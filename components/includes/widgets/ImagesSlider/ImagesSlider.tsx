@@ -1,25 +1,11 @@
 import React, {FC, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import useEmblaCarousel from 'embla-carousel-react'
-import {setLoading} from "@store/clientActions/globalStateActions";
-import {useRouter} from "next/router";
-import _shortNumber from "@_variables/clientVariables/_shortNumber";
-import dynamic from "next/dynamic";
-import {useDispatch, useSelector} from "react-redux";
 import styled from "styled-components";
-import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
-import ratingCalculator from "@_variables/util/ratingCalculator";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import Autoplay from "embla-carousel-autoplay";
+import Link from "next/link";
+import parse from "html-react-parser";
 
-
-const ArticleCardToRender = dynamic(() => import('@components/includes/PostsRenderer/ArticleCardToRender'))
-const LearnCardToRender = dynamic(() => import('@components/includes/PostsRenderer/LearnCardToRender'))
-const VideoCardToRender = dynamic(() => import('@components/includes/PostsRenderer/VideoCardToRender'))
-const PromotionCardToRender = dynamic(() => import('@components/includes/PostsRenderer/PromotionCardToRender'))
-const DefaultTypeCard = dynamic(() => import('@components/includes/cards/desktop/DefaultTypeCard/DefaultTypeCard'))
-
-
-const PostsSliderStyledDiv = styled.div`
+const ImagesSliderStyledDiv = styled.div`
   position: relative;
 
   .slider-parent {
@@ -37,13 +23,9 @@ const PostsSliderStyledDiv = styled.div`
         position: relative;
         flex: 0 0 100%;
         margin: 5px;
-        max-width: 96vw;
-
-        .mobile-card {
-          background-color: var(--post-element-background-color, #131314);
+        width: 96vw;
+        img{
           width: 100%;
-          font-size: 14px;
-          margin: auto;
         }
       }
     }
@@ -118,8 +100,11 @@ const PostsSliderStyledDiv = styled.div`
 
         .slide {
           position: relative;
-          
-          flex: 0 0 ${({cardWidth}: { cardWidth: number }) => `${cardWidth}px`};
+           
+          flex: 0 0 300px;
+          img{
+            width: 100%;
+          }
         }
       }
 
@@ -131,32 +116,27 @@ const PostsSliderStyledDiv = styled.div`
 
 
 interface PostsSliderPropsTypes {
-    postElementSize: number | string,
-    widgetId: string,
-    posts: PostTypes[],
-    cardWidthDesktop?: number,
-    isSidebar?: boolean,
-    index?: number,
+
     uniqueData?: {
-        posts: PostTypes[],
-        totalCount: number,
         sliderConfig?: {
             pagination?: boolean,
             navigation?: boolean,
-        }
-
+        },
+        moreDetailsButtonTextContent: string,
+        details: string,
+        imagesData: {
+            imageUrl: string,
+            imageAlt: string,
+            targetUrl?: string,
+            targetUrlType?: string,
+            imageIndex?: number,
+            imageId?: number,
+        }[]
     }
 }
 
 
-const PostsSlider: FC<PostsSliderPropsTypes> =
-    ({
-         cardWidthDesktop,
-         posts,
-         uniqueData,
-         widgetId,
-         isSidebar,
-     }) => {
+const ImagesSlider: FC<PostsSliderPropsTypes> = ({uniqueData}) => {
 
         const autoplay = useRef(
             Autoplay(
@@ -170,13 +150,10 @@ const PostsSlider: FC<PostsSliderPropsTypes> =
             dragFree: true
         }, [autoplay.current])
 
-
-        const {locale} = useRouter()
-        const dispatch = useDispatch()
+        const [showDetails, setShowDetails] = useState(false);
         const [selectedIndex, setSelectedIndex] = useState(0);
         const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
         const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
-        // const [scrollSnaps, setScrollSnaps] = useState([]);
         const scrollPrev = useCallback(() => sliderApi && sliderApi.scrollPrev(), [sliderApi]);
         const scrollNext = useCallback(() => sliderApi && sliderApi.scrollNext(), [sliderApi]);
         const scrollTo = useCallback((index) => sliderApi && sliderApi.scrollTo(index), [
@@ -190,80 +167,36 @@ const PostsSlider: FC<PostsSliderPropsTypes> =
             setNextBtnEnabled(sliderApi.canScrollNext());
         }, [sliderApi, setSelectedIndex]);
 
-        const {
-            elementSize,
-            postsPerRawForMobile,
-            isMobile,
-            cardWidth,
-            isAppleMobileDevice
-        } = useSelector(({settings}: StoreTypes) => {
-            const elementSize = cardWidthDesktop ? cardWidthDesktop : settings?.design?.cardWidthDesktop || 255
-            return {
-                elementSize,
-                postsPerRawForMobile: 1,
-                isMobile: settings?.isMobile,
-                cardWidth: elementSize,
-                isAppleMobileDevice: settings?.isAppleMobileDevice
-            }
-        })
-
         useEffect(() => {
             if (!sliderApi) return;
             onSelect();
-            // setScrollSnaps(sliderApi.scrollSnapList());
             sliderApi.on("select", onSelect);
         }, [sliderApi, onSelect]);
-          //setScrollSnaps,
-        const noImageUrl = '/static/images/noImage/no-image-available.png';
-
-        const postsToRender = useMemo(() => uniqueData?.posts || posts || [], [uniqueData?.posts, posts])
-        const sliderPaginationItems = useMemo(() => Array.from(Array(postsToRender.length).keys()), [postsToRender])
-
-        const renderSlides = postsToRender.map((post, index) => {
-
-            const title = process.env.NEXT_PUBLIC_DEFAULT_LOCAL === locale ? post?.title?.replace('#', '') :
-                post?.translations?.[locale as string]?.title ? post?.translations?.[locale as string]?.title?.replace('#', '') :
-                    post?.title?.replace('#', '');
-
-            const dir = locale === 'fa' || locale === 'ar' && post?.translations?.[locale as string]?.title ?
-                'rtl' : 'ltr'
-
-            const viewsNumber = post.views || 0
-            const views = _shortNumber(viewsNumber)
-            const rating = post.likes || post.disLikes ? ratingCalculator(post.likes, post.disLikes) : null
-            const postProps = {
-                dir,
-                views,
-                rating,
-                noImageUrl,
-                post,
-                cardWidthDesktop: elementSize,
-                widgetId,
-                postsPerRawForMobile: postsPerRawForMobile,
-                cardWidth: cardWidth,
-                title,
-                isMobile: isMobile,
-                isSidebar: isSidebar,
-                isAppleMobileDevice,
-                onActivateLoadingHandler: () => dispatch(setLoading(true))
-            }
 
 
-            return (
-                <div className={'slide'} key={index}>
-                    {post?.postType === 'video' ? <VideoCardToRender postProps={postProps} key={index} index={index}/> :
-                        post?.postType === 'promotion' ? <PromotionCardToRender postProps={postProps} index={index}/> :
-                            post?.postType === 'article' ? <ArticleCardToRender postProps={postProps} index={index}/> :
-                                post?.postType === 'learn' ? <LearnCardToRender postProps={postProps} index={index}/> :
-                                    <DefaultTypeCard {...postProps} key={index}/>
-                    }
+        const slidesToRender = useMemo(() => uniqueData?.imagesData || [], [uniqueData?.imagesData])
+        const sliderPaginationItems = useMemo(() => Array.from(Array(slidesToRender?.length || 0).keys()) || [], [slidesToRender])
+
+        const renderSlides = slidesToRender.map((imageData, index) => {
+
+            if (imageData.targetUrl) {
+                return <div className={'slide'} key={index}>
+                    <Link href={imageData.targetUrl}>
+                        <a className='swiper-slide'>
+                            <img src={imageData.imageUrl} alt={imageData.imageAlt}/>
+                        </a>
+                    </Link>
                 </div>
-            )
+            } else {
+                return <div className={'slide'} key={index}>
+                    <img src={imageData.imageUrl} alt={imageData.imageAlt}/>
+                </div>
+            }
         })
 
 
         return (
-            <PostsSliderStyledDiv cardWidth={cardWidth}>
+            <ImagesSliderStyledDiv className={'image-slider-content'} >
 
                 {uniqueData?.sliderConfig?.navigation ?
                     <>
@@ -305,10 +238,22 @@ const PostsSlider: FC<PostsSliderPropsTypes> =
                     : null
                 }
 
-            </PostsSliderStyledDiv>
+                {uniqueData?.details ?
+                    <button onClick={() => setShowDetails(!showDetails)} className={'show-details-button'}>
+                        {uniqueData?.moreDetailsButtonTextContent || 'Show More'}
+                    </button>
+                    : null
+                }
+                {uniqueData?.details ?
+                    <div className={'details'} style={{display: showDetails ? 'block' : 'none'}}>
+                        {parse(uniqueData?.details,{trim:true})}
+                    </div>
+                    : null
+                }
+
+            </ImagesSliderStyledDiv>
         );
-        // return null
     };
 
 
-export default PostsSlider;
+export default ImagesSlider;

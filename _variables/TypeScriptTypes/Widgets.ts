@@ -1,32 +1,39 @@
 export interface WidgetDataPropTypes {
-    name: string;
-    footerLink: string;
-    redirectToTitle: string;
-    translations: {};
-    uniqueData: any;
-    noSSR: boolean;
-    specificDayToRender: string;
-    pagination: boolean,
-    redirectLink: string,
-    customScriptStrategy: string,
+    mediaType?: string;
+    name?: string;
+    footerLink?: string;
+    redirectToTitle?: string;
+    translations?: {};
+    uniqueData?: UniqueDataTypes;
+    noSSR?: boolean;
+    specificDayToRender?: string;
+    pagination?: boolean,
+    stayOpen?: boolean,
+    redirectLink?: string,
+    customScriptStrategy?: string,
     customScript?: string,
     text?: string,
-    position: string,
-    type: string,
+    position?: string,
+    type?: string,
     extraClassName?: string,
     extraId?: string,
     title?: string,
     customStyles?: string,
-    metaType: string,
-    viewType: string,
-    deviceTypeToRender: string,
-    languageToRender: string,
-    editMode: boolean,
-    widgetIndex: number,
-    count: number,
+    metaType?: string,
+    viewType?: string,
+    deviceTypeToRender?: string,
+    languageToRender?: string,
+    editMode?: boolean,
+    widgetIndex?: number,
+    count?: number,
 }
 
 
+
+
+export interface UniqueDataTypes {
+    [key: string]:any
+}
 export interface WidgetPropTypes {
 
     _id: string,

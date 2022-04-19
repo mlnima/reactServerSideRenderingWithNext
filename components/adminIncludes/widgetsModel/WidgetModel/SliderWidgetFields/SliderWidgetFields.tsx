@@ -1,6 +1,6 @@
 //SliderTypeWidgetModelFields
 
-import React, {FC} from "react";
+import React, {FC, useState} from "react";
 import MonacoEditor from "@components/adminIncludes/MonacoEditor/MonacoEditor";
 
 interface PostSliderTypeWidgetModelFieldsPropTypes {
@@ -15,19 +15,28 @@ const SliderWidgetFields: FC<PostSliderTypeWidgetModelFieldsPropTypes> =
         uniqueData,
         onUniqueDataJsonChangeHandler
      }) => {
+        const [openConfig, setOpenConfig] = useState(false);
+
         return (
             <>
-                <div className={'editor-section'}>
-                    <p>Slider Widget Fields:</p>
+                <div className={'open-section'}>
+                    <p className={'section-title'}>Slider Widget Config:</p>
+                    <button onClick={() => setOpenConfig(!openConfig)} className={'btn btn-primary section-action'}>
+                        {openConfig ? 'close' : 'open'}
+                    </button>
                 </div>
-                <MonacoEditor
-                    language={'json'}
-                    name={'sliderConfig'}
-                    defaultValue={JSON.stringify(uniqueData?.sliderConfig, null, '\t')}
-                    value={JSON.stringify(uniqueData?.sliderConfig, null, '\t')}
-                    className={'details'}
-                    onChange={onUniqueDataJsonChangeHandler}
-                />
+                {openConfig?
+                    <MonacoEditor
+                        language={'json'}
+                        name={'sliderConfig'}
+                        defaultValue={JSON.stringify(uniqueData?.sliderConfig, null, '\t')}
+                        value={JSON.stringify(uniqueData?.sliderConfig, null, '\t')}
+                        className={'details'}
+                        onChange={onUniqueDataJsonChangeHandler}
+                    />
+                    :null
+                }
+
             </>
         )
     };

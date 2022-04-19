@@ -69,9 +69,9 @@ let StyledDiv = styled.div`
   }
 `
 
-interface ImageSwiperPropTypes {
+interface ImagesSwiperPropTypes {
     uniqueData?: {
-        imageSwiperData: {
+        imagesData: {
             imageUrl: string,
             imageAlt: string,
             targetUrl?: string,
@@ -102,12 +102,12 @@ interface ImageSwiperPropTypes {
 }
 
 
-const ImageSwiper: FC<ImageSwiperPropTypes> = ({uniqueData}) => {
+const ImagesSwiper: FC<ImagesSwiperPropTypes> = ({uniqueData}) => {
 
     const [showDetails, setShowDetails] = useState(false);
     const isMobile = useSelector((store: StoreTypes) => store.settings?.isMobile);
 
-    const renderSlides = uniqueData?.imageSwiperData?.sort((a, b) => a.imageIndex > b.imageIndex ? 1 : -1)
+    const renderSlides = uniqueData?.imagesData?.sort((a, b) => a.imageIndex > b.imageIndex ? 1 : -1)
         ?.map((imageData, index) => {
             const key = imageData.imageIndex + imageData.imageId + index
             if (imageData.targetUrl) {
@@ -149,7 +149,7 @@ const ImageSwiper: FC<ImageSwiperPropTypes> = ({uniqueData}) => {
             </Swiper>
 
             {uniqueData?.details ?
-                <button onClick={() => setShowDetails(!showDetails)}>
+                <button onClick={() => setShowDetails(!showDetails)} className={'show-details-button'}>
                     {uniqueData?.moreDetailsButtonTextContent || 'Show More'}
                 </button>
                 : null
@@ -164,7 +164,7 @@ const ImageSwiper: FC<ImageSwiperPropTypes> = ({uniqueData}) => {
 
     );
 };
-export default ImageSwiper;
+export default ImagesSwiper;
 
 //     tag="div"
 //     wrapperTag="div"

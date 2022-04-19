@@ -28,9 +28,10 @@ const ShoppingCart = dynamic(() => import('../widgets/ShoppingCart/ShoppingCart'
 const FormWidget = dynamic(() => import('../widgets/FormWidget/FormWidget'))
 const MultipleLinkTo = dynamic(() => import('../widgets/MultipleLinkTo/MultipleLinkTo'))
 const Advertise = dynamic(() => import('../widgets/Advertise/Advertise'))
-const ImageSwiper = dynamic(() => import('../widgets/ImageSwiper/ImageSwiper'))
+const ImagesSwiper = dynamic(() => import('../widgets/ImagesSwiper/ImagesSwiper'))
 const PostSwiper = dynamic(() => import('../widgets/PostSwiper/PostSwiper'))
 const PostSlider = dynamic(() => import('../widgets/PostsSlider/PostsSlider'))
+const ImagesSlider = dynamic(() => import('../widgets/ImagesSlider/ImagesSlider'))
 const Text = dynamic(() => import('./WidgetsModelsComponents/Text/Text'))
 const Authentication = dynamic(() => import('../widgets/Authentication/Authentication'))
 
@@ -54,6 +55,7 @@ const Widget: FC<WidgetComponentPropTypes> = ({data, widgetId, isSidebar, viewTy
             return data.type === 'posts' ? Posts :
             data.type === 'postsSwiper' ? PostSwiper :
             data.type === 'postsSlider' ? PostSlider :
+            data.type === 'imagesSlider' ? ImagesSlider :
             data.type === 'multipleLinkTo' ? MultipleLinkTo :
             data.type === 'media' ? MediaWidget :
             data.type === 'recentComments' ? RecentComments :
@@ -72,7 +74,7 @@ const Widget: FC<WidgetComponentPropTypes> = ({data, widgetId, isSidebar, viewTy
             data.type === 'language' ? LanguagesSwitcher :
             data.type === 'authentication' ? Authentication :
             data.type === 'linkTo' ? LinkTo :
-            data.type === 'imageSwiper' ? ImageSwiper :
+            data.type === 'imagesSwiper' ? ImagesSwiper :
             data.type === 'menu' ? MenuWidget :
             data.type === 'shoppingCart' ? ShoppingCart :
             data.type === 'advertise' ? Advertise :

@@ -19,6 +19,7 @@ const widgetsTypes = [
     'language',
     'authentication',
     'imagesSwiper',
+    'imagesSlider',
     'postsSwiper',
     //disabled
     // 'recentComments',

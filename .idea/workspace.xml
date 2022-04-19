@@ -20,74 +20,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SliderWidgetFields/SliderWidgetFields.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/ActionButtons.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/UniqueFields.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModelStyle.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/includes/widgets/ImagesSlider/ImagesSlider.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/AdminPanelTopBar/AdminPanelTopBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/AdminPanelTopBar/AdminPanelTopBar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetWithPositionMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetWithPositionMenu.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/models.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/models.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/ImageSwiperTypeWidgetModelFields/ImageSwiperTypeWidgetModelFields.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/ImagesSwiperTypeWidgetModelFields/ImagesSwiperTypeWidgetModelFields.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SliderWidgetTypeFields/SliderWidgetTypeFields.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SwiperWidgetFields/SwiperWidgetFields.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SliderWidgetTypeFields/sliderDefaultData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SwiperWidgetFields/swiperDefaultData.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/TypeScriptTypes/Widgets.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/TypeScriptTypes/Widgets.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/MonacoEditor/MonacoEditor.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/MonacoEditor/MonacoEditor.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/DefaultFields/DefaultFields.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/DefaultFields.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/FormTypeWidgetModelFields.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/FormTypeWidgetModelFields.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/ImagesSwiperTypeWidgetModelFields/ImagesSwiperTypeWidgetModelFields.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/ImagesSwiperTypeWidgetModelFields/ImagesSwiperTypeWidgetModelFields.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/LinkTypeWidgetModelFields/LinkTypeWidgetModelFields.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/LinkTypeWidgetModelFields/LinkTypeWidgetModelFields.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MediaWidgetType/MediaWidgetType.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MediaWidgetType/MediaWidgetType.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/MenuWidgetModelFields.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/MenuWidgetModelFields.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SelectFieldForWidget/SelectFieldForWidget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SelectFieldForWidget/SelectFieldForWidget.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SliderWidgetFields/SliderWidgetFields.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SliderWidgetFields/SliderWidgetFields.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SwiperWidgetFields/SwiperWidgetFields.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SwiperWidgetFields/SwiperWidgetFields.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/components/global/widgetsTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/widgetsTypes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/AlertBox/AlertBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/AlertBox/AlertBox.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/ClientPopActionRequest/CookiePopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/ClientPopActionRequest/CookiePopup.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/LoginRegisterPopup/LoginRegisterPopupForms.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/LoginRegisterPopup/LoginRegisterPopupForms.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/CommentFrom/CommentFrom.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/CommentFrom/CommentFrom.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/DownloadLink/DownloadLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/DownloadLink/DownloadLink.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/PostMeta/PostMeta.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/PostMeta/PostMeta.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/RatingButtons/RatingButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/RatingButtons/RatingButtons.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Soft404/Soft404.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Soft404/Soft404.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/Widget/Widget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Widget/Widget.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/ActorCard/ActorCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/desktop/ActorCard/ActorCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/ArticleTypeCard/ArticleTypeCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/desktop/ArticleTypeCard/ArticleTypeCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/CategoryCard/CategoryCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/desktop/CategoryCard/CategoryCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/DefaultTypeCard/DefaultTypeCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/desktop/DefaultTypeCard/DefaultTypeCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/LearnTypeCard/LearnTypeCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/desktop/LearnTypeCard/LearnTypeCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/TagCard/TagCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/desktop/TagCard/TagCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/mobile/MobileActorCard/MobileActorCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/mobile/MobileActorCard/MobileActorCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/mobile/MobileCategoryCard/MobileCategoryCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/mobile/MobileCategoryCard/MobileCategoryCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/mobile/MobileTagCard/MobileTagCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/mobile/MobileTagCard/MobileTagCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/profilePageComponents/ProfileNavigation/ProfileNavigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/profilePageComponents/ProfileNavigation/ProfileNavigation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/userPageComponents/UserPageActionButtons/UserPageActionButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/userPageComponents/UserPageActionButtons/UserPageActionButtons.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/DesktopAuthentication/LoggedInItemsForMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/DesktopAuthentication/LoggedInItemsForMenu.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/DesktopAuthentication/LoggedOutItemsMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/DesktopAuthentication/LoggedOutItemsMenu.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/MobileAuthentication/LoggedInItemsMobile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/MobileAuthentication/LoggedInItemsMobile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/MobileAuthentication/LoggedOutItemsMobile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/MobileAuthentication/LoggedOutItemsMobile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/DesktopMenuWidget/DesktopMenuWidgetItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/DesktopMenuWidget/DesktopMenuWidgetItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/PostSwiper/PostSwiper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/PostSwiper/PostSwiper.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/SearchButton/SearchButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/SearchButton/SearchButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/SearchButton/SearchButtonForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/SearchButton/SearchButtonForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/SearchInputComponent/SearchInputComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/SearchInputComponent/SearchInputComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/500.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/500.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_document.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_document.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/meta/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/meta/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/edit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/edit.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/user/[username].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/user/[username].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminFileManagerControllers/adminUploadFile.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminFileManagerControllers/adminUploadFile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/adminActions/adminPanelCommentsActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/adminActions/adminPanelCommentsActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/adminActions/adminPanelFileManagerActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/adminActions/adminPanelFileManagerActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/adminActions/adminPanelFormsActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/adminActions/adminPanelFormsActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/adminActions/adminPanelGlobalStateActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/adminActions/adminPanelGlobalStateActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/adminActions/adminPanelOrdersActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/adminActions/adminPanelOrdersActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/adminActions/adminPanelPagesActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/adminActions/adminPanelPagesActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/adminActions/adminPanelPostsActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/adminActions/adminPanelPostsActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/adminActions/adminPanelSettingsActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/adminActions/adminPanelSettingsActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/adminActions/adminTerminalActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/adminActions/adminTerminalActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/adminActions/adminUserActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/adminActions/adminUserActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/adminActions/adminWidgetsActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/adminActions/adminWidgetsActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/adminReducers/adminCommentsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/adminReducers/adminCommentsReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/adminReducers/adminPanelGlobalStateReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/adminReducers/adminPanelGlobalStateReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/clientActions/chatroomActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/clientActions/chatroomActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/clientActions/clientWidgetsActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/clientActions/clientWidgetsActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/clientActions/globalStateActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/clientActions/globalStateActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/clientActions/postsAction.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/clientActions/postsAction.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/clientActions/settingsActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/clientActions/settingsActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/clientActions/userActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/clientActions/userActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/DayModeNightMode/DayModeNightMode.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/DayModeNightMode/DayModeNightMode.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/ImageSwiper/ImageSwiper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/ImagesSwiper/ImagesSwiper.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/PostsSlider/PostsSlider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/PostsSlider/PostsSlider.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/chatroom/[chatRoomName].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/chatroom/[chatRoomName].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,11 +122,11 @@
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\server\controllers\adminControllers\_variables" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\widgetsModel\WidgetModel" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\widgets" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\widgets\Authentication\DesktopAuthentication" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\trash" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\trash\old post page" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\store" />
     </key>
   </component>
   <component name="RunManager" selected="npm.start">
@@ -1180,7 +1138,10 @@
       <workItem from="1649958437126" duration="4328000" />
       <workItem from="1650041531571" duration="1560000" />
       <workItem from="1650141210938" duration="2085000" />
-      <workItem from="1650203672268" duration="34625000" />
+      <workItem from="1650203672268" duration="46376000" />
+      <workItem from="1650284413659" duration="5032000" />
+      <workItem from="1650301819229" duration="1530000" />
+      <workItem from="1650362412700" duration="416000" />
     </task>
     <servers />
   </component>
@@ -1475,7 +1436,6 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/components/includes/widgets/PostSwiper/PostSwiper.tsx</url>
           <line>30</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="147" />
         </line-breakpoint>
       </breakpoints>

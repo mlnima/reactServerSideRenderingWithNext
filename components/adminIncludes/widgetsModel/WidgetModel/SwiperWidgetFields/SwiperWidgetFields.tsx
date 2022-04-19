@@ -1,5 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
-import TextInputFieldForWidget from "../TextInputFieldForWidget/TextInputFieldForWidget";
+import React, {FC, useState} from 'react';
 import MonacoEditor from "@components/adminIncludes/MonacoEditor/MonacoEditor";
 import {sliderDefaultData} from './swiperDefaultData'
 import convertVariableNameToName from "@_variables/util/convertVariableNameToName";
@@ -19,7 +18,7 @@ interface SliderWidgetTypeFieldsPropTypes {
             imageId?: number,
         }[]
     },
-    onUniqueDataChangeHandler: any,
+    // onUniqueDataChangeHandler: any,
     onUniqueDataJsonChangeHandler: any,
 }
 
@@ -63,7 +62,10 @@ const SwiperWidgetFields: FC<SliderWidgetTypeFieldsPropTypes> =
 
         return (
             <div className={'monaco-editor-section'}>
-                <h2> Swiper Config:   <a href={'https://swiperjs.com/demos'} target={'_blank'} className={'btn btn-info'}>Examples</a> </h2>
+                <div className={'open-section'}>
+                    <p className={'section-title'}>Swiper Config:</p>
+                    <a href={'https://swiperjs.com/demos'} target={'_blank'} className={'btn btn-info section-action'}>Examples</a>
+                </div>
                 <div className={'editor-section'}>
                     <p>Image Swiper Config for Desktop:</p>
                     <button className={'btn btn-primary'} onClick={() => setOpenObjectEditorDesktop(!openObjectEditorDesktop)}>

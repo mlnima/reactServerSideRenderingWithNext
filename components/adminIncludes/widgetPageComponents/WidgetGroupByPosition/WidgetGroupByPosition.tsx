@@ -57,15 +57,15 @@ const WidgetGroupByPosition: FC<WidgetGroupByPositionPropTypes> = ({filter, posi
 
     if (filter === position || filter === 'all') {
         return (
-            //@ts-ignore
             <Draggable handle={'.widgetAdminPanelItemHeader'}>
                 <WidgetGroupByPositionStyledDiv filter={filter} className='widgetAdminPanelItem'>
+
                     <p className='widgetAdminPanelItemHeader'>{convertVariableNameToName(position)}</p>
+
                     {widgets?.map((widget) => {
-                        return (
-                            <WidgetModel key={widget._id} widgetId={widget._id} position={position}/>
-                        )
+                        return  <WidgetModel key={widget._id} widgetId={widget._id}  widget={widget}/>
                     })}
+
                 </WidgetGroupByPositionStyledDiv>
             </Draggable>
         );

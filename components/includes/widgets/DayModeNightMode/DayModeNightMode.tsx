@@ -2,9 +2,10 @@ import {FC, useEffect, useState} from "react";
 import styled, {createGlobalStyle} from "styled-components";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {UniqueDataTypes} from "@_variables/TypeScriptTypes/Widgets";
 
 interface DayModeNightModePropTypes {
-    uniqueData: any
+    uniqueData: UniqueDataTypes
 }
 
 const DayModeNightModeStyledDiv = styled.div`

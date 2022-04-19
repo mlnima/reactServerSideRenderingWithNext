@@ -113,7 +113,6 @@ const MenuWidgetModelFields = props => {
         )
     })
 
-    if (props.rendering) {
         return (
             <MenuWidgetModelFieldsStyledDiv>
                 <MenuWidgetEditForm
@@ -134,7 +133,6 @@ const MenuWidgetModelFields = props => {
                 </div>
             </MenuWidgetModelFieldsStyledDiv>
         );
-    } else return null
 
 };
 export default MenuWidgetModelFields;

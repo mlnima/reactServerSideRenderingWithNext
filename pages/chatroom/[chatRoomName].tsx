@@ -15,6 +15,7 @@ import {wrapper} from "@store/store";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {_uniqBy} from "@_variables/util/arrayUtils/_uniqBy";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 const chatRoom = () => {
     const dispatch = useDispatch()
@@ -99,7 +100,6 @@ const chatRoom = () => {
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-    // @ts-ignore
     await store.dispatch(getDefaultPageData(context, [],
         {
             setHeadData:true,
@@ -109,7 +109,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 
     return {
         props: {
-            // ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
+            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
         }
     }
 })

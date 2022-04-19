@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext, useRef, FC} from 'react';
+import React, {useEffect, useState, FC} from 'react';
 import styled from "styled-components";
 import MonacoEditor from "@components/adminIncludes/MonacoEditor/MonacoEditor";
 
@@ -7,13 +7,8 @@ const ImageSwiperTypeWidgetModelFieldsStyledDiv = styled.div`
   padding: 2px;
   border-top: #fff solid;
   border-bottom: 1px #fff solid;
-
-  width: 95%;
-
-  .open-details {
-    margin: 20px auto;
-  }
-
+  width: 100%;
+  
   .form-control-input {
     width: 70%;
   }
@@ -83,7 +78,7 @@ interface ImageSwiperTypeWidgetModelFieldsPropTypes {
     uniqueData: {
         moreDetailsButtonTextContent: string,
         details: string,
-        imageSwiperData: {
+        imagesData: {
             imageUrl: string,
             imageAlt: string,
             targetUrl?: string,
@@ -111,7 +106,7 @@ const ImagesSwiperTypeWidgetModelFields: FC<ImageSwiperTypeWidgetModelFieldsProp
             imageId: 0
         });
         const [openDetails, setOpenDetails] = useState(false);
-
+        const [openImagesForm, setOpenImagesForm] = useState(false);
 
         const resetState = () => {
             setTimeout(() => {
@@ -121,8 +116,8 @@ const ImagesSwiperTypeWidgetModelFields: FC<ImageSwiperTypeWidgetModelFieldsProp
                     targetUrl: '',
                     targetUrlAs: '',
                     targetUrlType: '_self',
-                    imageIndex: uniqueData?.imageSwiperData ? Math.max(...uniqueData?.imageSwiperData?.map(image => image.imageId), 0) + 1 : 0,
-                    imageId: uniqueData?.imageSwiperData ? Math.max(...uniqueData?.imageSwiperData?.map(image => image.imageId), 0) + 1 : 0,
+                    imageIndex: uniqueData?.imagesData ? Math.max(...uniqueData?.imagesData?.map(image => image.imageId), 0) + 1 : 0,
+                    imageId: uniqueData?.imagesData ? Math.max(...uniqueData?.imagesData?.map(image => image.imageId), 0) + 1 : 0,
                 })
             }, 1000)
         }
@@ -130,7 +125,7 @@ const ImagesSwiperTypeWidgetModelFields: FC<ImageSwiperTypeWidgetModelFieldsProp
 
         useEffect(() => {
             resetState()
-        }, [uniqueData?.imageSwiperData]);
+        }, [uniqueData?.imagesData]);
 
 
         const onChangeHandler = (e) => {
@@ -141,8 +136,8 @@ const ImagesSwiperTypeWidgetModelFields: FC<ImageSwiperTypeWidgetModelFieldsProp
             e.preventDefault()
             onUniqueDataChangeHandler({
                 target: {
-                    name: 'imageSwiperData',
-                    value: [...(uniqueData?.imageSwiperData || []), state]
+                    name: 'imagesData',
+                    value: [...(uniqueData?.imagesData || []), state]
                 }
             })
         }
@@ -150,27 +145,27 @@ const ImagesSwiperTypeWidgetModelFields: FC<ImageSwiperTypeWidgetModelFieldsProp
         const onDeleteImageHandler = imageId => {
             const data = {
                 target: {
-                    name: 'imageSwiperData',
-                    value: uniqueData?.imageSwiperData?.filter(i => i.imageId !== imageId)
+                    name: 'imagesData',
+                    value: uniqueData?.imagesData?.filter(i => i.imageId !== imageId)
                 }
             }
             onUniqueDataChangeHandler(data)
         }
 
         const changeImageIndex = (imageId, value) => {
-            const findIndexOfTheImage = uniqueData?.imageSwiperData?.findIndex(image => image.imageId === imageId)
-            const instanceArray = uniqueData?.imageSwiperData
+            const findIndexOfTheImage = uniqueData?.imagesData?.findIndex(image => image.imageId === imageId)
+            const instanceArray = uniqueData?.imagesData
             instanceArray[findIndexOfTheImage].imageIndex = instanceArray[findIndexOfTheImage].imageIndex + value
             onUniqueDataChangeHandler({
                 target: {
-                    name: 'imageSwiperData',
+                    name: 'imagesData',
                     value: instanceArray
                 }
             })
         }
 
 
-        const renderCurrentData = uniqueData?.imageSwiperData?.sort((a, b) => a.imageIndex > b.imageIndex ? 1 : -1)?.map((item, index) => {
+        const renderCurrentData = uniqueData?.imagesData?.sort((a, b) => a.imageIndex > b.imageIndex ? 1 : -1)?.map((item, index) => {
             return (
                 <div key={item.imageId || index} className='current-data-preview' style={{maxWidth: '300px'}}>
                     <p>ID: {item.imageId}</p>
@@ -196,89 +191,112 @@ const ImagesSwiperTypeWidgetModelFields: FC<ImageSwiperTypeWidgetModelFieldsProp
 
         return (
             <ImageSwiperTypeWidgetModelFieldsStyledDiv className={'image-Swiper-fields'}>
-                <h2> Image Swiper : </h2>
-                <form onSubmit={e => onSubmitHandler(e)}>
-                    <div className={'image-Swiper-fields-form-section'}>
-                        <p>Image ID:</p>
-                        <label>{state.imageId}</label>
-                    </div>
-                    <div className={'image-Swiper-fields-form-section'}>
-                        <p>Url:</p>
-                        <input type='text'
-                               required={true}
-                               name='imageUrl'
-                               onChange={e => onChangeHandler(e)}
-                               value={state.imageUrl}
-                               className={'form-control-input'}
-                        />
-                    </div>
-                    <div className={'image-Swiper-fields-form-section'}>
-                        <p>Alt:</p>
-                        <input type='text'
-                               required={true}
-                               name='imageAlt'
-                               onChange={e => onChangeHandler(e)}
-                               value={state.imageAlt}
-                               className={'form-control-input'}
-                        />
-                    </div>
-                    <div className={'image-Swiper-fields-form-section'}>
-                        <p>Index:</p>
-                        <input type='number'
-                               name='imageIndex'
-                               onChange={e => onChangeHandler(e)}
-                               value={state.imageIndex}
-                               className={'form-control-input'}
-                        />
-                    </div>
-                    <div className={'image-Swiper-fields-form-section'}>
-                        <p>Target Url:</p>
-                        <input type='text'
-                               name='targetUrl'
-                               onChange={e => onChangeHandler(e)}
-                               value={state.targetUrl}
-                               className={'form-control-input'}
-                        />
-                    </div>
-                    <div className={'image-Swiper-fields-form-section'}>
-                        <p>Target Url Type:</p>
-                        <select name='targetUrlType'
-                                onChange={e => onChangeHandler(e)}
-                                value={state.targetUrlType}
-                                className={'custom-select'}
-                        >
-                            <option value=''>Select</option>
-                            <option value='_self'>Same Window</option>
-                            <option value='_blank'>Open New Tab</option>
-                        </select>
-                    </div>
 
-
-                    <button type='submit' className={' btn btn-primary'}>Add</button>
-                </form>
-
-                <div className={'added-images'}>
-                    {uniqueData?.imageSwiperData?.length ? renderCurrentData : null}
+                <div className={'open-section'}>
+                    <p className={'section-title'}> Image Swiper / Slider : </p>
+                    <button onClick={() => setOpenImagesForm(!openImagesForm)} className={'btn btn-primary section-action'}>
+                        {openDetails ? 'close' : 'open'}
+                    </button>
                 </div>
 
-                <div className={'image-Swiper-fields-form-section'}>
-                    <p>Details Button Text Content:</p>
-                    <input type='text'
-                           name='moreDetailsButtonTextContent'
-                           onChange={onUniqueDataChangeHandler}
-                           value={uniqueData?.moreDetailsButtonTextContent}
-                           className={'form-control-input'}
-                    />
+                {openImagesForm ?
+
+                <>
+
+                    <form onSubmit={e => onSubmitHandler(e)}>
+                        <div className={'image-Swiper-fields-form-section'}>
+                            <p>Image ID:</p>
+                            <label>{state.imageId}</label>
+                        </div>
+                        <div className={'image-Swiper-fields-form-section'}>
+                            <p>Url:</p>
+                            <input type='text'
+                                   required={true}
+                                   name='imageUrl'
+                                   onChange={e => onChangeHandler(e)}
+                                   value={state.imageUrl}
+                                   className={'form-control-input'}
+                            />
+                        </div>
+                        <div className={'image-Swiper-fields-form-section'}>
+                            <p>Alt:</p>
+                            <input type='text'
+                                   required={true}
+                                   name='imageAlt'
+                                   onChange={e => onChangeHandler(e)}
+                                   value={state.imageAlt}
+                                   className={'form-control-input'}
+                            />
+                        </div>
+                        <div className={'image-Swiper-fields-form-section'}>
+                            <p>Index:</p>
+                            <input type='number'
+                                   name='imageIndex'
+                                   onChange={e => onChangeHandler(e)}
+                                   value={state.imageIndex}
+                                   className={'form-control-input'}
+                            />
+                        </div>
+                        <div className={'image-Swiper-fields-form-section'}>
+                            <p>Target Url:</p>
+                            <input type='text'
+                                   name='targetUrl'
+                                   onChange={e => onChangeHandler(e)}
+                                   value={state.targetUrl}
+                                   className={'form-control-input'}
+                            />
+                        </div>
+                        <div className={'image-Swiper-fields-form-section'}>
+                            <p>Target Url Type:</p>
+                            <select name='targetUrlType'
+                                    onChange={e => onChangeHandler(e)}
+                                    value={state.targetUrlType}
+                                    className={'custom-select'}
+                            >
+                                <option value=''>Select</option>
+                                <option value='_self'>Same Window</option>
+                                <option value='_blank'>Open New Tab</option>
+                            </select>
+                        </div>
+
+
+                        <button type='submit' className={' btn btn-primary'}>Add</button>
+                    </form>
+
+                    <div className={'added-images'}>
+                        {uniqueData?.imagesData?.length ? renderCurrentData : null}
+                    </div>
+
+                    <div className={'image-Swiper-fields-form-section'}>
+                        <p>Details Button Text Content:</p>
+                        <input type='text'
+                               name='moreDetailsButtonTextContent'
+                               onChange={onUniqueDataChangeHandler}
+                               value={uniqueData?.moreDetailsButtonTextContent}
+                               className={'form-control-input'}
+                        />
+                    </div>
+                </>
+
+                :null
+                }
+
+
+                <div className={'open-section'}>
+                    <p className={'section-title'}>Details:</p>
+                    <button onClick={() => setOpenDetails(!openDetails)} className={'btn btn-primary section-action'}>
+                        {openDetails ? 'close details' : 'open details'}
+                    </button>
                 </div>
 
                 <div className={'monaco-editor-section'}>
 
-                    <div className={'editor-section'}>
-                        <p>Details:</p>
-                        <button onClick={() => setOpenDetails(!openDetails)} className={'btn btn-primary open-details'}>
-                            {openDetails ? 'close details' : 'open details'}
-                        </button>
-                    </div>
+                    {/*<div className={'editor-section'}>*/}
+                    {/*    <p>Details:</p>*/}
+                    {/*    <button onClick={() => setOpenDetails(!openDetails)} className={'btn btn-primary open-details'}>*/}
+                    {/*        {openDetails ? 'close details' : 'open details'}*/}
+                    {/*    </button>*/}
+                    {/*</div>*/}
 
                     {openDetails ?
                         <div>
@@ -301,15 +319,3 @@ const ImagesSwiperTypeWidgetModelFields: FC<ImageSwiperTypeWidgetModelFieldsProp
 export default ImagesSwiperTypeWidgetModelFields;
 
 
-// {/*<TextInputFieldForWidget element='input' inputTitle='Image Swiper Images Amount In View Mobile :' name='imageSwiperAmountMobile' type='number' value={props.imageSwiperAmountMobile}*/}
-// {/*                         classNameValue='imageSwiperAmountMobile' placeHolder='Image Swiper Images Amount In View Mobile'*/}
-// {/*                         onChangeHandler={props.onChangeHandler}/>*/}
-// {/*<TextInputFieldForWidget element='input' inputTitle='Image Swiper Images Amount In View Desktop :' name='imageSwiperAmountDesktop' type='number' value={props.imageSwiperAmountDesktop}*/}
-// {/*                         classNameValue='imageSwiperAmountDesktop' placeHolder='Image Swiper Images Amount In View Desktop'*/}
-// {/*                         onChangeHandler={props.onChangeHandler}/>*/}
-// {/*<TextInputFieldForWidget element='input' inputTitle='Image Swiper Space Between Mobile :' name='imageSwiperSpaceBetweenMobile' type='number' value={props.imageSwiperSpaceBetweenMobile}*/}
-// {/*                         classNameValue='imageSwiperSpaceBetweenMobile' placeHolder='Image Swiper Space Between Mobile'*/}
-// {/*                         onChangeHandler={props.onChangeHandler}/>*/}
-// {/*<TextInputFieldForWidget element='input' inputTitle='Image Swiper Space Between Desktop :' name='imageSwiperSpaceBetweenDesktop' type='number' value={props.imageSwiperSpaceBetweenDesktop}*/}
-// {/*                         classNameValue='imageSwiperSpaceBetweenDesktop' placeHolder='Image Swiper Space Between Desktop'*/}
-// {/*                         onChangeHandler={props.onChangeHandler}/>*/}

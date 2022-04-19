@@ -3,7 +3,7 @@ import SelectFieldForWidget
     from "@components/adminIncludes/widgetsModel/WidgetModel/SelectFieldForWidget/SelectFieldForWidget";
 import MonacoEditor from "@components/adminIncludes/MonacoEditor/MonacoEditor";
 import {WidgetDataPropTypes} from "@_variables/TypeScriptTypes/Widgets";
-import RenderTitleAndRedirectLink from '../RenderTitleAndRedirectLink/RenderTitleAndRedirectLink'
+import RenderTitleAndRedirectLink from './RenderTitleAndRedirectLink/RenderTitleAndRedirectLink'
 import TextInputFieldForWidget
     from "@components/adminIncludes/widgetsModel/WidgetModel/TextInputFieldForWidget/TextInputFieldForWidget";
 import {useSelector} from "react-redux";
@@ -25,8 +25,6 @@ interface DefaultFieldsPropTypes {
     onChangeLanguageHandler: any,
     onChangeHandler: any,
     setWidgetSettings: any,
-    languageElement: any
-
 }
 
 const DefaultFields: FC<DefaultFieldsPropTypes> =
@@ -39,8 +37,6 @@ const DefaultFields: FC<DefaultFieldsPropTypes> =
          onChangeHandler,
          onChangeLanguageHandler,
          setWidgetSettings,
-         languageElement
-
      }) => {
         const customPages = useSelector((store: StoreTypes) => store?.adminPanelGlobalState?.customPages)
         const positions = useMemo(() => {
@@ -51,12 +47,6 @@ const DefaultFields: FC<DefaultFieldsPropTypes> =
         }, [customPages])
 
 
-        useEffect(() => {
-            if (widgetData.type === 'imageSwiper'){
-                console.log(widgetData)
-            }
-
-        }, [widgetData]);
         return (
             <>
                 <div className='checkInputFieldForWidget widgetSection'>
@@ -78,9 +68,9 @@ const DefaultFields: FC<DefaultFieldsPropTypes> =
                 <TextInputFieldForWidget inputTitle='index:' name='widgetIndex' type='number'
                                          value={widgetData.widgetIndex} placeHolder='widgetIndex'
                                          onChangeHandler={e => onChangeHandler(e)}/>
+
                 <SelectFieldForWidget title={'Translations:'}
                                       name={'activeEditingLanguage'}
-                                      ref={languageElement}
                                       value={widgetSettings.activeEditingLanguage}
                                       options={[
                                           'default',
@@ -92,14 +82,12 @@ const DefaultFields: FC<DefaultFieldsPropTypes> =
 
                 <SelectFieldForWidget title={'Device Type To Render:'}
                                       name={'deviceTypeToRender'}
-                                      ref={null}
                                       value={widgetData.deviceTypeToRender}
                                       options={[ 'mobile', 'desktop']}
                                       onChangeHandler={onChangeHandler}
                 />
                 <SelectFieldForWidget title={'Specific Day Type To Render:'}
                                       name={'specificDayToRender'}
-                                      ref={null}
                                       value={widgetData.specificDayToRender}
                                       options={['all', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']}
                                       onChangeHandler={onChangeHandler}
@@ -107,7 +95,6 @@ const DefaultFields: FC<DefaultFieldsPropTypes> =
 
                 <SelectFieldForWidget title={'Language To Render:'}
                                       name={'languageToRender'}
-                                      ref={null}
                                       value={widgetData.languageToRender}
                                       options={['all', 'default', ...process.env.NEXT_PUBLIC_LOCALS.split(' ').filter(lang => lang !== process.env.NEXT_PUBLIC_DEFAULT_LOCAL)]}
                                       onChangeHandler={onChangeHandler}
@@ -115,7 +102,6 @@ const DefaultFields: FC<DefaultFieldsPropTypes> =
 
                 <SelectFieldForWidget title={'Position:'}
                                       name={'position'}
-                                      ref={null}
                                       value={widgetData.position}
                                       options={positions}
                                       onChangeHandler={onChangeHandler}
@@ -202,14 +188,13 @@ const DefaultFields: FC<DefaultFieldsPropTypes> =
                     }
                 </div>
 
-
                 <SelectFieldForWidget title={'Custom Script Strategy:'}
                                       name={'customScriptStrategy'}
-                                      ref={null}
                                       value={widgetData.customScriptStrategy}
                                       options={['lazyOnload', 'afterInteractive', 'beforeInteractive']}
                                       onChangeHandler={onChangeHandler}
                 />
+
                 <div className={'monaco-editor-section'}>
 
                     <div className={'editor-section'}>

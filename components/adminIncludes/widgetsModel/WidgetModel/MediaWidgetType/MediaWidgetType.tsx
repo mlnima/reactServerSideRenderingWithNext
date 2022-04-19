@@ -1,23 +1,29 @@
-import React from 'react';
+import React, {FC} from 'react';
+import {WidgetDataPropTypes} from "@_variables/TypeScriptTypes/Widgets";
 
-const MediaWidgetType = ({widgetData,rendering,onChangeHandler}) => {
+interface MediaWidgetTypePropTypes{
+    widgetData:WidgetDataPropTypes,
+    onChangeHandler:React.ChangeEventHandler<HTMLSelectElement>
+}
 
-    if (rendering){
-        return (
-            <div className={'selectInputFieldForWidget widgetSection'}>
-                <p>Media Type:</p>
-                <select className={'custom-select'} name='mediaType' value={widgetData.mediaType } onChange={e => onChangeHandler(e)}>
-                    <option  value=''>Select Media Type</option>
+const MediaWidgetType:FC<MediaWidgetTypePropTypes> = ({widgetData,onChangeHandler}) => {
 
-                    <option value='video'>Video</option>
-                    <option value='image'>Image</option>
-                    <option value='audio'>Audio</option>
-                    <option value='iframe'>Iframe</option>
-                </select>
+    return (
+        <div className={'selectInputFieldForWidget widgetSection'}>
+            <p>Media Type:</p>
+            <select className={'custom-select'}
+                    name='mediaType'
+                    value={widgetData.mediaType }
+                    onChange={(e) => onChangeHandler(e)}>
+                <option  value=''>Select Media Type</option>
+                <option value='video'>Video</option>
+                <option value='image'>Image</option>
+                <option value='audio'>Audio</option>
+                <option value='iframe'>Iframe</option>
+            </select>
 
-            </div>
-        );
-    }else return null
+        </div>
+    );
 
 
 };
