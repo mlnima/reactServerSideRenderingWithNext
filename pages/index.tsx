@@ -9,10 +9,7 @@ import { getDefaultPageData} from "@store/clientActions/globalStateActions";
 const Home: FC = () => {
     const homePageStyle = useSelector(({settings}: StoreTypes) => settings.design?.homePageStyle);
     return (
-        < MainWidgetArea
-            className='home-page main'
-            position='home'
-            stylesData={homePageStyle}
+        < MainWidgetArea className='home-page main' position='home' stylesData={homePageStyle}
         />
     );
 };
