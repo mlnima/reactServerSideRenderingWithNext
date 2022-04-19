@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
 
@@ -8,7 +8,14 @@ let StyledMain = styled.main`
   ${(props:{stylesData:string}) => props.stylesData ?? ''}
 `;
 
-const MainWidgetArea = ({stylesData,className,position}:any) => {
+
+interface MainWidgetAreaPropTypes {
+    stylesData:string,
+    className:string,
+    position:string,
+}
+
+const MainWidgetArea:FC<MainWidgetAreaPropTypes> = ({stylesData,className,position}) => {
 
     return (
         <StyledMain id={'main-content'} stylesData={stylesData ?? ''} className={className + ' widget-area ' + position}>

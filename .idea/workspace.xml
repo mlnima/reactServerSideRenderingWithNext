@@ -20,32 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/ActionButtons.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/UniqueFields.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModelStyle.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/widgets/ImagesSlider/ImagesSlider.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/TypeScriptTypes/Widgets.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/TypeScriptTypes/Widgets.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/MonacoEditor/MonacoEditor.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/MonacoEditor/MonacoEditor.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/DefaultFields/DefaultFields.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/DefaultFields.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/FormTypeWidgetModelFields.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/FormTypeWidgetModelFields.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/ImagesSwiperTypeWidgetModelFields/ImagesSwiperTypeWidgetModelFields.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/ImagesSwiperTypeWidgetModelFields/ImagesSwiperTypeWidgetModelFields.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/LinkTypeWidgetModelFields/LinkTypeWidgetModelFields.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/LinkTypeWidgetModelFields/LinkTypeWidgetModelFields.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MediaWidgetType/MediaWidgetType.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MediaWidgetType/MediaWidgetType.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/MenuWidgetModelFields.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/MenuWidgetModelFields.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SelectFieldForWidget/SelectFieldForWidget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SelectFieldForWidget/SelectFieldForWidget.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SliderWidgetFields/SliderWidgetFields.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SliderWidgetFields/SliderWidgetFields.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SwiperWidgetFields/SwiperWidgetFields.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SwiperWidgetFields/SwiperWidgetFields.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/global/widgetsTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/widgetsTypes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Widget/Widget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Widget/Widget.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/DayModeNightMode/DayModeNightMode.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/DayModeNightMode/DayModeNightMode.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/ImageSwiper/ImageSwiper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/ImagesSwiper/ImagesSwiper.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/PostsSlider/PostsSlider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/PostsSlider/PostsSlider.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/chatroom/[chatRoomName].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/chatroom/[chatRoomName].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/widgetsArea/MainWidgetArea/MainWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/widgetsArea/MainWidgetArea/MainWidgetArea.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/page/[pageName].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/page/[pageName].tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +106,7 @@
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\trash\old post page" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.start">
+  <component name="RunManager" selected="npm.dev">
     <configuration name="apiCache.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/server/middlewares/apiCache.js" working-dir="$PROJECT_DIR$/server/middlewares">
       <method v="2" />
     </configuration>
@@ -175,9 +152,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.analyze" />
         <item itemvalue="Node.js.apiCache.js" />
       </list>
@@ -1141,7 +1118,7 @@
       <workItem from="1650203672268" duration="46376000" />
       <workItem from="1650284413659" duration="5032000" />
       <workItem from="1650301819229" duration="1530000" />
-      <workItem from="1650362412700" duration="416000" />
+      <workItem from="1650362412700" duration="2749000" />
     </task>
     <servers />
   </component>
