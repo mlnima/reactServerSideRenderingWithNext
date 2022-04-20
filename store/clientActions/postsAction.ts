@@ -51,9 +51,8 @@ export const getPosts = (context, metaId, cache, metaType, options) => async dis
 
             if (res?.data?.meta && metaId && options) {
                 const staticData = staticDataJson
-                const title = res?.data?.meta?.name ? `${res?.data?.meta?.name || ''} 
-                ${getTextDataWithTranslation(context.locale, `${options.page}PageTitle`, staticData?.identity)} 
-                | ${staticData?.identity?.siteName || ''}` : staticData?.identity?.siteName
+                //@ts-ignore
+                const title = res?.data?.meta?.name ? `${res?.data?.meta?.name || ''} ${getTextDataWithTranslation(context.locale, `${options.page}PageTitle`, staticData?.identity)} | ${staticData?.identity?.siteName || ''}` : staticData?.identity?.siteName
 
                 const description = getTextDataWithTranslation(context.locale, `${options.page}PageDescription` , staticData?.identity)+
                                     ` ${res?.data?.meta?.name}`
