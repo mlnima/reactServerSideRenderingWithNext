@@ -6,7 +6,6 @@ import {checkRouteAndSetLoading} from "@store/clientActions/globalStateActions";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {MenuItem} from "@_variables/TypeScriptTypes/WidgetsInterfaces";
 import dynamic from "next/dynamic";
-// import {isMobile} from 'react-device-detect';
 
 const DesktopMenuWidget = dynamic(() => import('./DesktopMenuWidget/DesktopMenuWidget'));
 const MobileMenuWidget = dynamic(() => import('./MobileMenuWidget/MobileMenuWidget'));

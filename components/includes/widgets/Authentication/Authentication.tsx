@@ -2,7 +2,6 @@ import React, {FC} from 'react';
 import dynamic from "next/dynamic";
 import {useSelector} from 'react-redux';
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-// import {isMobile} from 'react-device-detect';
 
 const MobileAuthentication = dynamic(
     () => import('./MobileAuthentication/MobileAuthentication'));

@@ -7,8 +7,8 @@ require('./server/_variables/connectToDatabase').then(()=>{
 })
 require('./server/workers/mailServer')
 
-const cluster = require('cluster')
-const os = require('os')
+// const cluster = require('cluster')
+// const os = require('os')
 const express = require('express');
 const next = require('next');
 const bodyParser = require('body-parser');
@@ -81,7 +81,7 @@ const runServer = () => {
     server.use('/api/admin',adminMainRouter);
     server.use('/api/v1',clientMainRouter);
 
-    server.get('*', cacheSuccesses, (req, res) => {
+    server.get('*', (req, res) => {
         return handle(req, res)
     });
 

@@ -5,7 +5,6 @@ import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import dynamic from "next/dynamic";
-// import {isMobile} from 'react-device-detect';
 const SearchButton = dynamic(() => import('../SearchButton/SearchButton'));
 
 const SearchInputComponentStyledForm = styled.form`
