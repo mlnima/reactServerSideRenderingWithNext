@@ -22,9 +22,12 @@ const GlobalStyles= createGlobalStyle`
     font-size: 12px;
   }
 
-  .main {
+  #main-content{
+    margin: auto;
+    max-width: 100vw;
     min-height: 100vh;
   }
+
 
   a {
     text-decoration: none;
@@ -277,6 +280,13 @@ const GlobalStyles= createGlobalStyle`
     }
     to {
       top: 0;
+    }
+  }
+  
+  @media only screen and (min-width: 768px) {
+    #main-content{
+      margin: auto;
+      max-width: 97vw;
     }
   }
 

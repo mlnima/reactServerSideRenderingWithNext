@@ -1,11 +1,13 @@
-import {FC} from 'react';
-import {useSelector} from 'react-redux';
+import {FC, useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import dynamic from "next/dynamic";
 import GlobalStylesComponent from "../global/Styles/GlobalStylesComponent";
 import _setAppLayoutDataFromProp from '../../_variables/clientVariables/_setAppLayoutDataFromProp';
 import {useRouter} from "next/router";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import SiteSettingSetter from '../includes/SiteSettingsSetter/SiteSettingsSetter'
+import {setSettings} from "@store/clientActions/settingsActions";
+import {isAppleMobileDevice} from "@_variables/_variables";
 
 const SideBarWidgetArea = dynamic(() => import('../widgetsArea/SidebarWidgetArea/SidebarWidgetArea'));
 const HeaderWidgetArea = dynamic(() => import('../widgetsArea/HeaderWidgetArea/HeaderWidgetArea'));
@@ -28,6 +30,7 @@ interface AppLayoutPropTypes {
 const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
 
     const {pathname} = useRouter();
+    const dispatch = useDispatch()
 
     const {
         loggedIn,
@@ -36,6 +39,7 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
         loading,
         loginRegisterFormPopup,
         alert,
+        isMobile,
         sidebarsData,
         mainLayoutClassNameForGrid
     } = useSelector(({user, settings, globalState, posts}: StoreTypes) => {
@@ -46,6 +50,7 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
             userRole: user?.userData?.role,
             identity: settings?.identity,
             loading: globalState?.loading,
+            isMobile:settings.isMobile,
             loginRegisterFormPopup: globalState?.loginRegisterFormPopup,
             alert: globalState?.alert,
             sidebarsData,
@@ -55,6 +60,17 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
         }
     });
 
+    useEffect(() => {
+
+         if (typeof window !=='undefined'){
+             if (window.innerWidth < 768 && !isMobile  ){
+                 dispatch(setSettings({
+                     isMobile:true,
+                     isAppleMobileDevice:isAppleMobileDevice(navigator.userAgent)
+                 }))
+             }
+         }
+    }, []);
 
     return (
         <div className={'App ' + mainLayoutClassNameForGrid} suppressHydrationWarning>
@@ -63,7 +79,7 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
             {identity?.topbar === 'enable' ? <TopBarWidgetArea/> : null}
             {identity?.header === 'enable' ? <HeaderWidgetArea/> : null}
             {identity?.navigation === 'enable' ? <NavigationWidgetArea/> : null}
-            {sidebarsData?.leftSidebar?.enable && mainLayoutClassNameForGrid !==  'without-sidebar-layout'  ?
+            {sidebarsData?.leftSidebar?.enable && mainLayoutClassNameForGrid !== 'without-sidebar-layout' ?
                 <SideBarWidgetArea
                     gridArea='leftSidebar'
                     className='left-sidebar'
@@ -74,7 +90,7 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
 
             {children}
 
-            {sidebarsData?.rightSidebar?.enable  && mainLayoutClassNameForGrid !==  'without-sidebar-layout'  ?
+            {sidebarsData?.rightSidebar?.enable && mainLayoutClassNameForGrid !== 'without-sidebar-layout' ?
                 <SideBarWidgetArea
                     gridArea='rightSidebar'
                     className='right-sidebar'

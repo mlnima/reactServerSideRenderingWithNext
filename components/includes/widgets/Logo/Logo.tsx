@@ -7,6 +7,10 @@ import {UniqueDataTypes} from "@_variables/TypeScriptTypes/Widgets";
 const LogoStyledDiv = styled.div`
 
   a {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
     .logo-text, .logo-headline {
       color: var(--main-text-color);
     }
