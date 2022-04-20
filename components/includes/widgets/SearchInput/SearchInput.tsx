@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useMemo, useState} from 'react';
 import {useRouter} from "next/router";
 import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
@@ -63,7 +63,7 @@ const SearchInput: FC<SearchInputPropTypes> = ({uniqueData}) => {
     const {t} = useTranslation('common');
     const router = useRouter()
 
-    const isMobile = useSelector((store: StoreTypes) => store.settings?.isMobile);
+    const isMobile = useMemo(()=>useSelector((store: StoreTypes) => store.settings?.isMobile),[])
 
     const [state, setState] = useState({
         keyword: '',

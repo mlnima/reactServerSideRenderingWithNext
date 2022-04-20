@@ -9,6 +9,7 @@ import {
     _renderByDevice,
     _renderByLanguageCondition,
 } from "@_variables/clientVariables/_widgetsRendererVariables";
+import {useMemo} from "react";
 
 const DynamicNoSSR = dynamic(() => import('./DynamicNoSSR'))
 const Widget = dynamic(() => import('../Widget/Widget'))
@@ -22,13 +23,14 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
 
     const {locale} = useRouter()
 
-    const {widgets, userRole, isMobile} = useSelector(({widgets, user, settings}: StoreTypes) => {
+    const {widgets, userRole} = useSelector(({widgets, user}: StoreTypes) => {
         return {
             widgets: widgets?.widgetInGroups?.[position],
             userRole: user.userData?.role,
-            isMobile: settings?.isMobile,
         }
     })
+
+    const isMobile = useMemo(()=>useSelector((store: StoreTypes) => store.settings?.isMobile),[])
 
     const renderWidgets = widgets?.sort((a, b) => a.data.widgetIndex > b.data.widgetIndex ? 1 : -1)
         ?.map((widget: WidgetPropTypes) => {

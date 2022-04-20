@@ -81,7 +81,7 @@ const runServer = () => {
     server.use('/api/admin',adminMainRouter);
     server.use('/api/v1',clientMainRouter);
 
-    server.get('*', (req, res) => {
+    server.get('*', cacheSuccesses, (req, res) => {
         return handle(req, res)
     });
 
