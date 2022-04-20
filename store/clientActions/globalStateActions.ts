@@ -15,6 +15,7 @@ import {
 } from "@store/types";
 import {getTextDataWithTranslation,  isAppleMobileDevice} from "@_variables/_variables";
 import {AnyAction} from "redux";
+import isUserFromExternalLink from "@_variables/util/isUserFromExternalLink";
 
 //@ts-ignore
 export const setLoginRegisterFormStatus = (statusType):AnyAction => dispatch => {
@@ -83,6 +84,14 @@ export const hydrateGlobalState = (data):AnyAction  => dispatch => {
 export const getDefaultPageData =
     //@ts-ignore
     (context: GetServerSidePropsContext, dynamicWidgets: string[], options?: { page: string, setHeadData: boolean }):AnyAction  => async dispatch => {
+        let isDefaultDataSet = false
+        const isUserInternal  = context.req?.headers?.referer &&
+                                !context.req?.headers?.referer.includes(process.env.NEXT_PUBLIC_PRODUCTION_URL)
+
+        // console.log('referer: ',isUserInternal)
+
+
+
         context.res.setHeader(
             'Cache-Control',
             'public, s-maxage=604800, stale-while-revalidate=604800'
@@ -90,22 +99,36 @@ export const getDefaultPageData =
 
         const cache = process.env.NODE_ENV !== 'development'
         const userAgent = context.req.headers['user-agent'];
-        const staticWidgets = staticWidgetsJson?.widgets || []
-        const staticData = staticDataJson
-
-        dispatch({
-            type: GET_SETTINGS,
-            payload: {
-                design: staticData?.design || {},
-                identity: staticData?.identity || {},
-                eCommerce: {},
-                ip: context.req?.headers['x-forwarded-for'] || context.req?.socket?.remoteAddress,
-                isMobile: Boolean(userAgent?.match(
-                    /Android|BlackBerry|iPhone|iPod|Opera Mini|IEMobile|WPDesktop/i
-                )),
-                isAppleMobileDevice: isAppleMobileDevice(userAgent)
+        let staticWidgets = []
+        let staticData = {
+            design:{},
+            identity:{
+                themeColor:'#000'
             }
-        })
+        }
+
+        if (!isUserInternal || !isDefaultDataSet){
+            //@ts-ignore
+            staticWidgets = staticWidgetsJson?.widgets || []
+            //@ts-ignore
+            staticData = staticDataJson
+
+            dispatch({
+                type: GET_SETTINGS,
+                payload: {
+                    design: staticData?.design || {},
+                    identity: staticData?.identity || {},
+                    eCommerce: {},
+                    ip: context.req?.headers['x-forwarded-for'] || context.req?.socket?.remoteAddress,
+                    isMobile: Boolean(userAgent?.match(
+                        /Android|BlackBerry|iPhone|iPod|Opera Mini|IEMobile|WPDesktop/i
+                    )),
+                    isAppleMobileDevice: isAppleMobileDevice(userAgent)
+                }
+            })
+            isDefaultDataSet = true
+        }
+
 
         if (options?.setHeadData && options?.page?.match('search|tags|categories|actors|home|posts|chatroom|messenger|login|register')) {
 

@@ -28,7 +28,9 @@ const initialState = {
 
 export const globalStateReducer = (state= initialState , action : {type:string,payload:any}) =>{
     switch (action.type){
+        // console.log(state)
         case HYDRATE:
+
             return {
                 ...state,
                 ...action.payload.globalState

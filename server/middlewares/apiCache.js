@@ -2,7 +2,7 @@ const apiCache = require('apicache')
 const cache = apiCache.middleware;
 
 apiCache.options({
-    debug: process.env.NODE_ENV !== 'production',
+    // debug: process.env.NODE_ENV !== 'production',
     // debug: true,
     appendKey: (req, res) => {
         const userAgent = req.headers['user-agent'];
@@ -34,7 +34,7 @@ const cacheOn = (req, res) => {
     const notCacheUrls =  !req.url.includes('/workbox/') &&
                           !req.url.includes('/workbox') &&
                           !req.url.includes('/admin/') &&
-                          // !req.url.includes('/_next') &&
+                          !req.url.includes('/_next') &&
                           req.url !== '/admin'
 
     return checkAbsoluteConditions &&  (checkStaticRouteForCacheOption || notCacheUrls)

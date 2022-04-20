@@ -1,4 +1,4 @@
-import {FC, useEffect} from 'react';
+import {FC} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import dynamic from "next/dynamic";
 import GlobalStylesComponent from "../global/Styles/GlobalStylesComponent";
@@ -6,8 +6,8 @@ import _setAppLayoutDataFromProp from '../../_variables/clientVariables/_setAppL
 import {useRouter} from "next/router";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import SiteSettingSetter from '../includes/SiteSettingsSetter/SiteSettingsSetter'
-import {setSettings} from "@store/clientActions/settingsActions";
-import {isAppleMobileDevice} from "@_variables/_variables";
+// import {setSettings} from "@store/clientActions/settingsActions";
+// import {isAppleMobileDevice} from "@_variables/_variables";
 
 const SideBarWidgetArea = dynamic(() => import('../widgetsArea/SidebarWidgetArea/SidebarWidgetArea'));
 const HeaderWidgetArea = dynamic(() => import('../widgetsArea/HeaderWidgetArea/HeaderWidgetArea'));
@@ -29,7 +29,7 @@ interface AppLayoutPropTypes {
 
 const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
 
-    const {pathname,events,asPath} = useRouter();
+    const {pathname} = useRouter();
     const dispatch = useDispatch()
 
     const {
@@ -61,22 +61,22 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
         }
     });
 
-    useEffect(() => {
+    // useEffect(() => {
         // const reDetectMobileDevice = ()=>{
-            if (typeof window !=='undefined'){
-                if (window.innerWidth < 768 && !isMobile ){
-                    dispatch(setSettings({
-                        isMobile:true,
-                        isAppleMobileDevice:isAppleMobileDevice(navigator.userAgent)
-                    }))
-                }
-            }
+        //     if (typeof window !=='undefined'){
+        //         if (window.innerWidth < 768 && !isMobile ){
+        //             dispatch(setSettings({
+        //                 isMobile:true,
+        //                 isAppleMobileDevice:isAppleMobileDevice(navigator.userAgent)
+        //             }))
+        //         }
+        //     }
         // }
         // events.on('routeChangeComplete', reDetectMobileDevice);
         // return () => {
         //     events.off('routeChangeComplete', reDetectMobileDevice);
         // };
-    }, [asPath]);
+    // }, []);
 
     return (
         <div className={'App ' + mainLayoutClassNameForGrid} suppressHydrationWarning>
