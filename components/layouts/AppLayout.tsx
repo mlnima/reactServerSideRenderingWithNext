@@ -62,23 +62,21 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
     });
 
     useEffect(() => {
-        events.on('routeChangeComplete', reDetectMobileDevice);
-        return () => {
-            events.off('routeChangeComplete', reDetectMobileDevice);
-        };
-    }, [asPath]);
-
-    const reDetectMobileDevice = ()=>{
-        if (typeof window !=='undefined'){
-            if (window.innerWidth < 768 && !isMobile ){
-                dispatch(setSettings({
-                    isMobile:true,
-                    isAppleMobileDevice:isAppleMobileDevice(navigator.userAgent)
-                }))
+        const reDetectMobileDevice = ()=>{
+            if (typeof window !=='undefined'){
+                if (window.innerWidth < 768 && !isMobile ){
+                    dispatch(setSettings({
+                        isMobile:true,
+                        isAppleMobileDevice:isAppleMobileDevice(navigator.userAgent)
+                    }))
+                }
             }
         }
-    }
-
+        events.on('routeChangeComplete', reDetectMobileDevice);
+        // return () => {
+        //     events.off('routeChangeComplete', reDetectMobileDevice);
+        // };
+    }, [asPath]);
 
     return (
         <div className={'App ' + mainLayoutClassNameForGrid} suppressHydrationWarning>
