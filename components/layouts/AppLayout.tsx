@@ -63,7 +63,10 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
 
     useEffect(() => {
         events.on('routeChangeComplete', reDetectMobileDevice);
-    }, []);
+        return () => {
+            events.off('routeChangeComplete', reDetectMobileDevice);
+        };
+    }, [asPath]);
 
     const reDetectMobileDevice = ()=>{
         if (typeof window !=='undefined'){
