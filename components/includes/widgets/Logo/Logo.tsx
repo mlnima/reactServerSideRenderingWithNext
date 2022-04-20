@@ -1,63 +1,57 @@
-import {FC,useMemo} from 'react';
-import dynamic from "next/dynamic";
+import {FC, useMemo} from 'react';
 import Link from "next/link";
 import {useRouter} from "next/router";
-import isImageAllowedForNextImage from "../../../../_variables/util/isImageAllowedForNextImage";
-import isAbsolutePath from "../../../../_variables/util/isAbsolutePath";
 import styled from "styled-components";
-
-const LogoUsingNextImage = dynamic(() => import('./LogoUsingNextImage'));
+import {UniqueDataTypes} from "@_variables/TypeScriptTypes/Widgets";
 
 const LogoStyledDiv = styled.div`
 
-  a{
-    .logo-text,.logo-headline{
+  a {
+    .logo-text, .logo-headline {
       color: var(--main-text-color);
     }
-    .logo-text{
+
+    .logo-text {
       font-weight: bold;
     }
-    .logo-headline{
+
+    .logo-headline {
       margin: 5px 0 0 0;
     }
   }
 `
 
 interface LogoPropTypes {
+    uniqueData: UniqueDataTypes,
     translations: {},
-    LogoText: string,
-    headLine: string,
     LogoUrl: string,
 }
 
-const Logo: FC<LogoPropTypes> = ({translations, LogoText, headLine, LogoUrl}) => {
+const Logo: FC<LogoPropTypes> = ({uniqueData, LogoUrl}) => {
 
     const {locale} = useRouter()
 
-    const logoData = useMemo(() => {
-        const logoUrlSource =  LogoUrl && !isAbsolutePath(LogoUrl) ?
-                              `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${LogoUrl}` :
-                                LogoUrl
+    const {logoUrlSource, logoText, headLineData} = useMemo(() => {
+        // Logo Url must get Deleted after live sites widget data reSet
         return {
-            logoUrlSource,
-            logoText: locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? LogoText : translations?.[locale]?.LogoText,
-            headLineData: locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? headLine : translations?.[locale]?.headLine,
-            isImageAllowedForNextImage: isImageAllowedForNextImage(logoUrlSource)
+            logoUrlSource: uniqueData?.logoUrl || LogoUrl,
+            logoText: locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? uniqueData.logoText : uniqueData?.translations?.[locale]?.logoText,
+            headLineData: locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? uniqueData?.headLine : uniqueData?.translations?.[locale]?.headLine,
         }
-    }, [])
+    }, [uniqueData,LogoUrl])
 
 
     return (
         <LogoStyledDiv className={'logo-wrapper'}>
             <Link href='/'>
                 <a className='logo' href='/'>
-                    {logoData?.logoUrlSource?   <img alt={'logo'} src={logoData?.logoUrlSource}/>:null}
 
-                    {logoData.logoText && !logoData?.logoUrlSource ?
-                        <span className='logo-text'> {logoData.logoText} </span>
+                    {logoUrlSource && <img alt={'logo'} src={logoUrlSource}/> }
+                    {logoText && !logoUrlSource ?
+                        <span className='logo-text'> {logoText} </span>
                         : null
                     }
-                    {logoData.headLineData ? <p className='logo-headline'>{logoData.headLineData}</p> : null}
+                    {headLineData && <p className='logo-headline'>{headLineData}</p> }
                 </a>
             </Link>
         </LogoStyledDiv>
@@ -68,6 +62,8 @@ const Logo: FC<LogoPropTypes> = ({translations, LogoText, headLine, LogoUrl}) =>
 export default Logo;
 
 
+
+// {logoUrlSource ? <img alt={'logo'} src={logoUrlSource}/> : null}
 // <Link href='/'>
 //     <a className='logo' href='/'>
 //         {logoData?.logoUrlSource && logoData?.isImageAllowedForNextImage ?

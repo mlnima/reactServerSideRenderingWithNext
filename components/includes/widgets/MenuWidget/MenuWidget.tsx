@@ -28,7 +28,7 @@ const MenuWidget: FC<MenuWidgetPropTypes> = ({menuItems}) => {
     const menuItemsInOrder = useMemo(() => {
         return menuItems.filter((menuItem: MenuItem) => !menuItem.parent)
                         .sort((a, b) => a.itemIndex > b.itemIndex ? 1 : -1) || [];
-    }, [])
+    }, [menuItems])
 
 
     if (!isMobile){

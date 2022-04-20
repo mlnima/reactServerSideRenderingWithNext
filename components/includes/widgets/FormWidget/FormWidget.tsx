@@ -98,12 +98,6 @@ const FormWidget: FC<FormWidgetPropTypes> = ({widgetId, uniqueData}) => {
             }
         ))
         setSubmit(true)
-        // saveFormWidgetData({
-        //     ...state,
-        //     date: Date.now()
-        // }).then(res => {
-        //     setSubmit(true)
-        // })
     }
 
     const renderFields = ((uniqueData?.formFields || [])

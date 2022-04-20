@@ -62,7 +62,7 @@ interface MediaWidgetPropTypes {
 
 const MediaWidget: FC<MediaWidgetPropTypes> = ({mediaUrl, type, title, mediaType}) => {
 
-    const extraClassName = useMemo(() => mediaType === 'iframe' ? 'media-widget-video-iframe' : '', [])
+    const extraClassName = useMemo(() => mediaType === 'iframe' ? 'media-widget-video-iframe' : '', [mediaUrl])
 
         const ElementToRender = () => mediaType === 'image' ?
             <img className='media-element' src={mediaUrl} alt={title || type}/> :

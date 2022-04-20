@@ -3,21 +3,40 @@ const postSchema = require('../../../models/postSchema');
 const metaSchema = require('../../../models/metaSchema');
 const searchKeywordSchema = require('../../../models/searchKeywordSchema');
 const _clientQueryGeneratorForGettingPosts = require('../_variables/_clientQueryGeneratorForGettingPosts')
+const mongoIdValidator = require('../../../util/mongoIdValidator')
 
-
-const saveSearchedKeyword = async (keyword,count)=>{
-    if (keyword){
-      await  searchKeywordSchema.findOneAndUpdate(
-          {name:keyword},
-          {name:keyword,count},
-          { upsert: true }).exec()
+const saveSearchedKeyword = async (keyword, count) => {
+    if (keyword) {
+        await searchKeywordSchema.findOneAndUpdate(
+            {name: keyword},
+            {name: keyword, count},
+            {upsert: true}).exec()
     }
 }
 
+
+const getMetaForGettingPostsRequest = async (meta)=>{
+    try {
+        if (mongoIdValidator(meta)){
+            return await metaSchema.findById(meta).exec()
+        }else {
+            return await metaSchema.findOne({name:{$regex:decodeURIComponent(meta),$options:'i'}})
+        }
+    }catch (err){
+        return {}
+    }
+}
+
+
+
+
 module.exports = async (req, res) => {
     try {
-        const findingPostsOptions = _clientQueryGeneratorForGettingPosts(req.query)
-        // console.log(JSON.stringify(findingPostsOptions,null,'\t'))
+        const meta = req.query?.metaId || req.query?.selectedMetaForPosts ?
+            await getMetaForGettingPostsRequest(req.query?.metaId || req.query?.selectedMetaForPosts) || {} : {}
+
+        const findingPostsOptions = _clientQueryGeneratorForGettingPosts(req.query,meta?._id)
+
         const populateMeta = [
             {path: 'actors', select: {'name': 1, 'type': 1}},
             {path: 'categories', select: {'name': 1, 'type': 1, 'imageUrl': 1}},
@@ -34,10 +53,10 @@ module.exports = async (req, res) => {
             .populate(populateMeta)
             .exec()
 
-        const meta = req.query?.metaId || req.query?.selectedMetaForPosts ? await metaSchema.findById(req.query?.metaId || req.query?.selectedMetaForPosts).exec() : {}
-        if (req.query?.keyword){
-           await saveSearchedKeyword(req.query?.keyword,totalCount)
+        if (req.query?.keyword) {
+            await saveSearchedKeyword(req.query?.keyword, totalCount)
         }
+
         res.json({posts, totalCount, meta})
     } catch (err) {
         console.log(err.stack)
@@ -46,6 +65,11 @@ module.exports = async (req, res) => {
         })
     }
 };
+
+
+
+// const meta = req.query?.metaId || req.query?.selectedMetaForPosts ? await metaSchema.findById(req.query?.metaId || req.query?.selectedMetaForPosts).exec() : {}
+
 
 //const findPostsQueries = {$and: [findingPostsOptions.postTypeQuery, findingPostsOptions.statusQuery, findingPostsOptions.excludeQuery, findingPostsOptions.authorQuery, findingPostsOptions.searchQuery, findingPostsOptions.metaQuery]}
 // const findPostsQueries = {$and: [findingPostsOptions.postTypeQuery, findingPostsOptions.statusQuery, findingPostsOptions.excludeQuery, findingPostsOptions.authorQuery, findingPostsOptions.searchQuery, findingPostsOptions.metaQuery]}

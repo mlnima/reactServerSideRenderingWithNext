@@ -15,7 +15,7 @@ const ActorsRenderer = dynamic(() =>
 const RecentComments = dynamic(() => import('../widgets/RecentComments/RecentComments'))
 const MetaWidget = dynamic(() => import('../widgets/MetaWidget/MetaWidget'))
 const MediaWidget = dynamic(() => import('../widgets/MediaWidget/MediaWidget'))
-const SearchInputComponent = dynamic(() => import('../widgets/SearchInputComponent/SearchInputComponent'))
+const SearchInputComponent = dynamic(() => import('../widgets/SearchInput/SearchInput'))
 const SearchButton = dynamic(() => import('../widgets/SearchButton/SearchButton'))
 const AlphabeticalNumericalRangeLinksWidget = dynamic(() =>
     import('../widgets/AlphabeticalNumericalRangeLinksWidget/AlphabeticalNumericalRangeLinksWidget'))

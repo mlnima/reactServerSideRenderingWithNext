@@ -5,7 +5,9 @@ import {getPageData} from "@store/clientActions/postsAction";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
-import {FC} from "react";
+import React, {FC} from "react";
+import dynamic from "next/dynamic";
+const Soft404 = dynamic(() => import('@components/includes/Soft404/Soft404'));
 
 const page:FC = () => {
 
@@ -13,15 +15,16 @@ const page:FC = () => {
         return posts.pageData
     })
 
-    return (
-        <MainWidgetArea position={pageData?.pageName} className='page main' stylesData={pageData?.pageStyle || ''}/>
-    )
+    if (pageData?.pageName){
+        return (
+            <MainWidgetArea position={pageData?.pageName} className='page main' stylesData={pageData?.pageStyle || ''}/>
+        )
+    }else return <Soft404/>
+
 }
 
 //************SSR***************
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-
-    if (!context.query.pageName) return {notFound: true}
 
     await store.dispatch(getDefaultPageData(
         context,

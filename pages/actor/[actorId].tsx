@@ -2,7 +2,6 @@ import PostsPage from "@components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
-
 import {useRouter} from "next/router";
 import {wrapper} from "@store/store";
 import {useSelector} from "react-redux";
@@ -75,9 +74,9 @@ const actorPage: FC = () => {
 
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    const actorId = context.query.actorId as string
-    if (!actorId) return {notFound: true};
-    if (!actorId?.match(/^[0-9a-fA-F]{24}$/)) return {notFound: true};
+    // const actorId = context.query.actorId as string
+    // if (!actorId) return {notFound: true};
+    // if (!actorId?.match(/^[0-9a-fA-F]{24}$/)) return {notFound: true};
 
     // @ts-ignore
     await store.dispatch(getDefaultPageData(
@@ -98,7 +97,6 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         }
     }
 });
-
 
 export default actorPage;
 

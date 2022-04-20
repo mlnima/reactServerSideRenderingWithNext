@@ -137,7 +137,7 @@ const ImagesSwiper: FC<ImagesSwiperPropTypes> = ({uniqueData}) => {
                      uniqueData?.[deviceTypeData]?.effect === 'flip' ? [EffectFlip, Pagination, Navigation] :
                      uniqueData?.[deviceTypeData]?.navigation === 'true' ? [Pagination, Navigation] : [],
         }
-    }, [])
+    }, [uniqueData])
 
     return (
         <StyledDiv className={'swiper-content'}>

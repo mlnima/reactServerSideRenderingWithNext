@@ -4,6 +4,9 @@ import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
 import ActorDetails from "@components/includes/pagesComponents/actorsPageComponents/Components/ActorBio/ActorDetails";
+import dynamic from "next/dynamic";
+
+const Soft404 = dynamic(() => import('@components/includes/Soft404/Soft404'));
 
 const ActorBioDesktopStyledSection = styled.section`
   display: flex;
@@ -57,7 +60,7 @@ const ActorBioDesktopStyledSection = styled.section`
       background-color: var(--navigation-background-color);
       width: 100%;
       display: flex;
- 
+
 
       .actor-data-description {
         display: flex;
@@ -78,46 +81,49 @@ const ActorBioDesktop: FC = () => {
 
     const actorData = useSelector(({posts}: StoreTypes) => posts.actorData);
 
-    return (
-        <ActorBioDesktopStyledSection className={'actor-information'}>
 
-            <div className={'actor-images'}>
-                {actorData?.coverImageUrl ?
-                    <img className={'cover-image'} src={actorData.coverImageUrl} alt={actorData.name + 'cover image'}/>
-                    : null
-                }
-                {actorData.imageUrl ?
-                    <img className={'actor-image'} src={actorData.imageUrl} alt={actorData.name}/>
-                    : null
-                }
-            </div>
-
-            <div className={'actor-data'}>
-                <h1 className={'actor-data-name'}>{capitalizeFirstLetter(actorData.name)}</h1>
-                <div className={'actor-data-description-details'}>
-
-                    {actorData.description ?
-                        <section className={'actor-data-description'}>
-                            <h1>
-                                About {actorData.name}
-                            </h1>
-                            {actorData.description}
-                        </section>
+    if (actorData.name) {
+        return (
+            <ActorBioDesktopStyledSection className={'actor-information'}>
+                <div className={'actor-images'}>
+                    {actorData?.coverImageUrl ?
+                        <img className={'cover-image'} src={actorData.coverImageUrl}
+                             alt={actorData.name + 'cover image'}/>
                         : null
                     }
-                    {
-                        // @ts-ignore
-                        actorData?.additionalInfo?.length ?
-                            // @ts-ignore
-                            <ActorDetails additionalInfo={actorData.additionalInfo}/>
-                            : null
+                    {actorData.imageUrl ?
+                        <img className={'actor-image'} src={actorData.imageUrl} alt={actorData.name}/>
+                        : null
                     }
                 </div>
+                <div className={'actor-data'}>
+                    <h1 className={'actor-data-name'}>{capitalizeFirstLetter(actorData.name)}</h1>
+                    <div className={'actor-data-description-details'}>
 
-            </div>
+                        {actorData.description ?
+                            <section className={'actor-data-description'}>
+                                <h1>
+                                    About {actorData.name}
+                                </h1>
+                                {actorData.description}
+                            </section>
+                            : null
+                        }
+                        {
+                            // @ts-ignore
+                            actorData?.additionalInfo?.length ?
+                                // @ts-ignore
+                                <ActorDetails additionalInfo={actorData.additionalInfo}/>
+                                : null
+                        }
+                    </div>
+
+                </div>
 
 
-        </ActorBioDesktopStyledSection>
-    )
+            </ActorBioDesktopStyledSection>
+        )
+    } else return <Soft404/>
+
 };
 export default ActorBioDesktop

@@ -7,14 +7,14 @@ import ActionButtons from "@components/adminIncludes/widgetsModel/WidgetModel/Ac
 import UniqueFields from "@components/adminIncludes/widgetsModel/WidgetModel/UniqueFields";
 import WidgetHeaderControl from "./WidgetHeaderControl/WidgetHeaderControl";
 import {adminUpdateWidget} from "@store/adminActions/adminWidgetsActions";
-import {WidgetDataPropTypes, WidgetPropTypes} from "@_variables/TypeScriptTypes/Widgets";
+import { WidgetPropTypes} from "@_variables/TypeScriptTypes/Widgets";
+import {onChangeInputValueCorrector} from "@_variables/_variables";
 
 interface WidgetModelPropTypes {
-    widgetId: string,
     widget:WidgetPropTypes
 }
 
-const WidgetModel: FC<WidgetModelPropTypes> = ({widgetId,widget}) => {
+const WidgetModel: FC<WidgetModelPropTypes> = ({widget}) => {
     const dispatch = useDispatch()
 
     const [widgetSettings, setWidgetSettings] = useState({
@@ -27,13 +27,12 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({widgetId,widget}) => {
         activeEditingLanguage: 'default'
     })
 
-    const [widgetData, setWidgetData] = useState<WidgetDataPropTypes>({
+    const [widgetData, setWidgetData] = useState({
         translations: {},
         uniqueData: {},
         widgetIndex: 0,
         stayOpen: false,
     })
-
 
     useEffect(() => {
         if (widget) {
@@ -44,15 +43,6 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({widgetId,widget}) => {
         }
     }, [widget]);
 
-    // useEffect(() => {
-    //     if (currentWidgetData) {
-    //         setWidgetData({
-    //             ...widgetData,
-    //             ...currentWidgetData?.data,
-    //         })
-    //     }
-    // }, [currentWidgetData]);
-
     const onChangeLanguageHandler = e => {
         setWidgetSettings({
             ...widgetSettings,
@@ -60,38 +50,43 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({widgetId,widget}) => {
         })
     }
 
-    const onTextInputsDataChangeHandler = (e) => {
+    const onChangeHandler = e => {
+        const value =  onChangeInputValueCorrector(e)
+        setWidgetData({
+            ...widgetData,
+            [e.target.name]: value
+        })
+    };
 
+    // const onTextInputsDataChangeHandler = (e) => {
+    //     if (widgetSettings.activeEditingLanguage === 'default') {
+    //         onChangeHandler(e)
+    //     } else {
+    //         const value =   onChangeInputValueCorrector(e)
+    //         setWidgetData({
+    //             ...widgetData,
+    //             translations:{
+    //                 ...(widgetData?.translations || {}),
+    //                 [widgetSettings.activeEditingLanguage]:{
+    //                     ...(widgetData?.translations?.[widgetSettings.activeEditingLanguage] || {}),
+    //                     [e.target.name]: value
+    //                 }
+    //             }
+    //         })
+    //     }
+    // }
+    const onChangeHandlerWithTranslate = (e) => {
         if (widgetSettings.activeEditingLanguage === 'default') {
+            onChangeHandler(e)
+        } else {
+            const value =   onChangeInputValueCorrector(e)
             setWidgetData({
                 ...widgetData,
-                [e.target.name]: e.target.value
-            })
-        } else {
-            const currentData = widgetData.translations ?
-                widgetData.translations[widgetSettings.activeEditingLanguage] ?
-                    widgetData :
-                    {
-                        ...widgetData,
-                        translations: {
-                            ...widgetData.translations,
-                            [widgetSettings.activeEditingLanguage]: {}
-                        }
-                    }
-                : {
-                    ...widgetData,
-                    translations: {
-                        [widgetSettings.activeEditingLanguage]: {}
-                    }
-                }
-
-            setWidgetData({
-                ...currentData,
-                translations: {
-                    ...currentData.translations,
-                    [widgetSettings.activeEditingLanguage]: {
-                        ...currentData.translations[widgetSettings.activeEditingLanguage],
-                        [e.target.name]: e.target.value
+                translations:{
+                    ...(widgetData?.translations || {}),
+                    [widgetSettings.activeEditingLanguage]:{
+                        ...(widgetData?.translations?.[widgetSettings.activeEditingLanguage] || {}),
+                        [e.target.name]: value
                     }
                 }
             })
@@ -102,18 +97,18 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({widgetId,widget}) => {
         setWidgetData(JSON.parse(e.target.value))
     }
 
-
-    const onChangeHandler = e => {
-        const value = e.target.value
+    const onCheckboxChangeHandler = e => {
         setWidgetData({
             ...widgetData,
-            [e.target.name]: value === 'true' ? true : value === 'false' ? false : value
+            [e.target.name]: e.target.checked
         })
-    };
+    }
+
+
 
 
     const onUniqueDataChangeHandler = (e) => {
-        const value = e.target.value === 'true' || e.target.value === 'false' ? e.target.value === 'true' : e.target.value
+        const value =  onChangeInputValueCorrector(e)
 
         setWidgetData({
             ...widgetData,
@@ -122,6 +117,32 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({widgetId,widget}) => {
                 [e.target.name]: value
             }
         })
+    }
+
+    const onUniqueDataChangeHandlerWithTranslate = (e) => {
+        const value =  onChangeInputValueCorrector(e)
+        if (widgetSettings.activeEditingLanguage === 'default'){
+            onUniqueDataChangeHandler(e)
+        }else{
+
+            setWidgetData({
+                ...widgetData,
+                uniqueData: {
+                    ...(widgetData?.uniqueData || {}),
+                    translations:{
+                        //@ts-ignore
+                        ...(widgetData?.uniqueData?.translations || {}),
+                        [widgetSettings.activeEditingLanguage]:{
+                            //@ts-ignore
+                            ...(widgetData?.uniqueData?.translations?.[widgetSettings.activeEditingLanguage] || {}),
+                            [e.target.name]: value
+                        }
+
+                    }
+
+                }
+            })
+        }
     }
 
     const onUniqueDataJsonChangeHandler = (e) => {
@@ -142,18 +163,13 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({widgetId,widget}) => {
         })
     }
 
-    const onCheckboxChangeHandler = e => {
-        setWidgetData({
-            ...widgetData,
-            [e.target.name]: e.target.checked
-        })
-    }
+
 
 
     const changeWidgetIndex = (action) => {
         const valueToSet = action ? widgetData.widgetIndex + 1 : widgetData.widgetIndex - 1;
         dispatch(adminUpdateWidget({
-            _id: widgetId,
+            _id: widget._id,
             data: {
                 ...widgetData,
                 widgetIndex: valueToSet,
@@ -174,7 +190,7 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({widgetId,widget}) => {
 
     const onLockHandler = () => {
         dispatch(adminUpdateWidget({
-            _id: widgetId,
+            _id: widget._id,
             data: {
                 ...widgetData,
                 stayOpen: !widgetData.stayOpen,
@@ -193,7 +209,7 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({widgetId,widget}) => {
         <WidgetModelStyledDiv className='widget-model'>
             <WidgetHeaderControl setKey={false}
                                  widgetSettings={widgetSettings}
-                                 widgetId={widgetId}
+                                 widgetId={widget._id}
                                  widgetData={widgetData}
                                  onObjectModeHandler={() =>
                                      setWidgetSettings({
@@ -228,21 +244,22 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({widgetId,widget}) => {
                                    widgetSettings={widgetSettings}
                                    onCheckboxChangeHandler={onCheckboxChangeHandler}
                                    onChangeHandler={onChangeHandler}
-                                   onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
+                                   onChangeHandlerWithTranslate={onChangeHandlerWithTranslate}
                                    onChangeLanguageHandler={onChangeLanguageHandler}
                                    setWidgetSettings={setWidgetSettings}
-                                   widgetId={widgetId}
+                                   widgetId={widget._id}
 
                     />
 
                     <UniqueFields widgetData={widgetData}
-                                  widgetId={widgetId}
+                                  widgetId={widget._id}
                                   widgetSettings={widgetSettings}
                                   setWidgetSettings={setWidgetSettings}
                                   setWidgetData={setWidgetData}
                                   onChangeHandler={onChangeHandler}
                                   onUniqueDataChangeHandler={onUniqueDataChangeHandler}
-                                  onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
+                                  onUniqueDataChangeHandlerWithTranslate={onUniqueDataChangeHandlerWithTranslate}
+                                  onChangeHandlerWithTranslate={onChangeHandlerWithTranslate}
                                   onUniqueDataJsonChangeHandler={onUniqueDataJsonChangeHandler}
                                   onCheckboxChangeHandler={onCheckboxChangeHandler}
                     />
@@ -253,7 +270,7 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({widgetId,widget}) => {
 
             {widgetData.stayOpen ?
                 <ActionButtons widgetData={widgetData}
-                               widgetId={widgetId}
+                               widgetId={widget._id}
                                widgetSettings={widgetSettings}
                                setWidgetSettings={setWidgetSettings}
                 />

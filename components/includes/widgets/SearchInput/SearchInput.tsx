@@ -54,8 +54,13 @@ const SearchInputComponentStyledForm = styled.form`
 
 `
 
+interface SearchInputPropTypes{
+    uniqueData:{
+       switchToButtonOnMobile:boolean
+    }
+}
 
-const SearchInputComponent: FC = () => {
+const SearchInput: FC<SearchInputPropTypes> = ({uniqueData}) => {
     const {t} = useTranslation('common');
     const router = useRouter()
 
@@ -84,7 +89,7 @@ const SearchInputComponent: FC = () => {
         }
     }
 
-    if (isMobile) {
+    if (isMobile && uniqueData?.switchToButtonOnMobile) {
         return <SearchButton/>
     } else return (
 
@@ -115,5 +120,5 @@ const SearchInputComponent: FC = () => {
 
 };
 
-export default SearchInputComponent;
+export default SearchInput;
 

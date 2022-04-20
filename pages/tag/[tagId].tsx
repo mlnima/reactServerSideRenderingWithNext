@@ -65,9 +65,9 @@ const tagPage: FC = () => {
 
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    const tagId = context.query.tagId as string;
-    if (!tagId) return {notFound: true};
-    if (!tagId?.match(/^[0-9a-fA-F]{24}$/)) return {notFound: true};
+    // const tagId = context.query.tagId as string;
+    // if (!tagId) return {notFound: true};
+    // if (!tagId?.match(/^[0-9a-fA-F]{24}$/)) return {notFound: true};
 
     // @ts-ignore
     await store.dispatch(getDefaultPageData(

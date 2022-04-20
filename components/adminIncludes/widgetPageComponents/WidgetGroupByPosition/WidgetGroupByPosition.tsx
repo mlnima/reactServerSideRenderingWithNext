@@ -63,7 +63,7 @@ const WidgetGroupByPosition: FC<WidgetGroupByPositionPropTypes> = ({filter, posi
                     <p className='widgetAdminPanelItemHeader'>{convertVariableNameToName(position)}</p>
 
                     {widgets?.map((widget) => {
-                        return  <WidgetModel key={widget._id} widgetId={widget._id}  widget={widget}/>
+                        return  <WidgetModel key={widget._id} widget={widget}/>
                     })}
 
                 </WidgetGroupByPositionStyledDiv>

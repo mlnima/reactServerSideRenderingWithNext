@@ -20,13 +20,14 @@ interface UniqueFieldsPropTypes {
     widgetData:any,
     widgetSettings:any,
     setWidgetSettings:any,
-    onTextInputsDataChangeHandler:any,
+    onChangeHandlerWithTranslate:any,
     onUniqueDataJsonChangeHandler:any,
     onCheckboxChangeHandler:any,
     widgetId:string,
     setWidgetData,
     onChangeHandler,
-    onUniqueDataChangeHandler
+    onUniqueDataChangeHandler,
+    onUniqueDataChangeHandlerWithTranslate
 }
 
 const UniqueFields: FC<UniqueFieldsPropTypes> =
@@ -36,10 +37,13 @@ const UniqueFields: FC<UniqueFieldsPropTypes> =
          setWidgetData,
          onChangeHandler,
          onUniqueDataChangeHandler,
-         onTextInputsDataChangeHandler,
+         onChangeHandlerWithTranslate,
          onUniqueDataJsonChangeHandler,
-         onCheckboxChangeHandler
+         onCheckboxChangeHandler,
+         onUniqueDataChangeHandlerWithTranslate
     }) => {
+
+
     return (
         <>
             {widgetData.type === 'form' ?
@@ -62,20 +66,7 @@ const UniqueFields: FC<UniqueFieldsPropTypes> =
                 />
                 :null
             }
-            {widgetData.type === 'linkTo' ?
-                <LinkTypeWidgetModelFields
-                    widgetSettings={widgetSettings}
-                    widgetData={widgetData}
-                    onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
-                    onChangeHandler={onChangeHandler}
-                    linkToText={widgetData.linkToText}
-                    linkToWindowType={widgetData.linkToWindowType}
-                    linkTo={widgetData.linkTo}
-                    linkToType={widgetData.linkToType}
-                    linkToAs={widgetData.linkToAs}
-                />
-                :null
-            }
+
             {widgetData.type === 'media' ?
                 <>
                 <MediaWidgetType onChangeHandler={onChangeHandler} widgetData={widgetData}/>
@@ -124,10 +115,10 @@ const UniqueFields: FC<UniqueFieldsPropTypes> =
             }
 
             {widgetData.type === 'searchBar' ?
-                <SearchTypeInputFields widgetData={widgetData}
+                <SearchTypeInputFields uniqueData={widgetData?.uniqueData}
                                        widgetSettings={widgetSettings}
-                                       onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
-                                       onChangeHandler={onChangeHandler}
+                                       onUniqueDataChangeHandler={onUniqueDataChangeHandler}
+                                       onUniqueDataChangeHandlerWithTranslate={onUniqueDataChangeHandlerWithTranslate}
                 />
                 : null
             }
@@ -138,6 +129,16 @@ const UniqueFields: FC<UniqueFieldsPropTypes> =
                                                setWidgetData={setWidgetData}
                 />
                 : null
+            }
+
+            {widgetData.type === 'linkTo' ?
+                <LinkTypeWidgetModelFields
+                    widgetSettings={widgetSettings}
+                    uniqueData={widgetData?.uniqueData}
+                    onUniqueDataChangeHandler={onUniqueDataChangeHandler}
+                    onUniqueDataChangeHandlerWithTranslate={onUniqueDataChangeHandlerWithTranslate}
+                />
+                :null
             }
 
             {widgetData.type === 'meta' || widgetData.type === 'metaWithImage' ?
@@ -152,9 +153,9 @@ const UniqueFields: FC<UniqueFieldsPropTypes> =
 
             {widgetData.type === 'logo' ?
                 <LogoTypeWidgetModelFields widgetSettings={widgetSettings}
-                                           onChangeHandler={onChangeHandler}
+                                           onUniqueDataChangeHandler={onUniqueDataChangeHandler}
                                            widgetData={widgetData}
-                                           onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
+                                           onUniqueDataChangeHandlerWithTranslate={onUniqueDataChangeHandlerWithTranslate}
                 />
                 : null
             }

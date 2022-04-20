@@ -32,6 +32,7 @@ let StyledNavigation = styled.nav`
 
 const NavigationWidgetArea = () => {
     const navigationStyle = useSelector(({settings}: StoreTypes) => settings?.design?.navigationStyle)
+
     return (
         <StyledNavigation stylesData={navigationStyle || ''} className={'widget-area navigation'}>
             <div className='navigation-content'>

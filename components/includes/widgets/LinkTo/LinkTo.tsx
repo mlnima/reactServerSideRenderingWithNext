@@ -1,12 +1,14 @@
 import {FC, useMemo} from "react";
 import Link from "next/link";
 import {useRouter} from "next/router";
+import {UniqueDataTypes} from "@_variables/TypeScriptTypes/Widgets";
 
 interface LinkToPropTypes {
     linkTo: string,
     linkToText: string,
     linkToWindowType: string,
-    translations: {}
+    translations: {},
+    uniqueData:UniqueDataTypes
 }
 
 const LinkTo: FC<LinkToPropTypes> =
@@ -15,19 +17,19 @@ const LinkTo: FC<LinkToPropTypes> =
          linkToText,
          linkToWindowType,
          translations,
-
+         uniqueData
      }) => {
         const {locale} = useRouter()
 
         const linkContent = useMemo(() => {
-            return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? linkToText :
-                              translations?.[locale]?.linkToText || linkToText
-        }, [])
+            return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? uniqueData?.linkToText || linkToText :
+                             uniqueData?.translations?.[locale]?.linkToText || translations?.[locale]?.linkToText || linkToText
+        }, [linkTo,linkToText,linkToWindowType,translations])
 
-        if (linkTo) {
+        if (uniqueData?.linkTo||linkTo) {
             return (
-                <Link href={linkTo ? linkTo : '/'}>
-                    <a target={linkToWindowType || '_self'} className={'link-to'} title={linkContent}>
+                <Link href={uniqueData?.linkTo || linkTo || '/'}>
+                    <a target={uniqueData?.linkToWindowType || linkToWindowType || '_self'} className={'link-to'} title={linkContent}>
                         {linkContent}
                     </a>
                 </Link>

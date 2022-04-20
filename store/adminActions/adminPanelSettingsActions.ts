@@ -33,6 +33,7 @@ export const adminPanelGetSettings = ():AnyAction => async (dispatch: any) => {
 
             const designSettings = res.data?.settings?.find((setting: any) => setting.type === 'design') || {};
             const identitySettings = res.data?.settings?.find((setting: any) => setting.type === 'identity') || {};
+
             const settings = {
                 design: designSettings?.data,
                 identity: identitySettings?.data,

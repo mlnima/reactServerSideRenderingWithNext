@@ -1,6 +1,6 @@
 const {isValidObjectId} = require("mongoose");
 
-module.exports = data => {
+module.exports = (data,metaId) => {
     // const excludesPostFromSources = process.env.EXCLUDE_POSTS_SOURCE ? process.env.EXCLUDE_POSTS_SOURCE.split(' ') : [];
     //
 
@@ -17,10 +17,14 @@ module.exports = data => {
 
     const size = parseInt(data?.size || data?.count || '20') || 20;
     const sort = data?.sort || data?.sortBy;
-    const meta = data.metaId || data?.selectedMetaForPosts;
+    // const meta = metaId
+        //|| data.metaId || data?.selectedMetaForPosts;
 
-    const validateId = meta ? isValidObjectId(meta) && meta?.match(/^[0-9a-fA-F]{24}$/) : false;
-    const metaQuery = validateId ? [{$or: [{categories: {$in: meta}}, {tags: {$in: meta}}, {actors: {$in: meta}}]}] : [];
+    // const validateId = meta ? isValidObjectId(meta) && meta?.match(/^[0-9a-fA-F]{24}$/) : false;
+    //const metaQuery = validateId ? [{$or: [{categories: {$in: meta}}, {tags: {$in: meta}}, {actors: {$in: meta}}]}] : [];
+    const metaQuery = metaId ? [{$or: [{categories: {$in: metaId}}, {tags: {$in: metaId}}, {actors: {$in: metaId}}]}] : [];
+
+
     const keyword = data.keyword ? decodeURIComponent(data.keyword) : ''
     const searchQuery = !keyword ? [] :
           !data.lang || data.lang === 'default' ? [{$or: [{title: new RegExp(keyword, 'i')}]}] :

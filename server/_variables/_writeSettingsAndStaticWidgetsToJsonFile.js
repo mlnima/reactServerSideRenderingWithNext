@@ -1,5 +1,7 @@
 const settingSchema = require('../models/settings/settingSchema')
 const widgetSchema = require("../models/widgetSchema");
+const metaSchema = require("../models/metaSchema");
+const postSchema = require("../models/postSchema");
 const fs = require('fs')
 
 const widgetPopulateModel = [
@@ -52,7 +54,8 @@ const _writeSettingsAndStaticWidgetsToJsonFile = async ()=>{
     try {
         const identity = await settingSchema.findOne({type: 'identity'}).exec()
         const design = await settingSchema.findOne({type: 'design'}).exec()
-        const staticWidgets = await widgetSchema.find({$or: staticWidgetsQuery})
+        // console.log(widgetPopulateModel)
+        const staticWidgets = await widgetSchema.find({$or: [...staticWidgetsQuery]})
             .populate(widgetPopulateModel)
             .exec()
 
@@ -64,6 +67,7 @@ const _writeSettingsAndStaticWidgetsToJsonFile = async ()=>{
             widgets:staticWidgets,
         }))
 
+        console.log('static Data had written to Json')
     } catch (err) {
         err.stack ? console.log(err.stack) : console.log(err)
     }

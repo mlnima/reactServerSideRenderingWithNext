@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import MetaWidgetElement from './MetaWidgetElement'
 import {FC, useMemo} from "react";
-import {Meta} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
+import {Meta} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 const MetaWidgetStyledDiv = styled.div`
   display: flex;
@@ -29,7 +29,7 @@ const MetaWidget: FC<MetaWidgetPropType> = ({metaType,uniqueData}) => {
         return metaType === 'tags' ? 'tag' :
                metaType === 'categories' ? 'category' :
                metaType === 'actors' ? 'actor' : 'category'
-    },[])
+    },[uniqueData])
 
     // console.log(uniqueData?.metaData)
     const renderMeta = (uniqueData?.metaData || []).map((meta,index) => {

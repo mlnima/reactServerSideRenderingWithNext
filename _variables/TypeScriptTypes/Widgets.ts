@@ -1,4 +1,5 @@
 export interface WidgetDataPropTypes {
+
     mediaType?: string;
     name?: string;
     footerLink?: string;
@@ -28,11 +29,20 @@ export interface WidgetDataPropTypes {
     count?: number,
 }
 
-
-
+export interface WidgetSettingsPropTypes {
+    activeEditingLanguage?:string,
+}
 
 export interface UniqueDataTypes {
-    [key: string]:any
+    [key: string]:any,
+    translations?:{
+        [key: string]:any,
+    },
+    linkTo?: string,
+    linkToWindowType?: string,
+    linkToText?: string,
+    posts?: [],
+    metaData?: []
 }
 export interface WidgetPropTypes {
 

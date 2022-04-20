@@ -22,9 +22,6 @@ import {
 } from "@store/types";
 import {AnyAction} from "redux";
 
-// const mongoIdValidator = require('../../_variables/util/mongoIdValidator')
-// import mongoIdValidator from '../../_variables/util/mongoIdValidator'
-
 //@ts-ignore
 export const setPostsData = (postsData):AnyAction  => async dispatch => {
     dispatch({
@@ -34,6 +31,7 @@ export const setPostsData = (postsData):AnyAction  => async dispatch => {
 }
 
 export const getPosts = (context, metaId, cache, metaType, options) => async dispatch => {
+
     const gettingPostsQueries = _clientGetPostsQueryGenerator(context.query, metaId, cache)
     await Axios.get(`/api/v1/posts/clientGetPosts${gettingPostsQueries}`)
         .then(res => {
@@ -53,10 +51,9 @@ export const getPosts = (context, metaId, cache, metaType, options) => async dis
 
             if (res?.data?.meta && metaId && options) {
                 const staticData = staticDataJson
-                const title = `${res?.data?.meta?.name} ` +
-                               getTextDataWithTranslation(context.locale, `${options.page}PageTitle`, staticData?.identity) +
-                                //@ts-ignore
-                               (staticData?.identity?.siteName ? ` | ${staticData?.identity?.siteName}` : '')
+                const title = res?.data?.meta?.name ? `${res?.data?.meta?.name || ''} 
+                ${getTextDataWithTranslation(context.locale, `${options.page}PageTitle`, staticData?.identity)} 
+                | ${staticData?.identity?.siteName || ''}` : staticData?.identity?.siteName
 
                 const description = getTextDataWithTranslation(context.locale, `${options.page}PageDescription` , staticData?.identity)+
                                     ` ${res?.data?.meta?.name}`
@@ -70,18 +67,18 @@ export const getPosts = (context, metaId, cache, metaType, options) => async dis
                     type: SET_HEAD_DATA,
                     payload: {
                         title: title || null,
-                        description: description?.substring(1, 155) || null,
-                        keywords: [res?.data?.meta?.name] || null,
+                        description: description?.substring(0, 155) || null,
+                        keywords: res?.data?.meta?.name ?  [res?.data?.meta?.name] : null,
                         ogTitle: title || null,
                         ogType: 'website',
-                        ogDescription: description?.substring(1, 155) || null,
+                        ogDescription: description?.substring(0, 155) || null,
                         ...canonicalUrl,
                         ogUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${singularMetaForm}/${metaId}`,
                         ogImage: meta?.mainThumbnail || null,
                         twitterCard: true,
                         twitterUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${singularMetaForm}/${metaId}`,
                         twitterTitle: meta?.name || null,
-                        twitterDescription: meta?.description?.substring(1, 155) || null,
+                        twitterDescription: meta?.description?.substring(0, 155) || null,
                         twitterImage: meta?.imageUrl || null,
                     }
                 })
@@ -100,7 +97,7 @@ export const getPosts = (context, metaId, cache, metaType, options) => async dis
 //@ts-ignore
 export const getPost = (_id: string , locale : string):AnyAction  => async dispatch => {
     const isDefaultLocale = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL;
-    // if (mongoIdValidator(_id)){
+
         await Axios.get(`/api/v1/posts/clientGetPost${_postPageQueryGenerator({_id})}`).then(res => {
 
             const postData = res.data.post;
@@ -128,20 +125,20 @@ export const getPost = (_id: string , locale : string):AnyAction  => async dispa
                 type: SET_HEAD_DATA,
                 payload: {
                     title: postTitle,
-                    description: postDescription?.substring(1, 155) || null,
+                    description: postDescription?.substring(0, 155) || null,
                     keywords,
-                    canonicalUrl:`${process.env.NEXT_PUBLIC_PRODUCTION_URL}/post/${postData?.postType}/${postData?._id}`,
+                    canonicalUrl:`${process.env.NEXT_PUBLIC_PRODUCTION_URL}/post/${postData?.postType|| 'article'}/${postData?._id}`,
                     ogTitle: postTitle,
                     // ogType: postData?.postType === 'video' ? 'video.other' : postData?.postType || '',
                     ogType: 'website',
-                    ogDescription: postDescription?.substring(1, 155),
-                    ogUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/post/${postData?.postType}/${postData?._id}`,
+                    ogDescription: postDescription?.substring(0, 155),
+                    ogUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/post/${postData?.postType || 'article'}/${postData?._id}`,
                     ogImage: postData?.mainThumbnail || null,
 
                     twitterCard: true,
-                    twitterUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/post/${postData?.postType}/${postData?._id}`,
+                    twitterUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/post/${postData?.postType|| 'article'}/${postData?._id}`,
                     twitterTitle: postTitle,
-                    twitterDescription: postDescription?.substring(1, 155),
+                    twitterDescription: postDescription?.substring(0, 155),
                     twitterImage: postData?.mainThumbnail || null,
                 }
             })
@@ -386,18 +383,18 @@ export const getPageData = (pageName):AnyAction  => async dispatch => {
                 type: SET_HEAD_DATA,
                 payload: {
                     title: res.data?.pageData?.title || pageName ,
-                    description: res.data?.pageData?.description?.substring(1, 155) || null,
+                    description: res.data?.pageData?.description?.substring(0, 155) || null,
                     keywords:res.data?.pageData?.keywords|| null,
                     ogTitle: res.data?.pageData?.title || pageName,
                     canonicalUrl:`${process.env.NEXT_PUBLIC_PRODUCTION_URL}/page/${pageName}`,
                     ogType: 'website',
-                    ogDescription: res.data?.pageData?.description?.substring(1, 155) || null,
+                    ogDescription: res.data?.pageData?.description?.substring(0, 155) || null,
                     ogUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/page/${pageName}`,
                     ogImage: res.data?.pageData?.imageUrl || null,
                     twitterCard: true,
                     twitterUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/page/${pageName}`,
                     twitterTitle: res.data?.pageData?.title || pageName ,
-                    twitterDescription: res.data?.pageData?.description?.substring(1, 155) || null,
+                    twitterDescription: res.data?.pageData?.description?.substring(0, 155) || null,
                     twitterImage: res.data?.pageData?.imageUrl || null,
                 }
             })

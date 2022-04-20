@@ -21,7 +21,7 @@ interface DefaultFieldsPropTypes {
     },
     widgetId: string,
     onCheckboxChangeHandler: any,
-    onTextInputsDataChangeHandler: any,
+    onChangeHandlerWithTranslate: any,
     onChangeLanguageHandler: any,
     onChangeHandler: any,
     setWidgetSettings: any,
@@ -33,7 +33,7 @@ const DefaultFields: FC<DefaultFieldsPropTypes> =
          widgetId,
          widgetSettings,
          onCheckboxChangeHandler,
-         onTextInputsDataChangeHandler,
+         onChangeHandlerWithTranslate,
          onChangeHandler,
          onChangeLanguageHandler,
          setWidgetSettings,
@@ -110,8 +110,8 @@ const DefaultFields: FC<DefaultFieldsPropTypes> =
                 <RenderTitleAndRedirectLink
                     widgetData={widgetData}
                     widgetSettings={widgetSettings}
-                    onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
-                    onChangeHandlerForBoolean={onChangeHandler}
+                    onChangeHandlerWithTranslate={onChangeHandlerWithTranslate}
+                    onChangeHandler={onChangeHandler}
                     rendering={
                         widgetData.type === 'posts' ||
                         widgetData.type === 'postsSwiper' ||
@@ -159,7 +159,7 @@ const DefaultFields: FC<DefaultFieldsPropTypes> =
                                     widgetData?.translations?.[widgetSettings.activeEditingLanguage]?.text
                             }
                             className={'widgetTextTextarea'}
-                            onChange={onTextInputsDataChangeHandler}
+                            onChange={onChangeHandlerWithTranslate}
                         />
                         : null
                     }

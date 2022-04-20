@@ -17,10 +17,11 @@ const Soft404StyledDiv = styled.div`
   }
 
   .back-to-homepage {
-    color: var(--main-text-color, #fff);
+    color: var(--main-active-color, #f90);
     text-decoration: none;
   }
 `
+
 interface Soft404PropTypes {
 
 }
@@ -30,7 +31,7 @@ const Soft404: FC<Soft404PropTypes> = (props) => {
 
     return (
         <Soft404StyledDiv>
-            <h1>404 - {t<string>(`Not Found`)}</h1>
+            <h1>{t<string>(`Not Found`)}</h1>
             <Link href="/">
                 <a className='back-to-homepage'>
                     <h2>{t<string>(`Go To Homepage`)}</h2>

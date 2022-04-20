@@ -43,7 +43,17 @@ const rewrites = () => {
     return {
         beforeFiles: [
             {
-                source: `/:postType(video|post|product|article|book|standard|promotion|learn|food|book)?/:title`,
+                source: `/post`,
+                destination: '/post/old/:id',
+                has: [{type: 'query', key: 'id'}]
+            },
+            {
+                source: `/video`,
+                destination: '/post/old/:id',
+                has: [{type: 'query', key: 'id'}]
+            },
+            {
+                source: `/:postType(video|product|article|book|standard|promotion|learn|food|book)?/:title`,
                 destination: '/post/:postType/:id',
                 has: [{type: 'query', key: 'id'}]
             },

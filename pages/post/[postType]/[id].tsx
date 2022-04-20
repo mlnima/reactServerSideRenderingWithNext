@@ -27,7 +27,7 @@ const postPage:FC = () => {
 
     const {postType, _id,status,role} = useSelector(({posts,user}: StoreTypes) => {
         return {
-            postType: posts?.post?.postType,
+            postType: posts?.post?.postType || 'video',
             _id: posts?.post?._id,
             role: user?.userData?.role,
             status: posts?.post?.status,
