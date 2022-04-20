@@ -62,7 +62,7 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
     });
 
     useEffect(() => {
-        const reDetectMobileDevice = ()=>{
+        // const reDetectMobileDevice = ()=>{
             if (typeof window !=='undefined'){
                 if (window.innerWidth < 768 && !isMobile ){
                     dispatch(setSettings({
@@ -71,8 +71,8 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
                     }))
                 }
             }
-        }
-        events.on('routeChangeComplete', reDetectMobileDevice);
+        // }
+        // events.on('routeChangeComplete', reDetectMobileDevice);
         // return () => {
         //     events.off('routeChangeComplete', reDetectMobileDevice);
         // };
