@@ -29,7 +29,7 @@ interface AppLayoutPropTypes {
 
 const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
 
-    const {pathname} = useRouter();
+    const {pathname,events,asPath} = useRouter();
     const dispatch = useDispatch()
 
     const {
@@ -43,6 +43,7 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
         sidebarsData,
         mainLayoutClassNameForGrid
     } = useSelector(({user, settings, globalState, posts}: StoreTypes) => {
+
         const sidebarsData = _setAppLayoutDataFromProp(posts.pageData, pathname, settings?.identity)
 
         return {
@@ -61,16 +62,20 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
     });
 
     useEffect(() => {
-
-         if (typeof window !=='undefined'){
-             if (window.innerWidth < 768 && !isMobile  ){
-                 dispatch(setSettings({
-                     isMobile:true,
-                     isAppleMobileDevice:isAppleMobileDevice(navigator.userAgent)
-                 }))
-             }
-         }
+        events.on('routeChangeComplete', reDetectMobileDevice);
     }, []);
+
+    const reDetectMobileDevice = ()=>{
+        if (typeof window !=='undefined'){
+            if (window.innerWidth < 768 && !isMobile ){
+                dispatch(setSettings({
+                    isMobile:true,
+                    isAppleMobileDevice:isAppleMobileDevice(navigator.userAgent)
+                }))
+            }
+        }
+    }
+
 
     return (
         <div className={'App ' + mainLayoutClassNameForGrid} suppressHydrationWarning>
