@@ -1,6 +1,5 @@
 import {FC, useState, useEffect} from "react";
 import {useRouter} from "next/router";
-// import parse from 'html-react-parser';
 import styled from "styled-components";
 
 const AdvertiseStyledDiv = styled.div`

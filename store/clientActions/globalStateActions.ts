@@ -15,7 +15,7 @@ import {
 } from "@store/types";
 import {getTextDataWithTranslation,  isAppleMobileDevice} from "@_variables/_variables";
 import {AnyAction} from "redux";
-import isUserFromExternalLink from "@_variables/util/isUserFromExternalLink";
+import {getSelectorsByUserAgent} from 'react-device-detect'
 
 //@ts-ignore
 export const setLoginRegisterFormStatus = (statusType):AnyAction => dispatch => {
@@ -84,18 +84,11 @@ export const hydrateGlobalState = (data):AnyAction  => dispatch => {
 export const getDefaultPageData =
     //@ts-ignore
     (context: GetServerSidePropsContext, dynamicWidgets: string[], options?: { page: string, setHeadData: boolean }):AnyAction  => async dispatch => {
+        const userAgent = context.req.headers['user-agent'];
+        const { isMobile } = getSelectorsByUserAgent(userAgent)
         let isDefaultDataSet = false
         const isUserInternal  = context.req?.headers?.referer &&
                                 !context.req?.headers?.referer.includes(process.env.NEXT_PUBLIC_PRODUCTION_URL)
-        const userAgent = context.req.headers['user-agent'];
-        const isMobile =  Boolean(userAgent?.match(
-            /Android|BlackBerry|iPhone|iPod|Opera Mini|IEMobile|WPDesktop/i
-        ))
-
-        // console.log('referer: ',isUserInternal)
-
-
-
         context.res.setHeader(
             'Cache-Control',
             'public, s-maxage=604800, stale-while-revalidate=604800'
