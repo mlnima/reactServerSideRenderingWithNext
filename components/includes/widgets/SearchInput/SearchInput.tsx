@@ -63,7 +63,8 @@ const SearchInput: FC<SearchInputPropTypes> = ({uniqueData}) => {
     const {t} = useTranslation('common');
     const router = useRouter()
 
-    const isMobile = useMemo(()=>useSelector((store: StoreTypes) => store.settings?.isMobile),[])
+    const isMobileDevice = useSelector((store: StoreTypes) => store.settings?.isMobile)
+    const isMobile = useMemo(()=>isMobileDevice,[])
 
     const [state, setState] = useState({
         keyword: '',

@@ -30,7 +30,8 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
         }
     })
 
-    const isMobile = useMemo(()=>useSelector((store: StoreTypes) => store.settings?.isMobile),[])
+    const isMobileDevice = useSelector((store: StoreTypes) => store.settings?.isMobile)
+    const isMobile = useMemo(()=>isMobileDevice,[])
 
     const renderWidgets = widgets?.sort((a, b) => a.data.widgetIndex > b.data.widgetIndex ? 1 : -1)
         ?.map((widget: WidgetPropTypes) => {

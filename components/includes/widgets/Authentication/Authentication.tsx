@@ -10,7 +10,8 @@ const DesktopAuthentication = dynamic(
 
 const Authentication: FC = () => {
 
-    const isMobile = useMemo(()=>useSelector((store: StoreTypes) => store.settings?.isMobile),[])
+    const isMobileDevice = useSelector((store: StoreTypes) => store.settings?.isMobile)
+    const isMobile = useMemo(()=>isMobileDevice,[])
 
     if (isMobile) {
         return <MobileAuthentication/>
