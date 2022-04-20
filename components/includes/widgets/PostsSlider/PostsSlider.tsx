@@ -193,19 +193,24 @@ const PostsSlider: FC<PostsSliderPropsTypes> =
         const {
             elementSize,
             postsPerRawForMobile,
-            isMobile,
+            isMobileDevice,
             cardWidth,
-            isAppleMobileDevice
+            isAppleMobile
         } = useSelector(({settings}: StoreTypes) => {
             const elementSize = cardWidthDesktop ? cardWidthDesktop : settings?.design?.cardWidthDesktop || 255
             return {
                 elementSize,
                 postsPerRawForMobile: 1,
-                isMobile: settings?.isMobile,
+                isMobileDevice: settings?.isMobile,
                 cardWidth: elementSize,
-                isAppleMobileDevice: settings?.isAppleMobileDevice
+                isAppleMobile: settings?.isAppleMobileDevice
             }
         })
+
+
+        const isMobile = useMemo(()=>isMobileDevice,[])
+        const isAppleMobileDevice = useMemo(()=>isAppleMobile,[])
+
 
         useEffect(() => {
             if (!sliderApi) return;

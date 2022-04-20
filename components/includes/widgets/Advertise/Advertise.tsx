@@ -3,15 +3,16 @@ import {useRouter} from "next/router";
 import styled from "styled-components";
 
 const AdvertiseStyledDiv = styled.div`
-   display:flex;
-   justify-content:center;
-   align-items:center;
-   min-height: 100px;
-   min-width: 300px;
-   margin-top: 10px ;
-   margin-bottom: 10px ;
-  
-  .pre-load{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+  min-width: 300px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  max-width: 98vw !important;
+
+  .pre-load {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,8 +21,9 @@ const AdvertiseStyledDiv = styled.div`
     min-width: 300px;
   }
 `
+
 interface AdvertisePropTypes {
-    uniqueData:{
+    uniqueData: {
         adCode: string,
     }
 }
@@ -32,14 +34,14 @@ const Advertise: FC<AdvertisePropTypes> = ({uniqueData}) => {
 
     useEffect(() => {
         setAdCodeData(null)
-        setTimeout(()=>{
+        setTimeout(() => {
             setAdCodeData(uniqueData?.adCode)
-        },500)
-    }, [router.pathname,router.query]);
+        }, 500)
+    }, [router.pathname, router.query]);
 
     return (
         <AdvertiseStyledDiv dangerouslySetInnerHTML={{
-            __html:adCodeData ? adCodeData : `<div class='pre-load'><span>loading...</span></div>`
+            __html: adCodeData ? adCodeData : `<div class='pre-load'><span>loading...</span></div>`
         }}/>
     )
 

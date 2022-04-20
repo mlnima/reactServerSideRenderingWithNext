@@ -118,16 +118,18 @@ const PostSwiper: FC<PostSwiperComponentTypes> =
         const dispatch = useDispatch()
         const swiperParent = useRef(null)
 
-        const {elementSize,postsPerRawForMobile,isMobile,cardWidth} = useSelector((store: StoreTypes) => {
+        const {elementSize,postsPerRawForMobile,isMobileDevice,cardWidth} = useSelector((store: StoreTypes) => {
             const elementSize = cardWidthDesktop ? cardWidthDesktop : store.settings?.design?.cardWidthDesktop || 255
             return {
                 elementSize,
                 postsPerRawForMobile: 1,
-                isMobile: store.settings?.isMobile,
+                isMobileDevice: store.settings?.isMobile,
                 cardWidth:elementSize
             }
         })
 
+
+        const isMobile = useMemo(()=>isMobileDevice,[])
 
         const noImageUrl = '/static/images/noImage/no-image-available.png';
 

@@ -7,7 +7,7 @@ import {setLoading} from "@store/clientActions/globalStateActions";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import ratingCalculator from "@_variables/util/ratingCalculator";
-import {FC} from "react";
+import {FC, useMemo} from "react";
 
 const VideoCardToRender = dynamic(() => import('@components/includes/PostsRenderer/VideoCardToRender'))
 const PromotionCardToRender = dynamic(() => import('@components/includes/PostsRenderer/PromotionCardToRender'))
@@ -75,14 +75,17 @@ const PostsRenderer:FC<PostsComponentTypes> =
     const dispatch = useDispatch()
     const {locale} = useRouter()
 
-    const {cardWidth,postsPerRawForMobile,isMobile,isAppleMobileDevice} = useSelector(({settings}: StoreTypes) => {
+    const {cardWidth,postsPerRawForMobile,isMobileDevice,isAppleMobile} = useSelector(({settings}: StoreTypes) => {
         return {
             cardWidth:settings?.design?.cardWidthDesktop || 255,
             postsPerRawForMobile: settings?.design?.postsPerRawForMobile || 2,
-            isMobile: settings?.isMobile,
-            isAppleMobileDevice:settings?.isAppleMobileDevice
+            isMobileDevice: settings?.isMobile,
+            isAppleMobile:settings?.isAppleMobileDevice
         }
     });
+
+    const isMobile = useMemo(()=>isMobileDevice,[])
+    const isAppleMobileDevice = useMemo(()=>isAppleMobile,[])
 
     return (
         <PostsContentStyledDiv className={'posts-content'}

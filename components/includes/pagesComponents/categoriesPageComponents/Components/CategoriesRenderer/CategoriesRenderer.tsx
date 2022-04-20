@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, useMemo} from 'react';
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
 import dynamic from "next/dynamic";
@@ -49,18 +49,19 @@ const CategoriesRenderer: FC<CategoriesRendererPropTypes> = ({ uniqueData}) => {
 
     const dispatch = useDispatch();
 
-    const {categoriesMetas, postsPerRawForMobile, isMobile, cardWidth, isAppleMobileDevice} =
+    const {categoriesMetas, postsPerRawForMobile, isMobileDevice, cardWidth, isAppleMobile} =
         useSelector(({settings, posts}: StoreTypes) => {
             return {
                 categoriesMetas: uniqueData?.metaData ? uniqueData?.metaData : posts?.categoriesMetas,
                 postsPerRawForMobile: settings?.design?.postsPerRawForMobile || 2,
-                isMobile: settings?.isMobile,
+                isMobileDevice: settings?.isMobile,
                 cardWidth:settings?.design?.cardWidthDesktop || 255,
-                isAppleMobileDevice: settings?.isAppleMobileDevice
+                isAppleMobile: settings?.isAppleMobileDevice
             }
         })
 
-
+    const isMobile = useMemo(() => isMobileDevice, [])
+    const isAppleMobileDevice = useMemo(() => isAppleMobile, [])
 
     return (
         <CategoriesRendererStyledDiv className={'categories-block'}

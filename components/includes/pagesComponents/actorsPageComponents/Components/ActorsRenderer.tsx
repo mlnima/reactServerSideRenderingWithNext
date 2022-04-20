@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useMemo} from 'react';
 
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
@@ -22,15 +22,14 @@ let ActorsRendererStyledDiv = styled.div`
   margin: auto;
   grid-gap: 5px;
   grid-template-columns: repeat(auto-fill, minmax(${({cardWidth}: ActorsContentStyledDivPropTypes) => `${cardWidth}px`}, 1fr));
-  // grid-template-columns: repeat(auto-fill, minmax(${({postsPerRawForMobile}: ActorsContentStyledDivPropTypes) => `${96 / postsPerRawForMobile}`}vw, 2fr));
+    // grid-template-columns: repeat(auto-fill, minmax(${({postsPerRawForMobile}: ActorsContentStyledDivPropTypes) => `${96 / postsPerRawForMobile}`}vw, 2fr));
 
   // @media only screen and (min-width: 414px) {
   //   grid-gap: 15px 10px;
-  //   grid-template-columns: repeat(auto-fill, minmax(${({cardWidth}: ActorsContentStyledDivPropTypes) => `${cardWidth}px`}, 1fr));
+    //   grid-template-columns: repeat(auto-fill, minmax(${({cardWidth}: ActorsContentStyledDivPropTypes) => `${cardWidth}px`}, 1fr));
   // }
-  
-  
-  
+
+
   @media only screen and (min-width: 768px) {
     grid-gap: 30px;
     grid-template-columns: repeat(auto-fill, minmax(${({cardWidth}: ActorsContentStyledDivPropTypes) => `${cardWidth}px`}, 1fr));
@@ -48,18 +47,20 @@ const ActorsRenderer: FC<ActorsRendererPropTypes> = ({uniqueData}) => {
 
     const dispatch = useDispatch();
 
-    const {cardWidth, postsPerRawForMobile, actorsMetas, isAppleMobileDevice,isMobile} = useSelector(({
-                                                                                                 settings,
-                                                                                                 posts
-                                                                                             }: StoreTypes) => {
-        return {
-            postsPerRawForMobile: settings?.design?.postsPerRawForMobile || 2,
-            isMobile: settings?.isMobile,
-            actorsMetas: uniqueData?.metaData || posts?.actorsMetas || [],
-            cardWidth: 140,
-            isAppleMobileDevice: settings?.isAppleMobileDevice
-        }
-    })
+    const {cardWidth, postsPerRawForMobile, actorsMetas, isAppleMobile, isMobileDevice} = useSelector(
+        ({settings, posts}: StoreTypes) => {
+            return {
+                postsPerRawForMobile: settings?.design?.postsPerRawForMobile || 2,
+                isMobileDevice: settings?.isMobile,
+                actorsMetas: uniqueData?.metaData || posts?.actorsMetas || [],
+                cardWidth: 140,
+                isAppleMobile: settings?.isAppleMobileDevice
+            }
+        })
+
+    const isMobile = useMemo(() => isMobileDevice, [])
+    const isAppleMobileDevice = useMemo(() => isAppleMobile, [])
+
 
     return (
         <ActorsRendererStyledDiv className='actors-content'

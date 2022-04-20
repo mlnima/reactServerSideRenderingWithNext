@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useMemo} from 'react';
 import styled from "styled-components";
 import {setLoading} from "@store/clientActions/globalStateActions";
 import {useDispatch, useSelector} from "react-redux";
@@ -37,16 +37,18 @@ interface TagsRendererPropTypes {
 const TagsRenderer: FC<TagsRendererPropTypes> = ({ uniqueData}) => {
     const dispatch = useDispatch()
 
-    const {tagsMetas,postsPerRawForMobile,isMobile,cardWidth,isAppleMobileDevice} = useSelector(({settings,posts}: StoreTypes)=>{
+    const {tagsMetas,postsPerRawForMobile,isMobileDevice,cardWidth,isAppleMobile} = useSelector(({settings,posts}: StoreTypes)=>{
         return{
             tagsMetas: uniqueData?.metaData ? uniqueData?.metaData : posts?.tagsMetas,
             postsPerRawForMobile: settings?.design?.postsPerRawForMobile || 2,
-            isMobile: settings?.isMobile,
+            isMobileDevice: settings?.isMobile,
             cardWidth: settings?.design?.cardWidthDesktop || 255,
-            isAppleMobileDevice:settings?.isAppleMobileDevice
+            isAppleMobile:settings?.isAppleMobileDevice
         }
     })
 
+    const isMobile = useMemo(() => isMobileDevice, [])
+    const isAppleMobileDevice = useMemo(() => isAppleMobile, [])
 
     return (
         <TagsRendererStyledDiv className='tags-block'

@@ -74,7 +74,13 @@ const AlphabeticalNumericalRangeLinksWidgetStyledDiv = styled.div`
 const AlphabeticalNumericalRangeLinksWidget: FC = () => {
     const dispatch = useDispatch()
     const {pathname, query} = useRouter()
-    const isMobile = useSelector((store: StoreTypes) => store.settings?.isMobile);
+    const isMobileDevice = useSelector((store: StoreTypes) => store.settings?.isMobile)
+    const isMobile = useMemo(()=>isMobileDevice,[])
+
+
+
+
+
     const [renderItems, setRenderItems] = useState(!isMobile)
 
     const activePage = query.startWith;
