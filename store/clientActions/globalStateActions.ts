@@ -87,6 +87,10 @@ export const getDefaultPageData =
         let isDefaultDataSet = false
         const isUserInternal  = context.req?.headers?.referer &&
                                 !context.req?.headers?.referer.includes(process.env.NEXT_PUBLIC_PRODUCTION_URL)
+        const userAgent = context.req.headers['user-agent'];
+        const isMobile =  Boolean(userAgent?.match(
+            /Android|BlackBerry|iPhone|iPod|Opera Mini|IEMobile|WPDesktop/i
+        ))
 
         // console.log('referer: ',isUserInternal)
 
@@ -98,7 +102,7 @@ export const getDefaultPageData =
         )
 
         const cache = process.env.NODE_ENV !== 'development'
-        const userAgent = context.req.headers['user-agent'];
+
         let staticWidgets = []
         let staticData = {
             design:{},
@@ -120,9 +124,7 @@ export const getDefaultPageData =
                     identity: staticData?.identity || {},
                     eCommerce: {},
                     ip: context.req?.headers['x-forwarded-for'] || context.req?.socket?.remoteAddress,
-                    isMobile: Boolean(userAgent?.match(
-                        /Android|BlackBerry|iPhone|iPod|Opera Mini|IEMobile|WPDesktop/i
-                    )),
+                    isMobile,
                     isAppleMobileDevice: isAppleMobileDevice(userAgent)
                 }
             })

@@ -3,7 +3,7 @@ import {SET_SETTINGS,GET_SETTINGS} from "../types";
 import {EDIT_DESIGN} from "../adminTypes";
 
 const initialState = {
-    isMobile: false,
+    isMobile: true,
     design:  {},
     identity: {},
     eCommerce: {},

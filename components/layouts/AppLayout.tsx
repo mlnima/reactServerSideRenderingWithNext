@@ -39,7 +39,7 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
         loading,
         loginRegisterFormPopup,
         alert,
-        isMobile,
+        // isMobile,
         sidebarsData,
         mainLayoutClassNameForGrid
     } = useSelector(({user, settings, globalState, posts}: StoreTypes) => {
@@ -51,7 +51,7 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
             userRole: user?.userData?.role,
             identity: settings?.identity,
             loading: globalState?.loading,
-            isMobile:settings.isMobile,
+            // isMobile:settings.isMobile,
             loginRegisterFormPopup: globalState?.loginRegisterFormPopup,
             alert: globalState?.alert,
             sidebarsData,
