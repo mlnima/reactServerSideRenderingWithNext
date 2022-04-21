@@ -88,7 +88,7 @@ const Widget: FC<WidgetComponentPropTypes> = ({data, widgetId, isSidebar, viewTy
                              className={'widget ' + (data?.extraClassName ?? '')}
                              customStyles={data?.customStyles || ''}
         >
-            {data?.title ?
+            {data?.title &&
                 <WidgetHeader translations={data?.translations}
                               title={data?.title}
                               redirectLink={data?.redirectLink}
@@ -96,16 +96,9 @@ const Widget: FC<WidgetComponentPropTypes> = ({data, widgetId, isSidebar, viewTy
                               footerLink={data?.footerLink}
 
                 />
-                : null
             }
-            {/*{data?.text ?*/}
-            {/*    <WidgetText translations={data?.translations}*/}
-            {/*                text={data?.text}*/}
-            {/*    />*/}
-            {/*    : null*/}
-            {/*}*/}
-            {data?.text ? <Text translations={data?.translations} text={data?.text}/> : null
-            }
+
+            {data?.text && <Text translations={data?.translations} text={data?.text}/> }
             {WidgetToRender ?
 
                 <WidgetToRender
@@ -113,16 +106,14 @@ const Widget: FC<WidgetComponentPropTypes> = ({data, widgetId, isSidebar, viewTy
                     //@ts-ignore
                     widgetId={widgetId}
                     isSidebar={isSidebar}
-                    // widget={true}
                     viewType={viewType}
                 />
                 : null
             }
-            {data?.customScript ?
+            {data?.customScript &&
                 <WidgetCustomScript customScript={data?.customScript}
                                     customScriptStrategy={data?.customScriptStrategy}
                 />
-                : null
             }
             {data?.pagination && data?.redirectLink ?
                 <WidgetPagination baseUrl={data?.redirectLink}

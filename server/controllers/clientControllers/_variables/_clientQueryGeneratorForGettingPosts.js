@@ -1,27 +1,15 @@
-const {isValidObjectId} = require("mongoose");
-
 module.exports = (data,metaId) => {
-    // const excludesPostFromSources = process.env.EXCLUDE_POSTS_SOURCE ? process.env.EXCLUDE_POSTS_SOURCE.split(' ') : [];
-    //
 
     const excludeContent = (process.env.EXCLUDE_POSTS_SOURCE ? process.env.EXCLUDE_POSTS_SOURCE.split(' ') : []).map(excludeWord => {
-
         const expression = `.*${excludeWord}.*`
-
         return {'videoEmbedCode': {$not: new RegExp(expression, "g")}}
     })
-
-    // console.log(excludeContent)
 
     const excludeQuery = process.env.EXCLUDE_POSTS_SOURCE ? [{$or: excludeContent}] : []
 
     const size = parseInt(data?.size || data?.count || '20') || 20;
     const sort = data?.sort || data?.sortBy;
-    // const meta = metaId
-        //|| data.metaId || data?.selectedMetaForPosts;
 
-    // const validateId = meta ? isValidObjectId(meta) && meta?.match(/^[0-9a-fA-F]{24}$/) : false;
-    //const metaQuery = validateId ? [{$or: [{categories: {$in: meta}}, {tags: {$in: meta}}, {actors: {$in: meta}}]}] : [];
     const metaQuery = metaId ? [{$or: [{categories: {$in: metaId}}, {tags: {$in: metaId}}, {actors: {$in: metaId}}]}] : [];
 
 
@@ -54,9 +42,19 @@ module.exports = (data,metaId) => {
     }
 }
 
+
+// const excludesPostFromSources = process.env.EXCLUDE_POSTS_SOURCE ? process.env.EXCLUDE_POSTS_SOURCE.split(' ') : [];
+//
+
 // postTypeQuery: data?.postType ? {postType: data.postType} : {},
 // statusQuery: {status: 'published'},
 // authorQuery: data.author ? data.author === 'all' ? {} : {author: data.author} : {},
 // excludeQuery: process.env.EXCLUDE_POSTS_SOURCE ? excludeQuery : {},
 // metaQuery,
 // searchQuery,
+
+// const meta = metaId
+//|| data.metaId || data?.selectedMetaForPosts;
+
+// const validateId = meta ? isValidObjectId(meta) && meta?.match(/^[0-9a-fA-F]{24}$/) : false;
+//const metaQuery = validateId ? [{$or: [{categories: {$in: meta}}, {tags: {$in: meta}}, {actors: {$in: meta}}]}] : [];

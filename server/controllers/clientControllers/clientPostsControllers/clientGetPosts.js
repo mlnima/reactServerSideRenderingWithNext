@@ -14,7 +14,6 @@ const saveSearchedKeyword = async (keyword, count) => {
     }
 }
 
-
 const getMetaForGettingPostsRequest = async (meta)=>{
     try {
         if (mongoIdValidator(meta)){
@@ -26,9 +25,6 @@ const getMetaForGettingPostsRequest = async (meta)=>{
         return {}
     }
 }
-
-
-
 
 module.exports = async (req, res) => {
     try {

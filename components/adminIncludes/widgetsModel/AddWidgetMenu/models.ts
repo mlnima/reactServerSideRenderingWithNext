@@ -184,7 +184,7 @@ export const postsWidgetModel = {
     ...generalModel,
     count:8,
     postElementSize:255,
-    sortBy:'-lastModify'
+    sortBy:'updatedAt'
 }
 
 export const postsSwiperWidgetModel = {

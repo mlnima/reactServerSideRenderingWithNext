@@ -9,7 +9,9 @@ const updatePostWidget = async (widget) => {
     const widgetData = widget?.data
     if (widgetData) {
         try {
-            const findingPostsOptions = _clientQueryGeneratorForGettingPosts(widget?.data)
+            const findingPostsOptions = _clientQueryGeneratorForGettingPosts(widget?.data,widget?.data?.selectedMetaForPosts)
+
+            //console.log(JSON.stringify(findingPostsOptions.findPostsQueries, null, '\t'))
             let totalCount = await postSchema.countDocuments(findingPostsOptions.findPostsQueries).exec()
             let posts = await postSchema.find(findingPostsOptions.findPostsQueries, ['_id'],
                 {
@@ -17,6 +19,7 @@ const updatePostWidget = async (widget) => {
                     limit: findingPostsOptions.size,
                     sort: findingPostsOptions.sortQuery
                 }).exec()
+
 
             const dateForUpdateWidget = {
                 ...widgetData,
