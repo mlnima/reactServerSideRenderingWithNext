@@ -26,7 +26,7 @@ const PostsPageInfo: FC<PostsPageInfoPropTypes> = ({metaData, keyword}) => {
 
     const title = decodeURIComponent(capitalizeFirstLetter(metaData?.name || keyword))
 
-    if (metaData?.name) {
+    if (title) {
         return (
             <PostsPageInfoStyledDiv className='posts-page-info'>
                 <h1> {title.trim()}</h1>

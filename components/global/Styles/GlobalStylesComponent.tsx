@@ -19,7 +19,7 @@ const GlobalStyles= createGlobalStyle`
     font-family: Arial,serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-size: 12px;
+    font-size: 15px;
   }
 
   #main-content{

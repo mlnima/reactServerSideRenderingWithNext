@@ -38,13 +38,14 @@ const searchPage : FC = ( ) => {
 
 
     return (
-        <StyledMain className="main posts-page" stylesData={settings.design?.postsPageStyle || ''}>
+        <StyledMain id={'main-content'} className="main posts-page" stylesData={settings.design?.postsPageStyle || ''}>
 
             <WidgetsRenderer
                 position={'searchPageTop'}
 
             />
-            {router.query.keyword && posts?.length ? <PostsPageInfo keyword={router.query.keyword as string}/> : null}
+
+            {router.query.keyword && posts?.length && <PostsPageInfo keyword={router.query.keyword as string}/>}
 
             {!posts?.length ?
                     <h2 className='no-result-message'>No Result for {router.query.keyword}</h2> :
@@ -60,8 +61,8 @@ const searchPage : FC = ( ) => {
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
     // @ts-ignore
-    const keyword = context.query.keyword ? encodeURIComponent(context?.query?.keyword) : '';
-    if (!keyword) return {notFound: true};
+    // const keyword = context.query.keyword ? encodeURIComponent(context?.query?.keyword) : '';
+    // if (!keyword) return {notFound: true};
     // @ts-ignore
     await store.dispatch(getDefaultPageData(
         context,

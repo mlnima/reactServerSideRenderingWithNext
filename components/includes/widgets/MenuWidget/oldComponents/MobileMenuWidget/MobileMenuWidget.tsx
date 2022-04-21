@@ -1,6 +1,6 @@
 import {FC, useState} from "react";
 import styled from "styled-components";
-import {MenuItem} from "../../../../../_variables/TypeScriptTypes/WidgetsInterfaces";
+import {MenuItem} from "@_variables/TypeScriptTypes/WidgetsInterfaces";
 import MobileMenuWidgetItem from "./MobileMenuWidgetItem";
 
 const MobileMenuWidgetStyledAside = styled.aside`

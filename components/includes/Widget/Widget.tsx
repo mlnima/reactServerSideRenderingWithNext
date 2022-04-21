@@ -34,6 +34,7 @@ const PostSlider = dynamic(() => import('../widgets/PostsSlider/PostsSlider'))
 const ImagesSlider = dynamic(() => import('../widgets/ImagesSlider/ImagesSlider'))
 const Text = dynamic(() => import('./WidgetsModelsComponents/Text/Text'))
 const Authentication = dynamic(() => import('../widgets/Authentication/Authentication'))
+const Searchbar = dynamic(() => import('../widgets/Searchbar/Searchbar'))
 
 interface WidgetComponentPropTypes {
     data: WidgetDataPropTypes,
@@ -66,7 +67,8 @@ const Widget: FC<WidgetComponentPropTypes> = ({data, widgetId, isSidebar, viewTy
             TagsRenderer :
             data.type === 'metaWithImage' && data.metaType === 'actors' ?
             ActorsRenderer :
-            data.type === 'searchBar' ? SearchInputComponent :
+           // data.type === 'searchBar' ? SearchInputComponent :
+            data.type === 'searchBar' ? Searchbar :
             data.type === 'searchButton' ? SearchButton :
             data.type === 'logo' ? Logo :
             data.type === 'alphabeticalNumericalRange' ?

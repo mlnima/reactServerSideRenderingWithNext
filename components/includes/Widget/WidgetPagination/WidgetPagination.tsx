@@ -1,4 +1,4 @@
-import {FC} from "react";
+import {FC, useId} from "react";
 import Link from 'next/link'
 import styled from "styled-components";
 import rangeNumGenerator from "@_variables/util/rangeNumGenerator";
@@ -37,7 +37,7 @@ interface WidgetPaginationPropTypes {
 }
 
 const WidgetPagination: FC<WidgetPaginationPropTypes> = ({baseUrl, totalCount,count}) => {
-
+    const id = useId();
     const postsCountPerPage = useSelector(({settings}:StoreTypes) => {
         return settings?.identity?.postsCountPerPage ?
                parseInt(settings?.identity?.postsCountPerPage)
@@ -49,10 +49,10 @@ const WidgetPagination: FC<WidgetPaginationPropTypes> = ({baseUrl, totalCount,co
 
     return (
         <WidgetPaginationStyledDiv className={'widget-pagination'}>
-            {pages.map(pageNumber => {
+            {pages.map((pageNumber,index) => {
                 if (pageNumber && typeof pageNumber === "number"){
                     return (
-                        <Link key={pageNumber.toString()}
+                        <Link key={id + index + pageNumber}
                               href={`${baseUrl.includes('?') ? baseUrl + `&page=${pageNumber}` : baseUrl + `?page=${pageNumber}`}`}>
                             <a
                                 className='pagination-item'

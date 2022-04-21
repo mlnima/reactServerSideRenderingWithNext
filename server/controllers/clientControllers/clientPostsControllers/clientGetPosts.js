@@ -32,7 +32,7 @@ module.exports = async (req, res) => {
             await getMetaForGettingPostsRequest(req.query?.metaId || req.query?.selectedMetaForPosts) || {} : {}
 
         const findingPostsOptions = _clientQueryGeneratorForGettingPosts(req.query,meta?._id)
-
+        // console.log(JSON.stringify(findingPostsOptions, null, '\t'))
         const populateMeta = [
             {path: 'actors', select: {'name': 1, 'type': 1}},
             {path: 'categories', select: {'name': 1, 'type': 1, 'imageUrl': 1}},
