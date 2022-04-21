@@ -8,11 +8,19 @@ import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import ratingCalculator from "@_variables/util/ratingCalculator";
 import {FC, useMemo} from "react";
+const ArticlePostCard = dynamic(() => import('@components/includes/cards/ArticlePostCard'))
+const PromotionPostCard = dynamic(() => import('@components/includes/cards/PromotionPostCard'))
+const LearnPostCard = dynamic(() => import('@components/includes/cards/LearnPostCard'))
+const VideoPostCard = dynamic(() => import('@components/includes/cards/VideoPostCard'))
 
-const VideoCardToRender = dynamic(() => import('@components/includes/PostsRenderer/VideoCardToRender'))
-const PromotionCardToRender = dynamic(() => import('@components/includes/PostsRenderer/PromotionCardToRender'))
-const ArticleCardToRender = dynamic(() => import('@components/includes/PostsRenderer/ArticleCardToRender'))
-const LearnCardToRender = dynamic(() => import('@components/includes/PostsRenderer/LearnCardToRender'))
+// import ArticlePostCard from "@components/includes/cards/ArticlePostCard";
+// import PromotionPostCard from "@components/includes/cards/PromotionPostCard";
+// import LearnPostCard from "@components/includes/cards/LearnPostCard";
+// import VideoPostCard from "@components/includes/cards/VideoPostCard";
+// const VideoCardToRender = dynamic(() => import('@components/includes/PostsRenderer/VideoCardToRender'))
+// const PromotionCardToRender = dynamic(() => import('@components/includes/PostsRenderer/PromotionCardToRender'))
+// const ArticleCardToRender = dynamic(() => import('@components/includes/PostsRenderer/ArticleCardToRender'))
+// const LearnCardToRender = dynamic(() => import('@components/includes/PostsRenderer/LearnCardToRender'))
 
 interface PostsComponentTypes {
     viewType?: string,
@@ -42,27 +50,27 @@ const PostsContentStyledDiv = styled.div`
   margin: auto;
   grid-gap: 5px;
   grid-template-columns: repeat( auto-fill, minmax(${({postsPerRawForMobile}:PostsContentStyledDivPropTypes)=>`${96/postsPerRawForMobile}`}vw, 2fr) );
-  .mobile-card{
-    background-color: var(--post-element-background-color, #131314);
-    width: 100%;
-    font-size: 14px;
-    margin: auto;
-  }
   
-  
-  @media only screen and (min-width: 414px) {
-    grid-gap: 15px 10px;
-    grid-template-columns: repeat( auto-fill, minmax(${({cardWidth}:PostsContentStyledDivPropTypes)=>`${cardWidth}px`}, 1fr) );
-    .mobile-card{
-      max-width: ${({cardWidth}:PostsContentStyledDivPropTypes)=>`${cardWidth}px`};
-    }
-  }  
+  //.mobile-card{
+  //  background-color: var(--post-element-background-color, #131314);
+  //  width: 100%;
+  //  font-size: 14px;
+  //  margin: auto;
+  //}
   
   @media only screen and (min-width: 768px) {
     grid-gap: 15px 10px;
     grid-template-columns: repeat( auto-fill, minmax(${({cardWidth}:PostsContentStyledDivPropTypes)=>`${cardWidth}px`}, 1fr) );
   }
 `
+
+// @media only screen and (min-width: 414px) {
+//     grid-gap: 15px 10px;
+//     grid-template-columns: repeat( auto-fill, minmax(${({cardWidth}:PostsContentStyledDivPropTypes)=>`${cardWidth}px`}, 1fr) );
+// .mobile-card{
+//     max-width: ${({cardWidth}:PostsContentStyledDivPropTypes)=>`${cardWidth}px`};
+// }
+// }
 
 const PostsRenderer:FC<PostsComponentTypes> = 
     ({
@@ -98,8 +106,11 @@ const PostsRenderer:FC<PostsComponentTypes> =
                 const postProps = {
                     views:_shortNumber(post.views || 0),
                     cardWidth,
+                    postsPerRawForMobile,
+                    direction:locale.match(/fa|ar/g) ? 'rtl' : 'ltr',
                     rating : post.likes || post.disLikes ? ratingCalculator(post.likes, post.disLikes) : null ,
                     post,
+                    postUrl:`/post/${post?.postType}/${post._id}`,
                     widgetId,
                     title: process.env.NEXT_PUBLIC_DEFAULT_LOCAL === locale ?
                            post?.title :
@@ -119,13 +130,15 @@ const PostsRenderer:FC<PostsComponentTypes> =
                 //         post?.title?.replace('#', ''),
 
                 if (post?.postType === 'video') {
-                    return <VideoCardToRender postProps={postProps} key={index} index={index} />
+                    return <VideoPostCard {...postProps} key={index} index={index} />
                 } else if (post?.postType === 'promotion') {
-                    return <PromotionCardToRender postProps={postProps} key={index} index={index}  />
-                } else if (post?.postType === 'article') {
-                    return <ArticleCardToRender postProps={postProps} key={index} index={index} />
+                    return <PromotionPostCard {...postProps} key={index} index={index}  />
+                }
+                else if (post?.postType === 'article') {
+                    return <ArticlePostCard {...postProps} key={index} index={index} />
+
                 } else if (post?.postType === 'learn') {
-                    return <LearnCardToRender postProps={postProps} key={index} index={index} />
+                    return <LearnPostCard {...postProps} key={index} index={index} />
                 } else return null
             })}
         </PostsContentStyledDiv>
@@ -133,3 +146,7 @@ const PostsRenderer:FC<PostsComponentTypes> =
 };
 
 export default PostsRenderer
+
+
+//                else if (post?.postType === 'article') {
+//                     return <ArticleCardToRender postProps={postProps} key={index} index={index} />

@@ -28,7 +28,7 @@ const SearchbarStyledDiv = styled.div`
     right: 0;
     width: 100%;
     background: var(--serachbar-widget-background, #252525);
-    .search-button-widget-close-btn ,.searchbar-submit-btn{
+    .search-button-widget-close-btn ,.searchbar-submit-btn,.search-button-widget-clear-keyword{
       background: var(--serachbar-widget-buttons-background, #252525);
       color: var(--serachbar-widget-text-color, #fff);
       border: none;
@@ -44,15 +44,25 @@ const SearchbarStyledDiv = styled.div`
       outline: none;
       color: var(--serachbar-widget-text-color, #fff);
     }
+    .search-button-widget-clear-keyword{
+      display: none;
+    }
   }
 
   @media only screen and (min-width: 768px) {
+    width: clamp(300px, 100%, 650px);;
     .open-close-search-form{
       display: none;
     }
     .searchbar-form{
       display:flex;
       position: initial;
+      .search-button-widget-close-btn{
+        display: none;
+      }
+      .search-button-widget-clear-keyword{
+        display: initial;
+      }
     }
   }
   
@@ -109,6 +119,12 @@ const Searchbar: FC<SearchbarPropTypes> = (props) => {
             <form className={'searchbar-form'} onSubmit={e => onSearchHandler(e)}>
                 <button className='btn search-button-widget-close-btn' title={t<string>('Close')}>
                     <FontAwesomeIcon onClick={() => setOpen(!open)}
+                        style={{width: '24px', height: '24px',}}
+                        icon={faTimes}
+                    />
+                </button>
+                <button className='btn search-button-widget-clear-keyword' title={t<string>('Clear')}>
+                    <FontAwesomeIcon onClick={() => setKeyword('')}
                         style={{width: '24px', height: '24px',}}
                         icon={faTimes}
                     />

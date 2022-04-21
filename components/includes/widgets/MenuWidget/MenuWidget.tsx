@@ -65,6 +65,7 @@ const MenuWidgetStyledDiv = styled.div`
 
     .menu-item {
       list-style-type: none;
+     
       width: 100%;
 
       .menu-item-link {
@@ -84,11 +85,13 @@ const MenuWidgetStyledDiv = styled.div`
   }
 
   @media only screen and (min-width: 768px) {
+    width: 100%;
     .menu-widget-open-button {
       display: none;
     }
 
     .menu-widget-items {
+      width: 100%;
       position: initial;
       display: flex;
       flex-direction: row;
@@ -97,6 +100,11 @@ const MenuWidgetStyledDiv = styled.div`
       padding: 0;
       .menu-widget-close-button{
         display: none;
+      }
+      .menu-item{
+        margin: 0 10px;
+        display: block;
+        white-space: nowrap;
       }
     }
   }

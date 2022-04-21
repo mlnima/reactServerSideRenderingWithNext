@@ -4,10 +4,11 @@ import {useDispatch, useSelector} from "react-redux";
 import dynamic from "next/dynamic";
 import {setLoading} from "@store/clientActions/globalStateActions";
 import {Meta, StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import CategoryCard from "@components/includes/cards/CategoryCard";
 
-const CategoryCard = dynamic(() => import('@components/includes/cards/desktop/CategoryCard/CategoryCard'));
-const MobileCategoryCard = dynamic(() =>
-    import('@components/includes/cards/mobile/MobileCategoryCard/MobileCategoryCard'));
+// const CategoryCard = dynamic(() => import('@components/includes/cards/desktop/CategoryCard/CategoryCard'));
+// const MobileCategoryCard = dynamic(() =>
+//     import('@components/includes/cards/mobile/MobileCategoryCard/MobileCategoryCard'));
 
 interface CategoriesRendererPropTypes {
     uniqueData?: {
@@ -49,19 +50,14 @@ const CategoriesRenderer: FC<CategoriesRendererPropTypes> = ({ uniqueData}) => {
 
     const dispatch = useDispatch();
 
-    const {categoriesMetas, postsPerRawForMobile, isMobileDevice, cardWidth, isAppleMobile} =
+    const {categoriesMetas, postsPerRawForMobile, cardWidth} =
         useSelector(({settings, posts}: StoreTypes) => {
             return {
                 categoriesMetas: uniqueData?.metaData ? uniqueData?.metaData : posts?.categoriesMetas,
                 postsPerRawForMobile: settings?.design?.postsPerRawForMobile || 2,
-                isMobileDevice: settings?.isMobile,
                 cardWidth:settings?.design?.cardWidthDesktop || 255,
-                isAppleMobile: settings?.isAppleMobileDevice
             }
         })
-
-    const isMobile = useMemo(() => isMobileDevice, [])
-    const isAppleMobileDevice = useMemo(() => isAppleMobile, [])
 
     return (
         <CategoriesRendererStyledDiv className={'categories-block'}
@@ -69,26 +65,36 @@ const CategoriesRenderer: FC<CategoriesRendererPropTypes> = ({ uniqueData}) => {
                                      postsPerRawForMobile={postsPerRawForMobile}>
 
             {categoriesMetas.map((category, index) => {
-                if (isMobile) {
-                    return <MobileCategoryCard category={category}
-                                               key={category._id}
-                                               onActivateLoadingHandler={() => dispatch(setLoading(true))}
-                                               index={index}
-                                               isAppleMobileDevice={isAppleMobileDevice}
-
-                    />
-                } else {
-                    return <CategoryCard onActivateLoadingHandler={() => dispatch(setLoading(true))}
-                                         key={category._id}
-                                         category={category}
-                                         index={index}
-                                         cardWidth={cardWidth}
-
-                    />
-                }
-            })
-            }
+                     return (
+                         <CategoryCard category={category}
+                                       key={category._id}
+                                       cardWidth={cardWidth}
+                                       onActivateLoadingHandler={() => dispatch(setLoading(true))}
+                                       postsPerRawForMobile={postsPerRawForMobile}
+                                       index={index}
+                         />
+                     )
+            })}
         </CategoriesRendererStyledDiv>
     );
 };
 export default CategoriesRenderer;
+
+
+// if (isMobile) {
+//     return <MobileCategoryCard category={category}
+//                                key={category._id}
+//                                onActivateLoadingHandler={() => dispatch(setLoading(true))}
+//                                index={index}
+//                                isAppleMobileDevice={isAppleMobileDevice}
+//
+//     />
+// } else {
+//     return <CategoryCard onActivateLoadingHandler={() => dispatch(setLoading(true))}
+//                          key={category._id}
+//                          category={category}
+//                          index={index}
+//                          cardWidth={cardWidth}
+//
+//     />
+// }

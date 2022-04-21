@@ -29,6 +29,5 @@ const MobileCardImageRenderer: FC<CardImageNextPropTypes> =
 
         else return  <MobileCardImage imageUrl={imageUrlSource} mediaAlt={mediaAlt} isAppleMobileDevice={isAppleMobileDevice}/>
 
-        //return  <MobileCardImage imageUrl={imageUrl} mediaAlt={mediaAlt} isAppleMobileDevice={isAppleMobileDevice}/>
     };
 export default MobileCardImageRenderer

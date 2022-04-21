@@ -1,6 +1,7 @@
 import {FC, useState, useEffect} from "react";
 import {useRouter} from "next/router";
 import styled from "styled-components";
+import parse from 'html-react-parser'
 
 const AdvertiseStyledDiv = styled.div`
   display: flex;
@@ -25,7 +26,7 @@ const AdvertiseStyledDiv = styled.div`
 interface AdvertisePropTypes {
     uniqueData: {
         adCode: string,
-    }
+    },
 }
 
 const Advertise: FC<AdvertisePropTypes> = ({uniqueData}) => {
@@ -34,22 +35,33 @@ const Advertise: FC<AdvertisePropTypes> = ({uniqueData}) => {
 
     useEffect(() => {
         setAdCodeData(null)
-        setTimeout(() => {
-            setAdCodeData(uniqueData?.adCode)
-        }, 500)
+        setAdCode()
     }, [router.pathname, router.query]);
 
-    return (
-        <AdvertiseStyledDiv dangerouslySetInnerHTML={{
-            __html: adCodeData ? adCodeData : `<div class='pre-load'><span>loading...</span></div>`
-        }}/>
-    )
+
+    const setAdCode = () =>{
+        if (uniqueData?.adCode){
+            setTimeout(() => {
+                setAdCodeData(uniqueData?.adCode)
+            }, 500)
+        }
+    }
+
+
+    if (adCodeData){
+        return (
+            <AdvertiseStyledDiv>
+                {parse(adCodeData)}
+            </AdvertiseStyledDiv>
+        )
+    }else return null
 
 };
 export default Advertise
 
-// <AdvertiseStyledDiv >
-// {
-//     adCodeData ? parse(adCodeData) : null
-// }
-// </AdvertiseStyledDiv>
+
+// return (
+//     <AdvertiseStyledDiv dangerouslySetInnerHTML={{
+//         __html: adCodeData ? adCodeData : `<div class='pre-load'><span>loading...</span></div>`
+//     }}/>
+// )

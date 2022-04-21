@@ -15,8 +15,6 @@ const ActorsRenderer = dynamic(() =>
 const RecentComments = dynamic(() => import('../widgets/RecentComments/RecentComments'))
 const MetaWidget = dynamic(() => import('../widgets/MetaWidget/MetaWidget'))
 const MediaWidget = dynamic(() => import('../widgets/MediaWidget/MediaWidget'))
-const SearchInputComponent = dynamic(() => import('../widgets/SearchInput/SearchInput'))
-const SearchButton = dynamic(() => import('../widgets/SearchButton/SearchButton'))
 const AlphabeticalNumericalRangeLinksWidget = dynamic(() =>
     import('../widgets/AlphabeticalNumericalRangeLinksWidget/AlphabeticalNumericalRangeLinksWidget'))
 const LanguagesSwitcher = dynamic(() => import('../widgets/LanguagesSwitcher/LanguagesSwitcher'))
@@ -69,7 +67,7 @@ const Widget: FC<WidgetComponentPropTypes> = ({data, widgetId, isSidebar, viewTy
             ActorsRenderer :
            // data.type === 'searchBar' ? SearchInputComponent :
             data.type === 'searchBar' ? Searchbar :
-            data.type === 'searchButton' ? SearchButton :
+            data.type === 'searchButton' ? Searchbar :
             data.type === 'logo' ? Logo :
             data.type === 'alphabeticalNumericalRange' ?
             AlphabeticalNumericalRangeLinksWidget :
