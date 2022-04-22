@@ -14,7 +14,4 @@ router.post('/adminDeleteWidget',adminAuthMiddleware,adminDeleteWidget)
 router.get('/adminGetWidgets',adminAuthMiddleware,adminGetWidgets)
 router.get('/adminPanelGetWidgets',adminAuthMiddleware,adminPanelGetWidgets)
 
-
-
-
 module.exports = router

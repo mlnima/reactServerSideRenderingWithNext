@@ -175,16 +175,18 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
                                                                         cardWidth={cardWidth}/>
                                     :null
                             }
-                            {post?.quality && <CardQuality quality={_qualityConvertor(post?.quality)}
+                            {post?.quality ? <CardQuality quality={_qualityConvertor(post?.quality)}
                                                            className={'card-quality video-card-info-data'}/>
+                                :null
                             }
-                            {post?.duration && <CardDuration duration={post?.duration}
+                            {post?.duration ? <CardDuration duration={post?.duration}
                                                              className={'card-duration video-card-info-data'}/>
+                                :null
                             }
                         </div>
                     </a>
                 </Link>
-                {post?.actors.length ? <VideoPostCardActors actors={post?.actors} hover={hover}/> : null}
+                {post?.actors?.length ? <VideoPostCardActors actors={post?.actors} hover={hover}/> : null}
                 <Link href={postUrl}>
                     <a rel={'next'} onClick={onActivateLoadingHandler} className={'card-link'} title={title}>
                         <header className={'entry-header'}>
@@ -192,8 +194,10 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
                         </header>
                         <div className={'card-under-media-info'}>
                             <CardViews views={views} className={'card-views card-under-media-info-data'}/>
-                            {rating &&
-                            <CardRating rating={rating} className={'card-rating card-under-media-info-data'}/>}
+                            {rating ?
+                            <CardRating rating={rating} className={'card-rating card-under-media-info-data'}/>
+                            :null
+                            }
                         </div>
                         {(post?.updatedAt || post?.createdAt) &&
                         <CardLastUpdate targetedDate={post?.updatedAt || post?.createdAt}/>

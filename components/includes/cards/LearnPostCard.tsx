@@ -113,11 +113,12 @@ const LearnPostCard: FC<LearnPostCardPropTypes> =
                             <span className={'card-header'}>{title}</span>
                         </header>
                         <div className={'card-under-media-info'}>
-                            {views &&
+                            {views ?
                             <CardViews views={views} className={'card-views card-under-media-info-data'}/>
+                                :null
                             }
-                            {rating && <CardRating rating={rating}
-                                                   className={'card-rating card-under-media-info-data'}/>
+                            {rating ? <CardRating rating={rating} className={'card-rating card-under-media-info-data'}/>
+                                :null
                             }
 
                         </div>

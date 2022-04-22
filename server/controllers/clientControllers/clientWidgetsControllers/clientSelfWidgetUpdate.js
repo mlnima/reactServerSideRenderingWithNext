@@ -1,12 +1,12 @@
 const widgetSchema = require('../../../models/widgetSchema');
-const metaSchema = require('../../../models/metaSchema');
-const postSchema = require('../../../models/metaSchema');
-const {updatePostWidget} = require('../../adminControllers/adminWidgetsControllers/adminUpdateWidget')
+// const metaSchema = require('../../../models/metaSchema');
+// const postSchema = require('../../../models/metaSchema');
+const {updatePostWidgetData} = require('../../adminControllers/adminWidgetsControllers/adminUpdateWidget')
 
 module.exports = async (req,res)=>{
 
     await widgetSchema.findById(req.body._id).exec().then(widget=>{
-        updatePostWidget(widget).then(updatedWidgets=>{
+        updatePostWidgetData(widget).then(updatedWidgets=>{
             widgetSchema.findByIdAndUpdate(req.body._id, {'data.uniqueData.posts':[...updatedWidgets.posts]}, {new: true}).exec().then(afterUpdate => {
                 res.json({updatedWidgets:afterUpdate})
 

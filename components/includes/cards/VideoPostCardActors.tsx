@@ -69,7 +69,7 @@ const VideoPostCardActorsStyle = styled.div`
 
 const VideoPostCardActors: FC<VideoPostCardActorsPropTypes> = ({actors, hover}) => {
     return (
-        <VideoPostCardActorsStyle className={'card-actors'} hover={hover} actorsLength={actors.length}>
+        <VideoPostCardActorsStyle className={'card-actors'} hover={hover} actorsLength={actors?.length}>
             <span className={'card-actors-wrapper'}>
                             {actors.map((actor,index) => {
                                 return (
