@@ -69,12 +69,11 @@ const adminUpdateWidget = async (req, res) => {
             {$and: [countQuery, typeQuery, statusQuery]},
             {},
             {
-                // sort:widgetData.sort === 'createdAt' || !widgetData.sort ? {} : {[widgetData.sort]: -1},
                 sort:widgetData.sort === 'createdAt' || !widgetData.sort ?
                      {'rank':1,'likes':-1,'views':-1,'count':-1,'updatedAt':-1,'createdAt':-1} :
                      widgetData.sort === 'rank' ? {'rank': 1} : {[widgetData.sort]: -1},
             }
-        ).select('_id').limit(parseInt(widgetData.count)).sort(sortMethod).exec() : []
+        ).select('_id').limit(parseInt(widgetData?.count || 20)).sort(sortMethod).exec() : []
         const dateForUpdateWidget = {
             ...widgetData,
             uniqueData:{
