@@ -68,6 +68,7 @@ const Widget: FC<WidgetComponentPropTypes> = ({data, widgetId, isSidebar, viewTy
            // data.type === 'searchBar' ? SearchInputComponent :
             data.type === 'searchBar' ? Searchbar :
             data.type === 'searchButton' ? Searchbar :
+            data.type === 'searchbar' ? Searchbar :
             data.type === 'logo' ? Logo :
             data.type === 'alphabeticalNumericalRange' ?
             AlphabeticalNumericalRangeLinksWidget :

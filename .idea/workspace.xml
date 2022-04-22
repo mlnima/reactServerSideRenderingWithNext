@@ -20,44 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/components/includes/cards/ActorCard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/cards/ArticlePostCard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/cards/CardImageRenderer.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/cards/CategoryCard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/cards/LearnPostCard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/cards/PromotionPostCard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/cards/TagCard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/cards/VideoPostCard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/cards/VideoPostCardActors.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/cards/VideoPostCardTrailer.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/AuthenticationLoggedInItems.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/AuthenticationNotLoggedInItems.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostsRenderer/PostsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostsRenderer/PostsRenderer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/models.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/models.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/global/widgetsTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/widgetsTypes.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/Widget/Widget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Widget/Widget.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/mobileAsset/MobileCardImageRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/mobileAsset/MobileCardImageRenderer.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/pagesComponents/actorsPageComponents/Components/ActorsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/pagesComponents/actorsPageComponents/Components/ActorsRenderer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/pagesComponents/categoriesPageComponents/Components/CategoriesRenderer/CategoriesRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/pagesComponents/categoriesPageComponents/Components/CategoriesRenderer/CategoriesRenderer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/pagesComponents/tagsPageComponents/Components/TagsRenderer/TagsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/pagesComponents/tagsPageComponents/Components/TagsRenderer/TagsRenderer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Advertise/Advertise.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Advertise/Advertise.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/Authentication.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/Authentication.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/DesktopAuthentication/DesktopAuthentication.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/DesktopAuthentication/LoggedInItemsForMenu.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/DesktopAuthentication/LoggedOutItemsMenu.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/MobileAuthentication/AuthenticationSlideItems.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/MobileAuthentication/LoggedInItemsMobile.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/MobileAuthentication/LoggedOutItemsMobile.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/MobileAuthentication/MobileAuthentication.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidget.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/oldComponents/DesktopMenuWidget/DesktopMenuWidget.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/oldComponents/DesktopMenuWidget/DesktopMenuWidgetItem.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/oldComponents/MenuWidgetBK.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/oldComponents/MobileMenuWidget/MobileMenuWidget.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/oldComponents/MobileMenuWidget/MobileMenuWidgetItem.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/SearchButton/SearchButton.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/SearchButton/SearchButtonForm.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/SearchInput/SearchInput.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Searchbar/Searchbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Searchbar/Searchbar.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,7 +108,7 @@
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\widgets\Authentication\DesktopAuthentication" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.start">
+  <component name="RunManager" selected="npm.build">
     <configuration name="apiCache.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/server/middlewares/apiCache.js" working-dir="$PROJECT_DIR$/server/middlewares">
       <method v="2" />
     </configuration>
@@ -187,9 +154,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.start" />
         <item itemvalue="npm.analyze" />
         <item itemvalue="Node.js.apiCache.js" />
       </list>
@@ -1156,7 +1123,8 @@
       <workItem from="1650362412700" duration="36132000" />
       <workItem from="1650417922621" duration="2847000" />
       <workItem from="1650464606103" duration="21991000" />
-      <workItem from="1650506865027" duration="51716000" />
+      <workItem from="1650506865027" duration="53151000" />
+      <workItem from="1650609175266" duration="1887000" />
     </task>
     <servers />
   </component>
@@ -1446,7 +1414,6 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/components/includes/Widget/WidgetsModelsComponents/Text/Text.tsx</url>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="149" />
         </line-breakpoint>
       </breakpoints>

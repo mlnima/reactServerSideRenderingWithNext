@@ -11,7 +11,7 @@ interface ActorsContentStyledDivPropTypes {
 }
 
 let ActorsRendererStyledDiv = styled.div`
-
+  padding: 20px 0;
   display: grid;
   width: 98%;
   margin: auto;
