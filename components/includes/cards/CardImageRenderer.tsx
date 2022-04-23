@@ -8,39 +8,40 @@ import styled from "styled-components";
 interface CardImageNextPropTypes {
     imageUrl: string,
     mediaAlt: string,
-    index?:number,
+    index?: number,
     postsPerRawForMobile: number,
     cardWidth: number,
 }
 
 interface CardImageRendererStylePropTypes {
-    postsPerRawForMobile:number,
-    cardWidth:number,
+    postsPerRawForMobile: number,
+    cardWidth: number,
 
 }
+
 const CardImageRendererStyle = styled.div`
-  
+
   width: 100%;
-  height: ${({postsPerRawForMobile}:CardImageRendererStylePropTypes)=> 96/postsPerRawForMobile/1.777}vw;
+  height: ${({postsPerRawForMobile}: CardImageRendererStylePropTypes) => 96 / postsPerRawForMobile / 1.777}vw;
   aspect-ratio: 16 / 9;
   position: relative;
-  img{
+
+  img {
     width: 100%;
-    height: ${({postsPerRawForMobile}:CardImageRendererStylePropTypes)=> 96/postsPerRawForMobile/1.777}vw !important;
+    height: ${({postsPerRawForMobile}: CardImageRendererStylePropTypes) => 96 / postsPerRawForMobile / 1.777}vw !important;
     aspect-ratio: 16 / 9;
     object-fit: contain;
   }
 
   @media only screen and (min-width: 768px) {
-    width: ${({cardWidth}:CardImageRendererStylePropTypes)=> cardWidth}px;
-    height: ${({cardWidth}:CardImageRendererStylePropTypes)=> cardWidth / 1.777}px !important;
-    img{
-      width: ${({cardWidth}:CardImageRendererStylePropTypes)=> cardWidth}px;
-      height: ${({cardWidth}:CardImageRendererStylePropTypes)=> cardWidth / 1.777}px !important;
+    width: ${({cardWidth}: CardImageRendererStylePropTypes) => cardWidth}px;
+    height: ${({cardWidth}: CardImageRendererStylePropTypes) => cardWidth / 1.777}px !important;
+    img {
+      width: ${({cardWidth}: CardImageRendererStylePropTypes) => cardWidth}px;
+      height: ${({cardWidth}: CardImageRendererStylePropTypes) => cardWidth / 1.777}px !important;
     }
   }
 `
-
 
 
 const CardImageRenderer: FC<CardImageNextPropTypes> =
@@ -54,16 +55,20 @@ const CardImageRenderer: FC<CardImageNextPropTypes> =
         const [gotError, setGotError] = useState(false)
 
         const imageUrlSource = useMemo(() => {
-            if (gotError) return '/static/images/noImage/no-image-available.png'
+
             return imageUrl && !isAbsolutePath(imageUrl) ? `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${imageUrl}` : imageUrl
-        }, [imageUrl,gotError])
+
+        }, [imageUrl, gotError])
 
         return (
-            <CardImageRendererStyle postsPerRawForMobile={postsPerRawForMobile} cardWidth={cardWidth} className={'card-image'}>
-                {imageUrlSource && isImageAllowedForNextImage(imageUrlSource)  && index >= 2 ?
+            <CardImageRendererStyle postsPerRawForMobile={postsPerRawForMobile} cardWidth={cardWidth}
+                                    className={'card-image'}>
+                {imageUrlSource && isImageAllowedForNextImage(imageUrlSource) && index >= 2 ?
                     <Image alt={mediaAlt}
-                           //src={gotError || !imageUrlSource ? '/static/images/noImage/no-image-available.png' : imageUrlSource}
-                           src={imageUrlSource}
+                           src={gotError || !imageUrlSource ?
+                               '/static/images/noImage/no-image-available.png' :
+                               imageUrlSource
+                           }
                            loading={'lazy'}
                            layout={'fill'}
                            className={'card-image-next'}
@@ -71,9 +76,12 @@ const CardImageRenderer: FC<CardImageNextPropTypes> =
                            objectFit={'contain'}
                            onError={() => setGotError(true)}
                     /> :
-                    <img src={imageUrlSource}
+                    <img src={gotError || !imageUrlSource ?
+                            '/static/images/noImage/no-image-available.png' :
+                            imageUrlSource
+                        }
                         alt={mediaAlt}
-                         className={'card-image'}
+                        className={'card-image'}
                         onError={() => setGotError(true)}
                     />
                 }
