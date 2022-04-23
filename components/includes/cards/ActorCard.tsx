@@ -81,7 +81,6 @@ const ActorCardStyle = styled.article`
 
 interface ActorCardPropTypes {
     actor: Meta,
-    onActivateLoadingHandler: any,
     index?: number,
     postsPerRawForMobile: number,
     cardWidth: number,
@@ -90,21 +89,18 @@ interface ActorCardPropTypes {
 const ActorCard: FC<ActorCardPropTypes> =
     ({
          actor,
-         onActivateLoadingHandler,
          index,
          postsPerRawForMobile,
          cardWidth
      }) => {
+
         const {t} = useTranslation('common');
         const actorName = capitalizeFirstLetter(actor?.name)
 
         return (
             <ActorCardStyle cardWidth={cardWidth}>
                 <Link href={`/actor/${actor?._id}`}>
-                    <a className='actor-card-link'
-                       onClick={onActivateLoadingHandler}
-                       title={actorName as string}
-                    >
+                    <a className='actor-card-link' title={actorName as string}>
                         <CardImageRenderer imageUrl={actor.imageUrl}
                                            mediaAlt={actorName}
                                            index={index}
@@ -118,13 +114,13 @@ const ActorCard: FC<ActorCardPropTypes> =
 
 
                         </div>
-                        {actor?.count ?
+                        {!!actor?.count &&
                             <span className={'actor-card-count'}>
                                  <>
                                     {actor?.count} {t<string>('Videos')}
                                  </>
                              </span>
-                            : null}
+                        }
                     </a>
                 </Link>
             </ActorCardStyle>

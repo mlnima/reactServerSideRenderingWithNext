@@ -11,13 +11,10 @@ import ratingCalculator from "@_variables/util/ratingCalculator";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import Autoplay from "embla-carousel-autoplay";
 
-
-const ArticleCardToRender = dynamic(() => import('@components/includes/PostsRenderer/ArticleCardToRender'))
-const LearnCardToRender = dynamic(() => import('@components/includes/PostsRenderer/LearnCardToRender'))
-const VideoCardToRender = dynamic(() => import('@components/includes/PostsRenderer/VideoCardToRender'))
-const PromotionCardToRender = dynamic(() => import('@components/includes/PostsRenderer/PromotionCardToRender'))
-const DefaultTypeCard = dynamic(() => import('@components/includes/cards/desktop/DefaultTypeCard/DefaultTypeCard'))
-
+const ArticlePostCard = dynamic(() => import('@components/includes/cards/ArticlePostCard'))
+const PromotionPostCard = dynamic(() => import('@components/includes/cards/PromotionPostCard'))
+const LearnPostCard = dynamic(() => import('@components/includes/cards/LearnPostCard'))
+const VideoPostCard = dynamic(() => import('@components/includes/cards/VideoPostCard'))
 
 const PostsSliderStyledDiv = styled.div`
   position: relative;
@@ -29,22 +26,17 @@ const PostsSliderStyledDiv = styled.div`
       display: none;
       content: '{"draggable": true}';
     }
-
+    
     .slider-container {
       display: flex;
-
+      height: 100%;
       .slide {
         position: relative;
         flex: 0 0 100%;
         margin: 5px;
         max-width: 96vw;
-
-        .mobile-card {
-          background-color: var(--post-element-background-color, #131314);
-          width: 100%;
-          font-size: 14px;
-          margin: auto;
-        }
+        height:auto;
+        background-color: var(--post-element-background-color, #131314);
       }
     }
   }
@@ -154,13 +146,12 @@ const PostsSlider: FC<PostsSliderPropsTypes> =
          cardWidthDesktop,
          posts,
          uniqueData,
-         widgetId,
          isSidebar,
      }) => {
 
         const autoplay = useRef(
             Autoplay(
-                {delay: 3000, stopOnInteraction: false},
+                {delay: 4000, stopOnInteraction: true},
                 (rootElement) => rootElement.parentElement
             )
         );
@@ -176,7 +167,7 @@ const PostsSlider: FC<PostsSliderPropsTypes> =
         const [selectedIndex, setSelectedIndex] = useState(0);
         const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
         const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
-        // const [scrollSnaps, setScrollSnaps] = useState([]);
+
         const scrollPrev = useCallback(() => sliderApi && sliderApi.scrollPrev(), [sliderApi]);
         const scrollNext = useCallback(() => sliderApi && sliderApi.scrollNext(), [sliderApi]);
         const scrollTo = useCallback((index) => sliderApi && sliderApi.scrollTo(index), [
@@ -191,11 +182,8 @@ const PostsSlider: FC<PostsSliderPropsTypes> =
         }, [sliderApi, setSelectedIndex]);
 
         const {
-            elementSize,
             postsPerRawForMobile,
-            isMobileDevice,
             cardWidth,
-            isAppleMobile
         } = useSelector(({settings}: StoreTypes) => {
             const elementSize = cardWidthDesktop ? cardWidthDesktop : settings?.design?.cardWidthDesktop || 255
             return {
@@ -207,60 +195,39 @@ const PostsSlider: FC<PostsSliderPropsTypes> =
             }
         })
 
-
-        const isMobile = useMemo(()=>isMobileDevice,[])
-        const isAppleMobileDevice = useMemo(()=>isAppleMobile,[])
-
-
         useEffect(() => {
             if (!sliderApi) return;
             onSelect();
-            // setScrollSnaps(sliderApi.scrollSnapList());
             sliderApi.on("select", onSelect);
         }, [sliderApi, onSelect]);
-          //setScrollSnaps,
-        const noImageUrl = '/static/images/noImage/no-image-available.png';
 
         const postsToRender = useMemo(() => uniqueData?.posts || posts || [], [uniqueData?.posts, posts])
         const sliderPaginationItems = useMemo(() => Array.from(Array(postsToRender.length).keys()), [postsToRender])
 
         const renderSlides = postsToRender.map((post, index) => {
 
-            const title = process.env.NEXT_PUBLIC_DEFAULT_LOCAL === locale ? post?.title?.replace('#', '') :
-                post?.translations?.[locale as string]?.title ? post?.translations?.[locale as string]?.title?.replace('#', '') :
-                    post?.title?.replace('#', '');
-
-            const dir = locale === 'fa' || locale === 'ar' && post?.translations?.[locale as string]?.title ?
-                'rtl' : 'ltr'
-
-            const viewsNumber = post.views || 0
-            const views = _shortNumber(viewsNumber)
-            const rating = post.likes || post.disLikes ? ratingCalculator(post.likes, post.disLikes) : null
             const postProps = {
-                dir,
-                views,
-                rating,
-                noImageUrl,
+                views:_shortNumber(post.views || 0),
+                cardWidth,
+                postsPerRawForMobile,
+                rating : post.likes || post.disLikes ? ratingCalculator(post.likes, post.disLikes) : null ,
                 post,
-                cardWidthDesktop: elementSize,
-                widgetId,
-                postsPerRawForMobile: postsPerRawForMobile,
-                cardWidth: cardWidth,
-                title,
-                isMobile: isMobile,
+                postUrl:`/post/${post?.postType}/${post._id}`,
+                title: process.env.NEXT_PUBLIC_DEFAULT_LOCAL === locale ?
+                    post?.title :
+                    post?.translations?.[locale as string]?.title || post?.title,
                 isSidebar: isSidebar,
-                isAppleMobileDevice,
-                onActivateLoadingHandler: () => dispatch(setLoading(true))
+                onActivateLoadingHandler: () => null
             }
 
 
             return (
                 <div className={'slide'} key={index}>
-                    {post?.postType === 'video' ? <VideoCardToRender postProps={postProps} key={index} index={index}/> :
-                        post?.postType === 'promotion' ? <PromotionCardToRender postProps={postProps} index={index}/> :
-                            post?.postType === 'article' ? <ArticleCardToRender postProps={postProps} index={index}/> :
-                                post?.postType === 'learn' ? <LearnCardToRender postProps={postProps} index={index}/> :
-                                    <DefaultTypeCard {...postProps} key={index}/>
+                    {post?.postType === 'video' ? <VideoPostCard {...postProps} key={index} index={index}/> :
+                        post?.postType === 'promotion' ? <PromotionPostCard {...postProps} index={index}/> :
+                            post?.postType === 'article' ? <ArticlePostCard {...postProps} index={index}/> :
+                                post?.postType === 'learn' ? <LearnPostCard {...postProps}  index={index}/> :
+                                   null
                     }
                 </div>
             )
@@ -288,7 +255,6 @@ const PostsSlider: FC<PostsSliderPropsTypes> =
                     </>
                     : null
                 }
-
 
                 <div className="slider-parent" ref={sliderRef}>
                     <div className={'slider-container'}>

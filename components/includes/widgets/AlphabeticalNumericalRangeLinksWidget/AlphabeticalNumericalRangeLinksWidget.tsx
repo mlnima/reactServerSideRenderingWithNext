@@ -2,8 +2,7 @@ import {FC,useMemo, useState} from "react";
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import styled from "styled-components";
-import {setLoading} from "@store/clientActions/globalStateActions";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 const AlphabeticalNumericalRangeLinksWidgetStyledDiv = styled.div`
@@ -15,10 +14,8 @@ const AlphabeticalNumericalRangeLinksWidgetStyledDiv = styled.div`
   max-width: 95vw;
   margin-bottom: 10px;
   margin-top: 10px;
-
-
+  
   .alphabetical-range-content {
-
     display: ${({renderItems}: { renderItems: boolean }) => renderItems ? 'flex' : 'none'};
     justify-content: center;
     flex-wrap: wrap;
@@ -44,7 +41,6 @@ const AlphabeticalNumericalRangeLinksWidgetStyledDiv = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      
     }
   }
 
@@ -72,17 +68,11 @@ const AlphabeticalNumericalRangeLinksWidgetStyledDiv = styled.div`
   }
 `
 const AlphabeticalNumericalRangeLinksWidget: FC = () => {
-    const dispatch = useDispatch()
+
     const {pathname, query} = useRouter()
     const isMobileDevice = useSelector((store: StoreTypes) => store.settings?.isMobile)
     const isMobile = useMemo(()=>isMobileDevice,[])
-
-
-
-
-
     const [renderItems, setRenderItems] = useState(!isMobile)
-
     const activePage = query.startWith;
 
     const range = useMemo(() => {
@@ -100,9 +90,7 @@ const AlphabeticalNumericalRangeLinksWidget: FC = () => {
                     page: 1
                 }
             }}>
-                <a className={`alphabetical-range-widget-item ${activePage?.includes(Letter) ? 'active-item' : ''}`}
-                   onClick={() => dispatch(setLoading(true))}
-                >
+                <a className={`alphabetical-range-widget-item ${activePage?.includes(Letter) ? 'active-item' : ''}`}>
                     {query.startWith ? Letter : Letter.toUpperCase()}
                 </a>
             </Link>
@@ -127,8 +115,7 @@ const AlphabeticalNumericalRangeLinksWidget: FC = () => {
                         pathname: pathname,
                         query: {...query, startWith: query?.startWith?.slice(0, -1)}
                     }}>
-                        <a className='alphabetical-range-widget-item active-item current-query'
-                           onClick={() => dispatch(setLoading(true))}>
+                        <a className='alphabetical-range-widget-item active-item current-query'>
                             {query?.startWith} X
                         </a>
                     </Link>
@@ -138,9 +125,7 @@ const AlphabeticalNumericalRangeLinksWidget: FC = () => {
                     pathname: pathname,
                     query: {...query, startWith: ''}
                 }}>
-                    <a className={`alphabetical-range-widget-item ${!query.startWith ? 'active-item' : ''}`}
-                       onClick={() => dispatch(setLoading(true))}
-                    >
+                    <a className={`alphabetical-range-widget-item ${!query.startWith ? 'active-item' : ''}`} >
                         All
                     </a>
                 </Link>

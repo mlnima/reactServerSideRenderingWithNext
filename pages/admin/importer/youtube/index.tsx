@@ -2,7 +2,7 @@ import { useState, useRef, ChangeEvent} from 'react';
 import styled from "styled-components";
 import {useDispatch} from "react-redux";
 import {setAlert, setLoading} from "@store/clientActions/globalStateActions";
-import {updateSetting} from "@store/clientActions/settingsActions";
+import {updateSetting} from "@store/adminActions/adminPanelSettingsActions";
 import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {adminSaveNewPost, adminYoutubeDataScrapper} from "@store/adminActions/adminPanelPostsActions";

@@ -10,16 +10,11 @@ import VideoPostCardActors from "@components/includes/cards/VideoPostCardActors"
 
 const CardViews = dynamic(() => import('./asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('./asset/CardRating/CardRating'))
-const CardLastUpdate = dynamic(() => import('./asset/CardLastUpdate/CardLastUpdate'));
 const CardQuality = dynamic(() => import('./asset/CardQuality/CardQuality'))
 const CardDuration = dynamic(() => import('./asset/CardDuration/CardDuration'))
 
-// direction: ${({direction}: { direction: string }) => direction || 'ltr'};
-
 interface VideoPostCardPropTypes {
-    onActivateLoadingHandler: any,
     title: string,
-    direction: string,
     postUrl: string,
     postsPerRawForMobile: number,
     views: number,
@@ -27,7 +22,6 @@ interface VideoPostCardPropTypes {
     index: number,
     cardWidth: number,
     post: PostTypes,
-
 }
 
 interface VideoPostCardStylePropTypes {
@@ -86,14 +80,13 @@ const VideoPostCardStyle = styled.article`
 
   .card-under-media-info {
     font-size: 14px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    justify-content: space-between;
     margin: 0;
     color: var(--post-element-info-text-color, #ccc);
 
     .card-under-media-info-data {
       display: flex;
-      justify-content: center;
       align-items: center;
       margin: 2px 0;
       padding: 0 2px;
@@ -105,14 +98,6 @@ const VideoPostCardStyle = styled.article`
         height: 14px;
         margin: 0 2px;
       }
-    }
-
-    .card-views {
-      justify-self: flex-start;
-    }
-
-    .card-rating {
-      justify-self: flex-end;
     }
   }
 
@@ -131,10 +116,8 @@ const VideoPostCardStyle = styled.article`
 const LearnPostCard: FC<VideoPostCardPropTypes> =
     ({
          post,
-         onActivateLoadingHandler,
          title,
          postUrl,
-         direction,
          views,
          rating,
          postsPerRawForMobile,
@@ -158,7 +141,7 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
                                 onTouchEnd={hoverHandler}>
 
                 <Link href={postUrl}>
-                    <a rel={'next'} onClick={onActivateLoadingHandler} className={'card-link'} title={title}>
+                    <a rel={'next'} className={'card-link'} title={title}>
 
                         <div className={'video-post-card-media'}>
                             {hover && post?.videoTrailerUrl ?
@@ -166,8 +149,7 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
                                                       hoverHandler={hoverHandler}
                                                       hover={hover}
                                                       postsPerRawForMobile={postsPerRawForMobile}
-                                                      cardWidth={cardWidth}
-                                                      setHover={setHover}/> :
+                                                      cardWidth={cardWidth}/> :
                                 post.mainThumbnail ? <CardImageRenderer imageUrl={post.mainThumbnail}
                                                                         mediaAlt={title}
                                                                         index={index}
@@ -175,33 +157,44 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
                                                                         cardWidth={cardWidth}/>
                                     :null
                             }
-                            {post?.quality ? <CardQuality quality={_qualityConvertor(post?.quality)}
-                                                           className={'card-quality video-card-info-data'}/>
-                                :null
+
+                            {!!post?.quality && <CardQuality quality={_qualityConvertor(post?.quality)}
+                                                             className={'card-quality video-card-info-data'}/>
                             }
-                            {post?.duration ? <CardDuration duration={post?.duration}
+
+                            {!!post?.duration && <CardDuration duration={post?.duration}
                                                              className={'card-duration video-card-info-data'}/>
-                                :null
                             }
                         </div>
                     </a>
                 </Link>
-                {post?.actors?.length ? <VideoPostCardActors actors={post?.actors} hover={hover}/> : null}
+
+                {(!!post?.actors?.length || !!post?.updatedAt|| !!post?.createdAt) &&
+                    <VideoPostCardActors actors={post?.actors}
+                                         hover={hover}
+                                         updatedAt={post?.updatedAt}
+                                         createdAt={post?.createdAt}
+                    />
+                }
+
                 <Link href={postUrl}>
-                    <a rel={'next'} onClick={onActivateLoadingHandler} className={'card-link'} title={title}>
+                    <a rel={'next'} className={'card-link'} title={title}>
+
                         <header className={'entry-header'}>
                             <span className={'card-header'}>{title}</span>
                         </header>
+
                         <div className={'card-under-media-info'}>
-                            <CardViews views={views} className={'card-views card-under-media-info-data'}/>
-                            {rating ?
-                            <CardRating rating={rating} className={'card-rating card-under-media-info-data'}/>
-                            :null
+
+                            {!!views && views >= 10 &&
+                                 <CardViews views={views} className={'card-views card-under-media-info-data'}/>
                             }
+                            {!!rating &&
+                                  <CardRating rating={rating} className={'card-rating card-under-media-info-data'}/>
+                            }
+
                         </div>
-                        {(post?.updatedAt || post?.createdAt) &&
-                        <CardLastUpdate targetedDate={post?.updatedAt || post?.createdAt}/>
-                        }
+
                     </a>
                 </Link>
             </VideoPostCardStyle>
@@ -209,6 +202,10 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
     };
 export default LearnPostCard
 
+
+// {(post?.updatedAt || post?.createdAt) &&
+// <CardLastUpdate targetedDate={post?.updatedAt || post?.createdAt}/>
+// }
 
 // {views && <CardViews views={views} className={'card-views card-under-media-info-data'}/>}
 

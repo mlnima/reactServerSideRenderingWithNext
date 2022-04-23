@@ -1,6 +1,5 @@
 import {HYDRATE} from 'next-redux-wrapper';
 import {
-    CHECK_ROUTE_AND_SET_LOADING,
     CLOSE_ALERT,
     LOADING,
     LOGIN_REGISTER_FORM,
@@ -74,11 +73,6 @@ export const globalStateReducer = (state= initialState , action : {type:string,p
                     type:null,
                     message:''
                 }
-            };
-        case  CHECK_ROUTE_AND_SET_LOADING:
-            return {
-                ...state,
-                loading:action.payload
             };
         default:
             return state

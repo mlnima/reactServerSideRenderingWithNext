@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
-import {updateSetting} from "@store/clientActions/settingsActions";
+import {updateSetting} from "@store/adminActions/adminPanelSettingsActions";
 import MonacoEditor from "../../MonacoEditor/MonacoEditor";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {adminPanelEditDesign} from "@store/adminActions/adminPanelSettingsActions";

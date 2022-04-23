@@ -10,10 +10,12 @@ const TagCardStyle = styled.article`
   background-color: var(--post-element-background-color, #131314);
   width: 100%;
   margin: 0 auto;
-  .tag-card-link{
+
+  .tag-card-link {
     width: 100%;
     color: var(--post-element-text-color, #ccc);
-    .tag-card-info{
+
+    .tag-card-info {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -41,22 +43,20 @@ const TagCardStyle = styled.article`
   }
 
   @media only screen and (min-width: 768px) {
-    max-width: ${({cardWidth}: {cardWidth:number}) => cardWidth}px;
+    max-width: ${({cardWidth}: { cardWidth: number }) => cardWidth}px;
   }
 `
 
 interface TagCardPropTypes {
     tag: Meta,
-    onActivateLoadingHandler: any,
     index?: number,
-    postsPerRawForMobile:number,
-    cardWidth:number,
+    postsPerRawForMobile: number,
+    cardWidth: number,
 }
 
 const TagCard: FC<TagCardPropTypes> =
     ({
          tag,
-         onActivateLoadingHandler,
          index,
          postsPerRawForMobile,
          cardWidth
@@ -74,10 +74,7 @@ const TagCard: FC<TagCardPropTypes> =
         return (
             <TagCardStyle cardWidth={cardWidth}>
                 <Link href={`/tag/${tag?._id}`}>
-                    <a className='tag-card-link'
-                       onClick={onActivateLoadingHandler}
-                       title={cardTitle as string}
-                    >
+                    <a className='tag-card-link' title={cardTitle as string}>
                         <CardImageRenderer imageUrl={tag.imageUrl}
                                            mediaAlt={cardTitle}
                                            index={index}
@@ -88,12 +85,9 @@ const TagCard: FC<TagCardPropTypes> =
                             <h3 className={'tag-card-title'}>
                                 {cardTitle}
                             </h3>
-                            {tag?.count ? <span className={'category-card-count'}>
-                                           (<var>{tag?.count}</var>)
-                                           </span>
-                                : null
+                            {!!tag?.count &&
+                                    <span className={'category-card-count'}>(<var>{tag?.count}</var>)</span>
                             }
-
                         </div>
 
                     </a>

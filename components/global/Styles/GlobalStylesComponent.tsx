@@ -23,7 +23,7 @@ const GlobalStyles= createGlobalStyle`
   }
 
   #main-content{
-    margin: auto;
+    margin: 0 auto;
     max-width: 100vw;
     min-height: 100vh;
   }
@@ -285,7 +285,7 @@ const GlobalStyles= createGlobalStyle`
   
   @media only screen and (min-width: 768px) {
     #main-content{
-      margin: auto;
+      margin: 0;
       max-width: 97vw;
     }
   }

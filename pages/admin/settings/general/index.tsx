@@ -5,7 +5,7 @@ import {languagesOptions} from '@_variables/_variables'
 import convertVariableNameToName from "../../../../_variables/util/convertVariableNameToName";
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
-import {updateSetting} from "@store/clientActions/settingsActions";
+import {updateSetting} from "@store/adminActions/adminPanelSettingsActions";
 import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";

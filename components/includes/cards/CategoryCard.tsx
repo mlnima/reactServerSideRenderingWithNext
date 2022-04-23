@@ -10,10 +10,12 @@ const CategoryCardStyle = styled.article`
   background-color: var(--post-element-background-color, #131314);
   width: 100%;
   margin: 0 auto;
-  .category-card-link{
+
+  .category-card-link {
     width: 100%;
     color: var(--post-element-text-color, #ccc);
-    .category-card-info{
+
+    .category-card-info {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -41,22 +43,20 @@ const CategoryCardStyle = styled.article`
   }
 
   @media only screen and (min-width: 768px) {
-    max-width: ${({cardWidth}: {cardWidth:number}) => cardWidth}px;
+    max-width: ${({cardWidth}: { cardWidth: number }) => cardWidth}px;
   }
 `
 
 interface CategoryCardPropTypes {
     category: Meta,
-    onActivateLoadingHandler: any,
     index?: number,
-    postsPerRawForMobile:number,
-    cardWidth:number,
+    postsPerRawForMobile: number,
+    cardWidth: number,
 }
 
 const CategoryCard: FC<CategoryCardPropTypes> =
     ({
          category,
-         onActivateLoadingHandler,
          index,
          postsPerRawForMobile,
          cardWidth
@@ -74,10 +74,7 @@ const CategoryCard: FC<CategoryCardPropTypes> =
         return (
             <CategoryCardStyle cardWidth={cardWidth}>
                 <Link href={`/category/${category?._id}`}>
-                    <a className='category-card-link'
-                       onClick={onActivateLoadingHandler}
-                       title={cardTitle as string}
-                    >
+                    <a className='category-card-link' title={cardTitle as string}>
                         <CardImageRenderer imageUrl={category.imageUrl}
                                            mediaAlt={cardTitle}
                                            index={index}
@@ -88,12 +85,9 @@ const CategoryCard: FC<CategoryCardPropTypes> =
                             <h3 className={'category-card-title'}>
                                 {cardTitle}
                             </h3>
-                            {category?.count ? <span className={'category-card-count'}>
-                                           (<var>{category?.count}</var>)
-                                           </span>
-                                : null
+                            {!!category?.count &&
+                                 <span className={'category-card-count'}>(<var>{category?.count}</var>)</span>
                             }
-
                         </div>
 
                     </a>

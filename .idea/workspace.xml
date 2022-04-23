@@ -20,14 +20,97 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change afterPath="$PROJECT_DIR$/components/includes/LoadingV2/LoadingV2.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/design/StyleSection/StyleSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/design/StyleSection/StyleSection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetWithPositionMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetWithPositionMenu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/global/Styles/GlobalStylesComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/Styles/GlobalStylesComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/AdminTools/AdminTools.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/AdminTools/AdminTools.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PaginationComponent/PaginationComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PaginationComponent/PaginationComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PaginationComponent/PaginationComponentPageLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PaginationComponent/PaginationComponentPageLink.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostsRenderer/ArticleCardToRender.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostsRenderer/LearnCardToRender.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostsRenderer/PostsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostsRenderer/PostsRenderer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostsRenderer/PromotionCardToRender.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostsRenderer/VideoCardToRender.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/ActorCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/ActorCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/ArticlePostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/ArticlePostCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/CategoryCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CategoryCard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/cards/LearnPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/LearnPostCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/PromotionPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/PromotionPostCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/TagCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/TagCard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/cards/VideoPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/VideoPostCard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/cards/VideoPostCardActors.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/VideoPostCardActors.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/VideoPostCardTrailer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/VideoPostCardTrailer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/asset/CardImage/CardImage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/asset/CardImageNext/CardImageNext.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/asset/CardImageRenderer/CardImageRenderer.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/asset/CardMetaData/CardMetaItem.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/asset/CardMetaData/CardMetaRenderer.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/asset/NoImage/NoImage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/ActorCard/ActorCard.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/ActorCard/ActorCardMedia.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/ArticleTypeCard/ArticleCardMedia.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/ArticleTypeCard/ArticleTypeCard.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/ArticleTypeCard/ArticleTypeCardTitle.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/CategoryCard/CategoryCard.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/CategoryCard/CategoryCardMedia.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/DefaultTypeCard/DefaultTypeCard.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/DefaultTypeCard/DefaultTypeCardMedia.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/LearnTypeCard/LearnTypeCard.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/LearnTypeCard/LearnTypeCardMedia.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/LearnTypeCard/LearnTypeCardTitle.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/PromotionTypeCard/PromotionCardListSmall.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/PromotionTypeCard/PromotionCardMedia.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/PromotionTypeCard/PromotionTypeCard.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/TagCard/TagCard.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/TagCard/TagCardMedia.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/VideoCard/VideoCard.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/VideoCard/VideoCardInfo.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/VideoCard/VideoCardMedia/VideoCardMedia.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/VideoCard/VideoCardMedia/VideoCardTrailer.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/VideoCard/VideoCardTitle.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/VideoCardTypeList/VideoCardTypeList.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/VideoCardTypeList/VideoCardTypeListMedia.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/VideoCardTypeList/VideoCardTypeListTitle.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/mobile/MobileActorCard/MobileActorCard.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/mobile/MobileArticleCard/MobileArticleCard.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/mobile/MobileArticleCard/MobileArticleCardMedia.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/mobile/MobileCategoryCard/MobileCategoryCard.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/mobile/MobileCategoryCard/MobileCategoryCardMedia.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/mobile/MobileLearnCard/MobileLearnCard.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/mobile/MobileLearnCard/MobileLearnCardMedia.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/mobile/MobilePromotionCard/MobilePromotionCard.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/mobile/MobilePromotionCard/MobilePromotionCardMedia.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/mobile/MobileTagCard/MobileTagCard.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/mobile/MobileTagCard/MobileTagCardMedia.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/mobile/MobileVideoCard/MobileVideoCard.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/mobile/MobileVideoCard/MobileVideoCardInfo.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/mobile/MobileVideoCard/MobileVideoCardMedia/MobileVideoCardMedia.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/mobile/MobileVideoCard/MobileVideoCardMedia/MobileVideoCardTrailer.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/mobileAsset/MobileCardImage/MobileCardImage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/mobileAsset/MobileCardImageNext/MobileCardImageNext.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/mobileAsset/MobileCardImageRenderer.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/mobileAsset/MobileCardNoImage/MobileCardNoImage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/pagesComponents/actorsPageComponents/Components/ActorsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/pagesComponents/actorsPageComponents/Components/ActorsRenderer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/pagesComponents/categoriesPageComponents/Components/CategoriesRenderer/CategoriesRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/pagesComponents/categoriesPageComponents/Components/CategoriesRenderer/CategoriesRenderer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/pagesComponents/tagsPageComponents/Components/TagsRenderer/TagsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/pagesComponents/tagsPageComponents/Components/TagsRenderer/TagsRenderer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/AlphabeticalNumericalRangeLinksWidget/AlphabeticalNumericalRangeLinksWidget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/AlphabeticalNumericalRangeLinksWidget/AlphabeticalNumericalRangeLinksWidget.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidget.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidgetItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidgetItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/PostSwiper/PostSwiper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/PostSwiper/PostSwiper.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/widgets/PostsSlider/PostsSlider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/PostsSlider/PostsSlider.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsControllers/adminUpdateWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsControllers/adminUpdateWidget.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientSelfWidgetUpdate.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientSelfWidgetUpdate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/layouts/AppLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AppLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/importer/youtube/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/importer/youtube/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/settings/customScript/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/customScript/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/settings/general/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/general/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/adminActions/adminPanelSettingsActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/adminActions/adminPanelSettingsActions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/clientActions/globalStateActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/clientActions/globalStateActions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/clientActions/postsAction.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/clientActions/postsAction.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/clientActions/settingsActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/clientActions/settingsActions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/clientReducers/globalStateReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/clientReducers/globalStateReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +164,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="14.17.3" />
     <property name="javascript.nodejs.core.library.typings.version" value="14.17.3" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/components/includes/widgets/Authentication" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/components/includes" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -97,11 +180,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\widgets\Authentication" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\widgets\MenuWidget" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\global" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\public\asset\images\icons" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\_variables\adminVariables" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\trash" />
@@ -1127,7 +1210,8 @@
       <workItem from="1650417922621" duration="2847000" />
       <workItem from="1650464606103" duration="21991000" />
       <workItem from="1650506865027" duration="53151000" />
-      <workItem from="1650609175266" duration="8941000" />
+      <workItem from="1650609175266" duration="26571000" />
+      <workItem from="1650659766111" duration="14273000" />
     </task>
     <servers />
   </component>
@@ -1372,7 +1456,7 @@
           <option name="timeStamp" value="126" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/components/includes/cards/desktop/ArticleTypeCard/ArticleTypeCardTitle.tsx</url>
+          <url>file://$PROJECT_DIR$/trash/desktop/ArticleTypeCard/ArticleTypeCardTitle.tsx</url>
           <option name="timeStamp" value="128" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -1407,7 +1491,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/components/includes/widgets/PostSwiper/PostSwiper.tsx</url>
-          <line>30</line>
+          <line>29</line>
           <option name="timeStamp" value="147" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">

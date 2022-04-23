@@ -8,6 +8,7 @@ import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import SiteSettingSetter from '../includes/SiteSettingsSetter/SiteSettingsSetter'
 // import {setSettings} from "@store/clientActions/settingsActions";
 // import {isAppleMobileDevice} from "@_variables/_variables";
+import LoadingV2 from "@components/includes/LoadingV2/LoadingV2";
 
 const SideBarWidgetArea = dynamic(() => import('../widgetsArea/SidebarWidgetArea/SidebarWidgetArea'));
 const HeaderWidgetArea = dynamic(() => import('../widgetsArea/HeaderWidgetArea/HeaderWidgetArea'));
@@ -61,23 +62,6 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
         }
     });
 
-    // useEffect(() => {
-        // const reDetectMobileDevice = ()=>{
-        //     if (typeof window !=='undefined'){
-        //         if (window.innerWidth < 768 && !isMobile ){
-        //             dispatch(setSettings({
-        //                 isMobile:true,
-        //                 isAppleMobileDevice:isAppleMobileDevice(navigator.userAgent)
-        //             }))
-        //         }
-        //     }
-        // }
-        // events.on('routeChangeComplete', reDetectMobileDevice);
-        // return () => {
-        //     events.off('routeChangeComplete', reDetectMobileDevice);
-        // };
-    // }, []);
-
     return (
         <div className={'App ' + mainLayoutClassNameForGrid} suppressHydrationWarning>
             <GlobalStylesComponent/>
@@ -108,7 +92,8 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
             {identity?.footer === 'enable' ? <FooterWidgetArea/> : null}
             {loginRegisterFormPopup && !loggedIn ? <LoginRegisterPopup/> : null}
             {userRole === 'administrator' ? <AdminTools/> : null}
-            {loading ? <Loading/> : null}
+            {/*{loading ? <Loading/> : null}*/}
+            <LoadingV2/>
             {alert?.active && alert?.message ? <AlertBox/> : null}
 
 

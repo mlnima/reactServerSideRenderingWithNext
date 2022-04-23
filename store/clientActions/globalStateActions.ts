@@ -6,7 +6,6 @@ import staticDataJson from "../../static/jsons/staticData.json";
 import staticWidgetsJson from "../../static/jsons/staticWidgets.json";
 import {GetServerSidePropsContext} from "next";
 import {
-    CHECK_ROUTE_AND_SET_LOADING,
     CLOSE_ALERT, GET_SETTINGS,
     LOADING,
     LOGIN_REGISTER_FORM,
@@ -63,15 +62,7 @@ export const setSideHeadData = (headData):AnyAction  => dispatch => {
         payload: headData
     })
 }
-//@ts-ignore
-export const checkRouteAndSetLoading = (path, nextPath):AnyAction  => dispatch => {
-    if (path !== nextPath) {
-        dispatch({
-            type: CHECK_ROUTE_AND_SET_LOADING,
-            payload: true
-        })
-    }
-}
+
 //@ts-ignore
 export const hydrateGlobalState = (data):AnyAction  => dispatch => {
     dispatch({

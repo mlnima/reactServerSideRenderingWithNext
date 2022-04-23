@@ -1,7 +1,6 @@
 import React, {FC} from 'react';
 import styled from "styled-components";
-import {setLoading} from "@store/clientActions/globalStateActions";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {Meta, StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import TagCard from "@components/includes/cards/TagCard";
 
@@ -33,7 +32,6 @@ interface TagsRendererPropTypes {
 }
 
 const TagsRenderer: FC<TagsRendererPropTypes> = ({uniqueData}) => {
-    const dispatch = useDispatch()
 
     const {tagsMetas, postsPerRawForMobile, cardWidth} = useSelector(({settings, posts}: StoreTypes) => {
         return {
@@ -51,7 +49,6 @@ const TagsRenderer: FC<TagsRendererPropTypes> = ({uniqueData}) => {
                     <TagCard key={tag._id}
                              tag={tag}
                              cardWidth={cardWidth}
-                             onActivateLoadingHandler={() => dispatch(setLoading(true))}
                              postsPerRawForMobile={postsPerRawForMobile}
                              index={index}/>
                 )
@@ -61,21 +58,3 @@ const TagsRenderer: FC<TagsRendererPropTypes> = ({uniqueData}) => {
     );
 };
 export default TagsRenderer;
-
-
-// if (isMobile){
-//     return <MobileTagCard tag={tag}
-//                           key={tag._id}
-//                           onActivateLoadingHandler={() => dispatch(setLoading(true))}
-//                           index={index}
-//                           isAppleMobileDevice={isAppleMobileDevice}
-//     />
-//
-// }else{
-//     return (<TagCard onActivateLoadingHandler={() => dispatch(setLoading(true))}
-//                      key={tag._id}
-//                      tag={tag}
-//                      index={index}
-//                      cardWidth={cardWidth}
-//     />)
-// }

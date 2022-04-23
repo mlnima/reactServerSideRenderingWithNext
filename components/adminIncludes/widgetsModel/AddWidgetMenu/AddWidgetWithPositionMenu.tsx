@@ -50,6 +50,7 @@ const AddWidgetWithPositionMenu :FC<AddWidgetWithPositionMenuPropType> = ({type,
     const refToElement = useRef(null)
     // const widgets = useSelector((store:StoreTypes) => store?.widgets.widgets)
     const customPages = useSelector((store:StoreTypes) => store?.adminPanelGlobalState?.customPages)
+    console.log('typeof  customPages')
     const dispatch = useDispatch()
     const [open, setOpen] = useState(false)
 

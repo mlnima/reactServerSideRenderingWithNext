@@ -1,8 +1,5 @@
 import {FC, useState} from "react";
 import {useMemo} from 'react';
-import {useRouter} from "next/router";
-import {useDispatch} from "react-redux";
-import {checkRouteAndSetLoading} from "@store/clientActions/globalStateActions";
 import {MenuItem} from "@_variables/TypeScriptTypes/WidgetsInterfaces";
 import styled from "styled-components";
 import MenuWidgetItem from "./MenuWidgetItem";
@@ -116,14 +113,7 @@ interface MenuWidgetPropTypes {
 
 const MenuWidget: FC<MenuWidgetPropTypes> = ({menuItems}) => {
 
-    const {asPath} = useRouter()
-    const dispatch = useDispatch()
     const [open, setOpen] = useState(null);
-
-    const mobileNavigationOnClickHandler = (nextPath) => {
-        dispatch(checkRouteAndSetLoading(asPath, nextPath))
-    }
-
     const menuItemsInOrder = useMemo(() => {
         return menuItems.filter((menuItem: MenuItem) => !menuItem.parent)
             .sort((a, b) => a.itemIndex > b.itemIndex ? 1 : -1) || [];
@@ -145,7 +135,6 @@ const MenuWidget: FC<MenuWidgetPropTypes> = ({menuItems}) => {
                         <MenuWidgetItem menuItem={menuItem}
                                         key={menuItem.itemIndex}
                                         setOpen={setOpen}
-                                        mobileNavigationOnClickHandler={mobileNavigationOnClickHandler}
                         />
                     )
                 })}

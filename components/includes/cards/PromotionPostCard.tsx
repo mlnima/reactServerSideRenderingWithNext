@@ -14,9 +14,7 @@ const CardLastUpdate = dynamic(() => import('./asset/CardLastUpdate/CardLastUpda
 // direction: ${({direction}: { direction: string }) => direction || 'ltr'};
 
 interface PromotionPostCardPropTypes {
-    onActivateLoadingHandler: any,
     title: string,
-    direction: string,
     postUrl: string,
     postsPerRawForMobile: number,
     views: number,
@@ -24,7 +22,6 @@ interface PromotionPostCardPropTypes {
     index: number,
     cardWidth: number,
     post: PostTypes,
-    isAppleMobileDevice: boolean
 }
 
 interface PromotionPostCardStylePropTypes {
@@ -46,8 +43,8 @@ const PromotionPostCardStyle = styled.article`
 
   .card-under-media-info {
     font-size: 14px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    justify-content: space-between;
     margin: 0;
 
     .card-under-media-info-data {
@@ -64,14 +61,6 @@ const PromotionPostCardStyle = styled.article`
         height: 14px;
         margin: 0 2px;
       }
-    }
-
-    .card-views {
-      justify-self: flex-start;
-    }
-
-    .card-rating {
-      justify-self: flex-end;
     }
   }
 
@@ -90,10 +79,8 @@ const PromotionPostCardStyle = styled.article`
 const PromotionPostCard: FC<PromotionPostCardPropTypes> =
     ({
          post,
-         onActivateLoadingHandler,
          title,
          postUrl,
-         direction,
          views,
          rating,
          postsPerRawForMobile,
@@ -115,20 +102,19 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
                 </a>
 
                 <Link href={postUrl}>
-                    <a rel={'next'} onClick={onActivateLoadingHandler} className={'card-link'} title={title}>
+                    <a rel={'next'} className={'card-link'} title={title}>
+
                         <header className={'entry-header'}>
                             <span className={'card-header'}>{title}</span>
                         </header>
 
-
                         <div className={'card-under-media-info'}>
-                            {views &&
-                            <CardViews views={views} className={'card-views card-under-media-info-data'}/>
+                            {!!views &&
+                                 <CardViews views={views} className={'card-views card-under-media-info-data'}/>
                             }
-                            {rating && <CardRating rating={rating}
-                                                   className={'card-rating card-under-media-info-data'}/>
+                            {!!rating &&
+                                 <CardRating rating={rating} className={'card-rating card-under-media-info-data'}/>
                             }
-
                         </div>
 
                         {(post?.updatedAt || post?.createdAt) &&

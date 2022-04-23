@@ -1,14 +1,8 @@
-import {FC, useMemo} from 'react';
+import {FC} from 'react';
 import styled from "styled-components";
-import {useDispatch, useSelector} from "react-redux";
-import dynamic from "next/dynamic";
-import {setLoading} from "@store/clientActions/globalStateActions";
+import { useSelector} from "react-redux";
 import {Meta, StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import CategoryCard from "@components/includes/cards/CategoryCard";
-
-// const CategoryCard = dynamic(() => import('@components/includes/cards/desktop/CategoryCard/CategoryCard'));
-// const MobileCategoryCard = dynamic(() =>
-//     import('@components/includes/cards/mobile/MobileCategoryCard/MobileCategoryCard'));
 
 interface CategoriesRendererPropTypes {
     uniqueData?: {
@@ -48,8 +42,6 @@ let CategoriesRendererStyledDiv = styled.div`
 
 const CategoriesRenderer: FC<CategoriesRendererPropTypes> = ({ uniqueData}) => {
 
-    const dispatch = useDispatch();
-
     const {categoriesMetas, postsPerRawForMobile, cardWidth} =
         useSelector(({settings, posts}: StoreTypes) => {
             return {
@@ -69,7 +61,6 @@ const CategoriesRenderer: FC<CategoriesRendererPropTypes> = ({ uniqueData}) => {
                          <CategoryCard category={category}
                                        key={category._id}
                                        cardWidth={cardWidth}
-                                       onActivateLoadingHandler={() => dispatch(setLoading(true))}
                                        postsPerRawForMobile={postsPerRawForMobile}
                                        index={index}
                          />

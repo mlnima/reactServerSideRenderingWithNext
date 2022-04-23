@@ -5,6 +5,7 @@ import _metaPageQueryGenerator from "@_variables/clientVariables/_metaPageQueryG
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import {convertMetasTypeToSingular, getTextDataWithTranslation, reduceArrayOfDataToIds} from "@_variables/_variables";
 import staticDataJson from "../../static/jsons/staticData.json";
+import {AnyAction} from "redux";
 import {
     DELETE_COMMENT,
     GET_COMMENTS,
@@ -20,7 +21,7 @@ import {
     SET_POSTS_DATA,
     EDIT_POST_FIELD, LIKE_POST, DISLIKE_POST, VIEW_POST, SET_HEAD_DATA, SET_NOT_FOUND_PAGE
 } from "@store/types";
-import {AnyAction} from "redux";
+
 
 //@ts-ignore
 export const setPostsData = (postsData):AnyAction  => async dispatch => {
@@ -149,14 +150,11 @@ export const getPost = (_id: string , locale : string):AnyAction  => async dispa
 
 //@ts-ignore
 export const getEditingPost = (_id: string):AnyAction  => async dispatch => {
-    dispatch({type: LOADING, payload: true})
     await Axios.get(`/api/v1/posts/clientGetPost${_postPageQueryGenerator({_id})}`).then(res => {
-
         dispatch({
             type: GET_EDITING_POST,
             payload: res.data.post
         })
-
     }).catch(err => {
 
     }).finally(() => dispatch({type: LOADING, payload: false}))
@@ -166,8 +164,6 @@ export const getEditingPost = (_id: string):AnyAction  => async dispatch => {
 export const userCreateNewPost = (data: PostTypes, router):AnyAction  => async dispatch => {
 
     dispatch({type: LOADING, payload: true})
-
-
     const comments = data.comments ? {comments: reduceArrayOfDataToIds(data.comments)} : {}
     const categories = data.categories ? {categories: reduceArrayOfDataToIds(data.categories)} : {}
     const tags = data.tags ? {tags: reduceArrayOfDataToIds(data.tags)} : {}
@@ -210,8 +206,8 @@ export const userCreateNewPost = (data: PostTypes, router):AnyAction  => async d
 
 //@ts-ignore
 export const userUpdatePost = (data: PostTypes):AnyAction  => async dispatch => {
-    dispatch({type: LOADING, payload: true})
 
+    dispatch({type: LOADING, payload: true})
     const comments = data.comments ? {comments: reduceArrayOfDataToIds(data.comments)} : {}
     const categories = data.categories ? {categories: reduceArrayOfDataToIds(data.categories)} : {}
     const tags = data.tags ? {tags: reduceArrayOfDataToIds(data.tags)} : {}

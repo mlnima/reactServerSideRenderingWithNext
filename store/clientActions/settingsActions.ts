@@ -14,25 +14,25 @@ export const setSettings = (setting: any):AnyAction  => (dispatch: any) => {
 }
 
 //@ts-ignore
-export const updateSetting = (type: any, data: object):AnyAction  => async (dispatch: any) => {
-    dispatch({type: LOADING, payload: true})
-    const body = {
-        type,
-        data,
-        token: localStorage.wt,
-    };
-    await Axios.post( '/api/admin/settings/update', body).then((res: AxiosResponse<any>) => {
-        dispatch({
-            type: SET_ALERT,
-            payload: {message: res.data.message || 'updated', type: 'success'}
-        })
-    }).catch(err => {
-        dispatch({
-            type: SET_ALERT,
-            payload: {message: err.response.data.message || 'Something Went Wrong', type: 'error', err}
-        })
-    }).finally(()=>dispatch({type: LOADING, payload: false}))
-}
+// export const up dateSetting = (type: any, data: object):AnyAction  => async (dispatch: any) => {
+//     dispatch({type: LOADING, payload: true})
+//     const body = {
+//         type,
+//         data,
+//         token: localStorage.wt,
+//     };
+//     await Axios.post( '/api/admin/settings/update', body).then((res: AxiosResponse<any>) => {
+//         dispatch({
+//             type: SET_ALERT,
+//             payload: {message: res.data.message || 'updated', type: 'success'}
+//         })
+//     }).catch(err => {
+//         dispatch({
+//             type: SET_ALERT,
+//             payload: {message: err.response.data.message || 'Something Went Wrong', type: 'error', err}
+//         })
+//     }).finally(()=>dispatch({type: LOADING, payload: false}))
+// }
 
 //@ts-ignore
 export const editDesign = (e: ChangeEvent<any>):AnyAction  => async (dispatch: any) => {

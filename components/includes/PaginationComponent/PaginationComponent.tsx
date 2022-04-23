@@ -1,8 +1,6 @@
 import {FC} from "react";
 import PaginationComponentPageLink from "./PaginationComponentPageLink";
 import styled from "styled-components";
-import {useDispatch} from "react-redux";
-import {setLoading} from "@store/clientActions/globalStateActions";
 import {useRouter} from "next/router";
 import rangeNumGenerator from "@_variables/util/rangeNumGenerator";
 
@@ -13,11 +11,17 @@ const PaginationComponentStyledDiv = styled.div`
   flex-wrap: wrap;
 
   .pagination-item {
-    color: var(--main-text-color);
+    color: var(--navigation-text-color,#ccc);
+    background-color:var(--navigation-background-color,#18181b) ;
     padding: 5px 10px;
     margin: 5px;
     border-radius: 5px;
     cursor: pointer;
+  }
+  
+  .active-item{
+    color: var(--navigation-background-color,#18181b);
+    background-color:var(--main-active-color,#f90) ;
   }
   @media only screen and (max-width: 768px) {
     .pagination-item{
@@ -44,12 +48,10 @@ const PaginationComponent: FC<PaginationComponentPropTypes> =
     ({
          size,
          maxPage,
-         // pageNumber,
          isActive,
          totalCount,
          currentPage
      }) => {
-        const dispatch = useDispatch()
         const {query} = useRouter()
         if (isActive && totalCount > size) {
             const range = rangeNumGenerator(currentPage, maxPage)
@@ -63,7 +65,6 @@ const PaginationComponent: FC<PaginationComponentPropTypes> =
 
                             return (
                                 <PaginationComponentPageLink key={index}
-                                                             onActivateLoadingHandler={() => dispatch(setLoading(true))}
                                                              pageNumber={pageNumber}
                                                              isActivePage={pageNumber === currentPage}
                                 />

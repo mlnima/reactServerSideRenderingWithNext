@@ -1,8 +1,7 @@
 import React, {FC} from 'react';
 import styled from "styled-components";
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector} from "react-redux";
 import {Meta, StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {setLoading} from "@store/clientActions/globalStateActions";
 import ActorCard from "@components/includes/cards/ActorCard";
 
 interface ActorsContentStyledDivPropTypes {
@@ -33,7 +32,7 @@ interface ActorsRendererPropTypes {
 
 const ActorsRenderer: FC<ActorsRendererPropTypes> = ({uniqueData}) => {
 
-    const dispatch = useDispatch();
+
 
     const {cardWidth, postsPerRawForMobile, actorsMetas} = useSelector(
         ({settings, posts}: StoreTypes) => {
@@ -54,7 +53,6 @@ const ActorsRenderer: FC<ActorsRendererPropTypes> = ({uniqueData}) => {
                     return <ActorCard key={actor._id}
                                       actor={actor}
                                       cardWidth={cardWidth}
-                                      onActivateLoadingHandler={() => dispatch(setLoading(true))}
                                       postsPerRawForMobile={postsPerRawForMobile}
                                       index={index}
                     />

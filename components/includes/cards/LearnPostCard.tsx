@@ -9,12 +9,8 @@ const CardViews = dynamic(() => import('./asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('./asset/CardRating/CardRating'))
 const CardLastUpdate = dynamic(() => import('./asset/CardLastUpdate/CardLastUpdate'));
 
-// direction: ${({direction}: { direction: string }) => direction || 'ltr'};
-
 interface LearnPostCardPropTypes {
-    onActivateLoadingHandler: any,
     title: string,
-    direction: string,
     postUrl: string,
     postsPerRawForMobile: number,
     views: number,
@@ -22,7 +18,6 @@ interface LearnPostCardPropTypes {
     index: number,
     cardWidth: number,
     post: PostTypes,
-    isAppleMobileDevice: boolean
 }
 
 interface LearnPostCardStylePropTypes {
@@ -44,8 +39,8 @@ const LearnPostCardStyle = styled.article`
 
   .card-under-media-info {
     font-size: 14px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    justify-content: space-between;
     margin: 0;
 
     .card-under-media-info-data {
@@ -62,14 +57,6 @@ const LearnPostCardStyle = styled.article`
         height: 14px;
         margin: 0 2px;
       }
-    }
-
-    .card-views {
-      justify-self: flex-start;
-    }
-
-    .card-rating {
-      justify-self: flex-end;
     }
   }
 
@@ -88,42 +75,42 @@ const LearnPostCardStyle = styled.article`
 const LearnPostCard: FC<LearnPostCardPropTypes> =
     ({
          post,
-         onActivateLoadingHandler,
          title,
          postUrl,
-         direction,
          views,
          rating,
          postsPerRawForMobile,
          cardWidth,
          index
      }) => {
-        //direction={direction}
+
         return (
             <LearnPostCardStyle className={'post-card'} cardWidth={cardWidth}>
                 <Link href={postUrl}>
-                    <a rel={'next'} onClick={onActivateLoadingHandler} className={'card-link'} title={title}>
-                        {post.mainThumbnail && <CardImageRenderer imageUrl={post.mainThumbnail}
+                    <a rel={'next'} className={'card-link'} title={title}>
+
+                        {!!post.mainThumbnail && <CardImageRenderer imageUrl={post.mainThumbnail}
                                                                   mediaAlt={title}
                                                                   index={index}
                                                                   postsPerRawForMobile={postsPerRawForMobile}
                                                                   cardWidth={cardWidth}/>
                         }
+
                         <header className={'entry-header'}>
                             <span className={'card-header'}>{title}</span>
                         </header>
-                        <div className={'card-under-media-info'}>
-                            {views ?
-                            <CardViews views={views} className={'card-views card-under-media-info-data'}/>
-                                :null
-                            }
-                            {rating ? <CardRating rating={rating} className={'card-rating card-under-media-info-data'}/>
-                                :null
-                            }
 
+                        <div className={'card-under-media-info'}>
+                            {!!views &&
+                                    <CardViews views={views} className={'card-views card-under-media-info-data'}/>
+                            }
+                            {!!rating &&
+                                    <CardRating rating={rating} className={'card-rating card-under-media-info-data'}/>
+                            }
                         </div>
-                        {(post?.updatedAt || post?.createdAt) &&
-                        <CardLastUpdate targetedDate={post?.updatedAt || post?.createdAt}/>
+
+                        {!!(post?.updatedAt || post?.createdAt) &&
+                              <CardLastUpdate targetedDate={post?.updatedAt || post?.createdAt}/>
                         }
 
                     </a>

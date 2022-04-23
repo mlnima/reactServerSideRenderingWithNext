@@ -2,7 +2,7 @@ import React from 'react';
 import dynamic from "next/dynamic";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {useDispatch, useSelector} from "react-redux";
-import {updateSetting} from "@store/clientActions/settingsActions";
+import {updateSetting} from "@store/adminActions/adminPanelSettingsActions";
 import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {adminPanelEditIdentity} from "@store/adminActions/adminPanelSettingsActions";

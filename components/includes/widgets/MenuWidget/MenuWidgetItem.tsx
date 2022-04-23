@@ -7,10 +7,9 @@ import Link from "next/link";
 interface MenuWidgetItemPropTypes {
     menuItem:MenuItem,
     setOpen:any,
-    mobileNavigationOnClickHandler:any
 }
 
-const MenuWidgetItem: FC<MenuWidgetItemPropTypes> = ({menuItem, setOpen, mobileNavigationOnClickHandler}) => {
+const MenuWidgetItem: FC<MenuWidgetItemPropTypes> = ({menuItem, setOpen}) => {
     const {t} = useTranslation(['common', 'customTranslation']);
     const {locale} = useRouter()
 
@@ -20,18 +19,13 @@ const MenuWidgetItem: FC<MenuWidgetItemPropTypes> = ({menuItem, setOpen, mobileN
             t([t(menuItem.name, {ns: 'common'}), t(menuItem.name, {ns: 'customTranslation'})])
     }, [])
 
-    const onClickHandler = ()=>{
-        setOpen(false)
-        mobileNavigationOnClickHandler()
-    }
-
     return (
         <li className={'menu-item'}>
             <Link href={menuItem.target}>
                 <a className={'menu-item-link'}
                    target={menuItem.target.includes('http') ? '_blank' : '_self'}
                    title={linkNameWithTranslate}
-                   onClick={onClickHandler}>
+                   onClick={()=>setOpen(false)}>
 
                     {linkNameWithTranslate}
 
