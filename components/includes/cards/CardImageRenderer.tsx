@@ -55,7 +55,6 @@ const CardImageRenderer: FC<CardImageNextPropTypes> =
         const [gotError, setGotError] = useState(false)
 
         const imageUrlSource = useMemo(() => {
-
             return imageUrl && !isAbsolutePath(imageUrl) ? `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${imageUrl}` : imageUrl
 
         }, [imageUrl, gotError])

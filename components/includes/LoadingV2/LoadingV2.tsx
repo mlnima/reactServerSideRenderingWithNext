@@ -74,19 +74,16 @@ const LoadingV2: FC = () => {
     })
 
     useEffect(() => {
-        if (loading){
-            setTimeout(()=>{
+        if (loading) {
+            setTimeout(() => {
                 dispatch(setLoading(false))
-            },3000)
+            }, 3000)
         }
     }, [loading]);
 
     return (loading) && (
-
-        <StyledDiv className='Loading'>
-            <button className='stop-loading fas fa-times' onClick={() => dispatch(setLoading(false))}>
-                <FontAwesomeIcon style={{width: '1rem', height: '1rem'}} icon={faTimes} className='stop-loading-icon'/>
-            </button>
+        <StyledDiv className='Loading' onClick={() => dispatch(setLoading(false))}
+                   onTouchStartCapture={() => dispatch(setLoading(false))}>
             <ReactLoading type={'spin'} color={'var(--main-active-color,#f90)'} height={100} width={100}/>
         </StyledDiv>
     );
@@ -94,3 +91,6 @@ const LoadingV2: FC = () => {
 };
 
 export default LoadingV2;
+// <button className='stop-loading fas fa-times' onClick={() => dispatch(setLoading(false))}>
+//     <FontAwesomeIcon style={{width: '1rem', height: '1rem'}} icon={faTimes} className='stop-loading-icon'/>
+// </button>
