@@ -39,8 +39,8 @@ const Advertise: FC<AdvertisePropTypes> = ({uniqueData}) => {
     }, [router.pathname, router.query]);
 
 
-    const setAdCode = () =>{
-        if (uniqueData?.adCode){
+    const setAdCode = () => {
+        if (uniqueData?.adCode) {
             setTimeout(() => {
                 setAdCodeData(uniqueData?.adCode)
             }, 500)
@@ -48,14 +48,15 @@ const Advertise: FC<AdvertisePropTypes> = ({uniqueData}) => {
     }
 
 
-    if (adCodeData){
-        return (
-            <AdvertiseStyledDiv>
-                {parse(adCodeData)}
-            </AdvertiseStyledDiv>
-        )
-    }else return null
-
+    return (
+        <AdvertiseStyledDiv>
+            {adCodeData ? parse(adCodeData || '') :
+                <div className='pre-load'>
+                    <span>loading...</span>
+                </div>
+            }
+        </AdvertiseStyledDiv>
+    )
 };
 export default Advertise
 
