@@ -135,47 +135,65 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
         return (
             <VideoPostCardStyle className={'post-card'}
                                 cardWidth={cardWidth}
-                                onMouseEnter={()=>hoverHandler(true)}
-                                onMouseOut={()=>hoverHandler(false)}
-                                onTouchStartCapture={()=>hoverHandler(true)}
-                                onTouchEnd={()=>hoverHandler(false)}>
+                                onMouseEnter={() => hoverHandler(true)}
+                                onMouseOut={() => hoverHandler(false)}
+                                onTouchStartCapture={() => hoverHandler(true)}
+                                onTouchEnd={() => hoverHandler(false)}>
 
                 <Link href={postUrl}>
                     <a rel={'next'} className={'card-link'} title={title}>
 
                         <div className={'video-post-card-media'}>
-                            {hover && post?.videoTrailerUrl ?
-                                <VideoPostCardTrailer videoTrailerUrl={post?.videoTrailerUrl}
-                                                      hoverHandler={hoverHandler}
-                                                      hover={hover}
-                                                      postsPerRawForMobile={postsPerRawForMobile}
-                                                      cardWidth={cardWidth}/> :
-                                post.mainThumbnail ? <CardImageRenderer imageUrl={post.mainThumbnail}
-                                                                        mediaAlt={title}
-                                                                        index={index}
-                                                                        postsPerRawForMobile={postsPerRawForMobile}
-                                                                        cardWidth={cardWidth}/>
-                                    :null
+                            {/*{hover && post?.videoTrailerUrl ?*/}
+                            {/*    <VideoPostCardTrailer videoTrailerUrl={post?.videoTrailerUrl}*/}
+                            {/*                          hoverHandler={hoverHandler}*/}
+                            {/*                          hover={hover}*/}
+                            {/*                          postsPerRawForMobile={postsPerRawForMobile}*/}
+                            {/*                          cardWidth={cardWidth}/> :*/}
+                            {/*    post.mainThumbnail ? <CardImageRenderer imageUrl={post.mainThumbnail}*/}
+                            {/*                                            mediaAlt={title}*/}
+                            {/*                                            index={index}*/}
+                            {/*                                            postsPerRawForMobile={postsPerRawForMobile}*/}
+                            {/*                                            cardWidth={cardWidth}/>*/}
+                            {/*        : null*/}
+                            {/*}*/}
+
+                            {!hover && !!post.mainThumbnail &&
+                               <CardImageRenderer imageUrl={post.mainThumbnail}
+                                               mediaAlt={title}
+                                               index={index}
+                                               postsPerRawForMobile={postsPerRawForMobile}
+                                               cardWidth={cardWidth}/>
                             }
+
+
+                            {hover && post?.videoTrailerUrl &&
+                            <VideoPostCardTrailer videoTrailerUrl={post?.videoTrailerUrl}
+                                                  hoverHandler={hoverHandler}
+                                                  hover={hover}
+                                                  postsPerRawForMobile={postsPerRawForMobile}
+                                                  cardWidth={cardWidth}/>
+                            }
+
 
                             {!!post?.quality && <CardQuality quality={_qualityConvertor(post?.quality)}
                                                              className={'card-quality video-card-info-data'}/>
                             }
 
                             {!!post?.duration && <CardDuration duration={post?.duration}
-                                                             className={'card-duration video-card-info-data'}/>
+                                                               className={'card-duration video-card-info-data'}/>
                             }
                         </div>
                     </a>
                 </Link>
 
-                {/*{(!!post?.actors?.length || !!post?.updatedAt|| !!post?.createdAt) &&*/}
-                {/*    <VideoPostCardActors actors={post?.actors}*/}
-                {/*                         hover={hover}*/}
-                {/*                         updatedAt={post?.updatedAt}*/}
-                {/*                         createdAt={post?.createdAt}*/}
-                {/*    />*/}
-                {/*}*/}
+                {(!!post?.actors?.length || !!post?.updatedAt || !!post?.createdAt) &&
+                <VideoPostCardActors actors={post?.actors}
+                                     hover={hover}
+                                     updatedAt={post?.updatedAt}
+                                     createdAt={post?.createdAt}
+                />
+                }
 
                 <Link href={postUrl}>
                     <a rel={'next'} className={'card-link'} title={title}>
@@ -187,10 +205,10 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
                         <div className={'card-under-media-info'}>
 
                             {!!views && views >= 10 &&
-                                 <CardViews views={views} className={'card-views card-under-media-info-data'}/>
+                            <CardViews views={views} className={'card-views card-under-media-info-data'}/>
                             }
                             {!!rating &&
-                                  <CardRating rating={rating} className={'card-rating card-under-media-info-data'}/>
+                            <CardRating rating={rating} className={'card-rating card-under-media-info-data'}/>
                             }
 
                         </div>
