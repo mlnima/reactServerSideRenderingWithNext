@@ -110,6 +110,7 @@ const AdminHomePage:FC = () => {
         <AdminHomePageStyledDiv>
             <h1>Dashboard</h1>
             <h2>Your IP is: {ip}</h2>
+            <h2>ENV : {process.env.NODE_ENV}</h2>
             <div className={'quick-access'}  aria-label="outlined button group">
                 <h2>Quick Access</h2>
                 <div className={'quick-access-items'}>
