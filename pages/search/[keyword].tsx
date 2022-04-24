@@ -75,7 +75,8 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         {
             setHeadData: true,
             page: 'search'
-        }
+        },
+        store
     ))
     // @ts-ignore
     await store.dispatch(getPosts(context, null, true,null))

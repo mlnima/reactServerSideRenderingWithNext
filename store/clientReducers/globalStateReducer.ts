@@ -29,7 +29,10 @@ export const globalStateReducer = (state= initialState , action : {type:string,p
     switch (action.type){
         // console.log(state)
         case HYDRATE:
-
+            // console.log({
+            //     ...state,
+            //     ...action.payload.globalState
+            // })
             return {
                 ...state,
                 ...action.payload.globalState

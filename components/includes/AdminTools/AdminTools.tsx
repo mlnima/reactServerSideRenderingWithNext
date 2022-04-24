@@ -53,7 +53,7 @@ let StyledDiv = styled.div`
 `
 
 const AdminTools: FC = () => {
-
+    const nodeRef = React.useRef(null);
     const dispatch = useDispatch()
     const router = useRouter()
     const [open, setOpen] = useState(false)
@@ -61,10 +61,10 @@ const AdminTools: FC = () => {
     return (
         //@ts-ignore
 
-            <Draggable handle={'.open-button'}>
-                <StyledDiv className='admin-tools'>
+            <Draggable nodeRef={nodeRef}>
+                <StyledDiv className='admin-tools' ref={nodeRef}>
                     <button className='admin-tools-item open-button'
-                            onClick={() => setOpen(!open)}
+                            onDoubleClick={() => setOpen(!open)}
                             onTouchStartCapture={() => setOpen(!open)}>
                         <FontAwesomeIcon icon={faCogs} className='admin-tools-item-logo'/>
                     </button>

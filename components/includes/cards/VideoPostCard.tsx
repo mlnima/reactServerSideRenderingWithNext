@@ -29,7 +29,7 @@ interface VideoPostCardStylePropTypes {
 }
 
 const VideoPostCardStyle = styled.article`
-  background-color: var(--post-element-background-color, #131314);
+  background: var(--post-element-background, #131314);
   margin: 0 auto;
   width: 100%;
 
@@ -127,18 +127,18 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
 
         const [hover, setHover] = useState(null)
 
-        const hoverHandler = () => {
-            hover ? setHover(false) : setHover(true)
+        const hoverHandler = (status) => {
+            setHover(status)
         }
 
 
         return (
             <VideoPostCardStyle className={'post-card'}
                                 cardWidth={cardWidth}
-                                onMouseEnter={hoverHandler}
-                                onMouseOut={hoverHandler}
-                                onTouchStartCapture={hoverHandler}
-                                onTouchEnd={hoverHandler}>
+                                onMouseEnter={()=>hoverHandler(true)}
+                                onMouseOut={()=>hoverHandler(false)}
+                                onTouchStartCapture={()=>hoverHandler(true)}
+                                onTouchEnd={()=>hoverHandler(false)}>
 
                 <Link href={postUrl}>
                     <a rel={'next'} className={'card-link'} title={title}>
@@ -158,13 +158,13 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
                                     :null
                             }
 
-                            {!!post?.quality && <CardQuality quality={_qualityConvertor(post?.quality)}
-                                                             className={'card-quality video-card-info-data'}/>
-                            }
+                            {/*{!!post?.quality && <CardQuality quality={_qualityConvertor(post?.quality)}*/}
+                            {/*                                 className={'card-quality video-card-info-data'}/>*/}
+                            {/*}*/}
 
-                            {!!post?.duration && <CardDuration duration={post?.duration}
-                                                             className={'card-duration video-card-info-data'}/>
-                            }
+                            {/*{!!post?.duration && <CardDuration duration={post?.duration}*/}
+                            {/*                                 className={'card-duration video-card-info-data'}/>*/}
+                            {/*}*/}
                         </div>
                     </a>
                 </Link>

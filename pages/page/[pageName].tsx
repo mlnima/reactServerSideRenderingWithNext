@@ -32,7 +32,10 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             context.query.pageName as string,
             context.query.pageName + 'LeftSidebar',
             context.query.pageName + 'RightSidebar'
-        ]))
+        ],
+        null ,
+        store
+    ))
 
     await store.dispatch(getPageData(context.query.pageName))
 

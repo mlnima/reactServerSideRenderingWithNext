@@ -72,7 +72,8 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         {
             setHeadData: true,
             page: 'actors'
-        }
+        },
+        store
     ))
     // @ts-ignore
     await store.dispatch(getMetas(context.query, 'actors', true))

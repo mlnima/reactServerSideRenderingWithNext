@@ -7,6 +7,7 @@ import {adminPanelFileManagerReducer} from "@store/adminReducers/adminPanelFileM
 
 // SETTINGS
 export interface DesignSettings {
+    cardsCustomStyle: string;
     postsPerRawForMobile: number;
     cardWidthDesktop: number;
     sideBarWidth: number,

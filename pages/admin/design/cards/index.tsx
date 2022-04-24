@@ -8,7 +8,7 @@ import {adminPanelEditDesign} from "@store/adminActions/adminPanelSettingsAction
 
 const StyleSection = dynamic(() => import('@components/adminIncludes/design/StyleSection/StyleSection'), {ssr: false});
 
-const postElement = () => {
+const cards = () => {
     const design = useSelector(({adminPanelSettings}: StoreTypes) => adminPanelSettings?.design)
     const dispatch = useDispatch()
 
@@ -66,7 +66,7 @@ const postElement = () => {
                 : null
             }
 
-            <StyleSection name='postElementStyle' title='PostElement Design :'/>
+            <StyleSection name='cardsCustomStyle' title='Cards Custom Style:'/>
         </>
     );
 };
@@ -80,4 +80,4 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 })
 
 
-export default postElement;
+export default cards;

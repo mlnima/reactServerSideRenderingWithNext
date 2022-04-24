@@ -67,7 +67,9 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             'postPageLeftSidebar',
             'postPageRightSidebar',
             'underPost'
-        ]
+        ],
+        null,
+        store
     ))
 
 //@ts-ignore

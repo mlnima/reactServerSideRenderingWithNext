@@ -53,7 +53,8 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         {
             setHeadData: true,
             page: 'posts'
-        }
+        },
+        store
     ))
 
     // @ts-ignore

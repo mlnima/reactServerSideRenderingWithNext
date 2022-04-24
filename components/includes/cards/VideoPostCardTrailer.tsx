@@ -77,8 +77,8 @@ const VideoPostCardTrailer: FC<VideoPostCardMediaPropTypes> =
             <VideoPostCardTrailerStyle postsPerRawForMobile={postsPerRawForMobile} cardWidth={cardWidth}>
                 <video ref={videoTrailer}
                        loop={false}
-                       onMouseOut={hoverHandler}
-                       onTouchEnd={hoverHandler}
+                       onMouseOut={()=>hoverHandler(false)}
+                       onTouchEnd={()=>hoverHandler(false)}
                        muted
                        playsInline
                        className={'video-card-trailer'}>

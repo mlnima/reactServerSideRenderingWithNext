@@ -14,6 +14,7 @@ interface CategoriesRendererPropTypes {
 interface CategoriesContentStyledDivPropTypes {
     postsPerRawForMobile: number,
     cardWidth: number,
+    cardsCustomStyle: string,
 }
 
 
@@ -37,16 +38,18 @@ let CategoriesRendererStyledDiv = styled.div`
     grid-gap: 10px;
     grid-template-columns: repeat(auto-fill, minmax(${({cardWidth}: CategoriesContentStyledDivPropTypes) => `${cardWidth}px`}, 1fr));
   }
+  ${({cardsCustomStyle}:CategoriesContentStyledDivPropTypes)=>cardsCustomStyle||''}
 `
 
 
 const CategoriesRenderer: FC<CategoriesRendererPropTypes> = ({ uniqueData}) => {
 
-    const {categoriesMetas, postsPerRawForMobile, cardWidth} =
+    const {categoriesMetas, postsPerRawForMobile, cardWidth,cardsCustomStyle} =
         useSelector(({settings, posts}: StoreTypes) => {
             return {
                 categoriesMetas: uniqueData?.metaData ? uniqueData?.metaData : posts?.categoriesMetas,
                 postsPerRawForMobile: settings?.design?.postsPerRawForMobile || 2,
+                cardsCustomStyle:settings.design.cardsCustomStyle|| '',
                 cardWidth:settings?.design?.cardWidthDesktop || 255,
             }
         })
@@ -54,6 +57,7 @@ const CategoriesRenderer: FC<CategoriesRendererPropTypes> = ({ uniqueData}) => {
     return (
         <CategoriesRendererStyledDiv className={'categories-block'}
                                      cardWidth={cardWidth}
+                                     cardsCustomStyle={cardsCustomStyle}
                                      postsPerRawForMobile={postsPerRawForMobile}>
 
             {categoriesMetas.map((category, index) => {

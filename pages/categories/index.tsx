@@ -78,7 +78,8 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         {
             setHeadData: true,
             page: 'categories'
-        }
+        },
+        store
     ))
     // @ts-ignore
     await store.dispatch(getMetas(context.query, 'categories', true))

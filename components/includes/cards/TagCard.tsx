@@ -7,7 +7,7 @@ import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
 import CardImageRenderer from "@components/includes/cards/CardImageRenderer";
 
 const TagCardStyle = styled.article`
-  background-color: var(--post-element-background-color, #131314);
+  background: var(--post-element-background, #131314);
   width: 100%;
   margin: 0 auto;
 
@@ -72,7 +72,7 @@ const TagCard: FC<TagCardPropTypes> =
         }, [tag?.name]);
 
         return (
-            <TagCardStyle cardWidth={cardWidth}>
+            <TagCardStyle cardWidth={cardWidth} className={'tag-card'}>
                 <Link href={`/tag/${tag?._id}`}>
                     <a className='tag-card-link' title={cardTitle as string}>
                         <CardImageRenderer imageUrl={tag.imageUrl}

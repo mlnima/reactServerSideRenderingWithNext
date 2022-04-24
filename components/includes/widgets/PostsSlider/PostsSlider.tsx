@@ -36,7 +36,7 @@ const PostsSliderStyledDiv = styled.div`
         margin: 5px;
         max-width: 96vw;
         height:auto;
-        background-color: var(--post-element-background-color, #131314);
+        background: var(--post-element-background, #131314);
       }
     }
   }

@@ -9,7 +9,7 @@ import {
     CLOSE_ALERT, GET_SETTINGS,
     LOADING,
     LOGIN_REGISTER_FORM,
-    SET_ALERT, SET_HEAD_DATA,
+    SET_ALERT, SET_HEAD_DATA, SET_REQUESTED_WIDGETS,
     SET_WIDGETS_IN_GROUPS
 } from "@store/types";
 import {getTextDataWithTranslation,  isAppleMobileDevice} from "@_variables/_variables";
@@ -74,7 +74,8 @@ export const hydrateGlobalState = (data):AnyAction  => dispatch => {
 
 export const getDefaultPageData =
     //@ts-ignore
-    (context: GetServerSidePropsContext, dynamicWidgets: string[], options?: { page: string, setHeadData: boolean }):AnyAction  => async dispatch => {
+    (context: GetServerSidePropsContext, dynamicWidgets: string[], options?: { page: string, setHeadData: boolean },store?:any):AnyAction  => async dispatch => {
+
         const userAgent = context.req.headers['user-agent'];
         const { isMobile } = getSelectorsByUserAgent(userAgent)
         let isDefaultDataSet = false
@@ -203,18 +204,36 @@ export const getDefaultPageData =
 
 
         if (dynamicWidgets?.length) {
-            await Axios.get(`/api/v1/widgets/getMultipleWidgetWithData${_getMultipleWidgetWithDataQueryGenerator(dynamicWidgets, cache, context.locale)}`
-            ).then(res => {
-                dispatch({
-                    type: SET_WIDGETS_IN_GROUPS,
-                    payload: [...(res.data?.widgets || []), ...staticWidgets]
+
+            const prevStore = store?.getState()
+            const existingWidgets = prevStore.widgets?.requestedWidgets
+            const difference = dynamicWidgets.filter(x => !existingWidgets.includes(x));
+
+           //  console.log('existingWidgets',existingWidgets)
+           //  console.log('dynamicWidgets',dynamicWidgets)
+           console.log('difference',difference)
+
+            if (difference.length){
+                await Axios.get(`/api/v1/widgets/getMultipleWidgetWithData${_getMultipleWidgetWithDataQueryGenerator(difference, cache, context.locale)}`
+                ).then(res => {
+                    dispatch({
+                        type:SET_REQUESTED_WIDGETS,
+                        payload:dynamicWidgets
+                    })
+
+                    dispatch({
+                        type: SET_WIDGETS_IN_GROUPS,
+                        payload: [...(res.data?.widgets || []), ...staticWidgets]
+                    })
+                }).catch(err => {
+                    dispatch({
+                        type: SET_WIDGETS_IN_GROUPS,
+                        payload: staticWidgets || []
+                    })
                 })
-            }).catch(err => {
-                dispatch({
-                    type: SET_WIDGETS_IN_GROUPS,
-                    payload: staticWidgets || []
-                })
-            })
+            }
+
+
         } else {
             dispatch({
                 type: SET_WIDGETS_IN_GROUPS,

@@ -7,6 +7,7 @@ import TagCard from "@components/includes/cards/TagCard";
 interface TagsRenderContentStyledDivPropTypes {
     postsPerRawForMobile: number,
     cardWidth: number,
+    cardsCustomStyle: string
 }
 
 let TagsRendererStyledDiv = styled.div`
@@ -22,6 +23,7 @@ let TagsRendererStyledDiv = styled.div`
     grid-gap: 10px;
     grid-template-columns: repeat(auto-fill, minmax(${({cardWidth}: TagsRenderContentStyledDivPropTypes) => `${cardWidth}px`}, 1fr));
   }
+  ${({cardsCustomStyle}:TagsRenderContentStyledDivPropTypes)=>cardsCustomStyle||''}
 `
 
 interface TagsRendererPropTypes {
@@ -33,16 +35,20 @@ interface TagsRendererPropTypes {
 
 const TagsRenderer: FC<TagsRendererPropTypes> = ({uniqueData}) => {
 
-    const {tagsMetas, postsPerRawForMobile, cardWidth} = useSelector(({settings, posts}: StoreTypes) => {
+    const {tagsMetas, postsPerRawForMobile, cardWidth,cardsCustomStyle} = useSelector(({settings, posts}: StoreTypes) => {
         return {
             tagsMetas: uniqueData?.metaData ? uniqueData?.metaData : posts?.tagsMetas,
             postsPerRawForMobile: settings?.design?.postsPerRawForMobile || 2,
+            cardsCustomStyle:settings.design.cardsCustomStyle|| '',
             cardWidth: settings?.design?.cardWidthDesktop || 255,
         }
     })
 
     return (
-        <TagsRendererStyledDiv className='tags-block' cardWidth={cardWidth} postsPerRawForMobile={postsPerRawForMobile}>
+        <TagsRendererStyledDiv className='tags-block'
+                               cardWidth={cardWidth}
+                               cardsCustomStyle={cardsCustomStyle}
+                               postsPerRawForMobile={postsPerRawForMobile}>
 
             {tagsMetas.map((tag, index) => {
                 return (

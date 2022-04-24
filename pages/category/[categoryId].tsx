@@ -79,7 +79,10 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             'categoryPageLeftSidebar',
             'categoryPageBottom',
             'categoryPageRightSidebar'
-        ]))
+        ],
+        null,
+        store
+    ))
 
     // @ts-ignore
     await store.dispatch(getPosts(context, context.query.categoryId, true, 'categories', {page: 'category'}))

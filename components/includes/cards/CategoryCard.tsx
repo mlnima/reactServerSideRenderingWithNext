@@ -7,7 +7,7 @@ import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
 import CardImageRenderer from "@components/includes/cards/CardImageRenderer";
 
 const CategoryCardStyle = styled.article`
-  background-color: var(--post-element-background-color, #131314);
+  background: var(--post-element-background, #131314);
   width: 100%;
   margin: 0 auto;
 
@@ -72,7 +72,7 @@ const CategoryCard: FC<CategoryCardPropTypes> =
         }, [category?.name]);
 
         return (
-            <CategoryCardStyle cardWidth={cardWidth}>
+            <CategoryCardStyle cardWidth={cardWidth} className={'category-card'}>
                 <Link href={`/category/${category?._id}`}>
                     <a className='category-card-link' title={cardTitle as string}>
                         <CardImageRenderer imageUrl={category.imageUrl}

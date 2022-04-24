@@ -7,6 +7,7 @@ import ActorCard from "@components/includes/cards/ActorCard";
 interface ActorsContentStyledDivPropTypes {
     postsPerRawForMobile: number,
     cardWidth: number,
+    cardsCustomStyle: string,
 }
 
 let ActorsRendererStyledDiv = styled.div`
@@ -21,6 +22,7 @@ let ActorsRendererStyledDiv = styled.div`
     grid-gap: 30px;
     grid-template-columns: repeat(auto-fill, minmax(${({cardWidth}: ActorsContentStyledDivPropTypes) => `${cardWidth}px`}, 1fr));
   }
+  ${({cardsCustomStyle}:ActorsContentStyledDivPropTypes)=>cardsCustomStyle||''}
 `
 
 interface ActorsRendererPropTypes {
@@ -34,11 +36,12 @@ const ActorsRenderer: FC<ActorsRendererPropTypes> = ({uniqueData}) => {
 
 
 
-    const {cardWidth, postsPerRawForMobile, actorsMetas} = useSelector(
+    const {cardWidth, postsPerRawForMobile, actorsMetas,cardsCustomStyle} = useSelector(
         ({settings, posts}: StoreTypes) => {
             return {
                 postsPerRawForMobile: settings?.design?.postsPerRawForMobile || 2,
                 actorsMetas: uniqueData?.metaData || posts?.actorsMetas || [],
+                cardsCustomStyle:settings.design.cardsCustomStyle|| '',
                 cardWidth: 140,
             }
         })
@@ -46,6 +49,7 @@ const ActorsRenderer: FC<ActorsRendererPropTypes> = ({uniqueData}) => {
     return (
         <ActorsRendererStyledDiv className='actors-content'
                                  cardWidth={cardWidth}
+                                 cardsCustomStyle={cardsCustomStyle}
                                  postsPerRawForMobile={postsPerRawForMobile}>
 
             {actorsMetas.map((actor, index) => {

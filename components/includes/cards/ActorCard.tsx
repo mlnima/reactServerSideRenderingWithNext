@@ -7,7 +7,7 @@ import CardImageRenderer from "@components/includes/cards/CardImageRenderer";
 import {useTranslation} from "next-i18next";
 
 const ActorCardStyle = styled.article`
-  background-color: var(--post-element-background-color, #131314);
+  background: var(--post-element-background, #131314);
   width: 100%;
   margin: 20px auto;
   font-size: 15px;
@@ -98,7 +98,7 @@ const ActorCard: FC<ActorCardPropTypes> =
         const actorName = capitalizeFirstLetter(actor?.name)
 
         return (
-            <ActorCardStyle cardWidth={cardWidth}>
+            <ActorCardStyle cardWidth={cardWidth} className={'actor-card'}>
                 <Link href={`/actor/${actor?._id}`}>
                     <a className='actor-card-link' title={actorName as string}>
                         <CardImageRenderer imageUrl={actor.imageUrl}

@@ -1,4 +1,3 @@
-//@ts-nocheck
 import Link from "next/link";
 import convertVariableNameToName from "../../../_variables/util/convertVariableNameToName";
 import withRouter from 'next/dist/client/with-router'
@@ -164,7 +163,7 @@ const AdminPanelMainMenu = () => {
                 {name: 'tagsPage', url: '/admin/design/tagsPage'},
 
                 {name: 'metasPage', url: '/admin/design/metasPage'},
-                {name: 'postElement', url: '/admin/design/postElement'},
+                {name: 'cards', url: '/admin/design/cards'},
                 {name: 'footer', url: '/admin/design/footer'},
                 {name: 'customStyles', url: '/admin/design/customStyles'},
                 {name: 'customColors', url: '/admin/design/customColors'},

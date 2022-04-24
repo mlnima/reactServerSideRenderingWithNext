@@ -77,7 +77,8 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             'tagPageLeftSidebar',
             'tagPageBottom',
             'tagPageRightSidebar'
-        ]))
+        ],null,
+        store))
 
     // @ts-ignore
     await store.dispatch(getPosts(context, context.query.tagId, true, 'tags', {page: 'tag'}))

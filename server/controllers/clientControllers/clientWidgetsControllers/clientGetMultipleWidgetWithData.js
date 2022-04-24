@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
         const locale = req.query.locale
         const locales = process.env.NEXT_PUBLIC_LOCALS.split(' ')
         const excludeOtherLanguagesQuery = locale ? {select: locales.map(languageCode => languageCode !== locale ? `-data.translations.${languageCode}` : '').join(' ')} : {}
-        const requestedWidgets = Array.isArray(req.query.widget.isArray) ? req.query.widget : [req.query.widget]
+        const requestedWidgets = Array.isArray(req.query.widget) ? req.query.widget : [req.query.widget]
         const widgetsDataQuery = requestedWidgets.map(position => position === 'all' ? {} : {'data.position': position})
         const widgets = await widgetSchema.find(
             {$or: [...widgetsDataQuery]},

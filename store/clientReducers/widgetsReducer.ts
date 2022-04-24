@@ -1,24 +1,33 @@
 import {HYDRATE} from 'next-redux-wrapper';
 import _reduceWidgetsToGroups from "../../_variables/_reduceWidgetsToGroups/_reduceWidgetsToGroups";
-import {SET_WIDGETS, SET_WIDGETS_IN_GROUPS} from "@store/types";
+import {SET_REQUESTED_WIDGETS, SET_WIDGETS, SET_WIDGETS_IN_GROUPS} from "@store/types";
 // import {findIndex} from 'lodash'
 import {
     DELETE_WIDGET,
     UPDATE_WIDGET
 } from "@store/adminTypes";
+import {object} from "prop-types";
 
 const initialState = {
-    widgets: [],
-    widgetInGroups:{}
+    widgetInGroups:{},
+    requestedWidgets:[]
 }
 
+// ...action?.payload?.widgets || [],
+// widgetInGroups:{
+//     ...state.widgetInGroups,
+//     // ...action?.payload?.widgetInGroups
+// }
 export const widgetsReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case HYDRATE:
             return {
                 ...state,
-                ...action?.payload?.widgets || []
+                widgetInGroups:{
+                    ...state.widgetInGroups,
+                    ...action?.payload?.widgets?.widgetInGroups || {},
+                }
             };
         case  SET_WIDGETS:
             return {
@@ -33,6 +42,12 @@ export const widgetsReducer = (state = initialState, action) => {
                     ..._reduceWidgetsToGroups(action?.payload)
                 }
             }
+        case SET_REQUESTED_WIDGETS:
+            return {
+                ...state,
+                requestedWidgets: [...new Set([...state.requestedWidgets,...action.payload])]
+            }
+
         // case  SET_WIDGETS_FOR_ADMIN:
         //     return{
         //        ...state,
@@ -44,20 +59,7 @@ export const widgetsReducer = (state = initialState, action) => {
         //         ...state,
         //         widgets: [...state.widgets, action.payload]
         //     };
-        case UPDATE_WIDGET:
-           // const index =  findIndex(state.widgets, {_id: action.payload._id});
-            const index = state.widgets.findIndex(widget=>widget._id === action.payload._id);
-            const currentWidgets = state.widgets;
-            currentWidgets.splice(index, 1, action.payload);
-            return {
-                ...state,
-                widgets: currentWidgets
-            };
-        case DELETE_WIDGET:
-            return {
-                ...state,
-                widgets: state.widgets.filter(widget => widget._id !== action.payload)
-            };
+
         default:
             return state
     }

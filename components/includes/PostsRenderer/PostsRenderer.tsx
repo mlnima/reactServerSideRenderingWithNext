@@ -1,10 +1,9 @@
-import {FC, useEffect} from "react";
+import {FC} from "react";
 import dynamic from "next/dynamic";
 import {useRouter} from "next/router";
 import _shortNumber from '../../../_variables/clientVariables/_shortNumber'
 import styled from "styled-components";
-import {useDispatch, useSelector} from "react-redux";
-import {setLoading} from "@store/clientActions/globalStateActions";
+import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import ratingCalculator from "@_variables/util/ratingCalculator";
@@ -33,6 +32,7 @@ interface PostsComponentTypes {
 interface PostsContentStyledDivPropTypes {
     postsPerRawForMobile?: number,
     cardWidth?: number,
+    cardsCustomStyle:string
 }
 
 const PostsContentStyledDiv = styled.div`
@@ -42,11 +42,12 @@ const PostsContentStyledDiv = styled.div`
   margin: auto;
   grid-gap: 5px;
   grid-template-columns: repeat(auto-fill, minmax(${({postsPerRawForMobile}: PostsContentStyledDivPropTypes) => `${96 / postsPerRawForMobile}`}vw, 2fr));
-
+  
   @media only screen and (min-width: 768px) {
     grid-gap: 15px 10px;
     grid-template-columns: repeat(auto-fill, minmax(${({cardWidth}: PostsContentStyledDivPropTypes) => `${cardWidth}px`}, 1fr));
   }
+  ${({cardsCustomStyle}:PostsContentStyledDivPropTypes)=>cardsCustomStyle||''}
 `
 
 
@@ -57,12 +58,12 @@ const PostsRenderer: FC<PostsComponentTypes> =
          isSidebar
      }) => {
 
-        const dispatch = useDispatch()
         const {locale} = useRouter()
 
-        const {cardWidth, postsPerRawForMobile} = useSelector(({settings}: StoreTypes) => {
+        const {cardWidth, postsPerRawForMobile,cardsCustomStyle} = useSelector(({settings}: StoreTypes) => {
             return {
                 cardWidth: settings?.design?.cardWidthDesktop || 255,
+                cardsCustomStyle:settings.design.cardsCustomStyle|| '',
                 postsPerRawForMobile: settings?.design?.postsPerRawForMobile || 2,
             }
         });
@@ -72,6 +73,7 @@ const PostsRenderer: FC<PostsComponentTypes> =
             <PostsContentStyledDiv className={'posts-content'}
                                    postsPerRawForMobile={postsPerRawForMobile}
                                    cardWidth={cardWidth}
+                                   cardsCustomStyle={cardsCustomStyle}
             >
                 {(uniqueData?.posts || posts || []).map((post: PostTypes, index: number) => {
 

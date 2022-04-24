@@ -86,7 +86,9 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             'actorPageLeftSidebar',
             'actorPageBottom',
             'actorPageRightSidebar'
-        ]
+        ],
+        null,
+        store
     ))
 //@ts-ignore
     await store.dispatch(getPosts(context, context.query.actorId, true, 'actors', {page: 'actor'}))

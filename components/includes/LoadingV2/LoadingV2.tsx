@@ -57,8 +57,7 @@ const LoadingV2: FC = () => {
 
 
     useEffect(() => {
-        // const handleStart = (url) => (url !== asPath) && setRender(true);
-        // const handleComplete = (url) => (url === asPath) && setRender(false);
+
         const handleStart = (url) => (url !== asPath) && dispatch(setLoading(true));
         const handleComplete = (url) => (url === asPath) && dispatch(setLoading(false));
 
