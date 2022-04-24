@@ -158,13 +158,13 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
                                     :null
                             }
 
-                            {/*{!!post?.quality && <CardQuality quality={_qualityConvertor(post?.quality)}*/}
-                            {/*                                 className={'card-quality video-card-info-data'}/>*/}
-                            {/*}*/}
+                            {!!post?.quality && <CardQuality quality={_qualityConvertor(post?.quality)}
+                                                             className={'card-quality video-card-info-data'}/>
+                            }
 
-                            {/*{!!post?.duration && <CardDuration duration={post?.duration}*/}
-                            {/*                                 className={'card-duration video-card-info-data'}/>*/}
-                            {/*}*/}
+                            {!!post?.duration && <CardDuration duration={post?.duration}
+                                                             className={'card-duration video-card-info-data'}/>
+                            }
                         </div>
                     </a>
                 </Link>
@@ -186,12 +186,12 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
 
                         <div className={'card-under-media-info'}>
 
-                            {!!views && views >= 10 &&
-                                 <CardViews views={views} className={'card-views card-under-media-info-data'}/>
-                            }
-                            {!!rating &&
-                                  <CardRating rating={rating} className={'card-rating card-under-media-info-data'}/>
-                            }
+                            {/*{!!views && views >= 10 &&*/}
+                            {/*     <CardViews views={views} className={'card-views card-under-media-info-data'}/>*/}
+                            {/*}*/}
+                            {/*{!!rating &&*/}
+                            {/*      <CardRating rating={rating} className={'card-rating card-under-media-info-data'}/>*/}
+                            {/*}*/}
 
                         </div>
 
