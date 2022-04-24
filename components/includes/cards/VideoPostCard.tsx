@@ -169,13 +169,13 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
                     </a>
                 </Link>
 
-                {(!!post?.actors?.length || !!post?.updatedAt|| !!post?.createdAt) &&
-                    <VideoPostCardActors actors={post?.actors}
-                                         hover={hover}
-                                         updatedAt={post?.updatedAt}
-                                         createdAt={post?.createdAt}
-                    />
-                }
+                {/*{(!!post?.actors?.length || !!post?.updatedAt|| !!post?.createdAt) &&*/}
+                {/*    <VideoPostCardActors actors={post?.actors}*/}
+                {/*                         hover={hover}*/}
+                {/*                         updatedAt={post?.updatedAt}*/}
+                {/*                         createdAt={post?.createdAt}*/}
+                {/*    />*/}
+                {/*}*/}
 
                 <Link href={postUrl}>
                     <a rel={'next'} className={'card-link'} title={title}>
@@ -186,12 +186,12 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
 
                         <div className={'card-under-media-info'}>
 
-                            {/*{!!views && views >= 10 &&*/}
-                            {/*     <CardViews views={views} className={'card-views card-under-media-info-data'}/>*/}
-                            {/*}*/}
-                            {/*{!!rating &&*/}
-                            {/*      <CardRating rating={rating} className={'card-rating card-under-media-info-data'}/>*/}
-                            {/*}*/}
+                            {!!views && views >= 10 &&
+                                 <CardViews views={views} className={'card-views card-under-media-info-data'}/>
+                            }
+                            {!!rating &&
+                                  <CardRating rating={rating} className={'card-rating card-under-media-info-data'}/>
+                            }
 
                         </div>
 
