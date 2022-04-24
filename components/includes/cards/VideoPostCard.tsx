@@ -141,22 +141,9 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
                                 onTouchEnd={() => hoverHandler(false)}>
 
                 <Link href={postUrl}>
-                    <a rel={'next'} className={'card-link'} title={title}>
+                    <a className={'card-link'} title={title}>
 
                         <div className={'video-post-card-media'}>
-                            {/*{hover && post?.videoTrailerUrl ?*/}
-                            {/*    <VideoPostCardTrailer videoTrailerUrl={post?.videoTrailerUrl}*/}
-                            {/*                          hoverHandler={hoverHandler}*/}
-                            {/*                          hover={hover}*/}
-                            {/*                          postsPerRawForMobile={postsPerRawForMobile}*/}
-                            {/*                          cardWidth={cardWidth}/> :*/}
-                            {/*    post.mainThumbnail ? <CardImageRenderer imageUrl={post.mainThumbnail}*/}
-                            {/*                                            mediaAlt={title}*/}
-                            {/*                                            index={index}*/}
-                            {/*                                            postsPerRawForMobile={postsPerRawForMobile}*/}
-                            {/*                                            cardWidth={cardWidth}/>*/}
-                            {/*        : null*/}
-                            {/*}*/}
 
                             {!hover && !!post.mainThumbnail &&
                                <CardImageRenderer imageUrl={post.mainThumbnail}
@@ -167,7 +154,7 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
                             }
 
 
-                            {hover && post?.videoTrailerUrl &&
+                            {hover && !!post?.videoTrailerUrl &&
                             <VideoPostCardTrailer videoTrailerUrl={post?.videoTrailerUrl}
                                                   hoverHandler={hoverHandler}
                                                   hover={hover}

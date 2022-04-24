@@ -139,7 +139,7 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
                 <div className={'logged-items'}>
                     {pathname.includes('/messenger') || pathname.includes('/chatroom') ?
                         <Link href={`/`}>
-                            <a rel='next' className='logged-item logged-in' onClick={onOpenCloseHandler}>
+                            <a className='logged-item logged-in' onClick={onOpenCloseHandler}>
                                 <div className={'icon-wrapper'}>
                                     <span className={'home-button icon'}/>
                                 </div>

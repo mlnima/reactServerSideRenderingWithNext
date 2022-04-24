@@ -87,7 +87,7 @@ const LearnPostCard: FC<LearnPostCardPropTypes> =
         return (
             <LearnPostCardStyle className={'post-card'} cardWidth={cardWidth}>
                 <Link href={postUrl}>
-                    <a rel={'next'} className={'card-link'} title={title}>
+                    <a className={'card-link'} title={title}>
 
                         {!!post.mainThumbnail && <CardImageRenderer imageUrl={post.mainThumbnail}
                                                                   mediaAlt={title}

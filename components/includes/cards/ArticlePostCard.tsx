@@ -88,7 +88,7 @@ const ArticlePostCard: FC<ArticlePostCardPropTypes> =
         return (
             <ArticlePostCardStyle className={'post-card'} cardWidth={cardWidth}>
                 <Link href={postUrl}>
-                    <a rel={'next'} className={'card-link'} title={title}>
+                    <a className={'card-link'} title={title}>
                         {post.mainThumbnail &&
                         <CardImageRenderer imageUrl={post.mainThumbnail}
                                            mediaAlt={title}

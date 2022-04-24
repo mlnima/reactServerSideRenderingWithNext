@@ -102,7 +102,7 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
                 </a>
 
                 <Link href={postUrl}>
-                    <a rel={'next'} className={'card-link'} title={title}>
+                    <a className={'card-link'} title={title}>
 
                         <header className={'entry-header'}>
                             <span className={'card-header'}>{title}</span>
