@@ -60,14 +60,23 @@ const VideoPostCardTrailer: FC<VideoPostCardMediaPropTypes> =
         const videoTrailerUrlSource = useMemo(() => videoTrailerUrl, [videoTrailerUrl])
 
         useEffect(() => {
-            hover && videoTrailer?.current ?
-                playTrailer() :
-                null
+            (hover && videoTrailer?.current) && playTrailer()
         }, [hover]);
 
         const playTrailer = () => {
             try {
-                videoTrailer?.current?.play()
+                setTimeout(()=>{
+                    videoTrailer?.current?.play()
+                },100)
+
+            } catch (err) {
+
+            }
+        }
+
+        const pauseTrailer  = ()=>{
+            try {
+                videoTrailer?.current?.pause()
             } catch (err) {
 
             }
@@ -77,6 +86,7 @@ const VideoPostCardTrailer: FC<VideoPostCardMediaPropTypes> =
             <VideoPostCardTrailerStyle postsPerRawForMobile={postsPerRawForMobile} cardWidth={cardWidth}>
                 <video ref={videoTrailer}
                        loop={false}
+                       onMouseDown={pauseTrailer}
                        onMouseOut={()=>hoverHandler(false)}
                        onTouchEnd={()=>hoverHandler(false)}
                        muted

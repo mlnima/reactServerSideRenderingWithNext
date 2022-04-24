@@ -103,6 +103,7 @@ const StyledDiv = styled.div`
 `
 
 const AlertBox = () => {
+    const nodeRef = React.useRef(null);
     const {t} = useTranslation(['common', 'customTranslation', 'profile']);
     const dispatch = useDispatch();
     const alert = useSelector((store: StoreTypes) => store?.globalState?.alert);
@@ -121,9 +122,9 @@ const AlertBox = () => {
     return (
         <StyledDiv className='alert-box' onClick={() => dispatch(closeAlert())}>
             {/*//@ts-ignore*/}
-            <Draggable handle=".alert-message-header">
+            <Draggable nodeRef={nodeRef}>
                 <div className='alert-message'>
-                    <div className='alert-message-header'>
+                    <div className='alert-message-header' ref={nodeRef} >
                         <p className='alert-type'>
                             {alert.type === 'success' ?
                                 <span className={'icon faCheckCircle'}/> :

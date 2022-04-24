@@ -145,7 +145,7 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
 
                         <div className={'video-post-card-media'}>
 
-                            {!hover && !!post.mainThumbnail &&
+                            {((!hover || (hover && !post?.videoTrailerUrl)) && !!post.mainThumbnail) &&
                                <CardImageRenderer imageUrl={post.mainThumbnail}
                                                mediaAlt={title}
                                                index={index}
@@ -154,7 +154,7 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
                             }
 
 
-                            {hover && !!post?.videoTrailerUrl &&
+                            {(hover && !!post?.videoTrailerUrl) &&
                             <VideoPostCardTrailer videoTrailerUrl={post?.videoTrailerUrl}
                                                   hoverHandler={hoverHandler}
                                                   hover={hover}
