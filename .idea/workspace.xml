@@ -21,9 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/AlertBox/AlertBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/AlertBox/AlertBox.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/cards/VideoPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/VideoPostCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/VideoPostCardTrailer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/VideoPostCardTrailer.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1126,7 +1124,7 @@
       <workItem from="1650609175266" duration="26571000" />
       <workItem from="1650659766111" duration="17339000" />
       <workItem from="1650712060068" duration="14112000" />
-      <workItem from="1650813303542" duration="13927000" />
+      <workItem from="1650813303542" duration="16274000" />
     </task>
     <servers />
   </component>

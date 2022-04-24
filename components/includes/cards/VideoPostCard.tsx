@@ -191,7 +191,7 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
 
                         <div className={'card-under-media-info'}>
 
-                            {!!views && views >= 10 &&
+                            {!!views &&
                             <CardViews views={views} className={'card-views card-under-media-info-data'}/>
                             }
                             {!!rating &&
