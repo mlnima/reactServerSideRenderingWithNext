@@ -5,11 +5,12 @@ import {getPageData} from "@store/clientActions/postsAction";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
-import React, {FC} from "react";
 import dynamic from "next/dynamic";
 const Soft404 = dynamic(() => import('@components/includes/Soft404/Soft404'));
+import type { ReactElement } from 'react';
+import AppLayout from "@components/layouts/AppLayout";
 
-const page:FC = () => {
+const page = () => {
 
     const pageData = useSelector(({posts}: StoreTypes) => {
         return posts.pageData
@@ -45,6 +46,14 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         }
     }
 })
+
+page.getLayout = function getLayout(page:ReactElement) {
+    return (
+        <AppLayout>
+            {page}
+        </AppLayout>
+    )
+}
 
 export default page;
 

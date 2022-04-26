@@ -3,7 +3,6 @@ import {useRouter} from "next/router";
 import {useDispatch, useSelector} from "react-redux";
 import styled from "styled-components";
 import {wrapper} from "@store/store";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {
     adminPanelChangePassword,
     adminPanelChangeUserData, adminPanelDeleteUser,
@@ -11,6 +10,8 @@ import {
     newAPIKey
 } from "@store/adminActions/adminUserActions";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import type {ReactElement} from 'react';
+import AdminLayout from "@components/layouts/AdminLayout";
 
 const UserStyledDiv = styled.div`
   .user-admin-edit-profile-page-section {
@@ -208,11 +209,16 @@ const user = () => {
     );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    return {
-        props: {
-            ...(await serverSideTranslations(context.locale as string, ['common'])),
-        }
-    }
+export const getServerSideProps = wrapper.getServerSideProps(() => async () => {
+    return {props: {}}
 })
+
+user.getLayout = function getLayout(page: ReactElement) {
+
+    return (
+        <AdminLayout>
+            {page}
+        </AdminLayout>
+    )
+}
 export default user;

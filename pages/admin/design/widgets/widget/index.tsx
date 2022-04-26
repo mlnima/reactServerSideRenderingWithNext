@@ -1,6 +1,8 @@
 import React from 'react';
 import {wrapper} from "../../../../../store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import type {ReactElement} from 'react';
+import AdminLayout from "@components/layouts/AdminLayout";
 
 const widget = () => {
 
@@ -18,4 +20,13 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         }
     }
 })
+
+widget.getLayout = function getLayout(page: ReactElement) {
+
+    return (
+        <AdminLayout>
+            {page}
+        </AdminLayout>
+    )
+}
 export default widget;

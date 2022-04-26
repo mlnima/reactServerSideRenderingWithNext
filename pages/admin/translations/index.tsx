@@ -8,10 +8,12 @@ import {
     adminPanelEditTranslationsFile,
     adminPanelReadTranslationsFile, adminPanelUpdateTranslationsFile
 } from "@store/adminActions/adminPanelFileManagerActions";
+import type {ReactElement} from 'react';
+import AdminLayout from "@components/layouts/AdminLayout";
 
 
 // @ts-ignore
-const translations: FC = () => {
+const translations= () => {
     const dispatch = useDispatch()
     const translationsData = useSelector(({adminPanelFileManager}: StoreTypes) => adminPanelFileManager.translationsData)
     const [activeEditingLanguage, seActiveEditingLanguage] = useState(() => process.env.NEXT_PUBLIC_DEFAULT_LOCAL);
@@ -70,11 +72,12 @@ const translations: FC = () => {
 };
 
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    return {
-        props: {
-            ...(await serverSideTranslations(context.locale as string, ['common'])),
-        }
-    }
-})
+translations.getLayout = function getLayout(page: ReactElement) {
+    return (
+        <AdminLayout>
+            {page}
+        </AdminLayout>
+    )
+}
+
 export default translations;

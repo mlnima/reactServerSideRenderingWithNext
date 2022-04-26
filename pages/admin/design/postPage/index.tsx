@@ -1,6 +1,8 @@
 import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import StyleSection from '@components/adminIncludes/design/StyleSection/StyleSection'
+import type {ReactElement} from 'react';
+import AdminLayout from "@components/layouts/AdminLayout";
 
 const postPage = () => {
     return (
@@ -15,5 +17,14 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         }
     }
 })
+
+postPage.getLayout = function getLayout(page: ReactElement) {
+
+    return (
+        <AdminLayout>
+            {page}
+        </AdminLayout>
+    )
+}
 
 export default postPage;

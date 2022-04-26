@@ -3,6 +3,8 @@ import EcommerceSettingsInputSection from "../../../../components/adminIncludes/
 import styled from "styled-components";
 import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import type {ReactElement} from 'react';
+import AdminLayout from "@components/layouts/AdminLayout";
 
 let StyledDiv = styled.div`
   display: flex;
@@ -80,5 +82,14 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         }
     }
 })
+
+eCommerceSettings.getLayout = function getLayout(page: ReactElement) {
+
+    return (
+        <AdminLayout>
+            {page}
+        </AdminLayout>
+    )
+}
 
 export default eCommerceSettings;

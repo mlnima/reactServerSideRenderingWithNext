@@ -8,8 +8,10 @@ import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import Link from "next/link";
 import {getPosts} from "@store/clientActions/postsAction";
-import {FC} from "react";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import AppLayout from "@components/layouts/AppLayout";
+import type { ReactElement } from 'react'
+
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 const ActorBio = dynamic(() =>
@@ -34,7 +36,7 @@ const StyledMain = styled.main`
 
 `
 
-const actorPage: FC = () => {
+const actorPage = () => {
 
     const {query} = useRouter()
 
@@ -74,11 +76,7 @@ const actorPage: FC = () => {
 
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    // const actorId = context.query.actorId as string
-    // if (!actorId) return {notFound: true};
-    // if (!actorId?.match(/^[0-9a-fA-F]{24}$/)) return {notFound: true};
 
-    // @ts-ignore
     await store.dispatch(getDefaultPageData(
         context,
         [
@@ -100,13 +98,14 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     }
 });
 
+
+actorPage.getLayout = function getLayout(page:ReactElement) {
+    return (
+        <AppLayout>
+            {page}
+        </AppLayout>
+    )
+}
+
 export default actorPage;
 
-//import MetaDataToSiteHead from "@components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
-// {actorPageData.actor ? <MetaDataToSiteHead title={actorPageData.actor.name}
-//                                            description={actorPageData.actor.description}
-//                                            url={`${asPath}`}
-//                                            image={actorPageData.actor.imageUrl}
-//     />
-//     : null
-// }

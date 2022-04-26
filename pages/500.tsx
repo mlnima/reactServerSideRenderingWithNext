@@ -1,9 +1,10 @@
-import React from 'react';
 import Link from "next/link";
 import styled from "styled-components";
 import {useTranslation} from 'next-i18next';
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "@store/store";
+import type {ReactElement} from 'react';
+import AppLayout from "@components/layouts/AppLayout";
 
 const Custom500StyledDiv = styled.div`
   display: flex;
@@ -15,11 +16,11 @@ const Custom500StyledDiv = styled.div`
   grid-area: main;
 
   h1 {
-    color: var(--main-text-color,#fff);
+    color: var(--main-text-color, #fff);
   }
 
   .back-to-homepage {
-    color: var(--main-text-color,#fff);
+    color: var(--main-text-color, #fff);
     text-decoration: none;
   }
 `
@@ -49,6 +50,15 @@ export const getStaticProps = wrapper.getServerSideProps(store =>
             }
         }
     })
+
+
+Custom500.getLayout = function getLayout(page: ReactElement) {
+    return (
+        <AppLayout>
+            {page}
+        </AppLayout>
+    )
+}
 
 export default Custom500;
 

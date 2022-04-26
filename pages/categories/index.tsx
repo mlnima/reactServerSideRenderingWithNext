@@ -1,7 +1,6 @@
 import React from 'react';
 import {useRouter} from "next/router";
 import PaginationComponent from "@components/includes/PaginationComponent/PaginationComponent";
-//import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
 import CategoriesRenderer
     from "../../components/includes/pagesComponents/categoriesPageComponents/Components/CategoriesRenderer/CategoriesRenderer";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
@@ -12,6 +11,8 @@ import {getMetas} from "@store/clientActions/postsAction";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 import {wrapper} from "@store/store";
 import dynamic from "next/dynamic";
+import type { ReactElement } from 'react';
+import AppLayout from "@components/layouts/AppLayout";
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
@@ -91,5 +92,13 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     }
 
 });
+
+categoriesPage.getLayout = function getLayout(page:ReactElement) {
+    return (
+        <AppLayout>
+            {page}
+        </AppLayout>
+    )
+}
 
 export default categoriesPage;

@@ -6,10 +6,10 @@ import convertVariableNameToName from "../../../../_variables/util/convertVariab
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
 import {updateSetting} from "@store/adminActions/adminPanelSettingsActions";
-import {wrapper} from "@store/store";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {adminPanelEditIdentity} from "@store/adminActions/adminPanelSettingsActions";
+import type {ReactElement} from 'react';
+import AdminLayout from "@components/layouts/AdminLayout";
 
 let StyledForm = styled.form`
   background-color: white;
@@ -633,13 +633,14 @@ const settings = () => {
     );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    return {
-        props: {
-            ...(await serverSideTranslations(context.locale as string, ['common'])),
-        }
-    }
-})
+settings.getLayout = function getLayout(page: ReactElement) {
+
+    return (
+        <AdminLayout>
+            {page}
+        </AdminLayout>
+    )
+}
 
 export default settings;
 

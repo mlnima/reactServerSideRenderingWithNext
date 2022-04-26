@@ -7,6 +7,8 @@ import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {adminPanelEditIdentity} from "@store/adminActions/adminPanelSettingsActions";
 const Editor = dynamic(() => import('@monaco-editor/react'), {ssr: false})
+import type {ReactElement} from 'react';
+import AdminLayout from "@components/layouts/AdminLayout";
 
 const customScript = (props: { width: any; height: any; }) => {
     const dispatch = useDispatch()
@@ -49,5 +51,14 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         }
     }
 })
+
+customScript.getLayout = function getLayout(page: ReactElement) {
+
+    return (
+        <AdminLayout>
+            {page}
+        </AdminLayout>
+    )
+}
 
 export default customScript;

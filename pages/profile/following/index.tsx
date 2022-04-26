@@ -1,20 +1,20 @@
-import React, {FC, useEffect, useState} from 'react';
-// import {getMultipleUserDataById} from "@_variables/_userSocialAjaxVariables";
+import  { useEffect, useState} from 'react';
 import UserSmallPreview from "../../../components/includes/socialComponents/UserSmallPreview/UserSmallPreview";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "@store/store";
 import {useDispatch, useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {getMultipleUserDataById, getSpecificUserData} from "@store/clientActions/userActions";
-
 import styled from "styled-components";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import type { ReactElement } from 'react';
+import AppLayout from "@components/layouts/AppLayout";
 
 const FollowingStyledDiv = styled.div`
   max-width: 940px;
   margin: auto;
 `
-const Following : FC = ( ) => {
+const Following  = ( ) => {
     const userData = useSelector((store: StoreTypes) => store?.user?.userData)
     const dispatch = useDispatch()
     const [following, setFollowing] = useState([]);
@@ -65,4 +65,13 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         }
     }
 })
+
+Following.getLayout = function getLayout(page:ReactElement) {
+    return (
+        <AppLayout>
+            {page}
+        </AppLayout>
+    )
+}
+
 export default Following;

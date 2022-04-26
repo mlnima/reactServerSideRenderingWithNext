@@ -65,7 +65,7 @@ module.exports = async (req, res) => {
               {path: 'author',select:['username','profileImage','role']},
               {path: 'categories',select:{'name':1,'type':1}},
               {path: 'tags',select:{'name':1,'type':1}},
-              {path: 'actors',select:{'name':1,'type':1}},
+              {path: 'actors',select:{'name':1,'type':1,'imageUrl':1}},
           ]).exec()
             if (post){
 

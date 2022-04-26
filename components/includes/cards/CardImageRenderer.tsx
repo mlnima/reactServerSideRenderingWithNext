@@ -30,7 +30,8 @@ const CardImageRendererStyle = styled.div`
     width: 100%;
     height: ${({postsPerRawForMobile}: CardImageRendererStylePropTypes) => 96 / postsPerRawForMobile / 1.777}vw !important;
     aspect-ratio: 16 / 9;
-    object-fit: contain;
+    //object-fit: contain;
+    object-fit: cover;
   }
 
   @media only screen and (min-width: 768px) {
@@ -72,7 +73,7 @@ const CardImageRenderer: FC<CardImageNextPropTypes> =
                            layout={'fill'}
                            className={'card-image-next'}
                            quality={80}
-                           objectFit={'contain'}
+                           objectFit={'cover'}
                            onError={() => setGotError(true)}
                     /> :
                     <img src={gotError || !imageUrlSource ?

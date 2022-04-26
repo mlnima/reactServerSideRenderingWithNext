@@ -1,6 +1,8 @@
 import React from 'react';
 import {wrapper} from "../../../store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import type {ReactElement} from 'react';
+import AdminLayout from "@components/layouts/AdminLayout";
 
 const importer = () => {
 
@@ -18,4 +20,14 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         }
     }
 })
+
+importer.getLayout = function getLayout(page: ReactElement) {
+
+    return (
+        <AdminLayout>
+            {page}
+        </AdminLayout>
+    )
+}
+
 export default importer;

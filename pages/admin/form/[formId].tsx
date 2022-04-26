@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {useRouter} from "next/router";
 import styled from "styled-components";
 import {wrapper} from "@store/store";
@@ -6,6 +6,8 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useDispatch, useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {adminDeleteForm, adminGetForm} from "@store/adminActions/adminPanelFormsActions";
+import type {ReactElement} from 'react';
+import AdminLayout from "@components/layouts/AdminLayout";
 
 let StyledDiv = styled.div`
   .form-data-container {
@@ -68,5 +70,14 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         }
     }
 })
+
+formPage.getLayout = function getLayout(page: ReactElement) {
+
+    return (
+        <AdminLayout>
+            {page}
+        </AdminLayout>
+    )
+}
 
 export default formPage;

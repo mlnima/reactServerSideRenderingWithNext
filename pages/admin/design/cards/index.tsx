@@ -3,8 +3,10 @@ import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import dynamic from "next/dynamic";
-import React, {ChangeEvent} from "react";
+import {ChangeEvent} from "react";
 import {adminPanelEditDesign} from "@store/adminActions/adminPanelSettingsActions";
+import type {ReactElement} from 'react';
+import AdminLayout from "@components/layouts/AdminLayout";
 
 const StyleSection = dynamic(() => import('@components/adminIncludes/design/StyleSection/StyleSection'), {ssr: false});
 
@@ -23,7 +25,7 @@ const cards = () => {
                 <input className={'form-control-input'}
                        type={'number'}
                        name={'cardWidthDesktop'}
-                       placeholder={'Card Width Desktop px' }
+                       placeholder={'Card Width Desktop px'}
                        value={design.cardWidthDesktop}
                        onChange={(e: ChangeEvent<HTMLInputElement>) => onChangeHandler(e)}
                 />
@@ -33,7 +35,7 @@ const cards = () => {
                 <input className={'form-control-input'}
                        type={'number'}
                        name={'postsPerRawForMobile'}
-                       placeholder={'Posts Per Raw For Mobile' }
+                       placeholder={'Posts Per Raw For Mobile'}
                        value={design.postsPerRawForMobile}
                        onChange={(e: ChangeEvent<HTMLInputElement>) => onChangeHandler(e)}
                 />
@@ -46,7 +48,7 @@ const cards = () => {
                         placeholder={'Post Element Image Loader'}
                         className={'custom-select'}
                 >
-                    <option value='' >Select</option>
+                    <option value=''>Select</option>
                     <option value='normal'>Normal</option>
                     <option value='next'>Next</option>
                 </select>
@@ -79,5 +81,12 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     }
 })
 
+cards.getLayout = function getLayout(page: ReactElement) {
+    return (
+        <AdminLayout>
+            {page}
+        </AdminLayout>
+    )
+}
 
 export default cards;

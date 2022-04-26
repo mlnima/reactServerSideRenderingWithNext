@@ -1,4 +1,4 @@
-import {useEffect, useState, useRef} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 
 import TitleDescription from "../../../components/adminIncludes/PostComponents/TitleDescription/TitleDescription";
 import ActionOnPost from "@components/adminIncludes/PostComponents/ActionOnPost/ActionOnPost";
@@ -22,6 +22,8 @@ import {
 import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import type {ReactElement} from 'react';
+import AdminLayout from "@components/layouts/AdminLayout";
 
 const AdminPostPageStyledDiv = styled.div`
   display: grid;
@@ -147,5 +149,13 @@ export const getServerSideProps = wrapper.getServerSideProps(store =>
         }
     });
 
+Index.getLayout = function getLayout(page: ReactElement) {
+
+    return (
+        <AdminLayout>
+            {page}
+        </AdminLayout>
+    )
+}
 export default Index;
 

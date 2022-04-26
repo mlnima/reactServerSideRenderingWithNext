@@ -21,7 +21,88 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/VideoPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/VideoPostCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/AdminPanelMainMenu/AdminPanelMainMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/AdminPanelMainMenu/AdminPanelMainMenu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/global/SiteHeadSetter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/SiteHeadSetter.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/EditLinkForAdmin/EditLinkForAdmin.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/EditLinkForAdmin/EditLinkForAdmin.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/PostMeta/PostMeta.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/PostMeta/PostMeta.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/RatingButtons/RatingButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/RatingButtons/RatingButtons.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/CardImageRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CardImageRenderer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/VideoPostCardActors.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/VideoPostCardActors.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Advertise/Advertise.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Advertise/Advertise.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/layouts/AppLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AppLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/404.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/404.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/500.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/500.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/_document.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_document.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/actor/[actorId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/actor/[actorId].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/actors/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/actors/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/assets/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/assets/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/actorPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/actorPage/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/actorsPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/actorsPage/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/cards/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/cards/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/categoriesPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/categoriesPage/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/categoryPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/categoryPage/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/customColors/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/customColors/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/customStyles/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/customStyles/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/footer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/footer/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/header/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/header/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/metasPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/metasPage/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/navigation/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/navigation/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/postPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/postPage/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/postsPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/postsPage/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/tagPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/tagPage/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/tagsPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/tagsPage/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/topBar/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/topBar/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/widgets/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/widgets/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/widgets/widget/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/widgets/widget/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/exporter/postsExporter/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/exporter/postsExporter/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/fileManager/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/fileManager/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/form/[formId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/form/[formId].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/importer/content/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/importer/content/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/importer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/importer/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/importer/postsImporter/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/importer/postsImporter/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/importer/youtube/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/importer/youtube/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/meta/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/meta/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/page/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/page/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/post/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/post/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/settings/customScript/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/customScript/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/settings/eCommerceSettings/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/eCommerceSettings/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/settings/general/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/general/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/settings/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/settings/socialMediaSettings/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/socialMediaSettings/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/tools/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/tools/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/tools/terminal/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/tools/terminal/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/translations/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/translations/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/user/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/user/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/users/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/users/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/auth/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/auth/register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/register.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/categories/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/categories/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/category/[categoryId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/category/[categoryId].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/chatroom/[chatRoomName].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/chatroom/[chatRoomName].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/checkout/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/checkout/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/maintenance/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/maintenance/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/messenger/[conversation].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/messenger/[conversation].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/messenger/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/messenger/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/page/[pageName].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/page/[pageName].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/post/[postType]/[id].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/[postType]/[id].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/posts/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/posts/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/profile/edit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/edit.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/profile/followers/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/followers/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/profile/following/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/following/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/profile/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/profile/post/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/post/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/profile/posts/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/posts/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/search/[keyword].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/search/[keyword].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/tag/[tagId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tag/[tagId].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/tags/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tags/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/user/[username].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/user/[username].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetPost.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetPost.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/middlewares/apiCache.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/middlewares/apiCache.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/clientActions/globalStateActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/clientActions/globalStateActions.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +156,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="14.17.3" />
     <property name="javascript.nodejs.core.library.typings.version" value="14.17.3" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/components/includes" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/pages" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -91,11 +172,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\pages" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\widgets\Authentication" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\widgets\MenuWidget" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\global" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\public\asset\images\icons" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\trash" />
@@ -105,7 +186,7 @@
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\widgets\Authentication\DesktopAuthentication" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.dev">
+  <component name="RunManager" selected="npm.start">
     <configuration name="apiCache.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/server/middlewares/apiCache.js" working-dir="$PROJECT_DIR$/server/middlewares">
       <method v="2" />
     </configuration>
@@ -151,9 +232,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.dev" />
-        <item itemvalue="npm.build" />
         <item itemvalue="npm.start" />
+        <item itemvalue="npm.build" />
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.analyze" />
         <item itemvalue="Node.js.apiCache.js" />
       </list>
@@ -1125,6 +1206,9 @@
       <workItem from="1650659766111" duration="17339000" />
       <workItem from="1650712060068" duration="14112000" />
       <workItem from="1650813303542" duration="16274000" />
+      <workItem from="1650870912407" duration="1355000" />
+      <workItem from="1650889599852" duration="4632000" />
+      <workItem from="1650910025229" duration="19303000" />
     </task>
     <servers />
   </component>
@@ -1213,12 +1297,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/pages/checkout/index.tsx</url>
-          <line>117</line>
+          <line>119</line>
           <option name="timeStamp" value="51" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/pages/checkout/index.tsx</url>
-          <line>187</line>
+          <line>189</line>
           <option name="timeStamp" value="55" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -1262,11 +1346,6 @@
           <option name="timeStamp" value="81" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/pages/tag/[tagId].tsx</url>
-          <line>5</line>
-          <option name="timeStamp" value="86" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/store/clientActions/userActions.ts</url>
           <line>137</line>
           <option name="timeStamp" value="88" />
@@ -1297,17 +1376,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/pages/checkout/index.tsx</url>
-          <line>13</line>
+          <line>15</line>
           <option name="timeStamp" value="98" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/pages/admin/tools/index.tsx</url>
-          <line>7</line>
+          <line>8</line>
           <option name="timeStamp" value="105" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/pages/maintenance/index.tsx</url>
-          <option name="timeStamp" value="106" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/components/adminIncludes/TextEditors/TextEditors.tsx</url>
@@ -1415,6 +1490,12 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/components/includes/Widget/WidgetsModelsComponents/Text/Text.tsx</url>
           <option name="timeStamp" value="149" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/components/adminIncludes/AdminPanelMainMenu/AdminPanelMainMenu.tsx</url>
+          <line>19</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="150" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

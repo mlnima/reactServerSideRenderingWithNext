@@ -30,12 +30,12 @@ let StyledDiv = styled.div`
   align-items: flex-start;
   flex-direction: column;
   z-index: 16;
-  opacity: .9;
+  //opacity: .9; //opacity: .9;
 
   .SideBarItemElement {
     width: 100%;
     border-bottom: .5px solid #333;
-
+    position: relative;
     .SideBarItemTitle {
       display: flex;
       justify-content: space-between;
@@ -69,8 +69,9 @@ let StyledDiv = styled.div`
 
       &:hover {
         background-color: #181818;
-        transition: .5s;
+        //transition: .5s;
         font-weight: bold;
+        transition: opacity 300ms ease-in;
       }
 
       &:active {
@@ -80,7 +81,11 @@ let StyledDiv = styled.div`
 
     .SideBarItemElementSubItems {
       background-color: #181818;
-
+      position: absolute;
+      right: -100%;
+      top: 0;
+      width: 100%;
+      transition: opacity 300ms ease-in;
       .SideBarItem-SubItem {
         color: white;
         padding: 10px 0 10px 20px;
@@ -224,15 +229,14 @@ const AdminPanelMainMenu = () => {
                         >
                              {/*//@ts-ignore*/}
                             <FontAwesomeIcon icon={faSortDown}
-                                             style={{transform: hovered === item ? 'rotate(0deg)' : 'rotate(90deg)'}}
+                                             style={{transform: hovered === item ? 'rotate(-90deg)' : 'rotate(0deg)'}}
                                              className='fontawesomeSvgVerySmall'/>
                        </span>
                         : null}
 
                 </div>
                 <div className='SideBarItemElementSubItems'>
-                    {sidebarItems[item].subItems?.length ?
-                        sidebarItems[item].subItems.map(subItem => {
+                    {sidebarItems[item]?.subItems?.map(subItem => {
                             return (
                                 <Link key={subItem.url} href={subItem.url}>
                                     <a className='SideBarItem-SubItem'
@@ -244,9 +248,8 @@ const AdminPanelMainMenu = () => {
                                     </a>
                                 </Link>
                             )
-                        }) : null
+                        })
                     }
-
                 </div>
             </div>
         )

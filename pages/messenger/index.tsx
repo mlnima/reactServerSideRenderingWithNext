@@ -1,15 +1,13 @@
-import React from 'react';
 import MessengerConversationsList from "../../components/includes/messengerPageComponents/MessengerConversationsList/MessengerConversationsList";
 import Link from "next/link";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "@store/store";
-import {ClientPagesTypes} from "@_variables/TypeScriptTypes/ClientPagesTypes";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-
 import { useSelector} from "react-redux";
-
 import styled from "styled-components";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import MessengerLayout from "@components/layouts/MessengerLayout";
+import type {ReactElement} from 'react';
 
 const MessengerPageStyledMain = styled.main`
   display: flex;
@@ -23,8 +21,7 @@ const MessengerPageStyledMain = styled.main`
     color: var(--main-text-color);
   }
 `
-const messengerPage = (props: ClientPagesTypes) => {
-
+const messengerPage = () => {
 
     const userData = useSelector((state : StoreTypes) => state.user.userData)
 
@@ -66,5 +63,14 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         }
     }
 })
+
+messengerPage.getLayout = function getLayout(page: ReactElement) {
+
+    return (
+        <MessengerLayout>
+            {page}
+        </MessengerLayout>
+    )
+}
 
 export default messengerPage;

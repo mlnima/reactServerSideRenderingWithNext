@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import AddWidgetMenu from '@components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetMenu'
 import WidgetGroupByPosition
     from "../../../../components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition";
@@ -10,6 +10,8 @@ import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import WidgetPositionsSelect
     from "../../../../components/adminIncludes/widgetsModel/WidgetPositionsSelect/WidgetPositionsSelect";
 import {adminPanelGetWidgets} from "@store/adminActions/adminWidgetsActions";
+import type {ReactElement} from 'react';
+import AdminLayout from "@components/layouts/AdminLayout";
 
 
 let StyledDiv = styled.div`
@@ -117,4 +119,12 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     }
 })
 
+AdminWidgets.getLayout = function getLayout(page: ReactElement) {
+
+    return (
+        <AdminLayout>
+            {page}
+        </AdminLayout>
+    )
+}
 export default AdminWidgets;

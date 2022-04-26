@@ -1,12 +1,12 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
-// import {exportPosts} from '@_variables/ajaxPostsVariables'
 import {useDispatch} from "react-redux";
-// import {setLoading} from "@store/clientActions/globalStateActions";
 import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 import postTypes from "../../../../components/global/postTypes";
-// import {da} from "suneditor/src/lang";
+import type {ReactElement} from 'react';
+import AdminLayout from "@components/layouts/AdminLayout";
+
 import {adminExportPosts} from "@store/adminActions/adminPanelPostsActions";
 
 const PostsExporterStyledDiv = styled.div`
@@ -29,6 +29,7 @@ const PostsExporterStyledDiv = styled.div`
     margin: 20px;
   }
 `
+
 const postsExporter = () => {
     const dispatch = useDispatch()
     const [data, setData] = useState({
@@ -135,5 +136,15 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         }
     }
 })
+
+
+postsExporter.getLayout = function getLayout(page: ReactElement) {
+
+    return (
+        <AdminLayout>
+            {page}
+        </AdminLayout>
+    )
+}
 
 export default postsExporter;

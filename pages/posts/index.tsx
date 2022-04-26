@@ -1,4 +1,3 @@
-import {NextPage} from 'next';
 import PostsPage from "@components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
@@ -7,25 +6,23 @@ import {getPosts} from "@store/clientActions/postsAction";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import type { ReactElement } from 'react';
+import AppLayout from "@components/layouts/AppLayout";
 
 
 let StyledMain = styled.main`
-  //width: 100%;
   grid-area: main;
-
   .posts-page-info {
     margin: 5px 0;
-
     h1 {
       margin: 0;
       padding: 0 10px;
     }
   }
-
   ${({postsPageStyle}: { postsPageStyle: string }) => postsPageStyle || ''}
 `
 
-const posts: NextPage<any> = () => {
+const posts = () => {
 
     const {postsPageStyle} = useSelector(({settings}: StoreTypes) => {
         return {
@@ -66,5 +63,13 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         }
     }
 });
+
+posts.getLayout = function getLayout(page:ReactElement) {
+    return (
+        <AppLayout>
+            {page}
+        </AppLayout>
+    )
+}
 
 export default posts;

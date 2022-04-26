@@ -205,13 +205,13 @@ export const getDefaultPageData =
 
         if (dynamicWidgets?.length) {
 
-            const prevStore = store?.getState()
+            const prevStore = await store?.getState()
             const existingWidgets = prevStore.widgets?.requestedWidgets
             const difference = dynamicWidgets.filter(x => !existingWidgets.includes(x));
 
            //  console.log('existingWidgets',existingWidgets)
            //  console.log('dynamicWidgets',dynamicWidgets)
-           console.log('difference',difference)
+           // console.log('difference',difference)
 
             if (difference.length){
                 await Axios.get(`/api/v1/widgets/getMultipleWidgetWithData${_getMultipleWidgetWithDataQueryGenerator(difference, cache, context.locale)}`

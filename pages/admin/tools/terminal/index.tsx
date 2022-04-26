@@ -3,10 +3,10 @@ import {animateScroll} from 'react-scroll'
 import styled from "styled-components";
 import {setLoading} from "@store/clientActions/globalStateActions";
 import {useDispatch, useSelector} from "react-redux";
-import {wrapper} from "@store/store";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {terminalCommandExecutor} from "@store/adminActions/adminTerminalActions";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import type {ReactElement} from 'react';
+import AdminLayout from "@components/layouts/AdminLayout";
 
 let StyledDiv = styled.div`
   .quickAccess {
@@ -121,11 +121,13 @@ const terminal = () => {
 
     );
 };
-export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    return {
-        props: {
-            ...(await serverSideTranslations(context.locale as string, ['common'])),
-        }
-    }
-})
+
+terminal.getLayout = function getLayout(page: ReactElement) {
+    return (
+        <AdminLayout>
+            {page}
+        </AdminLayout>
+    )
+}
+
 export default terminal;

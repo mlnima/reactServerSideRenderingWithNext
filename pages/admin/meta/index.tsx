@@ -12,6 +12,8 @@ import {
 } from "@store/adminActions/adminPanelPostsActions";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {languagesOptions} from "@_variables/_variables";
+import type {ReactElement} from 'react';
+import AdminLayout from "@components/layouts/AdminLayout";
 
 let AdminMetaPageStyledDiv = styled.div`
   width: 95%;
@@ -260,6 +262,15 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         }
     }
 })
+
+meta.getLayout = function getLayout(page: ReactElement) {
+
+    return (
+        <AdminLayout>
+            {page}
+        </AdminLayout>
+    )
+}
 
 export default meta;
 

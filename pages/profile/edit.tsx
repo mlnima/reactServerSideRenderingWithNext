@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
@@ -8,6 +8,8 @@ import {userResetPassword} from "@store/clientActions/userActions";
 import _passwordValidator from "../../_variables/clientVariables/_passwordValidator";
 import ValidInput from "../../components/includes/LoginRegisterPopup/ValidInput";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import type {ReactElement} from 'react';
+import AppLayout from "@components/layouts/AppLayout";
 
 const EditProfileStyledMain = styled.main`
   grid-area: main;
@@ -58,7 +60,7 @@ interface ChangePasswordData {
     repeatNewPassword?: string,
 }
 
-const edit: FC = () => {
+const edit = () => {
     const {t} = useTranslation(['common', 'customTranslation', 'profile']);
     const dispatch = useDispatch()
 
@@ -161,6 +163,14 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         }
     }
 })
+
+edit.getLayout = function getLayout(page: ReactElement) {
+    return (
+        <AppLayout>
+            {page}
+        </AppLayout>
+    )
+}
 
 export default edit;
 //export default edit;

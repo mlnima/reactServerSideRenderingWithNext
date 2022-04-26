@@ -16,6 +16,8 @@ import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {_uniqBy} from "@_variables/util/arrayUtils/_uniqBy";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import MessengerLayout from "@components/layouts/MessengerLayout";
+import type {ReactElement} from 'react';
 
 const chatRoom = () => {
     const dispatch = useDispatch()
@@ -65,7 +67,7 @@ const chatRoom = () => {
 
         socket.on('onlineUsersList', (chatroomOnlineUsers: { username: string }[]) => {
             //dispatch(setChatroomUsers(uniqBy(chatroomOnlineUsers, e => e.username)))
-            dispatch(setChatroomUsers(_uniqBy(chatroomOnlineUsers,'username')))
+            dispatch(setChatroomUsers(_uniqBy(chatroomOnlineUsers, 'username')))
         })
 
         socket.on('recentChatRoomMessages', (chatroomMessages: object[]) => {
@@ -74,7 +76,7 @@ const chatRoom = () => {
 
         socket.on('userListUpdated', (chatroomOnlineUsers: { username: string }[]) => {
             // dispatch(setChatroomUsers(uniqBy(chatroomOnlineUsers, e => e.username)))
-            dispatch(setChatroomUsers(_uniqBy(chatroomOnlineUsers,'username')))
+            dispatch(setChatroomUsers(_uniqBy(chatroomOnlineUsers, 'username')))
         })
 
         socket.on('messageFromChatroom', (newMessageData: object) => {
@@ -102,8 +104,8 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 
     await store.dispatch(getDefaultPageData(context, [],
         {
-            setHeadData:true,
-            page:'chatroom'
+            setHeadData: true,
+            page: 'chatroom'
         }
     ))
 
@@ -113,5 +115,14 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         }
     }
 })
+
+chatRoom.getLayout = function getLayout(page: ReactElement) {
+
+    return (
+        <MessengerLayout>
+            {page}
+        </MessengerLayout>
+    )
+}
 
 export default chatRoom;

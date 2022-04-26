@@ -1,15 +1,12 @@
 import Link from 'next/link'
 import styled from "styled-components";
-import {wrapper} from "../../../store/store";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useDispatch} from "react-redux";
-import {adminCheckAndRemoveDeletedVideos, setMetaThumbnailsAndCount} from "../../../store/adminActions/adminPanelPostsActions";
+import {adminCheckAndRemoveDeletedVideos, setMetaThumbnailsAndCount} from "@store/adminActions/adminPanelPostsActions";
+import type {ReactElement} from 'react';
+import AdminLayout from "@components/layouts/AdminLayout";
+import React from "react";
 
 let StyledDiv = styled.div`
-  //display: flex;
-  //justify-content: space-between;
-  //align-items: center;
-  //flex-direction: column;
   
   .btn-primary{
     margin: 10px;
@@ -46,6 +43,7 @@ let StyledDiv = styled.div`
 
 
 const tools = () => {
+
     const dispatch = useDispatch()
 
     return (
@@ -62,12 +60,13 @@ const tools = () => {
     );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    return {
-        props: {
-            ...(await serverSideTranslations(context.locale as string, ['common'])),
-        }
-    }
-})
+tools.getLayout = function getLayout(page: ReactElement) {
+
+    return (
+        <AdminLayout>
+            {page}
+        </AdminLayout>
+    )
+}
 
 export default tools;

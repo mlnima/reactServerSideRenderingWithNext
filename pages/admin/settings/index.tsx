@@ -1,7 +1,9 @@
 import Link from "next/link";
 import styled from "styled-components";
-import {wrapper} from "../../../store/store";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import type {ReactElement} from 'react';
+import AdminLayout from "@components/layouts/AdminLayout";
+import React from "react";
+
 let StyledDiv = styled.div`
   display: flex;
   flex-direction: column;
@@ -17,12 +19,13 @@ const settings = () => {
     );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    return {
-        props: {
-            ...(await serverSideTranslations(context.locale as string, ['common'])),
-        }
-    }
-})
+settings.getLayout = function getLayout(page: ReactElement) {
+
+    return (
+        <AdminLayout>
+            {page}
+        </AdminLayout>
+    )
+}
 
 export default settings;

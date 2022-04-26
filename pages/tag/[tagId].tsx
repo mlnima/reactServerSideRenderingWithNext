@@ -1,4 +1,3 @@
-import React, {FC} from "react";
 import PostsPage from "@components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
 import PostsPageInfo from "@components/includes/PostsRenderer/PostsPageInfo";
@@ -10,6 +9,8 @@ import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import Link from "next/link";
 import {getPosts} from "@store/clientActions/postsAction";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import type { ReactElement } from 'react';
+import AppLayout from "@components/layouts/AppLayout";
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
@@ -28,7 +29,7 @@ let StyledMain = styled.main`
 
   ${({tagPageStyle}: { tagPageStyle: string }) => tagPageStyle || ''}
 `
-const tagPage: FC = () => {
+const tagPage = () => {
 
     const {role, tag, tagPageStyle} = useSelector(({user, posts, settings}: StoreTypes) => {
         return {
@@ -65,9 +66,6 @@ const tagPage: FC = () => {
 
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    // const tagId = context.query.tagId as string;
-    // if (!tagId) return {notFound: true};
-    // if (!tagId?.match(/^[0-9a-fA-F]{24}$/)) return {notFound: true};
 
     // @ts-ignore
     await store.dispatch(getDefaultPageData(
@@ -86,19 +84,17 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     return {
         props: {
             ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
-            // query: context.query,
         }
     }
 });
 
+tagPage.getLayout = function getLayout(page:ReactElement) {
+    return (
+        <AppLayout>
+            {page}
+        </AppLayout>
+    )
+}
+
 export default tagPage;
 
-//import MetaDataToSiteHead from "@components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
-// {storeData.tag ?
-//     <MetaDataToSiteHead title={storeData.tag?.name}
-//                         description={storeData.tag?.description}
-//                         url={`${asPath}`}
-//                         image={storeData.tag?.imageUrl}
-//     />
-//     : null
-// }

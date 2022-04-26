@@ -1,7 +1,6 @@
-import React, {FC, useEffect, useMemo, useState} from 'react';
+import React, { useEffect} from 'react';
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useDispatch, useSelector} from "react-redux";
-//import {setLoginRegisterFormStatus} from "@store/clientActions/globalStateActions";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import styled from "styled-components";
 import {wrapper} from "@store/store";
@@ -14,6 +13,8 @@ import MetaDataSelector from "@components/includes/profilePageComponents/profile
 import ThumbnailUploader from "@components/includes/profilePageComponents/profilePost/common/ThumbnailUploader";
 import VideoTypeFields from "@components/includes/profilePageComponents/profilePost/VideoTypeFields/VideoTypeFields";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import type { ReactElement } from 'react';
+import AppLayout from "@components/layouts/AppLayout";
 
 const ProfilePostPageStyledDiv = styled.div`
   margin: 20px 5px;
@@ -38,7 +39,7 @@ const ProfilePostPageStyledDiv = styled.div`
   }
 
 `
-const post: FC = () => {
+const post= () => {
 
     const dispatch = useDispatch();
     const {query} = useRouter();
@@ -197,5 +198,12 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 
     })
 
+post.getLayout = function getLayout(page:ReactElement) {
+    return (
+        <AppLayout>
+            {page}
+        </AppLayout>
+    )
+}
 
 export default post;

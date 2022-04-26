@@ -1,10 +1,8 @@
-import {FC} from "react";
+import React, {FC} from "react";
 import styled from "styled-components";
 import {adminBulkActionPost} from "@store/adminActions/adminPanelPostsActions";
 import {useRouter} from "next/router";
 import {useDispatch, useSelector} from "react-redux";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEllipsisV} from "@fortawesome/free-solid-svg-icons/faEllipsisV";
 import Draggable from 'react-draggable';
 import {reloadPageDataByAddingQuery} from "@store/adminActions/adminPanelGlobalStateActions";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
@@ -48,7 +46,7 @@ const EditLinkForAdminStyledDiv = styled.div`
 `
 
 const EditLinkForAdmin: FC = () => {
-
+    const nodeRef = React.useRef(null);
     const {query, push, pathname} = useRouter()
     const {_id, status, createdAt, updatedAt} = useSelector(({posts}: StoreTypes) => {
         return {
@@ -66,8 +64,8 @@ const EditLinkForAdmin: FC = () => {
 
     const dispatch = useDispatch()
     return (
-        <Draggable handle=".edit-as-admin-handler">
-            <EditLinkForAdminStyledDiv className='edit-as-admin'>
+        <Draggable nodeRef={nodeRef}>
+            <EditLinkForAdminStyledDiv className='edit-as-admin' ref={nodeRef}>
                 <a className='btn btn-primary' href={`/admin/post?id=${_id}`} target='_blank'>
                     Edit As Admin
                 </a>
@@ -93,9 +91,7 @@ const EditLinkForAdmin: FC = () => {
                 </div>
 
                 <h4 className='status'>Status : {status}</h4>
-                <div className={'edit-as-admin-handler'}>
-                    <FontAwesomeIcon icon={faEllipsisV}/>
-                </div>
+
             </EditLinkForAdminStyledDiv>
         </Draggable>
 

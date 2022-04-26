@@ -8,8 +8,9 @@ import Link from "next/link";
 import {useSelector} from "react-redux";
 import {wrapper} from "@store/store";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {FC} from "react";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import type { ReactElement } from 'react';
+import AppLayout from "@components/layouts/AppLayout";
 
 const ProfileStyledMain = styled.main`
   display: flex;
@@ -38,9 +39,6 @@ const ProfileStyledMain = styled.main`
     }
   }
 
-  //.profile-posts{
-  //  width: 300px;
-  //}
   .profile-username {
 
   }
@@ -74,7 +72,7 @@ const ProfileStyledMain = styled.main`
   }
 `
 
-const Profile : FC= () => {
+const Profile = () => {
 
     // @ts-ignore
     const userData = useSelector((state : StoreTypes) => state.user.userData)
@@ -122,5 +120,13 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         }
     }
 })
+
+Profile.getLayout = function getLayout(page:ReactElement) {
+    return (
+        <AppLayout>
+            {page}
+        </AppLayout>
+    )
+}
 
 export default Profile;

@@ -3,6 +3,8 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "@store/store";
 import {useDispatch} from "react-redux";
 import {getDefaultPageData, setLoginRegisterFormStatus} from "@store/clientActions/globalStateActions";
+import type { ReactElement } from 'react';
+import AppLayout from "@components/layouts/AppLayout";
 
 const Register = () => {
     const dispatch = useDispatch()
@@ -28,5 +30,14 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         }
     }
 })
+
+
+Register.getLayout = function getLayout(page:ReactElement) {
+    return (
+        <AppLayout>
+            {page}
+        </AppLayout>
+    )
+}
 
 export default Register;

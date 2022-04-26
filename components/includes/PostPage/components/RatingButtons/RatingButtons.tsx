@@ -1,4 +1,4 @@
-import {FC,useMemo} from "react";
+import {FC, useEffect, useState} from "react";
 import _shortNumber from '@_variables/clientVariables/_shortNumber'
 import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
@@ -34,18 +34,18 @@ const RatingButtonsStyledDiv = styled.div`
     }
 
     .thumbs-up {
-     // background-color: var(--post-page-info-color, #ccc);
-      background-color: ${({buttonsDisabledStatus}:{buttonsDisabledStatus:boolean})=> {
-       return  buttonsDisabledStatus ? `#666` : ` var(--post-page-info-color, #ccc)`
-      }  };
+      // background-color: var(--post-page-info-color, #ccc);
+      background-color: ${({buttonsDisabledStatus}: { buttonsDisabledStatus: boolean }) => {
+        return buttonsDisabledStatus ? `#666` : ` var(--post-page-info-color, #ccc)`
+      }};
       mask: url('/public/asset/images/icons/thumbs-up-solid.svg') no-repeat center;
       -webkit-mask: url('/public/asset/images/icons/thumbs-up-solid.svg') no-repeat center;
     }
 
     .thumbs-down {
       //background-color: var(--post-page-info-color, #ccc);
-      background-color: ${({buttonsDisabledStatus}:{buttonsDisabledStatus:boolean})=> {
-        return  buttonsDisabledStatus ? `#666` : ` var(--post-page-info-color, #ccc)`
+      background-color: ${({buttonsDisabledStatus}: { buttonsDisabledStatus: boolean }) => {
+        return buttonsDisabledStatus ? `#666` : ` var(--post-page-info-color, #ccc)`
       }};
       mask: url('/public/asset/images/icons/thumbs-down-solid.svg') no-repeat center;
       -webkit-mask: url('/public/asset/images/icons/thumbs-down-solid.svg') no-repeat center;
@@ -82,8 +82,9 @@ const RatingButtons: FC<RatingButtonsPropTypes> = ({rating}) => {
 
     const {t} = useTranslation('common');
     const dispatch = useDispatch();
-    const {likes, disLikes, views, _id} = useSelector(({posts}: StoreTypes) =>{
-        return{
+    const [isRated, setIsRated] = useState(null)
+    const {likes, disLikes, views, _id} = useSelector(({posts}: StoreTypes) => {
+        return {
             likes: posts.post?.likes,
             disLikes: posts.post?.disLikes,
             views: posts.post?.views,
@@ -91,15 +92,19 @@ const RatingButtons: FC<RatingButtonsPropTypes> = ({rating}) => {
         }
     })
 
-    const ratingData = useMemo(() => {
-        if (typeof window !== 'undefined')  return localStorage?.ratingData ?
-                                                   JSON.parse(localStorage.ratingData) :
-                                                   {likes: [], disLikes: []};
-        return {likes: [], disLikes: []}
-    }, [rating,likes,disLikes])
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const ratingsDataFromLocalStorage = localStorage?.ratingData ?
+                  JSON.parse(localStorage.ratingData) :
+                  {likes: [], disLikes: []};
 
-    const isRated = useMemo(()=>
-        ratingData.likes.includes(_id) || ratingData.disLikes.includes(_id),[ratingData,rating,likes,disLikes])
+            setIsRated(
+                       ratingsDataFromLocalStorage?.likes?.includes(_id) ||
+                             ratingsDataFromLocalStorage?.disLikes?.includes(_id)
+            )
+        }
+
+    }, [rating, likes, disLikes]);
 
     return (
         <RatingButtonsStyledDiv className="rating-buttons" buttonsDisabledStatus={isRated}>
@@ -117,7 +122,7 @@ const RatingButtons: FC<RatingButtonsPropTypes> = ({rating}) => {
                 <>
                     <button className='rating-item'
                             onClick={() => dispatch(likePost(_id))}
-                            disabled={isRated }
+                            disabled={!!isRated}
                             aria-label="like"
                             title={t<string>('Like')}
                     >
@@ -126,7 +131,7 @@ const RatingButtons: FC<RatingButtonsPropTypes> = ({rating}) => {
                     </button>
                     <button className='rating-item'
                             onClick={() => dispatch(disLikePost(_id))}
-                            disabled={isRated }
+                            disabled={!!isRated}
                             aria-label="dislike"
                             title={t<string>('Dislike')}
                     >

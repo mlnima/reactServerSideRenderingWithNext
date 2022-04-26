@@ -4,6 +4,8 @@ import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {adminSaveNewPost} from "@store/adminActions/adminPanelPostsActions";
+import type {ReactElement} from 'react';
+import AdminLayout from "@components/layouts/AdminLayout";
 
 const importContent = () => {
     const userData = useSelector((store:StoreTypes) => store?.user.userData)
@@ -75,6 +77,7 @@ const importContent = () => {
     );
 };
 
+
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
     return {
         props: {
@@ -82,4 +85,13 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         }
     }
 })
+
+importContent.getLayout = function getLayout(page: ReactElement) {
+
+    return (
+        <AdminLayout>
+            {page}
+        </AdminLayout>
+    )
+}
 export default importContent;

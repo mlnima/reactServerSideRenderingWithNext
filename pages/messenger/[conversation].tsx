@@ -6,23 +6,24 @@ import MessengerConversationMessageTools from "../../components/includes/messeng
 import {socket} from '@_variables/socket';
 import MessengerCall from "../../components/includes/messengerPageComponents/MessengerCall/MessengerCall";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {ClientPagesTypes} from "@_variables/TypeScriptTypes/ClientPagesTypes";
 import {useDispatch, useSelector} from "react-redux";
 import {wrapper} from "@store/store";
-// @ts-ignore
-import {
-        answerTheCall,
-        endCall,
-        getConversation,
-        incomingCall,
-        newMessageInConversation,
-        outgoingCall,
-        setPartnerVideo,
-       } from "@store/clientActions/userActions";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import {
+    answerTheCall,
+    endCall,
+    getConversation,
+    incomingCall,
+    newMessageInConversation,
+    outgoingCall,
+    setPartnerVideo,
+} from "@store/clientActions/userActions";
+import MessengerLayout from "@components/layouts/MessengerLayout";
+import type {ReactElement} from 'react';
 
-const conversation = (props: ClientPagesTypes) => {
+
+const conversation = () => {
     const dispatch = useDispatch()
     const router = useRouter();
     const userData = useSelector((store: StoreTypes) => store.user.userData);
@@ -38,7 +39,7 @@ const conversation = (props: ClientPagesTypes) => {
         if (localStorage.wt) {
             dispatch(getConversation(router.query.conversation, -20))
         }
-    }, [props]);
+    }, []);
 
     useEffect(() => {
         const connectedUser = users ?  users.find(user => user._id !== userData?._id) : {}
@@ -130,4 +131,12 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     }
 })
 
+conversation.getLayout = function getLayout(page: ReactElement) {
+
+    return (
+        <MessengerLayout>
+            {page}
+        </MessengerLayout>
+    )
+}
 export default conversation;

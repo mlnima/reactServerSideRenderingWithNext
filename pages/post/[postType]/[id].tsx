@@ -1,4 +1,4 @@
-import {FC, useEffect} from "react";
+import {useEffect} from "react";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "@store/store";
 import {useDispatch, useSelector} from "react-redux";
@@ -7,7 +7,9 @@ import dynamic from "next/dynamic";
 import {getComments, getPost, viewPost} from "@store/clientActions/postsAction";
 import {useRouter} from "next/router";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
-import isValidObjectId from '@_variables/util/mongoIdValidator'
+import isValidObjectId from '@_variables/util/mongoIdValidator';
+import type { ReactElement } from 'react';
+import AppLayout from "@components/layouts/AppLayout";
 
 const Soft404 = dynamic(() =>
     import('@components/includes/Soft404/Soft404'))
@@ -21,7 +23,7 @@ const VideoTypePostPage = dynamic(() =>
 
 const PostPage = dynamic(() => import('@components/includes/PostPage/PostPage'))
 
-const postPage:FC = () => {
+const postPage = () => {
     const {query} = useRouter()
     const dispatch = useDispatch()
 
@@ -82,6 +84,13 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     }
 });
 
+postPage.getLayout = function getLayout(page:ReactElement) {
+    return (
+        <AppLayout>
+            {page}
+        </AppLayout>
+    )
+}
 
 export default postPage;
 

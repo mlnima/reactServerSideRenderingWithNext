@@ -9,17 +9,19 @@ const AdvertiseStyledDiv = styled.div`
   align-items: center;
   min-height: 100px;
   min-width: 300px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  //margin-top: 10px;
+  //margin-bottom: 10px;
   max-width: 98vw !important;
 
   .pre-load {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: var(--default-border);
+    //border: var(--default-border);
     min-height: 100px;
     min-width: 300px;
+    //margin-top: 10px;
+    //margin-bottom: 10px;
   }
 `
 
@@ -55,6 +57,9 @@ const Advertise: FC<AdvertisePropTypes> = ({uniqueData}) => {
                     <span>loading...</span>
                 </div>
             }
+            {/*<div className='pre-load'>*/}
+            {/*           <span>loading...</span>*/}
+            {/*        </div>*/}
         </AdvertiseStyledDiv>
     )
 };

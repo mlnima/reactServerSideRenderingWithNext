@@ -4,7 +4,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {wrapper} from "../../../../store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
-
+import type {ReactElement} from 'react';
+import AdminLayout from "@components/layouts/AdminLayout";
 import styled from "styled-components";
 import {adminSaveNewPost} from "../../../../store/adminActions/adminPanelPostsActions";
 
@@ -103,4 +104,14 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         }
     }
 })
+
+postsImporter.getLayout = function getLayout(page: ReactElement) {
+
+    return (
+        <AdminLayout>
+            {page}
+        </AdminLayout>
+    )
+}
+
 export default postsImporter;

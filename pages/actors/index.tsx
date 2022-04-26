@@ -1,4 +1,3 @@
-import React from 'react';
 import {useRouter} from "next/router";
 import PaginationComponent from "@components/includes/PaginationComponent/PaginationComponent";
 import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
@@ -10,6 +9,8 @@ import {wrapper} from "@store/store";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {getMetas} from "@store/clientActions/postsAction";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import AppLayout from "@components/layouts/AppLayout";
+import type { ReactElement } from 'react'
 
 const ActorsPageStyledDiv = styled.div`
   grid-area: main;
@@ -85,6 +86,15 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     }
 
 });
+
+
+actorsPage.getLayout = function getLayout(page:ReactElement) {
+    return (
+        <AppLayout>
+            {page}
+        </AppLayout>
+    )
+}
 
 
 export default actorsPage;

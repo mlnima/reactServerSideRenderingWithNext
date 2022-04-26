@@ -1,13 +1,11 @@
 import {FC} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import { useSelector} from 'react-redux';
 import dynamic from "next/dynamic";
 import GlobalStylesComponent from "../global/Styles/GlobalStylesComponent";
 import _setAppLayoutDataFromProp from '../../_variables/clientVariables/_setAppLayoutDataFromProp';
 import {useRouter} from "next/router";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import SiteSettingSetter from '../includes/SiteSettingsSetter/SiteSettingsSetter'
-// import {setSettings} from "@store/clientActions/settingsActions";
-// import {isAppleMobileDevice} from "@_variables/_variables";
 import LoadingV2 from "@components/includes/LoadingV2/LoadingV2";
 
 const SideBarWidgetArea = dynamic(() => import('../widgetsArea/SidebarWidgetArea/SidebarWidgetArea'));
@@ -15,13 +13,13 @@ const HeaderWidgetArea = dynamic(() => import('../widgetsArea/HeaderWidgetArea/H
 const TopBarWidgetArea = dynamic(() => import('../widgetsArea/TopBarWidgetArea/TopBarWidgetArea'));
 const NavigationWidgetArea = dynamic(() => import('../widgetsArea/NavigationWidgetArea/NavigationWidgetArea'));
 const FooterWidgetArea = dynamic(() => import('../widgetsArea/FooterWidgetArea/FooterWidgetArea'));
-const Loading = dynamic(() => import('../includes/Loading/Loading'), {ssr: false});
 const AlertBox = dynamic(() => import('../includes/AlertBox/AlertBox'), {ssr: false});
 const AdminTools = dynamic(() => import('../includes/AdminTools/AdminTools'), {ssr: false});
 const LoginRegisterPopup = dynamic(() => import('../includes/LoginRegisterPopup/LoginRegisterPopup'), {ssr: false});
 const CookiePopup = dynamic(() => import('../includes/ClientPopActionRequest/CookiePopup'), {ssr: false});
 const AdminDataSetter = dynamic(() => import('../global/AdminDataSetter'), {ssr: false});
 const BackToTopButton = dynamic(() => import('@components/includes/BackToTopButton/BackToTopButton'), {ssr: false});
+// const Loading = dynamic(() => import('../includes/Loading/Loading'), {ssr: false});
 
 interface AppLayoutPropTypes {
     pageInfo?: {},
@@ -31,16 +29,13 @@ interface AppLayoutPropTypes {
 const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
 
     const {pathname} = useRouter();
-    const dispatch = useDispatch()
 
     const {
         loggedIn,
         userRole,
         identity,
-        loading,
         loginRegisterFormPopup,
         alert,
-        // isMobile,
         sidebarsData,
         mainLayoutClassNameForGrid
     } = useSelector(({user, settings, globalState, posts}: StoreTypes) => {
@@ -51,8 +46,6 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
             loggedIn: user?.loggedIn,
             userRole: user?.userData?.role,
             identity: settings?.identity,
-            loading: globalState?.loading,
-            // isMobile:settings.isMobile,
             loginRegisterFormPopup: globalState?.loginRegisterFormPopup,
             alert: globalState?.alert,
             sidebarsData,
@@ -66,43 +59,41 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
         <div className={'App ' + mainLayoutClassNameForGrid} suppressHydrationWarning>
             <GlobalStylesComponent/>
             <SiteSettingSetter/>
-            {identity?.topbar === 'enable' ? <TopBarWidgetArea/> : null}
-            {identity?.header === 'enable' ? <HeaderWidgetArea/> : null}
-            {identity?.navigation === 'enable' ? <NavigationWidgetArea/> : null}
-            {sidebarsData?.leftSidebar?.enable && mainLayoutClassNameForGrid !== 'without-sidebar-layout' ?
+            {identity?.topbar === 'enable' && <TopBarWidgetArea/> }
+            {identity?.header === 'enable' && <HeaderWidgetArea/> }
+            {identity?.navigation === 'enable' && <NavigationWidgetArea/>}
+            {(sidebarsData?.leftSidebar?.enable && mainLayoutClassNameForGrid !== 'without-sidebar-layout') &&
                 <SideBarWidgetArea
                     gridArea='leftSidebar'
                     className='left-sidebar'
                     position={sidebarsData?.leftSidebar?.name}
                 />
-                : null
             }
 
             {children}
 
-            {sidebarsData?.rightSidebar?.enable && mainLayoutClassNameForGrid !== 'without-sidebar-layout' ?
+            {(sidebarsData?.rightSidebar?.enable && mainLayoutClassNameForGrid !== 'without-sidebar-layout') &&
                 <SideBarWidgetArea
                     gridArea='rightSidebar'
                     className='right-sidebar'
                     position={sidebarsData?.rightSidebar?.name}
                 />
-                : null
             }
+
             <BackToTopButton/>
-            {identity?.footer === 'enable' ? <FooterWidgetArea/> : null}
-            {loginRegisterFormPopup && !loggedIn ? <LoginRegisterPopup/> : null}
-            {userRole === 'administrator' ? <AdminTools/> : null}
+            {identity?.footer === 'enable' && <FooterWidgetArea/>}
+            {loginRegisterFormPopup && !loggedIn && <LoginRegisterPopup/>}
+            {userRole === 'administrator' && <AdminTools/>}
             {/*{loading ? <Loading/> : null}*/}
             <LoadingV2/>
-            {alert?.active && alert?.message ? <AlertBox/> : null}
-
+            {(!!alert?.active && !!alert?.message) && <AlertBox/>}
 
             {typeof window !== 'undefined' ? localStorage.cookieAccepted !== 'true' ?
                 <CookiePopup/>
                 : null : null
             }
 
-            {userRole === 'administrator' ? <AdminDataSetter userRole={userRole}/> : null}
+            {userRole === 'administrator' && <AdminDataSetter userRole={userRole}/>}
 
         </div>
     );

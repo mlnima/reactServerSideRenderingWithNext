@@ -11,6 +11,8 @@ import {wrapper} from "@store/store";
 import {useDispatch, useSelector} from "react-redux";
 import {getSpecificUserData, getUserPageData} from "@store/clientActions/userActions";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import type { ReactElement } from 'react';
+import AppLayout from "@components/layouts/AppLayout";
 
 const UserPageStyledDiv = styled.div`
   color: var(--main-text-color);
@@ -71,7 +73,7 @@ const UserPageStyledDiv = styled.div`
   }
 `
 
-const user : FC = () => {
+const user = () => {
     const {t} = useTranslation('common');
     const dispatch = useDispatch()
     const router = useRouter()
@@ -172,6 +174,13 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     }
 })
 
+user.getLayout = function getLayout(page:ReactElement) {
+    return (
+        <AppLayout>
+            {page}
+        </AppLayout>
+    )
+}
 
 export default user;
 

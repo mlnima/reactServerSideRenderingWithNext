@@ -10,9 +10,10 @@ import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {getPosts} from "@store/clientActions/postsAction";
 import {FC} from "react";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import type { ReactElement } from 'react';
+import AppLayout from "@components/layouts/AppLayout";
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
-
 
 let StyledMain = styled.main`
   grid-area: main;
@@ -35,7 +36,8 @@ let StyledMain = styled.main`
 
   ${({categoryPageStyle}: { categoryPageStyle: string }) => categoryPageStyle || ''}
 `
-const categoryPage: FC = () => {
+
+const categoryPage = () => {
 
     const {role, category, categoryPageStyle} = useSelector(({user, posts, settings}: StoreTypes) => {
         return {
@@ -94,14 +96,13 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     }
 });
 
+categoryPage.getLayout = function getLayout(page:ReactElement) {
+    return (
+        <AppLayout>
+            {page}
+        </AppLayout>
+    )
+}
+
 export default categoryPage;
 
-//import MetaDataToSiteHead from "@components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
-// {category ?
-//     <MetaDataToSiteHead title={category?.name}
-//                         description={category?.description}
-//                         url={`${router.asPath}`}
-//                         image={category?.imageUrl}
-//     />
-//     : null
-// }

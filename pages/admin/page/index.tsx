@@ -13,6 +13,8 @@ import {
     adminSaveNewPage,
     adminUpdatePage
 } from "@store/adminActions/adminPanelPagesActions";
+import type {ReactElement} from 'react';
+import AdminLayout from "@components/layouts/AdminLayout";
 
 let AdminEditCustomPageStyledDiv = styled.div`
   padding: 10px 1rem;
@@ -148,4 +150,12 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     }
 })
 
+page.getLayout = function getLayout(page: ReactElement) {
+
+    return (
+        <AdminLayout>
+            {page}
+        </AdminLayout>
+    )
+}
 export default page;

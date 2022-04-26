@@ -1,6 +1,5 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect} from 'react';
 import ProfileNavigation from '../../../components/includes/profilePageComponents/ProfileNavigation/ProfileNavigation'
-// import {useRouter} from "next/router";
 import Link from "next/link";
 import ProfileImage from "@components/includes/profilePageComponents/ProfileImage/ProfileImage";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
@@ -9,6 +8,8 @@ import styled from "styled-components";
 import {wrapper} from "@store/store";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import type { ReactElement } from 'react';
+import AppLayout from "@components/layouts/AppLayout";
 
 const PostsStyledDiv = styled.div`
   max-width: 940px;
@@ -20,7 +21,7 @@ const PostsStyledDiv = styled.div`
     padding: 5px 10px;
   }
 `
-const Posts: FC = () => {
+const Posts = () => {
     const userData = useSelector((store: StoreTypes) => store?.user.userData)
     // const router = useRouter();
     //
@@ -84,4 +85,13 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             }
         }
     })
+
+
+Posts.getLayout = function getLayout(page:ReactElement) {
+    return (
+        <AppLayout>
+            {page}
+        </AppLayout>
+    )
+}
 export default Posts;

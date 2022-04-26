@@ -1,4 +1,4 @@
-import { useState, useRef, ChangeEvent} from 'react';
+import React, { useState, useRef, ChangeEvent} from 'react';
 import styled from "styled-components";
 import {useDispatch} from "react-redux";
 import {setAlert, setLoading} from "@store/clientActions/globalStateActions";
@@ -6,6 +6,8 @@ import {updateSetting} from "@store/adminActions/adminPanelSettingsActions";
 import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {adminSaveNewPost, adminYoutubeDataScrapper} from "@store/adminActions/adminPanelPostsActions";
+import type {ReactElement} from 'react';
+import AdminLayout from "@components/layouts/AdminLayout";
 
 let StyledDiv = styled.div`
   .admin-import-page-youtube {
@@ -165,4 +167,14 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         }
     }
 })
+
+youtube.getLayout = function getLayout(page: ReactElement) {
+
+    return (
+        <AdminLayout>
+            {page}
+        </AdminLayout>
+    )
+}
+
 export default youtube;

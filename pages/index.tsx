@@ -1,16 +1,16 @@
-import {FC} from 'react';
 import MainWidgetArea from "../components/widgetsArea/MainWidgetArea/MainWidgetArea";
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 import {wrapper} from "@store/store";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import { getDefaultPageData} from "@store/clientActions/globalStateActions";
+import AppLayout from '@components/layouts/AppLayout';
+import type { ReactElement } from 'react';
 
-const Home: FC = () => {
+const Home = () => {
     const homePageStyle = useSelector(({settings}: StoreTypes) => settings.design?.homePageStyle);
     return (
-        < MainWidgetArea className='home-page main' position='home' stylesData={homePageStyle}
-        />
+        < MainWidgetArea className='home-page main' position='home' stylesData={homePageStyle}/>
     );
 };
 
@@ -35,6 +35,15 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         }
 
     });
+
+
+Home.getLayout = function getLayout(page:ReactElement) {
+    return (
+        <AppLayout>
+          {page}
+        </AppLayout>
+    )
+}
 
 export default Home;
 

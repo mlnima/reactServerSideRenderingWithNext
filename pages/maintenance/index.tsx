@@ -1,10 +1,8 @@
-import React from 'react';
 import styled from "styled-components";
 import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-// import {getFirstLoadDataStatic} from "../../_variables/ajaxVariables";
-// import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-// import {wrapper} from "../../store/store";
+import type { ReactElement } from 'react';
+import AppLayout from "@components/layouts/AppLayout";
 
 let StyledDiv = styled.div`
   display: flex;
@@ -32,5 +30,13 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         }
     }
 })
+
+maintenance.getLayout = function getLayout(page:ReactElement) {
+    return (
+        <AppLayout>
+            {page}
+        </AppLayout>
+    )
+}
 
 export default maintenance;

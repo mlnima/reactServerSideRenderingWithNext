@@ -1,4 +1,3 @@
-import React, {FC} from "react";
 import {getPosts} from "@store/clientActions/postsAction";
 import PostsPage from "@components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
@@ -10,13 +9,14 @@ import {wrapper} from "@store/store";
 import {useSelector} from "react-redux";
 import {StoreTypes} from '@_variables/TypeScriptTypes/GlobalTypes'
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import type { ReactElement } from 'react';
+import AppLayout from "@components/layouts/AppLayout";
 
 let StyledMain = styled.main`
   width: 100%;
 
   .posts-page-info {
     margin: 5px 0;
-
     h1 {
       margin: 0;
       padding: 0 10px;
@@ -30,12 +30,12 @@ let StyledMain = styled.main`
 
   ${(props:{stylesData:string}) => props.stylesData || ''}
 `
-const searchPage : FC = ( ) => {
+
+const searchPage = ( ) => {
+
     const settings = useSelector((store: StoreTypes) => store.settings);
     const posts = useSelector((store:StoreTypes) => store.posts.posts)
     const router = useRouter()
-
-
 
     return (
         <StyledMain id={'main-content'} className="main posts-page" stylesData={settings.design?.postsPageStyle || ''}>
@@ -60,10 +60,7 @@ const searchPage : FC = ( ) => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    // @ts-ignore
-    // const keyword = context.query.keyword ? encodeURIComponent(context?.query?.keyword) : '';
-    // if (!keyword) return {notFound: true};
-    // @ts-ignore
+
     await store.dispatch(getDefaultPageData(
         context,
         [
@@ -87,5 +84,13 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         }
     }
 })
+
+searchPage.getLayout = function getLayout(page:ReactElement) {
+    return (
+        <AppLayout>
+            {page}
+        </AppLayout>
+    )
+}
 
 export default searchPage;

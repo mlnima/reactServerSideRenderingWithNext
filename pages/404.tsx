@@ -1,9 +1,10 @@
-import React, {FC} from 'react';
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "@store/store";
 import Soft404 from "@components/includes/Soft404/Soft404";
+import type { ReactElement } from 'react';
+import AppLayout from "@components/layouts/AppLayout";
 
-const Custom404: FC = () => {
+const Custom404 = () => {
     return <Soft404/>
 };
 
@@ -16,6 +17,15 @@ export const getStaticProps = wrapper.getServerSideProps(store =>
         }
     }
 )
+
+Custom404.getLayout = function getLayout(page:ReactElement) {
+    return (
+        <AppLayout>
+            {page}
+        </AppLayout>
+    )
+}
+
 
 export default Custom404;
 

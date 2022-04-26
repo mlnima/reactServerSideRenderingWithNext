@@ -1,35 +1,37 @@
-import {FC, useEffect, useState} from 'react'
+import React, {FC, useEffect, useState} from 'react'
 //import Analytics from '../../components/adminIncludes/Analytics/Analytics'
 import {socket} from '@_variables/socket'
 import Link from "next/link";
-// import _ from "lodash";
 import styled from "styled-components";
 import {wrapper} from "@store/store";
-// import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-
+import type {ReactElement} from 'react';
+import AdminLayout from "@components/layouts/AdminLayout";
 
 
 const AdminHomePageStyledDiv = styled.div`
   h1 {
     text-align: center;
   }
-  .quick-access{
+
+  .quick-access {
     width: 100%;
-    .quick-access-items{
+
+    .quick-access-items {
       display: flex;
       justify-content: space-evenly;
       align-items: center;
-      .btn{
+
+      .btn {
         padding: 15px 30px;
       }
-      
+
     }
 
   }
 `
-const AdminHomePage:FC = () => {
+const AdminHomePage = () => {
 
     const ip = useSelector((store: StoreTypes) => store?.settings.ip)
 
@@ -90,7 +92,7 @@ const AdminHomePage:FC = () => {
 
     }, []);
 
-    const getActiveUsersCount = ()=>{
+    const getActiveUsersCount = () => {
         socket.emit('giveSocketsList')
     }
 
@@ -99,9 +101,9 @@ const AdminHomePage:FC = () => {
         return (
             <Link key={linkData.name} href={linkData.pathURL}>
 
-                    <a className='btn btn-secondary'>
-                        {linkData.name}
-                    </a>
+                <a className='btn btn-secondary'>
+                    {linkData.name}
+                </a>
 
             </Link>
         )
@@ -111,7 +113,7 @@ const AdminHomePage:FC = () => {
             <h1>Dashboard</h1>
             <h2>Your IP is: {ip}</h2>
             <h2>ENV : {process.env.NODE_ENV}</h2>
-            <div className={'quick-access'}  aria-label="outlined button group">
+            <div className={'quick-access'} aria-label="outlined button group">
                 <h2>Quick Access</h2>
                 <div className={'quick-access-items'}>
                     {renderQuickAccessLinks}
@@ -120,7 +122,8 @@ const AdminHomePage:FC = () => {
             </div>
             <div className={'active-events'}>
                 <h2>Connected Sockets</h2>
-                <button className={'btn btn-primary'} onClick={getActiveUsersCount}>active sockets : {state?.socketsCount}</button>
+                <button className={'btn btn-primary'} onClick={getActiveUsersCount}>active sockets
+                    : {state?.socketsCount}</button>
 
             </div>
             {/*<Analytics/>*/}
@@ -132,8 +135,17 @@ const AdminHomePage:FC = () => {
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
     return {
         props: {
-            // ...(await serverSideTranslations(context.locale as string, ['common'])),
+
         }
     }
 })
+
+AdminHomePage.getLayout = function getLayout(page: ReactElement) {
+
+    return (
+        <AdminLayout>
+            {page}
+        </AdminLayout>
+    )
+}
 export default AdminHomePage;

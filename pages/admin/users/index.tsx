@@ -1,21 +1,22 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {adminGetUsers} from "@store/adminActions/adminUserActions";
 import {wrapper} from "@store/store";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {useRouter} from "next/router";
-import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
+// import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import type {ReactElement} from 'react';
+import AdminLayout from "@components/layouts/AdminLayout";
 
 
 const users = () => {
     const dispatch = useDispatch()
     const {pathname, asPath, query} = useRouter()
-    const usersData = useSelector((store: StoreTypes) => {
-        return {
-            users: store?.adminPanelUsers?.users,
-            totalCount: store?.adminPanelUsers?.totalCount
-        }
-    })
+    // const usersData = useSelector((store: StoreTypes) => {
+    //     return {
+    //         users: store?.adminPanelUsers?.users,
+    //         totalCount: store?.adminPanelUsers?.totalCount
+    //     }
+    // })
 
     const dataConfig = useMemo(() => {
         return {
@@ -46,8 +47,18 @@ const users = () => {
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
     return {
         props: {
-            ...(await serverSideTranslations(context.locale as string, ['common'])),
+
         }
     }
 })
+
+users.getLayout = function getLayout(page: ReactElement) {
+
+    return (
+        <AdminLayout>
+            {page}
+        </AdminLayout>
+    )
+}
+
 export default users;

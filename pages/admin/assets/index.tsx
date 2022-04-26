@@ -1,10 +1,8 @@
-import React, {FC, useEffect, useMemo, useState} from 'react';
+import React, {  useEffect, useMemo, useState} from 'react';
 import dynamic from 'next/dynamic'
 import {useRouter} from "next/router";
-//@ts-ignore
 import _adminGetPostsQueryGenerator from "@_variables/adminVariables/_adminGetPostsQueryGenerator";
 import {wrapper} from "@store/store";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useDispatch, useSelector} from "react-redux";
 import styled from "styled-components";
 import {adminGetMetas, adminGetPosts} from "@store/adminActions/adminPanelPostsActions";
@@ -15,6 +13,8 @@ import {adminGetComments} from "@store/adminActions/adminPanelCommentsActions";
 import {adminGetForms} from "@store/adminActions/adminPanelFormsActions";
 import {adminGetPages} from "@store/adminActions/adminPanelPagesActions";
 import {adminGetOrders} from "@store/adminActions/adminPanelOrdersActions";
+import type {ReactElement} from 'react';
+import AdminLayout from "@components/layouts/AdminLayout";
 
 const TableHeader = dynamic(
     () => import('@components/adminIncludes/assetComponents/TableHeader/TableHeader'),
@@ -33,8 +33,8 @@ const TableControls = dynamic(
 const AdminAssetPageStyledDiv = styled.div`
 
 `
-const assets: FC = () => {
-    const {query, pathname, asPath,push} = useRouter()
+const assets = () => {
+    const {query, pathname, asPath} = useRouter()
     const dispatch = useDispatch()
 
 
@@ -121,15 +121,20 @@ const assets: FC = () => {
 };
 
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
+export const getServerSideProps = wrapper.getServerSideProps(() => async (context) => {
     return {
-        props: {
-            ...(await serverSideTranslations(context.locale as string, ['common'])),
-        }
+        props: {}
     }
 })
 
+assets.getLayout = function getLayout(page: ReactElement) {
 
+    return (
+        <AdminLayout>
+            {page}
+        </AdminLayout>
+    )
+}
 export default assets;
 
 
