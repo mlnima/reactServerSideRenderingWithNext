@@ -40,6 +40,7 @@ export interface DesignSettings {
 }
 
 export interface IdentitySettings {
+
     favIcon: string;
     googleAnalyticsId: string;
     allowUserToPost: boolean;
@@ -67,6 +68,7 @@ export interface IdentitySettings {
     actorsPageDescription?: string,
     actorPageDescription?: string,
     searchPageDescription?:string,
+
     homePageSidebar: boolean | string,
     metaPageSidebar: boolean | string,
     postPageSidebar: boolean | string,
@@ -74,8 +76,12 @@ export interface IdentitySettings {
     userPageSidebar: boolean | string,
     tagPageSidebar: boolean | string,
     actorPageSidebar: boolean | string,
+    categoryPageSidebar: boolean | string;
+    categoriesPageSidebar: boolean | string;
+    tagsPageSidebar: boolean | string;
     searchPageSidebar: boolean | string,
     actorsPageSidebar: boolean | string,
+
     customScriptsAsString: string,
     siteMode: string,
     cookieReadMoreLink: string,

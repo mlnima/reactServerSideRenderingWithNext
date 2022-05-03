@@ -5,11 +5,11 @@ import {useDispatch, useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import dynamic from "next/dynamic";
 import {getComments, getPost, viewPost} from "@store/clientActions/postsAction";
-import {useRouter} from "next/router";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
-import isValidObjectId from '@_variables/util/mongoIdValidator';
-import type { ReactElement } from 'react';
+import styled from "styled-components";
+import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
+import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 
 const Soft404 = dynamic(() =>
     import('@components/includes/Soft404/Soft404'))
@@ -20,47 +20,54 @@ const LearnTypePostPage = dynamic(() =>
     import('@components/includes/PostPage/LearnTypePostPage/LearnTypePostPage'))
 const VideoTypePostPage = dynamic(() =>
     import('@components/includes/PostPage/VideoTypePostPage/VideoTypePostPage'))
-
 const PostPage = dynamic(() => import('@components/includes/PostPage/PostPage'))
 
+
+const PageStyle = styled.div`
+  
+  
+`
+
 const postPage = () => {
-    const {query} = useRouter()
+
     const dispatch = useDispatch()
 
-    const {postType, _id,status,role} = useSelector(({posts,user}: StoreTypes) => {
+    const {postType, _id, status, role, sidebar} = useSelector(({posts, user, settings}: StoreTypes) => {
+
         return {
-            postType: posts?.post?.postType || 'video',
+            postType: posts?.post?.postType,
             _id: posts?.post?._id,
             role: user?.userData?.role,
             status: posts?.post?.status,
+            sidebar: settings?.identity?.postPageSidebar,
+            //sidebar: undefined,
+
         }
     });
 
 
     useEffect(() => {
-        dispatch(getComments(query.id as string))
-        dispatch(viewPost(_id))
+        _id && dispatch(getComments(_id as string));
+        _id && dispatch(viewPost(_id));
     }, [])
 
-return (
-    <>
-        {role === 'administrator' ? <EditLinkForAdmin/> : null}
-        {
-            status !== 'published' || !_id ?  <Soft404/> :
-                postType === 'learn' ? <LearnTypePostPage/> :
-                    postType === 'video' ? <VideoTypePostPage/> :
-                        <PostPage/>
-
-        }
-    </>
-)
+    return (
+        <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
+            {role === 'administrator' ? <EditLinkForAdmin/> : null}
+            {((status === 'published' || role === 'administrator') && postType === 'video') && <VideoTypePostPage/>}
+            {((status === 'published' || role === 'administrator') && postType === 'learn') && <LearnTypePostPage/>}
+            {((status === 'published' || role === 'administrator') && postType !== 'learn' && postType !== 'video') &&
+            <PostPage/>}
+            {(status !== 'published' && role !== 'administrator') && <Soft404/>}
+            {!status && <Soft404/>}
+            <SidebarWidgetAreaRenderer sidebar={sidebar} position={'postPage'}/>
+        </PageStyle>
+    )
 
 
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-
-    if (!isValidObjectId(context.query?.id))return {notFound: true}
 
     // @ts-ignore
     await store.dispatch(getDefaultPageData(
@@ -74,8 +81,8 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         store
     ))
 
-//@ts-ignore
-    await store.dispatch(getPost(context.query?.id as string, context.locale as string))
+    //@ts-ignore
+    context.query?.identifier && await store.dispatch(getPost(context.query?.identifier as string, context.locale as string))
 
     return {
         props: {
@@ -84,7 +91,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     }
 });
 
-postPage.getLayout = function getLayout(page:ReactElement) {
+postPage.getLayout = function getLayout(page: ReactElement) {
     return (
         <AppLayout>
             {page}

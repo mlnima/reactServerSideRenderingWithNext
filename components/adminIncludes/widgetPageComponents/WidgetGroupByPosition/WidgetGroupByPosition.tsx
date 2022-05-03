@@ -28,7 +28,7 @@ const WidgetGroupByPositionStyledDiv = styled.div`
   }
 
   @media only screen and (min-width: 768px) {
-    width: ${({filter}: { filter: string }) => filter !== 'all' ? '650px' : '650px'} ;
+    width: 650px ;
     position: relative;
     .widget-model {
       width: 650px;
@@ -44,21 +44,21 @@ const WidgetGroupByPositionStyledDiv = styled.div`
 `
 
 interface WidgetGroupByPositionPropTypes {
-    filter: string,
+    filters: string[],
     position: string
 }
 
-const WidgetGroupByPosition: FC<WidgetGroupByPositionPropTypes> = ({filter, position}) => {
+const WidgetGroupByPosition: FC<WidgetGroupByPositionPropTypes> = ({filters, position}) => {
 
     const widgets = useSelector(
         ({adminPanelWidgets}: StoreTypes) => adminPanelWidgets?.adminPanelWidgets?.[position]
         ?.sort((a, b) => (a.data.widgetIndex > b.data.widgetIndex) ? 1 : -1)
     )
 
-    if (filter === position || filter === 'all') {
+    if (filters.includes(position)) {
         return (
             <Draggable handle={'.widgetAdminPanelItemHeader'}>
-                <WidgetGroupByPositionStyledDiv filter={filter} className='widgetAdminPanelItem'>
+                <WidgetGroupByPositionStyledDiv className='widgetAdminPanelItem'>
 
                     <p className='widgetAdminPanelItemHeader'>{convertVariableNameToName(position)}</p>
 

@@ -6,21 +6,34 @@ import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 import dynamic from "next/dynamic";
+
 const Soft404 = dynamic(() => import('@components/includes/Soft404/Soft404'));
-import type { ReactElement } from 'react';
+import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
+import styled from "styled-components";
+import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
+
+const PageStyle = styled.div`
+  ${({stylesData}: { stylesData: string }) => stylesData || ''}
+`
 
 const page = () => {
 
-    const pageData = useSelector(({posts}: StoreTypes) => {
-        return posts.pageData
+    const {pageData,sidebar} = useSelector(({posts}: StoreTypes) => {
+        return {
+            sidebar: posts.pageData?.sidebar,
+            pageData: posts.pageData
+        }
     })
 
-    if (pageData?.pageName){
+    if (pageData?.pageName) {
         return (
-            <MainWidgetArea position={pageData?.pageName} className='page main' stylesData={pageData?.pageStyle || ''}/>
+            <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`} stylesData={pageData?.pageStyle || ''}>
+                <MainWidgetArea position={pageData?.pageName} className='page main'/>
+                <SidebarWidgetAreaRenderer sidebar={sidebar} position={pageData?.pageName}/>
+            </PageStyle>
         )
-    }else return <Soft404/>
+    } else return <Soft404/>
 
 }
 
@@ -34,7 +47,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             context.query.pageName + 'LeftSidebar',
             context.query.pageName + 'RightSidebar'
         ],
-        null ,
+        null,
         store
     ))
 
@@ -47,7 +60,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     }
 })
 
-page.getLayout = function getLayout(page:ReactElement) {
+page.getLayout = function getLayout(page: ReactElement) {
     return (
         <AppLayout>
             {page}

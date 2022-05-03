@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from "react";
+import { useEffect, useState} from "react";
 import styled from "styled-components";
 
 const BackToTopButtonStyledDiv = styled.div`
@@ -15,17 +15,15 @@ const BackToTopButtonStyledDiv = styled.div`
   #back-to-top-button {
     width: 24px;
     height: 24px;
-    //background-color: var(--navigation-text-color, #ccc);
     background-color: var(--main-background-color, #ccc);
     margin: 5px;
-  
     mask: url('/public/asset/images/icons/angle-up-solid.svg') no-repeat center;
     -webkit-mask: url('/public/asset/images/icons/angle-up-solid.svg') no-repeat center;
   }
 
 
 `
-const BackToTopButton: FC = () => {
+const BackToTopButton = () => {
 
     const [showButton,setShowButton] = useState(false)
 

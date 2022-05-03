@@ -1,7 +1,11 @@
 import Link from 'next/link'
 import styled from "styled-components";
 import {useDispatch} from "react-redux";
-import {adminCheckAndRemoveDeletedVideos, setMetaThumbnailsAndCount} from "@store/adminActions/adminPanelPostsActions";
+import {
+    adminCheckAndRemoveDeletedVideos,
+    setGeneratePermaLinkForPosts,
+    setMetaThumbnailsAndCount
+} from "@store/adminActions/adminPanelPostsActions";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import React from "react";
@@ -52,6 +56,7 @@ const tools = () => {
                 <a className={'btn btn-primary'}>Terminal</a>
             </Link>
             <button className={'btn btn-primary'} onClick={()=>dispatch(adminCheckAndRemoveDeletedVideos())}>Check and Removed deleted videos</button>
+            <button className={'btn btn-primary'} onClick={()=>dispatch(setGeneratePermaLinkForPosts())}>Generate PermaLink For Posts</button>
             <button className={'btn btn-primary'} onClick={()=>dispatch(setMetaThumbnailsAndCount())}>Set New Meta Thumbnails And Count Fro Meta</button>
             <button className={'btn btn-primary'} onClick={()=>dispatch(setMetaThumbnailsAndCount('tags'))}>Set New Thumbnails And Count for Tags  </button>
             <button className={'btn btn-primary'} onClick={()=>dispatch(setMetaThumbnailsAndCount('categories'))}>Set New Thumbnails And Count for categories  </button>

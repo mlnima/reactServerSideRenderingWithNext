@@ -61,7 +61,8 @@ const runServer = () => {
     server.use('/public', express.static(path.join(__dirname, 'public'),{maxAge: "604800000"}))
     server.get('/api/admin/settings/clearCaches', adminAuthMiddleware, (req, res) => {
         apiCache.clear(req.params.collection)
-        res.json({message:'Cache Deleted'})
+        res.json({message:'Deleting Cache Command Executed'})
+
     });
     server.get('/robots.txt', (req, res) => clientRobotTxtController(req, res));
     server.get('/manifest.json', cacheSuccesses,(req,res)=>{clientMainFestController(req,res)})

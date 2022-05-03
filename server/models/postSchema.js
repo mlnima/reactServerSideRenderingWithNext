@@ -9,6 +9,7 @@ const downloadLinks = mongoose.Schema({
 const postSchema =  new Schema({
     author: {type: Schema.Types.ObjectID, ref: 'user'},
     title: String,
+    permaLink: String,
     company: String,
     description: mongoose.Mixed,
     descriptionRenderer: String,

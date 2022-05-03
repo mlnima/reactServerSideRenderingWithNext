@@ -57,6 +57,11 @@ const rewrites = () => {
                 destination: '/post/:postType/:id',
                 has: [{type: 'query', key: 'id'}]
             },
+            // {
+            //     source: `/:title`,
+            //     destination: '/post/undefinedType/:title',
+            //     has: [{type: 'query', key: 'title'}]
+            // },
             // {source: `/:locale(${languages})?/login`, destination: '/auth/login'},
             {source: `/login`, destination: '/auth/login'},
             // {source: `/:locale(${languages})?/register`, destination: '/auth/register'},
@@ -68,7 +73,13 @@ const rewrites = () => {
             {source: `/:postType(video|post|product|article|book)?/:title`, destination: '/post'},
 
         ],
-        fallback: []
+        fallback: [
+            {
+                source: `/:title`,
+                destination: '/post/undefinedType/:title',
+                has: [{type: 'query', key: 'title'}]
+            }
+        ]
     }
 }
 

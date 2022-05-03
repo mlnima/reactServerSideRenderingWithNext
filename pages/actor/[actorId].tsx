@@ -10,22 +10,18 @@ import Link from "next/link";
 import {getPosts} from "@store/clientActions/postsAction";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 import AppLayout from "@components/layouts/AppLayout";
-import type { ReactElement } from 'react'
-
+import type {ReactElement} from 'react'
+import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
+import ActorBio from '../../components/includes/pagesComponents/actorsPageComponents/Components/ActorBio/ActorBio'
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
-const ActorBio = dynamic(() =>
-    import('../../components/includes/pagesComponents/actorsPageComponents/Components/ActorBio/ActorBio'))
 
-const StyledMain = styled.main`
-
-  grid-area: main;
+const PageStyle = styled.div`
   width: 100%;
   height: 100%;
-
+  
   .posts-page-info {
     margin: 5px 0;
-
     h1 {
       margin: 0;
       padding: 0 10px;
@@ -40,37 +36,38 @@ const actorPage = () => {
 
     const {query} = useRouter()
 
-    const actorPageData = useSelector(({posts, user, settings}: StoreTypes) => {
+    const {role, actorPageStyle, sidebar} = useSelector(({user, settings}: StoreTypes) => {
         return {
-            actor: posts?.actorData,
             role: user?.userData.role,
-            actorPageStyle: settings?.design?.actorPageStyle
+            actorPageStyle: settings?.design?.actorPageStyle,
+            sidebar: settings?.identity?.actorPageSidebar
         }
     })
 
     return (
+        <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`} stylesData={actorPageStyle}>
+            <main id={'primary'} className="main posts-page">
+                {role === 'administrator' ?
+                    <div className='edit-as-admin'>
+                        <Link href={'/admin/meta?id=' + query.actorId}>
+                            <a className={'btn btn-primary'}>
+                                Edit
+                            </a>
+                        </Link>
+                    </div>
+                    : null}
 
-        <StyledMain id={'main-content'} className="main posts-page" stylesData={actorPageData.actorPageStyle}>
-            {actorPageData.role === 'administrator' ?
-                <div className='edit-as-admin'>
-                    <Link href={'/admin/meta?id=' + query.actorId}>
-                        <a className={'btn btn-primary'}>
-                            Edit
-                        </a>
-                    </Link>
-                </div>
-                : null}
-
-            <ActorBio/>
-            <WidgetsRenderer
-                position='actorPageTop'
-            />
-            <PostsPage/>
-            <WidgetsRenderer
-                position='actorPageBottom'
-            />
-        </StyledMain>
-
+                <ActorBio/>
+                <WidgetsRenderer
+                    position='actorPageTop'
+                />
+                <PostsPage/>
+                <WidgetsRenderer
+                    position='actorPageBottom'
+                />
+            </main>
+            <SidebarWidgetAreaRenderer sidebar={sidebar} position={'actorPage'}/>
+        </PageStyle>
     )
 };
 
@@ -99,7 +96,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 });
 
 
-actorPage.getLayout = function getLayout(page:ReactElement) {
+actorPage.getLayout = function getLayout(page: ReactElement) {
     return (
         <AppLayout>
             {page}

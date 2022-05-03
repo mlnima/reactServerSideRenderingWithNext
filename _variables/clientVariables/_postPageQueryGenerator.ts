@@ -1,8 +1,7 @@
-const _postPageQueryGenerator = (queryData,cache)=>{
+const _postPageQueryGenerator = (queryData:{_id?:string,title?:string})=>{
     const _id = queryData._id ? {_id: queryData._id} : {}
     const title = queryData.title ? {title: encodeURIComponent(queryData.title)} : {}
-    const cacheStatus = cache ? {cache} : {}
-    const queriesDataObject  = {..._id,...title,...cacheStatus}
+    const queriesDataObject  = {..._id,...title}
     const queries= new URLSearchParams(queriesDataObject).toString()
 
     return `?${queries}`

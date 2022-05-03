@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const PostPageStyledMain = styled.main`
+const PostPageStyle = styled.div`
 
   display: flex;
   justify-self: center;
@@ -8,7 +8,7 @@ const PostPageStyledMain = styled.main`
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  grid-area: main;
+  grid-area: primary;
 
   .rating-price-download {
     width: 100%;
@@ -59,4 +59,4 @@ const PostPageStyledMain = styled.main`
   ${(props: { postPageStyle: string }) => props?.postPageStyle || ''}
 `
 
-export default PostPageStyledMain
+export default PostPageStyle

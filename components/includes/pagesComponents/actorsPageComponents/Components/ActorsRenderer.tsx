@@ -28,7 +28,6 @@ let ActorsRendererStyledDiv = styled.div`
 interface ActorsRendererPropTypes {
     uniqueData?: {
         metaData?: Meta[],
-
     }
 }
 

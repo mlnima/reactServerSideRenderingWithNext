@@ -10,7 +10,6 @@ import {useRouter} from "next/router";
 import {faPenSquare} from "@fortawesome/free-solid-svg-icons/faPenSquare";
 import {faGear} from "@fortawesome/free-solid-svg-icons/faGear";
 import {faEnvelope} from "@fortawesome/free-solid-svg-icons/faEnvelope";
-import CSSTransition from 'react-transition-group';
 
 let StyledDiv = styled.div`
   position: fixed;
@@ -69,7 +68,7 @@ const AdminTools: FC = () => {
                         <FontAwesomeIcon icon={faCogs} className='admin-tools-item-logo'/>
                     </button>
 
-                    {open ?
+                    {open &&
                         //@ts-ignore
                         <>
                             <Link href={'/admin'} locale={false}>
@@ -96,8 +95,6 @@ const AdminTools: FC = () => {
                                 <FontAwesomeIcon icon={faEraser} className='admin-tools-item-logo'/>
                             </button>
                         </>
-
-                        : null
                     }
 
                 </StyledDiv>

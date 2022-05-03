@@ -18,7 +18,7 @@ const LearnTypePostPageStyledMain = styled(PostPageStyledMain)`
   max-width: 1300px;
   width: fit-content;
   margin: auto;
-
+  
   .rating-price-download {
     display: flex;
     flex-wrap: wrap;
@@ -55,7 +55,7 @@ const LearnTypePostPage = () => {
     })
 
     return (
-        <LearnTypePostPageStyledMain className='main post-page' postPageStyle={learnTypePostPageData.postPageStyle}>
+        <LearnTypePostPageStyledMain id={'primary'} className='main post-page' postPageStyle={learnTypePostPageData.postPageStyle}>
             <PostTitle/>
             <LearnTypePostPageDescription/>
             <div className='rating-price-download'>

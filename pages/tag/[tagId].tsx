@@ -9,13 +9,14 @@ import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import Link from "next/link";
 import {getPosts} from "@store/clientActions/postsAction";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
-import type { ReactElement } from 'react';
+import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
+import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
-let StyledMain = styled.main`
-  grid-area: main;
+let PageStyle = styled.div`
+
   width: 100%;
 
   .posts-page-info {
@@ -31,36 +32,40 @@ let StyledMain = styled.main`
 `
 const tagPage = () => {
 
-    const {role, tag, tagPageStyle} = useSelector(({user, posts, settings}: StoreTypes) => {
+    const {role, tag, tagPageStyle, sidebar} = useSelector(({user, posts, settings}: StoreTypes) => {
         return {
             role: user?.userData?.role,
             tag: posts.tagData,
             tagPageStyle: settings.design?.tagPageStyle,
+            sidebar: settings?.identity?.tagPageSidebar
         }
     })
 
     return (
-        <StyledMain id={'main-content'} className="main posts-page" tagPageStyle={tagPageStyle}>
-            {role === 'administrator' ?
-                <div className='edit-as-admin'>
-                    <Link href={'/admin/meta?id=' + tag._id}>
-                        <a className={'btn btn-primary'}>
-                            Edit
-                        </a>
-                    </Link>
-                </div>
-                : null}
-            {tag ? <PostsPageInfo metaData={tag}/> : null}
+        <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar `} tagPageStyle={tagPageStyle}>
+            <main id={'primary'} className="main posts-page">
+                {role === 'administrator' ?
+                    <div className='edit-as-admin'>
+                        <Link href={'/admin/meta?id=' + tag._id}>
+                            <a className={'btn btn-primary'}>
+                                Edit
+                            </a>
+                        </Link>
+                    </div>
+                    : null}
+                {tag ? <PostsPageInfo metaData={tag}/> : null}
 
 
-            <WidgetsRenderer
-                position={'tagPageTop'}
-            />
-            <PostsPage/>
-            <WidgetsRenderer
-                position={'tagPageBottom'}
-            />
-        </StyledMain>
+                <WidgetsRenderer
+                    position={'tagPageTop'}
+                />
+                <PostsPage/>
+                <WidgetsRenderer
+                    position={'tagPageBottom'}
+                />
+            </main>
+            <SidebarWidgetAreaRenderer sidebar={sidebar} position={'tagPage'}/>
+        </PageStyle>
     )
 };
 
@@ -75,7 +80,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             'tagPageLeftSidebar',
             'tagPageBottom',
             'tagPageRightSidebar'
-        ],null,
+        ], null,
         store))
 
     // @ts-ignore
@@ -88,7 +93,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     }
 });
 
-tagPage.getLayout = function getLayout(page:ReactElement) {
+tagPage.getLayout = function getLayout(page: ReactElement) {
     return (
         <AppLayout>
             {page}

@@ -4,13 +4,13 @@ import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {FC} from "react";
 
 const VideoPlayerStyledDiv = styled.div`
-  margin: 0;
+  margin: 0 auto;
   position: relative;
   top: 0;
   right: 0;
   left: 0;
   width: 100%;
-
+  max-width: 1300px;
   .responsive-player {
     overflow: hidden;
     position: relative;
@@ -39,10 +39,7 @@ const VideoPlayerStyledDiv = styled.div`
     outline: none;
     border-radius: 10px;
   }
-
-  @media only screen and (min-width: 768px) {
-    max-width: 1300px;
-  }
+  
 `
 
 

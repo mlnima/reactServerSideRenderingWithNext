@@ -112,8 +112,6 @@ const meta = (props: any) => {
     }, [props]);
 
 
-
-
     const onActiveEditingLanguageChangeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setEditingData({
             ...editingData,
@@ -138,6 +136,10 @@ const meta = (props: any) => {
                 }
             }))
         }
+    }
+
+    const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        dispatch(adminEditMeta({[e.target.name]: e.target.value}))
     }
 
 
@@ -170,7 +172,7 @@ const meta = (props: any) => {
             <div className={'single-meta-page-section'}>
                 <p>Meta Image :</p>
                 {/*// @ts-ignore*/}
-                <input className={'form-control-input'} name={'imageUrl'} onChange={e => onInputChangeHandler(e)}
+                <input className={'form-control-input'} name={'imageUrl'} onChange={e => onChangeHandler(e)}
                        value={meta?.imageUrl || ''}/>
 
             </div>
@@ -178,28 +180,28 @@ const meta = (props: any) => {
                 <p>Count :</p>
                 {/*// @ts-ignore*/}
                 <input type={'number'} className={'form-control-input'} name={'count'}
-                       onChange={e => onInputChangeHandler(e)} value={meta?.count || 0}/>
+                       onChange={e => onChangeHandler(e)} value={meta?.count || 0}/>
 
             </div>
             <div className={'single-meta-page-section'}>
                 <p>Likes :</p>
                 {/*// @ts-ignore*/}
                 <input type={'number'} className={'form-control-input'} name={'likes'}
-                       onChange={e => onInputChangeHandler(e)} value={meta?.likes || 0}/>
+                       onChange={e => onChangeHandler(e)} value={meta?.likes || 0}/>
 
             </div>
             <div className={'single-meta-page-section'}>
                 <p>view :</p>
                 {/*// @ts-ignore*/}
                 <input type={'number'} className={'form-control-input'} name={'views'}
-                       onChange={e => onInputChangeHandler(e)} value={meta?.views || 0}/>
+                       onChange={e => onChangeHandler(e)} value={meta?.views || 0}/>
 
             </div>
             <div className={'single-meta-page-section'}>
                 <p>Rank :</p>
                 {/*// @ts-ignore*/}
                 <input type={'number'} className={'form-control-input'} name={'rank'}
-                       onChange={e => onInputChangeHandler(e)} value={meta?.rank || 0}/>
+                       onChange={e => onChangeHandler(e)} value={meta?.rank || 0}/>
 
             </div>
             <div className={'single-meta-page-section preview-image'}>
@@ -211,16 +213,27 @@ const meta = (props: any) => {
                        onChange={e => dispatch(adminEditMeta({imageUrlLock: e.target.checked}))}/>
             </div>
             <div className={'single-meta-page-section'}>
+                <p>Type :</p>
+                <select className={'custom-select'} name={'type'} onChange={e => onChangeHandler(e)}
+                        value={meta?.type}>
+                    <option value=''>Select</option>
+                    <option value='tags'>Tag</option>
+                    <option value='categories'>Category</option>
+                    <option value='actors'>Actor</option>
+                </select>
+            </div>
+            <div className={'single-meta-page-section'}>
                 <p>Status :</p>
-                <select className={'custom-select'} name={'status'} onChange={e => onInputChangeHandler(e)}
+                <select className={'custom-select'} name={'status'} onChange={e => onChangeHandler(e)}
                         value={meta?.status}>
-                    <option value='' >Select</option>
+                    <option value=''>Select</option>
                     <option value='draft'>Draft</option>
                     <option value='published'>Published</option>
                     <option value='trash'>Trash</option>
                     <option value='pending'>Pending</option>
                 </select>
             </div>
+
             <div className={'single-meta-page-section'}>
                 <p>Meta Description :</p>
                 <textarea className={'form-control-input'}
@@ -240,11 +253,14 @@ const meta = (props: any) => {
             <div className='action-buttons'>
                 <button className='btn btn-primary' onClick={() => dispatch(adminUpdateMeta(meta))}>Update</button>
 
-                {!deleteButton ?
-                    <button className='btn btn-danger' onClick={() => setDeleteButton(true)}>I Want To Delete This
-                        Meta</button> : null}
-                {deleteButton ? <button className='btn btn-danger'
-                                        onClick={() => dispatch(adminDeleteMeta(router?.query?.id))}>Delete</button> : null}
+                {!deleteButton && <button className={'btn btn-danger'}
+                                          onClick={() => setDeleteButton(true)}>
+                                          I Want To Delete This Meta
+                                  </button>}
+                {!!deleteButton && <button onClick={() => dispatch(adminDeleteMeta(router?.query?.id))}
+                                           className='btn btn-danger'>
+                    Delete
+                </button>}
 
             </div>
 

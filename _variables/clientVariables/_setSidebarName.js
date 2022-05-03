@@ -1,8 +1,8 @@
 module.exports = (pathname, pageName, direction) => {
 
     return pathname === '/' ? `homePage${direction}Sidebar` :
-        pathname === '/post' ? `postPage${direction}Sidebar` :
-            pathname === '/post/[postType]/[id]' ? `postPage${direction}Sidebar` :
+        // pathname === '/post' ? `postPage${direction}Sidebar` :
+        //     pathname === '/post/[postType]/[id]' ? `postPage${direction}Sidebar` :
                 pathname === '/posts' ? `postsPage${direction}Sidebar` :
                     pathname === '/tags' ? `tagsPage${direction}Sidebar` :
                         pathname === '/categories' ? `categoriesPage${direction}Sidebar` :

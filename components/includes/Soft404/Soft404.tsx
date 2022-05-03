@@ -10,7 +10,7 @@ const Soft404StyledDiv = styled.div`
   align-items: center;
   height: 80vh;
   background-color: var(--main-background-color, #000);
-  grid-area: main;
+  //grid-area: main;
 
   h1 {
     color: var(--main-text-color, #fff);

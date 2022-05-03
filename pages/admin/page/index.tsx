@@ -47,7 +47,11 @@ const page = (props: any) => {
     }, [props]);
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) => {
-        dispatch(adminEditPageField({[e.target.name]: e.target.value}))
+        console.log(e.target.value)
+        const finalValue = e.target.value === 'true' ? true :
+            e.target.value === 'false' ? false :
+                e.target.value
+        dispatch(adminEditPageField({[e.target.name]: finalValue}))
     }
 
     const onStyleChangeHandler = (value: string) => {
@@ -105,11 +109,11 @@ const page = (props: any) => {
                     <p>Sidebar:</p>
                     <select name={'sidebar'} className={'custom-select'} onChange={e => onChangeHandler(e)}
                             value={pageData.sidebar}>
-                        <option value='' >Select</option>
+                        <option value={'no'}>No</option>
                         <option value={'left'}>Left</option>
                         <option value={'right'}>Right</option>
                         <option value={'both'}>Both</option>
-                        <option value={'false'}>No</option>
+
                     </select>
                 </div>
                 <div className={'form-group'}>

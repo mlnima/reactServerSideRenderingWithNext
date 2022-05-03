@@ -11,14 +11,14 @@ import {getMetas} from "@store/clientActions/postsAction";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 import {wrapper} from "@store/store";
 import dynamic from "next/dynamic";
-import type { ReactElement } from 'react';
+import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
+import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
-const CategoriesPageStyledMain = styled.main`
-  grid-area: main;
-  ${({categoriesPageStyle}: { categoriesPageStyle: string }) => categoriesPageStyle || ''}
+const PageStyle = styled.div`
+  ${({stylesData}: { stylesData: string }) => stylesData || ''}
 `
 
 const categoriesPage = () => {
@@ -29,10 +29,12 @@ const categoriesPage = () => {
         topWidgets,
         bottomWidgets,
         totalCount,
-        postsCountPerPage
+        postsCountPerPage,
+        sidebar
     } = useSelector(({settings, posts, widgets}: StoreTypes) => {
         return {
             categoriesPageStyle: settings?.design?.categoriesPageStyle,
+            sidebar: settings?.identity?.categoriesPageSidebar,
             totalCount: posts.totalCount,
             //@ts-ignore
             topWidgets: widgets?.widgetInGroups?.categoriesPageTop?.length,
@@ -45,23 +47,23 @@ const categoriesPage = () => {
 
 
     return (
-        <CategoriesPageStyledMain id={'main-content'} className={'content main '}
-                                  categoriesPageStyle={categoriesPageStyle}>
+        <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar `}
+                   stylesData={categoriesPageStyle}>
+            <main id={'primary'} className={'content main '}>
+                {topWidgets ? <WidgetsRenderer position={'categoriesPageTop'}/> : null}
+                <CategoriesRenderer cardWidthDesktop={undefined}/>
+                <PaginationComponent
+                    isActive={true}
+                    currentPage={query?.page ? parseInt(query?.page as string) : 1}
+                    totalCount={totalCount}
+                    size={postsCountPerPage}
+                    maxPage={Math.ceil(totalCount / postsCountPerPage)}
+                />
+                {bottomWidgets ? <WidgetsRenderer position={'categoriesPageBottom'}/> : null}
 
-
-            {topWidgets ? <WidgetsRenderer position={'categoriesPageTop'}/> : null}
-
-            <CategoriesRenderer cardWidthDesktop={undefined}/>
-            <PaginationComponent
-                isActive={true}
-                currentPage={query?.page ? parseInt(query?.page as string) : 1}
-                totalCount={totalCount}
-                size={postsCountPerPage}
-                maxPage={Math.ceil(totalCount / postsCountPerPage)}
-            />
-            {bottomWidgets ? <WidgetsRenderer position={'categoriesPageBottom'}/> : null}
-
-        </CategoriesPageStyledMain>
+            </main>
+            <SidebarWidgetAreaRenderer sidebar={sidebar} position={'categoriesPage'}/>
+        </PageStyle>
     );
 };
 
@@ -93,7 +95,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 
 });
 
-categoriesPage.getLayout = function getLayout(page:ReactElement) {
+categoriesPage.getLayout = function getLayout(page: ReactElement) {
     return (
         <AppLayout>
             {page}

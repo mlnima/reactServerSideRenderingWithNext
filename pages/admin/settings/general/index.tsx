@@ -590,7 +590,7 @@ const settings = () => {
                 {/*           onChange={e => onChangeHandler(e)}/>*/}
                 {/*</div>*/}
                 <h2>Widget Areas</h2>
-                <div className={'sidebarsStatus site-settings-form-section-parent'}>
+                <div className={'site-settings-form-section-parent'}>
                     {widgetAreas.map((widgetArea, index) => {
                         return (
                             <div className={'site-settings-form-section'} key={index}>
@@ -599,7 +599,6 @@ const settings = () => {
                                         onChange={e => onChangeHandler(e)}>
                                     <option>select</option>
                                     <option value='enable'>Enable</option>
-                                    <option value='disable'>Disable</option>
                                 </select>
                             </div>
                         )
@@ -614,11 +613,10 @@ const settings = () => {
                                 {/*// @ts-ignore*/}
                                 <select className={'custom-select'} name={sidebar} value={identity[sidebar]}
                                         onChange={e => onChangeHandler(e)}>
-                                    <option>select</option>
-                                    <option value='left'>Left</option>
-                                    <option value='right'>Right</option>
-                                    <option value='both'>Both</option>
-                                    <option value='false'>Disable</option>
+                                    <option value={'no'}>No</option>
+                                    <option value={'left'}>Left</option>
+                                    <option value={'right'}>Right</option>
+                                    <option value={'both'}>Both</option>
                                 </select>
                             </div>
                         )

@@ -5,6 +5,8 @@ import _metaPageQueryGenerator from "@_variables/clientVariables/_metaPageQueryG
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import {convertMetasTypeToSingular, getTextDataWithTranslation, reduceArrayOfDataToIds} from "@_variables/_variables";
 import staticDataJson from "../../static/jsons/staticData.json";
+import isValidObjectId from '@_variables/util/mongoIdValidator';
+
 import {AnyAction} from "redux";
 import {
     DELETE_COMMENT,
@@ -24,7 +26,7 @@ import {
 
 
 //@ts-ignore
-export const setPostsData = (postsData):AnyAction  => async dispatch => {
+export const setPostsData = (postsData): AnyAction => async dispatch => {
     dispatch({
         type: SET_POSTS_DATA,
         payload: postsData
@@ -55,12 +57,12 @@ export const getPosts = (context, metaId, cache, metaType, options) => async dis
                 //@ts-ignore
                 const title = res?.data?.meta?.name ? `${res?.data?.meta?.name || ''} ${getTextDataWithTranslation(context.locale, `${options.page}PageTitle`, staticData?.identity)} | ${staticData?.identity?.siteName || ''}` : staticData?.identity?.siteName
 
-                const description = getTextDataWithTranslation(context.locale, `${options.page}PageDescription` , staticData?.identity)+
-                                    ` ${res?.data?.meta?.name}`
+                const description = getTextDataWithTranslation(context.locale, `${options.page}PageDescription`, staticData?.identity) +
+                    ` ${res?.data?.meta?.name}`
 
 
-                const canonicalUrl= options?.page?.match('category|tag|actor') ?
-                    { canonicalUrl : `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${singularMetaForm}/${metaId}`} : {}
+                const canonicalUrl = options?.page?.match('category|tag|actor') ?
+                    {canonicalUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${singularMetaForm}/${metaId}`} : {}
 
 
                 dispatch({
@@ -68,7 +70,7 @@ export const getPosts = (context, metaId, cache, metaType, options) => async dis
                     payload: {
                         title: title || null,
                         description: description?.substring(0, 155) || null,
-                        keywords: res?.data?.meta?.name ?  [res?.data?.meta?.name] : null,
+                        keywords: res?.data?.meta?.name ? [res?.data?.meta?.name] : null,
                         ogTitle: title || null,
                         ogType: 'website',
                         ogDescription: description?.substring(0, 155) || null,
@@ -93,63 +95,66 @@ export const getPosts = (context, metaId, cache, metaType, options) => async dis
         })
 
 }
-
+//identifier
 //@ts-ignore
-export const getPost = (_id: string , locale : string):AnyAction  => async dispatch => {
-    const isDefaultLocale = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL;
+export const getPost = (identifier: string, locale: string): AnyAction => async dispatch => {
+    const queryGeneratorData = isValidObjectId(identifier) ? {_id: identifier} : {title: identifier}
 
-        await Axios.get(`/api/v1/posts/clientGetPost${_postPageQueryGenerator({_id})}`).then(res => {
-
-            const postData = res.data.post;
-            const postTitle = isDefaultLocale ?
-                postData?.title || '' :
-                postData?.translations?.[locale]?.title || postData?.title || '';
-            const postDescription = isDefaultLocale ?
-                postData?.description || '' :
-                postData?.translations?.[locale]?.description || postData?.description || ''
-
-            if (postData){
-                dispatch({
-                    type: GET_POST,
-                    payload: {post:postData,relatedPosts:res.data.relatedPosts}
-                })
-            }
-
-            const keywords =  [
-                ...(postData?.tags || []),
-                ...(postData?.categories || []),
-                ...(postData?.actors || [])
-            ].map(meta=>meta?.name)
-//video.movie
+    await Axios.get(`/api/v1/posts/clientGetPost${_postPageQueryGenerator(queryGeneratorData)}`).then(res => {
+        const postData = res.data.post;
+        if (postData) {
             dispatch({
-                type: SET_HEAD_DATA,
-                payload: {
-                    title: postTitle,
-                    description: postDescription?.substring(0, 155) || null,
-                    keywords,
-                    canonicalUrl:`${process.env.NEXT_PUBLIC_PRODUCTION_URL}/post/${postData?.postType|| 'article'}/${postData?._id}`,
-                    ogTitle: postTitle,
-                    // ogType: postData?.postType === 'video' ? 'video.other' : postData?.postType || '',
-                    ogType: 'website',
-                    ogDescription: postDescription?.substring(0, 155),
-                    ogUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/post/${postData?.postType || 'article'}/${postData?._id}`,
-                    ogImage: postData?.mainThumbnail || null,
-
-                    twitterCard: true,
-                    twitterUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/post/${postData?.postType|| 'article'}/${postData?._id}`,
-                    twitterTitle: postTitle,
-                    twitterDescription: postDescription?.substring(0, 155),
-                    twitterImage: postData?.mainThumbnail || null,
-                }
+                type: GET_POST,
+                payload: {post: postData, relatedPosts: res.data.relatedPosts}
             })
-        }).catch(err => {
+            setPostHeadData(postData, locale, dispatch)
+        }
+    }).catch(err => {
 
-        })
-    // }
+    })
 }
 
+const setPostHeadData = (postData, locale, dispatch) => {
+    const isDefaultLocale = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL;
+    const postTitle = isDefaultLocale ?
+        postData?.title || '' :
+        postData?.translations?.[locale]?.title || postData?.title || '';
+    const postDescription = isDefaultLocale ?
+        postData?.description || '' :
+        postData?.translations?.[locale]?.description || postData?.description || '';
+
+    const keywords = [
+        ...(postData?.tags || []),
+        ...(postData?.categories || []),
+        ...(postData?.actors || [])
+    ].map(meta => meta?.name)
+
+    dispatch({
+        type: SET_HEAD_DATA,
+        payload: {
+            title: postTitle,
+            description: postDescription?.substring(0, 155) || null,
+            keywords,
+            canonicalUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/post/${postData?.postType || 'article'}/${postData?._id}`,
+            ogTitle: postTitle,
+            // ogType: postData?.postType === 'video' ? 'video.other' : postData?.postType || '',
+            ogType: 'website',
+            ogDescription: postDescription?.substring(0, 155),
+            ogUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/post/${postData?.postType || 'article'}/${postData?._id}`,
+            ogImage: postData?.mainThumbnail || null,
+
+            twitterCard: true,
+            twitterUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/post/${postData?.postType || 'article'}/${postData?._id}`,
+            twitterTitle: postTitle,
+            twitterDescription: postDescription?.substring(0, 155),
+            twitterImage: postData?.mainThumbnail || null,
+        }
+    })
+}
+
+
 //@ts-ignore
-export const getEditingPost = (_id: string):AnyAction  => async dispatch => {
+export const getEditingPost = (_id: string): AnyAction => async dispatch => {
     await Axios.get(`/api/v1/posts/clientGetPost${_postPageQueryGenerator({_id})}`).then(res => {
         dispatch({
             type: GET_EDITING_POST,
@@ -161,7 +166,7 @@ export const getEditingPost = (_id: string):AnyAction  => async dispatch => {
 }
 
 //@ts-ignore
-export const userCreateNewPost = (data: PostTypes, router):AnyAction  => async dispatch => {
+export const userCreateNewPost = (data: PostTypes, router): AnyAction => async dispatch => {
 
     dispatch({type: LOADING, payload: true})
     const comments = data.comments ? {comments: reduceArrayOfDataToIds(data.comments)} : {}
@@ -205,7 +210,7 @@ export const userCreateNewPost = (data: PostTypes, router):AnyAction  => async d
 }
 
 //@ts-ignore
-export const userUpdatePost = (data: PostTypes):AnyAction  => async dispatch => {
+export const userUpdatePost = (data: PostTypes): AnyAction => async dispatch => {
 
     dispatch({type: LOADING, payload: true})
     const comments = data.comments ? {comments: reduceArrayOfDataToIds(data.comments)} : {}
@@ -249,7 +254,7 @@ export const userUpdatePost = (data: PostTypes):AnyAction  => async dispatch => 
 }
 
 //@ts-ignore
-export const editPostField = (data):AnyAction  => async dispatch => {
+export const editPostField = (data): AnyAction => async dispatch => {
     dispatch({
         type: EDIT_POST_FIELD,
         payload: data
@@ -257,7 +262,7 @@ export const editPostField = (data):AnyAction  => async dispatch => {
 }
 
 //@ts-ignore
-export const getMetas = (data, metaType, cache):AnyAction  => async dispatch => {
+export const getMetas = (data, metaType, cache): AnyAction => async dispatch => {
     const queries = _metaPageQueryGenerator(data, metaType, cache)
     await Axios.get(`/api/v1/posts/getMetas${queries}`).then(res => {
         dispatch({
@@ -273,7 +278,7 @@ export const getMetas = (data, metaType, cache):AnyAction  => async dispatch => 
 }
 
 //@ts-ignore
-export const getComments = (_id: string):AnyAction  => async dispatch => {
+export const getComments = (_id: string): AnyAction => async dispatch => {
     // @ts-ignore
     try {
         await Axios.get(`/api/v1/posts/getComments?onDocument=${_id}`).then(res => {
@@ -287,7 +292,7 @@ export const getComments = (_id: string):AnyAction  => async dispatch => {
                 payload: []
             })
         })
-    }catch (err){
+    } catch (err) {
         dispatch({
             type: SET_ALERT,
             payload: {
@@ -300,7 +305,7 @@ export const getComments = (_id: string):AnyAction  => async dispatch => {
 };
 
 //@ts-ignore
-export const addNewComment = (newComment):AnyAction  => async dispatch => {
+export const addNewComment = (newComment): AnyAction => async dispatch => {
     dispatch({
         type: NEW_COMMENT,
         payload: newComment
@@ -308,7 +313,7 @@ export const addNewComment = (newComment):AnyAction  => async dispatch => {
 }
 
 //@ts-ignore
-export const newComment = (commentData):AnyAction  => async dispatch => {
+export const newComment = (commentData): AnyAction => async dispatch => {
     dispatch({type: LOADING, payload: true})
     const body = {
         ...commentData,
@@ -322,7 +327,7 @@ export const newComment = (commentData):AnyAction  => async dispatch => {
                 message: 'Something Went Wrong'
             }
         })
-    }).catch(err=>{
+    }).catch(err => {
         dispatch({
             type: SET_ALERT,
             payload: {
@@ -335,7 +340,7 @@ export const newComment = (commentData):AnyAction  => async dispatch => {
 }
 
 //@ts-ignore
-export const deleteComments = (commentsListToDelete):AnyAction  => async dispatch => {
+export const deleteComments = (commentsListToDelete): AnyAction => async dispatch => {
     dispatch({type: LOADING, payload: true})
     await Axios.post(`/api/admin/posts/deleteComments`, {
         commentsIds: commentsListToDelete,
@@ -365,10 +370,10 @@ export const deleteComments = (commentsListToDelete):AnyAction  => async dispatc
 }
 
 //@ts-ignore
-export const getPageData = (pageName):AnyAction  => async dispatch => {
+export const getPageData = (pageName): AnyAction => async dispatch => {
     await Axios.get(`/api/v1/pages/getPageData?pageName=${pageName}`).then(res => {
 
-        if (res.data?.pageData && res.data?.pageData?.status === 'published'){
+        if (res.data?.pageData && res.data?.pageData?.status === 'published') {
             dispatch({
                 type: GET_PAGE_DATA,
                 payload: res.data?.pageData || {}
@@ -377,23 +382,23 @@ export const getPageData = (pageName):AnyAction  => async dispatch => {
             dispatch({
                 type: SET_HEAD_DATA,
                 payload: {
-                    title: res.data?.pageData?.title || pageName ,
+                    title: res.data?.pageData?.title || pageName,
                     description: res.data?.pageData?.description?.substring(0, 155) || null,
-                    keywords:res.data?.pageData?.keywords|| null,
+                    keywords: res.data?.pageData?.keywords || null,
                     ogTitle: res.data?.pageData?.title || pageName,
-                    canonicalUrl:`${process.env.NEXT_PUBLIC_PRODUCTION_URL}/page/${pageName}`,
+                    canonicalUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/page/${pageName}`,
                     ogType: 'website',
                     ogDescription: res.data?.pageData?.description?.substring(0, 155) || null,
                     ogUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/page/${pageName}`,
                     ogImage: res.data?.pageData?.imageUrl || null,
                     twitterCard: true,
                     twitterUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/page/${pageName}`,
-                    twitterTitle: res.data?.pageData?.title || pageName ,
+                    twitterTitle: res.data?.pageData?.title || pageName,
                     twitterDescription: res.data?.pageData?.description?.substring(0, 155) || null,
                     twitterImage: res.data?.pageData?.imageUrl || null,
                 }
             })
-        }else{
+        } else {
             dispatch({
                 type: SET_NOT_FOUND_PAGE,
                 payload: true
@@ -404,7 +409,7 @@ export const getPageData = (pageName):AnyAction  => async dispatch => {
 }
 
 //@ts-ignore
-export const likePost = (id: string):AnyAction  => async dispatch => {
+export const likePost = (id: string): AnyAction => async dispatch => {
     const ratingData = localStorage?.ratingData ? JSON.parse(localStorage.ratingData) : {likes: [], disLikes: []};
     ratingData.likes = [...new Set([...ratingData.likes, id])]
     ratingData.disLikes = ratingData.disLikes.filter(disLiked => disLiked !== id)
@@ -424,7 +429,7 @@ export const likePost = (id: string):AnyAction  => async dispatch => {
 }
 
 //@ts-ignore
-export const disLikePost = (id: string):AnyAction  => async dispatch => {
+export const disLikePost = (id: string): AnyAction => async dispatch => {
     const ratingData = localStorage?.ratingData ? JSON.parse(localStorage.ratingData) : {likes: [], disLikes: []};
     ratingData.disLikes = [...new Set([...ratingData.disLikes, id])]
     ratingData.likes = ratingData.likes.filter(liked => liked !== id)
@@ -443,7 +448,7 @@ export const disLikePost = (id: string):AnyAction  => async dispatch => {
 }
 
 //@ts-ignore
-export const viewPost = (id: string):AnyAction  => async dispatch => {
+export const viewPost = (id: string): AnyAction => async dispatch => {
     const body = {
         id,
         type: 'views'
@@ -457,7 +462,7 @@ export const viewPost = (id: string):AnyAction  => async dispatch => {
 }
 
 //@ts-ignore
-export const createEditPostByUser = (pageName):AnyAction  => async dispatch => {
+export const createEditPostByUser = (pageName): AnyAction => async dispatch => {
     // const body = {
     //     pageName
     // }

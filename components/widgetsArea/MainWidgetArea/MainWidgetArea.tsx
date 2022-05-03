@@ -3,22 +3,22 @@ import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
 
 let StyledMain = styled.main`
-  grid-area: main;
+  //grid-area: primary;
+  width: 100%;
   min-height: 100vh;
-  ${(props:{stylesData:string}) => props.stylesData ?? ''}
 `;
 
 
 interface MainWidgetAreaPropTypes {
-    stylesData:string,
-    className:string,
+    className?:string,
+    id?:string,
     position:string,
 }
 
-const MainWidgetArea:FC<MainWidgetAreaPropTypes> = ({stylesData,className,position}) => {
+const MainWidgetArea:FC<MainWidgetAreaPropTypes> = ({className,position}) => {
 
     return (
-        <StyledMain id={'main-content'} stylesData={stylesData ?? ''} className={className + ' widget-area ' + position}>
+        <StyledMain id={'primary'} className={className + ' widget-area ' + position}>
             <WidgetsRenderer
                 position={position}
             />

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useMemo} from 'react';
 import AddWidgetMenu from '@components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetMenu'
 import WidgetGroupByPosition
     from "../../../../components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition";
@@ -12,6 +12,7 @@ import WidgetPositionsSelect
 import {adminPanelGetWidgets} from "@store/adminActions/adminWidgetsActions";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
+import staticPositions from "@components/adminIncludes/widgetsModel/staticPositions";
 
 
 let StyledDiv = styled.div`
@@ -59,29 +60,55 @@ let StyledDiv = styled.div`
 
 const AdminWidgets = () => {
 
-    const availablePositions = useSelector(({adminPanelWidgets}: StoreTypes) =>
-        Object.keys(adminPanelWidgets?.adminPanelWidgets))
-
     const dispatch = useDispatch()
 
-    const [filter, setFilter] = useState('all')
+    const {customPages, availablePositions} = useSelector(({adminPanelWidgets, adminPanelGlobalState}: StoreTypes) => {
+        return {
+            customPages: adminPanelGlobalState?.customPages.reduce((customPositionsWithSidebars,currentPosition)=>{
+                return [...customPositionsWithSidebars,currentPosition,`${currentPosition}LeftSidebar`,`${currentPosition}RightSidebar`]
+            },[]),
+            availablePositions: Object.keys(adminPanelWidgets?.adminPanelWidgets)
+        }
+    })
+
+    const allPositions = useMemo(() => ['all', ...staticPositions, ...(customPages || [])], [customPages, availablePositions])
+
+    const [filters, setFilters] = useState([])
 
     const onFilter = (e) => {
-        setFilter(e.target.value)
-        localStorage.filterwidgetPosition = e.target.value
+        setFilters(prevFilters => {
+            const newSetOffData = prevFilters.includes(e.target.name) ?
+                prevFilters.filter(p => p !== e.target.name) :
+                [...prevFilters, e.target.name]
+
+            localStorage.setItem('filterWidgetPosition', JSON.stringify(newSetOffData))
+            return newSetOffData
+        })
     }
 
-    const onFilterByButton = (position: string) => {
-        setFilter(position)
-        localStorage.filterwidgetPosition = position
+    const onSelectAll = (actionType) => {
+        if (actionType) {
+            setFilters(allPositions)
+            localStorage.setItem('filterWidgetPosition', '[all]')
+        } else {
+            setFilters([])
+            localStorage.setItem('filterWidgetPosition', '[]')
+        }
     }
-
 
     useEffect(() => {
         dispatch(adminPanelGetWidgets())
-        typeof window !== 'undefined' && localStorage?.filterwidgetPosition !== 'all' ?
-            setFilter(localStorage?.filterwidgetPosition) : null
+        if (typeof window !== 'undefined') {
+            localStorage?.filterWidgetPosition === '[all]' && setFilters(allPositions);
+            (localStorage?.filterWidgetPosition && localStorage?.filterWidgetPosition !== '[all]') &&
+            setFilters(JSON.parse(localStorage?.filterWidgetPosition));
+        }
     }, []);
+
+    useEffect(() => {
+        // console.log(customPages)
+        // localStorage.setItem('filterWidgetPosition',JSON.stringify(filters))
+    }, [customPages]);
 
     return (
         <StyledDiv className='admin-widgets-page'>
@@ -93,16 +120,23 @@ const AdminWidgets = () => {
                 </div>
                 <div className={'filter-positions'}>
                     <h2>Filter Position:</h2>
-                    <WidgetPositionsSelect filter={filter} onChangeHandler={onFilter}
-                                           onFilterByButton={onFilterByButton}/>
+                    <WidgetPositionsSelect filters={filters}
+                                           onChangeHandler={onFilter}
+                                           onSelectAll={onSelectAll}
+                                           allPositions={allPositions}
+                    />
                 </div>
 
-                <h2>Widgets: <button onClick={() => dispatch(adminPanelGetWidgets())}
-                                     className={'btn btn-info'}>Refresh</button></h2>
+                <h2>
+                    Widgets:
+                    <button onClick={() => dispatch(adminPanelGetWidgets())} className={'btn btn-info'}>
+                        Refresh
+                    </button>
+                </h2>
                 <div className="widgets">
                     {availablePositions.map((position) => {
                         return (
-                            <WidgetGroupByPosition filter={filter} key={position} position={position}/>
+                            <WidgetGroupByPosition filters={filters} key={position} position={position}/>
                         )
                     })}
                 </div>

@@ -22,13 +22,19 @@ const GlobalStyles= createGlobalStyle`
     font-size: 15px;
   }
 
-  #main-content{
+  #content{
     margin: 0 auto;
+    width: 100%;
     max-width: 100vw;
-    min-height: 100vh;
+    display: grid;
+    grid-area: page;
+    min-height: 40em;
+    #primary{
+      grid-area: primary;
+      width: 100%;
+    }
   }
-
-
+  
   a {
     text-decoration: none;
   }
@@ -64,47 +70,32 @@ const GlobalStyles= createGlobalStyle`
           'leftSidebar'
           'footer';
   }
-
-  .sidebar {
-    grid-area: sidebar;
+  //---pages grid----
+  #page{
+    grid-area: main;
   }
-
-  .right-sidebar-layout {
-    display: grid;
-    grid-area: rightSidebar;
+  
+  .page-both-sidebar{
     grid-template-columns: 1fr;
-    grid-template-areas:
-            'topbar'
-            'header'
-            'navigation'
-            'main'
-            'rightSidebar'
-            'footer';
+    grid-template-areas: 'primary'
+                         'left-sidebar'
+                         'right-sidebar';
   }
-
-  .both-sidebar-layout {
-    display: grid;
+  .page-no-sidebar{
+    grid-template-columns: 1fr  ;
+    grid-template-areas: 'primary' ;
+  }
+  .page-left-sidebar{
     grid-template-columns: 1fr;
-    grid-template-areas:
-            'topbar'
-            'header'
-            'navigation'
-            'main'
-            'leftSidebar'
-            'rightSidebar'
-            'footer';
+    grid-template-areas: 'primary'
+                         'left-sidebar';
   }
-
-  .without-sidebar-layout {
-    display: grid;
+  .page-right-sidebar{
     grid-template-columns: 1fr;
-    grid-template-areas:
-            'topbar'
-            'header'
-            'navigation'
-            'main'
-            'footer';
+    grid-template-areas: 'primary'
+                         'right-sidebar';
   }
+  
 
   .action-client-button-link {
     background-color: transparent;
@@ -215,34 +206,27 @@ const GlobalStyles= createGlobalStyle`
     body {
       font-size: 14px;
     }
-    .left-sidebar-layout {
-      grid-template-columns: ${({sideBarWidth}:GlobalStylesPropTypes )=> `${sideBarWidth}px 1fr`} ;
-      grid-template-areas:  'topbar topbar'
-                                        'header header' 
-                                        'navigation navigation'
-                                        'leftSidebar main'
-                                        'footer footer'
-    }
 
-    .right-sidebar-layout {
-      grid-template-columns: ${({sideBarWidth}:GlobalStylesPropTypes )=> ` 1fr ${sideBarWidth}px`} ;
-      grid-template-areas:  'topbar topbar'
-                                        'header header'
-                                        'navigation navigation'
-                                        'main rightSidebar'
-                                        'footer footer'
-    }
 
-    .both-sidebar-layout {
-
+    
+    //---pages grid----
+    .page-both-sidebar{
       grid-template-columns: ${({sideBarWidth}:GlobalStylesPropTypes )=> `${sideBarWidth}px 1fr ${sideBarWidth}px` }  ;
-      grid-template-areas:  'topbar topbar topbar'
-                                        'header header header'
-                                        'navigation navigation navigation'
-                                        'leftSidebar main rightSidebar'
-                                        'footer footer footer'
+      grid-template-areas: 'left-sidebar primary right-sidebar' ;
     }
-
+    .page-no-sidebar{
+      grid-template-columns: 1fr  ;
+      grid-template-areas: 'primary' ;
+    }
+    
+    .page-left-sidebar{
+      grid-template-columns: ${({sideBarWidth}:GlobalStylesPropTypes )=> `${sideBarWidth}px 1fr`} ;
+      grid-template-areas: 'left-sidebar primary';
+    }
+    .page-right-sidebar{
+      grid-template-columns: ${({sideBarWidth}:GlobalStylesPropTypes )=> ` 1fr ${sideBarWidth}px`} ;
+      grid-template-areas: 'primary right-sidebar';
+    }
     .without-sidebar-layout {
       grid-template-columns: 1fr;
     }
@@ -284,9 +268,9 @@ const GlobalStyles= createGlobalStyle`
   }
   
   @media only screen and (min-width: 768px) {
-    #main-content{
+    #page{
       margin: 0;
-      max-width: 97vw;
+      //max-width: 97vw;
     }
   }
 
@@ -309,3 +293,72 @@ const GlobalStylesComponent : FC = () =>{
 export default GlobalStylesComponent;
 
 
+// .left-sidebar-layout {
+//   grid-template-columns: ${({sideBarWidth}:GlobalStylesPropTypes )=> `${sideBarWidth}px 1fr`} ;
+//   grid-template-areas:  'topbar topbar'
+//                                     'header header'
+//                                     'navigation navigation'
+//                                     'leftSidebar main'
+//                                     'footer footer';
+// }
+//
+// .right-sidebar-layout {
+//   grid-template-columns: ${({sideBarWidth}:GlobalStylesPropTypes )=> ` 1fr ${sideBarWidth}px`} ;
+//   grid-template-areas:  'topbar topbar'
+//                                     'header header'
+//                                     'navigation navigation'
+//                                     'main rightSidebar'
+//                                     'footer footer';
+// }
+//
+// .both-sidebar-layout {
+//
+//   grid-template-columns: ${({sideBarWidth}:GlobalStylesPropTypes )=> `${sideBarWidth}px 1fr ${sideBarWidth}px` }  ;
+//   grid-template-areas:  'topbar topbar topbar'
+//                                     'header header header'
+//                                     'navigation navigation navigation'
+//                                     'leftSidebar main rightSidebar'
+//                                     'footer footer footer';
+// }
+
+
+//.sidebar {
+//  grid-area: sidebar;
+//}
+
+//.right-sidebar-layout {
+//  display: grid;
+//  grid-area: rightSidebar;
+//  grid-template-columns: 1fr;
+//  grid-template-areas:
+//          'topbar'
+//          'header'
+//          'navigation'
+//          'main'
+//          'rightSidebar'
+//          'footer';
+//}
+//
+//.both-sidebar-layout {
+//  display: grid;
+//  grid-template-columns: 1fr;
+//  grid-template-areas:
+//          'topbar'
+//          'header'
+//          'navigation'
+//          'main'
+//          'leftSidebar'
+//          'rightSidebar'
+//          'footer';
+//}
+//
+//.without-sidebar-layout {
+//  display: grid;
+//  grid-template-columns: 1fr;
+//  grid-template-areas:
+//          'topbar'
+//          'header'
+//          'navigation'
+//          'main'
+//          'footer';
+//}

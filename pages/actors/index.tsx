@@ -10,11 +10,11 @@ import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {getMetas} from "@store/clientActions/postsAction";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 import AppLayout from "@components/layouts/AppLayout";
-import type { ReactElement } from 'react'
+import type {ReactElement} from 'react'
+import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
+import React from "react";
 
-const ActorsPageStyledDiv = styled.div`
-  grid-area: main;
-
+const PageStyle = styled.div`
   .actors {
     display: flex;
     flex-wrap: wrap;
@@ -22,16 +22,18 @@ const ActorsPageStyledDiv = styled.div`
     justify-content: center;
     max-width: 100%;
   }
+
   ${({actorsPageStyle}: { actorsPageStyle: string }) => actorsPageStyle || ''}
 `
 
 const actorsPage = () => {
     const {query} = useRouter();
 
-    const {actorsPageStyle,totalCount} = useSelector(({settings,posts}: StoreTypes) =>{
-        return{
-            actorsPageStyle:settings?.design?.actorsPageStyle,
-            totalCount:posts?.totalCount,
+    const {actorsPageStyle, totalCount,sidebar} = useSelector(({settings, posts}: StoreTypes) => {
+        return {
+            actorsPageStyle: settings?.design?.actorsPageStyle,
+            totalCount: posts?.totalCount,
+            sidebar: settings?.identity?.actorsPageSidebar,
         }
     })
 
@@ -39,23 +41,26 @@ const actorsPage = () => {
         useSelector((store: StoreTypes) => parseInt(store?.settings?.identity?.postsCountPerPage || '20'))
 
     return (
-        <ActorsPageStyledDiv id={'main-content'} className={'content main '} actorsPageStyle={actorsPageStyle}>
-            <WidgetsRenderer
-                position={'actorsPageTop'}
-            />
-            <ActorsRenderer/>
-            <PaginationComponent
-                isActive={true}
-                currentPage={query?.page ? parseInt(query?.page as string) : 1}
-                totalCount={totalCount}
-                size={postsCountPerPage}
-                maxPage={Math.ceil(totalCount / postsCountPerPage)}
-            />
-            <WidgetsRenderer
-                position={'actorsPageBottom'}
+        <PageStyle id={'content'} actorsPageStyle={actorsPageStyle} className={`page-${sidebar || 'no'}-sidebar `}>
+            <main id={'primary'} className={'content main '}>
+                <WidgetsRenderer
+                    position={'actorsPageTop'}
+                />
+                <ActorsRenderer/>
+                <PaginationComponent
+                    isActive={true}
+                    currentPage={query?.page ? parseInt(query?.page as string) : 1}
+                    totalCount={totalCount}
+                    size={postsCountPerPage}
+                    maxPage={Math.ceil(totalCount / postsCountPerPage)}
+                />
+                <WidgetsRenderer
+                    position={'actorsPageBottom'}
 
-            />
-        </ActorsPageStyledDiv>
+                />
+            </main>
+            <SidebarWidgetAreaRenderer sidebar={sidebar} position={'actorsPage'}/>
+        </PageStyle>
     );
 };
 
@@ -88,7 +93,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 });
 
 
-actorsPage.getLayout = function getLayout(page:ReactElement) {
+actorsPage.getLayout = function getLayout(page: ReactElement) {
     return (
         <AppLayout>
             {page}

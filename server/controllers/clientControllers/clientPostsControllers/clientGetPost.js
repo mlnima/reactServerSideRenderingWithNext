@@ -59,16 +59,23 @@ const getRelatedPosts = async (relatedByType,relatedIds,currentPostId,postType)=
 module.exports = async (req, res) => {
 
     try {
-        const validateId = mongoIdValidator(req.query._id);
-        if (validateId){
-          const post = await postSchema.findOne({_id:req.query._id},'-comments').populate([
+        const hasId = req.query?._id && mongoIdValidator(req.query?._id)
+        const decodeTitle = req.query?.title && decodeURIComponent(req.query?.title)
+
+        // const findQuery = hasId ? {_id:req.query._id} :
+        //                   decodeTitle ? {title:decodeTitle} : null
+        const findQuery = hasId ? {_id:req.query._id} :
+                          decodeTitle ? {$or:[{title:decodeTitle},{permaLink:decodeTitle.replaceAll(' ','-')}]} : null
+        //{$or:[{title:decodeTitle},{permaLink:decodeTitle.replaceAll(' ','-')}]}
+        // const validateId = mongoIdValidator(req.query._id);
+        if (findQuery){
+          const post = await postSchema.findOne(findQuery,'-comments').populate([
               {path: 'author',select:['username','profileImage','role']},
               {path: 'categories',select:{'name':1,'type':1}},
               {path: 'tags',select:{'name':1,'type':1}},
               {path: 'actors',select:{'name':1,'type':1,'imageUrl':1}},
           ]).exec()
             if (post){
-
                 res.json( {
                     post,
                     relatedPosts:{

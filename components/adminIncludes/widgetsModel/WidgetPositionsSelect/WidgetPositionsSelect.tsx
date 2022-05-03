@@ -1,81 +1,67 @@
-import staticPositions from "../staticPositions";
-import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import capitalizeFirstLetter from "../../../../_variables/util/capitalizeFirstLetter";
-
 import styled from "styled-components";
 import {FC} from "react";
 import convertVariableNameToName from "@_variables/util/convertVariableNameToName";
 
 const PositionSelectorStyledDiv = styled.div`
-  .custom-select {
-    margin: 20px 0;
+  .btn{
+    width: 100px;
+    margin: auto;
   }
-
-  .positions-buttons {
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    margin: 20px 0;
-    button {
-      width: 150px;
-      font-size: 12px;
+  .check-boxes{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    align-items: center;
+    justify-content: space-between;
+    .position-check-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: var(--default-border);
+      padding: 1px ;
+      margin: 1px ;
+      p{
+        padding: 1px ;
+        margin: 1px ;
+      }
     }
-
   }
+
+@media only screen and (min-width: 768px) {
+  margin: auto;
+  .check-boxes{
+    margin: auto;
+    width: 90%;
+  }
+ 
+}
+
 `
 
 interface PositionSelectorPropTypes {
     onChangeHandler: any,
-    onFilterByButton: any,
-    filter: string
+    onSelectAll: any,
+    filters: string[],
+    allPositions: string[],
 }
 
-const PositionSelector: FC<PositionSelectorPropTypes> = ({onChangeHandler, filter, onFilterByButton}) => {
-    const customPages = useSelector((store: StoreTypes) => store?.adminPanelGlobalState?.customPages)
-    const quickFilterPositions = [
-        'all',
-        'deactivated',
-        'topBar',
-        'header',
-        'navigation',
-        'home',
-        'underPost',
-        'footer',
-    ]
+const PositionSelector: FC<PositionSelectorPropTypes> = ({onChangeHandler, filters,onSelectAll,allPositions}) => {
 
-
-    const allPositions = ['all', ...staticPositions, ...(customPages || [])]
-
-    const renderOptions = allPositions.sort((a, b) => a > b ? 1 : -1).map(position => {
-
+    const renderCheckBoxes = allPositions.sort((a, b) => a > b ? 1 : -1).map(position => {
         return (
-            <option key={allPositions.indexOf(position)} value={position}>
-                {position}
-            </option>
+            <div className={'position-check-box'}>
+                <p>{convertVariableNameToName(position)}</p>
+                <input type={'checkbox'} name={position} onChange={onChangeHandler}
+                       checked={filters.includes(position)}/>
+            </div>
         )
     })
-
-
-
-
-
-    const renderStaticPositionsButton = quickFilterPositions.map(position => {
-        return (
-            <button className={'btn btn-primary'} key={position} onClick={() => onFilterByButton(position)}>
-                {convertVariableNameToName(position)}
-            </button>
-        )
-    })
-
 
     return (
         <PositionSelectorStyledDiv className={'position-selector'}>
-            <select onChange={e => onChangeHandler(e)} className={'custom-select'} value={filter}>
-                {renderOptions ? capitalizeFirstLetter(renderOptions) : ''}
-            </select>
-            <div className={'positions-buttons'}>
-                {renderStaticPositionsButton}
+            <button onClick={()=>onSelectAll(true)} className={'btn btn-primary'}>+</button>
+            <button onClick={()=>onSelectAll(false)} className={'btn btn-primary'}>-</button>
+            <div className={'check-boxes'}>
+                {renderCheckBoxes}
             </div>
 
         </PositionSelectorStyledDiv>

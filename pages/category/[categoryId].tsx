@@ -8,15 +8,14 @@ import {wrapper} from "@store/store";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {getPosts} from "@store/clientActions/postsAction";
-import {FC} from "react";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
-import type { ReactElement } from 'react';
+import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
+import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
-let StyledMain = styled.main`
-  grid-area: main;
+let PageStyle = styled.div`
   width: 100%;
 
   .edit-as-admin {
@@ -39,36 +38,40 @@ let StyledMain = styled.main`
 
 const categoryPage = () => {
 
-    const {role, category, categoryPageStyle} = useSelector(({user, posts, settings}: StoreTypes) => {
+    const {role, category, categoryPageStyle, sidebar} = useSelector(({user, posts, settings}: StoreTypes) => {
         return {
             role: user?.userData?.role,
             category: posts.categoryData,
             categoryPageStyle: settings.design?.categoryPageStyle,
+            sidebar: settings?.identity?.categoryPageSidebar
         }
     })
 
     return (
-        <StyledMain id={'main-content'} className="main posts-page" categoryPageStyle={categoryPageStyle}>
-            {role === 'administrator' ?
-                <div className='edit-as-admin'>
-                    <Link href={'/admin/meta?id=' + category?._id}>
-                        <a className={'btn btn-primary'}>
-                            Edit
-                        </a>
-                    </Link>
-                </div>
-                : null}
+        <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar `} categoryPageStyle={categoryPageStyle}>
+            <main id={'primary'} className="main posts-page">
+                {role === 'administrator' ?
+                    <div className='edit-as-admin'>
+                        <Link href={'/admin/meta?id=' + category?._id}>
+                            <a className={'btn btn-primary'}>
+                                Edit
+                            </a>
+                        </Link>
+                    </div>
+                    : null}
 
-            {category ? <PostsPageInfo metaData={category}/> : null}
+                {category ? <PostsPageInfo metaData={category}/> : null}
 
-            <WidgetsRenderer
-                position={'categoryPageTop'}
-            />
-            <PostsPage/>
-            <WidgetsRenderer
-                position={'categoryBottom'}
-            />
-        </StyledMain>
+                <WidgetsRenderer
+                    position={'categoryPageTop'}
+                />
+                <PostsPage/>
+                <WidgetsRenderer
+                    position={'categoryBottom'}
+                />
+            </main>
+            <SidebarWidgetAreaRenderer sidebar={sidebar} position={'categoryPage'}/>
+        </PageStyle>
     )
 };
 
@@ -96,7 +99,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     }
 });
 
-categoryPage.getLayout = function getLayout(page:ReactElement) {
+categoryPage.getLayout = function getLayout(page: ReactElement) {
     return (
         <AppLayout>
             {page}

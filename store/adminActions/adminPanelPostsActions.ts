@@ -372,6 +372,25 @@ export const setMetaThumbnailsAndCount = (type?: string):AnyAction => async (dis
             })
         }).finally(() =>  dispatch({type: LOADING, payload: false}))
 }
+//@ts-ignore
+export const setGeneratePermaLinkForPosts = (type?: string):AnyAction => async (dispatch) => {
+    dispatch({type: LOADING, payload: true})
+    await Axios.get(`/api/admin/posts/generatePermaLinkForPosts?token=${localStorage.wt}${type ? `&type=${type}` : ''}`)
+        .then((res: AxiosResponse<any>) => {
+            dispatch({
+                type: SET_ALERT,
+                payload: {
+                    message: res.data?.message || 'Generating PermaLinks for Posts Started',
+                    type: 'success'
+                }
+            })
+        }).catch((err: AxiosError<AxiosErrorTypes>) => {
+            dispatch({
+                type: SET_ALERT,
+                payload: {message: err.response.data.message, type: 'error', err}
+            })
+        }).finally(() =>  dispatch({type: LOADING, payload: false}))
+}
 
 //@ts-ignore
 export const postThumbnailsUpload = (image?: any):AnyAction => async (dispatch) => {
