@@ -51,6 +51,7 @@ interface WidgetGroupByPositionPropTypes {
 
 const WidgetGroupByPosition: FC<WidgetGroupByPositionPropTypes> = ({filters, position}) => {
     const nodeRef = React.useRef(null);
+
     const widgets = useSelector(
         ({adminPanelWidgets}: StoreTypes) => adminPanelWidgets?.adminPanelWidgets?.[position]
         ?.sort((a, b) => (a.data.widgetIndex > b.data.widgetIndex) ? 1 : -1)
@@ -58,17 +59,20 @@ const WidgetGroupByPosition: FC<WidgetGroupByPositionPropTypes> = ({filters, pos
 
     if (filters.includes(position)) {
         return (
-            <Draggable nodeRef={nodeRef}>
+            // <Draggable nodeRef={nodeRef}>
                 <WidgetGroupByPositionStyledDiv className='widgetAdminPanelItem'>
 
-                    <p ref={nodeRef} className='widgetAdminPanelItemHeader'>{convertVariableNameToName(position)}</p>
+                    <div>
+                        <p ref={nodeRef} className='widgetAdminPanelItemHeader'>{convertVariableNameToName(position)}</p>
+                    </div>
+
 
                     {widgets?.map((widget) => {
                         return  <WidgetModel key={widget._id} widget={widget}/>
                     })}
 
                 </WidgetGroupByPositionStyledDiv>
-            </Draggable>
+   // </Draggable>
         );
     } else return null
 

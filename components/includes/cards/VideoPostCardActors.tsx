@@ -19,7 +19,6 @@ interface VideoPostCardActorsStylePropTypes {
     hover: boolean
 }
 
-// ${({hover}: VideoPostCardActorsStylePropTypes) => hover ? `text-overflow: clip;` : 'ellipsis'}
 const VideoPostCardActorsStyle = styled.div`
 
   margin: 2px 0;
@@ -29,6 +28,7 @@ const VideoPostCardActorsStyle = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
+  height: 20px;
   justify-content: space-between;
   
   @keyframes textOverFlow {
@@ -72,11 +72,7 @@ const VideoPostCardActorsStyle = styled.div`
         color: var(--main-active-color, #f90);
         margin: 2px 2px;
         font-weight: bold;
-
-        :hover {
-          //text-decoration: underline;
-        }
-
+        
         &:after, &:before {
           box-sizing: border-box;
         }
