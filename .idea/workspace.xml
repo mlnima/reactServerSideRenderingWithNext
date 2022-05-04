@@ -20,33 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItemSection/RenderArraySection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItemSection/RenderArraySection.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetBulkAction.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetBulkAction.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetSearch.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetSearch.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetSize.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetSize.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/PostsByMeta.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/PostsByMeta.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetWithPositionMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetWithPositionMenu.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/ActionButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/ActionButtons.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetPositionsSelect/WidgetPositionsSelect.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetPositionsSelect/WidgetPositionsSelect.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/global/AdminDataSetter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/AdminDataSetter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/AdminTools/AdminTools.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/AdminTools/AdminTools.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/VideoTypePostPage/VideoTypePostPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/VideoTypePostPage/VideoTypePostPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/PostMeta/PostMeta.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/PostMeta/PostMeta.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/PostTitle/PostTitle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/PostTitle/PostTitle.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/layouts/AdminLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AdminLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/layouts/AppLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AppLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_document.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_document.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/widgets/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/widgets/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/asset/images/icons/tag-solid.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/asset/images/icons/tag-solid.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsControllers/adminAddNewWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsControllers/adminAddNewWidget.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/adminActions/adminWidgetsActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/adminActions/adminWidgetsActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/adminReducers/adminWidgetsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/adminReducers/adminWidgetsReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/adminTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/adminTypes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/clientReducers/widgetsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/clientReducers/widgetsReducer.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +104,7 @@
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\widgets\Authentication\DesktopAuthentication" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.dev">
+  <component name="RunManager" selected="npm.build">
     <configuration name="apiCache.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/server/middlewares/apiCache.js" working-dir="$PROJECT_DIR$/server/middlewares">
       <method v="2" />
     </configuration>
@@ -176,9 +150,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
-        <item itemvalue="npm.build" />
         <item itemvalue="npm.analyze" />
         <item itemvalue="Node.js.apiCache.js" />
       </list>
@@ -1160,7 +1134,7 @@
       <workItem from="1651320714056" duration="29335000" />
       <workItem from="1651503409853" duration="24660000" />
       <workItem from="1651575219010" duration="8683000" />
-      <workItem from="1651606610786" duration="10982000" />
+      <workItem from="1651606610786" duration="11295000" />
     </task>
     <servers />
   </component>
