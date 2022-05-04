@@ -16,9 +16,7 @@ const AdminDataSetter:FC<AdminDataSetterPropTypes> = ({userRole}) => {
 
     useEffect(() => {
         if (userRole === 'administrator') {
-            getAndSetDataForAdmin().then(() => {
-                console.log('welcome Admin, latest uncached data are sent for you')
-            })
+            getAndSetDataForAdmin().finally()
         }
     }, [userRole, pathname]);
 

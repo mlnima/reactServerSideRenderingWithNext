@@ -23,47 +23,52 @@ const PostMetaStyledDiv = styled.div`
 
   .content {
     display: flex;
+    align-items: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
-    margin: 2px 5px;
+
     .post-meta-item {
-      background-color: var(--meta-background-color, #f90);
-      padding: 2px 5px;
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: center;
+      margin: 2px 5px;
+      background-color: var(--meta-background-color, #f90);
+      padding: 5px;
       max-height: 30px;
-      margin: 2px;
       border-radius: 3px;
-    }
-
-    .post-meta-item-link {
       color: var(--meta-text-color, #000);
       text-decoration: none;
-      display: flex;
-      justify-content: center;
-      align-items: center;
 
+      .categories-logo, .tags-logo {
+        margin-right: 5px;
+        width: 14px;
+        height: 14px;
+        background-color: var(--meta-text-color, #000);
+      }
+
+      .categories-logo {
+        mask: url('/public/asset/images/icons/folder-solid.svg') no-repeat center;
+        -webkit-mask: url('/public/asset/images/icons/folder-solid.svg') no-repeat center;
+      }
+
+      .tags-logo {
+        mask: url('/public/asset/images/icons/tag-solid.svg') no-repeat center;
+        -webkit-mask: url('/public/asset/images/icons/tag-solid.svg') no-repeat center;
+      }
     }
 
     .actors {
       background-color: transparent;
+      color: var(--post-page-info-color, #ccc);
 
-      .post-meta-item-link {
-        color: var(--post-page-info-color, #ccc);
-
-        .meta-name {
-          margin: 0;
-          padding: 0;
-        }
-
-        .item-image {
-          padding: 0;
-          margin: 0 4px;
-          width: 30px;
-          height: 30px;
-          border-radius: 50%;
-          object-fit: contain;
-        }
+      .item-image {
+        padding: 0;
+        margin: 0 4px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        object-fit: cover;
       }
     }
   }
@@ -72,7 +77,6 @@ const PostMetaStyledDiv = styled.div`
 interface PostMetaPropType {
     type: string
 }
-
 
 const PostMeta: FC<PostMetaPropType> = ({type}) => {
     const {t} = useTranslation(['common', 'customTranslation']);
@@ -83,22 +87,28 @@ const PostMeta: FC<PostMetaPropType> = ({type}) => {
 
     const renderData = filterMeta.map(item => {
         return (
-            <div key={`${item.type}_${item._id}`} className={`post-meta-item ${item.type}`}>
-                <Link href={`/${convertMetasTypeToSingular(item.type)}/${item._id}`}>
-                    <a className={type + ' post-meta-item-link'} title={item.name}>
-                        {item.type === 'actors' && <img src={item?.imageUrl} alt={item.name} className={'item-image'}/>}
-                        <p className={'meta-name'}>{item.name}</p>
-                    </a>
-                </Link>
-            </div>
+            <Link href={`/${convertMetasTypeToSingular(item.type)}/${item._id}`} key={`${item.type}_${item._id}`}>
+                <a className={`post-meta-item ${item.type}`} title={item.name}>
+                    {item.type === 'actors' ? <img src={item?.imageUrl}
+                                                   alt={item.name}
+                                                   className={'item-image'}/> :
+                        <i className={`${item.type}-logo`}/>
+                    }
+                    {item.name}
+                </a>
+            </Link>
         )
     });
 
     if (filterMeta?.length) {
         return (
             <PostMetaStyledDiv className={type + ' post-meta'}>
-                <span className='meta-type'> {t<string>(`${type.charAt(0).toUpperCase() + type.substring(1)}`)}:</span>
                 <div className="content">
+                    {type === 'actors' &&
+                        <span className='meta-type'>
+                            {t<string>(`${type.charAt(0).toUpperCase() + type.substring(1)}: `)}
+                        </span>
+                    }
                     {renderData}
                 </div>
             </PostMetaStyledDiv>

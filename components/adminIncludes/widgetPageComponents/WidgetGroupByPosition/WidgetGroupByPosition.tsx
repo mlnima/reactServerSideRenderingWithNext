@@ -1,10 +1,11 @@
-import {FC} from 'react';
+import React, {FC} from 'react';
 import convertVariableNameToName from "../../../../_variables/util/convertVariableNameToName";
 import WidgetModel from "../../widgetsModel/WidgetModel/WidgetModel";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import Draggable from 'react-draggable';
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+
 
 const WidgetGroupByPositionStyledDiv = styled.div`
   background-color: transparent;
@@ -49,7 +50,7 @@ interface WidgetGroupByPositionPropTypes {
 }
 
 const WidgetGroupByPosition: FC<WidgetGroupByPositionPropTypes> = ({filters, position}) => {
-
+    const nodeRef = React.useRef(null);
     const widgets = useSelector(
         ({adminPanelWidgets}: StoreTypes) => adminPanelWidgets?.adminPanelWidgets?.[position]
         ?.sort((a, b) => (a.data.widgetIndex > b.data.widgetIndex) ? 1 : -1)
@@ -57,10 +58,10 @@ const WidgetGroupByPosition: FC<WidgetGroupByPositionPropTypes> = ({filters, pos
 
     if (filters.includes(position)) {
         return (
-            <Draggable handle={'.widgetAdminPanelItemHeader'}>
+            <Draggable nodeRef={nodeRef}>
                 <WidgetGroupByPositionStyledDiv className='widgetAdminPanelItem'>
 
-                    <p className='widgetAdminPanelItemHeader'>{convertVariableNameToName(position)}</p>
+                    <p ref={nodeRef} className='widgetAdminPanelItemHeader'>{convertVariableNameToName(position)}</p>
 
                     {widgets?.map((widget) => {
                         return  <WidgetModel key={widget._id} widget={widget}/>

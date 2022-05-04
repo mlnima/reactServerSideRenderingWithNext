@@ -1,19 +1,16 @@
 import React, {useState, useEffect, useMemo} from 'react';
 import AddWidgetMenu from '@components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetMenu'
-import WidgetGroupByPosition
-    from "../../../../components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition";
+import WidgetGroupByPosition from "@components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition";
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
 import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import WidgetPositionsSelect
-    from "../../../../components/adminIncludes/widgetsModel/WidgetPositionsSelect/WidgetPositionsSelect";
+import WidgetPositionsSelect from "@components/adminIncludes/widgetsModel/WidgetPositionsSelect/WidgetPositionsSelect";
 import {adminPanelGetWidgets} from "@store/adminActions/adminWidgetsActions";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import staticPositions from "@components/adminIncludes/widgetsModel/staticPositions";
-
 
 let StyledDiv = styled.div`
   display: flex;
@@ -62,24 +59,35 @@ const AdminWidgets = () => {
 
     const dispatch = useDispatch()
 
-    const {customPages, availablePositions} = useSelector(({adminPanelWidgets, adminPanelGlobalState}: StoreTypes) => {
+    const {customPages, availablePositions} = useSelector(
+        ({
+             adminPanelWidgets,
+             adminPanelGlobalState
+        }: StoreTypes) => {
+
         return {
-            customPages: adminPanelGlobalState?.customPages.reduce((customPositionsWithSidebars,currentPosition)=>{
-                return [...customPositionsWithSidebars,currentPosition,`${currentPosition}LeftSidebar`,`${currentPosition}RightSidebar`]
+            customPages: adminPanelGlobalState?.customPages.reduce(
+                (customPositionsWithSidebars,currentPosition)=>{
+                return [
+                    ...customPositionsWithSidebars,currentPosition,
+                    `${currentPosition}LeftSidebar`,
+                    `${currentPosition}RightSidebar`
+                ]
             },[]),
             availablePositions: Object.keys(adminPanelWidgets?.adminPanelWidgets)
         }
     })
 
-    const allPositions = useMemo(() => ['all', ...staticPositions, ...(customPages || [])], [customPages, availablePositions])
+    const allPositions = useMemo(() => ['all', ...staticPositions, ...(customPages || [])],
+        [customPages, availablePositions])
 
     const [filters, setFilters] = useState([])
 
-    const onFilter = (e) => {
+    const onFilter = (position) => {
         setFilters(prevFilters => {
-            const newSetOffData = prevFilters.includes(e.target.name) ?
-                prevFilters.filter(p => p !== e.target.name) :
-                [...prevFilters, e.target.name]
+            const newSetOffData = prevFilters.includes(position) ?
+                prevFilters.filter(p => p !== position) :
+                [...prevFilters, position]
 
             localStorage.setItem('filterWidgetPosition', JSON.stringify(newSetOffData))
             return newSetOffData
@@ -105,11 +113,6 @@ const AdminWidgets = () => {
         }
     }, []);
 
-    useEffect(() => {
-        // console.log(customPages)
-        // localStorage.setItem('filterWidgetPosition',JSON.stringify(filters))
-    }, [customPages]);
-
     return (
         <StyledDiv className='admin-widgets-page'>
             <h1>Widgets Settings</h1>
@@ -123,6 +126,7 @@ const AdminWidgets = () => {
                     <WidgetPositionsSelect filters={filters}
                                            onChangeHandler={onFilter}
                                            onSelectAll={onSelectAll}
+                                           availablePositions={availablePositions}
                                            allPositions={allPositions}
                     />
                 </div>

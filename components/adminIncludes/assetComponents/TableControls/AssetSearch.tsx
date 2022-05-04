@@ -20,7 +20,7 @@ let StyledForm = styled.form`
 const AssetSearch: FC = () => {
 
     const {query, pathname, push} = useRouter()
-    const [keyword, setKeyword] = useState(null)
+    const [keyword, setKeyword] = useState('')
 
     const onSubmitHandler = e => {
         e.preventDefault()

@@ -21,12 +21,13 @@ const VideoTypePostPageStyle = styled(PostPageStyle)`
   margin: auto;
   #main{
     width: 100%;
-    .entry-header {
+    article{
       width: 100%;
+      .entry-header {
+        width: 100%;
+      }
     }
   }
-
-
   ${({postPageStyle}: { postPageStyle: string }) => postPageStyle || ''}
 `
 
@@ -42,9 +43,11 @@ const VideoTypePostPage = () => {
     return (
         <VideoTypePostPageStyle id={'primary'} className='post-page' postPageStyle={videoTypePostPageData?.postPageStyle}>
             <main id={'main'}>
+                <article itemProp={'video'} itemScope itemType={'http://schema.org/VideoObject'}>
                 <header className={'entry-header'}>
                     <VideoPlayer/>
                     <div className='rating-price-download'>
+                        <PostTitle/>
                         <RatingButtons rating={true}/>
                         <DownloadLink
                             downloadLink={videoTypePostPageData?.post.downloadLink || videoTypePostPageData?.post.source}
@@ -54,11 +57,11 @@ const VideoTypePostPage = () => {
                     </div>
                 </header>
                 <div className="entry-content">
-                    <PostTitle/>
                     <PostDescription/>
                     <PostMeta type='actors'/>
-                    <PostMeta type='tags'/>
                     <PostMeta type='categories'/>
+                    <PostMeta type='tags'/>
+
                 </div>
                 <div className='under-post-widget-area'>
                     <WidgetsRenderer position='underPost'/>
@@ -66,7 +69,9 @@ const VideoTypePostPage = () => {
                 <RelatedPostsRenderer/>
                 <CommentFrom/>
                 {videoTypePostPageData?.post?.comments?.length ? <CommentsRenderer/> : null}
+                </article>
             </main>
+
         </VideoTypePostPageStyle>
     );
 };

@@ -28,7 +28,7 @@ const AssetSize: FC = () => {
             {/*    {staticDataJson?.identity?.postsCountPerPage}*/}
             {/*</option>*/}
             {range.map(unit=>{
-                return  <option value={unit}>{unit}</option>
+                return  <option value={unit} key={unit}>{unit}</option>
             })}
         </AssetSizeStyledDiv>
     );

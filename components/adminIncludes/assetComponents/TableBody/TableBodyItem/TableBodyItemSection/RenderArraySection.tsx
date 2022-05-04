@@ -1,6 +1,6 @@
 import {useRouter} from "next/router";
 import styled from "styled-components";
-import {FC} from "react";
+import {FC,} from "react";
 
 const ArraySectionStyledDiv = styled.div`
   button{
@@ -35,7 +35,7 @@ const RenderArraySection :FC<RenderArraySectionPropTypes> = ({data}) => {
 
     const renderArrItem = (data || []).map((item,index) => {
         return (
-                <button key={item._id} className={'btn btn-primary'} onClick={()=>onClickHandler(item._id)}>
+                <button key={`${item._id}${index}`} className={'btn btn-primary'} onClick={()=>onClickHandler(item._id)}>
                     {item.name}
                 </button>
         )

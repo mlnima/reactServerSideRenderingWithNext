@@ -10,6 +10,7 @@ import AdminDataSetter from "../global/AdminDataSetter";
 import GlobalStyles from "../global/Styles/GlobalStylesComponent";
 import styled from "styled-components";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import LoadingV2 from "@components/includes/LoadingV2/LoadingV2";
 
 const Loading = dynamic(() => import('../includes/Loading/Loading'), {ssr: false})
 const AlertBox = dynamic(() => import('../includes/AlertBox/AlertBox'), {ssr: false})
@@ -85,7 +86,8 @@ const AdminLayout = props => {
                 <main ref={Admin} className="Admin">
                     {props.children}
                 </main>
-                {loading ? <Loading/> : null}
+                <LoadingV2/>
+                {/*{loading ? <Loading/> : null}*/}
                 {alert && globalState?.alert?.message ? <AlertBox/> : null}
             </AdminLayoutStyledDiv>
 

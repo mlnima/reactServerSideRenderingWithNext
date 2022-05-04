@@ -59,10 +59,10 @@ const AdminTools: FC = () => {
 
     return (
         //@ts-ignore
-
             <Draggable nodeRef={nodeRef}>
-                <StyledDiv className='admin-tools' ref={nodeRef}>
+                <StyledDiv className='admin-tools' >
                     <button className='admin-tools-item open-button'
+                            ref={nodeRef}
                             onDoubleClick={() => setOpen(!open)}
                             onTouchStartCapture={() => setOpen(!open)}>
                         <FontAwesomeIcon icon={faCogs} className='admin-tools-item-logo'/>
@@ -91,7 +91,9 @@ const AdminTools: FC = () => {
                                     <FontAwesomeIcon icon={faEnvelope} className='admin-tools-item-logo'/>
                                 </a>
                             </Link>
-                            <button className='admin-tools-item' onClick={() => dispatch(clearCaches(router))}>
+                            <button className='admin-tools-item'
+                                    onClick={() => dispatch(clearCaches(router))}
+                                    onTouchStartCapture={() => dispatch(clearCaches(router))}>
                                 <FontAwesomeIcon icon={faEraser} className='admin-tools-item-logo'/>
                             </button>
                         </>

@@ -5,7 +5,7 @@ module.exports = (req, res) =>{
     let dataToSave = new widgetSchema({data})
     dataToSave?.save((err,newWidgetData)=>{
         if (err){
-            res.end()
+            res.end({newWidgetData})
         }
         res.json({newWidgetData})
     })

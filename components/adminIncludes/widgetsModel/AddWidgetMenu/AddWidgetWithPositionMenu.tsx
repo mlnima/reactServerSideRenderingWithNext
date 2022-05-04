@@ -45,12 +45,12 @@ interface AddWidgetWithPositionMenuPropType{
 const AddWidgetWithPositionMenu :FC<AddWidgetWithPositionMenuPropType> = ({type,name}) => {
 
     const adminPanelWidgets = useSelector(({adminPanelWidgets}:StoreTypes) => adminPanelWidgets?.adminPanelWidgets)
+    const nodeRef = React.useRef(null);
 
-
-    const refToElement = useRef(null)
+    // const refToElement = useRef(null)
     // const widgets = useSelector((store:StoreTypes) => store?.widgets.widgets)
     const customPages = useSelector((store:StoreTypes) => store?.adminPanelGlobalState?.customPages)
-    console.log('typeof  customPages')
+
     const dispatch = useDispatch()
     const [open, setOpen] = useState(false)
 
@@ -117,8 +117,8 @@ const AddWidgetWithPositionMenu :FC<AddWidgetWithPositionMenuPropType> = ({type,
     })
 
     const onIncreaseZIndexHandler = () => {
-        if (refToElement.current) {
-            refToElement.current.style.zIndex = 10
+        if (nodeRef.current) {
+            nodeRef.current.style.zIndex = 10
         }
     }
     const onReduceZIndexHandler = () => {
@@ -129,11 +129,12 @@ const AddWidgetWithPositionMenu :FC<AddWidgetWithPositionMenuPropType> = ({type,
 
     return (
         //@ts-ignore
-        <Draggable handle=".AddWidgetWithPositionMenu">
-            <AddWidgetWithPositionMenuStyledDiv ref={refToElement}
-                                                className='AddWidgetWithPositionMenu'
+        <Draggable nodeRef={nodeRef}>
+            <AddWidgetWithPositionMenuStyledDiv className='AddWidgetWithPositionMenu'
+                                                ref={nodeRef}
                                                 onClickCapture={onIncreaseZIndexHandler}
                                                 onMouseOut={onReduceZIndexHandler}
+                                                // ref={refToElement}
             >
                 <button className='btn btn-info' onClick={() => open ? setOpen(false) : setOpen(true)}>
                     {name}

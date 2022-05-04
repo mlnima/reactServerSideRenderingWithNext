@@ -1,7 +1,7 @@
 import axios, {AxiosResponse} from "axios";
 import {WidgetPropTypes} from "@_variables/TypeScriptTypes/Widgets";
 import {SET_WIDGETS_IN_GROUPS, LOADING, SET_ALERT} from "../types";
-import {ADMIN_PANEL_GET_WIDGETS, DELETE_WIDGET, SAVE_NEW_WIDGET, UPDATE_WIDGET} from "../adminTypes";
+import {ADMIN_PANEL_GET_WIDGETS, ADMIN_PANEL_DELETE_WIDGET, SAVE_NEW_WIDGET, UPDATE_WIDGET} from "../adminTypes";
 import Axios from "@_variables/util/Axios";
 import {AnyAction} from "redux";
 //@ts-ignore
@@ -75,11 +75,11 @@ export const adminAddNewWidget = (newWidgetData: WidgetPropTypes):AnyAction => a
 }
 
 //@ts-ignore
-export const adminDeleteWidget = (_id:string):AnyAction => async (dispatch: any) => {
+export const adminDeleteWidget = (_id:string,position):AnyAction => async (dispatch: any) => {
     await Axios.post( '/api/admin/widgets/adminDeleteWidget', {_id,token: localStorage.wt}).then((res:AxiosResponse<unknown|any>)=>{
         dispatch({
-            type: DELETE_WIDGET,
-            payload: _id
+            type: ADMIN_PANEL_DELETE_WIDGET,
+            payload: {_id,position}
         })
     }).catch(err=>{
         console.log(err)
@@ -88,6 +88,7 @@ export const adminDeleteWidget = (_id:string):AnyAction => async (dispatch: any)
 
 //@ts-ignore
 export const adminUpdateWidget = (widgetData:WidgetPropTypes):AnyAction => async (dispatch: any) => {
+    dispatch({type: LOADING, payload: true})
     await Axios.post(
         '/api/admin/widgets/adminUpdateWidget',
         {widgetData,token: localStorage.wt})
@@ -100,5 +101,10 @@ export const adminUpdateWidget = (widgetData:WidgetPropTypes):AnyAction => async
         }
     }).catch(err=>{
         console.log(err)
-    })
+    }).finally(()=>{
+            dispatch({
+                type: LOADING,
+                payload: false
+            })
+        })
 }

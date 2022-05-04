@@ -50,7 +50,7 @@ const ActionButtons: FC<ActionButtonsPropTypes> = ({widgetData,widgetId,widgetSe
 
     const onDeleteHandler = () => {
         if (widgetId) {
-            dispatch(adminDeleteWidget(widgetId))
+            dispatch(adminDeleteWidget(widgetId,widgetData.position))
         }
     };
 

@@ -11,7 +11,6 @@ import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea
 
 const HomePageStyle = styled.div`
   display: grid;
- 
   ${({stylesData}: { stylesData: string }) => stylesData || ''}
 `
 

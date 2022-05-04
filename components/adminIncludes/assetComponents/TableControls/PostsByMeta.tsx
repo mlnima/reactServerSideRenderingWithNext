@@ -23,7 +23,7 @@ const PostsByMetaStyledForm = styled.form`
 
 const PostsByMeta: FC = () => {
 
-    const [metaId, setMetaId] = useState(null)
+    const [metaId, setMetaId] = useState('')
 
     const {query, pathname, push} = useRouter()
 
@@ -58,7 +58,7 @@ const PostsByMeta: FC = () => {
 
     useEffect(() => {
         if (query.metaId) {
-            setMetaId(query.metaId)
+            setMetaId(query.metaId as string)
         }
     }, [query]);
 

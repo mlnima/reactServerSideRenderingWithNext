@@ -23,7 +23,7 @@ interface AssetBulkActionPropTypes {
 
 const AssetBulkAction: FC<AssetBulkActionPropTypes> = ({selectedItems, setSelectedItems}) => {
     const dispatch = useDispatch()
-    const [status, setStatus] = useState(null)
+    const [status, setStatus] = useState('')
     const {push, pathname, query} = useRouter()
 
     const reGetData = () => {
