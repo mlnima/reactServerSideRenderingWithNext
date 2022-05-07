@@ -18,7 +18,7 @@ const Text: FC<TextPropTypes> = ({translations, text}) => {
 
     const textToRender = useMemo(() => {
         return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? text : translations?.[locale]?.text || text || '';
-    }, [])
+    }, [text,translations])
 
     return (
         <WidgetTextTextDataStyledDiv className={'widgetText widget-text'} >

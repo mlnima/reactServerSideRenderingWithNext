@@ -60,6 +60,7 @@ export const adminPanelGetWidgets = ():AnyAction => async (dispatch: any) => {
 
 //@ts-ignore
 export const adminAddNewWidget = (newWidgetData: WidgetPropTypes):AnyAction => async (dispatch: any) => {
+    dispatch({type: LOADING, payload: true})
     await Axios.post('/api/admin/widgets/adminAddNewWidget', {data: newWidgetData, token: localStorage.wt})
         .then((res: AxiosResponse<unknown | any>) => {
             if (res.data?.newWidgetData) {
@@ -67,22 +68,60 @@ export const adminAddNewWidget = (newWidgetData: WidgetPropTypes):AnyAction => a
                     type: SAVE_NEW_WIDGET,
                     payload: res.data?.newWidgetData
                 })
-                // adminGetWidgets()
+                dispatch({
+                    type: SET_ALERT,
+                    payload: {
+                        message: 'Widget Created',
+                        type: 'success',
+                    }
+                })
             }
         }).catch(err => {
-            console.log(err)
+            dispatch({
+                type: SET_ALERT,
+                payload: {
+                    message: 'Error While Creating New Widget',
+                    type: 'error',
+                    err
+                }
+            })
+        }).finally(()=>{
+            dispatch({
+                type: LOADING,
+                payload: false
+            })
         })
 }
 
 //@ts-ignore
 export const adminDeleteWidget = (_id:string,position):AnyAction => async (dispatch: any) => {
+    dispatch({type: LOADING, payload: true})
     await Axios.post( '/api/admin/widgets/adminDeleteWidget', {_id,token: localStorage.wt}).then((res:AxiosResponse<unknown|any>)=>{
         dispatch({
             type: ADMIN_PANEL_DELETE_WIDGET,
             payload: {_id,position}
         })
+        dispatch({
+            type: SET_ALERT,
+            payload: {
+                message: 'Widget Deleted',
+                type: 'success',
+            }
+        })
     }).catch(err=>{
-        console.log(err)
+        dispatch({
+            type: SET_ALERT,
+            payload: {
+                message: 'Error While Deleting Widget',
+                type: 'error',
+                err
+            }
+        })
+    }).finally(()=>{
+        dispatch({
+            type: LOADING,
+            payload: false
+        })
     })
 }
 
@@ -98,6 +137,13 @@ export const adminUpdateWidget = (widgetData:WidgetPropTypes):AnyAction => async
                 type: UPDATE_WIDGET,
                 payload: res.data?.updatedWidget
             })
+            // dispatch({
+            //     type: SET_ALERT,
+            //     payload: {
+            //         message: 'Widget Updated',
+            //         type: 'success',
+            //     }
+            // })
         }
     }).catch(err=>{
         console.log(err)

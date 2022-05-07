@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {FC} from "react";
+import {FC, useMemo} from "react";
 
 const VideoPlayerStyledDiv = styled.div`
   margin: 0 auto;
@@ -50,21 +50,32 @@ const VideoPlayer :FC = () => {
       description,
       duration,
       videoUrl,
+      actors,
       mainThumbnail,
       videoEmbedCode,
+      createdAt,
       updatedAt,
       videoScriptCode
   } = useSelector(({posts}:StoreTypes)=>posts.post)
 
+      const uploadDate = useMemo(()=>{
+          const ISO8601Date = new Date(updatedAt || createdAt)
+          return ISO8601Date.toISOString()
+      },[createdAt,updatedAt])
+
     return (
         <VideoPlayerStyledDiv className='video-player'>
-
-            <meta itemProp="name" content={title}/>
-            <meta itemProp="description" content={description as string}/>
-            <meta itemProp="duration" content={duration}/>
-            <meta itemProp="thumbnailUrl" content={mainThumbnail}/>
-            <meta itemProp="embedURL" content={videoUrl || videoEmbedCode}/>
-            <meta itemProp="uploadDate" content={updatedAt}/>
+            {title &&   <meta itemProp="name" content={title}/>}
+            {description &&   <meta itemProp="description" content={description as string}/>}
+            {duration &&   <meta itemProp="duration" content={duration}/>}
+            {mainThumbnail &&    <meta itemProp="thumbnailUrl" content={mainThumbnail}/>}
+            {videoUrl || videoEmbedCode &&    <meta itemProp="embedURL" content={videoUrl || videoEmbedCode}/>}
+            {uploadDate && <meta itemProp="uploadDate" content={uploadDate}/>}
+            {!!actors.length && actors?.map(actor=>{
+                return(
+                    <meta key={actor._id} itemProp="actor" content={actor.name}/>
+                )
+            })}
             <div className="responsive-player">
                 {videoUrl ?
                     <video className='video-player-video-type' controls controlsList=" nodownload" poster={mainThumbnail} preload="none">

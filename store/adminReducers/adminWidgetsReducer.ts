@@ -25,15 +25,13 @@ export const adminPanelWidgetsReducer = (state: AdminPanelWidgetsTypes = initial
                 }
             };
             //[...state.widgets, action.payload]
-        // case UPDATE_WIDGET:
-        //     // const index =  findIndex(state.widgets, {_id: action.payload._id});
-        //     const index = state.widgets.findIndex(widget=>widget._id === action.payload._id);
-        //     const currentWidgets = state.widgets;
-        //     currentWidgets.splice(index, 1, action.payload);
-        //     return {
-        //         ...state,
-        //         widgets: currentWidgets
-        //     };
+        case UPDATE_WIDGET:
+
+
+            return {
+                ...state,
+
+            };
         case ADMIN_PANEL_DELETE_WIDGET:
             return {
                 ...state,

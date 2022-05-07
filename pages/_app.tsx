@@ -18,7 +18,9 @@ const MyApp = ({Component, pageProps}: AppPropsWithLayout) => {
     const getLayout = Component.getLayout ?? ((page) => page)
 
     return getLayout(<Component {...pageProps} />)
+
 }
+
 //@ts-ignore
 export default wrapper.withRedux(appWithTranslation(MyApp, nextI18NextConfig));
 

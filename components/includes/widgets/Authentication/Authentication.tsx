@@ -2,8 +2,13 @@ import React, {FC, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import styled from "styled-components";
+import dynamic from "next/dynamic";
 import AuthenticationNotLoggedInItems from "@components/includes/widgets/Authentication/AuthenticationNotLoggedInItems";
-import AuthenticationLoggedInItems from "@components/includes/widgets/Authentication/AuthenticationLoggedInItems";
+const AuthenticationLoggedInItems = dynamic(() =>
+    import('@components/includes/widgets/Authentication/AuthenticationLoggedInItems'),
+    { loading: () => <p>Signing in...</p> }
+)
+
 
 const AuthenticationStyledDiv = styled.div`
 
@@ -208,9 +213,7 @@ const Authentication: FC = () => {
                                                           profileImage={profileImage}
                                                           username={username}
                                                           allowUserToPost={allowUserToPost}
-                                                          membership={membership}
-                />
-                }
+                                                          membership={membership}/>}
             </div>
 
 

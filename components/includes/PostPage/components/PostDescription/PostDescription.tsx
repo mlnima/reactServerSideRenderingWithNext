@@ -14,6 +14,7 @@ const PostDescriptionStyledDiv = styled.div`
 
   @media only screen and (min-width: 768px) {
     max-width: 1300px;
+    margin: 0 auto;
   }
 `
 

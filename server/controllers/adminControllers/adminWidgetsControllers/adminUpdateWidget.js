@@ -2,8 +2,6 @@ const widgetSchema = require('../../../models/widgetSchema');
 const metaSchema = require('../../../models/metaSchema');
 const postSchema = require('../../../models/postSchema');
 const _clientQueryGeneratorForGettingPosts = require('../../clientControllers/_variables/_clientQueryGeneratorForGettingPosts')
-const a = require("postcss-nesting");
-
 
 const updatePostWidgetData = async (widgetData) => {
     if (widgetData) {

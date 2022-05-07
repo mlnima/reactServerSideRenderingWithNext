@@ -1,5 +1,16 @@
 const widgetSchema = require('../../../models/widgetSchema');
 
+
+
+// const getWidgets =
+
+
+
+
+
+
+
+
 module.exports = async (req, res) => {
     try {
         const widgets = await widgetSchema.find({}).populate([

@@ -57,9 +57,6 @@ const Advertise: FC<AdvertisePropTypes> = ({uniqueData}) => {
                     <span>loading...</span>
                 </div>
             }
-            {/*<div className='pre-load'>*/}
-            {/*           <span>loading...</span>*/}
-            {/*        </div>*/}
         </AdvertiseStyledDiv>
     )
 };
