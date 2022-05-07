@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {FC, useMemo} from "react";
+import React, {FC, useMemo} from "react";
 
 const VideoPlayerStyledDiv = styled.div`
   margin: 0 auto;
@@ -42,8 +42,11 @@ const VideoPlayerStyledDiv = styled.div`
   
 `
 
+interface PropTypes{
+    descriptionRef:React.Ref<HTMLDivElement>
+}
 
-const VideoPlayer :FC = () => {
+const VideoPlayer :FC<PropTypes> = ({descriptionRef}) => {
 
   const {title,
       _id,
@@ -53,6 +56,7 @@ const VideoPlayer :FC = () => {
       actors,
       mainThumbnail,
       videoEmbedCode,
+
       createdAt,
       updatedAt,
       videoScriptCode
@@ -66,7 +70,8 @@ const VideoPlayer :FC = () => {
     return (
         <VideoPlayerStyledDiv className='video-player'>
             {title &&   <meta itemProp="name" content={title}/>}
-            {description &&   <meta itemProp="description" content={description as string}/>}
+            {/*//@ts-ignore*/}
+            {descriptionRef?.current &&   <meta itemProp="description" content={descriptionRef?.current?.textContent || ''}/>}
             {duration &&   <meta itemProp="duration" content={duration}/>}
             {mainThumbnail &&    <meta itemProp="thumbnailUrl" content={mainThumbnail}/>}
             {videoUrl || videoEmbedCode &&    <meta itemProp="embedURL" content={videoUrl || videoEmbedCode}/>}

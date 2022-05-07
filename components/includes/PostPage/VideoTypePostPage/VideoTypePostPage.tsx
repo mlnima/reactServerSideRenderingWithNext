@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import styled from "styled-components";
 import PostPageStyle from "../PostPageStyle";
 import {useSelector} from "react-redux";
@@ -33,6 +33,8 @@ const VideoTypePostPageStyle = styled(PostPageStyle)`
 
 const VideoTypePostPage = () => {
 
+    const descriptionRef = useRef<HTMLDivElement>(null)
+
     const videoTypePostPageData = useSelector(({settings, posts}: StoreTypes) => {
         return {
             postPageStyle: settings?.design.postPageStyle,
@@ -45,7 +47,7 @@ const VideoTypePostPage = () => {
             <main id={'main'}>
                 <article itemProp={'video'} itemScope itemType={'http://schema.org/VideoObject'}>
                 <header className={'entry-header'}>
-                    <VideoPlayer/>
+                    <VideoPlayer descriptionRef={descriptionRef}/>
                     <div className='rating-price-download'>
                         <PostTitle/>
                         <RatingButtons rating={true}/>
@@ -57,7 +59,7 @@ const VideoTypePostPage = () => {
                     </div>
                 </header>
                 <div className="entry-content">
-                    <PostDescription/>
+                    <PostDescription descriptionRef={descriptionRef}/>
                     <PostMeta type='actors'/>
                     <PostMeta type='categories'/>
                     <PostMeta type='tags'/>

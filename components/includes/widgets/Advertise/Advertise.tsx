@@ -7,7 +7,7 @@ const AdvertiseStyledDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100px;
+  min-height: 102px;
   min-width: 300px;
   //margin-top: 10px;
   //margin-bottom: 10px;
@@ -18,7 +18,7 @@ const AdvertiseStyledDiv = styled.div`
     justify-content: center;
     align-items: center;
     //border: var(--default-border);
-    min-height: 100px;
+    min-height: 102px;
     min-width: 300px;
     //margin-top: 10px;
     //margin-bottom: 10px;

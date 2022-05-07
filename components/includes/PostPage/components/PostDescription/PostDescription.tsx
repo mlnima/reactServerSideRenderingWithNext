@@ -1,10 +1,9 @@
 import React, {FC, useMemo} from "react";
 import {useRouter} from "next/router";
-// import parse from "html-react-parser";
+import parse from "html-react-parser";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-//import 'react-quill/dist/quill.snow.css';
 
 const PostDescriptionStyledDiv = styled.div`
   color: var(--post-page-info-color, #ccc);
@@ -18,29 +17,31 @@ const PostDescriptionStyledDiv = styled.div`
   }
 `
 
-const PostDescription: FC = () => {
+interface PropTypes {
+    descriptionRef: React.Ref<any>
+}
+
+const PostDescription: FC<PropTypes> = ({descriptionRef}) => {
 
     const {locale} = useRouter();
     const {description, translations} = useSelector(({posts}: StoreTypes) => {
-        return{
-            description:posts.post?.description,
-            translations:posts.post?.translations,
+        return {
+            description: posts.post?.description,
+            translations: posts.post?.translations,
         }
     })
 
     const descriptionValue = useMemo(() => {
         return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?
-               description :
-               translations?.[locale]?.description || description
+            description :
+            translations?.[locale]?.description || description
     }, [description, translations]);
 
     return (
-        <PostDescriptionStyledDiv className="description" dangerouslySetInnerHTML={{__html:descriptionValue as string}}/>
+        <PostDescriptionStyledDiv className="description" ref={descriptionRef}>
+            {descriptionValue ? parse(descriptionValue as string) : ''}
+        </PostDescriptionStyledDiv>
     )
 };
 
 export default PostDescription;
-//
-// <PostDescriptionStyledDiv className="description" dangerouslySetInnerHTML={{__html:descriptionValue as string}}>
-//     {descriptionValue ? parse(descriptionValue as string) : ''}
-// </PostDescriptionStyledDiv>
