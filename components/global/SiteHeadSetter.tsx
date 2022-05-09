@@ -9,7 +9,7 @@ const SiteHeadSetter: FC = () => {
     const {asPath} = useRouter();
     const siteLanguages = useMemo(() => process.env.NEXT_PUBLIC_LOCALS?.split(' ') || [], []);
 
-    const headData = useSelector(({globalState}: StoreTypes) => globalState.headData)
+    const headData = useSelector(({globalState}: StoreTypes) => globalState?.headData)
 
     return (
         <Head >
@@ -39,9 +39,7 @@ const SiteHeadSetter: FC = () => {
 
             }
             <meta name={'theme-color'} content={headData.themeColor}/>
-            {/*{headData.canonical ?  <link rel={'canonical'} href={`${process.env.NEXT_PUBLIC_PRODUCTION_URL}${asPath}`}/> :null}*/}
             {!!headData.canonicalUrl &&  <link rel={'canonical'} href={headData.canonicalUrl}/>}
-
             <meta name={'apple-mobile-web-app-status-bar-style'} content={headData.themeColor}/>
             <meta name={'viewport'} content={'width=device-width, initial-scale=1'}/>
             <meta charSet={'utf-8'}/>
@@ -61,7 +59,7 @@ const SiteHeadSetter: FC = () => {
             {!!headData?.twitterCard && <meta property={'twitter:card'} content={'summary_large_image'}/> }
             {!!headData?.twitterSite && <meta property={'twitter:site'} content={headData?.twitterSite}/> }
             {!!headData?.twitterUrl && <meta property={'twitter:url'} content={headData?.twitterUrl}/> }
-            {!!headData?.twitterTitle && <meta property={'twitter:url'} content={headData?.twitterTitle}/> }
+            {!!headData?.twitterTitle && <meta property={'twitter:title'} content={headData?.twitterTitle}/> }
             {(!!headData?.twitterDescription && typeof headData.twitterDescription === 'string') &&
                 <meta property={'twitter:description'} content={headData?.twitterDescription}/> }
             {!!headData?.twitterImage && <meta property={'twitter:image'} content={headData?.twitterImage}/> }

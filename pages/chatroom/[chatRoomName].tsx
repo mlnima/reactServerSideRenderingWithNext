@@ -102,12 +102,17 @@ const chatRoom = () => {
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-    await store.dispatch(getDefaultPageData(context, [],
-        {
-            setHeadData: true,
-            page: 'chatroom'
-        }
-    ))
+    await store.dispatch(
+        getDefaultPageData(
+            context,
+            [],
+            {
+                setHeadData: true,
+                page: 'chatroom'
+            },
+            store
+        )
+    )
 
     return {
         props: {
@@ -117,7 +122,6 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 })
 
 chatRoom.getLayout = function getLayout(page: ReactElement) {
-
     return (
         <MessengerLayout>
             {page}

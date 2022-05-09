@@ -38,7 +38,8 @@ const Custom500 = () => {
         </Custom500StyledDiv>
     );
 };
-//
+
+
 export const getStaticProps = wrapper.getServerSideProps(store =>
     async (context) => {
         return {

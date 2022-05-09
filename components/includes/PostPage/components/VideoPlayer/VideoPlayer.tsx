@@ -67,13 +67,24 @@ const VideoPlayer :FC<PropTypes> = ({descriptionRef}) => {
           return ISO8601Date.toISOString()
       },[createdAt,updatedAt])
 
+
+    const playerSchemaData = useMemo(()=>{
+        return {
+            mainThumbnail:  mainThumbnail?.includes('http') ?
+                            mainThumbnail :
+                            `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${mainThumbnail}`,
+            uploadDate: (new Date(updatedAt || createdAt)).toISOString()
+
+        }
+    },[createdAt,updatedAt])
+
     return (
         <VideoPlayerStyledDiv className='video-player'>
             {title &&   <meta itemProp="name" content={title}/>}
             {/*//@ts-ignore*/}
             {descriptionRef?.current &&   <meta itemProp="description" content={descriptionRef?.current?.textContent || ''}/>}
             {duration &&   <meta itemProp="duration" content={duration}/>}
-            {mainThumbnail &&    <meta itemProp="thumbnailUrl" content={mainThumbnail}/>}
+            {playerSchemaData.mainThumbnail &&    <meta itemProp="thumbnailUrl" content={playerSchemaData.mainThumbnail}/>}
             {videoUrl || videoEmbedCode &&    <meta itemProp="embedURL" content={videoUrl || videoEmbedCode}/>}
             {uploadDate && <meta itemProp="uploadDate" content={uploadDate}/>}
             {!!actors.length && actors?.map(actor=>{

@@ -1,4 +1,4 @@
-import {FC,useMemo, useState} from "react";
+import {FC, useMemo, useState} from "react";
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import styled from "styled-components";
@@ -14,7 +14,7 @@ const AlphabeticalNumericalRangeLinksWidgetStyledDiv = styled.div`
   max-width: 95vw;
   margin-bottom: 10px;
   margin-top: 10px;
-  
+
   .alphabetical-range-content {
     display: ${({renderItems}: { renderItems: boolean }) => renderItems ? 'flex' : 'none'};
     justify-content: center;
@@ -28,19 +28,23 @@ const AlphabeticalNumericalRangeLinksWidgetStyledDiv = styled.div`
       margin: 5px;
       border-radius: 5px;
       transition: width 2s linear 1s;
-      background-color:  var(--navigation-background-color, #18181b);
-      color:var(--main-text-color, #ccc);
+      background-color: var(--navigation-background-color, #18181b);
+      color: var(--main-text-color, #ccc);
     }
 
     .active-item {
       background-color: var(--main-active-color, #f90);
       color: var(--navigation-background-color, #18181b);
     }
-    
-    .current-query{
+
+    .current-query {
       display: flex;
       justify-content: center;
       align-items: center;
+    }
+    .current-query-over{
+       background-color: var(--danger-button-link-background-color,#dc3545);
+       color: var(--danger-button-link-text-color,#fff);
     }
   }
 
@@ -56,7 +60,8 @@ const AlphabeticalNumericalRangeLinksWidgetStyledDiv = styled.div`
         align-items: center;
         font-size: 1rem;
       }
-      .current-query{
+
+      .current-query {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -69,14 +74,20 @@ const AlphabeticalNumericalRangeLinksWidgetStyledDiv = styled.div`
 `
 const AlphabeticalNumericalRangeLinksWidget: FC = () => {
 
-    const {pathname, query} = useRouter()
+    const {pathname, query,locale} = useRouter()
     const isMobileDevice = useSelector((store: StoreTypes) => store.settings?.isMobile)
-    const isMobile = useMemo(()=>isMobileDevice,[])
+    const isMobile = useMemo(() => isMobileDevice, [])
     const [renderItems, setRenderItems] = useState(!isMobile)
     const activePage = query.startWith;
 
+    // const range = useMemo(() => {
+    //     return pathname === '/actors' ? [...'abcdefghijklmnopqrstuvwxyz'] : [...'abcdefghijklmnopqrstuvwxyz0123456789'];
+    // }, [])
+
     const range = useMemo(() => {
-        return pathname === '/actors' ? [...'abcdefghijklmnopqrstuvwxyz'] : [...'abcdefghijklmnopqrstuvwxyz0123456789'];
+        return pathname === '/actors' ? [...'abcdefghijklmnopqrstuvwxyz'] :
+            // process.env.NEXT_PUBLIC_DEFAULT_LOCAL === 'fa' && locale ==='fa' ? [] :
+            [...'abcdefghijklmnopqrstuvwxyz0123456789'];
     }, [])
 
     const renderRange = range.map((Letter, index) => {
@@ -84,7 +95,11 @@ const AlphabeticalNumericalRangeLinksWidget: FC = () => {
         return (
             <Link key={index} href={{
                 pathname: pathname,
-                query: query.startWith ? {...query, startWith: (query?.startWith || '') + Letter, page: 1} : {
+                query: query.startWith ? {
+                    ...query,
+                    startWith: query?.startWith?.length <= 3 ? `${(query?.startWith || '') + Letter}` : query?.startWith,
+                    page: 1
+                } : {
                     ...query,
                     startWith: Letter,
                     page: 1
@@ -115,7 +130,10 @@ const AlphabeticalNumericalRangeLinksWidget: FC = () => {
                         pathname: pathname,
                         query: {...query, startWith: query?.startWith?.slice(0, -1)}
                     }}>
-                        <a className='alphabetical-range-widget-item active-item current-query'>
+                        <a className={
+                            `alphabetical-range-widget-item active-item current-query ${
+                                query?.startWith?.length > 3  && 'current-query-over'}`
+                        }>
                             {query?.startWith} X
                         </a>
                     </Link>
@@ -125,7 +143,7 @@ const AlphabeticalNumericalRangeLinksWidget: FC = () => {
                     pathname: pathname,
                     query: {...query, startWith: ''}
                 }}>
-                    <a className={`alphabetical-range-widget-item ${!query.startWith ? 'active-item' : ''}`} >
+                    <a className={`alphabetical-range-widget-item ${!query.startWith ? 'active-item' : ''}`}>
                         All
                     </a>
                 </Link>

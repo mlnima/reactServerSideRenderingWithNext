@@ -2,7 +2,7 @@ import axios, {AxiosResponse} from "axios";
 import {NextRouter} from 'next/router'
 import {PageTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {GET_CUSTOM_PAGES, SET_SIDEBAR_STATUS} from "@store/adminTypes";
-import {LOADING, SET_ALERT} from "../types";
+import {CLEAR_REQUESTED_WIDGETS, LOADING, SET_ALERT, SET_REQUESTED_WIDGETS} from "../types";
 import {AnyAction} from "redux";
 //@ts-ignore
 export const getCustomPages = ():AnyAction => async dispatch => {
@@ -24,11 +24,14 @@ export const clearCaches = (router?: NextRouter):AnyAction => async dispatch => 
         dispatch({
             type: SET_ALERT,
             payload: {
-
                 message: res.data.message || 'done',
                 type: 'success'
             }
         });
+        dispatch({
+            type:CLEAR_REQUESTED_WIDGETS ,
+            payload:[]
+        })
         setTimeout(() => router.reload(), 1000)
     }).catch(err => {
         dispatch({

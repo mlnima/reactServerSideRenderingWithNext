@@ -255,6 +255,7 @@ const settings = () => {
                             editingSettings.activeEditingLanguage === 'default' ? identity.title :
                                 identity.translations?.[editingSettings.activeEditingLanguage]?.title || ""
                         } onChange={e => onChangeHandlerWithTranslate(e)}/>
+
                         <p>Site Description:</p>
                         <textarea className={'form-control-input'} name='description' value={
                             editingSettings.activeEditingLanguage === 'default' ? identity.description :
@@ -303,7 +304,7 @@ const settings = () => {
                                 identity.translations?.[editingSettings.activeEditingLanguage]?.tagPageTitle || ""
                         } onChange={e => onChangeHandlerWithTranslate(e)}/>
                         <p>Tag Page Description + Tag :</p>
-                        <textarea className={'form-control-input'} name='tagsPageDescription' value={
+                        <textarea className={'form-control-input'} name='tagPageDescription' value={
                             editingSettings.activeEditingLanguage === 'default' ? identity?.tagPageDescription :
                                 identity.translations?.[editingSettings.activeEditingLanguage]?.tagPageDescription || ""
                         } onChange={e => onChangeHandlerWithTranslate(e)}/>

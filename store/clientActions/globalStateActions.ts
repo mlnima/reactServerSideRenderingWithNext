@@ -12,26 +12,27 @@ import {
     SET_ALERT, SET_HEAD_DATA, SET_REQUESTED_WIDGETS,
     SET_WIDGETS_IN_GROUPS
 } from "@store/types";
-import {getTextDataWithTranslation,  isAppleMobileDevice} from "@_variables/_variables";
+import {getTextDataWithTranslation, isAppleMobileDevice, textContentReplacer} from "@_variables/_variables";
 import {AnyAction} from "redux";
 import {getSelectorsByUserAgent} from 'react-device-detect'
+import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
 
 //@ts-ignore
-export const setLoginRegisterFormStatus = (statusType):AnyAction => dispatch => {
+export const setLoginRegisterFormStatus = (statusType): AnyAction => dispatch => {
     dispatch({
         type: LOGIN_REGISTER_FORM,
         payload: statusType
     })
 }
 //@ts-ignore
-export const setLoading = (statusType):AnyAction  => dispatch => {
+export const setLoading = (statusType): AnyAction => dispatch => {
     dispatch({
         type: LOADING,
         payload: statusType
     })
 }
 //@ts-ignore
-export const setAlert = (payload):AnyAction  => dispatch => {
+export const setAlert = (payload): AnyAction => dispatch => {
     dispatch({
         type: SET_ALERT,
         payload
@@ -49,14 +50,14 @@ export const setAlert = (payload):AnyAction  => dispatch => {
     }, 8000)
 }
 //@ts-ignore
-export const closeAlert = ():AnyAction  => dispatch => {
+export const closeAlert = (): AnyAction => dispatch => {
     dispatch({
         type: CLOSE_ALERT,
         payload: null
     })
 }
 //@ts-ignore
-export const setSideHeadData = (headData):AnyAction  => dispatch => {
+export const setSideHeadData = (headData): AnyAction => dispatch => {
     dispatch({
         type: SET_HEAD_DATA,
         payload: headData
@@ -64,7 +65,7 @@ export const setSideHeadData = (headData):AnyAction  => dispatch => {
 }
 
 //@ts-ignore
-export const hydrateGlobalState = (data):AnyAction  => dispatch => {
+export const hydrateGlobalState = (data): AnyAction => dispatch => {
     dispatch({
         type: HYDRATE,
         payload: data
@@ -74,13 +75,13 @@ export const hydrateGlobalState = (data):AnyAction  => dispatch => {
 
 export const getDefaultPageData =
     //@ts-ignore
-    (context: GetServerSidePropsContext, dynamicWidgets: string[], options?: { page: string, setHeadData: boolean },store?:any):AnyAction  => async dispatch => {
+    (context: GetServerSidePropsContext, dynamicWidgets: string[], options?: { page: string, setHeadData: boolean }, store?: any): AnyAction => async dispatch => {
 
         const userAgent = context.req.headers['user-agent'];
-        const { isMobile } = getSelectorsByUserAgent(userAgent)
+        const {isMobile} = getSelectorsByUserAgent(userAgent)
         let isDefaultDataSet = false
-        const isUserInternal  = context.req?.headers?.referer &&
-                                !context.req?.headers?.referer.includes(process.env.NEXT_PUBLIC_PRODUCTION_URL)
+        const isUserInternal = context.req?.headers?.referer &&
+            !context.req?.headers?.referer.includes(process.env.NEXT_PUBLIC_PRODUCTION_URL)
         context.res.setHeader(
             'Cache-Control',
             'public, s-maxage=604800, stale-while-revalidate=604800'
@@ -90,13 +91,14 @@ export const getDefaultPageData =
 
         let staticWidgets = []
         let staticData = {
-            design:{},
-            identity:{
-                themeColor:'#000'
+            design: {},
+            identity: {
+                themeColor: '#000'
             }
         }
 
-        if (!isUserInternal || !isDefaultDataSet){
+        if (!isUserInternal || !isDefaultDataSet) {
+
             //@ts-ignore
             staticWidgets = staticWidgetsJson?.widgets || []
             //@ts-ignore
@@ -117,38 +119,60 @@ export const getDefaultPageData =
         }
 
 
-        if (options?.setHeadData && options?.page?.match('search|tags|categories|actors|home|posts|chatroom|messenger|login|register')) {
+        if (
+            options?.setHeadData &&
+            options?.page?.match('search|tags|categories|actors|home|posts|chatroom|messenger|login|register')
+        ) {
 
             const title = options.page && options?.page?.match('search|tags|categories|actors') ?
-                (options.page === 'search' ? `${context.query?.keyword} ` : '') +
-                getTextDataWithTranslation(context.locale, `${options.page}PageTitle`, staticData?.identity) +
-                //@ts-ignore
-                (staticData?.identity?.siteName ? ` | ${staticData?.identity?.siteName}` : '') :
-                getTextDataWithTranslation(context.locale, 'title', staticData?.identity)
+                textContentReplacer(
+                    getTextDataWithTranslation(context.locale, `${options.page}PageTitle`, staticData?.identity)
+                    //@ts-ignore
+                    + ` | ${staticData?.identity?.siteName}`,
+                    {
+                        name: options.page === 'search' ?
+                            `${capitalizeFirstLetter(context.query?.keyword)} ` :
+                            ` ${capitalizeFirstLetter(options.page)} `
+                    }
+                )
+                : getTextDataWithTranslation(context.locale, 'title', staticData?.identity)
 
             const description = options.page && options?.page?.match('search|tags|categories|actors') ?
-                (options.page === 'search' ? `${context.query?.keyword} ` : '') +
-                getTextDataWithTranslation(context.locale, `${options.page}PageDescription`, staticData?.identity) +
-                //@ts-ignore
-                (staticData?.identity?.siteName ? ` | ${staticData?.identity?.siteName}` : ''):
-                getTextDataWithTranslation(context.locale, 'description', staticData?.identity)
+                textContentReplacer(
+                    getTextDataWithTranslation(context.locale, `${options.page}PageDescription`, staticData?.identity)
+                    //@ts-ignore
+                    + `| ${staticData?.identity?.siteName}`,
+                    {
+                        name: options.page === 'search' ?
+                            `${capitalizeFirstLetter(context.query?.keyword)}` :
+                            `${capitalizeFirstLetter(options.page)}`
+                    }
+                )
+                : getTextDataWithTranslation(context.locale, 'description', staticData?.identity)
 
 
-            const canonicalUrl= options?.page?.match('categories|tags|actors') ?
-                { canonicalUrl : `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${options?.page}`} :
-                options?.page?.match('search') ?
-                    { canonicalUrl : `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/search/${context.query?.keyword}`} :
-                options?.page?.match('home') ?
-                    { canonicalUrl : `${process.env.NEXT_PUBLIC_PRODUCTION_URL}`} :
-                {}
+            const canonicalUrl = options?.page?.match('categories|tags|actors') ?
+                {
+                    canonicalUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${options?.page}`
+                } : options?.page?.match('search') ?
+                    {
+                        canonicalUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/search/${context.query?.keyword}`
+                    } : options?.page?.match('home') ?
+                        {
+                            canonicalUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}`
+                        } : options?.page?.match('chatroom') ?
+                            {
+                                canonicalUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/chatroom/${context.query?.chatRoomName}`
+                            } : {
+                                canonicalUrl: null
+                            }
 
-            // console.log(title)
             dispatch({
                 type: SET_HEAD_DATA,
                 payload: {
                     title: title || null,
                     description: description?.substring(0, 155) || null,
-                    keywords: [(options.page !== 'home' ? options.page:'' ) ,...(getTextDataWithTranslation(context.locale, 'keywords', staticData?.identity) || [])],
+                    keywords: [(options.page !== 'home' ? options.page : ''), ...(getTextDataWithTranslation(context.locale, 'keywords', staticData?.identity) || [])],
                     themeColor: staticData.identity?.themeColor || '#000',
                     ...canonicalUrl,
                     //@ts-ignore
@@ -161,16 +185,16 @@ export const getDefaultPageData =
                     applicationName: staticData?.identity?.siteName || null,
                     //@ts-ignore
                     ogSiteName: staticData?.identity?.siteName || null,
-                    ogLocale: context.locale,
+                    ogLocale: context?.locale || null,
                     ogTitle: title || null,
                     ogDescription: description?.substring(0, 155) || null,
                     ogType: 'website',
-                    ogUrl: process.env.NEXT_PUBLIC_PRODUCTION_URL,
+                    ogUrl: canonicalUrl?.canonicalUrl || null,
                     //@ts-ignore
                     ogImage: staticData?.identity?.favIcon || '/static/images/favIcon/favicon.png',
 
                     twitterCard: true,
-                    twitterUrl: process.env.NEXT_PUBLIC_PRODUCTION_URL,
+                    twitterUrl: canonicalUrl?.canonicalUrl || null,
                     twitterTitle: title || null,
                     //@ts-ignore
                     twitterSite: staticData?.identity?.siteName || null,
@@ -188,12 +212,12 @@ export const getDefaultPageData =
                     //@ts-ignore
                     favIcon: staticData?.identity?.favIcon || '/static/images/favIcon/favicon.png',
                     //@ts-ignore
-                    customScriptsAsString: staticData?.identity?.customScriptsAsString || '',
+                    customScriptsAsString: staticData?.identity?.customScriptsAsString || null,
                     //@ts-ignore
                     rtaContent: staticData?.identity?.rtaContent || false,
                     //@ts-ignore
                     ogSiteName: staticData?.identity?.siteName || null,
-                    ogLocale: context.locale,
+                    ogLocale: context?.locale || null,
                     //@ts-ignore
                     twitterSite: staticData?.identity?.siteName || null,
 
@@ -209,16 +233,12 @@ export const getDefaultPageData =
             const existingWidgets = prevStore.widgets?.requestedWidgets
             const difference = dynamicWidgets.filter(x => !existingWidgets.includes(x));
 
-           //  console.log('existingWidgets',existingWidgets)
-           //  console.log('dynamicWidgets',dynamicWidgets)
-           // console.log('difference',difference)
-
-            if (difference.length){
+            if (difference.length) {
                 await Axios.get(`/api/v1/widgets/getMultipleWidgetWithData${_getMultipleWidgetWithDataQueryGenerator(difference, cache, context.locale)}`
                 ).then(res => {
                     dispatch({
-                        type:SET_REQUESTED_WIDGETS,
-                        payload:dynamicWidgets
+                        type: SET_REQUESTED_WIDGETS,
+                        payload: dynamicWidgets
                     })
 
                     dispatch({

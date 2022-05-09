@@ -34,6 +34,10 @@ export const onChangeInputValueCorrector = (e:any) =>{
                 e.target.value
 }
 
+export const textContentReplacer = (textString,replaces)=>{
+   return  textString.replaceAll('__NAME',replaces?.name || '')
+                     .replaceAll('__SITE_NAME',replaces?.siteName || '')
+}
 
 
 

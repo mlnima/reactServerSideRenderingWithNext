@@ -3,7 +3,12 @@ import _postPageQueryGenerator from "@_variables/clientVariables/_postPageQueryG
 import Axios from "@_variables/util/Axios";
 import _metaPageQueryGenerator from "@_variables/clientVariables/_metaPageQueryGenerator";
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
-import {convertMetasTypeToSingular, getTextDataWithTranslation, reduceArrayOfDataToIds} from "@_variables/_variables";
+import {
+    convertMetasTypeToSingular,
+    getTextDataWithTranslation,
+    reduceArrayOfDataToIds,
+    textContentReplacer
+} from "@_variables/_variables";
 import staticDataJson from "../../static/jsons/staticData.json";
 import isValidObjectId from '@_variables/util/mongoIdValidator';
 
@@ -53,13 +58,24 @@ export const getPosts = (context, metaId, cache, metaType, options) => async dis
             })
 
             if (res?.data?.meta && metaId && options) {
-                const staticData = staticDataJson
-                //@ts-ignore
-                const title = res?.data?.meta?.name ? `${res?.data?.meta?.name || ''} ${getTextDataWithTranslation(context.locale, `${options.page}PageTitle`, staticData?.identity)} | ${staticData?.identity?.siteName || ''}` : staticData?.identity?.siteName
+                const staticData = staticDataJson;
 
-                const description = getTextDataWithTranslation(context.locale, `${options.page}PageDescription`, staticData?.identity) +
-                    ` ${res?.data?.meta?.name}`
+                const title = textContentReplacer(
+                    getTextDataWithTranslation(
+                            context.locale,
+                            `${options.page}PageTitle`,
+                            staticData?.identity
+                        ),
+                    {name:res.data?.meta?.name,siteName:staticData?.identity?.siteName || ''}
+                )
 
+                const description = textContentReplacer(
+                    getTextDataWithTranslation(
+                            context.locale,
+                            `${options.page}PageDescription`,
+                            staticData?.identity
+                        ),{name:res.data?.meta?.name}
+                )
 
                 const canonicalUrl = options?.page?.match('category|tag|actor') ?
                     {canonicalUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${singularMetaForm}/${metaId}`} : {}
@@ -485,3 +501,15 @@ export const createEditPostByUser = (pageName): AnyAction => async dispatch => {
 //     })
 // }).catch(err=>{
 // })
+
+
+// const title = getTextDataWithTranslation(
+//     context.locale,
+//     `${options.page}PageTitle`,
+//     staticData?.identity
+// )?.replace('__KEY',res.data?.meta?.name)?.trim() + `| ${staticData?.identity?.siteName || ''}`
+// const description = getTextDataWithTranslation(
+//     context.locale,
+//     `${options.page}PageDescription`,
+//     staticData?.identity
+// )?.replace('__KEY',res.data?.meta?.name)?.trim();

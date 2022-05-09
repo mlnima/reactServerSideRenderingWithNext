@@ -1,6 +1,6 @@
 import {HYDRATE} from 'next-redux-wrapper';
 import _reduceWidgetsToGroups from "../../_variables/_reduceWidgetsToGroups/_reduceWidgetsToGroups";
-import {SET_REQUESTED_WIDGETS, SET_WIDGETS, SET_WIDGETS_IN_GROUPS} from "@store/types";
+import {CLEAR_REQUESTED_WIDGETS, SET_REQUESTED_WIDGETS, SET_WIDGETS, SET_WIDGETS_IN_GROUPS} from "@store/types";
 
 const initialState = {
     widgetInGroups:{},
@@ -11,6 +11,7 @@ export const widgetsReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case HYDRATE:
+            // console.log(action?.payload)
             return {
                 ...state,
                 widgetInGroups:{
@@ -35,6 +36,11 @@ export const widgetsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 requestedWidgets: [...new Set([...state.requestedWidgets,...action.payload])]
+            }
+        case CLEAR_REQUESTED_WIDGETS :
+            return {
+                ...state,
+                requestedWidgets: [ ]
             }
         default:
             return state

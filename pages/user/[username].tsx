@@ -165,7 +165,12 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         [
             'userPageRightSidebar',
             'userPageLeftSidebar',
-        ]))
+        ],
+        {
+            setHeadData: true,
+            page: 'user'
+        },
+        store))
 
     return {
         props: {
