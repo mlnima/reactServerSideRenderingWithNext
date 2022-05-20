@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {useDispatch} from "react-redux";
-import {setActiveVisibleProfile} from "@store/clientActions/chatroomActions";
 import styled from "styled-components";
+import {setActiveVisibleProfile} from "@store_toolkit/clientReducers/chatroomReducer";
 
 const ChatRoomOnlineUsersListItemStyledDiv = styled.div`
   display: flex;

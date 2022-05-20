@@ -1,16 +1,17 @@
 import React, {FC, useEffect} from 'react';
-import {useDispatch, } from "react-redux";
-import {getCustomPages} from "@store/adminActions/adminPanelGlobalStateActions";
+import {useDispatch,} from "react-redux";
 import {useRouter} from "next/router";
-import {adminGetWidgets} from "@store/adminActions/adminWidgetsActions";
 import Head from 'next/head'
-import {adminPanelGetSettings} from "@store/adminActions/adminPanelSettingsActions";
+import {adminPanelGetSettings} from "@store_toolkit/adminReducers/adminPanelSettingsReducer";
+import {fetchCustomPages} from "@store_toolkit/adminReducers/adminPanelGlobalStateReducer";
+import {fetchAdminPanelGetWidgets} from "@store_toolkit/adminReducers/adminWidgetsReducer";
+import {fetchAdminGetWidgets} from "@store_toolkit/clientReducers/widgetsReducer";
 
-interface AdminDataSetterPropTypes{
-    userRole:string
+interface AdminDataSetterPropTypes {
+    userRole: string
 }
 
-const AdminDataSetter:FC<AdminDataSetterPropTypes> = ({userRole}) => {
+const AdminDataSetter: FC<AdminDataSetterPropTypes> = ({userRole}) => {
     const dispatch = useDispatch()
     const {pathname} = useRouter()
 
@@ -22,15 +23,19 @@ const AdminDataSetter:FC<AdminDataSetterPropTypes> = ({userRole}) => {
 
     const getAndSetDataForAdmin = async () => {
         try {
-            dispatch(adminGetWidgets())
-            dispatch(getCustomPages())
-            dispatch(adminPanelGetSettings())
+            if (pathname.includes('/admin')) {
+                dispatch(fetchAdminPanelGetWidgets(null))
+            } else {
+                dispatch(fetchAdminGetWidgets(null))
+            }
+            dispatch(fetchCustomPages(null));
+            dispatch(adminPanelGetSettings(null));
         } catch (err) {
             console.log(err)
         }
     }
 
-    if (pathname?.match( /\/admin/g )){
+    if (pathname?.match(/\/admin/g)) {
         return (
 
             <Head>
@@ -49,7 +54,7 @@ const AdminDataSetter:FC<AdminDataSetterPropTypes> = ({userRole}) => {
             </Head>
 
         );
-    }else return null
+    } else return null
 
 };
 export default AdminDataSetter;

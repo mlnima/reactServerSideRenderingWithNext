@@ -315,10 +315,10 @@ export default GlobalStylesComponent;
 //
 //   grid-template-columns: ${({sideBarWidth}:GlobalStylesPropTypes )=> `${sideBarWidth}px 1fr ${sideBarWidth}px` }  ;
 //   grid-template-areas:  'topbar topbar topbar'
-//                                     'header header header'
-//                                     'navigation navigation navigation'
-//                                     'leftSidebar main rightSidebar'
-//                                     'footer footer footer';
+//                         'header header header'
+//                         'navigation navigation navigation'
+//                         'leftSidebar main rightSidebar'
+//                         'footer footer footer';
 // }
 
 

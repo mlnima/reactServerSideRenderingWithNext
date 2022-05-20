@@ -1,13 +1,14 @@
 import React, {useState, useRef, useEffect, ChangeEvent} from 'react';
 
 import {useDispatch, useSelector} from "react-redux";
-import {wrapper} from "../../../../store/store";
+import {wrapper} from "../../../../ZlegacyCodesAndComponents/store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import styled from "styled-components";
-import {adminSaveNewPost} from "../../../../store/adminActions/adminPanelPostsActions";
+import {fetchAdminPanelSaveNewPost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
+// import {adminSaveNewPost} from "../../../../store/adminActions/adminPanelPostsActions";
 
 const PostsImporterStyledDiv = styled.div`
   display: flex;
@@ -45,7 +46,7 @@ const postsImporter = () => {
                 status:  statusElement.current.value || 'draft',
                 author:  userData._id
             }
-            dispatch(adminSaveNewPost(postDataToSave,null))
+            dispatch(fetchAdminPanelSaveNewPost({data:postDataToSave, router:null}))
         }
     }
 

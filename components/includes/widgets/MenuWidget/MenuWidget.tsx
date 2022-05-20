@@ -115,7 +115,7 @@ const MenuWidget: FC<MenuWidgetPropTypes> = ({menuItems}) => {
 
     const [open, setOpen] = useState(null);
     const menuItemsInOrder = useMemo(() => {
-        return menuItems.filter((menuItem: MenuItem) => !menuItem.parent)
+        return [...menuItems.filter((menuItem: MenuItem) => !menuItem.parent)]
             .sort((a, b) => a.itemIndex > b.itemIndex ? 1 : -1) || [];
     }, [menuItems])
 

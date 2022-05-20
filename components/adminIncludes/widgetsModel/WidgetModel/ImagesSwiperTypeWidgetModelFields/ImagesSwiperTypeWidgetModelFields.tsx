@@ -165,7 +165,7 @@ const ImagesSwiperTypeWidgetModelFields: FC<ImageSwiperTypeWidgetModelFieldsProp
         }
 
 
-        const renderCurrentData = uniqueData?.imagesData?.sort((a, b) => a.imageIndex > b.imageIndex ? 1 : -1)?.map((item, index) => {
+        const renderCurrentData = [...uniqueData?.imagesData]?.sort((a, b) => a.imageIndex > b.imageIndex ? 1 : -1)?.map((item, index) => {
             return (
                 <div key={item.imageId || index} className='current-data-preview' style={{maxWidth: '300px'}}>
                     <p>ID: {item.imageId}</p>

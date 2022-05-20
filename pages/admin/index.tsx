@@ -1,13 +1,14 @@
-import React, {FC, useEffect, useState} from 'react'
+import React, { useEffect, useState} from 'react'
 //import Analytics from '../../components/adminIncludes/Analytics/Analytics'
 import {socket} from '@_variables/socket'
 import Link from "next/link";
 import styled from "styled-components";
-import {wrapper} from "@store/store";
+import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 
 const AdminHomePageStyledDiv = styled.div`
@@ -34,6 +35,12 @@ const AdminHomePageStyledDiv = styled.div`
 const AdminHomePage = () => {
 
     const ip = useSelector((store: StoreTypes) => store?.settings.ip)
+
+    const store = useSelector((store: StoreTypes) => store)
+
+    useEffect(() => {
+        console.log(store)
+    }, [store]);
 
     const [state, setState] = useState({
         quickAccessLinks: [
@@ -135,7 +142,7 @@ const AdminHomePage = () => {
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
     return {
         props: {
-
+            // ...(await serverSideTranslations(context?.locale as string, ['common', 'customTranslation']))
         }
     }
 })

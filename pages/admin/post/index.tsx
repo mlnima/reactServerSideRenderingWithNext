@@ -14,16 +14,17 @@ import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
 import {
     adminChangeActiveEditingLanguage,
-    adminEditPost,
-    adminGetPost,
+    // adminGetPost,
     adminNewPost,
 
-} from "@store/adminActions/adminPanelPostsActions";
-import {wrapper} from "@store/store";
+} from "../../../ZlegacyCodesAndComponents/store/adminActions/adminPanelPostsActions";
+import {adminEditPost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
+import {wrapper} from "../../../ZlegacyCodesAndComponents/store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
+import {fetchAdminPanelPost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
 
 const AdminPostPageStyledDiv = styled.div`
   display: grid;
@@ -53,7 +54,7 @@ const Index = () => {
 
     useEffect(() => {
         if (router.query.id) {
-            dispatch(adminGetPost(router.query.id))
+            dispatch(fetchAdminPanelPost(router.query.id as string))
         } else {
             dispatch(adminNewPost())
         }

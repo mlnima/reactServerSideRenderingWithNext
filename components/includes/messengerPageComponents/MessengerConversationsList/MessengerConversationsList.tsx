@@ -2,8 +2,8 @@ import React, {useEffect} from 'react';
 import MessengerConversationPreview from "./MessengerConversationPreview";
 import {useDispatch, useSelector} from "react-redux";
 import MessengerConversationListHeader from "./MessengerConversationListHeader";
-import {getConversations} from "../../../../store/clientActions/userActions";
 import styled from "styled-components";
+import {fetchConversations} from "@store_toolkit/clientReducers/userReducer";
 
 const MessengerConversationsListStyledDiv = styled.div`
   display: flex;
@@ -23,7 +23,7 @@ const MessengerConversationsList = () => {
 
     useEffect(() => {
         if (userData?._id) {
-            dispatch(getConversations(userData?._id))
+            dispatch(fetchConversations(userData?._id))
         }
     }, [userData]);
 

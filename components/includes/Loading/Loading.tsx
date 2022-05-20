@@ -6,7 +6,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 // "@emotion/react": "^11.8.2",
 import ReactLoading from 'react-loading';
 import {useDispatch, useSelector} from "react-redux";
-import {setLoading} from "@store/clientActions/globalStateActions";
+import {setLoading} from "../../../ZlegacyCodesAndComponents/store/clientActions/globalStateActions";
 import {useRouter} from "next/router";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 

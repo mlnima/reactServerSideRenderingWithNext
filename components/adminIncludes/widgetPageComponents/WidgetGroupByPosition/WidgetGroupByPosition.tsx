@@ -6,7 +6,6 @@ import {useSelector} from "react-redux";
 import Draggable from 'react-draggable';
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
-
 const WidgetGroupByPositionStyledDiv = styled.div`
   background-color: transparent;
   width: 100%;
@@ -52,14 +51,18 @@ interface WidgetGroupByPositionPropTypes {
 const WidgetGroupByPosition: FC<WidgetGroupByPositionPropTypes> = ({filters, position}) => {
     const nodeRef = React.useRef(null);
 
-    const widgets = useSelector(
-        ({adminPanelWidgets}: StoreTypes) => adminPanelWidgets?.adminPanelWidgets?.[position]
-        ?.sort((a, b) => (a.data.widgetIndex > b.data.widgetIndex) ? 1 : -1)
+    const widgets = useSelector(({adminPanelWidgets}: StoreTypes) => {
+            const widgetsToSort = [...(adminPanelWidgets?.adminPanelWidgets?.[position] || [])]
+
+            return [...widgetsToSort]?.sort((a, b) => {
+                return (a.data.widgetIndex > b.data.widgetIndex) ? 1 : -1
+            })
+        }
     )
 
     if (filters.includes(position)) {
         return (
-            // <Draggable nodeRef={nodeRef}>
+            <Draggable nodeRef={nodeRef}>
                 <WidgetGroupByPositionStyledDiv className='widgetAdminPanelItem'>
 
                     <div>
@@ -72,7 +75,7 @@ const WidgetGroupByPosition: FC<WidgetGroupByPositionPropTypes> = ({filters, pos
                     })}
 
                 </WidgetGroupByPositionStyledDiv>
-   // </Draggable>
+             </Draggable>
         );
     } else return null
 

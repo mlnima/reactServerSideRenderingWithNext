@@ -9,12 +9,12 @@ import ChatRoomOnlineUsersList
 import ChatRoomMessageUserInfoPopup
     from "@components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup";
 import {useDispatch, useSelector} from "react-redux";
-import {dispatchSocketId} from "@store/clientActions/userActions";
-import {setChatroomUsers, setChatroomMessages, newMessage} from '@store/clientActions/chatroomActions';
-import {wrapper} from "@store/store";
+import {dispatchSocketId} from "@store_toolkit/clientReducers/userReducer";
+import {setOnlineUsers,setMessages,  newMessage} from '@store_toolkit/clientReducers/chatroomReducer';
+import {wrapper} from "@store_toolkit/store";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {_uniqBy} from "@_variables/util/arrayUtils/_uniqBy";
-import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import MessengerLayout from "@components/layouts/MessengerLayout";
 import type {ReactElement} from 'react';
@@ -66,17 +66,15 @@ const chatRoom = () => {
         })
 
         socket.on('onlineUsersList', (chatroomOnlineUsers: { username: string }[]) => {
-            //dispatch(setChatroomUsers(uniqBy(chatroomOnlineUsers, e => e.username)))
-            dispatch(setChatroomUsers(_uniqBy(chatroomOnlineUsers, 'username')))
+            dispatch(setOnlineUsers(_uniqBy(chatroomOnlineUsers, 'username')))
         })
 
         socket.on('recentChatRoomMessages', (chatroomMessages: object[]) => {
-            dispatch(setChatroomMessages(chatroomMessages))
+            dispatch(setMessages(chatroomMessages))
         })
 
         socket.on('userListUpdated', (chatroomOnlineUsers: { username: string }[]) => {
-            // dispatch(setChatroomUsers(uniqBy(chatroomOnlineUsers, e => e.username)))
-            dispatch(setChatroomUsers(_uniqBy(chatroomOnlineUsers, 'username')))
+            dispatch(setOnlineUsers(_uniqBy(chatroomOnlineUsers, 'username')))
         })
 
         socket.on('messageFromChatroom', (newMessageData: object) => {
@@ -102,16 +100,14 @@ const chatRoom = () => {
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-    await store.dispatch(
-        getDefaultPageData(
-            context,
-            [],
-            {
-                setHeadData: true,
-                page: 'chatroom'
-            },
-            store
-        )
+    await  getDefaultPageData(
+        context,
+        [],
+        {
+            setHeadData: true,
+            page: 'chatroom'
+        },
+        store
     )
 
     return {

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {FC} from "react";
 
 const CardRatingStyledDiv = styled.div`
   font-size: 12px;
@@ -12,12 +13,12 @@ const CardRatingStyledDiv = styled.div`
   }
 `
 
-interface CardViewsPropTypes {
+interface CardRatingPropTypes {
     rating: number,
     className: string
 }
 
-const CardRating = ({rating, className}: CardViewsPropTypes) => {
+const CardRating:FC<CardRatingPropTypes> = ({rating, className} ) => {
 
     return (
         <CardRatingStyledDiv className={'card-rating ' + className}>

@@ -2,9 +2,10 @@ import React, {FC} from "react";
 import {useTranslation} from "next-i18next";
 import {useRouter} from "next/router";
 import {useDispatch} from "react-redux";
-import {setLoginRegisterFormStatus} from "@store/clientActions/globalStateActions";
+import {setLoginRegisterFormStatus} from "../../../../ZlegacyCodesAndComponents/store/clientActions/globalStateActions";
 import Link from "next/link";
 import styled from "styled-components";
+import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 
 const AuthenticationNotLoggedInItemsStyledDiv = styled.div`
     
@@ -20,11 +21,11 @@ const AuthenticationNotLoggedInItems: FC<AuthenticationNotLoggedInItemsPropTypes
     const dispatch = useDispatch()
 
     const onLoginButtonClickHandler = ()=>{
-        dispatch(setLoginRegisterFormStatus('login'))
+        dispatch(loginRegisterForm('login'))
         onOpenCloseHandler()
     }
     const onRegisterButtonClickHandler = ()=>{
-        dispatch(setLoginRegisterFormStatus('login'))
+        dispatch(loginRegisterForm('register'))
         onOpenCloseHandler()
     }
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState} from 'react';
-import withRouter from 'next/dist/client/with-router'
+
 //import { getPosts } from '@_variables/ajaxPostsVariables'
 import PostsRenderer from '../../PostsRenderer/PostsRenderer'
 import {useSelector} from "react-redux";
@@ -47,4 +47,4 @@ const MyProfilePosts = props => {
         </div>
     );
 };
-export default withRouter(MyProfilePosts);
+export default MyProfilePosts;

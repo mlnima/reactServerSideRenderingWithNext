@@ -1,4 +1,4 @@
-import staticDataJson from '../../static/jsons/staticData.json'
+
 
 const _adminGetPostsQueryGenerator = (query) => {
     const sort = query?.sort ? {sort: query?.sort} : {sort: 'updatedAt'}
@@ -10,8 +10,8 @@ const _adminGetPostsQueryGenerator = (query) => {
     const keyword = query?.keyword ? {keyword: encodeURIComponent(query?.keyword)} : {}
 
     const getPostsData = {
-        size: query?.size || staticDataJson?.identity?.postsCountPerPage,
-        page: query?.page || '1',
+        size: query?.size,
+        page: query?.page,
         ...status,
         ...author,
         ...lang,
@@ -20,27 +20,6 @@ const _adminGetPostsQueryGenerator = (query) => {
         ...sort,
         ...keyword,
     }
-
-    // const fields = [
-    //     'title',
-    //     'mainThumbnail',
-    //     'quality',
-    //     'likes',
-    //     'disLikes',
-    //     'views',
-    //     'duration',
-    //     'postType',
-    //     'price',
-    //     'translations',
-    //     'videoTrailerUrl',
-    //     'rating',
-    //     'redirectLink',
-    //     'createdAt',
-    //     'updatedAt'
-    // ]
-    //     .map(f => 'field=' + f).join('&')
-
-
 
     const queries = new URLSearchParams(getPostsData).toString()
 

@@ -1,8 +1,8 @@
-const settingSchema = require('../models/settings/settingSchema')
-const widgetSchema = require("../models/widgetSchema");
-const metaSchema = require("../models/metaSchema");
-const postSchema = require("../models/postSchema");
-const fs = require('fs')
+// const settingSchema = require('../models/settings/settingSchema')
+// const widgetSchema = require("../models/widgetSchema");
+// const metaSchema = require("../models/metaSchema");
+// const postSchema = require("../models/postSchema");
+// const fs = require('fs')
 
 const widgetPopulateModel = [
     {
@@ -47,25 +47,25 @@ const widgetPopulateModel = [
 
 const _writeSettingsAndStaticWidgetsToJsonFile = async ()=>{
 
-    const staticWidgetsQuery = ['footer', 'header', 'topBar', 'navigation'].map(position => {
-       return  {'data.position': position}
-    })
+    // const staticWidgetsQuery = ['footer', 'header', 'topBar', 'navigation'].map(position => {
+    //    return  {'data.position': position}
+    // })
 
     try {
-        const identity = await settingSchema.findOne({type: 'identity'}).exec()
-        const design = await settingSchema.findOne({type: 'design'}).exec()
+        // const identity = await settingSchema.findOne({type: 'identity'}).exec()
+        // const design = await settingSchema.findOne({type: 'design'}).exec()
         // console.log(widgetPopulateModel)
-        const staticWidgets = await widgetSchema.find({$or: [...staticWidgetsQuery]})
-            .populate(widgetPopulateModel)
-            .exec()
+        // const staticWidgets = await widgetSchema.find({$or: [...staticWidgetsQuery]})
+        //     .populate(widgetPopulateModel)
+        //     .exec()
 
-        fs.writeFileSync('./static/jsons/staticData.json', JSON.stringify({
-            identity:identity.data,
-            design:design.data,
-        }))
-        fs.writeFileSync('./static/jsons/staticWidgets.json', JSON.stringify({
-            widgets:staticWidgets,
-        }))
+        // fs.writeFileSync('./static/jsons/staticData.json', JSON.stringify({
+        //     identity:identity.data,
+        //     design:design.data,
+        // }))
+        // fs.writeFileSync('./static/jsons/staticWidgets.json', JSON.stringify({
+        //     widgets:staticWidgets,
+        // }))
 
         console.log('static Data had written to Json')
     } catch (err) {

@@ -1,12 +1,12 @@
 import React, {useState, useRef} from 'react';
 import {animateScroll} from 'react-scroll'
 import styled from "styled-components";
-import {setLoading} from "@store/clientActions/globalStateActions";
+import {setLoading} from "../../../../ZlegacyCodesAndComponents/store/clientActions/globalStateActions";
 import {useDispatch, useSelector} from "react-redux";
-import {terminalCommandExecutor} from "@store/adminActions/adminTerminalActions";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
+import {terminalCommandExecutor} from "@store_toolkit/adminReducers/adminTerminalReducer";
 
 let StyledDiv = styled.div`
   .quickAccess {

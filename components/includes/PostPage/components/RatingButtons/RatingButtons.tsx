@@ -3,8 +3,8 @@ import _shortNumber from '@_variables/clientVariables/_shortNumber'
 import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
-import {disLikePost, likePost} from "@store/clientActions/postsAction";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {fetchDisLikePost, fetchLikePost} from "@store_toolkit/clientReducers/postsReducer";
 
 // it just prevent user or visitor do not rate multiple time,
 // we need to create session id for none registered user or inject rating posts to the user schema
@@ -121,7 +121,7 @@ const RatingButtons: FC<RatingButtonsPropTypes> = ({rating}) => {
             {rating ?
                 <>
                     <button className='rating-item'
-                            onClick={() => dispatch(likePost(_id))}
+                            onClick={() => dispatch(fetchLikePost(_id))}
                             disabled={!!isRated}
                             aria-label="like"
                             title={t<string>('Like')}
@@ -130,7 +130,7 @@ const RatingButtons: FC<RatingButtonsPropTypes> = ({rating}) => {
                         <p className='rating-item-value'>{likes}</p>
                     </button>
                     <button className='rating-item'
-                            onClick={() => dispatch(disLikePost(_id))}
+                            onClick={() => dispatch(fetchDisLikePost(_id))}
                             disabled={!!isRated}
                             aria-label="dislike"
                             title={t<string>('Dislike')}

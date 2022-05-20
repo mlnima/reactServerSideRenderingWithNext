@@ -20,7 +20,6 @@ apiCache.options({
 
 const cacheOn = (req, res) => {
 
-
     const checkAbsoluteConditions = (req.body.cache === 'true' || !req.body.cache) &&
                                          (req.query.cache === 'true' || !req.query.cache) &&
                                          req.body.cache !== 'false' && req.query.cache !== 'false'&&

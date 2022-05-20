@@ -1,24 +1,28 @@
 import React, {useEffect, useState} from 'react';
 import {useRouter} from "next/router";
-import MessengerConversationHeader from "../../components/includes/messengerPageComponents/MessengerConversationHeader/MessengerConversationHeader";
-import MessengerConversationMessageArea from "../../components/includes/messengerPageComponents/MessengerConversationMessageArea/MessengerConversationMessageArea";
-import MessengerConversationMessageTools from "../../components/includes/messengerPageComponents/MessengerConversationMessageTools/MessengerConversationMessageTools";
+import MessengerConversationHeader
+    from "@components/includes/messengerPageComponents/MessengerConversationHeader/MessengerConversationHeader";
+import MessengerConversationMessageArea
+    from "@components/includes/messengerPageComponents/MessengerConversationMessageArea/MessengerConversationMessageArea";
+import MessengerConversationMessageTools
+    from "@components/includes/messengerPageComponents/MessengerConversationMessageTools/MessengerConversationMessageTools";
 import {socket} from '@_variables/socket';
-import MessengerCall from "../../components/includes/messengerPageComponents/MessengerCall/MessengerCall";
+import MessengerCall from "@components/includes/messengerPageComponents/MessengerCall/MessengerCall";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useDispatch, useSelector} from "react-redux";
-import {wrapper} from "@store/store";
+import {wrapper} from "@store_toolkit/store";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
+
 import {
-    answerTheCall,
+    // answerTheCall,
     endCall,
-    getConversation,
+    fetchConversation,
     incomingCall,
     newMessageInConversation,
-    outgoingCall,
+    // outgoingCall,
     setPartnerVideo,
-} from "@store/clientActions/userActions";
+} from "@store_toolkit/clientReducers/userReducer";
 import MessengerLayout from "@components/layouts/MessengerLayout";
 import type {ReactElement} from 'react';
 
@@ -37,12 +41,12 @@ const conversation = () => {
 
     useEffect(() => {
         if (localStorage.wt) {
-            dispatch(getConversation(router.query.conversation, -20))
+            dispatch(fetchConversation({_id: router.query.conversation as string, loadAmount: -20}))
         }
     }, []);
 
     useEffect(() => {
-        const connectedUser = users ?  users.find(user => user._id !== userData?._id) : {}
+        const connectedUser = users ? users.find(user => user._id !== userData?._id) : {}
         if (connectedUser) {
             // @ts-ignore
             setConnectedUserData(connectedUser)
@@ -67,19 +71,19 @@ const conversation = () => {
     const callUser = async () => {
         try {
             // @ts-ignore
-            dispatch(outgoingCall(router.query.conversation,mySocketId,userData?.username,router))
+            dispatch(outgoingCall(router.query.conversation, mySocketId, userData?.username, router))
         } catch (err) {
 
         }
     }
 
     const answerCall = async () => {
-        dispatch(answerTheCall(callData.myVideo,router.query.conversation,callData?.callerSignal,router))
+        //dispatch(answerTheCall(callData.myVideo, router.query.conversation, callData?.callerSignal, router))
     }
 
     const endCallHandler = () => {
         socket.emit("endCall", router.query.conversation)
-        dispatch(endCall())
+        dispatch(endCall(null))
     }
 
     return (
@@ -118,12 +122,15 @@ const conversation = () => {
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     // @ts-ignore
-    await store.dispatch(getDefaultPageData(context, [],
+    await getDefaultPageData(
+        context,
+        [],
         {
-            setHeadData:true,
-            page:'messenger'
-        }
-    ))
+            setHeadData: true,
+            page: 'messenger'
+        },
+        store
+    )
     return {
         props: {
             ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),

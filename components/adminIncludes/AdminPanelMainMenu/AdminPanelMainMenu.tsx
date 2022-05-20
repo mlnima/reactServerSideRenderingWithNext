@@ -1,13 +1,13 @@
 import Link from "next/link";
 import convertVariableNameToName from "../../../_variables/util/convertVariableNameToName";
-import withRouter from 'next/dist/client/with-router'
+
 import styled from "styled-components";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSortDown} from "@fortawesome/free-solid-svg-icons";
 import {useDispatch, useSelector} from "react-redux";
-import {setSidebarStatus} from "@store/adminActions/adminPanelGlobalStateActions";
+import {setSidebarStatus} from "@store_toolkit/adminReducers/adminPanelGlobalStateReducer";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {useState} from "react";
+import { useState} from "react";
 
 // interface menuItemTypes{
 //     [key:string] :{
@@ -36,6 +36,7 @@ let StyledDiv = styled.div`
     width: 100%;
     border-bottom: .5px solid #333;
     position: relative;
+
     .SideBarItemTitle {
       display: flex;
       justify-content: space-between;
@@ -86,6 +87,7 @@ let StyledDiv = styled.div`
       top: 0;
       width: 100%;
       transition: opacity 300ms ease-in;
+
       .SideBarItem-SubItem {
         color: white;
         padding: 10px 0 10px 20px;
@@ -218,7 +220,7 @@ const AdminPanelMainMenu = () => {
             <div key={item} className='SideBarItemElement'>
                 <div className='SideBarItemTitle'>
                     <Link href={sidebarItems[item].pathURL}>
-                        <a className='SideBarItem' onClick={() => dispatch(setSidebarStatus(false))}>
+                        <a className='SideBarItem' onClick={() =>    dispatch(setSidebarStatus(false))}>
                             {convertVariableNameToName(item)}
                         </a>
                     </Link>
@@ -237,18 +239,18 @@ const AdminPanelMainMenu = () => {
                 </div>
                 <div className='SideBarItemElementSubItems'>
                     {sidebarItems[item]?.subItems?.map(subItem => {
-                            return (
-                                <Link key={subItem.url} href={subItem.url}>
-                                    <a className='SideBarItem-SubItem'
-                                       style={{
-                                           display: hovered === item ? 'flex' : 'none'
-                                       }}
-                                       onClick={() => dispatch(setSidebarStatus(false))}>
-                                        {convertVariableNameToName(subItem.name)}
-                                    </a>
-                                </Link>
-                            )
-                        })
+                        return (
+                            <Link key={subItem.url} href={subItem.url}>
+                                <a className='SideBarItem-SubItem'
+                                   style={{
+                                       display: hovered === item ? 'flex' : 'none'
+                                   }}
+                                   onClick={() => dispatch(setSidebarStatus(false))}>
+                                    {convertVariableNameToName(subItem.name)}
+                                </a>
+                            </Link>
+                        )
+                    })
                     }
                 </div>
             </div>
@@ -263,16 +265,4 @@ const AdminPanelMainMenu = () => {
         );
     } else return null
 };
-export default withRouter(AdminPanelMainMenu);
-
-//
-// if (hovered === item) {
-//     return (
-//         <Link key={uniqueId('id_')} href={subItem.url}>
-//             <a className='SideBarItem-SubItem'
-//                onClick={() => dispatch(setSidebarStatus(false))}>
-//                 {convertVariableNameToName(subItem.name)}
-//             </a>
-//         </Link>
-//     )
-// } else return null
+export default AdminPanelMainMenu;

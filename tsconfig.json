@@ -12,9 +12,18 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@store/*": ["store/*"],
-      "@components/*": ["components/*"],
-      "@_variables/*": ["_variables/*"],
+      "@store/*": [
+        "store/*"
+      ],
+      "@store_toolkit/*": [
+        "store_toolkit/*"
+      ],
+      "@components/*": [
+        "components/*"
+      ],
+      "@_variables/*": [
+        "_variables/*"
+      ]
     },
     "allowJs": true,
     "checkJs": false,
@@ -31,7 +40,8 @@
   },
   "exclude": [
     "node_modules",
-    "trash"
+    "trash",
+    "ZlegacyCodesAndComponents"
   ],
   "include": [
     "next-env.d.ts",

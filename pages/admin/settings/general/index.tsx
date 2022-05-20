@@ -5,11 +5,10 @@ import {languagesOptions} from '@_variables/_variables'
 import convertVariableNameToName from "../../../../_variables/util/convertVariableNameToName";
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
-import {updateSetting} from "@store/adminActions/adminPanelSettingsActions";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {adminPanelEditIdentity} from "@store/adminActions/adminPanelSettingsActions";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
+import {adminEditIdentity, adminPanelUpdateSetting} from "@store_toolkit/adminReducers/adminPanelSettingsReducer";
 
 let StyledForm = styled.form`
   background-color: white;
@@ -130,29 +129,29 @@ const settings = () => {
 
     const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        dispatch(updateSetting('identity', identity))
+        dispatch(adminPanelUpdateSetting({type:'identity', data:identity}))
     }
 
     const checkboxChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(adminPanelEditIdentity({[e.target.name]: e.target.checked}))
+        dispatch(adminEditIdentity({[e.target.name]: e.target.checked}))
     }
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLInputElement>) => {
         const finalValue = e.target.value === 'true' ? true :
             e.target.value === 'false' ? false :
                 e.target.value
-        dispatch(adminPanelEditIdentity({[e.target.name]: finalValue}))
+        dispatch(adminEditIdentity({[e.target.name]: finalValue}))
     }
     const deleteItem = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         if (editingSettings.activeEditingLanguage === 'default') {
-            dispatch(adminPanelEditIdentity({
+            dispatch(adminEditIdentity({
                     keywords: identity.keywords.filter(i => {
                         return i !== e.currentTarget.name
                     })
                 }
             ))
         } else {
-            dispatch(adminPanelEditIdentity({
+            dispatch(adminEditIdentity({
                 translations: {
                     ...identity.translations,
                     [editingSettings.activeEditingLanguage]: {
@@ -172,11 +171,11 @@ const settings = () => {
             [keywordsInput.current.value]
         if (keywordsInput.current.value)
             if (editingSettings.activeEditingLanguage === 'default') {
-                dispatch(adminPanelEditIdentity({
+                dispatch(adminEditIdentity({
                     keywords: [...identity.keywords, ...enteredKeywords]
                 }))
             } else {
-                dispatch(adminPanelEditIdentity({
+                dispatch(adminEditIdentity({
                     translations: {
                         ...identity.translations,
                         [editingSettings.activeEditingLanguage]: {
@@ -209,9 +208,9 @@ const settings = () => {
 
     const onChangeHandlerWithTranslate = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
         if (editingSettings.activeEditingLanguage === 'default') {
-            dispatch(adminPanelEditIdentity({[e.target.name]: e.target.value}))
+            dispatch(adminEditIdentity({[e.target.name]: e.target.value}))
         } else {
-            dispatch(adminPanelEditIdentity({
+            dispatch(adminEditIdentity({
                 translations: {
                     ...(identity.translations || {}),
                     [editingSettings.activeEditingLanguage]: {

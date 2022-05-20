@@ -1,20 +1,20 @@
-import React, { useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useDispatch, useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import styled from "styled-components";
-import {wrapper} from "@store/store";
+import {wrapper} from "../../../ZlegacyCodesAndComponents/store/store";
 import {useRouter} from "next/router";
 import CreateEditArticlePostField
     from "@components/includes/profilePageComponents/profilePost/CreateEditArticlePostField/CreateEditArticlePostField";
-import {editPostField, getEditingPost, userCreateNewPost, userUpdatePost} from "@store/clientActions/postsAction";
 import TextInput from "@components/includes/profilePageComponents/profilePost/common/TextInput";
 import MetaDataSelector from "@components/includes/profilePageComponents/profilePost/common/MetaDataSelector";
 import ThumbnailUploader from "@components/includes/profilePageComponents/profilePost/common/ThumbnailUploader";
 import VideoTypeFields from "@components/includes/profilePageComponents/profilePost/VideoTypeFields/VideoTypeFields";
-import {getDefaultPageData} from "@store/clientActions/globalStateActions";
-import type { ReactElement } from 'react';
+import {getDefaultPageData} from "../../../ZlegacyCodesAndComponents/store/clientActions/globalStateActions";
+import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
+import {fetchUserCreateNewPost, fetchUserEditingPost,fetchUserEditingPostUpdate,editPostField} from "@store_toolkit/clientReducers/postsReducer";
 
 const ProfilePostPageStyledDiv = styled.div`
   margin: 20px 5px;
@@ -39,7 +39,7 @@ const ProfilePostPageStyledDiv = styled.div`
   }
 
 `
-const post= () => {
+const post = () => {
 
     const dispatch = useDispatch();
     const {query} = useRouter();
@@ -54,7 +54,7 @@ const post= () => {
     })
 
     useEffect(() => {
-        if (query.id) dispatch(getEditingPost(query.id as string));
+        if (query.id) dispatch(fetchUserEditingPost(query.id as string));
         if (!query.id && query?.postType) dispatch(editPostField({['postType']: query.postType}));
     }, []);
 
@@ -69,14 +69,17 @@ const post= () => {
             (postData.userData?._id === postData.editingPost.author || postData.userData.role === 'administrator') &&
             query.id
         ) {
-            dispatch(userUpdatePost(postData.editingPost))
+            dispatch(fetchUserEditingPostUpdate(postData.editingPost))
         } else if (!postData.editingPost._id) {
-            dispatch(userCreateNewPost({
-                ...postData.editingPost,
-                status: postData.userData.role === 'administrator' ? postData.editingPost.status || 'pending' : 'pending',
-                //@ts-ignore
-                author: postData.userData?._id
-            }, router))
+            dispatch(fetchUserCreateNewPost({
+                data: {
+                    ...postData.editingPost,
+                    status: postData.userData.role === 'administrator' ? postData.editingPost.status || 'pending' : 'pending',
+                    //@ts-ignore
+                    author: postData.userData?._id
+                },
+                router
+            }))
         }
     }
 
@@ -118,10 +121,10 @@ const post= () => {
                 <ThumbnailUploader mainThumbnail={postData.editingPost.mainThumbnail}/>
                 {postData.userData.role === 'administrator' ?
                     <>
-                    <TextInput required={true} name={'mainThumbnail'} type={'text'}
-                               value={postData.editingPost?.mainThumbnail}
-                               title={'Main Thumbnail'}
-                               onChangeHandler={onChangeHandler} className={'mainThumbnail'}/>
+                        <TextInput required={true} name={'mainThumbnail'} type={'text'}
+                                   value={postData.editingPost?.mainThumbnail}
+                                   title={'Main Thumbnail'}
+                                   onChangeHandler={onChangeHandler} className={'mainThumbnail'}/>
                         <TextInput required={true} name={'views'} type={'number'}
                                    value={postData.editingPost?.views}
                                    title={'views'}
@@ -138,10 +141,8 @@ const post= () => {
                                    onChangeHandler={onChangeHandler} className={'disLikes'}/>
 
                     </>
-                    :null
+                    : null
                 }
-
-
 
 
                 <label>Categories:</label>
@@ -165,11 +166,10 @@ const post= () => {
                     : null
                 }
 
-                { postData.editingPost?.postType === 'video' ?
+                {postData.editingPost?.postType === 'video' ?
                     <VideoTypeFields onChangeHandler={onChangeHandler}/>
                     : null
                 }
-
 
 
                 <button className={'btn btn-primary'} type={'submit'}>Save</button>
@@ -181,24 +181,24 @@ const post= () => {
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-        // @ts-ignore
-        await store.dispatch(getDefaultPageData(
-            context,
-            [
-                'profilePageRightSidebar',
-                'profilePageLeftSidebar',
-                'profilePage'
-            ]))
+    // @ts-ignore
+    await store.dispatch(getDefaultPageData(
+        context,
+        [
+            'profilePageRightSidebar',
+            'profilePageLeftSidebar',
+            'profilePage'
+        ]))
 
-        return {
-            props: {
-                ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
-            }
+    return {
+        props: {
+            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
         }
+    }
 
-    })
+})
 
-post.getLayout = function getLayout(page:ReactElement) {
+post.getLayout = function getLayout(page: ReactElement) {
     return (
         <AppLayout>
             {page}

@@ -2,19 +2,21 @@ import React, {  useEffect, useMemo, useState} from 'react';
 import dynamic from 'next/dynamic'
 import {useRouter} from "next/router";
 import _adminGetPostsQueryGenerator from "@_variables/adminVariables/_adminGetPostsQueryGenerator";
-import {wrapper} from "@store/store";
+import {wrapper} from "@store_toolkit/store";
 import {useDispatch, useSelector} from "react-redux";
 import styled from "styled-components";
-import {adminGetMetas, adminGetPosts} from "@store/adminActions/adminPanelPostsActions";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {adminGetUsers} from "@store/adminActions/adminUserActions";
+
 import _metaPageQueryGenerator from "../../../_variables/clientVariables/_metaPageQueryGenerator";
-import {adminGetComments} from "@store/adminActions/adminPanelCommentsActions";
-import {adminGetForms} from "@store/adminActions/adminPanelFormsActions";
-import {adminGetPages} from "@store/adminActions/adminPanelPagesActions";
-import {adminGetOrders} from "@store/adminActions/adminPanelOrdersActions";
+
+// import {adminGetOrders} from "@store/adminActions/adminPanelOrdersActions";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
+import {fetchAdminPanelMetas, fetchAdminPanelPosts} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
+import {fetchAdminForms} from "@store_toolkit/adminReducers/adminPanelFormsReducer";
+import { fetchAdminPanelPages} from "@store_toolkit/adminReducers/adminPanelPagesReducer";
+import {fetchAdminPanelUsers} from "@store_toolkit/adminReducers/adminPanelUsersReducer";
+import {fetchAdminPanelGetComments} from "@store_toolkit/adminReducers/adminCommentsReducer";
 
 const TableHeader = dynamic(
     () => import('@components/adminIncludes/assetComponents/TableHeader/TableHeader'),
@@ -47,6 +49,7 @@ const assets = () => {
             forms: store?.adminPanelForms?.forms,
             pages: store?.adminPanelPages?.pages,
             metas: store?.adminPanelPosts?.metas,
+            // identity:store.settings.identity,
             orders: store?.adminPanelOrders?.orders
         }
     })
@@ -79,20 +82,20 @@ const assets = () => {
         const assetType = query.assetsType
         if (assetType === 'posts') {
             const gettingPostsQueries = _adminGetPostsQueryGenerator(query)
-            dispatch(adminGetPosts(gettingPostsQueries))
+            dispatch(fetchAdminPanelPosts(gettingPostsQueries))
         } else if (assetType === 'users'){
-            dispatch(adminGetUsers({}))
+            dispatch(fetchAdminPanelUsers({}))
         } else if (assetType === 'metas') {
-            const queries = _metaPageQueryGenerator(query, query.metaType, false)
-            dispatch(adminGetMetas(queries))
+            const queries = _metaPageQueryGenerator(query, query.metaType)
+            dispatch(fetchAdminPanelMetas(queries))
         } else if (assetType === 'comments') {
-            dispatch(adminGetComments(dataConfig))
+            dispatch(fetchAdminPanelGetComments(dataConfig))
         } else if (assetType === 'forms') {
-            dispatch(adminGetForms(dataConfig))
+            dispatch(fetchAdminForms(dataConfig))
         } else if (assetType === 'pages') {
-            dispatch(adminGetPages(dataConfig))
+            dispatch(fetchAdminPanelPages(dataConfig))
         } else if (assetType === 'orders') {
-            dispatch(adminGetOrders(dataConfig))
+            // dispatch(adminGetOrders(dataConfig))
         }
     }
 

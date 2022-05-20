@@ -6,8 +6,8 @@ import {useRouter} from "next/router";
 import styled from "styled-components";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useDispatch, useSelector} from "react-redux";
-import {getDefaultPageData} from "@store/clientActions/globalStateActions";
-import {wrapper} from "@store/store";
+import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
+import {wrapper} from "@store_toolkit/store";
 import type { ReactElement } from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 // const PayWithPayPal = dynamic(() => import('../../components/includes/checkOutPageComponents/PayWithPaypal/PayWithPaypal'), {ssr: false})

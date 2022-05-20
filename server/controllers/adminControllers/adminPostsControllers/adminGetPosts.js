@@ -1,11 +1,21 @@
 //adminGetPosts
 const postSchema = require('../../../models/postSchema');
 const metaSchema = require('../../../models/metaSchema');
+const settingSchema = require('../../../models/settings/settingSchema');
 const _adminQueryGeneratorForGettingPosts = require('../_variables/_adminQueryGeneratorForGettingPosts')
 
 module.exports = async (req, res) => {
     try {
-        const findingPostsOptions = _adminQueryGeneratorForGettingPosts(req.query)
+        //defaultItemCountPerPage
+        const identitySetting = await settingSchema.findOne({type:'identity'}).exec()
+
+        const findingPostsOptions = _adminQueryGeneratorForGettingPosts(
+            {
+                ...req.query,
+                size: req.query.size === 'undefined' ? identitySetting?.data?.postsCountPerPage : parseInt(req.query.size),
+                page: req.query.page === 'undefined' ? 1 : parseInt(req.query.page)
+            }
+        )
 
         const populateMeta = [
             {path: 'author',select:['username','profileImage','role']},

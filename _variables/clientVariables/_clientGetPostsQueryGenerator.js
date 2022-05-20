@@ -1,16 +1,15 @@
-import staticDataJson from '../../static/jsons/staticData.json'
 import mongoIdValidator from '../util/mongoIdValidator'
 
-const _clientGetPostsQueryGenerator = (queryData, metaIdData, cache) => {
+const _clientGetPostsQueryGenerator = (queryData, metaIdData) => {
     const sort = queryData?.sort ? {sort: queryData?.sort} : {sort: 'updatedAt'}
     const postType = queryData?.postType ? {postType: queryData?.postType} : {}
     const isValidMetaId = metaIdData ? mongoIdValidator(metaIdData):false
-    const metaId = metaIdData && isValidMetaId ? {metaId: metaIdData} : metaIdData && !isValidMetaId ? {metaId: encodeURIComponent(metaIdData)}:  {}
+    const metaId = metaIdData && isValidMetaId ? {metaId: metaIdData} :
+        metaIdData && !isValidMetaId ? {metaId: encodeURIComponent(metaIdData)}:  {}
     const lang = queryData?.lang ? {lang: queryData?.lang} : {}
     const author = queryData?.author ? {author: queryData?.author} : {}
     const status = queryData?.status ? {status: queryData?.status} : {status: 'published'}
     const keyword = queryData?.keyword ? {keyword: encodeURIComponent(queryData?.keyword)} : {}
-    const cacheStatus = cache ? {cache} : {}
 
     const fields = [
         'title',
@@ -31,8 +30,8 @@ const _clientGetPostsQueryGenerator = (queryData, metaIdData, cache) => {
     ].map(f => 'field=' + f).join('&')
 
     const getPostsData = {
-        size: queryData?.size || staticDataJson?.identity?.postsCountPerPage,
-        page: queryData?.page || '1',
+        size: queryData?.size,
+        page: queryData?.page,
         ...status,
         ...author,
         ...lang,
@@ -40,7 +39,6 @@ const _clientGetPostsQueryGenerator = (queryData, metaIdData, cache) => {
         ...postType,
         ...sort,
         ...keyword,
-        ...cacheStatus
     }
 
     const queries = new URLSearchParams(getPostsData).toString()

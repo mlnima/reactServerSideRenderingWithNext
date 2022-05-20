@@ -1,17 +1,16 @@
 import MainWidgetArea from "../../components/widgetsArea/MainWidgetArea/MainWidgetArea";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {wrapper} from "@store/store";
-import {getPageData} from "@store/clientActions/postsAction";
+import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import dynamic from "next/dynamic";
-
-const Soft404 = dynamic(() => import('@components/includes/Soft404/Soft404'));
 import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 import styled from "styled-components";
 import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
+import {fetchPageData} from "@store_toolkit/clientReducers/postsReducer";
+const Soft404 = dynamic(() => import('@components/includes/Soft404/Soft404'));
 
 const PageStyle = styled.div`
   ${({stylesData}: { stylesData: string }) => stylesData || ''}
@@ -19,39 +18,45 @@ const PageStyle = styled.div`
 
 const page = () => {
 
-    const {pageData,sidebar} = useSelector(({posts}: StoreTypes) => {
+    const {pageData, sidebar, notFoundPage} = useSelector(({posts, globalState}: StoreTypes) => {
         return {
             sidebar: posts.pageData?.sidebar,
-            pageData: posts.pageData
+            pageData: posts.pageData,
+            notFoundPage: globalState.notFoundPage
         }
     })
 
-    if (pageData?.pageName) {
+    if (notFoundPage) {
+        return <Soft404/>
+    } else {
         return (
-            <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`} stylesData={pageData?.pageStyle || ''}>
+            <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`}
+                       stylesData={pageData?.pageStyle || ''}>
                 <MainWidgetArea position={pageData?.pageName} className='page main'/>
                 <SidebarWidgetAreaRenderer sidebar={sidebar} position={pageData?.pageName}/>
             </PageStyle>
         )
-    } else return <Soft404/>
-
+    }
 }
 
 //************SSR***************
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-    await store.dispatch(getDefaultPageData(
+    await getDefaultPageData(
         context,
         [
             context.query.pageName as string,
             context.query.pageName + 'LeftSidebar',
             context.query.pageName + 'RightSidebar'
         ],
-        null,
+        {
+            page: context.query.pageName,
+            setHeadData: false
+        },
         store
-    ))
-
-    await store.dispatch(getPageData(context.query.pageName))
+    )
+//@ts-ignore
+    await store.dispatch(fetchPageData(context?.query?.pageName as string))
 
     return {
         props: {

@@ -1,11 +1,11 @@
 import React, { useState, useRef, ChangeEvent} from 'react';
 import styled from "styled-components";
 import {useDispatch} from "react-redux";
-import {setAlert, setLoading} from "@store/clientActions/globalStateActions";
-import {updateSetting} from "@store/adminActions/adminPanelSettingsActions";
-import {wrapper} from "@store/store";
+import {setAlert, setLoading} from "../../../../ZlegacyCodesAndComponents/store/clientActions/globalStateActions";
+import {updateSetting} from "../../../../ZlegacyCodesAndComponents/store/adminActions/adminPanelSettingsActions";
+import {wrapper} from "../../../../ZlegacyCodesAndComponents/store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {adminSaveNewPost, adminYoutubeDataScrapper} from "@store/adminActions/adminPanelPostsActions";
+import { adminYoutubeDataScrapper} from "../../../../ZlegacyCodesAndComponents/store/adminActions/adminPanelPostsActions";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 

@@ -12,33 +12,11 @@ const CategoryCardStyle = styled.article`
   margin: 0 auto;
 
   .category-card-link {
-    width: 100%;
     color: var(--post-element-text-color, #ccc);
-
-    .category-card-info {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      .category-card-title, .category-card-count {
-        color: var(--post-element-text-color, #ccc);
-      }
-
-      .category-card-title {
-        width: fit-content;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 1;
-        font-size: 15px;
-        font-weight: normal;
-        padding: 3px 0;
-        margin: 3px 0;
-      }
-
-      .category-card-count {
-        margin: 0 2px;
-      }
+    .entry-header{
+      width: 100%;
+      margin: 3px 0;
+      text-align: center;
     }
   }
 
@@ -81,14 +59,19 @@ const CategoryCard: FC<CategoryCardPropTypes> =
                                            postsPerRawForMobile={postsPerRawForMobile}
                                            cardWidth={cardWidth}/>
 
-                        <div className={'category-card-info'}>
-                            <h3 className={'category-card-title'}>
+                        {/*<div className={'category-card-info'}>*/}
+                        {/*    <h3 className={'category-card-title'}>*/}
+                        {/*        {cardTitle}*/}
+                        {/*    </h3>*/}
+                        {/*    {!!category?.count &&*/}
+                        {/*         <span className={'category-card-count'}>(<var>{category?.count}</var>)</span>*/}
+                        {/*    }*/}
+                        {/*</div>*/}
+                        <header className={'entry-header'}>
+                            <span className={'cat-title'}>
                                 {cardTitle}
-                            </h3>
-                            {!!category?.count &&
-                                 <span className={'category-card-count'}>(<var>{category?.count}</var>)</span>
-                            }
-                        </div>
+                            </span>
+                        </header>
 
                     </a>
                 </Link>

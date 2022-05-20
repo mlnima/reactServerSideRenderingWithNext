@@ -5,9 +5,10 @@ import Link from 'next/link'
 import {faBars, faHome} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
-import {clearCaches, setSidebarStatus} from "@store/adminActions/adminPanelGlobalStateActions";
+import {setSidebarStatus} from "@store_toolkit/adminReducers/adminPanelGlobalStateReducer";
 import {useRouter} from "next/router";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {fetchClearCaches} from "@store_toolkit/adminReducers/adminPanelGlobalStateReducer";
 
 
 let StyledDiv = styled.div`
@@ -83,7 +84,7 @@ const AdminTopBar: FC = () => {
                                          className={'post-element-info-logo'}/>
                     </a>
                 </Link>
-                <p className={'clearCache adminTopBarItem'} onClick={() => dispatch(clearCaches(router))}>Clear
+                <p className={'clearCache adminTopBarItem'} onClick={() => dispatch(fetchClearCaches({router}))}>Clear
                     Caches</p>
             </div>
             <AdminActionMenu/>

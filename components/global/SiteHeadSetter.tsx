@@ -6,22 +6,25 @@ import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import parse from 'html-react-parser'
 
 const SiteHeadSetter: FC = () => {
-    const {asPath} = useRouter();
+    const {asPath,pathname,query} = useRouter();
     const siteLanguages = useMemo(() => process.env.NEXT_PUBLIC_LOCALS?.split(' ') || [], []);
 
-    const headData = useSelector(({globalState}: StoreTypes) => globalState?.headData)
+    const headDataFromStore = useSelector(({globalState}: StoreTypes) => globalState?.headData)
+    const headData = useMemo(()=>{
+        return headDataFromStore
+    },[asPath,pathname,query])
 
     return (
         <Head >
             {!!headData?.title && <title>{headData.title}</title>}
-            {(!!headData.description && typeof headData.description === 'string') &&
+            {(!!headData?.description && typeof headData.description === 'string') &&
                 <meta name="description" content={headData.description}/>
             }
             {(!!headData?.keywords && headData?.keywords?.length) &&
                 <meta name="keywords" content={headData.keywords?.join(' , ')}/>
             }
-            <link rel="shortcut icon" href={headData.favIcon}/>
-            <link rel="apple-touch-icon" href={headData.favIcon}/>
+            <link rel="shortcut icon" href={headData?.favIcon}/>
+            <link rel="apple-touch-icon" href={headData?.favIcon}/>
             {process.env.NEXT_PUBLIC_PWA === 'true' && <link rel="manifest" href={'/manifest.json'}/>}
             <link rel="alternate" hrefLang="x-default" href={`${process.env.NEXT_PUBLIC_PRODUCTION_URL}${asPath}`}/>
             {(!!siteLanguages && siteLanguages?.length) &&
@@ -38,9 +41,9 @@ const SiteHeadSetter: FC = () => {
                 })
 
             }
-            <meta name={'theme-color'} content={headData.themeColor}/>
-            {!!headData.canonicalUrl &&  <link rel={'canonical'} href={headData.canonicalUrl}/>}
-            <meta name={'apple-mobile-web-app-status-bar-style'} content={headData.themeColor}/>
+            <meta name={'theme-color'} content={headData?.themeColor}/>
+            {!!headData?.canonicalUrl &&  <link rel={'canonical'} href={headData?.canonicalUrl}/>}
+            <meta name={'apple-mobile-web-app-status-bar-style'} content={headData?.themeColor}/>
             <meta name={'viewport'} content={'width=device-width, initial-scale=1'}/>
             <meta charSet={'utf-8'}/>
             <meta httpEquiv={'X-UA-Compatible'} content={'IE=edge'}/>
@@ -64,7 +67,7 @@ const SiteHeadSetter: FC = () => {
                 <meta property={'twitter:description'} content={headData?.twitterDescription}/> }
             {!!headData?.twitterImage && <meta property={'twitter:image'} content={headData?.twitterImage}/> }
             {!!headData?.rtaContent && <meta name={'RATING'} content={'RTA-5042-1996-1400-1577-RTA'}/>   }
-            {!!headData.customScriptsAsString && <>{parse(headData.customScriptsAsString,{trim:true})}</>  }
+            {!!headData?.customScriptsAsString && <>{parse(headData.customScriptsAsString,{trim:true})}</>  }
 
         </Head>
     )

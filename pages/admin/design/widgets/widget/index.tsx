@@ -1,5 +1,5 @@
 import React from 'react';
-import {wrapper} from "../../../../../store/store";
+import {wrapper} from "../../../../../ZlegacyCodesAndComponents/store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";

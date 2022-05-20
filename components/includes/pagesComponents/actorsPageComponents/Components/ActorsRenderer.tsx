@@ -40,7 +40,7 @@ const ActorsRenderer: FC<ActorsRendererPropTypes> = ({uniqueData}) => {
             return {
                 postsPerRawForMobile: settings?.design?.postsPerRawForMobile || 2,
                 actorsMetas: uniqueData?.metaData || posts?.actorsMetas || [],
-                cardsCustomStyle:settings.design.cardsCustomStyle|| '',
+                cardsCustomStyle:settings?.design?.cardsCustomStyle|| '',
                 cardWidth: 140,
             }
         })
@@ -51,7 +51,7 @@ const ActorsRenderer: FC<ActorsRendererPropTypes> = ({uniqueData}) => {
                                  cardsCustomStyle={cardsCustomStyle}
                                  postsPerRawForMobile={postsPerRawForMobile}>
 
-            {actorsMetas.map((actor, index) => {
+            {actorsMetas?.map((actor, index) => {
 
                     return <ActorCard key={actor._id}
                                       actor={actor}

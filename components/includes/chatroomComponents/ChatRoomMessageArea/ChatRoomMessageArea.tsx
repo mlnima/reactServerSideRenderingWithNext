@@ -2,7 +2,7 @@ import React, {useEffect, useRef} from 'react';
 import ChatRoomMessage from "./ChatRoomMessage";
 import {useDispatch, useSelector} from "react-redux";
 import styled from "styled-components";
-import {setActiveVisibleProfile} from "@store/clientActions/chatroomActions";
+import {setActiveVisibleProfile} from "@store_toolkit/clientReducers/chatroomReducer";
 import {useRouter} from "next/router";
 import {ChatroomMessageTypes, StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
@@ -24,14 +24,15 @@ const ChatRoomMessageArea = () => {
     const messageAreaRef = useRef(null)
 
     const {chatroomMessages} = useSelector(({chatroom}: StoreTypes) => {
+
+        const currentMessages = chatroom?.messages || []
         return {
-            chatroomMessages: chatroom?.messages?.sort(
+            chatroomMessages: [...currentMessages].sort(
                 (message, nextMessage) =>
                     message.createdAt > nextMessage.createdAt ? 1 : -1
             )
         }
     })
-
 
     useEffect(() => {
         messageAreaRef.current.scroll({

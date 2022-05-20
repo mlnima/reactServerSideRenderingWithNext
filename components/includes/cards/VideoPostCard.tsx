@@ -6,10 +6,9 @@ import dynamic from "next/dynamic";
 import CardImageRenderer from "@components/includes/cards/CardImageRenderer";
 import VideoPostCardTrailer from "@components/includes/cards/VideoPostCardTrailer";
 import _qualityConvertor from "@components/includes/cards/asset/_qualityConvertor";
-import VideoPostCardActors from "@components/includes/cards/VideoPostCardActors";
+import CardViews from "./asset/CardViews/CardViews";
 
-const CardViews = dynamic(() => import('./asset/CardViews/CardViews'))
-const CardRating = dynamic(() => import('./asset/CardRating/CardRating'))
+const CardRatingBar = dynamic(() => import('./asset/CardRatingBar/CardRatingBar'))
 const CardQuality = dynamic(() => import('./asset/CardQuality/CardQuality'))
 const CardDuration = dynamic(() => import('./asset/CardDuration/CardDuration'))
 
@@ -37,38 +36,41 @@ const VideoPostCardStyle = styled.article`
     position: relative;
     color: var(--post-element-text-color, #ccc);
 
+    .card-quality, .card-duration, .card-views{
+      background-color: #000;
+      overflow: hidden;
+      padding: 2.4px 4.8px;
+    }
     .card-quality {
+      font-weight: 900;
       position: absolute;
-      bottom: 1px;
-      right: 45px;
+      top: 5px;
+      right: 5px;
       z-index: 1;
+      border-radius: 3px;
     }
 
     .card-duration {
       position: absolute;
-      bottom: 1px;
+      bottom: 5px;
       right: 5px;
       z-index: 1;
     }
-
-    &:after {
-      display: block;
+    .card-views {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       position: absolute;
-      top: 0;
-      height: 100%;
-      width: 100%;
-      content: '';
-      background: #000;
-      background: -moz-linear-gradient(to top,#000 -14%, rgba(0, 0, 0, 0) 17%);
-      background: -webkit-gradient(to top, color-stop(-14%, #000), color-stop(17%, rgba(0, 0, 0, 0)));
-      background: -webkit-linear-gradient(to top,#000 -14%, rgba(0, 0, 0, 0) 17%);
-      background: -o-linear-gradient(to top,#000 -14%, rgba(0, 0, 0, 0) 17%);
-      background: -ms-linear-gradient(to top,#000 -14%, rgba(0, 0, 0, 0) 17%);
-      background: linear-gradient(to top,#000 -14%, rgba(0, 0, 0, 0) 17%);
+      bottom: 5px;
+      left: 5px;
+      z-index: 1;
+          .icon {
+            width: 14px;
+            height: 14px;
+            margin: 0 2px;
+          }
     }
   }
-
-
   .entry-header {
     text-align: center;
     margin: 2px 0;
@@ -78,28 +80,6 @@ const VideoPostCardStyle = styled.article`
     }
   }
 
-  .card-under-media-info {
-    font-size: 14px;
-    display: flex;
-    justify-content: space-between;
-    margin: 0;
-    color: var(--post-element-info-text-color, #ccc);
-
-    .card-under-media-info-data {
-      display: flex;
-      align-items: center;
-      margin: 2px 0;
-      padding: 0 2px;
-      color: var(--post-element-info-text-color, #ccc);
-      font-size: 12px;
-
-      .icon {
-        width: 14px;
-        height: 14px;
-        margin: 0 2px;
-      }
-    }
-  }
 
   .last-update {
     font-size: 9px;
@@ -163,49 +143,46 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
                             }
 
 
-                            {!!post?.quality && <CardQuality quality={_qualityConvertor(post?.quality)}
-                                                             className={'card-quality video-card-info-data'}/>
-                            }
+                            {!!post?.quality &&
+                            <CardQuality quality={_qualityConvertor(post?.quality)}
+                                         className={'card-quality video-card-info-data'}/>}
 
-                            {!!post?.duration && <CardDuration duration={post?.duration}
-                                                               className={'card-duration video-card-info-data'}/>
-                            }
+                            {!!post?.duration &&
+                            <CardDuration duration={post?.duration} className={'card-duration video-card-info-data'}/>}
+
+                            <CardViews views={views} className={'card-views card-under-media-info-data'}/>
+
                         </div>
-                    </a>
-                </Link>
+                {/*    </a>*/}
+                {/*</Link>*/}
 
-                {(!!post?.actors?.length || !!post?.updatedAt || !!post?.createdAt) &&
-                <VideoPostCardActors actors={post?.actors}
-                                     hover={hover}
-                                     updatedAt={post?.updatedAt}
-                                     createdAt={post?.createdAt}
-                />
-                }
 
-                <Link href={postUrl}>
-                    <a rel={'next'} className={'card-link'} title={title}>
 
+                {/*<Link href={postUrl}>*/}
+                {/*    <a rel={'next'} className={'card-link'} title={title}>*/}
+                        <CardRatingBar rating={rating} className={'card-rating card-under-media-info-data'}/>
                         <header className={'entry-header'}>
                             <span className={'card-header'}>{title}</span>
                         </header>
-
-                        <div className={'card-under-media-info'}>
-
-                            {!!views &&
-                            <CardViews views={views} className={'card-views card-under-media-info-data'}/>
-                            }
-                            {!!rating &&
-                            <CardRating rating={rating} className={'card-rating card-under-media-info-data'}/>
-                            }
-
-                        </div>
-
                     </a>
                 </Link>
             </VideoPostCardStyle>
         )
     };
 export default LearnPostCard
+
+
+// {(!!post?.actors?.length || !!post?.updatedAt || !!post?.createdAt) &&
+// <VideoPostCardActors actors={post?.actors}
+//                      hover={hover}
+//                      updatedAt={post?.updatedAt}
+//                      createdAt={post?.createdAt}
+// />
+// }
+
+
+// {!!rating &&
+// <CardRating rating={rating} className={'card-rating card-under-media-info-data'}/>}
 
 
 // {(post?.updatedAt || post?.createdAt) &&

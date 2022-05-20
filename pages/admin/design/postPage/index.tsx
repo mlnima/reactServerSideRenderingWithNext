@@ -1,4 +1,4 @@
-import {wrapper} from "@store/store";
+import {wrapper} from "@store_toolkit/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import StyleSection from '@components/adminIncludes/design/StyleSection/StyleSection'
 import type {ReactElement} from 'react';

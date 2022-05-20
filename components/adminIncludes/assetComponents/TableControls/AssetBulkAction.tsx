@@ -1,10 +1,15 @@
 import React, {FC, useState} from 'react';
 
-import {adminBulkActionMeta, adminBulkActionPost} from "@store/adminActions/adminPanelPostsActions";
+// import {adminBulkActionMeta} from "@store/adminActions/adminPanelPostsActions";
 import {useDispatch} from "react-redux";
 import styled from "styled-components";
-import {setAlert} from "@store/clientActions/globalStateActions";
+import {setAlert} from "../../../../ZlegacyCodesAndComponents/store/clientActions/globalStateActions";
 import {useRouter} from "next/router";
+import {
+    fetchAdminBulkActionMeta,
+    fetchAdminPanelBulkActionPost
+} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
+import {updateQueryGenerator} from "@_variables/_variables";
 
 const AssetBulkActionStyledDiv = styled.div`
   select {
@@ -27,20 +32,20 @@ const AssetBulkAction: FC<AssetBulkActionPropTypes> = ({selectedItems, setSelect
     const {push, pathname, query} = useRouter()
 
     const reGetData = () => {
-
-        push({pathname: pathname, query: {...query}}).finally()
+        updateQueryGenerator(query,push,pathname)
+        // push({pathname: pathname, query: {...query}}).finally()
     }
 
     const onApplyHandler = () => {
         if (selectedItems?.length && status) {
             switch (query.assetsType) {
                 case 'posts':
-                    dispatch(adminBulkActionPost(selectedItems, status))
+                    dispatch(fetchAdminPanelBulkActionPost({ids:selectedItems,status}))
                     setSelectedItems([])
                     reGetData()
                     break
                 case 'metas':
-                    dispatch(adminBulkActionMeta('metas', status, selectedItems))
+                    dispatch(fetchAdminBulkActionMeta({type:'metas', status, ids:selectedItems}))
                     reGetData()
                     //
                     // bulkAction('metas', status, selectedItems).then(() => {

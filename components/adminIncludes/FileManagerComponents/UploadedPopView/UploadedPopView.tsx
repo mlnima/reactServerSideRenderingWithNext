@@ -5,11 +5,14 @@ import UploadedFilePreviewText from "./UploadedFilePreviewText";
 import styled from "styled-components";
 import fileTypeDetector from "@_variables/util/fileTypeDetector";
 import {useDispatch, useSelector} from "react-redux";
-import {
-    adminPanelFileManagerClosePopup,
-    adminPanelFileManagerDeleteFile
-} from "@store/adminActions/adminPanelFileManagerActions";
+// import {
+//     // adminPanelFileManagerClosePopup,
+//     // adminPanelFileManagerDeleteFile
+// } from "@store/adminActions/adminPanelFileManagerActions";
+
+import {adminPanelFileManagerClosePopup} from '@store_toolkit/adminReducers/adminPanelFileManagerReducer'
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {fetchFilManagerDeleteFile} from "@store_toolkit/adminReducers/adminPanelFileManagerReducer";
 
 const UploadedPopViewStyledDiv = styled.div`
   position: fixed;
@@ -81,12 +84,16 @@ const UploadedPopView: FC = () => {
     }
 
     const onDeleteHandler = filePath => {
-        dispatch(adminPanelFileManagerDeleteFile(
-            filePath, {
-                clickedItem: '',
-                path: fileManagerData.prevPath,
-                lastUpdate: Date.now()
-            }))
+        dispatch(fetchFilManagerDeleteFile(
+            {
+                filePath,
+                data: {
+                    clickedItem: '',
+                    path: fileManagerData.prevPath,
+                    lastUpdate: Date.now()
+                }
+            }
+        ))
     }
 
     if (fileManagerData.clickedItem) {

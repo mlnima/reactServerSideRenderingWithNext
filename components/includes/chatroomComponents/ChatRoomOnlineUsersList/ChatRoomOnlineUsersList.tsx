@@ -20,7 +20,7 @@ const ChatRoomOnlineUsersList = () => {
 
     const chatroomUsers = useSelector(({chatroom}:StoreTypes) => chatroom?.onlineUsers)
 
-    const renderOnlineUsers = _uniqBy(chatroomUsers,'username')
+    const renderOnlineUsers = [..._uniqBy(chatroomUsers,'username')]
         .sort((a, b) => a.username > b.username ? 1 : -1).map(onlineUser => {
             return (
                 <ChatRoomOnlineUsersListItem key={`${onlineUser.username + Date.now()}`} onlineUser={onlineUser}/>

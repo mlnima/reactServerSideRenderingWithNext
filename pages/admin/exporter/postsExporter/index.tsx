@@ -1,13 +1,14 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
 import {useDispatch} from "react-redux";
-import {wrapper} from "@store/store";
+import {wrapper} from "@store_toolkit/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 import postTypes from "../../../../components/global/postTypes";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
+import {fetchAdminExportPosts} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
 
-import {adminExportPosts} from "@store/adminActions/adminPanelPostsActions";
+// import {adminExportPosts} from "@store/adminActions/adminPanelPostsActions";
 
 const PostsExporterStyledDiv = styled.div`
   display: flex;
@@ -82,6 +83,7 @@ const postsExporter = () => {
         })
     }
 
+    // @ts-ignore
     return (
 
         <PostsExporterStyledDiv className={'export-posts-content'}>
@@ -123,7 +125,8 @@ const postsExporter = () => {
                     <input checked={data.ID} className={'form-control-input'} type={'checkbox'} placeholder={'ID'} name={'ID'} onChange={e => setData({...data, ID: e.target.checked})}/>
                 </div>
             </div>
-            <button className={'btn btn-primary'} onClick={() => dispatch(adminExportPosts(data))}>Export All The Posts To Json</button>
+            {/*//@ts-ignore*/}
+            <button className={'btn btn-primary'} onClick={() => dispatch(fetchAdminExportPosts(data))}>Export All The Posts To Json</button>
         </PostsExporterStyledDiv>
 
     );

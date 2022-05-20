@@ -10,7 +10,7 @@ const adminGetUser = require('./adminUsersControllers/adminGetUser');
 
 router.post('/newAPIKey',adminAuthMiddleware,adminNewApiKey);
 router.post('/getUsersList',adminAuthMiddleware,adminGetUsersList);
-router.post('/getUsersList',adminAuthMiddleware,adminGetUsersList);
+// router.post('/getUsersList',adminAuthMiddleware,adminGetUsersList);
 router.post('/deleteUser',adminAuthMiddleware,adminDeleteUser);
 router.post('/getUser',adminAuthMiddleware,adminGetUser);
 

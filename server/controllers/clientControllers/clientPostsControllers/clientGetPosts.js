@@ -4,6 +4,7 @@ const metaSchema = require('../../../models/metaSchema');
 const searchKeywordSchema = require('../../../models/searchKeywordSchema');
 const _clientQueryGeneratorForGettingPosts = require('../_variables/_clientQueryGeneratorForGettingPosts')
 const mongoIdValidator = require('../../../util/mongoIdValidator')
+const settingSchema = require("../../../models/settings/settingSchema");
 
 const saveSearchedKeyword = async (keyword, count) => {
     if (keyword) {
@@ -28,10 +29,17 @@ const getMetaForGettingPostsRequest = async (meta)=>{
 
 module.exports = async (req, res) => {
     try {
+        const identitySetting = await settingSchema.findOne({type:'identity'}).exec()
+
         const meta = req.query?.metaId || req.query?.selectedMetaForPosts ?
             await getMetaForGettingPostsRequest(req.query?.metaId || req.query?.selectedMetaForPosts) || {} : {}
 
-        const findingPostsOptions = _clientQueryGeneratorForGettingPosts(req.query,meta?._id)
+        const findingPostsOptions = _clientQueryGeneratorForGettingPosts({
+            ...req.query,
+            size: req.query.size === 'undefined' ? identitySetting?.data?.postsCountPerPage : parseInt(req.query.size),
+            page: req.query.page === 'undefined' ? 1 : parseInt(req.query.page)
+        },meta?._id)
+
         // console.log(JSON.stringify(findingPostsOptions, null, '\t'))
         const populateMeta = [
             {path: 'actors', select: {'name': 1, 'type': 1}},

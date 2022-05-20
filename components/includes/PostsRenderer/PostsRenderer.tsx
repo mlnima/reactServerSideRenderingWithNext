@@ -35,6 +35,7 @@ interface PostsContentStyledDivPropTypes {
     cardsCustomStyle:string
 }
 
+
 const PostsContentStyledDiv = styled.div`
   padding: 20px 0;
   display: grid;
@@ -43,10 +44,10 @@ const PostsContentStyledDiv = styled.div`
   grid-gap: 5px;
   grid-template-columns: repeat(auto-fill, minmax(${({postsPerRawForMobile}: PostsContentStyledDivPropTypes) => `${96 / postsPerRawForMobile}`}vw, 2fr));
   
-  @media only screen and (min-width: 768px) {
-    grid-gap: 15px 10px;
+  @media only screen and (min-width: 768px){
     grid-template-columns: repeat(auto-fill, minmax(${({cardWidth}: PostsContentStyledDivPropTypes) => `${cardWidth}px`}, 1fr));
   }
+  
   ${({cardsCustomStyle}:PostsContentStyledDivPropTypes)=>cardsCustomStyle||''}
 `
 
@@ -96,7 +97,6 @@ const PostsRenderer: FC<PostsComponentTypes> =
                         return <PromotionPostCard {...postProps} key={index} index={index}/>
                     } else if (post?.postType === 'article') {
                         return <ArticlePostCard {...postProps} key={index} index={index}/>
-
                     } else if (post?.postType === 'learn') {
                         return <LearnPostCard {...postProps} key={index} index={index}/>
                     } else return null

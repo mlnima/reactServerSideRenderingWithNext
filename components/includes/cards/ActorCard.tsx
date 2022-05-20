@@ -4,13 +4,12 @@ import {Meta} from "@_variables/TypeScriptTypes/GlobalTypes";
 import Link from "next/link";
 import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
 import CardImageRenderer from "@components/includes/cards/CardImageRenderer";
-import {useTranslation} from "next-i18next";
 
 const ActorCardStyle = styled.article`
   background: var(--post-element-background, #131314);
   width: 100%;
   margin: 20px auto;
-  font-size: 15px;
+  font-size: 14px;
 
   .actor-card-link {
     width: 100%;
@@ -65,12 +64,6 @@ const ActorCardStyle = styled.article`
         }
       }
     }
-    
-    .actor-card-count {
-      margin: 0 2px;
-      font-size: 14px;
-    }
-    
   }
 
   @media only screen and (min-width: 768px) {
@@ -94,7 +87,6 @@ const ActorCard: FC<ActorCardPropTypes> =
          cardWidth
      }) => {
 
-        const {t} = useTranslation('common');
         const actorName = capitalizeFirstLetter(actor?.name)
 
         return (
@@ -111,16 +103,7 @@ const ActorCard: FC<ActorCardPropTypes> =
                             <header>
                                 <span className={'card-header'}> {actorName}</span>
                             </header>
-
-
                         </div>
-                        {!!actor?.count &&
-                            <span className={'actor-card-count'}>
-                                 <>
-                                    {actor?.count} {t<string>('Videos')}
-                                 </>
-                             </span>
-                        }
                     </a>
                 </Link>
             </ActorCardStyle>

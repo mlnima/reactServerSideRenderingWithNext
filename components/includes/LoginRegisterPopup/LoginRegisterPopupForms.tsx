@@ -3,13 +3,15 @@ import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useTranslation} from 'next-i18next';
 import {useDispatch, useSelector} from 'react-redux';
-import {userLogin,userRegister} from "@store/clientActions/userActions";
+//import {userRegister} from "@store_toolkit/clientActions/userActions";
 import styled from "styled-components";
-import {setAlert, setLoginRegisterFormStatus} from "@store/clientActions/globalStateActions";
+import { loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 import Draggable from 'react-draggable';
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import _passwordValidator from "../../../_variables/clientVariables/_passwordValidator";
 import ValidInput from "./ValidInput";
+import {fetchLogin, fetchUserRegister} from "@store_toolkit/clientReducers/userReducer";
+import {setAlert} from "@store_toolkit/clientReducers/globalStateReducer";
 
 const LoginRegisterPopupFormsStyledDiv = styled.div`
   background-color: var(--navigation-background-color, #18181b);
@@ -84,7 +86,7 @@ const LoginRegisterPopupFormsStyledDiv = styled.div`
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-        
+
         p {
           margin: 4px 0;
           color: var(--main-text-color);
@@ -165,6 +167,7 @@ interface StateValidatorTypes {
 }
 
 const LoginRegisterPopupForms: FC = () => {
+    const nodeRef = React.useRef(null);
     const {t} = useTranslation('common');
     const dispatch = useDispatch()
     const globalState = useSelector(({globalState}: StoreTypes) => globalState)
@@ -180,6 +183,9 @@ const LoginRegisterPopupForms: FC = () => {
             [e.target.name]: e.target.value
         } as { [key: string]: string })
     };
+
+
+
     const onrResetStateHandler = () => {
         setState({
             username: '',
@@ -190,8 +196,10 @@ const LoginRegisterPopupForms: FC = () => {
     };
     const onLoginHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(userLogin(state.username, state.password))
+        dispatch(fetchLogin({username: state.username, password: state.password}))
     };
+
+
     const onRegisterHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const checkUsername = state.username ? state.username.length <= 16 && state?.username?.length >= 6 && (/[a-zA-Z]/).test(state.username) : false
@@ -205,25 +213,10 @@ const LoginRegisterPopupForms: FC = () => {
             dispatch(setAlert({message: 'password is to short or is not match', type: 'error', active: true}))
         }
 
+        if (checkUsername && checkPasswords){
+            dispatch(fetchUserRegister({data: state}))
+        }
 
-        if (checkUsername && checkPasswords)
-            dispatch(userRegister(state))
-            // registerUser(state).then(res => {
-            //     setResponse({
-            //         ...response,
-            //         // @ts-ignore
-            //         message: res.data.message,
-            //         type: 'success',
-            //     })
-            // }).catch(error => {
-            //     dispatch(setAlert({message: error.response.data.message, type: 'error', active: true}))
-            //     // setResponse({
-            //     //     ...response,
-            //     //     message: error.response.data.message,
-            //     //     type: 'error',
-            //     // })
-            //
-            // })
 
     };
 
@@ -245,13 +238,13 @@ const LoginRegisterPopupForms: FC = () => {
     }, [state]);
 
     return (
-        <Draggable handle=".form-header">
+        <Draggable nodeRef={nodeRef}>
             <LoginRegisterPopupFormsStyledDiv response={response}
                                               className='login-register-content'
             >
-                <div className='form-header'>
-                    <button onClick={() => dispatch(setLoginRegisterFormStatus(false))}
-                            onTouchStart={() => dispatch(setLoginRegisterFormStatus(false))}
+                <div className='form-header' ref={nodeRef}>
+                    <button onClick={() => dispatch(loginRegisterForm(false))}
+                            onTouchStart={() => dispatch(loginRegisterForm(false))}
                             className='close-form-button' title={t(`Close`)}
                     >
                         <FontAwesomeIcon icon={faTimes}/>
@@ -357,8 +350,8 @@ const LoginRegisterPopupForms: FC = () => {
                         !stateValidator.password2 &&
                         !stateValidator.gender
                         }
-                            type={'submit'}
-                            className={'login-register-form-button simple-button'}>
+                                type={'submit'}
+                                className={'login-register-form-button simple-button'}>
                             {t<string>(`Register`)}
                         </button>
                     </form> : globalState.loginRegisterFormPopup === 'login' ?
@@ -395,8 +388,8 @@ const LoginRegisterPopupForms: FC = () => {
 
                 <span onClick={() => {
                     globalState.loginRegisterFormPopup === 'register' ?
-                        dispatch(setLoginRegisterFormStatus('login')) :
-                        dispatch(setLoginRegisterFormStatus('register'))
+                        dispatch(loginRegisterForm('login')) :
+                        dispatch(loginRegisterForm('register'))
                     onrResetStateHandler()
                 }}
                       className='btn btn-secondary'>

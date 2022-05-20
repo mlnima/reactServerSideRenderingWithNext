@@ -4,14 +4,14 @@ import PostsPageInfo from "@components/includes/PostsRenderer/PostsPageInfo";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import {wrapper} from "@store/store";
+import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {getPosts} from "@store/clientActions/postsAction";
-import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
+import {fetchPosts} from "@store_toolkit/clientReducers/postsReducer";
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
@@ -77,7 +77,7 @@ const categoryPage = () => {
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-    await store.dispatch(getDefaultPageData(
+    await getDefaultPageData(
         context,
         [
             'categoryPageTop',
@@ -85,12 +85,24 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             'categoryPageBottom',
             'categoryPageRightSidebar'
         ],
-        null,
+        {
+            page:'category',
+            setHeadData:false
+        },
         store
-    ))
+    )
 
-    // @ts-ignore
-    await store.dispatch(getPosts(context, context.query.categoryId, true, 'categories', {page: 'category'}))
+    await store.dispatch(
+        fetchPosts({
+                context,
+                metaId: context?.query?.categoryId as string,
+                metaType: 'categories',
+                options: {
+                    page: 'category',
+                    setHeadData:true
+                }
+            }
+        ))
 
     return {
         props: {

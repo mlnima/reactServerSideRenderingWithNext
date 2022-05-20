@@ -1,5 +1,6 @@
 import React, {FC, useEffect} from 'react';
-import UserPageProfileImage from "../../components/includes/userPageComponents/UserPageProfileImage/UserPageProfileImage";
+import UserPageProfileImage
+    from "../../components/includes/userPageComponents/UserPageProfileImage/UserPageProfileImage";
 import UserPageActionButtons from "@components/includes/userPageComponents/UserPageActionButtons/UserPageActionButtons";
 import {useRouter} from "next/router";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -7,12 +8,13 @@ import {faCamera} from "@fortawesome/free-solid-svg-icons";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 import {useTranslation} from 'next-i18next';
-import {wrapper} from "@store/store";
+import {wrapper} from "../../ZlegacyCodesAndComponents/store/store";
 import {useDispatch, useSelector} from "react-redux";
-import {getSpecificUserData, getUserPageData} from "@store/clientActions/userActions";
-import {getDefaultPageData} from "@store/clientActions/globalStateActions";
-import type { ReactElement } from 'react';
+// import { getUserPageData} from "@store/clientActions/userActions";
+import {getDefaultPageData} from "../../ZlegacyCodesAndComponents/store/clientActions/globalStateActions";
+import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
+import {fetchSpecificUserData, fetchUserPageData} from "@store_toolkit/clientReducers/userReducer";
 
 const UserPageStyledDiv = styled.div`
   color: var(--main-text-color);
@@ -88,10 +90,15 @@ const user = () => {
 
     const getUserData = async () => {
         try {
-            dispatch(getUserPageData(  router.query.username,
-                undefined,
-                ['following', 'followers', 'blockList']))
-            dispatch(getSpecificUserData(['following', 'followers', 'blockList']))
+            dispatch(fetchUserPageData({
+                username: router.query.username as string,
+                _id: undefined,
+                fields: ['following', 'followers', 'blockList']
+            }))
+            dispatch(fetchSpecificUserData({
+                fields: ['following', 'followers', 'blockList'
+                ]
+            }))
         } catch (err) {
             console.log(err)
         }
@@ -109,7 +116,7 @@ const user = () => {
                         gender={userPageData?.gender}
                         // @ts-ignore
                         profileImage={userPageData?.profileImage}
-                    />:null
+                    /> : null
                 }
 
                 <div className='profile-header-info-actions'>
@@ -119,7 +126,7 @@ const user = () => {
                             // @ts-ignore
                             userPageData?.username
                         }
-                        </h3>:null
+                        </h3> : null
                     }
 
                     {
@@ -139,14 +146,15 @@ const user = () => {
                                 // @ts-ignore
                                 userPageData?.following ? userPageData.following?.length : 0
                             }</span></p>
-                        </div>:null
+                        </div> : null
                     }
 
                 </div>
             </div>
             <div className='profile-posts'>
                 <div className='profile-no-posts'>
-                    <FontAwesomeIcon style={{color: 'var(--main-text-color)'}} className='upload-profile-image-btn-svg' icon={faCamera}/>
+                    <FontAwesomeIcon style={{color: 'var(--main-text-color)'}} className='upload-profile-image-btn-svg'
+                                     icon={faCamera}/>
                 </div>
                 <h2 className='profile-no-posts-title'>No Post Yet </h2>
                 <p className='profile-no-posts-title'> Coming Soon</p>
@@ -179,7 +187,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     }
 })
 
-user.getLayout = function getLayout(page:ReactElement) {
+user.getLayout = function getLayout(page: ReactElement) {
     return (
         <AppLayout>
             {page}

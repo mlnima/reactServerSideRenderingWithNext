@@ -12,33 +12,13 @@ const TagCardStyle = styled.article`
   margin: 0 auto;
 
   .tag-card-link {
-    width: 100%;
+  
     color: var(--post-element-text-color, #ccc);
 
-    .tag-card-info {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      .tag-card-title, .tag-card-count {
-        color: var(--post-element-text-color, #ccc);
-      }
-
-      .tag-card-title {
-        width: fit-content;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 1;
-        font-size: 15px;
-        font-weight: normal;
-        padding: 3px 0;
-        margin: 3px 0;
-      }
-
-      .tag-card-count {
-        margin: 0 2px;
-      }
+    .entry-header{
+      width: 100%;
+      margin: 3px 0;
+      text-align: center;
     }
   }
 
@@ -81,14 +61,11 @@ const TagCard: FC<TagCardPropTypes> =
                                            postsPerRawForMobile={postsPerRawForMobile}
                                            cardWidth={cardWidth}/>
 
-                        <div className={'tag-card-info'}>
-                            <h3 className={'tag-card-title'}>
+                        <header className={'entry-header'}>
+                            <span className={'cat-title'}>
                                 {cardTitle}
-                            </h3>
-                            {!!tag?.count &&
-                                    <span className={'category-card-count'}>(<var>{tag?.count}</var>)</span>
-                            }
-                        </div>
+                            </span>
+                        </header>
 
                     </a>
                 </Link>

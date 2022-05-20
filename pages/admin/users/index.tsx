@@ -1,11 +1,12 @@
 import React, {useEffect, useMemo} from 'react';
-import {adminGetUsers} from "@store/adminActions/adminUserActions";
-import {wrapper} from "@store/store";
+
+import {wrapper} from "../../../ZlegacyCodesAndComponents/store/store";
 import {useDispatch} from "react-redux";
 import {useRouter} from "next/router";
 // import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
+import {fetchAdminPanelUsers} from "@store_toolkit/adminReducers/adminPanelUsersReducer";
 
 
 const users = () => {
@@ -31,7 +32,7 @@ const users = () => {
     }, [pathname, asPath, query])
 
     useEffect(() => {
-        dispatch(adminGetUsers(dataConfig))
+        dispatch(fetchAdminPanelUsers(dataConfig))
     }, []);
 
 

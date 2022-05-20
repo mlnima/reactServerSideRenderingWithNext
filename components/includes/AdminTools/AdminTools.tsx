@@ -5,11 +5,12 @@ import Link from "next/link";
 import styled from "styled-components";
 import Draggable from 'react-draggable';
 import {useDispatch} from "react-redux";
-import {clearCaches} from "@store/adminActions/adminPanelGlobalStateActions";
+// import {clearCaches} from "@store_toolkit/adminActions/adminPanelGlobalStateActions";
 import {useRouter} from "next/router";
 import {faPenSquare} from "@fortawesome/free-solid-svg-icons/faPenSquare";
 import {faGear} from "@fortawesome/free-solid-svg-icons/faGear";
 import {faEnvelope} from "@fortawesome/free-solid-svg-icons/faEnvelope";
+import {fetchClearCaches} from "@store_toolkit/adminReducers/adminPanelGlobalStateReducer";
 
 let StyledDiv = styled.div`
   position: fixed;
@@ -92,8 +93,8 @@ const AdminTools: FC = () => {
                                 </a>
                             </Link>
                             <button className='admin-tools-item'
-                                    onClick={() => dispatch(clearCaches(router))}
-                                    onTouchStartCapture={() => dispatch(clearCaches(router))}>
+                                    onClick={() => dispatch(fetchClearCaches({router}))}
+                                    onTouchStartCapture={() => dispatch(fetchClearCaches({router}))}>
                                 <FontAwesomeIcon icon={faEraser} className='admin-tools-item-logo'/>
                             </button>
                         </>

@@ -1,6 +1,8 @@
 import React from "react";
 
-export const languagesOptions = (process.env.NEXT_PUBLIC_LOCALS.split(' ').filter(lang=>lang!== process.env.NEXT_PUBLIC_DEFAULT_LOCAL) || []).map((lang:string) => {
+export const languagesOptions = (process.env.NEXT_PUBLIC_LOCALS.split(' ')
+    .filter(lang=>lang!== process.env.NEXT_PUBLIC_DEFAULT_LOCAL) || [])
+    .map((lang:string) => {
     return (
         <option key={lang} value={lang}>
            {lang}
@@ -35,35 +37,21 @@ export const onChangeInputValueCorrector = (e:any) =>{
 }
 
 export const textContentReplacer = (textString,replaces)=>{
-   return  textString.replaceAll('__NAME',replaces?.name || '')
-                     .replaceAll('__SITE_NAME',replaces?.siteName || '')
+    try {
+        return  textString.replaceAll('__NAME',replaces?.name || '')
+            .replaceAll('__SITE_NAME',replaces?.siteName || '')
+    }catch (err){
+        return textString
+    }
+
 }
 
 
-
-
-
-
-
-
-
-//
-// export const defaultFieldForPosts = [
-//     'title',
-//     'mainThumbnail',
-//     'quality',
-//     'likes',
-//     'disLikes',
-//     'views',
-//     'duration',
-//     'postType',
-//     'price',
-//     'translations',
-//     'videoTrailerUrl',
-//     'rating',
-//     'redirectLink'
-// ]
-
-
+export const updateQueryGenerator = (query, push, pathname)=> {
+    push({
+        pathname: pathname,
+        query: {...query, lastPageUpdate: Date.now()}
+    })
+}
 
 

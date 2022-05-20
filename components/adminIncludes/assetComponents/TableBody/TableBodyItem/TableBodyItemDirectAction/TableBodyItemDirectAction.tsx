@@ -3,11 +3,10 @@ import {useRouter} from "next/router";
 import Link from 'next/link';
 // import {deletePage} from "@_variables/ajaxVariables";
 import {useDispatch} from "react-redux";
-import {adminBulkActionPost, adminDeleteMeta} from "@store/adminActions/adminPanelPostsActions";
-import {reloadPageDataByAddingQuery} from "@store/adminActions/adminPanelGlobalStateActions";
-import {adminDeleteForm} from "@store/adminActions/adminPanelFormsActions";
-import {adminDeleteComments} from "@store/adminActions/adminPanelCommentsActions";
-import {adminDeleteCustomPage} from "@store/adminActions/adminPanelPagesActions";
+import {fetchAdminPanelBulkActionPost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
+import {fetchAdminDeleteForm} from "@store_toolkit/adminReducers/adminPanelFormsReducer";
+import {fetchAdminPanelDeleteComments} from "@store_toolkit/adminReducers/adminCommentsReducer";
+import {updateQueryGenerator} from "@_variables/_variables";
 
 interface TableBodyItemDirectActionPropTypes {
     assetsType: string,
@@ -20,13 +19,16 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({asse
     const dispatch = useDispatch()
     const {query, push, pathname} = useRouter()
 
-    const reGetData = () => {
-        setTimeout(() => dispatch(reloadPageDataByAddingQuery(query, push, pathname)), 1000)
-    }
+
 
     const onDeletePageHandler=()=>{
         // dispatch(adminDeleteCustomPage(_id))
         // reGetData()
+    }
+
+    const onActionHandler =(ids,status)=>{
+        dispatch(fetchAdminPanelBulkActionPost({ids,status}))
+        updateQueryGenerator(query,push,pathname)
     }
 
 
@@ -38,7 +40,7 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({asse
                 <Link href={`/post/${postType}/${_id}`}><a target={'_blank'} className={'btn btn-info'}>View</a></Link>
                 {status !== 'trash' ?
                     <span className={'btn btn-danger'}
-                          onClick={() => dispatch(adminBulkActionPost([_id], 'trash'))}
+                          onClick={() => onActionHandler([_id],'trash') }
                     >
                             Trash
                         </span>
@@ -46,7 +48,7 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({asse
                 }
                 {status !== 'draft' ?
                     <span className={'btn btn-info'}
-                          onClick={() => dispatch(adminBulkActionPost([_id], 'draft'))}
+                          onClick={() => onActionHandler([_id],'draft') }
                     >
                             Draft
                         </span>
@@ -54,7 +56,7 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({asse
                 }
                 {status !== 'pending' ?
                     <span className={'btn btn-info'}
-                          onClick={() => dispatch(adminBulkActionPost([_id], 'pending'))}
+                          onClick={() =>onActionHandler([_id],'pending')  }
                     >
                             Pending
                         </span>
@@ -62,7 +64,7 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({asse
                 }
                 {status === 'trash' ?
                     <span className={'btn btn-info'}
-                          onClick={() => dispatch(adminBulkActionPost([_id], 'delete'))}
+                          onClick={() => onActionHandler([_id],'delete') }
                     >
                             Delete
                         </span>
@@ -70,7 +72,7 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({asse
                 }
                 {status !== 'published' || !status ?
                     <span className={'btn btn-primary'}
-                          onClick={() => dispatch(adminBulkActionPost([_id], 'published'))}
+                          onClick={() => onActionHandler([_id],'published')}
                     >
                             Publish
                         </span>
@@ -88,8 +90,8 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({asse
         return (
             <div className='asset-page-table-body-item-hover-item'>
                 <button className={'btn btn-danger'} onClick={()=>{
-                    dispatch(adminDeleteComments([_id]))
-                    reGetData()
+                    dispatch(fetchAdminPanelDeleteComments([_id]))
+                    updateQueryGenerator(query,push,pathname)
                 }}>
                     Delete
                 </button>
@@ -106,8 +108,8 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({asse
             <div className='asset-page-table-body-item-hover-item'>
                 <Link href={'/admin/form/' + _id}><a>Edit</a></Link>
                 <span className={'btn btn-danger'} onClick={() => {
-                    dispatch(adminDeleteForm(_id))
-                    reGetData()
+                    dispatch(fetchAdminDeleteForm(_id))
+                    updateQueryGenerator(query,push,pathname)
                 }}>Delete</span>
             </div>
         );

@@ -3,8 +3,9 @@ import SendMessagePopUpHeader from "./SendMessagePopUpHeader";
 // import {sendMessage} from "../../../../_variables/_userSocialAjaxVariables";
 import {useDispatch, useSelector} from "react-redux";
 import styled from "styled-components";
-import {sendMessage} from "@store/clientActions/userActions";
+// import {sendMessage} from "@store/clientActions/userActions";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {fetchSendMessage} from "@store_toolkit/clientReducers/userReducer";
 
 const SendMessagePopUpStyledDiv = styled.div`
   display: flex;
@@ -44,7 +45,7 @@ const SendMessagePopUpStyledDiv = styled.div`
 `
 const SendMessagePopUp = props => {
     const dispatch = useDispatch()
-    const userData = useSelector((store:StoreTypes) => store?.user.userData)
+    const userData = useSelector((store: StoreTypes) => store?.user.userData)
     const [state, setState] = useState({
         sender: userData._id,
         receiver: props.receiverId,
@@ -59,7 +60,7 @@ const SendMessagePopUp = props => {
     }
 
     const onSendMessageHandler = () => {
-        dispatch(sendMessage(state.receiver, state.message))
+        dispatch(fetchSendMessage({_id: state.receiver, message: state.message}))
         // sendMessage(state.receiver, state.message).then(res => {
         //
         // })
@@ -74,7 +75,8 @@ const SendMessagePopUp = props => {
                     username={props.username}
                     onCloseMessagePop={props.onCloseMessagePop}
                 />
-                <textarea className='send-message-pop-up-content-message-area' name="message" onChange={e => onChangeHandler(e)}/>
+                <textarea className='send-message-pop-up-content-message-area' name="message"
+                          onChange={e => onChangeHandler(e)}/>
                 <button onClick={onSendMessageHandler}>Send</button>
             </div>
         </SendMessagePopUpStyledDiv>

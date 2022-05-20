@@ -3,15 +3,15 @@ import styled from "styled-components";
 import PostsPageInfo from "@components/includes/PostsRenderer/PostsPageInfo";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
-import {wrapper} from "@store/store";
+import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import Link from "next/link";
-import {getPosts} from "@store/clientActions/postsAction";
-import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
+import {fetchPosts} from "@store_toolkit/clientReducers/postsReducer";
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
@@ -72,19 +72,31 @@ const tagPage = () => {
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-    // @ts-ignore
-    await store.dispatch(getDefaultPageData(
+    await getDefaultPageData(
         context,
         [
             'tagPageTop',
             'tagPageLeftSidebar',
             'tagPageBottom',
             'tagPageRightSidebar'
-        ], null,
-        store))
+        ], {
+            page: 'tag',
+            setHeadData: false
+        },
+        store)
 
-    // @ts-ignore
-    await store.dispatch(getPosts(context, context.query.tagId, true, 'tags', {page: 'tag'}))
+    await store.dispatch(
+        fetchPosts({
+                context,
+                metaId: context?.query?.tagId as string,
+                metaType: 'tags',
+                options: {
+                    page: 'tag',
+                    setHeadData:true
+                }
+            }
+        ))
+
 
     return {
         props: {

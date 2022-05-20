@@ -1,13 +1,13 @@
 import React, {FC, useEffect} from 'react';
-import ProfileNavigation from '../../../components/includes/profilePageComponents/ProfileNavigation/ProfileNavigation'
+import ProfileNavigation from '@components/includes/profilePageComponents/ProfileNavigation/ProfileNavigation'
 import Link from "next/link";
 import ProfileImage from "@components/includes/profilePageComponents/ProfileImage/ProfileImage";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useSelector} from "react-redux";
 import styled from "styled-components";
-import {wrapper} from "@store/store";
+import {wrapper} from "../../../ZlegacyCodesAndComponents/store/store";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import {getDefaultPageData} from "../../../ZlegacyCodesAndComponents/store/clientActions/globalStateActions";
 import type { ReactElement } from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 

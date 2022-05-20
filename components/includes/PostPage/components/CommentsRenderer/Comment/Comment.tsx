@@ -3,11 +3,11 @@ import {formatDistance} from 'date-fns'
 import faIR from "date-fns/locale/fa-IR";
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
-import {deleteComments} from "@store/clientActions/postsAction";
 import {useRouter} from "next/router";
 import {FC} from "react";
 import {Comment} from '@_variables/TypeScriptTypes/PostTypes'
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {fetchDeleteCommentByAdminInPostPage} from "@store_toolkit/clientReducers/postsReducer";
 
 const CommentStyledDiv = styled.div`
   display: flex;
@@ -56,7 +56,7 @@ const Comment: FC<CommentPropTypes> = ({comment}) => {
     const localeData = locale === 'fa' ? {locale: faIR} : {}
 
     const onDeleteHandler = (id) => {
-        dispatch(deleteComments([id]))
+        dispatch(fetchDeleteCommentByAdminInPostPage([id]))
     }
 
     if (comment?.author?._id && comment?.createdAt){

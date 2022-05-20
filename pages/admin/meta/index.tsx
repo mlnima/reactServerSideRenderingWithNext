@@ -1,15 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import {useRouter} from "next/router";
-import {wrapper} from "@store/store";
+import {wrapper} from "../../../ZlegacyCodesAndComponents/store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useDispatch, useSelector} from "react-redux";
 import {
-    adminEditMeta,
-    adminDeleteMeta,
     adminGetMeta,
-    adminUpdateMeta
-} from "@store/adminActions/adminPanelPostsActions";
+
+} from "../../../ZlegacyCodesAndComponents/store/adminActions/adminPanelPostsActions";
+
+import {
+    adminEditMeta,
+    fetchAdminPanelDeleteMeta,
+    fetchAdminPanelMeta,
+    fetchAdminPanelUpdateMeta
+} from '@store_toolkit/adminReducers/adminPanelPostsReducer'
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {languagesOptions} from "@_variables/_variables";
 import type {ReactElement} from 'react';
@@ -106,7 +111,7 @@ const meta = (props: any) => {
 
         } else if (router.query.id) {
 
-            dispatch(adminGetMeta(router?.query?.id))
+            dispatch(fetchAdminPanelMeta(router?.query?.id as string))
 
         }
     }, [props]);
@@ -251,13 +256,13 @@ const meta = (props: any) => {
                 />
             </div>
             <div className='action-buttons'>
-                <button className='btn btn-primary' onClick={() => dispatch(adminUpdateMeta(meta))}>Update</button>
+                <button className='btn btn-primary' onClick={() => dispatch(fetchAdminPanelUpdateMeta(meta))}>Update</button>
 
                 {!deleteButton && <button className={'btn btn-danger'}
                                           onClick={() => setDeleteButton(true)}>
                                           I Want To Delete This Meta
                                   </button>}
-                {!!deleteButton && <button onClick={() => dispatch(adminDeleteMeta(router?.query?.id))}
+                {!!deleteButton && <button onClick={() => dispatch(fetchAdminPanelDeleteMeta(router?.query?.id as string))}
                                            className='btn btn-danger'>
                     Delete
                 </button>}

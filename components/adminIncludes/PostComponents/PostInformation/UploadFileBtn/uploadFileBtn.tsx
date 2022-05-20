@@ -3,7 +3,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUpload} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import {useDispatch} from "react-redux";
-import {adminPanelUploadFile} from "@store/adminActions/adminPanelFileManagerActions";
+import {fetchFileManagerUploadFile} from "@store_toolkit/adminReducers/adminPanelFileManagerReducer";
 
 const UploadFileBtnStyledDiv = styled.div`
   button{
@@ -29,7 +29,7 @@ const UploadFileBtn = props => {
                 props.name === 'VideoTrailerUrl' ? 'postVideoTrailerUrl' :
                     'fileManagerFileUpload'
 
-        dispatch(adminPanelUploadFile(filesData,fileUseType))
+        dispatch(fetchFileManagerUploadFile({file: filesData, useType:fileUseType,postData:null}))
 
         // uploadFiles(filesData).then(res=>{
         //     props.setFunction(props.name,res.data.path.replace('./','/'))
@@ -58,8 +58,8 @@ const UploadFileBtn = props => {
                                 props.name === 'videoUrl' ? 'postVideoUrl' :
                                 props.name === 'VideoTrailerUrl' ? 'postVideoTrailerUrl' :
                                     'fileManagerFileUpload'
-            dispatch(adminPanelUploadFile(filesData,fileUseType))
 
+            dispatch(fetchFileManagerUploadFile({file: filesData, useType:fileUseType,postData:null}))
             // fileUpload(filesData).then(res => {
             //     props.setFunction(props.name,res.data.path.replace('./','/'))
             // }).catch(err => {

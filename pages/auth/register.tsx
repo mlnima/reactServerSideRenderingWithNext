@@ -1,28 +1,31 @@
 import React, {useEffect} from 'react';
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {wrapper} from "@store/store";
+import {wrapper} from "@store_toolkit/store";
 import {useDispatch} from "react-redux";
-import {getDefaultPageData, setLoginRegisterFormStatus} from "@store/clientActions/globalStateActions";
+import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import type { ReactElement } from 'react';
 import AppLayout from "@components/layouts/AppLayout";
+import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 
 const Register = () => {
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(setLoginRegisterFormStatus('register'))
+        dispatch(loginRegisterForm('register'))
     }, []);
     return null
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-    // @ts-ignore
-    await store.dispatch(getDefaultPageData(context, [],
+    await getDefaultPageData(
+        context,
+        [],
         {
             setHeadData:true,
             page:'register'
-        }
-    ))
+        },
+        store
+    )
 
     return {
         props: {

@@ -18,7 +18,7 @@ const FormTypeWidgetModelFields = props => {
         formFields: []
     });
 
-    const formFieldsSorted = (props.widgetData?.uniqueData?.formFields || []).sort((a, b) => (a.fieldIndex > b.fieldIndex) ? 1 : -1)
+    const formFieldsSorted = ([...props.widgetData?.uniqueData?.formFields] || []).sort((a, b) => (a.fieldIndex > b.fieldIndex) ? 1 : -1)
 
     const renderExistingFields = formFieldsSorted.map(field => {
         return (

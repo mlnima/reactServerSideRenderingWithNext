@@ -2,10 +2,10 @@ import React, {FC} from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import {useTranslation} from "next-i18next";
-import {userLogOut} from "@store/clientActions/userActions";
-import {setLoginRegisterFormStatus} from "@store/clientActions/globalStateActions";
+import {setLoginRegisterFormStatus} from "../../../../ZlegacyCodesAndComponents/store/clientActions/globalStateActions";
 import {useRouter} from "next/router";
 import {useDispatch} from "react-redux";
+import {userLogout} from "@store_toolkit/clientReducers/userReducer";
 
 const AuthenticationLoggedInItemsStyledDiv = styled.div`
   .user-info {
@@ -150,7 +150,7 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
                     }
 
                     <span className='logged-item logged-in' onClick={(e) => {
-                        dispatch(userLogOut())
+                        dispatch(userLogout(null))
                         dispatch(setLoginRegisterFormStatus(false))
                         onOpenCloseHandler(e)
                     }}>

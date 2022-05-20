@@ -5,7 +5,8 @@ import {faEllipsisV, faSearch, faTrash, faUserCircle} from "@fortawesome/free-so
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 import {useDispatch} from "react-redux";
-import {deleteConversation} from "../../../../store/clientActions/userActions";
+import {fetchDeleteConversation} from "@store_toolkit/clientReducers/userReducer";
+// import {deleteConversation} from "../../../../store/clientActions/userActions";
 
 const MessengerConversationPreviewStyledDiv = styled.div`
   width: calc(100% - 20px);
@@ -104,7 +105,7 @@ const MessengerConversationPreview = ({conversationData, userId}) => {
 
     const onDeleteConversationHandler = () =>{
         conversationData._id?
-        dispatch(deleteConversation(conversationData._id)):
+        dispatch(fetchDeleteConversation(conversationData._id)):
           null
     }
 

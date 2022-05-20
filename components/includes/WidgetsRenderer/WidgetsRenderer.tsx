@@ -25,21 +25,31 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
 
     const {widgets, userRole} = useSelector(({widgets, user}: StoreTypes) => {
         return {
-            widgets: widgets?.widgetInGroups?.[position],
-            userRole: user.userData?.role,
+            widgets: widgets?.widgetInGroups?.[position] || [],
+            userRole: user?.userData?.role,
         }
     })
 
+    // const {widgetsGroup} = useSelector(({widgets, user}: StoreTypes) => {
+    //     return {
+    //         widgetsGroup: widgets?.widgetInGroups
+    //     }
+    // })
+    //
+
+    // useEffect(() => {
+    //     console.log('widgets:',position,widgets)
+    // }, [widgets]);
+
     const isMobileDevice = useSelector((store: StoreTypes) => store.settings?.isMobile)
-    const isMobile = useMemo(()=>isMobileDevice,[])
+    const isMobile = useMemo(() => isMobileDevice, [])
 
-    const renderWidgets = widgets?.sort((a, b) => a.data.widgetIndex > b.data.widgetIndex ? 1 : -1)
-        ?.map((widget: WidgetPropTypes) => {
-
+    const renderWidgets = !!widgets?.length && [...widgets].sort((a, b) => a.data.widgetIndex > b.data.widgetIndex ? 1 : -1)
+        .map((widget: WidgetPropTypes) => {
             if (
-                _renderByLanguageCondition(locale, widget.data.languageToRender) &&
+                _renderByLanguageCondition(locale, widget?.data?.languageToRender) &&
                 _renderByDayCondition(widget.data?.specificDayToRender) &&
-                _renderByDevice(isMobile, widget.data.deviceTypeToRender) &&
+                _renderByDevice(isMobile, widget?.data?.deviceTypeToRender) &&
                 !_isEditMode(widget.data.editMode, userRole)
             ) {
                 const widgetProps = {
@@ -51,13 +61,15 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
                 }
 
                 return widget.data.noSSR ?
-                    <DynamicNoSSR key={ widget._id}>
+                    <DynamicNoSSR key={widget._id}>
                         <Widget{...widgetProps}/>
                     </DynamicNoSSR> :
                     <Widget{...widgetProps}/>
 
             } else return null
+            // return null
         })
+
 
     return (
         <>

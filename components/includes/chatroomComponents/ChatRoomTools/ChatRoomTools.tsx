@@ -5,7 +5,7 @@ import {socket} from '@_variables/socket';
 import {useRouter} from "next/router";
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
-import {setLoginRegisterFormStatus} from "@store/clientActions/globalStateActions";
+import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 const ChatRoomToolsStyledFrom = styled.form`
@@ -120,7 +120,7 @@ const ChatRoomTools = () => {
                 messageData: ''
             })
         } else {
-            dispatch(setLoginRegisterFormStatus('register'))
+            dispatch(loginRegisterForm('register'))
         }
 
     }

@@ -1,7 +1,6 @@
 import React, {FC} from 'react';
-
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import withRouter from 'next/dist/client/with-router'
+
 import {faSlidersH} from "@fortawesome/free-solid-svg-icons";
 import {faCss3Alt, faJs, faSass} from "@fortawesome/free-brands-svg-icons";
 import {faFile, faFolder} from "@fortawesome/free-regular-svg-icons";
@@ -9,7 +8,11 @@ import styled from "styled-components";
 import fileTypeDetector from "@_variables/util/fileTypeDetector";
 import {useDispatch, useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {adminPanelEditState, adminPanelUploadFile} from "@store/adminActions/adminPanelFileManagerActions";
+
+import {
+    adminPanelFileManagerEditState,
+    fetchFileManagerUploadFile
+} from "@store_toolkit/adminReducers/adminPanelFileManagerReducer";
 
 const FileManagerAreaStyledDiv = styled.div`
   display: grid;
@@ -106,7 +109,8 @@ const FileManagerArea:FC = () => {
 
     const onClickHandler = item => {
         let itemPath = fileManagerData.path === './' ? './' + item : fileManagerData.path + '/' + item
-        dispatch(adminPanelEditState({
+        console.log(itemPath)
+        dispatch(adminPanelFileManagerEditState({
             prevPath: fileManagerData.path,
             path: itemPath,
             clickedItemName: item
@@ -130,7 +134,8 @@ const FileManagerArea:FC = () => {
             const filesData = new FormData()
             filesData.append('token', localStorage.wt)
             filesData.append('uploadingFile', fileData)
-            dispatch(adminPanelUploadFile(filesData,'fileManagerFileUpload'))
+
+            dispatch(fetchFileManagerUploadFile({file: filesData, useType:'fileManagerFileUpload',postData:null}))
         }
     }
 
@@ -142,5 +147,5 @@ const FileManagerArea:FC = () => {
         </FileManagerAreaStyledDiv>
     );
 };
-export default withRouter(FileManagerArea);
+export default FileManagerArea;
 

@@ -1,16 +1,16 @@
-import {getPosts} from "@store/clientActions/postsAction";
 import PostsPage from "@components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
 import PostsPageInfo from "@components/includes/PostsRenderer/PostsPageInfo";
 import {useRouter} from "next/router";
 import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {wrapper} from "@store/store";
+import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
 import {StoreTypes} from '@_variables/TypeScriptTypes/GlobalTypes'
-import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import type { ReactElement } from 'react';
 import AppLayout from "@components/layouts/AppLayout";
+import {fetchPosts} from "@store_toolkit/clientReducers/postsReducer";
 
 let StyledMain = styled.main`
   width: 100%;
@@ -61,7 +61,7 @@ const searchPage = ( ) => {
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-    await store.dispatch(getDefaultPageData(
+    await getDefaultPageData(
         context,
         [
             'searchPageTop',
@@ -74,9 +74,22 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             page: 'search'
         },
         store
-    ))
-    // @ts-ignore
-    await store.dispatch(getPosts(context, null, true,null))
+    )
+    // // @ts-ignore
+    // await store.dispatch(getPosts(context, null, true,null,null,store))
+
+    await store.dispatch(
+        fetchPosts({
+                context,
+                metaId: null,
+                metaType: null,
+                options: {
+                    page: 'search',
+                    setHeadData:true
+                }
+            }
+        ))
+
 
     return {
         props: {

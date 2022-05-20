@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import FileManagerControl from '@components/adminIncludes/FileManagerComponents/FileManagerControl/FileManagerControl'
 import FileManagerArea from '@components/adminIncludes/FileManagerComponents/FileManagerArea/FileManagerArea';
-import withRouter from 'next/dist/client/with-router'
 import UploadedPopView from '@components/adminIncludes/FileManagerComponents/UploadedPopView/UploadedPopView'
 import CreateNewFileFolderPop from "../../../components/adminIncludes/FileManagerComponents/CreateNewFileFolderPop/CreateNewFileFolderPop";
 import {useDispatch, useSelector} from "react-redux";
-import {wrapper} from "@store/store";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {adminPanelFileManagerReadPath} from "@store/adminActions/adminPanelFileManagerActions";
+import {wrapper} from "@store_toolkit/store";
+// import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+// import {adminPanelFileManagerReadPath} from "@store/adminActions/adminPanelFileManagerActions";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
+import {fetchFilManagerReadPath} from "@store_toolkit/adminReducers/adminPanelFileManagerReducer";
 
 const fileManager = () => {
     const dispatch = useDispatch()
@@ -43,7 +43,7 @@ const fileManager = () => {
     }, [ fileManagerData.path,fileManagerData.lastUpdate ]);
 
     const setData = () => {
-        dispatch(adminPanelFileManagerReadPath(fileManagerData.path,fileManagerData.prevPath))
+        dispatch(fetchFilManagerReadPath({path:fileManagerData.path, prevPath:fileManagerData.prevPath}))
     }
 
     // // @ts-ignore
@@ -55,21 +55,21 @@ const fileManager = () => {
     // }
 
     return (
-        <>
+        <div>
             <UploadedPopView/>
             <div className='fileManager'>
                 <FileManagerControl />
                 <FileManagerArea />
             </div>
             <CreateNewFileFolderPop render={state.createNewFileFolderPop} createNewFileFolderPopType={state.createNewFileFolderPopType} state={ state } setState={ setState }/>
-        </>
+        </div>
     );
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
     return {
         props: {
-            ...(await serverSideTranslations(context.locale as string, ['common'])),
+            // ...(await serverSideTranslations(context.locale as string, ['common'])),
         }
     }
 })
@@ -83,4 +83,4 @@ fileManager.getLayout = function getLayout(page: ReactElement) {
     )
 }
 
-export default withRouter(fileManager);
+export default fileManager;

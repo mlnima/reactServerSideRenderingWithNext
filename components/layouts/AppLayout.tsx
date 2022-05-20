@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import dynamic from "next/dynamic";
 import GlobalStylesComponent from "../global/Styles/GlobalStylesComponent";
@@ -38,6 +38,8 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
             alert: globalState?.alert,
         }
     });
+
+
 
     return (
         <>

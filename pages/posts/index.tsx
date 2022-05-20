@@ -1,24 +1,27 @@
 import PostsPage from "@components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {wrapper} from "@store/store";
-import {getPosts} from "@store/clientActions/postsAction";
-import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import {wrapper} from "@store_toolkit/store";
+import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import type { ReactElement } from 'react';
+import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
+import {fetchPosts} from "@store_toolkit/clientReducers/postsReducer";
 
 
 let StyledMain = styled.main`
   grid-area: main;
+
   .posts-page-info {
     margin: 5px 0;
+
     h1 {
       margin: 0;
       padding: 0 10px;
     }
   }
+
   ${({postsPageStyle}: { postsPageStyle: string }) => postsPageStyle || ''}
 `
 
@@ -41,7 +44,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 
 
     // @ts-ignore
-    await store.dispatch(getDefaultPageData(
+    await getDefaultPageData(
         context,
         [
             'postsPageLeftSidebar',
@@ -52,10 +55,20 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             page: 'posts'
         },
         store
-    ))
+    )
 
-    // @ts-ignore
-    await store.dispatch(getPosts(context, null, true, null))
+    await store.dispatch(
+        fetchPosts({
+                context,
+                metaId: null,
+                metaType: null,
+                options: {
+                    page: 'posts',
+                    setHeadData: false
+                }
+            }
+        ))
+
 
     return {
         props: {
@@ -64,7 +77,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     }
 });
 
-posts.getLayout = function getLayout(page:ReactElement) {
+posts.getLayout = function getLayout(page: ReactElement) {
     return (
         <AppLayout>
             {page}

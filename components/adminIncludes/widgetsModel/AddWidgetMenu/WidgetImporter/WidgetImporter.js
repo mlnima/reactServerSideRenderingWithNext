@@ -1,6 +1,5 @@
 import React, {useEffect, useState, useRef} from 'react';
-
-import {adminAddNewWidget} from "../../../../../store/adminActions/adminWidgetsActions";
+import {fetchAdminPanelAddNewWidget} from "@store_toolkit/adminReducers/adminWidgetsReducer";
 
 const WidgetImporter = () => {
     const inputFile = useRef(null)
@@ -17,7 +16,7 @@ const WidgetImporter = () => {
     const onWidgetImportHandler = async ()=>{
         if (state?.data?.length){
             for await (let widget of widgets){
-                adminAddNewWidget(widget)
+                fetchAdminPanelAddNewWidget(widget)
             }
         }
     }

@@ -4,9 +4,13 @@ import {faClone, faSave} from "@fortawesome/free-regular-svg-icons";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import ExportWidget from './ExportWidget/ExportWidget'
 import {useDispatch, useSelector} from "react-redux";
-import {adminAddNewWidget, adminDeleteWidget, adminUpdateWidget} from "@store/adminActions/adminWidgetsActions";
+import { adminUpdateWidget} from "../../../../ZlegacyCodesAndComponents/store/adminActions/adminWidgetsActions";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import { WidgetPropTypes} from "@_variables/TypeScriptTypes/Widgets";
+import {
+    fetchAdminPanelAddNewWidget,
+    fetchAdminPanelDeleteWidget
+} from "@store_toolkit/adminReducers/adminWidgetsReducer";
 
 
 interface ActionButtonsPropTypes {
@@ -39,7 +43,7 @@ const ActionButtons: FC<ActionButtonsPropTypes> = ({widgetData,widgetId,widgetSe
         
         const highestIndexInTheSamePosition = Math.max(...widgetsInTheSamePosition.map(() => widgetData.widgetIndex), 0)
 
-        dispatch(adminAddNewWidget({
+        dispatch(fetchAdminPanelAddNewWidget({
             ...widgetData,
             widgetIndex: highestIndexInTheSamePosition + 1,
             posts: [],
@@ -50,7 +54,7 @@ const ActionButtons: FC<ActionButtonsPropTypes> = ({widgetData,widgetId,widgetSe
 
     const onDeleteHandler = () => {
         if (widgetId) {
-            dispatch(adminDeleteWidget(widgetId,widgetData.position))
+            dispatch(fetchAdminPanelDeleteWidget({_id:widgetId, position:widgetData.position}))
         }
     };
 

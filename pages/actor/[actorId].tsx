@@ -3,25 +3,26 @@ import styled from "styled-components";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
 import {useRouter} from "next/router";
-import {wrapper} from "@store/store";
+import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import Link from "next/link";
-import {getPosts} from "@store/clientActions/postsAction";
-import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import AppLayout from "@components/layouts/AppLayout";
 import type {ReactElement} from 'react'
 import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import ActorBio from '../../components/includes/pagesComponents/actorsPageComponents/Components/ActorBio/ActorBio'
+import {fetchPosts} from "@store_toolkit/clientReducers/postsReducer";
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
 const PageStyle = styled.div`
   width: 100%;
   height: 100%;
-  
+
   .posts-page-info {
     margin: 5px 0;
+
     h1 {
       margin: 0;
       padding: 0 10px;
@@ -74,7 +75,7 @@ const actorPage = () => {
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-    await store.dispatch(getDefaultPageData(
+    await getDefaultPageData(
         context,
         [
             'actorPageTop',
@@ -82,11 +83,24 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             'actorPageBottom',
             'actorPageRightSidebar'
         ],
-        null,
+        {
+            page: 'actor',
+            setHeadData: false
+        },
         store
-    ))
-//@ts-ignore
-    await store.dispatch(getPosts(context, context.query.actorId, true, 'actors', {page: 'actor'}))
+    )
+
+    await store.dispatch(
+        fetchPosts({
+                context,
+                metaId: context?.query?.actorId as string,
+                metaType: 'actors',
+                options: {
+                    page: 'actor',
+                    setHeadData: true
+                }
+            }
+        ))
 
     return {
         props: {

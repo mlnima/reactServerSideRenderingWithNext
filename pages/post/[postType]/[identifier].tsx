@@ -1,15 +1,15 @@
 import {useEffect} from "react";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {wrapper} from "@store/store";
+import {wrapper} from "@store_toolkit/store";
 import {useDispatch, useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import dynamic from "next/dynamic";
-import {getComments, getPost, viewPost} from "@store/clientActions/postsAction";
-import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import styled from "styled-components";
 import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
+import {fetchPost, fetchPostComments, fetchViewPost} from "@store_toolkit/clientReducers/postsReducer";
 
 const Soft404 = dynamic(() =>
     import('@components/includes/Soft404/Soft404'))
@@ -47,8 +47,8 @@ const postPage = () => {
 
 
     useEffect(() => {
-        _id && dispatch(getComments(_id as string));
-        _id && dispatch(viewPost(_id));
+        _id && dispatch(fetchPostComments(_id as string));
+        _id && dispatch(fetchViewPost(_id));
     }, [])
 
     return (
@@ -70,19 +70,32 @@ const postPage = () => {
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     // @ts-ignore
-    await store.dispatch(getDefaultPageData(
+    await getDefaultPageData(
         context,
         [
             'postPageLeftSidebar',
             'postPageRightSidebar',
             'underPost'
         ],
-        null,
+        {
+            page:'postPage',
+            setHeadData: false
+        },
         store
-    ))
+    )
 
     //@ts-ignore
-    context.query?.identifier && await store.dispatch(getPost(context.query?.identifier as string, context.locale as string))
+   // context.query?.identifier && await store.dispatch(getPost(context.query?.identifier as string, context.locale as string))
+
+    !!context.query?.identifier && await store.dispatch(
+        fetchPost({
+            options:{
+                page:'postPage'
+            },
+            identifier: context?.query?.identifier as string,
+            locale:context.locale
+        })
+    )
 
     return {
         props: {

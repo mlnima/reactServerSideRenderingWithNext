@@ -1,12 +1,12 @@
 import {useDispatch, useSelector} from "react-redux";
-import {wrapper} from "@store/store";
+import {wrapper} from "@store_toolkit/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import dynamic from "next/dynamic";
 import {ChangeEvent} from "react";
-import {adminPanelEditDesign} from "@store/adminActions/adminPanelSettingsActions";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
+import {adminEditDesign} from "@store_toolkit/adminReducers/adminPanelSettingsReducer";
 
 const StyleSection = dynamic(() => import('@components/adminIncludes/design/StyleSection/StyleSection'), {ssr: false});
 
@@ -15,7 +15,7 @@ const cards = () => {
     const dispatch = useDispatch()
 
     const onChangeHandler = (event) => {
-        dispatch(adminPanelEditDesign({[event.target.name]: event.target.value}))
+        dispatch(adminEditDesign({[event.target.name]: event.target.value}))
     }
 
     return (

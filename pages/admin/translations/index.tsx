@@ -1,33 +1,29 @@
 import React, {useEffect, useState} from 'react';
 import Editor from "@monaco-editor/react";
-import {wrapper} from "@store/store";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import {wrapper} from "@store_toolkit/store";
 import {useDispatch, useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {
-    adminPanelEditTranslationsFile,
-    adminPanelReadTranslationsFile, adminPanelUpdateTranslationsFile
-} from "@store/adminActions/adminPanelFileManagerActions";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
+import {
+    fetchReadTranslationsFile,
+    fetchUpdateTranslationsFile,
+    adminPanelEditTranslationsFile
+} from "@store_toolkit/adminReducers/adminPanelFileManagerReducer";
+import {languagesOptions} from "@_variables/_variables";
 
+const translations = () => {
 
-// @ts-ignore
-const translations= () => {
     const dispatch = useDispatch()
     const translationsData = useSelector(({adminPanelFileManager}: StoreTypes) => adminPanelFileManager.translationsData)
     const [activeEditingLanguage, seActiveEditingLanguage] = useState(() => process.env.NEXT_PUBLIC_DEFAULT_LOCAL);
-    const [translationsFilePath, setTranslationsFilePath] = useState(() => `./public/locales/${activeEditingLanguage}/customTranslation.json`);
+    const [translationsFilePath, setTranslationsFilePath] = useState(
+        () => `./public/locales/${activeEditingLanguage}/customTranslation.json`
+    );
 
     const onChangeHandler = data => {
         dispatch(adminPanelEditTranslationsFile(data))
     }
-    // @ts-ignore
-    const languagesOptions = (process.env.NEXT_PUBLIC_LOCALS.split(' ').filter(lang => lang !== process.env.NEXT_PUBLIC_DEFAULT_LOCAL) || []).map(lang => {
-        return (
-            <option key={lang} value={lang}>{lang}</option>
-        )
-    })
 
     const onActiveEditingLanguageChangeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
         seActiveEditingLanguage(e.target.value)
@@ -38,20 +34,21 @@ const translations= () => {
     }, [activeEditingLanguage]);
 
     useEffect(() => {
-        dispatch(adminPanelReadTranslationsFile(translationsFilePath))
+        dispatch(fetchReadTranslationsFile(translationsFilePath))
     }, [translationsFilePath]);
 
     const onSaveHandler = () => {
-        dispatch(adminPanelUpdateTranslationsFile(translationsFilePath, translationsData))
+        dispatch(fetchUpdateTranslationsFile({path: translationsFilePath, data: translationsData}))
     }
 
     return (
 
         <div className='translations'>
             translations
-            <select onChange={e => onActiveEditingLanguageChangeHandler(e)}>
+            <select onChange={e => onActiveEditingLanguageChangeHandler(e)} className={'custom-select'}>
                 <option
-                    value={process.env.NEXT_PUBLIC_DEFAULT_LOCAL}>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL || 'Default'}</option>
+                    value={process.env.NEXT_PUBLIC_DEFAULT_LOCAL}>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL || 'Default'}
+                </option>
                 {languagesOptions}
             </select>
             <div className='editor-area'>
@@ -64,13 +61,16 @@ const translations= () => {
                     value={translationsData}
                     onChange={onChangeHandler}
                 />
-                <button onClick={onSaveHandler}>Save</button>
+                <button onClick={onSaveHandler} className={'btn btn-primary'}>Save</button>
             </div>
         </div>
 
     );
 };
 
+export const getServerSideProps = wrapper.getServerSideProps(() => async () => {
+    return {props: {}}
+})
 
 translations.getLayout = function getLayout(page: ReactElement) {
     return (

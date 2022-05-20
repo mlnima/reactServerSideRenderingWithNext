@@ -2,8 +2,9 @@ import React, {FC, useEffect, useRef} from "react";
 import styled from "styled-components";
 
 import {useDispatch} from "react-redux";
+import {fetchFileManagerUploadFile} from "@store_toolkit/adminReducers/adminPanelFileManagerReducer";
 // import {editPostField} from "@store/clientActions/postsAction";
-import {adminPanelUploadFile} from "@store/adminActions/adminPanelFileManagerActions";
+
 
 const ThumbnailUploaderStyledDiv = styled.div`
   width: 254.99px;
@@ -38,7 +39,7 @@ const ThumbnailUploader: FC<ThumbnailUploaderPropTypes> = ({mainThumbnail}) => {
         filesData.append('uploadingFile', e.target.files[0])
         filesData.append('type', 'thumbnail')
 
-        dispatch(adminPanelUploadFile(filesData,'postMainThumbnail'))
+        dispatch(fetchFileManagerUploadFile({file: filesData, useType:'postMainThumbnail',postData:null}))
         // uploadFiles(filesData).then(res => {
         //     if (res.data?.path){
         //         dispatch(editPostField({'mainThumbnail': res.data?.path?.replace('./','/')}))
@@ -64,8 +65,8 @@ const ThumbnailUploader: FC<ThumbnailUploaderPropTypes> = ({mainThumbnail}) => {
             filesData.append('token', localStorage.wt)
             filesData.append('uploadingFile', fileData)
 
-            dispatch(adminPanelUploadFile(filesData,'postMainThumbnail'))
 
+            dispatch(fetchFileManagerUploadFile({file: filesData, useType:'postMainThumbnail',postData:null}))
             // fileUpload(filesData).then(res => {
             //     if (res.data?.path){
             //         dispatch(editPostField({'mainThumbnail': res.data?.path?.replace('./','/')}))

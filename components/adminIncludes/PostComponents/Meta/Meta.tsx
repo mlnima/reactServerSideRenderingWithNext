@@ -3,7 +3,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus, faTimes} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
-import {adminEditPost} from "@store/adminActions/adminPanelPostsActions";
+import {adminEditPost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 // import {uniqBy} from "lodash";
 import {_uniqBy} from "@_variables/util/arrayUtils/_uniqBy";

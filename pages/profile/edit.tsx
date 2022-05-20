@@ -2,14 +2,15 @@ import React, {useEffect, useState} from 'react';
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
-import {wrapper} from "@store/store";
+import {wrapper} from "@store_toolkit/store";
 import {useDispatch} from "react-redux";
-import {userResetPassword} from "@store/clientActions/userActions";
+import {fetchUserResetPassword} from "@store_toolkit/clientReducers/userReducer";
 import _passwordValidator from "../../_variables/clientVariables/_passwordValidator";
 import ValidInput from "../../components/includes/LoginRegisterPopup/ValidInput";
-import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
+// import {fetchUserAutoLogin} from "@store_toolkit/clientReducers/userReducer";
 
 const EditProfileStyledMain = styled.main`
   grid-area: main;
@@ -77,7 +78,8 @@ const edit = () => {
     const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
 
         e.preventDefault()
-        dispatch(userResetPassword(changePasswordData))
+        //@ts-ignore
+        dispatch(fetchUserResetPassword(changePasswordData))
     }
 
     useEffect(() => {

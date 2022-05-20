@@ -1,19 +1,19 @@
 import {useRouter} from "next/router";
 import PaginationComponent from "@components/includes/PaginationComponent/PaginationComponent";
-import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
-import TagsRenderer
-    from "../../components/includes/pagesComponents/tagsPageComponents/Components/TagsRenderer/TagsRenderer";
+import WidgetsRenderer from "@components/includes/WidgetsRenderer/WidgetsRenderer";
+import TagsRenderer from "@components/includes/pagesComponents/tagsPageComponents/Components/TagsRenderer/TagsRenderer";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {wrapper} from "@store/store";
-import {getMetas} from "@store/clientActions/postsAction";
-import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import {wrapper} from "@store_toolkit/store";
+// import {getMetas} from "@store_toolkit/clientActions/postsAction";
+import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import React from "react";
+import {fetchMetas} from "@store_toolkit/clientReducers/postsReducer";
 
 const PageStyle = styled.div`
   ${({tagsPageStyle}: { tagsPageStyle: string }) => tagsPageStyle || ''}
@@ -50,14 +50,13 @@ const tagsPage = () => {
             </main>
             <SidebarWidgetAreaRenderer sidebar={sidebar} position={'tagsPage'}/>
         </PageStyle>
-    )
-        ;
+    );
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     // @ts-ignore
-    await store.dispatch(getDefaultPageData(
+    await getDefaultPageData(
         context,
         [
             'tagsPageTop',
@@ -70,10 +69,13 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             page: 'tags'
         },
         store
-    ))
+    )
 
-    // @ts-ignore
-    await store.dispatch(getMetas(context.query, 'tags', true))
+
+    await store.dispatch(fetchMetas({
+        data:context.query,
+        metaType:'tags'
+    }))
 
     return {
         props: {

@@ -1,13 +1,15 @@
 import MainWidgetArea from "../components/widgetsArea/MainWidgetArea/MainWidgetArea";
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
-import {wrapper} from "@store/store";
+import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import AppLayout from '@components/layouts/AppLayout';
 import type {ReactElement} from 'react';
 import styled from "styled-components";
 import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
+import {useEffect} from "react";
+
 
 const HomePageStyle = styled.div`
   display: grid;
@@ -16,16 +18,24 @@ const HomePageStyle = styled.div`
 
 const HomePage = () => {
 
-    const {sidebar,homePageStyle} = useSelector(({settings}: StoreTypes) => {
+    const {sidebar, homePageStyle} = useSelector(({settings}: StoreTypes) => {
         return {
-            homePageStyle:settings.design?.homePageStyle,
-            sidebar: settings?.identity?.homePageSidebar
+            homePageStyle: settings?.design?.homePageStyle,
+            sidebar: settings?.identity?.homePageSidebar,
         }
     })
 
+    const widgets = useSelector(({widgets}: StoreTypes)=>{
+        return widgets.widgetInGroups
+    })
+
+    useEffect(() => {
+        console.log(widgets)
+    }, [widgets]);
+
     return (
         <HomePageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`} stylesData={homePageStyle}>
-            <MainWidgetArea className='home-page' position='home' />
+            <MainWidgetArea className='home-page' position='home'/>
             <SidebarWidgetAreaRenderer sidebar={sidebar} position={'homePage'}/>
         </HomePageStyle>
 
@@ -34,21 +44,19 @@ const HomePage = () => {
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-    await store.dispatch(
-        getDefaultPageData(
-            context,
-            ['homePageLeftSidebar', 'homePageRightSidebar', 'home'],
-            {
-                setHeadData: true,
-                page: 'home'
-            },
-            store
-        )
+    await getDefaultPageData(
+        context,
+        ['homePageLeftSidebar', 'homePageRightSidebar', 'home'],
+        {
+            setHeadData: true,
+            page: 'home'
+        },
+        store
     )
 
     return {
         props: {
-            ...(await serverSideTranslations(context?.locale || process.env.NEXT_PUBLIC_DEFAULT_LOCAL as string, ['common', 'customTranslation']))
+            ...(await serverSideTranslations(context?.locale as string, ['common', 'customTranslation']))
         }
     }
 

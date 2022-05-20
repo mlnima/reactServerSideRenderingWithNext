@@ -5,14 +5,14 @@ import ActorsRenderer from "../../components/includes/pagesComponents/actorsPage
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {wrapper} from "@store/store";
+import {wrapper} from "@store_toolkit/store";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {getMetas} from "@store/clientActions/postsAction";
-import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import AppLayout from "@components/layouts/AppLayout";
 import type {ReactElement} from 'react'
 import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import React from "react";
+import {fetchMetas} from "@store_toolkit/clientReducers/postsReducer";
 
 const PageStyle = styled.div`
   .actors {
@@ -67,7 +67,7 @@ const actorsPage = () => {
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     // @ts-ignore
-    await store.dispatch(getDefaultPageData(
+    await getDefaultPageData(
         context,
         [
             'actorsPageTop',
@@ -80,9 +80,12 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             page: 'actors'
         },
         store
-    ))
-    // @ts-ignore
-    await store.dispatch(getMetas(context.query, 'actors', true))
+    )
+
+    await store.dispatch(fetchMetas({
+        data:context.query,
+        metaType:'actors'
+    }))
 
     return {
         props: {
@@ -91,7 +94,6 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     }
 
 });
-
 
 actorsPage.getLayout = function getLayout(page: ReactElement) {
     return (

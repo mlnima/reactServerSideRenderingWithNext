@@ -1,4 +1,4 @@
-import ProfileNavigation from '../../components/includes/profilePageComponents/ProfileNavigation/ProfileNavigation';
+import ProfileNavigation from '@components/includes/profilePageComponents/ProfileNavigation/ProfileNavigation';
 import ProfileImage from "@components/includes/profilePageComponents/ProfileImage/ProfileImage";
 import {faCamera} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -6,9 +6,9 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 import Link from "next/link";
 import {useSelector} from "react-redux";
-import {wrapper} from "@store/store";
+import {wrapper} from "@store_toolkit/store";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import type { ReactElement } from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 
@@ -75,7 +75,7 @@ const ProfileStyledMain = styled.main`
 const Profile = () => {
 
     // @ts-ignore
-    const userData = useSelector((state : StoreTypes) => state.user.userData)
+    const userData = useSelector(({user} : StoreTypes) => user?.userData)
 
     return (
         <ProfileStyledMain className='profile-page main'>
@@ -106,13 +106,19 @@ const Profile = () => {
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     // @ts-ignore
-    await store.dispatch(getDefaultPageData(
+    await getDefaultPageData(
         context,
         [
             'profilePageRightSidebar',
             'profilePageLeftSidebar',
             'profilePage'
-        ]))
+        ],
+        {
+            page:'profile',
+            setHeadData:true
+        },
+        store
+    )
 
     return {
         props: {

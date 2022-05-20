@@ -2,19 +2,20 @@ import React, {ChangeEvent, useEffect} from 'react';
 import {useRouter} from 'next/router'
 import Editor from "@monaco-editor/react";
 import styled from "styled-components";
-import {wrapper} from "@store/store";
+import {wrapper} from "../../../ZlegacyCodesAndComponents/store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useSelector, useDispatch} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {
-    adminDeleteCustomPage,
-    adminEditPageField,
-    adminGetPage,
-    adminSaveNewPage,
-    adminUpdatePage
-} from "@store/adminActions/adminPanelPagesActions";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
+
+import {
+    fetchAdminSaveNewPage,
+    fetchAdminUpdatePage,
+    adminEditPageField,
+    fetchAdminDeleteCustomPage,
+    fetchAdminPanelPage
+} from "@store_toolkit/adminReducers/adminPanelPagesReducer";
 
 let AdminEditCustomPageStyledDiv = styled.div`
   padding: 10px 1rem;
@@ -42,7 +43,7 @@ const page = (props: any) => {
 
     useEffect(() => {
         if (query.id) {
-            dispatch(adminGetPage(query.id))
+            dispatch(fetchAdminPanelPage(query.id as string))
         }
     }, [props]);
 
@@ -60,14 +61,14 @@ const page = (props: any) => {
 
     const onSaveHandler = () => {
         if (query.id) {
-            dispatch(adminUpdatePage(pageData))
+            dispatch(fetchAdminUpdatePage(pageData))
         } else {
-            dispatch(adminSaveNewPage(pageData, push))
+            dispatch(fetchAdminSaveNewPage({pageData, push}))
         }
     }
 
     const onDeleteHandler = ()=>{
-        dispatch(adminDeleteCustomPage(query.id))
+        dispatch(fetchAdminDeleteCustomPage(query.id as string))
         push('/admin/assets?assetsType=pages').finally()
     }
 
@@ -84,7 +85,7 @@ const page = (props: any) => {
                            className={'form-control-input'}
                            type={'text'}
                            placeholder={'page name'}
-                           value={pageData.pageName}
+                           value={pageData?.pageName}
                            onChange={e => onChangeHandler(e)}/>
                 </div>
                 <div className={'form-group'}>
@@ -108,7 +109,7 @@ const page = (props: any) => {
                 <div className={'form-group'}>
                     <p>Sidebar:</p>
                     <select name={'sidebar'} className={'custom-select'} onChange={e => onChangeHandler(e)}
-                            value={pageData.sidebar}>
+                            value={pageData?.sidebar}>
                         <option value={'no'}>No</option>
                         <option value={'left'}>Left</option>
                         <option value={'right'}>Right</option>
@@ -119,7 +120,7 @@ const page = (props: any) => {
                 <div className={'form-group'}>
                     <p>status:</p>
                     <select name={'status'} className={'custom-select'} onChange={e => onChangeHandler(e)}
-                            value={pageData.status} placeholder={'select'}>
+                            value={pageData?.status} placeholder={'select'}>
                         <option >select</option>
                         <option value={'published'}>Published</option>
                         <option value={'draft'}>Draft</option>
@@ -131,8 +132,8 @@ const page = (props: any) => {
                     width={props.width || '100%'}
                     height={props.height || '80vh'}
                     theme={'vs-dark'}
-                    defaultValue={pageData.pageStyle || ''}
-                    value={pageData.pageStyle || ''}
+                    defaultValue={pageData?.pageStyle || ''}
+                    value={pageData?.pageStyle || ''}
                     onChange={onStyleChangeHandler}
                 />
                 <div className={'actions-btns'}>

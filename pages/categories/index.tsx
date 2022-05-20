@@ -7,13 +7,13 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {getMetas} from "@store/clientActions/postsAction";
-import {getDefaultPageData} from "@store/clientActions/globalStateActions";
-import {wrapper} from "@store/store";
+import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
+import {wrapper} from "@store_toolkit/store";
 import dynamic from "next/dynamic";
 import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
+import {fetchMetas} from "@store_toolkit/clientReducers/postsReducer";
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
@@ -45,7 +45,6 @@ const categoriesPage = () => {
         }
     })
 
-
     return (
         <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar `}
                    stylesData={categoriesPageStyle}>
@@ -70,7 +69,7 @@ const categoriesPage = () => {
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     // @ts-ignore
-    await store.dispatch(getDefaultPageData(
+    await getDefaultPageData(
         context,
         [
             'categoriesPageTop',
@@ -83,9 +82,15 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             page: 'categories'
         },
         store
-    ))
+    )
     // @ts-ignore
-    await store.dispatch(getMetas(context.query, 'categories', true))
+    // await store.dispatch(getMetas(context.query, 'categories', true))
+    await store.dispatch(fetchMetas({
+        data:context.query,
+        metaType:'categories'
+    }))
+
+
 
     return {
         props: {

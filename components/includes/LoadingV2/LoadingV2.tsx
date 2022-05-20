@@ -1,10 +1,8 @@
 import React, {useEffect, FC} from 'react';
 import styled from "styled-components";
-import {faTimes} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import ReactLoading from 'react-loading';
 import {useRouter} from "next/router";
-import {setLoading} from "@store/clientActions/globalStateActions";
+import {loading} from "@store_toolkit/clientReducers/globalStateReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
@@ -52,14 +50,14 @@ let StyledDiv = styled.div`
 
 const LoadingV2: FC = () => {
     const dispatch = useDispatch()
-    const loading = useSelector(({globalState}: StoreTypes) => globalState?.loading)
+    const isLoading = useSelector(({globalState}: StoreTypes) => globalState?.loading)
     const {events, asPath} = useRouter()
 
 
     useEffect(() => {
 
-        const handleStart = (url) => (url !== asPath) && dispatch(setLoading(true));
-        const handleComplete = (url) => (url === asPath) && dispatch(setLoading(false));
+        const handleStart = (url) => (url !== asPath) && dispatch(loading(true));
+        const handleComplete = (url) => (url === asPath) && dispatch(loading(false));
 
         events.on('routeChangeStart', handleStart)
         events.on('routeChangeComplete', handleComplete)
@@ -73,16 +71,16 @@ const LoadingV2: FC = () => {
     })
 
     useEffect(() => {
-        if (loading) {
+        if (isLoading) {
             setTimeout(() => {
-                dispatch(setLoading(false))
+                dispatch(loading(false))
             }, 3000)
         }
-    }, [loading]);
+    }, [isLoading]);
 
-    return (loading) && (
-        <StyledDiv className='Loading' onClick={() => dispatch(setLoading(false))}
-                   onTouchStartCapture={() => dispatch(setLoading(false))}>
+    return (isLoading) && (
+        <StyledDiv className='Loading' onClick={() => dispatch(loading(false))}
+                   onTouchStartCapture={() => dispatch(loading(false))}>
             <ReactLoading type={'spin'} color={'var(--main-active-color,#f90)'} height={100} width={100}/>
         </StyledDiv>
     );

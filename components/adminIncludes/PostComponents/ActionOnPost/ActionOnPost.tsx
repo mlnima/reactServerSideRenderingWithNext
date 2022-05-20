@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {adminEditPost, adminSaveNewPost, adminUpdatePost} from "@store/adminActions/adminPanelPostsActions";
-import {setAlert} from "@store/clientActions/globalStateActions";
+// import { adminSaveNewPost} from "@store/adminActions/adminPanelPostsActions";
+import {adminEditPost, fetchAdminPanelSaveNewPost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
+import {setAlert} from "../../../../ZlegacyCodesAndComponents/store/clientActions/globalStateActions";
 import {useRouter} from "next/router";
+import {fetchAdminPanelUpdatePost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
 
 const ActionOnPostStyledDiv = styled.div`
   display: flex;
@@ -36,19 +38,19 @@ const ActionOnPost = () => {
         try {
             if (ActionOnPostData?.post?._id) {
 
-                dispatch(adminUpdatePost(
+                dispatch(fetchAdminPanelUpdatePost(
                     {...ActionOnPostData?.post,
                         //@ts-ignore
                         author: ActionOnPostData?.post?.author?._id  || ActionOnPostData?.userId}))
             } else {
-
-                dispatch(adminSaveNewPost(
-                    {
-                         ...ActionOnPostData?.post,
-                          status : ActionOnPostData.post.status || 'draft',
-                          author: ActionOnPostData?.userId
-                      },
-                    router
+                dispatch(fetchAdminPanelSaveNewPost({
+                        data: {
+                            ...ActionOnPostData?.post,
+                            status : ActionOnPostData.post.status || 'draft',
+                            author: ActionOnPostData?.userId
+                        },
+                        router
+                    }
                 ))
             }
         } catch (error) {

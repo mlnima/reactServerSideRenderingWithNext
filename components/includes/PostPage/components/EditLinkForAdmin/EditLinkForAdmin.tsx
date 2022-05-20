@@ -1,11 +1,11 @@
 import React, {FC} from "react";
 import styled from "styled-components";
-import {adminBulkActionPost} from "@store/adminActions/adminPanelPostsActions";
 import {useRouter} from "next/router";
 import {useDispatch, useSelector} from "react-redux";
 import Draggable from 'react-draggable';
-import {reloadPageDataByAddingQuery} from "@store/adminActions/adminPanelGlobalStateActions";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {fetchAdminPanelBulkActionPost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
+import {updateQueryGenerator} from "@_variables/_variables";
 
 const EditLinkForAdminStyledDiv = styled.div`
   display: flex;
@@ -58,8 +58,8 @@ const EditLinkForAdmin: FC = () => {
     })
 
     const onStatusChangeHandler = (status) => {
-        dispatch(adminBulkActionPost([_id], status))
-        dispatch(reloadPageDataByAddingQuery(query, push, pathname))
+        dispatch(fetchAdminPanelBulkActionPost({ids:[_id], status}))
+        updateQueryGenerator(query, push, pathname)
     }
 
     const dispatch = useDispatch()

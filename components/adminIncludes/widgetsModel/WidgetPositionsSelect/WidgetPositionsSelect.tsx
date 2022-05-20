@@ -60,18 +60,6 @@ interface PositionSelectorPropTypes {
 
 const PositionSelector: FC<PositionSelectorPropTypes> = ({onChangeHandler, filters,onSelectAll,allPositions,availablePositions}) => {
 
-    // const validePositions = useMemo(()=>{},[])
-    //
-    // const renderCheckBoxes = allPositions.sort((a, b) => a > b ? 1 : -1).map(position => {
-    //     return (
-    //         <div className={`btn ${filters.includes(position) ?'btn-primary'  :'btn-dark' }`}
-    //              key={position}
-    //              title={position}
-    //              onClick={()=>onChangeHandler(position)}>
-    //             <p>{convertVariableNameToName(position)}</p>
-    //         </div>
-    //     )
-    // })
     const renderCheckBoxes = availablePositions.map(position => {
         return (
             <div className={`btn ${filters.includes(position) ?'btn-primary'  :'btn-dark' }`}

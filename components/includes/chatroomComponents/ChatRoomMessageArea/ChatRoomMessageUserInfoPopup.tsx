@@ -4,11 +4,12 @@ import Link from "next/link";
 import {useRouter} from "next/router";
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
-import {setActiveVisibleProfile} from "@store/clientActions/chatroomActions";
+
 import Draggable from 'react-draggable';
-import {setLoginRegisterFormStatus} from "@store/clientActions/globalStateActions";
-import {conversation} from "@store/clientActions/userActions";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {fetchStartConversation} from "@store_toolkit/clientReducers/userReducer";
+import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
+import {setActiveVisibleProfile} from "@store_toolkit/clientReducers/chatroomReducer";
 
 
 const ChatRoomMessageUserInfoPopupStyledDiv = styled.div`
@@ -125,9 +126,9 @@ const ChatRoomMessageUserInfoPopup = () => {
 
     const onConversationHandler = () => {
         if (loggedIn) {
-            dispatch(conversation(activeVisibleProfile._id, push))
+            dispatch(fetchStartConversation({_id:activeVisibleProfile._id, push}))
         } else {
-            dispatch(setLoginRegisterFormStatus('register'))
+            dispatch(loginRegisterForm('register'))
         }
     }
 

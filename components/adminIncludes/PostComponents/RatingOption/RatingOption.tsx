@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {adminEditPost} from "@store/adminActions/adminPanelPostsActions";
+import {adminEditPost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
 import {FC} from "react";
 
 const RatingOption:FC = () => {

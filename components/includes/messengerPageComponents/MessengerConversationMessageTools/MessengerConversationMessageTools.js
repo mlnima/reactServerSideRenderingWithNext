@@ -5,7 +5,8 @@ import {socket} from '@_variables/socket';
 import {useDispatch, useSelector} from "react-redux";
 import {StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
 import styled from "styled-components";
-import {messageToConversation} from "@store/clientActions/userActions";
+import {messageToConversation} from "../../../../ZlegacyCodesAndComponents/store/clientActions/userActions";
+import {fetchSendAMessageToPrivateConversation} from "@store_toolkit/clientReducers/userReducer";
 
 const MessengerConversationMessageToolsStyledForm = styled.form`
   position: fixed;
@@ -47,7 +48,8 @@ const MessengerConversationMessageTools = props => {
                 conversationId: props.conversationId
             }
             socket.emit('sendMessageToConversation', messageData, props.conversationId)
-            dispatch(messageToConversation(props.conversationId, messageInputData))
+            //@ts-ignore
+            dispatch(fetchSendAMessageToPrivateConversation({conversationId:props.conversationId, messageBody:messageInputData}))
             messageInput.current.value = '';
             // props.getAndSetConversationData();
             // messageToConversation(props.conversationId, messageInputData).then(() => {

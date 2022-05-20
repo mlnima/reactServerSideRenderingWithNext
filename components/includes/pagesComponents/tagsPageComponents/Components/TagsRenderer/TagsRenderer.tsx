@@ -39,7 +39,7 @@ const TagsRenderer: FC<TagsRendererPropTypes> = ({uniqueData}) => {
         return {
             tagsMetas: uniqueData?.metaData ? uniqueData?.metaData : posts?.tagsMetas,
             postsPerRawForMobile: settings?.design?.postsPerRawForMobile || 2,
-            cardsCustomStyle:settings.design.cardsCustomStyle|| '',
+            cardsCustomStyle:settings?.design?.cardsCustomStyle|| '',
             cardWidth: settings?.design?.cardWidthDesktop || 255,
         }
     })
@@ -50,7 +50,7 @@ const TagsRenderer: FC<TagsRendererPropTypes> = ({uniqueData}) => {
                                cardsCustomStyle={cardsCustomStyle}
                                postsPerRawForMobile={postsPerRawForMobile}>
 
-            {tagsMetas.map((tag, index) => {
+            {tagsMetas?.map((tag, index) => {
                 return (
                     <TagCard key={tag._id}
                              tag={tag}

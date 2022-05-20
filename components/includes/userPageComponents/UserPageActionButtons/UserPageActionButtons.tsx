@@ -3,9 +3,15 @@ import {useRouter} from "next/router";
 import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
-import {setLoginRegisterFormStatus} from "@store/clientActions/globalStateActions";
-import {followUser, unFollowUser, getSpecificUserData, conversation} from "@store/clientActions/userActions";
+import {setLoginRegisterFormStatus} from "../../../../ZlegacyCodesAndComponents/store/clientActions/globalStateActions";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {
+    fetchFollowUser,
+    fetchSpecificUserData,
+    fetchStartConversation,
+    fetchUnFollowUser
+} from "@store_toolkit/clientReducers/userReducer";
+import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 
 const UserPageActionButtonsStyledDiv = styled.div`
   display: flex;
@@ -54,28 +60,24 @@ const UserPageActionButtons: FC<UserPageActionButtonsPropType> = ({_id}) => {
     }, [userData]);
     const onFollowHandler = () => {
         if (userPageData?._id && loggedIn && userData._id ) {
-            dispatch(followUser(userPageData._id))
-            dispatch(getSpecificUserData(['following']))
+            dispatch(fetchFollowUser(userPageData._id))
+            dispatch(fetchSpecificUserData({fields:['following']}))
         } else {
-            dispatch(setLoginRegisterFormStatus('login'))
+            dispatch(loginRegisterForm('login'))
         }
     }
 
     const onUnFollowHandler = () => {
-        dispatch(unFollowUser(userPageData._id))
-        dispatch(getSpecificUserData(['following']))
+        dispatch(fetchUnFollowUser(userPageData._id))
+        dispatch(fetchSpecificUserData({fields:['following']}))
     }
 
 
     const onConversationHandler = () => {
 
         if (userData._id && userPageData._id) {
-            dispatch(conversation(userPageData._id, push))
-            // conversation(userPageData._id).then(res => {
-            //     const conversation = res.data.conversation
-            //     router.push(`/messenger/${conversation._id}`)
-            // }).catch(err => {
-            // })
+            dispatch(fetchStartConversation({_id:userPageData._id, push}))
+
         } else {
             dispatch(setLoginRegisterFormStatus('login'))
         }

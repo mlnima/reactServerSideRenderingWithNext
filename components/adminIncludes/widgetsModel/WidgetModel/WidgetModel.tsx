@@ -6,7 +6,7 @@ import {WidgetModelStyledDiv} from './WidgetModelStyle'
 import ActionButtons from "@components/adminIncludes/widgetsModel/WidgetModel/ActionButtons";
 import UniqueFields from "@components/adminIncludes/widgetsModel/WidgetModel/UniqueFields";
 import WidgetHeaderControl from "./WidgetHeaderControl/WidgetHeaderControl";
-import {adminUpdateWidget} from "@store/adminActions/adminWidgetsActions";
+import {adminUpdateWidget} from "../../../../ZlegacyCodesAndComponents/store/adminActions/adminWidgetsActions";
 import { WidgetPropTypes} from "@_variables/TypeScriptTypes/Widgets";
 import {onChangeInputValueCorrector} from "@_variables/_variables";
 

@@ -85,7 +85,7 @@ const MultipleLinkWidgetModelFields = props => {
     }
 
 
-    const renderAddedItems = (props.widgetData.multipleLinks || []).sort((a, b) => a.linkIndex - b.linkIndex).map(eachLink => {
+    const renderAddedItems = ([...props?.widgetData?.multipleLinks] || []).sort((a, b) => a.linkIndex - b.linkIndex).map(eachLink => {
         return (
             <MultipleLinkWidgetSingleLinkPreview key={uniqueId('id_')} linkData={eachLink} widgetSettings={props.widgetSettings} widgetData={props.widgetData} setWidgetData={props.setWidgetData}/>
         )

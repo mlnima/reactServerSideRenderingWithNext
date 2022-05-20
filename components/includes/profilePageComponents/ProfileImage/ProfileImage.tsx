@@ -1,8 +1,9 @@
 import React, {useRef} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import styled from "styled-components";
-import { userProfileImageUpload} from "@store/clientActions/userActions";
+// import { userProfileImageUpload} from "@store/clientActions/userActions";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {fetchUserProfileImageUpload} from "@store_toolkit/clientReducers/userReducer";
 
 const ProfileImageStyledDiv = styled.div`
   position: relative;
@@ -54,7 +55,7 @@ const ProfileImage = () => {
         filesData.append('token', localStorage.wt)
         filesData.append('profileImage', e.target.files[0], 'profile')
         filesData.append('type', 'profile')
-        dispatch(userProfileImageUpload(filesData))
+        dispatch(fetchUserProfileImageUpload(filesData))
         setTimeout(()=>{
             reSetProfileImage()
         },1000)

@@ -4,8 +4,9 @@ import {uniqueId} from "lodash";
 import MenuWidgetEditForm from "./MenuWidgetEditForm";
 
 import styled from "styled-components";
+
 const MenuWidgetModelFieldsStyledDiv = styled.div`
-  .mobileNavigationLabel{
+  .mobileNavigationLabel {
     padding: 0 25px;
   }
 `
@@ -49,31 +50,30 @@ const MenuWidgetModelFields = props => {
     }
 
 
-
     const onAddHandler = e => {
         e.preventDefault()
-        if (!formData.parent){
+        if (!formData.parent) {
             props.setWidgetData({
                 ...props.widgetData,
                 menuItems: [
                     ...props?.widgetData?.menuItems || [],
                     {
                         ...formData,
-                        itemIndex:formData.itemIndex ? parseInt(formData.itemIndex) : (props?.widgetData?.menuItems?.length ||0),
-                        itemId : uniqueId('id_') + props?.widgetData?.menuItems?.length  || uniqueId('id_')
+                        itemIndex: formData.itemIndex ? parseInt(formData.itemIndex) : (props?.widgetData?.menuItems?.length || 0),
+                        itemId: uniqueId('id_') + props?.widgetData?.menuItems?.length || uniqueId('id_')
                     }
                 ]
             })
-        }else{
+        } else {
 
-            const findParentIndex = props?.widgetData?.menuItems.findIndex(menuItem=>menuItem.itemId === formData.parent)
-            const parentData = props?.widgetData?.menuItems.find(menuItem=>menuItem.itemId === formData.parent)
+            const findParentIndex = props?.widgetData?.menuItems.findIndex(menuItem => menuItem.itemId === formData.parent)
+            const parentData = props?.widgetData?.menuItems.find(menuItem => menuItem.itemId === formData.parent)
             const updatedParentData = {
                 ...(parentData || {}),
-                subItems:[...((props?.widgetData?.menuItems?.[findParentIndex] || {})?.subItems||[]), {
+                subItems: [...((props?.widgetData?.menuItems?.[findParentIndex] || {})?.subItems || []), {
                     ...formData,
-                    itemId : uniqueId('sub_') + props?.widgetData?.menuItems?.length  || uniqueId('sub_'),
-                    itemIndex:parentData?.subItems?.length +1 || 0,
+                    itemId: uniqueId('sub_') + props?.widgetData?.menuItems?.length || uniqueId('sub_'),
+                    itemIndex: parentData?.subItems?.length + 1 || 0,
                 }]
             }
 
@@ -100,7 +100,7 @@ const MenuWidgetModelFields = props => {
         })
     }
 
-    const renderCurrentItems = (props?.widgetData?.menuItems?.sort((a, b) => a.itemIndex > b.itemIndex ? 1 : -1) || []).map(menuItem => {
+    const renderCurrentItems = ([...props?.widgetData?.menuItems] || [])?.sort((a, b) => a.itemIndex > b.itemIndex ? 1 : -1).map(menuItem => {
         return (
             <MenuWidgetModelFieldsPreview key={uniqueId('id_')}
                                           data={menuItem}
@@ -113,26 +113,26 @@ const MenuWidgetModelFields = props => {
         )
     })
 
-        return (
-            <MenuWidgetModelFieldsStyledDiv>
-                <MenuWidgetEditForm
-                    onChangeHandler={onChangeHandler}
-                    onSubmitHandler={onAddHandler}
-                    onChangeHandlerWithTranslate={onChangeHandlerWithTranslate}
-                    data={formData}
-                    setData={setFormData}
-                    state={state}
-                    parentsOption={props.widgetData.menuItems || []}
-                    activeEditingLanguage={props.widgetSettings.activeEditingLanguage}
-                    onDeleteHandler={()=>null}
-                    mode='Add'
-                />
+    return (
+        <MenuWidgetModelFieldsStyledDiv>
+            <MenuWidgetEditForm
+                onChangeHandler={onChangeHandler}
+                onSubmitHandler={onAddHandler}
+                onChangeHandlerWithTranslate={onChangeHandlerWithTranslate}
+                data={formData}
+                setData={setFormData}
+                state={state}
+                parentsOption={props.widgetData.menuItems || []}
+                activeEditingLanguage={props.widgetSettings.activeEditingLanguage}
+                onDeleteHandler={() => null}
+                mode='Add'
+            />
 
-                <div className='menu-items'>
-                    {renderCurrentItems}
-                </div>
-            </MenuWidgetModelFieldsStyledDiv>
-        );
+            <div className='menu-items'>
+                {renderCurrentItems}
+            </div>
+        </MenuWidgetModelFieldsStyledDiv>
+    );
 
 };
 export default MenuWidgetModelFields;

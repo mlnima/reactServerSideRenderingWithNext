@@ -1,6 +1,6 @@
 import React, {FC, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import useEmblaCarousel from 'embla-carousel-react'
-import {setLoading} from "@store/clientActions/globalStateActions";
+import {setLoading} from "../../../../ZlegacyCodesAndComponents/store/clientActions/globalStateActions";
 import {useRouter} from "next/router";
 import _shortNumber from "@_variables/clientVariables/_shortNumber";
 import dynamic from "next/dynamic";

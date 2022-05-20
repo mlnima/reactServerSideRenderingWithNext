@@ -1,11 +1,15 @@
 const metaSchema = require('../../../models/metaSchema');
+const settingSchema = require("../../../models/settings/settingSchema");
 
 module.exports = async (req, res) => {
     try {
+
+        const identitySetting = await settingSchema.findOne({type:'identity'}).exec()
         const type = {type: req.query.metaType}
-        const size = parseInt(req.query.size) > 500 ? 500 : parseInt(req.query.size)
+        const size = req.query.size === 'undefined' ? identitySetting?.data?.postsCountPerPage : parseInt(req.query.size)
         const statusQuery = req.query.status === 'all' ? {status: {$ne: 'trash'}} : !req.query.status ? {status: 'published'}  : {status: req.query.status};
-        const page = parseInt(req.query.page);
+        const page = req.query.page === 'undefined' ? 1 : parseInt(req.query.page);
+
         const startWithQuery = req.query?.startWith === 'any' ? {} : {name: {$regex: '^' + req.query?.startWith, $options: 'i'}}
         const countQuery = {count:{ $gt: 0 }}
         //const sortQuery =  req.query.sort === 'createdAt' || !req.query.sort ? {} : {[req.query.sort]: -1}

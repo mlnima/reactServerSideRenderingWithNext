@@ -1,11 +1,7 @@
 const {isValidObjectId} = require("mongoose");
 
-const searchedKeywordLookForDefaultLanguage = (keyword) =>{
+module.exports = (data) => {
 
-}
-
-
-module.exports = data => {
     const excludeContent = (process.env.EXCLUDE_POSTS_SOURCE ? process.env.EXCLUDE_POSTS_SOURCE.split(' ') : []).map(excludeWord => {
 
         const expression = `.*${excludeWord}.*`
@@ -14,7 +10,7 @@ module.exports = data => {
     })
 
     const excludeQuery = process.env.EXCLUDE_POSTS_SOURCE ? [{$or: excludeContent}] : []
-    const size = parseInt(data?.size || '20');
+    const size = data?.size;
     const sort = data?.sort || data?.sortBy;
     const meta = data.metaId || data?.selectedMetaForPosts;
     const validateId = meta ? isValidObjectId(meta) && meta?.match(/^[0-9a-fA-F]{24}$/) : false;
@@ -51,14 +47,5 @@ module.exports = data => {
         page: data?.page ? parseInt(data?.page) : 1,
         selectedFields: data?.field || [] ,
         sortQuery,
-
-        // postTypeQuery: data?.postType ? {postType: data?.postType} : {},
-        // statusQuery,
-        // authorQuery: data.author ? data.author === 'all' ? {} : {author: data.author} : {},
-        // metaQuery,
-        // excludeQuery,
-        // searchQuery,
-
-
     }
 }

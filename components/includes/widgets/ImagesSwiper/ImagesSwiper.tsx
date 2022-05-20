@@ -107,7 +107,7 @@ const ImagesSwiper: FC<ImagesSwiperPropTypes> = ({uniqueData}) => {
     const [showDetails, setShowDetails] = useState(false);
     const isMobile = useSelector((store: StoreTypes) => store.settings?.isMobile);
 
-    const renderSlides = uniqueData?.imagesData?.sort((a, b) => a.imageIndex > b.imageIndex ? 1 : -1)
+    const renderSlides = [...uniqueData?.imagesData]?.sort((a, b) => a.imageIndex > b.imageIndex ? 1 : -1)
         ?.map((imageData, index) => {
             const key = imageData.imageIndex + imageData.imageId + index
             if (imageData.targetUrl) {

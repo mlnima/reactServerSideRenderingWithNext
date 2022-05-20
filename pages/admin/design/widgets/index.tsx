@@ -1,16 +1,18 @@
 import React, {useState, useEffect, useMemo} from 'react';
 import AddWidgetMenu from '@components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetMenu'
-import WidgetGroupByPosition from "@components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition";
+import WidgetGroupByPosition
+    from "@components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition";
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
-import {wrapper} from "@store/store";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import {wrapper} from "@store_toolkit/store";
+// import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import WidgetPositionsSelect from "@components/adminIncludes/widgetsModel/WidgetPositionsSelect/WidgetPositionsSelect";
-import {adminPanelGetWidgets} from "@store/adminActions/adminWidgetsActions";
+
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import staticPositions from "@components/adminIncludes/widgetsModel/staticPositions";
+import {fetchAdminPanelGetWidgets} from "@store_toolkit/adminReducers/adminWidgetsReducer";
 
 let StyledDiv = styled.div`
   display: flex;
@@ -63,23 +65,25 @@ const AdminWidgets = () => {
         ({
              adminPanelWidgets,
              adminPanelGlobalState
-        }: StoreTypes) => {
+         }: StoreTypes) => {
 
-        return {
-            customPages: adminPanelGlobalState?.customPages.reduce(
-                (customPositionsWithSidebars,currentPosition)=>{
-                return [
-                    ...customPositionsWithSidebars,currentPosition,
-                    `${currentPosition}LeftSidebar`,
-                    `${currentPosition}RightSidebar`
-                ]
-            },[]),
-            availablePositions: Object.keys(adminPanelWidgets?.adminPanelWidgets)
-        }
-    })
+            return {
+                customPages: adminPanelGlobalState?.customPages.reduce(
+                    (customPositionsWithSidebars, currentPosition) => {
+                        return [
+                            ...customPositionsWithSidebars, currentPosition,
+                            `${currentPosition}LeftSidebar`,
+                            `${currentPosition}RightSidebar`
+                        ]
+                    }, []),
+                availablePositions: Object.keys(adminPanelWidgets?.adminPanelWidgets)
+            }
+        })
+
 
     const allPositions = useMemo(() => ['all', ...staticPositions, ...(customPages || [])],
         [customPages, availablePositions])
+
 
     const [filters, setFilters] = useState([])
 
@@ -105,7 +109,7 @@ const AdminWidgets = () => {
     }
 
     useEffect(() => {
-        dispatch(adminPanelGetWidgets())
+        dispatch(fetchAdminPanelGetWidgets(null))
         if (typeof window !== 'undefined') {
             localStorage?.filterWidgetPosition === '[all]' && setFilters(allPositions);
             (localStorage?.filterWidgetPosition && localStorage?.filterWidgetPosition !== '[all]') &&
@@ -133,7 +137,7 @@ const AdminWidgets = () => {
 
                 <h2>
                     Widgets:
-                    <button onClick={() => dispatch(adminPanelGetWidgets())} className={'btn btn-info'}>
+                    <button onClick={() => dispatch(fetchAdminPanelGetWidgets(null))} className={'btn btn-info'}>
                         Refresh
                     </button>
                 </h2>
@@ -152,7 +156,7 @@ const AdminWidgets = () => {
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
     return {
         props: {
-            ...(await serverSideTranslations(context.locale as string, ['common'])),
+            // ...(await serverSideTranslations(context.locale as string, ['common'])),
         }
     }
 })

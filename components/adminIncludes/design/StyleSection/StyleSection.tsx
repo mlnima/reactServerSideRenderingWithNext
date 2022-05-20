@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
-import {updateSetting} from "@store/adminActions/adminPanelSettingsActions";
+import {updateSetting} from "../../../../ZlegacyCodesAndComponents/store/adminActions/adminPanelSettingsActions";
 import MonacoEditor from "../../MonacoEditor/MonacoEditor";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {adminPanelEditDesign} from "@store/adminActions/adminPanelSettingsActions";
+import {adminEditDesign} from "@store_toolkit/adminReducers/adminPanelSettingsReducer";
 
 const StyleSectionStyledDiv = styled.div`
   width: 100%;
@@ -37,9 +37,9 @@ const StyleSection = props => {
 
     const onChangeHandler = (event) => {
         if (typeof event === 'string') {
-            dispatch(adminPanelEditDesign({[props.name]: event}))
+            dispatch(adminEditDesign({[props.name]: event}))
         }else{
-            dispatch(adminPanelEditDesign({[event.target.name]: event.target.value}))
+            dispatch(adminEditDesign({[event.target.name]: event.target.value}))
         }
     }
 

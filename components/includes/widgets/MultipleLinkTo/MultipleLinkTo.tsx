@@ -39,7 +39,7 @@ interface MultipleLinkToPropTypes {
 const MultipleLinkTo: FC<MultipleLinkToPropTypes> = ({multipleLinks}) => {
     const {locale} = useRouter()
 
-    const renderLinks = (multipleLinks ?? []).sort((a, b) => a.linkIndex - b.linkIndex).map((linkData,index) => {
+    const renderLinks = ([...multipleLinks] || []).sort((a, b) => a.linkIndex - b.linkIndex).map((linkData,index) => {
         const linkTitle = linkData.translations?.[locale]?.linkTitle || linkData.linkTitle;
         const linkDescription = linkData.translations?.[locale]?.linkDescription || linkData.linkDescription;
 

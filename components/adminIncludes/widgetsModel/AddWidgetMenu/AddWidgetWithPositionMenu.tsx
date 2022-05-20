@@ -1,12 +1,13 @@
 import React, {FC, useRef, useState} from 'react';
 import * as widgetModels from './models'
-import {adminAddNewWidget} from '@store/adminActions/adminWidgetsActions'
+// import {adminAddNewWidget} from '@store/adminActions/adminWidgetsActions'
 import convertVariableNameToName from "../../../../_variables/util/convertVariableNameToName";
 import {useDispatch, useSelector} from 'react-redux';
 import styled from "styled-components";
 import staticPositions from '../staticPositions';
 import Draggable from 'react-draggable';
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {fetchAdminPanelAddNewWidget} from "@store_toolkit/adminReducers/adminWidgetsReducer";
 
 
 const AddWidgetWithPositionMenuStyledDiv = styled.div`
@@ -85,13 +86,13 @@ const AddWidgetWithPositionMenu :FC<AddWidgetWithPositionMenuPropType> = ({type,
             widgetIndex: highestIndexInTheSamePosition + 1,
         };
         //@ts-ignore
-        dispatch(adminAddNewWidget(dataToSave))
+        dispatch(fetchAdminPanelAddNewWidget(dataToSave))
        // setTimeout(()=>dispatch(adminGetWidgets()),1000)
         setOpen(false)
 
     }
 
-    const renderPositions = staticPositions.sort((a, b) => a > b ? 1 : -1).map(position => {
+    const renderPositions = [...staticPositions].sort((a, b) => a > b ? 1 : -1).map(position => {
         return (
 
             <button key={'position_'+position}

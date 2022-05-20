@@ -3,7 +3,8 @@ import convertVariableNameToName from "../../../../_variables/util/convertVariab
 import styled from "styled-components";
 import {useRouter} from "next/router";
 import {useDispatch} from "react-redux";
-import {saveFormData} from "@store/clientActions/clientWidgetsActions";
+import {saveWidgetFormData} from "@store_toolkit/clientReducers/widgetsReducer";
+
 
 const FormWidgetStyledDiv = styled.div`
   display: flex;
@@ -91,7 +92,7 @@ const FormWidget: FC<FormWidgetPropTypes> = ({widgetId, uniqueData}) => {
 
     const onSubmitHandler = e => {
         e.preventDefault()
-        dispatch(saveFormData(
+        dispatch(saveWidgetFormData(
             {
                 ...state,
                 date: Date.now()
@@ -100,7 +101,7 @@ const FormWidget: FC<FormWidgetPropTypes> = ({widgetId, uniqueData}) => {
         setSubmit(true)
     }
 
-    const renderFields = ((uniqueData?.formFields || [])
+    const renderFields = (([...uniqueData?.formFields] || [])
         .sort((a, b) => (a.fieldIndex > b.fieldIndex) ? 1 : -1) || [])
         .map(field => {
             const fieldAttr = {

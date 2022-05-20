@@ -1,7 +1,6 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import GlobalStyles from "../global/Styles/GlobalStylesComponent";
 import SiteSettingSetter from "../includes/SiteSettingsSetter/SiteSettingsSetter";
-import {autoUserLogin} from "@store/clientActions/userActions";
 import {useDispatch, useSelector} from 'react-redux';
 import AlertBox from "../includes/AlertBox/AlertBox";
 import dynamic from "next/dynamic";
@@ -13,11 +12,11 @@ const MessengerLayout = props => {
     const globalState = useSelector((store:StoreTypes) => store?.globalState)
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        if (localStorage.wt) {
-            dispatch(autoUserLogin(['username', 'role', 'keyMaster', 'profileImage', 'followingCount', 'followersCount']))
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (localStorage.wt) {
+    //         dispatch(autoUserLogin(['username', 'role', 'keyMaster', 'profileImage', 'followingCount', 'followersCount']))
+    //     }
+    // }, []);
 
     return (
         <div className='MessengerLayout'>

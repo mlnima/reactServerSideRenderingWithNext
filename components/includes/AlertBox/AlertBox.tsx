@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import styled from "styled-components";
 import {useDispatch, useSelector} from 'react-redux';
-import {closeAlert, setAlert} from "@store/clientActions/globalStateActions";
+import {closeAlert, setAlert} from "@store_toolkit/clientReducers/globalStateReducer";
 import Draggable from 'react-draggable';
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {useTranslation} from 'next-i18next';
@@ -45,7 +45,7 @@ const StyledDiv = styled.div`
         display: flex;
         justify-content: center;
 
-        .faTimes{
+        .faTimes {
           width: 25px;
           height: 25px;
           margin: 0 2px;
@@ -62,29 +62,31 @@ const StyledDiv = styled.div`
         width: 25px;
         display: flex;
         justify-content: center;
-        
-        .icon{
+
+        .icon {
           width: 25px;
           height: 25px;
         }
-        
-        .faCheckCircle{
+
+        .faCheckCircle {
           width: 25px;
           height: 25px;
           margin: 0 2px;
           background-color: green;
           mask: url('/public/asset/images/icons/circle-check-solid.svg') no-repeat center;
           -webkit-mask: url('/public/asset/images/icons/circle-check-solid.svg') no-repeat center;
-        }        
-        .faExclamationCircle{
+        }
+
+        .faExclamationCircle {
           width: 25px;
           height: 25px;
           margin: 0 2px;
           background-color: blue;
           mask: url('/public/asset/images/icons/circle-exclamation-solid.svg') no-repeat center;
           -webkit-mask: url('/public/asset/images/icons/circle-exclamation-solid.svg') no-repeat center;
-        }       
-        .faExclamationTriangle{
+        }
+
+        .faExclamationTriangle {
           width: 25px;
           height: 25px;
           margin: 0 2px;
@@ -113,18 +115,17 @@ const AlertBox = () => {
             const component = true
             setTimeout(() => {
                 if (component) {
-                    dispatch(setAlert({message: null, type: null, active: false}))
+                    dispatch(closeAlert(null))
                 }
             }, 3000)
         }
     }, [alert]);
 
     return (
-        <StyledDiv className='alert-box' onClick={() => dispatch(closeAlert())}>
-            {/*//@ts-ignore*/}
+        <StyledDiv className='alert-box' onClick={() => dispatch(closeAlert(null))}>
             <Draggable nodeRef={nodeRef}>
                 <div className='alert-message'>
-                    <div className='alert-message-header' ref={nodeRef} >
+                    <div className='alert-message-header' ref={nodeRef}>
                         <p className='alert-type'>
                             {alert.type === 'success' ?
                                 <span className={'icon faCheckCircle'}/> :
@@ -133,20 +134,23 @@ const AlertBox = () => {
                                     <span className={'icon faExclamationCircle'}/>
                             }
                         </p>
-                        <button className='close-alert' onClick={() => dispatch(closeAlert())}>
+                        <button className='close-alert' onClick={() => dispatch(closeAlert(null))}>
                             <span className={'icon faTimes'}/>
 
                         </button>
                     </div>
                     <p className='alert'>
-                        {/*//@ts-ignore*/}
-                        {t<string>([t<string>(alert.message, {ns: 'common'}), t<string>(alert.message, {ns: 'profile'})])}
+                        {t<string>(
+                            [
+                                t<string>(alert.message, {ns: 'common'}),
+                                t<string>(alert.message, {ns: 'profile'})
+                            ]
+                        )}
                     </p>
                     <p>{alert.err?.stack}</p>
                 </div>
             </Draggable>
         </StyledDiv>
-
     );
 
 };

@@ -1,13 +1,14 @@
 import React, {useEffect} from 'react';
 import {useRouter} from "next/router";
 import styled from "styled-components";
-import {wrapper} from "@store/store";
+import {wrapper} from "@store_toolkit/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useDispatch, useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {adminDeleteForm, adminGetForm} from "@store/adminActions/adminPanelFormsActions";
+// import {adminDeleteForm, adminGetForm} from "@store/adminActions/adminPanelFormsActions";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
+import {fetchAdminDeleteForm, fetchAdminForm} from "@store_toolkit/adminReducers/adminPanelFormsReducer";
 
 let StyledDiv = styled.div`
   .form-data-container {
@@ -36,11 +37,11 @@ const formPage = () => {
     const formData = useSelector(({adminPanelForms}: StoreTypes) => adminPanelForms.form)
 
     useEffect(() => {
-        dispatch(adminGetForm(query.formId))
+        dispatch(fetchAdminForm(query.formId as string))
     }, [pathname]);
 
     const onDeleteHandler = ()=>{
-        dispatch(adminDeleteForm(query.formId))
+        dispatch(fetchAdminDeleteForm(query.formId  as string))
         push('/admin/assets?assetsType=forms').finally()
     }
 

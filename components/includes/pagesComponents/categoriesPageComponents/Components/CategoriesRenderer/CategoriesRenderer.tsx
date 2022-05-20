@@ -49,10 +49,11 @@ const CategoriesRenderer: FC<CategoriesRendererPropTypes> = ({ uniqueData}) => {
             return {
                 categoriesMetas: uniqueData?.metaData ? uniqueData?.metaData : posts?.categoriesMetas,
                 postsPerRawForMobile: settings?.design?.postsPerRawForMobile || 2,
-                cardsCustomStyle:settings.design.cardsCustomStyle|| '',
+                cardsCustomStyle:settings?.design?.cardsCustomStyle|| '',
                 cardWidth:settings?.design?.cardWidthDesktop || 255,
             }
         })
+
 
     return (
         <CategoriesRendererStyledDiv className={'categories-block'}
@@ -60,7 +61,7 @@ const CategoriesRenderer: FC<CategoriesRendererPropTypes> = ({ uniqueData}) => {
                                      cardsCustomStyle={cardsCustomStyle}
                                      postsPerRawForMobile={postsPerRawForMobile}>
 
-            {categoriesMetas.map((category, index) => {
+            {categoriesMetas?.map((category, index) => {
                      return (
                          <CategoryCard category={category}
                                        key={category._id}

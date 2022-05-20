@@ -4,7 +4,8 @@ import {faPlus, faTimes, faUpload} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {adminPanelUploadFile} from "@store/adminActions/adminPanelFileManagerActions";
+import {fetchFileManagerUploadFile} from "@store_toolkit/adminReducers/adminPanelFileManagerReducer";
+
 let StyledDiv = styled.div`
     display: flex;
     .product-information-image-preview{
@@ -94,8 +95,8 @@ const ImageGallery:FC<ImageGalleryPropTypes> = ({onChangeHandler, rendering}) =>
         filesData.append('uploadingFile', e.target.files[0])
         filesData.append('type', 'gallery')
 
-        dispatch(adminPanelUploadFile(filesData,'postImageGallery',post))
 
+        dispatch(fetchFileManagerUploadFile({file: filesData, useType:'postImageGallery',postData:post}))
         // uploadFiles(filesData).then(res => {
         //     // labelOutputElement.current.value =res.data.path
         //     const e = {

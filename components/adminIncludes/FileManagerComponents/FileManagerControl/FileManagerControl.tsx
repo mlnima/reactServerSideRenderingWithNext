@@ -2,7 +2,7 @@ import React, { useRef, FC} from 'react';
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {adminPanelEditState, adminPanelUploadFile} from "@store/adminActions/adminPanelFileManagerActions";
+import {fetchFileManagerUploadFile,adminPanelFileManagerEditState} from "@store_toolkit/adminReducers/adminPanelFileManagerReducer";
 
 const FileManagerControlStyledDiv = styled.div`
   margin: 20px 0;
@@ -47,7 +47,7 @@ const FileManagerControl:FC = () => {
         let splitPath = path.split('/');
         let lastItemPlusSlash = '/' + splitPath[splitPath?.length - 1];
         let newPath = path.replace(lastItemPlusSlash, '');
-        dispatch(adminPanelEditState({path: newPath}))
+        dispatch(adminPanelFileManagerEditState({path: newPath}))
     };
 
     const clearClickedItemHandler = e => {
@@ -58,18 +58,18 @@ const FileManagerControl:FC = () => {
     };
 
     const onChaneHandler = e => {
-        dispatch(adminPanelEditState({[e.target.name]: e.target.value}))
+        dispatch(adminPanelFileManagerEditState({[e.target.name]: e.target.value}))
     }
 
     const onUploadHandler = e => {
         const filesData = new FormData()
         filesData.append('token', localStorage.wt)
         filesData.append('uploadingFile', e.target.files[0])
-        dispatch(adminPanelUploadFile(filesData,'fileManagerFileUpload'))
+        dispatch(fetchFileManagerUploadFile({file: filesData, useType:'fileManagerFileUpload',postData:null}))
     }
 
     const onCreateNewFileClickHandler = type => {
-        dispatch(adminPanelEditState({
+        dispatch(adminPanelFileManagerEditState({
             createNewFileFolderPop: true,
             createNewFileFolderPopType: type
         }))
@@ -81,28 +81,28 @@ const FileManagerControl:FC = () => {
                 <button onClick={(e) => onGoBackHandler(e)} className={'backBtn btn btn-navigation '}>Back</button>
                 <input ref={addressBar} name='addressBar' onChange={e => onChaneHandler(e)} className="ControlFilesItem"
                        onClick={e => clearClickedItemHandler(e)} value={fileManagerData.path}/>
-                <button onClick={() => dispatch(adminPanelEditState({path: addressBar.current.value}))}
+                <button onClick={() => dispatch(adminPanelFileManagerEditState({path: addressBar.current.value}))}
                         className={'btn btn-navigation'}>Go
                 </button>
             </div>
             <div className="file-Manager-control-quick-access">
-                <button onClick={() => dispatch(adminPanelEditState({path: '.'}))}
+                <button onClick={() => dispatch(adminPanelFileManagerEditState({path: '.'}))}
                         className={'btn btn-navigation'}>
                     Root
                 </button>
-                <button onClick={() => dispatch(adminPanelEditState({path: './public/uploads/image'}))}
+                <button onClick={() => dispatch(adminPanelFileManagerEditState({path: './public/uploads/image'}))}
                         className={'btn btn-navigation'}>
                     Images
                 </button>
-                <button onClick={() => dispatch(adminPanelEditState({path: './public'}))}
+                <button onClick={() => dispatch(adminPanelFileManagerEditState({path: './public'}))}
                         className={'btn btn-navigation'}>
                     Public
                 </button>
-                <button onClick={() => dispatch(adminPanelEditState({path: './public/uploads/video'}))}
+                <button onClick={() => dispatch(adminPanelFileManagerEditState({path: './public/uploads/video'}))}
                         className={'btn btn-navigation'}>
                     Videos
                 </button>
-                <button onClick={() => dispatch(adminPanelEditState({path: './public/uploads/application'}))}
+                <button onClick={() => dispatch(adminPanelFileManagerEditState({path: './public/uploads/application'}))}
                         className={'btn btn-navigation'}>Applications
                 </button>
                 <input ref={uploadInputElement} type='file' style={{display: 'none'}}

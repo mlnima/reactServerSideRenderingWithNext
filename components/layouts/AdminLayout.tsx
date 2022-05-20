@@ -3,7 +3,6 @@ import dynamic from "next/dynamic";
 import AdminPanelTopBar from "../adminIncludes/AdminPanelTopBar/AdminPanelTopBar";
 import AdminPanelMainMenu from "../adminIncludes/AdminPanelMainMenu/AdminPanelMainMenu";
 import {useDispatch, useSelector} from 'react-redux';
-import {autoUserLogin} from "@store/clientActions/userActions";
 import AdminPanelGlobalStyles from "../global/Styles/AdminPanelGlobalStyles";
 import Link from "next/link";
 import AdminDataSetter from "../global/AdminDataSetter";
@@ -11,6 +10,7 @@ import GlobalStyles from "../global/Styles/GlobalStylesComponent";
 import styled from "styled-components";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import LoadingV2 from "@components/includes/LoadingV2/LoadingV2";
+import {fetchUserAutoLogin} from "@store_toolkit/clientReducers/userReducer";
 
 const Loading = dynamic(() => import('../includes/Loading/Loading'), {ssr: false})
 const AlertBox = dynamic(() => import('../includes/AlertBox/AlertBox'), {ssr: false})
@@ -69,9 +69,14 @@ const AdminLayout = props => {
     })
 
     useEffect(() => {
-        if (localStorage.wt && !loggedIn) {
-            dispatch(autoUserLogin(['username', 'role', 'keyMaster', 'profileImage']))
-        }
+
+        !!localStorage?.wt && dispatch(
+            fetchUserAutoLogin(
+                {
+                    fields: ['username', 'role', 'keyMaster', 'profileImage', 'followingCount', 'followersCount']
+                }
+            ))
+
     }, [props]);
 
     if (userData.role === 'administrator') {

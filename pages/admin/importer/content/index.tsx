@@ -1,11 +1,12 @@
 import React, { useState, useRef} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {wrapper} from "@store/store";
+import {wrapper} from "@store_toolkit/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {adminSaveNewPost} from "@store/adminActions/adminPanelPostsActions";
+// import {adminSaveNewPost} from "@store/adminActions/adminPanelPostsActions";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
+import {fetchAdminPanelSaveNewPost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
 
 const importContent = () => {
     const userData = useSelector((store:StoreTypes) => store?.user.userData)
@@ -51,7 +52,7 @@ const importContent = () => {
                             return {name: actor.trim(), type: 'actors'}
                         }
                     }) : []
-                    dispatch(adminSaveNewPost(post,null))
+                    dispatch(fetchAdminPanelSaveNewPost({data:post,router:null}))
 
                 }
             }

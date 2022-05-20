@@ -2,7 +2,7 @@ import React from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFileExport} from "@fortawesome/free-solid-svg-icons";
 import {useDispatch} from "react-redux";
-import {setLoading} from "../../../../../store/clientActions/globalStateActions";
+import {setLoading} from "../../../../../ZlegacyCodesAndComponents/store/clientActions/globalStateActions";
 
 const ExportWidget = props => {
     const dispatch = useDispatch()

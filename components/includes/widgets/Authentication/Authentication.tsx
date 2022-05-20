@@ -1,9 +1,11 @@
 import React, {FC, useState} from 'react';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import styled from "styled-components";
 import dynamic from "next/dynamic";
 import AuthenticationNotLoggedInItems from "@components/includes/widgets/Authentication/AuthenticationNotLoggedInItems";
+import {setAlert} from "@store_toolkit/clientReducers/globalStateReducer";
+
 const AuthenticationLoggedInItems = dynamic(() =>
     import('@components/includes/widgets/Authentication/AuthenticationLoggedInItems'),
     { loading: () => <p>Signing in...</p> }
@@ -176,7 +178,7 @@ const AuthenticationStyledDiv = styled.div`
 `
 
 const Authentication: FC = () => {
-
+    const dispatch = useDispatch()
     const {profileImage, loggedIn, username, allowUserToPost, membership} = useSelector(({
                                                                                              user,
                                                                                              settings
@@ -193,6 +195,7 @@ const Authentication: FC = () => {
     const [open, setOpen] = useState(null)
 
     const onOpenCloseHandler = () => {
+        // dispatch(setAlert({message: 'you can not use this username', type: 'error', active: true}))
         setOpen(!open)
     }
 

@@ -1,11 +1,11 @@
 import MessengerConversationsList from "../../components/includes/messengerPageComponents/MessengerConversationsList/MessengerConversationsList";
 import Link from "next/link";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {wrapper} from "@store/store";
+import {wrapper} from "@store_toolkit/store";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import { useSelector} from "react-redux";
 import styled from "styled-components";
-import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import MessengerLayout from "@components/layouts/MessengerLayout";
 import type {ReactElement} from 'react';
 
@@ -44,7 +44,7 @@ const messengerPage = () => {
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     // @ts-ignore
-    await store.dispatch(getDefaultPageData(
+    await getDefaultPageData(
         context,
         [
             'messengerPagePageLeftSidebar',
@@ -54,8 +54,9 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         {
             setHeadData:true,
             page:'messenger'
-        }
-    ))
+        },
+        store
+    )
 
     return {
         props: {

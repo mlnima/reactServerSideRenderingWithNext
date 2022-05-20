@@ -1,14 +1,13 @@
 import Link from 'next/link'
 import styled from "styled-components";
 import {useDispatch} from "react-redux";
-import {
-    adminCheckAndRemoveDeletedVideos,
-    setGeneratePermaLinkForPosts,
-    setMetaThumbnailsAndCount
-} from "@store/adminActions/adminPanelPostsActions";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import React from "react";
+import {
+    fetchAdminCheckAndRemoveDeletedVideos, fetchGeneratePermaLinkForPosts,
+    fetchSetMetaThumbnailsAndCount
+} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
 
 let StyledDiv = styled.div`
   
@@ -55,12 +54,12 @@ const tools = () => {
             <Link href={'/admin/tools/terminal'}>
                 <a className={'btn btn-primary'}>Terminal</a>
             </Link>
-            <button className={'btn btn-primary'} onClick={()=>dispatch(adminCheckAndRemoveDeletedVideos())}>Check and Removed deleted videos</button>
-            <button className={'btn btn-primary'} onClick={()=>dispatch(setGeneratePermaLinkForPosts())}>Generate PermaLink For Posts</button>
-            <button className={'btn btn-primary'} onClick={()=>dispatch(setMetaThumbnailsAndCount())}>Set New Meta Thumbnails And Count Fro Meta</button>
-            <button className={'btn btn-primary'} onClick={()=>dispatch(setMetaThumbnailsAndCount('tags'))}>Set New Thumbnails And Count for Tags  </button>
-            <button className={'btn btn-primary'} onClick={()=>dispatch(setMetaThumbnailsAndCount('categories'))}>Set New Thumbnails And Count for categories  </button>
-            <button className={'btn btn-primary'} onClick={()=>dispatch(setMetaThumbnailsAndCount('actors'))}>Set New Thumbnails And Count for actors  </button>
+            <button className={'btn btn-primary'} onClick={()=>dispatch(fetchAdminCheckAndRemoveDeletedVideos())}>Check and Removed deleted videos</button>
+            <button className={'btn btn-primary'} onClick={()=>dispatch(fetchGeneratePermaLinkForPosts(null))}>Generate PermaLink For Posts</button>
+            <button className={'btn btn-primary'} onClick={()=>dispatch(fetchSetMetaThumbnailsAndCount(null))}>Set New Meta Thumbnails And Count Fro Meta</button>
+            <button className={'btn btn-primary'} onClick={()=>dispatch(fetchSetMetaThumbnailsAndCount('tags'))}>Set New Thumbnails And Count for Tags  </button>
+            <button className={'btn btn-primary'} onClick={()=>dispatch(fetchSetMetaThumbnailsAndCount('categories'))}>Set New Thumbnails And Count for categories  </button>
+            <button className={'btn btn-primary'} onClick={()=>dispatch(fetchSetMetaThumbnailsAndCount('actors'))}>Set New Thumbnails And Count for actors  </button>
         </StyledDiv>
     );
 };

@@ -1,14 +1,15 @@
 import  { useEffect, useState} from 'react';
 import UserSmallPreview from "../../../components/includes/socialComponents/UserSmallPreview/UserSmallPreview";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {wrapper} from "@store/store";
+import {wrapper} from "../../../ZlegacyCodesAndComponents/store/store";
 import {useDispatch, useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {getMultipleUserDataById, getSpecificUserData} from "@store/clientActions/userActions";
+import {getMultipleUserDataById} from "../../../ZlegacyCodesAndComponents/store/clientActions/userActions";
 import styled from "styled-components";
-import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import {getDefaultPageData} from "../../../ZlegacyCodesAndComponents/store/clientActions/globalStateActions";
 import type { ReactElement } from 'react';
 import AppLayout from "@components/layouts/AppLayout";
+import {fetchSpecificUserData} from "@store_toolkit/clientReducers/userReducer";
 
 const FollowingStyledDiv = styled.div`
   max-width: 940px;
@@ -20,7 +21,7 @@ const Following  = ( ) => {
     const [following, setFollowing] = useState([]);
 
     useEffect(() => {
-        dispatch(getSpecificUserData(['following']))
+        dispatch(fetchSpecificUserData({fields:['following']}))
     }, []);
 
 

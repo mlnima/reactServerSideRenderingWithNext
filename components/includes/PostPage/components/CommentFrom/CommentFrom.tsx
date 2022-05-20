@@ -2,9 +2,9 @@ import {FC, useRef} from 'react';
 import styled from "styled-components";
 import {useTranslation} from 'next-i18next';
 import {useDispatch, useSelector} from "react-redux";
-import {setLoginRegisterFormStatus} from "@store/clientActions/globalStateActions";
-import {newComment, getComments} from "@store/clientActions/postsAction";
+import {setLoginRegisterFormStatus} from "../../../../../ZlegacyCodesAndComponents/store/clientActions/globalStateActions";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {fetchNewComment, fetchPostComments} from "@store_toolkit/clientReducers/postsReducer";
 
 const CommentFromStyledForm = styled.form`
  
@@ -56,9 +56,9 @@ const CommentFrom:FC = () => {
                 onDocumentId: _id,
             };
             if (_id) {
-                dispatch(newComment(commentData))
+                dispatch(fetchNewComment(commentData))
                 bodyInput.current.value=''
-                dispatch(getComments(_id))
+                dispatch(fetchPostComments(_id))
             }
         }else {
             dispatch(setLoginRegisterFormStatus('login'))
