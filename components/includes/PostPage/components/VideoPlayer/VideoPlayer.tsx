@@ -73,20 +73,20 @@ const VideoPlayer :FC<PropTypes> = ({descriptionRef}) => {
             mainThumbnail:  mainThumbnail?.includes('http') ?
                             mainThumbnail :
                             `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${mainThumbnail}`,
-            uploadDate: (new Date(updatedAt || createdAt)).toISOString()
+            uploadDate: updatedAt || createdAt ? (new Date(updatedAt || createdAt)).toISOString() :null
 
         }
     },[createdAt,updatedAt])
 
     return (
         <VideoPlayerStyledDiv className='video-player'>
-            {title &&   <meta itemProp="name" content={title}/>}
+            {!!title &&   <meta itemProp="name" content={title}/>}
             {/*//@ts-ignore*/}
-            {descriptionRef?.current &&   <meta itemProp="description" content={descriptionRef?.current?.textContent || ''}/>}
-            {duration &&   <meta itemProp="duration" content={duration}/>}
-            {playerSchemaData.mainThumbnail &&    <meta itemProp="thumbnailUrl" content={playerSchemaData.mainThumbnail}/>}
-            {videoUrl || videoEmbedCode &&    <meta itemProp="embedURL" content={videoUrl || videoEmbedCode}/>}
-            {uploadDate && <meta itemProp="uploadDate" content={uploadDate}/>}
+            {!!descriptionRef?.current &&   <meta itemProp="description" content={descriptionRef?.current?.textContent || ''}/>}
+            {!!duration &&   <meta itemProp="duration" content={duration}/>}
+            {!!playerSchemaData.mainThumbnail &&    <meta itemProp="thumbnailUrl" content={playerSchemaData.mainThumbnail}/>}
+            {!!(videoUrl || videoEmbedCode) &&    <meta itemProp="embedURL" content={videoUrl || videoEmbedCode}/>}
+            {!!uploadDate && <meta itemProp="uploadDate" content={uploadDate}/>}
             {!!actors.length && actors?.map(actor=>{
                 return(
                     <meta key={actor._id} itemProp="actor" content={actor.name}/>
