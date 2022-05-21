@@ -92,7 +92,7 @@ export const widgetsSlice = createSlice({
                 // console.log(action.payload.requestedWidgets)
                 return {
                     ...state,
-                    requestedWidgets: [...new Set([...state.requestedWidgets,...action.payload.requestedWidgets])],
+                    requestedWidgets: [...new Set([...(state.requestedWidgets || []),...(action.payload?.requestedWidgets || [])])],
                     widgetInGroups:action.payload?.widgetInGroups
 
                 }

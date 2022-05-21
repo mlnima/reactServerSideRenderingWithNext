@@ -63,8 +63,12 @@ const VideoPlayer :FC<PropTypes> = ({descriptionRef}) => {
   } = useSelector(({posts}:StoreTypes)=>posts.post)
 
       const uploadDate = useMemo(()=>{
+
           const ISO8601Date = new Date(updatedAt || createdAt)
-          return ISO8601Date.toISOString()
+          if (ISO8601Date){
+              return ISO8601Date.toISOString()
+          }else return null
+
       },[createdAt,updatedAt])
 
 
