@@ -20,7 +20,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/VideoPlayer/VideoPlayer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/VideoPlayer/VideoPlayer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/ActorCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/ActorCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/ArticlePostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/ArticlePostCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/CategoryCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CategoryCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/LearnPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/LearnPostCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/PromotionPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/PromotionPostCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/TagCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/TagCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/VideoPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/VideoPostCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store_toolkit/clientReducers/settingsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/clientReducers/settingsReducer.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +112,7 @@
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\widgetsModel\WidgetModel" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.start">
+  <component name="RunManager" selected="npm.build">
     <configuration name="serverState.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/server/serverState/serverState.js" working-dir="$PROJECT_DIR$/server/serverState">
       <method v="2" />
     </configuration>
@@ -143,9 +151,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.start" />
         <item itemvalue="Node.js.serverState.js" />
         <item itemvalue="Node.js.temp.js" />
       </list>
@@ -1150,7 +1158,7 @@
       <workItem from="1652902882830" duration="16133000" />
       <workItem from="1652944409813" duration="33992000" />
       <workItem from="1653040670851" duration="29096000" />
-      <workItem from="1653091449269" duration="5173000" />
+      <workItem from="1653091449269" duration="6907000" />
     </task>
     <servers />
   </component>

@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "@store_toolkit/store";
-import {HYDRATE} from "next-redux-wrapper";
 import Axios from "@_variables/util/Axios";
+import { isMobile } from 'react-device-detect';
 
 import {setHeadData} from "@store_toolkit/clientReducers/globalStateReducer";
 import _firstRequestHeadDataSetter from "@store_toolkit/_clientVariables/_firstRequestHeadDataSetter";
@@ -77,6 +77,7 @@ export const fetchSettings = createAsyncThunk(
                 requestedSettings: config.requireSettings,
                 design: designData?.data || {},
                 identity: identityData.data || {},
+                isMobile
             }
         }catch (err) {
              console.log(err)
