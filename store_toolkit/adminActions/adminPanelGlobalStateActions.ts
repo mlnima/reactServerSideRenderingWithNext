@@ -1,7 +1,7 @@
 // import axios, {AxiosResponse} from "axios";
 // import {NextRouter} from 'next/router'
 // import {PageTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-// import {GET_CUSTOM_PAGES, SET_SIDEBAR_STATUS} from "../../ZlegacyCodesAndComponents/store/adminTypes";
+// import {GET_CUSTOM_PAGES, SET_SIDEBAR_STATUS} from "../../legacyCodesAndComponents/store/adminTypes";
 // import {CLEAR_REQUESTED_SETTINGS, CLEAR_REQUESTED_WIDGETS, LOADING, SET_ALERT, SET_REQUESTED_WIDGETS} from "../types";
 // import {AnyAction} from "redux";
 // //@ts-ignore

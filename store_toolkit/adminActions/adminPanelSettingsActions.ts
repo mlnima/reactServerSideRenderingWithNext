@@ -1,5 +1,5 @@
-// import {ADMIN_EDIT_DESIGN, ADMIN_EDIT_IDENTITY, ADMIN_EDIT_SETTING, ADMIN_GET_SETTINGS} from "../../ZlegacyCodesAndComponents/store/adminTypes";
-// import {LOADING, SET_ALERT, SET_SETTINGS} from "../../ZlegacyCodesAndComponents/store/types";
+// import {ADMIN_EDIT_DESIGN, ADMIN_EDIT_IDENTITY, ADMIN_EDIT_SETTING, ADMIN_GET_SETTINGS} from "../../legacyCodesAndComponents/store/adminTypes";
+// import {LOADING, SET_ALERT, SET_SETTINGS} from "../../legacyCodesAndComponents/store/types";
 // import Axios from "@_variables/util/Axios";
 // import _getMultipleSettingsQueryGenerator from "@_variables/clientVariables/_getMultipleSettingsQueryGenerator";
 // import {AnyAction} from "redux";

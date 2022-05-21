@@ -104,11 +104,11 @@ const PostMeta: FC<PostMetaPropType> = ({type}) => {
         return (
             <PostMetaStyledDiv className={type + ' post-meta'}>
                 <div className="content">
-                    {type === 'actors' &&
-                        <span className='meta-type'>
-                            {t<string>(`${type.charAt(0).toUpperCase() + type.substring(1)}: `)}
-                        </span>
-                    }
+                    {/*{type === 'actors' &&*/}
+                    {/*    <span className='meta-type'>*/}
+                    {/*        {t<string>(`${type.charAt(0).toUpperCase() + type.substring(1)}: `)}*/}
+                    {/*    </span>*/}
+                    {/*}*/}
                     {renderData}
                 </div>
             </PostMetaStyledDiv>

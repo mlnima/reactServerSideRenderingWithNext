@@ -1,15 +1,12 @@
-import React, {useEffect, useState} from 'react';
-import dynamic from 'next/dynamic'
-// import CheckOutItemPreview from "../../components/includes/checkOutPageComponents/CheckOutItemPreview/CheckOutItemPreview";
+import React, {useState} from 'react';
 import {useRouter} from "next/router";
-// import _ from 'lodash'
 import styled from "styled-components";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {useDispatch, useSelector} from "react-redux";
 import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import {wrapper} from "@store_toolkit/store";
 import type { ReactElement } from 'react';
 import AppLayout from "@components/layouts/AppLayout";
+import {useAppDispatch} from "@store_toolkit/hooks";
 // const PayWithPayPal = dynamic(() => import('../../components/includes/checkOutPageComponents/PayWithPaypal/PayWithPaypal'), {ssr: false})
 
 let StyledDiv = styled.div`
@@ -81,7 +78,7 @@ let StyledDiv = styled.div`
   }
 `
 const checkout = props => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     // const identity = useSelector(store => store?.settings.identity)
     // const userData = useSelector(store => store?.user.userData)
     const router = useRouter()

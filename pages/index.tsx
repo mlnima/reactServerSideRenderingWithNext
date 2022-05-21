@@ -25,13 +25,7 @@ const HomePage = () => {
         }
     })
 
-    const widgets = useSelector(({widgets}: StoreTypes)=>{
-        return widgets.widgetInGroups
-    })
 
-    useEffect(() => {
-        console.log(widgets)
-    }, [widgets]);
 
     return (
         <HomePageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`} stylesData={homePageStyle}>

@@ -2,8 +2,8 @@ import {FC, useState} from 'react';
 import convertVariableNameToName from "../../../../_variables/util/convertVariableNameToName";
 import styled from "styled-components";
 import {useRouter} from "next/router";
-import {useDispatch} from "react-redux";
 import {saveWidgetFormData} from "@store_toolkit/clientReducers/widgetsReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 
 const FormWidgetStyledDiv = styled.div`
@@ -67,7 +67,7 @@ interface FormWidgetPropTypes {
 const FormWidget: FC<FormWidgetPropTypes> = ({widgetId, uniqueData}) => {
 
     const {locale} = useRouter()
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const [state, setState] = useState(() => {
         return {

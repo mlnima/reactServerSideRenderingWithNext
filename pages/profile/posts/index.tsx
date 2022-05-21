@@ -5,9 +5,9 @@ import ProfileImage from "@components/includes/profilePageComponents/ProfileImag
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useSelector} from "react-redux";
 import styled from "styled-components";
-import {wrapper} from "../../../ZlegacyCodesAndComponents/store/store";
+import {wrapper} from "@store_toolkit/store";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {getDefaultPageData} from "../../../ZlegacyCodesAndComponents/store/clientActions/globalStateActions";
+import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import type { ReactElement } from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 

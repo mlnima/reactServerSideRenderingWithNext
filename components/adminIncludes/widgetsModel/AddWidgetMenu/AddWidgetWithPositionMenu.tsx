@@ -1,13 +1,13 @@
 import React, {FC, useRef, useState} from 'react';
 import * as widgetModels from './models'
-// import {adminAddNewWidget} from '@store/adminActions/adminWidgetsActions'
 import convertVariableNameToName from "../../../../_variables/util/convertVariableNameToName";
-import {useDispatch, useSelector} from 'react-redux';
+import { useSelector} from 'react-redux';
 import styled from "styled-components";
 import staticPositions from '../staticPositions';
 import Draggable from 'react-draggable';
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {fetchAdminPanelAddNewWidget} from "@store_toolkit/adminReducers/adminWidgetsReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 
 const AddWidgetWithPositionMenuStyledDiv = styled.div`
@@ -46,13 +46,13 @@ interface AddWidgetWithPositionMenuPropType{
 const AddWidgetWithPositionMenu :FC<AddWidgetWithPositionMenuPropType> = ({type,name}) => {
 
     const adminPanelWidgets = useSelector(({adminPanelWidgets}:StoreTypes) => adminPanelWidgets?.adminPanelWidgets)
-    const nodeRef = React.useRef(null);
+
 
     // const refToElement = useRef(null)
     // const widgets = useSelector((store:StoreTypes) => store?.widgets.widgets)
     const customPages = useSelector((store:StoreTypes) => store?.adminPanelGlobalState?.customPages)
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const [open, setOpen] = useState(false)
 
     const onAddNewWidget = (position:string, type:string) => {
@@ -118,9 +118,9 @@ const AddWidgetWithPositionMenu :FC<AddWidgetWithPositionMenuPropType> = ({type,
     })
 
     const onIncreaseZIndexHandler = () => {
-        if (nodeRef.current) {
-            nodeRef.current.style.zIndex = 10
-        }
+        // if (nodeRef.current) {
+        //     nodeRef.current.style.zIndex = 10
+        // }
     }
     const onReduceZIndexHandler = () => {
         // if (refToElement.current){
@@ -130,9 +130,8 @@ const AddWidgetWithPositionMenu :FC<AddWidgetWithPositionMenuPropType> = ({type,
 
     return (
         //@ts-ignore
-        <Draggable nodeRef={nodeRef}>
-            <AddWidgetWithPositionMenuStyledDiv className='AddWidgetWithPositionMenu'
-                                                ref={nodeRef}
+        <Draggable handle='.handle'>
+            <AddWidgetWithPositionMenuStyledDiv className='AddWidgetWithPositionMenu handle'
                                                 onClickCapture={onIncreaseZIndexHandler}
                                                 onMouseOut={onReduceZIndexHandler}
                                                 // ref={refToElement}

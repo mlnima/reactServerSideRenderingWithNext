@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import styled from "styled-components";
-import {useDispatch} from "react-redux";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import React from "react";
@@ -8,6 +7,7 @@ import {
     fetchAdminCheckAndRemoveDeletedVideos, fetchGeneratePermaLinkForPosts,
     fetchSetMetaThumbnailsAndCount
 } from "@store_toolkit/adminReducers/adminPanelPostsReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 let StyledDiv = styled.div`
   
@@ -47,7 +47,7 @@ let StyledDiv = styled.div`
 
 const tools = () => {
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     return (
         <StyledDiv className={'adminTools'}>

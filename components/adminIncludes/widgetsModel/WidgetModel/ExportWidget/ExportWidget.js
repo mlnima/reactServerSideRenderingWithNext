@@ -1,11 +1,11 @@
 import React from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFileExport} from "@fortawesome/free-solid-svg-icons";
-import {useDispatch} from "react-redux";
-import {setLoading} from "../../../../../ZlegacyCodesAndComponents/store/clientActions/globalStateActions";
+import {useAppDispatch} from "@store_toolkit/hooks";
+import {loading} from "@store_toolkit/clientReducers/globalStateReducer";
 
 const ExportWidget = props => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const onExportHandler = () => {
         const data = [{
             ...props.data,
@@ -15,7 +15,7 @@ const ExportWidget = props => {
         if (window.navigator && window.navigator.msSaveOrOpenBlob) {
             let blob = new Blob([decodeURIComponent(encodeURI(JSON.stringify(data)))], {type: contentType});
             navigator.msSaveOrOpenBlob(blob, filename);
-            dispatch(setLoading(false))
+            dispatch(loading(false))
         } else {
             let a = document.createElement('a');
             a.download = filename;
@@ -24,7 +24,7 @@ const ExportWidget = props => {
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
-            dispatch(setLoading(false))
+            dispatch(loading(false))
         }
     }
 

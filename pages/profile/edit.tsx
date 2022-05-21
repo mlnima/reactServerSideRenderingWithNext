@@ -3,13 +3,13 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
 import {wrapper} from "@store_toolkit/store";
-import {useDispatch} from "react-redux";
 import {fetchUserResetPassword} from "@store_toolkit/clientReducers/userReducer";
 import _passwordValidator from "../../_variables/clientVariables/_passwordValidator";
 import ValidInput from "../../components/includes/LoginRegisterPopup/ValidInput";
 import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
+import {useAppDispatch} from "@store_toolkit/hooks";
 // import {fetchUserAutoLogin} from "@store_toolkit/clientReducers/userReducer";
 
 const EditProfileStyledMain = styled.main`
@@ -63,7 +63,7 @@ interface ChangePasswordData {
 
 const edit = () => {
     const {t} = useTranslation(['common', 'customTranslation', 'profile']);
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const [changePasswordData, setChangePasswordData] = useState<ChangePasswordData>({})
     const [changePasswordDataValidator, setChangePasswordDataValidator] = useState<ChangePasswordDataValidator>({})

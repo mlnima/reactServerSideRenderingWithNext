@@ -1,5 +1,4 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
-import {useDispatch} from "react-redux";
+import React, {ChangeEvent,useState} from 'react';
 import {wrapper} from "@store_toolkit/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
@@ -7,6 +6,7 @@ import postTypes from "../../../../components/global/postTypes";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import {fetchAdminExportPosts} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 // import {adminExportPosts} from "@store/adminActions/adminPanelPostsActions";
 
@@ -32,7 +32,7 @@ const PostsExporterStyledDiv = styled.div`
 `
 
 const postsExporter = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const [data, setData] = useState({
         limit: 10,
         postType: 'video',

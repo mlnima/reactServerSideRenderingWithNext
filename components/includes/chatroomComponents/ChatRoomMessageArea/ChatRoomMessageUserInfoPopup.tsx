@@ -3,13 +3,13 @@ import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import {useRouter} from "next/router";
 import styled from "styled-components";
-import {useDispatch, useSelector} from "react-redux";
-
+import {useSelector} from "react-redux";
 import Draggable from 'react-draggable';
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {fetchStartConversation} from "@store_toolkit/clientReducers/userReducer";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 import {setActiveVisibleProfile} from "@store_toolkit/clientReducers/chatroomReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 
 const ChatRoomMessageUserInfoPopupStyledDiv = styled.div`
@@ -114,12 +114,12 @@ const ChatRoomMessageUserInfoPopupStyledDiv = styled.div`
 const ChatRoomMessageUserInfoPopup = () => {
 
     const {push} = useRouter();
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const {activeVisibleProfile, loggedIn, userId} = useSelector(({chatroom, user}: StoreTypes) => {
         return {
             activeVisibleProfile: chatroom?.activeVisibleProfile,
-            userId: user?.userData._id,
+            userId: user?.userData?._id,
             loggedIn: user?.loggedIn
         }
     })

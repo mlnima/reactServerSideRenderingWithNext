@@ -2,8 +2,7 @@ import React, {useState, useEffect, FC} from 'react';
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useTranslation} from 'next-i18next';
-import {useDispatch, useSelector} from 'react-redux';
-//import {userRegister} from "@store_toolkit/clientActions/userActions";
+import {useSelector} from 'react-redux';
 import styled from "styled-components";
 import { loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 import Draggable from 'react-draggable';
@@ -12,6 +11,7 @@ import _passwordValidator from "../../../_variables/clientVariables/_passwordVal
 import ValidInput from "./ValidInput";
 import {fetchLogin, fetchUserRegister} from "@store_toolkit/clientReducers/userReducer";
 import {setAlert} from "@store_toolkit/clientReducers/globalStateReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const LoginRegisterPopupFormsStyledDiv = styled.div`
   background-color: var(--navigation-background-color, #18181b);
@@ -167,9 +167,8 @@ interface StateValidatorTypes {
 }
 
 const LoginRegisterPopupForms: FC = () => {
-    const nodeRef = React.useRef(null);
     const {t} = useTranslation('common');
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const globalState = useSelector(({globalState}: StoreTypes) => globalState)
     const [submitButtonDisable, setSubmitButtonDisable] = useState(true)
     const [state, setState] = useState<StateTypes>({});
@@ -238,11 +237,11 @@ const LoginRegisterPopupForms: FC = () => {
     }, [state]);
 
     return (
-        <Draggable nodeRef={nodeRef}>
+        <Draggable  handle='.handle'>
             <LoginRegisterPopupFormsStyledDiv response={response}
                                               className='login-register-content'
             >
-                <div className='form-header' ref={nodeRef}>
+                <div className='form-header handle' >
                     <button onClick={() => dispatch(loginRegisterForm(false))}
                             onTouchStart={() => dispatch(loginRegisterForm(false))}
                             className='close-form-button' title={t(`Close`)}

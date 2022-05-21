@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import styled from "styled-components";
-import {wrapper} from "../../../ZlegacyCodesAndComponents/store/store";
+import {wrapper} from "@store_toolkit/store";
 import {useRouter} from "next/router";
 import CreateEditArticlePostField
     from "@components/includes/profilePageComponents/profilePost/CreateEditArticlePostField/CreateEditArticlePostField";
@@ -11,10 +11,11 @@ import TextInput from "@components/includes/profilePageComponents/profilePost/co
 import MetaDataSelector from "@components/includes/profilePageComponents/profilePost/common/MetaDataSelector";
 import ThumbnailUploader from "@components/includes/profilePageComponents/profilePost/common/ThumbnailUploader";
 import VideoTypeFields from "@components/includes/profilePageComponents/profilePost/VideoTypeFields/VideoTypeFields";
-import {getDefaultPageData} from "../../../ZlegacyCodesAndComponents/store/clientActions/globalStateActions";
+import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 import {fetchUserCreateNewPost, fetchUserEditingPost,fetchUserEditingPostUpdate,editPostField} from "@store_toolkit/clientReducers/postsReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const ProfilePostPageStyledDiv = styled.div`
   margin: 20px 5px;
@@ -41,7 +42,7 @@ const ProfilePostPageStyledDiv = styled.div`
 `
 const post = () => {
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const {query} = useRouter();
     const router = useRouter();
     const postType = query?.postType;

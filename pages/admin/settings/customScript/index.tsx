@@ -1,21 +1,20 @@
 import React from 'react';
 import dynamic from "next/dynamic";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {useDispatch, useSelector} from "react-redux";
-import {updateSetting} from "../../../../ZlegacyCodesAndComponents/store/adminActions/adminPanelSettingsActions";
+import { useSelector} from "react-redux";
 import {wrapper} from "@store_toolkit/store";
-// import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 const Editor = dynamic(() => import('@monaco-editor/react'), {ssr: false})
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
-import {adminEditIdentity} from "@store_toolkit/adminReducers/adminPanelSettingsReducer";
+import {adminEditIdentity, adminPanelUpdateSetting} from "@store_toolkit/adminReducers/adminPanelSettingsReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const customScript = (props: { width: any; height: any; }) => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const identity = useSelector(({adminPanelSettings}: StoreTypes) => adminPanelSettings?.identity)
 
     const onSaveHandler = () => {
-        dispatch(updateSetting('identity', identity))
+        dispatch(adminPanelUpdateSetting({type:'identity',data: identity}))
     }
 
     const onCustomScriptsAsStringChangeHandler = (value: any) => {
@@ -47,7 +46,7 @@ const customScript = (props: { width: any; height: any; }) => {
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
     return {
         props: {
-            // ...(await serverSideTranslations(context.locale as string, ['common'])),
+
         }
     }
 })

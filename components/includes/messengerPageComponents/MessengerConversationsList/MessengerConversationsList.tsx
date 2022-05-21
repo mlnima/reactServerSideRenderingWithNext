@@ -1,9 +1,10 @@
 import React, {useEffect} from 'react';
 import MessengerConversationPreview from "./MessengerConversationPreview";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import MessengerConversationListHeader from "./MessengerConversationListHeader";
 import styled from "styled-components";
 import {fetchConversations} from "@store_toolkit/clientReducers/userReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const MessengerConversationsListStyledDiv = styled.div`
   display: flex;
@@ -15,7 +16,7 @@ const MessengerConversationsListStyledDiv = styled.div`
   }
 `
 const MessengerConversationsList = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     // @ts-ignore
     const conversations = useSelector(store => store.user.conversations)
     // @ts-ignore

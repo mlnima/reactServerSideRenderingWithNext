@@ -8,13 +8,13 @@ import {faCamera} from "@fortawesome/free-solid-svg-icons";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 import {useTranslation} from 'next-i18next';
-import {wrapper} from "../../ZlegacyCodesAndComponents/store/store";
-import {useDispatch, useSelector} from "react-redux";
-// import { getUserPageData} from "@store/clientActions/userActions";
-import {getDefaultPageData} from "../../ZlegacyCodesAndComponents/store/clientActions/globalStateActions";
+import {wrapper} from "@store_toolkit/store";
+import { useSelector} from "react-redux";
+import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 import {fetchSpecificUserData, fetchUserPageData} from "@store_toolkit/clientReducers/userReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const UserPageStyledDiv = styled.div`
   color: var(--main-text-color);
@@ -77,7 +77,7 @@ const UserPageStyledDiv = styled.div`
 
 const user = () => {
     const {t} = useTranslation('common');
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const router = useRouter()
     // @ts-ignore
     const userPageData = useSelector(store => store.user.userPageData)

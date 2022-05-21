@@ -1,21 +1,21 @@
 import React, {FC, useEffect, useState} from 'react';
-import {useDispatch} from "react-redux";
 import MonacoEditor from "../../MonacoEditor/MonacoEditor";
 import DefaultFields from "@components/adminIncludes/widgetsModel/WidgetModel/DefaultFields";
 import {WidgetModelStyledDiv} from './WidgetModelStyle'
 import ActionButtons from "@components/adminIncludes/widgetsModel/WidgetModel/ActionButtons";
 import UniqueFields from "@components/adminIncludes/widgetsModel/WidgetModel/UniqueFields";
 import WidgetHeaderControl from "./WidgetHeaderControl/WidgetHeaderControl";
-import {adminUpdateWidget} from "../../../../ZlegacyCodesAndComponents/store/adminActions/adminWidgetsActions";
 import { WidgetPropTypes} from "@_variables/TypeScriptTypes/Widgets";
 import {onChangeInputValueCorrector} from "@_variables/_variables";
+import {useAppDispatch} from "@store_toolkit/hooks";
+import {fetchAdminPanelUpdateWidget} from "@store_toolkit/adminReducers/adminWidgetsReducer";
 
 interface WidgetModelPropTypes {
     widget:WidgetPropTypes
 }
 
 const WidgetModel: FC<WidgetModelPropTypes> = ({widget}) => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const [widgetSettings, setWidgetSettings] = useState({
         open: false,
@@ -168,7 +168,7 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({widget}) => {
 
     const changeWidgetIndex = (action) => {
         const valueToSet = action ? widgetData.widgetIndex + 1 : widgetData.widgetIndex - 1;
-        dispatch(adminUpdateWidget({
+        dispatch(fetchAdminPanelUpdateWidget({
             _id: widget._id,
             data: {
                 ...widgetData,
@@ -189,7 +189,7 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({widget}) => {
 
 
     const onLockHandler = () => {
-        dispatch(adminUpdateWidget({
+        dispatch(fetchAdminPanelUpdateWidget({
             _id: widget._id,
             data: {
                 ...widgetData,

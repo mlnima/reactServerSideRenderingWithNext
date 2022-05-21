@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
-import {useDispatch} from "react-redux";
 import styled from "styled-components";
 import {setActiveVisibleProfile} from "@store_toolkit/clientReducers/chatroomReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const ChatRoomOnlineUsersListItemStyledDiv = styled.div`
   display: flex;
@@ -54,7 +54,7 @@ interface ChatRoomOnlineUsersListItemPropType{
 
 const ChatRoomOnlineUsersListItem:FC<ChatRoomOnlineUsersListItemPropType> = ({onlineUser}) => {
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     return (
         <ChatRoomOnlineUsersListItemStyledDiv className='chatroom-online-users-list-item'

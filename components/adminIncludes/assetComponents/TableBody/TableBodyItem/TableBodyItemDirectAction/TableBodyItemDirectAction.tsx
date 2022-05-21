@@ -1,12 +1,11 @@
 import React, {FC} from 'react';
 import {useRouter} from "next/router";
 import Link from 'next/link';
-// import {deletePage} from "@_variables/ajaxVariables";
-import {useDispatch} from "react-redux";
 import {fetchAdminPanelBulkActionPost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
 import {fetchAdminDeleteForm} from "@store_toolkit/adminReducers/adminPanelFormsReducer";
 import {fetchAdminPanelDeleteComments} from "@store_toolkit/adminReducers/adminCommentsReducer";
 import {updateQueryGenerator} from "@_variables/_variables";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 interface TableBodyItemDirectActionPropTypes {
     assetsType: string,
@@ -16,7 +15,7 @@ interface TableBodyItemDirectActionPropTypes {
 }
 
 const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({assetsType, _id, postType, title}) => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const {query, push, pathname} = useRouter()
 
 

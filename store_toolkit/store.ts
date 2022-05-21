@@ -1,4 +1,4 @@
-import {AnyAction, combineReducers, configureStore, ThunkAction,} from '@reduxjs/toolkit';
+import {AnyAction, combineReducers, configureStore, ThunkAction} from '@reduxjs/toolkit';
 import {Action} from 'redux';
 import {createWrapper, HYDRATE} from 'next-redux-wrapper';
 import postsSlice from "./clientReducers/postsReducer";
@@ -18,10 +18,6 @@ import adminPanelUsersSlice from "./adminReducers/adminPanelUsersReducer";
 import adminPanelCommentsSlice from "./adminReducers/adminCommentsReducer";
 import adminTerminalSlice from "./adminReducers/adminTerminalReducer";
 // import {adminPanelOrdersReducer} from "./adminReducers/adminPanelOrdersReducer";
-
-//
-
-
 
 const debug = false
 
@@ -48,25 +44,63 @@ const combinedReducer = combineReducers({
 
 
 const reducer = (state: ReturnType<typeof combinedReducer>, action: AnyAction) => {
-    if (action.type === HYDRATE) {
-        const nextState = {
-                    ...state,
-                    ...action.payload, // empty store structure, we will inject necessary data from previous state to avoid extra fetch
-                    user: {
-                        ...(action.payload.user || {}),
-                        //@ts-ignore
-                        userData: state.user?.userData || {}
+
+        if (action.type === HYDRATE) {
+            const nextState = {
+                ...state,
+                ...action.payload,
+                user:{
+                    ...(action?.payload?.user || {}),
+                    //@ts-ignore
+                    userData:  state?.user?.userData || action?.payload?.user?.userData || {}
+                },
+                widgets:{
+                    ...(action?.payload?.widgets || {}),
+                    widgetInGroups:{
+                        ...(action?.payload?.widgets?.widgetInGroups  || {}),
+                        ...(state?.widgets?.widgetInGroups || {})
+                    },
+                    requestedWidgets:[
+                        ...new Set([
+                            ...(action?.payload?.widgets?.requestedWidgets || []),
+                            ...(state?.widgets?.requestedWidgets || [])
+                        ])
+
+                    ]
+                },
+                settings:{
+                    ...(action?.payload?.settings || {}),
+                    identity:{
+                        ...(action?.payload?.settings?.identity  || {}),
+                        ...(state?.settings?.identity || {} )
+                    },
+                    design:{
+                        ...(action?.payload?.settings?.design || {}),
+                        ...(state?.settings?.identity || {})
                     }
-                }
-        return nextState
-    } else {
-        return combinedReducer(state, action);
-    }
+                },
+            }
+
+            // console.log({
+            //     requestedWidgets:nextState.widgets.requestedWidgets,
+            //     requestedSettings:nextState.settings.requestedSettings
+            // })
+            return  nextState
+        } else {
+            return combinedReducer(state, action);
+        }
 };
 
 export const makeStore = () => configureStore({
     reducer,
-    // devTools: process.env.NODE_ENV !== 'production'
+    // middleware: (getDefaultMiddleware) =>
+    //     getDefaultMiddleware({
+    //         thunk: true,
+    //         serializableCheck: false,
+    //         immutableCheck: false,
+    //     }),
+    // devTools: process.env.NODE_ENV !== 'production',
+    devTools: true,
 });
 
 //@ts-ignore
@@ -86,7 +120,7 @@ export const wrapper = createWrapper<Store>(makeStore, {debug});
 //     reducer: {
 
 //         // adminPanelPosts:adminPanelPostsReducer,
-//   xxxx      // adminPanelSettings:adminPanelSettingsReducer,
+//      // adminPanelSettings:adminPanelSettingsReducer,
 //         // adminPanelFileManager:adminPanelFileManagerReducer,
 //         // adminPanelWidgets:adminPanelWidgetsReducer,
 //         // adminPanelForms:adminPanelFormsReducer,
@@ -94,7 +128,7 @@ export const wrapper = createWrapper<Store>(makeStore, {debug});
 //         // adminPanelPages:adminPanelPagesReducer,
 //         // adminPanelComments:adminPanelCommentsReducer,
 //         // adminPanelUsers:adminPanelUsersReducer,
-//  xxxx       // adminPanelGlobalState:adminPanelGlobalStateReducer,
+//       // adminPanelGlobalState:adminPanelGlobalStateReducer,
 //         // adminPanelTerminalState:adminTerminalReducer
 //     },
 //     // middleware: (getDefaultMiddleware) =>

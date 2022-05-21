@@ -1,16 +1,14 @@
 import React, {useEffect, useMemo} from 'react';
-
-import {wrapper} from "../../../ZlegacyCodesAndComponents/store/store";
-import {useDispatch} from "react-redux";
+import {wrapper} from "@store_toolkit/store";
 import {useRouter} from "next/router";
-// import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import {fetchAdminPanelUsers} from "@store_toolkit/adminReducers/adminPanelUsersReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 
 const users = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const {pathname, asPath, query} = useRouter()
     // const usersData = useSelector((store: StoreTypes) => {
     //     return {

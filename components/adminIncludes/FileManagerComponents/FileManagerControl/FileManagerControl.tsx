@@ -1,8 +1,9 @@
 import React, { useRef, FC} from 'react';
 import styled from "styled-components";
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {fetchFileManagerUploadFile,adminPanelFileManagerEditState} from "@store_toolkit/adminReducers/adminPanelFileManagerReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const FileManagerControlStyledDiv = styled.div`
   margin: 20px 0;
@@ -38,7 +39,7 @@ const FileManagerControlStyledDiv = styled.div`
 const FileManagerControl:FC = () => {
     const addressBar = useRef(null)
     const uploadInputElement = useRef(null)
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const fileManagerData = useSelector(({adminPanelFileManager}: StoreTypes) => adminPanelFileManager)
 
     const onGoBackHandler = (e) => {

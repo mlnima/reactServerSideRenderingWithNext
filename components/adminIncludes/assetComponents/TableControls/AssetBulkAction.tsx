@@ -1,15 +1,13 @@
 import React, {FC, useState} from 'react';
-
-// import {adminBulkActionMeta} from "@store/adminActions/adminPanelPostsActions";
-import {useDispatch} from "react-redux";
 import styled from "styled-components";
-import {setAlert} from "../../../../ZlegacyCodesAndComponents/store/clientActions/globalStateActions";
+import {setAlert} from "@store_toolkit/clientReducers/globalStateReducer";
 import {useRouter} from "next/router";
 import {
     fetchAdminBulkActionMeta,
     fetchAdminPanelBulkActionPost
 } from "@store_toolkit/adminReducers/adminPanelPostsReducer";
 import {updateQueryGenerator} from "@_variables/_variables";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const AssetBulkActionStyledDiv = styled.div`
   select {
@@ -27,7 +25,7 @@ interface AssetBulkActionPropTypes {
 }
 
 const AssetBulkAction: FC<AssetBulkActionPropTypes> = ({selectedItems, setSelectedItems}) => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const [status, setStatus] = useState('')
     const {push, pathname, query} = useRouter()
 

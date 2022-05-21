@@ -1,11 +1,12 @@
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {adminEditPost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
 import {FC} from "react";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const RatingOption:FC = () => {
     const post = useSelector((store:StoreTypes) => store?.adminPanelPosts.post);
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     return (
         <select className={'custom-select'}

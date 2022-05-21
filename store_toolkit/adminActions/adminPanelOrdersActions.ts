@@ -1,5 +1,5 @@
-// import {ADMIN_GET_ORDERS, ADMIN_GET_ORDER} from "../../ZlegacyCodesAndComponents/store/adminTypes";
-// import {LOADING} from "../../ZlegacyCodesAndComponents/store/types";
+// import {ADMIN_GET_ORDERS, ADMIN_GET_ORDER} from "../../legacyCodesAndComponents/store/adminTypes";
+// import {LOADING} from "../../legacyCodesAndComponents/store/types";
 // import Axios from "@_variables/util/Axios";
 // import {AxiosError, AxiosResponse} from "axios";
 // import {AnyAction} from "redux";

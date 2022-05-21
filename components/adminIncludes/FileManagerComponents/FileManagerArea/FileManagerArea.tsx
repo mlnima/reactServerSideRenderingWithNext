@@ -6,13 +6,14 @@ import {faCss3Alt, faJs, faSass} from "@fortawesome/free-brands-svg-icons";
 import {faFile, faFolder} from "@fortawesome/free-regular-svg-icons";
 import styled from "styled-components";
 import fileTypeDetector from "@_variables/util/fileTypeDetector";
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 import {
     adminPanelFileManagerEditState,
     fetchFileManagerUploadFile
 } from "@store_toolkit/adminReducers/adminPanelFileManagerReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const FileManagerAreaStyledDiv = styled.div`
   display: grid;
@@ -58,7 +59,7 @@ const FileManagerAreaStyledDiv = styled.div`
 
 
 const FileManagerArea:FC = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const fileManagerData = useSelector(({adminPanelFileManager}: StoreTypes) => adminPanelFileManager)
 
 

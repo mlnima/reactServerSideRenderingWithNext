@@ -1,7 +1,7 @@
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "@store_toolkit/store";
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import dynamic from "next/dynamic";
 import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
@@ -10,18 +10,17 @@ import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import {fetchPost, fetchPostComments, fetchViewPost} from "@store_toolkit/clientReducers/postsReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const Soft404 = dynamic(() =>
     import('@components/includes/Soft404/Soft404'))
 const EditLinkForAdmin = dynamic(() =>
     import('@components/includes/PostPage/components/EditLinkForAdmin/EditLinkForAdmin'))
-
 const LearnTypePostPage = dynamic(() =>
     import('@components/includes/PostPage/LearnTypePostPage/LearnTypePostPage'))
 const VideoTypePostPage = dynamic(() =>
     import('@components/includes/PostPage/VideoTypePostPage/VideoTypePostPage'))
 const PostPage = dynamic(() => import('@components/includes/PostPage/PostPage'))
-
 
 const PageStyle = styled.div`
   
@@ -30,7 +29,8 @@ const PageStyle = styled.div`
 
 const postPage = () => {
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
+    const [isNotFound,setIsNotFound] = useState(false)
 
     const {postType, _id, status, role, sidebar} = useSelector(({posts, user, settings}: StoreTypes) => {
 
@@ -51,6 +51,13 @@ const postPage = () => {
         _id && dispatch(fetchViewPost(_id));
     }, [])
 
+    useEffect(() => {
+        if((status !== 'published' && role !== 'administrator') || !status){
+            setIsNotFound(true)
+        }
+
+        }, [ role,status ]);
+
     return (
         <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
             {role === 'administrator' ? <EditLinkForAdmin/> : null}
@@ -58,8 +65,7 @@ const postPage = () => {
             {((status === 'published' || role === 'administrator') && postType === 'learn') && <LearnTypePostPage/>}
             {((status === 'published' || role === 'administrator') && postType !== 'learn' && postType !== 'video') &&
             <PostPage/>}
-            {(status !== 'published' && role !== 'administrator') && <Soft404/>}
-            {!status && <Soft404/>}
+            {isNotFound && <Soft404/>}
             <SidebarWidgetAreaRenderer sidebar={sidebar} position={'postPage'}/>
         </PageStyle>
     )

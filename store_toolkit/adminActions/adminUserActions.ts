@@ -1,6 +1,6 @@
 // import axios, {AxiosError, AxiosResponse} from "axios";
 // import {AxiosErrorTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-// import {LOADING, SET_ALERT} from "../../ZlegacyCodesAndComponents/store/types";
+// import {LOADING, SET_ALERT} from "../../legacyCodesAndComponents/store/types";
 // import {ADMIN_EDIT_USER_DATA, ADMIN_GET_USER, ADMIN_GET_USERS} from "../adminTypes";
 // import Axios from "@_variables/util/Axios";
 // import {AnyAction} from "redux";

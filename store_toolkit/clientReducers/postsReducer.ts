@@ -12,16 +12,8 @@ import {
     reduceArrayOfDataToIds,
     textContentReplacer
 } from "@_variables/_variables";
-import {
-    DELETE_COMMENT,
-    GET_COMMENTS, GET_EDITING_POST,
-    GET_PAGE_DATA, LIKE_POST,
-    LOADING,
-    SET_ALERT, SET_HEAD_DATA, SET_NOT_FOUND_PAGE, VIEW_POST
-} from "../../ZlegacyCodesAndComponents/store/types";
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import {NextRouter} from "next/router";
-
 // import {createEditPostByUser} from "@store_toolkit/clientActions/postsAction";
 
 interface PostsState {
@@ -307,10 +299,10 @@ export const fetchPageData = createAsyncThunk(
 
                 thunkAPI.dispatch(setNotFoundPage(false))
 
-                return res.data?.pageData || {}
+                return res.data?.pageData || null
             } else {
                 thunkAPI.dispatch(setNotFoundPage(true))
-
+                return  null
             }
 
         })
@@ -531,32 +523,13 @@ export const postsSlice = createSlice({
         },
 
         newComment: (state, action: PayloadAction<any>) => {
-            // const commentsPlusNewComment = [...(state.post?.comments || []), action.payload]
+           console.log(action.payload)
             state.post.comments = action.payload
         },
         deleteComment: (state, action: PayloadAction<any>) => {
             //@ts-ignore
             state.post.comments = state.post.comments.filter(comment => !action.payload.includes(comment._id))
         },
-        // setPost: (state, action: PayloadAction<any>) => {
-        //     return {
-        //         ...state,
-        //         ...action.payload,
-        //     }
-        // },
-        // setMetas: (state, action: PayloadAction<any>) => {
-        //     // console.log(action.payload)
-        //     // state.tagsMetas = action.payload.tagsMetas || []
-        //     // state.categoriesMetas = action.payload.categoriesMetas  || []
-        //     // state.actorsMetas = action.payload.actorsMetas  || []
-        //     // state.totalCount = action.payload.totalCount  || 0
-        //     console.log(action.payload)
-        //     return {
-        //         ...state,
-        //
-        //     }
-        //
-        // },
         likePost: (state, action: PayloadAction<any>) => {
             state.post.likes += 1
         },

@@ -3,17 +3,16 @@ import FileManagerControl from '@components/adminIncludes/FileManagerComponents/
 import FileManagerArea from '@components/adminIncludes/FileManagerComponents/FileManagerArea/FileManagerArea';
 import UploadedPopView from '@components/adminIncludes/FileManagerComponents/UploadedPopView/UploadedPopView'
 import CreateNewFileFolderPop from "../../../components/adminIncludes/FileManagerComponents/CreateNewFileFolderPop/CreateNewFileFolderPop";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {wrapper} from "@store_toolkit/store";
-// import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-// import {adminPanelFileManagerReadPath} from "@store/adminActions/adminPanelFileManagerActions";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import {fetchFilManagerReadPath} from "@store_toolkit/adminReducers/adminPanelFileManagerReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const fileManager = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const fileManagerData = useSelector(({adminPanelFileManager}:StoreTypes)=>adminPanelFileManager)
 
     const [ state, setState ] = useState({

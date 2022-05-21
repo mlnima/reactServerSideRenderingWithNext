@@ -2,11 +2,12 @@ import {useRef} from 'react'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRight} from "@fortawesome/free-solid-svg-icons";
 import {socket} from '@_variables/socket';
-import {useDispatch, useSelector} from "react-redux";
-import {StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
+import { useSelector} from "react-redux";
+
 import styled from "styled-components";
-import {messageToConversation} from "../../../../ZlegacyCodesAndComponents/store/clientActions/userActions";
+// import {messageToConversation} from "../../../../legacyCodesAndComponents/store/clientActions/userActions";
 import {fetchSendAMessageToPrivateConversation} from "@store_toolkit/clientReducers/userReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const MessengerConversationMessageToolsStyledForm = styled.form`
   position: fixed;
@@ -33,7 +34,7 @@ const MessengerConversationMessageToolsStyledForm = styled.form`
 `
 
 const MessengerConversationMessageTools = props => {
-    const dispatch=useDispatch()
+    const dispatch=useAppDispatch()
     const userData = useSelector((store) => store?.user.userData);
     const messageInput = useRef(null)
 

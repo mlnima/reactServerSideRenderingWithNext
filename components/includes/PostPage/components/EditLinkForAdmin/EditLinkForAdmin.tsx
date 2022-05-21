@@ -1,11 +1,12 @@
 import React, {FC} from "react";
 import styled from "styled-components";
 import {useRouter} from "next/router";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import Draggable from 'react-draggable';
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {fetchAdminPanelBulkActionPost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
 import {updateQueryGenerator} from "@_variables/_variables";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const EditLinkForAdminStyledDiv = styled.div`
   display: flex;
@@ -46,7 +47,7 @@ const EditLinkForAdminStyledDiv = styled.div`
 `
 
 const EditLinkForAdmin: FC = () => {
-    const nodeRef = React.useRef(null);
+    const dispatch = useAppDispatch()
     const {query, push, pathname} = useRouter()
     const {_id, status, createdAt, updatedAt} = useSelector(({posts}: StoreTypes) => {
         return {
@@ -62,10 +63,10 @@ const EditLinkForAdmin: FC = () => {
         updateQueryGenerator(query, push, pathname)
     }
 
-    const dispatch = useDispatch()
+
     return (
-        <Draggable nodeRef={nodeRef}>
-            <EditLinkForAdminStyledDiv className='edit-as-admin' ref={nodeRef}>
+        <Draggable handle='.handle'>
+            <EditLinkForAdminStyledDiv className='edit-as-admin handle'>
                 <a className='btn btn-primary' href={`/admin/post?id=${_id}`} target='_blank'>
                     Edit As Admin
                 </a>

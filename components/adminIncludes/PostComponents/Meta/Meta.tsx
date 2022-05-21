@@ -2,11 +2,12 @@ import React, {FC, useRef} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus, faTimes} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector} from "react-redux";
 import {adminEditPost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 // import {uniqBy} from "lodash";
 import {_uniqBy} from "@_variables/util/arrayUtils/_uniqBy";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const MetaStyledDiv = styled.div`
   .add-new-meta {
@@ -39,7 +40,7 @@ interface MetaPropType{
 const Meta:FC<MetaPropType> = props => {
     let newItemsElement = useRef(null);
     const post = useSelector((store:StoreTypes) => store?.adminPanelPosts.post);
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
 
     const deleteItem = (e) => {

@@ -57,7 +57,10 @@ export const globalStateSlice = createSlice({
             state.loading = action.payload
         },
         setAlert: (state, action: PayloadAction<any>) => {
-            state.alert = action.payload
+            state.alert = {
+                ...action.payload,
+                active: true,
+            }
         },
         closeAlert: (state, action: PayloadAction<any>) => {
             state.alert = {

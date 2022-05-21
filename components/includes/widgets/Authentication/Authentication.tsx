@@ -1,10 +1,10 @@
 import React, {FC, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import styled from "styled-components";
 import dynamic from "next/dynamic";
 import AuthenticationNotLoggedInItems from "@components/includes/widgets/Authentication/AuthenticationNotLoggedInItems";
-import {setAlert} from "@store_toolkit/clientReducers/globalStateReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const AuthenticationLoggedInItems = dynamic(() =>
     import('@components/includes/widgets/Authentication/AuthenticationLoggedInItems'),
@@ -178,7 +178,7 @@ const AuthenticationStyledDiv = styled.div`
 `
 
 const Authentication: FC = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const {profileImage, loggedIn, username, allowUserToPost, membership} = useSelector(({
                                                                                              user,
                                                                                              settings

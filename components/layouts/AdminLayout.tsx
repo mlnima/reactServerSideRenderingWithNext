@@ -2,7 +2,7 @@ import React, {useRef, useEffect} from 'react';
 import dynamic from "next/dynamic";
 import AdminPanelTopBar from "../adminIncludes/AdminPanelTopBar/AdminPanelTopBar";
 import AdminPanelMainMenu from "../adminIncludes/AdminPanelMainMenu/AdminPanelMainMenu";
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import AdminPanelGlobalStyles from "../global/Styles/AdminPanelGlobalStyles";
 import Link from "next/link";
 import AdminDataSetter from "../global/AdminDataSetter";
@@ -11,6 +11,7 @@ import styled from "styled-components";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import LoadingV2 from "@components/includes/LoadingV2/LoadingV2";
 import {fetchUserAutoLogin} from "@store_toolkit/clientReducers/userReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const Loading = dynamic(() => import('../includes/Loading/Loading'), {ssr: false})
 const AlertBox = dynamic(() => import('../includes/AlertBox/AlertBox'), {ssr: false})
@@ -54,7 +55,7 @@ const AdminLayoutStyledDiv = styled.div`
 `
 const AdminLayout = props => {
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const container = useRef(null);
     const Admin = useRef(null);
 

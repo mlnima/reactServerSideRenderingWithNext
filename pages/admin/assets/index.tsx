@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import {useRouter} from "next/router";
 import _adminGetPostsQueryGenerator from "@_variables/adminVariables/_adminGetPostsQueryGenerator";
 import {wrapper} from "@store_toolkit/store";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import styled from "styled-components";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
@@ -17,6 +17,7 @@ import {fetchAdminForms} from "@store_toolkit/adminReducers/adminPanelFormsReduc
 import { fetchAdminPanelPages} from "@store_toolkit/adminReducers/adminPanelPagesReducer";
 import {fetchAdminPanelUsers} from "@store_toolkit/adminReducers/adminPanelUsersReducer";
 import {fetchAdminPanelGetComments} from "@store_toolkit/adminReducers/adminCommentsReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const TableHeader = dynamic(
     () => import('@components/adminIncludes/assetComponents/TableHeader/TableHeader'),
@@ -37,7 +38,7 @@ const AdminAssetPageStyledDiv = styled.div`
 `
 const assets = () => {
     const {query, pathname, asPath} = useRouter()
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
 
     const assetPageData = useSelector((store: StoreTypes) => {

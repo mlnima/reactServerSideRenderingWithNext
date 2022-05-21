@@ -1,11 +1,11 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React, {useEffect, useState} from 'react';
 import moment from "moment";
 import Link from "next/link";
-import {faEllipsisV, faSearch, faTrash, faUserCircle} from "@fortawesome/free-solid-svg-icons";
+import {faEllipsisV, faTrash, faUserCircle} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
-import {useDispatch} from "react-redux";
 import {fetchDeleteConversation} from "@store_toolkit/clientReducers/userReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 // import {deleteConversation} from "../../../../store/clientActions/userActions";
 
 const MessengerConversationPreviewStyledDiv = styled.div`
@@ -79,7 +79,7 @@ const MessengerConversationPreviewStyledDiv = styled.div`
   }
 `
 const MessengerConversationPreview = ({conversationData, userId}) => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const [state, setState] = useState({
         username:'',
         profileImage:'',

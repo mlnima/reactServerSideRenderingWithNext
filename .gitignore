@@ -16,8 +16,6 @@
 /temp.txt
 /temp.json
 /temp/*
-/ZlegacyCodesAndComponents
-/ZlegacyCodesAndComponents/*
 generateFakeData.js
 tools/testAPI.js
 /package-lock.json

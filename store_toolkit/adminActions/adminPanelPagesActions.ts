@@ -1,10 +1,10 @@
 // //adminPanelPagesActions
 //
 //
-// import {LOADING} from "../../ZlegacyCodesAndComponents/store/types";
+// import {LOADING} from "../../legacyCodesAndComponents/store/types";
 // import Axios from "@_variables/util/Axios";
 // import axios, {AxiosError, AxiosResponse} from "axios";
-// import {ADMIN_GET_PAGES, ADMIN_GET_PAGE, ADMIN_EDIT_PAGE_FIELD} from "../../ZlegacyCodesAndComponents/store/adminTypes";
+// import {ADMIN_GET_PAGES, ADMIN_GET_PAGE, ADMIN_EDIT_PAGE_FIELD} from "../../legacyCodesAndComponents/store/adminTypes";
 // import {AnyAction} from "redux";
 // //@ts-ignore
 // export const adminGetPages = (data):AnyAction => async dispatch =>{

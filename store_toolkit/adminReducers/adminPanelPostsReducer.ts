@@ -5,8 +5,6 @@ import {AxiosError, AxiosResponse} from "axios";
 import {AxiosErrorTypes, Meta, PageTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {loading, setAlert} from "@store_toolkit/clientReducers/globalStateReducer";
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
-import {ADMIN_GET_META} from "../../ZlegacyCodesAndComponents/store/adminTypes";
-import {LOADING, SET_ALERT} from "../../ZlegacyCodesAndComponents/store/types";
 
 
 interface AdminPanelPosts {
@@ -430,10 +428,29 @@ export const fetchAdminYoutubeDataScrapper = createAsyncThunk(
     })
 
 
+
 export const adminPanelPostsSlice = createSlice({
     name: 'adminPanelPosts',
     initialState,
     reducers: {
+        // @ts-ignore
+        adminDefineNewPost: (state, action: PayloadAction<any>) => {
+            const postType = typeof window !== 'undefined' && localStorage?.preferAdminPostType ? localStorage?.preferAdminPostType : 'standard';
+
+            return {
+                ...state,
+                activeEditingLanguage: 'default',
+                post: {
+                    postType
+                }
+            };
+        },
+        adminChangeActiveEditingLanguage: (state, action: PayloadAction<any>) => {
+            return {
+                ...state,
+                activeEditingLanguage: action.payload
+            };
+        },
         adminEditPost: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
@@ -479,8 +496,13 @@ export const adminPanelPostsSlice = createSlice({
 })
 
 
-export const {adminEditPost, adminEditMeta} = adminPanelPostsSlice.actions
+export const {
+    adminEditPost,
+    adminEditMeta,
+    adminDefineNewPost,
+    adminChangeActiveEditingLanguage
+} = adminPanelPostsSlice.actions
 
 export const adminPanelPostsReducer = (state: RootState) => state?.adminPanelPosts || null
-
+//@ts-ignore
 export default adminPanelPostsSlice.reducer

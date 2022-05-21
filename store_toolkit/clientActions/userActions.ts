@@ -14,7 +14,7 @@ import {
     SET_ALERT,
     SET_CALL_ACCEPTED,
     SET_PARTNER_VIDEO, LOADING, LOGIN_REGISTER_FORM, UPDATE_USER_DATA_FIELD
-} from '../../ZlegacyCodesAndComponents/store/types';
+} from '../../temp/legacyCodesAndComponents/store/types';
 
 import Peer from 'simple-peer'
 import {socket} from '@_variables/socket';

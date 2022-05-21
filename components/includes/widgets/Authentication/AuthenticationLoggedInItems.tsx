@@ -2,10 +2,10 @@ import React, {FC} from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import {useTranslation} from "next-i18next";
-import {setLoginRegisterFormStatus} from "../../../../ZlegacyCodesAndComponents/store/clientActions/globalStateActions";
 import {useRouter} from "next/router";
-import {useDispatch} from "react-redux";
 import {userLogout} from "@store_toolkit/clientReducers/userReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
+import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 
 const AuthenticationLoggedInItemsStyledDiv = styled.div`
   .user-info {
@@ -75,7 +75,7 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
      }) => {
         const {t} = useTranslation('common');
         const {pathname} = useRouter()
-        const dispatch = useDispatch()
+        const dispatch = useAppDispatch()
 
         return (
             <AuthenticationLoggedInItemsStyledDiv className={'authentication-logged-in'}>
@@ -151,7 +151,7 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
 
                     <span className='logged-item logged-in' onClick={(e) => {
                         dispatch(userLogout(null))
-                        dispatch(setLoginRegisterFormStatus(false))
+                        dispatch(loginRegisterForm(false))
                         onOpenCloseHandler(e)
                     }}>
                         <div className={'icon-wrapper'}>

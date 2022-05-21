@@ -8,7 +8,7 @@ import ChatRoomOnlineUsersList
     from "@components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersList";
 import ChatRoomMessageUserInfoPopup
     from "@components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {dispatchSocketId} from "@store_toolkit/clientReducers/userReducer";
 import {setOnlineUsers,setMessages,  newMessage} from '@store_toolkit/clientReducers/chatroomReducer';
 import {wrapper} from "@store_toolkit/store";
@@ -18,9 +18,10 @@ import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateAction
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import MessengerLayout from "@components/layouts/MessengerLayout";
 import type {ReactElement} from 'react';
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const chatRoom = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const user = useSelector((store: StoreTypes) => store.user)
     const [onlineUserListVisibility, setOnlineUserListVisibility] = useState(false)
     const [isJoined, setIsJoined] = useState(false)

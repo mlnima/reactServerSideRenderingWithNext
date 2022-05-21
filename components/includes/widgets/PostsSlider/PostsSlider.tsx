@@ -1,15 +1,15 @@
 import React, {FC, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import useEmblaCarousel from 'embla-carousel-react'
-import {setLoading} from "../../../../ZlegacyCodesAndComponents/store/clientActions/globalStateActions";
 import {useRouter} from "next/router";
 import _shortNumber from "@_variables/clientVariables/_shortNumber";
 import dynamic from "next/dynamic";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import styled from "styled-components";
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import ratingCalculator from "@_variables/util/ratingCalculator";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import Autoplay from "embla-carousel-autoplay";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const ArticlePostCard = dynamic(() => import('@components/includes/cards/ArticlePostCard'))
 const PromotionPostCard = dynamic(() => import('@components/includes/cards/PromotionPostCard'))
@@ -163,7 +163,7 @@ const PostsSlider: FC<PostsSliderPropsTypes> =
 
 
         const {locale} = useRouter()
-        const dispatch = useDispatch()
+        const dispatch = useAppDispatch()
         const [selectedIndex, setSelectedIndex] = useState(0);
         const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
         const [nextBtnEnabled, setNextBtnEnabled] = useState(false);

@@ -1,7 +1,6 @@
 import React,{useRef} from 'react';
 import dynamic from "next/dynamic";
 import 'suneditor/dist/css/suneditor.min.css';
-import SunEditorCore from "suneditor/src/lib/core";
 import {buttonList} from "suneditor-react"
 const SunEditor = dynamic(() => import("suneditor-react"), {ssr: false});
 

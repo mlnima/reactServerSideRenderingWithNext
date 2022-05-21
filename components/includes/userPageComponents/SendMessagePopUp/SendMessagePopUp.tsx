@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import SendMessagePopUpHeader from "./SendMessagePopUpHeader";
-// import {sendMessage} from "../../../../_variables/_userSocialAjaxVariables";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import styled from "styled-components";
-// import {sendMessage} from "@store/clientActions/userActions";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {fetchSendMessage} from "@store_toolkit/clientReducers/userReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const SendMessagePopUpStyledDiv = styled.div`
   display: flex;
@@ -44,7 +43,7 @@ const SendMessagePopUpStyledDiv = styled.div`
     }
 `
 const SendMessagePopUp = props => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const userData = useSelector((store: StoreTypes) => store?.user.userData)
     const [state, setState] = useState({
         sender: userData._id,

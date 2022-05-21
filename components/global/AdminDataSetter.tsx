@@ -1,18 +1,18 @@
 import React, {FC, useEffect} from 'react';
-import {useDispatch,} from "react-redux";
 import {useRouter} from "next/router";
 import Head from 'next/head'
 import {adminPanelGetSettings} from "@store_toolkit/adminReducers/adminPanelSettingsReducer";
 import {fetchCustomPages} from "@store_toolkit/adminReducers/adminPanelGlobalStateReducer";
 import {fetchAdminPanelGetWidgets} from "@store_toolkit/adminReducers/adminWidgetsReducer";
 import {fetchAdminGetWidgets} from "@store_toolkit/clientReducers/widgetsReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 interface AdminDataSetterPropTypes {
     userRole: string
 }
 
 const AdminDataSetter: FC<AdminDataSetterPropTypes> = ({userRole}) => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const {pathname} = useRouter()
 
     useEffect(() => {

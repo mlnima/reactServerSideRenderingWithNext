@@ -2,7 +2,7 @@ import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "@store_toolkit/store";
 import {HYDRATE} from "next-redux-wrapper";
 import Axios from "@_variables/util/Axios";
-// import {isAppleMobileDevice} from "@_variables/_variables";
+
 import {setHeadData} from "@store_toolkit/clientReducers/globalStateReducer";
 import _firstRequestHeadDataSetter from "@store_toolkit/_clientVariables/_firstRequestHeadDataSetter";
 
@@ -17,7 +17,6 @@ interface SettingsStateState {
     requestedSettings: string[]
 }
 
-
 const initialState: SettingsStateState = {
     isMobile: true,
     design: {},
@@ -27,31 +26,29 @@ const initialState: SettingsStateState = {
     requestedSettings: []
 }
 
-
-export const hydrate = createAsyncThunk(
-    HYDRATE,
-    async (payload) => {
-        return payload
-    }
-)
-
+interface FetchSettingsProps{
+    requireSettings: string[],
+    options:{
+        page?:string
+        setHeadData:boolean
+    },
+    context
+}
 
 export const fetchSettings = createAsyncThunk(
     'settings/fetchSettings',
     async (
-        config:{
-            requireSettings: string[],
-            options:{
-                page?:string
-                setHeadData:boolean
-            },
-            context
-        },
+        config:FetchSettingsProps,
         thunkAPI) => {
 
         try {
+            // const prevStore = await thunkAPI.getState()
+            // console.log('_______________________________________________________________________________________')
+            // console.log(prevStore?.settings?.requestedSettings)
+            // console.log(prevStore?.widgets?.requestedWidgets)
 
             // const prevStore = await thunkAPI.getState()
+            // console.log(prevStore.user)
             // const existingSettings = prevStore?.settings?.requestedSettings || [];
             // const differenceSettings =  config.requireSettings.filter(x => !existingSettings?.includes(x));
             //
@@ -88,6 +85,15 @@ export const fetchSettings = createAsyncThunk(
 )
 
 
+// export const fetchSettings = createAsyncThunk(
+//     'settings/fetchSettings',
+//     async (config:FetchSettingsProps, thunkAPI) =>{
+//
+// }
+//
+// )
+
+
 export const settingsSlice = createSlice({
     name: 'settings',
     initialState,
@@ -115,25 +121,16 @@ export const settingsSlice = createSlice({
             // }
         },
     },
-    extraReducers: (builder) => {
-        builder
-            .addCase(hydrate.fulfilled, (state, action: PayloadAction<any>) => {
-                return {
-                    ...state,
-                    ...action.payload?.settings
-                };
-            })
-            .addCase(fetchSettings.fulfilled, (state, action: PayloadAction<any>) => {
-                return {
-                    ...state,
-                    ...action.payload
-                }
-            })
+    extraReducers: (builder) => builder
+        .addCase(fetchSettings.fulfilled, (state, action: PayloadAction<any>) => {
+            return {
+                ...state,
+                ...action.payload
+            }
+        })
 
 
-    }
 })
-
 
 export const {setRequestedSettings, editDesign} = settingsSlice.actions
 
@@ -141,15 +138,3 @@ export const settingsReducer = (state: RootState) => state?.settings || null
 
 export default settingsSlice.reducer
 
-
-// [HYDRATE]: (state, action: PayloadAction<any>) => {
-//     return {
-//         ...state,
-//         isMobile: action.payload?.settings?.isMobile,
-//         design: action.payload?.settings?.design,
-//         identity: action.payload?.settings?.identity,
-//         eCommerce: action.payload?.settings?.eCommerce,
-//         adminSettings: action.payload?.settings?.adminSettings,
-//         requestedSettings: action.payload?.settings?.requestedSettings
-//     };
-// }

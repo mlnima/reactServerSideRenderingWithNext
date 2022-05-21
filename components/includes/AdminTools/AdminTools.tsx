@@ -4,13 +4,12 @@ import {faCogs, faEraser, faUserShield} from "@fortawesome/free-solid-svg-icons"
 import Link from "next/link";
 import styled from "styled-components";
 import Draggable from 'react-draggable';
-import {useDispatch} from "react-redux";
-// import {clearCaches} from "@store_toolkit/adminActions/adminPanelGlobalStateActions";
 import {useRouter} from "next/router";
 import {faPenSquare} from "@fortawesome/free-solid-svg-icons/faPenSquare";
 import {faGear} from "@fortawesome/free-solid-svg-icons/faGear";
 import {faEnvelope} from "@fortawesome/free-solid-svg-icons/faEnvelope";
 import {fetchClearCaches} from "@store_toolkit/adminReducers/adminPanelGlobalStateReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 let StyledDiv = styled.div`
   position: fixed;
@@ -53,17 +52,15 @@ let StyledDiv = styled.div`
 `
 
 const AdminTools: FC = () => {
-    const nodeRef = React.useRef(null);
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const router = useRouter()
     const [open, setOpen] = useState(false)
 
     return (
         //@ts-ignore
-            <Draggable nodeRef={nodeRef}>
+            <Draggable handle='.handle'>
                 <StyledDiv className='admin-tools' >
-                    <button className='admin-tools-item open-button'
-                            ref={nodeRef}
+                    <button className='admin-tools-item open-button handle'
                             onDoubleClick={() => setOpen(!open)}
                             onTouchStartCapture={() => setOpen(!open)}>
                         <FontAwesomeIcon icon={faCogs} className='admin-tools-item-logo'/>

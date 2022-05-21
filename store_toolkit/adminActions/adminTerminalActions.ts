@@ -1,6 +1,6 @@
 // import axios, {AxiosError, AxiosResponse} from "axios";
 // import {AxiosErrorTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-// import {LOADING} from "../../ZlegacyCodesAndComponents/store/types";
+// import {LOADING} from "../../legacyCodesAndComponents/store/types";
 // import {EXECUTE_COMMAND} from "../adminTypes";
 // import {AnyAction} from "redux";
 // //@ts-ignore

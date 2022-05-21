@@ -1,10 +1,11 @@
 import React, {useEffect} from 'react';
 import styled from "styled-components";
-import {useDispatch, useSelector} from 'react-redux';
-import {closeAlert, setAlert} from "@store_toolkit/clientReducers/globalStateReducer";
+import { useSelector} from 'react-redux';
+import {closeAlert} from "@store_toolkit/clientReducers/globalStateReducer";
 import Draggable from 'react-draggable';
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {useTranslation} from 'next-i18next';
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const StyledDiv = styled.div`
   position: fixed;
@@ -105,10 +106,10 @@ const StyledDiv = styled.div`
 `
 
 const AlertBox = () => {
-    const nodeRef = React.useRef(null);
     const {t} = useTranslation(['common', 'customTranslation', 'profile']);
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const alert = useSelector((store: StoreTypes) => store?.globalState?.alert);
+
 
     useEffect(() => {
         if (alert.active) {
@@ -123,9 +124,9 @@ const AlertBox = () => {
 
     return (
         <StyledDiv className='alert-box' onClick={() => dispatch(closeAlert(null))}>
-            <Draggable nodeRef={nodeRef}>
+            <Draggable handle=".handle">
                 <div className='alert-message'>
-                    <div className='alert-message-header' ref={nodeRef}>
+                    <div className='alert-message-header handle' >
                         <p className='alert-type'>
                             {alert.type === 'success' ?
                                 <span className={'icon faCheckCircle'}/> :

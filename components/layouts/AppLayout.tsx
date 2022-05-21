@@ -39,8 +39,6 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
         }
     });
 
-
-
     return (
         <>
             <GlobalStylesComponent/>

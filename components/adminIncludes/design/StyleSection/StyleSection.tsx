@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from "styled-components";
-import {useDispatch, useSelector} from "react-redux";
-import {updateSetting} from "../../../../ZlegacyCodesAndComponents/store/adminActions/adminPanelSettingsActions";
+import { useSelector} from "react-redux";
 import MonacoEditor from "../../MonacoEditor/MonacoEditor";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {adminEditDesign} from "@store_toolkit/adminReducers/adminPanelSettingsReducer";
+import {adminEditDesign, adminPanelUpdateSetting} from "@store_toolkit/adminReducers/adminPanelSettingsReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const StyleSectionStyledDiv = styled.div`
   width: 100%;
@@ -32,7 +32,7 @@ const StyleSectionStyledDiv = styled.div`
 `
 
 const StyleSection = props => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const design = useSelector(({adminPanelSettings}: StoreTypes) => adminPanelSettings?.design)
 
     const onChangeHandler = (event) => {
@@ -44,7 +44,7 @@ const StyleSection = props => {
     }
 
     const onSaveHandler = () => {
-        dispatch(updateSetting('design', design))
+        dispatch(adminPanelUpdateSetting({type:'design',data: design}))
     }
 
     return (

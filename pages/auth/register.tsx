@@ -1,14 +1,14 @@
 import React, {useEffect} from 'react';
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "@store_toolkit/store";
-import {useDispatch} from "react-redux";
 import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import type { ReactElement } from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const Register = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     useEffect(() => {
         dispatch(loginRegisterForm('register'))
     }, []);

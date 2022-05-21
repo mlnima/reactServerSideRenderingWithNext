@@ -1,14 +1,15 @@
 import {FC, useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {fetchUserAutoLogin} from "@store_toolkit/clientReducers/userReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 interface UserAutoLoginPropTypes {
     renderAutoLogin: boolean
 }
 
 const UserAutoLogin: FC<UserAutoLoginPropTypes> = ({renderAutoLogin}) => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const loggedIn = useSelector((store: StoreTypes) => store?.user?.loggedIn)
 
     useEffect(() => {

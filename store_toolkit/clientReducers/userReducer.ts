@@ -4,7 +4,7 @@ import Axios from "@_variables/util/Axios";
 import {loading, setAlert, loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 
 interface UserState {
-    userData: {},
+    userData: any;
     userRatingData: {},
     loggedIn: boolean,
     userPageData: {},
@@ -59,10 +59,20 @@ export const fetchLogin = createAsyncThunk(
     async ({username, password}: Login, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         return await Axios.post('/api/v1/users/login', {username, password}).then(res => {
+            console.log(res.data)
             res?.data?.token ? localStorage.setItem('wt', res.data.token) : null
-            return res.data
+            return {
+                userData: res.data,
+                loggedIn: true
+            }
+
         }).catch((err) => {
+            console.log('err')
             thunkAPI.dispatch(setAlert({message: err?.response?.data?.message, type: 'error'}))
+            return {
+                userData: {},
+                loggedIn: false
+            }
         }).finally(() => {
             thunkAPI.dispatch(loading(false))
         })
@@ -464,13 +474,13 @@ export const userSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(fetchLogin.fulfilled, (state, action: PayloadAction<any>) => {
-            return {
-                ...state,
-                userData: action.payload,
-                loggedIn: true
-            }
-        })
+        builder
+            .addCase(fetchLogin.fulfilled, (state, action: PayloadAction<any>) => {
+                return {
+                    ...state,
+                    ...action.payload
+                }
+            })
             .addCase(fetchUserAutoLogin.fulfilled, (state, action: PayloadAction<any>) => {
                 return {
                     ...state,

@@ -4,9 +4,8 @@ import styled from "styled-components";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import CardImageRenderer from "@components/includes/cards/CardImageRenderer";
-
-import {useDispatch} from "react-redux";
 import {fetchViewPost} from "@store_toolkit/clientReducers/postsReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const CardViews = dynamic(() => import('./asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('./asset/CardRating/CardRating'))
@@ -89,7 +88,7 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
          index
      }) => {
         //direction={direction}
-        const dispatch = useDispatch();
+        const dispatch = useAppDispatch();
         return (
             <PromotionPostCardStyle className={'post-card'} cardWidth={cardWidth}>
                 <a href={post.redirectLink} className='promotion-card-link-external'

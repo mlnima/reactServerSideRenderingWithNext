@@ -4,11 +4,12 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {languagesOptions} from '@_variables/_variables'
 import convertVariableNameToName from "../../../../_variables/util/convertVariableNameToName";
 import styled from "styled-components";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import {adminEditIdentity, adminPanelUpdateSetting} from "@store_toolkit/adminReducers/adminPanelSettingsReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 let StyledForm = styled.form`
   background-color: white;
@@ -95,7 +96,7 @@ let StyledForm = styled.form`
 `
 
 const settings = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const keywordsInput = useRef(null)
     const identity = useSelector(({adminPanelSettings}: StoreTypes) => adminPanelSettings?.identity)
 

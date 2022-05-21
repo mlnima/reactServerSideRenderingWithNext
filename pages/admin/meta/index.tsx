@@ -1,14 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import {useRouter} from "next/router";
-import {wrapper} from "../../../ZlegacyCodesAndComponents/store/store";
+import {wrapper} from "@store_toolkit/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {useDispatch, useSelector} from "react-redux";
-import {
-    adminGetMeta,
-
-} from "../../../ZlegacyCodesAndComponents/store/adminActions/adminPanelPostsActions";
-
+import { useSelector} from "react-redux";
 import {
     adminEditMeta,
     fetchAdminPanelDeleteMeta,
@@ -19,6 +14,7 @@ import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {languagesOptions} from "@_variables/_variables";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 let AdminMetaPageStyledDiv = styled.div`
   width: 95%;
@@ -85,7 +81,7 @@ let AdminMetaPageStyledDiv = styled.div`
 `
 
 const meta = (props: any) => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const meta = useSelector((store: StoreTypes) => store?.adminPanelPosts.meta)
     const router = useRouter()
 

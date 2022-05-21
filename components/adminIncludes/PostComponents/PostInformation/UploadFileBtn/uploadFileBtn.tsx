@@ -2,8 +2,8 @@ import React, { useRef } from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUpload} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
-import {useDispatch} from "react-redux";
 import {fetchFileManagerUploadFile} from "@store_toolkit/adminReducers/adminPanelFileManagerReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const UploadFileBtnStyledDiv = styled.div`
   button{
@@ -16,7 +16,7 @@ const UploadFileBtnStyledDiv = styled.div`
 
 const UploadFileBtn = props => {
     const uploadInputElement = useRef(null)
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const onUploadHandler = e => {
         const filesData = new FormData()

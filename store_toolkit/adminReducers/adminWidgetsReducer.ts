@@ -1,12 +1,10 @@
-import {AdminPanelWidgetsTypes, WidgetPropTypes} from "@_variables/TypeScriptTypes/Widgets";
+import { WidgetPropTypes} from "@_variables/TypeScriptTypes/Widgets";
 import _reduceWidgetsToGroups from "@_variables/_reduceWidgetsToGroups/_reduceWidgetsToGroups";
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "@store_toolkit/store";
-
 import Axios from "@_variables/util/Axios";
 import {AxiosResponse} from "axios";
 import {loading, setAlert} from "@store_toolkit/clientReducers/globalStateReducer";
-
 
 const initialState = {
     adminPanelWidgets: {}
@@ -89,6 +87,26 @@ export const fetchAdminPanelGetWidgets = createAsyncThunk(
             })
     }
 )
+export const fetchAdminPanelUpdateWidget = createAsyncThunk(
+    'adminPanelWidgets/fetchAdminPanelUpdateWidget',
+    async (widgetData: any, thunkAPI) => {
+        thunkAPI.dispatch(loading(true))
+       return  await Axios.post(
+            '/api/admin/widgets/adminUpdateWidget',
+            {widgetData,token: localStorage.wt})
+            .then((res:AxiosResponse<unknown|any>)=>{
+                if (res.data?.updatedWidget){
+                    // dispatch({
+                    //     type: UPDATE_WIDGET,
+                    //     payload: res.data?.updatedWidget
+                    // })
+
+                }
+            }).catch(err=>{
+                console.log(err)
+            }).finally(()=>  thunkAPI.dispatch(loading(false)))
+    }
+)
 
 
 export const fetchAdminPanelAddNewWidget = createAsyncThunk(
@@ -135,6 +153,9 @@ export const fetchAdminPanelDeleteWidget = createAsyncThunk(
         }).finally(() => thunkAPI.dispatch(loading(false)))
     }
 )
+
+
+
 
 
 export const adminPanelWidgetsSlice = createSlice({

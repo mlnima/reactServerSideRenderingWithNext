@@ -2,9 +2,10 @@ import {FC, useEffect, useState} from "react";
 import _shortNumber from '@_variables/clientVariables/_shortNumber'
 import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {fetchDisLikePost, fetchLikePost} from "@store_toolkit/clientReducers/postsReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 // it just prevent user or visitor do not rate multiple time,
 // we need to create session id for none registered user or inject rating posts to the user schema
@@ -81,7 +82,7 @@ interface RatingButtonsPropTypes {
 const RatingButtons: FC<RatingButtonsPropTypes> = ({rating}) => {
 
     const {t} = useTranslation('common');
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const [isRated, setIsRated] = useState(null)
     const {likes, disLikes, views, _id} = useSelector(({posts}: StoreTypes) => {
         return {

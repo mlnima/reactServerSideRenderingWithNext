@@ -1,12 +1,13 @@
 import React, {useState, useRef} from 'react';
 import {animateScroll} from 'react-scroll'
 import styled from "styled-components";
-import {setLoading} from "../../../../ZlegacyCodesAndComponents/store/clientActions/globalStateActions";
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import {terminalCommandExecutor} from "@store_toolkit/adminReducers/adminTerminalReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
+import {loading} from "@store_toolkit/clientReducers/globalStateReducer";
 
 let StyledDiv = styled.div`
   .quickAccess {
@@ -53,7 +54,7 @@ let StyledDiv = styled.div`
 `
 
 const terminal = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const logElement = useRef(null)
     const processIdElement = useRef(null)
     const terminalData = useSelector(({adminPanelTerminalState}: StoreTypes) => {
@@ -77,7 +78,7 @@ const terminal = () => {
 
     const onExecutorHandler = (e, command) => {
         e.preventDefault()
-        dispatch(setLoading(true))
+        dispatch(loading(true))
         dispatch(terminalCommandExecutor(command))
         setTimeout(() => {
             animateScroll.scrollToBottom({containerId: 'terminalLog'})

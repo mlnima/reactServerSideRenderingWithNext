@@ -1,10 +1,11 @@
 import {FC, useRef} from 'react';
 import styled from "styled-components";
 import {useTranslation} from 'next-i18next';
-import {useDispatch, useSelector} from "react-redux";
-import {setLoginRegisterFormStatus} from "../../../../../ZlegacyCodesAndComponents/store/clientActions/globalStateActions";
+import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {fetchNewComment, fetchPostComments} from "@store_toolkit/clientReducers/postsReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
+import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 
 const CommentFromStyledForm = styled.form`
  
@@ -41,7 +42,7 @@ const CommentFromStyledForm = styled.form`
 
 const CommentFrom:FC = () => {
     const {t} = useTranslation('common');
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const _id = useSelector(({posts}:StoreTypes)=>posts.post?._id)
     const userData = useSelector(({user}:StoreTypes) => user?.userData)
     const bodyInput = useRef(null);
@@ -61,7 +62,7 @@ const CommentFrom:FC = () => {
                 dispatch(fetchPostComments(_id))
             }
         }else {
-            dispatch(setLoginRegisterFormStatus('login'))
+            dispatch(loginRegisterForm('login'))
         }
     }
 

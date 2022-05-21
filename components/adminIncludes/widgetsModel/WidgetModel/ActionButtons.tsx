@@ -3,14 +3,14 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faClone, faSave} from "@fortawesome/free-regular-svg-icons";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import ExportWidget from './ExportWidget/ExportWidget'
-import {useDispatch, useSelector} from "react-redux";
-import { adminUpdateWidget} from "../../../../ZlegacyCodesAndComponents/store/adminActions/adminWidgetsActions";
+import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import { WidgetPropTypes} from "@_variables/TypeScriptTypes/Widgets";
 import {
     fetchAdminPanelAddNewWidget,
-    fetchAdminPanelDeleteWidget
+    fetchAdminPanelDeleteWidget, fetchAdminPanelUpdateWidget
 } from "@store_toolkit/adminReducers/adminWidgetsReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 
 interface ActionButtonsPropTypes {
@@ -22,11 +22,11 @@ interface ActionButtonsPropTypes {
 }
 
 const ActionButtons: FC<ActionButtonsPropTypes> = ({widgetData,widgetId,widgetSettings,setWidgetSettings}) => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const widgets = useSelector(({adminPanelWidgets}:StoreTypes) => adminPanelWidgets?.adminPanelWidgets || [])
 
     const onSaveHandler = () => {
-        dispatch(adminUpdateWidget({
+        dispatch(fetchAdminPanelUpdateWidget({
             _id: widgetId,
             data: {
                 ...widgetData,

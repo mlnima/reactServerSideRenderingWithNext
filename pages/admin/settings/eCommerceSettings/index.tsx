@@ -1,7 +1,7 @@
 import React from 'react';
 import EcommerceSettingsInputSection from "../../../../components/adminIncludes/eCommerceSettingsPageComponents/EcommerceSettingsInputSection/EcommerceSettingsInputSection";
 import styled from "styled-components";
-import {wrapper} from "../../../../ZlegacyCodesAndComponents/store/store";
+import {wrapper} from "@store_toolkit/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";

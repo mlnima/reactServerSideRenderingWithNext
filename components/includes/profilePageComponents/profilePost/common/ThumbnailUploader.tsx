@@ -1,10 +1,7 @@
-import React, {FC, useEffect, useRef} from "react";
+import React, {FC,useRef} from "react";
 import styled from "styled-components";
-
-import {useDispatch} from "react-redux";
 import {fetchFileManagerUploadFile} from "@store_toolkit/adminReducers/adminPanelFileManagerReducer";
-// import {editPostField} from "@store/clientActions/postsAction";
-
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const ThumbnailUploaderStyledDiv = styled.div`
   width: 254.99px;
@@ -31,7 +28,7 @@ interface ThumbnailUploaderPropTypes {
 
 const ThumbnailUploader: FC<ThumbnailUploaderPropTypes> = ({mainThumbnail}) => {
     const uploadInputElement = useRef(null)
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const onUploadHandler = e => {
         const filesData = new FormData()

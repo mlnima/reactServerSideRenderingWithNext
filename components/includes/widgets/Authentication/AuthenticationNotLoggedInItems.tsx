@@ -1,11 +1,10 @@
 import React, {FC} from "react";
 import {useTranslation} from "next-i18next";
 import {useRouter} from "next/router";
-import {useDispatch} from "react-redux";
-import {setLoginRegisterFormStatus} from "../../../../ZlegacyCodesAndComponents/store/clientActions/globalStateActions";
 import Link from "next/link";
 import styled from "styled-components";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const AuthenticationNotLoggedInItemsStyledDiv = styled.div`
     
@@ -18,7 +17,7 @@ interface AuthenticationNotLoggedInItemsPropTypes {
 const AuthenticationNotLoggedInItems: FC<AuthenticationNotLoggedInItemsPropTypes> = ({onOpenCloseHandler}) => {
     const {t} = useTranslation('common');
     const {pathname} = useRouter()
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const onLoginButtonClickHandler = ()=>{
         dispatch(loginRegisterForm('login'))

@@ -4,7 +4,7 @@ import UploadedFilePreviewVideo from "./UploadedFilePreviewVideo";
 import UploadedFilePreviewText from "./UploadedFilePreviewText";
 import styled from "styled-components";
 import fileTypeDetector from "@_variables/util/fileTypeDetector";
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector} from "react-redux";
 // import {
 //     // adminPanelFileManagerClosePopup,
 //     // adminPanelFileManagerDeleteFile
@@ -13,6 +13,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {adminPanelFileManagerClosePopup} from '@store_toolkit/adminReducers/adminPanelFileManagerReducer'
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {fetchFilManagerDeleteFile} from "@store_toolkit/adminReducers/adminPanelFileManagerReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const UploadedPopViewStyledDiv = styled.div`
   position: fixed;
@@ -64,7 +65,7 @@ const UploadedPopViewStyledDiv = styled.div`
   }
 `
 const UploadedPopView: FC = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const fileManagerData = useSelector(({adminPanelFileManager}: StoreTypes) => adminPanelFileManager)
     const [state, setState] = useState({
         darkStyle: {

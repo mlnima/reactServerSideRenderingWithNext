@@ -1,10 +1,11 @@
 import React, {useEffect, useRef} from 'react';
 import ChatRoomMessage from "./ChatRoomMessage";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import styled from "styled-components";
 import {setActiveVisibleProfile} from "@store_toolkit/clientReducers/chatroomReducer";
 import {useRouter} from "next/router";
 import {ChatroomMessageTypes, StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const ChatRoomMessageAreaStyledMain = styled.main`
   position: fixed;
@@ -19,7 +20,7 @@ const ChatRoomMessageAreaStyledMain = styled.main`
 `
 
 const ChatRoomMessageArea = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const {locale} = useRouter()
     const messageAreaRef = useRef(null)
 

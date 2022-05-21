@@ -4,10 +4,11 @@ import convertVariableNameToName from "../../../_variables/util/convertVariableN
 import styled from "styled-components";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSortDown} from "@fortawesome/free-solid-svg-icons";
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector} from "react-redux";
 import {setSidebarStatus} from "@store_toolkit/adminReducers/adminPanelGlobalStateReducer";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import { useState} from "react";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 // interface menuItemTypes{
 //     [key:string] :{
@@ -105,7 +106,7 @@ let StyledDiv = styled.div`
 `
 
 const AdminPanelMainMenu = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const sidebar = useSelector(({adminPanelGlobalState}: StoreTypes) => adminPanelGlobalState?.sidebar)
 
     const sidebarItems = {

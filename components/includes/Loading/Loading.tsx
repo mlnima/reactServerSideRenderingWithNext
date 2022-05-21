@@ -5,10 +5,11 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 // import {SyncLoader} from "react-spinners";
 // "@emotion/react": "^11.8.2",
 import ReactLoading from 'react-loading';
-import {useDispatch, useSelector} from "react-redux";
-import {setLoading} from "../../../ZlegacyCodesAndComponents/store/clientActions/globalStateActions";
+import { useSelector} from "react-redux";
+// import {setLoading} from "../../../legacyCodesAndComponents/store/clientActions/globalStateActions";
 import {useRouter} from "next/router";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 let StyledDiv = styled.div`
   position: fixed;
@@ -45,7 +46,7 @@ let StyledDiv = styled.div`
 
 
 const Loading: FC = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const loading = useSelector(({globalState}: StoreTypes) => globalState?.loading)
     const {pathname} = useRouter()
     const [render, setRender] = useState(false)
@@ -61,7 +62,7 @@ const Loading: FC = () => {
     useEffect(() => {
         if (loading) {
             setTimeout(() => {
-                dispatch(setLoading(false))
+                // dispatch(loading(false))
             }, 1000)
         }
     }, [pathname]);
@@ -69,7 +70,7 @@ const Loading: FC = () => {
     if (render) {
         return (
             <StyledDiv className='Loading'>
-                <button className='stopLoading fas fa-times' onClick={() => dispatch(setLoading(false))}>
+                <button className='stopLoading fas fa-times' >
                     <FontAwesomeIcon style={{width: '1rem', height: '1rem'}} icon={faTimes} className='stopLoading'/>
                 </button>
                 <ReactLoading type={'spin'} color={'var(--main-active-color,#f90)'} height={100} width={100} />

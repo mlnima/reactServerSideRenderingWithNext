@@ -9,7 +9,7 @@ import MessengerConversationMessageTools
 import {socket} from '@_variables/socket';
 import MessengerCall from "@components/includes/messengerPageComponents/MessengerCall/MessengerCall";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {wrapper} from "@store_toolkit/store";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
@@ -25,10 +25,11 @@ import {
 } from "@store_toolkit/clientReducers/userReducer";
 import MessengerLayout from "@components/layouts/MessengerLayout";
 import type {ReactElement} from 'react';
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 
 const conversation = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const router = useRouter();
     const userData = useSelector((store: StoreTypes) => store.user.userData);
     const callData = useSelector((store: StoreTypes) => store.user.callData);

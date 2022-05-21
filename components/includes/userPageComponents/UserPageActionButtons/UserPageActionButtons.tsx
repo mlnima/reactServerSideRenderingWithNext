@@ -2,8 +2,7 @@ import React, {FC, useEffect} from 'react';
 import {useRouter} from "next/router";
 import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
-import {useDispatch, useSelector} from "react-redux";
-import {setLoginRegisterFormStatus} from "../../../../ZlegacyCodesAndComponents/store/clientActions/globalStateActions";
+import { useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {
     fetchFollowUser,
@@ -12,6 +11,7 @@ import {
     fetchUnFollowUser
 } from "@store_toolkit/clientReducers/userReducer";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const UserPageActionButtonsStyledDiv = styled.div`
   display: flex;
@@ -51,7 +51,7 @@ interface UserPageActionButtonsPropType {
 const UserPageActionButtons: FC<UserPageActionButtonsPropType> = ({_id}) => {
     const {t} = useTranslation('common');
     const {push} = useRouter()
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const {userData,loggedIn} = useSelector((store: StoreTypes) => store?.user)
     const userPageData = useSelector((store: StoreTypes) => store?.user?.userPageData)
 
@@ -79,7 +79,7 @@ const UserPageActionButtons: FC<UserPageActionButtonsPropType> = ({_id}) => {
             dispatch(fetchStartConversation({_id:userPageData._id, push}))
 
         } else {
-            dispatch(setLoginRegisterFormStatus('login'))
+            dispatch(loginRegisterForm('login'))
         }
 
     }

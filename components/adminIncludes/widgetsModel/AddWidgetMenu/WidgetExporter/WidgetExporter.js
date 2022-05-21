@@ -1,10 +1,11 @@
 import React from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {setLoading} from "../../../../../ZlegacyCodesAndComponents/store/clientActions/globalStateActions";
+import { useSelector} from "react-redux";
+import {useAppDispatch} from "@store_toolkit/hooks";
+import {loading} from "@store_toolkit/clientReducers/globalStateReducer";
 
 const WidgetExporter = () => {
     const widgets = useSelector(store => store?.widgets.widgets)
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const exportAllWidgets=()=>{
         const data = widgets.map(widget=>{
@@ -20,7 +21,8 @@ const WidgetExporter = () => {
         if (window.navigator && window.navigator.msSaveOrOpenBlob) {
             let blob = new Blob([decodeURIComponent(encodeURI(JSON.stringify(data)))], {type: contentType});
             navigator.msSaveOrOpenBlob(blob, filename);
-            dispatch(setLoading(false))
+
+            dispatch(loading(false))
         } else {
             let a = document.createElement('a');
             a.download = filename;
@@ -29,7 +31,8 @@ const WidgetExporter = () => {
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
-            dispatch(setLoading(false))
+
+            dispatch(loading(false))
         }
     }
 

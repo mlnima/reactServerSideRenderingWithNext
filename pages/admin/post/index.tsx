@@ -11,20 +11,15 @@ import {useRouter} from "next/router";
 import PostInformation from "@components/adminIncludes/PostComponents/PostInformation/PostInformation";
 import {languagesOptions} from "@_variables/_variables";
 import styled from "styled-components";
-import {useDispatch, useSelector} from "react-redux";
-import {
-    adminChangeActiveEditingLanguage,
-    // adminGetPost,
-    adminNewPost,
-
-} from "../../../ZlegacyCodesAndComponents/store/adminActions/adminPanelPostsActions";
+import { useSelector} from "react-redux";
 import {adminEditPost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
-import {wrapper} from "../../../ZlegacyCodesAndComponents/store/store";
+import {wrapper} from "@store_toolkit/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
-import {fetchAdminPanelPost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
+import {fetchAdminPanelPost,adminDefineNewPost,adminChangeActiveEditingLanguage} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const AdminPostPageStyledDiv = styled.div`
   display: grid;
@@ -47,7 +42,7 @@ const AdminPostPageStyledDiv = styled.div`
 const Index = () => {
     const post = useSelector((store: StoreTypes) => store.adminPanelPosts.post);
     const activeEditingLanguage = useSelector((store: StoreTypes) => store.adminPanelPosts.activeEditingLanguage);
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const router = useRouter();
     const languageElement = useRef(null)
     const [productInfo, setProductInfo] = useState({})
@@ -56,7 +51,7 @@ const Index = () => {
         if (router.query.id) {
             dispatch(fetchAdminPanelPost(router.query.id as string))
         } else {
-            dispatch(adminNewPost())
+            dispatch(adminDefineNewPost(null))
         }
     }, [router.query.id]);
 
@@ -105,7 +100,7 @@ const Index = () => {
             <AdminPostPageStyledDiv className={'admin-post'}>
                 <div className={'content'}>
                     <select className={'custom-select'} ref={languageElement}
-                            onChange={e => dispatch(adminChangeActiveEditingLanguage(e.target.value))}>
+                            onChange={e => dispatch(adminChangeActiveEditingLanguage(e.target.value as string))}>
                         <option value={'default'}>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL || 'Default'}</option>
                         {languagesOptions}
                     </select>

@@ -1,9 +1,9 @@
 import React, {useRef} from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import styled from "styled-components";
-// import { userProfileImageUpload} from "@store/clientActions/userActions";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {fetchUserProfileImageUpload} from "@store_toolkit/clientReducers/userReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const ProfileImageStyledDiv = styled.div`
   position: relative;
@@ -48,7 +48,7 @@ const ProfileImage = () => {
     const imageElement = useRef(null)
     const uploadInputElement = useRef(null)
     const userData = useSelector((store:StoreTypes) => store?.user?.userData)
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const onUploadHandler = e => {
         const filesData = new FormData()

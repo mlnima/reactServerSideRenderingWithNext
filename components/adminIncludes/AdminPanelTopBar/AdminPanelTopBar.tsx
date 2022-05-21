@@ -4,11 +4,12 @@ import AdminActionMenu from "./AdminActionMenu/AdminActionMenu";
 import Link from 'next/link'
 import {faBars, faHome} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector} from "react-redux";
 import {setSidebarStatus} from "@store_toolkit/adminReducers/adminPanelGlobalStateReducer";
 import {useRouter} from "next/router";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {fetchClearCaches} from "@store_toolkit/adminReducers/adminPanelGlobalStateReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 
 let StyledDiv = styled.div`
@@ -61,7 +62,7 @@ let StyledDiv = styled.div`
 
 const AdminTopBar: FC = () => {
     const router = useRouter()
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const sidebar = useSelector(({adminPanelGlobalState}: StoreTypes) => adminPanelGlobalState?.sidebar)
 
     const AdminSideBarOpenCloseHandler = () => {

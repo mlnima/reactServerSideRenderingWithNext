@@ -1,13 +1,13 @@
 import React, { useState, useRef, ChangeEvent} from 'react';
 import styled from "styled-components";
-import {useDispatch} from "react-redux";
-import {setAlert, setLoading} from "../../../../ZlegacyCodesAndComponents/store/clientActions/globalStateActions";
-import {updateSetting} from "../../../../ZlegacyCodesAndComponents/store/adminActions/adminPanelSettingsActions";
-import {wrapper} from "../../../../ZlegacyCodesAndComponents/store/store";
+import {wrapper} from "@store_toolkit/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import { adminYoutubeDataScrapper} from "../../../../ZlegacyCodesAndComponents/store/adminActions/adminPanelPostsActions";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
+import {useAppDispatch} from "@store_toolkit/hooks";
+import {adminPanelUpdateSetting} from "@store_toolkit/adminReducers/adminPanelSettingsReducer";
+import {loading} from "@store_toolkit/clientReducers/globalStateReducer";
+import {fetchAdminYoutubeDataScrapper} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
 
 let StyledDiv = styled.div`
   .admin-import-page-youtube {
@@ -39,7 +39,7 @@ let StyledDiv = styled.div`
 `
 const youtube = () => {
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const urlsElement = useRef(null)
     const [state, setState] = useState({
         apiKey: '',
@@ -73,7 +73,7 @@ const youtube = () => {
 
         for await (let url of data) {
             if (url.includes('http')) {
-                dispatch(adminYoutubeDataScrapper(url))
+                dispatch(fetchAdminYoutubeDataScrapper(url))
 //                 dispatch(setLoading(true))
 //                 youtubeDataScrapper(url).then(async res => {
 // // @ts-ignore
@@ -117,14 +117,13 @@ const youtube = () => {
     }
 
     const onSaveApiKeyHandler = () => {
-        dispatch(setLoading(true))
-        const data = {
-            apiKey: state.apiKey
-        }
-
-        dispatch(updateSetting('youtubeApiKey', {
-            apiKey: state.apiKey
-        }))
+        dispatch(loading(true))
+        dispatch(adminPanelUpdateSetting(
+            {
+                type:'youtubeApiKey',
+                data:{apiKey: state.apiKey}
+            }
+        ))
     }
 
     const onChaneHandler = (e: ChangeEvent<HTMLInputElement>) => {

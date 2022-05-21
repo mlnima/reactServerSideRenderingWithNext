@@ -3,12 +3,12 @@ import {useRouter} from "next/router";
 import styled from "styled-components";
 import {wrapper} from "@store_toolkit/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-// import {adminDeleteForm, adminGetForm} from "@store/adminActions/adminPanelFormsActions";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import {fetchAdminDeleteForm, fetchAdminForm} from "@store_toolkit/adminReducers/adminPanelFormsReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 let StyledDiv = styled.div`
   .form-data-container {
@@ -33,7 +33,7 @@ let StyledDiv = styled.div`
 
 const formPage = () => {
     const {pathname, query,push} = useRouter()
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const formData = useSelector(({adminPanelForms}: StoreTypes) => adminPanelForms.form)
 
     useEffect(() => {

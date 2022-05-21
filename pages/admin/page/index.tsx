@@ -2,9 +2,9 @@ import React, {ChangeEvent, useEffect} from 'react';
 import {useRouter} from 'next/router'
 import Editor from "@monaco-editor/react";
 import styled from "styled-components";
-import {wrapper} from "../../../ZlegacyCodesAndComponents/store/store";
+import {wrapper} from "@store_toolkit/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {useSelector, useDispatch} from "react-redux";
+import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
@@ -16,6 +16,7 @@ import {
     fetchAdminDeleteCustomPage,
     fetchAdminPanelPage
 } from "@store_toolkit/adminReducers/adminPanelPagesReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 let AdminEditCustomPageStyledDiv = styled.div`
   padding: 10px 1rem;
@@ -38,7 +39,7 @@ let AdminEditCustomPageStyledDiv = styled.div`
 
 const page = (props: any) => {
     const {query, push} = useRouter()
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const pageData = useSelector(({adminPanelPages}: StoreTypes) => adminPanelPages.page)
 
     useEffect(() => {

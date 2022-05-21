@@ -1,6 +1,6 @@
 import React,{useEffect, useRef, useState} from 'react';
 import {useRouter} from "next/router";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import styled from "styled-components";
 import {wrapper} from "@store_toolkit/store";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
@@ -12,6 +12,7 @@ import {
     adminPanelEditUserData,
     fetchAdminPanelUpdateUserData, fetchAdminPanelDeleteUser, fetchAdminPanelChangePassword
 } from "@store_toolkit/adminReducers/adminPanelUsersReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const UserStyledDiv = styled.div`
   .user-admin-edit-profile-page-section {
@@ -71,7 +72,7 @@ const UserStyledDiv = styled.div`
 `
 
 const user = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const router = useRouter()
     const userData = useSelector(({adminPanelUsers}: StoreTypes) => adminPanelUsers.user)
     const APIKeyElement = useRef(null)
