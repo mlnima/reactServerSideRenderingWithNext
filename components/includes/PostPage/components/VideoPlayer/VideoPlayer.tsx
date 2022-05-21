@@ -63,11 +63,15 @@ const VideoPlayer :FC<PropTypes> = ({descriptionRef}) => {
   } = useSelector(({posts}:StoreTypes)=>posts.post)
 
       const uploadDate = useMemo(()=>{
+        try {
+            const ISO8601Date = new Date(updatedAt || createdAt)
+            if (ISO8601Date){
+                return ISO8601Date.toISOString()
+            }else return null
+        }catch (err){
+            return null
+        }
 
-          const ISO8601Date = new Date(updatedAt || createdAt)
-          if (ISO8601Date){
-              return ISO8601Date.toISOString()
-          }else return null
 
       },[createdAt,updatedAt])
 
@@ -77,7 +81,7 @@ const VideoPlayer :FC<PropTypes> = ({descriptionRef}) => {
             mainThumbnail:  mainThumbnail?.includes('http') ?
                             mainThumbnail :
                             `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${mainThumbnail}`,
-            uploadDate: updatedAt || createdAt ? (new Date(updatedAt || createdAt)).toISOString() :null
+            // uploadDate: updatedAt || createdAt ? (new Date(updatedAt || createdAt)).toISOString() :null
 
         }
     },[createdAt,updatedAt])
