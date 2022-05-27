@@ -51,7 +51,9 @@ let StyledDiv = styled.div`
 
 const LoadingV2: FC = () => {
     const dispatch = useAppDispatch()
-    const isLoading = useSelector(({globalState}: StoreTypes) => globalState?.loading)
+    const isLoading = useSelector(({globalState}: StoreTypes) =>{
+        return  globalState?.loading
+    })
     const {events, asPath} = useRouter()
 
 

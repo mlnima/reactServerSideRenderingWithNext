@@ -2,12 +2,12 @@ import PostsPage from "@components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "@store_toolkit/store";
-import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 import {fetchPosts} from "@store_toolkit/clientReducers/postsReducer";
+import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 
 
 let StyledMain = styled.main`
@@ -44,7 +44,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 
 
     // @ts-ignore
-    await getDefaultPageData(
+    await _getServerSideStaticPageData(
         context,
         [
             'postsPageLeftSidebar',

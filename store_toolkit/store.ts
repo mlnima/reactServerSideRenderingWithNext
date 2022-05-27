@@ -28,7 +28,6 @@ const combinedReducer = combineReducers({
     globalState: globalStateSlice,
     chatroom: chatroomSlice,
     posts: postsSlice,
-
     adminPanelUsers:adminPanelUsersSlice,
     adminPanelPages:adminPanelPagesSlice,
     adminPanelGlobalState: adminPanelGlobalStateSlice,
@@ -39,7 +38,6 @@ const combinedReducer = combineReducers({
     adminPanelFileManager:adminPanelFileManagerSlice,
     adminPanelComments:adminPanelCommentsSlice,
     adminPanelTerminalState:adminTerminalSlice
-
 });
 
 
@@ -81,10 +79,6 @@ const reducer = (state: ReturnType<typeof combinedReducer>, action: AnyAction) =
                 },
             }
 
-            // console.log({
-            //     requestedWidgets:nextState.widgets.requestedWidgets,
-            //     requestedSettings:nextState.settings.requestedSettings
-            // })
             return  nextState
         } else {
             return combinedReducer(state, action);
@@ -99,8 +93,8 @@ export const makeStore = () => configureStore({
     //         serializableCheck: false,
     //         immutableCheck: false,
     //     }),
-    // devTools: process.env.NODE_ENV !== 'production',
-    devTools: true,
+    devTools: process.env.NODE_ENV !== 'production',
+    // devTools: true,
 });
 
 //@ts-ignore
@@ -116,29 +110,5 @@ export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,
 
 export const wrapper = createWrapper<Store>(makeStore, {debug});
 
-// export const store = configureStore({
-//     reducer: {
 
-//         // adminPanelPosts:adminPanelPostsReducer,
-//      // adminPanelSettings:adminPanelSettingsReducer,
-//         // adminPanelFileManager:adminPanelFileManagerReducer,
-//         // adminPanelWidgets:adminPanelWidgetsReducer,
-//         // adminPanelForms:adminPanelFormsReducer,
-//         // adminPanelOrders:adminPanelOrdersReducer,
-//         // adminPanelPages:adminPanelPagesReducer,
-//         // adminPanelComments:adminPanelCommentsReducer,
-//         // adminPanelUsers:adminPanelUsersReducer,
-//       // adminPanelGlobalState:adminPanelGlobalStateReducer,
-//         // adminPanelTerminalState:adminTerminalReducer
-//     },
-//     // middleware: (getDefaultMiddleware) =>
-//         // getDefaultMiddleware().concat(pokemonApi.middleware),
-// })
-//
-//
-// // Infer the `RootState` and `AppDispatch` types from the store itself
-// //@ts-ignore
-// export type RootState = ReturnType<typeof store.getState>
-// // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-// export type AppDispatch = typeof store.dispatch
 

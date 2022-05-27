@@ -2,9 +2,8 @@ import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "@store_toolkit/store";
 import Axios from "@_variables/util/Axios";
 import { isMobile } from 'react-device-detect';
-
 import {setHeadData} from "@store_toolkit/clientReducers/globalStateReducer";
-import _firstRequestHeadDataSetter from "@store_toolkit/_clientVariables/_firstRequestHeadDataSetter";
+import _firstRequestHeadDataSetter from "@store_toolkit/_storeVariables/_firstRequestHeadDataSetter";
 
 interface SettingsStateState {
     isMobile: boolean,
@@ -42,20 +41,6 @@ export const fetchSettings = createAsyncThunk(
         thunkAPI) => {
 
         try {
-            // const prevStore = await thunkAPI.getState()
-            // console.log('_______________________________________________________________________________________')
-            // console.log(prevStore?.settings?.requestedSettings)
-            // console.log(prevStore?.widgets?.requestedWidgets)
-
-            // const prevStore = await thunkAPI.getState()
-            // console.log(prevStore.user)
-            // const existingSettings = prevStore?.settings?.requestedSettings || [];
-            // const differenceSettings =  config.requireSettings.filter(x => !existingSettings?.includes(x));
-            //
-            // console.log('prevStore :', prevStore.user.userData)
-            // console.log('existingSettings :', existingSettings)
-            // console.log('requireSettings :', config.requireSettings)
-            // console.log('differenceSettings :', differenceSettings)
 
             const settingsQuery = config.requireSettings.map((setting) => `setting=${setting}`).join('&')
             const fetchedSettings = await Axios.get(`/api/v1/settings/getMultipleSettings?${settingsQuery}`)
@@ -72,7 +57,7 @@ export const fetchSettings = createAsyncThunk(
                     )
                 )
             )
-            // setHeadData(_firstRequestHeadDataSetter(config.context, config.options?.page, config.options?.setHeadData, identityData.data))
+
             return {
                 requestedSettings: config.requireSettings,
                 design: designData?.data || {},
@@ -105,6 +90,12 @@ export const settingsSlice = createSlice({
                 requestedSettings: [...new Set([...state.requestedSettings, ...action.payload])]
             }
         },
+        setSettingsForAdmin: (state, action: PayloadAction<any>) => {
+            return {
+                ...state,
+                ...action.payload
+            }
+        },
         clearRequestedSettings: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
@@ -133,7 +124,7 @@ export const settingsSlice = createSlice({
 
 })
 
-export const {setRequestedSettings, editDesign} = settingsSlice.actions
+export const {setRequestedSettings, editDesign,setSettingsForAdmin} = settingsSlice.actions
 
 export const settingsReducer = (state: RootState) => state?.settings || null
 

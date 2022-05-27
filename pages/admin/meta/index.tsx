@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import {useRouter} from "next/router";
-import {wrapper} from "@store_toolkit/store";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import { useSelector} from "react-redux";
 import {
     adminEditMeta,
@@ -14,7 +12,7 @@ import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {languagesOptions} from "@_variables/_variables";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAdminDispatch} from "@store_toolkit/hooks";
 
 let AdminMetaPageStyledDiv = styled.div`
   width: 95%;
@@ -81,7 +79,7 @@ let AdminMetaPageStyledDiv = styled.div`
 `
 
 const meta = (props: any) => {
-    const dispatch = useAppDispatch()
+    const dispatch = useAdminDispatch()
     const meta = useSelector((store: StoreTypes) => store?.adminPanelPosts.meta)
     const router = useRouter()
 
@@ -272,13 +270,6 @@ const meta = (props: any) => {
 };
 
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    return {
-        props: {
-            ...(await serverSideTranslations(context.locale as string, ['common'])),
-        }
-    }
-})
 
 meta.getLayout = function getLayout(page: ReactElement) {
 

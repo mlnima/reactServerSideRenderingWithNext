@@ -25,7 +25,7 @@ interface ArticlePostCardStylePropTypes {
 }
 
 const ArticlePostCardStyle = styled.article`
-  background-color: var(--post-element-background, #131314);
+  background-color: var(--post-element-background-color, #131314);
   margin: 0 auto;
   width: 100%;
 

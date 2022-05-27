@@ -4,6 +4,7 @@ import Axios from "@_variables/util/Axios";
 import _getMultipleSettingsQueryGenerator from "@_variables/clientVariables/_getMultipleSettingsQueryGenerator";
 import {loading, setAlert} from "@store_toolkit/clientReducers/globalStateReducer";
 import {AxiosResponse} from "axios";
+import {setSettingsForAdmin} from "@store_toolkit/clientReducers/settingsReducer";
 
 interface AdminPanelSettingState {
     design: {},
@@ -36,6 +37,8 @@ export const adminPanelGetSettings = createAsyncThunk(
                     design: designSettings?.data,
                     identity: identitySettings?.data,
                 }
+
+                thunkAPI.dispatch(setSettingsForAdmin(settings))
 
                 return settings
 

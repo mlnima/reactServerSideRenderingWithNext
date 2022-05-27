@@ -6,7 +6,7 @@ import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import {terminalCommandExecutor} from "@store_toolkit/adminReducers/adminTerminalReducer";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAdminDispatch} from "@store_toolkit/hooks";
 import {loading} from "@store_toolkit/clientReducers/globalStateReducer";
 
 let StyledDiv = styled.div`
@@ -54,7 +54,7 @@ let StyledDiv = styled.div`
 `
 
 const terminal = () => {
-    const dispatch = useAppDispatch()
+    const dispatch = useAdminDispatch()
     const logElement = useRef(null)
     const processIdElement = useRef(null)
     const terminalData = useSelector(({adminPanelTerminalState}: StoreTypes) => {

@@ -108,8 +108,7 @@ const StyledDiv = styled.div`
 const AlertBox = () => {
     const {t} = useTranslation(['common', 'customTranslation', 'profile']);
     const dispatch = useAppDispatch();
-    const alert = useSelector((store: StoreTypes) => store?.globalState?.alert);
-
+    const alert = useSelector(({globalState}: StoreTypes) =>  globalState?.alert );
 
     useEffect(() => {
         if (alert.active) {
@@ -148,7 +147,8 @@ const AlertBox = () => {
                             ]
                         )}
                     </p>
-                    <p>{alert.err?.stack}</p>
+                    {/*//@ts-ignore*/}
+                    {!!alert.err?.stack && <p>{alert.err?.stack}</p>}
                 </div>
             </Draggable>
         </StyledDiv>

@@ -7,7 +7,7 @@ import {adminEditPost} from "@store_toolkit/adminReducers/adminPanelPostsReducer
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 // import {uniqBy} from "lodash";
 import {_uniqBy} from "@_variables/util/arrayUtils/_uniqBy";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAdminDispatch} from "@store_toolkit/hooks";
 
 const MetaStyledDiv = styled.div`
   .add-new-meta {
@@ -40,7 +40,7 @@ interface MetaPropType{
 const Meta:FC<MetaPropType> = props => {
     let newItemsElement = useRef(null);
     const post = useSelector((store:StoreTypes) => store?.adminPanelPosts.post);
-    const dispatch = useAppDispatch()
+    const dispatch = useAdminDispatch()
 
 
     const deleteItem = (e) => {

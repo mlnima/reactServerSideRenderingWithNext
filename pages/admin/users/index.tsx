@@ -1,14 +1,12 @@
 import React, {useEffect, useMemo} from 'react';
-import {wrapper} from "@store_toolkit/store";
 import {useRouter} from "next/router";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import {fetchAdminPanelUsers} from "@store_toolkit/adminReducers/adminPanelUsersReducer";
-import {useAppDispatch} from "@store_toolkit/hooks";
-
+import {useAdminDispatch} from "@store_toolkit/hooks";
 
 const users = () => {
-    const dispatch = useAppDispatch()
+    const dispatch = useAdminDispatch()
     const {pathname, asPath, query} = useRouter()
     // const usersData = useSelector((store: StoreTypes) => {
     //     return {
@@ -43,13 +41,6 @@ const users = () => {
     );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    return {
-        props: {
-
-        }
-    }
-})
 
 users.getLayout = function getLayout(page: ReactElement) {
 

@@ -1,14 +1,12 @@
 import React, {useEffect} from 'react';
 import {useRouter} from "next/router";
 import styled from "styled-components";
-import {wrapper} from "@store_toolkit/store";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import {fetchAdminDeleteForm, fetchAdminForm} from "@store_toolkit/adminReducers/adminPanelFormsReducer";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAdminDispatch} from "@store_toolkit/hooks";
 
 let StyledDiv = styled.div`
   .form-data-container {
@@ -33,7 +31,7 @@ let StyledDiv = styled.div`
 
 const formPage = () => {
     const {pathname, query,push} = useRouter()
-    const dispatch = useAppDispatch()
+    const dispatch = useAdminDispatch()
     const formData = useSelector(({adminPanelForms}: StoreTypes) => adminPanelForms.form)
 
     useEffect(() => {
@@ -64,13 +62,7 @@ const formPage = () => {
     );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    return {
-        props: {
-            ...(await serverSideTranslations(context.locale as string, ['common'])),
-        }
-    }
-})
+
 
 formPage.getLayout = function getLayout(page: ReactElement) {
 

@@ -41,7 +41,7 @@
   "exclude": [
     "node_modules",
     "trash",
-    "temp/legacyCodesAndComponents"
+    "tempFiles/legacyCodesAndComponents"
   ],
   "include": [
     "next-env.d.ts",

@@ -7,12 +7,12 @@ import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {wrapper} from "@store_toolkit/store";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import AppLayout from "@components/layouts/AppLayout";
 import type {ReactElement} from 'react'
 import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import React from "react";
 import {fetchMetas} from "@store_toolkit/clientReducers/postsReducer";
+import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 
 const PageStyle = styled.div`
   .actors {
@@ -67,7 +67,7 @@ const actorsPage = () => {
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     // @ts-ignore
-    await getDefaultPageData(
+    await _getServerSideStaticPageData(
         context,
         [
             'actorsPageTop',

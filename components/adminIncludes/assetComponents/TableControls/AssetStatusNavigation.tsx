@@ -13,14 +13,13 @@ const AssetStatusNavigationStyledDiv = styled.div`
   .btn-navigation {
     margin: 0 2px;
   }
-  
 `
 
-const AssetStatusNavigation : FC = () => {
-    const {pathname,query} = useRouter()
+const AssetStatusNavigation: FC = () => {
+    const {pathname, query} = useRouter()
     const postsStatus = ['all', 'draft', 'published', 'pending', 'trash', 'reported'];
 
-    const renderStatus = postsStatus.map((type:string) => {
+    const renderStatus = postsStatus.map((type: string) => {
         return (
             <Link key={type} href={{pathname: pathname, query: {...query, status: type}}}>
                 <a className={'btn btn-navigation'}>

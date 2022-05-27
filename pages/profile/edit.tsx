@@ -6,10 +6,10 @@ import {wrapper} from "@store_toolkit/store";
 import {fetchUserResetPassword} from "@store_toolkit/clientReducers/userReducer";
 import _passwordValidator from "../../_variables/clientVariables/_passwordValidator";
 import ValidInput from "../../components/includes/LoginRegisterPopup/ValidInput";
-import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 import {useAppDispatch} from "@store_toolkit/hooks";
+import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 // import {fetchUserAutoLogin} from "@store_toolkit/clientReducers/userReducer";
 
 const EditProfileStyledMain = styled.main`
@@ -151,13 +151,18 @@ const edit = () => {
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     // @ts-ignore
-    await store.dispatch(getDefaultPageData(
+    await _getServerSideStaticPageData(
         context,
         [
             'profilePageRightSidebar',
             'profilePageLeftSidebar',
             'profilePage'
-        ]))
+        ],
+        {
+
+        },
+        store
+    )
 
     return {
         props: {

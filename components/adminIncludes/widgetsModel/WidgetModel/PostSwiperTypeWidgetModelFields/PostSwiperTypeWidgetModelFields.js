@@ -6,17 +6,27 @@ const PostSwiperTypeWidgetModelFields = props => {
     return (
         <>
 
-            <TextInputFieldForWidget inputTitle='Image Swiper Images Amount In View Mobile :' name='postSwiperAmountMobile' type='number' value={props.postSwiperAmountMobile}
-                                     classNameValue='postSwiperAmountMobile' placeHolder='Post Swiper Images Amount In View Mobile'
+            <TextInputFieldForWidget inputTitle='Image Swiper Images Amount In View Mobile :'
+                                     name='postSwiperAmountMobile' type='number' value={props?.postSwiperAmountMobile}
+                                     classNameValue='postSwiperAmountMobile'
+                                     placeHolder='Post Swiper Images Amount In View Mobile'
                                      onChangeHandler={props.onChangeHandler}/>
-            <TextInputFieldForWidget inputTitle='Image Swiper Images Amount In View Desktop :' name='postSwiperAmountDesktop' type='number' value={props.postSwiperAmountDesktop}
-                                     classNameValue='postSwiperAmountDesktop' placeHolder='Post Swiper Images Amount In View Desktop'
+            <TextInputFieldForWidget inputTitle='Image Swiper Images Amount In View Desktop :'
+                                     name='postSwiperAmountDesktop' type='number' value={props?.postSwiperAmountDesktop}
+                                     classNameValue='postSwiperAmountDesktop'
+                                     placeHolder='Post Swiper Images Amount In View Desktop'
                                      onChangeHandler={props.onChangeHandler}/>
-            <TextInputFieldForWidget inputTitle='Image Swiper Space Between Mobile :' name='postSwiperSpaceBetweenMobile' type='number' value={props.postSwiperSpaceBetweenMobile}
-                                     classNameValue='postSwiperSpaceBetweenMobile' placeHolder='Post Swiper Space Between Mobile'
+            <TextInputFieldForWidget inputTitle='Image Swiper Space Between Mobile :'
+                                     name='postSwiperSpaceBetweenMobile' type='number'
+                                     value={props?.postSwiperSpaceBetweenMobile}
+                                     classNameValue='postSwiperSpaceBetweenMobile'
+                                     placeHolder='Post Swiper Space Between Mobile'
                                      onChangeHandler={props.onChangeHandler}/>
-            <TextInputFieldForWidget inputTitle='Post Swiper Space Between Desktop :' name='postSwiperSpaceBetweenDesktop' type='number' value={props.postSwiperSpaceBetweenDesktop}
-                                     classNameValue='postSwiperSpaceBetweenDesktop' placeHolder='Post Swiper Space Between Desktop'
+            <TextInputFieldForWidget inputTitle='Post Swiper Space Between Desktop :'
+                                     name='postSwiperSpaceBetweenDesktop' type='number'
+                                     value={props?.postSwiperSpaceBetweenDesktop}
+                                     classNameValue='postSwiperSpaceBetweenDesktop'
+                                     placeHolder='Post Swiper Space Between Desktop'
                                      onChangeHandler={props.onChangeHandler}/>
         </>
     );

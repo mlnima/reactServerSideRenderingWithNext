@@ -83,7 +83,7 @@ const DefaultFields: FC<DefaultFieldsPropTypes> =
                 <SelectFieldForWidget title={'Device Type To Render:'}
                                       name={'deviceTypeToRender'}
                                       value={widgetData.deviceTypeToRender}
-                                      options={[ 'mobile', 'desktop']}
+                                      options={['mobile', 'desktop']}
                                       onChangeHandler={onChangeHandler}
                 />
                 <SelectFieldForWidget title={'Specific Day Type To Render:'}

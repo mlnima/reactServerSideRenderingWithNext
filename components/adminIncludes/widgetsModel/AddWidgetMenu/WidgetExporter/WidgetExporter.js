@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSelector} from "react-redux";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAdminDispatch} from "@store_toolkit/hooks";
 import {loading} from "@store_toolkit/clientReducers/globalStateReducer";
 
 const WidgetExporter = () => {
     const widgets = useSelector(store => store?.widgets.widgets)
-    const dispatch = useAppDispatch()
+    const dispatch = useAdminDispatch()
 
     const exportAllWidgets=()=>{
         const data = widgets.map(widget=>{

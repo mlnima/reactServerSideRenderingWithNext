@@ -7,12 +7,12 @@ import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import Link from "next/link";
-import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import AppLayout from "@components/layouts/AppLayout";
 import type {ReactElement} from 'react'
 import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import ActorBio from '../../components/includes/pagesComponents/actorsPageComponents/Components/ActorBio/ActorBio'
 import {fetchPosts} from "@store_toolkit/clientReducers/postsReducer";
+import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
@@ -75,7 +75,7 @@ const actorPage = () => {
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-    await getDefaultPageData(
+    await _getServerSideStaticPageData(
         context,
         [
             'actorPageTop',

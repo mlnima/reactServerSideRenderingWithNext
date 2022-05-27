@@ -5,7 +5,7 @@ import {fetchAdminPanelBulkActionPost} from "@store_toolkit/adminReducers/adminP
 import {fetchAdminDeleteForm} from "@store_toolkit/adminReducers/adminPanelFormsReducer";
 import {fetchAdminPanelDeleteComments} from "@store_toolkit/adminReducers/adminCommentsReducer";
 import {updateQueryGenerator} from "@_variables/_variables";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAdminDispatch} from "@store_toolkit/hooks";
 
 interface TableBodyItemDirectActionPropTypes {
     assetsType: string,
@@ -15,7 +15,7 @@ interface TableBodyItemDirectActionPropTypes {
 }
 
 const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({assetsType, _id, postType, title}) => {
-    const dispatch = useAppDispatch()
+    const dispatch = useAdminDispatch()
     const {query, push, pathname} = useRouter()
 
 

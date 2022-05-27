@@ -2,6 +2,7 @@ import type {NextApiRequest, NextApiResponse} from 'next';
 import {Comment, PostTypes} from "./PostTypes";
 import {AdminPanelUsersState} from "@store_toolkit/adminReducers/adminPanelUsersReducer";
 import {AdminPanelWidgetsTypes, WidgetsStateTypes} from "@_variables/TypeScriptTypes/Widgets";
+import {AdminPanelGlobalState} from "@_variables/TypeScriptTypes/AdminPanelTypes";
 // import {adminPanelFileManagerReducer} from "@store/adminReducers/adminPanelFileManagerReducer";
 
 
@@ -296,7 +297,7 @@ export interface GlobalStateTypes {
     isSiteDesignSet: boolean,
     console: boolean,
     headData:{
-        canonicalUrl: string;
+        canonicalUrl?: string;
         rtaContent?:boolean,
         twitterCard?:boolean,
         canonical?:boolean,
@@ -323,10 +324,10 @@ export interface GlobalStateTypes {
 
     }
     alert: {
-        active: boolean,
-        message: string,
-        type: string,
-        err: {
+        active?: boolean,
+        message?: string,
+        type?: string,
+        err?: {
             stack: any
         }
     }
@@ -420,15 +421,7 @@ export interface AdminPanelOrdersTypes {
     order: any
 }
 
-export interface AdminPanelGlobalState {
-    sidebar: boolean;
-    customPages: string[],
-    users: User[],
-    forms: [],
-    pages: [],
-    metas: [],
-    orders: [],
-}
+
 
 export interface AdminPanelTerminalState {
     command: string,

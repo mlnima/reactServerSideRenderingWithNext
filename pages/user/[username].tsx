@@ -10,11 +10,11 @@ import styled from "styled-components";
 import {useTranslation} from 'next-i18next';
 import {wrapper} from "@store_toolkit/store";
 import { useSelector} from "react-redux";
-import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 import {fetchSpecificUserData, fetchUserPageData} from "@store_toolkit/clientReducers/userReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
+import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 
 const UserPageStyledDiv = styled.div`
   color: var(--main-text-color);
@@ -168,7 +168,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 
 
     // @ts-ignore
-    await store.dispatch(getDefaultPageData(
+    await _getServerSideStaticPageData(
         context,
         [
             'userPageRightSidebar',
@@ -178,7 +178,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             setHeadData: true,
             page: 'user'
         },
-        store))
+        store)
 
     return {
         props: {

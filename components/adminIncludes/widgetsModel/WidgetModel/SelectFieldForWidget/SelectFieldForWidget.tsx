@@ -5,7 +5,7 @@ const SelectFieldForWidgetStyledDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  
+
   p {
     width: 50%;
     margin: 0;
@@ -25,7 +25,7 @@ const SelectFieldForWidget = (props: selectFieldTypes) => {
     return (
         <SelectFieldForWidgetStyledDiv className='selectFieldForWidget'>
             <p>{props.title}</p>
-            <select  name={props.name} onChange={e => props.onChangeHandler(e)} value={props.value}
+            <select name={props.name} onChange={e => props.onChangeHandler(e)} value={props.value}
                     className={'custom-select'} placeholder={'post type'}>
                 <option value=''>select</option>
                 {props.options.map((option: string | number, index: number) => {

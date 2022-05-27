@@ -1,19 +1,24 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import Axios from "@_variables/util/Axios";
 import axios, {AxiosResponse} from "axios";
-import {PageTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import { PageTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {loading, setAlert} from "@store_toolkit/clientReducers/globalStateReducer";
 import {NextRouter} from "next/router";
 import {RootState} from "@store_toolkit/store";
+import {AdminPanelGlobalState} from "@_variables/TypeScriptTypes/AdminPanelTypes";
 
-export interface AdminPanelGlobalState {
-    customPages: string[],
-    sidebar: boolean
-}
 
 const initialState : AdminPanelGlobalState = {
     customPages: [],
+    beforeUnload: false,
     sidebar: false,
+    loading: false,
+    alert: {
+        active: false,
+        type: null,
+        err: null,
+        message: ''
+    }
 }
 
 export const fetchCustomPages = createAsyncThunk(
@@ -52,7 +57,23 @@ export const adminPanelGlobalStateSlice = createSlice({
     reducers: {
         setSidebarStatus:(state, action: PayloadAction<any>) =>{
             state.sidebar = action.payload
-        }
+        },
+        // loading: (state, action: PayloadAction<any>) => {
+        //     state.loading = action.payload
+        // },
+        // setAlert: (state, action: PayloadAction<any>) => {
+        //     state.alert = {
+        //         ...action.payload,
+        //         active: true,
+        //     }
+        // },
+        // closeAlert: (state, action: PayloadAction<any>) => {
+        //     state.alert = {
+        //         active: false,
+        //         type: null,
+        //         message: ''
+        //     }
+        // }
     },
     extraReducers: (builder) => {
         builder.addCase(fetchCustomPages.fulfilled, (state, action: PayloadAction<any>) => {

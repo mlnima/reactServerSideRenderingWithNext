@@ -7,10 +7,11 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
 import {StoreTypes} from '@_variables/TypeScriptTypes/GlobalTypes'
-import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
+
 import type { ReactElement } from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 import {fetchPosts} from "@store_toolkit/clientReducers/postsReducer";
+import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 
 let StyledMain = styled.main`
   width: 100%;
@@ -61,7 +62,7 @@ const searchPage = ( ) => {
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-    await getDefaultPageData(
+    await _getServerSideStaticPageData(
         context,
         [
             'searchPageTop',

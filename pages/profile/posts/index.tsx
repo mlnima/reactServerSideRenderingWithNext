@@ -7,9 +7,9 @@ import {useSelector} from "react-redux";
 import styled from "styled-components";
 import {wrapper} from "@store_toolkit/store";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import type { ReactElement } from 'react';
 import AppLayout from "@components/layouts/AppLayout";
+import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 
 const PostsStyledDiv = styled.div`
   max-width: 940px;
@@ -71,13 +71,13 @@ const Posts = () => {
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
         // @ts-ignore
-        await store.dispatch(getDefaultPageData(
+        await _getServerSideStaticPageData(
             context,
             [
                 'profilePageRightSidebar',
                 'profilePageLeftSidebar',
                 'profilePage'
-            ]))
+            ])
 
         return {
             props: {

@@ -1,5 +1,4 @@
 import React, {useRef, useEffect} from 'react';
-import dynamic from "next/dynamic";
 import AdminPanelTopBar from "../adminIncludes/AdminPanelTopBar/AdminPanelTopBar";
 import AdminPanelMainMenu from "../adminIncludes/AdminPanelMainMenu/AdminPanelMainMenu";
 import {useSelector} from 'react-redux';
@@ -10,11 +9,11 @@ import GlobalStyles from "../global/Styles/GlobalStylesComponent";
 import styled from "styled-components";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import LoadingV2 from "@components/includes/LoadingV2/LoadingV2";
-import {fetchUserAutoLogin} from "@store_toolkit/clientReducers/userReducer";
+import AlertBox from "@components/includes/AlertBox/AlertBox";
 import {useAppDispatch} from "@store_toolkit/hooks";
-
-const Loading = dynamic(() => import('../includes/Loading/Loading'), {ssr: false})
-const AlertBox = dynamic(() => import('../includes/AlertBox/AlertBox'), {ssr: false})
+import {fetchUserAutoLogin} from "@store_toolkit/clientReducers/userReducer";
+// import {Provider} from 'react-redux'
+// import {makeStore} from "@store_toolkit/adminStore";
 
 const AdminLayout403StyledDiv = styled.div`
   display: flex;
@@ -59,28 +58,34 @@ const AdminLayout = props => {
     const container = useRef(null);
     const Admin = useRef(null);
 
-    const {globalState, loggedIn, userData, loading, alert} = useSelector(({globalState, user}: StoreTypes) => {
-        return {
-            globalState,
-            loggedIn: user.loggedIn,
-            userData: user.userData,
-            loading: globalState.loading,
-            alert: globalState.alert.active,
-        }
-    })
+    const {adminPanelGlobalState, userData, alert} = useSelector(
+        ({
+             adminPanelGlobalState,
+             adminPanelUsers
+         }: StoreTypes) => {
+            return {
+                adminPanelGlobalState,
+                userData: adminPanelUsers?.userData,
+                alert: adminPanelGlobalState?.alert?.active,
+            }
+        })
+
+    const store = useSelector((store: StoreTypes) => store)
 
     useEffect(() => {
+        console.log(store)
+    }, [store]);
 
+    useEffect(() => {
         !!localStorage?.wt && dispatch(
             fetchUserAutoLogin(
                 {
                     fields: ['username', 'role', 'keyMaster', 'profileImage', 'followingCount', 'followersCount']
                 }
             ))
-
     }, [props]);
 
-    if (userData.role === 'administrator') {
+    if (userData?.role === 'administrator') {
         return (
 
             <AdminLayoutStyledDiv ref={container} className="admin-container">
@@ -93,10 +98,9 @@ const AdminLayout = props => {
                     {props.children}
                 </main>
                 <LoadingV2/>
-                {/*{loading ? <Loading/> : null}*/}
-                {alert && globalState?.alert?.message ? <AlertBox/> : null}
+                {/*<AlertBox/>*/}
+                {alert && adminPanelGlobalState?.alert?.message ? <AlertBox/> : null}
             </AdminLayoutStyledDiv>
-
         );
     } else return (
         <AdminLayout403StyledDiv className='access-denied-admin'>

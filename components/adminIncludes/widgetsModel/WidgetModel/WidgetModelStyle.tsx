@@ -1,6 +1,7 @@
 //WidgetModel
 
 import styled from "styled-components";
+
 export const WidgetModelStyledDiv = styled.div`
   z-index: 3;
   background-color: var(--admin-color-8);
@@ -13,18 +14,19 @@ export const WidgetModelStyledDiv = styled.div`
   resize: both;
   overflow: hidden;
 
-  .open-section{
+  .open-section {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 95%;
     margin: auto;
-    
-    .section-title{
-      
+
+    .section-title {
+
     }
-    .section-action{
-      
+
+    .section-action {
+
     }
   }
 
@@ -61,7 +63,6 @@ export const WidgetModelStyledDiv = styled.div`
   }
 
 
-
   .monaco-editor-section {
     .editor-section {
       display: flex;
@@ -69,6 +70,7 @@ export const WidgetModelStyledDiv = styled.div`
       align-items: center;
       width: 95%;
       margin: 10px auto;
+
       p {
         width: 40%;
         margin: 0;
@@ -95,4 +97,4 @@ export const WidgetModelStyledDiv = styled.div`
       padding: 5px 5%;
     }
   }
-    `
+`

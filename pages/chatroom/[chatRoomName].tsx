@@ -14,11 +14,11 @@ import {setOnlineUsers,setMessages,  newMessage} from '@store_toolkit/clientRedu
 import {wrapper} from "@store_toolkit/store";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {_uniqBy} from "@_variables/util/arrayUtils/_uniqBy";
-import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import MessengerLayout from "@components/layouts/MessengerLayout";
 import type {ReactElement} from 'react';
 import {useAppDispatch} from "@store_toolkit/hooks";
+import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 
 const chatRoom = () => {
     const dispatch = useAppDispatch()
@@ -101,7 +101,7 @@ const chatRoom = () => {
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-    await  getDefaultPageData(
+    await  _getServerSideStaticPageData(
         context,
         [],
         {

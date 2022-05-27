@@ -12,12 +12,12 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useSelector} from "react-redux";
 import {wrapper} from "@store_toolkit/store";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
+
 
 import {
     // answerTheCall,
-    endCall,
-    fetchConversation,
+    endCall, fetchAnswerTheCall,
+    fetchConversation, fetchOutgoingCall,
     incomingCall,
     newMessageInConversation,
     // outgoingCall,
@@ -26,6 +26,7 @@ import {
 import MessengerLayout from "@components/layouts/MessengerLayout";
 import type {ReactElement} from 'react';
 import {useAppDispatch} from "@store_toolkit/hooks";
+import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 
 
 const conversation = () => {
@@ -72,14 +73,19 @@ const conversation = () => {
     const callUser = async () => {
         try {
             // @ts-ignore
-            dispatch(outgoingCall(router.query.conversation, mySocketId, userData?.username, router))
+            dispatch(fetchOutgoingCall(router.query.conversation, mySocketId, userData?.username, router))
         } catch (err) {
 
         }
     }
 
     const answerCall = async () => {
-        //dispatch(answerTheCall(callData.myVideo, router.query.conversation, callData?.callerSignal, router))
+        dispatch(fetchAnswerTheCall({
+            myVideo: callData.myVideo,
+            conversation: router.query.conversation as string,
+            callerSignal: callData?.callerSignal,
+            router
+        }))
     }
 
     const endCallHandler = () => {
@@ -123,7 +129,7 @@ const conversation = () => {
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     // @ts-ignore
-    await getDefaultPageData(
+    await _getServerSideStaticPageData(
         context,
         [],
         {

@@ -7,7 +7,7 @@ import {
     fetchAdminPanelBulkActionPost
 } from "@store_toolkit/adminReducers/adminPanelPostsReducer";
 import {updateQueryGenerator} from "@_variables/_variables";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAdminDispatch} from "@store_toolkit/hooks";
 
 const AssetBulkActionStyledDiv = styled.div`
   select {
@@ -25,7 +25,7 @@ interface AssetBulkActionPropTypes {
 }
 
 const AssetBulkAction: FC<AssetBulkActionPropTypes> = ({selectedItems, setSelectedItems}) => {
-    const dispatch = useAppDispatch()
+    const dispatch = useAdminDispatch()
     const [status, setStatus] = useState('')
     const {push, pathname, query} = useRouter()
 

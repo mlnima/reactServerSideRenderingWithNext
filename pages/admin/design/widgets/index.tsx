@@ -4,14 +4,13 @@ import WidgetGroupByPosition
     from "@components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {wrapper} from "@store_toolkit/store";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import WidgetPositionsSelect from "@components/adminIncludes/widgetsModel/WidgetPositionsSelect/WidgetPositionsSelect";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import staticPositions from "@components/adminIncludes/widgetsModel/staticPositions";
 import {fetchAdminPanelGetWidgets} from "@store_toolkit/adminReducers/adminWidgetsReducer";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAdminDispatch} from "@store_toolkit/hooks";
 
 let StyledDiv = styled.div`
   display: flex;
@@ -58,7 +57,7 @@ let StyledDiv = styled.div`
 
 const AdminWidgets = () => {
 
-    const dispatch = useAppDispatch()
+    const dispatch = useAdminDispatch()
 
     const {customPages, availablePositions} = useSelector(
         ({
@@ -152,13 +151,6 @@ const AdminWidgets = () => {
     );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    return {
-        props: {
-            // ...(await serverSideTranslations(context.locale as string, ['common'])),
-        }
-    }
-})
 
 AdminWidgets.getLayout = function getLayout(page: ReactElement) {
 

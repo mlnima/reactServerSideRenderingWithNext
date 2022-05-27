@@ -13,7 +13,7 @@ import {
     adminPanelFileManagerEditState,
     fetchFileManagerUploadFile
 } from "@store_toolkit/adminReducers/adminPanelFileManagerReducer";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAdminDispatch} from "@store_toolkit/hooks";
 
 const FileManagerAreaStyledDiv = styled.div`
   display: grid;
@@ -59,7 +59,7 @@ const FileManagerAreaStyledDiv = styled.div`
 
 
 const FileManagerArea:FC = () => {
-    const dispatch = useAppDispatch()
+    const dispatch = useAdminDispatch()
     const fileManagerData = useSelector(({adminPanelFileManager}: StoreTypes) => adminPanelFileManager)
 
 

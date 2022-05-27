@@ -6,45 +6,23 @@ import {AxiosError, AxiosResponse} from "axios";
 import {RootState} from "@store_toolkit/store";
 import {NextRouter} from "next/router";
 
-
 const initialState = {
+    userData: {},
+    loggedIn:false,
     users: [],
     totalCount: 0,
     user: {}
 }
 
 export interface AdminPanelUsersState {
+    loggedIn: boolean;
+    userData: {
+        role: string;
+    },
     totalCount: number;
     users: User[];
     user: User
 }
-
-// //@ts-ignore
-// export const adminPanelUsersReducer = (state: AdminPanelUsersState = initialState, action: { type: string, payload: any }) => {
-//     switch (action.type) {
-//         case ADMIN_GET_USERS:
-//             return {
-//                 ...state,
-//                 users: action.payload.users,
-//                 totalCount: action.payload.totalCount
-//             };
-//         case ADMIN_GET_USER:
-//             return {
-//                 ...state,
-//                 user: action.payload
-//             };
-//         case ADMIN_EDIT_USER_DATA:
-//             return {
-//                 ...state,
-//                 user: {
-//                     ...state.user,
-//                     ...action.payload
-//                 }
-//             };
-//         default:
-//             return state
-//     }
-// }
 
 export const fetchAdminPanelUsers = createAsyncThunk(
     'adminPanelUsers/fetchAdminPanelUsers',
@@ -193,6 +171,24 @@ export const fetchAdminPanelChangePassword = createAsyncThunk(
 )
 
 
+export const fetchAdminAutoLogin = createAsyncThunk(
+    'user/fetchUserAutoLogin',
+    async ({fields}: { fields: string[] }, thunkAPI) => {
+        if (localStorage.wt) {
+            return await Axios.post('/api/v1/users/getSignedInUserData', {token: localStorage.wt, fields}).then(res => {
+                // console.log(res.data?.userData)
+                thunkAPI.dispatch(setAlert({message: res.data.message, type: 'success'}))
+                return res.data?.userData
+            }).catch((err) => {
+                localStorage.removeItem('wt')
+                thunkAPI.dispatch(setAlert({message: err.response.data.message, type: 'error'}))
+            })
+        } else {
+            thunkAPI.dispatch(setAlert({message: 'You Need To Login', type: 'error'}))
+        }
+    }
+)
+
 export const adminPanelUsersSlice = createSlice({
     name: 'adminPanelUsers',
     initialState,
@@ -221,6 +217,13 @@ export const adminPanelUsersSlice = createSlice({
                     ...state,
                     user: action.payload
                 };
+            })
+            .addCase(fetchAdminAutoLogin.fulfilled, (state, action: PayloadAction<any>) => {
+                return {
+                    ...state,
+                    userData: action.payload,
+                    loggedIn: true
+                }
             })
     }
 })

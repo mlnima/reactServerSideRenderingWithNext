@@ -7,13 +7,13 @@ interface PostSliderTypeWidgetModelFieldsPropTypes {
     uniqueData: {
         sliderConfig: string
     },
-    onUniqueDataJsonChangeHandler:any
+    onUniqueDataJsonChangeHandler: any
 }
 
 const SliderWidgetFields: FC<PostSliderTypeWidgetModelFieldsPropTypes> =
     ({
-        uniqueData,
-        onUniqueDataJsonChangeHandler
+         uniqueData,
+         onUniqueDataJsonChangeHandler
      }) => {
         const [openConfig, setOpenConfig] = useState(false);
 
@@ -25,7 +25,7 @@ const SliderWidgetFields: FC<PostSliderTypeWidgetModelFieldsPropTypes> =
                         {openConfig ? 'close' : 'open'}
                     </button>
                 </div>
-                {openConfig?
+                {openConfig ?
                     <MonacoEditor
                         language={'json'}
                         name={'sliderConfig'}
@@ -34,7 +34,7 @@ const SliderWidgetFields: FC<PostSliderTypeWidgetModelFieldsPropTypes> =
                         className={'details'}
                         onChange={onUniqueDataJsonChangeHandler}
                     />
-                    :null
+                    : null
                 }
 
             </>

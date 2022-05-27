@@ -1,4 +1,4 @@
-import {useRef, useEffect, FC, useState} from 'react';
+import {useEffect, FC, useState} from 'react';
 import {useRouter} from "next/router";
 import styled from "styled-components";
 

@@ -5,7 +5,7 @@ import {adminEditPost, fetchAdminPanelSaveNewPost} from "@store_toolkit/adminRed
 import {setAlert} from "@store_toolkit/clientReducers/globalStateReducer";
 import {useRouter} from "next/router";
 import {fetchAdminPanelUpdatePost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAdminDispatch} from "@store_toolkit/hooks";
 
 const ActionOnPostStyledDiv = styled.div`
   display: flex;
@@ -28,7 +28,7 @@ const ActionOnPost = () => {
     })
 
     const router = useRouter()
-    const dispatch = useAppDispatch()
+    const dispatch = useAdminDispatch()
 
     const onViewHandler = () => {
         window.open(`/post/${ActionOnPostData?.post?.postType || 'video'}/${ActionOnPostData?.post?._id}`, '_blank')

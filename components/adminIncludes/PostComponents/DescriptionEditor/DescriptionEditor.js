@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic'
+
 let ReactQuill = () => <></>;
 ReactQuill = dynamic(() => import('react-quill'))
 import styled from "styled-components";
@@ -8,16 +9,19 @@ import styled from "styled-components";
 const DescriptionEditorStyledDiv = styled.div`
   .quill {
     width: 96%;
+
     .ql-container {
       min-height: 80vh;
       border-bottom-left-radius: 0.5em;
       border-bottom-right-radius: 0.5em;
       background: #fefcfc;
+
       .ql-tooltip {
         margin-left: 10%;
         z-index: 1000;
       }
     }
+
     .ql-snow.ql-toolbar {
       display: block;
       background: #eaecec;

@@ -1,5 +1,4 @@
 import React, {useEffect, useState, useRef} from 'react';
-
 import TitleDescription from "../../../components/adminIncludes/PostComponents/TitleDescription/TitleDescription";
 import ActionOnPost from "@components/adminIncludes/PostComponents/ActionOnPost/ActionOnPost";
 import DropDownWidget from "@components/adminIncludes/PostComponents/DropDownWidget/DropDownWidget";
@@ -13,13 +12,11 @@ import {languagesOptions} from "@_variables/_variables";
 import styled from "styled-components";
 import { useSelector} from "react-redux";
 import {adminEditPost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
-import {wrapper} from "@store_toolkit/store";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import {fetchAdminPanelPost,adminDefineNewPost,adminChangeActiveEditingLanguage} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAdminDispatch} from "@store_toolkit/hooks";
 
 const AdminPostPageStyledDiv = styled.div`
   display: grid;
@@ -42,7 +39,7 @@ const AdminPostPageStyledDiv = styled.div`
 const Index = () => {
     const post = useSelector((store: StoreTypes) => store.adminPanelPosts.post);
     const activeEditingLanguage = useSelector((store: StoreTypes) => store.adminPanelPosts.activeEditingLanguage);
-    const dispatch = useAppDispatch()
+    const dispatch = useAdminDispatch()
     const router = useRouter();
     const languageElement = useRef(null)
     const [productInfo, setProductInfo] = useState({})
@@ -135,15 +132,6 @@ const Index = () => {
         </>
     );
 };
-
-export const getServerSideProps = wrapper.getServerSideProps(store =>
-    async (context) => {
-        return {
-            props: {
-                ...(await serverSideTranslations(context.locale as string, ['common'])),
-            }
-        }
-    });
 
 Index.getLayout = function getLayout(page: ReactElement) {
 

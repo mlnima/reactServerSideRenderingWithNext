@@ -1,5 +1,5 @@
 import React from 'react';
-import {isJsonString} from '../../../../_variables/util/isJsonString'
+import {isJsonString} from '@_variables/util/isJsonString'
 import Editor from "@monaco-editor/react";
 
 interface MonacoEditorProTypes {

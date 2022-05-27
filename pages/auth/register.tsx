@@ -1,11 +1,11 @@
 import React, {useEffect} from 'react';
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "@store_toolkit/store";
-import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import type { ReactElement } from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
+import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 
 const Register = () => {
     const dispatch = useAppDispatch()
@@ -17,7 +17,7 @@ const Register = () => {
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-    await getDefaultPageData(
+    await _getServerSideStaticPageData(
         context,
         [],
         {

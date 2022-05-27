@@ -3,12 +3,11 @@ import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import AppLayout from '@components/layouts/AppLayout';
 import type {ReactElement} from 'react';
 import styled from "styled-components";
 import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
-import {useEffect} from "react";
+import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 
 
 const HomePageStyle = styled.div`
@@ -25,8 +24,6 @@ const HomePage = () => {
         }
     })
 
-
-
     return (
         <HomePageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`} stylesData={homePageStyle}>
             <MainWidgetArea className='home-page' position='home'/>
@@ -38,7 +35,7 @@ const HomePage = () => {
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-    await getDefaultPageData(
+    await _getServerSideStaticPageData(
         context,
         ['homePageLeftSidebar', 'homePageRightSidebar', 'home'],
         {

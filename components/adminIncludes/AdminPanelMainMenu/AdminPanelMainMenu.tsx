@@ -1,6 +1,5 @@
 import Link from "next/link";
 import convertVariableNameToName from "../../../_variables/util/convertVariableNameToName";
-
 import styled from "styled-components";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSortDown} from "@fortawesome/free-solid-svg-icons";
@@ -8,7 +7,7 @@ import { useSelector} from "react-redux";
 import {setSidebarStatus} from "@store_toolkit/adminReducers/adminPanelGlobalStateReducer";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import { useState} from "react";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAdminDispatch} from "@store_toolkit/hooks";
 
 // interface menuItemTypes{
 //     [key:string] :{
@@ -106,7 +105,7 @@ let StyledDiv = styled.div`
 `
 
 const AdminPanelMainMenu = () => {
-    const dispatch = useAppDispatch()
+    const dispatch = useAdminDispatch()
     const sidebar = useSelector(({adminPanelGlobalState}: StoreTypes) => adminPanelGlobalState?.sidebar)
 
     const sidebarItems = {

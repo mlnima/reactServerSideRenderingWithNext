@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React, {useEffect, useState} from 'react';
 import _createFileOrFolder from '../../../../_variables/adminAjaxVariables/adminFileManagerVariables/_createFileOrFolder'
 import styled from "styled-components";
 const CreateNewFileFolderPopStyledDiv = styled.div`

@@ -7,8 +7,8 @@ import convertVariableNameToName from "@_variables/util/convertVariableNameToNam
 interface SliderWidgetTypeFieldsPropTypes {
     uniqueData: {
         details: string,
-        swiperConfigMobile:{},
-        swiperConfigDesktop:{},
+        swiperConfigMobile: {},
+        swiperConfigDesktop: {},
         imageSwiperData: {
             imageUrl: string,
             imageAlt: string,
@@ -31,11 +31,11 @@ const SwiperWidgetFields: FC<SliderWidgetTypeFieldsPropTypes> =
         const [openObjectEditorDesktop, setOpenObjectEditorDesktop] = useState(false)
         const [openObjectEditorMobile, setOpenObjectEditorMobile] = useState(false)
 
-        const defaultDataInjector = (type,device)=>{
-            if (sliderDefaultData?.[type]){
+        const defaultDataInjector = (type, device) => {
+            if (sliderDefaultData?.[type]) {
                 const e = {
-                    target :{
-                        name:device,
+                    target: {
+                        name: device,
                         value: JSON.stringify(sliderDefaultData?.[type])
                     }
                 }
@@ -43,17 +43,19 @@ const SwiperWidgetFields: FC<SliderWidgetTypeFieldsPropTypes> =
             }
         }
 
-        const renderInjectorButtonsDesktop = ['cube','fade','coverflow','flip','cards','creative'].map((type,index)=>{
+        const renderInjectorButtonsDesktop = ['cube', 'fade', 'coverflow', 'flip', 'cards', 'creative'].map((type, index) => {
             return (
-                <button key={index} className={'btn btn-primary'} onClick={() => defaultDataInjector(type,'swiperConfigDesktop')}>
+                <button key={index} className={'btn btn-primary'}
+                        onClick={() => defaultDataInjector(type, 'swiperConfigDesktop')}>
                     {convertVariableNameToName(type)}
                 </button>
             )
         })
 
-        const renderInjectorButtonsMobile = ['cube','fade','coverflow','flip','cards','creative'].map((type,index)=>{
+        const renderInjectorButtonsMobile = ['cube', 'fade', 'coverflow', 'flip', 'cards', 'creative'].map((type, index) => {
             return (
-                <button key={index} className={'btn btn-primary'} onClick={() => defaultDataInjector(type,'swiperConfigMobile')}>
+                <button key={index} className={'btn btn-primary'}
+                        onClick={() => defaultDataInjector(type, 'swiperConfigMobile')}>
                     {convertVariableNameToName(type)}
                 </button>
             )
@@ -64,12 +66,14 @@ const SwiperWidgetFields: FC<SliderWidgetTypeFieldsPropTypes> =
             <div className={'monaco-editor-section'}>
                 <div className={'open-section'}>
                     <p className={'section-title'}>Swiper Config:</p>
-                    <a href={'https://swiperjs.com/demos'} target={'_blank'} className={'btn btn-info section-action'}>Examples</a>
+                    <a href={'https://swiperjs.com/demos'} target={'_blank'}
+                       className={'btn btn-info section-action'}>Examples</a>
                 </div>
                 <div className={'editor-section'}>
                     <p>Image Swiper Config for Desktop:</p>
-                    <button className={'btn btn-primary'} onClick={() => setOpenObjectEditorDesktop(!openObjectEditorDesktop)}>
-                         {openObjectEditorDesktop ? 'close' : 'open'}
+                    <button className={'btn btn-primary'}
+                            onClick={() => setOpenObjectEditorDesktop(!openObjectEditorDesktop)}>
+                        {openObjectEditorDesktop ? 'close' : 'open'}
                     </button>
                 </div>
 
@@ -79,14 +83,14 @@ const SwiperWidgetFields: FC<SliderWidgetTypeFieldsPropTypes> =
                             <p>Inject Default Data:</p>
                             {renderInjectorButtonsDesktop}
                         </div>
-                    <MonacoEditor
-                        language={'json'}
-                        name={'swiperConfigDesktop'}
-                        defaultValue={JSON.stringify(uniqueData?.swiperConfigDesktop, null, '\t')}
-                        value={JSON.stringify(uniqueData?.swiperConfigDesktop, null, '\t')}
-                        className={'details'}
-                        onChange={onUniqueDataJsonChangeHandler}
-                    />
+                        <MonacoEditor
+                            language={'json'}
+                            name={'swiperConfigDesktop'}
+                            defaultValue={JSON.stringify(uniqueData?.swiperConfigDesktop, null, '\t')}
+                            value={JSON.stringify(uniqueData?.swiperConfigDesktop, null, '\t')}
+                            className={'details'}
+                            onChange={onUniqueDataJsonChangeHandler}
+                        />
                     </>
                     : null
                 }
@@ -94,8 +98,9 @@ const SwiperWidgetFields: FC<SliderWidgetTypeFieldsPropTypes> =
                 <div className={'editor-section'}>
                     <p>Image Swiper Config for Mobile:</p>
 
-                    <button className={'btn btn-primary'} onClick={() => setOpenObjectEditorMobile(!openObjectEditorMobile)}>
-                         {openObjectEditorMobile ? 'close' : 'open'}
+                    <button className={'btn btn-primary'}
+                            onClick={() => setOpenObjectEditorMobile(!openObjectEditorMobile)}>
+                        {openObjectEditorMobile ? 'close' : 'open'}
                     </button>
                 </div>
 
@@ -105,14 +110,14 @@ const SwiperWidgetFields: FC<SliderWidgetTypeFieldsPropTypes> =
                             <p>Inject Default Data:</p>
                             {renderInjectorButtonsMobile}
                         </div>
-                    <MonacoEditor
-                        language={'json'}
-                        name={'swiperConfigMobile'}
-                        defaultValue={JSON.stringify(uniqueData?.swiperConfigMobile, null, '\t')}
-                        value={JSON.stringify(uniqueData?.swiperConfigMobile, null, '\t')}
-                        className={'details'}
-                        onChange={onUniqueDataJsonChangeHandler}
-                    />
+                        <MonacoEditor
+                            language={'json'}
+                            name={'swiperConfigMobile'}
+                            defaultValue={JSON.stringify(uniqueData?.swiperConfigMobile, null, '\t')}
+                            value={JSON.stringify(uniqueData?.swiperConfigMobile, null, '\t')}
+                            className={'details'}
+                            onChange={onUniqueDataJsonChangeHandler}
+                        />
                     </>
                     : null
                 }

@@ -2,29 +2,29 @@ import React, {FC} from "react";
 import MonacoEditor from "../../MonacoEditor/MonacoEditor";
 
 interface AdvertiseWidgetModelFieldsPropTypes {
-    uniqueData:{
-        adCode:string
+    uniqueData: {
+        adCode: string
     },
-    onUniqueDataChangeHandler:any
+    onUniqueDataChangeHandler: any
 }
 
 const AdvertiseWidgetModelFields: FC<AdvertiseWidgetModelFieldsPropTypes> =
     ({
          uniqueData,
          onUniqueDataChangeHandler
-    }) => {
-    return (
+     }) => {
+        return (
 
-        <div className={'monaco-editor-section'}>
-            <p>Advertise Code:</p>
-            <MonacoEditor name={'adCode'}
-                          language={'html'}
-                          theme={'vs-dark'}
-                          defaultValue={uniqueData?.adCode}
-                          value={uniqueData?.adCode}
-                          onChange={onUniqueDataChangeHandler}
-            />
-        </div>
-    )
-};
+            <div className={'monaco-editor-section'}>
+                <p>Advertise Code:</p>
+                <MonacoEditor name={'adCode'}
+                              language={'html'}
+                              theme={'vs-dark'}
+                              defaultValue={uniqueData?.adCode}
+                              value={uniqueData?.adCode}
+                              onChange={onUniqueDataChangeHandler}
+                />
+            </div>
+        )
+    };
 export default AdvertiseWidgetModelFields

@@ -4,7 +4,7 @@ import { useSelector} from "react-redux";
 import MonacoEditor from "../../MonacoEditor/MonacoEditor";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {adminEditDesign, adminPanelUpdateSetting} from "@store_toolkit/adminReducers/adminPanelSettingsReducer";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAdminDispatch} from "@store_toolkit/hooks";
 
 const StyleSectionStyledDiv = styled.div`
   width: 100%;
@@ -32,7 +32,7 @@ const StyleSectionStyledDiv = styled.div`
 `
 
 const StyleSection = props => {
-    const dispatch = useAppDispatch()
+    const dispatch = useAdminDispatch()
     const design = useSelector(({adminPanelSettings}: StoreTypes) => adminPanelSettings?.design)
 
     const onChangeHandler = (event) => {

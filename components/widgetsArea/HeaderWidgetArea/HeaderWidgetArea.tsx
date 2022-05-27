@@ -3,7 +3,7 @@ import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {useSelector} from "react-redux";
 
-let StyledHeader = styled.header`
+let HeaderWidgetAreaStyle = styled.div`
   grid-area: header;
   background-color: var(--header-background-color, #000);
   
@@ -29,12 +29,12 @@ let StyledHeader = styled.header`
 const HeaderWidgetArea = () => {
     const headerStyle = useSelector(({settings}: StoreTypes) => settings?.design?.headerStyle)
     return (
-        <StyledHeader stylesData={headerStyle || ''} className={'widget-area header'}>
+        <HeaderWidgetAreaStyle stylesData={headerStyle || ''} className={'widget-area header'}>
             <div className='header-content'>
                 <WidgetsRenderer position={'header'}/>
             </div>
 
-        </StyledHeader>
+        </HeaderWidgetAreaStyle>
     );
 };
 export default HeaderWidgetArea;

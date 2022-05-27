@@ -7,7 +7,7 @@ import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
 import CardImageRenderer from "@components/includes/cards/CardImageRenderer";
 
 const CategoryCardStyle = styled.article`
-  background-color: var(--post-element-background, #131314);
+  background-color: var(--post-element-background-color, #131314);
   width: 100%;
   margin: 0 auto;
 

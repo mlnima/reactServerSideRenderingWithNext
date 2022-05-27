@@ -1,4 +1,4 @@
-const staticPositions : string[] = [
+const staticPositions: string[] = [
     'deactivated',
     'topBar',
     'header',

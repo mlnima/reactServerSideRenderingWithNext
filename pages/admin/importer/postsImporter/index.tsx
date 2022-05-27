@@ -1,14 +1,11 @@
-import React, {useState, useRef, useEffect, ChangeEvent} from 'react';
-
+import React, {useState, useRef, ChangeEvent} from 'react';
 import { useSelector} from "react-redux";
-import {wrapper} from "@store_toolkit/store";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import styled from "styled-components";
 import {fetchAdminPanelSaveNewPost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAdminDispatch} from "@store_toolkit/hooks";
 // import {adminSaveNewPost} from "../../../../store/adminActions/adminPanelPostsActions";
 
 const PostsImporterStyledDiv = styled.div`
@@ -33,7 +30,7 @@ const postsImporter = () => {
     const userData = useSelector((store: StoreTypes) => store?.user.userData)
     const statusElement = useRef(null)
     const dataPreview = useRef(null)
-    const dispatch = useAppDispatch()
+    const dispatch = useAdminDispatch()
     const [state, setState] = useState({
         status: 'draft'
     });
@@ -99,13 +96,7 @@ const postsImporter = () => {
     );
 }
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    return {
-        props: {
-            ...(await serverSideTranslations(context.locale as string, ['common'])),
-        }
-    }
-})
+
 
 postsImporter.getLayout = function getLayout(page: ReactElement) {
 

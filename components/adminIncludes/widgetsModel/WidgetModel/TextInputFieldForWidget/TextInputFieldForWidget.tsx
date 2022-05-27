@@ -22,7 +22,7 @@ const TextInputFieldForWidget: FC<TextInputFieldForWidgetPropTypes> =
      }) => {
         return (
             <div className={`TextInputFieldForWidget ${classNameValue || ''}`}>
-                {inputTitle && <p>{inputTitle}</p> }
+                {inputTitle && <p>{inputTitle}</p>}
                 <input name={name} type={type} value={value} placeholder={placeHolder}
                        className={'form-control-input'} onChange={onChangeHandler}/>
             </div>

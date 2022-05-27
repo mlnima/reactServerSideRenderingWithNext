@@ -9,7 +9,7 @@ import {setSidebarStatus} from "@store_toolkit/adminReducers/adminPanelGlobalSta
 import {useRouter} from "next/router";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {fetchClearCaches} from "@store_toolkit/adminReducers/adminPanelGlobalStateReducer";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAdminDispatch} from "@store_toolkit/hooks";
 
 
 let StyledDiv = styled.div`
@@ -62,7 +62,7 @@ let StyledDiv = styled.div`
 
 const AdminTopBar: FC = () => {
     const router = useRouter()
-    const dispatch = useAppDispatch()
+    const dispatch = useAdminDispatch()
     const sidebar = useSelector(({adminPanelGlobalState}: StoreTypes) => adminPanelGlobalState?.sidebar)
 
     const AdminSideBarOpenCloseHandler = () => {

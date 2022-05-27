@@ -1,10 +1,8 @@
 import React, { useState, useRef, ChangeEvent} from 'react';
 import styled from "styled-components";
-import {wrapper} from "@store_toolkit/store";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAdminDispatch} from "@store_toolkit/hooks";
 import {adminPanelUpdateSetting} from "@store_toolkit/adminReducers/adminPanelSettingsReducer";
 import {loading} from "@store_toolkit/clientReducers/globalStateReducer";
 import {fetchAdminYoutubeDataScrapper} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
@@ -39,7 +37,7 @@ let StyledDiv = styled.div`
 `
 const youtube = () => {
 
-    const dispatch = useAppDispatch()
+    const dispatch = useAdminDispatch()
     const urlsElement = useRef(null)
     const [state, setState] = useState({
         apiKey: '',
@@ -159,13 +157,6 @@ const youtube = () => {
 };
 
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    return {
-        props: {
-            ...(await serverSideTranslations(context.locale as string, ['common'])),
-        }
-    }
-})
 
 youtube.getLayout = function getLayout(page: ReactElement) {
 

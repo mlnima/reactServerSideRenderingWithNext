@@ -27,6 +27,7 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
         loggedIn,
         userRole,
         identity,
+        cookiePopupMessage,
         loginRegisterFormPopup,
         alert,
     } = useSelector(({user, settings, globalState}: StoreTypes) => {
@@ -36,11 +37,13 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
             identity: settings?.identity,
             loginRegisterFormPopup: globalState?.loginRegisterFormPopup,
             alert: globalState?.alert,
+            cookiePopupMessage: settings?.identity?.cookiePopupMessage
         }
     });
 
     return (
         <>
+            {userRole === 'administrator' && <AdminTools/>}
             <GlobalStylesComponent/>
             <SiteSettingSetter/>
             <header>
@@ -53,12 +56,13 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
             </div>
             {identity?.footer === 'enable' && <FooterWidgetArea/>}
             <BackToTopButton/>
-            {userRole === 'administrator' && <AdminTools/>}
+
             <LoadingV2/>
-            {typeof window !== 'undefined' ? localStorage.cookieAccepted !== 'true' ?
+
+            {(typeof window !== 'undefined' && !!cookiePopupMessage && localStorage.cookieAccepted !== 'true') &&
                 <CookiePopup/>
-                : null : null
             }
+
             {loginRegisterFormPopup && !loggedIn && <LoginRegisterPopup/>}
             {(!!alert?.active && !!alert?.message) && <AlertBox/>}
             {userRole === 'administrator' && <AdminDataSetter userRole={userRole}/>}
@@ -67,3 +71,9 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
 };
 
 export default AppLayout;
+
+
+// {typeof window !== 'undefined' ? localStorage.cookieAccepted !== 'true' ?
+//     <CookiePopup/>
+//     : null : null
+// }

@@ -7,7 +7,7 @@ import {
     fetchAdminCheckAndRemoveDeletedVideos, fetchGeneratePermaLinkForPosts,
     fetchSetMetaThumbnailsAndCount
 } from "@store_toolkit/adminReducers/adminPanelPostsReducer";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAdminDispatch} from "@store_toolkit/hooks";
 
 let StyledDiv = styled.div`
   
@@ -47,7 +47,7 @@ let StyledDiv = styled.div`
 
 const tools = () => {
 
-    const dispatch = useAppDispatch()
+    const dispatch = useAdminDispatch()
 
     return (
         <StyledDiv className={'adminTools'}>

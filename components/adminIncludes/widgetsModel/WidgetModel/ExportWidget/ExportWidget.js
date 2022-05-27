@@ -1,11 +1,11 @@
 import React from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFileExport} from "@fortawesome/free-solid-svg-icons";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAdminDispatch} from "@store_toolkit/hooks";
 import {loading} from "@store_toolkit/clientReducers/globalStateReducer";
 
 const ExportWidget = props => {
-    const dispatch = useAppDispatch()
+    const dispatch = useAdminDispatch()
     const onExportHandler = () => {
         const data = [{
             ...props.data,

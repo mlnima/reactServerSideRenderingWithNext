@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {FC, useMemo} from "react";
+import {FC} from "react";
 import convertVariableNameToName from "@_variables/util/convertVariableNameToName";
 
 const PositionSelectorStyledDiv = styled.div`
@@ -12,11 +12,10 @@ const PositionSelectorStyledDiv = styled.div`
     align-items: center;
     justify-content: space-between;
 
-    .btn{
+    .btn {
       display: flex;
       align-items: center;
       justify-content: space-between;
-    
      
 
       border-radius: 3px;
@@ -44,7 +43,7 @@ const PositionSelectorStyledDiv = styled.div`
     }
   }
 
-  .unselect-all,.select-all {
+  .unselect-all, .select-all {
     width: 100px;
     margin: auto;
   }
@@ -58,14 +57,20 @@ interface PositionSelectorPropTypes {
     availablePositions: string[],
 }
 
-const PositionSelector: FC<PositionSelectorPropTypes> = ({onChangeHandler, filters,onSelectAll,allPositions,availablePositions}) => {
+const PositionSelector: FC<PositionSelectorPropTypes> = ({
+                                                             onChangeHandler,
+                                                             filters,
+                                                             onSelectAll,
+                                                             allPositions,
+                                                             availablePositions
+                                                         }) => {
 
     const renderCheckBoxes = availablePositions.map(position => {
         return (
-            <div className={`btn ${filters.includes(position) ?'btn-primary'  :'btn-dark' }`}
+            <div className={`btn ${filters.includes(position) ? 'btn-primary' : 'btn-dark'}`}
                  key={position}
                  title={position}
-                 onClick={()=>onChangeHandler(position)}>
+                 onClick={() => onChangeHandler(position)}>
                 <p>{convertVariableNameToName(position)}</p>
             </div>
         )
@@ -73,8 +78,8 @@ const PositionSelector: FC<PositionSelectorPropTypes> = ({onChangeHandler, filte
 
     return (
         <PositionSelectorStyledDiv className={'position-selector'}>
-            <button onClick={()=>onSelectAll(true)} className={'btn btn-primary select-all'}>+</button>
-            <button onClick={()=>onSelectAll(false)} className={'btn btn-primary unselect-all'}>-</button>
+            <button onClick={() => onSelectAll(true)} className={'btn btn-primary select-all'}>+</button>
+            <button onClick={() => onSelectAll(false)} className={'btn btn-primary unselect-all'}>-</button>
             <div className={'check-boxes'}>
                 {renderCheckBoxes}
             </div>

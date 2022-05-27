@@ -9,7 +9,7 @@ import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import {adminEditIdentity, adminPanelUpdateSetting} from "@store_toolkit/adminReducers/adminPanelSettingsReducer";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAdminDispatch} from "@store_toolkit/hooks";
 
 let StyledForm = styled.form`
   background-color: white;
@@ -96,7 +96,7 @@ let StyledForm = styled.form`
 `
 
 const settings = () => {
-    const dispatch = useAppDispatch()
+    const dispatch = useAdminDispatch()
     const keywordsInput = useRef(null)
     const identity = useSelector(({adminPanelSettings}: StoreTypes) => adminPanelSettings?.identity)
 

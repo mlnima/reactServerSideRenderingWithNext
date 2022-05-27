@@ -5,9 +5,9 @@ import {wrapper} from "@store_toolkit/store";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import { useSelector} from "react-redux";
 import styled from "styled-components";
-import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import MessengerLayout from "@components/layouts/MessengerLayout";
 import type {ReactElement} from 'react';
+import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 
 const MessengerPageStyledMain = styled.main`
   display: flex;
@@ -44,7 +44,7 @@ const messengerPage = () => {
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     // @ts-ignore
-    await getDefaultPageData(
+    await _getServerSideStaticPageData(
         context,
         [
             'messengerPagePageLeftSidebar',

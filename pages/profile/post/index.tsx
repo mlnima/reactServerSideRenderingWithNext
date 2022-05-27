@@ -11,11 +11,16 @@ import TextInput from "@components/includes/profilePageComponents/profilePost/co
 import MetaDataSelector from "@components/includes/profilePageComponents/profilePost/common/MetaDataSelector";
 import ThumbnailUploader from "@components/includes/profilePageComponents/profilePost/common/ThumbnailUploader";
 import VideoTypeFields from "@components/includes/profilePageComponents/profilePost/VideoTypeFields/VideoTypeFields";
-import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
-import {fetchUserCreateNewPost, fetchUserEditingPost,fetchUserEditingPostUpdate,editPostField} from "@store_toolkit/clientReducers/postsReducer";
+import {
+    fetchUserCreateNewPost,
+    fetchUserEditingPost,
+    fetchUserEditingPostUpdate,
+    editPostField
+} from "@store_toolkit/clientReducers/postsReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
+import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 
 const ProfilePostPageStyledDiv = styled.div`
   margin: 20px 5px;
@@ -54,6 +59,9 @@ const post = () => {
         }
     })
 
+    useEffect(() => {
+        console.log(postData)
+    }, [postData]);
     useEffect(() => {
         if (query.id) dispatch(fetchUserEditingPost(query.id as string));
         if (!query.id && query?.postType) dispatch(editPostField({['postType']: query.postType}));
@@ -119,7 +127,7 @@ const post = () => {
                     : null
                 }
 
-                <ThumbnailUploader mainThumbnail={postData.editingPost.mainThumbnail}/>
+                <ThumbnailUploader mainThumbnail={postData?.editingPost?.mainThumbnail}/>
                 {postData.userData.role === 'administrator' ?
                     <>
                         <TextInput required={true} name={'mainThumbnail'} type={'text'}
@@ -183,13 +191,17 @@ const post = () => {
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     // @ts-ignore
-    await store.dispatch(getDefaultPageData(
+    await _getServerSideStaticPageData(
         context,
         [
             'profilePageRightSidebar',
             'profilePageLeftSidebar',
             'profilePage'
-        ]))
+        ], {
+            setHeadData: true,
+            page: 'editPost'
+        },
+        store)
 
     return {
         props: {

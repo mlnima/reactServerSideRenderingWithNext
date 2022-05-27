@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
-import {formatDistance} from 'date-fns'
-import faIR from "date-fns/locale/fa-IR";
+// import {formatDistance} from 'date-fns'
+// import faIR from "date-fns/locale/fa-IR";
 import styled from "styled-components";
 import {ChatroomMessageTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
@@ -79,7 +79,7 @@ interface ChatRoomMessagePropTypes {
 class ChatRoomMessage extends PureComponent<ChatRoomMessagePropTypes> {
 
     render() {
-        const locale = this.props.locale === 'fa' ? {locale:faIR} : {}
+        // const locale = this.props.locale === 'fa' ? {locale:faIR} : {}
         if (this?.props?.message?.type === 'log') {
             return (
                 <ChatRoomLogMessageStyledDiv className='chatroom-message-area-message' >
@@ -106,9 +106,9 @@ class ChatRoomMessage extends PureComponent<ChatRoomMessagePropTypes> {
                 <div className='chatroom-message-area-message-data'>
                     <span className='chatroom-message-area-message-username-time'>
                     {this?.props?.message?.username}
-                        <span className='chatroom-message-area-message-time'>
-                            {formatDistance(new Date(this?.props?.message?.createdAt), new Date(), {addSuffix: true,...locale})}
-                        </span>
+                        {/*<span className='chatroom-message-area-message-time'>*/}
+                        {/*    {formatDistance(new Date(this?.props?.message?.createdAt), new Date(), {addSuffix: true,...locale})}*/}
+                        {/*</span>*/}
                     </span>
                     <p className='chatroom-message-area-message-text'>
                         {this?.props?.message?.messageData}

@@ -25,11 +25,14 @@ const AdminDataSetter: FC<AdminDataSetterPropTypes> = ({userRole}) => {
         try {
             if (pathname.includes('/admin')) {
                 dispatch(fetchAdminPanelGetWidgets(null))
+                dispatch(fetchCustomPages(null));
+                dispatch(adminPanelGetSettings(null));
             } else {
                 dispatch(fetchAdminGetWidgets(null))
+                dispatch(adminPanelGetSettings(null));
             }
-            dispatch(fetchCustomPages(null));
-            dispatch(adminPanelGetSettings(null));
+
+
         } catch (err) {
             console.log(err)
         }

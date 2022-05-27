@@ -1,23 +1,20 @@
-import React, {  useEffect, useMemo, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import dynamic from 'next/dynamic'
 import {useRouter} from "next/router";
 import _adminGetPostsQueryGenerator from "@_variables/adminVariables/_adminGetPostsQueryGenerator";
-import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
 import styled from "styled-components";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-
 import _metaPageQueryGenerator from "../../../_variables/clientVariables/_metaPageQueryGenerator";
-
-// import {adminGetOrders} from "@store/adminActions/adminPanelOrdersActions";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import {fetchAdminPanelMetas, fetchAdminPanelPosts} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
 import {fetchAdminForms} from "@store_toolkit/adminReducers/adminPanelFormsReducer";
-import { fetchAdminPanelPages} from "@store_toolkit/adminReducers/adminPanelPagesReducer";
+import {fetchAdminPanelPages} from "@store_toolkit/adminReducers/adminPanelPagesReducer";
 import {fetchAdminPanelUsers} from "@store_toolkit/adminReducers/adminPanelUsersReducer";
 import {fetchAdminPanelGetComments} from "@store_toolkit/adminReducers/adminCommentsReducer";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAdminDispatch} from "@store_toolkit/hooks";
+// import {adminGetOrders} from "@store/adminActions/adminPanelOrdersActions";
 
 const TableHeader = dynamic(
     () => import('@components/adminIncludes/assetComponents/TableHeader/TableHeader'),
@@ -38,7 +35,7 @@ const AdminAssetPageStyledDiv = styled.div`
 `
 const assets = () => {
     const {query, pathname, asPath} = useRouter()
-    const dispatch = useAppDispatch()
+    const dispatch = useAdminDispatch()
 
 
     const assetPageData = useSelector((store: StoreTypes) => {
@@ -78,13 +75,12 @@ const assets = () => {
     }, [query, pathname, asPath])
 
 
-
-    const getData = () =>{
+    const getData = () => {
         const assetType = query.assetsType
         if (assetType === 'posts') {
             const gettingPostsQueries = _adminGetPostsQueryGenerator(query)
             dispatch(fetchAdminPanelPosts(gettingPostsQueries))
-        } else if (assetType === 'users'){
+        } else if (assetType === 'users') {
             dispatch(fetchAdminPanelUsers({}))
         } else if (assetType === 'metas') {
             const queries = _metaPageQueryGenerator(query, query.metaType)
@@ -124,12 +120,6 @@ const assets = () => {
     );
 };
 
-
-export const getServerSideProps = wrapper.getServerSideProps(() => async (context) => {
-    return {
-        props: {}
-    }
-})
 
 assets.getLayout = function getLayout(page: ReactElement) {
 

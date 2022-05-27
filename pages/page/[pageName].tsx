@@ -3,13 +3,13 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import dynamic from "next/dynamic";
 import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 import styled from "styled-components";
 import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import {fetchPageData} from "@store_toolkit/clientReducers/postsReducer";
+import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 const Soft404 = dynamic(() => import('@components/includes/Soft404/Soft404'));
 
 const PageStyle = styled.div`
@@ -42,7 +42,7 @@ const page = () => {
 //************SSR***************
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-    await getDefaultPageData(
+    await _getServerSideStaticPageData(
         context,
         [
             context.query.pageName as string,

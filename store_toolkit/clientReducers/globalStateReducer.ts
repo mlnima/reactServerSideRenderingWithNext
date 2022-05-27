@@ -1,25 +1,8 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {RootState} from "../store";
-import {HYDRATE} from "next-redux-wrapper";
+import {GlobalStateTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
-interface GlobalState {
-    loginRegisterFormPopup: boolean,
-    beforeUnload: boolean,
-    loading: boolean,
-    notFoundPage: boolean,
-    isSiteIdentitySet: boolean,
-    isSiteDesignSet: boolean,
-    console: boolean,
-    headData: {},
-    alert: {
-        active: boolean,
-        type?: string,
-        err?: string,
-        message: ''
-    }
-}
-
-const initialState: GlobalState = {
+const initialState: GlobalStateTypes = {
     loginRegisterFormPopup: false,
     beforeUnload: false,
     loading: false,
@@ -44,7 +27,10 @@ export const globalStateSlice = createSlice({
         setHeadData: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
-                headData: action.payload
+                headData: {
+                    ...state.headData,
+                    ...action.payload
+                }
             }
         },
         loginRegisterForm: (state, action: PayloadAction<any>) => {
@@ -70,14 +56,14 @@ export const globalStateSlice = createSlice({
             }
         }
     },
-    extraReducers: {
-        [HYDRATE]: (state, action: PayloadAction<any>) => {
-            return {
-                ...state,
-                ...action.payload.globalState
-            };
-        }
-    }
+    // extraReducers: {
+    //     [HYDRATE]: (state, action: PayloadAction<any>) => {
+    //         return {
+    //             ...state,
+    //             ...action.payload.globalState
+    //         };
+    //     }
+    // }
 })
 
 

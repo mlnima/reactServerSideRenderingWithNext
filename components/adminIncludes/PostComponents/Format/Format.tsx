@@ -4,7 +4,7 @@ import { useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {adminEditPost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
 import postTypes from "../../../global/postTypes";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAdminDispatch} from "@store_toolkit/hooks";
 
 const FormatStyledDiv = styled.div`
 .custom-select{
@@ -18,7 +18,7 @@ interface PostFormatPropTypes {
 }
 
 const Format:FC<PostFormatPropTypes> = ({postType}) => {
-    const dispatch = useAppDispatch()
+    const dispatch = useAdminDispatch()
     const post = useSelector((state : StoreTypes) => state.adminPanelPosts.post);
 
     const onChangeHandlerAndSetPreferPostTypeToLocalStorage = (e: React.ChangeEvent<HTMLSelectElement>) =>{

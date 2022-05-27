@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import Editor from "@monaco-editor/react";
-import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import type {ReactElement} from 'react';
@@ -11,11 +10,11 @@ import {
     adminPanelEditTranslationsFile
 } from "@store_toolkit/adminReducers/adminPanelFileManagerReducer";
 import {languagesOptions} from "@_variables/_variables";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAdminDispatch} from "@store_toolkit/hooks";
 
 const translations = () => {
 
-    const dispatch = useAppDispatch()
+    const dispatch = useAdminDispatch()
     const translationsData = useSelector(({adminPanelFileManager}: StoreTypes) => adminPanelFileManager.translationsData)
     const [activeEditingLanguage, seActiveEditingLanguage] = useState(() => process.env.NEXT_PUBLIC_DEFAULT_LOCAL);
     const [translationsFilePath, setTranslationsFilePath] = useState(
@@ -69,9 +68,6 @@ const translations = () => {
     );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(() => async () => {
-    return {props: {}}
-})
 
 translations.getLayout = function getLayout(page: ReactElement) {
     return (

@@ -1,19 +1,19 @@
 import React from 'react';
-import Editor, { DiffEditor, useMonaco, loader } from "@monaco-editor/react";
+import Editor, {DiffEditor, useMonaco, loader} from "@monaco-editor/react";
 
 const TextWidgetTypeFields = props => {
 
-    const onChangeHandler = value=>{
-        const e={
-            target:{
-                name:'text',
+    const onChangeHandler = value => {
+        const e = {
+            target: {
+                name: 'text',
                 value
             }
         }
         props.onTextInputsDataChangeHandler(e)
     }
 
-    if (props.rendering){
+    if (props.rendering) {
         return (
             <div className={'monaco-editor-section'}>
                 <p>Text:</p>
@@ -35,7 +35,7 @@ const TextWidgetTypeFields = props => {
                 />
             </div>
         );
-    }else return null
+    } else return null
 
 };
 export default TextWidgetTypeFields;

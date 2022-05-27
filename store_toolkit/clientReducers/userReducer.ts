@@ -2,6 +2,9 @@ import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
 import Axios from "@_variables/util/Axios";
 import {loading, setAlert, loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
+import {NextRouter} from "next/router";
+import Peer from 'simple-peer'
+import {socket} from '@_variables/socket';
 
 interface UserState {
     userData: any;
@@ -55,11 +58,10 @@ interface Login {
 }
 
 export const fetchLogin = createAsyncThunk(
-    'user/login',
+    'user/fetchLogin',
     async ({username, password}: Login, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         return await Axios.post('/api/v1/users/login', {username, password}).then(res => {
-            console.log(res.data)
             res?.data?.token ? localStorage.setItem('wt', res.data.token) : null
             return {
                 userData: res.data,
@@ -79,23 +81,149 @@ export const fetchLogin = createAsyncThunk(
     }
 )
 
+interface FetchOutgoingCall{
+    conversation:string,
+    mySocketId:string,
+    callerName:string,
+    router:NextRouter
+}
 
-export const fetchUserAutoLogin = createAsyncThunk(
-    'user/autoLogin',
-    async ({fields}: { fields: string[] }, thunkAPI) => {
-        if (localStorage.wt) {
-            return await Axios.post('/api/v1/users/getSignedInUserData', {token: localStorage.wt, fields}).then(res => {
-                thunkAPI.dispatch(setAlert({message: res.data.message, type: 'success'}))
-                return res.data?.userData
-            }).catch((err) => {
-                localStorage.removeItem('wt')
-                thunkAPI.dispatch(setAlert({message: err.response.data.message, type: 'error'}))
+
+export const fetchOutgoingCall = createAsyncThunk(
+    'user/fetchOutgoingCall',
+    async ({conversation, mySocketId, callerName, router}:FetchOutgoingCall, thunkAPI) => {
+        try {
+            await navigator?.mediaDevices?.getUserMedia({video: true, audio: true}).then(async myVideo => {
+
+                thunkAPI.dispatch(setMyVideoData(myVideo))
+
+                const peer = new Peer({
+                    initiator: true,
+                    trickle: false,
+                    stream: myVideo
+                })
+
+                peer.on('signal', (data) => {
+                    socket.emit("callToConversation", {
+                        conversation,
+                        callerSignal: data,
+                        callerId: mySocketId,
+                        callerName
+                    })
+                })
+
+                peer.on('stream', (stream) => {
+                    thunkAPI.dispatch(setPartnerVideoData(stream))
+                    // console.log(stream)
+                    // dispatch({
+                    //     type: SET_PARTNER_VIDEO,
+                    //     payload: stream
+                    // })
+                })
+
+                socket.on('callAccepted', (signal) => {
+                    thunkAPI.dispatch(setCallAccepted(true))
+                    // dispatch({
+                    //     type: SET_CALL_ACCEPTED,
+                    //     payload: {
+                    //         callAccepted: true,
+                    //     }
+                    // })
+                    peer.signal(signal)
+                })
+
+                socket.on('endCall', () => {
+                    thunkAPI.dispatch(setCallAccepted(false))
+                    peer.destroy()
+                    router.reload()
+                })
+
+                peer.on("error", (error) => {
+                    console.log(error)
+                })
+
             })
-        } else {
-            thunkAPI.dispatch(setAlert({message: 'You Need To Login', type: 'error'}))
+
+        } catch (err) {
+            thunkAPI.dispatch(setAlert({message: 'Can Not Access The Camera', type: 'error', err}))
         }
     }
 )
+
+export const setMyVideoData = createAsyncThunk(
+    'user/setMyVideoData',
+    async (myVideo:any, thunkAPI) => {
+        return myVideo
+    }
+)
+export const setPartnerVideoData = createAsyncThunk(
+    'user/setPartnerVideoData',
+    async (stream:any, thunkAPI) => {
+        return stream
+    }
+)
+export const setCallAccepted = createAsyncThunk(
+    'user/setCallAccepted',
+    async (isAccepted:boolean, thunkAPI) => {
+        return isAccepted
+    }
+)
+
+interface FetchAnswerTheCall{
+    myVideo:any,
+    conversation:string,
+    callerSignal:any,
+    router:NextRouter
+}
+
+
+export const fetchAnswerTheCall = createAsyncThunk(
+    'user/fetchAnswerTheCall',
+    async ({myVideo, conversation, callerSignal, router}:FetchAnswerTheCall, thunkAPI) => {
+        thunkAPI.dispatch(setCallAccepted(true))
+        // dispatch({
+        //     type: SET_CALL_ACCEPTED,
+        //     payload: {
+        //         callAccepted: true,
+        //     }
+        // })
+        const peer = new Peer({
+            initiator: false,
+            trickle: false,
+            stream: myVideo
+        })
+
+        peer.on('signal', (data) => {
+            socket.emit('answerCall', {signal: data, conversation})
+        })
+
+        peer.on('stream', (partnerVideo) => {
+            thunkAPI.dispatch(setPartnerVideoData(partnerVideo))
+            // dispatch({
+            //     type: SET_PARTNER_VIDEO,
+            //     payload: partnerVideo
+            // })
+        })
+
+        peer.signal(callerSignal)
+
+        socket.on('endCall', () => {
+            // dispatch({
+            //     type: END_CALL,
+            //     payload: true
+            // })
+            peer.destroy()
+            router.reload()
+        })
+
+
+        peer.on("error", (error) => {
+            console.log(error)
+        })
+    }
+)
+
+
 
 export const fetchSpecificUserData = createAsyncThunk(
     'user/fetchSpecificUserData',
@@ -116,7 +244,7 @@ export const fetchSpecificUserData = createAsyncThunk(
 
 
 export const fetchUserResetPassword = createAsyncThunk(
-    'user/resetPassword',
+    'user/fetchUserResetPassword',
     async (data, thunkAPI) => {
         return await Axios.post('/api/v1/users/resetPassword', {token: localStorage.wt, data}).then(res => {
             return res.data?.userData
@@ -129,7 +257,7 @@ export const fetchUserResetPassword = createAsyncThunk(
 
 
 export const fetchUserRegister = createAsyncThunk(
-    'user/register',
+    'user/fetchUserRegister',
     async ({data}: { data: {} }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         return await Axios.post('/api/v1/users/register', data).then(res => {
@@ -147,7 +275,7 @@ export const fetchUserRegister = createAsyncThunk(
 
 
 export const fetchConversations = createAsyncThunk(
-    'user/conversations',
+    'user/fetchConversations',
     async (_id: string, thunkAPI) => {
         return Axios.post('/api/v1/users/getConversations',
             {_id, token: localStorage.wt})
@@ -158,7 +286,7 @@ export const fetchConversations = createAsyncThunk(
 )
 
 export const fetchConversation = createAsyncThunk(
-    'user/conversation',
+    'user/fetchConversation',
     async ({_id, loadAmount}: { _id: string, loadAmount: number }, thunkAPI) => {
         return Axios.post('/api/v1/users/getConversation',
             {
@@ -172,7 +300,7 @@ export const fetchConversation = createAsyncThunk(
     }
 )
 export const fetchDeleteConversation = createAsyncThunk(
-    'user/deleteConversation',
+    'user/fetchDeleteConversation',
     async (_id: string, thunkAPI) => {
         return await Axios.get(`/api/v1/users/deleteConversation?_id=${_id}&token=${localStorage.wt}`)
             .then(res => {
@@ -188,7 +316,7 @@ export const fetchDeleteConversation = createAsyncThunk(
     }
 )
 export const fetchUserPageData = createAsyncThunk(
-    'user/userPageData',
+    'user/fetchUserPageData',
     async ({username, _id, fields}: { username?: string, _id?: string, fields: string[] }, thunkAPI) => {
         const body = {
             username,
@@ -205,7 +333,7 @@ export const fetchUserPageData = createAsyncThunk(
     }
 )
 export const fetchUserProfileImageUpload = createAsyncThunk(
-    'user/profileImageUpload',
+    'user/fetchUserProfileImageUpload',
     async (image: any, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         return await Axios.post('/api/v1/fileManager/userImageUpload', image).then(res => {
@@ -216,7 +344,7 @@ export const fetchUserProfileImageUpload = createAsyncThunk(
     }
 )
 export const fetchFollowUser = createAsyncThunk(
-    'user/followUser',
+    'user/fetchFollowUser',
     async (_id: string, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         const body = {
@@ -232,7 +360,7 @@ export const fetchFollowUser = createAsyncThunk(
 )
 
 export const fetchUnFollowUser = createAsyncThunk(
-    'user/unFollowUser',
+    'user/fetchUnFollowUser',
     async (_id: string, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         const body = {
@@ -248,7 +376,7 @@ export const fetchUnFollowUser = createAsyncThunk(
 )
 
 export const fetchSendMessage = createAsyncThunk(
-    'user/sendPrivateMessage',
+    'user/fetchSendMessage',
     async ({_id, message}: { _id: string, message: {} }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         const body = {
@@ -284,7 +412,7 @@ export const fetchStartConversation = createAsyncThunk(
 )
 
 export const fetchSendAMessageToPrivateConversation = createAsyncThunk(
-    'user/fetchStartConversation',
+    'user/fetchSendAMessageToPrivateConversation',
     async ({conversationId, messageBody}: { conversationId: string, messageBody: {} }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         const body = {
@@ -301,7 +429,7 @@ export const fetchSendAMessageToPrivateConversation = createAsyncThunk(
 )
 
 export const fetchMultipleUserDataById  = createAsyncThunk(
-    'user/fetchStartConversation',
+    'user/fetchMultipleUserDataById',
     async ({usersList, type}: {usersList: {}[], type:string }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         const body = {
@@ -324,6 +452,22 @@ export const fetchMultipleUserDataById  = createAsyncThunk(
     }
 )
 
+export const fetchUserAutoLogin = createAsyncThunk(
+    'user/fetchUserAutoLogin',
+    async ({fields}: { fields: string[] }, thunkAPI) => {
+        if (localStorage.wt) {
+            return await Axios.post('/api/v1/users/getSignedInUserData', {token: localStorage.wt, fields}).then(res => {
+                thunkAPI.dispatch(setAlert({message: res.data.message, type: 'success'}))
+                return res.data?.userData
+            }).catch((err) => {
+                localStorage.removeItem('wt')
+                thunkAPI.dispatch(setAlert({message: err.response.data.message, type: 'error'}))
+            })
+        } else {
+            thunkAPI.dispatch(setAlert({message: 'You Need To Login', type: 'error'}))
+        }
+    }
+)
 
 export const userSlice = createSlice({
     name: 'user',
@@ -438,24 +582,24 @@ export const userSlice = createSlice({
                 }
             }
         },
-        outGoingCall: (state, action: PayloadAction<any>) => {
-            return {
-                ...state,
-                callData: {
-                    ...state.callData,
-                    ...action.payload,
-                }
-            }
-        },
-        setCallAccepted: (state, action: PayloadAction<any>) => {
-            return {
-                ...state,
-                callData: {
-                    ...state.callData,
-                    ...action.payload
-                }
-            }
-        },
+        // outGoingCall: (state, action: PayloadAction<any>) => {
+        //     return {
+        //         ...state,
+        //         callData: {
+        //             ...state.callData,
+        //             ...action.payload,
+        //         }
+        //     }
+        // },
+        // setCallAccepted: (state, action: PayloadAction<any>) => {
+        //     return {
+        //         ...state,
+        //         callData: {
+        //             ...state.callData,
+        //             ...action.payload
+        //         }
+        //     }
+        // },
         endCall: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
@@ -535,6 +679,21 @@ export const userSlice = createSlice({
                     }
                 }
             })
+            .addCase(setPartnerVideoData.fulfilled, (state, action: PayloadAction<any>) => {
+                state.callData.partnerVideo = action.payload
+            })
+            .addCase(setCallAccepted.fulfilled, (state, action: PayloadAction<any>) => {
+                state.callData.callAccepted = action.payload
+            })
+            .addCase(setMyVideoData.fulfilled, (state, action: PayloadAction<any>) => {
+                return{
+                    ...state,
+                        myVideoCallData:{
+                            calling: true,
+                            myVideo:action.payload,
+                        },
+                }
+            })
     }
 });
 
@@ -550,7 +709,7 @@ export const {
     setCallingStatus,
     incomingCall,
     outGoingCall,
-    setCallAccepted,
+    // setCallAccepted,
     endCall,
 } = userSlice.actions;
 

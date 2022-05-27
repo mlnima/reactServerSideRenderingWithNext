@@ -1,12 +1,10 @@
 import React, {ChangeEvent,useState} from 'react';
-import {wrapper} from "@store_toolkit/store";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 import postTypes from "../../../../components/global/postTypes";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import {fetchAdminExportPosts} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAdminDispatch} from "@store_toolkit/hooks";
 
 // import {adminExportPosts} from "@store/adminActions/adminPanelPostsActions";
 
@@ -32,7 +30,7 @@ const PostsExporterStyledDiv = styled.div`
 `
 
 const postsExporter = () => {
-    const dispatch = useAppDispatch()
+    const dispatch = useAdminDispatch()
     const [data, setData] = useState({
         limit: 10,
         postType: 'video',
@@ -131,14 +129,6 @@ const postsExporter = () => {
 
     );
 };
-
-export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    return {
-        props: {
-            ...(await serverSideTranslations(context.locale as string, ['common'])),
-        }
-    }
-})
 
 
 postsExporter.getLayout = function getLayout(page: ReactElement) {

@@ -2,7 +2,7 @@ import React from 'react';
 // import {convertVariableNameToName, languagesOptions} from '../../../../_variables/_variables';
 import styled from "styled-components";
 import { useSelector} from "react-redux";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAdminDispatch} from "@store_toolkit/hooks";
 // import {updateSetting} from "../../../../store/clientActions/settingsActions";
 // import {setLoading} from "../../../../store/clientActions/globalStateActions";
 let StyledDiv = styled.div`
@@ -37,7 +37,7 @@ let StyledDiv = styled.div`
   }
 `
 const EcommerceSettingsInputSection = props => {
-    const dispatch = useAppDispatch()
+    const dispatch = useAdminDispatch()
     const eCommerce = useSelector(store => store?.settings?.eCommerce)
     //eCommerce
     // const contextData = useContext(AppContext);

@@ -2,11 +2,11 @@ import React, {useState} from 'react';
 import {useRouter} from "next/router";
 import styled from "styled-components";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {getDefaultPageData} from "@store_toolkit/clientActions/globalStateActions";
 import {wrapper} from "@store_toolkit/store";
 import type { ReactElement } from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 import {useAppDispatch} from "@store_toolkit/hooks";
+import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 // const PayWithPayPal = dynamic(() => import('../../components/includes/checkOutPageComponents/PayWithPaypal/PayWithPaypal'), {ssr: false})
 
 let StyledDiv = styled.div`
@@ -310,7 +310,7 @@ const checkout = props => {
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     // @ts-ignore
-    await store.dispatch(getDefaultPageData(context, []))
+    await _getServerSideStaticPageData(context, [])
 
     return {
         props: {

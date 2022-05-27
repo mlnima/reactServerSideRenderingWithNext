@@ -9,13 +9,7 @@
 /public/locales/*/customTranslation.json
 /static/uploads/
 /static/uploads/*
-/temp.js
-/temp.html
-/temp.scss
-/temp.css
-/temp.txt
-/temp.json
-/temp/*
+/tempFiles/*
 generateFakeData.js
 tools/testAPI.js
 /package-lock.json

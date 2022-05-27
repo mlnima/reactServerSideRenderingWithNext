@@ -383,7 +383,7 @@ export const fetchUserEditingPost = createAsyncThunk(
     'posts/fetchUserEditingPost',
     async (_id: string, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        await Axios.get(`/api/v1/posts/clientGetPost${_postPageQueryGenerator({_id})}`).then(res => {
+        return await Axios.get(`/api/v1/posts/clientGetPost${_postPageQueryGenerator({_id})}`).then(res => {
             return res.data.post
         }).catch(err => {
 
@@ -579,6 +579,7 @@ export const postsSlice = createSlice({
                 state.post.likes -= 1
             })
             .addCase(fetchUserEditingPost.fulfilled, (state, action: PayloadAction<any>) => {
+
                 return {
                     ...state,
                     editingPost: action.payload

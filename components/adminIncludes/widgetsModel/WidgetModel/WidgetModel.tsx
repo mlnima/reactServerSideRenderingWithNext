@@ -7,7 +7,7 @@ import UniqueFields from "@components/adminIncludes/widgetsModel/WidgetModel/Uni
 import WidgetHeaderControl from "./WidgetHeaderControl/WidgetHeaderControl";
 import { WidgetPropTypes} from "@_variables/TypeScriptTypes/Widgets";
 import {onChangeInputValueCorrector} from "@_variables/_variables";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAdminDispatch} from "@store_toolkit/hooks";
 import {fetchAdminPanelUpdateWidget} from "@store_toolkit/adminReducers/adminWidgetsReducer";
 
 interface WidgetModelPropTypes {
@@ -15,7 +15,7 @@ interface WidgetModelPropTypes {
 }
 
 const WidgetModel: FC<WidgetModelPropTypes> = ({widget}) => {
-    const dispatch = useAppDispatch()
+    const dispatch = useAdminDispatch()
 
     const [widgetSettings, setWidgetSettings] = useState({
         open: false,
