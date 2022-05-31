@@ -159,7 +159,8 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             'profilePage'
         ],
         {
-
+            setHeadData: true,
+            page: 'home'
         },
         store
     )
