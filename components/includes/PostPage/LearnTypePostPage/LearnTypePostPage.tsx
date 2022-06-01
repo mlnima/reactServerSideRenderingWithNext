@@ -1,4 +1,4 @@
-import PostPageStyledMain from '../PostPageStyle'
+import PostPageStyle from '../PostPageStyle'
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import dynamic from "next/dynamic";
@@ -14,10 +14,17 @@ const CommentFrom = dynamic(() => import('../components/CommentFrom/CommentFrom'
 const WidgetsRenderer = dynamic(() => import('../../WidgetsRenderer/WidgetsRenderer'))
 const RatingButtons = dynamic(() => import('../components/RatingButtons/RatingButtons'))
 
-const LearnTypePostPageStyledMain = styled(PostPageStyledMain)`
-  max-width: 1300px;
-  width: fit-content;
+const LearnTypePostPageStyledMain = styled(PostPageStyle)`
   margin: auto;
+  #main{
+    width: 100%;
+    article{
+      width: 100%;
+      .entry-header {
+        width: 100%;
+      }
+    }
+  }
   
   .rating-price-download {
     display: flex;
@@ -56,24 +63,29 @@ const LearnTypePostPage = () => {
 
     return (
         <LearnTypePostPageStyledMain id={'primary'} className='main post-page' postPageStyle={learnTypePostPageData.postPageStyle}>
-            <PostTitle/>
-            <LearnTypePostPageDescription/>
-            <div className='rating-price-download'>
-                <RatingButtons rating={true}/>
-                {learnTypePostPageData.post?.source && learnTypePostPageData.post?.source.includes('http') ?
-                    <a href={learnTypePostPageData.post?.source} className={'link-to-source btn btn-info'}
-                       target={'_blank'}>Source</a>
-                    : null
-                }
-            </div>
-            <PostMeta type='tags'/>
-            <PostMeta type='categories'/>
-            <div className='under-post-widget-area'>
-                <WidgetsRenderer position='underPost'/>
-            </div>
-            <RelatedPostsRenderer/>
-            <CommentFrom/>
-            <CommentsRenderer/>
+            <main id={'main'}>
+                <article>
+                    <PostTitle/>
+                    <LearnTypePostPageDescription/>
+                    <div className='rating-price-download'>
+                        <RatingButtons rating={true}/>
+                        {learnTypePostPageData.post?.source && learnTypePostPageData.post?.source.includes('http') ?
+                            <a href={learnTypePostPageData.post?.source} className={'link-to-source btn btn-info'}
+                               target={'_blank'}>Source</a>
+                            : null
+                        }
+                    </div>
+                    <PostMeta type='tags'/>
+                    <PostMeta type='categories'/>
+                    <div className='under-post-widget-area'>
+                        <WidgetsRenderer position='underPost'/>
+                    </div>
+                    <RelatedPostsRenderer/>
+                    <CommentFrom/>
+                    <CommentsRenderer/>
+                </article>
+
+            </main>
 
         </LearnTypePostPageStyledMain>
     );

@@ -129,24 +129,26 @@ export const fetchPost = createAsyncThunk(
         thunkAPI.dispatch(
             setHeadData({
                     title: postTitle,
-                    description: postDescription?.substring(0, 155) || null,
+                    description: typeof postDescription === 'string' ? postDescription?.substring(0, 155) : null,
                     keywords,
                     canonicalUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/post/${apiData.data.post?.postType || 'article'}/${apiData.data.post?._id}`,
                     ogTitle: postTitle,
                     // ogType: postData?.postType === 'video' ? 'video.other' : postData?.postType || '',
                     ogType: 'website',
-                    ogDescription: postDescription?.substring(0, 155),
+                    ogDescription: typeof postDescription === 'string' ? postDescription?.substring(0, 155) : null,
                     ogUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/post/${apiData.data.post?.postType || 'article'}/${apiData.data.post?._id}`,
                     ogImage: apiData.data.post?.mainThumbnail || null,
 
                     twitterCard: true,
                     twitterUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/post/${apiData.data.post?.postType || 'article'}/${apiData.data.post?._id}`,
                     twitterTitle: postTitle,
-                    twitterDescription: postDescription?.substring(0, 155),
+                    twitterDescription: typeof postDescription === 'string' ? postDescription?.substring(0, 155) : null,
                     twitterImage: apiData.data.post?.mainThumbnail || null,
                 }
             )
         )
+
+
         return ({
             post: apiData.data.post,
             relatedPosts: apiData.data.relatedPosts
@@ -552,6 +554,7 @@ export const postsSlice = createSlice({
                 }
             })
             .addCase(fetchPost.fulfilled, (state, action: PayloadAction<any>) => {
+
                 return {
                     ...state,
                     ...action.payload

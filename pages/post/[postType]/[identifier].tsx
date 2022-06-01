@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "@store_toolkit/store";
-import { useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import dynamic from "next/dynamic";
 import styled from "styled-components";
@@ -23,24 +23,22 @@ const VideoTypePostPage = dynamic(() =>
 const PostPage = dynamic(() => import('@components/includes/PostPage/PostPage'))
 
 const PageStyle = styled.div`
-  
-  
+
+
 `
 
 const postPage = () => {
 
     const dispatch = useAppDispatch()
-    const [isNotFound,setIsNotFound] = useState(false)
+    const [isNotFound, setIsNotFound] = useState(false)
 
     const {postType, _id, status, role, sidebar} = useSelector(({posts, user, settings}: StoreTypes) => {
-
         return {
             postType: posts?.post?.postType,
             _id: posts?.post?._id,
             role: user?.userData?.role,
             status: posts?.post?.status,
             sidebar: settings?.identity?.postPageSidebar,
-            //sidebar: undefined,
 
         }
     });
@@ -52,11 +50,12 @@ const postPage = () => {
     }, [])
 
     useEffect(() => {
-        if((status !== 'published' && role !== 'administrator') || !status){
+        if ((status !== 'published' && role !== 'administrator') || !status) {
             setIsNotFound(true)
         }
+    }, [role, status]);
 
-        }, [ role,status ]);
+
 
     return (
         <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
@@ -84,22 +83,22 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             'underPost'
         ],
         {
-            page:'postPage',
+            page: 'postPage',
             setHeadData: false
         },
         store
     )
 
     //@ts-ignore
-   // context.query?.identifier && await store.dispatch(getPost(context.query?.identifier as string, context.locale as string))
+    // context.query?.identifier && await store.dispatch(getPost(context.query?.identifier as string, context.locale as string))
 
     !!context.query?.identifier && await store.dispatch(
         fetchPost({
-            options:{
-                page:'postPage'
+            options: {
+                page: 'postPage'
             },
             identifier: context?.query?.identifier as string,
-            locale:context.locale
+            locale: context.locale
         })
     )
 
