@@ -40,7 +40,7 @@ const cacheOn = (req, res) => {
     return checkAbsoluteConditions &&  (checkStaticRouteForCacheOption || notCacheUrls)
 }
 
-const cacheSuccesses = cache('480 minutes', cacheOn);
+const cacheSuccesses = cache('30 minutes', cacheOn);
 
 module.exports = cacheSuccesses
 
