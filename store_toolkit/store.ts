@@ -87,14 +87,7 @@ const reducer = (state: ReturnType<typeof combinedReducer>, action: AnyAction) =
 
 export const makeStore = () => configureStore({
     reducer,
-    // middleware: (getDefaultMiddleware) =>
-    //     getDefaultMiddleware({
-    //         thunk: true,
-    //         serializableCheck: false,
-    //         immutableCheck: false,
-    //     }),
     devTools: process.env.NODE_ENV !== 'production',
-    // devTools: true,
 });
 
 //@ts-ignore

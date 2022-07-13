@@ -22,6 +22,8 @@
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store_toolkit/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/store.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +107,7 @@
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\widgetsModel\WidgetModel" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.start">
+  <component name="RunManager" selected="npm.dev">
     <configuration name="analyze" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -158,9 +160,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.test" />
         <item itemvalue="npm.analyze" />
       </list>
@@ -1188,7 +1190,8 @@
       <workItem from="1655790291976" duration="647000" />
       <workItem from="1656535117172" duration="6373000" />
       <workItem from="1656700860127" duration="500000" />
-      <workItem from="1657085701455" duration="747000" />
+      <workItem from="1657085701455" duration="787000" />
+      <workItem from="1657735233192" duration="11741000" />
     </task>
     <servers />
   </component>
