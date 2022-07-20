@@ -95,7 +95,7 @@ const VideoPlayer :FC<PropTypes> = ({descriptionRef}) => {
             {!!playerSchemaData.mainThumbnail &&    <meta itemProp="thumbnailUrl" content={playerSchemaData.mainThumbnail}/>}
             {!!(videoUrl || videoEmbedCode) &&    <meta itemProp="embedURL" content={videoUrl || videoEmbedCode}/>}
             {!!uploadDate && <meta itemProp="uploadDate" content={uploadDate}/>}
-            {!!actors.length && actors?.map(actor=>{
+            {!!actors?.length && actors?.map(actor=>{
                 return(
                     <meta key={actor._id} itemProp="actor" content={actor.name}/>
                 )
