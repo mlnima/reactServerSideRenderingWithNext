@@ -4,7 +4,9 @@ import {Meta} from "@_variables/TypeScriptTypes/GlobalTypes";
 import Link from "next/link";
 import {useRouter} from "next/router";
 import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
-import CardImageRenderer from "@components/includes/cards/CardImageRenderer";
+import dynamic from "next/dynamic";
+const TextToCanvasImage = dynamic(() => import('@components/includes/cards/asset/TextToCanvasImage/TextToCanvasImage'))
+const CardImageRenderer = dynamic(() => import('@components/includes/cards/CardImageRenderer'))
 
 const CategoryCardStyle = styled.article`
   background-color: var(--post-element-background-color, #131314);
@@ -53,11 +55,16 @@ const CategoryCard: FC<CategoryCardPropTypes> =
             <CategoryCardStyle cardWidth={cardWidth} className={'category-card'}>
                 <Link href={`/category/${category?._id}`}>
                     <a className='category-card-link' title={cardTitle as string}>
-                        <CardImageRenderer imageUrl={category.imageUrl}
-                                           mediaAlt={cardTitle}
-                                           index={index}
-                                           postsPerRawForMobile={postsPerRawForMobile}
-                                           cardWidth={cardWidth}/>
+                        {!!category.imageUrl ?
+                            <CardImageRenderer imageUrl={category.imageUrl}
+                                               mediaAlt={cardTitle}
+                                               index={index}
+                                               postsPerRawForMobile={postsPerRawForMobile}
+                                               cardWidth={cardWidth}/> :
+                            <TextToCanvasImage title={cardTitle}
+                                               postsPerRawForMobile={postsPerRawForMobile}
+                                               cardWidth={cardWidth}/>
+                        }
 
                         {/*<div className={'category-card-info'}>*/}
                         {/*    <h3 className={'category-card-title'}>*/}

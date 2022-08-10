@@ -3,14 +3,14 @@ import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import styled from "styled-components";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import CardImageRenderer from "@components/includes/cards/CardImageRenderer";
 import {fetchViewPost} from "@store_toolkit/clientReducers/postsReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
 
 const CardViews = dynamic(() => import('./asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('./asset/CardRating/CardRating'))
 const CardLastUpdate = dynamic(() => import('./asset/CardLastUpdate/CardLastUpdate'));
-
+const TextToCanvasImage = dynamic(() => import('@components/includes/cards/asset/TextToCanvasImage/TextToCanvasImage'))
+const CardImageRenderer = dynamic(() => import('@components/includes/cards/CardImageRenderer'))
 // direction: ${({direction}: { direction: string }) => direction || 'ltr'};
 
 interface PromotionPostCardPropTypes {
@@ -36,6 +36,7 @@ const PromotionPostCardStyle = styled.article`
   .entry-header {
     text-align: center;
     margin-top: 2px;
+
     .card-header {
       color: var(--post-element-text-color, #ccc);
     }
@@ -93,11 +94,15 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
             <PromotionPostCardStyle className={'post-card'} cardWidth={cardWidth}>
                 <a href={post.redirectLink} className='promotion-card-link-external'
                    onClick={() => dispatch(fetchViewPost(post._id))} target='_blank' rel="nofollow noopener external">
-                    {post.mainThumbnail && <CardImageRenderer imageUrl={post.mainThumbnail}
-                                                              mediaAlt={title}
-                                                              index={index}
-                                                              postsPerRawForMobile={postsPerRawForMobile}
-                                                              cardWidth={cardWidth}/>
+                    {post.mainThumbnail ?
+                        <CardImageRenderer imageUrl={post.mainThumbnail}
+                                           mediaAlt={title}
+                                           index={index}
+                                           postsPerRawForMobile={postsPerRawForMobile}
+                                           cardWidth={cardWidth}/> :
+                        <TextToCanvasImage title={title}
+                                           postsPerRawForMobile={postsPerRawForMobile}
+                                           cardWidth={cardWidth}/>
                     }
                 </a>
 
@@ -110,10 +115,10 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
 
                         <div className={'card-under-media-info'}>
                             {!!views &&
-                                 <CardViews views={views} className={'card-views card-under-media-info-data'}/>
+                            <CardViews views={views} className={'card-views card-under-media-info-data'}/>
                             }
                             {!!rating &&
-                                 <CardRating rating={rating} className={'card-rating card-under-media-info-data'}/>
+                            <CardRating rating={rating} className={'card-rating card-under-media-info-data'}/>
                             }
                         </div>
 

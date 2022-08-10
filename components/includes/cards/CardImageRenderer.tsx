@@ -1,5 +1,4 @@
-//CardImageRenderer
-import {FC, useMemo, useState} from 'react'
+import React, {FC, useState} from 'react'
 import isAbsolutePath from "@_variables/util/isAbsolutePath";
 import isImageAllowedForNextImage from "@_variables/util/isImageAllowedForNextImage";
 import Image from 'next/image'
@@ -11,12 +10,12 @@ interface CardImageNextPropTypes {
     index?: number,
     postsPerRawForMobile: number,
     cardWidth: number,
+    title?: string,
 }
 
 interface CardImageRendererStylePropTypes {
     postsPerRawForMobile: number,
     cardWidth: number,
-
 }
 
 const CardImageRendererStyle = styled.div`
@@ -30,7 +29,6 @@ const CardImageRendererStyle = styled.div`
     width: 100%;
     height: ${({postsPerRawForMobile}: CardImageRendererStylePropTypes) => 96 / postsPerRawForMobile / 1.777}vw !important;
     aspect-ratio: 16 / 9;
-    //object-fit: contain;
     object-fit: cover;
   }
 
@@ -53,40 +51,39 @@ const CardImageRenderer: FC<CardImageNextPropTypes> =
          index,
          cardWidth,
      }) => {
-        const [gotError, setGotError] = useState(false)
 
-        const imageUrlSource = useMemo(() => {
-            return imageUrl && !isAbsolutePath(imageUrl) ? `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${imageUrl}` : imageUrl
+        const [imageSrc,setImageSrc] = useState(() => imageUrl && !isAbsolutePath(imageUrl) ?
+                `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${imageUrl}` :
+                imageUrl
+            )
 
-        }, [imageUrl, gotError])
+        const noImageUrl = `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${'/static/images/noImage/no-image-available.png'}`
 
         return (
-            <CardImageRendererStyle postsPerRawForMobile={postsPerRawForMobile} cardWidth={cardWidth}
+            <CardImageRendererStyle postsPerRawForMobile={postsPerRawForMobile}
+                                    cardWidth={cardWidth}
                                     className={'card-image'}>
-                {imageUrlSource && isImageAllowedForNextImage(imageUrlSource) && index >= 2 ?
+
+                {(imageSrc && isImageAllowedForNextImage(imageSrc) && index >= 2) ?
                     <Image alt={mediaAlt}
-                           src={gotError || !imageUrlSource ?
-                               '/static/images/noImage/no-image-available.png' :
-                               imageUrlSource
-                           }
+                           src={imageSrc}
                            loading={'lazy'}
                            layout={'fill'}
                            className={'card-image-next'}
                            quality={80}
                            objectFit={'cover'}
-                           onError={() => setGotError(true)}
+                           onError={() => setImageSrc(noImageUrl)}
                     /> :
-                    <img src={gotError || !imageUrlSource ?
-                            '/static/images/noImage/no-image-available.png' :
-                            imageUrlSource
-                        }
-                        alt={mediaAlt}
-                        className={'card-image'}
-                        onError={() => setGotError(true)}
+                    <img src={imageSrc}
+                         alt={mediaAlt}
+                         className={'card-image'}
+                         onError={({currentTarget }) =>currentTarget.src= noImageUrl}
                     />
                 }
+
             </CardImageRendererStyle>
         )
+
     };
 export default CardImageRenderer
 

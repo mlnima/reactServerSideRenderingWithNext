@@ -3,7 +3,6 @@ import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import styled from "styled-components";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import CardImageRenderer from "@components/includes/cards/CardImageRenderer";
 import VideoPostCardTrailer from "@components/includes/cards/VideoPostCardTrailer";
 import _qualityConvertor from "@components/includes/cards/asset/_qualityConvertor";
 import CardViews from "./asset/CardViews/CardViews";
@@ -11,6 +10,8 @@ import CardViews from "./asset/CardViews/CardViews";
 const CardRatingBar = dynamic(() => import('./asset/CardRatingBar/CardRatingBar'))
 const CardQuality = dynamic(() => import('./asset/CardQuality/CardQuality'))
 const CardDuration = dynamic(() => import('./asset/CardDuration/CardDuration'))
+const TextToCanvasImage = dynamic(() => import('@components/includes/cards/asset/TextToCanvasImage/TextToCanvasImage'))
+const CardImageRenderer = dynamic(() => import('@components/includes/cards/CardImageRenderer'))
 
 interface VideoPostCardPropTypes {
     title: string,
@@ -36,11 +37,12 @@ const VideoPostCardStyle = styled.article`
     position: relative;
     color: var(--post-element-text-color, #ccc);
 
-    .card-quality, .card-duration, .card-views{
+    .card-quality, .card-duration, .card-views {
       background-color: #000;
       overflow: hidden;
       padding: 2.4px 4.8px;
     }
+
     .card-quality {
       font-weight: 900;
       position: absolute;
@@ -56,6 +58,7 @@ const VideoPostCardStyle = styled.article`
       right: 5px;
       z-index: 1;
     }
+
     .card-views {
       display: flex;
       justify-content: center;
@@ -64,13 +67,15 @@ const VideoPostCardStyle = styled.article`
       bottom: 5px;
       left: 5px;
       z-index: 1;
-          .icon {
-            width: 14px;
-            height: 14px;
-            margin: 0 2px;
-          }
+
+      .icon {
+        width: 14px;
+        height: 14px;
+        margin: 0 2px;
+      }
     }
   }
+
   .entry-header {
     text-align: center;
     margin: 2px 0;
@@ -126,9 +131,15 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
                         <div className={'video-post-card-media'}>
 
                             {((!hover || (hover && !post?.videoTrailerUrl)) && !!post.mainThumbnail) &&
-                               <CardImageRenderer imageUrl={post.mainThumbnail}
+                            <CardImageRenderer imageUrl={post.mainThumbnail}
                                                mediaAlt={title}
                                                index={index}
+                                               postsPerRawForMobile={postsPerRawForMobile}
+                                               cardWidth={cardWidth}/>
+                            }
+
+                            {((!hover || (hover && !post?.videoTrailerUrl)) && !post.mainThumbnail) &&
+                            <TextToCanvasImage title={title}
                                                postsPerRawForMobile={postsPerRawForMobile}
                                                cardWidth={cardWidth}/>
                             }
@@ -153,13 +164,12 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
                             <CardViews views={views} className={'card-views card-under-media-info-data'}/>
 
                         </div>
-                {/*    </a>*/}
-                {/*</Link>*/}
+                        {/*    </a>*/}
+                        {/*</Link>*/}
 
 
-
-                {/*<Link href={postUrl}>*/}
-                {/*    <a rel={'next'} className={'card-link'} title={title}>*/}
+                        {/*<Link href={postUrl}>*/}
+                        {/*    <a rel={'next'} className={'card-link'} title={title}>*/}
                         <CardRatingBar rating={rating} className={'card-rating card-under-media-info-data'}/>
                         <header className={'entry-header'}>
                             <span className={'card-header'}>{title}</span>

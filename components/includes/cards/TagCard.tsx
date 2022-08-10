@@ -4,7 +4,9 @@ import {Meta} from "@_variables/TypeScriptTypes/GlobalTypes";
 import Link from "next/link";
 import {useRouter} from "next/router";
 import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
-import CardImageRenderer from "@components/includes/cards/CardImageRenderer";
+import dynamic from "next/dynamic";
+const TextToCanvasImage = dynamic(() => import('@components/includes/cards/asset/TextToCanvasImage/TextToCanvasImage'))
+const CardImageRenderer = dynamic(() => import('@components/includes/cards/CardImageRenderer'))
 
 const TagCardStyle = styled.article`
   background-color: var(--post-element-background-color, #131314);
@@ -12,10 +14,10 @@ const TagCardStyle = styled.article`
   margin: 0 auto;
 
   .tag-card-link {
-  
+
     color: var(--post-element-text-color, #ccc);
 
-    .entry-header{
+    .entry-header {
       width: 100%;
       margin: 3px 0;
       text-align: center;
@@ -55,11 +57,17 @@ const TagCard: FC<TagCardPropTypes> =
             <TagCardStyle cardWidth={cardWidth} className={'tag-card'}>
                 <Link href={`/tag/${tag?._id}`}>
                     <a className='tag-card-link' title={cardTitle as string}>
-                        <CardImageRenderer imageUrl={tag.imageUrl}
-                                           mediaAlt={cardTitle}
-                                           index={index}
-                                           postsPerRawForMobile={postsPerRawForMobile}
-                                           cardWidth={cardWidth}/>
+                        {!!tag.imageUrl ?
+                            <CardImageRenderer imageUrl={tag.imageUrl}
+                                               mediaAlt={cardTitle}
+                                               index={index}
+                                               postsPerRawForMobile={postsPerRawForMobile}
+                                               cardWidth={cardWidth}/> :
+                            <TextToCanvasImage title={cardTitle}
+                                               postsPerRawForMobile={postsPerRawForMobile}
+                                               cardWidth={cardWidth}/>
+                        }
+
 
                         <header className={'entry-header'}>
                             <span className={'cat-title'}>

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import CardImageRenderer from "@components/includes/cards/CardImageRenderer";
+import TextToCanvasImage from "@components/includes/cards/asset/TextToCanvasImage/TextToCanvasImage";
 
 const CardViews = dynamic(() => import('./asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('./asset/CardRating/CardRating'))
@@ -32,6 +33,7 @@ const LearnPostCardStyle = styled.article`
   .entry-header {
     text-align: center;
     margin-top: 2px;
+
     .card-header {
       color: var(--post-element-text-color, #ccc);
     }
@@ -89,11 +91,15 @@ const LearnPostCard: FC<LearnPostCardPropTypes> =
                 <Link href={postUrl}>
                     <a className={'card-link'} title={title}>
 
-                        {!!post.mainThumbnail && <CardImageRenderer imageUrl={post.mainThumbnail}
-                                                                  mediaAlt={title}
-                                                                  index={index}
-                                                                  postsPerRawForMobile={postsPerRawForMobile}
-                                                                  cardWidth={cardWidth}/>
+                        {!!post.mainThumbnail ?
+                            <CardImageRenderer imageUrl={post.mainThumbnail}
+                                               mediaAlt={title}
+                                               index={index}
+                                               postsPerRawForMobile={postsPerRawForMobile}
+                                               cardWidth={cardWidth}/> :
+                            <TextToCanvasImage title={title}
+                                               postsPerRawForMobile={postsPerRawForMobile}
+                                               cardWidth={cardWidth}/>
                         }
 
                         <header className={'entry-header'}>
@@ -102,15 +108,15 @@ const LearnPostCard: FC<LearnPostCardPropTypes> =
 
                         <div className={'card-under-media-info'}>
                             {!!views &&
-                                    <CardViews views={views} className={'card-views card-under-media-info-data'}/>
+                            <CardViews views={views} className={'card-views card-under-media-info-data'}/>
                             }
                             {!!rating &&
-                                    <CardRating rating={rating} className={'card-rating card-under-media-info-data'}/>
+                            <CardRating rating={rating} className={'card-rating card-under-media-info-data'}/>
                             }
                         </div>
 
                         {!!(post?.updatedAt || post?.createdAt) &&
-                              <CardLastUpdate targetedDate={post?.updatedAt || post?.createdAt}/>
+                        <CardLastUpdate targetedDate={post?.updatedAt || post?.createdAt}/>
                         }
 
                     </a>

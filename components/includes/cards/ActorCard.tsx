@@ -3,7 +3,10 @@ import styled from "styled-components";
 import {Meta} from "@_variables/TypeScriptTypes/GlobalTypes";
 import Link from "next/link";
 import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
-import CardImageRenderer from "@components/includes/cards/CardImageRenderer";
+import dynamic from "next/dynamic";
+
+const TextToCanvasImage = dynamic(() => import('@components/includes/cards/asset/TextToCanvasImage/TextToCanvasImage'))
+const CardImageRenderer = dynamic(() => import('@components/includes/cards/CardImageRenderer'))
 
 const ActorCardStyle = styled.article`
   background-color: var(--post-element-background-color, #131314);
@@ -37,7 +40,7 @@ const ActorCardStyle = styled.article`
         }
       }
     }
-    
+
     .actor-card-info {
       display: flex;
       align-items: center;
@@ -51,6 +54,7 @@ const ActorCardStyle = styled.article`
         width: 100%;
         text-align: center;
         margin-top: 5px;
+
         .card-header {
           width: min-content;
           color: var(--main-active-color);
@@ -93,11 +97,18 @@ const ActorCard: FC<ActorCardPropTypes> =
             <ActorCardStyle cardWidth={cardWidth} className={'actor-card'}>
                 <Link href={`/actor/${actor?._id}`}>
                     <a className='actor-card-link' title={actorName as string}>
-                        <CardImageRenderer imageUrl={actor.imageUrl}
-                                           mediaAlt={actorName}
-                                           index={index}
-                                           postsPerRawForMobile={postsPerRawForMobile}
-                                           cardWidth={cardWidth}/>
+                        {!!actor.imageUrl ?
+                            <CardImageRenderer imageUrl={actor.imageUrl}
+                                               mediaAlt={actorName}
+                                               index={index}
+                                               postsPerRawForMobile={postsPerRawForMobile}
+                                               cardWidth={cardWidth}/> :
+                            <TextToCanvasImage title={actorName}
+                                               postsPerRawForMobile={postsPerRawForMobile}
+                                               cardWidth={cardWidth}/>
+
+                        }
+
 
                         <div className={'actor-card-info'}>
                             <header>

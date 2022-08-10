@@ -3,8 +3,9 @@ import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import styled from "styled-components";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import CardImageRenderer from "@components/includes/cards/CardImageRenderer";
 
+const TextToCanvasImage = dynamic(() => import('@components/includes/cards/asset/TextToCanvasImage/TextToCanvasImage'))
+const CardImageRenderer = dynamic(() => import('@components/includes/cards/CardImageRenderer'))
 const CardViews = dynamic(() => import('./asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('./asset/CardRating/CardRating'))
 const CardLastUpdate = dynamic(() => import('./asset/CardLastUpdate/CardLastUpdate'));
@@ -89,12 +90,15 @@ const ArticlePostCard: FC<ArticlePostCardPropTypes> =
             <ArticlePostCardStyle className={'post-card'} cardWidth={cardWidth}>
                 <Link href={postUrl}>
                     <a className={'card-link'} title={title}>
-                        {post.mainThumbnail &&
-                        <CardImageRenderer imageUrl={post.mainThumbnail}
-                                           mediaAlt={title}
-                                           index={index}
-                                           postsPerRawForMobile={postsPerRawForMobile}
-                                           cardWidth={cardWidth}/>
+                        {post.mainThumbnail ?
+                            <CardImageRenderer imageUrl={post.mainThumbnail}
+                                               mediaAlt={title}
+                                               index={index}
+                                               postsPerRawForMobile={postsPerRawForMobile}
+                                               cardWidth={cardWidth}/> :
+                            <TextToCanvasImage title={title}
+                                               postsPerRawForMobile={postsPerRawForMobile}
+                                               cardWidth={cardWidth}/>
                         }
 
                         <header className={'entry-header'}>
