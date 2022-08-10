@@ -5,13 +5,14 @@ import Link from "next/link";
 import styled from "styled-components";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
+import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 
 const AuthenticationNotLoggedInItemsStyledDiv = styled.div`
-    
+
 `
 
 interface AuthenticationNotLoggedInItemsPropTypes {
-    onOpenCloseHandler:any,
+    onOpenCloseHandler: any,
 }
 
 const AuthenticationNotLoggedInItems: FC<AuthenticationNotLoggedInItemsPropTypes> = ({onOpenCloseHandler}) => {
@@ -19,15 +20,14 @@ const AuthenticationNotLoggedInItems: FC<AuthenticationNotLoggedInItemsPropTypes
     const {pathname} = useRouter()
     const dispatch = useAppDispatch()
 
-    const onLoginButtonClickHandler = ()=>{
+    const onLoginButtonClickHandler = () => {
         dispatch(loginRegisterForm('login'))
         onOpenCloseHandler()
     }
-    const onRegisterButtonClickHandler = ()=>{
+    const onRegisterButtonClickHandler = () => {
         dispatch(loginRegisterForm('register'))
         onOpenCloseHandler()
     }
-
 
 
     return (
@@ -39,7 +39,11 @@ const AuthenticationNotLoggedInItems: FC<AuthenticationNotLoggedInItemsPropTypes
                      aria-label='logged-out-items'>
 
                     <div className={'icon-wrapper'}>
-                           <span className={'sign-in-button icon'}/>
+                                <SvgRenderer svgUrl={'/public/asset/images/icons/user-solid.svg'}
+                                             size={48}
+                                             customClassName={'sign-in-button '}
+                                             color={' var(--auth-widget-text-color, #fff)'}
+                                />
                     </div>
 
                     <p className={'text-data'}>{t<string>(`Login`)}</p>
@@ -51,7 +55,11 @@ const AuthenticationNotLoggedInItems: FC<AuthenticationNotLoggedInItemsPropTypes
                       aria-label='logged-out-items'>
 
                     <div className={'icon-wrapper'}>
-                        <span className={'register-button icon'}/>
+                               <SvgRenderer svgUrl={'/public/asset/images/icons/pen-solid.svg'}
+                                            size={48}
+                                            customClassName={'register-button'}
+                                            color={' var(--auth-widget-text-color, #fff)'}
+                               />
                     </div>
 
                     <p className={'text-data'}>{t<string>(`Register`)}</p>
@@ -64,7 +72,11 @@ const AuthenticationNotLoggedInItems: FC<AuthenticationNotLoggedInItemsPropTypes
                     <Link href={`/`}>
                         <a className='logged-item logged-out' onClick={onOpenCloseHandler}>
                             <div className={'icon-wrapper'}>
-                                <span className={'home-button icon'}/>
+                                <SvgRenderer svgUrl={'/public/asset/images/icons/home-solid.svg'}
+                                             size={20}
+                                             customClassName={'home-button'}
+                                             color={' var(--auth-widget-text-color, #fff)'}
+                                />
                             </div>
                             <p className={'text-data'}>{t<string>(`Home`)}</p>
                         </a>

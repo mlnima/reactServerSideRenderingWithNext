@@ -12,11 +12,30 @@ module.exports = (data, metaId) => {
 
     const metaQuery = metaId ? [{$or: [{categories: {$in: metaId}}, {tags: {$in: metaId}}, {actors: {$in: metaId}}]}] : [];
 
-    const searchQuery = data.keyword ? [{
-        $or: ['title', 'description'].map(fieldToSearch => {
-            return {[fieldToSearch]: {$regex: decodeURIComponent(data.keyword), $options: 'i'}}
-        })
-    }] : []
+    const keyword = data.keyword ? decodeURIComponent(data.keyword) : ''
+
+    const searchQuery = !keyword ? [] :
+        !data.lang || data.lang === 'default' ?
+            [{
+                $or: [
+                    {title: new RegExp(keyword, 'i')},
+                    {description: new RegExp(keyword, 'i')}
+                ]
+            }] :
+            [{
+                $or: [
+                    {title: new RegExp(keyword, 'i')},
+                    {description: new RegExp(keyword, 'i')},
+                    {[`translations.${data.lang}.title`]: new RegExp(keyword, 'i')},
+                    {[`translations.${data.lang}.description`]: new RegExp(keyword, 'i')},
+                ]
+            }]
+
+    // const searchQuery = data.keyword ? [{
+    //     $or: ['title', 'description'].map(fieldToSearch => {
+    //         return {[fieldToSearch]: {$regex: decodeURIComponent(data.keyword), $options: 'i'}}
+    //     })
+    // }] : []
 
 
     const postTypeQuery = data?.postType ? [{postType: data.postType}] : []

@@ -7,7 +7,6 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
 import {StoreTypes} from '@_variables/TypeScriptTypes/GlobalTypes'
-
 import type { ReactElement } from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 import {fetchPosts} from "@store_toolkit/clientReducers/postsReducer";
@@ -41,21 +40,16 @@ const searchPage = ( ) => {
     return (
         <StyledMain id={'main-content'} className="main posts-page" stylesData={settings.design?.postsPageStyle || ''}>
 
-            <WidgetsRenderer
-                position={'searchPageTop'}
+            <WidgetsRenderer position={'searchPageTop'}/>
 
-            />
+            {!!router.query.keyword && !!posts?.length && <PostsPageInfo keyword={router.query.keyword as string}/>}
 
-            {router.query.keyword && posts?.length && <PostsPageInfo keyword={router.query.keyword as string}/>}
+            {!posts?.length && <h2 className='no-result-message'>No Result for {router.query.keyword}</h2>}
 
-            {!posts?.length ?
-                    <h2 className='no-result-message'>No Result for {router.query.keyword}</h2> :
-                    null
-            }
             <PostsPage  />
-            <WidgetsRenderer
-                position={'searchPageBottom'}
-            />
+
+            <WidgetsRenderer position={'searchPageBottom'}/>
+
         </StyledMain>
     )
 };

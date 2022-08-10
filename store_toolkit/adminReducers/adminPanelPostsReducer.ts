@@ -6,7 +6,6 @@ import {AxiosErrorTypes, Meta, PageTypes} from "@_variables/TypeScriptTypes/Glob
 import {loading, setAlert} from "@store_toolkit/clientReducers/globalStateReducer";
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 
-
 interface AdminPanelPosts {
     post: {
         title: string,

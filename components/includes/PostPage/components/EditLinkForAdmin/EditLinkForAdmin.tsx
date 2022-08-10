@@ -18,7 +18,7 @@ const EditLinkForAdminStyledDiv = styled.div`
   padding: 10px;
   top: 0;
   border-radius: 3px;
-  position: fixed;
+  //position: fixed;
 
   .btn-primary {
     color: var(--primary-button-link-text-color);

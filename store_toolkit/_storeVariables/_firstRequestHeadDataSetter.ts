@@ -3,7 +3,7 @@ import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
 
 const _firstRequestHeadDataSetter = (context,page:string,setHeadData:boolean,identity:any)=>{
     
-    if (page?.match('search|tags|categories|actors|home|posts|chatroom|messenger|login|register') && setHeadData){
+    if (page?.match('search|tags|categories|actors|home|profile|posts|chatroom|messenger|login|register') && setHeadData){
         const title = page && page?.match('search|tags|categories|actors') ?
             textContentReplacer(
                 getTextDataWithTranslation(context.locale, `${page}PageTitle`, identity)

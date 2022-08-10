@@ -1,10 +1,10 @@
-import React, {useState, useEffect, FC} from 'react';
+import React, {useState, useEffect, FC, useRef} from 'react';
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useTranslation} from 'next-i18next';
 import {useSelector} from 'react-redux';
 import styled from "styled-components";
-import { loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
+import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 import Draggable from 'react-draggable';
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import _passwordValidator from "../../../_variables/clientVariables/_passwordValidator";
@@ -12,6 +12,7 @@ import ValidInput from "./ValidInput";
 import {fetchLogin, fetchUserRegister} from "@store_toolkit/clientReducers/userReducer";
 import {setAlert} from "@store_toolkit/clientReducers/globalStateReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
+import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 
 const LoginRegisterPopupFormsStyledDiv = styled.div`
   background-color: var(--navigation-background-color, #18181b);
@@ -87,12 +88,35 @@ const LoginRegisterPopupFormsStyledDiv = styled.div`
         flex-wrap: wrap;
         justify-content: space-between;
 
+
         p {
           margin: 4px 0;
           color: var(--main-text-color);
           width: 100%;
         }
 
+        .password {
+          width: 80%;
+        }
+
+        .show-password-wrapper {
+          width: calc(20% - 26px);
+          height: 36px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+
+          .show-password {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            //width: 14px;
+            //height: 14px;
+            //margin: 0 2px;
+          }
+        }
 
       }
 
@@ -167,12 +191,14 @@ interface StateValidatorTypes {
 }
 
 const LoginRegisterPopupForms: FC = () => {
+    const passwordRef = useRef()
     const {t} = useTranslation('common');
     const dispatch = useAppDispatch()
     const globalState = useSelector(({globalState}: StoreTypes) => globalState)
     const [submitButtonDisable, setSubmitButtonDisable] = useState(true)
     const [state, setState] = useState<StateTypes>({});
     const [stateValidator, setStateValidator] = useState<StateValidatorTypes>({});
+    const [showPassword, setShowPassword] = useState<boolean>(false);
     const [response, setResponse] = useState<ResponseTypes>({});
 
     const onChangeHandler = (e: React.FormEvent<HTMLDivElement | HTMLFormElement>) => {
@@ -184,7 +210,6 @@ const LoginRegisterPopupForms: FC = () => {
     };
 
 
-
     const onrResetStateHandler = () => {
         setState({
             username: '',
@@ -193,6 +218,12 @@ const LoginRegisterPopupForms: FC = () => {
             password2: '',
         })
     };
+
+    // const showPasswordChangeHandler = () =>{
+    //     showPassword?
+    //     setShowPassword(!showPassword)
+    // }
+
     const onLoginHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(fetchLogin({username: state.username, password: state.password}))
@@ -212,7 +243,7 @@ const LoginRegisterPopupForms: FC = () => {
             dispatch(setAlert({message: 'password is to short or is not match', type: 'error', active: true}))
         }
 
-        if (checkUsername && checkPasswords){
+        if (checkUsername && checkPasswords) {
             dispatch(fetchUserRegister({data: state}))
         }
 
@@ -237,11 +268,11 @@ const LoginRegisterPopupForms: FC = () => {
     }, [state]);
 
     return (
-        <Draggable  handle='.handle'>
+        <Draggable handle='.handle'>
             <LoginRegisterPopupFormsStyledDiv response={response}
                                               className='login-register-content'
             >
-                <div className='form-header handle' >
+                <div className='form-header handle'>
                     <button onClick={() => dispatch(loginRegisterForm(false))}
                             onTouchStart={() => dispatch(loginRegisterForm(false))}
                             className='close-form-button' title={t(`Close`)}
@@ -327,6 +358,8 @@ const LoginRegisterPopupForms: FC = () => {
                                        required={true} value={state.password}
                                        onChange={e => onChangeHandler(e)}
                                 />
+
+
                                 <ValidInput valid={stateValidator.password}/>
                             </div>
                             <div className={'login-register-form-field'}>
@@ -369,12 +402,22 @@ const LoginRegisterPopupForms: FC = () => {
                                 </div>
                                 <div className="login-register-form-field">
                                     <p>{t<string>(`Password`)}</p>
-                                    <input className={'form-control-input'}
+                                    <input className={'form-control-input password'}
+                                           ref={passwordRef}
                                            name={'password'}
                                            value={state.password}
-                                           type={'password'}
+                                           type={showPassword ? 'text' : 'password'}
                                            onChange={e => onChangeHandler(e)}
                                     />
+                                    {state.password && <div className={'show-password-wrapper '}
+                                                            onClick={() => setShowPassword(!showPassword)}
+                                                            onTouchStart={() => setShowPassword(!showPassword)}>
+                                        <SvgRenderer svgUrl={'/public/asset/images/icons/eye-regular.svg'}
+                                                     size={20}
+                                                     customClassName={'show-password'}
+                                                     color={'var(--navigation-text-color, #fff)'}
+                                        />
+                                    </div>}
                                 </div>
                             </div>
                             <button disabled={!stateValidator.username && !state.password}

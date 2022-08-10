@@ -6,6 +6,7 @@ import {useRouter} from "next/router";
 import {userLogout} from "@store_toolkit/clientReducers/userReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
+import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 
 const AuthenticationLoggedInItemsStyledDiv = styled.div`
   .user-info {
@@ -29,12 +30,7 @@ const AuthenticationLoggedInItemsStyledDiv = styled.div`
         }
 
         .user-info-profile-button-icon {
-          width: 48px;
-          height: 48px;
           margin: 5px 10px;
-          background-color: var(--navigation-text-color, #ccc);
-          mask: url('/public/asset/images/icons/user-solid.svg') no-repeat center;
-          -webkit-mask: url('/public/asset/images/icons/user-solid.svg') no-repeat center;
           cursor: pointer;
         }
       }
@@ -76,7 +72,7 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
         const {t} = useTranslation('common');
         const {pathname} = useRouter()
         const dispatch = useAppDispatch()
-
+//    <span className={'user-info-profile-button-icon'}/>
         return (
             <AuthenticationLoggedInItemsStyledDiv className={'authentication-logged-in'}>
 
@@ -87,7 +83,11 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
                                 {profileImage ?
                                     <img className={'user-info-profile-button-image'} src={profileImage}
                                          alt={'profile image'}/> :
-                                    <span className={'user-info-profile-button-icon'}/>
+                                    <SvgRenderer svgUrl={'/public/asset/images/icons/user-solid.svg'}
+                                                 size={48}
+                                                 customClassName={'user-info-profile-button-icon'}
+                                                 color={' var(--auth-widget-text-color, #fff)'}
+                                    />
                                 }
                                 {/*<span className={'user-info-profile-button-icon'}/>*/}
                             </div>
@@ -105,9 +105,12 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
                        <span className='logged-item logged-item-action' aria-label='logged-in-items'>
                             <Link href={`/messenger`}>
                                 <a onClick={onOpenCloseHandler}>
-
                                         <div className={'icon-wrapper'}>
-                                              <span className={'messages-button icon'}/>
+                                              <SvgRenderer svgUrl={'/public/asset/images/icons/envelope-solid.svg'}
+                                                           size={48}
+                                                           customClassName={'messages-button'}
+                                                           color={' var(--auth-widget-text-color, #fff)'}
+                                              />
                                         </div>
                                         <p className={'text-data'}>{t<string>(`Messages`)}</p>
 
@@ -117,12 +120,17 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
 
 
                         {allowUserToPost &&
-                            <span className='logged-item logged-item-action' aria-label='logged-in-items'>
+                        <span className='logged-item logged-item-action' aria-label='logged-in-items'>
                                 <Link href={`/profile/posts/newPost?postType=article`}>
                                     <a onClick={onOpenCloseHandler}>
 
                                         <div className={'icon-wrapper'}>
-                                            <span className={'plus-button icon'}/>
+                                            {/*<span className={'plus-button icon'}/>*/}
+                                            <SvgRenderer svgUrl={'/public/asset/images/icons/plus-solid.svg'}
+                                                         size={48}
+                                                         customClassName={'plus-button'}
+                                                         color={' var(--auth-widget-text-color, #fff)'}
+                                            />
                                         </div>
 
                                         <p className={'text-data'}>{t<string>(`New Post`)}</p>
@@ -141,7 +149,11 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
                         <Link href={`/`}>
                             <a className='logged-item logged-in' onClick={onOpenCloseHandler}>
                                 <div className={'icon-wrapper'}>
-                                    <span className={'home-button icon'}/>
+                                    <SvgRenderer svgUrl={'/public/asset/images/icons/home-solid.svg'}
+                                                 size={20}
+                                                 customClassName={'home-button'}
+                                                 color={' var(--auth-widget-text-color, #fff)'}
+                                    />
                                 </div>
                                 <p className={'text-data'}>{t<string>(`Home`)}</p>
                             </a>
@@ -155,7 +167,11 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
                         onOpenCloseHandler(e)
                     }}>
                         <div className={'icon-wrapper'}>
-                           <span className={'sign-out-button icon'}/>
+                                    <SvgRenderer svgUrl={'/public/asset/images/icons/sign-out-alt-solid.svg'}
+                                                 size={20}
+                                                 customClassName={'sign-out-button'}
+                                                 color={' var(--auth-widget-text-color, #fff)'}
+                                    />
                         </div>
                         <p className={'text-data'}>{t<string>(`Logout`)}</p>
                     </span>

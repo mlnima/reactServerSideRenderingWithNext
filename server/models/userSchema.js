@@ -1,7 +1,7 @@
 let mongoose = require('mongoose');
 const Schema = mongoose.Schema
 
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
         username: {
             type: String,
             unique: true,
@@ -23,10 +23,10 @@ const userSchema = mongoose.Schema({
         followersCount: {type:Number,min:0},
         postsCount: {type:Number,min:0},
         following: Array,
-        posts: [{type: Schema.Types.ObjectID, ref: 'post'}],
+        posts: [{type: Schema.Types.ObjectId, ref: 'post'}],
         followers: Array,
         blockList: Array,
-        conversation: [{type: Schema.Types.ObjectID, ref: 'conversation'}],
+        conversation: [{type: Schema.Types.ObjectId, ref: 'conversation'}],
         profileImage: String,
         gender: String,
         relationshipStatus: String,

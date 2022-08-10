@@ -186,7 +186,7 @@ const GlobalStyles= createGlobalStyle`
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
   }  
   .form-control-input-validator{
-    width: 85%;
+    width: 80%;
   }
 
   .custom-select{

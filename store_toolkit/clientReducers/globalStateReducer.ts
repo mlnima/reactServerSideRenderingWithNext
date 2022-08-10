@@ -40,7 +40,13 @@ export const globalStateSlice = createSlice({
             state.notFoundPage = action.payload
         },
         loading: (state, action: PayloadAction<any>) => {
-            state.loading = action.payload
+
+            if(state.loading !== action.payload){
+                return{
+                    ...state,
+                    loading:action.payload
+                }
+            }
         },
         setAlert: (state, action: PayloadAction<any>) => {
             state.alert = {
@@ -79,3 +85,5 @@ export const {
 export const globalStateReducer = (state: RootState) => state?.globalState || null;
 
 export default globalStateSlice.reducer
+
+//PER6-9NG1-YDCN-GDT6

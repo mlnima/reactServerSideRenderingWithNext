@@ -70,12 +70,6 @@ const AdminLayout = props => {
             }
         })
 
-    const store = useSelector((store: StoreTypes) => store)
-
-    useEffect(() => {
-        console.log(store)
-    }, [store]);
-
     useEffect(() => {
         !!localStorage?.wt && dispatch(
             fetchUserAutoLogin(

@@ -28,66 +28,66 @@ const combinedReducer = combineReducers({
     globalState: globalStateSlice,
     chatroom: chatroomSlice,
     posts: postsSlice,
-    adminPanelUsers:adminPanelUsersSlice,
-    adminPanelPages:adminPanelPagesSlice,
+    adminPanelUsers: adminPanelUsersSlice,
+    adminPanelPages: adminPanelPagesSlice,
     adminPanelGlobalState: adminPanelGlobalStateSlice,
-    adminPanelSettings:adminPanelSettingsSlice,
-    adminPanelPosts:adminPanelPostsSlice,
-    adminPanelWidgets:adminPanelWidgetsSlice,
-    adminPanelForms:adminPanelFormsSlice,
-    adminPanelFileManager:adminPanelFileManagerSlice,
-    adminPanelComments:adminPanelCommentsSlice,
-    adminPanelTerminalState:adminTerminalSlice
+    adminPanelSettings: adminPanelSettingsSlice,
+    adminPanelPosts: adminPanelPostsSlice,
+    adminPanelWidgets: adminPanelWidgetsSlice,
+    adminPanelForms: adminPanelFormsSlice,
+    adminPanelFileManager: adminPanelFileManagerSlice,
+    adminPanelComments: adminPanelCommentsSlice,
+    adminPanelTerminalState: adminTerminalSlice
 });
 
 
 const reducer = (state: ReturnType<typeof combinedReducer>, action: AnyAction) => {
-
-        if (action.type === HYDRATE) {
-            const nextState = {
-                ...state,
-                ...action.payload,
-                user:{
-                    ...(action?.payload?.user || {}),
-                    //@ts-ignore
-                    userData:  state?.user?.userData || action?.payload?.user?.userData || {}
+    let didHydrate = false
+    if (action.type === HYDRATE ) {
+        const nextState = {
+            ...state,
+            ...action.payload,
+            user: {
+                ...(action?.payload?.user || {}),
+                //@ts-ignore
+                userData: state?.user?.userData || action?.payload?.user?.userData || {}
+            },
+            widgets: {
+                ...(action?.payload?.widgets || {}),
+                widgetInGroups: {
+                    ...(action?.payload?.widgets?.widgetInGroups || {}),
+                    ...(state?.widgets?.widgetInGroups || {})
                 },
-                widgets:{
-                    ...(action?.payload?.widgets || {}),
-                    widgetInGroups:{
-                        ...(action?.payload?.widgets?.widgetInGroups  || {}),
-                        ...(state?.widgets?.widgetInGroups || {})
-                    },
-                    requestedWidgets:[
-                        ...new Set([
-                            ...(action?.payload?.widgets?.requestedWidgets || []),
-                            ...(state?.widgets?.requestedWidgets || [])
-                        ])
+                requestedWidgets: [
+                    ...new Set([
+                        ...(action?.payload?.widgets?.requestedWidgets || []),
+                        ...(state?.widgets?.requestedWidgets || [])
+                    ])
 
-                    ]
+                ]
+            },
+            settings: {
+                ...(action?.payload?.settings || {}),
+                identity: {
+                    ...(action?.payload?.settings?.identity || {}),
+                    ...(state?.settings?.identity || {})
                 },
-                settings:{
-                    ...(action?.payload?.settings || {}),
-                    identity:{
-                        ...(action?.payload?.settings?.identity  || {}),
-                        ...(state?.settings?.identity || {} )
-                    },
-                    design:{
-                        ...(action?.payload?.settings?.design || {}),
-                        ...(state?.settings?.identity || {})
-                    }
-                },
-            }
-
-            return  nextState
-        } else {
-            return combinedReducer(state, action);
+                design: {
+                    ...(action?.payload?.settings?.design || {}),
+                    ...(state?.settings?.identity || {})
+                }
+            },
         }
+
+        return nextState
+    } else {
+        return combinedReducer(state, action);
+    }
 };
 
 export const makeStore = () => configureStore({
     reducer,
-    devTools: process.env.NODE_ENV !== 'production',
+    devTools: process.env.NODE_ENV !== 'production' || process.env.NEXT_PUBLIC_PRODUCTION_URL.includes(':3000'),
 });
 
 //@ts-ignore

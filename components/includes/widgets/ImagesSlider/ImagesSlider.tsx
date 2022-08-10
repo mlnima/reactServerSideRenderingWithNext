@@ -1,7 +1,16 @@
 import React, {FC, useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import useEmblaCarousel from 'embla-carousel-react'
+import useEmblaCarousel , {
+    EmblaCarouselType,
+    EmblaOptionsType,
+    EmblaPluginType,
+    EmblaEventType,
+    UseEmblaCarouselType,
+}from 'embla-carousel-react'
 import styled from "styled-components";
-import Autoplay from "embla-carousel-autoplay";
+import Autoplay, {
+    AutoplayType,
+    AutoplayOptionsType,
+} from "embla-carousel-autoplay";
 import Link from "next/link";
 import parse from "html-react-parser";
 
@@ -138,17 +147,20 @@ interface PostsSliderPropsTypes {
 
 const ImagesSlider: FC<PostsSliderPropsTypes> = ({uniqueData}) => {
 
-        const autoplay = useRef(
-            Autoplay(
-                {delay: 3000, stopOnInteraction: false},
-                (rootElement) => rootElement.parentElement
-            )
-        );
+        const options = {delay: 3000, stopOnInteraction: false}
+        const autoplay =  Autoplay(options)
+
+        // const autoplay = useRef<AutoplayType>(
+        //     Autoplay(
+        //         ,
+        //         (rootElement:any) => rootElement.parentElement
+        //     )
+        // );
 
         const [sliderRef, sliderApi] = useEmblaCarousel({
             loop: true,
             dragFree: true
-        }, [autoplay.current])
+        }, [autoplay])
 
         const [showDetails, setShowDetails] = useState(false);
         const [selectedIndex, setSelectedIndex] = useState(0);

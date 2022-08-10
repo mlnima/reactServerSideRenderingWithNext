@@ -5,10 +5,11 @@ import styled from "styled-components";
 import dynamic from "next/dynamic";
 import AuthenticationNotLoggedInItems from "@components/includes/widgets/Authentication/AuthenticationNotLoggedInItems";
 import {useAppDispatch} from "@store_toolkit/hooks";
+import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 
 const AuthenticationLoggedInItems = dynamic(() =>
-    import('@components/includes/widgets/Authentication/AuthenticationLoggedInItems'),
-    { loading: () => <p>Signing in...</p> }
+        import('@components/includes/widgets/Authentication/AuthenticationLoggedInItems'),
+    {loading: () => <p>Signing in...</p>}
 )
 
 
@@ -16,42 +17,6 @@ const AuthenticationStyledDiv = styled.div`
 
   .icon {
     background-color: var(--auth-widget-text-color, #fff);
-  }
-
-  .close {
-    mask: url('/public/asset/images/icons/times-solid.svg') no-repeat center;
-    -webkit-mask: url('/public/asset/images/icons/times-solid.svg') no-repeat center;
-  }
-
-  .register-button {
-    mask: url('/public/asset/images/icons/pen-solid.svg') no-repeat center;
-    -webkit-mask: url('/public/asset/images/icons/pen-solid.svg') no-repeat center;
-  }
-
-  .sign-in-button {
-    mask: url('/public/asset/images/icons/user-solid.svg') no-repeat center;
-    -webkit-mask: url('/public/asset/images/icons/user-solid.svg') no-repeat center;
-  }
-
-  .messages-button {
-    mask: url('/public/asset/images/icons/envelope-solid.svg') no-repeat center;
-    -webkit-mask: url('/public/asset/images/icons/envelope-solid.svg') no-repeat center;
-  }
-
-
-  .plus-button {
-    mask: url('/public/asset/images/icons/plus-solid.svg') no-repeat center;
-    -webkit-mask: url('/public/asset/images/icons/plus-solid.svg') no-repeat center;
-  }
-
-  .home-button {
-    mask: url('/public/asset/images/icons/home-solid.svg') no-repeat center;
-    -webkit-mask: url('/public/asset/images/icons/home-solid.svg') no-repeat center;
-  }
-
-  .sign-out-button {
-    mask: url('/public/asset/images/icons/user-solid.svg') no-repeat center;
-    -webkit-mask: url('/public/asset/images/icons/user-solid.svg') no-repeat center;
   }
 
   .profile {
@@ -103,11 +68,6 @@ const AuthenticationStyledDiv = styled.div`
       display: flex;
       justify-content: flex-start;
       align-items: center;
-
-      .close {
-        width: 24px;
-        height: 24px;
-      }
     }
 
     .logged-items-auth-actions {
@@ -209,7 +169,11 @@ const Authentication: FC = () => {
             </div>
             <div className={'authentication-widget-wrapper'}>
                 <button className={'logged-item btn btn-transparent-light close-btn'} onClick={onOpenCloseHandler}>
-                    <span className={'close icon'}/>
+                    <SvgRenderer svgUrl={'/public/asset/images/icons/times-solid.svg'}
+                                 size={24}
+                                 customClassName={'close icon'}
+                                 color={' var(--auth-widget-text-color, #fff)'}
+                    />
                 </button>
                 {!loggedIn && <AuthenticationNotLoggedInItems onOpenCloseHandler={onOpenCloseHandler}/>}
                 {loggedIn && <AuthenticationLoggedInItems onOpenCloseHandler={onOpenCloseHandler}

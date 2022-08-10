@@ -11,6 +11,7 @@ import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea
 import {fetchPost, fetchPostComments, fetchViewPost} from "@store_toolkit/clientReducers/postsReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
+import PromotionTypePostPage from "@components/includes/PostPage/PromotionTypePostPage/PromotionTypePostPage";
 
 const Soft404 = dynamic(() =>
     import('@components/includes/Soft404/Soft404'))
@@ -24,13 +25,11 @@ const PostPage = dynamic(() => import('@components/includes/PostPage/PostPage'))
 
 const PageStyle = styled.div`
 
-
 `
 
 const postPage = () => {
 
     const dispatch = useAppDispatch()
-    const [isNotFound, setIsNotFound] = useState(false)
 
     const {postType, _id, status, role, sidebar} = useSelector(({posts, user, settings}: StoreTypes) => {
         return {
@@ -43,31 +42,32 @@ const postPage = () => {
         }
     });
 
-
     useEffect(() => {
         _id && dispatch(fetchPostComments(_id as string));
         _id && dispatch(fetchViewPost(_id));
-    }, [])
-
-    useEffect(() => {
-        if ((status !== 'published' && role !== 'administrator') || !status) {
-            setIsNotFound(true)
-        }
-    }, [role, status]);
+    }, [_id])
 
 
+    if (status === 'published' || role === 'administrator') {
+        return (
+            <>
+                {role === 'administrator' ? <EditLinkForAdmin/> : null}
+                <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
 
-    return (
-        <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
-            {role === 'administrator' ? <EditLinkForAdmin/> : null}
-            {((status === 'published' || role === 'administrator') && postType === 'video') && <VideoTypePostPage/>}
-            {((status === 'published' || role === 'administrator') && postType === 'learn') && <LearnTypePostPage/>}
-            {((status === 'published' || role === 'administrator') && postType !== 'learn' && postType !== 'video') &&
-            <PostPage/>}
-            {isNotFound && <Soft404/>}
-            <SidebarWidgetAreaRenderer sidebar={sidebar} position={'postPage'}/>
-        </PageStyle>
-    )
+                    {
+                        postType === 'video' ? <VideoTypePostPage/> :
+                            postType === 'learn' ? <LearnTypePostPage/> :
+                                postType === 'promotion' ? <PromotionTypePostPage/> :
+                                    <PostPage/>
+                    }
+
+                    <SidebarWidgetAreaRenderer sidebar={sidebar} position={'postPage'}/>
+                </PageStyle>
+            </>
+        )
+    } else {
+        return <Soft404/>
+    }
 
 
 };
