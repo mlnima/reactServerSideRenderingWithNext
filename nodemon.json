@@ -6,19 +6,20 @@
     "./public/locales/*/customTranslation.json"
   ],
   "watch": [
-    "server/**/*",
-    "./server/*",
+    "expressServer/**/*",
+    "./expressServer/*",
     "./public/locales/*",
-    "./server.js",
+    "./server.ts",
     "./next.config.js",
     "./.swcrc",
     "./.env",
-    "./next-i18next.config.js"
+    "./next-i18next.config.ts"
 
   ],
   "execMap": {
     "ts": "ts-node"
   },
-  "ext": "js json",
+  "ext": "js,ts,json",
+  "exec": "concurrently \"ts-node --transpile-only ./expressServer/index.ts\" \"ts-node --transpile-only ./expressServer/socketServer/index.ts\"",
   "trace-warnings": true
 }

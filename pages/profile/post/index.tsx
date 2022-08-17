@@ -13,20 +13,23 @@ import ThumbnailUploader from "@components/includes/profilePageComponents/profil
 import VideoTypeFields from "@components/includes/profilePageComponents/profilePost/VideoTypeFields/VideoTypeFields";
 import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
-import {
-    fetchUserCreateNewPost,
-    fetchUserEditingPost,
-    fetchUserEditingPostUpdate,
-    editPostField
-} from "@store_toolkit/clientReducers/postsReducer";
+import {editPostField} from "@store_toolkit/clientReducers/postsReducer";
+import fetchUserEditingPostUpdate
+    from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserEditingPostUpdate";
+import fetchUserEditingPost
+    from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserEditingPost";
+import fetchUserCreateNewPost
+    from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserCreateNewPost";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 
 const ProfilePostPageStyledDiv = styled.div`
-  margin: 20px 5px;
+  margin: 20px auto;
+  max-width: 946px;
 
   .create-new-post-fields {
     width: 100%;
+
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
@@ -56,12 +59,14 @@ const post = () => {
         return {
             userData: store?.user.userData,
             editingPost: store?.posts?.editingPost,
+            editingPostImagesToUpload: store?.posts?.editingPostImagesToUpload,
         }
     })
 
     useEffect(() => {
-        console.log(postData)
-    }, [postData]);
+        console.log(postData.editingPostImagesToUpload)
+    }, [postData.editingPostImagesToUpload]);
+
     useEffect(() => {
         if (query.id) dispatch(fetchUserEditingPost(query.id as string));
         if (!query.id && query?.postType) dispatch(editPostField({['postType']: query.postType}));
@@ -127,13 +132,17 @@ const post = () => {
                     : null
                 }
 
-                <ThumbnailUploader mainThumbnail={postData?.editingPost?.mainThumbnail}/>
+                <ThumbnailUploader mainThumbnail={postData?.editingPost?.mainThumbnail}
+                                   images={postData?.editingPost?.images}
+                                   editingPostImagesToUpload={postData?.editingPostImagesToUpload}
+                                   postId={postData.editingPost._id}/>
+
                 {postData.userData.role === 'administrator' ?
                     <>
-                        <TextInput required={true} name={'mainThumbnail'} type={'text'}
-                                   value={postData.editingPost?.mainThumbnail}
-                                   title={'Main Thumbnail'}
-                                   onChangeHandler={onChangeHandler} className={'mainThumbnail'}/>
+                        {/*<TextInput required={true} name={'mainThumbnail'} type={'text'}*/}
+                        {/*           value={postData.editingPost?.mainThumbnail}*/}
+                        {/*           title={'Main Thumbnail'}*/}
+                        {/*           onChangeHandler={onChangeHandler} className={'mainThumbnail'}/>*/}
                         <TextInput required={true} name={'views'} type={'number'}
                                    value={postData.editingPost?.views}
                                    title={'views'}
@@ -183,6 +192,9 @@ const post = () => {
 
                 <button className={'btn btn-primary'} type={'submit'}>Save</button>
             </form>
+            <aside>
+
+            </aside>
 
         </ProfilePostPageStyledDiv>
     );

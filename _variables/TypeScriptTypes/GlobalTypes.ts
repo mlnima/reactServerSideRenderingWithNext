@@ -259,6 +259,7 @@ export interface PageDataPropTypes {
 }
 
 export interface PostStateTypes {
+    editingPostImagesToUpload: {};
     tagsMetas: Meta[],
     categoriesMetas: Meta[],
     actorsMetas: Meta[],

@@ -11,7 +11,7 @@ import AppLayout from "@components/layouts/AppLayout";
 import type {ReactElement} from 'react'
 import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import React from "react";
-import {fetchMetas} from "@store_toolkit/clientReducers/postsReducer";
+import fetchMetas from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchMetas";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 
 const PageStyle = styled.div`

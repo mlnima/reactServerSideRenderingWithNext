@@ -4,7 +4,10 @@ import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {fetchDisLikePost, fetchLikePost} from "@store_toolkit/clientReducers/postsReducer";
+import disLikePost
+    from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksDisLikePost";
+import likePost
+    from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksLikePost";
 import {useAppDispatch} from "@store_toolkit/hooks";
 
 // it just prevent user or visitor do not rate multiple time,
@@ -122,7 +125,7 @@ const RatingButtons: FC<RatingButtonsPropTypes> = ({rating}) => {
             {rating ?
                 <>
                     <button className='rating-item'
-                            onClick={() => dispatch(fetchLikePost(_id))}
+                            onClick={() => dispatch(likePost(_id))}
                             disabled={!!isRated}
                             aria-label="like"
                             title={t<string>('Like')}
@@ -131,7 +134,7 @@ const RatingButtons: FC<RatingButtonsPropTypes> = ({rating}) => {
                         <p className='rating-item-value'>{likes}</p>
                     </button>
                     <button className='rating-item'
-                            onClick={() => dispatch(fetchDisLikePost(_id))}
+                            onClick={() => dispatch(disLikePost(_id))}
                             disabled={!!isRated}
                             aria-label="dislike"
                             title={t<string>('Dislike')}

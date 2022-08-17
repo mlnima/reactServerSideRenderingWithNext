@@ -10,11 +10,11 @@
 /static/uploads/
 /static/uploads/*
 /tempFiles/*
-generateFakeData.js
+_devUtil/generateFakeData.js
 tools/testAPI.js
 /package-lock.json
 .package-lock.json
-/generateFakeData.js
+/_devUtil/generateFakeData.js
 .generateFakeData.js
 .env.local
 .env.development.local

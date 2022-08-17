@@ -20,18 +20,247 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/components/includes/cards/asset/TextToCanvasImage/TextToCanvasImage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/_devUtil/windowsNodeProccessBulkKiller.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/_variables/clientVariables/convertDurationStringToIso8601.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/includes/cards/asset/CardTitle/CardTitle.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/expressServer/_variables/connectToDatabase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFileManagerControllers/clientUserPostImageUpload.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsRouter.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/expressServer/workers/ApiWorkers/clientRequests/posts/getPosts.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksDeleteCommentByAdminInPostPage.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksDisLikePost.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchNewComment.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPageData.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPost.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPostComments.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPosts.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserCreateNewPost.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserEditingPost.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserEditingPostUpdate.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchViewPost.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksLikePost.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tsconfig.server.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.babelrc.old" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/TypeScriptTypes/PostTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/TypeScriptTypes/PostTypes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buildServer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/CommentFrom/CommentFrom.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/CommentFrom/CommentFrom.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/CommentsRenderer/Comment/Comment.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/CommentsRenderer/Comment/Comment.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/RatingButtons/RatingButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/RatingButtons/RatingButtons.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/VideoPlayer/VideoPlayer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/VideoPlayer/VideoPlayer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/Widget/Widget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Widget/Widget.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/Widget/WidgetPagination/WidgetPagination.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Widget/WidgetPagination/WidgetPagination.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/cards/ActorCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/ActorCard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/cards/ArticlePostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/ArticlePostCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/CardImageRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CardImageRenderer.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/cards/CategoryCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CategoryCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/LearnPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/LearnPostCard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/cards/PromotionPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/PromotionPostCard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/cards/TagCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/TagCard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/cards/VideoPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/VideoPostCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/asset/CardTitle/CardTitle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/checkOutPageComponents/CheckoutPageSettingsSetter/CheckoutPageSettingsSetter.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/checkOutPageComponents/CheckoutPageSettingsSetter/CheckoutPageSettingsSetter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/common/ThumbnailUploader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/common/ThumbnailUploader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next-i18next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next-i18next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.lock/data/https_cdnjs.cloudflare.com/ajax_libs_monaco-editor_0.29.1_min_vs_editor_editor.main_10131d0294fa7e8cbef1.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.lock/data/https_cdnjs.cloudflare.com/ajax_libs_monaco-editor_0.29.1_min_vs_editor_editor.main_10131d0294fa7e8cbef1.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nodemon.json" beforeDir="false" afterPath="$PROJECT_DIR$/nodemon.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/actor/[actorId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/actor/[actorId].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/actors/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/actors/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/categories/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/categories/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/category/[categoryId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/category/[categoryId].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/page/[pageName].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/page/[pageName].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/post/[postType]/[identifier].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/[postType]/[identifier].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/posts/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/posts/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/profile/post/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/post/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/search/[keyword].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/search/[keyword].tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/tag/[tagId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tag/[tagId].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/tags/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tags/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/_variables/ApiError.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/_variables/ApiError.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/_variables/_setSettingToEnvironmentVariables.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/_variables/_setSettingToEnvironmentVariables.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/_variables/_writeSettingsAndStaticWidgetsToJsonFile.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/_variables/_writeSettingsAndStaticWidgetsToJsonFile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/_variables/connectToDatabase.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/_variables/shouldCompress.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/_variables/shouldCompress.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/_variables/_adminQueryGeneratorForGettingPosts.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/_variables/_adminQueryGeneratorForGettingPosts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/_variables/_updateSaveMetas.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/_variables/_updateSaveMetas.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminDataScrappersControllers/adminScrapYoutubeInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminDataScrappersControllers/adminScrapYoutubeInfo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminDataScrappersRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminDataScrappersRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminFileManagerControllers/adminCreateNewFileOrFolder.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminCreateNewFileOrFolder.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminFileManagerControllers/adminDeleteFile.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminDeleteFile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminFileManagerControllers/adminPostThumbnailsUpload.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminPostThumbnailsUpload.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminFileManagerControllers/adminReadFile.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminReadFile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminFileManagerControllers/adminReadPath.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminReadPath.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminFileManagerControllers/adminReadTranslationsFile.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminReadTranslationsFile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminFileManagerControllers/adminUpdateTranslationsFile.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminUpdateTranslationsFile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminFileManagerControllers/adminUploadFile.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminUploadFile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminFileManagerControllers/adminUploadFiles.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminUploadFiles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminFileManagerRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminFormsControllers/adminDeleteFormData.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFormsControllers/adminDeleteFormData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminFormsControllers/adminGetFormData.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFormsControllers/adminGetFormData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminFormsControllers/adminGetFormsData.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFormsControllers/adminGetFormsData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminFormsRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFormsRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminMainRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminMainRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminOdersControllers/adminGetOrders.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminOdersControllers/adminGetOrders.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminOrdersRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminOrdersRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPagesControllers/adminCreateNewPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminCreateNewPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPagesControllers/adminDeleteCustomPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminDeleteCustomPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPagesControllers/adminGetPageData.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminGetPageData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPagesControllers/adminGetPagesData.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminGetPagesData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPagesControllers/adminUpdatePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminUpdatePage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPagesRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminBulkAction.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminBulkAction.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminCheckAndRemoveDeletedVideos.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminCheckAndRemoveDeletedVideos.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminCreateNewPost.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminCreateNewPost.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminCreateNewPostByApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminCreateNewPostByApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminDeleteComments.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminDeleteComments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminDeleteMeta.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminDeleteMeta.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminDeletePost.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminDeletePost.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminExportPosts.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminExportPosts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminGeneratePermaLinkForPosts.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGeneratePermaLinkForPosts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminGetComments.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetComments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminGetMeta.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetMeta.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminGetMetas.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetMetas.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminGetPost.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetPost.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminGetPosts.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetPosts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminImportPosts.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminImportPosts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminPostsBulkAction.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminPostsBulkAction.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminSetMetaThumbnailsAndCount.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminSetMetaThumbnailsAndCount.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminUpdateComment.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdateComment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminUpdateMeta.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdateMeta.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminUpdateMetaByApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdateMetaByApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminUpdatePost.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdatePost.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminUpdatePostByApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdatePostByApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminSettingsControllers/adminClearCaches.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsControllers/adminClearCaches.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminSettingsControllers/adminGetMultipleSettings.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsControllers/adminGetMultipleSettings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminSettingsControllers/adminGetSettings.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsControllers/adminGetSettings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminSettingsControllers/adminUpdateSettings.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsControllers/adminUpdateSettings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminSettingsRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminTerminalControllers/adminCommandExecutor.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminTerminalControllers/adminCommandExecutor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminTerminalRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminTerminalRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminUsersControllers/adminDeleteUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminDeleteUser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminUsersControllers/adminGetUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminGetUser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminUsersControllers/adminGetUsersList.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminGetUsersList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminUsersControllers/adminNewApiKey.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminNewApiKey.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminUsersControllers/adminUpdateUserData.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminUpdateUserData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminUsersRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsControllers/adminAddNewWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminAddNewWidget.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsControllers/adminDeleteWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminDeleteWidget.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsControllers/adminGetWidgets.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminGetWidgets.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsControllers/adminPanelGetWidgets.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminPanelGetWidgets.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsControllers/adminUpdateWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminUpdateWidget.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/_variables/_clientQueryGeneratorForGettingPosts.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/_variables/_clientQueryGeneratorForGettingPosts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientFileManagerControllers/clientUserImageUpload.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFileManagerControllers/clientUserImageUpload.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientFileManagerRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFileManagerRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientFormsControllers/clientSaveFormData.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFormsControllers/clientSaveFormData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientFormsRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFormsRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientMainFestController.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientMainFestController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientMainRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientMainRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientOrdersControllers/clientCreateOrder.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientOrdersControllers/clientCreateOrder.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientOrdersRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientOrdersRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPagesControllers/clientGetPageData.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPagesControllers/clientGetPageData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPagesControllers/clientGetPagesData.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPagesControllers/clientGetPagesData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPagesRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPagesRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/ClientMetaSuggestion.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/ClientMetaSuggestion.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientCheckRemovedContent.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientCheckRemovedContent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientFixMetaImage.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientFixMetaImage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetComments.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetComments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetMeta.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetMeta.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetMetas.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetMetas.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetPost.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetPost.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetPosts.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetPosts.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientLikeDislikeView.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientLikeDislikeView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientNewComment.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientNewComment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientUserCreateNewPost.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientUserCreateNewPost.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientUserUpdatePost.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientUserUpdatePost.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsRouter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientRobotTxtController.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientRobotTxtController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientSettingsControllers/clientGetMultipleSettings.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientSettingsControllers/clientGetMultipleSettings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientSettingsRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientSettingsRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientConversation.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientConversation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientDeleteConversation.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientDeleteConversation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientFollowUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientFollowUser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientGetConversation.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetConversation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientGetConversations.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetConversations.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientGetMultipleUserDataById.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetMultipleUserDataById.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientGetSignedInUserData.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetSignedInUserData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientGetUserData.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetUserData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientGetUserPreviewData.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetUserPreviewData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientGetUsersList.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetUsersList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientMessageToConversation.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientMessageToConversation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientRegisterNewUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientRegisterNewUser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientResetUserPassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientResetUserPassword.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientSendMessage.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientSendMessage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientUnFollowUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientUnFollowUser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientUpdateUserData.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientUpdateUserData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientUserLogin.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientUserLogin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientGetMultipleWidgetWithData.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientWidgetsControllers/clientGetMultipleWidgetWithData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientGetSingleWidgetData.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientWidgetsControllers/clientGetSingleWidgetData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientGetWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientWidgetsControllers/clientGetWidget.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientGetWidgetsWithData.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientWidgetsControllers/clientGetWidgetsWithData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientSelfWidgetUpdate.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientWidgetsControllers/clientSelfWidgetUpdate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientWidgetsRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/settingsControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/settingsControllers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/sitemapControllers/metaSitemapController.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/metaSitemapController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/sitemapControllers/pageSitemapController.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/pageSitemapController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/sitemapControllers/searchSitemapController.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/searchSitemapController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/sitemapControllers/siteMapController.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/siteMapController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/sitemapControllers/siteMapsController.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/siteMapsController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/sitemapControllers/subSiteMapsController.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/subSiteMapsController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/translateController.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/translateController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/middlewares/adminAuthMiddleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/middlewares/adminAuthMiddleware.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/middlewares/apiCache.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/middlewares/apiCache.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/middlewares/apiErrorHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/middlewares/apiErrorHandler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/middlewares/apiRequestMiddleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/middlewares/apiRequestMiddleware.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/middlewares/authMiddleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/middlewares/authMiddleware.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/middlewares/loggerMiddleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/middlewares/loggerMiddleware.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/chatroomSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/models/chatroomSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/commentSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/models/commentSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/contactFromSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/models/contactFromSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/conversationSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/models/conversationSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/formSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/models/formSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/metaSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/models/metaSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/metaSchemas/actorSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/models/metaSchemas/actorSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/metaSchemas/categorySchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/models/metaSchemas/categorySchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/metaSchemas/tagSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/models/metaSchemas/tagSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/orderSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/models/orderSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/pageSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/models/pageSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/postSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/models/postSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/searchKeywordSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/models/searchKeywordSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/settings/settingSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/models/settings/settingSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/translateSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/models/translateSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/userSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/models/userSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/widgetSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/models/widgetSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/serverState/serverState.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/serverState/serverState.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/socketServer/socketServer.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/socketServer/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/socketServer/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/socketServer/users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/tools/dataDecoder.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/tools/dataDecoder.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/tools/dataEncoder.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/tools/dataEncoder.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/tools/pageCache.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/tools/pageCache.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/util/fileDownloader.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/util/fileDownloader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/util/mongoIdValidator.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/util/mongoIdValidator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/workers/ApiWorkers/clientRequests/posts/getPosts.js" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchMetas.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/workers/checkAndRemoveDeletedVideos.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/workers/checkAndRemoveDeletedVideos.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/workers/commandExecutor.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/workers/commandExecutor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/workers/createNewPostByApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/workers/createNewPostByApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/workers/generatePermaLink.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/workers/generatePermaLink.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/workers/mailServer.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/workers/mailServer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/workers/setMetaThumbnailsAndCount.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/workers/setMetaThumbnailsAndCount.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store_toolkit/adminReducers/adminPanelFileManagerReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/adminReducers/adminPanelFileManagerReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store_toolkit/clientReducers/postsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/clientReducers/postsReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store_toolkit/clientReducers/userReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/clientReducers/userReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/fixMetaData.js" beforeDir="false" afterPath="$PROJECT_DIR$/tools/fixMetaData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/fixTimeStamsForPosts.js" beforeDir="false" afterPath="$PROJECT_DIR$/tools/fixTimeStamsForPosts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/mergeDuplicateMetaData.js" beforeDir="false" afterPath="$PROJECT_DIR$/tools/mergeDuplicateMetaData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/resetAdminPassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/tools/resetAdminPassword.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/setup.js" beforeDir="false" afterPath="$PROJECT_DIR$/tools/setup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/setupDarkTheme.js" beforeDir="false" afterPath="$PROJECT_DIR$/tools/setupDarkTheme.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,9 +273,9 @@
         <option value="HTML File" />
         <option value="tsconfig.json" />
         <option value="CSS File" />
+        <option value="TypeScript JSX File" />
         <option value="JavaScript File" />
         <option value="TypeScript File" />
-        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -85,7 +314,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="14.17.3" />
     <property name="javascript.nodejs.core.library.typings.version" value="14.17.3" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../coding-challange/ams-frontend-challange" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/_devUtil" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -101,18 +330,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\_devUtil" />
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\store_toolkit" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\public\asset\images\icons" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\pages" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\widgets\Authentication" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\trash" />
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\_devUtil" />
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\server" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\temp" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\ZlegacyCodesAndComponents" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\trash" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\widgets\MenuWidget\oldComponents" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\widgetsModel\WidgetModel" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -120,7 +349,10 @@
       <command value="nextEnv" />
     </option>
   </component>
-  <component name="RunManager" selected="npm.dev">
+  <component name="RunManager" selected="Node.js.temp.js">
+    <configuration name="temp.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/tempFiles/temp.js" working-dir="$PROJECT_DIR$/tempFiles">
+      <method v="2" />
+    </configuration>
     <configuration name="analyze" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -161,22 +393,12 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="test" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="npm.dev" />
+        <item itemvalue="Node.js.temp.js" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
-        <item itemvalue="npm.test" />
         <item itemvalue="npm.analyze" />
       </list>
     </recent_temporary>
@@ -1222,7 +1444,15 @@
       <workItem from="1660090154689" duration="2231000" />
       <workItem from="1660139053730" duration="3204000" />
       <workItem from="1660144553285" duration="8837000" />
-      <workItem from="1660165468332" duration="942000" />
+      <workItem from="1660165468332" duration="5359000" />
+      <workItem from="1660239282195" duration="22789000" />
+      <workItem from="1660295740595" duration="8497000" />
+      <workItem from="1660312711826" duration="5773000" />
+      <workItem from="1660400034131" duration="355000" />
+      <workItem from="1660494080098" duration="594000" />
+      <workItem from="1660568287736" duration="22385000" />
+      <workItem from="1660659543206" duration="18662000" />
+      <workItem from="1660700128154" duration="9453000" />
     </task>
     <servers />
   </component>
@@ -1253,7 +1483,7 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/server/middlewares/adminAuthMiddleware.js</url>
+          <url>file://$PROJECT_DIR$/expressServer/middlewares/adminAuthMiddleware.js</url>
           <line>5</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
@@ -1267,7 +1497,7 @@
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/server/middlewares/apiRequestMiddleware.js</url>
+          <url>file://$PROJECT_DIR$/expressServer/middlewares/apiRequestMiddleware.js</url>
           <line>19</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
@@ -1342,16 +1572,16 @@
           <option name="timeStamp" value="68" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/server/socketServer/socketServer.js</url>
-          <line>93</line>
+          <url>file://$PROJECT_DIR$/expressServer/socketServer/index.ts</url>
+          <line>89</line>
           <option name="timeStamp" value="70" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/server/controllers/clientControllers/clientSettingsRouter.js</url>
+          <url>file://$PROJECT_DIR$/expressServer/controllers/clientControllers/clientSettingsRouter.js</url>
           <option name="timeStamp" value="71" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/server/_variables/shouldCompress.js</url>
+          <url>file://$PROJECT_DIR$/expressServer/_variables/shouldCompress.js</url>
           <line>2</line>
           <option name="timeStamp" value="72" />
         </line-breakpoint>
@@ -1414,7 +1644,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts</url>
-          <line>263</line>
+          <line>264</line>
           <option name="timeStamp" value="112" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -1468,7 +1698,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts</url>
-          <line>434</line>
+          <line>435</line>
           <option name="timeStamp" value="135" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -1512,6 +1742,12 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/store_toolkit/adminReducers/adminPanelGlobalStateReducer.ts</url>
           <option name="timeStamp" value="152" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/expressServer/socketServer/index.ts</url>
+          <line>2</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="153" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

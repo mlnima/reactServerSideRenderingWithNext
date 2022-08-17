@@ -5,6 +5,7 @@ import Link from "next/link";
 import {useRouter} from "next/router";
 import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
 import dynamic from "next/dynamic";
+import CardTitle from "@components/includes/cards/asset/CardTitle/CardTitle";
 const TextToCanvasImage = dynamic(() => import('@components/includes/cards/asset/TextToCanvasImage/TextToCanvasImage'))
 const CardImageRenderer = dynamic(() => import('@components/includes/cards/CardImageRenderer'))
 
@@ -44,7 +45,7 @@ const CategoryCard: FC<CategoryCardPropTypes> =
 
         const {locale} = useRouter();
 
-        const cardTitle = useMemo(() => {
+        const title = useMemo(() => {
             const checkedTitle = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?
                 category?.name :
                 category?.translations?.[locale]?.name || category?.name
@@ -54,32 +55,18 @@ const CategoryCard: FC<CategoryCardPropTypes> =
         return (
             <CategoryCardStyle cardWidth={cardWidth} className={'category-card'}>
                 <Link href={`/category/${category?._id}`}>
-                    <a className='category-card-link' title={cardTitle as string}>
+                    <a className='category-card-link' title={title as string}>
                         {!!category.imageUrl ?
                             <CardImageRenderer imageUrl={category.imageUrl}
-                                               mediaAlt={cardTitle}
+                                               mediaAlt={title}
                                                index={index}
                                                postsPerRawForMobile={postsPerRawForMobile}
                                                cardWidth={cardWidth}/> :
-                            <TextToCanvasImage title={cardTitle}
+                            <TextToCanvasImage title={title}
                                                postsPerRawForMobile={postsPerRawForMobile}
                                                cardWidth={cardWidth}/>
                         }
-
-                        {/*<div className={'category-card-info'}>*/}
-                        {/*    <h3 className={'category-card-title'}>*/}
-                        {/*        {cardTitle}*/}
-                        {/*    </h3>*/}
-                        {/*    {!!category?.count &&*/}
-                        {/*         <span className={'category-card-count'}>(<var>{category?.count}</var>)</span>*/}
-                        {/*    }*/}
-                        {/*</div>*/}
-                        <header className={'entry-header'}>
-                            <span className={'cat-title'}>
-                                {cardTitle}
-                            </span>
-                        </header>
-
+                        <CardTitle title={title}/>
                     </a>
                 </Link>
             </CategoryCardStyle>

@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import VideoPostCardTrailer from "@components/includes/cards/VideoPostCardTrailer";
 import _qualityConvertor from "@components/includes/cards/asset/_qualityConvertor";
 import CardViews from "./asset/CardViews/CardViews";
+import CardTitle from "@components/includes/cards/asset/CardTitle/CardTitle";
 
 const CardRatingBar = dynamic(() => import('./asset/CardRatingBar/CardRatingBar'))
 const CardQuality = dynamic(() => import('./asset/CardQuality/CardQuality'))
@@ -75,23 +76,7 @@ const VideoPostCardStyle = styled.article`
       }
     }
   }
-
-  .entry-header {
-    text-align: center;
-    margin: 2px 0;
-
-    .card-header {
-      color: var(--post-element-text-color, #ccc);
-    }
-  }
-
-
-  .last-update {
-    font-size: 9px;
-    margin: 4px;
-    color: var(--post-element-info-text-color, #6A6A6A);
-  }
-
+  
   @media only screen and (min-width: 768px) {
     max-width: ${({cardWidth}: VideoPostCardStylePropTypes) => cardWidth}px;
   }
@@ -164,16 +149,8 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
                             <CardViews views={views} className={'card-views card-under-media-info-data'}/>
 
                         </div>
-                        {/*    </a>*/}
-                        {/*</Link>*/}
-
-
-                        {/*<Link href={postUrl}>*/}
-                        {/*    <a rel={'next'} className={'card-link'} title={title}>*/}
                         <CardRatingBar rating={rating} className={'card-rating card-under-media-info-data'}/>
-                        <header className={'entry-header'}>
-                            <span className={'card-header'}>{title}</span>
-                        </header>
+                        <CardTitle title={title}/>
                     </a>
                 </Link>
             </VideoPostCardStyle>

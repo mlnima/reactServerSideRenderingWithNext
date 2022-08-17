@@ -81,17 +81,17 @@ export const fetchLogin = createAsyncThunk(
     }
 )
 
-interface FetchOutgoingCall{
-    conversation:string,
-    mySocketId:string,
-    callerName:string,
-    router:NextRouter
+interface FetchOutgoingCall {
+    conversation: string,
+    mySocketId: string,
+    callerName: string,
+    router: NextRouter
 }
 
 
 export const fetchOutgoingCall = createAsyncThunk(
     'user/fetchOutgoingCall',
-    async ({conversation, mySocketId, callerName, router}:FetchOutgoingCall, thunkAPI) => {
+    async ({conversation, mySocketId, callerName, router}: FetchOutgoingCall, thunkAPI) => {
         try {
             await navigator?.mediaDevices?.getUserMedia({video: true, audio: true}).then(async myVideo => {
 
@@ -152,34 +152,34 @@ export const fetchOutgoingCall = createAsyncThunk(
 
 export const setMyVideoData = createAsyncThunk(
     'user/setMyVideoData',
-    async (myVideo:any, thunkAPI) => {
+    async (myVideo: any, thunkAPI) => {
         return myVideo
     }
 )
 export const setPartnerVideoData = createAsyncThunk(
     'user/setPartnerVideoData',
-    async (stream:any, thunkAPI) => {
+    async (stream: any, thunkAPI) => {
         return stream
     }
 )
 export const setCallAccepted = createAsyncThunk(
     'user/setCallAccepted',
-    async (isAccepted:boolean, thunkAPI) => {
+    async (isAccepted: boolean, thunkAPI) => {
         return isAccepted
     }
 )
 
-interface FetchAnswerTheCall{
-    myVideo:any,
-    conversation:string,
-    callerSignal:any,
-    router:NextRouter
+interface FetchAnswerTheCall {
+    myVideo: any,
+    conversation: string,
+    callerSignal: any,
+    router: NextRouter
 }
 
 
 export const fetchAnswerTheCall = createAsyncThunk(
     'user/fetchAnswerTheCall',
-    async ({myVideo, conversation, callerSignal, router}:FetchAnswerTheCall, thunkAPI) => {
+    async ({myVideo, conversation, callerSignal, router}: FetchAnswerTheCall, thunkAPI) => {
         thunkAPI.dispatch(setCallAccepted(true))
         // dispatch({
         //     type: SET_CALL_ACCEPTED,
@@ -222,7 +222,6 @@ export const fetchAnswerTheCall = createAsyncThunk(
         })
     }
 )
-
 
 
 export const fetchSpecificUserData = createAsyncThunk(
@@ -428,14 +427,14 @@ export const fetchSendAMessageToPrivateConversation = createAsyncThunk(
     }
 )
 
-export const fetchMultipleUserDataById  = createAsyncThunk(
+export const fetchMultipleUserDataById = createAsyncThunk(
     'user/fetchMultipleUserDataById',
-    async ({usersList, type}: {usersList: {}[], type:string }, thunkAPI) => {
+    async ({usersList, type}: { usersList: {}[], type: string }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         const body = {
             usersList
         }
-       return  await Axios.post('/api/v1/users/getMultipleUserDataById', body).then(res => {
+        return await Axios.post('/api/v1/users/getMultipleUserDataById', body).then(res => {
             if (type === 'followers') {
                 //UPDATE_USER_DATA_FIELD
 
@@ -448,7 +447,7 @@ export const fetchMultipleUserDataById  = createAsyncThunk(
 
         }).catch(err => {
 
-        }).finally(() =>     thunkAPI.dispatch(loading(false)))
+        }).finally(() => thunkAPI.dispatch(loading(false)))
     }
 )
 
@@ -466,6 +465,63 @@ export const fetchUserAutoLogin = createAsyncThunk(
         } else {
             thunkAPI.dispatch(setAlert({message: 'You Need To Login', type: 'error'}))
         }
+    }
+)
+
+
+export const fetchUserPostImageUpload = createAsyncThunk(
+    'adminPanelFileManager/fetchUserPostImageUpload',
+    async ({images, postId}: { images: [any], postId?: string }, thunkAPI) => {
+        thunkAPI.dispatch(loading(true))
+
+        try {
+            const filesData = new FormData()
+            filesData.append('token', localStorage.wt)
+            filesData.append('postId', postId)
+
+            for (const image in images) {
+                if (images[image]?.name && images[image]?.size && images[image]?.type) {
+                    const fileNameSplit = images[image].name.split('.')
+                    const fileExtension = fileNameSplit[fileNameSplit.length - 1]
+                    filesData.append(`${image}.${fileExtension}`, images[image])
+                }
+            }
+
+            await Axios.post('/api/v1/fileManager/userPostImageUpload', filesData).then(res => {
+                console.log(res.data)
+            }).catch(err => {
+                thunkAPI.dispatch(setAlert({message: err.response?.data?.message, type: 'error'}))
+
+            }).finally(() => thunkAPI.dispatch(loading(false)))
+
+        } catch (error) {
+            console.log(error)
+        }
+
+
+        // return await Axios.post('/api/v1/fileManager/userPostImageUpload', images).then(res => {
+        //
+        //     console.log(res.data)
+        //     // if (useType === 'fileManagerFileUpload') {
+        //     //     return {
+        //     //         clickedItem: res.data?.path?.replace('./', ''),
+        //     //         clickedItemName: res.data?.path?.split('/')[res?.data?.path?.split('/')?.length - 1]
+        //     //     }
+        //     // } else if (useType === 'postMainThumbnail') {
+        //     //     return {'mainThumbnail': res.data?.path?.replace('./', '/')}
+        //     // } else if (useType === 'postImageGallery') {
+        //     //     //@ts-ignore
+        //     //     return {'images': [...(postData?.images || []), res.data.path.replace('./', '/')]}
+        //     // } else if (useType === 'postVideoUrl') {
+        //     //     return {'videoUrl': res.data?.path?.replace('./', '/')}
+        //     // } else if (useType === 'postVideoTrailerUrl') {
+        //     //     return {'VideoTrailerUrl': res.data?.path?.replace('./', '/')}
+        //     // }
+        //
+        // }).catch(err => {
+        //     thunkAPI.dispatch(setAlert({message: err.response?.data?.message, type: 'error'}))
+        //
+        // }).finally(() => thunkAPI.dispatch(loading(false)))
     }
 )
 
@@ -686,12 +742,12 @@ export const userSlice = createSlice({
                 state.callData.callAccepted = action.payload
             })
             .addCase(setMyVideoData.fulfilled, (state, action: PayloadAction<any>) => {
-                return{
+                return {
                     ...state,
-                        myVideoCallData:{
-                            calling: true,
-                            myVideo:action.payload,
-                        },
+                    myVideoCallData: {
+                        calling: true,
+                        myVideo: action.payload,
+                    },
                 }
             })
     }

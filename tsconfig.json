@@ -8,8 +8,14 @@
     "lib": [
       "dom",
       "dom.iterable",
-      "esnext"
+      "esnext",
     ],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "importHelpers": true,
+    "pretty": true,
+    "declaration": true,
     "baseUrl": ".",
     "paths": {
       "@store/*": [
@@ -23,7 +29,7 @@
       ],
       "@_variables/*": [
         "_variables/*"
-      ]
+      ],
     },
     "allowJs": true,
     "checkJs": false,
@@ -31,7 +37,7 @@
     "strict": false,
     "strictNullChecks": false,
     "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
+    "noEmit": false,
     "esModuleInterop": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
@@ -40,7 +46,9 @@
   },
   "exclude": [
     "node_modules",
+    "node_modules/*",
     "trash",
+    "trash/*",
     "tempFiles/legacyCodesAndComponents"
   ],
   "include": [

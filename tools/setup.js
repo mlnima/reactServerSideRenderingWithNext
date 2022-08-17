@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 require('dotenv').config()
-const settingSchema = require('../server/models/settings/settingSchema')
-const widgetSchema = require('../server/models/widgetSchema')
-const postSchema = require('../server/models/postSchema')
-const userSchema = require('../server/models/userSchema')
+const settingSchema = require('../expressServer/models/settings/settingSchema')
+const widgetSchema = require('../expressServer/models/widgetSchema')
+const postSchema = require('../expressServer/models/postSchema')
+const userSchema = require('../expressServer/models/userSchema')
 const bcrypt = require('bcryptjs');
-require('../server/_variables/connectToDatabase')
+require('../expressServer/_variables/connectToDatabase')
 
 const identityData = {
     type: 'identity',

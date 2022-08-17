@@ -3,7 +3,8 @@ import styled from "styled-components";
 import {useTranslation} from 'next-i18next';
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {fetchNewComment, fetchPostComments} from "@store_toolkit/clientReducers/postsReducer";
+import fetchPostComments from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPostComments";
+import fetchNewComment from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchNewComment";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 

@@ -12,7 +12,7 @@ import dynamic from "next/dynamic";
 import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
-import {fetchMetas} from "@store_toolkit/clientReducers/postsReducer";
+import fetchMetas from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchMetas";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))

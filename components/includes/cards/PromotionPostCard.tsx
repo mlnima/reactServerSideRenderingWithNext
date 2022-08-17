@@ -3,15 +3,14 @@ import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import styled from "styled-components";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import {fetchViewPost} from "@store_toolkit/clientReducers/postsReducer";
+import fetchViewPost from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchViewPost";
 import {useAppDispatch} from "@store_toolkit/hooks";
+import CardTitle from "@components/includes/cards/asset/CardTitle/CardTitle";
 
 const CardViews = dynamic(() => import('./asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('./asset/CardRating/CardRating'))
-const CardLastUpdate = dynamic(() => import('./asset/CardLastUpdate/CardLastUpdate'));
 const TextToCanvasImage = dynamic(() => import('@components/includes/cards/asset/TextToCanvasImage/TextToCanvasImage'))
 const CardImageRenderer = dynamic(() => import('@components/includes/cards/CardImageRenderer'))
-// direction: ${({direction}: { direction: string }) => direction || 'ltr'};
 
 interface PromotionPostCardPropTypes {
     title: string,
@@ -32,16 +31,7 @@ const PromotionPostCardStyle = styled.article`
   background-color: var(--post-element-background-color, #131314);
   margin: 0 auto;
   width: 100%;
-
-  .entry-header {
-    text-align: center;
-    margin-top: 2px;
-
-    .card-header {
-      color: var(--post-element-text-color, #ccc);
-    }
-  }
-
+  
   .card-under-media-info {
     font-size: 14px;
     display: flex;
@@ -88,7 +78,7 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
          cardWidth,
          index
      }) => {
-        //direction={direction}
+
         const dispatch = useAppDispatch();
         return (
             <PromotionPostCardStyle className={'post-card'} cardWidth={cardWidth}>
@@ -109,9 +99,7 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
                 <Link href={postUrl}>
                     <a className={'card-link'} title={title}>
 
-                        <header className={'entry-header'}>
-                            <span className={'card-header'}>{title}</span>
-                        </header>
+                        <CardTitle title={title}/>
 
                         <div className={'card-under-media-info'}>
                             {!!views &&
@@ -121,11 +109,6 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
                             <CardRating rating={rating} className={'card-rating card-under-media-info-data'}/>
                             }
                         </div>
-
-                        {(post?.updatedAt || post?.createdAt) &&
-                        <CardLastUpdate targetedDate={post?.updatedAt || post?.createdAt}/>
-                        }
-
                     </a>
                 </Link>
             </PromotionPostCardStyle>

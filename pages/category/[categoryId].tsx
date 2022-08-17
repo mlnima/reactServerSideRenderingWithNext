@@ -10,7 +10,7 @@ import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
-import {fetchPosts} from "@store_toolkit/clientReducers/postsReducer";
+import fetchPosts from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPosts";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))

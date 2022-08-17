@@ -1,7 +1,7 @@
 //resetAdminPassword
-const userSchema = require('../server/models/userSchema')
+const userSchema = require('../expressServer/models/userSchema')
 const bcrypt = require('bcryptjs');
-require('../server/_variables/connectToDatabase')
+require('../expressServer/_variables/connectToDatabase')
 
 bcrypt.hash('Admin', 10, function (err, hash) {
     if (err) {

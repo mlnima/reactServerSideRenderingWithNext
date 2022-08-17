@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
-import Head from 'next/dist/next-server/lib/head'
+import Head from 'next/dist/next-expressServer/lib/head'
 
 const CheckoutPageSettingsSetter = props => {
     const [state, setState] = useState({});

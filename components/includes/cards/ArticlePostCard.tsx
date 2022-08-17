@@ -3,12 +3,12 @@ import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import styled from "styled-components";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import CardTitle from "@components/includes/cards/asset/CardTitle/CardTitle";
 
 const TextToCanvasImage = dynamic(() => import('@components/includes/cards/asset/TextToCanvasImage/TextToCanvasImage'))
 const CardImageRenderer = dynamic(() => import('@components/includes/cards/CardImageRenderer'))
 const CardViews = dynamic(() => import('./asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('./asset/CardRating/CardRating'))
-const CardLastUpdate = dynamic(() => import('./asset/CardLastUpdate/CardLastUpdate'));
 
 interface ArticlePostCardPropTypes {
     title: string,
@@ -29,16 +29,7 @@ const ArticlePostCardStyle = styled.article`
   background-color: var(--post-element-background-color, #131314);
   margin: 0 auto;
   width: 100%;
-
-  .entry-header {
-    text-align: center;
-    margin-top: 2px;
-
-    .card-header {
-      color: var(--post-element-text-color, #ccc);
-    }
-  }
-
+  
   .card-under-media-info {
     font-size: 14px;
     display: flex;
@@ -101,9 +92,7 @@ const ArticlePostCard: FC<ArticlePostCardPropTypes> =
                                                cardWidth={cardWidth}/>
                         }
 
-                        <header className={'entry-header'}>
-                            <span className={'card-header'}>{title}</span>
-                        </header>
+                        <CardTitle title={title}/>
 
                         <div className={'card-under-media-info'}>
                             {!!views &&
@@ -113,11 +102,6 @@ const ArticlePostCard: FC<ArticlePostCardPropTypes> =
                             <CardRating rating={rating} className={'card-rating card-under-media-info-data'}/>
                             }
                         </div>
-
-                        {(post?.updatedAt || post?.createdAt) &&
-                        <CardLastUpdate targetedDate={post?.updatedAt || post?.createdAt}/>
-                        }
-
                     </a>
                 </Link>
             </ArticlePostCardStyle>

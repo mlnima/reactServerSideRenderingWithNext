@@ -1,95 +1,95 @@
-import React, {FC,useRef} from "react";
+import React, {FC, useRef, useState} from "react";
 import styled from "styled-components";
-import {fetchFileManagerUploadFile} from "@store_toolkit/adminReducers/adminPanelFileManagerReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
+import {fetchUserPostImageUpload} from "@store_toolkit/clientReducers/userReducer";
+import {setEditingPostImagesToUpload} from "@store_toolkit/clientReducers/postsReducer";
+//import {fetchFileManagerUploadFile} from "@store_toolkit/adminReducers/adminPanelFileManagerReducer";
 
 const ThumbnailUploaderStyledDiv = styled.div`
-  width: 254.99px;
-  height: 143.48px;
-
-  border: var(--main-text-color, #ccc) dashed 1px;
-  margin: 20px;
+  width: 100%;
+  margin: 20px 0;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  text-align: center;
+  flex-wrap: wrap;
+  
+  .uploader-area{
+    width: 160px;
+    height: 91px;
+    border: var(--main-text-color, #ccc) dashed 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
   img{
     padding: 5px;
     object-fit: contain;
-    width: 254.99px;
-    height: 143.48px;
+    width: 160px;
+    height: 91px;
   }
 `
 
 interface ThumbnailUploaderPropTypes {
     mainThumbnail: string,
+    editingPostImagesToUpload: {},
+    images: [string],
+    postId: string,
 
 }
 
-const ThumbnailUploader: FC<ThumbnailUploaderPropTypes> = ({mainThumbnail}) => {
-    const uploadInputElement = useRef(null)
-    const dispatch = useAppDispatch();
-
-    const onUploadHandler = e => {
-        const filesData = new FormData()
-        filesData.append('token', localStorage.wt)
-        filesData.append('uploadingFile', e.target.files[0])
-        filesData.append('type', 'thumbnail')
-
-        dispatch(fetchFileManagerUploadFile({file: filesData, useType:'postMainThumbnail',postData:null}))
-        // uploadFiles(filesData).then(res => {
-        //     if (res.data?.path){
-        //         dispatch(editPostField({'mainThumbnail': res.data?.path?.replace('./','/')}))
-        //     }
-        // }).catch(err => {
-        //     // props.returnElement.current.value  = 'Something went Wrong'
-        // })
-    }
+const ThumbnailUploader: FC<ThumbnailUploaderPropTypes> = ({mainThumbnail,postId,images,editingPostImagesToUpload}) => {
+    const dispatch = useAppDispatch()
+    const uploadInputElement = useRef<HTMLInputElement>(null)
 
 
-    const onDropFileHandler = (e) => {
-        e.preventDefault()
-        const fileData = e.dataTransfer.files[0]
-        const droppedHTML = e?.dataTransfer?.getData("text/html");
 
-        if (droppedHTML) {
-            const elem = document.createElement("div");
-            elem.innerHTML = droppedHTML;
-            const image = elem.getElementsByTagName("img");
-            const url = (image[0] || image[1]).currentSrc
-        } else if (fileData) {
-            const filesData = new FormData()
-            filesData.append('token', localStorage.wt)
-            filesData.append('uploadingFile', fileData)
-
-
-            dispatch(fetchFileManagerUploadFile({file: filesData, useType:'postMainThumbnail',postData:null}))
-            // fileUpload(filesData).then(res => {
-            //     if (res.data?.path){
-            //         dispatch(editPostField({'mainThumbnail': res.data?.path?.replace('./','/')}))
-            //     }
-            //     // props.setFunction(props.name,res.data.path.replace('./','/'))
-            // }).catch(err => {
-            //     console.log(err)
-            // })
+    const uploadeImages = (images) =>{
+        if (images.length){
+            dispatch(fetchUserPostImageUpload({images,postId}))
         }
     }
 
+    const onSelectImagesHandler = (images)=>{
+        dispatch(setEditingPostImagesToUpload(images))
+    }
+
+
+   const PreviewUnUploadedImages = ()=>{
+        if (Object.keys(editingPostImagesToUpload)?.length){
+           return Object.keys(editingPostImagesToUpload).map((imageToUpload,index)=>{
+                console.log(editingPostImagesToUpload[imageToUpload])
+                return (
+                    <img src={URL.createObjectURL(editingPostImagesToUpload[imageToUpload])} alt={`image${index}`} key={index}/>
+                )
+            })
+        }else return null
+   }
+
+
+
     return (
         <ThumbnailUploaderStyledDiv onClick={() => uploadInputElement.current.click()}
-                                    onDrop={e => onDropFileHandler(e)}
+                                    onDrop={e => onSelectImagesHandler(e.dataTransfer.files)}
                                     onDragOver={e => e.preventDefault()}
         >
-            <input className={'form-control-input'} ref={uploadInputElement} type="file" style={{display: 'none'}}
-                   onChange={e => onUploadHandler(e)}/>
-            {!mainThumbnail ?
-                <p>Drag and Drop the image here or click to upload the file</p>
-                : <img src={mainThumbnail} alt="mainThumbnail"/>
-            }
+            <div className={'uploader-area'}>
+                <input className={'form-control-input'} ref={uploadInputElement} type="file" multiple style={{display: 'none'}}
+                       onChange={e => onSelectImagesHandler(e.target.files)}/>
+                <p>Click To Upload The Images</p>
+            </div>
+
+            {!!mainThumbnail && <img src={mainThumbnail} alt="mainThumbnail"/>}
+            {!!images?.length && images.map((image,index)=>{
+                return (
+                    <div className={'image-preview'}>
+                        <img src={image} alt={`image${index}`} key={index}/>
+                    </div>
+                )
+            })}
+            {/*//@ts-ignore*/}
+            <PreviewUnUploadedImages/>
         </ThumbnailUploaderStyledDiv>
     )
 };
 export default ThumbnailUploader
-// background-image: url("${(props: { mainThumbnail: string }) => props.mainThumbnail}");
-// background-size: contain;
-// background-repeat: no-repeat;

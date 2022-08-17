@@ -4,6 +4,7 @@ import {Meta} from "@_variables/TypeScriptTypes/GlobalTypes";
 import Link from "next/link";
 import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
 import dynamic from "next/dynamic";
+import CardTitle from "@components/includes/cards/asset/CardTitle/CardTitle";
 
 const TextToCanvasImage = dynamic(() => import('@components/includes/cards/asset/TextToCanvasImage/TextToCanvasImage'))
 const CardImageRenderer = dynamic(() => import('@components/includes/cards/CardImageRenderer'))
@@ -40,31 +41,13 @@ const ActorCardStyle = styled.article`
         }
       }
     }
+    
+    .entry-header {
+      .card-header {
+        color: var(--main-active-color) !important;
 
-    .actor-card-info {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      .actor-card-title, .actor-card-count {
-        color: var(--post-element-text-color, #ccc);
-      }
-
-      header {
-        width: 100%;
-        text-align: center;
-        margin-top: 5px;
-
-        .card-header {
-          width: min-content;
-          color: var(--main-active-color);
-          text-overflow: ellipsis;
-          overflow: hidden;
-          -webkit-box-orient: vertical;
-
-          &:hover {
-            color: var(--post-element-text-color, #fff);
-          }
+        &:hover {
+          color: var(--post-element-text-color, #fff) !important;
         }
       }
     }
@@ -106,15 +89,8 @@ const ActorCard: FC<ActorCardPropTypes> =
                             <TextToCanvasImage title={actorName}
                                                postsPerRawForMobile={postsPerRawForMobile}
                                                cardWidth={cardWidth}/>
-
                         }
-
-
-                        <div className={'actor-card-info'}>
-                            <header>
-                                <span className={'card-header'}> {actorName}</span>
-                            </header>
-                        </div>
+                        <CardTitle title={actorName}/>
                     </a>
                 </Link>
             </ActorCardStyle>

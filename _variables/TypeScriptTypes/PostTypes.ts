@@ -13,6 +13,7 @@ export interface Comment{
 }
 
 export interface PostTypes {
+    images?: [string];
     rating: string;
     videoEmbedCode: string,
     videoUrl: string,

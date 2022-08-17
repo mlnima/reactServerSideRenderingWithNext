@@ -1,13 +1,18 @@
-
-const withPlugins = require('next-compose-plugins');
-const nextEnv = require('next-env');
 const languages = process.env.NEXT_PUBLIC_LOCALS.replace(' ', '|')
 const locales = process.env.NEXT_PUBLIC_LOCALS.split(' ')
 const allowedDomainForImages = process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES.split(' ')
-const withPWA = require('next-pwa')
+// const withPWA = require('next-pwa')
+// const withPlugins = require('next-compose-plugins');
+// const nextEnv = require('next-env');
+// import { loadEnvConfig } from '@next/env'
+
+// const withBundleAnalyzer = require('@next/bundle-analyzer')({
+//     enabled: true,
+// })
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
     enabled: process.env.ANALYZE === 'true',
+    openAnalyzer: true,
 })
 
 const i18nConfig = locales?.length === 1 ? {} : {
@@ -69,21 +74,18 @@ const nextImageConfig = {
     },
 }
 
-const pwaSettings = process.env.NEXT_PUBLIC_PWA ? withPWA({
-    pwa: {
-        dest: 'public',
-        register: true,
-        skipWaiting: true,
-        sw: '/sw.js'
-    }
-}) : {}
-
-// delete pwaSettings.pwa;
+// const pwaSettings = process.env.NEXT_PUBLIC_PWA ? withPWA({
+//     pwa: {
+//         dest: 'public',
+//         register: true,
+//         skipWaiting: true,
+//         sw: '/sw.js'
+//     }
+// }) : {}
 
 const nextConfigs = {
-    // i18n,
+    ...i18nConfig,
     ...nextImageConfig,
-    // env: {},
     reactStrictMode: false,
     rewrites,
     swcMinify: true,
@@ -91,43 +93,22 @@ const nextConfigs = {
         ignoreDuringBuilds: true,
     },
     compiler: {
-
         styledComponents: true,
     }
 }
 
+//@ts-ignore
+module.exports = withBundleAnalyzer(nextConfigs);
 
-module.exports = withPlugins([
-    process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_PWA === 'true' ? withPWA(pwaSettings) : {},
-    withBundleAnalyzer,
-    nextEnv({
-        staticPrefix: 'NEXT_PUBLIC_',
-        publicPrefix: 'NEXT_PUBLIC_'
-    }),
-    i18nConfig,
-], nextConfigs);
+// module.exports = nextConfigs;
 
 
-//old
-// const {PHASE_DEVELOPMENT_SERVER} = require('next/constants')
-// require('webpack')
-// const {parsed: localEnv} = require('dotenv').config();
-// const {i18n} = require('./next-i18next.config');
-
-
-// const svgLoader = {
-//     webpack(config) {
-//         config.module.rules.push({
-//             test: /\.svg$/,
-//             use: ["@svgr/webpack"]
-//         });
-//         return config;
-//     }
-// }
-
-//*******************************Temporary SSG is disable************************************
-// const staticPageGeneration = process.env.NEXT_PUBLIC_STATIC_PAGES === 'true' ? {
-//     beforeFiles:[
-//         {source: `/`, destination: '/staticIndex'},
-//     ]
-// } :{}
+// module.exports = withPlugins([
+//     process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_PWA === 'true' ? withPWA(pwaSettings) : {},
+//     process.env.ANALYZE === 'true' ? withBundleAnalyzer :{},
+//     nextEnv({
+//         staticPrefix: 'NEXT_PUBLIC_',
+//         publicPrefix: 'NEXT_PUBLIC_'
+//     }),
+//     // i18nConfig,
+// ], nextConfigs);

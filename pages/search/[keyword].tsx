@@ -9,7 +9,7 @@ import {useSelector} from "react-redux";
 import {StoreTypes} from '@_variables/TypeScriptTypes/GlobalTypes'
 import type { ReactElement } from 'react';
 import AppLayout from "@components/layouts/AppLayout";
-import {fetchPosts} from "@store_toolkit/clientReducers/postsReducer";
+import fetchPosts from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPosts";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 
 let StyledMain = styled.main`

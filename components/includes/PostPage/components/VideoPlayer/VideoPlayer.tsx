@@ -2,6 +2,7 @@ import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import React, {FC, useMemo} from "react";
+import convertDurationStringToIso8601 from "@_variables/clientVariables/convertDurationStringToIso8601";
 
 const VideoPlayerStyledDiv = styled.div`
   margin: 0 auto;
@@ -90,8 +91,8 @@ const VideoPlayer :FC<PropTypes> = ({descriptionRef}) => {
         <VideoPlayerStyledDiv className='video-player'>
             {!!title &&   <meta itemProp="name" content={title}/>}
             {/*//@ts-ignore*/}
-            {!!descriptionRef?.current &&   <meta itemProp="description" content={descriptionRef?.current?.textContent || ''}/>}
-            {!!duration &&   <meta itemProp="duration" content={duration}/>}
+            {(!!descriptionRef?.current && !!descriptionRef?.current?.textContent)&&   <meta itemProp="description" content={descriptionRef?.current?.textContent}/>}
+            {!!duration &&   <meta itemProp="duration" content={ convertDurationStringToIso8601(duration)}/>}
             {!!playerSchemaData.mainThumbnail &&    <meta itemProp="thumbnailUrl" content={playerSchemaData.mainThumbnail}/>}
             {!!(videoUrl || videoEmbedCode) &&    <meta itemProp="embedURL" content={videoUrl || videoEmbedCode}/>}
             {!!uploadDate && <meta itemProp="uploadDate" content={uploadDate}/>}

@@ -1,0 +1,26 @@
+{
+  "extends": "./tsconfig.json",
+  "allowSyntheticDefaultImports": true,
+  "allowJs": true,
+  "checkJs": false,
+  "compilerOptions": {
+    "module": "commonjs",
+    "outDir": ".next",
+    "noEmit": false,
+    "lib": [
+      "es2017",
+      "esnext.asynciterable"
+    ],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "baseUrl": ".",
+  "paths": {
+    "@server/*": [
+      "server/*"
+    ]
+  },
+  "include": [
+    "expressServer"
+  ]
+}

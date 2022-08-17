@@ -87,7 +87,7 @@ export const fetchFilManagerCreateNewFolder = createAsyncThunk(
             token: localStorage.wt
         };
 
-        return await Axios.post('/server/files/admin-newFolder', body).then(res => {
+        return await Axios.post('/expressServer/files/admin-newFolder', body).then(res => {
 
             thunkAPI.dispatch(setAlert({message: 'Created', type: 'success'}))
 
@@ -108,7 +108,7 @@ export const fetchFilManagerCreateNewFile = createAsyncThunk(
             token: localStorage.wt
         };
 
-        return await Axios.post('/server/files/admin-newFile', body).then(res => {
+        return await Axios.post('/expressServer/files/admin-newFile', body).then(res => {
             thunkAPI.dispatch(setAlert({message: 'Created', type: 'success'}))
 
         }).catch(err => {
@@ -166,6 +166,10 @@ export const fetchFileManagerUploadFile = createAsyncThunk(
         }).finally(() => thunkAPI.dispatch(loading(false)))
     }
 )
+
+
+
+
 export const fetchReadTranslationsFile = createAsyncThunk(
     'adminPanelFileManager/fetchReadTranslationsFile',
     async (path: string, thunkAPI) => {

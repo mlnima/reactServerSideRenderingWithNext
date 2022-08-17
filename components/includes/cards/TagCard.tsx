@@ -5,6 +5,7 @@ import Link from "next/link";
 import {useRouter} from "next/router";
 import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
 import dynamic from "next/dynamic";
+import CardTitle from "@components/includes/cards/asset/CardTitle/CardTitle";
 const TextToCanvasImage = dynamic(() => import('@components/includes/cards/asset/TextToCanvasImage/TextToCanvasImage'))
 const CardImageRenderer = dynamic(() => import('@components/includes/cards/CardImageRenderer'))
 
@@ -46,7 +47,7 @@ const TagCard: FC<TagCardPropTypes> =
 
         const {locale} = useRouter();
 
-        const cardTitle = useMemo(() => {
+        const title = useMemo(() => {
             const checkedTitle = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?
                 tag?.name :
                 tag?.translations?.[locale]?.name || tag?.name
@@ -56,24 +57,19 @@ const TagCard: FC<TagCardPropTypes> =
         return (
             <TagCardStyle cardWidth={cardWidth} className={'tag-card'}>
                 <Link href={`/tag/${tag?._id}`}>
-                    <a className='tag-card-link' title={cardTitle as string}>
+                    <a className='tag-card-link' title={title as string}>
                         {!!tag.imageUrl ?
                             <CardImageRenderer imageUrl={tag.imageUrl}
-                                               mediaAlt={cardTitle}
+                                               mediaAlt={title}
                                                index={index}
                                                postsPerRawForMobile={postsPerRawForMobile}
                                                cardWidth={cardWidth}/> :
-                            <TextToCanvasImage title={cardTitle}
+                            <TextToCanvasImage title={title}
                                                postsPerRawForMobile={postsPerRawForMobile}
                                                cardWidth={cardWidth}/>
                         }
 
-
-                        <header className={'entry-header'}>
-                            <span className={'cat-title'}>
-                                {cardTitle}
-                            </span>
-                        </header>
+                        <CardTitle title={title}/>
 
                     </a>
                 </Link>

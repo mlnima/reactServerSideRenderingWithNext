@@ -49,7 +49,7 @@ const WidgetPagination: FC<WidgetPaginationPropTypes> = ({baseUrl, totalCount,co
 
     return (
         <WidgetPaginationStyledDiv className={'widget-pagination'}>
-            {pages.map((pageNumber,index) => {
+            {[...new Set(pages)].map((pageNumber,index) => {
                 if (pageNumber && typeof pageNumber === "number"){
                     return (
                         <Link key={ index + pageNumber}

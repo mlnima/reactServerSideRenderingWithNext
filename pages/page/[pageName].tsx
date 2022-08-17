@@ -8,7 +8,8 @@ import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 import styled from "styled-components";
 import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
-import {fetchPageData} from "@store_toolkit/clientReducers/postsReducer";
+import fetchPageData
+    from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPageData";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 const Soft404 = dynamic(() => import('@components/includes/Soft404/Soft404'));
 

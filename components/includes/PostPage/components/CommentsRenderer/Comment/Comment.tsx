@@ -7,7 +7,7 @@ import {useRouter} from "next/router";
 import {FC} from "react";
 import {Comment} from '@_variables/TypeScriptTypes/PostTypes'
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {fetchDeleteCommentByAdminInPostPage} from "@store_toolkit/clientReducers/postsReducer";
+import deleteCommentByAdminInPostPage from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksDeleteCommentByAdminInPostPage";
 import {useAppDispatch} from "@store_toolkit/hooks";
 
 const CommentStyledDiv = styled.div`
@@ -57,7 +57,7 @@ const Comment: FC<CommentPropTypes> = ({comment}) => {
     const localeData = locale === 'fa' ? {locale: faIR} : {}
 
     const onDeleteHandler = (id) => {
-        dispatch(fetchDeleteCommentByAdminInPostPage([id]))
+        dispatch(deleteCommentByAdminInPostPage([id]))
     }
 
     if (comment?.author?._id && comment?.createdAt){
