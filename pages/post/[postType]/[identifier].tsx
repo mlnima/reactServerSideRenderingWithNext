@@ -23,6 +23,8 @@ const LearnTypePostPage = dynamic(() =>
     import('@components/includes/PostPage/LearnTypePostPage/LearnTypePostPage'))
 const VideoTypePostPage = dynamic(() =>
     import('@components/includes/PostPage/VideoTypePostPage/VideoTypePostPage'))
+const ArticleTypePostPage = dynamic(() =>
+    import('@components/includes/PostPage/ArticleTypePostPage/ArticleTypePostPage'))
 const PostPage = dynamic(() => import('@components/includes/PostPage/PostPage'))
 
 const PageStyle = styled.div`
@@ -60,6 +62,7 @@ const postPage = () => {
                         postType === 'video' ? <VideoTypePostPage/> :
                             postType === 'learn' ? <LearnTypePostPage/> :
                                 postType === 'promotion' ? <PromotionTypePostPage/> :
+                                postType === 'article' ? <ArticleTypePostPage/> :
                                     <PostPage/>
                     }
 

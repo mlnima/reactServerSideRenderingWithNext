@@ -3,6 +3,7 @@ import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import React, {FC, useMemo} from "react";
 import convertDurationStringToIso8601 from "@_variables/clientVariables/convertDurationStringToIso8601";
+import convertDateToIso from "@_variables/clientVariables/convertDateToIso";
 
 const VideoPlayerStyledDiv = styled.div`
   margin: 0 auto;
@@ -63,18 +64,9 @@ const VideoPlayer :FC<PropTypes> = ({descriptionRef}) => {
       videoScriptCode
   } = useSelector(({posts}:StoreTypes)=>posts.post)
 
-      const uploadDate = useMemo(()=>{
-        try {
-            const ISO8601Date = new Date(updatedAt || createdAt)
-            if (ISO8601Date){
-                return ISO8601Date.toISOString()
-            }else return null
-        }catch (err){
-            return null
-        }
 
 
-      },[createdAt,updatedAt])
+      const uploadDate = useMemo(()=>convertDateToIso(updatedAt || createdAt),[createdAt,updatedAt])
 
 
     const playerSchemaData = useMemo(()=>{

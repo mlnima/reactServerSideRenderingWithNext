@@ -26,6 +26,11 @@ const i18nConfig = locales?.length === 1 ? {} : {
 const rewrites = () => {
     return {
         beforeFiles: [
+            // {
+            //     source: `/post/:postType(video|post|product|article|book)`,
+            //     destination: '/posts?postType=:postType' ,
+            //     has: [{type: 'query', key: 'postType'}]
+            // },
             {
                 source: `/post`,
                 destination: '/post/old/:id',
@@ -55,6 +60,7 @@ const rewrites = () => {
             {source: `/admin`, destination: '/admin', locale: false},
             {source: `/:locale(${languages})?/:postType(video|post|product|article|book)/:title`, destination: '/post'},
             {source: `/:postType(video|post|product|article|book)?/:title`, destination: '/post'},
+
 
         ],
         fallback: [

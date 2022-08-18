@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react'
+import React, {FC, useMemo, useState} from 'react'
 import isAbsolutePath from "@_variables/util/isAbsolutePath";
 import isImageAllowedForNextImage from "@_variables/util/isImageAllowedForNextImage";
 import Image from 'next/image'
@@ -51,33 +51,38 @@ const CardImageRenderer: FC<CardImageNextPropTypes> =
          index,
          cardWidth,
      }) => {
+        const [gotError, setGotError] = useState(false)
 
-        const [imageSrc,setImageSrc] = useState(() => imageUrl && !isAbsolutePath(imageUrl) ?
-                `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${imageUrl}` :
-                imageUrl
-            )
-
-        const noImageUrl = `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${'/static/images/noImage/no-image-available.png'}`
+        const defaultUrl = useMemo(()=>{
+            if (gotError){
+                return `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${'/static/images/noImage/no-image-available.png'}`
+            }else {
+                return imageUrl && !isAbsolutePath(imageUrl) ?
+                    `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${imageUrl}` :
+                    imageUrl
+            }
+        },[gotError,imageUrl])
 
         return (
             <CardImageRendererStyle postsPerRawForMobile={postsPerRawForMobile}
                                     cardWidth={cardWidth}
                                     className={'card-image'}>
 
-                {(imageSrc && isImageAllowedForNextImage(imageSrc) && index >= 2) ?
+                {(!!defaultUrl && isImageAllowedForNextImage(defaultUrl) && index >= 2) ?
                     <Image alt={mediaAlt}
-                           src={imageSrc}
+                           src={defaultUrl}
                            loading={'lazy'}
                            layout={'fill'}
                            className={'card-image-next'}
                            quality={80}
                            objectFit={'cover'}
-                           onError={() => setImageSrc(noImageUrl)}
+                           onError={() => setGotError(true)}
                     /> :
-                    <img src={imageSrc}
+                    <img src={defaultUrl}
                          alt={mediaAlt}
                          className={'card-image'}
-                         onError={({currentTarget }) =>currentTarget.src= noImageUrl}
+                         //onError={({currentTarget}) => currentTarget.src = noImageUrl}
+                         onError={() => setGotError(true)}
                     />
                 }
 

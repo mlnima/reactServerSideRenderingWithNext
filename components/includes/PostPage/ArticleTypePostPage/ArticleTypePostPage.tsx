@@ -30,10 +30,10 @@ const Style = styled(PostPageStyle)`
   ${({postPageStyle}: { postPageStyle: string }) => postPageStyle || ''}
 `
 
-interface PromotionTypePostPagePropTypes {
+interface ArticleTypePostPagePropTypes {
 }
 
-const PromotionTypePostPage: FC<PromotionTypePostPagePropTypes> = (props) => {
+const ArticleTypePostPage: FC<ArticleTypePostPagePropTypes> = (props) => {
     const descriptionRef = useRef<HTMLDivElement>(null)
 
     const {postPageStyle, post} = useSelector(({settings, posts}: StoreTypes) => {
@@ -43,30 +43,25 @@ const PromotionTypePostPage: FC<PromotionTypePostPagePropTypes> = (props) => {
         }
     })
 
-    const datePublished = useMemo(() => convertDateToIso(post.createdAt), [post.createdAt])
-    const dateModified = useMemo(() => convertDateToIso(post.updatedAt), [post.updatedAt])
+    const datePublished = useMemo(()=>convertDateToIso(post.createdAt),[post.createdAt])
+    const dateModified = useMemo(()=>convertDateToIso(post.updatedAt),[post.updatedAt ])
 
     return (
         <Style id={'primary'} className='post-page' postPageStyle={postPageStyle}>
             <main id={'main'}>
-                <article itemProp={'BlogPosting'} itemScope itemType={'https://schema.org/BlogPosting'}>
+                <article itemScope itemType={'https://schema.org/BlogPosting'}>
                     <header className={'entry-header'}>
                         <PostTitle/>
-                        {!!post.title && <meta itemProp="name" content={post.title}/>}
-                        {!!post.title && <meta itemProp="headline" content={post.title}/>}
-                        {(!!descriptionRef?.current && !!descriptionRef?.current?.textContent) &&
+                        {!!post.title &&   <meta itemProp="name" content={post.title}/>}
+                        {!!post.title &&   <meta itemProp="headline" content={post.title}/>}
+                        {/*//@ts-ignore*/}
+                        {(!!descriptionRef?.current && !!descriptionRef?.current?.textContent)&&
                         <meta itemProp="description" content={descriptionRef?.current?.textContent}/>}
-                        {!!post.mainThumbnail && <meta itemProp="thumbnailUrl" content={post.mainThumbnail}/>}
+                        {!!post.mainThumbnail &&    <meta itemProp="thumbnailUrl" content={post.mainThumbnail}/>}
                         {(!!descriptionRef?.current && !!descriptionRef?.current?.textContent) &&
-                        <meta itemProp="articleBody" content={descriptionRef?.current?.textContent}/>}
+                        <meta itemProp="articleBody" content={ descriptionRef?.current?.textContent}/>}
                         {!!datePublished && <meta itemProp="datePublished" content={datePublished}/>}
                         {!!dateModified && <meta itemProp="dateModified" content={dateModified}/>}
-                        <div className='promotion-thumbnail-link'>
-                            <a href={post?.redirectLink}>
-                                <img className='main-thumbnail' src={post?.mainThumbnail} alt="title"/></a>
-                            <a href={post?.redirectLink} className='redirect-link' target='_blank'>go
-                                to {post?.title}</a>
-                        </div>
                     </header>
                     <div className="entry-content">
                         <PostDescription descriptionRef={descriptionRef}/>
@@ -84,4 +79,4 @@ const PromotionTypePostPage: FC<PromotionTypePostPagePropTypes> = (props) => {
         </Style>
     )
 };
-export default PromotionTypePostPage
+export default ArticleTypePostPage

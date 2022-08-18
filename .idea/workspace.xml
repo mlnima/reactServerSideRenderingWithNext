@@ -20,8 +20,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change afterPath="$PROJECT_DIR$/_variables/clientVariables/convertDateToIso.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/includes/PostPage/ArticleTypePostPage/ArticleTypePostPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/widgetsArea/NavigationWidgetArea/BreadcrumbList.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/pagesComponents/categoriesPageComponents/Components/CategoriesRenderer/CategoriesRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/pagesComponents/categoriesPageComponents/Components/CategoriesRenderer/CategoriesRenderer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/PromotionTypePostPage/PromotionTypePostPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/PromotionTypePostPage/PromotionTypePostPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/VideoPlayer/VideoPlayer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/VideoPlayer/VideoPlayer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/CardImageRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CardImageRenderer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/widgetsArea/NavigationWidgetArea/NavigationWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/widgetsArea/NavigationWidgetArea/NavigationWidgetArea.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/post/[postType]/[identifier].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/[postType]/[identifier].tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,9 +42,9 @@
         <option value="HTML File" />
         <option value="tsconfig.json" />
         <option value="CSS File" />
-        <option value="TypeScript JSX File" />
         <option value="JavaScript File" />
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -110,7 +118,7 @@
       <command value="nextEnv" />
     </option>
   </component>
-  <component name="RunManager" selected="npm.dev">
+  <component name="RunManager" selected="npm.start">
     <configuration name="temp.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/tempFiles/temp.js" working-dir="$PROJECT_DIR$/tempFiles">
       <method v="2" />
     </configuration>
@@ -156,9 +164,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
+        <item itemvalue="npm.dev" />
         <item itemvalue="Node.js.temp.js" />
         <item itemvalue="npm.analyze" />
       </list>
@@ -1214,7 +1222,7 @@
       <workItem from="1660568287736" duration="22385000" />
       <workItem from="1660659543206" duration="18662000" />
       <workItem from="1660700128154" duration="9797000" />
-      <workItem from="1660740114149" duration="1441000" />
+      <workItem from="1660740114149" duration="20851000" />
     </task>
     <servers />
   </component>
