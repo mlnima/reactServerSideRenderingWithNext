@@ -3,6 +3,7 @@ import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {useSelector} from "react-redux";
 import BreadcrumbList from "@components/widgetsArea/NavigationWidgetArea/BreadcrumbList";
+import {useRouter} from "next/router";
 
 let StyledNavigation = styled.nav`
   grid-area: navigation;
@@ -33,6 +34,7 @@ let StyledNavigation = styled.nav`
 `
 
 const NavigationWidgetArea = () => {
+    const {pathname} = useRouter()
     const navigationStyle = useSelector(({settings}: StoreTypes) => settings?.design?.navigationStyle)
 
     return (
@@ -42,7 +44,8 @@ const NavigationWidgetArea = () => {
                 <WidgetsRenderer position={'navigation'}/>
             </div>
         </StyledNavigation>
-            <BreadcrumbList/>
+            {pathname !== '/' &&  <BreadcrumbList/> }
+
         </>
     );
 };
