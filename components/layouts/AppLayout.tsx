@@ -1,4 +1,4 @@
-import {FC, useEffect} from 'react';
+import {FC} from 'react';
 import {useSelector} from 'react-redux';
 import dynamic from "next/dynamic";
 import GlobalStylesComponent from "../global/Styles/GlobalStylesComponent";

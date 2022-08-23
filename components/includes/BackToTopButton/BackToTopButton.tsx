@@ -1,4 +1,4 @@
-import { useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import styled from "styled-components";
 
 const BackToTopButtonStyledDiv = styled.div`
@@ -25,30 +25,28 @@ const BackToTopButtonStyledDiv = styled.div`
 `
 const BackToTopButton = () => {
 
-    const [showButton,setShowButton] = useState(false)
+    const [showButton, setShowButton] = useState(false)
 
     useEffect(() => {
-       if (typeof window !== 'undefined'){
-           window.addEventListener("scroll", () => {
-               if (window?.pageYOffset > 300) {
-                   setShowButton(true);
-               } else {
-                   setShowButton(false);
-               }
-           });
-       }
+        if (typeof window !== 'undefined') {
+            window.addEventListener("scroll", () => {
+                if (window?.pageYOffset > 300) {
+                    setShowButton(true);
+                } else {
+                    setShowButton(false);
+                }
+            });
+        }
     }, []);
 
 
-    if (showButton){
+    if (showButton) {
         return (
-            <BackToTopButtonStyledDiv  onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
-
+            <BackToTopButtonStyledDiv onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
                 <span id={'back-to-top-button'}
-                        aria-label={'scroll to top'}
+                      aria-label={'scroll to top'}
 
                 />
-
             </BackToTopButtonStyledDiv>
 
         )

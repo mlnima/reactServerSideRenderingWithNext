@@ -1,4 +1,4 @@
-import React, {FC, useRef, useState} from "react";
+import React, {FC, SetStateAction, useRef, useState} from "react";
 import styled from "styled-components";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {fetchUserPostImageUpload} from "@store_toolkit/clientReducers/userReducer";
@@ -32,13 +32,19 @@ const ThumbnailUploaderStyledDiv = styled.div`
 
 interface ThumbnailUploaderPropTypes {
     mainThumbnail: string,
-    editingPostImagesToUpload: {},
+    editingPostImagesToUpload: any,
+    // setEditingPostImagesToUpload: React.Dispatch<SetStateAction<FormData>>,
     images: [string],
     postId: string,
 
 }
 
-const ThumbnailUploader: FC<ThumbnailUploaderPropTypes> = ({mainThumbnail,postId,images,editingPostImagesToUpload}) => {
+const ThumbnailUploader: FC<ThumbnailUploaderPropTypes> = ({
+                                                               mainThumbnail,
+                                                               postId,
+                                                               images,
+                                                               editingPostImagesToUpload
+}) => {
     const dispatch = useAppDispatch()
     const uploadInputElement = useRef<HTMLInputElement>(null)
 

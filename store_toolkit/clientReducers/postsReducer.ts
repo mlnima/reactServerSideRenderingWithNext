@@ -46,7 +46,7 @@ interface PostsState {
         tagsRelatedPosts: [],
     },
     editingPost: {},
-    editingPostImagesToUpload: {},
+    editingPostImagesToUpload: any,
     comments: {
         _id: string
     }[],
@@ -74,7 +74,7 @@ const initialState: PostsState = {
         tagsRelatedPosts: [],
     },
     editingPost: {},
-    editingPostImagesToUpload: {},
+    editingPostImagesToUpload:{},
     comments: [],
     categoriesMetas: [],
     tagsMetas: [],
@@ -86,16 +86,13 @@ export const postsSlice = createSlice({
     initialState,
     reducers: {
         setEditingPostImagesToUpload: (state, action: PayloadAction<any>) => {
-            state.editingPostImagesToUpload = Object.assign(state.editingPostImagesToUpload,action.payload)
-
-            // return {
-            //     ...state,
-            //     editingPostImagesToUpload: Object.assign(state.editingPostImagesToUpload,action.payload)
-            //     // editingPostImagesToUpload: {
-            //     //     ...state.editingPostImagesToUpload,
-            //     //     ...action.payload
-            //     // },
-            // }
+            return {
+                ...state,
+                editingPostImagesToUpload: {
+                    ...state.editingPostImagesToUpload,
+                    ...action.payload
+                },
+            }
         },
         setPostsData: (state, action: PayloadAction<any>) => {
             return {

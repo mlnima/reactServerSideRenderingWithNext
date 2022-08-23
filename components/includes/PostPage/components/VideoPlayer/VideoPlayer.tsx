@@ -58,7 +58,6 @@ const VideoPlayer :FC<PropTypes> = ({descriptionRef}) => {
       actors,
       mainThumbnail,
       videoEmbedCode,
-
       createdAt,
       updatedAt,
       videoScriptCode

@@ -1,9 +1,11 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import styled from "styled-components";
 import {wrapper} from "@store_toolkit/store";
+import dynamic from "next/dynamic";
+import FormData from 'form-data';
 import {useRouter} from "next/router";
 import CreateEditArticlePostField
     from "@components/includes/profilePageComponents/profilePost/CreateEditArticlePostField/CreateEditArticlePostField";
@@ -22,6 +24,10 @@ import fetchUserCreateNewPost
     from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserCreateNewPost";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
+import DynamicNoSSR from "@components/includes/WidgetsRenderer/DynamicNoSSR";
+
+
+// const WidgetsRenderer = dynamic(() => import('../WidgetsRenderer/WidgetsRenderer'))
 
 const ProfilePostPageStyledDiv = styled.div`
   margin: 20px auto;
@@ -53,6 +59,8 @@ const post = () => {
     const dispatch = useAppDispatch();
     const {query} = useRouter();
     const router = useRouter();
+    // const [editingPostImagesToUpload, setEditingPostImagesToUpload] = useState<any>(null)
+    // const editingPostImagesToUpload = useMemo(()=>new FormData(),[])
     const postType = query?.postType;
 
     const postData = useSelector((store: StoreTypes) => {
@@ -62,6 +70,10 @@ const post = () => {
             editingPostImagesToUpload: store?.posts?.editingPostImagesToUpload,
         }
     })
+
+    // useEffect(() => {
+    //     editingPostImagesToUpload = new FormData()
+    // }, []);
 
     useEffect(() => {
         console.log(postData.editingPostImagesToUpload)
@@ -102,6 +114,7 @@ const post = () => {
     }
 
     return (
+        <DynamicNoSSR>
         <ProfilePostPageStyledDiv className='create-new-post main'>
             <form className={'create-new-post-fields'} onSubmit={e => onSubmitHandler(e)}>
 
@@ -135,6 +148,7 @@ const post = () => {
                 <ThumbnailUploader mainThumbnail={postData?.editingPost?.mainThumbnail}
                                    images={postData?.editingPost?.images}
                                    editingPostImagesToUpload={postData?.editingPostImagesToUpload}
+                                   // setEditingPostImagesToUpload={setEditingPostImagesToUpload}
                                    postId={postData.editingPost._id}/>
 
                 {postData.userData.role === 'administrator' ?
@@ -197,6 +211,7 @@ const post = () => {
             </aside>
 
         </ProfilePostPageStyledDiv>
+        </DynamicNoSSR>
     );
 };
 

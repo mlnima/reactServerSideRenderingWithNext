@@ -34,8 +34,8 @@ const Style = styled.div`
           white-space: nowrap;
           overflow: hidden;
           max-width: 80vw;
-
         }
+        
         .breadcrumbList-arrow {
 
         }

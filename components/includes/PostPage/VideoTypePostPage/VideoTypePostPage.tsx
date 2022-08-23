@@ -49,7 +49,9 @@ const VideoTypePostPage = () => {
     return (
         <VideoTypePostPageStyle id={'primary'} className='post-page' postPageStyle={pageData?.postPageStyle}>
             <main id={'main'}>
-                <article itemProp={'video'} itemScope itemType={'http://schema.org/VideoObject'}>
+                <article itemProp={'video'}
+                         itemScope
+                         itemType={pageData.post.videoUrl ? 'http://schema.org/VideoObject' : 'http://schema.org/embedUrl'}>
                     <header className={'entry-header'}>
                         <VideoPlayer descriptionRef={descriptionRef}/>
                         <div className='rating-price-download'>
