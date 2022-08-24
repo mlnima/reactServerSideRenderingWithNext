@@ -41,7 +41,7 @@ const ActorCardStyle = styled.article`
         }
       }
     }
-    
+
     .entry-header {
       .card-header {
         color: var(--main-active-color) !important;
@@ -54,16 +54,22 @@ const ActorCardStyle = styled.article`
   }
 
   @media only screen and (min-width: 768px) {
-    width: ${({cardWidth}: { cardWidth: number }) => cardWidth}px;
-    height: ${({cardWidth}: { cardWidth: number }) => cardWidth}px;
+    width: ${({cardWidth}: ActorCardStylePropTypes) => cardWidth}px;
+    height: ${({cardWidth}: ActorCardStylePropTypes) => cardWidth}px;
   }
 `
+
 
 interface ActorCardPropTypes {
     meta: Meta,
     index?: number,
     postsPerRawForMobile: number,
     cardWidth: number,
+}
+
+interface ActorCardStylePropTypes {
+    postsPerRawForMobile: number,
+    cardWidth: number
 }
 
 const ActorCard: FC<ActorCardPropTypes> =
@@ -77,7 +83,7 @@ const ActorCard: FC<ActorCardPropTypes> =
         const actorName = capitalizeFirstLetter(meta?.name)
 
         return (
-            <ActorCardStyle cardWidth={cardWidth} className={'actor-card'}>
+            <ActorCardStyle cardWidth={cardWidth} className={'actor-card'} postsPerRawForMobile={postsPerRawForMobile}>
                 <Link href={`/actor/${meta?._id}`}>
                     <a className='actor-card-link' title={actorName as string}>
                         {!!meta.imageUrl ?

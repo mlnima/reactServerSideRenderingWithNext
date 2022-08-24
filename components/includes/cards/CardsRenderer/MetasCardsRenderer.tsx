@@ -25,20 +25,26 @@ interface MetasCardsRendererPropTypes {
 }
 
 let MetasCardsRendererStyle = styled.div`
-  padding: 20px 0;
+  padding: 5px 0;
   display: grid;
   width: 100%;
   margin: auto;
   grid-gap: 5px;
-  grid-template-columns: repeat(auto-fill, minmax(${({postsPerRawForMobile,metaType,cardWidth}: MetasCardsRendererStylePropType) => {
-      return metaType === 'actors' ? `${cardWidth}px` : `${96 / postsPerRawForMobile}`
-  }}vw, 2fr));
+  grid-template-columns: repeat(auto-fill, minmax(${
+          ({
+             postsPerRawForMobile,
+             metaType,
+             cardWidth
+           }: MetasCardsRendererStylePropType) => {
+
+            return metaType === 'actors' ? `${cardWidth}px` : `${96 / postsPerRawForMobile}vw`
+          }}, 2fr));
 
 
   @media only screen and (min-width: 768px) {
     grid-gap: 10px;
     grid-template-columns: repeat(auto-fill, minmax(${({cardWidth}: MetasCardsRendererStylePropType) => {
-        return `${cardWidth}px`
+      return `${cardWidth}px`
     }}, 1fr));
   }
   ${({cardsCustomStyle}: MetasCardsRendererStylePropType) => cardsCustomStyle || ''}
@@ -50,10 +56,10 @@ const MetasCardsRenderer: FC<MetasCardsRendererPropTypes> = ({uniqueData, metaTy
         ({settings, posts}: StoreTypes) => {
             return {
                 metas: uniqueData?.metaData || (metaType === 'categories' ? posts?.categoriesMetas :
-                    metaType === 'tags' ? posts?.tagsMetas : metaType === 'actors' ? posts?.actorsMetas : []) ,
-                    postsPerRawForMobile : settings?.design?.postsPerRawForMobile || 2,
+                    metaType === 'tags' ? posts?.tagsMetas : metaType === 'actors' ? posts?.actorsMetas : []),
+                postsPerRawForMobile: settings?.design?.postsPerRawForMobile || 2,
                 cardsCustomStyle: settings?.design?.cardsCustomStyle || '',
-                cardWidth: settings?.design?.cardWidthDesktop || (metaType === 'actors' ? 140 :255),
+                cardWidth: metaType === 'actors' ? 140 : settings?.design?.cardWidthDesktop || 255,
             }
         })
 
