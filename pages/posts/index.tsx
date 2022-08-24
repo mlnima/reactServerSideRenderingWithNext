@@ -35,7 +35,7 @@ const posts = () => {
 
     return (
         <StyledMain id={'main-content'} className="main posts-page" postsPageStyle={postsPageStyle || ''}>
-            <PostsPage/>
+            <PostsPage renderPagination={true}/>
         </StyledMain>
     )
 };

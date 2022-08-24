@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
-import ActorDetails from "@components/includes/pagesComponents/actorsPageComponents/Components/ActorBio/ActorDetails";
+import ActorDetails from "@components/includes/cards/CardsRenderer/ActorBio/ActorDetails";
 import dynamic from "next/dynamic";
 
 const Soft404 = dynamic(() => import('@components/includes/Soft404/Soft404'));

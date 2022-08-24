@@ -11,6 +11,7 @@ import CommentFrom from "@components/includes/PostPage/components/CommentFrom/Co
 import CommentsRenderer from "@components/includes/PostPage/components/CommentsRenderer/CommentsRenderer";
 import PostPageStyle from "@components/includes/PostPage/PostPageStyle";
 import convertDateToIso from "@_variables/clientVariables/convertDateToIso";
+import RatingButtons from "@components/includes/PostPage/components/RatingButtons/RatingButtons";
 
 const Style = styled(PostPageStyle)`
   margin: auto;
@@ -65,6 +66,9 @@ const ArticleTypePostPage: FC<ArticleTypePostPagePropTypes> = (props) => {
                     </header>
                     <div className="entry-content">
                         <PostDescription descriptionRef={descriptionRef}/>
+                        <div className='rating-price-download'>
+                            <RatingButtons rating={true}/>
+                        </div>
                         <PostMeta type='categories'/>
                         <PostMeta type='tags'/>
                     </div>

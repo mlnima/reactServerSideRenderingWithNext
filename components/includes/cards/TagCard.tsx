@@ -31,7 +31,7 @@ const TagCardStyle = styled.article`
 `
 
 interface TagCardPropTypes {
-    tag: Meta,
+    meta: Meta,
     index?: number,
     postsPerRawForMobile: number,
     cardWidth: number,
@@ -39,7 +39,7 @@ interface TagCardPropTypes {
 
 const TagCard: FC<TagCardPropTypes> =
     ({
-         tag,
+         meta,
          index,
          postsPerRawForMobile,
          cardWidth
@@ -49,17 +49,17 @@ const TagCard: FC<TagCardPropTypes> =
 
         const title = useMemo(() => {
             const checkedTitle = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?
-                tag?.name :
-                tag?.translations?.[locale]?.name || tag?.name
+                meta?.name :
+                meta?.translations?.[locale]?.name || meta?.name
             return capitalizeFirstLetter(checkedTitle)
-        }, [tag?.name]);
+        }, [meta?.name]);
 
         return (
             <TagCardStyle cardWidth={cardWidth} className={'tag-card'}>
-                <Link href={`/tag/${tag?._id}`}>
+                <Link href={`/tag/${meta?._id}`}>
                     <a className='tag-card-link' title={title as string}>
-                        {!!tag.imageUrl ?
-                            <CardImageRenderer imageUrl={tag.imageUrl}
+                        {!!meta?.imageUrl ?
+                            <CardImageRenderer imageUrl={meta?.imageUrl}
                                                mediaAlt={title}
                                                index={index}
                                                postsPerRawForMobile={postsPerRawForMobile}

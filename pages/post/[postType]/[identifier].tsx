@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
@@ -8,12 +8,14 @@ import styled from "styled-components";
 import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
-import fetchViewPost from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchViewPost";
-import fetchPostComments from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPostComments";
-import fetchPost from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPost";
+import fetchViewPost
+    from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchViewPost";
+import fetchPostComments
+    from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPostComments";
+import fetchPost
+    from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPost";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
-import PromotionTypePostPage from "@components/includes/PostPage/PromotionTypePostPage/PromotionTypePostPage";
 
 const Soft404 = dynamic(() =>
     import('@components/includes/Soft404/Soft404'))
@@ -25,11 +27,39 @@ const VideoTypePostPage = dynamic(() =>
     import('@components/includes/PostPage/VideoTypePostPage/VideoTypePostPage'))
 const ArticleTypePostPage = dynamic(() =>
     import('@components/includes/PostPage/ArticleTypePostPage/ArticleTypePostPage'))
+const PromotionTypePostPage = dynamic(() =>
+    import('@components/includes/PostPage/PromotionTypePostPage/PromotionTypePostPage'))
 const PostPage = dynamic(() => import('@components/includes/PostPage/PostPage'))
 
 const PageStyle = styled.div`
+  .rating-price-download {
+    width: 100%;
+    background-color: var(--post-page-info-background-color, #181818);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 
+
+    .rating-buttons{
+      .rating-item{
+        svg{
+          width: 24px;
+          height: 24px;
+        }
+      }
+
+    }
+  }
+  @media only screen and (min-width: 768px) {
+
+    .rating-price-download {
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  }
 `
+
 
 const postPage = () => {
 
@@ -52,7 +82,7 @@ const postPage = () => {
     }, [_id])
 
 
-    if (status === 'published' || role === 'administrator') {
+    if (status === 'published' || (role === 'administrator' && !!status)) {
         return (
             <>
                 {role === 'administrator' ? <EditLinkForAdmin/> : null}
@@ -62,8 +92,8 @@ const postPage = () => {
                         postType === 'video' ? <VideoTypePostPage/> :
                             postType === 'learn' ? <LearnTypePostPage/> :
                                 postType === 'promotion' ? <PromotionTypePostPage/> :
-                                postType === 'article' ? <ArticleTypePostPage/> :
-                                    <PostPage/>
+                                    postType === 'article' ? <ArticleTypePostPage/> :
+                                        <PostPage/>
                     }
 
                     <SidebarWidgetAreaRenderer sidebar={sidebar} position={'postPage'}/>

@@ -60,7 +60,7 @@ const ActorCardStyle = styled.article`
 `
 
 interface ActorCardPropTypes {
-    actor: Meta,
+    meta: Meta,
     index?: number,
     postsPerRawForMobile: number,
     cardWidth: number,
@@ -68,20 +68,20 @@ interface ActorCardPropTypes {
 
 const ActorCard: FC<ActorCardPropTypes> =
     ({
-         actor,
+         meta,
          index,
          postsPerRawForMobile,
          cardWidth
      }) => {
 
-        const actorName = capitalizeFirstLetter(actor?.name)
+        const actorName = capitalizeFirstLetter(meta?.name)
 
         return (
             <ActorCardStyle cardWidth={cardWidth} className={'actor-card'}>
-                <Link href={`/actor/${actor?._id}`}>
+                <Link href={`/actor/${meta?._id}`}>
                     <a className='actor-card-link' title={actorName as string}>
-                        {!!actor.imageUrl ?
-                            <CardImageRenderer imageUrl={actor.imageUrl}
+                        {!!meta.imageUrl ?
+                            <CardImageRenderer imageUrl={meta.imageUrl}
                                                mediaAlt={actorName}
                                                index={index}
                                                postsPerRawForMobile={postsPerRawForMobile}

@@ -10,7 +10,7 @@ import Link from "next/link";
 import AppLayout from "@components/layouts/AppLayout";
 import type {ReactElement} from 'react'
 import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
-import ActorBio from '../../components/includes/pagesComponents/actorsPageComponents/Components/ActorBio/ActorBio'
+import ActorBio from '../../components/includes/cards/CardsRenderer/ActorBio/ActorBio'
 import fetchPosts from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPosts";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 
@@ -62,7 +62,7 @@ const actorPage = () => {
                 <WidgetsRenderer
                     position='actorPageTop'
                 />
-                <PostsPage/>
+                <PostsPage renderPagination={true}/>
                 <WidgetsRenderer
                     position='actorPageBottom'
                 />

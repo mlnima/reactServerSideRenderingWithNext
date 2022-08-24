@@ -4,9 +4,9 @@ import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import dynamic from "next/dynamic";
 
 const ActorBioMobile = dynamic(() =>
-    import('@components/includes/pagesComponents/actorsPageComponents/Components/ActorBio/ActorBioMobile'));
+    import('@components/includes/cards/CardsRenderer/ActorBio/ActorBioMobile'));
 const ActorBioDesktop = dynamic(() =>
-    import('@components/includes/pagesComponents/actorsPageComponents/Components/ActorBio/ActorBioDesktop'));
+    import('@components/includes/cards/CardsRenderer/ActorBio/ActorBioDesktop'));
 
 const ActorBio: FC = () => {
 

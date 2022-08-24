@@ -149,7 +149,7 @@ const post = () => {
                                    images={postData?.editingPost?.images}
                                    editingPostImagesToUpload={postData?.editingPostImagesToUpload}
                                    // setEditingPostImagesToUpload={setEditingPostImagesToUpload}
-                                   postId={postData.editingPost._id}/>
+                                   postId={postData?.editingPost?._id}/>
 
                 {postData.userData.role === 'administrator' ?
                     <>

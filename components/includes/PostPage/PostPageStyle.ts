@@ -10,24 +10,24 @@ const PostPageStyle = styled.div`
   width: 100%;
   grid-area: primary;
 
-  .rating-price-download {
-    width: 100%;
-    background-color: var(--post-page-info-background-color, #181818);
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-
-    
-    .rating-buttons{
-      .rating-item{
-        svg{
-          width: 24px;
-          height: 24px;
-        }
-      }
-
-    }
-  }
+  //.rating-price-download {
+  //  width: 100%;
+  //  background-color: var(--post-page-info-background-color, #181818);
+  //  display: flex;
+  //  justify-content: center;
+  //  flex-wrap: wrap;
+  //
+  //  
+  //  .rating-buttons{
+  //    .rating-item{
+  //      svg{
+  //        width: 24px;
+  //        height: 24px;
+  //      }
+  //    }
+  //
+  //  }
+  //}
 
   .promotion-thumbnail-link {
     display: flex;
@@ -47,14 +47,14 @@ const PostPageStyle = styled.div`
     }
   }
 
-  @media only screen and (min-width: 768px) {
-
-    .rating-price-download {
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-  }
+  //@media only screen and (min-width: 768px) {
+  //
+  //  .rating-price-download {
+  //    justify-content: space-between;
+  //    align-items: center;
+  //    flex-wrap: wrap;
+  //  }
+  //}
 
   ${(props: { postPageStyle: string }) => props?.postPageStyle || ''}
 `

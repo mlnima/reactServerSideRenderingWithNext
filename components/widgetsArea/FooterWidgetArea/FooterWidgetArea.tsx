@@ -6,12 +6,18 @@ import {useSelector} from "react-redux";
 const StyledFooter = styled.footer`
   background-color: var(--footer-background-color,#000);
   grid-area: footer;
-  
+  padding: 0 10px 15px;
   .footer-content{
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
     align-items: center;
+  }
+
+  @media only screen and (min-width: 768px) {
+    .footer-content{
+      flex-direction: column;
+    }
   }
   
   ${(props:{stylesData:string}) => props.stylesData ?? ''}

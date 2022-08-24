@@ -29,7 +29,7 @@ const CategoryCardStyle = styled.article`
 `
 
 interface CategoryCardPropTypes {
-    category: Meta,
+    meta: Meta,
     index?: number,
     postsPerRawForMobile: number,
     cardWidth: number,
@@ -37,7 +37,7 @@ interface CategoryCardPropTypes {
 
 const CategoryCard: FC<CategoryCardPropTypes> =
     ({
-         category,
+         meta,
          index,
          postsPerRawForMobile,
          cardWidth
@@ -47,17 +47,17 @@ const CategoryCard: FC<CategoryCardPropTypes> =
 
         const title = useMemo(() => {
             const checkedTitle = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?
-                category?.name :
-                category?.translations?.[locale]?.name || category?.name
+                meta?.name :
+                meta?.translations?.[locale]?.name || meta?.name
             return capitalizeFirstLetter(checkedTitle)
-        }, [category?.name]);
+        }, [meta?.name]);
 
         return (
             <CategoryCardStyle cardWidth={cardWidth} className={'category-card'}>
-                <Link href={`/category/${category?._id}`}>
+                <Link href={`/category/${meta?._id}`}>
                     <a className='category-card-link' title={title as string}>
-                        {!!category.imageUrl ?
-                            <CardImageRenderer imageUrl={category.imageUrl}
+                        {!!meta.imageUrl ?
+                            <CardImageRenderer imageUrl={meta.imageUrl}
                                                mediaAlt={title}
                                                index={index}
                                                postsPerRawForMobile={postsPerRawForMobile}

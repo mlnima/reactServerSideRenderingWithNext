@@ -1,8 +1,8 @@
 import React from 'react';
 import {useRouter} from "next/router";
 import PaginationComponent from "@components/includes/PaginationComponent/PaginationComponent";
-import CategoriesRenderer
-    from "../../components/includes/pagesComponents/categoriesPageComponents/Components/CategoriesRenderer/CategoriesRenderer";
+// import CategoriesRenderer
+//     from "../../components/includes/pagesComponents/categoriesPageComponents/Components/CategoriesRenderer/CategoriesRenderer";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
@@ -14,6 +14,7 @@ import AppLayout from "@components/layouts/AppLayout";
 import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import fetchMetas from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchMetas";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
+import MetasCardsRenderer from "@components/includes/cards/CardsRenderer/MetasCardsRenderer";
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
@@ -50,7 +51,7 @@ const categoriesPage = () => {
                    stylesData={categoriesPageStyle}>
             <main id={'primary'} className={'content main '}>
                 {topWidgets ? <WidgetsRenderer position={'categoriesPageTop'}/> : null}
-                <CategoriesRenderer cardWidthDesktop={undefined}/>
+                <MetasCardsRenderer metaType={'categories'}/>
                 <PaginationComponent
                     isActive={true}
                     currentPage={query?.page ? parseInt(query?.page as string) : 1}

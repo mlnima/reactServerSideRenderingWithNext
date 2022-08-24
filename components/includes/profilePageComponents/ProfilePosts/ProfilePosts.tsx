@@ -1,9 +1,8 @@
 import React, { useEffect, useState} from 'react';
-
-//import { getPosts } from '@_variables/ajaxPostsVariables'
-import PostsRenderer from '../../PostsRenderer/PostsRenderer'
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import PostsCardsRenderer from "@components/includes/cards/CardsRenderer/PostsCardsRenderer";
+
 const MyProfilePosts = props => {
     const userData = useSelector(({user}:StoreTypes) => user.userData)
 
@@ -43,7 +42,7 @@ const MyProfilePosts = props => {
     return (
         <div className='my-profile-posts'>
           <h1>MyProfilePosts</h1>
-            <PostsRenderer posts={ state.posts || [] }/>
+            <PostsCardsRenderer posts={ state.posts || [] }/>
         </div>
     );
 };

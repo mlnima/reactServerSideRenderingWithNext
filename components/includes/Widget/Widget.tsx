@@ -5,13 +5,10 @@ import {WidgetDataPropTypes} from "@_variables/TypeScriptTypes/Widgets";
 const WidgetHeader = dynamic(() => import('./WidgetHeader/WidgetHeader'))
 const WidgetCustomScript = dynamic(() => import('./WidgetCustomScript/WidgetCustomScript'))
 const WidgetPagination = dynamic(() => import('./WidgetPagination/WidgetPagination'))
-const Posts = dynamic(() => import('../PostsRenderer/PostsRenderer'))
-const CategoriesRenderer = dynamic(() =>
-    import('../pagesComponents/categoriesPageComponents/Components/CategoriesRenderer/CategoriesRenderer'))
-const TagsRenderer = dynamic(() =>
-    import('../pagesComponents/tagsPageComponents/Components/TagsRenderer/TagsRenderer'))
-const ActorsRenderer = dynamic(() =>
-    import('../pagesComponents/actorsPageComponents/Components/ActorsRenderer'))
+const Posts = dynamic(() => import('@components/includes/cards/CardsRenderer/PostsCardsRenderer'))
+const MetasCardsRenderer = dynamic(() =>
+    import('@components/includes/cards/CardsRenderer/MetasCardsRenderer'))
+
 const RecentComments = dynamic(() => import('../widgets/RecentComments/RecentComments'))
 const MetaWidget = dynamic(() => import('../widgets/MetaWidget/MetaWidget'))
 const MediaWidget = dynamic(() => import('../widgets/MediaWidget/MediaWidget'))
@@ -48,7 +45,6 @@ let WidgetStyledSection = styled.section`
 const Widget: FC<WidgetComponentPropTypes> = ({data, widgetId, isSidebar, viewType}) => {
 
     const idAttribute = useMemo(()=>data?.extraId ? {id: data?.extraId} : {},[data])
-    // const idAttribute = data?.extraId ? {id: data?.extraId} : {}
 
     const WidgetToRender = useMemo(()=>{
             return data.type === 'posts' ? Posts :
@@ -59,13 +55,7 @@ const Widget: FC<WidgetComponentPropTypes> = ({data, widgetId, isSidebar, viewTy
             data.type === 'media' ? MediaWidget :
             data.type === 'recentComments' ? RecentComments :
             data.type === 'meta' ? MetaWidget :
-            data.type === 'metaWithImage' && data.metaType === 'categories' ?
-            CategoriesRenderer :
-            data.type === 'metaWithImage' && data.metaType === 'tags' ?
-            TagsRenderer :
-            data.type === 'metaWithImage' && data.metaType === 'actors' ?
-            ActorsRenderer :
-           // data.type === 'searchBar' ? SearchInputComponent :
+            data.type === 'metaWithImage'? MetasCardsRenderer :
             data.type === 'searchBar' ? Searchbar :
             data.type === 'searchButton' ? Searchbar :
             data.type === 'searchbar' ? Searchbar :

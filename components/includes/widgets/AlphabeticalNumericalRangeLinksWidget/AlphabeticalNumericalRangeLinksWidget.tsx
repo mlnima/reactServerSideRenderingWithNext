@@ -1,9 +1,8 @@
-import {FC, useMemo, useState} from "react";
+import React, {FC, useMemo, useState} from "react";
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import styled from "styled-components";
-import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 
 const AlphabeticalNumericalRangeLinksWidgetStyledDiv = styled.div`
   display: flex;
@@ -12,14 +11,20 @@ const AlphabeticalNumericalRangeLinksWidgetStyledDiv = styled.div`
   flex-wrap: wrap;
   flex-direction: column;
   max-width: 95vw;
-  margin-bottom: 10px;
-  margin-top: 10px;
+  padding: 10px;
+  margin: auto;
+  .filter-controller {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: flex-end;
+  }
 
   .alphabetical-range-content {
-    display: ${({renderItems}: { renderItems: boolean }) => renderItems ? 'flex' : 'none'};
+    display: ${({showFilters}: { showFilters: boolean }) => showFilters ? 'flex' : 'none'};
     justify-content: center;
     flex-wrap: wrap;
-
+    
     .alphabetical-range-widget-item {
       display: flex;
       justify-content: center;
@@ -42,9 +47,10 @@ const AlphabeticalNumericalRangeLinksWidgetStyledDiv = styled.div`
       justify-content: center;
       align-items: center;
     }
-    .current-query-over{
-       background-color: var(--danger-button-link-background-color,#dc3545);
-       color: var(--danger-button-link-text-color,#fff);
+
+    .current-query-over {
+      background-color: var(--danger-button-link-background-color, #dc3545);
+      color: var(--danger-button-link-text-color, #fff);
     }
   }
 
@@ -74,26 +80,20 @@ const AlphabeticalNumericalRangeLinksWidgetStyledDiv = styled.div`
 `
 const AlphabeticalNumericalRangeLinksWidget: FC = () => {
 
-    const {pathname, query,locale} = useRouter()
-    const isMobileDevice = useSelector((store: StoreTypes) => store.settings?.isMobile)
-    const isMobile = useMemo(() => isMobileDevice, [])
-    const [renderItems, setRenderItems] = useState(!isMobile)
-    const activePage = query.startWith;
-
-    // const range = useMemo(() => {
-    //     return pathname === '/actors' ? [...'abcdefghijklmnopqrstuvwxyz'] : [...'abcdefghijklmnopqrstuvwxyz0123456789'];
-    // }, [])
+    const {pathname, query} = useRouter()
+    const [showFilters, setShowFilters] = useState(false)
+    const activePage = useMemo(()=>query.startWith,[query.startWith])
+    const isDisabled = useMemo(()=>query?.startWith?.length > 3,[query.startWith])
 
     const range = useMemo(() => {
         return pathname === '/actors' ? [...'abcdefghijklmnopqrstuvwxyz'] :
-            // process.env.NEXT_PUBLIC_DEFAULT_LOCAL === 'fa' && locale ==='fa' ? [] :
             [...'abcdefghijklmnopqrstuvwxyz0123456789'];
     }, [])
 
     const renderRange = range.map((Letter, index) => {
 
         return (
-            <Link key={index} href={{
+            <Link key={index} href={ isDisabled ? '#':{
                 pathname: pathname,
                 query: query.startWith ? {
                     ...query,
@@ -113,18 +113,20 @@ const AlphabeticalNumericalRangeLinksWidget: FC = () => {
     })
 
     return (
-        <AlphabeticalNumericalRangeLinksWidgetStyledDiv className='alphabetical-range-widget' renderItems={renderItems}>
-            {isMobile ?
-                <button className={'mobile-controller btn btn-primary'}
-                        aria-label={'show filters'}
-                        onClick={() => setRenderItems(!renderItems)}
-                >
-                    Filters
-                </button>
-                : null
-            }
+        <AlphabeticalNumericalRangeLinksWidgetStyledDiv className='alphabetical-range-widget' showFilters={showFilters}>
 
-            <div className={'alphabetical-range-content'}>
+            <button className={'filter-controller btn btn-primary'}
+                    aria-label={'show filters'}
+                    onClick={() => setShowFilters(!showFilters)}
+            >
+                <SvgRenderer svgUrl={'/public/asset/images/icons/arrow-down-z-a-solid.svg'}
+                             size={20}
+                             customClassName={'show-filters'}
+                             color={'var(--primary-button-link-text-color,#000)'}
+                />
+
+            </button>
+            {!!showFilters && <div className={'alphabetical-range-content'}>
                 {query.startWith ?
                     <Link key={'X'} href={{
                         pathname: pathname,
@@ -132,7 +134,7 @@ const AlphabeticalNumericalRangeLinksWidget: FC = () => {
                     }}>
                         <a className={
                             `alphabetical-range-widget-item active-item current-query ${
-                                query?.startWith?.length > 3  && 'current-query-over'}`
+                                query?.startWith?.length > 3 && 'current-query-over'}`
                         }>
                             {query?.startWith} X
                         </a>
@@ -150,7 +152,8 @@ const AlphabeticalNumericalRangeLinksWidget: FC = () => {
 
                 {renderRange}
 
-            </div>
+            </div>}
+
         </AlphabeticalNumericalRangeLinksWidgetStyledDiv>
     );
 };

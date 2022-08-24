@@ -1,15 +1,17 @@
-import {useEffect,Fragment} from 'react';
+import {useEffect, Fragment, FC} from 'react';
 import {useRouter} from "next/router";
 import PaginationComponent from "../PaginationComponent/PaginationComponent";
-import PostsRenderer from "../PostsRenderer/PostsRenderer";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import PostsCardsRenderer from "@components/includes/cards/CardsRenderer/PostsCardsRenderer";
 
 let PostsContainer = styled.div`
   width: 100%;
+
   .posts-page-info {
     margin: 5px 0;
+
     h1 {
       margin: 0;
       padding: 0 10px;
@@ -17,18 +19,21 @@ let PostsContainer = styled.div`
   }
 `
 
-const PostsPage = () => {
-    
+interface PostPageTypes {
+    renderPagination: boolean
+}
+
+const PostsPage: FC<PostPageTypes> = ({renderPagination}) => {
+
     const {query} = useRouter()
 
-    const {posts,postsCountPerPage,totalCount}= useSelector(({posts,settings}: StoreTypes) =>{
-        return{
+    const {posts, postsCountPerPage, totalCount} = useSelector(({posts, settings}: StoreTypes) => {
+        return {
             posts: posts?.posts,
-            totalCount:posts?.totalCount,
+            totalCount: posts?.totalCount,
             postsCountPerPage: parseInt(query?.size as string || settings?.identity?.postsCountPerPage || '20')
         }
     })
-
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -39,15 +44,16 @@ const PostsPage = () => {
     return (
         <Fragment>
             <PostsContainer className='posts-container'>
-                <PostsRenderer posts={posts}/>
+                <PostsCardsRenderer posts={posts}/>
             </PostsContainer>
-            <PaginationComponent
+            {!!renderPagination && <PaginationComponent
                 isActive={true}
                 currentPage={query?.page ? parseInt(query?.page as string) : 1}
                 totalCount={totalCount}
-                size={ postsCountPerPage }
-                maxPage={Math.ceil(totalCount /postsCountPerPage)}
-            />
+                size={postsCountPerPage}
+                maxPage={Math.ceil(totalCount / postsCountPerPage)}
+            />}
+
         </Fragment>
     );
 };

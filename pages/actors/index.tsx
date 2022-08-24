@@ -1,7 +1,6 @@
 import {useRouter} from "next/router";
 import PaginationComponent from "@components/includes/PaginationComponent/PaginationComponent";
 import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
-import ActorsRenderer from "../../components/includes/pagesComponents/actorsPageComponents/Components/ActorsRenderer";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
@@ -13,6 +12,7 @@ import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea
 import React from "react";
 import fetchMetas from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchMetas";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
+import MetasCardsRenderer from "@components/includes/cards/CardsRenderer/MetasCardsRenderer";
 
 const PageStyle = styled.div`
   .actors {
@@ -46,7 +46,7 @@ const actorsPage = () => {
                 <WidgetsRenderer
                     position={'actorsPageTop'}
                 />
-                <ActorsRenderer/>
+                <MetasCardsRenderer metaType={'actors'}/>
                 <PaginationComponent
                     isActive={true}
                     currentPage={query?.page ? parseInt(query?.page as string) : 1}

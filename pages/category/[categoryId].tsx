@@ -1,6 +1,6 @@
 import PostsPage from "@components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
-import PostsPageInfo from "@components/includes/PostsRenderer/PostsPageInfo";
+import PostsPageInfo from "@components/includes/PostsPage/PostsPageInfo";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
 import Link from "next/link";
@@ -65,7 +65,7 @@ const categoryPage = () => {
                 <WidgetsRenderer
                     position={'categoryPageTop'}
                 />
-                <PostsPage/>
+                <PostsPage renderPagination={true}/>
                 <WidgetsRenderer
                     position={'categoryBottom'}
                 />

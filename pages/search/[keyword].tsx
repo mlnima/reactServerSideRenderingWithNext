@@ -1,6 +1,6 @@
 import PostsPage from "@components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
-import PostsPageInfo from "@components/includes/PostsRenderer/PostsPageInfo";
+import PostsPageInfo from "@components/includes/PostsPage/PostsPageInfo";
 import {useRouter} from "next/router";
 import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
@@ -46,7 +46,7 @@ const searchPage = ( ) => {
 
             {!posts?.length && <h2 className='no-result-message'>No Result for {router.query.keyword}</h2>}
 
-            <PostsPage  />
+            <PostsPage renderPagination={true}  />
 
             <WidgetsRenderer position={'searchPageBottom'}/>
 

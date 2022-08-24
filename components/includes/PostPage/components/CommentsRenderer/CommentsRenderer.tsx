@@ -7,7 +7,8 @@ import {FC} from "react";
 const CommentsRendererStyledDiv = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  margin: auto;
+  width: 95%;
   align-items: flex-start;
   justify-content: center;
   max-width: 90%;
