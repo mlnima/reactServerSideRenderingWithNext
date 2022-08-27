@@ -1,5 +1,8 @@
-const settingSchema = require('../models/settings/settingSchema')
-const widgetSchema = require("../models/widgetSchema");
+// const settingSchema = require('../models/settings/settingSchema')
+// const widgetSchema = require("../models/widgetSchema");
+import settingSchema from '../models/settings/settingSchema'
+import widgetSchema from '../models/widgetSchema'
+
 
 const _setSettingToEnvironmentVariables = async () => {
     const staticWidgetsQuery = ['footer', 'header', 'topBar', 'navigation'].map(position => position === 'all' ? {} : {'data.position': position})

@@ -1,9 +1,7 @@
-import React, {FC, SetStateAction, useRef, useState} from "react";
+import React, {FC, useRef, useState} from "react";
 import styled from "styled-components";
 import {useAppDispatch} from "@store_toolkit/hooks";
-import {fetchUserPostImageUpload} from "@store_toolkit/clientReducers/userReducer";
-import {setEditingPostImagesToUpload} from "@store_toolkit/clientReducers/postsReducer";
-//import {fetchFileManagerUploadFile} from "@store_toolkit/adminReducers/adminPanelFileManagerReducer";
+import ImagePreview from "@components/includes/profilePageComponents/profilePost/common/ImagePreview";
 
 const ThumbnailUploaderStyledDiv = styled.div`
   width: 100%;
@@ -12,8 +10,9 @@ const ThumbnailUploaderStyledDiv = styled.div`
   justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
-  
-  .uploader-area{
+
+
+  .uploader-area {
     width: 160px;
     height: 91px;
     border: var(--main-text-color, #ccc) dashed 1px;
@@ -22,7 +21,8 @@ const ThumbnailUploaderStyledDiv = styled.div`
     align-items: center;
     text-align: center;
   }
-  img{
+
+  img {
     padding: 5px;
     object-fit: contain;
     width: 160px;
@@ -32,70 +32,77 @@ const ThumbnailUploaderStyledDiv = styled.div`
 
 interface ThumbnailUploaderPropTypes {
     mainThumbnail: string,
-    editingPostImagesToUpload: any,
+    finalPostDataToSave: any,
+
     // setEditingPostImagesToUpload: React.Dispatch<SetStateAction<FormData>>,
     images: [string],
     postId: string,
+    onSelectImagesHandler: Function
 
 }
+
+// type GreetFunction = (a: string) => void;
 
 const ThumbnailUploader: FC<ThumbnailUploaderPropTypes> = ({
                                                                mainThumbnail,
                                                                postId,
+                                                               onSelectImagesHandler,
                                                                images,
-                                                               editingPostImagesToUpload
-}) => {
+                                                               finalPostDataToSave,
+
+                                                           }) => {
     const dispatch = useAppDispatch()
     const uploadInputElement = useRef<HTMLInputElement>(null)
+    const [unUploadedImagesForPreview,setUnUploadedImagesForPreview] = useState({})
 
 
 
-    const uploadeImages = (images) =>{
-        if (images.length){
-            dispatch(fetchUserPostImageUpload({images,postId}))
-        }
+
+    const onSelectImages = (files)=>{
+        // we need to assign new adding file to added one in case use wanna try to add more images
+        onSelectImagesHandler(files)
+        setUnUploadedImagesForPreview({
+            ...unUploadedImagesForPreview,
+            ...files
+        })
     }
-
-    const onSelectImagesHandler = (images)=>{
-        dispatch(setEditingPostImagesToUpload(images))
-    }
-
-
-   const PreviewUnUploadedImages = ()=>{
-        if (Object.keys(editingPostImagesToUpload)?.length){
-           return Object.keys(editingPostImagesToUpload).map((imageToUpload,index)=>{
-                console.log(editingPostImagesToUpload[imageToUpload])
-                return (
-                    <img src={URL.createObjectURL(editingPostImagesToUpload[imageToUpload])} alt={`image${index}`} key={index}/>
-                )
-            })
-        }else return null
-   }
-
-
 
     return (
         <ThumbnailUploaderStyledDiv onClick={() => uploadInputElement.current.click()}
-                                    onDrop={e => onSelectImagesHandler(e.dataTransfer.files)}
+                                    onDrop={e => onSelectImages(e.dataTransfer.files)}
                                     onDragOver={e => e.preventDefault()}
         >
             <div className={'uploader-area'}>
-                <input className={'form-control-input'} ref={uploadInputElement} type="file" multiple style={{display: 'none'}}
-                       onChange={e => onSelectImagesHandler(e.target.files)}/>
+                <input className={'form-control-input'} ref={uploadInputElement} type="file" multiple
+                       style={{display: 'none'}}
+                       onChange={e => onSelectImages(e.target.files)}/>
                 <p>Click To Upload The Images</p>
             </div>
 
             {!!mainThumbnail && <img src={mainThumbnail} alt="mainThumbnail"/>}
-            {!!images?.length && images.map((image,index)=>{
+            {!!images?.length && images.map((image, index) => {
                 return (
-                    <div className={'image-preview'}>
-                        <img src={image} alt={`image${index}`} key={index}/>
-                    </div>
+                    <ImagePreview imageSource={image} isUploaded={true}/>
                 )
             })}
-            {/*//@ts-ignore*/}
-            <PreviewUnUploadedImages/>
+
+
+            {Object.entries(unUploadedImagesForPreview).map(([key,value])=>{
+                return(
+                    <ImagePreview imageSource={value} isUploaded={false} key={key}/>
+                )
+            }) }
         </ThumbnailUploaderStyledDiv>
     )
 };
 export default ThumbnailUploader
+
+
+// <div className={'image-preview'}>
+//     <SvgRenderer svgUrl={'/public/asset/images/icons/trash-can-solid.svg'}
+// size={20}
+// customClassName={'delete-image'}
+// color={'var(--main-active-color,#000)'}
+// />
+// <img src={image} alt={`image${index}`} key={index}/>
+// </div>

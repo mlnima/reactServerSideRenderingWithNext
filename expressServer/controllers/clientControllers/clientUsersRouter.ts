@@ -1,0 +1,41 @@
+import {Router} from 'express';
+import authMiddleware from '../../middlewares/authMiddleware';
+import clientUpdateUserData from './clientUsersControllers/clientUpdateUserData';
+import clientRegisterNewUser from './clientUsersControllers/clientRegisterNewUser';
+import clientUserLogin from './clientUsersControllers/clientUserLogin';
+import clientResetUserPassword from './clientUsersControllers/clientResetUserPassword';
+import clientGetUserPreviewData from './clientUsersControllers/clientGetUserPreviewData';
+import clientGetMultipleUserDataById from './clientUsersControllers/clientGetMultipleUserDataById';
+import clientFollowUser from './clientUsersControllers/clientFollowUser';
+import clientUnFollowUser from './clientUsersControllers/clientUnFollowUser';
+import clientGetUserData from './clientUsersControllers/clientGetUserData';
+import clientGetSignedInUserData from './clientUsersControllers/clientGetSignedInUserData';
+import clientGetUsersList from './clientUsersControllers/clientGetUsersList';
+import clientSendMessage from './clientUsersControllers/clientSendMessage';
+import clientConversation from './clientUsersControllers/clientConversation';
+import clientMessageToConversation from './clientUsersControllers/clientMessageToConversation';
+import clientGetConversations from './clientUsersControllers/clientGetConversations';
+import clientGetConversation from './clientUsersControllers/clientGetConversation';
+import clientDeleteConversation from './clientUsersControllers/clientDeleteConversation';
+
+const router = Router();
+
+router.post('/register',clientRegisterNewUser);
+router.post('/login',clientUserLogin);
+router.post('/resetPassword',authMiddleware,clientResetUserPassword);
+router.post('/getSignedInUserData',authMiddleware,clientGetSignedInUserData);
+router.post('/getUserData',authMiddleware,clientGetUserData);
+router.post('/updateUserData',authMiddleware,clientUpdateUserData);
+router.post('/getUserPreviewData',clientGetUserPreviewData);
+router.post('/getMultipleUserDataById',clientGetMultipleUserDataById);
+router.post('/followUser',authMiddleware,clientFollowUser);
+router.post('/unFollowUser',authMiddleware,clientUnFollowUser);
+router.post('/getUsersList',clientGetUsersList);
+router.post('/sendMessage',authMiddleware,clientSendMessage);
+router.post('/conversation',authMiddleware,clientConversation);
+router.post('/getConversations',authMiddleware,clientGetConversations);
+router.post('/getConversation',authMiddleware,clientGetConversation);
+router.get('/deleteConversation',authMiddleware,clientDeleteConversation);
+router.post('/messageToConversation',authMiddleware,clientMessageToConversation);
+
+export default router;

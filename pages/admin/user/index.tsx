@@ -5,6 +5,8 @@ import styled from "styled-components";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
+import userRoles from "@_dataStructures/userRoles";
+import userStatus from "@_dataStructures/userStatus";
 import {
     fetchAdminPanelNewAPIKey,
     fetchAdminPanelUserData,
@@ -12,6 +14,7 @@ import {
     fetchAdminPanelUpdateUserData, fetchAdminPanelDeleteUser, fetchAdminPanelChangePassword
 } from "@store_toolkit/adminReducers/adminPanelUsersReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
+import convertVariableNameToName from "@_variables/util/convertVariableNameToName";
 
 const UserStyledDiv = styled.div`
   .user-admin-edit-profile-page-section {
@@ -156,10 +159,9 @@ const user = () => {
                         name='role'
                         onChange={e => onChangeHandler(e)}
                         disabled={userData.keyMaster}>
-                    <option value='administrator'>Administrator</option>
-                    <option value='author'>Author</option>
-                    <option value='editor'>Editor</option>
-                    <option value='subscriber'>Subscriber</option>
+                    {userRoles.map((userRole:string,index:number)=>{
+                        return <option value={userRole} key={index}>{convertVariableNameToName(userRole)}</option>
+                    })}
                 </select>
             </div>
             <div className='user-admin-edit-profile-page-section'>
@@ -168,10 +170,9 @@ const user = () => {
                         name='status'
                         onChange={e => onChangeHandler(e)}
                         disabled={userData.keyMaster}>
-                    <option value='unverified'>unverified</option>
-                    <option value='verified'>verified</option>
-                    <option value='restricted'>restricted</option>
-                    <option value='suspended'>suspended</option>
+                    {userStatus.map((status:string,index:number)=>{
+                        return <option value={status} key={index}>{convertVariableNameToName(status)}</option>
+                    })}
                 </select>
             </div>
             <button className='btn btn-primary' onClick={() => dispatch(fetchAdminPanelUpdateUserData(userData))}>

@@ -8,30 +8,41 @@ import fetchUserEditingPost
 
 const fetchUserEditingPostUpdate = createAsyncThunk(
     'posts/fetchUserEditingPost',
-    async (data: PostTypes, thunkAPI) => {
+    async (editedPost:any, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        const comments = data.comments ? {comments: reduceArrayOfDataToIds(data.comments)} : {}
-        const categories = data.categories ? {categories: reduceArrayOfDataToIds(data.categories)} : {}
-        const tags = data.tags ? {tags: reduceArrayOfDataToIds(data.tags)} : {}
-        const actors = data.actors ? {actors: reduceArrayOfDataToIds(data.actors)} : {}
-        //@ts-ignore
-        const author = data.author ? {author: data.author?._id} : {}
+        // // console.log(editingPost)
+        // const comments = editedPost.comments ? {comments: reduceArrayOfDataToIds(editedPost.comments)} : {}
+        // const categories = editedPost.categories ? {categories: reduceArrayOfDataToIds(editedPost.categories)} : {}
+        // const tags = editedPost.tags ? {tags: reduceArrayOfDataToIds(editedPost.tags)} : {}
+        // const actors = editedPost.actors ? {actors: reduceArrayOfDataToIds(editedPost.actors)} : {}
+        // //@ts-ignore
+        // const author = data.author ? {author: data.author?._id} : {}
+        //
+        // const postData = {
+        //     ...editedPost,
+        //     ...comments,
+        //     ...categories,
+        //     ...author,
+        //     ...tags,
+        //     ...actors
+        // }
+        //
+        // const body = {
+        //     postData,
+        //     token: localStorage.wt
+        // };
 
-        const postData = {
-            ...data,
-            ...comments,
-            ...categories,
-            ...author,
-            ...tags,
-            ...actors
-        }
+        // for (const pair of editedPost.entries()) {
+        //     console.log(`${pair[0]}, ${pair[1]}`);
+        // }
+        // console.log(editedPost.entries())
+        // if (Object.keys(editingPostImagesToUpload).length === 0){
+        //     console.log('has files to upload')
+        // }else {
+        //     console.log('has no file to upload')
+        // }
 
-        const body = {
-            postData,
-            token: localStorage.wt
-        };
-
-        await Axios.post(`/api/v1/posts/userUpdatePost`, body).then(res => {
+        await Axios.post(`/api/v1/posts/userUpdatePost`, editedPost).then(res => {
             if (res.data?.message) {
                 thunkAPI.dispatch(setAlert({
                     active: true,

@@ -131,6 +131,7 @@ const PostInformation = props => {
             <TextInput name='videoEmbedCode' rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
             <TextInput name='source' rendering={true} onChangeHandler={props.onChangeHandler}/>
             <TextInput name='redirectLink' rendering={post?.postType === 'promotion'} onChangeHandler={props.onChangeHandler}/>
+            <TextInput name='redirectLink' rendering={post?.postType?.match(/^(promotion|out)$/)} onChangeHandler={props.onChangeHandler}/>
             <TextAreaComponent name='videoScriptCode' rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
             <RenderIframe rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
             <TextInput name='VideoTrailerUrl' rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler}/>

@@ -15,7 +15,7 @@ import ThumbnailUploader from "@components/includes/profilePageComponents/profil
 import VideoTypeFields from "@components/includes/profilePageComponents/profilePost/VideoTypeFields/VideoTypeFields";
 import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
-import {editPostField} from "@store_toolkit/clientReducers/postsReducer";
+import {editPostField, setEditingPostImagesToUpload} from "@store_toolkit/clientReducers/postsReducer";
 import fetchUserEditingPostUpdate
     from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserEditingPostUpdate";
 import fetchUserEditingPost
@@ -25,6 +25,7 @@ import fetchUserCreateNewPost
 import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import DynamicNoSSR from "@components/includes/WidgetsRenderer/DynamicNoSSR";
+import _postDataCleanerBeforeSave from "@_variables/clientAjaxVariables/_postDataCleanerBeforeSave";
 
 
 // const WidgetsRenderer = dynamic(() => import('../WidgetsRenderer/WidgetsRenderer'))
@@ -58,26 +59,21 @@ const post = () => {
 
     const dispatch = useAppDispatch();
     const {query} = useRouter();
-    const router = useRouter();
-    // const [editingPostImagesToUpload, setEditingPostImagesToUpload] = useState<any>(null)
-    // const editingPostImagesToUpload = useMemo(()=>new FormData(),[])
+    const finalPostDataToSave = new FormData()
     const postType = query?.postType;
 
-    const postData = useSelector((store: StoreTypes) => {
+    const {userData, editingPost} = useSelector((store: StoreTypes) => {
         return {
             userData: store?.user.userData,
             editingPost: store?.posts?.editingPost,
-            editingPostImagesToUpload: store?.posts?.editingPostImagesToUpload,
         }
     })
 
     // useEffect(() => {
-    //     editingPostImagesToUpload = new FormData()
+    //     if (typeof window !=='undefined'){
+    //         editingPostImagesToUpload = new FormData()
+    //     }
     // }, []);
-
-    useEffect(() => {
-        console.log(postData.editingPostImagesToUpload)
-    }, [postData.editingPostImagesToUpload]);
 
     useEffect(() => {
         if (query.id) dispatch(fetchUserEditingPost(query.id as string));
@@ -90,22 +86,30 @@ const post = () => {
 
     const onSubmitHandler = (e) => {
         e.preventDefault()
+        finalPostDataToSave.append(
+            'postData',
+            JSON.stringify(_postDataCleanerBeforeSave(editingPost))
+        )
+        finalPostDataToSave.append('token',localStorage.wt)
+        finalPostDataToSave.append('postId', editingPost._id)
+
         if (
-            postData.editingPost._id &&
-            (postData.userData?._id === postData.editingPost.author || postData.userData.role === 'administrator') &&
+            editingPost._id &&
+            (userData?._id === editingPost.author || userData.role === 'administrator') &&
             query.id
         ) {
-            dispatch(fetchUserEditingPostUpdate(postData.editingPost))
-        } else if (!postData.editingPost._id) {
-            dispatch(fetchUserCreateNewPost({
-                data: {
-                    ...postData.editingPost,
-                    status: postData.userData.role === 'administrator' ? postData.editingPost.status || 'pending' : 'pending',
-                    //@ts-ignore
-                    author: postData.userData?._id
-                },
-                router
-            }))
+
+            dispatch(fetchUserEditingPostUpdate(finalPostDataToSave))
+        } else if (!editingPost._id) {
+            // dispatch(fetchUserCreateNewPost({
+            //     data: {
+            //         ...editingPost,
+            //         status: userData.role === 'administrator' ? editingPost.status || 'pending' : 'pending',
+            //         //@ts-ignore
+            //         author: userData?._id
+            //     },
+            //     router
+            // }))
         }
     }
 
@@ -113,104 +117,127 @@ const post = () => {
         dispatch(editPostField({[type]: metas}))
     }
 
+    const onSelectImagesHandler = (images) => {
+
+        Object.entries(images).forEach(([key, value]) => {
+            //@ts-ignore
+            const fileNameSplit = value?.name?.split('.')
+            const fileExtension = fileNameSplit[fileNameSplit.length -1]
+            const currentAmountOfImages = editingPost?.images?.length || 0
+            finalPostDataToSave.append(`image-${currentAmountOfImages + key}.${fileExtension}`, value)
+        });
+
+        // Object.keys(images).forEach((key)=> {
+        //     editingPostImagesToUpload.append(`image-${key}`,images[key])
+        // });
+
+        // Object.entries(editingPostImagesToUpload).forEach(([key, value]) => {
+        //     console.log(key, value);
+        // });
+        //
+        // for (const pair of editingPostImagesToUpload.entries()) {
+        //     console.log(`${pair[0]}, ${pair[1]}`);
+        // }
+    }
+
     return (
         <DynamicNoSSR>
-        <ProfilePostPageStyledDiv className='create-new-post main'>
-            <form className={'create-new-post-fields'} onSubmit={e => onSubmitHandler(e)}>
+            <ProfilePostPageStyledDiv className='create-new-post main'>
+                <form className={'create-new-post-fields'} onSubmit={e => onSubmitHandler(e)}>
 
-                {postData.editingPost?.status ?
-                    <label>Status: {postData.editingPost?.status}</label>
-                    : null
-                }
-                {postData.editingPost?.author ?
-                    //@ts-ignore
-                    <label>Author: {postData.editingPost?.author?.username}</label>
-                    : null
-                }
+                    {editingPost?.status ?
+                        <label>Status: {editingPost?.status}</label>
+                        : null
+                    }
+                    {editingPost?.author ?
+                        //@ts-ignore
+                        <label>Author: {editingPost?.author?.username}</label>
+                        : null
+                    }
 
-                {postData.editingPost?.postType ?
-                    <label>Post Type: {postData.editingPost?.postType}</label>
-                    : null
-                }
+                    {editingPost?.postType ?
+                        <label>Post Type: {editingPost?.postType}</label>
+                        : null
+                    }
 
-                <TextInput required={true} name={'title'} type={'text'} value={postData.editingPost?.title}
-                           title={'Title'}
-                           onChangeHandler={onChangeHandler}/>
-                <TextInput required={true} name={'description'} type={'textarea'}
-                           value={postData.editingPost?.description}
-                           title={'Description'}
-                           onChangeHandler={onChangeHandler} className={'description'}/>
-                {postType === 'article' ?
-                    <CreateEditArticlePostField onChangeHandler={onChangeHandler}/>
-                    : null
-                }
+                    <TextInput required={true} name={'title'} type={'text'} value={editingPost?.title}
+                               title={'Title'}
+                               onChangeHandler={onChangeHandler}/>
+                    <TextInput required={true} name={'description'} type={'textarea'}
+                               value={editingPost?.description}
+                               title={'Description'}
+                               onChangeHandler={onChangeHandler} className={'description'}/>
+                    {postType === 'article' ?
+                        <CreateEditArticlePostField onChangeHandler={onChangeHandler}/>
+                        : null
+                    }
 
-                <ThumbnailUploader mainThumbnail={postData?.editingPost?.mainThumbnail}
-                                   images={postData?.editingPost?.images}
-                                   editingPostImagesToUpload={postData?.editingPostImagesToUpload}
-                                   // setEditingPostImagesToUpload={setEditingPostImagesToUpload}
-                                   postId={postData?.editingPost?._id}/>
+                    <ThumbnailUploader mainThumbnail={editingPost?.mainThumbnail}
+                                       images={editingPost?.images}
+                                       finalPostDataToSave={finalPostDataToSave}
+                                       onSelectImagesHandler={onSelectImagesHandler}
+                                       postId={editingPost?._id}/>
 
-                {postData.userData.role === 'administrator' ?
-                    <>
-                        {/*<TextInput required={true} name={'mainThumbnail'} type={'text'}*/}
-                        {/*           value={postData.editingPost?.mainThumbnail}*/}
-                        {/*           title={'Main Thumbnail'}*/}
-                        {/*           onChangeHandler={onChangeHandler} className={'mainThumbnail'}/>*/}
-                        <TextInput required={true} name={'views'} type={'number'}
-                                   value={postData.editingPost?.views}
-                                   title={'views'}
-                                   onChangeHandler={onChangeHandler} className={'views'}/>
+                    {userData.role === 'administrator' ?
+                        <>
+                            <TextInput required={true} name={'mainThumbnail'} type={'text'}
+                                       value={editingPost?.mainThumbnail}
+                                       title={'Main Thumbnail'}
+                                       onChangeHandler={onChangeHandler} className={'mainThumbnail'}/>
+                            <TextInput required={true} name={'views'} type={'number'}
+                                       value={editingPost?.views}
+                                       title={'views'}
+                                       onChangeHandler={onChangeHandler} className={'views'}/>
 
-                        <TextInput required={true} name={'likes'} type={'number'}
-                                   value={postData.editingPost?.likes}
-                                   title={'Likes'}
-                                   onChangeHandler={onChangeHandler} className={'likes'}/>
+                            <TextInput required={true} name={'likes'} type={'number'}
+                                       value={editingPost?.likes}
+                                       title={'Likes'}
+                                       onChangeHandler={onChangeHandler} className={'likes'}/>
 
-                        <TextInput required={true} name={'disLikes'} type={'number'}
-                                   value={postData.editingPost?.disLikes}
-                                   title={'disLikes'}
-                                   onChangeHandler={onChangeHandler} className={'disLikes'}/>
+                            <TextInput required={true} name={'disLikes'} type={'number'}
+                                       value={editingPost?.disLikes}
+                                       title={'disLikes'}
+                                       onChangeHandler={onChangeHandler} className={'disLikes'}/>
 
-                    </>
-                    : null
-                }
-
-
-                <label>Categories:</label>
-                <MetaDataSelector type={'categories'}
-                                  onMetaChangeHandler={onMetaChangeHandler}
-                                  onChangeHandler={onChangeHandler}
-                />
-                <label>Tags:</label>
-                <MetaDataSelector type={'tags'}
-                                  onMetaChangeHandler={onMetaChangeHandler}
-                                  onChangeHandler={onChangeHandler}
-                />
-                {postData.editingPost?.postType === 'video' ?
-                    <>
-                        <label>Actors:</label>
-                        <MetaDataSelector type={'actors'}
-                                          onMetaChangeHandler={onMetaChangeHandler}
-                                          onChangeHandler={onChangeHandler}
-                        />
-                    </>
-                    : null
-                }
-
-                {postData.editingPost?.postType === 'video' ?
-                    <VideoTypeFields onChangeHandler={onChangeHandler}/>
-                    : null
-                }
+                        </>
+                        : null
+                    }
 
 
-                <button className={'btn btn-primary'} type={'submit'}>Save</button>
-            </form>
-            <aside>
+                    <label>Categories:</label>
+                    <MetaDataSelector type={'categories'}
+                                      onMetaChangeHandler={onMetaChangeHandler}
+                                      onChangeHandler={onChangeHandler}
+                    />
+                    <label>Tags:</label>
+                    <MetaDataSelector type={'tags'}
+                                      onMetaChangeHandler={onMetaChangeHandler}
+                                      onChangeHandler={onChangeHandler}
+                    />
+                    {editingPost?.postType === 'video' ?
+                        <>
+                            <label>Actors:</label>
+                            <MetaDataSelector type={'actors'}
+                                              onMetaChangeHandler={onMetaChangeHandler}
+                                              onChangeHandler={onChangeHandler}
+                            />
+                        </>
+                        : null
+                    }
 
-            </aside>
+                    {editingPost?.postType === 'video' ?
+                        <VideoTypeFields onChangeHandler={onChangeHandler}/>
+                        : null
+                    }
 
-        </ProfilePostPageStyledDiv>
+
+                    <button className={'btn btn-primary'} type={'submit'}>Save</button>
+                </form>
+                <aside>
+
+                </aside>
+
+            </ProfilePostPageStyledDiv>
         </DynamicNoSSR>
     );
 };

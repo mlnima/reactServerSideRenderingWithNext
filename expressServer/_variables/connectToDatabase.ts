@@ -13,7 +13,7 @@ const options = {
     useUnifiedTopology: true
 }
 
-const connectToDatabase = async () => {
+export const connectToDatabase = async () => {
     try {
         //@ts-ignore
         await mongoose.connect(mongoDBConnectionUrl, options)

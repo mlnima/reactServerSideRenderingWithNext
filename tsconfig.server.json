@@ -9,6 +9,8 @@
     "noEmit": false,
     "lib": [
       "es2017",
+      "es2018",
+      "es2021.string",
       "esnext.asynciterable"
     ],
     "experimentalDecorators": true,
@@ -18,6 +20,9 @@
   "paths": {
     "@server/*": [
       "server/*"
+    ],
+    "@_dataStructures/*": [
+      "_dataStructures/*"
     ]
   },
   "include": [

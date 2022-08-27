@@ -1,5 +1,7 @@
-require('dotenv').config()
-require('../_variables/connectToDatabase')
+import dotenv from 'dotenv';
+dotenv.config();
+import {connectToDatabase} from '../_variables/connectToDatabase';
+connectToDatabase().finally()
 import http from 'http'
 import express from 'express'
 import cors from 'cors'

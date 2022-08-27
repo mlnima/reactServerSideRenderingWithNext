@@ -1,7 +1,9 @@
-//resetAdminPassword
-const userSchema = require('../expressServer/models/userSchema')
-const bcrypt = require('bcryptjs');
-require('../expressServer/_variables/connectToDatabase')
+import dotenv from 'dotenv';
+dotenv.config();
+import {connectToDatabase} from '../expressServer/_variables/connectToDatabase';
+connectToDatabase().finally()
+import userSchema from '../expressServer/models/userSchema';
+import bcrypt from 'bcryptjs';
 
 bcrypt.hash('Admin', 10, function (err, hash) {
     if (err) {

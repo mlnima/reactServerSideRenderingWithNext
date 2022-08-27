@@ -30,6 +30,9 @@
       "@_variables/*": [
         "_variables/*"
       ],
+      "@_dataStructures/*": [
+        "_dataStructures/*"
+      ],
     },
     "allowJs": true,
     "checkJs": false,

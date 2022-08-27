@@ -1,6 +1,6 @@
 import React, {ChangeEvent,useState} from 'react';
 import styled from "styled-components";
-import postTypes from "../../../../components/global/postTypes";
+import postTypes from "../../../../_dataStructures/postTypes";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import {fetchAdminExportPosts} from "@store_toolkit/adminReducers/adminPanelPostsReducer";

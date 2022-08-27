@@ -1,10 +1,15 @@
 //clientGetPosts
-import postSchema from '../../../models/postSchema'
-import metaSchema from '../../../models/metaSchema'
-import settingSchema from '../../../models/settings/settingSchema'
+// import postSchema from '../../../models/postSchema'
+// import metaSchema from '../../../models/metaSchema'
+// import settingSchema from '../../../models/settings/settingSchema'
+
+import postSchema from '../../../models/postSchema';
+import settingSchema from '../../../models/settings/settingSchema';
+import metaSchema from '../../../models/metaSchema';
 import searchKeywordSchema from '../../../models/searchKeywordSchema'
 import _clientQueryGeneratorForGettingPosts from '../_variables/_clientQueryGeneratorForGettingPosts'
 import mongoIdValidator from '../../../util/mongoIdValidator'
+import postFieldRequestForCards from "../../../../_dataStructures/postFieldRequestForCards";
 //import postSchema from '@expressServer/models/postSchema'
 // const postSchema = require('../../../models/postSchema');
 // const metaSchema = require('../../../models/metaSchema');
@@ -54,11 +59,11 @@ const clientGetPosts =  async (req, res) => {
         },meta?._id)
 
         // console.log(JSON.stringify(findingPostsOptions, null, '\t'))
-        const populateMeta = [
-            {path: 'actors', select: {'name': 1, 'type': 1}},
-            {path: 'categories', select: {'name': 1, 'type': 1, 'imageUrl': 1}},
-            {path: 'tags', select: {'name': 1, 'type': 1}}
-        ]
+        // const populateMeta = [
+        //     {path: 'actors', select: {'name': 1, 'type': 1}},
+        //     {path: 'categories', select: {'name': 1, 'type': 1, 'imageUrl': 1}},
+        //     {path: 'tags', select: {'name': 1, 'type': 1}}
+        // ]
 
         const totalCount = await postSchema.countDocuments(findingPostsOptions.findPostsQueries).exec();
         const posts = await postSchema.find(findingPostsOptions.findPostsQueries, findingPostsOptions.selectedFields,
@@ -67,7 +72,7 @@ const clientGetPosts =  async (req, res) => {
                 limit: findingPostsOptions.size,
                 sort: findingPostsOptions.sortQuery
             })
-            .populate(populateMeta)
+            // .populate(populateMeta)
             .exec()
 
         if (req.query?.keyword) {

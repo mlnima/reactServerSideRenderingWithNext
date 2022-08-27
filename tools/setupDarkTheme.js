@@ -1,21 +1,25 @@
-const mongoose = require('mongoose');
-require('dotenv').config()
-const settingSchema = require('../expressServer/models/settings/settingSchema')
-const widgetSchema = require('../expressServer/models/widgetSchema')
-const postSchema = require('../expressServer/models/postSchema')
-const userSchema = require('../expressServer/models/userSchema')
-const bcrypt = require('bcryptjs');
+import dotenv from 'dotenv';
+dotenv.config();
+import {connectToDatabase} from './_variables/connectToDatabase';
+connectToDatabase().finally()
 
-const mongoDBConnectionUrl = process.env.DB_LOCAL === 'true' ?
-    `mongodb://localhost:${process.env.DB_PORT}/${process.env.DB_NAME}` :
-    `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`
+import userSchema from '../expressServer/models/userSchema';
+import settingSchema from '../expressServer/models/settingSchema';
+import widgetSchema from '../expressServer/models/widgetSchema';
+import postSchema from '../expressServer/models/postSchema';
+import bcrypt from 'bcryptjs';
 
-mongoose.connect(mongoDBConnectionUrl, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-    .then(() => console.log('DB connected'))
-    .catch(err => console.log('DB not connected', err));
+
+// const mongoDBConnectionUrl = process.env.DB_LOCAL === 'true' ?
+//     `mongodb://localhost:${process.env.DB_PORT}/${process.env.DB_NAME}` :
+//     `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`
+//
+// mongoose.connect(mongoDBConnectionUrl, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+// })
+//     .then(() => console.log('DB connected'))
+//     .catch(err => console.log('DB not connected', err));
 
 
 const designData = {

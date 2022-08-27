@@ -1,4 +1,7 @@
-require('../_variables/connectToDatabase')
+import dotenv from 'dotenv';
+dotenv.config();
+import {connectToDatabase} from '../_variables/connectToDatabase';
+connectToDatabase().finally()
 const {parentPort, workerData} = require("worker_threads");
 const metaSchema = require('../models/metaSchema')
 const postSchema = require("../models/postSchema");

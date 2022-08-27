@@ -469,61 +469,61 @@ export const fetchUserAutoLogin = createAsyncThunk(
 )
 
 
-export const fetchUserPostImageUpload = createAsyncThunk(
-    'adminPanelFileManager/fetchUserPostImageUpload',
-    async ({images, postId}: { images: [any], postId?: string }, thunkAPI) => {
-        thunkAPI.dispatch(loading(true))
-
-        try {
-            const filesData = new FormData()
-            filesData.append('token', localStorage.wt)
-            filesData.append('postId', postId)
-
-            for (const image in images) {
-                if (images[image]?.name && images[image]?.size && images[image]?.type) {
-                    const fileNameSplit = images[image].name.split('.')
-                    const fileExtension = fileNameSplit[fileNameSplit.length - 1]
-                    filesData.append(`${image}.${fileExtension}`, images[image])
-                }
-            }
-
-            await Axios.post('/api/v1/fileManager/userPostImageUpload', filesData).then(res => {
-                console.log(res.data)
-            }).catch(err => {
-                thunkAPI.dispatch(setAlert({message: err.response?.data?.message, type: 'error'}))
-
-            }).finally(() => thunkAPI.dispatch(loading(false)))
-
-        } catch (error) {
-            console.log(error)
-        }
-
-
-        // return await Axios.post('/api/v1/fileManager/userPostImageUpload', images).then(res => {
-        //
-        //     console.log(res.data)
-        //     // if (useType === 'fileManagerFileUpload') {
-        //     //     return {
-        //     //         clickedItem: res.data?.path?.replace('./', ''),
-        //     //         clickedItemName: res.data?.path?.split('/')[res?.data?.path?.split('/')?.length - 1]
-        //     //     }
-        //     // } else if (useType === 'postMainThumbnail') {
-        //     //     return {'mainThumbnail': res.data?.path?.replace('./', '/')}
-        //     // } else if (useType === 'postImageGallery') {
-        //     //     //@ts-ignore
-        //     //     return {'images': [...(postData?.images || []), res.data.path.replace('./', '/')]}
-        //     // } else if (useType === 'postVideoUrl') {
-        //     //     return {'videoUrl': res.data?.path?.replace('./', '/')}
-        //     // } else if (useType === 'postVideoTrailerUrl') {
-        //     //     return {'VideoTrailerUrl': res.data?.path?.replace('./', '/')}
-        //     // }
-        //
-        // }).catch(err => {
-        //     thunkAPI.dispatch(setAlert({message: err.response?.data?.message, type: 'error'}))
-        //
-        // }).finally(() => thunkAPI.dispatch(loading(false)))
-    }
-)
+// export const fetchUserPostImageUpload = createAsyncThunk(
+//     'adminPanelFileManager/fetchUserPostImageUpload',
+//     async ({images, postId}: { images: [any], postId?: string }, thunkAPI) => {
+//         thunkAPI.dispatch(loading(true))
+//
+//         try {
+//             const filesData = new FormData()
+//             filesData.append('token', localStorage.wt)
+//             filesData.append('postId', postId)
+//
+//             for (const image in images) {
+//                 if (images[image]?.name && images[image]?.size && images[image]?.type) {
+//                     const fileNameSplit = images[image].name.split('.')
+//                     const fileExtension = fileNameSplit[fileNameSplit.length - 1]
+//                     filesData.append(`${image}.${fileExtension}`, images[image])
+//                 }
+//             }
+//
+//             await Axios.post('/api/v1/fileManager/userPostImageUpload', filesData).then(res => {
+//                 console.log(res.data)
+//             }).catch(err => {
+//                 thunkAPI.dispatch(setAlert({message: err.response?.data?.message, type: 'error'}))
+//
+//             }).finally(() => thunkAPI.dispatch(loading(false)))
+//
+//         } catch (error) {
+//             console.log(error)
+//         }
+//
+//
+//         // return await Axios.post('/api/v1/fileManager/userPostImageUpload', images).then(res => {
+//         //
+//         //     console.log(res.data)
+//         //     // if (useType === 'fileManagerFileUpload') {
+//         //     //     return {
+//         //     //         clickedItem: res.data?.path?.replace('./', ''),
+//         //     //         clickedItemName: res.data?.path?.split('/')[res?.data?.path?.split('/')?.length - 1]
+//         //     //     }
+//         //     // } else if (useType === 'postMainThumbnail') {
+//         //     //     return {'mainThumbnail': res.data?.path?.replace('./', '/')}
+//         //     // } else if (useType === 'postImageGallery') {
+//         //     //     //@ts-ignore
+//         //     //     return {'images': [...(postData?.images || []), res.data.path.replace('./', '/')]}
+//         //     // } else if (useType === 'postVideoUrl') {
+//         //     //     return {'videoUrl': res.data?.path?.replace('./', '/')}
+//         //     // } else if (useType === 'postVideoTrailerUrl') {
+//         //     //     return {'VideoTrailerUrl': res.data?.path?.replace('./', '/')}
+//         //     // }
+//         //
+//         // }).catch(err => {
+//         //     thunkAPI.dispatch(setAlert({message: err.response?.data?.message, type: 'error'}))
+//         //
+//         // }).finally(() => thunkAPI.dispatch(loading(false)))
+//     }
+// )
 
 export const userSlice = createSlice({
     name: 'user',

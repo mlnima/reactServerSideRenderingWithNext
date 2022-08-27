@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import dynamic from "next/dynamic";
-import postTypes from "@components/global/postTypes";
+import postTypes from "../../../../_dataStructures/postTypes";
 
 const SearchTypeInputFields = dynamic(() => import('@components/adminIncludes/widgetsModel/WidgetModel/SearchTypeInputFields/SearchTypeInputFields'));
 const MultipleLinkWidgetModelFields = dynamic(() => import('@components/adminIncludes/widgetsModel/WidgetModel/MultipleLinkWidgetModelFields/MultipleLinkWidgetModelFields'));

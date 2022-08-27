@@ -1,5 +1,10 @@
-require('dotenv').config()
-require('./_variables/connectToDatabase')
+import dotenv from 'dotenv';
+dotenv.config();
+import {connectToDatabase} from './_variables/connectToDatabase';
+connectToDatabase().finally()
+// require('./_variables/connectToDatabase')
+
+
 import express from 'express'
 import next from 'next'
 import bodyParser from 'body-parser'
@@ -36,11 +41,8 @@ const staticServeOptions = {
 const runServer = () => {
     const server = express();
     server.use(cors())
-//@ts-ignore
-    server.listen(process.env.PORT || 3000, error => {
-        if (error) throw error
-        console.log(`process ${process.pid} : server ${process.env.PORT || 3000} `)
-    })
+
+
     server.use(cookieParser());
     server.use(fileUpload());
     // expressServer.use(middleware());
@@ -82,6 +84,14 @@ const runServer = () => {
 
     //rest of the routes
     server.get('*', cacheSuccesses, (req, res) => handle(req, res));
+
+
+    //@ts-ignore
+    server.listen(process.env.PORT || 3000, error => {
+        if (error) throw error
+        console.log(`process ${process.pid} : server ${process.env.PORT || 3000} `)
+    })
+
 
 }
 

@@ -13,6 +13,7 @@ const LearnPostCard = dynamic(() => import('@components/includes/cards/LearnPost
 const VideoPostCard = dynamic(() => import('@components/includes/cards/VideoPostCard'))
 
 import styled from "styled-components";
+
 const Style = styled.div`
   padding: 20px 0;
   display: grid;
@@ -21,11 +22,11 @@ const Style = styled.div`
   grid-gap: 5px;
   grid-template-columns: repeat(auto-fill, minmax(${({postsPerRawForMobile}: StylePropTypes) => `${96 / postsPerRawForMobile}`}vw, 1fr));
 
-  @media only screen and (min-width: 768px){
+  @media only screen and (min-width: 768px) {
     grid-template-columns: repeat(auto-fill, minmax(${({cardWidth}: StylePropTypes) => `${cardWidth}px`}, 1fr));
   }
 
-  ${({cardsCustomStyle}:StylePropTypes)=>cardsCustomStyle||''}
+  ${({cardsCustomStyle}: StylePropTypes) => cardsCustomStyle || ''}
 `
 
 interface CardsRendererPropTypes {
@@ -47,19 +48,19 @@ interface CardsRendererPropTypes {
 interface StylePropTypes {
     postsPerRawForMobile?: number,
     cardWidth?: number,
-    cardsCustomStyle:string
+    cardsCustomStyle: string
 }
 
 const PostsCardsRenderer: FC<CardsRendererPropTypes> = ({
-        posts,
-        uniqueData,
-        isSidebar
-    }) => {
+                                                            posts,
+                                                            uniqueData,
+                                                            isSidebar
+                                                        }) => {
     const {locale} = useRouter()
-    const {cardWidth, postsPerRawForMobile,cardsCustomStyle} = useSelector(({settings}: StoreTypes) => {
+    const {cardWidth, postsPerRawForMobile, cardsCustomStyle} = useSelector(({settings}: StoreTypes) => {
         return {
             cardWidth: settings?.design?.cardWidthDesktop || 255,
-            cardsCustomStyle:settings.design.cardsCustomStyle|| '',
+            cardsCustomStyle: settings.design.cardsCustomStyle || '',
             postsPerRawForMobile: settings?.design?.postsPerRawForMobile || 2,
         }
     });
@@ -85,13 +86,18 @@ const PostsCardsRenderer: FC<CardsRendererPropTypes> = ({
                     isSidebar: isSidebar,
                 }
 
-                if (post?.postType === 'video') {
+                // if (post?.postType === 'out' && post?.outPostType === 'video'){
+                //     console.log(post)
+                // }
+
+                if (post?.postType === 'video' || (post?.postType === 'out' && post?.outPostType === 'video')) {
+
                     return <VideoPostCard {...postProps} key={index} index={index}/>
-                } else if (post?.postType === 'promotion') {
+                } else if (post?.postType === 'promotion' || (post?.postType === 'out' && post?.outPostType === 'promotion')) {
                     return <PromotionPostCard {...postProps} key={index} index={index}/>
-                } else if (post?.postType === 'article') {
+                } else if (post?.postType === 'article' || (post?.postType === 'out' && post?.outPostType === 'article')) {
                     return <ArticlePostCard {...postProps} key={index} index={index}/>
-                } else if (post?.postType === 'learn') {
+                } else if (post?.postType === 'learn' || (post?.postType === 'out' && post?.outPostType === 'learn')) {
                     return <LearnPostCard {...postProps} key={index} index={index}/>
                 } else return null
             })}

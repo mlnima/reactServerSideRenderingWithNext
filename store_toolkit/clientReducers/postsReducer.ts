@@ -86,13 +86,14 @@ export const postsSlice = createSlice({
     initialState,
     reducers: {
         setEditingPostImagesToUpload: (state, action: PayloadAction<any>) => {
-            return {
-                ...state,
-                editingPostImagesToUpload: {
-                    ...state.editingPostImagesToUpload,
-                    ...action.payload
-                },
-            }
+            state.editingPostImagesToUpload = action.payload
+            // return {
+            //     ...state,
+            //     editingPostImagesToUpload: {
+            //         ...state.editingPostImagesToUpload,
+            //         ...action.payload
+            //     },
+            // }
         },
         setPostsData: (state, action: PayloadAction<any>) => {
             return {

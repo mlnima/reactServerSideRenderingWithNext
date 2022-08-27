@@ -1,9 +1,6 @@
-//clientPostsRouter
-const express = require('express');
-const router = express.Router();
-const authMiddleware = require('../../middlewares/authMiddleware');
-const cacheSuccesses = require('../../middlewares/apiCache');
-
+import {Router} from 'express';
+import authMiddleware from '../../middlewares/authMiddleware';
+import cacheSuccesses from '../../middlewares/apiCache';
 import clientGetPosts from './clientPostsControllers/clientGetPosts'
 import clientGetPost from './clientPostsControllers/clientGetPost'
 import clientLikeDislikeView from './clientPostsControllers/clientLikeDislikeView'
@@ -17,20 +14,7 @@ import clientUserUpdatePost from './clientPostsControllers/clientUserUpdatePost'
 import clientFixMetaImage from './clientPostsControllers/clientFixMetaImage'
 import ClientMetaSuggestion from './clientPostsControllers/ClientMetaSuggestion'
 
-
-// const clientGetPosts = require('./clientPostsControllers/clientGetPosts')
-// const clientGetPost = require('./clientPostsControllers/clientGetPost')
-// const clientLikeDislikeView = require('./clientPostsControllers/clientLikeDislikeView')
-// const clientNewComment = require('./clientPostsControllers/clientNewComment')
-// const clientCheckRemovedContent = require('./clientPostsControllers/clientCheckRemovedContent')
-// const clientGetMetas = require('./clientPostsControllers/clientGetMetas')
-// const clientGetMeta = require('./clientPostsControllers/clientGetMeta')
-// const clientGetComments = require('./clientPostsControllers/clientGetComments')
-// const clientUserCreateNewPost = require('./clientPostsControllers/clientUserCreateNewPost')
-// const clientUserUpdatePost = require('./clientPostsControllers/clientUserUpdatePost')
-// const clientFixMetaImage = require('./clientPostsControllers/clientFixMetaImage')
-// const ClientMetaSuggestion = require('./clientPostsControllers/ClientMetaSuggestion')
-
+const router = Router();
 
 router.get('/clientGetPosts',cacheSuccesses,clientGetPosts)
 router.get('/clientGetPost',cacheSuccesses,clientGetPost)
@@ -46,4 +30,4 @@ router.post('/userCreateNewPost',authMiddleware,clientUserCreateNewPost)
 router.post('/userUpdatePost',authMiddleware,clientUserUpdatePost)
 router.get('/metaSuggestion',ClientMetaSuggestion)
 
-module.exports = router
+export default router
