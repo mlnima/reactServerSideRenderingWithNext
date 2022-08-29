@@ -1,7 +1,6 @@
 import {model, Schema, Document} from "mongoose";
 import {User} from "../../_typeScriptTypes/User";
 
-
 const userSchema = new Schema({
         username: {
             type: String,

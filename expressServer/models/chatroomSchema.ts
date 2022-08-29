@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-const Schema = mongoose.Schema
+import {model, Schema, Document} from "mongoose";
+import {Chatroom} from "../../_typeScriptTypes/Chatroom/Chatroom";
 
 const chatroomSchema = new Schema({
     name:{
@@ -10,4 +10,4 @@ const chatroomSchema = new Schema({
     messages:Array
 },{ timestamps: true })
 
-export default mongoose.model("chatroom",chatroomSchema);
+export default model<Chatroom & Document>("chatroom",chatroomSchema);

@@ -1,6 +1,5 @@
-//commentSchema
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema
+import {model, Schema, Document} from "mongoose";
+import {Comment} from "../../_typeScriptTypes/Comment";
 
 const commentSchema = new Schema({
     onDocumentId: {type:Schema.Types.ObjectId,ref:'post'},
@@ -21,4 +20,4 @@ const commentSchema = new Schema({
     }
 },{ timestamps: true });
 
-export default mongoose.model("comment",commentSchema);
+export default model<Comment & Document>("comment",commentSchema);

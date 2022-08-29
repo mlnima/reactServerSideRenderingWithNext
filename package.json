@@ -53,7 +53,6 @@
     "mailparser": "^3.5.0",
     "moment": "^2.29.3",
     "mongoose": "^6.5.3",
-    "mongose": "^0.0.2-security",
     "next": "^12.2.5",
     "next-compose-plugins": "^2.2.1",
     "next-env": "^1.1.1",

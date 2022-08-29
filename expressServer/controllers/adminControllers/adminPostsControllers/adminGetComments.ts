@@ -5,7 +5,8 @@ const adminGetComments = (req, res) => {
     const pageNo = req.body.pageNo ? parseInt(req.body.pageNo) : 1
     const onDocument = req.body.onDocument ? {onDocumentId: req.body.onDocument} : {}
     const status = !req.body.status || req.body.status === 'all' ? {status: 'approved'} : {status: req.body.status}
-    let sortQuery = req.body.sort === 'latest' ? '-_id' : {[req.body.sort]: -1}
+    //  let sortQuery = req.body.sort === 'latest' ? '-_id' : {[req.body.sort]: -1}
+    const sortQuery = req.body.sort === 'latest' ? {_id: -1} : {[req.body.sort]: -1}
     const searchQuery = !req.body.keyword ? {} : {
         $or: [
             {author: new RegExp(req.body.keyword, 'i')},
@@ -14,16 +15,18 @@ const adminGetComments = (req, res) => {
         ]
     };
 
+    // @ts-ignore
     const comments = commentSchema.find({$and: [onDocument, status, searchQuery]})
-                                  .skip(size * (pageNo - 1))
-                                  .limit(size)
-                                  .sort(sortQuery)
-                                 // .populate({$and:['author','onDocumentId']})
-                                  .populate([
-                                      {path: 'author', select: {'username': 1}},
-                                      {path: 'onDocumentId', select: {'title': 1,'postType':1}},
-                                  ])
-                                  .exec()
+        .skip(size * (pageNo - 1))
+        .limit(size)
+        // @ts-ignore
+        .sort(sortQuery)
+        // .populate({$and:['author','onDocumentId']})
+        .populate([
+            {path: 'author', select: {'username': 1}},
+            {path: 'onDocumentId', select: {'title': 1, 'postType': 1}},
+        ])
+        .exec()
     const commentsCount = commentSchema.countDocuments({$and: [onDocument, status, searchQuery]}).exec()
 
     Promise.all([comments, commentsCount]).then(data => {

@@ -1,4 +1,4 @@
-import mongoose, {Document, Schema} from "mongoose";
+import {model, Schema, Document} from "mongoose";
 import {Widget} from "../../_typeScriptTypes/Widget";
 
 const widgetDataSchema = new Schema({
@@ -55,4 +55,4 @@ const widgetSchema = new Schema({
     data: widgetDataSchema,
 });
 
-export default mongoose.model<Widget & Document>("widgets", widgetSchema);
+export default model<Widget & Document>("widgets", widgetSchema);
