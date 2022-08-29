@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import {connectToDatabase} from './_variables/connectToDatabase';
-connectToDatabase().finally()
+connectToDatabase('Express Server').finally()
 // require('./_variables/connectToDatabase')
 
 

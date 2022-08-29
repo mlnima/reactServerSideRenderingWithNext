@@ -1,10 +1,12 @@
 import Link from "next/link";
 import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
-import {FC} from "react";
+import React, {FC} from "react";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {convertMetasTypeToSingular} from "@_variables/_variables";
+import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
+import ActorMetaImageRenderer from "@components/includes/PostPage/components/PostMeta/ActorMetaImageRenderer";
 
 const PostMetaStyledDiv = styled.div`
   display: flex;
@@ -70,6 +72,9 @@ const PostMetaStyledDiv = styled.div`
         border-radius: 50%;
         object-fit: cover;
       }
+      .actor-meta-svg{
+        padding: 0 5px;
+      }
     }
   }
 `
@@ -86,12 +91,11 @@ const PostMeta: FC<PostMetaPropType> = ({type}) => {
     const filterMeta = post?.[type]?.length ? post?.[type].filter(m => m.name?.length > 1) : [];
 
     const renderData = filterMeta.map(item => {
+
         return (
             <Link href={`/${convertMetasTypeToSingular(item.type)}/${item._id}`} key={`${item.type}_${item._id}`}>
                 <a className={`post-meta-item ${item.type}`} title={item.name}>
-                    {item.type === 'actors' ? <img src={item?.imageUrl}
-                                                   alt={item.name}
-                                                   className={'item-image'}/> :
+                    {item.type === 'actors' ? <ActorMetaImageRenderer imageUrl={item?.imageUrl} name={item.name}/>  :
                         <i className={`${item.type}-logo`}/>
                     }
                     {item.name}

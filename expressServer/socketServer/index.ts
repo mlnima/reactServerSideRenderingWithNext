@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import {connectToDatabase} from '../_variables/connectToDatabase';
-connectToDatabase().finally()
+connectToDatabase('Socket Server').finally()
 import http from 'http'
 import express from 'express'
 import cors from 'cors'

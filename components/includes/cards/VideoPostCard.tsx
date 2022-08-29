@@ -22,6 +22,7 @@ interface VideoPostCardPropTypes {
     rating: number,
     index: number,
     cardWidth: number,
+    targetLink:string,
     post: PostTypes,
 }
 
@@ -92,6 +93,7 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
          rating,
          postsPerRawForMobile,
          cardWidth,
+         targetLink,
          index
      }) => {
 
@@ -111,7 +113,7 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
                                 onTouchEnd={() => hoverHandler(false)}>
 
                 <Link href={postUrl}>
-                    <a className={'card-link'} title={title}>
+                    <a className={'card-link'} title={title} target={targetLink}>
 
                         <div className={'video-post-card-media'}>
 

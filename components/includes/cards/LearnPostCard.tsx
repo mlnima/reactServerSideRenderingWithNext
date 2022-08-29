@@ -18,6 +18,7 @@ interface LearnPostCardPropTypes {
     rating: number,
     index: number,
     cardWidth: number,
+    targetLink:string,
     post: PostTypes,
 }
 
@@ -83,13 +84,14 @@ const LearnPostCard: FC<LearnPostCardPropTypes> =
          rating,
          postsPerRawForMobile,
          cardWidth,
+         targetLink,
          index
      }) => {
 
         return (
             <LearnPostCardStyle className={'post-card'} cardWidth={cardWidth}>
                 <Link href={postUrl}>
-                    <a className={'card-link'} title={title}>
+                    <a className={'card-link'} title={title} target={targetLink}>
 
                         {!!post.mainThumbnail ?
                             <CardImageRenderer imageUrl={post.mainThumbnail}

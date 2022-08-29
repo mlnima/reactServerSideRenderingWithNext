@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import {connectToDatabase} from '../../../../_variables/connectToDatabase';
-connectToDatabase().finally()
+connectToDatabase('Worker getPosts').finally()
 // const {parentPort, workerData} = require("worker_threads");
 import  {parentPort, workerData} from 'worker_threads'
 

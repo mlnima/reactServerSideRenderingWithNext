@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import {connectToDatabase} from '../expressServer/_variables/connectToDatabase';
-connectToDatabase().finally()
+connectToDatabase('Setup').finally()
 import settingSchema from '../expressServer/models/settings/settingSchema';
 import widgetSchema from '../expressServer/models/widgetSchema';
 import postSchema from '../expressServer/models/postSchema';

@@ -20,6 +20,7 @@ interface PromotionPostCardPropTypes {
     rating: number,
     index: number,
     cardWidth: number,
+    targetLink:string,
     post: PostTypes,
 }
 

@@ -47,6 +47,11 @@ const rewrites = () => {
                 has: [{type: 'query', key: 'id'}]
             },
             // {
+            //     source: `/post/out/:postType(video|product|article|book|standard|promotion|learn|food|book|out)?/:id`,
+            //     destination: '/post/:postType/:id',
+            //     has: [{type: 'query', key: 'id'},{type: 'query', key: 'postType'}]
+            // },
+            // {
             //     source: `/:title`,
             //     destination: '/post/undefinedType/:title',
             //     has: [{type: 'query', key: 'title'}]
