@@ -20,21 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/components/includes/PostPage/components/PostMeta/ActorMetaImageRenderer.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/PostMeta/PostMeta.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/PostMeta/PostMeta.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/ArticlePostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/ArticlePostCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/CardsRenderer/PostsCardsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CardsRenderer/PostsCardsRenderer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/LearnPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/LearnPostCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/PromotionPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/PromotionPostCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/VideoPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/VideoPostCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/_variables/connectToDatabase.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/_variables/connectToDatabase.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/socketServer/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/socketServer/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/workers/ApiWorkers/clientRequests/posts/getPosts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/workers/ApiWorkers/clientRequests/posts/getPosts.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/setup.js" beforeDir="false" afterPath="$PROJECT_DIR$/tools/setup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/VideoTypePostPage/VideoTypePostPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/VideoTypePostPage/VideoTypePostPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/PostsSlider/PostsSlider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/PostsSlider/PostsSlider.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +111,7 @@
       <command value="nextEnv" />
     </option>
   </component>
-  <component name="RunManager" selected="npm.dev">
+  <component name="RunManager" selected="npm.build">
     <configuration name="temp.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/tempFiles/temp.js" working-dir="$PROJECT_DIR$/tempFiles">
       <method v="2" />
     </configuration>
@@ -169,10 +157,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
         <item itemvalue="Node.js.temp.js" />
         <item itemvalue="npm.start" />
-        <item itemvalue="npm.build" />
         <item itemvalue="npm.build:server" />
       </list>
     </recent_temporary>
@@ -1239,7 +1227,7 @@
       <workItem from="1661511364816" duration="29824000" />
       <workItem from="1661622300064" duration="11143000" />
       <workItem from="1661688589681" duration="1190000" />
-      <workItem from="1661770763439" duration="15225000" />
+      <workItem from="1661770763439" duration="18066000" />
     </task>
     <servers />
   </component>

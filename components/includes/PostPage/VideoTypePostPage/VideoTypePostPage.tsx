@@ -51,7 +51,8 @@ const VideoTypePostPage = () => {
             <main id={'main'}>
                 <article itemProp={'video'}
                          itemScope
-                         itemType={pageData.post.videoUrl ? 'http://schema.org/VideoObject' : 'http://schema.org/embedUrl'}>
+                         //itemType={pageData.post.videoUrl ? 'https://schema.org/VideoObject' : 'https://schema.org/embedUrl'}
+                         itemType={ 'https://schema.org/VideoObject' }>
                     <header className={'entry-header'}>
                         <VideoPlayer descriptionRef={descriptionRef}/>
                         <div className='rating-price-download'>

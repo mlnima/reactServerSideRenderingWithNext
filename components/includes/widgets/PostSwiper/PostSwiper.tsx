@@ -135,7 +135,9 @@ const PostSwiper: FC<PostSwiperComponentTypes> =
                 postsPerRawForMobile,
                 rating : post.likes || post.disLikes ? ratingCalculator(post.likes, post.disLikes) : null ,
                 post,
-                postUrl:`/post/${post?.postType}/${post._id}`,
+                postUrl: post?.postType === 'out' ? post?.redirectLink || '#' :
+                    `/post/${post?.postType}/${post._id}`,
+                targetLink: post?.postType === 'out' || post?.outPostType === 'promotion' ? '_blank':'_self',
                 title: process.env.NEXT_PUBLIC_DEFAULT_LOCAL === locale ?
                     post?.title :
                     post?.translations?.[locale as string]?.title || post?.title,
