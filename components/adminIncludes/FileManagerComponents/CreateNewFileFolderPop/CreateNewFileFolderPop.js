@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import _createFileOrFolder from '../../../../_variables/adminAjaxVariables/adminFileManagerVariables/_createFileOrFolder'
 import styled from "styled-components";
+import {useAppDispatch} from "@store_toolkit/hooks";
+import {createFileOrFolder} from "@store_toolkit/adminReducers/adminPanelFileManagerReducer";
 const CreateNewFileFolderPopStyledDiv = styled.div`
   position: fixed;
   top: 0;
@@ -55,6 +56,7 @@ const CreateNewFileFolderPop = props => {
         fileFolderName:''
     });
     const [render, setRender] = useState(false);
+    const dispatch = useAppDispatch()
 
 
     useEffect(() => {
@@ -83,7 +85,9 @@ const CreateNewFileFolderPop = props => {
                 fileFolderName: state.fileFolderName,
                 type:props.state.createNewFileFolderPopType
             }
-            _createFileOrFolder(data).then(() => setRender(false))
+            //@ts-ignore
+            dispatch(createFileOrFolder(data))
+            // _createFileOrFolder(data).then(() => setRender(false))
         }
     }
 

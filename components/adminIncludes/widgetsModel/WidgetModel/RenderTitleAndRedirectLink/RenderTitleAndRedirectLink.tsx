@@ -5,7 +5,6 @@ interface RenderTitleAndRedirectLinkPropTypes {
     widgetData: WidgetDataPropTypes,
     widgetSettings: WidgetSettingsPropTypes,
     onChangeHandlerWithTranslate: any,
-    rendering: boolean
     onChangeHandler: any
 }
 
@@ -15,10 +14,8 @@ const RenderTitleAndRedirectLink: FC<RenderTitleAndRedirectLinkPropTypes> =
          onChangeHandlerWithTranslate,
          widgetData,
          widgetSettings,
-         rendering
      }) => {
 
-        if (rendering) {
             return (
                 <>
                     <div className='textInputFieldForWidget widgetSection'>
@@ -65,7 +62,7 @@ const RenderTitleAndRedirectLink: FC<RenderTitleAndRedirectLinkPropTypes> =
                     </div>
                 </>
             );
-        } else return null
+
 
 
     };

@@ -1,46 +1,6 @@
-import dotenv from 'dotenv';
-dotenv.config();
-import {connectToDatabase} from '../_variables/connectToDatabase';
-connectToDatabase().finally()
-const {Worker, isMainThread,parentPort, workerData} = require('worker_threads');
-const postSchema = require("../models/postSchema");
-const metaSchema = require("../models/metaSchema");
-const axios = require("axios");
+const path = require("path");
+const { workerData } = require("worker_threads");
 
-const checkAndRemoveDeletedVideos = async ()=>{
-    try {
+require("ts-node").register({ transpileOnly: true });
 
-        await metaSchema.syncIndexes()
-        await postSchema.syncIndexes()
-
-        await postSchema.find({$and:[{type:'video'},{status:'published'}]}).exec().then(async posts=>{
-            for await (const post of posts){
-                if (post?.videoEmbedCode){
-                    await axios.get(post.videoEmbedCode).then(()=>{
-                        console.log(`${process.env.NEXT_PUBLIC_PRODUCTION_URL}/post/video/${post._id} is ok`)
-                    }).catch(async err=>{
-                        if (err?.response?.status === 410 || err?.response?.status === 404){
-                            await postSchema.findByIdAndUpdate(post._id,{$set:{status:'trash'}},{new:true}).exec().then(trashedPost=>{
-                                const metas = [...( trashedPost?.tags || []),...( trashedPost?.categories || []),...( trashedPost?.categories || [])]
-                                metas.forEach(meta=>{
-                                   metaSchema.findByIdAndUpdate(meta,{$inc:{count:-1}}).exec()
-                                })
-                                console.log(`http://localhost:3000/post/video/${post._id} trashed`)
-                            })
-                        }else {
-                            console.log(err.stack)
-                        }
-                    })
-                }
-            }
-        })
-        return null
-    }catch (err){
-        console.log(err)
-    }
-}
-
-checkAndRemoveDeletedVideos().then(res => {
-    parentPort.postMessage(res)
-    process.exit(0);
-})
+require(path.resolve(__dirname, './checkAndRemoveDeletedVideos.ts'));

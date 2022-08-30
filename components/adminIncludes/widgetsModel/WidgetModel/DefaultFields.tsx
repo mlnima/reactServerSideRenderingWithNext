@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useMemo} from "react";
+import React, {FC, useMemo} from "react";
 import SelectFieldForWidget
     from "@components/adminIncludes/widgetsModel/WidgetModel/SelectFieldForWidget/SelectFieldForWidget";
 import MonacoEditor from "@components/adminIncludes/MonacoEditor/MonacoEditor";
@@ -7,7 +7,7 @@ import RenderTitleAndRedirectLink from './RenderTitleAndRedirectLink/RenderTitle
 import TextInputFieldForWidget
     from "@components/adminIncludes/widgetsModel/WidgetModel/TextInputFieldForWidget/TextInputFieldForWidget";
 import {useSelector} from "react-redux";
-import staticPositions from "@components/adminIncludes/widgetsModel/staticPositions";
+import widgetsStaticPositions from "@_dataStructures/widgetsStaticPositions";
 import {flatMap} from "lodash";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
@@ -41,7 +41,7 @@ const DefaultFields: FC<DefaultFieldsPropTypes> =
         const customPages = useSelector((store: StoreTypes) => store?.adminPanelGlobalState?.customPages)
         const positions = useMemo(() => {
             return [
-                ...staticPositions,
+                ...widgetsStaticPositions,
                 ...flatMap(customPages, (customPage => [customPage, customPage + 'LeftSidebar', customPage + 'RightSidebar']))
             ]
         }, [customPages])
@@ -112,17 +112,6 @@ const DefaultFields: FC<DefaultFieldsPropTypes> =
                     widgetSettings={widgetSettings}
                     onChangeHandlerWithTranslate={onChangeHandlerWithTranslate}
                     onChangeHandler={onChangeHandler}
-                    rendering={
-                        widgetData.type === 'posts' ||
-                        widgetData.type === 'postsSwiper' ||
-                        widgetData.type === 'imageSwiper' ||
-                        widgetData.type === 'meta' ||
-                        widgetData.type === 'metaWithImage' ||
-                        widgetData.type === 'alphabeticalNumericalRange' ||
-                        widgetData.type === 'text' ||
-                        widgetData.type === 'textEditor' ||
-                        widgetData.type === 'media' ||
-                        widgetData.type === 'recentComments'}
                 />
 
 

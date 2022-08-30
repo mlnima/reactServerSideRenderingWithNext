@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config();
-import {connectToDatabase} from '../expressServer/_variables/connectToDatabase';
+import connectToDatabase from '../expressServer/_variables/connectToDatabase';
 connectToDatabase().finally()
 import userSchema from '../expressServer/models/userSchema';
 import bcrypt from 'bcryptjs';

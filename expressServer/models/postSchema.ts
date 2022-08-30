@@ -49,12 +49,12 @@ const postSchema =  new Schema({
     status: String,
     priceType: String,
     production: String,
-    posts: [{type: Schema.Types.ObjectID, ref: 'post'}],
-    comments: [{type:Schema.Types.ObjectID,ref:'comment'}],
+    posts: [{type: Schema.Types.ObjectId, ref: 'post'}],
+    comments: [{type:Schema.Types.ObjectId,ref:'comment'}],
     widgets:Array,
-    categories: [{type:Schema.Types.ObjectID,ref:'meta'}],
-    actors: [{type:Schema.Types.ObjectID,ref:'meta'}],
-    tags: [{type:Schema.Types.ObjectID,ref:'meta'}],
+    categories: [{type:Schema.Types.ObjectId,ref:'meta'}],
+    actors: [{type:Schema.Types.ObjectId,ref:'meta'}],
+    tags: [{type:Schema.Types.ObjectId,ref:'meta'}],
     likes: {
         type: Number,
         default: 0

@@ -3,7 +3,7 @@ import * as widgetModels from './models'
 import convertVariableNameToName from "../../../../_variables/util/convertVariableNameToName";
 import {useSelector} from 'react-redux';
 import styled from "styled-components";
-import staticPositions from '../staticPositions';
+import widgetsStaticPositions from '@_dataStructures/widgetsStaticPositions';
 import Draggable from 'react-draggable';
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {fetchAdminPanelAddNewWidget} from "@store_toolkit/adminReducers/adminWidgetsReducer";
@@ -70,7 +70,6 @@ const AddWidgetWithPositionMenu: FC<AddWidgetWithPositionMenuPropType> = ({type,
                                                                 type === 'alphabeticalNumericalRange' ? widgetModels.alphabeticalNumericalRangeWidgetModel :
                                                                     type === 'language' ? widgetModels.languageWidgetModel :
                                                                         type === 'alphabeticalNumericalRange' ? widgetModels.authenticationWidgetModel :
-                                                                            type === 'imagesSwiper' || type === 'postsSwiper' ? widgetModels.swiperWidgetModel :
                                                                                 type === 'postsSlider' ? widgetModels.postsWidgetModel :
                                                                                     widgetModels;
 
@@ -89,7 +88,7 @@ const AddWidgetWithPositionMenu: FC<AddWidgetWithPositionMenuPropType> = ({type,
 
     }
 
-    const renderPositions = [...staticPositions].sort((a, b) => a > b ? 1 : -1).map(position => {
+    const renderPositions = [...widgetsStaticPositions].sort((a, b) => a > b ? 1 : -1).map(position => {
         return (
 
             <button key={'position_' + position}

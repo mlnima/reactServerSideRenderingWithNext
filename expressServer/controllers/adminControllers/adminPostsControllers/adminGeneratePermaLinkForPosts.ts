@@ -1,30 +1,29 @@
-const {Worker, isMainThread,parentPort} = require('worker_threads');
+import {Worker, isMainThread, parentPort} from 'worker_threads';
 
-module.exports = async (req,res) =>{
+const adminGeneratePermaLinkForPosts = async (req, res) => {
     res.end()
-    if (isMainThread){
+    if (isMainThread) {
         const worker = new Worker(
-            './expressServer/workers/generatePermaLink.js',
-            {workerData:{}}
+            './expressServer/workers/generatePermaLink.ts',
+            {workerData: {}}
         )
 
         worker.on('message', (data) => {
             data.type === 'log' && console.log(data.message)
 
-            if (data.exit){
-                data.exit && worker.postMessage({exit:true})
+            if (data.exit) {
+                data.exit && worker.postMessage({exit: true})
             }
         });
 
         worker.on('error', error => {
-            console.log('error:',error);
+            console.log('error:', error);
         });
 
         worker.on('exit', exitCode => {
-            console.log('exitCode : ',exitCode);
+            console.log('exitCode : ', exitCode);
         })
-    }else{
-
+    } else {
         parentPort.on("message", (commandFromMainThread) => {
             if (commandFromMainThread.exit) {
                 console.log('terminating thread')
@@ -33,3 +32,5 @@ module.exports = async (req,res) =>{
         });
     }
 }
+
+export default adminGeneratePermaLinkForPosts;

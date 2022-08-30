@@ -8,7 +8,7 @@ import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import WidgetPositionsSelect from "@components/adminIncludes/widgetsModel/WidgetPositionsSelect/WidgetPositionsSelect";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
-import staticPositions from "@components/adminIncludes/widgetsModel/staticPositions";
+import widgetsStaticPositions from "@_dataStructures/widgetsStaticPositions";
 import {fetchAdminPanelGetWidgets} from "@store_toolkit/adminReducers/adminWidgetsReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
 
@@ -79,7 +79,7 @@ const AdminWidgets = () => {
         })
 
 
-    const allPositions = useMemo(() => ['all', ...staticPositions, ...(customPages || [])],
+    const allPositions = useMemo(() => ['all', ...widgetsStaticPositions, ...(customPages || [])],
         [customPages, availablePositions])
 
 

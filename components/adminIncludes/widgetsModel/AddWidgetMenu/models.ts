@@ -45,42 +45,42 @@ export const textWidgetModel = {
  ...generalModel
 }
 
-export const swiperWidgetModel = {
-    ...generalModel,
-uniqueData:{
-    swiperConfigDesktop: {
-        effect: "cards",
-        grabCursor: true,
-        autoplay: true,
-        modules: [
-            "EffectCards"
-        ]
-    },
-    swiperConfigMobile: {
-        tag: "div",
-        wrapperTag: "div",
-        controller: {
-            control: "controlledSwiper"
-        },
-        keyboard: false,
-        autoplay: true,
-        navigation: false,
-        effect: "cube",
-        modules: [
-            "EffectCube",
-            "Pagination"
-        ],
-        pagination: false,
-        grabCursor: false,
-        cubeEffect: {
-            shadow: true,
-            slideShadows: true,
-            shadowOffset: 20,
-            shadowScale: 0.94
-        }
-    }
-}
-}
+// export const swiperWidgetModel = {
+//     ...generalModel,
+// uniqueData:{
+//     swiperConfigDesktop: {
+//         effect: "cards",
+//         grabCursor: true,
+//         autoplay: true,
+//         modules: [
+//             "EffectCards"
+//         ]
+//     },
+//     swiperConfigMobile: {
+//         tag: "div",
+//         wrapperTag: "div",
+//         controller: {
+//             control: "controlledSwiper"
+//         },
+//         keyboard: false,
+//         autoplay: true,
+//         navigation: false,
+//         effect: "cube",
+//         modules: [
+//             "EffectCube",
+//             "Pagination"
+//         ],
+//         pagination: false,
+//         grabCursor: false,
+//         cubeEffect: {
+//             shadow: true,
+//             slideShadows: true,
+//             shadowOffset: 20,
+//             shadowScale: 0.94
+//         }
+//     }
+// }
+// }
 
 export const slider = {
     ...generalModel,

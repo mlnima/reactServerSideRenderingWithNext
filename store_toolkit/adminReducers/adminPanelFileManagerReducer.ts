@@ -3,7 +3,6 @@ import {loading, setAlert} from "@store_toolkit/clientReducers/globalStateReduce
 import Axios from "@_variables/util/Axios";
 import {RootState} from "@store_toolkit/store";
 
-
 const initialState = {
     path: '.',
     prevPath: '.',
@@ -179,6 +178,22 @@ export const fetchReadTranslationsFile = createAsyncThunk(
             token: localStorage.wt
         };
        return await Axios.post('/api/admin/fileManager/readTranslationsFile', body).then(res => {
+            return res.data.data
+        }).catch(err => {
+            thunkAPI.dispatch(setAlert({message: err.response?.data?.message, type: 'error'}))
+        }).finally(() => thunkAPI.dispatch(loading(false)))
+    }
+)
+
+export const createFileOrFolder = createAsyncThunk(
+    'adminPanelFileManager/createFileOrFolder',
+    async (data: {Path:string,fileFolderName:string,type:string}, thunkAPI) => {
+        thunkAPI.dispatch(loading(true))
+        const body = {
+            ...data,
+            token: localStorage.wt
+        }
+       return await Axios.post('/api/admin/fileManager/create', body).then(res => {
             return res.data.data
         }).catch(err => {
             thunkAPI.dispatch(setAlert({message: err.response?.data?.message, type: 'error'}))

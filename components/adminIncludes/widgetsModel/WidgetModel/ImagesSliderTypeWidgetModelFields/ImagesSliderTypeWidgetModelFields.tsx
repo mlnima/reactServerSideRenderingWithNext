@@ -2,7 +2,7 @@ import React, {useEffect, useState, FC} from 'react';
 import styled from "styled-components";
 import MonacoEditor from "@components/adminIncludes/MonacoEditor/MonacoEditor";
 
-const ImageSwiperTypeWidgetModelFieldsStyledDiv = styled.div`
+const style = styled.div`
   margin: 5px auto;
   padding: 2px;
   border-top: #fff solid;
@@ -90,7 +90,7 @@ interface ImageSwiperTypeWidgetModelFieldsPropTypes {
 
 }
 
-const ImagesSwiperTypeWidgetModelFields: FC<ImageSwiperTypeWidgetModelFieldsPropTypes> =
+const ImagesSliderTypeWidgetModelFields: FC<ImageSwiperTypeWidgetModelFieldsPropTypes> =
     ({
          uniqueData,
          onUniqueDataChangeHandler
@@ -190,7 +190,7 @@ const ImagesSwiperTypeWidgetModelFields: FC<ImageSwiperTypeWidgetModelFieldsProp
 
 
         return (
-            <ImageSwiperTypeWidgetModelFieldsStyledDiv className={'image-Swiper-fields'}>
+            <style className={'image-Swiper-fields'}>
 
                 <div className={'open-section'}>
                     <p className={'section-title'}> Image Swiper / Slider : </p>
@@ -313,9 +313,9 @@ const ImagesSwiperTypeWidgetModelFields: FC<ImageSwiperTypeWidgetModelFieldsProp
                     }
                 </div>
 
-            </ImageSwiperTypeWidgetModelFieldsStyledDiv>
+            </style>
         );
     };
-export default ImagesSwiperTypeWidgetModelFields;
+export default ImagesSliderTypeWidgetModelFields;
 
 

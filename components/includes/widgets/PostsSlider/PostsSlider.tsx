@@ -1,15 +1,15 @@
-import React, {FC, useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import React, {FC, useCallback, useEffect, useMemo,  useState} from 'react';
 import useEmblaCarousel from 'embla-carousel-react'
 import {useRouter} from "next/router";
 import _shortNumber from "@_variables/clientVariables/_shortNumber";
 import dynamic from "next/dynamic";
 import {useSelector} from "react-redux";
 import styled from "styled-components";
-import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import ratingCalculator from "@_variables/util/ratingCalculator";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import Autoplay from "embla-carousel-autoplay";
 import {useAppDispatch} from "@store_toolkit/hooks";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 
 const ArticlePostCard = dynamic(() => import('@components/includes/cards/ArticlePostCard'))
 const PromotionPostCard = dynamic(() => import('@components/includes/cards/PromotionPostCard'))
@@ -18,6 +18,7 @@ const VideoPostCard = dynamic(() => import('@components/includes/cards/VideoPost
 
 const PostsSliderStyledDiv = styled.div`
   position: relative;
+  max-width: 98vw;
 
   .slider-parent {
     overflow: hidden;
@@ -152,13 +153,6 @@ const PostsSlider: FC<PostsSliderPropsTypes> =
 
         const options = {delay: 3000, stopOnInteraction: false}
         const autoplay = Autoplay(options)
-
-        // const autoplay = useRef(
-        //     Autoplay(
-        //         {delay: 4000, stopOnInteraction: true},
-        //         (rootElement) => rootElement.parentElement
-        //     )
-        // );
 
         const [sliderRef, sliderApi] = useEmblaCarousel({
             loop: true,

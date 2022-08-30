@@ -1,9 +1,16 @@
-const fs = require("fs");
-const download = require("image-downloader");
-const sharp = require("sharp");
-const fsExtra = require("fs-extra");
-const postSchema = require("../../../models/postSchema");
-const updateSaveMetas = require("../_variables/_updateSaveMetas");
+// const fs = require("fs");
+// const download = require("image-downloader");
+// const sharp = require("sharp");
+// const fsExtra = require("fs-extra");
+// const postSchema = require("../../../models/postSchema");
+// const updateSaveMetas = require("../_variables/_updateSaveMetas");
+
+import fs from 'fs';
+import download from 'image-downloader';
+import sharp from 'sharp';
+import fsExtra from 'fs-extra';
+import postSchema from '../../../models/postSchema';
+import updateSaveMetas from '../_variables/_updateSaveMetas';
 
 const imageDownloader = async (newPost) => {
 
@@ -149,7 +156,9 @@ const createNewPostByApi = async (newPost, dontSaveDuplicate, downloadImageConte
     }
 }
 
-module.exports = async (req, res) => {
+
+
+const adminCreateNewPostByApi = async (req, res) => {
     const newPost = req.body.postData
     const dontSaveDuplicate = req.body?.dontSaveDuplicate
     const downloadImageContent = req.body?.downloadImageContent
@@ -160,4 +169,7 @@ module.exports = async (req, res) => {
         res.json({message: 'Something Went Wrong While running Creator! '})
     })
 }
+
+export default adminCreateNewPostByApi
+
 

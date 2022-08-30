@@ -1,4 +1,4 @@
-const {Worker, isMainThread,parentPort} = require('worker_threads');
+import {Worker, isMainThread,parentPort} from 'worker_threads';
 
 const adminSetMetaThumbnailsAndCount = async (req,res) =>{
     res.end()

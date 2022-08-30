@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config();
-import {connectToDatabase} from '../expressServer/_variables/connectToDatabase';
+import connectToDatabase from '../expressServer/_variables/connectToDatabase';
 connectToDatabase('Setup').finally()
 import settingSchema from '../expressServer/models/settings/settingSchema';
 import widgetSchema from '../expressServer/models/widgetSchema';

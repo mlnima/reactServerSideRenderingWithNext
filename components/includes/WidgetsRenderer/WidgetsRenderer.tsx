@@ -30,17 +30,6 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
         }
     })
 
-    // const {widgetsGroup} = useSelector(({widgets, user}: StoreTypes) => {
-    //     return {
-    //         widgetsGroup: widgets?.widgetInGroups
-    //     }
-    // })
-    //
-
-    // useEffect(() => {
-    //     console.log('widgets:',position,widgets)
-    // }, [widgets]);
-
     const isMobileDevice = useSelector((store: StoreTypes) => store.settings?.isMobile)
     const isMobile = useMemo(() => isMobileDevice, [])
 
@@ -67,7 +56,6 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
                     <Widget{...widgetProps}/>
 
             } else return null
-            // return null
         })
 
 

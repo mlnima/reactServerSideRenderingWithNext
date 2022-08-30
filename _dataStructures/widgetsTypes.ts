@@ -1,4 +1,4 @@
-const widgetsTypes = [
+const widgetsTypes  = [
     'text',
     'advertise',
     'textEditor',
@@ -8,8 +8,6 @@ const widgetsTypes = [
     'multipleLinkTo',
     'posts',
     'media',
-    // 'searchBar',
-    // 'searchButton',
     'searchbar',
     'meta',
     'metaWithImage',
@@ -19,10 +17,8 @@ const widgetsTypes = [
     'alphabeticalNumericalRange',
     'language',
     'authentication',
-    'imagesSwiper',
     'imagesSlider',
     'postsSwiper',
-    //disabled
     // 'recentComments',
     'postsSlider',
 ]

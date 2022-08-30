@@ -1,6 +1,6 @@
-import mongoose from 'mongoose'
-mongoose.Promise = global.Promise;
+import mongoose, {ConnectOptions} from 'mongoose'
 
+mongoose.Promise = global.Promise;
 
 const mongoDBConnectionUrl = process.env.DB_LOCAL === 'true' ?
     `mongodb://localhost:${process.env.DB_PORT}/${process.env.DB_NAME}` :
@@ -10,16 +10,19 @@ const options = {
     useUnifiedTopology: true
 }
 
-export const connectToDatabase = async (name?:string) => {
+const connectToDatabase = async (name?: string) => {
     try {
-        //@ts-ignore
-        await mongoose.connect(mongoDBConnectionUrl, options)
-                .then(() => console.log(`${name ||''}: connected to Database`))
-                .catch(err => console.log('error connection to Database', err));
-
+        return await mongoose.connect(mongoDBConnectionUrl, options as ConnectOptions)
+            .then(() => {
+                console.log(`${name || ''}: connected to Database`)
+            })
+            .catch(error => {
+                console.log('error connection to Database', error)
+            });
     } catch (err) {
         console.log('error connection to Database', err)
     }
+    return null
 }
 
 export default connectToDatabase

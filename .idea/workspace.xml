@@ -20,9 +20,52 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/VideoTypePostPage/VideoTypePostPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/VideoTypePostPage/VideoTypePostPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/adminAjaxVariables/adminAjaxSettingsVariables/getMultipleSetting.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/adminAjaxVariables/adminFileManagerVariables/_createFileOrFolder.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/socket.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/socket.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/FileManagerComponents/CreateNewFileFolderPop/CreateNewFileFolderPop.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/FileManagerComponents/CreateNewFileFolderPop/CreateNewFileFolderPop.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetMenu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetWithPositionMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetWithPositionMenu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/models.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/models.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/DefaultFields.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/DefaultFields.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/ImagesSwiperTypeWidgetModelFields/ImagesSwiperTypeWidgetModelFields.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/ImagesSliderTypeWidgetModelFields/ImagesSliderTypeWidgetModelFields.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/PostSwiperTypeWidgetModelFields/PostSwiperTypeWidgetModelFields.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/RenderTitleAndRedirectLink/RenderTitleAndRedirectLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/RenderTitleAndRedirectLink/RenderTitleAndRedirectLink.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/UniqueFields.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/UniqueFields.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/staticPositions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_dataStructures/widgetsStaticPositions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/global/widgetsTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_dataStructures/widgetsTypes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/Widget/Widget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Widget/Widget.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/WidgetsRenderer/WidgetsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/WidgetsRenderer/WidgetsRenderer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/ImagesSwiper/ImagesSwiper.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/PostSwiper/PostSwiper.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/widgets/PostsSlider/PostsSlider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/PostsSlider/PostsSlider.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/_variables/connectToDatabase.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/_variables/connectToDatabase.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminCreateNewPostByApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminCreateNewPostByApi.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGeneratePermaLinkForPosts.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGeneratePermaLinkForPosts.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminSetMetaThumbnailsAndCount.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminSetMetaThumbnailsAndCount.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminUpdateWidget.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminUpdateWidget.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/settingsControllers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/settingsControllers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/translateController.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/postSchema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/models/postSchema.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/socketServer/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/socketServer/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/ApiWorkers/clientRequests/posts/getPosts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/workers/ApiWorkers/clientRequests/posts/getPosts.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/checkAndRemoveDeletedVideos.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/workers/checkAndRemoveDeletedVideos.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/commandExecutor.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/workers/commandExecutor.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/createNewPostByApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/workers/createNewPostByApi.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/generatePermaLink.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/workers/generatePermaLink.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/mailServer.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/workers/mailServer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/setMetaThumbnailsAndCount.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/workers/setMetaThumbnailsAndCount.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/widgets/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/widgets/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store_toolkit/adminReducers/adminPanelFileManagerReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/adminReducers/adminPanelFileManagerReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/fixMetaData.js" beforeDir="false" afterPath="$PROJECT_DIR$/tools/fixMetaData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/resetAdminPassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/tools/resetAdminPassword.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/setup.js" beforeDir="false" afterPath="$PROJECT_DIR$/tools/setup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/setupDarkTheme.js" beforeDir="false" afterPath="$PROJECT_DIR$/tools/setupDarkTheme.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.server.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.server.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,9 +78,9 @@
         <option value="HTML File" />
         <option value="tsconfig.json" />
         <option value="CSS File" />
-        <option value="JavaScript File" />
         <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -99,11 +142,11 @@
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\pages" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\_dataStructures" />
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\trash" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\_typeScriptTypes\Chatroom" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\dataStructures" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\trash" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\cards\CardsRenderer" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\PostsPage" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -111,7 +154,7 @@
       <command value="nextEnv" />
     </option>
   </component>
-  <component name="RunManager" selected="npm.build">
+  <component name="RunManager" selected="npm.start">
     <configuration name="temp.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/tempFiles/temp.js" working-dir="$PROJECT_DIR$/tempFiles">
       <method v="2" />
     </configuration>
@@ -157,10 +200,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
         <item itemvalue="Node.js.temp.js" />
-        <item itemvalue="npm.start" />
         <item itemvalue="npm.build:server" />
       </list>
     </recent_temporary>
@@ -1227,12 +1270,23 @@
       <workItem from="1661511364816" duration="29824000" />
       <workItem from="1661622300064" duration="11143000" />
       <workItem from="1661688589681" duration="1190000" />
-      <workItem from="1661770763439" duration="18066000" />
+      <workItem from="1661770763439" duration="18880000" />
+      <workItem from="1661860278744" duration="24589000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/expressServer/workers/setMetaThumbnailsAndCount.js" />
+        <option value="$PROJECT_DIR$/expressServer/workers/checkAndRemoveDeletedVideos.js" />
+        <option value="$PROJECT_DIR$/expressServer/workers/commandExecutor.js" />
+        <option value="$PROJECT_DIR$/expressServer/workers/createNewPostByApi.js" />
+        <option value="$PROJECT_DIR$/expressServer/workers/generatePermaLink.js" />
+        <option value="$PROJECT_DIR$/expressServer/workers/mailServer.js" />
+      </list>
+    </option>
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.env" />
@@ -1487,7 +1541,7 @@
           <option name="timeStamp" value="145" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/components/includes/widgets/PostSwiper/PostSwiper.tsx</url>
+          <url>file://$PROJECT_DIR$/trash/PostSwiper/PostSwiper.tsx</url>
           <line>29</line>
           <option name="timeStamp" value="147" />
         </line-breakpoint>

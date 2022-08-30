@@ -1,7 +1,13 @@
-const widgetSchema = require('../../../models/widgetSchema');
-const metaSchema = require('../../../models/metaSchema');
-const postSchema = require('../../../models/postSchema');
-const _clientQueryGeneratorForGettingPosts = require('../../clientControllers/_variables/_clientQueryGeneratorForGettingPosts')
+// const widgetSchema = require('../../../models/widgetSchema');
+// const metaSchema = require('../../../models/metaSchema');
+// const postSchema = require('../../../models/postSchema');
+// const _clientQueryGeneratorForGettingPosts = require('../../clientControllers/_variables/_clientQueryGeneratorForGettingPosts')
+
+import widgetSchema from '../../../models/widgetSchema';
+import metaSchema from '../../../models/metaSchema';
+import postSchema from '../../../models/postSchema';
+import _clientQueryGeneratorForGettingPosts from '../../clientControllers/_variables/_clientQueryGeneratorForGettingPosts';
+
 
 export const updatePostWidgetData = async (widgetData) => {
     if (widgetData) {

@@ -1,12 +1,8 @@
 {
   "extends": "./tsconfig.json",
-  "allowSyntheticDefaultImports": true,
-  "allowJs": true,
-  "checkJs": false,
   "compilerOptions": {
-    "module": "commonjs",
     "outDir": ".next",
-    "noEmit": false,
+    "allowSyntheticDefaultImports": true,
     "lib": [
       "es2017",
       "es2018",
@@ -14,18 +10,21 @@
       "esnext.asynciterable"
     ],
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
-  },
-  "baseUrl": ".",
-  "paths": {
-    "@server/*": [
-      "server/*"
+    "emitDecoratorMetadata": true,
+    "types": [
+      "node"
     ],
-    "@_dataStructures/*": [
-      "_dataStructures/*"
-    ]
+    "paths": {
+      "@server/*": [
+        "server/*"
+      ],
+      "@_dataStructures/*": [
+        "_dataStructures/*"
+      ]
+    }
   },
   "include": [
-    "expressServer"
+    "expressServer",
+    "expressServer/workers"
   ]
 }

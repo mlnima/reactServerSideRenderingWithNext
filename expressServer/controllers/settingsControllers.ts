@@ -1,4 +1,3 @@
-// const settingSchema = require('../models/settings/settingSchema')
 import settingSchema from '../models/settings/settingSchema';
 
 const settingsControllers = {
@@ -16,19 +15,4 @@ const settingsControllers = {
     }
 }
 
-// settingsControllers.create = (req, res) => {
-//     const dataToSave = new settingSchema({
-//         type: req.body.type,
-//         data: req.body.data
-//     });
-//     dataToSave.save().then(() => {
-//         res.end()
-//     }).catch(err => {
-//         console.log(err)
-//         res.end()
-//     })
-// }
-
-
-
-export default settingsControllers
+export default settingsControllers;
