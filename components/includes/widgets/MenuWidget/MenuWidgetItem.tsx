@@ -1,8 +1,8 @@
 import {FC, useMemo} from "react";
-import {MenuItem} from "@_variables/TypeScriptTypes/WidgetsInterfaces";
 import {useTranslation} from "next-i18next";
 import {useRouter} from "next/router";
 import Link from "next/link";
+import {MenuItem} from "@_typeScriptTypes/widgets/MenuWidget/MenuItem";
 
 interface MenuWidgetItemPropTypes {
     menuItem:MenuItem,

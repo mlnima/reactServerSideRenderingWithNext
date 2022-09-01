@@ -2,12 +2,12 @@ import React, {useState, useRef} from 'react';
 import {animateScroll} from 'react-scroll'
 import styled from "styled-components";
 import { useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import {terminalCommandExecutor} from "@store_toolkit/adminReducers/adminTerminalReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
 import {loading} from "@store_toolkit/clientReducers/globalStateReducer";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 let StyledDiv = styled.div`
   .quickAccess {
@@ -57,7 +57,7 @@ const terminal = () => {
     const dispatch = useAdminDispatch()
     const logElement = useRef(null)
     const processIdElement = useRef(null)
-    const terminalData = useSelector(({adminPanelTerminalState}: StoreTypes) => {
+    const terminalData = useSelector(({adminPanelTerminalState}: Store) => {
         return {
             logs: adminPanelTerminalState?.logs,
             commandsHistory: adminPanelTerminalState?.commandsHistory,

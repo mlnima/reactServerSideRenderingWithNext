@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 // import {formatDistance} from 'date-fns'
 // import faIR from "date-fns/locale/fa-IR";
 import styled from "styled-components";
-import {ChatroomMessageTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {ChatroomMessage} from "@_typeScriptTypes/Chatroom/ChatroomMessage";
 
 const ChatRoomLogMessageStyledDiv = styled.div`
   background-color: var(--navigation-background-color, #18181b);
@@ -72,7 +72,7 @@ const ChatRoomMessageStyledDiv = styled.div`
 
 interface ChatRoomMessagePropTypes {
     locale:string,
-    message:ChatroomMessageTypes,
+    message:ChatroomMessage,
     onShowProfileHandler:any
 }
 

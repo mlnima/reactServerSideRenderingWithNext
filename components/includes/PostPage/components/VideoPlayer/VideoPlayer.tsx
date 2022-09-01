@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import React, {FC, useMemo} from "react";
 import convertDurationStringToIso8601 from "@_variables/clientVariables/convertDurationStringToIso8601";
 import convertDateToIso from "@_variables/clientVariables/convertDateToIso";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const VideoPlayerStyledDiv = styled.div`
   margin: 0 auto;
@@ -61,7 +61,7 @@ const VideoPlayer :FC<PropTypes> = ({descriptionRef}) => {
       createdAt,
       updatedAt,
       videoScriptCode
-  } = useSelector(({posts}:StoreTypes)=>posts.post)
+  } = useSelector(({posts}:Store)=>posts.post)
 
 
 

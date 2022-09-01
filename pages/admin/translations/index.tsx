@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Editor from "@monaco-editor/react";
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import {
@@ -11,11 +10,12 @@ import {
 } from "@store_toolkit/adminReducers/adminPanelFileManagerReducer";
 import {languagesOptions} from "@_variables/_variables";
 import {useAdminDispatch} from "@store_toolkit/hooks";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const translations = () => {
 
     const dispatch = useAdminDispatch()
-    const translationsData = useSelector(({adminPanelFileManager}: StoreTypes) => adminPanelFileManager.translationsData)
+    const translationsData = useSelector(({adminPanelFileManager}: Store) => adminPanelFileManager.translationsData)
     const [activeEditingLanguage, seActiveEditingLanguage] = useState(() => process.env.NEXT_PUBLIC_DEFAULT_LOCAL);
     const [translationsFilePath, setTranslationsFilePath] = useState(
         () => `./public/locales/${activeEditingLanguage}/customTranslation.json`

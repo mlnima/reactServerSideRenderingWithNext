@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import styled from "styled-components";
 import {FC, useMemo} from "react";
-import {WidgetDataPropTypes} from "@_variables/TypeScriptTypes/Widgets";
+import { WidgetData} from "@_typeScriptTypes/widgets/Widget";
 const WidgetHeader = dynamic(() => import('./WidgetHeader/WidgetHeader'))
 const WidgetCustomScript = dynamic(() => import('./WidgetCustomScript/WidgetCustomScript'))
 const WidgetPagination = dynamic(() => import('./WidgetPagination/WidgetPagination'))
@@ -30,7 +30,7 @@ const Authentication = dynamic(() => import('../widgets/Authentication/Authentic
 const Searchbar = dynamic(() => import('../widgets/Searchbar/Searchbar'))
 
 interface WidgetComponentPropTypes {
-    data: WidgetDataPropTypes,
+    data: WidgetData,
     widgetId: string,
     isSidebar: boolean,
     viewType?: string
@@ -40,7 +40,7 @@ let WidgetStyledSection = styled.section`
   ${({customStyles}: { customStyles: string }) => customStyles || ''}
 `
 
-const Widget: FC<WidgetComponentPropTypes> = ({data, widgetId, isSidebar, viewType}) => {
+const WidgetWrapper: FC<WidgetComponentPropTypes> = ({data, widgetId, isSidebar, viewType}) => {
 
     const idAttribute = useMemo(()=>data?.extraId ? {id: data?.extraId} : {},[data])
 
@@ -112,4 +112,4 @@ const Widget: FC<WidgetComponentPropTypes> = ({data, widgetId, isSidebar, viewTy
         </WidgetStyledSection>
     );
 };
-export default Widget;
+export default WidgetWrapper;

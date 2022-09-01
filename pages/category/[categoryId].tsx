@@ -6,12 +6,12 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import fetchPosts from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPosts";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
@@ -38,7 +38,7 @@ let PageStyle = styled.div`
 
 const categoryPage = () => {
 
-    const {role, category, categoryPageStyle, sidebar} = useSelector(({user, posts, settings}: StoreTypes) => {
+    const {role, category, categoryPageStyle, sidebar} = useSelector(({user, posts, settings}: Store) => {
         return {
             role: user?.userData?.role,
             category: posts.categoryData,

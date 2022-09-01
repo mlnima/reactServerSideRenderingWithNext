@@ -1,7 +1,6 @@
 import React, {FC, useMemo, useRef} from "react";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import PostTitle from "@components/includes/PostPage/components/PostTitle/PostTitle";
 import PostDescription from "@components/includes/PostPage/components/PostDescription/PostDescription";
 import PostMeta from "../components/PostMeta/PostMeta";
@@ -12,6 +11,7 @@ import CommentsRenderer from "@components/includes/PostPage/components/CommentsR
 import PostPageStyle from "@components/includes/PostPage/PostPageStyle";
 import convertDateToIso from "@_variables/clientVariables/convertDateToIso";
 import RatingButtons from "@components/includes/PostPage/components/RatingButtons/RatingButtons";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const Style = styled(PostPageStyle)`
   margin: auto;
@@ -37,7 +37,7 @@ interface PromotionTypePostPagePropTypes {
 const PromotionTypePostPage: FC<PromotionTypePostPagePropTypes> = (props) => {
     const descriptionRef = useRef<HTMLDivElement>(null)
 
-    const {postPageStyle, post} = useSelector(({settings, posts}: StoreTypes) => {
+    const {postPageStyle, post} = useSelector(({settings, posts}: Store) => {
         return {
             postPageStyle: settings?.design.postPageStyle,
             post: posts.post

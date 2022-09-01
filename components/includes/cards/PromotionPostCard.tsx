@@ -1,11 +1,11 @@
 import {FC} from "react";
-import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import styled from "styled-components";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import fetchViewPost from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchViewPost";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import CardTitle from "@components/includes/cards/asset/CardTitle/CardTitle";
+import {Post} from "@_typeScriptTypes/Post";
 
 const CardViews = dynamic(() => import('./asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('./asset/CardRating/CardRating'))
@@ -21,7 +21,7 @@ interface PromotionPostCardPropTypes {
     index: number,
     cardWidth: number,
     targetLink:string,
-    post: PostTypes,
+    post: Post,
 }
 
 interface PromotionPostCardStylePropTypes {

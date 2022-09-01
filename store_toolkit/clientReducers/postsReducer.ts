@@ -74,7 +74,7 @@ const initialState: PostsState = {
         tagsRelatedPosts: [],
     },
     editingPost: {},
-    editingPostImagesToUpload:{},
+    editingPostImagesToUpload: {},
     comments: [],
     categoriesMetas: [],
     tagsMetas: [],
@@ -176,20 +176,20 @@ export const postsSlice = createSlice({
             })
             .addCase(likePost.fulfilled, (state, action: PayloadAction<any>) => {
 
-                return{
+                return {
                     ...state,
-                    post:{
+                    post: {
                         ...state.post,
-                       likes: (state.post.likes || 0)  + 1
+                        likes: (state.post.likes || 0) + 1
                     }
                 }
             })
             .addCase(disLikePost.fulfilled, (state, action: PayloadAction<any>) => {
-                return{
+                return {
                     ...state,
-                    post:{
+                    post: {
                         ...state.post,
-                        disLikes: (state.post.disLikes || 0)  + 1
+                        disLikes: (state.post.disLikes || 0) + 1
                     }
                 }
             })

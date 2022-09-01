@@ -5,11 +5,11 @@ import {languagesOptions} from '@_variables/_variables'
 import convertVariableNameToName from "../../../../_variables/util/convertVariableNameToName";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import {adminEditIdentity, adminPanelUpdateSetting} from "@store_toolkit/adminReducers/adminPanelSettingsReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 let StyledForm = styled.form`
   background-color: white;
@@ -98,7 +98,7 @@ let StyledForm = styled.form`
 const settings = () => {
     const dispatch = useAdminDispatch()
     const keywordsInput = useRef(null)
-    const identity = useSelector(({adminPanelSettings}: StoreTypes) => adminPanelSettings?.identity)
+    const identity = useSelector(({adminPanelSettings}: Store) => adminPanelSettings?.identity)
 
     const [editingSettings, setEditingSettings] = useState({
         activeEditingLanguage: 'default'

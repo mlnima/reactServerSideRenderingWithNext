@@ -1,10 +1,10 @@
 import React, { useEffect, useState} from 'react';
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import PostsCardsRenderer from "@components/includes/cards/CardsRenderer/PostsCardsRenderer";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const MyProfilePosts = props => {
-    const userData = useSelector(({user}:StoreTypes) => user.userData)
+    const userData = useSelector(({user}:Store) => user.userData)
 
     const [ state, setState ] = useState({
         posts:[],

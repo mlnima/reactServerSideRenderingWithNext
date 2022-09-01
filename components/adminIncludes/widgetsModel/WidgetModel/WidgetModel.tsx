@@ -5,13 +5,13 @@ import {WidgetModelStyledDiv} from './WidgetModelStyle'
 import ActionButtons from "@components/adminIncludes/widgetsModel/WidgetModel/ActionButtons";
 import UniqueFields from "@components/adminIncludes/widgetsModel/WidgetModel/UniqueFields";
 import WidgetHeaderControl from "./WidgetHeaderControl/WidgetHeaderControl";
-import { WidgetPropTypes} from "@_variables/TypeScriptTypes/Widgets";
 import {onChangeInputValueCorrector} from "@_variables/_variables";
 import {useAdminDispatch} from "@store_toolkit/hooks";
 import {fetchAdminPanelUpdateWidget} from "@store_toolkit/adminReducers/adminWidgetsReducer";
+import {Widget} from "@_typeScriptTypes/widgets/Widget";
 
 interface WidgetModelPropTypes {
-    widget:WidgetPropTypes
+    widget:Widget
 }
 
 const WidgetModel: FC<WidgetModelPropTypes> = ({widget}) => {

@@ -1,13 +1,13 @@
 import React, { useState, useRef} from 'react';
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import {fetchAdminPanelSaveNewPost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const importContent = () => {
-    const userData = useSelector((store:StoreTypes) => store?.user.userData)
+    const userData = useSelector((store:Store) => store?.user.userData)
     const dataPreview = useRef(null)
     const dispatch = useAdminDispatch()
     const [state, setState] = useState({

@@ -3,20 +3,20 @@ import UserSmallPreview from "../../../components/includes/socialComponents/User
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "@store_toolkit/store";
 import { useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import styled from "styled-components";
 import type { ReactElement } from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 import {fetchMultipleUserDataById, fetchSpecificUserData} from "@store_toolkit/clientReducers/userReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const FollowingStyledDiv = styled.div`
   max-width: 940px;
   margin: auto;
 `
 const Following  = ( ) => {
-    const userData = useSelector((store: StoreTypes) => store?.user?.userData)
+    const userData = useSelector((store: Store) => store?.user?.userData)
     const dispatch = useAppDispatch()
     const [following, setFollowing] = useState([]);
 

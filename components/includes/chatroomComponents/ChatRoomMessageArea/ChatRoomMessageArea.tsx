@@ -4,8 +4,9 @@ import {useSelector} from "react-redux";
 import styled from "styled-components";
 import {setActiveVisibleProfile} from "@store_toolkit/clientReducers/chatroomReducer";
 import {useRouter} from "next/router";
-import {ChatroomMessageTypes, StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {useAppDispatch} from "@store_toolkit/hooks";
+import {ChatroomMessage} from "@_typeScriptTypes/Chatroom/ChatroomMessage";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const ChatRoomMessageAreaStyledMain = styled.main`
   position: fixed;
@@ -24,7 +25,7 @@ const ChatRoomMessageArea = () => {
     const {locale} = useRouter()
     const messageAreaRef = useRef(null)
 
-    const {chatroomMessages} = useSelector(({chatroom}: StoreTypes) => {
+    const {chatroomMessages} = useSelector(({chatroom}: Store) => {
 
         const currentMessages = chatroom?.messages || []
         return {
@@ -59,7 +60,7 @@ const ChatRoomMessageArea = () => {
         >
             {chatroomMessages?.length ?
                 //@ts-ignore
-                chatroomMessages.map((message: ChatroomMessageTypes, index: number) => {
+                chatroomMessages.map((message: ChatroomMessage, index: number) => {
                     return (
                         <ChatRoomMessage
                             message={message}

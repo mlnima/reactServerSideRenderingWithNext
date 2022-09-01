@@ -1,8 +1,8 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {RootState} from "../store";
-import {GlobalStateTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {GlobalState} from "@_typeScriptTypes/storeTypes/GlobalState";
 
-const initialState: GlobalStateTypes = {
+const initialState: GlobalState = {
     loginRegisterFormPopup: false,
     beforeUnload: false,
     loading: false,
@@ -41,10 +41,10 @@ export const globalStateSlice = createSlice({
         },
         loading: (state, action: PayloadAction<any>) => {
 
-            if(state.loading !== action.payload){
-                return{
+            if (state.loading !== action.payload) {
+                return {
                     ...state,
-                    loading:action.payload
+                    loading: action.payload
                 }
             }
         },
@@ -62,16 +62,7 @@ export const globalStateSlice = createSlice({
             }
         }
     },
-    // extraReducers: {
-    //     [HYDRATE]: (state, action: PayloadAction<any>) => {
-    //         return {
-    //             ...state,
-    //             ...action.payload.globalState
-    //         };
-    //     }
-    // }
 })
-
 
 export const {
     setHeadData,

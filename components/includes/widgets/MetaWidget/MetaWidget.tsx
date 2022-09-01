@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import MetaWidgetElement from './MetaWidgetElement'
 import {FC, useMemo} from "react";
-import {Meta} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {Meta} from "@_typeScriptTypes/Meta";
 
 const MetaWidgetStyledDiv = styled.div`
   display: flex;

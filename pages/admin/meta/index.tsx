@@ -8,11 +8,11 @@ import {
     fetchAdminPanelMeta,
     fetchAdminPanelUpdateMeta
 } from '@store_toolkit/adminReducers/adminPanelPostsReducer'
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {languagesOptions} from "@_variables/_variables";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import {useAdminDispatch} from "@store_toolkit/hooks";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 let AdminMetaPageStyledDiv = styled.div`
   width: 95%;
@@ -80,7 +80,7 @@ let AdminMetaPageStyledDiv = styled.div`
 
 const meta = (props: any) => {
     const dispatch = useAdminDispatch()
-    const meta = useSelector((store: StoreTypes) => store?.adminPanelPosts.meta)
+    const meta = useSelector((store: Store) => store?.adminPanelPosts.meta)
     const router = useRouter()
 
     const [editingData, setEditingData] = useState({

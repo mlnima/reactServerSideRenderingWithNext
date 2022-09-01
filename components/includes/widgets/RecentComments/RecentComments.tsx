@@ -1,6 +1,5 @@
 import Link from "next/link";
 import styled from "styled-components";
-import {useEffect} from "react";
 
 let RecentCommentsStyledDiv = styled.div`
   padding: 10px;

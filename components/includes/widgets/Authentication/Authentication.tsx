@@ -1,11 +1,11 @@
 import React, {FC, useState} from 'react';
 import {useSelector} from 'react-redux';
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import styled from "styled-components";
 import dynamic from "next/dynamic";
 import AuthenticationNotLoggedInItems from "@components/includes/widgets/Authentication/AuthenticationNotLoggedInItems";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const AuthenticationLoggedInItems = dynamic(() =>
         import('@components/includes/widgets/Authentication/AuthenticationLoggedInItems'),
@@ -142,7 +142,7 @@ const Authentication: FC = () => {
     const {profileImage, loggedIn, username, allowUserToPost, membership} = useSelector(({
                                                                                              user,
                                                                                              settings
-                                                                                         }: StoreTypes) => {
+                                                                                         }: Store) => {
         return {
             profileImage: user?.userData?.profileImage,
             loggedIn: user?.loggedIn,

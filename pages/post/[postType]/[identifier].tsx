@@ -2,7 +2,6 @@ import {useEffect} from "react";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import dynamic from "next/dynamic";
 import styled from "styled-components";
 import type {ReactElement} from 'react';
@@ -16,6 +15,7 @@ import fetchPost
     from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPost";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const Soft404 = dynamic(() =>
     import('@components/includes/Soft404/Soft404'))
@@ -65,7 +65,7 @@ const postPage = () => {
 
     const dispatch = useAppDispatch()
 
-    const {postType, _id, status, role, sidebar} = useSelector(({posts, user, settings}: StoreTypes) => {
+    const {postType, _id, status, role, sidebar} = useSelector(({posts, user, settings}: Store) => {
         return {
             postType: posts?.post?.postType,
             _id: posts?.post?._id,

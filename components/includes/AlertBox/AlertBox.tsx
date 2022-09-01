@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { useSelector} from 'react-redux';
 import {closeAlert} from "@store_toolkit/clientReducers/globalStateReducer";
 import Draggable from 'react-draggable';
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {useTranslation} from 'next-i18next';
 import {useAppDispatch} from "@store_toolkit/hooks";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const StyledDiv = styled.div`
   position: fixed;
@@ -108,7 +108,7 @@ const StyledDiv = styled.div`
 const AlertBox = () => {
     const {t} = useTranslation(['common', 'customTranslation', 'profile']);
     const dispatch = useAppDispatch();
-    const alert = useSelector(({globalState}: StoreTypes) =>  globalState?.alert );
+    const alert = useSelector(({globalState}: Store) =>  globalState?.alert );
 
     useEffect(() => {
         if (alert.active) {

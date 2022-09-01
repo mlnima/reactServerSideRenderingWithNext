@@ -1,17 +1,17 @@
 import React from 'react';
 import dynamic from "next/dynamic";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import { useSelector} from "react-redux";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import {adminEditIdentity, adminPanelUpdateSetting} from "@store_toolkit/adminReducers/adminPanelSettingsReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const Editor = dynamic(() => import('@monaco-editor/react'), {ssr: false})
 
 const customScript = (props: { width: any; height: any; }) => {
     const dispatch = useAdminDispatch()
-    const identity = useSelector(({adminPanelSettings}: StoreTypes) => adminPanelSettings?.identity)
+    const identity = useSelector(({adminPanelSettings}: Store) => adminPanelSettings?.identity)
 
     const onSaveHandler = () => {
         dispatch(adminPanelUpdateSetting({type:'identity',data: identity}))

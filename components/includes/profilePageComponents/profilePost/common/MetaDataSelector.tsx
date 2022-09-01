@@ -1,10 +1,10 @@
-import {FC, useEffect, useMemo, useState} from "react";
+import {FC,  useMemo, useState} from "react";
 import Select from 'react-select';
 import styled from "styled-components";
 import getMetaSuggestion from '@_variables/clientAjaxVariables/getMetaSuggestion'
-import {Meta, StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {uniqBy} from 'lodash'
 import {useSelector} from "react-redux";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const MetaDataSelectorStyledDiv = styled.div`
 
@@ -22,7 +22,7 @@ const MetaDataSelector: FC<ComponentPropTypes> =
          onMetaChangeHandler,
      }) => {
 
-        const editingPostData = useSelector(({posts}: StoreTypes) => posts?.editingPost)
+        const editingPostData = useSelector(({posts}: Store) => posts?.editingPost)
         const [suggestion, setSuggestion] = useState([])
         const [isLoading, setIsLoading] = useState(false)
 

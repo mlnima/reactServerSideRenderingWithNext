@@ -1,11 +1,11 @@
 import React, {useState, useRef, ChangeEvent} from 'react';
 import { useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import styled from "styled-components";
 import {fetchAdminPanelSaveNewPost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 // import {adminSaveNewPost} from "../../../../store/adminActions/adminPanelPostsActions";
 
 const PostsImporterStyledDiv = styled.div`
@@ -27,7 +27,7 @@ const PostsImporterStyledDiv = styled.div`
 `
 
 const postsImporter = () => {
-    const userData = useSelector((store: StoreTypes) => store?.user.userData)
+    const userData = useSelector((store: Store) => store?.user.userData)
     const statusElement = useRef(null)
     const dataPreview = useRef(null)
     const dispatch = useAdminDispatch()

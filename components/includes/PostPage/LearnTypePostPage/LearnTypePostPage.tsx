@@ -1,12 +1,12 @@
 import PostPageStyle from '../PostPageStyle'
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import dynamic from "next/dynamic";
 import styled from "styled-components";
 import PostTitle from '../components/PostTitle/PostTitle'
 import LearnTypePostPageDescription from "./components/LearnTypePostPageDescription";
 import RelatedPostsRenderer from "@components/includes/PostPage/components/RelatedPostsRenderer";
 import React from "react";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const PostMeta = dynamic(() => import('../components/PostMeta/PostMeta'))
 const CommentsRenderer = dynamic(() => import('../components/CommentsRenderer/CommentsRenderer'))
@@ -54,7 +54,7 @@ const LearnTypePostPageStyledMain = styled(PostPageStyle)`
 
 const LearnTypePostPage = () => {
 
-    const learnTypePostPageData = useSelector(({settings, posts}: StoreTypes) => {
+    const learnTypePostPageData = useSelector(({settings, posts}: Store) => {
         return {
             postPageStyle: settings?.design.postPageStyle,
             post: posts.post,

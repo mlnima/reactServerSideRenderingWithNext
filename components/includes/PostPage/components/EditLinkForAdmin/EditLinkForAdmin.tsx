@@ -3,10 +3,10 @@ import styled from "styled-components";
 import {useRouter} from "next/router";
 import {useSelector} from "react-redux";
 import Draggable from 'react-draggable';
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {fetchAdminPanelBulkActionPost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
 import {updateQueryGenerator} from "@_variables/_variables";
 import {useAppDispatch} from "@store_toolkit/hooks";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const EditLinkForAdminStyledDiv = styled.div`
   display: flex;
@@ -50,7 +50,7 @@ const EditLinkForAdminStyledDiv = styled.div`
 const EditLinkForAdmin: FC = () => {
     const dispatch = useAppDispatch()
     const {query, push, pathname} = useRouter()
-    const {_id, status, createdAt, updatedAt} = useSelector(({posts}: StoreTypes) => {
+    const {_id, status, createdAt, updatedAt} = useSelector(({posts}: Store) => {
         return {
             _id: posts.post?._id,
             status: posts.post?.status,

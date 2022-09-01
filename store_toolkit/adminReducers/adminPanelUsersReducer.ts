@@ -1,4 +1,5 @@
-import {AxiosErrorTypes, User} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {User} from "@_typeScriptTypes/User";
+import {AxiosErrorTypes} from "@_typeScriptTypes/axiosTypes/AxiosErrorTypes";
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {loading, setAlert} from "@store_toolkit/clientReducers/globalStateReducer";
 import Axios from "@_variables/util/Axios";
@@ -14,15 +15,15 @@ const initialState = {
     user: {}
 }
 
-export interface AdminPanelUsersState {
-    loggedIn: boolean;
-    userData: {
-        role: string;
-    },
-    totalCount: number;
-    users: User[];
-    user: User
-}
+// export interface AdminPanelUsersState {
+//     loggedIn: boolean;
+//     userData: {
+//         role: string;
+//     },
+//     totalCount: number;
+//     users: User[];
+//     user: User
+// }
 
 export const fetchAdminPanelUsers = createAsyncThunk(
     'adminPanelUsers/fetchAdminPanelUsers',

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const MyProfileInfoStyledDiv = styled.div`
   p,h1,h2,h3,h4{
@@ -9,7 +9,7 @@ const MyProfileInfoStyledDiv = styled.div`
   }
 `
 const MyProfileInfo = () => {
-    const userData = useSelector(({user}:StoreTypes) => user?.userData)
+    const userData = useSelector(({user}:Store) => user?.userData)
 
     return (
         <MyProfileInfoStyledDiv className='my-profile-info'>

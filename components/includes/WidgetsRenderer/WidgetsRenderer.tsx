@@ -1,8 +1,7 @@
 import {useRouter} from "next/router";
 import dynamic from "next/dynamic";
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {WidgetPropTypes} from '@_variables/TypeScriptTypes/Widgets'
+
 import {
     _isEditMode,
     _renderByDayCondition,
@@ -10,9 +9,10 @@ import {
     _renderByLanguageCondition,
 } from "@_variables/clientVariables/_widgetsRendererVariables";
 import {useMemo} from "react";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const DynamicNoSSR = dynamic(() => import('./DynamicNoSSR'))
-const Widget = dynamic(() => import('../Widget/Widget'))
+const Widget = dynamic(() => import('../Widget/WidgetWrapper'))
 
 interface WidgetsRendererProps {
     position: string,
@@ -23,18 +23,18 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
 
     const {locale} = useRouter()
 
-    const {widgets, userRole} = useSelector(({widgets, user}: StoreTypes) => {
+    const {widgets, userRole} = useSelector(({widgets, user}: Store) => {
         return {
             widgets: widgets?.widgetInGroups?.[position] || [],
             userRole: user?.userData?.role,
         }
     })
 
-    const isMobileDevice = useSelector((store: StoreTypes) => store.settings?.isMobile)
+    const isMobileDevice = useSelector((store: Store) => store.settings?.isMobile)
     const isMobile = useMemo(() => isMobileDevice, [])
 
     const renderWidgets = !!widgets?.length && [...widgets].sort((a, b) => a.data.widgetIndex > b.data.widgetIndex ? 1 : -1)
-        .map((widget: WidgetPropTypes) => {
+        .map((widget) => {
             if (
                 _renderByLanguageCondition(locale, widget?.data?.languageToRender) &&
                 _renderByDayCondition(widget.data?.specificDayToRender) &&

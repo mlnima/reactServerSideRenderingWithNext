@@ -1,8 +1,8 @@
 import React, {FC} from 'react';
-import {WidgetDataPropTypes} from "@_variables/TypeScriptTypes/Widgets";
+import {WidgetData} from "@_typeScriptTypes/widgets/Widget";
 
 interface MediaWidgetTypePropTypes{
-    widgetData:WidgetDataPropTypes,
+    widgetData:WidgetData,
     onChangeHandler:React.ChangeEventHandler<HTMLSelectElement>
 }
 

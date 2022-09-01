@@ -3,7 +3,6 @@ import {useRouter} from "next/router";
 import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
 import { useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {
     fetchFollowUser,
     fetchSpecificUserData,
@@ -12,6 +11,7 @@ import {
 } from "@store_toolkit/clientReducers/userReducer";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const UserPageActionButtonsStyledDiv = styled.div`
   display: flex;
@@ -52,12 +52,12 @@ const UserPageActionButtons: FC<UserPageActionButtonsPropType> = ({_id}) => {
     const {t} = useTranslation('common');
     const {push} = useRouter()
     const dispatch = useAppDispatch()
-    const {userData,loggedIn} = useSelector((store: StoreTypes) => store?.user)
-    const userPageData = useSelector((store: StoreTypes) => store?.user?.userPageData)
+    const {userData,loggedIn} = useSelector((store: Store) => store?.user)
+    const userPageData = useSelector((store: Store) => store?.user?.userPageData)
 
-    useEffect(() => {
-        console.log(loggedIn)
-    }, [userData]);
+    // useEffect(() => {
+    //     console.log(loggedIn)
+    // }, [userData]);
     const onFollowHandler = () => {
         if (userPageData?._id && loggedIn && userData._id ) {
             dispatch(fetchFollowUser(userPageData._id))

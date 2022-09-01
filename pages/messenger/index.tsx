@@ -2,12 +2,12 @@ import MessengerConversationsList from "../../components/includes/messengerPageC
 import Link from "next/link";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "@store_toolkit/store";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import { useSelector} from "react-redux";
 import styled from "styled-components";
 import MessengerLayout from "@components/layouts/MessengerLayout";
 import type {ReactElement} from 'react';
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const MessengerPageStyledMain = styled.main`
   display: flex;
@@ -23,7 +23,7 @@ const MessengerPageStyledMain = styled.main`
 `
 const messengerPage = () => {
 
-    const userData = useSelector((state : StoreTypes) => state.user.userData)
+    const userData = useSelector((state : Store) => state.user.userData)
 
     if (userData?._id) {
         return (

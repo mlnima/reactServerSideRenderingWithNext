@@ -1,13 +1,13 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import {NextRouter} from "next/router";
 import {loading, setAlert} from "@store_toolkit/clientReducers/globalStateReducer";
 import {reduceArrayOfDataToIds} from "@_variables/_variables";
 import Axios from "@_variables/util/Axios";
+import {Post} from "@_typeScriptTypes/Post";
 
 export const fetchUserCreateNewPost = createAsyncThunk(
     'posts/fetchUserEditingPost',
-    async ({data, router}: { data: PostTypes, router: NextRouter }, thunkAPI) => {
+    async ({data, router}: { data: Post, router: NextRouter }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         const comments = data.comments ? {comments: reduceArrayOfDataToIds(data.comments)} : {}
         const categories = data.categories ? {categories: reduceArrayOfDataToIds(data.categories)} : {}

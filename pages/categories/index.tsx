@@ -6,7 +6,6 @@ import PaginationComponent from "@components/includes/PaginationComponent/Pagina
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {wrapper} from "@store_toolkit/store";
 import dynamic from "next/dynamic";
 import type {ReactElement} from 'react';
@@ -15,6 +14,7 @@ import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea
 import fetchMetas from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchMetas";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import MetasCardsRenderer from "@components/includes/cards/CardsRenderer/MetasCardsRenderer";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
@@ -32,7 +32,7 @@ const categoriesPage = () => {
         totalCount,
         postsCountPerPage,
         sidebar
-    } = useSelector(({settings, posts, widgets}: StoreTypes) => {
+    } = useSelector(({settings, posts, widgets}: Store) => {
         return {
             categoriesPageStyle: settings?.design?.categoriesPageStyle,
             sidebar: settings?.identity?.categoriesPageSidebar,

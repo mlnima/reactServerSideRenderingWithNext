@@ -3,8 +3,7 @@ import dynamic from "next/dynamic";
 import {useRouter} from "next/router";
 import _shortNumber from '@_variables/clientVariables/_shortNumber'
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
+import {Post} from "@_typeScriptTypes/Post";
 import ratingCalculator from "@_variables/util/ratingCalculator";
 
 const ArticlePostCard = dynamic(() => import('@components/includes/cards/ArticlePostCard'))
@@ -13,6 +12,7 @@ const LearnPostCard = dynamic(() => import('@components/includes/cards/LearnPost
 const VideoPostCard = dynamic(() => import('@components/includes/cards/VideoPostCard'))
 
 import styled from "styled-components";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const Style = styled.div`
   padding: 20px 0;
@@ -31,10 +31,10 @@ const Style = styled.div`
 
 interface CardsRendererPropTypes {
     viewType?: string,
-    posts?: PostTypes[],
+    posts?: Post[],
     uniqueData?: {
         speed: number;
-        posts: PostTypes[],
+        posts: Post[],
         sliderEffect: string,
         spaceBetween: number,
         totalCount: number
@@ -57,7 +57,7 @@ const PostsCardsRenderer: FC<CardsRendererPropTypes> = ({
                                                             isSidebar
                                                         }) => {
     const {locale} = useRouter()
-    const {cardWidth, postsPerRawForMobile, cardsCustomStyle} = useSelector(({settings}: StoreTypes) => {
+    const {cardWidth, postsPerRawForMobile, cardsCustomStyle} = useSelector(({settings}: Store) => {
         return {
             cardWidth: settings?.design?.cardWidthDesktop || 255,
             cardsCustomStyle: settings.design.cardsCustomStyle || '',
@@ -71,7 +71,7 @@ const PostsCardsRenderer: FC<CardsRendererPropTypes> = ({
                cardWidth={cardWidth}
                cardsCustomStyle={cardsCustomStyle}>
 
-            {(uniqueData?.posts || posts || []).map((post: PostTypes, index: number) => {
+            {(uniqueData?.posts || posts || []).map((post: Post, index: number) => {
 
                 const postProps = {
                     views: _shortNumber(post.views || 0),

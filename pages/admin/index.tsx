@@ -4,9 +4,9 @@ import {socket} from '@_variables/socket'
 import Link from "next/link";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const AdminHomePageStyledDiv = styled.div`
   h1 {
@@ -31,7 +31,7 @@ const AdminHomePageStyledDiv = styled.div`
 `
 const AdminHomePage = () => {
 
-    const ip = useSelector((store: StoreTypes) => store?.settings?.ip)
+    const ip = useSelector((store: Store) => store?.settings?.ip)
 
 
     const [state, setState] = useState({

@@ -1,7 +1,7 @@
 import {useRouter} from "next/router";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const PostTitleStyledH1 = styled.h1`
   color: var(--post-page-info-color,#ccc);
@@ -13,7 +13,7 @@ const PostTitleStyledH1 = styled.h1`
 const PostTitle = () => {
 
     const {locale} = useRouter()
-    const {title,translations} = useSelector(({posts}:StoreTypes)=>{
+    const {title,translations} = useSelector(({posts}:Store)=>{
         return{
             title:posts?.post?.title,
             translations:posts?.post?.translations,

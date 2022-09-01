@@ -5,9 +5,9 @@ import {useSelector} from 'react-redux';
 import styled from "styled-components";
 import widgetsStaticPositions from '@_dataStructures/widgetsStaticPositions';
 import Draggable from 'react-draggable';
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {fetchAdminPanelAddNewWidget} from "@store_toolkit/adminReducers/adminWidgetsReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 
 const AddWidgetWithPositionMenuStyledDiv = styled.div`
@@ -45,9 +45,9 @@ interface AddWidgetWithPositionMenuPropType {
 
 const AddWidgetWithPositionMenu: FC<AddWidgetWithPositionMenuPropType> = ({type, name}) => {
 
-    const adminPanelWidgets = useSelector(({adminPanelWidgets}: StoreTypes) => adminPanelWidgets?.adminPanelWidgets)
+    const adminPanelWidgets = useSelector(({adminPanelWidgets}: Store) => adminPanelWidgets?.adminPanelWidgets)
 
-    const customPages = useSelector((store: StoreTypes) => store?.adminPanelGlobalState?.customPages)
+    const customPages = useSelector((store: Store) => store?.adminPanelGlobalState?.customPages)
 
     const dispatch = useAdminDispatch()
     const [open, setOpen] = useState(false)

@@ -3,7 +3,7 @@ import {useRouter} from "next/router";
 import parse from "html-react-parser";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const PostDescriptionStyledDiv = styled.div`
   color: var(--post-page-info-color, #ccc);
@@ -24,7 +24,7 @@ interface PropTypes {
 const PostDescription: FC<PropTypes> = ({descriptionRef}) => {
 
     const {locale} = useRouter();
-    const {description, translations} = useSelector(({posts}: StoreTypes) => {
+    const {description, translations} = useSelector(({posts}: Store) => {
         return {
             description: posts.post?.description,
             translations: posts.post?.translations,

@@ -4,7 +4,7 @@ import WidgetModel from "../../widgetsModel/WidgetModel/WidgetModel";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import Draggable from 'react-draggable';
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const WidgetGroupByPositionStyledDiv = styled.div`
   background-color: transparent;
@@ -51,7 +51,7 @@ interface WidgetGroupByPositionPropTypes {
 const WidgetGroupByPosition: FC<WidgetGroupByPositionPropTypes> = ({filters, position}) => {
 
 
-    const widgets = useSelector(({adminPanelWidgets}: StoreTypes) => {
+    const widgets = useSelector(({adminPanelWidgets}: Store) => {
             const widgetsToSort = [...(adminPanelWidgets?.adminPanelWidgets?.[position] || [])]
 
             return [...widgetsToSort]?.sort((a, b) => {

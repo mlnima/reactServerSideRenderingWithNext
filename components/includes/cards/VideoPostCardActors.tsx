@@ -1,6 +1,6 @@
 import {FC} from "react";
 import styled from "styled-components";
-import {Meta} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {Meta} from "@_typeScriptTypes/Meta";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 const CardLastUpdate = dynamic(() => import('@components/includes/cards/asset/CardLastUpdate/CardLastUpdate'),

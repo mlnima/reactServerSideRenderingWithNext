@@ -2,23 +2,18 @@ import React, {FC, useMemo} from "react";
 import SelectFieldForWidget
     from "@components/adminIncludes/widgetsModel/WidgetModel/SelectFieldForWidget/SelectFieldForWidget";
 import MonacoEditor from "@components/adminIncludes/MonacoEditor/MonacoEditor";
-import {WidgetDataPropTypes} from "@_variables/TypeScriptTypes/Widgets";
 import RenderTitleAndRedirectLink from './RenderTitleAndRedirectLink/RenderTitleAndRedirectLink'
 import TextInputFieldForWidget
     from "@components/adminIncludes/widgetsModel/WidgetModel/TextInputFieldForWidget/TextInputFieldForWidget";
 import {useSelector} from "react-redux";
 import widgetsStaticPositions from "@_dataStructures/widgetsStaticPositions";
 import {flatMap} from "lodash";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {WidgetData, WidgetSettingsPropTypes} from "@_typeScriptTypes/widgets/Widget";
 
 interface DefaultFieldsPropTypes {
-    widgetData: WidgetDataPropTypes,
-    widgetSettings: {
-        customStyleBox: boolean,
-        textBox: boolean,
-        customScriptBox: boolean,
-        activeEditingLanguage: string,
-    },
+    widgetData: any,
+    widgetSettings: WidgetSettingsPropTypes,
     widgetId: string,
     onCheckboxChangeHandler: any,
     onChangeHandlerWithTranslate: any,
@@ -38,7 +33,7 @@ const DefaultFields: FC<DefaultFieldsPropTypes> =
          onChangeLanguageHandler,
          setWidgetSettings,
      }) => {
-        const customPages = useSelector((store: StoreTypes) => store?.adminPanelGlobalState?.customPages)
+        const customPages = useSelector((store: Store) => store?.adminPanelGlobalState?.customPages)
         const positions = useMemo(() => {
             return [
                 ...widgetsStaticPositions,

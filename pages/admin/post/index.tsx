@@ -12,11 +12,11 @@ import {languagesOptions} from "@_variables/_variables";
 import styled from "styled-components";
 import { useSelector} from "react-redux";
 import {adminEditPost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import {fetchAdminPanelPost,adminDefineNewPost,adminChangeActiveEditingLanguage} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const AdminPostPageStyledDiv = styled.div`
   display: grid;
@@ -37,8 +37,8 @@ const AdminPostPageStyledDiv = styled.div`
 `
 
 const Index = () => {
-    const post = useSelector((store: StoreTypes) => store.adminPanelPosts.post);
-    const activeEditingLanguage = useSelector((store: StoreTypes) => store.adminPanelPosts.activeEditingLanguage);
+    const post = useSelector((store: Store) => store.adminPanelPosts.post);
+    const activeEditingLanguage = useSelector((store: Store) => store.adminPanelPosts.activeEditingLanguage);
     const dispatch = useAdminDispatch()
     const router = useRouter();
     const languageElement = useRef(null)

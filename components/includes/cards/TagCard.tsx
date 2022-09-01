@@ -1,6 +1,6 @@
 import {FC, useMemo} from "react";
 import styled from "styled-components";
-import {Meta} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {Meta} from "@_typeScriptTypes/Meta";
 import Link from "next/link";
 import {useRouter} from "next/router";
 import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";

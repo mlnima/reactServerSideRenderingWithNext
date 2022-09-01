@@ -1,4 +1,4 @@
-import {AxiosErrorTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {AxiosErrorTypes} from "@_typeScriptTypes/axiosTypes/AxiosErrorTypes";
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {loading} from "@store_toolkit/clientReducers/globalStateReducer";
 import axios, {AxiosError, AxiosResponse} from "axios";

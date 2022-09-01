@@ -5,10 +5,10 @@ import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {useRouter} from "next/router";
 import {FC} from "react";
-import {Comment} from '@_variables/TypeScriptTypes/PostTypes'
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {Comment} from '@_typeScriptTypes/Comment'
 import deleteCommentByAdminInPostPage from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksDeleteCommentByAdminInPostPage";
 import {useAppDispatch} from "@store_toolkit/hooks";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const CommentStyledDiv = styled.div`
   display: flex;
@@ -52,7 +52,7 @@ interface CommentPropTypes {
 
 const Comment: FC<CommentPropTypes> = ({comment}) => {
     const {locale} = useRouter()
-    const userData = useSelector(({user}: StoreTypes) => user?.userData)
+    const userData = useSelector(({user}: Store) => user?.userData)
     const dispatch = useAppDispatch()
     const localeData = locale === 'fa' ? {locale: faIR} : {}
 

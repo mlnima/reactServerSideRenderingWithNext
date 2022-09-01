@@ -5,11 +5,11 @@ import {useRouter} from "next/router";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import Draggable from 'react-draggable';
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {fetchStartConversation} from "@store_toolkit/clientReducers/userReducer";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 import {setActiveVisibleProfile} from "@store_toolkit/clientReducers/chatroomReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 
 const ChatRoomMessageUserInfoPopupStyledDiv = styled.div`
@@ -116,7 +116,7 @@ const ChatRoomMessageUserInfoPopup = () => {
     const {push} = useRouter();
     const dispatch = useAppDispatch();
 
-    const {activeVisibleProfile, loggedIn, userId} = useSelector(({chatroom, user}: StoreTypes) => {
+    const {activeVisibleProfile, loggedIn, userId} = useSelector(({chatroom, user}: Store) => {
         return {
             activeVisibleProfile: chatroom?.activeVisibleProfile,
             userId: user?.userData?._id,

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React, {FC} from "react";
-import {Meta} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {Meta} from "@_typeScriptTypes/Meta";
 import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
 import dynamic from "next/dynamic";
 

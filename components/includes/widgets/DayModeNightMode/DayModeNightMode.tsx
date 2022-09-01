@@ -1,8 +1,8 @@
 import {FC, useEffect, useState} from "react";
 import styled, {createGlobalStyle} from "styled-components";
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {UniqueDataTypes} from "@_variables/TypeScriptTypes/Widgets";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {UniqueDataTypes} from "@_typeScriptTypes/widgets/Widget";
 
 interface DayModeNightModePropTypes {
     uniqueData: UniqueDataTypes
@@ -40,7 +40,7 @@ const ModeStyles = createGlobalStyle`
 
 const DayModeNightMode: FC<DayModeNightModePropTypes> = ({uniqueData}) => {
 
-    const customColors = useSelector(({settings}: StoreTypes) => settings?.design?.customColors || '')
+    const customColors = useSelector(({settings}: Store) => settings?.design?.customColors || '')
 
     const [state, setstate] = useState({
         active: false,

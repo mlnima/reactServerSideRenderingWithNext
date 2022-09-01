@@ -1,15 +1,15 @@
 import {FC, useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import dynamic from "next/dynamic";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import SiteHeadSetter from "@components/global/SiteHeadSetter";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 const GoogleAnalytics = dynamic(() => import('./GoogleAnalytics'), {ssr: false})
 const UserAutoLogin = dynamic(() => import('./UserAutoLogin'), {ssr: false})
 
 const SiteSettingSetter : FC = () => {
 
     const [renderAutoLogin, setRenderAutoLogin] = useState(false)
-    const googleAnalyticsId = useSelector(({settings}:StoreTypes)=>settings?.identity?.googleAnalyticsId)
+    const googleAnalyticsId = useSelector(({settings}:Store)=>settings?.identity?.googleAnalyticsId)
 
     useEffect(() => {
         if (localStorage?.wt) {

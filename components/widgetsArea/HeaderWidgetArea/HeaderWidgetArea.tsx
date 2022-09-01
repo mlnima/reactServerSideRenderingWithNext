@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {useSelector} from "react-redux";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 let HeaderWidgetAreaStyle = styled.div`
   grid-area: header;
@@ -27,7 +27,7 @@ let HeaderWidgetAreaStyle = styled.div`
 `
 
 const HeaderWidgetArea = () => {
-    const headerStyle = useSelector(({settings}: StoreTypes) => settings?.design?.headerStyle)
+    const headerStyle = useSelector(({settings}: Store) => settings?.design?.headerStyle)
     return (
         <HeaderWidgetAreaStyle stylesData={headerStyle || ''} className={'widget-area header'}>
             <div className='header-content'>

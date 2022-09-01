@@ -1,10 +1,10 @@
 import React, {FC} from "react";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
 import ActorDetails from "@components/includes/cards/CardsRenderer/ActorBio/ActorDetails";
 import dynamic from "next/dynamic";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const Soft404 = dynamic(() => import('@components/includes/Soft404/Soft404'));
 
@@ -79,7 +79,7 @@ const ActorBioDesktopStyledSection = styled.section`
 
 const ActorBioDesktop: FC = () => {
 
-    const actorData = useSelector(({posts}: StoreTypes) => posts.actorData);
+    const actorData = useSelector(({posts}: Store) => posts.actorData);
 
 
     if (actorData.name) {

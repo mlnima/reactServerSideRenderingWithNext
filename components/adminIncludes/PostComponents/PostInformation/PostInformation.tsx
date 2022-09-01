@@ -9,7 +9,7 @@ import ImageGallery from "./ImageGallery/ImageGallery";
 import ProductPrice from "./ProductPrice/ProductPrice";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 let StyledDiv = styled.div`
   width: 96%;
@@ -120,7 +120,7 @@ let StyledDiv = styled.div`
 `
 
 const PostInformation = props => {
-    const post = useSelector((store:StoreTypes) => store?.adminPanelPosts?.post);
+    const post = useSelector((store:Store) => store?.adminPanelPosts?.post);
     return (
         <StyledDiv className='post-information  product-information admin-widget'>
 

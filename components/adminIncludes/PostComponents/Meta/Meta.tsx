@@ -4,10 +4,10 @@ import {faPlus, faTimes} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import { useSelector} from "react-redux";
 import {adminEditPost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 // import {uniqBy} from "lodash";
 import {_uniqBy} from "@_variables/util/arrayUtils/_uniqBy";
 import {useAdminDispatch} from "@store_toolkit/hooks";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const MetaStyledDiv = styled.div`
   .add-new-meta {
@@ -39,7 +39,7 @@ interface MetaPropType{
 
 const Meta:FC<MetaPropType> = props => {
     let newItemsElement = useRef(null);
-    const post = useSelector((store:StoreTypes) => store?.adminPanelPosts.post);
+    const post = useSelector((store:Store) => store?.adminPanelPosts.post);
     const dispatch = useAdminDispatch()
 
 

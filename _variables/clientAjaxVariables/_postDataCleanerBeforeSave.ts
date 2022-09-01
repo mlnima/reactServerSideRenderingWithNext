@@ -1,7 +1,7 @@
 import {reduceArrayOfDataToIds} from "@_variables/_variables";
-import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
+import {Post} from "@_typeScriptTypes/Post";
 
-const _postDataCleanerBeforeSave = (postData:PostTypes) =>{
+const _postDataCleanerBeforeSave = (postData:Post) =>{
     const comments = postData.comments ? {comments: reduceArrayOfDataToIds(postData.comments)} : {}
     const categories = postData.categories ? {categories: reduceArrayOfDataToIds(postData.categories)} : {}
     const tags = postData.tags ? {tags: reduceArrayOfDataToIds(postData.tags)} : {}

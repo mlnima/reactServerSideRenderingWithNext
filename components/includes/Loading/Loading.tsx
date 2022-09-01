@@ -8,8 +8,8 @@ import ReactLoading from 'react-loading';
 import { useSelector} from "react-redux";
 // import {setLoading} from "../../../legacyCodesAndComponents/store/clientActions/globalStateActions";
 import {useRouter} from "next/router";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {useAppDispatch} from "@store_toolkit/hooks";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 let StyledDiv = styled.div`
   position: fixed;
@@ -47,7 +47,7 @@ let StyledDiv = styled.div`
 
 const Loading: FC = () => {
     const dispatch = useAppDispatch()
-    const loading = useSelector(({globalState}: StoreTypes) => globalState?.loading)
+    const loading = useSelector(({globalState}: Store) => globalState?.loading)
     const {pathname} = useRouter()
     const [render, setRender] = useState(false)
 

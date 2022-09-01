@@ -2,7 +2,6 @@ import React,{useEffect, useRef, useState} from 'react';
 import {useRouter} from "next/router";
 import {useSelector} from "react-redux";
 import styled from "styled-components";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import userRoles from "@_dataStructures/userRoles";
@@ -15,6 +14,7 @@ import {
 } from "@store_toolkit/adminReducers/adminPanelUsersReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
 import convertVariableNameToName from "@_variables/util/convertVariableNameToName";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const UserStyledDiv = styled.div`
   .user-admin-edit-profile-page-section {
@@ -76,7 +76,7 @@ const UserStyledDiv = styled.div`
 const user = () => {
     const dispatch = useAdminDispatch()
     const router = useRouter()
-    const userData = useSelector(({adminPanelUsers}: StoreTypes) => adminPanelUsers.user)
+    const userData = useSelector(({adminPanelUsers}: Store) => adminPanelUsers.user)
     const APIKeyElement = useRef(null)
 
     const [resetPasswordData, setResetPasswordData] = useState({

@@ -7,11 +7,11 @@ import Link from "next/link";
 import AdminDataSetter from "../global/AdminDataSetter";
 import GlobalStyles from "../global/Styles/GlobalStylesComponent";
 import styled from "styled-components";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import LoadingV2 from "@components/includes/LoadingV2/LoadingV2";
 import AlertBox from "@components/includes/AlertBox/AlertBox";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {fetchUserAutoLogin} from "@store_toolkit/clientReducers/userReducer";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 // import {Provider} from 'react-redux'
 // import {makeStore} from "@store_toolkit/adminStore";
 
@@ -62,7 +62,7 @@ const AdminLayout = props => {
         ({
              adminPanelGlobalState,
              adminPanelUsers
-         }: StoreTypes) => {
+         }: Store) => {
             return {
                 adminPanelGlobalState,
                 userData: adminPanelUsers?.userData,

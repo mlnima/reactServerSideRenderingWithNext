@@ -3,8 +3,8 @@ import {useRouter} from "next/router";
 import PaginationComponent from "../PaginationComponent/PaginationComponent";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import PostsCardsRenderer from "@components/includes/cards/CardsRenderer/PostsCardsRenderer";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 let PostsContainer = styled.div`
   width: 100%;
@@ -27,7 +27,7 @@ const PostsPage: FC<PostPageTypes> = ({renderPagination}) => {
 
     const {query} = useRouter()
 
-    const {posts, postsCountPerPage, totalCount} = useSelector(({posts, settings}: StoreTypes) => {
+    const {posts, postsCountPerPage, totalCount} = useSelector(({posts, settings}: Store) => {
         return {
             posts: posts?.posts,
             totalCount: posts?.totalCount,

@@ -3,7 +3,7 @@ import {useRouter} from "next/router";
 import dynamic from 'next/dynamic'
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 // const ReactPageDescriptionRenderer = dynamic(() => import('../../components/ReactPageDescriptionRenderer/ReactPageDescriptionRenderer'))
 const ObjectKeyDescriptionRenderer = dynamic(() => import('../../components/ObjectKeyDescriptionRenderer/ObjectKeyDescriptionRenderer'))
 
@@ -26,7 +26,7 @@ const PostDescriptionStyledDiv = styled.div`
 const LearnTypePostPageDescription :FC = () => {
     const router = useRouter();
 
-    const {description,translations,source}  = useSelector(({posts}:StoreTypes)=>posts.post)
+    const {description,translations,source}  = useSelector(({posts}:Store)=>posts.post)
 
     const descriptionValue = useMemo(() => {
         return translations ?

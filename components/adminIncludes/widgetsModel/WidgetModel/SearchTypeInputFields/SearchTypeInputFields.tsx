@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {UniqueDataTypes, WidgetSettingsPropTypes} from "@_variables/TypeScriptTypes/Widgets";
+import {UniqueDataTypes, WidgetSettingsPropTypes} from "@_typeScriptTypes/widgets/Widget";
 
 interface SearchTypeInputFieldsPropTypes {
     uniqueData: UniqueDataTypes,

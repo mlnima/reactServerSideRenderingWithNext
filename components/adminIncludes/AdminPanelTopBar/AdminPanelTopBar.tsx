@@ -7,9 +7,9 @@ import styled from "styled-components";
 import { useSelector} from "react-redux";
 import {setSidebarStatus} from "@store_toolkit/adminReducers/adminPanelGlobalStateReducer";
 import {useRouter} from "next/router";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {fetchClearCaches} from "@store_toolkit/adminReducers/adminPanelGlobalStateReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 
 let StyledDiv = styled.div`
@@ -63,7 +63,7 @@ let StyledDiv = styled.div`
 const AdminTopBar: FC = () => {
     const router = useRouter()
     const dispatch = useAdminDispatch()
-    const sidebar = useSelector(({adminPanelGlobalState}: StoreTypes) => adminPanelGlobalState?.sidebar)
+    const sidebar = useSelector(({adminPanelGlobalState}: Store) => adminPanelGlobalState?.sidebar)
 
     const AdminSideBarOpenCloseHandler = () => {
         dispatch(setSidebarStatus(!sidebar))

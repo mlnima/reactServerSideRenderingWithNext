@@ -1,10 +1,10 @@
-import { WidgetPropTypes} from "@_variables/TypeScriptTypes/Widgets";
 import _reduceWidgetsToGroups from "@_variables/_reduceWidgetsToGroups/_reduceWidgetsToGroups";
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "@store_toolkit/store";
 import Axios from "@_variables/util/Axios";
 import {AxiosResponse} from "axios";
 import {loading, setAlert} from "@store_toolkit/clientReducers/globalStateReducer";
+import {Widget} from "@_typeScriptTypes/widgets/Widget";
 
 const initialState = {
     adminPanelWidgets: {}
@@ -111,13 +111,13 @@ export const fetchAdminPanelUpdateWidget = createAsyncThunk(
 
 export const fetchAdminPanelAddNewWidget = createAsyncThunk(
     'adminPanelWidgets/adminPanelAddNewWidget',
-    async (newWidgetData: WidgetPropTypes, thunkAPI) => {
+    async (newWidgetData: Widget, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         return await Axios.post('/api/admin/widgets/adminAddNewWidget', {data: newWidgetData, token: localStorage.wt})
             .then((res: AxiosResponse<unknown | any>) => {
                 if (res.data?.newWidgetData) {
                     thunkAPI.dispatch(setAlert({
-                        message: 'Widget Created',
+                        message: 'WidgetWrapper Created',
                         type: 'success',
                     }))
 
@@ -125,7 +125,7 @@ export const fetchAdminPanelAddNewWidget = createAsyncThunk(
                 }
             }).catch(err => {
                 thunkAPI.dispatch(setAlert({
-                    message: 'Error While Creating New Widget',
+                    message: 'Error While Creating New WidgetWrapper',
                     type: 'error',
                     err
                 }))
@@ -143,13 +143,13 @@ export const fetchAdminPanelDeleteWidget = createAsyncThunk(
         }).then((res: AxiosResponse<unknown | any>) => {
 
             thunkAPI.dispatch(setAlert({
-                message: 'Widget Deleted',
+                message: 'WidgetWrapper Deleted',
                 type: 'success',
             }))
 
             return {_id, position}
         }).catch(err => {
-            thunkAPI.dispatch(setAlert({message: 'Error While Deleting Widget', type: 'error', err}))
+            thunkAPI.dispatch(setAlert({message: 'Error While Deleting WidgetWrapper', type: 'error', err}))
         }).finally(() => thunkAPI.dispatch(loading(false)))
     }
 )

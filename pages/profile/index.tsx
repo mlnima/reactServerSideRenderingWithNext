@@ -7,10 +7,10 @@ import styled from "styled-components";
 import Link from "next/link";
 import {useSelector} from "react-redux";
 import {wrapper} from "@store_toolkit/store";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import type { ReactElement } from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const ProfileStyledMain = styled.main`
   display: flex;
@@ -75,7 +75,7 @@ const ProfileStyledMain = styled.main`
 const Profile = () => {
 
     // @ts-ignore
-    const userData = useSelector(({user} : StoreTypes) => user?.userData)
+    const userData = useSelector(({user} : Store) => user?.userData)
 
     return (
         <ProfileStyledMain className='profile-page main'>

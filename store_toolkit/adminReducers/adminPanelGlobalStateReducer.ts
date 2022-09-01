@@ -1,11 +1,11 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import Axios from "@_variables/util/Axios";
 import axios, {AxiosResponse} from "axios";
-import { PageTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import { PageTypes} from "@_typeScriptTypes/Page";
 import {loading, setAlert} from "@store_toolkit/clientReducers/globalStateReducer";
 import {NextRouter} from "next/router";
 import {RootState} from "@store_toolkit/store";
-import {AdminPanelGlobalState} from "@_variables/TypeScriptTypes/AdminPanelTypes";
+import {AdminPanelGlobalState} from "@_typeScriptTypes/storeTypes/AdminPanelGlobalState";
 
 
 const initialState : AdminPanelGlobalState = {

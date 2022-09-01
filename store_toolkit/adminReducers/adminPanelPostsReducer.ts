@@ -2,9 +2,10 @@ import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "@store_toolkit/store";
 import Axios from "@_variables/util/Axios";
 import {AxiosError, AxiosResponse} from "axios";
-import {AxiosErrorTypes, Meta, PageTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {AxiosErrorTypes} from "@_typeScriptTypes/axiosTypes/AxiosErrorTypes";
+import {Meta} from "@_typeScriptTypes/Meta";
 import {loading, setAlert} from "@store_toolkit/clientReducers/globalStateReducer";
-import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
+import {Post} from "@_typeScriptTypes/Post";
 
 interface AdminPanelPosts {
     post: {
@@ -13,8 +14,8 @@ interface AdminPanelPosts {
     },
     totalCount: number,
     posts: [],
-    meta: {},
-    metas: [],
+    meta: Meta,
+    metas: [Meta],
     activeEditingLanguage: 'default'
 }
 
@@ -82,7 +83,7 @@ export const fetchAdminPanelUpdatePost = createAsyncThunk(
 
 export const fetchAdminPanelSaveNewPost = createAsyncThunk(
     'adminPanelPosts/fetchAdminPanelSaveNewPost',
-    async ({data, router}: { data?: PostTypes, router?: any }, thunkAPI) => {
+    async ({data, router}: { data?: Post, router?: any }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         const body = {
             postData: data,
@@ -274,7 +275,7 @@ export const fetchPostThumbnailsUpload = createAsyncThunk(
 //notused
 export const fetchAdminImportPosts = createAsyncThunk(
     'adminPanelPosts/fetchAdminImportPosts',
-    async (posts: PostTypes[], thunkAPI) => {
+    async (posts: Post[], thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         await Axios.post(`/api/admin/posts/adminImportPosts`, {
             posts,

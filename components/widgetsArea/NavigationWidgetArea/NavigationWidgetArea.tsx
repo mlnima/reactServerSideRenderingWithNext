@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {useSelector} from "react-redux";
 import BreadcrumbList from "@components/widgetsArea/NavigationWidgetArea/BreadcrumbList";
 import {useRouter} from "next/router";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 let StyledNavigation = styled.nav`
   grid-area: navigation;
@@ -35,7 +35,7 @@ let StyledNavigation = styled.nav`
 
 const NavigationWidgetArea = () => {
     const {pathname} = useRouter()
-    const navigationStyle = useSelector(({settings}: StoreTypes) => settings?.design?.navigationStyle)
+    const navigationStyle = useSelector(({settings}: Store) => settings?.design?.navigationStyle)
 
     return (
         <>

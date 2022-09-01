@@ -1,7 +1,6 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import styled from "styled-components";
 import {wrapper} from "@store_toolkit/store";
 import dynamic from "next/dynamic";
@@ -26,6 +25,7 @@ import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import DynamicNoSSR from "@components/includes/WidgetsRenderer/DynamicNoSSR";
 import _postDataCleanerBeforeSave from "@_variables/clientAjaxVariables/_postDataCleanerBeforeSave";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 
 // const WidgetsRenderer = dynamic(() => import('../WidgetsRenderer/WidgetsRenderer'))
@@ -62,7 +62,7 @@ const post = () => {
     const finalPostDataToSave = new FormData()
     const postType = query?.postType;
 
-    const {userData, editingPost} = useSelector((store: StoreTypes) => {
+    const {userData, editingPost} = useSelector((store: Store) => {
         return {
             userData: store?.user.userData,
             editingPost: store?.posts?.editingPost,

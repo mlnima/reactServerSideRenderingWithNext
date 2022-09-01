@@ -8,7 +8,7 @@ import {useAdminDispatch} from "@store_toolkit/hooks";
 const users = () => {
     const dispatch = useAdminDispatch()
     const {pathname, asPath, query} = useRouter()
-    // const usersData = useSelector((store: StoreTypes) => {
+    // const usersData = useSelector((store: Store) => {
     //     return {
     //         users: store?.adminPanelUsers?.users,
     //         totalCount: store?.adminPanelUsers?.totalCount

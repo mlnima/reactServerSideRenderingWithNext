@@ -3,7 +3,7 @@ import Link from 'next/link'
 import {useTranslation} from 'next-i18next';
 import {useSelector} from "react-redux";
 import styled from "styled-components";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const ProfileNavigationStyledDiv = styled.div`
   display: flex;
@@ -46,7 +46,7 @@ const ProfileNavigationStyledDiv = styled.div`
 `
 const ProfileNavigation = () => {
     const {t} = useTranslation('common');
-    const userData = useSelector(({user}: StoreTypes) => user?.userData)
+    const userData = useSelector(({user}: Store) => user?.userData)
 
     const [navigationData, setNavigationData] = useState({
         isOpen: false,

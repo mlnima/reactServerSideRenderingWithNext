@@ -2,8 +2,8 @@ import React, {useEffect, useRef} from 'react';
 import _ from "lodash";
 import MessengerConversationMessage from "./MessengerConversationMessage";
 import {useSelector} from "react-redux";
-import {StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
 import styled from "styled-components";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 interface MessengerConversationMessageAreaTypes {
     connectedUserData: object,
@@ -23,7 +23,7 @@ const MessengerConversationMessageAreaStyledDiv = styled.div`
 
 const MessengerConversationMessageArea = ({connectedUserData, userData}: MessengerConversationMessageAreaTypes) => {
 
-    const messages = useSelector((store: StoreTypes) => store.user.activeConversation?.messages);
+    const messages = useSelector((store: Store) => store.user.activeConversation?.messages);
     const messageArea = useRef<null | HTMLDivElement>(null)
 
     useEffect(() => {

@@ -6,13 +6,13 @@ import {useSelector} from 'react-redux';
 import styled from "styled-components";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 import Draggable from 'react-draggable';
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import _passwordValidator from "../../../_variables/clientVariables/_passwordValidator";
 import ValidInput from "./ValidInput";
 import {fetchLogin, fetchUserRegister} from "@store_toolkit/clientReducers/userReducer";
 import {setAlert} from "@store_toolkit/clientReducers/globalStateReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const LoginRegisterPopupFormsStyledDiv = styled.div`
   background-color: var(--navigation-background-color, #18181b);
@@ -194,7 +194,7 @@ const LoginRegisterPopupForms: FC = () => {
     const passwordRef = useRef()
     const {t} = useTranslation('common');
     const dispatch = useAppDispatch()
-    const globalState = useSelector(({globalState}: StoreTypes) => globalState)
+    const globalState = useSelector(({globalState}: Store) => globalState)
     const [submitButtonDisable, setSubmitButtonDisable] = useState(true)
     const [state, setState] = useState<StateTypes>({});
     const [stateValidator, setStateValidator] = useState<StateValidatorTypes>({});

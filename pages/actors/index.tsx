@@ -5,7 +5,6 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {wrapper} from "@store_toolkit/store";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import AppLayout from "@components/layouts/AppLayout";
 import type {ReactElement} from 'react'
 import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
@@ -13,6 +12,7 @@ import React from "react";
 import fetchMetas from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchMetas";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import MetasCardsRenderer from "@components/includes/cards/CardsRenderer/MetasCardsRenderer";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const PageStyle = styled.div`
   .actors {
@@ -29,7 +29,7 @@ const PageStyle = styled.div`
 const actorsPage = () => {
     const {query} = useRouter();
 
-    const {actorsPageStyle, totalCount,sidebar} = useSelector(({settings, posts}: StoreTypes) => {
+    const {actorsPageStyle, totalCount,sidebar} = useSelector(({settings, posts}: Store) => {
         return {
             actorsPageStyle: settings?.design?.actorsPageStyle,
             totalCount: posts?.totalCount,
@@ -38,7 +38,7 @@ const actorsPage = () => {
     })
 
     const postsCountPerPage = query?.size ? parseInt(query?.size as string) :
-        useSelector((store: StoreTypes) => parseInt(store?.settings?.identity?.postsCountPerPage || '20'))
+        useSelector((store: Store) => parseInt(store?.settings?.identity?.postsCountPerPage || '20'))
 
     return (
         <PageStyle id={'content'} actorsPageStyle={actorsPageStyle} className={`page-${sidebar || 'no'}-sidebar `}>

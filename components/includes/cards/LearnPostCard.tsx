@@ -1,10 +1,10 @@
 import {FC} from "react";
-import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import styled from "styled-components";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import CardImageRenderer from "@components/includes/cards/CardImageRenderer";
 import TextToCanvasImage from "@components/includes/cards/asset/TextToCanvasImage/TextToCanvasImage";
+import {Post} from "@_typeScriptTypes/Post";
 
 const CardViews = dynamic(() => import('./asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('./asset/CardRating/CardRating'))
@@ -19,7 +19,7 @@ interface LearnPostCardPropTypes {
     index: number,
     cardWidth: number,
     targetLink:string,
-    post: PostTypes,
+    post: Post,
 }
 
 interface LearnPostCardStylePropTypes {

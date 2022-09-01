@@ -3,7 +3,7 @@ import Link from 'next/link'
 import styled from "styled-components";
 import rangeNumGenerator from "@_variables/util/rangeNumGenerator";
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const WidgetPaginationStyledDiv = styled.div`
   display: flex;
@@ -38,7 +38,7 @@ interface WidgetPaginationPropTypes {
 
 const WidgetPagination: FC<WidgetPaginationPropTypes> = ({baseUrl, totalCount,count}) => {
 
-    const postsCountPerPage = useSelector(({settings}:StoreTypes) => {
+    const postsCountPerPage = useSelector(({settings}:Store) => {
         return settings?.identity?.postsCountPerPage ?
                parseInt(settings?.identity?.postsCountPerPage)
                : 20

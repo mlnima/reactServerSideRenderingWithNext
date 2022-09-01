@@ -1,9 +1,9 @@
 import {FC} from "react";
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 // import PostsRenderer from "@components/includes/PostsRenderer/PostsRenderer";
 import styled from "styled-components";
 import PostsCardsRenderer from "@components/includes/cards/CardsRenderer/PostsCardsRenderer";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const RelatedPostsRendererStyledDiv = styled.div`
   width: 100%;
@@ -14,7 +14,7 @@ const RelatedPostsRenderer: FC = () => {
         actorsRelatedPosts,
         categoriesRelatedPosts,
         tagsRelatedPosts
-    } = useSelector((store: StoreTypes) => store?.posts?.relatedPosts);
+    } = useSelector((store: Store) => store?.posts?.relatedPosts);
 
     return (
         <RelatedPostsRendererStyledDiv>

@@ -6,10 +6,10 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useSelector} from "react-redux";
 import styled from "styled-components";
 import {wrapper} from "@store_toolkit/store";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import type { ReactElement } from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const PostsStyledDiv = styled.div`
   max-width: 940px;
@@ -22,7 +22,7 @@ const PostsStyledDiv = styled.div`
   }
 `
 const Posts = () => {
-    const userData = useSelector((store: StoreTypes) => store?.user.userData)
+    const userData = useSelector((store: Store) => store?.user.userData)
     // const router = useRouter();
     //
     // const [state, setState] = useState({

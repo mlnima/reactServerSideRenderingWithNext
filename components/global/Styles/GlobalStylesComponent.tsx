@@ -1,7 +1,7 @@
 import {createGlobalStyle} from "styled-components";
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {FC} from "react";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 interface GlobalStylesPropTypes {
   customColors:string,
@@ -278,7 +278,7 @@ const GlobalStyles= createGlobalStyle`
 `
 
 const GlobalStylesComponent : FC = () =>{
-  const {customColors,customStyles,sideBarWidth} = useSelector(({settings}:StoreTypes)=>{
+  const {customColors,customStyles,sideBarWidth} = useSelector(({settings}:Store)=>{
     return{
       customColors: settings?.design?.customColors,
       customStyles: settings?.design?.customStyles,

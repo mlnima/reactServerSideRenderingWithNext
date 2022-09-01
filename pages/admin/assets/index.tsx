@@ -4,7 +4,6 @@ import {useRouter} from "next/router";
 import _adminGetPostsQueryGenerator from "@_variables/adminVariables/_adminGetPostsQueryGenerator";
 import {useSelector} from "react-redux";
 import styled from "styled-components";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import _metaPageQueryGenerator from "../../../_variables/clientVariables/_metaPageQueryGenerator";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
@@ -14,6 +13,7 @@ import {fetchAdminPanelPages} from "@store_toolkit/adminReducers/adminPanelPages
 import {fetchAdminPanelUsers} from "@store_toolkit/adminReducers/adminPanelUsersReducer";
 import {fetchAdminPanelGetComments} from "@store_toolkit/adminReducers/adminCommentsReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 // import {adminGetOrders} from "@store/adminActions/adminPanelOrdersActions";
 
 const TableHeader = dynamic(
@@ -38,7 +38,7 @@ const assets = () => {
     const dispatch = useAdminDispatch()
 
 
-    const assetPageData = useSelector((store: StoreTypes) => {
+    const assetPageData = useSelector((store: Store) => {
         return {
             totalCount: store?.adminPanelPosts?.totalCount || store?.adminPanelUsers?.totalCount,
             posts: store?.adminPanelPosts?.posts,

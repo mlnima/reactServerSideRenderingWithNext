@@ -1,18 +1,8 @@
-import {Meta, MetasPropTypes,User} from './GlobalTypes'
+import {Comment} from "@_typeScriptTypes/Comment";
+import {User} from "@_typeScriptTypes/User";
+import {Meta} from "@_typeScriptTypes/Meta";
 
-export interface Comment{
-    onDocumentId: string,
-    _id:string,
-    author: User,
-    reply:[],
-    // likes:number,
-    // disLikes:number,
-    body: string,
-    createdAt: string,
-    status:string
-}
-
-export interface PostTypes {
+export interface Post {
     outPostType?: string;
     images?: [string];
     rating: string;
@@ -54,4 +44,3 @@ export interface PostTypes {
     categories:Meta[],
     tags:Meta[]
 }
-

@@ -2,14 +2,14 @@ import {FC,  useMemo} from "react";
 import Head from 'next/head'
 import {useRouter} from "next/router";
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import parse from 'html-react-parser'
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const SiteHeadSetter: FC = () => {
     const {asPath,pathname,query} = useRouter();
     const siteLanguages = useMemo(() => process.env.NEXT_PUBLIC_LOCALS?.split(' ') || [], []);
 
-    const headDataFromStore = useSelector(({globalState}: StoreTypes) => globalState?.headData)
+    const headDataFromStore = useSelector(({globalState}: Store) => globalState?.headData)
     const headData = useMemo(()=>{
         return headDataFromStore
     },[asPath,pathname,query])

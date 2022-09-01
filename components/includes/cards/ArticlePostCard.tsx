@@ -1,9 +1,9 @@
 import {FC} from "react";
-import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import styled from "styled-components";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import CardTitle from "@components/includes/cards/asset/CardTitle/CardTitle";
+import {Post} from "@_typeScriptTypes/Post";
 
 const TextToCanvasImage = dynamic(() => import('@components/includes/cards/asset/TextToCanvasImage/TextToCanvasImage'))
 const CardImageRenderer = dynamic(() => import('@components/includes/cards/CardImageRenderer'))
@@ -19,7 +19,7 @@ interface ArticlePostCardPropTypes {
     index: number,
     cardWidth: number,
     targetLink:string,
-    post: PostTypes,
+    post: Post,
 }
 
 interface ArticlePostCardStylePropTypes {

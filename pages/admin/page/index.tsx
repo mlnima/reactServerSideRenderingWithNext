@@ -3,7 +3,6 @@ import {useRouter} from 'next/router'
 import Editor from "@monaco-editor/react";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 
@@ -15,6 +14,7 @@ import {
     fetchAdminPanelPage
 } from "@store_toolkit/adminReducers/adminPanelPagesReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 let AdminEditCustomPageStyledDiv = styled.div`
   padding: 10px 1rem;
@@ -38,7 +38,7 @@ let AdminEditCustomPageStyledDiv = styled.div`
 const page = (props: any) => {
     const {query, push} = useRouter()
     const dispatch = useAdminDispatch()
-    const pageData = useSelector(({adminPanelPages}: StoreTypes) => adminPanelPages.page)
+    const pageData = useSelector(({adminPanelPages}: Store) => adminPanelPages.page)
 
     useEffect(() => {
         if (query.id) {

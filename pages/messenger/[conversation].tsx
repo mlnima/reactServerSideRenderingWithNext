@@ -11,7 +11,7 @@ import MessengerCall from "@components/includes/messengerPageComponents/Messenge
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useSelector} from "react-redux";
 import {wrapper} from "@store_toolkit/store";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+
 
 
 import {
@@ -27,14 +27,15 @@ import MessengerLayout from "@components/layouts/MessengerLayout";
 import type {ReactElement} from 'react';
 import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 
 const conversation = () => {
     const dispatch = useAppDispatch()
     const router = useRouter();
-    const userData = useSelector((store: StoreTypes) => store.user.userData);
-    const callData = useSelector((store: StoreTypes) => store.user.callData);
-    const users = useSelector((store: StoreTypes) => store.user.activeConversation?.users);
+    const userData = useSelector((store: Store) => store.user.userData);
+    const callData = useSelector((store: Store) => store.user.callData);
+    const users = useSelector((store: Store) => store.user.activeConversation?.users);
     const [connectedUserData, setConnectedUserData] = useState({
         profileImage: undefined
     });

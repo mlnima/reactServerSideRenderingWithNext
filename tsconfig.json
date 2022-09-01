@@ -33,6 +33,9 @@
       "@_dataStructures/*": [
         "_dataStructures/*"
       ],
+      "@_typeScriptTypes/*": [
+        "_typeScriptTypes/*"
+      ],
     },
     "allowJs": true,
     "checkJs": false,

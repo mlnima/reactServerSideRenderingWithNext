@@ -17,6 +17,7 @@ const metaSchema =  new Schema({
     imageUrl:String,
     coverImageUrl:String,
     imageUrlLock:Boolean,
+    rankLock:Boolean,
     translations:mongoose.Mixed,
     count:Number,
     likes:Number,

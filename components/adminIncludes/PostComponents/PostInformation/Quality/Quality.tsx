@@ -1,13 +1,15 @@
 import {useSelector} from "react-redux";
 import videoQualities from "@_dataStructures/videoQualities";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {FC} from "react";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
+
 interface QualityPropTypes{
     rendering:boolean,
     onChangeHandler:any
 }
+
 const Quality:FC<QualityPropTypes> = ({rendering,onChangeHandler}) => {
-    const post = useSelector(({adminPanelPosts}:StoreTypes) => adminPanelPosts.post);
+    const post = useSelector(({adminPanelPosts}:Store) => adminPanelPosts.post);
     if (rendering){
         return (
             <div className='post-information-section'>

@@ -4,13 +4,13 @@ import {faClone, faSave} from "@fortawesome/free-regular-svg-icons";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import ExportWidget from './ExportWidget/ExportWidget'
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {WidgetPropTypes} from "@_variables/TypeScriptTypes/Widgets";
 import {
     fetchAdminPanelAddNewWidget,
     fetchAdminPanelDeleteWidget, fetchAdminPanelUpdateWidget
 } from "@store_toolkit/adminReducers/adminWidgetsReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Widget} from "@_typeScriptTypes/widgets/Widget";
 
 
 interface ActionButtonsPropTypes {
@@ -23,7 +23,7 @@ interface ActionButtonsPropTypes {
 
 const ActionButtons: FC<ActionButtonsPropTypes> = ({widgetData, widgetId, widgetSettings, setWidgetSettings}) => {
     const dispatch = useAdminDispatch()
-    const widgets = useSelector(({adminPanelWidgets}: StoreTypes) => adminPanelWidgets?.adminPanelWidgets || [])
+    const widgets = useSelector(({adminPanelWidgets}: Store) => adminPanelWidgets?.adminPanelWidgets || [])
 
     const onSaveHandler = () => {
         dispatch(fetchAdminPanelUpdateWidget({
@@ -39,7 +39,7 @@ const ActionButtons: FC<ActionButtonsPropTypes> = ({widgetData, widgetId, widget
     const onCloneHandler = () => {
 
         const widgetsInTheSamePosition = widgets?.[widgetData.position]
-            ?.filter((widget: WidgetPropTypes) => widget?.data?.position === widgetData.position)
+            ?.filter((widget: Widget) => widget?.data?.position === widgetData.position)
 
         const highestIndexInTheSamePosition = Math.max(...widgetsInTheSamePosition.map(() => widgetData.widgetIndex), 0)
 

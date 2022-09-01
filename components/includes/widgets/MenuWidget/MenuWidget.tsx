@@ -1,8 +1,8 @@
 import {FC, useState} from "react";
 import {useMemo} from 'react';
-import {MenuItem} from "@_variables/TypeScriptTypes/WidgetsInterfaces";
 import styled from "styled-components";
 import MenuWidgetItem from "./MenuWidgetItem";
+import {MenuItem} from "@_typeScriptTypes/widgets/MenuWidget/MenuItem";
 
 const MenuWidgetStyledDiv = styled.div`
   z-index: 10;
@@ -110,6 +110,8 @@ const MenuWidgetStyledDiv = styled.div`
 interface MenuWidgetPropTypes {
     menuItems: MenuItem[]
 }
+
+
 
 const MenuWidget: FC<MenuWidgetPropTypes> = ({menuItems}) => {
 

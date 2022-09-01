@@ -1,16 +1,17 @@
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+
 import dynamic from "next/dynamic";
 import {ChangeEvent} from "react";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import {adminEditDesign} from "@store_toolkit/adminReducers/adminPanelSettingsReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const StyleSection = dynamic(() => import('@components/adminIncludes/design/StyleSection/StyleSection'), {ssr: false});
 
 const cards = () => {
-    const design = useSelector(({adminPanelSettings}: StoreTypes) => adminPanelSettings?.design)
+    const design = useSelector(({adminPanelSettings}: Store) => adminPanelSettings?.design)
     const dispatch = useAdminDispatch()
 
     const onChangeHandler = (event) => {

@@ -1,5 +1,4 @@
 import {FC, useState} from "react";
-import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import styled from "styled-components";
 import Link from "next/link";
 import dynamic from "next/dynamic";
@@ -7,6 +6,7 @@ import VideoPostCardTrailer from "@components/includes/cards/VideoPostCardTraile
 import _qualityConvertor from "@components/includes/cards/asset/_qualityConvertor";
 import CardViews from "./asset/CardViews/CardViews";
 import CardTitle from "@components/includes/cards/asset/CardTitle/CardTitle";
+import {Post} from "@_typeScriptTypes/Post";
 
 const CardRatingBar = dynamic(() => import('./asset/CardRatingBar/CardRatingBar'))
 const CardQuality = dynamic(() => import('./asset/CardQuality/CardQuality'))
@@ -23,7 +23,7 @@ interface VideoPostCardPropTypes {
     index: number,
     cardWidth: number,
     targetLink:string,
-    post: PostTypes,
+    post: Post,
 }
 
 interface VideoPostCardStylePropTypes {

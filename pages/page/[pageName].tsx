@@ -2,7 +2,6 @@ import MainWidgetArea from "../../components/widgetsArea/MainWidgetArea/MainWidg
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import dynamic from "next/dynamic";
 import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
@@ -11,6 +10,7 @@ import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea
 import fetchPageData
     from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPageData";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 const Soft404 = dynamic(() => import('@components/includes/Soft404/Soft404'));
 
 const PageStyle = styled.div`
@@ -19,7 +19,7 @@ const PageStyle = styled.div`
 
 const page = () => {
 
-    const {pageData, sidebar, notFoundPage} = useSelector(({posts, globalState}: StoreTypes) => {
+    const {pageData, sidebar, notFoundPage} = useSelector(({posts, globalState}: Store) => {
         return {
             sidebar: posts.pageData?.sidebar,
             pageData: posts.pageData,

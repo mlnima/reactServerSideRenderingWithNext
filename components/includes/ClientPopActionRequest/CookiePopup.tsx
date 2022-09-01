@@ -5,7 +5,7 @@ import {useTranslation} from 'next-i18next';
 import {useSelector} from "react-redux";
 import {useRouter} from "next/router";
 import styled from "styled-components";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const CookiePopupStyledDiv = styled.div`
 
@@ -84,7 +84,7 @@ const CookiePopup: FC = () => {
         cookieMessageText,
         cookieReadMoreLink,
         cookiePopupMessage
-    } = useSelector(({settings}: StoreTypes) => settings?.identity)
+    } = useSelector(({settings}: Store) => settings?.identity)
 
 
     const [state, setState] = useState({

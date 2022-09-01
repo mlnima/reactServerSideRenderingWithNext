@@ -2,13 +2,13 @@ import {FC, useRef} from 'react';
 import styled from "styled-components";
 import {useTranslation} from 'next-i18next';
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import fetchPostComments
     from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPostComments";
 import fetchNewComment
     from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchNewComment";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const CommentFromStyledForm = styled.form`
 
@@ -50,8 +50,8 @@ const CommentFromStyledForm = styled.form`
 const CommentFrom: FC = () => {
     const {t} = useTranslation('common');
     const dispatch = useAppDispatch()
-    const _id = useSelector(({posts}: StoreTypes) => posts.post?._id)
-    const userData = useSelector(({user}: StoreTypes) => user?.userData)
+    const _id = useSelector(({posts}: Store) => posts.post?._id)
+    const userData = useSelector(({user}: Store) => user?.userData)
     const bodyInput = useRef(null);
 
     const onSubmitHandler = e => {

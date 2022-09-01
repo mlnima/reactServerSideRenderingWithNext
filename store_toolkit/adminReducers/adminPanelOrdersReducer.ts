@@ -1,4 +1,4 @@
-import {AdminPanelOrdersTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {AdminPanelOrders} from "@_typeScriptTypes/storeTypes/AdminPanelOrders";
 
 
 const initialState = {
@@ -6,7 +6,7 @@ const initialState = {
     order:{}
 }
 
-export const adminPanelOrdersReducer = (state: AdminPanelOrdersTypes = initialState, action: { type: string, payload: any }) =>{
+export const adminPanelOrdersReducer = (state: AdminPanelOrders = initialState, action: { type: string, payload: any }) =>{
     switch (action.type) {
         // case ADMIN_GET_ORDERS:
         //     return {

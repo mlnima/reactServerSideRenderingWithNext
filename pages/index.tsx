@@ -2,12 +2,12 @@ import MainWidgetArea from "../components/widgetsArea/MainWidgetArea/MainWidgetA
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import AppLayout from '@components/layouts/AppLayout';
 import type {ReactElement} from 'react';
 import styled from "styled-components";
 import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 
 const HomePageStyle = styled.div`
@@ -17,7 +17,7 @@ const HomePageStyle = styled.div`
 
 const HomePage = () => {
 
-    const {sidebar, homePageStyle} = useSelector(({settings}: StoreTypes) => {
+    const {sidebar, homePageStyle} = useSelector(({settings}: Store) => {
         return {
             homePageStyle: settings?.design?.homePageStyle,
             sidebar: settings?.identity?.homePageSidebar,

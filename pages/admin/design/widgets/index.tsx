@@ -4,13 +4,13 @@ import WidgetGroupByPosition
     from "@components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import WidgetPositionsSelect from "@components/adminIncludes/widgetsModel/WidgetPositionsSelect/WidgetPositionsSelect";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import widgetsStaticPositions from "@_dataStructures/widgetsStaticPositions";
 import {fetchAdminPanelGetWidgets} from "@store_toolkit/adminReducers/adminWidgetsReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 let StyledDiv = styled.div`
   display: flex;
@@ -63,7 +63,7 @@ const AdminWidgets = () => {
         ({
              adminPanelWidgets,
              adminPanelGlobalState
-         }: StoreTypes) => {
+         }: Store) => {
 
             return {
                 customPages: adminPanelGlobalState?.customPages.reduce(

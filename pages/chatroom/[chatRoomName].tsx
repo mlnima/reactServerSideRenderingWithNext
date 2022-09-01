@@ -12,17 +12,17 @@ import {useSelector} from "react-redux";
 import {dispatchSocketId} from "@store_toolkit/clientReducers/userReducer";
 import {setOnlineUsers,setMessages,  newMessage} from '@store_toolkit/clientReducers/chatroomReducer';
 import {wrapper} from "@store_toolkit/store";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {_uniqBy} from "@_variables/util/arrayUtils/_uniqBy";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import MessengerLayout from "@components/layouts/MessengerLayout";
 import type {ReactElement} from 'react';
 import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const chatRoom = () => {
     const dispatch = useAppDispatch()
-    const user = useSelector((store: StoreTypes) => store.user)
+    const user = useSelector((store: Store) => store.user)
     const [onlineUserListVisibility, setOnlineUserListVisibility] = useState(false)
     const [isJoined, setIsJoined] = useState(false)
     const {query} = useRouter()

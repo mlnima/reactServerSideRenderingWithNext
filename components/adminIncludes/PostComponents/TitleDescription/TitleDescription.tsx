@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import dynamic from "next/dynamic";
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 const TextEditors = dynamic(()=>import('../../TextEditors/TextEditors'))
 
 let TitleDescriptionStyledDiv = styled.div`
@@ -43,8 +43,8 @@ let TitleDescriptionStyledDiv = styled.div`
 `
 
 const TitleDescription = (props:any) => {
-    const post = useSelector((state : StoreTypes)=> state?.adminPanelPosts.post);
-    const activeEditingLanguage = useSelector((state : StoreTypes) => state?.adminPanelPosts.activeEditingLanguage);
+    const post = useSelector((state : Store)=> state?.adminPanelPosts.post);
+    const activeEditingLanguage = useSelector((state : Store) => state?.adminPanelPosts.activeEditingLanguage);
 
     const allowsEditorToUse = post?.postType === 'learn' ? ['ReactPage','Monaco','SunEditor'] :
                               post?.postType === 'video' ? ['Monaco','SunEditor','ReactQuillEditor'] :

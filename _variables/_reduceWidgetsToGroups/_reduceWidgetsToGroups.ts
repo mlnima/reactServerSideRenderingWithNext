@@ -1,7 +1,7 @@
-import {WidgetPropTypes} from "@_variables/TypeScriptTypes/Widgets";
+import {Widget} from "@_typeScriptTypes/widgets/Widget";
 
-const _reduceWidgetsToGroups = (widgets:WidgetPropTypes[])=>{
-    return widgets.reduce((widgetInPositions:any,widget:WidgetPropTypes)=>{
+const _reduceWidgetsToGroups = (widgets:Widget[])=>{
+    return widgets.reduce((widgetInPositions:any,widget:Widget)=>{
         widgetInPositions[widget.data.position] = [...(widgetInPositions[widget.data.position] || []) ,widget]
         return widgetInPositions
     },{})

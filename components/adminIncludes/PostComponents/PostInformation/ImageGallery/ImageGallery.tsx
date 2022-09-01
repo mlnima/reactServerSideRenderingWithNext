@@ -3,9 +3,9 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus, faTimes, faUpload} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import { useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {fetchFileManagerUploadFile} from "@store_toolkit/adminReducers/adminPanelFileManagerReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 let StyledDiv = styled.div`
     display: flex;
@@ -44,7 +44,7 @@ const ImageGallery:FC<ImageGalleryPropTypes> = ({onChangeHandler, rendering}) =>
     const dispatch = useAdminDispatch()
     const uploadInputElement = useRef(null)
 
-    const post = useSelector((store:StoreTypes) => store.adminPanelPosts.post);
+    const post = useSelector((store:Store) => store.adminPanelPosts.post);
     
     const [state, setState] = useState({
         images: [],

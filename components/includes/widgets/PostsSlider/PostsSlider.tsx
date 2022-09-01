@@ -8,8 +8,8 @@ import styled from "styled-components";
 import ratingCalculator from "@_variables/util/ratingCalculator";
 import Autoplay from "embla-carousel-autoplay";
 import {useAppDispatch} from "@store_toolkit/hooks";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
+import {Post} from "@_typeScriptTypes/Post";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const ArticlePostCard = dynamic(() => import('@components/includes/cards/ArticlePostCard'))
 const PromotionPostCard = dynamic(() => import('@components/includes/cards/PromotionPostCard'))
@@ -127,12 +127,12 @@ const PostsSliderStyledDiv = styled.div`
 interface PostsSliderPropsTypes {
     postElementSize: number | string,
     widgetId: string,
-    posts: PostTypes[],
+    posts: Post[],
     cardWidthDesktop?: number,
     isSidebar?: boolean,
     index?: number,
     uniqueData?: {
-        posts: PostTypes[],
+        posts: Post[],
         totalCount: number,
         sliderConfig?: {
             pagination?: boolean,
@@ -182,7 +182,7 @@ const PostsSlider: FC<PostsSliderPropsTypes> =
         const {
             postsPerRawForMobile,
             cardWidth,
-        } = useSelector(({settings}: StoreTypes) => {
+        } = useSelector(({settings}: Store) => {
             const elementSize = cardWidthDesktop ? cardWidthDesktop : settings?.design?.cardWidthDesktop || 255
             return {
                 elementSize,

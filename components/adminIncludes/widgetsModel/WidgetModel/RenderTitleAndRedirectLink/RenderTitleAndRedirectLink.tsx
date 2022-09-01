@@ -1,8 +1,8 @@
 import React, {FC} from 'react';
-import {WidgetDataPropTypes, WidgetSettingsPropTypes} from "@_variables/TypeScriptTypes/Widgets";
+import {WidgetData, WidgetSettingsPropTypes} from "@_typeScriptTypes/widgets/Widget";
 
 interface RenderTitleAndRedirectLinkPropTypes {
-    widgetData: WidgetDataPropTypes,
+    widgetData: WidgetData,
     widgetSettings: WidgetSettingsPropTypes,
     onChangeHandlerWithTranslate: any,
     onChangeHandler: any

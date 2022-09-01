@@ -1,6 +1,7 @@
-import React, {FC} from "react";
+import React, {ChangeEventHandler, FC} from "react";
 import dynamic from "next/dynamic";
 import postTypes from "../../../../_dataStructures/postTypes";
+import {WidgetData, WidgetSettingsPropTypes} from "@_typeScriptTypes/widgets/Widget";
 
 const SearchTypeInputFields = dynamic(() => import('@components/adminIncludes/widgetsModel/WidgetModel/SearchTypeInputFields/SearchTypeInputFields'));
 const MultipleLinkWidgetModelFields = dynamic(() => import('@components/adminIncludes/widgetsModel/WidgetModel/MultipleLinkWidgetModelFields/MultipleLinkWidgetModelFields'));
@@ -19,16 +20,16 @@ const SliderWidgetFields = dynamic(() => import('./SliderWidgetFields/SliderWidg
 
 interface UniqueFieldsPropTypes {
     widgetData: any,
-    widgetSettings: any,
+    widgetSettings: WidgetSettingsPropTypes,
     setWidgetSettings: any,
     onChangeHandlerWithTranslate: any,
     onUniqueDataJsonChangeHandler: any,
     onCheckboxChangeHandler: any,
     widgetId: string,
-    setWidgetData,
-    onChangeHandler,
-    onUniqueDataChangeHandler,
-    onUniqueDataChangeHandlerWithTranslate
+    setWidgetData:React.Dispatch<React.SetStateAction<any>> ,
+    onChangeHandler:ChangeEventHandler<HTMLSelectElement | HTMLInputElement>,
+    onUniqueDataChangeHandler:ChangeEventHandler<HTMLInputElement>,
+    onUniqueDataChangeHandlerWithTranslate:ChangeEventHandler<HTMLInputElement>
 }
 
 const UniqueFields: FC<UniqueFieldsPropTypes> =
@@ -197,14 +198,6 @@ const UniqueFields: FC<UniqueFieldsPropTypes> =
                     <ImagesSliderTypeWidgetModelFields onUniqueDataChangeHandler={onUniqueDataChangeHandler}
                                                        uniqueData={widgetData.uniqueData}
                     />
-                }
-
-                {(widgetData.type === 'postsSwiper' || widgetData.type === 'imagesSwiper') &&
-                    <SwiperWidgetFields
-                        onUniqueDataJsonChangeHandler={onUniqueDataJsonChangeHandler}
-                        uniqueData={widgetData.uniqueData}
-                    />
-
                 }
 
                 {(widgetData.type === 'postsSlider' || widgetData.type === 'imagesSlider') &&

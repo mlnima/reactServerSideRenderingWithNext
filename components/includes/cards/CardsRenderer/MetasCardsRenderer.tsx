@@ -1,8 +1,9 @@
 import React, {FC, useMemo} from 'react';
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {Meta, StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import dynamic from "next/dynamic";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Meta} from "@_typeScriptTypes/Meta";
 
 const TagCard = dynamic(() => import('@components/includes/cards/TagCard'))
 const ActorCard = dynamic(() => import('@components/includes/cards/ActorCard'))
@@ -53,7 +54,7 @@ let MetasCardsRendererStyle = styled.div`
 const MetasCardsRenderer: FC<MetasCardsRendererPropTypes> = ({uniqueData, metaType}) => {
 
     const {metas, postsPerRawForMobile, cardWidth, cardsCustomStyle} = useSelector(
-        ({settings, posts}: StoreTypes) => {
+        ({settings, posts}: Store) => {
             return {
                 metas: uniqueData?.metaData || (metaType === 'categories' ? posts?.categoriesMetas :
                     metaType === 'tags' ? posts?.tagsMetas : metaType === 'actors' ? posts?.actorsMetas : []),

@@ -3,10 +3,10 @@ import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
 import React, {FC} from "react";
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {convertMetasTypeToSingular} from "@_variables/_variables";
 import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 import ActorMetaImageRenderer from "@components/includes/PostPage/components/PostMeta/ActorMetaImageRenderer";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const PostMetaStyledDiv = styled.div`
   display: flex;
@@ -86,7 +86,7 @@ interface PostMetaPropType {
 const PostMeta: FC<PostMetaPropType> = ({type}) => {
     const {t} = useTranslation(['common', 'customTranslation']);
 
-    const post = useSelector(({posts}: StoreTypes) => posts.post)
+    const post = useSelector(({posts}: Store) => posts.post)
 
     const filterMeta = post?.[type]?.length ? post?.[type].filter(m => m.name?.length > 1) : [];
 

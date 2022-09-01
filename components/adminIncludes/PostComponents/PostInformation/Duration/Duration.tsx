@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 interface DurationPropTypes {
     onChangeHandler: any,
@@ -8,7 +8,7 @@ interface DurationPropTypes {
 }
 
 const Duration: FC<DurationPropTypes> = ({onChangeHandler, rendering}) => {
-    const duration = useSelector((store: StoreTypes) => store.adminPanelPosts.post?.duration);
+    const duration = useSelector((store: Store) => store.adminPanelPosts.post?.duration);
     if (rendering) {
         return (
             <div className='post-information-section'>

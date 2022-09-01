@@ -2,9 +2,9 @@ import {FC} from 'react';
 import {useSelector} from 'react-redux';
 import dynamic from "next/dynamic";
 import GlobalStylesComponent from "../global/Styles/GlobalStylesComponent";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import SiteSettingSetter from '../includes/SiteSettingsSetter/SiteSettingsSetter'
 import LoadingV2 from "@components/includes/LoadingV2/LoadingV2";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const HeaderWidgetArea = dynamic(() => import('../widgetsArea/HeaderWidgetArea/HeaderWidgetArea'));
 const TopBarWidgetArea = dynamic(() => import('../widgetsArea/TopBarWidgetArea/TopBarWidgetArea'));
@@ -30,7 +30,7 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
         cookiePopupMessage,
         loginRegisterFormPopup,
         alert,
-    } = useSelector(({user, settings, globalState}: StoreTypes) => {
+    } = useSelector(({user, settings, globalState}: Store) => {
         return {
             loggedIn: user?.loggedIn,
             userRole: user?.userData?.role,

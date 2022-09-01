@@ -2,14 +2,14 @@
 // import Head from "next/head";
 // import {uniqueId} from "lodash";
 // import {useSelector} from "react-redux";
-// import {Meta, StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+// import {Meta, Store} from "@_variables/TypeScriptTypes/GlobalTypes";
 // import {useRouter} from "next/router";
 //
 // const PostMetaDataToSiteHead: FC = () => {
 //
 //     const {asPath,locale} = useRouter()
 //
-//     const {locals,keywords,post} = useSelector((store: StoreTypes) => {
+//     const {locals,keywords,post} = useSelector((store: Store) => {
 //         const post =  store.posts.post
 //         return {
 //             post,

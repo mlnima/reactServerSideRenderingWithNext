@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {adminEditPost, fetchAdminPanelSaveNewPost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
 import {setAlert} from "@store_toolkit/clientReducers/globalStateReducer";
 import {useRouter} from "next/router";
 import {fetchAdminPanelUpdatePost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const ActionOnPostStyledDiv = styled.div`
   display: flex;
@@ -20,7 +20,7 @@ const ActionOnPostStyledDiv = styled.div`
 
 const ActionOnPost = () => {
 
-    const ActionOnPostData = useSelector((store: StoreTypes) =>{
+    const ActionOnPostData = useSelector((store: Store) =>{
         return{
             userId:store.user.userData?._id,
             post:store?.adminPanelPosts.post

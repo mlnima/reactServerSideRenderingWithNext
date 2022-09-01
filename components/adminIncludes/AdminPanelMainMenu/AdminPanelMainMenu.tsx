@@ -5,9 +5,9 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSortDown} from "@fortawesome/free-solid-svg-icons";
 import { useSelector} from "react-redux";
 import {setSidebarStatus} from "@store_toolkit/adminReducers/adminPanelGlobalStateReducer";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import { useState} from "react";
 import {useAdminDispatch} from "@store_toolkit/hooks";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 // interface menuItemTypes{
 //     [key:string] :{
@@ -106,7 +106,7 @@ let StyledDiv = styled.div`
 
 const AdminPanelMainMenu = () => {
     const dispatch = useAdminDispatch()
-    const sidebar = useSelector(({adminPanelGlobalState}: StoreTypes) => adminPanelGlobalState?.sidebar)
+    const sidebar = useSelector(({adminPanelGlobalState}: Store) => adminPanelGlobalState?.sidebar)
 
     const sidebarItems = {
         Dashboard: {

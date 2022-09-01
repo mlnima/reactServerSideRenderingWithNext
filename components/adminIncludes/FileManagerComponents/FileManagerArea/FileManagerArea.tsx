@@ -1,19 +1,19 @@
 import React, {FC} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-
 import {faSlidersH} from "@fortawesome/free-solid-svg-icons";
 import {faCss3Alt, faJs, faSass} from "@fortawesome/free-brands-svg-icons";
 import {faFile, faFolder} from "@fortawesome/free-regular-svg-icons";
 import styled from "styled-components";
 import fileTypeDetector from "@_variables/util/fileTypeDetector";
 import { useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+
 
 import {
     adminPanelFileManagerEditState,
     fetchFileManagerUploadFile
 } from "@store_toolkit/adminReducers/adminPanelFileManagerReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const FileManagerAreaStyledDiv = styled.div`
   display: grid;
@@ -60,7 +60,7 @@ const FileManagerAreaStyledDiv = styled.div`
 
 const FileManagerArea:FC = () => {
     const dispatch = useAdminDispatch()
-    const fileManagerData = useSelector(({adminPanelFileManager}: StoreTypes) => adminPanelFileManager)
+    const fileManagerData = useSelector(({adminPanelFileManager}: Store) => adminPanelFileManager)
 
 
 

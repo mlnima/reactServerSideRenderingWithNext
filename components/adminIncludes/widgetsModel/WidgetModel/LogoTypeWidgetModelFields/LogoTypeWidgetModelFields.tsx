@@ -1,10 +1,11 @@
 import React, {FC} from 'react';
 import TextInputFieldForWidget from "../TextInputFieldForWidget/TextInputFieldForWidget";
-import {WidgetDataPropTypes, WidgetSettingsPropTypes} from "@_variables/TypeScriptTypes/Widgets";
+// import { WidgetSettingsPropTypes} from "@_variables/../../../../../trash/TypeScriptTypes/Widgets";
+import {WidgetData,WidgetSettingsPropTypes} from "@_typeScriptTypes/widgets/Widget";
 
 interface LogoTypeWidgetModelFieldsPropTypes {
     widgetSettings: WidgetSettingsPropTypes,
-    widgetData: WidgetDataPropTypes,
+    widgetData: WidgetData,
     onUniqueDataChangeHandlerWithTranslate: any,
     onUniqueDataChangeHandler: any,
 }

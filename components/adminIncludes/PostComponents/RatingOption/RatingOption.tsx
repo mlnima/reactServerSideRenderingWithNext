@@ -1,11 +1,11 @@
 import { useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {adminEditPost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
 import {FC} from "react";
 import {useAdminDispatch} from "@store_toolkit/hooks";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const RatingOption:FC = () => {
-    const post = useSelector((store:StoreTypes) => store?.adminPanelPosts.post);
+    const post = useSelector((store:Store) => store?.adminPanelPosts.post);
     const dispatch = useAdminDispatch()
 
     return (

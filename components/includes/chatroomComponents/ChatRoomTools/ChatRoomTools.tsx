@@ -6,8 +6,8 @@ import {useRouter} from "next/router";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {useAppDispatch} from "@store_toolkit/hooks";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const ChatRoomToolsStyledFrom = styled.form`
   position: fixed;
@@ -78,7 +78,7 @@ const ChatRoomToolsStyledFrom = styled.form`
 
 const ChatRoomTools = () => {
     const dispatch = useAppDispatch()
-    const userData = useSelector(({user}:StoreTypes) => user?.userData)
+    const userData = useSelector(({user}:Store) => user?.userData)
     const colorPicker = useRef(null)
     const router = useRouter()
 

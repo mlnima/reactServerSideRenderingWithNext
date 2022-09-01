@@ -1,18 +1,16 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {RootState} from "../store";
 import _reduceWidgetsToGroups from "../../_variables/_reduceWidgetsToGroups/_reduceWidgetsToGroups";
-import {WidgetPropTypes} from "@_variables/TypeScriptTypes/Widgets";
-import {HYDRATE} from "next-redux-wrapper";
 import Axios from "@_variables/util/Axios";
 import _getMultipleWidgetWithDataQueryGenerator
     from "@_variables/clientVariables/_getMultipleWidgetWithDataQueryGenerator";
 import {loading, setAlert} from "@store_toolkit/clientReducers/globalStateReducer";
-import {NextRouter} from "next/router";
 import {AxiosResponse} from "axios";
+import {Widget} from "@_typeScriptTypes/widgets/Widget";
 
 interface WidgetsState {
     widgetInGroups: {
-        [key: string]: WidgetPropTypes[]
+        [key: string]: Widget[]
     },
     requestedWidgets: string[]
 }
@@ -21,7 +19,6 @@ const initialState: WidgetsState = {
     widgetInGroups: {},
     requestedWidgets: []
 }
-
 
 export const fetchWidgets = createAsyncThunk(
     'widgets/fetchWidgets',
@@ -87,9 +84,6 @@ export const widgetsSlice = createSlice({
     },
     extraReducers: (builder) => builder
             .addCase(fetchWidgets.fulfilled, (state, action: PayloadAction<any>) => {
-                // console.log([...state.requestedWidgets,...action.payload.requestedWidgets])
-                // console.log([...state.requestedWidgets])
-                // console.log(action.payload.requestedWidgets)
                 return {
                     ...state,
                     requestedWidgets: [...new Set([...(state.requestedWidgets || []),...(action.payload?.requestedWidgets || [])])],

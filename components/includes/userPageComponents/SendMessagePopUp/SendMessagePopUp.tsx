@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import SendMessagePopUpHeader from "./SendMessagePopUpHeader";
 import {useSelector} from "react-redux";
 import styled from "styled-components";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {fetchSendMessage} from "@store_toolkit/clientReducers/userReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const SendMessagePopUpStyledDiv = styled.div`
   display: flex;
@@ -44,7 +44,7 @@ const SendMessagePopUpStyledDiv = styled.div`
 `
 const SendMessagePopUp = props => {
     const dispatch = useAppDispatch()
-    const userData = useSelector((store: StoreTypes) => store?.user.userData)
+    const userData = useSelector((store: Store) => store?.user.userData)
     const [state, setState] = useState({
         sender: userData._id,
         receiver: props.receiverId,
