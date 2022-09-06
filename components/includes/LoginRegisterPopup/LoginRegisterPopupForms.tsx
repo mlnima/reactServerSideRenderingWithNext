@@ -1,6 +1,4 @@
 import React, {useState, useEffect, FC, useRef} from 'react';
-import {faTimes} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useTranslation} from 'next-i18next';
 import {useSelector} from 'react-redux';
 import styled from "styled-components";
@@ -35,6 +33,9 @@ const LoginRegisterPopupFormsStyledDiv = styled.div`
       color: var(--navigation-text-color, #ccc);
       border: none;
       padding: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
       svg {
         margin: 5px 3px 0 3px;
@@ -277,7 +278,12 @@ const LoginRegisterPopupForms: FC = () => {
                             onTouchStart={() => dispatch(loginRegisterForm(false))}
                             className='close-form-button' title={t(`Close`)}
                     >
-                        <FontAwesomeIcon icon={faTimes}/>
+
+                        <SvgRenderer svgUrl={'/public/asset/images/icons/xmark-solid.svg'}
+                                     size={25}
+                                     customClassName={'show-password'}
+                                     color={'var(--serachbar-widget-text-color, #fff)'}
+                        />
                     </button>
                 </div>
 

@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import MenuWidgetEditForm from "./MenuWidgetEditForm";
-import _ from "lodash";
 import EditSubMenuForm from "./subMenuComponenets/EditSubMenuForm";
 import styled from "styled-components";
 
@@ -154,7 +153,7 @@ const MenuWidgetModelFieldsPreview = props => {
     const renderSubMenus = (itemData?.subItems || []).map(subItem => {
         return (
             <EditSubMenuForm
-                key={_.uniqueId('id_')}
+                key={`${itemData.name}${itemData.itemId}${itemData.itemIndex}`}
                 parentId={itemData.itemId}
                 data={subItem}
                 onChangeHandler={onChangeHandler}

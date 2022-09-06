@@ -7,7 +7,6 @@ import TextInputFieldForWidget
     from "@components/adminIncludes/widgetsModel/WidgetModel/TextInputFieldForWidget/TextInputFieldForWidget";
 import {useSelector} from "react-redux";
 import widgetsStaticPositions from "@_dataStructures/widgetsStaticPositions";
-import {flatMap} from "lodash";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
 import {WidgetData, WidgetSettingsPropTypes} from "@_typeScriptTypes/widgets/Widget";
 
@@ -37,7 +36,8 @@ const DefaultFields: FC<DefaultFieldsPropTypes> =
         const positions = useMemo(() => {
             return [
                 ...widgetsStaticPositions,
-                ...flatMap(customPages, (customPage => [customPage, customPage + 'LeftSidebar', customPage + 'RightSidebar']))
+                // ...flatMap(customPages, (customPage => [customPage, customPage + 'LeftSidebar', customPage + 'RightSidebar'])),
+                ...customPages.flatMap((customPage => [customPage, customPage + 'LeftSidebar', customPage + 'RightSidebar']) ),
             ]
         }, [customPages])
 

@@ -1,6 +1,6 @@
 //_clientPostsAsyncThunksFetchPost
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import isValidObjectId from "@_variables/util/mongoIdValidator";
+import isValidObjectId from "@_variables/util/mongoIdValidatorClient";
 import Axios from "@_variables/util/Axios";
 import _postPageQueryGenerator from "@_variables/clientVariables/_postPageQueryGenerator";
 import {setHeadData} from "@store_toolkit/clientReducers/globalStateReducer";

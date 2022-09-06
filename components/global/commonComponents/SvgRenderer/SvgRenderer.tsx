@@ -8,6 +8,8 @@ interface SvgRendererPropTypes {
     width?: number,
     height?: number,
     size?: number,
+    customStyle?: string,
+
 }
 
 interface StylePropTypes {
@@ -15,6 +17,8 @@ interface StylePropTypes {
     color?: string,
     width?: number,
     height?: number,
+    customStyle?: string,
+    style?: string,
     size?: number,
 }
 
@@ -24,11 +28,18 @@ const Style = styled.span`
   width: ${({width, size}: StylePropTypes) => width || size || 48}px;
   height: ${({height, size}: StylePropTypes) => height || size || 48}px;
   background-color: ${({color}: StylePropTypes) => color || ' var(--main-text-color, #ccc) '};
+
+  //span &{
+  //display: flex;
+  //justify-content: center;
+  //align-items: center;
+  //}
+  ${({customStyle}:StylePropTypes)=>customStyle}
 `
 
-const SvgRenderer: FC<SvgRendererPropTypes> = ({customClassName, svgUrl, size, color}) => {
+const SvgRenderer: FC<SvgRendererPropTypes> = ({customClassName, svgUrl, size, color,customStyle}) => {
     return (
-        <Style className={`${customClassName + ' ' || ''}icon`} svgUrl={svgUrl} size={size} color={color}/>
+        <Style className={`${customClassName + ' ' || ''}icon`} svgUrl={svgUrl} size={size} color={color} customStyle={customStyle} />
     )
 };
 

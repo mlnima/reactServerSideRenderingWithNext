@@ -1,7 +1,4 @@
-import React, {FC} from "react";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faClone, faSave} from "@fortawesome/free-regular-svg-icons";
-import {faTrash} from "@fortawesome/free-solid-svg-icons";
+import {FC} from "react";
 import ExportWidget from './ExportWidget/ExportWidget'
 import {useSelector} from "react-redux";
 import {
@@ -11,6 +8,7 @@ import {
 import {useAdminDispatch} from "@store_toolkit/hooks";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
 import {Widget} from "@_typeScriptTypes/widgets/Widget";
+import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 
 
 interface ActionButtonsPropTypes {
@@ -61,16 +59,19 @@ const ActionButtons: FC<ActionButtonsPropTypes> = ({widgetData, widgetId, widget
     return (
         <div className='control-buttons'>
             <button className={'btn btn-primary'} title="save" onClick={() => onSaveHandler()}>
-                <FontAwesomeIcon icon={faSave} style={{
-                    width: '15px',
-                    height: '15px'
-                }}/></button>
+                <SvgRenderer svgUrl={'/public/asset/images/icons/floppy-disk-solid.svg'}
+                             size={20}
+                             color={'var(--primary-button-link-text-color, #000)'}/>
+
+            </button>
+
+
             <ExportWidget data={{...widgetData}}/>
             <button className={'btn btn-primary'} title="clone" onClick={() => onCloneHandler()}>
-                <FontAwesomeIcon icon={faClone} style={{
-                    width: '15px',
-                    height: '15px'
-                }}/></button>
+                <SvgRenderer svgUrl={'/public/asset/images/icons/clone-solid.svg'}
+                             size={20}
+                             color={'var(--primary-button-link-text-color, #000)'}/>
+            </button>
             <button className={'btn btn-primary'} title="delete"
                     onClick={() => widgetSettings.renderDeleteBtn ? setWidgetSettings({
                         ...widgetSettings,
@@ -79,7 +80,9 @@ const ActionButtons: FC<ActionButtonsPropTypes> = ({widgetData, widgetId, widget
                         ...widgetSettings,
                         renderDeleteBtn: true
                     })}>
-                <FontAwesomeIcon icon={faTrash} style={{width: '15px', height: '15px'}}/>
+                <SvgRenderer svgUrl={'/public/asset/images/icons/trash-can-solid.svg'}
+                             size={20}
+                             color={'var(--primary-button-link-text-color, #000)'}/>
             </button>
             {widgetSettings.renderDeleteBtn ?
                 <button className={'btn btn-danger'} onClick={() => onDeleteHandler()}>

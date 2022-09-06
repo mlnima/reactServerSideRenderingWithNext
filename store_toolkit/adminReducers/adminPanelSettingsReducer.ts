@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "@store_toolkit/store";
 import Axios from "@_variables/util/Axios";
-import _getMultipleSettingsQueryGenerator from "@_variables/clientVariables/_getMultipleSettingsQueryGenerator";
+import _getMultipleSettingsQueryGenerator from "@_variables/adminVariables/_getMultipleSettingsQueryGenerator";
 import {loading, setAlert} from "@store_toolkit/clientReducers/globalStateReducer";
 import {AxiosResponse} from "axios";
 import {setSettingsForAdmin} from "@store_toolkit/clientReducers/settingsReducer";
@@ -27,7 +27,7 @@ export const adminPanelGetSettings = createAsyncThunk(
     'adminPanelSettings/adminPanelGetSettings',
     async (data:any, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await Axios.get(`/api/admin/settings/getMultipleSetting${_getMultipleSettingsQueryGenerator(['identity', 'design', 'adminSettings'], false)}&token=${localStorage.wt}`)
+        return await Axios.get(`/api/admin/settings/getMultipleSetting${_getMultipleSettingsQueryGenerator(['identity', 'design', 'adminSettings'])}&token=${localStorage.wt}`)
             .then(res => {
 
                 const designSettings = res.data?.settings?.find((setting: any) => setting.type === 'design') || {};

@@ -1,7 +1,5 @@
 import ProfileNavigation from '@components/includes/profilePageComponents/ProfileNavigation/ProfileNavigation';
 import ProfileImage from "@components/includes/profilePageComponents/ProfileImage/ProfileImage";
-import {faCamera} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 import Link from "next/link";
@@ -11,6 +9,7 @@ import type { ReactElement } from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 
 const ProfileStyledMain = styled.main`
   display: flex;
@@ -94,7 +93,10 @@ const Profile = () => {
 
             <div className='profile-posts'>
                 <div className='profile-no-posts'>
-                    <FontAwesomeIcon className='upload-profile-image-btn-svg' icon={faCamera}/>
+
+                    <SvgRenderer svgUrl={'/public/asset/images/icons/camera-solid.svg'}
+                                 size={20}
+                                 color={'var(--navigation-text-color, #ccc)'}/>
                 </div>
                 <h2 className='profile-no-posts-title'>No Post Yet </h2>
                 <p className='profile-no-posts-title'> Coming Soon</p>

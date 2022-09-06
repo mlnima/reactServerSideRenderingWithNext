@@ -205,7 +205,7 @@ const PostsSlider: FC<PostsSliderPropsTypes> =
         const renderSlides = postsToRender.map((post, index) => {
 
             const postProps = {
-                views: _shortNumber(post.views || 0),
+                views: _shortNumber(post.views || 0) as number,
                 cardWidth,
                 postsPerRawForMobile,
                 rating: post.likes || post.disLikes ? ratingCalculator(post.likes, post.disLikes) : null,

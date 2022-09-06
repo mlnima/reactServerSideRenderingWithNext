@@ -2,9 +2,9 @@ import {FC,  useMemo, useState} from "react";
 import Select from 'react-select';
 import styled from "styled-components";
 import getMetaSuggestion from '@_variables/clientAjaxVariables/getMetaSuggestion'
-import {uniqBy} from 'lodash'
 import {useSelector} from "react-redux";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {_uniqBy} from "@_variables/util/arrayUtils/_uniqBy";
 
 const MetaDataSelectorStyledDiv = styled.div`
 
@@ -48,7 +48,8 @@ const MetaDataSelector: FC<ComponentPropTypes> =
             const selectedIds = [...new Set(selected.map((meta) => meta.value))]
             const findSelectedMeta = [...suggestion, ...editingPostData?.[type]]
                                      .filter(meta => selectedIds.includes(meta._id))
-            onMetaChangeHandler(uniqBy(findSelectedMeta, meta => meta._id), type)
+            // onMetaChangeHandler(uniqBy(findSelectedMeta, meta => meta._id), type)
+            onMetaChangeHandler(_uniqBy(findSelectedMeta, '_id'), type)
         }
 
 

@@ -1,3 +1,4 @@
+import 'module-alias/register';
 import dotenv from 'dotenv';
 dotenv.config();
 import connectToDatabase from '../_variables/connectToDatabase';
@@ -5,14 +6,12 @@ connectToDatabase('Socket Server').finally()
 import http from 'http'
 import express from 'express'
 import cors from 'cors'
-import _ from 'lodash'
 import chatroomSchema from '../models/chatroomSchema'
+import _uniqBy from "@_variables/util/arrayUtils/_uniqBy";
 const app = express();
 const server = http.createServer(app);
 
 app.use(cors())
-
-console.log('running')
 
 const {userJoin, userLeave, getUsersListOfRoom} = require('./users')
 let chatroomMessages = []
@@ -114,7 +113,8 @@ io.on('connection', socket => {
 
     socket.on('joinUserToTheRoom', async userData => {
         const updatedUserList = [...chatroomOnlineUsers, userData]
-        chatroomOnlineUsers = _.uniqBy(updatedUserList, e => e.username);
+        //chatroomOnlineUsers = _.uniqBy(updatedUserList, e => e.username);
+        chatroomOnlineUsers = _uniqBy(updatedUserList, 'username');
         io.in(userData.chatRoomName).emit('userListUpdated', chatroomOnlineUsers)
     });
 
@@ -123,7 +123,8 @@ io.on('connection', socket => {
     });
 
     socket.on('onlineUsersList', () => {
-        io.to(socket.id).emit('onlineUsersList', _.uniqBy(chatroomOnlineUsers, e => e.username))
+        //io.to(socket.id).emit('onlineUsersList', _.uniqBy(chatroomOnlineUsers, e => e.username))
+        io.to(socket.id).emit('onlineUsersList', _uniqBy(chatroomOnlineUsers, 'username'))
     });
 
     socket.on('messageToChatroom', async newMessageData => {

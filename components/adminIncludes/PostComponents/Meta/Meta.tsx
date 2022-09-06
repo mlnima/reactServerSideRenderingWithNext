@@ -1,19 +1,22 @@
 import React, {FC, useRef} from 'react';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPlus, faTimes} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import { useSelector} from "react-redux";
 import {adminEditPost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
-// import {uniqBy} from "lodash";
 import {_uniqBy} from "@_variables/util/arrayUtils/_uniqBy";
 import {useAdminDispatch} from "@store_toolkit/hooks";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 
 const MetaStyledDiv = styled.div`
   .add-new-meta {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    button{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
   .small-info {
     font-size: 12px;
@@ -83,7 +86,10 @@ const Meta:FC<MetaPropType> = props => {
         return (
             <button key={index} name={item?.name} onClick={(e) => deleteItem(e)} className='btn btn-danger'>
                 {item?.name}
-                <FontAwesomeIcon style={{width: '16px', height: '16px'}} icon={faTimes} />
+                <SvgRenderer svgUrl={'/public/asset/images/icons/xmark-solid.svg'}
+                             size={16}
+                             customClassName={'show-password'}
+                             color={'#fff'}/>
             </button>
         )
     });
@@ -93,7 +99,12 @@ const Meta:FC<MetaPropType> = props => {
         <MetaStyledDiv className='post-meta-editor'>
             <form className="add-new-meta" onSubmit={e => addNewItem(e)}>
                 <input className={'form-control-input'} ref={newItemsElement} type='text'/>
-                <button className={'btn btn-success'} type='submit'><FontAwesomeIcon style={{width: '16px', height: '16px'}} icon={faPlus} className='post-element-info-logo'/></button>
+                <button className={'btn btn-success'} type='submit'>
+                    <SvgRenderer svgUrl={'/public/asset/images/icons/plus-solid.svg'}
+                                 size={16}
+                                 customClassName={'show-password'}
+                                 color={'#fff'}/>
+                </button>
             </form>
             <span className='small-info'>Separate tags with commas</span>
             <div className="items">

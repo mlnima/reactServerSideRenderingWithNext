@@ -1,9 +1,8 @@
 import React from 'react';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import ItemCountUI from "./ItemCountUI";
 import {useRouter} from "next/router";
 import styled from "styled-components";
+
 let StyledDiv = styled.div`
  width: 100%;
   display: flex;
@@ -100,8 +99,9 @@ const CheckOutItemPreview = props => {
                     </>
                     : null}
                 <div className='count-remove'>
-                    <button className='check-out-item-remove' onClick={() => onRemoveItemFromBasketHandler()}><FontAwesomeIcon className='check-out-item-remove-icon'
-                                                                                                                               icon={faTrash}/></button>
+                    <button className='check-out-item-remove' onClick={() => onRemoveItemFromBasketHandler()}>
+                        {/*<FontAwesomeIcon className='check-out-item-remove-icon' icon={faTrash}/>*/}
+                    </button>
                     <ItemCountUI count={props.count} productId={props.productId}/>
                 </div>
 

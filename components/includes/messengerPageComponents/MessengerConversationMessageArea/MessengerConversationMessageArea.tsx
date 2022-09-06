@@ -1,9 +1,9 @@
 import React, {useEffect, useRef} from 'react';
-import _ from "lodash";
 import MessengerConversationMessage from "./MessengerConversationMessage";
 import {useSelector} from "react-redux";
 import styled from "styled-components";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {_uniqBy} from "@_variables/util/arrayUtils/_uniqBy";
 
 interface MessengerConversationMessageAreaTypes {
     connectedUserData: object,
@@ -41,13 +41,27 @@ const MessengerConversationMessageArea = ({connectedUserData, userData}: Messeng
 
     return (
         <MessengerConversationMessageAreaStyledDiv className='messenger-conversation-message-area' ref={messageArea}>
+            {/*{messages?*/}
+            {/*    _.uniqBy((messages || []),(message: any)=> {*/}
+            {/*        return message.createdAt*/}
+            {/*    }).map((message: any) => {*/}
+            {/*        return (*/}
+            {/*            <MessengerConversationMessage*/}
+            {/*                key={_.uniqueId('message_')}*/}
+            {/*                message={message}*/}
+            {/*                connectedUserData={connectedUserData}*/}
+            {/*                // @ts-ignore*/}
+            {/*                currentUserId={userData._id}*/}
+            {/*            />*/}
+            {/*        )*/}
+            {/*    })*/}
+            {/*    :null*/}
+            {/*}*/}
             {messages?
-                _.uniqBy((messages || []),(message: any)=> {
-                    return message.createdAt
-                }).map((message: any) => {
+                _uniqBy((messages || []),'createdAt').map((message: any) => {
                     return (
                         <MessengerConversationMessage
-                            key={_.uniqueId('message_')}
+                            key={message.createdAt}
                             message={message}
                             connectedUserData={connectedUserData}
                             // @ts-ignore

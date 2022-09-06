@@ -4,7 +4,7 @@ import {useRouter} from "next/router";
 import _adminGetPostsQueryGenerator from "@_variables/adminVariables/_adminGetPostsQueryGenerator";
 import {useSelector} from "react-redux";
 import styled from "styled-components";
-import _metaPageQueryGenerator from "../../../_variables/clientVariables/_metaPageQueryGenerator";
+import _metaPageQueryGenerator from "@_variables/clientVariables/_metaPageQueryGenerator";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import {fetchAdminPanelMetas, fetchAdminPanelPosts} from "@store_toolkit/adminReducers/adminPanelPostsReducer";

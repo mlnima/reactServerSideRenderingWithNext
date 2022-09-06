@@ -1,38 +1,44 @@
 import React, {useEffect, useState, useRef, FC} from 'react';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPlus, faTimes, faUpload} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
-import { useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {fetchFileManagerUploadFile} from "@store_toolkit/adminReducers/adminPanelFileManagerReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 
 let StyledDiv = styled.div`
-    display: flex;
-    .product-information-image-preview{
-      .image-remove-btn{
-        border-radius: 50%;
-        border: white .2px solid;
-        width: 30px;
-        height: 30px;
-        padding: 0;
-        margin: 0;
-        svg{
-          width: 20px;
-          height: 20px;
+  display: flex;
 
-        }
-        &:hover{
-          transform: scale(1.1);
-          transition: .5s;
-        }
+  .product-information-image-preview {
+    .image-remove-btn {
+      border-radius: 50%;
+      border: white .2px solid;
+      width: 30px;
+      height: 30px;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      svg {
+        width: 20px;
+        height: 20px;
+
       }
-      &:hover{
-        transform: scale(1.3);
+
+      &:hover {
+        transform: scale(1.1);
         transition: .5s;
-        z-index: 10;
       }
     }
+
+    &:hover {
+      transform: scale(1.3);
+      transition: .5s;
+      z-index: 10;
+    }
+  }
 `
 
 interface ImageGalleryPropTypes {
@@ -40,12 +46,12 @@ interface ImageGalleryPropTypes {
     rendering: boolean
 }
 
-const ImageGallery:FC<ImageGalleryPropTypes> = ({onChangeHandler, rendering}) => {
+const ImageGallery: FC<ImageGalleryPropTypes> = ({onChangeHandler, rendering}) => {
     const dispatch = useAdminDispatch()
     const uploadInputElement = useRef(null)
 
-    const post = useSelector((store:Store) => store.adminPanelPosts.post);
-    
+    const post = useSelector((store: Store) => store.adminPanelPosts.post);
+
     const [state, setState] = useState({
         images: [],
         imageFromUrl: ''
@@ -74,7 +80,12 @@ const ImageGallery:FC<ImageGalleryPropTypes> = ({onChangeHandler, rendering}) =>
         return (
             <div className='product-information-image-preview' key={image + Date.now()}>
                 <img src={image}/>
-                <button className='image-remove-btn' onClick={() => onRemoveImageHandler()}> <FontAwesomeIcon icon={faTimes} className='post-element-info-logo'/></button>
+                <button className='image-remove-btn' onClick={() => onRemoveImageHandler()}>
+                    <SvgRenderer svgUrl={'/public/asset/images/icons/xmark-solid.svg'}
+                                 size={25}
+                                 customClassName={'show-password'}
+                                 color={'#fff'}/>
+                </button>
             </div>
         )
     });
@@ -97,7 +108,7 @@ const ImageGallery:FC<ImageGalleryPropTypes> = ({onChangeHandler, rendering}) =>
         filesData.append('type', 'gallery')
 
 
-        dispatch(fetchFileManagerUploadFile({file: filesData, useType:'postImageGallery',postData:post}))
+        dispatch(fetchFileManagerUploadFile({file: filesData, useType: 'postImageGallery', postData: post}))
         // uploadFiles(filesData).then(res => {
         //     // labelOutputElement.current.value =res.data.path
         //     const e = {
@@ -120,10 +131,20 @@ const ImageGallery:FC<ImageGalleryPropTypes> = ({onChangeHandler, rendering}) =>
                 <div className=' product-information-section product-information-add-image'>
                     <input value={state.imageFromUrl}
                            onChange={e => setState({...state, imageFromUrl: e.target.value})}/>
-                    <button onClick={() => onAddImageFromUrlHandler()}><FontAwesomeIcon icon={faPlus} className='post-element-info-logo'/></button>
+                    <button onClick={() => onAddImageFromUrlHandler()}>
+                        <SvgRenderer svgUrl={'/public/asset/images/icons/plus-solid.svg'}
+                                     size={25}
+                                     customClassName={'show-password'}
+                                     color={'#fff'}/>
+                    </button>
                     <input ref={uploadInputElement} type="file" style={{display: 'none'}}
                            onChange={e => onUploadHandler(e)}/>
-                    <button onClick={() => uploadInputElement.current.click()}><FontAwesomeIcon icon={faUpload} className='post-element-info-logo'/></button>
+                    <button onClick={() => uploadInputElement.current.click()}>
+                        <SvgRenderer svgUrl={'/public/asset/images/icons/upload-solid.svg'}
+                                     size={25}
+                                     customClassName={'show-password'}
+                                     color={'#fff'}/>
+                    </button>
                 </div>
                 <div className='post-information-section'>
                     <StyledDiv className='product-information-images-preview'>

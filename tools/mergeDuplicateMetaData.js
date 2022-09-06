@@ -3,7 +3,6 @@ require('../expressServer/_variables/connectToDatabase')
 const mongoose = require('mongoose');
 const postSchema = require('../expressServer/models/postSchema')
 const metaSchema = require('../expressServer/models/metaSchema')
-const {lowerCase} = require("lodash");
 
 const mergeDuplicateMetaData = async (type) => {
 

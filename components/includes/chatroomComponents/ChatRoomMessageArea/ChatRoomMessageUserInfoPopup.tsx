@@ -1,5 +1,3 @@
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import {useRouter} from "next/router";
 import styled from "styled-components";
@@ -10,8 +8,9 @@ import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReduce
 import {setActiveVisibleProfile} from "@store_toolkit/clientReducers/chatroomReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 
-
+//modify-require
 const ChatRoomMessageUserInfoPopupStyledDiv = styled.div`
   display: flex;
   justify-content: center;
@@ -126,7 +125,7 @@ const ChatRoomMessageUserInfoPopup = () => {
 
     const onConversationHandler = () => {
         if (loggedIn) {
-            dispatch(fetchStartConversation({_id:activeVisibleProfile._id, push}))
+            dispatch(fetchStartConversation({_id: activeVisibleProfile._id, push}))
         } else {
             dispatch(loginRegisterForm('register'))
         }
@@ -146,7 +145,12 @@ const ChatRoomMessageUserInfoPopup = () => {
                                              dispatch(setActiveVisibleProfile({}))
                                          }}
                                                className='chatroom-message-user-info-popup-content-close-button'>
-                    <FontAwesomeIcon style={{width: '20px', height: '20px'}} icon={faTimes}/>
+
+                                                <SvgRenderer
+                                                    svgUrl={'/public/asset/images/icons/xmark-solid.svg'}
+                                                    size={25}
+                                                    customClassName={'download-logo'}
+                                                    color={'var(--primary-button-link-text-color, #000)'}/>
                  </span>
                         </div>
 

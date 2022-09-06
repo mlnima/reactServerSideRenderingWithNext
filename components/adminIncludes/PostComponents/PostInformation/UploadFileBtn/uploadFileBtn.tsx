@@ -1,9 +1,8 @@
-import React, { useRef } from 'react';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faUpload} from "@fortawesome/free-solid-svg-icons";
+import { useRef } from 'react';
 import styled from "styled-components";
 import {fetchFileManagerUploadFile} from "@store_toolkit/adminReducers/adminPanelFileManagerReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
+import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 
 const UploadFileBtnStyledDiv = styled.div`
   button{
@@ -67,12 +66,16 @@ const UploadFileBtn = props => {
         }
     }
 
-
     return (
         <UploadFileBtnStyledDiv>
             <input className={'form-control-input'} ref={ uploadInputElement } type="file" style={ { display: 'none' } } onChange={ e => onUploadHandler(e) }/>
             <button  className={'btn btn-success'} onClick={ () => uploadInputElement.current.click() } onDrop={e=>onDropFileHandler(e)} onDragOver={e=>e.preventDefault()}>
-                <FontAwesomeIcon icon={faUpload} />
+
+                <SvgRenderer svgUrl={'/public/asset/images/icons/upload-solid.svg'}
+                             size={25}
+                             customClassName={'show-password'}
+                             color={'var(--serachbar-widget-text-color, #fff)'}
+                />
             </button>
         </UploadFileBtnStyledDiv>
     );

@@ -1,0 +1,26 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var tslib_1 = require("tslib");
+var express_1 = require("express");
+var adminAuthMiddleware_1 = tslib_1.__importDefault(require("../../middlewares/adminAuthMiddleware"));
+var adminReadPath_1 = tslib_1.__importDefault(require("./adminFileManagerControllers/adminReadPath"));
+var adminReadFile_1 = tslib_1.__importDefault(require("./adminFileManagerControllers/adminReadFile"));
+var adminDeleteFile_1 = tslib_1.__importDefault(require("./adminFileManagerControllers/adminDeleteFile"));
+var adminUploadFile_1 = tslib_1.__importDefault(require("./adminFileManagerControllers/adminUploadFile"));
+var adminUploadFiles_1 = tslib_1.__importDefault(require("./adminFileManagerControllers/adminUploadFiles"));
+var adminPostThumbnailsUpload_1 = tslib_1.__importDefault(require("./adminFileManagerControllers/adminPostThumbnailsUpload"));
+var adminCreateNewFileOrFolder_1 = tslib_1.__importDefault(require("./adminFileManagerControllers/adminCreateNewFileOrFolder"));
+var adminUpdateTranslationsFile_1 = tslib_1.__importDefault(require("./adminFileManagerControllers/adminUpdateTranslationsFile"));
+var adminReadTranslationsFile_1 = tslib_1.__importDefault(require("./adminFileManagerControllers/adminReadTranslationsFile"));
+var router = (0, express_1.Router)();
+router.post('/readPath', adminAuthMiddleware_1.default, adminReadPath_1.default);
+router.post('/readFile', adminAuthMiddleware_1.default, adminReadFile_1.default);
+router.post('/deleteFile', adminAuthMiddleware_1.default, adminDeleteFile_1.default);
+router.post('/uploadFile', adminAuthMiddleware_1.default, adminUploadFile_1.default);
+router.post('/uploadFiles', adminAuthMiddleware_1.default, adminUploadFiles_1.default);
+router.post('/postThumbnailsUpload', adminAuthMiddleware_1.default, adminPostThumbnailsUpload_1.default);
+router.post('/create', adminAuthMiddleware_1.default, adminCreateNewFileOrFolder_1.default);
+router.post('/updateTranslationsFile', adminAuthMiddleware_1.default, adminUpdateTranslationsFile_1.default);
+router.post('/readTranslationsFile', adminAuthMiddleware_1.default, adminReadTranslationsFile_1.default);
+exports.default = router;
+//# sourceMappingURL=adminFileManagerRouter.js.map

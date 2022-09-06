@@ -9,7 +9,7 @@ const updateSaveMetas = require("../controllers/adminControllers/_variables/_upd
 const download = require('image-downloader')
 const fsExtra = require("fs-extra");
 const fs = require("fs");
-const fileDownloader = require('../util/fileDownloader')
+const fileDownloader = require('@_variables/serverUtil/fileDownloader')
 
 const imageDownloader = async (newPost) => {
 

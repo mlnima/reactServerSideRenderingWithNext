@@ -91,6 +91,3 @@ const LoadingV2: FC = () => {
 };
 
 export default LoadingV2;
-// <button className='stop-loading fas fa-times' onClick={() => dispatch(setLoading(false))}>
-//     <FontAwesomeIcon style={{width: '1rem', height: '1rem'}} icon={faTimes} className='stop-loading-icon'/>
-// </button>

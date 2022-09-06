@@ -20,205 +20,149 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/_typeScriptTypes/Chatroom/ChatroomMessage.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_typeScriptTypes/Meta.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_typeScriptTypes/Page.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_typeScriptTypes/Post.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_typeScriptTypes/Translations.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_typeScriptTypes/axiosTypes/AxiosErrorTypes.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_typeScriptTypes/axiosTypes/AxiosResponseTypes.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_typeScriptTypes/settings/DesignSettings.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_typeScriptTypes/settings/IdentitySettings.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_typeScriptTypes/settings/SettingsState.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_typeScriptTypes/storeTypes/AdminPanelComments.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_typeScriptTypes/storeTypes/AdminPanelFileManager.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_typeScriptTypes/storeTypes/AdminPanelForms.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_typeScriptTypes/storeTypes/AdminPanelGlobalState.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_typeScriptTypes/storeTypes/AdminPanelOrders.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_typeScriptTypes/storeTypes/AdminPanelPages.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_typeScriptTypes/storeTypes/AdminPanelPosts.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_typeScriptTypes/storeTypes/AdminPanelSettings.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_typeScriptTypes/storeTypes/AdminPanelTerminalState.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_typeScriptTypes/storeTypes/AdminPanelUsers.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_typeScriptTypes/storeTypes/AdminPanelWidgets.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_typeScriptTypes/storeTypes/ChatroomState.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_typeScriptTypes/storeTypes/GlobalState.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_typeScriptTypes/storeTypes/PostsState.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_typeScriptTypes/storeTypes/SettingsState.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_typeScriptTypes/storeTypes/Store.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_typeScriptTypes/storeTypes/UserState.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_typeScriptTypes/storeTypes/WidgetsState.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_typeScriptTypes/widgets/MenuWidget/MenuItem.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_typeScriptTypes/widgets/Widget.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/_variables/serverUtil/fileDownloader.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/_variables/serverUtil/mongoIdValidator.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/arrow-left-solid.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/camera-solid.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/cart-plus-solid.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/check-solid.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/circle-user-solid.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/clone-solid.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/css3-alt-.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/dollar-sign-solid.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/download-solid.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/eraser-solid.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/euro-sign-solid.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/file-export-solid.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/file-solid.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/floppy-disk-solid.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/gear-solid.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/gears-solid.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/js-.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/lock-open-solid.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/lock-solid.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/pen-to-square-solid.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/phone-slash-solid.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/phone-solid.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/sass-.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/share-solid.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/sliders-solid.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/typescript-seeklogo.com.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/upload-solid.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/user-shield-solid.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/video-slash-solid.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/video-solid.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_typeScriptTypes/Comment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_typeScriptTypes/Comment.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_typeScriptTypes/User.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_typeScriptTypes/User.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_typeScriptTypes/Widget.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/TypeScriptTypes/AdminPanelTypes.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/TypeScriptTypes/ClientPagesTypes.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/TypeScriptTypes/PostTypes.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/TypeScriptTypes/UserInterfaces.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/TypeScriptTypes/Widgets.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/TypeScriptTypes/WidgetsInterfaces.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/_reduceWidgetsToGroups/_reduceWidgetsToGroups.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/_reduceWidgetsToGroups/_reduceWidgetsToGroups.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/clientAjaxVariables/_postDataCleanerBeforeSave.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/clientAjaxVariables/_postDataCleanerBeforeSave.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/adminVariables/_adminGetPostsQueryGenerator.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/adminVariables/_adminGetPostsQueryGenerator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/clientAjaxVariables/_fixMetaImage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/clientAjaxVariables/getMetaSuggestion.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/clientAjaxVariables/getMetaSuggestion.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_clientGetPostsQueryGenerator.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/clientVariables/_clientGetPostsQueryGenerator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_getMultipleSettingsQueryGenerator.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/adminVariables/_getMultipleSettingsQueryGenerator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_getMultipleWidgetWithDataQueryGenerator.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/clientVariables/_getMultipleWidgetWithDataQueryGenerator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_metaPageQueryGenerator.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/clientVariables/_metaPageQueryGenerator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_objectToQuery.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_setAppLayoutDataFromProp.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_setSidebarName.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_shortNumber.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/clientVariables/_shortNumber.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/util/arraySortRandom.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/util/arraySortRandom.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/util/arrayUtils/_uniqBy.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/util/arrayUtils/_uniqBy.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/util/mongoIdValidator.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/util/mongoIdValidatorClient.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/adminIncludes/AdminPanelMainMenu/AdminPanelMainMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/AdminPanelMainMenu/AdminPanelMainMenu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/AdminPanelTopBar/AdminActionMenu/AdminActionMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/AdminPanelTopBar/AdminActionMenu/AdminActionMenu.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/adminIncludes/AdminPanelTopBar/AdminPanelTopBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/AdminPanelTopBar/AdminPanelTopBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/FileManagerComponents/CreateNewFileFolderPop/CreateNewFileFolderPop.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/FileManagerComponents/CreateNewFileFolderPop/CreateNewFileFolderPop.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/adminIncludes/FileManagerComponents/FileManagerArea/FileManagerArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/FileManagerComponents/FileManagerArea/FileManagerArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/FileManagerComponents/FileManagerControl/FileManagerControl.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/FileManagerComponents/FileManagerControl/FileManagerControl.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/FileManagerComponents/UploadedPopView/UploadedPopView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/FileManagerComponents/UploadedPopView/UploadedPopView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/ActionOnPost/ActionOnPost.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/ActionOnPost/ActionOnPost.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/Format/Format.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/Format/Format.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/AddWidgetToPostMenu/AddWidgetToPostMenu.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/AddWidgetToPostMenu/AddWidgetToPostMenuItem.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/ImagePreview/ImagePreview.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/ImagePreview/ImagePreview.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/Meta/Meta.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/Meta/Meta.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/Duration/Duration.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/Duration/Duration.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/ImageGallery/ImageGallery.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/ImageGallery/ImageGallery.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/PostInformation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/PostInformation.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/Quality/Quality.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/Quality/Quality.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/RatingOption/RatingOption.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/RatingOption/RatingOption.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/TitleDescription/TitleDescription.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/TitleDescription/TitleDescription.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetSize.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetSize.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/design/StyleSection/StyleSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/design/StyleSection/StyleSection.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetWithPositionMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetWithPositionMenu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/IsInSlideShow/IsInSlideShow.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/ProductPrice/ProductPrice.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/ProductPrice/ProductPrice.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/RatingAndViews/RatingAndViews.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/RatingAndViews/RatingAndViews.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/RenderIframe/RenderIframe.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/RenderIframe/RenderIframe.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/TextAreaComponent/TextAreaComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/TextAreaComponent/TextAreaComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/TextInput/TextInput.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/TextInput/TextInput.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/UploadFileBtn/uploadFileBtn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/UploadFileBtn/uploadFileBtn.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/VideoEmbedCode/VideoEmbedCode.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/VideoEmbedCode/VideoEmbedCode.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/VideoUrls/VideoUrls.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/VideoUrls/VideoUrls.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/eCommerceSettingsPageComponents/EcommerceSettingsInputSection/EcommerceSettingsInputSection.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/eCommerceSettingsPageComponents/EcommerceSettingsInputSection/EcommerceSettingsInputSection.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/ActionButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/ActionButtons.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/AdvertiseWidgetModelFields.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/AdvertiseWidgetModelFields.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/DefaultFields.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/DefaultFields.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/LinkTypeWidgetModelFields/LinkTypeWidgetModelFields.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/LinkTypeWidgetModelFields/LinkTypeWidgetModelFields.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/LogoTypeWidgetModelFields/LogoTypeWidgetModelFields.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/LogoTypeWidgetModelFields/LogoTypeWidgetModelFields.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MediaWidgetType/MediaWidgetType.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MediaWidgetType/MediaWidgetType.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/RenderTitleAndRedirectLink/RenderTitleAndRedirectLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/RenderTitleAndRedirectLink/RenderTitleAndRedirectLink.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SearchTypeInputFields/SearchTypeInputFields.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SearchTypeInputFields/SearchTypeInputFields.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/UniqueFields.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/UniqueFields.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/global/SiteHeadSetter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/SiteHeadSetter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/global/Styles/GlobalStylesComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/Styles/GlobalStylesComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/ExportWidget/ExportWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/ExportWidget/ExportWidget.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/AddFormConditional.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/AddFormConditional.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/FieldPreview.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/FieldPreview.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/FormTypeWidgetModelFields.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/FormTypeWidgetModelFields.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/MenuWidgetEditForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/MenuWidgetEditForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/MenuWidgetModelFields.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/MenuWidgetModelFields.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/MenuWidgetModelFieldsPreview.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/MenuWidgetModelFieldsPreview.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/MenuWidgetSubMenuModelFieldsPreview.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/MenuWidgetSubMenuModelFieldsPreview.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetHeaderControl/WidgetHeaderControl.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetHeaderControl/WidgetHeaderControl.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModelStyle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModelStyle.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/global/commonComponents/SvgRenderer/SvgRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/commonComponents/SvgRenderer/SvgRenderer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/global/fontawesome/fontawesome.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/AdminTools/AdminTools.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/AdminTools/AdminTools.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/AlertBox/AlertBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/AlertBox/AlertBox.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/ClientPopActionRequest/CookiePopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/ClientPopActionRequest/CookiePopup.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Loading/Loading.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Loading/Loading.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/Loading/Loading.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/LoadingV2/LoadingV2.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/LoadingV2/LoadingV2.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/LoginRegisterPopup/LoginRegisterPopupForms.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/LoginRegisterPopup/LoginRegisterPopupForms.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/ArticleTypePostPage/ArticleTypePostPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/ArticleTypePostPage/ArticleTypePostPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/LearnTypePostPage/LearnTypePostPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/LearnTypePostPage/LearnTypePostPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/LearnTypePostPage/components/LearnTypePostPageDescription.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/LearnTypePostPage/components/LearnTypePostPageDescription.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/PromotionTypePostPage/PromotionTypePostPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/PromotionTypePostPage/PromotionTypePostPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/VideoTypePostPage/VideoTypePostPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/VideoTypePostPage/VideoTypePostPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/CommentFrom/CommentFrom.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/CommentFrom/CommentFrom.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/CommentsRenderer/Comment/Comment.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/CommentsRenderer/Comment/Comment.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/CommentsRenderer/CommentsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/CommentsRenderer/CommentsRenderer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/EditLinkForAdmin/EditLinkForAdmin.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/EditLinkForAdmin/EditLinkForAdmin.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/PostDescription/PostDescription.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/PostDescription/PostDescription.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/PostMeta/PostMeta.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/PostMeta/PostMeta.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/LoginRegisterPopup/ValidInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/LoginRegisterPopup/ValidInput.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/AddToBasket/AddToBasket.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/AddToBasket/AddToBasket.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/DownloadLink/DownloadLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/DownloadLink/DownloadLink.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/PostMetaDataToSiteHead/PostMetaDataToSiteHead.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/PostMetaDataToSiteHead/PostMetaDataToSiteHead.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/PostTitle/PostTitle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/PostTitle/PostTitle.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/RatingButtons/RatingButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/RatingButtons/RatingButtons.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/RelatedPostsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/RelatedPostsRenderer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/VideoPlayer/VideoPlayer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/VideoPlayer/VideoPlayer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostsPage/PostsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostsPage/PostsPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostsPage/PostsPageInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostsPage/PostsPageInfo.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/UserAutoLogin.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/UserAutoLogin.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Widget/Widget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Widget/WidgetWrapper.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Widget/WidgetPagination/WidgetPagination.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Widget/WidgetPagination/WidgetPagination.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/WidgetsRenderer/WidgetsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/WidgetsRenderer/WidgetsRenderer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/ActorCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/ActorCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/ArticlePostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/ArticlePostCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/CardsRenderer/ActorBio/ActorBio.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CardsRenderer/ActorBio/ActorBio.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/CardsRenderer/ActorBio/ActorBioDesktop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CardsRenderer/ActorBio/ActorBioDesktop.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/CardsRenderer/ActorBio/ActorBioMobile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CardsRenderer/ActorBio/ActorBioMobile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/CardsRenderer/MetasCardsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CardsRenderer/MetasCardsRenderer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/Price/Price.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/Price/Price.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/cards/CardsRenderer/PostsCardsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CardsRenderer/PostsCardsRenderer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/CategoryCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CategoryCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/LearnPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/LearnPostCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/PromotionPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/PromotionPostCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/TagCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/TagCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/VideoPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/VideoPostCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/VideoPostCardActors.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/VideoPostCardActors.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageArea.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersListItemMoreInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersListItemMoreInfo.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomTools/ChatRoomTools.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomTools/ChatRoomTools.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/checkOutPageComponents/CheckOutItemPreview/CheckOutItemPreview.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/checkOutPageComponents/CheckOutItemPreview/CheckOutItemPreview.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/checkOutPageComponents/CheckOutItemPreview/ItemCountUI.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/checkOutPageComponents/CheckOutItemPreview/ItemCountUI.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/checkOutPageComponents/CheckoutPop/CheckOutSlideHeader/CheckOutSlideHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/checkOutPageComponents/CheckoutPop/CheckOutSlideHeader/CheckOutSlideHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/checkOutPageComponents/CheckoutPop/CheckoutPop.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/checkOutPageComponents/CheckoutPop/CheckoutPop.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/checkOutPageComponents/CheckoutPop/CheckoutPop.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerCall/MessengerCall.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerCall/MessengerCall.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationHeader/MessengerConversationHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationHeader/MessengerConversationHeader.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationMessageArea/MessengerConversationMessageArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationMessageArea/MessengerConversationMessageArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/profilePageComponents/ProfileImage/ProfileImage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/profilePageComponents/ProfileImage/ProfileImage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/profilePageComponents/ProfileInfo/ProfileInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/profilePageComponents/ProfileInfo/ProfileInfo.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/profilePageComponents/ProfileNavigation/ProfileNavigation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/profilePageComponents/ProfileNavigation/ProfileNavigation.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/profilePageComponents/ProfilePosts/ProfilePosts.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/profilePageComponents/ProfilePosts/ProfilePosts.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/CreateEditArticlePostField/CreateEditArticlePostField.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/CreateEditArticlePostField/CreateEditArticlePostField.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/VideoTypeFields/VideoTypeFields.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/VideoTypeFields/VideoTypeFields.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationMessageTools/MessengerConversationMessageTools.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationMessageTools/MessengerConversationMessageTools.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationsList/MessengerConversationPreview.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationsList/MessengerConversationPreview.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/common/MetaDataSelector.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/common/MetaDataSelector.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/userPageComponents/SendMessagePopUp/SendMessagePopUp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/userPageComponents/SendMessagePopUp/SendMessagePopUp.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/userPageComponents/UserPageActionButtons/UserPageActionButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/userPageComponents/UserPageActionButtons/UserPageActionButtons.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/Authentication.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/Authentication.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/DayModeNightMode/DayModeNightMode.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/DayModeNightMode/DayModeNightMode.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/LinkTo/LinkTo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/LinkTo/LinkTo.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Logo/Logo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Logo/Logo.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidget.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidgetItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidgetItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MetaWidget/MetaWidget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MetaWidget/MetaWidget.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/userPageComponents/SendMessagePopUp/SendMessagePopUpHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/userPageComponents/SendMessagePopUp/SendMessagePopUpHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/LanguagesSwitcher/LanguagesSwitcher.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/LanguagesSwitcher/LanguagesSwitcher.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/widgets/PostsSlider/PostsSlider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/PostsSlider/PostsSlider.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/RecentComments/RecentComments.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/RecentComments/RecentComments.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/widgets/Searchbar/Searchbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Searchbar/Searchbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/layouts/AdminLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AdminLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/layouts/AppLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AppLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/layouts/MessengerLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/MessengerLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/widgetsArea/FooterWidgetArea/FooterWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/widgetsArea/FooterWidgetArea/FooterWidgetArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/widgetsArea/HeaderWidgetArea/HeaderWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/widgetsArea/HeaderWidgetArea/HeaderWidgetArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/widgetsArea/NavigationWidgetArea/NavigationWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/widgetsArea/NavigationWidgetArea/NavigationWidgetArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/widgetsArea/TopBarWidgetArea/TopBarWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/widgetsArea/TopBarWidgetArea/TopBarWidgetArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/models/commentSchema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/models/commentSchema.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/models/metaSchema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/models/metaSchema.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/models/widgetSchema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/models/widgetSchema.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.lock/data/https_cdnjs.cloudflare.com/ajax_libs_monaco-editor_0.29.1_min_vs_editor_editor.main_10131d0294fa7e8cbef1.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.lock/data/https_cdnjs.cloudflare.com/ajax_libs_monaco-editor_0.29.1_min_vs_editor_editor.main_10131d0294fa7e8cbef1.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/ShoppingCart/ShoppingCart.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/ShoppingCart/ShoppingCart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/_variables/ApiError.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/_variables/ApiError.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/_variables/_setSettingToEnvironmentVariables.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/_variables/_writeSettingsAndStaticWidgetsToJsonFile.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/_variables/shouldCompress.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/_variables/shouldCompress.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetComments.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetComments.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetPost.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetPost.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetPosts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetPosts.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/socketServer/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/socketServer/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/util/fileDownloader.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/util/mongoIdValidator.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/checkAndRemoveDeletedVideos.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/workers/checkAndRemoveDeletedVideos.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/commandExecutor.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/workers/commandExecutor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/createNewPostByApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/workers/createNewPostByApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/createNewPostByApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/workers/createNewPostByApi.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/generatePermaLink.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/workers/generatePermaLink.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/mailServer.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/workers/mailServer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/setMetaThumbnailsAndCount.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/workers/setMetaThumbnailsAndCount.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/master" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFixMetaImage.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/actor/[actorId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/actor/[actorId].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/actors/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/actors/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/admin/assets/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/assets/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/cards/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/cards/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/widgets/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/widgets/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/admin/fileManager/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/fileManager/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/form/[formId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/form/[formId].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/importer/content/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/importer/content/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/importer/postsImporter/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/importer/postsImporter/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/meta/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/meta/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/page/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/page/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/post/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/post/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/settings/customScript/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/customScript/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/settings/eCommerceSettings/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/eCommerceSettings/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/admin/settings/general/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/general/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/tools/terminal/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/tools/terminal/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/translations/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/translations/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/user/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/user/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/users/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/users/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/categories/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/categories/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/category/[categoryId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/category/[categoryId].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/chatroom/[chatRoomName].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/chatroom/[chatRoomName].tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/messenger/[conversation].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/messenger/[conversation].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/messenger/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/messenger/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/page/[pageName].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/page/[pageName].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/post/[postType]/[identifier].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/[postType]/[identifier].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/posts/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/posts/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/followers/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/followers/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/following/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/following/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/profile/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/post/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/post/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/posts/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/posts/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/search/[keyword].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/search/[keyword].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/tag/[tagId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tag/[tagId].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/tags/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tags/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserCreateNewPost.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserCreateNewPost.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserEditingPostUpdate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserEditingPostUpdate.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_toolkit/adminReducers/adminPanelGlobalStateReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/adminReducers/adminPanelGlobalStateReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_toolkit/adminReducers/adminPanelOrdersReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/adminReducers/adminPanelOrdersReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_toolkit/adminReducers/adminPanelPostsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/adminReducers/adminPanelPostsReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_toolkit/adminReducers/adminPanelUsersReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/adminReducers/adminPanelUsersReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_toolkit/adminReducers/adminTerminalReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/adminReducers/adminTerminalReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_toolkit/adminReducers/adminWidgetsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/adminReducers/adminWidgetsReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_toolkit/clientReducers/globalStateReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/clientReducers/globalStateReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_toolkit/clientReducers/postsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/clientReducers/postsReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_toolkit/clientReducers/widgetsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/clientReducers/widgetsReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/user/[username].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/user/[username].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/asset/images/icons/envelope-solid.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/asset/images/icons/envelope-solid.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/asset/images/icons/folder-solid.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/asset/images/icons/folder-solid.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPost.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPost.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store_toolkit/adminReducers/adminPanelSettingsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/adminReducers/adminPanelSettingsReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/mergeDuplicateMetaData.js" beforeDir="false" afterPath="$PROJECT_DIR$/tools/mergeDuplicateMetaData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/setupDarkTheme.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/tsconfig.server.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.server.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -296,11 +240,11 @@
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\pages" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\_typeScriptTypes\widgets" />
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\_variables\serverUtil" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\trash" />
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\_variables\adminVariables" />
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\_typeScriptTypes\widgets" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\_dataStructures" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\_typeScriptTypes\Chatroom" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\dataStructures" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -308,8 +252,15 @@
       <command value="nextEnv" />
     </option>
   </component>
-  <component name="RunManager" selected="npm.dev">
-    <configuration name="temp.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/tempFiles/temp.js" working-dir="$PROJECT_DIR$/tempFiles">
+  <component name="RunManager" selected="npm.build">
+    <configuration name="analyze" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="analyze" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
       <method v="2" />
     </configuration>
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -354,11 +305,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.build" />
-        <item itemvalue="npm.build:server" />
         <item itemvalue="npm.start" />
-        <item itemvalue="Node.js.temp.js" />
+        <item itemvalue="npm.dev" />
+        <item itemvalue="npm.build:server" />
+        <item itemvalue="npm.analyze" />
       </list>
     </recent_temporary>
   </component>
@@ -1429,7 +1380,15 @@
       <workItem from="1661940582410" duration="6861000" />
       <workItem from="1661961702600" duration="8940000" />
       <workItem from="1661981197241" duration="6573000" />
-      <workItem from="1662025547344" duration="3545000" />
+      <workItem from="1662025547344" duration="20199000" />
+      <workItem from="1662069007664" duration="1179000" />
+      <workItem from="1662115286798" duration="1624000" />
+      <workItem from="1662195782328" duration="8432000" />
+      <workItem from="1662402232117" duration="3045000" />
+      <workItem from="1662452713100" duration="4564000" />
+      <workItem from="1662457980273" duration="4633000" />
+      <workItem from="1662477041640" duration="3765000" />
+      <workItem from="1662483083734" duration="4876000" />
     </task>
     <servers />
   </component>
@@ -1437,12 +1396,830 @@
     <option name="version" value="3" />
     <option name="exactExcludedFiles">
       <list>
-        <option value="$PROJECT_DIR$/expressServer/workers/setMetaThumbnailsAndCount.js" />
+        <option value="$PROJECT_DIR$/expressServer/middlewares/authMiddleware.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/middlewares/apiCache.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/middlewares/authMiddleware.js" />
+        <option value="$PROJECT_DIR$/expressServer/middlewares/apiCache.js" />
+        <option value="$PROJECT_DIR$/expressServer/middlewares/adminAuthMiddleware.js" />
+        <option value="$PROJECT_DIR$/expressServer/middlewares/loggerMiddleware.js" />
+        <option value="$PROJECT_DIR$/expressServer/middlewares/apiCache.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/middlewares/loggerMiddleware.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/middlewares/loggerMiddleware.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/middlewares/apiErrorHandler.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/socketServer/index.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/middlewares/apiErrorHandler.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/socketServer/index.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/socketServer/index.js" />
         <option value="$PROJECT_DIR$/expressServer/workers/checkAndRemoveDeletedVideos.js" />
         <option value="$PROJECT_DIR$/expressServer/workers/commandExecutor.js" />
         <option value="$PROJECT_DIR$/expressServer/workers/createNewPostByApi.js" />
+        <option value="$PROJECT_DIR$/expressServer/workers/setMetaThumbnailsAndCount.js" />
         <option value="$PROJECT_DIR$/expressServer/workers/generatePermaLink.js" />
         <option value="$PROJECT_DIR$/expressServer/workers/mailServer.js" />
+        <option value="$PROJECT_DIR$/_typeScriptTypes/widgets/Widget.js.map" />
+        <option value="$PROJECT_DIR$/_typeScriptTypes/widgets/Widget.js" />
+        <option value="$PROJECT_DIR$/_typeScriptTypes/widgets/Widget.d.ts" />
+        <option value="$PROJECT_DIR$/components/global/Styles/GlobalStylesComponent.d.ts" />
+        <option value="$PROJECT_DIR$/components/global/Styles/GlobalStylesComponent.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/cards/VideoPostCard.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/cards/PromotionPostCard.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/cards/LearnPostCard.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/cards/CategoryCard.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/cards/ActorCard.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/cards/VideoPostCardTrailer.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/cards/LearnPostCard.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/cards/VideoPostCardActors.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/cards/TagCard.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/cards/PromotionPostCard.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/cards/CardImageRenderer.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/cards/ArticlePostCard.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/cards/VideoPostCardActors.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/cards/ActorCard.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/cards/CardImageRenderer.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/cards/VideoPostCardTrailer.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/cards/CategoryCard.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/cards/VideoPostCard.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/cards/TagCard.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/cards/ArticlePostCard.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/Widget/WidgetWrapper.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/Widget/WidgetWrapper.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/Soft404/Soft404.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/Soft404/Soft404.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/AlertBox/AlertBox.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/AlertBox/AlertBox.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/PostPageStyle.js.map" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/PostPageStyle.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/PostPageStyle.js" />
+        <option value="$PROJECT_DIR$/components/includes/LoadingV2/LoadingV2.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/LoadingV2/LoadingV2.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/PostsPage/PostsPageInfo.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/PostsPage/PostsPage.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/PostsPage/PostsPageInfo.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/AdminTools/AdminTools.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/PostsPage/PostsPage.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/AdminTools/AdminTools.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/BackToTopButton/BackToTopButton.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/WidgetsRenderer/WidgetsRenderer.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/BackToTopButton/BackToTopButton.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/WidgetsRenderer/DynamicNoSSR.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/WidgetsRenderer/WidgetsRenderer.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/WidgetsRenderer/DynamicNoSSR.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/LoginRegisterPopup/LoginRegisterPopup.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/LoginRegisterPopup/LoginRegisterPopupForms.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/LoginRegisterPopup/LoginRegisterPopupForms.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/LoginRegisterPopup/LoginRegisterPopup.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/LoginRegisterPopup/ValidInput.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/LoginRegisterPopup/ValidInput.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/SiteSettingsSetter/ScriptParser.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/SiteSettingsSetter/GoogleAnalytics.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/SiteSettingsSetter/UserAutoLogin.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/SiteSettingsSetter/UserAutoLogin.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/SiteSettingsSetter/GoogleAnalytics.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/SiteSettingsSetter/ScriptParser.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/PaginationComponent/PaginationComponent.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/PaginationComponent/PaginationComponent.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/PaginationComponent/PaginationComponentPageLink.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/PaginationComponent/PaginationComponentPageLink.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/PostsDataToSiteHead/MetaDataToSiteHead.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/PostsDataToSiteHead/MetaDataToSiteHead.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/ClientPopActionRequest/CookiePopup.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/ClientPopActionRequest/CookiePopup.jsx" />
+        <option value="$PROJECT_DIR$/components/widgetsArea/MainWidgetArea/MainWidgetArea.jsx" />
+        <option value="$PROJECT_DIR$/components/widgetsArea/FooterWidgetArea/FooterWidgetArea.jsx" />
+        <option value="$PROJECT_DIR$/components/widgetsArea/MainWidgetArea/MainWidgetArea.d.ts" />
+        <option value="$PROJECT_DIR$/components/widgetsArea/FooterWidgetArea/FooterWidgetArea.d.ts" />
+        <option value="$PROJECT_DIR$/components/widgetsArea/HeaderWidgetArea/HeaderWidgetArea.jsx" />
+        <option value="$PROJECT_DIR$/components/widgetsArea/TopBarWidgetArea/TopBarWidgetArea.d.ts" />
+        <option value="$PROJECT_DIR$/components/widgetsArea/HeaderWidgetArea/HeaderWidgetArea.d.ts" />
+        <option value="$PROJECT_DIR$/components/widgetsArea/TopBarWidgetArea/TopBarWidgetArea.jsx" />
+        <option value="$PROJECT_DIR$/components/widgetsArea/SectionWidgetArea/SectionWidgetArea.jsx" />
+        <option value="$PROJECT_DIR$/components/widgetsArea/SectionWidgetArea/SectionWidgetArea.d.ts" />
+        <option value="$PROJECT_DIR$/components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer.d.ts" />
+        <option value="$PROJECT_DIR$/components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer.jsx" />
+        <option value="$PROJECT_DIR$/components/widgetsArea/SidebarWidgetArea/SidebarWidgetArea.d.ts" />
+        <option value="$PROJECT_DIR$/components/widgetsArea/NavigationWidgetArea/BreadcrumbList.jsx" />
+        <option value="$PROJECT_DIR$/components/widgetsArea/SidebarWidgetArea/SidebarWidgetArea.jsx" />
+        <option value="$PROJECT_DIR$/components/widgetsArea/NavigationWidgetArea/BreadcrumbList.d.ts" />
+        <option value="$PROJECT_DIR$/components/widgetsArea/NavigationWidgetArea/NavigationWidgetArea.jsx" />
+        <option value="$PROJECT_DIR$/components/widgetsArea/NavigationWidgetArea/NavigationWidgetArea.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/models/settings/settingSchema.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/models/settings/settingSchema.js" />
+        <option value="$PROJECT_DIR$/expressServer/models/metaSchemas/tagSchema.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/models/settings/settingSchema.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/models/metaSchemas/actorSchema.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/models/metaSchemas/actorSchema.js" />
+        <option value="$PROJECT_DIR$/expressServer/models/metaSchemas/tagSchema.js" />
+        <option value="$PROJECT_DIR$/expressServer/models/metaSchemas/categorySchema.js" />
+        <option value="$PROJECT_DIR$/expressServer/models/metaSchemas/categorySchema.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/models/metaSchemas/categorySchema.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/models/metaSchemas/actorSchema.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/models/metaSchemas/tagSchema.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsRouter.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminOrdersRouter.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsRouter.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesRouter.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminTerminalRouter.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersRouter.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsRouter.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesRouter.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFormsRouter.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsRouter.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerRouter.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsRouter.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFormsRouter.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerRouter.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminOrdersRouter.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersRouter.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesRouter.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminDataScrappersRouter.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminTerminalRouter.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerRouter.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsRouter.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsRouter.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminMainRouter.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminDataScrappersRouter.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsRouter.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsRouter.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminTerminalRouter.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFormsRouter.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersRouter.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminMainRouter.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminOrdersRouter.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminDataScrappersRouter.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientMainRouter.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminMainRouter.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientRobotTxtController.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientWidgetsRouter.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientSettingsRouter.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsRouter.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientWidgetsRouter.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientRobotTxtController.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFormsRouter.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFileManagerRouter.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientOrdersRouter.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPagesRouter.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersRouter.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersRouter.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersRouter.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientSettingsRouter.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientSettingsRouter.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPagesRouter.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientMainRouter.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientOrdersRouter.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFormsRouter.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsRouter.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPagesRouter.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientOrdersRouter.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientMainRouter.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFileManagerRouter.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsRouter.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientMainFestController.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientWidgetsRouter.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFileManagerRouter.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientMainFestController.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientMainFestController.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientRobotTxtController.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFormsRouter.js.map" />
+        <option value="$PROJECT_DIR$/_typeScriptTypes/widgets/MenuWidget/MenuItem.js" />
+        <option value="$PROJECT_DIR$/_typeScriptTypes/widgets/MenuWidget/MenuItem.d.ts" />
+        <option value="$PROJECT_DIR$/_typeScriptTypes/widgets/MenuWidget/MenuItem.js.map" />
+        <option value="$PROJECT_DIR$/components/global/commonComponents/Input/Input.jsx" />
+        <option value="$PROJECT_DIR$/components/global/commonComponents/Input/Input.d.ts" />
+        <option value="$PROJECT_DIR$/components/global/commonComponents/TextArea/TextArea.d.ts" />
+        <option value="$PROJECT_DIR$/components/global/commonComponents/TextArea/TextArea.jsx" />
+        <option value="$PROJECT_DIR$/components/global/commonComponents/SvgRenderer/SvgRenderer.jsx" />
+        <option value="$PROJECT_DIR$/components/global/commonComponents/ImageUploader/ImageUploader.d.ts" />
+        <option value="$PROJECT_DIR$/components/global/commonComponents/SvgRenderer/SvgRenderer.d.ts" />
+        <option value="$PROJECT_DIR$/components/global/commonComponents/ImageUploader/ImageUploader.js" />
+        <option value="$PROJECT_DIR$/components/global/commonComponents/ImageUploader/ImageUploader.js.map" />
+        <option value="$PROJECT_DIR$/components/includes/cards/asset/_qualityConvertor.js" />
+        <option value="$PROJECT_DIR$/components/includes/cards/asset/_qualityConvertor.js.map" />
+        <option value="$PROJECT_DIR$/components/includes/cards/CardsRenderer/PostsCardsRenderer.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/cards/asset/_qualityConvertor.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/cards/CardsRenderer/MetasCardsRenderer.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/cards/CardsRenderer/MetasCardsRenderer.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/Widget/WidgetText/WidgetText.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/cards/CardsRenderer/PostsCardsRenderer.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/Widget/WidgetText/WidgetText.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/Widget/WidgetFooter/WidgetFooter.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/Widget/WidgetHeader/WidgetHeader.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/Widget/WidgetFooter/WidgetFooter.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/Widget/WidgetHeader/WidgetHeader.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/Widget/WidgetPagination/WidgetPagination.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/Widget/WidgetCustomScript/WidgetCustomScript.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/Widget/WidgetPagination/WidgetPagination.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/Widget/WidgetCustomScript/WidgetCustomScript.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/Logo/LogoUsingNextImage.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/Logo/Logo.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/Logo/LogoUsingNextImage.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/Logo/Logo.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/LinkTo/LinkTo.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/Advertise/Advertise.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/LinkTo/LinkTo.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/Advertise/Advertise.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/Searchbar/Searchbar.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/FormWidget/FormWidget.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/Searchbar/Searchbar.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/FormWidget/FormWidget.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidget.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidgetItem.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidget.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidgetItem.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/MetaWidget/MetaWidget.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/MetaWidget/MetaWidget.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/MetaWidget/MetaWidgetElement.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/MetaWidget/MetaWidgetElement.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/MediaWidget/MediaWidget.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/MediaWidget/MediaWidget.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/PostsSlider/PostsSlider.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/PostsSlider/PostsSlider.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/ImagesSlider/ImagesSlider.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/ImagesSlider/ImagesSlider.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/Authentication/Authentication.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/Authentication/AuthenticationNotLoggedInItems.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/Authentication/Authentication.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/Authentication/AuthenticationLoggedInItems.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/Authentication/AuthenticationLoggedInItems.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/Authentication/AuthenticationNotLoggedInItems.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/MultipleLinkTo/MultipleLinkTo.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/MultipleLinkTo/MultipleLinkTo.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/RecentComments/RecentComments.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/DayModeNightMode/DayModeNightMode.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/RecentComments/RecentComments.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/DayModeNightMode/DayModeNightMode.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/LanguagesSwitcher/LanguagesSwitcher.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/AlphabeticalNumericalRangeLinksWidget/AlphabeticalNumericalRangeLinksWidget.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/LanguagesSwitcher/LanguagesSwitcher.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/AlphabeticalNumericalRangeLinksWidget/AlphabeticalNumericalRangeLinksWidget.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/RelatedPostsRenderer.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/LearnTypePostPage/LearnTypePostPage.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/RelatedPostsRenderer.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/LearnTypePostPage/LearnTypePostPage.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/VideoTypePostPage/VideoTypePostPage.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/ArticleTypePostPage/ArticleTypePostPage.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/VideoTypePostPage/VideoTypePostPage.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/ArticleTypePostPage/ArticleTypePostPage.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/PromotionTypePostPage/PromotionTypePostPage.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/PromotionTypePostPage/PromotionTypePostPage.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomTools/ChatRoomTools.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomTools/ChatRoomTools.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomHeader/ChatRoomHeader.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomHeader/ChatRoomHeader.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageArea.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessage.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessage.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageArea.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersList.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersListItem.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersListItemMoreInfo.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersListItemMoreInfo.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersListItem.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersList.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/userPageComponents/SendMessagePopUp/SendMessagePopUp.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/userPageComponents/SendMessagePopUp/SendMessagePopUpHeader.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/userPageComponents/SendMessagePopUp/SendMessagePopUpHeader.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/userPageComponents/SendMessagePopUp/SendMessagePopUp.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/userPageComponents/UserPageActionButtons/UserPageActionButtons.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/userPageComponents/UserPageActionButtons/UserPageActionButtons.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/profilePageComponents/ProfileInfo/ProfileInfo.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/profilePageComponents/ProfileInfo/ProfileInfo.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/profilePageComponents/ProfileImage/ProfileImage.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/profilePageComponents/ProfileImage/ProfileImage.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/profilePageComponents/ProfilePosts/ProfilePosts.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/profilePageComponents/ProfileFollowers/ProfileFollowers.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/profilePageComponents/ProfilePosts/ProfilePosts.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/profilePageComponents/ProfileFollowers/ProfileFollowers.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/profilePageComponents/ProfileNavigation/ProfileNavigation.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerCall/MessengerCall.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/profilePageComponents/ProfileNavigation/ProfileNavigation.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerCall/MessengerCall.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationsList/MessengerConversationPreview.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationsList/MessengerConversationsList.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationsList/MessengerConversationsList.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationHeader/MessengerConversationHeader.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationsList/MessengerConversationPreview.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationHeader/MessengerConversationHeader.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationMessageArea/MessengerConversationMessageArea.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationMessageArea/MessengerConversationMessageArea.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationMessageTools/MessengerConversationMessageTools.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationMessageTools/MessengerConversationMessageTools.d.ts" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.d.ts" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/AdvertiseWidgetModelFields.d.ts" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/DefaultFields.d.ts" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/DefaultFields.jsx" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/UniqueFields.d.ts" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModelStyle.jsx" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/ActionButtons.d.ts" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/ActionButtons.jsx" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/AdvertiseWidgetModelFields.jsx" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/UniqueFields.jsx" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModelStyle.d.ts" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.jsx" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetPositionsSelect/WidgetPositionsSelect.d.ts" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetPositionsSelect/WidgetPositionsSelect.jsx" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetPagination.d.ts" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/TableControls.d.ts" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetBulkAction.d.ts" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/PostsTypes.jsx" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetSize.jsx" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetPagination.jsx" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/PostsTypes.d.ts" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/PostsByMeta.d.ts" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetSize.d.ts" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetSearch.d.ts" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/TableControls.jsx" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetStatusNavigation.jsx" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetBulkAction.jsx" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetSearch.jsx" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetStatusNavigation.d.ts" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/PostsByMeta.jsx" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/_variables/_adminQueryGeneratorForGettingPosts.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/_variables/_updateSaveMetas.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/_variables/_adminQueryGeneratorForGettingPosts.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/_variables/_adminQueryGeneratorForGettingPosts.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/_variables/_updateSaveMetas.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/_variables/_updateSaveMetas.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFormsControllers/adminGetFormsData.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFormsControllers/adminDeleteFormData.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFormsControllers/adminGetFormData.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFormsControllers/adminGetFormData.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFormsControllers/adminGetFormsData.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFormsControllers/adminDeleteFormData.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFormsControllers/adminGetFormData.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFormsControllers/adminDeleteFormData.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminOdersControllers/adminGetOrders.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFormsControllers/adminGetFormsData.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminOdersControllers/adminGetOrders.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminOdersControllers/adminGetOrders.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminDeleteCustomPage.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminGetPageData.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminDeleteCustomPage.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminGetPagesData.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminGetPageData.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminUpdatePage.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminGetPageData.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminUpdatePage.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminCreateNewPage.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminDeleteCustomPage.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminUpdatePage.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminCreateNewPage.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminCreateNewPage.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminGetPagesData.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminBulkAction.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminGetPagesData.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetPosts.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetMeta.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminExportPosts.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdatePostByApi.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdatePostByApi.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetMeta.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminCheckAndRemoveDeletedVideos.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdateMetaByApi.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminCreateNewPost.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdateMetaByApi.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdatePost.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGeneratePermaLinkForPosts.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminImportPosts.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminSetMetaThumbnailsAndCount.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetComments.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminCreateNewPost.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminBulkAction.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminExportPosts.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetMetas.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGeneratePermaLinkForPosts.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminDeletePost.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminDeleteComments.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminPostsBulkAction.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetPost.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdateComment.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetComments.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminCheckAndRemoveDeletedVideos.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminPostsBulkAction.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdateMeta.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGeneratePermaLinkForPosts.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminDeletePost.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdateMeta.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdatePost.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminCreateNewPostByApi.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetMeta.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdateMetaByApi.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetPosts.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetPosts.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminDeleteMeta.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminImportPosts.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetPost.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminCreateNewPostByApi.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminDeletePost.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminPostsBulkAction.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminDeleteComments.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdatePost.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminDeleteMeta.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdateMeta.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminImportPosts.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdateComment.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdateComment.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminCheckAndRemoveDeletedVideos.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminSetMetaThumbnailsAndCount.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminCreateNewPostByApi.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdatePostByApi.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminCreateNewPost.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminSetMetaThumbnailsAndCount.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminBulkAction.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminDeleteComments.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetMetas.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminDeleteMeta.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetPost.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetMetas.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetComments.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminNewApiKey.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminExportPosts.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminGetUser.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminUpdateUserData.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminGetUsersList.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminUpdateUserData.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminGetUser.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminUpdateUserData.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminDeleteUser.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminGetUsersList.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminDeleteUser.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminNewApiKey.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminDeleteUser.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminNewApiKey.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminGetUsersList.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminGetUser.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminPanelGetWidgets.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminUpdateWidget.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminGetWidgets.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminPanelGetWidgets.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminDeleteWidget.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminAddNewWidget.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminUpdateWidget.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminGetWidgets.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminDeleteWidget.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminAddNewWidget.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminGetWidgets.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminDeleteWidget.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminAddNewWidget.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminUpdateWidget.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsControllers/adminUpdateSettings.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminPanelGetWidgets.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsControllers/adminClearCaches.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsControllers/adminGetMultipleSettings.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsControllers/adminGetSettings.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsControllers/adminGetMultipleSettings.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsControllers/adminUpdateSettings.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsControllers/adminGetSettings.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsControllers/adminGetMultipleSettings.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsControllers/adminClearCaches.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsControllers/adminUpdateSettings.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsControllers/adminClearCaches.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminTerminalControllers/adminCommandExecutor.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsControllers/adminGetSettings.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminTerminalControllers/adminCommandExecutor.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminTerminalControllers/adminCommandExecutor.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminReadPath.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminReadFile.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminReadPath.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminReadPath.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminUploadFiles.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminUploadFile.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminDeleteFile.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminCreateNewFileOrFolder.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminReadTranslationsFile.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminUploadFile.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminDeleteFile.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminReadFile.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminUploadFiles.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminUploadFiles.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminUpdateTranslationsFile.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminPostThumbnailsUpload.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminPostThumbnailsUpload.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminCreateNewFileOrFolder.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminCreateNewFileOrFolder.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminUpdateTranslationsFile.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminReadTranslationsFile.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminReadFile.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminUpdateTranslationsFile.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminUploadFile.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminDeleteFile.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminPostThumbnailsUpload.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminDataScrappersControllers/adminScrapYoutubeInfo.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminReadTranslationsFile.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminDataScrappersControllers/adminScrapYoutubeInfo.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminDataScrappersControllers/adminScrapYoutubeInfo.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/_variables/_clientQueryGeneratorForGettingPosts.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/_variables/_clientQueryGeneratorForGettingPosts.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFormsControllers/clientSaveFormData.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/_variables/_clientQueryGeneratorForGettingPosts.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFormsControllers/clientSaveFormData.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFormsControllers/clientSaveFormData.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPagesControllers/clientGetPageData.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPagesControllers/clientGetPageData.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPagesControllers/clientGetPagesData.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPagesControllers/clientGetPageData.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPagesControllers/clientGetPagesData.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPagesControllers/clientGetPagesData.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/ClientMetaSuggestion.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientCheckRemovedContent.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetPost.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientNewComment.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientUserCreateNewPost.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetComments.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientFixMetaImage.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientCheckRemovedContent.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientLikeDislikeView.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetComments.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientUserUpdatePost.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientUserUpdatePost.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetMetas.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetMeta.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetPosts.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientFixMetaImage.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientUserCreateNewPost.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/ClientMetaSuggestion.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientNewComment.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/ClientMetaSuggestion.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientUserUpdatePost.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetMetas.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientNewComment.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientCheckRemovedContent.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetPost.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetMeta.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetMetas.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetPosts.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientLikeDislikeView.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetPost.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetPosts.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetMeta.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientLikeDislikeView.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientFixMetaImage.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetComments.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientUserCreateNewPost.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetSignedInUserData.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetMultipleUserDataById.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetMultipleUserDataById.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientFollowUser.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetConversations.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetUsersList.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetUsersList.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetConversation.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientSendMessage.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientFollowUser.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientRegisterNewUser.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientMessageToConversation.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetMultipleUserDataById.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetUserPreviewData.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientResetUserPassword.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientUnFollowUser.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetSignedInUserData.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientUpdateUserData.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetUserData.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetConversations.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientMessageToConversation.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetConversations.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientUnFollowUser.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientDeleteConversation.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientUserLogin.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientUnFollowUser.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetConversation.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetUserData.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientDeleteConversation.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientConversation.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientUpdateUserData.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientDeleteConversation.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientSendMessage.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientResetUserPassword.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientConversation.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientFollowUser.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetUserPreviewData.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientSendMessage.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientRegisterNewUser.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetUserData.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientResetUserPassword.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientRegisterNewUser.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetUserPreviewData.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetUsersList.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetConversation.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientUpdateUserData.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientUserLogin.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetSignedInUserData.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientMessageToConversation.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientConversation.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientOrdersControllers/clientCreateOrder.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientUserLogin.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientOrdersControllers/clientCreateOrder.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientOrdersControllers/clientCreateOrder.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientWidgetsControllers/clientSelfWidgetUpdate.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientWidgetsControllers/clientGetWidget.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientWidgetsControllers/clientGetMultipleWidgetWithData.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientWidgetsControllers/clientGetSingleWidgetData.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientWidgetsControllers/clientGetMultipleWidgetWithData.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientWidgetsControllers/clientGetWidget.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientWidgetsControllers/clientGetSingleWidgetData.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientWidgetsControllers/clientGetMultipleWidgetWithData.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientWidgetsControllers/clientGetSingleWidgetData.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientWidgetsControllers/clientSelfWidgetUpdate.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientWidgetsControllers/clientGetWidget.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientWidgetsControllers/clientGetWidgetsWithData.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientWidgetsControllers/clientSelfWidgetUpdate.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientWidgetsControllers/clientGetWidgetsWithData.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientSettingsControllers/clientGetMultipleSettings.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientWidgetsControllers/clientGetWidgetsWithData.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientSettingsControllers/clientGetMultipleSettings.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientSettingsControllers/clientGetMultipleSettings.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFileManagerControllers/clientUserPostImageUpload.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFileManagerControllers/clientUserImageUpload.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFileManagerControllers/clientUserPostImageUpload.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFileManagerControllers/clientUserImageUpload.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFileManagerControllers/clientUserPostImageUpload.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFileManagerControllers/clientUserImageUpload.js" />
+        <option value="$PROJECT_DIR$/components/includes/cards/asset/CardTitle/CardTitle.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/cards/asset/CardTitle/CardTitle.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/cards/asset/CardViews/CardViews.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/cards/asset/CardViews/CardViews.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/cards/asset/CardRating/CardRating.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/cards/asset/CardRating/CardRating.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/cards/asset/CardQuality/CardQuality.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/cards/asset/CardDuration/CardDuration.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/cards/asset/CardQuality/CardQuality.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/cards/asset/CardDuration/CardDuration.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/cards/asset/CardRatingBar/CardRatingBar.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/cards/asset/CardRatingBar/CardRatingBar.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/cards/asset/CardLastUpdate/CardLastUpdate.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/cards/asset/CardLastUpdate/CardLastUpdate.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/cards/asset/TextToCanvasImage/TextToCanvasImage.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/cards/asset/TextToCanvasImage/TextToCanvasImage.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/cards/CardsRenderer/ActorBio/ActorDetails.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/cards/CardsRenderer/ActorBio/ActorBio.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/cards/CardsRenderer/ActorBio/ActorBioMobile.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/cards/CardsRenderer/ActorBio/ActorBioMobile.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/cards/CardsRenderer/ActorBio/ActorDetails.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/cards/CardsRenderer/ActorBio/ActorBio.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/cards/CardsRenderer/ActorBio/ActorBioDesktop.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/cards/CardsRenderer/ActorBio/ActorBioDesktop.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/Widget/WidgetsModelsComponents/Text/Text.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/Widget/WidgetsModelsComponents/Text/Text.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/LanguagesSwitcher/__test__/LanguagesSwitcher.test.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/widgets/LanguagesSwitcher/__test__/LanguagesSwitcher.test.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/Price/Price.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/Price/Price.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/PostMeta/ActorMetaImageRenderer.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/PostMeta/PostMeta.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/PostMeta/PostMeta.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/PostMeta/ActorMetaImageRenderer.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/PostTitle/PostTitle.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/AddToBasket/AddToBasket.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/PostTitle/PostTitle.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/AddToBasket/AddToBasket.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/CommentFrom/CommentFrom.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/CommentFrom/CommentFrom.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/VideoPlayer/VideoPlayer.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/VideoPlayer/VideoPlayer.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/DownloadLink/DownloadLink.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/DownloadLink/DownloadLink.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/RatingButtons/RatingButtons.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/RatingButtons/RatingButtons.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/PostDescription/PostDescription.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/PostDescription/PostDescription.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/CommentsRenderer/CommentsRenderer.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/CommentsRenderer/CommentsRenderer.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/EditLinkForAdmin/EditLinkForAdmin.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/EditLinkForAdmin/EditLinkForAdmin.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/PostMetaDataToSiteHead/PostMetaDataToSiteHead.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/PostMetaDataToSiteHead/PostMetaDataToSiteHead.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/ObjectKeyDescriptionRenderer/ObjectKeyDescriptionRenderer.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/ReactPageDescriptionRenderer/ReactPageDescriptionRenderer.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/ObjectKeyDescriptionRenderer/ObjectKeyDescriptionRenderer.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/ReactPageDescriptionRenderer/ReactPageDescriptionRenderer.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/LearnTypePostPage/components/LearnTypePostPageDescription.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/common/MetaDataSelector.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/LearnTypePostPage/components/LearnTypePostPageDescription.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/common/TextInput.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/common/MetaDataSelector.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/common/ThumbnailUploader.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/common/ThumbnailUploader.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/common/TextInput.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/common/ImagePreview.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/VideoTypeFields/VideoTypeFields.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/common/ImagePreview.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/VideoTypeFields/VideoTypeFields.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/CreateEditArticlePostField/CreateEditArticlePostField.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/CreateEditArticlePostField/CreateEditArticlePostField.jsx" />
+        <option value="$PROJECT_DIR$/components/includes/checkOutPageComponents/CheckoutPop/CheckOutSlideHeader/CheckOutSlideHeader.d.ts" />
+        <option value="$PROJECT_DIR$/components/includes/checkOutPageComponents/CheckoutPop/CheckOutSlideHeader/CheckOutSlideHeader.jsx" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SliderWidgetFields/SliderWidgetFields.jsx" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SwiperWidgetFields/SwiperWidgetFields.d.ts" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SliderWidgetFields/SliderWidgetFields.d.ts" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SwiperWidgetFields/swiperDefaultData.d.ts" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SwiperWidgetFields/SwiperWidgetFields.jsx" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SwiperWidgetFields/swiperDefaultData.js" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SwiperWidgetFields/swiperDefaultData.js.map" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetHeaderControl/WidgetHeaderControl.d.ts" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetHeaderControl/WidgetHeaderControl.jsx" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SelectFieldForWidget/SelectFieldForWidget.d.ts" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SelectFieldForWidget/SelectFieldForWidget.jsx" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SearchTypeInputFields/SearchTypeInputFields.jsx" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SearchTypeInputFields/SearchTypeInputFields.d.ts" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/TextInputFieldForWidget/TextInputFieldForWidget.d.ts" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/TextInputFieldForWidget/TextInputFieldForWidget.jsx" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/RenderTitleAndRedirectLink/RenderTitleAndRedirectLink.jsx" />
+        <option value="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/RenderTitleAndRedirectLink/RenderTitleAndRedirectLink.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/workers/ApiWorkers/clientRequests/posts/getPosts.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/workers/ApiWorkers/clientRequests/posts/getPosts.js" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/CommentsRenderer/Comment/Comment.jsx" />
+        <option value="$PROJECT_DIR$/expressServer/workers/ApiWorkers/clientRequests/posts/getPosts.js.map" />
+        <option value="$PROJECT_DIR$/components/includes/PostPage/components/CommentsRenderer/Comment/Comment.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/index.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/index.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/index.js" />
+        <option value="$PROJECT_DIR$/pages/profile/index.d.ts" />
+        <option value="$PROJECT_DIR$/pages/profile/index.jsx" />
+        <option value="$PROJECT_DIR$/components/global/AdminDataSetter.d.ts" />
+        <option value="$PROJECT_DIR$/components/global/CodeSnippet.jsx" />
+        <option value="$PROJECT_DIR$/components/global/SiteHeadSetter.d.ts" />
+        <option value="$PROJECT_DIR$/components/global/CodeSnippet.d.ts" />
+        <option value="$PROJECT_DIR$/components/global/AdminDataSetter.jsx" />
+        <option value="$PROJECT_DIR$/components/global/SiteHeadSetter.jsx" />
+        <option value="$PROJECT_DIR$/components/layouts/AppLayout.jsx" />
+        <option value="$PROJECT_DIR$/components/layouts/AdminLayout.d.ts" />
+        <option value="$PROJECT_DIR$/components/layouts/MessengerLayout.d.ts" />
+        <option value="$PROJECT_DIR$/components/layouts/AppLayout.d.ts" />
+        <option value="$PROJECT_DIR$/components/layouts/AdminLayout.jsx" />
+        <option value="$PROJECT_DIR$/components/layouts/MessengerLayout.jsx" />
+        <option value="$PROJECT_DIR$/expressServer/models/userSchema.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/models/contactFromSchema.js" />
+        <option value="$PROJECT_DIR$/expressServer/models/contactFromSchema.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/models/formSchema.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/models/searchKeywordSchema.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/models/chatroomSchema.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/models/orderSchema.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/models/orderSchema.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/models/pageSchema.js" />
+        <option value="$PROJECT_DIR$/expressServer/models/formSchema.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/models/metaSchema.js" />
+        <option value="$PROJECT_DIR$/expressServer/models/widgetSchema.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/models/metaSchema.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/models/conversationSchema.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/models/orderSchema.js" />
+        <option value="$PROJECT_DIR$/expressServer/models/widgetSchema.js" />
+        <option value="$PROJECT_DIR$/expressServer/models/chatroomSchema.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/models/translateSchema.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/models/contactFromSchema.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/models/commentSchema.js" />
+        <option value="$PROJECT_DIR$/expressServer/models/postSchema.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/models/pageSchema.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/models/metaSchema.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/models/userSchema.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/models/translateSchema.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/models/postSchema.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/models/conversationSchema.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/models/commentSchema.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/models/postSchema.js" />
+        <option value="$PROJECT_DIR$/expressServer/models/conversationSchema.js" />
+        <option value="$PROJECT_DIR$/expressServer/models/userSchema.js" />
+        <option value="$PROJECT_DIR$/expressServer/models/pageSchema.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/models/commentSchema.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/models/searchKeywordSchema.js" />
+        <option value="$PROJECT_DIR$/expressServer/models/chatroomSchema.js" />
+        <option value="$PROJECT_DIR$/expressServer/models/widgetSchema.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/models/translateSchema.js" />
+        <option value="$PROJECT_DIR$/expressServer/models/formSchema.js" />
+        <option value="$PROJECT_DIR$/expressServer/workers/mailServer.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/models/searchKeywordSchema.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/workers/setMetaThumbnailsAndCount.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/workers/setMetaThumbnailsAndCount.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/workers/createNewPostByApi.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/workers/commandExecutor.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/workers/mailServer.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/workers/commandExecutor.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/workers/checkAndRemoveDeletedVideos.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/workers/checkAndRemoveDeletedVideos.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/workers/generatePermaLink.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/workers/createNewPostByApi.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/_variables/ApiError.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/workers/generatePermaLink.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/_variables/shouldCompress.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/_variables/shouldCompress.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/_variables/connectToDatabase.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/_variables/connectToDatabase.js" />
+        <option value="$PROJECT_DIR$/expressServer/_variables/ApiError.js" />
+        <option value="$PROJECT_DIR$/expressServer/_variables/connectToDatabase.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/_variables/ApiError.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/_variables/shouldCompress.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/settingsControllers.js" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/settingsControllers.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/middlewares/adminAuthMiddleware.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/controllers/settingsControllers.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/middlewares/apiRequestMiddleware.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/middlewares/apiErrorHandler.js" />
+        <option value="$PROJECT_DIR$/expressServer/middlewares/apiRequestMiddleware.d.ts" />
+        <option value="$PROJECT_DIR$/expressServer/middlewares/authMiddleware.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/middlewares/adminAuthMiddleware.js.map" />
+        <option value="$PROJECT_DIR$/expressServer/middlewares/apiRequestMiddleware.js" />
       </list>
     </option>
   </component>
@@ -1560,7 +2337,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/expressServer/socketServer/index.ts</url>
-          <line>91</line>
+          <line>90</line>
           <option name="timeStamp" value="70" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -1568,8 +2345,8 @@
           <option name="timeStamp" value="71" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/expressServer/_variables/shouldCompress.js</url>
-          <line>2</line>
+          <url>file://$PROJECT_DIR$/expressServer/_variables/shouldCompress.ts</url>
+          <line>3</line>
           <option name="timeStamp" value="72" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -1587,7 +2364,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/components/includes/LoginRegisterPopup/ValidInput.tsx</url>
-          <line>14</line>
+          <line>13</line>
           <option name="timeStamp" value="90" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -1661,7 +2438,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/components/includes/LoginRegisterPopup/LoginRegisterPopupForms.tsx</url>
-          <line>262</line>
+          <line>263</line>
           <option name="timeStamp" value="124" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -1714,7 +2491,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/components/adminIncludes/AdminPanelMainMenu/AdminPanelMainMenu.tsx</url>
-          <line>19</line>
+          <line>10</line>
           <option name="timeStamp" value="150" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -1724,11 +2501,6 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/store_toolkit/adminReducers/adminPanelGlobalStateReducer.ts</url>
           <option name="timeStamp" value="152" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/expressServer/socketServer/index.ts</url>
-          <line>4</line>
-          <option name="timeStamp" value="153" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/common/ThumbnailUploader.tsx</url>

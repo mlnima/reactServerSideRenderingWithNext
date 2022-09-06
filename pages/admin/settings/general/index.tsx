@@ -1,6 +1,4 @@
 import React, {useState, useRef} from 'react';
-import {faTimes} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {languagesOptions} from '@_variables/_variables'
 import convertVariableNameToName from "../../../../_variables/util/convertVariableNameToName";
 import styled from "styled-components";
@@ -10,6 +8,7 @@ import AdminLayout from "@components/layouts/AdminLayout";
 import {adminEditIdentity, adminPanelUpdateSetting} from "@store_toolkit/adminReducers/adminPanelSettingsReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 
 let StyledForm = styled.form`
   background-color: white;
@@ -71,6 +70,9 @@ let StyledForm = styled.form`
 
           button {
             margin: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
           }
         }
       }
@@ -202,7 +204,12 @@ const settings = () => {
         return (
             <div key={index} className='item'>
                 <p>{item}</p>
-                <button name={item} onClick={(e) => deleteItem(e)}><FontAwesomeIcon icon={faTimes}/></button>
+                <button name={item} onClick={(e) => deleteItem(e)}>
+
+                    <SvgRenderer svgUrl={'/public/asset/images/icons/icons/xmark-solid.svg'}
+                                 size={20}
+                                 color={'var(--navigation-text-color, #ccc)'}/>
+                </button>
             </div>
         )
     });

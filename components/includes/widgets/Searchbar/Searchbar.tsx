@@ -62,10 +62,8 @@ const SearchbarStyledDiv = styled.div`
     .searchbar-form {
       display: flex;
       position: initial;
-
-
+      
       .searchbar-submit-btn {
-        //position: absolute;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -80,8 +78,8 @@ const SearchbarStyledDiv = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-
       }
+      
     }
   }
 
@@ -114,7 +112,7 @@ const Searchbar: FC<SearchbarPropTypes> = (props) => {
                 }
             }).finally()
         }
-        if (!keyword?.length){
+        if (!keyword?.length) {
             push({
                 pathname: `/`,
             }).finally()
@@ -146,8 +144,7 @@ const Searchbar: FC<SearchbarPropTypes> = (props) => {
                 <SvgRenderer svgUrl={'/public/asset/images/icons/magnifying-glass-solid.svg'}
                              size={25}
                              customClassName={'show-password'}
-                             color={'var(--serachbar-widget-text-color, #fff)'}
-                />
+                             color={'var(--serachbar-widget-text-color, #fff)'}/>
 
             </button>
 
@@ -159,8 +156,7 @@ const Searchbar: FC<SearchbarPropTypes> = (props) => {
                     <SvgRenderer svgUrl={'/public/asset/images/icons/xmark-solid.svg'}
                                  size={25}
                                  customClassName={'show-password'}
-                                 color={'var(--serachbar-widget-text-color, #fff)'}
-                    />
+                                 color={'var(--serachbar-widget-text-color, #fff)'}/>
                 </button>
 
                 {!!keyword?.length &&
@@ -170,8 +166,7 @@ const Searchbar: FC<SearchbarPropTypes> = (props) => {
                     <SvgRenderer svgUrl={'/public/asset/images/icons/xmark-solid.svg'}
                                  size={25}
                                  customClassName={'show-password'}
-                                 color={'var(--serachbar-widget-text-color, #fff)'}
-                    />
+                                 color={'var(--serachbar-widget-text-color, #fff)'}/>
                 </button>}
                 <input type="text"
                        onChange={e => setKeyword(e.target.value)}
@@ -186,8 +181,7 @@ const Searchbar: FC<SearchbarPropTypes> = (props) => {
                     <SvgRenderer svgUrl={'/public/asset/images/icons/magnifying-glass-solid.svg'}
                                  size={25}
                                  customClassName={'show-password'}
-                                 color={'var(--serachbar-widget-text-color, #fff)'}
-                    />
+                                 color={'var(--serachbar-widget-text-color, #fff)'}/>
                 </button>
 
             </form>

@@ -1,8 +1,7 @@
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faDownload} from "@fortawesome/free-solid-svg-icons";
 import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
 import {FC} from "react";
+import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 
 const DownloadLinkStyledDiv = styled.div`
   display: flex;
@@ -53,7 +52,12 @@ const DownloadLink:FC<DownloadLinkPropTypes> = ({ downloadLink, render, download
         return (
             <DownloadLinkStyledDiv>
                 <span className={'download-text'}>
-                    {t<string>([t<string>('Download', {ns: 'common'}), t<string>('Download', {ns: 'customTranslation'})])}:
+                    {t<string>(
+                        [t<string>(
+                            'Download', {ns: 'common'}), t<string>(
+                                'Download', {ns: 'customTranslation'}
+                        )]
+                    )}:
                 </span>
                 <div className={'multiple-download-links'}>
 
@@ -83,9 +87,10 @@ const DownloadLink:FC<DownloadLinkPropTypes> = ({ downloadLink, render, download
                            ])}
                     >
                         <span style={{display: 'none'}}>download link for post</span>
-                        <FontAwesomeIcon icon={faDownload}
-                                         style={{width: '24px', height: '24px'}}
-                                         className={'download-logo'}/>
+                        <SvgRenderer svgUrl={'/public/asset/images/icons/download-solid.svg'}
+                                     size={25}
+                                     customClassName={'download-logo'}
+                                     color={'var(--primary-button-link-text-color, #000)'}/>
                     </a>
                     : null
                 }

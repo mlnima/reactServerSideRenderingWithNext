@@ -2,7 +2,6 @@ import {useState} from 'react';
 import MenuWidgetModelFieldsPreview from "./MenuWidgetModelFieldsPreview";
 import {uniqueId} from "lodash";
 import MenuWidgetEditForm from "./MenuWidgetEditForm";
-
 import styled from "styled-components";
 
 const MenuWidgetModelFieldsStyledDiv = styled.div`
@@ -53,6 +52,8 @@ const MenuWidgetModelFields = props => {
     const onAddHandler = e => {
         e.preventDefault()
         if (!formData.parent) {
+
+
             props.setWidgetData({
                 ...props.widgetData,
                 menuItems: [

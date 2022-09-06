@@ -1,0 +1,27 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var tslib_1 = require("tslib");
+var express_1 = require("express");
+var adminUsersRouter_1 = tslib_1.__importDefault(require("./adminUsersRouter"));
+var adminSettingsRouter_1 = tslib_1.__importDefault(require("./adminSettingsRouter"));
+var adminPostsRouter_1 = tslib_1.__importDefault(require("./adminPostsRouter"));
+var adminWidgetsRouter_1 = tslib_1.__importDefault(require("./adminWidgetsRouter"));
+var adminTerminalRouter_1 = tslib_1.__importDefault(require("./adminTerminalRouter"));
+var adminFileManagerRouter_1 = tslib_1.__importDefault(require("./adminFileManagerRouter"));
+var adminPagesRouter_1 = tslib_1.__importDefault(require("./adminPagesRouter"));
+var adminFormsRouter_1 = tslib_1.__importDefault(require("./adminFormsRouter"));
+var adminDataScrappersRouter_1 = tslib_1.__importDefault(require("./adminDataScrappersRouter"));
+var adminOrdersRouter_1 = tslib_1.__importDefault(require("./adminOrdersRouter"));
+var router = (0, express_1.Router)();
+router.use('/users', adminUsersRouter_1.default);
+router.use('/posts', adminPostsRouter_1.default);
+router.use('/settings', adminSettingsRouter_1.default);
+router.use('/widgets', adminWidgetsRouter_1.default);
+router.use('/terminal', adminTerminalRouter_1.default);
+router.use('/fileManager', adminFileManagerRouter_1.default);
+router.use('/pages', adminPagesRouter_1.default);
+router.use('/forms', adminFormsRouter_1.default);
+router.use('/scrapper', adminDataScrappersRouter_1.default);
+router.use('/orders', adminOrdersRouter_1.default);
+exports.default = router;
+//# sourceMappingURL=adminMainRouter.js.map

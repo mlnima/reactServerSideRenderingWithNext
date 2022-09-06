@@ -1,7 +1,5 @@
 import React from 'react';
 import Link from "next/link";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faShoppingCart} from "@fortawesome/free-solid-svg-icons";
 import {useRouter} from "next/router";
 import styled from "styled-components";
 
@@ -40,7 +38,7 @@ const ShoppingCart = props => {
             locale={router.locale || router.query.locale || false}
         >
             <StyledA className='shopping-card-button'>
-                <FontAwesomeIcon style={{width:'20px',height:'20px'}}  icon={faShoppingCart} className='shopping-card-logo svg-logo-medium'/>
+                {/*<FontAwesomeIcon style={{width:'20px',height:'20px'}}  icon={faShoppingCart} className='shopping-card-logo svg-logo-medium'/>*/}
                 {/*<p className='shopping-card-number'>{contextData.checkOutData.items.length}</p>*/}
             </StyledA>
         </Link>

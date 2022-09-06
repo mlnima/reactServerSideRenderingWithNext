@@ -1,8 +1,7 @@
-import React, {FC} from 'react';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBars, faLock, faLockOpen, faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
+import {FC} from 'react';
 import convertVariableNameToName from "../../../../../_variables/util/convertVariableNameToName";
 import styled from "styled-components";
+import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 
 let StyledDiv = styled.div`
   display: grid;
@@ -109,8 +108,12 @@ const WidgetHeaderControl: FC<WidgetHeaderControlPropType> =
         return (
             <StyledDiv className='widget-open-control' {...keyStatus}>
                 <div className='widget-open-close-button' onClick={onLockHandler}>
-                    <FontAwesomeIcon icon={widgetData.stayOpen ? faLockOpen : faLock}
-                                     className='widget-header-handler-admin'/>
+                    <SvgRenderer svgUrl={widgetData.stayOpen ? '/public/asset/images/icons/lock-open-solid.svg':
+                        '/public/asset/images/icons/lock-solid.svg'}
+                                 size={25}
+                                 customClassName={'show-password'}
+                                 color={'var(--serachbar-widget-text-color, #fff)'}
+                    />
 
                 </div>
                 <button className={'btn btn-danger'} onClick={onObjectModeHandler}>
@@ -123,10 +126,18 @@ const WidgetHeaderControl: FC<WidgetHeaderControlPropType> =
 
                 <div className='widget-open-control-group-buttons'>
                     <button className='changeWidgetIndexBtn' onClick={() => changeWidgetIndex(false)}>
-                        <FontAwesomeIcon icon={faSortUp} className='widget-header-handler-admin'/>
+                        <SvgRenderer svgUrl={'/public/asset/images/icons/sort-up-solid.svg'}
+                                     size={25}
+                                     customClassName={'show-password'}
+                                     color={'var(--serachbar-widget-text-color, #fff)'}
+                        />
                     </button>
                     <button className='changeWidgetIndexBtn' onClick={() => changeWidgetIndex(true)}>
-                        <FontAwesomeIcon icon={faSortDown} className='widget-header-handler-admin'/>
+                        <SvgRenderer svgUrl={'/public/asset/images/icons/sort-down-solid.svg'}
+                                     size={25}
+                                     customClassName={'show-password'}
+                                     color={'var(--serachbar-widget-text-color, #fff)'}
+                        />
                     </button>
                 </div>
             </StyledDiv>

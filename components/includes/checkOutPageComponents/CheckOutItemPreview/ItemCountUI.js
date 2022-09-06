@@ -48,7 +48,7 @@ const ItemCountUI = props => {
 
     return (
         <StyledDiv className='item-count-ui'>
-            {/*<button disabled={props.count<=1} onClick={()=>changeAmountItems(-1)}><FontAwesomeIcon className='item-count-ui-btn'  icon={faMinus}/></button>*/}
+            {/*<button disabled={props.count<=1} onClick={()=>changeAmountItems(-1)}></button>*/}
             {/*  {props.count}*/}
             {/*<button onClick={()=>changeAmountItems(1)}><FontAwesomeIcon className='item-count-ui-btn'  icon={faPlus}/></button>*/}
         </StyledDiv>

@@ -5,14 +5,13 @@ import _shortNumber from '@_variables/clientVariables/_shortNumber'
 import {useSelector} from "react-redux";
 import {Post} from "@_typeScriptTypes/Post";
 import ratingCalculator from "@_variables/util/ratingCalculator";
+import styled from "styled-components";
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const ArticlePostCard = dynamic(() => import('@components/includes/cards/ArticlePostCard'))
 const PromotionPostCard = dynamic(() => import('@components/includes/cards/PromotionPostCard'))
 const LearnPostCard = dynamic(() => import('@components/includes/cards/LearnPostCard'))
 const VideoPostCard = dynamic(() => import('@components/includes/cards/VideoPostCard'))
-
-import styled from "styled-components";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const Style = styled.div`
   padding: 20px 0;
@@ -74,7 +73,7 @@ const PostsCardsRenderer: FC<CardsRendererPropTypes> = ({
             {(uniqueData?.posts || posts || []).map((post: Post, index: number) => {
 
                 const postProps = {
-                    views: _shortNumber(post.views || 0),
+                    views: _shortNumber(post.views || 0) as number,
                     cardWidth,
                     postsPerRawForMobile,
                     rating: post.likes || post.disLikes ? ratingCalculator(post.likes, post.disLikes) : null,

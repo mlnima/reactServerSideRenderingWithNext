@@ -61,7 +61,7 @@ const CheckoutPop = props => {
     //                     <div className='check-out-pop-next'>
     //                         <Link href="/checkout"><a className='check-out-pop-next-btn' onClick={onLinkClickHandler}>
     //                             <span className='proceed-to-checkout-text'> Proceed to checkout</span>
-    //                             {/*<FontAwesomeIcon  className='check-out-pop-next-btn-icon'  icon={faShoppingCart} />*/}
+
     //                         </a></Link>
     //                     </div>
     //

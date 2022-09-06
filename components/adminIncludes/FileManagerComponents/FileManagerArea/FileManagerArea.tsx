@@ -1,19 +1,14 @@
-import React, {FC} from 'react';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faSlidersH} from "@fortawesome/free-solid-svg-icons";
-import {faCss3Alt, faJs, faSass} from "@fortawesome/free-brands-svg-icons";
-import {faFile, faFolder} from "@fortawesome/free-regular-svg-icons";
+import  {FC,Fragment} from 'react';
 import styled from "styled-components";
 import fileTypeDetector from "@_variables/util/fileTypeDetector";
-import { useSelector} from "react-redux";
-
-
+import {useSelector} from "react-redux";
 import {
     adminPanelFileManagerEditState,
     fetchFileManagerUploadFile
 } from "@store_toolkit/adminReducers/adminPanelFileManagerReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 
 const FileManagerAreaStyledDiv = styled.div`
   display: grid;
@@ -22,31 +17,39 @@ const FileManagerAreaStyledDiv = styled.div`
   background-color: black;
   padding: 20px 20px 200px 20px;
   border-radius: 20px;
-  
-  .dirItem{
+
+  .dirItem {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    .file-manager-image-item{
+
+    .file-manager-image-item {
       width: 80px;
       object-fit: cover;
     }
-    button{
+
+    button {
       width: 80px;
       height: 80px;
       background-color: rgba(255, 255, 255, .1);
       outline: none;
       transition: .4s;
       border-radius: 10px;
-      &:hover{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:hover {
         transform: scale(1.2);
       }
+
       .file-manager-icons {
         color: white;
         width: 50px;
         height: 50px;
       }
     }
+
     p {
       font-size: small;
       overflow: hidden;
@@ -54,26 +57,24 @@ const FileManagerAreaStyledDiv = styled.div`
       text-align: center;
     }
   }
-  
+
 `
 
 
-const FileManagerArea:FC = () => {
+const FileManagerArea: FC = () => {
     const dispatch = useAdminDispatch()
     const fileManagerData = useSelector(({adminPanelFileManager}: Store) => adminPanelFileManager)
-
-
 
 
     const WhatToRender = data => {
         const itemType = fileTypeDetector(data.fileName)
         if (itemType === 'image') {
             return (
-                <React.Fragment>
+                <Fragment>
                     <img className='file-manager-image-item'
                          src={fileManagerData.path.replace('.', '') + '/' + data.fileName}
                     />
-                </React.Fragment>
+                </Fragment>
 
             )
         } else if (itemType === 'video') {
@@ -83,27 +84,29 @@ const FileManagerArea:FC = () => {
                 </video>
             )
         } else {
-            const logoToRender = data.fileName.includes('.js') ? faJs :
-                data.fileName.includes('.env') ? faSlidersH :
-                    !data.fileName.includes('.') ? faFolder :
-                        data.fileName.includes('.scss') ? faSass :
-                            data.fileName.includes('.css') ? faCss3Alt :
-                                faFile
+            const logoToRender = `/public/asset/images/icons/${data.fileName.includes('.js') ? 'js-.svg' :
+                data.fileName.includes('.env') ? 'sliders-solid.svg' :
+                    !data.fileName.includes('.') ? 'folder-solid.svg' :
+                        data.fileName.includes('.scss') ? 'sass-.svg' :
+                            data.fileName.includes('.css') ? 'css3-alt-.svg' :
+                                'file-solid.svg'
+            }`
             const logoColorToRender = data.fileName.includes('.js') ? '#efd81d' :
                 data.fileName.includes('.env') ? 'red' :
                     !data.fileName.includes('.') ? '#ffe8a0' :
                         data.fileName.includes('.scss') ? 'red' :
                             data.fileName.includes('.css') ? 'blue' :
                                 'white'
-            //className={()=>classGenerator(data.fileName) as string}
+
             return (
-                <React.Fragment>
-                    <button  key={data.fileName} name={data.fileName}>
-                        <FontAwesomeIcon style={{ color: logoColorToRender}}
-                                         icon={logoToRender}
-                                         className='file-manager-icons'/>
+                <Fragment>
+                    <button key={data.fileName} name={data.fileName}>
+                        <SvgRenderer svgUrl={logoToRender}
+                                     size={25}
+                                     customClassName={'file-manager-icons'}
+                                     color={logoColorToRender}/>
                     </button>
-                </React.Fragment>
+                </Fragment>
             )
         }
     }
@@ -128,21 +131,22 @@ const FileManagerArea:FC = () => {
         )
     });
 
-    const onDropFileHandler = (e)=>{
+    const onDropFileHandler = (e) => {
         e.preventDefault()
         const fileData = e.dataTransfer.files[0]
-        if (fileData){
+        if (fileData) {
             const filesData = new FormData()
             filesData.append('token', localStorage.wt)
             filesData.append('uploadingFile', fileData)
 
-            dispatch(fetchFileManagerUploadFile({file: filesData, useType:'fileManagerFileUpload',postData:null}))
+            dispatch(fetchFileManagerUploadFile({file: filesData, useType: 'fileManagerFileUpload', postData: null}))
         }
     }
 
 
     return (
-        <FileManagerAreaStyledDiv className='FileManagerArea' onDrop={e=>onDropFileHandler(e)} onDragOver={e=>e.preventDefault()}>
+        <FileManagerAreaStyledDiv className='FileManagerArea' onDrop={e => onDropFileHandler(e)}
+                                  onDragOver={e => e.preventDefault()}>
 
             {renderDir}
         </FileManagerAreaStyledDiv>

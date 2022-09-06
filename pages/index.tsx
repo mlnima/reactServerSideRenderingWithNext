@@ -3,12 +3,11 @@ import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
 import AppLayout from '@components/layouts/AppLayout';
-import type {ReactElement} from 'react';
 import styled from "styled-components";
 import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
-
+import type {ReactElement} from 'react';
 
 const HomePageStyle = styled.div`
   display: grid;

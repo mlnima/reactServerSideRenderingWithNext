@@ -92,9 +92,13 @@ export const WidgetModelStyledDiv = styled.div`
     margin: 30px 0;
     display: flex;
     justify-content: space-evenly;
+    
 
     button {
       padding: 5px 5%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 `

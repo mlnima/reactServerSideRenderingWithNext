@@ -1,4 +1,3 @@
-// import {uniqueId} from "lodash";
 import styled from "styled-components";
 
 const MenuWidgetEditFormStyledFrom = styled.form`

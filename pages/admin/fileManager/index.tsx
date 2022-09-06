@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import FileManagerControl from '@components/adminIncludes/FileManagerComponents/FileManagerControl/FileManagerControl'
 import FileManagerArea from '@components/adminIncludes/FileManagerComponents/FileManagerArea/FileManagerArea';
 import UploadedPopView from '@components/adminIncludes/FileManagerComponents/UploadedPopView/UploadedPopView'
-import CreateNewFileFolderPop from "../../../components/adminIncludes/FileManagerComponents/CreateNewFileFolderPop/CreateNewFileFolderPop";
+import CreateNewFileFolderPop from "@components/adminIncludes/FileManagerComponents/CreateNewFileFolderPop/CreateNewFileFolderPop";
 import {useSelector} from "react-redux";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";

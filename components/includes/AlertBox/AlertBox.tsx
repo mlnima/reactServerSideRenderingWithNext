@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import styled from "styled-components";
-import { useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {closeAlert} from "@store_toolkit/clientReducers/globalStateReducer";
 import Draggable from 'react-draggable';
 import {useTranslation} from 'next-i18next';
@@ -108,7 +108,7 @@ const StyledDiv = styled.div`
 const AlertBox = () => {
     const {t} = useTranslation(['common', 'customTranslation', 'profile']);
     const dispatch = useAppDispatch();
-    const alert = useSelector(({globalState}: Store) =>  globalState?.alert );
+    const alert = useSelector(({globalState}: Store) => globalState?.alert);
 
     useEffect(() => {
         if (alert.active) {
@@ -125,7 +125,7 @@ const AlertBox = () => {
         <StyledDiv className='alert-box' onClick={() => dispatch(closeAlert(null))}>
             <Draggable handle=".handle">
                 <div className='alert-message'>
-                    <div className='alert-message-header handle' >
+                    <div className='alert-message-header handle'>
                         <p className='alert-type'>
                             {alert.type === 'success' ?
                                 <span className={'icon faCheckCircle'}/> :
@@ -157,10 +157,3 @@ const AlertBox = () => {
 };
 export default AlertBox;
 
-// {/*{alert.type === 'success' ?*/}
-// {/*    <FontAwesomeIcon icon={faCheckCircle} style={{color: 'green'}}/> :*/}
-// {/*    alert.type === 'error' ?*/}
-// {/*        <FontAwesomeIcon icon={faExclamationTriangle} style={{color: 'red'}}/> :*/}
-// {/*        <FontAwesomeIcon icon={faExclamationCircle} style={{color: 'blue'}}/>*/}
-// {/*}*/}
-// {/*<FontAwesomeIcon icon={faTimes}/>*/}

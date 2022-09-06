@@ -1,5 +1,5 @@
 import commentSchema from '../../../models/commentSchema';
-import mongoIdValidator from '../../../../_variables/util/mongoIdValidator';
+import mongoIdValidator from '../../../../_variables/serverUtil/mongoIdValidator';
 
 const clientGetComments = async (req, res) => {
     try {

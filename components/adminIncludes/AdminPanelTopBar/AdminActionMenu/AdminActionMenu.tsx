@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import {FC} from "react";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faUser} from "@fortawesome/free-regular-svg-icons";
+import React, {FC} from "react";
+import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 
 let StyledDiv = styled.div`
   position: relative;
-  .admin-panel-topbar-action-menu-items{
+
+  .admin-panel-topbar-action-menu-items {
     background-color: #33373c;
     position: absolute;
     right: 0;
@@ -14,35 +14,35 @@ let StyledDiv = styled.div`
     align-items: flex-start;
     width: 200px;
     border-radius: 3px;
+
     .AdminActionMenuItem {
     @include transparentLightTextBtn;
-      padding:10px;
+      padding: 10px;
     }
   }
-  
-  &:hover > .admin-panel-topbar-action-menu-items{
+
+  &:hover > .admin-panel-topbar-action-menu-items {
     display: flex;
   }
 `
 
-const AdminActionMenu:FC = () => {
-        return (
-            <StyledDiv className='admin-panel-topbar-action-menu'>
+const AdminActionMenu: FC = () => {
+    return (
+        <StyledDiv className='admin-panel-topbar-action-menu'>
                 <span className={'adminActionBtn adminTopBarItem'}>
-                    <FontAwesomeIcon style={{width: '20px', height: '20px'}}
-                                     //@ts-ignore
-                                     icon={faUser}
-                                     className={'post-element-info-logo'}
-                    />
+                    <SvgRenderer svgUrl={'/public/asset/images/icons/user-solid.svg'}
+                                 size={20}
+                                 customClassName={'show-password'}
+                                 color={'var(--serachbar-widget-text-color, #fff)'}/>
                 </span>
-                <div className={'admin-panel-topbar-action-menu-items'}>
-                    <button className='AdminActionMenuItem adminTopBarItem'> My Profile</button>
-                    <button className='AdminActionMenuItem adminTopBarItem'> Edit My Profile</button>
-                    <button className='AdminActionMenuItem adminTopBarItem'> Log Out</button>
-                </div>
+            <div className={'admin-panel-topbar-action-menu-items'}>
+                <button className='AdminActionMenuItem adminTopBarItem'> My Profile</button>
+                <button className='AdminActionMenuItem adminTopBarItem'> Edit My Profile</button>
+                <button className='AdminActionMenuItem adminTopBarItem'> Log Out</button>
+            </div>
 
-            </StyledDiv>
-        );
+        </StyledDiv>
+    );
 };
 
 export default AdminActionMenu;

@@ -1,22 +1,13 @@
 import Link from "next/link";
 import convertVariableNameToName from "../../../_variables/util/convertVariableNameToName";
 import styled from "styled-components";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faSortDown} from "@fortawesome/free-solid-svg-icons";
 import { useSelector} from "react-redux";
 import {setSidebarStatus} from "@store_toolkit/adminReducers/adminPanelGlobalStateReducer";
-import { useState} from "react";
+import React, { useState} from "react";
 import {useAdminDispatch} from "@store_toolkit/hooks";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 
-// interface menuItemTypes{
-//     [key:string] :{
-//         pathURL?:string
-//         subItems?:{name?:string,url?:string}[] | []
-//     }
-// }
-
-// need to rewrite later
 let StyledDiv = styled.div`
   position: absolute;
   font-size: 12px;
@@ -30,8 +21,7 @@ let StyledDiv = styled.div`
   align-items: flex-start;
   flex-direction: column;
   z-index: 16;
-  //opacity: .9; //opacity: .9;
-
+  
   .SideBarItemElement {
     width: 100%;
     border-bottom: .5px solid #333;
@@ -60,6 +50,9 @@ let StyledDiv = styled.div`
         color: var(--admin-sidebar-text-color);
         width: 50px;
         transition: all .5s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         svg {
           width: 20px;
@@ -70,7 +63,6 @@ let StyledDiv = styled.div`
 
       &:hover {
         background-color: #181818;
-        //transition: .5s;
         font-weight: bold;
         transition: opacity 300ms ease-in;
       }
@@ -229,10 +221,14 @@ const AdminPanelMainMenu = () => {
                               onMouseOver={() => setHovered(item)}
                               onClick={() => hovered === item ? setHovered('') : setHovered(item)}
                         >
-                             {/*//@ts-ignore*/}
-                            <FontAwesomeIcon icon={faSortDown}
-                                             style={{transform: hovered === item ? 'rotate(-90deg)' : 'rotate(0deg)'}}
-                                             className='fontawesomeSvgVerySmall'/>
+                            <SvgRenderer svgUrl={'/public/asset/images/icons/sort-down-solid.svg'}
+                                         size={25}
+                                         customClassName={'show-password'}
+                                         customStyle={
+                                             `transform:${ hovered === item ? `rotate(-90deg);` : `rotate(0deg);`}`
+                                         }
+                                         color={'var(--serachbar-widget-text-color, #fff)'}
+                            />
                        </span>
                         : null}
 

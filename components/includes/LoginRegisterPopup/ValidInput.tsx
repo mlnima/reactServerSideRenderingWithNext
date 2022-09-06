@@ -1,7 +1,6 @@
 import React, {FC} from 'react';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCheck, faTimes} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
+import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 
 const ValidInputStyledDiv = styled.div`
   width: 4%;
@@ -23,10 +22,14 @@ const ValidInput: FC<ValidInputPropTypes> = ({valid}) => {
     return (
         <ValidInputStyledDiv className='validator'> {
             valid ?
-                //@ts-ignore
-                <FontAwesomeIcon icon={faCheck} style={{color: 'green'}}/> :
-                //@ts-ignore
-                <FontAwesomeIcon icon={faTimes} style={{color: 'red'}}/>
+                <SvgRenderer svgUrl={'/public/asset/images/icons/check-solid.svg'}
+                             size={25}
+                             customClassName={'show-password'}
+                             color={'green'}/> :
+                <SvgRenderer svgUrl={'/public/asset/images/icons/xmark-solid.svg'}
+                             size={25}
+                             customClassName={'show-password'}
+                             color={'red'}/>
         }</ValidInputStyledDiv>
     );
 };

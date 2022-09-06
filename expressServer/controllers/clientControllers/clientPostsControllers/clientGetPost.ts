@@ -1,5 +1,5 @@
 import postSchema from '../../../models/postSchema';
-import mongoIdValidator from '../../../../_variables/util/mongoIdValidator';
+import mongoIdValidator from '../../../../_variables/serverUtil/mongoIdValidator';
 import arraySortRandom from '../../../../_variables/util/arraySortRandom';
 
 const defaultFieldForPosts = [

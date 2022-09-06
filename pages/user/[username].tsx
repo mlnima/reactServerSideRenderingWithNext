@@ -1,20 +1,19 @@
-import React, {FC, useEffect} from 'react';
+import {useEffect} from 'react';
 import UserPageProfileImage
     from "../../components/includes/userPageComponents/UserPageProfileImage/UserPageProfileImage";
 import UserPageActionButtons from "@components/includes/userPageComponents/UserPageActionButtons/UserPageActionButtons";
 import {useRouter} from "next/router";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCamera} from "@fortawesome/free-solid-svg-icons";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 import {useTranslation} from 'next-i18next';
 import {wrapper} from "@store_toolkit/store";
-import { useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 import {fetchSpecificUserData, fetchUserPageData} from "@store_toolkit/clientReducers/userReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
+import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 
 const UserPageStyledDiv = styled.div`
   color: var(--main-text-color);
@@ -153,8 +152,10 @@ const user = () => {
             </div>
             <div className='profile-posts'>
                 <div className='profile-no-posts'>
-                    <FontAwesomeIcon style={{color: 'var(--main-text-color)'}} className='upload-profile-image-btn-svg'
-                                     icon={faCamera}/>
+                    <SvgRenderer svgUrl={'/public/asset/images/icons/camera-solid.svg'}
+                                 size={20}
+                                 customClassName={'upload-profile-image-btn-svg'}
+                                 color={'var(--main-text-color, #ccc)'}/>
                 </div>
                 <h2 className='profile-no-posts-title'>No Post Yet </h2>
                 <p className='profile-no-posts-title'> Coming Soon</p>

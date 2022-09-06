@@ -14,9 +14,13 @@
     "types": [
       "node"
     ],
+    "baseUrl": ".",
     "paths": {
-      "@server/*": [
-        "server/*"
+      "@expressServer/*": [
+        "expressServer/*"
+      ],
+      "@_variables/*": [
+        "_variables/*"
       ],
       "@_dataStructures/*": [
         "_dataStructures/*"

@@ -1,6 +1,4 @@
 import React, {useEffect, useState, useRef} from 'react';
-import {faArrowRight} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {socket} from '@_variables/socket';
 import {useRouter} from "next/router";
 import styled from "styled-components";
@@ -8,6 +6,7 @@ import {useSelector} from "react-redux";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 
 const ChatRoomToolsStyledFrom = styled.form`
   position: fixed;
@@ -184,9 +183,9 @@ const ChatRoomTools = () => {
             />
             <div className={'chatroom-tools-Send'}>
                 <button className={'chatroom-tools-content-submit-button'} type={'submit'}>
-                    <FontAwesomeIcon
-                        style={{width: '24px', height: '24px', color: 'var(--navigation-text-color, #ccc)'}}
-                        icon={faArrowRight}/>
+                    <SvgRenderer svgUrl={'/public/asset/images/icons/share-solid.svg'}
+                                 size={25}
+                                 color={'var(--navigation-text-color, #ccc)'}/>
                 </button>
             </div>
         </ChatRoomToolsStyledFrom>
