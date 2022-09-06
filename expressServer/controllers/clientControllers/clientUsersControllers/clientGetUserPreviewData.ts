@@ -1,4 +1,3 @@
-//clientGetUserPreviewData
 import userSchema from '../../../models/userSchema';
 
 const clientGetUserPreviewData = (req, res) => {

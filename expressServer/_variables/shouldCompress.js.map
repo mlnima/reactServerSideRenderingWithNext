@@ -1,1 +1,0 @@
-{"version":3,"file":"shouldCompress.js","sourceRoot":"","sources":["shouldCompress.ts"],"names":[],"mappings":";;;AAAA,oEAAsC;AAEtC,IAAM,cAAc,GAAG,UAAC,GAAG,EAAE,GAAG;IAC5B,IAAI,GAAG,CAAC,OAAO,CAAC,kBAAkB,CAAC,EAAE;QACjC,OAAO,KAAK,CAAA;KACf;IACD,OAAO,qBAAW,CAAC,MAAM,CAAC,GAAG,EAAE,GAAG,CAAC,CAAA;AACvC,CAAC,CAAA;AAED,kBAAe,cAAc,CAAC"}

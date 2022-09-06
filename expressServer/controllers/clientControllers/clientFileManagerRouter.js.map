@@ -1,1 +1,0 @@
-{"version":3,"file":"clientFileManagerRouter.js","sourceRoot":"","sources":["clientFileManagerRouter.ts"],"names":[],"mappings":";;;AAAA,mCAA+B;AAC/B,4FAA8D;AAC9D,uHAAyF;AACzF,+HAAiG;AAEjG,IAAM,MAAM,GAAG,IAAA,gBAAM,GAAE,CAAC;AAExB,MAAM,CAAC,IAAI,CAAC,kBAAkB,EAAE,wBAAc,EAAE,+BAAqB,CAAC,CAAA;AACtE,MAAM,CAAC,IAAI,CAAC,sBAAsB,EAAE,mCAAyB,CAAC,CAAA;AAE9D,kBAAe,MAAM,CAAA"}

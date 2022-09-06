@@ -20,150 +20,486 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/_variables/serverUtil/fileDownloader.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_variables/serverUtil/mongoIdValidator.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/arrow-left-solid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/camera-solid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/cart-plus-solid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/check-solid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/circle-user-solid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/clone-solid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/css3-alt-.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/dollar-sign-solid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/download-solid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/eraser-solid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/euro-sign-solid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/file-export-solid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/file-solid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/floppy-disk-solid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/gear-solid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/gears-solid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/js-.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/lock-open-solid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/lock-solid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/pen-to-square-solid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/phone-slash-solid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/phone-solid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/sass-.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/share-solid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/sliders-solid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/typescript-seeklogo.com.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/upload-solid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/user-shield-solid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/video-slash-solid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/video-solid.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/adminVariables/_adminGetPostsQueryGenerator.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/adminVariables/_adminGetPostsQueryGenerator.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/clientAjaxVariables/_fixMetaImage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/clientAjaxVariables/getMetaSuggestion.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/clientAjaxVariables/getMetaSuggestion.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_clientGetPostsQueryGenerator.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/clientVariables/_clientGetPostsQueryGenerator.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_getMultipleSettingsQueryGenerator.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/adminVariables/_getMultipleSettingsQueryGenerator.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_getMultipleWidgetWithDataQueryGenerator.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/clientVariables/_getMultipleWidgetWithDataQueryGenerator.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_metaPageQueryGenerator.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/clientVariables/_metaPageQueryGenerator.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_objectToQuery.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_setAppLayoutDataFromProp.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_setSidebarName.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_shortNumber.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/clientVariables/_shortNumber.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/util/arraySortRandom.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/util/arraySortRandom.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/util/arrayUtils/_uniqBy.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/util/arrayUtils/_uniqBy.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/util/mongoIdValidator.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/util/mongoIdValidatorClient.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/AdminPanelMainMenu/AdminPanelMainMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/AdminPanelMainMenu/AdminPanelMainMenu.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/AdminPanelTopBar/AdminActionMenu/AdminActionMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/AdminPanelTopBar/AdminActionMenu/AdminActionMenu.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/AdminPanelTopBar/AdminPanelTopBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/AdminPanelTopBar/AdminPanelTopBar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/FileManagerComponents/CreateNewFileFolderPop/CreateNewFileFolderPop.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/FileManagerComponents/CreateNewFileFolderPop/CreateNewFileFolderPop.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/FileManagerComponents/FileManagerArea/FileManagerArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/FileManagerComponents/FileManagerArea/FileManagerArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/AddWidgetToPostMenu/AddWidgetToPostMenu.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/AddWidgetToPostMenu/AddWidgetToPostMenuItem.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/ImagePreview/ImagePreview.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/ImagePreview/ImagePreview.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/Meta/Meta.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/Meta/Meta.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/ImageGallery/ImageGallery.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/ImageGallery/ImageGallery.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/IsInSlideShow/IsInSlideShow.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/ProductPrice/ProductPrice.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/ProductPrice/ProductPrice.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/RatingAndViews/RatingAndViews.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/RatingAndViews/RatingAndViews.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/RenderIframe/RenderIframe.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/RenderIframe/RenderIframe.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/TextAreaComponent/TextAreaComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/TextAreaComponent/TextAreaComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/TextInput/TextInput.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/TextInput/TextInput.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/UploadFileBtn/uploadFileBtn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/UploadFileBtn/uploadFileBtn.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/VideoEmbedCode/VideoEmbedCode.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/VideoEmbedCode/VideoEmbedCode.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/VideoUrls/VideoUrls.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/VideoUrls/VideoUrls.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/eCommerceSettingsPageComponents/EcommerceSettingsInputSection/EcommerceSettingsInputSection.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/eCommerceSettingsPageComponents/EcommerceSettingsInputSection/EcommerceSettingsInputSection.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/ActionButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/ActionButtons.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/DefaultFields.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/DefaultFields.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/ExportWidget/ExportWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/ExportWidget/ExportWidget.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/AddFormConditional.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/AddFormConditional.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/FieldPreview.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/FieldPreview.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/FormTypeWidgetModelFields.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/FormTypeWidgetModelFields.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/MenuWidgetEditForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/MenuWidgetEditForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/MenuWidgetModelFields.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/MenuWidgetModelFields.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/MenuWidgetModelFieldsPreview.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/MenuWidgetModelFieldsPreview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/MenuWidgetSubMenuModelFieldsPreview.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/MenuWidgetSubMenuModelFieldsPreview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetHeaderControl/WidgetHeaderControl.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetHeaderControl/WidgetHeaderControl.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModelStyle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModelStyle.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/global/commonComponents/SvgRenderer/SvgRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/commonComponents/SvgRenderer/SvgRenderer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/global/fontawesome/fontawesome.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/AdminTools/AdminTools.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/AdminTools/AdminTools.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/AlertBox/AlertBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/AlertBox/AlertBox.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Loading/Loading.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/LoadingV2/LoadingV2.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/LoadingV2/LoadingV2.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/LoginRegisterPopup/LoginRegisterPopupForms.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/LoginRegisterPopup/LoginRegisterPopupForms.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/LoginRegisterPopup/ValidInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/LoginRegisterPopup/ValidInput.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/AddToBasket/AddToBasket.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/AddToBasket/AddToBasket.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/DownloadLink/DownloadLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/DownloadLink/DownloadLink.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/PostMetaDataToSiteHead/PostMetaDataToSiteHead.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/PostMetaDataToSiteHead/PostMetaDataToSiteHead.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/Price/Price.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/Price/Price.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/CardsRenderer/PostsCardsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CardsRenderer/PostsCardsRenderer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersListItemMoreInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersListItemMoreInfo.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomTools/ChatRoomTools.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomTools/ChatRoomTools.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/checkOutPageComponents/CheckOutItemPreview/CheckOutItemPreview.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/checkOutPageComponents/CheckOutItemPreview/CheckOutItemPreview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/checkOutPageComponents/CheckOutItemPreview/ItemCountUI.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/checkOutPageComponents/CheckOutItemPreview/ItemCountUI.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/checkOutPageComponents/CheckoutPop/CheckOutSlideHeader/CheckOutSlideHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/checkOutPageComponents/CheckoutPop/CheckOutSlideHeader/CheckOutSlideHeader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/checkOutPageComponents/CheckoutPop/CheckoutPop.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/checkOutPageComponents/CheckoutPop/CheckoutPop.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/checkOutPageComponents/CheckoutPop/CheckoutPop.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerCall/MessengerCall.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerCall/MessengerCall.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationHeader/MessengerConversationHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationHeader/MessengerConversationHeader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationMessageArea/MessengerConversationMessageArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationMessageArea/MessengerConversationMessageArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationMessageTools/MessengerConversationMessageTools.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationMessageTools/MessengerConversationMessageTools.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationsList/MessengerConversationPreview.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationsList/MessengerConversationPreview.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/common/MetaDataSelector.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/common/MetaDataSelector.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/userPageComponents/SendMessagePopUp/SendMessagePopUpHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/userPageComponents/SendMessagePopUp/SendMessagePopUpHeader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/LanguagesSwitcher/LanguagesSwitcher.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/LanguagesSwitcher/LanguagesSwitcher.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/PostsSlider/PostsSlider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/PostsSlider/PostsSlider.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Searchbar/Searchbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Searchbar/Searchbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/ShoppingCart/ShoppingCart.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/ShoppingCart/ShoppingCart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/_variables/ApiError.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/_variables/ApiError.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/_variables/_setSettingToEnvironmentVariables.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/_variables/_writeSettingsAndStaticWidgetsToJsonFile.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/_variables/shouldCompress.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/_variables/shouldCompress.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetComments.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetComments.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetPost.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetPost.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetPosts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetPosts.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/socketServer/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/socketServer/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/util/fileDownloader.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/util/mongoIdValidator.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/workers/checkAndRemoveDeletedVideos.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/workers/checkAndRemoveDeletedVideos.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/workers/commandExecutor.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/workers/commandExecutor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/workers/createNewPostByApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/workers/createNewPostByApi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/workers/createNewPostByApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/workers/createNewPostByApi.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/workers/generatePermaLink.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/workers/generatePermaLink.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/workers/mailServer.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/workers/mailServer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/workers/setMetaThumbnailsAndCount.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/workers/setMetaThumbnailsAndCount.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/master" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFixMetaImage.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/assets/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/assets/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/fileManager/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/fileManager/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/settings/eCommerceSettings/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/eCommerceSettings/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/settings/general/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/general/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/user/[username].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/user/[username].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/asset/images/icons/envelope-solid.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/asset/images/icons/envelope-solid.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/asset/images/icons/folder-solid.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/asset/images/icons/folder-solid.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPost.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPost.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_toolkit/adminReducers/adminPanelSettingsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/adminReducers/adminPanelSettingsReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/mergeDuplicateMetaData.js" beforeDir="false" afterPath="$PROJECT_DIR$/tools/mergeDuplicateMetaData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/setupDarkTheme.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.server.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.server.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/_variables/ApiError.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/_variables/ApiError.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/_variables/ApiError.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/_variables/connectToDatabase.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/_variables/connectToDatabase.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/_variables/connectToDatabase.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/_variables/shouldCompress.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/_variables/shouldCompress.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/_variables/shouldCompress.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/_variables/_adminQueryGeneratorForGettingPosts.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/_variables/_adminQueryGeneratorForGettingPosts.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/_variables/_adminQueryGeneratorForGettingPosts.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/_variables/_updateSaveMetas.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/_variables/_updateSaveMetas.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/_variables/_updateSaveMetas.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminDataScrappersControllers/adminScrapYoutubeInfo.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminDataScrappersControllers/adminScrapYoutubeInfo.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminDataScrappersControllers/adminScrapYoutubeInfo.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminDataScrappersRouter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminDataScrappersRouter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminDataScrappersRouter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminCreateNewFileOrFolder.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminCreateNewFileOrFolder.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminCreateNewFileOrFolder.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminDeleteFile.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminDeleteFile.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminDeleteFile.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminPostThumbnailsUpload.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminPostThumbnailsUpload.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminPostThumbnailsUpload.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminReadFile.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminReadFile.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminReadFile.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminReadPath.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminReadPath.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminReadPath.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminReadTranslationsFile.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminReadTranslationsFile.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminReadTranslationsFile.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminUpdateTranslationsFile.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminUpdateTranslationsFile.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminUpdateTranslationsFile.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminUploadFile.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminUploadFile.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminUploadFile.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminUploadFiles.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminUploadFiles.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminUploadFiles.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerRouter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerRouter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerRouter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFormsControllers/adminDeleteFormData.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFormsControllers/adminDeleteFormData.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFormsControllers/adminDeleteFormData.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFormsControllers/adminGetFormData.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFormsControllers/adminGetFormData.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFormsControllers/adminGetFormData.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFormsControllers/adminGetFormsData.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFormsControllers/adminGetFormsData.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFormsControllers/adminGetFormsData.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFormsRouter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFormsRouter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFormsRouter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminMainRouter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminMainRouter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminMainRouter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminOdersControllers/adminGetOrders.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminOdersControllers/adminGetOrders.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminOdersControllers/adminGetOrders.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminOrdersRouter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminOrdersRouter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminOrdersRouter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminCreateNewPage.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminCreateNewPage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminCreateNewPage.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminDeleteCustomPage.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminDeleteCustomPage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminDeleteCustomPage.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminGetPageData.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminGetPageData.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminGetPageData.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminGetPagesData.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminGetPagesData.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminGetPagesData.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminUpdatePage.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminUpdatePage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesControllers/adminUpdatePage.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesRouter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesRouter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPagesRouter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminBulkAction.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminBulkAction.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminBulkAction.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminCheckAndRemoveDeletedVideos.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminCheckAndRemoveDeletedVideos.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminCheckAndRemoveDeletedVideos.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminCreateNewPost.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminCreateNewPost.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminCreateNewPost.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminCreateNewPostByApi.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminCreateNewPostByApi.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminCreateNewPostByApi.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminDeleteComments.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminDeleteComments.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminDeleteComments.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminDeleteMeta.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminDeleteMeta.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminDeleteMeta.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminDeletePost.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminDeletePost.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminDeletePost.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminExportPosts.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminExportPosts.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminExportPosts.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGeneratePermaLinkForPosts.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGeneratePermaLinkForPosts.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGeneratePermaLinkForPosts.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetComments.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetComments.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetComments.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetMeta.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetMeta.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetMeta.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetMetas.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetMetas.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetMetas.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetPost.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetPost.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetPost.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetPosts.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetPosts.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetPosts.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminImportPosts.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminImportPosts.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminImportPosts.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminPostsBulkAction.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminPostsBulkAction.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminPostsBulkAction.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminSetMetaThumbnailsAndCount.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminSetMetaThumbnailsAndCount.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminSetMetaThumbnailsAndCount.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdateComment.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdateComment.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdateComment.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdateMeta.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdateMeta.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdateMeta.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdateMetaByApi.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdateMetaByApi.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdateMetaByApi.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdatePost.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdatePost.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdatePost.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdatePostByApi.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdatePostByApi.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdatePostByApi.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsRouter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsRouter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsRouter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsControllers/adminClearCaches.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsControllers/adminClearCaches.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsControllers/adminClearCaches.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsControllers/adminGetMultipleSettings.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsControllers/adminGetMultipleSettings.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsControllers/adminGetMultipleSettings.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsControllers/adminGetSettings.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsControllers/adminGetSettings.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsControllers/adminGetSettings.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsControllers/adminUpdateSettings.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsControllers/adminUpdateSettings.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsControllers/adminUpdateSettings.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsRouter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsRouter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminSettingsRouter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminTerminalControllers/adminCommandExecutor.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminTerminalControllers/adminCommandExecutor.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminTerminalControllers/adminCommandExecutor.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminTerminalRouter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminTerminalRouter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminTerminalRouter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminDeleteUser.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminDeleteUser.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminDeleteUser.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminGetUser.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminGetUser.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminGetUser.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminGetUsersList.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminGetUsersList.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminGetUsersList.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminNewApiKey.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminNewApiKey.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminNewApiKey.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminUpdateUserData.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminUpdateUserData.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersControllers/adminUpdateUserData.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersRouter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersRouter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminUsersRouter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminAddNewWidget.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminAddNewWidget.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminAddNewWidget.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminDeleteWidget.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminDeleteWidget.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminDeleteWidget.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminGetWidgets.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminGetWidgets.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminGetWidgets.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminPanelGetWidgets.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminPanelGetWidgets.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminPanelGetWidgets.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminUpdateWidget.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminUpdateWidget.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminUpdateWidget.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsRouter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsRouter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsRouter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/_variables/_clientQueryGeneratorForGettingPosts.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/_variables/_clientQueryGeneratorForGettingPosts.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/_variables/_clientQueryGeneratorForGettingPosts.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFileManagerControllers/clientUserImageUpload.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFileManagerControllers/clientUserImageUpload.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFileManagerControllers/clientUserImageUpload.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFileManagerControllers/clientUserPostImageUpload.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFileManagerControllers/clientUserPostImageUpload.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFileManagerControllers/clientUserPostImageUpload.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFileManagerRouter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFileManagerRouter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFileManagerRouter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFormsControllers/clientSaveFormData.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFormsControllers/clientSaveFormData.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFormsControllers/clientSaveFormData.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFormsRouter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFormsRouter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFormsRouter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientMainFestController.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientMainFestController.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientMainFestController.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientMainRouter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientMainRouter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientMainRouter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientOrdersControllers/clientCreateOrder.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientOrdersControllers/clientCreateOrder.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientOrdersControllers/clientCreateOrder.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientOrdersRouter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientOrdersRouter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientOrdersRouter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPagesControllers/clientGetPageData.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPagesControllers/clientGetPageData.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPagesControllers/clientGetPageData.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPagesControllers/clientGetPagesData.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPagesControllers/clientGetPagesData.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPagesControllers/clientGetPagesData.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPagesRouter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPagesRouter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPagesRouter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/ClientMetaSuggestion.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/ClientMetaSuggestion.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/ClientMetaSuggestion.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientCheckRemovedContent.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientCheckRemovedContent.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientCheckRemovedContent.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientFixMetaImage.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientFixMetaImage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientFixMetaImage.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetComments.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetComments.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetComments.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetMeta.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetMeta.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetMeta.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetMetas.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetMetas.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetMetas.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetPost.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetPost.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetPost.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetPosts.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetPosts.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetPosts.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientLikeDislikeView.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientLikeDislikeView.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientLikeDislikeView.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientNewComment.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientNewComment.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientNewComment.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientUserCreateNewPost.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientUserCreateNewPost.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientUserCreateNewPost.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientUserUpdatePost.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientUserUpdatePost.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientUserUpdatePost.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsRouter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsRouter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsRouter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientRobotTxtController.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientRobotTxtController.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientRobotTxtController.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientSettingsControllers/clientGetMultipleSettings.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientSettingsControllers/clientGetMultipleSettings.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientSettingsControllers/clientGetMultipleSettings.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientSettingsRouter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientSettingsRouter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientSettingsRouter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientConversation.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientConversation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientConversation.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientDeleteConversation.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientDeleteConversation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientDeleteConversation.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientFollowUser.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientFollowUser.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientFollowUser.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientFollowUser.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientFollowUser.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetConversation.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetConversation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetConversation.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetConversations.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetConversations.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetConversations.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetConversations.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetConversations.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetMultipleUserDataById.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetMultipleUserDataById.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetMultipleUserDataById.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetMultipleUserDataById.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetMultipleUserDataById.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetSignedInUserData.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetSignedInUserData.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetSignedInUserData.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetSignedInUserData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetSignedInUserData.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetUserData.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetUserData.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetUserData.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetUserData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetUserData.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetUserPreviewData.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetUserPreviewData.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetUserPreviewData.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetUserPreviewData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetUserPreviewData.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetUsersList.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetUsersList.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetUsersList.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetUsersList.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientGetUsersList.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientMessageToConversation.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientMessageToConversation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientMessageToConversation.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientMessageToConversation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientMessageToConversation.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientRegisterNewUser.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientRegisterNewUser.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientRegisterNewUser.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientRegisterNewUser.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientRegisterNewUser.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientResetUserPassword.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientResetUserPassword.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientResetUserPassword.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientResetUserPassword.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientResetUserPassword.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientSendMessage.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientSendMessage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientSendMessage.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientSendMessage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientSendMessage.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientUnFollowUser.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientUnFollowUser.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientUnFollowUser.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientUnFollowUser.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientUnFollowUser.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientUpdateUserData.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientUpdateUserData.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientUpdateUserData.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientUpdateUserData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientUpdateUserData.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientUserLogin.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientUserLogin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientUserLogin.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientUserLogin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersControllers/clientUserLogin.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersRouter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersRouter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientUsersRouter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientWidgetsRouter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientWidgetsRouter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientWidgetsRouter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/settingsControllers.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/settingsControllers.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/settingsControllers.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/metaSitemapController.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/pageSitemapController.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/searchSitemapController.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/siteMapController.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/siteMapsController.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/subSiteMapsController.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/index.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/middlewares/adminAuthMiddleware.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/middlewares/adminAuthMiddleware.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/middlewares/adminAuthMiddleware.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/middlewares/apiCache.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/middlewares/apiCache.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/middlewares/apiCache.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/middlewares/apiErrorHandler.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/middlewares/apiErrorHandler.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/middlewares/apiErrorHandler.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/middlewares/apiRequestMiddleware.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/middlewares/apiRequestMiddleware.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/middlewares/apiRequestMiddleware.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/middlewares/authMiddleware.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/middlewares/authMiddleware.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/middlewares/authMiddleware.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/middlewares/loggerMiddleware.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/middlewares/loggerMiddleware.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/middlewares/loggerMiddleware.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/chatroomSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/chatroomSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/chatroomSchema.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/commentSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/commentSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/commentSchema.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/contactFromSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/contactFromSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/contactFromSchema.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/conversationSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/conversationSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/conversationSchema.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/formSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/formSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/formSchema.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/metaSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/metaSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/metaSchema.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/metaSchemas/actorSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/metaSchemas/actorSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/metaSchemas/actorSchema.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/metaSchemas/categorySchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/metaSchemas/categorySchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/metaSchemas/categorySchema.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/metaSchemas/tagSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/metaSchemas/tagSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/metaSchemas/tagSchema.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/orderSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/orderSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/orderSchema.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/pageSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/pageSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/pageSchema.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/postSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/postSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/postSchema.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/searchKeywordSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/searchKeywordSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/searchKeywordSchema.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/settings/settingSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/settings/settingSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/settings/settingSchema.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/translateSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/translateSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/translateSchema.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/userSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/userSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/userSchema.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/widgetSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/widgetSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/widgetSchema.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/socketServer/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/socketServer/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/socketServer/index.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/ApiWorkers/clientRequests/posts/getPosts.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/ApiWorkers/clientRequests/posts/getPosts.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/ApiWorkers/clientRequests/posts/getPosts.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/checkAndRemoveDeletedVideos.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/checkAndRemoveDeletedVideos.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/checkAndRemoveDeletedVideos.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/commandExecutor.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/commandExecutor.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/commandExecutor.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/createNewPostByApi.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/createNewPostByApi.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/createNewPostByApi.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/generatePermaLink.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/generatePermaLink.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/generatePermaLink.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/mailServer.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/mailServer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/mailServer.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/setMetaThumbnailsAndCount.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/setMetaThumbnailsAndCount.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/setMetaThumbnailsAndCount.js.map" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1388,7 +1724,7 @@
       <workItem from="1662452713100" duration="4564000" />
       <workItem from="1662457980273" duration="4633000" />
       <workItem from="1662477041640" duration="3765000" />
-      <workItem from="1662483083734" duration="4876000" />
+      <workItem from="1662483083734" duration="10474000" />
     </task>
     <servers />
   </component>

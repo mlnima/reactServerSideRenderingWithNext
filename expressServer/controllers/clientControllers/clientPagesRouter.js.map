@@ -1,1 +1,0 @@
-{"version":3,"file":"clientPagesRouter.js","sourceRoot":"","sources":["clientPagesRouter.ts"],"names":[],"mappings":";;;AAAA,mCAA+B;AAC/B,yGAA2E;AAC3E,2GAA6E;AAC7E,gFAAwD;AAExD,IAAM,MAAM,GAAG,IAAA,gBAAM,GAAE,CAAC;AAExB,MAAM,CAAC,GAAG,CAAC,cAAc,EAAE,kBAAc,EAAE,2BAAiB,CAAC,CAAA;AAC7D,MAAM,CAAC,GAAG,CAAC,eAAe,EAAE,kBAAc,EAAE,4BAAkB,CAAC,CAAA;AAE/D,kBAAe,MAAM,CAAA"}

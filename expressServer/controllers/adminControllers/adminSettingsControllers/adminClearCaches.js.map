@@ -1,1 +1,0 @@
-{"version":3,"file":"adminClearCaches.js","sourceRoot":"","sources":["adminClearCaches.ts"],"names":[],"mappings":";;;AAAA,8DAAgC;AAEhC,IAAM,gBAAgB,GAAG,UAAC,GAAG,EAAE,GAAG;IAE9B,kBAAQ,CAAC,KAAK,CAAC,GAAG,CAAC,MAAM,CAAC,UAAU,CAAC,CAAA;IACrC,OAAO,CAAC,GAAG,CAAC,mBAAmB,CAAC,CAAA;IAChC,GAAG,CAAC,GAAG,EAAE,CAAA;AAEb,CAAC,CAAC;AAEF,kBAAe,gBAAgB,CAAC"}

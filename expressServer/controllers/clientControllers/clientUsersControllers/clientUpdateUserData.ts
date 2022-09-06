@@ -10,4 +10,4 @@ const clientUpdateUserData  = (req, res) =>{
         res.end()
     })
 }
- export default clientUpdateUserData
+export default clientUpdateUserData
