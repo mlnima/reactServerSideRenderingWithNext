@@ -42,8 +42,8 @@ const combinedReducer = combineReducers({
 
 
 const reducer = (state: ReturnType<typeof combinedReducer>, action: AnyAction) => {
-    let didHydrate = false
-    if (action.type === HYDRATE ) {
+
+    if (action.type === HYDRATE  ) {
         const nextState = {
             ...state,
             ...action.payload,
@@ -83,6 +83,7 @@ const reducer = (state: ReturnType<typeof combinedReducer>, action: AnyAction) =
     } else {
         return combinedReducer(state, action);
     }
+
 };
 
 export const makeStore = () => configureStore({

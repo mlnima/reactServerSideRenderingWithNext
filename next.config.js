@@ -97,7 +97,7 @@ const nextImageConfig = {
 const nextConfigs = {
     ...i18nConfig,
     ...nextImageConfig,
-    reactStrictMode: false,
+    // reactStrictMode: false,
     rewrites,
     swcMinify: true,
     eslint: {

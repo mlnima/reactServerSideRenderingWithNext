@@ -10,6 +10,7 @@ const WidgetImporter = () => {
     const [widgets,setWidgets] = useState([])
 
     useEffect( () => {
+        //@ts-ignore
         onWidgetImportHandler()
     }, [state.data]);
 
@@ -27,6 +28,7 @@ const WidgetImporter = () => {
                 const reader = new FileReader()
                 reader.readAsText(e.target.files[0])
                 reader.onload = e => {
+                    //@ts-ignore
                     setWidgets(JSON.parse(e.target.result))
                 }
             }}/>

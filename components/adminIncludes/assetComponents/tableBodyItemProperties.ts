@@ -9,4 +9,3 @@ const tableItemProperties = {
 }
 export default tableItemProperties
 
-//'description',

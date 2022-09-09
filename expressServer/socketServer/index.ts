@@ -7,7 +7,7 @@ import http from 'http'
 import express from 'express'
 import cors from 'cors'
 import chatroomSchema from '../models/chatroomSchema'
-import _uniqBy from "@_variables/util/arrayUtils/_uniqBy";
+import _uniqBy from "../../_variables/util/arrayUtils/_uniqBy";
 const app = express();
 const server = http.createServer(app);
 
