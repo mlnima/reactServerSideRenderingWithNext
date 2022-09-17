@@ -9,7 +9,7 @@ const adminGeneratePermaLinkForPosts = async (req, res) => {
         )
 
         worker.on('message', (data) => {
-            data.type === 'log' && console.log(data.message)
+            // data.type === 'log' && console.log(data.message)
 
             if (data.exit) {
                 data.exit && worker.postMessage({exit: true})

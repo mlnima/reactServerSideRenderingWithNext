@@ -130,7 +130,6 @@ export const postsSlice = createSlice({
         },
 
         newComment: (state, action: PayloadAction<any>) => {
-            console.log(action.payload)
             state.post.comments = action.payload
         },
         deleteComment: (state, action: PayloadAction<any>) => {

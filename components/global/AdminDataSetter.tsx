@@ -16,6 +16,7 @@ const AdminDataSetter: FC<AdminDataSetterPropTypes> = ({userRole}) => {
     const {pathname} = useRouter()
 
     useEffect(() => {
+        // console.log('admin deata setter')
         if (userRole === 'administrator') {
             getAndSetDataForAdmin().finally()
         }

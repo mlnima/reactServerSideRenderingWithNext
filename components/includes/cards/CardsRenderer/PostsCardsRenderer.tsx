@@ -87,9 +87,7 @@ const PostsCardsRenderer: FC<CardsRendererPropTypes> = ({
                     isSidebar: isSidebar,
                 }
 
-                // if (post?.postType === 'out' && post?.outPostType === 'video'){
-                //     console.log(post)
-                // }
+
 
                 if (post?.postType === 'video' || (post?.postType === 'out' && post?.outPostType === 'video')) {
                     return <VideoPostCard {...postProps} key={index} index={index}/>

@@ -19,7 +19,8 @@ import adminPanelCommentsSlice from "./adminReducers/adminCommentsReducer";
 import adminTerminalSlice from "./adminReducers/adminTerminalReducer";
 // import {adminPanelOrdersReducer} from "./adminReducers/adminPanelOrdersReducer";
 
-const debug = false
+const debugDev = process.env.NODE_ENV !== 'production' || process.env.NEXT_PUBLIC_PRODUCTION_URL.includes(':3000')
+const debug = false;
 
 const combinedReducer = combineReducers({
     settings: settingsSlice,
@@ -43,41 +44,41 @@ const combinedReducer = combineReducers({
 
 const reducer = (state: ReturnType<typeof combinedReducer>, action: AnyAction) => {
 
-    if (action.type === HYDRATE  ) {
+    if (action.type === HYDRATE) {
         const nextState = {
             ...state,
             ...action.payload,
+            widgets: {
+                widgetInGroups: {
+                    ...(state?.widgets?.widgetInGroups || {}),
+                    ...(action?.payload?.widgets?.widgetInGroups || {})
+                },
+                requestedWidgets: [
+                    ...new Set([
+                        ...(state?.widgets?.requestedWidgets || []),
+                        ...(action?.payload?.widgets?.requestedWidgets || [])
+                    ])
+                ]
+            },
             user: {
                 ...(action?.payload?.user || {}),
                 //@ts-ignore
                 userData: state?.user?.userData || action?.payload?.user?.userData || {}
             },
-            widgets: {
-                ...(action?.payload?.widgets || {}),
-                widgetInGroups: {
-                    ...(action?.payload?.widgets?.widgetInGroups || {}),
-                    ...(state?.widgets?.widgetInGroups || {})
-                },
-                requestedWidgets: [
-                    ...new Set([
-                        ...(action?.payload?.widgets?.requestedWidgets || []),
-                        ...(state?.widgets?.requestedWidgets || [])
-                    ])
-
-                ]
-            },
             settings: {
                 ...(action?.payload?.settings || {}),
                 identity: {
-                    ...(action?.payload?.settings?.identity || {}),
-                    ...(state?.settings?.identity || {})
+                    ...(state?.settings?.identity || {}),
+                    ...(action?.payload?.settings?.identity || {})
+
                 },
                 design: {
-                    ...(action?.payload?.settings?.design || {}),
-                    ...(state?.settings?.identity || {})
+                    ...(state?.settings?.design || {}),
+                    ...(action?.payload?.settings?.design || {})
                 }
             },
         }
+
 
         return nextState
     } else {
@@ -88,7 +89,7 @@ const reducer = (state: ReturnType<typeof combinedReducer>, action: AnyAction) =
 
 export const makeStore = () => configureStore({
     reducer,
-    devTools: process.env.NODE_ENV !== 'production' || process.env.NEXT_PUBLIC_PRODUCTION_URL.includes(':3000'),
+    devTools: debugDev,
 });
 
 //@ts-ignore

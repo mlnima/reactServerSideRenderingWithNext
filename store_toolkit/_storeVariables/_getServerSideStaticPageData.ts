@@ -2,18 +2,27 @@ import {fetchWidgets} from "@store_toolkit/clientReducers/widgetsReducer";
 import {fetchSettings} from "@store_toolkit/clientReducers/settingsReducer";
 
 export const _getServerSideStaticPageData = async (context, dynamicWidgets, options, store) => {
+    const referer = context.req?.headers?.referer;
+    const staticWidgets = ['footer', 'header', 'topBar', 'navigation']
 
-    await store.dispatch(fetchSettings({
-        requireSettings: ['identity', 'design'],
-        options: {
-            page: options.page,
-            setHeadData: options.setHeadData
-        },
-        context
-    }))
+    const matchReferer = new RegExp(`${process.env.NEXT_PUBLIC_PRODUCTION_URL}|localhost`, 'g');
+    const isInternalReferer = referer ? !!referer.match(matchReferer) : false;
+
+    if (!isInternalReferer) {
+        await store.dispatch(fetchSettings({
+            requireSettings: ['identity', 'design'],
+            options: {
+                page: options.page,
+                setHeadData: options.setHeadData
+            },
+            context
+        }))
+    }
+
+    const widgetsPositionsToRequest = isInternalReferer ? dynamicWidgets : [...staticWidgets, ...dynamicWidgets]
 
     await store.dispatch(fetchWidgets({
-        positions: ['footer', 'header', 'topBar', 'navigation', ...dynamicWidgets],
+        positions: widgetsPositionsToRequest,
         locale: context.locale
     }))
 }

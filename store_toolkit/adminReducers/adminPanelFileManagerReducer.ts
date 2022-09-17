@@ -20,7 +20,7 @@ const initialState = {
     report: '',
     inputBox: false,
     newItemName: '',
-    lastUpdate: Date.now(),
+    lastUpdate: '0000000000000',
     createNewFileFolderPop: false,
     createNewFileFolderPopType: 'file',
     translationsData: ''

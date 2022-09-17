@@ -40,9 +40,9 @@ const PageStyle = styled.div`
     flex-wrap: wrap;
 
 
-    .rating-buttons{
-      .rating-item{
-        svg{
+    .rating-buttons {
+      .rating-item {
+        svg {
           width: 24px;
           height: 24px;
         }
@@ -50,6 +50,7 @@ const PageStyle = styled.div`
 
     }
   }
+
   @media only screen and (min-width: 768px) {
 
     .rating-price-download {
@@ -75,6 +76,13 @@ const postPage = () => {
 
         }
     });
+    // const widgets = useSelector(({widgets}: Store) => widgets.widgetInGroups);
+    // const requestedWidgets = useSelector(({widgets}: Store) => widgets.requestedWidgets);
+
+    // useEffect(() => {
+    //     console.log(widgets)
+    //     console.log(requestedWidgets)
+    // }, [requestedWidgets]);
 
     useEffect(() => {
         _id && dispatch(fetchPostComments(_id as string));

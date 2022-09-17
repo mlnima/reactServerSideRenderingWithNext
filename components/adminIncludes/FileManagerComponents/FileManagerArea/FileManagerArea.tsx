@@ -113,7 +113,7 @@ const FileManagerArea: FC = () => {
 
     const onClickHandler = item => {
         let itemPath = fileManagerData.path === './' ? './' + item : fileManagerData.path + '/' + item
-        console.log(itemPath)
+
         dispatch(adminPanelFileManagerEditState({
             prevPath: fileManagerData.path,
             path: itemPath,

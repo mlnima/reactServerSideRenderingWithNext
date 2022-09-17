@@ -1,9 +1,9 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "@store_toolkit/store";
 import Axios from "@_variables/util/Axios";
-import { isMobile } from 'react-device-detect';
 import {setHeadData} from "@store_toolkit/clientReducers/globalStateReducer";
 import _firstRequestHeadDataSetter from "@store_toolkit/_storeVariables/_firstRequestHeadDataSetter";
+
 
 interface SettingsStateState {
     isMobile: boolean,
@@ -25,11 +25,11 @@ const initialState: SettingsStateState = {
     requestedSettings: []
 }
 
-interface FetchSettingsProps{
+interface FetchSettingsProps {
     requireSettings: string[],
-    options:{
-        page?:string
-        setHeadData:boolean
+    options: {
+        page?: string
+        setHeadData: boolean
     },
     context
 }
@@ -37,16 +37,15 @@ interface FetchSettingsProps{
 export const fetchSettings = createAsyncThunk(
     'settings/fetchSettings',
     async (
-        config:FetchSettingsProps,
+        config: FetchSettingsProps,
         thunkAPI) => {
 
         try {
-
             const settingsQuery = config.requireSettings.map((setting) => `setting=${setting}`).join('&')
             const fetchedSettings = await Axios.get(`/api/v1/settings/getMultipleSettings?${settingsQuery}`)
-
             const designData = fetchedSettings.data.settings?.find(setting => setting.type === 'design')
             const identityData = fetchedSettings.data.settings?.find(setting => setting.type === 'identity')
+
             thunkAPI.dispatch(
                 setHeadData(
                     _firstRequestHeadDataSetter(
@@ -62,10 +61,9 @@ export const fetchSettings = createAsyncThunk(
                 requestedSettings: config.requireSettings,
                 design: designData?.data || {},
                 identity: identityData.data || {},
-                isMobile
             }
-        }catch (err) {
-             console.log(err)
+        } catch (err) {
+            console.log(err)
         }
     }
 )
@@ -84,34 +82,25 @@ export const settingsSlice = createSlice({
     name: 'settings',
     initialState,
     reducers: {
-        setRequestedSettings: (state, action: PayloadAction<any>) => {
-            return {
-                ...state,
-                requestedSettings: [...new Set([...state.requestedSettings, ...action.payload])]
-            }
-        },
+        // setRequestedSettings: (state, action: PayloadAction<any>) => {
+        //     return {
+        //         ...state,
+        //         requestedSettings: [...new Set([...state.requestedSettings, ...action.payload])]
+        //     }
+        // },
         setSettingsForAdmin: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
                 ...action.payload
             }
         },
-        clearRequestedSettings: (state, action: PayloadAction<any>) => {
-            return {
-                ...state,
-                requestedSettings: []
-            }
-        },
-        editDesign: (state, action: PayloadAction<any>) => {
-            // state.design = action?.payload || null
-            // return {
-            //     ...state,
-            //     design: {
-            //         ...state.design,
-            //         ...action?.payload || {}
-            //     }
-            // }
-        },
+        // clearRequestedSettings: (state, action: PayloadAction<any>) => {
+        //     return {
+        //         ...state,
+        //         requestedSettings: []
+        //     }
+        // },
+
     },
     extraReducers: (builder) => builder
         .addCase(fetchSettings.fulfilled, (state, action: PayloadAction<any>) => {
@@ -120,11 +109,21 @@ export const settingsSlice = createSlice({
                 ...action.payload
             }
         })
+        // .addCase([HYDRATE],(state, action: PayloadAction<any>) =>{
+        //     console.log('HYDRATE')
+        //     // return {
+        //     //     ...state,
+        //     //     ...action.payload
+        //     // }
+        // })
 
 
 })
 
-export const {setRequestedSettings, editDesign,setSettingsForAdmin} = settingsSlice.actions
+export const {
+    // setRequestedSettings,
+    setSettingsForAdmin
+} = settingsSlice.actions
 
 export const settingsReducer = (state: RootState) => state?.settings || null
 
