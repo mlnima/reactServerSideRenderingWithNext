@@ -30,6 +30,7 @@ const LanguagesSwitcherStyledDiv = styled.div`
   .custom-select {
     border: none;
     width: 70px;
+    font-size: initial;
     background-color: var(--navigation-background-color, #18181b);
     color: var(--navigation-text-color, #ccc);
   }

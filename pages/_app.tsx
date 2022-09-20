@@ -4,6 +4,7 @@ import type {AppProps} from 'next/app'
 import {appWithTranslation} from 'next-i18next';
 import nextI18NextConfig from '../next-i18next.config';
 import {wrapper} from '@store_toolkit/store';
+import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 
 type NextPageWithLayout = NextPage & {
     getLayout?: (page: ReactElement) => ReactNode

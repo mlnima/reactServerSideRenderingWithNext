@@ -159,9 +159,7 @@ const PostsSlider: FC<PostsSliderPropsTypes> =
             dragFree: true
         }, [autoplay])
 
-
         const {locale} = useRouter()
-        const dispatch = useAppDispatch()
         const [selectedIndex, setSelectedIndex] = useState(0);
         const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
         const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
@@ -185,11 +183,8 @@ const PostsSlider: FC<PostsSliderPropsTypes> =
         } = useSelector(({settings}: Store) => {
             const elementSize = cardWidthDesktop ? cardWidthDesktop : settings?.design?.cardWidthDesktop || 255
             return {
-                elementSize,
                 postsPerRawForMobile: 1,
-                isMobileDevice: settings?.isMobile,
                 cardWidth: elementSize,
-                isAppleMobile: settings?.isAppleMobileDevice
             }
         })
 

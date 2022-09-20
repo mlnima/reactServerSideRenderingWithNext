@@ -8,7 +8,7 @@ import {
     _renderByDevice,
     _renderByLanguageCondition,
 } from "@_variables/clientVariables/_widgetsRendererVariables";
-import {useMemo} from "react";
+// import {useMemo} from "react";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const DynamicNoSSR = dynamic(() => import('./DynamicNoSSR'))
@@ -30,8 +30,9 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
         }
     })
 
-    const isMobileDevice = useSelector((store: Store) => store.settings?.isMobile)
-    const isMobile = useMemo(() => isMobileDevice, [])
+    // const isMobileDevice = useSelector((store: Store) => store.settings?.isMobile)
+    // const isMobile = useMemo(() => isMobileDevice, [])
+    const isMobile = true
 
     const renderWidgets = !!widgets?.length && [...widgets].sort((a, b) => a.data.widgetIndex > b.data.widgetIndex ? 1 : -1)
         .map((widget) => {

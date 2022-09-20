@@ -4,9 +4,8 @@ import Axios from "@_variables/util/Axios";
 import {setHeadData} from "@store_toolkit/clientReducers/globalStateReducer";
 import _firstRequestHeadDataSetter from "@store_toolkit/_storeVariables/_firstRequestHeadDataSetter";
 
-
-interface SettingsStateState {
-    isMobile: boolean,
+interface SettingsState {
+    ip?: string,
     design: {},
     identity: {},
     eCommerce: {},
@@ -16,8 +15,7 @@ interface SettingsStateState {
     requestedSettings: string[]
 }
 
-const initialState: SettingsStateState = {
-    isMobile: true,
+const initialState: SettingsState = {
     design: {},
     identity: {},
     eCommerce: {},
@@ -82,25 +80,12 @@ export const settingsSlice = createSlice({
     name: 'settings',
     initialState,
     reducers: {
-        // setRequestedSettings: (state, action: PayloadAction<any>) => {
-        //     return {
-        //         ...state,
-        //         requestedSettings: [...new Set([...state.requestedSettings, ...action.payload])]
-        //     }
-        // },
         setSettingsForAdmin: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
                 ...action.payload
             }
         },
-        // clearRequestedSettings: (state, action: PayloadAction<any>) => {
-        //     return {
-        //         ...state,
-        //         requestedSettings: []
-        //     }
-        // },
-
     },
     extraReducers: (builder) => builder
         .addCase(fetchSettings.fulfilled, (state, action: PayloadAction<any>) => {
@@ -109,19 +94,9 @@ export const settingsSlice = createSlice({
                 ...action.payload
             }
         })
-        // .addCase([HYDRATE],(state, action: PayloadAction<any>) =>{
-        //     console.log('HYDRATE')
-        //     // return {
-        //     //     ...state,
-        //     //     ...action.payload
-        //     // }
-        // })
-
-
 })
 
 export const {
-    // setRequestedSettings,
     setSettingsForAdmin
 } = settingsSlice.actions
 

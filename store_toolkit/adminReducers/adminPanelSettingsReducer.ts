@@ -10,7 +10,6 @@ interface AdminPanelSettingState {
     design: {},
     identity: {},
     eCommerce: {},
-    isMobile: boolean,
     ip: string,
 }
 
@@ -18,7 +17,6 @@ const initialState:AdminPanelSettingState = {
     design: {},
     identity: {},
     eCommerce: {},
-    isMobile: false,
     ip: '',
 }
 

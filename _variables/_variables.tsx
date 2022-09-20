@@ -24,9 +24,9 @@ export const convertMetasTypeToSingular = (metaType:string)=>{
 }
 
 
-export const isAppleMobileDevice = (userAgent:string)=>{
-    return /iPhone|iPad|iPod/i.test(userAgent)
-}
+// export const isAppleMobileDevice = (userAgent:string)=>{
+//     return /iPhone|iPad|iPod/i.test(userAgent)
+// }
 
 
 export const onChangeInputValueCorrector = (e:any) =>{

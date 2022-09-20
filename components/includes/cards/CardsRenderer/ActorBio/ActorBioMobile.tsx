@@ -41,7 +41,7 @@ const ActorBioMobileStyledSection = styled.section`
   
   .show-more-detail-btn{
     align-self: flex-end;
-    margin: 5px;
+    margin: auto;
   }
 `
 
@@ -92,9 +92,9 @@ const ActorBioMobile: FC = () => {
                 // @ts-ignore
                 actorData?.additionalInfo?.length || actorData?.description ?
                 <button onClick={onShowDetailsHandler}
-                        className={'btn btn-primary show-more-detail-btn'}
-                >
-                    {showMore ? '-' : '+'}
+                        className={'btn btn-info show-more-detail-btn'}
+                        aria-label={'More Info'}>
+                    {showMore ? '-' : '+'} More Info
                 </button>
                 :null
             }
