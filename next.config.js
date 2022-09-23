@@ -27,26 +27,51 @@ const i18nConfig = locales?.length === 1 ? {} : {
 const rewrites = () => {
     return {
         beforeFiles: [
+
             // {
             //     source: `/post/:postType(video|post|product|article|book)`,
             //     destination: '/posts?postType=:postType' ,
             //     has: [{type: 'query', key: 'postType'}]
             // },
+
+
             {
                 source: `/post`,
-                destination: '/post/old/:id',
+                destination: '/posts/old/:id',
                 has: [{type: 'query', key: 'id'}]
             },
             {
                 source: `/video`,
-                destination: '/post/old/:id',
-                has: [{type: 'query', key: 'id'}]
+                destination: '/posts/old/:identifier',
+                has: [{type: 'query', key: 'identifier'}]
             },
             {
                 source: `/:postType(video|product|article|book|standard|promotion|learn|food|book)?/:title`,
-                destination: '/post/:postType/:id',
-                has: [{type: 'query', key: 'id'}]
+                destination: '/posts/:postType/:identifier',
+                has: [{type: 'query', key: 'identifier'}]
             },
+            {
+                source: `/:metaType(categories|tags|actors)?/:title`,
+                destination: '/:metaType/:content',
+                has: [{type: 'query', key: 'content'}]
+            },
+            {
+                source: `/post/:postType/:id`,
+                destination: '/posts/:postType/:id',
+            },
+            {
+                source: `/category/:categoryId`,
+                destination: '/categories/:categoryId',
+            },
+            {
+                source: `/tag/:tagId`,
+                destination: '/tags/:tagId',
+            },
+            {
+                source: `/actor/:actorId`,
+                destination: '/actors/:actorId',
+            },
+
             // {
             //     source: `/post/out/:postType(video|product|article|book|standard|promotion|learn|food|book|out)?/:id`,
             //     destination: '/post/:postType/:id',
@@ -57,24 +82,20 @@ const rewrites = () => {
             //     destination: '/post/undefinedType/:title',
             //     has: [{type: 'query', key: 'title'}]
             // },
-            // {source: `/:locale(${languages})?/login`, destination: '/auth/login'},
             {source: `/login`, destination: '/auth/login'},
-            // {source: `/:locale(${languages})?/register`, destination: '/auth/register'},
             {source: `/register`, destination: '/auth/register'},
         ],
         afterFiles: [
             {source: `/admin`, destination: '/admin', locale: false},
-            {source: `/:locale(${languages})?/:postType(video|post|product|article|book)/:title`, destination: '/post'},
-            {source: `/:postType(video|post|product|article|book)?/:title`, destination: '/post'},
-
-
+            // {source: `/:locale(${languages})?/:postType(video|post|product|article|book)/:title`, destination: '/post',has: [{type: 'query', key: 'id'}]},
+            {source: `/:postType(video|post|product|article|book)?/:title`, destination: '/posts',has: [{type: 'query', key: 'id'}]},
         ],
         fallback: [
             {
-                source: `/:title`,
-                destination: '/post/undefinedType/:title',
-                has: [{type: 'query', key: 'title'}]
-            }
+                source: `/:identifier`,
+                destination: '/posts/undefinedType/:identifier',
+                // has: [{type: 'query', key: 'title'}]
+            },
         ]
     }
 }

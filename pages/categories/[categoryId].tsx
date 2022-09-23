@@ -1,24 +1,28 @@
 import PostsPage from "@components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
+import PostsPageInfo from "@components/includes/PostsPage/PostsPageInfo";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
-import {useRouter} from "next/router";
+import Link from "next/link";
 import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
-import Link from "next/link";
+import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
-import type {ReactElement} from 'react'
 import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
-import ActorBio from '../../components/includes/cards/CardsRenderer/ActorBio/ActorBio'
 import fetchPosts from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPosts";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
-const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
+const WidgetsRenderer = dynamic(() => import('@components/includes/WidgetsRenderer/WidgetsRenderer'))
 
-const PageStyle = styled.div`
+let PageStyle = styled.div`
   width: 100%;
-  height: 100%;
+
+  .edit-as-admin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   .posts-page-info {
     margin: 5px 0;
@@ -29,28 +33,26 @@ const PageStyle = styled.div`
     }
   }
 
-  ${(props: { stylesData: string }) => props.stylesData || ''}
-
+  ${({categoryPageStyle}: { categoryPageStyle: string }) => categoryPageStyle || ''}
 `
 
-const actorPage = () => {
+const categoryPage = () => {
 
-    const {query} = useRouter()
-
-    const {role, actorPageStyle, sidebar} = useSelector(({user, settings}: Store) => {
+    const {role, category, categoryPageStyle, sidebar} = useSelector(({user, posts, settings}: Store) => {
         return {
-            role: user?.userData.role,
-            actorPageStyle: settings?.design?.actorPageStyle,
-            sidebar: settings?.identity?.actorPageSidebar
+            role: user?.userData?.role,
+            category: posts.categoryData,
+            categoryPageStyle: settings.design?.categoryPageStyle,
+            sidebar: settings?.identity?.categoryPageSidebar
         }
     })
 
     return (
-        <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`} stylesData={actorPageStyle}>
+        <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar `} categoryPageStyle={categoryPageStyle}>
             <main id={'primary'} className="main posts-page">
                 {role === 'administrator' ?
                     <div className='edit-as-admin'>
-                        <Link href={'/admin/meta?id=' + query.actorId}>
+                        <Link href={'/admin/meta?id=' + category?._id}>
                             <a className={'btn btn-primary'}>
                                 Edit
                             </a>
@@ -58,34 +60,34 @@ const actorPage = () => {
                     </div>
                     : null}
 
-                <ActorBio/>
+                {category ? <PostsPageInfo metaData={category}/> : null}
+
                 <WidgetsRenderer
-                    position='actorPageTop'
+                    position={'categoryPageTop'}
                 />
                 <PostsPage renderPagination={true}/>
                 <WidgetsRenderer
-                    position='actorPageBottom'
+                    position={'categoryBottom'}
                 />
             </main>
-            <SidebarWidgetAreaRenderer sidebar={sidebar} position={'actorPage'}/>
+            <SidebarWidgetAreaRenderer sidebar={sidebar} position={'categoryPage'}/>
         </PageStyle>
     )
 };
-
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     await _getServerSideStaticPageData(
         context,
         [
-            'actorPageTop',
-            'actorPageLeftSidebar',
-            'actorPageBottom',
-            'actorPageRightSidebar'
+            'categoryPageTop',
+            'categoryPageLeftSidebar',
+            'categoryPageBottom',
+            'categoryPageRightSidebar'
         ],
         {
-            page: 'actor',
-            setHeadData: false
+            page:'category',
+            setHeadData:false
         },
         store
     )
@@ -93,11 +95,11 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     await store.dispatch(
         fetchPosts({
                 context,
-                metaId: context?.query?.actorId as string,
-                metaType: 'actors',
+                metaId: context?.query?.categoryId as string,
+                metaType: 'categories',
                 options: {
-                    page: 'actor',
-                    setHeadData: true
+                    page: 'category',
+                    setHeadData:true
                 }
             }
         ))
@@ -109,8 +111,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     }
 });
 
-
-actorPage.getLayout = function getLayout(page: ReactElement) {
+categoryPage.getLayout = function getLayout(page: ReactElement) {
     return (
         <AppLayout>
             {page}
@@ -118,5 +119,5 @@ actorPage.getLayout = function getLayout(page: ReactElement) {
     )
 }
 
-export default actorPage;
+export default categoryPage;
 

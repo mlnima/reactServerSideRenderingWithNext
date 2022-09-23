@@ -8,7 +8,8 @@ import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRend
 const Style = styled.div`
   background-color: var(--navigation-background-color, #000);
   width: 100%;
-  .breadcrumbs{
+
+  .breadcrumbs {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
@@ -18,7 +19,9 @@ const Style = styled.div`
     padding: 5px 0;
 
     .breadcrumbs-item {
-      margin-right: 5px;
+      margin: auto 2px;
+
+
       .breadcrumbs-link {
         color: var(--navigation-text-color, #ccc);
         display: flex;
@@ -29,13 +32,13 @@ const Style = styled.div`
           color: var(--main-active-color, #f90);
         }
 
-        span{
+        span {
           text-overflow: ellipsis;
           white-space: nowrap;
           overflow: hidden;
           max-width: 80vw;
         }
-        
+
         .breadcrumbList-arrow {
 
         }
@@ -49,25 +52,32 @@ interface BreadcrumbListPropTypes {
 }
 
 const BreadcrumbList: FC<BreadcrumbListPropTypes> = (props) => {
+
     const {asPath} = useRouter()
-
     const siteName = useAppSelector(({settings}) => settings?.identity?.siteName || 'Home')
-
     const linkPath = asPath.split('/');
-    //const linkPath =useMemo(()=>asPath.split('/'),[asPath])
+
+    const nameFixerForOldUrls = (name: string) => {
+        return name === 'post' ? 'posts' :
+            name === 'category' ? 'categories' :
+                name === 'tag' ? 'tags' :
+                    name === 'actor' ? 'actors' :
+                        name === 'posts?postType=video' ? 'video' :
+                            name === 'posts?postType=article' ? 'article' :
+                                name === 'posts?postType=promotion' ? 'promotion' :
+                                    name === 'posts?postType=learn' ? 'learn' :
+                                        name
+    }
 
     linkPath.shift();
 
-
-
-    const renderListItems = linkPath.map((path, index) => {
-
+    const renderListItems = linkPath.filter(path=>path!=='page').map((path, index) => {
         const normalPath = `/${linkPath.slice(0, index + 1).join('/')}`
-        const overWritePath = normalPath === '/post' ? '/posts' :
-            normalPath.includes('post/video') ? '/posts?postType=video' :
-                normalPath.includes('post/article') ? '/posts?postType=article' :
-                    normalPath.includes('post/promotion') ? '/posts?postType=promotion' :
-                        normalPath.includes('post/learn') ? '/posts?postType=learn' :
+        const overwritePath = normalPath === '/post' ? '/posts' :
+            normalPath.match(/post\/video|posts\/video/g) ? '/posts?postType=video' :
+                normalPath.match(/post\/article|posts\/article/g) ? '/posts?postType=article' :
+                    normalPath.match(/post\/promotion|posts\/promotion/g) ? '/posts?postType=promotion' :
+                        normalPath.match(/post\/learn|posts\/learn/g) ? '/posts?postType=learn' :
                             normalPath === '/category' ? '/categories' :
                                 normalPath === '/tag' ? '/tags' :
                                     normalPath === '/actor' ? 'actors' :
@@ -75,7 +85,7 @@ const BreadcrumbList: FC<BreadcrumbListPropTypes> = (props) => {
 
         const itemData = {
             breadcrumb: path,
-            href: overWritePath
+            href: overwritePath
         }
 
         return (
@@ -91,7 +101,7 @@ const BreadcrumbList: FC<BreadcrumbListPropTypes> = (props) => {
                                      customClassName={'breadcrumbList-arrow icon'}
                                      color={'var(--navigation-text-color,#ccc)'}
                         />
-                        <span itemProp="name">  {itemData.breadcrumb.substring(0,20)}</span>
+                        <span itemProp="name">{nameFixerForOldUrls(itemData.breadcrumb)}</span>
                     </a>
                 </Link>
                 <meta itemProp="position" content={(index + 2).toString()}/>
@@ -108,7 +118,7 @@ const BreadcrumbList: FC<BreadcrumbListPropTypes> = (props) => {
                     itemType="https://schema.org/ListItem">
                     <Link href={'/'}>
                         <a itemProp="item" className="breadcrumbs-link">
-                            <span itemProp="name">{siteName  || 'Home'} </span>
+                            <span itemProp="name">{siteName || 'Home'} </span>
                         </a>
                     </Link>
                     <meta itemProp="position" content={'1'}/>

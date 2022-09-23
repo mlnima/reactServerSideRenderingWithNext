@@ -20,7 +20,12 @@ export const getTextDataWithTranslation = (locale : string,name: string,parentOb
 export const convertMetasTypeToSingular = (metaType:string)=>{
   return metaType === 'actors' ? 'actor' :
          metaType === 'tags' ? 'tag' :
-         metaType === 'categories' ? 'category':''
+         metaType === 'categories' ? 'category':metaType
+}
+export const convertMetasTypeToPlural = (metaType:string)=>{
+  return metaType === 'actor' ? 'actors' :
+         metaType === 'tag' ? 'tags' :
+         metaType === 'category' ? 'categories': metaType
 }
 
 

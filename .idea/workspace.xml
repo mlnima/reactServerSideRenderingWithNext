@@ -20,22 +20,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change afterPath="$PROJECT_DIR$/app/admin/test/page.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_typeScriptTypes/settings/SettingsState.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_typeScriptTypes/storeTypes/AdminPanelSettings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_typeScriptTypes/storeTypes/AdminPanelSettings.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_typeScriptTypes/storeTypes/SettingsState.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_typeScriptTypes/storeTypes/SettingsState.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_typeScriptTypes/storeTypes/Store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_typeScriptTypes/storeTypes/Store.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_variables/_variables.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/_variables.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/WidgetsRenderer/WidgetsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/WidgetsRenderer/WidgetsRenderer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/CardsRenderer/ActorBio/ActorBio.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CardsRenderer/ActorBio/ActorBio.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/CardsRenderer/ActorBio/ActorBioDesktop.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/CardsRenderer/ActorBio/ActorBioMobile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CardsRenderer/ActorBio/ActorBioMobile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/LanguagesSwitcher/LanguagesSwitcher.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/LanguagesSwitcher/LanguagesSwitcher.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/VideoPlayer/VideoPlayer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/VideoPlayer/VideoPlayer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/ActorCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/ActorCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/CardsRenderer/PostsCardsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CardsRenderer/PostsCardsRenderer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/CategoryCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CategoryCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/TagCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/TagCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/Authentication.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/Authentication.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/widgets/PostsSlider/PostsSlider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/PostsSlider/PostsSlider.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Searchbar/Searchbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Searchbar/Searchbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/layouts/AdminLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AdminLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/layouts/AppLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AppLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/widgetsArea/NavigationWidgetArea/BreadcrumbList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/widgetsArea/NavigationWidgetArea/BreadcrumbList.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_toolkit/adminReducers/adminPanelSettingsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/adminReducers/adminPanelSettingsReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_toolkit/clientReducers/settingsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/clientReducers/settingsReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/404.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/404.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/actor/[actorId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/actors/[actorId].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/category/[categoryId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/categories/[categoryId].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/post/[postType]/[identifier].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/posts/[postType]/[identifier].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/tag/[tagId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tags/[tagId].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store_toolkit/clientReducers/postsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/clientReducers/postsReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store_toolkit/clientReducers/userReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/clientReducers/userReducer.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,8 +56,8 @@
         <option value="tsconfig.json" />
         <option value="CSS File" />
         <option value="TypeScript JSX File" />
-        <option value="JavaScript File" />
         <option value="TypeScript File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -89,7 +96,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="14.17.3" />
     <property name="javascript.nodejs.core.library.typings.version" value="14.17.3" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/_devUtil" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -105,18 +112,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\app" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\_devUtil" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\store_toolkit" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\public\asset\images\icons" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\pages" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\trash" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\_variables\serverUtil" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\_variables\adminVariables" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\_typeScriptTypes\widgets" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\_dataStructures" />
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\pages\posts" />
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\pages\tags" />
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\pages\tags\[tagId]" />
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\pages\actors" />
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\pages\categories" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -124,7 +131,7 @@
       <command value="nextEnv" />
     </option>
   </component>
-  <component name="RunManager" selected="npm.start">
+  <component name="RunManager" selected="npm.dev">
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -177,9 +184,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.update:packages" />
         <item itemvalue="npm.build:server" />
       </list>
@@ -1275,7 +1282,11 @@
       <workItem from="1663472058884" duration="2062000" />
       <workItem from="1663523962711" duration="11893000" />
       <workItem from="1663610301686" duration="1800000" />
-      <workItem from="1663676252660" duration="10172000" />
+      <workItem from="1663676252660" duration="17729000" />
+      <workItem from="1663761335107" duration="4180000" />
+      <workItem from="1663785916634" duration="5350000" />
+      <workItem from="1663856551725" duration="2083000" />
+      <workItem from="1663871165536" duration="13721000" />
     </task>
     <servers />
   </component>
@@ -1398,11 +1409,6 @@
           <url>file://$PROJECT_DIR$/pages/checkout/index.tsx</url>
           <line>186</line>
           <option name="timeStamp" value="55" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/node_modules/next/dist/server/next.d.ts</url>
-          <line>10</line>
-          <option name="timeStamp" value="58" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/trash/DesktopAuthentication/LoggedInItemsForMenu.tsx</url>
@@ -1546,11 +1552,6 @@
           <url>file://$PROJECT_DIR$/pages/admin/post/index.tsx</url>
           <line>10</line>
           <option name="timeStamp" value="138" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/node_modules/next/dist/server/next.d.ts</url>
-          <line>1</line>
-          <option name="timeStamp" value="140" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/trash/DesktopAuthentication/LoggedOutItemsMenu.tsx</url>

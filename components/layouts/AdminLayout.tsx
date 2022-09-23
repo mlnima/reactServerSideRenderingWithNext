@@ -1,11 +1,11 @@
 import React, {useRef, useEffect} from 'react';
-import AdminPanelTopBar from "../adminIncludes/AdminPanelTopBar/AdminPanelTopBar";
-import AdminPanelMainMenu from "../adminIncludes/AdminPanelMainMenu/AdminPanelMainMenu";
+import AdminPanelTopBar from "@components/adminIncludes/AdminPanelTopBar/AdminPanelTopBar";
+import AdminPanelMainMenu from "@components/adminIncludes/AdminPanelMainMenu/AdminPanelMainMenu";
 import {useSelector} from 'react-redux';
-import AdminPanelGlobalStyles from "../global/Styles/AdminPanelGlobalStyles";
+import AdminPanelGlobalStyles from "@components/global/Styles/AdminPanelGlobalStyles";
 import Link from "next/link";
-import AdminDataSetter from "../global/AdminDataSetter";
-import GlobalStyles from "../global/Styles/GlobalStylesComponent";
+import AdminDataSetter from "@components/global/AdminDataSetter";
+import GlobalStyles from "@components/global/Styles/GlobalStylesComponent";
 import styled from "styled-components";
 import LoadingV2 from "@components/includes/LoadingV2/LoadingV2";
 import AlertBox from "@components/includes/AlertBox/AlertBox";

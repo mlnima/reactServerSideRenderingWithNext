@@ -49,13 +49,14 @@ const AuthenticationStyledDiv = styled.div`
   }
 
   .authentication-widget-wrapper {
+  
     padding: 5px 0;
     position: fixed;
     right: 0;
     top: 0;
     background: var(--auth-widget-background, #000);
     width: 85%;
-    z-index: 11;
+    z-index: 12;
     height: 100vh;
     display: ${({open}: { open: boolean }) => open ? 'flex' : 'none'};
     flex-direction: column;

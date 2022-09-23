@@ -1,23 +1,24 @@
 import PostsPage from "@components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
-import PostsPageInfo from "@components/includes/PostsPage/PostsPageInfo";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
+import {useRouter} from "next/router";
 import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
 import Link from "next/link";
-import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
+import type {ReactElement} from 'react'
 import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
+import ActorBio from '@components/includes/cards/CardsRenderer/ActorBio/ActorBio'
 import fetchPosts from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPosts";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
-const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
+const WidgetsRenderer = dynamic(() => import('@components/includes/WidgetsRenderer/WidgetsRenderer'))
 
-let PageStyle = styled.div`
-
+const PageStyle = styled.div`
   width: 100%;
+  height: 100%;
 
   .posts-page-info {
     margin: 5px 0;
@@ -28,43 +29,45 @@ let PageStyle = styled.div`
     }
   }
 
-  ${({tagPageStyle}: { tagPageStyle: string }) => tagPageStyle || ''}
-`
-const tagPage = () => {
+  ${(props: { stylesData: string }) => props.stylesData || ''}
 
-    const {role, tag, tagPageStyle, sidebar} = useSelector(({user, posts, settings}: Store) => {
+`
+
+const actorPage = () => {
+
+    const {query} = useRouter()
+
+    const {role, actorPageStyle, sidebar} = useSelector(({user, settings}: Store) => {
         return {
-            role: user?.userData?.role,
-            tag: posts.tagData,
-            tagPageStyle: settings.design?.tagPageStyle,
-            sidebar: settings?.identity?.tagPageSidebar
+            role: user?.userData.role,
+            actorPageStyle: settings?.design?.actorPageStyle,
+            sidebar: settings?.identity?.actorPageSidebar
         }
     })
 
     return (
-        <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar `} tagPageStyle={tagPageStyle}>
+        <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`} stylesData={actorPageStyle}>
             <main id={'primary'} className="main posts-page">
                 {role === 'administrator' ?
                     <div className='edit-as-admin'>
-                        <Link href={'/admin/meta?id=' + tag._id}>
-                            <a className={'btn btn-primary'} target={'_blank'}>
+                        <Link href={'/admin/meta?id=' + query.actorId}>
+                            <a className={'btn btn-primary'}>
                                 Edit
                             </a>
                         </Link>
                     </div>
                     : null}
-                {tag ? <PostsPageInfo metaData={tag}/> : null}
 
-
+                <ActorBio/>
                 <WidgetsRenderer
-                    position={'tagPageTop'}
+                    position='actorPageTop'
                 />
                 <PostsPage renderPagination={true}/>
                 <WidgetsRenderer
-                    position={'tagPageBottom'}
+                    position='actorPageBottom'
                 />
             </main>
-            <SidebarWidgetAreaRenderer sidebar={sidebar} position={'tagPage'}/>
+            <SidebarWidgetAreaRenderer sidebar={sidebar} position={'actorPage'}/>
         </PageStyle>
     )
 };
@@ -75,37 +78,39 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     await _getServerSideStaticPageData(
         context,
         [
-            'tagPageTop',
-            'tagPageLeftSidebar',
-            'tagPageBottom',
-            'tagPageRightSidebar'
-        ], {
-            page: 'tag',
+            'actorPageTop',
+            'actorPageLeftSidebar',
+            'actorPageBottom',
+            'actorPageRightSidebar'
+        ],
+        {
+            page: 'actor',
             setHeadData: false
         },
-        store)
+        store
+    )
 
     await store.dispatch(
         fetchPosts({
                 context,
-                metaId: context?.query?.tagId as string,
-                metaType: 'tags',
+                metaId: context?.query?.actorId as string,
+                metaType: 'actors',
                 options: {
-                    page: 'tag',
-                    setHeadData:true
+                    page: 'actor',
+                    setHeadData: true
                 }
             }
         ))
 
-
     return {
         props: {
-            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
+            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation']))
         }
     }
 });
 
-tagPage.getLayout = function getLayout(page: ReactElement) {
+
+actorPage.getLayout = function getLayout(page: ReactElement) {
     return (
         <AppLayout>
             {page}
@@ -113,5 +118,5 @@ tagPage.getLayout = function getLayout(page: ReactElement) {
     )
 }
 
-export default tagPage;
+export default actorPage;
 

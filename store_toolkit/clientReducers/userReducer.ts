@@ -456,7 +456,7 @@ export const fetchUserAutoLogin = createAsyncThunk(
     async ({fields}: { fields: string[] }, thunkAPI) => {
         if (localStorage.wt) {
             return await Axios.post('/api/v1/users/getSignedInUserData', {token: localStorage.wt, fields}).then(res => {
-                thunkAPI.dispatch(setAlert({message: res.data.message, type: 'success'}))
+                // thunkAPI.dispatch(setAlert({message: res.data.message, type: 'success'}))
                 return res.data?.userData
             }).catch((err) => {
                 localStorage.removeItem('wt')

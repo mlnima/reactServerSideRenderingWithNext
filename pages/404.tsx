@@ -3,8 +3,14 @@ import {wrapper} from "@store_toolkit/store";
 import Soft404 from "@components/includes/Soft404/Soft404";
 import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
+import {useRouter} from "next/router";
+import {useEffect} from "react";
 
 const Custom404 = () => {
+    const router = useRouter()
+    useEffect(() => {
+        console.log(router)
+    }, []);
     return <Soft404/>
 };
 

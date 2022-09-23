@@ -80,7 +80,7 @@ const PostsCardsRenderer: FC<CardsRendererPropTypes> = ({
                     post,
                     targetLink: post?.postType === 'out' || post?.outPostType === 'promotion' ? '_blank':'_self',
                     postUrl: post?.postType === 'out' ? post?.redirectLink || '#' :
-                        `/post/${post?.postType}/${post._id}`,
+                        `/posts/${post?.postType}/${post._id}`,
                     title: process.env.NEXT_PUBLIC_DEFAULT_LOCAL === locale ?
                         post?.title :
                         post?.translations?.[locale as string]?.title || post?.title,

@@ -54,7 +54,7 @@ const CategoryCard: FC<CategoryCardPropTypes> =
 
         return (
             <CategoryCardStyle cardWidth={cardWidth} className={'category-card'}>
-                <Link href={`/category/${meta?._id}`}>
+                <Link href={`/categories/${meta?._id}`}>
                     <a className='category-card-link' title={title as string}>
                         {!!meta.imageUrl ?
                             <CardImageRenderer imageUrl={meta.imageUrl}

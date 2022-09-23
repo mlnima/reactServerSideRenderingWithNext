@@ -12,7 +12,7 @@ const VideoPlayerStyledDiv = styled.div`
   right: 0;
   left: 0;
   width: 100%;
-  max-width: 1300px;
+  max-width: 992px;
   .responsive-player {
     overflow: hidden;
     position: relative;

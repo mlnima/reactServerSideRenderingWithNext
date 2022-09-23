@@ -19,7 +19,7 @@ const VideoPostCard = dynamic(() => import('@components/includes/cards/VideoPost
 const PostsSliderStyledDiv = styled.div`
   position: relative;
   max-width: 98vw;
-
+  margin: auto;
   .slider-parent {
     overflow: hidden;
 

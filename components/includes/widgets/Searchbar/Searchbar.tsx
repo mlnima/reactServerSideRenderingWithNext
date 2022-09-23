@@ -92,12 +92,12 @@ const Searchbar: FC<SearchbarPropTypes> = (props) => {
 
     const {t} = useTranslation('common');
     const {push, query} = useRouter()
-    const [keyword, setKeyword] = useState(null)
+    const [keyword, setKeyword] = useState('')
     const [open, setOpen] = useState(null)
 
     useEffect(() => {
         if (query?.keyword && query?.keyword !== keyword) {
-            setKeyword(query?.keyword)
+            setKeyword(query?.keyword as string)
         }
     }, [query?.keyword]);
 
