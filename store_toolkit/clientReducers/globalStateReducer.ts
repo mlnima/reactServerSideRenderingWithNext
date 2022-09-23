@@ -7,9 +7,6 @@ const initialState: GlobalState = {
     beforeUnload: false,
     loading: false,
     notFoundPage: false,
-    isSiteIdentitySet: false,
-    isSiteDesignSet: false,
-    console: false,
     headData: {},
     alert: {
         active: false,
@@ -77,4 +74,3 @@ export const globalStateReducer = (state: RootState) => state?.globalState || nu
 
 export default globalStateSlice.reducer
 
-//PER6-9NG1-YDCN-GDT6

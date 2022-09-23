@@ -3,9 +3,12 @@ import {RootState} from "@store_toolkit/store";
 import Axios from "@_variables/util/Axios";
 import {setHeadData} from "@store_toolkit/clientReducers/globalStateReducer";
 import _firstRequestHeadDataSetter from "@store_toolkit/_storeVariables/_firstRequestHeadDataSetter";
+import {makeStore as store} from "@store_toolkit/store";
 
-interface SettingsState {
+
+interface SettingsStateRaw {
     ip?: string,
+    isSettingSet:boolean,
     design: {},
     identity: {},
     eCommerce: {},
@@ -15,7 +18,8 @@ interface SettingsState {
     requestedSettings: string[]
 }
 
-const initialState: SettingsState = {
+const initialState: SettingsStateRaw = {
+    isSettingSet:false,
     design: {},
     identity: {},
     eCommerce: {},
@@ -44,6 +48,8 @@ export const fetchSettings = createAsyncThunk(
             const designData = fetchedSettings.data.settings?.find(setting => setting.type === 'design')
             const identityData = fetchedSettings.data.settings?.find(setting => setting.type === 'identity')
 
+
+
             thunkAPI.dispatch(
                 setHeadData(
                     _firstRequestHeadDataSetter(
@@ -59,6 +65,7 @@ export const fetchSettings = createAsyncThunk(
                 requestedSettings: config.requireSettings,
                 design: designData?.data || {},
                 identity: identityData.data || {},
+                isSettingSet:true,
             }
         } catch (err) {
             console.log(err)

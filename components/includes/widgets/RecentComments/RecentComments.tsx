@@ -23,9 +23,7 @@ let RecentCommentsStyledDiv = styled.div`
   }
 `
 const RecentComments = props => {
-    // useEffect(() => {
-    //     console.log(props)
-    // }, [props]);
+
     const renderComments = props.comments.map(comment => {
         return (
             <div key={props.comments.indexOf(comment)} className='recent-comments-item'>

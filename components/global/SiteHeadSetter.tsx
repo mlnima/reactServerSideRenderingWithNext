@@ -10,9 +10,10 @@ const SiteHeadSetter: FC = () => {
     const siteLanguages = useMemo(() => process.env.NEXT_PUBLIC_LOCALS?.split(' ') || [], []);
 
     const headDataFromStore = useSelector(({globalState}: Store) => globalState?.headData)
+
     const headData = useMemo(()=>{
         return headDataFromStore
-    },[asPath,pathname,query])
+    },[asPath,pathname,query,headDataFromStore])
 
     return (
         <Head >

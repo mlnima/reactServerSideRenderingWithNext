@@ -6,7 +6,7 @@ import {NextRouter} from "next/router";
 import Peer from 'simple-peer'
 import {socket} from '@_variables/socket';
 
-interface UserState {
+interface UserStateRaw {
     userData: any;
     userRatingData: {},
     loggedIn: boolean,
@@ -29,7 +29,7 @@ interface UserState {
     }
 }
 
-const initialState: UserState = {
+const initialState: UserStateRaw = {
     userData: {},
     userRatingData: {},
     loggedIn: false,

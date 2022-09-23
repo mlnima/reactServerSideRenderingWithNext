@@ -20,8 +20,8 @@ import fetchUserEditingPost
 //     from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserCreateNewPost";
 // import fetchUserEditingPostUpdate
 //     from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserEditingPostUpdate";
-// import fetchNewComment
-//     from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchNewComment";
+import fetchNewComment
+    from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchNewComment";
 // import fetchViewPost
 //     from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchViewPost";
 // import fetchDeleteCommentByAdminInPostPage
@@ -203,6 +203,16 @@ export const postsSlice = createSlice({
                 return {
                     ...state,
                     pageData: action.payload
+                }
+            })
+            .addCase(fetchNewComment.fulfilled, (state, action: PayloadAction<any>) => {
+
+                return {
+                    ...state,
+                    post: {
+                        ...state.post,
+                        comments:[...(state.post?.comments || []),action.payload]
+                    }
                 }
             })
 

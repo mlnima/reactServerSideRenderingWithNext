@@ -54,7 +54,7 @@ const LoadingV2: FC = () => {
     const isLoading = useSelector(({globalState}: Store) =>globalState?.loading)
     const {events, asPath} = useRouter()
 
-    useLayoutEffect(() => {
+    useEffect(() => {
 
         const handleStart = (url) => (url !== asPath) && dispatch(loading(true));
         const handleComplete = (url) => (url === asPath) && dispatch(loading(false));

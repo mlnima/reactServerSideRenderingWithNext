@@ -3,9 +3,6 @@ export interface GlobalState {
     beforeUnload:boolean,
     loading: boolean,
     notFoundPage: boolean,
-    isSiteIdentitySet: boolean,
-    isSiteDesignSet: boolean,
-    console: boolean,
     headData:{
         canonicalUrl?: string;
         rtaContent?:boolean,
@@ -24,7 +21,6 @@ export interface GlobalState {
         ogImage?:string,
         ogSiteName?:string,
         ogLocale?:string,
-
         twitterSite?:string,
         twitterUrl?:string,
         twitterTitle?:string,

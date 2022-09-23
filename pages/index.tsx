@@ -35,6 +35,10 @@ const HomePage = () => {
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
+    // const prevStore = await store.getState()
+    // console.log(prevStore)
+
+
     await _getServerSideStaticPageData(
         context,
         ['homePageLeftSidebar', 'homePageRightSidebar', 'home'],

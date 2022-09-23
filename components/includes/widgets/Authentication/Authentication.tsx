@@ -1,9 +1,8 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import styled from "styled-components";
 import dynamic from "next/dynamic";
 import AuthenticationNotLoggedInItems from "@components/includes/widgets/Authentication/AuthenticationNotLoggedInItems";
-import {useAppDispatch} from "@store_toolkit/hooks";
 import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
@@ -49,7 +48,7 @@ const AuthenticationStyledDiv = styled.div`
   }
 
   .authentication-widget-wrapper {
-  
+
     padding: 5px 0;
     position: fixed;
     right: 0;
@@ -97,6 +96,7 @@ const AuthenticationStyledDiv = styled.div`
           display: flex;
           align-items: center;
           justify-content: center;
+          cursor: pointer;
 
           .icon {
             position: relative;
@@ -108,6 +108,7 @@ const AuthenticationStyledDiv = styled.div`
 
         .text-data {
           width: 100%;
+          text-align: center;
         }
       }
     }
@@ -136,14 +137,21 @@ const AuthenticationStyledDiv = styled.div`
     }
 
   }
+
+  @media only screen and (min-width: 768px) {
+    .authentication-widget-wrapper {
+      width: 300px;
+    }
+  }
 `
 
 const Authentication: FC = () => {
-    const dispatch = useAppDispatch()
-    const {profileImage, loggedIn, username, allowUserToPost, membership} = useSelector(({
-                                                                                             user,
-                                                                                             settings
-                                                                                         }: Store) => {
+
+    const {profileImage, loggedIn, username, allowUserToPost, membership} = useSelector((
+        {
+            user,
+            settings
+        }: Store) => {
         return {
             profileImage: user?.userData?.profileImage,
             loggedIn: user?.loggedIn,
@@ -152,6 +160,10 @@ const Authentication: FC = () => {
             membership: settings?.identity?.membership,
         }
     })
+
+    // useEffect(() => {
+    //     console.log(loggedIn)
+    // }, [loggedIn]);
 
     const [open, setOpen] = useState(null)
 
