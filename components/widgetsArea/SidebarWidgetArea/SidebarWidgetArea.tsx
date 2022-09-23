@@ -1,3 +1,4 @@
+import {memo} from "react";
 import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
 import React from "react";
@@ -24,4 +25,4 @@ const SidebarWidgetArea = ({className,position,gridArea}:SideBarWidgetAreaProps)
     );
 };
 
-export default SidebarWidgetArea;
+export default memo(SidebarWidgetArea);

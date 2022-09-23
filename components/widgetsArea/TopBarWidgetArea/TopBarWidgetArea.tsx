@@ -1,7 +1,9 @@
+import {memo} from "react";
 import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
 import {useSelector} from "react-redux";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
+
 
 let StyledDiv = styled.div`
   grid-area: topbar;
@@ -33,4 +35,4 @@ const TopBarWidgetArea = () => {
         </StyledDiv>
     );
 };
-export default TopBarWidgetArea;
+export default memo(TopBarWidgetArea);

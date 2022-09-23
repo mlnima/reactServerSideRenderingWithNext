@@ -1,3 +1,4 @@
+import {memo} from "react";
 import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
 import {useSelector} from "react-redux";
@@ -28,6 +29,7 @@ let HeaderWidgetAreaStyle = styled.div`
 
 const HeaderWidgetArea = () => {
     const headerStyle = useSelector(({settings}: Store) => settings?.design?.headerStyle)
+
     return (
         <HeaderWidgetAreaStyle stylesData={headerStyle || ''} className={'widget-area header'}>
             <div className='header-content'>
@@ -37,4 +39,4 @@ const HeaderWidgetArea = () => {
         </HeaderWidgetAreaStyle>
     );
 };
-export default HeaderWidgetArea;
+export default memo(HeaderWidgetArea);

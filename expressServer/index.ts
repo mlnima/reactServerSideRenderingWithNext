@@ -83,7 +83,9 @@ const runServer = () => {
     server.use('/api/v1', clientMainRouter);
 
     //rest of the routes
-    server.get('*', cacheSuccesses, (req, res) => handle(req, res));
+    server.get('*', cacheSuccesses, (req, res) => {
+        return handle(req, res)
+    });
 
 
     //@ts-ignore

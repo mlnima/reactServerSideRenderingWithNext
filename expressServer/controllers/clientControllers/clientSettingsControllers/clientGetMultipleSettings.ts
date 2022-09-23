@@ -1,6 +1,7 @@
 import settingSchema from '../../../models/settings/settingSchema';
 
 const clientGetMultipleSettings = async (req, res) => {
+
     try {
         const requestedSettings =  Array.isArray(req.query.setting) ? req.query.setting : [req.query.setting]
         const settingRequestPromises = requestedSettings.map(async setting => {

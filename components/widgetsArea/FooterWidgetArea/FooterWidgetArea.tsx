@@ -1,3 +1,4 @@
+import {memo} from "react";
 import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
 import {useSelector} from "react-redux";
@@ -35,4 +36,4 @@ const FooterWidgetArea = ( ) => {
         </StyledFooter>
     );
 };
-export default FooterWidgetArea;
+export default memo(FooterWidgetArea);

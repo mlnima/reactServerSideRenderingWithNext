@@ -1,4 +1,4 @@
-import React, {FC, useState, MouseEvent, useEffect} from "react";
+import React, {FC, useState, MouseEvent, useEffect,useCallback} from "react";
 import styled from "styled-components";
 import {useTranslation} from "next-i18next";
 import {useRouter} from "next/router";
@@ -102,7 +102,7 @@ const Searchbar: FC<SearchbarPropTypes> = (props) => {
     }, [query?.keyword]);
 
 
-    const onSearchHandler = e => {
+    const onSearchHandler =  (e) => {
         e.preventDefault()
         if (keyword?.length >= 2) {
             push({
@@ -189,4 +189,4 @@ const Searchbar: FC<SearchbarPropTypes> = (props) => {
         </SearchbarStyledDiv>
     )
 };
-export default Searchbar
+export default Searchbar;

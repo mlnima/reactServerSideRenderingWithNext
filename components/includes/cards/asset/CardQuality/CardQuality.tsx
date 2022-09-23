@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {useMemo} from "react";
 
 const CardQualityStyledDiv = styled.div`
   font-size: 12px;
@@ -12,9 +13,10 @@ interface CardViewsPropTypes {
 }
 
 const CardQuality = ({quality, className}: CardViewsPropTypes) => {
+    const qualityMemo = useMemo(()=>quality,[quality])
     return (
         <CardQualityStyledDiv className={'card-quality ' + className}>
-            {quality.toUpperCase()}
+            {qualityMemo.toUpperCase()}
         </CardQualityStyledDiv>
     );
 };

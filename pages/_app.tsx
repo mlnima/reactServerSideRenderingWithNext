@@ -4,7 +4,6 @@ import type {AppProps} from 'next/app'
 import {appWithTranslation} from 'next-i18next';
 import nextI18NextConfig from '../next-i18next.config';
 import {wrapper} from '@store_toolkit/store';
-import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 
 type NextPageWithLayout = NextPage & {
     getLayout?: (page: ReactElement) => ReactNode
@@ -18,13 +17,17 @@ const MyApp = ({Component, pageProps}: AppPropsWithLayout) => {
 
     const getLayout = Component.getLayout ?? ((page) => page)
 
-    return getLayout(<Component {...pageProps} />)
+    return getLayout(
+           <Component {...pageProps} />
+    )
+
 }
+
 
 //@ts-ignore
 export default wrapper.withRedux(appWithTranslation(MyApp, nextI18NextConfig));
 
-// export default appWithTranslation(MyApp, nextI18nextConfig)
+// export default appWithTranslation(MyApp, nextI18NextConfig)
 
 
 

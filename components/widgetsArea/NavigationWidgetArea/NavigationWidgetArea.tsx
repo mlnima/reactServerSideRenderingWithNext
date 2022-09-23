@@ -1,9 +1,11 @@
+import {memo} from "react";
 import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
 import {useSelector} from "react-redux";
 import BreadcrumbList from "@components/widgetsArea/NavigationWidgetArea/BreadcrumbList";
 import {useRouter} from "next/router";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
+
 
 let StyledNavigation = styled.nav`
   grid-area: navigation;
@@ -49,4 +51,4 @@ const NavigationWidgetArea = () => {
         </>
     );
 };
-export default NavigationWidgetArea;
+export default memo(NavigationWidgetArea);

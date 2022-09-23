@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 import styled from "styled-components";
-import {FC, useMemo} from "react";
+import {FC, memo, useMemo} from "react";
 import { WidgetData} from "@_typeScriptTypes/widgets/Widget";
 const WidgetHeader = dynamic(() => import('./WidgetHeader/WidgetHeader'))
 const WidgetCustomScript = dynamic(() => import('./WidgetCustomScript/WidgetCustomScript'))
@@ -112,4 +112,4 @@ const WidgetWrapper: FC<WidgetComponentPropTypes> = ({data, widgetId, isSidebar,
         </WidgetStyledSection>
     );
 };
-export default WidgetWrapper;
+export default memo(WidgetWrapper);

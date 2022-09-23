@@ -8,6 +8,7 @@ import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
 import type {ReactElement} from 'react';
+import {makeStore} from "@store_toolkit/store";
 
 const HomePageStyle = styled.div`
   display: grid;
@@ -51,6 +52,25 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     }
 
 });
+
+// export async function getServerSideProps(context) {
+//
+//         await _getServerSideStaticPageData(
+//         context,
+//         ['homePageLeftSidebar', 'homePageRightSidebar', 'home'],
+//         {
+//             setHeadData: true,
+//             page: 'home'
+//         },
+//             wrapper.useWrappedStore(makeStore)
+//     )
+//
+//     return {
+//         props: {
+//             ...(await serverSideTranslations(context?.locale as string, ['common', 'customTranslation']))
+//         }
+//     }
+// }
 
 
 HomePage.getLayout = function getLayout(page: ReactElement) {

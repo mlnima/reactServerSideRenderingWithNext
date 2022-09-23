@@ -1,3 +1,4 @@
+import {memo} from "react";
 import React from 'react';
 import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
@@ -16,4 +17,4 @@ const SectionWidgetArea = ({stylesData,className,position}:SectionWidgetAreaProp
         </StyledSection>
     );
 };
-export default SectionWidgetArea;
+export default memo(SectionWidgetArea);

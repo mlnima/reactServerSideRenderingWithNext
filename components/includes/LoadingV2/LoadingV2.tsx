@@ -1,4 +1,4 @@
-import React, {useEffect, FC} from 'react';
+import React, {useEffect, FC, useLayoutEffect} from 'react';
 import styled from "styled-components";
 import ReactLoading from 'react-loading';
 import {useRouter} from "next/router";
@@ -51,13 +51,10 @@ let StyledDiv = styled.div`
 
 const LoadingV2: FC = () => {
     const dispatch = useAppDispatch()
-    const isLoading = useSelector(({globalState}: Store) =>{
-        return  globalState?.loading
-    })
+    const isLoading = useSelector(({globalState}: Store) =>globalState?.loading)
     const {events, asPath} = useRouter()
 
-
-    useEffect(() => {
+    useLayoutEffect(() => {
 
         const handleStart = (url) => (url !== asPath) && dispatch(loading(true));
         const handleComplete = (url) => (url === asPath) && dispatch(loading(false));
@@ -71,7 +68,7 @@ const LoadingV2: FC = () => {
             events.off('routeChangeComplete', handleComplete)
             events.off('routeChangeError', handleComplete)
         }
-    })
+    },[])
 
     useEffect(() => {
         if (isLoading) {
@@ -79,14 +76,16 @@ const LoadingV2: FC = () => {
                 dispatch(loading(false))
             }, 3000)
         }
-    }, [isLoading]);
+    },[]);
 
-    return (isLoading) && (
-        <StyledDiv className='Loading' onClick={() => dispatch(loading(false))}
-                   onTouchStartCapture={() => dispatch(loading(false))}>
-            <ReactLoading type={'spin'} color={'var(--main-active-color,#f90)'} height={100} width={100}/>
-        </StyledDiv>
-    );
+    if (isLoading){
+        return (
+            <StyledDiv className='Loading' onClick={() => dispatch(loading(false))}
+                       onTouchStartCapture={() => dispatch(loading(false))}>
+                <ReactLoading type={'spin'} color={'var(--main-active-color,#f90)'} height={100} width={100}/>
+            </StyledDiv>
+        )
+    }else return null
 
 };
 

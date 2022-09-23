@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC,memo} from 'react';
 import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
 
@@ -26,4 +26,4 @@ const MainWidgetArea:FC<MainWidgetAreaPropTypes> = ({className,position}) => {
     );
 
 };
-export default MainWidgetArea;
+export default memo(MainWidgetArea);

@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import dynamic from "next/dynamic";
 import GlobalStylesComponent from "../global/Styles/GlobalStylesComponent";
@@ -41,7 +41,13 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
         }
     });
 
+    // useEffect(() => {
+    //     console.log('changed')
+    // }, [loggedIn,userRole,identity,cookiePopupMessage,loginRegisterFormPopup,alert]);
+
+
     return (
+
         <>
             {userRole === 'administrator' && <AdminTools/>}
             <GlobalStylesComponent/>
@@ -60,13 +66,14 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
             <LoadingV2/>
 
             {(typeof window !== 'undefined' && !!cookiePopupMessage && localStorage.cookieAccepted !== 'true') &&
-                <CookiePopup/>
+            <CookiePopup/>
             }
 
             {loginRegisterFormPopup && !loggedIn && <LoginRegisterPopup/>}
             {(!!alert?.active && !!alert?.message) && <AlertBox/>}
             {userRole === 'administrator' && <AdminDataSetter userRole={userRole}/>}
         </>
+
     );
 };
 

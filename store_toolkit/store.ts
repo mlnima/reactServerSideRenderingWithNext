@@ -44,7 +44,7 @@ const combinedReducer = combineReducers({
 
 const reducer = (state: ReturnType<typeof combinedReducer>, action: AnyAction) => {
 
-    if (action.type === HYDRATE) {
+    if (action.type === HYDRATE ) {
         const nextState = {
             ...state,
             ...action.payload,
@@ -79,9 +79,9 @@ const reducer = (state: ReturnType<typeof combinedReducer>, action: AnyAction) =
             },
         }
 
-
         return nextState
     } else {
+
         return combinedReducer(state, action);
     }
 
@@ -98,6 +98,7 @@ type Store = ReturnType<typeof makeStore>;
 export type AppDispatch = Store['dispatch'];
 //@ts-ignore
 export type RootState = ReturnType<Store['getState']>;
+
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,
     RootState,
     unknown,
