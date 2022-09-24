@@ -1,5 +1,5 @@
 import MainWidgetArea from "../components/widgetsArea/MainWidgetArea/MainWidgetArea";
-import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
+// import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
 import AppLayout from '@components/layouts/AppLayout';
@@ -8,7 +8,6 @@ import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
 import type {ReactElement} from 'react';
-import {makeStore} from "@store_toolkit/store";
 
 const HomePageStyle = styled.div`
   display: grid;
@@ -33,11 +32,8 @@ const HomePage = () => {
     );
 };
 
+//@ts-ignore
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-
-    // const prevStore = await store.getState()
-    // console.log(prevStore)
-
 
     await _getServerSideStaticPageData(
         context,
@@ -49,11 +45,11 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         store
     )
 
-    return {
-        props: {
-            ...(await serverSideTranslations(context?.locale as string, ['common', 'customTranslation']))
-        }
-    }
+    // return {
+    //     props: {
+    //         ...(await serverSideTranslations(context?.locale as string, ['common', 'customTranslation']))
+    //     }
+    // }
 
 });
 

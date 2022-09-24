@@ -1,9 +1,6 @@
 import React from 'react';
 import {useRouter} from "next/router";
 import PaginationComponent from "@components/includes/PaginationComponent/PaginationComponent";
-// import CategoriesRenderer
-//     from "../../components/includes/pagesComponents/categoriesPageComponents/Components/CategoriesRenderer/CategoriesRenderer";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {wrapper} from "@store_toolkit/store";
@@ -69,7 +66,6 @@ const categoriesPage = () => {
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-    // @ts-ignore
     await _getServerSideStaticPageData(
         context,
         [
@@ -84,21 +80,13 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         },
         store
     )
-    // @ts-ignore
-    // await store.dispatch(getMetas(context.query, 'categories', true))
+
     await store.dispatch(fetchMetas({
         data:context.query,
         metaType:'categories'
     }))
 
-
-
-    return {
-        props: {
-            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation']))
-        }
-    }
-
+    return null
 });
 
 categoriesPage.getLayout = function getLayout(page: ReactElement) {

@@ -2,7 +2,6 @@ import React, {FC, useEffect} from 'react';
 import ProfileNavigation from '@components/includes/profilePageComponents/ProfileNavigation/ProfileNavigation'
 import Link from "next/link";
 import ProfileImage from "@components/includes/profilePageComponents/ProfileImage/ProfileImage";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useSelector} from "react-redux";
 import styled from "styled-components";
 import {wrapper} from "@store_toolkit/store";
@@ -79,11 +78,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
                 'profilePage'
             ])
 
-        return {
-            props: {
-                ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
-            }
-        }
+    return null
     })
 
 

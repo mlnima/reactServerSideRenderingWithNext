@@ -1,7 +1,8 @@
 import React, {FC, useState} from 'react';
 import Link from "next/link";
 import LanguagesSwitcher from "../widgets/LanguagesSwitcher/LanguagesSwitcher";
-import {useTranslation} from 'next-i18next';
+// import {useTranslation} from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation'
 import {useSelector} from "react-redux";
 import {useRouter} from "next/router";
 import styled from "styled-components";

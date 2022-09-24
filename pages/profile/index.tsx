@@ -1,6 +1,5 @@
 import ProfileNavigation from '@components/includes/profilePageComponents/ProfileNavigation/ProfileNavigation';
 import ProfileImage from "@components/includes/profilePageComponents/ProfileImage/ProfileImage";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 import Link from "next/link";
 import {useSelector} from "react-redux";
@@ -122,11 +121,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         store
     )
 
-    return {
-        props: {
-            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation', 'profile'])),
-        }
-    }
+    return null
 })
 
 Profile.getLayout = function getLayout(page:ReactElement) {

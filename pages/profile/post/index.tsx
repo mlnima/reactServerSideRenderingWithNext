@@ -1,5 +1,4 @@
 import React, {useEffect, useMemo, useState} from 'react';
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useSelector} from "react-redux";
 import styled from "styled-components";
 import {wrapper} from "@store_toolkit/store";
@@ -257,12 +256,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         },
         store)
 
-    return {
-        props: {
-            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
-        }
-    }
-
+    return null
 })
 
 post.getLayout = function getLayout(page: ReactElement) {

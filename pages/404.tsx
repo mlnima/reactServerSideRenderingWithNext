@@ -1,4 +1,4 @@
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+// import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "@store_toolkit/store";
 import Soft404 from "@components/includes/Soft404/Soft404";
 import type {ReactElement} from 'react';
@@ -14,15 +14,15 @@ const Custom404 = () => {
     return <Soft404/>
 };
 
-export const getStaticProps = wrapper.getServerSideProps(store =>
-    async (context) => {
-        return {
-            props: {
-                ...(await serverSideTranslations(context.locale as string, ['common'])),
-            }
-        }
-    }
-)
+// export const getStaticProps = wrapper.getServerSideProps(store =>
+//     async (context) => {
+//         return {
+//             props: {
+//                 ...(await serverSideTranslations(context.locale as string, ['common'])),
+//             }
+//         }
+//     }
+// )
 
 Custom404.getLayout = function getLayout(page: ReactElement) {
     return (

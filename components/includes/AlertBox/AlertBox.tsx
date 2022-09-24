@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {useSelector} from 'react-redux';
 import {closeAlert} from "@store_toolkit/clientReducers/globalStateReducer";
 import Draggable from 'react-draggable';
-import {useTranslation} from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation'
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
@@ -106,7 +106,7 @@ const StyledDiv = styled.div`
 `
 
 const AlertBox = () => {
-    const {t} = useTranslation(['common', 'customTranslation', 'profile']);
+    const {t} = useTranslation();
     const dispatch = useAppDispatch();
     const alert = useSelector(({globalState}: Store) => globalState?.alert);
 
@@ -140,11 +140,13 @@ const AlertBox = () => {
                         </button>
                     </div>
                     <p className='alert'>
-                        {t<string>(
-                            [
-                                t<string>(alert.message, {ns: 'common'}),
-                                t<string>(alert.message, {ns: 'profile'})
-                            ]
+                        {t(`common:${alert.message}`,
+                            {},
+                            {fallback:
+                                    t(`customTranslation:${alert.message}`,
+                                        {},
+                                        {fallback: alert.message}
+                                    )}
                         )}
                     </p>
                     {/*//@ts-ignore*/}

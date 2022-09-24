@@ -1,6 +1,7 @@
 import {FC, useRef} from 'react';
 import styled from "styled-components";
-import {useTranslation} from 'next-i18next';
+// import {useTranslation} from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation'
 import {useSelector} from "react-redux";
 import fetchPostComments
     from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPostComments";
@@ -50,8 +51,13 @@ const CommentFromStyledForm = styled.form`
 const CommentFrom: FC = () => {
     const {t} = useTranslation('common');
     const dispatch = useAppDispatch()
-    const _id = useSelector(({posts}: Store) => posts.post?._id)
-    const userData = useSelector(({user}: Store) => user?.userData)
+    const {_id,userData} = useSelector(({posts,user}: Store) => {
+        return{
+            _id:posts.post?._id,
+            userData:user?.userData
+        }
+    })
+
     const bodyInput = useRef(null);
 
     const onSubmitHandler = e => {

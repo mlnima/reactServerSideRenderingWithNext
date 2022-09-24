@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {useRouter} from "next/router";
 import styled from "styled-components";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "@store_toolkit/store";
 import type { ReactElement } from 'react';
 import AppLayout from "@components/layouts/AppLayout";
@@ -312,11 +311,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     // @ts-ignore
     await _getServerSideStaticPageData(context, [])
 
-    return {
-        props: {
-            ...(await serverSideTranslations(context.locale, ['common', 'customTranslation'])),
-        }
-    }
+    return null
 })
 
 checkout.getLayout = function getLayout(page:ReactElement) {

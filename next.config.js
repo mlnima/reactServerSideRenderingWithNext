@@ -1,9 +1,10 @@
 // const {flatMap} = require("lodash");
-const languages = process.env.NEXT_PUBLIC_LOCALS.replace(' ', '|')
+const nextTranslate = require('next-translate')
+// const languages = process.env.NEXT_PUBLIC_LOCALS.replace(' ', '|')
 const locales = process.env.NEXT_PUBLIC_LOCALS.split(' ')
 const allowedDomainForImages = process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES.split(' ')
 // const withPWA = require('next-pwa')
-// const withPlugins = require('next-compose-plugins');
+const withPlugins = require('next-compose-plugins');
 // const nextEnv = require('next-env');
 // import { loadEnvConfig } from '@next/env'
 
@@ -88,7 +89,11 @@ const rewrites = () => {
         afterFiles: [
             {source: `/admin`, destination: '/admin', locale: false},
             // {source: `/:locale(${languages})?/:postType(video|post|product|article|book)/:title`, destination: '/post',has: [{type: 'query', key: 'id'}]},
-            {source: `/:postType(video|post|product|article|book)?/:title`, destination: '/posts',has: [{type: 'query', key: 'id'}]},
+            {
+                source: `/:postType(video|post|product|article|book)?/:title`,
+                destination: '/posts',
+                has: [{type: 'query', key: 'id'}]
+            },
         ],
         fallback: [
             {
@@ -101,15 +106,11 @@ const rewrites = () => {
 }
 
 
-
-
-
-
 const nextImageConfig = {
     images: {
         // domains: allowedDomainForImages,
         deviceSizes: [320, 375, 414, 540, 640, 717, 750, 768, 828, 1024, 1080, 1200, 1920, 2048],
-        remotePatterns: allowedDomainForImages.filter(Boolean).reduce((finalPatterns,domain)=>{
+        remotePatterns: allowedDomainForImages.filter(Boolean).reduce((finalPatterns, domain) => {
             const domainSplit = domain.split('.')
             finalPatterns = [
                 ...finalPatterns,
@@ -123,7 +124,7 @@ const nextImageConfig = {
                 },
             ]
             return finalPatterns
-        },[])
+        }, [])
     },
 }
 
@@ -150,8 +151,36 @@ const nextConfigs = {
     }
 }
 
+// const nextTranslateConfig = nextTranslate({
+//     webpack: (config, {isServer, webpack}) => {
+//         return config;
+//     }
+// })
+//
+//
+// const plugins = [
+//     nextTranslateConfig
+// ]
+
+
 //@ts-ignore
-module.exports = withBundleAnalyzer(nextConfigs);
+// module.exports = withBundleAnalyzer(withPlugins([
+//     // nextTranslate({
+//     //     webpack: (config, {isServer, webpack}) => {
+//     //         return config;
+//     //     }
+//     // })
+// ],nextConfigs));
+
+/* eslint-disable */
+module.exports = withPlugins([
+    nextTranslate({
+        webpack: (config, {isServer, webpack}) => {
+            return config;
+        }
+    })
+],withBundleAnalyzer(nextConfigs)); // eslint-disable-line
+/* eslint-enable */
 
 // module.exports = nextConfigs;
 

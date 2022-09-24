@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "@store_toolkit/store";
 import type { ReactElement } from 'react';
 import AppLayout from "@components/layouts/AppLayout";
@@ -27,11 +26,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         store
     )
 
-    return {
-        props: {
-            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
-        }
-    }
+    return null
 })
 
 

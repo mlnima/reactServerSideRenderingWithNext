@@ -1,7 +1,8 @@
 import React, {FC} from "react";
 import styled from "styled-components";
 import Link from "next/link";
-import {useTranslation} from "next-i18next";
+// import {useTranslation} from "next-i18next";
+import useTranslation from 'next-translate/useTranslation'
 import {useRouter} from "next/router";
 import {userLogout} from "@store_toolkit/clientReducers/userReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";

@@ -1,4 +1,4 @@
-import {useTranslation} from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation'
 import styled from "styled-components";
 import {FC} from "react";
 import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
@@ -47,17 +47,12 @@ interface DownloadLinkPropTypes{
 }
 
 const DownloadLink:FC<DownloadLinkPropTypes> = ({ downloadLink, render, downloadLinks}) => {
-    const {t} = useTranslation('common');
+    const {t} = useTranslation();
     if (render) {
         return (
             <DownloadLinkStyledDiv>
                 <span className={'download-text'}>
-                    {t<string>(
-                        [t<string>(
-                            'Download', {ns: 'common'}), t<string>(
-                                'Download', {ns: 'customTranslation'}
-                        )]
-                    )}:
+                    {t(`common:Download`, {}, {fallback:'Download'})}
                 </span>
                 <div className={'multiple-download-links'}>
 
@@ -68,7 +63,7 @@ const DownloadLink:FC<DownloadLinkPropTypes> = ({ downloadLink, render, download
                                    target={'_blank'}
                                    className={'btn btn-primary'}
                                    rel={'noreferrer'}
-                                   title={t<string>(`Download`)}
+                                   title= {t(`common:Download`, {}, {fallback:'Download'})}
                                 >
                                     <span>{link.title}</span>
                                 </a>
@@ -81,10 +76,7 @@ const DownloadLink:FC<DownloadLinkPropTypes> = ({ downloadLink, render, download
                     <a className={'single-download-link btn btn-primary'}
                        href={downloadLink}
                        target={'_blank'}
-                       title={t<string>([
-                               t<string>('Download', {ns: 'common'}),
-                               t<string>('Download', {ns: 'customTranslation'})
-                           ])}
+                       title= {t(`common:Download`, {}, {fallback:'Download'})}
                     >
                         <span style={{display: 'none'}}>download link for post</span>
                         <SvgRenderer svgUrl={'/public/asset/images/icons/download-solid.svg'}

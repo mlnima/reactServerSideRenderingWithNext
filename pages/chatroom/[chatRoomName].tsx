@@ -13,7 +13,6 @@ import {dispatchSocketId} from "@store_toolkit/clientReducers/userReducer";
 import {setOnlineUsers,setMessages,  newMessage} from '@store_toolkit/clientReducers/chatroomReducer';
 import {wrapper} from "@store_toolkit/store";
 import {_uniqBy} from "@_variables/util/arrayUtils/_uniqBy";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import MessengerLayout from "@components/layouts/MessengerLayout";
 import type {ReactElement} from 'react';
 import {useAppDispatch} from "@store_toolkit/hooks";
@@ -111,11 +110,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         store
     )
 
-    return {
-        props: {
-            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
-        }
-    }
+    return null
 })
 
 chatRoom.getLayout = function getLayout(page: ReactElement) {

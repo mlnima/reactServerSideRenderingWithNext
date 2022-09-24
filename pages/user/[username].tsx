@@ -3,9 +3,8 @@ import UserPageProfileImage
     from "../../components/includes/userPageComponents/UserPageProfileImage/UserPageProfileImage";
 import UserPageActionButtons from "@components/includes/userPageComponents/UserPageActionButtons/UserPageActionButtons";
 import {useRouter} from "next/router";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
-import {useTranslation} from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation'
 import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
 import type {ReactElement} from 'react';
@@ -107,7 +106,6 @@ const user = () => {
     return (
         <UserPageStyledDiv className='user-page main'>
 
-
             <div className='profile-header'>
                 {userPageData?._id ?
                     <UserPageProfileImage
@@ -137,11 +135,11 @@ const user = () => {
                     }
                     {userPageData?._id ?
                         <div className='follow-count'>
-                            <p>{t<string>([`Followers`])} : <span>{
+                            <p>{t('common:Followers',{},{fallback:'Followers'})} : <span>{
                                 // @ts-ignore
                                 userPageData?.followers ? userPageData.followers?.length : 0
                             }</span></p>
-                            <p>{t<string>([`Following`])} : <span>{
+                            <p>{t('common:Following',{},{fallback:'Following'})}: <span>{
                                 // @ts-ignore
                                 userPageData?.following ? userPageData.following?.length : 0
                             }</span></p>
@@ -167,7 +165,6 @@ const user = () => {
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-
     // @ts-ignore
     await _getServerSideStaticPageData(
         context,
@@ -181,11 +178,8 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         },
         store)
 
-    return {
-        props: {
-            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
-        }
-    }
+    return null
+
 })
 
 user.getLayout = function getLayout(page: ReactElement) {

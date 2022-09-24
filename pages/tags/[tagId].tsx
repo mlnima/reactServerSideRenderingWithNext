@@ -1,7 +1,6 @@
 import PostsPage from "@components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
 import PostsPageInfo from "@components/includes/PostsPage/PostsPageInfo";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
 import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
@@ -98,11 +97,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         ))
 
 
-    return {
-        props: {
-            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
-        }
-    }
+    return null
 });
 
 tagPage.getLayout = function getLayout(page: ReactElement) {

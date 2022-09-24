@@ -79,11 +79,11 @@
   "Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character like $": "Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character like $",
   "View Profile": "View Profile",
   "Send Message": "Send Message",
-  "Followers": "Followers",
-  "Following": "Following",
   "About Us": "About Us",
   "Contact Us": "Contact Us",
-  "Unauthorized Access": "Unauthorized Access"
+  "Unauthorized Access": "Unauthorized Access",
+  "Mismatch Passwords": "Mismatch Passwords",
+  "Wrong Password": "Wrong Password"
 
 
 }

@@ -1,5 +1,6 @@
 import React, {FC} from "react";
-import {useTranslation} from "next-i18next";
+// import {useTranslation} from "next-i18next";
+import useTranslation from 'next-translate/useTranslation'
 import {useRouter} from "next/router";
 import Link from "next/link";
 import styled from "styled-components";

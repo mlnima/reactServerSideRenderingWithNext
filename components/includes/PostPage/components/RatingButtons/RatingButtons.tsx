@@ -1,6 +1,7 @@
 import {FC, useEffect, useState} from "react";
 import _shortNumber from '@_variables/clientVariables/_shortNumber'
-import {useTranslation} from 'next-i18next';
+// import {useTranslation} from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation'
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import disLikePost

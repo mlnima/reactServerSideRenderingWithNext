@@ -1,6 +1,5 @@
 import  { useEffect, useState} from 'react';
 import UserSmallPreview from "../../../components/includes/socialComponents/UserSmallPreview/UserSmallPreview";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "@store_toolkit/store";
 import { useSelector} from "react-redux";
 import styled from "styled-components";
@@ -60,11 +59,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             'profilePage'
         ])
 
-    return {
-        props: {
-            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
-        }
-    }
+    return null
 })
 
 Following.getLayout = function getLayout(page:ReactElement) {

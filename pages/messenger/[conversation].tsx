@@ -8,7 +8,6 @@ import MessengerConversationMessageTools
     from "@components/includes/messengerPageComponents/MessengerConversationMessageTools/MessengerConversationMessageTools";
 import {socket} from '@_variables/socket';
 import MessengerCall from "@components/includes/messengerPageComponents/MessengerCall/MessengerCall";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useSelector} from "react-redux";
 import {wrapper} from "@store_toolkit/store";
 
@@ -139,11 +138,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         },
         store
     )
-    return {
-        props: {
-            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
-        }
-    }
+    return null
 })
 
 conversation.getLayout = function getLayout(page: ReactElement) {

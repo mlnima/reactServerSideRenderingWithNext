@@ -1,5 +1,4 @@
 import {useEffect} from "react";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
 import dynamic from "next/dynamic";
@@ -145,11 +144,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         })
     )
 
-    return {
-        props: {
-            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
-        }
-    }
+    return null
 });
 
 postPage.getLayout = function getLayout(page: ReactElement) {

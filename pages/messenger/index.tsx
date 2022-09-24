@@ -1,6 +1,5 @@
 import MessengerConversationsList from "../../components/includes/messengerPageComponents/MessengerConversationsList/MessengerConversationsList";
 import Link from "next/link";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "@store_toolkit/store";
 import { useSelector} from "react-redux";
 import styled from "styled-components";
@@ -58,11 +57,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         store
     )
 
-    return {
-        props: {
-            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation','profile'])),
-        }
-    }
+    return null
 })
 
 messengerPage.getLayout = function getLayout(page: ReactElement) {

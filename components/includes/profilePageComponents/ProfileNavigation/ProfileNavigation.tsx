@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Link from 'next/link'
-import {useTranslation} from 'next-i18next';
+// import {useTranslation} from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation'
 import {useSelector} from "react-redux";
 import styled from "styled-components";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";

@@ -3,8 +3,6 @@ import {RootState} from "@store_toolkit/store";
 import Axios from "@_variables/util/Axios";
 import {setHeadData} from "@store_toolkit/clientReducers/globalStateReducer";
 import _firstRequestHeadDataSetter from "@store_toolkit/_storeVariables/_firstRequestHeadDataSetter";
-import {makeStore as store} from "@store_toolkit/store";
-
 
 interface SettingsStateRaw {
     ip?: string,

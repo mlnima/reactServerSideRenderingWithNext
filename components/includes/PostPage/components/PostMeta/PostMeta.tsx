@@ -1,10 +1,9 @@
 import Link from "next/link";
-import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
 import React, {FC} from "react";
 import {useSelector} from "react-redux";
 import {convertMetasTypeToSingular} from "@_variables/_variables";
-import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
+//import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 import ActorMetaImageRenderer from "@components/includes/PostPage/components/PostMeta/ActorMetaImageRenderer";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
@@ -84,7 +83,6 @@ interface PostMetaPropType {
 }
 
 const PostMeta: FC<PostMetaPropType> = ({type}) => {
-    const {t} = useTranslation(['common', 'customTranslation']);
 
     const post = useSelector(({posts}: Store) => posts.post)
 
@@ -108,11 +106,6 @@ const PostMeta: FC<PostMetaPropType> = ({type}) => {
         return (
             <PostMetaStyledDiv className={type + ' post-meta'}>
                 <div className="content">
-                    {/*{type === 'actors' &&*/}
-                    {/*    <span className='meta-type'>*/}
-                    {/*        {t<string>(`${type.charAt(0).toUpperCase() + type.substring(1)}: `)}*/}
-                    {/*    </span>*/}
-                    {/*}*/}
                     {renderData}
                 </div>
             </PostMetaStyledDiv>

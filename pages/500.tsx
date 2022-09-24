@@ -1,10 +1,12 @@
 import Link from "next/link";
 import styled from "styled-components";
-import {useTranslation} from 'next-i18next';
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {wrapper} from "@store_toolkit/store";
+// import {useTranslation} from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation'
+// import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+// import {wrapper} from "@store_toolkit/store";
 import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
+import React from "react";
 
 const Custom500StyledDiv = styled.div`
   display: flex;
@@ -26,13 +28,13 @@ const Custom500StyledDiv = styled.div`
 `
 
 const Custom500 = () => {
-    const {t} = useTranslation(['common', 'customTranslation']);
+    const {t} = useTranslation();
     return (
         <Custom500StyledDiv id='not-found-page' className='main'>
-            <h1>500 - {t<string>(`Server Error`)}</h1>
+            <h1>500 -{t(`common:Server Error`,{},{fallback:'Server Error'})}</h1>
             <Link href="/">
                 <a className='back-to-homepage'>
-                    <h2>{t<string>(`Go To Homepage`)}</h2>
+                    <h2>{t(`common:Go To Homepage`,{},{fallback:'Go To Homepage'})}</h2>
                 </a>
             </Link>
         </Custom500StyledDiv>
@@ -40,17 +42,17 @@ const Custom500 = () => {
 };
 
 
-export const getStaticProps = wrapper.getServerSideProps(store =>
-    async (context) => {
-        return {
-            props: {
-                ...(await serverSideTranslations(
-                    context.locale || process.env.NEXT_PUBLIC_DEFAULT_LOCAL as string,
-                    ['common', 'customTranslation']
-                )),
-            }
-        }
-    })
+// export const getStaticProps = wrapper.getServerSideProps(store =>
+//     async (context) => {
+//         return {
+//             props: {
+//                 ...(await serverSideTranslations(
+//                     context.locale || process.env.NEXT_PUBLIC_DEFAULT_LOCAL as string,
+//                     ['common', 'customTranslation']
+//                 )),
+//             }
+//         }
+//     })
 
 
 Custom500.getLayout = function getLayout(page: ReactElement) {

@@ -1,5 +1,5 @@
-import React, {FC, useEffect} from "react";
-import {useTranslation} from "next-i18next";
+import React, {useEffect} from "react";
+import useTranslation from 'next-translate/useTranslation'
 import Link from "next/link";
 import styled from "styled-components";
 import {useAppDispatch} from "@store_toolkit/hooks";
@@ -13,7 +13,7 @@ const Soft404StyledDiv = styled.div`
   justify-content: center;
   align-items: center;
   background-color: var(--main-background-color, #000);
-  
+
   h1 {
     color: var(--main-text-color, #fff);
   }
@@ -24,14 +24,10 @@ const Soft404StyledDiv = styled.div`
   }
 `
 
-interface Soft404PropTypes {
 
-}
-
-const Soft404: FC<Soft404PropTypes> = (props) => {
-    const {t} = useTranslation(['common', 'customTranslation']);
+const Soft404 = () => {
+    const {t} = useTranslation();
     const dispatch = useAppDispatch();
-
 
     useEffect(() => {
         dispatch(fetchPosts({
@@ -51,12 +47,13 @@ const Soft404: FC<Soft404PropTypes> = (props) => {
     return (
         <>
             <Soft404StyledDiv>
-                {/*<h1>{t<string>(`Not Found`)}</h1>*/}
-                <h1>{t<string>(`Nothing found`)}</h1>
-                <p>{t<string>(`It seems we can’t find what you’re looking for. Perhaps searching can help.`)}</p>
+                <h1>{t(`common:Nothing found`, {}, {fallback: 'Nothing found'})}</h1>
+                <p>{t(`common:It seems we can’t find what you’re looking for. Perhaps searching can help.`,
+                    {},
+                    {fallback: 'It seems we can’t find what you’re looking for. Perhaps searching can help.'})}</p>
                 <Link href="/">
                     <a className='back-to-homepage'>
-                        <h2>{t<string>(`Go To Homepage`)}</h2>
+                        <h2>{t(`common:Go To Homepage`,{},{fallback:'Go To Homepage'})}</h2>
                     </a>
                 </Link>
 

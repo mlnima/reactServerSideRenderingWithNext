@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {useTranslation} from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation'
 import styled from "styled-components";
 import {wrapper} from "@store_toolkit/store";
 import {fetchUserResetPassword} from "@store_toolkit/clientReducers/userReducer";
@@ -10,7 +9,6 @@ import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
-// import {fetchUserAutoLogin} from "@store_toolkit/clientReducers/userReducer";
 
 const EditProfileStyledMain = styled.main`
   grid-area: main;
@@ -62,7 +60,7 @@ interface ChangePasswordData {
 }
 
 const edit = () => {
-    const {t} = useTranslation(['common', 'customTranslation', 'profile']);
+    const {t} = useTranslation();
     const dispatch = useAppDispatch()
 
     const [changePasswordData, setChangePasswordData] = useState<ChangePasswordData>({})
@@ -92,12 +90,13 @@ const edit = () => {
 
     return (
         <EditProfileStyledMain className='main'>
-            <h1> {t<string>('Edit Profile', {ns: 'profile'})}</h1>
+            <h1> {t('profile:Edit Profile', {},{fallback:'Edit Profile'})}</h1>
             <form className='reset-password-form' onSubmit={onSubmitHandler}>
-                <h2>{t<string>('Change Password', {ns: 'profile'})}</h2>
 
+                <h2>{t('profile:Change Password', {},{fallback:'Change Password'})}</h2>
                 <div className='reset-password-form-field'>
-                    <p>{t<string>('Password', {ns: 'common'})}</p>
+
+                    <p>{t('common:Password', {},{fallback:'Password'})}</p>
                     <input className={'form-control-input'}
                            type="password"
                            autoComplete="off"
@@ -109,11 +108,13 @@ const edit = () => {
                 </div>
 
                 <div className='reset-password-form-field'>
-                    <p> {t<string>('NewPassword', {ns: 'profile'})}</p>
+                    <p>{t('profile:New Password', {},{fallback:'New Password'})}</p>
                     {
                         !changePasswordDataValidator.newPassword ?
                             <span className='password-info'>
-                                {t<string>('Minimum eight characters, at least one letter and one number', {ns: 'common'})}
+                              {t('common:Minimum eight characters, at least one letter and one number',
+                                  {},
+                                  {fallback:'Minimum eight characters, at least one letter and one number'})}
                             </span>
                             : null
                     }
@@ -128,7 +129,7 @@ const edit = () => {
                 </div>
 
                 <div className={'reset-password-form-field'}>
-                    <p>{t<string>('Repeat New Password', {ns: 'profile'})}</p>
+                    <p>{t('profile:Repeat New Password', {},{fallback:'Repeat New Password'})}</p>
                     <input className={'form-control-input form-control-input-validator'}
                            type={'password'}
                            autoComplete="off"
@@ -140,7 +141,7 @@ const edit = () => {
                 </div>
 
                 <button type='submit' className={'btn btn-warning'}>
-                    {t<string>('Change Password', {ns: 'profile'})}
+                    {t('profile:Change Password', {},{fallback:'Change Password'})}
                 </button>
             </form>
 
@@ -165,11 +166,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         store
     )
 
-    return {
-        props: {
-            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation', 'profile'])),
-        }
-    }
+    return null
 })
 
 edit.getLayout = function getLayout(page: ReactElement) {
@@ -181,4 +178,3 @@ edit.getLayout = function getLayout(page: ReactElement) {
 }
 
 export default edit;
-//export default edit;

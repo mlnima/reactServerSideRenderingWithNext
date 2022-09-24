@@ -1,5 +1,6 @@
 import {FC, useMemo} from "react";
-import {useTranslation} from "next-i18next";
+// import {useTranslation} from "next-i18next";
+import useTranslation from 'next-translate/useTranslation'
 import {useRouter} from "next/router";
 import Link from "next/link";
 import {MenuItem} from "@_typeScriptTypes/widgets/MenuWidget/MenuItem";
@@ -10,14 +11,18 @@ interface MenuWidgetItemPropTypes {
 }
 
 const MenuWidgetItem: FC<MenuWidgetItemPropTypes> = ({menuItem, setOpen}) => {
-    const {t} = useTranslation(['common', 'customTranslation']);
+
+    const {t,lang} = useTranslation();
     const {locale} = useRouter()
 
     const linkNameWithTranslate = useMemo(() => {
         return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?
             menuItem.name :
-            t([t(menuItem.name, {ns: 'common'}), t(menuItem.name, {ns: 'customTranslation'})])
-    }, [])
+            t(`common:${menuItem.name}`, {},
+             {fallback:t(`customTranslation:${menuItem.name}`,{},
+                     {fallback:menuItem.name})})
+
+    }, [lang])
 
     return (
         <li className={'menu-item'}>
@@ -36,3 +41,10 @@ const MenuWidgetItem: FC<MenuWidgetItemPropTypes> = ({menuItem, setOpen}) => {
 };
 
 export default MenuWidgetItem
+
+//const {t} = useTranslation(['common', 'customTranslation']);
+// const {t} = useTranslation('common');
+
+//t([t(menuItem.name, {ns: 'common'}), t(menuItem.name, {ns: 'customTranslation'})])
+// t([t(`common:${menuItem.name}`), t(`customTranslation:${menuItem.name}`)])
+//   t(`common:${menuItem.name}`,t(`customTranslation:${menuItem.name}`))

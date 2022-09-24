@@ -1,6 +1,6 @@
-import React, {FC, useState, MouseEvent, useEffect,useCallback} from "react";
+import React, { useState, MouseEvent, useEffect} from "react";
 import styled from "styled-components";
-import {useTranslation} from "next-i18next";
+import useTranslation from 'next-translate/useTranslation'
 import {useRouter} from "next/router";
 import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 
@@ -62,7 +62,7 @@ const SearchbarStyledDiv = styled.div`
     .searchbar-form {
       display: flex;
       position: initial;
-      
+
       .searchbar-submit-btn {
         display: flex;
         justify-content: center;
@@ -79,18 +79,16 @@ const SearchbarStyledDiv = styled.div`
         justify-content: center;
         align-items: center;
       }
-      
+
     }
   }
 
 `
 
-interface SearchbarPropTypes {
-}
+const Searchbar = () => {
 
-const Searchbar: FC<SearchbarPropTypes> = (props) => {
+    const {t} = useTranslation();
 
-    const {t} = useTranslation('common');
     const {push, query} = useRouter()
     const [keyword, setKeyword] = useState('')
     const [open, setOpen] = useState(null)
@@ -102,7 +100,7 @@ const Searchbar: FC<SearchbarPropTypes> = (props) => {
     }, [query?.keyword]);
 
 
-    const onSearchHandler =  (e) => {
+    const onSearchHandler = (e) => {
         e.preventDefault()
         if (keyword?.length >= 2) {
             push({
@@ -123,6 +121,7 @@ const Searchbar: FC<SearchbarPropTypes> = (props) => {
         e.preventDefault()
         setKeyword('')
     }
+
     const onCloseForm = (e: MouseEvent) => {
         e.preventDefault()
         if (keyword.length) {
@@ -133,12 +132,14 @@ const Searchbar: FC<SearchbarPropTypes> = (props) => {
     }
 
 
+
+
     return (
         <SearchbarStyledDiv className={'searchbar'} open={open}>
 
             <button onClick={() => setOpen(!open)}
                     aria-label={'open close search form'}
-                    title={t<string>('Search')}
+                    title={t('common:Search',{},{fallback:'Search'})}
                     className={'open-close-search-form'}>
 
                 <SvgRenderer svgUrl={'/public/asset/images/icons/magnifying-glass-solid.svg'}
@@ -151,7 +152,7 @@ const Searchbar: FC<SearchbarPropTypes> = (props) => {
             <form className={'searchbar-form'} onSubmit={e => onSearchHandler(e)}>
 
                 <button className='btn search-button-widget-close-btn'
-                        title={t<string>('Close')}
+                        title={t('common:Close',{},{fallback:'Close'})}
                         onClick={e => onCloseForm(e)}>
                     <SvgRenderer svgUrl={'/public/asset/images/icons/xmark-solid.svg'}
                                  size={25}
@@ -161,7 +162,7 @@ const Searchbar: FC<SearchbarPropTypes> = (props) => {
 
                 {!!keyword?.length &&
                 <button className='btn search-button-widget-clear-keyword'
-                        title={t<string>('Clear')}
+                        title={t('common:Clear',{},{fallback:'Clear'})}
                         onClick={e => onClearHandler(e)}>
                     <SvgRenderer svgUrl={'/public/asset/images/icons/xmark-solid.svg'}
                                  size={25}
@@ -172,11 +173,11 @@ const Searchbar: FC<SearchbarPropTypes> = (props) => {
                        onChange={e => setKeyword(e.target.value)}
                        name='keyword' value={keyword || ''}
                        className='searchbar-input form-control-input'
-                       placeholder={t<string>('Search...')}
+                       placeholder={t('common:Search...',{},{fallback:'Search...'})}
                 />
                 <button type='submit'
                         className='btn searchbar-submit-btn'
-                        title={t<string>('Search')}
+                        title={t('common:Search',{},{fallback:'Search'})}
                 >
                     <SvgRenderer svgUrl={'/public/asset/images/icons/magnifying-glass-solid.svg'}
                                  size={25}

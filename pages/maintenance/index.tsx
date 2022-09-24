@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {wrapper} from "@store_toolkit/store";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+// import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import type { ReactElement } from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 
@@ -23,13 +23,13 @@ const maintenance = () => {
 };
 
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    return {
-        props: {
-            ...(await serverSideTranslations(context.locale as string, ['common'])),
-        }
-    }
-})
+// export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
+//     return {
+//         props: {
+//             ...(await serverSideTranslations(context.locale as string, ['common'])),
+//         }
+//     }
+// })
 
 maintenance.getLayout = function getLayout(page:ReactElement) {
     return (

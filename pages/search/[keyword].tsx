@@ -3,7 +3,6 @@ import styled from "styled-components";
 import PostsPageInfo from "@components/includes/PostsPage/PostsPageInfo";
 import {useRouter} from "next/router";
 import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
 import type { ReactElement } from 'react';
@@ -86,11 +85,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         ))
 
 
-    return {
-        props: {
-            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
-        }
-    }
+    return null
 })
 
 searchPage.getLayout = function getLayout(page:ReactElement) {

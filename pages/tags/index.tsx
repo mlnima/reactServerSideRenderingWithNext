@@ -1,7 +1,6 @@
 import {useRouter} from "next/router";
 import PaginationComponent from "@components/includes/PaginationComponent/PaginationComponent";
 import WidgetsRenderer from "@components/includes/WidgetsRenderer/WidgetsRenderer";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {wrapper} from "@store_toolkit/store";
@@ -76,11 +75,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         metaType:'tags'
     }))
 
-    return {
-        props: {
-            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
-        }
-    }
+    return null
 
 });
 

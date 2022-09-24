@@ -1,5 +1,4 @@
 import MainWidgetArea from "../../components/widgetsArea/MainWidgetArea/MainWidgetArea";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
 import dynamic from "next/dynamic";
@@ -59,11 +58,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 //@ts-ignore
     await store.dispatch(fetchPageData(context?.query?.pageName as string))
 
-    return {
-        props: {
-            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
-        }
-    }
+    return null
 })
 
 page.getLayout = function getLayout(page: ReactElement) {

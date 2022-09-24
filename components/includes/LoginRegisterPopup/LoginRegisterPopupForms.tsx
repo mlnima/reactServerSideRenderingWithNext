@@ -1,5 +1,6 @@
 import React, {useState, useEffect, FC, useRef} from 'react';
-import {useTranslation} from 'next-i18next';
+// import {useTranslation} from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation'
 import {useSelector} from 'react-redux';
 import styled from "styled-components";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
