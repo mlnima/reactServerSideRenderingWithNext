@@ -4,6 +4,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import {useAppSelector} from "@store_toolkit/hooks";
 import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
+import mongoIdValidator from "@_variables/util/mongoIdValidatorClient";
 
 const Style = styled.div`
   background-color: var(--navigation-background-color, #000);
@@ -54,26 +55,36 @@ interface BreadcrumbListPropTypes {
 const BreadcrumbList: FC<BreadcrumbListPropTypes> = (props) => {
 
     const {asPath} = useRouter()
-    const siteName = useAppSelector(({settings}) => settings?.identity?.siteName || 'Home')
+    const {siteName, currentPageTitle} = useAppSelector(({settings, globalState}) => {
+        return {
+            siteName: settings?.identity?.siteName || 'Home',
+            currentPageTitle: globalState.headData.title
+        }
+    })
     const linkPath = asPath.split('/');
 
     const nameFixerForOldUrls = (name: string) => {
-        return name === 'post' ? 'posts' :
-            name === 'category' ? 'categories' :
-                name === 'tag' ? 'tags' :
-                    name === 'actor' ? 'actors' :
-                        name === 'posts?postType=video' ? 'video' :
-                            name === 'posts?postType=article' ? 'article' :
-                                name === 'posts?postType=promotion' ? 'promotion' :
-                                    name === 'posts?postType=learn' ? 'learn' :
-                                        name
+
+        return asPath.match(/\/posts\/|\/post\/|\/categories\/|\/category\/|\/tag\/|\/tags\/|\/actor\/|\/actors\//g) &&
+        mongoIdValidator(name) ? currentPageTitle :
+            name === 'post' ? 'posts' :
+                name === 'category' ? 'categories' :
+                    name === 'tag' ? 'tags' :
+                        name === 'actor' ? 'actors' :
+                            name === 'posts?postType=video' ? 'video' :
+                                name === 'posts?postType=article' ? 'article' :
+                                    name === 'posts?postType=promotion' ? 'promotion' :
+                                        name === 'posts?postType=learn' ? 'learn' :
+                                            name
     }
 
     linkPath.shift();
 
-    const renderListItems = linkPath.filter(path=>path!=='page').map((path, index) => {
+    const renderListItems = linkPath.filter(path => path !== 'page').map((path, index) => {
         const normalPath = `/${linkPath.slice(0, index + 1).join('/')}`
-        const overwritePath = normalPath === '/post' ? '/posts' :
+        const overwritePath = asPath.match(/\/posts\/|\/post\/|\/categories\/|\/category\/|\/tag\/|\/tags\/|\/actor\/|\/actors\//g) &&
+            mongoIdValidator(normalPath)? asPath:
+            normalPath === '/post' ? '/posts' :
             normalPath.match(/post\/video|posts\/video/g) ? '/posts?postType=video' :
                 normalPath.match(/post\/article|posts\/article/g) ? '/posts?postType=article' :
                     normalPath.match(/post\/promotion|posts\/promotion/g) ? '/posts?postType=promotion' :

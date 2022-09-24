@@ -47,7 +47,7 @@ const fetchPosts = createAsyncThunk(
             )
 
             const canonicalUrl = options?.page?.match('category|tag|actor') ?
-                {canonicalUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${singularMetaForm}/${metaId}`} : {}
+                {canonicalUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${metaType}/${metaId}`} : {}
 
 
             thunkAPI.dispatch(
@@ -60,10 +60,10 @@ const fetchPosts = createAsyncThunk(
                         ogType: 'website',
                         ogDescription: description?.substring(0, 155) || null,
                         ...canonicalUrl,
-                        ogUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${singularMetaForm}/${metaId}`,
+                        ogUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${metaType}/${metaId}`,
                         ogImage: meta?.mainThumbnail || null,
                         twitterCard: true,
-                        twitterUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${singularMetaForm}/${metaId}`,
+                        twitterUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${metaType}/${metaId}`,
                         twitterTitle: meta?.name || null,
                         twitterDescription: meta?.description?.substring(0, 155) || null,
                         twitterImage: meta?.imageUrl || null,
