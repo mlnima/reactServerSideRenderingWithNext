@@ -41,13 +41,12 @@ const NavigationWidgetArea = () => {
 
     return (
         <>
-        <StyledNavigation stylesData={navigationStyle || ''} className={'widget-area navigation'}>
-            <div className='navigation-content'>
-                <WidgetsRenderer position={'navigation'}/>
-            </div>
-        </StyledNavigation>
-            {pathname !== '/' &&  <BreadcrumbList/> }
-
+            <StyledNavigation stylesData={navigationStyle || ''} className={'widget-area navigation'}>
+                <div className='navigation-content'>
+                    <WidgetsRenderer position={'navigation'}/>
+                </div>
+            </StyledNavigation>
+                {pathname !== '/' && <BreadcrumbList/>}
         </>
     );
 };

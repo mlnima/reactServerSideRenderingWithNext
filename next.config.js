@@ -25,15 +25,26 @@ const i18nConfig = locales?.length === 1 ? {} : {
     }
 }
 
+
+const  redirects = ()=> {
+    return [
+        {
+            source: `/post/:postType`,
+            destination: '/posts?postType=:postType',
+            permanent: true,
+        },
+        {
+            source: '/about',
+            destination: '/',
+            permanent: true,
+        },
+    ]
+}
+
 const rewrites = () => {
     return {
         beforeFiles: [
 
-            // {
-            //     source: `/post/:postType(video|post|product|article|book)`,
-            //     destination: '/posts?postType=:postType' ,
-            //     has: [{type: 'query', key: 'postType'}]
-            // },
 
 
             {
@@ -57,32 +68,14 @@ const rewrites = () => {
                 has: [{type: 'query', key: 'content'}]
             },
             {
-                source: `/post/:postType/:id`,
-                destination: '/posts/:postType/:id',
+                source: `/post`,
+                destination: '/posts',
             },
-            {
-                source: `/category/:categoryId`,
-                destination: '/categories/:categoryId',
-            },
-            {
-                source: `/tag/:tagId`,
-                destination: '/tags/:tagId',
-            },
-            {
-                source: `/actor/:actorId`,
-                destination: '/actors/:actorId',
-            },
+            // {
+            //     source: `/post/:postType`,
+            //     destination: '/posts?postType=:postType',
+            // },
 
-            // {
-            //     source: `/post/out/:postType(video|product|article|book|standard|promotion|learn|food|book|out)?/:id`,
-            //     destination: '/post/:postType/:id',
-            //     has: [{type: 'query', key: 'id'},{type: 'query', key: 'postType'}]
-            // },
-            // {
-            //     source: `/:title`,
-            //     destination: '/post/undefinedType/:title',
-            //     has: [{type: 'query', key: 'title'}]
-            // },
             {source: `/login`, destination: '/auth/login'},
             {source: `/register`, destination: '/auth/register'},
         ],
@@ -91,14 +84,14 @@ const rewrites = () => {
             // {source: `/:locale(${languages})?/:postType(video|post|product|article|book)/:title`, destination: '/post',has: [{type: 'query', key: 'id'}]},
             {
                 source: `/:postType(video|post|product|article|book)?/:title`,
-                destination: '/posts',
+                destination: '/post',
                 has: [{type: 'query', key: 'id'}]
             },
         ],
         fallback: [
             {
                 source: `/:identifier`,
-                destination: '/posts/undefinedType/:identifier',
+                destination: '/post/undefinedType/:identifier',
                 // has: [{type: 'query', key: 'title'}]
             },
         ]
@@ -142,6 +135,7 @@ const nextConfigs = {
     ...nextImageConfig,
     // reactStrictMode: false,
     rewrites,
+    redirects,
     swcMinify: true,
     eslint: {
         ignoreDuringBuilds: true,
@@ -194,3 +188,45 @@ module.exports = withPlugins([
 //     }),
 //     // i18nConfig,
 // ], nextConfigs);
+
+
+
+// {
+//     source: `/post/:postType(video|post|product|article|book)`,
+//     destination: '/posts?postType=:postType' ,
+//     has: [{type: 'query', key: 'postType'}]
+// },
+
+
+
+// {
+//     source: `/post/out/:postType(video|product|article|book|standard|promotion|learn|food|book|out)?/:id`,
+//     destination: '/post/:postType/:id',
+//     has: [{type: 'query', key: 'id'},{type: 'query', key: 'postType'}]
+// },
+// {
+//     source: `/:title`,
+//     destination: '/post/undefinedType/:title',
+//     has: [{type: 'query', key: 'title'}]
+// },
+
+// {
+//     source: `/post/:postType/:id`,
+//     destination: '/posts/:postType/:id',
+// },
+// {
+//     source: `/category/:categoryId`,
+//     destination: '/categories/:categoryId',
+// },
+// {
+//     source: `/tag/:tagId`,
+//     destination: '/tags/:tagId',
+// },
+// {
+//     source: `/actor/:actorId`,
+//     destination: '/actors/:actorId',
+// },
+// {
+//     source: `/categories/:categoryId/page/:page`,
+//     destination: '/categories/:page',
+// },

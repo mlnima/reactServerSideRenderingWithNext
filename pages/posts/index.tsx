@@ -41,7 +41,6 @@ const posts = () => {
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-
     // @ts-ignore
     await _getServerSideStaticPageData(
         context,

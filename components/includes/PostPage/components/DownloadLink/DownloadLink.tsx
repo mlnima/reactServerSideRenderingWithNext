@@ -9,7 +9,7 @@ const DownloadLinkStyledDiv = styled.div`
   align-items: center;
   flex-wrap: wrap;
   margin: 0 5px;
-  
+
   .download-text{
     margin: 0 3px;
   }
@@ -20,7 +20,7 @@ const DownloadLinkStyledDiv = styled.div`
     align-items: center;
     text-decoration: none;
     width: 100px;
-    height: 24px;
+    height: 40px;
   }
 
   .multiple-download-links {

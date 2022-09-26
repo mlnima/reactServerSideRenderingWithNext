@@ -3,6 +3,8 @@ import {convertMetasTypeToSingular, getTextDataWithTranslation, textContentRepla
 import _clientGetPostsQueryGenerator from "@_variables/clientVariables/_clientGetPostsQueryGenerator";
 import Axios from "@_variables/util/Axios";
 import {setHeadData} from "@store_toolkit/clientReducers/globalStateReducer";
+import {_postsCanonicalUrlGenerator} from "@_variables/clientVariables/_canonicalUrlGenerators";
+import {locale} from "moment";
 
 
 interface FetchPosts {
@@ -46,9 +48,12 @@ const fetchPosts = createAsyncThunk(
                 ), {name: apiData.data?.meta?.name}
             )
 
-            const canonicalUrl = options?.page?.match('category|tag|actor') ?
-                {canonicalUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${metaType}/${metaId}`} : {}
-
+            const canonicalUrl = _postsCanonicalUrlGenerator(
+                options?.page?.match('category|tag|actor'),
+                metaId,context.locale,
+                context.req?.query?.page,
+                context.req?.query?.keyword
+            )
 
             thunkAPI.dispatch(
                 setHeadData(
@@ -59,11 +64,11 @@ const fetchPosts = createAsyncThunk(
                         ogTitle: title || null,
                         ogType: 'website',
                         ogDescription: description?.substring(0, 155) || null,
-                        ...canonicalUrl,
-                        ogUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${metaType}/${metaId}`,
+                        canonicalUrl,
+                        ogUrl: canonicalUrl,
                         ogImage: meta?.mainThumbnail || null,
                         twitterCard: true,
-                        twitterUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${metaType}/${metaId}`,
+                        twitterUrl: canonicalUrl,
                         twitterTitle: meta?.name || null,
                         twitterDescription: meta?.description?.substring(0, 155) || null,
                         twitterImage: meta?.imageUrl || null,

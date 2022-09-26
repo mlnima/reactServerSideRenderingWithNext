@@ -56,7 +56,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         store
     )
 //@ts-ignore
-    await store.dispatch(fetchPageData(context?.query?.pageName as string))
+    await store.dispatch(fetchPageData(context))
 
     return null
 })

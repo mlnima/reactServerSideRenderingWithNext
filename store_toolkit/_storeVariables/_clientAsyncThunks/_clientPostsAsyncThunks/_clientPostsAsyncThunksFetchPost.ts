@@ -4,6 +4,7 @@ import isValidObjectId from "@_variables/util/mongoIdValidatorClient";
 import Axios from "@_variables/util/Axios";
 import _postPageQueryGenerator from "@_variables/clientVariables/_postPageQueryGenerator";
 import {setHeadData} from "@store_toolkit/clientReducers/globalStateReducer";
+import {_postCanonicalUrlGenerator} from "@_variables/clientVariables/_canonicalUrlGenerators";
 
 interface FetchPost {
     identifier: string,
@@ -34,21 +35,21 @@ const fetchPost = createAsyncThunk(
             ...(apiData.data.post?.actors || [])
         ].map(meta => meta?.name)
 
+        const canonicalUrl = _postCanonicalUrlGenerator(apiData.data.post?.postType,apiData.data.post?._id,locale)
+
         thunkAPI.dispatch(
             setHeadData({
                     title: postTitle,
                     description: typeof postDescription === 'string' ? postDescription?.substring(0, 155) : null,
                     keywords,
-                    canonicalUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/posts/${apiData.data.post?.postType || 'article'}/${apiData.data.post?._id}`,
+                    canonicalUrl: canonicalUrl,
                     ogTitle: postTitle,
-                    // ogType: postData?.postType === 'video' ? 'video.other' : postData?.postType || '',
                     ogType: 'website',
                     ogDescription: typeof postDescription === 'string' ? postDescription?.substring(0, 155) : null,
-                    ogUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/posts/${apiData.data.post?.postType || 'article'}/${apiData.data.post?._id}`,
+                    ogUrl: canonicalUrl,
                     ogImage: apiData.data.post?.mainThumbnail || null,
-
                     twitterCard: true,
-                    twitterUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/posts/${apiData.data.post?.postType || 'article'}/${apiData.data.post?._id}`,
+                    twitterUrl: canonicalUrl,
                     twitterTitle: postTitle,
                     twitterDescription: typeof postDescription === 'string' ? postDescription?.substring(0, 155) : null,
                     twitterImage: apiData.data.post?.mainThumbnail || null,
