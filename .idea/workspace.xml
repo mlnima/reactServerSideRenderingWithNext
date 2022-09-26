@@ -20,31 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/_variables/clientVariables/_breadcrumbLinkCorrector.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_variables/clientVariables/_canonicalUrlGenerators.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/BreadcrumbGenerator.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/DownloadLink/DownloadLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/DownloadLink/DownloadLink.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/ActorCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/ActorCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/CardsRenderer/PostsCardsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CardsRenderer/PostsCardsRenderer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/CategoryCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CategoryCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/TagCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/TagCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/layouts/AppLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AppLayout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/widgetsArea/NavigationWidgetArea/BreadcrumbList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/widgetsArea/NavigationWidgetArea/BreadcrumbList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/widgetsArea/NavigationWidgetArea/NavigationWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/widgetsArea/NavigationWidgetArea/NavigationWidgetArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_document.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_document.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/actors/[actorId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/actor/[actorId].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/categories/[categoryId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/category/[categoryId].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/page/[pageName].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/page/[pageName].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/posts/[postType]/[identifier].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/[postType]/[identifier].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/posts/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/posts/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/tags/[tagId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tag/[tagId].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPageData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPageData.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPost.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPost.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPosts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPosts.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_toolkit/_storeVariables/_firstRequestHeadDataSetter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_firstRequestHeadDataSetter.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +110,7 @@
       <command value="nextEnv" />
     </option>
   </component>
-  <component name="RunManager" selected="npm.start">
+  <component name="RunManager" selected="npm.dev">
     <configuration name="analyze" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -186,9 +163,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.update:packages" />
         <item itemvalue="npm.analyze" />
       </list>
@@ -1293,7 +1270,8 @@
       <workItem from="1663968127916" duration="14744000" />
       <workItem from="1664008227237" duration="22396000" />
       <workItem from="1664036630102" duration="20119000" />
-      <workItem from="1664105733800" duration="15696000" />
+      <workItem from="1664105733800" duration="16454000" />
+      <workItem from="1664197518732" duration="532000" />
     </task>
     <servers />
   </component>

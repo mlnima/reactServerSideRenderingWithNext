@@ -23,7 +23,7 @@ const Style = styled.div`
 const BreadcrumbList = () => {
     const navigationStyle = useSelector(({settings}: Store) => settings?.design?.navigationStyle)
     return (
-        <Style role="presentation" stylesData={navigationStyle || ''} className='navigation-content'>
+        <Style role="presentation" stylesData={navigationStyle || ''} className='breadcrumbs-content'>
             <Breadcrumbs maxItems={2} aria-label="breadcrumb">
                 <BreadcrumbGenerator/>
             </Breadcrumbs>
