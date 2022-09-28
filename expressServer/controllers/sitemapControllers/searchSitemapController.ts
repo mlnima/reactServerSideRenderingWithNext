@@ -33,7 +33,7 @@ export const searchSitemapsController= async ()=>{
 
             for (const currentPage of rangeOfSitemaps){
                 finalXML += sitemapItemTemplate(
-                    `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemaps/sitemap-tax-search-${currentPage+1}.xml`,
+                    `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemap-tax-search-${currentPage+1}.xml`,
                     lastUpdate.toISOString()
                 )
             }

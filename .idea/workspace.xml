@@ -21,15 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/_variables/sitemapVariables/xmlTemplateGenerators.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/_variables/sitemapVariables/xmlTemplateGenerators.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/metaSitemapController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/metaSitemapController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/pageSitemapController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/pageSitemapController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/rootSiteMap.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/rootSiteMap.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/searchSitemapController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/searchSitemapController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/siteMapsController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/siteMapsController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/sitemapMainRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/sitemapMainRouter.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/subSiteMapsController.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1276,7 +1268,7 @@
       <workItem from="1664221031897" duration="24271000" />
       <workItem from="1664274368423" duration="7674000" />
       <workItem from="1664295618054" duration="7208000" />
-      <workItem from="1664333699916" duration="39686000" />
+      <workItem from="1664333699916" duration="41243000" />
     </task>
     <servers />
   </component>
