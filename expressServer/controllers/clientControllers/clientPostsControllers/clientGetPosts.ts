@@ -7,7 +7,7 @@ import postSchema from '../../../models/postSchema';
 import settingSchema from '../../../models/settings/settingSchema';
 import metaSchema from '../../../models/metaSchema';
 import searchKeywordSchema from '../../../models/searchKeywordSchema'
-import _clientQueryGeneratorForGettingPosts from '../_variables/_clientQueryGeneratorForGettingPosts'
+import _clientQueryGeneratorForGettingPosts from '../../../_variables/serverClientVariables/_clientQueryGeneratorForGettingPosts'
 import mongoIdValidator from '../../../../_variables/serverUtil/mongoIdValidator';
 import postFieldRequestForCards from "../../../../_dataStructures/postFieldRequestForCards";
 //import postSchema from '@expressServer/models/postSchema'

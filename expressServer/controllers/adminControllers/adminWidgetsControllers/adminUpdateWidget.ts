@@ -1,9 +1,9 @@
 import widgetSchema from '../../../models/widgetSchema';
 import postSchema from '../../../models/postSchema';
 import _clientQueryGeneratorForGettingPosts
-    from '../../clientControllers/_variables/_clientQueryGeneratorForGettingPosts';
-// import {findMetas} from "../../../../_variables/serverVariables/serverGlobalVariable/findMetas";
-import {findMetas} from "@_variables/serverVariables/serverGlobalVariable/findMetas";
+    from '../../../_variables/serverClientVariables/_clientQueryGeneratorForGettingPosts';
+
+import {findMetas} from "../../../../_variables/serverVariables/serverGlobalVariable/findMetas";
 import metaSchema from "../../../models/metaSchema";
 
 export const updatePostWidgetData = async (widgetData) => {

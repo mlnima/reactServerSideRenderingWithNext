@@ -20,41 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/_variables/adminVariables/_adminMetaPageQueryGenerator.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_variables/serverVariables/serverGlobalVariable/findMetas.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/cards/asset/MuiCustomCard/CustomCard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/metasPage/MetaElement.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/metasPage/MetasRenderer.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/tags.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/next.configPlugins.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/getTags.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_dataStructures/postTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_dataStructures/postTypes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_metaPageQueryGenerator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/clientVariables/_metaPageQueryGenerator.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/Format/Format.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/Format/Format.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/PostsTypes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/PostsTypes.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/global/Styles/GlobalStylesComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/Styles/GlobalStylesComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/BackToTopButton/BackToTopButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/BackToTopButton/BackToTopButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/BreadcrumbGenerator.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/BreadcrumbGenerator.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/CardsRenderer/PostsCardsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CardsRenderer/PostsCardsRenderer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/CategoryCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CategoryCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/PromotionPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/PromotionPostCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/AlphabeticalNumericalRangeLinksWidget/AlphabeticalNumericalRangeLinksWidget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/AlphabeticalNumericalRangeLinksWidget/AlphabeticalNumericalRangeLinksWidget.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MetaWidget/MetaWidget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MetaWidget/MetaWidget.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MetaWidget/MetaWidgetElement.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminUpdateWidget.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminUpdateWidget.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetMetas.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetMetas.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsRouter.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/404.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/404.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/500.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/500.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/assets/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/assets/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/tags/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tags/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_toolkit/clientReducers/postsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/clientReducers/postsReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/_variables/_clientQueryGeneratorForGettingPosts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/_variables/serverClientVariables/_clientQueryGeneratorForGettingPosts.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetPosts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetPosts.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tsconfig.server.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.server.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -132,11 +101,11 @@
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\public\asset\images\icons" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\expressServer\_variables" />
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\_variables\serverVariables\serverClientVariables" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\metasPage" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\pages\post" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\pages\tag" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\pages\category" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -1302,7 +1271,7 @@
       <workItem from="1664221031897" duration="24271000" />
       <workItem from="1664274368423" duration="7674000" />
       <workItem from="1664295618054" duration="7208000" />
-      <workItem from="1664333699916" duration="11755000" />
+      <workItem from="1664333699916" duration="12409000" />
     </task>
     <servers />
   </component>

@@ -18,6 +18,7 @@
     "paths": {
       "@expressServer/*": ["expressServer/*"],
       "@_variables/*": ["_variables/*"],
+      "@_serverVariables/*": ["expressServer/_variables/*"],
       "@_dataStructures/*": ["_dataStructures/*"],
       "@_typeScriptTypes/*": ["_typeScriptTypes/*"]
     }

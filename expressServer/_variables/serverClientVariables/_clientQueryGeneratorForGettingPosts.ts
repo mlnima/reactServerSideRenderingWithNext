@@ -1,4 +1,4 @@
-import postFieldRequestForCards from "../../../../_dataStructures/postFieldRequestForCards";
+import postFieldRequestForCards from "../../../_dataStructures/postFieldRequestForCards";
 
 const _clientQueryGeneratorForGettingPosts = (data, metaId) => {
 
