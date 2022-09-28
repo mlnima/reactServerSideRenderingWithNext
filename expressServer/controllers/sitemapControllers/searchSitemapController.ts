@@ -1,6 +1,4 @@
-//searchSitemapController
-const searchKeywordSchema = require('../../models/searchKeywordSchema')
-
+import searchKeywordSchema from '../../models/searchKeywordSchema';
 
 const searchSitemapController = async (req,res)=>{
     try {
@@ -33,4 +31,4 @@ const searchSitemapController = async (req,res)=>{
     }
 }
 
-module.exports = searchSitemapController
+export default searchSitemapController;

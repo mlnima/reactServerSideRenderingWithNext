@@ -6,7 +6,8 @@ export const _getServerSideStaticPageData = async (context, dynamicWidgets, opti
     const staticWidgets = ['footer', 'header', 'topBar', 'navigation']
 
     const matchReferer = new RegExp(`${process.env.NEXT_PUBLIC_PRODUCTION_URL}|localhost`, 'g');
-    const isInternalReferer = referer ? !!referer.match(matchReferer) : false;
+    const unMatchInternalReferer = new RegExp(`/sitemap`, 'g');
+    const isInternalReferer = referer ? !!matchReferer.test(referer) && !unMatchInternalReferer.test(referer)  : false;
 
     await store.dispatch(fetchSettings({
         requireSettings: ['identity', 'design'],

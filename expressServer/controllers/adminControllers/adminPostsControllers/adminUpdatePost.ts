@@ -1,5 +1,5 @@
 import postSchema from '../../../models/postSchema';
-import updateSaveMetas from '../_variables/_updateSaveMetas';
+import updateSaveMetas from '../../../_variables/adminVariables/_updateSaveMetas';
 
 const adminUpdatePost =  async (req, res) => {
     const postUpdatedData = req.body.postData

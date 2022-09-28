@@ -28,7 +28,7 @@ const ArticleTypePostPage = dynamic(() =>
     import('@components/includes/PostPage/ArticleTypePostPage/ArticleTypePostPage'))
 const PromotionTypePostPage = dynamic(() =>
     import('@components/includes/PostPage/PromotionTypePostPage/PromotionTypePostPage'))
-const PostPage = dynamic(() => import('@components/includes/PostPage/PostPage'))
+
 
 const PageStyle = styled.div`
   .rating-price-download {
@@ -100,7 +100,7 @@ const postPage = () => {
                             postType === 'learn' ? <LearnTypePostPage/> :
                                 postType === 'promotion' ? <PromotionTypePostPage/> :
                                     postType === 'article' ? <ArticleTypePostPage/> :
-                                        <PostPage/>
+                                       null
                     }
 
                     <SidebarWidgetAreaRenderer sidebar={sidebar} position={'postPage'}/>

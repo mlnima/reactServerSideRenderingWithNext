@@ -28,16 +28,14 @@ const PageStyle = styled.div`
 const actorsPage = () => {
     const {query} = useRouter();
 
-    const {actorsPageStyle, totalCount,sidebar} = useSelector(({settings, posts}: Store) => {
+    const {actorsPageStyle, totalCount,sidebar,postsCountPerPage} = useSelector(({settings, posts}: Store) => {
         return {
             actorsPageStyle: settings?.design?.actorsPageStyle,
             totalCount: posts?.totalCount,
             sidebar: settings?.identity?.actorsPageSidebar,
+            postsCountPerPage: query?.size ? parseInt(query?.size as string) : settings?.identity?.postsCountPerPage || 20
         }
     })
-
-    const postsCountPerPage = query?.size ? parseInt(query?.size as string) :
-        useSelector((store: Store) => parseInt(store?.settings?.identity?.postsCountPerPage || '20'))
 
     return (
         <PageStyle id={'content'} actorsPageStyle={actorsPageStyle} className={`page-${sidebar || 'no'}-sidebar `}>

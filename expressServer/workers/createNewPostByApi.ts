@@ -5,7 +5,7 @@ connectToDatabase().finally()
 const {Worker, parentPort, workerData} = require('worker_threads');
 const sharp = require('sharp');
 const postSchema = require("../models/postSchema");
-const updateSaveMetas = require("../controllers/adminControllers/_variables/_updateSaveMetas");
+const updateSaveMetas = require("../_variables/adminVariables/_updateSaveMetas");
 const download = require('image-downloader')
 const fsExtra = require("fs-extra");
 const fs = require("fs");

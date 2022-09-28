@@ -1,9 +1,8 @@
 import widgetSchema from '../../../models/widgetSchema';
 import postSchema from '../../../models/postSchema';
 import _clientQueryGeneratorForGettingPosts
-    from '../../../_variables/serverClientVariables/_clientQueryGeneratorForGettingPosts';
-
-import {findMetas} from "../../../../_variables/serverVariables/serverGlobalVariable/findMetas";
+    from '../../../_variables/clientVariables/_clientQueryGeneratorForGettingPosts';
+import {findMetas} from "../../../_variables/serverGlobalVariable/findMetas";
 import metaSchema from "../../../models/metaSchema";
 
 export const updatePostWidgetData = async (widgetData) => {
@@ -41,21 +40,17 @@ export const updatePostWidgetData = async (widgetData) => {
 
 const updateMetaWidgetData = async (widgetData) => {
     try {
-        const metas = await findMetas({
+
+        const resultMetaFindQueries = await findMetas({
             limit: widgetData?.count,
             metaType: widgetData?.metaType
         })
 
-        const countQuery = {count: {$gt: 0}}
-        const typeQuery = {type: widgetData?.metaType || 'categories'}
-        const statusQuery = {status: 'published'}
-        let totalCount = await metaSchema.countDocuments({$and: [countQuery, typeQuery, statusQuery]}).exec()
-
         return {
             ...widgetData,
             uniqueData: {
-                metaData: metas.map(meta => meta._id),
-                totalCount
+                metaData: resultMetaFindQueries?.metas?.map(meta => meta._id) ,
+                totalCount: resultMetaFindQueries?.totalCount
             }
         }
     } catch (err) {

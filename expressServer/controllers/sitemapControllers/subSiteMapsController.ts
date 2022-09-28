@@ -59,7 +59,7 @@ subSiteMapsController.subSiteMapsController = async (req, res) => {
     })
 };
 
-module.exports = subSiteMapsController;
+export default subSiteMapsController;
 
 
 // let month = req.params.month;

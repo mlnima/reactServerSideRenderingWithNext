@@ -1,0 +1,52 @@
+import metaSchema from "../../models/metaSchema";
+import settingSchema from "../../models/settings/settingSchema";
+import postSchema from "../../models/postSchema";
+import {IdentitySettings} from "@_typeScriptTypes/settings/IdentitySettings";
+
+interface FindMetasQueryTypes{
+    metaType:string,
+    page?:number,
+    limit?:number,
+    startWith?:number|string,
+    sort?:string,
+}
+
+export const findMetas = async (query:FindMetasQueryTypes)=>{
+    try {
+        // @ts-ignore
+        const identitySetting:{data:IdentitySettings} = query?.page ? await settingSchema.findOne({type: 'identity'}).exec() : {}
+        const statusQuery = {status: 'published'};
+        const type = {type: query.metaType}
+        const notStartWithNumberRegex = /^(?![0-9].*$).*/g
+        const startWithQuery = !query.startWith  ? {name: {$regex: notStartWithNumberRegex}} :  {name: {$regex: '^' + query.startWith}}
+        const countQuery =  {count: {$gt: 0}}
+        const limit = query?.page ? identitySetting?.data?.postsCountPerPage : query?.limit ? query?.limit: 0
+        const page = query?.page || 1
+        const skip = query?.page ? limit * (page - 1) : 0
+
+        const sortQuery = !query.sort ? {
+            'rank': 1,
+            'count': -1
+        } : {[query.sort]: -1}
+        const totalCount = await postSchema.countDocuments([type, startWithQuery, statusQuery, countQuery]).exec()
+        const metas = await metaSchema.find(
+            {$and: [type, startWithQuery, statusQuery, countQuery]},
+            {},
+            {sort: sortQuery})
+            .limit(limit || (query?.startWith ? 0 : 1000))
+            .skip(skip)
+            .select( query.metaType ==='tags' ? 'name type' : 'name type imageUrl')
+            .exec()
+        console.log(metas?.[0]?.name)
+        return{
+            metas,
+            totalCount
+        }
+    }catch (error){
+        console.log(error)
+        return{
+            metas:[],
+            totalCount:0
+        }
+    }
+}

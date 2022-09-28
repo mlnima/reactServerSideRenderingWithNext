@@ -1,5 +1,5 @@
 import postSchema from '../../../models/postSchema';
-import updateSaveMetas from '../_variables/_updateSaveMetas';
+import updateSaveMetas from '../../../_variables/adminVariables/_updateSaveMetas';
 
 const adminImportPosts = async (req, res) => {
     const newPosts = req.body.posts;

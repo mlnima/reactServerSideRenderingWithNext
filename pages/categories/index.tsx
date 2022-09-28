@@ -24,8 +24,6 @@ const categoriesPage = () => {
 
     const {
         categoriesPageStyle,
-        topWidgets,
-        bottomWidgets,
         totalCount,
         postsCountPerPage,
         sidebar
@@ -34,12 +32,7 @@ const categoriesPage = () => {
             categoriesPageStyle: settings?.design?.categoriesPageStyle,
             sidebar: settings?.identity?.categoriesPageSidebar,
             totalCount: posts.totalCount,
-            //@ts-ignore
-            topWidgets: widgets?.widgetInGroups?.categoriesPageTop?.length,
-            //@ts-ignore
-            bottomWidgets: widgets?.widgetInGroups?.categoriesPageBottom?.length,
-            postsCountPerPage: query?.size ? parseInt(query?.size as string) :
-                parseInt(settings?.identity?.postsCountPerPage || '20')
+            postsCountPerPage: query?.size ? parseInt(query?.size as string) : settings?.identity?.postsCountPerPage || 20
         }
     })
 
@@ -47,7 +40,7 @@ const categoriesPage = () => {
         <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar `}
                    stylesData={categoriesPageStyle}>
             <main id={'primary'} className={'content main '}>
-                {topWidgets ? <WidgetsRenderer position={'categoriesPageTop'}/> : null}
+                <WidgetsRenderer position={'categoriesPageTop'}/>
                 <MetasCardsRenderer metaType={'categories'}/>
                 <PaginationComponent
                     isActive={true}
@@ -56,8 +49,7 @@ const categoriesPage = () => {
                     size={postsCountPerPage}
                     maxPage={Math.ceil(totalCount / postsCountPerPage)}
                 />
-                {bottomWidgets ? <WidgetsRenderer position={'categoriesPageBottom'}/> : null}
-
+                <WidgetsRenderer position={'categoriesPageBottom'}/>
             </main>
             <SidebarWidgetAreaRenderer sidebar={sidebar} position={'categoriesPage'}/>
         </PageStyle>

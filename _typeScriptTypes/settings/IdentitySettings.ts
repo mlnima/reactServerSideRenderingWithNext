@@ -51,5 +51,5 @@ export interface IdentitySettings {
     cookiePopupMessage: boolean,
     rtaContent: boolean,
     membership: boolean,
-    postsCountPerPage?: string ,
+    postsCountPerPage?: number ,
 }

@@ -31,7 +31,7 @@ const PostsPage: FC<PostPageTypes> = ({renderPagination}) => {
         return {
             posts: posts?.posts,
             totalCount: posts?.totalCount,
-            postsCountPerPage: parseInt(query?.size as string || settings?.identity?.postsCountPerPage || '20')
+            postsCountPerPage: query?.size ? parseInt(query?.size as string) : settings?.identity?.postsCountPerPage
         }
     })
 
