@@ -1,4 +1,53 @@
 import pageSchema from '../../models/pageSchema';
+import {sitemapItemTemplate} from "../../_variables/sitemapVariables/xmlTemplateGenerators";
+
+export const pagesSitemapsController = async () =>{
+    try {
+        let finalXML = ''
+        const findPageQuery = {status:'published'}
+        const pagesCount = await pageSchema.countDocuments(findPageQuery).exec();
+        const toDay = new Date();
+
+        if (pagesCount<500){
+            return sitemapItemTemplate(
+                `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemap-pt-page-1.xml`,
+                toDay.toISOString()
+            )
+        }else {
+            const lastPage = await pageSchema.findOne(findPageQuery)
+                .select(['createdAt'])
+                .limit(1)
+                .sort('-_id').exec();
+//@ts-ignore
+            const lastUpdate = lastPage?.createdAt ?
+                //@ts-ignore
+                new Date(lastPage.createdAt) :
+                //@ts-ignore
+                new Date(lastPage.createdAt)
+
+            const countOfSiteMaps = Math.ceil(pagesCount/500)
+            const rangeOfSitemaps = [...Array(countOfSiteMaps).keys()]
+
+            for (const currentPage of rangeOfSitemaps){
+                finalXML += sitemapItemTemplate(
+                    `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemaps/sitemap-pt-page-${currentPage+1}.xml`,
+                    lastUpdate.toISOString()
+                )
+            }
+
+            return finalXML
+
+        }
+    }catch (err){
+        console.error(err)
+
+    }
+}
+
+
+
+
+
 
 const pagesDataToXmlString = (pages) => pages.reduce((sitemap,currentPageData)=>{
     const pagesUrl = `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/page/${currentPageData.pageName}`
@@ -28,7 +77,6 @@ const templateGenerator = (pages) => {
 const pageSitemapController = async (req, res) => {
     try {
         const pages = await pageSchema.find({status: 'published'}).exec() || []
-        console.log(templateGenerator(pages))
         res.set('Content-Type', 'text/xml');
         res.send(templateGenerator(pages))
     } catch (err) {

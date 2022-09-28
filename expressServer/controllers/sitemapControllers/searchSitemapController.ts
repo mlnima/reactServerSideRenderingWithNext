@@ -1,34 +1,70 @@
 import searchKeywordSchema from '../../models/searchKeywordSchema';
+import {
+    keywordXmlTemplateGenerator,
+    sitemapItemTemplate,
+    urlSetXmlTemplate
+} from "../../_variables/sitemapVariables/xmlTemplateGenerators";
 
-const searchSitemapController = async (req,res)=>{
+export const searchSitemapsController= async ()=>{
     try {
-        let metaXmlData = ''
-        const keywords = await searchKeywordSchema.find({count: {$gt:0}}).exec()
+        let finalXML = ''
+        const keywordsCount = await searchKeywordSchema.countDocuments({count: {$gt:0}}).exec();
+        const toDay = new Date();
 
-        for await (const keyword of keywords){
-            const keywordsUrl = `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/search/${keyword?.name}`
-            const date = (keyword?.updatedAt).toISOString()
-            metaXmlData +=`<url> 
-                         <loc>${keywordsUrl}</loc>
-                         <lastmod>${date}</lastmod>
-                         <changefreq>always</changefreq>
-                         <priority>1</priority>
-                      </url>`
+        if (keywordsCount<500){
+            return sitemapItemTemplate(
+                `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemap-tax-search-1.xml`,
+                toDay.toISOString()
+            )
+        }else {
+            const lastKeyword = await searchKeywordSchema.findOne({count: {$gt:0}})
+                .select(['createdAt'])
+                .limit(1)
+                .sort('-_id').exec();
+//@ts-ignore
+            const lastUpdate = lastKeyword?.createdAt ?
+                //@ts-ignore
+                new Date(lastKeyword.createdAt) :
+                //@ts-ignore
+                new Date(lastKeyword.createdAt)
+
+            const countOfSiteMaps = Math.ceil(keywordsCount/500)
+            const rangeOfSitemaps = [...Array(countOfSiteMaps).keys()]
+
+            for (const currentPage of rangeOfSitemaps){
+                finalXML += sitemapItemTemplate(
+                    `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemaps/sitemap-tax-search-${currentPage+1}.xml`,
+                    lastUpdate.toISOString()
+                )
+            }
+
+            return finalXML
+
         }
+    }catch (err){
+        console.error(err)
 
-        const finalXml =  `<?xml version="1.0" encoding="UTF-8"?>
-    <?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>
-    <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    ${metaXmlData}
-    </urlset>`
+    }
+}
 
+export const searchSitemapController = async (req,res)=>{
+
+    try {
+        const cleanParams = req.params['0'].replace('.xml', '')
+        const splitParams =  cleanParams.split('-')
+        const page =  splitParams?.[splitParams.length -1] || 1
+        const keywords = await searchKeywordSchema.find({count: {$gt:0}}).limit(500).skip(500 * (page - 1)).exec();
         res.set('Content-Type', 'text/xml');
-        res.send(finalXml)
-
+        res.send(
+            urlSetXmlTemplate(
+                keywordXmlTemplateGenerator(keywords)
+            )
+        )
     }catch (err){
         console.error(err)
         res.status(500).json({message:'Something went wrong please try again later'})
     }
+
+    // res.send('alive')
 }
 
-export default searchSitemapController;

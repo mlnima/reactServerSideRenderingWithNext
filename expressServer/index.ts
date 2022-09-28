@@ -18,16 +18,15 @@ import shouldCompress from './_variables/shouldCompress';
 import cacheSuccesses from './middlewares/apiCache';
 import adminMainRouter from './controllers/adminControllers/adminMainRouter';
 import clientMainRouter from './controllers/clientControllers/clientMainRouter';
-import sitemapMainRouter from "./controllers/sitemapControllers/sitemapMainRouter";
 import clientMainFestController from './controllers/clientControllers/clientMainFestController'
 import clientRobotTxtController from './controllers/clientControllers/clientRobotTxtController'
-// import siteMapController from './controllers/sitemapControllers/siteMapController'
-// import siteMapsController from './controllers/sitemapControllers/siteMapsController'
-// import subSiteMapsController from './controllers/sitemapControllers/subSiteMapsController'
-// import metaSitemapController from './controllers/sitemapControllers/metaSitemapController'
-// import pageSitemapController from './controllers/sitemapControllers/pageSitemapController'
-// import searchSitemapController from './controllers/sitemapControllers/searchSitemapController'
 
+
+import rootSitemap from "./controllers/sitemapControllers/rootSiteMap";
+import  {monthSitemapController} from "./controllers/sitemapControllers/siteMapsController";
+import {categories,tags,actors} from './controllers/sitemapControllers/metaSitemapController'
+import pageSitemapController from './controllers/sitemapControllers/pageSitemapController'
+import {searchSitemapController} from './controllers/sitemapControllers/searchSitemapController'
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({dev});
@@ -68,23 +67,18 @@ const runServer = () => {
     server.get('/sitemap.xsl', (req, res) => {
         return res.status(200).sendFile('sitemap.xsl', staticServeOptions)
     });
-    // server.get('/sitemap.xml', cacheSuccesses, (req, res) => siteMapController.siteMap(req, res));
-    // server.get('/sitemap', cacheSuccesses, (req, res) => siteMapController.siteMap(req, res));
-    // server.get('/sitemaps/search.xml', cacheSuccesses, (req, res) => searchSitemapController(req, res));
-    // server.get('/sitemaps/actors.xml', cacheSuccesses, (req, res) => metaSitemapController.actors(req, res));
-    // server.get('/sitemaps/categories.xml', cacheSuccesses, (req, res) => metaSitemapController.categories(req, res));
-    // server.get('/sitemaps/tags.xml', cacheSuccesses, (req, res) => metaSitemapController.tags(req, res));
-    // server.get('/sitemaps/pages.xml', cacheSuccesses, (req, res) => pageSitemapController(req, res));
-    // server.get('/sitemaps/:month', cacheSuccesses, (req, res) => siteMapsController.siteMapMonths(req, res));
-    // server.get('/sitemap/:month/:pageNo', cacheSuccesses, (req, res) => subSiteMapsController.subSiteMapsController(req, res));
+    server.get('/sitemap.xml', cacheSuccesses, (req, res) => rootSitemap(req, res));
+    server.get('/sitemap', cacheSuccesses, (req, res) => rootSitemap(req, res));
+    server.get('/sitemap-tax-categories-(*.xml)', cacheSuccesses, (req, res) => categories(req, res));
+    server.get('/sitemap-tax-tags-(*.xml)', cacheSuccesses, (req, res) => tags(req, res));
+    server.get('/sitemap-tax-actors-(*.xml)', cacheSuccesses, (req, res) => actors(req, res));
+    server.get('/sitemap-tax-search-(*.xml)', cacheSuccesses, (req, res) => searchSitemapController(req, res));
+    server.get('/sitemap-pt-post-(*.xml)', cacheSuccesses, (req, res) => monthSitemapController(req, res));
+    server.get('/sitemap-pt-page(-*.xml)', cacheSuccesses, (req, res) => pageSitemapController(req, res));
 
     //api routes
-    server.use('/sitemap.xml', sitemapMainRouter);
-    server.use('/sitemap', sitemapMainRouter);
-    server.use('/sitemaps', sitemapMainRouter);
     server.use('/api/admin', adminMainRouter);
     server.use('/api/v1', clientMainRouter);
-
 
     //rest of the routes
     server.get('*', cacheSuccesses, (req, res) => {

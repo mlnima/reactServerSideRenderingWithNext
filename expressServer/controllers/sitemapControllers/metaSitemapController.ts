@@ -1,34 +1,65 @@
 import metaSchema from '../../models/metaSchema';
+import {
+    sitemapItemTemplate,
+    metaXmlTemplateGenerator,
+    urlSetXmlTemplate
+} from "../../_variables/sitemapVariables/xmlTemplateGenerators";
 
-const xmlTemplate = (data) =>{
-    return `<?xml version="1.0" encoding="UTF-8"?>
-    <?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>
-    <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    ${data}
-    </urlset>`
+export const metasSitemapsController = async (metaType)=>{
+    let finalXML = ''
+    const findMetaQuery = {$and:[{count: {$gt:0}},{status:'published'},{type:metaType}]}
+    const metasCount = await metaSchema.countDocuments(findMetaQuery).exec();
+    const toDay = new Date();
+    if (metasCount<500){
+        return sitemapItemTemplate(
+            // `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemaps/${metaType}-1.xml`,
+            `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemap-tax-${metaType}-1.xml`,
+            toDay.toISOString()
+        )
+    }else{
+        const lastMeta = await metaSchema.findOne(findMetaQuery)
+            .select(['createdAt'])
+            .limit(1)
+            .sort('-_id').exec();
+
+        const lastUpdate = lastMeta?.createdAt ?
+            new Date(lastMeta.createdAt) :
+            new Date(lastMeta.createdAt)
+
+        const countOfSiteMaps = Math.ceil(metasCount/500)
+        const rangeOfSitemaps = [...Array(countOfSiteMaps).keys()]
+
+        for (const currentPage of rangeOfSitemaps){
+            finalXML += sitemapItemTemplate(
+                // `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemaps/${metaType}-${currentPage+1}.xml`,
+                `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemap-tax-${metaType}-${currentPage+1}.xml`,
+                lastUpdate.toISOString()
+            )
+        }
+
+        return finalXML
+    }
 }
 
-const metaXmlTemplateGenerator = (metaData,type:string,priority:string,changeFreq:string) =>{
-    return metaData.reduce((sitemap,currentMeta)=>{
-        const metaUrl = `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${type}/${currentMeta._id}`
-        const date = (currentMeta.updatedAt || currentMeta.createdAt || currentMeta._id.getTimestamp() || Date.now()).toISOString()
-        sitemap +=`<url> 
-                         <loc>${metaUrl}</loc>
-                         <lastmod>${date}</lastmod>
-                         <changefreq>${changeFreq}</changefreq>
-                         <priority>${priority}</priority>
-                      </url>`
 
-        return sitemap
-    },'' )
+export const metaSitemapController= async (req,metaType,metaUrlFormat)=>{
+    try {
+        const findMetaQuery = {$and:[{count: {$gt:0}},{status:'published'},{type:metaType}]}
+        const cleanParams = req.params['0'].replace('.xml', '')
+        const splitParams =  cleanParams.split('-')
+        const page =  splitParams[splitParams.length -1] || 1
+        const metas = await metaSchema.find(findMetaQuery).limit(500).skip(500 * (page - 1)).exec()
+        return urlSetXmlTemplate(metaXmlTemplateGenerator(metas,metaType,'1','hourly',metaUrlFormat))
+    }catch (error){
+        console.log(error)
+    }
 }
 
 
 export const categories = async (req, res) => {
     try {
-        const categories = await metaSchema.find({status: 'published',type:'categories'}).exec() || []
         res.set('Content-Type', 'text/xml');
-        res.send(xmlTemplate(metaXmlTemplateGenerator(categories,'category','1','hourly')))
+        res.send(await metaSitemapController(req,'categories','category'))
     } catch (err) {
         console.error(err)
         res.status(500).json({message:'Something went wrong please try again later'})
@@ -38,9 +69,8 @@ export const categories = async (req, res) => {
 
 export const tags = async (req, res) => {
     try {
-        const tags = await metaSchema.find({status: 'published',type:'tags'}).exec() || []
         res.set('Content-Type', 'text/xml');
-        res.send(xmlTemplate(metaXmlTemplateGenerator(tags,'tag','1','hourly')))
+        res.send(await metaSitemapController(req,'tags','tag'))
     } catch (err) {
         console.error(err)
         res.status(500).json({message:'Something went wrong please try again later'})
@@ -49,9 +79,8 @@ export const tags = async (req, res) => {
 
 export const actors = async (req, res) => {
     try {
-        const actors = await metaSchema.find({status: 'published',type:'actors'}).exec() || []
         res.set('Content-Type', 'text/xml');
-        res.send(xmlTemplate(metaXmlTemplateGenerator(actors,'actor','1','hourly')))
+        res.send(await metaSitemapController(req,'actors','actor'))
     } catch (err) {
         console.error(err)
         res.status(500).json({message:'Something went wrong please try again later'})

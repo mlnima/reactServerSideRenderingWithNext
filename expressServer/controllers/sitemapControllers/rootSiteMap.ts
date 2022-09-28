@@ -1,7 +1,9 @@
 import postSchema from '../../models/postSchema';
 import moment from 'moment';
 import {rootTemplate, sitemapItemTemplate} from "../../_variables/sitemapVariables/xmlTemplateGenerators";
-const toDay = new Date();
+import {searchSitemapsController} from "./searchSitemapController";
+import {metasSitemapsController} from "./metaSitemapController";
+import {pagesSitemapsController} from "./pageSitemapController";
 
 const monthsSitemapGenerator = async (allMonthsSinceStart) => {
     let finalXML = ''
@@ -29,7 +31,7 @@ const monthsSitemapGenerator = async (allMonthsSinceStart) => {
                 new Date(lastDocumentUpdatedDate.createdAt) :
                 new Date(lastDocumentUpdatedDate.createdAt)
             finalXML += sitemapItemTemplate(
-                `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemaps/${fixedMonth}-1.xml`,
+                `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemap-pt-post-${fixedMonth}-1.xml`,
                 lastUpdate.toISOString()
             )
         } else if (postCountInThisMonth > 0 && postCountInThisMonth > 500){
@@ -40,7 +42,7 @@ const monthsSitemapGenerator = async (allMonthsSinceStart) => {
                 new Date(lastDocumentUpdatedDate.createdAt)
             for (const currentMonthPage of rangeOfSitemaps){
                 finalXML += sitemapItemTemplate(
-                    `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemaps/${fixedMonth}-${currentMonthPage +1}.xml`,
+                    `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemap-pt-post-${fixedMonth}-${currentMonthPage +1}.xml`,
                     lastUpdate.toISOString()
                 )
             }
@@ -49,15 +51,6 @@ const monthsSitemapGenerator = async (allMonthsSinceStart) => {
     return finalXML
 }
 
-const metaAndStaticPagesSitemapGenerator = () => {
-    const pages = ['pages', 'categories', 'tags', 'actors', 'search']
-    return pages.map(page => {
-        return sitemapItemTemplate(
-            `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemaps/${page}.xml`,
-            toDay.toISOString()
-        )
-    })
-}
 
 const getDates = (firstCreatedPostDate, lastUpdatedPostDate) => {
     try {
@@ -75,7 +68,6 @@ const getDates = (firstCreatedPostDate, lastUpdatedPostDate) => {
     } catch (err) {
         console.log('getDates :', err)
     }
-
 };
 
 
@@ -101,11 +93,17 @@ export const rootSitemap = async (req, res) => {
         res.set('Content-Type', 'text/xml');
         res.send(
             rootTemplate(`
-                ${metaAndStaticPagesSitemapGenerator()}    
+                
+                ${await searchSitemapsController()}
+             
+                ${await metasSitemapsController('categories')}
+                ${await metasSitemapsController('tags')}
+                ${await metasSitemapsController('actors')}
                 ${await monthsSitemapGenerator(rangeOfTheMonths)}
+                ${await pagesSitemapsController()}
+              
             `)
         );
-
     } catch (error) {
         console.log(error)
 
@@ -114,20 +112,3 @@ export const rootSitemap = async (req, res) => {
 };
 
 export default rootSitemap
-
-
-// `<sitemap>
-//                         <loc>${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemaps/${fixedMonth}.xml</loc>
-//                         <lastmod>${lastUpdate.toISOString()}</lastmod>
-//                   </sitemap>`
-
-
-// const oldestPost = await postSchema.findOne({$and: [{status: 'published'}, {createdAt: {$exists: true}}]})
-//     .select(['createdAt', 'updatedAt'])
-//     .sort([['createdAt', 1]])
-//     .exec();
-//
-// const lastPost = await postSchema.findOne({$and: [{status: 'published'}, {createdAt: {$exists: true}}]})
-//     .select(['createdAt', 'updatedAt'])
-//     .sort([['createdAt', -1]])
-//     .exec();

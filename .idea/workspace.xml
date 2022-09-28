@@ -20,41 +20,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/expressServer/_variables/sitemapVariables/xmlTemplateGenerators.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/sitemapMainRouter.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_typeScriptTypes/settings/IdentitySettings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_typeScriptTypes/settings/IdentitySettings.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/serverVariables/serverGlobalVariable/findMetas.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/_variables/serverGlobalVariable/findMetas.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/PostPage.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/PostPage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostsPage/PostsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostsPage/PostsPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Widget/WidgetPagination/WidgetPagination.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Widget/WidgetPagination/WidgetPagination.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/_variables/serverClientVariables/_clientQueryGeneratorForGettingPosts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/_variables/clientVariables/_clientQueryGeneratorForGettingPosts.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/_variables/_adminQueryGeneratorForGettingPosts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/_variables/adminVariables/_adminQueryGeneratorForGettingPosts.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/_variables/_updateSaveMetas.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/_variables/adminVariables/_updateSaveMetas.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminCreateNewPost.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminCreateNewPost.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminCreateNewPostByApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminCreateNewPostByApi.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetPosts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminGetPosts.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminImportPosts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminImportPosts.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdatePost.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminUpdatePost.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminUpdateWidget.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminWidgetsControllers/adminUpdateWidget.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetMetas.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetMetas.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetPosts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetPosts.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/tags.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/tags.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/metaSitemapController.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/metaSitemapController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/pageSitemapController.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/pageSitemapController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/searchSitemapController.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/searchSitemapController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/siteMapController.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/rootSiteMap.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/siteMapsController.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/siteMapsController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/subSiteMapsController.js" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/subSiteMapsController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/_variables/sitemapVariables/xmlTemplateGenerators.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/_variables/sitemapVariables/xmlTemplateGenerators.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/metaSitemapController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/metaSitemapController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/pageSitemapController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/pageSitemapController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/rootSiteMap.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/rootSiteMap.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/searchSitemapController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/searchSitemapController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/siteMapsController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/siteMapsController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/sitemapMainRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/sitemapMainRouter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/subSiteMapsController.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/expressServer/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/workers/createNewPostByApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/workers/createNewPostByApi.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/actors/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/actors/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/categories/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/categories/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/post/[postType]/[identifier].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/[postType]/[identifier].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/tags/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tags/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/getTags.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/getTags.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_toolkit/_storeVariables/_getServerSideStaticPageData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_getServerSideStaticPageData.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1301,7 +1276,7 @@
       <workItem from="1664221031897" duration="24271000" />
       <workItem from="1664274368423" duration="7674000" />
       <workItem from="1664295618054" duration="7208000" />
-      <workItem from="1664333699916" duration="28140000" />
+      <workItem from="1664333699916" duration="39686000" />
     </task>
     <servers />
   </component>
