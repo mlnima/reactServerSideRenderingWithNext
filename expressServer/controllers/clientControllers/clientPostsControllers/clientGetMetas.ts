@@ -5,17 +5,25 @@ const clientGetMetas = async (req, res) => {
     try {
 
         const identitySetting = await settingSchema.findOne({type: 'identity'}).exec()
-        const type = {type: req.query.metaType}
-        const size = req.query.size === 'undefined' ? identitySetting?.data?.postsCountPerPage : parseInt(req.query.size)
-        const statusQuery = req.query.status === 'all' ? {status: {$ne: 'trash'}} : !req.query.status ? {status: 'published'} : {status: req.query.status};
-        const page = req.query.page === 'undefined' ? 1 : parseInt(req.query.page);
+        const metaType = req.query.metaType
 
-        const startWithQuery = req.query?.startWith === 'any' ? {} : {
+        const size = metaType ==='tags'? 1000: metaType ==='tags'&&req.query?.startWith? -1 : req.query.size === 'undefined' ? identitySetting?.data?.postsCountPerPage : parseInt(req.query.size)
+        const statusQuery = req.query.status === 'all' ? {status: {$ne: 'trash'}} : !req.query.status ? {status: 'published'} : {status: req.query.status};
+
+        const page = req.query.page === 'undefined' ? 1 : parseInt(req.query.page);
+        const type = {type: metaType}
+
+        const startWithQuery = req.query?.startWith === 'any' ? {} :
+            req.query?.startWith === 'digits' ? {
+                name: {
+                    $regex: /^\d/ ,
+                }
+            } :{
             name: {
                 $regex: '^' + req.query?.startWith,
-                $options: 'i'
             }
         }
+        console.log(startWithQuery)
         const countQuery = {count: {$gt: 0}}
         //const sortQuery =  req.query.sort === 'createdAt' || !req.query.sort ? {} : {[req.query.sort]: -1}
         const searchQuery = req.query.keyword === '' || !req.query.keyword ? {} :

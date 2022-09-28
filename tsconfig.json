@@ -18,24 +18,12 @@
     "declaration": true,
     "baseUrl": ".",
     "paths": {
-      "@store/*": [
-        "store/*"
-      ],
-      "@store_toolkit/*": [
-        "store_toolkit/*"
-      ],
-      "@components/*": [
-        "components/*"
-      ],
-      "@_variables/*": [
-        "_variables/*"
-      ],
-      "@_dataStructures/*": [
-        "_dataStructures/*"
-      ],
-      "@_typeScriptTypes/*": [
-        "_typeScriptTypes/*"
-      ],
+      "@store/*": ["store/*"],
+      "@store_toolkit/*": ["store_toolkit/*"],
+      "@components/*": ["components/*"],
+      "@_variables/*": ["_variables/*"],
+      "@_dataStructures/*": ["_dataStructures/*"],
+      "@_typeScriptTypes/*": ["_typeScriptTypes/*"]
     },
     "allowJs": true,
     "checkJs": false,

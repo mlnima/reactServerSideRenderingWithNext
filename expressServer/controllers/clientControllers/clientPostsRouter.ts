@@ -13,6 +13,7 @@ import clientUserCreateNewPost from './clientPostsControllers/clientUserCreateNe
 import clientUserUpdatePost from './clientPostsControllers/clientUserUpdatePost'
 import clientFixMetaImage from './clientPostsControllers/clientFixMetaImage'
 import ClientMetaSuggestion from './clientPostsControllers/ClientMetaSuggestion'
+import tags from './clientPostsControllers/tags'
 
 const router = Router();
 
@@ -25,6 +26,7 @@ router.post('/checkRemovedContent',clientCheckRemovedContent)
 router.post('/fixMetaImage',clientFixMetaImage)
 router.get('/getMetas',cacheSuccesses,clientGetMetas)
 router.get('/getMeta',cacheSuccesses,clientGetMeta)
+router.get('/tags',cacheSuccesses,tags)
 router.get('/getComments',clientGetComments)
 router.post('/userCreateNewPost',authMiddleware,clientUserCreateNewPost)
 router.post('/userUpdatePost',authMiddleware,clientUserUpdatePost)

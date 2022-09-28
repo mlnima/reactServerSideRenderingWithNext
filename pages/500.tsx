@@ -1,9 +1,6 @@
 import Link from "next/link";
 import styled from "styled-components";
-// import {useTranslation} from 'next-i18next';
 import useTranslation from 'next-translate/useTranslation'
-// import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-// import {wrapper} from "@store_toolkit/store";
 import type {ReactElement} from 'react';
 import AppLayout from "@components/layouts/AppLayout";
 import React from "react";

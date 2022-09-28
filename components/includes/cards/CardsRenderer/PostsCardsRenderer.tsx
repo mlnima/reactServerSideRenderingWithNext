@@ -71,15 +71,14 @@ const PostsCardsRenderer: FC<CardsRendererPropTypes> = ({
                cardsCustomStyle={cardsCustomStyle}>
 
             {(uniqueData?.posts || posts || []).map((post: Post, index: number) => {
-
                 const postProps = {
                     views: _shortNumber(post.views || 0) as number,
                     cardWidth,
                     postsPerRawForMobile,
                     rating: post.likes || post.disLikes ? ratingCalculator(post.likes, post.disLikes) : null,
                     post,
-                    targetLink: post?.postType === 'out' || post?.outPostType === 'promotion' ? '_blank':'_self',
-                    postUrl: post?.postType === 'out' ? post?.redirectLink || '#' :
+                    targetLink: post?.postType.includes('external') || post?.outPostType === 'promotion' ? '_blank':'_self',
+                    postUrl: post?.postType.includes('external') ? post?.redirectLink || '#' :
                         `/post/${post?.postType}/${post._id}`,
                     title: process.env.NEXT_PUBLIC_DEFAULT_LOCAL === locale ?
                         post?.title :
@@ -87,15 +86,13 @@ const PostsCardsRenderer: FC<CardsRendererPropTypes> = ({
                     isSidebar: isSidebar,
                 }
 
-
-
-                if (post?.postType === 'video' || (post?.postType === 'out' && post?.outPostType === 'video')) {
+                if (post?.postType === 'video' || post?.postType === 'externalVideo') {
                     return <VideoPostCard {...postProps} key={index} index={index}/>
-                } else if (post?.postType === 'promotion' || (post?.postType === 'out' && post?.outPostType === 'promotion')) {
+                } else if (post?.postType === 'promotion' || post?.postType === 'externalPromotion') {
                     return <PromotionPostCard {...postProps} key={index} index={index}/>
-                } else if (post?.postType === 'article' || (post?.postType === 'out' && post?.outPostType === 'article')) {
+                } else if (post?.postType === 'article' ||post?.postType === 'externalArticle') {
                     return <ArticlePostCard {...postProps} key={index} index={index}/>
-                } else if (post?.postType === 'learn' || (post?.postType === 'out' && post?.outPostType === 'learn')) {
+                } else if (post?.postType === 'learn' || post?.postType === 'externaLearn') {
                     return <LearnPostCard {...postProps} key={index} index={index}/>
                 } else return null
             })}

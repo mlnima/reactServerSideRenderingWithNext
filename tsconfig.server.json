@@ -16,18 +16,10 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@expressServer/*": [
-        "expressServer/*"
-      ],
-      "@_variables/*": [
-        "_variables/*"
-      ],
-      "@_dataStructures/*": [
-        "_dataStructures/*"
-      ],
-      "@_typeScriptTypes/*": [
-        "_typeScriptTypes/*"
-      ]
+      "@expressServer/*": ["expressServer/*"],
+      "@_variables/*": ["_variables/*"],
+      "@_dataStructures/*": ["_dataStructures/*"],
+      "@_typeScriptTypes/*": ["_typeScriptTypes/*"]
     }
   },
   "include": [

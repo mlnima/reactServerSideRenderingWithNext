@@ -42,18 +42,6 @@ const Format: FC<PostFormatPropTypes> = ({postType}) => {
                     )
                 })}
             </select>
-            {post?.postType === 'out' && <select className={'custom-select'}
-                                                 name='outPostType'
-                                                 value={post?.outPostType}
-                                                 onChange={e => onChangeHandlerAndSetPreferPostTypeToLocalStorage(e)}>
-                                            {(postTypes.filter(postType => postType !== 'out')).map((postType) => {
-                                                return (
-                                                    <option value={postType} key={postType}>{postType}</option>
-                                                )
-                                            })}
-                                        </select>
-            }
-
         </FormatStyledDiv>
     );
 };

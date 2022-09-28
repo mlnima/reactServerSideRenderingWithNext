@@ -16,6 +16,8 @@ import disLikePost
     from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksDisLikePost";
 import fetchUserEditingPost
     from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserEditingPost";
+import getTags
+    from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/getTags";
 // import fetchUserCreateNewPost
 //     from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserCreateNewPost";
 // import fetchUserEditingPostUpdate
@@ -146,6 +148,12 @@ export const postsSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchMetas.fulfilled, (state, action: PayloadAction<any>) => {
+                return {
+                    ...state,
+                    ...action.payload
+                }
+            })
+            .addCase(getTags.fulfilled, (state, action: PayloadAction<any>) => {
                 return {
                     ...state,
                     ...action.payload

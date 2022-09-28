@@ -37,6 +37,8 @@ const GlobalStyles= createGlobalStyle`
   
   a {
     text-decoration: none;
+    box-sizing: border-box;
+    outline: none;
   }
   
   .post-element-info-logo {

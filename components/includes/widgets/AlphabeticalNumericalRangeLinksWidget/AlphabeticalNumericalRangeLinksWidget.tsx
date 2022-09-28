@@ -98,11 +98,11 @@ const AlphabeticalNumericalRangeLinksWidget: FC = () => {
                 query: query.startWith ? {
                     ...query,
                     startWith: query?.startWith?.length <= 3 ? `${(query?.startWith || '') + Letter}` : query?.startWith,
-                    page: 1
+                    // page: 1
                 } : {
                     ...query,
                     startWith: Letter,
-                    page: 1
+                    // page: 1
                 }
             }}>
                 <a className={`alphabetical-range-widget-item ${activePage?.includes(Letter) ? 'active-item' : ''}`}>
@@ -111,6 +111,16 @@ const AlphabeticalNumericalRangeLinksWidget: FC = () => {
             </Link>
         )
     })
+
+
+    const queryRemover = (pathname,query)=>{
+        const targetUrl ={
+            pathname: pathname,
+            query: {...query, startWith: ''}
+        }
+        delete targetUrl.query.startWith
+        return targetUrl
+    }
 
     return (
         <AlphabeticalNumericalRangeLinksWidgetStyledDiv className='alphabetical-range-widget' showFilters={showFilters}>
@@ -141,10 +151,7 @@ const AlphabeticalNumericalRangeLinksWidget: FC = () => {
                     </Link>
                     : null
                 }
-                <Link key={'all'} href={{
-                    pathname: pathname,
-                    query: {...query, startWith: ''}
-                }}>
+                <Link key={'all'} href={queryRemover(pathname,query)}>
                     <a className={`alphabetical-range-widget-item ${!query.startWith ? 'active-item' : ''}`}>
                         All
                     </a>

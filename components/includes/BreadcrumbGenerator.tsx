@@ -60,7 +60,7 @@ const BreadcrumbGenerator = ({}) => {
             {!!breadcrumbs.length && breadcrumbs.map((breadcrumb, index) => {
                 return (
                     <>
-                        <ChevronRightIcon/>
+                        <ChevronRightIcon key={index+'icon'}/>
                         <Link key={index} href={_breadcrumbLinkCorrector(breadcrumb.href)} >
                             <MUILink underline="hover" key={index} color="inherit" href={_breadcrumbLinkCorrector(breadcrumb.href)} >
                                 {mongoIdValidator(breadcrumb.breadcrumb) ? currentPageTitle : breadcrumb.breadcrumb}

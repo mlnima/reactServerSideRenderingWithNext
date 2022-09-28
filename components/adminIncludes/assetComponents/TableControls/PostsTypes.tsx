@@ -1,6 +1,8 @@
 import {useRouter} from "next/router";
 import styled from "styled-components";
 import React from "react";
+import postTypes from "@_dataStructures/postTypes";
+import convertVariableNameToName from "@_variables/util/convertVariableNameToName";
 
 const PostsTypesStyledDiv = styled.div`
   display: flex;
@@ -27,13 +29,7 @@ const PostsTypes = () => {
             <select className={'custom-select'} onChange={e => onFormatChangeHandler(e)} value={query?.postType}>
                 <option value='' >Select</option>
                 <option value='all'>All</option>
-                <option value='standard'>Standard</option>
-                <option value='video'>Video</option>
-                <option value='product'>Product</option>
-                <option value='food'>Food</option>
-                <option value='article'>Article</option>
-                <option value='learn'>Learn</option>
-                <option value='promotion'>Promotion</option>
+                {postTypes.map(postType=><option value={postType}>{convertVariableNameToName(postType)}</option>)}
             </select>
         </PostsTypesStyledDiv>
     );

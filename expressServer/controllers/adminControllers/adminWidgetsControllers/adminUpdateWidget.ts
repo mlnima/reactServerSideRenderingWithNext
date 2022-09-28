@@ -1,13 +1,10 @@
-// const widgetSchema = require('../../../models/widgetSchema');
-// const metaSchema = require('../../../models/metaSchema');
-// const postSchema = require('../../../models/postSchema');
-// const _clientQueryGeneratorForGettingPosts = require('../../clientControllers/_variables/_clientQueryGeneratorForGettingPosts')
-
 import widgetSchema from '../../../models/widgetSchema';
-import metaSchema from '../../../models/metaSchema';
 import postSchema from '../../../models/postSchema';
-import _clientQueryGeneratorForGettingPosts from '../../clientControllers/_variables/_clientQueryGeneratorForGettingPosts';
-
+import _clientQueryGeneratorForGettingPosts
+    from '../../clientControllers/_variables/_clientQueryGeneratorForGettingPosts';
+// import {findMetas} from "../../../../_variables/serverVariables/serverGlobalVariable/findMetas";
+import {findMetas} from "@_variables/serverVariables/serverGlobalVariable/findMetas";
+import metaSchema from "../../../models/metaSchema";
 
 export const updatePostWidgetData = async (widgetData) => {
     if (widgetData) {
@@ -44,23 +41,15 @@ export const updatePostWidgetData = async (widgetData) => {
 
 const updateMetaWidgetData = async (widgetData) => {
     try {
-        const sortQuery = widgetData.sort === 'createdAt' || !widgetData.sort ?
-            {'rank': 1, 'likes': -1, 'views': -1, 'count': -1, 'updatedAt': -1, 'createdAt': -1} :
-            widgetData.sort === 'rank' ? {'rank': 1} : {[widgetData.sort]: -1}
+        const metas = await findMetas({
+            limit: widgetData?.count,
+            metaType: widgetData?.metaType
+        })
 
         const countQuery = {count: {$gt: 0}}
         const typeQuery = {type: widgetData?.metaType || 'categories'}
         const statusQuery = {status: 'published'}
         let totalCount = await metaSchema.countDocuments({$and: [countQuery, typeQuery, statusQuery]}).exec()
-
-        const metas = await metaSchema.find(
-            {$and: [countQuery, typeQuery, statusQuery]},
-            {},
-            {
-                sort: sortQuery,
-                limit: widgetData?.count || 20
-            }
-        ).select('_id').exec()
 
         return {
             ...widgetData,
@@ -81,9 +70,8 @@ export const adminUpdateWidget = async (req, res) => {
     const widgetId = req.body?.widgetData?._id
 
 
-
     if (widgetData.type === 'posts' || widgetData.type === 'postsSlider' || widgetData.type === 'postsSwiper') {
-      await updatePostWidgetData(widgetData).then(async updatedWidget => {
+        await updatePostWidgetData(widgetData).then(async updatedWidget => {
             if (updatedWidget) {
                 await widgetSchema.findByIdAndUpdate(widgetId, {data: updatedWidget}, {new: true}).exec().then(updatedWidget => {
                     res.json({updatedWidget})
@@ -95,28 +83,20 @@ export const adminUpdateWidget = async (req, res) => {
                 res.status(503).json({message: 'something went wrong please try again later'})
             }
         })
-    }
-
-
-
-    else if (widgetData.type === 'meta' || widgetData.type === 'metaWithImage') {
-      await  updateMetaWidgetData(widgetData).then(updatedWidget=>{
-          if (updatedWidget){
-              widgetSchema.findByIdAndUpdate(widgetId, {data: updatedWidget}, {new: true}).exec().then(updatedWidget => {
-                  res.json({updatedWidget})
-              }).catch(err => {
-                  console.log(err)
-                  res.status(503).json({message: 'something went wrong please try again later'})
-              })
-          } else {
-              res.status(503).json({message: 'something went wrong please try again later'})
-          }
-      })
-    }
-
-
-
-    else {
+    } else if (widgetData.type === 'meta' || widgetData.type === 'metaWithImage') {
+        await updateMetaWidgetData(widgetData).then(updatedWidget => {
+            if (updatedWidget) {
+                widgetSchema.findByIdAndUpdate(widgetId, {data: updatedWidget}, {new: true}).exec().then(updatedWidget => {
+                    res.json({updatedWidget})
+                }).catch(err => {
+                    console.log(err)
+                    res.status(503).json({message: 'something went wrong please try again later'})
+                })
+            } else {
+                res.status(503).json({message: 'something went wrong please try again later'})
+            }
+        })
+    } else {
         widgetSchema.findByIdAndUpdate(req.body?.widgetData._id, {data: widgetData}, {new: true}).exec().then(updatedWidget => {
             res.json({updatedWidget})
         }).catch(err => {
@@ -126,8 +106,6 @@ export const adminUpdateWidget = async (req, res) => {
 }
 
 // module.exports = {adminUpdateWidget, updatePostWidgetData}
-
-
 
 
 // const countQuery = {count: {$gt: 0}}
@@ -156,3 +134,21 @@ export const adminUpdateWidget = async (req, res) => {
 // }).catch(err => {
 //     console.log(err)
 // })
+
+
+// console.log(metasData.length)
+// const sortQuery = widgetData.sortBy === 'createdAt' || !widgetData.sortBy ?
+//     {'rank': 1, 'likes': -1, 'views': -1, 'count': -1, 'updatedAt': -1, 'createdAt': -1} :
+//     widgetData.sortBy === 'rank' ? {'rank': 1} : {[widgetData.sortBy]: -1}
+// const countQuery = {count: {$gt: 0}}
+// const typeQuery = {type: widgetData?.metaType || 'categories'}
+// const statusQuery = {status: 'published'}
+// let totalCount = await metaSchema.countDocuments({$and: [countQuery, typeQuery, statusQuery]}).exec()
+// const metas = await metaSchema.find(
+//     {$and: [countQuery, typeQuery, statusQuery]},
+//     {},
+//     {
+//         sort: sortQuery,
+//         limit: widgetData?.count || 20
+//     }
+// ).select('_id').exec()

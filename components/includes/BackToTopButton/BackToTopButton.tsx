@@ -30,7 +30,7 @@ const BackToTopButton = () => {
     useEffect(() => {
         if (typeof window !== 'undefined') {
             window.addEventListener("scroll", () => {
-                if (window?.pageYOffset > 300) {
+                if (window?.pageYOffset > 500) {
                     setShowButton(true);
                 } else {
                     setShowButton(false);
@@ -42,7 +42,7 @@ const BackToTopButton = () => {
 
     if (showButton) {
         return (
-            <BackToTopButtonStyledDiv onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
+            <BackToTopButtonStyledDiv onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} title="Back to top">
                 <span id={'back-to-top-button'}
                       aria-label={'scroll to top'}
 

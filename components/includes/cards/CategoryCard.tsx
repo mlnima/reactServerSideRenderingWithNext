@@ -18,7 +18,7 @@ const CategoryCardStyle = styled.article`
     color: var(--post-element-text-color, #ccc);
     .entry-header{
       width: 100%;
-      margin: 3px 0;
+      margin: 5px 0;
       text-align: center;
     }
   }

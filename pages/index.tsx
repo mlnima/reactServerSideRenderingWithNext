@@ -1,5 +1,4 @@
 import MainWidgetArea from "../components/widgetsArea/MainWidgetArea/MainWidgetArea";
-// import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
 import AppLayout from '@components/layouts/AppLayout';
@@ -45,33 +44,9 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         store
     )
 
-    // return {
-    //     props: {
-    //         ...(await serverSideTranslations(context?.locale as string, ['common', 'customTranslation']))
-    //     }
-    // }
+    return null
 
 });
-
-// export async function getServerSideProps(context) {
-//
-//         await _getServerSideStaticPageData(
-//         context,
-//         ['homePageLeftSidebar', 'homePageRightSidebar', 'home'],
-//         {
-//             setHeadData: true,
-//             page: 'home'
-//         },
-//             wrapper.useWrappedStore(makeStore)
-//     )
-//
-//     return {
-//         props: {
-//             ...(await serverSideTranslations(context?.locale as string, ['common', 'customTranslation']))
-//         }
-//     }
-// }
-
 
 HomePage.getLayout = function getLayout(page: ReactElement) {
     return (

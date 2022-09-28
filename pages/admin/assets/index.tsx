@@ -4,7 +4,6 @@ import {useRouter} from "next/router";
 import _adminGetPostsQueryGenerator from "@_variables/adminVariables/_adminGetPostsQueryGenerator";
 import {useSelector} from "react-redux";
 import styled from "styled-components";
-import _metaPageQueryGenerator from "@_variables/clientVariables/_metaPageQueryGenerator";
 import type {ReactElement} from 'react';
 import AdminLayout from "@components/layouts/AdminLayout";
 import {fetchAdminPanelMetas, fetchAdminPanelPosts} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
@@ -14,6 +13,7 @@ import {fetchAdminPanelUsers} from "@store_toolkit/adminReducers/adminPanelUsers
 import {fetchAdminPanelGetComments} from "@store_toolkit/adminReducers/adminCommentsReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import _adminMetaPageQueryGenerator from "@_variables/adminVariables/_adminMetaPageQueryGenerator";
 // import {adminGetOrders} from "@store/adminActions/adminPanelOrdersActions";
 
 const TableHeader = dynamic(
@@ -83,7 +83,7 @@ const assets = () => {
         } else if (assetType === 'users') {
             dispatch(fetchAdminPanelUsers({}))
         } else if (assetType === 'metas') {
-            const queries = _metaPageQueryGenerator(query, query.metaType)
+            const queries = _adminMetaPageQueryGenerator(query, query.metaType)
             dispatch(fetchAdminPanelMetas(queries))
         } else if (assetType === 'comments') {
             dispatch(fetchAdminPanelGetComments(dataConfig))
