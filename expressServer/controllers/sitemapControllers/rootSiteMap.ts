@@ -93,15 +93,12 @@ export const rootSitemap = async (req, res) => {
         res.set('Content-Type', 'text/xml');
         res.send(
             rootTemplate(`
-                
                 ${await searchSitemapsController()}
-             
                 ${await metasSitemapsController('categories')}
                 ${await metasSitemapsController('tags')}
                 ${await metasSitemapsController('actors')}
                 ${await monthsSitemapGenerator(rangeOfTheMonths)}
                 ${await pagesSitemapsController()}
-              
             `)
         );
     } catch (error) {

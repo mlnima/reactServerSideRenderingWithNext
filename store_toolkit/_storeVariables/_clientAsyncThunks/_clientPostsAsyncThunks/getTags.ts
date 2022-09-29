@@ -4,12 +4,11 @@ import Axios from "@_variables/util/Axios";
 
 const getTags = createAsyncThunk(
     'posts/getTags',
-    async () => {
+    async ({data}:{data:{}}, thunkAPI) => {
         try {
-            // const queries = _metaPageQueryGenerator(data, 'tags')
-            // console.log(queries)
-            // const apiData = await Axios.get(`/api/v1/posts/tags${queries}`)
-            const apiData = await Axios.get(`/api/v1/posts/tags`)
+            const queries = _metaPageQueryGenerator(data, 'tags')
+
+            const apiData = await Axios.get(`/api/v1/posts/tags${queries}`)
             return {
                 tagsMetas: apiData?.data?.metas || [],
             }

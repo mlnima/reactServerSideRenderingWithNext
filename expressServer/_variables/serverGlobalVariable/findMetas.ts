@@ -1,6 +1,5 @@
 import metaSchema from "../../models/metaSchema";
 import settingSchema from "../../models/settings/settingSchema";
-import postSchema from "../../models/postSchema";
 import {IdentitySettings} from "@_typeScriptTypes/settings/IdentitySettings";
 
 interface FindMetasQueryTypes{
@@ -28,20 +27,24 @@ export const findMetas = async (query:FindMetasQueryTypes)=>{
             'rank': 1,
             'count': -1
         } : {[query.sort]: -1}
-        const totalCount = await postSchema.countDocuments([type, startWithQuery, statusQuery, countQuery]).exec()
+
+        const findQuery = {$and: [type, startWithQuery, statusQuery, countQuery]}
+
+        const totalCount = await metaSchema.countDocuments(findQuery).exec()
         const metas = await metaSchema.find(
-            {$and: [type, startWithQuery, statusQuery, countQuery]},
+            findQuery,
             {},
             {sort: sortQuery})
             .limit(limit || (query?.startWith ? 0 : 1000))
             .skip(skip)
             .select( query.metaType ==='tags' ? 'name type' : 'name type imageUrl')
             .exec()
-        console.log(metas?.[0]?.name)
+
         return{
             metas,
             totalCount
         }
+
     }catch (error){
         console.log(error)
         return{

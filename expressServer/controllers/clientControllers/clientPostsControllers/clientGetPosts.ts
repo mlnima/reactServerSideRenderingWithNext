@@ -1,25 +1,11 @@
-//clientGetPosts
-// import postSchema from '../../../models/postSchema'
-// import metaSchema from '../../../models/metaSchema'
-// import settingSchema from '../../../models/settings/settingSchema'
-
 import postSchema from '../../../models/postSchema';
 import settingSchema from '../../../models/settings/settingSchema';
 import metaSchema from '../../../models/metaSchema';
 import searchKeywordSchema from '../../../models/searchKeywordSchema'
 import _clientQueryGeneratorForGettingPosts from '../../../_variables/clientVariables/_clientQueryGeneratorForGettingPosts'
 import mongoIdValidator from '../../../../_variables/serverUtil/mongoIdValidator';
-import postFieldRequestForCards from "../../../../_dataStructures/postFieldRequestForCards";
-//import postSchema from '@expressServer/models/postSchema'
-// const postSchema = require('../../../models/postSchema');
-// const metaSchema = require('../../../models/metaSchema');
-// const searchKeywordSchema = require('../../../models/searchKeywordSchema');
-// const _clientQueryGeneratorForGettingPosts = require('../_variables/_clientQueryGeneratorForGettingPosts');
-// const mongoIdValidator = require('../../../util/mongoIdValidator');
-// const settingSchema = require("../../../models/settings/settingSchema");
-// const {Worker, isMainThread,parentPort} = require('worker_threads');
-// import path from 'path';
-// import getPostsWorker from '../../../workers/ApiWorkers/clientRequests/posts/getPosts';
+//import postFieldRequestForCards from "../../../../_dataStructures/postFieldRequestForCards";
+
 
 const saveSearchedKeyword = async (keyword, count) => {
     if (keyword) {
@@ -57,6 +43,8 @@ const clientGetPosts =  async (req, res) => {
             page: req.query.page === 'undefined' ? 1 : parseInt(req.query.page)
             //@ts-ignore
         },meta?._id)
+
+        // console.log('findingPostsOptions :',JSON.stringify(findingPostsOptions,null,2))
 
         // console.log(JSON.stringify(findingPostsOptions, null, '\t'))
         // const populateMeta = [

@@ -56,7 +56,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         store
     )
 
-    await store.dispatch(getTags())
+    await store.dispatch(getTags({data: context.query}))
 
     return null
 
