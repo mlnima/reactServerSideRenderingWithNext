@@ -59,15 +59,15 @@ const BreadcrumbGenerator = ({}) => {
 
             {!!breadcrumbs.length && breadcrumbs.map((breadcrumb, index) => {
                 return (
-                    <>
+                    <React.Fragment key={index}>
                         <ChevronRightIcon key={index+'icon'}/>
-                        <Link key={index} href={_breadcrumbLinkCorrector(breadcrumb.href)} >
-                            <MUILink underline="hover" key={index} color="inherit" href={_breadcrumbLinkCorrector(breadcrumb.href)} >
+                        <Link  href={_breadcrumbLinkCorrector(breadcrumb.href)}key={index}  >
+                            <MUILink underline="hover" color="inherit" href={_breadcrumbLinkCorrector(breadcrumb.href)} >
                                 {mongoIdValidator(breadcrumb.breadcrumb) ? currentPageTitle : breadcrumb.breadcrumb}
                             </MUILink>
                             {/*{convertBreadcrumb(breadcrumb.breadcrumb, labelsToUppercase, replaceCharacterList, transformLabel)}*/}
                         </Link>
-                    </>
+                    </React.Fragment>
                 )
             })
 

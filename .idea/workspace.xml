@@ -21,7 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/_variables/sitemapVariables/xmlTemplateGenerators.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/_variables/sitemapVariables/xmlTemplateGenerators.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/BreadcrumbGenerator.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/BreadcrumbGenerator.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/VideoPlayer/VideoPlayer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/VideoPlayer/VideoPlayer.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1272,7 +1273,7 @@
       <workItem from="1664394805623" duration="6023000" />
       <workItem from="1664401104211" duration="3353000" />
       <workItem from="1664452197039" duration="7347000" />
-      <workItem from="1664542970016" duration="655000" />
+      <workItem from="1664542970016" duration="2387000" />
     </task>
     <servers />
   </component>
