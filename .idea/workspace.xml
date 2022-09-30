@@ -21,11 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/_variables/serverGlobalVariable/findMetas.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/_variables/serverGlobalVariable/findMetas.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetPosts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientGetPosts.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/rootSiteMap.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/sitemapControllers/rootSiteMap.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/tags/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tags/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/getTags.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/getTags.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/_variables/sitemapVariables/xmlTemplateGenerators.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/_variables/sitemapVariables/xmlTemplateGenerators.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +110,7 @@
       <command value="nextEnv" />
     </option>
   </component>
-  <component name="RunManager" selected="npm.start">
+  <component name="RunManager" selected="npm.dev">
     <configuration name="temp.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/tempFiles/temp.js" working-dir="$PROJECT_DIR$/tempFiles">
       <method v="2" />
     </configuration>
@@ -160,9 +156,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
-        <item itemvalue="npm.dev" />
         <item itemvalue="Node.js.temp.js" />
         <item itemvalue="npm.analyze" />
       </list>
@@ -1275,7 +1271,8 @@
       <workItem from="1664333699916" duration="43549000" />
       <workItem from="1664394805623" duration="6023000" />
       <workItem from="1664401104211" duration="3353000" />
-      <workItem from="1664452197039" duration="4594000" />
+      <workItem from="1664452197039" duration="7347000" />
+      <workItem from="1664542970016" duration="655000" />
     </task>
     <servers />
   </component>

@@ -39,14 +39,14 @@ export const urlXmlTemplate = (Url, date, changeFreq, priority) => {
 
 export const keywordXmlTemplateGenerator = (keywords) => keywords.reduce((finalXml, currentKeyword) => {
     const keywordsUrl = `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/search/${currentKeyword?.name}`
-    const date = (currentKeyword?.updatedAt).toISOString()
-    finalXml += urlXmlTemplate(keywordsUrl,date,'hourly','1')
+    const date = new Date (currentKeyword?.updatedAt || currentKeyword?.createdAt|| currentKeyword._id.getTimestamp() || Date.now() )
+    finalXml += urlXmlTemplate(keywordsUrl,date.toISOString(),'hourly','1')
     return finalXml
 }, '')
 
 export const postXmlTemplateGenerator = (posts) => posts.reduce((finalXml, currentPost) => {
     let postUrl = process.env.NEXT_PUBLIC_PRODUCTION_URL + `/post/${currentPost?.postType}/${currentPost._id}`;
-    let lastModify = new Date(currentPost.updatedAt);
+    let lastModify = new Date(currentPost.updatedAt || currentPost?.createdAt || currentPost._id.getTimestamp() || Date.now() );
     finalXml += urlXmlTemplate(postUrl,lastModify.toISOString(),'hourly','1')
     return finalXml
 }, '')
@@ -54,8 +54,8 @@ export const postXmlTemplateGenerator = (posts) => posts.reduce((finalXml, curre
 export const metaXmlTemplateGenerator = (metaData,type:string,priority:string,changeFreq:string,metaUrlFormat:string) =>{
     return metaData.reduce((sitemap,currentMeta)=>{
         const metaUrl = `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${metaUrlFormat}/${currentMeta._id}`
-        const date = (currentMeta.updatedAt || currentMeta.createdAt || currentMeta._id.getTimestamp() || Date.now()).toISOString()
-        sitemap += urlXmlTemplate(metaUrl,date,changeFreq,priority)
+        const date = new Date(currentMeta.updatedAt || currentMeta.createdAt || currentMeta._id.getTimestamp() || Date.now())
+        sitemap += urlXmlTemplate(metaUrl,date.toISOString(),changeFreq,priority)
         return sitemap
     },'' )
 }
