@@ -10,9 +10,10 @@ import {
 } from "@_variables/clientVariables/_widgetsRendererVariables";
 // import {useMemo} from "react";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {useMemo} from "react";
 
 const DynamicNoSSR = dynamic(() => import('./DynamicNoSSR'))
-const Widget = dynamic(() => import('../Widget/WidgetWrapper'))
+const WidgetWrapper = dynamic(() => import('../Widget/WidgetWrapper'))
 
 interface WidgetsRendererProps {
     position: string,
@@ -24,6 +25,7 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
     const {locale} = useRouter()
 
     const {widgets, userRole} = useSelector(({widgets, user}: Store) => {
+
         return {
             widgets: widgets?.widgetInGroups?.[position] || [],
             userRole: user?.userData?.role,
@@ -34,8 +36,13 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
     // const isMobile = useMemo(() => isMobileDevice, [])
     const isMobile = true
 
-    const renderWidgets = !!widgets?.length && [...widgets].sort((a, b) => a.data.widgetIndex > b.data.widgetIndex ? 1 : -1)
-        .map((widget) => {
+
+
+    // const sortWidgetsByIndex = useMemo(()=> {
+    //     return widgets?.sort((a, b) => a?.data?.widgetIndex > b?.data?.widgetIndex ? 1 : -1);
+    // },[widgets])
+
+    const renderWidgets = [...widgets].map((widget) => {
             if (
                 _renderByLanguageCondition(locale, widget?.data?.languageToRender) &&
                 _renderByDayCondition(widget.data?.specificDayToRender) &&
@@ -52,9 +59,10 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
 
                 return widget.data.noSSR ?
                     <DynamicNoSSR key={widget._id}>
-                        <Widget{...widgetProps}/>
+                        <WidgetWrapper{...widgetProps}/>
                     </DynamicNoSSR> :
-                    <Widget{...widgetProps}/>
+                    <WidgetWrapper{...widgetProps}/>
+                // return <Widget{...widgetProps}/>
 
             } else return null
         })

@@ -81,9 +81,14 @@ const runServer = () => {
     server.use('/api/v1', clientMainRouter);
 
     //rest of the routes
-    server.get('*', cacheSuccesses, (req, res) => {
-        return handle(req, res)
-    });
+
+    if (process.env.BUILD_SERVER !== 'true'){
+        server.get('*', cacheSuccesses, (req, res) => {
+            return handle(req, res)
+        });
+    }
+
+
 
 
     //@ts-ignore

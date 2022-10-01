@@ -1,14 +1,14 @@
 import dynamic from "next/dynamic";
 import styled from "styled-components";
 import {FC, memo, useMemo} from "react";
-import { WidgetData} from "@_typeScriptTypes/widgets/Widget";
+import {WidgetData} from "@_typeScriptTypes/widgets/Widget";
+
 const WidgetHeader = dynamic(() => import('./WidgetHeader/WidgetHeader'))
 const WidgetCustomScript = dynamic(() => import('./WidgetCustomScript/WidgetCustomScript'))
 const WidgetPagination = dynamic(() => import('./WidgetPagination/WidgetPagination'))
 const Posts = dynamic(() => import('@components/includes/cards/CardsRenderer/PostsCardsRenderer'))
 const MetasCardsRenderer = dynamic(() =>
     import('@components/includes/cards/CardsRenderer/MetasCardsRenderer'))
-
 const RecentComments = dynamic(() => import('../widgets/RecentComments/RecentComments'))
 const MetaWidget = dynamic(() => import('../widgets/MetaWidget/MetaWidget'))
 const MediaWidget = dynamic(() => import('../widgets/MediaWidget/MediaWidget'))
@@ -42,33 +42,35 @@ let WidgetStyledSection = styled.section`
 
 const WidgetWrapper: FC<WidgetComponentPropTypes> = ({data, widgetId, isSidebar, viewType}) => {
 
-    const idAttribute = useMemo(()=>data?.extraId ? {id: data?.extraId} : {},[data])
+    const idAttribute = useMemo(() => data?.extraId ? {id: data?.extraId} : {}, [data])
 
-    const WidgetToRender = useMemo(()=>{
-            return data.type === 'posts' ? Posts :
-            data.type === 'postsSlider' ? PostSlider :
-            data.type === 'imagesSlider' ? ImagesSlider :
-            data.type === 'multipleLinkTo' ? MultipleLinkTo :
-            data.type === 'media' ? MediaWidget :
-            data.type === 'recentComments' ? RecentComments :
-            data.type === 'meta' ? MetaWidget :
-            data.type === 'metaWithImage'? MetasCardsRenderer :
-            data.type === 'searchBar' ? Searchbar :
-            data.type === 'searchButton' ? Searchbar :
-            data.type === 'searchbar' ? Searchbar :
-            data.type === 'logo' ? Logo :
-            data.type === 'alphabeticalNumericalRange' ?
-            AlphabeticalNumericalRangeLinksWidget :
-            data.type === 'language' ? LanguagesSwitcher :
-            data.type === 'authentication' ? Authentication :
-            data.type === 'linkTo' ? LinkTo :
-            data.type === 'menu' ? MenuWidget :
-            data.type === 'shoppingCart' ? ShoppingCart :
-            data.type === 'advertise' ? Advertise :
-            data.type === 'form' ? FormWidget:
-            data.type === 'dayModeNightMode' ? DayModeNightMode
-            : null;
-    },[])
+    const WidgetToRender = useMemo(() => {
+        return data.type === 'postsSlider' ? PostSlider :
+            data.type === 'posts' ? Posts :
+                data.type === 'imagesSlider' ? ImagesSlider :
+                    data.type === 'multipleLinkTo' ? MultipleLinkTo :
+                        data.type === 'media' ? MediaWidget :
+                            data.type === 'recentComments' ? RecentComments :
+                                data.type === 'meta' ? MetaWidget :
+                                    data.type === 'metaWithImage' ? MetasCardsRenderer :
+                                        data.type === 'searchBar' ? Searchbar :
+                                            data.type === 'searchButton' ? Searchbar :
+                                                data.type === 'searchbar' ? Searchbar :
+                                                    data.type === 'logo' ? Logo :
+                                                        data.type === 'alphabeticalNumericalRange' ?
+                                                            AlphabeticalNumericalRangeLinksWidget :
+                                                            data.type === 'language' ? LanguagesSwitcher :
+                                                                data.type === 'authentication' ? Authentication :
+                                                                    data.type === 'linkTo' ? LinkTo :
+                                                                        data.type === 'menu' ? MenuWidget :
+                                                                            data.type === 'shoppingCart' ? ShoppingCart :
+                                                                                data.type === 'advertise' ? Advertise :
+                                                                                    data.type === 'form' ? FormWidget :
+                                                                                        data.type === 'dayModeNightMode' ? DayModeNightMode
+                                                                                            : null;
+    }, [])
+
+
 
     return (
         <WidgetStyledSection {...idAttribute}
@@ -76,16 +78,16 @@ const WidgetWrapper: FC<WidgetComponentPropTypes> = ({data, widgetId, isSidebar,
                              customStyles={data?.customStyles || ''}
         >
             {data?.title &&
-                <WidgetHeader translations={data?.translations}
-                              title={data?.title}
-                              redirectLink={data?.redirectLink}
-                              redirectToTitle={data?.redirectToTitle}
-                              footerLink={data?.footerLink}
+            <WidgetHeader translations={data?.translations}
+                          title={data?.title}
+                          redirectLink={data?.redirectLink}
+                          redirectToTitle={data?.redirectToTitle}
+                          footerLink={data?.footerLink}
 
-                />
+            />
             }
 
-            {data?.text && <Text translations={data?.translations} text={data?.text}/> }
+            {data?.text && <Text translations={data?.translations} text={data?.text}/>}
             {WidgetToRender ?
 
                 <WidgetToRender
@@ -98,9 +100,9 @@ const WidgetWrapper: FC<WidgetComponentPropTypes> = ({data, widgetId, isSidebar,
                 : null
             }
             {data?.customScript &&
-                <WidgetCustomScript customScript={data?.customScript}
-                                    customScriptStrategy={data?.customScriptStrategy}
-                />
+            <WidgetCustomScript customScript={data?.customScript}
+                                customScriptStrategy={data?.customScriptStrategy}
+            />
             }
             {data?.pagination && data?.redirectLink ?
                 <WidgetPagination baseUrl={data?.redirectLink}

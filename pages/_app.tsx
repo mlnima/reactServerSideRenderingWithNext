@@ -1,35 +1,51 @@
-import type {ReactElement, ReactNode} from 'react'
-import type {NextPage} from 'next'
+import type {
+    FC,
+    // ReactElement,
+    // ReactNode
+} from 'react'
+// import type {NextPage} from 'next'
 import type {AppProps} from 'next/app'
-// import {appWithTranslation} from 'next-i18next';
-// import nextI18NextConfig from '../next-i18next.config';
 import {wrapper} from '@store_toolkit/store';
+import {Provider} from 'react-redux';
 
-type NextPageWithLayout = NextPage & {
-    getLayout?: (page: ReactElement) => ReactNode
-}
+// type NextPageWithLayout = NextPage & {
+//     getLayout?: (page: ReactElement) => ReactNode
+// }
 
-type AppPropsWithLayout = AppProps & {
-    Component: NextPageWithLayout
-}
+// type AppPropsWithLayout = AppProps & {
+//     Component: NextPageWithLayout
+// }
 
-const MyApp = ({Component, pageProps}: AppPropsWithLayout) => {
 
+const MyApp: FC<AppProps> = ({Component, ...rest}) => {
+
+    const {store, props} = wrapper.useWrappedStore(rest);
+    //@ts-ignore
     const getLayout = Component.getLayout ?? ((page) => page)
 
     return getLayout(
-           <Component {...pageProps} />
+        <Provider store={store}>
+            <Component {...props.pageProps} />
+        </Provider>
     )
 
-}
+};
+
+
+// const MyApp = ({Component, pageProps}: AppPropsWithLayout) => {
+//
+//     const getLayout = Component.getLayout ?? ((page) => page)
+//
+//     return getLayout(
+//            <Component {...pageProps} />
+//     )
+//
+// }
 
 
 //@ts-ignore
 export default wrapper.withRedux(MyApp);
 
-// export default wrapper.withRedux(appWithTranslation(MyApp, nextI18NextConfig));
-
-// export default appWithTranslation(MyApp, nextI18NextConfig)
 
 
 

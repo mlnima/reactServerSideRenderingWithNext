@@ -7,6 +7,7 @@
     "dev": "cross-env nodemon --trace-warnings",
     "analyze": "npm run build:nextAnalyze && npm run build:server",
     "build": "npm run build:next && npm run build:server",
+    "buildStatic": "ts-node --transpile-only ./expressServer/_variables/ssgServer/index.ts && next build",
     "start": "concurrently \"NODE_ENV=production node ./.next/expressServer/index.js\" \"node ./.next/expressServer/socketServer/index.js\"",
     "fixTimeStamsForPosts": "node tools/fixTimeStamsForPosts.js",
     "mergeDuplicateMetaData": "node tools/mergeDuplicateMetaData.js",

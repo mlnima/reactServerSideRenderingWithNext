@@ -7,7 +7,6 @@ let StyledMain = styled.main`
   min-height: 100vh;
 `;
 
-
 interface MainWidgetAreaPropTypes {
     className?: string,
     id?: string,
@@ -18,9 +17,7 @@ const MainWidgetArea: FC<MainWidgetAreaPropTypes> = ({className, position}) => {
 
     return (
         <StyledMain id={'primary'} className={className + ' widget-area ' + position}>
-            <WidgetsRenderer
-                position={position}
-            />
+            <WidgetsRenderer position={position}/>
         </StyledMain>
     );
 
