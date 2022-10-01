@@ -1,5 +1,4 @@
-import React, {useState, useEffect, FC, useRef} from 'react';
-// import {useTranslation} from 'next-i18next';
+import React, {useState, useEffect, FC} from 'react';
 import useTranslation from 'next-translate/useTranslation'
 import {useSelector} from 'react-redux';
 import styled from "styled-components";
@@ -69,9 +68,7 @@ const LoginRegisterPopupFormsStyledDiv = styled.div`
 
 
   .server-response {
-    color: ${(props: { response: ResponseTypes }) => props.response.type === 'success' ?
-            'green' :
-            props.response.type === 'error' ? 'red' : 'var(--main-text-color)'};
+
   }
 
 
@@ -193,15 +190,20 @@ interface StateValidatorTypes {
 }
 
 const LoginRegisterPopupForms: FC = () => {
-    const passwordRef = useRef()
+    // const passwordRef = useRef()
     const {t} = useTranslation('common');
     const dispatch = useAppDispatch()
     const globalState = useSelector(({globalState}: Store) => globalState)
     const [submitButtonDisable, setSubmitButtonDisable] = useState(true)
-    const [state, setState] = useState<StateTypes>({});
+    const [state, setState] = useState<StateTypes>({
+        username: '',
+        email: '',
+        password: '',
+        password2: '',
+    });
     const [stateValidator, setStateValidator] = useState<StateValidatorTypes>({});
     const [showPassword, setShowPassword] = useState<boolean>(false);
-    const [response, setResponse] = useState<ResponseTypes>({});
+    // const [response, setResponse] = useState<ResponseTypes>({});
 
     const onChangeHandler = (e: React.FormEvent<HTMLDivElement | HTMLFormElement>) => {
         setState({
@@ -271,8 +273,9 @@ const LoginRegisterPopupForms: FC = () => {
 
     return (
         <Draggable handle='.handle'>
-            <LoginRegisterPopupFormsStyledDiv response={response}
-                                              className='login-register-content'
+            <LoginRegisterPopupFormsStyledDiv className='login-register-content'
+                                              // response={response}
+
             >
                 <div className='form-header handle'>
                     <button onClick={() => dispatch(loginRegisterForm(false))}
@@ -282,7 +285,7 @@ const LoginRegisterPopupForms: FC = () => {
 
                         <SvgRenderer svgUrl={'/public/asset/images/icons/xmark-solid.svg'}
                                      size={25}
-                                     customClassName={'show-password'}
+                                     customClassName={'close-form-button-icon'}
                                      color={'var(--serachbar-widget-text-color, #fff)'}
                         />
                     </button>
@@ -291,12 +294,12 @@ const LoginRegisterPopupForms: FC = () => {
                 <h3 className='login-register-title'>
                     {globalState.loginRegisterFormPopup === 'register' ? t<string>(`Register`) : t<string>(`Member login`)}
                 </h3>
-                {response.message ?
-                    <p className='server-response'>
-                        {t<string>(`${response.message}`)}
-                    </p>
-                    : null
-                }
+                {/*{response.message ?*/}
+                {/*    <p className='server-response'>*/}
+                {/*        {t<string>(`${response.message}`)}*/}
+                {/*    </p>*/}
+                {/*    : null*/}
+                {/*}*/}
 
                 {globalState.loginRegisterFormPopup === 'register' ?
                     <form className='login-register-form' onSubmit={e => onRegisterHandler(e)}>
@@ -410,7 +413,7 @@ const LoginRegisterPopupForms: FC = () => {
                                 <div className="login-register-form-field">
                                     <p>{t<string>(`Password`)}</p>
                                     <input className={'form-control-input password'}
-                                           ref={passwordRef}
+                                           // ref={passwordRef}
                                            name={'password'}
                                            value={state.password}
                                            type={showPassword ? 'text' : 'password'}
@@ -452,3 +455,8 @@ const LoginRegisterPopupForms: FC = () => {
     );
 };
 export default LoginRegisterPopupForms;
+
+
+// color: ${(props: { response: ResponseTypes }) => props.response.type === 'success' ?
+//         'green' :
+//         props.response.type === 'error' ? 'red' : 'var(--main-text-color)'};

@@ -1,21 +1,20 @@
-import React, {FC,memo} from 'react';
+import React, {FC, memo} from 'react';
 import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
 
 let StyledMain = styled.main`
-  //grid-area: primary;
   width: 100%;
   min-height: 100vh;
 `;
 
 
 interface MainWidgetAreaPropTypes {
-    className?:string,
-    id?:string,
-    position:string,
+    className?: string,
+    id?: string,
+    position: string,
 }
 
-const MainWidgetArea:FC<MainWidgetAreaPropTypes> = ({className,position}) => {
+const MainWidgetArea: FC<MainWidgetAreaPropTypes> = ({className, position}) => {
 
     return (
         <StyledMain id={'primary'} className={className + ' widget-area ' + position}>

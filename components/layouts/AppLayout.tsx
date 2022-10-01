@@ -5,8 +5,6 @@ import GlobalStylesComponent from "../global/Styles/GlobalStylesComponent";
 import SiteSettingSetter from '../includes/SiteSettingsSetter/SiteSettingsSetter'
 import LoadingV2 from "@components/includes/LoadingV2/LoadingV2";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
 const HeaderWidgetArea = dynamic(() => import('@components/widgetsArea/HeaderWidgetArea/HeaderWidgetArea'));
 const TopBarWidgetArea = dynamic(() => import('@components/widgetsArea/TopBarWidgetArea/TopBarWidgetArea'));
 const NavigationWidgetArea = dynamic(() => import('@components/widgetsArea/NavigationWidgetArea/NavigationWidgetArea'));
@@ -18,12 +16,6 @@ const CookiePopup = dynamic(() => import('@components/includes/ClientPopActionRe
 const AdminDataSetter = dynamic(() => import('@components/global/AdminDataSetter'), {ssr: false});
 const BackToTopButton = dynamic(() => import('@components/includes/BackToTopButton/BackToTopButton'), {ssr: false});
 
-
-const darkTheme = createTheme({
-    palette: {
-        mode: 'dark',
-    },
-});
 interface AppLayoutPropTypes {
     children: any
 }
@@ -49,9 +41,8 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
     });
 
     return (
+<>
 
-        <ThemeProvider theme={darkTheme}>
-            <CssBaseline />
             {userRole === 'administrator' && <AdminTools/>}
             <GlobalStylesComponent/>
             <SiteSettingSetter/>
@@ -75,9 +66,7 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
             {loginRegisterFormPopup && !loggedIn && <LoginRegisterPopup/>}
             {(!!alert?.active && !!alert?.message) && <AlertBox/>}
             {userRole === 'administrator' && <AdminDataSetter userRole={userRole}/>}
-        </ThemeProvider>
-
-
+</>
     );
 };
 

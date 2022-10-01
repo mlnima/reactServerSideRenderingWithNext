@@ -1,4 +1,4 @@
-import {FC, useState, useEffect} from "react";
+import {FC, useState, useEffect,memo} from "react";
 import {useRouter} from "next/router";
 import styled from "styled-components";
 import parse from 'html-react-parser'
@@ -9,19 +9,14 @@ const AdvertiseStyledDiv = styled.div`
   align-items: center;
   min-height: 102px;
   min-width: 300px;
-  //margin-top: 10px;
-  //margin-bottom: 10px;
   max-width: 98vw !important;
 
   .pre-load {
     display: flex;
     justify-content: center;
     align-items: center;
-    //border: var(--default-border);
     min-height: 102px;
     min-width: 300px;
-    //margin-top: 10px;
-    //margin-bottom: 10px;
   }
 `
 
@@ -49,7 +44,6 @@ const Advertise: FC<AdvertisePropTypes> = ({uniqueData}) => {
         }
     }
 
-
     return (
         <AdvertiseStyledDiv>
             {adCodeData ? parse(adCodeData || '') :
@@ -60,11 +54,6 @@ const Advertise: FC<AdvertisePropTypes> = ({uniqueData}) => {
         </AdvertiseStyledDiv>
     )
 };
-export default Advertise
+export default memo(Advertise)
 
 
-// return (
-//     <AdvertiseStyledDiv dangerouslySetInnerHTML={{
-//         __html: adCodeData ? adCodeData : `<div class='pre-load'><span>loading...</span></div>`
-//     }}/>
-// )

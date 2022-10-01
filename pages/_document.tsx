@@ -1,6 +1,6 @@
 import Document from 'next/document'
 import {ServerStyleSheet} from 'styled-components';
-import { ServerStyleSheets } from '@material-ui/core/styles';
+// import { ServerStyleSheets } from '@material-ui/core/styles';
 import React from "react";
 // import {Html, Head, Main, NextScript} from 'next/document'
 
@@ -21,7 +21,7 @@ class MyDocument extends Document {
 
 MyDocument.getInitialProps = async (ctx) =>{
     const styledComponentsSheet = new ServerStyleSheet()
-    const materialSheets = new ServerStyleSheets()
+    // const materialSheets = new ServerStyleSheets()
     const originalRenderPage = ctx.renderPage;
     try {
         ctx.renderPage = () => originalRenderPage({

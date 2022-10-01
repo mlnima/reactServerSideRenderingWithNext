@@ -1,4 +1,4 @@
-import React, {useEffect, FC, useLayoutEffect} from 'react';
+import React, {useEffect, FC, memo, useState} from 'react';
 import styled from "styled-components";
 import ReactLoading from 'react-loading';
 import {useRouter} from "next/router";
@@ -51,42 +51,54 @@ let StyledDiv = styled.div`
 
 const LoadingV2: FC = () => {
     const dispatch = useAppDispatch()
-    const isLoading = useSelector(({globalState}: Store) =>globalState?.loading)
-    const {events, asPath} = useRouter()
+    const [isLoadingByRouteChange, setIsLoadingByRouteChange] = useState(false)
+    const isLoading = useSelector(({globalState}: Store) => globalState?.loading)
+    const {events} = useRouter()
 
     useEffect(() => {
 
-        const handleStart = (url) => (url !== asPath) && dispatch(loading(true));
-        const handleComplete = (url) => (url === asPath) && dispatch(loading(false));
+        const handleStart = (eventType) =>  {
+            // console.log(eventType)
+            setIsLoadingByRouteChange(true)
+        };
 
-        events.on('routeChangeStart', handleStart)
-        events.on('routeChangeComplete', handleComplete)
-        events.on('routeChangeError', handleComplete)
+        const handleComplete = (eventType) =>  {
+            // console.log(eventType)
+            setIsLoadingByRouteChange(false)
+        };
 
+        events.on('routeChangeStart',()=> handleStart('routeChangeStart'))
+        events.on('routeChangeComplete',()=> handleComplete('routeChangeComplete'))
+        // events.on('routeChangeError', ()=>handleComplete('routeChangeError'))
         return () => {
-            events.off('routeChangeStart', handleComplete)
-            events.off('routeChangeComplete', handleComplete)
-            events.off('routeChangeError', handleComplete)
+            events.off('routeChangeStart',()=> handleComplete('routeChangeStart'))
+            events.off('routeChangeComplete',()=> handleComplete('routeChangeComplete'))
+            // events.off('routeChangeError', handleComplete('routeChangeError'))
         }
-    },[])
+    }, [])
 
     useEffect(() => {
         if (isLoading) {
             setTimeout(() => {
                 dispatch(loading(false))
+                setIsLoadingByRouteChange(false)
             }, 3000)
         }
-    },[]);
+    }, []);
 
-    if (isLoading){
+    if (isLoadingByRouteChange || isLoading) {
         return (
             <StyledDiv className='Loading' onClick={() => dispatch(loading(false))}
                        onTouchStartCapture={() => dispatch(loading(false))}>
                 <ReactLoading type={'spin'} color={'var(--main-active-color,#f90)'} height={100} width={100}/>
             </StyledDiv>
         )
-    }else return null
+    } else return null
 
 };
 
-export default LoadingV2;
+export default memo(LoadingV2);
+
+
+// const handleStart = (url) => (url !== asPath) && dispatch(loading(true));
+// const handleComplete = (url) => (url === asPath) && dispatch(loading(false));

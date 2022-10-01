@@ -1,23 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import Link from 'next/link';
-import { Link as MUILink } from '@mui/material';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
-import Typography from '@mui/material/Typography';
 import {useRouter} from 'next/router';
 import useTranslation from "next-translate/useTranslation";
 import _breadcrumbLinkCorrector from "@_variables/clientVariables/_breadcrumbLinkCorrector";
 import {useAppSelector} from "@store_toolkit/hooks";
 import mongoIdValidator from "@_variables/util/mongoIdValidatorClient";
-import Chip from '@mui/material/Chip';
-import HomeIcon from '@mui/icons-material/Home';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
-
-const getPathFromUrl = function getPathFromUrl(url) {
-    return url.split(/[?#]/)[0];
-};
-
+import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
+import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 
 const BreadcrumbGenerator = ({}) => {
 
@@ -49,25 +38,30 @@ const BreadcrumbGenerator = ({}) => {
 
     return (
         <>
-            <HomeIcon/>
-            <Link href="/">
-                <MUILink  color="inherit">
-
-                </MUILink>
-                {/*{t(`common:Home`, {}, {fallback: 'Home'})}*/}
-            </Link>
-
+            <div className={'breadcrumb-item'}>
+                <Link href="/">
+                    <a className={'breadcrumb-item-link'}>
+                        <SvgRenderer svgUrl={'/public/asset/images/icons/home-solid.svg'}
+                                     size={20}
+                                     customClassName={'breadcrumb-item-icon'}
+                                     color={'var(--navigation-text-color, #ccc)'}/>
+                    </a>
+                </Link>
+            </div>
             {!!breadcrumbs.length && breadcrumbs.map((breadcrumb, index) => {
                 return (
-                    <React.Fragment key={index}>
-                        <ChevronRightIcon key={index+'icon'}/>
-                        <Link  href={_breadcrumbLinkCorrector(breadcrumb.href)}key={index}  >
-                            <MUILink underline="hover" color="inherit" href={_breadcrumbLinkCorrector(breadcrumb.href)} >
-                                {mongoIdValidator(breadcrumb.breadcrumb) ? currentPageTitle : breadcrumb.breadcrumb}
-                            </MUILink>
-                            {/*{convertBreadcrumb(breadcrumb.breadcrumb, labelsToUppercase, replaceCharacterList, transformLabel)}*/}
+                    <div key={index} className={'breadcrumb-item'}>
+                        <Link href={_breadcrumbLinkCorrector(breadcrumb.href)} key={index}>
+                            <a className={'breadcrumb-item-link'}>
+                                <SvgRenderer svgUrl={'/public/asset/images/icons/sort-up-solid.svg'}
+                                             size={20}
+                                             customClassName={'breadcrumb-item-arrow-icon'}
+                                             color={'var(--navigation-text-color, #ccc)'}/>
+                                {mongoIdValidator(breadcrumb.breadcrumb) ?
+                                    currentPageTitle : t(capitalizeFirstLetter(breadcrumb.breadcrumb))}
+                            </a>
                         </Link>
-                    </React.Fragment>
+                    </div>
                 )
             })
 

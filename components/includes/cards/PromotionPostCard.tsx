@@ -2,12 +2,13 @@ import {FC} from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import fetchViewPost from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchViewPost";
+import fetchViewPost
+    from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchViewPost";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import CardTitle from "@components/includes/cards/asset/CardTitle/CardTitle";
 import {Post} from "@_typeScriptTypes/Post";
 import useTranslation from "next-translate/useTranslation";
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
 
 
 const CardViews = dynamic(() => import('./asset/CardViews/CardViews'))
@@ -23,7 +24,7 @@ interface PromotionPostCardPropTypes {
     rating: number,
     index: number,
     cardWidth: number,
-    targetLink:string,
+    targetLink: string,
     post: Post,
 }
 
@@ -35,8 +36,6 @@ const PromotionPostCardStyle = styled.article`
   background-color: var(--post-element-background-color, #131314);
   margin: 0 auto;
   width: 100%;
-
-  
   .card-under-media-info {
     font-size: 14px;
     display: flex;
@@ -58,15 +57,14 @@ const PromotionPostCardStyle = styled.article`
         margin: 0 2px;
       }
     }
-    
-
-    
-
   }
-  button{
+  
+  .read-more-btn {
     width: 100%;
-    margin-top: 2px;
+    margin: auto;
+    box-sizing: border-box;
   }
+  
   .last-update {
     font-size: 9px;
     margin: 4px;
@@ -125,22 +123,15 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
 
                         </div>
 
-                            <Button>
-                                {t('common:Read More',{},{fallback:'Read More'})}
-                            </Button>
-
+                        <span className={'btn btn-secondary read-more-btn'}>
+                            {t('common:Read More', {}, {fallback: 'Read More'})}
+                        </span>
                     </a>
-
                 </Link>
             </PromotionPostCardStyle>
         )
     };
 export default PromotionPostCard
-
-
-
-
-
 
 
 // return (

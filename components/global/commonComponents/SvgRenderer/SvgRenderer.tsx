@@ -39,7 +39,7 @@ const Style = styled.span`
 
 const SvgRenderer: FC<SvgRendererPropTypes> = ({customClassName, svgUrl, size, color,customStyle}) => {
     return (
-        <Style className={`${customClassName + ' ' || ''}icon`} svgUrl={svgUrl} size={size} color={color} customStyle={customStyle} />
+        <Style className={`${customClassName ? customClassName : ''} icon`} svgUrl={svgUrl} size={size} color={color} customStyle={customStyle} />
     )
 };
 

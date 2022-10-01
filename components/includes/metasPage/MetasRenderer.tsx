@@ -5,8 +5,8 @@ import Link from "next/link";
 import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
 import MetaElement from "@components/includes/metasPage/MetaElement";
 import useTranslation from "next-translate/useTranslation";
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import {useRouter} from "next/router";
+import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 
 const MetasRendererStyle = styled.div`
 
@@ -52,11 +52,14 @@ const MetasRendererStyle = styled.div`
         .view-all {
           display: flex;
           align-items: center;
-          color: var(--main-active-color, #ccc);
+          color: var(--main-active-color, #f90);
           font-size: large;
           font-weight: bold;
           padding: 3px 6px;
           margin: 2px 5px;
+          .view-all-arrow-icon{
+            rotate: 90deg;
+          }
         }
       }
 
@@ -77,12 +80,8 @@ const MetasRendererStyle = styled.div`
       width: 90%;
 
       .group-wrapper {
-        //display: flex;
-        .items {
-          //display: flex;
-          //flex-direction: column;
-          //columns: 200px 1;
 
+        .items {
           .meta-widget-item {
             padding: 2px;
 
@@ -120,10 +119,6 @@ const MetasRenderer: FC<MetasRendererPropTypes> = ({metaType, metaData}) => {
         if (!!metaData.length){
             return metaData.reduce((finalData, current) => {
                 const firstLetter = current?.name?.[0]
-                // const group = /\d/.test(firstLetter) || /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(firstLetter) ?
-                //     '#' : firstLetter;
-                // const group = firstLetter
-
                 finalData[firstLetter] = [...(finalData?.[current.name?.[0]] || []), current]
                 return finalData
             }, {})
@@ -142,11 +137,6 @@ const MetasRenderer: FC<MetasRendererPropTypes> = ({metaType, metaData}) => {
          }
 
     }, [query]);
-
-    // useEffect(() => {
-    //     console.log(metaData)
-    //     // Object.keys(groupMetas)
-    // }, [groupMetas]);
 
     return (
         <MetasRendererStyle>
@@ -173,7 +163,10 @@ const MetasRenderer: FC<MetasRendererPropTypes> = ({metaType, metaData}) => {
                                     <a>
                                         <span className={'view-all'}>
                                             {t('common:View All', {}, {fallback: 'View All'})}
-                                            <KeyboardArrowRightIcon/>
+                                            <SvgRenderer svgUrl={'/public/asset/images/icons/sort-up-solid.svg'}
+                                                         size={20}
+                                                         customClassName={'view-all-arrow-icon'}
+                                                         color={'var(--main-active-color, #f90)'}/>
                                         </span>
                                     </a>
                                 </Link>
@@ -185,11 +178,6 @@ const MetasRenderer: FC<MetasRendererPropTypes> = ({metaType, metaData}) => {
                 })}
             </div>
 
-            {/*<Link href={`/${metaType}`}>*/}
-            {/*    <a className={'btn btn-primary show-more-link'}>*/}
-            {/*        More*/}
-            {/*    </a>*/}
-            {/*</Link>*/}
         </MetasRendererStyle>
     )
 };
