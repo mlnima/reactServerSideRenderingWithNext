@@ -20,96 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/components/layouts/getAppLayout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/util/isImageAllowedForNextImage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/util/isImageAllowedForNextImage.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/PostsTypes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/PostsTypes.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/WidgetExporter/WidgetExporter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/WidgetExporter/WidgetExporter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostsPage/PostsPageInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostsPage/PostsPageInfo.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Widget/WidgetWrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Widget/WidgetWrapper.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/WidgetsRenderer/WidgetsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/WidgetsRenderer/WidgetsRenderer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/CardsRenderer/PostsCardsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CardsRenderer/PostsCardsRenderer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/asset/CardRatingBar/CardRatingBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/asset/CardRatingBar/CardRatingBar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/asset/CardViews/CardViews.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/asset/CardViews/CardViews.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomTools/ChatRoomTools.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomTools/ChatRoomTools.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/layouts/AdminLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AdminLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/layouts/AppLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AppLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/layouts/MessengerLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/MessengerLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/widgetsArea/MainWidgetArea/MainWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/widgetsArea/MainWidgetArea/MainWidgetArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminReadTranslationsFile.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/adminControllers/adminFileManagerControllers/adminReadTranslationsFile.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/fa/customTranslation.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/fa/customTranslation.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/404.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/404.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/500.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/500.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/actor/[actorId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/actor/[actorId].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/actors/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/actors/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/assets/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/assets/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/actorPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/actorPage/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/actorsPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/actorsPage/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/cards/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/cards/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/categoriesPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/categoriesPage/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/categoryPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/categoryPage/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/customColors/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/customColors/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/customStyles/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/customStyles/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/footer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/footer/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/header/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/header/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/metasPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/metasPage/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/navigation/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/navigation/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/postPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/postPage/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/postsPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/postsPage/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/tagPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/tagPage/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/tagsPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/tagsPage/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/topBar/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/topBar/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/widgets/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/widgets/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/widgets/widget/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/widgets/widget/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/exporter/postsExporter/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/exporter/postsExporter/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/fileManager/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/fileManager/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/form/[formId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/form/[formId].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/importer/content/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/importer/content/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/importer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/importer/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/importer/postsImporter/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/importer/postsImporter/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/importer/youtube/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/importer/youtube/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/meta/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/meta/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/page/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/page/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/post/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/post/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/settings/customScript/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/customScript/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/settings/eCommerceSettings/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/eCommerceSettings/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/settings/general/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/general/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/settings/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/settings/socialMediaSettings/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/socialMediaSettings/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/tools/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/tools/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/tools/terminal/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/tools/terminal/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/translations/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/translations/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/user/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/user/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/users/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/users/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/auth/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/auth/register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/register.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/categories/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/categories/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/category/[categoryId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/category/[categoryId].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/chatroom/[chatRoomName].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/chatroom/[chatRoomName].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/checkout/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/checkout/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/maintenance/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/maintenance/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/messenger/[conversation].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/messenger/[conversation].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/messenger/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/messenger/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/page/[pageName].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/page/[pageName].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/post/[postType]/[identifier].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/[postType]/[identifier].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/posts/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/posts/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/edit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/edit.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/followers/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/followers/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/following/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/following/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/post/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/post/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/posts/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/posts/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/search/[keyword].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/search/[keyword].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/tag/[tagId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tag/[tagId].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/tags/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tags/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/user/[username].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/user/[username].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_toolkit/_storeVariables/_getServerSideStaticPageData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_getServerSideStaticPageData.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_toolkit/adminStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/adminStore.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_toolkit/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/CardImageRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CardImageRenderer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/metasPage/MetasRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/metasPage/MetasRenderer.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,7 +111,7 @@
       <command value="nextEnv" />
     </option>
   </component>
-  <component name="RunManager" selected="npm.start">
+  <component name="RunManager" selected="npm.dev">
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -251,9 +164,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.update:packages" />
         <item itemvalue="npm.killNodes" />
       </list>
@@ -1373,7 +1286,8 @@
       <workItem from="1664770600334" duration="2562000" />
       <workItem from="1664799784382" duration="987000" />
       <workItem from="1664817547657" duration="19749000" />
-      <workItem from="1664883999211" duration="12742000" />
+      <workItem from="1664883999211" duration="16304000" />
+      <workItem from="1664910412000" duration="756000" />
     </task>
     <servers />
   </component>

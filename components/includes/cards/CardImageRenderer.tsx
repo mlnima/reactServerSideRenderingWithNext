@@ -68,7 +68,7 @@ const CardImageRenderer: FC<CardImageNextPropTypes> =
                                     cardWidth={cardWidth}
                                     className={'card-image'}>
 
-                {(!!defaultUrl && isImageAllowedForNextImage(defaultUrl) && index >= 2) ?
+                {(!!defaultUrl && isImageAllowedForNextImage(defaultUrl) && index >= 1) ?
                     <Image alt={mediaAlt}
                            src={defaultUrl}
                            loading={'lazy'}

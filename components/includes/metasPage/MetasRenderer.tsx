@@ -36,13 +36,17 @@ const MetasRendererStyle = styled.div`
           display: block;
           list-style: none;
           text-overflow: ellipsis;
-          padding: 3px 6px;
-          margin: 2px 5px;
+          //box-sizing: border-box;
+          margin: 5px 8px;
           background-color: var(--meta-background-color, #f90);
 
           a {
-            display: inline-block;
+            display: flex;
+            align-items: center;
+            //padding: 3px 6px;
+            //display: inline-block;
             font-size: large;
+            min-height: 48px;
             color: var(--meta-text-color, #ccc);
             cursor: pointer;
             text-decoration: none;
@@ -55,8 +59,9 @@ const MetasRendererStyle = styled.div`
           color: var(--main-active-color, #f90);
           font-size: large;
           font-weight: bold;
-          padding: 3px 6px;
+          //padding: 3px 6px;
           margin: 2px 5px;
+          min-height: 48px;
           .view-all-arrow-icon{
             rotate: 90deg;
           }
@@ -83,15 +88,18 @@ const MetasRendererStyle = styled.div`
 
         .items {
           .meta-widget-item {
-            padding: 2px;
+            padding: 0;
 
             a {
-              font-size: small;
+              padding: 2px;
+              font-size: initial;
+              min-height: auto;
             }
           }
 
           .view-all {
             font-size: small;
+            min-height: auto;
           }
         }
       }
