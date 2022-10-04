@@ -52,13 +52,13 @@ const Custom500 = () => {
 //     })
 
 
-Custom500.getLayout = function getLayout(page: ReactElement) {
-    return (
-        <AppLayout>
-            {page}
-        </AppLayout>
-    )
-}
+// Custom500.getLayout = function getLayout(page: ReactElement) {
+//     return (
+//         <AppLayout>
+//             {page}
+//         </AppLayout>
+//     )
+// }
 
 export default Custom500;
 

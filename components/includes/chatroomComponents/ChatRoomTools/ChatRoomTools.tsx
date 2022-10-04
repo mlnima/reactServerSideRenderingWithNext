@@ -78,12 +78,11 @@ const ChatRoomToolsStyledFrom = styled.form`
 const ChatRoomTools = () => {
     const dispatch = useAppDispatch()
     const userData = useSelector(({user}:Store) => user?.userData)
-    const colorPicker = useRef(null)
     const router = useRouter()
 
     const [state, setState] = useState({
         messageData: '',
-        color: 'var(--navigation-text-color, #ccc)'
+        color: '#ccc'
     });
 
     const [someoneTypes, setSomeoneTypes] = useState({
@@ -174,13 +173,12 @@ const ChatRoomTools = () => {
                 />
             </div>
 
-            <input className={'chatroom-tools-Send-color-picker-input'}
-                   ref={colorPicker}
-                   name={'color'}
-                   type={'color'}
-                   value={state.color}
-                   onChange={e => onChangeHandler(e)}
-            />
+            {/*<input className={'chatroom-tools-Send-color-picker-input'}*/}
+            {/*       name={'color'}*/}
+            {/*       type={'color'}*/}
+            {/*       value={ state?.color || '#ccc'}*/}
+            {/*       onChange={e => onChangeHandler(e)}*/}
+            {/*/>*/}
             <div className={'chatroom-tools-Send'}>
                 <button className={'chatroom-tools-content-submit-button'} type={'submit'}>
                     <SvgRenderer svgUrl={'/public/asset/images/icons/share-solid.svg'}

@@ -1,7 +1,5 @@
 import Link from 'next/link'
 import styled from "styled-components";
-import type {ReactElement} from 'react';
-import AdminLayout from "@components/layouts/AdminLayout";
 import React from "react";
 import {
     fetchAdminCheckAndRemoveDeletedVideos, fetchGeneratePermaLinkForPosts,
@@ -63,14 +61,5 @@ const tools = () => {
         </StyledDiv>
     );
 };
-
-tools.getLayout = function getLayout(page: ReactElement) {
-
-    return (
-        <AdminLayout>
-            {page}
-        </AdminLayout>
-    )
-}
 
 export default tools;

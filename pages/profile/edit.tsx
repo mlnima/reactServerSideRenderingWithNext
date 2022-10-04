@@ -5,8 +5,6 @@ import {wrapper} from "@store_toolkit/store";
 import {fetchUserResetPassword} from "@store_toolkit/clientReducers/userReducer";
 import _passwordValidator from "../../_variables/clientVariables/_passwordValidator";
 import ValidInput from "../../components/includes/LoginRegisterPopup/ValidInput";
-import type {ReactElement} from 'react';
-import AppLayout from "@components/layouts/AppLayout";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 
@@ -169,12 +167,5 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     return null
 })
 
-edit.getLayout = function getLayout(page: ReactElement) {
-    return (
-        <AppLayout>
-            {page}
-        </AppLayout>
-    )
-}
 
 export default edit;

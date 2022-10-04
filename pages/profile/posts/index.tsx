@@ -5,8 +5,6 @@ import ProfileImage from "@components/includes/profilePageComponents/ProfileImag
 import {useSelector} from "react-redux";
 import styled from "styled-components";
 import {wrapper} from "@store_toolkit/store";
-import type { ReactElement } from 'react';
-import AppLayout from "@components/layouts/AppLayout";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
@@ -82,11 +80,5 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     })
 
 
-Posts.getLayout = function getLayout(page:ReactElement) {
-    return (
-        <AppLayout>
-            {page}
-        </AppLayout>
-    )
-}
+
 export default Posts;

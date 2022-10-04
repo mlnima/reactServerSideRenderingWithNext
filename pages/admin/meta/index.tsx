@@ -9,8 +9,6 @@ import {
     fetchAdminPanelUpdateMeta
 } from '@store_toolkit/adminReducers/adminPanelPostsReducer'
 import {languagesOptions} from "@_variables/_variables";
-import type {ReactElement} from 'react';
-import AdminLayout from "@components/layouts/AdminLayout";
 import {useAdminDispatch} from "@store_toolkit/hooks";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
@@ -268,17 +266,6 @@ const meta = (props: any) => {
 
     );
 };
-
-
-
-meta.getLayout = function getLayout(page: ReactElement) {
-
-    return (
-        <AdminLayout>
-            {page}
-        </AdminLayout>
-    )
-}
 
 export default meta;
 

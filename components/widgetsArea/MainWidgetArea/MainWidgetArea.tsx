@@ -16,8 +16,8 @@ interface MainWidgetAreaPropTypes {
 const MainWidgetArea: FC<MainWidgetAreaPropTypes> = ({className, position}) => {
 
     return (
-        <StyledMain id={'primary'} className={className + ' widget-area ' + position}>
-            <WidgetsRenderer position={position}/>
+        <StyledMain id={'primary'} className={className + ' widget-area ' + position}    suppressHydrationWarning={true}  >
+            <WidgetsRenderer position={position} />
         </StyledMain>
     );
 

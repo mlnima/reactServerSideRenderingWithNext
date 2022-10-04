@@ -5,8 +5,6 @@ import WidgetGroupByPosition
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import WidgetPositionsSelect from "@components/adminIncludes/widgetsModel/WidgetPositionsSelect/WidgetPositionsSelect";
-import type {ReactElement} from 'react';
-import AdminLayout from "@components/layouts/AdminLayout";
 import widgetsStaticPositions from "@_dataStructures/widgetsStaticPositions";
 import {fetchAdminPanelGetWidgets} from "@store_toolkit/adminReducers/adminWidgetsReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
@@ -152,12 +150,5 @@ const AdminWidgets = () => {
 };
 
 
-AdminWidgets.getLayout = function getLayout(page: ReactElement) {
 
-    return (
-        <AdminLayout>
-            {page}
-        </AdminLayout>
-    )
-}
 export default AdminWidgets;

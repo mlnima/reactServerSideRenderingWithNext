@@ -1,7 +1,5 @@
 import Link from "next/link";
 import styled from "styled-components";
-import type {ReactElement} from 'react';
-import AdminLayout from "@components/layouts/AdminLayout";
 import React from "react";
 
 let StyledDiv = styled.div`
@@ -18,14 +16,5 @@ const settings = () => {
         </StyledDiv>
     );
 };
-
-settings.getLayout = function getLayout(page: ReactElement) {
-
-    return (
-        <AdminLayout>
-            {page}
-        </AdminLayout>
-    )
-}
 
 export default settings;

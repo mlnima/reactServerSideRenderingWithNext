@@ -3,8 +3,6 @@ import {languagesOptions} from '@_variables/_variables'
 import convertVariableNameToName from "../../../../_variables/util/convertVariableNameToName";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import type {ReactElement} from 'react';
-import AdminLayout from "@components/layouts/AdminLayout";
 import {adminEditIdentity, adminPanelUpdateSetting} from "@store_toolkit/adminReducers/adminPanelSettingsReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
@@ -638,15 +636,6 @@ const settings = () => {
 
     );
 };
-
-settings.getLayout = function getLayout(page: ReactElement) {
-
-    return (
-        <AdminLayout>
-            {page}
-        </AdminLayout>
-    )
-}
 
 export default settings;
 

@@ -1,7 +1,5 @@
 import React, {useEffect, useMemo} from 'react';
 import {useRouter} from "next/router";
-import type {ReactElement} from 'react';
-import AdminLayout from "@components/layouts/AdminLayout";
 import {fetchAdminPanelUsers} from "@store_toolkit/adminReducers/adminPanelUsersReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
 
@@ -40,15 +38,5 @@ const users = () => {
 
     );
 };
-
-
-users.getLayout = function getLayout(page: ReactElement) {
-
-    return (
-        <AdminLayout>
-            {page}
-        </AdminLayout>
-    )
-}
 
 export default users;

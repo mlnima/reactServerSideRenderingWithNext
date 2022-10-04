@@ -2,8 +2,6 @@ import MainWidgetArea from "../../components/widgetsArea/MainWidgetArea/MainWidg
 import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
 import dynamic from "next/dynamic";
-import type {ReactElement} from 'react';
-import AppLayout from "@components/layouts/AppLayout";
 import styled from "styled-components";
 import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import fetchPageData
@@ -60,14 +58,6 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 
     return null
 })
-
-page.getLayout = function getLayout(page: ReactElement) {
-    return (
-        <AppLayout>
-            {page}
-        </AppLayout>
-    )
-}
 
 export default page;
 

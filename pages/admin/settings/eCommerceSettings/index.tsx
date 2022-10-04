@@ -1,8 +1,6 @@
 import React from 'react';
 import EcommerceSettingsInputSection from "@components/adminIncludes/eCommerceSettingsPageComponents/EcommerceSettingsInputSection/EcommerceSettingsInputSection";
 import styled from "styled-components";
-import type {ReactElement} from 'react';
-import AdminLayout from "@components/layouts/AdminLayout";
 
 let StyledDiv = styled.div`
   display: flex;
@@ -71,15 +69,5 @@ const eCommerceSettings = () => {
 //
 //     return {props: {domainName, eCommerce}}
 // }
-
-
-eCommerceSettings.getLayout = function getLayout(page: ReactElement) {
-
-    return (
-        <AdminLayout>
-            {page}
-        </AdminLayout>
-    )
-}
 
 export default eCommerceSettings;

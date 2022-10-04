@@ -4,8 +4,6 @@ import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRe
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {wrapper} from "@store_toolkit/store";
-import AppLayout from "@components/layouts/AppLayout";
-import type {ReactElement} from 'react'
 import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import React from "react";
 import fetchMetas from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchMetas";
@@ -87,14 +85,5 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     return null
 
 });
-
-actorsPage.getLayout = function getLayout(page: ReactElement) {
-    return (
-        <AppLayout>
-            {page}
-        </AppLayout>
-    )
-}
-
 
 export default actorsPage;

@@ -16,13 +16,13 @@ const Custom404 = () => {
 //     }
 // )
 
-Custom404.getLayout = function getLayout(page: ReactElement) {
-    return (
-        <AppLayout>
-            {page}
-        </AppLayout>
-    )
-}
+// Custom404.getLayout = function getLayout(page: ReactElement) {
+//     return (
+//         <AppLayout>
+//             {page}
+//         </AppLayout>
+//     )
+// }
 
 
 export default Custom404;

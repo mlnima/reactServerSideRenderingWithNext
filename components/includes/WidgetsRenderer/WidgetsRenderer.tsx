@@ -1,19 +1,18 @@
+import {useMemo,memo} from "react";
 import {useRouter} from "next/router";
 import dynamic from "next/dynamic";
 import {useSelector} from "react-redux";
-
+import {Store} from "@_typeScriptTypes/storeTypes/Store";
 import {
     _isEditMode,
     _renderByDayCondition,
     _renderByDevice,
     _renderByLanguageCondition,
 } from "@_variables/clientVariables/_widgetsRendererVariables";
-// import {useMemo} from "react";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
-import {useMemo} from "react";
 
-const DynamicNoSSR = dynamic(() => import('./DynamicNoSSR'))
-const WidgetWrapper = dynamic(() => import('../Widget/WidgetWrapper'))
+
+const DynamicNoSSR = dynamic(() => import('./DynamicNoSSR'));
+const WidgetWrapper = dynamic(() => import('../Widget/WidgetWrapper'));
 
 interface WidgetsRendererProps {
     position: string,
@@ -25,7 +24,6 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
     const {locale} = useRouter()
 
     const {widgets, userRole} = useSelector(({widgets, user}: Store) => {
-
         return {
             widgets: widgets?.widgetInGroups?.[position] || [],
             userRole: user?.userData?.role,
@@ -36,13 +34,11 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
     // const isMobile = useMemo(() => isMobileDevice, [])
     const isMobile = true
 
+    const sortWidgetsByIndex = useMemo(()=> {
+        return [...widgets]?.sort((a, b) => a?.data?.widgetIndex > b?.data?.widgetIndex ? 1 : -1);
+    },[widgets])
 
-
-    // const sortWidgetsByIndex = useMemo(()=> {
-    //     return widgets?.sort((a, b) => a?.data?.widgetIndex > b?.data?.widgetIndex ? 1 : -1);
-    // },[widgets])
-
-    const renderWidgets = [...widgets].map((widget) => {
+    const renderWidgets = sortWidgetsByIndex.map((widget) => {
             if (
                 _renderByLanguageCondition(locale, widget?.data?.languageToRender) &&
                 _renderByDayCondition(widget.data?.specificDayToRender) &&
@@ -58,21 +54,19 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
                 }
 
                 return widget.data.noSSR ?
-                    <DynamicNoSSR key={widget._id}>
+                    <DynamicNoSSR key={widget._id} >
                         <WidgetWrapper{...widgetProps}/>
                     </DynamicNoSSR> :
                     <WidgetWrapper{...widgetProps}/>
-                // return <Widget{...widgetProps}/>
-
             } else return null
         })
 
 
     return (
-        <>
+        < >
             {renderWidgets}
         </>
     )
 };
-export default WidgetsRenderer;
+export default memo(WidgetsRenderer);
 

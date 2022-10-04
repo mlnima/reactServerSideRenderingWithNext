@@ -1,8 +1,4 @@
 import styled from "styled-components";
-import {wrapper} from "@store_toolkit/store";
-// import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import type { ReactElement } from 'react';
-import AppLayout from "@components/layouts/AppLayout";
 
 let StyledDiv = styled.div`
   display: flex;
@@ -30,13 +26,5 @@ const maintenance = () => {
 //         }
 //     }
 // })
-
-maintenance.getLayout = function getLayout(page:ReactElement) {
-    return (
-        <AppLayout>
-            {page}
-        </AppLayout>
-    )
-}
 
 export default maintenance;

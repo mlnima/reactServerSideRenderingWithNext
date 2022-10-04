@@ -5,17 +5,23 @@ import {loading} from "@store_toolkit/clientReducers/globalStateReducer";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const WidgetExporter = () => {
-    const widgets = useSelector((store: Store) => store?.widgets.widgets)
+    const widgets = useSelector((store: Store) => store?.adminPanelWidgets)
     const dispatch = useAdminDispatch()
 
     const exportAllWidgets = () => {
-        const data = widgets.map(widget => {
-            widget.data.uniqueData.posts = []
-            widget.data.uniqueData.metaData = []
-            //@ts-ignore
-            widget.data.comments = []
-            return widget.data
-        })
+//[position,widgetsOnPosition]
+        const data = Object.entries(widgets).reduce((finalArr,current)=>{
+            const [position,widgetsOnPosition] = current
+            finalArr = [...finalArr,...widgetsOnPosition]
+            return finalArr
+        },[])
+        // const data = widgets.map(widget => {
+        //     widget.data.uniqueData.posts = []
+        //     widget.data.uniqueData.metaData = []
+        //     //@ts-ignore
+        //     widget.data.comments = []
+        //     return widget.data
+        // })
 
         let filename = `${Date.now().toLocaleString()}-all-widgets.json`;
         let contentType = "application/json;charset=utf-8;";

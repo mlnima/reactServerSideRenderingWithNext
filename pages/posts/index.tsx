@@ -2,8 +2,6 @@ import PostsPage from "@components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
 import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
-import type {ReactElement} from 'react';
-import AppLayout from "@components/layouts/AppLayout";
 import fetchPosts from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPosts";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
@@ -70,12 +68,5 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     return null
 });
 
-posts.getLayout = function getLayout(page: ReactElement) {
-    return (
-        <AppLayout>
-            {page}
-        </AppLayout>
-    )
-}
 
 export default posts;

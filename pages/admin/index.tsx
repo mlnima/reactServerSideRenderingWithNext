@@ -4,8 +4,6 @@ import {socket} from '@_variables/socket'
 import Link from "next/link";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import type {ReactElement} from 'react';
-import AdminLayout from "@components/layouts/AdminLayout";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const AdminHomePageStyledDiv = styled.div`
@@ -131,12 +129,4 @@ const AdminHomePage = () => {
     );
 };
 
-AdminHomePage.getLayout = function getLayout(page: ReactElement) {
-
-    return (
-        <AdminLayout>
-            {page}
-        </AdminLayout>
-    )
-}
 export default AdminHomePage;

@@ -4,8 +4,6 @@ import {useRouter} from "next/router";
 import _adminGetPostsQueryGenerator from "@_variables/adminVariables/_adminGetPostsQueryGenerator";
 import {useSelector} from "react-redux";
 import styled from "styled-components";
-import type {ReactElement} from 'react';
-import AdminLayout from "@components/layouts/AdminLayout";
 import {fetchAdminPanelMetas, fetchAdminPanelPosts} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
 import {fetchAdminForms} from "@store_toolkit/adminReducers/adminPanelFormsReducer";
 import {fetchAdminPanelPages} from "@store_toolkit/adminReducers/adminPanelPagesReducer";
@@ -14,7 +12,6 @@ import {fetchAdminPanelGetComments} from "@store_toolkit/adminReducers/adminComm
 import {useAdminDispatch} from "@store_toolkit/hooks";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
 import _adminMetaPageQueryGenerator from "@_variables/adminVariables/_adminMetaPageQueryGenerator";
-// import {adminGetOrders} from "@store/adminActions/adminPanelOrdersActions";
 
 const TableHeader = dynamic(
     () => import('@components/adminIncludes/assetComponents/TableHeader/TableHeader'),
@@ -38,22 +35,29 @@ const assets = () => {
     const dispatch = useAdminDispatch()
 
 
-    const assetPageData = useSelector((store: Store) => {
+    const assetPageData = useSelector((
+        {
+            adminPanelPosts,
+            adminPanelUsers,
+            adminPanelComments,
+            adminPanelForms,
+            adminPanelPages,
+            adminPanelOrders,
+        }: Store) => {
         return {
-            totalCount: store?.adminPanelPosts?.totalCount || store?.adminPanelUsers?.totalCount,
-            posts: store?.adminPanelPosts?.posts,
-            users: store?.adminPanelUsers?.users,
-            comments: store?.adminPanelComments?.comments,
-            forms: store?.adminPanelForms?.forms,
-            pages: store?.adminPanelPages?.pages,
-            metas: store?.adminPanelPosts?.metas,
+            totalCount: adminPanelPosts?.totalCount || adminPanelUsers?.totalCount,
+            posts: adminPanelPosts?.posts,
+            users: adminPanelUsers?.users,
+            comments: adminPanelComments?.comments,
+            forms: adminPanelForms?.forms,
+            pages: adminPanelPages?.pages,
+            metas: adminPanelPosts?.metas,
             // identity:store.settings.identity,
-            orders: store?.adminPanelOrders?.orders
+            orders: adminPanelOrders?.orders
         }
     })
 
     const [selectedItems, setSelectedItems] = useState([]);
-
 
     const dataConfig = useMemo(() => {
         return {
@@ -120,15 +124,6 @@ const assets = () => {
     );
 };
 
-
-assets.getLayout = function getLayout(page: ReactElement) {
-
-    return (
-        <AdminLayout>
-            {page}
-        </AdminLayout>
-    )
-}
 export default assets;
 
 

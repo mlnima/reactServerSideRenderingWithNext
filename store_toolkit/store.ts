@@ -7,17 +7,17 @@ import settingsSlice from "./clientReducers/settingsReducer";
 import userSlice from "./clientReducers/userReducer";
 import globalStateSlice from "./clientReducers/globalStateReducer";
 import chatroomSlice from "./clientReducers/chatroomReducer";
-import adminPanelGlobalStateSlice from "./adminReducers/adminPanelGlobalStateReducer";
-import adminPanelSettingsSlice from "./adminReducers/adminPanelSettingsReducer";
-import adminPanelPostsSlice from "./adminReducers/adminPanelPostsReducer";
-import adminPanelWidgetsSlice from "./adminReducers/adminWidgetsReducer";
-import adminPanelFormsSlice from "./adminReducers/adminPanelFormsReducer";
-import adminPanelFileManagerSlice from "./adminReducers/adminPanelFileManagerReducer";
-import adminPanelPagesSlice from "./adminReducers/adminPanelPagesReducer";
-import adminPanelUsersSlice from "./adminReducers/adminPanelUsersReducer";
-import adminPanelCommentsSlice from "./adminReducers/adminCommentsReducer";
-import adminTerminalSlice from "./adminReducers/adminTerminalReducer";
-// import {adminPanelOrdersReducer} from "./adminReducers/adminPanelOrdersReducer";
+// import adminPanelGlobalStateSlice from "./adminReducers/adminPanelGlobalStateReducer";
+// import adminPanelSettingsSlice from "./adminReducers/adminPanelSettingsReducer";
+// import adminPanelPostsSlice from "./adminReducers/adminPanelPostsReducer";
+// import adminPanelWidgetsSlice from "./adminReducers/adminWidgetsReducer";
+// import adminPanelFormsSlice from "./adminReducers/adminPanelFormsReducer";
+// import adminPanelFileManagerSlice from "./adminReducers/adminPanelFileManagerReducer";
+// import adminPanelPagesSlice from "./adminReducers/adminPanelPagesReducer";
+// import adminPanelUsersSlice from "./adminReducers/adminPanelUsersReducer";
+// import adminPanelCommentsSlice from "./adminReducers/adminCommentsReducer";
+// import adminTerminalSlice from "./adminReducers/adminTerminalReducer";
+import {adminPanelOrdersReducer} from "./adminReducers/adminPanelOrdersReducer";
 
 const debugDev = process.env.NODE_ENV !== 'production' || process.env.NEXT_PUBLIC_PRODUCTION_URL.includes(':3000')
 const debug = false;
@@ -29,16 +29,16 @@ const combinedReducer = combineReducers({
     globalState: globalStateSlice,
     chatroom: chatroomSlice,
     posts: postsSlice,
-    adminPanelUsers: adminPanelUsersSlice,
-    adminPanelPages: adminPanelPagesSlice,
-    adminPanelGlobalState: adminPanelGlobalStateSlice,
-    adminPanelSettings: adminPanelSettingsSlice,
-    adminPanelPosts: adminPanelPostsSlice,
-    adminPanelWidgets: adminPanelWidgetsSlice,
-    adminPanelForms: adminPanelFormsSlice,
-    adminPanelFileManager: adminPanelFileManagerSlice,
-    adminPanelComments: adminPanelCommentsSlice,
-    adminPanelTerminalState: adminTerminalSlice
+    // adminPanelUsers: adminPanelUsersSlice,
+    // adminPanelPages: adminPanelPagesSlice,
+    // adminPanelGlobalState: adminPanelGlobalStateSlice,
+    // adminPanelSettings: adminPanelSettingsSlice,
+    // adminPanelPosts: adminPanelPostsSlice,
+    // adminPanelWidgets: adminPanelWidgetsSlice,
+    // adminPanelForms: adminPanelFormsSlice,
+    // adminPanelFileManager: adminPanelFileManagerSlice,
+    // adminPanelComments: adminPanelCommentsSlice,
+    // adminPanelTerminalState: adminTerminalSlice
 });
 
 
@@ -108,5 +108,5 @@ export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,
 
 export const wrapper = createWrapper<Store>(makeStore, {debug});
 
-
+export default wrapper
 

@@ -96,6 +96,7 @@ const WidgetWrapper: FC<WidgetComponentPropTypes> = ({data, widgetId, isSidebar,
                     widgetId={widgetId}
                     isSidebar={isSidebar}
                     viewType={viewType}
+
                 />
                 : null
             }

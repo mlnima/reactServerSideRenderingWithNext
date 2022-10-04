@@ -12,8 +12,6 @@ import {languagesOptions} from "@_variables/_variables";
 import styled from "styled-components";
 import { useSelector} from "react-redux";
 import {adminEditPost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
-import type {ReactElement} from 'react';
-import AdminLayout from "@components/layouts/AdminLayout";
 import {fetchAdminPanelPost,adminDefineNewPost,adminChangeActiveEditingLanguage} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
@@ -133,13 +131,5 @@ const Index = () => {
     );
 };
 
-Index.getLayout = function getLayout(page: ReactElement) {
-
-    return (
-        <AdminLayout>
-            {page}
-        </AdminLayout>
-    )
-}
 export default Index;
 

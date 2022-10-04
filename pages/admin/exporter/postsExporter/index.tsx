@@ -1,8 +1,6 @@
 import React, {ChangeEvent,useState} from 'react';
 import styled from "styled-components";
 import postTypes from "../../../../_dataStructures/postTypes";
-import type {ReactElement} from 'react';
-import AdminLayout from "@components/layouts/AdminLayout";
 import {fetchAdminExportPosts} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
 
@@ -131,13 +129,6 @@ const postsExporter = () => {
 };
 
 
-postsExporter.getLayout = function getLayout(page: ReactElement) {
 
-    return (
-        <AdminLayout>
-            {page}
-        </AdminLayout>
-    )
-}
 
 export default postsExporter;

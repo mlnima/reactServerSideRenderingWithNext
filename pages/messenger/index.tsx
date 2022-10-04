@@ -3,8 +3,6 @@ import Link from "next/link";
 import {wrapper} from "@store_toolkit/store";
 import { useSelector} from "react-redux";
 import styled from "styled-components";
-import MessengerLayout from "@components/layouts/MessengerLayout";
-import type {ReactElement} from 'react';
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
@@ -59,14 +57,5 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 
     return null
 })
-
-messengerPage.getLayout = function getLayout(page: ReactElement) {
-
-    return (
-        <MessengerLayout>
-            {page}
-        </MessengerLayout>
-    )
-}
 
 export default messengerPage;

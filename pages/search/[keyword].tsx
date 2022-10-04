@@ -5,8 +5,6 @@ import {useRouter} from "next/router";
 import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
 import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
-import type { ReactElement } from 'react';
-import AppLayout from "@components/layouts/AppLayout";
 import fetchPosts from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPosts";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
@@ -41,7 +39,9 @@ const searchPage = ( ) => {
 
             <WidgetsRenderer position={'searchPageTop'}/>
 
-            {!!router.query.keyword && !!posts?.length && <PostsPageInfo keyword={router.query.keyword as string}/>}
+            {!!router.query.keyword && !!posts?.length &&
+                <PostsPageInfo titleEntry={router.query.keyword as string }/>
+            }
 
             {!posts?.length && <h2 className='no-result-message'>No Result for {router.query.keyword}</h2>}
 
@@ -87,13 +87,5 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 
     return null
 })
-
-searchPage.getLayout = function getLayout(page:ReactElement) {
-    return (
-        <AppLayout>
-            {page}
-        </AppLayout>
-    )
-}
 
 export default searchPage;

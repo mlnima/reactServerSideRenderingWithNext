@@ -3,8 +3,6 @@ import UserSmallPreview from "../../../components/includes/socialComponents/User
 import {wrapper} from "@store_toolkit/store";
 import { useSelector} from "react-redux";
 import styled from "styled-components";
-import type { ReactElement } from 'react';
-import AppLayout from "@components/layouts/AppLayout";
 import {fetchMultipleUserDataById, fetchSpecificUserData} from "@store_toolkit/clientReducers/userReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
@@ -61,13 +59,5 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 
     return null
 })
-
-Following.getLayout = function getLayout(page:ReactElement) {
-    return (
-        <AppLayout>
-            {page}
-        </AppLayout>
-    )
-}
 
 export default Following;

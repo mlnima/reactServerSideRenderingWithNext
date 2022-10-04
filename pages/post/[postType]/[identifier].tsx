@@ -3,8 +3,6 @@ import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
 import dynamic from "next/dynamic";
 import styled from "styled-components";
-import type {ReactElement} from 'react';
-import AppLayout from "@components/layouts/AppLayout";
 import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import fetchViewPost
     from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchViewPost";
@@ -146,14 +144,6 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 
     return null
 });
-
-postPage.getLayout = function getLayout(page: ReactElement) {
-    return (
-        <AppLayout>
-            {page}
-        </AppLayout>
-    )
-}
 
 export default postPage;
 

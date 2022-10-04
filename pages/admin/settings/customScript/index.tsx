@@ -1,8 +1,6 @@
 import React from 'react';
 import dynamic from "next/dynamic";
 import { useSelector} from "react-redux";
-import type {ReactElement} from 'react';
-import AdminLayout from "@components/layouts/AdminLayout";
 import {adminEditIdentity, adminPanelUpdateSetting} from "@store_toolkit/adminReducers/adminPanelSettingsReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
@@ -42,16 +40,5 @@ const customScript = (props: { width: any; height: any; }) => {
             </div>
     );
 };
-
-
-
-customScript.getLayout = function getLayout(page: ReactElement) {
-
-    return (
-        <AdminLayout>
-            {page}
-        </AdminLayout>
-    )
-}
 
 export default customScript;

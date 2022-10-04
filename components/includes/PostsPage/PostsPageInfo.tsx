@@ -18,21 +18,26 @@ let PostsPageInfoStyledDiv = styled.div`
 `
 
 interface PostsPageInfoPropTypes {
-    metaData?: Meta
-    keyword?: string
+    titleEntry?: string,
 }
 
-const PostsPageInfo: FC<PostsPageInfoPropTypes> = ({metaData, keyword}) => {
+const PostsPageInfo: FC<PostsPageInfoPropTypes> = ({titleEntry}) => {
 
-    const title = decodeURIComponent(capitalizeFirstLetter(metaData?.name || keyword))
+    const title = capitalizeFirstLetter(titleEntry)
 
-    if (title) {
-        return (
-            <PostsPageInfoStyledDiv className='posts-page-info'>
-                <h1> {title.trim()}</h1>
-            </PostsPageInfoStyledDiv>
-        );
-    } else return <Soft404/>
+    // if (title) {
+    //     return (
+    //         <PostsPageInfoStyledDiv className='posts-page-info'>
+    //             <h1> {title.trim()}</h1>
+    //         </PostsPageInfoStyledDiv>
+    //     );
+    // } else return <Soft404/>
+
+    return !!title ?
+        <PostsPageInfoStyledDiv className='posts-page-info'>
+            <h1> {title.trim()}</h1>
+        </PostsPageInfoStyledDiv> :
+        <Soft404/>
 
 };
 export default PostsPageInfo;

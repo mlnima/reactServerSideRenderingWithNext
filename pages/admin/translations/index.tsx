@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Editor from "@monaco-editor/react";
 import {useSelector} from "react-redux";
-import type {ReactElement} from 'react';
-import AdminLayout from "@components/layouts/AdminLayout";
+
 import {
     fetchReadTranslationsFile,
     fetchUpdateTranslationsFile,
@@ -18,7 +17,7 @@ const translations = () => {
     const translationsData = useSelector(({adminPanelFileManager}: Store) => adminPanelFileManager.translationsData)
     const [activeEditingLanguage, seActiveEditingLanguage] = useState(() => process.env.NEXT_PUBLIC_DEFAULT_LOCAL);
     const [translationsFilePath, setTranslationsFilePath] = useState(
-        () => `./public/locales/${activeEditingLanguage}/customTranslation.json`
+        () => `./locales/${activeEditingLanguage}/customTranslation.json`
     );
 
     const onChangeHandler = data => {
@@ -30,7 +29,7 @@ const translations = () => {
     }
 
     useEffect(() => {
-        setTranslationsFilePath(`./public/locales/${activeEditingLanguage}/customTranslation.json`)
+        setTranslationsFilePath(`./locales/${activeEditingLanguage}/customTranslation.json`)
     }, [activeEditingLanguage]);
 
     useEffect(() => {
@@ -67,14 +66,5 @@ const translations = () => {
 
     );
 };
-
-
-translations.getLayout = function getLayout(page: ReactElement) {
-    return (
-        <AdminLayout>
-            {page}
-        </AdminLayout>
-    )
-}
 
 export default translations;

@@ -1,7 +1,5 @@
 import React, { useState, useRef, ChangeEvent} from 'react';
 import styled from "styled-components";
-import type {ReactElement} from 'react';
-import AdminLayout from "@components/layouts/AdminLayout";
 import {useAdminDispatch} from "@store_toolkit/hooks";
 import {adminPanelUpdateSetting} from "@store_toolkit/adminReducers/adminPanelSettingsReducer";
 import {loading} from "@store_toolkit/clientReducers/globalStateReducer";
@@ -155,16 +153,5 @@ const youtube = () => {
         </StyledDiv>
     );
 };
-
-
-
-youtube.getLayout = function getLayout(page: ReactElement) {
-
-    return (
-        <AdminLayout>
-            {page}
-        </AdminLayout>
-    )
-}
 
 export default youtube;

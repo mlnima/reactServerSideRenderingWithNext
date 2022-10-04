@@ -2,8 +2,6 @@ import React,{useEffect, useRef, useState} from 'react';
 import {useRouter} from "next/router";
 import {useSelector} from "react-redux";
 import styled from "styled-components";
-import type {ReactElement} from 'react';
-import AdminLayout from "@components/layouts/AdminLayout";
 import userRoles from "@_dataStructures/userRoles";
 import userStatus from "@_dataStructures/userStatus";
 import {
@@ -210,13 +208,4 @@ const user = () => {
     );
 };
 
-
-user.getLayout = function getLayout(page: ReactElement) {
-
-    return (
-        <AdminLayout>
-            {page}
-        </AdminLayout>
-    )
-}
 export default user;

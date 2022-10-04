@@ -7,8 +7,6 @@ import styled from "styled-components";
 import useTranslation from 'next-translate/useTranslation'
 import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
-import type {ReactElement} from 'react';
-import AppLayout from "@components/layouts/AppLayout";
 import {fetchSpecificUserData, fetchUserPageData} from "@store_toolkit/clientReducers/userReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
@@ -181,14 +179,6 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     return null
 
 })
-
-user.getLayout = function getLayout(page: ReactElement) {
-    return (
-        <AppLayout>
-            {page}
-        </AppLayout>
-    )
-}
 
 export default user;
 

@@ -10,9 +10,6 @@ import {socket} from '@_variables/socket';
 import MessengerCall from "@components/includes/messengerPageComponents/MessengerCall/MessengerCall";
 import {useSelector} from "react-redux";
 import {wrapper} from "@store_toolkit/store";
-
-
-
 import {
     // answerTheCall,
     endCall, fetchAnswerTheCall,
@@ -22,8 +19,7 @@ import {
     // outgoingCall,
     setPartnerVideo,
 } from "@store_toolkit/clientReducers/userReducer";
-import MessengerLayout from "@components/layouts/MessengerLayout";
-import type {ReactElement} from 'react';
+
 import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
@@ -141,12 +137,5 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     return null
 })
 
-conversation.getLayout = function getLayout(page: ReactElement) {
 
-    return (
-        <MessengerLayout>
-            {page}
-        </MessengerLayout>
-    )
-}
 export default conversation;

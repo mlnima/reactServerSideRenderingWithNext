@@ -2,8 +2,6 @@ import React, {useState, useRef} from 'react';
 import {animateScroll} from 'react-scroll'
 import styled from "styled-components";
 import { useSelector} from "react-redux";
-import type {ReactElement} from 'react';
-import AdminLayout from "@components/layouts/AdminLayout";
 import {terminalCommandExecutor} from "@store_toolkit/adminReducers/adminTerminalReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
 import {loading} from "@store_toolkit/clientReducers/globalStateReducer";
@@ -122,13 +120,5 @@ const terminal = () => {
 
     );
 };
-
-terminal.getLayout = function getLayout(page: ReactElement) {
-    return (
-        <AdminLayout>
-            {page}
-        </AdminLayout>
-    )
-}
 
 export default terminal;

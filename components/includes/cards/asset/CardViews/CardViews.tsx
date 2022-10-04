@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const CardViewsStyledDiv = styled.div`
   font-size: 12px;
+
   .icon {
     width: 14px;
     height: 14px;
@@ -19,9 +20,12 @@ interface CardViewsPropTypes {
 const CardViews = ({views, className}: CardViewsPropTypes) => {
     return (
         <CardViewsStyledDiv className={'card-views ' + className}>
-            <span className={'icon'}/>
-            <span>{views}</span>
-
+            {!!views &&
+                <>
+                    <span className={'icon'}/>
+                    <span>{views}</span>
+                </>
+            }
         </CardViewsStyledDiv>
     );
 };

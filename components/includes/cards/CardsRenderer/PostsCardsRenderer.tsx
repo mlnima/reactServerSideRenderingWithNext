@@ -87,7 +87,7 @@ const PostsCardsRenderer: FC<CardsRendererPropTypes> = ({
                 }
 
                 if (post?.postType === 'video' || post?.postType === 'externalVideo') {
-                    return <VideoPostCard {...postProps} key={index} index={index}/>
+                    return <VideoPostCard {...postProps} key={index} index={index}  />
                 } else if (post?.postType === 'promotion' || post?.postType === 'externalPromotion') {
                     return <PromotionPostCard {...postProps} key={index} index={index}/>
                 } else if (post?.postType === 'article' ||post?.postType === 'externalArticle') {

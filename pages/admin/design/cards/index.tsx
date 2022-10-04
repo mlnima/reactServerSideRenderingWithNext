@@ -1,9 +1,6 @@
 import {useSelector} from "react-redux";
-
 import dynamic from "next/dynamic";
 import {ChangeEvent} from "react";
-import type {ReactElement} from 'react';
-import AdminLayout from "@components/layouts/AdminLayout";
 import {adminEditDesign} from "@store_toolkit/adminReducers/adminPanelSettingsReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
@@ -73,12 +70,6 @@ const cards = () => {
     );
 };
 
-cards.getLayout = function getLayout(page: ReactElement) {
-    return (
-        <AdminLayout>
-            {page}
-        </AdminLayout>
-    )
-}
+
 
 export default cards;

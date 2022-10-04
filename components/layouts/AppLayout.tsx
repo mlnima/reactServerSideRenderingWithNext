@@ -5,6 +5,7 @@ import GlobalStylesComponent from "../global/Styles/GlobalStylesComponent";
 import SiteSettingSetter from '../includes/SiteSettingsSetter/SiteSettingsSetter'
 import LoadingV2 from "@components/includes/LoadingV2/LoadingV2";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
+
 const HeaderWidgetArea = dynamic(() => import('@components/widgetsArea/HeaderWidgetArea/HeaderWidgetArea'));
 const TopBarWidgetArea = dynamic(() => import('@components/widgetsArea/TopBarWidgetArea/TopBarWidgetArea'));
 const NavigationWidgetArea = dynamic(() => import('@components/widgetsArea/NavigationWidgetArea/NavigationWidgetArea'));
@@ -41,17 +42,14 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
     });
 
     return (
-<>
+        <>
 
-            {userRole === 'administrator' && <AdminTools/>}
-            <GlobalStylesComponent/>
-            <SiteSettingSetter/>
             <header>
                 {identity?.topbar === 'enable' && <TopBarWidgetArea/>}
                 {identity?.header === 'enable' && <HeaderWidgetArea/>}
                 {identity?.navigation === 'enable' && <NavigationWidgetArea/>}
             </header>
-            <div id={'page'} className={'App'} suppressHydrationWarning>
+            <div id={'page'} className={'App'}>
                 {children}
             </div>
             {identity?.footer === 'enable' && <FooterWidgetArea/>}
@@ -66,7 +64,10 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
             {loginRegisterFormPopup && !loggedIn && <LoginRegisterPopup/>}
             {(!!alert?.active && !!alert?.message) && <AlertBox/>}
             {userRole === 'administrator' && <AdminDataSetter userRole={userRole}/>}
-</>
+            {userRole === 'administrator' && <AdminTools/>}
+            <GlobalStylesComponent/>
+            <SiteSettingSetter/>
+        </>
     );
 };
 

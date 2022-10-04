@@ -1,8 +1,7 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useEffect} from 'react';
 import {useSelector} from "react-redux";
 import styled from "styled-components";
 import {wrapper} from "@store_toolkit/store";
-import dynamic from "next/dynamic";
 import FormData from 'form-data';
 import {useRouter} from "next/router";
 import CreateEditArticlePostField
@@ -11,15 +10,11 @@ import TextInput from "@components/includes/profilePageComponents/profilePost/co
 import MetaDataSelector from "@components/includes/profilePageComponents/profilePost/common/MetaDataSelector";
 import ThumbnailUploader from "@components/includes/profilePageComponents/profilePost/common/ThumbnailUploader";
 import VideoTypeFields from "@components/includes/profilePageComponents/profilePost/VideoTypeFields/VideoTypeFields";
-import type {ReactElement} from 'react';
-import AppLayout from "@components/layouts/AppLayout";
 import {editPostField, setEditingPostImagesToUpload} from "@store_toolkit/clientReducers/postsReducer";
 import fetchUserEditingPostUpdate
     from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserEditingPostUpdate";
 import fetchUserEditingPost
     from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserEditingPost";
-import fetchUserCreateNewPost
-    from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserCreateNewPost";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import DynamicNoSSR from "@components/includes/WidgetsRenderer/DynamicNoSSR";
@@ -259,12 +254,6 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     return null
 })
 
-post.getLayout = function getLayout(page: ReactElement) {
-    return (
-        <AppLayout>
-            {page}
-        </AppLayout>
-    )
-}
+
 
 export default post;

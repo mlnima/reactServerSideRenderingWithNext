@@ -32,23 +32,23 @@ const combinedReducer = combineReducers({
 
 const reducer = (state: ReturnType<typeof combinedReducer>, action: AnyAction) => {
 
-    // if (action.type === HYDRATE) {
-    //     const nextState = {
-    //         ...state,
-    //         ...action.payload,
-    //         user: {
-    //             ...(action?.payload?.user || {}),
-    //             //@ts-ignore
-    //             userData: state?.user?.userData || action?.payload?.user?.userData || {}
-    //         }
-    //     }
-    //     return nextState
-    // } else {
-    //     return combinedReducer(state, action);
-    // }
-    console.log(action)
-
-    return combinedReducer(state, action);
+    if (action.type === HYDRATE) {
+        const nextState = {
+            ...state,
+            ...action.payload,
+            user: {
+                ...(action?.payload?.user || {}),
+                //@ts-ignore
+                userData: state?.user?.userData || action?.payload?.user?.userData || {}
+            }
+        }
+        return nextState
+    } else {
+        return combinedReducer(state, action);
+    }
+    // console.log(action)
+    //
+    // return combinedReducer(state, action);
 };
 
 export const makeStore = () => configureStore({
@@ -70,5 +70,5 @@ export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,
 
 export const wrapper = createWrapper<Store>(makeStore, {debug});
 
-
+export default wrapper
 

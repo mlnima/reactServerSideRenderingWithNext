@@ -29,7 +29,7 @@ const PostsTypes = () => {
             <select className={'custom-select'} onChange={e => onFormatChangeHandler(e)} value={query?.postType}>
                 <option value='' >Select</option>
                 <option value='all'>All</option>
-                {postTypes.map(postType=><option value={postType}>{convertVariableNameToName(postType)}</option>)}
+                {postTypes.map(postType=><option key={postType} value={postType}>{convertVariableNameToName(postType)}</option>)}
             </select>
         </PostsTypesStyledDiv>
     );

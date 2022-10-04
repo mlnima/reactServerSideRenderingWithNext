@@ -2,8 +2,6 @@ import WidgetsRenderer from "@components/includes/WidgetsRenderer/WidgetsRendere
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {wrapper} from "@store_toolkit/store";
-import type {ReactElement} from 'react';
-import AppLayout from "@components/layouts/AppLayout";
 import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import React from "react";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
@@ -61,14 +59,6 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     return null
 
 });
-
-tagsPage.getLayout = function getLayout(page: ReactElement) {
-    return (
-        <AppLayout>
-            {page}
-        </AppLayout>
-    )
-}
 
 export default tagsPage;
 

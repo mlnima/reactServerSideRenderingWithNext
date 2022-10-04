@@ -6,8 +6,7 @@ import {useRouter} from "next/router";
 import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
 import Link from "next/link";
-import AppLayout from "@components/layouts/AppLayout";
-import type {ReactElement} from 'react'
+
 import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import ActorBio from '@components/includes/cards/CardsRenderer/ActorBio/ActorBio'
 import fetchPosts from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPosts";
@@ -106,13 +105,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 });
 
 
-actorPage.getLayout = function getLayout(page: ReactElement) {
-    return (
-        <AppLayout>
-            {page}
-        </AppLayout>
-    )
-}
+
 
 export default actorPage;
 

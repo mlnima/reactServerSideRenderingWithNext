@@ -1,7 +1,5 @@
 import React, {useState, useRef, ChangeEvent} from 'react';
 import { useSelector} from "react-redux";
-import type {ReactElement} from 'react';
-import AdminLayout from "@components/layouts/AdminLayout";
 import styled from "styled-components";
 import {fetchAdminPanelSaveNewPost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
@@ -94,17 +92,6 @@ const postsImporter = () => {
         </PostsImporterStyledDiv>
 
     );
-}
-
-
-
-postsImporter.getLayout = function getLayout(page: ReactElement) {
-
-    return (
-        <AdminLayout>
-            {page}
-        </AdminLayout>
-    )
 }
 
 export default postsImporter;

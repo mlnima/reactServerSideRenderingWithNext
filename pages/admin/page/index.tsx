@@ -3,8 +3,6 @@ import {useRouter} from 'next/router'
 import Editor from "@monaco-editor/react";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import type {ReactElement} from 'react';
-import AdminLayout from "@components/layouts/AdminLayout";
 
 import {
     fetchAdminSaveNewPage,
@@ -147,13 +145,4 @@ const page = (props: any) => {
 };
 
 
-
-page.getLayout = function getLayout(page: ReactElement) {
-
-    return (
-        <AdminLayout>
-            {page}
-        </AdminLayout>
-    )
-}
 export default page;

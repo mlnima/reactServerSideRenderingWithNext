@@ -5,8 +5,6 @@ import dynamic from "next/dynamic";
 import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
 import Link from "next/link";
-import type {ReactElement} from 'react';
-import AppLayout from "@components/layouts/AppLayout";
 import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import fetchPosts from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPosts";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
@@ -52,7 +50,7 @@ const tagPage = () => {
                         </Link>
                     </div>
                     : null}
-                {tag ? <PostsPageInfo metaData={tag}/> : null}
+                {!!tag && <PostsPageInfo titleEntry={tag.name}/> }
 
 
                 <WidgetsRenderer
@@ -99,14 +97,6 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 
     return null
 });
-
-tagPage.getLayout = function getLayout(page: ReactElement) {
-    return (
-        <AppLayout>
-            {page}
-        </AppLayout>
-    )
-}
 
 export default tagPage;
 
