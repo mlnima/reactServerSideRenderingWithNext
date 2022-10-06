@@ -9,7 +9,9 @@
 /public/uploads
 /public/locales/*/customTranslation.json
 /public/jsons/widgets/*
+/public/jsons/widgets
 /public/jsons/settings/*
+/public/jsons/settings
 
 /static/uploads
 /static/uploads/
