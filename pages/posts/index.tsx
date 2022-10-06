@@ -57,7 +57,6 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         fetchPosts({
                 context,
                 metaId: null,
-                metaType: null,
                 options: {
                     page: 'posts',
                     setHeadData: false

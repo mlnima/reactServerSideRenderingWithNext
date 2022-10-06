@@ -20,11 +20,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change afterPath="$PROJECT_DIR$/nextConfigs/redirects.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PaginationComponent/PaginationComponentPageLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PaginationComponent/PaginationComponentPageLink.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/Soft404/Soft404.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Soft404/Soft404.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextConfigs/rewrites.js" beforeDir="false" afterPath="$PROJECT_DIR$/nextConfigs/rewrites.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nodemon.json" beforeDir="false" afterPath="$PROJECT_DIR$/nodemon.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/meta/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/meta/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/actor/[actorId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/actor/[actorId].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/category/[categoryId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/category/[categoryId].tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/post/[postType]/[identifier].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/[postType]/[identifier].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/posts/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/posts/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/search/[keyword].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/search/[keyword].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/tag/[tagId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tag/[tagId].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPost.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPost.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPosts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPosts.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store_toolkit/_storeVariables/_firstRequestHeadDataSetter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_firstRequestHeadDataSetter.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,8 +48,8 @@
         <option value="tsconfig.json" />
         <option value="CSS File" />
         <option value="TypeScript File" />
-        <option value="JavaScript File" />
         <option value="TypeScript JSX File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -113,7 +123,7 @@
       <command value="nextEnv" />
     </option>
   </component>
-  <component name="RunManager" selected="npm.start">
+  <component name="RunManager" selected="npm.build">
     <configuration name="temp.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/tempFiles/temp.js" working-dir="$PROJECT_DIR$/tempFiles">
       <method v="2" />
     </configuration>
@@ -159,9 +169,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.start" />
         <item itemvalue="Node.js.temp.js" />
         <item itemvalue="npm.update:packages" />
       </list>

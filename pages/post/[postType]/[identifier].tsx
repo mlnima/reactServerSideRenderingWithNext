@@ -131,14 +131,13 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 
     //@ts-ignore
     // context.query?.identifier && await store.dispatch(getPost(context.query?.identifier as string, context.locale as string))
-
     !!context.query?.identifier && await store.dispatch(
         fetchPost({
             options: {
                 page: 'postPage'
             },
             identifier: context?.query?.id as string || context?.query?.identifier as string,
-            locale: context.locale
+            context
         })
     )
 

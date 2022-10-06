@@ -36,16 +36,22 @@ const _firstRequestHeadDataSetter = (context, page: string, setHeadData: boolean
 
         const isMetaPageRegex = /categories|tags|actors/g
 
-        const canonicalUrl = isMetaPageRegex.test(page) ?
+        const pageUrl = isMetaPageRegex.test(page) ?
             _metasCanonicalUrlGenerator(page, context.locale, context.query.page) :
-            _homePageCanonicalUrlGenerator(context.locale)
+            null
+            // _homePageCanonicalUrlGenerator(context.locale)
+
+         const ogUrls = pageUrl ? {
+             ogUrl: pageUrl,
+             twitterUrl: pageUrl,
+         } :{}
 
         return {
             title: title || null,
             description: description?.substring(0, 155) || null,
             keywords: [(page !== 'home' ? page : ''), ...(getTextDataWithTranslation(context.locale, 'keywords', identity) || [])],
             themeColor: identity?.themeColor || '#000',
-            canonicalUrl,
+            ...ogUrls,
             //@ts-ignore
             favIcon: identity?.favIcon || '/static/images/favIcon/favicon.png',
             //@ts-ignore
@@ -60,12 +66,12 @@ const _firstRequestHeadDataSetter = (context, page: string, setHeadData: boolean
             ogTitle: title || null,
             ogDescription: description?.substring(0, 155) || null,
             ogType: 'website',
-            ogUrl: canonicalUrl,
+
             //@ts-ignore
             ogImage: identity?.favIcon || '/static/images/favIcon/favicon.png',
 
             twitterCard: true,
-            twitterUrl: canonicalUrl,
+
             twitterTitle: title || null,
             //@ts-ignore
             twitterSite: identity?.siteName || null,

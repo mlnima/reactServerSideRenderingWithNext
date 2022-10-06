@@ -93,7 +93,6 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         fetchPosts({
                 context,
                 metaId: context?.query?.actorId as string,
-                metaType: 'actors',
                 options: {
                     page: 'actor',
                     setHeadData: true

@@ -7,6 +7,7 @@ import fetchPosts
     from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPosts";
 import PostsPage from "@components/includes/PostsPage/PostsPage";
 
+
 const Soft404StyledDiv = styled.div`
   display: flex;
   flex-direction: column;
@@ -29,20 +30,19 @@ const Soft404 = () => {
     const {t} = useTranslation();
     const dispatch = useAppDispatch();
 
+
     useEffect(() => {
         dispatch(fetchPosts({
             context: {
                 query: {}
             },
             metaId: null,
-            metaType: null,
             options: {
                 page: '404',
                 setHeadData: false
             }
         }))
     }, []);
-
 
     return (
         <>
@@ -53,7 +53,7 @@ const Soft404 = () => {
                     {fallback: 'It seems we can’t find what you’re looking for. Perhaps searching can help.'})}</p>
                 <Link href="/">
                     <a className='back-to-homepage'>
-                        <h2>{t(`common:Go To Homepage`,{},{fallback:'Go To Homepage'})}</h2>
+                        <h2>{t(`common:Go To Homepage`, {}, {fallback: 'Go To Homepage'})}</h2>
                     </a>
                 </Link>
 

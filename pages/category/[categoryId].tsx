@@ -91,15 +91,12 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         fetchPosts({
                 context,
                 metaId: context?.query?.categoryId as string,
-                metaType: 'categories',
                 options: {
                     page: 'category',
                     setHeadData:true
                 }
             }
         ))
-
-
     return null
 });
 

@@ -12,10 +12,14 @@ const PaginationComponentPageLink: FC<PropTypes> = ({pageNumber, isActivePage}) 
     const {pathname, query} = useRouter()
 
     const nextQuery = useMemo(() => {
-        return {
+        const nextQuery = {
             ...query,
-            page: pageNumber
+            page: pageNumber,
+            content: query.content,
         }
+        delete nextQuery?.content
+
+        return nextQuery
     }, [query, pageNumber])
 
     return (

@@ -10,22 +10,35 @@ import {locale} from "moment";
 interface FetchPosts {
     context: any,
     metaId: string,
-    metaType: string,
     options: {
         page: string,
         setHeadData?: boolean
-    },
-
+    }
 }
 
 const fetchPosts = createAsyncThunk(
     'posts/fetchPosts',
-    async ({context, metaId, metaType, options}: FetchPosts, thunkAPI) => {
+    async ({context, metaId, options}: FetchPosts, thunkAPI) => {
         //@ts-ignore
         const {settings} = await thunkAPI.getState()
-        const singularMetaForm = convertMetasTypeToSingular(metaType);
         const gettingPostsQueries = _clientGetPostsQueryGenerator(context.query, metaId)
         const apiData = await Axios.get(`/api/v1/posts/clientGetPosts${gettingPostsQueries}`)
+        const metaType = apiData.data?.meta?.type
+        const singularMetaForm = convertMetasTypeToSingular(metaType);
+
+        // const isWrongPathWithContentQueryRegex = new RegExp('\/posts\\?content=','g')
+        // const ifIsInternalNavigated = new RegExp(`\/_next\/data\/`)
+        // console.log(ifIsInternalNavigated.test(context.req.url))
+        // console.log(context.req.url)
+
+
+        if (!!context && singularMetaForm !== options.page && options.page!== '404' && options.page!== 'posts'){
+            context.res.writeHead(301, {
+                Location: `/${singularMetaForm}/${apiData.data?.meta?._id}`
+            });
+            context.res.end();
+        }
+
         const dataForm = metaType && singularMetaForm ? `${singularMetaForm}Data` : '';
         const meta = apiData?.data?.meta
         const metaData = dataForm && meta ? {[dataForm]: meta} : {}
@@ -57,7 +70,7 @@ const fetchPosts = createAsyncThunk(
             )
 
             const canonicalUrl = _postsCanonicalUrlGenerator(
-                options?.page?.match('category|tag|actor'),
+                singularMetaForm,
                 metaId,context.locale,
                 context.req?.query?.page,
                 context.req?.query?.keyword

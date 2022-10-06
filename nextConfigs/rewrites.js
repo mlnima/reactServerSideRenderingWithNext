@@ -5,12 +5,17 @@ module.exports = () =>{
                 source: `/meta`,
                 destination: '/categories',
             },
+
+            {
+                source: `/posts`,
+                has: [{type: 'query', key: 'content'}],
+                destination: '/category/:content'
+            },
             {
                 source: `/post`,
                 destination: '/posts/old/:id',
                 has: [{type: 'query', key: 'id'}]
             },
-
             {
                 source: `/video`,
                 destination: '/posts/old/:identifier',
@@ -40,6 +45,7 @@ module.exports = () =>{
                 source: `/actors/:actorId`,
                 destination: '/actor/:actorId',
             },
+
         ],
         afterFiles: [
             {source: `/admin`, destination: '/admin', locale: false},
@@ -49,6 +55,7 @@ module.exports = () =>{
                 destination: '/post',
                 has: [{type: 'query', key: 'id'}]
             },
+
 
 
         ],
@@ -63,6 +70,11 @@ module.exports = () =>{
                 destination: '/post/:identifier',
                 has: [{type: 'query', key: 'identifier'}]
             },
+            // {
+            //     source: `/posts?content=:id`,
+            //     destination: '/categories',
+            //     // has: [{type: 'query', key: 'content'}]
+            // },
 
 
         ]

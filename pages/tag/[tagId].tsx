@@ -86,11 +86,10 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         fetchPosts({
                 context,
                 metaId: context?.query?.tagId as string,
-                metaType: 'tags',
                 options: {
                     page: 'tag',
                     setHeadData:true
-                }
+                },
             }
         ))
 
