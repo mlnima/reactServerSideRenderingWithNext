@@ -7,14 +7,7 @@ import _getMultipleWidgetWithDataQueryGenerator
 import {loading, setAlert} from "@store_toolkit/clientReducers/globalStateReducer";
 import {AxiosResponse} from "axios";
 import {Widget} from "@_typeScriptTypes/widgets/Widget";
-import footerWidgets from '../../public/asset/jsons/widgets/footer.json'
-import headerWidgets from '../../public/asset/jsons/widgets/header.json'
-import navigationWidgets from '../../public/asset/jsons/widgets/navigation.json'
-import topBarWidgets from '../../public/asset/jsons/widgets/topBar.json'
-// import topBar from "../../public/asset/jsons/widgets/topBar.json";
-// import header from "../../public/asset/jsons/widgets/header.json";
-// import navigation from "../../public/asset/jsons/widgets/navigation.json";
-// import footer from "../../public/asset/jsons/widgets/footer.json";
+
 
 interface WidgetsState {
     widgetInGroups: {
@@ -37,13 +30,7 @@ export const fetchWidgets = createAsyncThunk(
 
             return {
                 requestedWidgets: options.positions,
-                widgetInGroups: {
-                    topBar:topBarWidgets,
-                    header:headerWidgets,
-                    navigation:navigationWidgets,
-                    footer:footerWidgets,
-                    ..._reduceWidgetsToGroups([...(widgets.data?.widgets || [])])
-                }
+                widgetInGroups: _reduceWidgetsToGroups([...(widgets.data?.widgets || [])])
             }
         } catch (err) {
             console.log(err)
