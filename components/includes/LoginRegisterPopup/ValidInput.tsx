@@ -24,11 +24,9 @@ const ValidInput: FC<ValidInputPropTypes> = ({valid}) => {
             valid ?
                 <SvgRenderer svgUrl={'/public/asset/images/icons/check-solid.svg'}
                              size={25}
-                             customClassName={'show-password'}
                              color={'green'}/> :
                 <SvgRenderer svgUrl={'/public/asset/images/icons/xmark-solid.svg'}
                              size={25}
-                             customClassName={'show-password'}
                              color={'red'}/>
         }</ValidInputStyledDiv>
     );

@@ -73,7 +73,6 @@ const UploadFileBtn = props => {
 
                 <SvgRenderer svgUrl={'/public/asset/images/icons/upload-solid.svg'}
                              size={25}
-                             customClassName={'show-password'}
                              color={'var(--serachbar-widget-text-color, #fff)'}
                 />
             </button>

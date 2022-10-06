@@ -1,14 +1,12 @@
 import styled from "styled-components";
+import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
+import React from "react";
 
 const CardViewsStyledDiv = styled.div`
   font-size: 12px;
 
   .icon {
-    width: 14px;
-    height: 14px;
     margin: 0 2px;
-    background-color: var(--post-element-text-color, #ccc);
-    -webkit-mask: url('/public/asset/images/icons/eye-regular.svg') no-repeat center;
   }
 `
 
@@ -22,7 +20,11 @@ const CardViews = ({views, className}: CardViewsPropTypes) => {
         <CardViewsStyledDiv className={'card-views ' + className}>
             {!!views &&
                 <>
-                    <span className={'icon'}/>
+
+                    <SvgRenderer svgUrl={'/public/asset/images/icons/eye-regular.svg'}
+                                 size={14}
+                                 customClassName={'views'}
+                                 color={'var(--post-element-info-text-color, #ccc)'}/>
                     <span>{views}</span>
                 </>
             }

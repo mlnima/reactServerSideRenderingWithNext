@@ -83,7 +83,7 @@ const ImageGallery: FC<ImageGalleryPropTypes> = ({onChangeHandler, rendering}) =
                 <button className='image-remove-btn' onClick={() => onRemoveImageHandler()}>
                     <SvgRenderer svgUrl={'/public/asset/images/icons/xmark-solid.svg'}
                                  size={25}
-                                 customClassName={'show-password'}
+                                 customClassName={'image-remove-btn-icon'}
                                  color={'#fff'}/>
                 </button>
             </div>
@@ -134,7 +134,6 @@ const ImageGallery: FC<ImageGalleryPropTypes> = ({onChangeHandler, rendering}) =
                     <button onClick={() => onAddImageFromUrlHandler()}>
                         <SvgRenderer svgUrl={'/public/asset/images/icons/plus-solid.svg'}
                                      size={25}
-                                     customClassName={'show-password'}
                                      color={'#fff'}/>
                     </button>
                     <input ref={uploadInputElement} type="file" style={{display: 'none'}}

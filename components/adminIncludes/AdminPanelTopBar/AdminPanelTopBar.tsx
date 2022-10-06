@@ -85,7 +85,7 @@ const AdminTopBar: FC = () => {
 
                              <SvgRenderer svgUrl={'/public/asset/images/icons/bars-solid.svg'}
                                           size={25}
-                                          customClassName={'show-password'}
+                                          customClassName={'adminTopBarItem-icon'}
                                           color={'var(--serachbar-widget-text-color, #fff)'}
                              />
                     </span>
@@ -93,7 +93,7 @@ const AdminTopBar: FC = () => {
                     <a className={'adminTopBarItem'}>
                         <SvgRenderer svgUrl={'/public/asset/images/icons/home-solid.svg'}
                                      size={25}
-                                     customClassName={'show-password'}
+                                     customClassName={'adminTopBarItem-icon'}
                                      color={'var(--serachbar-widget-text-color, #fff)'}
                         />
                     </a>

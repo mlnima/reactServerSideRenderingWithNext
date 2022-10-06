@@ -144,7 +144,6 @@ const Searchbar = () => {
 
                 <SvgRenderer svgUrl={'/public/asset/images/icons/magnifying-glass-solid.svg'}
                              size={25}
-                             customClassName={'show-password'}
                              color={'var(--serachbar-widget-text-color, #fff)'}/>
 
             </button>
@@ -156,7 +155,7 @@ const Searchbar = () => {
                         onClick={e => onCloseForm(e)}>
                     <SvgRenderer svgUrl={'/public/asset/images/icons/xmark-solid.svg'}
                                  size={25}
-                                 customClassName={'show-password'}
+                                 customClassName={'search-button-widget-close-btn-icon'}
                                  color={'var(--serachbar-widget-text-color, #fff)'}/>
                 </span>
 
@@ -166,7 +165,7 @@ const Searchbar = () => {
                         onClick={e => onClearHandler(e)}>
                     <SvgRenderer svgUrl={'/public/asset/images/icons/xmark-solid.svg'}
                                  size={25}
-                                 customClassName={'show-password'}
+                                 customClassName={'search-button-widget-clear-keyword-icon'}
                                  color={'var(--serachbar-widget-text-color, #fff)'}/>
                 </span>}
                 <input type="text"
@@ -181,7 +180,7 @@ const Searchbar = () => {
                 >
                     <SvgRenderer svgUrl={'/public/asset/images/icons/magnifying-glass-solid.svg'}
                                  size={25}
-                                 customClassName={'show-password'}
+                                 customClassName={'searchbar-submit-btn-icon'}
                                  color={'var(--serachbar-widget-text-color, #fff)'}/>
                 </button>
 

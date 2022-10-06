@@ -223,7 +223,7 @@ const AdminPanelMainMenu = () => {
                         >
                             <SvgRenderer svgUrl={'/public/asset/images/icons/sort-down-solid.svg'}
                                          size={25}
-                                         customClassName={'show-password'}
+                                         customClassName={'sidebar-items-switch-icon'}
                                          customStyle={
                                              `transform:${ hovered === item ? `rotate(-90deg);` : `rotate(0deg);`}`
                                          }

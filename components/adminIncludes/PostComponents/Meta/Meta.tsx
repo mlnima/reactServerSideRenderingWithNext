@@ -88,7 +88,7 @@ const Meta:FC<MetaPropType> = props => {
                 {item?.name}
                 <SvgRenderer svgUrl={'/public/asset/images/icons/xmark-solid.svg'}
                              size={16}
-                             customClassName={'show-password'}
+                             customClassName={'meta-icon'}
                              color={'#fff'}/>
             </button>
         )
@@ -102,7 +102,7 @@ const Meta:FC<MetaPropType> = props => {
                 <button className={'btn btn-success'} type='submit'>
                     <SvgRenderer svgUrl={'/public/asset/images/icons/plus-solid.svg'}
                                  size={16}
-                                 customClassName={'show-password'}
+                                 customClassName={'add-new-meta-icon'}
                                  color={'#fff'}/>
                 </button>
             </form>

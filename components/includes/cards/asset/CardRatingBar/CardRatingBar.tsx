@@ -10,48 +10,53 @@ const CardRatingStyle = styled.div`
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  
-  .rating-value-number {
-    color: var(--post-element-text-color, #ccc);
+  .fill-bar{
+    position: absolute;
+    width: ${({rating}:{rating:number})=>rating}%;
+    background-color: var(--main-secondary-color,#6c757d);
+    left: 0;
+    top: 0;
+    bottom: 0;
+    opacity: 20%;
+  }
+  .rating-value-number,.icon {
+    text-shadow: 1px 1px 5px #000,-1px -1px 5px #000;
+    z-index: 2;
   }
 
+  .rating-value-number{
+    color: var(--post-element-text-color, #ccc);
+    
+  }
   .icon {
-    width: 11px;
-    height: 11px;
     margin: 0 2px;
-    background-color: var(--post-element-text-color, #ccc);
-    mask: url('/public/asset/images/icons/thumbs-up-solid.svg') no-repeat center;
-    -webkit-mask: url('/public/asset/images/icons/thumbs-up-solid.svg') no-repeat center;
   }
 `
 
-import {FC} from "react";
+import React, {FC} from "react";
+import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 
 interface CardRatingBarPropTypes {
     rating: number,
     className: string
 }
 
-// .fill-bar{
-//   position: absolute;
-//   width: ${({rating}:{rating:number})=>rating}%;
-//   background-color: var(--scondary-main-color,#f90);
-//   left: 0;
-//   top: 0;
-//   bottom: 0;
-// }
+
 
 const CardRatingBar: FC<CardRatingBarPropTypes> = ({rating, className}) => {
     return (
-        <CardRatingStyle className={'card-rating-bar ' + className}>
-            {/*<div className={'fill-bar'}/>*/}
+        <CardRatingStyle className={'card-rating-bar ' + className} rating={rating}>
+            <div className={'fill-bar'}/>
             {!!rating &&
                 <>
-                    <span className={'icon'}/>
+                    <SvgRenderer svgUrl={'/public/asset/images/icons/thumbs-up-solid.svg'}
+                                 size={11}
+                                 customClassName={'rating'}
+                                 color={'var(--post-element-info-text-color, #ccc)'}/>
                     <span className={'rating-value-number'}>{rating}%</span>
                 </>
             }
-
+            <div className={'fill-bar'}/>
         </CardRatingStyle>
     )
 };
