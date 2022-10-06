@@ -1,11 +1,15 @@
 //adminCommandExecutor
+import path from "path";
+
 const {Worker, isMainThread,parentPort} = require('worker_threads');
 
 const adminCommandExecutor = async (req, res) => {
     const command = req.body.command;
     try {
+        const workerPath = path.join(__dirname,'../../../workers/commandExecutor/worker.js') ;
+
         const worker = new Worker(
-            './expressServer/workers/commandExecutor.js',
+            workerPath,
             {workerData:{command}}
         )
 

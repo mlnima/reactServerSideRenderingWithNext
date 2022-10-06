@@ -1,8 +1,8 @@
 import dotenv from 'dotenv';
-import connectToDatabase from '../_variables/connectToDatabase';
+import connectToDatabase from '../../_variables/connectToDatabase';
 import {parentPort, workerData} from 'worker_threads';
-import metaSchema from '../models/metaSchema';
-import postSchema from '../models/postSchema';
+import metaSchema from '../../models/metaSchema';
+import postSchema from '../../models/postSchema';
 import mongoose from 'mongoose';
 
 dotenv.config();
@@ -12,7 +12,7 @@ const randomNumberGenerator = (min, max) => {
     return Math.ceil(Math.random() * (max - min) + min);
 }
 
-const setMetaThumbnailsAndCount = async (workerData) => {
+const worker = async (workerData) => {
     try {
         const excludesPostFromSources = process.env.EXCLUDE_POSTS_SOURCE ? process.env.EXCLUDE_POSTS_SOURCE.split(' ') : [];
 
@@ -96,7 +96,7 @@ const setMetaThumbnailsAndCount = async (workerData) => {
     return null
 }
 
-setMetaThumbnailsAndCount(workerData).then(res => {
+worker(workerData).then(res => {
     parentPort.postMessage(res)
     process.exit(0);
 })

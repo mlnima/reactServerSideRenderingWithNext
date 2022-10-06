@@ -37,7 +37,11 @@ const fetchPosts = createAsyncThunk(
                     `${options.page}PageTitle`,
                     settings?.identity
                 ),
-                {name: apiData.data?.meta?.name, siteName: settings?.identity?.siteName || ''}
+                {
+                    name: apiData.data?.meta?.name,
+                    siteName: settings?.identity?.siteName || '',
+                    count:apiData.data?.meta?.count
+                }
             )
 
             const description = textContentReplacer(
@@ -45,7 +49,11 @@ const fetchPosts = createAsyncThunk(
                     context.locale,
                     `${options.page}PageDescription`,
                     settings?.identity
-                ), {name: apiData.data?.meta?.name}
+                ), {
+                    name: apiData.data?.meta?.name,
+                    siteName: settings?.identity?.siteName || '',
+                    count:apiData.data?.meta?.count
+                }
             )
 
             const canonicalUrl = _postsCanonicalUrlGenerator(

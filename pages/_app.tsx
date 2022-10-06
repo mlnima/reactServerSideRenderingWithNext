@@ -33,9 +33,9 @@ const MyApp: FC<AppProps> = ({Component, ...rest}) => {
 
     return (
         <Provider store={store}>
-            <ActiveLayout>
-               <Component {...props.pageProps} />
-            </ActiveLayout>
+                <ActiveLayout>
+                   <Component {...props.pageProps} />
+                </ActiveLayout>
         </Provider>
     )
 

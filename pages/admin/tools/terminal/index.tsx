@@ -76,7 +76,7 @@ const terminal = () => {
 
     const onExecutorHandler = (e, command) => {
         e.preventDefault()
-        dispatch(loading(true))
+        // dispatch(loading(true))
         dispatch(terminalCommandExecutor(command))
         setTimeout(() => {
             animateScroll.scrollToBottom({containerId: 'terminalLog'})

@@ -3,6 +3,7 @@ import {FC} from "react";
 
 const CardRatingStyledDiv = styled.div`
   font-size: 12px;
+
   .icon {
     width: 11px;
     height: 11px;

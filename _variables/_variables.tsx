@@ -44,11 +44,11 @@ export const onChangeInputValueCorrector = (e:any) =>{
 export const textContentReplacer = (textString,replaces)=>{
     try {
         return  textString.replaceAll('__NAME',replaces?.name || '')
-            .replaceAll('__SITE_NAME',replaces?.siteName || '')
+                .replaceAll('__SITE_NAME',replaces?.siteName || '')
+                .replaceAll('__COUNT', replaces?.count || '')
     }catch (err){
         return textString
     }
-
 }
 
 

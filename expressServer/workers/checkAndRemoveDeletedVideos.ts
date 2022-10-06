@@ -5,7 +5,7 @@ import metaSchema from '../models/metaSchema';
 import postSchema from '../models/postSchema';
 import axios from 'axios';
 dotenv.config();
-connectToDatabase().finally();
+connectToDatabase()
 
 const checkAndRemoveDeletedVideos = async ()=>{
     try {

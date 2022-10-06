@@ -7,10 +7,26 @@ import {useAppSelector} from "@store_toolkit/hooks";
 import mongoIdValidator from "@_variables/util/mongoIdValidatorClient";
 import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
 import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
+import postTypes from "@_dataStructures/postTypes";
+
+const overrideCrumbWithQueryName =  (name : string)=>{
+
+    const matchPaths = postTypes.reduce((finalMatches,currentPostType)=>{
+        finalMatches[`${currentPostType}s`] = new RegExp(`posts\\?postType=${currentPostType}`,'g')
+        return finalMatches
+    },{})
+
+    for (const matchPath in matchPaths){
+        if (matchPaths[matchPath].test(name)){
+            return matchPath
+        }
+    }
+    return name
+}
 
 const BreadcrumbGenerator = ({}) => {
 
-    const {asPath} = useRouter();
+    const {asPath,query} = useRouter();
     const {t} = useTranslation();
     const currentPageTitle = useAppSelector(({globalState}) => globalState.headData?.title)
 
@@ -58,7 +74,8 @@ const BreadcrumbGenerator = ({}) => {
                                              customClassName={'breadcrumb-item-arrow-icon'}
                                              color={'var(--navigation-text-color, #ccc)'}/>
                                 {mongoIdValidator(breadcrumb.breadcrumb) ?
-                                    currentPageTitle : t(capitalizeFirstLetter(breadcrumb.breadcrumb))}
+                                    currentPageTitle : t(  capitalizeFirstLetter(overrideCrumbWithQueryName(breadcrumb.breadcrumb)))}
+                                {query.page && ` ${query.page}` }
                             </a>
                         </Link>
                     </div>

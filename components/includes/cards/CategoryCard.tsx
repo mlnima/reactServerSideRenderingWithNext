@@ -6,6 +6,8 @@ import {useRouter} from "next/router";
 import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
 import dynamic from "next/dynamic";
 import CardTitle from "@components/includes/cards/asset/CardTitle/CardTitle";
+// import AdminThumbnailToRandomImageFromPostsButton
+//     from "@components/includes/cards/asset/adminThumbnailToRandomImageFromPostsButton/AdminThumbnailToRandomImageFromPostsButton";
 const TextToCanvasImage = dynamic(() => import('@components/includes/cards/asset/TextToCanvasImage/TextToCanvasImage'))
 const CardImageRenderer = dynamic(() => import('@components/includes/cards/CardImageRenderer'))
 
@@ -13,13 +15,20 @@ const CategoryCardStyle = styled.article`
   background-color: var(--post-element-background-color, #131314);
   width: 100%;
   margin: 0 auto;
-
+  
   .category-card-link {
+    position: relative;
     color: var(--post-element-text-color, #ccc);
     .entry-header{
+      position: absolute;
+      top:35%;
       width: 100%;
       margin: 5px 0;
       text-align: center;
+      text-shadow: 2px 2px 5px #000 ,-2px -2px 5px #000 ;
+      font-weight: bold;
+      font-size: 22px;
+   
     }
   }
 
@@ -54,8 +63,11 @@ const CategoryCard: FC<CategoryCardPropTypes> =
 
         return (
             <CategoryCardStyle cardWidth={cardWidth} className={'category-card'}>
+
                 <Link href={`/category/${meta?._id}`}>
+
                     <a className='category-card-link' title={title as string}>
+
                         {!!meta.imageUrl ?
                             <CardImageRenderer imageUrl={meta.imageUrl}
                                                mediaAlt={title}
@@ -67,8 +79,12 @@ const CategoryCard: FC<CategoryCardPropTypes> =
                                                cardWidth={cardWidth}/>
                         }
                         <CardTitle title={title}/>
+
+
                     </a>
+
                 </Link>
+                {/*<AdminThumbnailToRandomImageFromPostsButton/>*/}
             </CategoryCardStyle>
         )
     };

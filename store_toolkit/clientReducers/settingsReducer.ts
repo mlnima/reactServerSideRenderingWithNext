@@ -1,8 +1,10 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "@store_toolkit/store";
-import Axios from "@_variables/util/Axios";
+// import Axios from "@_variables/util/Axios";
 import {setHeadData} from "@store_toolkit/clientReducers/globalStateReducer";
 import _firstRequestHeadDataSetter from "@store_toolkit/_storeVariables/_firstRequestHeadDataSetter";
+import designSetting from '../../public/asset/jsons/settings/design.json'
+import identitySetting from '../../public/asset/jsons/settings/identity.json'
 
 interface SettingsStateRaw {
     ip?: string,
@@ -41,12 +43,10 @@ export const fetchSettings = createAsyncThunk(
         thunkAPI) => {
 
         try {
-            const settingsQuery = config.requireSettings.map((setting) => `setting=${setting}`).join('&')
-            const fetchedSettings = await Axios.get(`/api/v1/settings/getMultipleSettings?${settingsQuery}`)
-            const designData = fetchedSettings.data.settings?.find(setting => setting.type === 'design')
-            const identityData = fetchedSettings.data.settings?.find(setting => setting.type === 'identity')
-
-
+            // const settingsQuery = config.requireSettings.map((setting) => `setting=${setting}`).join('&')
+            // const fetchedSettings = await Axios.get(`/api/v1/settings/getMultipleSettings?${settingsQuery}`)
+            // const designData = fetchedSettings.data.settings?.find(setting => setting.type === 'design')
+            // const identityData = fetchedSettings.data.settings?.find(setting => setting.type === 'identity')
 
             thunkAPI.dispatch(
                 setHeadData(
@@ -54,17 +54,23 @@ export const fetchSettings = createAsyncThunk(
                         config.context,
                         config.options?.page,
                         config.options?.setHeadData,
-                        identityData.data
+                        identitySetting
                     )
                 )
             )
 
             return {
                 requestedSettings: config.requireSettings,
-                design: designData?.data || {},
-                identity: identityData.data || {},
+                design: designSetting || {},
+                identity: identitySetting || {},
                 isSettingSet:true,
             }
+            // return {
+            //     requestedSettings: config.requireSettings,
+            //     design: designData?.data || {},
+            //     identity: identityData.data || {},
+            //     isSettingSet:true,
+            // }
         } catch (err) {
             console.log(err)
         }

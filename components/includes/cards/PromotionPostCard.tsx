@@ -36,6 +36,7 @@ const PromotionPostCardStyle = styled.article`
   background-color: var(--post-element-background-color, #131314);
   margin: 0 auto;
   width: 100%;
+
   .card-under-media-info {
     font-size: 14px;
     display: flex;
@@ -58,13 +59,13 @@ const PromotionPostCardStyle = styled.article`
       }
     }
   }
-  
+
   .read-more-btn {
     width: 100%;
     margin: auto;
     box-sizing: border-box;
   }
-  
+
   .last-update {
     font-size: 9px;
     margin: 4px;
@@ -109,22 +110,19 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
 
                 <Link href={postUrl}>
                     <a className={'card-link'} title={title}>
+                     <span className={'btn btn-transparent read-more-btn'}>
+                            <div className={'card-under-media-info'}>
+                                {!!views &&
+                                <CardViews views={views} className={'card-views card-under-media-info-data'}/>
+                                }
+                                {/*<InfoIcon/>*/}
+                                {!!rating &&
+                                <CardRating rating={rating} className={'card-rating card-under-media-info-data'}/>
+                                }
 
-                        <CardTitle title={title}/>
+                            </div>
 
-                        <div className={'card-under-media-info'}>
-                            {!!views &&
-                            <CardViews views={views} className={'card-views card-under-media-info-data'}/>
-                            }
-                            {/*<InfoIcon/>*/}
-                            {!!rating &&
-                            <CardRating rating={rating} className={'card-rating card-under-media-info-data'}/>
-                            }
-
-                        </div>
-
-                        <span className={'btn btn-secondary read-more-btn'}>
-                            {t('common:Read More', {}, {fallback: 'Read More'})}
+                            <CardTitle title={title}/>
                         </span>
                     </a>
                 </Link>

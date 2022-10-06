@@ -1,12 +1,12 @@
 import dotenv from 'dotenv';
-import connectToDatabase from '../_variables/connectToDatabase';
+import connectToDatabase from '../../_variables/connectToDatabase';
 import {parentPort} from 'worker_threads';
-import postSchema from '../models/postSchema';
+import postSchema from '../../models/postSchema';
 
 dotenv.config();
-connectToDatabase('setMetaThumbnailsAndCount :').finally();
+connectToDatabase('generatePermaLink :').finally();
 
-const generatePermaLink = async () => {
+const worker = async () => {
 
     try {
         await postSchema.syncIndexes()
@@ -34,7 +34,7 @@ const generatePermaLink = async () => {
 }
 
 
-generatePermaLink().then(() => {
+worker().then(() => {
     parentPort.on('message', (data) => {
         console.log('message from main process:', data)
         if (data.exit) {

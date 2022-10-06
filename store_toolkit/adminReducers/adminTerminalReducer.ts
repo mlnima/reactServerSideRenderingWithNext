@@ -19,7 +19,7 @@ export const terminalCommandExecutor = createAsyncThunk(
             command,
             token: localStorage.wt
         };
-        return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/terminal/commandExecutor', body)
+        return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/terminal/command', body)
             .then((res: AxiosResponse<any>)=>{
                 return   {
                     result:res.data.response,

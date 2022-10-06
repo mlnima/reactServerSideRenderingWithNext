@@ -1,7 +1,7 @@
 import {parentPort, workerData} from 'worker_threads';
 import shell from 'shelljs';
 
-const commandExecutor = async (workerData) => {
+const worker = async (workerData) => {
     const command = workerData.command
     try {
         if (command && command.includes(' ; ')) {
@@ -22,6 +22,6 @@ const commandExecutor = async (workerData) => {
     }
 }
 
-commandExecutor(workerData).then(result=>{
+worker(workerData).then(result=>{
     parentPort.postMessage(result)
 })

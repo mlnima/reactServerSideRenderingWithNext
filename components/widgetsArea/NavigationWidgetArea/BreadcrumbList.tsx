@@ -7,19 +7,20 @@ import {Store} from "@_typeScriptTypes/storeTypes/Store";
 const Style = styled.div`
   background-color: var(--navigation-background-color, #000);
   display: flex;
-  flex-wrap: wrap;
+  //flex-wrap: wrap;
   padding: 5px;
   box-sizing: border-box;
   justify-content: flex-start;
   align-items: center;
-
+  max-width: 100vw;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow: ellipsis;
   div {
     display: flex;
     align-items: center;
     font-size: small;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+
 
     .breadcrumb-item-link {
       display: flex;

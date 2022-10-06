@@ -25,6 +25,6 @@
   },
   "include": [
     "expressServer",
-    "expressServer/workers"
+    "expressServer/workers",
   ]
 }

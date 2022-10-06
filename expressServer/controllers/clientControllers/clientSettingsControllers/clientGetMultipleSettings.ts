@@ -19,4 +19,4 @@ const clientGetMultipleSettings = async (req, res) => {
     }
 };
 
-export default clientGetMultipleSettings
+export default clientGetMultipleSettings;

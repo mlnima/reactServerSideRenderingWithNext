@@ -4,7 +4,7 @@ const adminGeneratePermaLinkForPosts = async (req, res) => {
     res.end()
     if (isMainThread) {
         const worker = new Worker(
-            './expressServer/workers/generatePermaLink.ts',
+            './expressServer/workers/generatePermaLink.js',
             {workerData: {}}
         )
 

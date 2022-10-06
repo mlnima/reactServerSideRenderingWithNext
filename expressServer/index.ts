@@ -2,6 +2,8 @@ import dotenv from 'dotenv';
 dotenv.config();
 import connectToDatabase from './_variables/connectToDatabase';
 connectToDatabase('Express Server')
+import {writeStaticDataToJson} from "./_variables/clientVariables/writeStaticDataToJsonOnServerStart";
+writeStaticDataToJson()
 
 import express from 'express';
 import next from 'next';
@@ -20,13 +22,13 @@ import adminMainRouter from './controllers/adminControllers/adminMainRouter';
 import clientMainRouter from './controllers/clientControllers/clientMainRouter';
 import clientMainFestController from './controllers/clientControllers/clientMainFestController'
 import clientRobotTxtController from './controllers/clientControllers/clientRobotTxtController'
-
-
 import rootSitemap from "./controllers/sitemapControllers/rootSiteMap";
 import  {monthSitemapController} from "./controllers/sitemapControllers/siteMapsController";
 import {categories,tags,actors} from './controllers/sitemapControllers/metaSitemapController'
 import pageSitemapController from './controllers/sitemapControllers/pageSitemapController'
 import {searchSitemapController} from './controllers/sitemapControllers/searchSitemapController'
+import loggerMiddleware from "./middlewares/loggerMiddleware";
+
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({dev});
@@ -78,7 +80,7 @@ const runServer = () => {
 
     //api routes
     server.use('/api/admin', adminMainRouter);
-    server.use('/api/v1', clientMainRouter);
+    server.use('/api/v1',loggerMiddleware, clientMainRouter);
 
     //rest of the routes
 

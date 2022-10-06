@@ -151,24 +151,24 @@ const Searchbar = () => {
 
             <form className={'searchbar-form'} onSubmit={e => onSearchHandler(e)}>
 
-                <button className='btn search-button-widget-close-btn'
+                <span className='btn search-button-widget-close-btn'
                         title={t('common:Close',{},{fallback:'Close'})}
                         onClick={e => onCloseForm(e)}>
                     <SvgRenderer svgUrl={'/public/asset/images/icons/xmark-solid.svg'}
                                  size={25}
                                  customClassName={'show-password'}
                                  color={'var(--serachbar-widget-text-color, #fff)'}/>
-                </button>
+                </span>
 
                 {!!keyword?.length &&
-                <button className='btn search-button-widget-clear-keyword'
+                <span className='btn search-button-widget-clear-keyword'
                         title={t('common:Clear',{},{fallback:'Clear'})}
                         onClick={e => onClearHandler(e)}>
                     <SvgRenderer svgUrl={'/public/asset/images/icons/xmark-solid.svg'}
                                  size={25}
                                  customClassName={'show-password'}
                                  color={'var(--serachbar-widget-text-color, #fff)'}/>
-                </button>}
+                </span>}
                 <input type="text"
                        onChange={e => setKeyword(e.target.value)}
                        name='keyword' value={keyword || ''}

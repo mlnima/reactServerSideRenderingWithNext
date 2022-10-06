@@ -9,7 +9,6 @@ import SidebarWidgetAreaRenderer from "@components/widgetsArea/SidebarWidgetArea
 import fetchPosts from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPosts";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
-import getAppLayout from "@components/layouts/getAppLayout";
 
 const WidgetsRenderer = dynamic(() => import('@components/includes/WidgetsRenderer/WidgetsRenderer'))
 
@@ -73,19 +72,6 @@ const categoryPage = () => {
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-
-    await store.dispatch(
-        fetchPosts({
-                context,
-                metaId: context?.query?.categoryId as string,
-                metaType: 'categories',
-                options: {
-                    page: 'category',
-                    setHeadData:true
-                }
-            }
-        ))
-
     await _getServerSideStaticPageData(
         context,
         [
@@ -101,39 +87,22 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         store
     )
 
+    await store.dispatch(
+        fetchPosts({
+                context,
+                metaId: context?.query?.categoryId as string,
+                metaType: 'categories',
+                options: {
+                    page: 'category',
+                    setHeadData:true
+                }
+            }
+        ))
 
 
     return null
 });
 
 
-// export async function getServerSideProps(context) {
-//     return {
-//         props: {}, // will be passed to the page component as props
-//     }
-// }
-
-
-
-
-
-// categoryPage.getLayout = function getLayout(page: ReactElement) {
-//     return (
-//         <AppLayout>
-//             {page}
-//         </AppLayout>
-//     )
-// }
-
-// categoryPage.getLayout = page=> getAppLayout(page)
-
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         addCount: fetchPosts(addCount, dispatch),
-//         startClock: bindActionCreators(startClock, dispatch),
-//     }
-// }
-
 export default categoryPage;
 
-// export default connect(null, mapDispatchToProps)(categoryPage)

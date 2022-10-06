@@ -1,11 +1,18 @@
 import {Worker, isMainThread,parentPort} from 'worker_threads';
+import path from 'path';
+
 
 const adminSetMetaThumbnailsAndCount = async (req,res) =>{
     res.end()
     if (isMainThread){
+        const workerPath = path.join(__dirname,'../../../workers/setMetaThumbnailsAndCount/worker.js') ;
         const worker = new Worker(
-            './expressServer/workers/setMetaThumbnailsAndCount.js',
-            {workerData:{type:req.query.type}}
+            workerPath,
+            {
+                workerData:{
+                    type:req.query.type
+                }
+            }
         )
 
         worker.once('message',() =>{

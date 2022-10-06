@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import connectToDatabase from '../_variables/connectToDatabase';
-connectToDatabase().finally()
+connectToDatabase()
 const {Worker, parentPort, workerData} = require('worker_threads');
 const sharp = require('sharp');
 const postSchema = require("../models/postSchema");

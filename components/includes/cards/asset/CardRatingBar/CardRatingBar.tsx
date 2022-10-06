@@ -9,15 +9,8 @@ const CardRatingStyle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #333;
-  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 70%);
-  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 70%);
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 70%);
-  -moz-box-shadow: inset 0 0 2px 0 #000000;
-  -webkit-box-shadow: inset 0 0 2px 0 #000000;
-  -o-box-shadow: inset 0 0 2px 0 #000000;
-  box-shadow: inset 0 0 2px 0 #000000;
-
+  box-sizing: border-box;
+  
   .rating-value-number {
     color: var(--post-element-text-color, #ccc);
   }
@@ -39,10 +32,19 @@ interface CardRatingBarPropTypes {
     className: string
 }
 
+// .fill-bar{
+//   position: absolute;
+//   width: ${({rating}:{rating:number})=>rating}%;
+//   background-color: var(--scondary-main-color,#f90);
+//   left: 0;
+//   top: 0;
+//   bottom: 0;
+// }
+
 const CardRatingBar: FC<CardRatingBarPropTypes> = ({rating, className}) => {
     return (
         <CardRatingStyle className={'card-rating-bar ' + className}>
-
+            {/*<div className={'fill-bar'}/>*/}
             {!!rating &&
                 <>
                     <span className={'icon'}/>
