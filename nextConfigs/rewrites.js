@@ -2,10 +2,15 @@ module.exports = () =>{
     return {
         beforeFiles: [
             {
+                source: `/meta`,
+                destination: '/categories',
+            },
+            {
                 source: `/post`,
                 destination: '/posts/old/:id',
                 has: [{type: 'query', key: 'id'}]
             },
+
             {
                 source: `/video`,
                 destination: '/posts/old/:identifier',
@@ -44,6 +49,8 @@ module.exports = () =>{
                 destination: '/post',
                 has: [{type: 'query', key: 'id'}]
             },
+
+
         ],
         fallback: [
             {
@@ -51,6 +58,13 @@ module.exports = () =>{
                 destination: '/post/undefinedType/:identifier',
                 // has: [{type: 'query', key: 'title'}]
             },
+            {
+                source: `/post/:title`,
+                destination: '/post/:identifier',
+                has: [{type: 'query', key: 'identifier'}]
+            },
+
+
         ]
     }
 }

@@ -9,6 +9,7 @@
     "expressServer/**/*",
     "./expressServer/*",
     "./public/locales/*",
+    "./nextConfigs/*",
     "./server.ts",
     "./next.config.js",
     "./.swcrc",

@@ -137,7 +137,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             options: {
                 page: 'postPage'
             },
-            identifier: context?.query?.identifier as string,
+            identifier: context?.query?.id as string || context?.query?.identifier as string,
             locale: context.locale
         })
     )
