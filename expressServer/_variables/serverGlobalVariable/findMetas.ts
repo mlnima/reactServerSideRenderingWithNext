@@ -15,7 +15,7 @@ export const findMetas = async (query:FindMetasQueryTypes)=>{
         // @ts-ignore
         const identitySetting:{data:IdentitySettings} = query?.page ? await settingSchema.findOne({type: 'identity'}).exec() : {}
         const statusQuery = {status: 'published'};
-        const type = {type: query.metaType}
+        const type = {type: query?.metaType}
         const notStartWithNumberRegex = /^(?![0-9].*$).*/g
         const startWithQuery = !query.startWith  ? {name: {$regex: notStartWithNumberRegex}} :  {name: {$regex: '^' + query.startWith}}
         const countQuery =  {count: {$gt: 0}}
@@ -37,7 +37,7 @@ export const findMetas = async (query:FindMetasQueryTypes)=>{
             {sort: sortQuery})
             .limit(limit || (query?.startWith ? 0 : 1000))
             .skip(skip)
-            .select( query.metaType ==='tags' ? 'name type' : 'name type imageUrl')
+            .select( query?.metaType ==='tags' ? 'name type' : 'name type imageUrl')
             .exec()
 
         return{

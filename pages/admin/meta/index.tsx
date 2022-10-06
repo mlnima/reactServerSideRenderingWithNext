@@ -87,11 +87,11 @@ const meta = (props: any) => {
     const [deleteButton, setDeleteButton] = useState(false)
 
     useEffect(() => {
-        if (router.query.new && router.query.metaType) {
+        if (router.query.new && router.query?.metaType) {
             dispatch(adminEditMeta({
                 // @ts-ignore
                 name: '',
-                type: router.query.metaType,
+                type: router.query?.metaType,
                 description: '',
                 imageUrl: '',
                 imageUrlLock: false,

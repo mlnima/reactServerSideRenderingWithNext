@@ -51,5 +51,6 @@ const BreadcrumbList = () => {
         </Style>
     )
 };
+
 export default memo(BreadcrumbList)
 

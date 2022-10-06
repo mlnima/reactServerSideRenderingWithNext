@@ -2,8 +2,8 @@ import dotenv from 'dotenv';
 dotenv.config();
 import connectToDatabase from './_variables/connectToDatabase';
 connectToDatabase('Express Server')
-import {writeStaticDataToJson} from "./_variables/clientVariables/writeStaticDataToJsonOnServerStart";
-writeStaticDataToJson()
+// import {writeStaticDataToJson} from "./_variables/clientVariables/writeStaticDataToJsonOnServerStart";
+// writeStaticDataToJson()
 
 import express from 'express';
 import next from 'next';

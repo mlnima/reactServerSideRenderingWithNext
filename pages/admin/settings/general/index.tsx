@@ -45,7 +45,7 @@ let StyledForm = styled.form`
 
   .site-settings-form-section-parent {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     grid-gap: 10px;
 
     .site-settings-form-section {
@@ -58,9 +58,7 @@ let StyledForm = styled.form`
         width: 90%;
       }
 
-      textarea{
-        height: 250px;
-      }
+   
 
       .items {
         display: flex;
@@ -259,20 +257,20 @@ const settings = () => {
 
 
                 <div className="siteIdentity site-settings-form-section-parent">
-                    <div className={'site-settings-form-section'}>
-                        <p>Site Title:</p>
-                        <input className={'form-control-input'} type='text' name='title' value={
-                            editingSettings.activeEditingLanguage === 'default' ? identity.title :
-                                identity.translations?.[editingSettings.activeEditingLanguage]?.title || ""
-                        } onChange={e => onChangeHandlerWithTranslate(e)}/>
+                    {/*<div className={'site-settings-form-section'}>*/}
+                    {/*    <p>Site Title:</p>*/}
+                    {/*    <input className={'form-control-input'} type='text' name='title' value={*/}
+                    {/*        editingSettings.activeEditingLanguage === 'default' ? identity.title :*/}
+                    {/*            identity.translations?.[editingSettings.activeEditingLanguage]?.title || ""*/}
+                    {/*    } onChange={e => onChangeHandlerWithTranslate(e)}/>*/}
 
-                        <p>Site Description:</p>
-                        <textarea className={'form-control-input'} name='description' value={
-                            editingSettings.activeEditingLanguage === 'default' ? identity.description :
-                                identity.translations?.[editingSettings.activeEditingLanguage]?.description || ""
-                        } onChange={e => onChangeHandlerWithTranslate(e)}/>
+                    {/*    <p>Site Description:</p>*/}
+                    {/*    <textarea className={'form-control-input'} name='description' value={*/}
+                    {/*        editingSettings.activeEditingLanguage === 'default' ? identity.description :*/}
+                    {/*            identity.translations?.[editingSettings.activeEditingLanguage]?.description || ""*/}
+                    {/*    } onChange={e => onChangeHandlerWithTranslate(e)}/>*/}
 
-                    </div>
+                    {/*</div>*/}
 
                     {/*<div className={'site-settings-form-section'}>*/}
                     {/*    <p>Categories Page Title:</p>*/}

@@ -9,7 +9,7 @@ import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
 import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 import postTypes from "@_dataStructures/postTypes";
 
-const overrideCrumbWithQueryName =  (name : string)=>{
+const overrideCrumbWithQueryName =  (name : string,asPath:string)=>{
 
     const matchPaths = postTypes.reduce((finalMatches,currentPostType)=>{
         finalMatches[`${currentPostType}s`] = new RegExp(`posts\\?postType=${currentPostType}`,'g')
@@ -20,6 +20,14 @@ const overrideCrumbWithQueryName =  (name : string)=>{
         if (matchPaths[matchPath].test(name)){
             return matchPath
         }
+    }
+
+    const ifIsSearchPageRegex = new RegExp(/\/search\/(.*?)\\?page=/g)
+    if (ifIsSearchPageRegex.test(asPath) && name !== 'search'){
+       // const keyword = new RegExp(/\/search\/(.*?)\\?page=/g)
+        const keywordRegex = new RegExp(/(?<=\/search\/\s*).*?(?=\s*\\?page=)/gs)
+        const keyword = asPath.match(keywordRegex)?.[0]?.replace('?','')
+        return keyword
     }
     return name
 }
@@ -65,6 +73,7 @@ const BreadcrumbGenerator = ({}) => {
                 </Link>
             </div>
             {!!breadcrumbs.length && breadcrumbs.map((breadcrumb, index) => {
+                const crumbName = overrideCrumbWithQueryName(breadcrumb.breadcrumb,asPath)
                 return (
                     <div key={index} className={'breadcrumb-item'}>
                         <Link href={_breadcrumbLinkCorrector(breadcrumb.href)} key={index}>
@@ -74,8 +83,8 @@ const BreadcrumbGenerator = ({}) => {
                                              customClassName={'breadcrumb-item-arrow-icon'}
                                              color={'var(--navigation-text-color, #ccc)'}/>
                                 {mongoIdValidator(breadcrumb.breadcrumb) ?
-                                    currentPageTitle : t(  capitalizeFirstLetter(overrideCrumbWithQueryName(breadcrumb.breadcrumb)))}
-                                {query.page && ` ${query.page}` }
+                                    currentPageTitle : t(  capitalizeFirstLetter(crumbName))}
+                                {query.page && crumbName!== 'search' ?  ` ${query.page}` : null }
                             </a>
                         </Link>
                     </div>
@@ -86,9 +95,6 @@ const BreadcrumbGenerator = ({}) => {
         </>
     )
 };
-
-
-// Breadcrumbs.defaultProps = defaultProps;
 
 export default BreadcrumbGenerator;
 

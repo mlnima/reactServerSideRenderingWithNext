@@ -4,7 +4,7 @@ import metaSchema from '../../../models/metaSchema';
 const adminGetMetas = async (req, res) => {
     try {
         const identitySetting = await settingSchema.findOne({type:'identity'}).exec()
-        const type = {type: req.query.metaType}
+        const type = {type: req.query?.metaType}
 
         const size = req.query.size === 'undefined' ? identitySetting?.data?.postsCountPerPage : parseInt(req.query.size)
         const statusQuery = req.query.status === 'all' ? {status: {$ne: 'trash'}} : !req.query.status ? {}  : {status: req.query.status};

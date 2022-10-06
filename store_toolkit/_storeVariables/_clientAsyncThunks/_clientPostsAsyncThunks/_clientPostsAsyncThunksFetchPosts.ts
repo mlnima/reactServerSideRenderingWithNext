@@ -38,7 +38,7 @@ const fetchPosts = createAsyncThunk(
                     settings?.identity
                 ),
                 {
-                    name: apiData.data?.meta?.name,
+                    name: apiData.data?.meta?.name || context?.query?.keyword ,
                     siteName: settings?.identity?.siteName || '',
                     count:apiData.data?.meta?.count
                 }
@@ -50,7 +50,7 @@ const fetchPosts = createAsyncThunk(
                     `${options.page}PageDescription`,
                     settings?.identity
                 ), {
-                    name: apiData.data?.meta?.name,
+                    name: apiData.data?.meta?.name || context?.query?.keyword,
                     siteName: settings?.identity?.siteName || '',
                     count:apiData.data?.meta?.count
                 }

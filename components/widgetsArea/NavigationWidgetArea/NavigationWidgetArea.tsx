@@ -6,7 +6,6 @@ import BreadcrumbList from "@components/widgetsArea/NavigationWidgetArea/Breadcr
 import {useRouter} from "next/router";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
-
 let StyledNavigation = styled.nav`
   grid-area: navigation;
   background-color: var(--navigation-background-color, #000);

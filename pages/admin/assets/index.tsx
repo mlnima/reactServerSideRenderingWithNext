@@ -87,7 +87,7 @@ const assets = () => {
         } else if (assetType === 'users') {
             dispatch(fetchAdminPanelUsers({}))
         } else if (assetType === 'metas') {
-            const queries = _adminMetaPageQueryGenerator(query, query.metaType)
+            const queries = _adminMetaPageQueryGenerator(query, query?.metaType)
             dispatch(fetchAdminPanelMetas(queries))
         } else if (assetType === 'comments') {
             dispatch(fetchAdminPanelGetComments(dataConfig))

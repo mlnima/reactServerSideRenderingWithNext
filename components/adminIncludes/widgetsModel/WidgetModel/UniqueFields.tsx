@@ -137,7 +137,7 @@ const UniqueFields: FC<UniqueFieldsPropTypes> =
                 {(widgetData.type === 'meta' || widgetData.type === 'metaWithImage' )&&
                     <SelectFieldForWidget title={'Meta Type:'}
                                           name={'metaType'}
-                                          value={widgetData.metaType}
+                                          value={widgetData?.metaType}
                                           options={['tags', 'categories', 'actors']}
                                           onChangeHandler={onChangeHandler}
                     />

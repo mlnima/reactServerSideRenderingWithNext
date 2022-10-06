@@ -64,7 +64,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             'searchPageRightSidebar'
         ],
         {
-            setHeadData: true,
+            setHeadData: false,
             page: 'search'
         },
         store
@@ -79,7 +79,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
                 metaType: null,
                 options: {
                     page: 'search',
-                    setHeadData:true
+                    setHeadData:true,
                 }
             }
         ))

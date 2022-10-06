@@ -3,7 +3,7 @@ import metaSchema from '../../../models/metaSchema';
 const ClientMetaSuggestion = async (req, res) => {
 
     try {
-        const type = {type: req.query.metaType}
+        const type = {type: req.query?.metaType}
         const statusQuery = {status: 'published'}
         const size = 10;
         const startWithQuery = req.query?.startWith === 'any' ? {} :
