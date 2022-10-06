@@ -32,7 +32,7 @@ const fetchPosts = createAsyncThunk(
         // console.log(context.req.url)
 
 
-        if (!!context && singularMetaForm !== options.page && options.page!== '404' && options.page!== 'posts'){
+        if (!!context && singularMetaForm !== options.page && options.page!== '404' && options.page!== 'posts' && options.page!== 'search'){
             context.res.writeHead(301, {
                 Location: `/${singularMetaForm}/${apiData.data?.meta?._id}`
             });
