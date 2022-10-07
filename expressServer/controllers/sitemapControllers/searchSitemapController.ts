@@ -11,7 +11,7 @@ export const searchSitemapsController= async ()=>{
         const keywordsCount = await searchKeywordSchema.countDocuments({count: {$gt:0}}).exec();
         const toDay = new Date();
 
-        if (keywordsCount<500){
+        if (keywordsCount<2){
             return sitemapItemTemplate(
                 `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemap-tax-search-1.xml`,
                 toDay.toISOString()
@@ -28,7 +28,7 @@ export const searchSitemapsController= async ()=>{
                 //@ts-ignore
                 new Date(lastKeyword.createdAt)
 
-            const countOfSiteMaps = Math.ceil(keywordsCount/500)
+            const countOfSiteMaps = Math.ceil(keywordsCount/2)
             const rangeOfSitemaps = [...Array(countOfSiteMaps).keys()]
 
             for (const currentPage of rangeOfSitemaps){
