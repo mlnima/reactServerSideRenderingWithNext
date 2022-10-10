@@ -7,7 +7,12 @@ const PostTitleStyledH1 = styled.h1`
   color: var(--post-page-info-color,#ccc);
   font-size: 1.25em;
   text-align: center;
-  width: 100%;
+  width: 90%;
+  margin: 10px auto;
+  
+  @media only screen and (min-width: 768px) {
+    width: 100%;
+  }
 `
 
 const PostTitle = () => {

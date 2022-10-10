@@ -14,7 +14,10 @@ const CommentStyledDiv = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 90vw;
+  border-bottom: var(--default-border);
 
+  width: 100%;
+  padding: 10px 0;
   .comment-header {
     display: flex;
     justify-content: flex-start;
@@ -43,6 +46,7 @@ const CommentStyledDiv = styled.div`
 
   .comment-body {
     color: var(--comment-body-color, #fff);
+    overflow-wrap: break-word;
   }
 `
 

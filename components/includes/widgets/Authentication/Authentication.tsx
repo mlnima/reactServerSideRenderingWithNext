@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import AuthenticationNotLoggedInItems from "@components/includes/widgets/Authentication/AuthenticationNotLoggedInItems";
 import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import UserProfileImage from "@components/includes/UserProfileImage/UserProfileImage";
 
 const AuthenticationLoggedInItems = dynamic(() =>
         import('@components/includes/widgets/Authentication/AuthenticationLoggedInItems'),
@@ -18,34 +19,34 @@ const AuthenticationStyledDiv = styled.div`
     background-color: var(--auth-widget-text-color, #fff);
   }
 
-  .profile {
-    mask: url('/public/asset/images/icons/user-solid.svg') no-repeat center;
-    -webkit-mask: url('/public/asset/images/icons/user-solid.svg') no-repeat center;
-  }
+  //.profile {
+  //  mask: url('/public/asset/images/icons/user-solid.svg') no-repeat center;
+  //  -webkit-mask: url('/public/asset/images/icons/user-solid.svg') no-repeat center;
+  //}
 
 
-  .profile-icon {
-    width: 30px;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 2px;
-    margin: auto;
-    cursor: pointer;
-
-    .profile-button-icon {
-      width: 24px;
-      height: 24px;
-      cursor: pointer;
-    }
-
-    .profile-button-image {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-    }
-  }
+  //.profile-icon {
+  //  width: 30px;
+  //  height: 30px;
+  //  display: flex;
+  //  justify-content: center;
+  //  align-items: center;
+  //  padding: 0 2px;
+  //  margin: auto;
+  //  cursor: pointer;
+  //
+  //  .profile-button-icon {
+  //    width: 24px;
+  //    height: 24px;
+  //    cursor: pointer;
+  //  }
+  //
+  //  .profile-button-image {
+  //    width: 30px;
+  //    height: 30px;
+  //    border-radius: 50%;
+  //  }
+  //}
 
   .authentication-widget-wrapper {
 
@@ -175,10 +176,11 @@ const Authentication: FC = () => {
     return (
         <AuthenticationStyledDiv open={open}>
             <div className='profile-icon' onClick={onOpenCloseHandler}>
-                {profileImage ?
-                    <img className={'profile-button-image'} src={profileImage} alt={'profile image'}/> :
-                    <span className={'profile-button-icon profile icon'}/>
-                }
+                {/*{profileImage ?*/}
+                {/*    <img className={'profile-button-image'} src={profileImage} alt={'profile image'}/> :*/}
+                {/*    <span className={'profile-button-icon profile icon'}/>*/}
+                {/*}*/}
+                <UserProfileImage size={30}/>
             </div>
             <div className={'authentication-widget-wrapper'}>
                 <button className={'logged-item btn btn-transparent-light close-btn'} onClick={onOpenCloseHandler}>

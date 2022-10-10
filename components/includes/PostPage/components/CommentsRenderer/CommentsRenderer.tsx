@@ -1,29 +1,38 @@
 import Comment from "./Comment/Comment";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {FC} from "react";
+import React, {FC} from "react";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const CommentsRendererStyledDiv = styled.div`
   display: flex;
   flex-direction: column;
   margin: auto;
-  width: 95%;
+  width: 100%;
   align-items: flex-start;
   justify-content: center;
-  max-width: 90%;
-  padding: 5px;
+  padding: 8px;
+  box-sizing: border-box;
 `
-const CommentsRenderer :FC = () => {
+
+interface CommentsRendererPropTypes{
+    showComments:boolean
+}
+const CommentsRenderer :FC<CommentsRendererPropTypes> = ({showComments}) => {
 
     const comments = useSelector(({posts}:Store) => posts?.post?.comments || [])
+
 
     if (comments?.length){
         return (
             <CommentsRendererStyledDiv className='comments'>
-                {comments.map((comment, index) => {
-                    return (<Comment key={index} comment={comment}/>)
-                })}
+                {showComments && <>
+                    {comments.map((comment, index) => {
+                        return (<Comment key={index} comment={comment}/>)
+                    })}
+                </>
+                }
+
             </CommentsRendererStyledDiv>
         );
     }else return null

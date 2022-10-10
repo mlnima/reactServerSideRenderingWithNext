@@ -1,13 +1,13 @@
 import React, {FC} from "react";
 import styled from "styled-components";
 import Link from "next/link";
-// import {useTranslation} from "next-i18next";
 import useTranslation from 'next-translate/useTranslation'
 import {useRouter} from "next/router";
 import {userLogout} from "@store_toolkit/clientReducers/userReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
+import UserProfileImage from "@components/includes/UserProfileImage/UserProfileImage";
 
 const AuthenticationLoggedInItemsStyledDiv = styled.div`
   .user-info {
@@ -17,25 +17,9 @@ const AuthenticationLoggedInItemsStyledDiv = styled.div`
       align-items: center;
       color: var(--auth-widget-text-color, #fff);
       width: 100%;
-
-      .user-info-profile-icon {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        .user-info-profile-button-image {
-          border-radius: 50%;
-          margin: 5px 10px;
-          width: 48px;
-          height: 48px;
-        }
-
-        .user-info-profile-button-icon {
-          margin: 5px 10px;
-          cursor: pointer;
-        }
+      .user-profile-image{
+        margin: 10px 0;
       }
-
       .username-info {
         display: flex;
         flex-direction: column;
@@ -81,16 +65,7 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
                     <Link href={`/profile`}>
                         <a onClick={onOpenCloseHandler}>
                             <div className='user-info-profile-icon'>
-                                {profileImage ?
-                                    <img className={'user-info-profile-button-image'} src={profileImage}
-                                         alt={'profile image'}/> :
-                                    <SvgRenderer svgUrl={'/public/asset/images/icons/user-solid.svg'}
-                                                 size={48}
-                                                 customClassName={'user-info-profile-button-icon'}
-                                                 color={' var(--auth-widget-text-color, #fff)'}
-                                    />
-                                }
-                                {/*<span className={'user-info-profile-button-icon'}/>*/}
+                                <UserProfileImage size={40}/>
                             </div>
                             <div className={'username-info'}>
                                 <span className={'username'}>{username}</span>

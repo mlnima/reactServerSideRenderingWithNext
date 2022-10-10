@@ -2,6 +2,8 @@ import {createGlobalStyle} from "styled-components";
 import {useSelector} from "react-redux";
 import {FC} from "react";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import keyframes from './keyframes';
+import buttons from './buttons';
 
 interface GlobalStylesPropTypes {
   customColors:string,
@@ -11,15 +13,18 @@ interface GlobalStylesPropTypes {
 
 const GlobalStyles= createGlobalStyle`
   ${({customColors}:GlobalStylesPropTypes ) => customColors?.includes(':root') ? customColors :`:root {${customColors}}`}
-  
+  ${keyframes}
+  ${buttons}
   body {
     background-color: var(--main-background-color, #000);
-    margin: 0;
+    //margin: 0;
     color: var(--main-text-color, '#ccc');
     font-family: Arial,serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-size: 15px;
+    font-size: 0.875rem;
+    margin: 0;
+    padding: 0;
   }
 
   #content{
@@ -107,68 +112,7 @@ const GlobalStyles= createGlobalStyle`
     box-shadow: 0 0 5px 2.5px rgba(255, 255, 255, .2);
   }
   
-  .btn{
-    display: inline-block;
-    font-weight: 400;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    border: 1px solid var(--primary-button-link-text-color, #000);
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    border-radius: .25rem;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    cursor: pointer;
-  }  
-  .btn-primary{
-    background-color: var(--primary-button-link-background-color, #f90);
-    color: var(--primary-button-link-text-color, #000);
-  }  
-  .btn-secondary{
-    background-color: var(--secondary-button-link-background-color, #6c757d);
-    color: var(--secondary-button-text-color, #fff);
-  } 
-  .btn-success{
-    background-color: var(--success-button-link-background-color,#28a745);
-    color: var(--success-button-text-color, #fff);
-  }
-  .btn-danger{
-    background-color: var(--danger-button-link-background-color, #dc3545);
-    color: var(--danger-button-text-color, #fff);
-  }
-  .btn-warning{
-    background-color: var(--warning-button-link-background-color, #f90);
-    color: var(--warning-button-text-color, #212529);
-  }
-  .btn-info{
-    background-color: var(--info-button-link-background-color, #117a8b);
-    color: var(--info-button-text-color, #fff);
-  }
-  .btn-transparent-dark{
-    background-color: transparent;
-    color:  var(--transparent-dark-button-color, #343a40); 
-    border-color:  transparent;
-  }
-  .btn-transparent-light{
-    background-color: transparent;
-    color: var(--transparent-light-button-color,  #fff); 
-    border-color:  transparent;
-  }
-  .btn-dark{
-    background-color: var( --dark-button-link-background-color, #343a40);
-    border-color:  var(--dark-button-link-border-color, #343a40);
-    color: var(--info-button-text-color, #fff);
-  }
-  .btn-navigation{
-    background-color:var(--navigation-background-color, #18181b);
-    color: var(--navigation-text-color, #ccc);
-    border: none;
-  }
+
   
   .form-group{
     margin-bottom: 1rem;
@@ -178,7 +122,6 @@ const GlobalStyles= createGlobalStyle`
     width: 100%;
     display: block;
     padding: .375rem .75rem;
-    font-size: 1rem;
     line-height: 1.5;
     color: #495057;
     background-color: #fff;
@@ -206,11 +149,12 @@ const GlobalStyles= createGlobalStyle`
   
   @media only screen and (min-width: 768px) {
     body {
-      font-size: 14px;
+      font-size: 0.875rem;
     }
-
-
-    
+    #page{
+      margin: 0;
+      //max-width: 97vw;
+    }
     //---pages grid----
     .page-both-sidebar{
       grid-template-columns: ${({sideBarWidth}:GlobalStylesPropTypes )=> `${sideBarWidth}px 1fr ${sideBarWidth}px` }  ;
@@ -242,38 +186,18 @@ const GlobalStyles= createGlobalStyle`
 
   }
   
-  @keyframes navigationMobileSlide {
-    from {
-      left: -100%;
-    }
-    to {
-      left: 0;
-    }
-  }  
-  
-  @keyframes userMenuSlide {
-    from {
-      right: -100%;
-    }
-    to {
-      right: 0;
-    }
-  }
 
-  @keyframes searchbarFall {
-    from {
-      top: -40px;
-    }
-    to {
-      top: 0;
-    }
-  }
   
-  @media only screen and (min-width: 768px) {
-    #page{
-      margin: 0;
-      //max-width: 97vw;
+
+  @media only screen and (min-width: 1024px) {
+
+    #content,#main-content{
+      margin:auto;
+      min-width: 991px;
+      max-width: 1323px !important;
+
     }
+
   }
 
   ${({customStyles}:GlobalStylesPropTypes ) => customStyles ? customStyles : '' }
@@ -294,73 +218,3 @@ const GlobalStylesComponent : FC = () =>{
 
 export default GlobalStylesComponent;
 
-
-// .left-sidebar-layout {
-//   grid-template-columns: ${({sideBarWidth}:GlobalStylesPropTypes )=> `${sideBarWidth}px 1fr`} ;
-//   grid-template-areas:  'topbar topbar'
-//                                     'header header'
-//                                     'navigation navigation'
-//                                     'leftSidebar main'
-//                                     'footer footer';
-// }
-//
-// .right-sidebar-layout {
-//   grid-template-columns: ${({sideBarWidth}:GlobalStylesPropTypes )=> ` 1fr ${sideBarWidth}px`} ;
-//   grid-template-areas:  'topbar topbar'
-//                                     'header header'
-//                                     'navigation navigation'
-//                                     'main rightSidebar'
-//                                     'footer footer';
-// }
-//
-// .both-sidebar-layout {
-//
-//   grid-template-columns: ${({sideBarWidth}:GlobalStylesPropTypes )=> `${sideBarWidth}px 1fr ${sideBarWidth}px` }  ;
-//   grid-template-areas:  'topbar topbar topbar'
-//                         'header header header'
-//                         'navigation navigation navigation'
-//                         'leftSidebar main rightSidebar'
-//                         'footer footer footer';
-// }
-
-
-//.sidebar {
-//  grid-area: sidebar;
-//}
-
-//.right-sidebar-layout {
-//  display: grid;
-//  grid-area: rightSidebar;
-//  grid-template-columns: 1fr;
-//  grid-template-areas:
-//          'topbar'
-//          'header'
-//          'navigation'
-//          'main'
-//          'rightSidebar'
-//          'footer';
-//}
-//
-//.both-sidebar-layout {
-//  display: grid;
-//  grid-template-columns: 1fr;
-//  grid-template-areas:
-//          'topbar'
-//          'header'
-//          'navigation'
-//          'main'
-//          'leftSidebar'
-//          'rightSidebar'
-//          'footer';
-//}
-//
-//.without-sidebar-layout {
-//  display: grid;
-//  grid-template-columns: 1fr;
-//  grid-template-areas:
-//          'topbar'
-//          'header'
-//          'navigation'
-//          'main'
-//          'footer';
-//}

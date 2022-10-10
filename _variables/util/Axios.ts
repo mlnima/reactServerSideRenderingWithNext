@@ -6,3 +6,5 @@ const Axios = axios.create({
 });
 
 export default Axios
+
+//https://stackoverflow.com/questions/63064393/getting-axios-error-connect-etimedout-when-making-high-volume-of-calls

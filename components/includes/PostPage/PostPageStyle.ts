@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const PostPageStyle = styled.div`
-
+//entry-content
   display: flex;
   justify-self: center;
   flex-direction: column;
@@ -9,53 +9,59 @@ const PostPageStyle = styled.div`
   justify-content: flex-start;
   width: 100%;
   grid-area: primary;
-
-  //.rating-price-download {
-  //  width: 100%;
-  //  background-color: var(--post-page-info-background-color, #181818);
+  
+  //.promotion-thumbnail-link {
   //  display: flex;
+  //  flex-direction: column;
+  //  align-items: center;
   //  justify-content: center;
-  //  flex-wrap: wrap;
   //
-  //  
-  //  .rating-buttons{
-  //    .rating-item{
-  //      svg{
-  //        width: 24px;
-  //        height: 24px;
-  //      }
-  //    }
+  //  .main-thumbnail {
+  //    margin: auto;
+  //    max-width: 320px;
+  //  }
   //
+  //  .redirect-link {
+  //    color: var(--main-text-color);
+  //    padding: 10px 20px;
+  //    border: var(--main-text-color) 1px solid;
+  //  }
+  //}
+  
+  //article{
+  //  entry-header{
+  //    
   //  }
   //}
 
-  .promotion-thumbnail-link {
+  .rating-buttons,.show-hide-comments,.download-button{
+
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 
-    .main-thumbnail {
-      margin: auto;
-      max-width: 320px;
-    }
-
-    .redirect-link {
-      color: var(--main-text-color);
-      padding: 10px 20px;
-      border: var(--main-text-color) 1px solid;
+    .rating-item,.show-hide-comments-button,.download-link{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background-color: transparent;
+      color: var(--post-page-info-color, #ccc);
+      outline: none;
+      border: none;
+      margin-left:  10px;
+      min-width: 50px;
+      p{
+        padding: 0 5px;
+        margin-top: 5px;
+        font-size: small;
+      }
     }
   }
-
-  //@media only screen and (min-width: 768px) {
-  //
-  //  .rating-price-download {
-  //    justify-content: space-between;
-  //    align-items: center;
-  //    flex-wrap: wrap;
-  //  }
-  //}
-
+  .download-button{
+    justify-self: flex-end;
+  }
+  
   ${(props: { postPageStyle: string }) => props?.postPageStyle || ''}
 `
 

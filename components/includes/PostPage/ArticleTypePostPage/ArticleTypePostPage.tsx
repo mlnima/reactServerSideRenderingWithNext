@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {useSelector} from "react-redux";
 import PostTitle from "@components/includes/PostPage/components/PostTitle/PostTitle";
 import PostDescription from "@components/includes/PostPage/components/PostDescription/PostDescription";
-import PostMeta from "../components/PostMeta/PostMeta";
+import PostMetasRenderer from "../components/PostMetasRenderer/PostMetasRenderer";
 import RelatedPostsRenderer from "@components/includes/PostPage/components/RelatedPostsRenderer";
 import WidgetsRenderer from "@components/includes/WidgetsRenderer/WidgetsRenderer";
 import CommentFrom from "@components/includes/PostPage/components/CommentFrom/CommentFrom";
@@ -24,6 +24,12 @@ const Style = styled(PostPageStyle)`
 
       .entry-header {
         width: 100%;
+      }
+      .entry-content{
+        .rating-price-download{
+          display: flex;
+          justify-content: flex-start;
+        }
       }
     }
   }
@@ -69,15 +75,16 @@ const ArticleTypePostPage: FC<ArticleTypePostPagePropTypes> = (props) => {
                         <div className='rating-price-download'>
                             <RatingButtons rating={true}/>
                         </div>
-                        <PostMeta type='categories'/>
-                        <PostMeta type='tags'/>
+                        <PostMetasRenderer type='categories'/>
+                        <PostMetasRenderer type='tags'/>
                     </div>
+                    <CommentFrom/>
+                    {post?.comments?.length ? <CommentsRenderer showComments={true}/> : null}
                     <div className='under-post-widget-area'>
                         <WidgetsRenderer position='underPost'/>
                     </div>
                     <RelatedPostsRenderer/>
-                    <CommentFrom/>
-                    {post?.comments?.length ? <CommentsRenderer/> : null}
+
                 </article>
             </main>
         </Style>

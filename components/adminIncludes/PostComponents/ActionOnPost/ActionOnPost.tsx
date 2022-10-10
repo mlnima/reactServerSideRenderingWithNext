@@ -22,8 +22,8 @@ const ActionOnPost = () => {
 
     const ActionOnPostData = useSelector((store: Store) =>{
         return{
-            userId:store.user.userData?._id,
-            post:store?.adminPanelPosts.post
+            userId:store.user?.userData?._id,
+            post:store?.adminPanelPosts?.post
         }
     })
 

@@ -9,6 +9,7 @@ import widgetsStaticPositions from "@_dataStructures/widgetsStaticPositions";
 import {fetchAdminPanelGetWidgets} from "@store_toolkit/adminReducers/adminWidgetsReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {useRouter} from "next/router";
 
 let StyledDiv = styled.div`
   display: flex;
@@ -56,7 +57,7 @@ let StyledDiv = styled.div`
 const AdminWidgets = () => {
 
     const dispatch = useAdminDispatch()
-
+    const router = useRouter()
     const {customPages, availablePositions} = useSelector(
         ({
              adminPanelWidgets,

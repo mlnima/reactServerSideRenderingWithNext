@@ -1,6 +1,5 @@
-import {FC, useRef} from 'react';
+import React, {FC, useRef} from 'react';
 import styled from "styled-components";
-// import {useTranslation} from 'next-i18next';
 import useTranslation from 'next-translate/useTranslation'
 import {useSelector} from "react-redux";
 import fetchPostComments
@@ -10,41 +9,65 @@ import fetchNewComment
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import UserProfileImage from "@components/includes/UserProfileImage/UserProfileImage";
+
+
+//after making special translation file
 
 const CommentFromStyledForm = styled.form`
 
   display: flex;
   flex-direction: column;
-  width: 95%;
-  margin: auto;
+  width: 100%;
+  margin: 20px auto;
+  padding: 0 8px;
+  box-sizing: border-box;
 
-  .comment-form-input {
+  .comment-form-container{
     display: flex;
-  }
-
-  textarea {
+    justify-content: flex-start;
+    align-items: center;
     width: 100%;
-    min-height: 200px;
+    .user-profile-image{
+      margin-right: 20px;
+    }
+    .comment-form-input-wrapper{
+      display: flex;
+      position: relative;
+      width: 100%;
+      .tail{
+        border-style: solid;
+        border-width: 0 10px 10px 0;
+        border-color: transparent #ccc transparent transparent;
+        width: 0;
+        height: 0;
+        left: -8px;
+        position: absolute;
+        top: 0;
+      }
+      .comment-form-input{
+        width: 100%;
+        min-height: 35px;
+        background-color: #ccc;
+        border: none;
+        color: #000;
+        outline:none;
+      }
+    }
   }
-
-  textarea {
-    background-color: var(--post-page-info-background-color, #181818);
-    margin: 3px;
-    padding: 5px;
-    border: none;
-    color: var(--post-page-info-color, #ccc);
-  }
-
+  
   .comment-form-submit-button {
-    padding: 7px 20px;
-    text-align: center;
-    box-sizing: border-box;
-    color: var(--post-page-info-color, #ccc);
-    background-color: var(--post-page-info-background-color, #181818);
-    border: none;
-    margin: 5px;
+    margin: 10px 0 5px 0;
     max-width: 150px;
-    cursor: pointer;
+  }
+  @media only screen and (min-width: 768px) {
+    .comment-form-container{
+      .comment-form-input-wrapper{
+        .comment-form-input{
+          min-height: 60px;
+        }
+      }
+    }
   }
 `
 
@@ -54,6 +77,7 @@ const CommentFrom: FC = () => {
     const {_id,userData} = useSelector(({posts,user}: Store) => {
         return{
             _id:posts.post?._id,
+            // loggedIn:user.loggedIn,
             userData:user?.userData
         }
     })
@@ -81,12 +105,18 @@ const CommentFrom: FC = () => {
 
     return (
         <CommentFromStyledForm className='comment-form' onSubmit={e => onSubmitHandler(e)}>
-            <div>
-                <div className='comment-form-input'>
-                    <textarea ref={bodyInput} required={true} placeholder={t<string>(`Write a Comment`)} name='body'/>
+            <div className={'comment-form-container'}>
+                <UserProfileImage size={40}/>
+                <div className='comment-form-input-wrapper'>
+                    <div className={'tail'}/>
+                    <textarea className={'comment-form-input'}
+                              ref={bodyInput}
+                              required={true}
+                              placeholder={t<string>(`Share What You Think`,{},{fallback:`Share what you think`})}
+                              name='body'/>
                 </div>
             </div>
-            <button className='comment-form-submit-button' type='submit'>{t<string>(`Post Comment`)}</button>
+            <button className='comment-form-submit-button btn btn-dark' type='submit'>{t<string>(`Post Comment`)}</button>
         </CommentFromStyledForm>
     );
 };

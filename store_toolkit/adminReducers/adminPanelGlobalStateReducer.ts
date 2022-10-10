@@ -8,6 +8,7 @@ import {RootState} from "@store_toolkit/store";
 import {AdminPanelGlobalState} from "@_typeScriptTypes/storeTypes/AdminPanelGlobalState";
 
 
+
 const initialState : AdminPanelGlobalState = {
     customPages: [],
     beforeUnload: false,
@@ -40,15 +41,15 @@ export const fetchClearCaches = createAsyncThunk(
     async ({router} :{router?: NextRouter}, thunkAPI) => {
          thunkAPI.dispatch(loading(true))
         return await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/settings/clearCaches?token=${localStorage.wt}`).then((res: AxiosResponse<unknown | any>) => {
-
             thunkAPI.dispatch(setAlert({message: res.data.message || 'done', type: 'success'}))
-
             setTimeout(() => router.reload(), 1000)
         }).catch(err => {
             thunkAPI.dispatch(setAlert({message:'Error While Deleting Cache', type: 'error', err}))
         }).finally(() =>  thunkAPI.dispatch(loading(false)))
     }
 )
+
+
 
 
 export const adminPanelGlobalStateSlice = createSlice({
@@ -58,6 +59,7 @@ export const adminPanelGlobalStateSlice = createSlice({
         setSidebarStatus:(state, action: PayloadAction<any>) =>{
             state.sidebar = action.payload
         },
+
         // loading: (state, action: PayloadAction<any>) => {
         //     state.loading = action.payload
         // },

@@ -47,7 +47,7 @@ const getRelatedPosts = async (relatedByType, relatedIds, currentPostId, postTyp
             findRelatedPostsQuery,
             defaultFieldForPosts,
             {sort: sortOrder}
-        ).populate(populateMeta).limit(10).sort('-updatedAt').exec()
+        ).populate(populateMeta).limit(4).sort('-updatedAt').exec()
         return {[`${relatedByType}RelatedPosts`]: relatedPosts}
     } catch (e) {
         return {[`${relatedByType}RelatedPosts`]: []}

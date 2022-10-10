@@ -8,7 +8,7 @@ import RelatedPostsRenderer from "@components/includes/PostPage/components/Relat
 import React from "react";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
-const PostMeta = dynamic(() => import('../components/PostMeta/PostMeta'))
+const PostMeta = dynamic(() => import('../components/PostMetasRenderer/PostMetasRenderer'))
 const CommentsRenderer = dynamic(() => import('../components/CommentsRenderer/CommentsRenderer'))
 const CommentFrom = dynamic(() => import('../components/CommentFrom/CommentFrom'))
 const WidgetsRenderer = dynamic(() => import('../../WidgetsRenderer/WidgetsRenderer'))
@@ -82,7 +82,7 @@ const LearnTypePostPage = () => {
                     </div>
                     <RelatedPostsRenderer/>
                     <CommentFrom/>
-                    <CommentsRenderer/>
+                    <CommentsRenderer showComments={true}/>
                 </article>
 
             </main>

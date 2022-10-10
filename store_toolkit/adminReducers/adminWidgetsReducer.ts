@@ -104,7 +104,9 @@ export const fetchAdminPanelUpdateWidget = createAsyncThunk(
                 }
             }).catch(err=>{
                 console.log(err)
-            }).finally(()=>  thunkAPI.dispatch(loading(false)))
+            }).finally(()=> {
+               thunkAPI.dispatch(loading(false))
+           })
     }
 )
 

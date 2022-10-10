@@ -9,6 +9,9 @@ import {useAdminDispatch} from "@store_toolkit/hooks";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
 import {Widget} from "@_typeScriptTypes/widgets/Widget";
 import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
+import {useRouter} from "next/router";
+import updateRouteQuery from "@_variables/clientVariables/updateRouteQuery";
+
 
 
 interface ActionButtonsPropTypes {
@@ -21,6 +24,7 @@ interface ActionButtonsPropTypes {
 
 const ActionButtons: FC<ActionButtonsPropTypes> = ({widgetData, widgetId, widgetSettings, setWidgetSettings}) => {
     const dispatch = useAdminDispatch()
+    const router = useRouter()
     const widgets = useSelector(({adminPanelWidgets}: Store) => adminPanelWidgets?.adminPanelWidgets || [])
 
     const onSaveHandler = () => {
@@ -31,7 +35,7 @@ const ActionButtons: FC<ActionButtonsPropTypes> = ({widgetData, widgetId, widget
                 posts: [],
                 metaData: []
             }
-        }))
+        })).then(()=>updateRouteQuery(router))
     };
 
     const onCloneHandler = () => {
@@ -53,6 +57,7 @@ const ActionButtons: FC<ActionButtonsPropTypes> = ({widgetData, widgetId, widget
     const onDeleteHandler = () => {
         if (widgetId) {
             dispatch(fetchAdminPanelDeleteWidget({_id: widgetId, position: widgetData.position}))
+
         }
     };
 

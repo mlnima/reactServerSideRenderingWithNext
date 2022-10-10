@@ -7,11 +7,13 @@ import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const PostDescriptionStyledDiv = styled.div`
   color: var(--post-page-info-color, #ccc);
-  margin: 0 5px;
-  padding: 50px 0;
-  max-width: 95%;
+  margin-bottom: 10px;
+  width: 100%;
+  padding:  10px;
+  box-sizing: border-box;
 
   @media only screen and (min-width: 768px) {
+    
     max-width: 1300px;
     margin: 0 auto;
   }
@@ -37,11 +39,14 @@ const PostDescription: FC<PropTypes> = ({descriptionRef}) => {
             translations?.[locale]?.description || description
     }, [description, translations]);
 
-    return (
-        <PostDescriptionStyledDiv className="description" ref={descriptionRef}>
-            {descriptionValue ? parse(descriptionValue as string) : ''}
-        </PostDescriptionStyledDiv>
-    )
+    if (descriptionValue){
+        return (
+            <PostDescriptionStyledDiv className="description" ref={descriptionRef}>
+                {descriptionValue ? parse(descriptionValue as string) : ''}
+            </PostDescriptionStyledDiv>
+        )
+    }else return null
+
 };
 
 export default PostDescription;
