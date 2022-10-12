@@ -20,66 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/components/layouts/AdminLayout/AdminLayout.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/layouts/AdminLayout/AdminLayoutInitializer.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/layouts/AppLayout/AppLayoutInitializer.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/layouts/MessengerLayout/MessengerLayoutInitializer.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/locales/fi/customTranslation.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/locales/hi/customTranslation.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/locales/hu/customTranslation.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/locales/it/customTranslation.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/global/AdminDataSetter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/AdminDataSetter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/LoadingV2/LoadingV2.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/commonComponents/Loading/Loading.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/VideoTypePostPage/VideoTypePostPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/VideoTypePostPage/VideoTypePostPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/CommentFrom/CommentFrom.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/CommentFrom/CommentFrom.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Soft404/Soft404.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Soft404/Soft404.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/UserProfileImage/UserProfileImage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/UserProfileImage/UserProfileImage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/ArticlePostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/ArticlePostCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/CategoryCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CategoryCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/VideoPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/VideoPostCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/asset/CardTitle/CardTitle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/asset/CardTitle/CardTitle.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/Authentication.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/Authentication.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/AuthenticationLoggedInItems.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/AuthenticationLoggedInItems.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/layouts/AdminLayout.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/layouts/AppLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AppLayout/AppLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/layouts/MessengerLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/MessengerLayout/MessengerLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/layouts/getAppLayout.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/ar/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/ar/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/cs/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/cs/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/da/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/da/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/de/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/de/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/el/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/el/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/en/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/en/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/es/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/es/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/fa/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/fa/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/fi/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/fi/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/fr/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/fr/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/hi/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/hi/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/hu/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/hu/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/it/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/it/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/ja/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/ja/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/ko/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/ko/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/nl/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/nl/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/no/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/no/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/pl/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/pl/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/pt/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/pt/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/ru/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/ru/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/sk/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/sk/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/sl/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/sl/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/sv/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/sv/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/tr/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/tr/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/zh/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/zh/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/404.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/404.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/500.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/500.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/meta/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/meta/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/page/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/page/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/category/[categoryId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/category/[categoryId].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_toolkit/_storeVariables/_firstRequestHeadDataSetter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_firstRequestHeadDataSetter.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_toolkit/adminReducers/adminPanelPagesReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/adminReducers/adminPanelPagesReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_toolkit/adminReducers/adminPanelUsersReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/adminReducers/adminPanelUsersReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_toolkit/adminStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/adminStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/AddFormConditional.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/AddFormConditional.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/FieldPreview.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/FieldPreview.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetHeaderControl/WidgetHeaderControl.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetHeaderControl/WidgetHeaderControl.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModelStyle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModelStyle.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,7 +113,7 @@
       <command value="nextEnv" />
     </option>
   </component>
-  <component name="RunManager" selected="npm.start">
+  <component name="RunManager" selected="npm.build">
     <configuration name="temp.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/tempFiles/temp.js" working-dir="$PROJECT_DIR$/tempFiles">
       <method v="2" />
     </configuration>
@@ -214,9 +159,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.start" />
         <item itemvalue="npm.update:packages" />
         <item itemvalue="Node.js.temp.js" />
       </list>
@@ -1351,7 +1296,7 @@
       <workItem from="1665487052616" duration="4179000" />
       <workItem from="1665497240919" duration="13049000" />
       <workItem from="1665538714902" duration="7564000" />
-      <workItem from="1665549719808" duration="1212000" />
+      <workItem from="1665549719808" duration="4958000" />
     </task>
     <servers />
   </component>

@@ -42,6 +42,7 @@ let StyledDiv = styled.div`
 
 interface FieldPreviewPropTypes{
     widgetData:WidgetData,
+    setWidgetData:Function,
     field:{
         fieldName:string,
         filedId:number,
@@ -51,7 +52,7 @@ interface FieldPreviewPropTypes{
     }
 }
 
-const FieldPreview :FC<FieldPreviewPropTypes>= ({widgetData,field}) => {
+const FieldPreview :FC<FieldPreviewPropTypes>= ({setWidgetData,widgetData,field}) => {
         const [state, setState] = useState({
             open: false
         });
@@ -106,13 +107,13 @@ const FieldPreview :FC<FieldPreviewPropTypes>= ({widgetData,field}) => {
         const fieldIndexPlus = value => {
             const updatedFieldData = {...field, fieldIndex: field.fieldIndex + value}
             //@ts-ignore
-            const findIndexOfTheField = widgetData.formFields.findIndex(f => f.filedId === field.filedId)
+            const findIndexOfTheField = widgetData?.uniqueData.formFields.findIndex(f => f.filedId === field.filedId)
             const updatedFields = [
                 //@ts-ignore
-                ...widgetData.formFields.slice(0, findIndexOfTheField),
+                ...widgetData?.uniqueData.formFields.slice(0, findIndexOfTheField),
                 updatedFieldData,
                 //@ts-ignore
-                ...widgetData.formFields.slice(findIndexOfTheField + 1),
+                ...widgetData?.uniqueData.formFields.slice(findIndexOfTheField + 1),
             ];
             //@ts-ignore
             setWidgetData({

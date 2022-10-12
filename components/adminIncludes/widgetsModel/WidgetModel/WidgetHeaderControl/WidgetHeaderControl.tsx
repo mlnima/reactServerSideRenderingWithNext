@@ -9,7 +9,6 @@ let StyledDiv = styled.div`
   align-items: center;
   background-color: var(--admin-darkcolor70);
   color: var(--admin-text-color);
-  width: 100%;
   height: 50px;
   font-size: 12px;
 
@@ -111,7 +110,6 @@ const WidgetHeaderControl: FC<WidgetHeaderControlPropType> =
                     <SvgRenderer svgUrl={widgetData.stayOpen ? '/public/asset/images/icons/lock-open-solid.svg':
                         '/public/asset/images/icons/lock-solid.svg'}
                                  size={25}
-
                                  color={'var(--serachbar-widget-text-color, #fff)'}
                     />
 

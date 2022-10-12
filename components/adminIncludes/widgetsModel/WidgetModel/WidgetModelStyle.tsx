@@ -13,12 +13,14 @@ export const WidgetModelStyledDiv = styled.div`
   width: 100%;
   resize: both;
   overflow: hidden;
-
+  padding: 8px;
+  box-sizing: border-box;
   .open-section {
+
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 95%;
+    width: 100%;
     margin: auto;
 
     .section-title {
@@ -32,7 +34,6 @@ export const WidgetModelStyledDiv = styled.div`
 
   .widgetSection, .selectFieldForWidget, .TextInputFieldForWidget {
     margin: 10px auto;
-    width: 95%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -55,7 +56,7 @@ export const WidgetModelStyledDiv = styled.div`
 
   .widgetInfo {
     margin: auto;
-    width: 95%;
+   
   }
 
   .customStylesTextarea {
@@ -89,7 +90,7 @@ export const WidgetModelStyledDiv = styled.div`
   }
 
   .control-buttons {
-    margin: 30px 0;
+    margin-top: 20px ;
     display: flex;
     justify-content: space-evenly;
     
