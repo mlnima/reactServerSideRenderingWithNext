@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import CardImageRenderer from "@components/includes/cards/CardImageRenderer";
 import TextToCanvasImage from "@components/includes/cards/asset/TextToCanvasImage/TextToCanvasImage";
 import {Post} from "@_typeScriptTypes/Post";
+import CardTitle from "@components/includes/cards/asset/CardTitle/CardTitle";
 
 const CardViews = dynamic(() => import('./asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('./asset/CardRating/CardRating'))
@@ -104,10 +105,10 @@ const LearnPostCard: FC<LearnPostCardPropTypes> =
                                                cardWidth={cardWidth}/>
                         }
 
-                        <header className={'entry-header'}>
-                            <span className={'card-header'}>{title}</span>
-                        </header>
-
+                        {/*<header className={'entry-header'}>*/}
+                        {/*    <span className={'card-header'}>{title}</span>*/}
+                        {/*</header>*/}
+                        <CardTitle title={title}/>
                         <div className={'card-under-media-info'}>
                             {!!views &&
                             <CardViews views={views} className={'card-views card-under-media-info-data'}/>

@@ -5,6 +5,8 @@ import LoadingV2 from "@components/global/commonComponents/Loading/Loading";
 import GlobalStylesComponent from "@components/global/Styles/GlobalStylesComponent";
 import SiteSettingSetter from "@components/includes/SiteSettingsSetter/SiteSettingsSetter";
 import dynamic from "next/dynamic";
+import AdminDataSetter from "@components/global/AdminDataSetter";
+import AppLayoutAdminDataInitializer from "@components/layouts/AppLayout/AppLayoutAdminDataInitializer";
 // const AdminDataSetter = dynamic(() => import('@components/global/AdminDataSetter'));
 const HeaderWidgetArea = dynamic(() => import('@components/widgetsArea/HeaderWidgetArea/HeaderWidgetArea'));
 const TopBarWidgetArea = dynamic(() => import('@components/widgetsArea/TopBarWidgetArea/TopBarWidgetArea'));
@@ -61,7 +63,7 @@ const AppLayoutInitializer: FC<AppLayoutInitializerPropTypes> = ({children}) => 
 
             {loginRegisterFormPopup && !loggedIn && <LoginRegisterPopup/>}
             {(!!alert?.active && !!alert?.message) && <AlertBox/>}
-            {/*{userRole === 'administrator' && <AdminDataSetter/>}*/}
+            {userRole === 'administrator' && <AppLayoutAdminDataInitializer/>}
             {userRole === 'administrator' && <AdminTools/>}
             <GlobalStylesComponent/>
             <SiteSettingSetter/>

@@ -1,8 +1,9 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "@store_toolkit/store";
 import Axios from "@_variables/util/Axios";
-import {setHeadData} from "@store_toolkit/clientReducers/globalStateReducer";
+import {loading, setHeadData} from "@store_toolkit/clientReducers/globalStateReducer";
 import _firstRequestHeadDataSetter from "@store_toolkit/_storeVariables/_firstRequestHeadDataSetter";
+import _getMultipleSettingsQueryGenerator from "@_variables/adminVariables/_getMultipleSettingsQueryGenerator";
 
 interface SettingsStateRaw {
     ip?: string,
@@ -56,13 +57,6 @@ export const fetchSettings = createAsyncThunk(
                     )
                 )
             )
-
-            // return {
-            //     requestedSettings: config.requireSettings,
-            //     design: designSetting || {},
-            //     identity: identitySetting || {},
-            //     isSettingSet:true,
-            // }
             return {
                 requestedSettings: config.requireSettings,
                 design: designData?.data || {},
@@ -75,15 +69,32 @@ export const fetchSettings = createAsyncThunk(
     }
 )
 
+export const getUncachedSettingsForAdmin = createAsyncThunk('settings/getUncachedSettingsForAdmin', async (
+        data: any,
+        thunkAPI) => {
+        try {
+            thunkAPI.dispatch(loading(true))
+            return await Axios.get(`/api/admin/settings/getMultipleSetting${_getMultipleSettingsQueryGenerator(['identity', 'design', 'adminSettings'])}&token=${localStorage.wt}`)
+                .then(res => {
 
-// export const fetchSettings = createAsyncThunk(
-//     'settings/fetchSettings',
-//     async (config:FetchSettingsProps, thunkAPI) =>{
-//
-// }
-//
-// )
+                    const designSettings = res.data?.settings?.find((setting: any) => setting.type === 'design') || {};
+                    const identitySettings = res.data?.settings?.find((setting: any) => setting.type === 'identity') || {};
 
+                    const settings = {
+                        design: designSettings?.data,
+                        identity: identitySettings?.data,
+                    }
+
+                    return settings
+
+                }).catch(() => {
+
+                }).finally(() =>      thunkAPI.dispatch(loading(false)))
+        } catch (err) {
+            console.log(err)
+        }
+    }
+)
 
 export const settingsSlice = createSlice({
     name: 'settings',
@@ -98,6 +109,12 @@ export const settingsSlice = createSlice({
     },
     extraReducers: (builder) => builder
         .addCase(fetchSettings.fulfilled, (state, action: PayloadAction<any>) => {
+            return {
+                ...state,
+                ...action.payload
+            }
+        })
+        .addCase(getUncachedSettingsForAdmin.fulfilled, (state, action: PayloadAction<any>) => {
             return {
                 ...state,
                 ...action.payload

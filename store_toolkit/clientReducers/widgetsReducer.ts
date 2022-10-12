@@ -51,8 +51,8 @@ export const saveWidgetFormData = createAsyncThunk(
     }
 )
 
-export const fetchAdminGetWidgets = createAsyncThunk(
-    'adminPanelWidgets/fetchAdminWidgets',
+export const getUncachedWidgetsForAdmin = createAsyncThunk(
+    'adminPanelWidgets/getUncachedWidgetsForAdmin',
     async (data:any, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         return await Axios.get(`/api/admin/widgets/adminGetWidgets?token=${localStorage.wt}`)
@@ -94,7 +94,7 @@ export const widgetsSlice = createSlice({
 
                 }
             })
-            .addCase(fetchAdminGetWidgets.fulfilled, (state, action: PayloadAction<any>) => {
+            .addCase(getUncachedWidgetsForAdmin.fulfilled, (state, action: PayloadAction<any>) => {
                 return {
                     ...state,
                     widgetInGroups: action.payload?.widgetInGroups

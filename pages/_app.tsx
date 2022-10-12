@@ -1,8 +1,9 @@
 import type {FC} from 'react'
 import type {AppProps} from 'next/app'
-import { useMemo} from "react";
+import {useMemo} from "react";
 import {useRouter} from "next/router";
 import dynamic from "next/dynamic";
+
 const AdminLayout = dynamic(() => import('@components/layouts/AdminLayout/AdminLayout'))
 const AppLayout = dynamic(() => import('@components/layouts/AppLayout/AppLayout'))
 const MessengerLayout = dynamic(() => import('@components/layouts/MessengerLayout/MessengerLayout'))

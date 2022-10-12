@@ -65,7 +65,7 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
                     <Link href={`/profile`}>
                         <a onClick={onOpenCloseHandler}>
                             <div className='user-info-profile-icon'>
-                                <UserProfileImage size={40} profileRedirect={true}/>
+                                <UserProfileImage size={40} profileRedirect={false}/>
                             </div>
                             <div className={'username-info'}>
                                 <span className={'username'}>{username}</span>

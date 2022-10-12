@@ -20,11 +20,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change afterPath="$PROJECT_DIR$/components/layouts/AppLayout/AppLayoutAdminDataInitializer.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/AddFormConditional.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/AddFormConditional.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/FieldPreview.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/FieldPreview.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetHeaderControl/WidgetHeaderControl.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetHeaderControl/WidgetHeaderControl.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModelStyle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModelStyle.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/global/AdminDataSetter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/AdminDataSetter.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostsPage/PostsPageInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostsPage/PostsPageInfo.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/CategoryCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CategoryCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/LearnPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/LearnPostCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/asset/CardTitle/CardTitle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/asset/CardTitle/CardTitle.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/AuthenticationLoggedInItems.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/AuthenticationLoggedInItems.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/layouts/AppLayout/AppLayoutInitializer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AppLayout/AppLayoutInitializer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/category/[categoryId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/category/[categoryId].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store_toolkit/_storeVariables/_firstRequestHeadDataSetter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_firstRequestHeadDataSetter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store_toolkit/clientReducers/settingsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/clientReducers/settingsReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store_toolkit/clientReducers/widgetsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/clientReducers/widgetsReducer.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,8 +47,8 @@
         <option value="tsconfig.json" />
         <option value="CSS File" />
         <option value="JavaScript File" />
-        <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -1296,7 +1305,7 @@
       <workItem from="1665487052616" duration="4179000" />
       <workItem from="1665497240919" duration="13049000" />
       <workItem from="1665538714902" duration="7564000" />
-      <workItem from="1665549719808" duration="4958000" />
+      <workItem from="1665549719808" duration="20743000" />
     </task>
     <servers />
   </component>

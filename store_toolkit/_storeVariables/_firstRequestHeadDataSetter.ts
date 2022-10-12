@@ -1,18 +1,14 @@
 import {getTextDataWithTranslation, textContentReplacer} from "@_variables/_variables";
 import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
-import {
-    _homePageCanonicalUrlGenerator,
-    _metasCanonicalUrlGenerator
-} from "@_variables/clientVariables/_canonicalUrlGenerators";
+import {_metasCanonicalUrlGenerator} from "@_variables/clientVariables/_canonicalUrlGenerators";
 
 const _firstRequestHeadDataSetter = (context, page: string, setHeadData: boolean, identity: any) => {
-   const matchPathRegex = new RegExp('search|tags|categories|actors|home|profile|posts|chatroom|messenger|login|register|user','i')
-    // console.log(matchPathRegex.test(page))
+    const matchPathRegex = new RegExp('search|tags|categories|actors|home|profile|posts|chatroom|messenger|login|register|user', 'i')
+
     if (matchPathRegex.test(page) && setHeadData) {
         const title = page && page?.match('search|tags|categories|actors') ?
             textContentReplacer(
                 getTextDataWithTranslation(context.locale, `${page}PageTitle`, identity)
-                //@ts-ignore
                 + ` | ${identity?.siteName}`,
                 {
                     name: page === 'search' ?
@@ -25,7 +21,6 @@ const _firstRequestHeadDataSetter = (context, page: string, setHeadData: boolean
         const description = page && page?.match('search|tags|categories|actors') ?
             textContentReplacer(
                 getTextDataWithTranslation(context.locale, `${page}PageDescription`, identity)
-                //@ts-ignore
                 + `| ${identity?.siteName}`,
                 {
                     name: page === 'search' ?
@@ -40,12 +35,12 @@ const _firstRequestHeadDataSetter = (context, page: string, setHeadData: boolean
         const pageUrl = isMetaPageRegex.test(page) ?
             _metasCanonicalUrlGenerator(page, context.locale, context.query.page) :
             null
-            // _homePageCanonicalUrlGenerator(context.locale)
 
-         const ogUrls = pageUrl ? {
-             ogUrl: pageUrl,
-             twitterUrl: pageUrl,
-         } :{}
+
+        const ogUrls = pageUrl ? {
+            ogUrl: pageUrl,
+            twitterUrl: pageUrl,
+        } : {}
 
         return {
             title: title || null,
@@ -53,46 +48,30 @@ const _firstRequestHeadDataSetter = (context, page: string, setHeadData: boolean
             keywords: [(page !== 'home' ? page : ''), ...(getTextDataWithTranslation(context.locale, 'keywords', identity) || [])],
             themeColor: identity?.themeColor || '#000',
             ...ogUrls,
-            //@ts-ignore
             favIcon: identity?.favIcon || '/static/images/favIcon/favicon.png',
-            //@ts-ignore
             customScriptsAsString: identity?.customScriptsAsString || '',
-            //@ts-ignore
             rtaContent: identity?.rtaContent || false,
-            //@ts-ignore
             applicationName: identity?.siteName || null,
-            //@ts-ignore
             ogSiteName: identity?.siteName || null,
             ogLocale: context?.locale || null,
             ogTitle: title || null,
             ogDescription: description?.substring(0, 155) || null,
             ogType: 'website',
-
-            //@ts-ignore
             ogImage: identity?.favIcon || '/static/images/favIcon/favicon.png',
-
             twitterCard: true,
-
             twitterTitle: title || null,
-            //@ts-ignore
             twitterSite: identity?.siteName || null,
             twitterDescription: description?.substring(0, 155) || null,
-            //@ts-ignore
             twitterImage: identity?.favIcon || '/static/images/favIcon/favicon.png',
         }
     } else {
         return {
             themeColor: identity?.themeColor || '#000',
-            //@ts-ignore
             favIcon: identity?.favIcon || '/static/images/favIcon/favicon.png',
-            //@ts-ignore
             customScriptsAsString: identity?.customScriptsAsString || null,
-            //@ts-ignore
             rtaContent: identity?.rtaContent || false,
-            //@ts-ignore
             ogSiteName: identity?.siteName || null,
             ogLocale: context?.locale || null,
-            //@ts-ignore
             twitterSite: identity?.siteName || null,
         }
     }

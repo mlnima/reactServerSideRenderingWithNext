@@ -6,7 +6,6 @@ import {useRouter} from "next/router";
 import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
 import dynamic from "next/dynamic";
 import CardTitle from "@components/includes/cards/asset/CardTitle/CardTitle";
-import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 // import AdminThumbnailToRandomImageFromPostsButton
 //     from "@components/includes/cards/asset/adminThumbnailToRandomImageFromPostsButton/AdminThumbnailToRandomImageFromPostsButton";
 const TextToCanvasImage = dynamic(() => import('@components/includes/cards/asset/TextToCanvasImage/TextToCanvasImage'))
@@ -15,7 +14,7 @@ const CardImageRenderer = dynamic(() => import('@components/includes/cards/CardI
 const CategoryCardStyle = styled.article`
   
   width: 100%;
-  margin: 0 ;
+  margin: 20px auto;
   position: relative;
   .category-card-link {
     background-color: var(--post-element-background-color, #131314);
@@ -27,20 +26,31 @@ const CategoryCardStyle = styled.article`
     display: inline-block;
     color: var(--post-element-text-color, #ccc);
     .category-logo{
+      position: absolute;
       display: flex;
+      flex: 0 0 50px;
       justify-content: center;
       align-items: center;
-      position: absolute;
+      padding: 8px;
+      box-sizing: border-box;
+      width: 100%;
       top:0;
       left: 0;
       right: 0;
       bottom: 0;
+      
+      .icon{
+        margin: 5px;
+      }
       .entry-header{
+        width: 100%;
         box-sizing: border-box;
         text-shadow: 2px 2px 5px #000 ,-2px -2px 5px #000 ;
         .card-header{
-          font-weight: bolder;
-          font-size: large;
+          overflow-wrap: break-word;
+          -webkit-line-clamp: 3;
+          font-weight: bold;
+          font-size: small;
         }
       }
     }
@@ -53,8 +63,8 @@ const CategoryCardStyle = styled.article`
       .category-logo{
         .entry-header{
           .card-header{
-            font-weight: bold !important;
-            font-size: medium !important;
+            font-weight: bolder;
+            font-size: large;
           }
         }
       }
@@ -88,11 +98,8 @@ const CategoryCard: FC<CategoryCardPropTypes> =
 
         return (
             <CategoryCardStyle cardWidth={cardWidth} className={'category-card'}>
-
                 <Link href={`/category/${meta?._id}`}>
-
                     <a className='category-card-link' title={title as string}>
-
                         {!!meta.imageUrl ?
                             <CardImageRenderer imageUrl={meta.imageUrl}
                                                mediaAlt={title}
@@ -104,17 +111,9 @@ const CategoryCard: FC<CategoryCardPropTypes> =
                                                cardWidth={cardWidth}/>
                         }
                         <span className={'category-logo'}>
-                                 <SvgRenderer svgUrl={'/public/asset/images/icons/css3-alt-.svg'}
-                                              size={25}
-                                              color={'var(--serachbar-widget-text-color, #fff)'}/>
                                  <CardTitle title={title}/>
                         </span>
-
-
-
-
                     </a>
-
                 </Link>
                 {/*<AdminThumbnailToRandomImageFromPostsButton/>*/}
             </CategoryCardStyle>

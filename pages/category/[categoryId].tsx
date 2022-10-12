@@ -13,14 +13,13 @@ import {Store} from "@_typeScriptTypes/storeTypes/Store";
 const WidgetsRenderer = dynamic(() => import('@components/includes/WidgetsRenderer/WidgetsRenderer'))
 
 let PageStyle = styled.div`
-  width: 100%;
 
   .edit-as-admin {
     display: flex;
     justify-content: center;
     align-items: center;
   }
-
+  
   .posts-page-info {
     margin: 5px 0;
 
