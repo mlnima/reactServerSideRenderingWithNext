@@ -49,8 +49,9 @@ const AuthenticationStyledDiv = styled.div`
   //}
 
   .authentication-widget-wrapper {
-
-    padding: 5px 0;
+    border-left: var(--default-border);
+    padding: 10px;
+    box-sizing: border-box;
     position: fixed;
     right: 0;
     top: 0;
@@ -63,7 +64,7 @@ const AuthenticationStyledDiv = styled.div`
     animation: ${({open}: { open: boolean }) => open ? 'userMenuSlide .3s linear alternate' : 'none'};
 
     .close-btn {
-      padding: 6px 12px;
+      padding: 6px 0;
       margin-bottom: 20px;
       width: 100%;
       display: flex;
@@ -74,7 +75,7 @@ const AuthenticationStyledDiv = styled.div`
     .logged-items-auth-actions {
       width: 100%;
       display: flex;
-      justify-content: space-evenly;
+      justify-content: space-between;
       align-items: center;
 
       .logged-item {
@@ -120,12 +121,11 @@ const AuthenticationStyledDiv = styled.div`
         width: 100%;
         height: auto;
         min-height: 52px;
-        padding: 13px 0 13px 17px;
+        //padding: 13px 0 13px 17px;
         color: var(--auth-widget-text-color, #fff);
         display: flex;
         align-items: center;
         justify-content: flex-start;
-
         .icon-wrapper {
           width: 30px;
           height: 30px;
@@ -162,10 +162,6 @@ const Authentication: FC = () => {
         }
     })
 
-    // useEffect(() => {
-    //     console.log(loggedIn)
-    // }, [loggedIn]);
-
     const [open, setOpen] = useState(null)
 
     const onOpenCloseHandler = () => {
@@ -176,10 +172,6 @@ const Authentication: FC = () => {
     return (
         <AuthenticationStyledDiv open={open}>
             <div className='profile-icon' onClick={onOpenCloseHandler}>
-                {/*{profileImage ?*/}
-                {/*    <img className={'profile-button-image'} src={profileImage} alt={'profile image'}/> :*/}
-                {/*    <span className={'profile-button-icon profile icon'}/>*/}
-                {/*}*/}
                 <UserProfileImage size={30}/>
             </div>
             <div className={'authentication-widget-wrapper'}>

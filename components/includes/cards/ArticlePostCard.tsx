@@ -45,6 +45,7 @@ const ArticlePostCardStyle = styled.article`
       padding: 0 2px;
       color: var(--post-element-info-text-color, #ccc);
       font-size: 12px;
+      box-sizing: border-box;
 
       .icon {
         width: 14px;

@@ -73,6 +73,17 @@
   "Your account has been successfully created you can login now":"Sua conta foi criada com sucesso, você pode fazer o login agora",
   "Passwords are not matched":"As senhas não correspondem",
   "Login successful":"Login bem-sucedido",
-  "Use 8 or more characters with a mix of letters, numbers & symbols":"Use 8 ou mais caracteres com uma mistura de letras,números e símbolos"
+  "Use 8 or more characters with a mix of letters, numbers & symbols":"Use 8 ou mais caracteres com uma mistura de letras,números e símbolos",
+  "Minimum eight characters, at least one letter and one number": "Mínimo de oito caracteres, pelo menos uma letra e um número",
+  "Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character like $": "Mínimo de 8 caracteres, pelo menos 1 letra maiúscula, 1 letra minúscula, 1 número e 1 caractere especial como $",
+  "View Profile": "Ver perfil",
+  "Send Message": "Enviar mensagem",
+  "About Us": "Sobre nós",
+  "Contact Us": "Contate-nos",
+  "Unauthorized Access": "Acesso não autorizado",
+  "Mismatch Passwords": "Senhas incompatíveis",
+  "Wrong Password": "Senha incorreta",
+  "Nothing found": "Nada encontrado",
+  "Nothing found Description": "Parece que não conseguimos encontrar o que você está procurando. Talvez a pesquisa possa ajudar"
 
 }

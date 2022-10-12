@@ -73,6 +73,18 @@
   "Your account has been successfully created you can login now":"Ваша учетная запись успешно создана, вы можете войти сейчас",
   "Passwords are not matched":"Пароли не совпадают",
   "Login successful":"Вход выполнен успешно",
-  "Use 8 or more characters with a mix of letters, numbers & symbols":"Используйте 8 или более символов, сочетая буквы, цифры и символы"
+  "Use 8 or more characters with a mix of letters, numbers & symbols":"Используйте 8 или более символов, сочетая буквы, цифры и символы",
+  "Minimum eight characters, at least one letter and one number": "Минимум восемь символов, минимум одна буква и одна цифра",
+  "Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character like $": "Минимум 8 символов, минимум 1 заглавная буква, 1 строчная буква, 1 цифра и 1 специальный символ, например $",
+  "View Profile": "Просмотреть профиль",
+  "Send Message": "Отправить сообщение",
+  "About Us": "О нас",
+  "Contact Us": "Свяжитесь с нами",
+  "Unauthorized Access": "Несанкционированный доступ",
+  "Mismatch Passwords": "Несоответствие паролей",
+  "Wrong Password": "Неправильный парольd",
+  "Nothing found": "Ничего не найдено",
+  "Nothing found Description": "Кажется, мы не можем найти то, что вы ищете. Может поиск поможет"
+
 
 }

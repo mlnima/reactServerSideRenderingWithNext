@@ -46,9 +46,6 @@ const reducer = (state: ReturnType<typeof combinedReducer>, action: AnyAction) =
     } else {
         return combinedReducer(state, action);
     }
-    // console.log(action)
-    //
-    // return combinedReducer(state, action);
 };
 
 export const makeStore = () => configureStore({

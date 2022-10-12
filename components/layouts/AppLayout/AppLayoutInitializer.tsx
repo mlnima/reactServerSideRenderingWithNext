@@ -1,11 +1,11 @@
-import {FC} from 'react';
-import {useSelector} from 'react-redux';
-import dynamic from "next/dynamic";
-import GlobalStylesComponent from "../global/Styles/GlobalStylesComponent";
-import SiteSettingSetter from '../includes/SiteSettingsSetter/SiteSettingsSetter'
-import LoadingV2 from "@components/includes/LoadingV2/LoadingV2";
+import React,{FC} from "react";
+import {useSelector} from "react-redux";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
-
+import LoadingV2 from "@components/global/commonComponents/Loading/Loading";
+import GlobalStylesComponent from "@components/global/Styles/GlobalStylesComponent";
+import SiteSettingSetter from "@components/includes/SiteSettingsSetter/SiteSettingsSetter";
+import dynamic from "next/dynamic";
+// const AdminDataSetter = dynamic(() => import('@components/global/AdminDataSetter'));
 const HeaderWidgetArea = dynamic(() => import('@components/widgetsArea/HeaderWidgetArea/HeaderWidgetArea'));
 const TopBarWidgetArea = dynamic(() => import('@components/widgetsArea/TopBarWidgetArea/TopBarWidgetArea'));
 const NavigationWidgetArea = dynamic(() => import('@components/widgetsArea/NavigationWidgetArea/NavigationWidgetArea'));
@@ -14,15 +14,13 @@ const AlertBox = dynamic(() => import('@components/includes/AlertBox/AlertBox'),
 const AdminTools = dynamic(() => import('@components/includes/AdminTools/AdminTools'), {ssr: false});
 const LoginRegisterPopup = dynamic(() => import('@components/includes/LoginRegisterPopup/LoginRegisterPopup'), {ssr: false});
 const CookiePopup = dynamic(() => import('@components/includes/ClientPopActionRequest/CookiePopup'), {ssr: false});
-const AdminDataSetter = dynamic(() => import('@components/global/AdminDataSetter'), {ssr: false});
 const BackToTopButton = dynamic(() => import('@components/includes/BackToTopButton/BackToTopButton'), {ssr: false});
 
-interface AppLayoutPropTypes {
-    children: any
+interface AppLayoutInitializerPropTypes {
+    children:React.ReactNode
 }
 
-const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
-
+const AppLayoutInitializer: FC<AppLayoutInitializerPropTypes> = ({children}) => {
     const {
         loggedIn,
         userRole,
@@ -40,18 +38,18 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
             cookiePopupMessage: settings?.identity?.cookiePopupMessage
         }
     });
-
     return (
         <>
-
             <header>
                 {identity?.topbar === 'enable' && <TopBarWidgetArea/>}
                 {identity?.header === 'enable' && <HeaderWidgetArea/>}
                 {identity?.navigation === 'enable' && <NavigationWidgetArea/>}
             </header>
+
             <div id={'page'} className={'App'}>
                 {children}
             </div>
+
             {identity?.footer === 'enable' && <FooterWidgetArea/>}
             <BackToTopButton/>
 
@@ -63,18 +61,11 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
 
             {loginRegisterFormPopup && !loggedIn && <LoginRegisterPopup/>}
             {(!!alert?.active && !!alert?.message) && <AlertBox/>}
-            {userRole === 'administrator' && <AdminDataSetter userRole={userRole}/>}
+            {/*{userRole === 'administrator' && <AdminDataSetter/>}*/}
             {userRole === 'administrator' && <AdminTools/>}
             <GlobalStylesComponent/>
             <SiteSettingSetter/>
         </>
-    );
+    )
 };
-
-export default AppLayout;
-
-
-// {typeof window !== 'undefined' ? localStorage.cookieAccepted !== 'true' ?
-//     <CookiePopup/>
-//     : null : null
-// }
+export default AppLayoutInitializer;

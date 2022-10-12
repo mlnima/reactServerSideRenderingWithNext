@@ -8,7 +8,7 @@
   "Do You Have An Account? Login Here": "Do You Have An Account? Login Here",
   "Member login": "Member login",
   "Create New Post": "Create New Post",
-  "Profile":"Profile",
+  "Profile": "Profile",
   "Messages": "Messages",
   "Register": "Register",
   "Sign Up": "Register",
@@ -63,7 +63,7 @@
   "Go To Homepage": "Go To Homepage",
   "Error": "Error",
   "Server Error": "Server Error",
-  "An Error Occurred" : "An Error Occurred",
+  "An Error Occurred": "An Error Occurred",
   "Occurred On Server": "Occurred On Server",
   "Comments": "Comments",
   "Write a Comment": "Write a Comment",
@@ -83,7 +83,8 @@
   "Contact Us": "Contact Us",
   "Unauthorized Access": "Unauthorized Access",
   "Mismatch Passwords": "Mismatch Passwords",
-  "Wrong Password": "Wrong Password"
-
+  "Wrong Password": "Wrong Password",
+  "Nothing found": "Nothing found",
+  "Nothing found Description": "It seems we can’t find what you’re looking for. Perhaps searching can help"
 
 }

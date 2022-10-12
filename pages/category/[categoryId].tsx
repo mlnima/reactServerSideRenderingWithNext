@@ -56,7 +56,7 @@ const categoryPage = () => {
                 {role === 'administrator' &&
                 <div className='edit-as-admin'>
                     <Link href={'/admin/meta?id=' + category?._id}>
-                        <a className={'btn btn-primary'}>
+                        <a className={'btn btn-primary'} target={'_blank'}>
                             Edit
                         </a>
                     </Link>

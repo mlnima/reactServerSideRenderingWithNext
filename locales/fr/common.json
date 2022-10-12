@@ -22,7 +22,7 @@
   "Country":"Pays",
   "State":"État",
   "Street":"Rue",
-  "House Number":" Numéro de la maison ",
+  "House Number":"Numéro de maison",
   "Address":"Adresse",
   "Logout":"Se déconnecter",
   "Accept":"J'accepte",
@@ -71,9 +71,19 @@
   "Something went wrong please try again later":"Quelque chose c'est mal passé.Merci d'essayer plus tard",
   "This username already exists":"Cet identifiant existe déjà",
   "Your account has been successfully created you can login now":"Votre compte a été créé avec succès, vous pouvez vous connecter maintenant",
-  "Passwords are not matched":" Les mots de passe ne correspondent pas ",
+  "Passwords are not matched":"Les mots de passe ne correspondent pas",
   "Login successful":"Connexion réussie",
-  "Use 8 or more characters with a mix of letters, numbers & symbols":" Utilisez 8 caractères ou plus avec un mélange de lettres, de chiffres et de symboles "
-
+  "Use 8 or more characters with a mix of letters, numbers & symbols":"Utilisez 8 caractères ou plus avec un mélange de lettres, de chiffres et de symboles",
+  "Minimum eight characters, at least one letter and one number": "Minimum huit caractères, au moins une lettre et un chiffre",
+  "Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character like $": "Minimum 8 caractères, au moins 1 lettre majuscule, 1 lettre minuscule, 1 chiffre et 1 caractère spécial comme $",
+  "View Profile": "Voir le profil",
+  "Send Message": "Envoyer le message",
+  "About Us": "À propos de nous",
+  "Contact Us": "Nous contacter",
+  "Unauthorized Access": "L'accès non autorisé",
+  "Mismatch Passwords": "Mots de passe incompatibles",
+  "Wrong Password": "Mauvais mot de passe",
+  "Nothing found": "Rien n'a été trouvé",
+  "Nothing found Description": "Il semble que nous ne trouvions pas ce que vous cherchez. Peut-être que la recherche peut aider"
 
 }

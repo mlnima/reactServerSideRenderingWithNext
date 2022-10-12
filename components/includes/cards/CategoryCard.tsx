@@ -49,6 +49,16 @@ const CategoryCardStyle = styled.article`
 
   @media only screen and (min-width: 768px) {
     max-width: ${({cardWidth}: { cardWidth: number }) => cardWidth}px;
+    .category-card-link {
+      .category-logo{
+        .entry-header{
+          .card-header{
+            font-weight: bold !important;
+            font-size: medium !important;
+          }
+        }
+      }
+    }
   }
 `
 

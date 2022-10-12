@@ -73,7 +73,18 @@
   "Your account has been successfully created you can login now":"Hesabınız başarıyla oluşturuldu, şimdi giriş yapabilirsiniz",
   "Passwords are not matched":"Şifreler eşleşmiyor",
   "Login successful":"Giriş başarılı",
-  "Use 8 or more characters with a mix of letters, numbers & symbols":"Harf, sayı ve simge karışımıyla 8 veya daha fazla karakter kullanın"
+  "Use 8 or more characters with a mix of letters, numbers & symbols":"Harf, sayı ve simge karışımıyla 8 veya daha fazla karakter kullanın",
+  "Minimum eight characters, at least one letter and one number": "En az sekiz karakter, en az bir harf ve bir sayı",
+  "Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character like $": "En az 8 karakter, en az 1 büyük harf, 1 küçük harf, 1 rakam ve $ gibi 1 özel karakter",
+  "View Profile": "Profili Görüntüle",
+  "Send Message": "Mesaj gönder",
+  "About Us": "Hakkımızda",
+  "Contact Us": "Bize Ulaşın",
+  "Unauthorized Access": "Yetkisiz Erişim",
+  "Mismatch Passwords": "Eşleşmeyen Şifreler",
+  "Wrong Password": "Yanlış şifre",
+  "Nothing found": "Hiçbirşey Bulunamadı",
+  "Nothing found Description": "Aradığınızı bulamayacağız gibi görünüyor. Belki arama yardımcı olabilir"
 
 
 }

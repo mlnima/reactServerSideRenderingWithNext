@@ -73,5 +73,17 @@
   "Your account has been successfully created you can login now":"Vaš račun je bil uspešno ustvarjen, zdaj se lahko prijavite",
   "Passwords are not matched":"Gesla se ne ujemajo",
   "Login successful":"Prijava uspešna",
-  "Use 8 or more characters with a mix of letters, numbers & symbols":"Uporabite 8 ali več znakov z mešanico črk, številkin simbolov"
+  "Use 8 or more characters with a mix of letters, numbers & symbols":"Uporabite 8 ali več znakov z mešanico črk, številkin simbolov",
+  "Minimum eight characters, at least one letter and one number": "Najmanj osem znakov, vsaj ena črka in ena številka",
+  "Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character like $": "Najmanj 8 znakov, vsaj 1 velika črka, 1 mala črka, 1 številka in 1 poseben znak, kot je $",
+  "View Profile": "Poglej profil",
+  "Send Message": "Pošlji sporočilo",
+  "About Us": "O nas",
+  "Contact Us": "Kontaktiraj nas",
+  "Unauthorized Access": "Nepooblaščen dostop",
+  "Mismatch Passwords": "Neujemanje gesel",
+  "Wrong Password": "Napačno geslo",
+  "Nothing found": "Nič najdenega",
+  "Nothing found Description": "Zdi se, da ne moremo najti, kar iščete. Morda bo iskanje pomagalo"
+
 }

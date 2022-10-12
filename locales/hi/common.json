@@ -73,5 +73,17 @@
   "Your account has been successfully created you can login now":"आपका खाता सफलतापूर्वक बना लिया गया है अब आप लॉगिन कर सकते हैं",
   "Passwords are not matched":"पासवर्ड मेल नहीं खाते",
   "Login successful":"सफलतापूर्ण प्रवेश",
-  "Use 8 or more characters with a mix of letters, numbers & symbols":"अक्षरों, संख्याओं और प्रतीकों के मिश्रण के साथ 8 याअधिक वर्णों का प्रयोग करें"
+  "Use 8 or more characters with a mix of letters, numbers & symbols":"अक्षरों, संख्याओं और प्रतीकों के मिश्रण के साथ 8 याअधिक वर्णों का प्रयोग करें",
+  "Minimum eight characters, at least one letter and one number": "कम से कम आठ अक्षर, कम से कम एक अक्षर और एक अंक",
+  "Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character like $": "न्यूनतम 8 वर्ण, कम से कम 1 अपरकेस अक्षर, 1 लोअरकेस अक्षर, 1 संख्या और 1 विशेष वर्ण जैसे $",
+  "View Profile": "प्रोफ़ाइल देखें",
+  "Send Message": "मेसेज भेजें",
+  "About Us": "हमारे बारे में",
+  "Contact Us": "संपर्क करें",
+  "Unauthorized Access": "अनधिकृत पहुंच",
+  "Mismatch Passwords": "बेमेल पासवर्ड",
+  "Wrong Password": "गलत पासवर्ड",
+  "Nothing found": "कुछ नहीं मिला",
+  "Nothing found Description": "ऐसा लगता है कि आप जो खोज रहे हैं वह हमें नहीं मिल रहा है। शायद खोज मदद कर सकती है"
+
 }

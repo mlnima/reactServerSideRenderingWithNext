@@ -6,8 +6,9 @@ import {
 } from "@_variables/clientVariables/_canonicalUrlGenerators";
 
 const _firstRequestHeadDataSetter = (context, page: string, setHeadData: boolean, identity: any) => {
-
-    if (page?.match('search|tags|categories|actors|home|profile|posts|chatroom|messenger|login|register') && setHeadData) {
+   const matchPathRegex = new RegExp('search|tags|categories|actors|home|profile|posts|chatroom|messenger|login|register|user','i')
+    // console.log(matchPathRegex.test(page))
+    if (matchPathRegex.test(page) && setHeadData) {
         const title = page && page?.match('search|tags|categories|actors') ?
             textContentReplacer(
                 getTextDataWithTranslation(context.locale, `${page}PageTitle`, identity)

@@ -73,7 +73,18 @@
   "Your account has been successfully created you can login now":"Twoje konto zostało pomyślnie utworzone, możesz się teraz zalogować",
   "Passwords are not matched":"Hasła nie są dopasowane",
   "Login successful":"Zalogowano poprawnie",
-  "Use 8 or more characters with a mix of letters, numbers & symbols":"Użyj 8 lub więcej znaków z kombinacją liter, cyfr isymboli"
+  "Use 8 or more characters with a mix of letters, numbers & symbols":"Użyj 8 lub więcej znaków z kombinacją liter, cyfr isymboli",
+  "Minimum eight characters, at least one letter and one number": "Minimum osiem znaków, co najmniej jedna litera i jedna cyfra",
+  "Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character like $": "Minimum 8 znaków, co najmniej 1 wielka litera, 1 mała litera, 1 cyfra i 1 znak specjalny, np. $",
+  "View Profile": "Zobacz profil",
+  "Send Message": "Wyślij wiadomość",
+  "About Us": "O nas",
+  "Contact Us": "Skontaktuj się z nami",
+  "Unauthorized Access": "Nieautoryzowany dostęp",
+  "Mismatch Passwords": "Niedopasowane hasła",
+  "Wrong Password": "Złe hasło",
+  "Nothing found": "Nic nie znaleziono",
+  "Nothing found Description": "Wygląda na to, że nie możemy znaleźć tego, czego szukasz. Być może wyszukiwanie może pomóc"
 
 
 }

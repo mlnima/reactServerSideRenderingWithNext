@@ -9,11 +9,12 @@ const Style = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  
+  cursor: pointer;
+
   .user-info-profile-button-image {
     border-radius: 50%;
-    width: ${({size}:UserProfileImageStylePropTypes)=> size || 48 }px;
-    height:  ${({size}:UserProfileImageStylePropTypes)=> size || 48 }px;
+    width: ${({size}: UserProfileImageStylePropTypes) => size || 48}px;
+    height: ${({size}: UserProfileImageStylePropTypes) => size || 48}px;
     box-sizing: border-box;
   }
 
@@ -31,48 +32,40 @@ interface UserProfileImagePropTypes {
     profileRedirect?: boolean,
 }
 
-const UserProfileImage: FC<UserProfileImagePropTypes> = ({size,profileRedirect}) => {
+const UserProfileImage: FC<UserProfileImagePropTypes> = ({size, profileRedirect}) => {
 
-    const {_id, userData, loggedIn} = useSelector(({posts, user}: Store) => {
+    const {userData, loggedIn} = useSelector(({user}: Store) => {
         return {
-            _id: posts.post?._id,
             loggedIn: user.loggedIn,
             userData: user?.userData
         }
     })
 
-    if (loggedIn) {
-        return (
-            <Style className={'user-profile-image'} size={size}>
 
-                {userData?.profileImage ?
-                    <Link href={`/user/${userData?.username}`}>
-                        <a>
-                            <img className={'user-info-profile-button-image'} src={userData?.profileImage}
-                                 alt={'profile image'}/>
-                        </a>
-                    </Link> :
-                    <SvgRenderer svgUrl={'/public/asset/images/icons/user-solid.svg'}
-                                 size={size - 10 || 48}
-                                 customClassName={'user-info-profile-button-icon'}
-                                 color={' var(--auth-widget-text-color, #fff)'}
-                    />
-                }
-            </Style>
-        )
-    } else {
-        return (
-            <Style className={'user-profile-image'} size={size}>
+    const ImageContent = () => userData?.profileImage ?
+        <img className={'user-info-profile-button-image'} src={userData?.profileImage}
+             alt={'profile image'}/>
+        :
+        <SvgRenderer svgUrl={'/public/asset/images/icons/user-solid.svg'}
+                     size={size - 10 || 48}
+                     customClassName={'user-info-profile-button-icon'}
+                     color={' var(--auth-widget-text-color, #fff)'}
+        />
 
-                <SvgRenderer svgUrl={'/public/asset/images/icons/user-solid.svg'}
-                             size={size -10 || 48}
-                             customClassName={'user-info-profile-button-icon'}
-                             color={' var(--auth-widget-text-color, #fff)'}
-                />
-            </Style>
-        )
-    }
+    return (
+        <Style className={'user-profile-image'} size={size}>
+            {profileRedirect && loggedIn ?
+
+                <Link href={`/profile`}>
+                    <a>
+                        <ImageContent/>
+                    </a>
+                </Link> : <ImageContent/>
+            }
+        </Style>
+    )
 
 
 };
 export default UserProfileImage;
+// <Link href={`/user/${userData?.username}`}>

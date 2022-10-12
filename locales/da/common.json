@@ -73,6 +73,18 @@
   "Your account has been successfully created you can login now":"Din konto er oprettet med succes, du kan logge ind nu",
   "Passwords are not matched":"Adgangskoder matches ikke",
   "Login successful":"Login vellykket",
-  "Use 8 or more characters with a mix of letters, numbers & symbols":"Brug 8 eller flere tegn med en blanding af bogstaver, tal og symboler"
+  "Use 8 or more characters with a mix of letters, numbers & symbols":"Brug 8 eller flere tegn med en blanding af bogstaver, tal og symboler",
+  "Minimum eight characters, at least one letter and one number": "Minimum otte tegn, mindst et bogstav og et tal",
+  "Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character like $": "Minimum 8 tegn, mindst 1 stort bogstav, 1 lille bogstav, 1 tal og 1 specialtegn som $",
+  "View Profile": "Se profil",
+  "Send Message": "Send besked",
+  "About Us": "Om os",
+  "Contact Us": "Kontakt os",
+  "Unauthorized Access": "Uautoriseret adgang",
+  "Mismatch Passwords": "Uoverensstemmende adgangskoder",
+  "Wrong Password": "Forkert kodeord",
+  "Nothing found": "Intet fundet",
+  "Nothing found Description": "Det ser ud til, at vi ikke kan finde det, du leder efter. Måske kan søgning hjælpe"
+
 
 }

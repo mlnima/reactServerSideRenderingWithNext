@@ -139,12 +139,10 @@ const meta = (props: any) => {
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         dispatch(adminEditMeta({[e.target.name]: e.target.value}))
     }
-    console.log(meta)
+
 
     if (meta) {
-
         return (
-
             <AdminMetaPageStyledDiv className='single-meta-page'>
                 {!!meta?.type && <label>Type: {meta?.type}</label>}
 

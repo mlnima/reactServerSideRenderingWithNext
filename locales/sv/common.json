@@ -73,6 +73,17 @@
   "Your account has been successfully created you can login now":"Ditt konto har skapats, du kan logga in nu",
   "Passwords are not matched":"Lösenord matchas inte",
   "Login successful":"Inloggningen lyckades",
-  "Use 8 or more characters with a mix of letters, numbers & symbols":"Använd 8 eller fler tecken med en blandning av bokstäver, siffror och symboler"
+  "Use 8 or more characters with a mix of letters, numbers & symbols":"Använd 8 eller fler tecken med en blandning av bokstäver, siffror och symboler",
+  "Minimum eight characters, at least one letter and one number": "Minst åtta tecken, minst en bokstav och en siffra",
+  "Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character like $": "Minst 8 tecken, minst 1 stor bokstav, 1 liten bokstav, 1 siffra och 1 specialtecken som $",
+  "View Profile": "Visa profil",
+  "Send Message": "Skicka meddelande",
+  "About Us": "Om oss",
+  "Contact Us": "Kontakta oss",
+  "Unauthorized Access": "Obehörig åtkomst",
+  "Mismatch Passwords": "Felaktiga lösenord",
+  "Wrong Password": "Fel lösenord",
+  "Nothing found": "Inget hittat",
+  "Nothing found Description": "Det verkar som om vi inte kan hitta det du letar efter. Kanske kan sökning hjälpa"
 
 }

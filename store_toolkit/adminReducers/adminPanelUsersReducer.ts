@@ -76,7 +76,6 @@ export const fetchAdminPanelUserData = createAsyncThunk(
         }
         return await Axios.post('/api/admin/users/getUser', body)
             .then(res => {
-                console.log(res.data.user)
                 return res.data.user
             }).catch(err => {
 

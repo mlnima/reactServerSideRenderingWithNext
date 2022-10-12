@@ -77,14 +77,15 @@
   "Use 8 or more characters with a mix of letters, numbers & symbols": "از 8 کاراکتر یا بیشتر با ترکیبی از حروف ، اعداد و نمادها استفاده کنید",
   "Minimum eight characters, at least one letter and one number": "حداقل هشت کاراکتر ، حداقل یک حرف و یک عدد",
   "Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character like $": "حداقل 8 نویسه ، حداقل 1 حرف بزرگ ، 1 حرف کوچک ، 1 عدد و 1 نویسه خاص مانند $",
-
   "View Profile": "مشاهده پروفایل",
   "Send Message": "ارسال پیام",
   "Followers": "فالو کنندگان",
   "Following": "فالو شدگان",
   "About Us": "درباره ما",
   "Contact Us": "تماس با ما",
-
-  "Unauthorized Access": "دسترسی غیرمجاز"
-
+  "Unauthorized Access": "دسترسی غیرمجاز",
+  "Mismatch Passwords": "رمزهای عبور هماهنگی ندارند",
+  "Wrong Password": "رمز عبور اشتباه است",
+  "Nothing found": "مطلب مورد نظر پیدا نشد",
+  "Nothing found Description": "به نظر میرسد نمیتوانیم اطلاعات مورد نظر شما را پیدا کنیم, ممکن است جستجو کمک کند"
 }

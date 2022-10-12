@@ -106,7 +106,7 @@ const CommentFrom: FC = () => {
     return (
         <CommentFromStyledForm className='comment-form' onSubmit={e => onSubmitHandler(e)}>
             <div className={'comment-form-container'}>
-                <UserProfileImage size={40}/>
+                <UserProfileImage size={40} profileRedirect={true}/>
                 <div className='comment-form-input-wrapper'>
                     <div className={'tail'}/>
                     <textarea className={'comment-form-input'}

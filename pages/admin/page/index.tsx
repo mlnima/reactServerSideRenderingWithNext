@@ -45,7 +45,6 @@ const page = (props: any) => {
     }, [props]);
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) => {
-        console.log(e.target.value)
         const finalValue = e.target.value === 'true' ? true :
             e.target.value === 'false' ? false :
                 e.target.value

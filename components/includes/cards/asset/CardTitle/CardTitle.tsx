@@ -4,7 +4,10 @@ import {FC} from "react";
 const CardTitleStyle = styled.header`
   text-align: center;
   margin-top: 2px;
-
+  padding: 0 10px;
+  box-sizing: border-box;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
   .card-header {
     color: var(--post-element-text-color, #ccc);
     overflow: hidden;
@@ -21,7 +24,7 @@ const CardTitleStyle = styled.header`
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    padding: .375rem .75rem;
+    //padding: .375rem .75rem;
     font-size: 1rem;
     line-height: 1.5;
     border-radius: .25rem;
@@ -29,6 +32,13 @@ const CardTitleStyle = styled.header`
     cursor: pointer;
     width: 100%;
     box-sizing: border-box;
+ 
+  }
+  @media only screen and (min-width: 768px) {
+    padding: 0 ;
+    .card-header {
+      padding: 0 ;
+    }
   }
 `
 
@@ -36,7 +46,7 @@ interface CardTitlePropTypes{
     title:string,
 }
 
-const CardTitle :FC<CardTitlePropTypes> = ({title}) => {
+const  CardTitle :FC<CardTitlePropTypes> = ({title}) => {
     return (
         <CardTitleStyle className={'entry-header'}>
             <span className={'card-header'}>{title}</span>

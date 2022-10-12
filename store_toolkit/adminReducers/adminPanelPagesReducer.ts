@@ -63,7 +63,6 @@ export const fetchAdminPanelPage = createAsyncThunk(
         };
 
         return await Axios.post('/api/admin/pages/getPageData', body).then((response: AxiosResponse) => {
-            console.log(response.data?.pageData)
             return response.data?.pageData
         }).catch((err: AxiosError) => {
 

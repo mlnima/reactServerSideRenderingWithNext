@@ -73,5 +73,17 @@
   "Your account has been successfully created you can login now":"「アカウントが正常に作成されました。今すぐログインできます」",
   "Passwords are not matched":"「パスワードが一致しません」",
   "Login successful":"ログイン成功",
-  "Use 8 or more characters with a mix of letters, numbers & symbols":"「文字,数字,記号を組み合わせて8文字以上を使用する」"
+  "Use 8 or more characters with a mix of letters, numbers & symbols":"「文字,数字,記号を組み合わせて8文字以上を使用する」",
+  "Minimum eight characters, at least one letter and one number": "最低 8 文字、少なくとも 1 つの文字と 1 つの数字",
+  "Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character like $": "8 文字以上、大文字 1 文字、小文字 1 文字、数字 1 文字、$ などの特殊文字 1 文字以上",
+  "View Profile": "プロフィールを見る",
+  "Send Message": "メッセージを送る",
+  "About Us": "私たちに関しては",
+  "Contact Us": "お問い合わせ",
+  "Unauthorized Access": "不正アクセス",
+  "Mismatch Passwords": "パスワードの不一致",
+  "Wrong Password": "間違ったパスワード",
+  "Nothing found": "何も見つかりません",
+  "Nothing found Description": "お探しのものが見つからないようです。 おそらく検索が役立つかもしれません"
+
 }

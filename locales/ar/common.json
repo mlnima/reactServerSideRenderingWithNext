@@ -73,5 +73,17 @@
   "Your account has been successfully created you can login now":"تم إنشاء حسابك بنجاح يمكنك تسجيل الدخول الآن",
   "Passwords are not matched":"كلمات المرور غير متطابقة",
   "Login successful":"تم تسجيل الدخول بنجاح",
-  "Use 8 or more characters with a mix of letters, numbers & symbols":"استخدم 8 أحرف أو أكثر مع مزيج من الأحرف والأرقام والرموز"
+  "Use 8 or more characters with a mix of letters, numbers & symbols":"استخدم 8 أحرف أو أكثر مع مزيج من الأحرف والأرقام والرموز",
+  "Minimum eight characters, at least one letter and one number": "ثمانية أحرف على الأقل ، حرف واحد على الأقل ورقم واحد",
+  "Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character like $": "8 أحرف على الأقل ، حرف كبير واحد على الأقل ، حرف واحد صغير ، رقم واحد وحرف خاص واحد مثل $",
+  "View Profile": "عرض الصفحة الشخصية",
+  "Send Message": "أرسل رسالة",
+  "About Us": "معلومات عنا",
+  "Contact Us": "اتصل بنا",
+  "Unauthorized Access": "دخول غير مرخص",
+  "Mismatch Passwords": "كلمات المرور غير متطابقة",
+  "Wrong Password": "كلمة مرور خاطئة",
+  "Nothing found": "لم يتم العثور على شيء",
+  "Nothing found Description": "يبدو أننا لا نستطيع العثور على ما تبحث عنه. ربما يمكن أن يساعد البحث"
+
 }

@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef} from 'react';
 import styled from "styled-components";
 import PostPageStyle from "../PostPageStyle";
 import {useSelector} from "react-redux";
@@ -6,8 +6,8 @@ import dynamic from "next/dynamic";
 import PostTitle from "../components/PostTitle/PostTitle";
 import RelatedPostsRenderer from "@components/includes/PostPage/components/RelatedPostsRenderer";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
-import ShowHideCommentsButton
-    from "@components/includes/PostPage/components/ShowHideCommentsButton/ShowHideCommentsButton";
+// import ShowHideCommentsButton
+//     from "@components/includes/PostPage/components/ShowHideCommentsButton/ShowHideCommentsButton";
 
 const PostMetasRenderer = dynamic(() => import('../components/PostMetasRenderer/PostMetasRenderer'))
 const CommentsRenderer = dynamic(() => import('../components/CommentsRenderer/CommentsRenderer'))
@@ -104,11 +104,10 @@ const VideoTypePostPage = () => {
                             <PostTitle/>
                             <div className='entry-header-actions'>
                                 <RatingButtons rating={true}/>
-                                {/*<ShowHideCommentsButton setShowComments={setShowComments} showComments={showComments}/>*/}
-                                {(pageData?.post?.downloadLink || pageData?.post?.downloadLinks?.length)&&
-                                <DownloadLink downloadLink={pageData?.post.downloadLink || pageData?.post.source}
-                                    downloadLinks={pageData?.post?.downloadLinks || []}
-                                />
+                                {(pageData?.post?.downloadLink || pageData?.post.source)&&
+                                    <DownloadLink downloadLink={pageData?.post.downloadLink || pageData?.post.source}
+                                        downloadLinks={pageData?.post?.downloadLinks || []}
+                                    />
                                 }
                             </div>
                         </div>

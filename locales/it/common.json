@@ -73,6 +73,18 @@
   "Your account has been successfully created you can login now":"Il tuo account è stato creato con successo puoi accedereora",
   "Passwords are not matched":"Le password non corrispondono",
   "Login successful":"Accesso riuscito",
-  "Use 8 or more characters with a mix of letters, numbers & symbols":"Usa 8 o più caratteri con un mix di lettere, numerie simboli"
+  "Use 8 or more characters with a mix of letters, numbers & symbols":"Usa 8 o più caratteri con un mix di lettere, numerie simboli",
+  "Minimum eight characters, at least one letter and one number": "Legalább nyolc karakter, legalább egy betű és egy szám",
+  "Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character like $": "Minimum 8 karakter, legalább 1 nagybetű, 1 kisbetű, 1 szám és 1 speciális karakter, például $",
+  "View Profile": "Profil megtekintése",
+  "Send Message": "Üzenet küldése",
+  "About Us": "Rólunk",
+  "Contact Us": "Lépjen kapcsolatba velünk",
+  "Unauthorized Access": "Illetéktelen hozzáférés",
+  "Mismatch Passwords": "Nem egyező jelszavak",
+  "Wrong Password": "Rossz jelszó",
+  "Nothing found": "Nincs találat",
+  "Nothing found Description": "Úgy tűnik, nem találjuk, amit keres. Talán a keresés segíthet"
+
 
 }

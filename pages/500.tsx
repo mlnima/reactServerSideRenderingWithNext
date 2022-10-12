@@ -2,7 +2,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import useTranslation from 'next-translate/useTranslation'
 import type {ReactElement} from 'react';
-import AppLayout from "@components/layouts/AppLayout";
+import AppLayout from "@components/layouts/AppLayout/AppLayout";
 import React from "react";
 
 const Custom500StyledDiv = styled.div`

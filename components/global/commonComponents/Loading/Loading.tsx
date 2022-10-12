@@ -49,7 +49,7 @@ let StyledDiv = styled.div`
 `
 
 
-const LoadingV2: FC = () => {
+const Loading: FC = () => {
     const dispatch = useAppDispatch()
     const [isLoadingByRouteChange, setIsLoadingByRouteChange] = useState(false)
     const isLoading = useSelector(({globalState}: Store) => globalState?.loading)
@@ -97,7 +97,7 @@ const LoadingV2: FC = () => {
 
 };
 
-export default memo(LoadingV2);
+export default memo(Loading);
 
 
 // const handleStart = (url) => (url !== asPath) && dispatch(loading(true));

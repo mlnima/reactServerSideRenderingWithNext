@@ -73,5 +73,17 @@
   "Your account has been successfully created you can login now":"Váš účet byl úspěšně vytvořen, můžete se přihlásit hned",
   "Passwords are not matched":"Hesla se neshodují",
   "Login successful":"Přihlášení úspěšné",
-  "Use 8 or more characters with a mix of letters, numbers & symbols":"Použijte 8 nebo více znaků s kombinací písmen, číslic a symbolů"
+  "Use 8 or more characters with a mix of letters, numbers & symbols":"Použijte 8 nebo více znaků s kombinací písmen, číslic a symbolů",
+  "Minimum eight characters, at least one letter and one number": "Minimálně osm znaků, alespoň jedno písmeno a jedna číslice",
+  "Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character like $": "Minimálně 8 znaků, alespoň 1 velké písmeno, 1 malé písmeno, 1 číslo a 1 speciální znak jako $",
+  "View Profile": "Prohlédnout profil",
+  "Send Message": "Poslat zprávu",
+  "About Us": "O nás",
+  "Contact Us": "Kontaktujte nás",
+  "Unauthorized Access": "Neautorizovaný přístup",
+  "Mismatch Passwords": "Neshoda hesel",
+  "Wrong Password": "Špatné heslo",
+  "Nothing found": "Nic nalezeno",
+  "Nothing found Description": "Zdá se, že nemůžeme najít to, co hledáte. Možná pomůže hledání"
+
 }

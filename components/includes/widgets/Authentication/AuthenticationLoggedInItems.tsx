@@ -21,6 +21,7 @@ const AuthenticationLoggedInItemsStyledDiv = styled.div`
         margin: 10px 0;
       }
       .username-info {
+        padding: 0 20px;
         display: flex;
         flex-direction: column;
 
@@ -49,7 +50,6 @@ interface AuthenticationLoggedInItemsPropTypes {
 const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
     ({
          onOpenCloseHandler,
-         profileImage,
          membership,
          allowUserToPost,
          username
@@ -57,7 +57,7 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
         const {t} = useTranslation('common');
         const {pathname} = useRouter()
         const dispatch = useAppDispatch()
-//    <span className={'user-info-profile-button-icon'}/>
+
         return (
             <AuthenticationLoggedInItemsStyledDiv className={'authentication-logged-in'}>
 
@@ -65,7 +65,7 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
                     <Link href={`/profile`}>
                         <a onClick={onOpenCloseHandler}>
                             <div className='user-info-profile-icon'>
-                                <UserProfileImage size={40}/>
+                                <UserProfileImage size={40} profileRedirect={true}/>
                             </div>
                             <div className={'username-info'}>
                                 <span className={'username'}>{username}</span>

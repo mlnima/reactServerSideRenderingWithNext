@@ -73,6 +73,17 @@
   "Your account has been successfully created you can login now":"Uw account is succesvol aangemaakt, u kunt nu inloggen",
   "Passwords are not matched":"Wachtwoorden komen niet overeen",
   "Login successful":"Succesvol ingelogd",
-  "Use 8 or more characters with a mix of letters, numbers & symbols":"Gebruik 8 of meer tekens met een mix van letters, cijfers en symbolen"
+  "Use 8 or more characters with a mix of letters, numbers & symbols":"Gebruik 8 of meer tekens met een mix van letters, cijfers en symbolen",
+  "Minimum eight characters, at least one letter and one number": "Minimaal acht tekens, minimaal één letter en één cijfer",
+  "Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character like $": "Minimaal 8 tekens, minimaal 1 hoofdletter, 1 kleine letter, 1 cijfer en 1 speciaal teken zoals $",
+  "View Profile": "Profiel bekijken",
+  "Send Message": "Bericht versturen",
+  "About Us": "Over ons",
+  "Contact Us": "Neem contact met ons op",
+  "Unauthorized Access": "Onbevoegde toegang",
+  "Mismatch Passwords": "Niet-overeenkomende wachtwoorden",
+  "Wrong Password": "Verkeerd wachtwoord",
+  "Nothing found": "Niets gevonden",
+  "Nothing found Description": "Het lijkt erop dat we niet kunnen vinden wat u zoekt. Misschien kan zoeken helpen"
 
 }

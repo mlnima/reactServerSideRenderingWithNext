@@ -7,6 +7,8 @@ import _qualityConvertor from "@components/includes/cards/asset/_qualityConverto
 import CardViews from "./asset/CardViews/CardViews";
 import CardTitle from "@components/includes/cards/asset/CardTitle/CardTitle";
 import {Post} from "@_typeScriptTypes/Post";
+import CardRating from "@components/includes/cards/asset/CardRating/CardRating";
+import useTranslation from "next-translate/useTranslation";
 
 const CardRatingBar = dynamic(() => import('./asset/CardRatingBar/CardRatingBar'))
 const CardQuality = dynamic(() => import('./asset/CardQuality/CardQuality'))
@@ -22,7 +24,7 @@ interface VideoPostCardPropTypes {
     rating: number,
     index: number,
     cardWidth: number,
-    targetLink:string,
+    targetLink: string,
     post: Post,
 }
 
@@ -34,7 +36,6 @@ const VideoPostCardStyle = styled.article`
   background-color: var(--post-element-background-color, #131314);
   margin: 0 auto;
   width: 100%;
-
   .video-post-card-media {
     position: relative;
     color: var(--post-element-text-color, #ccc);
@@ -60,24 +61,33 @@ const VideoPostCardStyle = styled.article`
       right: 5px;
       z-index: 1;
     }
+    
+  }
 
-    .card-views {
+  .card-under-title-info {
+    color: var(--post-element-text-color, #ccc);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: small;
+    padding: 0 5px;
+    box-sizing: border-box;
+    .card-views{
+      margin-right: 10px;
+      
+      .card-views-count{
+        margin-right: 5px;
+      }
+    }
+
+    .card-under-title-info-data {
       display: flex;
       justify-content: center;
       align-items: center;
-      position: absolute;
-      bottom: 5px;
-      left: 5px;
-      z-index: 1;
-
-      .icon {
-        width: 14px;
-        height: 14px;
-        margin: 0 2px;
-      }
     }
+
   }
-  
+
   @media only screen and (min-width: 768px) {
     max-width: ${({cardWidth}: VideoPostCardStylePropTypes) => cardWidth}px;
   }
@@ -98,6 +108,7 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
      }) => {
 
         const [hover, setHover] = useState(null)
+        const {t} = useTranslation()
 
         const hoverHandler = (status) => {
             setHover(status)
@@ -148,11 +159,23 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
                             {!!post?.duration &&
                             <CardDuration duration={post?.duration} className={'card-duration video-card-info-data'}/>}
 
-                            <CardViews views={views} className={'card-views card-under-media-info-data'}/>
+                            {/*<CardViews views={views} className={'card-views card-under-media-info-data'}/>*/}
 
                         </div>
-                        <CardRatingBar rating={rating} className={'card-rating card-under-media-info-data'}/>
-                        <CardTitle title={title}/>
+                        <div className={'video-post-card-info'}>
+                            <CardTitle title={title}/>
+                            <div className={'card-under-title-info'}>
+                                {!!views &&
+                                <p className={'card-under-title-info-data card-views'}>
+                                    <span className={'card-views-count'}>{views}</span>
+                                    <span >{t('common:Views')}</span>
+                                </p>
+                                }
+                                {!!rating &&
+                                <CardRating rating={rating} className={'card-rating card-under-title-info-data'}/>
+                                }
+                            </div>
+                        </div>
                     </a>
                 </Link>
             </VideoPostCardStyle>
