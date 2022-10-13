@@ -20,20 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/components/layouts/AppLayout/AppLayoutAdminDataInitializer.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/global/AdminDataSetter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/AdminDataSetter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostsPage/PostsPageInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostsPage/PostsPageInfo.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/CategoryCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CategoryCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/LearnPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/LearnPostCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/asset/CardTitle/CardTitle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/asset/CardTitle/CardTitle.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/AuthenticationLoggedInItems.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/AuthenticationLoggedInItems.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/layouts/AppLayout/AppLayoutInitializer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AppLayout/AppLayoutInitializer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/category/[categoryId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/category/[categoryId].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_toolkit/_storeVariables/_firstRequestHeadDataSetter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_firstRequestHeadDataSetter.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_toolkit/clientReducers/settingsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/clientReducers/settingsReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store_toolkit/clientReducers/widgetsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/clientReducers/widgetsReducer.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,7 +109,7 @@
       <command value="nextEnv" />
     </option>
   </component>
-  <component name="RunManager" selected="npm.build">
+  <component name="RunManager" selected="npm.start">
     <configuration name="temp.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/tempFiles/temp.js" working-dir="$PROJECT_DIR$/tempFiles">
       <method v="2" />
     </configuration>
@@ -168,10 +155,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.build" />
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
+        <item itemvalue="npm.build" />
         <item itemvalue="npm.update:packages" />
+        <item itemvalue="npm.dev" />
         <item itemvalue="Node.js.temp.js" />
       </list>
     </recent_temporary>
@@ -1305,7 +1292,8 @@
       <workItem from="1665487052616" duration="4179000" />
       <workItem from="1665497240919" duration="13049000" />
       <workItem from="1665538714902" duration="7564000" />
-      <workItem from="1665549719808" duration="20743000" />
+      <workItem from="1665549719808" duration="21608000" />
+      <workItem from="1665643078557" duration="2874000" />
     </task>
     <servers />
   </component>
