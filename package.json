@@ -11,7 +11,7 @@
     "start": "concurrently \"NODE_ENV=production node ./.next/expressServer/index.js\" \"node ./.next/expressServer/socketServer/index.js\"",
     "fixTimeStamsForPosts": "node tools/fixTimeStamsForPosts.js",
     "mergeDuplicateMetaData": "node tools/mergeDuplicateMetaData.js",
-    "setup": "node ./tools/setup.js",
+    "setup": "ts-node --transpile-only ./tools/setup.js",
     "ResetAdminPassword": "node ./tools/resetAdminPassword.js",
     "build:server": "tsc --project tsconfig.server.json",
     "build:next": "next build",

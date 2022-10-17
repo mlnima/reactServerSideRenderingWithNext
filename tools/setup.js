@@ -1,45 +1,13 @@
-// import dotenv from 'dotenv';
-// dotenv.config();
-// import connectToDatabase from '../expressServer/_variables/connectToDatabase';
-// connectToDatabase('Setup').finally()
-// import settingSchema from '../expressServer/models/settings/settingSchema';
-// import widgetSchema from '../expressServer/models/widgetSchema';
-// import postSchema from '../expressServer/models/postSchema';
-// import userSchema from '../expressServer/models/userSchema';
-// import bcrypt from 'bcryptjs';
-
-const dotenv = require('dotenv')
+import dotenv from 'dotenv';
 dotenv.config();
-const mongoose = require('mongoose')
+import connectToDatabase from '../expressServer/_variables/connectToDatabase';
+connectToDatabase('Setup').finally()
+import settingSchema from '../expressServer/models/settings/settingSchema';
+import widgetSchema from '../expressServer/models/widgetSchema';
 
-const mongoDBConnectionUrl = process.env.DB_LOCAL === 'true' ?
-    `mongodb://localhost:${process.env.DB_PORT}/${process.env.DB_NAME}` :
-    `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`
-const options = {
-    useUnifiedTopology: true
-}
+import userSchema from '../expressServer/models/userSchema';
+import bcrypt from 'bcryptjs';
 
-const connectToDatabase = async () => {
-    try {
-        return await mongoose.connect(mongoDBConnectionUrl, options)
-    .then(() => {
-            console.log(`connected to Database`)
-        })
-            .catch(error => {
-                console.log('error connection to Database', error)
-            });
-    } catch (err) {
-        console.log('error connection to Database', err)
-    }
-    return null
-}
-
-connectToDatabase().finally()
-
-const settingSchema = require('../expressServer/models/settings/settingSchema')
-const widgetSchema = require('../expressServer/models/widgetSchema')
-const userSchema = require('../expressServer/models/userSchema')
-const bcrypt = require('bcryptjs')
 
 
 const identityData = {

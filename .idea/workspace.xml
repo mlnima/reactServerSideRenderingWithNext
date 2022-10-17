@@ -21,6 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tools/setup.js" beforeDir="false" afterPath="$PROJECT_DIR$/tools/setup.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -111,9 +112,6 @@
     </option>
   </component>
   <component name="RunManager" selected="npm.build">
-    <configuration name="temp.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/tempFiles/temp.js" working-dir="$PROJECT_DIR$/tempFiles">
-      <method v="2" />
-    </configuration>
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -129,6 +127,16 @@
       <command value="run" />
       <scripts>
         <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="setup" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="setup" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -156,11 +164,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.setup" />
         <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.update:packages" />
         <item itemvalue="npm.start" />
-        <item itemvalue="Node.js.temp.js" />
       </list>
     </recent_temporary>
   </component>
@@ -1302,7 +1310,9 @@
       <workItem from="1665915511434" duration="16274000" />
       <workItem from="1665949566458" duration="1494000" />
       <workItem from="1665958418088" duration="2366000" />
-      <workItem from="1666000463859" duration="5704000" />
+      <workItem from="1666000463859" duration="6419000" />
+      <workItem from="1666011636093" duration="330000" />
+      <workItem from="1666028830351" duration="409000" />
     </task>
     <servers />
   </component>
