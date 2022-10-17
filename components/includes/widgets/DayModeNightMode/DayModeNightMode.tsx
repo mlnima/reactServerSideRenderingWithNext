@@ -45,7 +45,7 @@ const DayModeNightMode: FC<DayModeNightModePropTypes> = ({uniqueData}) => {
     const [state, setstate] = useState({
         active: false,
         open: false,
-        mode: uniqueData.dayNightModeDefault || 'night'
+        mode: uniqueData?.dayNightModeDefault || 'night'
     })
 
     const onSelectHandler = (mode) => {
