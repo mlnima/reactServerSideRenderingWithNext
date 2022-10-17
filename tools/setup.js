@@ -23,6 +23,10 @@ const identityData = {
         postPageSidebar: true,
         postsPageSidebar: true,
         anyoneCanRegister: false,
+        footer : "enable",
+        header : "enable",
+        navigation : "enable",
+        topbar : "enable",
     }
 }
 
