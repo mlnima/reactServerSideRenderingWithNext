@@ -8,15 +8,39 @@
 // import userSchema from '../expressServer/models/userSchema';
 // import bcrypt from 'bcryptjs';
 
-
 const dotenv = require('dotenv')
 dotenv.config();
-const connectToDatabase = require('../expressServer/_variables/connectToDatabase')
-connectToDatabase('Setup').finally()
+const mongoose = require('mongoose')
+
+const mongoDBConnectionUrl = process.env.DB_LOCAL === 'true' ?
+    `mongodb://localhost:${process.env.DB_PORT}/${process.env.DB_NAME}` :
+    `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`
+const options = {
+    useUnifiedTopology: true
+}
+
+const connectToDatabase = async () => {
+    try {
+        return await mongoose.connect(mongoDBConnectionUrl, options)
+    .then(() => {
+            console.log(`connected to Database`)
+        })
+            .catch(error => {
+                console.log('error connection to Database', error)
+            });
+    } catch (err) {
+        console.log('error connection to Database', err)
+    }
+    return null
+}
+
+connectToDatabase().finally()
+
 const settingSchema = require('../expressServer/models/settings/settingSchema')
-const widgetSchema = require('../expressServer/models/settings/widgetSchema')
+const widgetSchema = require('../expressServer/models/widgetSchema')
 const userSchema = require('../expressServer/models/userSchema')
 const bcrypt = require('bcryptjs')
+
 
 const identityData = {
     type: 'identity',
@@ -56,20 +80,20 @@ const designData = {
     --main-text-color: #ccc;
     --main-background-color: #000;
 //postpage
---post-page-info-color:#ccc;
+    --post-page-info-color:#ccc;
     --post-page-info-background-color:#181818;
 //meta-widget-under posts
---meta-text-color:#000;
+    --meta-text-color:#000;
     --meta-background-color:#f90;
 //widgets
---widget-header-footer-text-color:#fff;
+    --widget-header-footer-text-color:#fff;
     --widget-header-footer-background-color:transparent;
 //postElement
---post-element-text-color:#ccc;
+    --post-element-text-color:#ccc;
     --post-element-info-text-color:#ccc;
     --post-element-background-color:#000;
 //widgetAreas
---topbar-text-color: #18181b;
+    --topbar-text-color: #18181b;
     --topbar-background-color: #000;
 
     --header-text-color: #000;
