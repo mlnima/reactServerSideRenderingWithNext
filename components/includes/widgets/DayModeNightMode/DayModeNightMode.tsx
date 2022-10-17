@@ -83,8 +83,8 @@ const DayModeNightMode: FC<DayModeNightModePropTypes> = ({uniqueData}) => {
             >
                 <span className={'light'}/>
             </button>
-            <ModeStyles dayNightModeData={state.mode === uniqueData.dayNightModeDefault ?
-                customColors : uniqueData.dayNightModeData || ''}
+            <ModeStyles dayNightModeData={state.mode === uniqueData?.dayNightModeDefault ?
+                customColors : uniqueData?.dayNightModeData || ''}
             />
         </DayModeNightModeStyledDiv>
     )
