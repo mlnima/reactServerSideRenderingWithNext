@@ -9,7 +9,7 @@ import CardTitle from "@components/includes/cards/asset/CardTitle/CardTitle";
 // import AdminThumbnailToRandomImageFromPostsButton
 //     from "@components/includes/cards/asset/adminThumbnailToRandomImageFromPostsButton/AdminThumbnailToRandomImageFromPostsButton";
 const TextToCanvasImage = dynamic(() => import('@components/includes/cards/asset/TextToCanvasImage/TextToCanvasImage'))
-const CardImageRenderer = dynamic(() => import('@components/includes/cards/CardImageRenderer'))
+const CardImageRenderer = dynamic(() => import('@components/includes/cards/asset/CardImageRenderer'))
 
 const CategoryCardStyle = styled.article`
   

@@ -1,6 +1,6 @@
 import metaSchema from "../../models/metaSchema";
 import settingSchema from "../../models/settings/settingSchema";
-import {IdentitySettings} from "@_typeScriptTypes/settings/IdentitySettings";
+import {IdentitySettings} from "../../../_typeScriptTypes/settings/IdentitySettings";
 
 interface FindMetasQueryTypes{
     metaType:string,

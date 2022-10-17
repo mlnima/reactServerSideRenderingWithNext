@@ -5,6 +5,7 @@ const postTypes = [
     'promotion',
     'article',
     'learn',
+    'event',
     'food',
     'book',
     'blog',

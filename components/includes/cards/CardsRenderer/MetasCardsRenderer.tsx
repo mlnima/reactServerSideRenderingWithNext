@@ -5,9 +5,9 @@ import dynamic from "next/dynamic";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
 import {Meta} from "@_typeScriptTypes/Meta";
 
-const TagCard = dynamic(() => import('@components/includes/cards/TagCard'))
-const ActorCard = dynamic(() => import('@components/includes/cards/ActorCard'))
-const CategoryCard = dynamic(() => import('@components/includes/cards/CategoryCard'))
+const TagCard = dynamic(() => import('@components/includes/cards/metasCards/TagCard'))
+const ActorCard = dynamic(() => import('@components/includes/cards/metasCards/ActorCard'))
+const CategoryCard = dynamic(() => import('@components/includes/cards/metasCards/CategoryCard'))
 
 
 interface MetasCardsRendererStylePropType {

@@ -26,6 +26,8 @@ const ArticleTypePostPage = dynamic(() =>
     import('@components/includes/PostPage/ArticleTypePostPage/ArticleTypePostPage'))
 const PromotionTypePostPage = dynamic(() =>
     import('@components/includes/PostPage/PromotionTypePostPage/PromotionTypePostPage'))
+const EventTypePostPage = dynamic(() =>
+    import('@components/includes/PostPage/EventTypePostPage/EventTypePostPage'))
 
 
 const PageStyle = styled.div`
@@ -73,13 +75,7 @@ const postPage = () => {
 
         }
     });
-    // const widgets = useSelector(({widgets}: Store) => widgets.widgetInGroups);
-    // const requestedWidgets = useSelector(({widgets}: Store) => widgets.requestedWidgets);
 
-    // useEffect(() => {
-    //     console.log(widgets)
-    //     console.log(requestedWidgets)
-    // }, [requestedWidgets]);
 
     useEffect(() => {
         _id && dispatch(fetchPostComments(_id as string));
@@ -98,6 +94,7 @@ const postPage = () => {
                             postType === 'learn' ? <LearnTypePostPage/> :
                                 postType === 'promotion' ? <PromotionTypePostPage/> :
                                     postType === 'article' ? <ArticleTypePostPage/> :
+                                    postType === 'event' ? <EventTypePostPage/> :
                                        null
                     }
 

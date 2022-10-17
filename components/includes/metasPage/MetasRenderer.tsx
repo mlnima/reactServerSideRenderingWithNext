@@ -14,15 +14,19 @@ const MetasRendererStyle = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  max-width: 100vw;
+  //margin: 8px;
+  //box-sizing: border-box;
 
   .letters-container {
-    margin: auto;
-
+    //margin: 0;
+    //box-sizing: border-box;
+    width: 100%;
     .group-wrapper {
-      margin: 20px auto;
-
+  
+      
       .letter {
-        margin: 3px 5px;
+        margin: 10px;;
         font-size: xx-large;
         color: var(--meta-text-color, #ccc);
       }
@@ -33,23 +37,22 @@ const MetasRendererStyle = styled.div`
         width: 100%;
 
         .meta-widget-item {
+          max-width: 250px;
           display: block;
           list-style: none;
           text-overflow: ellipsis;
-          //box-sizing: border-box;
-          margin: 5px 8px;
+          padding: 14px 10px;
           background-color: var(--meta-background-color, #f90);
-
+          overflow:hidden;
           a {
-            display: flex;
-            align-items: center;
-            //padding: 3px 6px;
-            //display: inline-block;
+            overflow:hidden;
             font-size: large;
             min-height: 48px;
             color: var(--meta-text-color, #ccc);
             cursor: pointer;
             text-decoration: none;
+            overflow-wrap: break-word;
+        
           }
         }
 
@@ -60,7 +63,7 @@ const MetasRendererStyle = styled.div`
           font-size: large;
           font-weight: bold;
           //padding: 3px 6px;
-          margin: 2px 5px;
+          margin: 10px;;
           min-height: 48px;
           .view-all-arrow-icon{
             rotate: 90deg;
@@ -82,16 +85,21 @@ const MetasRendererStyle = styled.div`
       columns: 200px 5;
       margin: auto;
       padding: 0;
-      width: 90%;
+      //width: 90%;
 
       .group-wrapper {
-
+        
+        a{
+          .letter{
+            margin: 0;
+            padding: 5px;
+          }
+        }
         .items {
           .meta-widget-item {
-            padding: 0;
-
+            padding: 5px;
             a {
-              padding: 2px;
+              //padding: 2px;
               font-size: initial;
               min-height: auto;
             }

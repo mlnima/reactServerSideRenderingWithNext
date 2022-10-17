@@ -7,7 +7,7 @@ import dynamic from "next/dynamic";
 import CardTitle from "@components/includes/cards/asset/CardTitle/CardTitle";
 
 const TextToCanvasImage = dynamic(() => import('@components/includes/cards/asset/TextToCanvasImage/TextToCanvasImage'))
-const CardImageRenderer = dynamic(() => import('@components/includes/cards/CardImageRenderer'))
+const CardImageRenderer = dynamic(() => import('@components/includes/cards/asset/CardImageRenderer'))
 
 const ActorCardStyle = styled.article`
   background-color: var(--post-element-background-color, #131314);

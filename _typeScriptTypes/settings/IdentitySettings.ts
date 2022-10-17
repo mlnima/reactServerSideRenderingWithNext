@@ -1,4 +1,4 @@
-import {Translations} from "@_typeScriptTypes/Translations";
+import {Translations} from "../../_typeScriptTypes/Translations";
 
 export interface IdentitySettings {
     favIcon: string;

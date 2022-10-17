@@ -1,5 +1,5 @@
-import {Post} from "@_typeScriptTypes/Post";
-import {User} from "@_typeScriptTypes/User";
+import {Post} from "../_typeScriptTypes/Post";
+import {User} from "../_typeScriptTypes/User";
 
 export interface Comment {
     _id: string,

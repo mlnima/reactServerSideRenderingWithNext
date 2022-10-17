@@ -2,14 +2,13 @@ import {FC} from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import CardImageRenderer from "@components/includes/cards/CardImageRenderer";
+import CardImageRenderer from "@components/includes/cards/asset/CardImageRenderer";
 import TextToCanvasImage from "@components/includes/cards/asset/TextToCanvasImage/TextToCanvasImage";
 import {Post} from "@_typeScriptTypes/Post";
 import CardTitle from "@components/includes/cards/asset/CardTitle/CardTitle";
-
-const CardViews = dynamic(() => import('./asset/CardViews/CardViews'))
-const CardRating = dynamic(() => import('./asset/CardRating/CardRating'))
-const CardLastUpdate = dynamic(() => import('./asset/CardLastUpdate/CardLastUpdate'));
+import DefaultPostCardStyle from "@components/includes/cards/asset/DefaultPostCardStyle";
+import useTranslation from "next-translate/useTranslation";
+const CardRating = dynamic(() => import('../asset/CardRating/CardRating'))
 
 interface LearnPostCardPropTypes {
     title: string,
@@ -27,11 +26,8 @@ interface LearnPostCardStylePropTypes {
     cardWidth: number
 }
 
-const LearnPostCardStyle = styled.article`
-  background-color: var(--post-element-background-color, #131314);
-  margin: 0 auto;
-  width: 100%;
-
+const LearnPostCardStyle = styled(DefaultPostCardStyle)`
+  
   .entry-header {
     text-align: center;
     margin-top: 2px;
@@ -89,6 +85,8 @@ const LearnPostCard: FC<LearnPostCardPropTypes> =
          index
      }) => {
 
+        const {t} = useTranslation()
+
         return (
             <LearnPostCardStyle className={'post-card'} cardWidth={cardWidth}>
                 <Link href={postUrl}>
@@ -105,23 +103,19 @@ const LearnPostCard: FC<LearnPostCardPropTypes> =
                                                cardWidth={cardWidth}/>
                         }
 
-                        {/*<header className={'entry-header'}>*/}
-                        {/*    <span className={'card-header'}>{title}</span>*/}
-                        {/*</header>*/}
                         <CardTitle title={title}/>
+
                         <div className={'card-under-media-info'}>
                             {!!views &&
-                            <CardViews views={views} className={'card-views card-under-media-info-data'}/>
+                                <p className={'card-under-title-info-data card-views'}>
+                                    <span className={'card-views-count'}>{views}</span>
+                                    <span >{t('common:Views')}</span>
+                                </p>
                             }
                             {!!rating &&
-                            <CardRating rating={rating} className={'card-rating card-under-media-info-data'}/>
+                                <CardRating rating={rating} className={'card-rating card-under-title-info-data'}/>
                             }
                         </div>
-
-                        {!!(post?.updatedAt || post?.createdAt) &&
-                        <CardLastUpdate targetedDate={post?.updatedAt || post?.createdAt}/>
-                        }
-
                     </a>
                 </Link>
             </LearnPostCardStyle>

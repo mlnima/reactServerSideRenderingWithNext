@@ -2,19 +2,17 @@ import {FC, useState} from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import VideoPostCardTrailer from "@components/includes/cards/VideoPostCardTrailer";
+import VideoPostCardTrailer from "@components/includes/cards/asset/VideoPostCardTrailer";
 import _qualityConvertor from "@components/includes/cards/asset/_qualityConvertor";
-import CardViews from "./asset/CardViews/CardViews";
 import CardTitle from "@components/includes/cards/asset/CardTitle/CardTitle";
 import {Post} from "@_typeScriptTypes/Post";
-import CardRating from "@components/includes/cards/asset/CardRating/CardRating";
 import useTranslation from "next-translate/useTranslation";
-
-const CardRatingBar = dynamic(() => import('./asset/CardRatingBar/CardRatingBar'))
-const CardQuality = dynamic(() => import('./asset/CardQuality/CardQuality'))
-const CardDuration = dynamic(() => import('./asset/CardDuration/CardDuration'))
+import DefaultPostCardStyle from "@components/includes/cards/asset/DefaultPostCardStyle";
+const CardRating = dynamic(() => import('../asset/CardRating/CardRating'))
+const CardQuality = dynamic(() => import('../asset/CardQuality/CardQuality'))
+const CardDuration = dynamic(() => import('../asset/CardDuration/CardDuration'))
 const TextToCanvasImage = dynamic(() => import('@components/includes/cards/asset/TextToCanvasImage/TextToCanvasImage'))
-const CardImageRenderer = dynamic(() => import('@components/includes/cards/CardImageRenderer'))
+const CardImageRenderer = dynamic(() => import('@components/includes/cards/asset/CardImageRenderer'))
 
 interface VideoPostCardPropTypes {
     title: string,
@@ -32,10 +30,8 @@ interface VideoPostCardStylePropTypes {
     cardWidth: number
 }
 
-const VideoPostCardStyle = styled.article`
-  background-color: var(--post-element-background-color, #131314);
-  margin: 0 auto;
-  width: 100%;
+const VideoPostCardStyle = styled(DefaultPostCardStyle)`
+
   .video-post-card-media {
     position: relative;
     color: var(--post-element-text-color, #ccc);
@@ -63,31 +59,7 @@ const VideoPostCardStyle = styled.article`
     }
     
   }
-
-  .card-under-title-info {
-    color: var(--post-element-text-color, #ccc);
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    font-size: small;
-    padding: 0 5px;
-    box-sizing: border-box;
-    .card-views{
-      margin-right: 10px;
-      
-      .card-views-count{
-        margin-right: 5px;
-      }
-    }
-
-    .card-under-title-info-data {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-  }
-
+  
   @media only screen and (min-width: 768px) {
     max-width: ${({cardWidth}: VideoPostCardStylePropTypes) => cardWidth}px;
   }
@@ -159,22 +131,19 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
                             {!!post?.duration &&
                             <CardDuration duration={post?.duration} className={'card-duration video-card-info-data'}/>}
 
-                            {/*<CardViews views={views} className={'card-views card-under-media-info-data'}/>*/}
-
                         </div>
-                        <div className={'video-post-card-info'}>
-                            <CardTitle title={title}/>
-                            <div className={'card-under-title-info'}>
-                                {!!views &&
-                                <p className={'card-under-title-info-data card-views'}>
-                                    <span className={'card-views-count'}>{views}</span>
-                                    <span >{t('common:Views')}</span>
-                                </p>
-                                }
-                                {!!rating &&
-                                <CardRating rating={rating} className={'card-rating card-under-title-info-data'}/>
-                                }
-                            </div>
+                        <CardTitle title={title}/>
+                        <div className={'card-under-media-info'}>
+
+                            {!!views &&
+                            <p className={'card-under-title-info-data card-views'}>
+                                <span className={'card-views-count'}>{views}</span>
+                                <span >{t('common:Views')}</span>
+                            </p>
+                            }
+                            {!!rating &&
+                            <CardRating rating={rating} className={'card-rating card-under-title-info-data'}/>
+                            }
                         </div>
                     </a>
                 </Link>

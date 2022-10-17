@@ -1,5 +1,5 @@
 import {model, Schema, Document} from "mongoose";
-import {CommentRaw} from "@_typeScriptTypes/Comment";
+import {CommentRaw} from "../../_typeScriptTypes/Comment";
 
 const commentSchema = new Schema({
     onDocumentId: {type:Schema.Types.ObjectId,ref:'post'},

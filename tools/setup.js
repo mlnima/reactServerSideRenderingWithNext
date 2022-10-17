@@ -1,12 +1,22 @@
-import dotenv from 'dotenv';
+// import dotenv from 'dotenv';
+// dotenv.config();
+// import connectToDatabase from '../expressServer/_variables/connectToDatabase';
+// connectToDatabase('Setup').finally()
+// import settingSchema from '../expressServer/models/settings/settingSchema';
+// import widgetSchema from '../expressServer/models/widgetSchema';
+// import postSchema from '../expressServer/models/postSchema';
+// import userSchema from '../expressServer/models/userSchema';
+// import bcrypt from 'bcryptjs';
+
+
+const dotenv = require('dotenv')
 dotenv.config();
-import connectToDatabase from '../expressServer/_variables/connectToDatabase';
+const connectToDatabase = require('../expressServer/_variables/connectToDatabase')
 connectToDatabase('Setup').finally()
-import settingSchema from '../expressServer/models/settings/settingSchema';
-import widgetSchema from '../expressServer/models/widgetSchema';
-import postSchema from '../expressServer/models/postSchema';
-import userSchema from '../expressServer/models/userSchema';
-import bcrypt from 'bcryptjs';
+const settingSchema = require('../expressServer/models/settings/settingSchema')
+const widgetSchema = require('../expressServer/models/settings/widgetSchema')
+const userSchema = require('../expressServer/models/userSchema')
+const bcrypt = require('bcryptjs')
 
 const identityData = {
     type: 'identity',
@@ -114,7 +124,7 @@ const designData = {
     --light-button-link-text-color: #212529;
 
 //border
---default-border-color : rgba(138,145,158,.5);
+    --default-border-color : rgba(138,145,158,.5);
     --default-border : solid var(--default-border-color,#ccc) .5px;
     --default-box-sizing:   border-box;
 }

@@ -1,6 +1,6 @@
-import {Comment} from "@_typeScriptTypes/Comment";
-import {User} from "@_typeScriptTypes/User";
-import {Meta} from "@_typeScriptTypes/Meta";
+import {Comment} from "../_typeScriptTypes/Comment";
+import {User} from "../_typeScriptTypes/User";
+import {Meta} from "../_typeScriptTypes/Meta";
 
 export interface Post {
     outPostType?: string;

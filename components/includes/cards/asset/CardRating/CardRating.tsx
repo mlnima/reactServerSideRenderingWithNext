@@ -3,10 +3,8 @@ import React, {FC} from "react";
 import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 
 const CardRatingStyledDiv = styled.div`
-  font-size: 12px;
-
   .icon {
-    margin: 0 2px;
+    margin: 0 3px;
   }
 `
 

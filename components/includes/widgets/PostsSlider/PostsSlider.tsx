@@ -11,10 +11,10 @@ import {useAppDispatch} from "@store_toolkit/hooks";
 import {Post} from "@_typeScriptTypes/Post";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
-const ArticlePostCard = dynamic(() => import('@components/includes/cards/ArticlePostCard'))
-const PromotionPostCard = dynamic(() => import('@components/includes/cards/PromotionPostCard'))
-const LearnPostCard = dynamic(() => import('@components/includes/cards/LearnPostCard'))
-const VideoPostCard = dynamic(() => import('@components/includes/cards/VideoPostCard'))
+const ArticlePostCard = dynamic(() => import('@components/includes/cards/postsCards/ArticlePostCard'))
+const PromotionPostCard = dynamic(() => import('@components/includes/cards/postsCards/PromotionPostCard'))
+const LearnPostCard = dynamic(() => import('@components/includes/cards/postsCards/LearnPostCard'))
+const VideoPostCard = dynamic(() => import('@components/includes/cards/postsCards/VideoPostCard'))
 
 const PostsSliderStyledDiv = styled.div`
   position: relative;

@@ -8,13 +8,12 @@ import {useAppDispatch} from "@store_toolkit/hooks";
 import CardTitle from "@components/includes/cards/asset/CardTitle/CardTitle";
 import {Post} from "@_typeScriptTypes/Post";
 import useTranslation from "next-translate/useTranslation";
-// import Button from '@mui/material/Button';
+import DefaultPostCardStyle from "@components/includes/cards/asset/DefaultPostCardStyle";
 
-
-const CardViews = dynamic(() => import('./asset/CardViews/CardViews'))
-const CardRating = dynamic(() => import('./asset/CardRating/CardRating'))
+const CardViews = dynamic(() => import('../asset/CardViews/CardViews'))
+const CardRating = dynamic(() => import('../asset/CardRating/CardRating'))
 const TextToCanvasImage = dynamic(() => import('@components/includes/cards/asset/TextToCanvasImage/TextToCanvasImage'))
-const CardImageRenderer = dynamic(() => import('@components/includes/cards/CardImageRenderer'))
+const CardImageRenderer = dynamic(() => import('@components/includes/cards/asset/CardImageRenderer'))
 
 interface PromotionPostCardPropTypes {
     title: string,
@@ -32,11 +31,8 @@ interface PromotionPostCardStylePropTypes {
     cardWidth: number
 }
 
-const PromotionPostCardStyle = styled.article`
-  background-color: var(--post-element-background-color, #131314);
-  margin: 0 auto;
-  width: 100%;
-
+const Style = styled(DefaultPostCardStyle)`
+  
   .card-under-media-info {
     font-size: 14px;
     display: flex;
@@ -93,7 +89,7 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
         const dispatch = useAppDispatch();
         const {t} = useTranslation()
         return (
-            <PromotionPostCardStyle className={'post-card'} cardWidth={cardWidth}>
+            <Style className={'post-card'} cardWidth={cardWidth}>
                 <a href={post.redirectLink} className='promotion-card-link-external'
                    onClick={() => dispatch(fetchViewPost(post._id))} target='_blank' rel="nofollow noopener external">
                     {post.mainThumbnail ?
@@ -116,7 +112,6 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
                                 {!!views &&
                                 <CardViews views={views} className={'card-views card-under-media-info-data'}/>
                                 }
-                                {/*<InfoIcon/>*/}
                                 {!!rating &&
                                 <CardRating rating={rating} className={'card-rating card-under-media-info-data'}/>
                                 }
@@ -127,7 +122,7 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
                         </span>
                     </a>
                 </Link>
-            </PromotionPostCardStyle>
+            </Style>
         )
     };
 export default PromotionPostCard

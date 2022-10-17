@@ -8,10 +8,11 @@ import ratingCalculator from "@_variables/util/ratingCalculator";
 import styled from "styled-components";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
-const ArticlePostCard = dynamic(() => import('@components/includes/cards/ArticlePostCard'))
-const PromotionPostCard = dynamic(() => import('@components/includes/cards/PromotionPostCard'))
-const LearnPostCard = dynamic(() => import('@components/includes/cards/LearnPostCard'))
-const VideoPostCard = dynamic(() => import('@components/includes/cards/VideoPostCard'))
+const ArticlePostCard = dynamic(() => import('@components/includes/cards/postsCards/ArticlePostCard'))
+const PromotionPostCard = dynamic(() => import('@components/includes/cards/postsCards/PromotionPostCard'))
+const LearnPostCard = dynamic(() => import('@components/includes/cards/postsCards/LearnPostCard'))
+const VideoPostCard = dynamic(() => import('@components/includes/cards/postsCards/VideoPostCard'))
+const EventPostCard = dynamic(() => import('@components/includes/cards/postsCards/EventPostCard'))
 
 const Style = styled.div`
   padding: 20px 0;
@@ -86,8 +87,13 @@ const PostsCardsRenderer: FC<CardsRendererPropTypes> = ({
                     isSidebar: isSidebar,
                 }
 
+
+
+
                 if (post?.postType === 'video' || post?.postType === 'externalVideo') {
                     return <VideoPostCard {...postProps} key={index} index={index}  />
+                }else if (post?.postType === 'event') {
+                    return <EventPostCard {...postProps} key={index} index={index}  />
                 } else if (post?.postType === 'promotion' || post?.postType === 'externalPromotion') {
                     return <PromotionPostCard {...postProps} key={index} index={index}/>
                 } else if (post?.postType === 'article' ||post?.postType === 'externalArticle') {
