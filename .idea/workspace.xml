@@ -21,9 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/CardsRenderer/PostsCardsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CardsRenderer/PostsCardsRenderer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/asset/OgImageGenerator/OgImageGenerator.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/asset/OgImageGenerator/OgImageGenerator.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/PostsSlider/PostsSlider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/PostsSlider/PostsSlider.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFileManagerControllers/ugc_postImagesUpload.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFileManagerControllers/ugc_postImagesUpload.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/workers/clientWorkers/clientUploadPostImageWorker/worker.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/workers/clientWorkers/clientUploadPostImageWorker/worker.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +53,12 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/expressServer/workers/commandExecutor/worker.ts" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/expressServer/workers/clientWorkers/clientUploadPostImageWorker/worker.ts" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/pages/profile/edit.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/expressServer/controllers/adminControllers/adminPostsControllers/adminSetMetaThumbnailsAndCount.ts" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFileManagerControllers/ugc_postImagesUpload.ts" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/expressServer/controllers/adminControllers/adminTerminalControllers/adminCommandExecutor.ts" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="PackageJsonUpdateNotifier">
     <dismissed value="$PROJECT_DIR$/package.json" />
@@ -112,7 +116,7 @@
       <command value="nextEnv" />
     </option>
   </component>
-  <component name="RunManager" selected="npm.build">
+  <component name="RunManager" selected="npm.dev">
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -165,9 +169,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.update:packages" />
+        <item itemvalue="npm.build" />
         <item itemvalue="npm.setup" />
         <item itemvalue="npm.start" />
       </list>
@@ -1324,7 +1328,7 @@
       <workItem from="1666565856947" duration="12862000" />
       <workItem from="1666609581050" duration="12518000" />
       <workItem from="1666636234085" duration="10399000" />
-      <workItem from="1666691825440" duration="5057000" />
+      <workItem from="1666691825440" duration="18679000" />
     </task>
     <servers />
   </component>
