@@ -3,7 +3,7 @@ import useTranslation from 'next-translate/useTranslation'
 import styled from "styled-components";
 import {wrapper} from "@store_toolkit/store";
 import {fetchUserResetPassword} from "@store_toolkit/clientReducers/userReducer";
-import _passwordValidator from "../../_variables/clientVariables/_passwordValidator";
+import _passwordValidator from "../../_variables/_clientVariables/clientVariables/_passwordValidator";
 import ValidInput from "../../components/includes/LoginRegisterPopup/ValidInput";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";

@@ -71,7 +71,7 @@ const actorPage = () => {
     )
 };
 
-
+//http://localhost:3000/actor/5f411023b4df305e903613ca
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     await _getServerSideStaticPageData(

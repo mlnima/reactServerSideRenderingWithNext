@@ -7,7 +7,7 @@ import {Post} from "@_typeScriptTypes/Post";
 
 export const fetchUserCreateNewPost = createAsyncThunk(
     'posts/fetchUserEditingPost',
-    async ({data, router}: { data: Post, router: NextRouter }, thunkAPI) => {
+    async ({data, push}: { data: Post, push: any }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         const comments = data.comments ? {comments: reduceArrayOfDataToIds(data.comments)} : {}
         const categories = data.categories ? {categories: reduceArrayOfDataToIds(data.categories)} : {}
@@ -26,17 +26,9 @@ export const fetchUserCreateNewPost = createAsyncThunk(
             token: localStorage.wt
         };
         await Axios.post(`/api/v1/posts/userCreateNewPost`, body).then(res => {
-
-                thunkAPI.dispatch(setAlert({
-                    active: true,
-                    type: 'success',
-                    message: res.data.message
-                }))
-
                 if (res.data?.post?._id) {
-                    router.push(`/profile/post?id=${res.data.post._id}`)
+                    push(`/profile/post?id=${res.data.post._id}`)
                 }
-                // return res.data.post
             }
         )
     }

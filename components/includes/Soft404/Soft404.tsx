@@ -31,7 +31,11 @@ const Soft404StyledDiv = styled.div`
 const Soft404 = () => {
     const {t} = useTranslation();
     const dispatch = useAppDispatch();
-const {locale} =useRouter()
+    const {locale, pathname} = useRouter()
+
+    useEffect(() => {
+        console.log(pathname)
+    }, [pathname]);
 
     useEffect(() => {
         dispatch(fetchPosts({
@@ -47,17 +51,17 @@ const {locale} =useRouter()
     }, []);
 
 
-    const title = useMemo(()=>t(`common:Nothing found`, {}, {fallback: 'Nothing found'}),[locale])
-    const description = useMemo(()=>{
+    const title = useMemo(() => t(`common:Nothing found`, {}, {fallback: 'Nothing found'}), [locale])
+    const description = useMemo(() => {
         return t(`common:Nothing found Description`,
             {},
             {fallback: 'It seems we can’t find what you’re looking for. Perhaps searching can help'})
-    },[locale])
+    }, [locale])
 
 
     return (
         <>
-            <Head >
+            <Head>
                 <title>{title}</title>
                 <meta name="description" content={description}/>
             </Head>

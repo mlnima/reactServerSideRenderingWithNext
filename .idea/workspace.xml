@@ -20,8 +20,81 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change afterPath="$PROJECT_DIR$/_typeScriptTypes/settings/MembershipSettings.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/includes/cards/asset/OgImageGenerator/OgImageGenerator.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/common/ImageUploading.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/common/ThumbnailUploadArea.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFileManagerControllers/ugc_postImageDelete.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFileManagerControllers/ugc_postImagesUpload.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/expressServer/workers/clientWorkers/clientUploadPostImageWorker/worker.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/admin/settings/membershipSettings/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/circle-plus-solid.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_ugcUploadPostImages.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/DayModeNightMode/DayModeNightMode.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/DayModeNightMode/DayModeNightMode.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_typeScriptTypes/storeTypes/AdminPanelSettings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_typeScriptTypes/storeTypes/AdminPanelSettings.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_typeScriptTypes/storeTypes/SettingsState.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_typeScriptTypes/storeTypes/SettingsState.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/clientAjaxVariables/_postDataCleanerBeforeSave.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/_clientVariables/clientAjaxVariables/_postDataCleanerBeforeSave.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/clientAjaxVariables/getMetaSuggestion.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/_clientVariables/clientAjaxVariables/getMetaSuggestion.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_breadcrumbLinkCorrector.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/_clientVariables/clientVariables/_breadcrumbLinkCorrector.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_canonicalUrlGenerators.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/_clientVariables/clientVariables/_canonicalUrlGenerators.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_clientGetPostsQueryGenerator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/_clientVariables/clientVariables/_clientGetPostsQueryGenerator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_getMultipleWidgetWithDataQueryGenerator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/_clientVariables/clientVariables/_getMultipleWidgetWithDataQueryGenerator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_metaPageQueryGenerator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/_clientVariables/clientVariables/_metaPageQueryGenerator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_passwordValidator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/_clientVariables/clientVariables/_passwordValidator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_postPageQueryGenerator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/_clientVariables/clientVariables/_postPageQueryGenerator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_shortNumber.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/_clientVariables/clientVariables/_shortNumber.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_widgetsRendererVariables.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/_clientVariables/clientVariables/_widgetsRendererVariables.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/convertDateToIso.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/_clientVariables/clientVariables/convertDateToIso.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/convertDurationStringToIso8601.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/_clientVariables/clientVariables/convertDurationStringToIso8601.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/updateRouteQuery.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/_clientVariables/clientVariables/updateRouteQuery.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/AdminPanelMainMenu/AdminPanelMainMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/AdminPanelMainMenu/AdminPanelMainMenu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/ActionButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/ActionButtons.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/FieldPreview.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/FieldPreview.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/BreadcrumbGenerator.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/BreadcrumbGenerator.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/LoginRegisterPopup/LoginRegisterPopupForms.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/LoginRegisterPopup/LoginRegisterPopupForms.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/ArticleTypePostPage/ArticleTypePostPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/ArticleTypePostPage/ArticleTypePostPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/EventTypePostPage/EventTypePostPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/EventTypePostPage/EventTypePostPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/PromotionTypePostPage/PromotionTypePostPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/PromotionTypePostPage/PromotionTypePostPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/EditLinkForAdmin/EditLinkForAdmin.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/EditLinkForAdmin/EditLinkForAdmin.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/RatingButtons/RatingButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/RatingButtons/RatingButtons.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/VideoPlayer/VideoPlayer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/VideoPlayer/VideoPlayer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/Soft404/Soft404.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Soft404/Soft404.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/WidgetsRenderer/WidgetsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/WidgetsRenderer/WidgetsRenderer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/CardsRenderer/PostsCardsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CardsRenderer/PostsCardsRenderer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/asset/CardImageRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/asset/CardImageRenderer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/common/MetaDataSelector.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/common/MetaDataSelector.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/common/ThumbnailUploader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/common/ThumbnailsUploader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/Authentication.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/Authentication.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/AuthenticationLoggedInItems.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/AuthenticationLoggedInItems.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/PostsSlider/PostsSlider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/PostsSlider/PostsSlider.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFileManagerRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientFileManagerRouter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientUserCreateNewPost.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientUserCreateNewPost.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientUserUpdatePost.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/controllers/clientControllers/clientPostsControllers/clientUserUpdatePost.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expressServer/models/postSchema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expressServer/models/postSchema.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/i18n.js" beforeDir="false" afterPath="$PROJECT_DIR$/i18n.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.configPlugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.configPlugins.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextConfigs/rewrites.js" beforeDir="false" afterPath="$PROJECT_DIR$/nextConfigs/rewrites.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/404.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/404.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/actor/[actorId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/actor/[actorId].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/settings/general/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/general/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/profile/edit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/edit.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/profile/post/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/post/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchMetas.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchMetas.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPageData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPageData.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPost.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPost.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPosts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPosts.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserCreateNewPost.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserCreateNewPost.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserEditingPost.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserEditingPost.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserEditingPostUpdate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserEditingPostUpdate.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/getTags.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/getTags.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store_toolkit/_storeVariables/_firstRequestHeadDataSetter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_firstRequestHeadDataSetter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store_toolkit/_storeVariables/_getServerSideStaticPageData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/_storeVariables/_getServerSideStaticPageData.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store_toolkit/adminReducers/adminPanelSettingsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/adminReducers/adminPanelSettingsReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store_toolkit/clientReducers/postsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/clientReducers/postsReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store_toolkit/clientReducers/settingsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/clientReducers/settingsReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store_toolkit/clientReducers/widgetsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store_toolkit/clientReducers/widgetsReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/setup.js" beforeDir="false" afterPath="$PROJECT_DIR$/tools/setup.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,9 +107,9 @@
         <option value="HTML File" />
         <option value="tsconfig.json" />
         <option value="CSS File" />
-        <option value="JavaScript File" />
-        <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -98,11 +171,11 @@
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\app" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\expressServer\workers\clientWorkers\clientUploadPostImageWorker" />
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\trash" />
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\_variables\_clientVariables" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\cards\metasCards" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\cards\postsCards" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\cards\asset" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\layouts\AdminLayout" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\layouts\MessengerLayout" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -164,9 +237,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.update:packages" />
         <item itemvalue="npm.setup" />
         <item itemvalue="npm.build" />
-        <item itemvalue="npm.update:packages" />
         <item itemvalue="npm.start" />
       </list>
     </recent_temporary>
@@ -1312,6 +1385,17 @@
       <workItem from="1666000463859" duration="6419000" />
       <workItem from="1666011636093" duration="330000" />
       <workItem from="1666028830351" duration="4887000" />
+      <workItem from="1666048644736" duration="1566000" />
+      <workItem from="1666083275918" duration="19507000" />
+      <workItem from="1666224848060" duration="2024000" />
+      <workItem from="1666262440984" duration="37578000" />
+      <workItem from="1666393534443" duration="3316000" />
+      <workItem from="1666437679644" duration="16571000" />
+      <workItem from="1666564729840" duration="620000" />
+      <workItem from="1666565856947" duration="12862000" />
+      <workItem from="1666609581050" duration="12518000" />
+      <workItem from="1666636234085" duration="10399000" />
+      <workItem from="1666691825440" duration="4204000" />
     </task>
     <servers />
   </component>
@@ -1343,6 +1427,7 @@
         <option value="$PROJECT_DIR$/expressServer/workers/setMetaThumbnailsAndCount/worker.js" />
         <option value="$PROJECT_DIR$/expressServer/workers/commandExecutor/worker.js" />
         <option value="$PROJECT_DIR$/expressServer/workers/generatePermaLink/worker.js" />
+        <option value="$PROJECT_DIR$/expressServer/workers/clientWorkers/clientUploadPostImageWorker/worker.js" />
       </list>
     </option>
   </component>
@@ -1600,8 +1685,8 @@
           <option name="timeStamp" value="152" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/common/ThumbnailUploader.tsx</url>
-          <line>33</line>
+          <url>file://$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/common/ThumbnailsUploader.tsx</url>
+          <line>42</line>
           <option name="timeStamp" value="154" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">

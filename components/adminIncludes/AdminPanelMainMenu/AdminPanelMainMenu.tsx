@@ -182,6 +182,7 @@ const AdminPanelMainMenu = () => {
             subItems: [
                 {name: 'customScript', url: '/admin/settings/customScript'},
                 {name: 'general', url: '/admin/settings/general'},
+                {name: 'membership', url: '/admin/settings/membershipSettings'},
                 {name: 'eCommerce', url: '/admin/settings/eCommerceSettings'},
             ]
         },

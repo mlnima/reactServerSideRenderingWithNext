@@ -32,14 +32,31 @@ const nextTranslateConfig = nextTranslate({
     }
 })
 
+
+// const waConfig = {
+//     webpack: (config, {isServer, webpack}) => {
+//         config.experiments = {
+//             asyncWebAssembly: true,
+//             layers: true,
+//         };
+//         return config;
+//     }
+// }
+
 // const withMDXConfig = withMDX({
 //     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
 // })
 
+
+
+
 const pluginsConfig = [
     bundleAnalyzerConfig,
+    // waConfig,
     nextTranslateConfig
 ]
+
+
 
 
 

@@ -3,7 +3,7 @@ import {RootState} from "../store";
 import _reduceWidgetsToGroups from "../../_variables/_reduceWidgetsToGroups/_reduceWidgetsToGroups";
 import Axios from "@_variables/util/Axios";
 import _getMultipleWidgetWithDataQueryGenerator
-    from "@_variables/clientVariables/_getMultipleWidgetWithDataQueryGenerator";
+    from "@_variables/_clientVariables/clientVariables/_getMultipleWidgetWithDataQueryGenerator";
 import {loading, setAlert} from "@store_toolkit/clientReducers/globalStateReducer";
 import {AxiosResponse} from "axios";
 import {Widget} from "@_typeScriptTypes/widgets/Widget";

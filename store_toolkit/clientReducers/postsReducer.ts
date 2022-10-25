@@ -18,12 +18,14 @@ import fetchUserEditingPost
     from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserEditingPost";
 import getTags
     from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/getTags";
-// import fetchUserCreateNewPost
-//     from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserCreateNewPost";
+import fetchUserCreateNewPost
+    from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserCreateNewPost";
 // import fetchUserEditingPostUpdate
 //     from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserEditingPostUpdate";
 import fetchNewComment
     from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchNewComment";
+import {_ugcDeletePostImage, _ugcUploadPostImages}
+    from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_ugcUploadPostImages";
 // import fetchViewPost
 //     from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchViewPost";
 // import fetchDeleteCommentByAdminInPostPage
@@ -220,6 +222,27 @@ export const postsSlice = createSlice({
                     post: {
                         ...state.post,
                         comments:[...(state.post?.comments || []),action.payload]
+                    }
+                }
+            })
+            .addCase(_ugcUploadPostImages.fulfilled, (state, action: PayloadAction<any>) => {
+
+                return {
+                    ...state,
+                    editingPost: {
+                        ...state.editingPost,
+                        //images:[...(state.editingPost?.images || []),...action.payload]
+                        images:action.payload
+                    }
+                }
+            })
+            .addCase(_ugcDeletePostImage.fulfilled, (state, action: PayloadAction<any>) => {
+
+                return {
+                    ...state,
+                    editingPost: {
+                        ...state.editingPost,
+                        images:action.payload
                     }
                 }
             })

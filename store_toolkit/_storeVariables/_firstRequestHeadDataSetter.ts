@@ -1,6 +1,6 @@
 import {getTextDataWithTranslation, textContentReplacer} from "@_variables/_variables";
 import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
-import {_metasCanonicalUrlGenerator} from "@_variables/clientVariables/_canonicalUrlGenerators";
+import {_metasCanonicalUrlGenerator} from "@_variables/_clientVariables/clientVariables/_canonicalUrlGenerators";
 
 const _firstRequestHeadDataSetter = (context, page: string, setHeadData: boolean, identity: any) => {
     const matchPathRegex = new RegExp('search|tags|categories|actors|home|profile|posts|chatroom|messenger|login|register|user', 'i')

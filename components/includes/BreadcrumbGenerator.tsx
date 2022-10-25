@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
 import useTranslation from "next-translate/useTranslation";
-import _breadcrumbLinkCorrector from "@_variables/clientVariables/_breadcrumbLinkCorrector";
+import _breadcrumbLinkCorrector from "@_variables/_clientVariables/clientVariables/_breadcrumbLinkCorrector";
 import {useAppSelector} from "@store_toolkit/hooks";
 import mongoIdValidator from "@_variables/util/mongoIdValidatorClient";
 import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";

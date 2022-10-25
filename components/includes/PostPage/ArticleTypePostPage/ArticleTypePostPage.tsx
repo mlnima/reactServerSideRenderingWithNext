@@ -9,7 +9,7 @@ import WidgetsRenderer from "@components/includes/WidgetsRenderer/WidgetsRendere
 import CommentFrom from "@components/includes/PostPage/components/CommentFrom/CommentFrom";
 import CommentsRenderer from "@components/includes/PostPage/components/CommentsRenderer/CommentsRenderer";
 import PostPageStyle from "@components/includes/PostPage/PostPageStyle";
-import convertDateToIso from "@_variables/clientVariables/convertDateToIso";
+import convertDateToIso from "@_variables/_clientVariables/clientVariables/convertDateToIso";
 import RatingButtons from "@components/includes/PostPage/components/RatingButtons/RatingButtons";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
 

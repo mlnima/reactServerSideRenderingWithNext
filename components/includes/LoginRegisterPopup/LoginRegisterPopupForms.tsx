@@ -4,7 +4,7 @@ import {useSelector} from 'react-redux';
 import styled from "styled-components";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 import Draggable from 'react-draggable';
-import _passwordValidator from "../../../_variables/clientVariables/_passwordValidator";
+import _passwordValidator from "../../../_variables/_clientVariables/clientVariables/_passwordValidator";
 import ValidInput from "./ValidInput";
 import {fetchLogin, fetchUserRegister} from "@store_toolkit/clientReducers/userReducer";
 import {setAlert} from "@store_toolkit/clientReducers/globalStateReducer";

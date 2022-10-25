@@ -1,7 +1,7 @@
 import React, {FC, useCallback, useEffect, useMemo,  useState} from 'react';
 import useEmblaCarousel from 'embla-carousel-react'
 import {useRouter} from "next/router";
-import _shortNumber from "@_variables/clientVariables/_shortNumber";
+import _shortNumber from "@_variables/_clientVariables/clientVariables/_shortNumber";
 import dynamic from "next/dynamic";
 import {useSelector} from "react-redux";
 import styled from "styled-components";

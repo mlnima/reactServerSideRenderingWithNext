@@ -105,7 +105,8 @@ const FieldPreview :FC<FieldPreviewPropTypes>= ({setWidgetData,widgetData,field}
         }
 
         const fieldIndexPlus = value => {
-            const updatedFieldData = {...field, fieldIndex: field.fieldIndex + value}
+            //@ts-ignore
+            const updatedFieldData = {...field, fieldIndex: parseInt(field.fieldIndex) + value}
             //@ts-ignore
             const findIndexOfTheField = widgetData?.uniqueData.formFields.findIndex(f => f.filedId === field.filedId)
             const updatedFields = [

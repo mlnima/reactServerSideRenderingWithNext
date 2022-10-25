@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import React, {FC, useMemo,memo} from "react";
-import convertDurationStringToIso8601 from "@_variables/clientVariables/convertDurationStringToIso8601";
-import convertDateToIso from "@_variables/clientVariables/convertDateToIso";
+import convertDurationStringToIso8601 from "@_variables/_clientVariables/clientVariables/convertDurationStringToIso8601";
+import convertDateToIso from "@_variables/_clientVariables/clientVariables/convertDateToIso";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
 
 const VideoPlayerStyledDiv = styled.div`

@@ -148,17 +148,21 @@ const AuthenticationStyledDiv = styled.div`
 
 const Authentication: FC = () => {
 
-    const {profileImage, loggedIn, username, allowUserToPost, membership} = useSelector((
-        {
-            user,
-            settings
-        }: Store) => {
+    const {
+        profileImage,
+        loggedIn,
+        username,
+        allowUserToPost,
+        membership,
+        allowedPostTypeUserCanCreate,
+    } = useSelector(({user, settings}: Store) => {
         return {
             profileImage: user?.userData?.profileImage,
             loggedIn: user?.loggedIn,
             username: user?.userData?.username,
-            allowUserToPost: settings?.identity?.allowUserToPost,
-            membership: settings?.identity?.membership,
+            allowUserToPost: settings?.membershipSettings?.allowUserToPost,
+            membership: settings?.membershipSettings?.membership,
+            allowedPostTypeUserCanCreate:settings?.membershipSettings?.allowedPostTypeUserCanCreate
         }
     })
 
@@ -184,6 +188,7 @@ const Authentication: FC = () => {
                 </button>
                 {!loggedIn && <AuthenticationNotLoggedInItems onOpenCloseHandler={onOpenCloseHandler}/>}
                 {loggedIn && <AuthenticationLoggedInItems onOpenCloseHandler={onOpenCloseHandler}
+                                                          allowedPostTypeUserCanCreate={allowedPostTypeUserCanCreate}
                                                           profileImage={profileImage}
                                                           username={username}
                                                           allowUserToPost={allowUserToPost}

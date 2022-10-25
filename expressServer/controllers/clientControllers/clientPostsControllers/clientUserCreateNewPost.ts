@@ -1,4 +1,4 @@
-const postSchema = require("../../../models/postSchema");
+import postSchema from "../../../models/postSchema";
 
 const clientUserCreateNewPost = async (req, res) => {
     const newPost = req.body.postData;
@@ -8,6 +8,7 @@ const clientUserCreateNewPost = async (req, res) => {
 
         newPostDataToSave.save((err, savedPostData) => {
             if (err) {
+
                 if (err.code === 11000) {
                     res.status(400).json({message: 'Post with this title already exist in the Database', type: 'error'})
                 } else {

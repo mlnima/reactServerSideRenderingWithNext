@@ -66,7 +66,7 @@ const EditLinkForAdmin: FC = () => {
 
 
     return (
-        <Draggable handle='.handle'>
+        <div>
             <EditLinkForAdminStyledDiv className='edit-as-admin handle'>
                 <a className='btn btn-primary' href={`/admin/post?id=${_id}`} target='_blank'>
                     Edit As Admin
@@ -95,7 +95,7 @@ const EditLinkForAdmin: FC = () => {
                 <h4 className='status'>Status : {status}</h4>
 
             </EditLinkForAdminStyledDiv>
-        </Draggable>
+        </div>
 
     )
 };

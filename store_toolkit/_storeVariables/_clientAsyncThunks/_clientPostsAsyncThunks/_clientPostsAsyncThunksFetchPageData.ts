@@ -5,7 +5,7 @@ import type {
     PreviewData,
 } from "next";
 import {setHeadData, setNotFoundPage} from "@store_toolkit/clientReducers/globalStateReducer";
-import {_customPageCanonicalUrlGenerator} from "@_variables/clientVariables/_canonicalUrlGenerators";
+import {_customPageCanonicalUrlGenerator} from "@_variables/_clientVariables/clientVariables/_canonicalUrlGenerators";
 import {ParsedUrlQuery} from "querystring";
 
 const fetchPageData = createAsyncThunk(

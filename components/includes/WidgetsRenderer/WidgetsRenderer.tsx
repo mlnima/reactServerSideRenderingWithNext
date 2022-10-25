@@ -8,7 +8,7 @@ import {
     _renderByDayCondition,
     _renderByDevice,
     _renderByLanguageCondition,
-} from "@_variables/clientVariables/_widgetsRendererVariables";
+} from "@_variables/_clientVariables/clientVariables/_widgetsRendererVariables";
 
 
 const DynamicNoSSR = dynamic(() => import('./DynamicNoSSR'));

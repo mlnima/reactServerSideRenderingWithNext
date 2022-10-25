@@ -1,4 +1,4 @@
-import mongoIdValidator from '../util/mongoIdValidatorClient'
+import mongoIdValidator from '../../util/mongoIdValidatorClient'
 import {NextRouter} from "next/router";
 
 const _clientGetPostsQueryGenerator = (queryData: NextRouter['query'], metaIdData: string) => {

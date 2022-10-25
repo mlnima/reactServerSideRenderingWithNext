@@ -27,7 +27,12 @@ module.exports = () =>{
                 has: [{type: 'query', key: 'identifier'}]
             },
             {
-                source: `/:metaType(categories|tags|actors)?/:title`,
+                source: `/posts/:postType(video|product|article|book|standard|promotion|learn|food|book)?/:id`,
+                destination: '/post/:postType/:id',
+                // has: [{type: 'query', key: 'identifier'}]
+            },
+            {
+                source: `/:metaType(categories|tags|actors|category|tag|actor)?/:title`,
                 destination: '/:metaType/:content',
                 has: [{type: 'query', key: 'content'}]
             },
@@ -81,39 +86,8 @@ module.exports = () =>{
     }
 }
 
-
-// {
-//     source: `/post/:postType(video|post|product|article|book)`,
-//     destination: '/posts?postType=:postType' ,
-//     has: [{type: 'query', key: 'postType'}]
-// },
-// {
-//     source: `/post/out/:postType(video|product|article|book|standard|promotion|learn|food|book|out)?/:id`,
-//     destination: '/post/:postType/:id',
-//     has: [{type: 'query', key: 'id'},{type: 'query', key: 'postType'}]
-// },
-// {
-//     source: `/:title`,
-//     destination: '/post/undefinedType/:title',
-//     has: [{type: 'query', key: 'title'}]
-// },
-// {
-//     source: `/post/:postType/:id`,
-//     destination: '/posts/:postType/:id',
-// },
-// {
-//     source: `/category/:categoryId`,
-//     destination: '/categories/:categoryId',
-// },
-// {
-//     source: `/tag/:tagId`,
-//     destination: '/tags/:tagId',
-// },
-// {
-//     source: `/actor/:actorId`,
-//     destination: '/actors/:actorId',
-// },
-// {
-//     source: `/categories/:categoryId/page/:page`,
-//     destination: '/categories/:page',
-// },
+//url examples
+//notfound
+// /fa/actor/5f411023b4df305e903613ca
+// /fi/posts/video/62118ef9d325ca4bc29b7a63
+// /Neighbor VR?content=5f41107eb4df305e903619f3

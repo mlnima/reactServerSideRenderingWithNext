@@ -9,6 +9,7 @@ import {setSettingsForAdmin} from "@store_toolkit/clientReducers/settingsReducer
 interface AdminPanelSettingState {
     design: {},
     identity: {},
+    membershipSettings:{}
     eCommerce: {},
     ip: string,
 }
@@ -16,6 +17,7 @@ interface AdminPanelSettingState {
 const initialState:AdminPanelSettingState = {
     design: {},
     identity: {},
+    membershipSettings:{},
     eCommerce: {},
     ip: '',
 }
@@ -25,15 +27,17 @@ export const adminPanelGetSettings = createAsyncThunk(
     'adminPanelSettings/adminPanelGetSettings',
     async (data:any, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await Axios.get(`/api/admin/settings/getMultipleSetting${_getMultipleSettingsQueryGenerator(['identity', 'design', 'adminSettings'])}&token=${localStorage.wt}`)
+        return await Axios.get(`/api/admin/settings/getMultipleSetting${_getMultipleSettingsQueryGenerator(['identity', 'design', 'adminSettings','membershipSettings'])}&token=${localStorage.wt}`)
             .then(res => {
 
                 const designSettings = res.data?.settings?.find((setting: any) => setting.type === 'design') || {};
                 const identitySettings = res.data?.settings?.find((setting: any) => setting.type === 'identity') || {};
+                const membershipSettings = res.data?.settings?.find((setting: any) => setting.type === 'membershipSettings') || {};
 
                 const settings = {
                     design: designSettings?.data,
                     identity: identitySettings?.data,
+                    membershipSettings: membershipSettings?.data,
                 }
 
                 thunkAPI.dispatch(setSettingsForAdmin(settings))
@@ -72,7 +76,15 @@ export const adminPanelSettingsSlice = createSlice({
     name:'adminPanelSettings',
     initialState,
     reducers:{
-
+        adminEditMembershipSettings:(state, action: PayloadAction<any>) => {
+            return {
+                ...state,
+                membershipSettings: {
+                    ...state.membershipSettings,
+                    ...action.payload
+                }
+            };
+        },
         adminEditIdentity:(state, action: PayloadAction<any>) => {
             return {
                 ...state,
@@ -92,6 +104,7 @@ export const adminPanelSettingsSlice = createSlice({
             };
         },
 
+
     },
     extraReducers:(builder )=> {
         builder.addCase(adminPanelGetSettings.fulfilled,(state, action: PayloadAction<any>) =>{
@@ -103,7 +116,7 @@ export const adminPanelSettingsSlice = createSlice({
     }
 })
 
-export const {adminEditIdentity,adminEditDesign} = adminPanelSettingsSlice.actions
+export const {adminEditIdentity,adminEditDesign,adminEditMembershipSettings} = adminPanelSettingsSlice.actions
 
 export const adminPanelSettingsReducer = (state: RootState) => state?.adminPanelSettings || null;
 

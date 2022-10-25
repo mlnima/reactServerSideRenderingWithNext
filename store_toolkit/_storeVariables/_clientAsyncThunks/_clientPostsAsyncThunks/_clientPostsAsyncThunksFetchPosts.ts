@@ -1,9 +1,9 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {convertMetasTypeToSingular, getTextDataWithTranslation, textContentReplacer} from "@_variables/_variables";
-import _clientGetPostsQueryGenerator from "@_variables/clientVariables/_clientGetPostsQueryGenerator";
+import _clientGetPostsQueryGenerator from "@_variables/_clientVariables/clientVariables/_clientGetPostsQueryGenerator";
 import Axios from "@_variables/util/Axios";
 import {setHeadData} from "@store_toolkit/clientReducers/globalStateReducer";
-import {_postsCanonicalUrlGenerator} from "@_variables/clientVariables/_canonicalUrlGenerators";
+import {_postsCanonicalUrlGenerator} from "@_variables/_clientVariables/clientVariables/_canonicalUrlGenerators";
 import {locale} from "moment";
 
 
@@ -32,12 +32,13 @@ const fetchPosts = createAsyncThunk(
         // console.log(context.req.url)
 
 
-        if (!!context && singularMetaForm !== options.page && options.page!== '404' && options.page!== 'posts' && options.page!== 'search'){
-            context.res.writeHead(301, {
-                Location: `/${singularMetaForm}/${apiData.data?.meta?._id}`
-            });
-            context.res.end();
-        }
+        // if (!!context && singularMetaForm !== options.page && options.page!== '404' && options.page!== 'posts' && options.page!== 'search'){
+        //     console.log(`/${singularMetaForm}/${apiData.data?.meta?._id}`)
+            // context.res.writeHead(301, {
+            //     Location: `/${singularMetaForm}/${apiData.data?.meta?._id}`
+            // });
+            // context.res.end();
+        // }
 
         const dataForm = metaType && singularMetaForm ? `${singularMetaForm}Data` : '';
         const meta = apiData?.data?.meta

@@ -1,7 +1,7 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {loading} from "@store_toolkit/clientReducers/globalStateReducer";
 import Axios from "@_variables/util/Axios";
-import _postPageQueryGenerator from "@_variables/clientVariables/_postPageQueryGenerator";
+import _postPageQueryGenerator from "@_variables/_clientVariables/clientVariables/_postPageQueryGenerator";
 
 export const fetchUserEditingPost = createAsyncThunk(
     'posts/fetchUserEditingPost',

@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import _metaPageQueryGenerator from "@_variables/clientVariables/_metaPageQueryGenerator";
+import _metaPageQueryGenerator from "@_variables/_clientVariables/clientVariables/_metaPageQueryGenerator";
 import Axios from "@_variables/util/Axios";
 
 const fetchMetas = createAsyncThunk(

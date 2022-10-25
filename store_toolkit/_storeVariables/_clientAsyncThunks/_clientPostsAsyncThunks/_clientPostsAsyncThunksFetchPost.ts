@@ -1,9 +1,9 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import isValidObjectId from "@_variables/util/mongoIdValidatorClient";
 import Axios from "@_variables/util/Axios";
-import _postPageQueryGenerator from "@_variables/clientVariables/_postPageQueryGenerator";
+import _postPageQueryGenerator from "@_variables/_clientVariables/clientVariables/_postPageQueryGenerator";
 import {setHeadData} from "@store_toolkit/clientReducers/globalStateReducer";
-import {_postCanonicalUrlGenerator} from "@_variables/clientVariables/_canonicalUrlGenerators";
+import {_postCanonicalUrlGenerator} from "@_variables/_clientVariables/clientVariables/_canonicalUrlGenerators";
 import postTypes from "@_dataStructures/postTypes";
 
 interface FetchPost {

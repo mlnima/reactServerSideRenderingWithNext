@@ -4,6 +4,8 @@ import isImageAllowedForNextImage from "@_variables/util/isImageAllowedForNextIm
 import Image from 'next/image'
 import styled from "styled-components";
 
+// import OgImageGenerator from "@components/includes/cards/asset/OgImageGenerator/OgImageGenerator";
+
 interface CardImageNextPropTypes {
     imageUrl: string,
     mediaAlt: string,
@@ -53,15 +55,15 @@ const CardImageRenderer: FC<CardImageNextPropTypes> =
      }) => {
         const [gotError, setGotError] = useState(false)
 
-        const defaultUrl = useMemo(()=>{
-            if (gotError){
+        const defaultUrl = useMemo(() => {
+            if (gotError) {
                 return `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${'/static/images/noImage/no-image-available.png'}`
-            }else {
+            } else {
                 return imageUrl && !isAbsolutePath(imageUrl) ?
                     `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${imageUrl}` :
                     imageUrl
             }
-        },[gotError,imageUrl])
+        }, [gotError, imageUrl])
 
         return (
             <CardImageRendererStyle postsPerRawForMobile={postsPerRawForMobile}
@@ -81,9 +83,11 @@ const CardImageRenderer: FC<CardImageNextPropTypes> =
                     <img src={defaultUrl}
                          alt={mediaAlt}
                          className={'card-image'}
-                         //onError={({currentTarget}) => currentTarget.src = noImageUrl}
+                        //onError={({currentTarget}) => currentTarget.src = noImageUrl}
                          onError={() => setGotError(true)}
                     />
+
+
                 }
 
             </CardImageRendererStyle>
@@ -91,6 +95,7 @@ const CardImageRenderer: FC<CardImageNextPropTypes> =
 
     };
 export default CardImageRenderer
+// <OgImageGenerator title={mediaAlt} postsPerRawForMobile={postsPerRawForMobile} cardWidth={cardWidth}/>
 
 
 // if (imageUrlSource && isImageAllowedForNextImage(imageUrlSource)  && index >= 2 )

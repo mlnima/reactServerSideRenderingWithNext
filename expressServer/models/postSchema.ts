@@ -3,7 +3,6 @@ const Schema = mongoose.Schema
 import postTypes from "../../_dataStructures/postTypes";
 import videoQualities from "../../_dataStructures/videoQualities";
 
-
 const downloadLinks = mongoose.Schema({
     title:String,
     url:String

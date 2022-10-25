@@ -10,7 +10,7 @@ import {Store} from "@_typeScriptTypes/storeTypes/Store";
 import {Widget} from "@_typeScriptTypes/widgets/Widget";
 import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 import {useRouter} from "next/router";
-import updateRouteQuery from "@_variables/clientVariables/updateRouteQuery";
+import updateRouteQuery from "@_variables/_clientVariables/clientVariables/updateRouteQuery";
 
 
 

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useSelector} from "react-redux";
 import styled from "styled-components";
 import {wrapper} from "@store_toolkit/store";
@@ -8,7 +8,7 @@ import CreateEditArticlePostField
     from "@components/includes/profilePageComponents/profilePost/CreateEditArticlePostField/CreateEditArticlePostField";
 import TextInput from "@components/includes/profilePageComponents/profilePost/common/TextInput";
 import MetaDataSelector from "@components/includes/profilePageComponents/profilePost/common/MetaDataSelector";
-import ThumbnailUploader from "@components/includes/profilePageComponents/profilePost/common/ThumbnailUploader";
+import ThumbnailsUploader from "@components/includes/profilePageComponents/profilePost/common/ThumbnailsUploader";
 import VideoTypeFields from "@components/includes/profilePageComponents/profilePost/VideoTypeFields/VideoTypeFields";
 import {editPostField, setEditingPostImagesToUpload} from "@store_toolkit/clientReducers/postsReducer";
 import fetchUserEditingPostUpdate
@@ -18,26 +18,27 @@ import fetchUserEditingPost
 import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import DynamicNoSSR from "@components/includes/WidgetsRenderer/DynamicNoSSR";
-import _postDataCleanerBeforeSave from "@_variables/clientAjaxVariables/_postDataCleanerBeforeSave";
+import _postDataCleanerBeforeSave from "@_variables/_clientVariables/clientAjaxVariables/_postDataCleanerBeforeSave";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
-
-
+import fetchUserCreateNewPost
+    from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserCreateNewPost";
 // const WidgetsRenderer = dynamic(() => import('../WidgetsRenderer/WidgetsRenderer'))
-
 const ProfilePostPageStyledDiv = styled.div`
   margin: 20px auto;
+  box-sizing: border-box;
   max-width: 946px;
 
   .create-new-post-fields {
     width: 100%;
-
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
     margin: 20px 5px;
-
+    input{
+      //width: 320px;
+    }
     .description {
-      min-height: 400px;
+      min-height: 90px;
     }
   }
 
@@ -50,12 +51,9 @@ const ProfilePostPageStyledDiv = styled.div`
 
 `
 const post = () => {
-
     const dispatch = useAppDispatch();
-    const {query} = useRouter();
-    const finalPostDataToSave = new FormData()
+    const {query,push} = useRouter();
     const postType = query?.postType;
-
     const {userData, editingPost} = useSelector((store: Store) => {
         return {
             userData: store?.user.userData,
@@ -63,15 +61,20 @@ const post = () => {
         }
     })
 
-    // useEffect(() => {
-    //     if (typeof window !=='undefined'){
-    //         editingPostImagesToUpload = new FormData()
-    //     }
-    // }, []);
-
     useEffect(() => {
-        if (query.id) dispatch(fetchUserEditingPost(query.id as string));
-        if (!query.id && query?.postType) dispatch(editPostField({['postType']: query.postType}));
+        if (query.id) {
+            dispatch(fetchUserEditingPost(query.id as string));
+        }else  if (!query.id && !!query?.new && !!query?.postType){
+            dispatch(fetchUserCreateNewPost({
+                data: {
+                    ...editingPost,
+                    status: 'pending',
+                    postType:query?.postType as string,
+                    author: userData?._id
+                },
+                push
+            }))
+        }
     }, []);
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -80,20 +83,13 @@ const post = () => {
 
     const onSubmitHandler = (e) => {
         e.preventDefault()
-        finalPostDataToSave.append(
-            'postData',
-            JSON.stringify(_postDataCleanerBeforeSave(editingPost))
-        )
-        finalPostDataToSave.append('token',localStorage.wt)
-        finalPostDataToSave.append('postId', editingPost._id)
 
         if (
             editingPost._id &&
             (userData?._id === editingPost.author || userData.role === 'administrator') &&
             query.id
         ) {
-
-            dispatch(fetchUserEditingPostUpdate(finalPostDataToSave))
+            dispatch(fetchUserEditingPostUpdate(editingPost))
         } else if (!editingPost._id) {
             // dispatch(fetchUserCreateNewPost({
             //     data: {
@@ -107,32 +103,15 @@ const post = () => {
         }
     }
 
+
+
+
+
+
     const onMetaChangeHandler = (metas, type) => {
         dispatch(editPostField({[type]: metas}))
     }
 
-    const onSelectImagesHandler = (images) => {
-
-        Object.entries(images).forEach(([key, value]) => {
-            //@ts-ignore
-            const fileNameSplit = value?.name?.split('.')
-            const fileExtension = fileNameSplit[fileNameSplit.length -1]
-            const currentAmountOfImages = editingPost?.images?.length || 0
-            finalPostDataToSave.append(`image-${currentAmountOfImages + key}.${fileExtension}`, value)
-        });
-
-        // Object.keys(images).forEach((key)=> {
-        //     editingPostImagesToUpload.append(`image-${key}`,images[key])
-        // });
-
-        // Object.entries(editingPostImagesToUpload).forEach(([key, value]) => {
-        //     console.log(key, value);
-        // });
-        //
-        // for (const pair of editingPostImagesToUpload.entries()) {
-        //     console.log(`${pair[0]}, ${pair[1]}`);
-        // }
-    }
 
     return (
         <DynamicNoSSR>
@@ -166,11 +145,10 @@ const post = () => {
                         : null
                     }
 
-                    <ThumbnailUploader mainThumbnail={editingPost?.mainThumbnail}
-                                       images={editingPost?.images}
-                                       finalPostDataToSave={finalPostDataToSave}
-                                       onSelectImagesHandler={onSelectImagesHandler}
-                                       postId={editingPost?._id}/>
+                    <ThumbnailsUploader mainThumbnail={editingPost?.mainThumbnail}
+                                        postId={editingPost?._id}
+                                        images={editingPost?.images}
+                    />
 
                     {userData.role === 'administrator' ?
                         <>
@@ -253,7 +231,6 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 
     return null
 })
-
 
 
 export default post;

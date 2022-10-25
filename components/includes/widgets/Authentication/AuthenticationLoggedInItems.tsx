@@ -45,6 +45,7 @@ interface AuthenticationLoggedInItemsPropTypes {
     membership: boolean,
     allowUserToPost: boolean,
     username: string,
+    allowedPostTypeUserCanCreate: string[],
 }
 
 const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
@@ -52,7 +53,8 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
          onOpenCloseHandler,
          membership,
          allowUserToPost,
-         username
+         username,
+         allowedPostTypeUserCanCreate
      }) => {
         const {t} = useTranslation('common');
         const {pathname} = useRouter()
@@ -97,7 +99,7 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
 
                         {allowUserToPost &&
                         <span className='logged-item logged-item-action' aria-label='logged-in-items'>
-                                <Link href={`/profile/posts/newPost?postType=article`}>
+                                <Link href={`/profile/post?new=1&postType=article`}>
                                     <a onClick={onOpenCloseHandler}>
 
                                         <div className={'icon-wrapper'}>
