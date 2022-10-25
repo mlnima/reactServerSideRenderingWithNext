@@ -28,7 +28,7 @@ const Style = styled.div`
 `
 
 
-
+//@ts-ignore
 const OgImageGenerator: FC<PropTypes> = ({title,cardWidth,postsPerRawForMobile}) => {
 
     return new ImageResponse(

@@ -73,7 +73,7 @@ const PostsCardsRenderer: FC<CardsRendererPropTypes> = ({
 
             {(uniqueData?.posts || posts || []).map((post: Post, index: number) => {
                 const postProps = {
-                    views: _shortNumber(post.views || 0) as number,
+                    views: _shortNumber(post.views || 0) as unknown as number,
                     cardWidth,
                     postsPerRawForMobile,
                     rating: post.likes || post.disLikes ? ratingCalculator(post.likes, post.disLikes) : null,
