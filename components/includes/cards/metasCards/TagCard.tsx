@@ -56,8 +56,8 @@ const TagCard: FC<TagCardPropTypes> =
 
         return (
             <TagCardStyle cardWidth={cardWidth} className={'tag-card'}>
-                <Link href={`/tag/${meta?._id}`}>
-                    <a className='tag-card-link' title={title as string}>
+                <Link href={`/tag/${meta?._id}`} className='tag-card-link' title={title as string}>
+
                         {!!meta?.imageUrl ?
                             <CardImageRenderer imageUrl={meta?.imageUrl}
                                                mediaAlt={title}
@@ -70,8 +70,6 @@ const TagCard: FC<TagCardPropTypes> =
                         }
 
                         <CardTitle title={title}/>
-
-                    </a>
                 </Link>
             </TagCardStyle>
         )

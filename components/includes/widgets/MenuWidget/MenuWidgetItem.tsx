@@ -26,15 +26,12 @@ const MenuWidgetItem: FC<MenuWidgetItemPropTypes> = ({menuItem, setOpen}) => {
 
     return (
         <li className={'menu-item'}>
-            <Link href={menuItem.target}>
-                <a className={'menu-item-link'}
-                   target={menuItem.target.includes('http') ? '_blank' : '_self'}
-                   title={linkNameWithTranslate}
-                   onClick={()=>setOpen(false)}>
-
+            <Link href={menuItem.target}
+                  className={'menu-item-link'}
+                  target={menuItem.target.includes('http') ? '_blank' : '_self'}
+                  title={linkNameWithTranslate}
+                  onClick={()=>setOpen(false)}>
                     {linkNameWithTranslate}
-
-                </a>
             </Link>
         </li>
     )

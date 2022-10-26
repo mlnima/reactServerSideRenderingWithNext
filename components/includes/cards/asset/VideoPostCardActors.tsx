@@ -89,8 +89,8 @@ const VideoPostCardActors: FC<VideoPostCardActorsPropTypes> = ({actors, hover, u
                                 {actors?.map((actor, index) => {
                                     return (
                                         <span key={actor?._id + index}>
-                                            <Link href={`/actor/${actor?._id}`}>
-                                                <a className={'card-actor'}>{actor.name}{index !== actors.length -1 ? ', ' :''}</a>
+                                            <Link href={`/actor/${actor?._id}`} className={'card-actor'}>
+                                               {actor.name}{index !== actors.length -1 ? ', ' :''}
                                             </Link>
                                         </span>
                                     )

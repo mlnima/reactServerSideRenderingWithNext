@@ -23,10 +23,10 @@ const PaginationComponentPageLink: FC<PropTypes> = ({pageNumber, isActivePage}) 
     }, [query, pageNumber])
 
     return (
-        <Link key={pageNumber.toString()} href={{pathname: pathname, query: nextQuery}}>
-            <a className={`pagination-item ${isActivePage ? 'active-item' : ''}`}>
+        <Link key={pageNumber.toString()}
+              href={{pathname: pathname, query: nextQuery}}
+              className={`pagination-item ${isActivePage ? 'active-item' : ''}`}>
                 {pageNumber}
-            </a>
         </Link>
     );
 };

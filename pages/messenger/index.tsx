@@ -30,8 +30,8 @@ const messengerPage = () => {
         );
     } else return (
         <MessengerPageStyledMain className='messenger-page main'>
-            <Link href={'/register'}>
-                <a className='messenger-page-register-page-link'>You need to create an account in order to access this page</a>
+            <Link href={'/register'} className='messenger-page-register-page-link'>
+                You need to create an account in order to access this page
             </Link>
         </MessengerPageStyledMain>
     )

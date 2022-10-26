@@ -167,10 +167,8 @@ const ChatRoomMessageUserInfoPopup = () => {
                                 <div className='chatroom-message-user-info-popup-user-data'>
                                     <p className='chatroom-message-user-info-popup-username'>{activeVisibleProfile.username}</p>
                                     <div className='chatroom-message-user-info-popup-user-data-links'>
-                                        <Link href={`/user/${activeVisibleProfile.username}`}>
-                                            <a className={'btn btn-primary'}>
+                                        <Link href={`/user/${activeVisibleProfile.username}`} className={'btn btn-primary'}>
                                                 <span className={'icon view-profile'}/>
-                                            </a>
                                         </Link>
                                         <button onClick={onConversationHandler} className={'btn btn-primary'}>
                                             <span className={'icon send-message'}/>

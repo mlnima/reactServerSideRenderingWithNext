@@ -212,10 +212,8 @@ const AdminPanelMainMenu = () => {
         return (
             <div key={item} className='SideBarItemElement'>
                 <div className='SideBarItemTitle'>
-                    <Link href={sidebarItems[item].pathURL}>
-                        <a className='SideBarItem' onClick={() =>    dispatch(setSidebarStatus(false))}>
+                    <Link className='SideBarItem' href={sidebarItems[item].pathURL} onClick={() => dispatch(setSidebarStatus(false))}>
                             {convertVariableNameToName(item)}
-                        </a>
                     </Link>
                     {sidebarItems[item].subItems?.length ?
                         <span className={'sidebar-items-switch'}
@@ -237,14 +235,15 @@ const AdminPanelMainMenu = () => {
                 <div className='SideBarItemElementSubItems'>
                     {sidebarItems[item]?.subItems?.map(subItem => {
                         return (
-                            <Link key={subItem.url} href={subItem.url}>
-                                <a className='SideBarItem-SubItem'
-                                   style={{
-                                       display: hovered === item ? 'flex' : 'none'
-                                   }}
-                                   onClick={() => dispatch(setSidebarStatus(false))}>
+                            <Link className='SideBarItem-SubItem'
+                                  key={subItem.url} href={subItem.url}
+                                  style={{
+                                      display: hovered === item ? 'flex' : 'none'
+                                  }}
+                                  onClick={() => dispatch(setSidebarStatus(false))}
+                            >
                                     {convertVariableNameToName(subItem.name)}
-                                </a>
+
                             </Link>
                         )
                     })

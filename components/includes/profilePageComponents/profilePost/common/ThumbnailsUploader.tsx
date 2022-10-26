@@ -43,7 +43,10 @@ const ThumbnailsUploaderStyledDiv = styled.div`
 interface ThumbnailUploaderPropTypes {
     mainThumbnail: string,
     postId: string,
-    images: string[],
+    images: {
+        imageIndex:number,
+        imagePath:string
+    }[],
 }
 
 const ThumbnailsUploader: FC<ThumbnailUploaderPropTypes> =
@@ -72,7 +75,7 @@ const ThumbnailsUploader: FC<ThumbnailUploaderPropTypes> =
             <ThumbnailsUploaderStyledDiv>
                 {!!images?.length && images.map((image, index) => {
                     return (
-                        <ThumbnailUploadArea key={index}
+                        <ThumbnailUploadArea key={image.imageIndex}
                                              postId={postId}
                                              image={image}
                                              onUploadHandler={onUploadHandler}/>

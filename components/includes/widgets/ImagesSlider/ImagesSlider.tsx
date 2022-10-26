@@ -193,10 +193,8 @@ const ImagesSlider: FC<PostsSliderPropsTypes> = ({uniqueData}) => {
 
             if (imageData.targetUrl) {
                 return <div className={'slide'} key={index}>
-                    <Link href={imageData.targetUrl}>
-                        <a className='swiper-slide'>
+                    <Link href={imageData.targetUrl} className='swiper-slide'>
                             <img src={imageData.imageUrl} alt={imageData.imageAlt}/>
-                        </a>
                     </Link>
                 </div>
             } else {

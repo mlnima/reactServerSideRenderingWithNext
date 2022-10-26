@@ -129,10 +129,8 @@ const CookiePopup: FC = () => {
                     </button>
                 </div>
                  {cookieReadMoreLink ?
-                     <Link href={cookieReadMoreLink}>
-                         <a className='cookie-popup-content-action-read-more' onClick={onAcceptHandler}>
+                     <Link href={cookieReadMoreLink} className='cookie-popup-content-action-read-more' onClick={onAcceptHandler}>
                              Accept and Read More
-                         </a>
                      </Link>
                      : null
                  }

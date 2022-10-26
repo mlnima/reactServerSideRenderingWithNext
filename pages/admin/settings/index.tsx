@@ -10,8 +10,8 @@ let StyledDiv = styled.div`
 const settings = () => {
     return (
         <StyledDiv id='settings'>
-            <Link href={'/admin/settings/general'}>
-                <a className='settings-page-item green-action-btn-link'>General Setting</a>
+            <Link href={'/admin/settings/general'} className='settings-page-item green-action-btn-link'>
+               General Setting
             </Link>
         </StyledDiv>
     );

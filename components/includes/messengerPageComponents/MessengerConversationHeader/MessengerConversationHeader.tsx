@@ -79,13 +79,13 @@ const MessengerConversationHeader = ({profileImage, username, callUser}) => {
             <div className='messenger-conversation-header'>
                 <div className='back-btn-image-username'>
 
-                    <Link href={`/messenger`}>
-                        <a className='messenger-conversation-header-back-btn' rel='no-referrer'>
+                    <Link href={`/messenger`}
+                          className='messenger-conversation-header-back-btn'
+                          rel='no-referrer'>
                             <SvgRenderer svgUrl={'/public/asset/images/icons/arrow-left-solid.svg'}
                                          size={25}
                                          customClassName={'messenger-conversation-header-back-btn-svg'}
                                          color={'var(--navigation-text-color, #ccc)'}/>
-                        </a>
                     </Link>
                     <img onClick={() => router.push(`/user/${username}`)}
                          src={profileImage ? profileImage : '/public/asset/images/user/noGenderAvatar150.jpg'}

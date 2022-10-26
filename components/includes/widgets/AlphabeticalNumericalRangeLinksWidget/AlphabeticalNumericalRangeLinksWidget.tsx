@@ -13,6 +13,7 @@ const AlphabeticalNumericalRangeLinksWidgetStyledDiv = styled.div`
   max-width: 95vw;
   padding: 10px;
   margin: auto;
+
   .filter-controller {
     display: flex;
     justify-content: center;
@@ -24,7 +25,7 @@ const AlphabeticalNumericalRangeLinksWidgetStyledDiv = styled.div`
     display: ${({showFilters}: { showFilters: boolean }) => showFilters ? 'flex' : 'none'};
     justify-content: center;
     flex-wrap: wrap;
-    
+
     .alphabetical-range-widget-item {
       display: flex;
       justify-content: center;
@@ -82,8 +83,8 @@ const AlphabeticalNumericalRangeLinksWidget: FC = () => {
 
     const {pathname, query} = useRouter()
     const [showFilters, setShowFilters] = useState(false)
-    const activePage = useMemo(()=>query.startWith,[query.startWith])
-    const isDisabled = useMemo(()=>query?.startWith?.length > 3,[query.startWith])
+    const activePage = useMemo(() => query.startWith, [query.startWith])
+    const isDisabled = useMemo(() => query?.startWith?.length > 3, [query.startWith])
 
     const range = useMemo(() => {
         return pathname === '/actors' ? [...'abcdefghijklmnopqrstuvwxyz'] :
@@ -93,28 +94,28 @@ const AlphabeticalNumericalRangeLinksWidget: FC = () => {
     const renderRange = range.map((Letter, index) => {
 
         return (
-            <Link key={index} href={ isDisabled ? '#':{
-                pathname: pathname,
-                query: query.startWith ? {
-                    ...query,
-                    startWith: query?.startWith?.length <= 3 ? `${(query?.startWith || '') + Letter}` : query?.startWith,
-                    // page: 1
-                } : {
-                    ...query,
-                    startWith: Letter,
-                    // page: 1
-                }
-            }}>
-                <a className={`alphabetical-range-widget-item ${activePage?.includes(Letter) ? 'active-item' : ''}`}>
-                    {query.startWith ? Letter : Letter.toUpperCase()}
-                </a>
+            <Link className={`alphabetical-range-widget-item ${activePage?.includes(Letter) ? 'active-item' : ''}`}
+                  key={index}
+                  href={isDisabled ? '#' : {
+                      pathname: pathname,
+                      query: query.startWith ? {
+                          ...query,
+                          startWith: query?.startWith?.length <= 3 ? `${(query?.startWith || '') + Letter}` : query?.startWith,
+                          // page: 1
+                      } : {
+                          ...query,
+                          startWith: Letter,
+                          // page: 1
+                      }
+                  }}>
+                {query.startWith ? Letter : Letter.toUpperCase()}
             </Link>
         )
     })
 
 
-    const queryRemover = (pathname,query)=>{
-        const targetUrl ={
+    const queryRemover = (pathname, query) => {
+        const targetUrl = {
             pathname: pathname,
             query: {...query, startWith: ''}
         }
@@ -138,23 +139,26 @@ const AlphabeticalNumericalRangeLinksWidget: FC = () => {
             </button>
             {!!showFilters && <div className={'alphabetical-range-content'}>
                 {query.startWith ?
-                    <Link key={'X'} href={{
-                        pathname: pathname,
-                        query: {...query, startWith: query?.startWith?.slice(0, -1)}
-                    }}>
-                        <a className={
+                    <Link
+                        className={
                             `alphabetical-range-widget-item active-item current-query ${
                                 query?.startWith?.length > 3 && 'current-query-over'}`
-                        }>
-                            {query?.startWith} X
-                        </a>
+                        }
+                        key={'X'} href={{
+                        pathname: pathname,
+                        query: {...query, startWith: query?.startWith?.slice(0, -1)}
+                    }}
+                    >
+
+                        {query?.startWith} X
+
                     </Link>
                     : null
                 }
-                <Link key={'all'} href={queryRemover(pathname,query)}>
-                    <a className={`alphabetical-range-widget-item ${!query.startWith ? 'active-item' : ''}`}>
-                        All
-                    </a>
+                <Link key={'all'}
+                      href={queryRemover(pathname, query)}
+                      className={`alphabetical-range-widget-item ${!query.startWith ? 'active-item' : ''}`}>
+                    All
                 </Link>
 
                 {renderRange}

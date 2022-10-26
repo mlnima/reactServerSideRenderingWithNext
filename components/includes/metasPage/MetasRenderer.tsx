@@ -161,9 +161,7 @@ const MetasRenderer: FC<MetasRendererPropTypes> = ({metaType, metaData}) => {
                     return (
                         <div className={'group-wrapper'} key={group}>
                             <Link href={`/${metaType}?startWith=${group === '#' ? 'digits' : group}`}>
-                                <a>
                                     <h2 className={'letter'}>{capitalizeFirstLetter(group)}</h2>
-                                </a>
                             </Link>
 
                             <div className={'items'}>
@@ -176,7 +174,6 @@ const MetasRenderer: FC<MetasRendererPropTypes> = ({metaType, metaData}) => {
                                 {((!query?.startWith && /\/tags|\/categories/.test(pathname)) ||
                                 !/\/tags|\/categories/.test(pathname)) &&
                                 <Link href={`/${metaType}?startWith=${group === '#' ? 'digits' : group}`}>
-                                    <a>
                                         <span className={'view-all'}>
                                             {t('common:View All', {}, {fallback: 'View All'})}
                                             <SvgRenderer svgUrl={'/public/asset/images/icons/sort-up-solid.svg'}
@@ -184,7 +181,6 @@ const MetasRenderer: FC<MetasRendererPropTypes> = ({metaType, metaData}) => {
                                                          customClassName={'view-all-arrow-icon'}
                                                          color={'var(--main-active-color, #f90)'}/>
                                         </span>
-                                    </a>
                                 </Link>
                                 }
                             </div>

@@ -21,10 +21,8 @@ const AssetStatusNavigation: FC = () => {
 
     const renderStatus = postsStatus.map((type: string) => {
         return (
-            <Link key={type} href={{pathname: pathname, query: {...query, status: type}}}>
-                <a className={'btn btn-navigation'}>
-                    {convertVariableNameToName(type)}
-                </a>
+            <Link className={'btn btn-navigation'} key={type} href={{pathname: pathname, query: {...query, status: type}}}>
+                {convertVariableNameToName(type)}
             </Link>
         )
     })

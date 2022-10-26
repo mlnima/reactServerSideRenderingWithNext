@@ -28,11 +28,9 @@ const Custom500 = () => {
     const {t} = useTranslation();
     return (
         <Custom500StyledDiv id='not-found-page' className='main'>
-            <h1>500 -{t(`common:Server Error`,{},{fallback:'Server Error'})}</h1>
-            <Link href="/">
-                <a className='back-to-homepage'>
-                    <h2>{t(`common:Go To Homepage`,{},{fallback:'Go To Homepage'})}</h2>
-                </a>
+            <h1>500 -{t(`common:Server Error`, {}, {fallback: 'Server Error'})}</h1>
+            <Link href="/" className='back-to-homepage'>
+                <h2>{t(`common:Go To Homepage`, {}, {fallback: 'Go To Homepage'})}</h2>
             </Link>
         </Custom500StyledDiv>
     );

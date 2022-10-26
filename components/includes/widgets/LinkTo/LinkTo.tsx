@@ -29,10 +29,13 @@ const LinkTo: FC<LinkToPropTypes> =
 
         if (uniqueData?.linkTo||linkTo) {
             return (
-                <Link href={uniqueData?.linkTo || linkTo || '/'}>
-                    <a target={uniqueData?.linkToWindowType || linkToWindowType || '_self'} className={'link-to'} title={linkContent}>
+                <Link href={uniqueData?.linkTo || linkTo || '/'}
+                      target={uniqueData?.linkToWindowType || linkToWindowType || '_self'}
+                      className={'link-to'}
+                      title={linkContent}>
+
                         {linkContent}
-                    </a>
+
                 </Link>
             )
         } else return null

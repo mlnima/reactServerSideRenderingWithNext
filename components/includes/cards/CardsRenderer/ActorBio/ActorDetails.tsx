@@ -73,8 +73,9 @@ const ActorDetails = (props: ActorDetailsPropTypes) => {
                         {detail?.name.trim() + ':'}
                     </span>
                     {value?.includes('http') ?
-                        <a href={value} className={'actor-detail-value'} target={'_blank'} title={detail?.name}>External
-                            Link </a> :
+                        <a href={value} className={'actor-detail-value'} target={'_blank'} title={detail?.name}>
+                            External Link
+                        </a> :
                         <span className={'actor-detail-value'}>{value}</span>
                     }
                 </div>

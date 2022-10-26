@@ -81,10 +81,8 @@ const Profile = () => {
             </div>
             <div className='profile-page-info'>
                 <p className='profile-username'>{ userData?.username ? userData.username :''}</p>
-                <Link href={'/profile/edit'}>
-                    <a className='btn-secondary btn profile-page-info-edit-link'>
+                <Link href={'/profile/edit'} className='btn-secondary btn profile-page-info-edit-link'>
                         Edit
-                    </a>
                 </Link>
             </div>
 

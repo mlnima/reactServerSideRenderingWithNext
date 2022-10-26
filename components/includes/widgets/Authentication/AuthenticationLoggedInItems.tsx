@@ -64,8 +64,7 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
             <AuthenticationLoggedInItemsStyledDiv className={'authentication-logged-in'}>
 
                 <div className={'user-info'}>
-                    <Link href={`/profile`}>
-                        <a onClick={onOpenCloseHandler}>
+                    <Link href={`/profile`} onClick={onOpenCloseHandler}>
                             <div className='user-info-profile-icon'>
                                 <UserProfileImage size={40} profileRedirect={false}/>
                             </div>
@@ -73,7 +72,6 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
                                 <span className={'username'}>{username}</span>
                                 <span className={'view-profile'}>View Profile</span>
                             </div>
-                        </a>
                     </Link>
                 </div>
 
@@ -81,8 +79,8 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
                     {membership &&
                     <>
                        <span className='logged-item logged-item-action' aria-label='logged-in-items'>
-                            <Link href={`/messenger`}>
-                                <a onClick={onOpenCloseHandler}>
+                            <Link href={`/messenger`} onClick={onOpenCloseHandler}>
+
                                         <div className={'icon-wrapper'}>
                                               <SvgRenderer svgUrl={'/public/asset/images/icons/envelope-solid.svg'}
                                                            size={48}
@@ -92,15 +90,14 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
                                         </div>
                                         <p className={'text-data'}>{t<string>(`Messages`)}</p>
 
-                                </a>
+
                             </Link>
                         </span>
 
 
                         {allowUserToPost &&
                         <span className='logged-item logged-item-action' aria-label='logged-in-items'>
-                                <Link href={`/profile/post?new=1&postType=article`}>
-                                    <a onClick={onOpenCloseHandler}>
+                                <Link href={`/profile/post?new=1&postType=article`}  onClick={onOpenCloseHandler}>
 
                                         <div className={'icon-wrapper'}>
                                             {/*<span className={'plus-button icon'}/>*/}
@@ -113,7 +110,6 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
 
                                         <p className={'text-data'}>{t<string>(`New Post`)}</p>
 
-                                    </a>
                                 </Link>
                             </span>
                         }
@@ -124,8 +120,8 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
 
                 <div className={'logged-items'}>
                     {pathname.includes('/messenger') || pathname.includes('/chatroom') ?
-                        <Link href={`/`}>
-                            <a className='logged-item logged-in' onClick={onOpenCloseHandler}>
+                        <Link href={`/`} className='logged-item logged-in' onClick={onOpenCloseHandler}>
+
                                 <div className={'icon-wrapper'}>
                                     <SvgRenderer svgUrl={'/public/asset/images/icons/home-solid.svg'}
                                                  size={20}
@@ -134,7 +130,7 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
                                     />
                                 </div>
                                 <p className={'text-data'}>{t<string>(`Home`)}</p>
-                            </a>
+
                         </Link>
                         : null
                     }

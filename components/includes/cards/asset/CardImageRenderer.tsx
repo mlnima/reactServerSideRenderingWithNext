@@ -74,10 +74,12 @@ const CardImageRenderer: FC<CardImageNextPropTypes> =
                     <Image alt={mediaAlt}
                            src={defaultUrl}
                            loading={'lazy'}
-                           layout={'fill'}
+                           // layout={'fill'}
+                           width={cardWidth}
+                           height={cardWidth/1.333}
                            className={'card-image-next'}
-                           quality={80}
-                           objectFit={'cover'}
+                           quality={99}
+                           // objectFit={'cover'}
                            onError={() => setGotError(true)}
                     /> :
                     <img src={defaultUrl}

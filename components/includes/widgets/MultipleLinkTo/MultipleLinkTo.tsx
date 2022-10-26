@@ -46,10 +46,10 @@ const MultipleLinkTo: FC<MultipleLinkToPropTypes> = ({multipleLinks}) => {
         return (
             <li key={`${linkData.linkTitle}-${index}`} className='multiple-links-widget-item'>
                 {linkDescription ? <p>{linkDescription}</p> : null}
-                <Link href={linkData.linkTo} >
-                    <a  title={linkTitle}  target={linkData.linkToWindowType || '_self'}>
+                <Link href={linkData.linkTo}
+                      title={linkTitle}
+                      target={linkData.linkToWindowType || '_self'}>
                         {linkTitle}
-                    </a>
                 </Link>
             </li>
         )

@@ -49,10 +49,8 @@ const actorPage = () => {
             <main id={'primary'} className="main posts-page">
                 {role === 'administrator' ?
                     <div className='edit-as-admin'>
-                        <Link href={'/admin/meta?id=' + query.actorId}>
-                            <a className={'btn btn-primary'}>
+                        <Link href={'/admin/meta?id=' + query.actorId} className={'btn btn-primary'}>
                                 Edit
-                            </a>
                         </Link>
                     </div>
                     : null}

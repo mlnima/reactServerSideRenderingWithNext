@@ -95,8 +95,7 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
                                 onTouchStartCapture={() => hoverHandler(true)}
                                 onTouchEnd={() => hoverHandler(false)}>
 
-                <Link href={postUrl}>
-                    <a className={'card-link'} title={title} target={targetLink}>
+                <Link href={postUrl} className={'card-link'} title={title} target={targetLink}>
 
                         <div className={'video-post-card-media'}>
 
@@ -145,7 +144,6 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
                             <CardRating rating={rating} className={'card-rating card-under-title-info-data'}/>
                             }
                         </div>
-                    </a>
                 </Link>
             </VideoPostCardStyle>
         )

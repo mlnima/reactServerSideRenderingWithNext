@@ -51,20 +51,17 @@ const WidgetPagination: FC<WidgetPaginationPropTypes> = ({baseUrl, totalCount,co
                 if (pageNumber && typeof pageNumber === "number"){
                     return (
                         <Link key={ index + pageNumber}
-                              href={`${baseUrl.includes('?') ? baseUrl + `&page=${pageNumber}` : baseUrl + `?page=${pageNumber}`}`}>
-                            <a
-                                className='pagination-item'
-                                style={{
-                                    backgroundColor: pageNumber === 1 && postsCountPerPage === count?
-                                        'var(--main-active-color,#f90)' :
-                                        'var(--navigation-background-color,#18181b)',
-                                    color: pageNumber === 1 && postsCountPerPage === count ?
-                                        'var(--navigation-background-color,#18181b)' :
-                                        'var(--navigation-text-color,#ccc)'
-                                }}
-                            >
+                              href={`${baseUrl.includes('?') ? baseUrl + `&page=${pageNumber}` : baseUrl + `?page=${pageNumber}`}`}
+                              className='pagination-item'
+                              style={{
+                                  backgroundColor: pageNumber === 1 && postsCountPerPage === count?
+                                      'var(--main-active-color,#f90)' :
+                                      'var(--navigation-background-color,#18181b)',
+                                  color: pageNumber === 1 && postsCountPerPage === count ?
+                                      'var(--navigation-background-color,#18181b)' :
+                                      'var(--navigation-text-color,#ccc)'
+                              }}>
                                 {pageNumber}
-                            </a>
                         </Link>
                     )
                 }else return null

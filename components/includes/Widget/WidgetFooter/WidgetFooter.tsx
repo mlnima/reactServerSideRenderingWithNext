@@ -27,7 +27,7 @@ const WidgetFooter:FC<WidgetFooterPropTypes> = ({redirectLink,redirectToTitle,fo
         return (
             <WidgetFooterStyledDiv className='widget-footer'>
                 <Link href={redirectLink} >
-                    <a>{redirectToTitle}</a>
+                    {redirectToTitle}
                 </Link>
             </WidgetFooterStyledDiv>
         );

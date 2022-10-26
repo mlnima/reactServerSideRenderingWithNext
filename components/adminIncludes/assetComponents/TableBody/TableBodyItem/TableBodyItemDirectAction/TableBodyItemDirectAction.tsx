@@ -35,8 +35,8 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({asse
         const status = query.status as string
         return (
             <div className='asset-page-table-body-item-hover-item'>
-                <Link href={'/admin/post?id=' + _id}><a className={'btn btn-info'}>Edit</a></Link>
-                <Link href={`/post/${postType}/${_id}`}><a target={'_blank'} className={'btn btn-info'}>View</a></Link>
+                <Link href={'/admin/post?id=' + _id} className={'btn btn-info'}>Edit</Link>
+                <Link href={`/post/${postType}/${_id}`} target={'_blank'} className={'btn btn-info'}>View</Link>
                 {status !== 'trash' ?
                     <span className={'btn btn-danger'}
                           onClick={() => onActionHandler([_id],'trash') }
@@ -82,7 +82,7 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({asse
     } else if (assetsType === 'users') {
         return (
             <div className='asset-page-table-body-item-hover-item'>
-                <Link href={'/admin/user?id=' + _id}><a>Edit</a></Link>
+                <Link href={'/admin/user?id=' + _id}>Edit</Link>
             </div>
         );
     } else if (assetsType === 'comments') {
@@ -99,13 +99,13 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({asse
     } else if (assetsType === 'metas') {
         return (
             <div className='asset-page-table-body-item-hover-item'>
-                <Link href={'/admin/meta?id=' + _id}><a className={'btn btn-info'}>Edit</a></Link>
+                <Link href={'/admin/meta?id=' + _id} className={'btn btn-info'}>Edit</Link>
             </div>
         );
     } else if (assetsType === 'forms') {
         return (
             <div className='asset-page-table-body-item-hover-item'>
-                <Link href={'/admin/form/' + _id}><a>Edit</a></Link>
+                <Link href={'/admin/form/' + _id}>Edit</Link>
                 <span className={'btn btn-danger'} onClick={() => {
                     dispatch(fetchAdminDeleteForm(_id))
                     updateQueryGenerator(query,push,pathname)
@@ -115,7 +115,7 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({asse
     } else if (assetsType === 'pages') {
         return (
             <div className='asset-page-table-body-item-hover-item'>
-                <Link href={'/admin/page?id=' + _id}><a>Edit</a></Link>
+                <Link href={'/admin/page?id=' + _id}>Edit</Link>
                 {/*<span className={'btn btn-danger'}*/}
                 {/*      onClick={onDeletePageHandler}*/}
                 {/*>*/}

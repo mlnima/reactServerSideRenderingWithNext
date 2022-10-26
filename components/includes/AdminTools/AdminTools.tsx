@@ -69,40 +69,33 @@ const AdminTools: FC = () => {
                 //@ts-ignore
 
                 <>
-                    <Link href={'/admin'} locale={false}>
-                        <a className='admin-tools-item' target={'_blank'}>
+                    <Link href={'/admin'} locale={false} className='admin-tools-item' target={'_blank'}>
+
                             <SvgRenderer svgUrl={'/public/asset/images/icons/user-shield-solid.svg'}
                                          size={25}
                                          customClassName={'admin-tools-item-logo'}
                                          color={'var(--primary-button-link-text-color, #000)'}/>
 
-
-                        </a>
                     </Link>
-                    <Link href={'/admin/design/widgets'} locale={false}>
-                        <a className='admin-tools-item' target={'_blank'}>
+                    <Link href={'/admin/design/widgets'} locale={false} className='admin-tools-item' target={'_blank'}>
+
                             <SvgRenderer svgUrl={'/public/asset/images/icons/pen-to-square-solid.svg'}
                                          size={25}
                                          customClassName={'admin-tools-item-logo'}
                                          color={'var(--primary-button-link-text-color, #000)'}/>
 
-                        </a>
                     </Link>
-                    <Link href={'/admin/settings/general'} locale={false}>
-                        <a className='admin-tools-item' target={'_blank'}>
+                    <Link href={'/admin/settings/general'} locale={false} className='admin-tools-item' target={'_blank'}>
                             <SvgRenderer svgUrl={'/public/asset/images/icons/gear-solid.svg'}
                                          size={25}
                                          customClassName={'admin-tools-item-logo'}
                                          color={'var(--primary-button-link-text-color, #000)'}/>
-                        </a>
                     </Link>
-                    <Link href={'/admin/assets?assetsType=posts'} locale={false}>
-                        <a className='admin-tools-item' target={'_blank'}>
+                    <Link href={'/admin/assets?assetsType=posts'} locale={false} className='admin-tools-item' target={'_blank'}>
                             <SvgRenderer svgUrl={'/public/asset/images/icons/envelope-solid.svg'}
                                          size={25}
                                          customClassName={'admin-tools-item-logo'}
                                          color={'var(--primary-button-link-text-color, #000)'}/>
-                        </a>
                     </Link>
                     <button className='admin-tools-item'
                             onClick={() => dispatch(fetchClearCaches({router}))}

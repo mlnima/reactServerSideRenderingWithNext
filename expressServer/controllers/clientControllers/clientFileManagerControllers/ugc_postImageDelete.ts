@@ -10,7 +10,8 @@ const ugc_postImageDelete = async (req, res) => {
         // console.error(err)
     }
 
-    await postSchema.findByIdAndUpdate(postId, {$pull: {images:image}},{new:true}).exec().then(async updated => {
+    await postSchema.findByIdAndUpdate(postId, {$pull: {images:{imagePath:image}}},{new:true}).exec().then(async updated => {
+        console.log(updated.images)
         res.json({message: 'Deleted', images:updated.images})
     }).catch(err=>{
         console.log(err)

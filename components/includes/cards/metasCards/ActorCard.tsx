@@ -84,8 +84,7 @@ const ActorCard: FC<ActorCardPropTypes> =
 
         return (
             <ActorCardStyle cardWidth={cardWidth} className={'actor-card'} postsPerRawForMobile={postsPerRawForMobile}>
-                <Link href={`/actor/${meta?._id}`}>
-                    <a className='actor-card-link' title={actorName as string}>
+                <Link href={`/actor/${meta?._id}`} className='actor-card-link' title={actorName as string}>
                         {!!meta.imageUrl ?
                             <CardImageRenderer imageUrl={meta.imageUrl}
                                                mediaAlt={actorName}
@@ -97,7 +96,6 @@ const ActorCard: FC<ActorCardPropTypes> =
                                                cardWidth={cardWidth}/>
                         }
                         <CardTitle title={actorName}/>
-                    </a>
                 </Link>
             </ActorCardStyle>
         )

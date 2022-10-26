@@ -8,10 +8,11 @@ import {
 import {useAdminDispatch} from "@store_toolkit/hooks";
 
 let StyledDiv = styled.div`
-  
-  .btn-primary{
+
+  .btn-primary {
     margin: 10px;
   }
+
   .terminalControl {
     display: flex;
     justify-content: space-between;
@@ -49,15 +50,28 @@ const tools = () => {
 
     return (
         <StyledDiv className={'adminTools'}>
-            <Link href={'/admin/tools/terminal'}>
-                <a className={'btn btn-primary'}>Terminal</a>
+            <Link href={'/admin/tools/terminal'} className={'btn btn-primary'}>
+                Terminal
             </Link>
-            <button className={'btn btn-primary'} onClick={()=>dispatch(fetchAdminCheckAndRemoveDeletedVideos())}>Check and Removed deleted videos</button>
-            <button className={'btn btn-primary'} onClick={()=>dispatch(fetchGeneratePermaLinkForPosts(null))}>Generate PermaLink For Posts</button>
-            <button className={'btn btn-primary'} onClick={()=>dispatch(fetchSetMetaThumbnailsAndCount(null))}>Set New Meta Thumbnails And Count Fro Meta</button>
-            <button className={'btn btn-primary'} onClick={()=>dispatch(fetchSetMetaThumbnailsAndCount('tags'))}>Set New Thumbnails And Count for Tags  </button>
-            <button className={'btn btn-primary'} onClick={()=>dispatch(fetchSetMetaThumbnailsAndCount('categories'))}>Set New Thumbnails And Count for categories  </button>
-            <button className={'btn btn-primary'} onClick={()=>dispatch(fetchSetMetaThumbnailsAndCount('actors'))}>Set New Thumbnails And Count for actors  </button>
+            <button className={'btn btn-primary'} onClick={() => dispatch(fetchAdminCheckAndRemoveDeletedVideos())}>
+                Check and Removed deleted videos
+            </button>
+            <button className={'btn btn-primary'} onClick={() => dispatch(fetchGeneratePermaLinkForPosts(null))}>
+                Generate PermaLink For Posts
+            </button>
+            <button className={'btn btn-primary'} onClick={() => dispatch(fetchSetMetaThumbnailsAndCount(null))}>
+                Set New Meta Thumbnails And Count Fro Meta
+            </button>
+            <button className={'btn btn-primary'} onClick={() => dispatch(fetchSetMetaThumbnailsAndCount('tags'))}>
+                Set New Thumbnails And Count for Tags
+            </button>
+            <button className={'btn btn-primary'}
+                    onClick={() => dispatch(fetchSetMetaThumbnailsAndCount('categories'))}>
+                Set New Thumbnails And Count for categories
+            </button>
+            <button className={'btn btn-primary'} onClick={() => dispatch(fetchSetMetaThumbnailsAndCount('actors'))}>
+                Set New Thumbnails And Count for actors
+            </button>
         </StyledDiv>
     );
 };

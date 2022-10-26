@@ -57,9 +57,7 @@ const UserProfileImage: FC<UserProfileImagePropTypes> = ({size, profileRedirect}
             {profileRedirect && loggedIn ?
 
                 <Link href={`/profile`}>
-                    <a>
                         <ImageContent/>
-                    </a>
                 </Link> : <ImageContent/>
             }
         </Style>

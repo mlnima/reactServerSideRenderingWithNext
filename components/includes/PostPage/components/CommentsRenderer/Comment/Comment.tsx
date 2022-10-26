@@ -74,10 +74,8 @@ const Comment: FC<CommentPropTypes> = ({comment}) => {
                          src={comment?.author?.profileImage || '/public/asset/images/icons/profile-image.jpg'}
                     />
 
-                    <Link href={`/user/${comment?.author?.username}`}>
-                        <a className='comment-author'>
+                    <Link href={`/user/${comment?.author?.username}`} className='comment-author'>
                             {comment?.author?.username||''}
-                        </a>
                     </Link>
 
                     <span className='comment-date'>

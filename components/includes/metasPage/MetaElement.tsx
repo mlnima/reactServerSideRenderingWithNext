@@ -11,10 +11,10 @@ class MetaElement extends PureComponent<MetaWidgetElementPropTypes> {
     render() {
         return (
             <div className='meta-widget-item'>
-                <Link href={`/${this?.props?.typePath}/${this?.props?.id}`} key={this?.props?.name}>
-                    <a title={this?.props?.name}>
+                <Link href={`/${this?.props?.typePath}/${this?.props?.id}`}
+                      // key={this?.props?.name}
+                      title={this?.props?.name}>
                         {this?.props?.name}
-                    </a>
                 </Link>
             </div>
         )

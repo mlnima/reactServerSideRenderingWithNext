@@ -98,8 +98,7 @@ const CategoryCard: FC<CategoryCardPropTypes> =
 
         return (
             <CategoryCardStyle cardWidth={cardWidth} className={'category-card'}>
-                <Link href={`/category/${meta?._id}`}>
-                    <a className='category-card-link' title={title as string}>
+                <Link href={`/category/${meta?._id}`} className='category-card-link' title={title as string}>
                         {!!meta.imageUrl ?
                             <CardImageRenderer imageUrl={meta.imageUrl}
                                                mediaAlt={title}
@@ -113,7 +112,6 @@ const CategoryCard: FC<CategoryCardPropTypes> =
                         <span className={'category-logo'}>
                                  <CardTitle title={title}/>
                         </span>
-                    </a>
                 </Link>
                 {/*<AdminThumbnailToRandomImageFromPostsButton/>*/}
             </CategoryCardStyle>

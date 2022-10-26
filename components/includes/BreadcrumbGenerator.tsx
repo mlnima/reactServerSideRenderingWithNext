@@ -63,21 +63,18 @@ const BreadcrumbGenerator = ({}) => {
     return (
         <>
             <div className={'breadcrumb-item'}>
-                <Link href="/">
-                    <a className={'breadcrumb-item-link'}>
+                <Link href="/" className={'breadcrumb-item-link'}>
                         <SvgRenderer svgUrl={'/public/asset/images/icons/home-solid.svg'}
                                      size={20}
                                      customClassName={'breadcrumb-item-icon'}
                                      color={'var(--navigation-text-color, #ccc)'}/>
-                    </a>
                 </Link>
             </div>
             {!!breadcrumbs.length && breadcrumbs.map((breadcrumb, index) => {
                 const crumbName = overrideCrumbWithQueryName(breadcrumb.breadcrumb,asPath)
                 return (
                     <div key={index} className={'breadcrumb-item'}>
-                        <Link href={_breadcrumbLinkCorrector(breadcrumb.href)} key={index}>
-                            <a className={'breadcrumb-item-link'}>
+                        <Link href={_breadcrumbLinkCorrector(breadcrumb.href)} key={index} className={'breadcrumb-item-link'}>
                                 <SvgRenderer svgUrl={'/public/asset/images/icons/sort-up-solid.svg'}
                                              size={20}
                                              customClassName={'breadcrumb-item-arrow-icon'}
@@ -85,7 +82,6 @@ const BreadcrumbGenerator = ({}) => {
                                 {mongoIdValidator(breadcrumb.breadcrumb) ?
                                     currentPageTitle : t(  capitalizeFirstLetter(crumbName))}
                                 {query.page && crumbName!== 'search' ?  ` ${query.page}` : null }
-                            </a>
                         </Link>
                     </div>
                 )

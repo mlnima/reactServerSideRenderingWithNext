@@ -87,10 +87,8 @@ const Index = () => {
 
     return (
         <>
-            <Link href={'/admin/post?new=1'}>
-                <a className={'btn btn-info'}>
+            <Link href={'/admin/post?new=1'} className={'btn btn-info'}>
                     New Post
-                </a>
             </Link>
             <AdminPostPageStyledDiv className={'admin-post'}>
                 <div className={'content'}>

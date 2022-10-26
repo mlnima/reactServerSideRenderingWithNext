@@ -30,17 +30,16 @@ const AssetPagination = ({assetPageData}) => {
         <AssetPaginationStyledDiv className='asset-page-pagination'>
             <label>{assetPageData.totalCount}</label>
 
-            <Link href={{pathname: pathname, query: {...query, page: 1}}}>
-                <a className='btn btn-navigation'>1 </a>
+            <Link href={{pathname: pathname, query: {...query, page: 1}}} className='btn btn-navigation'>
+                1
             </Link>
 
-            <Link href={{
-                pathname: pathname,
-                query: {...query, page: query.page ? parseInt(query.page as string) - 1 : 1}
-            }}>
-                <a className='btn btn-navigation'>
-                    {'<'}
-                </a>
+            <Link className='btn btn-navigation'
+                  href={{
+                      pathname: pathname,
+                      query: {...query, page: query.page ? parseInt(query.page as string) - 1 : 1}
+                  }}>
+                {'<'}
             </Link>
 
             <input ref={manualPage}
@@ -54,24 +53,27 @@ const AssetPagination = ({assetPageData}) => {
                 Go
             </button>
 
-            <Link href={{
-                pathname: pathname,
-                query: {...query, page: query.page ? parseInt(query.page as string) + 1 : 2}
-            }}>
-                <a className='btn btn-navigation'>{'>'} </a>
+            <Link className='btn btn-navigation'
+
+                  href={{
+                      pathname: pathname,
+                      query: {...query, page: query.page ? parseInt(query.page as string) + 1 : 2}
+                  }}>
+                {'>'}
             </Link>
 
-            <Link href={{
-                pathname: pathname,
-                query: {
-                    ...query,
-                    page: Math.ceil(parseInt(assetPageData.totalCount) / parseInt(query.size as string || '30'))
-                }
-               }}
+            <Link className='btn btn-navigation'
+                  href={{
+                      pathname: pathname,
+                      query: {
+                          ...query,
+                          page: Math.ceil(parseInt(assetPageData.totalCount) / parseInt(query.size as string || '30'))
+                      }
+                  }}
             >
-                <a className='btn btn-navigation'>
-                    {Math.ceil(parseInt(assetPageData.totalCount) / parseInt(query.size as string || '30'))}
-                </a>
+
+                {Math.ceil(parseInt(assetPageData.totalCount) / parseInt(query.size as string || '30'))}
+
             </Link>
         </AssetPaginationStyledDiv>
     );

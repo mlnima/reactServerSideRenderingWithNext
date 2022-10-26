@@ -1,4 +1,4 @@
-import React, {FC, useRef} from "react";
+import React, {FC, useEffect, useRef} from "react";
 import styled from "styled-components";
 import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 import {useAppDispatch} from "@store_toolkit/hooks";
@@ -52,12 +52,12 @@ const Style = styled.div`
 
   @media only screen and (min-width: 768px) {
     .action-buttons {
-   
+
       .change-image-btn {
         display: none;
       }
 
-      &:hover >.change-image-btn{
+      &:hover > .change-image-btn {
         display: flex;
       }
     }
@@ -67,7 +67,7 @@ const Style = styled.div`
 interface PropTypes {
     onUploadHandler: Function,
     image?: any,
-    postId: string
+    postId: string,
 }
 
 const ThumbnailUploadArea: FC<PropTypes> = ({onUploadHandler, image, postId}) => {
@@ -76,25 +76,32 @@ const ThumbnailUploadArea: FC<PropTypes> = ({onUploadHandler, image, postId}) =>
     const dispatch = useAppDispatch()
 
     const onSelectHandler = (files, e) => {
-        if (files.length){
-            const imageUrlSplit = image.split('/')[image.split('/').length -1]
+        if (files.length) {
+            // console.log(imageIndex, ': ', image)
+            // const imageUrlSplit = image.split('/')[image.split('/').length - 1]
             e.preventDefault()
-            onUploadHandler(files, parseInt(imageUrlSplit))
+            onUploadHandler(files, image.imageIndex)
         }
     }
 
+    useEffect(() => {
+        inputRef.current.files = null
+    }, [image]);
+
     const onDeleteHandler = (e) => {
         e.preventDefault()
+        inputRef?.current?.value ? inputRef.current.value = null : null
         const deletingData = {
             token: localStorage.wt,
             postId: postId,
-            image: image
+            image: image.imagePath
         }
         dispatch(_ugcDeletePostImage(deletingData))
     }
 
 
-    const clickOnRefElement = (e)=>{
+    const clickOnRefElement = (e) => {
+        inputRef?.current?.value ? inputRef.current.value = null : null
         e.preventDefault()
         inputRef.current.click()
     }
@@ -106,23 +113,38 @@ const ThumbnailUploadArea: FC<PropTypes> = ({onUploadHandler, image, postId}) =>
                    ref={inputRef}
                    accept="image/x-png,image/gif,image/jpeg,image/webp"
                    style={{display: 'none'}}
+                   //@ts-ignore
+                   onClick={e=>e.target?.value ? e.target.value = null : null}
                    onChange={e => onSelectHandler(e.target.files, e)}/>
-            {!!image &&
-            <img className={'image-preview'}
-                 src={`${image}?lastUpdate=${Date.now()}`}
-                 onClick={(e) =>clickOnRefElement(e)}
-
-                 onDrop={e => onSelectHandler(e.dataTransfer.files[0], e)}
-                 onDragOver={e => e.preventDefault()}/>}
-            <div className="action-buttons">
-                <button className={'btn  remove-btn'} onClick={e => onDeleteHandler(e)}>
-                    <SvgRenderer svgUrl={'/public/asset/images/icons/times-solid.svg'} size={15}/>
-                </button>
-                <button className={'btn  change-image-btn'}  onClick={(e) =>clickOnRefElement(e)}>
-                    <SvgRenderer svgUrl={'/public/asset/images/icons/rotate-right-solid.svg'} size={15}/>
-                </button>
-            </div>
-
+            {(!!image?.imagePath && !!image?.imageIndex) &&
+            <>
+                <img className={'image-preview'}
+                     src={`${image?.imagePath}?lastUpdate=${Date.now()}`}
+                     onClick={(e) => clickOnRefElement(e)}
+                     onDrop={e => onSelectHandler(e.dataTransfer.files[0], e)}
+                     onDragOver={e => e.preventDefault()}/>
+                <div className="action-buttons">
+                    <button className={'btn  remove-btn'} onClick={e => onDeleteHandler(e)}>
+                        <SvgRenderer svgUrl={'/public/asset/images/icons/times-solid.svg'} size={15}/>
+                    </button>
+                    <button className={'btn  change-image-btn'} onClick={(e) => clickOnRefElement(e)}>
+                        <SvgRenderer svgUrl={'/public/asset/images/icons/rotate-right-solid.svg'} size={15}/>
+                    </button>
+                </div>
+            </>}
+            {/*{!image &&*/}
+            {/*<div className={'add-new-image'}*/}
+            {/*     onClick={() => inputRef.current.click()}*/}
+            {/*     onDrop={e => onUploadHandler(e.dataTransfer.files, imageIndex + 1)}>*/}
+            {/*    <SvgRenderer svgUrl={'/public/asset/images/icons/camera-solid.svg'}*/}
+            {/*                 size={70}*/}
+            {/*                 customClassName={'camera'}*/}
+            {/*                 color={'var(--serachbar-widget-text-color, #fff)'}/>*/}
+            {/*    <SvgRenderer svgUrl={'/public/asset/images/icons/circle-plus-solid.svg'}*/}
+            {/*                 size={20}*/}
+            {/*                 customClassName={'plus'}*/}
+            {/*                 color={'var(--main-active-color, #f90)'}/>*/}
+            {/*</div>}*/}
         </Style>
     )
 };

@@ -29,9 +29,7 @@ const RecentComments = props => {
             <div key={props.comments.indexOf(comment)} className='recent-comments-item'>
 
                 <Link href={`/post/${comment?.onDocumentTitle}?id=${comment.onDocumentId}`}>
-                    <a>
                         <strong className='recent-comments-item-author'>{comment?.onDocumentTitle}</strong>
-                    </a>
                 </Link>
 
                 <strong className='recent-comments-item-author'>{comment.author}:</strong>

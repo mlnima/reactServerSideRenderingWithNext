@@ -2,7 +2,7 @@ import React from 'react';
 import Link from "next/link";
 import styled from "styled-components";
 
-const UserSmallPreviewStyledSpan= styled.span`
+const UserSmallPreviewStyledSpan = styled.span`
   .user {
     list-style: none;
     padding: 5px 10px;
@@ -12,6 +12,7 @@ const UserSmallPreviewStyledSpan= styled.span`
     justify-content: flex-start;
     background-color: var(--navigation-background-color, #18181b);
     margin: 10px auto;
+
     .user-profile-image {
       width: 50px;
       height: 50px;
@@ -20,6 +21,7 @@ const UserSmallPreviewStyledSpan= styled.span`
 
     .user-names-info {
       margin: 0 5px;
+
       p {
         color: var(--navigation-text-color, #ccc);
       }
@@ -30,13 +32,14 @@ const UserSmallPreviewStyledSpan= styled.span`
 const UserSmallPreview = ({username, role, profileImage, name, lastName, _id, gender}) => {
     return (
         <UserSmallPreviewStyledSpan>
-        <Link href={{
-            pathname: `/user/${username}`,
-            query: {username}
-        }}
-              as={`/user/${username}`}
-        >
-            <a className='user'>
+            <Link href={{
+                pathname: `/user/${username}`,
+                query: {username}
+            }}
+                  as={`/user/${username}`}
+                  className='user'
+            >
+
                 <img src={profileImage ? profileImage :
                     gender === 'male' ? '/public/asset/images/user/maleAvatar50.jpg' :
                         gender === 'female' ? '/public/asset/images/user/femaleAvatar50.jpg' :
@@ -46,9 +49,9 @@ const UserSmallPreview = ({username, role, profileImage, name, lastName, _id, ge
                     <p>{username}</p>
                     <p>{name} {lastName}</p>
                 </div>
-            </a>
-        </Link>
-</UserSmallPreviewStyledSpan>
+
+            </Link>
+        </UserSmallPreviewStyledSpan>
     );
 };
 export default UserSmallPreview;

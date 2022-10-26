@@ -43,10 +43,8 @@ const tagPage = () => {
             <main id={'primary'} className="main posts-page">
                 {role === 'administrator' ?
                     <div className='edit-as-admin'>
-                        <Link href={'/admin/meta?id=' + tag._id}>
-                            <a className={'btn btn-primary'} target={'_blank'}>
+                        <Link href={'/admin/meta?id=' + tag._id} className={'btn btn-primary'} target={'_blank'}>
                                 Edit
-                            </a>
                         </Link>
                     </div>
                     : null}

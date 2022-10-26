@@ -1,16 +1,19 @@
-import React, { useState, FC} from 'react';
+import React, {useState, FC} from 'react';
 import RenderArraySection from './RenderArraySection';
 import Link from 'next/link'
 import moment from "moment";
 
 import styled from "styled-components";
+
 let StyledDiv = styled.div`
   overflow-wrap: break-word;
   width: 150px;
   text-align: center;
+
   img {
     width: 100%;
   }
+
   .asset-page-item-array-section {
     display: flex;
     flex-wrap: wrap;
@@ -19,26 +22,27 @@ let StyledDiv = styled.div`
       margin: 5px;
       font-size: small;
     }
-    p{
-      overflow:hidden;
-      display:inline-block;
+
+    p {
+      overflow: hidden;
+      display: inline-block;
       text-overflow: ellipsis;
       white-space: nowrap;
       width: 150px;
-     
+
     }
 
   }
 
 `
 
-interface TableBodyItemSectionPropTypes{
-    dataValue:any,
-    dataName:string
+interface TableBodyItemSectionPropTypes {
+    dataValue: any,
+    dataName: string
 }
 
-const TableBodyItemSection: FC<TableBodyItemSectionPropTypes> = ({dataValue,dataName}) => {
-const [gotError,setGotError] = useState(false)
+const TableBodyItemSection: FC<TableBodyItemSectionPropTypes> = ({dataValue, dataName}) => {
+    const [gotError, setGotError] = useState(false)
 
 
     if (dataName === '_id') {
@@ -62,13 +66,11 @@ const [gotError,setGotError] = useState(false)
     } else if (dataName === 'author') {
         return (
             <StyledDiv className='asset-page-table-body-item-section'>
-                { dataValue?.username && dataValue?._id ?
-                    <Link href={`/admin/user?id=${dataValue?._id}`}>
-                        <a target={'blank'}>
-                            <p>{dataValue.username}</p>
-                        </a>
+                {dataValue?.username && dataValue?._id ?
+                    <Link href={`/admin/user?id=${dataValue?._id}`} target={'blank'}>
+                        <p>{dataValue.username}</p>
                     </Link>
-                    :<p> Account might be deleted</p>
+                    : <p> Account might be deleted</p>
                 }
             </StyledDiv>
         )
@@ -87,13 +89,11 @@ const [gotError,setGotError] = useState(false)
     } else if (dataName === 'onDocumentId') {
         return (
             <StyledDiv className='asset-page-table-body-item-section'>
-                { dataValue?.postType && dataValue?._id ?
-                    <Link href={`/post/${dataValue?.postType}/${dataValue?._id}`}>
-                        <a target={'blank'}>
-                            <p>{dataValue?.title || dataValue?._id || 'something went wrong'}</p>
-                        </a>
+                {dataValue?.postType && dataValue?._id ?
+                    <Link href={`/post/${dataValue?.postType}/${dataValue?._id}`} target={'blank'}>
+                        <p>{dataValue?.title || dataValue?._id || 'something went wrong'}</p>
                     </Link>
-                    :<p> Post might be deleted</p>
+                    : <p> Post might be deleted</p>
                 }
             </StyledDiv>
         )
@@ -127,20 +127,20 @@ const [gotError,setGotError] = useState(false)
                 <RenderArraySection data={dataValue}/>
             </StyledDiv>
         )
-    } else if (dataName === 'mainThumbnail'||dataName === 'noImageUrl'||dataName === 'imageUrl') {
+    } else if (dataName === 'mainThumbnail' || dataName === 'noImageUrl' || dataName === 'imageUrl') {
         return (
             <StyledDiv className='asset-page-table-body-item-section'>
                 {gotError ?
-                   <p>Error || No image</p>
-                :  <img src={dataValue} onError={(err)=>{
+                    <p>Error || No image</p>
+                    : <img src={dataValue} onError={(err) => {
                         // console.log(err)
                         setGotError(true)
-                  }}/>
+                    }}/>
                 }
 
             </StyledDiv>
         )
-    } else if (dataName === 'createdAt'||dataName === 'updatedAt') {
+    } else if (dataName === 'createdAt' || dataName === 'updatedAt') {
         return (
             <StyledDiv className='asset-page-table-body-item-section'>
                 <p>{moment(new Date(dataValue), "YYYYMMDD").fromNow(false)}</p>

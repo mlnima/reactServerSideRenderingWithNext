@@ -39,10 +39,11 @@ const WidgetHeader:FC<WidgetHeaderPropTypes> = ({translations,title,redirectLink
             <WidgetHeaderStyledDiv className='widget-Header' >
                 <h2 className='widget-header-title'>{widgetHeaderTitle}</h2>
                 {redirectLink && redirectToTitle && !footerLink ?
-                    <Link href={redirectLink}>
-                        <a className={'btn btn-secondary widget-header-redirect-link'} rel={'next'} title={widgetHeaderTitle + ' content'} aria-label={redirectToTitle}>
+                    <Link href={redirectLink}
+                          className={'btn btn-secondary widget-header-redirect-link'}
+                          title={widgetHeaderTitle + ' content'}
+                          aria-label={redirectToTitle}>
                             {redirectToTitle}
-                        </a>
                     </Link>
                     :null
                 }

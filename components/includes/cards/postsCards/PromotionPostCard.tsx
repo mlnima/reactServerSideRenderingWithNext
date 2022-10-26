@@ -104,8 +104,8 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
                     }
                 </a>
 
-                <Link href={postUrl}>
-                    <a className={'card-link'} title={title}>
+                <Link href={postUrl} className={'card-link'} title={title}>
+
                      <span className={'btn btn-transparent read-more-btn'}>
                             <CardTitle title={title}/>
                             <div className={'card-under-media-info'}>
@@ -117,10 +117,7 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
                                 }
 
                             </div>
-
-
                         </span>
-                    </a>
                 </Link>
             </Style>
         )

@@ -96,12 +96,8 @@ const AdminHomePage = () => {
 
     const renderQuickAccessLinks = state.quickAccessLinks.map(linkData => {
         return (
-            <Link key={linkData.name} href={linkData.pathURL}>
-
-                <a className='btn btn-secondary'>
+            <Link key={linkData.name} href={linkData.pathURL} className='btn btn-secondary'>
                     {linkData.name}
-                </a>
-
             </Link>
         )
     })

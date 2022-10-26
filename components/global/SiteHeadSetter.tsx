@@ -57,6 +57,12 @@ const SiteHeadSetter: FC = () => {
                 <meta property={'og:description'} content={headData?.ogDescription}/>
                  }
             {!!headData?.ogImage && <meta property={'og:image'} content={headData?.ogImage}/>  }
+            {(!headData?.ogImage && !!headData?.ogTitle )&&
+                <meta
+                    property="og:image"
+                    content={`${process.env.NEXT_PUBLIC_PRODUCTION_URL}/api/og?title=${headData?.ogTitle}`}
+                />
+            }
             {!!headData?.ogSiteName && <meta property={'og:site_name'} content={headData?.ogSiteName}/>   }
             {!!headData?.ogLocale && <meta property={'og:locale'} content={headData?.ogLocale}/> }
 

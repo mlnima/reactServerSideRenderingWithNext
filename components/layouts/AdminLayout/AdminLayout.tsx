@@ -62,7 +62,7 @@ const AdminLayout = ({children, rest}) => {
                 <div className={'admin-unauthorized'}>
                     <h1>
                         <Link href={'/auth/login'}>
-                            <a>403 Forbidden</a>
+                            403 Forbidden
                         </Link>
                     </h1>
                 </div>

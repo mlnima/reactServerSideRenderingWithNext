@@ -116,8 +116,8 @@ const MessengerConversationPreview = ({conversationData, userId}) => {
 
     return (
         <MessengerConversationPreviewStyledDiv>
-            <Link href={`/messenger/${conversationData._id}`}>
-                <a className='messenger-conversation-preview'>
+            <Link href={`/messenger/${conversationData._id}`} className='messenger-conversation-preview'>
+
                     {state.profileImage ?
                         <img className='messenger-conversation-preview-image' src={state.profileImage} alt=""/> :
                         <SvgRenderer svgUrl={'/public/asset/images/icons/circle-user-solid.svg'}
@@ -134,8 +134,6 @@ const MessengerConversationPreview = ({conversationData, userId}) => {
                         </div>
                         <p className='messenger-conversation-preview-last-message'>{state.messageBody}</p>
                     </div>
-
-                </a>
             </Link>
             <span className={'conversation-clientActions'}>
         <span onClick={() => actionMenu ? setActionMenu(false) : setActionMenu(true)}>

@@ -47,16 +47,13 @@ const Logo: FC<LogoPropTypes> = ({uniqueData, LogoUrl}) => {
 
     return (
         <LogoStyledDiv className={'logo-wrapper'}>
-            <Link href='/'>
-                <a className='logo' href='/'>
-
+            <Link href='/' className='logo'>
                     {logoUrlSource && <img alt={'logo'} src={logoUrlSource}/> }
                     {logoText && !logoUrlSource ?
                         <span className='logo-text'> {logoText} </span>
                         : null
                     }
                     {headLineData && <p className='logo-headline'>{headLineData}</p> }
-                </a>
             </Link>
         </LogoStyledDiv>
 

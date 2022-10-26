@@ -56,8 +56,8 @@ const Posts = () => {
         <PostsStyledDiv className='my-profile-posts main'>
             <ProfileImage/>
             <ProfileNavigation/>
-            <Link href={'/profile.json/posts/newpost'}>
-                <a className='create-new-post-link'>create new post</a>
+            <Link href={'/profile.json/posts/newpost'} className='create-new-post-link'>
+               create new post
             </Link>
             {/*<PostsRenderer posts={ state.posts || [] }/>*/}
             {/*posts*/}

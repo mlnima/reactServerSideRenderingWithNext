@@ -69,10 +69,8 @@ const Soft404 = () => {
             <Soft404StyledDiv>
                 <h1>{title}</h1>
                 <p>{description}</p>
-                <Link href="/">
-                    <a className='back-to-homepage'>
+                <Link href="/" className='back-to-homepage'>
                         <h2>{t(`common:Go To Homepage`, {}, {fallback: 'Go To Homepage'})}</h2>
-                    </a>
                 </Link>
 
             </Soft404StyledDiv>

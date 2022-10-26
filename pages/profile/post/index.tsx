@@ -152,7 +152,7 @@ const post = () => {
 
                     {userData.role === 'administrator' ?
                         <>
-                            <TextInput required={true} name={'mainThumbnail'} type={'text'}
+                            <TextInput required={false} name={'mainThumbnail'} type={'text'}
                                        value={editingPost?.mainThumbnail}
                                        title={'Main Thumbnail'}
                                        onChangeHandler={onChangeHandler} className={'mainThumbnail'}/>

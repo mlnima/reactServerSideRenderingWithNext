@@ -89,14 +89,12 @@ const AdminTopBar: FC = () => {
                                           color={'var(--serachbar-widget-text-color, #fff)'}
                              />
                     </span>
-                <Link href={'/'}>
-                    <a className={'adminTopBarItem'}>
+                <Link href={'/'} className={'adminTopBarItem'}>
                         <SvgRenderer svgUrl={'/public/asset/images/icons/home-solid.svg'}
                                      size={25}
                                      customClassName={'adminTopBarItem-icon'}
                                      color={'var(--serachbar-widget-text-color, #fff)'}
                         />
-                    </a>
                 </Link>
                 <p className={'clearCache adminTopBarItem'} onClick={() => dispatch(fetchClearCaches({router}))}>Clear
                     Caches</p>

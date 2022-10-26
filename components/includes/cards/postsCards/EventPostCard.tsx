@@ -49,8 +49,8 @@ const EventPostCard: FC<PropTypes> =
 
     return (
         <Style className={'post-card'} cardWidth={cardWidth}>
-            <Link href={postUrl}>
-                <a className={'card-link'} title={title} target={targetLink}>
+            <Link href={postUrl} className={'card-link'} title={title} target={targetLink}>
+
                     {post.mainThumbnail ?
                         <CardImageRenderer imageUrl={post.mainThumbnail}
                                            mediaAlt={title}
@@ -75,7 +75,7 @@ const EventPostCard: FC<PropTypes> =
                             <CardRating rating={rating} className={'card-rating card-under-title-info-data'}/>
                         }
                     </div>
-                </a>
+
             </Link>
         </Style>
     )

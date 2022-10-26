@@ -67,7 +67,9 @@ const SwiperWidgetFields: FC<SliderWidgetTypeFieldsPropTypes> =
                 <div className={'open-section'}>
                     <p className={'section-title'}>Swiper Config:</p>
                     <a href={'https://swiperjs.com/demos'} target={'_blank'}
-                       className={'btn btn-info section-action'}>Examples</a>
+                       className={'btn btn-info section-action'}>
+                        Examples
+                    </a>
                 </div>
                 <div className={'editor-section'}>
                     <p>Image Swiper Config for Desktop:</p>
