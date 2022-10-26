@@ -1,15 +1,20 @@
 import React, {useState, useEffect, useMemo} from 'react';
-import AddWidgetMenu from '@components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetMenu'
-import WidgetGroupByPosition
-    from "@components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition";
+// import AddWidgetMenu from '@components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetMenu'
+// import WidgetGroupByPosition
+//     from "@components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import WidgetPositionsSelect from "@components/adminIncludes/widgetsModel/WidgetPositionsSelect/WidgetPositionsSelect";
+// import WidgetPositionsSelect from "@components/adminIncludes/widgetsModel/WidgetPositionsSelect/WidgetPositionsSelect";
 import widgetsStaticPositions from "@_dataStructures/widgetsStaticPositions";
 import {fetchAdminPanelGetWidgets} from "@store_toolkit/adminReducers/adminWidgetsReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
 import {useRouter} from "next/router";
+import dynamic from "next/dynamic";
+const WidgetPositionsSelect = dynamic(() => import('@components/adminIncludes/widgetsModel/WidgetPositionsSelect/WidgetPositionsSelect'),{ssr:false})
+const WidgetGroupByPosition = dynamic(() => import('@components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition'),{ssr:false})
+const AddWidgetMenu = dynamic(() => import('@components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetMenu'),{ssr:false})
+
 
 let StyledDiv = styled.div`
   display: flex;
@@ -18,6 +23,7 @@ let StyledDiv = styled.div`
   flex-direction: column;
   width: 100%;
 
+  
   .widget-setting {
     width: 100%;
     display: flex;

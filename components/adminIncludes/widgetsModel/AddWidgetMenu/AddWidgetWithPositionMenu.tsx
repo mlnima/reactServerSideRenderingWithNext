@@ -8,7 +8,7 @@ import Draggable from 'react-draggable';
 import {fetchAdminPanelAddNewWidget} from "@store_toolkit/adminReducers/adminWidgetsReducer";
 import {useAdminDispatch} from "@store_toolkit/hooks";
 import {Store} from "@_typeScriptTypes/storeTypes/Store";
-
+import dynamic from "next/dynamic";
 
 const AddWidgetWithPositionMenuStyledDiv = styled.div`
   position: relative;
@@ -34,6 +34,7 @@ const AddWidgetWithPositionMenuStyledDiv = styled.div`
 
     .btn {
       width: 100%;
+      z-index: 10;
     }
   }
 `
@@ -88,6 +89,18 @@ const AddWidgetWithPositionMenu: FC<AddWidgetWithPositionMenuPropType> = ({type,
 
     }
 
+    const onIncreaseZIndexHandler = () => {
+        // if (nodeRef.current) {
+        //     nodeRef.current.style.zIndex = 10
+        // }
+    }
+    const onReduceZIndexHandler = () => {
+        // if (refToElement.current){
+        //     refToElement.current.style.zIndex = 'initial'
+        // }
+    }
+
+
     const renderPositions = [...widgetsStaticPositions].sort((a, b) => a > b ? 1 : -1).map(position => {
         return (
 
@@ -116,16 +129,6 @@ const AddWidgetWithPositionMenu: FC<AddWidgetWithPositionMenuPropType> = ({type,
         )
     })
 
-    const onIncreaseZIndexHandler = () => {
-        // if (nodeRef.current) {
-        //     nodeRef.current.style.zIndex = 10
-        // }
-    }
-    const onReduceZIndexHandler = () => {
-        // if (refToElement.current){
-        //     refToElement.current.style.zIndex = 'initial'
-        // }
-    }
 
     return (
         //@ts-ignore
