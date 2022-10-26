@@ -147,6 +147,7 @@ const post = () => {
 
                     <ThumbnailsUploader mainThumbnail={editingPost?.mainThumbnail}
                                         postId={editingPost?._id}
+                                        //@ts-ignore
                                         images={editingPost?.images}
                     />
 
