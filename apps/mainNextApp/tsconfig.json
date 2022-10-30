@@ -1,0 +1,15 @@
+{
+  "extends": "tsconfig/mainNextApp.json",
+  "compilerOptions": {
+    "outDir": "../../.next",
+    "rootDir": "."
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

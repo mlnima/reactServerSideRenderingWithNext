@@ -1,0 +1,15 @@
+{
+  "name": "custom-vaiables",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "main": "index.ts",
+  "types": "index.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "typescript": "latest"
+  }
+}
+

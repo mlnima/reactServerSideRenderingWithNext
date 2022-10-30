@@ -1,0 +1,54 @@
+{
+  "$schema": "https://turborepo.org/schema.json",
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**"]
+    },
+    "test": {
+      "dependsOn": ["build"],
+      "outputs": [],
+      "inputs": ["src/**/*.tsx", "src/**/*.ts", "test/**/*.ts", "test/**/*.tsx"]
+    },
+    "lint": {
+      "outputs": []
+    },
+    "dev": {
+      "cache": false
+    },
+    "deploy": {
+      "dependsOn": ["build", "test", "lint"],
+      "outputs": []
+    }
+  },
+  "globalDependencies": [
+    ".env"
+  ],
+
+  "globalEnv": [
+    "JWT_KEY",
+    "NODE_ENV",
+    "SERVER_IP",
+    "MAIL_SERVER",
+    "MAIL_SERVER_PORT",
+    "NEXT_PUBLIC_PRODUCTION_URL",
+    "NEXT_PUBLIC_SERVER_URL",
+    "NEXT_PUBLIC_STATIC_PAGES",
+    "NEXT_PUBLIC_PWA",
+    "PORT",
+    "SERVER_PORT",
+    "NEXT_PUBLIC_LOCALS",
+    "NEXT_PUBLIC_DEFAULT_LOCAL",
+    "NEXT_PUBLIC_SOCKET",
+    "NEXT_PUBLIC_ANALYZE",
+    "DB_LOCAL",
+    "DB_NAME",
+    "SOCKET_PORT",
+    "DB_HOST",
+    "DB_USER",
+    "DB_PASS",
+    "DB_PORT",
+    "NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES",
+    "EXCLUDE_POSTS_SOURCE"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "expressServer",
+  "extends": "./base.json",
+  "compilerOptions": {
+    "target": "es6",
+    "allowSyntheticDefaultImports": true,
+    "lib": [
+      "es2017",
+      "es2018",
+      "es2021.string",
+      "esnext.asynciterable"
+    ],
+    "types": [
+      "node"
+    ],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "baseUrl": ".",
+    "paths": {
+    }
+  }
+}
