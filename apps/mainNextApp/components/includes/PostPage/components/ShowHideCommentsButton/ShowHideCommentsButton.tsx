@@ -49,7 +49,7 @@ const ShowHideCommentsButton: FC<ShowHideCommentsButtonPropTypes> = ({setShowCom
 
         <Style onClick={()=>setShowComments(!showComments)} className={'show-hide-comments'}>
             <button className={'show-hide-comments-button'}>
-                <SvgRenderer svgUrl={'/public/asset/images/icons/comments-solid.svg'}
+                <SvgRenderer svgUrl={'/asset/images/icons/comments-solid.svg'}
                              size={16}
                              color={'var(--post-page-info-color,#ccc)'}/>
                 <p className={'show-hide-comments-text'}> {t('Comments')}</p>

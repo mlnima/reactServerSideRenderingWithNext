@@ -3,7 +3,7 @@ import {useRouter} from "next/router";
 import parse from "html-react-parser";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const PostDescriptionStyledDiv = styled.div`
   color: var(--post-page-info-color, #ccc);

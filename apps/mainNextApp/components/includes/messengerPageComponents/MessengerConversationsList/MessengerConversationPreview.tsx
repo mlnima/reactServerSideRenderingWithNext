@@ -120,7 +120,7 @@ const MessengerConversationPreview = ({conversationData, userId}) => {
 
                     {state.profileImage ?
                         <img className='messenger-conversation-preview-image' src={state.profileImage} alt=""/> :
-                        <SvgRenderer svgUrl={'/public/asset/images/icons/circle-user-solid.svg'}
+                        <SvgRenderer svgUrl={'/asset/images/icons/circle-user-solid.svg'}
                                      size={20}
                                      customClassName={'messenger-conversation-preview-image'}
                                      color={'var(--navigation-text-color, #ccc)'}/>
@@ -137,7 +137,7 @@ const MessengerConversationPreview = ({conversationData, userId}) => {
             </Link>
             <span className={'conversation-clientActions'}>
         <span onClick={() => actionMenu ? setActionMenu(false) : setActionMenu(true)}>
-                   <SvgRenderer svgUrl={'/public/asset/images/icons/envelope-solid.svg'}
+                   <SvgRenderer svgUrl={'/asset/images/icons/envelope-solid.svg'}
                                 size={20}
                                 color={'var(--navigation-text-color, #ccc)'}/>
         </span>
@@ -146,7 +146,7 @@ const MessengerConversationPreview = ({conversationData, userId}) => {
                 {actionMenu ?
                     <div className={'action-menu'}>
                         <button onClick={onDeleteConversationHandler} className={'btn btn-danger'}>
-                            <SvgRenderer svgUrl={'/public/asset/images/icons/trash-can-solid.svg'}
+                            <SvgRenderer svgUrl={'/asset/images/icons/trash-can-solid.svg'}
                                          size={20}
                                          color={'var(--navigation-text-color, #ccc)'}/>
                         </button>

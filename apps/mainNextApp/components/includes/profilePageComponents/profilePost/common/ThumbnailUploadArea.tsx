@@ -125,10 +125,10 @@ const ThumbnailUploadArea: FC<PropTypes> = ({onUploadHandler, image, postId}) =>
                      onDragOver={e => e.preventDefault()}/>
                 <div className="action-buttons">
                     <button className={'btn  remove-btn'} onClick={e => onDeleteHandler(e)}>
-                        <SvgRenderer svgUrl={'/public/asset/images/icons/times-solid.svg'} size={15}/>
+                        <SvgRenderer svgUrl={'/asset/images/icons/times-solid.svg'} size={15}/>
                     </button>
                     <button className={'btn  change-image-btn'} onClick={(e) => clickOnRefElement(e)}>
-                        <SvgRenderer svgUrl={'/public/asset/images/icons/rotate-right-solid.svg'} size={15}/>
+                        <SvgRenderer svgUrl={'/asset/images/icons/rotate-right-solid.svg'} size={15}/>
                     </button>
                 </div>
             </>}

@@ -1,4 +1,4 @@
-import postSchema from '../../../models/postSchema';
+import postSchema from '../../../../../packages/models/src/postSchema';
 
 const clientLikeDislikeView = (req, res) => {
     postSchema.findByIdAndUpdate(

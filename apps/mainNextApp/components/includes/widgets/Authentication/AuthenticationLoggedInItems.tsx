@@ -82,7 +82,7 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
                             <Link href={`/messenger`} onClick={onOpenCloseHandler}>
 
                                         <div className={'icon-wrapper'}>
-                                              <SvgRenderer svgUrl={'/public/asset/images/icons/envelope-solid.svg'}
+                                              <SvgRenderer svgUrl={'/asset/images/icons/envelope-solid.svg'}
                                                            size={48}
                                                            customClassName={'messages-button'}
                                                            color={' var(--auth-widget-text-color, #fff)'}
@@ -101,7 +101,7 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
 
                                         <div className={'icon-wrapper'}>
                                             {/*<span className={'plus-button icon'}/>*/}
-                                            <SvgRenderer svgUrl={'/public/asset/images/icons/plus-solid.svg'}
+                                            <SvgRenderer svgUrl={'/asset/images/icons/plus-solid.svg'}
                                                          size={48}
                                                          customClassName={'plus-button'}
                                                          color={' var(--auth-widget-text-color, #fff)'}
@@ -123,7 +123,7 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
                         <Link href={`/`} className='logged-item logged-in' onClick={onOpenCloseHandler}>
 
                                 <div className={'icon-wrapper'}>
-                                    <SvgRenderer svgUrl={'/public/asset/images/icons/home-solid.svg'}
+                                    <SvgRenderer svgUrl={'/asset/images/icons/home-solid.svg'}
                                                  size={20}
                                                  customClassName={'home-button'}
                                                  color={' var(--auth-widget-text-color, #fff)'}
@@ -141,7 +141,7 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
                         onOpenCloseHandler(e)
                     }}>
                         <div className={'icon-wrapper'}>
-                                    <SvgRenderer svgUrl={'/public/asset/images/icons/sign-out-alt-solid.svg'}
+                                    <SvgRenderer svgUrl={'/asset/images/icons/sign-out-alt-solid.svg'}
                                                  size={20}
                                                  customClassName={'sign-out-button'}
                                                  color={' var(--auth-widget-text-color, #fff)'}

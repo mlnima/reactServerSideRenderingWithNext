@@ -5,7 +5,7 @@ import {setAlert} from "../../../../store_toolkit/clientReducers/globalStateRedu
 import {useRouter} from "next/router";
 import {fetchAdminPanelUpdatePost} from "../../../../store_toolkit/adminReducers/adminPanelPostsReducer";
 import {useAdminDispatch} from "../../../../store_toolkit/hooks";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const ActionOnPostStyledDiv = styled.div`
   display: flex;

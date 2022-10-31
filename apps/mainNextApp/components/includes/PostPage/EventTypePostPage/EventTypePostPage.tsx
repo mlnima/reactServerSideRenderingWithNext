@@ -11,7 +11,7 @@ import CommentsRenderer from "../components/CommentsRenderer/CommentsRenderer";
 import PostPageStyle from "../PostPageStyle";
 import convertDateToIso from "@_variables/_clientVariables/clientVariables/convertDateToIso";
 import RatingButtons from "../components/RatingButtons/RatingButtons";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const Style = styled(PostPageStyle)`
   margin: auto;

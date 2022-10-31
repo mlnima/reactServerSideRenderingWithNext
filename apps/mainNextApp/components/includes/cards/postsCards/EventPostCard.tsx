@@ -5,7 +5,7 @@ import Link from "next/link";
 import CardTitle from "../asset/CardTitle/CardTitle";
 import useTranslation from "next-translate/useTranslation";
 import dynamic from "next/dynamic";
-import {Post} from "@_typeScriptTypes/Post";
+import {Post} from "typescript-types";
 const TextToCanvasImage = dynamic(() => import('../asset/TextToCanvasImage/TextToCanvasImage'))
 const CardImageRenderer = dynamic(() => import('../asset/CardImageRenderer'))
 const CardRating = dynamic(() => import('../asset/CardRating/CardRating'))

@@ -6,7 +6,7 @@ import useTranslation from 'next-translate/useTranslation'
 import {useSelector} from "react-redux";
 import {useRouter} from "next/router";
 import styled from "styled-components";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const CookiePopupStyledDiv = styled.div`
 

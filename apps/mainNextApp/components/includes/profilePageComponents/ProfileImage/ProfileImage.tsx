@@ -3,7 +3,7 @@ import {useSelector} from "react-redux";
 import styled from "styled-components";
 import {fetchUserProfileImageUpload} from "../../../../store_toolkit/clientReducers/userReducer";
 import {useAppDispatch} from "../../../../store_toolkit/hooks";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const ProfileImageStyledDiv = styled.div`
   position: relative;
@@ -62,13 +62,13 @@ const ProfileImage = () => {
     }
 
     const reSetProfileImage = ()=>{
-        imageElement.current.src = userData?.profileImage ? userData?.profileImage + '?date=' + Date.now() : '/public/asset/images/user/noGenderAvatar150.jpg'
+        imageElement.current.src = userData?.profileImage ? userData?.profileImage + '?date=' + Date.now() : '/asset/images/user/noGenderAvatar150.jpg'
     }
     return (
         <ProfileImageStyledDiv className='profile-image'>
             <img ref={imageElement} onClick={() => uploadInputElement.current.click()}
                  className='profile-image-img'
-                 src={userData?.profileImage ? userData?.profileImage + '?date=' + Date.now() : '/public/asset/images/user/noGenderAvatar150.jpg'}/>
+                 src={userData?.profileImage ? userData?.profileImage + '?date=' + Date.now() : '/asset/images/user/noGenderAvatar150.jpg'}/>
             <input ref={uploadInputElement} type="file" style={{display: 'none'}} onChange={e => onUploadHandler(e)}/>
 
         </ProfileImageStyledDiv>

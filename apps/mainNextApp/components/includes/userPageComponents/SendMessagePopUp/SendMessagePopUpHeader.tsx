@@ -29,7 +29,7 @@ const SendMessagePopUpHeader = props => {
             <img src={props.receiverProfileImage} alt=""/>
             <p>{props.username}</p>
             <button onClick={props.onCloseMessagePop}>
-                <SvgRenderer svgUrl={'/public/asset/images/icons/icons/xmark-solid.svg'}
+                <SvgRenderer svgUrl={'/asset/images/icons/icons/xmark-solid.svg'}
                              size={20}
                              color={'var(--navigation-text-color, #ccc)'}/>
             </button>

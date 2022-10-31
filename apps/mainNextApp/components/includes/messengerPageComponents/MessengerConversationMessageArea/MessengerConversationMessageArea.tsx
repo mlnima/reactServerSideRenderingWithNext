@@ -2,8 +2,8 @@ import React, {useEffect, useRef} from 'react';
 import MessengerConversationMessage from "./MessengerConversationMessage";
 import {useSelector} from "react-redux";
 import styled from "styled-components";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
-import {_uniqBy} from "@_variables/util/arrayUtils/uniqArrayBy";
+import {Store} from "typescript-types";
+import {uniqArrayBy} from 'custom-util'
 
 interface MessengerConversationMessageAreaTypes {
     connectedUserData: object,
@@ -58,7 +58,7 @@ const MessengerConversationMessageArea = ({connectedUserData, userData}: Messeng
             {/*    :null*/}
             {/*}*/}
             {messages?
-                _uniqBy((messages || []),'createdAt').map((message: any) => {
+                uniqArrayBy((messages || []),'createdAt').map((message: any) => {
                     return (
                         <MessengerConversationMessage
                             key={message.createdAt}

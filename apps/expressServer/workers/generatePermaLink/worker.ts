@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
-import connectToDatabase from '../../_variables/connectToDatabase';
+import connectToDatabase from 'custom-server-util/src/connectToDatabase';
 import {parentPort} from 'worker_threads';
-import postSchema from '../../models/postSchema';
+import postSchema from '../../../../packages/models/src/postSchema';
 
 dotenv.config();
 connectToDatabase('generatePermaLink :').finally();

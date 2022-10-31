@@ -1,4 +1,4 @@
-import userSchema from '../../../models/userSchema';
+import userSchema from '../../../../../packages/models/src/userSchema';
 
 const clientUpdateUserData  = (req, res) =>{
     const userID = req.userData._id

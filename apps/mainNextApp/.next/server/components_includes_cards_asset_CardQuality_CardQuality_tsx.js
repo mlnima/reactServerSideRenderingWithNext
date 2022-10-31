@@ -1,0 +1,25 @@
+"use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+exports.id = "components_includes_cards_asset_CardQuality_CardQuality_tsx";
+exports.ids = ["components_includes_cards_asset_CardQuality_CardQuality_tsx"];
+exports.modules = {
+
+/***/ "./components/includes/cards/asset/CardQuality/CardQuality.tsx":
+/*!*********************************************************************!*\
+  !*** ./components/includes/cards/asset/CardQuality/CardQuality.tsx ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"react/jsx-dev-runtime\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ \"styled-components\");\n/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);\n\n\n\nconst CardQualityStyledDiv = styled_components__WEBPACK_IMPORTED_MODULE_1___default().div.withConfig({\n    displayName: \"CardQuality__CardQualityStyledDiv\",\n    componentId: \"sc-6ba43f07-0\"\n})`\r\n  font-size: 12px;\r\n  font-weight: bold;\r\n  color: var(--post-element-text-color, #ccc);\r\n`;\nconst CardQuality = ({ quality , className  })=>{\n    const qualityMemo = (0,react__WEBPACK_IMPORTED_MODULE_2__.useMemo)(()=>quality, [\n        quality\n    ]);\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(CardQualityStyledDiv, {\n        className: \"card-quality \" + className,\n        children: qualityMemo.toUpperCase()\n    }, void 0, false, {\n        fileName: \"I:\\\\Dev Project\\\\reactServerSideRenderingWithNext\\\\apps\\\\mainNextApp\\\\components\\\\includes\\\\cards\\\\asset\\\\CardQuality\\\\CardQuality.tsx\",\n        lineNumber: 18,\n        columnNumber: 9\n    }, undefined);\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CardQuality);\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9jb21wb25lbnRzL2luY2x1ZGVzL2NhcmRzL2Fzc2V0L0NhcmRRdWFsaXR5L0NhcmRRdWFsaXR5LnRzeC5qcyIsIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7O0FBQUE7QUFBdUM7QUFDVDtBQUU5QixNQUFNRSx1QkFBdUJGLHVFQUFVOzs7RUFBQSxDQUFDO0FBV3hDLE1BQU1JO0lBQ0YsTUFBTUc7UUFBbUNGOztJQUN6QyxxQkFDSSxRQUFDSDtRQUFxQkksV0FBVyx5REFBa0JBOzs7Ozs7O0FBSTNEO0FBQ0EsZUFBZUYiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9tYWluTmV4dEFwcC8uL2NvbXBvbmVudHMvaW5jbHVkZXMvY2FyZHMvYXNzZXQvQ2FyZFF1YWxpdHkvQ2FyZFF1YWxpdHkudHN4Pzc5NTUiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHN0eWxlZCBmcm9tIFwic3R5bGVkLWNvbXBvbmVudHNcIjtcclxuaW1wb3J0IHt1c2VNZW1vfSBmcm9tIFwicmVhY3RcIjtcclxuXHJcbmNvbnN0IENhcmRRdWFsaXR5U3R5bGVkRGl2ID0gc3R5bGVkLmRpdmBcclxuICBmb250LXNpemU6IDEycHg7XHJcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbiAgY29sb3I6IHZhcigtLXBvc3QtZWxlbWVudC10ZXh0LWNvbG9yLCAjY2NjKTtcclxuYFxyXG5cclxuaW50ZXJmYWNlIENhcmRWaWV3c1Byb3BUeXBlcyB7XHJcbiAgICBxdWFsaXR5OiBzdHJpbmcsXHJcbiAgICBjbGFzc05hbWU6IHN0cmluZ1xyXG59XHJcblxyXG5jb25zdCBDYXJkUXVhbGl0eSA9ICh7cXVhbGl0eSwgY2xhc3NOYW1lfTogQ2FyZFZpZXdzUHJvcFR5cGVzKSA9PiB7XHJcbiAgICBjb25zdCBxdWFsaXR5TWVtbyA9IHVzZU1lbW8oKCk9PnF1YWxpdHksW3F1YWxpdHldKVxyXG4gICAgcmV0dXJuIChcclxuICAgICAgICA8Q2FyZFF1YWxpdHlTdHlsZWREaXYgY2xhc3NOYW1lPXsnY2FyZC1xdWFsaXR5ICcgKyBjbGFzc05hbWV9PlxyXG4gICAgICAgICAgICB7cXVhbGl0eU1lbW8udG9VcHBlckNhc2UoKX1cclxuICAgICAgICA8L0NhcmRRdWFsaXR5U3R5bGVkRGl2PlxyXG4gICAgKTtcclxufTtcclxuZXhwb3J0IGRlZmF1bHQgQ2FyZFF1YWxpdHk7XHJcbiJdLCJuYW1lcyI6WyJzdHlsZWQiLCJ1c2VNZW1vIiwiQ2FyZFF1YWxpdHlTdHlsZWREaXYiLCJkaXYiLCJDYXJkUXVhbGl0eSIsInF1YWxpdHkiLCJjbGFzc05hbWUiLCJxdWFsaXR5TWVtbyIsInRvVXBwZXJDYXNlIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./components/includes/cards/asset/CardQuality/CardQuality.tsx\n");
+
+/***/ })
+
+};
+;

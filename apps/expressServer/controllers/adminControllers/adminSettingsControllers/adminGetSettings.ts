@@ -1,4 +1,4 @@
-import settingSchema from '../../../models/settings/settingSchema';
+import settingSchema from '../../../../../packages/models/src/settings/settingSchema';
 
 const adminGetSettings = async (req, res) => {
     const setting = await settingSchema.findOne({type: req.query.type}).exec();

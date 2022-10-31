@@ -1,6 +1,7 @@
 import Authentication from "../../widgets/Authentication/Authentication";
 import styled from "styled-components";
 import React, {FC} from "react";
+import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 
 const ChatRoomHeaderStyledHeader = styled.header`
   background-color: var(--navigation-background-color, #18181b);
@@ -26,14 +27,6 @@ const ChatRoomHeaderStyledHeader = styled.header`
       justify-content: center;
       align-items: center;
       padding: 0;
-
-      .users-icon {
-        width: 24px !important;
-        height: 24px !important;
-        background-color: var(--navigation-text-color, #ccc);
-        mask: url('/apps/mainNextApp/public/asset/images/icons/users-solid.svg') no-repeat center;
-        -webkit-mask: url('/apps/mainNextApp/public/asset/images/icons/users-solid.svg') no-repeat center;
-      }
     }
   }
 `
@@ -48,7 +41,10 @@ const ChatRoomHeader:FC<ChatRoomHeaderPropTypes> = ({onOnlineUserListVisibilityC
             <div className='chatroom-header-content'>
                 <Authentication/>
                 <button className='chatroom-header-open-online-users-list-button' onClick={onOnlineUserListVisibilityChangeHandler}>
-                    <span className={'users-icon'}/>
+                    <SvgRenderer svgUrl={'/asset/images/icons/users-solid.svg'}
+                                 size={24}
+                                 customClassName={'users-icon'}
+                                 color={'var(--navigation-text-color,#ccc)'}/>
                 </button>
             </div>
         </ChatRoomHeaderStyledHeader>

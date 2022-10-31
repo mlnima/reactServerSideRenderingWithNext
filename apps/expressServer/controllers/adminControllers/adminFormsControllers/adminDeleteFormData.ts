@@ -1,4 +1,4 @@
-import formSchema from '../../../models/formSchema';
+import formSchema from '../../../../../packages/models/src/formSchema';
 
 const adminDeleteFormData = async (req, res) => {
     const _id = req.body._id

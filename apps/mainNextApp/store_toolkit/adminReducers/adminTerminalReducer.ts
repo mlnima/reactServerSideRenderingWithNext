@@ -1,4 +1,4 @@
-import {AxiosErrorTypes} from "@_typeScriptTypes/axiosTypes/AxiosErrorTypes";
+// import {AxiosErrorTypes} from "typescript-types";
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {loading} from "../clientReducers/globalStateReducer";
 import axios, {AxiosError, AxiosResponse} from "axios";
@@ -25,7 +25,7 @@ export const terminalCommandExecutor = createAsyncThunk(
                     result:res.data.response,
                     command,
                 }
-            }).catch((err: AxiosError<AxiosErrorTypes>)=>{
+            }).catch((err)=>{
                 return  {
                     result:err.stack,
                     command,

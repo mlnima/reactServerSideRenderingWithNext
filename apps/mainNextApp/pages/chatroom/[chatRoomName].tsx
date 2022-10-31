@@ -12,10 +12,10 @@ import {useSelector} from "react-redux";
 import {dispatchSocketId} from "../../store_toolkit/clientReducers/userReducer";
 import {setOnlineUsers,setMessages,  newMessage} from '../../store_toolkit/clientReducers/chatroomReducer';
 import {wrapper} from "../../store_toolkit/store";
-import {_uniqBy} from "@_variables/util/arrayUtils/uniqArrayBy";
 import {useAppDispatch} from "../../store_toolkit/hooks";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
+import {uniqArrayBy} from 'custom-util'
 
 const chatRoom = () => {
     const dispatch = useAppDispatch()
@@ -64,7 +64,7 @@ const chatRoom = () => {
         })
 
         socket.on('onlineUsersList', (chatroomOnlineUsers: { username: string }[]) => {
-            dispatch(setOnlineUsers(_uniqBy(chatroomOnlineUsers, 'username')))
+            dispatch(setOnlineUsers(uniqArrayBy(chatroomOnlineUsers, 'username')))
         })
 
         socket.on('recentChatRoomMessages', (chatroomMessages: object[]) => {
@@ -72,7 +72,7 @@ const chatRoom = () => {
         })
 
         socket.on('userListUpdated', (chatroomOnlineUsers: { username: string }[]) => {
-            dispatch(setOnlineUsers(_uniqBy(chatroomOnlineUsers, 'username')))
+            dispatch(setOnlineUsers(uniqArrayBy(chatroomOnlineUsers, 'username')))
         })
 
         socket.on('messageFromChatroom', (newMessageData: object) => {

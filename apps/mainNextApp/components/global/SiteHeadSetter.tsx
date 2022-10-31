@@ -3,7 +3,7 @@ import Head from 'next/head'
 import {useRouter} from "next/router";
 import {useSelector} from "react-redux";
 import parse from 'html-react-parser'
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const SiteHeadSetter: FC = () => {
     const {asPath,pathname,query} = useRouter();

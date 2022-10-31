@@ -11,7 +11,7 @@ import SidebarWidgetAreaRenderer from "../../components/widgetsArea/SidebarWidge
 import ActorBio from '../../components/includes/cards/CardsRenderer/ActorBio/ActorBio'
 import fetchPosts from "../../store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPosts";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 

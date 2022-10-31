@@ -5,10 +5,10 @@ import {WidgetModelStyledDiv} from './WidgetModelStyle'
 import ActionButtons from "./ActionButtons";
 import UniqueFields from "./UniqueFields";
 import WidgetHeaderControl from "./WidgetHeaderControl/WidgetHeaderControl";
-import {onChangeInputValueCorrector} from "@_variables/custom-vaiables";
+import {onChangeInputValueCorrector} from "@_variables/variables";
 import {useAdminDispatch} from "../../../../store_toolkit/hooks";
 import {fetchAdminPanelUpdateWidget} from "../../../../store_toolkit/adminReducers/adminWidgetsReducer";
-import {Widget} from "@_typeScriptTypes/widgets/Widget";
+import {Widget} from "typescript-types";
 
 interface WidgetModelPropTypes {
     widget:Widget

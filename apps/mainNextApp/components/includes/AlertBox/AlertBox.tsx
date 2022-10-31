@@ -5,7 +5,8 @@ import {closeAlert} from "../../../store_toolkit/clientReducers/globalStateReduc
 import Draggable from 'react-draggable';
 import useTranslation from 'next-translate/useTranslation'
 import {useAppDispatch} from "../../../store_toolkit/hooks";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
+import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 
 const StyledDiv = styled.div`
   position: fixed;
@@ -46,14 +47,14 @@ const StyledDiv = styled.div`
         display: flex;
         justify-content: center;
 
-        .faTimes {
-          width: 25px;
-          height: 25px;
-          margin: 0 2px;
-          background-color: var(--post-element-info-text-color, #ccc);
-          mask: url('/apps/mainNextApp/public/asset/images/icons/times-solid.svg') no-repeat center;
-          -webkit-mask: url('/apps/mainNextApp/public/asset/images/icons/times-solid.svg') no-repeat center;
-        }
+        //.faTimes {
+        //  width: 25px;
+        //  height: 25px;
+        //  margin: 0 2px;
+        //  background-color: var(--post-element-info-text-color, #ccc);
+        //  mask: url('/apps/mainNextApp/public/asset/images/icons/times-solid.svg') no-repeat center;
+        //  -webkit-mask: url('/apps/mainNextApp/public/asset/images/icons/times-solid.svg') no-repeat center;
+        //}
       }
 
       .alert-type {
@@ -69,32 +70,32 @@ const StyledDiv = styled.div`
           height: 25px;
         }
 
-        .faCheckCircle {
-          width: 25px;
-          height: 25px;
-          margin: 0 2px;
-          background-color: green;
-          mask: url('/apps/mainNextApp/public/asset/images/icons/circle-check-solid.svg') no-repeat center;
-          -webkit-mask: url('/apps/mainNextApp/public/asset/images/icons/circle-check-solid.svg') no-repeat center;
-        }
-
-        .faExclamationCircle {
-          width: 25px;
-          height: 25px;
-          margin: 0 2px;
-          background-color: blue;
-          mask: url('/apps/mainNextApp/public/asset/images/icons/circle-exclamation-solid.svg') no-repeat center;
-          -webkit-mask: url('/apps/mainNextApp/public/asset/images/icons/circle-exclamation-solid.svg') no-repeat center;
-        }
-
-        .faExclamationTriangle {
-          width: 25px;
-          height: 25px;
-          margin: 0 2px;
-          background-color: red;
-          mask: url('/apps/mainNextApp/public/asset/images/icons/triangle-exclamation-solid.svg') no-repeat center;
-          -webkit-mask: url('/apps/mainNextApp/public/asset/images/icons/triangle-exclamation-solid.svg') no-repeat center;
-        }
+        //.faCheckCircle {
+        //  width: 25px;
+        //  height: 25px;
+        //  margin: 0 2px;
+        //  background-color: green;
+        //  mask: url('/apps/mainNextApp/public/asset/images/icons/circle-check-solid.svg') no-repeat center;
+        //  -webkit-mask: url('/apps/mainNextApp/public/asset/images/icons/circle-check-solid.svg') no-repeat center;
+        //}
+        //
+        //.faExclamationCircle {
+        //  width: 25px;
+        //  height: 25px;
+        //  margin: 0 2px;
+        //  background-color: blue;
+        //  mask: url('/apps/mainNextApp/public/asset/images/icons/circle-exclamation-solid.svg') no-repeat center;
+        //  -webkit-mask: url('/apps/mainNextApp/public/asset/images/icons/circle-exclamation-solid.svg') no-repeat center;
+        //}
+        //
+        //.faExclamationTriangle {
+        //  width: 25px;
+        //  height: 25px;
+        //  margin: 0 2px;
+        //  background-color: red;
+        //  mask: url('/apps/mainNextApp/public/asset/images/icons/triangle-exclamation-solid.svg') no-repeat center;
+        //  -webkit-mask: url('/apps/mainNextApp/public/asset/images/icons/triangle-exclamation-solid.svg') no-repeat center;
+        //}
       }
     }
 
@@ -127,26 +128,31 @@ const AlertBox = () => {
                 <div className='alert-message'>
                     <div className='alert-message-header handle'>
                         <p className='alert-type'>
-                            {alert.type === 'success' ?
-                                <span className={'icon faCheckCircle'}/> :
-                                alert.type === 'error' ?
-                                    <span className={'icon faExclamationTriangle'}/> :
-                                    <span className={'icon faExclamationCircle'}/>
-                            }
+                            <SvgRenderer size={25}
+                                         svgUrl={alert.type === 'success' ? '/asset/images/icons/circle-check-solid.svg' :
+                                             alert.type === 'error' ? '/asset/images/icons/triangle-exclamation-solid.svg' :
+                                                 '/asset/images/icons/circle-exclamation-solid.svg'}
+                                         customClassName={'download-logo'}
+                                         color={'var(--navigation-text-color,#ccc)'}/>
                         </p>
                         <button className='close-alert' onClick={() => dispatch(closeAlert(null))}>
                             <span className={'icon faTimes'}/>
-
+                            <SvgRenderer svgUrl={'/asset/images/icons/xmark-solid.svg'}
+                                         size={25}
+                                         customClassName={'download-logo'}
+                                         color={alert.type === 'success' ? 'green' : alert.type === 'error' ? 'red' : '#ccc'}/>
                         </button>
                     </div>
                     <p className='alert'>
                         {t(`common:${alert.message}`,
                             {},
-                            {fallback:
+                            {
+                                fallback:
                                     t(`customTranslation:${alert.message}`,
                                         {},
                                         {fallback: alert.message}
-                                    )}
+                                    )
+                            }
                         )}
                     </p>
                     {/*//@ts-ignore*/}
@@ -155,7 +161,13 @@ const AlertBox = () => {
             </Draggable>
         </StyledDiv>
     );
-
 };
+
 export default AlertBox;
 
+// {alert.type === 'success' ?
+//     <span className={'icon faCheckCircle'}/> :
+//     alert.type === 'error' ?
+//         <span className={'icon faExclamationTriangle'}/> :
+//         <span className={'icon faExclamationCircle'}/>
+// }

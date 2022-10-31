@@ -1,7 +1,7 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {convertMetasTypeToSingular, getTextDataWithTranslation, textContentReplacer} from "@_variables/custom-vaiables";
+import {getTextDataWithTranslation, textContentReplacer,convertMetasTypeToSingular} from "custom-util";
 import _clientGetPostsQueryGenerator from "@_variables/_clientVariables/clientVariables/_clientGetPostsQueryGenerator";
-import Axios from "@_variables/util/Axios";
+import Axios from "@_variables/Axios";
 import {setHeadData} from "../../../clientReducers/globalStateReducer";
 import {_postsCanonicalUrlGenerator} from "@_variables/_clientVariables/clientVariables/_canonicalUrlGenerators";
 

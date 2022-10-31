@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import {useSelector} from "react-redux";
 import TextInput from "../common/TextInput";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 interface VideoTypeFieldsPropTypes {
     onChangeHandler:any

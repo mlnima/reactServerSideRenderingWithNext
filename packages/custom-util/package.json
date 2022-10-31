@@ -9,6 +9,7 @@
     "access": "public"
   },
   "dependencies": {
-    "typescript": "latest"
+    "typescript": "latest",
+    "typescript-types": "*"
   }
 }

@@ -6,7 +6,7 @@ import {useSelector} from "react-redux";
 import styled from "styled-components";
 import {wrapper} from "../../../store_toolkit/store";
 import _getServerSideStaticPageData from "../../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const PostsStyledDiv = styled.div`
   max-width: 940px;

@@ -9,7 +9,7 @@ import React from "react";
 import fetchMetas from "../../store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchMetas";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import MetasCardsRenderer from "../../components/includes/cards/CardsRenderer/MetasCardsRenderer";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const PageStyle = styled.div`
   .actors {

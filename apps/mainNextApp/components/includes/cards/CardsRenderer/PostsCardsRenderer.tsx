@@ -3,10 +3,10 @@ import dynamic from "next/dynamic";
 import {useRouter} from "next/router";
 import _shortNumber from '@_variables/_clientVariables/clientVariables/_shortNumber'
 import {useSelector} from "react-redux";
-import {Post} from "@_typeScriptTypes/Post";
-import ratingCalculator from "@_variables/util/ratingCalculator";
+import {Post,Store} from "typescript-types";
+import {ratingCalculator} from "custom-util";
 import styled from "styled-components";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+
 
 const ArticlePostCard = dynamic(() => import('../postsCards/ArticlePostCard'))
 const PromotionPostCard = dynamic(() => import('../postsCards/PromotionPostCard'))

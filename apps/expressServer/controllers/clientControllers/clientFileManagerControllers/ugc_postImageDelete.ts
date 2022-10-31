@@ -1,5 +1,5 @@
 import fs from 'fs'
-import postSchema from "../../../models/postSchema";
+import postSchema from "../../../../../packages/models/src/postSchema";
 
 const ugc_postImageDelete = async (req, res) => {
     const postId = req.body.postId

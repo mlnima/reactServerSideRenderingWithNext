@@ -1,6 +1,5 @@
 import React, {FC, useEffect, useState} from "react";
 import _shortNumber from '@_variables/_clientVariables/clientVariables/_shortNumber'
-// import {useTranslation} from 'next-i18next';
 import useTranslation from 'next-translate/useTranslation'
 import styled from "styled-components";
 import {useSelector} from "react-redux";
@@ -9,7 +8,7 @@ import disLikePost
 import likePost
     from "../../../../../store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksLikePost";
 import {useAppDispatch} from "../../../../../store_toolkit/hooks";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 import SvgRenderer from "../../../../global/commonComponents/SvgRenderer/SvgRenderer";
 
 // it just prevent user or visitor do not rate multiple time,
@@ -92,9 +91,8 @@ const RatingButtons: FC<RatingButtonsPropTypes> = ({rating}) => {
         <RatingButtonsStyledDiv className="rating-buttons" buttonsDisabledStatus={isRated}>
             {views ?
                 <span className='like-disLike-count-items rating-item'
-                      title={t<string>('Views')}
-                >
-                        <SvgRenderer svgUrl={'/public/asset/images/icons/eye-regular.svg'}
+                      title={t<string>('Views')}>
+                        <SvgRenderer svgUrl={'/asset/images/icons/eye-regular.svg'}
                                      size={16}
                                      customClassName={'rate-logo view'}
                                      color={'var(--post-page-info-color,#ccc)'}/>
@@ -111,7 +109,7 @@ const RatingButtons: FC<RatingButtonsPropTypes> = ({rating}) => {
                             aria-label="like"
                             title={t<string>('Like')}
                     >
-                        <SvgRenderer svgUrl={'/public/asset/images/icons/thumbs-up-solid.svg'}
+                        <SvgRenderer svgUrl={'/asset/images/icons/thumbs-up-solid.svg'}
                                      size={16}
                                      customClassName={'rate-logo thumbs-up'}
                                      color={'var(--post-page-info-color,#ccc)'}/>
@@ -123,7 +121,7 @@ const RatingButtons: FC<RatingButtonsPropTypes> = ({rating}) => {
                             aria-label="dislike"
                             title={t<string>('Dislike')}
                     >
-                        <SvgRenderer svgUrl={'/public/asset/images/icons/thumbs-down-solid.svg'}
+                        <SvgRenderer svgUrl={`/asset/images/icons/thumbs-down-solid.svg`}
                                      size={16}
                                      customClassName={'rate-logo thumbs-down'}
                                      color={'var(--post-page-info-color,#ccc)'}/>

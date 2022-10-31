@@ -2,7 +2,7 @@ import Comment from "./Comment/Comment";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import React, {FC} from "react";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const CommentsRendererStyledDiv = styled.div`
   display: flex;

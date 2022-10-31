@@ -1,13 +1,13 @@
-import postSchema from '../../../models/postSchema';
-import settingSchema from '../../../models/settings/settingSchema';
-import metaSchema from '../../../models/metaSchema';
-import searchKeywordSchema from '../../../models/searchKeywordSchema'
+import {postSchema} from 'models';
+import {settingSchema} from 'models';
+import {metaSchema} from 'models';
+import {searchKeywordSchema} from 'models'
 import _clientQueryGeneratorForGettingPosts from '../../../_variables/clientVariables/_clientQueryGeneratorForGettingPosts'
 import {mongoIdValidator} from 'custom-server-util';
 //import postFieldRequestForCards from "../../../../data-structures/postFieldRequestForCards";
 
 
-const saveSearchedKeyword = async (keyword, count) => {
+const saveSearchedKeyword = async (keyword :string, count:number) => {
     if (keyword) {
         await searchKeywordSchema.findOneAndUpdate(
             {name: keyword},
@@ -16,7 +16,7 @@ const saveSearchedKeyword = async (keyword, count) => {
     }
 }
 
-const getMetaForGettingPostsRequest = async (meta)=>{
+const getMetaForGettingPostsRequest = async (meta:string)=>{
     try {
         if (mongoIdValidator(meta)){
             return await metaSchema.findById(meta).exec()

@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 interface SvgRendererPropTypes {
     customClassName?: string,
+    customID?: string,
     color?: string,
     svgUrl: string,
     width?: number,
@@ -37,9 +38,18 @@ const Style = styled.span`
   ${({customStyle}:StylePropTypes)=>customStyle}
 `
 
-const SvgRenderer: FC<SvgRendererPropTypes> = ({customClassName, svgUrl, size, color,customStyle}) => {
+const SvgRenderer: FC<SvgRendererPropTypes> = ({customClassName, svgUrl, size, color,customStyle,customID}) => {
+    const idProps = customID ? {id:customID}:{}
+    const elementProps = {
+        className: `${customClassName ? customClassName : ''} icon`,
+        ...idProps,
+        svgUrl,
+        size,
+        color,
+        customStyle
+    }
     return (
-        <Style className={`${customClassName ? customClassName : ''} icon`} svgUrl={svgUrl} size={size} color={color} customStyle={customStyle} />
+        <Style {...elementProps} />
     )
 };
 

@@ -3,7 +3,7 @@ import UploadedFilePreviewImage from "./UploadedFilePreviewImage";
 import UploadedFilePreviewVideo from "./UploadedFilePreviewVideo";
 import UploadedFilePreviewText from "./UploadedFilePreviewText";
 import styled from "styled-components";
-import fileTypeDetector from "@_variables/util/fileTypeDetector";
+import {fileTypeDetector} from "custom-util";
 import { useSelector} from "react-redux";
 // import {
 //     // adminPanelFileManagerClosePopup,
@@ -13,7 +13,7 @@ import { useSelector} from "react-redux";
 import {adminPanelFileManagerClosePopup} from '../../../../store_toolkit/adminReducers/adminPanelFileManagerReducer'
 import {fetchFilManagerDeleteFile} from "../../../../store_toolkit/adminReducers/adminPanelFileManagerReducer";
 import {useAdminDispatch} from "../../../../store_toolkit/hooks";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const UploadedPopViewStyledDiv = styled.div`
   position: fixed;

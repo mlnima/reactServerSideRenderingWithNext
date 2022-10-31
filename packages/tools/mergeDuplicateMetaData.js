@@ -1,8 +1,7 @@
 require('dotenv').config()
-require('reacticum-server/custom-vaiables/connectToDatabase')
+require('custom-server-util/src/connectToDatabase')
 const mongoose = require('mongoose');
-const postSchema = require('reacticum-server/models/postSchema')
-const metaSchema = require('reacticum-server/models/metaSchema')
+import {postSchema,metaSchema} from 'models';
 
 const mergeDuplicateMetaData = async (type) => {
 

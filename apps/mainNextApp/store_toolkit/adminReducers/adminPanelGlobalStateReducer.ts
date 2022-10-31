@@ -1,11 +1,10 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import Axios from "@_variables/util/Axios";
-import axios, {AxiosResponse} from "axios";
-import { PageTypes} from "@_typeScriptTypes/Page";
+import Axios from "@_variables/Axios";
+import {AxiosResponse} from "axios";
 import {loading, setAlert} from "../clientReducers/globalStateReducer";
 import {NextRouter} from "next/router";
 import {RootState} from "../store";
-import {AdminPanelGlobalState} from "@_typeScriptTypes/storeTypes/AdminPanelGlobalState";
+import {AdminPanelGlobalState,PageTypes} from "typescript-types";
 
 
 
@@ -40,7 +39,7 @@ export const fetchClearCaches = createAsyncThunk(
     'adminPanelGlobalState/fetchClearCaches',
     async ({router} :{router?: NextRouter}, thunkAPI) => {
          thunkAPI.dispatch(loading(true))
-        return await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/settings/clearCaches?token=${localStorage.wt}`).then((res: AxiosResponse<unknown | any>) => {
+        return await Axios.get(`/api/admin/settings/clearCaches?token=${localStorage.wt}`).then((res: AxiosResponse<unknown | any>) => {
             thunkAPI.dispatch(setAlert({message: res.data.message || 'done', type: 'success'}))
             setTimeout(() => router.reload(), 1000)
         }).catch(err => {

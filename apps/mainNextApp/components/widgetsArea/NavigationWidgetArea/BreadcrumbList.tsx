@@ -2,7 +2,7 @@ import React, {memo} from "react";
 import styled from "styled-components";
 import BreadcrumbGenerator from "../../includes/BreadcrumbGenerator";
 import {useSelector} from "react-redux";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const Style = styled.div`
   background-color: var(--navigation-background-color, #000);

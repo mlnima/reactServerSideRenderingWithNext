@@ -6,7 +6,7 @@ import PostTitle from '../components/PostTitle/PostTitle'
 import LearnTypePostPageDescription from "./components/LearnTypePostPageDescription";
 import RelatedPostsRenderer from "../components/RelatedPostsRenderer";
 import React from "react";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const PostMeta = dynamic(() => import('../components/PostMetasRenderer/PostMetasRenderer'))
 const CommentsRenderer = dynamic(() => import('../components/CommentsRenderer/CommentsRenderer'))

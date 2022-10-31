@@ -4,7 +4,7 @@ import {useSelector} from "react-redux";
 import styled from "styled-components";
 import {fetchSendMessage} from "../../../../store_toolkit/clientReducers/userReducer";
 import {useAppDispatch} from "../../../../store_toolkit/hooks";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const SendMessagePopUpStyledDiv = styled.div`
   display: flex;

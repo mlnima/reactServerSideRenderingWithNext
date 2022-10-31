@@ -1,4 +1,4 @@
-import conversationSchema from '../../../models/conversationSchema';
+import conversationSchema from '../../../../../packages/models/src/conversationSchema';
 
 const clientGetConversations = async (req, res) => {
     try{

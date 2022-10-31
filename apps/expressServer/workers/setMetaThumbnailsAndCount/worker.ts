@@ -1,8 +1,8 @@
 import dotenv from 'dotenv';
-import connectToDatabase from '../../_variables/connectToDatabase';
+import connectToDatabase from 'custom-server-util/src/connectToDatabase';
 import {parentPort, workerData} from 'worker_threads';
-import metaSchema from '../../models/metaSchema';
-import postSchema from '../../models/postSchema';
+import metaSchema from '../../../../packages/models/src/metaSchema';
+import postSchema from '../../../../packages/models/src/postSchema';
 import mongoose from 'mongoose';
 
 dotenv.config();

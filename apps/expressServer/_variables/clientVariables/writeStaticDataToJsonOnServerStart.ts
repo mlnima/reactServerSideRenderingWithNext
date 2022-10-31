@@ -1,5 +1,5 @@
-import widgetSchema from '../../models/widgetSchema';
-import settingSchema from "../../models/settings/settingSchema";
+import widgetSchema from '../../../../packages/models/src/widgetSchema';
+import settingSchema from "../../../../packages/models/src/settings/settingSchema";
 import databaseSelectFieldsForPostCards from "@_dataStructures/databaseSelectFieldsForPostCards";
 import fs from "fs";
 import path from "path";

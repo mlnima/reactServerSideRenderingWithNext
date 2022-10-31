@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {WidgetData, WidgetSettingsPropTypes} from "@_typeScriptTypes/widgets/Widget";
+import {WidgetData, WidgetSettingsPropTypes} from "typescript-types";
 
 interface RenderTitleAndRedirectLinkPropTypes {
     widgetData: WidgetData,

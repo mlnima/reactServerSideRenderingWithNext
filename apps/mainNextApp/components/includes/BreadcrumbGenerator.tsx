@@ -3,11 +3,10 @@ import Link from 'next/link';
 import {useRouter} from 'next/router';
 import useTranslation from "next-translate/useTranslation";
 import _breadcrumbLinkCorrector from "@_variables/_clientVariables/clientVariables/_breadcrumbLinkCorrector";
-import {useAppSelector} from "../../store_toolkit/hooks";
-import mongoIdValidator from "@_variables/util/mongoIdValidatorClient";
-import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
+import {useAppSelector} from "@store_toolkit/hooks";
+import {mongoIdValidator,capitalizeFirstLetter} from "custom-util";
 import SvgRenderer from "../global/commonComponents/SvgRenderer/SvgRenderer";
-import postTypes from "@_dataStructures/postTypes";
+import {postTypes} from "data-structures";
 
 const overrideCrumbWithQueryName =  (name : string,asPath:string)=>{
 
@@ -64,7 +63,7 @@ const BreadcrumbGenerator = ({}) => {
         <>
             <div className={'breadcrumb-item'}>
                 <Link href="/" className={'breadcrumb-item-link'}>
-                        <SvgRenderer svgUrl={'/public/asset/images/icons/home-solid.svg'}
+                        <SvgRenderer svgUrl={'/asset/images/icons/home-solid.svg'}
                                      size={20}
                                      customClassName={'breadcrumb-item-icon'}
                                      color={'var(--navigation-text-color, #ccc)'}/>
@@ -75,7 +74,7 @@ const BreadcrumbGenerator = ({}) => {
                 return (
                     <div key={index} className={'breadcrumb-item'}>
                         <Link href={_breadcrumbLinkCorrector(breadcrumb.href)} key={index} className={'breadcrumb-item-link'}>
-                                <SvgRenderer svgUrl={'/public/asset/images/icons/sort-up-solid.svg'}
+                                <SvgRenderer svgUrl={'/asset/images/icons/sort-up-solid.svg'}
                                              size={20}
                                              customClassName={'breadcrumb-item-arrow-icon'}
                                              color={'var(--navigation-text-color, #ccc)'}/>

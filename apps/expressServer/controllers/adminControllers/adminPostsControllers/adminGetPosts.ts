@@ -1,6 +1,6 @@
-import postSchema from '../../../models/postSchema';
-import settingSchema from '../../../models/settings/settingSchema';
-import metaSchema from '../../../models/metaSchema';
+import postSchema from '../../../../../packages/models/src/postSchema';
+import settingSchema from '../../../../../packages/models/src/settings/settingSchema';
+import metaSchema from '../../../../../packages/models/src/metaSchema';
 import _adminQueryGeneratorForGettingPosts from '../../../_variables/adminVariables/_adminQueryGeneratorForGettingPosts';
 
 const adminGetPosts= async (req, res) => {

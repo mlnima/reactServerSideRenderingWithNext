@@ -1,6 +1,6 @@
-import convertVariableNameToName from "@_variables/util/convertVariableNameToName";
+import {convertVariableNameToName} from "custom-util";
 import {useSelector} from "react-redux";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const RatingAndViews = props => {
     const post = useSelector((store:Store) => store?.adminPanelPosts?.post);

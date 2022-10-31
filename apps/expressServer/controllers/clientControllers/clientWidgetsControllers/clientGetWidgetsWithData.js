@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
-var widgetSchema_1 = tslib_1.__importDefault(require("../../../models/widgetSchema"));
-var postSchema_1 = tslib_1.__importDefault(require("../../../models/postSchema"));
+var widgetSchema_1 = tslib_1.__importDefault(require("../../../../../packages/models/src/widgetSchema"));
+var postSchema_1 = tslib_1.__importDefault(require("../../../../../packages/models/src/postSchema"));
 var clientGetWidgetsWithData = function (req, res) {
     var position = req.body.position === 'all' ? {} : { position: req.body.position };
     widgetSchema_1.default.find(position).exec().then(function (widgets) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {

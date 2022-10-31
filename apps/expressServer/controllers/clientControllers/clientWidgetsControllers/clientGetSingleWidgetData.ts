@@ -1,4 +1,4 @@
-const widgetSchema = require('../../../models/widgetSchema');
+const widgetSchema = require('../../../../../packages/models/src/widgetSchema');
 
 const clientGetSingleWidgetData = (req, res) => {
     const id = req.body.id;

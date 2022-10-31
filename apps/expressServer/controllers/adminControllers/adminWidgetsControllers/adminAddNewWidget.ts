@@ -1,4 +1,4 @@
-import WidgetSchema from '../../../models/widgetSchema';
+import WidgetSchema from '../../../../../packages/models/src/widgetSchema';
 
 const adminAddNewWidget = (req, res) =>{
     const data = req.body.data;

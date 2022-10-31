@@ -9,8 +9,7 @@ import ImageGallery from "./ImageGallery/ImageGallery";
 import ProductPrice from "./ProductPrice/ProductPrice";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
-
+import {Store} from "typescript-types";
 let StyledDiv = styled.div`
   width: 96%;
   padding: 1%;

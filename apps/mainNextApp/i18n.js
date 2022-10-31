@@ -1,9 +1,9 @@
 module.exports =  {
-    locales: process.env?.NEXT_PUBLIC_LOCALS?.split(' ') || [],
+    locales: process.env.NEXT_PUBLIC_LOCALS?.split(' ') || [],
     defaultLocale: process.env.NEXT_PUBLIC_DEFAULT_LOCAL,
     logger:()=>null,
     logBuild: false,
-    // localeDetection: false,
+    localeDetection: false,
     // loadLocaleFrom: (lang, ns) =>
     //     import(`./public/locales/${lang}/${ns}.json`).then((m) => m.default),
     pages: {

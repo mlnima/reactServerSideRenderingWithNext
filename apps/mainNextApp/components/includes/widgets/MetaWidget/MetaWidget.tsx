@@ -1,5 +1,5 @@
 import {FC, useEffect, useMemo} from "react";
-import {Meta} from "@_typeScriptTypes/Meta";
+import {Meta} from "typescript-types";
 import MetasRenderer from "../../metasPage/MetasRenderer";
 
 interface MetaWidgetPropType {

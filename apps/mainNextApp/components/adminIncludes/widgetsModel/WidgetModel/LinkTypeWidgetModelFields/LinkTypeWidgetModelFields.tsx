@@ -1,6 +1,6 @@
 import React, {FC, useMemo} from 'react';
 import TextInputFieldForWidget from "../TextInputFieldForWidget/TextInputFieldForWidget";
-import {UniqueDataTypes, WidgetSettingsPropTypes} from "@_typeScriptTypes/widgets/Widget";
+import {UniqueDataTypes, WidgetSettingsPropTypes} from "typescript-types";
 
 
 interface LinkTypeWidgetModelFieldsPropTypes {

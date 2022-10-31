@@ -8,7 +8,7 @@ import fetchNewComment
     from "../../../../../store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchNewComment";
 import {useAppDispatch} from "../../../../../store_toolkit/hooks";
 import {loginRegisterForm} from "../../../../../store_toolkit/clientReducers/globalStateReducer";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 import UserProfileImage from "../../../UserProfileImage/UserProfileImage";
 
 

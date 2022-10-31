@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {loading, setAlert} from "../clientReducers/globalStateReducer";
-import Axios from "@_variables/util/Axios";
+import Axios from "@_variables/Axios";
 import {AxiosError, AxiosResponse} from "axios";
 import {RootState} from "../store";
 

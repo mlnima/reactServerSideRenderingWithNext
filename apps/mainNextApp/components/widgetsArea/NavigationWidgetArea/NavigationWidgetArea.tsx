@@ -4,7 +4,7 @@ import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
 import {useSelector} from "react-redux";
 import BreadcrumbList from "./BreadcrumbList";
 import {useRouter} from "next/router";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 let StyledNavigation = styled.nav`
   grid-area: navigation;

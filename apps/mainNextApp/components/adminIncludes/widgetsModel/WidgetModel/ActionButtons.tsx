@@ -6,8 +6,7 @@ import {
     fetchAdminPanelDeleteWidget, fetchAdminPanelUpdateWidget
 } from "../../../../store_toolkit/adminReducers/adminWidgetsReducer";
 import {useAdminDispatch} from "../../../../store_toolkit/hooks";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
-import {Widget} from "@_typeScriptTypes/widgets/Widget";
+import {Store,Widget} from "typescript-types";
 import SvgRenderer from "../../../global/commonComponents/SvgRenderer/SvgRenderer";
 import {useRouter} from "next/router";
 import updateRouteQuery from "@_variables/_clientVariables/clientVariables/updateRouteQuery";
@@ -64,7 +63,7 @@ const ActionButtons: FC<ActionButtonsPropTypes> = ({widgetData, widgetId, widget
     return (
         <div className='control-buttons'>
             <button className={'btn btn-primary'} title="save" onClick={() => onSaveHandler()}>
-                <SvgRenderer svgUrl={'/public/asset/images/icons/floppy-disk-solid.svg'}
+                <SvgRenderer svgUrl={'/asset/images/icons/floppy-disk-solid.svg'}
                              size={20}
                              color={'var(--primary-button-link-text-color, #000)'}/>
 
@@ -73,7 +72,7 @@ const ActionButtons: FC<ActionButtonsPropTypes> = ({widgetData, widgetId, widget
 
             <ExportWidget data={{...widgetData}}/>
             <button className={'btn btn-primary'} title="clone" onClick={() => onCloneHandler()}>
-                <SvgRenderer svgUrl={'/public/asset/images/icons/clone-solid.svg'}
+                <SvgRenderer svgUrl={'/asset/images/icons/clone-solid.svg'}
                              size={20}
                              color={'var(--primary-button-link-text-color, #000)'}/>
             </button>
@@ -85,7 +84,7 @@ const ActionButtons: FC<ActionButtonsPropTypes> = ({widgetData, widgetId, widget
                         ...widgetSettings,
                         renderDeleteBtn: true
                     })}>
-                <SvgRenderer svgUrl={'/public/asset/images/icons/trash-can-solid.svg'}
+                <SvgRenderer svgUrl={'/asset/images/icons/trash-can-solid.svg'}
                              size={20}
                              color={'var(--primary-button-link-text-color, #000)'}/>
             </button>

@@ -7,8 +7,9 @@ import {fetchStartConversation} from "../../../../store_toolkit/clientReducers/u
 import {loginRegisterForm} from "../../../../store_toolkit/clientReducers/globalStateReducer";
 import {setActiveVisibleProfile} from "../../../../store_toolkit/clientReducers/chatroomReducer";
 import {useAppDispatch} from "../../../../store_toolkit/hooks";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 import SvgRenderer from "../../../global/commonComponents/SvgRenderer/SvgRenderer";
+import React from "react";
 
 //modify-require
 const ChatRoomMessageUserInfoPopupStyledDiv = styled.div`
@@ -39,7 +40,7 @@ const ChatRoomMessageUserInfoPopupStyledDiv = styled.div`
       width: 100%;
 
       .chatroom-message-user-info-popup-content-close-button {
-        // align-self: flex-end;
+        display: flex;
         background-color: transparent;
         color: var(--main-text-color);
         height: 20px;
@@ -84,26 +85,7 @@ const ChatRoomMessageUserInfoPopupStyledDiv = styled.div`
             margin: 0 5px;
             display: flex;
             justify-content: center;
-
-            .icon {
-              width: 24px !important;
-              height: 24px !important;
-              background-color: var(--primary-button-link-text-color, #000);
-            }
-
-            .send-message {
-              mask: url('/apps/mainNextApp/public/asset/images/icons/rocketchat-brands.svg') no-repeat center;
-              -webkit-mask: url('/apps/mainNextApp/public/asset/images/icons/rocketchat-brands.svg') no-repeat center;
-            }
-
-            //eye-regular.svg
-            .view-profile {
-              mask: url('/apps/mainNextApp/public/asset/images/icons/eye-regular.svg') no-repeat center;
-              -webkit-mask: url('/apps/mainNextApp/public/asset/images/icons/eye-regular.svg') no-repeat center;
-            }
-
           }
-
         }
       }
     }
@@ -139,39 +121,45 @@ const ChatRoomMessageUserInfoPopup = () => {
                 <Draggable handle=".chatroom-message-user-info-popup-header">
                     <div className='chatroom-message-user-info-popup-content'>
                         <div className={'chatroom-message-user-info-popup-header'}>
-                                         <span onClick={() => {
-                                             dispatch(setActiveVisibleProfile({}))
-                                         }} onTouchStart={() => {
-                                             dispatch(setActiveVisibleProfile({}))
-                                         }}
-                                               className='chatroom-message-user-info-popup-content-close-button'>
-
-                                                <SvgRenderer
-                                                    svgUrl={'/public/asset/images/icons/xmark-solid.svg'}
-                                                    size={25}
-                                                    customClassName={'download-logo'}
-                                                    color={'var(--primary-button-link-text-color, #000)'}/>
-                 </span>
+                            <span onClick={() => {
+                                dispatch(setActiveVisibleProfile({}))
+                            }}
+                                  onTouchStart={() => {
+                                      dispatch(setActiveVisibleProfile({}))
+                                  }}
+                                  className='chatroom-message-user-info-popup-content-close-button'>
+                                <SvgRenderer svgUrl={'/asset/images/icons/xmark-solid.svg'}
+                                             size={25}
+                                             customClassName={'download-logo'}
+                                             color={'var(--navigation-text-color,#ccc)'}/>
+                            </span>
                         </div>
 
                         <div className='chatroom-message-user-info-popup-content-user-info'>
                             <img className='chatroom-message-user-info-popup-content-userImage'
-                                 src={
-                                     activeVisibleProfile.profileImage ?
-                                         activeVisibleProfile.profileImage :
-                                         '/public/asset/images/user/noGenderAvatar150.jpg'
-                                 }
+                                 src={activeVisibleProfile.profileImage ? activeVisibleProfile.profileImage :
+                                     '/asset/images/user/noGenderAvatar150.jpg'}
+                                 onError={e => e.currentTarget.src = '/asset/images/user/noGenderAvatar150.jpg'}
                                  alt="chatroom-message-user"
                             />
                             {userId !== activeVisibleProfile._id ?
                                 <div className='chatroom-message-user-info-popup-user-data'>
                                     <p className='chatroom-message-user-info-popup-username'>{activeVisibleProfile.username}</p>
                                     <div className='chatroom-message-user-info-popup-user-data-links'>
-                                        <Link href={`/user/${activeVisibleProfile.username}`} className={'btn btn-primary'}>
-                                                <span className={'icon view-profile'}/>
+                                        <Link href={`/user/${activeVisibleProfile.username}`}
+                                              className={'btn btn-primary'}>
+
+                                            <SvgRenderer svgUrl={'/asset/images/icons/eye-regular.svg'}
+                                                         size={24}
+                                                         customClassName={'view-profile'}
+                                                         color={'var(--navigation-text-color,#ccc)'}/>
                                         </Link>
                                         <button onClick={onConversationHandler} className={'btn btn-primary'}>
-                                            <span className={'icon send-message'}/>
+
+                                            <SvgRenderer svgUrl={'/asset/images/icons/rocketchat-brands.svg'}
+                                                         size={24}
+                                                         customClassName={'send-message'}
+                                                         color={'var(--navigation-text-color,#ccc)'}/>
                                         </button>
                                     </div>
                                 </div>

@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs';
-import UserSchema from '../../../models/userSchema';
+import UserSchema from '../../../../../packages/models/src/userSchema';
 
 const clientRegisterNewUser = (req, res) => {
     const username = req.body.username;

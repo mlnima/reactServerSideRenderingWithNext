@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
-import Axios from "@_variables/util/Axios";
+import Axios from "@_variables/Axios";
 import {loading, setAlert, loginRegisterForm} from "./globalStateReducer";
 import {NextRouter} from "next/router";
 import Peer from 'simple-peer'

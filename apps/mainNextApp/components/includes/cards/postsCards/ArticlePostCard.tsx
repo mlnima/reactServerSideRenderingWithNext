@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import CardTitle from "../asset/CardTitle/CardTitle";
-import {Post} from "@_typeScriptTypes/Post";
+import {Post} from "typescript-types";
 import useTranslation from "next-translate/useTranslation";
 import DefaultPostCardStyle from "../asset/DefaultPostCardStyle";
 

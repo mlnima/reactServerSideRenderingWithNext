@@ -1,7 +1,7 @@
 import React, {ChangeEventHandler, FC} from "react";
 import dynamic from "next/dynamic";
-import postTypes from "@_dataStructures/postTypes";
-import {WidgetData, WidgetSettingsPropTypes} from "@_typeScriptTypes/widgets/Widget";
+import {postTypes} from "data-structures";
+import {WidgetData, WidgetSettingsPropTypes} from "typescript-types";
 
 const SearchTypeInputFields = dynamic(() => import('./SearchTypeInputFields/SearchTypeInputFields'));
 const MultipleLinkWidgetModelFields = dynamic(() => import('./MultipleLinkWidgetModelFields/MultipleLinkWidgetModelFields'));

@@ -1,6 +1,5 @@
 import React, {FC, useMemo, useState} from 'react'
-import isAbsolutePath from "@_variables/util/isAbsolutePath";
-import isImageAllowedForNextImage from "@_variables/util/isImageAllowedForNextImage";
+import {isAbsolutePath,isImageAllowedForNextImage} from "custom-util";
 import Image from 'next/image'
 import styled from "styled-components";
 

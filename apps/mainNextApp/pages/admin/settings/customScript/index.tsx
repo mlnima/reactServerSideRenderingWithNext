@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import { useSelector} from "react-redux";
 import {adminEditIdentity, adminPanelUpdateSetting} from "../../../../store_toolkit/adminReducers/adminPanelSettingsReducer";
 import {useAdminDispatch} from "../../../../store_toolkit/hooks";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const Editor = dynamic(() => import('@monaco-editor/react'), {ssr: false})
 

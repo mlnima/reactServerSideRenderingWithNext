@@ -1,0 +1,25 @@
+"use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+exports.id = "locales_de_common_json";
+exports.ids = ["locales_de_common_json"];
+exports.modules = {
+
+/***/ "./locales/de/common.json":
+/*!********************************!*\
+  !*** ./locales/de/common.json ***!
+  \********************************/
+/***/ ((module) => {
+
+module.exports = JSON.parse('{"Home":"Startseite","Categories":"Kategorien","Tags":"Stichworte","Email":"Email","Login":"Anmeldung","Not A Member Yet? Register Here":"Noch kein Mitglied? Hier registrieren","Do You Have An Account? Login Here":"Hast du einen Account? Hier anmelden","Member login":"Login für Mitglieder","Create New Post":"Neuen Beitrag erstellen","Profile":"Profil","Messages":"Mitteilungen","Register":"Registrieren","Sign Up":"Anmeldung","Username":"Nutzername","Password":"Kennwort","Repeat Password":"Passwort wiederholen","Gender":"Geschlecht","Male":"Männlich","Female":"Female","Other":"Sonstiges","City":"Stadt","Country":"Land","State":"Bundesland","Street":"Straße","House Number":"Hausnummer","Address":"Adresse","Logout":"Ausloggen","Accept":"akzeptieren","Accept and Read More":"Akzeptieren und mehr lesen","Decline":"Ablehnen","User":"Benutzer","Users":"Benutzer","Online Users":"Online Benutzer","Follow":"Folgen","Unfollow":"Entfolgen","Posts":"Beiträge","Post":"Gesendet","Yes":"Ja","No":"Nein","Ok":"Ok","Send":"Senden","Cancel":"Abbrechen","Close":"schließen","Open":"Offen","Language":"Sprache","Chatroom":"Chatraum","Search":"Suche","Search...":"Suche...","Download":"Herunterladen","Like":"Mögen","Dislike":"Nicht mögen","Views":"Ansichten","Details":"Einzelheiten","Go To":"Gehe zu","Edit":"Bearbeiten","Coming Soon":"Kommt bald","Report":"Prüfbericht","Feedback":"Rückmeldung","Bug Report":"Fehlerbericht","Advertise":"Werben","Not Found":"Nicht gefunden","Go To Homepage":"Zur Startseite gehen","Error":"Fehler","Server Error":"Serverfehler","An Error Occurred":"Ein Fehler ist aufgetreten","Occurred On Server":"Auf dem Server aufgetreten","Comments":"Kommentare","Write a Comment":"Schreibe einen Kommentar","Post Comment":"Kommentar posten","You have entered an invalid username or password":"Sie haben einen ungültigen Benutzernamen oder ein ungültiges Passwort eingegeben","Something went wrong please try again later":"Etwas ist schief gelaufen, bitte versuche es später noch einmal","This username already exists":"Dieser Benutzername ist schon vergeben","Your account has been successfully created you can login now":"Ihr Konto wurde erfolgreich erstellt Sie können sich jetzt anmelden","Passwords are not matched":"Passwörter stimmen nicht überein","Login successful":"Anmeldung erfolgreich","Use 8 or more characters with a mix of letters, numbers & symbols":"Verwenden Sie 8 oder mehr Zeichen mit einer Mischung aus Buchstaben, Zahlen und Symbolen","Minimum eight characters, at least one letter and one number":"Mindestens acht Zeichen, mindestens ein Buchstabe und eine Zahl","Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character like $":"Mindestens 8 Zeichen, mindestens 1 Großbuchstabe, 1 Kleinbuchstabe, 1 Zahl und 1 Sonderzeichen wie $","View Profile":"Profil anzeigen","Send Message":"Nachricht senden","Followers":"Anhänger","Following":"Folge","About Us":"Über uns","Contact Us":"Kontakt","Unauthorized Access":"Unautorisierter Zugriff","Mismatch Passwords":"Passwörter nicht übereinstimmen","Wrong Password":"Falsches Passwort","Nothing found":"Nichts gefunden","Nothing found Description":"Anscheinend können wir nicht finden, wonach Sie suchen. Vielleicht hilft die Suche"}');
+
+/***/ })
+
+};
+;

@@ -1,4 +1,4 @@
-import formSchema from '../../../models/formSchema';
+import formSchema from '../../../../../packages/models/src/formSchema';
 
 const clientSaveFormData = (req, res) => {
     const formData = req.body.data

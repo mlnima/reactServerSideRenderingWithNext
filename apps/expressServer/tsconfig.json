@@ -1,9 +1,12 @@
 {
-  "extends": "tsconfig/expressServer.json",
+  "extends": "tsconfig/server.json",
   "include": ["**/*.ts"],
   "exclude": ["node_modules",".turbo", "coverage"],
   "compilerOptions": {
-    "outDir": "../../.next",
-    "rootDir": "."
+    "outDir": "./dist",
+    "rootDir": ".",
+    "paths": {
+      "@_variables/*": ["_variables/*"],
+    }
   }
 }

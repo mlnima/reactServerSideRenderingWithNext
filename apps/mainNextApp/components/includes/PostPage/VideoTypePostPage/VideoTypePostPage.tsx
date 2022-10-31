@@ -5,7 +5,7 @@ import {useSelector} from "react-redux";
 import dynamic from "next/dynamic";
 import PostTitle from "../components/PostTitle/PostTitle";
 import RelatedPostsRenderer from "../components/RelatedPostsRenderer";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 // import ShowHideCommentsButton
 //     from "@components/includes/PostPage/components/ShowHideCommentsButton/ShowHideCommentsButton";
 

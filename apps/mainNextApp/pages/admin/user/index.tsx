@@ -2,8 +2,7 @@ import React,{useEffect, useRef, useState} from 'react';
 import {useRouter} from "next/router";
 import {useSelector} from "react-redux";
 import styled from "styled-components";
-import userRoles from "@_dataStructures/index";
-import userStatus from "@_dataStructures/userStatus";
+import {userStatus,userRoles} from "data-structures";
 import {
     fetchAdminPanelNewAPIKey,
     fetchAdminPanelUserData,
@@ -11,8 +10,8 @@ import {
     fetchAdminPanelUpdateUserData, fetchAdminPanelDeleteUser, fetchAdminPanelChangePassword
 } from "../../../store_toolkit/adminReducers/adminPanelUsersReducer";
 import {useAdminDispatch} from "../../../store_toolkit/hooks";
-import convertVariableNameToName from "@_variables/util/convertVariableNameToName";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {convertVariableNameToName} from "custom-util";
+import {Store} from "typescript-types";
 
 const UserStyledDiv = styled.div`
   .user-admin-edit-profile-page-section {

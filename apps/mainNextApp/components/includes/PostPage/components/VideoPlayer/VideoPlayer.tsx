@@ -3,7 +3,7 @@ import {useSelector} from "react-redux";
 import React, {FC, useMemo,memo} from "react";
 import convertDurationStringToIso8601 from "@_variables/_clientVariables/clientVariables/convertDurationStringToIso8601";
 import convertDateToIso from "@_variables/_clientVariables/clientVariables/convertDateToIso";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const VideoPlayerStyledDiv = styled.div`
   margin: 0 auto;

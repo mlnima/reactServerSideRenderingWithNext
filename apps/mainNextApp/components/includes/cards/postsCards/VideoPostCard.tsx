@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import VideoPostCardTrailer from "../asset/VideoPostCardTrailer";
 import _qualityConvertor from "../asset/_qualityConvertor";
 import CardTitle from "../asset/CardTitle/CardTitle";
-import {Post} from "@_typeScriptTypes/Post";
+import {Post} from "typescript-types";
 import useTranslation from "next-translate/useTranslation";
 import DefaultPostCardStyle from "../asset/DefaultPostCardStyle";
 const CardRating = dynamic(() => import('../asset/CardRating/CardRating'))

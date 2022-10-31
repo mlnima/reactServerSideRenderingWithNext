@@ -1,4 +1,4 @@
-import formSchema from '../../../models/formSchema';
+import formSchema from '../../../../../packages/models/src/formSchema';
 
 const adminGetFormsData = async (req, res) => {
 

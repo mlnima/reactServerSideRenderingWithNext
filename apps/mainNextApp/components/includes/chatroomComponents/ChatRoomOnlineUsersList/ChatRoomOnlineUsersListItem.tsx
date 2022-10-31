@@ -71,7 +71,7 @@ const ChatRoomOnlineUsersListItem:FC<ChatRoomOnlineUsersListItemPropType> = ({on
                          src={
                              onlineUser.profileImage ?
                                  onlineUser.profileImage :
-                                 '/public/asset/images/user/noGenderAvatar150.jpg'}
+                                 '/asset/images/user/noGenderAvatar150.jpg'}
                          alt="chatroom-online-users"
                     />
                     <p className='chatroom-online-users-list-item-username'>{onlineUser.username}</p>

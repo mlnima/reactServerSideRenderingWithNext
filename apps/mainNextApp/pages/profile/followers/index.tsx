@@ -6,7 +6,7 @@ import styled from "styled-components";
 import {fetchMultipleUserDataById, fetchSpecificUserData} from "../../../store_toolkit/clientReducers/userReducer";
 import {useAppDispatch} from "../../../store_toolkit/hooks";
 import _getServerSideStaticPageData from "../../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const FollowersStyledDiv = styled.div`
   max-width: 940px;

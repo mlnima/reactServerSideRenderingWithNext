@@ -130,7 +130,7 @@ const AlphabeticalNumericalRangeLinksWidget: FC = () => {
                     aria-label={'show filters'}
                     onClick={() => setShowFilters(!showFilters)}
             >
-                <SvgRenderer svgUrl={'/public/asset/images/icons/arrow-down-z-a-solid.svg'}
+                <SvgRenderer svgUrl={'/asset/images/icons/arrow-down-z-a-solid.svg'}
                              size={20}
                              customClassName={'show-filters'}
                              color={'var(--primary-button-link-text-color,#000)'}

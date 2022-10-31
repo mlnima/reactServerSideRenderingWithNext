@@ -1,4 +1,4 @@
-import widgetSchema from '../../../models/widgetSchema';
+import widgetSchema from '../../../../../packages/models/src/widgetSchema';
 
 const adminDeleteWidget = (req, res) => {
     if (req.body._id){

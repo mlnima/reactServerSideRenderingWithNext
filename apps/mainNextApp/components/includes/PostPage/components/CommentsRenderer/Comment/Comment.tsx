@@ -5,10 +5,9 @@ import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {useRouter} from "next/router";
 import {FC} from "react";
-import {Comment} from '@_typeScriptTypes/Comment'
 import deleteCommentByAdminInPostPage from "../../../../../../store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksDeleteCommentByAdminInPostPage";
 import {useAppDispatch} from "../../../../../../store_toolkit/hooks";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store,Comment} from "typescript-types";
 
 const CommentStyledDiv = styled.div`
   display: flex;
@@ -71,7 +70,7 @@ const Comment: FC<CommentPropTypes> = ({comment}) => {
                 <div className='comment-header'>
 
                     <img className='comment-author-image'
-                         src={comment?.author?.profileImage || '/public/asset/images/icons/profile-image.jpg'}
+                         src={comment?.author?.profileImage || '/asset/images/icons/profile-image.jpg'}
                     />
 
                     <Link href={`/user/${comment?.author?.username}`} className='comment-author'>

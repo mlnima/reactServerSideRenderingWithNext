@@ -4,7 +4,7 @@ import PaginationComponent from "../PaginationComponent/PaginationComponent";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import PostsCardsRenderer from "../cards/CardsRenderer/PostsCardsRenderer";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 let PostsContainer = styled.div`
   width: 100%;

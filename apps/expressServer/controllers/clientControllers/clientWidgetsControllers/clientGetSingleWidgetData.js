@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var widgetSchema = require('../../../models/widgetSchema');
+var widgetSchema = require('../../../../../packages/models/src/widgetSchema');
 var clientGetSingleWidgetData = function (req, res) {
     var id = req.body.id;
     widgetSchema.findById(id).exec().then(function (widgetData) {

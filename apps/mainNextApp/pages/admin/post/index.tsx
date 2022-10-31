@@ -8,13 +8,13 @@ import Link from 'next/link'
 import RatingOption from '../../../components/adminIncludes/PostComponents/RatingOption/RatingOption'
 import {useRouter} from "next/router";
 import PostInformation from "../../../components/adminIncludes/PostComponents/PostInformation/PostInformation";
-import {languagesOptions} from "@_variables/custom-vaiables";
+import {languagesOptions} from "@_variables/variables";
 import styled from "styled-components";
 import { useSelector} from "react-redux";
 import {adminEditPost} from "../../../store_toolkit/adminReducers/adminPanelPostsReducer";
 import {fetchAdminPanelPost,adminDefineNewPost,adminChangeActiveEditingLanguage} from "../../../store_toolkit/adminReducers/adminPanelPostsReducer";
 import {useAdminDispatch} from "../../../store_toolkit/hooks";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const AdminPostPageStyledDiv = styled.div`
   display: grid;

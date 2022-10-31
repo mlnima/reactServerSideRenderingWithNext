@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
-var widgetSchema_1 = tslib_1.__importDefault(require("../../../models/widgetSchema"));
+var widgetSchema_1 = tslib_1.__importDefault(require("../../../../../packages/models/src/widgetSchema"));
 var databaseSelectFieldsForPostCards_1 = tslib_1.__importDefault(require("../../../../../packages/data-structures/src/databaseSelectFieldsForPostCards"));
 var clientGetMultipleWidgetWithData = function (req, res) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
     var locale_1, locales, excludeOtherLanguagesQuery, requestedWidgets, widgetsDataQuery, widgets, err_1;

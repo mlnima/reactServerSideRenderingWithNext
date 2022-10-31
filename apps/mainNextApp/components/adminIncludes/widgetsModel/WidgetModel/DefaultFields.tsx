@@ -6,9 +6,9 @@ import RenderTitleAndRedirectLink from './RenderTitleAndRedirectLink/RenderTitle
 import TextInputFieldForWidget
     from "./TextInputFieldForWidget/TextInputFieldForWidget";
 import {useSelector} from "react-redux";
-import widgetsStaticPositions from "@_dataStructures/widgetsStaticPositions";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
-import {WidgetData, WidgetSettingsPropTypes} from "@_typeScriptTypes/widgets/Widget";
+import {widgetsStaticPositions} from "data-structures";
+import {Store} from "typescript-types";
+import {WidgetData, WidgetSettingsPropTypes} from "typescript-types";
 
 interface DefaultFieldsPropTypes {
     widgetData: any,

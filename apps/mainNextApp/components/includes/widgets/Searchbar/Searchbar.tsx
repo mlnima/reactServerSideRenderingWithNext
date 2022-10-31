@@ -142,7 +142,7 @@ const Searchbar = () => {
                     title={t('common:Search',{},{fallback:'Search'})}
                     className={'open-close-search-form'}>
 
-                <SvgRenderer svgUrl={'/public/asset/images/icons/magnifying-glass-solid.svg'}
+                <SvgRenderer svgUrl={'/asset/images/icons/magnifying-glass-solid.svg'}
                              size={25}
                              color={'var(--serachbar-widget-text-color, #fff)'}/>
 
@@ -153,7 +153,7 @@ const Searchbar = () => {
                 <span className='btn search-button-widget-close-btn'
                         title={t('common:Close',{},{fallback:'Close'})}
                         onClick={e => onCloseForm(e)}>
-                    <SvgRenderer svgUrl={'/public/asset/images/icons/xmark-solid.svg'}
+                    <SvgRenderer svgUrl={'/asset/images/icons/xmark-solid.svg'}
                                  size={25}
                                  customClassName={'search-button-widget-close-btn-icon'}
                                  color={'var(--serachbar-widget-text-color, #fff)'}/>
@@ -163,7 +163,7 @@ const Searchbar = () => {
                 <span className='btn search-button-widget-clear-keyword'
                         title={t('common:Clear',{},{fallback:'Clear'})}
                         onClick={e => onClearHandler(e)}>
-                    <SvgRenderer svgUrl={'/public/asset/images/icons/xmark-solid.svg'}
+                    <SvgRenderer svgUrl={'/asset/images/icons/xmark-solid.svg'}
                                  size={25}
                                  customClassName={'search-button-widget-clear-keyword-icon'}
                                  color={'var(--serachbar-widget-text-color, #fff)'}/>
@@ -178,7 +178,7 @@ const Searchbar = () => {
                         className='btn searchbar-submit-btn'
                         title={t('common:Search',{},{fallback:'Search'})}
                 >
-                    <SvgRenderer svgUrl={'/public/asset/images/icons/magnifying-glass-solid.svg'}
+                    <SvgRenderer svgUrl={'/asset/images/icons/magnifying-glass-solid.svg'}
                                  size={25}
                                  customClassName={'searchbar-submit-btn-icon'}
                                  color={'var(--serachbar-widget-text-color, #fff)'}/>

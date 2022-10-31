@@ -1,5 +1,5 @@
 import {useRouter} from "next/router";
-import {languagesOptions} from "@_variables/custom-vaiables";
+import {languagesOptions} from "@_variables/variables";
 import styled from "styled-components";
 import {FC} from "react";
 

@@ -1,20 +1,18 @@
-import {FC, useState} from "react";
+import React, {FC, useState} from "react";
 import {useMemo} from 'react';
 import styled from "styled-components";
 import MenuWidgetItem from "./MenuWidgetItem";
-import {MenuItem} from "@_typeScriptTypes/widgets/MenuWidget/MenuItem";
+import {MenuItem} from "typescript-types";
+import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 
 const MenuWidgetStyledDiv = styled.div`
   z-index: 10;
 
   .menu-widget-open-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: 0;
-    padding: 6px 12px;
-    width: 18px;
-    height: 16px;
-    background-color: var(--navigation-text-color, #ccc);
-    mask: url('/apps/mainNextApp/public/asset/images/icons/bars-solid.svg') no-repeat center;
-    -webkit-mask: url('/apps/mainNextApp/public/asset/images/icons/bars-solid.svg') no-repeat center;
   }
 
   .menu-widget-items {
@@ -50,14 +48,14 @@ const MenuWidgetStyledDiv = styled.div`
       color: var(--navigation-text-color, #ccc);
       padding: 6px;
 
-      .menu-widget-close-button-logo {
-        width: 18px;
-        height: 18px;
-        padding: 6px;
-        background-color: var(--navigation-text-color, #ccc);
-        mask: url('/apps/mainNextApp/public/asset/images/icons/xmark-solid.svg') no-repeat center;
-        -webkit-mask: url('/apps/mainNextApp/public/asset/images/icons/xmark-solid.svg') no-repeat center;
-      }
+      //.menu-widget-close-button-logo {
+      //  width: 18px;
+      //  height: 18px;
+      //  padding: 6px;
+      //  background-color: var(--navigation-text-color, #ccc);
+      //  mask: url('/apps/mainNextApp/public/asset/images/icons/xmark-solid.svg') no-repeat center;
+      //  -webkit-mask: url('/apps/mainNextApp/public/asset/images/icons/xmark-solid.svg') no-repeat center;
+      //}
     }
 
     .menu-item {
@@ -128,11 +126,19 @@ const MenuWidget: FC<MenuWidgetPropTypes> = ({menuItems}) => {
             <ul onClick={() => setOpen(!open)}
                 className='menu-widget-open-button btn btn-transparent-light'
                 aria-label="open navigation">
+                <SvgRenderer svgUrl={'/asset/images/icons/bars-solid.svg'}
+                             size={30}
+                             customClassName={'menu-widget-close-button-logo'}
+                             color={'  var(--navigation-text-color, #ccc)'}/>
             </ul>
             <ul className='menu-widget-items'>
                 <li onClick={() => setOpen(!open)}
                     className='menu-widget-close-button  btn btn-transparent-light'>
-                    <span className='menu-widget-close-button-logo'/>
+
+                    <SvgRenderer svgUrl={'/asset/images/icons/xmark-solid.svg'}
+                                 size={25}
+                                 customClassName={'menu-widget-close-button-logo'}
+                                 color={'  var(--navigation-text-color, #ccc)'}/>
                 </li>
                 {menuItemsInOrder.map(menuItem => {
                     return (

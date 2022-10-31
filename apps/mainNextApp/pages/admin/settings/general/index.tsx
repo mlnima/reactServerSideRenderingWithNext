@@ -1,11 +1,11 @@
 import React, {useState, useRef} from 'react';
-import {languagesOptions} from '@_variables/custom-vaiables'
-import convertVariableNameToName from "@_variables/util/convertVariableNameToName";
+import {languagesOptions} from '@_variables/variables'
+import {convertVariableNameToName} from "custom-util";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {adminEditIdentity, adminPanelUpdateSetting} from "../../../../store_toolkit/adminReducers/adminPanelSettingsReducer";
 import {useAdminDispatch} from "../../../../store_toolkit/hooks";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 import SvgRenderer from "../../../../components/global/commonComponents/SvgRenderer/SvgRenderer";
 import TitleDescriptionSettingFields
     from "../../../../components/adminIncludes/pagesComponents/settings/general/TitleDescriptionSettingFields";
@@ -207,7 +207,7 @@ const settings = () => {
                 <p>{item}</p>
                 <button name={item} onClick={(e) => deleteItem(e)}>
 
-                    <SvgRenderer svgUrl={'/public/asset/images/icons/icons/xmark-solid.svg'}
+                    <SvgRenderer svgUrl={'/asset/images/icons/icons/xmark-solid.svg'}
                                  size={20}
                                  color={'var(--navigation-text-color, #ccc)'}/>
                 </button>

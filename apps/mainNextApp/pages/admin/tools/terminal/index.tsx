@@ -5,7 +5,7 @@ import { useSelector} from "react-redux";
 import {terminalCommandExecutor} from "../../../../store_toolkit/adminReducers/adminTerminalReducer";
 import {useAdminDispatch} from "../../../../store_toolkit/hooks";
 import {loading} from "../../../../store_toolkit/clientReducers/globalStateReducer";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 let StyledDiv = styled.div`
   .quickAccess {

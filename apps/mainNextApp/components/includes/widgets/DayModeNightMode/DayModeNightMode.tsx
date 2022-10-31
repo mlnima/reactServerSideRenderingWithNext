@@ -1,8 +1,9 @@
-import {FC, useEffect, useState} from "react";
+import React, {FC, useEffect, useState} from "react";
 import styled, {createGlobalStyle} from "styled-components";
 import {useSelector} from "react-redux";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
-import {UniqueDataTypes} from "@_typeScriptTypes/widgets/Widget";
+import {Store} from "typescript-types";
+import {UniqueDataTypes} from "typescript-types";
+import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 
 interface DayModeNightModePropTypes {
     uniqueData: UniqueDataTypes
@@ -17,15 +18,7 @@ const DayModeNightModeStyledDiv = styled.div`
     align-items: center;
     background-color: transparent;
     border: none;
-
-    .light {
-      width: 25px;
-      height: 25px;
-      margin: 0 2px;
-      background-color: var(--main-active-color, #f90);
-      mask: url('/apps/mainNextApp/public/asset/images/icons/lightbulb-solid.svg') no-repeat center;
-      -webkit-mask: url('/apps/mainNextApp/public/asset/images/icons/lightbulb-solid.svg') no-repeat center;
-    }
+    
   }
 
   .select-section {
@@ -81,7 +74,10 @@ const DayModeNightMode: FC<DayModeNightModePropTypes> = ({uniqueData}) => {
                             onSelectHandler('night')
                     }}
             >
-                <span className={'light'}/>
+                <SvgRenderer svgUrl={'/asset/images/icons/lightbulb-solid.svg'}
+                             size={25}
+                             customClassName={'light'}
+                             color={' var(--main-active-color, #f90)'}/>
             </button>
             <ModeStyles dayNightModeData={state.mode === uniqueData?.dayNightModeDefault ?
                 customColors : uniqueData?.dayNightModeData || ''}

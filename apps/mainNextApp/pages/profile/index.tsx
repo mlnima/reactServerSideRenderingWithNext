@@ -5,7 +5,7 @@ import Link from "next/link";
 import {useSelector} from "react-redux";
 import {wrapper} from "../../store_toolkit/store";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 import SvgRenderer from "../../components/global/commonComponents/SvgRenderer/SvgRenderer";
 
 const ProfileStyledMain = styled.main`
@@ -89,7 +89,7 @@ const Profile = () => {
             <div className='profile-posts'>
                 <div className='profile-no-posts'>
 
-                    <SvgRenderer svgUrl={'/public/asset/images/icons/camera-solid.svg'}
+                    <SvgRenderer svgUrl={'/asset/images/icons/camera-solid.svg'}
                                  size={20}
                                  color={'var(--navigation-text-color, #ccc)'}/>
                 </div>

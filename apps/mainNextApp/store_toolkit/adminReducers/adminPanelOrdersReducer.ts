@@ -1,4 +1,4 @@
-import {AdminPanelOrders} from "@_typeScriptTypes/storeTypes/AdminPanelOrders";
+import {AdminPanelOrders} from "typescript-types";
 
 
 const initialState = {

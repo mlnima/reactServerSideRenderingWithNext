@@ -1,6 +1,6 @@
 import React from 'react';
 import {useSelector} from "react-redux";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const ProductPrice = props => {
     const price = useSelector((store:Store) => store.adminPanelPosts.post?.price);

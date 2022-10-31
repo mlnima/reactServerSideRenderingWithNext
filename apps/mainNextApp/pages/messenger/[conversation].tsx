@@ -22,7 +22,7 @@ import {
 
 import {useAppDispatch} from "../../store_toolkit/hooks";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 
 const conversation = () => {

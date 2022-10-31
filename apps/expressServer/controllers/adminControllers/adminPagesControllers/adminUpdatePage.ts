@@ -1,4 +1,4 @@
-import pageSchema from '../../../models/pageSchema';
+import pageSchema from '../../../../../packages/models/src/pageSchema';
 
 const adminUpdatePage = (req, res) =>{
     const updateData = req.body.pageData

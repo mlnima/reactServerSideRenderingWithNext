@@ -1,5 +1,5 @@
-import {getTextDataWithTranslation, textContentReplacer} from "@_variables/custom-vaiables";
-import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
+import {getTextDataWithTranslation, textContentReplacer,capitalizeFirstLetter} from "custom-util";
+
 import {_metasCanonicalUrlGenerator} from "@_variables/_clientVariables/clientVariables/_canonicalUrlGenerators";
 
 const _firstRequestHeadDataSetter = (context, page: string, setHeadData: boolean, identity: any) => {
@@ -10,10 +10,14 @@ const _firstRequestHeadDataSetter = (context, page: string, setHeadData: boolean
             textContentReplacer(
                 getTextDataWithTranslation(context.locale, `${page}PageTitle`, identity)
                 + ` | ${identity?.siteName}`,
+                //@ts-ignore
                 {
-                    name: page === 'search' ?
-                        `${capitalizeFirstLetter(context.query?.keyword)} ` :
-                        ` ${capitalizeFirstLetter(page)} `
+                    //@ts-ignore
+                           name: page === 'search' ?
+                               //@ts-ignore
+                        `${capitalizeFirstLetter(context.query?.keyword as string)} ` :
+                               //@ts-ignore
+                        ` ${capitalizeFirstLetter(page as string)} `
                 }
             )
             : getTextDataWithTranslation(context.locale, 'title', identity)
@@ -22,6 +26,7 @@ const _firstRequestHeadDataSetter = (context, page: string, setHeadData: boolean
             textContentReplacer(
                 getTextDataWithTranslation(context.locale, `${page}PageDescription`, identity)
                 + `| ${identity?.siteName}`,
+                //@ts-ignore
                 {
                     name: page === 'search' ?
                         `${capitalizeFirstLetter(context.query?.keyword)}` :

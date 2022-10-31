@@ -1,4 +1,4 @@
-import postSchema from '../../models/postSchema';
+import postSchema from '../../../../packages/models/src/postSchema';
 import moment from 'moment';
 import {rootTemplate, sitemapItemTemplate} from "../../_variables/sitemapVariables/xmlTemplateGenerators";
 import {searchSitemapsController} from "./searchSitemapController";

@@ -5,7 +5,7 @@ import {useRouter} from "next/router";
 import {loading} from "../../../../store_toolkit/clientReducers/globalStateReducer";
 import {useSelector} from "react-redux";
 import {useAppDispatch} from "../../../../store_toolkit/hooks";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 let StyledDiv = styled.div`
   position: fixed;

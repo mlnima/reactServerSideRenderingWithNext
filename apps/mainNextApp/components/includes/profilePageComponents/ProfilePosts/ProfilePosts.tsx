@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from 'react';
 import {useSelector} from "react-redux";
 import PostsCardsRenderer from "../../cards/CardsRenderer/PostsCardsRenderer";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const MyProfilePosts = props => {
     const userData = useSelector(({user}:Store) => user.userData)

@@ -17,7 +17,7 @@ const CardRating:FC<CardRatingPropTypes> = ({rating, className} ) => {
 
     return (
         <CardRatingStyledDiv className={'card-rating ' + className}>
-            <SvgRenderer svgUrl={'/public/asset/images/icons/thumbs-up-solid.svg'}
+            <SvgRenderer svgUrl={'/asset/images/icons/thumbs-up-solid.svg'}
                          size={11}
                          customClassName={'rating'}
                          color={'var(--post-element-info-text-color, #ccc)'}/>

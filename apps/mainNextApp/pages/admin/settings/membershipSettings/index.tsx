@@ -1,14 +1,14 @@
 import React, {useState} from "react";
 import styled from "styled-components";
 import {useAdminDispatch, useAdminSelector} from "../../../../store_toolkit/hooks";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
-import {onChangeInputValueCorrector} from "@_variables/custom-vaiables";
+import {Store} from "typescript-types";
+import {onChangeInputValueCorrector} from "@_variables/variables";
 import {
     adminEditMembershipSettings,
     adminPanelUpdateSetting
 } from "../../../../store_toolkit/adminReducers/adminPanelSettingsReducer";
-import postTypes from "@_dataStructures/postTypes";
-import convertVariableNameToName from "@_variables/util/convertVariableNameToName";
+import {postTypes} from "data-structures";
+import {convertVariableNameToName} from "custom-util";
 
 const Style = styled.div`
 

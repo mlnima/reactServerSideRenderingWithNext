@@ -1,7 +1,7 @@
 import {useSelector} from "react-redux";
-import videoQualities from "@_dataStructures/videoQualities";
+import {videoQualities} from "data-structures";
 import {FC} from "react";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 interface QualityPropTypes{
     rendering:boolean,

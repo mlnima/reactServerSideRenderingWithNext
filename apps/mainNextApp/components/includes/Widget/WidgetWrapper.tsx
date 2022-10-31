@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import styled from "styled-components";
 import {FC, memo, useMemo} from "react";
-import {WidgetData} from "@_typeScriptTypes/widgets/Widget";
+import {WidgetData} from "typescript-types";
 
 const WidgetHeader = dynamic(() => import('./WidgetHeader/WidgetHeader'))
 const WidgetCustomScript = dynamic(() => import('./WidgetCustomScript/WidgetCustomScript'))

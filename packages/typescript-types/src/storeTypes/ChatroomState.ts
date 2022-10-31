@@ -1,4 +1,4 @@
-import {ChatroomMessage} from "@_typeScriptTypes/Chatroom/ChatroomMessage";
+import {ChatroomMessage} from "typescript-types";
 
 export interface ChatroomState {
 

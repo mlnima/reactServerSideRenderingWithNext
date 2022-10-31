@@ -19,11 +19,11 @@ const Price = ({currency, price}) => {
     return (
         <PriceStyledDiv className='price-information'>
             {currency === 'Usd'?
-            <SvgRenderer svgUrl={'/public/asset/images/icons/dollar-sign-solid.svg'}
+            <SvgRenderer svgUrl={'/asset/images/icons/dollar-sign-solid.svg'}
                          size={25}
                          customClassName={'price-info-logo'}
                          color={'var(--primary-button-link-text-color, #000)'}/>:
-                <SvgRenderer svgUrl={'/public/asset/images/icons/euro-sign-solid.svg'}
+                <SvgRenderer svgUrl={'/asset/images/icons/euro-sign-solid.svg'}
                              size={25}
                              customClassName={'price-info-logo'}
                              color={'var(--primary-button-link-text-color, #000)'}/>

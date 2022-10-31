@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {WidgetData} from "@_typeScriptTypes/widgets/Widget";
+import {WidgetData} from "typescript-types";
 
 interface CountInputPropTypes {
     widgetData: WidgetData,

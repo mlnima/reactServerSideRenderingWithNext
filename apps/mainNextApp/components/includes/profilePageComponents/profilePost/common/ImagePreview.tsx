@@ -27,7 +27,7 @@ const ImagePreview: FC<ImagePreviewPropTypes> = ({isUploaded, imageSource}) => {
 
     return (
         <Style className={'image-preview'}>
-            <SvgRenderer svgUrl={'/public/asset/images/icons/trash-can-solid.svg'}
+            <SvgRenderer svgUrl={'/asset/images/icons/trash-can-solid.svg'}
                          size={20}
                          customClassName={'delete-image'}
                          color={'var(--main-active-color,#000)'}

@@ -2,8 +2,8 @@ import React from 'react';
 import styled from "styled-components";
 import { useSelector} from "react-redux";
 import {useAdminDispatch} from "../../../../store_toolkit/hooks";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
-// import {convertVariableNameToName, languagesOptions} from '../../../../custom-vaiables/custom-vaiables';
+import {Store} from "typescript-types";
+// import {convertVariableNameToName, languagesOptions} from '../../../../custom-client-variables/custom-client-variables';
 // import {updateSetting} from "../../../../store/clientActions/settingsActions";
 // import {setLoading} from "../../../../store/clientActions/globalStateActions";
 let StyledDiv = styled.div`

@@ -1,6 +1,6 @@
 import React,{FC} from "react";
 import {useSelector} from "react-redux";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 import LoadingV2 from "../../global/commonComponents/Loading/Loading";
 import GlobalStylesComponent from "../../global/Styles/GlobalStylesComponent";
 import SiteSettingSetter from "../../includes/SiteSettingsSetter/SiteSettingsSetter";

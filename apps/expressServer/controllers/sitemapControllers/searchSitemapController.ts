@@ -1,4 +1,4 @@
-import searchKeywordSchema from '../../models/searchKeywordSchema';
+import searchKeywordSchema from '../../../../packages/models/src/searchKeywordSchema';
 import {
     keywordXmlTemplateGenerator,
     sitemapItemTemplate,

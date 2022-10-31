@@ -1,4 +1,4 @@
-import commentSchema from '../../../models/commentSchema';
+import commentSchema from '../../../../../packages/models/src/commentSchema';
 
 const adminDeleteComments = (req, res) => {
     const commentsIds = req.body.commentsIds || []

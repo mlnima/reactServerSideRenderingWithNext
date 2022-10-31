@@ -1,4 +1,4 @@
-import postSchema from '../../../models/postSchema';
+import postSchema from '../../../../../packages/models/src/postSchema';
 
 const adminExportPosts = (req, res) => {
 

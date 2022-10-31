@@ -5,8 +5,7 @@ import styled from "styled-components";
 import {setActiveVisibleProfile} from "../../../../store_toolkit/clientReducers/chatroomReducer";
 import {useRouter} from "next/router";
 import {useAppDispatch} from "../../../../store_toolkit/hooks";
-import {ChatroomMessage} from "@_typeScriptTypes/Chatroom/ChatroomMessage";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store,ChatroomMessage} from "typescript-types";
 
 const ChatRoomMessageAreaStyledMain = styled.main`
   position: fixed;

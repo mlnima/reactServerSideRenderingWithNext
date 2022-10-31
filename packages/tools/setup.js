@@ -1,14 +1,10 @@
 import dotenv from 'dotenv';
 dotenv.config();
-import connectToDatabase from 'reacticum-server/custom-vaiables/connectToDatabase';
+import connectToDatabase from 'custom-server-util/src/connectToDatabase';
 connectToDatabase('Setup').finally()
-import settingSchema from 'reacticum-server/models/settings/settingSchema';
-import widgetSchema from 'reacticum-server/models/widgetSchema';
+import {settingSchema,widgetSchema,userSchema} from 'models';
 
-import userSchema from 'reacticum-server/models/userSchema';
 import bcrypt from 'bcryptjs';
-
-
 
 const identityData = {
     type: 'identity',

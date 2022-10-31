@@ -1,5 +1,5 @@
 {
-  "name": "mainNextApp",
+  "name": "web-app",
   "version": "1.0.0",
   "description": "Reacticum-client is a client side of Reacticum CMS project which is built using NextJs, Express, MongoDB...etc",
   "keywords": [
@@ -13,9 +13,15 @@
   "scripts": {
     "build": "npm run build:next",
     "start": "concurrently  \"ts-node next-production-server\"",
-    "dev": "concurrently  \"ts-node next-dev-server.js\"",
+    "dev": "concurrently  \"ts-node --transpile-only next-dev-server.js\"",
     "build:next": "next build",
     "test": "jest --watch"
+  },
+  "proxy": {
+    "/public/**": {
+      "target": "http://localhost:3001",
+      "secure": false
+    }
   },
   "dependencies": {
     "@loadable/component": "^5.15.2",
@@ -27,7 +33,6 @@
     "@vercel/edge": "^0.0.5",
     "@vercel/og": "^0.0.20",
     "axios": "^0.27.2",
-    "custom-util": "*",
     "data-structures": "*",
     "date-fns": "^2.29.2",
     "embla-carousel-autoplay": "^7.0.2",
@@ -73,6 +78,11 @@
     "suneditor-react": "^3.4.0",
     "tsconfig": "*",
     "typescript-types": "*",
+    "custom-client-variables": "*",
+    "custom-util": "*",
     "uuid-apikey": "^1.5.3"
+  },
+  "_moduleAliases": {
+    "@_variables": "_variables"
   }
 }

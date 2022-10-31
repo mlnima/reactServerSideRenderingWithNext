@@ -1,9 +1,9 @@
 import {FC, useMemo} from "react";
 import styled from "styled-components";
-import {Meta} from "@_typeScriptTypes/Meta";
+import {Meta} from "typescript-types";
 import Link from "next/link";
 import {useRouter} from "next/router";
-import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
+import {capitalizeFirstLetter} from "custom-util";
 import dynamic from "next/dynamic";
 import CardTitle from "../asset/CardTitle/CardTitle";
 const TextToCanvasImage = dynamic(() => import('../asset/TextToCanvasImage/TextToCanvasImage'))

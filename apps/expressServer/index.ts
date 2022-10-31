@@ -1,6 +1,8 @@
 import dotenv from 'dotenv';
+
 dotenv.config({path: '../../.env'});
-import connectToDatabase from './_variables/connectToDatabase';
+import connectToDatabase from 'custom-server-util/src/connectToDatabase';
+//from "@_variables/variables";
 connectToDatabase('Express Server')
 import express from 'express';
 import bodyParser from 'body-parser';
@@ -12,15 +14,15 @@ import xmlParser from 'express-xml-bodyparser';
 import apiCache from 'apicache';
 import cors from 'cors';
 import compression from 'compression';
-import shouldCompress from './_variables/shouldCompress';
+import shouldCompress from 'custom-server-util/src/shouldCompress';
 import cacheSuccesses from './middlewares/apiCache';
 import adminMainRouter from './controllers/adminControllers/adminMainRouter';
 import clientMainRouter from './controllers/clientControllers/clientMainRouter';
 import clientMainFestController from './controllers/clientControllers/clientMainFestController'
 import clientRobotTxtController from './controllers/clientControllers/clientRobotTxtController'
 import rootSitemap from "./controllers/sitemapControllers/rootSiteMap";
-import  {monthSitemapController} from "./controllers/sitemapControllers/siteMapsController";
-import {categories,tags,actors} from './controllers/sitemapControllers/metaSitemapController'
+import {monthSitemapController} from "./controllers/sitemapControllers/siteMapsController";
+import {categories, tags, actors} from './controllers/sitemapControllers/metaSitemapController'
 import pageSitemapController from './controllers/sitemapControllers/pageSitemapController'
 import {searchSitemapController} from './controllers/sitemapControllers/searchSitemapController'
 import loggerMiddleware from "./middlewares/loggerMiddleware";
@@ -68,47 +70,15 @@ const runServer = () => {
     server.get('/sitemap-pt-page(-*.xml)', cacheSuccesses, (req, res) => pageSitemapController(req, res));
     //api routes
     server.use('/api/admin', adminMainRouter);
-    server.use('/api/v1',loggerMiddleware, clientMainRouter);
-
-    //@ts-ignore
+    server.use('/api/v1', loggerMiddleware, clientMainRouter);
 
 
-    server.listen(process.env.SERVER_PORT || 3001, (error) => {
-        console.log('process.env.SERVER_PORT : ',process.env.SERVER_PORT)
-        if (error) throw error
-        console.log(`process ${process.pid} : server ${process.env.PORT || 3001} `)
+    server.listen(process.env.API_SERVER_PORT || 3001, () => {
+        console.log(`process ${process.pid} : api server started at ${process.env.API_SERVER_PORT || 3001} `)
     })
 }
 
 runServer()
-
-// app.prepare().then(() => runServer()).catch((ex) => {
-//     console.log('exit error:', ex.stack)
-// });
-
-
-// if (!process.env.CPU_CORES_ALLOW_TO_USE || process.env.NODE_ENV !== 'production'){
-//     app.prepare().then(()=>runServer()).catch((ex) => {
-//         console.log('exit error:', ex.stack)
-//     });
-// }else{
-//     if (cluster.isMaster){
-//         const numberOfCpus = os.cpus()?.length
-//         const numberOfCpusToUse = parseInt(process.env.CPU_CORES_ALLOW_TO_USE) || 1
-//
-//         if (numberOfCpusToUse < numberOfCpus ){
-//             [...Array(numberOfCpusToUse)].forEach(()=>{
-//                 cluster.fork()
-//             })
-//         }
-//     }else {
-//
-//         app.prepare().then(()=>runServer()).catch((ex) => {
-//             console.log('exit error:', ex.stack)
-//         });
-//     }
-// }
-
 
 
 

@@ -2,8 +2,7 @@ import {memo} from "react";
 import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
 import {useSelector} from "react-redux";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
-
+import {Store} from "typescript-types";
 const StyledFooter = styled.footer`
   background-color: var(--footer-background-color,#000);
   grid-area: footer;

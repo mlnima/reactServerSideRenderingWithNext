@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import TextInputFieldForWidget from "../TextInputFieldForWidget/TextInputFieldForWidget";
-// import { WidgetSettingsPropTypes} from "@custom-vaiables/../../../../../trash/TypeScriptTypes/Widgets";
-import {WidgetData,WidgetSettingsPropTypes} from "@_typeScriptTypes/widgets/Widget";
+// import { WidgetSettingsPropTypes} from "@custom-client-variables/../../../../../trash/TypeScriptTypes/Widgets";
+import {WidgetData,WidgetSettingsPropTypes} from "typescript-types";
 
 interface LogoTypeWidgetModelFieldsPropTypes {
     widgetSettings: WidgetSettingsPropTypes,

@@ -41,9 +41,9 @@ const UserSmallPreview = ({username, role, profileImage, name, lastName, _id, ge
             >
 
                 <img src={profileImage ? profileImage :
-                    gender === 'male' ? '/public/asset/images/user/maleAvatar50.jpg' :
-                        gender === 'female' ? '/public/asset/images/user/femaleAvatar50.jpg' :
-                            '/public/asset/images/user/noGenderAvatar50.jpg'
+                    gender === 'male' ? '/asset/images/user/maleAvatar50.jpg' :
+                        gender === 'female' ? '/asset/images/user/femaleAvatar50.jpg' :
+                            '/asset/images/user/noGenderAvatar50.jpg'
                 } alt="user-profile-image" className="user-profile-image"/>
                 <div className='user-names-info'>
                     <p>{username}</p>

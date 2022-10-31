@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import Axios from "@_variables/util/Axios";
+import Axios from "@_variables/Axios";
 
 export const fetchViewPost = createAsyncThunk(
     'posts/fetchViewPost',

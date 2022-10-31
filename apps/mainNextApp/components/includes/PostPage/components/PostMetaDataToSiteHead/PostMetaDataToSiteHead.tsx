@@ -1,7 +1,7 @@
 // import {FC, useMemo} from "react";
 // import Head from "next/head";
 // import {useSelector} from "react-redux";
-// import {Meta, Store} from "@custom-vaiables/TypeScriptTypes/GlobalTypes";
+// import {Meta, Store} from "@custom-client-variables/TypeScriptTypes/GlobalTypes";
 // import {useRouter} from "next/router";
 //
 // const PostMetaDataToSiteHead: FC = () => {
@@ -61,3 +61,5 @@
 // };
 // export default PostMetaDataToSiteHead;
 //
+
+export {}

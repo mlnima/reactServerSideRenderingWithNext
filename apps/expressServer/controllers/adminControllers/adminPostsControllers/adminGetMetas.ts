@@ -1,5 +1,5 @@
-import settingSchema from '../../../models/settings/settingSchema';
-import metaSchema from '../../../models/metaSchema';
+import settingSchema from '../../../../../packages/models/src/settings/settingSchema';
+import metaSchema from '../../../../../packages/models/src/metaSchema';
 
 const adminGetMetas = async (req, res) => {
     try {

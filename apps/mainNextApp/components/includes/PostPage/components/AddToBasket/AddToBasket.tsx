@@ -82,7 +82,7 @@ const AddToBasket: FC<AddToBasketPropTypes> = ({render}) => {
 
                 <button onClick={onAddToBasketHandler} className='add-item-to-basket-action'>
 
-                    <SvgRenderer svgUrl={'/public/asset/images/icons/cart-plus-solid.svg'}
+                    <SvgRenderer svgUrl={'/asset/images/icons/cart-plus-solid.svg'}
                                  size={25}
                                  color={'var(--primary-button-link-text-color, #000)'}/>
 

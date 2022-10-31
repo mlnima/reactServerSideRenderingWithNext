@@ -1,9 +1,9 @@
 import {FC, useState} from 'react';
-import convertVariableNameToName from "@_variables/util/convertVariableNameToName";
+import {convertVariableNameToName} from "custom-util";
 import styled from "styled-components";
 import {useRouter} from "next/router";
-import {saveWidgetFormData} from "../../../../store_toolkit/clientReducers/widgetsReducer";
-import {useAppDispatch} from "../../../../store_toolkit/hooks";
+import {saveWidgetFormData} from "@store_toolkit/clientReducers/widgetsReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 
 const FormWidgetStyledDiv = styled.div`

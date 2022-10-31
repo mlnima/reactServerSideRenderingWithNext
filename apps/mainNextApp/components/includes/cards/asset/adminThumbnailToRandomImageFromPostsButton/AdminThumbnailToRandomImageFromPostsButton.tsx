@@ -16,7 +16,7 @@ interface adminThumbnailToRandomImageFromPostsButtonPropTypes {
 const AdminThumbnailToRandomImageFromPostsButton: FC<adminThumbnailToRandomImageFromPostsButtonPropTypes> = (props) => {
     return (
         <Style className={'btn btn-primary'}>
-            <SvgRenderer svgUrl={'/public/asset/images/icons/rotate-right-solid.svg'}
+            <SvgRenderer svgUrl={'/asset/images/icons/rotate-right-solid.svg'}
                          size={10}
                          customClassName={'change-image'}
                          color={'#000'}/>

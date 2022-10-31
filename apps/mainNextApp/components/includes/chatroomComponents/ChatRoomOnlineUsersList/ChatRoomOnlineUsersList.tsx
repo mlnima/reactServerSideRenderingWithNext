@@ -1,8 +1,8 @@
 import ChatRoomOnlineUsersListItem from "./ChatRoomOnlineUsersListItem";
 import {useSelector} from "react-redux";
 import styled from "styled-components";
-import {_uniqBy} from "@_variables/util/arrayUtils/uniqArrayBy";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {uniqArrayBy} from "custom-util";
+import {Store} from "typescript-types";
 
 const ChatRoomOnlineUsersListStyledDiv = styled.div`
   display: initial;
@@ -20,7 +20,7 @@ const ChatRoomOnlineUsersList = () => {
 
     const chatroomUsers = useSelector(({chatroom}:Store) => chatroom?.onlineUsers)
 
-    const renderOnlineUsers = [..._uniqBy(chatroomUsers,'username')]
+    const renderOnlineUsers = [...uniqArrayBy(chatroomUsers,'username')]
         .sort((a, b) => a.username > b.username ? 1 : -1).map(onlineUser => {
             return (
                 <ChatRoomOnlineUsersListItem key={`${onlineUser.username + Date.now()}`} onlineUser={onlineUser}/>

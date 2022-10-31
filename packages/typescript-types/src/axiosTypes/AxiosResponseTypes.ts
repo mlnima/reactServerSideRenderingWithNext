@@ -1,4 +1,4 @@
-import {Post} from "@_typeScriptTypes/Post";
+import {Post} from "../Post";
 
 export interface AxiosResponseTypes {
     message?: string,

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {fetchAdminDeleteForm, fetchAdminForm} from "../../../store_toolkit/adminReducers/adminPanelFormsReducer";
 import {useAdminDispatch} from "../../../store_toolkit/hooks";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 let StyledDiv = styled.div`
   .form-data-container {

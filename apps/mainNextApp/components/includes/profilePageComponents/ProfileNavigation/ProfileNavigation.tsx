@@ -4,7 +4,7 @@ import Link from 'next/link'
 import useTranslation from 'next-translate/useTranslation'
 import {useSelector} from "react-redux";
 import styled from "styled-components";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const ProfileNavigationStyledDiv = styled.div`
   display: flex;

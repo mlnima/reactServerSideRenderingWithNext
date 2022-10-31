@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import {parentPort, workerData} from 'worker_threads';
-import connectToDatabase from '../../../_variables/connectToDatabase';
+import connectToDatabase from 'custom-server-util/src/connectToDatabase';
 import sharp from 'sharp'
 import fs from 'fs'
 import path from "path";

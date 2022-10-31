@@ -5,7 +5,7 @@ import styled from "styled-components";
 import {fetchSendAMessageToPrivateConversation} from "../../../../store_toolkit/clientReducers/userReducer";
 import {useAppDispatch} from "../../../../store_toolkit/hooks";
 import SvgRenderer from "../../../global/commonComponents/SvgRenderer/SvgRenderer";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 // import {messageToConversation} from "../../../../legacyCodesAndComponents/store/clientActions/userActions";
 
 const MessengerConversationMessageToolsStyledForm = styled.form`
@@ -68,7 +68,7 @@ const MessengerConversationMessageTools = props => {
             <MessengerConversationMessageToolsStyledForm onSubmit={onSendMessageHandler} className='messenger-conversation-message-tools'>
                 <input maxLength={300} ref={messageInput} className='form-control-input' type="text" name='message'/>
                 <button onClick={e => onSendMessageHandler(e)} className='btn btn-primary'>
-                    <SvgRenderer svgUrl={'/public/asset/images/icons/share-solid.svg'}
+                    <SvgRenderer svgUrl={'/asset/images/icons/share-solid.svg'}
                                  size={20}
                                  color={'var(--navigation-text-color, #ccc)'}/>
                 </button>

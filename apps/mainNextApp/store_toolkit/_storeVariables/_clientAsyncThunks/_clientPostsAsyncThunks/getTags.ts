@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import _metaPageQueryGenerator from "@_variables/_clientVariables/clientVariables/_metaPageQueryGenerator";
-import Axios from "@_variables/util/Axios";
+import Axios from "@_variables/Axios";
 
 const getTags = createAsyncThunk(
     'posts/getTags',

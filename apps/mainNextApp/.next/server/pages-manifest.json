@@ -1,5 +1,13 @@
 {
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js"
+  "/_document": "pages/_document.js",
+  "/404": "pages/404.js",
+  "/admin/design/customColors": "pages/admin/design/customColors.js",
+  "/post/[postType]/[identifier]": "pages/post/[postType]/[identifier].js",
+  "/chatroom/[chatRoomName]": "pages/chatroom/[chatRoomName].js",
+  "/": "pages/index.js",
+  "/actors": "pages/actors.js",
+  "/categories": "pages/categories.js",
+  "/tags": "pages/tags.js"
 }

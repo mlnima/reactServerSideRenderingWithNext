@@ -6,7 +6,7 @@ import {
     fetchAdminBulkActionMeta,
     fetchAdminPanelBulkActionPost
 } from "../../../../store_toolkit/adminReducers/adminPanelPostsReducer";
-import {updateQueryGenerator} from "@_variables/custom-vaiables";
+import {updateQueryGenerator} from "@_variables/variables";
 import {useAdminDispatch} from "../../../../store_toolkit/hooks";
 
 const AssetBulkActionStyledDiv = styled.div`

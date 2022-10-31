@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import {ChangeEvent} from "react";
 import {adminEditDesign} from "../../../../store_toolkit/adminReducers/adminPanelSettingsReducer";
 import {useAdminDispatch} from "../../../../store_toolkit/hooks";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const StyleSection = dynamic(() => import('../../../../components/adminIncludes/design/StyleSection/StyleSection'), {ssr: false});
 

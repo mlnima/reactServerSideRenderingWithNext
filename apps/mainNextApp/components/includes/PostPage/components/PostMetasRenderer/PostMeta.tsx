@@ -1,9 +1,9 @@
 import React, {FC} from "react";
 import ActorMetaImageRenderer from "./ActorMetaImageRenderer";
 import Link from "next/link";
-import {convertMetasTypeToSingular} from "@_variables/custom-vaiables";
-import {Meta} from "@_typeScriptTypes/Meta";
-import capitalizeFirstLetters from "@_variables/util/capitalizeFirstLetters";
+import {convertMetasTypeToSingular,capitalizeFirstLetters} from "custom-util";
+import {Meta} from "typescript-types";
+
 
 interface PostMetaPropTypes {
     item: Meta

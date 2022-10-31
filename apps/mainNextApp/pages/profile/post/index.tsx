@@ -15,11 +15,11 @@ import fetchUserEditingPostUpdate
     from "../../../store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserEditingPostUpdate";
 import fetchUserEditingPost
     from "../../../store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserEditingPost";
-import {useAppDispatch} from "../../../store_toolkit/hooks";
+import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "../../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import DynamicNoSSR from "../../../components/includes/WidgetsRenderer/DynamicNoSSR";
-import _postDataCleanerBeforeSave from "@_variables/_clientVariables/clientAjaxVariables/_postDataCleanerBeforeSave";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import postDataCleanerBeforeSave from "@_variables/post-variables/postDataCleanerBeforeSave";
+import {Store} from "typescript-types";
 import fetchUserCreateNewPost
     from "../../../store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserCreateNewPost";
 // const WidgetsRenderer = dynamic(() => import('../WidgetsRenderer/WidgetsRenderer'))

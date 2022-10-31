@@ -1,4 +1,4 @@
-import metaSchema from '../../../models/metaSchema';
+import metaSchema from '../../../../../packages/models/src/metaSchema';
 
 const adminUpdateMetaByApi =async (req, res) => {
     try {

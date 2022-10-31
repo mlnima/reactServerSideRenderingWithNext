@@ -12,7 +12,7 @@ import {
     fetchAdminPanelPage
 } from "../../../store_toolkit/adminReducers/adminPanelPagesReducer";
 import {useAdminDispatch} from "../../../store_toolkit/hooks";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 let AdminEditCustomPageStyledDiv = styled.div`
   padding: 10px 1rem;

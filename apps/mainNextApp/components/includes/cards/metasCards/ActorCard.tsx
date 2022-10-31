@@ -1,8 +1,8 @@
 import {FC} from "react";
 import styled from "styled-components";
-import {Meta} from "@_typeScriptTypes/Meta";
+import {Meta} from "typescript-types";
 import Link from "next/link";
-import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
+import {capitalizeFirstLetter} from "custom-util";
 import dynamic from "next/dynamic";
 import CardTitle from "../asset/CardTitle/CardTitle";
 

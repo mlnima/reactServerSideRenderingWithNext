@@ -2,7 +2,7 @@ import React from 'react';
 import {useSelector} from "react-redux";
 import {useAdminDispatch} from "../../../../../store_toolkit/hooks";
 import {loading} from "../../../../../store_toolkit/clientReducers/globalStateReducer";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const WidgetExporter = () => {
     const widgets = useSelector((store: Store) => store?.adminPanelWidgets)

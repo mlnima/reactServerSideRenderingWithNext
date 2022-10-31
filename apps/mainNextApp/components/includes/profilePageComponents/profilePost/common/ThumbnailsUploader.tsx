@@ -93,11 +93,11 @@ const ThumbnailsUploader: FC<ThumbnailUploaderPropTypes> =
                         // multiple
                            style={{display: 'none'}}
                            onChange={e => onUploadHandler(e.target.files, images.length + 1)}/>
-                    <SvgRenderer svgUrl={'/public/asset/images/icons/camera-solid.svg'}
+                    <SvgRenderer svgUrl={'/asset/images/icons/camera-solid.svg'}
                                  size={70}
                                  customClassName={'camera'}
                                  color={'var(--serachbar-widget-text-color, #fff)'}/>
-                    <SvgRenderer svgUrl={'/public/asset/images/icons/circle-plus-solid.svg'}
+                    <SvgRenderer svgUrl={'/asset/images/icons/circle-plus-solid.svg'}
                                  size={20}
                                  customClassName={'plus'}
                                  color={'var(--main-active-color, #f90)'}/>

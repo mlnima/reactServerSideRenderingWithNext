@@ -4,7 +4,7 @@ import {wrapper} from "../../store_toolkit/store";
 import { useSelector} from "react-redux";
 import styled from "styled-components";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const MessengerPageStyledMain = styled.main`
   display: flex;

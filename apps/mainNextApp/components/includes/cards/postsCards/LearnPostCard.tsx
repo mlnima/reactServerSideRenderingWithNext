@@ -4,7 +4,7 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import CardImageRenderer from "../asset/CardImageRenderer";
 import TextToCanvasImage from "../asset/TextToCanvasImage/TextToCanvasImage";
-import {Post} from "@_typeScriptTypes/Post";
+import {Post} from "typescript-types";
 import CardTitle from "../asset/CardTitle/CardTitle";
 import DefaultPostCardStyle from "../asset/DefaultPostCardStyle";
 import useTranslation from "next-translate/useTranslation";

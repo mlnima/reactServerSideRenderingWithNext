@@ -2,7 +2,7 @@ import {FC, useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import dynamic from "next/dynamic";
 import SiteHeadSetter from "../../global/SiteHeadSetter";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const GoogleAnalytics = dynamic(() => import('./GoogleAnalytics'), {ssr: false})
 const UserAutoLogin = dynamic(() => import('./UserAutoLogin'), {ssr: false})

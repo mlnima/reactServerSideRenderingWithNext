@@ -1,4 +1,4 @@
-import pageSchema from '../../models/pageSchema';
+import pageSchema from '../../../../packages/models/src/pageSchema';
 import {sitemapItemTemplate} from "../../_variables/sitemapVariables/xmlTemplateGenerators";
 
 export const pagesSitemapsController = async () =>{

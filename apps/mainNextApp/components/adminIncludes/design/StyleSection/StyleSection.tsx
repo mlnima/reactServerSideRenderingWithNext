@@ -4,7 +4,7 @@ import { useSelector} from "react-redux";
 import MonacoEditor from "../../MonacoEditor/MonacoEditor";
 import {adminEditDesign, adminPanelUpdateSetting} from "../../../../store_toolkit/adminReducers/adminPanelSettingsReducer";
 import {useAdminDispatch} from "../../../../store_toolkit/hooks";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const StyleSectionStyledDiv = styled.div`
   width: 100%;

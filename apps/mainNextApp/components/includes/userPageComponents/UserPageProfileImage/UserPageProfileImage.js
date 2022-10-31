@@ -29,7 +29,7 @@ const UserPageProfileImage = ({gender,profileImage}) => {
 
     return (
         <UserPageProfileImageStyledDiv className='user-page-profile-image'>
-            <img src={profileImage ? profileImage + '?date=' + Date.now() : '/public/asset/images/user/noGenderAvatar150.jpg'}
+            <img src={profileImage ? profileImage + '?date=' + Date.now() : '/asset/images/user/noGenderAvatar150.jpg'}
                  alt='user-page-profile-image-content'
                  className='user-page-profile-image-content'
             />

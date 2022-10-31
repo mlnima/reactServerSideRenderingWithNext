@@ -1,0 +1,25 @@
+"use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+exports.id = "locales_pt_common_json";
+exports.ids = ["locales_pt_common_json"];
+exports.modules = {
+
+/***/ "./locales/pt/common.json":
+/*!********************************!*\
+  !*** ./locales/pt/common.json ***!
+  \********************************/
+/***/ ((module) => {
+
+module.exports = JSON.parse('{"Home":"Casa","Categories":"Categorias","Tags":"Tag","Email":"O email","Login":"Conecte-se","Not A Member Yet? Register Here":"Ainda não é membro? Registre-se aqui","Do You Have An Account? Login Here":"Você tem uma conta? Entre aqui","Member login":"Acesso de membro","Profile":"Perfil","Messages":"Mensagens","Register":"Registro","Sign Up":"Inscrever-se","Username":"Nome do usuário","Password":"Senha","Repeat Password":"Repita a senha","Gender":"Gênero","Male":"Masculino","Female":"Fêmea","Other":"De outros","City":"Cidade","Country":"País","State":"Estado","Street":"Rua","House Number":"Número da casa","Address":"Endereço","Logout":"Sair","Accept":"Aceitar","Accept and Read More":"Aceite e leia mais","Decline":"Declínio","User":"Do utilizador","Users":"Comercial","Online Users":"Usuários online","Follow":"Seguir","Unfollow":"Deixar de seguir","Posts":"Postagens","Post":"Publicar","Yes":"Sim","No":"Não","Ok":"OK","Send":"Mandar","Cancel":"Cancelar","Close":"Fechar","Open":"Abrir","Language":"Língua","Chatroom":"Sala de bate-papo","Search":"Procurar","Search...":"Procurar...","Download":"Download","Like":"Gostar","Dislike":"Não gosto","Views":"Visualizações","Details":"Detalhes","Go To":"Vamos para","Edit":"Editar","Coming Soon":"Em breve","Report":"Relatório","Feedback":"Comentários","Bug Report":"Relatório de erro","Advertise":"Anunciar","Not Found":"Não encontrado","Go To Homepage":"Vá para a página inicial","Error":"Erro","Server Error":"Erro de servidor","An Error Occurred":"Um erro ocorreu","Occurred On Server":"Ocorreu no servidor","Comments":"Comentários","Write a Comment":"Escreva um comentário","Post Comment":"Postar comentário","You have entered an invalid username or password":"Você digitou um nome de usuário ou senha inválida","Something went wrong please try again later":"Algo deu errado, tente novamente mais tarde","This username already exists":"Esse nome de usuário já existe","Your account has been successfully created you can login now":"Sua conta foi criada com sucesso, você pode fazer o login agora","Passwords are not matched":"As senhas não correspondem","Login successful":"Login bem-sucedido","Use 8 or more characters with a mix of letters, numbers & symbols":"Use 8 ou mais caracteres com uma mistura de letras,números e símbolos","Minimum eight characters, at least one letter and one number":"Mínimo de oito caracteres, pelo menos uma letra e um número","Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character like $":"Mínimo de 8 caracteres, pelo menos 1 letra maiúscula, 1 letra minúscula, 1 número e 1 caractere especial como $","View Profile":"Ver perfil","Send Message":"Enviar mensagem","About Us":"Sobre nós","Contact Us":"Contate-nos","Unauthorized Access":"Acesso não autorizado","Mismatch Passwords":"Senhas incompatíveis","Wrong Password":"Senha incorreta","Nothing found":"Nada encontrado","Nothing found Description":"Parece que não conseguimos encontrar o que você está procurando. Talvez a pesquisa possa ajudar"}');
+
+/***/ })
+
+};
+;

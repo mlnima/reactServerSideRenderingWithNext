@@ -2,10 +2,10 @@ import Link from "next/link";
 import styled from "styled-components";
 import React, {FC, useEffect, useRef, useState} from "react";
 import {useSelector} from "react-redux";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 import PostMeta from "./PostMeta";
 import PostActor from "./PostActor";
-import capitalizeFirstLetters from "@_variables/util/capitalizeFirstLetters";
+import {capitalizeFirstLetters} from "custom-util";
 
 
 const PostMetaStyledDiv = styled.div`

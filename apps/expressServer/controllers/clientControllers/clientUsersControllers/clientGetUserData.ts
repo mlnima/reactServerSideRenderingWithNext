@@ -1,5 +1,5 @@
 
-import userSchema from '../../../models/userSchema';
+import userSchema from '../../../../../packages/models/src/userSchema';
 
 const clientGetUserData = (req, res) => {
     userSchema.findById(req.body._id).exec().then(user => {

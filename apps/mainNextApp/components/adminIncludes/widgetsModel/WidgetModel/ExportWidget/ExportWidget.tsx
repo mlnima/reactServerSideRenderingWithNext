@@ -35,7 +35,7 @@ const ExportWidget = props => {
 
     return (
         <button className={'btn btn-primary'} title="export" onClick={() => onExportHandler()}>
-            <SvgRenderer svgUrl={'/public/asset/images/icons/file-export-solid.svg'}
+            <SvgRenderer svgUrl={'/asset/images/icons/file-export-solid.svg'}
                          size={20}
                          color={'var(--primary-button-link-text-color, #000)'}/>
         </button>

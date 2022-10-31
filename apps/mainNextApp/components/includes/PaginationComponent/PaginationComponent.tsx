@@ -2,7 +2,7 @@ import {FC} from "react";
 import PaginationComponentPageLink from "./PaginationComponentPageLink";
 import styled from "styled-components";
 import {useRouter} from "next/router";
-import rangeNumGenerator from "@_variables/util/rangeNumGenerator";
+import {rangeNumGenerator} from "custom-util";
 
 const PaginationComponentStyledDiv = styled.div`
   display: flex;

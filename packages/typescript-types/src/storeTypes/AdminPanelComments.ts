@@ -1,4 +1,4 @@
-import {Comment} from "@_typeScriptTypes/Comment";
+import {Comment} from "typescript-types";
 
 export interface AdminPanelComments {
     comments: Comment[],

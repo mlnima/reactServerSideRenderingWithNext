@@ -2,7 +2,7 @@ import React, {FC} from "react";
 import GlobalStyles from "../../global/Styles/GlobalStylesComponent";
 import SiteSettingSetter from "../../includes/SiteSettingsSetter/SiteSettingsSetter";
 import {useSelector} from "react-redux";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 import dynamic from "next/dynamic";
 const LoginRegisterPopup = dynamic(() => import('../../includes/LoginRegisterPopup/LoginRegisterPopup'), {ssr: false});
 const AlertBox = dynamic(() => import('../../includes/AlertBox/AlertBox'), {ssr: false});

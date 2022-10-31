@@ -21,7 +21,7 @@ const CardViews = ({views, className}: CardViewsPropTypes) => {
             {!!views &&
                 <>
 
-                    <SvgRenderer svgUrl={'/public/asset/images/icons/eye-regular.svg'}
+                    <SvgRenderer svgUrl={'/asset/images/icons/eye-regular.svg'}
                                  size={14}
                                  customClassName={'views'}
                                  color={'var(--post-element-info-text-color, #ccc)'}/>

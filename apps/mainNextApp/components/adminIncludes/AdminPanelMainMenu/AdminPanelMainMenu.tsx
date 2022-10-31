@@ -220,7 +220,7 @@ const AdminPanelMainMenu = () => {
                               onMouseOver={() => setHovered(item)}
                               onClick={() => hovered === item ? setHovered('') : setHovered(item)}
                         >
-                            <SvgRenderer svgUrl={'/public/asset/images/icons/sort-down-solid.svg'}
+                            <SvgRenderer svgUrl={'/asset/images/icons/sort-down-solid.svg'}
                                          size={25}
                                          customClassName={'sidebar-items-switch-icon'}
                                          customStyle={

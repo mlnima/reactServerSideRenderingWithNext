@@ -1,9 +1,9 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {NextRouter} from "next/router";
 import {loading, setAlert} from "../../../clientReducers/globalStateReducer";
-import {reduceArrayOfDataToIds} from "@_variables/custom-vaiables";
-import Axios from "@_variables/util/Axios";
-import {Post} from "@_typeScriptTypes/Post";
+import {reduceArrayOfDataToIds} from "custom-util";
+import Axios from "@_variables/Axios";
+import {Post} from "typescript-types";
 
 export const fetchUserCreateNewPost = createAsyncThunk(
     'posts/fetchUserEditingPost',

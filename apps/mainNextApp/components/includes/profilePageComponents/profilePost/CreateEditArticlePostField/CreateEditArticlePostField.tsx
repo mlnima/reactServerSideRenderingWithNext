@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 //import TextInput from "@components/includes/profilePageComponents/profilePost/common/TextInput";
 import {useSelector} from "react-redux";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 interface CreateEditArticlePostPropTypes {
     onChangeHandler:any

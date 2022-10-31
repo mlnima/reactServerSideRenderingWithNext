@@ -1,7 +1,7 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {loading, setAlert} from "../../../clientReducers/globalStateReducer";
-import {reduceArrayOfDataToIds} from "@_variables/custom-vaiables";
-import Axios from "@_variables/util/Axios";
+import {reduceArrayOfDataToIds} from "custom-util";
+import Axios from "@_variables/Axios";
 import fetchUserEditingPost
     from "./_clientPostsAsyncThunksFetchUserEditingPost";
 

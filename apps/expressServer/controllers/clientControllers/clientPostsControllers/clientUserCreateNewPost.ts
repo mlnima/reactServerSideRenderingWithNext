@@ -1,4 +1,4 @@
-import postSchema from "../../../models/postSchema";
+import postSchema from "../../../../../packages/models/src/postSchema";
 
 const clientUserCreateNewPost = async (req, res) => {
     const newPost = req.body.postData;

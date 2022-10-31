@@ -1,4 +1,4 @@
-import userSchema from '../../../models/userSchema';
+import userSchema from '../../../../../packages/models/src/userSchema';
 import uuidAPIKey from 'uuid-apikey';
 
 const adminNewApiKey = (req, res) => {

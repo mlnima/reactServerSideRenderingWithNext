@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 import SvgRenderer from "../../global/commonComponents/SvgRenderer/SvgRenderer";
 import Link from "next/link";
 
@@ -46,7 +46,7 @@ const UserProfileImage: FC<UserProfileImagePropTypes> = ({size, profileRedirect}
         <img className={'user-info-profile-button-image'} src={userData?.profileImage}
              alt={'profile image'}/>
         :
-        <SvgRenderer svgUrl={'/public/asset/images/icons/user-solid.svg'}
+        <SvgRenderer svgUrl={'/asset/images/icons/user-solid.svg'}
                      size={size - 10 || 48}
                      customClassName={'user-info-profile-button-icon'}
                      color={' var(--auth-widget-text-color, #fff)'}

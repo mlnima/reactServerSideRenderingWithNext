@@ -1,12 +1,12 @@
 import 'module-alias/register';
 import dotenv from 'dotenv';
 dotenv.config({path: '../../.env'});
-import connectToDatabase from 'reacticum-server/_variables/connectToDatabase';
-connectToDatabase('Socket Server').finally()
+import {connectToDatabase} from 'custom-server-util';
+connectToDatabase('Socket Server')
 import http from 'http'
 import express from 'express'
 import cors from 'cors'
-import chatroomSchema from 'reacticum-server/models/chatroomSchema'
+import {chatroomSchema} from 'models'
 import {uniqArrayBy} from "custom-util";
 const app = express();
 const server = http.createServer(app);
@@ -37,11 +37,8 @@ app.get('/*', (req, res) => {
     res.end()
 });
 //@ts-ignore
-server.listen(process.env.SOCKET_PORT, (error) => {
-    if (error) {
-        throw error
-    }
-    console.log(`socket server is running on ${process.env.SOCKET_PORT}`);
+server.listen(process.env.SOCKET_SERVER_PORT || 3005, (error) => {
+    console.log(`process ${process.pid} : socket server is running at ${process.env.SOCKET_PORT}`);
 });
 
 

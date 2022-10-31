@@ -1,7 +1,7 @@
 import {FC, useEffect, useState} from 'react';
 import styled from "styled-components";
 import SvgRenderer from "../../../../global/commonComponents/SvgRenderer/SvgRenderer";
-import {WidgetData} from "@_typeScriptTypes/widgets/Widget";
+import {WidgetData} from "typescript-types";
 
 let StyledDiv = styled.div`
   padding: 5px 10px;
@@ -135,7 +135,7 @@ const FieldPreview :FC<FieldPreviewPropTypes>= ({setWidgetData,widgetData,field}
                             open: true
                         })}
                         className={'btn btn-secondary'}>
-                        <SvgRenderer svgUrl={'/public/asset/images/icons/sliders-solid.svg'}
+                        <SvgRenderer svgUrl={'/asset/images/icons/sliders-solid.svg'}
                                      size={20}
                                      color={'var(--secondary-button-link-text-color, #fff)'}/>
 
@@ -145,17 +145,17 @@ const FieldPreview :FC<FieldPreviewPropTypes>= ({setWidgetData,widgetData,field}
                     <p>{field.fieldType + ' : ' + field.fieldName}</p>
                     <p>index:{field.fieldIndex}</p>
                     <button onClick={() => fieldIndexPlus(-1)} className={'btn btn-secondary'}>
-                        <SvgRenderer svgUrl={'/public/asset/images/icons/sort-up-solid.svg'}
+                        <SvgRenderer svgUrl={'/asset/images/icons/sort-up-solid.svg'}
                                      size={20}
                                      color={'var(--secondary-button-link-text-color, #fff)'}/>
                     </button>
                     <button onClick={() => fieldIndexPlus(+1)} className={'btn btn-secondary'}>
-                        <SvgRenderer svgUrl={'/public/asset/images/icons/sort-down-solid.svg'}
+                        <SvgRenderer svgUrl={'/asset/images/icons/sort-down-solid.svg'}
                                      size={20}
                                      color={'var(--secondary-button-link-text-color, #fff)'}/>
                     </button>
                     <button onClick={() => onDeleteHandler(field.fieldName)} className={'btn btn-secondary'}>
-                        <SvgRenderer svgUrl={'/public/asset/images/icons/trash-can-solid.svg'}
+                        <SvgRenderer svgUrl={'/asset/images/icons/trash-can-solid.svg'}
                                      size={20}
                                      color={'var(--secondary-button-link-text-color, #fff)'}/>
                     </button>

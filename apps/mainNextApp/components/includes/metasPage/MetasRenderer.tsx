@@ -1,8 +1,8 @@
 import React, {FC, useEffect, useMemo} from "react";
-import {Meta} from "@_typeScriptTypes/Meta";
+import {Meta} from "typescript-types";
 import styled from "styled-components";
 import Link from "next/link";
-import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
+import {capitalizeFirstLetter} from "custom-util";
 import MetaElement from "./MetaElement";
 import useTranslation from "next-translate/useTranslation";
 import {useRouter} from "next/router";
@@ -176,7 +176,7 @@ const MetasRenderer: FC<MetasRendererPropTypes> = ({metaType, metaData}) => {
                                 <Link href={`/${metaType}?startWith=${group === '#' ? 'digits' : group}`}>
                                         <span className={'view-all'}>
                                             {t('common:View All', {}, {fallback: 'View All'})}
-                                            <SvgRenderer svgUrl={'/public/asset/images/icons/sort-up-solid.svg'}
+                                            <SvgRenderer svgUrl={'/asset/images/icons/sort-up-solid.svg'}
                                                          size={20}
                                                          customClassName={'view-all-arrow-icon'}
                                                          color={'var(--main-active-color, #f90)'}/>

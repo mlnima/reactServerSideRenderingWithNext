@@ -6,7 +6,7 @@ import CreateNewFileFolderPop from "../../../components/adminIncludes/FileManage
 import {useSelector} from "react-redux";
 import {fetchFilManagerReadPath} from "../../../store_toolkit/adminReducers/adminPanelFileManagerReducer";
 import {useAdminDispatch} from "../../../store_toolkit/hooks";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const fileManager = () => {
     const dispatch = useAdminDispatch()

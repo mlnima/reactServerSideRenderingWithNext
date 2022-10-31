@@ -3,7 +3,7 @@ import { useSelector} from "react-redux";
 import styled from "styled-components";
 import {fetchAdminPanelSaveNewPost} from "../../../../store_toolkit/adminReducers/adminPanelPostsReducer";
 import {useAdminDispatch} from "../../../../store_toolkit/hooks";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 // import {adminSaveNewPost} from "../../../../store/adminActions/adminPanelPostsActions";
 
 const PostsImporterStyledDiv = styled.div`

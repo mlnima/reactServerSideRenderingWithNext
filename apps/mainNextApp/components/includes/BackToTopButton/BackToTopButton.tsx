@@ -1,5 +1,6 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components";
+import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 
 const BackToTopButtonStyledDiv = styled.div`
   position: fixed;
@@ -11,17 +12,11 @@ const BackToTopButtonStyledDiv = styled.div`
   align-items: center;
   padding: 8px 16px;
   cursor: pointer;
-
-  #back-to-top-button {
-    width: 24px;
-    height: 24px;
-    background-color: var(--main-background-color, #ccc);
-    margin: 5px;
-    mask: url('/apps/mainNextApp/public/asset/images/icons/angle-up-solid.svg') no-repeat center;
-    -webkit-mask: url('/apps/mainNextApp/public/asset/images/icons/angle-up-solid.svg') no-repeat center;
+  
+  span{
+    display: flex;
   }
-
-
+  
 `
 const BackToTopButton = () => {
 
@@ -43,10 +38,13 @@ const BackToTopButton = () => {
     if (showButton) {
         return (
             <BackToTopButtonStyledDiv onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} title="Back to top">
-                <span id={'back-to-top-button'}
-                      aria-label={'scroll to top'}
-
-                />
+                <span aria-label={'scroll to top'}>
+                     <SvgRenderer svgUrl={'/asset/images/icons/angle-up-solid.svg'}
+                                  customID={'back-to-top-button'}
+                                  size={24}
+                                  customClassName={'view-profile'}
+                                  color={'var(--main-background-color, #000)'}/>
+                </span>
             </BackToTopButtonStyledDiv>
 
         )

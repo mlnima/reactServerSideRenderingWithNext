@@ -2,7 +2,7 @@ import {useMemo,memo} from "react";
 import {useRouter} from "next/router";
 import dynamic from "next/dynamic";
 import {useSelector} from "react-redux";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 import {
     _isEditMode,
     _renderByDayCondition,

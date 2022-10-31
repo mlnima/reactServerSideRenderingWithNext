@@ -1,5 +1,5 @@
-import userSchema from '../../../models/userSchema';
-import conversationSchema from '../../../models/conversationSchema';
+import userSchema from '../../../../../packages/models/src/userSchema';
+import conversationSchema from '../../../../../packages/models/src/conversationSchema';
 
 const clientMessageToConversation= async (req, res) =>{
     try {

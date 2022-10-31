@@ -5,11 +5,10 @@ import _shortNumber from "@_variables/_clientVariables/clientVariables/_shortNum
 import dynamic from "next/dynamic";
 import {useSelector} from "react-redux";
 import styled from "styled-components";
-import ratingCalculator from "@_variables/util/ratingCalculator";
+import {ratingCalculator} from "custom-util";
 import Autoplay from "embla-carousel-autoplay";
-import {useAppDispatch} from "../../../../store_toolkit/hooks";
-import {Post} from "@_typeScriptTypes/Post";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {useAppDispatch} from "@store_toolkit/hooks";
+import {Post,Store} from "typescript-types";
 
 const ArticlePostCard = dynamic(() => import('../../cards/postsCards/ArticlePostCard'))
 const PromotionPostCard = dynamic(() => import('../../cards/postsCards/PromotionPostCard'))

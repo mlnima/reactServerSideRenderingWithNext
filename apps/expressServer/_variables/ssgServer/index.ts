@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config();
-import connectToDatabase from '../connectToDatabase';
+import connectToDatabase from 'custom-server-util/src/connectToDatabase';
 connectToDatabase('Express Server')
 
 import express from 'express';
@@ -13,7 +13,7 @@ import xmlParser from 'express-xml-bodyparser';
 import apiCache from 'apicache';
 import cors from 'cors';
 import compression from 'compression';
-import shouldCompress from '../shouldCompress';
+import shouldCompress from 'custom-server-util/src/shouldCompress';
 import cacheSuccesses from '../../middlewares/apiCache';
 import adminMainRouter from '../../controllers/adminControllers/adminMainRouter';
 import clientMainRouter from '../../controllers/clientControllers/clientMainRouter';

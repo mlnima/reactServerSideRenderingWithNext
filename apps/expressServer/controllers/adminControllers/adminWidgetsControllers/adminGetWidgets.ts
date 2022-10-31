@@ -1,4 +1,4 @@
-import widgetSchema from '../../../models/widgetSchema';
+import widgetSchema from '../../../../../packages/models/src/widgetSchema';
 import {databaseSelectFieldsForPostCards} from "data-structures";
 
 const adminGetWidgets = async (req, res) => {

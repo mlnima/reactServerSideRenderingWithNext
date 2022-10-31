@@ -1,4 +1,4 @@
-import orderSchema from '../../../models/orderSchema';
+import orderSchema from '../../../../../packages/models/src/orderSchema';
 
 const adminGetOrders = (req, res) => {
 

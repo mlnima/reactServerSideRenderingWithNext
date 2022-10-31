@@ -1,26 +1,51 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Default",
-  "compilerOptions":{
+  "compilerOptions": {
     "module": "commonjs",
-    "downlevelIteration": true,
-    "sourceMap": true,
-    "noEmit": true,
+    "allowJs": true,
     "importHelpers": true,
     "pretty": true,
-    "declaration": true,
     "baseUrl": ".",
-    "outDir": ".next",
-    "allowJs": true,
-    "checkJs": false,
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2015",
+      "es2017",
+      "es2018",
+      "es2021"
+    ],
+    "composite": false,
+    "declaration": true,
+    "declarationMap": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "inlineSources": false,
+    "isolatedModules": true,
+    "moduleResolution": "node",
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "preserveWatchOutput": true,
     "skipLibCheck": true,
     "strict": false,
+    "checkJs": false,
     "strictNullChecks": false,
-    "forceConsistentCasingInFileNames": true,
-    "esModuleInterop": true,
-    "moduleResolution": "node",
+    "noEmit": false,
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "incremental": true
-  }
+    "incremental": true,
+    "downlevelIteration": true
+  },
+  "exclude": [
+    "node_modules",
+    "node_modules/*",
+    "trash",
+    "trash/*",
+    "tempFiles/legacyCodesAndComponents"
+  ],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ]
 }

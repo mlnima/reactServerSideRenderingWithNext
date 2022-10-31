@@ -2,8 +2,7 @@ import React, {FC, useMemo} from 'react';
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import dynamic from "next/dynamic";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
-import {Meta} from "@_typeScriptTypes/Meta";
+import {Store,Meta} from "typescript-types";
 
 const TagCard = dynamic(() => import('../metasCards/TagCard'))
 const ActorCard = dynamic(() => import('../metasCards/ActorCard'))

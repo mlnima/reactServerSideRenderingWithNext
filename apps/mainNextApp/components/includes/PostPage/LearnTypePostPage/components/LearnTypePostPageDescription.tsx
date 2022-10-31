@@ -3,7 +3,7 @@ import {useRouter} from "next/router";
 import dynamic from 'next/dynamic'
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 // const ReactPageDescriptionRenderer = dynamic(() => import('../../components/ReactPageDescriptionRenderer/ReactPageDescriptionRenderer'))
 const ObjectKeyDescriptionRenderer = dynamic(() => import('../../components/ObjectKeyDescriptionRenderer/ObjectKeyDescriptionRenderer'))
 

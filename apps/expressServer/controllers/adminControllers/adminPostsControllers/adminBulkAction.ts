@@ -1,7 +1,7 @@
-import postSchema from '../../../models/postSchema';
-import metaSchema from '../../../models/metaSchema';
-import userSchema from '../../../models/userSchema';
-import commentSchema from '../../../models/commentSchema';
+import postSchema from '../../../../../packages/models/src/postSchema';
+import metaSchema from '../../../../../packages/models/src/metaSchema';
+import userSchema from '../../../../../packages/models/src/userSchema';
+import commentSchema from '../../../../../packages/models/src/commentSchema';
 
 const adminBulkAction = async (req, res) => {
     const type = req.body.type

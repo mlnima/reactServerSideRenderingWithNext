@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 // import {formatDistance} from 'date-fns'
 // import faIR from "date-fns/locale/fa-IR";
 import styled from "styled-components";
-import {ChatroomMessage} from "@_typeScriptTypes/Chatroom/ChatroomMessage";
+import {ChatroomMessage} from "typescript-types";
 
 const ChatRoomLogMessageStyledDiv = styled.div`
   background-color: var(--navigation-background-color, #18181b);
@@ -99,7 +99,7 @@ class ChatRoomMessage extends PureComponent<ChatRoomMessagePropTypes> {
                     )
                 }}
                      className='chatroom-message-area-message-image'
-                     src={this?.props?.message?.profileImage ? this?.props?.message?.profileImage : '/public/asset/images/user/noGenderAvatar50.jpg'}
+                     src={this?.props?.message?.profileImage ? this?.props?.message?.profileImage : '/asset/images/user/noGenderAvatar50.jpg'}
                      alt={'profileImage'}
                 />
 

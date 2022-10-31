@@ -1,7 +1,7 @@
 import {createGlobalStyle} from "styled-components";
 import {useSelector} from "react-redux";
 import {FC} from "react";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 import keyframes from './keyframes';
 import buttons from './buttons';
 

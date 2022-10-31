@@ -1,4 +1,4 @@
-import orderSchema from '../../../models/orderSchema'
+import orderSchema from '../../../../../packages/models/src/orderSchema'
 
 const clientCreateOrder = (req, res) => {
 

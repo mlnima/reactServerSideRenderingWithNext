@@ -1,13 +1,13 @@
 import  {FC,Fragment} from 'react';
 import styled from "styled-components";
-import fileTypeDetector from "@_variables/util/fileTypeDetector";
+import {fileTypeDetector} from "custom-util";
 import {useSelector} from "react-redux";
 import {
     adminPanelFileManagerEditState,
     fetchFileManagerUploadFile
 } from "../../../../store_toolkit/adminReducers/adminPanelFileManagerReducer";
 import {useAdminDispatch} from "../../../../store_toolkit/hooks";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 import SvgRenderer from "../../../global/commonComponents/SvgRenderer/SvgRenderer";
 
 const FileManagerAreaStyledDiv = styled.div`
@@ -84,7 +84,7 @@ const FileManagerArea: FC = () => {
                 </video>
             )
         } else {
-            const logoToRender = `/public/asset/images/icons/${data.fileName.includes('.js') ? 'js-.svg' :
+            const logoToRender = `/asset/images/icons/${data.fileName.includes('.js') ? 'js-.svg' :
                 data.fileName.includes('.env') ? 'sliders-solid.svg' :
                     !data.fileName.includes('.') ? 'folder-solid.svg' :
                         data.fileName.includes('.scss') ? 'sass-.svg' :

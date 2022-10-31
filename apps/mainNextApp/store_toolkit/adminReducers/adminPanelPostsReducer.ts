@@ -1,11 +1,11 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
-import Axios from "@_variables/util/Axios";
+import Axios from "@_variables/Axios";
 import {AxiosError, AxiosResponse} from "axios";
-import {AxiosErrorTypes} from "@_typeScriptTypes/axiosTypes/AxiosErrorTypes";
-import {Meta} from "@_typeScriptTypes/Meta";
+// import {AxiosErrorTypes} from "typescript-types";
+import {Meta,Post} from "typescript-types";
 import {loading, setAlert} from "../clientReducers/globalStateReducer";
-import {Post} from "@_typeScriptTypes/Post";
+
 
 interface AdminPanelPosts {
     post: {
@@ -38,7 +38,7 @@ export const fetchAdminPanelPost = createAsyncThunk(
         return await Axios.get(`/api/admin/posts/getPost?_id=${_id}&token=${localStorage.wt}`)
             .then((res: AxiosResponse<any>) => {
                 return res.data?.post
-            }).catch((err: AxiosError<AxiosErrorTypes>) => {
+            }).catch((err) => {
                 thunkAPI.dispatch(setAlert({message: err.response?.data?.message, type: 'Error'}))
             }).finally(() => {
                 thunkAPI.dispatch(loading(false))
@@ -55,7 +55,7 @@ export const fetchAdminPanelPosts = createAsyncThunk(
                     posts: res.data?.posts,
                     totalCount: res.data?.totalCount
                 }
-            }).catch((err: AxiosError<AxiosErrorTypes>) => {
+            }).catch((err) => {
                 thunkAPI.dispatch(setAlert({message: err.response?.data?.message, type: 'Error'}))
             }).finally(() => {
                 thunkAPI.dispatch(loading(false))
@@ -73,7 +73,7 @@ export const fetchAdminPanelUpdatePost = createAsyncThunk(
         return await Axios.post(`/api/admin/posts/updatePost`, body)
             .then((res: AxiosResponse<any>) => {
                 thunkAPI.dispatch(setAlert({message: res.data.message || 'Post Updated', type: 'success'}))
-            }).catch((err: AxiosError<AxiosErrorTypes>) => {
+            }).catch((err) => {
                 thunkAPI.dispatch(setAlert({message: err.response.data.message, type: 'error', err}))
             }).finally(() => {
                 thunkAPI.dispatch(loading(false))
@@ -95,7 +95,7 @@ export const fetchAdminPanelSaveNewPost = createAsyncThunk(
                 setTimeout(() => {
                     res.data?.savedPostData?._id && router ? router.push('/admin/post?id=' + res.data.savedPostData._id) : null
                 }, 1500)
-            }).catch((err: AxiosError<AxiosErrorTypes>) => {
+            }).catch((err) => {
                 thunkAPI.dispatch(setAlert({message: err.response.data.message, type: 'error', err}))
             }).finally(() => {
                 thunkAPI.dispatch(loading(false))
@@ -114,7 +114,7 @@ export const fetchAdminPanelDeleteMeta = createAsyncThunk(
             .then((res: AxiosResponse<any>) => {
                 thunkAPI.dispatch(setAlert({message: res.data?.message || 'deleted', type: 'success'}))
 
-            }).catch((err: AxiosError<AxiosErrorTypes>) => {
+            }).catch((err) => {
                 thunkAPI.dispatch(setAlert({message: err.response.data.message, type: 'error', err}))
             }).finally(() => {
                 thunkAPI.dispatch(loading(false))
@@ -134,7 +134,7 @@ export const fetchAdminPanelUpdateMeta = createAsyncThunk(
             .then((res: AxiosResponse<any>) => {
                 thunkAPI.dispatch(setAlert({message: res.data?.message, type: 'success'}))
 
-            }).catch((err: AxiosError<AxiosErrorTypes>) => {
+            }).catch((err) => {
                 thunkAPI.dispatch(setAlert({message: err.response.data.message, type: 'error', err}))
 
             }).finally(() => {
@@ -154,7 +154,7 @@ export const fetchAdminPanelMetas = createAsyncThunk(
                     metas: res.data?.metas,
                     totalCount: res.data?.totalCount
                 }
-            }).catch((err: AxiosError<AxiosErrorTypes>) => {
+            }).catch((err) => {
                 thunkAPI.dispatch(setAlert({message: err.response.data.message, type: 'error', err}))
             }).finally(() => {
                 thunkAPI.dispatch(loading(false))
@@ -173,7 +173,7 @@ export const fetchAdminPanelMeta = createAsyncThunk(
                         imageUrlLock: res.data?.meta?.imageUrlLock || false
                     }
                 }
-            }).catch((err: AxiosError<AxiosErrorTypes>) => {
+            }).catch((err) => {
                 thunkAPI.dispatch(setAlert({message: err.response.data.message, type: 'error', err}))
 
             }).finally(() => thunkAPI.dispatch(loading(false)))
@@ -193,7 +193,7 @@ export const fetchAdminPanelBulkActionPost = createAsyncThunk(
         Axios.post('/api/admin/posts/postsBulkAction', body).then((res: AxiosResponse<any>) => {
             thunkAPI.dispatch(setAlert({message: res.data?.message, type: 'success'}))
 
-        }).catch((err: AxiosError<AxiosErrorTypes>) => {
+        }).catch((err) => {
             thunkAPI.dispatch(setAlert({message: err.response.data.message, type: 'error', err}))
 
         }).finally(() => thunkAPI.dispatch(loading(false)))
@@ -212,7 +212,7 @@ export const fetchAdminCheckAndRemoveDeletedVideos = createAsyncThunk(
                     type: 'success'
                 }))
 
-            }).catch((err: AxiosError<AxiosErrorTypes>) => {
+            }).catch((err) => {
                 thunkAPI.dispatch(setAlert({message: err.response.data.message, type: 'error', err}))
 
             }).finally(() => {
@@ -232,7 +232,7 @@ export const fetchSetMetaThumbnailsAndCount = createAsyncThunk(
                     type: 'success'
                 }))
 
-            }).catch((err: AxiosError<AxiosErrorTypes>) => {
+            }).catch((err) => {
                 thunkAPI.dispatch(setAlert({message: err.response.data.message, type: 'error', err}))
 
             }).finally(() => thunkAPI.dispatch(loading(false)))
@@ -250,7 +250,7 @@ export const fetchGeneratePermaLinkForPosts = createAsyncThunk(
                     type: 'success'
                 }))
 
-            }).catch((err: AxiosError<AxiosErrorTypes>) => {
+            }).catch((err) => {
                 thunkAPI.dispatch(setAlert({message: err.response.data.message, type: 'error', err}))
 
             }).finally(() => thunkAPI.dispatch(loading(false)))
@@ -283,7 +283,7 @@ export const fetchAdminImportPosts = createAsyncThunk(
         }).then((res: AxiosResponse<any>) => {
             thunkAPI.dispatch(setAlert({message: res?.data?.message || 'posts are imported', type: 'success'}))
 
-        }).catch((err: AxiosError<AxiosErrorTypes>) => {
+        }).catch((err) => {
             thunkAPI.dispatch(setAlert({message: err?.response?.data?.message, type: 'error', err}))
 
         }).finally(() => {

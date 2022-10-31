@@ -10,7 +10,7 @@ import {fetchLogin, fetchUserRegister} from "../../../store_toolkit/clientReduce
 import {setAlert} from "../../../store_toolkit/clientReducers/globalStateReducer";
 import {useAppDispatch} from "../../../store_toolkit/hooks";
 import SvgRenderer from "../../global/commonComponents/SvgRenderer/SvgRenderer";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const LoginRegisterPopupFormsStyledDiv = styled.div`
   background-color: var(--navigation-background-color, #18181b);
@@ -283,7 +283,7 @@ const LoginRegisterPopupForms: FC = () => {
                             className='close-form-button' title={t(`Close`)}
                     >
 
-                        <SvgRenderer svgUrl={'/public/asset/images/icons/xmark-solid.svg'}
+                        <SvgRenderer svgUrl={'/asset/images/icons/xmark-solid.svg'}
                                      size={25}
                                      customClassName={'close-form-button-icon'}
                                      color={'var(--serachbar-widget-text-color, #fff)'}
@@ -422,7 +422,7 @@ const LoginRegisterPopupForms: FC = () => {
                                     {state.password && <div className={'show-password-wrapper '}
                                                             onClick={() => setShowPassword(!showPassword)}
                                                             onTouchStart={() => setShowPassword(!showPassword)}>
-                                        <SvgRenderer svgUrl={'/public/asset/images/icons/eye-regular.svg'}
+                                        <SvgRenderer svgUrl={'/asset/images/icons/eye-regular.svg'}
                                                      size={20}
                                                      customClassName={'show-password'}
                                                      color={'var(--navigation-text-color, #fff)'}

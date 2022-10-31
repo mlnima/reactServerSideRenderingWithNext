@@ -22,7 +22,7 @@ const CheckOutSlideHeader = props => {
         <StyledDiv className='checkout-slide-header'>
             <button className='close-checkout-slide-button' onClick={onCloseCheckoutSlideHandler}>
 
-                <SvgRenderer svgUrl={'/public/asset/images/icons/xmark-solid.svg'}
+                <SvgRenderer svgUrl={'/asset/images/icons/xmark-solid.svg'}
                              size={25}
                              customClassName={'navigation-mobile-button-logo'}
                              color={'var(--navigation-text-color, #fff)'}/>

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import dynamic from "next/dynamic";
 import AuthenticationNotLoggedInItems from "./AuthenticationNotLoggedInItems";
 import SvgRenderer from "../../../global/commonComponents/SvgRenderer/SvgRenderer";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 import UserProfileImage from "../../UserProfileImage/UserProfileImage";
 
 const AuthenticationLoggedInItems = dynamic(() =>
@@ -180,7 +180,7 @@ const Authentication: FC = () => {
             </div>
             <div className={'authentication-widget-wrapper'}>
                 <button className={'logged-item btn btn-transparent-light close-btn'} onClick={onOpenCloseHandler}>
-                    <SvgRenderer svgUrl={'/public/asset/images/icons/times-solid.svg'}
+                    <SvgRenderer svgUrl={'/asset/images/icons/times-solid.svg'}
                                  size={24}
                                  customClassName={'close icon'}
                                  color={' var(--auth-widget-text-color, #fff)'}

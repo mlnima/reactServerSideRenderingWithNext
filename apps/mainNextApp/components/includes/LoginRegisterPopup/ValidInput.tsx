@@ -22,10 +22,10 @@ const ValidInput: FC<ValidInputPropTypes> = ({valid}) => {
     return (
         <ValidInputStyledDiv className='validator'> {
             valid ?
-                <SvgRenderer svgUrl={'/public/asset/images/icons/check-solid.svg'}
+                <SvgRenderer svgUrl={'/asset/images/icons/check-solid.svg'}
                              size={25}
                              color={'green'}/> :
-                <SvgRenderer svgUrl={'/public/asset/images/icons/xmark-solid.svg'}
+                <SvgRenderer svgUrl={'/asset/images/icons/xmark-solid.svg'}
                              size={25}
                              color={'red'}/>
         }</ValidInputStyledDiv>

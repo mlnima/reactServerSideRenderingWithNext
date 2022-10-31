@@ -12,7 +12,7 @@ import fetchPost
     from "../../../store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPost";
 import {useAppDispatch} from "../../../store_toolkit/hooks";
 import _getServerSideStaticPageData from "../../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const Soft404 = dynamic(() =>
     import('../../../components/includes/Soft404/Soft404'))

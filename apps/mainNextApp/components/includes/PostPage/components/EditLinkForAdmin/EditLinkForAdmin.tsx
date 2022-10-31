@@ -3,10 +3,10 @@ import styled from "styled-components";
 import {useRouter} from "next/router";
 import {useSelector} from "react-redux";
 import Draggable from 'react-draggable';
-import {fetchAdminPanelBulkActionPost} from "../../../../../store_toolkit/adminReducers/adminPanelPostsReducer";
-import {updateQueryGenerator} from "@_variables/custom-vaiables";
-import {useAppDispatch} from "../../../../../store_toolkit/hooks";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {fetchAdminPanelBulkActionPost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
+import {updateQueryGenerator} from "@_variables/variables";
+import {useAppDispatch} from "@store_toolkit/hooks";
+import {Store} from "typescript-types";
 
 const EditLinkForAdminStyledDiv = styled.div`
   display: flex;

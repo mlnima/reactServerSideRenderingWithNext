@@ -71,7 +71,7 @@ const UploadFileBtn = props => {
             <input className={'form-control-input'} ref={ uploadInputElement } type="file" style={ { display: 'none' } } onChange={ e => onUploadHandler(e) }/>
             <button  className={'btn btn-success'} onClick={ () => uploadInputElement.current.click() } onDrop={e=>onDropFileHandler(e)} onDragOver={e=>e.preventDefault()}>
 
-                <SvgRenderer svgUrl={'/public/asset/images/icons/upload-solid.svg'}
+                <SvgRenderer svgUrl={'/asset/images/icons/upload-solid.svg'}
                              size={25}
                              color={'var(--serachbar-widget-text-color, #fff)'}
                 />

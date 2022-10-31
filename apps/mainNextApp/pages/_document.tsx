@@ -9,7 +9,6 @@ class MyDocument extends Document {
 
 MyDocument.getInitialProps = async (ctx) =>{
     const styledComponentsSheet = new ServerStyleSheet()
-    // const materialSheets = new ServerStyleSheets()
     const originalRenderPage = ctx.renderPage;
     try {
         ctx.renderPage = () => originalRenderPage({
@@ -23,7 +22,6 @@ MyDocument.getInitialProps = async (ctx) =>{
             styles: (
                 <React.Fragment>
                     {initialProps.styles}
-                    {/*{materialSheets.getStyleElement()}*/}
                     {styledComponentsSheet.getStyleElement()}
                 </React.Fragment>
             ),

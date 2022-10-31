@@ -107,8 +107,8 @@ const WidgetHeaderControl: FC<WidgetHeaderControlPropType> =
         return (
             <StyledDiv className='widget-open-control' {...keyStatus}>
                 <div className='widget-open-close-button' onClick={onLockHandler}>
-                    <SvgRenderer svgUrl={widgetData.stayOpen ? '/public/asset/images/icons/lock-open-solid.svg':
-                        '/public/asset/images/icons/lock-solid.svg'}
+                    <SvgRenderer svgUrl={widgetData.stayOpen ? '/asset/images/icons/lock-open-solid.svg':
+                        '/asset/images/icons/lock-solid.svg'}
                                  size={25}
                                  color={'var(--serachbar-widget-text-color, #fff)'}
                     />
@@ -124,14 +124,14 @@ const WidgetHeaderControl: FC<WidgetHeaderControlPropType> =
 
                 <div className='widget-open-control-group-buttons'>
                     <button className='changeWidgetIndexBtn' onClick={() => changeWidgetIndex(false)}>
-                        <SvgRenderer svgUrl={'/public/asset/images/icons/sort-up-solid.svg'}
+                        <SvgRenderer svgUrl={'/asset/images/icons/sort-up-solid.svg'}
                                      size={25}
                                      customClassName={'show-password'}
                                      color={'var(--serachbar-widget-text-color, #fff)'}
                         />
                     </button>
                     <button className='changeWidgetIndexBtn' onClick={() => changeWidgetIndex(true)}>
-                        <SvgRenderer svgUrl={'/public/asset/images/icons/sort-down-solid.svg'}
+                        <SvgRenderer svgUrl={'/asset/images/icons/sort-down-solid.svg'}
                                      size={25}
                                      color={'var(--serachbar-widget-text-color, #fff)'}
                         />

@@ -1,7 +1,7 @@
 import fsExtra from 'fs-extra'
 // import sharp from 'sharp'
 // import fs from 'fs'
-import postSchema from "../../../models/postSchema";
+import postSchema from "../../../../../packages/models/src/postSchema";
 import {Worker, isMainThread, parentPort} from 'worker_threads';
 import path from "path";
 

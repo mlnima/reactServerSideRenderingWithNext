@@ -1,4 +1,4 @@
-import metaSchema from '../../../models/metaSchema';
+import metaSchema from '../../../../../packages/models/src/metaSchema';
 
 const adminUpdateMeta = (req, res) => {
     metaSchema.findByIdAndUpdate(req.body.data._id, {...req.body.data}, {new: true}).exec().then(updatedMeta => {

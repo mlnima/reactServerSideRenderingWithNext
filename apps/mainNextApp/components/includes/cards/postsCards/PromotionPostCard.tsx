@@ -6,7 +6,7 @@ import fetchViewPost
     from "../../../../store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchViewPost";
 import {useAppDispatch} from "../../../../store_toolkit/hooks";
 import CardTitle from "../asset/CardTitle/CardTitle";
-import {Post} from "@_typeScriptTypes/Post";
+import {Post} from "typescript-types";
 import useTranslation from "next-translate/useTranslation";
 import DefaultPostCardStyle from "../asset/DefaultPostCardStyle";
 

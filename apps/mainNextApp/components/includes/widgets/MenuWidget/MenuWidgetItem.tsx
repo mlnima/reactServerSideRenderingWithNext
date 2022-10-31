@@ -3,7 +3,7 @@ import {FC, useMemo} from "react";
 import useTranslation from 'next-translate/useTranslation'
 import {useRouter} from "next/router";
 import Link from "next/link";
-import {MenuItem} from "@_typeScriptTypes/widgets/MenuWidget/MenuItem";
+import {MenuItem} from "typescript-types";
 
 interface MenuWidgetItemPropTypes {
     menuItem:MenuItem,

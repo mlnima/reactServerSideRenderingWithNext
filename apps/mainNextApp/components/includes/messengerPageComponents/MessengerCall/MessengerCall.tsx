@@ -3,7 +3,7 @@ import {useSelector} from "react-redux";
 import styled from "styled-components";
 import Draggable from 'react-draggable';
 import SvgRenderer from "../../../global/commonComponents/SvgRenderer/SvgRenderer";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const MessengerCallStyledDiv = styled.div`
   position: fixed;
@@ -189,12 +189,12 @@ const MessengerCall = ({endCallHandler, callAccepted, attemptForAnswer, disableM
                             <p className='messenger-call-user-calling-message-call-type'>Incoming video call</p>
                             <div className='messenger-call-user-calling-message-answer-buttons'>
                                 <button className='messenger-call-user-calling-message-answer-button' onClick={answerCall}>
-                                    <SvgRenderer svgUrl={'/public/asset/images/icons/phone-solid.svg'}
+                                    <SvgRenderer svgUrl={'/asset/images/icons/phone-solid.svg'}
                                                  size={20}
                                                  color={'var(--navigation-text-color, #ccc)'}/>
                                 </button>
                                 <button className='messenger-call-user-calling-message-reject-button' onClick={endCallHandler}>
-                                    <SvgRenderer svgUrl={'/public/asset/images/icons/phone-slash-solid.svg'}
+                                    <SvgRenderer svgUrl={'/asset/images/icons/phone-slash-solid.svg'}
                                                  size={20}
                                                  color={'var(--navigation-text-color, #ccc)'}/>
                                 </button>
@@ -206,7 +206,7 @@ const MessengerCall = ({endCallHandler, callAccepted, attemptForAnswer, disableM
                         {/*<button onClick={disableCamera} className='disable-video-button'></button>*/}
                         {/*<button onClick={disableMicrophone} className='disable-audio-button'> </button>*/}
                         <button onClick={endCallHandler} className='leave-call-button'>
-                            <SvgRenderer svgUrl={'/public/asset/images/icons/phone-slash-solid.svg'}
+                            <SvgRenderer svgUrl={'/asset/images/icons/phone-slash-solid.svg'}
                                          size={20}
                                          color={'var(--navigation-text-color, #ccc)'}/>
                         </button>

@@ -1,9 +1,9 @@
 import React, {FC, useState} from "react";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
+import {capitalizeFirstLetter} from "custom-util";
 import ActorDetails from "./ActorDetails";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const ActorBioMobileStyledSection = styled.section`
   display: flex;

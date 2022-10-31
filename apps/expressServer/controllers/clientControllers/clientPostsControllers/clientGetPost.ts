@@ -1,4 +1,4 @@
-import postSchema from '../../../models/postSchema';
+import {postSchema} from 'models';
 import {mongoIdValidator} from 'custom-server-util';
 import {arraySortRandom} from 'custom-util';
 

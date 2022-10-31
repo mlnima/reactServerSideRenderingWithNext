@@ -1,5 +1,5 @@
 import React, {FC, useState} from 'react';
-import {onChangeInputValueCorrector} from "@_variables/custom-vaiables";
+import {onChangeInputValueCorrector} from "@_variables/variables";
 
 interface AddFormConditionalPropTypes{
     setWidgetData:React.SetStateAction<any>

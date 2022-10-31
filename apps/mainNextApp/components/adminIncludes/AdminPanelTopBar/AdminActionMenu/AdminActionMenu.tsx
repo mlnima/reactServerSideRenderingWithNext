@@ -30,7 +30,7 @@ const AdminActionMenu: FC = () => {
     return (
         <StyledDiv className='admin-panel-topbar-action-menu'>
                 <span className={'adminActionBtn adminTopBarItem'}>
-                    <SvgRenderer svgUrl={'/public/asset/images/icons/user-solid.svg'}
+                    <SvgRenderer svgUrl={'/asset/images/icons/user-solid.svg'}
                                  size={20}
                                  customClassName={'adminTopBarItem-icon'}
                                  color={'var(--serachbar-widget-text-color, #fff)'}/>

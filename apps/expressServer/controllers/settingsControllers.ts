@@ -1,4 +1,4 @@
-import settingSchema from '../models/settings/settingSchema';
+import settingSchema from '../../../packages/models/src/settings/settingSchema';
 
 const settingsControllers = {
     create : (req, res) => {

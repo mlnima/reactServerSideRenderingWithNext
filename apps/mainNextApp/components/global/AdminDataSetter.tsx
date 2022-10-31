@@ -1,14 +1,14 @@
 import React, {FC, useEffect} from 'react';
 import {useRouter} from "next/router";
 import Head from 'next/head'
-import {adminPanelGetSettings} from "../../store_toolkit/adminReducers/adminPanelSettingsReducer";
-import {fetchCustomPages} from "../../store_toolkit/adminReducers/adminPanelGlobalStateReducer";
-import {fetchAdminPanelGetWidgets} from "../../store_toolkit/adminReducers/adminWidgetsReducer";
-import {getUncachedWidgetsForAdmin} from "../../store_toolkit/clientReducers/widgetsReducer";
-import {useAppDispatch} from "../../store_toolkit/hooks";
+import {adminPanelGetSettings} from "@store_toolkit/adminReducers/adminPanelSettingsReducer";
+import {fetchCustomPages} from "@store_toolkit/adminReducers/adminPanelGlobalStateReducer";
+import {fetchAdminPanelGetWidgets} from "@store_toolkit/adminReducers/adminWidgetsReducer";
+import {getUncachedWidgetsForAdmin} from "@store_toolkit/clientReducers/widgetsReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 import {useSelector} from "react-redux";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
-import {fetchUserAutoLogin} from "../../store_toolkit/clientReducers/userReducer";
+import {Store} from "typescript-types";
+import {fetchUserAutoLogin} from "@store_toolkit/clientReducers/userReducer";
 import AlertBox from "../includes/AlertBox/AlertBox";
 
 interface AdminDataSetterPropTypes {

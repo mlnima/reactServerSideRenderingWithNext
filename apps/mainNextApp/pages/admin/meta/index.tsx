@@ -8,9 +8,9 @@ import {
     fetchAdminPanelMeta,
     fetchAdminPanelUpdateMeta
 } from '../../../store_toolkit/adminReducers/adminPanelPostsReducer'
-import {languagesOptions} from "@_variables/custom-vaiables";
+import {languagesOptions} from "@_variables/variables";
 import {useAdminDispatch} from "../../../store_toolkit/hooks";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 import Soft404 from "../../../components/includes/Soft404/Soft404";
 
 let AdminMetaPageStyledDiv = styled.div`

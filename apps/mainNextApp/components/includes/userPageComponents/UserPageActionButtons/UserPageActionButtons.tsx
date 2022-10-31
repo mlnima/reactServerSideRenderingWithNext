@@ -12,8 +12,7 @@ import {
 } from "../../../../store_toolkit/clientReducers/userReducer";
 import {loginRegisterForm} from "../../../../store_toolkit/clientReducers/globalStateReducer";
 import {useAppDispatch} from "../../../../store_toolkit/hooks";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
-
+import {Store} from "typescript-types";
 const UserPageActionButtonsStyledDiv = styled.div`
   display: flex;
   justify-content: center;

@@ -1,13 +1,13 @@
 import React, {FC, useRef, useState} from 'react';
 import * as widgetModels from './models'
-import convertVariableNameToName from "@_variables/util/convertVariableNameToName";
+import {convertVariableNameToName} from "custom-util";
 import {useSelector} from 'react-redux';
 import styled from "styled-components";
-import widgetsStaticPositions from '@_dataStructures/widgetsStaticPositions';
+import {widgetsStaticPositions} from 'data-structures';
 import Draggable from 'react-draggable';
 import {fetchAdminPanelAddNewWidget} from "../../../../store_toolkit/adminReducers/adminWidgetsReducer";
 import {useAdminDispatch} from "../../../../store_toolkit/hooks";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 import dynamic from "next/dynamic";
 
 const AddWidgetWithPositionMenuStyledDiv = styled.div`

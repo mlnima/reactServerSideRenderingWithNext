@@ -5,7 +5,7 @@ import {wrapper} from "../../store_toolkit/store";
 import SidebarWidgetAreaRenderer from "../../components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import React from "react";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 import MetasRenderer from "../../components/includes/metasPage/MetasRenderer";
 import getTags from "../../store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/getTags";
 

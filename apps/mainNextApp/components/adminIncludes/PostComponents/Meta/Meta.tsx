@@ -2,9 +2,9 @@ import React, {FC, useRef} from 'react';
 import styled from "styled-components";
 import { useSelector} from "react-redux";
 import {adminEditPost} from "../../../../store_toolkit/adminReducers/adminPanelPostsReducer";
-import {_uniqBy} from "@_variables/util/arrayUtils/uniqArrayBy";
+import {uniqArrayBy} from "custom-util";
 import {useAdminDispatch} from "../../../../store_toolkit/hooks";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 import SvgRenderer from "../../../global/commonComponents/SvgRenderer/SvgRenderer";
 
 const MetaStyledDiv = styled.div`
@@ -70,7 +70,7 @@ const Meta:FC<MetaPropType> = props => {
         // const uniqItems = uniqBy([...previousMetaData, ...newItemsToSchemaForm], (e) => {
         //     return e.name;
         // })
-        const uniqItems = _uniqBy([...previousMetaData, ...newItemsToSchemaForm],'name')
+        const uniqItems = uniqArrayBy([...previousMetaData, ...newItemsToSchemaForm],'name')
 
         dispatch(adminEditPost({
             [props.type]: uniqItems
@@ -86,7 +86,7 @@ const Meta:FC<MetaPropType> = props => {
         return (
             <button key={index} name={item?.name} onClick={(e) => deleteItem(e)} className='btn btn-danger'>
                 {item?.name}
-                <SvgRenderer svgUrl={'/public/asset/images/icons/xmark-solid.svg'}
+                <SvgRenderer svgUrl={'/asset/images/icons/xmark-solid.svg'}
                              size={16}
                              customClassName={'meta-icon'}
                              color={'#fff'}/>
@@ -100,7 +100,7 @@ const Meta:FC<MetaPropType> = props => {
             <form className="add-new-meta" onSubmit={e => addNewItem(e)}>
                 <input className={'form-control-input'} ref={newItemsElement} type='text'/>
                 <button className={'btn btn-success'} type='submit'>
-                    <SvgRenderer svgUrl={'/public/asset/images/icons/plus-solid.svg'}
+                    <SvgRenderer svgUrl={'/asset/images/icons/plus-solid.svg'}
                                  size={16}
                                  customClassName={'add-new-meta-icon'}
                                  color={'#fff'}/>

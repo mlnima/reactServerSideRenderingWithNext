@@ -1,8 +1,8 @@
-import {User} from "@_typeScriptTypes/User";
-import {AxiosErrorTypes} from "@_typeScriptTypes/axiosTypes/AxiosErrorTypes";
+// import {User} from "typescript-types";
+// import {AxiosErrorTypes} from "typescript-types";
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {loading, setAlert} from "../clientReducers/globalStateReducer";
-import Axios from "@_variables/util/Axios";
+import Axios from "@_variables/Axios";
 import {AxiosError, AxiosResponse} from "axios";
 import {RootState} from "../store";
 import {NextRouter} from "next/router";
@@ -39,7 +39,7 @@ export const fetchAdminPanelUsers = createAsyncThunk(
                 totalCount: res.data.totalCount || 0
             }
 
-        }).catch((err: AxiosError<AxiosErrorTypes>) => {
+        }).catch((err) => {
 
         }).finally(() => thunkAPI.dispatch(loading(false)))
     }

@@ -1,10 +1,10 @@
 import React, {FC} from 'react';
-import convertVariableNameToName from "@_variables/util/convertVariableNameToName";
+import {convertVariableNameToName} from "custom-util";
 import WidgetModel from "../../widgetsModel/WidgetModel/WidgetModel";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import Draggable from 'react-draggable';
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const WidgetGroupByPositionStyledDiv = styled.div`
   background-color: transparent;

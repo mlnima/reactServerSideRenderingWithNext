@@ -5,7 +5,7 @@ import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {loginRegisterForm} from "../../../../store_toolkit/clientReducers/globalStateReducer";
 import {useAppDispatch} from "../../../../store_toolkit/hooks";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 import SvgRenderer from "../../../global/commonComponents/SvgRenderer/SvgRenderer";
 
 const ChatRoomToolsStyledFrom = styled.form`
@@ -181,7 +181,7 @@ const ChatRoomTools = () => {
             {/*/>*/}
             <div className={'chatroom-tools-Send'}>
                 <button className={'chatroom-tools-content-submit-button'} type={'submit'}>
-                    <SvgRenderer svgUrl={'/public/asset/images/icons/share-solid.svg'}
+                    <SvgRenderer svgUrl={'/asset/images/icons/share-solid.svg'}
                                  size={25}
                                  color={'var(--navigation-text-color, #ccc)'}/>
                 </button>

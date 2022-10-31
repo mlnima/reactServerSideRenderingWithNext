@@ -1,9 +1,9 @@
 import {FC} from "react";
 import Link from 'next/link'
 import styled from "styled-components";
-import rangeNumGenerator from "@_variables/util/rangeNumGenerator";
+import {rangeNumGenerator} from "custom-util";
 import {useSelector} from "react-redux";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const WidgetPaginationStyledDiv = styled.div`
   display: flex;

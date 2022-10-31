@@ -1,7 +1,7 @@
 //checkRemovedContent
-import postSchema from '../../../models/postSchema';
-import metaSchema from '../../../models/metaSchema';
-import widgetSchema from '../../../models/widgetSchema';
+import postSchema from '../../../../../packages/models/src/postSchema';
+import metaSchema from '../../../../../packages/models/src/metaSchema';
+import widgetSchema from '../../../../../packages/models/src/widgetSchema';
 import axios from 'axios'
 import {updatePostWidgetData} from '../../adminControllers/adminWidgetsControllers/adminUpdateWidget'
 

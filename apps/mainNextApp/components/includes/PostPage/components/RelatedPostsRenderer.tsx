@@ -2,7 +2,7 @@ import {FC} from "react";
 import {useSelector} from "react-redux";
 import styled from "styled-components";
 import PostsCardsRenderer from "../../cards/CardsRenderer/PostsCardsRenderer";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const RelatedPostsRendererStyledDiv = styled.div`
   width: 100%;

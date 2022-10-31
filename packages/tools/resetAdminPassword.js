@@ -1,8 +1,8 @@
 import dotenv from 'dotenv';
 dotenv.config();
-import connectToDatabase from 'reacticum-server/custom-vaiables/connectToDatabase';
+import connectToDatabase from 'custom-server-util/src/connectToDatabase';
 connectToDatabase().finally()
-import userSchema from 'reacticum-server/models/userSchema';
+import {userSchema} from 'models';
 import bcrypt from 'bcryptjs';
 
 bcrypt.hash('Admin', 10, function (err, hash) {

@@ -1,4 +1,4 @@
-import commentSchema from '../../../models/commentSchema';
+import commentSchema from '../../../../../packages/models/src/commentSchema';
 
 const adminGetComments = (req, res) => {
     const size = parseInt(req.body.size) > 50 ? 50 : parseInt(req.body.size)

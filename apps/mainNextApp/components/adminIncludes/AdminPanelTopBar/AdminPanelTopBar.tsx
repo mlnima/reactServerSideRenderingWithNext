@@ -3,11 +3,11 @@ import AdminActionMenu from "./AdminActionMenu/AdminActionMenu";
 import Link from 'next/link'
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {setSidebarStatus} from "../../../store_toolkit/adminReducers/adminPanelGlobalStateReducer";
+import {setSidebarStatus} from "@store_toolkit/adminReducers/adminPanelGlobalStateReducer";
 import {useRouter} from "next/router";
-import {fetchClearCaches} from "../../../store_toolkit/adminReducers/adminPanelGlobalStateReducer";
-import {useAdminDispatch} from "../../../store_toolkit/hooks";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {fetchClearCaches} from "@store_toolkit/adminReducers/adminPanelGlobalStateReducer";
+import {useAdminDispatch} from "@store_toolkit/hooks";
+import {Store} from "typescript-types";
 import SvgRenderer from "../../global/commonComponents/SvgRenderer/SvgRenderer";
 
 
@@ -83,14 +83,14 @@ const AdminTopBar: FC = () => {
                     <span className={'admin-panel-topbar-open-button adminTopBarItem'}
                           onClick={AdminSideBarOpenCloseHandler}>
 
-                             <SvgRenderer svgUrl={'/public/asset/images/icons/bars-solid.svg'}
+                             <SvgRenderer svgUrl={'/asset/images/icons/bars-solid.svg'}
                                           size={25}
                                           customClassName={'adminTopBarItem-icon'}
                                           color={'var(--serachbar-widget-text-color, #fff)'}
                              />
                     </span>
                 <Link href={'/'} className={'adminTopBarItem'}>
-                        <SvgRenderer svgUrl={'/public/asset/images/icons/home-solid.svg'}
+                        <SvgRenderer svgUrl={'/asset/images/icons/home-solid.svg'}
                                      size={25}
                                      customClassName={'adminTopBarItem-icon'}
                                      color={'var(--serachbar-widget-text-color, #fff)'}

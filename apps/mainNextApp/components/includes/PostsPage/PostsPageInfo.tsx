@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React, {FC} from "react";
-import {Meta} from "@_typeScriptTypes/Meta";
-import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
+import {Meta} from "typescript-types";
+import {capitalizeFirstLetter} from "custom-util";
 import dynamic from "next/dynamic";
 
 const Soft404 = dynamic(() => import('../Soft404/Soft404'));

@@ -1,12 +1,12 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {RootState} from "../store";
-import _reduceWidgetsToGroups from "@_variables/_reduceWidgetsToGroups/_reduceWidgetsToGroups";
-import Axios from "@_variables/util/Axios";
+import {reduceWidgetsToGroups} from "custom-util";
+import Axios from "@_variables/Axios";
 import _getMultipleWidgetWithDataQueryGenerator
     from "@_variables/_clientVariables/clientVariables/_getMultipleWidgetWithDataQueryGenerator";
 import {loading, setAlert} from "./globalStateReducer";
 import {AxiosResponse} from "axios";
-import {Widget} from "@_typeScriptTypes/widgets/Widget";
+import {Widget} from "typescript-types";
 
 
 interface WidgetsState {
@@ -30,7 +30,7 @@ export const fetchWidgets = createAsyncThunk(
 
             return {
                 requestedWidgets: options.positions,
-                widgetInGroups: _reduceWidgetsToGroups([...(widgets.data?.widgets || [])])
+                widgetInGroups: reduceWidgetsToGroups([...(widgets.data?.widgets || [])])
             }
         } catch (err) {
             console.log(err)
@@ -58,7 +58,7 @@ export const getUncachedWidgetsForAdmin = createAsyncThunk(
         return await Axios.get(`/api/admin/widgets/adminGetWidgets?token=${localStorage.wt}`)
             .then((res: AxiosResponse<unknown | any>) => {
                 return {
-                    widgetInGroups: _reduceWidgetsToGroups([...(res?.data?.widgets  || [])])
+                    widgetInGroups: reduceWidgetsToGroups([...(res?.data?.widgets  || [])])
                 }
             }).catch(err => {
                 thunkAPI.dispatch(setAlert({

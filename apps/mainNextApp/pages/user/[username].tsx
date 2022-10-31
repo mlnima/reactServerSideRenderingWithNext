@@ -148,7 +148,7 @@ const user = () => {
             </div>
             <div className='profile-posts'>
                 <div className='profile-no-posts'>
-                    <SvgRenderer svgUrl={'/public/asset/images/icons/camera-solid.svg'}
+                    <SvgRenderer svgUrl={'/asset/images/icons/camera-solid.svg'}
                                  size={20}
                                  customClassName={'upload-profile-image-btn-svg'}
                                  color={'var(--main-text-color, #ccc)'}/>
@@ -181,4 +181,4 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 })
 
 export default user;
-
+///public

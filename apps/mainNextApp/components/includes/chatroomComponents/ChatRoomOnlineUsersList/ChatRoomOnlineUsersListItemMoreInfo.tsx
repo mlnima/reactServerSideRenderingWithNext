@@ -16,7 +16,7 @@ const ChatRoomOnlineUsersListItemMoreInfo = ({username,moreInfo}) => {
                 <Link href={`/user/${username}`} as={`/user/${username}`}
                       className='chatroom-online-users-list-item-more-info-link'
                       aria-label='view profile'>
-                        <SvgRenderer svgUrl={'/public/asset/images/icons/user-solid.svg'}
+                        <SvgRenderer svgUrl={'/images/icons/user-solid.svg'}
                                      size={30}
                                      color={'var(--navigation-text-color, #ccc)'}/>
                 </Link>

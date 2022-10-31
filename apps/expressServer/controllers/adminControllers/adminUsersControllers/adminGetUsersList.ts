@@ -1,4 +1,4 @@
-import userSchema from '../../../models/userSchema';
+import userSchema from '../../../../../packages/models/src/userSchema';
 
 const adminGetUsersList = async (req, res) => {
     const totalCount = await userSchema.countDocuments({}).exec()

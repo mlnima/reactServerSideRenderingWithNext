@@ -20,7 +20,7 @@ const DownloadLink: FC<DownloadLinkPropTypes> = ({downloadLink, downloadLinks}) 
                        title={t(`common:Download`, {}, {fallback: 'Download'})}>
 
                         <span style={{display: 'none'}}>download link for post</span>
-                        <SvgRenderer svgUrl={'/public/asset/images/icons/download-solid.svg'}
+                        <SvgRenderer svgUrl={'/asset/images/icons/download-solid.svg'}
                                      size={16}
                                      customClassName={'download-logo'}/>
                         <p className={'download-text'}>

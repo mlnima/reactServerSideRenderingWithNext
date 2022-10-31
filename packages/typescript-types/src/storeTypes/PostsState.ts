@@ -1,6 +1,5 @@
-import {Post} from "@_typeScriptTypes/Post";
-import {Meta} from "@_typeScriptTypes/Meta";
-import {PageTypes} from "@_typeScriptTypes/Page";
+import {Post,Meta,PageTypes} from "typescript-types";
+
 
 export interface PostStateTypes {
     editingPostImagesToUpload: {};

@@ -1,4 +1,4 @@
-import pageSchema from '../../../models/pageSchema';
+import pageSchema from '../../../../../packages/models/src/pageSchema';
 
 const clientGetPagesData = (req, res) =>{
     pageSchema.find({}).exec().then(pagesData=>{

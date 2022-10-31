@@ -23,10 +23,30 @@ import {SettingsState} from "./src/storeTypes/SettingsState";
 import {Store} from "./src/storeTypes/Store";
 import {UserState} from "./src/storeTypes/UserState";
 import {WidgetsState} from "./src/storeTypes/WidgetsState";
+import {Post} from "./src/Post";
+import {Meta} from "./src/Meta";
+import {Widget} from "./src/widgets/Widget";
+import {PageTypes} from "./src/Page";
+import {WidgetData} from "./src/widgets/Widget";
+import {WidgetSettingsPropTypes} from "./src/widgets/Widget";
+import {Comment} from "./src/Comment";
+import {UniqueDataTypes} from "./src/widgets/Widget";
+import {MenuItem} from "./src/widgets/MenuWidget/MenuItem";
+import {User} from "./src/User";
+import {CommentRaw} from "./src/Comment";
 
 export type {
+    CommentRaw,
+    User,
+    MenuItem,
+    UniqueDataTypes,
+    Comment,
+    WidgetData,
+    WidgetSettingsPropTypes,
     AxiosErrorTypes,
+    PageTypes,
     AxiosResponseTypes,
+    Widget,
     Chatroom,
     ChatroomMessage,
     DesignSettings,
@@ -48,6 +68,8 @@ export type {
     PostStateTypes,
     SettingsState,
     Store,
+    Post,
+    Meta,
     UserState,
     WidgetsState
 }

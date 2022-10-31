@@ -1,5 +1,5 @@
-import widgetSchema from '../../../models/widgetSchema';
-import postSchema from '../../../models/postSchema';
+import widgetSchema from '../../../../../packages/models/src/widgetSchema';
+import postSchema from '../../../../../packages/models/src/postSchema';
 
 const clientGetWidgetsWithData = (req, res) => {
     const position = req.body.position === 'all' ? {} : {position: req.body.position};

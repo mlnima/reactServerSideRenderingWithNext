@@ -1,6 +1,8 @@
 /node_modules
+/apps/**/node_modules
+/apps/**/.next
 .package-lock.json
-/.next
+
 
 apps/mainNextApp/public/uploads
 apps/mainNextApp/public/locales/*/customTranslation.json

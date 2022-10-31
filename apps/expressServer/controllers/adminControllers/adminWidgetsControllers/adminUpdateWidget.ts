@@ -1,11 +1,12 @@
-import widgetSchema from '../../../models/widgetSchema';
-import postSchema from '../../../models/postSchema';
+import {widgetSchema} from 'models';
+import {postSchema} from 'models';
 import _clientQueryGeneratorForGettingPosts
     from '../../../_variables/clientVariables/_clientQueryGeneratorForGettingPosts';
 import {findMetas} from "../../../_variables/serverGlobalVariable/findMetas";
-import metaSchema from "../../../models/metaSchema";
+import {metaSchema} from "models";
+import {Meta, Post} from "typescript-types";
 
-export const updatePostWidgetData = async (widgetData) => {
+export const updatePostWidgetData = async (widgetData:any) => {
     if (widgetData) {
         try {
             const findingPostsOptions = _clientQueryGeneratorForGettingPosts(widgetData, widgetData?.selectedMetaForPosts)
@@ -24,7 +25,7 @@ export const updatePostWidgetData = async (widgetData) => {
                 ...widgetData,
                 uniqueData: {
                     ...(widgetData?.uniqueData || {}),
-                    posts: posts.map(post => post?._id),
+                    posts: posts.map((post:Post) => post?._id),
                     totalCount
                 }
             }
@@ -38,7 +39,7 @@ export const updatePostWidgetData = async (widgetData) => {
 }
 
 
-const updateMetaWidgetData = async (widgetData) => {
+const updateMetaWidgetData = async (widgetData:any) => {
     try {
 
         const resultMetaFindQueries = await findMetas({
@@ -49,7 +50,7 @@ const updateMetaWidgetData = async (widgetData) => {
         return {
             ...widgetData,
             uniqueData: {
-                metaData: resultMetaFindQueries?.metas?.map(meta => meta._id) ,
+                metaData: resultMetaFindQueries?.metas?.map((meta:Meta) => meta._id) ,
                 totalCount: resultMetaFindQueries?.totalCount
             }
         }
@@ -59,7 +60,7 @@ const updateMetaWidgetData = async (widgetData) => {
     }
 }
 
-
+//@ts-ignore
 export const adminUpdateWidget = async (req, res) => {
     const widgetData = req.body?.widgetData?.data
     const widgetId = req.body?.widgetData?._id

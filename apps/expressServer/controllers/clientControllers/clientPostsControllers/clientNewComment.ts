@@ -1,5 +1,5 @@
-import postSchema from '../../../models/postSchema';
-import CommentSchema from '../../../models/commentSchema';
+import postSchema from '../../../../../packages/models/src/postSchema';
+import CommentSchema from '../../../../../packages/models/src/commentSchema';
 
 const clientNewComment = (req, res) => {
     const commentDataToSave = new CommentSchema(req.body);

@@ -82,13 +82,13 @@ const MessengerConversationHeader = ({profileImage, username, callUser}) => {
                     <Link href={`/messenger`}
                           className='messenger-conversation-header-back-btn'
                           rel='no-referrer'>
-                            <SvgRenderer svgUrl={'/public/asset/images/icons/arrow-left-solid.svg'}
+                            <SvgRenderer svgUrl={'/asset/images/icons/arrow-left-solid.svg'}
                                          size={25}
                                          customClassName={'messenger-conversation-header-back-btn-svg'}
                                          color={'var(--navigation-text-color, #ccc)'}/>
                     </Link>
                     <img onClick={() => router.push(`/user/${username}`)}
-                         src={profileImage ? profileImage : '/public/asset/images/user/noGenderAvatar150.jpg'}
+                         src={profileImage ? profileImage : '/asset/images/user/noGenderAvatar150.jpg'}
                          alt="messenger-conversation-header-profile-image"
                          className="messenger-conversation-header-profile-image"/>
                     <p onClick={() => router.push(`/user/${username}`)}
@@ -96,7 +96,7 @@ const MessengerConversationHeader = ({profileImage, username, callUser}) => {
                 </div>
                 <div className='call-buttons'>
                     <button onClick={callUser} className='messenger-conversation-header-video-call-btn'>
-                        <SvgRenderer svgUrl={'/public/asset/images/icons/video-solid.svg'}
+                        <SvgRenderer svgUrl={'/asset/images/icons/video-solid.svg'}
                                      size={25}
                                      customClassName={'messenger-conversation-header-video-call-btn-svg'}
                                      color={'var(--navigation-text-color, #ccc)'}/>

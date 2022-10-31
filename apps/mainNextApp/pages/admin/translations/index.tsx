@@ -7,9 +7,9 @@ import {
     fetchUpdateTranslationsFile,
     adminPanelEditTranslationsFile
 } from "../../../store_toolkit/adminReducers/adminPanelFileManagerReducer";
-import {languagesOptions} from "@_variables/custom-vaiables";
+import {languagesOptions} from "@_variables/variables";
 import {useAdminDispatch} from "../../../store_toolkit/hooks";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 
 const translations = () => {
 

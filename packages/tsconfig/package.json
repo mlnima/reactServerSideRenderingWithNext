@@ -3,12 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "license": "MIT",
-  "publishConfig": {
-    "access": "public"
-  },
+  "main": "index.js",
   "files": [
     "base.json",
-    "expressServer.json",
-    "mainNextApp.json"
+    "server.json",
+    "nextjs.json"
   ]
 }

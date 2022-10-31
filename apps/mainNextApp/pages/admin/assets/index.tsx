@@ -10,7 +10,7 @@ import {fetchAdminPanelPages} from "../../../store_toolkit/adminReducers/adminPa
 import {fetchAdminPanelUsers} from "../../../store_toolkit/adminReducers/adminPanelUsersReducer";
 import {fetchAdminPanelGetComments} from "../../../store_toolkit/adminReducers/adminCommentsReducer";
 import {useAdminDispatch} from "../../../store_toolkit/hooks";
-import {Store} from "@_typeScriptTypes/storeTypes/Store";
+import {Store} from "typescript-types";
 import _adminMetaPageQueryGenerator from "@_variables/adminVariables/_adminMetaPageQueryGenerator";
 
 const TableHeader = dynamic(

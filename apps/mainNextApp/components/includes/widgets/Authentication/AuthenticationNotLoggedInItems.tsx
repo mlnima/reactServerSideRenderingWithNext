@@ -40,7 +40,7 @@ const AuthenticationNotLoggedInItems: FC<AuthenticationNotLoggedInItemsPropTypes
                      aria-label='logged-out-items'>
 
                     <div className={'icon-wrapper'}>
-                                <SvgRenderer svgUrl={'/public/asset/images/icons/user-solid.svg'}
+                                <SvgRenderer svgUrl={'/asset/images/icons/user-solid.svg'}
                                              size={48}
                                              customClassName={'sign-in-button '}
                                              color={' var(--auth-widget-text-color, #fff)'}
@@ -56,7 +56,7 @@ const AuthenticationNotLoggedInItems: FC<AuthenticationNotLoggedInItemsPropTypes
                       aria-label='logged-out-items'>
 
                     <div className={'icon-wrapper'}>
-                               <SvgRenderer svgUrl={'/public/asset/images/icons/pen-solid.svg'}
+                               <SvgRenderer svgUrl={'/asset/images/icons/pen-solid.svg'}
                                             size={48}
                                             customClassName={'register-button'}
                                             color={' var(--auth-widget-text-color, #fff)'}
@@ -72,7 +72,7 @@ const AuthenticationNotLoggedInItems: FC<AuthenticationNotLoggedInItemsPropTypes
                 {pathname.includes('/messenger') || pathname.includes('/chatroom') ?
                     <Link href={`/`} className='logged-item logged-out' onClick={onOpenCloseHandler}>
                             <div className={'icon-wrapper'}>
-                                <SvgRenderer svgUrl={'/public/asset/images/icons/home-solid.svg'}
+                                <SvgRenderer svgUrl={'/asset/images/icons/home-solid.svg'}
                                              size={20}
                                              customClassName={'home-button'}
                                              color={' var(--auth-widget-text-color, #fff)'}

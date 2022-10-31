@@ -4,7 +4,7 @@ import Link from 'next/link';
 import {fetchAdminPanelBulkActionPost} from "../../../../../../store_toolkit/adminReducers/adminPanelPostsReducer";
 import {fetchAdminDeleteForm} from "../../../../../../store_toolkit/adminReducers/adminPanelFormsReducer";
 import {fetchAdminPanelDeleteComments} from "../../../../../../store_toolkit/adminReducers/adminCommentsReducer";
-import {updateQueryGenerator} from "@_variables/custom-vaiables";
+import {updateQueryGenerator} from "@_variables/variables";
 import {useAdminDispatch} from "../../../../../../store_toolkit/hooks";
 
 interface TableBodyItemDirectActionPropTypes {

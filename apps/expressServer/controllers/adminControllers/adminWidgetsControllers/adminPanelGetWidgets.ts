@@ -1,4 +1,4 @@
-import widgetSchema from '../../../models/widgetSchema';
+import widgetSchema from '../../../../../packages/models/src/widgetSchema';
 
 const adminPanelGetWidgets = async (req, res) => {
     try {
