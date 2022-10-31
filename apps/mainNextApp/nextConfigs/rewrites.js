@@ -1,11 +1,54 @@
-module.exports = () =>{
+
+module.exports = () => {
     return {
         beforeFiles: [
+
+            // {
+            //     source: "/:host(^(?!.*\\api\\b).*$)",
+            //     destination: `${process.env.NEXT_PUBLIC_API_SERVER_URL}/:host`,
+            // },
+
+            // {
+            //     source: "/:socket(.*\\.io)",
+            //     destination: `${process.env.NEXT_PUBLIC_SOCKET_SERVER_URL}/:socket`,
+            // },
+            // {
+            //     source: "/:socket(.*\\=websocket)",
+            //     destination: `${process.env.NEXT_PUBLIC_SOCKET_SERVER_URL}/:socket`,
+            // },
+
+
+
+
+
+
+            {
+                source: "/:sitemap(.*\\.xml)",
+                destination: `${process.env.NEXT_PUBLIC_API_SERVER_URL}/:sitemap`,
+            },
+            {
+                source: "/sitemap.xml",
+                destination: `${process.env.NEXT_PUBLIC_API_SERVER_URL}/sitemap.xml`,
+            },
+            {
+                source: "/api/:path*",
+                destination: `${process.env.NEXT_PUBLIC_API_SERVER_URL}/api/:path*`,
+            },
+            {
+                source: "/public/:path*",
+                destination: `${process.env.NEXT_PUBLIC_API_SERVER_URL}/public/:path*`,
+            },
+
+
+            // {
+            //     // source: "//:host(^(?!.*\\\\sitemap\\\\b).*$)",
+            //     source: "/:host(^sitemap|xxx)?",
+            //     destination: `${process.env.NEXT_PUBLIC_API_SERVER_URL}/:host`,
+            // },
             {
                 source: `/meta`,
                 destination: '/categories',
             },
-
             {
                 source: `/posts`,
                 has: [{type: 'query', key: 'content'}],
@@ -53,6 +96,8 @@ module.exports = () =>{
 
         ],
         afterFiles: [
+
+
             {source: `/admin`, destination: '/admin', locale: false},
             // {source: `/:locale(${languages})?/:postType(video|post|product|article|book)/:title`, destination: '/post',has: [{type: 'query', key: 'id'}]},
             {
@@ -62,9 +107,9 @@ module.exports = () =>{
             },
 
 
-
         ],
         fallback: [
+
             {
                 source: `/:identifier`,
                 destination: '/post/undefinedType/:identifier',

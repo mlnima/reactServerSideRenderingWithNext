@@ -50,6 +50,7 @@ const updateMetaWidgetData = async (widgetData:any) => {
         return {
             ...widgetData,
             uniqueData: {
+                //@ts-ignore
                 metaData: resultMetaFindQueries?.metas?.map((meta:Meta) => meta._id) ,
                 totalCount: resultMetaFindQueries?.totalCount
             }

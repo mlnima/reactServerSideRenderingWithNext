@@ -1,40 +1,40 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema
-import {postTypes,videoQualities} from "data-structures";
+import {postTypes, videoQualities} from "data-structures";
 
 const downloadLinks = mongoose.Schema({
-    title:String,
-    url:String
+    title: String,
+    url: String
 })
 
-const postSchema =  new Schema({
-    author: {type: Schema.Types.ObjectID, ref: 'user'},
+const postSchema = new Schema({
+    author: {type: Schema.Types.ObjectId, ref: 'user'},
     title: String,
     permaLink: String,
     company: String,
-    description: mongoose.Mixed,
+    description: Schema.Types.Mixed,
     descriptionRenderer: String,
     mainThumbnail: String,
-    images:Array,
+    images: Array,
     videoTrailerUrl: String,
     quality: {
-        type:String,
-        enum:videoQualities,
-        default:'HD'
+        type: String,
+        enum: videoQualities,
+        default: 'HD'
     },
-    translations:mongoose.Mixed,
-    shippingCost:String,
+    translations: Schema.Types.Mixed,
+    shippingCost: String,
     format: String,
     source: String,
     sourceSite: String,
     videoUrl: String,
-    postType:{
-        type:String,
-        enum:postTypes
+    postType: {
+        type: String,
+        enum: postTypes
     },
-    outPostType:{
-        type:String,
-        enum:postTypes
+    outPostType: {
+        type: String,
+        enum: postTypes
     },
     videoEmbedCode: String,
     videoScriptCode: String,
@@ -48,35 +48,35 @@ const postSchema =  new Schema({
     priceType: String,
     production: String,
     posts: [{type: Schema.Types.ObjectId, ref: 'post'}],
-    comments: [{type:Schema.Types.ObjectId,ref:'comment'}],
-    widgets:Array,
-    categories: [{type:Schema.Types.ObjectId,ref:'meta'}],
-    actors: [{type:Schema.Types.ObjectId,ref:'meta'}],
-    tags: [{type:Schema.Types.ObjectId,ref:'meta'}],
+    comments: [{type: Schema.Types.ObjectId, ref: 'comment'}],
+    widgets: Array,
+    categories: [{type: Schema.Types.ObjectId, ref: 'meta'}],
+    actors: [{type: Schema.Types.ObjectId, ref: 'meta'}],
+    tags: [{type: Schema.Types.ObjectId, ref: 'meta'}],
     likes: {
         type: Number,
         default: 0
     },
     price: String,
-    disLikes:  {
+    disLikes: {
         type: Number,
         default: 0
     },
-    views:  {
+    views: {
         type: Number,
         default: 0
     },
-    duration:  {
+    duration: {
         type: String,
         default: '00:00'
     },
-    availableCount:Number,
+    availableCount: Number,
     premium: Boolean,
-    rating:Boolean,
-    createdAt:Date,
-    updatedAt:Date
+    rating: Boolean,
+    createdAt: Date,
+    updatedAt: Date
 
-},{ timestamps: true });
+}, {timestamps: true});
 
 export default mongoose.model("post", postSchema);
 

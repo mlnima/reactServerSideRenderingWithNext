@@ -1,4 +1,4 @@
-import pageSchema from '../../../../../packages/models/src/pageSchema';
+import {pageSchema} from 'models';
 
 const adminCreateNewPage = (req, res) => {
     const newPageDataToSave = new pageSchema(req.body.pageData)

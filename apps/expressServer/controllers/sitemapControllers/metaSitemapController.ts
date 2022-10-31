@@ -1,4 +1,6 @@
-import metaSchema from '../../../../packages/models/src/metaSchema';
+import {metaSchema} from 'models';
+import {Meta} from 'typescript-types'
+
 import {
     sitemapItemTemplate,
     metaXmlTemplateGenerator,
@@ -10,6 +12,7 @@ export const metasSitemapsController = async (metaType)=>{
     const findMetaQuery = {$and:[{count: {$gt:0}},{status:'published'},{type:metaType}]}
     const metasCount = await metaSchema.countDocuments(findMetaQuery).exec();
     const toDay = new Date();
+
     if (metasCount<500){
         return sitemapItemTemplate(
             // `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemaps/${metaType}-1.xml`,
@@ -17,7 +20,8 @@ export const metasSitemapsController = async (metaType)=>{
             toDay.toISOString()
         )
     }else{
-        const lastMeta = await metaSchema.findOne(findMetaQuery)
+        // @ts-ignore
+        const lastMeta:Meta = await metaSchema.findOne(findMetaQuery)
             .select(['createdAt'])
             .limit(1)
             .sort('-_id').exec();

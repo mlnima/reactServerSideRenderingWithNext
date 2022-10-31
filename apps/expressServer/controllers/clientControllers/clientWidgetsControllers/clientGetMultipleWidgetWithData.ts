@@ -1,6 +1,6 @@
-import widgetSchema from '../../../../../packages/models/src/widgetSchema';
-import databaseSelectFieldsForPostCards from "@_dataStructures/databaseSelectFieldsForPostCards";
-import settingSchema from "../../../../../packages/models/src/settings/settingSchema";
+import {widgetSchema} from 'models';
+import {databaseSelectFieldsForPostCards} from "data-structures";
+import {settingSchema} from 'models';
 
 const clientGetMultipleWidgetWithData = async (req, res) => {
 

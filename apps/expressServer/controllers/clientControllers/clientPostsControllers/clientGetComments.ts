@@ -1,4 +1,4 @@
-import commentSchema from '../../../../../packages/models/src/commentSchema';
+import {commentSchema} from 'models';
 import {mongoIdValidator} from 'custom-server-util';
 
 const clientGetComments = async (req, res) => {

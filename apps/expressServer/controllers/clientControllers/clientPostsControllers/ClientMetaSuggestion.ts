@@ -1,4 +1,4 @@
-import metaSchema from '../../../../../packages/models/src/metaSchema';
+import {metaSchema} from 'models';
 
 const ClientMetaSuggestion = async (req, res) => {
 

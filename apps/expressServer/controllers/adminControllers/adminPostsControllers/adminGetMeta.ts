@@ -1,4 +1,4 @@
-import metaSchema from '../../../../../packages/models/src/metaSchema';
+import {metaSchema} from 'models';
 import mongoose from 'mongoose';
 // const ObjectId = mongoose.Types.ObjectId;
 

@@ -1,4 +1,4 @@
-import userSchema from '../../../../../packages/models/src/userSchema';
+import {userSchema} from 'models';
 
 const clientGetSignedInUserData = (req, res) => {
     userSchema.findById(req.userData._id).select(req?.body?.fields || ['username','role']).exec().then(user => {

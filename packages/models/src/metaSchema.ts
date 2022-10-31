@@ -1,5 +1,4 @@
-//settingSchema
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 const Schema = mongoose.Schema
 
 const metaSchema =  new Schema({
@@ -18,12 +17,12 @@ const metaSchema =  new Schema({
     coverImageUrl:String,
     imageUrlLock:Boolean,
     rankLock:Boolean,
-    translations:mongoose.Mixed,
+    translations:Schema.Types.Mixed,
     count:Number,
     likes:Number,
     views:Number,
     rank:Number,
-    additionalInfo:mongoose.Mixed
+    additionalInfo:Schema.Types.Mixed
 
 },{ timestamps: true });
 

@@ -1,4 +1,4 @@
-import userSchema from '../../../../../packages/models/src/userSchema';
+import {userSchema} from 'models';
 
 const clientGetUserPreviewData = (req, res) => {
     const username  =  req.body.username;

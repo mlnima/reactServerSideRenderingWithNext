@@ -27,8 +27,9 @@ const CommentsRenderer :FC<CommentsRendererPropTypes> = ({showComments}) => {
         return (
             <CommentsRendererStyledDiv className='comments'>
                 {showComments && <>
-                    {comments.map((comment, index) => {
-                        return (<Comment key={index} comment={comment}/>)
+                    {comments.map((commentData, index) => {
+                        //@ts-ignore
+                        return (<Comment key={index} commentData={commentData}/>)
                     })}
                 </>
                 }

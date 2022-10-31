@@ -1,5 +1,5 @@
 import {useEffect, useRef, FC, useMemo} from 'react';
-import convertVariableNameToName from "@_variables/util/convertVariableNameToName";
+import {convertVariableNameToName} from "custom-util";
 import {useRouter} from "next/router";
 import styled from "styled-components";
 import tableItemProperties from "../tableBodyItemProperties";

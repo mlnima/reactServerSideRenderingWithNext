@@ -1,4 +1,4 @@
-import pageSchema from '../../../../../packages/models/src/pageSchema';
+import {pageSchema} from 'models';
 
 const clientGetPageData = (req, res) =>{
     const pageId = req.body.id

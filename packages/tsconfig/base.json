@@ -10,12 +10,6 @@
     "typeRoots": [
       "node_modules/@types"
     ],
-    "lib": [
-      "es2015",
-      "es2017",
-      "es2018",
-      "es2021"
-    ],
     "composite": false,
     "declaration": true,
     "declarationMap": true,

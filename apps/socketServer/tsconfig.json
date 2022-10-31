@@ -1,7 +1,7 @@
 {
   "extends": "tsconfig/server.json",
   "include": ["**/*.ts"],
-  "exclude": ["node_modules",".turbo", "coverage"],
+  "exclude": ["node_modules",".turbo", "coverage", "dist/**/*"],
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "."

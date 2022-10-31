@@ -1,5 +1,4 @@
-
-import userSchema from '../../../../../packages/models/src/userSchema';
+import {userSchema} from 'models';
 
 const clientGetMultipleUserDataById = (req, res) => {
     const usersList = req.body.usersList

@@ -1,5 +1,5 @@
 // const settingSchema = require('../models/settings/settingSchema');
-import settingSchema from '../../../packages/models/src/settings/settingSchema';
+import {settingSchema} from 'models';
 
 class ServerState {
     constructor() {

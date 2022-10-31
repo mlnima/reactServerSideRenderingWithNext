@@ -1,4 +1,4 @@
-import postSchema from '../../../../../packages/models/src/postSchema';
+import {postSchema} from 'models';
 
 const adminGetPost = async (req, res) => {
     const _id = req.query._id;

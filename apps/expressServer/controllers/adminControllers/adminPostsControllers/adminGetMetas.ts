@@ -1,5 +1,4 @@
-import settingSchema from '../../../../../packages/models/src/settings/settingSchema';
-import metaSchema from '../../../../../packages/models/src/metaSchema';
+import {metaSchema,settingSchema} from 'models';
 
 const adminGetMetas = async (req, res) => {
     try {
@@ -30,6 +29,7 @@ const adminGetMetas = async (req, res) => {
         metaSchema.find({$and: [type, searchQuery, startWithQuery, statusQuery,countQuery]},{},{sort:req.query.sort === 'createdAt' || !req.query.sort ? {} : {[req.query.sort]: -1}})
             .limit(size)
             .skip(size * (page - 1))
+            //@ts-ignore
             .sort(sortQuery)
             .exec()
             .then(async metas => {

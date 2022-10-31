@@ -1,4 +1,4 @@
-import widgetSchema from '../../../../../packages/models/src/widgetSchema';
+import {widgetSchema} from 'models';
 // const metaSchema = require('../../../models/metaSchema');
 // const postSchema = require('../../../models/metaSchema');
 // const {updatePostWidgetData} = require('../../adminControllers/adminWidgetsControllers/adminUpdateWidget');

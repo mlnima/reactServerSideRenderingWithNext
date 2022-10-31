@@ -1,7 +1,6 @@
 import dotenv from 'dotenv';
-
 dotenv.config({path: '../../.env'});
-import connectToDatabase from 'custom-server-util/src/connectToDatabase';
+import {connectToDatabase} from 'custom-server-util';
 //from "@_variables/variables";
 connectToDatabase('Express Server')
 import express from 'express';
@@ -14,7 +13,7 @@ import xmlParser from 'express-xml-bodyparser';
 import apiCache from 'apicache';
 import cors from 'cors';
 import compression from 'compression';
-import shouldCompress from 'custom-server-util/src/shouldCompress';
+import {shouldCompress} from 'custom-server-util';
 import cacheSuccesses from './middlewares/apiCache';
 import adminMainRouter from './controllers/adminControllers/adminMainRouter';
 import clientMainRouter from './controllers/clientControllers/clientMainRouter';
@@ -46,14 +45,23 @@ const runServer = () => {
     const staticPath = dev ? '../static' : '../../static'
     const publicPath = dev ? '../public' : '../../public'
 
+    const staticOldPath = '../mainNextApp/static'
+    const publicOldPath = '../mainNextApp/public'
+
     server.use('/static', express.static(path.join(__dirname, staticPath), {maxAge: "604800000"}))
+    server.use('/static', express.static(path.join(__dirname, staticOldPath), {maxAge: "604800000"}))
     server.use('/public', express.static(path.join(__dirname, publicPath), {maxAge: "604800000"}))
+    server.use('/public', express.static(path.join(__dirname, publicOldPath), {maxAge: "604800000"}))
 
     server.get('/api/admin/settings/clearCaches', adminAuthMiddleware, (req, res) => {
         //@ts-ignore
         apiCache.clear(req.params?.collection)
         res.json({message: 'Deleting Cache Command Executed'})
     });
+
+    server.post('/api',(req,res)=>{
+        res.send('*****************************I am the API Server*****************************')
+    })
 
     server.get('/robots.txt', (req, res) => clientRobotTxtController(req, res));
     server.get('/alive', (req, res) => res.send('alive'));
@@ -79,6 +87,4 @@ const runServer = () => {
 }
 
 runServer()
-
-
 

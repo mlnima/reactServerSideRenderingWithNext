@@ -1,4 +1,4 @@
-import settingSchema from '../../../../../packages/models/src/settings/settingSchema';
+import {settingSchema} from 'models';
 
 const adminGetMultipleSettings = async (req, res) => {
     try {

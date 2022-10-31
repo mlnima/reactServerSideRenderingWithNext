@@ -1,8 +1,7 @@
-import postSchema from '../../../../../packages/models/src/postSchema';
-import CommentSchema from '../../../../../packages/models/src/commentSchema';
+import {commentSchema,postSchema} from 'models';
 
 const clientNewComment = (req, res) => {
-    const commentDataToSave = new CommentSchema(req.body);
+    const commentDataToSave = new commentSchema(req.body);
     commentDataToSave.save((err,comment) => {
         if (err){
             res.status(500).json({message:'comment did not saved',type:'error'});

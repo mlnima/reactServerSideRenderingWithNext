@@ -47,7 +47,8 @@ const fetchPosts = createAsyncThunk(
                 getTextDataWithTranslation(
                     context.locale,
                     `${options.page}PageTitle`,
-                    settings?.identity
+                    settings?.identity,
+                    process.env.NEXT_PUBLIC_DEFAULT_LOCAL
                 ),
                 {
                     name: apiData.data?.meta?.name || context?.query?.keyword ,
@@ -60,7 +61,8 @@ const fetchPosts = createAsyncThunk(
                 getTextDataWithTranslation(
                     context.locale,
                     `${options.page}PageDescription`,
-                    settings?.identity
+                    settings?.identity,
+                    process.env.NEXT_PUBLIC_DEFAULT_LOCAL
                 ), {
                     name: apiData.data?.meta?.name || context?.query?.keyword,
                     siteName: settings?.identity?.siteName || '',

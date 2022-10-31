@@ -1,5 +1,5 @@
 require('dotenv').config()
-require('custom-server-util/src/connectToDatabase')
+// require('custom-server-util/src/connectToDatabase')
 const mongoose = require('mongoose');
 import {postSchema,metaSchema} from 'models';
 

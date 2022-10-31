@@ -1,18 +1,19 @@
 /node_modules
 /apps/**/node_modules
 /apps/**/.next
+/apps/**/dist
+/apps/**/.turbo
 .package-lock.json
+proxy.json
+node_modules
 
+apps/**/public/uploads
+apps/**/public/locales/*/customTranslation.json
+apps/**/public/jsons/widgets/*
+apps/**/public/jsons/widgets
+apps/**/public/jsons/settings/*
+apps/**/public/jsons/settings
 
-apps/mainNextApp/public/uploads
-apps/mainNextApp/public/locales/*/customTranslation.json
-apps/mainNextApp/public/jsons/widgets/*
-apps/mainNextApp/public/jsons/widgets
-apps/mainNextApp/public/jsons/settings/*
-apps/mainNextApp/public/jsons/settings
-apps/mainNextApp/static/uploads
-apps/mainNextApp/static/uploads/
-apps/mainNextApp/static/uploads/*
 
 packages/_devUtil/generateFakeData.js
 packages/tools/testAPI.js

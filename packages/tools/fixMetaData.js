@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config();
-import connectToDatabase from 'custom-server-util/src/connectToDatabase';
+import {connectToDatabase} from 'custom-server-util';
 connectToDatabase().finally()
 import {postSchema,metaSchema} from 'models';
 

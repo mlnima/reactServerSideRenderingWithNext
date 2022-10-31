@@ -1,6 +1,6 @@
 import sharp from 'sharp'
 import fsExtra from 'fs-extra'
-import userSchema from '../../../../../packages/models/src/userSchema'
+import {userSchema} from 'models';
 
 const clientUserImageUpload =  async (req, res) => {
     const file = req.files.profileImage

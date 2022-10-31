@@ -1,5 +1,4 @@
-import metaSchema from '../../../../packages/models/src/metaSchema';
-import postSchema from '../../../../packages/models/src/postSchema';
+import {metaSchema,postSchema} from 'models';
 
 const _updateSaveMetas = async (metas) => {
     const metasData = metas ?? []

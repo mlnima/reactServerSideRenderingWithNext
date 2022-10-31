@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config();
-import connectToDatabase from 'custom-server-util/src/connectToDatabase';
+import {connectToDatabase} from 'custom-server-util';
 connectToDatabase('Setup').finally()
 import {settingSchema,widgetSchema,userSchema} from 'models';
 

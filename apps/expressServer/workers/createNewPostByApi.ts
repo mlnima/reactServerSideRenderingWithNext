@@ -1,15 +1,15 @@
 import dotenv from 'dotenv';
 dotenv.config();
-import connectToDatabase from 'custom-server-util/src/connectToDatabase';
+import {connectToDatabase} from 'custom-server-util';
 connectToDatabase()
 const {Worker, parentPort, workerData} = require('worker_threads');
 const sharp = require('sharp');
-const postSchema = require("../../../packages/models/src/postSchema");
+const postSchema = require("models");
 const updateSaveMetas = require("../_variables/adminVariables/_updateSaveMetas");
 const download = require('image-downloader')
 const fsExtra = require("fs-extra");
 const fs = require("fs");
-const fileDownloader = require('@_variables/serverUtil/fileDownloader')
+// const {fileDownloader} = require('custom-server-util');
 
 const imageDownloader = async (newPost) => {
 

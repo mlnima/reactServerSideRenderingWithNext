@@ -2,7 +2,7 @@ import {
     urlSetXmlTemplate,
     postXmlTemplateGenerator
 } from "../../_variables/sitemapVariables/xmlTemplateGenerators";
-import postSchema from '../../../../packages/models/src/postSchema';
+import {postSchema} from 'models';
 import moment from 'moment';
 
 export const monthSitemapController = async (req, res)=>{

@@ -1,4 +1,4 @@
-import userSchema from '../../../../../packages/models/src/userSchema';
+import {userSchema} from 'models';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 const tokenExpireTime = '30 days';

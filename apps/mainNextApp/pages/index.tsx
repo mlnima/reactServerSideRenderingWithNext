@@ -5,6 +5,8 @@ import styled from "styled-components";
 import SidebarWidgetAreaRenderer from "../components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import _getServerSideStaticPageData from "../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
+import axios from "axios";
+import {useEffect} from "react";
 
 const HomePageStyle = styled.div`
   display: grid;
@@ -20,7 +22,9 @@ const HomePage = () => {
         }
     })
 
-
+    // useEffect(() => {
+    //     axios.post('/api')
+    // }, []);
 
     return (
         <HomePageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`} stylesData={homePageStyle}>
@@ -49,8 +53,6 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 });
 
 
-
-
 // export async function getStaticPaths() {
 //     const locales = process.env.NEXT_PUBLIC_LOCALS.split(' ')
 //     let paths = [];
@@ -61,9 +63,6 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 //
 //     return {paths, fallback: false};
 // }
-
-
-
 
 
 // export const getStaticProps = wrapper.getStaticProps(store => async (context) => {

@@ -8,15 +8,20 @@
     "apps/*"
   ],
   "scripts": {
-    "build": "turbo run build",
+    "graph": "turbo run build test lint --graph=graph.jpg",
+    "build": "turbo run build --parallel",
+    "build:api-server": "turbo run build --filter=api-server",
+    "build:file-server": "turbo run build --filter=file-server",
+    "build:socket-server": "turbo run build --filter=socket-server",
+    "build:web-app": "turbo run build --filter=web-app",
+    "start:api-server": "npm --prefix ./apps/expressServer run start",
+    "start:file-server": "npm --prefix tempFiles/fileServer run start",
+    "start:socket-server": "npm --prefix ./apps/socketServer run start",
+    "start:web-app": "npm --prefix ./apps/mainNextApp run start",
+    "start": "concurrently \"npm run start:api-server\"  \"npm run start:socket-server\" \"npm run start:file-server\" \"npm run start:web-app\"",
     "dev": "turbo run dev",
-    "update:packages": "npm update --save/--save-dev -f"
-  },
-  "dependencies": {
-    "cors": "^2.8.5",
-    "cross-env": "^7.0.3",
-    "dotenv": "^16.0.2",
-    "dotenv-load": "^2.0.1"
+    "update:packages": "npm update --save/--save-dev -f",
+    "killNodes": ".\\_devUtil\\windowsNodeProccessBulkKiller.bat"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^13.0.0",
@@ -31,9 +36,14 @@
     "@types/react-fontawesome": "^1.6.5",
     "@types/react-redux": "^7.1.24",
     "@types/react-scroll": "^1.8.4",
+    "@types/jest": "^26.0.22",
     "@types/styled-components": "^5.1.26",
     "cookie-parser": "^1.4.6",
     "eslint": "7.32.0",
+    "eslint-config-next": "^12.0.8",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-react": "7.28.0",
+    "eslint-config-turbo": "latest",
     "express-xml-bodyparser": "^0.3.0",
     "jest": "^29.0.3",
     "ts-loader": "^9.4.1",

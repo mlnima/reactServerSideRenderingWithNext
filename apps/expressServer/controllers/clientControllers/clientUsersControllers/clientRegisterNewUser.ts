@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs';
-import UserSchema from '../../../../../packages/models/src/userSchema';
+import {userSchema} from 'models';
 
 const clientRegisterNewUser = (req, res) => {
     const username = req.body.username;
@@ -7,7 +7,7 @@ const clientRegisterNewUser = (req, res) => {
     const password = req.body.password;
     const password2 = req.body.password2;
 
-    UserSchema.findOne({$or: [{username}, {email}]}).exec()
+    userSchema.findOne({$or: [{username}, {email}]}).exec()
         .then(user => {
             if (user) {
                 res.status(409).json({message: 'This username already exists'})
@@ -26,7 +26,7 @@ const clientRegisterNewUser = (req, res) => {
                                 password: hash,
                                 keyMaster: false
                             };
-                            let newUserData = new UserSchema(userData);
+                            let newUserData = new userSchema(userData);
                             newUserData.save().then(() => {
                                 res.json({message: 'Your account has been successfully created you can login now'})
                             }).catch(err => {

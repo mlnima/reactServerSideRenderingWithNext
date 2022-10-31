@@ -1,4 +1,4 @@
-import postSchema from '../../../../../packages/models/src/postSchema';
+import {postSchema} from 'models';
 import updateSaveMetas from '../../../_variables/adminVariables/_updateSaveMetas';
 
 const adminUpdatePost =  async (req, res) => {

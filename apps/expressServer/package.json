@@ -1,7 +1,7 @@
 {
   "name": "api-server",
   "version": "1.0.0",
-
+  "main": "index.js",
   "keywords": [
     "nextJs",
     "turbo repo",
@@ -12,13 +12,13 @@
   "license": "MIT",
   "scripts": {
     "build": "npm run build:server",
-    "start": "concurrently \"NODE_ENV=production node ./.next/expressServer/index.js\" \"node ./.next/expressServer/socketServer/index.js\"",
+    "start": "concurrently \"NODE_ENV=production node ./dist/index.js\"",
     "dev": "concurrently \"cross-env nodemon --trace-warnings\"",
     "fixTimeStamsForPosts": "node tools/fixTimeStamsForPosts.js",
     "mergeDuplicateMetaData": "node tools/mergeDuplicateMetaData.js",
     "setup": "ts-node --transpile-only ./tools/setup.js",
     "ResetAdminPassword": "node ./tools/resetAdminPassword.js",
-    "build:server": "tsc --project tsconfig.server.json",
+    "build:server": "tsc --project tsconfig.json",
     "update:packages": "npm update --save/--save-dev -f",
     "test": "jest --watch"
   },
@@ -28,6 +28,8 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
     "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "custom-server-util": "*",
     "custom-util": "*",
     "data-structures": "*",
@@ -42,6 +44,7 @@
     "jwt-decode": "^3.1.2",
     "lodash": "^4.14.181",
     "mailparser": "^3.5.0",
+    "models": "*",
     "module-alias": "^2.2.2",
     "moment": "^2.29.3",
     "mongoose": "^6.6.0",
@@ -55,8 +58,10 @@
     "simple-youtube-api": "^5.2.1",
     "smtp-server": "^3.11.0",
     "ts-node": "^10.9.1",
-    "uuid-apikey": "^1.5.3",
-    "models": "*",
-    "typescript-types": "*"
+    "typescript-types": "*",
+    "uuid-apikey": "^1.5.3"
+  },
+  "_moduleAliases": {
+    "@_variables": "_variables"
   }
 }

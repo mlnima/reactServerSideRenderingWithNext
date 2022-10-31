@@ -1,5 +1,4 @@
-
-import userSchema from '../../../../../packages/models/src/userSchema';
+import {userSchema} from 'models';
 
 const clientUnFollowUser = async (req, res) => {
     try{

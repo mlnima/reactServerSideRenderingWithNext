@@ -1,8 +1,8 @@
 import {useRouter} from "next/router";
 import styled from "styled-components";
 import React from "react";
-import postTypes from "@_dataStructures/postTypes";
-import convertVariableNameToName from "@_variables/util/convertVariableNameToName";
+import {postTypes} from "data-structures";
+import {convertVariableNameToName} from "custom-util";
 
 const PostsTypesStyledDiv = styled.div`
   display: flex;

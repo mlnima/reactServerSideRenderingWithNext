@@ -14,3 +14,6 @@
 //     )
 // };
 // export default AdminLayoutInitializer;
+
+
+export default {}

@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import userSchema from '../../../packages/models/src/userSchema';
+import {userSchema} from 'models';
 
 const adminAuthMiddleware = async (req, res, next) => {
 

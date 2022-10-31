@@ -1,7 +1,7 @@
 import React, {FC, useState} from 'react';
 import MonacoEditor from "../../../MonacoEditor/MonacoEditor";
 import {sliderDefaultData} from './swiperDefaultData'
-import convertVariableNameToName from "@_variables/util/convertVariableNameToName";
+import {convertVariableNameToName} from "custom-util";
 
 
 interface SliderWidgetTypeFieldsPropTypes {

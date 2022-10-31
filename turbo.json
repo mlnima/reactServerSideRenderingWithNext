@@ -5,6 +5,12 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**",".next/**"]
     },
+    "dev": {
+      "cache": false
+    },
+    "graph": {
+      "cache": false
+    },
     "test": {
       "dependsOn": ["build"],
       "outputs": [],
@@ -12,9 +18,6 @@
     },
     "lint": {
       "outputs": []
-    },
-    "dev": {
-      "cache": false
     },
     "deploy": {
       "dependsOn": ["build", "test", "lint"],
@@ -28,12 +31,12 @@
   "globalEnv": [
     "JWT_KEY",
     "NODE_ENV",
-    "SERVER_IP",
+
     "MAIL_SERVER",
     "MAIL_SERVER_PORT",
     "NEXT_PUBLIC_PRODUCTION_URL",
-    "NEXT_PUBLIC_SERVER_URL",
-    "NEXT_PUBLIC_STATIC_PAGES",
+    "NEXT_PUBLIC_API_SERVER_URL",
+    "NEXT_PUBLIC_SOCKET_SERVER_URL",
     "NEXT_PUBLIC_PWA",
     "PORT",
     "SERVER_PORT",

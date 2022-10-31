@@ -1,4 +1,4 @@
-const metaSchema = require('../../../../../packages/models/src/metaSchema');
+const {metaSchema} = require('models');
 
 const adminDeleteMeta = (req, res) => {
     const _id = req.body._id

@@ -7,6 +7,7 @@ module.exports = {
             //     destination: '/category/:content',
             //     permanent: true,
             // },
+
         ]
     },
 }

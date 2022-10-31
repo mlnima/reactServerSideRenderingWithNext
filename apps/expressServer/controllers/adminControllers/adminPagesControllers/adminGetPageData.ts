@@ -1,4 +1,4 @@
-import pageSchema from '../../../../../packages/models/src/pageSchema';
+import {pageSchema} from 'models';
 
 const adminGetPageData = async (req, res) =>{
     try {

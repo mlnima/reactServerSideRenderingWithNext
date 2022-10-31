@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import convertVariableNameToName from "@_variables/util/convertVariableNameToName";
+import {convertVariableNameToName} from "custom-util";
 import styled from "styled-components";
 import SvgRenderer from "../../../../global/commonComponents/SvgRenderer/SvgRenderer";
 

@@ -1,4 +1,4 @@
-import userSchema from '../../../../../packages/models/src/userSchema';
+import {userSchema} from 'models';
 
 const adminGetUser = (req, res) => {
     userSchema.findById(req.body._id).exec().then(user => {

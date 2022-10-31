@@ -1,7 +1,7 @@
 import sharp from 'sharp'
 import fsExtra from 'fs-extra'
 import fs from 'fs'
-import postSchema from '../../../../../packages/models/src/postSchema'
+import {postSchema} from "models";
 
 const clientUserPostImageUpload = async (req, res) => {
     const onErrorHandler = (error) => {

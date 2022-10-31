@@ -1,4 +1,4 @@
-import userSchema from '../../../packages/models/src/userSchema';
+import {userSchema} from 'models';
 
 const apiRequestMiddleware = async (req, res, next) => {
     const apiKey = req.body.apiKey

@@ -1,4 +1,4 @@
-import settingSchema from '../../../../../packages/models/src/settings/settingSchema';
+import {settingSchema} from 'models';
 import simpleYoutubeApiLib from 'simple-youtube-api';
 
 const adminScrapYoutubeInfo = async (req, res) => {

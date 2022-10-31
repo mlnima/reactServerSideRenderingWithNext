@@ -1,4 +1,4 @@
-import postSchema from '../../../../../packages/models/src/postSchema';
+import {postSchema} from 'models';
 import fs from 'fs';
 
 const adminPostsBulkAction = async (req, res) => {

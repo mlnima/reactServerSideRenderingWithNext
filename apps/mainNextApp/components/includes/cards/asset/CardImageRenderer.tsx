@@ -56,7 +56,7 @@ const CardImageRenderer: FC<CardImageNextPropTypes> =
 
         const defaultUrl = useMemo(() => {
             if (gotError) {
-                return `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${'/static/images/noImage/no-image-available.png'}`
+                return `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${'/asset/images/default/no-image-available.png'}`
             } else {
                 return imageUrl && !isAbsolutePath(imageUrl) ?
                     `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${imageUrl}` :
@@ -69,7 +69,7 @@ const CardImageRenderer: FC<CardImageNextPropTypes> =
                                     cardWidth={cardWidth}
                                     className={'card-image'}>
 
-                {(!!defaultUrl && isImageAllowedForNextImage(defaultUrl) && index >= 1) ?
+                {(!!defaultUrl && isImageAllowedForNextImage(defaultUrl,process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES) && index >= 1) ?
                     <Image alt={mediaAlt}
                            src={defaultUrl}
                            loading={'lazy'}

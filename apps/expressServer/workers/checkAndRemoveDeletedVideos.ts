@@ -1,8 +1,7 @@
 import dotenv from 'dotenv';
-import connectToDatabase from 'custom-server-util/src/connectToDatabase';
+import {connectToDatabase} from 'custom-server-util';
 import {parentPort, workerData} from 'worker_threads';
-import metaSchema from '../../../packages/models/src/metaSchema';
-import postSchema from '../../../packages/models/src/postSchema';
+import {metaSchema,postSchema} from 'models';
 import axios from 'axios';
 dotenv.config();
 connectToDatabase()

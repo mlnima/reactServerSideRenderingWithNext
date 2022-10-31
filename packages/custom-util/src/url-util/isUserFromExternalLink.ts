@@ -1,7 +1,7 @@
-const isUserFromExternalLink = (req,res)=>{
+const isUserFromExternalLink = (req,domain)=>{
     try{
         const referer = req?.headers?.referer &&
-                        !req?.headers?.referer.includes(process.env.NEXT_PUBLIC_PRODUCTION_URL)
+                        !req?.headers?.referer.includes(domain)
         return referer
     }catch (err){
         return false

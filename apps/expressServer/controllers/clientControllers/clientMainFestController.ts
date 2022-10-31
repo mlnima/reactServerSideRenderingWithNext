@@ -1,4 +1,4 @@
-import settingSchema from '../../../../packages/models/src/settings/settingSchema';
+import {settingSchema} from 'models';
 
 const clientMainFestController = async (req, res) =>{
 
@@ -11,19 +11,19 @@ const clientMainFestController = async (req, res) =>{
             "short_name": identityData.data.title || 'React CMS website',
             "icons": [
                 {
-                    "src": identityData?.data?.pwa192 || process.env.NEXT_PUBLIC_PRODUCTION_URL + '/static/images/pwa/192.png',
+                    "src": identityData?.data?.pwa192 || process.env.NEXT_PUBLIC_PRODUCTION_URL + '/asset/images/default/pwa/192.png',
                     "sizes": "192x192",
                     "type": "image/png",
                     "purpose": "any maskable"
                 },
                 {
-                    "src": identityData?.data?.pwa384 || process.env.NEXT_PUBLIC_PRODUCTION_URL + '/static/images/pwa/384.png',
+                    "src": identityData?.data?.pwa384 || process.env.NEXT_PUBLIC_PRODUCTION_URL + '/asset/images/default/pwa/384.png',
                     "sizes": "384x384",
                     "type": "image/png",
                     "purpose": "image/png"
                 },
                 {
-                    "src": identityData?.data?.pwa512 || process.env.NEXT_PUBLIC_PRODUCTION_URL + '/static/images/pwa/512.png',
+                    "src": identityData?.data?.pwa512 || process.env.NEXT_PUBLIC_PRODUCTION_URL + '/asset/images/default/pwa/512.png',
                     "sizes": "512x512",
                     "type": "image/png",
                     "purpose": "image/png"

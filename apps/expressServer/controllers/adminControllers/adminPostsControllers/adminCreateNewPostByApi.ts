@@ -2,7 +2,7 @@ import fs from 'fs';
 import download from 'image-downloader';
 import sharp from 'sharp';
 import fsExtra from 'fs-extra';
-import postSchema from '../../../../../packages/models/src/postSchema';
+import {postSchema} from 'models';
 import updateSaveMetas from '../../../_variables/adminVariables/_updateSaveMetas';
 
 const imageDownloader = async (newPost) => {

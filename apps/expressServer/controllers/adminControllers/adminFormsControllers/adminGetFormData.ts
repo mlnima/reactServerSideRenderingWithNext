@@ -1,4 +1,4 @@
-import formSchema from '../../../../../packages/models/src/formSchema';
+import {formSchema} from 'models';
 
 const adminGetFormData = async (req, res) => {
     const _id = req.body._id

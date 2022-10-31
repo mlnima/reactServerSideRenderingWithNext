@@ -1,4 +1,4 @@
-import userSchema from '../../../../../packages/models/src/userSchema';
+import {userSchema} from 'models';
 
 const adminDeleteUser = (req, res) => {
     userSchema.findByIdAndDelete(req.body.id).exec().then(() => {

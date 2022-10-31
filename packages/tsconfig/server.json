@@ -3,13 +3,21 @@
   "display": "expressServer",
   "extends": "./base.json",
   "compilerOptions": {
-    "target": "es6",
+    "target": "es5",
     "allowSyntheticDefaultImports": true,
-    "types": [
-      "node"
+    "module": "CommonJS",
+    "baseUrl": ".",
+    "lib": [
+      "es2017",
+      "es2018",
+      "ES2021.String",
+      "ESNext.AsyncIterable",
+      "ESNext.Array",
+      "ESNext.Intl",
+      "ESNext.Symbol",
+      "ScriptHost"
     ],
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "baseUrl": "."
+    "emitDecoratorMetadata": true
   }
 }

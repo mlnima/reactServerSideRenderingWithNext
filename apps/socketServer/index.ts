@@ -10,16 +10,21 @@ import {chatroomSchema} from 'models'
 import {uniqArrayBy} from "custom-util";
 const app = express();
 const server = http.createServer(app);
+// import proxy from 'http-proxy-middleware'
+//
+// const wsProxy = proxy('/socket.io', {target:'ws://my-websocket.com/', changeOrigin: true, ws:true});
+
 
 app.use(cors())
 
-const {userJoin, userLeave, getUsersListOfRoom} = require('./users')
-let chatroomMessages = []
+// const {userJoin, userLeave, getUsersListOfRoom} = require('./users')
+// let chatroomMessages = []
 let chatroomOnlineUsers = []
 
 
 const io = require('socket.io')(server, {
     origin: [process.env.NEXT_PUBLIC_PRODUCTION_URL, '*'],
+    path:'/socket',
     cors: true,
     handlePreflightRequest: (req, res) => {
         res.writeHead(200, {
@@ -32,18 +37,46 @@ const io = require('socket.io')(server, {
     }
 })
 
-app.get('/test',  (req, res) => res.json({message:'fine'}));
+// app.get('/',(req,res)=>{
+//     res.send('****************************************************I am the Socket Server')
+// })
+// app.get('/socket',(req,res)=>{
+//     console.log('****************************************************I am the Socket Server')
+//     res.end()
+//
+// })
+
 app.get('/*', (req, res) => {
     res.end()
 });
+
+
+
 //@ts-ignore
 server.listen(process.env.SOCKET_SERVER_PORT || 3005, (error) => {
-    console.log(`process ${process.pid} : socket server is running at ${process.env.SOCKET_PORT}`);
+    console.log(`process ${process.pid} : socket server is running at ${process.env.SOCKET_SERVER_PORT}`);
 });
 
+// app.use(
+//     '/socket.io',
+//     createProxyMiddleware({
+//         target: 'http://localhost:3000',
+//         changeOrigin: true,
+//     })
+// );
 
 
 io.on('connection', socket => {
+
+    // server.on('upgrade', wsProxy.upgrade);
+
+    // io.on('connection', function (socket) {
+    //     setInterval(() => {
+    //         console.log('****************************************************I am the Socket Server')
+    //         io.emit('event', { data: 'worked successfully!' });
+    //     }, 1000);
+    // });
+
 
     socket.on('socketId', () => {
         socket.emit("socketId", socket.id)

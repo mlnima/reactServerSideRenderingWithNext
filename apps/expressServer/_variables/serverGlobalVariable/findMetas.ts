@@ -1,5 +1,4 @@
-import metaSchema from "../../../../packages/models/src/metaSchema";
-import settingSchema from "../../../../packages/models/src/settings/settingSchema";
+import {metaSchema,settingSchema} from 'models';
 import {IdentitySettings} from "typescript-types";
 
 interface FindMetasQueryTypes{

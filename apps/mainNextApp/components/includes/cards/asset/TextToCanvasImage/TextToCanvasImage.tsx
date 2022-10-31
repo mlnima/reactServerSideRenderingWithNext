@@ -73,7 +73,7 @@ export default TextToCanvasImage
 // {imageUrlSource && isImageAllowedForNextImage(imageUrlSource) && index >= 2 ?
 //     <Image alt={mediaAlt}
 //            src={gotError || !imageUrlSource ?
-//                '/static/images/noImage/no-image-available.png' :
+//                '/asset/images/default/no-image-available.png' :
 //                imageUrlSource
 //            }
 //            loading={'lazy'}
@@ -84,7 +84,7 @@ export default TextToCanvasImage
 //            onError={() => setGotError(true)}
 //     /> :
 //     <img src={gotError || !imageUrlSource ?
-//         '/static/images/noImage/no-image-available.png' :
+//         '/asset/images/default/no-image-available.png' :
 //         imageUrlSource
 //     }
 //          alt={mediaAlt}

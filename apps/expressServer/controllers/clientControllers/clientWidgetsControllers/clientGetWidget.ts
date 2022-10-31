@@ -1,4 +1,4 @@
-import widgetSchema from '../../../../../packages/models/src/widgetSchema';
+import {widgetSchema} from 'models';
 
 const clientGetWidget = (req, res) => {
     const position = req.body.position = 'all' ? {} : {position: req.body.position};

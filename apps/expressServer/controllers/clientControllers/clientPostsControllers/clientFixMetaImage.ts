@@ -1,5 +1,4 @@
-import postSchema from '../../../../../packages/models/src/postSchema';
-import metaSchema from '../../../../../packages/models/src/metaSchema';
+import {metaSchema,postSchema} from 'models';
 
 const clientFixMetaImage = async (req, res) => {
     try {

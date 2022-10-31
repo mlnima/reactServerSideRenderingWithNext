@@ -1,6 +1,6 @@
 import {FC} from "react";
 import Link from 'next/link';
-import convertVariableNameToName from "@_variables/util/convertVariableNameToName";
+import {convertVariableNameToName} from "custom-util";
 import {useRouter} from "next/router";
 import styled from "styled-components";
 

@@ -50,3 +50,5 @@
 // };
 //
 // export default ReactPageDescriptionRenderer;
+
+export default {}
