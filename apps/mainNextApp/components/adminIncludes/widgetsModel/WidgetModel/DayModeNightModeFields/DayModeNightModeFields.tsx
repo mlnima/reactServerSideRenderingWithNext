@@ -3,14 +3,18 @@ import MonacoEditor from "../../../MonacoEditor/MonacoEditor";
 
 interface DayModeNightModeFieldsPropTypes {
     dayNightModeData:any,
+    dayNightModeDefault:any,
     onChangeHandler:any
 }
 
 const DayModeNightModeFields: FC<DayModeNightModeFieldsPropTypes> =
     ({
          dayNightModeData,
+         dayNightModeDefault,
          onChangeHandler
     }) => {
+
+    // console.log(dayNightModeDefault)
     return (
         <>
             <div className={'widgetSection'}>
@@ -18,8 +22,9 @@ const DayModeNightModeFields: FC<DayModeNightModeFieldsPropTypes> =
             <select name={'dayNightModeDefault'}
                     onChange={onChangeHandler}
                     className={'custom-select'}
+                    value={dayNightModeDefault}
             >
-                <option value='' >Select</option>
+                 <option value='' >Select</option>
                  <option value={'night'}>Night</option>
                  <option value={'day'}>Day</option>
             </select>

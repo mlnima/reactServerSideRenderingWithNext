@@ -84,6 +84,7 @@ const UniqueFields: FC<UniqueFieldsPropTypes> =
 
                 {widgetData.type === 'dayModeNightMode' &&
                     <DayModeNightModeFields onChangeHandler={onUniqueDataChangeHandler}
+                                            dayNightModeDefault={widgetData?.uniqueData?.dayNightModeDefault || ''}
                                             dayNightModeData={widgetData?.uniqueData?.dayNightModeData || ''}
                     />
                 }

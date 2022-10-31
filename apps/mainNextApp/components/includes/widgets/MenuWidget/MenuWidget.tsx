@@ -93,6 +93,7 @@ const MenuWidgetStyledDiv = styled.div`
       overflow: hidden;
       margin: auto;
       padding: 0;
+      transition: none;
 
       .menu-widget-close-button {
         display: none;

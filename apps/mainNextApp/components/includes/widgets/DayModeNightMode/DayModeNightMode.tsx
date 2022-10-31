@@ -18,7 +18,7 @@ const DayModeNightModeStyledDiv = styled.div`
     align-items: center;
     background-color: transparent;
     border: none;
-    
+
   }
 
   .select-section {
@@ -35,31 +35,26 @@ const DayModeNightMode: FC<DayModeNightModePropTypes> = ({uniqueData}) => {
 
     const customColors = useSelector(({settings}: Store) => settings?.design?.customColors || '')
 
-    const [state, setstate] = useState({
+    const [state, setState] = useState({
         active: false,
-        open: false,
+        colors: '',
         mode: uniqueData?.dayNightModeDefault || 'night'
     })
 
     const onSelectHandler = (mode) => {
-        setstate({
+        localStorage.setItem('theme', mode)
+        setState({
             ...state,
             active: true,
-            open: false,
+            colors: mode === uniqueData?.dayNightModeDefault ? customColors : uniqueData?.dayNightModeData,
             mode
         })
-        if (typeof window !== 'undefined' && mode) {
-            localStorage.setItem('theme', mode)
-        }
     }
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            if (localStorage.theme){
-                setstate({
-                    ...state,
-                    mode: localStorage.theme
-                })
+            if (localStorage.theme) {
+                onSelectHandler(localStorage.theme)
             }
         }
     }, [uniqueData]);
@@ -77,10 +72,9 @@ const DayModeNightMode: FC<DayModeNightModePropTypes> = ({uniqueData}) => {
                 <SvgRenderer svgUrl={'/asset/images/icons/lightbulb-solid.svg'}
                              size={25}
                              customClassName={'light'}
-                             color={' var(--main-active-color, #f90)'}/>
+                             color={state.mode === 'night' ? '#f90' : '#222'}/>
             </button>
-            <ModeStyles dayNightModeData={state.mode === uniqueData?.dayNightModeDefault ?
-                customColors : uniqueData?.dayNightModeData || ''}
+            <ModeStyles dayNightModeData={state.colors}
             />
         </DayModeNightModeStyledDiv>
     )

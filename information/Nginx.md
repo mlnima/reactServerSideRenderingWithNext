@@ -23,7 +23,7 @@
 
         location /api {
             # API server address
-            proxy_pass http://localhost:3001;
+            proxy_pass http://localhost:3002;
             proxy_http_version 1.1;
             proxy_set_header Upgrade $http_upgrade;
             proxy_set_header Connection 'upgrade';
@@ -41,9 +41,19 @@
             proxy_cache_bypass $http_upgrade;
         }
 
+        location ~* \.(xml|xsl)$ {
+            # File server address
+            proxy_pass http://localhost:3002;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection 'upgrade';
+            proxy_set_header Host $host;
+            proxy_cache_bypass $http_upgrade;
+        }
+
         location /socket.io {
             # Socket.io server address
-            proxy_pass http://localhost:3005/socket.io;
+            proxy_pass http://localhost:3001/socket.io;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
             proxy_set_header Host $http_host;
             proxy_http_version 1.1;
@@ -56,8 +66,8 @@
         listen 443 ssl http2;
         listen [::]:443 ssl http2;
         ssl        on;
-        ssl_certificate         /etc/ssl/certs/cert.pem;
-        ssl_certificate_key     /etc/ssl/private/key.pem;
+        ssl_certificate         /etc/ssl/certs/trdland.pem;
+        ssl_certificate_key     /etc/ssl/private/trdlandKey.pem;
         server_name $DOMAIN.com www.$DOMAIN.com;
         root /var/www/example.com/html;
         index index.html index.htm index.nginx-debian.html;
@@ -74,7 +84,7 @@
 
         location /api {
             # API server address
-            proxy_pass http://localhost:3001;
+            proxy_pass http://localhost:3002;
             proxy_http_version 1.1;
             proxy_set_header Upgrade $http_upgrade;
             proxy_set_header Connection 'upgrade';
@@ -92,9 +102,19 @@
             proxy_cache_bypass $http_upgrade;
         }
 
+        location ~* \.(xml|xsl)$ {
+            # File server address
+            proxy_pass http://localhost:3002;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection 'upgrade';
+            proxy_set_header Host $host;
+            proxy_cache_bypass $http_upgrade;
+        }
+
         location /socket.io {
             # Socket.io server address
-            proxy_pass http://localhost:3005/socket.io;
+            proxy_pass http://localhost:3001/socket.io;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
             proxy_set_header Host $http_host;
             proxy_http_version 1.1;
