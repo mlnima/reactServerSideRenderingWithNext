@@ -5,9 +5,10 @@
 .package-lock.json
 node_modules
 
-apps/**/public/uploads
-apps/**/public/locales/*/customTranslation.json
-/!apps/web-app/public/*.xml
+apps/api-server/public/*
+apps/web-app/public/uploads
+apps/web-app/locales/*/customTranslation.json
+!apps/web-app/public/*.xml
 ssl/**
 
 packages/_devUtil/generateFakeData.js
