@@ -1,10 +1,8 @@
-/node_modules
 /apps/**/node_modules
 /apps/**/.next
 /apps/**/dist
 /apps/**/.turbo
 .package-lock.json
-proxy.json
 node_modules
 
 apps/**/public/uploads
@@ -13,7 +11,8 @@ apps/**/public/jsons/widgets/*
 apps/**/public/jsons/widgets
 apps/**/public/jsons/settings/*
 apps/**/public/jsons/settings
-
+!apps/web-app/public/*.xml
+ssl/**
 
 packages/_devUtil/generateFakeData.js
 packages/tools/testAPI.js

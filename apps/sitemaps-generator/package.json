@@ -1,0 +1,28 @@
+{
+  "name": "sitemap-generator",
+  "version": "1.0.0",
+  "keywords": [],
+  "author": "02dev",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run build:generators",
+    "build:generators": "tsc --project tsconfig.json",
+    "start": "concurrently \"NODE_ENV=production node ./dist/index.js\"",
+    "update:packages": "npm update --save/--save-dev -f"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "custom-server-util": "*",
+    "custom-util": "*",
+    "data-structures": "*",
+    "dotenv": "^16.0.2",
+    "dotenv-load": "^2.0.1",
+    "models": "*",
+    "module-alias": "^2.2.2",
+    "moment": "^2.29.3",
+    "mongoose": "^6.6.0",
+    "ts-node": "^10.9.1",
+    "typescript-types": "*"
+  }
+}

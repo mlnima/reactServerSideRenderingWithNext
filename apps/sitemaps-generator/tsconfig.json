@@ -1,0 +1,11 @@
+{
+  "extends": "tsconfig/server.json",
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules",".turbo", "coverage","dist/**/*"],
+  "types": "index.ts",
+  "main": "./index.js",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "."
+  }
+}
