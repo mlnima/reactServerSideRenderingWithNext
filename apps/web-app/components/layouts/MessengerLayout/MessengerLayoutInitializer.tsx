@@ -16,7 +16,7 @@ interface MessengerLayoutInitializerPropTypes {
 const MessengerLayoutInitializer: FC<MessengerLayoutInitializerPropTypes> = ({children}) => {
 
     const dispatch = useAppDispatch();
-    const {loggedIn,globalState} = useSelector(({user,globalState}:Store) => {
+    const {loggedIn,globalState,alert} = useSelector(({user,globalState}:Store) => {
         return{
             loggedIn: user.loggedIn,
             alert: globalState?.alert,
