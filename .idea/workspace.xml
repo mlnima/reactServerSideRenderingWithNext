@@ -20,7 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/public/asset/images/ads/ad300x100.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/public/asset/images/ads/ad300x250.jpg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1348,7 +1349,7 @@
       <workItem from="1667391363112" duration="277000" />
       <workItem from="1667391654544" duration="17215000" />
       <workItem from="1667469793320" duration="1930000" />
-      <workItem from="1667489663883" duration="11942000" />
+      <workItem from="1667489663883" duration="12340000" />
     </task>
     <servers />
   </component>

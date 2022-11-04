@@ -12,7 +12,7 @@ apps/web-app/public/*.xml
 ssl/**
 
 packages/_devUtil/generateFakeData.js
-packages/tools/testAPI.js
+apps/api-server/tools/testAPI.js
 /packages/_devUtil/generateFakeData.js
 
 .turbo
