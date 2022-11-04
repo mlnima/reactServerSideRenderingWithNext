@@ -7,11 +7,7 @@ node_modules
 
 apps/**/public/uploads
 apps/**/public/locales/*/customTranslation.json
-apps/**/public/jsons/widgets/*
-apps/**/public/jsons/widgets
-apps/**/public/jsons/settings/*
-apps/**/public/jsons/settings
-!apps/web-app/public/*.xml
+/!apps/web-app/public/*.xml
 ssl/**
 
 packages/_devUtil/generateFakeData.js
@@ -25,8 +21,6 @@ packages/tools/testAPI.js
 .env.test.local
 .env.production.local
 *.env
-/apps/mainNextApp/static/jsons/staticData.json
-/apps/mainNextApp/static/jsons/staticWidgets.json
 
 /tempFiles
 /trash
