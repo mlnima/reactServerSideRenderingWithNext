@@ -8,7 +8,7 @@ node_modules
 apps/api-server/public/*
 apps/web-app/public/uploads
 apps/web-app/locales/*/customTranslation.json
-!apps/web-app/public/*.xml
+apps/web-app/public/*.xml
 ssl/**
 
 packages/_devUtil/generateFakeData.js
