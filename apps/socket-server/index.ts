@@ -36,6 +36,10 @@ const io = require('socket.io')(server, {
     }
 })
 
+app.get('/', (req, res) => {
+    res.send(`server running on ${process.env.SOCKET_SERVER_PORT}`)
+});
+
 app.get('/*', (req, res) => {
     res.end()
 });
