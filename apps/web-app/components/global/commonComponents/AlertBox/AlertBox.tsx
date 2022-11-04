@@ -1,11 +1,7 @@
-import React, {useEffect} from 'react';
+import React, {FC, useEffect} from 'react';
 import styled from "styled-components";
-import {useSelector} from 'react-redux';
-import {closeAlert} from "../../../store_toolkit/clientReducers/globalStateReducer";
 import Draggable from 'react-draggable';
 import useTranslation from 'next-translate/useTranslation'
-import {useAppDispatch} from "../../../store_toolkit/hooks";
-import {Store} from "typescript-types";
 import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 
 const StyledDiv = styled.div`
@@ -106,61 +102,67 @@ const StyledDiv = styled.div`
   }
 `
 
-const AlertBox = () => {
+interface PropTypes{
+
+    alert:any,
+    closeAdminpanelAlert:Function
+}
+const AlertBox:FC<PropTypes> = ({alert,closeAdminpanelAlert}) => {
     const {t} = useTranslation();
-    const dispatch = useAppDispatch();
-    const alert = useSelector(({globalState}: Store) => globalState?.alert);
 
     useEffect(() => {
-        if (alert.active) {
+        if (alert?.active) {
             const component = true
             setTimeout(() => {
                 if (component) {
-                    dispatch(closeAlert(null))
+                    closeAdminpanelAlert()
                 }
             }, 3000)
         }
     }, [alert]);
 
-    return (
-        <StyledDiv className='alert-box' onClick={() => dispatch(closeAlert(null))}>
-            <Draggable handle=".handle">
-                <div className='alert-message'>
-                    <div className='alert-message-header handle'>
-                        <p className='alert-type'>
-                            <SvgRenderer size={25}
-                                         svgUrl={alert.type === 'success' ? '/asset/images/icons/circle-check-solid.svg' :
-                                             alert.type === 'error' ? '/asset/images/icons/triangle-exclamation-solid.svg' :
-                                                 '/asset/images/icons/circle-exclamation-solid.svg'}
-                                         customClassName={'download-logo'}
-                                         color={'var(--navigation-text-color,#ccc)'}/>
+    if (alert?.active){
+        return (
+            <StyledDiv className='alert-box' onClick={() => closeAdminpanelAlert()}>
+                <Draggable handle=".handle">
+                    <div className='alert-message'>
+                        <div className='alert-message-header handle'>
+                            <p className='alert-type'>
+                                <SvgRenderer size={25}
+                                             svgUrl={alert.type === 'success' ? '/asset/images/icons/circle-check-solid.svg' :
+                                                 alert.type === 'error' ? '/asset/images/icons/triangle-exclamation-solid.svg' :
+                                                     '/asset/images/icons/circle-exclamation-solid.svg'}
+                                             customClassName={'download-logo'}
+                                             color={'var(--navigation-text-color,#ccc)'}/>
+                            </p>
+                            <button className='close-alert' onClick={() => closeAdminpanelAlert()}>
+                                <span className={'icon faTimes'}/>
+                                <SvgRenderer svgUrl={'/asset/images/icons/xmark-solid.svg'}
+                                             size={25}
+                                             customClassName={'download-logo'}
+                                             color={alert.type === 'success' ? 'green' : alert.type === 'error' ? 'red' : '#ccc'}/>
+                            </button>
+                        </div>
+                        <p className='alert'>
+                            {t(`common:${alert.message}`,
+                                {},
+                                {
+                                    fallback:
+                                        t(`customTranslation:${alert.message}`,
+                                            {},
+                                            {fallback: alert.message}
+                                        )
+                                }
+                            )}
                         </p>
-                        <button className='close-alert' onClick={() => dispatch(closeAlert(null))}>
-                            <span className={'icon faTimes'}/>
-                            <SvgRenderer svgUrl={'/asset/images/icons/xmark-solid.svg'}
-                                         size={25}
-                                         customClassName={'download-logo'}
-                                         color={alert.type === 'success' ? 'green' : alert.type === 'error' ? 'red' : '#ccc'}/>
-                        </button>
+                        {/*//@ts-ignore*/}
+                        {!!alert.err?.stack && <p>{alert.err?.stack}</p>}
                     </div>
-                    <p className='alert'>
-                        {t(`common:${alert.message}`,
-                            {},
-                            {
-                                fallback:
-                                    t(`customTranslation:${alert.message}`,
-                                        {},
-                                        {fallback: alert.message}
-                                    )
-                            }
-                        )}
-                    </p>
-                    {/*//@ts-ignore*/}
-                    {!!alert.err?.stack && <p>{alert.err?.stack}</p>}
-                </div>
-            </Draggable>
-        </StyledDiv>
-    );
+                </Draggable>
+            </StyledDiv>
+        );
+    }else return null
+
 };
 
 export default AlertBox;

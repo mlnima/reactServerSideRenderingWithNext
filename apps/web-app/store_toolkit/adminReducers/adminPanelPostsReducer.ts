@@ -4,7 +4,7 @@ import Axios from "@_variables/Axios";
 import {AxiosError, AxiosResponse} from "axios";
 // import {AxiosErrorTypes} from "typescript-types";
 import {Meta,Post} from "typescript-types";
-import {loading, setAlert} from "../clientReducers/globalStateReducer";
+import {loading, setAlert} from "../adminReducers/adminPanelGlobalStateReducer";
 
 
 interface AdminPanelPosts {
@@ -66,15 +66,16 @@ export const fetchAdminPanelUpdatePost = createAsyncThunk(
     'adminPanelPosts/fetchAdminPanelUpdatePost',
     async (data: {}, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
+
         const body = {
             postData: data,
             token: localStorage.wt
         }
         return await Axios.post(`/api/admin/posts/updatePost`, body)
             .then((res: AxiosResponse<any>) => {
-                thunkAPI.dispatch(setAlert({message: res.data.message || 'Post Updated', type: 'success'}))
+                thunkAPI.dispatch(setAlert({message: res.data?.message || 'Post Updated', type: 'success'}))
             }).catch((err) => {
-                thunkAPI.dispatch(setAlert({message: err.response.data.message, type: 'error', err}))
+                thunkAPI.dispatch(setAlert({message: err.response.data?.message, type: 'error', err}))
             }).finally(() => {
                 thunkAPI.dispatch(loading(false))
             })

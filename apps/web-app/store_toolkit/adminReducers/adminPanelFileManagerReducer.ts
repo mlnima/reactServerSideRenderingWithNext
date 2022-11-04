@@ -4,8 +4,8 @@ import Axios from "@_variables/Axios";
 import {RootState} from "../store";
 
 const initialState = {
-    path: '.',
-    prevPath: '.',
+    path: './public',
+    prevPath: './public',
     files: [],
     clickedItem: '',
     clickedItemName: '',

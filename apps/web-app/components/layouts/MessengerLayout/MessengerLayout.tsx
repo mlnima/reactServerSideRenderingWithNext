@@ -1,5 +1,5 @@
 import {Provider} from 'react-redux';
-import {wrapper} from "../../../store_toolkit/store";
+import {wrapper} from "@store_toolkit/store";
 import MessengerLayoutInitializer from "./MessengerLayoutInitializer";
 // const LoginRegisterPopup = dynamic(() => import('../../includes/LoginRegisterPopup/LoginRegisterPopup'), {ssr: false});
 
@@ -15,4 +15,5 @@ const MessengerLayout = ({children,rest}) => {
         </Provider>
     );
 };
+
 export default MessengerLayout;

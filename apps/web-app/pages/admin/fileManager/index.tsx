@@ -4,8 +4,8 @@ import FileManagerArea from '../../../components/adminIncludes/FileManagerCompon
 import UploadedPopView from '../../../components/adminIncludes/FileManagerComponents/UploadedPopView/UploadedPopView'
 import CreateNewFileFolderPop from "../../../components/adminIncludes/FileManagerComponents/CreateNewFileFolderPop/CreateNewFileFolderPop";
 import {useSelector} from "react-redux";
-import {fetchFilManagerReadPath} from "../../../store_toolkit/adminReducers/adminPanelFileManagerReducer";
-import {useAdminDispatch} from "../../../store_toolkit/hooks";
+import {fetchFilManagerReadPath} from "@store_toolkit/adminReducers/adminPanelFileManagerReducer";
+import {useAdminDispatch} from "@store_toolkit/hooks";
 import {Store} from "typescript-types";
 
 const fileManager = () => {
@@ -13,8 +13,8 @@ const fileManager = () => {
     const fileManagerData = useSelector(({adminPanelFileManager}:Store)=>adminPanelFileManager)
 
     const [ state, setState ] = useState({
-        path: '.',
-        prevPath: '.',
+        path: './public',
+        prevPath: './public',
         files: [],
         clickedItem: '',
         clickedItemName: '',

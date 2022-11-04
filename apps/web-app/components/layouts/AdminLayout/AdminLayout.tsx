@@ -6,9 +6,9 @@ import Link from "next/link";
 import AdminDataSetter from "../../global/AdminDataSetter";
 import GlobalStyles from "../../global/Styles/GlobalStylesComponent";
 import styled from "styled-components";
-import LoadingV2 from "../../global/commonComponents/Loading/Loading";
 import wrapper from '../../../store_toolkit/adminStore';
 import {Provider} from 'react-redux';
+import AdminLayoutInitializer from "@components/layouts/AdminLayout/AdminLayoutInitializer";
 
 const AdminLayoutStyledDiv = styled.div`
   display: grid;
@@ -46,6 +46,7 @@ const AdminLayoutStyledDiv = styled.div`
     }
   }
 `
+
 const AdminLayout = ({children, rest}) => {
 
     const [unauthorized, setUnauthorized] = useState(true)
@@ -57,6 +58,7 @@ const AdminLayout = ({children, rest}) => {
             <AdminLayoutStyledDiv className={'admin-container'}>
 
                 <AdminDataSetter setUnauthorized={setUnauthorized}/>
+                <AdminLayoutInitializer/>
 
                 {unauthorized &&
                 <div className={'admin-unauthorized'}>
@@ -77,7 +79,7 @@ const AdminLayout = ({children, rest}) => {
                     <main className="Admin">
                         {children}
                     </main>
-                    <LoadingV2/>
+
                 </>
                 }
 

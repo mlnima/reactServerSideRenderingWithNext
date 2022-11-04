@@ -5,8 +5,8 @@ var fileTypeDetector = function (fileName) {
     var fileFormat = splitFileName[(splitFileName === null || splitFileName === void 0 ? void 0 : splitFileName.length) - 1].toLowerCase();
     var finalFormat = '';
     var fileFormats = {
-        image: ['jpg', 'png', 'jpeg', 'svg'],
-        video: ['mp4', '3gp'],
+        image: ['jpg', 'png', 'jpeg', 'svg', 'webp', 'gif'],
+        video: ['mp4', '3gp', 'mov'],
         document: ['js', 'css', 'env', 'scss', 'txt'],
         application: ['exe'],
         archive: ['zip', 'rar']

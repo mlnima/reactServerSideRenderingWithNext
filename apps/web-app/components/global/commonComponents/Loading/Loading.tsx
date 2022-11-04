@@ -2,10 +2,8 @@ import React, {useEffect, FC, memo, useState} from 'react';
 import styled from "styled-components";
 import ReactLoading from 'react-loading';
 import {useRouter} from "next/router";
-import {loading} from "../../../../store_toolkit/clientReducers/globalStateReducer";
-import {useSelector} from "react-redux";
-import {useAppDispatch} from "../../../../store_toolkit/hooks";
-import {Store} from "typescript-types";
+import {loading} from "@store_toolkit/clientReducers/globalStateReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 let StyledDiv = styled.div`
   position: fixed;
@@ -48,32 +46,29 @@ let StyledDiv = styled.div`
   }
 `
 
-
-const Loading: FC = () => {
+interface PropTypes{
+    isLoading:boolean
+}
+const Loading: FC<PropTypes> = ({isLoading}) => {
     const dispatch = useAppDispatch()
     const [isLoadingByRouteChange, setIsLoadingByRouteChange] = useState(false)
-    const isLoading = useSelector(({globalState}: Store) => globalState?.loading)
     const {events} = useRouter()
 
     useEffect(() => {
 
-        const handleStart = (eventType) =>  {
-            // console.log(eventType)
+        const handleStart = () =>  {
             setIsLoadingByRouteChange(true)
         };
 
-        const handleComplete = (eventType) =>  {
-            // console.log(eventType)
+        const handleComplete = () =>  {
             setIsLoadingByRouteChange(false)
         };
 
-        events.on('routeChangeStart',()=> handleStart('routeChangeStart'))
-        events.on('routeChangeComplete',()=> handleComplete('routeChangeComplete'))
-        // events.on('routeChangeError', ()=>handleComplete('routeChangeError'))
+        events.on('routeChangeStart',()=> handleStart())
+        events.on('routeChangeComplete',()=> handleComplete())
         return () => {
-            events.off('routeChangeStart',()=> handleComplete('routeChangeStart'))
-            events.off('routeChangeComplete',()=> handleComplete('routeChangeComplete'))
-            // events.off('routeChangeError', handleComplete('routeChangeError'))
+            events.off('routeChangeStart',()=> handleComplete())
+            events.off('routeChangeComplete',()=> handleComplete())
         }
     }, [])
 
@@ -98,7 +93,3 @@ const Loading: FC = () => {
 };
 
 export default memo(Loading);
-
-
-// const handleStart = (url) => (url !== asPath) && dispatch(loading(true));
-// const handleComplete = (url) => (url === asPath) && dispatch(loading(false));

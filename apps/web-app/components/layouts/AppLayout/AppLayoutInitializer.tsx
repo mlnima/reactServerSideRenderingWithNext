@@ -1,18 +1,20 @@
 import React,{FC} from "react";
 import {useSelector} from "react-redux";
 import {Store} from "typescript-types";
-import LoadingV2 from "../../global/commonComponents/Loading/Loading";
+import Loading from "../../global/commonComponents/Loading/Loading";
 import GlobalStylesComponent from "../../global/Styles/GlobalStylesComponent";
 import SiteSettingSetter from "../../includes/SiteSettingsSetter/SiteSettingsSetter";
 import dynamic from "next/dynamic";
-import AdminDataSetter from "../../global/AdminDataSetter";
+// import AdminDataSetter from "../../global/AdminDataSetter";
 import AppLayoutAdminDataInitializer from "./AppLayoutAdminDataInitializer";
+import {closeAlert} from "@store_toolkit/clientReducers/globalStateReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 // const AdminDataSetter = dynamic(() => import('@components/global/AdminDataSetter'));
 const HeaderWidgetArea = dynamic(() => import('../../widgetsArea/HeaderWidgetArea/HeaderWidgetArea'));
 const TopBarWidgetArea = dynamic(() => import('../../widgetsArea/TopBarWidgetArea/TopBarWidgetArea'));
 const NavigationWidgetArea = dynamic(() => import('../../widgetsArea/NavigationWidgetArea/NavigationWidgetArea'));
 const FooterWidgetArea = dynamic(() => import('../../widgetsArea/FooterWidgetArea/FooterWidgetArea'));
-const AlertBox = dynamic(() => import('../../includes/AlertBox/AlertBox'), {ssr: false});
+const AlertBox = dynamic(() => import('../../global/commonComponents/AlertBox/AlertBox'), {ssr: false});
 const AdminTools = dynamic(() => import('../../includes/AdminTools/AdminTools'), {ssr: false});
 const LoginRegisterPopup = dynamic(() => import('../../includes/LoginRegisterPopup/LoginRegisterPopup'), {ssr: false});
 const CookiePopup = dynamic(() => import('../../includes/ClientPopActionRequest/CookiePopup'), {ssr: false});
@@ -23,6 +25,7 @@ interface AppLayoutInitializerPropTypes {
 }
 
 const AppLayoutInitializer: FC<AppLayoutInitializerPropTypes> = ({children}) => {
+    const dispatch = useAppDispatch();
     const {
         loggedIn,
         userRole,
@@ -30,16 +33,23 @@ const AppLayoutInitializer: FC<AppLayoutInitializerPropTypes> = ({children}) => 
         cookiePopupMessage,
         loginRegisterFormPopup,
         alert,
+        isLoading
     } = useSelector(({user, settings, globalState}: Store) => {
         return {
             loggedIn: user?.loggedIn,
             userRole: user?.userData?.role,
             identity: settings?.identity,
+            isLoading:globalState?.loading,
             loginRegisterFormPopup: globalState?.loginRegisterFormPopup,
             alert: globalState?.alert,
             cookiePopupMessage: settings?.identity?.cookiePopupMessage
         }
     });
+
+    const closeClientAlert = ()=>{
+        dispatch(closeAlert(null))
+    }
+
     return (
         <>
             <header>
@@ -55,14 +65,14 @@ const AppLayoutInitializer: FC<AppLayoutInitializerPropTypes> = ({children}) => 
             {identity?.footer === 'enable' && <FooterWidgetArea/>}
             <BackToTopButton/>
 
-            <LoadingV2/>
+            <Loading isLoading={isLoading}/>
 
             {(typeof window !== 'undefined' && !!cookiePopupMessage && localStorage.cookieAccepted !== 'true') &&
             <CookiePopup/>
             }
 
             {loginRegisterFormPopup && !loggedIn && <LoginRegisterPopup/>}
-            {(!!alert?.active && !!alert?.message) && <AlertBox/>}
+            <AlertBox alert={alert} closeAdminpanelAlert={closeClientAlert}/>
             {userRole === 'administrator' && <AppLayoutAdminDataInitializer/>}
             {userRole === 'administrator' && <AdminTools/>}
             <GlobalStylesComponent/>

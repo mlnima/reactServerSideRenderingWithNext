@@ -3,8 +3,8 @@ const fileTypeDetector =( fileName :string) => {
     const fileFormat = splitFileName[splitFileName?.length - 1].toLowerCase()
     let finalFormat = ''
     const fileFormats = {
-        image: ['jpg', 'png', 'jpeg', 'svg'],
-        video: ['mp4', '3gp'],
+        image: ['jpg', 'png', 'jpeg', 'svg','webp','gif'],
+        video: ['mp4', '3gp', 'mov'],
         document: ['js', 'css', 'env', 'scss', 'txt'],
         application: ['exe'],
         archive: ['zip', 'rar']

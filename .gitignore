@@ -11,6 +11,8 @@ apps/web-app/locales/*/customTranslation.json
 apps/web-app/public/*.xml
 ssl/**
 
+static
+
 packages/_devUtil/generateFakeData.js
 apps/api-server/tools/testAPI.js
 /packages/_devUtil/generateFakeData.js

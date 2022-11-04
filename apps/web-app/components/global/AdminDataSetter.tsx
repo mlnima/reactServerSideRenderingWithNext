@@ -9,7 +9,7 @@ import {useAppDispatch} from "@store_toolkit/hooks";
 import {useSelector} from "react-redux";
 import {Store} from "typescript-types";
 import {fetchUserAutoLogin} from "@store_toolkit/clientReducers/userReducer";
-import AlertBox from "../includes/AlertBox/AlertBox";
+
 
 interface AdminDataSetterPropTypes {
     setUnauthorized:React.Dispatch<React.SetStateAction<boolean>>
@@ -19,15 +19,9 @@ const AdminDataSetter: FC<AdminDataSetterPropTypes> = ({setUnauthorized}) => {
     const dispatch = useAppDispatch()
     const {pathname} = useRouter()
 
-    const {adminPanelGlobalState, userData, alert} = useSelector(
-        ({
-             adminPanelGlobalState,
-             adminPanelUsers
-         }: Store) => {
+    const {userData} = useSelector(({adminPanelUsers}: Store) => {
             return {
-                adminPanelGlobalState,
                 userData: adminPanelUsers?.userData,
-                alert: adminPanelGlobalState?.alert?.active,
             }
         })
 
@@ -83,7 +77,6 @@ const AdminDataSetter: FC<AdminDataSetterPropTypes> = ({setUnauthorized}) => {
 
                 </Head>
 
-                {(!!alert && !!adminPanelGlobalState?.alert?.message) && <AlertBox/>}
             </>
         );
     } else return null

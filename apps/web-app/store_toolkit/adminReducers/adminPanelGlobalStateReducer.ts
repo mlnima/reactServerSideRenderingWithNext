@@ -1,12 +1,10 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import Axios from "@_variables/Axios";
 import {AxiosResponse} from "axios";
-import {loading, setAlert} from "../clientReducers/globalStateReducer";
+
 import {NextRouter} from "next/router";
 import {RootState} from "../store";
 import {AdminPanelGlobalState,PageTypes} from "typescript-types";
-
-
 
 const initialState : AdminPanelGlobalState = {
     customPages: [],
@@ -59,22 +57,22 @@ export const adminPanelGlobalStateSlice = createSlice({
             state.sidebar = action.payload
         },
 
-        // loading: (state, action: PayloadAction<any>) => {
-        //     state.loading = action.payload
-        // },
-        // setAlert: (state, action: PayloadAction<any>) => {
-        //     state.alert = {
-        //         ...action.payload,
-        //         active: true,
-        //     }
-        // },
-        // closeAlert: (state, action: PayloadAction<any>) => {
-        //     state.alert = {
-        //         active: false,
-        //         type: null,
-        //         message: ''
-        //     }
-        // }
+        loading: (state, action: PayloadAction<any>) => {
+            state.loading = action.payload
+        },
+        setAlert: (state, action: PayloadAction<any>) => {
+            state.alert = {
+                ...action.payload,
+                active: true,
+            }
+        },
+        closeAlert: (state, action: PayloadAction<any>) => {
+            state.alert = {
+                active: false,
+                type: null,
+                message: ''
+            }
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(fetchCustomPages.fulfilled, (state, action: PayloadAction<any>) => {
@@ -86,7 +84,7 @@ export const adminPanelGlobalStateSlice = createSlice({
     }
 })
 
-export const {setSidebarStatus} = adminPanelGlobalStateSlice.actions
+export const {setSidebarStatus,loading,setAlert,closeAlert} = adminPanelGlobalStateSlice.actions
 
 export const adminPanelGlobalStateReducer = (state: RootState) => state?.adminPanelGlobalState || null
 
