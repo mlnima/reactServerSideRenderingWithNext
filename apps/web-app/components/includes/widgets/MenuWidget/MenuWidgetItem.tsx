@@ -1,5 +1,4 @@
 import {FC, useMemo} from "react";
-// import {useTranslation} from "next-i18next";
 import useTranslation from 'next-translate/useTranslation'
 import {useRouter} from "next/router";
 import Link from "next/link";
@@ -25,7 +24,7 @@ const MenuWidgetItem: FC<MenuWidgetItemPropTypes> = ({menuItem, setOpen}) => {
     }, [lang])
 
     return (
-        <li className={'menu-item'}>
+        <div className={'menu-item'}>
             <Link href={menuItem.target}
                   className={'menu-item-link'}
                   target={menuItem.target.includes('http') ? '_blank' : '_self'}
@@ -33,15 +32,8 @@ const MenuWidgetItem: FC<MenuWidgetItemPropTypes> = ({menuItem, setOpen}) => {
                   onClick={()=>setOpen(false)}>
                     {linkNameWithTranslate}
             </Link>
-        </li>
+        </div>
     )
 };
 
-export default MenuWidgetItem
-
-//const {t} = useTranslation(['common', 'customTranslation']);
-// const {t} = useTranslation('common');
-
-//t([t(menuItem.name, {ns: 'common'}), t(menuItem.name, {ns: 'customTranslation'})])
-// t([t(`common:${menuItem.name}`), t(`customTranslation:${menuItem.name}`)])
-//   t(`common:${menuItem.name}`,t(`customTranslation:${menuItem.name}`))
+export default MenuWidgetItem;

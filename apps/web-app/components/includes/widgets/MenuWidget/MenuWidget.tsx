@@ -43,19 +43,8 @@ const MenuWidgetStyledDiv = styled.div`
       align-items: center;
       background-color: transparent;
       border: none;
-      width: 18px;
-      height: 18px;
       color: var(--navigation-text-color, #ccc);
       padding: 6px;
-
-      //.menu-widget-close-button-logo {
-      //  width: 18px;
-      //  height: 18px;
-      //  padding: 6px;
-      //  background-color: var(--navigation-text-color, #ccc);
-      //  mask: url('/apps/mainNextApp/public/asset/images/icons/xmark-solid.svg') no-repeat center;
-      //  -webkit-mask: url('/apps/mainNextApp/public/asset/images/icons/xmark-solid.svg') no-repeat center;
-      //}
     }
 
     .menu-item {
@@ -124,23 +113,22 @@ const MenuWidget: FC<MenuWidgetPropTypes> = ({menuItems}) => {
 
     return (
         <MenuWidgetStyledDiv open={open} className={'menu-widget'}>
-            <ul onClick={() => setOpen(!open)}
+            <button onClick={() => setOpen(!open)}
                 className='menu-widget-open-button btn btn-transparent-light'
                 aria-label="open navigation">
                 <SvgRenderer svgUrl={'/asset/images/icons/bars-solid.svg'}
                              size={30}
                              customClassName={'menu-widget-close-button-logo'}
                              color={'  var(--navigation-text-color, #ccc)'}/>
-            </ul>
-            <ul className='menu-widget-items'>
-                <li onClick={() => setOpen(!open)}
+            </button>
+            <div className='menu-widget-items'>
+                <button onClick={() => setOpen(!open)}
                     className='menu-widget-close-button  btn btn-transparent-light'>
-
                     <SvgRenderer svgUrl={'/asset/images/icons/xmark-solid.svg'}
                                  size={25}
                                  customClassName={'menu-widget-close-button-logo'}
                                  color={'  var(--navigation-text-color, #ccc)'}/>
-                </li>
+                </button>
                 {menuItemsInOrder.map(menuItem => {
                     return (
                         <MenuWidgetItem menuItem={menuItem}
@@ -149,7 +137,7 @@ const MenuWidget: FC<MenuWidgetPropTypes> = ({menuItems}) => {
                         />
                     )
                 })}
-            </ul>
+            </div>
         </MenuWidgetStyledDiv>
     )
 
