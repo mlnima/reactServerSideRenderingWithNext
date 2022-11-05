@@ -246,11 +246,12 @@ export const fetchUserResetPassword = createAsyncThunk(
     'user/fetchUserResetPassword',
     async (data, thunkAPI) => {
         return await Axios.post('/api/v1/users/resetPassword', {token: localStorage.wt, data}).then(res => {
+            thunkAPI.dispatch(setAlert({message: 'Password Successfully Changed', type: 'success'}))
             return res.data?.userData
         }).catch(() => {
+            thunkAPI.dispatch(setAlert({message: 'Old Password Is Not Valid', type: 'error'}))
             localStorage.removeItem('wt')
         })
-
     }
 )
 

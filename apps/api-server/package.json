@@ -16,7 +16,6 @@
     "start": "concurrently \"NODE_ENV=production node ./dist/index.js\"",
     "fixTimeStamsForPosts": "node tools/fixTimeStamsForPosts.js",
     "mergeDuplicateMetaData": "node tools/mergeDuplicateMetaData.js",
-    "setup": "ts-node --transpile-only ./tools/setup.js",
     "ResetAdminPassword": "node ./tools/resetAdminPassword.js",
     "build:server": "tsc --project tsconfig.json",
     "update:packages": "npm update --save/--save-dev -f",

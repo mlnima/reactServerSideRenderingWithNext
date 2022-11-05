@@ -1,12 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import useTranslation from 'next-translate/useTranslation'
 import styled from "styled-components";
-import {wrapper} from "../../store_toolkit/store";
-import {fetchUserResetPassword} from "../../store_toolkit/clientReducers/userReducer";
+import {wrapper} from "@store_toolkit/store";
+import {fetchUserResetPassword} from "@store_toolkit/clientReducers/userReducer";
 import _passwordValidator from "@_variables/_clientVariables/clientVariables/_passwordValidator";
 import ValidInput from "../../components/includes/LoginRegisterPopup/ValidInput";
-import {useAppDispatch} from "../../store_toolkit/hooks";
+import {useAppDispatch, useAppSelector} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
+import {Store} from "typescript-types";
+import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 
 const EditProfileStyledMain = styled.main`
   grid-area: main;
@@ -61,6 +63,8 @@ const edit = () => {
     const {t} = useTranslation();
     const dispatch = useAppDispatch()
 
+    const user = useAppSelector(({user}:Store)=>user)
+
     const [changePasswordData, setChangePasswordData] = useState<ChangePasswordData>({})
     const [changePasswordDataValidator, setChangePasswordDataValidator] = useState<ChangePasswordDataValidator>({})
 
@@ -72,10 +76,13 @@ const edit = () => {
     }
 
     const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-
         e.preventDefault()
-        //@ts-ignore
-        dispatch(fetchUserResetPassword(changePasswordData))
+        if (!user.loggedIn){
+            dispatch(loginRegisterForm('login'))
+        }else{
+            //@ts-ignore
+            dispatch(fetchUserResetPassword(changePasswordData))
+        }
     }
 
     useEffect(() => {
