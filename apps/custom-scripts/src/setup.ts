@@ -13,6 +13,15 @@ import defaultWidgets from "../asset/defaultWidgets";
 const runScripts = async ()=>{
 
     try {
+
+        for await (const widget of defaultWidgets){
+            const dataToSave = new widgetSchema(widget)
+            dataToSave.save().catch(err => {
+                console.log(err)
+                console.log('Error on widget set')
+            })
+        }
+
         const identityToSave = new settingSchema(defaultIdentitySettings)
 
         const siteDesignToSave = new settingSchema(defaultDesignSettings)
@@ -39,13 +48,7 @@ const runScripts = async ()=>{
             }
         });
 
-        for await (const widget of defaultWidgets){
-            const dataToSave = new widgetSchema(widget)
-            dataToSave.save().catch(err => {
-                console.log(err)
-                console.log('Error on widget set')
-            })
-        }
+
     }catch (error){
         console.log(error)
     }

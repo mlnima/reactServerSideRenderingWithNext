@@ -13,7 +13,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc --project tsconfig.json",
-    "run-script:setup": "node  ./dist/src/setup.js",
+    "run-script:setup": "node ./dist/src/setup.js",
     "run-script:resetAdminPassword": "node ./dist/src/resetAdminPassword.js",
     "test": "jest --watch"
   },

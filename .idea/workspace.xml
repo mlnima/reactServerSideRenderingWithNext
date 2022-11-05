@@ -20,22 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/apps/custom-scripts/asset/defaultAdminAccountData.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/custom-scripts/asset/defaultDesignSettings.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/custom-scripts/asset/defaultIdentitySettings.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/custom-scripts/asset/defaultWidgets.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/custom-scripts/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/custom-scripts/src/resetAdminPassword.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/custom-scripts/src/setup.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/custom-scripts/tsconfig.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/information/install guid.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api-server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api-server/tools/pageCache.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api-server/tools/setup.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/tools/setup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/profile/edit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/profile/edit.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/userReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/userReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/custom-scripts/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/custom-scripts/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/custom-scripts/src/setup.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/custom-scripts/src/setup.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/information/install guid.md" beforeDir="false" afterPath="$PROJECT_DIR$/information/install guid.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1367,7 +1355,7 @@
       <workItem from="1667561269566" duration="156000" />
       <workItem from="1667562862071" duration="2798000" />
       <workItem from="1667582371588" duration="21511000" />
-      <workItem from="1667645478587" duration="7743000" />
+      <workItem from="1667645478587" duration="10727000" />
     </task>
     <servers />
   </component>
