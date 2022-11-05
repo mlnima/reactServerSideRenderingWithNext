@@ -74,6 +74,10 @@ const runScripts = async () => {
     await createAdminAccount
 }
 
-runScripts().then(() => process.exit())
+runScripts().then(() => {
+    setTimeout(()=>{
+        process.exit()
+    },5000)
+})
 
 
