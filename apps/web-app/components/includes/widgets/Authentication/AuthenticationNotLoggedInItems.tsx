@@ -70,7 +70,7 @@ const AuthenticationNotLoggedInItems: FC<AuthenticationNotLoggedInItemsPropTypes
 
             <div className={'logged-items'}>
                 {pathname.includes('/messenger') || pathname.includes('/chatroom') ?
-                    <Link href={`/`} className='logged-item logged-out' onClick={onOpenCloseHandler}>
+                    <a href={`/`} className='logged-item logged-out' onClick={onOpenCloseHandler}>
                             <div className={'icon-wrapper'}>
                                 <SvgRenderer svgUrl={'/asset/images/icons/home-solid.svg'}
                                              size={20}
@@ -79,7 +79,7 @@ const AuthenticationNotLoggedInItems: FC<AuthenticationNotLoggedInItemsPropTypes
                                 />
                             </div>
                             <p className={'text-data'}>{t<string>(`Home`)}</p>
-                    </Link>
+                    </a>
                     : null
                 }
             </div>

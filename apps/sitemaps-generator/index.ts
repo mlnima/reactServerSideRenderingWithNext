@@ -7,6 +7,7 @@ import {searchKeywordsSitemapsGenerator} from './src/searchSitemap'
 import {rootSitemapGenerator} from './src/rootSiteMap'
 import {metaSitemapGenerator} from './src/metaSitemap'
 import {pagesSitemapGenerator} from './src/pageSitemap'
+import {robotsTxtGenerator} from './src/robotsTxtGenerator'
 
 const baseOutputPath = '../web-app/public'
 
@@ -15,6 +16,7 @@ const runAllGenerators = async ()=>{
    await searchKeywordsSitemapsGenerator(baseOutputPath)
    await metaSitemapGenerator(baseOutputPath)
    await pagesSitemapGenerator(baseOutputPath)
+   await robotsTxtGenerator(baseOutputPath)
 }
 
 runAllGenerators().finally(()=>process.exit())
