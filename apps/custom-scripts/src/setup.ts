@@ -77,7 +77,7 @@ const runScripts = async () => {
 runScripts().then(() => {
     setTimeout(()=>{
         process.exit()
-    },5000)
+    },15000)
 })
 
 
