@@ -11,7 +11,7 @@ import defaultIdentitySettings from "../asset/defaultIdentitySettings";
 import defaultDesignSettings from "../asset/defaultDesignSettings";
 import defaultAdminAccountData from "../asset/defaultAdminAccountData";
 import defaultWidgets from "../asset/defaultWidgets";
-
+import {isEmptyObject} from 'custom-util'
 
 const setWidgets = async () => {
     try {
@@ -30,13 +30,19 @@ const setWidgets = async () => {
 
 const setSettings = async () => {
     try {
-        const identityToSave = new settingSchema(defaultIdentitySettings)
 
-        const siteDesignToSave = new settingSchema(defaultDesignSettings)
+        const identitySettings = settingSchema.findOne({type:'identity'}).exec()
+        const designSettings = settingSchema.findOne({type:'design'}).exec()
 
-        await identityToSave.save(error => console.log(error))
+        if (!isEmptyObject(identitySettings)){
+            const identityToSave = new settingSchema(defaultIdentitySettings)
+            await identityToSave.save(error => console.log(error))
+        }
+        if (!isEmptyObject(designSettings)){
+            const siteDesignToSave = new settingSchema(defaultDesignSettings)
+            await siteDesignToSave.save(error => console.log(error))
+        }
 
-        await siteDesignToSave.save(error => console.log(error))
     } catch (error) {
         console.log(error)
     }
@@ -45,23 +51,26 @@ const setSettings = async () => {
 
 const createAdminAccount = async () => {
     try {
-        const APIKey = await uuidAPIKey.create()
-        await bcrypt.hash(defaultAdminAccountData.password, 10, function (err, hash) {
-            if (err) {
-                console.log(err)
-            } else if (hash) {
-                const adminAccountData = {
-                    ...defaultAdminAccountData,
-                    password: hash,
-                    API_KEY: APIKey.apiKey,
-                    uuid: APIKey.uuid
-                }
-                const adminDataToSave = new userSchema(adminAccountData)
-                adminDataToSave.save()
-                console.log('admin account created , username: Admin , password: Admin')
-            }
-        });
 
+        const adminUser = userSchema.findOne({username:'Admin'})
+        if (!isEmptyObject(adminUser)){
+            const APIKey = await uuidAPIKey.create()
+            await bcrypt.hash(defaultAdminAccountData.password, 10, function (err, hash) {
+                if (err) {
+                    console.log(err)
+                } else if (hash) {
+                    const adminAccountData = {
+                        ...defaultAdminAccountData,
+                        password: hash,
+                        API_KEY: APIKey.apiKey,
+                        uuid: APIKey.uuid
+                    }
+                    const adminDataToSave = new userSchema(adminAccountData)
+                    adminDataToSave.save()
+                    console.log('admin account created , username: Admin , password: Admin')
+                }
+            });
+        }
     } catch (error) {
         console.log(error)
     }
@@ -71,7 +80,7 @@ const createAdminAccount = async () => {
 const runScripts = async () => {
     await setWidgets()
     await setSettings()
-    await createAdminAccount
+    await createAdminAccount()
 }
 
 runScripts().then(() => {
