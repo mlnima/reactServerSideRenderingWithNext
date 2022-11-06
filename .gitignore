@@ -25,6 +25,7 @@ apps/api-server/tools/testAPI.js
 .env.test.local
 .env.production.local
 *.env
+custom-config.json
 
 /tempFiles
 /trash
