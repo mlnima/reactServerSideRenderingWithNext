@@ -1,11 +1,10 @@
 "use strict";
 exports.__esModule = true;
 exports.shouldCompress = exports.connectToDatabase = exports.mongoIdValidator = void 0;
-var tslib_1 = require("tslib");
 // import fileDownloader from "./src/fileDownloader";
-var mongoIdValidator_1 = tslib_1.__importDefault(require("./src/mongoIdValidator"));
+var mongoIdValidator_1 = require("./src/mongoIdValidator");
 exports.mongoIdValidator = mongoIdValidator_1["default"];
-var connectToDatabase_1 = tslib_1.__importDefault(require("./src/connectToDatabase"));
+var connectToDatabase_1 = require("./src/connectToDatabase");
 exports.connectToDatabase = connectToDatabase_1["default"];
-var shouldCompress_1 = tslib_1.__importDefault(require("./src/shouldCompress"));
+var shouldCompress_1 = require("./src/shouldCompress");
 exports.shouldCompress = shouldCompress_1["default"];

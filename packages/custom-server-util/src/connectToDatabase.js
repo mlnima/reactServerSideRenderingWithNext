@@ -4,7 +4,7 @@ var tslib_1 = require("tslib");
 var mongoose_1 = tslib_1.__importDefault(require("mongoose"));
 mongoose_1["default"].Promise = global.Promise;
 var mongoDBConnectionUrl = process.env.DB_LOCAL === 'true' ?
-    "mongodb://localhost:".concat(process.env.DB_PORT, "/").concat(process.env.DB_NAME) :
+    "mongodb://0.0.0.0:".concat(process.env.DB_PORT, "/").concat(process.env.DB_NAME) :
     "mongodb://".concat(process.env.DB_USER, ":").concat(process.env.DB_PASS, "@").concat(process.env.DB_HOST, ":").concat(process.env.DB_PORT, "/").concat(process.env.DB_NAME);
 var options = {
     useUnifiedTopology: true
@@ -31,3 +31,6 @@ var connectToDatabase = function (name) { return tslib_1.__awaiter(void 0, void 
     });
 }); };
 exports["default"] = connectToDatabase;
+// const mongoDBConnectionUrl = process.env.DB_LOCAL === 'true' ?
+//     `mongodb://0.0.0.0:${process.env.DB_PORT}/${process.env.DB_NAME}` :
+//     `mongodb://${process.env.DB_USER ? `${process.env.DB_USER}:` : ''}${process.env.DB_PASS ? `${process.env.DB_PASS}@` : ''}${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`

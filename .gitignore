@@ -18,6 +18,7 @@ packages/_devUtil/generateFakeData.js
 apps/api-server/tools/testAPI.js
 /packages/_devUtil/generateFakeData.js
 
+.idea
 .turbo
 .generateFakeData.js
 .env.local

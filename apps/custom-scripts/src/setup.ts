@@ -1,9 +1,7 @@
 import dotenv from 'dotenv';
-
 dotenv.config({path: '../../.env'});
+connectToDatabase('Setup')
 import {connectToDatabase} from 'custom-server-util';
-
-connectToDatabase('Setup').finally()
 import {settingSchema, widgetSchema, userSchema} from 'models';
 import bcrypt from 'bcryptjs';
 import uuidAPIKey from 'uuid-apikey';
@@ -31,17 +29,23 @@ const setWidgets = async () => {
 const setSettings = async () => {
     try {
 
-        const identitySettings = settingSchema.findOne({type:'identity'}).exec()
-        const designSettings = settingSchema.findOne({type:'design'}).exec()
+        // const identitySettings = settingSchema.findOne({type:'identity'}).exec()
+        // const designSettings = settingSchema.findOne({type:'design'}).exec()
+        //
+        // if (!isEmptyObject(identitySettings)){
+        //     const identityToSave = new settingSchema(defaultIdentitySettings)
+        //     await identityToSave.save(error => console.log(error))
+        // }
+        // if (!isEmptyObject(designSettings)){
+        //     const siteDesignToSave = new settingSchema(defaultDesignSettings)
+        //     await siteDesignToSave.save(error => console.log(error))
+        // }
 
-        if (!isEmptyObject(identitySettings)){
-            const identityToSave = new settingSchema(defaultIdentitySettings)
-            await identityToSave.save(error => console.log(error))
-        }
-        if (!isEmptyObject(designSettings)){
-            const siteDesignToSave = new settingSchema(defaultDesignSettings)
-            await siteDesignToSave.save(error => console.log(error))
-        }
+        const identityToSave = new settingSchema(defaultIdentitySettings)
+        await identityToSave.save(error => console.log(error))
+
+        const siteDesignToSave = new settingSchema(defaultDesignSettings)
+        await siteDesignToSave.save(error => console.log(error))
 
     } catch (error) {
         console.log(error)
@@ -78,12 +82,14 @@ const createAdminAccount = async () => {
 
 
 const runScripts = async () => {
+
+    await createAdminAccount()
     await setWidgets()
     await setSettings()
-    await createAdminAccount()
 }
 
 runScripts().then(() => {
+    // process.exit()
     setTimeout(()=>{
         process.exit()
     },15000)

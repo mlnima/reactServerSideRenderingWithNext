@@ -1,7 +1,7 @@
 {
   "name": "custom-scripts",
   "version": "1.0.0",
-  "description": "reacticum-socket-server is a socket server of Reacticum CMS project which is built using NextJs, Express, MongoDB...etc",
+  "description": "",
   "main": "index.js",
   "keywords": [
     "nextJs",
@@ -13,8 +13,8 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc --project tsconfig.json",
-    "run-script:setup": "node ./dist/src/setup.js",
-    "run-script:resetAdminPassword": "node ./dist/src/resetAdminPassword.js",
+    "run-script:setup": "node --trace-warnings ./dist/src/setup.js",
+    "run-script:resetAdminPassword": "node --trace-warnings ./dist/src/resetAdminPassword.js",
     "test": "jest --watch"
   },
   "dependencies": {

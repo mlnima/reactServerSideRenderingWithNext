@@ -8,14 +8,14 @@ const domains = !process.env.NEXT_PUBLIC_DOMAINS ? {} :
         }
     })
 
-
+console.log(domains)
 module.exports = {
     locales,
     defaultLocale,
     ...domains,
     logger: () => null,
     logBuild: false,
-    localeDetection: false,
+    // localeDetection: false,
     // loadLocaleFrom: (lang, ns) =>
     //     import(`./public/locales/${lang}/${ns}.json`).then((m) => m.default),
     pages: {

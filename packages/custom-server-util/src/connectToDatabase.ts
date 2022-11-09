@@ -3,7 +3,7 @@ import mongoose, {ConnectOptions} from 'mongoose'
 mongoose.Promise = global.Promise;
 
 const mongoDBConnectionUrl = process.env.DB_LOCAL === 'true' ?
-    `mongodb://localhost:${process.env.DB_PORT}/${process.env.DB_NAME}` :
+    `mongodb://0.0.0.0:${process.env.DB_PORT}/${process.env.DB_NAME}` :
     `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`
 
 const options = {
@@ -28,3 +28,6 @@ const connectToDatabase = async (name?: string) => {
 export default connectToDatabase
 
 
+// const mongoDBConnectionUrl = process.env.DB_LOCAL === 'true' ?
+//     `mongodb://0.0.0.0:${process.env.DB_PORT}/${process.env.DB_NAME}` :
+//     `mongodb://${process.env.DB_USER ? `${process.env.DB_USER}:` : ''}${process.env.DB_PASS ? `${process.env.DB_PASS}@` : ''}${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`

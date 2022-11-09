@@ -38,9 +38,33 @@ const LanguagesSwitcherStyledDiv = styled.div`
 const LanguagesSwitcher :FC = () => {
     const router = useRouter()
 
+
+
     const onChangeHandler = e => {
+
         const localToSet = e.target.value === 'default' ? process.env.NEXT_PUBLIC_DEFAULT_LOCAL : e.target.value
         router?.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale: localToSet})
+
+
+        // if (process.env.NEXT_PUBLIC_DOMAINS){
+        //
+        //     const locales = process.env.NEXT_PUBLIC_LOCALS?.split(' ') || [];
+        //     const domains = !process.env.NEXT_PUBLIC_DOMAINS ? {} :
+        //         process.env.NEXT_PUBLIC_DOMAINS.split(' ').map((domain, index) => {
+        //             return {
+        //                 domain,
+        //                 defaultLocale: locales[index],
+        //             }
+        //         })
+        //
+        // if (typeof window !=='undefined'){
+        //     window.location.assign('https://duckduckgo.com/')
+        // }
+        //
+        // }else{
+        //     const localToSet = e.target.value === 'default' ? process.env.NEXT_PUBLIC_DEFAULT_LOCAL : e.target.value
+        //     router?.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale: localToSet})
+        // }
     }
 
     return (

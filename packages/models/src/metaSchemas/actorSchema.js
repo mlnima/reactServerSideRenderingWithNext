@@ -1,7 +1,6 @@
 "use strict";
 exports.__esModule = true;
-var tslib_1 = require("tslib");
-var mongoose_1 = tslib_1.__importDefault(require("mongoose"));
+var mongoose_1 = require("mongoose");
 var Schema = mongoose_1["default"].Schema;
 var actorSchema = new Schema({
     name: {

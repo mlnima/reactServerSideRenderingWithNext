@@ -1,10 +1,18 @@
 "use strict";
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
 exports.__esModule = true;
 exports.uniqArrayBy = void 0;
-var tslib_1 = require("tslib");
 var uniqArrayBy = function (dataArray, key) {
     //@ts-ignore
-    return tslib_1.__spreadArray([], tslib_1.__read(new Map(dataArray.map(function (item) { return [item[key], item]; })).values()), false);
+    return __spreadArray([], new Map(dataArray.map(function (item) { return [item[key], item]; })).values(), true);
 };
 exports.uniqArrayBy = uniqArrayBy;
 exports["default"] = exports.uniqArrayBy;
