@@ -1,13 +1,16 @@
-import {useAdminDispatch} from "../../../../../store_toolkit/hooks";
-import {loading} from "../../../../../store_toolkit/clientReducers/globalStateReducer";
+import {useAdminDispatch} from "@store_toolkit/hooks";
+import {loading} from "@store_toolkit/clientReducers/globalStateReducer";
 import SvgRenderer from "../../../../global/commonComponents/SvgRenderer/SvgRenderer";
+import {WidgetData} from "typescript-types";
+import {FC} from "react";
 
-const ExportWidget = props => {
+interface PropTypes{
+    widgetData:WidgetData
+}
+const ExportWidget:FC<PropTypes> = ({widgetData}) => {
     const dispatch = useAdminDispatch()
     const onExportHandler = () => {
-        const data = [{
-            ...props.data,
-        }]
+        const data = [widgetData]
 
         let filename = `${Date.now().toLocaleString()}-widget.json`;
         let contentType = "application/json;charset=utf-8;";

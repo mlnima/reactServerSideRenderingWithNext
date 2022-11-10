@@ -2,40 +2,35 @@ import {FC, useMemo} from "react";
 import Link from "next/link";
 import {useRouter} from "next/router";
 import {UniqueDataTypes} from "typescript-types";
+import useTranslation from "next-translate/useTranslation";
 
 
 interface LinkToPropTypes {
-    linkTo: string,
-    linkToText: string,
-    linkToWindowType: string,
     translations: {},
     uniqueData:UniqueDataTypes
 }
 
-const LinkTo: FC<LinkToPropTypes> =
-    ({
-         linkTo,
-         linkToText,
-         linkToWindowType,
-         translations,
-         uniqueData
-     }) => {
+const LinkTo: FC<LinkToPropTypes> = ({translations, uniqueData}) => {
         const {locale} = useRouter()
+        const {t} = useTranslation();
 
         const linkContent = useMemo(() => {
-            return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? uniqueData?.linkToText || linkToText :
-                             uniqueData?.translations?.[locale]?.linkToText || translations?.[locale]?.linkToText || linkToText
-        }, [linkTo,linkToText,linkToWindowType,translations])
+            const widgetTranslation =  locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? uniqueData?.linkToText || uniqueData.linkToText :
+                             uniqueData?.translations?.[locale]?.uniqueData?.linkToText || translations?.[locale]?.uniqueData?.linkToText || uniqueData.linkToText;
 
-        if (uniqueData?.linkTo||linkTo) {
+            return    t(`common:${widgetTranslation}`, {},
+                {fallback:t(`customTranslation:${widgetTranslation}`,{},
+                        {fallback:widgetTranslation})})
+
+        }, [uniqueData,translations])
+
+        if (uniqueData?.linkTo) {
             return (
-                <Link href={uniqueData?.linkTo || linkTo || '/'}
-                      target={uniqueData?.linkToWindowType || linkToWindowType || '_self'}
+                <Link href={uniqueData?.linkTo}
+                      target={uniqueData?.linkToWindowType || '_self'}
                       className={'link-to'}
                       title={linkContent}>
-
                         {linkContent}
-
                 </Link>
             )
         } else return null

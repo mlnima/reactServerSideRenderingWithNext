@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useState} from 'react';
 import {useSelector} from 'react-redux';
 import styled from "styled-components";
 import dynamic from "next/dynamic";
@@ -12,42 +12,12 @@ const AuthenticationLoggedInItems = dynamic(() =>
     {loading: () => <p>Signing in...</p>}
 )
 
-
 const AuthenticationStyledDiv = styled.div`
 
   .icon {
     background-color: var(--auth-widget-text-color, #fff);
   }
-
-  //.profile {
-  //  mask: url('/public/asset/images/icons/user-solid.svg') no-repeat center;
-  //  -webkit-mask: url('/public/asset/images/icons/user-solid.svg') no-repeat center;
-  //}
-
-
-  //.profile-icon {
-  //  width: 30px;
-  //  height: 30px;
-  //  display: flex;
-  //  justify-content: center;
-  //  align-items: center;
-  //  padding: 0 2px;
-  //  margin: auto;
-  //  cursor: pointer;
-  //
-  //  .profile-button-icon {
-  //    width: 24px;
-  //    height: 24px;
-  //    cursor: pointer;
-  //  }
-  //
-  //  .profile-button-image {
-  //    width: 30px;
-  //    height: 30px;
-  //    border-radius: 50%;
-  //  }
-  //}
-
+  
   .authentication-widget-wrapper {
     border-left: var(--default-border);
     padding: 10px;
@@ -169,7 +139,6 @@ const Authentication: FC = () => {
     const [open, setOpen] = useState(null)
 
     const onOpenCloseHandler = () => {
-        // dispatch(setAlert({message: 'you can not use this username', type: 'error', active: true}))
         setOpen(!open)
     }
 

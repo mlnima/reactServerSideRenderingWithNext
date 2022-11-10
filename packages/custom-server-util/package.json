@@ -26,6 +26,7 @@
     "@types/jest": "latest",
     "eslint": "^7.32.0",
     "jest": "latest",
+    "compression": "^1.7.4",
     "jest-presets": "*",
     "eslint-config-custom": "*",
     "tsconfig": "*",

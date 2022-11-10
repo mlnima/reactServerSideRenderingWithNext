@@ -1,16 +1,29 @@
 import dotenv from 'dotenv';
 dotenv.config({path: '../../.env'});
-connectToDatabase('Setup')
 import {connectToDatabase} from 'custom-server-util';
-import {settingSchema, widgetSchema, userSchema} from 'models';
+
+import {settingSchema, widgetSchema, userSchema,postSchema} from 'models';
 import bcrypt from 'bcryptjs';
 import uuidAPIKey from 'uuid-apikey';
 import defaultIdentitySettings from "../asset/defaultIdentitySettings";
 import defaultDesignSettings from "../asset/defaultDesignSettings";
 import defaultAdminAccountData from "../asset/defaultAdminAccountData";
+import defaultMembershipSettings from "../asset/defaultMembershipSettings";
+import defaultHelloWorldPost from "../asset/defaultHelloWorldPost";
 import defaultWidgets from "../asset/defaultWidgets";
 import {isEmptyObject} from 'custom-util'
+import {error} from "next/dist/build/output/log";
 
+// console.log(process.env)
+
+
+const createHelloWorldPost = async ()=>{
+    const postDataToSave = new postSchema(defaultHelloWorldPost)
+    postDataToSave.save().catch(err => {
+        console.log(err)
+        console.log('Error on HelloWorldPost')
+    })
+}
 const setWidgets = async () => {
     try {
         for await (const widget of defaultWidgets) {
@@ -24,6 +37,8 @@ const setWidgets = async () => {
         console.log(error)
     }
 }
+
+
 
 
 const setSettings = async () => {
@@ -42,10 +57,13 @@ const setSettings = async () => {
         // }
 
         const identityToSave = new settingSchema(defaultIdentitySettings)
-        await identityToSave.save(error => console.log(error))
+        await identityToSave.save(error => console.log(error || ''))
 
         const siteDesignToSave = new settingSchema(defaultDesignSettings)
-        await siteDesignToSave.save(error => console.log(error))
+        await siteDesignToSave.save(error => console.log(error || ''))
+
+        const membershipSettings = new settingSchema(defaultMembershipSettings)
+        await membershipSettings.save(error => console.log(error || ''))
 
     } catch (error) {
         console.log(error)
@@ -82,17 +100,19 @@ const createAdminAccount = async () => {
 
 
 const runScripts = async () => {
-
+    await connectToDatabase('Setup')
     await createAdminAccount()
     await setWidgets()
     await setSettings()
+    await createHelloWorldPost()
 }
 
 runScripts().then(() => {
     // process.exit()
     setTimeout(()=>{
         process.exit()
-    },15000)
+    },10000)
+
 })
 
 

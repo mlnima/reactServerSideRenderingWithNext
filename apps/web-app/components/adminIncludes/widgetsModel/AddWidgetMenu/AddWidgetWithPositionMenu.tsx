@@ -1,12 +1,12 @@
 import React, {FC, useRef, useState} from 'react';
-import * as widgetModels from './models'
+import * as defaultWidgetsData from './defaultWidgetsData'
 import {convertVariableNameToName} from "custom-util";
 import {useSelector} from 'react-redux';
 import styled from "styled-components";
 import {widgetsStaticPositions} from 'data-structures';
 import Draggable from 'react-draggable';
-import {fetchAdminPanelAddNewWidget} from "../../../../store_toolkit/adminReducers/adminWidgetsReducer";
-import {useAdminDispatch} from "../../../../store_toolkit/hooks";
+import {fetchAdminPanelAddNewWidget} from "@store_toolkit/adminReducers/adminWidgetsReducer";
+import {useAdminDispatch} from "@store_toolkit/hooks";
 import {Store} from "typescript-types";
 import dynamic from "next/dynamic";
 
@@ -54,25 +54,25 @@ const AddWidgetWithPositionMenu: FC<AddWidgetWithPositionMenuPropType> = ({type,
     const [open, setOpen] = useState(false)
 
     const onAddNewWidget = (position: string, type: string) => {
-        const widgetModelData = type === 'text' || type === 'textEditor' ? widgetModels.textWidgetModel :
-            type === 'menu' ? widgetModels.menuWidgetModel :
-                type === 'postsSlider' || type === 'imagesSlider' ? widgetModels.slider :
-                    type === 'postsSlider' || type === 'imagesSlider' ? widgetModels.slider :
-                        type === 'linkTo' ? widgetModels.linkToWidgetModel :
-                            type === 'multipleLinkTo' ? widgetModels.multipleLinkToWidgetModel :
-                                type === 'posts' ? widgetModels.postsWidgetModel :
-                                    type === 'media' ? widgetModels.mediaWidgetModel :
-                                        type === 'searchBar' ? widgetModels.searchBarWidgetModel :
-                                            type === 'searchButton' ? widgetModels.searchBarWidgetModel :
-                                                type === 'recentComments' ? widgetModels.recentCommentsWidgetModel :
-                                                    type === 'meta' ? widgetModels.metaWidgetModel :
-                                                        type === 'logo' ? widgetModels.logoWidgetModel :
-                                                            type === 'shoppingCart' ? widgetModels.shoppingCartWidgetModel :
-                                                                type === 'alphabeticalNumericalRange' ? widgetModels.alphabeticalNumericalRangeWidgetModel :
-                                                                    type === 'language' ? widgetModels.languageWidgetModel :
-                                                                        type === 'alphabeticalNumericalRange' ? widgetModels.authenticationWidgetModel :
-                                                                                type === 'postsSlider' ? widgetModels.postsWidgetModel :
-                                                                                    widgetModels;
+        const widgetModelData = type === 'text' || type === 'textEditor' ? defaultWidgetsData.textWidgetModel :
+            type === 'menu' ? defaultWidgetsData.menuWidgetModel :
+                type === 'postsSlider' || type === 'imagesSlider' ? defaultWidgetsData.slider :
+                    type === 'postsSlider' || type === 'imagesSlider' ? defaultWidgetsData.slider :
+                        type === 'linkTo' ? defaultWidgetsData.linkToWidgetModel :
+                            type === 'multipleLinkTo' ? defaultWidgetsData.multipleLinkToWidgetModel :
+                                type === 'posts' ? defaultWidgetsData.postsWidgetModel :
+                                    type === 'media' ? defaultWidgetsData.mediaWidgetModel :
+                                        type === 'searchBar' ? defaultWidgetsData.searchBarWidgetModel :
+                                            type === 'searchButton' ? defaultWidgetsData.searchBarWidgetModel :
+                                                type === 'recentComments' ? defaultWidgetsData.recentCommentsWidgetModel :
+                                                    type === 'meta' ? defaultWidgetsData.metaWidgetModel :
+                                                        type === 'logo' ? defaultWidgetsData.logoWidgetModel :
+                                                            type === 'shoppingCart' ? defaultWidgetsData.shoppingCartWidgetModel :
+                                                                type === 'alphabeticalNumericalRange' ? defaultWidgetsData.alphabeticalNumericalRangeWidgetModel :
+                                                                    type === 'language' ? defaultWidgetsData.languageWidgetModel :
+                                                                        type === 'alphabeticalNumericalRange' ? defaultWidgetsData.authenticationWidgetModel :
+                                                                                type === 'postsSlider' ? defaultWidgetsData.postsWidgetModel :
+                                                                                    {};
 
         const highestIndexInTheSamePosition = Math.max(...(adminPanelWidgets?.[position] || []).map(widget => widget?.data?.widgetIndex), 0)
 

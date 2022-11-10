@@ -1,24 +1,33 @@
 import React, {useEffect, useState, useRef} from 'react';
-import {fetchAdminPanelAddNewWidget} from "../../../../../store_toolkit/adminReducers/adminWidgetsReducer";
+import {fetchAdminPanelAddNewWidget} from "@store_toolkit/adminReducers/adminWidgetsReducer";
+import {useAdminDispatch} from "@store_toolkit/hooks";
 
 const WidgetImporter = () => {
     const inputFile = useRef(null)
-    const [state, setState] = useState({
-        data:[]
-    });
+    const dispatch = useAdminDispatch()
+    // const [widgets,setWidgets] = useState([])
 
-    const [widgets,setWidgets] = useState([])
+    // useEffect( () => {
+    //     onWidgetImportHandler()
+    // }, [widgets]);
 
-    useEffect( () => {
-        //@ts-ignore
-        onWidgetImportHandler()
-    }, [state.data]);
+    // const onWidgetImportHandler = async ()=>{
+    //     if (widgets?.length){
+    //         for await (let widget of widgets){
+    //             dispatch(fetchAdminPanelAddNewWidget(widget))
+    //         }
+    //     }
+    // }
 
-    const onWidgetImportHandler = async ()=>{
-        if (state?.data?.length){
+    const onLoadHandler = async (e)=>{
+        try {
+            //@ts-ignore
+            const widgets = JSON.parse(e.target.result)
             for await (let widget of widgets){
-                fetchAdminPanelAddNewWidget(widget)
+                dispatch(fetchAdminPanelAddNewWidget(widget))
             }
+        }catch (error){
+
         }
     }
 
@@ -27,10 +36,7 @@ const WidgetImporter = () => {
             <input ref={inputFile} style={{display:'none'}} type='file' onChange={async e => {
                 const reader = new FileReader()
                 reader.readAsText(e.target.files[0])
-                reader.onload = e => {
-                    //@ts-ignore
-                    setWidgets(JSON.parse(e.target.result))
-                }
+                reader.onload = async (e) => onLoadHandler(e)
             }}/>
             <button className='btn btn-primary' onClick={()=>inputFile.current.click()}>
                 Import Widget

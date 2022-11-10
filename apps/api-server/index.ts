@@ -52,6 +52,9 @@ const runServer = () => {
     server.use('/public', express.static(path.join(__dirname, publicPath), {maxAge: "604800000"}))
     // server.use('/public', express.static(path.join(__dirname, publicOldPath), {maxAge: "604800000"}))
 
+    server.get('/api/alive', (req, res) => {
+        res.json({message: 'alive'})
+    });
     server.get('/api/admin/settings/clearCaches', adminAuthMiddleware, (req, res) => {
         //@ts-ignore
         apiCache.clear(req.params?.collection)

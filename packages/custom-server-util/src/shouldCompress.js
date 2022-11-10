@@ -1,8 +1,7 @@
 "use strict";
 exports.__esModule = true;
-// @ts-ignore
-var compression_1 = require("compression");
-//@ts-ignore
+var tslib_1 = require("tslib");
+var compression_1 = tslib_1.__importDefault(require("compression"));
 var shouldCompress = function (req, res) {
     if (req.headers['x-no-compression']) {
         return false;

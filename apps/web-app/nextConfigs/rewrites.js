@@ -1,7 +1,22 @@
 
+const apiServerProxy = process.env.NEXT_PUBLIC_API_SERVER_URL === process.env.NEXT_PUBLIC_PRODUCTION_URL ?
+      [
+          {
+              source: "/api/:path*",
+              destination: `${process.env.NEXT_PUBLIC_API_SERVER_URL}/api/:path*`,
+          },
+          {
+              source: "/public/:path*",
+              destination: `${process.env.NEXT_PUBLIC_API_SERVER_URL}/public/:path*`,
+          },
+      ] :[]
+
+
+
 module.exports = () => {
     return {
         beforeFiles: [
+            ...apiServerProxy,
 
             // {
             //     source: "/:host(^(?!.*\\api\\b).*$)",
@@ -33,16 +48,14 @@ module.exports = () => {
             //     source: "/sitemap.xml",
             //     destination: `/xml/sitemap.xml`,
             // },
-            {
-                source: "/api/:path*",
-                destination: `${process.env.NEXT_PUBLIC_API_SERVER_URL}/api/:path*`,
-            },
-            {
-                source: "/public/:path*",
-                destination: `${process.env.NEXT_PUBLIC_API_SERVER_URL}/public/:path*`,
-            },
-
-
+            // {
+            //     source: "/api/:path*",
+            //     destination: `${process.env.NEXT_PUBLIC_API_SERVER_URL}/api/:path*`,
+            // },
+            // {
+            //     source: "/public/:path*",
+            //     destination: `${process.env.NEXT_PUBLIC_API_SERVER_URL}/public/:path*`,
+            // },
             // {
             //     // source: "//:host(^(?!.*\\\\sitemap\\\\b).*$)",
             //     source: "/:host(^sitemap|xxx)?",

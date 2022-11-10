@@ -70,7 +70,7 @@ const ActionButtons: FC<ActionButtonsPropTypes> = ({widgetData, widgetId, widget
             </button>
 
 
-            <ExportWidget data={{...widgetData}}/>
+            <ExportWidget widgetData={widgetData}/>
             <button className={'btn btn-primary'} title="clone" onClick={() => onCloneHandler()}>
                 <SvgRenderer svgUrl={'/asset/images/icons/clone-solid.svg'}
                              size={20}
