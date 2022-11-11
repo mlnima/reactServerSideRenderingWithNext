@@ -13,7 +13,7 @@ import SvgRenderer from "../../global/commonComponents/SvgRenderer/SvgRenderer";
 import {Store} from "typescript-types";
 
 const LoginRegisterPopupFormsStyledDiv = styled.div`
-  background-color: var(--navigation-background-color, #18181b);
+  background-color: var(--secondary-background-color, #181818);
   width: 100%;
   max-width: 320px;
   padding: 0 5px 10px 5px;
@@ -151,7 +151,7 @@ const LoginRegisterPopupFormsStyledDiv = styled.div`
     .login-register-form-button {
       border: none;
       background-color: var(--main-active-color, #f90);
-      color: var(--navigation-background-color, #18181b);
+      color: var(--secondary-background-color, #181818);
       font-weight: bold;
       font-size: 18px;
       padding: 10px 0;

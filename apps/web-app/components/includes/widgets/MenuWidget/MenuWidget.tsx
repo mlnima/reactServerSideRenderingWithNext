@@ -16,7 +16,7 @@ const MenuWidgetStyledDiv = styled.div`
   }
 
   .menu-widget-items {
-    background-color: var(--navigation-background-color, #18181b);
+    background-color: var(--secondary-background-color, #181818);
     top: 0;
     left: 0;
     bottom: 0;

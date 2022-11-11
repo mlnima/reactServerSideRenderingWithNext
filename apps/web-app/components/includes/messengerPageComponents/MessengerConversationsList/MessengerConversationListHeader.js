@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Authentication from "../../widgets/Authentication/Authentication";
 
 const MessengerConversationListHeaderStyledDiv = styled.div`
-  background-color: var(--navigation-background-color, #18181b);
+  background-color: var(--secondary-background-color, #181818);
   height: 56px;
   width: 100%;
   display: flex;

@@ -34,13 +34,13 @@ const AlphabeticalNumericalRangeLinksWidgetStyledDiv = styled.div`
       margin: 5px;
       border-radius: 5px;
       transition: width 2s linear 1s;
-      background-color: var(--navigation-background-color, #18181b);
+      background-color: var(--secondary-background-color, #181818);
       color: var(--main-text-color, #ccc);
     }
 
     .active-item {
       background-color: var(--main-active-color, #f90);
-      color: var(--navigation-background-color, #18181b);
+      color: var(--secondary-background-color, #181818);
     }
 
     .current-query {

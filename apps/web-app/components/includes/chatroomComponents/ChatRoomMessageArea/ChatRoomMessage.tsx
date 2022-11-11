@@ -5,7 +5,7 @@ import styled from "styled-components";
 import {ChatroomMessage} from "typescript-types";
 
 const ChatRoomLogMessageStyledDiv = styled.div`
-  background-color: var(--navigation-background-color, #18181b);
+  background-color: var(--secondary-background-color, #181818);
 
   .chatroom-message-area-message-log {
     color: var(--main-text-color, #fff);
@@ -56,7 +56,7 @@ const ChatRoomMessageStyledDiv = styled.div`
   }
 
   .chatroom-message-area-message-data {
-    background-color: var(--navigation-background-color, #18181b);
+    background-color: var(--secondary-background-color, #181818);
     padding: 10px;
     margin: 5px;
     border-radius: 10px;

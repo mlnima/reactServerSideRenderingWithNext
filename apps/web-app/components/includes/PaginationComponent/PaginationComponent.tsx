@@ -12,7 +12,7 @@ const PaginationComponentStyledDiv = styled.div`
 
   .pagination-item {
     color: var(--main-text-color, #fff);
-    background-color:var(--navigation-background-color,#18181b) ;
+    background-color:var(--secondary-background-color, #181818) ;
     padding: 5px 10px;
     margin: 5px;
     border-radius: 5px;
@@ -20,7 +20,7 @@ const PaginationComponentStyledDiv = styled.div`
   }
   
   .active-item{
-    color: var(--navigation-background-color,#18181b);
+    color: var(--secondary-background-color, #181818);
     background-color:var(--main-active-color,#f90) ;
   }
   @media only screen and (max-width: 768px) {

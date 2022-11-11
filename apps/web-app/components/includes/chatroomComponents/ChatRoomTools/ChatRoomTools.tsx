@@ -15,7 +15,7 @@ const ChatRoomToolsStyledFrom = styled.form`
   bottom: 0;
   height: 50px;
   padding: 2px;
-  background-color: var(--navigation-background-color, #18181b);
+  background-color: var(--secondary-background-color, #181818);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,7 +25,7 @@ const ChatRoomToolsStyledFrom = styled.form`
     position: absolute;
     top: -14px;
     left: 10px;
-    background-color: var(--navigation-background-color, #18181b);
+    background-color: var(--secondary-background-color, #181818);
     color: var(--main-text-color, #fff);
   }
 
@@ -51,7 +51,7 @@ const ChatRoomToolsStyledFrom = styled.form`
     right: 8px;
 
     .chatroom-tools-content-submit-button {
-      background-color: var(--navigation-background-color, #18181b);
+      background-color: var(--secondary-background-color, #181818);
       border: none;
       width: 34px;
       height: 34px;

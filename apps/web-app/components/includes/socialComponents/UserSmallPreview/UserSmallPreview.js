@@ -10,7 +10,7 @@ const UserSmallPreviewStyledSpan = styled.span`
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    background-color: var(--navigation-background-color, #18181b);
+    background-color: var(--secondary-background-color, #181818);
     margin: 10px auto;
 
     .user-profile-image {

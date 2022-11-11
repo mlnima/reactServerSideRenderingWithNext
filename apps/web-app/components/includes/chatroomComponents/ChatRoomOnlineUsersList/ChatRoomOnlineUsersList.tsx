@@ -6,7 +6,7 @@ import {Store} from "typescript-types";
 
 const ChatRoomOnlineUsersListStyledDiv = styled.div`
   display: initial;
-  background-color: var(--navigation-background-color, #18181b);
+  background-color: var(--secondary-background-color, #181818);
   position: fixed;
   width: 150px;
   top: 48px;

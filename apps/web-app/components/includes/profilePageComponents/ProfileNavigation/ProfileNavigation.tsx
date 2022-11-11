@@ -31,7 +31,7 @@ const ProfileNavigationStyledDiv = styled.div`
       }
 
       &:active {
-        color: var(--navigation-background-color, #18181b);
+        color: var(--secondary-background-color, #181818);
         background-color: var(--main-text-color, #fff);
       }
     }

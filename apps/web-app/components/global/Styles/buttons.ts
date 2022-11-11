@@ -59,7 +59,7 @@ const buttons = css`
     color: var(--dark-button-link-text-color, #fff);
   }
   .btn-navigation{
-    background-color:var(--navigation-background-color, #18181b);
+    background-color:var(--secondary-background-color, #181818);
     color: var(--main-text-color, #fff);
     border: none;
   }

@@ -68,7 +68,7 @@ const MessengerCallStyledDiv = styled.div`
       flex-direction: column;
       padding: 5px 10px;
       align-items: flex-start;
-      background-color: var(--navigation-background-color, #18181b);
+      background-color: var(--secondary-background-color, #181818);
       color: var(--main-text-color, #fff);
       position: absolute;
       top: 5px;

@@ -4,7 +4,7 @@ import React, {FC} from "react";
 import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 
 const ChatRoomHeaderStyledHeader = styled.header`
-  background-color: var(--navigation-background-color, #18181b);
+  background-color: var(--secondary-background-color, #181818);
   height: 56px;
   display: flex;
   justify-content: space-between;
