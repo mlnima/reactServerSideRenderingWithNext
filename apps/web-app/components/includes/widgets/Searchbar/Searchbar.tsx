@@ -27,11 +27,11 @@ const SearchbarStyledDiv = styled.div`
     left: 0;
     right: 0;
     width: 100%;
-    background: var(--serachbar-widget-background, #252525);
+    background: var(--main-background-color, #000);
 
     .search-button-widget-close-btn, .searchbar-submit-btn, .search-button-widget-clear-keyword {
-      background: var(--serachbar-widget-buttons-background, #252525);
-      color: var(--serachbar-widget-text-color, #fff);
+      background: var(--main-background-color, #000);
+      color: var(--main-text-color, #fff);
       border: none;
       outline: none;
       display: flex;
@@ -144,7 +144,7 @@ const Searchbar = () => {
 
                 <SvgRenderer svgUrl={'/asset/images/icons/magnifying-glass-solid.svg'}
                              size={25}
-                             color={'var(--serachbar-widget-text-color, #fff)'}/>
+                             color={'var(--main-text-color, #fff)'}/>
 
             </button>
 
@@ -156,7 +156,7 @@ const Searchbar = () => {
                     <SvgRenderer svgUrl={'/asset/images/icons/xmark-solid.svg'}
                                  size={25}
                                  customClassName={'search-button-widget-close-btn-icon'}
-                                 color={'var(--serachbar-widget-text-color, #fff)'}/>
+                                 color={'var(--main-text-color, #fff)'}/>
                 </span>
 
                 {!!keyword?.length &&
@@ -166,7 +166,7 @@ const Searchbar = () => {
                     <SvgRenderer svgUrl={'/asset/images/icons/xmark-solid.svg'}
                                  size={25}
                                  customClassName={'search-button-widget-clear-keyword-icon'}
-                                 color={'var(--serachbar-widget-text-color, #fff)'}/>
+                                 color={'var(--main-text-color, #fff)'}/>
                 </span>}
                 <input type="text"
                        onChange={e => setKeyword(e.target.value)}
@@ -181,7 +181,7 @@ const Searchbar = () => {
                     <SvgRenderer svgUrl={'/asset/images/icons/magnifying-glass-solid.svg'}
                                  size={25}
                                  customClassName={'searchbar-submit-btn-icon'}
-                                 color={'var(--serachbar-widget-text-color, #fff)'}/>
+                                 color={'var(--main-text-color, #fff)'}/>
                 </button>
 
             </form>

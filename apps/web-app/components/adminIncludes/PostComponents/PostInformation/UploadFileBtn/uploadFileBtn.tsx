@@ -73,7 +73,7 @@ const UploadFileBtn = props => {
 
                 <SvgRenderer svgUrl={'/asset/images/icons/upload-solid.svg'}
                              size={25}
-                             color={'var(--serachbar-widget-text-color, #fff)'}
+                             color={'var(--main-text-color, #fff)'}
                 />
             </button>
         </UploadFileBtnStyledDiv>

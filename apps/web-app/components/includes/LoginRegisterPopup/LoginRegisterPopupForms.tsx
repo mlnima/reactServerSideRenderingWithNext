@@ -286,7 +286,7 @@ const LoginRegisterPopupForms: FC = () => {
                         <SvgRenderer svgUrl={'/asset/images/icons/xmark-solid.svg'}
                                      size={25}
                                      customClassName={'close-form-button-icon'}
-                                     color={'var(--serachbar-widget-text-color, #fff)'}
+                                     color={'var(--main-text-color, #fff)'}
                         />
                     </button>
                 </div>

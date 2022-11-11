@@ -33,7 +33,7 @@ const AdminActionMenu: FC = () => {
                     <SvgRenderer svgUrl={'/asset/images/icons/user-solid.svg'}
                                  size={20}
                                  customClassName={'adminTopBarItem-icon'}
-                                 color={'var(--serachbar-widget-text-color, #fff)'}/>
+                                 color={'var(--main-text-color, #fff)'}/>
                 </span>
             <div className={'admin-panel-topbar-action-menu-items'}>
                 <button className='AdminActionMenuItem adminTopBarItem'> My Profile</button>

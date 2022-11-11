@@ -139,7 +139,7 @@ const ThumbnailUploadArea: FC<PropTypes> = ({onUploadHandler, image, postId}) =>
             {/*    <SvgRenderer svgUrl={'/public/asset/images/icons/camera-solid.svg'}*/}
             {/*                 size={70}*/}
             {/*                 customClassName={'camera'}*/}
-            {/*                 color={'var(--serachbar-widget-text-color, #fff)'}/>*/}
+            {/*                 color={'var(--main-text-color, #fff)'}/>*/}
             {/*    <SvgRenderer svgUrl={'/public/asset/images/icons/circle-plus-solid.svg'}*/}
             {/*                 size={20}*/}
             {/*                 customClassName={'plus'}*/}

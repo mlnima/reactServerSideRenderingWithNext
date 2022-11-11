@@ -226,7 +226,7 @@ const AdminPanelMainMenu = () => {
                                          customStyle={
                                              `transform:${ hovered === item ? `rotate(-90deg);` : `rotate(0deg);`}`
                                          }
-                                         color={'var(--serachbar-widget-text-color, #fff)'}
+                                         color={'var(--main-text-color, #fff)'}
                             />
                        </span>
                         : null}

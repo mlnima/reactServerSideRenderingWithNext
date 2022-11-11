@@ -110,7 +110,7 @@ const WidgetHeaderControl: FC<WidgetHeaderControlPropType> =
                     <SvgRenderer svgUrl={widgetData.stayOpen ? '/asset/images/icons/lock-open-solid.svg':
                         '/asset/images/icons/lock-solid.svg'}
                                  size={25}
-                                 color={'var(--serachbar-widget-text-color, #fff)'}
+                                 color={'var(--main-text-color, #fff)'}
                     />
 
                 </div>
@@ -127,13 +127,13 @@ const WidgetHeaderControl: FC<WidgetHeaderControlPropType> =
                         <SvgRenderer svgUrl={'/asset/images/icons/sort-up-solid.svg'}
                                      size={25}
                                      customClassName={'show-password'}
-                                     color={'var(--serachbar-widget-text-color, #fff)'}
+                                     color={'var(--main-text-color, #fff)'}
                         />
                     </button>
                     <button className='changeWidgetIndexBtn' onClick={() => changeWidgetIndex(true)}>
                         <SvgRenderer svgUrl={'/asset/images/icons/sort-down-solid.svg'}
                                      size={25}
-                                     color={'var(--serachbar-widget-text-color, #fff)'}
+                                     color={'var(--main-text-color, #fff)'}
                         />
                     </button>
                 </div>
