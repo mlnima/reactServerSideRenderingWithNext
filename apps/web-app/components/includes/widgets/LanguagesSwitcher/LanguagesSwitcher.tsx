@@ -31,7 +31,7 @@ const LanguagesSwitcherStyledDiv = styled.div`
     border: none;
     width: 70px;
     font-size: initial;
-    background-color: var(--secondary-background-color, #181818);
+    background-color: var(--main-background-color, #000);
     color: var(--main-text-color, #fff);
   }
 `

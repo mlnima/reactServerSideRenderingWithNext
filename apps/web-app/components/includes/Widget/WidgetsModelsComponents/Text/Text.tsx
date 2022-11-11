@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {useRouter} from "next/router";
-import {FC, useMemo} from "react";
+import {FC} from "react";
 import parse from 'html-react-parser'
 
 const WidgetTextTextDataStyledDiv = styled.div`
@@ -16,13 +16,13 @@ interface TextPropTypes {
 const Text: FC<TextPropTypes> = ({translations, text}) => {
     const {locale} = useRouter();
 
-    const textToRender = useMemo(() => {
-        return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? text : translations?.[locale]?.text || text || '';
-    }, [text,translations])
+    // const textToRender = useMemo(() => {
+    //     return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? text : translations?.[locale]?.text || text || '';
+    // }, [text,translations,locale])
 
     return (
         <WidgetTextTextDataStyledDiv className={'widgetText widget-text'} >
-            {parse(textToRender)}
+            {parse(locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? text : translations?.[locale]?.text || text || '')}
         </WidgetTextTextDataStyledDiv>
     );
 
