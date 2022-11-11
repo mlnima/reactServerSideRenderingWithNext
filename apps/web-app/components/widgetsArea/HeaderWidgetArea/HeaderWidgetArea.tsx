@@ -6,7 +6,7 @@ import {Store} from "typescript-types";
 
 let HeaderWidgetAreaStyle = styled.div`
   grid-area: header;
-  background-color: var(--secondary-background-color, #181818);
+  background-color: var(--main-background-color, #000);
   
   .header-content {
     display: flex;

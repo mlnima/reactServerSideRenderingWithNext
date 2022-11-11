@@ -4,7 +4,7 @@ import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
 import {useSelector} from "react-redux";
 import {Store} from "typescript-types";
 const StyledFooter = styled.footer`
-  background-color: var(--secondary-background-color,#181818);
+  background-color: var(--main-background-color,#000);
   grid-area: footer;
   padding: 0 10px 15px;
   .footer-content{

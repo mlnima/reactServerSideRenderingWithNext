@@ -5,7 +5,7 @@ import {useSelector} from "react-redux";
 import {Store} from "typescript-types";
 
 const Style = styled.div`
-  background-color: var(--secondary-background-color, #181818);
+  background-color: var(--main-background-color, #000);
   display: flex;
   //flex-wrap: wrap;
   padding: 5px;

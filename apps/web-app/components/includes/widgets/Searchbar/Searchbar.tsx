@@ -42,10 +42,10 @@ const SearchbarStyledDiv = styled.div`
     }
 
     .searchbar-input {
-      background: var(--serachbar-widget-input-background, #252525);
+      background: var(--main-background-color, #252525);
       border: none;
       outline: none;
-      color: var(--serachbar-widget-text-color, #fff);
+      color: var(--main-text-color, #fff);
     }
 
     .search-button-widget-clear-keyword {
