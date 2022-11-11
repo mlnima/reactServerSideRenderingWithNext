@@ -11,7 +11,7 @@ const PaginationComponentStyledDiv = styled.div`
   flex-wrap: wrap;
 
   .pagination-item {
-    color: var(--navigation-text-color,#ccc);
+    color: var(--main-text-color, #fff);
     background-color:var(--navigation-background-color,#18181b) ;
     padding: 5px 10px;
     margin: 5px;

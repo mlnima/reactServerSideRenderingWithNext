@@ -37,7 +37,7 @@ const PostMetaStyledDiv = styled.div`
       justify-content: flex-start;
       margin-right: 8px;
       margin-bottom:8px;
-      color: var(--meta-text-color, #000);
+      color: var(--secondary-text-color, #ccc);
       text-decoration: none;
 
       p {
@@ -48,7 +48,7 @@ const PostMetaStyledDiv = styled.div`
         margin-right: 5px;
         width: 14px;
         height: 14px;
-        background-color: var(--meta-text-color, #000);
+        background-color: var(--secondary-text-color, #ccc);
       }
     }
     

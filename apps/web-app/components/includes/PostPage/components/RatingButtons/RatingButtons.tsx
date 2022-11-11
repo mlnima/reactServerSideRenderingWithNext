@@ -16,12 +16,12 @@ import SvgRenderer from "../../../../global/commonComponents/SvgRenderer/SvgRend
 const RatingButtonsStyledDiv = styled.div`
  
   .rated-message {
-    color: var(--post-page-info-color, #ccc);
+    color: var(--secondary-text-color, #ccc);
   }
   .rating-item {
     .thumbs-up ,.thumbs-down{
       background-color: ${({buttonsDisabledStatus}: { buttonsDisabledStatus: boolean }) => {
-        return buttonsDisabledStatus ? `#666` : ` var(--post-page-info-color, #ccc)`
+        return buttonsDisabledStatus ? `#666` : ` var(--secondary-text-color, #ccc)`
       }};
     }
 
@@ -95,7 +95,7 @@ const RatingButtons: FC<RatingButtonsPropTypes> = ({rating}) => {
                         <SvgRenderer svgUrl={'/asset/images/icons/eye-regular.svg'}
                                      size={16}
                                      customClassName={'rate-logo view'}
-                                     color={'var(--post-page-info-color,#ccc)'}/>
+                                     color={'var(--secondary-text-color,#ccc)'}/>
                         <p className='rating-item-value'>{_shortNumber(views)} </p>
                     </span>
                 : null
@@ -112,7 +112,7 @@ const RatingButtons: FC<RatingButtonsPropTypes> = ({rating}) => {
                         <SvgRenderer svgUrl={'/asset/images/icons/thumbs-up-solid.svg'}
                                      size={16}
                                      customClassName={'rate-logo thumbs-up'}
-                                     color={'var(--post-page-info-color,#ccc)'}/>
+                                     color={'var(--secondary-text-color,#ccc)'}/>
                         <p className='rating-item-value'>{likes}</p>
                     </button>
                     <button className='rating-item'
@@ -124,7 +124,7 @@ const RatingButtons: FC<RatingButtonsPropTypes> = ({rating}) => {
                         <SvgRenderer svgUrl={`/asset/images/icons/thumbs-down-solid.svg`}
                                      size={16}
                                      customClassName={'rate-logo thumbs-down'}
-                                     color={'var(--post-page-info-color,#ccc)'}/>
+                                     color={'var(--secondary-text-color,#ccc)'}/>
                         <p className='rating-item-value'>{disLikes}</p>
                     </button>
                 </> : null

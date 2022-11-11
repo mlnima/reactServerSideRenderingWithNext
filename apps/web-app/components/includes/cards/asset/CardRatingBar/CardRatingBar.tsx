@@ -25,7 +25,7 @@ const CardRatingStyle = styled.div`
   }
 
   .rating-value-number{
-    color: var(--post-element-text-color, #ccc);
+    color: var(--secondary-text-color, #ccc);
     
   }
   .icon {
@@ -52,7 +52,7 @@ const CardRatingBar: FC<CardRatingBarPropTypes> = ({rating, className}) => {
                     <SvgRenderer svgUrl={'/asset/images/icons/thumbs-up-solid.svg'}
                                  size={11}
                                  customClassName={'rating'}
-                                 color={'var(--post-element-info-text-color, #ccc)'}/>
+                                 color={'var(--secondary-text-color, #ccc)'}/>
                     <span className={'rating-value-number'}>{rating}%</span>
                 </>
             }

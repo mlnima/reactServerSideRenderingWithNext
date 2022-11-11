@@ -33,7 +33,7 @@ const EventTypePostPage = dynamic(() =>
 const PageStyle = styled.div`
   .rating-price-download {
     width: 100%;
-    background-color: var(--post-page-info-background-color, #181818);
+    background-color: var(--secondary-background-color, #181818);
     display: flex;
     justify-content: center;
     flex-wrap: wrap;

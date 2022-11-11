@@ -20,7 +20,7 @@ const MessengerCallStyledDiv = styled.div`
     text-align: center;
     position: absolute;
     top: 50px;
-    color: var(--navigation-text-color, #ccc);
+    color: var(--main-text-color, #fff);
   }
 
 
@@ -69,7 +69,7 @@ const MessengerCallStyledDiv = styled.div`
       padding: 5px 10px;
       align-items: flex-start;
       background-color: var(--navigation-background-color, #18181b);
-      color: var(--navigation-text-color, #ccc);
+      color: var(--main-text-color, #fff);
       position: absolute;
       top: 5px;
       left: 0;
@@ -92,7 +92,7 @@ const MessengerCallStyledDiv = styled.div`
 
         .messenger-call-user-calling-message-answer-button, .messenger-call-user-calling-message-reject-button {
           background-color: transparent;
-          color: var(--navigation-text-color, #ccc);
+          color: var(--main-text-color, #fff);
           padding: 10px 20px;
           border: none;
           display: flex;
@@ -191,12 +191,12 @@ const MessengerCall = ({endCallHandler, callAccepted, attemptForAnswer, disableM
                                 <button className='messenger-call-user-calling-message-answer-button' onClick={answerCall}>
                                     <SvgRenderer svgUrl={'/asset/images/icons/phone-solid.svg'}
                                                  size={20}
-                                                 color={'var(--navigation-text-color, #ccc)'}/>
+                                                 color={'var(--main-text-color, #fff)'}/>
                                 </button>
                                 <button className='messenger-call-user-calling-message-reject-button' onClick={endCallHandler}>
                                     <SvgRenderer svgUrl={'/asset/images/icons/phone-slash-solid.svg'}
                                                  size={20}
-                                                 color={'var(--navigation-text-color, #ccc)'}/>
+                                                 color={'var(--main-text-color, #fff)'}/>
                                 </button>
                             </div>
 
@@ -208,7 +208,7 @@ const MessengerCall = ({endCallHandler, callAccepted, attemptForAnswer, disableM
                         <button onClick={endCallHandler} className='leave-call-button'>
                             <SvgRenderer svgUrl={'/asset/images/icons/phone-slash-solid.svg'}
                                          size={20}
-                                         color={'var(--navigation-text-color, #ccc)'}/>
+                                         color={'var(--main-text-color, #fff)'}/>
                         </button>
                     </div> : null}
                 </div>

@@ -7,7 +7,7 @@ import {Store} from "typescript-types";
 
 let StyledDiv = styled.div`
   grid-area: topbar;
-  background-color: var(--topbar-background-color, #000);
+  background-color: var(-secondary-background-color, #181818);
   height: 56px;
   display: flex;
   align-items: center;

@@ -49,7 +49,7 @@ const UserProfileImage: FC<UserProfileImagePropTypes> = ({size, profileRedirect}
         <SvgRenderer svgUrl={'/asset/images/icons/user-solid.svg'}
                      size={size - 10 || 48}
                      customClassName={'user-info-profile-button-icon'}
-                     color={' var(--auth-widget-text-color, #fff)'}
+                     color={' var(--main-text-color, #fff)'}
         />
 
     return (

@@ -7,11 +7,11 @@ const PriceStyledDiv = styled.div`
   align-items: center;
   font-size: 25px;
   font-weight: bold;
-  color: var(--post-page-info-color, #ccc);
+  color: var(--secondary-text-color, #ccc);
   .price-info-logo {
     width: 24px;
     height: 24px;
-    color: var(--post-page-info-color, #ccc);
+    color: var(--secondary-text-color, #ccc);
   }
 `
 

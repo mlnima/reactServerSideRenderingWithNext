@@ -14,14 +14,14 @@ let TitleDescriptionStyledDiv = styled.div`
   }
   .text-editors{
     background-color: var(--main-background-color, #000);
-    color: var(--post-page-info-color, #ccc);
+    color: var(--secondary-text-color, #ccc);
     .text-editors-content{
       .quill{
         //margin-left: -1%;
         .ql-container{
           width: 100%;
           height: 80vh;
-           color: var(--post-page-info-color, #ccc);
+           color: var(--secondary-text-color, #ccc);
           background-color: var(--main-background-color, #000);
         }
       }
@@ -31,7 +31,7 @@ let TitleDescriptionStyledDiv = styled.div`
             .se-wrapper {
               height: 100%;
               .se-wrapper-inner {
-                color: var(--post-page-info-color, #ccc);
+                color: var(--secondary-text-color, #ccc);
                 background-color: var(--main-background-color, #000);
               }
             }

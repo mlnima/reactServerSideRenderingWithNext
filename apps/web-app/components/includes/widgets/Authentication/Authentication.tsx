@@ -14,9 +14,7 @@ const AuthenticationLoggedInItems = dynamic(() =>
 
 const AuthenticationStyledDiv = styled.div`
 
-  .icon {
-    background-color: var(--auth-widget-text-color, #fff);
-  }
+
   
   .authentication-widget-wrapper {
     border-left: var(--default-border);
@@ -25,7 +23,7 @@ const AuthenticationStyledDiv = styled.div`
     position: fixed;
     right: 0;
     top: 0;
-    background: var(--auth-widget-background, #000);
+    background: var(--main-background-color, #000);
     width: 85%;
     z-index: 12;
     height: 100vh;
@@ -57,11 +55,11 @@ const AuthenticationStyledDiv = styled.div`
         position: relative;
 
         a {
-          color: var(--auth-widget-text-color, #fff);
+          color: var(--main-text-color, #fff);
         }
 
         .icon-wrapper {
-          background-color: var(--auth-widget-mobile-items-background-color, #222);
+          background-color: var(--main-text-color, #222);
           width: 60px;
           height: 60px;
           border-radius: 50%;
@@ -92,7 +90,7 @@ const AuthenticationStyledDiv = styled.div`
         height: auto;
         min-height: 52px;
         //padding: 13px 0 13px 17px;
-        color: var(--auth-widget-text-color, #fff);
+        color: var(--main-text-color, #fff);
         display: flex;
         align-items: center;
         justify-content: flex-start;
@@ -152,7 +150,7 @@ const Authentication: FC = () => {
                     <SvgRenderer svgUrl={'/asset/images/icons/times-solid.svg'}
                                  size={24}
                                  customClassName={'close icon'}
-                                 color={' var(--auth-widget-text-color, #fff)'}
+                                 color={' var(--main-text-color, #fff)'}
                     />
                 </button>
                 {!loggedIn && <AuthenticationNotLoggedInItems onOpenCloseHandler={onOpenCloseHandler}/>}

@@ -13,19 +13,19 @@ const StyledDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--popup-text-color, #fff);
-  background-color: var(--popup-outer-background-color, rgba(0, 0, 0, .6));
+  color: var(--main-text-color, #fff);
+  background-color: rgba(0,0,0,.6);
   z-index: 1010;
 
   .alert-message {
     min-width: 300px;
     max-width: 600px;
-    background-color: var(--popup-background-color, #191919);
+    background-color: var(--secondary-background-color, #181818);
     padding: 0;
     border-radius: 5px;
 
     .alert-message-header {
-      background-color: var(--popup-header-color, #202020);
+      background-color: var( --main-text-color, #fff);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -33,7 +33,7 @@ const StyledDiv = styled.div`
       padding: 5px 0;
 
       .close-alert {
-        color: var(--navigation-text-color, #ccc);;
+        color: var(--main-text-color, #fff);;
         background-color: transparent;
         border: none;
         //margin: 0;
@@ -133,7 +133,7 @@ const AlertBox:FC<PropTypes> = ({alert,closeAdminpanelAlert}) => {
                                                  alert.type === 'error' ? '/asset/images/icons/triangle-exclamation-solid.svg' :
                                                      '/asset/images/icons/circle-exclamation-solid.svg'}
                                              customClassName={'download-logo'}
-                                             color={'var(--navigation-text-color,#ccc)'}/>
+                                             color={'var(--main-text-color, #fff)'}/>
                             </p>
                             <button className='close-alert' onClick={() => closeAdminpanelAlert()}>
                                 <span className={'icon faTimes'}/>

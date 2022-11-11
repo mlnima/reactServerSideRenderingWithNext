@@ -15,7 +15,7 @@ const SearchbarStyledDiv = styled.div`
     align-items: center;
     background-color: transparent;
     outline: none;
-    color: var(--navigation-text-color, #ccc);
+    color: var(--main-text-color, #fff);
   }
 
   .searchbar-form {

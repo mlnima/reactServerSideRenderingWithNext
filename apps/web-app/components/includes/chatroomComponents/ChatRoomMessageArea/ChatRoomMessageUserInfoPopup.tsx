@@ -16,8 +16,8 @@ const ChatRoomMessageUserInfoPopupStyledDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--popup-outer-background-color, rgba(0, 0, 0, .6));
-  color: var(--popup-text-color, #fff);
+  background-color: rgba(0,0,0,.6);
+  color: var(--main-text-color, #fff);
   position: fixed;
   left: 0;
   top: 0;
@@ -131,7 +131,7 @@ const ChatRoomMessageUserInfoPopup = () => {
                                 <SvgRenderer svgUrl={'/asset/images/icons/xmark-solid.svg'}
                                              size={25}
                                              customClassName={'download-logo'}
-                                             color={'var(--navigation-text-color,#ccc)'}/>
+                                             color={'var(--main-text-color, #fff)'}/>
                             </span>
                         </div>
 
@@ -152,14 +152,14 @@ const ChatRoomMessageUserInfoPopup = () => {
                                             <SvgRenderer svgUrl={'/asset/images/icons/eye-regular.svg'}
                                                          size={24}
                                                          customClassName={'view-profile'}
-                                                         color={'var(--navigation-text-color,#ccc)'}/>
+                                                         color={'var(--main-text-color, #fff)'}/>
                                         </Link>
                                         <button onClick={onConversationHandler} className={'btn btn-primary'}>
 
                                             <SvgRenderer svgUrl={'/asset/images/icons/rocketchat-brands.svg'}
                                                          size={24}
                                                          customClassName={'send-message'}
-                                                         color={'var(--navigation-text-color,#ccc)'}/>
+                                                         color={'var(--main-text-color, #fff)'}/>
                                         </button>
                                     </div>
                                 </div>

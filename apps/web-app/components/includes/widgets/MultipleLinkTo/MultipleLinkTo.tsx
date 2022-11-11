@@ -12,12 +12,12 @@ const MultipleLinkToStyledUl = styled.ul`
 
   .multiple-links-widget-item {
     list-style: none;
-    color: var(--navigation-text-color, #ccc);
+    color: var(--main-text-color, #fff);
     margin: 0 5px;
   }
 
   .multiple-links-widget-item-link {
-    color: var(--navigation-text-color, #ccc);
+    color: var(--main-text-color, #fff);
     text-decoration: none;
   }
 `

@@ -43,7 +43,7 @@ const MenuWidgetStyledDiv = styled.div`
       align-items: center;
       background-color: transparent;
       border: none;
-      color: var(--navigation-text-color, #ccc);
+      color: var(--main-text-color, #fff);
       padding: 6px;
     }
 
@@ -53,7 +53,7 @@ const MenuWidgetStyledDiv = styled.div`
       width: 100%;
 
       .menu-item-link {
-        color: var(--navigation-text-color, #ccc);
+        color: var(--main-text-color, #fff);
         background-color: transparent;
         font-weight: bold;
         font-size: 1em;
@@ -119,7 +119,7 @@ const MenuWidget: FC<MenuWidgetPropTypes> = ({menuItems}) => {
                 <SvgRenderer svgUrl={'/asset/images/icons/bars-solid.svg'}
                              size={30}
                              customClassName={'menu-widget-close-button-logo'}
-                             color={'  var(--navigation-text-color, #ccc)'}/>
+                             color={'var(--main-text-color, #fff)'}/>
             </button>
             <div className='menu-widget-items'>
                 <button onClick={() => setOpen(!open)}
@@ -127,7 +127,7 @@ const MenuWidget: FC<MenuWidgetPropTypes> = ({menuItems}) => {
                     <SvgRenderer svgUrl={'/asset/images/icons/xmark-solid.svg'}
                                  size={25}
                                  customClassName={'menu-widget-close-button-logo'}
-                                 color={'  var(--navigation-text-color, #ccc)'}/>
+                                 color={'var(--main-text-color, #fff)'}/>
                 </button>
                 {menuItemsInOrder.map(menuItem => {
                     return (

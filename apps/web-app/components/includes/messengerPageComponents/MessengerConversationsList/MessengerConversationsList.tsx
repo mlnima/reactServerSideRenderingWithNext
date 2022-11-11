@@ -12,7 +12,7 @@ const MessengerConversationsListStyledDiv = styled.div`
   align-items: center;
   justify-content: center;
   .no-message {
-    color: var(--navigation-text-color, #ccc);
+    color: var(--main-text-color, #fff);
   }
 `
 const MessengerConversationsList = () => {

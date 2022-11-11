@@ -66,7 +66,7 @@ const BreadcrumbGenerator = ({}) => {
                         <SvgRenderer svgUrl={'/asset/images/icons/home-solid.svg'}
                                      size={20}
                                      customClassName={'breadcrumb-item-icon'}
-                                     color={'var(--navigation-text-color, #ccc)'}/>
+                                     color={'var(--main-text-color, #fff)'}/>
                 </Link>
             </div>
             {!!breadcrumbs.length && breadcrumbs.map((breadcrumb, index) => {
@@ -77,7 +77,7 @@ const BreadcrumbGenerator = ({}) => {
                                 <SvgRenderer svgUrl={'/asset/images/icons/sort-up-solid.svg'}
                                              size={20}
                                              customClassName={'breadcrumb-item-arrow-icon'}
-                                             color={'var(--navigation-text-color, #ccc)'}/>
+                                             color={'var(--main-text-color, #fff)'}/>
                                 {mongoIdValidator(breadcrumb.breadcrumb) ?
                                     currentPageTitle : t(  capitalizeFirstLetter(crumbName))}
                                 {query.page && crumbName!== 'search' ?  ` ${query.page}` : null }

@@ -33,20 +33,20 @@ const CommentStyledDiv = styled.div`
     }
 
     .comment-author {
-      color: var(--comment-author-color, #f90);
+      color: var(--main-active-color, #f90);
       margin: 4px 10px;
       font-weight: bold;
     }
 
     .comment-date {
-      color: var(--comment-date-color, #fff);
+      color: var(--main-text-colo, #fff);
       font-size: 14px;
       margin: 4px 5px;
     }
   }
 
   .comment-body {
-    color: var(--comment-body-color, #fff);
+    color: var(--main-text-colo, #fff);
     overflow-wrap: break-word;
   }
 `

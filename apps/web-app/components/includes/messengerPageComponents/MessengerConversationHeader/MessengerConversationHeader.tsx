@@ -42,7 +42,7 @@ const MessengerConversationHeaderStyledDiv = styled.div`
       }
 
       .messenger-conversation-header-username {
-        color: var(--navigation-text-color, #ccc);
+        color: var(--main-text-color, #fff);
         margin: 0 0 0 10px;
         white-space: nowrap;
         overflow: hidden;
@@ -85,7 +85,7 @@ const MessengerConversationHeader = ({profileImage, username, callUser}) => {
                             <SvgRenderer svgUrl={'/asset/images/icons/arrow-left-solid.svg'}
                                          size={25}
                                          customClassName={'messenger-conversation-header-back-btn-svg'}
-                                         color={'var(--navigation-text-color, #ccc)'}/>
+                                         color={'var(--main-text-color, #fff)'}/>
                     </Link>
                     <img onClick={() => router.push(`/user/${username}`)}
                          src={profileImage ? profileImage : '/asset/images/user/noGenderAvatar150.jpg'}
@@ -99,10 +99,10 @@ const MessengerConversationHeader = ({profileImage, username, callUser}) => {
                         <SvgRenderer svgUrl={'/asset/images/icons/video-solid.svg'}
                                      size={25}
                                      customClassName={'messenger-conversation-header-video-call-btn-svg'}
-                                     color={'var(--navigation-text-color, #ccc)'}/>
+                                     color={'var(--main-text-color, #fff)'}/>
                     </button>
                     {/*<button onClick={attemptForCall} className='messenger-conversation-header-call-btn'>*/}
-                    {/*    <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color, #ccc)'}} icon={faPhoneAlt} className='messenger-conversation-header-video-call-btn-svg'/>*/}
+                    {/*    <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--main-text-color, #fff)'}} icon={faPhoneAlt} className='messenger-conversation-header-video-call-btn-svg'/>*/}
                     {/*</button>*/}
                 </div>
             </div>

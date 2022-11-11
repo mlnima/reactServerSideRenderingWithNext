@@ -20,13 +20,13 @@ const ChatRoomOnlineUsersListItemStyledDiv = styled.div`
   }
 
   .chatroom-online-users-list-item-username {
-    color: var(--navigation-text-color, #ccc);
+    color: var(--main-text-color, #fff);
     margin-left: 5px;
   }
 
   .chatroom-online-users-list-item-more-info-button {
     background-color: transparent;
-    color: var(--navigation-text-color, #ccc);
+    color: var(--main-text-color, #fff);
     border: none;
 
   }

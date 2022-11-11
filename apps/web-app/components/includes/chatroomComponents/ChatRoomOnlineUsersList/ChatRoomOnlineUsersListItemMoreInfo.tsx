@@ -18,7 +18,7 @@ const ChatRoomOnlineUsersListItemMoreInfo = ({username,moreInfo}) => {
                       aria-label='view profile'>
                         <SvgRenderer svgUrl={'/images/icons/user-solid.svg'}
                                      size={30}
-                                     color={'var(--navigation-text-color, #ccc)'}/>
+                                     color={'var(--main-text-color, #fff)'}/>
                 </Link>
             </StyledChatRoomOnlineUsersListItemMoreInfoDiv>
         );

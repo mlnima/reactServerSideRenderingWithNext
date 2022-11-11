@@ -4,7 +4,7 @@ import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
 import React from "react";
 
 let StyledSideBar = styled.aside`
-  background-color: var(--sidebar-background-color,#18181b);
+  background-color: var(--secondary-background-color,#181818);
   display: flex;
   flex-direction: column;
   ${(props:{gridArea:string})  => `grid-area:${props.gridArea ||''}` } ;

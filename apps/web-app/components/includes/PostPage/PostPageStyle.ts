@@ -46,7 +46,7 @@ const PostPageStyle = styled.div`
       align-items: center;
       flex-direction: column;
       background-color: transparent;
-      color: var(--post-page-info-color, #ccc);
+      color: var(--secondary-text-color, #ccc);
       outline: none;
       border: none;
       margin-left:  10px;

@@ -34,7 +34,7 @@ const VideoPostCardStyle = styled(DefaultPostCardStyle)`
 
   .video-post-card-media {
     position: relative;
-    color: var(--post-element-text-color, #ccc);
+    color: var(--secondary-text-color, #ccc);
 
     .card-quality, .card-duration, .card-views {
       background-color: #000;

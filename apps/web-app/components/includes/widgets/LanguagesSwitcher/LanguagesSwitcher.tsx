@@ -24,7 +24,7 @@ const LanguagesSwitcherStyledDiv = styled.div`
     align-items: center;
     margin: 0 10px;
     font-size: 12px;
-    color: var(--navigation-text-color, #ccc);
+    color: var(--main-text-color, #fff);
   }
 
   .custom-select {
@@ -32,7 +32,7 @@ const LanguagesSwitcherStyledDiv = styled.div`
     width: 70px;
     font-size: initial;
     background-color: var(--navigation-background-color, #18181b);
-    color: var(--navigation-text-color, #ccc);
+    color: var(--main-text-color, #fff);
   }
 `
 const LanguagesSwitcher :FC = () => {

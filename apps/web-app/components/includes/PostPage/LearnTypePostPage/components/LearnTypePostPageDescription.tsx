@@ -8,7 +8,7 @@ import {Store} from "typescript-types";
 const ObjectKeyDescriptionRenderer = dynamic(() => import('../../components/ObjectKeyDescriptionRenderer/ObjectKeyDescriptionRenderer'))
 
 const PostDescriptionStyledDiv = styled.div`
-  color: var(--post-page-info-color, #ccc);
+  color: var(--secondary-text-color, #ccc);
   margin: 0 5px;
   padding: 50px 0;
   width: 100%;

@@ -10,14 +10,14 @@ const TextToCanvasImage = dynamic(() => import('../asset/TextToCanvasImage/TextT
 const CardImageRenderer = dynamic(() => import('../asset/CardImageRenderer'))
 
 const ActorCardStyle = styled.article`
-  background-color: var(--post-element-background-color, #131314);
+  background-color: var(--secondary-background-color, #181818);
   width: 100%;
   margin: 20px auto;
   font-size: 14px;
 
   .actor-card-link {
     width: 100%;
-    color: var(--post-element-text-color, #ccc);
+    color: var(--secondary-text-color, #ccc);
 
     .card-image {
       margin: auto;
@@ -47,7 +47,7 @@ const ActorCardStyle = styled.article`
         color: var(--main-active-color) !important;
 
         &:hover {
-          color: var(--post-element-text-color, #fff) !important;
+          color: var(--secondary-text-color, #ccc) !important;
         }
       }
     }

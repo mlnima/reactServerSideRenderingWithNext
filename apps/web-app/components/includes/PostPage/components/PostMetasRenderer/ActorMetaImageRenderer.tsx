@@ -19,7 +19,7 @@ const ActorMetaImageRenderer: FC<ComponentPropTypes> = ({imageUrl, name}) => {
             <SvgRenderer svgUrl={'/asset/images/icons/user-solid.svg'}
                          size={20}
                          customClassName={'actor-meta-svg'}
-                         color={'var(--post-page-info-color, #ccc)'}
+                         color={'var(--secondary-text-color, #ccc)'}
             />
         )
     }

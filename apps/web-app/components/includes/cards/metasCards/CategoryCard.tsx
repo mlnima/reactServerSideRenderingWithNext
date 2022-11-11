@@ -17,14 +17,14 @@ const CategoryCardStyle = styled.article`
   margin: 20px auto;
   position: relative;
   .category-card-link {
-    background-color: var(--post-element-background-color, #131314);
+    background-color: var(--secondary-background-color, #181818);
     margin: 0 ;
     padding: 0;
     position: relative;
     width: 100%;
     height: auto;
     display: inline-block;
-    color: var(--post-element-text-color, #ccc);
+    color: var(--secondary-text-color, #ccc);
     .category-logo{
       position: absolute;
       display: flex;
@@ -122,7 +122,7 @@ export default CategoryCard
 //
 //     .category-card-link {
 //     position: relative;
-//     color: var(--post-element-text-color, #ccc);
+//     color: var(--secondary-text-color, #ccc);
 // .entry-header{
 //         z-index: 2;
 //         position: absolute;

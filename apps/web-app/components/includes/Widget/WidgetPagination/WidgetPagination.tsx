@@ -59,7 +59,7 @@ const WidgetPagination: FC<WidgetPaginationPropTypes> = ({baseUrl, totalCount,co
                                       'var(--navigation-background-color,#18181b)',
                                   color: pageNumber === 1 && postsCountPerPage === count ?
                                       'var(--navigation-background-color,#18181b)' :
-                                      'var(--navigation-text-color,#ccc)'
+                                      'var(--main-text-color, #fff)'
                               }}>
                                 {pageNumber}
                         </Link>

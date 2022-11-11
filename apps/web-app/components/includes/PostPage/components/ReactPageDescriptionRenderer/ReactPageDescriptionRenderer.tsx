@@ -21,7 +21,7 @@
 // }), image, spacer, divider, codeSnippet, html5video, video];
 //
 // const ReactPageDescriptionRendererStyledDiv = styled.div`
-//   color: var(--post-page-info-color, #ccc);
+//   color: var(--secondary-text-color, #ccc);
 //   margin: 0 5px;
 //   padding: 50px 0;
 //   width: fit-content;

@@ -69,10 +69,10 @@ const DayModeNightMode: FC<DayModeNightModePropTypes> = ({uniqueData}) => {
                             onSelectHandler('night')
                     }}
             >
-                <SvgRenderer svgUrl={'/asset/images/icons/lightbulb-solid.svg'}
+                <SvgRenderer svgUrl={state.mode === 'night' ? '/asset/images/icons/moon-solid.svg':'/asset/images/icons/sun.svg'}
                              size={25}
                              customClassName={'light'}
-                             color={state.mode === 'night' ? '#f90' : '#222'}/>
+                             color={'var(--main-text-color)'}/>
             </button>
             <ModeStyles dayNightModeData={state.colors}
             />

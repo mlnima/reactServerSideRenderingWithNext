@@ -21,7 +21,7 @@ const MessengerConversationMessageStyledDiv = styled.div`
     max-width: 90%;
 
     .messenger-conversation-message-text {
-      color: var(--navigation-text-color, #ccc);
+      color: var(--main-text-color, #fff);
       padding: 4px 8px;
       word-break: break-word;
       margin: 0;
@@ -30,7 +30,7 @@ const MessengerConversationMessageStyledDiv = styled.div`
     .messenger-conversation-message-date {
       display: flex;
       justify-content: flex-end;
-      color: var(--navigation-text-color, #ccc);
+      color: var(--main-text-color, #fff);
       font-size: x-small;
       width: 100%;
     }

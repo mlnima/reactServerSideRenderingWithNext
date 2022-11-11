@@ -36,7 +36,7 @@ const SendMessagePopUpStyledDiv = styled.div`
 
       .send-message-pop-up-content-message-area {
         background-color: var(--navigation-background-color, #18181b);
-        color: var(--navigation-text-color, #ccc);
+        color: var(--main-text-color, #fff);
         width: 380px;
 
       }

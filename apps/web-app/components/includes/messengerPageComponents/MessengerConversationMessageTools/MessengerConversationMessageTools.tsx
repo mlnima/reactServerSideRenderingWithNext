@@ -70,7 +70,7 @@ const MessengerConversationMessageTools = props => {
                 <button onClick={e => onSendMessageHandler(e)} className='btn btn-primary'>
                     <SvgRenderer svgUrl={'/asset/images/icons/share-solid.svg'}
                                  size={20}
-                                 color={'var(--navigation-text-color, #ccc)'}/>
+                                 color={'var(--main-text-color, #fff)'}/>
                 </button>
             </MessengerConversationMessageToolsStyledForm>
     );

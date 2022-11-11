@@ -21,7 +21,7 @@ const UserPageActionButtonsStyledDiv = styled.div`
 
   .user-page-action-button {
     background-color: transparent;
-    color: var(--navigation-text-color, #ccc);
+    color: var(--main-text-color, #fff);
     border: none;
     padding: 5px 10px;
     margin: 5px;
@@ -34,7 +34,7 @@ const UserPageActionButtonsStyledDiv = styled.div`
 
     &:active {
       color: var(--navigation-background-color, #18181b);
-      background-color: var(--navigation-text-color, #ccc);
+      background-color: var(--main-text-color, #fff);
     }
   }
 

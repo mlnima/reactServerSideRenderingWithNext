@@ -17,10 +17,10 @@ const ProfileNavigationStyledDiv = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: var(--navigation-text-color, #ccc);
+    color: var(--main-text-color, #fff);
 
     .profile-navigation-item {
-      color: var(--navigation-text-color, #ccc);
+      color: var(--main-text-color, #fff);
       padding: 5px;
       margin: 5px;
       font-size: small;
@@ -32,7 +32,7 @@ const ProfileNavigationStyledDiv = styled.div`
 
       &:active {
         color: var(--navigation-background-color, #18181b);
-        background-color: var(--navigation-text-color, #ccc);
+        background-color: var(--main-text-color, #fff);
       }
     }
   }

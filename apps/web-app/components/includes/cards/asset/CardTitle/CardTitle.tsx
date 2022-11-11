@@ -7,7 +7,7 @@ const CardTitleStyle = styled.header`
   padding: 0 10px;
   box-sizing: border-box;
   .card-header {
-    color: var(--post-element-text-color, #ccc);
+    color: var(--secondary-text-color, #ccc);
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;

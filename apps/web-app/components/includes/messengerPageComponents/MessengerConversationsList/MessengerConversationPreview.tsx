@@ -28,7 +28,7 @@ const MessengerConversationPreviewStyledDiv = styled.div`
       height: 30px;
       margin: 0 5px;
       border-radius: 50%;
-      color: var(--navigation-text-color, #ccc);
+      color: var(--main-text-color, #fff);
     }
 
     .messenger-conversation-content-preview {
@@ -41,7 +41,7 @@ const MessengerConversationPreviewStyledDiv = styled.div`
         display: flex;
         justify-content: space-between;
         align-items: center;
-        color: var(--navigation-text-color, #ccc);
+        color: var(--main-text-color, #fff);
 
         .messenger-conversation-preview-username {
           margin: 4px 0;
@@ -54,7 +54,7 @@ const MessengerConversationPreviewStyledDiv = styled.div`
 
       .messenger-conversation-preview-last-message {
         margin: 0;
-        color: var(--navigation-text-color, #ccc);
+        color: var(--main-text-color, #fff);
       }
     }
 
@@ -62,7 +62,7 @@ const MessengerConversationPreviewStyledDiv = styled.div`
   }
 
   .conversation-actions {
-    color: var(--navigation-text-color, #ccc);
+    color: var(--main-text-color, #fff);
     padding: 2px 5px;
     position: relative;
 
@@ -123,7 +123,7 @@ const MessengerConversationPreview = ({conversationData, userId}) => {
                         <SvgRenderer svgUrl={'/asset/images/icons/circle-user-solid.svg'}
                                      size={20}
                                      customClassName={'messenger-conversation-preview-image'}
-                                     color={'var(--navigation-text-color, #ccc)'}/>
+                                     color={'var(--main-text-color, #fff)'}/>
 
                     }
 
@@ -139,7 +139,7 @@ const MessengerConversationPreview = ({conversationData, userId}) => {
         <span onClick={() => actionMenu ? setActionMenu(false) : setActionMenu(true)}>
                    <SvgRenderer svgUrl={'/asset/images/icons/envelope-solid.svg'}
                                 size={20}
-                                color={'var(--navigation-text-color, #ccc)'}/>
+                                color={'var(--main-text-color, #fff)'}/>
         </span>
 
 
@@ -148,7 +148,7 @@ const MessengerConversationPreview = ({conversationData, userId}) => {
                         <button onClick={onDeleteConversationHandler} className={'btn btn-danger'}>
                             <SvgRenderer svgUrl={'/asset/images/icons/trash-can-solid.svg'}
                                          size={20}
-                                         color={'var(--navigation-text-color, #ccc)'}/>
+                                         color={'var(--main-text-color, #fff)'}/>
                         </button>
                     </div> : null
                 }

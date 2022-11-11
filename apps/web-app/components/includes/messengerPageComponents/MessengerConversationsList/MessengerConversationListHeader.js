@@ -17,7 +17,7 @@ const MessengerConversationListHeaderStyledDiv = styled.div`
     margin: 0 5px;
     padding: 0 5px;
     a{
-      color: var(--navigation-text-color,#ccc) ;
+      color: var(--main-text-color, #fff) ;
       margin: 0 10px;
     }
   }

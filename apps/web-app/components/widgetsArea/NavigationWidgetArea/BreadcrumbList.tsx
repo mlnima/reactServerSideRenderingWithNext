@@ -26,7 +26,7 @@ const Style = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      color: var(--navigation-text-color, #ccc);
+      color:var(--main-text-color, #fff);
 
       .breadcrumb-item-arrow-icon {
         margin: auto 3px;

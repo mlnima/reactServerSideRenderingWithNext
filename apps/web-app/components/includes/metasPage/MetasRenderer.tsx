@@ -28,7 +28,7 @@ const MetasRendererStyle = styled.div`
       .letter {
         margin: 10px;;
         font-size: xx-large;
-        color: var(--meta-text-color, #ccc);
+        color: var(--secondary-text-color, #ccc);
       }
 
       .items {
@@ -42,13 +42,13 @@ const MetasRendererStyle = styled.div`
           list-style: none;
           text-overflow: ellipsis;
           padding: 14px 10px;
-          background-color: var(--meta-background-color, #f90);
+          background-color: var(--secondary-background-color, #181818);
           overflow:hidden;
           a {
             overflow:hidden;
             font-size: large;
             min-height: 48px;
-            color: var(--meta-text-color, #ccc);
+            color: var(--secondary-text-color, #ccc);
             cursor: pointer;
             text-decoration: none;
             overflow-wrap: break-word;

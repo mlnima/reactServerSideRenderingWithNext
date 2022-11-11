@@ -25,7 +25,7 @@ const CheckOutSlideHeader = props => {
                 <SvgRenderer svgUrl={'/asset/images/icons/xmark-solid.svg'}
                              size={25}
                              customClassName={'navigation-mobile-button-logo'}
-                             color={'var(--navigation-text-color, #fff)'}/>
+                             color={'var(--main-text-color, #fff)'}/>
             </button>
         </StyledDiv>
     );

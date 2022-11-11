@@ -43,7 +43,7 @@ const AuthenticationNotLoggedInItems: FC<AuthenticationNotLoggedInItemsPropTypes
                                 <SvgRenderer svgUrl={'/asset/images/icons/user-solid.svg'}
                                              size={48}
                                              customClassName={'sign-in-button '}
-                                             color={' var(--auth-widget-text-color, #fff)'}
+                                             color={' var(--main-text-color, #fff)'}
                                 />
                     </div>
 
@@ -59,7 +59,7 @@ const AuthenticationNotLoggedInItems: FC<AuthenticationNotLoggedInItemsPropTypes
                                <SvgRenderer svgUrl={'/asset/images/icons/pen-solid.svg'}
                                             size={48}
                                             customClassName={'register-button'}
-                                            color={' var(--auth-widget-text-color, #fff)'}
+                                            color={' var(--main-text-color, #fff)'}
                                />
                     </div>
 
@@ -75,7 +75,7 @@ const AuthenticationNotLoggedInItems: FC<AuthenticationNotLoggedInItemsPropTypes
                                 <SvgRenderer svgUrl={'/asset/images/icons/home-solid.svg'}
                                              size={20}
                                              customClassName={'home-button'}
-                                             color={' var(--auth-widget-text-color, #fff)'}
+                                             color={' var(--main-text-color, #fff)'}
                                 />
                             </div>
                             <p className={'text-data'}>{t<string>(`Home`)}</p>

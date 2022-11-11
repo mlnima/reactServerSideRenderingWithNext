@@ -31,7 +31,7 @@ const SendMessagePopUpHeader = props => {
             <button onClick={props.onCloseMessagePop}>
                 <SvgRenderer svgUrl={'/asset/images/icons/icons/xmark-solid.svg'}
                              size={20}
-                             color={'var(--navigation-text-color, #ccc)'}/>
+                             color={'var(--main-text-color, #fff)'}/>
             </button>
         </SendMessagePopUpHeaderStyledDiv>
     );

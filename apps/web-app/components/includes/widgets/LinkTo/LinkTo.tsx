@@ -3,7 +3,7 @@ import Link from "next/link";
 import {useRouter} from "next/router";
 import {UniqueDataTypes} from "typescript-types";
 import useTranslation from "next-translate/useTranslation";
-
+import {i18LibTranslationWithCallback, widgetTranslationContentSelector} from "@_variables/translationVariables";
 
 interface LinkToPropTypes {
     translations: {},
@@ -14,21 +14,21 @@ const LinkTo: FC<LinkToPropTypes> = ({translations, uniqueData}) => {
         const {locale} = useRouter()
         const {t} = useTranslation();
 
-        const linkContent = useMemo(() => {
-            const widgetTranslation =  locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? uniqueData?.linkToText || uniqueData.linkToText :
-                             uniqueData?.translations?.[locale]?.uniqueData?.linkToText || translations?.[locale]?.uniqueData?.linkToText || uniqueData.linkToText;
-
-            return    t(`common:${widgetTranslation}`, {},
-                {fallback:t(`customTranslation:${widgetTranslation}`,{},
-                        {fallback:widgetTranslation})})
-
-        }, [uniqueData,translations])
-
         if (uniqueData?.linkTo) {
+
+            const linkContent = useMemo(() => {
+                return i18LibTranslationWithCallback(
+                    t,
+                    null,
+                    widgetTranslationContentSelector(locale,uniqueData,'linkToText')
+                )
+            }, [uniqueData,translations])
+
             return (
                 <Link href={uniqueData?.linkTo}
                       target={uniqueData?.linkToWindowType || '_self'}
                       className={'link-to'}
+                      style={{color:'var(--main-text-color)'}}
                       title={linkContent}>
                         {linkContent}
                 </Link>

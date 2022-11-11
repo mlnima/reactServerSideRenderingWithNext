@@ -15,7 +15,7 @@ const AuthenticationLoggedInItemsStyledDiv = styled.div`
       display: flex;
       justify-content: flex-start;
       align-items: center;
-      color: var(--auth-widget-text-color, #fff);
+      color: var(--main-text-color, #fff);
       width: 100%;
       .user-profile-image{
         margin: 10px 0;
@@ -85,7 +85,7 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
                                               <SvgRenderer svgUrl={'/asset/images/icons/envelope-solid.svg'}
                                                            size={48}
                                                            customClassName={'messages-button'}
-                                                           color={' var(--auth-widget-text-color, #fff)'}
+                                                           color={' var(--main-text-color, #fff)'}
                                               />
                                         </div>
                                         <p className={'text-data'}>{t<string>(`Messages`)}</p>
@@ -104,7 +104,7 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
                                             <SvgRenderer svgUrl={'/asset/images/icons/plus-solid.svg'}
                                                          size={48}
                                                          customClassName={'plus-button'}
-                                                         color={' var(--auth-widget-text-color, #fff)'}
+                                                         color={' var(--main-text-color, #fff)'}
                                             />
                                         </div>
 
@@ -126,7 +126,7 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
                                     <SvgRenderer svgUrl={'/asset/images/icons/home-solid.svg'}
                                                  size={20}
                                                  customClassName={'home-button'}
-                                                 color={' var(--auth-widget-text-color, #fff)'}
+                                                 color={' var(--main-text-color, #fff)'}
                                     />
                                 </div>
                                 <p className={'text-data'}>{t<string>(`Home`)}</p>
@@ -144,7 +144,7 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
                                     <SvgRenderer svgUrl={'/asset/images/icons/sign-out-alt-solid.svg'}
                                                  size={20}
                                                  customClassName={'sign-out-button'}
-                                                 color={' var(--auth-widget-text-color, #fff)'}
+                                                 color={' var(--main-text-color, #fff)'}
                                     />
                         </div>
                         <p className={'text-data'}>{t<string>(`Logout`)}</p>

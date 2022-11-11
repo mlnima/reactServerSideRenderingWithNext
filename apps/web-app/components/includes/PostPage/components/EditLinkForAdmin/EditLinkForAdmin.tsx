@@ -14,7 +14,7 @@ const EditLinkForAdminStyledDiv = styled.div`
   align-items: center;
   flex-wrap: wrap;
   margin: 10px;
-  background-color: var(--popup-background-color, #191919);
+  background-color: var(--secondary-background-color, #181818);
   padding: 10px;
   top: 0;
   border-radius: 3px;

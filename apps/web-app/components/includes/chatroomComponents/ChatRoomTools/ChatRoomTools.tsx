@@ -26,7 +26,7 @@ const ChatRoomToolsStyledFrom = styled.form`
     top: -14px;
     left: 10px;
     background-color: var(--navigation-background-color, #18181b);
-    color: var(--navigation-text-color, #ccc);
+    color: var(--main-text-color, #fff);
   }
 
   .chatroom-tools-text {
@@ -183,7 +183,7 @@ const ChatRoomTools = () => {
                 <button className={'chatroom-tools-content-submit-button'} type={'submit'}>
                     <SvgRenderer svgUrl={'/asset/images/icons/share-solid.svg'}
                                  size={25}
-                                 color={'var(--navigation-text-color, #ccc)'}/>
+                                 color={'var(--main-text-color, #fff)'}/>
                 </button>
             </div>
         </ChatRoomToolsStyledFrom>

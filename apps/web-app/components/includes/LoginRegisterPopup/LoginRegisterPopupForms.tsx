@@ -17,7 +17,7 @@ const LoginRegisterPopupFormsStyledDiv = styled.div`
   width: 100%;
   max-width: 320px;
   padding: 0 5px 10px 5px;
-  color: var(--navigation-text-color, #ccc);
+  color: var(--main-text-color, #fff);
   position: relative;
   overflow-y: auto;
   display: flex;
@@ -30,7 +30,7 @@ const LoginRegisterPopupFormsStyledDiv = styled.div`
 
     .close-form-button {
       background-color: transparent;
-      color: var(--navigation-text-color, #ccc);
+      color: var(--main-text-color, #fff);
       border: none;
       padding: 10px;
       display: flex;
@@ -425,7 +425,7 @@ const LoginRegisterPopupForms: FC = () => {
                                         <SvgRenderer svgUrl={'/asset/images/icons/eye-regular.svg'}
                                                      size={20}
                                                      customClassName={'show-password'}
-                                                     color={'var(--navigation-text-color, #fff)'}
+                                                     color={'var(--main-text-color, #fff)'}
                                         />
                                     </div>}
                                 </div>

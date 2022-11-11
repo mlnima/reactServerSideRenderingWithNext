@@ -91,7 +91,7 @@ const Profile = () => {
 
                     <SvgRenderer svgUrl={'/asset/images/icons/camera-solid.svg'}
                                  size={20}
-                                 color={'var(--navigation-text-color, #ccc)'}/>
+                                 color={'var(--main-text-color, #fff)'}/>
                 </div>
                 <h2 className='profile-no-posts-title'>No Post Yet </h2>
                 <p className='profile-no-posts-title'> Coming Soon</p>

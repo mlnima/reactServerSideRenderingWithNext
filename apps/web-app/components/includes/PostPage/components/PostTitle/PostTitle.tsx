@@ -4,7 +4,7 @@ import {useSelector} from "react-redux";
 import {Store} from "typescript-types";
 
 const PostTitleStyledH1 = styled.h1`
-  color: var(--post-page-info-color,#ccc);
+  color: var(--secondary-text-color,#ccc);
   font-size: 1.25em;
   text-align: center;
   width: 90%;

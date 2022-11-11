@@ -11,7 +11,7 @@ const Style = styled.div`
     //align-items: center;
     //flex-direction: column;
     //background-color: transparent;
-    //color: var(--post-page-info-color, #ccc);
+    //color: var(--secondary-text-color, #ccc);
     //outline: none;
     //border: none;
     //margin: 0 10px;
@@ -51,7 +51,7 @@ const ShowHideCommentsButton: FC<ShowHideCommentsButtonPropTypes> = ({setShowCom
             <button className={'show-hide-comments-button'}>
                 <SvgRenderer svgUrl={'/asset/images/icons/comments-solid.svg'}
                              size={16}
-                             color={'var(--post-page-info-color,#ccc)'}/>
+                             color={'var(--secondary-text-color,#ccc)'}/>
                 <p className={'show-hide-comments-text'}> {t('Comments')}</p>
             </button>
         </Style>

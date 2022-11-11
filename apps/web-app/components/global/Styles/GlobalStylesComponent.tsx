@@ -12,6 +12,10 @@ interface GlobalStylesPropTypes {
 }
 
 const GlobalStyles= createGlobalStyle`
+  :root{
+    --default-border-color : rgba(138,145,158,.2);
+    --default-border : solid var(--default-border-color,#ccc) .2px;
+  }
   ${({customColors}:GlobalStylesPropTypes ) => customColors?.includes(':root') ? customColors :`:root {${customColors}}`}
   ${keyframes}
   ${buttons}
@@ -49,11 +53,11 @@ const GlobalStyles= createGlobalStyle`
   .post-element-info-logo {
     max-width: 25px;
     max-height: 25px;
-    color: var(--post-element-text-color, #ccc);
+    color: var(--secondary-text-color, #ccc);
   }
 
   .value-next-icon {
-    color: var(--post-element-text-color, #ccc);
+    color: var(--secondary-text-color, #ccc);
     margin: 0 5px;
   }
 
@@ -62,7 +66,7 @@ const GlobalStyles= createGlobalStyle`
     display: flex;
     align-items: center;
     padding: 1px 3px;
-    color: var(--post-element-text-color, #ccc);
+    color: var(--secondary-text-color, #ccc);
   }
   
   .left-sidebar-layout {
@@ -185,7 +189,7 @@ const GlobalStyles= createGlobalStyle`
     }
 
   }
-  
+
 
   
 

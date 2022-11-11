@@ -8,7 +8,7 @@ const ChatRoomLogMessageStyledDiv = styled.div`
   background-color: var(--navigation-background-color, #18181b);
 
   .chatroom-message-area-message-log {
-    color: var(--navigation-text-color, #ccc);
+    color: var(--main-text-color, #fff);
     padding: 5px;
     margin: 5px;
     text-align: center;
@@ -30,12 +30,12 @@ const ChatRoomMessageStyledDiv = styled.div`
   .chatroom-message-area-message-username-time {
     display: flex;
     justify-content: space-between;
-    color: var(--navigation-text-color, #ccc);
+    color: var(--main-text-color, #fff);
     font-size: small;
   }
 
   .chatroom-message-area-message-text {
-    color: var(--navigation-text-color, #ccc);
+    color: var(--main-text-color, #fff);
     margin: 10px 20px;
     overflow-wrap: break-word;
   }
@@ -64,7 +64,7 @@ const ChatRoomMessageStyledDiv = styled.div`
 
   .chatroom-message-area-message-time {
     direction: ${({locale}:{locale:string})=> locale === 'fa' ? 'rtl' : 'ltr'};
-    color: var(--navigation-text-color, #ccc);
+    color: var(--main-text-color, #fff);
     font-size: xx-small;
     margin-left: 30px;
   }

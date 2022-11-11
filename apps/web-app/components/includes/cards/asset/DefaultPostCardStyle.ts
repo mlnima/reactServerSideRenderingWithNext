@@ -1,11 +1,11 @@
 import styled from "styled-components";
 const DefaultPostCardStyle = styled.article`
-  background-color: var(--post-element-background-color, #131314);
+  background-color: var(--secondary-background-color, #181818);
   margin: 0 auto;
   width: 100%;
   
   .card-under-media-info{
-    color: var(--post-element-text-color, #ccc);
+    color: var(--secondary-text-color, #ccc);
     display: flex;
     justify-content: flex-start;
     align-items: center;

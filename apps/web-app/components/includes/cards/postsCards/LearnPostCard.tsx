@@ -33,7 +33,7 @@ const LearnPostCardStyle = styled(DefaultPostCardStyle)`
     margin-top: 2px;
 
     .card-header {
-      color: var(--post-element-text-color, #ccc);
+      color: var(--secondary-text-color, #ccc);
     }
   }
 
@@ -49,7 +49,7 @@ const LearnPostCardStyle = styled(DefaultPostCardStyle)`
       align-items: center;
       margin: 2px 0;
       padding: 0 2px;
-      color: var(--post-element-info-text-color, #ccc);
+      color: var(--secondary-text-color, #ccc);
       font-size: 12px;
 
       .icon {
@@ -63,7 +63,7 @@ const LearnPostCardStyle = styled(DefaultPostCardStyle)`
   .last-update {
     font-size: 9px;
     margin: 4px;
-    color: var(--post-element-info-text-color, #6A6A6A);
+    color: var(--secondary-text-color, #6A6A6A);
   }
 
   @media only screen and (min-width: 768px) {

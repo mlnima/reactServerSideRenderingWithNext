@@ -6,7 +6,7 @@ import {useSelector} from "react-redux";
 import {Store} from "typescript-types";
 
 const PostDescriptionStyledDiv = styled.div`
-  color: var(--post-page-info-color, #ccc);
+  color: var(--secondary-text-color, #ccc);
   margin-bottom: 10px;
   width: 100%;
   padding:  10px;
