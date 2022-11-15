@@ -10,6 +10,7 @@ import wrapper from '../../../store_toolkit/adminStore';
 import {Provider} from 'react-redux';
 import AdminLayoutInitializer from "@components/layouts/AdminLayout/AdminLayoutInitializer";
 
+
 const AdminLayoutStyledDiv = styled.div`
   display: grid;
   grid-template-columns: 1fr;
@@ -22,18 +23,18 @@ const AdminLayoutStyledDiv = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--admin-main-background-color);
+    //background-color: var(--main-background-color,#000);
     width: 100vw;
     min-height: 100vh;
 
     a {
-      color: var(--admin-main-text-color);
+      color: var(--main-text-color,#fff);
     }
   }
 
   .Admin {
     grid-area: admin-content;
-    background-color: #f1f1f1;
+    background-color: var(--main-background-color,#000);
     color: black;
     min-height: 100vh;
     float: left;
@@ -57,6 +58,7 @@ const AdminLayout = ({children, rest}) => {
         <Provider store={store}>
             <AdminLayoutStyledDiv className={'admin-container'}>
 
+
                 <AdminDataSetter setUnauthorized={setUnauthorized}/>
                 <AdminLayoutInitializer/>
 
@@ -73,6 +75,7 @@ const AdminLayout = ({children, rest}) => {
                 {!unauthorized &&
                 <>
                     <AdminPanelGlobalStyles/>
+                    {/*<GlobalStylesComponent/>*/}
                     <GlobalStyles/>
                     <AdminPanelTopBar/>
                     <AdminPanelMainMenu/>

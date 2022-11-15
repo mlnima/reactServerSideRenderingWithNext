@@ -54,7 +54,8 @@ const TextToCanvasImage: FC<TextToCanvasImagePropTypes> =
             if (canvasElement?.current){
                 const ctx = canvasElement?.current?.getContext('2d')
                 ctx.font = '30px serif';
-                ctx.fillStyle = '#ccc';
+                // ctx.fillStyle = 'var(--main-text-color, #f90)';
+                ctx.fillStyle = '#333';
                 ctx.fillText(title.substring(0,15) + '...',50,(cardWidth / 1.777)/2);
             }
         }, [canvasElement?.current]);
@@ -63,8 +64,8 @@ const TextToCanvasImage: FC<TextToCanvasImagePropTypes> =
             <TextToCanvasImageStyle postsPerRawForMobile={postsPerRawForMobile}
                                     cardWidth={cardWidth}
                                     className={'card-image'}>
-                <canvas ref={canvasElement}>
-                </canvas>
+                <canvas ref={canvasElement}/>
+
             </TextToCanvasImageStyle>
         )
     };

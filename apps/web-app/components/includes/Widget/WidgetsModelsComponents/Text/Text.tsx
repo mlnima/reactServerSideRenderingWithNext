@@ -13,6 +13,7 @@ interface TextPropTypes {
     text: string
 }
 
+//not in use for now-
 const Text: FC<TextPropTypes> = ({translations, text}) => {
     const {locale} = useRouter();
 

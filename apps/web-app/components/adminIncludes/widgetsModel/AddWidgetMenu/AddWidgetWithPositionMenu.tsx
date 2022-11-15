@@ -28,7 +28,7 @@ const AddWidgetWithPositionMenuStyledDiv = styled.div`
     width: 320px;
     top: 35px;
     z-index: 1;
-    background-color: var(--admin-darkcolor70);
+    background-color: var(--secondary-background-color,#181818);
     display: grid;
     grid-template-columns: 1fr;
 

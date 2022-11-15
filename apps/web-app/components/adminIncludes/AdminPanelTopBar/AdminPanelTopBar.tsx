@@ -9,6 +9,7 @@ import {fetchClearCaches} from "@store_toolkit/adminReducers/adminPanelGlobalSta
 import {useAdminDispatch} from "@store_toolkit/hooks";
 import {Store} from "typescript-types";
 import SvgRenderer from "../../global/commonComponents/SvgRenderer/SvgRenderer";
+import TopbarQuickAccess from "@components/adminIncludes/AdminPanelTopBar/TopbarQuickAccess/TopbarQuickAccess";
 
 
 let StyledDiv = styled.div`
@@ -17,13 +18,14 @@ let StyledDiv = styled.div`
   justify-content: space-between;
   padding: 5px 10px;
   height: 30px;
-  background-color: var(--admin-topbar-background-color);
+
+  background-color: var(--secondary-background-color, #181818);
   grid-area: admin-panel-topbar;
   opacity: .9;
 
   .developmentModeSwitch {
     display: flex;
-    color: var(--admin-topbar-text-color);
+    color: var(--secondary-text-color, #ccc);
     justify-content: center;
     align-items: center;
 
@@ -82,7 +84,6 @@ const AdminTopBar: FC = () => {
             <div className={'admin-panel-topbar-control'}>
                     <span className={'admin-panel-topbar-open-button adminTopBarItem'}
                           onClick={AdminSideBarOpenCloseHandler}>
-
                              <SvgRenderer svgUrl={'/asset/images/icons/bars-solid.svg'}
                                           size={25}
                                           customClassName={'adminTopBarItem-icon'}
@@ -90,15 +91,16 @@ const AdminTopBar: FC = () => {
                              />
                     </span>
                 <Link href={'/'} className={'adminTopBarItem'}>
-                        <SvgRenderer svgUrl={'/asset/images/icons/home-solid.svg'}
-                                     size={25}
-                                     customClassName={'adminTopBarItem-icon'}
-                                     color={'var(--main-text-color, #fff)'}
-                        />
+                    <SvgRenderer svgUrl={'/asset/images/icons/home-solid.svg'}
+                                 size={25}
+                                 customClassName={'adminTopBarItem-icon'}
+                                 color={'var(--main-text-color, #fff)'}
+                    />
                 </Link>
                 <p className={'clearCache adminTopBarItem'} onClick={() => dispatch(fetchClearCaches({router}))}>Clear
                     Caches</p>
             </div>
+            <TopbarQuickAccess/>
             <AdminActionMenu/>
         </StyledDiv>
     );

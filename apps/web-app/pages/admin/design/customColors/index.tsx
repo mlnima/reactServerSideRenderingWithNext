@@ -1,12 +1,18 @@
 import dynamic from "next/dynamic";
+import styled from "styled-components";
 
 const StyleSection = dynamic(() => import("../../../../components/adminIncludes/design/StyleSection/StyleSection"), {ssr: false})
 
-const customStyles = () => {
+const Style = styled.div`
+
+`
+const customColors = () => {
     return (
-        <StyleSection name={'customColors'} title={'Custom Colors :'}/>
+        <Style>
+            <StyleSection name={'customColors'} title={'Custom Colors :'}/>
+        </Style>
     );
 };
 
 
-export default customStyles;
+export default customColors;

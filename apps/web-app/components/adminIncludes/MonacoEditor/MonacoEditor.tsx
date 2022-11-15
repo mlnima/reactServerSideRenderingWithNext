@@ -1,50 +1,64 @@
-import React from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import Editor from "@monaco-editor/react";
 
-// import Head from "next/head";
-interface MonacoEditorPropTypes {
+interface PropTypes {
     name: string,
-    language: string,
+    language?: string,
     theme?: string,
-    defaultValue: string,
-    value: string,
+    value?: string,
+    defaultValue?: string,
+    className?: string,
     width?: number | string,
     height?: number | string,
-    className?: string,
-    onChange: any,
-
+    translation?: any,
+    activeEditingLanguage?: string,
+    onChange: Function
 }
 
-const MonacoEditor = (props: MonacoEditorPropTypes) => {
+const MonacoEditor: FC<PropTypes> = (
+    {
+        name,
+        onChange,
+        language,
+        theme,
+        value,
+        defaultValue,
+        className,
+        width,
+        height,
+    }) => {
+    const [editorValue, setEditorValue] = useState('')
 
-    const onChangeHandler = (value: string) => {
-        const e = {
-            target: {
-                name: props.name,
-                value
+    useEffect(() => {
+        setEditorValue(prevValue=>(value))
+    }, [value]);
+
+    const onChangeHandler = (value: string, ev) => {
+
+        if (value) {
+            const e = {
+                target: {
+                    name: name,
+                    value
+                }
             }
+            onChange(e)
         }
-        props.onChange(e)
     }
-
-    const onPrettyHandler = () => {
-        //@ts-ignore
-        Editor?.getAction('editor.action.formatDocument').run();
-    }
-
 
     return (
         <>
 
             <Editor
-                language={props.language || 'css'}
-                theme={props.theme || 'vs-dark'}
-                defaultValue={props.defaultValue || ''}
-                value={props.value || ''}
-                onChange={onChangeHandler}
-                className={props.className || ''}
-                width={props.width || '100%'}
-                height={props.height || '500px'}
+                language={language || 'css'}
+                theme={theme || 'vs-dark'}
+                defaultValue={defaultValue || ''}
+                value={editorValue}
+                onMount={e => console.log(e)}
+                onChange={(value,ev)=>onChangeHandler(value,ev)}
+                className={className || ''}
+                width={width || '100%'}
+                height={height || '500px'}
             />
         </>
     );

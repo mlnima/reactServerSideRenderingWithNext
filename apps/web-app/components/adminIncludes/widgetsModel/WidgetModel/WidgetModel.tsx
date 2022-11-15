@@ -6,12 +6,12 @@ import ActionButtons from "./ActionButtons";
 import UniqueFields from "./UniqueFields";
 import WidgetHeaderControl from "./WidgetHeaderControl/WidgetHeaderControl";
 import {onChangeInputValueCorrector} from "@_variables/variables";
-import {useAdminDispatch} from "../../../../store_toolkit/hooks";
-import {fetchAdminPanelUpdateWidget} from "../../../../store_toolkit/adminReducers/adminWidgetsReducer";
+import {useAdminDispatch} from "@store_toolkit/hooks";
+import {fetchAdminPanelUpdateWidget} from "@store_toolkit/adminReducers/adminWidgetsReducer";
 import {Widget} from "typescript-types";
 
 interface WidgetModelPropTypes {
-    widget:Widget
+    widget: Widget
 }
 
 const WidgetModel: FC<WidgetModelPropTypes> = ({widget}) => {
@@ -34,6 +34,10 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({widget}) => {
         stayOpen: false,
     })
 
+    // useEffect(() => {
+    //     console.log(widgetData)
+    // }, [widgetData]);
+
     useEffect(() => {
         if (widget) {
             setWidgetData({
@@ -44,18 +48,18 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({widget}) => {
     }, [widget]);
 
     const onChangeLanguageHandler = e => {
-        setWidgetSettings({
-            ...widgetSettings,
+        setWidgetSettings(prevState => ({
+            ...prevState,
             activeEditingLanguage: e.target.value
-        })
+        }))
     }
 
     const onChangeHandler = e => {
-        const value =  onChangeInputValueCorrector(e)
-        setWidgetData({
-            ...widgetData,
+        const value = onChangeInputValueCorrector(e)
+        setWidgetData(prevState => ({
+            ...prevState,
             [e.target.name]: value
-        })
+        }))
     };
 
     // const onTextInputsDataChangeHandler = (e) => {
@@ -75,22 +79,29 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({widget}) => {
     //         })
     //     }
     // }
+
     const onChangeHandlerWithTranslate = (e) => {
-        if (widgetSettings.activeEditingLanguage === 'default') {
-            onChangeHandler(e)
-        } else {
-            const value =   onChangeInputValueCorrector(e)
-            setWidgetData({
-                ...widgetData,
-                translations:{
-                    ...(widgetData?.translations || {}),
-                    [widgetSettings.activeEditingLanguage]:{
-                        ...(widgetData?.translations?.[widgetSettings.activeEditingLanguage] || {}),
-                        [e.target.name]: value
+        // console.log(widgetSettings.activeEditingLanguage,e)
+        if (e?.target?.value) {
+            if (widgetSettings.activeEditingLanguage === 'default') {
+                onChangeHandler(e)
+            } else {
+                // const value =   onChangeInputValueCorrector(e)
+                setWidgetData(prevState => (
+                    {
+                        ...prevState,
+                        translations: {
+                            ...(widgetData?.translations || {}),
+                            [widgetSettings.activeEditingLanguage]: {
+                                ...(widgetData?.translations?.[widgetSettings.activeEditingLanguage] || {}),
+                                [e.target.name]: e.target.value
+                            }
+                        }
                     }
-                }
-            })
+                ))
+            }
         }
+
     }
 
     const onObjectEditingModeChangeHandler = e => {
@@ -98,50 +109,77 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({widget}) => {
     }
 
     const onCheckboxChangeHandler = e => {
-        setWidgetData({
-            ...widgetData,
-            [e.target.name]: e.target.checked
-        })
+        setWidgetData(prevState => (
+            {
+                ...prevState,
+                [e.target.name]: e.target.checked
+            }
+        ))
     }
-
-
 
 
     const onUniqueDataChangeHandler = (e) => {
-        const value =  onChangeInputValueCorrector(e)
+        const value = onChangeInputValueCorrector(e)
 
-        setWidgetData({
-            ...widgetData,
+        // setWidgetData({
+        //     ...widgetData,
+        //     uniqueData: {
+        //         ...(widgetData?.uniqueData || {}),
+        //         [e.target.name]: value
+        //     }
+        // })
+
+        setWidgetData(prevState => ({
+            ...prevState,
             uniqueData: {
-                ...(widgetData?.uniqueData || {}),
+                ...(prevState?.uniqueData || {}),
                 [e.target.name]: value
             }
-        })
+        }))
     }
 
     const onUniqueDataChangeHandlerWithTranslate = (e) => {
-        const value =  onChangeInputValueCorrector(e)
-        if (widgetSettings.activeEditingLanguage === 'default'){
+        const value = onChangeInputValueCorrector(e)
+        if (widgetSettings.activeEditingLanguage === 'default') {
             onUniqueDataChangeHandler(e)
-        }else{
+        } else {
 
-            setWidgetData({
-                ...widgetData,
+            // setWidgetData({
+            //     ...widgetData,
+            //     uniqueData: {
+            //         ...(widgetData?.uniqueData || {}),
+            //         translations: {
+            //             //@ts-ignore
+            //             ...(widgetData?.uniqueData?.translations || {}),
+            //             [widgetSettings.activeEditingLanguage]: {
+            //                 //@ts-ignore
+            //                 ...(widgetData?.uniqueData?.translations?.[widgetSettings.activeEditingLanguage] || {}),
+            //                 [e.target.name]: value
+            //             }
+            //
+            //         }
+            //
+            //     }
+            // })
+
+
+            setWidgetData(prevState => ({
+                ...prevState,
                 uniqueData: {
-                    ...(widgetData?.uniqueData || {}),
-                    translations:{
-                        //@ts-ignore
-                        ...(widgetData?.uniqueData?.translations || {}),
-                        [widgetSettings.activeEditingLanguage]:{
+                    ...(prevState?.uniqueData || {}),
+                    translations: {
+                      //@ts-ignore
+                        ...(prevState?.uniqueData?.translations || {}),
+                        [widgetSettings.activeEditingLanguage]: {
                             //@ts-ignore
-                            ...(widgetData?.uniqueData?.translations?.[widgetSettings.activeEditingLanguage] || {}),
+                            ...(prevState?.uniqueData?.translations?.[widgetSettings.activeEditingLanguage] || {}),
                             [e.target.name]: value
                         }
 
                     }
-
                 }
-            })
+            }))
+
         }
     }
 
@@ -162,8 +200,6 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({widget}) => {
             }
         })
     }
-
-
 
 
     const changeWidgetIndex = (action) => {
@@ -241,6 +277,7 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({widget}) => {
                 <div className='widgetModel'>
 
                     <DefaultFields widgetData={widgetData}
+                                   setWidgetData={setWidgetData}
                                    widgetSettings={widgetSettings}
                                    onCheckboxChangeHandler={onCheckboxChangeHandler}
                                    onChangeHandler={onChangeHandler}

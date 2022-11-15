@@ -4,10 +4,10 @@ import styled from "styled-components";
 
 export const WidgetModelStyledDiv = styled.div`
   z-index: 3;
-  background-color: var(--admin-color-8);
+  background-color: var(--secondary-background-color,#181818);
   display: flex;
   flex-direction: column;
-  color: var(--admin-text-color);
+  color: var(--main-text-color,#fff);
   position: initial;
   top: 100px;
   width: 100%;

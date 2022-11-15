@@ -8,7 +8,6 @@ const domains = !process.env.NEXT_PUBLIC_DOMAINS ? {} :
         }
     })
 
-console.log(domains)
 module.exports = {
     locales,
     defaultLocale,

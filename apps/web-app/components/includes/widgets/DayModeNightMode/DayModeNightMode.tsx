@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from "react";
+import React, {FC, useEffect, useMemo, useState} from "react";
 import styled, {createGlobalStyle} from "styled-components";
 import {useSelector} from "react-redux";
 import {Store} from "typescript-types";
@@ -33,49 +33,43 @@ const ModeStyles = createGlobalStyle`
 
 const DayModeNightMode: FC<DayModeNightModePropTypes> = ({uniqueData}) => {
 
-    const customColors = useSelector(({settings}: Store) => settings?.design?.customColors || '')
+    const [isDefaultTheme, setIsDefaultTheme] = useState(true)
 
-    const [state, setState] = useState({
-        active: false,
-        colors: '',
-        mode: uniqueData?.dayNightModeDefault || 'night'
+    const {defaultColors} = useSelector(({settings}: Store) => {
+        return {
+            defaultColors: settings?.design?.customColors || '',
+        }
     })
 
-    const onSelectHandler = (mode) => {
-        localStorage.setItem('theme', mode)
-        setState({
-            ...state,
-            active: true,
-            colors: mode === uniqueData?.dayNightModeDefault ? customColors : uniqueData?.dayNightModeData,
-            mode
-        })
+    const currentColors = useMemo(() => isDefaultTheme ? defaultColors  : uniqueData?.dayNightModeData ,[isDefaultTheme])
+
+    const onSelectHandler = () => {
+        const currentValue = !isDefaultTheme
+        setIsDefaultTheme(currentValue)
+        localStorage.setItem('theme', currentValue.toString())
     }
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
             if (localStorage.theme) {
-                onSelectHandler(localStorage.theme)
+                setIsDefaultTheme(localStorage.theme === 'true')
             }
         }
-    }, [uniqueData]);
+    }, []);
 
     return (
         <DayModeNightModeStyledDiv>
             <button className={'btn btn-primary'}
-                    aria-label={state.mode === 'night' ? 'day mode' : 'night mode'}
-                    onClick={() => {
-                        state.mode === 'night' ?
-                            onSelectHandler('day') :
-                            onSelectHandler('night')
-                    }}
-            >
-                <SvgRenderer svgUrl={state.mode === 'night' ? '/asset/images/icons/moon-solid.svg':'/asset/images/icons/sun.svg'}
-                             size={25}
-                             customClassName={'light'}
-                             color={'var(--main-text-color)'}/>
+                    aria-label={'theme mode'}
+                    onClick={onSelectHandler}>
+
+                <SvgRenderer
+                    svgUrl={ isDefaultTheme  ? '/asset/images/icons/moon-solid.svg' : '/asset/images/icons/sun.svg'}
+                    size={25}
+                    customClassName={'moon-sun'}
+                    color={'var(--main-text-color)'}/>
             </button>
-            <ModeStyles dayNightModeData={state.colors}
-            />
+            <ModeStyles dayNightModeData={currentColors}/>
         </DayModeNightModeStyledDiv>
     )
 };

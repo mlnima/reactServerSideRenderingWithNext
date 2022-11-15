@@ -8,6 +8,20 @@
       <excludeFolder url="file://$MODULE_DIR$/trash" />
       <excludeFolder url="file://$MODULE_DIR$/apps/web-app/static/uploads" />
       <excludeFolder url="file://$MODULE_DIR$/apps/web-app/public/uploads" />
+      <excludeFolder url="file://$MODULE_DIR$/apps/api-server/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/apps/custom-scripts/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/apps/custom-scripts/.turbo" />
+      <excludeFolder url="file://$MODULE_DIR$/apps/api-server/.turbo" />
+      <excludeFolder url="file://$MODULE_DIR$/apps/sitemaps-generator/.turbo" />
+      <excludeFolder url="file://$MODULE_DIR$/apps/sitemaps-generator/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/apps/socket-server/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/apps/socket-server/.turbo" />
+      <excludeFolder url="file://$MODULE_DIR$/apps/web-app/.turbo" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/custom-server-util/.turbo" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/custom-util/.turbo" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/data-structures/.turbo" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/jest-presets/node" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/models/.turbo" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

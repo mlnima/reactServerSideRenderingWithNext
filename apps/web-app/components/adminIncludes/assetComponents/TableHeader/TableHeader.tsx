@@ -6,7 +6,7 @@ import tableItemProperties from "../tableBodyItemProperties";
 
 const TableHeaderStyledDiv = styled.div`
   padding: 10px;
-  background-color: var(--admin-color-0);
+  background-color: var(--secondary-background-color,#181818);
   margin: 5px 0 0 0;
   border: .2px solid rgba(0, 0, 0, .1);
   font-size: 13px;

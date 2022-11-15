@@ -1,10 +1,9 @@
-import {FC, useState} from 'react';
+import {FC, useMemo, useState} from 'react';
 import {convertVariableNameToName} from "custom-util";
 import styled from "styled-components";
 import {useRouter} from "next/router";
 import {saveWidgetFormData} from "@store_toolkit/clientReducers/widgetsReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
-
 
 const FormWidgetStyledDiv = styled.div`
   display: flex;
@@ -78,7 +77,7 @@ const FormWidget: FC<FormWidgetPropTypes> = ({widgetId, uniqueData}) => {
         }
     })
 
-    const [submit, setSubmit] = useState(false)
+    const [isSubmit, setIsSubmit] = useState(false)
 
     const onFormFieldsChangeHandler = e => {
         setState({
@@ -98,12 +97,16 @@ const FormWidget: FC<FormWidgetPropTypes> = ({widgetId, uniqueData}) => {
                 date: Date.now()
             }
         ))
-        setSubmit(true)
+        setIsSubmit(true)
     }
 
-    const renderFields = (([...uniqueData?.formFields] || [])
-        .sort((a, b) => (a.fieldIndex > b.fieldIndex) ? 1 : -1) || [])
-        .map(field => {
+    let formFields = useMemo(()=>{
+        const formFieldsInstance = [...(uniqueData?.formFields||[])]
+        return formFieldsInstance?.sort((a, b) => (a.fieldIndex > b.fieldIndex) ? 1 : -1)
+    },[uniqueData?.formFields])
+
+
+    const renderFields = formFields.map((field,index )=> {
             const fieldAttr = {
                 required: field.required ? Boolean(field.required) : false,
                 placeholder: field.fieldPlaceHolder || '',
@@ -111,7 +114,7 @@ const FormWidget: FC<FormWidgetPropTypes> = ({widgetId, uniqueData}) => {
                 onChange: (e) => onFormFieldsChangeHandler(e),
             }
             return (
-                <div className='form-widget-field' key={(uniqueData?.formFields || []).indexOf(field)}>
+                <div className='form-widget-field' key={index}>
                     <p className='form-widget-field-title'>{convertVariableNameToName(field.fieldName)}</p>
                     {field.fieldType === 'textarea' ?
                         <textarea className={'form-control-input'}
@@ -126,19 +129,13 @@ const FormWidget: FC<FormWidgetPropTypes> = ({widgetId, uniqueData}) => {
             )
         })
 
-    if (submit) {
-        return (
-            <FormWidgetStyledDiv className='form-widget'>
-                <h3 className='after-submit-message'>
+    return (
+        <FormWidgetStyledDiv className='form-widget'>
+            {isSubmit ? <h3 className='after-submit-message'>
                     {uniqueData?.afterSubmitMessage ||
-                    'We got Your message and will get back to you soon as possible'
+                        'We got Your message and will get back to you soon as possible'
                     }
-                </h3>
-            </FormWidgetStyledDiv>
-        )
-    } else {
-        return (
-            <FormWidgetStyledDiv className='form-widget'>
+                </h3> :
                 <form onSubmit={e => onSubmitHandler(e)} className='form-widget-the-form'>
                     <h2>{uniqueData?.formTitle}</h2>
                     {renderFields}
@@ -146,10 +143,10 @@ const FormWidget: FC<FormWidgetPropTypes> = ({widgetId, uniqueData}) => {
                         {uniqueData?.submitButtonText || 'Submit'}
                     </button>
                 </form>
-            </FormWidgetStyledDiv>
-
-        );
-    }
+            }
+        </FormWidgetStyledDiv>
+    )
 
 };
 export default FormWidget;
+

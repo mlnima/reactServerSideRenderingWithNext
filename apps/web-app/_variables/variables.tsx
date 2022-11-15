@@ -9,7 +9,7 @@ export const languagesOptions = (process.env.NEXT_PUBLIC_LOCALS.split(' ')
 })
 
 export const onChangeInputValueCorrector = (e:any) =>{
-        return  e.target.type === 'checkbox' ? e.target.checked :
+        return  e.target?.type === 'checkbox' ? e.target.checked :
                 e.target.value === 'true' ? true :
                 e.target.value === 'false' ? false :
                 e.target.value

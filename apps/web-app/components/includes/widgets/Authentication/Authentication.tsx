@@ -59,7 +59,6 @@ const AuthenticationStyledDiv = styled.div`
         }
 
         .icon-wrapper {
-          background-color: var(--main-text-color, #222);
           width: 60px;
           height: 60px;
           border-radius: 50%;

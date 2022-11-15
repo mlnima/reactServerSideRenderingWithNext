@@ -16,7 +16,7 @@ let StyledDiv = styled.div`
   grid-area: adminSideBar;
   min-height: 100%;
   width: 256px;
-  background-color: var(--admin-sidebar-background-color);
+  background-color: var(--secondary-background-color,#181818);
   display: flex;
   align-items: flex-start;
   flex-direction: column;
@@ -34,7 +34,7 @@ let StyledDiv = styled.div`
 
       .SideBarItem {
         text-decoration: none;
-        color: var(--admin-sidebar-text-color);
+        color: var(--secondary-text-color,#c7c7c7);
         width: 100%;
         padding: 6px 8px;
         margin: 5px;
@@ -47,7 +47,7 @@ let StyledDiv = styled.div`
         border: none;
         outline: none;
         padding: 5px 10px;
-        color: var(--admin-sidebar-text-color);
+        color: var(--secondary-text-color,#c7c7c7);
         width: 50px;
         transition: all .5s;
         display: flex;

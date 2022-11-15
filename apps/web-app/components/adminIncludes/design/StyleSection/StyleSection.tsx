@@ -12,6 +12,9 @@ const StyleSectionStyledDiv = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  max-width: 1300px;
+  margin: auto;
+
 
   .style-section-editor {
     width: 100%;
@@ -21,13 +24,14 @@ const StyleSectionStyledDiv = styled.div`
 
       .ql-container {
         width: 100%;
-        height: 70vh;
+        height: 80vh;
       }
     }
   }
 
-  .btn-primary {
-    margin: 20px;
+  .save-button {
+    margin-top: 20px;
+    align-self: flex-start;
   }
 `
 
@@ -66,10 +70,11 @@ const StyleSection = props => {
                     value={design?.[props.name]}
                     className={'style-section-editor'}
                     onChange={onChangeHandler}
-                    height={'70vh'}
+                    height={'80vh'}
+
                 />
             </div>
-            <button className={'btn btn-primary'} onClick={onSaveHandler}>
+            <button className={'btn btn-primary save-button'} onClick={onSaveHandler}>
                 Save Changes
             </button>
 

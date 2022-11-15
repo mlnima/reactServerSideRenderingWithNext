@@ -1,14 +1,30 @@
-import React, {FC} from 'react';
-import Text from '../WidgetsModelsComponents/Text/Text'
+import React, {FC, useMemo} from 'react';
+import styled from "styled-components";
+import parse from 'html-react-parser'
+import {useRouter} from "next/router";
 
-interface WidgetTextProps{
+interface PropTypes{
     translations:{},
     text:string
 }
 
-const WidgetText:FC<WidgetTextProps> = props => {
+const Style = styled.div`
+  color: var(--main-text-color);
+  max-width: 100vw;
+`
+
+const WidgetText:FC<PropTypes> = ({translations, text}) => {
+
+    const {locale} = useRouter();
+
+    const stringToRender = useMemo(() => {
+        return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? text : translations?.[locale]?.text || text || '';
+    }, [text,translations,locale])
+
     return (
-        <Text {...props}/>
+        <Style>
+            {parse(stringToRender)}
+        </Style>
     )
 };
 

@@ -7,8 +7,8 @@ let StyledDiv = styled.div`
   display: grid;
   grid-template-columns:  1fr 1fr 5fr 2fr;
   align-items: center;
-  background-color: var(--admin-darkcolor70);
-  color: var(--admin-text-color);
+  background-color: var(--secondary-background-color,#181818);
+  color: var(--main-text-color,#fff);
   height: 50px;
   font-size: 12px;
 
@@ -26,12 +26,8 @@ let StyledDiv = styled.div`
       width: 25px;
       height: 25px;
       margin: 0 5px;
-      color: var(--admin-text-color);
+      color: var(--main-text-color,#fff);
       place-items: center;
-
-      &:hover {
-        //background-color: var(--admin-darkcolor80);
-      }
     }
   }
 
@@ -43,7 +39,7 @@ let StyledDiv = styled.div`
   .widget-name-index {
     p {
 
-      color: var(--admin-text-color)
+      color: var(--main-text-color,#fff);
     }
   }
 
@@ -52,7 +48,7 @@ let StyledDiv = styled.div`
     grid-template-columns:  1fr 1fr;
 
     button, a {
-      color: var(--admin-text-color);
+      color: var(--main-text-color,#fff);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -62,7 +58,7 @@ let StyledDiv = styled.div`
       padding: 8px 10px;
 
       &:hover {
-        background-color: var(--admin-darkcolor80);
+        background-color: var(--secondary-background-color,#181818);
       }
 
       svg {

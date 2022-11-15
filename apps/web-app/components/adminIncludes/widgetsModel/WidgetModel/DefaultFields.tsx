@@ -8,10 +8,11 @@ import TextInputFieldForWidget
 import {useSelector} from "react-redux";
 import {widgetsStaticPositions} from "data-structures";
 import {Store} from "typescript-types";
-import {WidgetData, WidgetSettingsPropTypes} from "typescript-types";
+import { WidgetSettingsPropTypes} from "typescript-types";
 
 interface DefaultFieldsPropTypes {
     widgetData: any,
+    setWidgetData: Function,
     widgetSettings: WidgetSettingsPropTypes,
     widgetId: string,
     onCheckboxChangeHandler: any,
@@ -30,7 +31,7 @@ const DefaultFields: FC<DefaultFieldsPropTypes> =
          onChangeHandlerWithTranslate,
          onChangeHandler,
          onChangeLanguageHandler,
-         setWidgetSettings,
+         setWidgetSettings
      }) => {
         const customPages = useSelector((store: Store) => store?.adminPanelGlobalState?.customPages)
         const positions = useMemo(() => {
@@ -40,6 +41,20 @@ const DefaultFields: FC<DefaultFieldsPropTypes> =
                 ...customPages.flatMap((customPage => [customPage, customPage + 'LeftSidebar', customPage + 'RightSidebar']) ),
             ]
         }, [customPages])
+
+        const onChangeWithTranslate = (name,value)=>{
+            const e = {
+                target:{
+                    name,
+                    value
+                }
+            }
+            onChangeHandlerWithTranslate(e)
+        }
+
+
+
+
 
 
         return (
@@ -134,12 +149,13 @@ const DefaultFields: FC<DefaultFieldsPropTypes> =
                         <MonacoEditor
                             language={'html'}
                             name={'text'}
+                            activeEditingLanguage={widgetSettings.activeEditingLanguage}
                             defaultValue={
-                                widgetSettings.activeEditingLanguage === 'default' ? widgetData.text :
+                                    widgetSettings.activeEditingLanguage === 'default' ? widgetData.text :
                                     widgetData?.translations?.[widgetSettings.activeEditingLanguage]?.text
                             }
                             value={
-                                widgetSettings.activeEditingLanguage === 'default' ? widgetData.text :
+                                    widgetSettings.activeEditingLanguage === 'default' ? widgetData.text :
                                     widgetData?.translations?.[widgetSettings.activeEditingLanguage]?.text
                             }
                             className={'widgetTextTextarea'}
@@ -200,6 +216,7 @@ const DefaultFields: FC<DefaultFieldsPropTypes> =
                             value={widgetData.customScript}
                             className={'customScriptTextarea'}
                             onChange={onChangeHandler}
+
                         />
                         : null
                     }
