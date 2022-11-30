@@ -9,9 +9,6 @@ import {Store} from "typescript-types";
 import Posts from "@components/pagesIncludes/profile/Posts";
 
 const PageStyle = styled.div`
-  
-  
-  
   #primary{
     #main{
       display: flex;

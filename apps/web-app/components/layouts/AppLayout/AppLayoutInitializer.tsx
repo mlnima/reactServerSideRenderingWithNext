@@ -5,6 +5,7 @@ import Loading from "../../global/commonComponents/Loading/Loading";
 import GlobalStylesComponent from "../../global/Styles/GlobalStylesComponent";
 import SiteSettingSetter from "../../includes/SiteSettingsSetter/SiteSettingsSetter";
 import dynamic from "next/dynamic";
+import styled from "styled-components";
 // import AdminDataSetter from "../../global/AdminDataSetter";
 import AppLayoutAdminDataInitializer from "./AppLayoutAdminDataInitializer";
 import {closeAlert} from "@store_toolkit/clientReducers/globalStateReducer";
@@ -20,6 +21,9 @@ const LoginRegisterPopup = dynamic(() => import('../../includes/LoginRegisterPop
 const CookiePopup = dynamic(() => import('../../includes/ClientPopActionRequest/CookiePopup'), {ssr: false});
 const BackToTopButton = dynamic(() => import('../../includes/BackToTopButton/BackToTopButton'), {ssr: false});
 
+const HeaderStyle = styled.header`
+ 
+`
 interface AppLayoutInitializerPropTypes {
     children:React.ReactNode
 }

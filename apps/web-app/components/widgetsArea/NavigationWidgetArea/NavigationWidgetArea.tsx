@@ -2,7 +2,6 @@ import {memo} from "react";
 import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
 import {useSelector} from "react-redux";
-import BreadcrumbList from "./BreadcrumbList";
 import {useRouter} from "next/router";
 import {Store} from "typescript-types";
 
@@ -12,14 +11,13 @@ let StyledNavigation = styled.nav`
   height: 56px;
   display: flex;
   align-items: center;
-
+  
   .navigation-content {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     align-items: center;
-    margin: 0 5px;
-    padding: 0 5px;
+ 
     width: 100%;
     height: 100%;
     overflow: hidden;
@@ -45,7 +43,6 @@ const NavigationWidgetArea = () => {
                     <WidgetsRenderer position={'navigation'}/>
                 </div>
             </StyledNavigation>
-                {pathname !== '/' && <BreadcrumbList/>}
         </>
     );
 };

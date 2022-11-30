@@ -13,6 +13,7 @@ const MenuWidgetStyledDiv = styled.div`
     align-items: center;
     justify-content: center;
     margin: 0;
+
   }
 
   .menu-widget-items {
@@ -118,7 +119,7 @@ const MenuWidget: FC<MenuWidgetPropTypes> = ({menuItems}) => {
                 className='menu-widget-open-button btn btn-transparent-light'
                 aria-label="open navigation">
                 <SvgRenderer svgUrl={'/asset/images/icons/bars-solid.svg'}
-                             size={30}
+                             size={28}
                              customClassName={'menu-widget-close-button-logo'}
                              color={'var(--main-text-color, #fff)'}/>
             </button>

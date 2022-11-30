@@ -61,8 +61,8 @@ const gridLayout = css`
 
     #page {
       width: 100%;
-      padding: 8px;
-      margin: 0;
+      //padding: 8px;
+      //margin: 0;
       box-sizing: border-box;
       display: flex;
       justify-content: center;

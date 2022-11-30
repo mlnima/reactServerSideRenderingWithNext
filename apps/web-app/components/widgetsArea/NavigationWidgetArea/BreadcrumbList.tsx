@@ -7,8 +7,6 @@ import {Store} from "typescript-types";
 const Style = styled.div`
   background-color: var(--main-background-color, #000);
   display: flex;
-  //flex-wrap: wrap;
-  padding: 5px;
   box-sizing: border-box;
   justify-content: flex-start;
   align-items: center;
@@ -16,11 +14,13 @@ const Style = styled.div`
   overflow:hidden;
   white-space:nowrap;
   text-overflow: ellipsis;
+  padding: 0 8px;
   div {
     display: flex;
     align-items: center;
     font-size: small;
-
+    //padding: 0 8px;
+    box-sizing: border-box;
 
     .breadcrumb-item-link {
       display: flex;

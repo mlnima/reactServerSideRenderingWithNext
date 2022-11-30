@@ -35,7 +35,7 @@ const GlobalStyles = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 0.875rem;
-    padding: 0;
+    margin: 0;
   }
   
   a {
