@@ -16,18 +16,18 @@ import {Store} from "typescript-types";
 
 const Soft404 = dynamic(() =>
     import('../../../components/includes/Soft404/Soft404'))
-const EditLinkForAdmin = dynamic(() =>
-    import('../../../components/includes/PostPage/components/EditLinkForAdmin/EditLinkForAdmin'))
+const EditingActionQuickAccess = dynamic(() =>
+    import('@components/pagesIncludes/post/components/common/EditingActionQuickAccess'))
 const LearnTypePostPage = dynamic(() =>
-    import('../../../components/includes/PostPage/LearnTypePostPage/LearnTypePostPage'))
+    import('../../../components/pagesIncludes/post/templates/LearnTypePostPage/LearnTypePostPage'))
 const VideoTypePostPage = dynamic(() =>
-    import('../../../components/includes/PostPage/VideoTypePostPage/VideoTypePostPage'))
+    import('../../../components/pagesIncludes/post/templates/VideoTypePostPage/VideoTypePostPage'))
 const ArticleTypePostPage = dynamic(() =>
-    import('../../../components/includes/PostPage/ArticleTypePostPage/ArticleTypePostPage'))
+    import('../../../components/pagesIncludes/post/templates/ArticleTypePostPage/ArticleTypePostPage'))
 const PromotionTypePostPage = dynamic(() =>
-    import('../../../components/includes/PostPage/PromotionTypePostPage/PromotionTypePostPage'))
+    import('../../../components/pagesIncludes/post/templates/PromotionTypePostPage/PromotionTypePostPage'))
 const EventTypePostPage = dynamic(() =>
-    import('../../../components/includes/PostPage/EventTypePostPage/EventTypePostPage'))
+    import('../../../components/pagesIncludes/post/templates/EventTypePostPage/EventTypePostPage'))
 
 
 const PageStyle = styled.div`
@@ -37,8 +37,7 @@ const PageStyle = styled.div`
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-
-
+    
     .rating-buttons {
       .rating-item {
         svg {
@@ -65,11 +64,13 @@ const postPage = () => {
 
     const dispatch = useAppDispatch()
 
-    const {postType, _id, status, role, sidebar} = useSelector(({posts, user, settings}: Store) => {
+    const {postType, _id, status, role, sidebar,author,userId} = useSelector(({posts, user, settings}: Store) => {
         return {
             postType: posts?.post?.postType,
+            author: posts?.post?.author,
             _id: posts?.post?._id,
             role: user?.userData?.role,
+            userId: user?.userData?._id,
             status: posts?.post?.status,
             sidebar: settings?.identity?.postPageSidebar,
 
@@ -83,10 +84,10 @@ const postPage = () => {
     }, [_id])
 
 
-    if (status === 'published' || (role === 'administrator' && !!status)) {
+    if (status === 'published' || (role === 'administrator' && !!status) || author?._id === userId ) {
         return (
             <>
-                {role === 'administrator' ? <EditLinkForAdmin/> : null}
+                {(role === 'administrator' || author?._id === userId)  && <EditingActionQuickAccess role={role}/>}
                 <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
 
                     {
@@ -125,20 +126,6 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         },
         store
     )
-
-    //@ts-ignore
-    // context.query?.identifier && await store.dispatch(getPost(context.query?.identifier as string, context.locale as string))
-    // if (context.query?.identifier){
-    //     await store.dispatch(
-    //         fetchPost({
-    //             options: {
-    //                 page: 'postPage'
-    //             },
-    //             identifier: context?.query?.id as string || context?.query?.identifier as string,
-    //             context
-    //         })
-    //     )
-    // }
 
     await store.dispatch(
         fetchPost({

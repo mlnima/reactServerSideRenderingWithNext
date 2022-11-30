@@ -1,19 +1,17 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import Axios from "@_variables/Axios";
-import type {
-    GetServerSidePropsContext,
-    PreviewData,
-} from "next";
+import type {GetServerSidePropsContext, PreviewData} from "next";
 import {setHeadData, setNotFoundPage} from "../../../clientReducers/globalStateReducer";
 import {_customPageCanonicalUrlGenerator} from "@_variables/_clientVariables/clientVariables/_canonicalUrlGenerators";
 import {ParsedUrlQuery} from "querystring";
+import getPageData from "api-requests/src/client/custom-pages/getPageData";
 
 const fetchPageData = createAsyncThunk(
     'posts/fetchPageData',
     async (context :GetServerSidePropsContext<ParsedUrlQuery,PreviewData>, thunkAPI) => {
         const pageName = context.query?.pageName
 
-        return await Axios.get(`/api/v1/pages/getPageData?pageName=${pageName}`).then(res => {
+        return await getPageData(pageName)
+            .then(res => {
 
             if (res.data?.pageData && res.data?.pageData?.status === 'published') {
 

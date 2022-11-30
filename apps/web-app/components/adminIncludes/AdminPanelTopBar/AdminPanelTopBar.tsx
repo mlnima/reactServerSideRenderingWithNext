@@ -1,6 +1,5 @@
 import React, {FC} from 'react';
 import AdminActionMenu from "./AdminActionMenu/AdminActionMenu";
-import Link from 'next/link'
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {setSidebarStatus} from "@store_toolkit/adminReducers/adminPanelGlobalStateReducer";
@@ -90,13 +89,13 @@ const AdminTopBar: FC = () => {
                                           color={'var(--main-text-color, #fff)'}
                              />
                     </span>
-                <Link href={'/'} className={'adminTopBarItem'}>
+                <a href={'/'} className={'adminTopBarItem'}>
                     <SvgRenderer svgUrl={'/asset/images/icons/home-solid.svg'}
                                  size={25}
                                  customClassName={'adminTopBarItem-icon'}
                                  color={'var(--main-text-color, #fff)'}
                     />
-                </Link>
+                </a>
                 <p className={'clearCache adminTopBarItem'} onClick={() => dispatch(fetchClearCaches({router}))}>Clear
                     Caches</p>
             </div>

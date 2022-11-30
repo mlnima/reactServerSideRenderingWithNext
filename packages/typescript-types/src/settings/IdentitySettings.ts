@@ -34,6 +34,7 @@ export interface IdentitySettings {
     postPageSidebar: boolean | string,
     postsPageSidebar: boolean | string,
     userPageSidebar: boolean | string,
+    profilePageSidebar: boolean | string,
     tagPageSidebar: boolean | string,
     actorPageSidebar: boolean | string,
     categoryPageSidebar: boolean | string;

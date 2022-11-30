@@ -31,7 +31,7 @@ const bundleAnalyzerConfig = require('@next/bundle-analyzer')({
 // const nextTranslateConfig = nextTranslate({
 //     webpack: (config, {isServer, webpack}) => {
 //         // config.module.rules.push(   {
-//         //     test: /\.tsx|\.ts?$/,
+//         //     experimental: /\.tsx|\.ts?$/,
 //         //     use: 'ts-loader',
 //         //     exclude: /node_modules/,
 //         // })

@@ -13,7 +13,8 @@ const postTypes = [
     'externalProduct',
     'externalPromotion',
     'externalArticle',
-    'externaLearn',
+    'externalLearn',
+    'ugcAd'
 ]
 
 export default postTypes

@@ -10,8 +10,8 @@ connectToDatabase('client upload post image :').finally();
 
 const worker = async (workerData) => {
     try {
-        const tempPath = path.join(__dirname, `../../../../public/uploads/posts/${workerData.postId}/temp`)
-        const targetPath = path.join(__dirname, `../../../../public/uploads/posts/${workerData.postId}/${workerData.imageIndex}.webp`)
+        const tempPath = path.join(__dirname, `../../../../api-server/public/uploads/posts/${workerData.postId}/temp`)
+        const targetPath = path.join(__dirname, `../../../../api-server/public/uploads/posts/${workerData.postId}/${workerData.imageIndex}.webp`)
         sharp.cache({files:0})
         return await sharp(tempPath).webp({lossless: true})
             .resize({width: 640, height: 360, fit: sharp.fit.contain})

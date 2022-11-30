@@ -10,11 +10,13 @@ import ProductPrice from "./ProductPrice/ProductPrice";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {Store} from "typescript-types";
+
 let StyledDiv = styled.div`
   width: 96%;
   padding: 1%;
   border: .1px solid rgba(0, 0, 0, .2);
-  background-color: white;
+  background-color: var(--secondary-background-color, #181818);
+  color: var(--secondary-text-color, #ccc);
 
   .form-control-input {
     width: 95%;
@@ -119,7 +121,7 @@ let StyledDiv = styled.div`
 `
 
 const PostInformation = props => {
-    const post = useSelector((store:Store) => store?.adminPanelPosts?.post);
+    const post = useSelector((store: Store) => store?.adminPanelPosts?.post);
     return (
         <StyledDiv className='post-information  product-information admin-widget'>
 
@@ -127,17 +129,24 @@ const PostInformation = props => {
             <ImagePreview/>
             <Quality rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
             <TextInput name='videoUrl' rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
-            <TextInput name='videoEmbedCode' rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
+            <TextInput name='videoEmbedCode' rendering={post?.postType === 'video'}
+                       onChangeHandler={props.onChangeHandler}/>
             <TextInput name='source' rendering={true} onChangeHandler={props.onChangeHandler}/>
-            <TextInput name='redirectLink' rendering={post?.postType === 'promotion'} onChangeHandler={props.onChangeHandler}/>
-            <TextInput name='redirectLink' rendering={post?.postType?.match(/^(promotion|out)$/)} onChangeHandler={props.onChangeHandler}/>
-            <TextAreaComponent name='videoScriptCode' rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
+            <TextInput name='redirectLink' rendering={post?.postType === 'promotion'}
+                       onChangeHandler={props.onChangeHandler}/>
+            <TextInput name='redirectLink' rendering={post?.postType?.match(/^(promotion|out)$/)}
+                       onChangeHandler={props.onChangeHandler}/>
+            <TextAreaComponent name='videoScriptCode' rendering={post?.postType === 'video'}
+                               onChangeHandler={props.onChangeHandler}/>
             <RenderIframe rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
-            <TextInput name='VideoTrailerUrl' rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
-            <TextInput name='downloadLink' title='Download Link' rendering={true} onChangeHandler={props.onChangeHandler}/>
+            <TextInput name='VideoTrailerUrl' rendering={post?.postType === 'video'}
+                       onChangeHandler={props.onChangeHandler}/>
+            <TextInput name='downloadLink' title='Download Link' rendering={true}
+                       onChangeHandler={props.onChangeHandler}/>
             <Duration rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
             <ProductPrice rendering={post?.postType === 'product'} onChangeHandler={props.onChangeHandler}/>
-            <TextInput name='shippingCost' rendering={post?.postType === 'product'} onChangeHandler={props.onChangeHandler}/>
+            <TextInput name='shippingCost' rendering={post?.postType === 'product'}
+                       onChangeHandler={props.onChangeHandler}/>
             <ImageGallery rendering={post?.postType === 'product'} onChangeHandler={props.onChangeHandler}/>
             <RatingAndViews name='views' rendering={true} onChangeHandler={props.onChangeHandler}/>
             <RatingAndViews name='likes' rendering={true} onChangeHandler={props.onChangeHandler}/>

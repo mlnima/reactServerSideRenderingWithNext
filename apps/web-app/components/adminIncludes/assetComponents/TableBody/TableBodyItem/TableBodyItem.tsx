@@ -39,10 +39,8 @@ let StyledDiv = styled.div`
   }
 
   &:nth-child(even) {
-    background-color: #fff;
+    background-color: var(--secondary-background-color,#181818);
   }
-
-
 `;
 
 interface TableBodyItemPropType {

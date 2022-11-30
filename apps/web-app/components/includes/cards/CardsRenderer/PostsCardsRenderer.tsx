@@ -13,6 +13,7 @@ const PromotionPostCard = dynamic(() => import('../postsCards/PromotionPostCard'
 const LearnPostCard = dynamic(() => import('../postsCards/LearnPostCard'))
 const VideoPostCard = dynamic(() => import('../postsCards/VideoPostCard'))
 const EventPostCard = dynamic(() => import('../postsCards/EventPostCard'))
+const UgcAdPostCard = dynamic(() => import('../postsCards/UgcAd'))
 
 const Style = styled.div`
   padding: 20px 0;
@@ -60,7 +61,7 @@ const PostsCardsRenderer: FC<CardsRendererPropTypes> = ({
     const {cardWidth, postsPerRawForMobile, cardsCustomStyle} = useSelector(({settings}: Store) => {
         return {
             cardWidth: settings?.design?.cardWidthDesktop || 255,
-            cardsCustomStyle: settings.design.cardsCustomStyle || '',
+            cardsCustomStyle: settings?.design?.cardsCustomStyle || '',
             postsPerRawForMobile: settings?.design?.postsPerRawForMobile || 2,
         }
     });
@@ -98,8 +99,10 @@ const PostsCardsRenderer: FC<CardsRendererPropTypes> = ({
                     return <PromotionPostCard {...postProps} key={index} index={index}/>
                 } else if (post?.postType === 'article' ||post?.postType === 'externalArticle') {
                     return <ArticlePostCard {...postProps} key={index} index={index}/>
-                } else if (post?.postType === 'learn' || post?.postType === 'externaLearn') {
+                } else if (post?.postType === 'learn' || post?.postType === 'externalLearn') {
                     return <LearnPostCard {...postProps} key={index} index={index}/>
+                }else if (post?.postType === 'ugcAd' ) {
+                    return <UgcAdPostCard {...postProps} key={index} index={index}/>
                 } else return null
             })}
 

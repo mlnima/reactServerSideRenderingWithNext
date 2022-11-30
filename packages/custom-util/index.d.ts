@@ -9,6 +9,7 @@ import isImageAllowedForNextImage from "./src/url-util/isImageAllowedForNextImag
 import isInternalUrl from "./src/url-util/isInternalUrl";
 import isJsonString from "./src/string-util/isJsonString";
 import isUserFromExternalLink from "./src/url-util/isUserFromExternalLink";
+import queryUniquer from "./src/url-util/queryUniquer";
 import mongoIdValidator from "./src/string-util/mongoIdValidatorClient";
 import randomNumberGenerator from "./src/math-util/randomNumberGenerator";
 import rangeNumGenerator from "./src/math-util/rangeNumGenerator";
@@ -20,5 +21,5 @@ import textContentReplacer from "./src/string-util/textContentReplacer";
 import getTextDataWithTranslation from "./src/object-util/getTextDataWithTranslation";
 import convertMetasTypeToPlural from "./src/string-util/convertMetasTypeToPlural";
 import convertMetasTypeToSingular from "./src/string-util/convertMetasTypeToSingular";
-export { convertMetasTypeToPlural, convertMetasTypeToSingular, textContentReplacer, getTextDataWithTranslation, arraySortRandom, reduceWidgetsToGroups, reduceArrayOfDataToIds, capitalizeFirstLetter, capitalizeFirstLetters, convertVariableNameToName, fileTypeDetector, isAbsolutePath, isEmptyObject, isImageAllowedForNextImage, isInternalUrl, isJsonString, isUserFromExternalLink, mongoIdValidator, randomNumberGenerator, rangeNumGenerator, ratingCalculator, uniqArrayBy, };
+export { convertMetasTypeToPlural, convertMetasTypeToSingular, textContentReplacer, getTextDataWithTranslation, arraySortRandom, reduceWidgetsToGroups, reduceArrayOfDataToIds, capitalizeFirstLetter, capitalizeFirstLetters, convertVariableNameToName, fileTypeDetector, isAbsolutePath, isEmptyObject, isImageAllowedForNextImage, isInternalUrl, isJsonString, isUserFromExternalLink, mongoIdValidator, randomNumberGenerator, rangeNumGenerator, ratingCalculator, uniqArrayBy, queryUniquer };
 //# sourceMappingURL=index.d.ts.map

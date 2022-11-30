@@ -21,7 +21,7 @@ import adminGetMeta from './adminPostsControllers/adminGetMeta';
 import adminGetMetas from './adminPostsControllers/adminGetMetas';
 import adminCheckAndRemoveDeletedVideos from './adminPostsControllers/adminCheckAndRemoveDeletedVideos';
 import adminSetMetaThumbnailsAndCount from './adminPostsControllers/adminSetMetaThumbnailsAndCount';
-import adminImportPosts from './adminPostsControllers/adminImportPosts';
+// import adminImportPosts from './adminPostsControllers/adminImportPosts';
 import adminUpdateMetaByApi from './adminPostsControllers/adminUpdateMetaByApi';
 import adminGetPost from './adminPostsControllers/adminGetPost';
 import adminGetPosts from './adminPostsControllers/adminGetPosts';
@@ -30,7 +30,7 @@ import adminGeneratePermaLinkForPosts from './adminPostsControllers/adminGenerat
 const router = express.Router();
 
 router.post('/createNewPost',adminAuthMiddleware,adminCreateNewPost)
-router.post('/adminImportPosts',adminAuthMiddleware,adminImportPosts)
+// router.post('/adminImportPosts',adminAuthMiddleware,adminImportPosts)
 router.post('/updatePost',adminAuthMiddleware,adminUpdatePost)
 router.post('/deletePost',adminAuthMiddleware,adminDeletePost)
 router.post('/postsBulkAction',adminAuthMiddleware,adminPostsBulkAction)

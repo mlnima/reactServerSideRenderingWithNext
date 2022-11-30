@@ -1,15 +1,10 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import Axios from "@_variables/Axios";
+import resetMetaImage from "api-requests/src/client/metas/resetMetaImage";
 
 export const fixMetaImage = createAsyncThunk(
     'posts/likePost',
     async (_id: string, thunkAPI) => {
-        const body = {
-            _id,
-            token: localStorage.wt
-        };
-
-        return await Axios.post('/api/v1/posts/fixMetaImage', body)
+        return await resetMetaImage(_id)
     }
 )
 

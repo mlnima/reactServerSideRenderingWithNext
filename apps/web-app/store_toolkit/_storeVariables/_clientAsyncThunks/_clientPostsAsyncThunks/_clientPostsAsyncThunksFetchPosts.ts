@@ -1,9 +1,8 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {getTextDataWithTranslation, textContentReplacer,convertMetasTypeToSingular} from "custom-util";
-import _clientGetPostsQueryGenerator from "@_variables/_clientVariables/clientVariables/_clientGetPostsQueryGenerator";
-import Axios from "@_variables/Axios";
 import {setHeadData} from "../../../clientReducers/globalStateReducer";
 import {_postsCanonicalUrlGenerator} from "@_variables/_clientVariables/clientVariables/_canonicalUrlGenerators";
+import getPosts from "api-requests/src/client/posts/getPosts";
 
 interface FetchPosts {
     context: any,
@@ -19,24 +18,9 @@ const fetchPosts = createAsyncThunk(
     async ({context, metaId, options}: FetchPosts, thunkAPI) => {
         //@ts-ignore
         const {settings} = await thunkAPI.getState()
-        const gettingPostsQueries = _clientGetPostsQueryGenerator(context.query, metaId)
-        const apiData = await Axios.get(`/api/v1/posts/clientGetPosts${gettingPostsQueries}`)
+        const apiData = await getPosts(context.query,metaId)
         const metaType = apiData.data?.meta?.type
         const singularMetaForm = convertMetasTypeToSingular(metaType);
-
-        // const isWrongPathWithContentQueryRegex = new RegExp('\/posts\\?content=','g')
-        // const ifIsInternalNavigated = new RegExp(`\/_next\/data\/`)
-        // console.log(ifIsInternalNavigated.test(context.req.url))
-        // console.log(context.req.url)
-
-
-        // if (!!context && singularMetaForm !== options.page && options.page!== '404' && options.page!== 'posts' && options.page!== 'search'){
-        //     console.log(`/${singularMetaForm}/${apiData.data?.meta?._id}`)
-            // context.res.writeHead(301, {
-            //     Location: `/${singularMetaForm}/${apiData.data?.meta?._id}`
-            // });
-            // context.res.end();
-        // }
 
         const dataForm = metaType && singularMetaForm ? `${singularMetaForm}Data` : '';
         const meta = apiData?.data?.meta

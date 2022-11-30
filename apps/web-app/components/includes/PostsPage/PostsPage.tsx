@@ -41,6 +41,8 @@ const PostsPage: FC<PostPageTypes> = ({renderPagination}) => {
         }
     }, [query]);
 
+
+
     return (
         <Fragment>
             <PostsContainer className='posts-container'>

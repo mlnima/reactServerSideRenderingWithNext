@@ -6,7 +6,7 @@ const ugc_postImageDelete = async (req, res) => {
     const image = req.body.image
     try {
         await fs.unlinkSync(`.${image}`)
-    } catch (err) {
+    } catch (error) {
         // console.error(err)
     }
 

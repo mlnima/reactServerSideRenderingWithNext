@@ -44,6 +44,7 @@ const ActionOnPost = () => {
                         author: ActionOnPostData?.post?.author?._id  || ActionOnPostData?.userId}))
             } else {
                 dispatch(fetchAdminPanelSaveNewPost({
+                    //@ts-ignore
                         data: {
                             ...ActionOnPostData?.post,
                             status : ActionOnPostData.post.status || 'draft',

@@ -1,59 +1,104 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect} from 'react';
 import {useSelector} from "react-redux";
+import dynamic from "next/dynamic";
 import styled from "styled-components";
-import {wrapper} from "../../../store_toolkit/store";
-import FormData from 'form-data';
+import {wrapper} from "@store_toolkit/store";
 import {useRouter} from "next/router";
 import CreateEditArticlePostField
     from "../../../components/includes/profilePageComponents/profilePost/CreateEditArticlePostField/CreateEditArticlePostField";
 import TextInput from "../../../components/includes/profilePageComponents/profilePost/common/TextInput";
 import MetaDataSelector from "../../../components/includes/profilePageComponents/profilePost/common/MetaDataSelector";
-import ThumbnailsUploader from "../../../components/includes/profilePageComponents/profilePost/common/ThumbnailsUploader";
-import VideoTypeFields from "../../../components/includes/profilePageComponents/profilePost/VideoTypeFields/VideoTypeFields";
-import {editPostField, setEditingPostImagesToUpload} from "../../../store_toolkit/clientReducers/postsReducer";
+import ThumbnailsUploader
+    from "../../../components/includes/profilePageComponents/profilePost/common/ThumbnailsUploader";
+import VideoTypeFields
+    from "../../../components/includes/profilePageComponents/profilePost/VideoTypeFields/VideoTypeFields";
+import {editPostField, setEditingPostImagesToUpload} from "@store_toolkit/clientReducers/postsReducer";
 import fetchUserEditingPostUpdate
-    from "../../../store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserEditingPostUpdate";
+    from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserEditingPostUpdate";
 import fetchUserEditingPost
-    from "../../../store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserEditingPost";
+    from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserEditingPost";
 import {useAppDispatch} from "@store_toolkit/hooks";
-import _getServerSideStaticPageData from "../../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
+import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import DynamicNoSSR from "../../../components/includes/WidgetsRenderer/DynamicNoSSR";
 import postDataCleanerBeforeSave from "@_variables/post-variables/postDataCleanerBeforeSave";
 import {Store} from "typescript-types";
 import fetchUserCreateNewPost
-    from "../../../store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserCreateNewPost";
-// const WidgetsRenderer = dynamic(() => import('../WidgetsRenderer/WidgetsRenderer'))
+    from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserCreateNewPost";
+import EventDates from "@components/pagesIncludes/profile/post/event/EventDates";
+
+const AdMode = dynamic(() => import('@components/pagesIncludes/profile/post/ucgAd/AdMode'));
+const Price = dynamic(() => import('@components/pagesIncludes/profile/post/common/Price'));
+const Location = dynamic(() => import('@components/pagesIncludes/profile/post/common/Location'));
+const PersonalInfo = dynamic(() => import('@components/pagesIncludes/profile/post/common/PersonalInfo'));
+const DatePickerComponent = dynamic(() => import('@components/pagesIncludes/profile/post/common/DatePickerComponent'));
+
 const ProfilePostPageStyledDiv = styled.div`
   margin: 20px auto;
   box-sizing: border-box;
-  max-width: 946px;
+  max-width: 738px;
 
   .create-new-post-fields {
+
     width: 100%;
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
     margin: 20px 5px;
-    input{
-      //width: 320px;
+    gap: 8px;
+    padding: 8px;
+    box-sizing: border-box;
+    background-color: var(--secondary-background-color, #181818);
+    
+    .field-section{
+      width: 100%;
+     p{
+       width: 20%;
+     }
     }
-    .description {
-      min-height: 90px;
+
+    .description-section, .title-section {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+
+      .description {
+        min-height: 90px;
+      }
+
+      input, .description {
+        width: 80%;
+      }
+    }
+
+    .meta-selector-section {
+      display: grid;
+      grid-template-columns: 20% 80%;
+    }
+
+    .admin-control-fields {
+      border: var(--default-border);
+      background-color: var(--secondary-background-color, #181818);
     }
   }
 
   @media only screen and (min-width: 768px) {
     .create-new-post-fields {
-      width: 83.333%;
       margin: auto;
     }
   }
-
 `
 const post = () => {
     const dispatch = useAppDispatch();
-    const {query,push} = useRouter();
+    const {query, push} = useRouter();
     const postType = query?.postType;
+
+    const {sidebar} = useSelector(({settings}: Store) => {
+        return {
+            sidebar: settings?.identity?.profilePageSidebar,
+        }
+    });
+
     const {userData, editingPost} = useSelector((store: Store) => {
         return {
             userData: store?.user.userData,
@@ -64,12 +109,13 @@ const post = () => {
     useEffect(() => {
         if (query.id) {
             dispatch(fetchUserEditingPost(query.id as string));
-        }else  if (!query.id && !!query?.new && !!query?.postType){
+        } else if (!query.id && !!query?.new && !!query?.postType) {
+            const unpopulatedPostData = postDataCleanerBeforeSave(editingPost)
             dispatch(fetchUserCreateNewPost({
                 data: {
-                    ...editingPost,
+                    ...unpopulatedPostData,
                     status: 'pending',
-                    postType:query?.postType as string,
+                    postType: query?.postType as string,
                     author: userData?._id
                 },
                 push
@@ -81,32 +127,27 @@ const post = () => {
         dispatch(editPostField({[e.target.name]: e.target.value}))
     }
 
-    const onSubmitHandler = (e) => {
-        e.preventDefault()
-
-        if (
-            editingPost._id &&
-            (userData?._id === editingPost.author || userData.role === 'administrator') &&
-            query.id
-        ) {
-            dispatch(fetchUserEditingPostUpdate(editingPost))
-        } else if (!editingPost._id) {
-            // dispatch(fetchUserCreateNewPost({
-            //     data: {
-            //         ...editingPost,
-            //         status: userData.role === 'administrator' ? editingPost.status || 'pending' : 'pending',
-            //         //@ts-ignore
-            //         author: userData?._id
-            //     },
-            //     router
-            // }))
-        }
+    const onUniqueDataChangeHandler = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
+        dispatch(editPostField({
+            uniqueData: {
+                ...(editingPost?.uniqueData || {}),
+                [e.target.name]: e.target.value
+            }
+        }))
     }
 
-
-
-
-
+    const onSubmitHandler = (e) => {
+        e.preventDefault()
+        if (
+            editingPost._id && query.id &&
+            (userData?._id === editingPost.author._id as unknown as string || userData.role === 'administrator')
+        ) {
+            dispatch(fetchUserEditingPostUpdate({
+                ...editingPost,
+                status: 'pending',
+            }))
+        }
+    }
 
     const onMetaChangeHandler = (metas, type) => {
         dispatch(editPostField({[type]: metas}))
@@ -115,100 +156,85 @@ const post = () => {
 
     return (
         <DynamicNoSSR>
-            <ProfilePostPageStyledDiv className='create-new-post main'>
-                <form className={'create-new-post-fields'} onSubmit={e => onSubmitHandler(e)}>
+            <ProfilePostPageStyledDiv className={`profile-page create-new-post page-${sidebar || 'no'}-sidebar`}
+                                      id={'content'}>
+                <div id={'primary'}>
+                    <form className={'create-new-post-fields'} onSubmit={e => onSubmitHandler(e)}>
 
-                    {editingPost?.status ?
-                        <label>Status: {editingPost?.status}</label>
-                        : null
-                    }
-                    {editingPost?.author ?
-                        //@ts-ignore
-                        <label>Author: {editingPost?.author?.username}</label>
-                        : null
-                    }
+                        {!!editingPost?.status && <label>Status: {editingPost?.status}</label>}
+                        {!!editingPost?.postType && userData?.role === 'administrator' &&
+                            <label>Post Type: {editingPost?.postType}</label>}
+                        {editingPost?.postType === 'ugcAd' && <AdMode onChangeHandler={onUniqueDataChangeHandler}/>}
+                        <div className={'title-section field-section'}>
+                            <TextInput required={true} name={'title'} type={'text'} value={editingPost?.title}
+                                       title={'Title'}
+                                       onChangeHandler={onChangeHandler}/>
+                        </div>
+                        { editingPost?.postType === 'event' && <EventDates onChangeHandler={onUniqueDataChangeHandler} uniqueData={editingPost.uniqueData}/>}
 
-                    {editingPost?.postType ?
-                        <label>Post Type: {editingPost?.postType}</label>
-                        : null
-                    }
-
-                    <TextInput required={true} name={'title'} type={'text'} value={editingPost?.title}
-                               title={'Title'}
-                               onChangeHandler={onChangeHandler}/>
-                    <TextInput required={true} name={'description'} type={'textarea'}
-                               value={editingPost?.description}
-                               title={'Description'}
-                               onChangeHandler={onChangeHandler} className={'description'}/>
-                    {postType === 'article' ?
-                        <CreateEditArticlePostField onChangeHandler={onChangeHandler}/>
-                        : null
-                    }
-
-                    <ThumbnailsUploader mainThumbnail={editingPost?.mainThumbnail}
-                                        postId={editingPost?._id}
-                                        //@ts-ignore
-                                        images={editingPost?.images}
-                    />
-
-                    {userData.role === 'administrator' ?
-                        <>
-                            <TextInput required={false} name={'mainThumbnail'} type={'text'}
-                                       value={editingPost?.mainThumbnail}
-                                       title={'Main Thumbnail'}
-                                       onChangeHandler={onChangeHandler} className={'mainThumbnail'}/>
-                            <TextInput required={true} name={'views'} type={'number'}
-                                       value={editingPost?.views}
-                                       title={'views'}
-                                       onChangeHandler={onChangeHandler} className={'views'}/>
-
-                            <TextInput required={true} name={'likes'} type={'number'}
-                                       value={editingPost?.likes}
-                                       title={'Likes'}
-                                       onChangeHandler={onChangeHandler} className={'likes'}/>
-
-                            <TextInput required={true} name={'disLikes'} type={'number'}
-                                       value={editingPost?.disLikes}
-                                       title={'disLikes'}
-                                       onChangeHandler={onChangeHandler} className={'disLikes'}/>
-
-                        </>
-                        : null
-                    }
-
-
-                    <label>Categories:</label>
-                    <MetaDataSelector type={'categories'}
-                                      onMetaChangeHandler={onMetaChangeHandler}
-                                      onChangeHandler={onChangeHandler}
-                    />
-                    <label>Tags:</label>
-                    <MetaDataSelector type={'tags'}
-                                      onMetaChangeHandler={onMetaChangeHandler}
-                                      onChangeHandler={onChangeHandler}
-                    />
-                    {editingPost?.postType === 'video' ?
-                        <>
-                            <label>Actors:</label>
-                            <MetaDataSelector type={'actors'}
+                        <div className="meta-selector-section">
+                            <p>Categories:</p>
+                            <MetaDataSelector type={'categories'}
                                               onMetaChangeHandler={onMetaChangeHandler}
                                               onChangeHandler={onChangeHandler}
                             />
-                        </>
-                        : null
-                    }
+                        </div>
+                        <div className="meta-selector-section">
+                            <p>Tags:</p>
+                            <MetaDataSelector type={'tags'}
+                                              onMetaChangeHandler={onMetaChangeHandler}
+                                              onChangeHandler={onChangeHandler}
+                            />
+                        </div>
 
-                    {editingPost?.postType === 'video' ?
-                        <VideoTypeFields onChangeHandler={onChangeHandler}/>
-                        : null
-                    }
+                        {editingPost?.postType === 'video' &&
+                            <>
+                                <div className="meta-selector-section">
+                                    <p>Actors:</p>
+                                    <MetaDataSelector type={'actors'}
+                                                      onMetaChangeHandler={onMetaChangeHandler}
+                                                      onChangeHandler={onChangeHandler}
+                                    />
+                                </div>
+                            </>
+                        }
+
+                        {editingPost?.postType === 'ugcAd' && <Price onChangeHandler={onUniqueDataChangeHandler}/>}
+
+                        <div className={'description-section field-section'}>
+                            <TextInput required={true} name={'description'} type={'textarea'}
+                                       value={editingPost?.description}
+                                       title={'Description'}
+                                       onChangeHandler={onChangeHandler}
+                                       className={'description'}/>
+                        </div>
 
 
-                    <button className={'btn btn-primary'} type={'submit'}>Save</button>
-                </form>
-                <aside>
+                        <ThumbnailsUploader mainThumbnail={editingPost?.mainThumbnail}
+                                            postId={editingPost?._id}
+                            //@ts-ignore
+                                            images={editingPost?.images}
+                        />
 
-                </aside>
+                        {/ugcAd|event/.test(editingPost?.postType) &&
+                            <Location onChangeHandler={onUniqueDataChangeHandler}/>}
+                        {editingPost?.postType === 'ugcAd' && <PersonalInfo onChangeHandler={onUniqueDataChangeHandler}/>}
+
+                        {postType === 'article' ?
+                            <CreateEditArticlePostField onChangeHandler={onChangeHandler}/>
+                            : null
+                        }
+
+                        {editingPost?.postType === 'video' ?
+                            <VideoTypeFields onChangeHandler={onChangeHandler}/>
+                            : null
+                        }
+
+                        <button className={'btn btn-primary'} type={'submit'}>Save</button>
+                    </form>
+                </div>
+
+
 
             </ProfilePostPageStyledDiv>
         </DynamicNoSSR>
@@ -223,7 +249,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         [
             'profilePageRightSidebar',
             'profilePageLeftSidebar',
-            'profilePage'
+            'profile'
         ], {
             setHeadData: true,
             page: 'editPost'

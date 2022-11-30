@@ -10,14 +10,17 @@ import fetchPostComments
     from "../_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPostComments";
 import fetchPageData
     from "../_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPageData";
-import likePost
+import fetchLikePost
     from "../_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksLikePost";
-import disLikePost
+import fetchDisLikePost
     from "../_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksDisLikePost";
 import fetchUserEditingPost
     from "../_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserEditingPost";
+
+//not in package
 import getTags
     from "../_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/getTags";
+//**not in package
 import fetchUserCreateNewPost
     from "../_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserCreateNewPost";
 // import fetchUserEditingPostUpdate
@@ -183,7 +186,7 @@ export const postsSlice = createSlice({
                     }
                 }
             })
-            .addCase(likePost.fulfilled, (state, action: PayloadAction<any>) => {
+            .addCase(fetchLikePost.fulfilled, (state, action: PayloadAction<any>) => {
 
                 return {
                     ...state,
@@ -193,7 +196,7 @@ export const postsSlice = createSlice({
                     }
                 }
             })
-            .addCase(disLikePost.fulfilled, (state, action: PayloadAction<any>) => {
+            .addCase(fetchDisLikePost.fulfilled, (state, action: PayloadAction<any>) => {
                 return {
                     ...state,
                     post: {

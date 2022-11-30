@@ -52,9 +52,10 @@ let MetasCardsRendererStyle = styled.div`
 
 const MetasCardsRenderer: FC<MetasCardsRendererPropTypes> = ({uniqueData, metaType}) => {
 
-    const {metas, postsPerRawForMobile, cardWidth, cardsCustomStyle} = useSelector(
-        ({settings, posts}: Store) => {
+    const {metas, postsPerRawForMobile, cardWidth, cardsCustomStyle,role} = useSelector(
+        ({settings, posts,user}: Store) => {
             return {
+                role:user.userData.role,
                 metas: uniqueData?.metaData || (metaType === 'categories' ? posts?.categoriesMetas :
                     metaType === 'tags' ? posts?.tagsMetas : metaType === 'actors' ? posts?.actorsMetas : []),
                 postsPerRawForMobile: settings?.design?.postsPerRawForMobile || 2,
@@ -79,6 +80,7 @@ const MetasCardsRenderer: FC<MetasCardsRendererPropTypes> = ({uniqueData, metaTy
                 return (
                     <MetaCardToRender key={meta._id}
                                       meta={meta}
+                                      role={role}
                                       cardWidth={cardWidth}
                                       postsPerRawForMobile={postsPerRawForMobile}
                                       index={index}/>

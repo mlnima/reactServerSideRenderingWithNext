@@ -5,6 +5,7 @@ import {AxiosError, AxiosResponse} from "axios";
 // import {AxiosErrorTypes} from "typescript-types";
 import {Meta,Post} from "typescript-types";
 import {loading, setAlert} from "../adminReducers/adminPanelGlobalStateReducer";
+import {PostRaw} from "typescript-types/src/Post";
 
 
 interface AdminPanelPosts {
@@ -84,7 +85,7 @@ export const fetchAdminPanelUpdatePost = createAsyncThunk(
 
 export const fetchAdminPanelSaveNewPost = createAsyncThunk(
     'adminPanelPosts/fetchAdminPanelSaveNewPost',
-    async ({data, router}: { data?: Post, router?: any }, thunkAPI) => {
+    async ({data, router}: { data?: PostRaw, router?: any }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         const body = {
             postData: data,
@@ -103,6 +104,7 @@ export const fetchAdminPanelSaveNewPost = createAsyncThunk(
             })
     }
 )
+
 export const fetchAdminPanelDeleteMeta = createAsyncThunk(
     'adminPanelPosts/fetchAdminPanelDeleteMeta',
     async (_id: string, thunkAPI) => {
@@ -274,23 +276,23 @@ export const fetchPostThumbnailsUpload = createAsyncThunk(
 
 
 //notused
-export const fetchAdminImportPosts = createAsyncThunk(
-    'adminPanelPosts/fetchAdminImportPosts',
-    async (posts: Post[], thunkAPI) => {
-        thunkAPI.dispatch(loading(true))
-        await Axios.post(`/api/admin/posts/adminImportPosts`, {
-            posts,
-            token: localStorage.wt
-        }).then((res: AxiosResponse<any>) => {
-            thunkAPI.dispatch(setAlert({message: res?.data?.message || 'posts are imported', type: 'success'}))
-
-        }).catch((err) => {
-            thunkAPI.dispatch(setAlert({message: err?.response?.data?.message, type: 'error', err}))
-
-        }).finally(() => {
-            thunkAPI.dispatch(loading(false))
-        })
-    })
+// export const fetchAdminImportPosts = createAsyncThunk(
+//     'adminPanelPosts/fetchAdminImportPosts',
+//     async (posts: Post[], thunkAPI) => {
+//         thunkAPI.dispatch(loading(true))
+//         await Axios.post(`/api/admin/posts/adminImportPosts`, {
+//             posts,
+//             token: localStorage.wt
+//         }).then((res: AxiosResponse<any>) => {
+//             thunkAPI.dispatch(setAlert({message: res?.data?.message || 'posts are imported', type: 'success'}))
+//
+//         }).catch((err) => {
+//             thunkAPI.dispatch(setAlert({message: err?.response?.data?.message, type: 'error', err}))
+//
+//         }).finally(() => {
+//             thunkAPI.dispatch(loading(false))
+//         })
+//     })
 
 
 export const fetchAdminExportPosts = createAsyncThunk(

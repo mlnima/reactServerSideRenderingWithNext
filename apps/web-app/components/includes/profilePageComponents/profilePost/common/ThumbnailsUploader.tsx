@@ -6,7 +6,7 @@ import SvgRenderer from "../../../../global/commonComponents/SvgRenderer/SvgRend
 import {_ugcUploadPostImages}
     from "../../../../../store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_ugcUploadPostImages";
 
-//test doc for dev
+//experimental doc for dev
 //db.getCollection('posts').find({"_id":ObjectId("603adfacfb13c0091074fa0e")})
 const ThumbnailsUploaderStyledDiv = styled.div`
   width: 100%;
@@ -74,12 +74,15 @@ const ThumbnailsUploader: FC<ThumbnailUploaderPropTypes> =
         return (
             <ThumbnailsUploaderStyledDiv>
                 {!!images?.length && images.map((image, index) => {
-                    return (
-                        <ThumbnailUploadArea key={image.imageIndex}
-                                             postId={postId}
-                                             image={image}
-                                             onUploadHandler={onUploadHandler}/>
-                    )
+                    if (image){
+                        return (
+                            <ThumbnailUploadArea key={image.imageIndex}
+                                                 postId={postId}
+                                                 image={image}
+                                                 onUploadHandler={onUploadHandler}/>
+                        )
+                    }
+
                 })}
 
                 {images?.length < 6 &&

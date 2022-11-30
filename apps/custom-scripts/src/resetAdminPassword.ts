@@ -12,8 +12,8 @@ const resetAdminPassword = async ()=>{
             console.log(error)
             process.exit()
         } else if (hash) {
-            userSchema.findOneAndUpdate({username:'Admin'},{$set:{password:hash}}).then(()=>{
-                console.log('Admin Password Reset Was successfully')
+            userSchema.findOneAndUpdate({username:'dashboard'},{$set:{password:hash}}).then(()=>{
+                console.log('dashboard Password Reset Was successfully')
             }).catch((error)=>{
                 console.log(error)
                 console.log('Something Went Wrong')

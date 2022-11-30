@@ -73,6 +73,7 @@ const postSchema = new Schema({
     availableCount: Number,
     premium: Boolean,
     rating: Boolean,
+    uniqueData: Schema.Types.Mixed,
     createdAt: Date,
     updatedAt: Date
 

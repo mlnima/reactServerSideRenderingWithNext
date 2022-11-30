@@ -12,17 +12,23 @@ const MenuWidgetModelFieldsPreviewStyledDiv = styled.div`
   margin: 2px 0;
   .menu-item-header {
     display: flex;
+    gap: 2px;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    
+    button{
+      background-color: var(--secondary-background-color,#181818);
+      color: var(--secondary-text-color,#ccc);
+      border: none;
+    }
     .menu-item-header-index-controller {
       display: flex;
       justify-content: center;
       align-items: center;
       button {
-        background-color: transparent;
-        color: white;
-        border: none;
+
+       
         font-size: large;
         width: 30px;
         height: 30px;

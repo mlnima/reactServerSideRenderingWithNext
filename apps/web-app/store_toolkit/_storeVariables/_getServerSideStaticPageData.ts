@@ -29,7 +29,7 @@ export const _getServerSideStaticPageData = async (context, dynamicWidgets, opti
 //
 //     const matchReferer = new RegExp(`${process.env.NEXT_PUBLIC_PRODUCTION_URL}|localhost`, 'g');
 //     const unMatchInternalReferer = new RegExp(`/sitemap`, 'g');
-//     const isInternalReferer = referer ? !!matchReferer.test(referer) && !unMatchInternalReferer.test(referer)  : false;
+//     const isInternalReferer = referer ? !!matchReferer.experimental(referer) && !unMatchInternalReferer.experimental(referer)  : false;
 //
 //     const widgetsPositionsToRequest = isInternalReferer ? dynamicWidgets : [...staticWidgets, ...dynamicWidgets]
 //     // const widgetsPositionsToRequest = [...staticWidgets, ...dynamicWidgets]

@@ -1,9 +1,10 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
-import Axios from "@_variables/Axios";
+// import Axios from "@_variables/Axios";
+import {getSettings,getUncachedSettings} from "api-requests";
 import {loading, setHeadData} from "./globalStateReducer";
 import _firstRequestHeadDataSetter from "../_storeVariables/_firstRequestHeadDataSetter";
-import _getMultipleSettingsQueryGenerator from "@_variables/adminVariables/_getMultipleSettingsQueryGenerator";
+// import _getMultipleSettingsQueryGenerator from "@_variables/adminVariables/_getMultipleSettingsQueryGenerator";
 
 interface SettingsStateRaw {
     ip?: string,
@@ -41,8 +42,12 @@ export const fetchSettings = createAsyncThunk(
         config: FetchSettingsProps,
         thunkAPI) => {
         try {
-            const settingsQuery = config.requireSettings.map((setting) => `setting=${setting}`).join('&')
-            const fetchedSettings = await Axios.get(`/api/v1/settings/getMultipleSettings?${settingsQuery}`)
+            // const settingsQuery = config.requireSettings.map((setting) => `setting=${setting}`).join('&')
+            // const fetchedSettings = await Axios.get(`/api/v1/settings/getMultipleSettings?${settingsQuery}`)
+            // const axiosInstanceTest = await AxiosInstance.get(`/api/v1/settings/getMultipleSettings?${settingsQuery}`)
+            // console.log('axiosInstanceTest:',axiosInstanceTest.data)
+
+            const fetchedSettings = await getSettings(config.requireSettings)
             const designData = fetchedSettings.data.settings?.find(setting => setting?.type === 'design')
             const identityData = fetchedSettings.data.settings?.find(setting => setting?.type === 'identity')
             const membershipSettings = fetchedSettings.data.settings?.find(setting => setting?.type === 'membershipSettings')
@@ -75,7 +80,9 @@ export const getUncachedSettingsForAdmin = createAsyncThunk('settings/getUncache
         thunkAPI) => {
         try {
             thunkAPI.dispatch(loading(true))
-            return await Axios.get(`/api/admin/settings/getMultipleSetting${_getMultipleSettingsQueryGenerator(['identity', 'design', 'adminSettings', 'membershipSettings'])}&token=${localStorage.wt}`)
+            // return await Axios.get(`/api/admin/settings/getMultipleSetting${_getMultipleSettingsQueryGenerator(['identity', 'design', 'adminSettings', 'membershipSettings'])}&token=${localStorage.wt}`)
+
+            return await getUncachedSettings(['identity', 'design', 'adminSettings', 'membershipSettings'])
                 .then(res => {
 
                     const designSettings = res.data?.settings?.find((setting: any) => setting?.type === 'design') || {};

@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.uniqArrayBy = exports.ratingCalculator = exports.rangeNumGenerator = exports.randomNumberGenerator = exports.mongoIdValidator = exports.isUserFromExternalLink = exports.isJsonString = exports.isInternalUrl = exports.isImageAllowedForNextImage = exports.isEmptyObject = exports.isAbsolutePath = exports.fileTypeDetector = exports.convertVariableNameToName = exports.capitalizeFirstLetters = exports.capitalizeFirstLetter = exports.reduceArrayOfDataToIds = exports.reduceWidgetsToGroups = exports.arraySortRandom = exports.getTextDataWithTranslation = exports.textContentReplacer = exports.convertMetasTypeToSingular = exports.convertMetasTypeToPlural = void 0;
+exports.queryUniquer = exports.uniqArrayBy = exports.ratingCalculator = exports.rangeNumGenerator = exports.randomNumberGenerator = exports.mongoIdValidator = exports.isUserFromExternalLink = exports.isJsonString = exports.isInternalUrl = exports.isImageAllowedForNextImage = exports.isEmptyObject = exports.isAbsolutePath = exports.fileTypeDetector = exports.convertVariableNameToName = exports.capitalizeFirstLetters = exports.capitalizeFirstLetter = exports.reduceArrayOfDataToIds = exports.reduceWidgetsToGroups = exports.arraySortRandom = exports.getTextDataWithTranslation = exports.textContentReplacer = exports.convertMetasTypeToSingular = exports.convertMetasTypeToPlural = void 0;
 var tslib_1 = require("tslib");
 var arraySortRandom_1 = tslib_1.__importDefault(require("./src/array-utils/arraySortRandom"));
 exports.arraySortRandom = arraySortRandom_1["default"];
@@ -24,6 +24,8 @@ var isJsonString_1 = tslib_1.__importDefault(require("./src/string-util/isJsonSt
 exports.isJsonString = isJsonString_1["default"];
 var isUserFromExternalLink_1 = tslib_1.__importDefault(require("./src/url-util/isUserFromExternalLink"));
 exports.isUserFromExternalLink = isUserFromExternalLink_1["default"];
+var queryUniquer_1 = tslib_1.__importDefault(require("./src/url-util/queryUniquer"));
+exports.queryUniquer = queryUniquer_1["default"];
 var mongoIdValidatorClient_1 = tslib_1.__importDefault(require("./src/string-util/mongoIdValidatorClient"));
 exports.mongoIdValidator = mongoIdValidatorClient_1["default"];
 var randomNumberGenerator_1 = tslib_1.__importDefault(require("./src/math-util/randomNumberGenerator"));

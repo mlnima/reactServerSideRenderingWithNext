@@ -23,19 +23,16 @@ const AdminLayoutStyledDiv = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    //background-color: var(--main-background-color,#000);
     width: 100vw;
     min-height: 100vh;
 
     a {
-      color: var(--main-text-color,#fff);
+      color: var(--main-text-color, #fff);
     }
   }
 
   .Admin {
     grid-area: admin-content;
-    background-color: var(--main-background-color,#000);
-    color: black;
     min-height: 100vh;
     float: left;
     -webkit-font-smoothing: subpixel-antialiased;
@@ -56,34 +53,26 @@ const AdminLayout = ({children, rest}) => {
 
     return (
         <Provider store={store}>
+            <AdminPanelGlobalStyles/>
             <AdminLayoutStyledDiv className={'admin-container'}>
-
-
                 <AdminDataSetter setUnauthorized={setUnauthorized}/>
                 <AdminLayoutInitializer/>
-
-                {unauthorized &&
-                <div className={'admin-unauthorized'}>
-                    <h1>
-                        <Link href={'/auth/login'}>
-                            403 Forbidden
-                        </Link>
-                    </h1>
-                </div>
-                }
-
-                {!unauthorized &&
-                <>
-                    <AdminPanelGlobalStyles/>
-                    {/*<GlobalStylesComponent/>*/}
-                    <GlobalStyles/>
-                    <AdminPanelTopBar/>
-                    <AdminPanelMainMenu/>
-                    <main className="Admin">
-                        {children}
-                    </main>
-
-                </>
+                {unauthorized ?
+                    <div className={'admin-unauthorized'}>
+                        <h1>
+                            <Link href={'/auth/login'}>
+                                403 Forbidden
+                            </Link>
+                        </h1>
+                    </div> :
+                    <>
+                        <GlobalStyles/>
+                        <AdminPanelTopBar/>
+                        <AdminPanelMainMenu/>
+                        <main className="Admin">
+                            {children}
+                        </main>
+                    </>
                 }
 
             </AdminLayoutStyledDiv>

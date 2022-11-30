@@ -2,16 +2,19 @@ import {Comment} from "./Comment";
 import {User} from "./User";
 import {Meta} from "./Meta";
 
-export interface Post {
-    outPostType?: string;
-    images?: [string];
-    rating: string;
+interface uniqueDataPossibility{
+    startDate?: Date;
+}
+
+
+interface Base {
+    outPostType?: string,
+    images?: [string],
+    rating: string,
     videoEmbedCode: string,
     videoUrl: string,
     videoScriptCode: string,
     format: string,
-    comments:Comment[],
-    author?:  User | string,
     status: string,
     source: any,
     updatedAt: string,
@@ -36,11 +39,25 @@ export interface Post {
     videoTrailerUrl?:string,
     price?:string,
     duration?:string,
-    actors?:Meta[],
     quality?:string,
     _id?:string,
     mainThumbnail?:string,
     VideoTrailerUrl?:string,
+    uniqueData: uniqueDataPossibility;
+}
+
+export interface Post extends Base{
+    author?:  User,
+    comments:Comment[],
+    actors?:Meta[],
     categories:Meta[],
-    tags:Meta[]
+    tags:Meta[],
+}
+
+export interface PostRaw extends Base{
+    author?:  string,
+    comments:string[],
+    actors?:string[],
+    categories:string[],
+    tags:string[],
 }

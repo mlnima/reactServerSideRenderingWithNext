@@ -7,6 +7,8 @@ const DropDownWidgetStyledDiv = styled.div`
   align-items: center;
   width: 95%;
   padding: 10px;
+  background-color: var(--secondary-background-color,#181818);
+  color: var(--secondary-text-color,#ccc);
 
   .post-drop-down-section-header {
     height: 30px;
@@ -16,13 +18,11 @@ const DropDownWidgetStyledDiv = styled.div`
     align-items: center;
     padding: 0 10px;
     margin-bottom: 1px;
-    background-color: white;
   }
 
   .post-drop-down-component {
     padding: 10px;
     width: 100%;
-    background-color: white;
   }
 `
 

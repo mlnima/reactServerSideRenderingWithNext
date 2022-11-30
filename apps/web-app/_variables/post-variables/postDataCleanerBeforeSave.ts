@@ -1,5 +1,6 @@
 import {reduceArrayOfDataToIds} from "custom-util";
 import {Post} from "typescript-types";
+import {PostRaw} from "typescript-types/src/Post";
 
 const postDataCleanerBeforeSave = (postData:Post) =>{
     const comments = postData.comments ? {comments: reduceArrayOfDataToIds(postData.comments)} : {}
@@ -16,7 +17,7 @@ const postDataCleanerBeforeSave = (postData:Post) =>{
         ...author,
         ...tags,
         ...actors
-    }
+    } as PostRaw
 }
 
 export default postDataCleanerBeforeSave;

@@ -262,7 +262,7 @@ const LoginRegisterPopupForms: FC = () => {
                 (/[a-zA-Z]/).test(state.username) &&
                 (/^((?!admin).)*$/i).test(state.username) || (
                     globalState.loginRegisterFormPopup === 'login' &&
-                    state.username === 'Admin'
+                    state.username === 'dashboard'
                 ) : false,
             email: state.email ? (/^[^\s@]+@[^\s@]+\.[^\s@]+$/).test(state.email) : false,
             password: state.password ? _passwordValidator(state.password) : false,
@@ -393,7 +393,7 @@ const LoginRegisterPopupForms: FC = () => {
                         !stateValidator.gender
                         }
                                 type={'submit'}
-                                className={'login-register-form-button simple-button'}>
+                                className={'login-register-form-button btn btn-primary'}>
                             {t<string>(`Register`)}
                         </button>
                     </form> : globalState.loginRegisterFormPopup === 'login' ?
@@ -432,7 +432,7 @@ const LoginRegisterPopupForms: FC = () => {
                             </div>
                             <button disabled={!stateValidator.username && !state.password}
                                     type={'submit'}
-                                    className={'login-register-form-button simple-button'}>
+                                    className={'login-register-form-button btn btn-primary'}>
                                 {t<string>(`Login`)}
                             </button>
                         </form> : null

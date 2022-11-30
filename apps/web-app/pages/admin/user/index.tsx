@@ -124,7 +124,7 @@ const user = () => {
             <div className='user-admin-edit-profile-page-section'>
                 <p>Username :</p>
                 <input name='username' value={userData.username} onChange={e => onChangeHandler(e)}
-                       disabled={userData.username === 'admin' || userData.username === 'Admin'}/>
+                       disabled={userData.username === 'admin' || userData.username === 'dashboard'}/>
             </div>
             <div className='user-admin-edit-profile-page-section'>
                 <p>Email :</p>

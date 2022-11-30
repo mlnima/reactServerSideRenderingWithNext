@@ -31,7 +31,7 @@ const posts = () => {
     })
 
     return (
-        <StyledMain id={'main-content'} className="main posts-page" postsPageStyle={postsPageStyle || ''}>
+        <StyledMain id={'content'} className="main posts-page" postsPageStyle={postsPageStyle || ''}>
             <PostsPage renderPagination={true}/>
         </StyledMain>
     )

@@ -1,8 +1,8 @@
 import React, {useRef} from 'react';
 import {useSelector} from "react-redux";
 import styled from "styled-components";
-import {fetchUserProfileImageUpload} from "../../../../store_toolkit/clientReducers/userReducer";
-import {useAppDispatch} from "../../../../store_toolkit/hooks";
+import {fetchUserProfileImageUpload} from "@store_toolkit/clientReducers/userReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 import {Store} from "typescript-types";
 
 const ProfileImageStyledDiv = styled.div`
@@ -10,7 +10,7 @@ const ProfileImageStyledDiv = styled.div`
   bottom: 0;
   margin: auto;
   width: 77px;
-  border: black 1px solid;
+
   .profile-image-img {
     width: 77px;
     border-radius: 50%;

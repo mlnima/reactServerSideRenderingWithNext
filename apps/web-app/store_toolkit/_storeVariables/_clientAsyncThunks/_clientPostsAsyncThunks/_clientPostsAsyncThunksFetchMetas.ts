@@ -1,13 +1,11 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import _metaPageQueryGenerator from "@_variables/_clientVariables/clientVariables/_metaPageQueryGenerator";
-import Axios from "@_variables/Axios";
+import {getMetas} from "api-requests";
 
 const fetchMetas = createAsyncThunk(
     'posts/fetchMetas',
     async ({data, metaType}: { data: {}, metaType: string }, thunkAPI) => {
         try {
-            const queries = _metaPageQueryGenerator(data, metaType)
-            const apiData = await Axios.get(`/api/v1/posts/getMetas${queries}`)
+            const apiData = await getMetas(data, metaType)
             return {
                 [`${metaType}Metas`]: apiData?.data?.metas || [],
                 totalCount: apiData?.data?.totalCount || 0,

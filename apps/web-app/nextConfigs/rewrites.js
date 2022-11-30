@@ -48,14 +48,14 @@ module.exports = () => {
             //     source: "/sitemap.xml",
             //     destination: `/xml/sitemap.xml`,
             // },
-            // {
-            //     source: "/api/:path*",
-            //     destination: `${process.env.NEXT_PUBLIC_API_SERVER_URL}/api/:path*`,
-            // },
-            // {
-            //     source: "/public/:path*",
-            //     destination: `${process.env.NEXT_PUBLIC_API_SERVER_URL}/public/:path*`,
-            // },
+            {
+                source: "/api/:path*",
+                destination: `${process.env.NEXT_PUBLIC_API_SERVER_URL}/api/:path*`,
+            },
+            {
+                source: "/public/:path*",
+                destination: `${process.env.NEXT_PUBLIC_API_SERVER_URL}/public/:path*`,
+            },
             // {
             //     // source: "//:host(^(?!.*\\\\sitemap\\\\b).*$)",
             //     source: "/:host(^sitemap|xxx)?",
@@ -80,21 +80,21 @@ module.exports = () => {
                 destination: '/posts/old/:identifier',
                 has: [{type: 'query', key: 'identifier'}]
             },
-            {
-                source: `/:postType(video|product|article|book|standard|promotion|learn|food|book)?/:title`,
-                destination: '/posts/:postType/:identifier',
-                has: [{type: 'query', key: 'identifier'}]
-            },
-            {
-                source: `/posts/:postType(video|product|article|book|standard|promotion|learn|food|book)?/:id`,
-                destination: '/post/:postType/:id',
-                // has: [{type: 'query', key: 'identifier'}]
-            },
-            {
-                source: `/:metaType(categories|tags|actors|category|tag|actor)?/:title`,
-                destination: '/:metaType/:content',
-                has: [{type: 'query', key: 'content'}]
-            },
+            // {
+            //     source: `/:postType(video|product|article|book|standard|promotion|learn|food|book)?/:title`,
+            //     destination: '/posts/:postType/:identifier',
+            //     has: [{type: 'query', key: 'identifier'}]
+            // },
+            // {
+            //     source: `/posts/:postType(video|product|article|book|standard|promotion|learn|food|book)?/:id`,
+            //     destination: '/post/:postType/:id',
+            //     // has: [{type: 'query', key: 'identifier'}]
+            // },
+            // {
+            //     source: `/:metaType(categories|tags|actors|category|tag|actor)?/:title`,
+            //     destination: '/:metaType/:content',
+            //     has: [{type: 'query', key: 'content'}]
+            // },
             {source: `/login`, destination: '/auth/login'},
             {source: `/register`, destination: '/auth/register'},
             {

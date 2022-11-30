@@ -11,7 +11,7 @@ import clientGetMeta from './clientPostsControllers/clientGetMeta'
 import clientGetComments from './clientPostsControllers/clientGetComments'
 import clientUserCreateNewPost from './clientPostsControllers/clientUserCreateNewPost'
 import clientUserUpdatePost from './clientPostsControllers/clientUserUpdatePost'
-import clientFixMetaImage from './clientPostsControllers/clientFixMetaImage'
+import resetMetaImage from './clientPostsControllers/resetMetaImage'
 import ClientMetaSuggestion from './clientPostsControllers/ClientMetaSuggestion'
 import tags from './clientPostsControllers/tags'
 
@@ -23,7 +23,7 @@ router.get('/clientGetEditingPost',clientGetPost)
 router.post('/likeDislikeView',clientLikeDislikeView)
 router.post('/newComment',clientNewComment)
 router.post('/checkRemovedContent',clientCheckRemovedContent)
-router.post('/fixMetaImage',clientFixMetaImage)
+router.post('/resetMetaImage',resetMetaImage)
 router.get('/getMetas',cacheSuccesses,clientGetMetas)
 router.get('/getMeta',cacheSuccesses,clientGetMeta)
 router.get('/tags',cacheSuccesses,tags)

@@ -29,13 +29,15 @@ interface ErrorComponentProps {
 const Error = ({statusCode}: ErrorComponentProps) => {
 
     return (
-        <ErrorStyledDiv className='error-page'>
-            <h1 className='error-page-message'>
-                {statusCode ? `Error ${statusCode} Occurred On Server` : 'An Error Occurred'}
-            </h1>
-            <Link href="/" className='back-to-homepage'>
-                <h2>back to homepage</h2>
-            </Link>
+        <ErrorStyledDiv className='error-page' id={'content'}>
+            <div id={'primary'}>
+                <h1 className='error-page-message'>
+                    {statusCode ? `Error ${statusCode} Occurred On Server` : 'An Error Occurred'}
+                </h1>
+                <Link href="/" className='back-to-homepage'>
+                    <h2>back to homepage</h2>
+                </Link>
+            </div>
         </ErrorStyledDiv>
     )
 }

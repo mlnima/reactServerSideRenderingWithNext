@@ -4,7 +4,7 @@ import Link from "next/link";
 import ProfileImage from "../../../components/includes/profilePageComponents/ProfileImage/ProfileImage";
 import {useSelector} from "react-redux";
 import styled from "styled-components";
-import {wrapper} from "../../../store_toolkit/store";
+import {wrapper} from "@store_toolkit/store";
 import _getServerSideStaticPageData from "../../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
 
@@ -73,7 +73,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             [
                 'profilePageRightSidebar',
                 'profilePageLeftSidebar',
-                'profilePage'
+                'profile'
             ])
 
     return null

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { ImageResponse } from '@vercel/og';
 
 export const config = {
-    runtime: 'experimental-edge',
+    runtime: '(experimental)-edge',
 };
 interface PropTypes {
     title:string,

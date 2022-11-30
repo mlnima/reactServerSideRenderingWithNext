@@ -9,6 +9,7 @@ import isImageAllowedForNextImage from "./src/url-util/isImageAllowedForNextImag
 import isInternalUrl from "./src/url-util/isInternalUrl";
 import isJsonString from "./src/string-util/isJsonString";
 import isUserFromExternalLink from "./src/url-util/isUserFromExternalLink";
+import queryUniquer from "./src/url-util/queryUniquer";
 import mongoIdValidator from "./src/string-util/mongoIdValidatorClient";
 import randomNumberGenerator from "./src/math-util/randomNumberGenerator";
 import rangeNumGenerator from "./src/math-util/rangeNumGenerator";
@@ -44,4 +45,5 @@ export {
     rangeNumGenerator,
     ratingCalculator,
     uniqArrayBy,
+    queryUniquer
 }

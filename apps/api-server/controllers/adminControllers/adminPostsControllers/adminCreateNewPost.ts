@@ -13,15 +13,17 @@ const adminCreateNewPost = async (req, res) => {
         const newPostDataToSave = new postSchema(editedNewPost);
         newPostDataToSave.save().then(savedPostData => {
             res.json({savedPostData, message: 'Post Has Been Saved'});
-        }).catch(err => {
-            if (err.code === 11000) {
-                res.status(400).send({message: 'Post with this TextInput already exist in the Database', err})
+        }).catch(error => {
+            console.log(error)
+            if (error.code === 11000) {
+                res.status(400).send({message: 'Post with this TextInput already exist in the Database', error})
 
             } else {
-                res.status(500).send({message: 'Something Went Wrong While Saving The Post', err})
+                res.status(500).send({message: 'Something Went Wrong While Saving The Post', error})
             }
         })
-    } catch (err) {
+    } catch (error) {
+        console.log(error)
         res.end()
     }
 };

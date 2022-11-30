@@ -1,0 +1,36 @@
+{
+  "name": "api-requests",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "types": "index.ts",
+  "main": "./index.js",
+  "source": "./index.ts",
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "dev": "tsc -w",
+    "lint": "TIMING=1 eslint \"src/**/*.ts*\"",
+    "test": "jest"
+  },
+  "jest": {
+    "preset": "jest-presets/jest/node"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@types/jest": "latest",
+    "axios": "^0.27.2",
+    "eslint": "^7.32.0",
+    "jest": "latest",
+    "jest-presets": "*",
+    "custom-util": "*",
+    "eslint-config-custom": "*",
+    "tsconfig": "*",
+    "typescript": "^4.5.3"
+  }
+}

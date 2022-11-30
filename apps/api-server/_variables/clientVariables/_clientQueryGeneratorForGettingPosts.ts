@@ -40,6 +40,8 @@ const _clientQueryGeneratorForGettingPosts = (data, metaId) => {
         sort === 'updatedAt' ? {updatedAt: -1, createdAt: -1} :
             {[sort]: -1}
 
+    const statusQuery = !data.status ?  [{status: 'published'}] : data.status ==='all' ?  []:[]
+
     return {
         findPostsQueries: {
             $and: [
@@ -48,7 +50,8 @@ const _clientQueryGeneratorForGettingPosts = (data, metaId) => {
                 ...excludeQuery,
                 ...searchQuery,
                 ...metaQuery,
-                {status: 'published'}
+                ...statusQuery,
+                // {status: 'published'}
             ]
         },
         size: size > 1000 ? 1000 : size,

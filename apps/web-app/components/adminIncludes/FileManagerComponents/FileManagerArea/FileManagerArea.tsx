@@ -14,7 +14,7 @@ const FileManagerAreaStyledDiv = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
   grid-gap: 10px;
-  background-color: black;
+  background-color: var(--secondary-background-color,#181818);
   padding: 20px 20px 200px 20px;
   border-radius: 20px;
 

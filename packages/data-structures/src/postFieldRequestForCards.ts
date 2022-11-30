@@ -13,5 +13,8 @@ const postFieldRequestForCards = [
     'updatedAt',
     'createdAt',
     'outPostType',
+    'uniqueData'
 ]
+
+
 export default  postFieldRequestForCards

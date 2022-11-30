@@ -7,7 +7,9 @@ import {Store} from "typescript-types";
 import {uniqArrayBy} from "custom-util";
 
 const MetaDataSelectorStyledDiv = styled.div`
-width: 300px;
+  width: 300px;
+  color: var( --secondary-text-color,#ccc);
+  background: var(--secondary-background-color,#181818) ;
 `
 
 interface ComponentPropTypes {
@@ -66,6 +68,14 @@ const MetaDataSelector: FC<ComponentPropTypes> =
                         // options={options}
                         options={options}
                         isMulti={true}
+                        styles={{
+                            control: (baseStyles, state) => ({
+                                ...baseStyles,
+                                color: 'var( --secondary-text-color,#ccc)',
+                                backgroundColor:' var(--secondary-background-color,#181818)',
+
+                            }),
+                        }}
                         // isClearable ={true}
                     />
                 </div>

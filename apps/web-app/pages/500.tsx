@@ -27,36 +27,17 @@ const Custom500StyledDiv = styled.div`
 const Custom500 = () => {
     const {t} = useTranslation();
     return (
-        <Custom500StyledDiv id='not-found-page' className='main'>
-            <h1>500 -{t(`common:Server Error`, {}, {fallback: 'Server Error'})}</h1>
-            <Link href="/" className='back-to-homepage'>
-                <h2>{t(`common:Go To Homepage`, {}, {fallback: 'Go To Homepage'})}</h2>
-            </Link>
+        <Custom500StyledDiv id={'not-found-page content'}>
+            <div id={'primary'}>
+                <h1>500 -{t(`common:Server Error`, {}, {fallback: 'Server Error'})}</h1>
+                <Link href="/" className='back-to-homepage'>
+                    <h2>{t(`common:Go To Homepage`, {}, {fallback: 'Go To Homepage'})}</h2>
+                </Link>
+            </div>
         </Custom500StyledDiv>
     );
 };
 
-
-// export const getStaticProps = wrapper.getServerSideProps(store =>
-//     async (context) => {
-//         return {
-//             props: {
-//                 ...(await serverSideTranslations(
-//                     context.locale || process.env.NEXT_PUBLIC_DEFAULT_LOCAL as string,
-//                     ['common', 'customTranslation']
-//                 )),
-//             }
-//         }
-//     })
-
-
-// Custom500.getLayout = function getLayout(page: ReactElement) {
-//     return (
-//         <AppLayout>
-//             {page}
-//         </AppLayout>
-//     )
-// }
 
 export default Custom500;
 

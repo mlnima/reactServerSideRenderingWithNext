@@ -16,6 +16,8 @@ const ugc_postImagesUpload = async (req, res) => {
         const imagesKeys = Object.keys(images)
         // let uploadedImagesUrls = []
         // console.log(imageIndex)
+
+
         for await (const image of imagesKeys) {
 
             const tempPath = `./public/uploads/posts/${postId}/temp`

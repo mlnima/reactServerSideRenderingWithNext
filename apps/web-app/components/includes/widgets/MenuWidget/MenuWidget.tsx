@@ -83,6 +83,7 @@ const MenuWidgetStyledDiv = styled.div`
       margin: auto;
       padding: 0;
       transition: none;
+      background-color: transparent;
 
       .menu-widget-close-button {
         display: none;

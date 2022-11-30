@@ -35,7 +35,7 @@ const searchPage = ( ) => {
     const router = useRouter()
 
     return (
-        <StyledMain id={'main-content'} className="main posts-page" stylesData={settings.design?.postsPageStyle || ''}>
+        <StyledMain id={'content'} className="main posts-page" stylesData={settings.design?.postsPageStyle || ''}>
 
             <WidgetsRenderer position={'searchPageTop'}/>
 

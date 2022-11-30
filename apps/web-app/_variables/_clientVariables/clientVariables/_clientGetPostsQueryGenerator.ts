@@ -1,5 +1,6 @@
 import {mongoIdValidator} from 'custom-util'
 import {NextRouter} from "next/router";
+import {postFieldRequestForCards} from "data-structures";
 
 const _clientGetPostsQueryGenerator = (queryData: NextRouter['query'], metaIdData: string) => {
     const sort = queryData?.sort ? {sort: queryData?.sort} : {sort: 'updatedAt'}
@@ -12,23 +13,7 @@ const _clientGetPostsQueryGenerator = (queryData: NextRouter['query'], metaIdDat
     const status = queryData?.status ? {status: queryData?.status} : {status: 'published'}
     const keyword = queryData?.keyword ? {keyword: encodeURIComponent(queryData?.keyword as string)} : {}
 
-    const fields = [
-        'title',
-        'mainThumbnail',
-        'quality',
-        'likes',
-        'disLikes',
-        'views',
-        'duration',
-        'postType',
-        'price',
-        'translations',
-        'videoTrailerUrl',
-        'rating',
-        'redirectLink',
-        'createdAt',
-        'updatedAt'
-    ].map(f => 'field=' + f).join('&')
+    // postFieldRequestForCards.map(f => 'field=' + f).join('&')
 
     const getPostsData = {
         size: queryData?.size,
@@ -45,7 +30,7 @@ const _clientGetPostsQueryGenerator = (queryData: NextRouter['query'], metaIdDat
 
     const queries = new URLSearchParams(getPostsData as {}).toString()
 
-    return `?${queries}&${fields}`
+    return `?${queries}&${postFieldRequestForCards.map(f => 'field=' + f).join('&')}`
 
 }
 

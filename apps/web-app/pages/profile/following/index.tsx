@@ -54,7 +54,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         [
             'profilePageRightSidebar',
             'profilePageLeftSidebar',
-            'profilePage'
+            'profile'
         ])
 
     return null

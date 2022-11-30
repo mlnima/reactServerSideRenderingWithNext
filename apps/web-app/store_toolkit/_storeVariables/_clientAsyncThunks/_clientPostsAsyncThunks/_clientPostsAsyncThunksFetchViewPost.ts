@@ -1,16 +1,10 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import Axios from "@_variables/Axios";
+import viewPost from "api-requests/src/client/posts/viewPost";
 
 export const fetchViewPost = createAsyncThunk(
     'posts/fetchViewPost',
     async (id: string, thunkAPI) => {
-        const body = {
-            id,
-            type: 'views'
-        };
-        return await Axios.post('/api/v1/posts/likeDislikeView', body).then(res => {
-            return
-        })
+        return await viewPost(id)
     }
 )
 

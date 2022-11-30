@@ -22,6 +22,7 @@ const clientUserPostImageUpload = async (req, res) => {
         let uploadedImages=[]
 
         for await (const image of Object.keys(images)) {
+
             const filePath = `./public/uploads/posts/${postId}/${image}`
             const tempPath = `./public/uploads/posts/${postId}/temp-${image}`
 

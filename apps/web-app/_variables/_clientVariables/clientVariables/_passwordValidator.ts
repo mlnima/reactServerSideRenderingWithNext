@@ -1,8 +1,8 @@
 const _passwordValidator = (password:string|undefined)=>{
-    //return password? (/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/).test(password):false
+    //return password? (/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/).experimental(password):false
 
     //Minimum eight characters, at least one letter and one number
-    // return password? (/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/).test(password):false
+    // return password? (/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/).experimental(password):false
     //Minimum eight characters, at least one letter and one number allow special charecter
      return password? (/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d$@$!%*?&]{8,}/).test(password):false
 }

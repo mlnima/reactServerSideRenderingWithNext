@@ -3,20 +3,21 @@ import {languagesOptions} from '@_variables/variables'
 import {convertVariableNameToName} from "custom-util";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {adminEditIdentity, adminPanelUpdateSetting} from "../../../../store_toolkit/adminReducers/adminPanelSettingsReducer";
-import {useAdminDispatch} from "../../../../store_toolkit/hooks";
+import {adminEditIdentity, adminPanelUpdateSetting} from "@store_toolkit/adminReducers/adminPanelSettingsReducer";
+import {useAdminDispatch} from "@store_toolkit/hooks";
 import {Store} from "typescript-types";
 import SvgRenderer from "../../../../components/global/commonComponents/SvgRenderer/SvgRenderer";
 import TitleDescriptionSettingFields
     from "../../../../components/adminIncludes/pagesComponents/settings/general/TitleDescriptionSettingFields";
 
 let StyledForm = styled.form`
-  background-color: white;
+  //background-color: white;
   padding: 20px;
   
   .forms{
     .active-editing-language{
       width: 100px;
+      margin: 10px 0;
     }
   }
 

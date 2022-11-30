@@ -139,7 +139,7 @@ const FormWidget: FC<FormWidgetPropTypes> = ({widgetId, uniqueData}) => {
                 <form onSubmit={e => onSubmitHandler(e)} className='form-widget-the-form'>
                     <h2>{uniqueData?.formTitle}</h2>
                     {renderFields}
-                    <button type='submit' className='btn btn-primary'>
+                    <button type='submit' className='btn btn-primary submit-button'>
                         {uniqueData?.submitButtonText || 'Submit'}
                     </button>
                 </form>

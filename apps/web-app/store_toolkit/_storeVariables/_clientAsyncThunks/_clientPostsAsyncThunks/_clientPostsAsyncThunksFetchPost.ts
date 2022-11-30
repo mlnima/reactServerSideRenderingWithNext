@@ -1,10 +1,7 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {mongoIdValidator} from "custom-util";
-import Axios from "@_variables/Axios";
-import _postPageQueryGenerator from "@_variables/_clientVariables/clientVariables/_postPageQueryGenerator";
 import {setHeadData} from "../../../clientReducers/globalStateReducer";
 import {_postCanonicalUrlGenerator} from "@_variables/_clientVariables/clientVariables/_canonicalUrlGenerators";
-// import postTypes from "@data-structures/postTypes";
+import {getPost} from "api-requests";
 
 interface FetchPost {
     identifier: string,
@@ -18,22 +15,7 @@ interface FetchPost {
 const fetchPost = createAsyncThunk(
     'posts/fetchPost',
     async ({context, identifier}: FetchPost, thunkAPI) => {
-        const queryGeneratorData = mongoIdValidator(identifier) ? {_id: identifier} : {title: identifier}
-
-        const apiData = await Axios.get(`/api/v1/posts/clientGetPost${_postPageQueryGenerator(queryGeneratorData)}`)
-        // const regexMatchCorrectPostsRoutes =postTypes.map(postType=> `^\/${postType}\/i|\/post\/${postType}\/` ).join('|')
-
-        // const correctPathRegex = new RegExp(`${regexMatchCorrectPostsRoutes}/g`)
-        //
-        // const ifIsInternalNavigated = new RegExp(`\/_next\/data\/`)
-
-        // if (!correctPathRegex.test(context.req.path) && !ifIsInternalNavigated.test(context.req.path)){
-        //     context.res.writeHead(301, {
-        //         Location: `/post/${apiData.data?.post?.postType}/${apiData.data?.post?._id}`
-        //     });
-        //     context.res.end();
-        // }
-
+        const apiData = await getPost(identifier)
         const isDefaultLocale = context.locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL;
         const postTitle = isDefaultLocale ?
             apiData.data.post?.title || '' :
@@ -69,8 +51,6 @@ const fetchPost = createAsyncThunk(
                 }
             )
         )
-
-
         return ({
             post: apiData?.data?.post || {},
             relatedPosts: apiData?.data?.relatedPosts || []

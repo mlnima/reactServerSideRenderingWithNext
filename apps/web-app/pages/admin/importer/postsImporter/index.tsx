@@ -1,9 +1,10 @@
 import React, {useState, useRef, ChangeEvent} from 'react';
 import { useSelector} from "react-redux";
 import styled from "styled-components";
-import {fetchAdminPanelSaveNewPost} from "../../../../store_toolkit/adminReducers/adminPanelPostsReducer";
-import {useAdminDispatch} from "../../../../store_toolkit/hooks";
+import {fetchAdminPanelSaveNewPost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
+import {useAdminDispatch} from "@store_toolkit/hooks";
 import {Store} from "typescript-types";
+import _qualityConvertor from "@components/includes/cards/asset/_qualityConvertor";
 // import {adminSaveNewPost} from "../../../../store/adminActions/adminPanelPostsActions";
 
 const PostsImporterStyledDiv = styled.div`
@@ -25,7 +26,7 @@ const PostsImporterStyledDiv = styled.div`
 `
 
 const postsImporter = () => {
-    const userData = useSelector((store: Store) => store?.user.userData)
+    const userData = useSelector(({adminPanelUsers}: Store) => adminPanelUsers?.userData)
     const statusElement = useRef(null)
     const dataPreview = useRef(null)
     const dispatch = useAdminDispatch()
@@ -40,9 +41,12 @@ const postsImporter = () => {
             const postDataToSave = {
                 ...post,
                 status:  statusElement.current.value || 'draft',
+                quality: _qualityConvertor(post.quality),
+                //@ts-ignore
                 author:  userData._id
             }
             dispatch(fetchAdminPanelSaveNewPost({data:postDataToSave, router:null}))
+
         }
     }
 

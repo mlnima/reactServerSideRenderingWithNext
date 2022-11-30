@@ -1,22 +1,20 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {loading, setAlert} from "../../../clientReducers/globalStateReducer";
-import Axios from "@_variables/Axios";
+import postNewComment from "api-requests/src/client/comments/postNewComment";
 
 const fetchNewComment = createAsyncThunk(
     'posts/fetchNewComment',
     async (commentData: {}, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         const storeData = thunkAPI.getState()
-        const body = {
-            ...commentData,
-        };
-        await Axios.post(`/api/v1/posts/newComment`, body).then(()=>{
-            const commentData = {
-                ...body,
-                //@ts-ignore
+        postNewComment(commentData)
+            .then(()=>{
+            const newCommentData = {
+                ...commentData,
+          //@ts-ignore
                 author: storeData.user.userData
             }
-            return commentData
+            return newCommentData
         }).catch(() => {
             thunkAPI.dispatch(setAlert({
                 active: true,

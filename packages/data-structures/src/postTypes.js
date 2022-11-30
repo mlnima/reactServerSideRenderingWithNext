@@ -15,6 +15,7 @@ var postTypes = [
     'externalProduct',
     'externalPromotion',
     'externalArticle',
-    'externaLearn',
+    'externalLearn',
+    'ugcAd'
 ];
 exports["default"] = postTypes;

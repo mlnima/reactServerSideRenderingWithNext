@@ -10,6 +10,7 @@ interface GlobalStylesPropTypes {
 //body {
 const GlobalStyles = createGlobalStyle`
   body {
+
     background-color: var(--main-background-color,#000);
     color: var(--main-text-color,#fff);
     margin: 0 !important;

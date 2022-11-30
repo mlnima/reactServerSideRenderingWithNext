@@ -1,6 +1,4 @@
-import {FC, useEffect, useMemo, useRef, useState} from 'react'
-import {isAbsolutePath,isImageAllowedForNextImage} from "custom-util";
-import Image from 'next/image'
+import {FC, useEffect, useRef} from 'react'
 import styled from "styled-components";
 
 interface TextToCanvasImagePropTypes {
@@ -12,7 +10,6 @@ interface TextToCanvasImagePropTypes {
 interface TextToCanvasImageStylePropTypes {
     postsPerRawForMobile: number,
     cardWidth: number,
-
 }
 
 const TextToCanvasImageStyle = styled.div`
@@ -51,11 +48,10 @@ const TextToCanvasImage: FC<TextToCanvasImagePropTypes> =
         const canvasElement = useRef<HTMLCanvasElement | null>(null)
 
         useEffect(() => {
-            if (canvasElement?.current){
+            if (canvasElement?.current && title){
                 const ctx = canvasElement?.current?.getContext('2d')
                 ctx.font = '30px serif';
-                // ctx.fillStyle = 'var(--main-text-color, #f90)';
-                ctx.fillStyle = '#333';
+                ctx.fillStyle = '#fff';
                 ctx.fillText(title.substring(0,15) + '...',50,(cardWidth / 1.777)/2);
             }
         }, [canvasElement?.current]);
@@ -70,26 +66,3 @@ const TextToCanvasImage: FC<TextToCanvasImagePropTypes> =
         )
     };
 export default TextToCanvasImage
-
-// {imageUrlSource && isImageAllowedForNextImage(imageUrlSource) && index >= 2 ?
-//     <Image alt={mediaAlt}
-//            src={gotError || !imageUrlSource ?
-//                '/asset/images/default/no-image-available.png' :
-//                imageUrlSource
-//            }
-//            loading={'lazy'}
-//            layout={'fill'}
-//            className={'card-image-next'}
-//            quality={80}
-//            objectFit={'cover'}
-//            onError={() => setGotError(true)}
-//     /> :
-//     <img src={gotError || !imageUrlSource ?
-//         '/asset/images/default/no-image-available.png' :
-//         imageUrlSource
-//     }
-//          alt={mediaAlt}
-//          className={'card-image'}
-//          onError={() => setGotError(true)}
-//     />
-// }

@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import AppLayoutInitializer from "./AppLayoutInitializer";
 import {Provider} from 'react-redux';
-import {wrapper} from '../../../store_toolkit/store';
+import {wrapper} from '@store_toolkit/store';
 
 interface AppLayoutPropTypes {
     children: React.ReactNode,

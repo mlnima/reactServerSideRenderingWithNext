@@ -35,6 +35,7 @@ interface TagCardPropTypes {
     index?: number,
     postsPerRawForMobile: number,
     cardWidth: number,
+    role:string
 }
 
 const TagCard: FC<TagCardPropTypes> =
@@ -42,7 +43,8 @@ const TagCard: FC<TagCardPropTypes> =
          meta,
          index,
          postsPerRawForMobile,
-         cardWidth
+         cardWidth,
+         role
      }) => {
 
         const {locale} = useRouter();

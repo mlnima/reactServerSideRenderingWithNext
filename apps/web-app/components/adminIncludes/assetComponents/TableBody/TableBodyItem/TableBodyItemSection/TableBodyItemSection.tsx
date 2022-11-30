@@ -18,20 +18,18 @@ let StyledDiv = styled.div`
     display: flex;
     flex-wrap: wrap;
 
-    .asset-page-item-array-section-item {
-      margin: 5px;
-      font-size: small;
+    button{
+       font-size: xx-small;
+      padding: 2px 4px;
     }
-
+    
     p {
       overflow: hidden;
       display: inline-block;
       text-overflow: ellipsis;
       white-space: nowrap;
       width: 150px;
-
     }
-
   }
 
 `

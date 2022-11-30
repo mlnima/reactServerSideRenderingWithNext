@@ -15,5 +15,6 @@ var postFieldRequestForCards = [
     'updatedAt',
     'createdAt',
     'outPostType',
+    'uniqueData'
 ];
 exports["default"] = postFieldRequestForCards;
