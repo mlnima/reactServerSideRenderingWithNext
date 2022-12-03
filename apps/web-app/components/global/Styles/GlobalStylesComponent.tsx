@@ -38,6 +38,11 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
   }
   
+  .sub-content{
+    padding: 0 8px;
+    box-sizing: border-box;
+  }
+  
   a {
     text-decoration: none;
     box-sizing: border-box;

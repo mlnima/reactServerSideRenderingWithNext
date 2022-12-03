@@ -6,12 +6,13 @@ const BackToTopButtonStyledDiv = styled.div`
   position: fixed;
   bottom: 6rem;
   right: 2rem;
-  background-color: var(--main-active-color, #ccc);
+  background-color: var(--main-active-color, #f90);
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 8px 16px;
   cursor: pointer;
+  z-index: 11;
   
   span{
     display: flex;

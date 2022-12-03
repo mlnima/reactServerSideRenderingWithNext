@@ -11,7 +11,7 @@ const CommentsRendererStyledDiv = styled.div`
   width: 100%;
   align-items: flex-start;
   justify-content: center;
-  padding: 8px;
+
   box-sizing: border-box;
 `
 
@@ -25,7 +25,7 @@ const CommentsRenderer :FC<CommentsRendererPropTypes> = ({showComments}) => {
 
     if (comments?.length){
         return (
-            <CommentsRendererStyledDiv className='comments'>
+            <CommentsRendererStyledDiv className='comments sub-content'>
                 {showComments && <>
                     {comments.map((commentData, index) => {
                         //@ts-ignore

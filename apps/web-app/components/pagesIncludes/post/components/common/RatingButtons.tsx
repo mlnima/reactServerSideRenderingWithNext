@@ -11,10 +11,9 @@ import {useAppDispatch} from "@store_toolkit/hooks";
 import {Store} from "typescript-types";
 import SvgRenderer from "../../../../global/commonComponents/SvgRenderer/SvgRenderer";
 
-// it just prevent user or visitor do not rate multiple time,
-// we need to create session id for none registered user or inject rating posts to the user schema
 const RatingButtonsStyledDiv = styled.div`
- 
+ padding: 0;
+  margin: 0;
   .rated-message {
     color: var(--secondary-text-color, #ccc);
   }
@@ -88,7 +87,7 @@ const RatingButtons: FC<RatingButtonsPropTypes> = ({rating}) => {
     }, [rating, likes, disLikes]);
 
     return (
-        <RatingButtonsStyledDiv className="rating-buttons" buttonsDisabledStatus={isRated}>
+        <RatingButtonsStyledDiv className="rating-buttons sub-content" buttonsDisabledStatus={isRated}>
             {views ?
                 <span className='like-disLike-count-items rating-item'
                       title={t<string>('Views')}>

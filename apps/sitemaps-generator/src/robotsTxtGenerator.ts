@@ -9,7 +9,7 @@ Disallow: /admin
 Disallow: /admin/*
 Disallow: /profile/*
 Disallow: /chatroom/*
-Disallow: /messenger/*
+Disallow: /page/test
 Sitemap: ${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemap.xml
 Host: ${process.env.NEXT_PUBLIC_PRODUCTION_URL}`,
         {

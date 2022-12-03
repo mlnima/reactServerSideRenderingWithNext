@@ -16,19 +16,22 @@ import fetchDisLikePost
     from "../_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksDisLikePost";
 import fetchUserEditingPost
     from "../_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserEditingPost";
-
-//not in package
-import getTags
-    from "../_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/getTags";
-//**not in package
-import fetchUserCreateNewPost
-    from "../_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserCreateNewPost";
-// import fetchUserEditingPostUpdate
-//     from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserEditingPostUpdate";
 import fetchNewComment
     from "../_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchNewComment";
 import {_ugcDeletePostImage, _ugcUploadPostImages}
     from "../_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_ugcUploadPostImages";
+//not in package
+import getTags
+    from "../_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/getTags";
+import clientLikeDislikeView
+    from "api-server/dist/controllers/clientControllers/clientPostsControllers/clientLikeDislikeView";
+import attendingToEvent from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/attendToEvent";
+
+//**not in package
+// import fetchUserCreateNewPost
+//     from "../_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserCreateNewPost";
+// import fetchUserEditingPostUpdate
+//     from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserEditingPostUpdate";
 // import fetchViewPost
 //     from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchViewPost";
 // import fetchDeleteCommentByAdminInPostPage
@@ -224,7 +227,7 @@ export const postsSlice = createSlice({
                     ...state,
                     post: {
                         ...state.post,
-                        comments:[...(state.post?.comments || []),action.payload]
+                        comments: [...(state.post?.comments || []), action.payload]
                     }
                 }
             })
@@ -235,7 +238,7 @@ export const postsSlice = createSlice({
                     editingPost: {
                         ...state.editingPost,
                         //images:[...(state.editingPost?.images || []),...action.payload]
-                        images:action.payload
+                        images: action.payload
                     }
                 }
             })
@@ -245,7 +248,17 @@ export const postsSlice = createSlice({
                     ...state,
                     editingPost: {
                         ...state.editingPost,
-                        images:action.payload
+                        images: action.payload
+                    }
+                }
+            })
+            .addCase(attendingToEvent.fulfilled, (state, action: PayloadAction<any>) => {
+
+                return {
+                    ...state,
+                    post:{
+                        ...state.post,
+                        ...action.payload
                     }
                 }
             })

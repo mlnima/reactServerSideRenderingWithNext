@@ -7,13 +7,9 @@ import {Store} from "typescript-types";
 
 const PostDescriptionStyledDiv = styled.div`
   color: var(--secondary-text-color, #ccc);
-  margin-bottom: 10px;
-  width: 100%;
-  padding:  10px;
   box-sizing: border-box;
 
   @media only screen and (min-width: 768px) {
-    
     max-width: 1300px;
     margin: 0 auto;
   }
@@ -41,7 +37,7 @@ const Description: FC<PropTypes> = ({descriptionRef}) => {
 
     if (descriptionValue){
         return (
-            <PostDescriptionStyledDiv className="description" ref={descriptionRef}>
+            <PostDescriptionStyledDiv className={'description sub-content'} ref={descriptionRef}>
                 {descriptionValue ? parse(descriptionValue as string) : ''}
             </PostDescriptionStyledDiv>
         )

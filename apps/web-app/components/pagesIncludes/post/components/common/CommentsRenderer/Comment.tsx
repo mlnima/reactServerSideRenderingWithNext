@@ -39,14 +39,14 @@ const CommentStyledDiv = styled.div`
     }
 
     .comment-date {
-      color: var(--main-text-colo, #fff);
+      color: var(--main-text-color, #fff);
       font-size: 14px;
       margin: 4px 5px;
     }
   }
 
   .comment-body {
-    color: var(--main-text-colo, #fff);
+    color: var(--main-text-color, #fff);
     overflow-wrap: break-word;
   }
 `

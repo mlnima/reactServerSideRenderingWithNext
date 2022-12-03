@@ -55,8 +55,8 @@ const ProfilePostPageStyledDiv = styled.div`
        width: 20%;
      }
     }
-
-    .description-section, .title-section {
+    
+    .description-section, .title-section ,.capacity{
       width: 100%;
       display: flex;
       justify-content: space-between;
@@ -70,7 +70,7 @@ const ProfilePostPageStyledDiv = styled.div`
         width: 80%;
       }
     }
-
+    
     .meta-selector-section {
       display: grid;
       grid-template-columns: 20% 80%;
@@ -170,7 +170,15 @@ const post = () => {
                                        title={'Title'}
                                        onChangeHandler={onChangeHandler}/>
                         </div>
-                        { editingPost?.postType === 'event' && <EventDates onChangeHandler={onUniqueDataChangeHandler} uniqueData={editingPost.uniqueData}/>}
+                        { editingPost?.postType === 'event' &&
+                            <EventDates onChangeHandler={onUniqueDataChangeHandler} uniqueData={editingPost.uniqueData}/>}
+                        {editingPost?.postType === 'event' &&
+                            <div className={'capacity field-section'}>
+                                <TextInput name={'capacity'} type={'number'} value={editingPost?.uniqueData?.capacity}
+                                           title={'Capacity'}
+                                           onChangeHandler={onUniqueDataChangeHandler}/>
+                            </div>
+                        }
 
                         <div className="meta-selector-section">
                             <p>Categories:</p>

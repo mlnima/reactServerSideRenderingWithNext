@@ -2,19 +2,20 @@ import {FC} from "react";
 import styled from "styled-components";
 import {atcb_action} from 'add-to-calendar-button';
 import 'add-to-calendar-button/assets/css/atcb.css';
+import useTranslation from "next-translate/useTranslation";
 
 const Style = styled.form`
 
 `;
 
 interface PropTypes {
-    startDate: string|Date,
-    endDate: string|Date,
+    startDate: string | Date,
+    endDate: string | Date,
     eventName: string
 }
 
-const AddToCalendar: FC<PropTypes> = ({startDate,endDate,eventName}) => {
-
+const AddToCalendar: FC<PropTypes> = ({startDate, endDate, eventName}) => {
+    const {t} = useTranslation();
     return (
 
         <Style onSubmit={e => {
@@ -30,8 +31,13 @@ const AddToCalendar: FC<PropTypes> = ({startDate,endDate,eventName}) => {
                 iCalFileName: "Reminder-Event",
             });
         }}>
-            {/*<input value={eventName} onChange={changeName}/>*/}
-            <input type="submit" value="Add To Calendar" className={'btn btn-primary'}/>
+            <input type="submit"
+                   value={
+                       t(`event:Add To Calendar`,
+                           {},
+                           {fallback: 'Add To Calendar'})
+                   }
+                   className={'btn btn-primary'}/>
         </Style>
     )
 };

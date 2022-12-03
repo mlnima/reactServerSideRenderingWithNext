@@ -7,14 +7,12 @@ const WidgetHeaderStyledDiv = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 10px ;
   border-radius: 5px;
   max-height: 30px;
   background-color: var(--secondary-background-color,#181818) ;
   .widget-header-title{
     font-weight: initial;
     font-size: 20px;
-    padding: 0 2px;
     color: var( --secondary-text-color,#ccc);
   }
   .widget-header-redirect-link{
@@ -37,7 +35,7 @@ const WidgetHeader:FC<WidgetHeaderPropTypes> = ({translations,title,redirectLink
 
         return (
             <WidgetHeaderStyledDiv className='widget-Header' >
-                <h2 className='widget-header-title'>{widgetHeaderTitle}</h2>
+                <h2 className='widget-header-title sub-content'>{widgetHeaderTitle}</h2>
                 {redirectLink && redirectToTitle && !footerLink ?
                     <Link href={redirectLink}
                           className={'btn btn-secondary widget-header-redirect-link'}

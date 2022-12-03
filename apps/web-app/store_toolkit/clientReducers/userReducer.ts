@@ -62,11 +62,20 @@ export const fetchLogin = createAsyncThunk(
     async ({username, password}: Login, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         return await Axios.post('/api/v1/users/login', {username, password}).then(res => {
-            res?.data?.token ? localStorage.setItem('wt', res.data.token) : null
-            return {
-                userData: res.data,
-                loggedIn: true
+
+            if(res?.data?.token){
+                localStorage.setItem('wt', res.data.token)
+                return {
+                    userData: res.data,
+                    loggedIn: true
+                }
+            }else {
+                return {
+                    loggedIn: false
+                }
             }
+
+
 
         }).catch((err) => {
             console.log('err')

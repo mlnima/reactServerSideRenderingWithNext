@@ -32,7 +32,7 @@ const buttons = css`
     color: var(--success-button-text-color, #fff);
   }
   .btn-danger{
-    background-color: var(--danger-button-link-background-color, #dc3545);
+    background-color: var(--danger-button-background-color, #dc3545);
     color: var(--danger-button-text-color, #fff);
   }
   .btn-warning{

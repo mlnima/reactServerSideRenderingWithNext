@@ -10,8 +10,7 @@ interface GlobalStylesPropTypes {
 
 
 const gridLayout = css`
-
-
+  
   .page-both-sidebar {
     grid-template-columns: 1fr;
     grid-template-areas: 'primary'
@@ -38,18 +37,15 @@ const gridLayout = css`
 
 
   #page {
-
+    width: 100%;
+    box-sizing: border-box;
     #content {
       margin: 0 auto;
-      width: 100%;
-      max-width: 100vw;
       display: grid;
       grid-area: page;
       min-height: 40em;
-
       #primary {
         grid-area: primary;
-        width: 100%;
       }
     }
   }
@@ -61,14 +57,10 @@ const gridLayout = css`
 
     #page {
       width: 100%;
-      //padding: 8px;
-      //margin: 0;
-      box-sizing: border-box;
       display: flex;
       justify-content: center;
       flex-direction: column;
       align-items: center;
-
       #content {
       
         width: 100%;
@@ -79,7 +71,6 @@ const gridLayout = css`
         max-width: 1323px !important;
 
         #primary {
-          //margin: 8px auto;
           grid-area: primary;
           width: 100%;
           #main{

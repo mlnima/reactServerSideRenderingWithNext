@@ -9,10 +9,6 @@ import {capitalizeFirstLetters} from "custom-util";
 
 
 const PostMetaStyledDiv = styled.div`
-  display: block;
-  width: 100%;
-  padding: 0 10px;
-  box-sizing: border-box;
   .title{
     font-weight: initial;
     font-size: initial;
@@ -38,6 +34,7 @@ const PostMetaStyledDiv = styled.div`
       margin-right: 8px;
       margin-bottom:8px;
       color: var(--secondary-text-color, #ccc);
+      background-color: var(--secondary-background-color, #ccc);
       text-decoration: none;
 
       p {
@@ -94,7 +91,7 @@ const PostMetasRenderer: FC<PostMetaPropType> = ({type}) => {
 
     if (filterMeta?.length) {
         return (
-            <PostMetaStyledDiv className={`${type}-container post-meta`} ref={containerRef} >
+            <PostMetaStyledDiv className={`${type}-container post-meta sub-content`} ref={containerRef} >
                 {(type !== 'all' && !!type) && <h2 className={'title'}>{capitalizeFirstLetters(type)}</h2>}
                 <div className="content">
                     {renderData}

@@ -3,7 +3,10 @@ import {User} from "./User";
 import {Meta} from "./Meta";
 
 interface uniqueDataPossibility{
-    startDate?: Date;
+    startDate?: Date | string;
+    endDate?: Date | string;
+    capacity?: number;
+    attenders?: string[];
 }
 
 

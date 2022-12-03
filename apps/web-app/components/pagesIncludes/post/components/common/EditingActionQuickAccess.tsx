@@ -15,12 +15,8 @@ const EditLinkForAdminStyledDiv = styled.div`
   align-items: center;
   flex-wrap: wrap;
   background-color: var(--secondary-background-color, #181818);
-  padding: 10px;
   top: 0;
   border-radius: 3px;
-  box-sizing: border-box;
-  margin: 8px 0;
-
   .btn-primary {
     color: var(--primary-button-link-text-color);
   }

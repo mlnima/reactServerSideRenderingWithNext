@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const PostPageStyle = styled.div`
-//entry-content
   display: flex;
   justify-self: center;
   flex-direction: column;
@@ -9,31 +8,8 @@ const PostPageStyle = styled.div`
   justify-content: flex-start;
   width: 100%;
   grid-area: primary;
-  
-  //.promotion-thumbnail-link {
-  //  display: flex;
-  //  flex-direction: column;
-  //  align-items: center;
-  //  justify-content: center;
-  //
-  //  .main-thumbnail {
-  //    margin: auto;
-  //    max-width: 320px;
-  //  }
-  //
-  //  .redirect-link {
-  //    color: var(--main-text-color);
-  //    padding: 10px 20px;
-  //    border: var(--main-text-color) 1px solid;
-  //  }
-  //}
-  
-  //article{
-  //  entry-header{
-  //    
-  //  }
-  //}
 
+  
   .rating-buttons,.show-hide-comments,.download-button{
 
     display: flex;
@@ -57,6 +33,10 @@ const PostPageStyle = styled.div`
         font-size: small;
       }
     }
+  }
+
+  .rating-buttons{
+    justify-content: flex-start;
   }
   .download-button{
     justify-self: flex-end;

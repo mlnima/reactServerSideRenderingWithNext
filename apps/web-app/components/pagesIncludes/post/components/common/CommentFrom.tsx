@@ -11,18 +11,12 @@ import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReduce
 import {Store} from "typescript-types";
 import UserProfileImage from "../../../../includes/UserProfileImage/UserProfileImage";
 
-
-//after making special translation file
-
 const CommentFromStyledForm = styled.form`
 
   display: flex;
   flex-direction: column;
-  width: 100%;
-  margin: 20px auto;
-  padding: 0 8px;
-  box-sizing: border-box;
-
+  margin: 10px auto;
+  
   .comment-form-container{
     display: flex;
     justify-content: flex-start;
@@ -104,7 +98,7 @@ const CommentFrom: FC = () => {
     }
 
     return (
-        <CommentFromStyledForm className='comment-form' onSubmit={e => onSubmitHandler(e)}>
+        <CommentFromStyledForm className={'comment-form sub-content'} onSubmit={e => onSubmitHandler(e)}>
             <div className={'comment-form-container'}>
                 <UserProfileImage size={40} profileRedirect={true}/>
                 <div className='comment-form-input-wrapper'>

@@ -37,16 +37,6 @@ const PageStyle = styled.div`
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    
-    .rating-buttons {
-      .rating-item {
-        svg {
-          width: 24px;
-          height: 24px;
-        }
-      }
-
-    }
   }
 
   @media only screen and (min-width: 768px) {

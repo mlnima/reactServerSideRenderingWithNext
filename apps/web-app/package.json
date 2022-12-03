@@ -25,7 +25,7 @@
     "@next/mdx": "^13.0.0",
     "@reduxjs/toolkit": "^1.9.0",
     "@vercel/edge": "^0.1.1",
-    "@vercel/og": "^0.0.20",
+    "@vercel/og": "^0.0.21",
     "add-to-calendar-button": "^1.18.8",
     "axios": "^0.27.2",
     "cors": "^2.8.5",

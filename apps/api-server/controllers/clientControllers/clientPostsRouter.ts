@@ -13,6 +13,7 @@ import clientUserCreateNewPost from './clientPostsControllers/clientUserCreateNe
 import clientUserUpdatePost from './clientPostsControllers/clientUserUpdatePost'
 import resetMetaImage from './clientPostsControllers/resetMetaImage'
 import ClientMetaSuggestion from './clientPostsControllers/ClientMetaSuggestion'
+import attendToEvent from './clientPostsControllers/attendToEvent'
 import tags from './clientPostsControllers/tags'
 
 const router = Router();
@@ -31,5 +32,6 @@ router.get('/getComments',clientGetComments)
 router.post('/userCreateNewPost',authMiddleware,clientUserCreateNewPost)
 router.post('/userUpdatePost',authMiddleware,clientUserUpdatePost)
 router.get('/metaSuggestion',ClientMetaSuggestion)
+router.post('/attendToEvent',attendToEvent)
 
 export default router

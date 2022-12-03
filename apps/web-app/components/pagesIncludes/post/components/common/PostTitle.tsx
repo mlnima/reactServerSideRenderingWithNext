@@ -7,8 +7,8 @@ const PostTitleStyledH1 = styled.h1`
   color: var(--secondary-text-color,#ccc);
   font-size: 1.25em;
   text-align: center;
-  width: 90%;
-  margin: 10px auto;
+  width: 100%;
+  margin: 8px auto;
   
   @media only screen and (min-width: 768px) {
     width: 100%;
@@ -26,7 +26,7 @@ const PostTitle = () => {
     })
 
     return (
-        <PostTitleStyledH1 className='post-title'>
+        <PostTitleStyledH1 className='post-title sub-content'>
             {
                     translations ? translations[locale] ?
                     translations[locale]?.title || title :

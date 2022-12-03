@@ -8,7 +8,7 @@ const RelatedPostsRendererStyledDiv = styled.div`
   width: 100%;
   
   h2 {
-    padding: 0 10px;
+   
     box-sizing: border-box;
     margin: 0;
   }
@@ -25,9 +25,9 @@ const RelatedPostsRenderer: FC = () => {
     });
 
     return (
-        <RelatedPostsRendererStyledDiv>
+        <RelatedPostsRendererStyledDiv >
             {!!relatedPosts?.length && <>
-                <h2>Related</h2>
+                <h2 className={'sub-content'}>Related</h2>
                 <PostsCardsRenderer posts={relatedPosts}/>
             </>}
         </RelatedPostsRendererStyledDiv>
@@ -36,19 +36,3 @@ const RelatedPostsRenderer: FC = () => {
 export default RelatedPostsRenderer
 
 
-// return (
-//     <RelatedPostsRendererStyledDiv>
-//         {actorsRelatedPosts?.length ?
-//             <PostsCardsRenderer posts={actorsRelatedPosts}/>
-//             : null
-//         }
-//         {categoriesRelatedPosts?.length ?
-//             <PostsCardsRenderer posts={categoriesRelatedPosts}/>
-//             : null
-//         }
-//         {tagsRelatedPosts?.length ?
-//             <PostsCardsRenderer posts={tagsRelatedPosts}/>
-//             : null
-//         }
-//     </RelatedPostsRendererStyledDiv>
-// )
