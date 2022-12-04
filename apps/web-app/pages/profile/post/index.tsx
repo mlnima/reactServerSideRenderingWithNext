@@ -93,35 +93,31 @@ const post = () => {
     const {query, push} = useRouter();
     const postType = query?.postType;
 
-    const {sidebar} = useSelector(({settings}: Store) => {
+    const {loggedIn,userData, editingPost,sidebar} = useSelector(({settings,user,posts}: Store) => {
         return {
             sidebar: settings?.identity?.profilePageSidebar,
-        }
-    });
-
-    const {userData, editingPost} = useSelector((store: Store) => {
-        return {
-            userData: store?.user.userData,
-            editingPost: store?.posts?.editingPost,
+            loggedIn: user.loggedIn,
+            userData: user.userData,
+            editingPost: posts?.editingPost,
         }
     })
 
     useEffect(() => {
         if (query.id) {
             dispatch(fetchUserEditingPost(query.id as string));
-        } else if (!query.id && !!query?.new && !!query?.postType && userData?._id) {
+        } else if (!query.id && !!query?.new && !!query?.postType && loggedIn) {
+
             const unpopulatedPostData = postDataCleanerBeforeSave(editingPost)
             dispatch(fetchUserCreateNewPost({
                 data: {
                     ...unpopulatedPostData,
                     status: 'pending',
                     postType: query?.postType as string,
-                    author: userData?._id
-                },
-                push
+                    author: userData._id
+                }
             }))
         }
-    }, [userData?._id]);
+    }, [userData._id]);
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
         dispatch(editPostField({[e.target.name]: e.target.value}))
@@ -155,7 +151,7 @@ const post = () => {
 
 
     return (
-        <DynamicNoSSR>
+
             <ProfilePostPageStyledDiv className={`profile-page create-new-post page-${sidebar || 'no'}-sidebar`}
                                       id={'content'}>
                 <div id={'primary'}>
@@ -245,7 +241,7 @@ const post = () => {
 
 
             </ProfilePostPageStyledDiv>
-        </DynamicNoSSR>
+
     );
 };
 
@@ -269,3 +265,5 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 
 
 export default post;
+// <DynamicNoSSR>
+//</DynamicNoSSR>

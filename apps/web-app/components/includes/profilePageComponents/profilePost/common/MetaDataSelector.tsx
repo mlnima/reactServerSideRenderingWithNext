@@ -71,8 +71,8 @@ const MetaDataSelector: FC<ComponentPropTypes> =
                         styles={{
                             control: (baseStyles, state) => ({
                                 ...baseStyles,
-                                color: 'var( --secondary-text-color,#ccc)',
-                                backgroundColor:' var(--secondary-background-color,#181818)',
+                                color: 'var(--main-text-color, #fff)',
+                                backgroundColor:' var(--main-background-color, #000)',
 
                             }),
                         }}

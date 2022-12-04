@@ -5,11 +5,11 @@ import createNewPost from "api-requests/src/client/posts/ugc/createNewPost";
 
 export const fetchUserCreateNewPost = createAsyncThunk(
     'posts/fetchUserEditingPost',
-    async ({data, push}: { data: PostRaw, push: any }, thunkAPI) => {
+    async ({data}: { data: PostRaw }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         await createNewPost(data).then(res => {
                 if (res.data?.post?._id) {
-                    push(`/profile/post?id=${res.data.post._id}`)
+                    window.location.href = `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/profile/post?id=${res.data.post._id}`;
                 }
             }
         )
