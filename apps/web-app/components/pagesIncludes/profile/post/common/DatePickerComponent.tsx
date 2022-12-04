@@ -1,4 +1,4 @@
-import {FC, useState} from "react";
+import {FC} from "react";
 import styled from "styled-components";
 import DatePicker  from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -33,9 +33,9 @@ const DatePickerComponent: FC<PropTypes> = ({onChangeHandler,name,uniqueData}) =
 
     return (
         <Style>
-            {/*//@ts-ignore*/}
-            <DatePicker selected={new Date(uniqueData?.[name])}
+            <DatePicker
                         className={'form-control-input'}
+                        selected={uniqueData?.[name] ? new Date(uniqueData?.[name]) : null}
                         onChange={(date:Date) => onDateChangeHandler(date)}
                         showTimeSelect
                         dateFormat="Pp" />

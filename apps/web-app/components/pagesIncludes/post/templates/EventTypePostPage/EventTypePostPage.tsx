@@ -35,8 +35,8 @@ const Style = styled(PostPageStyle)`
       .entry-content {
     
         .info-action-section{
-   
-          transition: 1s all;
+          margin-top: 20px;
+       
           display: flex;
           justify-content: flex-start;
           gap: 8px;

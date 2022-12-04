@@ -1,6 +1,7 @@
 import {FC} from "react";
 import styled from "styled-components";
 import {formatRelative} from 'date-fns';
+import dateValidator from "custom-util/src/date-utils/dateValidator";
 
 const Style = styled.span`
   gap: 8px;
@@ -15,7 +16,7 @@ const StartDate: FC<PropTypes> = ({startDate}) => {
 
     return (
         <Style className={'sub-content'}>
-            {formatRelative(new Date(startDate), new Date())}
+            {dateValidator(startDate) && formatRelative(new Date(startDate), new Date())   }
         </Style>
     )
 };

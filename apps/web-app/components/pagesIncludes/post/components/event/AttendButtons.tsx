@@ -7,7 +7,9 @@ import {useSelector} from "react-redux";
 import {Store} from "typescript-types";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 
-const Style = styled.div``;
+const Style = styled.div`
+
+`;
 
 interface PropTypes {
     isUserAttending: boolean
@@ -35,7 +37,7 @@ const AttendButtons: FC<PropTypes> = ({isUserAttending, postId, userId}) => {
 
     return (
         <Style>
-            <button className={`btn ${isUserAttending ? 'btn-primary':'btn-danger'}`} onClick={onAttendHandler}>
+            <button className={`btn ${isUserAttending ? 'btn-danger':'btn-primary'}`} onClick={onAttendHandler}>
                 {isUserAttending ? t(`event:Cancel Attending`, {}, {fallback: 'Cancel Attending'}) :
                     t(`event:Attend`, {}, {fallback: 'Attend'})
                 }

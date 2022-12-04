@@ -171,7 +171,7 @@ const post = () => {
                                        onChangeHandler={onChangeHandler}/>
                         </div>
                         { editingPost?.postType === 'event' &&
-                            <EventDates onChangeHandler={onUniqueDataChangeHandler} uniqueData={editingPost.uniqueData}/>}
+                            <EventDates onChangeHandler={onUniqueDataChangeHandler} uniqueData={editingPost?.uniqueData}/>}
                         {editingPost?.postType === 'event' &&
                             <div className={'capacity field-section'}>
                                 <TextInput name={'capacity'} type={'number'} value={editingPost?.uniqueData?.capacity}
