@@ -109,7 +109,7 @@ const post = () => {
     useEffect(() => {
         if (query.id) {
             dispatch(fetchUserEditingPost(query.id as string));
-        } else if (!query.id && !!query?.new && !!query?.postType) {
+        } else if (!query.id && !!query?.new && !!query?.postType && userData?._id) {
             const unpopulatedPostData = postDataCleanerBeforeSave(editingPost)
             dispatch(fetchUserCreateNewPost({
                 data: {
@@ -121,7 +121,7 @@ const post = () => {
                 push
             }))
         }
-    }, []);
+    }, [userData?._id]);
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
         dispatch(editPostField({[e.target.name]: e.target.value}))
