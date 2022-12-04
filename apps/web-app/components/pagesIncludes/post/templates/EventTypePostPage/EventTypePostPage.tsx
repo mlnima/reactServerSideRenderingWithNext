@@ -80,7 +80,7 @@ const EventTypePostPage: FC<EventTypePostPagePropTypes> = () => {
                 <article itemScope itemType={'https://schema.org/BlogPosting'}>
                     <header className={'entry-header'}>
                         {/*//@ts-ignore*/}
-                        <StartDate startDate={post.uniqueData.startDate}/>
+                        <StartDate startDate={post?.uniqueData?.startDate}/>
                         <PostTitle/>
                         <p className={'sub-content'}>{post.uniqueData?.capacity - post.uniqueData?.attenders?.length } place left</p>
                         {!!post.title && <meta itemProp="name" content={post.title}/>}
