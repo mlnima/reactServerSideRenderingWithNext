@@ -44,7 +44,7 @@ const ChatRoomHeader:FC<ChatRoomHeaderPropTypes> = ({onOnlineUserListVisibilityC
                     <SvgRenderer svgUrl={'/asset/images/icons/users-solid.svg'}
                                  size={24}
                                  customClassName={'users-icon'}
-                                 color={'var(--main-text-color, #fff)'}/>
+                                 color={'var(--secondary-text-color, #ccc)'}/>
                 </button>
             </div>
         </ChatRoomHeaderStyledHeader>

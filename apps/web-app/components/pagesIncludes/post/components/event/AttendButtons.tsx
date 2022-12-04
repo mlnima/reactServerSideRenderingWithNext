@@ -1,4 +1,4 @@
-import {FC, useEffect} from "react";
+import {FC} from "react";
 import styled from "styled-components";
 import useTranslation from "next-translate/useTranslation";
 import {useAppDispatch} from "@store_toolkit/hooks";

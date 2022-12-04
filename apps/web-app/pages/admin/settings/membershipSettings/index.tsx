@@ -1,12 +1,12 @@
 import React, {useState} from "react";
 import styled from "styled-components";
-import {useAdminDispatch, useAdminSelector} from "../../../../store_toolkit/hooks";
+import {useAdminDispatch, useAdminSelector} from "@store_toolkit/hooks";
 import {Store} from "typescript-types";
 import {onChangeInputValueCorrector} from "@_variables/variables";
 import {
     adminEditMembershipSettings,
     adminPanelUpdateSetting
-} from "../../../../store_toolkit/adminReducers/adminPanelSettingsReducer";
+} from "@store_toolkit/adminReducers/adminPanelSettingsReducer";
 import {postTypes} from "data-structures";
 import {convertVariableNameToName} from "custom-util";
 
@@ -73,18 +73,18 @@ const page = () => {
             <div className="settingSection membership">
                 <h3>Membership Feature:</h3>
                 <input type="checkbox"
-                       checked={membershipSettings.membership}
+                       checked={membershipSettings?.membership}
                        name={'membership'}
                        onChange={e => onChangeHandler(e)}/>
             </div>
             <div className="settingSection allowUserToPost">
                 <h3>Allow User To Post:</h3>
                 <input type="checkbox"
-                       checked={membershipSettings.allowUserToPost}
+                       checked={membershipSettings?.allowUserToPost}
                        name={'allowUserToPost'}
                        onChange={e => onChangeHandler(e)}/>
             </div>
-            {membershipSettings.allowUserToPost &&
+            {membershipSettings?.allowUserToPost &&
             <div className="settingSection allowedPostTypeUserCanCreate">
                 <h3>Allowed Post Types User Can Create </h3>
                 {postTypes.map(postType => {
