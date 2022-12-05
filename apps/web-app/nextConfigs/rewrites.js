@@ -70,11 +70,16 @@ module.exports = () => {
                 has: [{type: 'query', key: 'content'}],
                 destination: '/category/:content'
             },
-            {
-                source: `/post`,
-                destination: '/posts/old/:id',
-                has: [{type: 'query', key: 'id'}]
-            },
+            // {
+            //     source: `/post`,
+            //     destination: '/posts/old/:id',
+            //     has: [{type: 'query', key: 'id'},{type: 'query', key: 'title'}]
+            // },
+            // {
+            //     source: `/post`,
+            //     destination: '/posts/old/:id',
+            //     has: [{type: 'query', key: 'id'}]
+            // },
             {
                 source: `/video`,
                 destination: '/posts/old/:identifier',
@@ -90,6 +95,11 @@ module.exports = () => {
                 destination: '/post/:postType/:id',
                 // has: [{type: 'query', key: 'identifier'}]
             },
+            // {
+            //     source: `/post`,
+            //     destination: '/post/old/:id',
+            //     has: [{type: 'query', key: 'id'}]
+            // },
             // {
             //     source: `/:metaType(categories|tags|actors|category|tag|actor)?/:title`,
             //     destination: '/:metaType/:content',
