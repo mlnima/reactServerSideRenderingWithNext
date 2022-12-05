@@ -29,7 +29,6 @@ const HomePage = () => {
     );
 };
 
-//@ts-ignore
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     await _getServerSideStaticPageData(
@@ -45,43 +44,6 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     return null
 
 });
-
-
-// export async function getStaticPaths() {
-//     const locales = process.env.NEXT_PUBLIC_LOCALS.split(' ')
-//     let paths = [];
-//
-//     locales.forEach(locale=>{
-//         paths = [...paths,{locale}]
-//     })
-//
-//     return {paths, fallback: false};
-// }
-
-
-// export const getStaticProps = wrapper.getStaticProps(store => async (context) => {
-//
-//     await _getServerSideStaticPageData(
-//         context,
-//         ['homePageLeftSidebar', 'homePageRightSidebar', 'home'],
-//         {
-//             setHeadData: true,
-//             page: 'home'
-//         },
-//         store
-//     )
-//
-//     return null
-//
-// });
-
-// HomePage.getLayout = function getLayout(page: ReactElement) {
-//     return (
-//         <AppLayout>
-//             {page}
-//         </AppLayout>
-//     )
-// }
 
 export default HomePage;
 

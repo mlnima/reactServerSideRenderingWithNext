@@ -85,11 +85,11 @@ module.exports = () => {
             //     destination: '/posts/:postType/:identifier',
             //     has: [{type: 'query', key: 'identifier'}]
             // },
-            // {
-            //     source: `/posts/:postType(video|product|article|book|standard|promotion|learn|food|book)?/:id`,
-            //     destination: '/post/:postType/:id',
-            //     // has: [{type: 'query', key: 'identifier'}]
-            // },
+            {
+                source: `/posts/:postType(video|product|article|book|standard|promotion|learn|food|book)?/:id`,
+                destination: '/post/:postType/:id',
+                // has: [{type: 'query', key: 'identifier'}]
+            },
             // {
             //     source: `/:metaType(categories|tags|actors|category|tag|actor)?/:title`,
             //     destination: '/:metaType/:content',
