@@ -27,7 +27,7 @@
     "@vercel/edge": "^0.1.1",
     "@vercel/og": "^0.0.21",
     "add-to-calendar-button": "^1.18.8",
-    "axios": "^1.2.1",
+    "axios": "^0.27.2",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
     "custom-util": "*",

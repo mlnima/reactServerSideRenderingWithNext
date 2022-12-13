@@ -20,73 +20,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/apps/web-app/_variables/_clientVariables/getCurrentPageData.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/client/metas/getMetaSuggestion.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/client/widgets/getWidgets.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/custom-util/src/math-util/shortNumber.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/api-server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/custom-scripts/asset/defaultAdminAccountData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/custom-scripts/asset/defaultAdminAccountData.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/custom-scripts/asset/defaultDesignSettings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/custom-scripts/asset/defaultDesignSettings.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/custom-scripts/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/custom-scripts/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/custom-scripts/src/setup.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/custom-scripts/src/setup.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/sitemaps-generator/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/sitemaps-generator/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/socket-server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/socket-server/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/_variables/_clientVariables/clientAjaxVariables/getMetaSuggestion.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/_variables/_clientVariables/clientVariables/_getMultipleWidgetWithDataQueryGenerator.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/_variables/_clientVariables/clientVariables/_shortNumber.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/app/experimental/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/app/experimental/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetMenu.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetWithPositionMenu.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/AddWidgetMenu/defaultWidgetsData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/AddWidgetMenu/defaultWidgetsData.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/Styles/selects.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/global/Styles/selects.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/CardsRenderer/PostsCardsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/CardsRenderer/PostsCardsRenderer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/profilePageComponents/profilePost/common/MetaDataSelector.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/profilePageComponents/profilePost/common/MetaDataSelector.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/PostsSlider/PostsSlider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/PostsSlider/PostsSlider.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayoutInitializer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayoutInitializer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/RatingButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/RatingButtons.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/Styles/inputs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/global/Styles/inputs.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/design/widgets/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/admin/design/widgets/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/post/[postType]/[identifier].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/post/[postType]/[identifier].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/widgetsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/widgetsReducer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/api-requests/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/api-requests/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/tsconfig.tsbuildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-server-util/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/connectToDatabase.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-server-util/src/connectToDatabase.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/connectToDatabase.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-server-util/src/connectToDatabase.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-server-util/tsconfig.tsbuildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/custom-util/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/custom-util/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/tsconfig.tsbuildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/data-structures/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/data-structures/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/data-structures/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/data-structures/tsconfig.tsbuildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/eslint-config-custom/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/eslint-config-custom/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/jest-presets/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/jest-presets/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/src/conversationSchema.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/conversationSchema.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/src/conversationSchema.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/conversationSchema.d.ts.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/src/formSchema.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/formSchema.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/src/formSchema.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/formSchema.d.ts.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/src/log.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/log.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/src/log.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/log.d.ts.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/src/metaSchema.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/metaSchema.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/src/metaSchema.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/metaSchema.d.ts.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/src/metaSchemas/actorSchema.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/metaSchemas/actorSchema.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/src/metaSchemas/actorSchema.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/metaSchemas/actorSchema.d.ts.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/src/metaSchemas/categorySchema.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/metaSchemas/categorySchema.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/src/metaSchemas/categorySchema.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/metaSchemas/categorySchema.d.ts.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/src/metaSchemas/tagSchema.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/metaSchemas/tagSchema.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/src/metaSchemas/tagSchema.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/metaSchemas/tagSchema.d.ts.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/src/orderSchema.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/orderSchema.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/src/pageSchema.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/pageSchema.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/src/searchKeywordSchema.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/searchKeywordSchema.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/src/searchKeywordSchema.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/searchKeywordSchema.d.ts.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/src/settings/settingSchema.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/settings/settingSchema.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/src/translateSchema.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/translateSchema.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/tsconfig.tsbuildinfo" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -228,8 +168,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.build" />
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.setup:dark" />
         <item itemvalue="npm.setup" />
         <item itemvalue="npm.update:api-server-packages" />
@@ -1466,7 +1406,7 @@
       <workItem from="1670607811848" duration="1723000" />
       <workItem from="1670737432290" duration="4794000" />
       <workItem from="1670862941327" duration="6004000" />
-      <workItem from="1670951057247" duration="7865000" />
+      <workItem from="1670951057247" duration="8696000" />
     </task>
     <servers />
   </component>
