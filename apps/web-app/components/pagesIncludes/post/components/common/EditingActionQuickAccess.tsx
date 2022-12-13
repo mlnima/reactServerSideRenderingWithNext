@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from "react";
+import React, {FC} from "react";
 import styled from "styled-components";
 import {useRouter} from "next/router";
 import {useSelector} from "react-redux";
@@ -6,8 +6,6 @@ import {fetchAdminPanelBulkActionPost} from "@store_toolkit/adminReducers/adminP
 import {updateQueryGenerator} from "@_variables/variables";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {Store} from "typescript-types";
-import {formatDistance} from 'date-fns';
-
 
 const EditLinkForAdminStyledDiv = styled.div`
   display: flex;
