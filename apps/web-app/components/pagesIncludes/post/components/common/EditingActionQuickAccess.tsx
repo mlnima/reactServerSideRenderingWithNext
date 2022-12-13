@@ -98,8 +98,8 @@ const EditingActionQuickAccess: FC<PropTypes> = ({role}) => {
 
 
                 <div className={'dates'}>
-                    {createdAt && <span> Created At : {formatDistance(new Date(createdAt), new Date(), {addSuffix: true})}</span>}
-                    {createdAt &&  <span> Updated At : {formatDistance(new Date(updatedAt), new Date(), {addSuffix: true})}</span>}
+                    {/*{createdAt && <span> Created At : {formatDistance(new Date(createdAt), new Date(), {addSuffix: true})}</span>}*/}
+                    {/*{createdAt &&  <span> Updated At : {formatDistance(new Date(updatedAt), new Date(), {addSuffix: true})}</span>}*/}
 
 
                 </div>

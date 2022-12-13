@@ -21,12 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api-server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/socket-server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/socket-server/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/Styles/inputs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/global/Styles/inputs.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/api-requests/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/EditingActionQuickAccess.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/EditingActionQuickAccess.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1406,7 +1401,7 @@
       <workItem from="1670607811848" duration="1723000" />
       <workItem from="1670737432290" duration="4794000" />
       <workItem from="1670862941327" duration="6004000" />
-      <workItem from="1670951057247" duration="8696000" />
+      <workItem from="1670951057247" duration="10807000" />
     </task>
     <servers />
   </component>
