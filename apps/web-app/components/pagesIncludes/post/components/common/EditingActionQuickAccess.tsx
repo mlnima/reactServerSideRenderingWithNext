@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, {FC, useEffect, useState} from "react";
 import styled from "styled-components";
 import {useRouter} from "next/router";
 import {useSelector} from "react-redux";
@@ -17,6 +17,7 @@ const EditLinkForAdminStyledDiv = styled.div`
   background-color: var(--secondary-background-color, #181818);
   top: 0;
   border-radius: 3px;
+
   .btn-primary {
     color: var(--primary-button-link-text-color);
   }
@@ -51,6 +52,7 @@ interface PropTypes {
 const EditingActionQuickAccess: FC<PropTypes> = ({role}) => {
     const dispatch = useAppDispatch()
     const {query, push, pathname} = useRouter()
+
     const {_id, status, createdAt, updatedAt} = useSelector(({posts}: Store) => {
         return {
             _id: posts.post?._id,
@@ -65,48 +67,46 @@ const EditingActionQuickAccess: FC<PropTypes> = ({role}) => {
         updateQueryGenerator(query, push, pathname)
     }
 
-
     return (
 
-            <EditLinkForAdminStyledDiv className='edit-as-admin handle'>
+        <EditLinkForAdminStyledDiv className='edit-as-admin handle'>
 
-                <a className='btn btn-primary' href={`/profile/post?id=${_id}`} target='_blank'>
-                    Edit
-                </a>
+            <a className='btn btn-primary' href={`/profile/post?id=${_id}`} target='_blank'>
+                Edit
+            </a>
 
-                {
-                    role === 'administrator' &&
-                    <>
-                        <a className='btn btn-primary' href={`/admin/post?id=${_id}`} target='_blank'>
-                            Edit As Admin
-                        </a>
-                        <span className={'btn btn-info'} onClick={() => onStatusChangeHandler('draft')}>
+            {
+                role === 'administrator' &&
+                <>
+                    <a className='btn btn-primary' href={`/admin/post?id=${_id}`} target='_blank'>
+                        Edit As Admin
+                    </a>
+                    <span className={'btn btn-info'} onClick={() => onStatusChangeHandler('draft')}>
                             Draft
                         </span>
-                        <span className={'btn btn-primary'} onClick={() => onStatusChangeHandler('published')}>
+                    <span className={'btn btn-primary'} onClick={() => onStatusChangeHandler('published')}>
                             Publish
                         </span>
-                        <span className={'btn btn-info'} onClick={() => onStatusChangeHandler('pending')}>
+                    <span className={'btn btn-info'} onClick={() => onStatusChangeHandler('pending')}>
                         Pending
                         </span>
-                    </>
-                }
-                <span className={'btn btn-danger'} onClick={() => onStatusChangeHandler('trash')}>
+                </>
+            }
+            <span className={'btn btn-danger'} onClick={() => onStatusChangeHandler('trash')}>
                         Trash
                 </span>
 
 
+            <div className={'dates'}>
+                {createdAt && <span> Created At : {createdAt}</span>}
+                {updatedAt &&  <span> Updated At : {updatedAt}</span>}
 
-                <div className={'dates'}>
-                    {/*{createdAt && <span> Created At : {formatDistance(new Date(createdAt), new Date(), {addSuffix: true})}</span>}*/}
-                    {/*{createdAt &&  <span> Updated At : {formatDistance(new Date(updatedAt), new Date(), {addSuffix: true})}</span>}*/}
 
+            </div>
 
-                </div>
+            <h4 className='status'>Status : {status}</h4>
 
-                <h4 className='status'>Status : {status}</h4>
-
-            </EditLinkForAdminStyledDiv>
+        </EditLinkForAdminStyledDiv>
 
 
     )
