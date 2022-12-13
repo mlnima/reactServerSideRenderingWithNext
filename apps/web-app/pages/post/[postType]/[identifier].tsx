@@ -101,10 +101,7 @@ const postPage = () => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-console.log('getServerSideProps post page')
-console.log(context?.query)
-console.log(context?.req.url)
-    // @ts-ignore
+
     await _getServerSideStaticPageData(
         context,
         [

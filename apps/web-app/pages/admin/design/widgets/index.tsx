@@ -1,13 +1,9 @@
 import React, {useState, useEffect, useMemo} from 'react';
-// import AddWidgetMenu from '@components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetMenu'
-// import WidgetGroupByPosition
-//     from "@components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-// import WidgetPositionsSelect from "@components/adminIncludes/widgetsModel/WidgetPositionsSelect/WidgetPositionsSelect";
 import {widgetsStaticPositions} from "data-structures";
-import {fetchAdminPanelGetWidgets} from "../../../../store_toolkit/adminReducers/adminWidgetsReducer";
-import {useAdminDispatch} from "../../../../store_toolkit/hooks";
+import {fetchAdminPanelGetWidgets} from "@store_toolkit/adminReducers/adminWidgetsReducer";
+import {useAdminDispatch} from "@store_toolkit/hooks";
 import {Store} from "typescript-types";
 import {useRouter} from "next/router";
 import dynamic from "next/dynamic";
@@ -124,7 +120,7 @@ const AdminWidgets = () => {
         <StyledDiv className='admin-widgets-page'>
             <h1>Widgets Settings</h1>
             <div className='widget-setting'>
-                <h2>Add New Widget</h2>
+                <h2>Add New Widget:</h2>
                 <div className="top-panel">
                     <AddWidgetMenu/>
                 </div>

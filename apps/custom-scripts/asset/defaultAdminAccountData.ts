@@ -1,6 +1,6 @@
 const defaultAdminAccountData = {
-    username: 'dashboard',
-    password: 'dashboard',
+    username: 'Admin',
+    password: 'Admin',
     role: 'administrator',
     keyMaster: true
 }

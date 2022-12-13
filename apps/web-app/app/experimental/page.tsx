@@ -1,11 +1,14 @@
 'use client';
 import {useSelector} from "react-redux";
 
+
+
+
+
 export default function Page() {
 
     const store = useSelector((store)=>store)
 
-    // console.log(store)
 
     return <div>
         <h1>Hello, Next.js!</h1>

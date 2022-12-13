@@ -1,10 +1,10 @@
 import {FC,  useMemo, useState} from "react";
 import Select from 'react-select';
 import styled from "styled-components";
-import getMetaSuggestion from '@_variables/_clientVariables/clientAjaxVariables/getMetaSuggestion'
 import {useSelector} from "react-redux";
 import {Store} from "typescript-types";
 import {uniqArrayBy} from "custom-util";
+import getMetaSuggestion from "api-requests/src/client/metas/getMetaSuggestion";
 
 const MetaDataSelectorStyledDiv = styled.div`
   width: 300px;

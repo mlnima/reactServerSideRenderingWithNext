@@ -2,12 +2,10 @@ import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {RootState} from "../store";
 import {reduceWidgetsToGroups} from "custom-util";
 import Axios from "@_variables/Axios";
-import _getMultipleWidgetWithDataQueryGenerator
-    from "@_variables/_clientVariables/clientVariables/_getMultipleWidgetWithDataQueryGenerator";
 import {loading, setAlert} from "./globalStateReducer";
 import {AxiosResponse} from "axios";
 import {Widget} from "typescript-types";
-
+import getWidgets from "api-requests/src/client/widgets/getWidgets";
 
 interface WidgetsState {
     widgetInGroups: {
@@ -25,8 +23,7 @@ export const fetchWidgets = createAsyncThunk(
     'widgets/fetchWidgets',
     async (options: { positions: string[], locale: string }, thunkAPI) => {
         try {
-            // console.log('Axios.defaults.baseURL : ',Axios.defaults.baseURL)
-            const widgets = await Axios.get(`/api/v1/widgets/getMultipleWidgetWithData${_getMultipleWidgetWithDataQueryGenerator(options.positions, options.locale)}`)
+            const widgets = await getWidgets(options.positions, options.locale)
 
             return {
                 requestedWidgets: options.positions,

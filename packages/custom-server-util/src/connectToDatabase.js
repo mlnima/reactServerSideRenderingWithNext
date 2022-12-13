@@ -3,6 +3,7 @@ exports.__esModule = true;
 var tslib_1 = require("tslib");
 var mongoose_1 = tslib_1.__importDefault(require("mongoose"));
 mongoose_1["default"].Promise = global.Promise;
+mongoose_1["default"].set('strictQuery', true);
 var mongoDBConnectionUrl = process.env.DB_LOCAL === 'true' ?
     "mongodb://0.0.0.0:".concat(process.env.DB_PORT, "/").concat(process.env.DB_NAME) :
     "mongodb://".concat(process.env.DB_USER, ":").concat(process.env.DB_PASS, "@").concat(process.env.DB_HOST, ":").concat(process.env.DB_PORT, "/").concat(process.env.DB_NAME);

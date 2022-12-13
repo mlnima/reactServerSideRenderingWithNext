@@ -4,7 +4,7 @@ const selects = css`
   .custom-select {
     display: inline-block;
     width: 50%;
-    height: calc(2.25rem + 2px);
+    height: 2rem;
     padding: .375rem .75rem .375rem .75rem;
     line-height: 1.5;
     vertical-align: middle;

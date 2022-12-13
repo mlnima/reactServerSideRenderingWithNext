@@ -1,7 +1,7 @@
 import React, {FC, useCallback, useEffect, useMemo,  useState} from 'react';
 import useEmblaCarousel from 'embla-carousel-react'
 import {useRouter} from "next/router";
-import _shortNumber from "@_variables/_clientVariables/clientVariables/_shortNumber";
+// import _shortNumber from "@_variables/_clientVariables/clientVariables/_shortNumber";
 import dynamic from "next/dynamic";
 import {useSelector} from "react-redux";
 import styled from "styled-components";
@@ -9,6 +9,7 @@ import {ratingCalculator} from "custom-util";
 import Autoplay from "embla-carousel-autoplay";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {Post,Store} from "typescript-types";
+import shortNumber from "custom-util/src/math-util/shortNumber";
 
 const ArticlePostCard = dynamic(() => import('../../cards/postsCards/ArticlePostCard'))
 const PromotionPostCard = dynamic(() => import('../../cards/postsCards/PromotionPostCard'))
@@ -199,7 +200,7 @@ const PostsSlider: FC<PostsSliderPropsTypes> =
         const renderSlides = postsToRender.map((post, index) => {
 
             const postProps = {
-                views: _shortNumber(post.views || 0) as unknown as number,
+                views: shortNumber(post.views || 0) as unknown as number,
                 cardWidth,
                 postsPerRawForMobile,
                 rating: post.likes || post.disLikes ? ratingCalculator(post.likes, post.disLikes) : null,

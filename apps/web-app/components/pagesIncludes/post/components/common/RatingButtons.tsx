@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useState} from "react";
-import _shortNumber from '@_variables/_clientVariables/clientVariables/_shortNumber'
+
 import useTranslation from 'next-translate/useTranslation'
 import styled from "styled-components";
 import {useSelector} from "react-redux";
@@ -10,6 +10,7 @@ import likePost
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {Store} from "typescript-types";
 import SvgRenderer from "../../../../global/commonComponents/SvgRenderer/SvgRenderer";
+import shortNumber from "custom-util/src/math-util/shortNumber";
 
 const RatingButtonsStyledDiv = styled.div`
  padding: 0;
@@ -95,7 +96,7 @@ const RatingButtons: FC<RatingButtonsPropTypes> = ({rating}) => {
                                      size={16}
                                      customClassName={'rate-logo view'}
                                      color={'var(--secondary-text-color,#ccc)'}/>
-                        <p className='rating-item-value'>{_shortNumber(views)} </p>
+                        <p className='rating-item-value'>{shortNumber(views)} </p>
                     </span>
                 : null
             }

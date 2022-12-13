@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "apicache": "^1.6.3",
-    "axios": "^0.27.2",
+    "axios": "^1.2.1",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
@@ -32,7 +32,7 @@
     "http-proxy-middleware": "^2.0.6",
     "models": "*",
     "module-alias": "^2.2.2",
-    "mongoose": "^6.6.0",
+    "mongoose": "^6.8.0",
     "path": "^0.12.7",
     "peerjs": "^1.4.7",
     "simple-peer": "^9.11.1",

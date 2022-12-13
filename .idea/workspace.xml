@@ -20,9 +20,73 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change afterPath="$PROJECT_DIR$/apps/web-app/_variables/_clientVariables/getCurrentPageData.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/client/metas/getMetaSuggestion.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/client/widgets/getWidgets.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/custom-util/src/math-util/shortNumber.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/nextConfigs/rewrites.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/nextConfigs/rewrites.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/custom-scripts/asset/defaultAdminAccountData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/custom-scripts/asset/defaultAdminAccountData.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/custom-scripts/asset/defaultDesignSettings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/custom-scripts/asset/defaultDesignSettings.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/custom-scripts/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/custom-scripts/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/custom-scripts/src/setup.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/custom-scripts/src/setup.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/sitemaps-generator/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/sitemaps-generator/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/socket-server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/socket-server/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/_variables/_clientVariables/clientAjaxVariables/getMetaSuggestion.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/_variables/_clientVariables/clientVariables/_getMultipleWidgetWithDataQueryGenerator.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/_variables/_clientVariables/clientVariables/_shortNumber.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/experimental/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/app/experimental/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetMenu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetWithPositionMenu.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/AddWidgetMenu/defaultWidgetsData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/AddWidgetMenu/defaultWidgetsData.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/Styles/selects.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/global/Styles/selects.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/CardsRenderer/PostsCardsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/CardsRenderer/PostsCardsRenderer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/profilePageComponents/profilePost/common/MetaDataSelector.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/profilePageComponents/profilePost/common/MetaDataSelector.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/PostsSlider/PostsSlider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/PostsSlider/PostsSlider.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayoutInitializer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayoutInitializer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/RatingButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/RatingButtons.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/design/widgets/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/admin/design/widgets/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/pages/post/[postType]/[identifier].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/post/[postType]/[identifier].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/widgetsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/widgetsReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/tsconfig.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-server-util/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/connectToDatabase.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-server-util/src/connectToDatabase.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/connectToDatabase.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-server-util/src/connectToDatabase.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-server-util/tsconfig.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/tsconfig.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/data-structures/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/data-structures/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/data-structures/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/data-structures/tsconfig.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/eslint-config-custom/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/eslint-config-custom/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/jest-presets/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/jest-presets/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/conversationSchema.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/conversationSchema.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/conversationSchema.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/conversationSchema.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/formSchema.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/formSchema.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/formSchema.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/formSchema.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/log.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/log.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/log.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/log.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/metaSchema.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/metaSchema.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/metaSchema.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/metaSchema.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/metaSchemas/actorSchema.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/metaSchemas/actorSchema.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/metaSchemas/actorSchema.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/metaSchemas/actorSchema.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/metaSchemas/categorySchema.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/metaSchemas/categorySchema.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/metaSchemas/categorySchema.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/metaSchemas/categorySchema.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/metaSchemas/tagSchema.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/metaSchemas/tagSchema.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/metaSchemas/tagSchema.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/metaSchemas/tagSchema.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/orderSchema.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/orderSchema.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/pageSchema.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/pageSchema.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/searchKeywordSchema.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/searchKeywordSchema.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/searchKeywordSchema.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/searchKeywordSchema.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/settings/settingSchema.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/settings/settingSchema.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/translateSchema.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/translateSchema.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/tsconfig.tsbuildinfo" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +147,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/Dev Project/reactServerSideRenderingWithNext/apps/web-app/locales/de&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/Dev Project/ultimateGrabber&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;ts.external.directory.path&quot;: &quot;F:\\Dev Project\\reactServerSideRenderingWithNext\\node_modules\\typescript\\lib&quot;,
@@ -99,11 +163,11 @@
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\apps\scripts" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\trash" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\api-requests\src\lib" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\api-requests\src\Client" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\api-requests\src\Admin" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-app\components\pagesIncludes\post\components\learn" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-app\components\pagesIncludes\post\components\styles" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -142,21 +206,21 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+    <configuration name="setup:dark" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
-        <script value="start" />
+        <script value="setup:dark" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="update:packages" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+    <configuration name="update:api-server-packages" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
-        <script value="update:packages" />
+        <script value="update:api-server-packages" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -166,9 +230,9 @@
       <list>
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.build" />
-        <item itemvalue="npm.update:packages" />
-        <item itemvalue="npm.start" />
+        <item itemvalue="npm.setup:dark" />
         <item itemvalue="npm.setup" />
+        <item itemvalue="npm.update:api-server-packages" />
       </list>
     </recent_temporary>
   </component>
@@ -1393,7 +1457,16 @@
       <workItem from="1670075761704" duration="3163000" />
       <workItem from="1670111514681" duration="2310000" />
       <workItem from="1670145352157" duration="17851000" />
-      <workItem from="1670207854240" duration="7505000" />
+      <workItem from="1670207854240" duration="20890000" />
+      <workItem from="1670253412475" duration="3571000" />
+      <workItem from="1670293023660" duration="4320000" />
+      <workItem from="1670317862653" duration="953000" />
+      <workItem from="1670487326034" duration="1627000" />
+      <workItem from="1670565124469" duration="1713000" />
+      <workItem from="1670607811848" duration="1723000" />
+      <workItem from="1670737432290" duration="4794000" />
+      <workItem from="1670862941327" duration="6004000" />
+      <workItem from="1670951057247" duration="7865000" />
     </task>
     <servers />
   </component>
@@ -1635,6 +1708,15 @@
         <option value="$PROJECT_DIR$/packages/custom-util/src/date-utils/dateValidator.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/date-utils/dateValidator.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/date-utils/dateValidator.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/client/metas/getMetaSuggestion.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/client/metas/getMetaSuggestion.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/client/metas/getMetaSuggestion.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/custom-util/src/math-util/shortNumber.d.ts" />
+        <option value="$PROJECT_DIR$/packages/custom-util/src/math-util/shortNumber.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/custom-util/src/math-util/shortNumber.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/client/widgets/getWidgets.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/client/widgets/getWidgets.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/client/widgets/getWidgets.d.ts" />
       </list>
     </option>
   </component>

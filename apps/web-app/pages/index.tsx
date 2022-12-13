@@ -5,6 +5,7 @@ import styled from "styled-components";
 import SidebarWidgetAreaRenderer from "../components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import _getServerSideStaticPageData from "../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
+// import getCurrentPageData from "@_variables/_clientVariables/getCurrentPageData";
 
 const HomePageStyle = styled.div`
   display: grid;
@@ -31,6 +32,7 @@ const HomePage = () => {
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
+
     await _getServerSideStaticPageData(
         context,
         ['homePageLeftSidebar', 'homePageRightSidebar', 'home'],
@@ -41,8 +43,19 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         store
     )
 
-    return null
+    // const pageData = await getCurrentPageData({
+    //     dynamicWidgets: ['homePageLeftSidebar', 'homePageRightSidebar', 'home'],
+    //     locale: context.locale,
+    //     requireSettings: ['identity', 'design', 'membershipSettings']
+    // })
+    //
+    // return {
+    //     props: {
+    //         pageData
+    //     }
+    // }
 
+    return null
 });
 
 export default HomePage;

@@ -74,7 +74,7 @@ const setSettings = async () => {
 const createAdminAccount = async () => {
     try {
 
-        const adminUser = userSchema.findOne({username:'dashboard'})
+        const adminUser = userSchema.findOne({username:'Admin'})
         if (!isEmptyObject(adminUser)){
             const APIKey = await uuidAPIKey.create()
             await bcrypt.hash(defaultAdminAccountData.password, 10, function (err, hash) {
@@ -89,7 +89,7 @@ const createAdminAccount = async () => {
                     }
                     const adminDataToSave = new userSchema(adminAccountData)
                     adminDataToSave.save()
-                    console.log('admin account created , username: dashboard , password: dashboard')
+                    console.log('admin account created , username: Admin , password: Admin')
                 }
             });
         }
@@ -100,11 +100,12 @@ const createAdminAccount = async () => {
 
 
 const runScripts = async () => {
-    await connectToDatabase('Setup')
-    await createAdminAccount()
-    await setWidgets()
-    await setSettings()
-    await createHelloWorldPost()
+    console.log(process.env.THEME_MODE)
+    // await connectToDatabase('Setup')
+    // await createAdminAccount()
+    // await setWidgets()
+    // await setSettings()
+    // await createHelloWorldPost()
 }
 
 runScripts().then(() => {

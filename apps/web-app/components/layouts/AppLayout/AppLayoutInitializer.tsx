@@ -26,6 +26,7 @@ const HeaderStyle = styled.header`
 `
 interface AppLayoutInitializerPropTypes {
     children:React.ReactNode
+
 }
 
 const AppLayoutInitializer: FC<AppLayoutInitializerPropTypes> = ({children}) => {

@@ -1,30 +1,3 @@
-export let widgetModels = {
-    type: '',
-    title: '',
-    categories:[],
-    formData:{
-        formName:'',
-        formFields:[]
-    },
-    menuItems:[],
-    tags:[],
-    count:8,
-    comments:[],
-    pagination:false,
-    position:'',
-    redirectLink:'',
-    sortBy:'',
-    text:'',
-    textAlign:'center',
-    customHtml:'',
-    metaType:'',
-    pathURL:'',
-    LogoUrl:'',
-    LogoText:'',
-    headLine:'',
-    viewType:'standard',
-}
-
 const generalModel ={
     extraClassName:'',
     extraId:'',
@@ -41,145 +14,112 @@ const generalModel ={
     languageToRender:''
 }
 
-export const textWidgetModel = {
- ...generalModel
-}
-
-// export const swiperWidgetModel = {
-//     ...generalModel,
-// uniqueData:{
-//     swiperConfigDesktop: {
-//         effect: "cards",
-//         grabCursor: true,
-//         autoplay: true,
-//         modules: [
-//             "EffectCards"
-//         ]
-//     },
-//     swiperConfigMobile: {
-//         tag: "div",
-//         wrapperTag: "div",
-//         controller: {
-//             control: "controlledSwiper"
-//         },
-//         keyboard: false,
-//         autoplay: true,
-//         navigation: false,
-//         effect: "cube",
-//         modules: [
-//             "EffectCube",
-//             "Pagination"
-//         ],
-//         pagination: false,
-//         grabCursor: false,
-//         cubeEffect: {
-//             shadow: true,
-//             slideShadows: true,
-//             shadowOffset: 20,
-//             shadowScale: 0.94
-//         }
-//     }
-// }
-// }
-
-export const slider = {
-    ...generalModel,
-    uniqueData:{
-        sliderConfig:{
-            pagination:true,
-            navigation:true
+const defaultWidgetsData = {
+    'text': {...generalModel},
+    'textEditor': {...generalModel},
+    'menu': {
+        ...generalModel,
+        menuItems:[]
+    },
+    'postsSlider': {
+        ...generalModel,
+        uniqueData:{
+            sliderConfig:{
+                pagination:true,
+                navigation:true
+            }
         }
-    }
+    },
+    'imagesSlider': {
+        ...generalModel,
+        uniqueData:{
+            sliderConfig:{
+                pagination:true,
+                navigation:true
+            }
+        }
+    },
+    'linkTo': {
+        ...generalModel,
+        uniqueData:{
+            linkTo:'',
+            linkToAs:'',
+            linkToText:''
+        }
 
+    },
+    'multipleLinkTo': {
+        ...generalModel,
+        uniqueData:{
+            menuItems:[]
+        }
+    },
+    'posts': {
+        ...generalModel,
+        uniqueData:{
+            count:8,
+            postElementSize:255,
+            sortBy:'updatedAt'
+        }
+    },
+    'media': {
+        ...generalModel,
+        uniqueData:{
+            mediaUrl:'',
+            mediaType:''
+        }
+    },
+    'searchBar': {
+        ...generalModel,
+        uniqueData:{
+            searchInputPlaceHolder:'search...',
+            mobileMode:false
+        }
+    },
+    'recentComments': {
+        ...generalModel,
+        uniqueData:{
+           comments:[]
+        }
+    },
+    'meta': {
+        ...generalModel,
+        uniqueData:{
+            metaType:'',
+            sortBy:'',
+            count:30,
+            metaData:[]
+        }
+    },
+    'logo': {
+        ...generalModel,
+        uniqueData:{
+            LogoText:'LOGO',
+            headLine:'head line',
+        }
+    },
+    'shoppingCart': {
+        ...generalModel,
+        uniqueData:{
+            LogoText:'LOGO',
+            headLine:'head line',
+        }
+    },
+    'language': {
+        ...generalModel,
+        customStyles:'select{\n' +
+            '  border: none;\n' +
+            '  background-color: var(--main-background-color,#000);\n' +
+            '  color: var(--main-text-color);\n' +
+            '}'
+    },
+    'alphabeticalNumericalRange': {
+        ...generalModel,
+        uniqueData:{
+            LogoText:'LOGO',
+            headLine:'head line',
+        }
+    },
 }
 
-
-
-
-export const authenticationWidgetModel = {
-    ...generalModel,
-
-}
-export const languageWidgetModel = {
-    ...generalModel,
-    customStyles:'select{\n' +
-        '  border: none;\n' +
-        '  background-color: var(--main-background-color,#000);\n' +
-        '  color: var(--main-text-color);\n' +
-        '}'
-}
-export const alphabeticalNumericalRangeWidgetModel = {
-    ...generalModel,
-}
-export const shoppingCartWidgetModel = {
-    ...generalModel,
-}
-export const formWidgetModel = {
-    ...generalModel,
-    formData:[]
-}
-export const logoWidgetModel = {
-    ...generalModel,
-    LogoText:'LOGO',
-    headLine:'head line',
-    customStyles:`.logo{
-  .logo-text,p{
-    color: white;
-  }
-  .logo-text{
-    font-weight: bold;
-  }
-}`
-}
-
-export const metaWidgetModel = {
-    ...generalModel,
-    metaType:'',
-    sortBy:'',
-    count:30,
-    metaData:[]
-}
-export const searchBarWidgetModel = {
-    ...generalModel,
-    searchInputPlaceHolder:'search...',
-    mobileMode:false
-}
-export const recentCommentsWidgetModel = {
-    ...generalModel,
-    comments:[]
-}
-export const mediaWidgetModel = {
-    ...generalModel,
-    mediaUrl:'',
-    mediaType:''
-}
-
-export const linkToWidgetModel = {
-    ...generalModel,
-    linkTo:'',
-    linkToAs:'',
-    linkToText:''
-}
-export const multipleLinkToWidgetModel = {
-    ...generalModel,
-    multipleLinks:[],
-}
-
-export const menuWidgetModel = {
-    ...generalModel,
-    menuItems:[]
-}
-
-export const postsWidgetModel = {
-    ...generalModel,
-    count:8,
-    postElementSize:255,
-    sortBy:'updatedAt'
-}
-
-export const postsSwiperWidgetModel = {
-    ...generalModel,
-    count:16,
-    sliderEffect:'',
-    sortBy:'',
-}
+export default defaultWidgetsData

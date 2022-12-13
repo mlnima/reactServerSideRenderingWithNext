@@ -13,7 +13,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc --project tsconfig.json",
-    "run-script:setup": "node --trace-warnings ./dist/src/setup.js",
+    "run-script:setup": " node --trace-warnings ./dist/src/setup.js",
     "run-script:resetAdminPassword": "node --trace-warnings ./dist/src/resetAdminPassword.js",
     "test": "jest --watch"
   },
@@ -22,7 +22,7 @@
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.2",
     "dotenv-load": "^2.0.1",
-    "mongoose": "^6.6.0",
+    "mongoose": "^6.8.0",
     "ts-node": "^10.9.1",
     "typescript-types": "*",
     "uuid-apikey": "^1.5.3",

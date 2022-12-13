@@ -9,7 +9,7 @@ declare const _default: mongoose.Model<{
     translation?: any;
     pageStyle?: string;
     pageName?: string;
-}, {}, {}, {}, mongoose.Schema<any, mongoose.Model<any, any, any, any, any>, {}, {}, {}, {}, "type", {
+}, {}, {}, {}, mongoose.Schema<any, mongoose.Model<any, any, any, any, any>, {}, {}, {}, {}, mongoose.DefaultSchemaOptions, {
     description?: string;
     status?: string;
     imageUrl?: string;
