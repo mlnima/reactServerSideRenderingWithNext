@@ -26,13 +26,11 @@ const PostMetaStyledDiv = styled.div`
     align-items: center;
     justify-content: flex-start;
     flex-wrap:wrap ;
-    
+    gap: 8px;
     .post-meta-item{
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      margin-right: 8px;
-      margin-bottom:8px;
       color: var(--secondary-text-color, #ccc);
       background-color: var(--secondary-background-color, #ccc);
       text-decoration: none;
@@ -50,9 +48,7 @@ const PostMetaStyledDiv = styled.div`
     }
     
     .actors {
-
-      //font-weight: bold;
-      //font-size: large;
+      background-color: transparent;
       .item-image {
         padding: 0;
         margin-right:4px;

@@ -67,10 +67,10 @@ const LearnTypePostPage = () => {
                 <article>
                     <PostTitle/>
                     <LearnTypePostPageDescription/>
-                    <div className='rating-price-download'>
+                    <div className='entry-header-actions'>
                         <RatingButtons rating={true}/>
                         {learnTypePostPageData.post?.source && learnTypePostPageData.post?.source.includes('http') ?
-                            <a href={learnTypePostPageData.post?.source} className={'link-to-source btn btn-info'}
+                            <a href={learnTypePostPageData.post?.source} className={'link-to-source btn btn-dark'}
                                target={'_blank'}>Source</a>
                             : null
                         }

@@ -13,14 +13,14 @@ import SvgRenderer from "../../../../global/commonComponents/SvgRenderer/SvgRend
 import shortNumber from "custom-util/src/math-util/shortNumber";
 
 const RatingButtonsStyledDiv = styled.div`
- padding: 0;
+  padding: 0;
   margin: 0;
   .rated-message {
     color: var(--secondary-text-color, #ccc);
   }
   .rating-item {
     .thumbs-up ,.thumbs-down{
-      background-color: ${({buttonsDisabledStatus}: { buttonsDisabledStatus: boolean }) => {
+        background-color: ${({buttonsDisabledStatus}: { buttonsDisabledStatus: boolean }) => {
         return buttonsDisabledStatus ? `#666` : ` var(--secondary-text-color, #ccc)`
       }};
     }

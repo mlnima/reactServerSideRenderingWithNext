@@ -9,14 +9,21 @@ const PostPageStyle = styled.div`
   width: 100%;
   grid-area: primary;
 
-  
-  .rating-buttons,.show-hide-comments,.download-button{
+  .entry-header-actions {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+  }
+
+  .rating-buttons, .show-hide-comments, .download-button {
 
     display: flex;
     justify-content: center;
     align-items: center;
 
-    .rating-item,.show-hide-comments-button,.download-link{
+    .rating-item, .show-hide-comments-button, .download-link {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -25,9 +32,10 @@ const PostPageStyle = styled.div`
       color: var(--secondary-text-color, #ccc);
       outline: none;
       border: none;
-      margin-left:  10px;
+      margin-left: 10px;
       min-width: 50px;
-      p{
+
+      p {
         padding: 0 5px;
         margin-top: 5px;
         font-size: small;
@@ -35,13 +43,29 @@ const PostPageStyle = styled.div`
     }
   }
 
-  .rating-buttons{
+  .rating-buttons {
     justify-content: flex-start;
   }
-  .download-button{
+
+  .download-button {
     justify-self: flex-end;
   }
-  
+
+  @media only screen and (min-width: 768px) {
+    .entry-header-actions{
+      margin: 10px 0;
+      .rating-buttons,.show-hide-comments,.download-button{
+        .rating-item,.show-hide-comments-button,.download-link{
+          flex-direction: row;
+          p {
+            margin: 0 0 0 5px;
+            font-size: small;
+            padding: 0;
+          }
+        }
+      }
+    }
+  }
   ${(props: { postPageStyle: string }) => props?.postPageStyle || ''}
 `
 

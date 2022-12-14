@@ -72,7 +72,7 @@ const ArticleTypePostPage: FC<ArticleTypePostPagePropTypes> = (props) => {
                     </header>
                     <div className="entry-content">
                         <PostDescription descriptionRef={descriptionRef}/>
-                        <div className='rating-price-download'>
+                        <div className='entry-header-actions'>
                             <RatingButtons rating={true}/>
                         </div>
                         <PostMetasRenderer type='categories'/>

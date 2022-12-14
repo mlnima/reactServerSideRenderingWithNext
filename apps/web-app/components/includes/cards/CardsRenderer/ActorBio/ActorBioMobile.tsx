@@ -48,7 +48,7 @@ const ActorBioMobileStyledSection = styled.section`
 
 const ActorBioMobile: FC = () => {
 
-    const actorData = useSelector(({posts}: Store) => posts.actorData);
+    const actorData = useSelector(({posts}: Store) => posts?.actorData);
     const [showMore,setShowMore] = useState(false);
 
 

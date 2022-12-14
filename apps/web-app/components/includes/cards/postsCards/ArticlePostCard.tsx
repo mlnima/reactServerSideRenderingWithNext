@@ -6,6 +6,7 @@ import CardTitle from "../asset/CardTitle/CardTitle";
 import {Post} from "typescript-types";
 import useTranslation from "next-translate/useTranslation";
 import DefaultPostCardStyle from "../asset/DefaultPostCardStyle";
+import CardViews from "@components/includes/cards/asset/CardViews/CardViews";
 
 const TextToCanvasImage = dynamic(() => import('../asset/TextToCanvasImage/TextToCanvasImage'));
 const CardImageRenderer = dynamic(() => import('../asset/CardImageRenderer'));
@@ -68,12 +69,7 @@ const ArticlePostCard: FC<ArticlePostCardPropTypes> =
                         <CardTitle title={title}/>
 
                         <div className={'card-under-media-info'}>
-                            {!!views &&
-                            <p className={'card-under-title-info-data card-views'}>
-                                <span className={'card-views-count'}>{views}</span>
-                                <span >{t('common:Views')}</span>
-                            </p>
-                            }
+                            <CardViews views={views}/>
                             {!!rating &&
                             <CardRating rating={rating} className={'card-rating card-under-title-info-data'}/>
                             }

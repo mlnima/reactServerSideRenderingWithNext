@@ -27,16 +27,6 @@ const VideoTypePostPageStyle = styled(PostPageStyle)`
       .entry-header {
         width: 100%;
         border-bottom: var(--default-border);
-        .entry-header-data {
-          .entry-header-actions {
-            //padding: 0 10px;
-            box-sizing: border-box;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            width: 100%;
-          }
-        }
       }
 
       .entry-content {
@@ -50,24 +40,6 @@ const VideoTypePostPageStyle = styled(PostPageStyle)`
   @media only screen and (min-width: 768px) {
     #main {
       article {
-        .entry-header{
-          .entry-header-data{
-            .entry-header-actions{
-              margin-bottom: 10px;
-              .rating-buttons,.show-hide-comments,.download-button{
-                .rating-item,.show-hide-comments-button,.download-link{
-                  flex-direction: row;
-                  p {
-                    margin: 0 0 0 5px;
-                    font-size: small;
-                    padding: 0;
-                  }
-                }
-              }
-            }
-          }
-
-        }
         .entry-content {
           box-sizing: border-box;
         }
