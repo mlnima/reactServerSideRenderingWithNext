@@ -10,7 +10,6 @@ const TextToCanvasImage = dynamic(() => import('../asset/TextToCanvasImage/TextT
 const CardImageRenderer = dynamic(() => import('../asset/CardImageRenderer'))
 
 const TagCardStyle = styled.article`
-  background-color: var(--secondary-background-color, #181818);
   width: 100%;
   margin: 0 auto;
 

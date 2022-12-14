@@ -2,10 +2,11 @@ import styled from "styled-components";
 import {FC} from "react";
 
 const CardTitleStyle = styled.header`
-  text-align: center;
   margin-top: 2px;
-  padding: 0 10px;
+  padding: 0 4px;
   box-sizing: border-box;
+  height: 2.2em;
+
   .card-header {
     color: var(--secondary-text-color, #ccc);
     display: -webkit-box;
@@ -13,25 +14,24 @@ const CardTitleStyle = styled.header`
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    //transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     cursor: pointer;
     box-sizing: border-box;
-   
- 
+    line-height: 1.1;
   }
+
   @media only screen and (min-width: 768px) {
     padding: 0 ;
     .card-header {
-      padding: 0 ;
+      padding: 0;
     }
   }
 `
 
-interface CardTitlePropTypes{
-    title:string,
+interface CardTitlePropTypes {
+    title: string,
 }
 
-const  CardTitle :FC<CardTitlePropTypes> = ({title}) => {
+const CardTitle: FC<CardTitlePropTypes> = ({title}) => {
     return (
         <CardTitleStyle className={'entry-header'}>
             <span className={'card-header'}>{title}</span>

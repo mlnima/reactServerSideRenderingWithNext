@@ -1,21 +1,22 @@
 import styled from "styled-components";
+
 const DefaultPostCardStyle = styled.article`
-  background-color: var(--secondary-background-color, #181818);
   margin: 0 auto;
   width: 100%;
-  
-  .card-under-media-info{
+
+  .card-under-media-info {
     color: var(--secondary-text-color, #ccc);
     display: flex;
     justify-content: flex-start;
     align-items: center;
     font-size: small;
-    padding: 0 5px;
+    padding: 0 4px;
     box-sizing: border-box;
-    .card-views{
+
+    .card-views {
       margin-right: 10px;
 
-      .card-views-count{
+      .card-views-count {
         margin-right: 5px;
       }
     }
@@ -26,6 +27,17 @@ const DefaultPostCardStyle = styled.article`
       align-items: center;
     }
   }
+
+  @media only screen and (min-width: 768px) {
+    .card-under-media-info {
+      padding: 0;
+
+      .card-views {
+        margin-right: 0;
+      }
+    }
+  }
+
 `
 
 export default DefaultPostCardStyle;

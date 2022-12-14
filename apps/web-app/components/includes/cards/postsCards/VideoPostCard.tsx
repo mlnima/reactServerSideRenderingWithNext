@@ -8,6 +8,7 @@ import CardTitle from "../asset/CardTitle/CardTitle";
 import {Post} from "typescript-types";
 import useTranslation from "next-translate/useTranslation";
 import DefaultPostCardStyle from "../asset/DefaultPostCardStyle";
+import CardViews from "@components/includes/cards/asset/CardViews/CardViews";
 const CardRating = dynamic(() => import('../asset/CardRating/CardRating'))
 const CardQuality = dynamic(() => import('../asset/CardQuality/CardQuality'))
 const CardDuration = dynamic(() => import('../asset/CardDuration/CardDuration'))
@@ -57,7 +58,6 @@ const VideoPostCardStyle = styled(DefaultPostCardStyle)`
       right: 5px;
       z-index: 1;
     }
-    
   }
   
   @media only screen and (min-width: 768px) {
@@ -134,12 +134,7 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
                         <CardTitle title={title}/>
                         <div className={'card-under-media-info'}>
 
-                            {!!views &&
-                            <p className={'card-under-title-info-data card-views'}>
-                                <span className={'card-views-count'}>{views}</span>
-                                <span >{t('common:Views')}</span>
-                            </p>
-                            }
+                            <CardViews views={views}/>
                             {!!rating &&
                             <CardRating rating={rating} className={'card-rating card-under-title-info-data'}/>
                             }

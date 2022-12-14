@@ -7,7 +7,6 @@ import {ratingCalculator} from "custom-util";
 import styled from "styled-components";
 import shortNumber from "custom-util/src/math-util/shortNumber";
 
-
 const ArticlePostCard = dynamic(() => import('../postsCards/ArticlePostCard'))
 const PromotionPostCard = dynamic(() => import('../postsCards/PromotionPostCard'))
 const LearnPostCard = dynamic(() => import('../postsCards/LearnPostCard'))
@@ -16,10 +15,9 @@ const EventPostCard = dynamic(() => import('../postsCards/EventPostCard'))
 const UgcAdPostCard = dynamic(() => import('../postsCards/UgcAd'))
 
 const Style = styled.div`
-  padding: 20px 0;
   display: grid;
   width: 100%;
-  margin: auto;
+  margin: 10px auto;
   grid-gap: 5px;
   grid-template-columns: repeat(auto-fill, minmax(${({postsPerRawForMobile}: StylePropTypes) => `${96 / postsPerRawForMobile}`}vw, 1fr));
 
@@ -87,8 +85,6 @@ const PostsCardsRenderer: FC<CardsRendererPropTypes> = ({
                         post?.translations?.[locale as string]?.title || post?.title,
                     isSidebar: isSidebar,
                 }
-
-
 
 
                 if (post?.postType === 'video' || post?.postType === 'externalVideo') {

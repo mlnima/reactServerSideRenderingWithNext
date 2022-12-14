@@ -9,12 +9,12 @@ const WidgetHeaderStyledDiv = styled.div`
   align-items: center;
   border-radius: 5px;
   max-height: 30px;
-  background-color: var(--secondary-background-color,#181818) ;
+  margin: 8px 0;
   .widget-header-title{
     font-weight: initial;
     font-size: 20px;
-    color: var( --secondary-text-color,#ccc);
   }
+  
   .widget-header-redirect-link{
     font-weight: bold;
   }

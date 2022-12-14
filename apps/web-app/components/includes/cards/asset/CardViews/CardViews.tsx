@@ -1,9 +1,14 @@
 import styled from "styled-components";
-import SvgRenderer from "../../../../global/commonComponents/SvgRenderer/SvgRenderer";
 import React from "react";
+import useTranslation from "next-translate/useTranslation";
 
 const CardViewsStyledDiv = styled.div`
   font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 2px 0;
 
   .icon {
     margin: 0 2px;
@@ -12,20 +17,17 @@ const CardViewsStyledDiv = styled.div`
 
 interface CardViewsPropTypes {
     views: number,
-    className: string
+    className?: string
 }
 
 const CardViews = ({views, className}: CardViewsPropTypes) => {
+    const {t} = useTranslation()
     return (
-        <CardViewsStyledDiv className={'card-views ' + className}>
-            {!!views &&
+        <CardViewsStyledDiv className={`card-views ${className || ''}`}>
+            {!!views && views>10  &&
                 <>
-
-                    <SvgRenderer svgUrl={'/asset/images/icons/eye-regular.svg'}
-                                 size={14}
-                                 customClassName={'views'}
-                                 color={'var(--secondary-text-color, #ccc)'}/>
                     <span>{views}</span>
+                    <span >{t('common:Views')}</span>
                 </>
             }
         </CardViewsStyledDiv>
