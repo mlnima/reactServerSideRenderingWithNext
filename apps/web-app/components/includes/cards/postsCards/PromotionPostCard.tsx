@@ -105,9 +105,9 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
                 </a>
 
                 <Link href={postUrl} className={'card-link'} title={title}>
+                    <CardTitle title={title}/>
+                     <span className={'read-more-btn'}>
 
-                     <span className={'btn btn-transparent read-more-btn'}>
-                            <CardTitle title={title}/>
                             <div className={'card-under-media-info'}>
                                 {!!views &&
                                 <CardViews views={views} className={'card-views card-under-media-info-data'}/>

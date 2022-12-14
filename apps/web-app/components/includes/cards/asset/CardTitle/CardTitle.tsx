@@ -2,7 +2,7 @@ import styled from "styled-components";
 import {FC} from "react";
 
 const CardTitleStyle = styled.header`
-  margin-top: 2px;
+  margin-top: 4px;
   padding: 0 4px;
   box-sizing: border-box;
   height: 2.2em;

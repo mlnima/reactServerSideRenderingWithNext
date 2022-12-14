@@ -77,7 +77,7 @@ const postPage = () => {
     if (status === 'published' || (role === 'administrator' && !!status) || author?._id === userId ) {
         return (
             <>
-                {(role === 'administrator' || author?._id === userId)  && <EditingActionQuickAccess role={role}/>}
+                {(userId && (role === 'administrator' || author?._id === userId))  && <EditingActionQuickAccess role={role}/>}
                 <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
 
                     {

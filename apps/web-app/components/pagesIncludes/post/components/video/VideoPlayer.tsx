@@ -85,7 +85,8 @@ const VideoPlayer :FC<PropTypes> = ({descriptionRef}) => {
             {(!!descriptionRef?.current && !!descriptionRef?.current?.textContent)&&   <meta itemProp="description" content={descriptionRef?.current?.textContent}/>}
             {!!duration &&   <meta itemProp="duration" content={ convertDurationStringToIso8601(duration)}/>}
             {!!playerSchemaData.mainThumbnail &&    <meta itemProp="thumbnailUrl" content={playerSchemaData.mainThumbnail}/>}
-            {!!(videoUrl || videoEmbedCode) &&    <meta itemProp="embedURL" content={videoUrl || videoEmbedCode}/>}
+            {!!videoUrl &&    <meta itemProp="contentUrl" content={videoUrl}/>}
+            {!!videoEmbedCode &&    <meta itemProp="embedURL" content={videoEmbedCode}/>}
             {!!uploadDate && <meta itemProp="uploadDate" content={uploadDate}/>}
             {!!actors?.length && actors?.map(actor=>{
                 return(
