@@ -30,9 +30,7 @@ interface LearnPostCardStylePropTypes {
 const LearnPostCardStyle = styled(DefaultPostCardStyle)`
   
   .entry-header {
-    text-align: center;
     margin-top: 2px;
-
     .card-header {
       color: var(--secondary-text-color, #ccc);
     }

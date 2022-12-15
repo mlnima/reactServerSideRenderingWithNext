@@ -1,5 +1,4 @@
 import React, {FC, useEffect, useState} from "react";
-
 import useTranslation from 'next-translate/useTranslation'
 import styled from "styled-components";
 import {useSelector} from "react-redux";
@@ -13,12 +12,28 @@ import SvgRenderer from "../../../../global/commonComponents/SvgRenderer/SvgRend
 import shortNumber from "custom-util/src/math-util/shortNumber";
 
 const RatingButtonsStyledDiv = styled.div`
-  padding: 0;
+  padding: 0 8px;
+  box-sizing: border-box;
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+ 
   .rated-message {
     color: var(--secondary-text-color, #ccc);
   }
+  
   .rating-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: transparent;
+    color: var(--secondary-text-color, #ccc);
+    outline: none;
+    border: none;
+    
     .thumbs-up ,.thumbs-down{
         background-color: ${({buttonsDisabledStatus}: { buttonsDisabledStatus: boolean }) => {
         return buttonsDisabledStatus ? `#666` : ` var(--secondary-text-color, #ccc)`
@@ -50,9 +65,7 @@ const RatingButtonsStyledDiv = styled.div`
         padding: 0;
       }
     }
-
   }
-
 `
 
 interface RatingButtonsPropTypes {

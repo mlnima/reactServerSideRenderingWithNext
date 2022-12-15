@@ -17,13 +17,13 @@ const PostPageStyle = styled.div`
     width: 100%;
   }
 
-  .rating-buttons, .show-hide-comments, .download-button {
+   .show-hide-comments, .download-button {
 
     display: flex;
     justify-content: center;
     align-items: center;
 
-    .rating-item, .show-hide-comments-button, .download-link {
+     .show-hide-comments-button, .download-link {
       display: flex;
       justify-content: center;
       align-items: center;

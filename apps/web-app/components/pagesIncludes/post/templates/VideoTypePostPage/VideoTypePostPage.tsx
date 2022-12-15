@@ -6,9 +6,6 @@ import dynamic from "next/dynamic";
 import PostTitle from "../../components/common/PostTitle";
 import RelatedPostsRenderer from "../../components/common/RelatedPostsRenderer";
 import {Store} from "typescript-types";
-// import ShowHideCommentsButton
-//     from "@components/includes/PostPage/components/ShowHideCommentsButton/ShowHideCommentsButton";
-
 const PostMetasRenderer = dynamic(() => import('../../components/common/PostMetasRenderer/PostMetasRenderer'))
 const CommentsRenderer = dynamic(() => import('../../components/common/CommentsRenderer/CommentsRenderer'))
 const CommentFrom = dynamic(() => import('../../components/common/CommentFrom'))
@@ -53,7 +50,6 @@ const VideoTypePostPageStyle = styled(PostPageStyle)`
 const VideoTypePostPage = () => {
     const pageContentRef = useRef()
     const descriptionRef = useRef<HTMLDivElement>(null)
-    // const [showComments, setShowComments] = useState(false)
     const pageData = useSelector(({settings, posts}: Store) => {
         return {
             postPageStyle: settings?.design.postPageStyle,
@@ -83,7 +79,6 @@ const VideoTypePostPage = () => {
                             </div>
                         </div>
                     </header>
-
 
                     <div className="entry-content">
                         <PostDescription descriptionRef={descriptionRef}/>

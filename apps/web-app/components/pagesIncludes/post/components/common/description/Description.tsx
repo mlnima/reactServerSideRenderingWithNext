@@ -7,11 +7,11 @@ import {Store} from "typescript-types";
 
 const PostDescriptionStyledDiv = styled.div`
   color: var(--secondary-text-color, #ccc);
+  padding: 8px;
   box-sizing: border-box;
-
   @media only screen and (min-width: 768px) {
     max-width: 1300px;
-    margin: 0 auto;
+    margin: 0;
   }
 `
 
