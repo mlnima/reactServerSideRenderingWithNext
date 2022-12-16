@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import React from "react";
 import useTranslation from "next-translate/useTranslation";
+import shortNumber from "custom-util/src/math-util/shortNumber";
 
 const CardViewsStyledDiv = styled.div`
   font-size: 12px;
@@ -16,7 +17,7 @@ const CardViewsStyledDiv = styled.div`
 `
 
 interface CardViewsPropTypes {
-    views: string,
+    views: number,
     className?: string
 }
 
@@ -27,7 +28,7 @@ const CardViews = ({views, className}: CardViewsPropTypes) => {
         <CardViewsStyledDiv className={`card-views ${className || ''}`}>
             {!!views   &&
                 <>
-                    <span>{views}</span>
+                    <span>{shortNumber(views)}</span>
                     <span >{t('common:Views')}</span>
                 </>
             }

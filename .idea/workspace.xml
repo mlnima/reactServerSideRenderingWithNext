@@ -164,9 +164,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
-        <item itemvalue="npm.build" />
         <item itemvalue="npm.update:packages" />
         <item itemvalue="npm.setup:dark" />
       </list>
@@ -1407,7 +1407,7 @@
       <workItem from="1671050540472" duration="85000" />
       <workItem from="1671076804779" duration="4052000" />
       <workItem from="1671129006538" duration="8360000" />
-      <workItem from="1671166380350" duration="2301000" />
+      <workItem from="1671166380350" duration="3335000" />
     </task>
     <servers />
   </component>
