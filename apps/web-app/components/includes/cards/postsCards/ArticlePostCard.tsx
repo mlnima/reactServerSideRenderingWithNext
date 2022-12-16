@@ -20,7 +20,7 @@ interface ArticlePostCardPropTypes {
     rating: number,
     index: number,
     cardWidth: number,
-    targetLink:string,
+    targetLink: string,
     post: Post,
 }
 
@@ -29,7 +29,7 @@ interface ArticlePostCardStylePropTypes {
 }
 
 const ArticlePostCardStyle = styled(DefaultPostCardStyle)`
-  
+
   @media only screen and (min-width: 768px) {
     max-width: ${({cardWidth}: ArticlePostCardStylePropTypes) => cardWidth}px;
   }
@@ -49,40 +49,33 @@ const ArticlePostCard: FC<ArticlePostCardPropTypes> =
          index
      }) => {
 
-    const {t} = useTranslation()
+        const {t} = useTranslation()
 
         return (
             <ArticlePostCardStyle className={'post-card'} cardWidth={cardWidth}>
                 <Link href={postUrl} className={'card-link'} title={title} target={targetLink}>
 
-                        {post.mainThumbnail ?
-                            <CardImageRenderer imageUrl={post.mainThumbnail}
-                                               mediaAlt={title}
-                                               index={index}
-                                               postsPerRawForMobile={postsPerRawForMobile}
-                                               cardWidth={cardWidth}/> :
-                            <TextToCanvasImage title={title}
-                                               postsPerRawForMobile={postsPerRawForMobile}
-                                               cardWidth={cardWidth}/>
-                        }
-
-                        <CardTitle title={title}/>
-
-                        <div className={'card-under-media-info'}>
-                            <CardViews views={views}/>
-                            {!!rating &&
-                            <CardRating rating={rating} className={'card-rating card-under-title-info-data'}/>
-                            }
-                        </div>
-
+                    {post.mainThumbnail ?
+                        <CardImageRenderer imageUrl={post.mainThumbnail}
+                                           mediaAlt={title}
+                                           index={index}
+                                           postsPerRawForMobile={postsPerRawForMobile}
+                                           cardWidth={cardWidth}/> :
+                        <TextToCanvasImage title={title}
+                                           postsPerRawForMobile={postsPerRawForMobile}
+                                           cardWidth={cardWidth}/>
+                    }
                 </Link>
+                <CardTitle title={title} url={postUrl} targetLink={targetLink}/>
+
+                <div className={'card-under-media-info'}>
+                    <CardViews views={views}/>
+                    {!!rating &&
+                        <CardRating rating={rating} className={'card-rating card-under-title-info-data'}/>
+                    }
+                </div>
+
             </ArticlePostCardStyle>
         )
     };
 export default ArticlePostCard
-// {!!views &&
-// <CardViews views={views} className={'card-views card-under-media-info-data'}/>
-// }
-// {!!rating &&
-// <CardRating rating={rating} className={'card-rating card-under-media-info-data'}/>
-// }

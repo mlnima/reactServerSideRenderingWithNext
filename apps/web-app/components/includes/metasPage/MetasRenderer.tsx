@@ -35,6 +35,7 @@ const MetasRendererStyle = styled.div`
         display: flex;
         flex-wrap: wrap;
         width: 100%;
+        gap: 8px;
 
         .meta-widget-item {
           max-width: 250px;
@@ -42,7 +43,7 @@ const MetasRendererStyle = styled.div`
           list-style: none;
           text-overflow: ellipsis;
           padding: 14px 10px;
-          background-color: var(--secondary-background-color, #181818);
+          //background-color: var(--secondary-background-color, #181818);
           overflow:hidden;
           a {
             overflow:hidden;

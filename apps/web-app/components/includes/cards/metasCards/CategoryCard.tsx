@@ -6,6 +6,7 @@ import {useRouter} from "next/router";
 import {capitalizeFirstLetter} from "custom-util";
 import dynamic from "next/dynamic";
 import CardTitle from "../asset/CardTitle/CardTitle";
+
 const TextToCanvasImage = dynamic(() => import('../asset/TextToCanvasImage/TextToCanvasImage'))
 const ResetMetaImageButton = dynamic(() => import('../asset/ResetMetaImageButton/ResetMetaImageButton'))
 const CardImageRenderer = dynamic(() => import('../asset/CardImageRenderer'))
@@ -59,7 +60,7 @@ interface CategoryCardPropTypes {
     index?: number,
     postsPerRawForMobile: number,
     cardWidth: number,
-    role:string
+    role: string
 }
 
 const CategoryCard: FC<CategoryCardPropTypes> =
@@ -93,9 +94,10 @@ const CategoryCard: FC<CategoryCardPropTypes> =
                                            postsPerRawForMobile={postsPerRawForMobile}
                                            cardWidth={cardWidth}/>
                     }
-                    <CardTitle title={title}/>
                 </Link>
-                {role==='administrator' &&   <ResetMetaImageButton _id={meta._id}/>}
+                <CardTitle title={title} url={`/category/${meta?._id}`}/>
+
+                {role === 'administrator' && <ResetMetaImageButton _id={meta._id}/>}
             </CategoryCardStyle>
         )
     };

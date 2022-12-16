@@ -70,8 +70,9 @@ const TagCard: FC<TagCardPropTypes> =
                                                cardWidth={cardWidth}/>
                         }
 
-                        <CardTitle title={title}/>
+
                 </Link>
+                <CardTitle title={title} url={`/tag/${meta?._id}`}/>
             </TagCardStyle>
         )
     };

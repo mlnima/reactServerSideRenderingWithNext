@@ -3,8 +3,6 @@ import {isAbsolutePath,isImageAllowedForNextImage} from "custom-util";
 import Image from 'next/image'
 import styled from "styled-components";
 
-// import OgImageGenerator from "@components/includes/cards/asset/OgImageGenerator/OgImageGenerator";
-
 interface CardImageNextPropTypes {
     imageUrl: string,
     mediaAlt: string,
@@ -95,11 +93,5 @@ const CardImageRenderer: FC<CardImageNextPropTypes> =
         )
 
     };
+
 export default CardImageRenderer
-// <OgImageGenerator title={mediaAlt} postsPerRawForMobile={postsPerRawForMobile} cardWidth={cardWidth}/>
-
-
-// if (imageUrlSource && isImageAllowedForNextImage(imageUrlSource)  && index >= 2 )
-//     return <MobileCardImageNext imageUrl={imageUrlSource} mediaAlt={mediaAlt} isAppleMobileDevice={isAppleMobileDevice}/>
-//
-// else return  <MobileCardImage imageUrl={imageUrlSource} mediaAlt={mediaAlt} isAppleMobileDevice={isAppleMobileDevice}/>

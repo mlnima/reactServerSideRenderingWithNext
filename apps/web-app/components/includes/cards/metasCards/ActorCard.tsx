@@ -96,8 +96,9 @@ const ActorCard: FC<ActorCardPropTypes> =
                                                postsPerRawForMobile={postsPerRawForMobile}
                                                cardWidth={cardWidth}/>
                         }
-                        <CardTitle title={actorName}/>
+
                 </Link>
+                <CardTitle title={actorName} url={`/actor/${meta?._id}`} />
             </ActorCardStyle>
         )
     };

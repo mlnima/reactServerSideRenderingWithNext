@@ -1,4 +1,3 @@
-import Link from "next/link";
 import styled from "styled-components";
 import React, {FC, useEffect, useRef, useState} from "react";
 import {useSelector} from "react-redux";
@@ -9,6 +8,8 @@ import {capitalizeFirstLetters} from "custom-util";
 
 
 const PostMetaStyledDiv = styled.div`
+  margin-top: 8px ;
+  margin-bottom: 8px ;
   .title{
     font-weight: initial;
     font-size: initial;

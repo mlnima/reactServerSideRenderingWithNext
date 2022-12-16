@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Link from "next/link";
 import {FC} from "react";
 
 const CardTitleStyle = styled.header`
@@ -7,7 +8,7 @@ const CardTitleStyle = styled.header`
   box-sizing: border-box;
   height: 2.2em;
 
-  .card-header {
+  a{
     color: var(--secondary-text-color, #ccc);
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -29,12 +30,17 @@ const CardTitleStyle = styled.header`
 
 interface CardTitlePropTypes {
     title: string,
+    url:string,
+    targetLink?:string
 }
 
-const CardTitle: FC<CardTitlePropTypes> = ({title}) => {
+const CardTitle: FC<CardTitlePropTypes> = ({title,url,targetLink}) => {
+
     return (
-        <CardTitleStyle className={'entry-header'}>
-            <span className={'card-header'}>{title}</span>
+        <CardTitleStyle className={'title'}>
+            <Link href={url} title={title} target={targetLink|| '_self'}>
+                {title}
+            </Link>
         </CardTitleStyle>
     );
 };

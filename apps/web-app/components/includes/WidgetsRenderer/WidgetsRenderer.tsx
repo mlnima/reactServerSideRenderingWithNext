@@ -46,7 +46,7 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
                 !_isEditMode(widget.data.editMode, userRole)
             ) {
                 const widgetProps = {
-                    key: widget._id,
+
                     widgetId: widget._id,
                     isSidebar: position ? position.includes('Sidebar') : false,
                     viewType: widget.data?.viewType,
@@ -57,7 +57,7 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
                     <DynamicNoSSR key={widget._id} >
                         <WidgetWrapper{...widgetProps}/>
                     </DynamicNoSSR> :
-                    <WidgetWrapper{...widgetProps}/>
+                    <WidgetWrapper{...widgetProps} key={widget._id}/>
             } else return null
         })
 

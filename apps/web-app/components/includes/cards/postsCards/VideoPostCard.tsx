@@ -9,6 +9,7 @@ import {Post} from "typescript-types";
 import useTranslation from "next-translate/useTranslation";
 import DefaultPostCardStyle from "../asset/DefaultPostCardStyle";
 import CardViews from "@components/includes/cards/asset/CardViews/CardViews";
+
 const CardRating = dynamic(() => import('../asset/CardRating/CardRating'))
 const CardQuality = dynamic(() => import('../asset/CardQuality/CardQuality'))
 const CardDuration = dynamic(() => import('../asset/CardDuration/CardDuration'))
@@ -37,29 +38,34 @@ const VideoPostCardStyle = styled(DefaultPostCardStyle)`
     position: relative;
     color: var(--secondary-text-color, #ccc);
 
-    .card-quality, .card-duration, .card-views {
-      background-color: #000;
-      overflow: hidden;
-      padding: 2.4px 4.8px;
+    .card-link {
+      .card-quality, .card-duration, .card-views {
+        background-color: #000;
+        overflow: hidden;
+        padding: 2.4px 4.8px;
+        color: var(--secondary-text-color, #ccc);
+      }
+
+      .card-quality {
+        font-weight: 900;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        z-index: 1;
+        border-radius: 3px;
+      }
+
+      .card-duration {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        z-index: 1;
+      }
     }
 
-    .card-quality {
-      font-weight: 900;
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      z-index: 1;
-      border-radius: 3px;
-    }
 
-    .card-duration {
-      position: absolute;
-      bottom: 5px;
-      right: 5px;
-      z-index: 1;
-    }
   }
-  
+
   @media only screen and (min-width: 768px) {
     max-width: ${({cardWidth}: VideoPostCardStylePropTypes) => cardWidth}px;
   }
@@ -95,51 +101,50 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
                                 onTouchStartCapture={() => hoverHandler(true)}
                                 onTouchEnd={() => hoverHandler(false)}>
 
-                <Link href={postUrl} className={'card-link'} title={title} target={targetLink}>
 
-                        <div className={'video-post-card-media'}>
-
-                            {((!hover || (hover && !post?.videoTrailerUrl)) && !!post.mainThumbnail) &&
+                <div className={'video-post-card-media'}>
+                    <Link href={postUrl} className={'card-link'} title={title} target={targetLink}>
+                        {((!hover || (hover && !post?.videoTrailerUrl)) && !!post.mainThumbnail) &&
                             <CardImageRenderer imageUrl={post.mainThumbnail}
                                                mediaAlt={title}
                                                index={index}
                                                postsPerRawForMobile={postsPerRawForMobile}
                                                cardWidth={cardWidth}/>
-                            }
+                        }
 
-                            {((!hover || (hover && !post?.videoTrailerUrl)) && !post.mainThumbnail) &&
+                        {((!hover || (hover && !post?.videoTrailerUrl)) && !post.mainThumbnail) &&
                             <TextToCanvasImage title={title}
                                                postsPerRawForMobile={postsPerRawForMobile}
                                                cardWidth={cardWidth}/>
-                            }
+                        }
 
 
-                            {(hover && !!post?.videoTrailerUrl) &&
+                        {(hover && !!post?.videoTrailerUrl) &&
                             <VideoPostCardTrailer videoTrailerUrl={post?.videoTrailerUrl}
                                                   hoverHandler={hoverHandler}
                                                   hover={hover}
                                                   postsPerRawForMobile={postsPerRawForMobile}
                                                   cardWidth={cardWidth}/>
-                            }
+                        }
 
 
-                            {!!post?.quality &&
+                        {!!post?.quality &&
                             <CardQuality quality={_qualityConvertor(post?.quality)}
                                          className={'card-quality video-card-info-data'}/>}
 
-                            {!!post?.duration &&
+                        {!!post?.duration &&
                             <CardDuration duration={post?.duration} className={'card-duration video-card-info-data'}/>}
+                    </Link>
+                </div>
+                <CardTitle title={title} targetLink={targetLink} url={postUrl}/>
+                <div className={'card-under-media-info'}>
 
-                        </div>
-                        <CardTitle title={title}/>
-                        <div className={'card-under-media-info'}>
+                    <CardViews views={views}/>
+                    {!!rating &&
+                        <CardRating rating={rating} className={'card-rating card-under-title-info-data'}/>
+                    }
+                </div>
 
-                            <CardViews views={views}/>
-                            {!!rating &&
-                            <CardRating rating={rating} className={'card-rating card-under-title-info-data'}/>
-                            }
-                        </div>
-                </Link>
             </VideoPostCardStyle>
         )
     };

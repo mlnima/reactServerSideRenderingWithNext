@@ -7,6 +7,7 @@ import useTranslation from "next-translate/useTranslation";
 import dynamic from "next/dynamic";
 import {Post} from "typescript-types";
 import CardViews from "@components/includes/cards/asset/CardViews/CardViews";
+
 const TextToCanvasImage = dynamic(() => import('../asset/TextToCanvasImage/TextToCanvasImage'))
 const CardImageRenderer = dynamic(() => import('../asset/CardImageRenderer'))
 const CardRating = dynamic(() => import('../asset/CardRating/CardRating'))
@@ -23,7 +24,7 @@ interface PropTypes {
     rating: number,
     index: number,
     cardWidth: number,
-    targetLink:string,
+    targetLink: string,
     post: Post,
 }
 
@@ -35,22 +36,22 @@ const Style = styled(DefaultPostCardStyle)`
 
 const EventPostCard: FC<PropTypes> =
     ({
-        post,
-        title,
-        postUrl,
-        views,
-        rating,
-        postsPerRawForMobile,
-        cardWidth,
-        targetLink,
-        index
-    }) => {
+         post,
+         title,
+         postUrl,
+         views,
+         rating,
+         postsPerRawForMobile,
+         cardWidth,
+         targetLink,
+         index
+     }) => {
 
-    const {t} = useTranslation()
+        const {t} = useTranslation()
 
-    return (
-        <Style className={'post-card'} cardWidth={cardWidth}>
-            <Link href={postUrl} className={'card-link'} title={title} target={targetLink}>
+        return (
+            <Style className={'post-card'} cardWidth={cardWidth}>
+                <Link href={postUrl} className={'card-link'} title={title} target={targetLink}>
 
                     {post.mainThumbnail ?
                         <CardImageRenderer imageUrl={post.mainThumbnail}
@@ -62,18 +63,18 @@ const EventPostCard: FC<PropTypes> =
                                            postsPerRawForMobile={postsPerRawForMobile}
                                            cardWidth={cardWidth}/>
                     }
+                </Link>
+                <CardTitle title={title} url={postUrl} targetLink={targetLink}/>
 
-                    <CardTitle title={title}/>
+                <div className={'card-under-media-info'}>
+                    <CardViews views={views}/>
+                    {!!rating &&
+                        <CardRating rating={rating} className={'card-rating card-under-title-info-data'}/>
+                    }
+                </div>
 
-                    <div className={'card-under-media-info'}>
-                        <CardViews views={views}/>
-                        {!!rating &&
-                            <CardRating rating={rating} className={'card-rating card-under-title-info-data'}/>
-                        }
-                    </div>
 
-            </Link>
-        </Style>
-    )
-};
+            </Style>
+        )
+    };
 export default EventPostCard;
