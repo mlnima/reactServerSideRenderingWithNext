@@ -16,15 +16,16 @@ const CardViewsStyledDiv = styled.div`
 `
 
 interface CardViewsPropTypes {
-    views: number,
+    views: string,
     className?: string
 }
 
 const CardViews = ({views, className}: CardViewsPropTypes) => {
     const {t} = useTranslation()
+
     return (
         <CardViewsStyledDiv className={`card-views ${className || ''}`}>
-            {!!views && views>10  &&
+            {!!views   &&
                 <>
                     <span>{views}</span>
                     <span >{t('common:Views')}</span>

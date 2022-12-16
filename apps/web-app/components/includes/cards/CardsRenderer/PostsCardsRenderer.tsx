@@ -2,7 +2,7 @@ import {FC} from "react";
 import dynamic from "next/dynamic";
 import {useRouter} from "next/router";
 import {useSelector} from "react-redux";
-import {Post,Store} from "typescript-types";
+import {Post, Store} from "typescript-types";
 import {ratingCalculator} from "custom-util";
 import styled from "styled-components";
 import shortNumber from "custom-util/src/math-util/shortNumber";
@@ -72,12 +72,12 @@ const PostsCardsRenderer: FC<CardsRendererPropTypes> = ({
 
             {(uniqueData?.posts || posts || []).map((post: Post, index: number) => {
                 const postProps = {
-                    views: shortNumber(post.views || 0) as unknown as number,
+                    views: post.views > 10 ? shortNumber(post.views || 0) as unknown as number : null,
                     cardWidth,
                     postsPerRawForMobile,
                     rating: post.likes || post.disLikes ? ratingCalculator(post.likes, post.disLikes) : null,
                     post,
-                    targetLink: post?.postType.includes('external') || post?.outPostType === 'promotion' ? '_blank':'_self',
+                    targetLink: post?.postType.includes('external') || post?.outPostType === 'promotion' ? '_blank' : '_self',
                     postUrl: post?.postType.includes('external') ? post?.redirectLink || '#' :
                         `/post/${post?.postType}/${post._id}`,
                     title: process.env.NEXT_PUBLIC_DEFAULT_LOCAL === locale ?
@@ -88,16 +88,16 @@ const PostsCardsRenderer: FC<CardsRendererPropTypes> = ({
 
 
                 if (post?.postType === 'video' || post?.postType === 'externalVideo') {
-                    return <VideoPostCard {...postProps} key={index} index={index}  />
-                }else if (post?.postType === 'event') {
-                    return <EventPostCard {...postProps} key={index} index={index}  />
+                    return <VideoPostCard {...postProps} key={index} index={index}/>
+                } else if (post?.postType === 'event') {
+                    return <EventPostCard {...postProps} key={index} index={index}/>
                 } else if (post?.postType === 'promotion' || post?.postType === 'externalPromotion') {
                     return <PromotionPostCard {...postProps} key={index} index={index}/>
-                } else if (post?.postType === 'article' ||post?.postType === 'externalArticle') {
+                } else if (post?.postType === 'article' || post?.postType === 'externalArticle') {
                     return <ArticlePostCard {...postProps} key={index} index={index}/>
                 } else if (post?.postType === 'learn' || post?.postType === 'externalLearn') {
                     return <LearnPostCard {...postProps} key={index} index={index}/>
-                }else if (post?.postType === 'ugcAd' ) {
+                } else if (post?.postType === 'ugcAd') {
                     return <UgcAdPostCard {...postProps} key={index} index={index}/>
                 } else return null
             })}
