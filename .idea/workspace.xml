@@ -20,9 +20,89 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/global/ErrorBoundary.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/public/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/public/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/public/logo192.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/public/logo512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/public/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/public/robots.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/App.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/App.test.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/App.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/logo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/react-app-env.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/reportWebVitals.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/setupTests.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/hooks.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/commentsReducer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/fileManagerReducer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/formsReducer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/globalStateReducer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/ordersReducer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/pagesReducer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/postsReducer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/settingsReducer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/terminalReducer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/usersReducer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/widgetsReducer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/store.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/tsconfig.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/socket-server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/socket-server/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/experimental/components/providers/ReduxProvider.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/experimental/components/providers/ThemeProvider.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/experimental/components/store/store.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/experimental/head.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/experimental/layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/experimental/lib/fetching/settings.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/experimental/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/ActionButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/ActionButtons.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/WidgetMonacoEditor.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/WidgetMonacoEditor.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/SiteHeadSetter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/global/SiteHeadSetter.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/BackToTopButton/BackToTopButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/BackToTopButton/BackToTopButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/Soft404/Soft404.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/Soft404/Soft404.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/CardsRenderer/PostsCardsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/CardsRenderer/PostsCardsRenderer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/CardViews/CardViews.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/CardViews/CardViews.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/CardImageRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/CardImageRenderer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/CardQuality/CardQuality.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/CardQuality/CardQuality.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/PromotionPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/PromotionPostCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/UgcAd.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/AdPostCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/VideoPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/VideoPostCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/checkOutPageComponents/CheckoutPageSettingsSetter/CheckoutPageSettingsSetter.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/checkOutPageComponents/CheckoutPageSettingsSetter/CheckoutPageSettingsSetter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/profilePageComponents/profilePost/common/ImageUploading.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/profilePageComponents/profilePost/common/ImageUploading.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/Advertise/Advertise.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/Advertise/Advertise.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayoutInitializer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayoutInitializer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/next-dev-server.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/next-production-server.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/nextConfigs/rewrites.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/nextConfigs/rewrites.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/_app.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/exporter/postsExporter/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/admin/exporter/postsExporter/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/importer/youtube/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/admin/importer/youtube/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/post/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/admin/post/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/tools/terminal/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/admin/tools/terminal/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/api/og.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/_storeVariables/_firstRequestHeadDataSetter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/_storeVariables/_firstRequestHeadDataSetter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminReducers/adminCommentsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminReducers/adminCommentsReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminReducers/adminPanelPagesReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminReducers/adminPanelPagesReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/userReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/userReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/hooks.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/hooks.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/tsconfig.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/configs/jest.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/configs/jest.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-server-util/tsconfig.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/tsconfig.tsbuildinfo" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,8 +116,8 @@
         <option value="CSS File" />
         <option value="tsconfig.json" />
         <option value="JavaScript File" />
-        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -78,32 +158,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/Dev Project/ultimateGrabber&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;F:\\Dev Project\\reactServerSideRenderingWithNext\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "F:/Dev Project/reactServerSideRenderingWithNext/apps/web-dashboard-app/src/store/reducers",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "F:\\Dev Project\\reactServerSideRenderingWithNext\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-dashboard-app\src\store\reducers" />
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\trash" />
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-dashboard-app" />
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-dashboard-app\store" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-app\locales\de" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\api-requests" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-app\app\experimental\lib\fetching" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-app\app\(experimental)" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\apps\scripts" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-dashboard-app" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\trash" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\api-requests\src\lib" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\api-requests\src\Client" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\api-requests\src\Admin" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-app\components\pagesIncludes\post\components\learn" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -132,11 +212,11 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="setup:dark" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+    <configuration name="killNodes" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
-        <script value="setup:dark" />
+        <script value="killNodes" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -164,11 +244,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
+        <item itemvalue="npm.build" />
+        <item itemvalue="npm.killNodes" />
         <item itemvalue="npm.update:packages" />
-        <item itemvalue="npm.setup:dark" />
       </list>
     </recent_temporary>
   </component>
@@ -1408,6 +1488,9 @@
       <workItem from="1671076804779" duration="4052000" />
       <workItem from="1671129006538" duration="8360000" />
       <workItem from="1671166380350" duration="3335000" />
+      <workItem from="1671594595764" duration="4194000" />
+      <workItem from="1671640698851" duration="15815000" />
+      <workItem from="1671677895292" duration="7536000" />
     </task>
     <servers />
   </component>
@@ -1916,6 +1999,11 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/StartDate.tsx</url>
           <option name="timeStamp" value="159" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/apps/sitemaps-generator/index.ts</url>
+          <line>5</line>
+          <option name="timeStamp" value="160" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

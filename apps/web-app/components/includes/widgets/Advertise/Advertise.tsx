@@ -46,11 +46,11 @@ const Advertise: FC<AdvertisePropTypes> = ({uniqueData}) => {
 
     return (
         <AdvertiseStyledDiv>
-            {adCodeData ? parse(adCodeData || '') :
-                <div className='pre-load'>
-                    <span>loading...</span>
-                </div>
-            }
+            {/*{adCodeData ? parse(adCodeData || '') :*/}
+            {/*    <div className='pre-load'>*/}
+            {/*        <span>loading...</span>*/}
+            {/*    </div>*/}
+            {/*}*/}
         </AdvertiseStyledDiv>
     )
 };

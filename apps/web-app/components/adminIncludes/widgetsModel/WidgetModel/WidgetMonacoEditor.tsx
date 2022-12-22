@@ -1,5 +1,5 @@
 import Editor from "@monaco-editor/react";
-import {FC, useState,useMemo} from 'react';
+import {FC,useMemo} from 'react';
 import {WidgetData} from "typescript-types";
 
 

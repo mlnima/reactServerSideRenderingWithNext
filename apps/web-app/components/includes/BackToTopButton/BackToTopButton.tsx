@@ -35,10 +35,16 @@ const BackToTopButton = () => {
         }
     }, []);
 
+    const scrollEvent = ()=>{
+        if (typeof window !== 'undefined') {
+            window?.scrollTo({top: 0, behavior: 'smooth'})
+        }
+    }
+
 
     if (showButton) {
         return (
-            <BackToTopButtonStyledDiv onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} title="Back to top">
+            <BackToTopButtonStyledDiv onClick={() => scrollEvent()} title="Back to top">
                 <span aria-label={'scroll to top'}>
                      <SvgRenderer svgUrl={'/asset/images/icons/angle-up-solid.svg'}
                                   customID={'back-to-top-button'}

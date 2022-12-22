@@ -1,13 +1,11 @@
 import {FC} from "react";
 import styled from "styled-components";
-import Link from "next/link";
 import dynamic from "next/dynamic";
 import fetchViewPost
     from "../../../../store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchViewPost";
-import {useAppDispatch} from "../../../../store_toolkit/hooks";
+import {useAppDispatch} from "@store_toolkit/hooks";
 import CardTitle from "../asset/CardTitle/CardTitle";
 import {Post} from "typescript-types";
-import useTranslation from "next-translate/useTranslation";
 import DefaultPostCardStyle from "../asset/DefaultPostCardStyle";
 
 const CardViews = dynamic(() => import('../asset/CardViews/CardViews'))
@@ -87,7 +85,7 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
      }) => {
 
         const dispatch = useAppDispatch();
-        const {t} = useTranslation()
+
         return (
             <Style className={'post-card'} cardWidth={cardWidth}>
                 <a href={post.redirectLink} className='promotion-card-link-external'
@@ -123,44 +121,3 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
     };
 export default PromotionPostCard
 
-
-// return (
-//     <PromotionPostCardStyle className={'post-card'} cardWidth={cardWidth}>
-//         <a href={post.redirectLink} className='promotion-card-link-external'
-//            onClick={() => dispatch(fetchViewPost(post._id))} target='_blank' rel="nofollow noopener external">
-//             {post.mainThumbnail ?
-//                 <CardImageRenderer imageUrl={post.mainThumbnail}
-//                                    mediaAlt={title}
-//                                    index={index}
-//                                    postsPerRawForMobile={postsPerRawForMobile}
-//                                    cardWidth={cardWidth}/> :
-//                 <TextToCanvasImage title={title}
-//                                    postsPerRawForMobile={postsPerRawForMobile}
-//                                    cardWidth={cardWidth}/>
-//             }
-//         </a>
-//
-//         <Link href={postUrl}>
-//             <a className={'card-link'} title={title}>
-//
-//                 <CardTitle title={title}/>
-//
-//                 <div className={'card-under-media-info'}>
-//                     {!!views &&
-//                     <CardViews views={views} className={'card-views card-under-media-info-data'}/>
-//                     }
-//                     {/*<InfoIcon/>*/}
-//                     {!!rating &&
-//                     <CardRating rating={rating} className={'card-rating card-under-media-info-data'}/>
-//                     }
-//
-//                 </div>
-//                 {/*<Stack spacing={1} direction="row">*/}
-//                 <Button variant="contained" className={'read-more-btn'}>
-//                     {t('common:Read More',{},{fallback:'Read More'})}
-//                 </Button>
-//                 {/*</Stack>*/}
-//             </a>
-//         </Link>
-//     </PromotionPostCardStyle>
-// )

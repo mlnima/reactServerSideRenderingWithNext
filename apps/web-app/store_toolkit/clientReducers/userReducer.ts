@@ -2,7 +2,6 @@ import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
 import Axios from "@_variables/Axios";
 import {loading, setAlert, loginRegisterForm} from "./globalStateReducer";
-import {NextRouter} from "next/router";
 import Peer from 'simple-peer'
 import {socket} from '@_variables/socket';
 
@@ -94,7 +93,7 @@ interface FetchOutgoingCall {
     conversation: string,
     mySocketId: string,
     callerName: string,
-    router: NextRouter
+    router: any
 }
 
 
@@ -182,7 +181,7 @@ interface FetchAnswerTheCall {
     myVideo: any,
     conversation: string,
     callerSignal: any,
-    router: NextRouter
+    router: any
 }
 
 

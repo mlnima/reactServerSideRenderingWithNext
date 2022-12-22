@@ -25,6 +25,7 @@ export const fetchAdminPanelGetComments = createAsyncThunk(
         }).finally(() => thunkAPI.dispatch(loading(false)))
     }
 )
+
 export const fetchAdminPanelDeleteComments = createAsyncThunk(
     'adminPanelComments/fetchAdminPanelGerComments',
     async (commentsIds: string[], thunkAPI) => {

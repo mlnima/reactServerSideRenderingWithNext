@@ -3,13 +3,15 @@ import type {AppProps} from 'next/app'
 import {useMemo} from "react";
 import {useRouter} from "next/router";
 import dynamic from "next/dynamic";
+import ErrorBoundary from "@components/global/ErrorBoundary";
+// import {wrapper} from '@store_toolkit/store';
 
 const AdminLayout = dynamic(() => import('../components/layouts/AdminLayout/AdminLayout'))
 const AppLayout = dynamic(() => import('../components/layouts/AppLayout/AppLayout'))
 const MessengerLayout = dynamic(() => import('../components/layouts/MessengerLayout/MessengerLayout'))
 
 const MyApp: FC<AppProps> = ({Component, ...rest}) => {
-
+//'useState'
     const {asPath} = useRouter()
 
     const activeEnvironment = useMemo(() => {
@@ -24,26 +26,19 @@ const MyApp: FC<AppProps> = ({Component, ...rest}) => {
                 AppLayout
     }, [asPath])
 
-    if (activeEnvironment === 'adminPanel') {
         return (
-            <AdminLayout rest={rest}>
-                <Component {...rest.pageProps} />
-            </AdminLayout>
+            <ErrorBoundary>
+                <ActiveLayout rest={rest}>
+                    <Component {...rest.pageProps} />
+                </ActiveLayout>
+            </ErrorBoundary>
         )
-    } else {
-        return (
-            <ActiveLayout rest={rest}>
-                <Component {...rest.pageProps} />
-            </ActiveLayout>
-        )
-    }
-
 
 };
 
 export default MyApp;
 
-
+// export default wrapper.withRedux(MyApp);
 
 
 

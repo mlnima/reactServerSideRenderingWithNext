@@ -1,8 +1,8 @@
-import React from "react";
+import {useState} from "react";
 import ImageUploading, { ImageListType } from "react-images-uploading";
 
 export function PostImageUploading() {
-    const [images, setImages] = React.useState([]);
+    const [images, setImages] = useState([]);
     const maxNumber = 69;
 
     const onChange = (

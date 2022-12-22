@@ -1,9 +1,9 @@
 import React, { useState, useRef, ChangeEvent} from 'react';
 import styled from "styled-components";
-import {useAdminDispatch} from "../../../../store_toolkit/hooks";
-import {adminPanelUpdateSetting} from "../../../../store_toolkit/adminReducers/adminPanelSettingsReducer";
-import {loading} from "../../../../store_toolkit/clientReducers/globalStateReducer";
-import {fetchAdminYoutubeDataScrapper} from "../../../../store_toolkit/adminReducers/adminPanelPostsReducer";
+import {useAdminDispatch} from "@store_toolkit/hooks";
+import {adminPanelUpdateSetting} from "@store_toolkit/adminReducers/adminPanelSettingsReducer";
+import {loading} from "@store_toolkit/clientReducers/globalStateReducer";
+import {fetchAdminYoutubeDataScrapper} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
 
 let StyledDiv = styled.div`
   .admin-import-page-youtube {

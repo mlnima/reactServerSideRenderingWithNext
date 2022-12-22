@@ -4,7 +4,7 @@ import {useMemo} from "react";
 const CardQualityStyledDiv = styled.div`
   font-size: 12px;
   font-weight: bold;
-  color: var(--secondary-text-color, #ccc);
+
 `
 
 interface CardViewsPropTypes {

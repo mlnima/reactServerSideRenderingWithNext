@@ -6,7 +6,6 @@ import VideoPostCardTrailer from "../asset/VideoPostCardTrailer";
 import _qualityConvertor from "../asset/_qualityConvertor";
 import CardTitle from "../asset/CardTitle/CardTitle";
 import {Post} from "typescript-types";
-import useTranslation from "next-translate/useTranslation";
 import DefaultPostCardStyle from "../asset/DefaultPostCardStyle";
 import CardViews from "@components/includes/cards/asset/CardViews/CardViews";
 
@@ -39,27 +38,25 @@ const VideoPostCardStyle = styled(DefaultPostCardStyle)`
     color: var(--secondary-text-color, #ccc);
 
     .card-link {
-      .card-quality, .card-duration, .card-views {
-        background-color: #000;
+      .card-quality, .card-duration {
         overflow: hidden;
         padding: 2.4px 4.8px;
         color: var(--secondary-text-color, #ccc);
+        background-color: var(--secondary-background-color, #ccc);
+        border-radius: 3px;
+        position: absolute;
+        z-index: 1;
       }
 
       .card-quality {
         font-weight: 900;
-        position: absolute;
         top: 5px;
         right: 5px;
-        z-index: 1;
-        border-radius: 3px;
       }
 
       .card-duration {
-        position: absolute;
         bottom: 5px;
         right: 5px;
-        z-index: 1;
       }
     }
 
@@ -86,7 +83,6 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
      }) => {
 
         const [hover, setHover] = useState(null)
-        const {t} = useTranslation()
 
         const hoverHandler = (status) => {
             setHover(status)
@@ -150,30 +146,3 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
     };
 export default LearnPostCard
 
-
-// {(!!post?.actors?.length || !!post?.updatedAt || !!post?.createdAt) &&
-// <VideoPostCardActors actors={post?.actors}
-//                      hover={hover}
-//                      updatedAt={post?.updatedAt}
-//                      createdAt={post?.createdAt}
-// />
-// }
-
-
-// {!!rating &&
-// <CardRating rating={rating} className={'card-rating card-under-media-info-data'}/>}
-
-
-// {(post?.updatedAt || post?.createdAt) &&
-// <CardLastUpdate targetedDate={post?.updatedAt || post?.createdAt}/>
-// }
-
-// {views && <CardViews views={views} className={'card-views card-under-media-info-data'}/>}
-
-// {post.mainThumbnail && <CardImageRenderer imageUrl={post.mainThumbnail}
-//                                           mediaAlt={title}
-//                                           index={index}
-//                                           postsPerRawForMobile={postsPerRawForMobile}
-//                                           cardWidth={cardWidth}
-//                                           isAppleMobileDevice={isAppleMobileDevice}/>
-// }

@@ -15,11 +15,17 @@ const HeaderWidgetArea = dynamic(() => import('../../widgetsArea/HeaderWidgetAre
 const TopBarWidgetArea = dynamic(() => import('../../widgetsArea/TopBarWidgetArea/TopBarWidgetArea'));
 const NavigationWidgetArea = dynamic(() => import('../../widgetsArea/NavigationWidgetArea/NavigationWidgetArea'));
 const FooterWidgetArea = dynamic(() => import('../../widgetsArea/FooterWidgetArea/FooterWidgetArea'));
-const AlertBox = dynamic(() => import('../../global/commonComponents/AlertBox/AlertBox'), {ssr: false});
-const AdminTools = dynamic(() => import('../../includes/AdminTools/AdminTools'), {ssr: false});
-const LoginRegisterPopup = dynamic(() => import('../../includes/LoginRegisterPopup/LoginRegisterPopup'), {ssr: false});
-const CookiePopup = dynamic(() => import('../../includes/ClientPopActionRequest/CookiePopup'), {ssr: false});
-const BackToTopButton = dynamic(() => import('../../includes/BackToTopButton/BackToTopButton'), {ssr: false});
+// const AlertBox = dynamic(() => import('../../global/commonComponents/AlertBox/AlertBox'), {ssr: false});
+// const AdminTools = dynamic(() => import('../../includes/AdminTools/AdminTools'), {ssr: false});
+// const LoginRegisterPopup = dynamic(() => import('../../includes/LoginRegisterPopup/LoginRegisterPopup'), {ssr: false});
+// const CookiePopup = dynamic(() => import('../../includes/ClientPopActionRequest/CookiePopup'), {ssr: false});
+// const BackToTopButton = dynamic(() => import('../../includes/BackToTopButton/BackToTopButton'), {ssr: false});
+
+const AlertBox = dynamic(() => import('../../global/commonComponents/AlertBox/AlertBox'));
+const AdminTools = dynamic(() => import('../../includes/AdminTools/AdminTools'));
+const LoginRegisterPopup = dynamic(() => import('../../includes/LoginRegisterPopup/LoginRegisterPopup'));
+const CookiePopup = dynamic(() => import('../../includes/ClientPopActionRequest/CookiePopup'));
+const BackToTopButton = dynamic(() => import('../../includes/BackToTopButton/BackToTopButton'));
 
 const HeaderStyle = styled.header`
  
@@ -35,10 +41,10 @@ const AppLayoutInitializer: FC<AppLayoutInitializerPropTypes> = ({children}) => 
         loggedIn,
         userRole,
         identity,
-        cookiePopupMessage,
         loginRegisterFormPopup,
         alert,
-        isLoading
+        isLoading,
+        cookiePopupMessage
     } = useSelector(({user, settings, globalState}: Store) => {
         return {
             loggedIn: user?.loggedIn,
@@ -85,4 +91,4 @@ const AppLayoutInitializer: FC<AppLayoutInitializerPropTypes> = ({children}) => 
         </>
     )
 };
-export default AppLayoutInitializer;
+export default AppLayoutInitializer ;

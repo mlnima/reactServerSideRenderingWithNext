@@ -10,7 +10,7 @@ const initialState = {
     page: {}
 }
 
-// export const adminPanelPagesReducer = (state: AdminPanelPagesTypes = initialState, action: { type: string, payload: any }) =>{
+// export const pagesReducer = (state: AdminPanelPagesTypes = initialState, action: { type: string, payload: any }) =>{
 //     switch (action.type) {
 //         case ADMIN_GET_PAGES:
 //             return {

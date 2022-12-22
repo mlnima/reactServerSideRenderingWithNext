@@ -5,14 +5,13 @@ import {useSelector} from "react-redux";
 import {Post, Store} from "typescript-types";
 import {ratingCalculator} from "custom-util";
 import styled from "styled-components";
-import shortNumber from "custom-util/src/math-util/shortNumber";
 
 const ArticlePostCard = dynamic(() => import('../postsCards/ArticlePostCard'))
 const PromotionPostCard = dynamic(() => import('../postsCards/PromotionPostCard'))
 const LearnPostCard = dynamic(() => import('../postsCards/LearnPostCard'))
 const VideoPostCard = dynamic(() => import('../postsCards/VideoPostCard'))
 const EventPostCard = dynamic(() => import('../postsCards/EventPostCard'))
-const UgcAdPostCard = dynamic(() => import('../postsCards/UgcAd'))
+const AdPostCard = dynamic(() => import('../postsCards/AdPostCard'))
 
 const Style = styled.div`
   display: grid;
@@ -50,59 +49,60 @@ interface StylePropTypes {
     cardsCustomStyle: string
 }
 
-const PostsCardsRenderer: FC<CardsRendererPropTypes> = ({
-                                                            posts,
-                                                            uniqueData,
-                                                            isSidebar
-                                                        }) => {
-    const {locale} = useRouter()
-    const {cardWidth, postsPerRawForMobile, cardsCustomStyle} = useSelector(({settings}: Store) => {
-        return {
-            cardWidth: settings?.design?.cardWidthDesktop || 255,
-            cardsCustomStyle: settings?.design?.cardsCustomStyle || '',
-            postsPerRawForMobile: settings?.design?.postsPerRawForMobile || 2,
-        }
-    });
+const PostsCardsRenderer: FC<CardsRendererPropTypes> =
+    ({
+         posts,
+         uniqueData,
+         isSidebar
+     }) => {
+        const {locale} = useRouter()
+        const {cardWidth, postsPerRawForMobile, cardsCustomStyle} = useSelector(({settings}: Store) => {
+            return {
+                cardWidth: settings?.design?.cardWidthDesktop || 255,
+                cardsCustomStyle: settings?.design?.cardsCustomStyle || '',
+                postsPerRawForMobile: settings?.design?.postsPerRawForMobile || 2,
+            }
+        });
 
-    return (
-        <Style className={'posts-content'}
-               postsPerRawForMobile={postsPerRawForMobile}
-               cardWidth={cardWidth}
-               cardsCustomStyle={cardsCustomStyle}>
+        return (
+            <Style className={'posts-content'}
+                   postsPerRawForMobile={postsPerRawForMobile}
+                   cardWidth={cardWidth}
+                   cardsCustomStyle={cardsCustomStyle}>
 
-            {(uniqueData?.posts || posts || []).map((post: Post, index: number) => {
-                const postProps = {
-                    views: post.views > 10 ? post.views as unknown as number : 0,
-                    cardWidth,
-                    postsPerRawForMobile,
-                    rating: post.likes || post.disLikes ? ratingCalculator(post.likes, post.disLikes) : null,
-                    post,
-                    targetLink: post?.postType.includes('external') || post?.outPostType === 'promotion' ? '_blank' : '_self',
-                    postUrl: post?.postType.includes('external') ? post?.redirectLink || '#' :
-                        `/post/${post?.postType}/${post._id}`,
-                    title: process.env.NEXT_PUBLIC_DEFAULT_LOCAL === locale ?
-                        post?.title :
-                        post?.translations?.[locale as string]?.title || post?.title,
-                    isSidebar: isSidebar,
-                }
+                {(uniqueData?.posts || posts || []).map((post: Post, index: number) => {
+                    const postProps = {
+                        views: post.views > 10 ? post.views as unknown as number : 0,
+                        cardWidth,
+                        postsPerRawForMobile,
+                        rating: post.likes || post.disLikes ? ratingCalculator(post.likes, post.disLikes) : null,
+                        post,
+                        targetLink: post?.postType.includes('external') || post?.outPostType === 'promotion' ? '_blank' : '_self',
+                        postUrl: post?.postType.includes('external') ? post?.redirectLink || '#' :
+                            `/post/${post?.postType}/${post._id}`,
+                        title: process.env.NEXT_PUBLIC_DEFAULT_LOCAL === locale ?
+                            post?.title :
+                            post?.translations?.[locale as string]?.title || post?.title,
+                        isSidebar: isSidebar,
+                    }
 
 
-                if (post?.postType === 'video' || post?.postType === 'externalVideo') {
-                    return <VideoPostCard {...postProps} key={index} index={index}/>
-                } else if (post?.postType === 'event') {
-                    return <EventPostCard {...postProps} key={index} index={index}/>
-                } else if (post?.postType === 'promotion' || post?.postType === 'externalPromotion') {
-                    return <PromotionPostCard {...postProps} key={index} index={index}/>
-                } else if (post?.postType === 'article' || post?.postType === 'externalArticle') {
-                    return <ArticlePostCard {...postProps} key={index} index={index}/>
-                } else if (post?.postType === 'learn' || post?.postType === 'externalLearn') {
-                    return <LearnPostCard {...postProps} key={index} index={index}/>
-                } else if (post?.postType === 'ugcAd') {
-                    return <UgcAdPostCard {...postProps} key={index} index={index}/>
-                } else return null
-            })}
+                    if (post?.postType === 'video' || post?.postType === 'externalVideo') {
+                        return <VideoPostCard {...postProps} key={index} index={index}/>
+                    } else if (post?.postType === 'event') {
+                        return <EventPostCard {...postProps} key={index} index={index}/>
+                    } else if (post?.postType === 'promotion' || post?.postType === 'externalPromotion') {
+                        return <PromotionPostCard {...postProps} key={index} index={index}/>
+                    } else if (post?.postType === 'article' || post?.postType === 'externalArticle') {
+                        return <ArticlePostCard {...postProps} key={index} index={index}/>
+                    } else if (post?.postType === 'learn' || post?.postType === 'externalLearn') {
+                        return <LearnPostCard {...postProps} key={index} index={index}/>
+                    } else if (post?.postType === 'Ad') {
+                        return <AdPostCard {...postProps} key={index} index={index}/>
+                    } else return null
+                })}
 
-        </Style>
-    )
-};
+            </Style>
+        )
+    };
 export default PostsCardsRenderer

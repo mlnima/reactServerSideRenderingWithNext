@@ -9,17 +9,18 @@ const nextConfigs = {
     ...nextImageConfig,
     // distDir: '../../.next',
     rewrites,
-    experimental:{appDir: true},
+    // experimental:{appDir: true},
     // runtime: 'experimental-edge',
     redirects,
     swcMinify: true,
     eslint: {
-        ignoreDuringBuilds: true,
+        ignoreDuringBuilds: true
     },
     compiler: {
-        styledComponents: true,
+        styledComponents: true
     }
 }
 
 module.exports = withPlugins(pluginsConfig, nextConfigs);
+// module.exports = nextConfigs;
 

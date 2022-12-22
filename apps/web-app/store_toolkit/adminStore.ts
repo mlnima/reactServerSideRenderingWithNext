@@ -12,7 +12,7 @@ import adminPanelUsersSlice from "./adminReducers/adminPanelUsersReducer";
 import adminPanelCommentsSlice from "./adminReducers/adminCommentsReducer";
 import adminTerminalSlice from "./adminReducers/adminTerminalReducer";
 
-// import {adminPanelOrdersReducer} from "./adminReducers/adminPanelOrdersReducer";
+// import {ordersReducer} from "./adminReducers/ordersReducer";
 
 const debug = false
 
@@ -24,9 +24,9 @@ const combinedReducer = combineReducers({
     adminPanelPosts: adminPanelPostsSlice,
     adminPanelWidgets: adminPanelWidgetsSlice,
     adminPanelForms: adminPanelFormsSlice,
+    adminPanelTerminalState: adminTerminalSlice,
     adminPanelFileManager: adminPanelFileManagerSlice,
-    adminPanelComments: adminPanelCommentsSlice,
-    adminPanelTerminalState: adminTerminalSlice
+    adminPanelComments: adminPanelCommentsSlice
 });
 
 

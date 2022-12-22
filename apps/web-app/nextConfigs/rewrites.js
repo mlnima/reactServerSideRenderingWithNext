@@ -1,16 +1,14 @@
-
 const apiServerProxy = process.env.NEXT_PUBLIC_API_SERVER_URL === process.env.NEXT_PUBLIC_PRODUCTION_URL ?
-      [
-          {
-              source: "/api/:path*",
-              destination: `${process.env.NEXT_PUBLIC_API_SERVER_URL}/api/:path*`,
-          },
-          {
-              source: "/public/:path*",
-              destination: `${process.env.NEXT_PUBLIC_API_SERVER_URL}/public/:path*`,
-          },
-      ] :[]
-
+    [
+        {
+            source: "/api/:path*",
+            destination: `${process.env.NEXT_PUBLIC_API_SERVER_URL}/api/:path*`,
+        },
+        {
+            source: "/public/:path*",
+            destination: `${process.env.NEXT_PUBLIC_API_SERVER_URL}/public/:path*`,
+        },
+    ] : []
 
 
 module.exports = () => {
@@ -135,12 +133,12 @@ module.exports = () => {
 
         ],
         fallback: [
-
-            {
-                source: `/:identifier`,
-                destination: '/post/undefinedType/:identifier',
-                // has: [{type: 'query', key: 'title'}]
-            },
+//*******************
+            // {
+            //     source: `/:identifier`,
+            //     destination: '/post/undefinedType/:identifier',
+            //     // has: [{type: 'query', key: 'title'}]
+            // },
             {
                 source: `/post/:title`,
                 destination: '/post/:identifier',

@@ -33,9 +33,7 @@ const Soft404 = () => {
     const dispatch = useAppDispatch();
     const {locale, pathname} = useRouter()
 
-    useEffect(() => {
-        console.log(pathname)
-    }, [pathname]);
+
 
     useEffect(() => {
         dispatch(fetchPosts({

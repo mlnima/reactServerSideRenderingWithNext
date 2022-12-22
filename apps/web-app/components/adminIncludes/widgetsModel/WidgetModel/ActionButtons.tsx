@@ -34,7 +34,8 @@ const ActionButtons: FC<ActionButtonsPropTypes> = ({widgetData, widgetId, widget
                 posts: [],
                 metaData: []
             }
-        })).then(()=>updateRouteQuery(router))
+        }))
+            .then(()=>updateRouteQuery(router))
     };
 
     const onCloneHandler = () => {

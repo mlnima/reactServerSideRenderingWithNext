@@ -2,9 +2,9 @@ import React, {useState, useRef} from 'react';
 import {animateScroll} from 'react-scroll'
 import styled from "styled-components";
 import { useSelector} from "react-redux";
-import {terminalCommandExecutor} from "../../../../store_toolkit/adminReducers/adminTerminalReducer";
-import {useAdminDispatch} from "../../../../store_toolkit/hooks";
-import {loading} from "../../../../store_toolkit/clientReducers/globalStateReducer";
+import {terminalCommandExecutor} from "@store_toolkit/adminReducers/adminTerminalReducer";
+import {useAdminDispatch} from "@store_toolkit/hooks";
+import {loading} from "@store_toolkit/clientReducers/globalStateReducer";
 import {Store} from "typescript-types";
 
 let StyledDiv = styled.div`

@@ -43,7 +43,7 @@ const Index = () => {
     const [productInfo, setProductInfo] = useState({})
 
     useEffect(() => {
-        if (router.query.id) {
+        if (router?.query?.id) {
             dispatch(fetchAdminPanelPost(router.query.id as string))
         } else {
             dispatch(adminDefineNewPost(null))

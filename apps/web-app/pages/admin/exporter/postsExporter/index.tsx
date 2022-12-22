@@ -1,8 +1,8 @@
 import React, {ChangeEvent,useState} from 'react';
 import styled from "styled-components";
 import {postTypes} from "data-structures";
-import {fetchAdminExportPosts} from "../../../../store_toolkit/adminReducers/adminPanelPostsReducer";
-import {useAdminDispatch} from "../../../../store_toolkit/hooks";
+import {fetchAdminExportPosts} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
+import {useAdminDispatch} from "@store_toolkit/hooks";
 
 // import {adminExportPosts} from "@store/adminActions/adminPanelPostsActions";
 

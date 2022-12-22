@@ -12,6 +12,7 @@ const _firstRequestHeadDataSetter = (context, page: string, setHeadData: boolean
                 + ` | ${identity?.siteName}`,
                 //@ts-ignore
                 {
+                    // /api/og
                     //@ts-ignore
                            name: page === 'search' ?
                                //@ts-ignore

@@ -13,11 +13,16 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children,rest}) => {
     const {store} = wrapper.useWrappedStore(rest);
 
     return (
-        <Provider store={store}>
+       <Provider store={store}>
+
             <AppLayoutInitializer children={children}/>
-        </Provider>
+
+       </Provider>
     );
+
 };
 
 export default AppLayout;
+
+// export default wrapper.withRedux(AppLayout);
 
