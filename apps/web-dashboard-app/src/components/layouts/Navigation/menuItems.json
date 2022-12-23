@@ -1,0 +1,105 @@
+{
+  "Dashboard": {
+    "pathURL": "/dashboard",
+
+    "subItems": []
+  },
+  "Posts": {
+    "pathURL": "/dashboard/assets?assetsType=posts",
+    "subItems": [{"name": "newPost", "url": "/dashboard/post?new=1"}]
+  },
+  "Users": {
+    "pathURL": "/dashboard/assets?assetsType=users",
+    "subItems": []
+  },
+  "Metas": {
+    "pathURL": "/dashboard/assets?assetsType=metas&metaType=categories",
+    "subItems": [
+      {"name": "tags", "url": "/dashboard/assets?assetsType=metas&metaType=tags"},
+      {"name": "categories", "url": "/dashboard/assets?assetsType=metas&metaType=categories"},
+      {"name": "actors", "url": "/dashboard/assets?assetsType=metas&metaType=actors"}]
+  },
+  "Pages": {
+    "pathURL": "/dashboard/assets?assetsType=pages",
+    "subItems": [{"name": "newPage", "url": "/dashboard/page?new=1"}]
+  },
+  "Orders": {
+    "pathURL": "/dashboard/assets?assetsType=orders",
+    "subItems": []
+  },
+  "Forms": {
+    "pathURL": "/dashboard/assets?assetsType=forms",
+    "subItems": []
+  },
+  "Comments": {
+    "pathURL": "/dashboard/assets?assetsType=comments",
+    "subItems": []
+  },
+
+  "FileManager": {
+    "pathURL": "/dashboard/fileManager",
+    "subItems": []
+  },
+  "Design": {
+    "pathURL": "/dashboard/design/widgets",
+    "subItems": [
+      {"name": "topBar", "url": "/dashboard/design/topBar"},
+      {"name": "header", "url": "/dashboard/design/header"},
+      {"name": "navigation", "url": "/dashboard/design/navigation"},
+      {"name": "widgets", "url": "/dashboard/design/widgets"},
+      {"name": "postPage", "url": "/dashboard/design/postPage"},
+      {"name": "postsPage", "url": "/dashboard/design/postsPage"},
+
+      {"name": "actorPage", "url": "/dashboard/design/actorPage"},
+      {"name": "actorsPage", "url": "/dashboard/design/actorsPage"},
+
+      {"name": "categoryPage", "url": "/dashboard/design/categoryPage"},
+      {"name": "categoriesPage", "url": "/dashboard/design/categoriesPage"},
+
+      {"name": "tagPage", "url": "/dashboard/design/tagPage"},
+      {"name": "tagsPage", "url": "/dashboard/design/tagsPage"},
+
+      {"name": "metasPage", "url": "/dashboard/design/metasPage"},
+      {"name": "cards", "url": "/dashboard/design/cards"},
+      {"name": "footer", "url": "/dashboard/design/footer"},
+      {"name": "customStyles", "url": "/dashboard/design/customStyles"},
+      {"name": "customColors", "url": "/dashboard/design/customColors"}
+    ]
+  },
+  "Tools": {
+    "pathURL": "/dashboard/tools",
+    "subItems": [
+      {
+        "name": "terminal",
+        "url": "/dashboard/tools/terminal"
+      }
+    ]
+  },
+  "Settings": {
+    "pathURL": "/dashboard/settings",
+    "subItems": [
+      {"name": "customScript", "url": "/dashboard/settings/customScript"},
+      {"name": "general", "url": "/dashboard/settings/general"},
+      {"name": "membership", "url": "/dashboard/settings/membershipSettings"},
+      {"name": "eCommerce", "url": "/dashboard/settings/eCommerceSettings"}
+    ]
+  },
+  "Translations": {
+    "pathURL": "/dashboard/translations",
+    "subItems": []
+  },
+  "Importer": {
+    "pathURL": "/dashboard/importer",
+    "subItems": [
+      {"name": "youtube", "url": "/dashboard/importer/youtube"},
+      {"name": "content", "url": "/dashboard/importer/content"},
+      {"name": "Posts", "url": "/dashboard/importer/postsImporter"}
+    ]
+  },
+  "Exporter": {
+    "pathURL": "/dashboard/exporter",
+    "subItems": [
+      {"name": "posts", "url": "/dashboard/exporter/postsExporter"}
+    ]
+  }
+}

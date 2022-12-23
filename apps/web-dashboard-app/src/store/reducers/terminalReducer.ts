@@ -1,7 +1,7 @@
-// import {AxiosErrorTypes} from "typescript-types";
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {loading} from "../clientReducers/globalStateReducer";
-import axios, {AxiosError, AxiosResponse} from "axios";
+import {loading} from "./globalStateReducer";
+import {AxiosError, AxiosResponse} from "axios";
+import {AxiosInstance} from "api-requests";
 import {RootState} from "../store";
 
 const initialState = {
@@ -19,15 +19,15 @@ export const terminalCommandExecutor = createAsyncThunk(
             command,
             token: localStorage.wt
         };
-        return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/terminal/command', body)
+        return await AxiosInstance.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/terminal/command', body)
             .then((res: AxiosResponse<any>)=>{
                 return   {
                     result:res.data.response,
                     command,
                 }
-            }).catch((err)=>{
+            }).catch((error:AxiosError)=>{
                 return  {
-                    result:err.stack,
+                    result:error.stack,
                     command,
                 }
             }).finally(()=>thunkAPI.dispatch(loading(false)))
@@ -38,6 +38,7 @@ export const terminalSlice = createSlice({
    name : 'adminPanelTerminalState',
     initialState,
     reducers:{},
+    //@ts-ignore
     extraReducers:(builder) => builder
         .addCase(terminalCommandExecutor.fulfilled,(state, action: PayloadAction<any>) =>{
             return {

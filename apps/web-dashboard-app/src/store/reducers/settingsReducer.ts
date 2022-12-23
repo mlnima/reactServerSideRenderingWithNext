@@ -1,10 +1,9 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
-import Axios from "@_variables/Axios";
-import _getMultipleSettingsQueryGenerator from "@_variables/adminVariables/_getMultipleSettingsQueryGenerator";
-import {loading, setAlert} from "../clientReducers/globalStateReducer";
+import {AxiosInstance} from "api-requests";
+import _getMultipleSettingsQueryGenerator from "../../_variables/_getMultipleSettingsQueryGenerator";
+import {loading, setAlert} from "./globalStateReducer";
 import {AxiosResponse} from "axios";
-import {setSettingsForAdmin} from "../clientReducers/settingsReducer";
 
 interface AdminPanelSettingState {
     design: {},
@@ -27,7 +26,7 @@ export const adminPanelGetSettings = createAsyncThunk(
     'adminPanelSettings/adminPanelGetSettings',
     async (data:any, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await Axios.get(`/api/admin/settings/getMultipleSetting${_getMultipleSettingsQueryGenerator(['identity', 'design', 'adminSettings','membershipSettings'])}&token=${localStorage.wt}`)
+        return await AxiosInstance.get(`/api/admin/settings/getMultipleSetting${_getMultipleSettingsQueryGenerator(['identity', 'design', 'adminSettings','membershipSettings'])}&token=${localStorage.wt}`)
             .then(res => {
 
                 const designSettings = res.data?.settings?.find((setting: any) => setting.type === 'design') || {};
@@ -40,7 +39,7 @@ export const adminPanelGetSettings = createAsyncThunk(
                     membershipSettings: membershipSettings?.data,
                 }
 
-                thunkAPI.dispatch(setSettingsForAdmin(settings))
+                // thunkAPI.dispatch(setSettingsForAdmin(settings))
 
                 return settings
 
@@ -59,11 +58,11 @@ export const adminPanelUpdateSetting = createAsyncThunk(
             data,
             token: localStorage.wt,
         };
-        await Axios.post( '/api/admin/settings/update', body).then((res: AxiosResponse<any>) => {
+        await AxiosInstance.post( '/api/admin/settings/update', body).then((res: AxiosResponse<any>) => {
 
             thunkAPI.dispatch(setAlert({message: res.data.message || 'updated', type: 'success'}))
-        }).catch(err => {
-            thunkAPI.dispatch(setAlert({message: err.response.data.message || 'Something Went Wrong', type: 'error', err}))
+        }).catch(error => {
+            thunkAPI.dispatch(setAlert({message: error.response.data.message || 'Something Went Wrong', type: 'error', err:error}))
 
         }).finally(()=> thunkAPI.dispatch(loading(false)))
     }

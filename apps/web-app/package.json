@@ -13,7 +13,7 @@
   "scripts": {
     "build": "npm run build:next",
     "start": " node next-production-server",
-    "dev": "ts-node --transpile-only ../web-dashboard-app/next-dev-server.js",
+    "dev": "ts-node --transpile-only ./next-dev-server.js",
     "build:next": "next build",
     "test": "jest --watch"
   },
@@ -78,6 +78,7 @@
     "suneditor-react": "^3.4.0",
     "tsconfig": "*",
     "typescript-types": "*",
+    "ui": "*",
     "uuid-apikey": "^1.5.3"
   },
   "_moduleAliases": {

@@ -1,7 +1,6 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import Axios from "@_variables/Axios";
+import {AxiosInstance} from "api-requests";
 import {AxiosResponse} from "axios";
-
 import {NextRouter} from "next/router";
 import {RootState} from "../store";
 import {AdminPanelGlobalState,PageTypes} from "typescript-types";
@@ -13,8 +12,8 @@ const initialState : AdminPanelGlobalState = {
     loading: false,
     alert: {
         active: false,
-        type: null,
-        err: null,
+        type: undefined,
+        err: undefined,
         message: ''
     }
 }
@@ -22,7 +21,7 @@ const initialState : AdminPanelGlobalState = {
 export const fetchCustomPages = createAsyncThunk(
     'adminPanelGlobalState/fetchCustomPages',
     async (data:any , thunkAPI) => {
-        return Axios.post('/api/admin/pages/getPagesData', {token: localStorage.wt})
+        return AxiosInstance.post('/api/admin/pages/getPagesData', {token: localStorage.wt})
             .then((response: AxiosResponse<unknown | any>) => {
                 if (response.data?.pages) {
                     return response.data.pages.map((page: PageTypes) => page.pageName)
@@ -37,9 +36,12 @@ export const fetchClearCaches = createAsyncThunk(
     'adminPanelGlobalState/fetchClearCaches',
     async ({router} :{router?: NextRouter}, thunkAPI) => {
          thunkAPI.dispatch(loading(true))
-        return await Axios.get(`/api/admin/settings/clearCaches?token=${localStorage.wt}`).then((res: AxiosResponse<unknown | any>) => {
+        return await AxiosInstance.get(`/api/admin/settings/clearCaches?token=${localStorage.wt}`).then((res: AxiosResponse<unknown | any>) => {
             thunkAPI.dispatch(setAlert({message: res.data.message || 'done', type: 'success'}))
-            setTimeout(() => router.reload(), 1000)
+            if (router){
+                setTimeout(() => router.reload(), 1000)
+            }
+
         }).catch(err => {
             thunkAPI.dispatch(setAlert({message:'Error While Deleting Cache', type: 'error', err}))
         }).finally(() =>  thunkAPI.dispatch(loading(false)))
@@ -66,7 +68,8 @@ export const globalStateSlice = createSlice({
         closeAlert: (state, action: PayloadAction<any>) => {
             state.alert = {
                 active: false,
-                type: null,
+                type: undefined,
+                err: undefined,
                 message: ''
             }
         }

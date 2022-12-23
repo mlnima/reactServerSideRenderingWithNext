@@ -1,8 +1,6 @@
-// import {User} from "typescript-types";
-// import {AxiosErrorTypes} from "typescript-types";
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {loading, setAlert} from "../clientReducers/globalStateReducer";
-import Axios from "@_variables/Axios";
+import {loading, setAlert} from "./globalStateReducer";
+import {AxiosInstance} from "api-requests";
 import {AxiosError, AxiosResponse} from "axios";
 import {RootState} from "../store";
 import {NextRouter} from "next/router";
@@ -33,13 +31,13 @@ export const fetchAdminPanelUsers = createAsyncThunk(
             data,
             token: localStorage.wt
         };
-        return await Axios.post('/api/admin/users/getUsersList', body).then((res: AxiosResponse<any>) => {
+        return await AxiosInstance.post('/api/admin/users/getUsersList', body).then((res: AxiosResponse<any>) => {
             return {
                 users: res.data.users,
                 totalCount: res.data.totalCount || 0
             }
 
-        }).catch((err) => {
+        }).catch((error: AxiosError) => {
 
         }).finally(() => thunkAPI.dispatch(loading(false)))
     }
@@ -49,14 +47,14 @@ export const fetchAdminPanelNewAPIKey = createAsyncThunk(
     'adminPanelUsers/fetchAdminPanelNewAPIKey',
     async (data: {}, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await Axios.post('/api/admin/users/newAPIKey', {token: localStorage.wt})
+        return await AxiosInstance.post('/api/admin/users/newAPIKey', {token: localStorage.wt})
             .then(() => {
                 thunkAPI.dispatch(setAlert({
                     active: true,
                     type: 'success',
                     message: 'New API KEY Generated'
                 }))
-            }).catch(() => {
+            }).catch((error: AxiosError) => {
                 thunkAPI.dispatch(setAlert({
                     active: true,
                     type: 'error',
@@ -74,10 +72,10 @@ export const fetchAdminPanelUserData = createAsyncThunk(
             _id,
             token: localStorage.wt
         }
-        return await Axios.post('/api/admin/users/getUser', body)
+        return await AxiosInstance.post('/api/admin/users/getUser', body)
             .then(res => {
                 return res.data.user
-            }).catch(err => {
+            }).catch((error: AxiosError) => {
 
 
                 thunkAPI.dispatch(setAlert({
@@ -97,7 +95,7 @@ export const fetchAdminPanelUpdateUserData = createAsyncThunk(
             data,
             token: localStorage.wt
         }
-        return await Axios.post('/api/v1/users/updateUserData', body).then(res => {
+        return await AxiosInstance.post('/api/v1/users/updateUserData', body).then(res => {
 
             thunkAPI.dispatch(setAlert({
                 active: true,
@@ -105,7 +103,7 @@ export const fetchAdminPanelUpdateUserData = createAsyncThunk(
                 message: 'User Updated'
             }))
 
-        }).catch(err => {
+        }).catch((error: AxiosError) => {
 
             thunkAPI.dispatch(setAlert({
                 active: true,
@@ -124,14 +122,14 @@ export const fetchAdminPanelDeleteUser = createAsyncThunk(
             id,
             token: localStorage.wt
         }
-        return await Axios.post('/api/admin/users/deleteUser', body).then(res => {
+        return await AxiosInstance.post('/api/admin/users/deleteUser', body).then(res => {
             thunkAPI.dispatch(setAlert({
                 active: true,
                 type: 'success',
                 message: 'User Deleted'
             }))
 
-        }).catch(err => {
+        }).catch((error: AxiosError) => {
             thunkAPI.dispatch(setAlert({
                 active: true,
                 type: 'error',
@@ -154,17 +152,18 @@ export const fetchAdminPanelChangePassword = createAsyncThunk(
             newPass2,
             token: localStorage.wt
         }
-        return await Axios.post('/api/v1/users/resetPassword', body).then(res => {
+        return await AxiosInstance.post('/api/v1/users/resetPassword', body).then((response: AxiosResponse) => {
             thunkAPI.dispatch(setAlert({
                 active: true,
                 type: 'success',
                 message: 'Password Changed'
             }))
-        }).catch(err => {
+        }).catch((error: AxiosError)  => {
             thunkAPI.dispatch(setAlert({
                 active: true,
                 type: 'error',
-                message: 'Can Not Change The Password'
+                message: 'Can Not Change The Password',
+                err:error
             }))
         }).finally(() => thunkAPI.dispatch(loading(false)))
     }
@@ -175,13 +174,14 @@ export const fetchAdminAutoLogin = createAsyncThunk(
     'user/fetchUserAutoLogin',
     async ({fields}: { fields: string[] }, thunkAPI) => {
         if (localStorage.wt) {
-            return await Axios.post('/api/v1/users/getSignedInUserData', {token: localStorage.wt, fields}).then(res => {
+            return await AxiosInstance.post('/api/v1/users/getSignedInUserData', {token: localStorage.wt, fields}).then((response: AxiosResponse) => {
                 // console.log(res.data?.userData)
-                thunkAPI.dispatch(setAlert({message: res.data.message, type: 'success'}))
-                return res.data?.userData
-            }).catch((err) => {
+                thunkAPI.dispatch(setAlert({message: response.data.message, type: 'success'}))
+                return response.data?.userData
+            }).catch((error: AxiosError) => {
                 localStorage.removeItem('wt')
-                thunkAPI.dispatch(setAlert({message: err.response.data.message, type: 'error'}))
+                //@ts-ignore
+                thunkAPI.dispatch(setAlert({message: error?.response?.data?.message, type: 'error'}))
             })
         } else {
             thunkAPI.dispatch(setAlert({message: 'You Need To Login', type: 'error'}))

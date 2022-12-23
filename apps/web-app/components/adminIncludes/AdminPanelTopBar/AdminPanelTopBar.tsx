@@ -17,7 +17,6 @@ let StyledDiv = styled.div`
   justify-content: space-between;
   padding: 5px 10px;
   height: 30px;
-
   background-color: var(--secondary-background-color, #181818);
   grid-area: admin-panel-topbar;
   opacity: .9;

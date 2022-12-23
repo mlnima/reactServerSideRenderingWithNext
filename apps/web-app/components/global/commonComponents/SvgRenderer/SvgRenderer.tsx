@@ -29,12 +29,6 @@ const Style = styled.span`
   width: ${({width, size}: StylePropTypes) => width || size || 48}px;
   height: ${({height, size}: StylePropTypes) => height || size || 48}px;
   background-color: ${({color}: StylePropTypes) => color || ' var(--main-text-color, #ccc) '};
-
-  //span &{
-  //display: flex;
-  //justify-content: center;
-  //align-items: center;
-  //}
   ${({customStyle}:StylePropTypes)=>customStyle}
 `
 

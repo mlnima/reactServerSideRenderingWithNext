@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {loading, setAlert} from "../clientReducers/globalStateReducer";
-import Axios from "@_variables/Axios";
+import {loading, setAlert} from "./globalStateReducer";
+import {AxiosInstance} from "api-requests";
 import {AxiosError, AxiosResponse} from "axios";
 import {RootState} from "../store";
 
@@ -17,7 +17,7 @@ export const fetchAdminForms = createAsyncThunk(
             ...data,
             token: localStorage.wt
         };
-        return await Axios.post('/api/admin/forms/getFormsData', body).then((response: AxiosResponse) => {
+        return await AxiosInstance.post('/api/admin/forms/getFormsData', body).then((response: AxiosResponse) => {
             return response.data?.forms
         }).catch((err: AxiosError) => {
 
@@ -33,7 +33,7 @@ export const fetchAdminForm = createAsyncThunk(
             _id,
             token: localStorage.wt
         };
-        return await Axios.post('/api/admin/forms/getFormData', body).then((response: AxiosResponse) => {
+        return await AxiosInstance.post('/api/admin/forms/getFormData', body).then((response: AxiosResponse) => {
             return response.data?.form
         }).catch((err: AxiosError) => {
 
@@ -49,7 +49,7 @@ export const fetchAdminDeleteForm = createAsyncThunk(
             _id,
             token: localStorage.wt
         };
-        return await Axios.post('/api/admin/forms/deleteFormData', body).then((response: AxiosResponse) => {
+        return await AxiosInstance.post('/api/admin/forms/deleteFormData', body).then((response: AxiosResponse) => {
             thunkAPI.dispatch(setAlert({
                 message: 'Deleted',
                 type: 'success',

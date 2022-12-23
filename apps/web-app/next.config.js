@@ -9,7 +9,7 @@ const nextConfigs = {
     ...nextImageConfig,
     // distDir: '../../.next',
     rewrites,
-    // experimental:{appDir: true},
+    experimental:{appDir: true},
     // runtime: 'experimental-edge',
     redirects,
     swcMinify: true,

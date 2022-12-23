@@ -1,7 +1,9 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {loading, setAlert} from "../clientReducers/globalStateReducer";
-import Axios from "@_variables/Axios";
+import {loading, setAlert} from "./globalStateReducer";
+import {AxiosInstance} from "api-requests";
+import {AxiosError, AxiosResponse} from "axios";
 import {RootState} from "../store";
+import {PostRaw} from "typescript-types/src/Post";
 
 const initialState = {
     path: './public',
@@ -13,7 +15,6 @@ const initialState = {
     editFile: false,
     action: '',
     _do: '',
-    // AlertBox:false,
     DeleteAlertBox: false,
     confirm: Date.now(),
     message: '',
@@ -35,21 +36,22 @@ export const fetchFilManagerReadPath = createAsyncThunk(
             token: localStorage.wt
         };
 
-        return await Axios.post('/api/admin/fileManager/readPath', body).then(res => {
-            if (res.data.type === 'dir') {
-                return {files: res.data.data}
-            } else if (res.data.type === 'file') {
+        return await AxiosInstance.post('/api/admin/fileManager/readPath', body).then((response: AxiosResponse<any>)  => {
+            if (response.data.type === 'dir') {
+                return {files: response.data.data}
+            } else if (response.data.type === 'file') {
                 return {
                     clickedItem: path,
                     path: prevPath,
-                    file: res.data.data
+                    file: response.data.data
                 }
             } else {
                 thunkAPI.dispatch(setAlert({message: 'Something Went Wrong', type: 'error'}))
             }
 
-        }).catch(err => {
-            thunkAPI.dispatch(setAlert({message: err.response?.data?.message, type: 'error', err}))
+        }).catch((error: AxiosError<any>)  => {
+
+            thunkAPI.dispatch(setAlert({message: error.response?.data?.message, type: 'error', err:error}))
 
         }).finally(() => thunkAPI.dispatch(loading(false)))
     }
@@ -65,13 +67,14 @@ export const fetchFilManagerDeleteFile = createAsyncThunk(
             token: localStorage.wt
         };
 
-        return await Axios.post('/api/admin/fileManager/deleteFile', body).then(res => {
+        return await AxiosInstance.post('/api/admin/fileManager/deleteFile', body).then((response: AxiosResponse<any>)  => {
 
             thunkAPI.dispatch(setAlert({message: 'Deleted', type: 'success'}))
             return data
 
-        }).catch(err => {
-            thunkAPI.dispatch(setAlert({message: err.response?.data?.message, type: 'error'}))
+        }).catch((error: AxiosError<any>) => {
+
+            thunkAPI.dispatch(setAlert({message: error.response?.data?.message, type: 'error'}))
         }).finally(() => thunkAPI.dispatch(loading(false)))
     }
 )
@@ -86,13 +89,13 @@ export const fetchFilManagerCreateNewFolder = createAsyncThunk(
             token: localStorage.wt
         };
 
-        return await Axios.post('/expressServer/files/admin-newFolder', body).then(res => {
+        return await AxiosInstance.post('/expressServer/files/admin-newFolder', body).then((response: AxiosResponse<any>)  => {
 
             thunkAPI.dispatch(setAlert({message: 'Created', type: 'success'}))
 
-        }).catch(err => {
+        }).catch((error: AxiosError<any>) => {
 
-            thunkAPI.dispatch(setAlert({message: err.response?.data?.message, type: 'error'}))
+            thunkAPI.dispatch(setAlert({message: error.response?.data?.message, type: 'error'}))
         }).finally(() => thunkAPI.dispatch(loading(false)))
     }
 )
@@ -107,11 +110,11 @@ export const fetchFilManagerCreateNewFile = createAsyncThunk(
             token: localStorage.wt
         };
 
-        return await Axios.post('/expressServer/files/admin-newFile', body).then(res => {
+        return await AxiosInstance.post('/expressServer/files/admin-newFile', body).then((response: AxiosResponse<any>)  => {
             thunkAPI.dispatch(setAlert({message: 'Created', type: 'success'}))
 
-        }).catch(err => {
-            thunkAPI.dispatch(setAlert({message: err.response?.data?.message, type: 'error'}))
+        }).catch((error: AxiosError<any>) => {
+            thunkAPI.dispatch(setAlert({message: error.response?.data?.message, type: 'error'}))
 
         }).finally(() => thunkAPI.dispatch(loading(false)))
     }
@@ -128,39 +131,39 @@ export const fetchUpdateTranslationsFile = createAsyncThunk(
             token: localStorage.wt
         };
 
-        return await Axios.post('/api/admin/fileManager/updateTranslationsFile', body).then(res => {
+        return await AxiosInstance.post('/api/admin/fileManager/updateTranslationsFile', body).then((response: AxiosResponse<any>)  => {
 
             thunkAPI.dispatch(setAlert({message: 'Updated', type: 'success'}))
 
-        }).catch(err => {
-            thunkAPI.dispatch(setAlert({message: err.response?.data?.message, type: 'error'}))
+        }).catch((error: AxiosError<any>) => {
+            thunkAPI.dispatch(setAlert({message: error.response?.data?.message, type: 'error'}))
 
         }).finally(() => thunkAPI.dispatch(loading(false)))
     }
 )
 export const fetchFileManagerUploadFile = createAsyncThunk(
     'adminPanelFileManager/fetchFileManagerUploadFile',
-    async ({file, useType, postData}: { file: any, useType: string, postData?: {} }, thunkAPI) => {
+    async ({file, useType, postData}: { file: any, useType: string, postData?: PostRaw }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await Axios.post('/api/admin/fileManager/uploadFile', file).then(res => {
+        return await AxiosInstance.post('/api/admin/fileManager/uploadFile', file).then((response: AxiosResponse<any>) => {
             if (useType === 'fileManagerFileUpload') {
                 return {
-                    clickedItem: res.data?.path?.replace('./', ''),
-                    clickedItemName: res.data?.path?.split('/')[res?.data?.path?.split('/')?.length - 1]
+                    clickedItem: response.data?.path?.replace('./', ''),
+                    clickedItemName: response.data?.path?.split('/')[response?.data?.path?.split('/')?.length - 1]
                 }
             } else if (useType === 'postMainThumbnail') {
-                return {'mainThumbnail': res.data?.path?.replace('./', '/')}
+                return {'mainThumbnail': response.data?.path?.replace('./', '/')}
             } else if (useType === 'postImageGallery') {
-                //@ts-ignore
-                return {'images': [...(postData?.images || []), res.data.path.replace('./', '/')]}
+
+                return {'images': [...(postData?.images || []), response.data.path.replace('./', '/')]}
             } else if (useType === 'postVideoUrl') {
-                return {'videoUrl': res.data?.path?.replace('./', '/')}
+                return {'videoUrl': response.data?.path?.replace('./', '/')}
             } else if (useType === 'postVideoTrailerUrl') {
-                return {'VideoTrailerUrl': res.data?.path?.replace('./', '/')}
+                return {'VideoTrailerUrl': response.data?.path?.replace('./', '/')}
             }
 
-        }).catch(err => {
-            thunkAPI.dispatch(setAlert({message: err.response?.data?.message, type: 'error'}))
+        }).catch((error: AxiosError<any>) => {
+            thunkAPI.dispatch(setAlert({message: error.response?.data?.message, type: 'error'}))
 
         }).finally(() => thunkAPI.dispatch(loading(false)))
     }
@@ -177,10 +180,10 @@ export const fetchReadTranslationsFile = createAsyncThunk(
             path,
             token: localStorage.wt
         };
-       return await Axios.post('/api/admin/fileManager/readTranslationsFile', body).then(res => {
-            return res.data.data
-        }).catch(err => {
-            thunkAPI.dispatch(setAlert({message: err.response?.data?.message, type: 'error'}))
+       return await AxiosInstance.post('/api/admin/fileManager/readTranslationsFile', body).then((response: AxiosResponse<any>) => {
+            return response.data.data
+        }).catch((error: AxiosError<any>) => {
+            thunkAPI.dispatch(setAlert({message: error.response?.data?.message, type: 'error'}))
         }).finally(() => thunkAPI.dispatch(loading(false)))
     }
 )
@@ -193,10 +196,10 @@ export const createFileOrFolder = createAsyncThunk(
             ...data,
             token: localStorage.wt
         }
-       return await Axios.post('/api/admin/fileManager/create', body).then(res => {
-            return res.data.data
-        }).catch(err => {
-            thunkAPI.dispatch(setAlert({message: err.response?.data?.message, type: 'error'}))
+       return await AxiosInstance.post('/api/admin/fileManager/create', body).then((response: AxiosResponse<any>) => {
+            return response.data.data
+        }).catch((error: AxiosError<any>) => {
+            thunkAPI.dispatch(setAlert({message: error.response?.data?.message, type: 'error'}))
         }).finally(() => thunkAPI.dispatch(loading(false)))
     }
 )
@@ -256,7 +259,7 @@ export const fileManagerSlice = createSlice({
 })
 
 
-export const {adminPanelFileManagerClosePopup, adminPanelFileManagerEditState,adminPanelEditTranslationsFile} = adminPanelFileManagerSlice.actions
+export const {adminPanelFileManagerClosePopup, adminPanelFileManagerEditState,adminPanelEditTranslationsFile} = fileManagerSlice.actions
 
 export const fileManagerReducer = (state: RootState) => state?.fileManager || null
 

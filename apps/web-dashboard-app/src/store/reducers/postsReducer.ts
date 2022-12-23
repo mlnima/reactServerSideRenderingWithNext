@@ -1,10 +1,9 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
-import Axios from "@_variables/Axios";
+import {AxiosInstance} from "api-requests";
 import {AxiosError, AxiosResponse} from "axios";
-// import {AxiosErrorTypes} from "typescript-types";
 import {Meta,Post} from "typescript-types";
-import {loading, setAlert} from "../adminReducers/globalStateReducer";
+import {loading, setAlert} from "./globalStateReducer";
 import {PostRaw} from "typescript-types/src/Post";
 
 
@@ -36,11 +35,11 @@ export const fetchAdminPanelPost = createAsyncThunk(
     'adminPanelPosts/fetchAdminPanelPost',
     async (_id: string, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await Axios.get(`/api/admin/posts/getPost?_id=${_id}&token=${localStorage.wt}`)
+        return await AxiosInstance.get(`/api/admin/posts/getPost?_id=${_id}&token=${localStorage.wt}`)
             .then((res: AxiosResponse<any>) => {
                 return res.data?.post
-            }).catch((err) => {
-                thunkAPI.dispatch(setAlert({message: err.response?.data?.message, type: 'Error'}))
+            }).catch((error) => {
+                thunkAPI.dispatch(setAlert({message: error.response?.data?.message, type: 'Error'}))
             }).finally(() => {
                 thunkAPI.dispatch(loading(false))
             })
@@ -50,14 +49,14 @@ export const fetchAdminPanelPosts = createAsyncThunk(
     'adminPanelPosts/fetchAdminPanelPosts',
     async (queriesData: string, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await Axios.get(`/api/admin/posts/getPosts${queriesData}&token=${localStorage.wt}`)
+        return await AxiosInstance.get(`/api/admin/posts/getPosts${queriesData}&token=${localStorage.wt}`)
             .then((res: AxiosResponse<any>) => {
                 return {
                     posts: res.data?.posts,
                     totalCount: res.data?.totalCount
                 }
-            }).catch((err) => {
-                thunkAPI.dispatch(setAlert({message: err.response?.data?.message, type: 'Error'}))
+            }).catch((error) => {
+                thunkAPI.dispatch(setAlert({message: error.response?.data?.message, type: 'Error'}))
             }).finally(() => {
                 thunkAPI.dispatch(loading(false))
             })
@@ -72,11 +71,11 @@ export const fetchAdminPanelUpdatePost = createAsyncThunk(
             postData: data,
             token: localStorage.wt
         }
-        return await Axios.post(`/api/admin/posts/updatePost`, body)
+        return await AxiosInstance.post(`/api/admin/posts/updatePost`, body)
             .then((res: AxiosResponse<any>) => {
                 thunkAPI.dispatch(setAlert({message: res.data?.message || 'Post Updated', type: 'success'}))
-            }).catch((err) => {
-                thunkAPI.dispatch(setAlert({message: err.response.data?.message, type: 'error', err}))
+            }).catch((error) => {
+                thunkAPI.dispatch(setAlert({message: error.response.data?.message, type: 'error', error}))
             }).finally(() => {
                 thunkAPI.dispatch(loading(false))
             })
@@ -91,7 +90,7 @@ export const fetchAdminPanelSaveNewPost = createAsyncThunk(
             postData: data,
             token: localStorage.wt
         }
-        return await Axios.post(`/api/admin/posts/createNewPost`, body)
+        return await AxiosInstance.post(`/api/admin/posts/createNewPost`, body)
             .then((res: AxiosResponse<any>) => {
                 thunkAPI.dispatch(setAlert({message: res.data.message || 'Post Saved', type: 'success'}))
                 setTimeout(() => {
@@ -113,12 +112,12 @@ export const fetchAdminPanelDeleteMeta = createAsyncThunk(
             _id,
             token: localStorage.wt
         };
-        return await Axios.post(`/api/admin/posts/deleteMeta`, body)
+        return await AxiosInstance.post(`/api/admin/posts/deleteMeta`, body)
             .then((res: AxiosResponse<any>) => {
                 thunkAPI.dispatch(setAlert({message: res.data?.message || 'deleted', type: 'success'}))
 
-            }).catch((err) => {
-                thunkAPI.dispatch(setAlert({message: err.response.data.message, type: 'error', err}))
+            }).catch((error) => {
+                thunkAPI.dispatch(setAlert({message: error.response.data.message, type: 'error', error}))
             }).finally(() => {
                 thunkAPI.dispatch(loading(false))
             })
@@ -133,7 +132,7 @@ export const fetchAdminPanelUpdateMeta = createAsyncThunk(
             data,
             token: localStorage.wt
         };
-        await Axios.post(`/api/admin/posts/updateMeta`, body)
+        await AxiosInstance.post(`/api/admin/posts/updateMeta`, body)
             .then((res: AxiosResponse<any>) => {
                 thunkAPI.dispatch(setAlert({message: res.data?.message, type: 'success'}))
 
@@ -151,7 +150,7 @@ export const fetchAdminPanelMetas = createAsyncThunk(
     'adminPanelPosts/fetchAdminPanelMetas',
     async (queries: string, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await Axios.get(`/api/admin/posts/getMetas${queries}&token=${localStorage.wt}`)
+        return await AxiosInstance.get(`/api/admin/posts/getMetas${queries}&token=${localStorage.wt}`)
             .then((res: AxiosResponse<any>) => {
                 return {
                     metas: res.data?.metas,
@@ -168,7 +167,7 @@ export const fetchAdminPanelMeta = createAsyncThunk(
     'adminPanelPosts/fetchAdminPanelMeta',
     async (_id: string, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await Axios.get(`/api/admin/posts/getMeta?_id=${_id}&token=${localStorage.wt}`)
+        return await AxiosInstance.get(`/api/admin/posts/getMeta?_id=${_id}&token=${localStorage.wt}`)
             .then((res: AxiosResponse<any>) => {
                 if (res?.data?.meta) {
                     return {
@@ -193,7 +192,7 @@ export const fetchAdminPanelBulkActionPost = createAsyncThunk(
             status,
             token: localStorage.wt
         };
-        Axios.post('/api/admin/posts/postsBulkAction', body).then((res: AxiosResponse<any>) => {
+       await AxiosInstance.post('/api/admin/posts/postsBulkAction', body).then((res: AxiosResponse<any>) => {
             thunkAPI.dispatch(setAlert({message: res.data?.message, type: 'success'}))
 
         }).catch((err) => {
@@ -208,7 +207,7 @@ export const fetchAdminCheckAndRemoveDeletedVideos = createAsyncThunk(
     'adminPanelPosts/fetchAdminCheckAndRemoveDeletedVideos',
     async (data, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await Axios.get(`/api/admin/posts/checkAndRemoveDeletedVideos?token=${localStorage.wt}`)
+        return await AxiosInstance.get(`/api/admin/posts/checkAndRemoveDeletedVideos?token=${localStorage.wt}`)
             .then((res: AxiosResponse<any>) => {
                 thunkAPI.dispatch(setAlert({
                     message: res.data?.message || 'Checking Removed Video Started',
@@ -228,7 +227,7 @@ export const fetchSetMetaThumbnailsAndCount = createAsyncThunk(
     'adminPanelPosts/fetchSetMetaThumbnailsAndCount',
     async (type: string, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        await Axios.get(`/api/admin/posts/setMetaThumbnailsAndCount?token=${localStorage.wt}${type ? `&type=${type}` : ''}`)
+        await AxiosInstance.get(`/api/admin/posts/setMetaThumbnailsAndCount?token=${localStorage.wt}${type ? `&type=${type}` : ''}`)
             .then((res: AxiosResponse<any>) => {
                 thunkAPI.dispatch(setAlert({
                     message: res.data?.message || 'Setting New Image and Fix Count For Meta Data Started',
@@ -246,7 +245,7 @@ export const fetchGeneratePermaLinkForPosts = createAsyncThunk(
     'adminPanelPosts/fetchGeneratePermaLinkForPosts',
     async (type: string, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        await Axios.get(`/api/admin/posts/generatePermaLinkForPosts?token=${localStorage.wt}${type ? `&type=${type}` : ''}`)
+        await AxiosInstance.get(`/api/admin/posts/generatePermaLinkForPosts?token=${localStorage.wt}${type ? `&type=${type}` : ''}`)
             .then((res: AxiosResponse<any>) => {
                 thunkAPI.dispatch(setAlert({
                     message: res.data?.message || 'Generating PermaLinks for Posts Started',
@@ -266,7 +265,7 @@ export const fetchPostThumbnailsUpload = createAsyncThunk(
     'adminPanelPosts/fetchPostThumbnailsUpload',
     async (image, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        await Axios.post('/api/admin/fileManager/postThumbnailsUpload', image).then(res => {
+        await AxiosInstance.post('/api/admin/fileManager/postThumbnailsUpload', image).then(res => {
 
         }).catch(err => {
 
@@ -280,7 +279,7 @@ export const fetchPostThumbnailsUpload = createAsyncThunk(
 //     'adminPanelPosts/fetchAdminImportPosts',
 //     async (posts: Post[], thunkAPI) => {
 //         thunkAPI.dispatch(loading(true))
-//         await Axios.post(`/api/admin/posts/adminImportPosts`, {
+//         await AxiosInstance.post(`/api/admin/posts/adminImportPosts`, {
 //             posts,
 //             token: localStorage.wt
 //         }).then((res: AxiosResponse<any>) => {
@@ -303,9 +302,9 @@ export const fetchAdminExportPosts = createAsyncThunk(
             token: localStorage.wt,
             data
         };
-        await Axios.post('/api/admin/posts/exportPosts', body).then(res => {
+        await AxiosInstance.post('/api/admin/posts/exportPosts', body).then(res => {
 
-            const posts = res.data.exportedData.map(post => {
+            const posts = res.data.exportedData.map((post:any) => {
                 post.mainThumbnail = post.mainThumbnail ? post.mainThumbnail.includes('http') ? post.mainThumbnail : process.env.NEXT_PUBLIC_PRODUCTION_URL + post.mainThumbnail : '';
                 //@ts-ignore
                 !data.ID ? delete post._id : null
@@ -352,7 +351,7 @@ export const fetchAdminBulkActionMeta = createAsyncThunk(
             ids,
             token: localStorage.wt
         };
-        await Axios.post(`/api/admin/posts/bulkAction`, body).then(res => {
+        await AxiosInstance.post(`/api/admin/posts/bulkAction`, body).then(res => {
 
         }).catch(err => {
 
@@ -368,7 +367,7 @@ export const fetchCheckRemovedContent = createAsyncThunk(
             token: localStorage.wt
         };
 
-        await Axios.post(`/api/v1/posts/checkRemovedContent`, body)
+        await AxiosInstance.post(`/api/v1/posts/checkRemovedContent`, body)
     })
 
 export const fetchUpdateComment = createAsyncThunk(
@@ -378,13 +377,13 @@ export const fetchUpdateComment = createAsyncThunk(
             ...data,
             token: localStorage.wt
         };
-        await Axios.post(`/api/admin/posts/updateComment`, body)
+        await AxiosInstance.post(`/api/admin/posts/updateComment`, body)
     })
 
 export const fetchAdminYoutubeDataScrapper = createAsyncThunk(
     'adminPanelPosts/fetchAdminYoutubeDataScrapper',
     async (url: string, thunkAPI) => {
-        const durationToString = duration => {
+        const durationToString = (duration :any) => {
             const hours = duration.hours === 0 ? '' :
                 duration.hours < 10 ? '0' + duration.hours.toString() + ':' :
                     duration.hours.toString() + ':'
@@ -402,7 +401,7 @@ export const fetchAdminYoutubeDataScrapper = createAsyncThunk(
             token: localStorage.wt
         };
 
-        await Axios.post('/api/admin/scrapper/scrapYoutubeInfo', body).then(async res => {
+        await AxiosInstance.post('/api/admin/scrapper/scrapYoutubeInfo', body).then(async res => {
             for await (let video of res.data.videos) {
                 if (video.id) {
                     const videoData = {
@@ -421,7 +420,7 @@ export const fetchAdminYoutubeDataScrapper = createAsyncThunk(
                         views: 0
                     }
                     // @ts-ignore
-                    await Axios.post(`/api/admin/posts/createNewPost`, {
+                    await AxiosInstance.post(`/api/admin/posts/createNewPost`, {
                         postData: videoData,
                         token: localStorage.wt
                     })
@@ -431,7 +430,7 @@ export const fetchAdminYoutubeDataScrapper = createAsyncThunk(
     })
 
 
-
+// @ts-ignore
 export const postsSlice = createSlice({
     name: 'adminPanelPosts',
     initialState,

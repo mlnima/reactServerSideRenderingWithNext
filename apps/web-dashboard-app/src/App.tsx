@@ -1,13 +1,12 @@
 import React from 'react';
-
-
+import RootLayout from "./components/layouts/RootLayout";
+import GlobalStyles from "./global/style/GlobalStyles";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-          new dash
-      </header>
+       <GlobalStyles/>
+       <RootLayout/>
     </div>
   );
 }
