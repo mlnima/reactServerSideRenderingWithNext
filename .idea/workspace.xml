@@ -20,45 +20,89 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/apps/web-app/next-dev-server.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-app/next-production-server.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/.eslintrc.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/_variables/_getMultipleSettingsQueryGenerator.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Main/Main.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Main/MainComponentsWrapper.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Main/MainRouter.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Navigation/Menu.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Navigation/Navigation.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Navigation/menuItems.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/RootLayout.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Home.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/global/style/GlobalStyles.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/typescript-types/src/dashboardStoreTypes/Comments.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/typescript-types/src/dashboardStoreTypes/DashboardStore.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/typescript-types/src/dashboardStoreTypes/FileManager.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/typescript-types/src/dashboardStoreTypes/Forms.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/typescript-types/src/dashboardStoreTypes/GlobalState.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/typescript-types/src/dashboardStoreTypes/Orders.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/typescript-types/src/dashboardStoreTypes/Pages.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/typescript-types/src/dashboardStoreTypes/Posts.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/typescript-types/src/dashboardStoreTypes/Settings.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/typescript-types/src/dashboardStoreTypes/TerminalState.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/typescript-types/src/dashboardStoreTypes/Users.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/typescript-types/src/dashboardStoreTypes/Widgets.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/ui/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/ui/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/ui/src/SvgRenderer.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/ui/tsconfig.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/ui/tsconfig.tsbuildinfo" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/craco.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Assets/Assets.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Login.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/NotFound.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/routers/PrivateRoutes.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/variables/getPostQueryGenerator.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/tsconfig.paths.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/webpack.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/clearCaches.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/comments/deleteComments.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/comments/getComments.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/createFile.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/createFileOrFolder.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/createFolder.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/deleteFile.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/readPath.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/readTranslationFile.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/updateTranslationFile.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/uploadFile.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/forms/deleteForm.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/forms/getForm.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/forms/getForms.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/metas/bulkActionOnMetas.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/metas/deleteMeta.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/metas/getMeta.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/metas/getMetas.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/metas/setMetaThumbnailsAndCount.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/metas/updateMeta.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/pages/createNewPage.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/pages/deletePage.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/pages/getPage.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/pages/getPages.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/pages/updatePage.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/bulkActionOnPosts.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/checkAndRemoveDeletedVideos.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/createNewPost.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/exportPosts.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/generatePermaLinkForPosts.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/getPost.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/getPosts.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/scrapYoutubeInfo.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/updatePost.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/settings/getMultipleSetting.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/settings/updateSetting.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/changePassword.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/deleteUser.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/generateNewAPIKey.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/getSignedInUserData.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/getUser.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/getUsers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/updateUser.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/widgets/createNewWidget.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/widgets/deleteWidget.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/widgets/getWidgets.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/widgets/updateWidget.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/ui/src/buttonsStyle.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/ui/src/defaultColors.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/ui/src/inputsStyles.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/ui/src/selectsStyle.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/AdminPanelTopBar/AdminPanelTopBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/AdminPanelTopBar/AdminPanelTopBar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/commonComponents/SvgRenderer/SvgRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/global/commonComponents/SvgRenderer/SvgRenderer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/_variables/adminVariables/_adminGetPostsQueryGenerator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/_variables/adminVariables/_adminGetPostsQueryGenerator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/Styles/GlobalStylesComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/global/Styles/GlobalStylesComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/assets/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/admin/assets/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminReducers/adminCommentsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminReducers/adminCommentsReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminReducers/adminPanelFileManagerReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminReducers/adminPanelFileManagerReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminReducers/adminPanelFormsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminReducers/adminPanelFormsReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminReducers/adminPanelGlobalStateReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminReducers/adminPanelGlobalStateReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminReducers/adminPanelPagesReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminReducers/adminPanelPagesReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminReducers/adminPanelPostsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminReducers/adminPanelPostsReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminReducers/adminPanelSettingsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminReducers/adminPanelSettingsReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminReducers/adminPanelUsersReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminReducers/adminPanelUsersReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminReducers/adminWidgetsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminReducers/adminWidgetsReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/tsconfig.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/App.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/_variables/_getMultipleSettingsQueryGenerator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/variables/_getMultipleSettingsQueryGenerator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Main/Main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Main/Main.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Main/MainRouter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/routers/RootRouter.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Navigation/Menu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Navigation/Menu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/RootLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/RootLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Dashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/global/style/GlobalStyles.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/global/style/GlobalStyles.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/commentsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/commentsReducer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/fileManagerReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/fileManagerReducer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/formsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/formsReducer.ts" afterDir="false" />
@@ -66,14 +110,14 @@
       <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/pagesReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/pagesReducer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/postsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/postsReducer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/settingsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/settingsReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/terminalReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/terminalReducer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/usersReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/usersReducer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/widgetsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/widgetsReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/tsconfig.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/lib/AxiosInstance.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/lib/AxiosInstance.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/lib/AxiosInstance.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/lib/AxiosInstance.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/api-requests/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/tsconfig.tsbuildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/custom-util/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/tsconfig.tsbuildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/tsconfig.tsbuildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/typescript-types/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/typescript-types/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/tsconfig.tsbuildinfo" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,9 +130,9 @@
         <option value="HTML File" />
         <option value="CSS File" />
         <option value="tsconfig.json" />
-        <option value="JavaScript File" />
-        <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -151,11 +195,11 @@
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-dashboard-app\src\_variables" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-dashboard-app\src\components" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-dashboard-app\src\global" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-dashboard-app" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\trash" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\api-requests\src\lib" />
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\api-requests\src\dashboard\users" />
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\api-requests\src\dashboard\metas" />
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\api-requests\src\dashboard\posts" />
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\api-requests\src\dashboard\pages" />
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\api-requests\src\dashboard\forms" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -1464,7 +1508,15 @@
       <workItem from="1671640698851" duration="15815000" />
       <workItem from="1671677895292" duration="8330000" />
       <workItem from="1671727665948" duration="15591000" />
-      <workItem from="1671768490946" duration="3844000" />
+      <workItem from="1671768490946" duration="4562000" />
+      <workItem from="1671814850476" duration="9138000" />
+      <workItem from="1671874244387" duration="4847000" />
+      <workItem from="1671962346627" duration="697000" />
+      <workItem from="1671969730672" duration="2940000" />
+      <workItem from="1671987005502" duration="11300000" />
+      <workItem from="1672047184722" duration="23998000" />
+      <workItem from="1672115512754" duration="2928000" />
+      <workItem from="1672159571625" duration="4660000" />
     </task>
     <servers />
   </component>
@@ -1721,6 +1773,135 @@
         <option value="$PROJECT_DIR$/packages/ui/src/SvgRenderer.js" />
         <option value="$PROJECT_DIR$/packages/ui/src/SvgRenderer.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/ui/src/SvgRenderer.d.ts" />
+        <option value="$PROJECT_DIR$/packages/ui/src/buttonsStyle.d.ts" />
+        <option value="$PROJECT_DIR$/packages/ui/src/buttonsStyle.js" />
+        <option value="$PROJECT_DIR$/packages/ui/src/buttonsStyle.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/ui/src/inputsStyles.d.ts" />
+        <option value="$PROJECT_DIR$/packages/ui/src/inputsStyles.js" />
+        <option value="$PROJECT_DIR$/packages/ui/src/inputsStyles.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/ui/src/defaultColors.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/ui/src/defaultColors.js" />
+        <option value="$PROJECT_DIR$/packages/ui/src/defaultColors.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/comments/deleteComments.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/comments/deleteComments.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/comments/deleteComments.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/forms/getForm.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/forms/getForm.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/forms/getForm.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/readPath.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/readPath.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/readPath.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/deleteFile.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/createFolder.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/deleteFile.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/createFolder.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/createFolder.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/deleteFile.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/createFile.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/createFile.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/createFile.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/updateTranslationFile.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/updateTranslationFile.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/updateTranslationFile.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/uploadFile.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/uploadFile.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/uploadFile.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/readTranslationFile.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/readTranslationFile.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/readTranslationFile.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/createFileOrFolder.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/createFileOrFolder.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/createFileOrFolder.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/clearCaches.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/clearCaches.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/clearCaches.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/pages/getPage.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/pages/getPage.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/pages/getPage.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/pages/createNewPage.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/pages/deletePage.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/pages/createNewPage.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/pages/deletePage.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/pages/updatePage.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/pages/updatePage.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/pages/updatePage.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/pages/createNewPage.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/pages/deletePage.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/getPost.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/getPost.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/getPost.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/updatePost.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/updatePost.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/updatePost.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/createNewPost.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/createNewPost.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/createNewPost.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/metas/deleteMeta.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/metas/deleteMeta.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/metas/deleteMeta.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/metas/updateMeta.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/metas/updateMeta.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/metas/updateMeta.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/metas/getMeta.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/metas/getMeta.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/metas/getMeta.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/bulkActionOnPosts.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/bulkActionOnPosts.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/bulkActionOnPosts.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/checkAndRemoveDeletedVideos.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/checkAndRemoveDeletedVideos.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/checkAndRemoveDeletedVideos.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/metas/setMetaThumbnailsAndCount.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/metas/setMetaThumbnailsAndCount.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/metas/setMetaThumbnailsAndCount.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/generatePermaLinkForPosts.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/generatePermaLinkForPosts.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/generatePermaLinkForPosts.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/metas/bulkActionOnMetas.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/metas/bulkActionOnMetas.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/metas/bulkActionOnMetas.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/exportPosts.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/exportPosts.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/exportPosts.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/scrapYoutubeInfo.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/scrapYoutubeInfo.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/scrapYoutubeInfo.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/settings/getMultipleSetting.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/settings/getMultipleSetting.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/settings/getMultipleSetting.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/settings/updateSetting.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/settings/updateSetting.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/settings/updateSetting.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/deleteUser.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/generateNewAPIKey.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/deleteUser.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/changePassword.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/changePassword.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/changePassword.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/updateUser.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/updateUser.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/getUser.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/deleteUser.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/generateNewAPIKey.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/getUser.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/generateNewAPIKey.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/getUser.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/updateUser.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/getSignedInUserData.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/getSignedInUserData.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/getSignedInUserData.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/widgets/getWidgets.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/widgets/getWidgets.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/widgets/getWidgets.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/widgets/createNewWidget.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/widgets/createNewWidget.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/widgets/updateWidget.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/widgets/updateWidget.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/widgets/updateWidget.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/widgets/createNewWidget.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/widgets/deleteWidget.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/widgets/deleteWidget.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/widgets/deleteWidget.d.ts" />
       </list>
     </option>
   </component>

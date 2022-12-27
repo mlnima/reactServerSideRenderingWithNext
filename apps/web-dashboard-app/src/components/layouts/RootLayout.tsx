@@ -8,7 +8,7 @@ const Style = styled.main`
   grid-area: main-content;
 `
 
-const Layout = () => {
+const RootLayout = () => {
     return (
         <Style>
             <Navigation/>
@@ -18,4 +18,4 @@ const Layout = () => {
     )
 };
 
-export default Layout
+export default RootLayout

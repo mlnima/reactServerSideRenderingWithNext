@@ -1,10 +1,10 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
-import Axios from "@_variables/Axios";
-import _getMultipleSettingsQueryGenerator from "@_variables/adminVariables/_getMultipleSettingsQueryGenerator";
 import {loading, setAlert} from "../clientReducers/globalStateReducer";
 import {AxiosResponse} from "axios";
 import {setSettingsForAdmin} from "../clientReducers/settingsReducer";
+import getMultipleSetting from "api-requests/src/dashboard/settings/getMultipleSetting";
+import updateSetting from "api-requests/src/dashboard/settings/updateSetting";
 
 interface AdminPanelSettingState {
     design: {},
@@ -27,7 +27,8 @@ export const adminPanelGetSettings = createAsyncThunk(
     'adminPanelSettings/adminPanelGetSettings',
     async (data:any, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await Axios.get(`/api/admin/settings/getMultipleSetting${_getMultipleSettingsQueryGenerator(['identity', 'design', 'adminSettings','membershipSettings'])}&token=${localStorage.wt}`)
+      //  return await Axios.get(`/api/admin/settings/getMultipleSetting${_getMultipleSettingsQueryGenerator(['identity', 'design', 'adminSettings','membershipSettings'])}&token=${localStorage.wt}`)
+        return getMultipleSetting()
             .then(res => {
 
                 const designSettings = res.data?.settings?.find((setting: any) => setting.type === 'design') || {};
@@ -59,7 +60,8 @@ export const adminPanelUpdateSetting = createAsyncThunk(
             data,
             token: localStorage.wt,
         };
-        await Axios.post( '/api/admin/settings/update', body).then((res: AxiosResponse<any>) => {
+        await updateSetting( type,data)
+            .then((res: AxiosResponse<any>) => {
 
             thunkAPI.dispatch(setAlert({message: res.data.message || 'updated', type: 'success'}))
         }).catch(err => {

@@ -4,6 +4,14 @@ import {AxiosInstance} from "api-requests";
 import {AxiosError, AxiosResponse} from "axios";
 import {RootState} from "../store";
 import {PostRaw} from "typescript-types/src/Post";
+import readPath from "api-requests/src/dashboard/fileManager/readPath";
+import deleteFile from "api-requests/src/dashboard/fileManager/deleteFile";
+import createFolder from "api-requests/src/dashboard/fileManager/createFolder";
+import createFile from "api-requests/src/dashboard/fileManager/createFile";
+import updateTranslationFile from "api-requests/src/dashboard/fileManager/updateTranslationFile";
+import uploadFile from "api-requests/src/dashboard/fileManager/uploadFile";
+import readTranslationFile from "api-requests/src/dashboard/fileManager/readTranslationFile";
+import createFileOrFolder from "api-requests/src/dashboard/fileManager/createFileOrFolder";
 
 const initialState = {
     path: './public',
@@ -31,12 +39,8 @@ export const fetchFilManagerReadPath = createAsyncThunk(
     'adminPanelFileManager/fetchFilManagerReadPath',
     async ({path, prevPath}: { path: string, prevPath: string }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        let body = {
-            path,
-            token: localStorage.wt
-        };
 
-        return await AxiosInstance.post('/api/admin/fileManager/readPath', body).then((response: AxiosResponse<any>)  => {
+        return await readPath(path).then((response: AxiosResponse<any>)  => {
             if (response.data.type === 'dir') {
                 return {files: response.data.data}
             } else if (response.data.type === 'file') {
@@ -62,12 +66,7 @@ export const fetchFilManagerDeleteFile = createAsyncThunk(
     async ({filePath, data}: { filePath: string, data: {} }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
-        let body = {
-            filePath,
-            token: localStorage.wt
-        };
-
-        return await AxiosInstance.post('/api/admin/fileManager/deleteFile', body).then((response: AxiosResponse<any>)  => {
+        return await deleteFile(filePath).then((response: AxiosResponse<any>)  => {
 
             thunkAPI.dispatch(setAlert({message: 'Deleted', type: 'success'}))
             return data
@@ -78,18 +77,13 @@ export const fetchFilManagerDeleteFile = createAsyncThunk(
         }).finally(() => thunkAPI.dispatch(loading(false)))
     }
 )
+
 export const fetchFilManagerCreateNewFolder = createAsyncThunk(
     'adminPanelFileManager/fetchFilManagerCreateNewFolder',
     async ({folderName, folderPath}: { folderName: string, folderPath: string }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
-        let body = {
-            folderName,
-            folderPath,
-            token: localStorage.wt
-        };
-
-        return await AxiosInstance.post('/expressServer/files/admin-newFolder', body).then((response: AxiosResponse<any>)  => {
+        return await createFolder(folderName,folderPath).then((response: AxiosResponse<any>)  => {
 
             thunkAPI.dispatch(setAlert({message: 'Created', type: 'success'}))
 
@@ -110,7 +104,7 @@ export const fetchFilManagerCreateNewFile = createAsyncThunk(
             token: localStorage.wt
         };
 
-        return await AxiosInstance.post('/expressServer/files/admin-newFile', body).then((response: AxiosResponse<any>)  => {
+        return await createFile(fileName, filePath).then((response: AxiosResponse<any>)  => {
             thunkAPI.dispatch(setAlert({message: 'Created', type: 'success'}))
 
         }).catch((error: AxiosError<any>) => {
@@ -125,13 +119,9 @@ export const fetchUpdateTranslationsFile = createAsyncThunk(
     async ({path, data}: { path: string, data: string }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
-        let body = {
-            path,
-            data,
-            token: localStorage.wt
-        };
 
-        return await AxiosInstance.post('/api/admin/fileManager/updateTranslationsFile', body).then((response: AxiosResponse<any>)  => {
+
+        return await updateTranslationFile(path, data).then((response: AxiosResponse<any>)  => {
 
             thunkAPI.dispatch(setAlert({message: 'Updated', type: 'success'}))
 
@@ -145,7 +135,7 @@ export const fetchFileManagerUploadFile = createAsyncThunk(
     'adminPanelFileManager/fetchFileManagerUploadFile',
     async ({file, useType, postData}: { file: any, useType: string, postData?: PostRaw }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await AxiosInstance.post('/api/admin/fileManager/uploadFile', file).then((response: AxiosResponse<any>) => {
+        return await uploadFile(file).then((response: AxiosResponse<any>) => {
             if (useType === 'fileManagerFileUpload') {
                 return {
                     clickedItem: response.data?.path?.replace('./', ''),
@@ -176,11 +166,8 @@ export const fetchReadTranslationsFile = createAsyncThunk(
     'adminPanelFileManager/fetchReadTranslationsFile',
     async (path: string, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        let body = {
-            path,
-            token: localStorage.wt
-        };
-       return await AxiosInstance.post('/api/admin/fileManager/readTranslationsFile', body).then((response: AxiosResponse<any>) => {
+
+       return await readTranslationFile(path).then((response: AxiosResponse<any>) => {
             return response.data.data
         }).catch((error: AxiosError<any>) => {
             thunkAPI.dispatch(setAlert({message: error.response?.data?.message, type: 'error'}))
@@ -188,7 +175,7 @@ export const fetchReadTranslationsFile = createAsyncThunk(
     }
 )
 
-export const createFileOrFolder = createAsyncThunk(
+export const createFileOrDir = createAsyncThunk(
     'adminPanelFileManager/createFileOrFolder',
     async (data: {Path:string,fileFolderName:string,type:string}, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
@@ -196,7 +183,7 @@ export const createFileOrFolder = createAsyncThunk(
             ...data,
             token: localStorage.wt
         }
-       return await AxiosInstance.post('/api/admin/fileManager/create', body).then((response: AxiosResponse<any>) => {
+       return await createFileOrFolder(data).then((response: AxiosResponse<any>) => {
             return response.data.data
         }).catch((error: AxiosError<any>) => {
             thunkAPI.dispatch(setAlert({message: error.response?.data?.message, type: 'error'}))

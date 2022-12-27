@@ -1,9 +1,15 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {loading, setAlert} from "./globalStateReducer";
-import {AxiosInstance} from "api-requests";
 import {AxiosError, AxiosResponse} from "axios";
 import {RootState} from "../store";
 import {NextRouter} from "next/router";
+import getUsers from "api-requests/src/dashboard/users/getUsers";
+import generateNewAPIKey from "api-requests/src/dashboard/users/generateNewAPIKey";
+import getUser from "api-requests/src/dashboard/users/getUser";
+import updateUser from "api-requests/src/dashboard/users/updateUser";
+import deleteUser from "api-requests/src/dashboard/users/deleteUser";
+import changePassword from "api-requests/src/dashboard/users/changePassword";
+import getSignedInUserData from "api-requests/src/dashboard/users/getSignedInUserData";
 
 const initialState = {
     userData: {},
@@ -31,7 +37,7 @@ export const fetchAdminPanelUsers = createAsyncThunk(
             data,
             token: localStorage.wt
         };
-        return await AxiosInstance.post('/api/admin/users/getUsersList', body).then((res: AxiosResponse<any>) => {
+        return await getUsers(data).then((res: AxiosResponse<any>) => {
             return {
                 users: res.data.users,
                 totalCount: res.data.totalCount || 0
@@ -47,7 +53,7 @@ export const fetchAdminPanelNewAPIKey = createAsyncThunk(
     'adminPanelUsers/fetchAdminPanelNewAPIKey',
     async (data: {}, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await AxiosInstance.post('/api/admin/users/newAPIKey', {token: localStorage.wt})
+        return await generateNewAPIKey()
             .then(() => {
                 thunkAPI.dispatch(setAlert({
                     active: true,
@@ -68,11 +74,8 @@ export const fetchAdminPanelUserData = createAsyncThunk(
     'adminPanelUsers/fetchAdminPanelUserData',
     async (_id: string, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        const body = {
-            _id,
-            token: localStorage.wt
-        }
-        return await AxiosInstance.post('/api/admin/users/getUser', body)
+
+        return await getUser(_id)
             .then(res => {
                 return res.data.user
             }).catch((error: AxiosError) => {
@@ -95,7 +98,8 @@ export const fetchAdminPanelUpdateUserData = createAsyncThunk(
             data,
             token: localStorage.wt
         }
-        return await AxiosInstance.post('/api/v1/users/updateUserData', body).then(res => {
+        return await updateUser(data)
+            .then(res => {
 
             thunkAPI.dispatch(setAlert({
                 active: true,
@@ -122,7 +126,8 @@ export const fetchAdminPanelDeleteUser = createAsyncThunk(
             id,
             token: localStorage.wt
         }
-        return await AxiosInstance.post('/api/admin/users/deleteUser', body).then(res => {
+        return await deleteUser(id)
+            .then(res => {
             thunkAPI.dispatch(setAlert({
                 active: true,
                 type: 'success',
@@ -146,13 +151,9 @@ export const fetchAdminPanelChangePassword = createAsyncThunk(
     'adminPanelUsers/fetchAdminPanelChangePassword',
     async ({oldPass, newPass, newPass2}: { oldPass: string, newPass: string, newPass2: string }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        let body = {
-            oldPass,
-            newPass,
-            newPass2,
-            token: localStorage.wt
-        }
-        return await AxiosInstance.post('/api/v1/users/resetPassword', body).then((response: AxiosResponse) => {
+
+        return await changePassword(oldPass, newPass, newPass2)
+            .then((response: AxiosResponse) => {
             thunkAPI.dispatch(setAlert({
                 active: true,
                 type: 'success',
@@ -174,7 +175,8 @@ export const fetchAdminAutoLogin = createAsyncThunk(
     'user/fetchUserAutoLogin',
     async ({fields}: { fields: string[] }, thunkAPI) => {
         if (localStorage.wt) {
-            return await AxiosInstance.post('/api/v1/users/getSignedInUserData', {token: localStorage.wt, fields}).then((response: AxiosResponse) => {
+            return await getSignedInUserData(fields)
+                .then((response: AxiosResponse) => {
                 // console.log(res.data?.userData)
                 thunkAPI.dispatch(setAlert({message: response.data.message, type: 'success'}))
                 return response.data?.userData

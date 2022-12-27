@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import styled from "styled-components";
-import MainRouter from "./MainRouter";
+import RootRouter from "../../routers/RootRouter";
 
 const Style = styled.div`
   grid-area: main;
@@ -8,6 +8,7 @@ const Style = styled.div`
   min-width: 100vw;
   min-height: 70vh;
 `
+
 interface MainPropTypes {
 
 }
@@ -15,8 +16,9 @@ interface MainPropTypes {
 const Main: FC<MainPropTypes> = (props) => {
     return (
         <Style>
-           {/*<MainRouter/>*/}
+           <RootRouter/>
         </Style>
     )
 };
+
 export default Main

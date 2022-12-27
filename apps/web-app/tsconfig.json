@@ -25,7 +25,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "../web-dashboard-app/next-production-server.js",
+    "../web-app/next-production-server.js",
     ".next/types/**/*.ts"
   ],
   "exclude": [

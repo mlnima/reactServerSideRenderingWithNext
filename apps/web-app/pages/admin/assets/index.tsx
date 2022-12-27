@@ -83,6 +83,7 @@ const assets = () => {
         const assetType = query.assetsType
         if (assetType === 'posts') {
             const gettingPostsQueries = _adminGetPostsQueryGenerator(query)
+            console.log(gettingPostsQueries)
             dispatch(fetchAdminPanelPosts(gettingPostsQueries))
         } else if (assetType === 'users') {
             dispatch(fetchAdminPanelUsers({}))

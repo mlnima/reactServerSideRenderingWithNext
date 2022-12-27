@@ -5,6 +5,8 @@ import {AxiosResponse} from "axios";
 import {NextRouter} from "next/router";
 import {RootState} from "../store";
 import {AdminPanelGlobalState,PageTypes} from "typescript-types";
+import getPages from "api-requests/src/dashboard/pages/getPages";
+import clearCaches from "api-requests/src/dashboard/clearCaches";
 
 const initialState : AdminPanelGlobalState = {
     customPages: [],
@@ -22,7 +24,7 @@ const initialState : AdminPanelGlobalState = {
 export const fetchCustomPages = createAsyncThunk(
     'adminPanelGlobalState/fetchCustomPages',
     async (data:any , thunkAPI) => {
-        return Axios.post('/api/admin/pages/getPagesData', {token: localStorage.wt})
+        return await getPages({})
             .then((response: AxiosResponse<unknown | any>) => {
                 if (response.data?.pages) {
                     return response.data.pages.map((page: PageTypes) => page.pageName)
@@ -37,7 +39,7 @@ export const fetchClearCaches = createAsyncThunk(
     'adminPanelGlobalState/fetchClearCaches',
     async ({router} :{router?: NextRouter}, thunkAPI) => {
          thunkAPI.dispatch(loading(true))
-        return await Axios.get(`/api/admin/settings/clearCaches?token=${localStorage.wt}`).then((res: AxiosResponse<unknown | any>) => {
+        return await clearCaches().then((res: AxiosResponse<unknown | any>) => {
             thunkAPI.dispatch(setAlert({message: res.data.message || 'done', type: 'success'}))
             setTimeout(() => router.reload(), 1000)
         }).catch(err => {

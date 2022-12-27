@@ -3,6 +3,11 @@ import {loading} from "./globalStateReducer";
 import {AxiosInstance} from "api-requests";
 import {AxiosError, AxiosResponse} from "axios";
 import {RootState} from "../store";
+import getPages from "api-requests/src/dashboard/pages/getPages";
+import getPage from "api-requests/src/dashboard/pages/getPage";
+import updatePage from "api-requests/src/dashboard/pages/updatePage";
+import createNewPage from "api-requests/src/dashboard/pages/createNewPage";
+import deletePage from "api-requests/src/dashboard/pages/deletePage";
 
 
 const initialState = {
@@ -45,7 +50,7 @@ export const fetchAdminPanelPages = createAsyncThunk(
             token: localStorage.wt
         };
 
-        return await AxiosInstance.post('/api/admin/pages/getPagesData', body).then((response: AxiosResponse) => {
+        return await getPages(body).then((response: AxiosResponse) => {
             return response.data?.pages
         }).catch((err: AxiosError) => {
 
@@ -62,7 +67,7 @@ export const fetchAdminPanelPage = createAsyncThunk(
             token: localStorage.wt
         };
 
-        return await AxiosInstance.post('/api/admin/pages/getPageData', body).then((response: AxiosResponse) => {
+        return await getPage(id).then((response: AxiosResponse) => {
             return response.data?.pageData
         }).catch((err: AxiosError) => {
 
@@ -78,7 +83,7 @@ export const fetchAdminUpdatePage = createAsyncThunk(
             token: localStorage.wt
         };
 
-        return await AxiosInstance.post('/api/admin/pages/updatePage', body).then((response: AxiosResponse) => {
+        return await updatePage(pageData).then((response: AxiosResponse) => {
 
         }).catch((err: AxiosError) => {
 
@@ -89,12 +94,8 @@ export const fetchAdminSaveNewPage = createAsyncThunk(
     'adminPanelPages/fetchAdminPanelPage',
     async ({pageData, push}: { pageData: {}, push: any }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        const body = {
-            pageData,
-            token: localStorage.wt
-        };
 
-        return await AxiosInstance.post('/api/admin/pages/createNewPage', body).then((response: AxiosResponse) => {
+        return await createNewPage(pageData).then((response: AxiosResponse) => {
             const pageId = response.data.savedPageData._id
             push(`/admin/page?id=${pageId}`)
         }).catch((err: AxiosError) => {
@@ -107,12 +108,8 @@ export const fetchAdminDeleteCustomPage = createAsyncThunk(
     'adminPanelPages/fetchAdminPanelPage',
     async (id:string, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        const body = {
-            id,
-            token: localStorage.wt
-        }
 
-        return  await AxiosInstance.post('/api/admin/pages/deleteCustomPage', body).then(res=>{
+        return  await deletePage(id).then(res=>{
 
         }).catch(err=>{
 

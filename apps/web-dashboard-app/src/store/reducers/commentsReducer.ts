@@ -3,6 +3,8 @@ import {loading, setAlert} from "./globalStateReducer";
 import {AxiosInstance} from "api-requests";
 import {AxiosError, AxiosResponse} from "axios";
 import {RootState} from "../store";
+import getComments from "api-requests/src/dashboard/comments/getComments";
+import deleteComments from "api-requests/src/dashboard/comments/deleteComments";
 
 const initialState = {
     comments: [],
@@ -18,22 +20,21 @@ export const fetchAdminPanelGetComments = createAsyncThunk(
             token: localStorage.wt
         };
 
-        return await AxiosInstance.post('/api/admin/posts/getComments', body).then((response: AxiosResponse<any>) => {
+        return await getComments(data).then((response: AxiosResponse) => {
             return response.data?.comments
         }).catch((error: AxiosError) => {
 
         }).finally(() => thunkAPI.dispatch(loading(false)))
     }
 )
+
+
 export const fetchAdminPanelDeleteComments = createAsyncThunk(
     'adminPanelComments/fetchAdminPanelGerComments',
     async (commentsIds: string[], thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
-        return await AxiosInstance.post(`/api/admin/posts/deleteComments`, {
-            commentsIds: commentsIds,
-            token: localStorage.wt
-        }).then((res) => {
+        return await deleteComments(commentsIds).then((res) => {
             thunkAPI.dispatch(setAlert({
                 message: res.data.message || 'Comment Deleted',
                 type: 'success'

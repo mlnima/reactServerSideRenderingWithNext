@@ -35,7 +35,7 @@
     "fs-extra": "^11.1.0",
     "image-downloader": "^4.3.0",
     "js-cookie": "^3.0.1",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "jwt-decode": "^3.1.2",
     "lodash": "^4.14.181",
     "mailparser": "^3.6.0",

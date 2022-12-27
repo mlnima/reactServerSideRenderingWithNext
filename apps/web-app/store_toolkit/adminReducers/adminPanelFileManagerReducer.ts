@@ -2,6 +2,13 @@ import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {loading, setAlert} from "../clientReducers/globalStateReducer";
 import Axios from "@_variables/Axios";
 import {RootState} from "../store";
+import readPath from "api-requests/src/dashboard/fileManager/readPath";
+import deleteFile from "api-requests/src/dashboard/fileManager/deleteFile";
+import createFolder from "api-requests/src/dashboard/fileManager/createFolder";
+import createFile from "api-requests/src/dashboard/fileManager/createFile";
+import updateTranslationFile from "api-requests/src/dashboard/fileManager/updateTranslationFile";
+import uploadFile from "api-requests/src/dashboard/fileManager/uploadFile";
+import readTranslationFile from "api-requests/src/dashboard/fileManager/readTranslationFile";
 
 const initialState = {
     path: './public',
@@ -30,12 +37,8 @@ export const fetchFilManagerReadPath = createAsyncThunk(
     'adminPanelFileManager/fetchFilManagerReadPath',
     async ({path, prevPath}: { path: string, prevPath: string }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        let body = {
-            path,
-            token: localStorage.wt
-        };
 
-        return await Axios.post('/api/admin/fileManager/readPath', body).then(res => {
+        return await readPath(path).then(res => {
             if (res.data.type === 'dir') {
                 return {files: res.data.data}
             } else if (res.data.type === 'file') {
@@ -60,12 +63,7 @@ export const fetchFilManagerDeleteFile = createAsyncThunk(
     async ({filePath, data}: { filePath: string, data: {} }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
-        let body = {
-            filePath,
-            token: localStorage.wt
-        };
-
-        return await Axios.post('/api/admin/fileManager/deleteFile', body).then(res => {
+        return await deleteFile(filePath).then(res => {
 
             thunkAPI.dispatch(setAlert({message: 'Deleted', type: 'success'}))
             return data
@@ -86,7 +84,7 @@ export const fetchFilManagerCreateNewFolder = createAsyncThunk(
             token: localStorage.wt
         };
 
-        return await Axios.post('/expressServer/files/admin-newFolder', body).then(res => {
+        return await createFolder(folderName,folderPath).then(res => {
 
             thunkAPI.dispatch(setAlert({message: 'Created', type: 'success'}))
 
@@ -101,13 +99,7 @@ export const fetchFilManagerCreateNewFile = createAsyncThunk(
     async ({fileName, filePath}: { fileName: string, filePath: string }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
-        let body = {
-            fileName,
-            filePath,
-            token: localStorage.wt
-        };
-
-        return await Axios.post('/expressServer/files/admin-newFile', body).then(res => {
+        return await createFile(fileName, filePath).then(res => {
             thunkAPI.dispatch(setAlert({message: 'Created', type: 'success'}))
 
         }).catch(err => {
@@ -122,13 +114,7 @@ export const fetchUpdateTranslationsFile = createAsyncThunk(
     async ({path, data}: { path: string, data: string }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
-        let body = {
-            path,
-            data,
-            token: localStorage.wt
-        };
-
-        return await Axios.post('/api/admin/fileManager/updateTranslationsFile', body).then(res => {
+        return await updateTranslationFile(path, data).then(res => {
 
             thunkAPI.dispatch(setAlert({message: 'Updated', type: 'success'}))
 
@@ -142,7 +128,7 @@ export const fetchFileManagerUploadFile = createAsyncThunk(
     'adminPanelFileManager/fetchFileManagerUploadFile',
     async ({file, useType, postData}: { file: any, useType: string, postData?: {} }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await Axios.post('/api/admin/fileManager/uploadFile', file).then(res => {
+        return await uploadFile(file).then(res => {
             if (useType === 'fileManagerFileUpload') {
                 return {
                     clickedItem: res.data?.path?.replace('./', ''),
@@ -173,11 +159,8 @@ export const fetchReadTranslationsFile = createAsyncThunk(
     'adminPanelFileManager/fetchReadTranslationsFile',
     async (path: string, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        let body = {
-            path,
-            token: localStorage.wt
-        };
-       return await Axios.post('/api/admin/fileManager/readTranslationsFile', body).then(res => {
+
+       return await readTranslationFile(path).then(res => {
             return res.data.data
         }).catch(err => {
             thunkAPI.dispatch(setAlert({message: err.response?.data?.message, type: 'error'}))
@@ -193,7 +176,7 @@ export const createFileOrFolder = createAsyncThunk(
             ...data,
             token: localStorage.wt
         }
-       return await Axios.post('/api/admin/fileManager/create', body).then(res => {
+       return await createFileOrFolder(data).then(res => {
             return res.data.data
         }).catch(err => {
             thunkAPI.dispatch(setAlert({message: err.response?.data?.message, type: 'error'}))

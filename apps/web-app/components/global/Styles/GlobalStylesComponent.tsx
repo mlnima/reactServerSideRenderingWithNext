@@ -3,11 +3,11 @@ import {useSelector} from "react-redux";
 import {FC} from "react";
 import {Store} from "typescript-types";
 import keyframes from './keyframes';
-import buttons from './buttons';
 import gridLayout from './gridLayout';
-import inputs from './inputs';
-import selects from './selects';
 import scrollBar from './scrollBar';
+import buttons from 'ui/src/buttonsStyle';
+import inputs from 'ui/src/inputsStyles';
+import selects from 'ui/src/selectsStyle';
 
 interface GlobalStylesPropTypes {
     customColors: string,
