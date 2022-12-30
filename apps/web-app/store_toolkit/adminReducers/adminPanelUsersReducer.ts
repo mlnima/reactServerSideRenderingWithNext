@@ -11,7 +11,7 @@ import getUser from "api-requests/src/dashboard/users/getUser";
 import updateUser from "api-requests/src/dashboard/users/updateUser";
 import deleteUser from "api-requests/src/dashboard/users/deleteUser";
 import changePassword from "api-requests/src/dashboard/users/changePassword";
-import getSignedInUserData from "api-requests/src/dashboard/users/getSignedInUserData";
+import getSignedInUserData from "api-requests/src/common/users/getSignedInUserData";
 
 const initialState = {
     userData: {},

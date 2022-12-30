@@ -1,6 +1,6 @@
 import React, {FC, useState} from "react";
 import styled from "styled-components";
-import Link from "next/link";
+import {Link} from "react-router-dom";
 
 const Style = styled.main`
   h1 {
@@ -77,7 +77,7 @@ const Dashboard: FC<PropTypes> = (props) => {
 
     const renderQuickAccessLinks = state.quickAccessLinks.map(linkData => {
         return (
-            <Link key={linkData.name} href={linkData.pathURL} className='btn btn-secondary'>
+            <Link key={linkData.name} to={linkData.pathURL} className='btn btn-secondary'>
                 {linkData.name}
             </Link>
         )

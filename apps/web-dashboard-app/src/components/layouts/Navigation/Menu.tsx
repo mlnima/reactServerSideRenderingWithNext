@@ -1,13 +1,11 @@
-import React, {FC, useEffect, useState} from "react";
+import React, {FC,  useState} from "react";
 import styled from "styled-components";
-import {useAppDispatch} from "../../../store/hooks";
+import {useAppDispatch} from "@store/hooks";
 import {useSelector} from "react-redux";
 import {DashboardStore} from "typescript-types";
 import menuItems from './menuItems.json'
-// import Link from "next/link";
-import {setSidebarStatus} from "../../../store/reducers/globalStateReducer";
+import {setSidebarStatus} from "@store/reducers/globalStateReducer";
 import {convertVariableNameToName} from "custom-util";
-// import SvgRenderer from "web-app/components/global/commonComponents/SvgRenderer/SvgRenderer";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSortDown, faUser} from "@fortawesome/free-solid-svg-icons";
 import {NavLink} from "react-router-dom";
@@ -103,7 +101,7 @@ let StyledDiv = styled.div`
 interface PropTypes {
 }
 
-const Component: FC<PropTypes> = ({}) => {
+const Menu: FC<PropTypes> = ({}) => {
     const dispatch = useAppDispatch()
     const sidebar = useSelector(({globalState}: DashboardStore) => globalState?.sidebar)
     const [hovered, setHovered] = useState('')
@@ -154,4 +152,4 @@ const Component: FC<PropTypes> = ({}) => {
         );
     } else return null
 };
-export default Component;
+export default Menu;

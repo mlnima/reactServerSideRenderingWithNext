@@ -1,19 +1,20 @@
-import {CommentsState} from "./Comments";
-import {UsersState} from "./Users";
-import {PostsState} from "./Posts";
-import {FileManagerState} from "./FileManager";
-import {SettingsState} from "./Settings";
-import {FormsState} from "./Forms";
-import {PagesState} from "./Pages";
-import {OrdersState} from "./Orders";
+import {CommentsState} from "./CommentsState";
+import {UsersState} from "./UsersState";
+import {PostsState} from "./PostsState";
+import {FileManagerState} from "./FileManagerState";
+import {SettingsState} from "./SettingsState";
+import {FormsState} from "./FormsState";
+import {PagesState} from "./PagesState";
+import {OrdersState} from "./OrdersState";
 import {TerminalState} from "./TerminalState";
 import {GlobalState} from "./GlobalState";
+import {WidgetsState} from "./WidgetsState";
 
 
 export interface DashboardStore{
     comments: CommentsState;
     users: UsersState;
-    post: PostsState;
+    posts: PostsState;
     fileManager: FileManagerState;
     settings: SettingsState;
     forms: FormsState;
@@ -21,4 +22,5 @@ export interface DashboardStore{
     orders: OrdersState;
     Terminal: TerminalState;
     globalState: GlobalState;
+    widgets:WidgetsState
 }

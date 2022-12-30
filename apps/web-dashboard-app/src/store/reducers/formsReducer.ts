@@ -12,14 +12,10 @@ const initialState = {
     form: {}
 }
 
-export const fetchAdminForms = createAsyncThunk(
-    'adminPanelForms/fetchAdminForms',
+export const getFormsAction = createAsyncThunk(
+    'adminPanelForms/getFormsAction',
     async (data: {}, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        const body = {
-            ...data,
-            token: localStorage.wt
-        };
         return await getForms(data).then((response: AxiosResponse) => {
             return response.data?.forms
         }).catch((err: AxiosError) => {
@@ -45,8 +41,8 @@ export const fetchAdminForm = createAsyncThunk(
     }
 )
 
-export const fetchAdminDeleteForm = createAsyncThunk(
-    'adminPanelForms/fetchAdminDeleteForm',
+export const deleteFormAction = createAsyncThunk(
+    'adminPanelForms/deleteFormAction',
     async (_id: string, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         const body = {
@@ -76,7 +72,7 @@ export const formsSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(fetchAdminForms.fulfilled, (state, action: PayloadAction<any>) => {
+            .addCase(getFormsAction.fulfilled, (state, action: PayloadAction<any>) => {
                 return {
                     ...state,
                     forms: action.payload
@@ -88,7 +84,7 @@ export const formsSlice = createSlice({
                     form: action.payload
                 };
             })
-            .addCase(fetchAdminDeleteForm.fulfilled, (state, action: PayloadAction<any>) => {
+            .addCase(deleteFormAction.fulfilled, (state, action: PayloadAction<any>) => {
                 return {
                     ...state,
                     // form: action.payload

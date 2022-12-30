@@ -1,10 +1,8 @@
 import {User} from "typescript-types";
 
 export interface UsersState {
-    loggedIn: boolean;
-    userData: {
-        role: string;
-    },
+    isUserLoggedIn: boolean;
+    userData: User,
     totalCount: number;
     users: User[];
     user: User

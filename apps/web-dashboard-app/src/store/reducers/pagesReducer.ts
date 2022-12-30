@@ -41,16 +41,11 @@ const initialState = {
 // }
 
 
-export const fetchAdminPanelPages = createAsyncThunk(
-    'adminPanelPages/fetchAdminPanelPages',
+export const getPagesAction = createAsyncThunk(
+    'adminPanelPages/getPagesAction',
     async (data: {}, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        const body = {
-            ...data,
-            token: localStorage.wt
-        };
-
-        return await getPages(body).then((response: AxiosResponse) => {
+        return await getPages(data).then((response: AxiosResponse) => {
             return response.data?.pages
         }).catch((err: AxiosError) => {
 
@@ -134,7 +129,7 @@ export const pagesSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchAdminPanelPages.fulfilled, (state, action: PayloadAction<any>) => {
+            .addCase(getPagesAction.fulfilled, (state, action: PayloadAction<any>) => {
                 return {
                     ...state,
                     pages: action.payload

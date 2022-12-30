@@ -20,6 +20,7 @@ import generatePermaLinkForPosts from "api-requests/src/dashboard/posts/generate
 import exportPosts from "api-requests/src/dashboard/posts/exportPosts";
 import bulkActionOnMetas from "api-requests/src/dashboard/metas/bulkActionOnMetas";
 import scrapYoutubeInfo from "api-requests/src/dashboard/posts/scrapYoutubeInfo";
+import { redirect } from "react-router-dom";
 
 
 interface AdminPanelPosts {
@@ -46,8 +47,8 @@ const initialState = {
     activeEditingLanguage: 'default'
 }
 
-export const fetchAdminPanelPost = createAsyncThunk(
-    'adminPanelPosts/fetchAdminPanelPost',
+export const getPostAction = createAsyncThunk(
+    'adminPanelPosts/getPostAction',
     async (_id: string, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         return await getPost(_id)
@@ -60,8 +61,8 @@ export const fetchAdminPanelPost = createAsyncThunk(
             })
     }
 )
-export const fetchAdminPanelPosts = createAsyncThunk(
-    'adminPanelPosts/fetchAdminPanelPosts',
+export const getPostsAction = createAsyncThunk(
+    'adminPanelPosts/getPostsAction',
     async (queriesData: string, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         return await getPosts(queriesData)
@@ -77,8 +78,8 @@ export const fetchAdminPanelPosts = createAsyncThunk(
             })
     }
 )
-export const fetchAdminPanelUpdatePost = createAsyncThunk(
-    'adminPanelPosts/fetchAdminPanelUpdatePost',
+export const updatePostAction = createAsyncThunk(
+    'adminPanelPosts/updatePostAction',
     async (data: {}, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
@@ -93,16 +94,16 @@ export const fetchAdminPanelUpdatePost = createAsyncThunk(
     }
 )
 
-export const fetchAdminPanelSaveNewPost = createAsyncThunk(
-    'adminPanelPosts/fetchAdminPanelSaveNewPost',
-    async ({data, router}: { data?: PostRaw, router?: any }, thunkAPI) => {
+export const createNewPostAction = createAsyncThunk(
+    'adminPanelPosts/createNewPostAction',
+    async ({data}: { data?: PostRaw }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
         return await createNewPost(data)
             .then((res: AxiosResponse<any>) => {
                 thunkAPI.dispatch(setAlert({message: res.data.message || 'Post Saved', type: 'success'}))
                 setTimeout(() => {
-                    res.data?.savedPostData?._id && router ? router.push('/admin/post?id=' + res.data.savedPostData._id) : null
+                    res.data?.savedPostData?._id  ? redirect('/admin/post?id=' + res.data.savedPostData._id) : null
                 }, 1500)
             }).catch((err) => {
                 thunkAPI.dispatch(setAlert({message: err.response.data.message, type: 'error', err}))
@@ -151,8 +152,8 @@ export const fetchAdminPanelUpdateMeta = createAsyncThunk(
 )
 
 
-export const fetchAdminPanelMetas = createAsyncThunk(
-    'adminPanelPosts/fetchAdminPanelMetas',
+export const getMetasAction = createAsyncThunk(
+    'adminPanelPosts/getMetasAction',
     async (queries: string, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         return await getMetas(queries)
@@ -188,9 +189,9 @@ export const fetchAdminPanelMeta = createAsyncThunk(
 )
 
 
-export const fetchAdminPanelBulkActionPost = createAsyncThunk(
-    'adminPanelPosts/fetchAdminPanelBulkActionPost',
-    async ({ids, status}: { ids: string[], status: string }, thunkAPI) => {
+export const bulkActionPostsAction = createAsyncThunk(
+    'adminPanelPosts/bulkActionPostsAction',
+    async ({ids, status}: { ids: string| string[], status: string }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
        await bulkActionOnPosts(ids, status).then((res: AxiosResponse<any>) => {
@@ -337,8 +338,8 @@ export const fetchAdminExportPosts = createAsyncThunk(
 //     })
 
 
-export const fetchAdminBulkActionMeta = createAsyncThunk(
-    'adminPanelPosts/fetchAdminBulkActionMeta',
+export const bulkActionMetaAction = createAsyncThunk(
+    'adminPanelPosts/bulkActionMetaAction',
     async ({type, status, ids}: { type: string, status: string, ids: string[] }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
@@ -423,7 +424,7 @@ export const postsSlice = createSlice({
     initialState,
     reducers: {
         // @ts-ignore
-        adminDefineNewPost: (state, action: PayloadAction<any>) => {
+        defineNewPost: (state, action: PayloadAction<any>) => {
             const postType = typeof window !== 'undefined' && localStorage?.preferAdminPostType ? localStorage?.preferAdminPostType : 'standard';
 
             return {
@@ -434,13 +435,13 @@ export const postsSlice = createSlice({
                 }
             };
         },
-        adminChangeActiveEditingLanguage: (state, action: PayloadAction<any>) => {
+        changeActiveEditingLanguage: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
                 activeEditingLanguage: action.payload
             };
         },
-        adminEditPost: (state, action: PayloadAction<any>) => {
+        editPostAction: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
                 post: {
@@ -460,17 +461,17 @@ export const postsSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(fetchAdminPanelPost.fulfilled, (state, action: PayloadAction<any>) => {
+        builder.addCase(getPostAction.fulfilled, (state, action: PayloadAction<any>) => {
             return {
                 ...state,
                 post: action.payload
             };
-        }).addCase(fetchAdminPanelPosts.fulfilled, (state, action: PayloadAction<any>) => {
+        }).addCase(getPostsAction.fulfilled, (state, action: PayloadAction<any>) => {
             return {
                 ...state,
                 ...action.payload
             };
-        }).addCase(fetchAdminPanelMetas.fulfilled, (state, action: PayloadAction<any>) => {
+        }).addCase(getMetasAction.fulfilled, (state, action: PayloadAction<any>) => {
             return {
                 ...state,
                 ...action.payload
@@ -486,10 +487,10 @@ export const postsSlice = createSlice({
 
 
 export const {
-    adminEditPost,
+    editPostAction,
     adminEditMeta,
-    adminDefineNewPost,
-    adminChangeActiveEditingLanguage
+    defineNewPost,
+    changeActiveEditingLanguage
 } = postsSlice.actions
 
 export const postsReducer = (state: RootState) => state?.posts || null

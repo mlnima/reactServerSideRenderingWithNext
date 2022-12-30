@@ -1,4 +1,5 @@
 const CracoAlias = require("craco-alias");
+require('dotenv').config({ path: '../../.env' });
 
 module.exports = {
     plugins: [

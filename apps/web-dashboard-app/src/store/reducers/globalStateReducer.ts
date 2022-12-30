@@ -1,7 +1,6 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {AxiosInstance} from "api-requests";
 import {AxiosResponse} from "axios";
-import {NextRouter} from "next/router";
 import {RootState} from "../store";
 import {AdminPanelGlobalState,PageTypes} from "typescript-types";
 import getPages from "api-requests/src/dashboard/pages/getPages";
@@ -37,13 +36,13 @@ export const fetchCustomPages = createAsyncThunk(
 
 export const fetchClearCaches = createAsyncThunk(
     'adminPanelGlobalState/fetchClearCaches',
-    async ({router} :{router?: NextRouter}, thunkAPI) => {
+    async ({router} :{router?: any}, thunkAPI) => {
          thunkAPI.dispatch(loading(true))
         return await clearCaches().then((res: AxiosResponse<unknown | any>) => {
             thunkAPI.dispatch(setAlert({message: res.data.message || 'done', type: 'success'}))
-            if (router){
-                setTimeout(() => router.reload(), 1000)
-            }
+            // if (router){
+            //     setTimeout(() => router.reload(), 1000)
+            // }
 
         }).catch(err => {
             thunkAPI.dispatch(setAlert({message:'Error While Deleting Cache', type: 'error', err}))

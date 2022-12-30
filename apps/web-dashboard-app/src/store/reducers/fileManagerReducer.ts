@@ -131,8 +131,8 @@ export const fetchUpdateTranslationsFile = createAsyncThunk(
         }).finally(() => thunkAPI.dispatch(loading(false)))
     }
 )
-export const fetchFileManagerUploadFile = createAsyncThunk(
-    'adminPanelFileManager/fetchFileManagerUploadFile',
+export const uploadFileAction = createAsyncThunk(
+    'adminPanelFileManager/uploadFileAction',
     async ({file, useType, postData}: { file: any, useType: string, postData?: PostRaw }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         return await uploadFile(file).then((response: AxiosResponse<any>) => {
@@ -230,7 +230,7 @@ export const fileManagerSlice = createSlice({
                     ...action.payload
                 };
             })
-            .addCase(fetchFileManagerUploadFile.fulfilled, (state, action: PayloadAction<any>) => {
+            .addCase(uploadFileAction.fulfilled, (state, action: PayloadAction<any>) => {
                 return {
                     ...state,
                     ...action.payload

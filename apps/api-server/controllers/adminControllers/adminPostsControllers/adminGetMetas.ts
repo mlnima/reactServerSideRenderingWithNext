@@ -2,14 +2,16 @@ import {metaSchema,settingSchema} from 'models';
 
 const adminGetMetas = async (req, res) => {
     try {
+
         const identitySetting = await settingSchema.findOne({type:'identity'}).exec()
         const type = {type: req.query?.metaType}
 
-        const size = req.query.size === 'undefined' ? identitySetting?.data?.postsCountPerPage : parseInt(req.query.size)
+        const size = !req.query.size ? identitySetting?.data?.postsCountPerPage : parseInt(req.query.size)
+
         const statusQuery = req.query.status === 'all' ? {status: {$ne: 'trash'}} : !req.query.status ? {}  : {status: req.query.status};
         const page = req.query.page === 'undefined' ? 1 : parseInt(req.query.page);
 
-        const startWithQuery = req.query?.startWith === 'any' ? {} : {name: {$regex: '^' + req.query?.startWith, $options: 'i'}}
+        const startWithQuery = req.query?.startWith === 'any' || ! req.query?.startWith ? {} : {name: {$regex: '^' + req.query?.startWith, $options: 'i'}}
         const countQuery = {}
         const searchQuery = req.query.keyword === '' || !req.query.keyword ? {} :
             !req.query.lang || req.query.lang === 'default' ? {$or: [{name: new RegExp(req.query.keyword, 'i')}, {description: new RegExp(req.query.keyword, 'i')}]} :

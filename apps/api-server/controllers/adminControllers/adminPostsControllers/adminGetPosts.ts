@@ -8,8 +8,8 @@ const adminGetPosts= async (req, res) => {
         const findingPostsOptions = _adminQueryGeneratorForGettingPosts(
             {
                 ...req.query,
-                size: req.query.size === 'undefined' ? identitySetting?.data?.postsCountPerPage : parseInt(req.query.size),
-                page: req.query.page === 'undefined' ? 1 : parseInt(req.query.page)
+                size: !req.query.size? identitySetting?.data?.postsCountPerPage : parseInt(req.query.size),
+                page: !req.query.page ? 1 : parseInt(req.query.page)
             }
         )
 

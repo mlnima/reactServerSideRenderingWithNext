@@ -2,41 +2,81 @@ import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {loading, setAlert} from "./globalStateReducer";
 import {AxiosError, AxiosResponse} from "axios";
 import {RootState} from "../store";
-import {NextRouter} from "next/router";
+
 import getUsers from "api-requests/src/dashboard/users/getUsers";
 import generateNewAPIKey from "api-requests/src/dashboard/users/generateNewAPIKey";
 import getUser from "api-requests/src/dashboard/users/getUser";
 import updateUser from "api-requests/src/dashboard/users/updateUser";
 import deleteUser from "api-requests/src/dashboard/users/deleteUser";
 import changePassword from "api-requests/src/dashboard/users/changePassword";
-import getSignedInUserData from "api-requests/src/dashboard/users/getSignedInUserData";
+import getSignedInUserData from "api-requests/src/common/users/getSignedInUserData";
+import loginUser from "api-requests/src/common/users/loginUser";
 
 const initialState = {
+    isUserLoggedIn:false,
     userData: {},
-    loggedIn:false,
     users: [],
     totalCount: 0,
     user: {}
 }
 
-// export interface AdminPanelUsersState {
-//     loggedIn: boolean;
-//     userData: {
-//         role: string;
-//     },
-//     totalCount: number;
-//     users: User[];
-//     user: User
-// }
+export const loginUserAction = createAsyncThunk(
+    'users/loginUserAction',
+    async ({username,password}:{username:string,password:string}, thunkAPI) => {
+        thunkAPI.dispatch(loading(true))
 
-export const fetchAdminPanelUsers = createAsyncThunk(
-    'adminPanelUsers/fetchAdminPanelUsers',
+       return await loginUser(username, password).then(response => {
+            if (response?.data?.token) {
+                localStorage.setItem('wt', response.data.token)
+
+                return {
+                    userData: response.data,
+                    isUserLoggedIn: true
+                }
+            }
+        }).catch(error => {
+            return {
+                isUserLoggedIn: false
+            }
+        }).then(() => {
+            thunkAPI.dispatch(loading(false))
+        })
+    }
+)
+
+export const autologinUserAction = createAsyncThunk(
+    'users/autologinUserAction',
+    async ({fields}:{ fields: string[] }, thunkAPI) => {
+        thunkAPI.dispatch(loading(true))
+
+        if (localStorage.wt) {
+            return await getSignedInUserData(fields).then(response => {
+                thunkAPI.dispatch(setAlert({message: response.data.message, type: 'success'}))
+                return {
+                    userData: response.data?.userData,
+                    isUserLoggedIn: true
+                }
+            }).catch((err) => {
+                localStorage.removeItem('wt')
+                thunkAPI.dispatch(setAlert({message: err.response.data.message, type: 'error'}))
+            })
+        }
+    }
+)
+
+
+
+
+
+
+
+
+
+export const getUsersAction = createAsyncThunk(
+    'adminPanelUsers/getUsersAction',
     async (data: {}, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        const body = {
-            data,
-            token: localStorage.wt
-        };
+
         return await getUsers(data).then((res: AxiosResponse<any>) => {
             return {
                 users: res.data.users,
@@ -120,7 +160,7 @@ export const fetchAdminPanelUpdateUserData = createAsyncThunk(
 )
 export const fetchAdminPanelDeleteUser = createAsyncThunk(
     'adminPanelUsers/fetchAdminPanelDeleteUser',
-    async ({id, router}: { id: string, router: NextRouter }, thunkAPI) => {
+    async ({id, router}: { id: string, router: any }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         const body = {
             id,
@@ -195,6 +235,7 @@ export const usersSlice = createSlice({
     name: 'adminPanelUsers',
     initialState,
     reducers: {
+
         adminPanelEditUserData: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
@@ -207,7 +248,19 @@ export const usersSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchAdminPanelUsers.fulfilled, (state, action: PayloadAction<any>) => {
+            .addCase(loginUserAction.fulfilled, (state, action: PayloadAction<any>) => {
+                return {
+                    ...state,
+                    ...action.payload
+                }
+            })
+            .addCase(autologinUserAction.fulfilled, (state, action: PayloadAction<any>) => {
+                return {
+                    ...state,
+                    ...action.payload
+                }
+            })
+            .addCase(getUsersAction.fulfilled, (state, action: PayloadAction<any>) => {
                 return {
                     ...state,
                     users: action.payload.users,

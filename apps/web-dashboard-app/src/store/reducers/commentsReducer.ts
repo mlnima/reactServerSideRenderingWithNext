@@ -11,14 +11,10 @@ const initialState = {
     comment: {}
 }
 
-export const fetchAdminPanelGetComments = createAsyncThunk(
-    'adminPanelComments/fetchAdminPanelGerComments',
+export const getCommentsAction = createAsyncThunk(
+    'adminPanelComments/getCommentsAction',
     async (data: {}, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        const body = {
-            ...data,
-            token: localStorage.wt
-        };
 
         return await getComments(data).then((response: AxiosResponse) => {
             return response.data?.comments
@@ -29,8 +25,8 @@ export const fetchAdminPanelGetComments = createAsyncThunk(
 )
 
 
-export const fetchAdminPanelDeleteComments = createAsyncThunk(
-    'adminPanelComments/fetchAdminPanelGerComments',
+export const deleteCommentsAction = createAsyncThunk(
+    'adminPanelComments/deleteCommentsAction',
     async (commentsIds: string[], thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
@@ -57,7 +53,7 @@ export const commentsSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => builder
-        .addCase(fetchAdminPanelGetComments.fulfilled, (state, action: PayloadAction<any>) => {
+        .addCase(getCommentsAction.fulfilled, (state, action: PayloadAction<any>) => {
             return {
                 ...state,
                 comments: action.payload || []

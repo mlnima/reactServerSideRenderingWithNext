@@ -4,6 +4,8 @@ import Axios from "@_variables/Axios";
 import {loading, setAlert, loginRegisterForm} from "./globalStateReducer";
 import Peer from 'simple-peer'
 import {socket} from '@_variables/socket';
+import loginUser from "api-requests/src/common/users/loginUser";
+import getSignedInUserData from "api-requests/src/common/users/getSignedInUserData";
 
 interface UserStateRaw {
     userData: any;
@@ -60,7 +62,8 @@ export const fetchLogin = createAsyncThunk(
     'user/fetchLogin',
     async ({username, password}: Login, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await Axios.post('/api/v1/users/login', {username, password}).then(res => {
+        // return await Axios.post('/api/v1/users/login', {username, password}).then(res => {
+        return await loginUser(username, password).then(res => {
 
             if(res?.data?.token){
                 localStorage.setItem('wt', res.data.token)
@@ -236,7 +239,7 @@ export const fetchSpecificUserData = createAsyncThunk(
     'user/fetchSpecificUserData',
     async ({fields}: { fields: string[] }, thunkAPI) => {
         if (localStorage.wt) {
-            return await Axios.post('/api/v1/users/getSignedInUserData', {token: localStorage.wt, fields}).then(res => {
+            return await getSignedInUserData(fields).then(res => {
                 thunkAPI.dispatch(setAlert({message: res.data.message, type: 'success'}))
                 return res.data?.userData
             }).catch((err) => {
@@ -464,11 +467,11 @@ export const fetchUserAutoLogin = createAsyncThunk(
     'user/fetchUserAutoLogin',
     async ({fields}: { fields: string[] }, thunkAPI) => {
         if (localStorage.wt) {
-            return await Axios.post('/api/v1/users/getSignedInUserData', {token: localStorage.wt, fields}).then(res => {
+            return await getSignedInUserData(fields).then(res => {
                 // thunkAPI.dispatch(setAlert({message: res.data.message, type: 'success'}))
                 return res.data?.userData
             }).catch((err) => {
-                localStorage.removeItem('wt')
+                // localStorage.removeItem('wt')
                 thunkAPI.dispatch(setAlert({message: err.response.data.message, type: 'error'}))
             })
         } else {

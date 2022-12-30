@@ -1,4 +1,4 @@
-/apps/**/node_modules
+cd app/apps/**/node_modules
 /apps/**/.next
 /apps/**/dist
 /apps/**/.turbo
