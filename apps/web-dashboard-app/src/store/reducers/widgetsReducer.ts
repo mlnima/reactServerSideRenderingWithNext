@@ -73,8 +73,8 @@ const initialState = {
 // )
 
 
-export const fetchAdminPanelGetWidgets = createAsyncThunk(
-    'adminPanelWidgets/fetchAdminWidgets',
+export const getWidgetsAction = createAsyncThunk(
+    'adminPanelWidgets/getWidgetsAction',
     async (data: any, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         return await getWidgets()
@@ -162,7 +162,7 @@ export const widgetsSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchAdminPanelGetWidgets.fulfilled, (state, action: PayloadAction<any>) => {
+            .addCase(getWidgetsAction.fulfilled, (state, action: PayloadAction<any>) => {
                 return {
                     ...state,
                     //adminPanelWidgets: !!action?.payload && {...reduceWidgetsToGroups(action?.payload)},

@@ -20,7 +20,7 @@ export interface DashboardStore{
     forms: FormsState;
     pages: PagesState;
     orders: OrdersState;
-    Terminal: TerminalState;
+    terminal: TerminalState;
     globalState: GlobalState;
     widgets:WidgetsState
 }

@@ -20,7 +20,7 @@ const combinedReducer = combineReducers({
   settings: settingsSlice,
   posts: postsSlice,
   widgets: widgetsSlice,
-  terminalState: terminalSlice,
+  terminal: terminalSlice,
 })
 
 export const store = configureStore({

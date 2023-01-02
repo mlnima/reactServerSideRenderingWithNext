@@ -205,8 +205,8 @@ export const bulkActionPostsAction = createAsyncThunk(
 )
 
 
-export const fetchAdminCheckAndRemoveDeletedVideos = createAsyncThunk(
-    'adminPanelPosts/fetchAdminCheckAndRemoveDeletedVideos',
+export const checkAndRemoveDeletedVideosAction = createAsyncThunk(
+    'adminPanelPosts/checkAndRemoveDeletedVideosAction',
     async (data, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         return await checkAndRemoveDeletedVideos()
@@ -225,9 +225,9 @@ export const fetchAdminCheckAndRemoveDeletedVideos = createAsyncThunk(
     }
 )
 
-export const fetchSetMetaThumbnailsAndCount = createAsyncThunk(
-    'adminPanelPosts/fetchSetMetaThumbnailsAndCount',
-    async (type: string, thunkAPI) => {
+export const setMetaThumbnailsAndCountAction = createAsyncThunk(
+    'adminPanelPosts/setMetaThumbnailsAndCountAction',
+    async (type: string | null, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         await setMetaThumbnailsAndCount(type)
             .then((res: AxiosResponse<any>) => {
@@ -243,9 +243,9 @@ export const fetchSetMetaThumbnailsAndCount = createAsyncThunk(
     }
 )
 
-export const fetchGeneratePermaLinkForPosts = createAsyncThunk(
-    'adminPanelPosts/fetchGeneratePermaLinkForPosts',
-    async (type: string, thunkAPI) => {
+export const generatePermaLinkForPostsAction = createAsyncThunk(
+    'adminPanelPosts/generatePermaLinkForPostsAction',
+    async (type: string|null, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         await generatePermaLinkForPosts(type)
             .then((res: AxiosResponse<any>) => {
@@ -296,8 +296,8 @@ export const fetchGeneratePermaLinkForPosts = createAsyncThunk(
 //     })
 
 
-export const fetchAdminExportPosts = createAsyncThunk(
-    'adminPanelPosts/fetchAdminExportPosts',
+export const getExportingPosts = createAsyncThunk(
+    'adminPanelPosts/getExportingPosts',
     async (data, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         await exportPosts(data).then(res => {
@@ -373,8 +373,8 @@ export const bulkActionMetaAction = createAsyncThunk(
 //         await AxiosInstance.post(`/api/admin/posts/updateComment`, body)
 //     })
 
-export const fetchAdminYoutubeDataScrapper = createAsyncThunk(
-    'adminPanelPosts/fetchAdminYoutubeDataScrapper',
+export const getYoutubeDataScrapperAction = createAsyncThunk(
+    'adminPanelPosts/getYoutubeDataScrapperAction',
     async (url: string, thunkAPI) => {
         const durationToString = (duration :any) => {
             const hours = duration.hours === 0 ? '' :

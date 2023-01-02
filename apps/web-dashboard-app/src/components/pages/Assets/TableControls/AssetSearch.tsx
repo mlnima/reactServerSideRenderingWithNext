@@ -51,14 +51,8 @@ const AssetSearch: FC = () => {
                    type={'text'}
                    onChange={e => setKeyword(e.target.value)}
             />
-
             <button className={'btn btn-navigation'}>Search</button>
-
-            {keyword ?
-                <span className={'btn btn-navigation'} onClick={onDeleteKeywordHandler}>X</span>
-                : null
-            }
-
+            {keyword ? <span className={'btn btn-navigation'} onClick={onDeleteKeywordHandler}>X</span> : null}
         </StyledForm>
     );
 };

@@ -2,7 +2,8 @@ import React, {FC, useRef} from 'react';
 import styled from "styled-components";
 import {uploadFileAction} from "@store/reducers/fileManagerReducer";
 import {useAppDispatch} from "@store/hooks";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {
+    FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUpload} from "@fortawesome/free-solid-svg-icons/faUpload";
 
 const UploadFileBtnStyledDiv = styled.div`
@@ -35,7 +36,7 @@ const UploadFileBtn:FC<PropType> = props => {
                     'fileManagerFileUpload'
 
         //@ts-ignore
-        dispatch(uploadFileAction({file: filesData, useType:fileUseType,postData:null}))
+        dispatch(uploadFileAction({file: filesData, useType:fileUseType}))
 
         // uploadFiles(filesData).then(res=>{
         //     props.setFunction(props.name,res.data.path.replace('./','/'))
@@ -65,7 +66,7 @@ const UploadFileBtn:FC<PropType> = props => {
                                 props.name === 'VideoTrailerUrl' ? 'postVideoTrailerUrl' :
                                     'fileManagerFileUpload'
 //@ts-ignore
-            dispatch(uploadFileAction({file: filesData, useType:fileUseType,postData:null}))
+            dispatch(uploadFileAction({file: filesData, useType:fileUseType}))
             // fileUpload(filesData).then(res => {
             //     props.setFunction(props.name,res.data.path.replace('./','/'))
             // }).catch(err => {

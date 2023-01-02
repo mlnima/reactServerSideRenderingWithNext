@@ -6,7 +6,6 @@ import Format from "./Format/Format";
 import Meta from "./Meta/Meta";
 import {Link, useSearchParams} from 'react-router-dom'
 import RatingOption from './RatingOption/RatingOption'
-import {useRouter} from "next/router";
 import PostInformation from "./PostInformation/PostInformation";
 import languagesOptions from "@variables/languagesOptions";
 import styled from "styled-components";
@@ -15,7 +14,6 @@ import {editPostAction} from "@store/reducers/postsReducer";
 import {getPostAction,defineNewPost,changeActiveEditingLanguage} from "@store/reducers/postsReducer";
 import {DashboardStore, Store} from "typescript-types";
 import {useAppDispatch} from "@store/hooks";
-import paramsObjectGenerator from "@variables/paramsObjectGenerator";
 
 const AdminPostPageStyledDiv = styled.div`
   display: grid;
@@ -27,8 +25,7 @@ const AdminPostPageStyledDiv = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-  }
-
+  
   @media only screen and (min-width: 768px) {
     grid-template-columns: 1fr 200px;
     grid-gap: 10px;

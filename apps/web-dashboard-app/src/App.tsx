@@ -6,10 +6,18 @@ import {DashboardStore} from "typescript-types";
 import Login from "@components/pages/Login";
 import {autologinUserAction} from "@store/reducers/usersReducer";
 import {useAppDispatch} from "@store/hooks";
+import {getSettingsAction} from "@store/reducers/settingsReducer";
+import {getWidgetsAction} from "@store/reducers/widgetsReducer";
+import {getCustomPagesAction} from "@store/reducers/globalStateReducer";
 
 function App() {
     //@ts-ignore
-    const isUserLoggedIn = useSelector(({users}: DashboardStore) => users.isUserLoggedIn)
+    const {isUserLoggedIn, role} = useSelector(({users}: DashboardStore) => {
+        return {
+            isUserLoggedIn: users.isUserLoggedIn,
+            role: users.userData.role
+        }
+    })
     const dispatch = useAppDispatch()
 
     useEffect(() => {
@@ -19,6 +27,22 @@ function App() {
             }))
         }
     }, [localStorage.wt]);
+
+    useEffect(() => {
+        if (role === 'administrator') {
+            getAndSetDataForAdmin()
+        }
+    }, []);
+
+    const getAndSetDataForAdmin = async () => {
+        try {
+            dispatch(getWidgetsAction(null))
+            dispatch(getCustomPagesAction(null));
+            dispatch(getSettingsAction(null));
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
     return (
         <div className="App">

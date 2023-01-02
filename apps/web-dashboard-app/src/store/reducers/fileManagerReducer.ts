@@ -35,8 +35,8 @@ const initialState = {
     translationsData: ''
 }
 
-export const fetchFilManagerReadPath = createAsyncThunk(
-    'adminPanelFileManager/fetchFilManagerReadPath',
+export const readThePathAction = createAsyncThunk(
+    'adminPanelFileManager/readThePathAction',
     async ({path, prevPath}: { path: string, prevPath: string }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
@@ -61,8 +61,8 @@ export const fetchFilManagerReadPath = createAsyncThunk(
     }
 )
 
-export const fetchFilManagerDeleteFile = createAsyncThunk(
-    'adminPanelFileManager/fetchFilManagerDeleteFile',
+export const filManagerDeleteFileAction = createAsyncThunk(
+    'adminPanelFileManager/filManagerDeleteFileAction',
     async ({filePath, data}: { filePath: string, data: {} }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
@@ -133,7 +133,7 @@ export const fetchUpdateTranslationsFile = createAsyncThunk(
 )
 export const uploadFileAction = createAsyncThunk(
     'adminPanelFileManager/uploadFileAction',
-    async ({file, useType, postData}: { file: any, useType: string, postData?: PostRaw }, thunkAPI) => {
+    async ({file, useType, postData}: { file: any, useType: string, postData?: PostRaw | undefined }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         return await uploadFile(file).then((response: AxiosResponse<any>) => {
             if (useType === 'fileManagerFileUpload') {
@@ -175,8 +175,8 @@ export const fetchReadTranslationsFile = createAsyncThunk(
     }
 )
 
-export const createFileOrDir = createAsyncThunk(
-    'adminPanelFileManager/createFileOrFolder',
+export const createFileOrFolderAction = createAsyncThunk(
+    'adminPanelFileManager/createFileOrFolderAction',
     async (data: {Path:string,fileFolderName:string,type:string}, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         const body = {
@@ -197,13 +197,13 @@ export const fileManagerSlice = createSlice({
     name: 'adminPanelFileManager',
     initialState,
     reducers: {
-        adminPanelFileManagerClosePopup: (state, action: PayloadAction<any>) => {
+        fileManagerClosePopupAction: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
                 ...action.payload
             };
         },
-        adminPanelFileManagerEditState: (state, action: PayloadAction<any>) => {
+        fileManagerEditState: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
                 ...action.payload
@@ -218,13 +218,13 @@ export const fileManagerSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchFilManagerReadPath.fulfilled, (state, action: PayloadAction<any>) => {
+            .addCase(readThePathAction.fulfilled, (state, action: PayloadAction<any>) => {
                 return {
                     ...state,
                     ...action.payload
                 };
             })
-            .addCase(fetchFilManagerDeleteFile.fulfilled, (state, action: PayloadAction<any>) => {
+            .addCase(filManagerDeleteFileAction.fulfilled, (state, action: PayloadAction<any>) => {
                 return {
                     ...state,
                     ...action.payload
@@ -246,7 +246,7 @@ export const fileManagerSlice = createSlice({
 })
 
 
-export const {adminPanelFileManagerClosePopup, adminPanelFileManagerEditState,adminPanelEditTranslationsFile} = fileManagerSlice.actions
+export const {fileManagerClosePopupAction, fileManagerEditState,adminPanelEditTranslationsFile} = fileManagerSlice.actions
 
 export const fileManagerReducer = (state: RootState) => state?.fileManager || null
 

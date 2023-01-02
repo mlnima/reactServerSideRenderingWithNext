@@ -56,5 +56,5 @@ export const terminalSlice = createSlice({
 })
 
 
-export const terminalReducer = (state: RootState) => state?.terminalState || null
+export const terminalReducer = (state: RootState) => state?.terminal || null
 export default terminalSlice.reducer

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import {FC} from "react";
 import {IdentitySettings} from "typescript-types";
 import {convertVariableNameToName} from "custom-util";
@@ -39,14 +38,17 @@ const TitleDescriptionSettingFields: FC<ComponentPropTypes> = (
         return(
             <Style className={'site-settings-form-section'}>
                     <p>{convertVariableNameToName(title)}:</p>
-                {/*//@ts-ignore*/}
                     <input className={'form-control-input'} type='text' name={title} value={
+                        //@ts-ignore
                         activeEditingLanguage === 'default' ? identity?.[title] :
+                            //@ts-ignore
                             identity.translations?.[activeEditingLanguage]?.[title] || ""
                     } onChange={e => onChangeHandlerWithTranslate(e)}/>
                     <p>{convertVariableNameToName(description)}:</p>
                     <textarea className={'form-control-input'} name={description} value={
+                        //@ts-ignore
                            activeEditingLanguage === 'default' ? identity?.[description] :
+                               //@ts-ignore
                             identity.translations?.[activeEditingLanguage]?.[description] || ""
                     } onChange={e => onChangeHandlerWithTranslate(e)}/>
                     <p>Category + CategoryPage Title:</p>

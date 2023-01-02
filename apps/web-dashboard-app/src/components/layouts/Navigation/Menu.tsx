@@ -144,6 +144,7 @@ const Menu: FC<PropTypes> = ({}) => {
             </div>
         )
     })
+    
     if (sidebar) {
         return (
             <StyledDiv className='SideBar'>

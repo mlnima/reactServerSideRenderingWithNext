@@ -19,8 +19,8 @@ const initialState : AdminPanelGlobalState = {
     }
 }
 
-export const fetchCustomPages = createAsyncThunk(
-    'adminPanelGlobalState/fetchCustomPages',
+export const getCustomPagesAction = createAsyncThunk(
+    'adminPanelGlobalState/getCustomPagesAction',
     async (data:any , thunkAPI) => {
         return await getPages({})
         // return AxiosInstance.post('/api/admin/pages/getPagesData', {token: localStorage.wt})
@@ -77,7 +77,7 @@ export const globalStateSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(fetchCustomPages.fulfilled, (state, action: PayloadAction<any>) => {
+        builder.addCase(getCustomPagesAction.fulfilled, (state, action: PayloadAction<any>) => {
             return {
                 ...state,
                 customPages: action.payload
