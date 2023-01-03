@@ -24,15 +24,15 @@ export const getFormsAction = createAsyncThunk(
     }
 )
 
-export const fetchAdminForm = createAsyncThunk(
+export const getFormAction = createAsyncThunk(
     'adminPanelForms/fetchAdminForm',
-    async (_id: string, thunkAPI) => {
+    async (_id: string | undefined, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         const body = {
             _id,
             token: localStorage.wt
         };
-        // return await AxiosInstance.post('/api/admin/forms/getFormData', body).then((response: AxiosResponse) => {
+        // return await AxiosInstance.post('/api/dashboard/forms/getFormData', body).then((response: AxiosResponse) => {
         return await getForm(_id).then((response: AxiosResponse) => {
             return response.data?.form
         }).catch((err: AxiosError) => {
@@ -43,7 +43,7 @@ export const fetchAdminForm = createAsyncThunk(
 
 export const deleteFormAction = createAsyncThunk(
     'adminPanelForms/deleteFormAction',
-    async (_id: string, thunkAPI) => {
+    async (_id: string | undefined, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         const body = {
             _id,
@@ -78,7 +78,7 @@ export const formsSlice = createSlice({
                     forms: action.payload
                 };
             })
-            .addCase(fetchAdminForm.fulfilled, (state, action: PayloadAction<any>) => {
+            .addCase(getFormAction.fulfilled, (state, action: PayloadAction<any>) => {
                 return {
                     ...state,
                     form: action.payload

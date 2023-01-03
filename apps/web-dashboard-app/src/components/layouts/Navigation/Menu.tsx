@@ -111,7 +111,12 @@ const Menu: FC<PropTypes> = ({}) => {
             <div key={item} className='SideBarItemElement'>
                 <div className='SideBarItemTitle'>
                     {/*//@ts-ignore*/}
-                    <NavLink to={menuItems[item].pathURL} className='SideBarItem'> {convertVariableNameToName(item)}</NavLink>
+                    <NavLink to={menuItems[item].pathURL}
+                             className='SideBarItem'
+                             onClick={() => dispatch(setSidebarStatus(false))}
+                    >
+                        {convertVariableNameToName(item)}
+                    </NavLink>
 
                     {/*//@ts-ignore*/}
                     {menuItems[item].subItems?.length ?

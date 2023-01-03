@@ -18,8 +18,8 @@ import {useAppDispatch} from "@store/hooks";
 const AdminPostPageStyledDiv = styled.div`
   display: grid;
   justify-content: center;
-  grid-template-columns: 1fr;
-
+  grid-template-columns: 1fr 200px;
+  max-width: 100vw;
   .content {
     display: flex;
     justify-content: center;
@@ -83,7 +83,7 @@ const Index = () => {
 
     return (
         <>
-            <Link to={'/admin/post?new=1'} className={'btn btn-info'}>
+            <Link to={'/dashboard/post?new=1'} className={'btn btn-info'}>
                 New Post
             </Link>
             <AdminPostPageStyledDiv className={'admin-post'}>

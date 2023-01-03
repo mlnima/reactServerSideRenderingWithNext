@@ -13,8 +13,9 @@ import {DashboardStore, Store} from "typescript-types";
 import {FC} from "react";
 
 let StyledDiv = styled.div`
-  width: 96%;
-  padding: 1%;
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
   border: .1px solid rgba(0, 0, 0, .2);
   background-color: var(--secondary-background-color, #181818);
   color: var(--secondary-text-color, #ccc);
@@ -120,12 +121,13 @@ let StyledDiv = styled.div`
     }
   }
 `
-interface PropTypes{
-        onChangeHandler:Function
+
+interface PropTypes {
+    onChangeHandler: Function
 }
 
-const PostInformation:FC<PropTypes> = (props) => {
-    const post = useSelector(({posts}:DashboardStore) => posts.post);
+const PostInformation: FC<PropTypes> = (props) => {
+    const post = useSelector(({posts}: DashboardStore) => posts.post);
     return (
         <StyledDiv className='post-information  product-information admin-widget'>
 

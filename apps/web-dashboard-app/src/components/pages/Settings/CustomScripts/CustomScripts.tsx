@@ -1,11 +1,9 @@
 import React, {FC} from 'react';
-import dynamic from "next/dynamic";
 import { useSelector} from "react-redux";
-import {DashboardStore, Store} from "typescript-types";
+import {DashboardStore} from "typescript-types";
 import {editIdentityAction, updateSettingAction} from "@store/reducers/settingsReducer";
 import {useAppDispatch} from "@store/hooks";
-
-const Editor = dynamic(() => import('@monaco-editor/react'), {ssr: false})
+import Editor from '@monaco-editor/react'
 interface PropTypes{
     width?: any,
     height?: any

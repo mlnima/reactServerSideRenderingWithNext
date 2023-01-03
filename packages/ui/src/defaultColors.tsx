@@ -5,6 +5,7 @@ const defaultColors = css`
     --main-text-color: #fff;
     --secondary-text-color: #ccc;
     --tertiary-text-color: #c7c7c7;
+
     --main-background-color: #000;
     --secondary-background-color: #181818;
     --dim-background-color:rgba(0,0,0,.6);

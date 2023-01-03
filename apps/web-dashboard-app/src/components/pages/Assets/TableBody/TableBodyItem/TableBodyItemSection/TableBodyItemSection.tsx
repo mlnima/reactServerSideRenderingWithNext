@@ -65,7 +65,7 @@ const TableBodyItemSection: FC<TableBodyItemSectionPropTypes> = ({dataValue, dat
         return (
             <StyledDiv className='asset-page-table-body-item-section'>
                 {dataValue?.username && dataValue?._id ?
-                    <Link to={`/admin/user?id=${dataValue?._id}`} target={'blank'}>
+                    <Link to={`/dashboard/user?id=${dataValue?._id}`} target={'blank'}>
                         <p>{dataValue.username}</p>
                     </Link>
                     : <p> Account might be deleted</p>

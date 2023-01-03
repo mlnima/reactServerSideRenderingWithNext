@@ -16,6 +16,11 @@ import PostsExporter from "@components/pages/Exporter/PostsExporter/PostsExporte
 import Content from "@components/pages/Importer/Content";
 import Youtube from "@components/pages/Importer/Youtube";
 import PostsImporter from "@components/pages/Importer/PostsImporter";
+import User from "@components/pages/User/User";
+import Page from "@components/pages/Page/Page";
+import Meta from "@components/pages/Meta/Meta";
+import Form from "@components/pages/Form/Form";
+import Translations from "@components/pages/Translations/Translations";
 
 const MainRouter = () => {
     return (
@@ -23,10 +28,15 @@ const MainRouter = () => {
             <Route path="/dashboard" element={<Dashboard/>}/>
             <Route path="/dashboard/assets" element={<Assets/>}/>
             <Route path="/dashboard/post" element={<Post/>}/>
+            <Route path="/dashboard/user" element={<User/>}/>
+            <Route path="/dashboard/page" element={<Page/>}/>
+            <Route path="/dashboard/meta" element={<Meta/>}/>
+            <Route path="/dashboard/form/:id" element={<Form/>}/>
             <Route path="/dashboard/fileManager" element={<FileManager/>}/>
             <Route path="/dashboard/design/:section" element={<DesignSection/>}/>
             <Route path="/dashboard/tools" element={<Tools/>}/>
             <Route path="/dashboard/tools/terminal" element={<Terminal/>}/>
+            <Route path="/dashboard/translations" element={<Translations/>}/>
             <Route path="/dashboard/settings" element={<Settings/>}/>
             <Route path="/dashboard/settings/customScript" element={<CustomScript/>}/>
             <Route path="/dashboard/settings/membershipSettings" element={<Membership/>}/>
@@ -35,7 +45,7 @@ const MainRouter = () => {
             <Route path="/dashboard/importer/content" element={<Content/>}/>
             <Route path="/dashboard/importer/youtube" element={<Youtube/>}/>
             <Route path="/dashboard/importer/postsImporter" element={<PostsImporter/>}/>
-            <Route element={<Login/>} path={'/dashboard/login'}/>
+            <Route path={'/dashboard/login'} element={<Login/>} />
             <Route path="*" element={<NotFound/>}/>
         </Routes>
     )

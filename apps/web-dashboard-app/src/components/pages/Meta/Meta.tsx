@@ -1,17 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import styled from "styled-components";
-import {useRouter} from "next/router";
 import {useSelector} from "react-redux";
-import {
-    adminEditMeta,
-    fetchAdminPanelDeleteMeta,
-    fetchAdminPanelMeta,
-    fetchAdminPanelUpdateMeta
-} from '@store_toolkit/adminReducers/adminPanelPostsReducer'
-import {languagesOptions} from "@_variables/variables";
-import {useAdminDispatch} from "../../../store_toolkit/hooks";
-import {Store} from "typescript-types";
-import Soft404 from "../../../components/includes/Soft404/Soft404";
+import languagesOptions from "@variables/languagesOptions";
+import {DashboardStore} from "typescript-types";
+import {useAppDispatch} from "@store/hooks";
+import {useSearchParams} from "react-router-dom";
+import {deleteMetaAction, editMetaAction, getMetaAction, updateMetaAction} from "@store/reducers/postsReducer";
 
 let AdminMetaPageStyledDiv = styled.div`
   width: 95%;
@@ -34,10 +28,7 @@ let AdminMetaPageStyledDiv = styled.div`
 
     input, textarea {
       min-width: 300px;
-      border: 1px solid rgba(0, 0, 0, .1);
       padding: 3px 5px;
-      background-color: white;
-
     }
 
     textarea {
@@ -77,37 +68,38 @@ let AdminMetaPageStyledDiv = styled.div`
 
 `
 
-const meta = (props: any) => {
-    const dispatch = useAdminDispatch()
-    const meta = useSelector((store: Store) => store?.adminPanelPosts.meta)
-    const router = useRouter()
+const Meta = () => {
+    const dispatch = useAppDispatch()
+    const meta = useSelector(({posts}: DashboardStore) => posts.meta)
+    const [search, setSearch] = useSearchParams();
+    const metaId = useMemo(()=>search.get('id'),[search])
+    const newMeta = useMemo(()=>search.get('new'),[search])
+    const metaType = useMemo(()=>search.get('metaType'),[search])
+    const lang = useMemo(()=>search.get('lang'),[search])
 
     const [editingData, setEditingData] = useState({
         activeEditingLanguage: 'default'
     })
+
     const [deleteButton, setDeleteButton] = useState(false)
 
     useEffect(() => {
-        if (router.query?.new && router.query?.metaType) {
-            dispatch(adminEditMeta({
+        if (newMeta && metaType) {
+            dispatch(editMetaAction({
                 // @ts-ignore
                 name: '',
-                type: router.query?.metaType,
+                type: metaType,
                 description: '',
                 imageUrl: '',
                 imageUrlLock: false,
                 translations: {},
                 count: 0,
-                lang: router.query.lang || 'default'
+                lang: lang || 'default'
             }))
-
-
-        } else if (router.query.id) {
-
-            dispatch(fetchAdminPanelMeta(router?.query?.id as string))
-
+        } else if (metaId) {
+            dispatch(getMetaAction(metaId))
         }
-    }, [props]);
+    }, [metaId]);
 
 
     const onActiveEditingLanguageChangeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -121,9 +113,9 @@ const meta = (props: any) => {
     const onInputChangeHandler = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
 
         if (editingData.activeEditingLanguage === 'default') {
-            dispatch(adminEditMeta({[e.target.name]: e.target.value}))
+            dispatch(editMetaAction({[e.target.name]: e.target.value}))
         } else {
-            dispatch(adminEditMeta({
+            dispatch(editMetaAction({
                 translations: {
                     ...(meta?.translations || {}),
                     [editingData.activeEditingLanguage]: {
@@ -137,7 +129,7 @@ const meta = (props: any) => {
     }
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        dispatch(adminEditMeta({[e.target.name]: e.target.value}))
+        dispatch(editMetaAction({[e.target.name]: e.target.value}))
     }
 
 
@@ -209,7 +201,7 @@ const meta = (props: any) => {
                 <div className={'single-meta-page-section'}>
                     <p>Lock Meta Image :</p>
                     <input type={'checkbox'} checked={meta.imageUrlLock} name={'imageUrlLock'}
-                           onChange={e => dispatch(adminEditMeta({imageUrlLock: e.target.checked}))}/>
+                           onChange={e => dispatch(editMetaAction({imageUrlLock: e.target.checked}))}/>
                 </div>
                 <div className={'single-meta-page-section'}>
                     <p>Type :</p>
@@ -251,7 +243,7 @@ const meta = (props: any) => {
                 </div>
                 <div className='action-buttons'>
                     <button className='btn btn-primary'
-                            onClick={() => dispatch(fetchAdminPanelUpdateMeta(meta))}>Update
+                            onClick={() => dispatch(updateMetaAction(meta))}>Update
                     </button>
 
                     {!deleteButton && <button className={'btn btn-danger'}
@@ -259,10 +251,10 @@ const meta = (props: any) => {
                         I Want To Delete This Meta
                     </button>}
                     {!!deleteButton &&
-                    <button onClick={() => dispatch(fetchAdminPanelDeleteMeta(router?.query?.id as string))}
-                            className='btn btn-danger'>
-                        Delete
-                    </button>}
+                        <button onClick={() => dispatch(deleteMetaAction(metaId))}
+                                className='btn btn-danger'>
+                            Delete
+                        </button>}
 
                 </div>
 
@@ -272,6 +264,6 @@ const meta = (props: any) => {
     } else return <h1>Not Found</h1>
 };
 
-export default meta;
+export default Meta;
 
 

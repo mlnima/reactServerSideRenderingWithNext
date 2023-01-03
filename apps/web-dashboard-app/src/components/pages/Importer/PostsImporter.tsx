@@ -50,7 +50,6 @@ const PostsImporter = () => {
             }
             //@ts-ignore
             dispatch(createNewPostAction({data:postDataToSave, router:null}))
-
         }
     }
 
@@ -82,7 +81,11 @@ const PostsImporter = () => {
 
         <PostsImporterStyledDiv className='posts-importer'>
             <div className={'posts-importer-form'}>
-                <select ref={statusElement} className={'custom-select'} name={'status'} onChange={e => onChangeHandler(e)}>
+
+                <select ref={statusElement}
+                        className={'custom-select'}
+                        name={'status'}
+                        onChange={e => onChangeHandler(e)}>
 
                     <option value='' >No Change</option>
                     <option value='published'>Published</option>
@@ -90,7 +93,9 @@ const PostsImporter = () => {
                     <option value='trash'>Trash</option>
                     <option value='pending'>Pending</option>
                     <option value='reported'>Reported</option>
+
                 </select>
+
                 <div className={'posts-importer-form-clientActions'}>
                     <input type='file' onChange={async e => onSelectFileHandler(e)}/>
                     <button className={'btn btn-primary'} onClick={() => onImportPostsHandler()}>Import Posts</button>

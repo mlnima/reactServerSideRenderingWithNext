@@ -51,7 +51,7 @@ const Tools = () => {
 
     return (
         <StyledDiv className={'adminTools'}>
-            <Link to={'/admin/tools/terminal'} className={'btn btn-primary'}>
+            <Link to={'/dashboard/tools/terminal'} className={'btn btn-primary'}>
                 Terminal
             </Link>
             <button className={'btn btn-primary'} onClick={() => dispatch(checkAndRemoveDeletedVideosAction())}>

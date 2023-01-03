@@ -23,7 +23,7 @@ export const getCustomPagesAction = createAsyncThunk(
     'adminPanelGlobalState/getCustomPagesAction',
     async (data:any , thunkAPI) => {
         return await getPages({})
-        // return AxiosInstance.post('/api/admin/pages/getPagesData', {token: localStorage.wt})
+        // return AxiosInstance.post('/api/dashboard/pages/getPagesData', {token: localStorage.wt})
             .then((response: AxiosResponse<unknown | any>) => {
                 if (response.data?.pages) {
                     return response.data.pages.map((page: PageTypes) => page.pageName)

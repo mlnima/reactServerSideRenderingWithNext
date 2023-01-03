@@ -7,13 +7,14 @@ const Style = styled.div`
     height: 100px;
   }
 `
-interface ComponentPropTypes {
+
+interface PropTypes {
     onChangeHandlerWithTranslate:Function,
     identity:IdentitySettings,
     activeEditingLanguage:string
 }
 
-const TitleDescriptionSettingFields: FC<ComponentPropTypes> = (
+const TitleDescriptionSettingFields: FC<PropTypes> = (
     {
         identity,
         onChangeHandlerWithTranslate,

@@ -1,6 +1,8 @@
 import dotenv from 'dotenv';
+
 dotenv.config({path: '../../.env'});
 import {connectToDatabase} from 'custom-server-util';
+
 connectToDatabase('Express Server')
 import express from 'express';
 import bodyParser from 'body-parser';
@@ -37,11 +39,20 @@ const runServer = () => {
 
     const staticPath = dev ? './static' : '../static';
     const publicPath = dev ? './public' : '../public';
-
+    const dashboardAppPath = dev ? '../web-dashboard-app/build' : '../../web-dashboard-app/build';
+    const dashboardBuiltPath = path.join(__dirname, dashboardAppPath)
     server.use('/static', express.static(path.join(__dirname, staticPath), {maxAge: "604800000"}));
+    server.use('/static', express.static(path.join(__dirname, `${dashboardBuiltPath}/static`), {maxAge: "604800000"}));
     server.use('/public', express.static(path.join(__dirname, publicPath), {maxAge: "604800000"}));
 
-    server.get('/api/alive',loggerMiddleware, (req, res) => {
+    server.get('/dashboard', (req, res) => {
+        res.sendFile(`${dashboardBuiltPath}/index.html`);
+    })
+    server.get('/dashboard/*', (req, res) => {
+        res.sendFile(`${dashboardBuiltPath}/index.html`);
+    })
+
+    server.get('/api/alive', loggerMiddleware, (req, res) => {
         res.json({message: 'alive'})
     });
 
@@ -51,7 +62,7 @@ const runServer = () => {
         res.json({message: 'Deleting Cache Command Executed'})
     });
 
-    server.post('/api',(req,res)=>{
+    server.post('/api', (req, res) => {
         res.send('*****************************I am the API Server*****************************')
     });
 

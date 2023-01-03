@@ -1,6 +1,5 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {loading, setAlert} from "./globalStateReducer";
-import {AxiosInstance} from "api-requests";
 import {AxiosError, AxiosResponse} from "axios";
 import {RootState} from "../store";
 import {PostRaw} from "typescript-types/src/Post";
@@ -114,8 +113,8 @@ export const fetchFilManagerCreateNewFile = createAsyncThunk(
     }
 )
 
-export const fetchUpdateTranslationsFile = createAsyncThunk(
-    'adminPanelFileManager/fetchUpdateTranslationsFile',
+export const updateTranslationsFileAction = createAsyncThunk(
+    'adminPanelFileManager/updateTranslationsFileAction',
     async ({path, data}: { path: string, data: string }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
@@ -162,8 +161,8 @@ export const uploadFileAction = createAsyncThunk(
 
 
 
-export const fetchReadTranslationsFile = createAsyncThunk(
-    'adminPanelFileManager/fetchReadTranslationsFile',
+export const readTranslationsFileAction = createAsyncThunk(
+    'adminPanelFileManager/readTranslationsFileAction',
     async (path: string, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
@@ -209,7 +208,7 @@ export const fileManagerSlice = createSlice({
                 ...action.payload
             };
         },
-        adminPanelEditTranslationsFile: (state, action: PayloadAction<any>) => {
+        editTranslationsFileAction: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
                 translationsData:action.payload
@@ -236,7 +235,7 @@ export const fileManagerSlice = createSlice({
                     ...action.payload
                 };
             })
-            .addCase(fetchReadTranslationsFile.fulfilled, (state, action: PayloadAction<any>) => {
+            .addCase(readTranslationsFileAction.fulfilled, (state, action: PayloadAction<any>) => {
                 return {
                     ...state,
                     translationsData: action.payload
@@ -246,7 +245,7 @@ export const fileManagerSlice = createSlice({
 })
 
 
-export const {fileManagerClosePopupAction, fileManagerEditState,adminPanelEditTranslationsFile} = fileManagerSlice.actions
+export const {fileManagerClosePopupAction, fileManagerEditState,editTranslationsFileAction} = fileManagerSlice.actions
 
 export const fileManagerReducer = (state: RootState) => state?.fileManager || null
 

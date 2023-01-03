@@ -5,11 +5,14 @@ import {DashboardStore, Store} from "typescript-types";
 import TextEditors from '@components/common/TextEditors/TextEditors'
 
 let TitleDescriptionStyledDiv = styled.div`
-  width: 98%;
-  padding: 1%;
+  //padding: 8px;
+  box-sizing: border-box;
   margin: auto;
+  width: 100%;
   .form-control-input {
-    width: 98%;
+    width: 95%;
+    //margin: 8px;
+    box-sizing: border-box;
   }
   .text-editors{
     background-color: var(--main-background-color, #000);

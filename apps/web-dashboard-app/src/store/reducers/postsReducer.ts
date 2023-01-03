@@ -103,7 +103,7 @@ export const createNewPostAction = createAsyncThunk(
             .then((res: AxiosResponse<any>) => {
                 thunkAPI.dispatch(setAlert({message: res.data.message || 'Post Saved', type: 'success'}))
                 setTimeout(() => {
-                    res.data?.savedPostData?._id  ? redirect('/admin/post?id=' + res.data.savedPostData._id) : null
+                    res.data?.savedPostData?._id  ? redirect('/dashboard/post?id=' + res.data.savedPostData._id) : null
                 }, 1500)
             }).catch((err) => {
                 thunkAPI.dispatch(setAlert({message: err.response.data.message, type: 'error', err}))
@@ -113,9 +113,9 @@ export const createNewPostAction = createAsyncThunk(
     }
 )
 
-export const fetchAdminPanelDeleteMeta = createAsyncThunk(
+export const deleteMetaAction = createAsyncThunk(
     'adminPanelPosts/fetchAdminPanelDeleteMeta',
-    async (_id: string, thunkAPI) => {
+    async (_id: string|null, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
         return await deleteMeta(_id)
@@ -130,8 +130,8 @@ export const fetchAdminPanelDeleteMeta = createAsyncThunk(
     }
 )
 
-export const fetchAdminPanelUpdateMeta = createAsyncThunk(
-    'adminPanelPosts/fetchAdminPanelUpdateMeta',
+export const updateMetaAction = createAsyncThunk(
+    'adminPanelPosts/updateMetaAction',
     async (data: Meta, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         const body = {
@@ -169,9 +169,9 @@ export const getMetasAction = createAsyncThunk(
             })
     }
 )
-export const fetchAdminPanelMeta = createAsyncThunk(
-    'adminPanelPosts/fetchAdminPanelMeta',
-    async (_id: string, thunkAPI) => {
+export const getMetaAction = createAsyncThunk(
+    'adminPanelPosts/getMetaAction',
+    async (_id: string|null, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         return await getMeta(_id)
             .then((res: AxiosResponse<any>) => {
@@ -450,7 +450,7 @@ export const postsSlice = createSlice({
                 }
             }
         },
-        adminEditMeta: (state, action: PayloadAction<any>) => {
+        editMetaAction: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
                 meta: {
@@ -476,7 +476,7 @@ export const postsSlice = createSlice({
                 ...state,
                 ...action.payload
             };
-        }).addCase(fetchAdminPanelMeta.fulfilled, (state, action: PayloadAction<any>) => {
+        }).addCase(getMetaAction.fulfilled, (state, action: PayloadAction<any>) => {
             return {
                 ...state,
                 meta: action.payload
@@ -488,7 +488,7 @@ export const postsSlice = createSlice({
 
 export const {
     editPostAction,
-    adminEditMeta,
+    editMetaAction,
     defineNewPost,
     changeActiveEditingLanguage
 } = postsSlice.actions

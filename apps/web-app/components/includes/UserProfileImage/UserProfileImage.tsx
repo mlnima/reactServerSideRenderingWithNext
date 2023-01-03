@@ -1,9 +1,10 @@
-import React, {FC, useState} from "react";
+import React, {FC} from "react";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {Store} from "typescript-types";
-import SvgRenderer from "../../global/commonComponents/SvgRenderer/SvgRenderer";
 import Link from "next/link";
+import ImageContent from "@components/includes/UserProfileImage/ImageContent";
+import NoSSR from "next/dist/shared/lib/dynamic-no-ssr";
 
 const Style = styled.div`
   display: flex;
@@ -34,8 +35,6 @@ interface UserProfileImagePropTypes {
 
 const UserProfileImage: FC<UserProfileImagePropTypes> = ({size, profileRedirect}) => {
 
-    const [gotError,setGotError] = useState(false)
-
     const {userData, loggedIn} = useSelector(({user}: Store) => {
         return {
             loggedIn: user.loggedIn,
@@ -43,26 +42,15 @@ const UserProfileImage: FC<UserProfileImagePropTypes> = ({size, profileRedirect}
         }
     })
 
-
-    const ImageContent = () => userData?.profileImage && !gotError ?
-        <img className={'user-info-profile-button-image'} src={userData?.profileImage}
-             onError={()=>setGotError(true)}
-             alt={'profile image'}/>
-        :
-        <SvgRenderer svgUrl={'/asset/images/icons/user-solid.svg'}
-                     size={size - 10 || 48}
-                     customClassName={'user-info-profile-button-icon'}
-                     color={' var(--main-text-color, #fff)'}
-        />
-
     return (
         <Style className={'user-profile-image'} size={size}>
+            <NoSSR>
             {profileRedirect && loggedIn ?
-
                 <Link href={`/profile`}>
-                        <ImageContent/>
-                </Link> : <ImageContent/>
+                        <ImageContent profileImage={userData?.profileImage} size={size}/>
+                </Link> : <ImageContent profileImage={userData?.profileImage} size={size}/>
             }
+            </NoSSR>
         </Style>
     )
 

@@ -73,7 +73,7 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({asse
     } else if (assetsType === 'users') {
         return (
             <div className='asset-page-table-body-item-hover-item'>
-                <Link to={'/admin/user?id=' + _id}>Edit</Link>
+                <Link to={'/dashboard/user?id=' + _id}>Edit</Link>
             </div>
         );
     } else if (assetsType === 'comments') {
@@ -89,13 +89,13 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({asse
     } else if (assetsType === 'metas') {
         return (
             <div className='asset-page-table-body-item-hover-item'>
-                <Link to={'/admin/meta?id=' + _id} className={'btn btn-info'}>Edit</Link>
+                <Link to={'/dashboard/meta?id=' + _id} className={'btn btn-info'}>Edit</Link>
             </div>
         );
     } else if (assetsType === 'forms') {
         return (
             <div className='asset-page-table-body-item-hover-item'>
-                <Link to={'/admin/form/' + _id}>Edit</Link>
+                <Link to={'/dashboard/form/' + _id}>Edit</Link>
                 <span className={'btn btn-danger'} onClick={() => {
                     dispatch(deleteFormAction(_id))
                 }}>Delete</span>
@@ -104,7 +104,7 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({asse
     } else if (assetsType === 'pages') {
         return (
             <div className='asset-page-table-body-item-hover-item'>
-                <Link to={'/admin/page?id=' + _id}>Edit</Link>
+                <Link to={'/dashboard/page?id=' + _id}>Edit</Link>
                 {/*<span className={'btn btn-danger'}*/}
                 {/*      onClick={onDeletePageHandler}*/}
                 {/*>*/}

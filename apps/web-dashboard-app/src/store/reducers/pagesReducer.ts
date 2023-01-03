@@ -53,15 +53,15 @@ export const getPagesAction = createAsyncThunk(
     }
 )
 
-export const fetchAdminPanelPage = createAsyncThunk(
-    'adminPanelPages/fetchAdminPanelPage',
-    async (id: string, thunkAPI) => {
+export const getPageAction = createAsyncThunk(
+    'adminPanelPages/getPageAction',
+    async (id: string|null, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         const body = {
             _id: id,
             token: localStorage.wt
         };
-
+//@ts-ignore
         return await getPage(id).then((response: AxiosResponse) => {
             return response.data?.pageData
         }).catch((err: AxiosError) => {
@@ -69,8 +69,8 @@ export const fetchAdminPanelPage = createAsyncThunk(
         }).finally(() => thunkAPI.dispatch(loading(false)))
     }
 )
-export const fetchAdminUpdatePage = createAsyncThunk(
-    'adminPanelPages/fetchAdminPanelPage',
+export const updatePageAction = createAsyncThunk(
+    'adminPanelPages/updatePageAction',
     async (pageData: {}, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         const body = {
@@ -85,22 +85,22 @@ export const fetchAdminUpdatePage = createAsyncThunk(
         }).finally(() => thunkAPI.dispatch(loading(false)))
     }
 )
-export const fetchAdminSaveNewPage = createAsyncThunk(
-    'adminPanelPages/fetchAdminPanelPage',
-    async ({pageData, push}: { pageData: {}, push: any }, thunkAPI) => {
+export const createNewPageAction = createAsyncThunk(
+    'adminPanelPages/createNewPageAction',
+    async ({pageData}: { pageData: {} }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
         return await createNewPage(pageData).then((response: AxiosResponse) => {
-            const pageId = response.data.savedPageData._id
-            push(`/admin/page?id=${pageId}`)
+            // const pageId = response.data.savedPageData._id
+            // push(`/admin/page?id=${pageId}`)
         }).catch((err: AxiosError) => {
 
 
         }).finally(() => thunkAPI.dispatch(loading(false)))
     }
 )
-export const fetchAdminDeleteCustomPage = createAsyncThunk(
-    'adminPanelPages/fetchAdminPanelPage',
+export const deletePageAction = createAsyncThunk(
+    'adminPanelPages/deletePageAction',
     async (id:string, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
@@ -117,7 +117,7 @@ export const pagesSlice = createSlice({
     name: 'adminPanelPages',
     initialState,
     reducers: {
-        adminEditPageField:(state, action: PayloadAction<any>) =>{
+        editPageFieldAction:(state, action: PayloadAction<any>) =>{
             return {
                 ...state,
                 page: {
@@ -135,7 +135,7 @@ export const pagesSlice = createSlice({
                     pages: action.payload
                 };
             })
-            .addCase(fetchAdminPanelPage.fulfilled, (state, action: PayloadAction<any>) => {
+            .addCase(getPageAction.fulfilled, (state, action: PayloadAction<any>) => {
                 return {
                     ...state,
                     page: action.payload
@@ -147,7 +147,7 @@ export const pagesSlice = createSlice({
 
 //adminEditPageField
 
-export const {adminEditPageField} = pagesSlice.actions
+export const {editPageFieldAction} = pagesSlice.actions
 
 export const pagesReducer = (state: RootState) => state?.pages || null
 

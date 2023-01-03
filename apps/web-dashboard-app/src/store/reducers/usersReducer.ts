@@ -89,9 +89,9 @@ export const getUsersAction = createAsyncThunk(
     }
 )
 
-export const fetchAdminPanelNewAPIKey = createAsyncThunk(
-    'adminPanelUsers/fetchAdminPanelNewAPIKey',
-    async (data: {}, thunkAPI) => {
+export const generateNewAPIKeyAction = createAsyncThunk(
+    'adminPanelUsers/generateNewAPIKeyAction',
+    async (data:null, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         return await generateNewAPIKey()
             .then(() => {
@@ -110,9 +110,9 @@ export const fetchAdminPanelNewAPIKey = createAsyncThunk(
     }
 )
 
-export const fetchAdminPanelUserData = createAsyncThunk(
-    'adminPanelUsers/fetchAdminPanelUserData',
-    async (_id: string, thunkAPI) => {
+export const getUserDataAction = createAsyncThunk(
+    'adminPanelUsers/getUserDataAction',
+    async (_id: string|null, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
         return await getUser(_id)
@@ -130,8 +130,8 @@ export const fetchAdminPanelUserData = createAsyncThunk(
     }
 )
 
-export const fetchAdminPanelUpdateUserData = createAsyncThunk(
-    'adminPanelUsers/fetchAdminPanelUpdateUserData',
+export const updateUserDataAction = createAsyncThunk(
+    'adminPanelUsers/updateUserDataAction',
     async (data: {}, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         const body = {
@@ -158,9 +158,9 @@ export const fetchAdminPanelUpdateUserData = createAsyncThunk(
         }).finally(() => thunkAPI.dispatch(loading(false)))
     }
 )
-export const fetchAdminPanelDeleteUser = createAsyncThunk(
-    'adminPanelUsers/fetchAdminPanelDeleteUser',
-    async ({id, router}: { id: string, router: any }, thunkAPI) => {
+export const deleteUserAction = createAsyncThunk(
+    'adminPanelUsers/deleteUserAction',
+    async (id: string|null, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         const body = {
             id,
@@ -183,12 +183,11 @@ export const fetchAdminPanelDeleteUser = createAsyncThunk(
 
         }).finally(() => {
             thunkAPI.dispatch(loading(false))
-            router.back()
         })
     }
 )
-export const fetchAdminPanelChangePassword = createAsyncThunk(
-    'adminPanelUsers/fetchAdminPanelChangePassword',
+export const changePasswordAction = createAsyncThunk(
+    'adminPanelUsers/changePasswordAction',
     async ({oldPass, newPass, newPass2}: { oldPass: string, newPass: string, newPass2: string }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
@@ -236,7 +235,7 @@ export const usersSlice = createSlice({
     initialState,
     reducers: {
 
-        adminPanelEditUserData: (state, action: PayloadAction<any>) => {
+        editUserDataAction: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
                 user: {
@@ -267,7 +266,7 @@ export const usersSlice = createSlice({
                     totalCount: action.payload.totalCount
                 };
             })
-            .addCase(fetchAdminPanelUserData.fulfilled, (state, action: PayloadAction<any>) => {
+            .addCase(getUserDataAction.fulfilled, (state, action: PayloadAction<any>) => {
                 return {
                     ...state,
                     user: action.payload
@@ -284,7 +283,7 @@ export const usersSlice = createSlice({
 })
 
 
-export const {adminPanelEditUserData} = usersSlice.actions
+export const {editUserDataAction} = usersSlice.actions
 
 export const usersReducer = (state: RootState) => state?.users || null
 
