@@ -17,7 +17,7 @@ const nextImageConfig = require('./nextConfigs/nextImageConfig')
 //     }, {})
 //
 //
-// console.log(transformedEnv)
+// import * as entry from
 
 
 const nextConfigs = {

@@ -21,6 +21,7 @@ import Page from "@components/pages/Page/Page";
 import Meta from "@components/pages/Meta/Meta";
 import Form from "@components/pages/Form/Form";
 import Translations from "@components/pages/Translations/Translations";
+import General from "@components/pages/Settings/General/General";
 
 const MainRouter = () => {
     return (
@@ -40,7 +41,7 @@ const MainRouter = () => {
             <Route path="/dashboard/settings" element={<Settings/>}/>
             <Route path="/dashboard/settings/customScript" element={<CustomScript/>}/>
             <Route path="/dashboard/settings/membershipSettings" element={<Membership/>}/>
-            <Route path="/dashboard/settings/membershipSettings" element={<Membership/>}/>
+            <Route path="/dashboard/settings/general" element={<General/>}/>
             <Route path="/dashboard/exporter/postsExporter" element={<PostsExporter/>}/>
             <Route path="/dashboard/importer/content" element={<Content/>}/>
             <Route path="/dashboard/importer/youtube" element={<Youtube/>}/>

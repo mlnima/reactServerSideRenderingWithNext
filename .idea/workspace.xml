@@ -21,9 +21,16 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/profilePageComponents/profilePost/common/ThumbnailsUploader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/profilePageComponents/profilePost/common/ThumbnailsUploader.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/next.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/500.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/500.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/config/env.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/config/env.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Navigation/menuItems.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Navigation/menuItems.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Assets/Assets.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Assets/Assets.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Settings/General/TitleDescriptionSettingFields.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Settings/General/TitleDescriptionSettingFields.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/routers/MainRouter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/routers/MainRouter.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/routers/PrivateRoutes.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/routers/RootRouter.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/variables/paramsQueryGenerator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/variables/paramsQueryGenerator.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/information/NginXConfigs/api-server-config.md" beforeDir="false" afterPath="$PROJECT_DIR$/information/NginXConfigs/api-server-config.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -104,11 +111,11 @@
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-dashboard-app\src\components\pages\Assets" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-dashboard-app\src\components" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-dashboard-app\src\components\pages\Tools" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\api-requests\src\common\users" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\api-requests\src\dashboard\users" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\api-requests\src\dashboard\metas" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\api-requests\src\dashboard\posts" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -122,6 +129,16 @@
       <command value="run" />
       <scripts>
         <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="dev (1)" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/apps/web-dashboard-app/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -147,16 +164,6 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="killNodes" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="killNodes" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
     <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -169,11 +176,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.dev" />
+        <item itemvalue="npm.dev (1)" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.eject" />
-        <item itemvalue="npm.killNodes" />
       </list>
     </recent_temporary>
   </component>
@@ -1441,7 +1448,7 @@
       <workItem from="1672777813047" duration="13293000" />
       <workItem from="1672802359783" duration="5065000" />
       <workItem from="1672850916495" duration="3355000" />
-      <workItem from="1672863453695" duration="727000" />
+      <workItem from="1672863453695" duration="5527000" />
     </task>
     <servers />
   </component>
@@ -2125,6 +2132,12 @@
           <url>file://$PROJECT_DIR$/apps/web-dashboard-app/config/webpack.config.js</url>
           <line>578</line>
           <option name="timeStamp" value="169" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/apps/web-dashboard-app/src/components/routers/MainRouter.tsx</url>
+          <line>33</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="170" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

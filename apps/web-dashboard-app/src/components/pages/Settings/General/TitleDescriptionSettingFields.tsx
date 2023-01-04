@@ -37,7 +37,7 @@ const TitleDescriptionSettingFields: FC<PropTypes> = (
 
 
         return(
-            <Style className={'site-settings-form-section'}>
+            <Style key={page} className={'site-settings-form-section'}>
                     <p>{convertVariableNameToName(title)}:</p>
                     <input className={'form-control-input'} type='text' name={title} value={
                         //@ts-ignore

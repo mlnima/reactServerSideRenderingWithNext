@@ -1,13 +1,6 @@
 import {FC, useEffect, useMemo, useState} from "react";
 import styled from "styled-components";
-import {
-    createSearchParams,
-    useLocation,
-    useNavigationType,
-    useParams,
-    useResolvedPath,
-    useSearchParams
-} from 'react-router-dom'
+import {useLocation, useSearchParams} from 'react-router-dom'
 import {useAppDispatch} from "@store/hooks";
 import paramsQueryGenerator from "@variables/paramsQueryGenerator";
 import {getMetasAction, getPostsAction} from "@store/reducers/postsReducer";
@@ -72,9 +65,6 @@ const Assets: FC<PropTypes> = ({}) => {
         getData()
     }, [query]);
 
-    // useEffect(() => {
-    //     console.log(query)
-    // }, [query]);
 
     return (
         <Style>
@@ -88,18 +78,3 @@ const Assets: FC<PropTypes> = ({}) => {
 };
 export default Assets;
 
-
-// //@ts-ignore
-//  const posts = useSelector(({posts}: DashboardStore) => posts.posts)
-//  //@ts-ignore
-//  const metas = useSelector(({posts}: DashboardStore) => posts.metas)
-//  //@ts-ignore
-//  const users = useSelector(({users}: DashboardStore) => users.users)
-//  //@ts-ignore
-//  const comments = useSelector(({comments}: DashboardStore) => comments.comments)
-//  //@ts-ignore
-//  const forms = useSelector(({forms}: DashboardStore) => forms.forms)
-//  //@ts-ignore
-//  const pages = useSelector(({pages}: DashboardStore) => pages.pages)
-//  //@ts-ignore
-//  const orders = useSelector(({orders}: DashboardStore) => orders.orders)

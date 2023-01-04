@@ -5,34 +5,34 @@
     "subItems": []
   },
   "Posts": {
-    "pathURL": "/dashboard/assets?assetsType=posts",
+    "pathURL": "/dashboard/assets?assetsType=posts&size=20",
     "subItems": [{"name": "newPost", "url": "/dashboard/post?new=1"}]
   },
   "Users": {
-    "pathURL": "/dashboard/assets?assetsType=users",
+    "pathURL": "/dashboard/assets?assetsType=users&size=20",
     "subItems": []
   },
   "Metas": {
     "pathURL": "/dashboard/assets?assetsType=metas&metaType=categories",
     "subItems": [
-      {"name": "tags", "url": "/dashboard/assets?assetsType=metas&metaType=tags"},
-      {"name": "categories", "url": "/dashboard/assets?assetsType=metas&metaType=categories"},
-      {"name": "actors", "url": "/dashboard/assets?assetsType=metas&metaType=actors"}]
+      {"name": "tags", "url": "/dashboard/assets?assetsType=metas&metaType=tags&size=20"},
+      {"name": "categories", "url": "/dashboard/assets?assetsType=metas&metaType=categories&size=20"},
+      {"name": "actors", "url": "/dashboard/assets?assetsType=metas&metaType=actors&size=20"}]
   },
   "Pages": {
-    "pathURL": "/dashboard/assets?assetsType=pages",
+    "pathURL": "/dashboard/assets?assetsType=pages&size=20",
     "subItems": [{"name": "newPage", "url": "/dashboard/page?new=1"}]
   },
   "Orders": {
-    "pathURL": "/dashboard/assets?assetsType=orders",
+    "pathURL": "/dashboard/assets?assetsType=orders&size=20",
     "subItems": []
   },
   "Forms": {
-    "pathURL": "/dashboard/assets?assetsType=forms",
+    "pathURL": "/dashboard/assets?assetsType=forms&size=20",
     "subItems": []
   },
   "Comments": {
-    "pathURL": "/dashboard/assets?assetsType=comments",
+    "pathURL": "/dashboard/assets?assetsType=comments&size=20",
     "subItems": []
   },
 
