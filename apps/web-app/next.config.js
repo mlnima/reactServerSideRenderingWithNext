@@ -25,7 +25,7 @@ const nextConfigs = {
     // distDir: '../../.next',
     rewrites,
     reactStrictMode: false,
-    experimental: {appDir: true},
+    experimental: {appDir: false},
     // runtime: 'experimental-edge',
     redirects,
     swcMinify: true,

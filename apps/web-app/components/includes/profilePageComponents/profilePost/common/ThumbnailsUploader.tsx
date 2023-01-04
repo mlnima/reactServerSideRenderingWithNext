@@ -1,10 +1,10 @@
 import React, {FC, useRef,} from "react";
 import styled from "styled-components";
-import {useAppDispatch} from "../../../../../store_toolkit/hooks";
+import {useAppDispatch} from "@store_toolkit/hooks";
 import ThumbnailUploadArea from "./ThumbnailUploadArea";
 import SvgRenderer from "../../../../global/commonComponents/SvgRenderer/SvgRenderer";
 import {_ugcUploadPostImages}
-    from "../../../../../store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_ugcUploadPostImages";
+    from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_ugcUploadPostImages";
 
 //experimental doc for dev
 //db.getCollection('posts').find({"_id":ObjectId("603adfacfb13c0091074fa0e")})

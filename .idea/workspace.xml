@@ -20,44 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/config/env.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/config/getHttpsConfig.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/config/jest/babelTransform.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/config/jest/cssTransform.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/config/jest/fileTransform.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/config/modules.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/config/paths.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/config/webpack.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/config/webpack/persistentCache/createEnvironmentHash.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/config/webpackDevServer.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/scripts/build.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/scripts/start.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/scripts/test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api-server/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/AdminTools/AdminTools.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/AdminTools/AdminTools.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/SiteSettingsSetter/SiteSettingsSetter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/SiteSettingsSetter/SiteSettingsSetter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/Authentication/Authentication.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/Authentication/Authentication.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayoutAdminDataInitializer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayoutAdminDataInitializer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayoutInitializer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayoutInitializer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/layouts/MessengerLayout/MessengerLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/layouts/MessengerLayout/MessengerLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/next-dev-server.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/next-dev-server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/profilePageComponents/profilePost/common/ThumbnailsUploader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/profilePageComponents/profilePost/common/ThumbnailsUploader.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/next.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/_app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/craco.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/craco.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/Post.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/Post.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/react-app-env.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/react-app-env.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/variables/languagesOptions.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/variables/languagesOptions.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/webpack.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/lib/AxiosInstance.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/lib/AxiosInstance.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/lib/AxiosInstance.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/lib/AxiosInstance.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/api-requests/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/tsconfig.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/500.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/500.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/information/NginXConfigs/api-server-config.md" beforeDir="false" afterPath="$PROJECT_DIR$/information/NginXConfigs/api-server-config.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1473,7 +1440,8 @@
       <workItem from="1672766631470" duration="3136000" />
       <workItem from="1672777813047" duration="13293000" />
       <workItem from="1672802359783" duration="5065000" />
-      <workItem from="1672850916495" duration="2382000" />
+      <workItem from="1672850916495" duration="3355000" />
+      <workItem from="1672863453695" duration="727000" />
     </task>
     <servers />
   </component>
