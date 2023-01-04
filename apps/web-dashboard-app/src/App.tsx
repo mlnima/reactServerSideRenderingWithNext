@@ -44,6 +44,10 @@ function App() {
         }
     }
 
+    useEffect(() => {
+        console.log('process.env:',process.env.NEXT_PUBLIC_PRODUCTION_URL)
+        console.log('process.env:',process.env.secretKey)
+    }, []);
     return (
         <div className="App">
             <GlobalStyles/>

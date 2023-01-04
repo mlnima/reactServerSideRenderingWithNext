@@ -7,17 +7,10 @@ interface AppLayoutPropTypes {
 }
 
 const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
-
-    // const {store} = wrapper.useWrappedStore(rest);
-
     return (
         <AppLayoutInitializer children={children}/>
     );
-
 };
 
 export default AppLayout;
 
-// export default wrapper.withRedux(AppLayout);
-// <Provider store={store}>
-//        </Provider>

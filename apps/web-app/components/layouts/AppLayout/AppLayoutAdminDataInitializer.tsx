@@ -6,14 +6,16 @@ import {useRouter} from "next/router";
 
 const AppLayoutAdminDataInitializer: FC = () => {
     const dispatch = useAppDispatch()
-    const {asPath,pathname} = useRouter()
+    const {asPath, pathname} = useRouter()
 
     useEffect(() => {
+        setTimeout(() => {
+            // dispatch(getUncachedWidgetsForAdmin(null))
+            // dispatch(getUncachedSettingsForAdmin(null))
+        }, 2000)
 
-        dispatch(getUncachedWidgetsForAdmin(null))
-        dispatch(getUncachedSettingsForAdmin(null))
 
-    }, [asPath,pathname]);
+    }, [asPath, pathname]);
 
     return null
 };

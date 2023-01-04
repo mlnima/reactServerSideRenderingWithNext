@@ -1,12 +1,8 @@
-const webpack = require('webpack'); // only add this if you don't have yet
-import dotenv from 'dotenv'
-require('dotenv').config({ path: '../../.env' });
-import { DefinePlugin } from 'webpack'
-
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+console.log('rrrrrrrrrrrrrrrrrrrrrrrrrr')
 module.exports = {
-    plugins: [
-        new DefinePlugin({
-            'process.env': JSON.stringify(dotenv.config().parsed)
-        })
-    ]
+    //other rules
+    resolve: {
+        plugins: [new TsconfigPathsPlugin()],
+    }
 }

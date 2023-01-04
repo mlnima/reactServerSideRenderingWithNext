@@ -1,18 +1,19 @@
-import {Provider} from 'react-redux';
-import {wrapper} from "@store_toolkit/store";
 import MessengerLayoutInitializer from "./MessengerLayoutInitializer";
-// const LoginRegisterPopup = dynamic(() => import('../../includes/LoginRegisterPopup/LoginRegisterPopup'), {ssr: false});
+import {FC} from "react";
 
-const MessengerLayout = ({children,rest}) => {
+interface PropTypes {
+    children:any,
+    rest?:any
+}
 
-    const {store} = wrapper.useWrappedStore(rest);
+const MessengerLayout:FC<PropTypes> = ({children}) => {
 
     return (
-        <Provider store={store}>
-            <div className='MessengerLayout'>
-                <MessengerLayoutInitializer children={children}/>
-            </div>
-        </Provider>
+
+        <div className='MessengerLayout'>
+            <MessengerLayoutInitializer children={children}/>
+        </div>
+
     );
 };
 

@@ -13,8 +13,10 @@ const SiteSettingSetter: FC = () => {
     const settings = useSelector(({settings}: Store) => settings)
 
     useEffect(() => {
-        if (localStorage?.wt) {
-            setRenderAutoLogin(true)
+        if (typeof window !== 'undefined' &&localStorage?.wt) {
+            setTimeout(()=>{
+                setRenderAutoLogin(true)
+            },1000)
         }
     }, []);
 

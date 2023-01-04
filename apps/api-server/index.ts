@@ -41,8 +41,9 @@ const runServer = () => {
     const publicPath = dev ? './public' : '../public';
     const dashboardAppPath = dev ? '../web-dashboard-app/build' : '../../web-dashboard-app/build';
     const dashboardBuiltPath = path.join(__dirname, dashboardAppPath)
+
     server.use('/static', express.static(path.join(__dirname, staticPath), {maxAge: "604800000"}));
-    server.use('/static', express.static(path.join(__dirname, `${dashboardBuiltPath}/static`), {maxAge: "604800000"}));
+    server.use('/static', express.static(`${dashboardBuiltPath}/static`, {maxAge: "604800000"}));
     server.use('/public', express.static(path.join(__dirname, publicPath), {maxAge: "604800000"}));
 
     server.get('/dashboard', (req, res) => {

@@ -90,7 +90,7 @@ const Index = () => {
                 <div className={'content'}>
                     <select className={'custom-select'} ref={languageElement}
                             onChange={e => dispatch(changeActiveEditingLanguage(e.target.value as string))}>
-                        <option value={'default'}>{process.env.REACT_APP_DEFAULT_LOCAL || 'Default'}</option>
+                        <option value={'default'}>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL || 'Default'}</option>
                         {languagesOptions}
                     </select>
 

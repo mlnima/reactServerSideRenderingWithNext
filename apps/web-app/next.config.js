@@ -5,18 +5,19 @@ const rewrites = require('./nextConfigs/rewrites')
 const redirects = require('./nextConfigs/redirects')
 const nextImageConfig = require('./nextConfigs/nextImageConfig')
 
+
 // const MY_PREFIX = /^REACT_APP_/i;
-
-// const transformedEnv = Object.keys(process.env)
-//     .filter(key => MY_PREFIX.test(key))
-//     .reduce((env, key) => {
-//         const craKey = key.replace(MY_PREFIX, "NEXT_PUBLIC_");
-//         env[craKey] = process.env[key];
-//         return env;
-//     }, {});
-
-
-
+//
+// const transformedEnv = Object.entries(process.env)
+//     .filter(([key, value]) => MY_PREFIX.test(key))
+//     .reduce((finalEnvs, current) => {
+//         const envKey = current[0].replace('REACT_APP_', 'NEXT_PUBLIC_')
+//         finalEnvs[envKey] = current[1]
+//         return finalEnvs
+//     }, {})
+//
+//
+// console.log(transformedEnv)
 
 
 const nextConfigs = {
@@ -24,7 +25,7 @@ const nextConfigs = {
     // distDir: '../../.next',
     rewrites,
     reactStrictMode: false,
-    experimental:{appDir: true},
+    experimental: {appDir: true},
     // runtime: 'experimental-edge',
     redirects,
     swcMinify: true,
@@ -33,7 +34,7 @@ const nextConfigs = {
     },
     compiler: {
         styledComponents: true
-    },
+    }
     // env: transformedEnv
 }
 

@@ -9,7 +9,7 @@ import UserProfileImage from "../../UserProfileImage/UserProfileImage";
 
 const AuthenticationLoggedInItems = dynamic(() =>
         import('./AuthenticationLoggedInItems'),
-    {loading: () => <p>Signing in...</p>}
+    {ssr:false}
 )
 
 const AuthenticationStyledDiv = styled.div`
