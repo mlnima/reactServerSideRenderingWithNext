@@ -22,6 +22,7 @@ import Meta from "@components/pages/Meta/Meta";
 import Form from "@components/pages/Form/Form";
 import Translations from "@components/pages/Translations/Translations";
 import General from "@components/pages/Settings/General/General";
+import Widgets from "@components/pages/Design/Widgets/Widgets";
 
 const MainRouter = () => {
     return (
@@ -34,7 +35,22 @@ const MainRouter = () => {
             <Route path="/dashboard/meta" element={<Meta/>}/>
             <Route path="/dashboard/form/:id" element={<Form/>}/>
             <Route path="/dashboard/fileManager" element={<FileManager/>}/>
-            <Route path="/dashboard/design/:section" element={<DesignSection/>}/>
+            <Route path="/dashboard/design/widgets" element={<Widgets/>}/>
+            <Route path="/dashboard/design/topBar"  element={<DesignSection name={'topBarStyle'}/>}/>
+            <Route path="/dashboard/design/header"  element={<DesignSection name={'headerStyle'}/>}/>
+            <Route path="/dashboard/design/navigation"  element={<DesignSection name={'navigationStyle'}/>}/>
+            <Route path="/dashboard/design/postPage"  element={<DesignSection name={'postPageStyle'}/>}/>
+            <Route path="/dashboard/design/postsPage"  element={<DesignSection name={'postsPageStyle'}/>}/>
+            <Route path="/dashboard/design/actorPage"  element={<DesignSection name={'actorPageStyle'}/>}/>
+            <Route path="/dashboard/design/actorsPage"  element={<DesignSection name={'actorsPageStyle'}/>}/>
+            <Route path="/dashboard/design/categoryPage"  element={<DesignSection name={'categoryPageStyle'}/>}/>
+            <Route path="/dashboard/design/categoriesPage"  element={<DesignSection name={'categoriesPageStyle'}/>}/>
+            <Route path="/dashboard/design/tagPage"  element={<DesignSection name={'tagPageStyle'}/>}/>
+            <Route path="/dashboard/design/tagsPage"  element={<DesignSection name={'tagsPageStyle'}/>}/>
+            <Route path="/dashboard/design/cards"  element={<DesignSection name={'cardsCustomStyle'}/>}/>
+            <Route path="/dashboard/design/footer"  element={<DesignSection name={'footerStyle'}/>}/>
+            <Route path="/dashboard/design/customStyles"  element={<DesignSection name={'customStyles'}/>}/>
+            <Route path="/dashboard/design/customColors"  element={<DesignSection name={'customColors'}/>}/>
             <Route path="/dashboard/tools" element={<Tools/>}/>
             <Route path="/dashboard/tools/terminal" element={<Terminal/>}/>
             <Route path="/dashboard/translations" element={<Translations/>}/>

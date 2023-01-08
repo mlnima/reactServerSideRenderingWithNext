@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef, useMemo} from 'react';
+import React, {useEffect, useRef, useMemo} from 'react';
 import TitleDescription from "./TitleDescription/TitleDescription";
 import ActionOnPost from "./ActionOnPost/ActionOnPost";
 import DropDownWidget from "./DropDownWidget/DropDownWidget";
@@ -12,7 +12,7 @@ import styled from "styled-components";
 import { useSelector} from "react-redux";
 import {editPostAction} from "@store/reducers/postsReducer";
 import {getPostAction,defineNewPost,changeActiveEditingLanguage} from "@store/reducers/postsReducer";
-import {DashboardStore, Store} from "typescript-types";
+import {DashboardStore} from "typescript-types";
 import {useAppDispatch} from "@store/hooks";
 
 const AdminPostPageStyledDiv = styled.div`
@@ -21,14 +21,28 @@ const AdminPostPageStyledDiv = styled.div`
   grid-template-columns: 1fr 200px;
   max-width: 100vw;
   .content {
+
+    .language-action{
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px;
+      .language-selector{
+        width: 100px;
+      }
+    }
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-  
-  @media only screen and (min-width: 768px) {
-    grid-template-columns: 1fr 200px;
-    grid-gap: 10px;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  .side{
+    width: 200px;
+    padding: 8px;
+    box-sizing: border-box;
   }
 `
 
@@ -82,17 +96,22 @@ const Index = () => {
     }
 
     return (
-        <>
-            <Link to={'/dashboard/post?new=1'} className={'btn btn-info'}>
-                New Post
-            </Link>
+        <div>
+
             <AdminPostPageStyledDiv className={'admin-post'}>
+
                 <div className={'content'}>
-                    <select className={'custom-select'} ref={languageElement}
-                            onChange={e => dispatch(changeActiveEditingLanguage(e.target.value as string))}>
-                        <option value={'default'}>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL || 'Default'}</option>
-                        {languagesOptions}
-                    </select>
+                    <div className="language-action">
+                        <Link to={'/dashboard/post?new=1'} className={'btn btn-info'}>
+                            New Post
+                        </Link>
+                        <select className={'custom-select language-selector'} ref={languageElement}
+                                onChange={e => dispatch(changeActiveEditingLanguage(e.target.value as string))}>
+                            <option value={'default'}>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL || 'Default'}</option>
+                            {languagesOptions}
+                        </select>
+                    </div>
+
 
                     <TitleDescription onChangeHandler={onTranslatedInputChangeHandler}
                                       onDescriptionChangeHandler={onDescriptionChangeHandler}
@@ -103,7 +122,7 @@ const Index = () => {
 
                 </div>
 
-                <div className={'side'}>
+                <aside className={'side'}>
                     <DropDownWidget  component={ActionOnPost} title={post?.status}/>
                     <DropDownWidget  component={Format} title={'Format'}/>
                     <DropDownWidget  component={Meta} type={'categories'} title={'Post Category'}/>
@@ -116,10 +135,10 @@ const Index = () => {
 
                     <DropDownWidget  component={RatingOption} title={'Rating'}/>
 
-                </div>
+                </aside>
 
             </AdminPostPageStyledDiv>
-        </>
+        </div>
     );
 };
 

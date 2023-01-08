@@ -22,6 +22,7 @@ import {PostStateTypes} from "./src/storeTypes/PostsState";
 import {SettingsState} from "./src/storeTypes/SettingsState";
 import {Store} from "./src/storeTypes/Store";
 import {DashboardStore} from "./src/dashboardStoreTypes/DashboardStore";
+import {MessengerStore} from "./src/messengerStoreTypes/MessengerStore";
 import {UserState} from "./src/storeTypes/UserState";
 import {WidgetsState} from "./src/storeTypes/WidgetsState";
 import {Post} from "./src/Post";
@@ -70,6 +71,7 @@ export type {
     SettingsState,
     Store,
     DashboardStore,
+    MessengerStore,
     Post,
     Meta,
     UserState,

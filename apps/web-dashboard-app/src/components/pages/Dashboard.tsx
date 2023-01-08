@@ -37,7 +37,7 @@ const Dashboard: FC<PropTypes> = (props) => {
             },
             {
                 name: 'Posts',
-                pathURL: '/dashboard/assets?assetsType=posts'
+                pathURL: '/dashboard/dashboard/assets?assetsType=posts&size=20'
             },
             {
                 name: 'Users',

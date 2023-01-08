@@ -2,7 +2,6 @@ import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {loading, setAlert} from "./globalStateReducer";
 import {AxiosError, AxiosResponse} from "axios";
 import {RootState} from "../store";
-
 import getUsers from "api-requests/src/dashboard/users/getUsers";
 import generateNewAPIKey from "api-requests/src/dashboard/users/generateNewAPIKey";
 import getUser from "api-requests/src/dashboard/users/getUser";

@@ -9,116 +9,39 @@ import ImageGallery from "./ImageGallery/ImageGallery";
 import ProductPrice from "./ProductPrice/ProductPrice";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {DashboardStore, Store} from "typescript-types";
+import {DashboardStore} from "typescript-types";
 import {FC} from "react";
 
 let StyledDiv = styled.div`
   width: 100%;
   padding: 8px;
   box-sizing: border-box;
-  border: .1px solid rgba(0, 0, 0, .2);
   background-color: var(--secondary-background-color, #181818);
   color: var(--secondary-text-color, #ccc);
 
   .form-control-input {
-    width: 95%;
-  }
-
-
-  .saveBtn {
-    display: flex;
-    justify-content: center;
-
-    .SaveVideoDataBtn {
-      background-color: #0085ba;
-      color: white;
-      outline: none;
-
-      padding: 5px 20px;
-      font-size: large;
-
-    }
+    box-sizing: border-box;
   }
 
   .VideoInformationSection, .post-information-section {
     display: grid;
-    grid-template-columns: 30% 1fr;
+    grid-template-columns: 200px 1fr;
     align-items: center;
+    padding: 8px;
+    box-sizing: border-box;
 
     .title {
       padding: 2px;
       font-size: small;
-      @media only screen and (min-width: 768px) {
-        font-size: medium;
-      }
     }
 
-    .editor {
-      width: 100%;
-
-      iframe {
-        width: 100%;
-        height: auto;
-        @media only screen and (min-width: 768px) {
-          width: 100%;
-          min-height: 400px;
-        }
-      }
-
-      img {
-        width: 240px;
-        height: auto;
-        @media only screen and (min-width: 768px) {
-          width: 100%;
-          min-height: 400px;
-        }
-      }
-
-      .option {
-        display: flex;
-        align-items: center;
-      }
-
-      select {
-        padding: 4px;
-      }
-
-      .textInput {
-        outline: none;
-        padding: 3px 5px;
-        height: 30px;
-        width: 90%;
-      }
-
-      .textInputWithUpload {
-        outline: none;
-        padding: 3px 5px;
-        height: 30px;
-        width: 80%;
-
-      }
-
-      .TextInput {
-
-
-      }
-
-      .uploadBtn {
-        outline: none;
-        padding: 3px 5px;
-        width: 200px;
-        height: 30px;
-        margin: 0 3px;
-      }
-
-      .textareaInput {
-        outline: none;
-        padding: 3px 5px;
-        height: 30px;
-        width: 90%;
-        min-height: 200px;
-      }
+    iframe {
+      padding: 8px;
+      box-sizing: border-box;
+      width: 50%;
+      aspect-ratio: 16/9;
     }
+    
   }
 `
 
@@ -161,10 +84,6 @@ const PostInformation: FC<PropTypes> = (props) => {
         </StyledDiv>
     );
 };
+
 export default PostInformation;
 
-//
-// <TextInputWithUploadBtn type='thumbnail' onChangeHandler={props.onChangeHandler} thumbnailsType={true} name='mainThumbnail'
-//                         title='Main thumbnail' rendering={true}/>
-// <TextInputWithUploadBtn name='VideoTrailerUrl' title='Video Trailer Url' rendering={post.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
-// <TextInputWithUploadBtn type='video' {...props} name='videoUrl' title='Video Url' rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler}/>

@@ -1,21 +1,18 @@
-import {FC, useEffect} from "react";
+import {FC} from "react";
 import styled from "styled-components";
 import StyleEditor from "@components/common/StyleEditor";
-import {useParams} from "react-router-dom";
+import {convertVariableNameToName} from "custom-util";
 
 const Style = styled.div``;
 
 interface PropTypes {
-
+name?:any
 }
 
-const DesignSection: FC<PropTypes> = ({}) => {
-    let {section} = useParams();
-    // useEffect(() => {
-    //     console.log(section)
-    // }, [section]);
+const DesignSection: FC<PropTypes> = ({name}) => {
+
     return (
-        <StyleEditor name={`${section}Style`} title='Top Bar Design :'/>
+        <StyleEditor name={name} title={convertVariableNameToName(name)}/>
     )
 };
 export default DesignSection;

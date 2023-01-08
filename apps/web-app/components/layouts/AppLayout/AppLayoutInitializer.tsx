@@ -9,9 +9,8 @@ import styled from "styled-components";
 import AppLayoutAdminDataInitializer from "./AppLayoutAdminDataInitializer";
 import {closeAlert} from "@store_toolkit/clientReducers/globalStateReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
-const HeaderWidgetArea = dynamic(() => import('../../widgetsArea/HeaderWidgetArea/HeaderWidgetArea'));
-const TopBarWidgetArea = dynamic(() => import('../../widgetsArea/TopBarWidgetArea/TopBarWidgetArea'));
-const NavigationWidgetArea = dynamic(() => import('../../widgetsArea/NavigationWidgetArea/NavigationWidgetArea'));
+import AppLayoutHeader from "@components/layouts/AppLayout/AppLayoutHeader/AppLayoutHeader";
+
 const FooterWidgetArea = dynamic(() => import('../../widgetsArea/FooterWidgetArea/FooterWidgetArea'));
 const AlertBox = dynamic(() => import('../../global/commonComponents/AlertBox/AlertBox'), {ssr: false});
 const AdminTools = dynamic(() => import('../../includes/AdminTools/AdminTools'), {ssr: false});
@@ -25,12 +24,8 @@ const BackToTopButton = dynamic(() => import('../../includes/BackToTopButton/Bac
 // const CookiePopup = dynamic(() => import('../../includes/ClientPopActionRequest/CookiePopup'));
 // const BackToTopButton = dynamic(() => import('../../includes/BackToTopButton/BackToTopButton'));
 
-const HeaderStyle = styled.header`
- 
-`
 interface AppLayoutInitializerPropTypes {
     children:React.ReactNode
-
 }
 
 const AppLayoutInitializer: FC<AppLayoutInitializerPropTypes> = ({children}) => {
@@ -61,17 +56,13 @@ const AppLayoutInitializer: FC<AppLayoutInitializerPropTypes> = ({children}) => 
 
     return (
         <>
-            <header>
-                {identity?.topbar === 'enable' && <TopBarWidgetArea/>}
-                {identity?.header === 'enable' && <HeaderWidgetArea/>}
-                {identity?.navigation === 'enable' && <NavigationWidgetArea/>}
-            </header>
+            <AppLayoutHeader/>
 
             <div id={'page'} className={'App'}>
                 {children}
             </div>
 
-            {identity?.footer === 'enable' && <FooterWidgetArea/>}
+            {(identity?.footer === 'enable' || identity?.footer === undefined) && <FooterWidgetArea/>}
             <BackToTopButton/>
 
             <Loading isLoading={isLoading}/>

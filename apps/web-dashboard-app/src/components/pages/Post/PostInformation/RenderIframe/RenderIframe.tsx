@@ -13,6 +13,7 @@ const RenderIframe:FC<PropTypes> = props => {
         return (
             <div className='post-information-section'>
                 <div className="title">
+                    Video Preview
                 </div>
                 <div className="editor">
                     {videoEmbedCode?<iframe src={videoEmbedCode}/>:null}

@@ -52,9 +52,9 @@ const Navigation = () => {
             </div>
 
             <div className={'dashboard-navigation-item'}>
-                <NavLink to="/dashboard/widgets" className={'navigationLink'}>Widgets</NavLink>
-                <NavLink to="/dashboard/posts" className={'navigationLink'}>Posts</NavLink>
-                <NavLink to="/dashboard/Colors" className={'navigationLink'}>Colors</NavLink>
+                <NavLink to="/dashboard/design/widgets" className={'navigationLink'}>Widgets</NavLink>
+                <NavLink to="/dashboard/assets?assetsType=posts&size=20" className={'navigationLink'}>Posts</NavLink>
+                <NavLink to="/dashboard/design/customColors" className={'navigationLink'}>Colors</NavLink>
                 <NavLink to="/dashboard/settings/general" className={'navigationLink'}>General Settings</NavLink>
             </div>
 

@@ -91,7 +91,7 @@ export const getWidgetsAction = createAsyncThunk(
             })
     }
 )
-export const fetchAdminPanelUpdateWidget = createAsyncThunk(
+export const updateWidgetAction = createAsyncThunk(
     'adminPanelWidgets/fetchAdminPanelUpdateWidget',
     async (widgetData: any, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
@@ -107,8 +107,8 @@ export const fetchAdminPanelUpdateWidget = createAsyncThunk(
 )
 
 
-export const fetchAdminPanelAddNewWidget = createAsyncThunk(
-    'adminPanelWidgets/adminPanelAddNewWidget',
+export const createNewWidgetAction = createAsyncThunk(
+    'adminPanelWidgets/createNewWidgetAction',
     async (newWidgetData: Widget, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         return await createNewWidget(newWidgetData)
@@ -131,8 +131,8 @@ export const fetchAdminPanelAddNewWidget = createAsyncThunk(
     }
 )
 
-export const fetchAdminPanelDeleteWidget = createAsyncThunk(
-    'adminPanelWidgets/fetchAdminPanelDeleteWidget',
+export const deleteWidgetAction = createAsyncThunk(
+    'adminPanelWidgets/deleteWidgetAction',
     async ({_id, position}: { _id: string, position: string }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         await deleteWidget(_id)
@@ -169,7 +169,7 @@ export const widgetsSlice = createSlice({
                     adminPanelWidgets: action?.payload,
                 };
             })
-            .addCase(fetchAdminPanelAddNewWidget.fulfilled, (state, action: PayloadAction<any>) => {
+            .addCase(createNewWidgetAction.fulfilled, (state, action: PayloadAction<any>) => {
                 return {
                     ...state,
                     adminPanelWidgets: {

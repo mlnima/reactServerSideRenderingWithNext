@@ -5,8 +5,12 @@ import {useSearchParams} from "react-router-dom";
 import React, {useEffect, useMemo, useState} from "react";
 import paramsObjectGenerator from "../../../../variables/paramsObjectGenerator";
 
-const AssetSizeStyledDiv = styled.select`
+const Styled = styled.div`
   width: 100px;
+  select{
+    width: 100%;
+  }
+
 `
 
 const AssetSize = () => {
@@ -33,14 +37,17 @@ const AssetSize = () => {
 
     return (
         //@ts-ignore
-        <AssetSizeStyledDiv className={'custom-select'}
-                            value={currentSize}
-                            onChange={e => onChangeHandler(e)}>
+        <Styled>
+            <select className={'custom-select'}
+                    value={currentSize}
+                    onChange={e => onChangeHandler(e)}>
 
-            {range.map(unit => {
-                return <option value={unit} key={unit}>{unit}</option>
-            })}
-        </AssetSizeStyledDiv>
+                {range.map(unit => {
+                    return <option value={unit} key={unit}>{unit}</option>
+                })}
+            </select>
+        </Styled>
+
     );
 };
 export default AssetSize;

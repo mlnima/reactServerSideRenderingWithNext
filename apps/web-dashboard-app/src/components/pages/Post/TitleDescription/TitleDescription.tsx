@@ -1,17 +1,14 @@
 import React from 'react';
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {DashboardStore, Store} from "typescript-types";
+import {DashboardStore} from "typescript-types";
 import TextEditors from '@components/common/TextEditors/TextEditors'
 
 let TitleDescriptionStyledDiv = styled.div`
-  //padding: 8px;
   box-sizing: border-box;
   margin: auto;
   width: 100%;
   .form-control-input {
-    width: 95%;
-    //margin: 8px;
     box-sizing: border-box;
   }
   .text-editors{
@@ -19,7 +16,6 @@ let TitleDescriptionStyledDiv = styled.div`
     color: var(--secondary-text-color, #ccc);
     .text-editors-content{
       .quill{
-        //margin-left: -1%;
         .ql-container{
           width: 100%;
           height: 80vh;
@@ -40,7 +36,6 @@ let TitleDescriptionStyledDiv = styled.div`
           }
         }
     }
-
   }
 `
 
@@ -60,12 +55,10 @@ const TitleDescription = (props:any) => {
     return (
         <TitleDescriptionStyledDiv className='title-description'>
             <input type="text" name='title'
-                // @ts-ignore
                    value={(activeEditingLanguage === 'default' ? post?.title : post?.translations?.[activeEditingLanguage]?.title) || ''}
                    className='form-control-input' placeholder='Enter The TextInput Here'
                    onChange={e => props.onTranslatedInputChangeHandler(e)}/>
-            {/*// @ts-ignore*/}
-            <TextEditors value={activeEditingLanguage === 'default' ? post.description : post?.translations?.[activeEditingLanguage]?.description || {}}
+            <TextEditors value={activeEditingLanguage === 'default' ? post?.description : post?.translations?.[activeEditingLanguage]?.description || {}}
                          use={allowsEditorToUse}
                          openWith={openEditorOnLoad}
                          language={'html'}

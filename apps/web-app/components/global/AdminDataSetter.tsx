@@ -1,9 +1,9 @@
 import React, {FC, useEffect} from 'react';
 import {useRouter} from "next/router";
 import Head from 'next/head'
-import {adminPanelGetSettings} from "@store_toolkit/adminReducers/adminPanelSettingsReducer";
-import {fetchCustomPages} from "@store_toolkit/adminReducers/adminPanelGlobalStateReducer";
-import {fetchAdminPanelGetWidgets} from "@store_toolkit/adminReducers/adminWidgetsReducer";
+// import {adminPanelGetSettings} from "@store_toolkit/../../../../trash/oldAdminPagesAndComponents/store/adminReducers/adminPanelSettingsReducer";
+// import {fetchCustomPages} from "@store_toolkit/../../../../trash/oldAdminPagesAndComponents/store/adminReducers/adminPanelGlobalStateReducer";
+// import {fetchAdminPanelGetWidgets} from "@store_toolkit/../../../../trash/oldAdminPagesAndComponents/store/adminReducers/adminWidgetsReducer";
 import {getUncachedWidgetsForAdmin} from "@store_toolkit/clientReducers/widgetsReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {useSelector} from "react-redux";
@@ -46,12 +46,12 @@ const AdminDataSetter: FC<AdminDataSetterPropTypes> = ({setUnauthorized}) => {
     const getAndSetDataForAdmin = async () => {
         try {
             if (pathname.includes('/admin')) {
-                dispatch(fetchAdminPanelGetWidgets(null))
-                dispatch(fetchCustomPages(null));
-                dispatch(adminPanelGetSettings(null));
+                // dispatch(fetchAdminPanelGetWidgets(null))
+                // dispatch(fetchCustomPages(null));
+                // dispatch(adminPanelGetSettings(null));
             } else {
                 dispatch(getUncachedWidgetsForAdmin(null))
-                dispatch(adminPanelGetSettings(null));
+                // dispatch(adminPanelGetSettings(null));
             }
         } catch (err) {
             console.log(err)

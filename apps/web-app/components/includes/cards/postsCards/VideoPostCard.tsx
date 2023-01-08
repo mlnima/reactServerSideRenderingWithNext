@@ -42,7 +42,7 @@ const VideoPostCardStyle = styled(DefaultPostCardStyle)`
         overflow: hidden;
         padding: 2.4px 4.8px;
         color: var(--secondary-text-color, #ccc);
-        background-color: var(--secondary-background-color, #ccc);
+        background-color: var(--secondary-background-color, #222);
         border-radius: 3px;
         position: absolute;
         z-index: 1;

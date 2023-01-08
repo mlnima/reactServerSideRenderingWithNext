@@ -2,7 +2,7 @@ import React, {FC} from "react";
 import styled from "styled-components";
 import {useRouter} from "next/router";
 import {useSelector} from "react-redux";
-import {fetchAdminPanelBulkActionPost} from "@store_toolkit/adminReducers/adminPanelPostsReducer";
+// import {fetchAdminPanelBulkActionPost} from "@store_toolkit/../../../../../../../trash/oldAdminPagesAndComponents/store/adminReducers/adminPanelPostsReducer";
 import {updateQueryGenerator} from "@_variables/variables";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {Store} from "typescript-types";
@@ -61,7 +61,7 @@ const EditingActionQuickAccess: FC<PropTypes> = ({role}) => {
     })
 
     const onStatusChangeHandler = (status) => {
-        dispatch(fetchAdminPanelBulkActionPost({ids: [_id], status}))
+        // dispatch(fetchAdminPanelBulkActionPost({ids: [_id], status}))
         updateQueryGenerator(query, push, pathname)
     }
 
