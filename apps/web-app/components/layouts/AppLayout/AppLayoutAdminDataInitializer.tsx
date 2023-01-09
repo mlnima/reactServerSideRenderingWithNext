@@ -1,7 +1,7 @@
 import {FC, useEffect} from "react";
-import {useAppDispatch} from "../../../store_toolkit/hooks";
-import {getUncachedWidgetsForAdmin} from "../../../store_toolkit/clientReducers/widgetsReducer";
-import {getUncachedSettingsForAdmin} from "../../../store_toolkit/clientReducers/settingsReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
+import {getUncachedWidgetsForAdmin} from "@store_toolkit/clientReducers/widgetsReducer";
+import {getUncachedSettingsForAdmin} from "@store_toolkit/clientReducers/settingsReducer";
 import {useRouter} from "next/router";
 
 const AppLayoutAdminDataInitializer: FC = () => {
@@ -10,8 +10,8 @@ const AppLayoutAdminDataInitializer: FC = () => {
 
     useEffect(() => {
         setTimeout(() => {
-            // dispatch(getUncachedWidgetsForAdmin(null))
-            // dispatch(getUncachedSettingsForAdmin(null))
+            dispatch(getUncachedWidgetsForAdmin(null))
+            dispatch(getUncachedSettingsForAdmin(null))
         }, 2000)
 
 

@@ -41,7 +41,6 @@ const BackToTopButton = () => {
         }
     }
 
-
     if (showButton) {
         return (
             <BackToTopButtonStyledDiv onClick={() => scrollEvent()} title="Back to top">

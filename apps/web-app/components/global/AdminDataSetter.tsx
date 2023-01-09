@@ -45,14 +45,7 @@ const AdminDataSetter: FC<AdminDataSetterPropTypes> = ({setUnauthorized}) => {
 
     const getAndSetDataForAdmin = async () => {
         try {
-            if (pathname.includes('/admin')) {
-                // dispatch(fetchAdminPanelGetWidgets(null))
-                // dispatch(fetchCustomPages(null));
-                // dispatch(adminPanelGetSettings(null));
-            } else {
-                dispatch(getUncachedWidgetsForAdmin(null))
-                // dispatch(adminPanelGetSettings(null));
-            }
+            dispatch(getUncachedWidgetsForAdmin(null))
         } catch (err) {
             console.log(err)
         }

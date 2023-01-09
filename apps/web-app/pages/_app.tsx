@@ -1,6 +1,5 @@
-import type {FC} from 'react'
-import type {AppProps} from 'next/app'
-import {useMemo} from "react";
+import type {FC} from 'react';
+import type {AppProps} from 'next/app';
 import {useRouter} from "next/router";
 import dynamic from "next/dynamic";
 import {Provider} from 'react-redux';
@@ -13,22 +12,24 @@ const MyApp: FC<AppProps> = ({Component, ...rest}) => {
     const {asPath} = useRouter()
     const {store} = wrapper.useWrappedStore(rest);
 
-    const activeEnvironment = useMemo(() => {
-        return /\/messenger|\/chatroom/g.test(asPath) ? 'messenger' :
-                'client'
-    }, [asPath])
-
-    const ActiveLayout = useMemo(() => {
-        return  activeEnvironment === 'messenger' ? MessengerLayout : AppLayout
-    }, [asPath])
-
+    if (/\/messenger|\/chatroom/g.test(asPath)){
         return (
-                <Provider store={store}>
-                    <ActiveLayout rest={rest}>
-                        <Component {...rest.pageProps} />
-                    </ActiveLayout>
-                </Provider>
+            <Provider store={store}>
+                <MessengerLayout rest={rest}>
+                    <Component {...rest.pageProps} />
+                </MessengerLayout>
+            </Provider>
         )
+    }else {
+        return (
+            <Provider store={store}>
+                <AppLayout rest={rest}>
+                    <Component {...rest.pageProps} />
+                </AppLayout>
+            </Provider>
+        )
+    }
+
 
 };
 

@@ -2,9 +2,9 @@ import {useSelector} from "react-redux";
 import {Store} from "typescript-types";
 import dynamic from "next/dynamic";
 
-const HeaderWidgetArea = dynamic(() => import('../../../widgetsArea/HeaderWidgetArea/HeaderWidgetArea'));
-const TopBarWidgetArea = dynamic(() => import('../../../widgetsArea/TopBarWidgetArea/TopBarWidgetArea'));
-const NavigationWidgetArea = dynamic(() => import('../../../widgetsArea/NavigationWidgetArea/NavigationWidgetArea'));
+const HeaderWidgetArea = dynamic(() => import('../../widgetsArea/HeaderWidgetArea/HeaderWidgetArea'));
+const TopBarWidgetArea = dynamic(() => import('../../widgetsArea/TopBarWidgetArea/TopBarWidgetArea'));
+const NavigationWidgetArea = dynamic(() => import('../../widgetsArea/NavigationWidgetArea/NavigationWidgetArea'));
 
 const AppLayoutHeader = ({}) => {
 

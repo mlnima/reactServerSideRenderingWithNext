@@ -5,7 +5,12 @@
   "private": true,
   "workspaces": [
     "packages/*",
-    "apps/*"
+    "apps/api-server",
+    "apps/custom-scripts",
+    "apps/sitemaps-generator",
+    "apps/socket-server",
+    "apps/web-app",
+    "apps/web-dashboard-app"
   ],
   "scripts": {
     "graph": "turbo run build test lint --graph=graph.jpg",

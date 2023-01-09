@@ -20,304 +20,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayoutHeader/AppLayoutHeader.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/AddWidgetMenu/AddWidgetMenu.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/AddWidgetMenu/WidgetExporter/WidgetExporter.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/AddWidgetMenu/WidgetImporter/WidgetImporter.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/AddWidgetMenu/defaultWidgetsData.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetGroupByPosition.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/ActionButtons.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/AdvertiseWidgetModelFields.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/CountInput/CountInput.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/DayModeNightModeFields/DayModeNightModeFields.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/DefaultFields.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/ExportWidget/ExportWidget.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/FormTypeWidgetModelFields/AddFormConditional.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/FormTypeWidgetModelFields/FieldPreview.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/FormTypeWidgetModelFields/FormTypeWidgetModelFields.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/ImagesSliderTypeWidgetModelFields/ImagesSliderTypeWidgetModelFields.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/LinkTypeWidgetModelFields/LinkTypeWidgetModelFields.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/LogoTypeWidgetModelFields/LogoTypeWidgetModelFields.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/MediaWidgetType/MediaWidgetType.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/MenuWidgetModelFields/MenuWidgetEditForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/MenuWidgetModelFields/MenuWidgetModelFields.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/MenuWidgetModelFields/MenuWidgetModelFieldsPreview.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/MenuWidgetModelFields/MenuWidgetSubMenuModelFieldsPreview.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/MenuWidgetModelFields/subMenuComponenets/EditSubMenuForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/MultipleLinkWidgetModelFields/MultipleLinkWidgetModelFields.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/MultipleLinkWidgetModelFields/MultipleLinkWidgetSingleLinkPreview.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/RenderTitleAndRedirectLink/RenderTitleAndRedirectLink.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/SearchTypeInputFields/SearchTypeInputFields.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/SelectFieldForWidget/SelectFieldForWidget.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/SelectedMetaIdForPostWidget/SelectedMetaIdForPostWidget.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/SliderWidgetFields/SliderWidgetFields.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/SwiperWidgetFields/SwiperWidgetFields.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/SwiperWidgetFields/swiperDefaultData.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/TextInputFieldForWidget/TextInputFieldForWidget.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/TextMediaWidgetType/TextMediaWidgetType.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/TextWidgetTypeFields/TextWidgetTypeFields.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/UniqueFields.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/WidgetHeaderControl/WidgetHeaderControl.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/WidgetModel.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/WidgetModelStyle.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/WidgetMonacoEditor.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/WidgetPreview/WidgetPreview.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetPositionsSelect.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/Widgets.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/.eslintrc.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/config/env.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/config/getHttpsConfig.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/config/jest/babelTransform.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/config/jest/cssTransform.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/config/jest/fileTransform.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/config/modules.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/config/paths.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/config/webpack.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/config/webpack/persistentCache/createEnvironmentHash.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/config/webpackDevServer.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/craco.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/public/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/public/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/public/logo192.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/public/logo512.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/public/manifest.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/public/robots.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/scripts/build.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/scripts/start.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/scripts/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/App.test.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/App.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/components/common/MonacoEditor.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/components/common/StyleEditor.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/components/common/TextEditors/TextEditorMonacoEditor/TextEditorMonacoEditor.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/components/common/TextEditors/TextEditorSunEditor/TextEditorSunEditor.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/components/common/TextEditors/TextEditors.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/components/layouts/Main/Main.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/components/layouts/Main/MainComponentsWrapper.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/components/layouts/Navigation/Menu.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/components/layouts/Navigation/Navigation.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/components/layouts/Navigation/menuItems.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/components/layouts/RootLayout.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/components/pages/Login.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/components/pages/NotFound.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/components/routers/MainRouter.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/global/style/GlobalStyles.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/index.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/logo.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/react-app-env.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/reportWebVitals.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/setupTests.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/store/hooks.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/store/reducers/globalStateReducer.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/store/reducers/settingsReducer.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/store/reducers/usersReducer.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/store/store.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/variables/_getMultipleSettingsQueryGenerator.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/variables/languagesOptions.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/variables/onChangeInputValueCorrector.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/variables/paramsObjectGenerator.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/variables/paramsQueryGenerator.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/variables/qualityConvertor.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/src/variables/updateQueryGenerator.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/tsconfig.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/tsconfig.paths.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-messenger-app/webpack.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/typescript-types/src/messengerStoreTypes/MessengerStore.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/typescript-types/src/messengerStoreTypes/UsersState.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api-server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/custom-scripts/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/custom-scripts/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/sitemaps-generator/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/sitemaps-generator/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/socket-server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/socket-server/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/AdminFooter/AdminFooter.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/AdminPanelMainMenu/AdminPanelMainMenu.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/AdminPanelTopBar/AdminActionMenu/AdminActionMenu.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/AdminPanelTopBar/AdminPanelTopBar.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/AdminPanelTopBar/TopbarQuickAccess/TopbarQuickAccess.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/Analytics/Analytics.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/FileManagerComponents/CreateNewFileFolderPop/CreateNewFileFolderPop.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/FileManagerComponents/FileManagerArea/FileManagerArea.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/FileManagerComponents/FileManagerControl/FileManagerControl.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/FileManagerComponents/UploadedPopView/UploadedFilePreviewImage.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/FileManagerComponents/UploadedPopView/UploadedFilePreviewText.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/FileManagerComponents/UploadedPopView/UploadedFilePreviewVideo.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/FileManagerComponents/UploadedPopView/UploadedPopView.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/MonacoEditor/MonacoEditor.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/PostComponents/ActionOnPost/ActionOnPost.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/PostComponents/DropDownWidget/DropDownWidget.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/PostComponents/Format/Format.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/PostComponents/ImagePreview/ImagePreview.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/PostComponents/Meta/Meta.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/PostComponents/PostInformation/Duration/Duration.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/PostComponents/PostInformation/ImageGallery/ImageGallery.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/PostComponents/PostInformation/PostInformation.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/PostComponents/PostInformation/ProductPrice/ProductPrice.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/PostComponents/PostInformation/Quality/Quality.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/PostComponents/PostInformation/RatingAndViews/RatingAndViews.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/PostComponents/PostInformation/RenderIframe/RenderIframe.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/PostComponents/PostInformation/TextAreaComponent/TextAreaComponent.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/PostComponents/PostInformation/TextInput/TextInput.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/PostComponents/PostInformation/UploadFileBtn/uploadFileBtn.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/PostComponents/PostInformation/VideoEmbedCode/VideoEmbedCode.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/PostComponents/PostInformation/VideoUrls/VideoUrls.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/PostComponents/RatingOption/RatingOption.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/PostComponents/TitleDescription/TitleDescription.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/TextEditors/TextEditorMonacoEditor/TextEditorMonacoEditor.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/TextEditors/TextEditorSunEditor/TextEditorSunEditor.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/TextEditors/TextEditors.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/assetComponents/TableBody/TableBody.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItem.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItemDirectAction/TableBodyItemDirectAction.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItemSection/RenderArraySection.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItemSection/TableBodyItemSection.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/assetComponents/TableControls/AssetBulkAction.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/assetComponents/TableControls/AssetPagination.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/assetComponents/TableControls/AssetSearch.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/assetComponents/TableControls/AssetSize.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/assetComponents/TableControls/AssetStatusNavigation.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/assetComponents/TableControls/PostsByMeta.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/assetComponents/TableControls/PostsTypes.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/assetComponents/TableControls/TableControls.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/assetComponents/TableHeader/TableHeader.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/assetComponents/tableBodyItemProperties.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/design/StyleSection/StyleSection.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/eCommerceSettingsPageComponents/EcommerceSettingsInputSection/EcommerceSettingsInputSection.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/pagesComponents/settings/general/TitleDescriptionSettingFields.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetMenu.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/AddWidgetMenu/WidgetExporter/WidgetExporter.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/AddWidgetMenu/WidgetImporter/WidgetImporter.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/AddWidgetMenu/defaultWidgetsData.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/ActionButtons.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/AdvertiseWidgetModelFields.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/CountInput/CountInput.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/DayModeNightModeFields/DayModeNightModeFields.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/DefaultFields.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/ExportWidget/ExportWidget.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/AddFormConditional.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/FieldPreview.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/FormTypeWidgetModelFields.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/ImagesSliderTypeWidgetModelFields/ImagesSliderTypeWidgetModelFields.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/LinkTypeWidgetModelFields/LinkTypeWidgetModelFields.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/LogoTypeWidgetModelFields/LogoTypeWidgetModelFields.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/MediaWidgetType/MediaWidgetType.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/MenuWidgetEditForm.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/MenuWidgetModelFields.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/MenuWidgetModelFieldsPreview.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/MenuWidgetSubMenuModelFieldsPreview.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/subMenuComponenets/EditSubMenuForm.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/MultipleLinkWidgetModelFields/MultipleLinkWidgetModelFields.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/MultipleLinkWidgetModelFields/MultipleLinkWidgetSingleLinkPreview.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/RenderTitleAndRedirectLink/RenderTitleAndRedirectLink.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/SearchTypeInputFields/SearchTypeInputFields.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/SelectFieldForWidget/SelectFieldForWidget.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/SelectedMetaIdForPostWidget/SelectedMetaIdForPostWidget.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/SliderWidgetFields/SliderWidgetFields.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/SwiperWidgetFields/SwiperWidgetFields.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/SwiperWidgetFields/swiperDefaultData.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/TextInputFieldForWidget/TextInputFieldForWidget.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/TextMediaWidgetType/TextMediaWidgetType.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/TextWidgetTypeFields/TextWidgetTypeFields.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/UniqueFields.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/WidgetHeaderControl/WidgetHeaderControl.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/WidgetModelStyle.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/WidgetMonacoEditor.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetModel/WidgetPreview/WidgetPreview.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/adminIncludes/widgetsModel/WidgetPositionsSelect/WidgetPositionsSelect.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/AdminDataSetter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/global/AdminDataSetter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/AdminTools/AdminTools.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/AdminTools/AdminTools.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/VideoPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/VideoPostCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/layouts/AdminLayout/AdminLayout.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/layouts/AdminLayout/AdminLayoutInitializer.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayoutInitializer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayoutInitializer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/EditingActionQuickAccess.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/EditingActionQuickAccess.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/BackToTopButton/BackToTopButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/BackToTopButton/BackToTopButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayoutAdminDataInitializer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayoutAdminDataInitializer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayoutHeader/AppLayoutHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayoutHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayoutInitializer.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/_app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/assets/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/design/actorPage/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/design/actorsPage/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/design/cards/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/design/categoriesPage/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/design/categoryPage/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/design/customColors/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/design/customStyles/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/design/footer/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/design/header/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/design/metasPage/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/design/navigation/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/design/postPage/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/design/postsPage/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/design/tagPage/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/design/tagsPage/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/design/topBar/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/design/widgets/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/design/widgets/widget/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/exporter/postsExporter/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/fileManager/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/form/[formId].tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/importer/content/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/importer/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/importer/postsImporter/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/importer/youtube/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/meta/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/page/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/post/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/settings/customScript/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/settings/eCommerceSettings/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/settings/general/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/settings/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/settings/membershipSettings/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/settings/socialMediaSettings/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/tools/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/tools/terminal/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/translations/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/user/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/admin/users/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/messenger/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/messenger/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminReducers/adminCommentsReducer.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminReducers/adminPanelFileManagerReducer.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminReducers/adminPanelFormsReducer.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminReducers/adminPanelGlobalStateReducer.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminReducers/adminPanelOrdersReducer.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminReducers/adminPanelPagesReducer.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminReducers/adminPanelPostsReducer.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminReducers/adminPanelSettingsReducer.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminReducers/adminPanelUsersReducer.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminReducers/adminTerminalReducer.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminReducers/adminWidgetsReducer.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/adminStore.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/hooks.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/hooks.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/common/TextEditors/TextEditors.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/common/TextEditors/TextEditors.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Main/Main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Main/Main.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Navigation/Navigation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Navigation/Navigation.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Assets/TableControls/AssetSize.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Assets/TableControls/AssetSize.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Dashboard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/DesignSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/DesignSection.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/Post.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/Post.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/PostInformation/PostInformation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/PostInformation/PostInformation.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/PostInformation/RenderIframe/RenderIframe.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/PostInformation/RenderIframe/RenderIframe.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/TitleDescription/TitleDescription.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/TitleDescription/TitleDescription.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/routers/MainRouter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/routers/MainRouter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/usersReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/usersReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/widgetsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/widgetsReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/information/NginXConfigs/Nginx.md" beforeDir="false" afterPath="$PROJECT_DIR$/information/NginXConfigs/Nginx.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/information/NginXConfigs/media-server-config.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/api-requests/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/tsconfig.tsbuildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-server-util/tsconfig.tsbuildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/custom-util/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/tsconfig.tsbuildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/tsconfig.tsbuildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/typescript-types/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/typescript-types/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/tmp-1-1586713924904" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/tmp-2-1586714138139" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/tmp-3-1586714146981" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -397,11 +111,11 @@
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-dashboard-app\src\components\common" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-app\components\layouts\AppLayout" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\trash\oldAdminPagesAndComponents" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\trash\oldAdminPagesAndComponents\components" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\trash\oldAdminPagesAndComponents\store" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\trash\oldAdminPagesAndComponents\pages" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-dashboard-app\src\components" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -455,9 +169,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
+        <item itemvalue="npm.dev" />
         <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="npm.dev (1)" />
       </list>
@@ -1733,7 +1447,8 @@
       <workItem from="1673048580726" duration="322000" />
       <workItem from="1673110997948" duration="595000" />
       <workItem from="1673122586387" duration="3816000" />
-      <workItem from="1673169565965" duration="10997000" />
+      <workItem from="1673169565965" duration="14553000" />
+      <workItem from="1673285332434" duration="5053000" />
     </task>
     <servers />
   </component>
