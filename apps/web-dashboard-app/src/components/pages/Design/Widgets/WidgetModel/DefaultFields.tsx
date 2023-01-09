@@ -53,11 +53,6 @@ const DefaultFields: FC<DefaultFieldsPropTypes> =
             onChangeHandlerWithTranslate(e)
         }
 
-
-
-
-console.log(process.env.NEXT_PUBLIC_LOCALS)
-
         return (
             <>
                 <div className='checkInputFieldForWidget widgetSection'>

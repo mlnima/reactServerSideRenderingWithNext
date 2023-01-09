@@ -90,11 +90,6 @@ const AddWidgetMenu: FC = () => {
         }))
     }
 
-    useEffect(() => {
-        console.log(state)
-    }, [state]);
-
-
     return (
         <AddWidgetMenuStyledDiv className='add-export-widgets'>
 

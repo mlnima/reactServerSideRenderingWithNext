@@ -56,7 +56,7 @@ const MonacoEditor: FC<PropTypes> = (
                 theme={theme || 'vs-dark'}
                 defaultValue={defaultValue || ''}
                 value={editorValue}
-                onMount={e => console.log(e)}
+                // onMount={e => console.log(e)}
                 //@ts-ignore
                 onChange={(value,ev)=>onChangeHandler(value,ev)}
                 className={className || ''}
