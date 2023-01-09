@@ -37,10 +37,20 @@ const runServer = () => {
     server.use(xmlParser());
     server.use(compression({filter: shouldCompress}));
 
+    server.get('/api/admin/settings/clearCaches', adminAuthMiddleware, (req, res) => {
+        //@ts-ignore
+        apiCache.clear(req.params?.collection)
+        res.json({message: 'Deleting Cache Command Executed'})
+    });
+
+
     const staticPath = dev ? './static' : '../static';
     const publicPath = dev ? './public' : '../public';
     const dashboardAppPath = dev ? '../web-dashboard-app/build' : '../../web-dashboard-app/build';
     const dashboardBuiltPath = path.join(__dirname, dashboardAppPath)
+
+
+
 
     server.use('/static', express.static(path.join(__dirname, staticPath), {maxAge: "604800000"}));
     server.use('/static', express.static(`${dashboardBuiltPath}/static`, {maxAge: "604800000"}));
@@ -57,11 +67,7 @@ const runServer = () => {
         res.json({message: 'alive'})
     });
 
-    server.get('/api/admin/settings/clearCaches', adminAuthMiddleware, (req, res) => {
-        //@ts-ignore
-        apiCache.clear(req.params?.collection)
-        res.json({message: 'Deleting Cache Command Executed'})
-    });
+
 
     server.post('/api', (req, res) => {
         res.send('*****************************I am the API Server*****************************')

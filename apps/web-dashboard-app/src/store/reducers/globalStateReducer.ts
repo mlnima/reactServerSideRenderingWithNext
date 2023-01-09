@@ -34,17 +34,16 @@ export const getCustomPagesAction = createAsyncThunk(
     }
 )
 
-export const fetchClearCaches = createAsyncThunk(
-    'adminPanelGlobalState/fetchClearCaches',
-    async ({router} :{router?: any}, thunkAPI) => {
+export const clearCachesAction = createAsyncThunk(
+    'adminPanelGlobalState/clearCachesAction',
+    async ({} , thunkAPI) => {
+        console.log('clearCachesAction')
          thunkAPI.dispatch(loading(true))
         return await clearCaches().then((res: AxiosResponse<unknown | any>) => {
-            thunkAPI.dispatch(setAlert({message: res.data.message || 'done', type: 'success'}))
-            // if (router){
-            //     setTimeout(() => router.reload(), 1000)
-            // }
 
+            thunkAPI.dispatch(setAlert({message: res.data.message || 'done', type: 'success'}))
         }).catch(err => {
+            console.log(err)
             thunkAPI.dispatch(setAlert({message:'Error While Deleting Cache', type: 'error', err}))
         }).finally(() =>  thunkAPI.dispatch(loading(false)))
     }

@@ -3,9 +3,9 @@ import Link from "next/link";
 import styled from "styled-components";
 import Draggable from 'react-draggable';
 import {useRouter} from "next/router";
-// import {fetchClearCaches} from "@store_toolkit/../../../../../trash/oldAdminPagesAndComponents/store/adminReducers/adminPanelGlobalStateReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import SvgRenderer from "../../global/commonComponents/SvgRenderer/SvgRenderer";
+import clearCaches from "api-requests/src/dashboard/clearCaches";
 
 let StyledDiv = styled.div`
   position: fixed;
@@ -52,6 +52,7 @@ const AdminTools: FC = () => {
     const router = useRouter()
     const [open, setOpen] = useState(false)
 
+
     return (
         //@ts-ignore
         <Draggable handle='.handle'>
@@ -97,14 +98,14 @@ const AdminTools: FC = () => {
                                          customClassName={'admin-tools-item-logo'}
                                          color={'var(--primary-button-link-text-color, #000)'}/>
                     </Link>
-                    {/*<button className='admin-tools-item'*/}
-                    {/*        onClick={() => dispatch(fetchClearCaches({router}))}*/}
-                    {/*        onTouchStartCapture={() => dispatch(fetchClearCaches({router}))}>*/}
-                    {/*    <SvgRenderer svgUrl={'/asset/images/icons/eraser-solid.svg'}*/}
-                    {/*                 size={25}*/}
-                    {/*                 customClassName={'admin-tools-item-logo'}*/}
-                    {/*                 color={'var(--primary-button-link-text-color, #000)'}/>*/}
-                    {/*</button>*/}
+                    <button className='admin-tools-item'
+                            onClick={() =>clearCaches().then(()=>router.reload())}
+                            onTouchStartCapture={() => clearCaches().then(()=>router.reload())}>
+                        <SvgRenderer svgUrl={'/asset/images/icons/eraser-solid.svg'}
+                                     size={25}
+                                     customClassName={'admin-tools-item-logo'}
+                                     color={'var(--primary-button-link-text-color, #000)'}/>
+                    </button>
                 </>
                 }
 

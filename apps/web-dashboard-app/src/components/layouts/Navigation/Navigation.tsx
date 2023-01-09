@@ -1,12 +1,16 @@
 import styled from "styled-components";
-import {NavLink} from 'react-router-dom';
-import {useAppDispatch, useAppSelector} from "../../../store/hooks";
+import {NavLink, useNavigate} from 'react-router-dom';
+import {useAppDispatch} from "@store/hooks";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faBars} from '@fortawesome/free-solid-svg-icons'
 import {faUser} from '@fortawesome/free-solid-svg-icons'
-import {setSidebarStatus} from "../../../store/reducers/globalStateReducer";
+import { setSidebarStatus} from "@store/reducers/globalStateReducer";
 import {useSelector} from "react-redux";
 import {DashboardStore} from "typescript-types";
+import React from "react";
+import {faHome} from "@fortawesome/free-solid-svg-icons/faHome";
+import {faEraser} from "@fortawesome/free-solid-svg-icons/faEraser";
+import clearCaches from "api-requests/src/dashboard/clearCaches";
 
 const Style = styled.div`
   display: flex;
@@ -35,7 +39,7 @@ const Style = styled.div`
 `
 
 const Navigation = () => {
-
+    const navigate = useNavigate();
     const dispatch = useAppDispatch()
     const sidebar = useSelector(({globalState}: DashboardStore) => globalState?.sidebar)
     const AdminSideBarOpenCloseHandler = () => {
@@ -49,9 +53,17 @@ const Navigation = () => {
                 <span className={'navigationLink'} onClick={AdminSideBarOpenCloseHandler}>
                     <FontAwesomeIcon icon={faBars}/>
                 </span>
+                <a className={'navigationLink'} href={'/'}  target={'_blank'}>
+                    <FontAwesomeIcon icon={faHome}/>
+                </a>
+                <span className={'navigationLink'} onClick={() => clearCaches().then(()=>navigate(0))}>
+                    <FontAwesomeIcon icon={faEraser}/>
+                </span>
             </div>
 
+
             <div className={'dashboard-navigation-item'}>
+
                 <NavLink to="/dashboard/design/widgets" className={'navigationLink'}>Widgets</NavLink>
                 <NavLink to="/dashboard/assets?assetsType=posts&size=20" className={'navigationLink'}>Posts</NavLink>
                 <NavLink to="/dashboard/design/customColors" className={'navigationLink'}>Colors</NavLink>
