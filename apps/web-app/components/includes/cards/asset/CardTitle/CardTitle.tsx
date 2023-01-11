@@ -6,18 +6,18 @@ const CardTitleStyle = styled.header`
   margin-top: 4px;
   padding: 0 4px;
   box-sizing: border-box;
-  height: 2.2em;
+  //height: 2.2em;
 
   a{
     color: var(--secondary-text-color, #ccc);
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
     cursor: pointer;
     box-sizing: border-box;
-    line-height: 1.1;
+    //line-height: 1.1;
   }
 
   @media only screen and (min-width: 768px) {

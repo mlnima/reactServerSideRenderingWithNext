@@ -1,22 +1,21 @@
 import React, {ChangeEventHandler, FC} from "react";
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
 import {postTypes} from "data-structures";
 import {WidgetData, WidgetSettingsPropTypes} from "typescript-types";
-
-const SearchTypeInputFields = dynamic(() => import('./SearchTypeInputFields/SearchTypeInputFields'));
-const MultipleLinkWidgetModelFields = dynamic(() => import('./MultipleLinkWidgetModelFields/MultipleLinkWidgetModelFields'));
-const SelectFieldForWidget = dynamic(() => import('./SelectFieldForWidget/SelectFieldForWidget'));
-const LogoTypeWidgetModelFields = dynamic(() => import('./LogoTypeWidgetModelFields/LogoTypeWidgetModelFields'));
-const DayModeNightModeFields = dynamic(() => import('./DayModeNightModeFields/DayModeNightModeFields'));
-const FormTypeWidgetModelFields = dynamic(() => import('./FormTypeWidgetModelFields/FormTypeWidgetModelFields'));
-const MenuWidgetModelFields = dynamic(() => import('./MenuWidgetModelFields/MenuWidgetModelFields'));
-const LinkTypeWidgetModelFields = dynamic(() => import('./LinkTypeWidgetModelFields/LinkTypeWidgetModelFields'));
-const MediaWidgetType = dynamic(() => import('./MediaWidgetType/MediaWidgetType'));
-const TextInputFieldForWidget = dynamic(() => import('./TextInputFieldForWidget/TextInputFieldForWidget'), {ssr: false});
-const AdvertiseWidgetModelFields = dynamic(() => import('./AdvertiseWidgetModelFields'));
-const ImagesSliderTypeWidgetModelFields = dynamic(() => import('./ImagesSliderTypeWidgetModelFields/ImagesSliderTypeWidgetModelFields'));
-const SwiperWidgetFields = dynamic(() => import('./SwiperWidgetFields/SwiperWidgetFields'));
-const SliderWidgetFields = dynamic(() => import('./SliderWidgetFields/SliderWidgetFields'));
+import SearchTypeInputFields from './SearchTypeInputFields/SearchTypeInputFields';
+import MultipleLinkWidgetModelFields from './MultipleLinkWidgetModelFields/MultipleLinkWidgetModelFields';
+import SelectFieldForWidget from './SelectFieldForWidget/SelectFieldForWidget';
+import LogoTypeWidgetModelFields from './LogoTypeWidgetModelFields/LogoTypeWidgetModelFields';
+import DayModeNightModeFields from './DayModeNightModeFields/DayModeNightModeFields';
+import FormTypeWidgetModelFields from './FormTypeWidgetModelFields/FormTypeWidgetModelFields';
+import MenuWidgetModelFields from './MenuWidgetModelFields/MenuWidgetModelFields';
+import LinkTypeWidgetModelFields from './LinkTypeWidgetModelFields/LinkTypeWidgetModelFields';
+import MediaWidgetType from './MediaWidgetType/MediaWidgetType';
+import TextInputFieldForWidget from './TextInputFieldForWidget/TextInputFieldForWidget';
+import AdvertiseWidgetModelFields from './AdvertiseWidgetModelFields';
+import ImagesSliderTypeWidgetModelFields from './ImagesSliderTypeWidgetModelFields/ImagesSliderTypeWidgetModelFields';
+import SwiperWidgetFields from './SwiperWidgetFields/SwiperWidgetFields';
+import SliderWidgetFields from './SliderWidgetFields/SliderWidgetFields';
 
 interface UniqueFieldsPropTypes {
     widgetData: any,

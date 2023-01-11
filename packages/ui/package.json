@@ -25,7 +25,7 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "@types/jest": "latest",
+    "@types/jest": "^29.2.5",
     "styled-components": "^5.3.3",
     "eslint": "^8.29.0",
     "jest": "latest",

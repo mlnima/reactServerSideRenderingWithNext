@@ -23,7 +23,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@types/jest": "latest",
+    "@types/jest": "^29.2.5",
     "eslint": "^8.29.0",
     "jest": "latest",
     "compression": "^1.7.4",
