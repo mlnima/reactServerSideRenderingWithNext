@@ -9,9 +9,9 @@ import Link from "next/link";
 
 import SidebarWidgetAreaRenderer from "../../components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import ActorBio from '../../components/includes/cards/CardsRenderer/ActorBio/ActorBio'
-import fetchPosts from "../../store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPosts";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
+import getPostsAction from "@store_toolkit/clientReducers/postsReducer/getPostsAction";
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
@@ -88,7 +88,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     )
 
     await store.dispatch(
-        fetchPosts({
+        getPostsAction({
                 context,
                 metaId: context?.query?.actorId as string,
                 options: {

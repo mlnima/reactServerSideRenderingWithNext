@@ -6,10 +6,10 @@ import {useSelector} from "react-redux";
 import {wrapper} from "../../store_toolkit/store";
 import SidebarWidgetAreaRenderer from "../../components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import React from "react";
-import fetchMetas from "../../store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchMetas";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import MetasCardsRenderer from "../../components/includes/cards/CardsRenderer/MetasCardsRenderer";
 import {Store} from "typescript-types";
+import getMetasAction from "@store_toolkit/clientReducers/postsReducer/getMetasAction";
 
 const PageStyle = styled.div`
   .actors {
@@ -77,7 +77,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         store
     )
 
-    await store.dispatch(fetchMetas({
+    await store.dispatch(getMetasAction({
         data:context.query,
         metaType:'actors'
     }))

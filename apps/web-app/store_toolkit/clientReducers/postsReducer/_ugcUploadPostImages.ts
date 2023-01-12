@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {loading} from "../../../clientReducers/globalStateReducer";
+import {loading} from "../globalStateReducer";
 import deletePostImage from "api-requests/src/client/posts/ugc/deletePostImage";
 import UploadPostImages from "api-requests/src/client/posts/ugc/UploadPostImages";
 

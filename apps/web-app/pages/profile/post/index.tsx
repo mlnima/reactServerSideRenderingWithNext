@@ -12,19 +12,16 @@ import ThumbnailsUploader
     from "../../../components/includes/profilePageComponents/profilePost/common/ThumbnailsUploader";
 import VideoTypeFields
     from "../../../components/includes/profilePageComponents/profilePost/VideoTypeFields/VideoTypeFields";
-import {editPostField, setEditingPostImagesToUpload} from "@store_toolkit/clientReducers/postsReducer";
-import fetchUserEditingPostUpdate
-    from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserEditingPostUpdate";
-import fetchUserEditingPost
-    from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserEditingPost";
+import {editPostField, setEditingPostImagesToUpload} from "@store_toolkit/clientReducers/postsReducer/postsReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import DynamicNoSSR from "../../../components/includes/WidgetsRenderer/DynamicNoSSR";
 import postDataCleanerBeforeSave from "@_variables/post-variables/postDataCleanerBeforeSave";
 import {Store} from "typescript-types";
-import fetchUserCreateNewPost
-    from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchUserCreateNewPost";
 import EventDates from "@components/pagesIncludes/profile/post/event/EventDates";
+import getEditingPostAction from "@store_toolkit/clientReducers/postsReducer/getEditingPostAction";
+import createNewPostAction from "@store_toolkit/clientReducers/postsReducer/createNewPostAction";
+import updatePostAction from "@store_toolkit/clientReducers/postsReducer/updatePostAction";
 
 const AdMode = dynamic(() => import('@components/pagesIncludes/profile/post/ucgAd/AdMode'));
 const Price = dynamic(() => import('@components/pagesIncludes/profile/post/common/Price'));
@@ -104,11 +101,11 @@ const post = () => {
 
     useEffect(() => {
         if (query.id) {
-            dispatch(fetchUserEditingPost(query.id as string));
+            dispatch(getEditingPostAction(query.id as string));
         } else if (!query.id && !!query?.new && !!query?.postType && loggedIn) {
 
             const unpopulatedPostData = postDataCleanerBeforeSave(editingPost)
-            dispatch(fetchUserCreateNewPost({
+            dispatch(createNewPostAction({
                 data: {
                     ...unpopulatedPostData,
                     status: 'pending',
@@ -138,7 +135,7 @@ const post = () => {
             editingPost._id && query.id &&
             (userData?._id === editingPost.author._id as unknown as string || userData.role === 'administrator')
         ) {
-            dispatch(fetchUserEditingPostUpdate({
+            dispatch(updatePostAction({
                 ...editingPost,
                 status: 'pending',
             }))

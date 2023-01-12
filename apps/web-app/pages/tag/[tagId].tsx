@@ -6,9 +6,9 @@ import {wrapper} from "../../store_toolkit/store";
 import {useSelector} from "react-redux";
 import Link from "next/link";
 import SidebarWidgetAreaRenderer from "../../components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
-import fetchPosts from "../../store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPosts";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
+import getPostsAction from "@store_toolkit/clientReducers/postsReducer/getPostsAction";
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
@@ -81,7 +81,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         store)
 
     await store.dispatch(
-        fetchPosts({
+        getPostsAction({
                 context,
                 metaId: context?.query?.tagId as string,
                 options: {

@@ -1,9 +1,9 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {loading} from "../../../clientReducers/globalStateReducer";
+import {loading} from "../globalStateReducer";
 import likePost from "api-requests/src/client/posts/likePost";
 
-export const fetchLikePost = createAsyncThunk(
-    'posts/likePost',
+export const likePostAction = createAsyncThunk(
+    'posts/likePostAction',
     async (id: string, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         return await likePost(id)
@@ -13,4 +13,4 @@ export const fetchLikePost = createAsyncThunk(
     }
 )
 
-export default fetchLikePost
+export default likePostAction

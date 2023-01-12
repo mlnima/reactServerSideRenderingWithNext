@@ -4,15 +4,12 @@ import {useSelector} from "react-redux";
 import dynamic from "next/dynamic";
 import styled from "styled-components";
 import SidebarWidgetAreaRenderer from "../../../components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
-import fetchViewPost
-    from "../../../store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchViewPost";
-import fetchPostComments
-    from "../../../store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPostComments";
-import fetchPost
-    from "../../../store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPost";
 import {useAppDispatch} from "../../../store_toolkit/hooks";
 import _getServerSideStaticPageData from "../../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
+import getPostAction from "@store_toolkit/clientReducers/postsReducer/getPostAction";
+import getPostCommentsAction from "@store_toolkit/clientReducers/postsReducer/getPostCommentsAction";
+import viewPost from "api-requests/src/client/posts/viewPost";
 
 const Soft404 = dynamic(() =>
     import('../../../components/includes/Soft404/Soft404'))
@@ -69,8 +66,10 @@ const postPage = () => {
 
 
     useEffect(() => {
-        _id && dispatch(fetchPostComments(_id as string));
-        _id && dispatch(fetchViewPost(_id));
+        if (_id){
+            dispatch(getPostCommentsAction(_id as string));
+            viewPost(_id);
+        }
     }, [_id])
 
 
@@ -117,7 +116,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     )
 
     await store.dispatch(
-        fetchPost({
+        getPostAction({
             options: {
                 page: 'postPage'
             },

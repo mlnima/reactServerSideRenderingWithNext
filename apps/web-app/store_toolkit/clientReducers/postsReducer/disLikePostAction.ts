@@ -1,9 +1,9 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {loading} from "../../../clientReducers/globalStateReducer";
+import {loading} from "../globalStateReducer";
 import disLikePost from "api-requests/src/client/posts/disLikePost";
 
-export const fetchDisLikePost = createAsyncThunk(
-    'posts/disLikePost',
+export const disLikePostAction = createAsyncThunk(
+    'posts/disLikePostAction',
     async (id: string, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         return await disLikePost(id)
@@ -13,4 +13,4 @@ export const fetchDisLikePost = createAsyncThunk(
     }
 )
 
-export default fetchDisLikePost
+export default disLikePostAction

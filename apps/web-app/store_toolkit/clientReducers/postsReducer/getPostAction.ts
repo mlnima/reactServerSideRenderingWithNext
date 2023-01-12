@@ -1,9 +1,9 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {setHeadData} from "../../../clientReducers/globalStateReducer";
+import {setHeadData} from "../globalStateReducer";
 import {_postCanonicalUrlGenerator} from "@_variables/_clientVariables/clientVariables/_canonicalUrlGenerators";
-import {getPost} from "api-requests";
+import getPost from "api-requests/src/client/posts/getPost";
 
-interface FetchPost {
+interface GetPostAction {
     identifier: string,
     options: {
         page: string
@@ -12,9 +12,9 @@ interface FetchPost {
     context: any
 }
 
-const fetchPost = createAsyncThunk(
-    'posts/fetchPost',
-    async ({context, identifier}: FetchPost, thunkAPI) => {
+const getPostAction = createAsyncThunk(
+    'posts/getPostAction',
+    async ({context, identifier}: GetPostAction, thunkAPI) => {
         const apiData = await getPost(identifier)
         const isDefaultLocale = context.locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL;
         const postTitle = isDefaultLocale ?
@@ -59,4 +59,4 @@ const fetchPost = createAsyncThunk(
 )
 
 
-export default fetchPost
+export default getPostAction

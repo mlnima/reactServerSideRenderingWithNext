@@ -2,14 +2,12 @@ import React, {FC, useRef} from 'react';
 import styled from "styled-components";
 import useTranslation from 'next-translate/useTranslation'
 import {useSelector} from "react-redux";
-import fetchPostComments
-    from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPostComments";
-import fetchNewComment
-    from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchNewComment";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 import {Store} from "typescript-types";
 import UserProfileImage from "../../../../includes/UserProfileImage/UserProfileImage";
+import postNewCommentAction from "@store_toolkit/clientReducers/postsReducer/postNewCommentAction";
+import getPostCommentsAction from "@store_toolkit/clientReducers/postsReducer/getPostCommentsAction";
 
 const CommentFromStyledForm = styled.form`
 
@@ -88,9 +86,9 @@ const CommentFrom: FC = () => {
                 onDocumentId: _id,
             };
             if (_id) {
-                dispatch(fetchNewComment(commentData))
+                dispatch(postNewCommentAction(commentData))
                 bodyInput.current.value = ''
-                dispatch(fetchPostComments(_id))
+                dispatch(getPostCommentsAction(_id))
             }
         } else {
             dispatch(loginRegisterForm('login'))

@@ -7,7 +7,7 @@ import React from "react";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
 import MetasRenderer from "../../components/includes/metasPage/MetasRenderer";
-import getTags from "../../store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/getTags";
+import getTags from "@store_toolkit/clientReducers/postsReducer/getTags";
 
 const PageStyle = styled.div`
   ${({tagsPageStyle}: { tagsPageStyle: string }) => tagsPageStyle || ''}

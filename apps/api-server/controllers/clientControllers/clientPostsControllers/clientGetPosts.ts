@@ -44,15 +44,6 @@ const clientGetPosts =  async (req, res) => {
             //@ts-ignore
         },meta?._id)
 
-        // console.log('findingPostsOptions :',JSON.stringify(findingPostsOptions,null,2))
-
-        // console.log(JSON.stringify(findingPostsOptions, null, '\t'))
-        // const populateMeta = [
-        //     {path: 'actors', select: {'name': 1, 'type': 1}},
-        //     {path: 'categories', select: {'name': 1, 'type': 1, 'imageUrl': 1}},
-        //     {path: 'tags', select: {'name': 1, 'type': 1}}
-        // ]
-
         const totalCount = await postSchema.countDocuments(findingPostsOptions.findPostsQueries).exec();
         const posts = await postSchema.find(findingPostsOptions.findPostsQueries, findingPostsOptions.selectedFields,
             {

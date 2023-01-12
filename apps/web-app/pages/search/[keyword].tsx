@@ -3,11 +3,11 @@ import styled from "styled-components";
 import PostsPageInfo from "../../components/includes/PostsPage/PostsPageInfo";
 import {useRouter} from "next/router";
 import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
-import {wrapper} from "../../store_toolkit/store";
+import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
-import fetchPosts from "../../store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPosts";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
+import getPostsAction from "@store_toolkit/clientReducers/postsReducer/getPostsAction";
 
 let StyledMain = styled.main`
   width: 100%;
@@ -73,7 +73,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     // await store.dispatch(getPosts(context, null, true,null,null,store))
 
     await store.dispatch(
-        fetchPosts({
+        getPostsAction({
                 context,
                 metaId: null,
                 options: {

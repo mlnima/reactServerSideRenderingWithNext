@@ -6,7 +6,7 @@ import {postFieldRequestForCards} from "data-structures";
 import _clientGetPostsQueryGenerator from "@_variables/_clientVariables/clientVariables/_clientGetPostsQueryGenerator";
 import Axios from "@_variables/Axios";
 import {useDispatch} from "react-redux";
-import {setPostsData} from "@store_toolkit/clientReducers/postsReducer";
+import {setPostsData} from "@store_toolkit/clientReducers/postsReducer/postsReducer";
 import PostsPage from "@components/includes/PostsPage/PostsPage";
 
 const PostsCardsRenderer = dynamic(() => import('@components/includes/cards/CardsRenderer/PostsCardsRenderer'));

@@ -6,6 +6,9 @@ import {useSelector} from "react-redux";
 import {updateQueryGenerator} from "@_variables/variables";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {Store} from "typescript-types";
+import {
+    editPostStatusAction
+} from "@store_toolkit/clientReducers/postsReducer/editPostStatusAction";
 
 const EditLinkForAdminStyledDiv = styled.div`
   display: flex;
@@ -61,7 +64,7 @@ const EditingActionQuickAccess: FC<PropTypes> = ({role}) => {
     })
 
     const onStatusChangeHandler = (status) => {
-        // dispatch(fetchAdminPanelBulkActionPost({ids: [_id], status}))
+         dispatch(editPostStatusAction({ids: [_id], status}))
         updateQueryGenerator(query, push, pathname)
     }
 
@@ -76,7 +79,7 @@ const EditingActionQuickAccess: FC<PropTypes> = ({role}) => {
             {
                 role === 'administrator' &&
                 <>
-                    <a className='btn btn-primary' href={`/admin/post?id=${_id}`} target='_blank'>
+                    <a className='btn btn-primary' href={`/dashboard/post?id=${_id}`} target='_blank'>
                         Edit As Admin
                     </a>
                     <span className={'btn btn-info'} onClick={() => onStatusChangeHandler('draft')}>

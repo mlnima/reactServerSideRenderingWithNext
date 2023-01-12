@@ -1,9 +1,9 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {loading} from "../../../clientReducers/globalStateReducer";
+import {loading} from "../globalStateReducer";
 import {PostRaw} from "typescript-types/src/Post";
 import createNewPost from "api-requests/src/client/posts/ugc/createNewPost";
 
-export const fetchUserCreateNewPost = createAsyncThunk(
+export const createNewPostAction = createAsyncThunk(
     'posts/fetchUserEditingPost',
     async ({data}: { data: PostRaw }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
@@ -16,4 +16,4 @@ export const fetchUserCreateNewPost = createAsyncThunk(
     }
 )
 
-export default fetchUserCreateNewPost
+export default createNewPostAction

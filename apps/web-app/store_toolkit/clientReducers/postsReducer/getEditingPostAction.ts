@@ -1,9 +1,9 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {loading} from "../../../clientReducers/globalStateReducer";
+import {loading} from "../globalStateReducer";
 import getEditingPost from "api-requests/src/client/posts/getEditingPost";
 
-export const fetchUserEditingPost = createAsyncThunk(
-    'posts/fetchUserEditingPost',
+export const getEditingPostAction = createAsyncThunk(
+    'posts/getEditingPostAction',
     async (_id: string, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         return await getEditingPost(_id)
@@ -12,4 +12,4 @@ export const fetchUserEditingPost = createAsyncThunk(
     }
 )
 
-export default fetchUserEditingPost
+export default getEditingPostAction

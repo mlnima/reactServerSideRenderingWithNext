@@ -2,7 +2,7 @@ import {FC} from "react";
 import styled from "styled-components";
 import useTranslation from "next-translate/useTranslation";
 import {useAppDispatch} from "@store_toolkit/hooks";
-import attendingToEvent from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/attendToEvent";
+import attendingToEvent from "@store_toolkit/clientReducers/postsReducer/attendToEvent";
 import {useSelector} from "react-redux";
 import {Store} from "typescript-types";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";

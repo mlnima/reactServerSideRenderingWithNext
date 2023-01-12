@@ -1,8 +1,8 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import getPostComments from "api-requests/src/client/comments/getPostComments";
 
-const fetchPostComments = createAsyncThunk(
-    'posts/fetchPostComments',
+const getPostCommentsAction = createAsyncThunk(
+    'posts/getPostCommentsAction',
     async (_id: string, thunkAPI) => {
         return await getPostComments(_id)
             .then(res => {
@@ -13,4 +13,4 @@ const fetchPostComments = createAsyncThunk(
     }
 )
 
-export default fetchPostComments
+export default getPostCommentsAction

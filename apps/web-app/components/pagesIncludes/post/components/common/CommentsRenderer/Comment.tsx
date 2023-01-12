@@ -5,8 +5,7 @@ import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {useRouter} from "next/router";
 import {FC} from "react";
-import deleteCommentByAdminInPostPage
-    from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksDeleteCommentByAdminInPostPage";
+import deleteCommentByAdminInPostPageAction from "@store_toolkit/clientReducers/postsReducer/deleteCommentByAdminInPostPageAction";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {Store, Comment} from "typescript-types";
 
@@ -62,7 +61,7 @@ const Comment: FC<CommentPropTypes> = ({commentData}) => {
     const localeData = locale === 'fa' ? {locale: faIR} : {}
 
     const onDeleteHandler = (id) => {
-        dispatch(deleteCommentByAdminInPostPage([id]))
+        dispatch(deleteCommentByAdminInPostPageAction([id]))
     }
 
     if (commentData?.author?._id && commentData?.createdAt) {

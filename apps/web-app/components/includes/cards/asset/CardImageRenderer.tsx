@@ -1,6 +1,6 @@
 import React, {FC, useMemo, useState} from 'react'
-import {isAbsolutePath,isImageAllowedForNextImage} from "custom-util";
-import Image from 'next/image'
+// import {isAbsolutePath,isImageAllowedForNextImage} from "custom-util";
+// import Image from 'next/image'
 import styled from "styled-components";
 
 interface CardImageNextPropTypes {
@@ -52,15 +52,7 @@ const CardImageRenderer: FC<CardImageNextPropTypes> =
      }) => {
         const [gotError, setGotError] = useState(false)
 
-        // const defaultUrl = useMemo(() => {
-        //     if (gotError) {
-        //         return `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${'/asset/images/default/no-image-available.png'}`
-        //     } else {
-        //         return imageUrl && !isAbsolutePath(imageUrl) ?
-        //             `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${imageUrl}` :
-        //             imageUrl
-        //     }
-        // }, [gotError, imageUrl])
+
         const defaultUrl = useMemo(() => {
             if (gotError) {
                 return `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${'/asset/images/default/no-image-available.png'}`
@@ -73,35 +65,10 @@ const CardImageRenderer: FC<CardImageNextPropTypes> =
             <CardImageRendererStyle postsPerRawForMobile={postsPerRawForMobile}
                                     cardWidth={cardWidth}
                                     className={'card-image'}>
-
-                {/*{(!!defaultUrl && isImageAllowedForNextImage(defaultUrl,process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES) && index >= 1) ?*/}
-                {/*    <Image alt={mediaAlt}*/}
-                {/*           src={defaultUrl}*/}
-                {/*           // loading={'lazy'}*/}
-                {/*           // layout={'fill'}*/}
-                {/*           width={cardWidth}*/}
-                {/*           height={cardWidth/1.333}*/}
-                {/*           className={'card-image-next'}*/}
-                {/*           quality={99}*/}
-                {/*           // objectFit={'cover'}*/}
-                {/*           onError={() => setGotError(true)}*/}
-                {/*    /> :*/}
-                {/*    <img src={defaultUrl}*/}
-                {/*         alt={mediaAlt}*/}
-                {/*         className={'card-image'}*/}
-                {/*        //onError={({currentTarget}) => currentTarget.src = noImageUrl}*/}
-                {/*         onError={() => setGotError(true)}*/}
-                {/*    />*/}
-
-
-
-                {/*}*/}
-
                 <img src={defaultUrl}
                      alt={mediaAlt}
-                     loading="lazy"
+                     loading={index === 0 ?'eager': 'lazy' }
                      className={'card-image'}
-                    //onError={({currentTarget}) => currentTarget.src = noImageUrl}
                      onError={() => setGotError(true)}
                 />
 
@@ -111,3 +78,38 @@ const CardImageRenderer: FC<CardImageNextPropTypes> =
     };
 
 export default CardImageRenderer
+
+
+
+// {(!!defaultUrl && isImageAllowedForNextImage(defaultUrl,process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES) && index >= 1) ?
+//     <Image alt={mediaAlt}
+//            src={defaultUrl}
+//         // loading={'lazy'}
+//         // layout={'fill'}
+//            width={cardWidth}
+//            height={cardWidth/1.333}
+//            className={'card-image-next'}
+//            quality={99}
+//         // objectFit={'cover'}
+//            onError={() => setGotError(true)}
+//     /> :
+//     <img src={defaultUrl}
+//          alt={mediaAlt}
+//          className={'card-image'}
+//         //onError={({currentTarget}) => currentTarget.src = noImageUrl}
+//          onError={() => setGotError(true)}
+//     />
+//
+//
+//
+// }
+
+// const defaultUrl = useMemo(() => {
+//     if (gotError) {
+//         return `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${'/asset/images/default/no-image-available.png'}`
+//     } else {
+//         return imageUrl && !isAbsolutePath(imageUrl) ?
+//             `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${imageUrl}` :
+//             imageUrl
+//     }
+// }, [gotError, imageUrl])

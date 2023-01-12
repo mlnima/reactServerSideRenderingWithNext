@@ -3,13 +3,13 @@ import {useRouter} from "next/router";
 import PaginationComponent from "../../components/includes/PaginationComponent/PaginationComponent";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {wrapper} from "../../store_toolkit/store";
+import {wrapper} from "@store_toolkit/store";
 import dynamic from "next/dynamic";
 import SidebarWidgetAreaRenderer from "../../components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
-import fetchMetas from "../../store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchMetas";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import MetasCardsRenderer from "../../components/includes/cards/CardsRenderer/MetasCardsRenderer";
 import {Store} from "typescript-types";
+import getMetasAction from "@store_toolkit/clientReducers/postsReducer/getMetasAction";
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
@@ -71,7 +71,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         store
     )
 
-    await store.dispatch(fetchMetas({
+    await store.dispatch(getMetasAction({
         data:context.query,
         metaType:'categories'
     }))

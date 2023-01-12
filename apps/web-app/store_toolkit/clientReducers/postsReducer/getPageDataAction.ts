@@ -1,12 +1,12 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import type {GetServerSidePropsContext, PreviewData} from "next";
-import {setHeadData, setNotFoundPage} from "../../../clientReducers/globalStateReducer";
+import {setHeadData, setNotFoundPage} from "../globalStateReducer";
 import {_customPageCanonicalUrlGenerator} from "@_variables/_clientVariables/clientVariables/_canonicalUrlGenerators";
 import {ParsedUrlQuery} from "querystring";
 import getPageData from "api-requests/src/client/custom-pages/getPageData";
 
-const fetchPageData = createAsyncThunk(
-    'posts/fetchPageData',
+const getPageDataAction = createAsyncThunk(
+    'posts/getPageDataAction',
     async (context :GetServerSidePropsContext<ParsedUrlQuery,PreviewData>, thunkAPI) => {
         const pageName = context.query?.pageName
 
@@ -46,4 +46,4 @@ const fetchPageData = createAsyncThunk(
     }
 )
 
-export default fetchPageData
+export default getPageDataAction

@@ -1,8 +1,8 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {getMetas} from "api-requests";
+import getMetas from "api-requests/src/client/metas/getMetas";
 
-const fetchMetas = createAsyncThunk(
-    'posts/fetchMetas',
+const getMetasAction = createAsyncThunk(
+    'posts/getMetasAction',
     async ({data, metaType}: { data: {}, metaType: string }, thunkAPI) => {
         try {
             const apiData = await getMetas(data, metaType)
@@ -16,4 +16,4 @@ const fetchMetas = createAsyncThunk(
     }
 )
 
-export default fetchMetas
+export default getMetasAction

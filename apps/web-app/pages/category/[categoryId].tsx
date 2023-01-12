@@ -3,12 +3,12 @@ import styled from "styled-components";
 import PostsPageInfo from "../../components/includes/PostsPage/PostsPageInfo";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import {wrapper} from "../../store_toolkit/store";
+import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
 import SidebarWidgetAreaRenderer from "../../components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
-import fetchPosts from "../../store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPosts";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
+import getPostsAction from "@store_toolkit/clientReducers/postsReducer/getPostsAction";
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
@@ -85,7 +85,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     )
 
     await store.dispatch(
-        fetchPosts({
+        getPostsAction({
                 context,
                 metaId: context?.query?.categoryId as string,
                 options: {

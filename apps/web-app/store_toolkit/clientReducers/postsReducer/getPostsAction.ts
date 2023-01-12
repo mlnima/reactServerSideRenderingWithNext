@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {getTextDataWithTranslation, textContentReplacer,convertMetasTypeToSingular} from "custom-util";
-import {setHeadData} from "../../../clientReducers/globalStateReducer";
+import {setHeadData} from "../globalStateReducer";
 import {_postsCanonicalUrlGenerator} from "@_variables/_clientVariables/clientVariables/_canonicalUrlGenerators";
 import getPosts from "api-requests/src/client/posts/getPosts";
 
@@ -13,8 +13,8 @@ interface FetchPosts {
     }
 }
 
-const fetchPosts = createAsyncThunk(
-    'posts/fetchPosts',
+const getPostsAction = createAsyncThunk(
+    'posts/getPostsAction',
     async ({context, metaId, options}: FetchPosts, thunkAPI) => {
         //@ts-ignore
         const {settings} = await thunkAPI.getState()
@@ -92,4 +92,4 @@ const fetchPosts = createAsyncThunk(
     }
 )
 
-export default fetchPosts
+export default getPostsAction

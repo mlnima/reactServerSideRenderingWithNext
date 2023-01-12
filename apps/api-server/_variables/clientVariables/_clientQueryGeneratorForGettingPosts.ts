@@ -40,7 +40,9 @@ const _clientQueryGeneratorForGettingPosts = (data, metaId) => {
         sort === 'updatedAt' ? {updatedAt: -1, createdAt: -1} :
             {[sort]: -1}
 
-    const statusQuery = !data.status ?  [{status: 'published'}] : data.status ==='all' ?  []:[]
+    // console.log('data.status',data.status)
+    const statusQuery = (data.status === 'undefined' || data.status === 'published')  ?
+                        [{status: 'published'}] : data.status ==='all' ?  []:[]
 
     return {
         findPostsQueries: {

@@ -1,10 +1,10 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {loading, setAlert} from "../../../clientReducers/globalStateReducer";
+import {loading, setAlert} from "../globalStateReducer";
 import Axios from "@_variables/Axios";
 import deleteCommentByAdmin from "api-requests/src/client/comments/deleteCommentByAdmin";
 
-export const deleteCommentByAdminInPostPage = createAsyncThunk(
-    'posts/deleteCommentByAdminInPostPage',
+export const deleteCommentByAdminInPostPageAction = createAsyncThunk(
+    'posts/deleteCommentByAdminInPostPageAction',
     async (commentsListToDelete: string[], thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         await deleteCommentByAdmin(commentsListToDelete).then((res) => {
@@ -24,4 +24,4 @@ export const deleteCommentByAdminInPostPage = createAsyncThunk(
     }
 )
 
-export default deleteCommentByAdminInPostPage
+export default deleteCommentByAdminInPostPageAction

@@ -1,11 +1,10 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {loading, setAlert} from "../../../clientReducers/globalStateReducer";
-import fetchUserEditingPost
-    from "./_clientPostsAsyncThunksFetchUserEditingPost";
+import {loading, setAlert} from "../globalStateReducer";
 import userUpdatePost from "api-requests/src/client/posts/ugc/userUpdatePost";
+import getEditingPostAction from "@store_toolkit/clientReducers/postsReducer/getEditingPostAction";
 
-const fetchUserEditingPostUpdate = createAsyncThunk(
-    'posts/fetchUserEditingPost',
+const updatePostAction = createAsyncThunk(
+    'posts/updatePostAction',
     async (editedPost:any, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         await userUpdatePost(editedPost).then(res => {
@@ -16,7 +15,7 @@ const fetchUserEditingPostUpdate = createAsyncThunk(
                     message: res.data.message
                 }))
             }
-            thunkAPI.dispatch(fetchUserEditingPost(res.data.post._id))
+            thunkAPI.dispatch(getEditingPostAction(res.data.post._id))
 
         }).catch(error => {
 
@@ -24,4 +23,4 @@ const fetchUserEditingPostUpdate = createAsyncThunk(
     }
 )
 
-export default fetchUserEditingPostUpdate
+export default updatePostAction

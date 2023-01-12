@@ -2,7 +2,7 @@ import React, {FC, useEffect, useRef} from "react";
 import styled from "styled-components";
 import SvgRenderer from "../../../../global/commonComponents/SvgRenderer/SvgRenderer";
 import {useAppDispatch} from "../../../../../store_toolkit/hooks";
-import {_ugcDeletePostImage} from "../../../../../store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_ugcUploadPostImages";
+import {_ugcDeletePostImage} from "@store_toolkit/clientReducers/postsReducer/_ugcUploadPostImages";
 
 const Style = styled.div`
   width: 160px;

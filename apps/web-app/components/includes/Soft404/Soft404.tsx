@@ -2,12 +2,11 @@ import React, {useEffect, useMemo} from "react";
 import useTranslation from 'next-translate/useTranslation'
 import Link from "next/link";
 import styled from "styled-components";
-import {useAppDispatch} from "../../../store_toolkit/hooks";
+import {useAppDispatch} from "@store_toolkit/hooks";
 import Head from 'next/head'
-import fetchPosts
-    from "../../../store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksFetchPosts";
 import PostsPage from "../PostsPage/PostsPage";
 import {useRouter} from "next/router";
+import getPostsAction from "@store_toolkit/clientReducers/postsReducer/getPostsAction";
 
 
 const Soft404StyledDiv = styled.div`
@@ -36,7 +35,7 @@ const Soft404 = () => {
 
 
     useEffect(() => {
-        dispatch(fetchPosts({
+        dispatch(getPostsAction({
             context: {
                 query: {}
             },

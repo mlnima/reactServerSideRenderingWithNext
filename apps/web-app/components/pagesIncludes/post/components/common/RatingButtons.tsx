@@ -2,14 +2,12 @@ import React, {FC, useEffect, useState} from "react";
 import useTranslation from 'next-translate/useTranslation'
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import disLikePost
-    from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksDisLikePost";
-import likePost
-    from "@store_toolkit/_storeVariables/_clientAsyncThunks/_clientPostsAsyncThunks/_clientPostsAsyncThunksLikePost";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {Store} from "typescript-types";
 import SvgRenderer from "../../../../global/commonComponents/SvgRenderer/SvgRenderer";
 import shortNumber from "custom-util/src/math-util/shortNumber";
+import likePostAction from "@store_toolkit/clientReducers/postsReducer/likePostAction";
+import disLikePostAction from "@store_toolkit/clientReducers/postsReducer/disLikePostAction";
 
 const RatingButtonsStyledDiv = styled.div`
   padding: 0 8px;
@@ -117,7 +115,7 @@ const RatingButtons: FC<RatingButtonsPropTypes> = ({rating}) => {
             {rating ?
                 <>
                     <button className='rating-item'
-                            onClick={() => dispatch(likePost(_id))}
+                            onClick={() => dispatch(likePostAction(_id))}
                             disabled={!!isRated}
                             aria-label="like"
                             title={t<string>('Like')}
@@ -129,7 +127,7 @@ const RatingButtons: FC<RatingButtonsPropTypes> = ({rating}) => {
                         <p className='rating-item-value'>{likes}</p>
                     </button>
                     <button className='rating-item'
-                            onClick={() => dispatch(disLikePost(_id))}
+                            onClick={() => dispatch(disLikePostAction(_id))}
                             disabled={!!isRated}
                             aria-label="dislike"
                             title={t<string>('Dislike')}

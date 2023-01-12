@@ -1,7 +1,7 @@
 import {AnyAction, combineReducers, configureStore, ThunkAction} from '@reduxjs/toolkit';
 import {Action} from 'redux';
 import {createWrapper, HYDRATE} from 'next-redux-wrapper';
-import postsSlice from "./clientReducers/postsReducer";
+import postsSlice from "./clientReducers/postsReducer/postsReducer";
 import widgetsSlice from "./clientReducers/widgetsReducer";
 import settingsSlice from "./clientReducers/settingsReducer";
 import userSlice from "./clientReducers/userReducer";
