@@ -67,7 +67,10 @@ const postPage = () => {
 
     useEffect(() => {
         if (_id){
-            dispatch(getPostCommentsAction(_id as string));
+            setTimeout(()=>{
+                dispatch(getPostCommentsAction(_id as string));
+            },1000)
+
             viewPost(_id);
         }
     }, [_id])
