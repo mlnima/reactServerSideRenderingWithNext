@@ -1,6 +1,6 @@
 export interface GlobalState {
     loginRegisterFormPopup: boolean | string,
-    beforeUnload:boolean,
+    isAppInitialized: boolean,
     loading: boolean,
     notFoundPage: boolean,
     headData:{

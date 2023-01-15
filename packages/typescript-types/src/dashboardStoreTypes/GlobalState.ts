@@ -1,6 +1,5 @@
 export interface GlobalState {
     customPages: string[];
-    beforeUnload: boolean,
     loading: boolean,
     alert: {
         active: boolean,

@@ -9,6 +9,8 @@ const PostDescriptionStyledDiv = styled.div`
   color: var(--secondary-text-color, #ccc);
   padding: 8px;
   box-sizing: border-box;
+  border-top : var(--default-border) ;
+  border-bottom : var(--default-border) ;
   @media only screen and (min-width: 768px) {
     max-width: 1300px;
     margin: 0;

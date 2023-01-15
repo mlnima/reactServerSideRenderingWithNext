@@ -23,13 +23,6 @@ const VideoTypePostPageStyle = styled(PostPageStyle)`
       width: 100%;
       .entry-header {
         width: 100%;
-        border-bottom: var(--default-border);
-      }
-
-      .entry-content {
-        .actors-container {
-          border-top: var(--default-border);
-        }
       }
     }
   }

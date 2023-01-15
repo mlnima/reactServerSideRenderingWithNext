@@ -67,6 +67,7 @@ export const getPostsAction = createAsyncThunk(
         thunkAPI.dispatch(loading(true))
         return await getPosts(queriesData)
             .then((res: AxiosResponse<any>) => {
+                console.log(res)
                 return {
                     posts: res.data?.posts,
                     totalCount: res.data?.totalCount

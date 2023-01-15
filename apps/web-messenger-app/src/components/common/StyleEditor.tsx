@@ -4,7 +4,6 @@ import { useSelector} from "react-redux";
 import MonacoEditor from "./MonacoEditor";
 import {DashboardStore, Store} from "typescript-types";
 import {useAppDispatch} from "@store/hooks";
-import input from "web-app/components/global/commonComponents/Input/Input";
 import {editDesign,updateSettingAction} from "@store/reducers/settingsReducer";
 
 const StyleSectionStyledDiv = styled.div`

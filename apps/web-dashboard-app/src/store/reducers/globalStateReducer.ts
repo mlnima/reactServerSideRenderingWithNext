@@ -8,7 +8,6 @@ import clearCaches from "api-requests/src/dashboard/clearCaches";
 
 const initialState : AdminPanelGlobalState = {
     customPages: [],
-    beforeUnload: false,
     sidebar: false,
     loading: false,
     alert: {

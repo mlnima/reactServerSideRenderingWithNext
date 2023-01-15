@@ -31,6 +31,7 @@ const Assets: FC<PropTypes> = ({}) => {
 
     const assetPageData = useSelector(({posts, users, comments, forms, pages}: DashboardStore) => {
         return {
+            totalCount:posts.totalCount,
             posts: posts.posts,
             metas: posts.metas,
             users: users.users,

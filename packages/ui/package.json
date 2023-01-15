@@ -31,6 +31,7 @@
     "jest": "latest",
     "jest-presets": "*",
     "eslint-config-custom": "*",
+    "react-loading": "^2.0.3",
     "tsconfig": "*",
     "typescript": "^4.9.4"
   }

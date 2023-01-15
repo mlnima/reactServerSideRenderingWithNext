@@ -4,7 +4,6 @@ import { useSelector} from "react-redux";
 import MonacoEditor from "./MonacoEditor";
 import {DashboardStore, Store} from "typescript-types";
 import {useAppDispatch} from "@store/hooks";
-import input from "web-app/components/global/commonComponents/Input/Input";
 import {editDesign,updateSettingAction} from "@store/reducers/settingsReducer";
 
 const StyleSectionStyledDiv = styled.div`
@@ -60,8 +59,11 @@ const StyleEditor:FC<PropTypes> = props => {
             {props.name === 'customStyles' ?
                 <div className='style-section-editor'>
                     <p>Sidebar width:</p>
-                    <input type={'number'} name={'sideBarWidth'} placeholder={'default value is 320px'}
-                           value={design?.sideBarWidth || ''} onChange={onChangeHandler}/>
+                    <input type={'number'}
+                           name={'sideBarWidth'}
+                           placeholder={'default value is 320px'}
+                           value={design?.sideBarWidth || ''}
+                           onChange={onChangeHandler}/>
                 </div>
                 : null
             }

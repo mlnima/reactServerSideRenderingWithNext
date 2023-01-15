@@ -8,6 +8,7 @@ import {useAppDispatch} from "@store_toolkit/hooks";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 import SvgRenderer from "../../../global/commonComponents/SvgRenderer/SvgRenderer";
 import UserProfileImage from "../../UserProfileImage/UserProfileImage";
+import AuthenticationAdminItems from "@components/includes/widgets/Authentication/AuthenticationAdminItems";
 
 const AuthenticationLoggedInItemsStyledDiv = styled.div`
   .user-info {
@@ -45,6 +46,7 @@ interface AuthenticationLoggedInItemsPropTypes {
     membership: boolean,
     allowUserToPost: boolean,
     username: string,
+    role: string,
     allowedPostTypeUserCanCreate: string[],
 }
 
@@ -54,6 +56,7 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
          membership,
          allowUserToPost,
          username,
+         role,
          allowedPostTypeUserCanCreate
      }) => {
         const {t} = useTranslation('common');
@@ -119,23 +122,22 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
                 </div>
 
                 <div className={'logged-items'}>
-                    {pathname.includes('/messenger') || pathname.includes('/chatroom') ?
-                        <Link href={`/`} className='logged-item logged-in' onClick={onOpenCloseHandler}>
+                    <Link href={`/`} className='logged-item logged-in' onClick={onOpenCloseHandler}>
 
-                                <div className={'icon-wrapper'}>
-                                    <SvgRenderer svgUrl={'/asset/images/icons/home-solid.svg'}
-                                                 size={20}
-                                                 customClassName={'home-button'}
-                                                 color={' var(--main-text-color, #fff)'}
-                                    />
-                                </div>
-                                <p className={'text-data'}>{t<string>(`Home`)}</p>
+                        <div className={'icon-wrapper'}>
+                            <SvgRenderer svgUrl={'/asset/images/icons/home-solid.svg'}
+                                         size={20}
+                                         customClassName={'home-button'}
+                                         color={' var(--main-text-color, #fff)'}
+                            />
+                        </div>
+                        <p className={'text-data'}>{t<string>(`Home`)}</p>
 
-                        </Link>
-                        : null
-                    }
+                    </Link>
+                    {role==='administrator' && <AuthenticationAdminItems/> }
 
-                    <span className='logged-item logged-in' onClick={(e) => {
+
+                    <span className='logged-item logged-in sign-out' onClick={(e) => {
                         dispatch(userLogout(null))
                         dispatch(loginRegisterForm(false))
                         onOpenCloseHandler(e)

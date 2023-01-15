@@ -27,10 +27,14 @@ const AssetPagination: FC<PropTypes> = ({assetPageData}) => {
     const [search, setSearch] = useSearchParams();
     //@ts-ignore
     const query = useMemo(() => paramsObjectGenerator(search), [search])
+    const maxPage = useMemo(() => {
+        return Math.ceil(parseInt(assetPageData.totalCount) / parseInt(query.size ? query.size as string : '20'))
+    }, [assetPageData])
 
     useEffect(() => {
         setCurrentPage(parseInt(query.page) || 1)
     }, [query.page]);
+
 
     return (
         <AssetPaginationStyledDiv className='asset-page-pagination'>
@@ -57,10 +61,10 @@ const AssetPagination: FC<PropTypes> = ({assetPageData}) => {
 
             <button onClick={() => setSearch({
                 ...query,
-                page: Math.ceil(parseInt(assetPageData.totalCount) / parseInt(query.size ? query.size as string : '20'))
+                page: maxPage
             })
             } className='btn btn-navigation'>
-               last
+                {maxPage}
             </button>
 
         </AssetPaginationStyledDiv>

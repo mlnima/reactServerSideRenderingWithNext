@@ -38,7 +38,7 @@
     "jsonwebtoken": "^9.0.0",
     "jwt-decode": "^3.1.2",
     "lodash": "^4.14.181",
-    "mailparser": "^3.6.0",
+    "mailparser": "^3.6.3",
     "models": "*",
     "module-alias": "^2.2.2",
     "moment": "^2.29.3",

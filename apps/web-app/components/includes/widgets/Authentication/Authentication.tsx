@@ -13,8 +13,6 @@ const AuthenticationLoggedInItems = dynamic(() =>
 )
 
 const AuthenticationStyledDiv = styled.div`
-
-
   
   .authentication-widget-wrapper {
     border-left: var(--default-border);
@@ -43,7 +41,7 @@ const AuthenticationStyledDiv = styled.div`
     .logged-items-auth-actions {
       width: 100%;
       display: flex;
-      justify-content: space-between;
+      justify-content: space-evenly;
       align-items: center;
 
       .logged-item {
@@ -83,10 +81,11 @@ const AuthenticationStyledDiv = styled.div`
     }
 
     .logged-items {
+     
       .logged-item {
         position: relative;
         width: 100%;
-        height: auto;
+        height: 100%;
         min-height: 52px;
         //padding: 13px 0 13px 17px;
         color: var(--main-text-color, #fff);
@@ -101,6 +100,10 @@ const AuthenticationStyledDiv = styled.div`
           align-items: center;
           justify-content: center;
         }
+      }
+      .sign-out{
+        align-self: flex-end;
+        justify-self: flex-end;
       }
     }
 
@@ -119,6 +122,7 @@ const Authentication: FC = () => {
         profileImage,
         loggedIn,
         username,
+        role,
         allowUserToPost,
         membership,
         allowedPostTypeUserCanCreate,
@@ -127,6 +131,7 @@ const Authentication: FC = () => {
             profileImage: user?.userData?.profileImage,
             loggedIn: user?.loggedIn,
             username: user?.userData?.username,
+            role: user?.userData?.role,
             allowUserToPost: settings?.membershipSettings?.allowUserToPost,
             membership: settings?.membershipSettings?.membership,
             allowedPostTypeUserCanCreate:settings?.membershipSettings?.allowedPostTypeUserCanCreate
@@ -157,6 +162,7 @@ const Authentication: FC = () => {
                                                           allowedPostTypeUserCanCreate={allowedPostTypeUserCanCreate}
                                                           profileImage={profileImage}
                                                           username={username}
+                                                          role={role}
                                                           allowUserToPost={allowUserToPost}
                                                           membership={membership}/>}
             </div>

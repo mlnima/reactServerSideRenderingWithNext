@@ -34,12 +34,8 @@ const ModeStyles = createGlobalStyle`
 const DayModeNightMode: FC<DayModeNightModePropTypes> = ({uniqueData}) => {
 
     const [isDefaultTheme, setIsDefaultTheme] = useState(true)
-
-    const {defaultColors} = useSelector(({settings}: Store) => {
-        return {
-            defaultColors: settings?.design?.customColors || '',
-        }
-    })
+    const isAppInitialized = useSelector(({globalState}: Store) => globalState.isAppInitialized)
+    const defaultColors = useSelector(({settings}: Store) => settings?.design?.customColors || '')
 
     const currentColors = useMemo(() => isDefaultTheme ? defaultColors  : uniqueData?.dayNightModeData ,[isDefaultTheme])
 
@@ -50,12 +46,12 @@ const DayModeNightMode: FC<DayModeNightModePropTypes> = ({uniqueData}) => {
     }
 
     useEffect(() => {
-        if (typeof window !== 'undefined') {
+        if (isAppInitialized) {
             if (localStorage.theme) {
                 setIsDefaultTheme(localStorage.theme === 'true')
             }
         }
-    }, []);
+    }, [isAppInitialized]);
 
     return (
         <DayModeNightModeStyledDiv>

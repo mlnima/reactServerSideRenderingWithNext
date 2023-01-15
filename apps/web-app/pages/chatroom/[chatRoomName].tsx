@@ -9,10 +9,10 @@ import ChatRoomOnlineUsersList
 import ChatRoomMessageUserInfoPopup
     from "../../components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup";
 import {useSelector} from "react-redux";
-import {dispatchSocketId} from "../../store_toolkit/clientReducers/userReducer";
-import {setOnlineUsers,setMessages,  newMessage} from '../../store_toolkit/clientReducers/chatroomReducer';
-import {wrapper} from "../../store_toolkit/store";
-import {useAppDispatch} from "../../store_toolkit/hooks";
+import {dispatchSocketId} from "@store_toolkit/clientReducers/userReducer";
+import {setOnlineUsers,setMessages,  newMessage} from '@store_toolkit/clientReducers/chatroomReducer';
+import {wrapper} from "@store_toolkit/store";
+import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
 import {uniqArrayBy} from 'custom-util'
