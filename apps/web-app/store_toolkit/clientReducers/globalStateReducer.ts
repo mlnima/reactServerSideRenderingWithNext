@@ -6,6 +6,7 @@ const initialState: GlobalState = {
     loginRegisterFormPopup: false,
     isAppInitialized:false,
     loading: false,
+    adminMode: false,
     notFoundPage: false,
     headData: {},
     alert: {
@@ -39,6 +40,9 @@ export const globalStateSlice = createSlice({
         setIsAppInitialized: (state, action: PayloadAction<any>) => {
             state.isAppInitialized = action.payload
         },
+        setAdminMode: (state, action: PayloadAction<any>) => {
+            state.adminMode = action.payload
+        },
         loading: (state, action: PayloadAction<any>) => {
 
             if (state.loading !== action.payload) {
@@ -69,6 +73,7 @@ export const {
     loginRegisterForm,
     setNotFoundPage,
     loading,
+    setAdminMode,
     setAlert,
     setIsAppInitialized,
     closeAlert

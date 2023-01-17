@@ -64,7 +64,8 @@ interface ActorCardPropTypes {
     index?: number,
     postsPerRawForMobile: number,
     cardWidth: number,
-    role:string
+    role:string,
+    adminMode: boolean
 }
 
 interface ActorCardStylePropTypes {
@@ -78,6 +79,7 @@ const ActorCard: FC<ActorCardPropTypes> =
          index,
          postsPerRawForMobile,
          cardWidth,
+         adminMode,
          role
      }) => {
 

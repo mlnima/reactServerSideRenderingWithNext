@@ -60,7 +60,8 @@ interface CategoryCardPropTypes {
     index?: number,
     postsPerRawForMobile: number,
     cardWidth: number,
-    role: string
+    role: string,
+    adminMode: boolean,
 }
 
 const CategoryCard: FC<CategoryCardPropTypes> =
@@ -69,6 +70,7 @@ const CategoryCard: FC<CategoryCardPropTypes> =
          index,
          postsPerRawForMobile,
          cardWidth,
+         adminMode,
          role
      }) => {
 
@@ -97,7 +99,7 @@ const CategoryCard: FC<CategoryCardPropTypes> =
                 </Link>
                 <CardTitle title={title} url={`/category/${meta?._id}`}/>
 
-                {role === 'administrator' && <ResetMetaImageButton _id={meta._id}/>}
+                {(role === 'administrator' && adminMode) && <ResetMetaImageButton _id={meta._id}/>}
             </CategoryCardStyle>
         )
     };

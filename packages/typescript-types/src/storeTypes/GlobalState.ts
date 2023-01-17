@@ -2,6 +2,7 @@ export interface GlobalState {
     loginRegisterFormPopup: boolean | string,
     isAppInitialized: boolean,
     loading: boolean,
+    adminMode: boolean,
     notFoundPage: boolean,
     headData:{
         canonicalUrl?: string;

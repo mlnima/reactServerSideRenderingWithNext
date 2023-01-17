@@ -25,10 +25,10 @@ interface UniqueFieldsPropTypes {
     onUniqueDataJsonChangeHandler: any,
     onCheckboxChangeHandler: any,
     widgetId: string,
-    setWidgetData:React.Dispatch<React.SetStateAction<any>> ,
-    onChangeHandler:ChangeEventHandler<HTMLSelectElement | HTMLInputElement>,
-    onUniqueDataChangeHandler:ChangeEventHandler<HTMLInputElement>,
-    onUniqueDataChangeHandlerWithTranslate:ChangeEventHandler<HTMLInputElement>
+    setWidgetData: React.Dispatch<React.SetStateAction<any>>,
+    onChangeHandler: ChangeEventHandler<HTMLSelectElement | HTMLInputElement>,
+    onUniqueDataChangeHandler: ChangeEventHandler<HTMLInputElement>,
+    onUniqueDataChangeHandlerWithTranslate: ChangeEventHandler<HTMLInputElement>
 }
 
 const UniqueFields: FC<UniqueFieldsPropTypes> =
@@ -88,7 +88,12 @@ const UniqueFields: FC<UniqueFieldsPropTypes> =
                     />
                 }
 
-                {(widgetData.type === 'posts' || widgetData.type === 'postsSwiper' || widgetData.type === 'metaWithImage' || widgetData.type === 'meta' || widgetData.type === 'postsSlider') &&
+                {(widgetData.type === 'posts' ||
+                        widgetData.type === 'postsList' ||
+                        widgetData.type === 'postsSwiper' ||
+                        widgetData.type === 'metaWithImage' ||
+                        widgetData.type === 'meta' ||
+                        widgetData.type === 'postsSlider') &&
                     <TextInputFieldForWidget
                         inputTitle='count :'
                         name='count'
@@ -100,7 +105,10 @@ const UniqueFields: FC<UniqueFieldsPropTypes> =
                     />
                 }
 
-                {(widgetData.type === 'posts' || widgetData.type === 'postsSwiper' || widgetData.type === 'postsSlider') &&
+                {(widgetData.type === 'posts' ||
+                        widgetData.type === 'postsList' ||
+                        widgetData.type === 'postsSwiper' ||
+                        widgetData.type === 'postsSlider') &&
                     <TextInputFieldForWidget inputTitle='Selected Meta For PostsRenderer:'
                                              name='selectedMetaForPosts'
                                              type='text' value={widgetData.selectedMetaForPosts}
@@ -134,7 +142,7 @@ const UniqueFields: FC<UniqueFieldsPropTypes> =
                     />
                 }
 
-                {(widgetData.type === 'meta' || widgetData.type === 'metaWithImage' )&&
+                {(widgetData.type === 'meta' || widgetData.type === 'metaWithImage') &&
                     <SelectFieldForWidget title={'Meta Type:'}
                                           name={'metaType'}
                                           value={widgetData?.metaType}
@@ -158,7 +166,12 @@ const UniqueFields: FC<UniqueFieldsPropTypes> =
 
                 }
 
-                {(widgetData.type === 'posts' || widgetData.type === 'postsSwiper' || widgetData.type === 'metaWithImage' || widgetData.type === 'meta' || widgetData.type === 'postsSlider') &&
+                {(widgetData.type === 'posts' ||
+                        widgetData.type === 'postsList' ||
+                        widgetData.type === 'postsSwiper' ||
+                        widgetData.type === 'metaWithImage' ||
+                        widgetData.type === 'meta' ||
+                        widgetData.type === 'postsSlider') &&
                     <SelectFieldForWidget title={'Sort By:'}
                                           name={'sortBy'}
                                           value={widgetData.sortBy}
@@ -170,7 +183,10 @@ const UniqueFields: FC<UniqueFieldsPropTypes> =
                     />
                 }
 
-                {(widgetData.type === 'posts' || widgetData.type === 'postsSwiper' || widgetData.type === 'postsSlider') &&
+                {(widgetData.type === 'posts' ||
+                        widgetData.type === 'postsList' ||
+                        widgetData.type === 'postsSwiper' ||
+                        widgetData.type === 'postsSlider') &&
                     <SelectFieldForWidget title={'Post Type:'}
                                           name={'postType'}
                                           value={widgetData?.postType}
@@ -179,7 +195,9 @@ const UniqueFields: FC<UniqueFieldsPropTypes> =
                     />
                 }
 
-                {(widgetData.type === 'posts' || widgetData.type === 'postsSwiper' || widgetData.type === 'metaWithImage' || widgetData.type === 'postsSlider') &&
+                {(widgetData.type === 'posts' ||
+                        widgetData.type === 'postsList' ||
+                        widgetData.type === 'postsSwiper' || widgetData.type === 'metaWithImage' || widgetData.type === 'postsSlider') &&
                     <>
                         <SelectFieldForWidget title={'Card Width Desktop:'}
                                               name={'cardWidthDesktop'}

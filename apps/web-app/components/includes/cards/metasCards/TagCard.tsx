@@ -34,6 +34,7 @@ interface TagCardPropTypes {
     index?: number,
     postsPerRawForMobile: number,
     cardWidth: number,
+    adminMode: boolean,
     role:string
 }
 
@@ -43,6 +44,7 @@ const TagCard: FC<TagCardPropTypes> =
          index,
          postsPerRawForMobile,
          cardWidth,
+         adminMode,
          role
      }) => {
 

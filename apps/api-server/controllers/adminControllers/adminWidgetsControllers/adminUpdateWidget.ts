@@ -67,7 +67,7 @@ export const adminUpdateWidget = async (req, res) => {
     const widgetId = req.body?.widgetData?._id
 
 
-    if (widgetData.type === 'posts' || widgetData.type === 'postsSlider' || widgetData.type === 'postsSwiper') {
+    if (widgetData.type === 'posts' || widgetData.type === 'postsList' || widgetData.type === 'postsSlider' || widgetData.type === 'postsSwiper') {
         await updatePostWidgetData(widgetData).then(async updatedWidget => {
             if (updatedWidget) {
                 await widgetSchema.findByIdAndUpdate(widgetId, {data: updatedWidget}, {new: true}).exec().then(updatedWidget => {

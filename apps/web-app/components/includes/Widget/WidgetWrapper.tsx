@@ -24,6 +24,7 @@ const FormWidget = dynamic(() => import('../widgets/FormWidget/FormWidget'))
 const MultipleLinkTo = dynamic(() => import('../widgets/MultipleLinkTo/MultipleLinkTo'))
 const Advertise = dynamic(() => import('../widgets/Advertise/Advertise'))
 const PostSlider = dynamic(() => import('../widgets/PostsSlider/PostsSlider'))
+const PostsList = dynamic(() => import('../widgets/PostsList/PostsList'))
 const ImagesSlider = dynamic(() => import('../widgets/ImagesSlider/ImagesSlider'))
 const Text = dynamic(() => import('./WidgetsModelsComponents/Text/Text'))
 const Authentication = dynamic(() => import('../widgets/Authentication/Authentication'))
@@ -47,6 +48,7 @@ const WidgetWrapper: FC<WidgetComponentPropTypes> = ({data, widgetId, isSidebar,
     const WidgetToRender = useMemo(() => {
         return data.type === 'postsSlider' ? PostSlider :
             data.type === 'posts' ? Posts :
+            data.type === 'postsList' ? PostsList :
                 data.type === 'imagesSlider' ? ImagesSlider :
                     data.type === 'multipleLinkTo' ? MultipleLinkTo :
                         data.type === 'media' ? MediaWidget :

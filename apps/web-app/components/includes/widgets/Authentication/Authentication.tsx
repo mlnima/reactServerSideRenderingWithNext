@@ -56,6 +56,7 @@ const AuthenticationStyledDiv = styled.div`
         justify-content: center;
         flex-direction: column;
         position: relative;
+       
 
         a {
           color: var(--main-text-color, #fff);
@@ -88,6 +89,7 @@ const AuthenticationStyledDiv = styled.div`
     .logged-items {
      
       .logged-item {
+        cursor: pointer;
         position: relative;
         width: 100%;
         height: 100%;

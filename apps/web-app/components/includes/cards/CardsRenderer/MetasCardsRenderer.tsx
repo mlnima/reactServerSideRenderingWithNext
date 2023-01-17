@@ -52,17 +52,22 @@ let MetasCardsRendererStyle = styled.div`
 
 const MetasCardsRenderer: FC<MetasCardsRendererPropTypes> = ({uniqueData, metaType}) => {
 
-    const {metas, postsPerRawForMobile, cardWidth, cardsCustomStyle,role} = useSelector(
-        ({settings, posts,user}: Store) => {
+    const {postsPerRawForMobile, cardWidth, cardsCustomStyle} = useSelector(
+        ({settings}: Store) => {
             return {
-                role:user.userData.role,
-                metas: uniqueData?.metaData || (metaType === 'categories' ? posts?.categoriesMetas :
-                    metaType === 'tags' ? posts?.tagsMetas : metaType === 'actors' ? posts?.actorsMetas : []),
                 postsPerRawForMobile: settings?.design?.postsPerRawForMobile || 2,
                 cardsCustomStyle: settings?.design?.cardsCustomStyle || '',
                 cardWidth: metaType === 'actors' ? 140 : settings?.design?.cardWidthDesktop || 255,
             }
         })
+
+    const metas = useSelector(({posts}: Store) =>
+            uniqueData?.metaData || (metaType === 'categories' ? posts?.categoriesMetas :
+            metaType === 'tags' ? posts?.tagsMetas : metaType === 'actors' ? posts?.actorsMetas : []))
+
+    const role = useSelector(({user}: Store) => user.userData.role)
+
+    const adminMode = useSelector(({globalState}: Store) => globalState.adminMode)
 
     const MetaCardToRender = useMemo(() => {
         return metaType === 'categories' ? CategoryCard :
@@ -81,6 +86,7 @@ const MetasCardsRenderer: FC<MetasCardsRendererPropTypes> = ({uniqueData, metaTy
                     <MetaCardToRender key={meta._id}
                                       meta={meta}
                                       role={role}
+                                      adminMode={adminMode}
                                       cardWidth={cardWidth}
                                       postsPerRawForMobile={postsPerRawForMobile}
                                       index={index}/>

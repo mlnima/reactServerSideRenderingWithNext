@@ -3,11 +3,10 @@ import Link from "next/link";
 import {FC} from "react";
 
 const CardTitleStyle = styled.header`
-  margin-top: 4px;
-  padding: 0 4px;
+  margin: 4px 0;
+  padding:  4px 0;
   box-sizing: border-box;
-  //height: 2.2em;
-
+  line-height: 2.5;
   a{
     color: var(--secondary-text-color, #ccc);
     display: -webkit-box;
@@ -17,14 +16,11 @@ const CardTitleStyle = styled.header`
     text-overflow: ellipsis;
     cursor: pointer;
     box-sizing: border-box;
-    //line-height: 1.1;
   }
 
   @media only screen and (min-width: 768px) {
     padding: 0 ;
-    .card-header {
-      padding: 0;
-    }
+    line-height: 1;
   }
 `
 

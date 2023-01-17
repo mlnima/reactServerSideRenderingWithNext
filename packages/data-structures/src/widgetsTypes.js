@@ -9,6 +9,7 @@ var widgetsTypes = [
     'dayModeNightMode',
     'multipleLinkTo',
     'posts',
+    'postsList',
     'media',
     'searchbar',
     'meta',
@@ -20,7 +21,7 @@ var widgetsTypes = [
     'language',
     'authentication',
     'imagesSlider',
-    'postsSwiper',
+    // 'postsSwiper',
     // 'recentComments',
     'postsSlider',
 ];

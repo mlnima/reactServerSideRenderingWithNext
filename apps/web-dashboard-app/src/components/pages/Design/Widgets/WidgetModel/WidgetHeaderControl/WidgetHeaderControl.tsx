@@ -9,12 +9,18 @@ import {faSortDown} from "@fortawesome/free-solid-svg-icons/faSortDown";
 
 let StyledDiv = styled.div`
   display: grid;
-  grid-template-columns:  1fr 1fr 5fr 2fr;
+  grid-template-columns: 10px 1fr 1fr 5fr 2fr;
   align-items: center;
   background-color: var(--secondary-background-color,#181818);
   color: var(--main-text-color,#fff);
   height: 50px;
   font-size: 12px;
+  
+  .widget-index{
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+  }
 
   .widget-open-close-button {
     display: flex;
@@ -103,15 +109,13 @@ const WidgetHeaderControl: FC<WidgetHeaderControlPropType> =
      }) => {
 
         const keyStatus = setKey ? {key: widgetId} : {}
-
+//index: {widgetData.widgetIndex || '0'}
         return (
             <StyledDiv className='widget-open-control' {...keyStatus}>
+                <span className={'widget-index'}>
+                    {widgetData.widgetIndex}
+                </span>
                 <div className='widget-open-close-button' onClick={onLockHandler}>
-                    {/*<SvgRenderer svgUrl={widgetData.stayOpen ? '/asset/images/icons/lock-open-solid.svg':*/}
-                    {/*    '/asset/images/icons/lock-solid.svg'}*/}
-                    {/*             size={25}*/}
-                    {/*             color={'var(--main-text-color, #fff)'}*/}
-                    {/*/>*/}
                     <FontAwesomeIcon icon={widgetData.stayOpen ? faLockOpen : faLock} className={'meta-icon'}/>
                 </div>
                 <button className={'btn btn-danger'} onClick={onObjectModeHandler}>
@@ -119,23 +123,14 @@ const WidgetHeaderControl: FC<WidgetHeaderControlPropType> =
 
                 </button>
                 <div className='widget-name-index'>
-                    <p>{convertVariableNameToName(widgetData.type)} : {widgetData.name} index: {widgetData.widgetIndex || '0'}</p>
+                    <p>{convertVariableNameToName(widgetData.type)}  {widgetData.name} </p>
                 </div>
 
                 <div className='widget-open-control-group-buttons'>
                     <button className='changeWidgetIndexBtn' onClick={() => changeWidgetIndex(false)}>
-                        {/*<SvgRenderer svgUrl={'/asset/images/icons/sort-up-solid.svg'}*/}
-                        {/*             size={25}*/}
-                        {/*             customClassName={'show-password'}*/}
-                        {/*             color={'var(--main-text-color, #fff)'}*/}
-                        {/*/>*/}
                         <FontAwesomeIcon icon={faSortUp} className={'meta-icon'}/>
                     </button>
                     <button className='changeWidgetIndexBtn' onClick={() => changeWidgetIndex(true)}>
-                        {/*<SvgRenderer svgUrl={'/asset/images/icons/sort-down-solid.svg'}*/}
-                        {/*             size={25}*/}
-                        {/*             color={'var(--main-text-color, #fff)'}*/}
-                        {/*/>*/}
                         <FontAwesomeIcon icon={faSortDown} className={'meta-icon'}/>
                     </button>
                 </div>
