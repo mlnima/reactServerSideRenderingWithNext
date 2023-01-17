@@ -1,8 +1,9 @@
-import {FC, useMemo} from 'react';
+import React, {FC, useMemo} from 'react';
 import Link from "next/link";
 import {useRouter} from "next/router";
 import styled from "styled-components";
 import {UniqueDataTypes} from "typescript-types";
+import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 
 const LogoStyledDiv = styled.div`
 

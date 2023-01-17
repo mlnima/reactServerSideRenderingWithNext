@@ -1,19 +1,24 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useState,memo} from 'react';
 import {useSelector} from 'react-redux';
 import styled from "styled-components";
 import dynamic from "next/dynamic";
 import AuthenticationNotLoggedInItems from "./AuthenticationNotLoggedInItems";
 import SvgRenderer from "../../../global/commonComponents/SvgRenderer/SvgRenderer";
 import {Store} from "typescript-types";
-import UserProfileImage from "../../UserProfileImage/UserProfileImage";
 
-const AuthenticationLoggedInItems = dynamic(() =>
-        import('./AuthenticationLoggedInItems'),
-    {ssr:false}
-)
+const AuthenticationLoggedInItems = dynamic(() => import('./AuthenticationLoggedInItems'))
 
 const AuthenticationStyledDiv = styled.div`
-  
+  .profile-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+    border: none;
+    outline: none;
+  }
   .authentication-widget-wrapper {
     border-left: var(--default-border);
     padding: 10px;
@@ -87,7 +92,6 @@ const AuthenticationStyledDiv = styled.div`
         width: 100%;
         height: 100%;
         min-height: 52px;
-        //padding: 13px 0 13px 17px;
         color: var(--main-text-color, #fff);
         display: flex;
         align-items: center;
@@ -118,20 +122,17 @@ const AuthenticationStyledDiv = styled.div`
 
 const Authentication: FC = () => {
 
-    const {
-        profileImage,
-        loggedIn,
-        username,
-        role,
-        allowUserToPost,
-        membership,
-        allowedPostTypeUserCanCreate,
-    } = useSelector(({user, settings}: Store) => {
+    const {profileImage, loggedIn, username, role,} = useSelector(({user}: Store) => {
         return {
             profileImage: user?.userData?.profileImage,
             loggedIn: user?.loggedIn,
             username: user?.userData?.username,
             role: user?.userData?.role,
+        }
+    })
+
+    const {allowUserToPost, membership, allowedPostTypeUserCanCreate,} = useSelector(({ settings}: Store) => {
+        return {
             allowUserToPost: settings?.membershipSettings?.allowUserToPost,
             membership: settings?.membershipSettings?.membership,
             allowedPostTypeUserCanCreate:settings?.membershipSettings?.allowedPostTypeUserCanCreate
@@ -146,9 +147,13 @@ const Authentication: FC = () => {
 
     return (
         <AuthenticationStyledDiv open={open}>
-            <div className='profile-icon' onClick={onOpenCloseHandler}>
-                <UserProfileImage size={30}/>
-            </div>
+            <button className={'profile-icon'} onClick={onOpenCloseHandler} aria-label={'authentication panel'}>
+                <SvgRenderer svgUrl={'/asset/images/icons/user-solid.svg'}
+                             size={24}
+                             customClassName={'user-info-profile-button-icon'}
+                             color={' var(--main-text-color, #fff)'}
+                />
+            </button>
             <div className={'authentication-widget-wrapper'}>
                 <button className={'logged-item btn btn-transparent-light close-btn'} onClick={onOpenCloseHandler}>
                     <SvgRenderer svgUrl={'/asset/images/icons/times-solid.svg'}
@@ -172,4 +177,4 @@ const Authentication: FC = () => {
     )
 };
 
-export default Authentication;
+export default memo(Authentication);

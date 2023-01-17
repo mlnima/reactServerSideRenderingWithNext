@@ -44,12 +44,12 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
 
     const identity = useSelector(({settings}: Store) => settings?.identity);
 
-    useEffect(() => {
-        setTimeout(()=>{
-            dispatch(setIsAppInitialized(true))
-        },500)
-
-    }, []);
+    // useEffect(() => {
+    //     setTimeout(()=>{
+    //         dispatch(setIsAppInitialized(true))
+    //     },500)
+    //
+    // }, []);
 
     const closeClientAlert = () => {
         dispatch(closeAlert(null))

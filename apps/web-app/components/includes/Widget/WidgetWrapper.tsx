@@ -105,12 +105,11 @@ const WidgetWrapper: FC<WidgetComponentPropTypes> = ({data, widgetId, isSidebar,
                                 customScriptStrategy={data?.customScriptStrategy}
             />
             }
-            {data?.pagination && data?.redirectLink ?
+            {(data?.pagination && data?.redirectLink) &&
                 <WidgetPagination baseUrl={data?.redirectLink}
                                   totalCount={data?.uniqueData?.totalCount}
                                   count={data?.count}
                 />
-                : null
             }
         </WidgetStyledSection>
     );

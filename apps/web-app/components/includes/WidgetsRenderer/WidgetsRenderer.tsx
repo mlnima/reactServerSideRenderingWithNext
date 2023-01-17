@@ -30,8 +30,6 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
         }
     })
 
-    // const isMobileDevice = useSelector((store: Store) => store.settings?.isMobile)
-    // const isMobile = useMemo(() => isMobileDevice, [])
     const isMobile = true
 
     const sortWidgetsByIndex = useMemo(()=> {

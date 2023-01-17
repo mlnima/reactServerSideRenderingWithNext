@@ -44,13 +44,11 @@ const UserProfileImage: FC<UserProfileImagePropTypes> = ({size, profileRedirect}
 
     return (
         <Style className={'user-profile-image'} size={size}>
-            <NoSSR>
             {profileRedirect && loggedIn ?
                 <Link href={`/profile`}>
                         <ImageContent profileImage={userData?.profileImage} size={size}/>
                 </Link> : <ImageContent profileImage={userData?.profileImage} size={size}/>
             }
-            </NoSSR>
         </Style>
     )
 

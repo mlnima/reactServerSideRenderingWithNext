@@ -7,7 +7,7 @@ const AuthenticationAdminItems = ({}) => {
     const router = useRouter()
     return (
         <>
-            <Link href={'/dashboard'} className={'logged-item'}>
+            <Link href={'/dashboard'} target={'_blank'} className={'logged-item'}>
                 <div className={'icon-wrapper'}>
                     <SvgRenderer svgUrl={'/asset/images/icons/user-shield-solid.svg'}
                                  size={25}
