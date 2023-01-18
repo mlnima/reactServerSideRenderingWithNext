@@ -45,7 +45,7 @@ interface PropTypes {
 const PromotionPostListCard: FC<PropTypes> = ({post,index}) => {
 
     return (
-        <Style>
+        <Style className={'posts-list'}>
             <div className={'external-link-index'}>
                 <span className={'post-index'}>{index}.</span>
                 <CardTitle title={post.title} targetLink={'_blank'} url={post.redirectLink}/>
