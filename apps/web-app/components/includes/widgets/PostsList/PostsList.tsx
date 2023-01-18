@@ -44,7 +44,7 @@ interface PropTypes {
 const PostsList: FC<PropTypes> = ({uniqueData}) => {
 
     return (
-        <Style>
+        <Style className={'posts-list'}>
             {uniqueData?.posts?.map((post,index) => {
 
 
