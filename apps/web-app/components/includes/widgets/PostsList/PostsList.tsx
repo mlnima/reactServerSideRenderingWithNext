@@ -8,18 +8,9 @@ const Style = styled.div`
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
-
-  .post-item{
-    
-    display: flex;
-    align-items: center;
-    .post-index{
-      padding: 10px;
-      box-sizing: border-box;
-    }
-  }
+  
   @media only screen and (min-width: 768px) {
     width: 320px;
   }

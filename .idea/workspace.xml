@@ -21,7 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/PromotionPostListCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/PromotionPostListCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/Styles/GlobalStylesComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/global/Styles/GlobalStylesComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/PostsList/PostsList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/PostsList/PostsList.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1452,7 +1453,7 @@
       <workItem from="1673930913919" duration="895000" />
       <workItem from="1673975263348" duration="3643000" />
       <workItem from="1673987093582" duration="6510000" />
-      <workItem from="1674060328998" duration="661000" />
+      <workItem from="1674060328998" duration="2375000" />
     </task>
     <servers />
   </component>

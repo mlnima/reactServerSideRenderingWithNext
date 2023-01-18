@@ -27,7 +27,7 @@ const GlobalStyles = createGlobalStyle`
   ${gridLayout}
   ${inputs}
   ${selects}
-  ${scrollBar}
+
   body {
     background-color: var(--main-background-color, #000);
     color: var(--main-text-color, '#ccc');
