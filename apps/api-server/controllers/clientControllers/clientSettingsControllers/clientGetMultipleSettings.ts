@@ -6,9 +6,8 @@ const clientGetMultipleSettings = async (req, res) => {
         const settingRequestPromises = requestedSettings.map(async setting => {
             return await settingSchema.findOne({type: setting}).exec()
         })
-        Promise.all(settingRequestPromises).then(settings => {
+        Promise.any(settingRequestPromises).then(settings => {
             res.json({settings})
-
         }).catch(err => {
             res.status(404).json('Not Found')
         })

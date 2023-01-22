@@ -10,7 +10,7 @@
     "lib": [
       "es2017",
       "es2018",
-      "ES2021.String",
+      "ES2021",
       "ESNext.AsyncIterable",
       "ESNext.Array",
       "ESNext.Intl",
