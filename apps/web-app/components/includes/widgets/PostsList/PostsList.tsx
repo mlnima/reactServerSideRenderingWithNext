@@ -36,11 +36,9 @@ const PostsList: FC<PropTypes> = ({uniqueData}) => {
 
     return (
         <Style className={'posts-list'}>
-            {uniqueData?.posts?.map((post,index) => {
-
-
-                return <PromotionPostListCard post={post} index={index}/>
-            })}
+            {/*{uniqueData?.posts?.map((post,index) => {*/}
+            {/*    return <PromotionPostListCard post={post} index={index}/>*/}
+            {/*})}*/}
         </Style>
     )
 };

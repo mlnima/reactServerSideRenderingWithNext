@@ -2,7 +2,6 @@ import {reduceWidgetsToGroups} from "custom-util";
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
 import {AxiosError, AxiosResponse} from "axios";
-import {AxiosInstance} from "api-requests";
 import {loading, setAlert} from "./globalStateReducer";
 import {Widget} from "typescript-types";
 import getWidgets from "api-requests/src/dashboard/widgets/getWidgets";
@@ -13,65 +12,6 @@ import deleteWidget from "api-requests/src/dashboard/widgets/deleteWidget";
 const initialState = {
     adminPanelWidgets: {}
 }
-
-// export const adminPanelWidgetsReducer = (state: AdminPanelWidgetsTypes = initialState, action: { type: string, payload: any }) => {
-//     switch (action.type) {
-//         case ADMIN_PANEL_GET_WIDGETS:
-//             return {
-//                 ...state,
-//                 adminPanelWidgets: {...reduceWidgetsToGroups(action?.payload)}
-//             };
-//         case SAVE_NEW_WIDGET:
-//             return {
-//                 ...state,
-//                 adminPanelWidgets:{
-//                    ...state.adminPanelWidgets,
-//                     [action.payload?.data?.position] : [
-//                         ...state.adminPanelWidgets?.[action.payload?.data?.position],
-//                         action.payload
-//                     ]
-//                 }
-//             };
-//             //[...state.widgets, action.payload]
-//         case UPDATE_WIDGET:
-//
-//
-//             return {
-//                 ...state,
-//
-//             };
-//         case ADMIN_PANEL_DELETE_WIDGET:
-//             return {
-//                 ...state,
-//                 adminPanelWidgets: {
-//                     ...state.adminPanelWidgets,
-//                     [action.payload?.position]: state.adminPanelWidgets?.[action.payload?.position]
-//                         ?.filter(widget=> widget._id !== action.payload._id),
-//                 }
-//             };
-//         default:
-//             return state
-//     }
-// }
-
-// export const fetchAdminGetWidgets = createAsyncThunk(
-//     'adminPanelWidgets/fetchAdminWidgets',
-//     async ({router}: { router?: NextRouter }, thunkAPI) => {
-//         thunkAPI.dispatch(loading(true))
-//         return await Axios.get(`/api/admin/widgets/adminGetWidgets?token=${localStorage.wt}`)
-//         .then((res: AxiosResponse<unknown | any>) => {
-//             console.log(res?.data?.widgets)
-//             thunkAPI.dispatch(setRealTimeWidgetsForAdmin( reduceWidgetsToGroups(res?.data?.widgets || [])))
-//         }).catch(err => {
-//                 thunkAPI.dispatch(setAlert({
-//                     message: 'Error While Getting Widgets',
-//                     type: 'error',
-//                     err
-//                 }))
-//         }).finally(()=>thunkAPI.dispatch(loading(false)))
-//     }
-// )
-
 
 export const getWidgetsAction = createAsyncThunk(
     'adminPanelWidgets/getWidgetsAction',

@@ -1,4 +1,4 @@
-import {FC, useState, useEffect,memo} from "react";
+import {FC, useState, useEffect, memo} from "react";
 import {useRouter} from "next/router";
 import styled from "styled-components";
 import parse from 'html-react-parser'
@@ -35,7 +35,6 @@ const Advertise: FC<AdvertisePropTypes> = ({uniqueData}) => {
         setAdCode()
     }, [router.pathname, router.query]);
 
-
     const setAdCode = () => {
         if (uniqueData?.adCode) {
             setTimeout(() => {
@@ -46,11 +45,11 @@ const Advertise: FC<AdvertisePropTypes> = ({uniqueData}) => {
 
     return (
         <AdvertiseStyledDiv>
-            {/*{adCodeData ? parse(adCodeData || '') :*/}
-            {/*    <div className='pre-load'>*/}
-            {/*        <span>loading...</span>*/}
-            {/*    </div>*/}
-            {/*}*/}
+            {adCodeData ? parse(adCodeData || '') :
+                <div className='pre-load'>
+                    <span>loading...</span>
+                </div>
+            }
         </AdvertiseStyledDiv>
     )
 };

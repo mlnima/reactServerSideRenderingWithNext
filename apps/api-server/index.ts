@@ -31,6 +31,7 @@ const runServer = () => {
         // origin: process.env.NEXT_PUBLIC_PRODUCTION_URL,
         // credentials: !dev,
     }))
+    server.use(express.json({ limit: '2MB' }));
     server.use(cookieParser());
     server.use(fileUpload());
     server.use(bodyParser.json());

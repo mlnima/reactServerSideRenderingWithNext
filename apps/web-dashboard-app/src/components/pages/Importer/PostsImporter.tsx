@@ -1,11 +1,11 @@
 import React, {useState, useRef, ChangeEvent} from 'react';
 import { useSelector} from "react-redux";
 import styled from "styled-components";
-import {Store} from "typescript-types";
+import {DashboardStore, Store} from "typescript-types";
 import {createNewPostAction} from "@store/reducers/postsReducer";
 import {useAppDispatch} from "@store/hooks";
 import qualityConvertor from "@variables/qualityConvertor";
-
+import createNewPost from "api-requests/src/dashboard/posts/createNewPost";
 
 const PostsImporterStyledDiv = styled.div`
   display: flex;
@@ -14,9 +14,11 @@ const PostsImporterStyledDiv = styled.div`
   .posts-importer-form {
     width: 300px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
     flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap:5px;
+   
     .posts-importer-form-actions {
       display: flex;
       justify-content: space-between;
@@ -26,7 +28,7 @@ const PostsImporterStyledDiv = styled.div`
 `
 
 const PostsImporter = () => {
-    const userData = useSelector(({adminPanelUsers}: Store) => adminPanelUsers?.userData)
+    const userData = useSelector(({users}: DashboardStore) => users?.userData)
     const statusElement = useRef(null)
     const dataPreview = useRef(null)
     const dispatch = useAppDispatch()
@@ -49,7 +51,8 @@ const PostsImporter = () => {
                 author:  userData._id
             }
             //@ts-ignore
-            dispatch(createNewPostAction({data:postDataToSave, router:null}))
+            await createNewPost(postDataToSave)
+            // dispatch(createNewPostAction({data:postDataToSave, router:null}))
         }
     }
 

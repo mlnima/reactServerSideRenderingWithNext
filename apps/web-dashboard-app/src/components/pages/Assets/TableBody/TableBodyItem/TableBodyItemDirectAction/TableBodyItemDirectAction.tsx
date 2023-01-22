@@ -16,7 +16,7 @@ interface TableBodyItemDirectActionPropTypes {
 const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({assetsType, _id, postType, title}) => {
     const dispatch = useAppDispatch()
     const [search, setSearch] = useSearchParams();
-    const statusQuery = search.get(status)
+    const statusQuery = search.get('status')
 
     const onDeletePageHandler=()=>{
         // dispatch(adminDeleteCustomPage(_id))

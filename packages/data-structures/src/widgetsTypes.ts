@@ -8,6 +8,7 @@ const widgetsTypes  = [
     'multipleLinkTo',
     'posts',
     'postsList',
+    'postsListEntireByCategories',
     'media',
     'searchbar',
     'meta',

@@ -25,7 +25,7 @@
     "start:sitemaps-generator": "npm --prefix ./apps/sitemaps-generator run start",
     "start": "concurrently \"npm run start:sitemaps-generator\" \"npm run start:api-server\"  \"npm run start:socket-server\" \"npm run start:web-app\" ",
     "resetAdminPassword": "npm --prefix ./apps/custom-scripts run run-script:resetAdminPassword",
-    "setup": "npm --prefix ./apps/custom-scripts run run-script:setupDark",
+    "setup": "npm --prefix ./apps/custom-scripts run run-script:setup",
     "dev": "turbo run dev",
     "update:packages": "npm update --save/--save-dev -f",
     "update:api-server-packages": "npm update --save/--save-dev -f --workspace=api-server",

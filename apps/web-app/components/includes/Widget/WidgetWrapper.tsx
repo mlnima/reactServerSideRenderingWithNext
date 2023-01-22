@@ -7,6 +7,7 @@ const WidgetHeader = dynamic(() => import('./WidgetHeader/WidgetHeader'))
 const WidgetCustomScript = dynamic(() => import('./WidgetCustomScript/WidgetCustomScript'))
 const WidgetPagination = dynamic(() => import('./WidgetPagination/WidgetPagination'))
 const Posts = dynamic(() => import('../cards/CardsRenderer/PostsCardsRenderer'))
+const PostsListEntireByCategories = dynamic(() => import('@components/includes/widgets/PostsListEntireByCategories/PostsListEntireByCategories'))
 const MetasCardsRenderer = dynamic(() =>
     import('../cards/CardsRenderer/MetasCardsRenderer'))
 const RecentComments = dynamic(() => import('../widgets/RecentComments/RecentComments'))
@@ -49,6 +50,7 @@ const WidgetWrapper: FC<WidgetComponentPropTypes> = ({data, widgetId, isSidebar,
         return data.type === 'postsSlider' ? PostSlider :
             data.type === 'posts' ? Posts :
             data.type === 'postsList' ? PostsList :
+            data.type === 'postsListEntireByCategories' ? PostsListEntireByCategories :
                 data.type === 'imagesSlider' ? ImagesSlider :
                     data.type === 'multipleLinkTo' ? MultipleLinkTo :
                         data.type === 'media' ? MediaWidget :

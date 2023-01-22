@@ -6,12 +6,10 @@ import {findMetas} from "../../../_variables/serverGlobalVariable/findMetas";
 import {metaSchema} from "models";
 import {Meta, Post} from "typescript-types";
 
-export const updatePostWidgetData = async (widgetData:any) => {
+export const updatePostWidgetData = async (widgetData: any) => {
     if (widgetData) {
         try {
             const findingPostsOptions = _clientQueryGeneratorForGettingPosts(widgetData, widgetData?.selectedMetaForPosts)
-
-            //console.log(JSON.stringify(findingPostsOptions.findPostsQueries, null, '\t'))
             let totalCount = await postSchema.countDocuments(findingPostsOptions.findPostsQueries).exec()
             let posts = await postSchema.find(findingPostsOptions.findPostsQueries, ['_id'],
                 {
@@ -25,7 +23,7 @@ export const updatePostWidgetData = async (widgetData:any) => {
                 ...widgetData,
                 uniqueData: {
                     ...(widgetData?.uniqueData || {}),
-                    posts: posts.map((post:Post) => post?._id),
+                    posts: posts.map((post: Post) => post?._id),
                     totalCount
                 }
             }
@@ -39,7 +37,7 @@ export const updatePostWidgetData = async (widgetData:any) => {
 }
 
 
-const updateMetaWidgetData = async (widgetData:any) => {
+const updateMetaWidgetData = async (widgetData: any) => {
     try {
 
         const resultMetaFindQueries = await findMetas({
@@ -51,7 +49,7 @@ const updateMetaWidgetData = async (widgetData:any) => {
             ...widgetData,
             uniqueData: {
                 //@ts-ignore
-                metaData: resultMetaFindQueries?.metas?.map((meta:Meta) => meta._id) ,
+                metaData: resultMetaFindQueries?.metas?.map((meta: Meta) => meta._id),
                 totalCount: resultMetaFindQueries?.totalCount
             }
         }
@@ -66,40 +64,83 @@ export const adminUpdateWidget = async (req, res) => {
     const widgetData = req.body?.widgetData?.data
     const widgetId = req.body?.widgetData?._id
 
+    try {
+        if (widgetData.type === 'posts' || widgetData.type === 'postsList' || widgetData.type === 'postsSlider' || widgetData.type === 'postsSwiper') {
+            await updatePostWidgetData(widgetData).then(async updatedWidget => {
+                if (updatedWidget) {
+                    await widgetSchema.findByIdAndUpdate(widgetId, {data: updatedWidget}, {new: true}).exec().then(updatedWidget => {
+                        res.json({updatedWidget})
+                    }).catch(err => {
+                        console.log(err)
+                        res.status(503).json({message: 'something went wrong please try again later'})
+                    })
+                } else {
+                    res.status(503).json({message: 'something went wrong please try again later'})
+                }
+            })
+        } else if (widgetData.type === 'meta' || widgetData.type === 'metaWithImage') {
+            await updateMetaWidgetData(widgetData).then(updatedWidget => {
+                if (updatedWidget) {
+                    widgetSchema.findByIdAndUpdate(widgetId, {data: updatedWidget}, {new: true}).exec().then(updatedWidget => {
+                        res.json({updatedWidget})
+                    }).catch(err => {
+                        console.log(err)
+                        res.status(503).json({message: 'something went wrong please try again later'})
+                    })
+                } else {
+                    res.status(503).json({message: 'something went wrong please try again later'})
+                }
+            })
+        } else if (widgetData.type === 'postsListEntireByCategories') {
+            let final = []
+            const categories = await metaSchema.find({$and: [{type: 'categories'}, {status: 'published'}]}).select('name description status').exec()
 
-    if (widgetData.type === 'posts' || widgetData.type === 'postsList' || widgetData.type === 'postsSlider' || widgetData.type === 'postsSwiper') {
-        await updatePostWidgetData(widgetData).then(async updatedWidget => {
-            if (updatedWidget) {
-                await widgetSchema.findByIdAndUpdate(widgetId, {data: updatedWidget}, {new: true}).exec().then(updatedWidget => {
-                    res.json({updatedWidget})
-                }).catch(err => {
-                    console.log(err)
-                    res.status(503).json({message: 'something went wrong please try again later'})
-                })
-            } else {
-                res.status(503).json({message: 'something went wrong please try again later'})
+            for await (const category of categories) {
+
+                //return the id only and save on the widget
+                const postsOfCurrentCategory = await postSchema.find({$inc:{categories:category._id}})
+                    .select('_id title')
+                    .exec()
+
+                final =  [
+                    ...final,
+                    {
+                        ...category.toObject(),
+                        posts:postsOfCurrentCategory
+                    }]
             }
-        })
-    } else if (widgetData.type === 'meta' || widgetData.type === 'metaWithImage') {
-        await updateMetaWidgetData(widgetData).then(updatedWidget => {
-            if (updatedWidget) {
-                widgetSchema.findByIdAndUpdate(widgetId, {data: updatedWidget}, {new: true}).exec().then(updatedWidget => {
-                    res.json({updatedWidget})
-                }).catch(err => {
-                    console.log(err)
-                    res.status(503).json({message: 'something went wrong please try again later'})
-                })
-            } else {
-                res.status(503).json({message: 'something went wrong please try again later'})
+
+            console.log(final[0])
+
+            const widgetDateUpdate = {
+                ...widgetData,
+                uniqueData:{
+                    ...widgetData.uniqueData,
+                    categoriesDataWithPosts: final
+                }
             }
-        })
-    } else {
-        widgetSchema.findByIdAndUpdate(req.body?.widgetData._id, {data: widgetData}, {new: true}).exec().then(updatedWidget => {
-            res.json({updatedWidget})
-        }).catch(err => {
-            console.log(err)
-        })
+
+            await widgetSchema.findByIdAndUpdate(widgetId, {data: widgetDateUpdate}, {new: true}).exec().then(updatedWidget => {
+                // res.json({updatedWidget:widgetDateUpdate})
+                res.end()
+            }).catch(err => {
+                console.log(err)
+                res.status(503).json({message: 'something went wrong please try again later'})
+            })
+
+            // res.end()
+        } else {
+            widgetSchema.findByIdAndUpdate(req.body?.widgetData._id, {data: widgetData}, {new: true}).exec().then(updatedWidget => {
+                res.json({updatedWidget})
+            }).catch(err => {
+                console.log(err)
+            })
+        }
+    } catch (error) {
+        console.log(error)
     }
+
+
 }
 
 // module.exports = {adminUpdateWidget, updatePostWidgetData}

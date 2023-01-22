@@ -30,6 +30,14 @@ const ActionButtons: FC<ActionButtonsPropTypes> = ({widgetData, widgetId, widget
             _id: widgetId,
             data: {
                 ...widgetData,
+                uniqueData:{
+                    ...widgetData.uniqueData,
+                    categoriesDataWithPosts:[],
+                    tagsDataWithPosts:[],
+                    ActorsDataWithPosts:[],
+                    posts: [],
+                    metaData: []
+                },
                 posts: [],
                 metaData: []
             }

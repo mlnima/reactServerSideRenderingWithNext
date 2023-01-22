@@ -12,10 +12,6 @@ import defaultMembershipSettings from "../asset/defaultMembershipSettings";
 import defaultHelloWorldPost from "../asset/defaultHelloWorldPost";
 import defaultWidgets from "../asset/defaultWidgets";
 import {isEmptyObject} from 'custom-util'
-import {error} from "next/dist/build/output/log";
-
-// console.log(process.env)
-
 
 const createHelloWorldPost = async ()=>{
     const postDataToSave = new postSchema(defaultHelloWorldPost)
@@ -100,12 +96,15 @@ const createAdminAccount = async () => {
 
 
 const runScripts = async () => {
-    console.log(process.env.THEME_MODE)
-    // await connectToDatabase('Setup')
-    // await createAdminAccount()
-    // await setWidgets()
-    // await setSettings()
-    // await createHelloWorldPost()
+    try {
+        await connectToDatabase('Setup')
+        await createAdminAccount()
+        await setWidgets()
+        await setSettings()
+        await createHelloWorldPost()
+    }catch (error){
+        console.log(error)
+    }
 }
 
 runScripts().then(() => {

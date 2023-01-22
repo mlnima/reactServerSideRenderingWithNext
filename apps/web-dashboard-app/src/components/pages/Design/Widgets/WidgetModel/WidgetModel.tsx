@@ -35,6 +35,8 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({widget}) => {
         stayOpen: false,
     })
 
+    //<iframe title='HomePageSideBarBanner ad-banner' border='0' frameBorder='0' marginHeight='0' marginWidth='0' width='300' height='100' scrolling='no' allowtransparency='true' src='https://adserver.juicyads.com/adshow.php?adzone=941535'/>
+
     // useEffect(() => {
     //     console.log(widgetData)
     // }, [widgetData]);
@@ -118,17 +120,8 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({widget}) => {
         ))
     }
 
-
     const onUniqueDataChangeHandler = (e) => {
         const value = onChangeInputValueCorrector(e)
-
-        // setWidgetData({
-        //     ...widgetData,
-        //     uniqueData: {
-        //         ...(widgetData?.uniqueData || {}),
-        //         [e.target.name]: value
-        //     }
-        // })
 
         setWidgetData(prevState => ({
             ...prevState,
@@ -202,7 +195,6 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({widget}) => {
         })
     }
 
-
     const changeWidgetIndex = (action) => {
         const valueToSet = action ? widgetData.widgetIndex + 1 : widgetData.widgetIndex - 1;
         dispatch(updateWidgetAction({
@@ -224,7 +216,6 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({widget}) => {
 
     };
 
-
     const onLockHandler = () => {
         dispatch(updateWidgetAction({
             _id: widget._id,
@@ -233,6 +224,9 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({widget}) => {
                 stayOpen: !widgetData.stayOpen,
                 uniqueData: {
                     ...(widgetData?.uniqueData || {}),
+                    categoriesDataWithPosts:[],
+                    tagsDataWithPosts:[],
+                    ActorsDataWithPosts:[],
                     posts: [],
                     metaData: []
                 }

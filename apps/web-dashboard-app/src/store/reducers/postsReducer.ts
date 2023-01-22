@@ -102,7 +102,7 @@ export const createNewPostAction = createAsyncThunk(
 
         return await createNewPost(data)
             .then((res: AxiosResponse<any>) => {
-                thunkAPI.dispatch(setAlert({message: res.data.message || 'Post Saved', type: 'success'}))
+                // thunkAPI.dispatch(setAlert({message: res.data.message || 'Post Saved', type: 'success'}))
                 setTimeout(() => {
                     res.data?.savedPostData?._id  ? redirect('/dashboard/post?id=' + res.data.savedPostData._id) : null
                 }, 1500)

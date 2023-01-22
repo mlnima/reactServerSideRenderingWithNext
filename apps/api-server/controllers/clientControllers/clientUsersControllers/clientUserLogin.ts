@@ -1,7 +1,7 @@
 import {userSchema} from 'models';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
-const tokenExpireTime = '30 days';
+const tokenExpireTime = '365 days';
 
 const clientUserLogin = async (req, res) => {
     const username = req.body.username;
