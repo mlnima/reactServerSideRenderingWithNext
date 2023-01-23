@@ -25,27 +25,21 @@ const initialState:AdminPanelSettingState = {
 export const getSettingsAction = createAsyncThunk(
     'adminPanelSettings/adminPanelGetSettings',
     async (data:any, thunkAPI) => {
-        thunkAPI.dispatch(loading(true))
-        return getMultipleSetting()
-            .then(res => {
+        try {
+            thunkAPI.dispatch(loading(true))
+            const settingsRequestData = await getMultipleSetting()
+            thunkAPI.dispatch(loading(false))
 
-                const designSettings = res.data?.settings?.find((setting: any) => setting.type === 'design') || {};
-                const identitySettings = res.data?.settings?.find((setting: any) => setting.type === 'identity') || {};
-                const membershipSettings = res.data?.settings?.find((setting: any) => setting.type === 'membershipSettings') || {};
+            return {
+                design: settingsRequestData?.data?.settings?.design?.data || {},
+                identity: settingsRequestData?.data?.settings?.identity?.data|| {},
+                membershipSettings: settingsRequestData?.data?.settings?.membershipSettings?.data|| {},
+            }
 
-                const settings = {
-                    design: designSettings?.data,
-                    identity: identitySettings?.data,
-                    membershipSettings: membershipSettings?.data,
-                }
+        } catch (err) {
+            console.log(err)
+        }
 
-                // thunkAPI.dispatch(setSettingsForAdmin(settings))
-
-                return settings
-
-            }).catch(() => {
-
-            }).finally(() =>      thunkAPI.dispatch(loading(false)))
     }
 )
 

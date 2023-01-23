@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, {useState, useRef} from 'react';
+import React, {useState,useEffect, useRef} from 'react';
 import languagesOptions from "@variables/languagesOptions";
 import {convertVariableNameToName} from "custom-util";
 import styled from "styled-components";
@@ -14,9 +14,9 @@ import {faXmark} from "@fortawesome/free-solid-svg-icons/faXmark";
 let StyledForm = styled.form`
   //background-color: white;
   padding: 20px;
-  
-  .forms{
-    .active-editing-language{
+
+  .forms {
+    .active-editing-language {
       width: 100px;
       margin: 10px 0;
     }
@@ -60,7 +60,6 @@ let StyledForm = styled.form`
         width: 90%;
       }
 
-   
 
       .items {
         display: flex;
@@ -135,7 +134,7 @@ const General = () => {
 
     const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        dispatch(updateSettingAction({type:'identity', data:identity}))
+        dispatch(updateSettingAction({type: 'identity', data: identity}))
     }
 
     const checkboxChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {

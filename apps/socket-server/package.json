@@ -32,7 +32,7 @@
     "http-proxy-middleware": "^2.0.6",
     "models": "*",
     "module-alias": "^2.2.2",
-    "mongoose": "^6.8.3",
+    "mongoose": "^6.8.4",
     "path": "^0.12.7",
     "peerjs": "^1.4.7",
     "simple-peer": "^9.11.1",

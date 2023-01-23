@@ -76,6 +76,7 @@ const postPage = () => {
     }, [_id])
 
 
+
     if (status === 'published' || (role === 'administrator' && !!status) || author?._id === userId ) {
         return (
             <>

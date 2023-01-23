@@ -8,7 +8,9 @@ const initialState: GlobalState = {
     loading: false,
     adminMode: false,
     notFoundPage: false,
-    headData: {},
+    headData: {
+        allowIndexByRobots:true
+    },
     alert: {
         active: false,
         type: null,

@@ -2,15 +2,18 @@ import {settingSchema} from 'models';
 
 const clientGetMultipleSettings = async (req, res) => {
     try {
-        const requestedSettings =  Array.isArray(req.query.setting) ? req.query.setting : [req.query.setting]
-        const settingRequestPromises = requestedSettings.map(async setting => {
-            return await settingSchema.findOne({type: setting}).exec()
-        })
-        Promise.any(settingRequestPromises).then(settings => {
-            res.json({settings})
-        }).catch(err => {
-            res.status(404).json('Not Found')
-        })
+        const requestedSettings = Array.isArray(req.query.setting) ? req.query.setting : [req.query.setting]
+        let responseData = {}
+
+        for await (const setting of requestedSettings){
+            responseData = {
+                ...responseData,
+                [setting]: await settingSchema.findOne({type: setting}).exec() || {}
+            }
+        }
+
+        res.json({settings:responseData})
+
     } catch (err) {
         console.log(err)
         res.status(404).json('Not Found')

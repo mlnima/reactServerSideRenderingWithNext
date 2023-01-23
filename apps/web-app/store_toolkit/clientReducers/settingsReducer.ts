@@ -42,15 +42,7 @@ export const fetchSettings = createAsyncThunk(
         config: FetchSettingsProps,
         thunkAPI) => {
         try {
-            // const settingsQuery = config.requireSettings.map((setting) => `setting=${setting}`).join('&')
-            // const fetchedSettings = await Axios.get(`/api/v1/settings/getMultipleSettings?${settingsQuery}`)
-            // const axiosInstanceTest = await AxiosInstance.get(`/api/v1/settings/getMultipleSettings?${settingsQuery}`)
-            // console.log('axiosInstanceTest:',axiosInstanceTest.data)
-
             const fetchedSettings = await getSettings(config.requireSettings)
-            const designData = fetchedSettings.data.settings?.find(setting => setting?.type === 'design')
-            const identityData = fetchedSettings.data.settings?.find(setting => setting?.type === 'identity')
-            const membershipSettings = fetchedSettings.data.settings?.find(setting => setting?.type === 'membershipSettings')
 
             thunkAPI.dispatch(
                 setHeadData(
@@ -58,15 +50,16 @@ export const fetchSettings = createAsyncThunk(
                         config.context,
                         config.options?.page,
                         config.options?.setHeadData,
-                        identityData.data
+                        // identityData.data
+                        fetchedSettings.data?.settings?.identity?.data
                     )
                 )
             )
             return {
                 requestedSettings: config.requireSettings,
-                design: designData?.data || {},
-                identity: identityData?.data || {},
-                membershipSettings: membershipSettings?.data || {},
+                design: fetchedSettings.data?.settings?.design?.data || {},
+                identity: fetchedSettings.data?.settings?.identity?.data || {},
+                membershipSettings: fetchedSettings.data?.settings?.membershipSettings?.data  || {},
                 isSettingSet: true,
             }
         } catch (err) {
@@ -80,26 +73,15 @@ export const getUncachedSettingsForAdmin = createAsyncThunk('settings/getUncache
         thunkAPI) => {
         try {
             thunkAPI.dispatch(loading(true))
-            // return await Axios.get(`/api/admin/settings/getMultipleSetting${_getMultipleSettingsQueryGenerator(['identity', 'design', 'adminSettings', 'membershipSettings'])}&token=${localStorage.wt}`)
+            const settingsRequestData = await getUncachedSettings(['identity', 'design', 'adminSettings', 'membershipSettings'])
+            thunkAPI.dispatch(loading(false))
 
-            return await getUncachedSettings(['identity', 'design', 'adminSettings', 'membershipSettings'])
-                .then(res => {
+            return {
+                design: settingsRequestData?.data?.settings?.design?.data || {},
+                identity: settingsRequestData?.data?.settings?.identity?.data|| {},
+                membershipSettings: settingsRequestData?.data?.settings?.membershipSettings?.data|| {},
+            }
 
-                    const designSettings = res.data?.settings?.find((setting: any) => setting?.type === 'design') || {};
-                    const identitySettings = res.data?.settings?.find((setting: any) => setting?.type === 'identity') || {};
-                    const membershipSettings = res.data?.settings?.find((setting: any) => setting?.type === 'membershipSettings') || {};
-
-                    const settings = {
-                        design: designSettings?.data,
-                        identity: identitySettings?.data,
-                        membershipSettings: membershipSettings?.data,
-                    }
-
-                    return settings
-
-                }).catch(() => {
-
-                }).finally(() => thunkAPI.dispatch(loading(false)))
         } catch (err) {
             console.log(err)
         }

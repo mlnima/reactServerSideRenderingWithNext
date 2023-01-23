@@ -35,6 +35,7 @@ const getPostAction = createAsyncThunk(
         thunkAPI.dispatch(
             setHeadData({
                     title: postTitle,
+                    allowIndexByRobots: apiData.data.post.status === 'published',
                     description: typeof postDescription === 'string' ? postDescription?.substring(0, 155) : null,
                     keywords,
                     canonicalUrl: canonicalUrl,

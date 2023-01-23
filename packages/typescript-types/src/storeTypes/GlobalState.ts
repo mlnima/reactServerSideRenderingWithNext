@@ -5,6 +5,7 @@ export interface GlobalState {
     adminMode: boolean,
     notFoundPage: boolean,
     headData:{
+        allowIndexByRobots?: Boolean;
         canonicalUrl?: string;
         rtaContent?:boolean,
         twitterCard?:boolean,
