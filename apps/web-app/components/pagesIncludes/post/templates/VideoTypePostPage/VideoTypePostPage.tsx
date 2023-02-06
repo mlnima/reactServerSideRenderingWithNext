@@ -12,7 +12,7 @@ const CommentFrom = dynamic(() => import('../../components/common/CommentFrom'))
 const WidgetsRenderer = dynamic(() => import('../../../../includes/WidgetsRenderer/WidgetsRenderer'))
 const RatingButtons = dynamic(() => import('../../components/common/RatingButtons'))
 const DownloadLink = dynamic(() => import('../../components/common/DownloadLink'))
-const VideoPlayer = dynamic(() => import('../../components/video/VideoPlayer'))
+const VideoPlayer = dynamic(() => import('../../components/video/VideoPlayer'),{ssr:false})
 const PostDescription = dynamic(() => import('../../components/common/description/Description'))
 
 const VideoTypePostPageStyle = styled(PostPageStyle)`

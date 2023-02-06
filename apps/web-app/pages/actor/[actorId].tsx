@@ -12,6 +12,7 @@ import ActorBio from '../../components/includes/cards/CardsRenderer/ActorBio/Act
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
 import getPostsAction from "@store_toolkit/clientReducers/postsReducer/getPostsAction";
+import MetaAdminQuickAccessBar from "@components/pagesIncludes/metas/MetaAdminQuickAccessBar";
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
@@ -34,26 +35,22 @@ const PageStyle = styled.div`
 
 const actorPage = () => {
 
-    const {query} = useRouter()
-
-    const {role, actorPageStyle, sidebar} = useSelector(({user, settings}: Store) => {
+    const {actor, actorPageStyle, sidebar} = useSelector(({user, settings,posts}: Store) => {
         return {
-            role: user?.userData.role,
+            actor:  posts?.actorData,
             actorPageStyle: settings?.design?.actorPageStyle,
             sidebar: settings?.identity?.actorPageSidebar
         }
     })
 
+    const role = useSelector(({user}: Store) => user?.userData?.role);
+    const adminMode = useSelector(({globalState}: Store) =>  globalState?.adminMode);
+
+
     return (
         <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`} stylesData={actorPageStyle}>
             <main id={'primary'} className="main posts-page">
-                {role === 'administrator' ?
-                    <div className='edit-as-admin'>
-                        <Link href={'/admin/meta?id=' + query.actorId} className={'btn btn-primary'}>
-                                Edit
-                        </Link>
-                    </div>
-                    : null}
+                {(!!adminMode && role === 'administrator') && <MetaAdminQuickAccessBar metaId={actor._id}/>}
 
                 <ActorBio/>
                 <WidgetsRenderer

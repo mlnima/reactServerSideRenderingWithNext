@@ -18,6 +18,7 @@ module.exports = {
     pages: {
         "*": ['common', 'customTranslation'],
         "/profile": ["profile"],
+        "/user": ["profile"],
         "rgx:^/post": ["event"],
         "/profile/edit": ["profile"]
     }

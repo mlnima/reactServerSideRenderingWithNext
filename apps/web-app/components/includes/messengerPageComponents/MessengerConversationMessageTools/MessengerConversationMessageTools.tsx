@@ -1,37 +1,68 @@
-import {useRef} from 'react'
-import {socket} from '@_variables/socket';
+import React, {useRef} from 'react'
+import {socket} from 'custom-util/src/socket-utils/socketIoClient';
 import { useSelector} from "react-redux";
 import styled from "styled-components";
 import {fetchSendAMessageToPrivateConversation} from "../../../../store_toolkit/clientReducers/userReducer";
 import {useAppDispatch} from "../../../../store_toolkit/hooks";
 import SvgRenderer from "../../../global/commonComponents/SvgRenderer/SvgRenderer";
 import {Store} from "typescript-types";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faPaperPlane} from "@fortawesome/free-regular-svg-icons/faPaperPlane";
 // import {messageToConversation} from "../../../../legacyCodesAndComponents/store/clientActions/userActions";
 
 const MessengerConversationMessageToolsStyledForm = styled.form`
   position: fixed;
   left: 0;
   right: 0;
-  bottom: 5px;
+  bottom: 0;
+  height: 50px;
+  z-index: 1;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  height: 38px;
-  .form-control-input{
-    height: 28px;
+  width: 100%;
+  margin: 0 auto;
+  background-color: transparent;
+
+  .messaging-tools-text {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: var(--secondary-background-color, #181818);
+    padding:  8px;
+    box-sizing: border-box;
+
+    .messaging-tools-input {
+      background-color: var(--secondary-background-color, #181818);
+      color: var(--secondary-text-color, #181818);
+      border: none;
+      outline: none;
+      height: 27px;
+      width: 100%;
+    }
   }
-  .btn-primary{
-    right: 8px;
-    height: 42px;
+
+  .messaging-tools-Send {
+    z-index: 10;
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    svg{
-      width: 24px;
-      height: 24px;
-      
+    right: 8px;
+
+    .submit-button {
+      background-color: var(--secondary-background-color, #181818);
+      color: var(--secondary-text-color, #181818);
+      border: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
+
 `
 
 const MessengerConversationMessageTools = props => {
@@ -66,12 +97,16 @@ const MessengerConversationMessageTools = props => {
 
     return (
             <MessengerConversationMessageToolsStyledForm onSubmit={onSendMessageHandler} className='messenger-conversation-message-tools'>
-                <input maxLength={300} ref={messageInput} className='form-control-input' type="text" name='message'/>
-                <button onClick={e => onSendMessageHandler(e)} className='btn btn-primary'>
-                    <SvgRenderer svgUrl={'/asset/images/icons/share-solid.svg'}
-                                 size={20}
-                                 color={'var(--main-text-color, #fff)'}/>
-                </button>
+
+                <div className={'messaging-tools-text'}>
+                    <input maxLength={300} ref={messageInput} className='messaging-tools-input' type="text" name='message'/>
+                </div>
+                <div  className={'messaging-tools-Send'}>
+                    <button onClick={e => onSendMessageHandler(e)} className={'submit-button'} type={'submit'}>
+                        <FontAwesomeIcon icon={faPaperPlane} style={{width: 25, height: 25}}/>
+                    </button>
+                </div>
+
             </MessengerConversationMessageToolsStyledForm>
     );
 };

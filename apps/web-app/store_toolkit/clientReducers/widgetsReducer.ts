@@ -1,11 +1,12 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {RootState} from "../store";
 import {reduceWidgetsToGroups} from "custom-util";
-import Axios from "@_variables/Axios";
 import {loading, setAlert} from "./globalStateReducer";
 import {AxiosResponse} from "axios";
 import {Widget} from "typescript-types";
 import getWidgets from "api-requests/src/client/widgets/getWidgets";
+import saveFormData from "api-requests/src/client/widgets/saveFormData";
+import getUncachedWidgetsForAdmin from "api-requests/src/client/widgets/getUncachedWidgetsForAdmin";
 
 interface WidgetsState {
     widgetInGroups: {
@@ -39,20 +40,17 @@ export const saveWidgetFormData = createAsyncThunk(
     'widgets/saveWidgetFormData',
     async (data: {}, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-
-        return await Axios.post('/api/v1/forms/saveFormData', {data}).then(res => {
-
-        }).catch(err => {
-
-        }).finally(() => thunkAPI.dispatch(loading(true)))
+        return await saveFormData(data).then(response => {
+        }).catch(error => {
+        }).finally(() => thunkAPI.dispatch(loading(false)))
     }
 )
 
-export const getUncachedWidgetsForAdmin = createAsyncThunk(
-    'adminPanelWidgets/getUncachedWidgetsForAdmin',
+export const getUncachedWidgetsForAdminAction = createAsyncThunk(
+    'adminPanelWidgets/getUncachedWidgetsForAdminAction',
     async (data:any, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await Axios.get(`/api/admin/widgets/adminGetWidgets?token=${localStorage.wt}`)
+        return await getUncachedWidgetsForAdmin()
             .then((res: AxiosResponse<unknown | any>) => {
                 return {
                     widgetInGroups: reduceWidgetsToGroups([...(res?.data?.widgets  || [])])
@@ -91,7 +89,7 @@ export const widgetsSlice = createSlice({
 
                 }
             })
-            .addCase(getUncachedWidgetsForAdmin.fulfilled, (state, action: PayloadAction<any>) => {
+            .addCase(getUncachedWidgetsForAdminAction.fulfilled, (state, action: PayloadAction<any>) => {
                 return {
                     ...state,
                     widgetInGroups: action.payload?.widgetInGroups

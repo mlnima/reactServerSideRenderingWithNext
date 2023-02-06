@@ -21,7 +21,22 @@
   },
   "Pages": {
     "pathURL": "/dashboard/assets?assetsType=pages&size=20",
-    "subItems": [{"name": "newPage", "url": "/dashboard/page?new=1"}]
+    "subItems": [
+      {"name": "newPage", "url": "/dashboard/page?new=1"},
+      {"name": "home", "url": "/dashboard/page/home"},
+      {"name": "categories", "url": "/dashboard/page/categories"},
+      {"name": "tags", "url": "/dashboard/page/tags"},
+      {"name": "actors", "url": "/dashboard/page/actors"},
+      {"name": "category", "url": "/dashboard/page/category"},
+      {"name": "tag", "url": "/dashboard/page/tag"},
+      {"name": "actor", "url": "/dashboard/page/actor"},
+      {"name": "posts", "url": "/dashboard/page/posts"},
+      {"name": "post", "url": "/dashboard/page/post"},
+      {"name": "chatroom", "url": "/dashboard/page/chatroom"},
+      {"name": "messenger", "url": "/dashboard/page/messenger"},
+      {"name": "profile", "url": "/dashboard/page/profile"},
+      {"name": "user", "url": "/dashboard/page/user"}
+    ]
   },
   "Orders": {
     "pathURL": "/dashboard/assets?assetsType=orders&size=20",

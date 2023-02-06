@@ -4,10 +4,11 @@ import {FC} from "react";
 import {Store} from "typescript-types";
 import keyframes from './keyframes';
 import gridLayout from './gridLayout';
-import scrollBar from './scrollBar';
+// import scrollBar from './scrollBar';
 import buttons from 'ui/src/buttonsStyle';
 import inputs from 'ui/src/inputsStyles';
 import selects from 'ui/src/selectsStyle';
+import scrollBars from 'ui/src/scrollBars';
 
 interface GlobalStylesPropTypes {
     customColors: string,
@@ -27,6 +28,7 @@ const GlobalStyles = createGlobalStyle`
   ${gridLayout}
   ${inputs}
   ${selects}
+  ${scrollBars}
 
   body {
     background-color: var(--main-background-color, #000);

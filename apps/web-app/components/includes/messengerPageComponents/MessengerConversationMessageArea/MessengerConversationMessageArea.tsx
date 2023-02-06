@@ -12,12 +12,15 @@ interface MessengerConversationMessageAreaTypes {
 
 
 const MessengerConversationMessageAreaStyledDiv = styled.div`
-  position: fixed;
+  position: absolute;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 50px;
   top: 0;
-  margin: 58px 0;
+  height: 70vh;
+  //margin:  0;
+  //padding: 0 8px;
+  //box-sizing: border-box;
   overflow-y: scroll;
 `
 
@@ -40,23 +43,8 @@ const MessengerConversationMessageArea = ({connectedUserData, userData}: Messeng
     }
 
     return (
-        <MessengerConversationMessageAreaStyledDiv className='messenger-conversation-message-area' ref={messageArea}>
-            {/*{messages?*/}
-            {/*    _.uniqBy((messages || []),(message: any)=> {*/}
-            {/*        return message.createdAt*/}
-            {/*    }).map((message: any) => {*/}
-            {/*        return (*/}
-            {/*            <MessengerConversationMessage*/}
-            {/*                key={_.uniqueId('message_')}*/}
-            {/*                message={message}*/}
-            {/*                connectedUserData={connectedUserData}*/}
-            {/*                // @ts-ignore*/}
-            {/*                currentUserId={userData._id}*/}
-            {/*            />*/}
-            {/*        )*/}
-            {/*    })*/}
-            {/*    :null*/}
-            {/*}*/}
+        <MessengerConversationMessageAreaStyledDiv className='messenger-conversation-message-area custom-scroll' ref={messageArea}>
+
             {messages?
                 uniqArrayBy((messages || []),'createdAt').map((message: any) => {
                     return (

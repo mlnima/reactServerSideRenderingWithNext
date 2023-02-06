@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Draggable from 'react-draggable';
 import useTranslation from 'next-translate/useTranslation'
 import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
+import {useAppDispatch} from "@store_toolkit/hooks";
+import {closeAlert} from "@store_toolkit/clientReducers/globalStateReducer";
 
 const StyledDiv = styled.div`
   position: fixed;
@@ -103,19 +105,18 @@ const StyledDiv = styled.div`
 `
 
 interface PropTypes{
-
-    alert:any,
-    closeAdminpanelAlert:Function
+    alert:any
 }
-const AlertBox:FC<PropTypes> = ({alert,closeAdminpanelAlert}) => {
-    const {t} = useTranslation();
+const AlertBox:FC<PropTypes> = ({alert,}) => {
+    const {t} = useTranslation('common customTranslation');
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         if (alert?.active) {
             const component = true
             setTimeout(() => {
                 if (component) {
-                    closeAdminpanelAlert()
+                    dispatch(closeAlert(null))
                 }
             }, 3000)
         }
@@ -123,7 +124,7 @@ const AlertBox:FC<PropTypes> = ({alert,closeAdminpanelAlert}) => {
 
     if (alert?.active){
         return (
-            <StyledDiv className='alert-box' onClick={() => closeAdminpanelAlert()}>
+            <StyledDiv className='alert-box' onClick={() =>  dispatch(closeAlert(null))}>
                 <Draggable handle=".handle">
                     <div className='alert-message'>
                         <div className='alert-message-header handle'>
@@ -135,7 +136,7 @@ const AlertBox:FC<PropTypes> = ({alert,closeAdminpanelAlert}) => {
                                              customClassName={'download-logo'}
                                              color={'var(--main-text-color, #fff)'}/>
                             </p>
-                            <button className='close-alert' onClick={() => closeAdminpanelAlert()}>
+                            <button className='close-alert' onClick={() =>  dispatch(closeAlert(null))}>
                                 <span className={'icon faTimes'}/>
                                 <SvgRenderer svgUrl={'/asset/images/icons/xmark-solid.svg'}
                                              size={25}

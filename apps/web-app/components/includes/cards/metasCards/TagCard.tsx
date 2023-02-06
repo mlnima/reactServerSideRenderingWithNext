@@ -11,8 +11,7 @@ const CardImageRenderer = dynamic(() => import('../asset/CardImageRenderer'))
 
 const TagCardStyle = styled.article`
   width: 100%;
-  margin: 0 auto;
-
+  
   .tag-card-link {
 
     color: var(--secondary-text-color, #ccc);

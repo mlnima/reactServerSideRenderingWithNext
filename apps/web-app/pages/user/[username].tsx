@@ -1,16 +1,17 @@
-import {useEffect} from 'react';
-import UserPageProfileImage
-    from "../../components/includes/userPageComponents/UserPageProfileImage/UserPageProfileImage";
-import UserPageActionButtons from "../../components/includes/userPageComponents/UserPageActionButtons/UserPageActionButtons";
+import React, {useEffect} from 'react';
+import UserPageActionButtons
+    from "../../components/includes/userPageComponents/UserPageActionButtons/UserPageActionButtons";
 import {useRouter} from "next/router";
 import styled from "styled-components";
 import useTranslation from 'next-translate/useTranslation'
-import {wrapper} from "../../store_toolkit/store";
+import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
-import {fetchSpecificUserData, fetchUserPageData} from "../../store_toolkit/clientReducers/userReducer";
-import {useAppDispatch} from "../../store_toolkit/hooks";
+import {fetchSpecificUserData, fetchUserPageData} from "@store_toolkit/clientReducers/userReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import SvgRenderer from "../../components/global/commonComponents/SvgRenderer/SvgRenderer";
+import UserPreviewImage from "ui/src/UserPreviewImage";
+import {Store} from "typescript-types";
 
 const UserPageStyledDiv = styled.div`
   color: var(--main-text-color);
@@ -75,13 +76,13 @@ const user = () => {
     const {t} = useTranslation('common');
     const dispatch = useAppDispatch()
     const router = useRouter()
-    // @ts-ignore
-    const userPageData = useSelector(store => store.user.userPageData)
-    // @ts-ignore
-    const userData = useSelector(store => store.user.userData)
+
+    const {userData,userPageData} = useSelector(({user}:Store) =>user)
 
     useEffect(() => {
-        getUserData()
+         setTimeout(()=>{
+             getUserData()
+         },500)
     }, []);
 
     const getUserData = async () => {
@@ -101,64 +102,46 @@ const user = () => {
     }
 
 
-    return (
-        <UserPageStyledDiv className='user-page main'>
+    if (userPageData?._id && userPageData?.username){
+        return (
+            <UserPageStyledDiv className='user-page main'>
 
-            <div className='profile-header'>
-                {userPageData?._id ?
-                    <UserPageProfileImage
-                        // @ts-ignore
-                        gender={userPageData?.gender}
-                        // @ts-ignore
-                        profileImage={userPageData?.profileImage}
-                    /> : null
-                }
-
-                <div className='profile-header-info-actions'>
-
-                    {userPageData?.username ?
-                        <h3>{
-                            // @ts-ignore
-                            userPageData?.username
-                        }
-                        </h3> : null
-                    }
-
-                    {
-                        // @ts-ignore
-                        userData?.username !== userPageData?.username && userPageData?._id ?
-                            <UserPageActionButtons
-                                _id={userData?._id}
-                            /> : null
-                    }
-                    {userPageData?._id ?
+                <div className='profile-header'>
+                    {!!userPageData?.profileImage &&
+                        <UserPreviewImage imageUrl={userPageData?.profileImage} size={150}/>}
+                    <div className='profile-header-info-actions'>
+                        <h3>{userPageData?.username}</h3>
+                        <UserPageActionButtons _id={userData?._id}/>
                         <div className='follow-count'>
-                            <p>{t('common:Followers',{},{fallback:'Followers'})} : <span>{
-                                // @ts-ignore
-                                userPageData?.followers ? userPageData.followers?.length : 0
-                            }</span></p>
-                            <p>{t('common:Following',{},{fallback:'Following'})}: <span>{
-                                // @ts-ignore
-                                userPageData?.following ? userPageData.following?.length : 0
-                            }</span></p>
-                        </div> : null
-                    }
+                            <p>
+                                {t('common:Followers', {}, {fallback: 'Followers'})} :
+                                <span>{userPageData?.followers ? userPageData.followers?.length : 0}</span>
+                            </p>
+                            <p>
+                                {t('common:Following', {}, {fallback: 'Following'})}:
+                                <span>{userPageData?.following ? userPageData.following?.length : 0}</span>
+                            </p>
+                        </div>
 
+                    </div>
                 </div>
-            </div>
-            <div className='profile-posts'>
-                <div className='profile-no-posts'>
-                    <SvgRenderer svgUrl={'/asset/images/icons/camera-solid.svg'}
-                                 size={20}
-                                 customClassName={'upload-profile-image-btn-svg'}
-                                 color={'var(--main-text-color, #ccc)'}/>
+                <div className='profile-posts'>
+                    <div className='profile-no-posts'>
+                        <SvgRenderer svgUrl={'/asset/images/icons/camera-solid.svg'}
+                                     size={20}
+                                     customClassName={'upload-profile-image-btn-svg'}
+                                     color={'var(--main-text-color, #ccc)'}/>
+                    </div>
+                    <h2 className='profile-no-posts-title'>No Post Yet </h2>
+                    <p className='profile-no-posts-title'> Coming Soon</p>
                 </div>
-                <h2 className='profile-no-posts-title'>No Post Yet </h2>
-                <p className='profile-no-posts-title'> Coming Soon</p>
-            </div>
 
-        </UserPageStyledDiv>
-    );
+            </UserPageStyledDiv>
+        );
+    }else return null
+
+
+
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {

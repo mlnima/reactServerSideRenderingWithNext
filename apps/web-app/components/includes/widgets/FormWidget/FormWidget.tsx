@@ -1,9 +1,11 @@
-import {FC, useMemo, useState} from 'react';
+import {FC, useEffect, useMemo, useState} from 'react';
 import {convertVariableNameToName} from "custom-util";
 import styled from "styled-components";
 import {useRouter} from "next/router";
 import {saveWidgetFormData} from "@store_toolkit/clientReducers/widgetsReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
+import {useSelector} from "react-redux";
+import {Store} from "typescript-types";
 
 const FormWidgetStyledDiv = styled.div`
   display: flex;
@@ -67,6 +69,13 @@ const FormWidget: FC<FormWidgetPropTypes> = ({widgetId, uniqueData}) => {
 
     const {locale} = useRouter()
     const dispatch = useAppDispatch()
+    const {userId, username, role} = useSelector(({user}: Store) => {
+        return {
+            userId: user?.userData?._id,
+            username: user?.userData?.username,
+            role: user?.userData?.role,
+        }
+    })
 
     const [state, setState] = useState(() => {
         return {
@@ -76,6 +85,18 @@ const FormWidget: FC<FormWidgetPropTypes> = ({widgetId, uniqueData}) => {
             data: {}
         }
     })
+
+    useEffect(() => {
+        setState(prevState => ({
+            ...prevState,
+            data: {
+                ...prevState.data,
+                userId,
+                username,
+                role
+            }
+        }))
+    }, [userId, username, role]);
 
     const [isSubmit, setIsSubmit] = useState(false)
 
@@ -100,34 +121,34 @@ const FormWidget: FC<FormWidgetPropTypes> = ({widgetId, uniqueData}) => {
         setIsSubmit(true)
     }
 
-    let formFields = useMemo(()=>{
-        const formFieldsInstance = [...(uniqueData?.formFields||[])]
+    let formFields = useMemo(() => {
+        const formFieldsInstance = [...(uniqueData?.formFields || [])]
         return formFieldsInstance?.sort((a, b) => (a.fieldIndex > b.fieldIndex) ? 1 : -1)
-    },[uniqueData?.formFields])
+    }, [uniqueData?.formFields])
 
 
-    const renderFields = formFields.map((field,index )=> {
-            const fieldAttr = {
-                required: field.required ? Boolean(field.required) : false,
-                placeholder: field.fieldPlaceHolder || '',
-                name: field.fieldName,
-                onChange: (e) => onFormFieldsChangeHandler(e),
-            }
-            return (
-                <div className='form-widget-field' key={index}>
-                    <p className='form-widget-field-title'>{convertVariableNameToName(field.fieldName)}</p>
-                    {field.fieldType === 'textarea' ?
-                        <textarea className={'form-control-input'}
-                                  {...fieldAttr}
-                        /> :
-                        <input className={'form-control-input'}
-                               {...fieldAttr}
-                               type={field.fieldType || 'text'}
-                        />
-                    }
-                </div>
-            )
-        })
+    const renderFields = formFields.map((field, index) => {
+        const fieldAttr = {
+            required: field.required ? Boolean(field.required) : false,
+            placeholder: field.fieldPlaceHolder || '',
+            name: field.fieldName,
+            onChange: (e) => onFormFieldsChangeHandler(e),
+        }
+        return (
+            <div className='form-widget-field' key={index}>
+                <p className='form-widget-field-title'>{convertVariableNameToName(field.fieldName)}</p>
+                {field.fieldType === 'textarea' ?
+                    <textarea className={'form-control-input'}
+                              {...fieldAttr}
+                    /> :
+                    <input className={'form-control-input'}
+                           {...fieldAttr}
+                           type={field.fieldType || 'text'}
+                    />
+                }
+            </div>
+        )
+    })
 
     return (
         <FormWidgetStyledDiv className='form-widget'>

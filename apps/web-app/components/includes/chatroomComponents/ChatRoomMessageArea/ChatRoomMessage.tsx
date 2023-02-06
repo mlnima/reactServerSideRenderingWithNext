@@ -1,8 +1,9 @@
 import React, {PureComponent} from "react";
 import {formatDistance} from 'date-fns'
-import faIR from "date-fns/locale/fa-IR";
 import styled from "styled-components";
 import {ChatroomMessage} from "typescript-types";
+import UserPreviewImage from "ui/src/UserPreviewImage";
+import Link from "next/link";
 
 const ChatRoomLogMessageStyledDiv = styled.div`
   background-color: var(--secondary-background-color, #181818);
@@ -20,105 +21,80 @@ const ChatRoomLogMessageStyledDiv = styled.div`
 const ChatRoomMessageStyledDiv = styled.div`
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-end;
   flex-wrap: wrap;
   max-width: 70vw;
   border-radius: 5px;
   padding: 5px 10px;
+  box-sizing: border-box;
 
-
-  .chatroom-message-area-message-username-time {
-    display: flex;
-    justify-content: space-between;
-    color: var(--main-text-color, #fff);
-    font-size: small;
+  .user-profile-image {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    margin-bottom: 7px;
   }
-
-  .chatroom-message-area-message-text {
-    color: var(--main-text-color, #fff);
-    margin: 10px 20px;
-    overflow-wrap: break-word;
-  }
-
-  .chatroom-message-area-message-image {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-
-  }
-
-  .chatroom-message-area-message-image:hover {
-    transition: .5s;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-
-  }
-
+  
   .chatroom-message-area-message-data {
     background-color: var(--secondary-background-color, #181818);
     padding: 10px;
     margin: 5px;
+    box-sizing: border-box;
     border-radius: 10px;
-  }
+    .chatroom-message-area-message-username {
+      display: flex;
+      justify-content: space-between;
+      color: var(--main-text-color, #fff);
+      font-size: small;
+    }
 
-  .chatroom-message-area-message-time {
-    direction: ${({locale}:{locale:string})=> locale === 'fa' ? 'rtl' : 'ltr'};
-    color: var(--main-text-color, #fff);
-    font-size: xx-small;
-    margin-left: 30px;
+    .chatroom-message-area-message-text {
+      color: var(--main-text-color, #fff);
+      margin: 10px 20px;
+      overflow-wrap: break-word;
+    }
   }
 `
 
 interface ChatRoomMessagePropTypes {
-    locale:string,
-    message:ChatroomMessage,
-    onShowProfileHandler:any
+    locale: string,
+    message: ChatroomMessage,
+    onShowProfileHandler: any
 }
 
 class ChatRoomMessage extends PureComponent<ChatRoomMessagePropTypes> {
 
     render() {
-        const locale = this.props.locale === 'fa' ? {locale:faIR} : {}
+
         if (this?.props?.message?.type === 'log') {
             return (
-                <ChatRoomLogMessageStyledDiv className='chatroom-message-area-message' >
+                <ChatRoomLogMessageStyledDiv className='chatroom-message-area-message'>
                     <p className='chatroom-message-area-message-log'>
                         {this?.props?.message?.username}
                         joined the room
                     </p>
                 </ChatRoomLogMessageStyledDiv>
             )
-        } else return (
-            <ChatRoomMessageStyledDiv className='chatroom-message-area-message' locale={this.props.locale}>
-                <img onClick={() => {
-                    //@ts-ignore
-                    this?.props?.onShowProfileHandler(this?.props?.message?.username,
-                        this?.props?.message?.id,
-                        this?.props?.message?.profileImage
-                    )
-                }}
-                     className='chatroom-message-area-message-image'
-                     src={this?.props?.message?.profileImage ? this?.props?.message?.profileImage : '/asset/images/user/noGenderAvatar50.jpg'}
+        } else if(!!this?.props?.message?.username) {
+            return (
+                <ChatRoomMessageStyledDiv className='chatroom-message-area-message'>
 
+                    <Link className={'user-profile-image'} href={`/user/${this?.props?.message?.username}`}>
+                        <UserPreviewImage imageUrl={this?.props?.message?.profileImage} size={24}/>
+                    </Link>
 
-                     alt={'profileImage'}
-                />
-
-
-                <div className='chatroom-message-area-message-data'>
-                    <span className='chatroom-message-area-message-username-time' title= {formatDistance(new Date(this?.props?.message?.createdAt), new Date(), {addSuffix: true,...locale})}>
+                    <div className='chatroom-message-area-message-data'>
+                    <span className='chatroom-message-area-message-username'
+                          title={formatDistance(new Date(this?.props?.message?.createdAt), new Date(), {addSuffix: true})}>
                     {this?.props?.message?.username}
-                        {/*<span className='chatroom-message-area-message-time'>*/}
-                        {/*    {formatDistance(new Date(this?.props?.message?.createdAt), new Date(), {addSuffix: true,...locale})}*/}
-                        {/*</span>*/}
                     </span>
-                    <p className='chatroom-message-area-message-text'>
-                        {this?.props?.message?.messageData}
-                    </p>
-                </div>
-            </ChatRoomMessageStyledDiv>
-        );
+                        <p className='chatroom-message-area-message-text'>
+                            {this?.props?.message?.messageData}
+                        </p>
+                    </div>
+                </ChatRoomMessageStyledDiv>
+            );
+        }
     }
 }
 
@@ -126,3 +102,4 @@ export default ChatRoomMessage;
 
 
 // <div>{this.props.message}</div>
+//

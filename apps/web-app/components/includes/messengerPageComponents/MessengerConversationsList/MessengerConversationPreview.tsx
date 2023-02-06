@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import moment from "moment";
+import {formatDistance} from 'date-fns';
 import Link from "next/link";
 import styled from "styled-components";
-import {fetchDeleteConversation} from "../../../../store_toolkit/clientReducers/userReducer";
-import {useAppDispatch} from "../../../../store_toolkit/hooks";
+import {fetchDeleteConversation} from "@store_toolkit/clientReducers/userReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 import SvgRenderer from "../../../global/commonComponents/SvgRenderer/SvgRenderer";
 // import {deleteConversation} from "../../../../store/clientActions/userActions";
 
@@ -101,7 +101,7 @@ const MessengerConversationPreview = ({conversationData, userId}) => {
             profileImage: conversationData?.users ? conversationData.users.find(u => u._id !== userId)?.profileImage : '/asset/images/default/no-image-available.png',
             messageBody: conversationData?.messages?.[0]?.messageBody,
             date: conversationData?.updatedAt ?
-                moment(new Date(conversationData.updatedAt), "YYYYMMDD").fromNow(false)
+                formatDistance(new Date(conversationData.updatedAt), new Date(), {addSuffix: true})
                 : ''
         })
     }, []);

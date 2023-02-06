@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import {FC} from "react";
 
-const CardTitleStyle = styled.header`
+const CardTitleStyle = styled.h3`
   margin: 4px 0;
   padding:  4px 0;
   box-sizing: border-box;
@@ -16,6 +16,8 @@ const CardTitleStyle = styled.header`
     text-overflow: ellipsis;
     cursor: pointer;
     box-sizing: border-box;
+    font-size: 1rem;
+    font-weight: normal;
   }
 
   @media only screen and (min-width: 768px) {

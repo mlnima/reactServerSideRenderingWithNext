@@ -1,21 +1,19 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../../store";
-// import fetchPost
-//     from "./_clientPostsAsyncThunksFetchPost";
 import getPostAction from "./getPostAction";
 import getMetasAction from "./getMetasAction";
 import likePostAction from "./likePostAction";
 import disLikePostAction from "./disLikePostAction";
 import postNewCommentAction from "./postNewCommentAction";
 import {_ugcDeletePostImage, _ugcUploadPostImages} from "./_ugcUploadPostImages";
-//not in package
-import getTags from "./getTags";
-import clientLikeDislikeView from "api-server/dist/controllers/clientControllers/clientPostsControllers/clientLikeDislikeView";
+import getTagsAction from "./getTagsAction";
 import attendingToEvent from "@store_toolkit/clientReducers/postsReducer/attendToEvent";
 import getPageDataAction from "@store_toolkit/clientReducers/postsReducer/getPageDataAction";
 import getPostCommentsAction from "@store_toolkit/clientReducers/postsReducer/getPostCommentsAction";
 import getPostsAction from "@store_toolkit/clientReducers/postsReducer/getPostsAction";
 import getEditingPostAction from "@store_toolkit/clientReducers/postsReducer/getEditingPostAction";
+
+
 
 //**not in package
 // import fetchUserCreateNewPost
@@ -137,6 +135,7 @@ export const postsSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
+        //@ts-ignore
         builder
             .addCase(getMetasAction.fulfilled, (state, action: PayloadAction<any>) => {
                 return {
@@ -144,7 +143,7 @@ export const postsSlice = createSlice({
                     ...action.payload
                 }
             })
-            .addCase(getTags.fulfilled, (state, action: PayloadAction<any>) => {
+            .addCase(getTagsAction.fulfilled, (state, action: PayloadAction<any>) => {
                 return {
                     ...state,
                     ...action.payload

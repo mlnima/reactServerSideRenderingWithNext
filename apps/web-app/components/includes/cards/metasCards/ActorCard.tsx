@@ -11,7 +11,7 @@ const CardImageRenderer = dynamic(() => import('../asset/CardImageRenderer'))
 
 const ActorCardStyle = styled.article`
   width: 100%;
-  margin: 20px auto;
+  margin: 10px auto;
   font-size: 14px;
 
   .actor-card-link {

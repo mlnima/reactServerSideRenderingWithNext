@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC} from 'react';
 import {useSelector} from "react-redux";
 import {Store} from "typescript-types";
 import Loading from "../../global/commonComponents/Loading/Loading";
@@ -6,11 +6,11 @@ import GlobalStylesComponent from "../../global/Styles/GlobalStylesComponent";
 import SiteSettingSetter from "../../includes/SiteSettingsSetter/SiteSettingsSetter";
 import dynamic from "next/dynamic";
 import AppLayoutAdminDataInitializer from "./AppLayoutAdminDataInitializer";
-import {closeAlert, setIsAppInitialized} from "@store_toolkit/clientReducers/globalStateReducer";
-import {useAppDispatch} from "@store_toolkit/hooks";
-import AppLayoutHeader from "@components/layouts/AppLayout/AppLayoutHeader";
 
 const FooterWidgetArea = dynamic(() => import('../../widgetsArea/FooterWidgetArea/FooterWidgetArea'));
+const TopBarWidgetArea = dynamic(() => import('../../widgetsArea/TopBarWidgetArea/TopBarWidgetArea'));
+const HeaderWidgetArea = dynamic(() => import('../../widgetsArea/HeaderWidgetArea/HeaderWidgetArea'));
+const NavigationWidgetArea = dynamic(() => import('../../widgetsArea/NavigationWidgetArea/NavigationWidgetArea'));
 const AlertBox = dynamic(() => import('../../global/commonComponents/AlertBox/AlertBox'), {ssr: false});
 const LoginRegisterPopup = dynamic(() => import('../../includes/LoginRegisterPopup/LoginRegisterPopup'), {ssr: false});
 const CookiePopup = dynamic(() => import('../../includes/ClientPopActionRequest/CookiePopup'), {ssr: false});
@@ -23,41 +23,20 @@ interface AppLayoutPropTypes {
 }
 
 const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
-    const dispatch = useAppDispatch();
 
-    const isAppInitialized = useSelector(({globalState}: Store) => globalState.isAppInitialized)
+    const {loggedIn} = useSelector(({user}: Store) =>user)
 
-    const {loggedIn, userRole} = useSelector(({user}: Store) => {
-        return {
-            loggedIn: user?.loggedIn,
-            userRole: user?.userData?.role,
-        }
-    })
-
-    const {loginRegisterFormPopup, alert, isLoading} = useSelector(({globalState}: Store) => {
-        return {
-            alert: globalState?.alert,
-            isLoading: globalState?.loading,
-            loginRegisterFormPopup: globalState?.loginRegisterFormPopup
-        }
-    })
+    const {loginRegisterFormPopup, alert, loading,adminMode} = useSelector(({globalState}: Store) => globalState)
 
     const identity = useSelector(({settings}: Store) => settings?.identity);
 
-    // useEffect(() => {
-    //     setTimeout(()=>{
-    //         dispatch(setIsAppInitialized(true))
-    //     },500)
-    //
-    // }, []);
 
-    const closeClientAlert = () => {
-        dispatch(closeAlert(null))
-    }
 
     return (
         <>
-            <AppLayoutHeader/>
+            {(identity?.topbar === 'enable' || identity?.topbar === undefined) && <TopBarWidgetArea/>}
+            {(identity?.header === 'enable' || identity?.header === undefined) && <HeaderWidgetArea/>}
+            {(identity?.navigation === 'enable' || identity?.navigation === undefined) && <NavigationWidgetArea/>}
 
             <div id={'page'} className={'App'}>
                 {children}
@@ -66,13 +45,13 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
             {(identity?.footer === 'enable' || identity?.footer === undefined) && <FooterWidgetArea/>}
             <BackToTopButton/>
 
-            <Loading isLoading={isLoading}/>
+            <Loading isLoading={loading}/>
 
-            {(isAppInitialized && localStorage.cookieAccepted !== 'true') && <CookiePopup/>}
+            {(typeof window !== 'undefined' && localStorage?.cookieAccepted !== 'true') && <CookiePopup/>}
 
             {loginRegisterFormPopup && !loggedIn && <LoginRegisterPopup/>}
-            <AlertBox alert={alert} closeAdminpanelAlert={closeClientAlert}/>
-            {userRole === 'administrator' && <AppLayoutAdminDataInitializer/>}
+            <AlertBox alert={alert}/>
+            {!!adminMode && <AppLayoutAdminDataInitializer/>}
 
             <GlobalStylesComponent/>
             <SiteSettingSetter/>

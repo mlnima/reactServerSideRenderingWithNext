@@ -4,7 +4,7 @@ import styled from "styled-components";
 import SvgRenderer from "../../../global/commonComponents/SvgRenderer/SvgRenderer";
 
 const MessengerConversationHeaderStyledDiv = styled.div`
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;

@@ -4,7 +4,7 @@ import Head from 'next/head'
 // import {adminPanelGetSettings} from "@store_toolkit/../../../../trash/oldAdminPagesAndComponents/store/adminReducers/adminPanelSettingsReducer";
 // import {fetchCustomPages} from "@store_toolkit/../../../../trash/oldAdminPagesAndComponents/store/adminReducers/adminPanelGlobalStateReducer";
 // import {fetchAdminPanelGetWidgets} from "@store_toolkit/../../../../trash/oldAdminPagesAndComponents/store/adminReducers/adminWidgetsReducer";
-import {getUncachedWidgetsForAdmin} from "@store_toolkit/clientReducers/widgetsReducer";
+import {getUncachedWidgetsForAdminAction} from "@store_toolkit/clientReducers/widgetsReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {useSelector} from "react-redux";
 import {Store} from "typescript-types";
@@ -45,7 +45,7 @@ const AdminDataSetter: FC<AdminDataSetterPropTypes> = ({setUnauthorized}) => {
 
     const getAndSetDataForAdmin = async () => {
         try {
-            dispatch(getUncachedWidgetsForAdmin(null))
+            dispatch(getUncachedWidgetsForAdminAction(null))
         } catch (err) {
             console.log(err)
         }

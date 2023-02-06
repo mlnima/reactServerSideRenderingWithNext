@@ -1,13 +1,13 @@
 import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {wrapper} from "../../store_toolkit/store";
+import {wrapper} from "@store_toolkit/store";
 import SidebarWidgetAreaRenderer from "../../components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import React from "react";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
 import MetasRenderer from "../../components/includes/metasPage/MetasRenderer";
-import getTags from "@store_toolkit/clientReducers/postsReducer/getTags";
+import getTagsAction from "@store_toolkit/clientReducers/postsReducer/getTagsAction";
 
 const PageStyle = styled.div`
   ${({tagsPageStyle}: { tagsPageStyle: string }) => tagsPageStyle || ''}
@@ -54,7 +54,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         store
     )
 
-    await store.dispatch(getTags({data: context.query}))
+    await store.dispatch(getTagsAction({data: context.query}))
 
     return null
 

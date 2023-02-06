@@ -9,6 +9,7 @@ import SidebarWidgetAreaRenderer from "../../components/widgetsArea/SidebarWidge
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
 import getPostsAction from "@store_toolkit/clientReducers/postsReducer/getPostsAction";
+import MetaAdminQuickAccessBar from "@components/pagesIncludes/metas/MetaAdminQuickAccessBar";
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
@@ -34,20 +35,25 @@ let PageStyle = styled.div`
 
 const categoryPage = () => {
 
-    const {role, category, categoryPageStyle, sidebar} = useSelector(({user, posts, settings}: Store) => {
+    const { category, categoryPageStyle, sidebar} = useSelector(({user, posts, settings}: Store) => {
         return {
-            role: user?.userData?.role,
             category: posts.categoryData ,
             categoryPageStyle: settings.design?.categoryPageStyle,
             sidebar: settings?.identity?.categoryPageSidebar
         }
     })
 
+    const role = useSelector(({user}: Store) => user?.userData?.role);
+    const adminMode = useSelector(({globalState}: Store) =>  globalState?.adminMode);
+
+
     return (
 
         <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar `} categoryPageStyle={categoryPageStyle}>
 
             <main id={'primary'} className="main posts-page">
+                {(!!adminMode && role === 'administrator') && <MetaAdminQuickAccessBar metaId={category._id}/>}
+
                 {category?.name && <PostsPageInfo titleEntry={category.name}/>}
                 <WidgetsRenderer position={'categoryPageTop'}/>
                 <PostsPage renderPagination={true}/>

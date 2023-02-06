@@ -5,6 +5,8 @@ import dynamic from "next/dynamic";
 import AuthenticationNotLoggedInItems from "./AuthenticationNotLoggedInItems";
 import SvgRenderer from "../../../global/commonComponents/SvgRenderer/SvgRenderer";
 import {Store} from "typescript-types";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
 
 const AuthenticationLoggedInItems = dynamic(() => import('./AuthenticationLoggedInItems'))
 
@@ -18,6 +20,7 @@ const AuthenticationStyledDiv = styled.div`
     margin: 0;
     border: none;
     outline: none;
+    cursor: pointer;
   }
   .authentication-widget-wrapper {
     border-left: var(--default-border);
@@ -150,11 +153,12 @@ const Authentication: FC = () => {
     return (
         <AuthenticationStyledDiv open={open}>
             <button className={'profile-icon'} onClick={onOpenCloseHandler} aria-label={'authentication panel'}>
-                <SvgRenderer svgUrl={'/asset/images/icons/user-solid.svg'}
-                             size={24}
-                             customClassName={'user-info-profile-button-icon'}
-                             color={' var(--main-text-color, #fff)'}
-                />
+                {/*<SvgRenderer svgUrl={'/asset/images/icons/user-solid.svg'}*/}
+                {/*             size={24}*/}
+                {/*             customClassName={'user-info-profile-button-icon'}*/}
+                {/*             color={' var(--main-text-color, #fff)'}*/}
+                {/*/>*/}
+                <FontAwesomeIcon icon={faUser} style={{width:24,height:24, color:' var(--main-text-color, #fff)'}}/>
             </button>
             <div className={'authentication-widget-wrapper'}>
                 <button className={'logged-item btn btn-transparent-light close-btn'} onClick={onOpenCloseHandler}>

@@ -3,6 +3,7 @@ import {languagesOptions} from "@_variables/variables";
 import styled from "styled-components";
 import {FC} from "react";
 
+
 const LanguagesSwitcherStyledDiv = styled.div`
   display: flex;
   align-items: center;

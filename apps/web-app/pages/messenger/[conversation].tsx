@@ -6,24 +6,25 @@ import MessengerConversationMessageArea
     from "../../components/includes/messengerPageComponents/MessengerConversationMessageArea/MessengerConversationMessageArea";
 import MessengerConversationMessageTools
     from "../../components/includes/messengerPageComponents/MessengerConversationMessageTools/MessengerConversationMessageTools";
-import {socket} from '@_variables/socket';
+import {socket} from 'custom-util/src/socket-utils/socketIoClient';
 import MessengerCall from "../../components/includes/messengerPageComponents/MessengerCall/MessengerCall";
 import {useSelector} from "react-redux";
-import {wrapper} from "../../store_toolkit/store";
+import {wrapper} from "@store_toolkit/store";
 import {
-    // answerTheCall,
     endCall, fetchAnswerTheCall,
-    fetchConversation, fetchOutgoingCall,
+    fetchOutgoingCall, getConversationAction,
     incomingCall,
     newMessageInConversation,
-    // outgoingCall,
-    setPartnerVideo,
-} from "../../store_toolkit/clientReducers/userReducer";
+} from "@store_toolkit/clientReducers/userReducer";
 
-import {useAppDispatch} from "../../store_toolkit/hooks";
+import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
-
+import styled from "styled-components";
+const Style = styled.div`
+  position: relative;
+  height: 80vh;
+`
 
 const conversation = () => {
     const dispatch = useAppDispatch()
@@ -38,32 +39,35 @@ const conversation = () => {
     const [mySocketId, setMySocketId] = useState("")
 
     useEffect(() => {
-        if (localStorage.wt) {
-            dispatch(fetchConversation({_id: router.query.conversation as string, loadAmount: -20}))
-        }
-    }, []);
+        setTimeout(()=>{
+            const connectedUser = users ? users.find(user => user._id !== userData?._id) : {}
+            if (connectedUser) {
+                // @ts-ignore
+                setConnectedUserData(connectedUser)
+            }
+        },500)
 
-    useEffect(() => {
-        const connectedUser = users ? users.find(user => user._id !== userData?._id) : {}
-        if (connectedUser) {
-            // @ts-ignore
-            setConnectedUserData(connectedUser)
-        }
+
     }, [users]);
 
     useEffect(() => {
-        socket.on('receiveMessageFromConversation', (messageData: { conversationId: string }) => {
-            if (messageData.conversationId === router.query.conversation) {
-                dispatch(newMessageInConversation(messageData))
+        setTimeout(()=>{
+            if (localStorage.wt) {
+                dispatch(getConversationAction({_id: router.query.conversation as string, loadAmount: -20}))
             }
-        })
-        socket.emit('joinConversation', router.query.conversation)
-        socket.on("mySocketId", (id: string) => {
-            setMySocketId(id)
-        })
-        socket.on("incomingCallFromConversation", (data: { callerId: any; callerName: any; userStream: any; }) => {
-            dispatch(incomingCall(data))
-        })
+            socket.on('receiveMessageFromConversation', (messageData: { conversationId: string }) => {
+                if (messageData.conversationId === router.query.conversation) {
+                    dispatch(newMessageInConversation(messageData))
+                }
+            })
+            socket.emit('joinConversation', router.query.conversation)
+            socket.on("mySocketId", (id: string) => {
+                setMySocketId(id)
+            })
+            socket.on("incomingCallFromConversation", (data: { callerId: any; callerName: any; userStream: any; }) => {
+                dispatch(incomingCall(data))
+            })
+        },500)
     }, []);
 
     const callUser = async () => {
@@ -90,15 +94,8 @@ const conversation = () => {
     }
 
     return (
-        <div className='messenger main'>
-            <MessengerConversationHeader
-                // @ts-ignore
-                callUser={callUser}
-                profileImage={connectedUserData.profileImage}
-                // @ts-ignore
-                username={connectedUserData.username}
-                // @ts-ignore
-                connectedUserId={connectedUserData._id}/>
+        <Style id={'content'} className='messenger main'>
+
             <MessengerConversationMessageArea
                 // @ts-ignore
                 userData={userData}
@@ -118,7 +115,7 @@ const conversation = () => {
                 endCallHandler={endCallHandler}
             />
 
-        </div>
+        </Style>
     );
 };
 

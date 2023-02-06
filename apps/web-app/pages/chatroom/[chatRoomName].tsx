@@ -1,13 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {socket} from '@_variables/socket';
+import {socket} from 'custom-util/src/socket-utils/socketIoClient';
 import {useRouter} from "next/router";
-import ChatRoomHeader from "../../components/includes/chatroomComponents/ChatRoomHeader/ChatRoomHeader";
 import ChatRoomMessageArea from "../../components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageArea";
 import ChatRoomTools from "../../components/includes/chatroomComponents/ChatRoomTools/ChatRoomTools";
 import ChatRoomOnlineUsersList
     from "../../components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersList";
-import ChatRoomMessageUserInfoPopup
-    from "../../components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup";
 import {useSelector} from "react-redux";
 import {dispatchSocketId} from "@store_toolkit/clientReducers/userReducer";
 import {setOnlineUsers,setMessages,  newMessage} from '@store_toolkit/clientReducers/chatroomReducer';
@@ -16,6 +13,14 @@ import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
 import {uniqArrayBy} from 'custom-util'
+import styled from "styled-components";
+import ChatRoomUserListButton
+    from "@components/includes/chatroomComponents/ChatRoomUserListButton/ChatRoomUserListButton";
+const Style = styled.div`
+  position: relative;
+  min-height: 80vh;
+ 
+`
 
 const chatRoom = () => {
     const dispatch = useAppDispatch()
@@ -24,75 +29,72 @@ const chatRoom = () => {
     const [isJoined, setIsJoined] = useState(false)
     const {query} = useRouter()
 
-    const onOnlineUserListVisibilityChangeHandler = () => {
-        onlineUserListVisibility ?
-            setOnlineUserListVisibility(false) :
-            setOnlineUserListVisibility(true)
-    }
 
     useEffect(() => {
-
-        if (
-            query.chatRoomName &&
-            user.userData?.username &&
-            user.userData._id &&
-            !isJoined &&
-            user.socketId
-        ) {
-            setIsJoined(true)
-            const userDataForJoiningRoom = {
-                chatRoomName: query.chatRoomName,
-                username: user.userData.username,
-                id: user.userData._id,
-                profileImage: user.userData.profileImage,
-                socketId: user.socketId
+        setTimeout(()=>{
+            if (
+                query.chatRoomName &&
+                user.userData?.username &&
+                user.userData._id &&
+                !isJoined &&
+                user.socketId
+            ) {
+                setIsJoined(true)
+                const userDataForJoiningRoom = {
+                    chatRoomName: query.chatRoomName,
+                    username: user.userData.username,
+                    id: user.userData._id,
+                    profileImage: user.userData.profileImage,
+                    socketId: user.socketId
+                }
+                socket.emit('joinUserToTheRoom', userDataForJoiningRoom)
             }
-            socket.emit('joinUserToTheRoom', userDataForJoiningRoom)
-        }
+        },500)
+
 
     }, [user.userData?._id, user.socketId]);
 
     useEffect(() => {
 
-        socket.emit('socketId')
-        socket.emit('onlineUsersList')
-        socket.emit('recentChatRoomMessages', query.chatRoomName)
-        socket.emit('joinSocketToTheChatroom', query.chatRoomName)
 
-        socket.on('socketId', (socketId: string) => {
-            dispatch(dispatchSocketId(socketId))
-        })
+        setTimeout(()=>{
+            socket.emit('socketId')
+            socket.emit('onlineUsersList')
+            socket.emit('recentChatRoomMessages', query.chatRoomName)
+            socket.emit('joinSocketToTheChatroom', query.chatRoomName)
 
-        socket.on('onlineUsersList', (chatroomOnlineUsers: { username: string }[]) => {
-            dispatch(setOnlineUsers(uniqArrayBy(chatroomOnlineUsers, 'username')))
-        })
+            socket.on('socketId', (socketId: string) => {
+                dispatch(dispatchSocketId(socketId))
+            })
 
-        socket.on('recentChatRoomMessages', (chatroomMessages: object[]) => {
-            dispatch(setMessages(chatroomMessages))
-        })
+            socket.on('onlineUsersList', (chatroomOnlineUsers: { username: string }[]) => {
+                dispatch(setOnlineUsers(uniqArrayBy(chatroomOnlineUsers, 'username')))
+            })
 
-        socket.on('userListUpdated', (chatroomOnlineUsers: { username: string }[]) => {
-            dispatch(setOnlineUsers(uniqArrayBy(chatroomOnlineUsers, 'username')))
-        })
+            socket.on('recentChatRoomMessages', (chatroomMessages: object[]) => {
+                dispatch(setMessages(chatroomMessages))
+            })
 
-        socket.on('messageFromChatroom', (newMessageData: object) => {
-            dispatch(newMessage(newMessageData))
-        })
+            socket.on('userListUpdated', (chatroomOnlineUsers: { username: string }[]) => {
+                dispatch(setOnlineUsers(uniqArrayBy(chatroomOnlineUsers, 'username')))
+            })
+
+            socket.on('messageFromChatroom', (newMessageData: object) => {
+                dispatch(newMessage(newMessageData))
+            })
+        },500)
+
 
     }, []);
 
     return (
-        <div>
-            <ChatRoomHeader onOnlineUserListVisibilityChangeHandler={onOnlineUserListVisibilityChangeHandler}/>
+        <Style id={'content'}>
+
             <ChatRoomMessageArea/>
             <ChatRoomTools/>
-            {
-                onlineUserListVisibility ?
-                    <ChatRoomOnlineUsersList/> :
-                    null
-            }
-            <ChatRoomMessageUserInfoPopup/>
-        </div>
+            {onlineUserListVisibility && <ChatRoomOnlineUsersList/>}
+            <ChatRoomUserListButton onlineUserListVisibility={onlineUserListVisibility} onOnlineUserListVisibilityChangeHandler={()=> setOnlineUserListVisibility(!onlineUserListVisibility)}/>
+        </Style>
     );
 };
 

@@ -4,7 +4,6 @@ import {GlobalState} from "typescript-types";
 
 const initialState: GlobalState = {
     loginRegisterFormPopup: false,
-    isAppInitialized:false,
     loading: false,
     adminMode: false,
     notFoundPage: false,
@@ -38,9 +37,6 @@ export const globalStateSlice = createSlice({
         },
         setNotFoundPage: (state, action: PayloadAction<any>) => {
             state.notFoundPage = action.payload
-        },
-        setIsAppInitialized: (state, action: PayloadAction<any>) => {
-            state.isAppInitialized = action.payload
         },
         setAdminMode: (state, action: PayloadAction<any>) => {
             state.adminMode = action.payload
@@ -77,7 +73,6 @@ export const {
     loading,
     setAdminMode,
     setAlert,
-    setIsAppInitialized,
     closeAlert
 } = globalStateSlice.actions;
 

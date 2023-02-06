@@ -5,6 +5,10 @@ export interface UserState {
     socketId?: string,
     loggedIn: boolean,
     userPageData?: {
+        profileImage: string;
+        username:string,
+        followers:[],
+        following:[],
         _id:string
     },
     conversations?: { _id: string }[],

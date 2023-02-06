@@ -1,6 +1,5 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
-// import Axios from "@_variables/Axios";
 import {getSettings,getUncachedSettings} from "api-requests";
 import {loading, setHeadData} from "./globalStateReducer";
 import _firstRequestHeadDataSetter from "../_storeVariables/_firstRequestHeadDataSetter";

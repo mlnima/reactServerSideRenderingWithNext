@@ -1,11 +1,22 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
-import Axios from "@_variables/Axios";
 import {loading, setAlert, loginRegisterForm} from "./globalStateReducer";
 import Peer from 'simple-peer'
-import {socket} from '@_variables/socket';
+import {socket} from 'custom-util/src/socket-utils/socketIoClient';
 import loginUser from "api-requests/src/common/users/loginUser";
 import getSignedInUserData from "api-requests/src/common/users/getSignedInUserData";
+import resetPassword from "api-requests/src/client/users/resetPassword";
+import registerUser from "api-requests/src/client/users/registerUser";
+import getConversation from "api-requests/src/client/users/getConversation";
+import getConversations from "api-requests/src/client/users/getConversations";
+import getMultipleUserDataById from "api-requests/src/client/users/getMultipleUserDataById";
+import sendPrivateMessage from "api-requests/src/client/users/sendPrivateMessage";
+import getStartConversation from "api-requests/src/client/users/getStartConversation";
+import unFollowUser from "api-requests/src/client/users/unFollowUser";
+import followUser from "api-requests/src/client/users/followUser";
+import userProfileImageUpload from "api-requests/src/client/users/userProfileImageUpload";
+import getUserPreviewData from "api-requests/src/client/users/getUserPreviewData";
+import deleteConversation from "api-requests/src/client/users/deleteConversation";
 
 interface UserStateRaw {
     userData: any;
@@ -62,7 +73,6 @@ export const fetchLogin = createAsyncThunk(
     'user/fetchLogin',
     async ({username, password}: Login, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        // return await Axios.post('/api/v1/users/login', {username, password}).then(res => {
         return await loginUser(username, password).then(res => {
 
             if(res?.data?.token){
@@ -240,14 +250,12 @@ export const fetchSpecificUserData = createAsyncThunk(
     async ({fields}: { fields: string[] }, thunkAPI) => {
         if (localStorage.wt) {
             return await getSignedInUserData(fields).then(res => {
-                thunkAPI.dispatch(setAlert({message: res.data.message, type: 'success'}))
                 return res.data?.userData
             }).catch((err) => {
                 localStorage.removeItem('wt')
-                thunkAPI.dispatch(setAlert({message: err.response.data.message, type: 'error'}))
             })
         } else {
-            thunkAPI.dispatch(setAlert({message: 'You Need To Login', type: 'error'}))
+            // thunkAPI.dispatch(setAlert({message: 'You Need To Login', type: 'error'}))
         }
     }
 )
@@ -256,7 +264,7 @@ export const fetchSpecificUserData = createAsyncThunk(
 export const fetchUserResetPassword = createAsyncThunk(
     'user/fetchUserResetPassword',
     async (data, thunkAPI) => {
-        return await Axios.post('/api/v1/users/resetPassword', {token: localStorage.wt, data}).then(res => {
+        return await resetPassword(data).then(res => {
             thunkAPI.dispatch(setAlert({message: 'Password Successfully Changed', type: 'success'}))
             return res.data?.userData
         }).catch(() => {
@@ -271,7 +279,7 @@ export const fetchUserRegister = createAsyncThunk(
     'user/fetchUserRegister',
     async ({data}: { data: {} }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await Axios.post('/api/v1/users/register', data).then(res => {
+        return await registerUser(data).then(res => {
             thunkAPI.dispatch(setAlert({message: res.data.message, type: 'success'}))
 
             setTimeout(() => {
@@ -285,26 +293,19 @@ export const fetchUserRegister = createAsyncThunk(
 )
 
 
-export const fetchConversations = createAsyncThunk(
-    'user/fetchConversations',
+export const getConversationsAction = createAsyncThunk(
+    'user/getConversationsAction',
     async (_id: string, thunkAPI) => {
-        return Axios.post('/api/v1/users/getConversations',
-            {_id, token: localStorage.wt})
-            .then(res => {
+        return getConversations(_id).then(res => {
                 return res.data?.conversations
             })
     }
 )
 
-export const fetchConversation = createAsyncThunk(
-    'user/fetchConversation',
+export const getConversationAction = createAsyncThunk(
+    'user/getConversationAction',
     async ({_id, loadAmount}: { _id: string, loadAmount: number }, thunkAPI) => {
-        return Axios.post('/api/v1/users/getConversation',
-            {
-                _id,
-                loadAmount,
-                token: localStorage.wt
-            })
+        return await getConversation(_id, loadAmount)
             .then(res => {
                 return res.data.conversation
             })
@@ -313,14 +314,10 @@ export const fetchConversation = createAsyncThunk(
 export const fetchDeleteConversation = createAsyncThunk(
     'user/fetchDeleteConversation',
     async (_id: string, thunkAPI) => {
-        return await Axios.get(`/api/v1/users/deleteConversation?_id=${_id}&token=${localStorage.wt}`)
+        return await deleteConversation(_id)
             .then(res => {
-
-
                 thunkAPI.dispatch(setAlert({message: res.data.message, type: 'success'}))
-
                 return _id
-
             }).catch(err => {
                 thunkAPI.dispatch(setAlert({message: err.response.data.message, type: 'error'}))
             })
@@ -329,13 +326,7 @@ export const fetchDeleteConversation = createAsyncThunk(
 export const fetchUserPageData = createAsyncThunk(
     'user/fetchUserPageData',
     async ({username, _id, fields}: { username?: string, _id?: string, fields: string[] }, thunkAPI) => {
-        const body = {
-            username,
-            fields,
-            _id
-        }
-
-        return await Axios.post('/api/v1/users/getUserPreviewData', body).then(res => {
+        return await getUserPreviewData(username, _id, fields).then(res => {
             return res.data.userData
         }).catch(error => {
             console.log(error)
@@ -347,10 +338,8 @@ export const fetchUserProfileImageUpload = createAsyncThunk(
     'user/fetchUserProfileImageUpload',
     async (image: any, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await Axios.post('/api/v1/fileManager/userImageUpload', image).then(res => {
-
-        }).catch(err => {
-
+        return await userProfileImageUpload(image).then(response => {
+        }).catch(error => {
         }).finally(() => thunkAPI.dispatch(loading(false)))
     }
 )
@@ -358,14 +347,8 @@ export const fetchFollowUser = createAsyncThunk(
     'user/fetchFollowUser',
     async (_id: string, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        const body = {
-            _id,
-            token: localStorage.wt
-        }
-        return await Axios.post('/api/v1/users/followUser', body).then(res => {
-
-        }).catch(err => {
-
+        return await followUser(_id).then(response => {
+        }).catch(error => {
         }).finally(() => thunkAPI.dispatch(loading(false)))
     }
 )
@@ -374,50 +357,21 @@ export const fetchUnFollowUser = createAsyncThunk(
     'user/fetchUnFollowUser',
     async (_id: string, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        const body = {
-            _id,
-            token: localStorage.wt
-        }
-        return await Axios.post('/api/v1/users/unFollowUser', body).then(res => {
-
-        }).catch(err => {
-
+        return await unFollowUser(_id).then(response => {
+        }).catch(error => {
         }).finally(() => thunkAPI.dispatch(loading(false)))
     }
 )
-
-export const fetchSendMessage = createAsyncThunk(
-    'user/fetchSendMessage',
-    async ({_id, message}: { _id: string, message: {} }, thunkAPI) => {
-        thunkAPI.dispatch(loading(true))
-        const body = {
-            _id,
-            message,
-            token: localStorage.wt
-        }
-        return await Axios.post('/api/v1/users/sendMessage', body).then(res => {
-
-        }).catch(err => {
-
-        }).finally(() => thunkAPI.dispatch(loading(false)))
-    }
-)
-
 
 export const fetchStartConversation = createAsyncThunk(
     'user/fetchStartConversation',
     async ({_id, push}: { _id: string, push: any }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        const body = {
-            _id,
-            token: localStorage.wt
-        }
-        await Axios.post('/api/v1/users/conversation', body).then(res => {
+        await getStartConversation(_id).then(res => {
             if (res.data?.conversation?._id) {
                 push(`/messenger/${res.data?.conversation?._id}`)
             }
-        }).catch(err => {
-
+        }).catch(error => {
         }).finally(() => thunkAPI.dispatch(loading(false)))
     }
 )
@@ -426,15 +380,8 @@ export const fetchSendAMessageToPrivateConversation = createAsyncThunk(
     'user/fetchSendAMessageToPrivateConversation',
     async ({conversationId, messageBody}: { conversationId: string, messageBody: {} }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        const body = {
-            conversationId,
-            messageBody,
-            token: localStorage.wt
-        }
-        await Axios.post('/api/v1/users/messageToConversation', body).then(res => {
-
-        }).catch(err => {
-
+        await sendPrivateMessage(conversationId, messageBody).then(res => {
+        }).catch(error => {
         }).finally(() => thunkAPI.dispatch(loading(false)))
     }
 )
@@ -443,22 +390,9 @@ export const fetchMultipleUserDataById = createAsyncThunk(
     'user/fetchMultipleUserDataById',
     async ({usersList, type}: { usersList: {}[], type: string }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        const body = {
-            usersList
-        }
-        return await Axios.post('/api/v1/users/getMultipleUserDataById', body).then(res => {
-            if (type === 'followers') {
-                //UPDATE_USER_DATA_FIELD
-
-                return {followers: res?.data?.users || []}
-
-            } else if (type === 'following') {
-                return {following: res?.data?.users || []}
-
-            }
-
-        }).catch(err => {
-
+        return await getMultipleUserDataById(usersList).then(res => {
+            return {[type]: res?.data?.users || []}
+        }).catch(error => {
         }).finally(() => thunkAPI.dispatch(loading(false)))
     }
 )
@@ -471,8 +405,8 @@ export const fetchUserAutoLogin = createAsyncThunk(
                 // thunkAPI.dispatch(setAlert({message: res.data.message, type: 'success'}))
                 return res.data?.userData
             }).catch((err) => {
-                // localStorage.removeItem('wt')
-                thunkAPI.dispatch(setAlert({message: err.response.data.message, type: 'error'}))
+                localStorage.removeItem('wt')
+                thunkAPI.dispatch(setAlert({message: err.response?.data?.message, type: 'error'}))
             })
         } else {
             thunkAPI.dispatch(setAlert({message: 'You Need To Login', type: 'error'}))
@@ -707,13 +641,13 @@ export const userSlice = createSlice({
                     loggedIn: true
                 }
             })
-            .addCase(fetchConversations.fulfilled, (state, action: PayloadAction<any>) => {
+            .addCase(getConversationsAction.fulfilled, (state, action: PayloadAction<any>) => {
                 return {
                     ...state,
                     conversations: action.payload,
                 }
             })
-            .addCase(fetchConversation.fulfilled, (state, action: PayloadAction<any>) => {
+            .addCase(getConversationAction.fulfilled, (state, action: PayloadAction<any>) => {
                 return {
                     ...state,
                     activeConversation: action.payload,

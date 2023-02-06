@@ -2,13 +2,13 @@ import PostsPage from "../../components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
 import PostsPageInfo from "../../components/includes/PostsPage/PostsPageInfo";
 import dynamic from "next/dynamic";
-import {wrapper} from "../../store_toolkit/store";
+import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
-import Link from "next/link";
 import SidebarWidgetAreaRenderer from "../../components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
 import getPostsAction from "@store_toolkit/clientReducers/postsReducer/getPostsAction";
+import MetaAdminQuickAccessBar from "@components/pagesIncludes/metas/MetaAdminQuickAccessBar";
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
@@ -29,27 +29,22 @@ let PageStyle = styled.div`
 `
 const tagPage = () => {
 
-    const {role, tag, tagPageStyle, sidebar} = useSelector(({user, posts, settings}: Store) => {
+    const { tag, tagPageStyle, sidebar} = useSelector(({user, posts, settings}: Store) => {
         return {
-            role: user?.userData?.role,
             tag: posts.tagData,
             tagPageStyle: settings.design?.tagPageStyle,
             sidebar: settings?.identity?.tagPageSidebar
         }
     })
 
+    const role = useSelector(({user}: Store) => user?.userData?.role);
+    const adminMode = useSelector(({globalState}: Store) =>  globalState?.adminMode);
+
     return (
         <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar `} tagPageStyle={tagPageStyle}>
             <main id={'primary'} className="main posts-page">
-                {role === 'administrator' ?
-                    <div className='edit-as-admin'>
-                        <Link href={'/admin/meta?id=' + tag._id} className={'btn btn-primary'} target={'_blank'}>
-                                Edit
-                        </Link>
-                    </div>
-                    : null}
+                {(!!adminMode && role === 'administrator') && <MetaAdminQuickAccessBar metaId={tag._id}/>}
                 {!!tag && <PostsPageInfo titleEntry={tag.name}/> }
-
 
                 <WidgetsRenderer
                     position={'tagPageTop'}

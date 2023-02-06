@@ -59,13 +59,17 @@ const CardImageRenderer: FC<CardImageNextPropTypes> =
             }
         }, [gotError, imageUrl])
 
+        const loadingAttr = index > 1 ? {loading:'lazy'} :{}
+
+
         return (
             <CardImageRendererStyle postsPerRawForMobile={postsPerRawForMobile}
                                     cardWidth={cardWidth}
                                     className={'card-image'}>
+                {/*// @ts-ignore*/}
                 <img src={defaultUrl}
                      alt={mediaAlt}
-                     loading={index <= 1 ? 'eager': 'lazy' }
+                     {...loadingAttr}
                      className={'card-image'}
                      onError={() => setGotError(true)}
                 />

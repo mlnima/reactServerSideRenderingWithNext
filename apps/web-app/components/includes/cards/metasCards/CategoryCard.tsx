@@ -14,7 +14,6 @@ const CardImageRenderer = dynamic(() => import('../asset/CardImageRenderer'))
 const CategoryCardStyle = styled.article`
 
   width: 100%;
-  margin: 20px auto;
   position: relative;
 
   .category-card-link {
@@ -33,7 +32,7 @@ const CategoryCardStyle = styled.article`
 
       .card-header {
         overflow-wrap: break-word;
-        -webkit-line-clamp: 3;
+        -webkit-line-clamp: 1;
         font-weight: bold;
         font-size: small;
       }

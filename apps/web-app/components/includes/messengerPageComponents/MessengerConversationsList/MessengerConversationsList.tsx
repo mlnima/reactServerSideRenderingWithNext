@@ -1,16 +1,17 @@
 import React, {useEffect} from 'react';
 import MessengerConversationPreview from "./MessengerConversationPreview";
 import {useSelector} from "react-redux";
-import MessengerConversationListHeader from "./MessengerConversationListHeader";
+// import MessengerConversationListHeader from "./MessengerConversationListHeader";
 import styled from "styled-components";
-import {fetchConversations} from "../../../../store_toolkit/clientReducers/userReducer";
-import {useAppDispatch} from "../../../../store_toolkit/hooks";
+import { getConversationsAction} from "@store_toolkit/clientReducers/userReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const MessengerConversationsListStyledDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+ 
   .no-message {
     color: var(--main-text-color, #fff);
   }
@@ -24,7 +25,7 @@ const MessengerConversationsList = () => {
 
     useEffect(() => {
         if (userData?._id) {
-            dispatch(fetchConversations(userData?._id))
+            dispatch(getConversationsAction(userData?._id))
         }
     }, [userData]);
 
@@ -35,7 +36,6 @@ const MessengerConversationsList = () => {
 
     return (
         <MessengerConversationsListStyledDiv className='messenger-conversations-list'>
-            <MessengerConversationListHeader/>
             {renderConversationsPreview}
             {!conversations || conversations?.length < 1 ? <p className='no-message'>there is no messages yet</p> : null}
         </MessengerConversationsListStyledDiv>

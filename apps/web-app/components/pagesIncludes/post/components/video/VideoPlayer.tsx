@@ -99,7 +99,7 @@ const VideoPlayer :FC<PropTypes> = ({descriptionRef}) => {
                         <source src={videoUrl}/>
                     </video>
                     : videoEmbedCode && !videoUrl ?
-                        <iframe className={_id} allow="fullscreen" title={title} src={videoEmbedCode}  frameBorder="0" width='640' height='360' />
+                        <iframe className={_id} loading="lazy" allow="fullscreen" title={title} src={videoEmbedCode}  frameBorder="0" width='640' height='360' />
                         : !videoUrl && !videoEmbedCode && videoScriptCode ?
                             videoScriptCode :
                             null

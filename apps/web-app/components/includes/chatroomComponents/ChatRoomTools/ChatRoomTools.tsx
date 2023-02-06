@@ -1,12 +1,13 @@
-import React, {useEffect, useState, useRef} from 'react';
-import {socket} from '@_variables/socket';
+import React, {useEffect, useState} from 'react';
+import {socket} from 'custom-util/src/socket-utils/socketIoClient';
 import {useRouter} from "next/router";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {loginRegisterForm} from "../../../../store_toolkit/clientReducers/globalStateReducer";
-import {useAppDispatch} from "../../../../store_toolkit/hooks";
+import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 import {Store} from "typescript-types";
-import SvgRenderer from "../../../global/commonComponents/SvgRenderer/SvgRenderer";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faPaperPlane} from "@fortawesome/free-regular-svg-icons/faPaperPlane";
 
 const ChatRoomToolsStyledFrom = styled.form`
   position: fixed;
@@ -14,12 +15,13 @@ const ChatRoomToolsStyledFrom = styled.form`
   right: 0;
   bottom: 0;
   height: 50px;
-  padding: 2px;
-  background-color: var(--secondary-background-color, #181818);
+  z-index: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
+  margin: 0 auto;
+  background-color: transparent;
 
   .chatroom-someone-typing {
     position: absolute;
@@ -33,12 +35,19 @@ const ChatRoomToolsStyledFrom = styled.form`
     display: flex;
     justify-content: center;
     width: 100%;
+    background-color: var(--secondary-background-color, #181818);
+    padding: 8px;
+    box-sizing: border-box;
 
-    .chatroom-tools-content-input {
-      border-radius: 50px;
+    .chatroom-tools-input {
+      background-color: var(--secondary-background-color, #181818);
+      color: var(--secondary-text-color, #181818);
+      border: none;
+      outline: none;
       height: 27px;
       width: 100%;
-      padding: 5px 5px;
+
+
     }
   }
 
@@ -50,8 +59,9 @@ const ChatRoomToolsStyledFrom = styled.form`
     align-items: center;
     right: 8px;
 
-    .chatroom-tools-content-submit-button {
+    .submit-button {
       background-color: var(--secondary-background-color, #181818);
+      color: var(--secondary-text-color, #181818);
       border: none;
       width: 34px;
       height: 34px;
@@ -62,62 +72,37 @@ const ChatRoomToolsStyledFrom = styled.form`
     }
   }
 
-  .chatroom-tools-Send-color-picker-input {
-    position: absolute;
-    width: 34px;
-    height: 34px;
-    right: 48px;
-    background-color: ${props => props.color};
-    border: none;
-    outline: none;
-    padding: 0;
-    margin: 0;
-  }
 `
 
 const ChatRoomTools = () => {
     const dispatch = useAppDispatch()
-    const userData = useSelector(({user}:Store) => user?.userData)
+    const userData = useSelector(({user}: Store) => user?.userData)
     const router = useRouter()
 
-    const [state, setState] = useState({
-        messageData: '',
-        color: '#ccc'
-    });
+    const [messageText, setMessageText] = useState('')
 
     const [someoneTypes, setSomeoneTypes] = useState({
         username: '',
         active: false
     });
 
-    const onChangeHandler = e => {
-        setState({
-            ...state,
-            [e.target.name]: e.target.value
-        })
-    }
-
     const onSubmitHandler = e => {
 
         e.preventDefault()
 
-        if (userData._id && state.messageData?.length) {
+        if (userData._id && messageText) {
             const newMessageData = {
-                messageData: state.messageData,
+                messageData: messageText,
                 roomName: router.query.chatRoomName,
                 username: userData.username,
                 id: userData._id,
                 profileImage: userData.profileImage,
-                color: state.color,
                 createdAt: Date.now(),
                 type: 'message',
             }
             socket.emit('messageToChatroom', newMessageData)
 
-            setState({
-                ...state,
-                messageData: ''
-            })
+            setMessageText('')
         } else {
             dispatch(loginRegisterForm('register'))
         }
@@ -125,7 +110,7 @@ const ChatRoomTools = () => {
     }
 
     const onStartTypingHandler = () => {
-        if (userData?.username){
+        if (userData?.username) {
             socket.emit('startTyping', router.query.chatRoomName, userData.username)
         }
 
@@ -133,13 +118,15 @@ const ChatRoomTools = () => {
 
 
     useEffect(() => {
-        socket.on('startTyping', username => {
-            setSomeoneTypes({
-                ...someoneTypes,
-                username,
-                active: true
-            })
-        });
+        setTimeout(() => {
+            socket.on('startTyping', username => {
+                setSomeoneTypes({
+                    ...someoneTypes,
+                    username,
+                    active: true
+                })
+            });
+        }, 500)
     }, []);
 
 
@@ -157,35 +144,30 @@ const ChatRoomTools = () => {
 
 
     return (
-        <ChatRoomToolsStyledFrom className={'chatroom-tools'} onSubmit={e => onSubmitHandler(e)} color={state.color}>
-            {someoneTypes.active ?
-                <span className={'chatroom-someone-typing'}> {someoneTypes.username} is typing </span>
-                : null
+        <ChatRoomToolsStyledFrom className={'chatroom-tools'} onSubmit={e => onSubmitHandler(e)}>
+            {!!someoneTypes.active &&
+                <span className={'chatroom-someone-typing'}>
+                    {someoneTypes.username} is typing
+                </span>
             }
             <div className={'chatroom-tools-text'}>
-                <input className={'chatroom-tools-content-input'}
+                <input className={'chatroom-tools-input'}
                        maxLength={300}
                        type={'text'}
                        name={'messageData'}
-                       onChange={e => onChangeHandler(e)}
+                       placeholder={'Type a message'}
+                       onChange={e => setMessageText(e.target.value)}
                        onKeyDown={onStartTypingHandler}
-                       value={state.messageData}
+                       value={messageText}
                 />
             </div>
 
-            {/*<input className={'chatroom-tools-Send-color-picker-input'}*/}
-            {/*       name={'color'}*/}
-            {/*       type={'color'}*/}
-            {/*       value={ state?.color || '#ccc'}*/}
-            {/*       onChange={e => onChangeHandler(e)}*/}
-            {/*/>*/}
             <div className={'chatroom-tools-Send'}>
-                <button className={'chatroom-tools-content-submit-button'} type={'submit'}>
-                    <SvgRenderer svgUrl={'/asset/images/icons/share-solid.svg'}
-                                 size={25}
-                                 color={'var(--main-text-color, #fff)'}/>
+                <button className={'submit-button'} type={'submit'}>
+                    <FontAwesomeIcon icon={faPaperPlane} style={{width: 25, height: 25}}/>
                 </button>
             </div>
+
         </ChatRoomToolsStyledFrom>
 
     );

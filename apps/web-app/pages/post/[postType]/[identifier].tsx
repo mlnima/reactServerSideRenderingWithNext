@@ -13,8 +13,8 @@ import viewPost from "api-requests/src/client/posts/viewPost";
 
 const Soft404 = dynamic(() =>
     import('../../../components/includes/Soft404/Soft404'))
-const EditingActionQuickAccess = dynamic(() =>
-    import('@components/pagesIncludes/post/components/common/EditingActionQuickAccess'))
+const PostAdminQuickAccessBar = dynamic(() =>
+    import('@components/pagesIncludes/post/components/common/PostAdminQuickAccessBar'),{ssr:false})
 const LearnTypePostPage = dynamic(() =>
     import('../../../components/pagesIncludes/post/templates/LearnTypePostPage/LearnTypePostPage'))
 const VideoTypePostPage = dynamic(() =>
@@ -51,27 +51,31 @@ const postPage = () => {
 
     const dispatch = useAppDispatch()
 
-    const {postType, _id, status, role, sidebar,author,userId} = useSelector(({posts, user, settings}: Store) => {
+    const {postType, _id, status,author} = useSelector(({posts}: Store) => posts?.post);
+
+    const {role, userId} = useSelector(({user}: Store) => {
         return {
-            postType: posts?.post?.postType,
-            author: posts?.post?.author,
-            _id: posts?.post?._id,
             role: user?.userData?.role,
             userId: user?.userData?._id,
-            status: posts?.post?.status,
-            sidebar: settings?.identity?.postPageSidebar,
-
         }
     });
 
+    const { sidebar} = useSelector(({ settings}: Store) => {
+        return {
+            sidebar: settings?.identity?.postPageSidebar,
+        }
+    });
+
+    const adminMode = useSelector(({globalState}: Store) =>  globalState?.adminMode);
 
     useEffect(() => {
         if (_id){
             setTimeout(()=>{
                 dispatch(getPostCommentsAction(_id as string));
+                viewPost(_id);
             },1000)
 
-            viewPost(_id);
+
         }
     }, [_id])
 
@@ -80,7 +84,7 @@ const postPage = () => {
     if (status === 'published' || (role === 'administrator' && !!status) || author?._id === userId ) {
         return (
             <>
-                {(userId && (role === 'administrator' || author?._id === userId))  && <EditingActionQuickAccess role={role}/>}
+                {(!!adminMode && userId && (role === 'administrator' || author?._id === userId))  && <PostAdminQuickAccessBar role={role}/>}
                 <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
 
                     {

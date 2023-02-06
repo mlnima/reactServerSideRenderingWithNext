@@ -1,9 +1,8 @@
-import {NextRouter} from "next/router";
 import {mongoIdValidator, queryUniquer} from "custom-util";
 import AxiosInstance from "../../lib/AxiosInstance";
 import {postFieldRequestForCards} from "data-structures";
 
-const getPosts = async (currentQuery:NextRouter['query'],medaId?:string) => {
+const getPosts = async (currentQuery:any,medaId?:string) => {
     const sort = currentQuery?.sort ? {sort: currentQuery?.sort} : {sort: 'updatedAt'}
     const postType = currentQuery?.postType ? {postType: currentQuery?.postType} : {}
     const isValidMetaId = medaId ? mongoIdValidator(medaId) : false

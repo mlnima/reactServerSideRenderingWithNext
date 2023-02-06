@@ -2,12 +2,15 @@ import React, { useState, MouseEvent, useEffect} from "react";
 import styled from "styled-components";
 import useTranslation from 'next-translate/useTranslation'
 import {useRouter} from "next/router";
-import SvgRenderer from "../../../global/commonComponents/SvgRenderer/SvgRenderer";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons/faMagnifyingGlass";
+import {faXmark} from "@fortawesome/free-solid-svg-icons/faXmark";
 
 const SearchbarStyledDiv = styled.div`
   position: relative;
   z-index: 11;
-
+  border:var(--default-border);
+  
   .open-close-search-form {
     border: none;
     display: flex;
@@ -16,6 +19,7 @@ const SearchbarStyledDiv = styled.div`
     background-color: transparent;
     outline: none;
     color: var(--main-text-color, #fff);
+
   }
 
   .searchbar-form {
@@ -142,10 +146,7 @@ const Searchbar = () => {
                     title={t('common:Search',{},{fallback:'Search'})}
                     className={'open-close-search-form'}>
 
-                <SvgRenderer svgUrl={'/asset/images/icons/magnifying-glass-solid.svg'}
-                             size={25}
-                             color={'var(--main-text-color, #fff)'}/>
-
+                <FontAwesomeIcon icon={faMagnifyingGlass} style={{width:25,height:25}}/>
             </button>
 
             <form className={'searchbar-form'} onSubmit={e => onSearchHandler(e)}>
@@ -153,20 +154,14 @@ const Searchbar = () => {
                 <span className='btn search-button-widget-close-btn'
                         title={t('common:Close',{},{fallback:'Close'})}
                         onClick={e => onCloseForm(e)}>
-                    <SvgRenderer svgUrl={'/asset/images/icons/xmark-solid.svg'}
-                                 size={25}
-                                 customClassName={'search-button-widget-close-btn-icon'}
-                                 color={'var(--main-text-color, #fff)'}/>
+                     <FontAwesomeIcon icon={faXmark} style={{width:25,height:25}}/>
                 </span>
 
                 {!!keyword?.length &&
                 <span className='btn search-button-widget-clear-keyword'
                         title={t('common:Clear',{},{fallback:'Clear'})}
                         onClick={e => onClearHandler(e)}>
-                    <SvgRenderer svgUrl={'/asset/images/icons/xmark-solid.svg'}
-                                 size={25}
-                                 customClassName={'search-button-widget-clear-keyword-icon'}
-                                 color={'var(--main-text-color, #fff)'}/>
+                     <FontAwesomeIcon icon={faXmark} style={{width:25,height:25}}/>
                 </span>}
                 <input type="text"
                        onChange={e => setKeyword(e.target.value)}
@@ -176,12 +171,8 @@ const Searchbar = () => {
                 />
                 <button type='submit'
                         className='btn searchbar-submit-btn'
-                        title={t('common:Search',{},{fallback:'Search'})}
-                >
-                    <SvgRenderer svgUrl={'/asset/images/icons/magnifying-glass-solid.svg'}
-                                 size={25}
-                                 customClassName={'searchbar-submit-btn-icon'}
-                                 color={'var(--main-text-color, #fff)'}/>
+                        title={t('common:Search',{},{fallback:'Search'})}>
+                    <FontAwesomeIcon icon={faMagnifyingGlass} style={{width:25,height:25}}/>
                 </button>
 
             </form>

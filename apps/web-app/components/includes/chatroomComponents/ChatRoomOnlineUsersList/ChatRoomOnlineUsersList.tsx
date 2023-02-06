@@ -7,13 +7,16 @@ import {Store} from "typescript-types";
 const ChatRoomOnlineUsersListStyledDiv = styled.div`
   display: initial;
   background-color: var(--secondary-background-color, #181818);
-  position: fixed;
+  position: absolute;
   width: 150px;
-  top: 48px;
+  top: 0;
   right: 0;
   bottom: 50px;
+  height: 70vh;
   padding: 5px;
   overflow-y: scroll;
+  //border-radius: 15px;
+  box-sizing: border-box;
 `
 
 const ChatRoomOnlineUsersList = () => {
@@ -29,8 +32,9 @@ const ChatRoomOnlineUsersList = () => {
     )
 
     return (
-        <ChatRoomOnlineUsersListStyledDiv className='chatroom-online-users-list'>
+        <ChatRoomOnlineUsersListStyledDiv className='chatroom-online-users-list custom-scroll'>
             {renderOnlineUsers}
+
         </ChatRoomOnlineUsersListStyledDiv>
     );
 

@@ -32,6 +32,7 @@ const MainRouter = () => {
             <Route path="/dashboard/post" element={<Post/>}/>
             <Route path="/dashboard/user" element={<User/>}/>
             <Route path="/dashboard/page" element={<Page/>}/>
+            <Route path="/dashboard/page/:pageName" element={<Page/>}/>
             <Route path="/dashboard/meta" element={<Meta/>}/>
             <Route path="/dashboard/form/:id" element={<Form/>}/>
             <Route path="/dashboard/fileManager" element={<FileManager/>}/>
