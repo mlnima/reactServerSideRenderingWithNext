@@ -36,7 +36,8 @@
     "killNodes": ".\\_devUtil\\windowsNodeProccessBulkKiller.bat"
   },
   "dependencies": {
-    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3"
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
+    "react-refresh": "^0.11.0"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^13.1.6",
