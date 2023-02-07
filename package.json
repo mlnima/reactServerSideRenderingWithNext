@@ -27,12 +27,12 @@
     "resetAdminPassword": "npm --prefix ./apps/custom-scripts run run-script:resetAdminPassword",
     "setup": "npm --prefix ./apps/custom-scripts run run-script:setup",
     "dev": "turbo run dev",
-    "update:packages": "npm update --save/--save-dev -f",
-    "update:api-server-packages": "npm update --save/--save-dev -f --workspace=api-server",
-    "update:socket-server-packages": "npm  update --save/--save-dev -f --workspace=socket-server",
-    "update:web-app-packages": "npm  update --save/--save-dev -f --workspace=web-app",
-    "update:sitemaps-generator-packages": "npm  update --save/--save-dev -f --workspace=sitemaps-generator",
-    "update:custom-scripts-packages": "npm  update --save/--save-dev -f --workspace=custom-scripts",
+    "outdate:packages": "npm update --save/--save-dev -f",
+    "outdate:api-server-packages": "npm outdated -w api-server",
+    "outdate:socket-server-packages": "npm outdated -w socket-server",
+    "outdate:web-app-packages": "npm outdated -w web-app",
+    "outdate:sitemaps-generator-packages": "npm outdated -w sitemaps-generator",
+    "outdate:custom-scripts-packages": "npm outdated -w custom-scripts",
     "killNodes": ".\\_devUtil\\windowsNodeProccessBulkKiller.bat"
   },
   "dependencies": {

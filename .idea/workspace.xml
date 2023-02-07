@@ -21,7 +21,9 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,16 +116,6 @@
     </option>
   </component>
   <component name="RunManager" selected="npm.build">
-    <configuration name="build (1)" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/apps/web-dashboard-app/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="build" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -144,11 +136,21 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="setup" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+    <configuration name="outdate:api-server-packages" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
-        <script value="setup" />
+        <script value="outdate:api-server-packages" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="outdate:web-app-packages" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="outdate:web-app-packages" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -166,11 +168,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.build" />
+        <item itemvalue="npm.outdate:web-app-packages" />
+        <item itemvalue="npm.outdate:api-server-packages" />
         <item itemvalue="npm.start" />
-        <item itemvalue="npm.setup" />
-        <item itemvalue="npm.build (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -1485,7 +1487,9 @@
       <workItem from="1675588925785" duration="2117000" />
       <workItem from="1675613572886" duration="3073000" />
       <workItem from="1675672788238" duration="2707000" />
-      <workItem from="1675686869822" duration="9702000" />
+      <workItem from="1675686869822" duration="11934000" />
+      <workItem from="1675771055912" duration="1387000" />
+      <workItem from="1675796521581" duration="831000" />
     </task>
     <servers />
   </component>
@@ -2253,7 +2257,6 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/PostAdminQuickAccessBar.tsx</url>
           <line>4</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="176" />
         </line-breakpoint>
       </breakpoints>

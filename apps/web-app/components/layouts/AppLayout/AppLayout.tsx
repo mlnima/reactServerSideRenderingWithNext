@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {useSelector} from "react-redux";
 import {Store} from "typescript-types";
 import Loading from "../../global/commonComponents/Loading/Loading";
@@ -24,13 +24,21 @@ interface AppLayoutPropTypes {
 
 const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
 
-    const {loggedIn} = useSelector(({user}: Store) =>user)
+    const {loggedIn} = useSelector(({user}: Store) => user)
 
-    const {loginRegisterFormPopup, alert, loading,adminMode} = useSelector(({globalState}: Store) => globalState)
+    const [renderCookiesBar,setRenderCookiesBar] = useState(false)
+
+    const {loginRegisterFormPopup, alert, loading, adminMode} = useSelector(({globalState}: Store) => globalState)
 
     const identity = useSelector(({settings}: Store) => settings?.identity);
 
-
+    useEffect(() => {
+         setTimeout(()=>{
+             if (localStorage?.cookieAccepted !== 'true'){
+                 setRenderCookiesBar(true)
+             }
+         },500)
+    }, []);
 
     return (
         <>
@@ -47,7 +55,7 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
 
             <Loading isLoading={loading}/>
 
-            {(typeof window !== 'undefined' && localStorage?.cookieAccepted !== 'true') && <CookiePopup/>}
+            {renderCookiesBar && <CookiePopup/>}
 
             {loginRegisterFormPopup && !loggedIn && <LoginRegisterPopup/>}
             <AlertBox alert={alert}/>
