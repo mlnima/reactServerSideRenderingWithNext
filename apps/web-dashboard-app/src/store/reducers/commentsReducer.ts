@@ -8,7 +8,8 @@ import deleteComments from "api-requests/src/dashboard/comments/deleteComments";
 
 const initialState = {
     comments: [],
-    comment: {}
+    comment: {},
+    totalCount: 0
 }
 
 export const getCommentsAction = createAsyncThunk(
@@ -17,7 +18,7 @@ export const getCommentsAction = createAsyncThunk(
         thunkAPI.dispatch(loading(true))
 
         return await getComments(data).then((response: AxiosResponse) => {
-            return response.data?.comments
+            return response.data
         }).catch((error: AxiosError) => {
 
         }).finally(() => thunkAPI.dispatch(loading(false)))
@@ -56,7 +57,7 @@ export const commentsSlice = createSlice({
         .addCase(getCommentsAction.fulfilled, (state, action: PayloadAction<any>) => {
             return {
                 ...state,
-                comments: action.payload || []
+                ...action.payload
             };
         })
 })

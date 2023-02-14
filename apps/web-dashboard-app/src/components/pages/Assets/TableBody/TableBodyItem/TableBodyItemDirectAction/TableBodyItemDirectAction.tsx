@@ -5,6 +5,7 @@ import {deleteFormAction} from "@store/reducers/formsReducer";
 import {deleteCommentsAction} from "@store/reducers/commentsReducer";
 import {useAppDispatch} from "@store/hooks";
 import {useSearchParams} from "react-router-dom";
+import deleteChatroom from "api-requests/src/dashboard/chatrooms/deleteChatroom";
 
 interface TableBodyItemDirectActionPropTypes {
     assetsType: string,
@@ -18,15 +19,9 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({asse
     const [search, setSearch] = useSearchParams();
     const statusQuery = search.get('status')
 
-    const onDeletePageHandler=()=>{
-        // dispatch(adminDeleteCustomPage(_id))
-        // reGetData()
-    }
-
     const onActionHandler =(ids:string,status:string)=>{
         dispatch(bulkActionPostsAction({ids,status}))
     }
-
 
     if (assetsType === 'posts') {
         return (
@@ -76,12 +71,19 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({asse
                 <Link to={'/dashboard/user?id=' + _id}>Edit</Link>
             </div>
         );
+    }else if (assetsType === 'chatrooms') {
+        return (
+            <div className='asset-page-table-body-item-hover-item'>
+                <Link to={'/dashboard/chatroom?id=' + _id}>Edit</Link>
+                {/*<button className={'btn btn-danger'} onClick={()=>{deleteChatroom(_id as string)}}>*/}
+                {/*    Delete*/}
+                {/*</button>*/}
+            </div>
+        );
     } else if (assetsType === 'comments') {
         return (
             <div className='asset-page-table-body-item-hover-item'>
-                <button className={'btn btn-danger'} onClick={()=>{
-                    dispatch(deleteCommentsAction([_id]))
-                }}>
+                <button className={'btn btn-danger'} onClick={()=>{dispatch(deleteCommentsAction([_id]))}}>
                     Delete
                 </button>
             </div>

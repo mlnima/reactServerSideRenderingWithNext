@@ -14,6 +14,7 @@ import TableControls from "@components/pages/Assets/TableControls/TableControls"
 import paramsObjectGenerator from "@variables/paramsObjectGenerator";
 import TableHeader from "@components/pages/Assets/TableHeader/TableHeader";
 import TableBody from "@components/pages/Assets/TableBody/TableBody";
+import {getChatroomsAction} from "@store/reducers/chatroomsReducer";
 
 const Style = styled.div``;
 
@@ -29,10 +30,11 @@ const Assets: FC<PropTypes> = ({}) => {
     //@ts-ignore
     const query = useMemo(() => paramsObjectGenerator(search), [search]);
 
-    const assetPageData = useSelector(({posts, users, comments, forms, pages}: DashboardStore) => {
+    const assetPageData = useSelector(({posts, users, comments, forms, pages,chatrooms}: DashboardStore) => {
         return {
-            totalCount:posts.totalCount,
+            totalCount:posts.totalCount || comments.totalCount,
             posts: posts.posts,
+            chatrooms: chatrooms.chatrooms,
             metas: posts.metas,
             users: users.users,
             comments: comments.comments,
@@ -43,12 +45,12 @@ const Assets: FC<PropTypes> = ({}) => {
 
     const getData = () => {
         const paramsQueries = paramsQueryGenerator(search)
+
         if (query.assetsType === 'posts') {
             dispatch(getPostsAction(paramsQueries))
         } else if (query.assetsType === 'users') {
             dispatch(getUsersAction({}))
         } else if (query.assetsType === 'metas') {
-            // const queries = _adminMetaPageQueryGenerator(query, query?.metaType)
             dispatch(getMetasAction(paramsQueries))
         } else if (query.assetsType === 'comments') {
             dispatch(getCommentsAction(paramsQueries))
@@ -56,10 +58,10 @@ const Assets: FC<PropTypes> = ({}) => {
             dispatch(getFormsAction(paramsQueries))
         } else if (query.assetsType === 'pages') {
             dispatch(getPagesAction(paramsQueries))
+        } else if (query.assetsType === 'chatrooms') {
+            dispatch(getChatroomsAction(null))
         }
-        // else if (assetType === 'orders') {
-        //     // dispatch(adminGetOrders(dataConfig))
-        // }
+
     }
 
     useEffect(() => {

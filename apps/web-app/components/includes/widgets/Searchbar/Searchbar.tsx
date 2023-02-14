@@ -9,7 +9,7 @@ import {faXmark} from "@fortawesome/free-solid-svg-icons/faXmark";
 const SearchbarStyledDiv = styled.div`
   position: relative;
   z-index: 11;
-  border:var(--default-border);
+
   
   .open-close-search-form {
     border: none;
@@ -58,6 +58,7 @@ const SearchbarStyledDiv = styled.div`
   }
 
   @media only screen and (min-width: 768px) {
+    border:var(--default-border);
     width: clamp(300px, 400px, 650px);;
     .open-close-search-form {
       display: none;

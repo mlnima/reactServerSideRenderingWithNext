@@ -2,6 +2,7 @@ import {Router} from 'express';
 import clientUsersRouter from './clientUsersRouter';
 import clientSettingsRouter from './clientSettingsRouter';
 import clientPostsRouter from './clientPostsRouter';
+import chatroomsRouter from './chatroomsRouter';
 import clientWidgetsRouter from './clientWidgetsRouter';
 import clientFileManagerRouter from './clientFileManagerRouter';
 import clientPagesRouter from './clientPagesRouter';
@@ -12,6 +13,7 @@ const router = Router();
 
 router.use('/users', clientUsersRouter);
 router.use('/posts', clientPostsRouter);
+router.use('/chatrooms', chatroomsRouter);
 router.use('/settings', clientSettingsRouter);
 router.use('/widgets', clientWidgetsRouter);
 router.use('/fileManager', clientFileManagerRouter);

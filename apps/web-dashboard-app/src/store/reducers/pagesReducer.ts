@@ -15,32 +15,6 @@ const initialState = {
     page: {}
 }
 
-// export const pagesReducer = (state: AdminPanelPagesTypes = initialState, action: { type: string, payload: any }) =>{
-//     switch (action.type) {
-//         case ADMIN_GET_PAGES:
-//             return {
-//                 ...state,
-//                 pages: action.payload
-//             };
-//         case ADMIN_GET_PAGE:
-//             return {
-//                 ...state,
-//                 page: action.payload
-//             };
-//         case ADMIN_EDIT_PAGE_FIELD:
-//             return {
-//                 ...state,
-//                 page: {
-//                     ...state.page,
-//                     ...action.payload
-//                 }
-//             };
-//         default:
-//             return state
-//     }
-// }
-
-
 export const getPagesAction = createAsyncThunk(
     'adminPanelPages/getPagesAction',
     async (data: {}, thunkAPI) => {

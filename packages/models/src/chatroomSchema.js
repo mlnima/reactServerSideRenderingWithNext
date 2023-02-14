@@ -7,6 +7,10 @@ var chatroomSchema = new mongoose_1.Schema({
         trim: true,
         unique: true
     },
-    messages: Array
+    title: String,
+    description: String,
+    tags: String,
+    status: String,
+    messages: [{ type: mongoose_1.Schema.Types.ObjectId, ref: 'chatroomMessage' }]
 }, { timestamps: true });
 exports["default"] = (0, mongoose_1.model)("chatroom", chatroomSchema);

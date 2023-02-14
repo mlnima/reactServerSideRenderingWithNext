@@ -9,11 +9,13 @@ import adminPagesRouter from './adminPagesRouter';
 import adminFormsRouter from './adminFormsRouter';
 import adminDataScrappersRouter from './adminDataScrappersRouter';
 import adminOrdersRouter from './adminOrdersRouter';
+import chatroomsRouter from "./chatroomsRouter";
 
 const router = Router();
 
 router.use('/users',adminUsersRouter);
 router.use('/posts',adminPostsRouter);
+router.use('/chatrooms',chatroomsRouter);
 router.use('/settings',adminSettingsRouter);
 router.use('/widgets',adminWidgetsRouter);
 router.use('/terminal',adminTerminalRouter);

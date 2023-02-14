@@ -1,36 +1,44 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, memo, FC} from 'react';
 import ChatRoomMessage from "./ChatRoomMessage";
 import {useSelector} from "react-redux";
 import styled from "styled-components";
-import {setActiveVisibleProfile} from "@store_toolkit/clientReducers/chatroomReducer";
 import {useRouter} from "next/router";
-import {useAppDispatch} from "@store_toolkit/hooks";
 import {Store,ChatroomMessage} from "typescript-types";
 
 const ChatRoomMessageAreaStyledMain = styled.main`
-  position: absolute;
-  top:0;
-  left: 0;
-  right: 0;
-  bottom: 50px;
+  height: ${({headerSize}:StylePropTypes)=> `calc(100vh - ${headerSize}px )` } ;
   margin: 0;
   width: 100%;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
+  grid-area: chatroomMessagingArea;
+  padding-bottom: 50px;
+  box-sizing: border-box;
+  //margin-bottom: 50px;
 `
 
-const ChatRoomMessageArea = () => {
-    const dispatch = useAppDispatch()
+interface StylePropTypes{
+    headerSize:number,
+}
+
+interface PropTypes{
+    chatroomId:string,
+    headerSize:number
+}
+const ChatRoomMessageArea:FC<PropTypes> = ({chatroomId,headerSize}) => {
+
     const {locale} = useRouter()
     const messageAreaRef = useRef(null)
 
     const {chatroomMessages} = useSelector(({chatroom}: Store) => {
 
-        const currentMessages = chatroom?.messages || []
+        const currentMessages = chatroom?.messages || [];
+
         return {
             chatroomMessages: [...currentMessages].sort(
                 (message, nextMessage) =>
+                    //@ts-ignore
                     message.createdAt > nextMessage.createdAt ? 1 : -1
             )
         }
@@ -38,35 +46,26 @@ const ChatRoomMessageArea = () => {
 
     useEffect(() => {
         messageAreaRef.current.scroll({
-            top: messageAreaRef.current.scrollHeight,
+            top: messageAreaRef.current.scrollHeight + 45,
             behavior: "smooth"
         })
     }, [chatroomMessages]);
-
-
-    const onShowProfileHandler = (username, _id, profileImage) => {
-        dispatch(setActiveVisibleProfile({
-            username,
-            _id,
-            profileImage,
-        }))
-    }
 
     return (
         <ChatRoomMessageAreaStyledMain
             ref={messageAreaRef}
             className='chatroom-message-area custom-scroll'
             id='chatroom-message-area'
+            headerSize={headerSize}
         >
             {chatroomMessages?.length ?
                 //@ts-ignore
-                chatroomMessages.map((message: ChatroomMessage, index: number) => {
+                chatroomMessages.filter((message)=>message.chatroom === chatroomId).map((message: ChatroomMessage, index: number) => {
                     return (
                         <ChatRoomMessage
                             message={message}
                             key={index}
                             locale={locale}
-                            onShowProfileHandler={onShowProfileHandler}
                         />
                     )
                 })
@@ -76,4 +75,4 @@ const ChatRoomMessageArea = () => {
         </ChatRoomMessageAreaStyledMain>
     );
 };
-export default ChatRoomMessageArea;
+export default memo(ChatRoomMessageArea);

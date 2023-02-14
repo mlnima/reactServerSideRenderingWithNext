@@ -7,7 +7,11 @@ const chatroomSchema = new Schema({
         trim:true,
         unique:true
     },
-    messages:Array
+    title:String,
+    description:String,
+    tags:String,
+    status:String,
+    messages:[{type: Schema.Types.ObjectId, ref: 'chatroomMessage'}]
 },{ timestamps: true })
 
 export default model<Chatroom & Document>("chatroom",chatroomSchema);

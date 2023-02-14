@@ -9,9 +9,11 @@ import settingsSlice from './reducers/settingsReducer';
 import terminalSlice from './reducers/terminalReducer';
 import usersSlice from './reducers/usersReducer';
 import widgetsSlice from './reducers/widgetsReducer';
+import chatroomsSlice from "./reducers/chatroomsReducer";
 
 const combinedReducer = combineReducers({
   comments: commentsSlice,
+  chatrooms: chatroomsSlice,
   fileManager: fileManagerSlice,
   forms: formsSlice,
   globalState: globalStateSlice,

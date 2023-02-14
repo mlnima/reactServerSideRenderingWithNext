@@ -4,6 +4,8 @@ import styled from "styled-components";
 import {ChatroomMessage} from "typescript-types";
 import UserPreviewImage from "ui/src/UserPreviewImage";
 import Link from "next/link";
+import AdminActionOnMessageMenu
+    from "@components/pagesIncludes/chatroom/ChatRoomMessageArea/AdminActionOnMessageMenu";
 
 const ChatRoomLogMessageStyledDiv = styled.div`
   background-color: var(--secondary-background-color, #181818);
@@ -59,39 +61,39 @@ const ChatRoomMessageStyledDiv = styled.div`
 interface ChatRoomMessagePropTypes {
     locale: string,
     message: ChatroomMessage,
-    onShowProfileHandler: any
 }
 
 class ChatRoomMessage extends PureComponent<ChatRoomMessagePropTypes> {
 
     render() {
-
         if (this?.props?.message?.type === 'log') {
             return (
                 <ChatRoomLogMessageStyledDiv className='chatroom-message-area-message'>
                     <p className='chatroom-message-area-message-log'>
-                        {this?.props?.message?.username}
+                        {this?.props?.message?.author?.username}
                         joined the room
                     </p>
                 </ChatRoomLogMessageStyledDiv>
             )
-        } else if(!!this?.props?.message?.username) {
+        } else if(!!this?.props?.message?.author?.username) {
             return (
                 <ChatRoomMessageStyledDiv className='chatroom-message-area-message'>
 
-                    <Link className={'user-profile-image'} href={`/user/${this?.props?.message?.username}`}>
-                        <UserPreviewImage imageUrl={this?.props?.message?.profileImage} size={24}/>
+                    <Link className={'user-profile-image'} href={`/user/${this?.props?.message?.author?.username}`}>
+                        <UserPreviewImage imageUrl={this?.props?.message?.author?.profileImage} size={24}/>
                     </Link>
 
                     <div className='chatroom-message-area-message-data'>
                     <span className='chatroom-message-area-message-username'
                           title={formatDistance(new Date(this?.props?.message?.createdAt), new Date(), {addSuffix: true})}>
-                    {this?.props?.message?.username}
+                    {this?.props?.message?.author?.username}
                     </span>
                         <p className='chatroom-message-area-message-text'>
                             {this?.props?.message?.messageData}
                         </p>
                     </div>
+                    {/*//@ts-ignore*/}
+                    <AdminActionOnMessageMenu chatroomId={this?.props?.message?.chatroom} messageId={this?.props?.message?.author._id}/>
                 </ChatRoomMessageStyledDiv>
             );
         }

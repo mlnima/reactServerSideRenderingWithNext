@@ -1,5 +1,6 @@
 const tableItemProperties = {
     posts:['title', 'author', 'status', 'tags', 'categories', 'mainThumbnail', 'createdAt', 'updatedAt'],
+    chatrooms:['name', 'status', 'createdAt', 'updatedAt'],
     users:['username', 'email', 'status', 'role', 'createdAt', 'updatedAt'],
     comments:['_id','author','status', 'body', 'onDocumentId','createdAt', 'updatedAt'],
     metas:['name',  'type', 'status', 'count', 'imageUrl', 'createdAt', 'updatedAt'],

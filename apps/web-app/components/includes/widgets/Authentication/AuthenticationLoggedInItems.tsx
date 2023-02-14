@@ -6,9 +6,11 @@ import {useRouter} from "next/router";
 import {userLogout} from "@store_toolkit/clientReducers/userReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
-import SvgRenderer from "../../../global/commonComponents/SvgRenderer/SvgRenderer";
 import UserProfileImage from "../../UserProfileImage/UserProfileImage";
 import AuthenticationAdminItems from "@components/includes/widgets/Authentication/AuthenticationAdminItems";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faSignOut} from "@fortawesome/free-solid-svg-icons/faSignOut";
+import {faEnvelope} from "@fortawesome/free-solid-svg-icons/faEnvelope";
 
 const AuthenticationLoggedInItemsStyledDiv = styled.div`
   .user-info {
@@ -18,9 +20,11 @@ const AuthenticationLoggedInItemsStyledDiv = styled.div`
       align-items: center;
       color: var(--main-text-color, #fff);
       width: 100%;
-      .user-profile-image{
+
+      .user-profile-image {
         margin: 10px 0;
       }
+
       .username-info {
         padding: 0 20px;
         display: flex;
@@ -60,7 +64,6 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
          allowedPostTypeUserCanCreate
      }) => {
         const {t} = useTranslation('common');
-        const {pathname} = useRouter()
         const dispatch = useAppDispatch()
 
         return (
@@ -68,73 +71,29 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
 
                 <div className={'user-info'}>
                     <Link href={`/profile`} onClick={onOpenCloseHandler}>
-                            <div className='user-info-profile-icon'>
-                                <UserProfileImage size={40} profileRedirect={false}/>
-                            </div>
-                            <div className={'username-info'}>
-                                <span className={'username'}>{username}</span>
-                                <span className={'view-profile'}>View Profile</span>
-                            </div>
+                        <div className='user-info-profile-icon'>
+                            <UserProfileImage size={40} profileRedirect={false}/>
+                        </div>
+                        <div className={'username-info'}>
+                            <span className={'username'}>{username}</span>
+                            <span className={'view-profile'}>View Profile</span>
+                        </div>
                     </Link>
                 </div>
 
-                <div className={'logged-items-auth-actions'}>
-                    {membership &&
-                    <>
-                       <span className='logged-item logged-item-action' aria-label='logged-in-items'>
-                            <Link href={`/messenger`} onClick={onOpenCloseHandler}>
-
-                                        <div className={'icon-wrapper'}>
-                                              <SvgRenderer svgUrl={'/asset/images/icons/envelope-solid.svg'}
-                                                           size={48}
-                                                           customClassName={'messages-button'}
-                                                           color={' var(--main-text-color, #fff)'}
-                                              />
-                                        </div>
-                                        <p className={'text-data'}>{t<string>(`Messages`)}</p>
-
-
-                            </Link>
-                        </span>
-
-
-                        {allowUserToPost &&
-                        <span className='logged-item logged-item-action' aria-label='logged-in-items'>
-                                <Link href={`/profile/post?new=1&postType=article`}  onClick={onOpenCloseHandler}>
-
-                                        <div className={'icon-wrapper'}>
-                                            {/*<span className={'plus-button icon'}/>*/}
-                                            <SvgRenderer svgUrl={'/asset/images/icons/plus-solid.svg'}
-                                                         size={48}
-                                                         customClassName={'plus-button'}
-                                                         color={' var(--main-text-color, #fff)'}
-                                            />
-                                        </div>
-
-                                        <p className={'text-data'}>{t<string>(`New Post`)}</p>
-
-                                </Link>
-                            </span>
-                        }
-
-                    </>
-                    }
-                </div>
 
                 <div className={'logged-items'}>
-                    <Link href={`/`} className='logged-item logged-in' onClick={onOpenCloseHandler}>
+                    {membership && <Link href={`/messenger`}
+                                         className='logged-item logged-in'
+                                         onClick={onOpenCloseHandler}>
+                            <div className={'icon-wrapper'}>
+                                <FontAwesomeIcon icon={faEnvelope} style={{width:20,height:20}}/>
+                            </div>
+                            <p className={'text-data'}>{t<string>(`Messages`)}</p>
+                        </Link>}
 
-                        <div className={'icon-wrapper'}>
-                            <SvgRenderer svgUrl={'/asset/images/icons/home-solid.svg'}
-                                         size={20}
-                                         customClassName={'home-button'}
-                                         color={' var(--main-text-color, #fff)'}
-                            />
-                        </div>
-                        <p className={'text-data'}>{t<string>(`Home`)}</p>
 
-                    </Link>
-                    {role==='administrator' && <AuthenticationAdminItems/> }
+                    {role === 'administrator' && <AuthenticationAdminItems/>}
 
 
                     <span className='logged-item logged-in sign-out' onClick={(e) => {
@@ -143,11 +102,7 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
                         onOpenCloseHandler(e)
                     }}>
                         <div className={'icon-wrapper'}>
-                                    <SvgRenderer svgUrl={'/asset/images/icons/sign-out-alt-solid.svg'}
-                                                 size={20}
-                                                 customClassName={'sign-out-button'}
-                                                 color={' var(--main-text-color, #fff)'}
-                                    />
+                             <FontAwesomeIcon icon={faSignOut} style={{width:20,height:20}}/>
                         </div>
                         <p className={'text-data'}>{t<string>(`Logout`)}</p>
                     </span>

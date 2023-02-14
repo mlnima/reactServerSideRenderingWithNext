@@ -9,10 +9,12 @@ import {OrdersState} from "./OrdersState";
 import {TerminalState} from "./TerminalState";
 import {GlobalState} from "./GlobalState";
 import {WidgetsState} from "./WidgetsState";
+import {ChatroomsState} from "./ChatroomsState";
 
 
 export interface DashboardStore{
     comments: CommentsState;
+    chatrooms: ChatroomsState;
     users: UsersState;
     posts: PostsState;
     fileManager: FileManagerState;

@@ -1,0 +1,37 @@
+import React, {FC} from "react";
+import styled from "styled-components";
+import {useSelector} from "react-redux";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faTrashCan} from "@fortawesome/free-solid-svg-icons/faTrashCan";
+import deleteChatroomMessage from 'api-requests/src/client/users/deleteChatroomMessage'
+
+const Style = styled.div``;
+
+interface PropTypes {
+    messageId: string,
+    chatroomId: string,
+}
+
+const AdminActionOnMessageMenu: FC<PropTypes> = ({chatroomId, messageId}) => {
+    const role = useSelector(({user}) => user?.userData?.role)
+    const adminMode = useSelector(({globalState}) => globalState?.adminMode)
+
+    const onDeleteMessageHandler = () => {
+        if (chatroomId && messageId) {
+            deleteChatroomMessage(chatroomId, messageId)
+        }
+    }
+
+    if (role === 'administrator' && adminMode) {
+        return (
+            <Style>
+                <button className={'btn btn-danger'} onClick={onDeleteMessageHandler}>
+                    <FontAwesomeIcon icon={faTrashCan} style={{width: 15, height: 15}}/>
+                </button>
+            </Style>
+        )
+    } else return null
+
+};
+
+export default AdminActionOnMessageMenu;

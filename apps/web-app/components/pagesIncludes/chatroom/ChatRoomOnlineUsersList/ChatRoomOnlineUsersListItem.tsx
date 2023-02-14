@@ -27,6 +27,9 @@ const ChatRoomOnlineUsersListItemStyledDiv = styled.div`
         .chatroom-online-users-list-item-username {
           color: var(--main-text-color, #fff);
           margin-left: 5px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       }
     }

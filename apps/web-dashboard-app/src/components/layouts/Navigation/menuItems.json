@@ -8,6 +8,10 @@
     "pathURL": "/dashboard/assets?assetsType=posts&size=20",
     "subItems": [{"name": "newPost", "url": "/dashboard/post?new=1"}]
   },
+  "Chatrooms": {
+    "pathURL": "/dashboard/assets?assetsType=chatrooms&size=20",
+    "subItems": [{"name": "newChatroom", "url": "/dashboard/chatroom?new=1"}]
+  },
   "Users": {
     "pathURL": "/dashboard/assets?assetsType=users&size=20",
     "subItems": []

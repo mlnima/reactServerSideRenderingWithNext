@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {socket} from 'custom-util/src/socket-utils/socketIoClient';
 import {useRouter} from "next/router";
 import styled from "styled-components";
@@ -10,11 +10,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPaperPlane} from "@fortawesome/free-regular-svg-icons/faPaperPlane";
 
 const ChatRoomToolsStyledFrom = styled.form`
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 50px;
+  height: 45px;
   z-index: 1;
   display: flex;
   justify-content: center;
@@ -22,7 +18,12 @@ const ChatRoomToolsStyledFrom = styled.form`
   width: 100%;
   margin: 0 auto;
   background-color: transparent;
-
+  //grid-area: chatroomTools;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  
   .chatroom-someone-typing {
     position: absolute;
     top: -14px;
@@ -32,13 +33,15 @@ const ChatRoomToolsStyledFrom = styled.form`
   }
 
   .chatroom-tools-text {
+    border-top: var(--default-border);
+    border-bottom: var(--default-border);
     display: flex;
     justify-content: center;
     width: 100%;
     background-color: var(--secondary-background-color, #181818);
     padding: 8px;
     box-sizing: border-box;
-
+    height: 45px;
     .chatroom-tools-input {
       background-color: var(--secondary-background-color, #181818);
       color: var(--secondary-text-color, #181818);
@@ -46,8 +49,6 @@ const ChatRoomToolsStyledFrom = styled.form`
       outline: none;
       height: 27px;
       width: 100%;
-
-
     }
   }
 
@@ -73,10 +74,19 @@ const ChatRoomToolsStyledFrom = styled.form`
   }
 
 `
+interface PropTypes{
+    chatroomId:string
+}
 
-const ChatRoomTools = () => {
+const ChatRoomTools:FC<PropTypes> = ({chatroomId}) => {
     const dispatch = useAppDispatch()
-    const userData = useSelector(({user}: Store) => user?.userData)
+    const {loggedIn,_id,username} = useSelector(({user}: Store) => {
+        return {
+            loggedIn: user?.loggedIn,
+            _id:user.userData._id,
+            username:user.userData.username,
+        }
+    })
     const router = useRouter()
 
     const [messageText, setMessageText] = useState('')
@@ -87,46 +97,40 @@ const ChatRoomTools = () => {
     });
 
     const onSubmitHandler = e => {
-
         e.preventDefault()
-
-        if (userData._id && messageText) {
-            const newMessageData = {
-                messageData: messageText,
-                roomName: router.query.chatRoomName,
-                username: userData.username,
-                id: userData._id,
-                profileImage: userData.profileImage,
-                createdAt: Date.now(),
+        if (loggedIn && messageText) {
+            const messageBody = {
+                chatroom:chatroomId,
+                author: _id,
                 type: 'message',
+                messageData: messageText
             }
-            socket.emit('messageToChatroom', newMessageData)
-
+            socket.emit('messageToChatroom', messageBody)
             setMessageText('')
         } else {
             dispatch(loginRegisterForm('register'))
         }
-
     }
 
     const onStartTypingHandler = () => {
-        if (userData?.username) {
-            socket.emit('startTyping', router.query.chatRoomName, userData.username)
+        if (username) {
+            socket.emit('startTyping', chatroomId, username)
         }
-
     }
 
 
     useEffect(() => {
-        setTimeout(() => {
-            socket.on('startTyping', username => {
+
+        socket.on('startTyping', ({username,activeChatroomId}) => {
+            if (activeChatroomId === chatroomId && username ){
                 setSomeoneTypes({
                     ...someoneTypes,
                     username,
                     active: true
                 })
-            });
-        }, 500)
+            }
+
+        });
     }, []);
 
 

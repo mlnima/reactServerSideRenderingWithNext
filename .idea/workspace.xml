@@ -20,10 +20,80 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/chatroomsControllers/createChatroom.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/chatroomsControllers/deleteChatroom.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/chatroomsControllers/deleteChatroomMessage.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/chatroomsControllers/getChatroom.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/chatroomsControllers/getChatrooms.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/chatroomsControllers/updateChatroom.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/chatroomsRouter.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/formsControllers/getForms.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/chatroomsControllers/getChatroom.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/chatroomsRouter.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/chatroom/ChatRoomMessageArea/AdminActionOnMessageMenu.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/chatroom/ChatroomTopbar.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Chatroom/Chatroom.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/chatroomsReducer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/client/chatrooms/getChatroom.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/client/users/deleteChatroomMessage.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/chatrooms/createChatroom.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/chatrooms/deleteChatroom.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/chatrooms/getChatroom.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/chatrooms/getChatrooms.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/chatrooms/updateChatroom.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/custom-util/src/url-util/ObjectToQuery.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/models/src/chatroomMessageSchema.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/typescript-types/src/dashboardStoreTypes/ChatroomsState.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminFormsControllers/adminDeleteFormData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/formsControllers/adminDeleteFormData.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminFormsControllers/adminGetFormData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/formsControllers/adminGetFormData.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminFormsControllers/adminGetFormsData.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminFormsRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminFormsRouter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminMainRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminMainRouter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminPostsControllers/adminGetComments.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminPostsControllers/adminGetComments.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminPostsRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminPostsRouter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminUsersRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminUsersRouter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/clientMainRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/clientMainRouter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/socket-server/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/socket-server/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/socket-server/nodemon.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/socket-server/nodemon.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/chatroom/ChatRoomMessageArea/ChatRoomMessage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/chatroom/ChatRoomMessageArea/ChatRoomMessageArea.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/chatroom/ChatRoomOnlineUsersList/ChatRoomOnlineUsersList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersListItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/chatroom/ChatRoomOnlineUsersList/ChatRoomOnlineUsersListItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/chatroomComponents/ChatRoomTools/ChatRoomTools.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/chatroom/ChatRoomTools/ChatRoomTools.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/chatroomComponents/ChatRoomUserListButton/ChatRoomUserListButton.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/Authentication/AuthenticationAdminItems.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/Authentication/AuthenticationAdminItems.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/Authentication/AuthenticationLoggedInItems.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/Authentication/AuthenticationLoggedInItems.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/Searchbar/Searchbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/Searchbar/Searchbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/chatroom/[chatRoomName].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/chatroom/[Identifier].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Navigation/menuItems.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Navigation/menuItems.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Assets/Assets.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Assets/Assets.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Assets/TableBody/TableBodyItem/TableBodyItemDirectAction/TableBodyItemDirectAction.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Assets/TableBody/TableBodyItem/TableBodyItemDirectAction/TableBodyItemDirectAction.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Assets/tableBodyItemProperties.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Assets/tableBodyItemProperties.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/routers/MainRouter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/routers/MainRouter.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/commentsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/commentsReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/pagesReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/pagesReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/store.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/dashboard/comments/getComments.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/comments/getComments.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/dashboard/comments/getComments.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/comments/getComments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/dashboard/comments/getComments.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/comments/getComments.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/dashboard/forms/getForms.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/forms/getForms.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/dashboard/forms/getForms.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/forms/getForms.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/tsconfig.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/array-utils/uniqArrayBy.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/src/array-utils/uniqArrayBy.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/array-utils/uniqArrayBy.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/src/array-utils/uniqArrayBy.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/array-utils/uniqArrayBy.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/src/array-utils/uniqArrayBy.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/tsconfig.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/chatroomSchema.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/chatroomSchema.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/chatroomSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/chatroomSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/chatroomSchema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/chatroomSchema.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/tsconfig.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/typescript-types/src/Chatroom/Chatroom.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/typescript-types/src/Chatroom/Chatroom.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/typescript-types/src/Chatroom/ChatroomMessage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/typescript-types/src/Chatroom/ChatroomMessage.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/typescript-types/src/dashboardStoreTypes/CommentsState.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/typescript-types/src/dashboardStoreTypes/CommentsState.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/typescript-types/src/dashboardStoreTypes/DashboardStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/typescript-types/src/dashboardStoreTypes/DashboardStore.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,8 +107,8 @@
         <option value="CSS File" />
         <option value="tsconfig.json" />
         <option value="JavaScript File" />
-        <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -87,7 +157,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;18.12.1&quot;,
     &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;18.11.18&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/Dev Project/reactServerSideRenderingWithNext/apps/web-app/app/[lang]&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/Dev Project/reactServerSideRenderingWithNext/apps/api-server/controllers/clientControllers/chatroomControllers&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;ts.external.directory.path&quot;: &quot;F:\\Dev Project\\reactServerSideRenderingWithNext\\node_modules\\typescript\\lib&quot;,
@@ -96,18 +166,18 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\api-server\controllers\clientControllers\chatroomControllers" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-app\app\[lang]" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-app\app\[lang]\community" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\trash" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\typescript-types\src\MessengerStoreTypes" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-app\components\pagesIncludes\chatroom" />
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\api-server\controllers\adminControllers\chatroomsControllers" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\trash" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\tempFiles" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-app\app\[lang]\components" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-app\app\[lang]" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-app" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -136,11 +206,11 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="outdate:api-server-packages" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+    <configuration name="graph" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
-        <script value="outdate:api-server-packages" />
+        <script value="graph" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -168,11 +238,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.build" />
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.outdate:web-app-packages" />
-        <item itemvalue="npm.outdate:api-server-packages" />
         <item itemvalue="npm.start" />
+        <item itemvalue="npm.graph" />
       </list>
     </recent_temporary>
   </component>
@@ -1489,7 +1559,19 @@
       <workItem from="1675672788238" duration="2707000" />
       <workItem from="1675686869822" duration="11934000" />
       <workItem from="1675771055912" duration="1387000" />
-      <workItem from="1675796521581" duration="831000" />
+      <workItem from="1675796521581" duration="3103000" />
+      <workItem from="1675932804342" duration="6650000" />
+      <workItem from="1675966992660" duration="1845000" />
+      <workItem from="1675974571720" duration="11433000" />
+      <workItem from="1676012792885" duration="2558000" />
+      <workItem from="1676029130055" duration="11362000" />
+      <workItem from="1676056182076" duration="7361000" />
+      <workItem from="1676111644389" duration="16159000" />
+      <workItem from="1676185657984" duration="14862000" />
+      <workItem from="1676235923779" duration="1386000" />
+      <workItem from="1676278277516" duration="18462000" />
+      <workItem from="1676310717861" duration="23678000" />
+      <workItem from="1676360316837" duration="3938000" />
     </task>
     <servers />
   </component>
@@ -1930,6 +2012,30 @@
         <option value="$PROJECT_DIR$/packages/ui/src/scrollBars.js" />
         <option value="$PROJECT_DIR$/packages/ui/src/scrollBars.d.ts" />
         <option value="$PROJECT_DIR$/packages/ui/src/scrollBars.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/client/users/deleteChatroomMessage.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/client/users/deleteChatroomMessage.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/client/users/deleteChatroomMessage.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/chatrooms/getChatroom.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/chatrooms/getChatroom.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/chatrooms/getChatroom.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/chatrooms/getChatrooms.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/chatrooms/getChatrooms.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/chatrooms/getChatrooms.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/chatrooms/updateChatroom.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/chatrooms/updateChatroom.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/chatrooms/updateChatroom.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/client/chatrooms/getChatroom.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/client/chatrooms/getChatroom.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/client/chatrooms/getChatroom.d.ts" />
+        <option value="$PROJECT_DIR$/packages/custom-util/src/url-util/ObjectToQuery.d.ts" />
+        <option value="$PROJECT_DIR$/packages/custom-util/src/url-util/ObjectToQuery.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/custom-util/src/url-util/ObjectToQuery.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/chatrooms/createChatroom.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/chatrooms/createChatroom.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/chatrooms/createChatroom.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/chatrooms/deleteChatroom.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/chatrooms/deleteChatroom.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/chatrooms/deleteChatroom.d.ts" />
       </list>
     </option>
   </component>
@@ -2021,11 +2127,6 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/trash/ImageRenderer/ImageRenderer.js</url>
           <option name="timeStamp" value="68" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/apps/socket-server/index.ts</url>
-          <line>104</line>
-          <option name="timeStamp" value="70" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/apps/api-server/controllers/clientControllers/clientSettingsRouter.ts</url>
@@ -2228,7 +2329,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/apps/web-dashboard-app/src/components/routers/MainRouter.tsx</url>
-          <line>35</line>
+          <line>37</line>
           <option name="timeStamp" value="170" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -2258,6 +2359,18 @@
           <url>file://$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/PostAdminQuickAccessBar.tsx</url>
           <line>4</line>
           <option name="timeStamp" value="176" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Assets/TableHeader/TableHeader.tsx</url>
+          <option name="timeStamp" value="177" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/packages/models/src/chatroomMessageSchema.ts</url>
+          <option name="timeStamp" value="178" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/apps/web-app/components/pagesIncludes/chatroom/ChatRoomOnlineUsersList/ChatRoomOnlineUsersList.tsx</url>
+          <option name="timeStamp" value="179" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

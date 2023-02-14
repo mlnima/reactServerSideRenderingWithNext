@@ -23,6 +23,7 @@ import Form from "@components/pages/Form/Form";
 import Translations from "@components/pages/Translations/Translations";
 import General from "@components/pages/Settings/General/General";
 import Widgets from "@components/pages/Design/Widgets/Widgets";
+import Chatroom from "@components/pages/Chatroom/Chatroom";
 
 const MainRouter = () => {
     return (
@@ -30,6 +31,7 @@ const MainRouter = () => {
             <Route path="/dashboard" element={<Dashboard/>}/>
             <Route path="/dashboard/assets" element={<Assets/>}/>
             <Route path="/dashboard/post" element={<Post/>}/>
+            <Route path="/dashboard/chatroom" element={<Chatroom/>}/>
             <Route path="/dashboard/user" element={<User/>}/>
             <Route path="/dashboard/page" element={<Page/>}/>
             <Route path="/dashboard/page/:pageName" element={<Page/>}/>

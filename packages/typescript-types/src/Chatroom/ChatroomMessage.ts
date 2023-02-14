@@ -1,10 +1,20 @@
-//ChatroomMessage
+import {Chatroom} from "./Chatroom";
+import {User} from "../User";
 
 export interface ChatroomMessage{
-    createdAt: string,
+    chatroom: Chatroom,
+    author: User,
     type:string,
     messageData:string,
-    id:string,
-    profileImage:string,
-    username:string,
+    createdAt:Date,
+    updatedAt:Date,
+}
+
+export interface ChatroomMessageRaw{
+    chatroom: string,
+    author: string,
+    type:string,
+    messageData:string,
+    createdAt:string,
+    updatedAt:string,
 }
