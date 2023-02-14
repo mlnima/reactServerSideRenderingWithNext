@@ -26,10 +26,12 @@ import adminUpdateMetaByApi from './adminPostsControllers/adminUpdateMetaByApi';
 import adminGetPost from './adminPostsControllers/adminGetPost';
 import adminGetPosts from './adminPostsControllers/adminGetPosts';
 import adminGeneratePermaLinkForPosts from './adminPostsControllers/adminGeneratePermaLinkForPosts';
+import postDataScrappers from "./adminPostsControllers/postDataScrappers/postDataScrappers";
 
 const router = express.Router();
 
 router.post('/createNewPost',adminAuthMiddleware,adminCreateNewPost)
+router.post('/postDataScrappers',adminAuthMiddleware,postDataScrappers)
 // router.post('/adminImportPosts',adminAuthMiddleware,adminImportPosts)
 router.post('/updatePost',adminAuthMiddleware,adminUpdatePost)
 router.post('/deletePost',adminAuthMiddleware,adminDeletePost)
