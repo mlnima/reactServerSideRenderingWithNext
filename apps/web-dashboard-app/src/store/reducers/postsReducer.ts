@@ -21,6 +21,7 @@ import exportPosts from "api-requests/src/dashboard/posts/exportPosts";
 import bulkActionOnMetas from "api-requests/src/dashboard/metas/bulkActionOnMetas";
 import scrapYoutubeInfo from "api-requests/src/dashboard/posts/scrapYoutubeInfo";
 import { redirect } from "react-router-dom";
+import postDataScrappers from "api-requests/src/dashboard/posts/postDataScrappers";
 
 
 interface AdminPanelPosts {
@@ -61,6 +62,31 @@ export const getPostAction = createAsyncThunk(
             })
     }
 )
+
+export const getPostScrapedDataAction = createAsyncThunk(
+    'adminPanelPosts/getPostScrapedDataAction',
+    async ({url,fields}:{url: string,fields?:string[]}, thunkAPI) => {
+        console.log(69,url)
+        thunkAPI.dispatch(loading(true))
+        return await postDataScrappers(url).then(async (res: AxiosResponse<any>) => {
+            if (!fields){
+                return res.data?.urlData
+            }else {
+                let fieldToSet = {}
+                for await (const field of fields){
+                    //@ts-ignore
+                    fieldToSet[field] = res.data?.urlData?.[field]
+                }
+                return res.data?.urlData
+            }
+        }).catch((error) => {
+            thunkAPI.dispatch(setAlert({message: error.response?.data?.message, type: 'Error'}))
+        }).finally(() => {
+            thunkAPI.dispatch(loading(false))
+        })
+    }
+)
+
 export const getPostsAction = createAsyncThunk(
     'adminPanelPosts/getPostsAction',
     async (queriesData: string, thunkAPI) => {
@@ -262,41 +288,6 @@ export const generatePermaLinkForPostsAction = createAsyncThunk(
     }
 )
 
-
-//notused
-// export const fetchPostThumbnailsUpload = createAsyncThunk(
-//     'adminPanelPosts/fetchPostThumbnailsUpload',
-//     async (image, thunkAPI) => {
-//         thunkAPI.dispatch(loading(true))
-//         await AxiosInstance.post('/api/admin/fileManager/postThumbnailsUpload', image).then(res => {
-//
-//         }).catch(err => {
-//
-//         }).finally(() => thunkAPI.dispatch(loading(false)))
-//     }
-// )
-
-
-//notused
-// export const fetchAdminImportPosts = createAsyncThunk(
-//     'adminPanelPosts/fetchAdminImportPosts',
-//     async (posts: Post[], thunkAPI) => {
-//         thunkAPI.dispatch(loading(true))
-//         await AxiosInstance.post(`/api/admin/posts/adminImportPosts`, {
-//             posts,
-//             token: localStorage.wt
-//         }).then((res: AxiosResponse<any>) => {
-//             thunkAPI.dispatch(setAlert({message: res?.data?.message || 'posts are imported', type: 'success'}))
-//
-//         }).catch((err) => {
-//             thunkAPI.dispatch(setAlert({message: err?.response?.data?.message, type: 'error', err}))
-//
-//         }).finally(() => {
-//             thunkAPI.dispatch(loading(false))
-//         })
-//     })
-
-
 export const getExportingPosts = createAsyncThunk(
     'adminPanelPosts/getExportingPosts',
     async (data, thunkAPI) => {
@@ -332,13 +323,6 @@ export const getExportingPosts = createAsyncThunk(
     }
 )
 
-// export const fetchAdminCheckAndRemoveDeletedVideos = createAsyncThunk(
-//     'adminPanelPosts/fetchAdminCheckAndRemoveDeletedVideos',
-//     async (data, thunkAPI) => {
-//
-//     })
-
-
 export const bulkActionMetaAction = createAsyncThunk(
     'adminPanelPosts/bulkActionMetaAction',
     async ({type, status, ids}: { type: string, status: string, ids: string[] }, thunkAPI) => {
@@ -351,28 +335,6 @@ export const bulkActionMetaAction = createAsyncThunk(
 
         }).finally(() => thunkAPI.dispatch(loading(false)))
     })
-
-
-// export const fetchCheckRemovedContent = createAsyncThunk(
-//     'adminPanelPosts/fetchCheckRemovedContent',
-//     async (data: {}, thunkAPI) => {
-//         const body = {
-//             ...data,
-//             token: localStorage.wt
-//         };
-//
-//         await AxiosInstance.post(`/api/v1/posts/checkRemovedContent`, body)
-//     })
-
-// export const fetchUpdateComment = createAsyncThunk(
-//     'adminPanelPosts/fetchUpdateComment',
-//     async (data: {}, thunkAPI) => {
-//         const body = {
-//             ...data,
-//             token: localStorage.wt
-//         };
-//         await AxiosInstance.post(`/api/admin/posts/updateComment`, body)
-//     })
 
 export const getYoutubeDataScrapperAction = createAsyncThunk(
     'adminPanelPosts/getYoutubeDataScrapperAction',
@@ -481,6 +443,14 @@ export const postsSlice = createSlice({
             return {
                 ...state,
                 meta: action.payload
+            };
+        }).addCase(getPostScrapedDataAction.fulfilled, (state, action: PayloadAction<any>) => {
+            return {
+                ...state,
+                post: {
+                    ...state.post,
+                    ...action.payload
+                }
             };
         })
     }

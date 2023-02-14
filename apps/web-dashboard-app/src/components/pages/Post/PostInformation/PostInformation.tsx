@@ -11,6 +11,9 @@ import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {DashboardStore} from "typescript-types";
 import {FC} from "react";
+import postDataScrappers from "api-requests/src/dashboard/posts/postDataScrappers";
+import {useAppDispatch} from "@store/hooks";
+import {getPostScrapedDataAction} from "@store/reducers/postsReducer";
 
 let StyledDiv = styled.div`
   width: 100%;
@@ -41,7 +44,7 @@ let StyledDiv = styled.div`
       width: 50%;
       aspect-ratio: 16/9;
     }
-    
+
   }
 `
 
@@ -51,6 +54,8 @@ interface PropTypes {
 
 const PostInformation: FC<PropTypes> = (props) => {
     const post = useSelector(({posts}: DashboardStore) => posts.post);
+    const dispatch = useAppDispatch()
+
     return (
         <StyledDiv className='post-information  product-information admin-widget'>
 
@@ -61,6 +66,19 @@ const PostInformation: FC<PropTypes> = (props) => {
             <TextInput name='videoEmbedCode' rendering={post?.postType === 'video'}
                        onChangeHandler={props.onChangeHandler}/>
             <TextInput name='source' rendering={true} onChangeHandler={props.onChangeHandler}/>
+            {!!post?.source && <div className={'scrapper-buttons'}>
+                <button className={'btn btn-primary'} onClick={()=>dispatch(getPostScrapedDataAction({url:post?.source}))}>
+                    scrap All
+                </button>
+                <button className={'btn btn-primary'}
+                        onClick={()=>{
+                            dispatch(getPostScrapedDataAction({url:post?.source,fields:['mainThumbnail','videoEmbedCode']}))}
+                        }>
+                    scrap limited
+                </button>
+            </div>}
+
+
             <TextInput name='redirectLink' rendering={post?.postType === 'promotion'}
                        onChangeHandler={props.onChangeHandler}/>
             <TextInput name='redirectLink' rendering={!!post?.postType?.match(/^(promotion|out)$/)}
