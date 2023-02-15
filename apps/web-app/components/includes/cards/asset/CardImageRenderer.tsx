@@ -1,4 +1,4 @@
-import React, {FC, useMemo, useState} from 'react';
+import React, {FC, useEffect, useMemo, useState} from 'react';
 import styled from "styled-components";
 
 interface CardImageNextPropTypes {
@@ -48,30 +48,26 @@ const CardImageRenderer: FC<CardImageNextPropTypes> =
          index,
          cardWidth,
      }) => {
-        const [gotError, setGotError] = useState(false)
 
+        const onErrorHandler = (e) => {
+            setTimeout(() => {
+                if (e?.target){
+                    e.target.src = `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/asset/images/default/no-image-available.png`
+                }
+            }, 500)
+        }
 
-        const defaultUrl = useMemo(() => {
-            if (gotError) {
-                return `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${'/asset/images/default/no-image-available.png'}`
-            } else {
-                return imageUrl
-            }
-        }, [gotError, imageUrl])
-
-        const loadingAttr = index > 1 ? {loading:'lazy'} :{}
-
-
+        const loadingAttr = index > 1 ? {loading: 'lazy'} : {}
         return (
             <CardImageRendererStyle postsPerRawForMobile={postsPerRawForMobile}
                                     cardWidth={cardWidth}
                                     className={'card-image'}>
                 {/*// @ts-ignore*/}
-                <img src={defaultUrl}
+                <img src={imageUrl}
                      alt={mediaAlt}
                      {...loadingAttr}
                      className={'card-image'}
-                     onError={() => setGotError(true)}
+                     onError={(e) => onErrorHandler(e)}
                 />
 
             </CardImageRendererStyle>

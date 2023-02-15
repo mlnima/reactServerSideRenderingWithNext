@@ -31,16 +31,17 @@ const PostsPage: FC<PostPageTypes> = ({renderPagination}) => {
         return {
             posts: posts?.posts,
             totalCount: posts?.totalCount,
-            postsCountPerPage: query?.size ? parseInt(query?.size as string) : settings?.identity?.postsCountPerPage
+            postsCountPerPage: settings?.identity?.postsCountPerPage || 20
         }
     })
+
+
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
             window.scrollTo({top: 0, behavior: 'smooth'})
         }
     }, [query]);
-
 
 
     return (

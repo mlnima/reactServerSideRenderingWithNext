@@ -53,12 +53,14 @@ const PaginationComponent: FC<PaginationComponentPropTypes> =
          currentPage
      }) => {
         const {query} = useRouter()
+
         if (isActive && totalCount > size) {
             const range = rangeNumGenerator(currentPage, maxPage)
                 .filter(n => (n !== (1 || maxPage)) && (n < maxPage) && (n > 0))
             const rangeWithMinMax = [1, ...range, maxPage]
             return (
                 <PaginationComponentStyledDiv className='pagination'>
+
                     {
                         rangeWithMinMax.map((pageNumber, index) => {
                             const currentPage = query?.page ? parseInt(query?.page as string) : 1;

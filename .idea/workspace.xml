@@ -21,9 +21,11 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/Authentication/AuthenticationAdminItems.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/Authentication/AuthenticationAdminItems.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayoutAdminDataInitializer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayoutAdminDataInitializer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/PaginationComponent/PaginationComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/PaginationComponent/PaginationComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/PostsPage/PostsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/PostsPage/PostsPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/CardImageRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/CardImageRenderer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/category/[categoryId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/category/[categoryId].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/PostInformation/PostInformation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/PostInformation/PostInformation.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1504,7 +1506,7 @@
       <workItem from="1676360316837" duration="4634000" />
       <workItem from="1676372724982" duration="13525000" />
       <workItem from="1676395096540" duration="3174000" />
-      <workItem from="1676436985383" duration="3215000" />
+      <workItem from="1676436985383" duration="10685000" />
     </task>
     <servers />
   </component>

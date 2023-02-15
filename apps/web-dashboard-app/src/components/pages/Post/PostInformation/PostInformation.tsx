@@ -72,7 +72,7 @@ const PostInformation: FC<PropTypes> = (props) => {
                 <button className={'btn btn-primary'}
                         onClick={()=>{
                             dispatch(getPostScrapedDataAction({
-                                url:post?.source,fields:['mainThumbnail','videoEmbedCode']
+                                url:post?.source,fields:['mainThumbnail','videoEmbedCode','quality']
                             }))}
                         }>
                     scrap limited

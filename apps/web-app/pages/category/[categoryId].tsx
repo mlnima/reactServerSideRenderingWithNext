@@ -58,13 +58,7 @@ const categoryPage = () => {
                 <WidgetsRenderer position={'categoryPageTop'}/>
                 <PostsPage renderPagination={true}/>
                 <WidgetsRenderer position={'categoryPageBottom'}/>
-                {role === 'administrator' &&
-                <div className='edit-as-admin'>
-                    <Link href={'/admin/meta?id=' + category?._id} className={'btn btn-primary'} target={'_blank'}>
-                            Edit
-                    </Link>
-                </div>
-                }
+
             </main>
             <SidebarWidgetAreaRenderer sidebar={sidebar} position={'categoryPage'}/>
         </PageStyle>
