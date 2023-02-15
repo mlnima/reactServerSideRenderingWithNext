@@ -66,10 +66,11 @@ export const getPostAction = createAsyncThunk(
 export const getPostScrapedDataAction = createAsyncThunk(
     'adminPanelPosts/getPostScrapedDataAction',
     async ({url,fields}:{url: string,fields?:string[]}, thunkAPI) => {
-        console.log(69,url)
         thunkAPI.dispatch(loading(true))
         return await postDataScrappers(url).then(async (res: AxiosResponse<any>) => {
-            if (!fields){
+
+            //@ts-ignore
+            if (!fields?.length){
                 return res.data?.urlData
             }else {
                 let fieldToSet = {}
@@ -77,7 +78,7 @@ export const getPostScrapedDataAction = createAsyncThunk(
                     //@ts-ignore
                     fieldToSet[field] = res.data?.urlData?.[field]
                 }
-                return res.data?.urlData
+                return fieldToSet
             }
         }).catch((error) => {
             thunkAPI.dispatch(setAlert({message: error.response?.data?.message, type: 'Error'}))

@@ -11,7 +11,6 @@ import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {DashboardStore} from "typescript-types";
 import {FC} from "react";
-import postDataScrappers from "api-requests/src/dashboard/posts/postDataScrappers";
 import {useAppDispatch} from "@store/hooks";
 import {getPostScrapedDataAction} from "@store/reducers/postsReducer";
 
@@ -72,7 +71,9 @@ const PostInformation: FC<PropTypes> = (props) => {
                 </button>
                 <button className={'btn btn-primary'}
                         onClick={()=>{
-                            dispatch(getPostScrapedDataAction({url:post?.source,fields:['mainThumbnail','videoEmbedCode']}))}
+                            dispatch(getPostScrapedDataAction({
+                                url:post?.source,fields:['mainThumbnail','videoEmbedCode']
+                            }))}
                         }>
                     scrap limited
                 </button>

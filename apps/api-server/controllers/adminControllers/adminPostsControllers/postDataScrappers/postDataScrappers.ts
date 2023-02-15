@@ -3,7 +3,7 @@ import xHamster from "./xHamster";
 const postDataScrappers = async (req, res) => {
     try {
         const urlToScrap = req.body.urlToScrap
-        console.log('postDataScrappers',urlToScrap)
+
 
         if (urlToScrap.includes('xhamster')) {
 
