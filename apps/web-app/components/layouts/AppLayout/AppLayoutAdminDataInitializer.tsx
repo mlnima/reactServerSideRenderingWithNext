@@ -22,6 +22,8 @@ const AppLayoutAdminDataInitializer: FC = () => {
         }, 2000)
     }, [asPath, pathname,adminMode]);
 
+
+
     return null
 };
 export default AppLayoutAdminDataInitializer;

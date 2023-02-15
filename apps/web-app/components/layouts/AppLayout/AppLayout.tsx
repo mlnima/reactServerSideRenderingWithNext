@@ -6,6 +6,8 @@ import GlobalStylesComponent from "../../global/Styles/GlobalStylesComponent";
 import SiteSettingSetter from "../../includes/SiteSettingsSetter/SiteSettingsSetter";
 import dynamic from "next/dynamic";
 import AppLayoutAdminDataInitializer from "./AppLayoutAdminDataInitializer";
+import {setAdminMode} from "@store_toolkit/clientReducers/globalStateReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 const FooterWidgetArea = dynamic(() => import('../../widgetsArea/FooterWidgetArea/FooterWidgetArea'));
 const TopBarWidgetArea = dynamic(() => import('../../widgetsArea/TopBarWidgetArea/TopBarWidgetArea'));
@@ -23,7 +25,7 @@ interface AppLayoutPropTypes {
 }
 
 const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
-
+    const dispatch = useAppDispatch()
     const {loggedIn} = useSelector(({user}: Store) => user)
 
     const [renderCookiesBar,setRenderCookiesBar] = useState(false)
@@ -36,6 +38,9 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
          setTimeout(()=>{
              if (localStorage?.cookieAccepted !== 'true'){
                  setRenderCookiesBar(true)
+             }
+             if (localStorage?.adminMode === 'true'){
+                 dispatch(setAdminMode(!adminMode))
              }
          },500)
     }, []);

@@ -15,26 +15,34 @@ import {faCheck} from "@fortawesome/free-solid-svg-icons/faCheck";
 const AuthenticationAdminItems = ({}) => {
     const router = useRouter()
     const dispatch = useAppDispatch()
-    const adminMode = useSelector(({globalState}:Store)=>globalState.adminMode)
+    const adminMode = useSelector(({globalState}: Store) => globalState.adminMode)
+
+    const onSetAdminModeHandler = () => {
+        dispatch(setAdminMode(!adminMode))
+        localStorage.setItem('adminMode', localStorage?.adminMode === 'true' ? 'false': 'true')
+    }
+
+
+
     return (
         <>
             <Link href={'/dashboard'} target={'_blank'} className={'logged-item'}>
                 <div className={'icon-wrapper'}>
-                    <FontAwesomeIcon icon={faUserShield} style={{width:25,height:25}}/>
+                    <FontAwesomeIcon icon={faUserShield} style={{width: 25, height: 25}}/>
                 </div>
 
                 Dashboard
             </Link>
             <span className={'logged-item'} onClick={() => clearCaches().then(() => router.reload())}>
                    <div className={'icon-wrapper'}>
-                       <FontAwesomeIcon icon={faEraser} style={{width:25,height:25}}/>
+                       <FontAwesomeIcon icon={faEraser} style={{width: 25, height: 25}}/>
                   </div>
 
                 Clear Cache
             </span>
-            <span className={'logged-item'} onClick={() => dispatch(setAdminMode(!adminMode))}>
+            <span className={'logged-item'} onClick={() => onSetAdminModeHandler()}>
                    <div className={'icon-wrapper'}>
-                       <FontAwesomeIcon icon={ adminMode ?faCheck:faShield} style={{width:25,height:25}}/>
+                       <FontAwesomeIcon icon={adminMode ? faCheck : faShield} style={{width: 25, height: 25}}/>
                   </div>
 
                 Admin Mode
