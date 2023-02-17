@@ -68,6 +68,7 @@ const Navigation = () => {
                 <NavLink to="/dashboard/assets?assetsType=posts&size=20" className={'navigationLink'}>Posts</NavLink>
                 <NavLink to="/dashboard/design/customColors" className={'navigationLink'}>Colors</NavLink>
                 <NavLink to="/dashboard/settings/general" className={'navigationLink'}>General Settings</NavLink>
+                <NavLink to="/dashboard/fileManager" className={'navigationLink'}>File Manager</NavLink>
             </div>
 
             <nav id={'main-navigation'} className={'dashboard-navigation-item'}>

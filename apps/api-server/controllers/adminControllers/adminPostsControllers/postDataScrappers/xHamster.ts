@@ -31,6 +31,15 @@ const xHamster = async (url) => {
             videoData.mainThumbnail = noScriptTag?.querySelector('video')?.getAttribute('poster') || ''
             videoData.source = url
             const categoriesContainer = videoPageDom.querySelector('.collapsable-list').querySelectorAll('li')
+
+            //duration
+
+            // const duration = videoPageDom?.querySelector('.timing')
+            // console.log('duration:',duration)
+            // if (duration){
+            //     videoData.duration=duration
+            // }
+
             for await (let categoriesContainerItem of categoriesContainer) {
                 const categoriesItem = categoriesContainerItem.querySelector('a').textContent.trim()
                 const categoriesItemUrl = categoriesContainerItem.querySelector('a').getAttribute('href')

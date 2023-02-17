@@ -1,6 +1,6 @@
 import {widgetSchema} from 'models';
 
-const adminAddNewWidget = (req, res) =>{
+const createWidget = (req, res) =>{
     const data = req.body.data;
     let dataToSave = new widgetSchema({data})
     dataToSave?.save((err,newWidgetData)=>{
@@ -11,4 +11,4 @@ const adminAddNewWidget = (req, res) =>{
     })
 
 }
-export default adminAddNewWidget;
+export default createWidget;

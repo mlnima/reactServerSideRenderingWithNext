@@ -6,7 +6,7 @@ import {useRouter} from "next/router";
 import {Store,ChatroomMessage} from "typescript-types";
 
 const ChatRoomMessageAreaStyledMain = styled.main`
-  height: ${({headerSize}:StylePropTypes)=> `calc(100vh - ${headerSize}px )` } ;
+  height: ${({headerSize,isMaximized}:StylePropTypes)=> isMaximized? `calc(100vh - 90)`: `calc(100vh - ${headerSize}px )` } ;
   margin: 0;
   width: 100%;
   overflow-y: scroll;
@@ -15,11 +15,13 @@ const ChatRoomMessageAreaStyledMain = styled.main`
   grid-area: chatroomMessagingArea;
   padding-bottom: 50px;
   box-sizing: border-box;
+  background-color: var(--main-background-color,#000);
   //margin-bottom: 50px;
 `
 
 interface StylePropTypes{
     headerSize:number,
+    isMaximized:boolean
 }
 
 interface PropTypes{
@@ -30,7 +32,7 @@ const ChatRoomMessageArea:FC<PropTypes> = ({chatroomId,headerSize}) => {
 
     const {locale} = useRouter()
     const messageAreaRef = useRef(null)
-
+    const isMaximized = useSelector(({chatroom}: Store) => chatroom.isMaximized)
     const {chatroomMessages} = useSelector(({chatroom}: Store) => {
 
         const currentMessages = chatroom?.messages || [];
@@ -57,6 +59,7 @@ const ChatRoomMessageArea:FC<PropTypes> = ({chatroomId,headerSize}) => {
             className='chatroom-message-area custom-scroll'
             id='chatroom-message-area'
             headerSize={headerSize}
+            isMaximized={isMaximized}
         >
             {chatroomMessages?.length ?
                 //@ts-ignore

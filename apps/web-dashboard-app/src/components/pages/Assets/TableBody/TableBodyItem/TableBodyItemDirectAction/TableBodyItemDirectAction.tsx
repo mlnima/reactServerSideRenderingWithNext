@@ -1,11 +1,10 @@
 import React, {FC} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {bulkActionPostsAction} from "@store/reducers/postsReducer";
-import {deleteFormAction} from "@store/reducers/formsReducer";
 import {deleteCommentsAction} from "@store/reducers/commentsReducer";
 import {useAppDispatch} from "@store/hooks";
 import {useSearchParams} from "react-router-dom";
-import deleteChatroom from "api-requests/src/dashboard/chatrooms/deleteChatroom";
+import deleteForm from "api-requests/src/dashboard/forms/deleteForm";
 
 interface TableBodyItemDirectActionPropTypes {
     assetsType: string,
@@ -18,6 +17,7 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({asse
     const dispatch = useAppDispatch()
     const [search, setSearch] = useSearchParams();
     const statusQuery = search.get('status')
+    const navigate = useNavigate();
 
     const onActionHandler =(ids:string,status:string)=>{
         dispatch(bulkActionPostsAction({ids,status}))
@@ -98,8 +98,10 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({asse
         return (
             <div className='asset-page-table-body-item-hover-item'>
                 <Link to={'/dashboard/form/' + _id}>Edit</Link>
-                <span className={'btn btn-danger'} onClick={() => {
-                    dispatch(deleteFormAction(_id))
+                <span className={'btn btn-danger'} onClick={async () => {
+                    await deleteForm(_id).then(()=>{
+                        navigate(`/dashboard/assets?assetsType=forms&size=20&lastUpdate=${Date.now()}`)
+                    })
                 }}>Delete</span>
             </div>
         );

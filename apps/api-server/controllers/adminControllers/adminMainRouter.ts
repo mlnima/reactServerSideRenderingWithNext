@@ -2,14 +2,14 @@ import {Router} from 'express';
 import adminUsersRouter from './adminUsersRouter';
 import adminSettingsRouter from './adminSettingsRouter';
 import adminPostsRouter from './adminPostsRouter';
-import adminWidgetsRouter from './adminWidgetsRouter';
+import adminWidgetsRouter from './widgets/adminWidgetsRouter';
 import adminTerminalRouter from './adminTerminalRouter';
 import adminFileManagerRouter from './adminFileManagerRouter';
 import adminPagesRouter from './adminPagesRouter';
-import adminFormsRouter from './adminFormsRouter';
+import adminFormsRouter from './forms/formsRouter';
 import adminDataScrappersRouter from './adminDataScrappersRouter';
 import adminOrdersRouter from './adminOrdersRouter';
-import chatroomsRouter from "./chatroomsRouter";
+import chatroomsRouter from "./chatrooms/chatroomsRouter";
 
 const router = Router();
 

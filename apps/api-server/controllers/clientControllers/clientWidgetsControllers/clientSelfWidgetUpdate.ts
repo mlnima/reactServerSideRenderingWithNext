@@ -2,7 +2,7 @@ import {widgetSchema} from 'models';
 // const metaSchema = require('../../../models/metaSchema');
 // const postSchema = require('../../../models/metaSchema');
 // const {updatePostWidgetData} = require('../../adminControllers/adminWidgetsControllers/adminUpdateWidget');
-import {updatePostWidgetData} from '../../adminControllers/adminWidgetsControllers/adminUpdateWidget';
+import {updatePostWidgetData} from '../../adminControllers/widgets/updateWidget';
 
 const clientSelfWidgetUpdate = async (req, res) => {
 

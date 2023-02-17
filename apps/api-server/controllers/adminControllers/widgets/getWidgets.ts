@@ -1,6 +1,6 @@
 import {widgetSchema} from 'models';
 
-const adminPanelGetWidgets = async (req, res) => {
+const getWidgets = async (req, res) => {
     try {
         const widgets = await widgetSchema.find({}).exec()
         Promise.all(widgets).then(widgetsWithData => {
@@ -15,4 +15,4 @@ const adminPanelGetWidgets = async (req, res) => {
     }
 }
 
-export default adminPanelGetWidgets;
+export default getWidgets;

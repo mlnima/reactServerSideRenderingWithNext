@@ -12,7 +12,7 @@ import Tools from "@components/pages/Tools/Tools";
 import Settings from "@components/pages/Settings/Settings";
 import CustomScript from "@components/pages/Settings/CustomScripts/CustomScripts";
 import Membership from "@components/pages/Settings/Membership/Membership";
-import PostsExporter from "@components/pages/Exporter/PostsExporter/PostsExporter";
+import PostsExporter from "@components/pages/Backup/PostsExporter/PostsExporter";
 import Content from "@components/pages/Importer/Content";
 import Youtube from "@components/pages/Importer/Youtube";
 import PostsImporter from "@components/pages/Importer/PostsImporter";
@@ -24,6 +24,7 @@ import Translations from "@components/pages/Translations/Translations";
 import General from "@components/pages/Settings/General/General";
 import Widgets from "@components/pages/Design/Widgets/Widgets";
 import Chatroom from "@components/pages/Chatroom/Chatroom";
+import Backup from "@components/pages/Backup/Backup";
 
 const MainRouter = () => {
     return (
@@ -61,7 +62,8 @@ const MainRouter = () => {
             <Route path="/dashboard/settings/customScript" element={<CustomScript/>}/>
             <Route path="/dashboard/settings/membershipSettings" element={<Membership/>}/>
             <Route path="/dashboard/settings/general" element={<General/>}/>
-            <Route path="/dashboard/exporter/postsExporter" element={<PostsExporter/>}/>
+            <Route path="/dashboard/backup/postsExporter" element={<PostsExporter/>}/>
+            <Route path="/dashboard/backup" element={<Backup/>}/>
             <Route path="/dashboard/importer/content" element={<Content/>}/>
             <Route path="/dashboard/importer/youtube" element={<Youtube/>}/>
             <Route path="/dashboard/importer/postsImporter" element={<PostsImporter/>}/>

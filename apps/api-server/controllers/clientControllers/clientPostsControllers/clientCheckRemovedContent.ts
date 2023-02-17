@@ -1,6 +1,6 @@
 import {metaSchema,postSchema,widgetSchema} from 'models';
 import axios from 'axios'
-import {updatePostWidgetData} from '../../adminControllers/adminWidgetsControllers/adminUpdateWidget'
+import {updatePostWidgetData} from '../../adminControllers/widgets/updateWidget'
 
 const clientCheckRemovedContent = (req, res) => {
     const checkUrl = req.body.checkUrl

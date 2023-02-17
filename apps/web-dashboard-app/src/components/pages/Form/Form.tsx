@@ -2,9 +2,10 @@ import React, {useEffect} from 'react';
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {DashboardStore} from "typescript-types";
-import {deleteFormAction, getFormAction} from "@store/reducers/formsReducer";
-import {redirect, useParams, useSearchParams} from "react-router-dom";
+import { getFormAction} from "@store/reducers/formsReducer";
+import {redirect, useNavigate, useParams, useSearchParams} from "react-router-dom";
 import {useAppDispatch} from "@store/hooks";
+import deleteForm from "api-requests/src/dashboard/forms/deleteForm";
 
 let StyledDiv = styled.div`
   .form-data-container {
@@ -30,6 +31,7 @@ let StyledDiv = styled.div`
 const Form = () => {
     const dispatch = useAppDispatch()
     const [search, setSearch] = useSearchParams();
+    const navigate = useNavigate();
     const {id} = useParams()
     const formData = useSelector(({forms}: DashboardStore) => forms.form)
 
@@ -37,9 +39,10 @@ const Form = () => {
         dispatch(getFormAction(id))
     }, [search]);
 
-    const onDeleteHandler = () => {
-        dispatch(deleteFormAction(id))
-        redirect("/admin/assets?assetsType=forms")
+    const onDeleteHandler = async () => {
+       await deleteForm(id).then(()=>{
+           navigate(`/dashboard/assets?assetsType=forms&size=20&lastUpdate=${Date.now()}`)
+       })
     }
 
     return (

@@ -1,11 +1,11 @@
 import {Router} from 'express';
-import getChatrooms from "./chatroomsControllers/getChatrooms";
-import getChatroom from "./chatroomsControllers/getChatroom";
-import deleteChatroom from "./chatroomsControllers/deleteChatroom";
-import adminAuthMiddleware from "../../middlewares/adminAuthMiddleware";
-import updateChatroom from "./chatroomsControllers/updateChatroom";
-import deleteChatroomMessage from "./chatroomsControllers/deleteChatroomMessage";
-import createChatroom from "./chatroomsControllers/createChatroom";
+import getChatrooms from "./getChatrooms";
+import getChatroom from "./getChatroom";
+import deleteChatroom from "./deleteChatroom";
+import adminAuthMiddleware from "../../../middlewares/adminAuthMiddleware";
+import updateChatroom from "./updateChatroom";
+import deleteChatroomMessage from "./deleteChatroomMessage";
+import createChatroom from "./createChatroom";
 
 const router = Router();
 

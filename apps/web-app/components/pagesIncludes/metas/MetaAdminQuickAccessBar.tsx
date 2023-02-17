@@ -11,7 +11,7 @@ interface PropTypes {
 const MetaAdminQuickAccessBar: FC<PropTypes> = ({metaId}) => {
     return (
         <Style>
-            <Link href={'/admin/meta?id=' + metaId} className={'btn btn-primary'} target={'_blank'}>
+            <Link href={'/dashboard/meta?id=' + metaId} className={'btn btn-primary'} target={'_blank'}>
                 Edit
             </Link>
         </Style>

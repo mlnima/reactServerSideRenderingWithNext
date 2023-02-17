@@ -20,12 +20,68 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/backup/metas.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/forms/deleteForm.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/forms/formsRouter.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/forms/getForms.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/forms/getFrom.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Backup/Backup.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/PaginationComponent/PaginationComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/PaginationComponent/PaginationComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/PostsPage/PostsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/PostsPage/PostsPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/CardImageRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/CardImageRenderer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/category/[categoryId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/category/[categoryId].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/PostInformation/PostInformation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/PostInformation/PostInformation.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminFormsRouter.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminMainRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminMainRouter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminPostsControllers/adminGetMetas.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminPostsControllers/adminGetMetas.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminPostsControllers/postDataScrappers/xHamster.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminPostsControllers/postDataScrappers/xHamster.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminWidgetsControllers/adminAddNewWidget.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/widgets/createWidget.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminWidgetsControllers/adminDeleteWidget.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/widgets/adminDeleteWidget.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminWidgetsControllers/adminGetWidgets.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/widgets/adminGetWidgets.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminWidgetsControllers/adminPanelGetWidgets.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/widgets/getWidgets.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminWidgetsControllers/adminUpdateWidget.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/widgets/updateWidget.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminWidgetsRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/widgets/adminWidgetsRouter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/chatroomsControllers/createChatroom.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/chatrooms/createChatroom.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/chatroomsControllers/deleteChatroom.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/chatrooms/deleteChatroom.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/chatroomsControllers/deleteChatroomMessage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/chatrooms/deleteChatroomMessage.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/chatroomsControllers/getChatroom.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/chatrooms/getChatroom.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/chatroomsControllers/getChatrooms.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/chatrooms/getChatrooms.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/chatroomsControllers/updateChatroom.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/chatrooms/updateChatroom.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/chatroomsRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/chatrooms/chatroomsRouter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/formsControllers/adminDeleteFormData.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/formsControllers/adminGetFormData.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/formsControllers/getForms.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/clientPostsControllers/clientCheckRemovedContent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/clientPostsControllers/clientCheckRemovedContent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/clientWidgetsControllers/clientSelfWidgetUpdate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/clientWidgetsControllers/clientSelfWidgetUpdate.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/chatroom/ChatRoomMessageArea/ChatRoomMessageArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/chatroom/ChatRoomMessageArea/ChatRoomMessageArea.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/chatroom/ChatroomTopbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/chatroom/ChatroomTopbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/metas/MetaAdminQuickAccessBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/metas/MetaAdminQuickAccessBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/chatroom/[Identifier].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/chatroom/[Identifier].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/chatroomReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/chatroomReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Navigation/Navigation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Navigation/Navigation.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Navigation/menuItems.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Navigation/menuItems.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Assets/TableBody/TableBodyItem/TableBodyItemDirectAction/TableBodyItemDirectAction.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Assets/TableBody/TableBodyItem/TableBodyItemDirectAction/TableBodyItemDirectAction.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Dashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Exporter/PostsExporter/PostsExporter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Backup/PostsExporter/PostsExporter.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Form/Form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Form/Form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/routers/MainRouter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/routers/MainRouter.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/formsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/formsReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/client/widgets/getUncachedWidgetsForAdmin.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/client/widgets/getUncachedWidgetsForAdmin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/client/widgets/getUncachedWidgetsForAdmin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/client/widgets/getUncachedWidgetsForAdmin.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/dashboard/forms/deleteForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/forms/deleteForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/dashboard/forms/deleteForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/forms/deleteForm.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/dashboard/forms/getForm.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/forms/getForm.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/dashboard/forms/getForm.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/forms/getForm.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/dashboard/forms/getForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/forms/getForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/dashboard/forms/getForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/forms/getForm.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/dashboard/widgets/createNewWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/widgets/createNewWidget.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/dashboard/widgets/createNewWidget.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/widgets/createNewWidget.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/dashboard/widgets/getWidgets.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/widgets/getWidgets.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/dashboard/widgets/getWidgets.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/widgets/getWidgets.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/dashboard/widgets/updateWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/widgets/updateWidget.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/dashboard/widgets/updateWidget.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/widgets/updateWidget.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/tsconfig.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/tsconfig.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/tsconfig.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/typescript-types/src/storeTypes/ChatroomState.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/typescript-types/src/storeTypes/ChatroomState.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,11 +161,11 @@
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\typescript-types\src\MessengerStoreTypes" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\api-server\controllers\adminControllers\widgets" />
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\api-server\controllers\adminControllers\chatroomsControllers" />
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\api-server\controllers\adminControllers\forms" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\api-server\controllers\adminControllers\adminPostsControllers\postDataScrappers" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-app\components\pagesIncludes\chatroom" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\api-server\controllers\adminControllers\chatroomsControllers" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\trash" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\tempFiles" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -170,8 +226,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.build" />
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.outdate:web-app-packages" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.graph" />
@@ -1506,7 +1562,10 @@
       <workItem from="1676360316837" duration="4634000" />
       <workItem from="1676372724982" duration="13525000" />
       <workItem from="1676395096540" duration="3174000" />
-      <workItem from="1676436985383" duration="10685000" />
+      <workItem from="1676436985383" duration="15193000" />
+      <workItem from="1676533785538" duration="12366000" />
+      <workItem from="1676621775635" duration="12403000" />
+      <workItem from="1676659643799" duration="11361000" />
     </task>
     <servers />
   </component>
@@ -2270,7 +2329,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/apps/web-dashboard-app/src/components/routers/MainRouter.tsx</url>
-          <line>37</line>
+          <line>38</line>
           <option name="timeStamp" value="170" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">

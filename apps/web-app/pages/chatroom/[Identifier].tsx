@@ -21,17 +21,30 @@ const Soft404 = dynamic(() =>
     import('@components/includes/Soft404/Soft404'))
 //onlineUserListVisibility
 const Style = styled.div`
-  width:100%;
+
+  ${({isMaximized}) => isMaximized ?  `
+      position: fixed;
+      top: 0;
+      left: 0;
+      right:0;
+      bottom: 0;
+      z-index: 11;
+  `:''}
+
+
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 150px;
   grid-template-rows: 45px 1fr;
   grid-template-areas:  'chatroomTopbar chatroomTopbar'
                         'chatroomMessagingArea ${({userList}: StylePropTypes) => userList ? 'chatroomOnlineUsersList' : 'chatroomMessagingArea'}';
-                  
+
 `
+
 //      'chatroomTools chatroomTools';
 interface StylePropTypes {
     userList: boolean,
+    isMaximized: boolean,
 }
 
 interface PropTypes {
@@ -47,6 +60,7 @@ const chatRoom: FC<PropTypes> = ({pageData}) => {
     const [onlineUserListVisibility, setOnlineUserListVisibility] = useState(false)
     const [isJoined, setIsJoined] = useState(false)
     const [headerSize, setHeaderSize] = useState(0)
+    const isMaximized = useSelector(({chatroom}: Store) => chatroom.isMaximized)
 
     useEffect(() => {
         if (pageData?.chatroom?._id && user.loggedIn && !isJoined && !!user.socketId) {
@@ -109,7 +123,7 @@ const chatRoom: FC<PropTypes> = ({pageData}) => {
 
     if (pageData?.chatroom?._id) {
         return (
-            <Style id={'full-width-content'} userList={onlineUserListVisibility}>
+            <Style id={'full-width-content'} userList={onlineUserListVisibility} isMaximized={isMaximized}>
                 <ChatroomTopbar chatrooms={pageData?.chatrooms}
                                 chatroomId={pageData?.chatroom?._id}
                                 onlineUserListVisibility={onlineUserListVisibility}

@@ -115,10 +115,10 @@
       {"name": "Posts", "url": "/dashboard/importer/postsImporter"}
     ]
   },
-  "Exporter": {
-    "pathURL": "/dashboard/exporter",
+  "Backup": {
+    "pathURL": "/dashboard/backup",
     "subItems": [
-      {"name": "posts", "url": "/dashboard/exporter/postsExporter"}
+      {"name": "posts", "url": "/dashboard/backup/postsExporter"}
     ]
   }
 }

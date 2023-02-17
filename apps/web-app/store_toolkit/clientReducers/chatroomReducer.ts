@@ -4,13 +4,17 @@ import {RootState} from "../store";
 const initialState = {
     onlineUsers: [],
     messages: [],
-    activeVisibleProfile: {}
+    activeVisibleProfile: {},
+    isMaximized:false
 }
 
 export const chatroomSlice = createSlice({
     name: 'chatroom',
     initialState,
     reducers: {
+        setMaximize: (state, action: PayloadAction<any>) => {
+            state.isMaximized = !state.isMaximized
+        },
         setOnlineUsers: (state, action: PayloadAction<any>) => {
             state.onlineUsers = action.payload
         },
@@ -26,7 +30,7 @@ export const chatroomSlice = createSlice({
     }
 })
 
-export const {setOnlineUsers, setMessages, newMessage, setActiveVisibleProfile} = chatroomSlice.actions;
+export const {setOnlineUsers, setMessages, newMessage, setActiveVisibleProfile,setMaximize} = chatroomSlice.actions;
 
 export const chatroomReducer = (state: RootState) => state?.chatroom || null
 

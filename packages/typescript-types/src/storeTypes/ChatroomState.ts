@@ -6,6 +6,7 @@ export interface ChatroomState {
         username:string,
     }[],
     messages: ChatroomMessage[],
+    isMaximized:boolean,
     activeVisibleProfile: {
         username: string,
         _id: string,

@@ -1,9 +1,16 @@
-import React, {FC} from "react";
+import React, {FC, useEffect} from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import {capitalizeFirstLetters} from "custom-util";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUsers} from "@fortawesome/free-solid-svg-icons/faUsers";
+import {faMaximize} from "@fortawesome/free-solid-svg-icons/faMaximize";
+import {useAppDispatch} from "@store_toolkit/hooks";
+import {useSelector} from "react-redux";
+import {Store} from "typescript-types";
+import {faMinimize} from "@fortawesome/free-solid-svg-icons/faMinimize";
+import {setMaximize} from "@store_toolkit/clientReducers/chatroomReducer";
+import {useRouter} from "next/router";
 
 const Style = styled.div`
   height: 45px;
@@ -17,33 +24,30 @@ const Style = styled.div`
   border-top: var(--default-border);
   border-bottom: var(--default-border);
   grid-area: chatroomTopbar;
-  .chatrooms-links {
+  
+  .chatroom-selector{
+    width: auto;
+    outline: none;
+    border: none;
+  }
+  .chatroom-actions {
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
     align-items: center;
-    .chatrooms-link {
-      padding: 6px 12px;
+
+    .open-online-user-list {
+      border: none;
+      outline: none;
+      background-color: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       color: var(--secondary-text-color, #ccc);
-    }
-    .active{
-      font-weight: bold;
-      background-color: var(--secondary-text-color, #ccc);
-      color: var(--secondary-background-color, #181818) ;
-      border-radius: 5px;
+      width: 45px;
+      height: 45px;
     }
   }
 
-  .open-online-user-list {
-    border: none;
-    outline: none;
-    background-color: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--secondary-text-color, #ccc);
-    width: 45px;
-    height: 45px;
-  }
 `;
 
 interface PropTypes {
@@ -53,29 +57,58 @@ interface PropTypes {
     onlineUserListVisibility: boolean
 }
 
-const ChatroomTopbar: FC<PropTypes> = ({
-                                           chatrooms,
-                                           chatroomId,
-                                           onlineUserListVisibility,
-                                           onOnlineUserListVisibilityChangeHandler
-                                       }) => {
-//onlineUserListVisibility={onlineUserListVisibility}
+const ChatroomTopbar: FC<PropTypes> = (
+    {
+        chatrooms,
+        chatroomId,
+        onlineUserListVisibility,
+        onOnlineUserListVisibilityChangeHandler
+    }) => {
+    const {push,asPath} = useRouter()
+    const isMaximized = useSelector(({chatroom}: Store) => chatroom.isMaximized)
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+         setTimeout(()=>{
+             if (localStorage.isMaximized === 'true'){
+                 dispatch(setMaximize(null))
+             }
+         },100)
+    }, [asPath]);
+
+    const onSetMaximizedHandler = ()=>{
+        dispatch(setMaximize(null))
+        localStorage.setItem('isMaximized',(!isMaximized).toString())
+    }
+
+    const onChatroomChangeHandler = (e)=>{
+        push(`/chatroom/${e.target.value}`)
+    }
+
     return (
         <Style>
-            <div className={'chatrooms-links'}>
+            <select className={'custom-select chatroom-selector'}  onChange={e=>onChatroomChangeHandler(e)} value={chatroomId}>
                 {(chatrooms || []).map(chatroom => {
-                    return(
-                        <Link href={`/chatroom/${chatroom._id}`}
-                              key={chatroom._id}
-                              className={`chatrooms-link${ chatroomId === chatroom._id ? ' active' : ''}`}>
+                    return (
+                        <option value={chatroom._id}
+                                key={chatroom._id}
+
+                            // className={`chatrooms-link${chatroomId === chatroom._id ? ' active' : ''}`}
+                        >
                             {capitalizeFirstLetters(chatroom.name)}
-                        </Link>
+                        </option>
                     )
                 })}
+            </select>
+            <div className="chatroom-actions">
+                <button className='open-online-user-list' onClick={onSetMaximizedHandler}>
+                    <FontAwesomeIcon icon={isMaximized ? faMinimize : faMaximize} style={{width: 20, height: 20}}/>
+                </button>
+                <button className='open-online-user-list' onClick={onOnlineUserListVisibilityChangeHandler}>
+                    <FontAwesomeIcon icon={faUsers} style={{width: 25, height: 25}}/>
+                </button>
             </div>
-            <button className='open-online-user-list' onClick={onOnlineUserListVisibilityChangeHandler}>
-                <FontAwesomeIcon icon={faUsers} style={{width: 25, height: 25}}/>
-            </button>
+
         </Style>
     )
 };

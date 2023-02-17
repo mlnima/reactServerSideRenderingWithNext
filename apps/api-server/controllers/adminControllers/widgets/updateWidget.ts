@@ -60,7 +60,7 @@ const updateMetaWidgetData = async (widgetData: any) => {
 }
 
 //@ts-ignore
-export const adminUpdateWidget = async (req, res) => {
+export const updateWidget = async (req, res) => {
     const widgetData = req.body?.widgetData?.data
     const widgetId = req.body?.widgetData?._id
 
