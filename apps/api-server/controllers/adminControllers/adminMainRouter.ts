@@ -10,10 +10,12 @@ import adminFormsRouter from './forms/formsRouter';
 import adminDataScrappersRouter from './adminDataScrappersRouter';
 import adminOrdersRouter from './adminOrdersRouter';
 import chatroomsRouter from "./chatrooms/chatroomsRouter";
+import backupRouter from "./backup/backupRouter";
 
 const router = Router();
 
 router.use('/users',adminUsersRouter);
+router.use('/backups',backupRouter);
 router.use('/posts',adminPostsRouter);
 router.use('/chatrooms',chatroomsRouter);
 router.use('/settings',adminSettingsRouter);

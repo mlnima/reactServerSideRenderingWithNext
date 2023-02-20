@@ -1,13 +1,28 @@
 import {metaSchema} from "models";
+import fs from "fs";
+import path from "path";
 
-
-export const findMetasAndCreateFile = async (metaType, fields) => {
+//, {imageUrl: {$ne: null}}
+export const findMetasAndCreateFile = async (metaType: string, fields: string,limit:number) => {
     try {
-        const metas = await metaSchema.find(metaType,fields).limit(10).exec()
-
-        console.log(metas)
+        //@ts-ignore
+        const fieldsQuery = fields.map(field => `-${field}`).join(' ')
+        //@ts-ignore
+        const metaTypeQuery = metaType ? {$and: [{type: metaType}]} : {}
+        const metas = await metaSchema.find(metaTypeQuery).select(fieldsQuery).limit(limit || -1).sort('-count').exec()
+        const filePath = `/public/backups/${metaType}.json`
+        const fileAbsolutePath = path.join(__dirname + `../../../../${filePath}`)
+        await fs.writeFileSync(
+            fileAbsolutePath,
+            JSON.stringify(metas),
+            {
+                encoding: "utf8",
+                flag: "w",
+            }
+        )
+        return fileAbsolutePath
     } catch (error) {
-
+        console.log(error)
     }
 
 }
@@ -15,12 +30,11 @@ export const findMetasAndCreateFile = async (metaType, fields) => {
 
 const metas = async (req, res) => {
     try {
-        const metaType = req.query.metaType ? {type: req.query.metaType} : {}
-        const fields = req.query.field
-        await findMetasAndCreateFile(metaType,fields)
-        res.end()
+        await findMetasAndCreateFile(req.body.metaType as string, req.body.fields,req.body.limit).then(filePath => {
+            res.download(filePath)
+        })
     } catch (error) {
-
+        res.end()
     }
 }
 

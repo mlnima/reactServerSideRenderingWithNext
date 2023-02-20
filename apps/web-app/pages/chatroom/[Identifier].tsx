@@ -22,26 +22,26 @@ const Soft404 = dynamic(() =>
 //onlineUserListVisibility
 const Style = styled.div`
 
-  ${({isMaximized}) => isMaximized ?  `
+  ${({isMaximized}) => isMaximized ? `
       position: fixed;
       top: 0;
       left: 0;
       right:0;
       bottom: 0;
       z-index: 11;
-  `:''}
+  ` : ''}
 
 
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 150px;
+
   grid-template-rows: 45px 1fr;
   grid-template-areas:  'chatroomTopbar chatroomTopbar'
                         'chatroomMessagingArea ${({userList}: StylePropTypes) => userList ? 'chatroomOnlineUsersList' : 'chatroomMessagingArea'}';
 
 `
 
-//      'chatroomTools chatroomTools';
 interface StylePropTypes {
     userList: boolean,
     isMaximized: boolean,
@@ -61,14 +61,14 @@ const chatRoom: FC<PropTypes> = ({pageData}) => {
     const [isJoined, setIsJoined] = useState(false)
     const [headerSize, setHeaderSize] = useState(0)
     const isMaximized = useSelector(({chatroom}: Store) => chatroom.isMaximized)
-
+    // useEffect(() => {
+    //     console.log(!!pageData?.chatroom?._id , user.loggedIn, !isJoined , !!user.socketId)
+    // }, [user.loggedIn, pageData?.chatroom?._id]);
     useEffect(() => {
-        if (pageData?.chatroom?._id && user.loggedIn && !isJoined && !!user.socketId) {
-            setTimeout(() => {
+        if (!!pageData?.chatroom?._id && user.loggedIn && !isJoined && !!user.socketId) {
                 setIsJoined(true)
                 const userDataForJoiningRoom = {
                     chatroomId: pageData?.chatroom?._id,
-                    // author: user.userData._id,
                     author: {
                         _id: user.userData?._id,
                         username: user.userData?.username,
@@ -77,9 +77,8 @@ const chatRoom: FC<PropTypes> = ({pageData}) => {
                     socketId: user.socketId
                 }
                 socket.emit('joinUserToTheRoom', userDataForJoiningRoom)
-            }, 500)
         }
-    }, [user.loggedIn, pageData?.chatroom?._id]);
+    }, [user.loggedIn, pageData?.chatroom?._id,user.socketId]);
 
     useEffect(() => {
         if (pageData?.chatroom?._id) {

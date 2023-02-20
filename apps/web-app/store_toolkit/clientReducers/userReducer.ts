@@ -406,10 +406,10 @@ export const fetchUserAutoLogin = createAsyncThunk(
                 return res.data?.userData
             }).catch((err) => {
                 localStorage.removeItem('wt')
-                thunkAPI.dispatch(setAlert({message: err.response?.data?.message, type: 'error'}))
+                // thunkAPI.dispatch(setAlert({message: err.response?.data?.message, type: 'error'}))
             })
         } else {
-            thunkAPI.dispatch(setAlert({message: 'You Need To Login', type: 'error'}))
+            // thunkAPI.dispatch(setAlert({message: 'You Need To Login', type: 'error'}))
         }
     }
 )

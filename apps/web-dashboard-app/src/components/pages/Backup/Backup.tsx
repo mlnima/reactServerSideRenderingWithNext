@@ -1,19 +1,56 @@
-import {FC, useEffect, useState} from "react";
+import React, {ChangeEvent, ChangeEventHandler, FC, useEffect, useState} from "react";
 import styled from "styled-components";
+import backupMetas from "api-requests/src/dashboard/backups/backupMetas";
+import MetasSection from "@components/pages/Backup/MetasSection";
 
 const Style = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+
   .export-type-container {
-    border: var('--default-border');
+    border: 1px solid;
+    padding: 8px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    width: 350px;
+
 
     .action-buttons, .fields {
       margin: 20px 0;
       display: flex;
       align-items: center;
+
+      flex-wrap: wrap;
+
+      button {
+        margin: 0 20px;
+      }
     }
 
-    button {
-      margin: 0 20px;
+    .fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+
+      .field {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 4px;
+      }
     }
+
+    .limit-field {
+      display: flex;
+      align-items: center;
+
+      .limit {
+        width: 100px;
+        margin: 0 8px;
+      }
+    }
+
   }
 `;
 
@@ -22,67 +59,22 @@ interface PropTypes {
 }
 
 const Backup: FC<PropTypes> = ({}) => {
-    const [metasSelectedFields, setMetasSelectedFields] = useState([])
-
-
-    const onMetasSelectedFieldsChangeHandler = (e: any) => {
-        setMetasSelectedFields([
-            //@ts-ignore
-            ...metasSelectedFields,
-            //@ts-ignore
-            e.target.value
-        ])
-    }
-
-    const onBackupMetasHandler = () => {
-
-    }
 
 
     return (
         <Style>
-            <div className={'export-type-container'}>
-                <h2>General Backup config:</h2>
-            </div>
-            <div className={'export-type-container'}>
-                <h2>Posts:</h2>
-            </div>
+            <MetasSection/>
+            {/*<div className={'export-type-container'}>*/}
+            {/*    <h2>General Backup config:</h2>*/}
+            {/*</div>*/}
+            {/*<div className={'export-type-container'}>*/}
+            {/*    <h2>Posts:</h2>*/}
+            {/*</div>*/}
 
-            <div className={'export-type-container'}>
-                <h2>Metas:</h2>
-                <div className="action-buttons">
-                    <button className={'btn btn-primary'}>Categories</button>
-                    <button className={'btn btn-primary'}>Tags</button>
-                    <button className={'btn btn-primary'}>Actors</button>
-                </div>
-                <div className="fields">
-                    <div className="field">
-                        <label>description</label>
-                        <input className={'field'}
-                               type={'checkbox'}
-                               value={'description'}
-                               onChange={e => onMetasSelectedFieldsChangeHandler(e)}/>
-                    </div>
-                    <div className="field">
-                        <label>imageUrl</label>
-                        <input name={'imageUrl'} className={'field'} type={'checkbox'} value={'imageUrl'}
-                               onChange={e => onMetasSelectedFieldsChangeHandler(e)}/>
-                    </div>
-                    <div className="field">
-                        <label>translations</label>
-                        <input name={'translations'} className={'field'} type={'checkbox'} value={'translations'}
-                               onChange={e => onMetasSelectedFieldsChangeHandler(e)}/>
-                    </div>
-                    <div className="field">
-                        <label>additionalInfo</label>
-                        <input name={'additionalInfo'} className={'field'} type={'checkbox'} value={'additionalInfo'}
-                               onChange={e => onMetasSelectedFieldsChangeHandler(e)}/>
-                    </div>
-                </div>
-            </div>
-            <div className={'export-type-container'}>
-                <h2>Settings:</h2>
-            </div>
+
+            {/*<div className={'export-type-container'}>*/}
+            {/*    <h2>Settings:</h2>*/}
+            {/*</div>*/}
 
         </Style>
     )
