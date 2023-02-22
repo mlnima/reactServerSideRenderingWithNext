@@ -87,7 +87,7 @@ const PostInformation: FC<PropTypes> = (props) => {
             <TextAreaComponent name='videoScriptCode' rendering={post?.postType === 'video'}
                                onChangeHandler={props.onChangeHandler}/>
             <RenderIframe rendering={post?.postType === 'video'}/>
-            <TextInput name='VideoTrailerUrl' rendering={post?.postType === 'video'}
+            <TextInput name='videoTrailerUrl' rendering={post?.postType === 'video'}
                        onChangeHandler={props.onChangeHandler}/>
             <TextInput name='downloadLink' rendering={true}
                        onChangeHandler={props.onChangeHandler}/>

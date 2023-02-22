@@ -9,16 +9,18 @@ const MultipleLinkToStyledUl = styled.ul`
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-
+  gap: 5px;
+  margin: 0;
+  padding: 0;
   .multiple-links-widget-item {
     list-style: none;
     color: var(--main-text-color, #fff);
-    margin: 0 5px;
-  }
-
-  .multiple-links-widget-item-link {
-    color: var(--main-text-color, #fff);
-    text-decoration: none;
+    padding:  8px;
+    box-sizing: border-box;
+    a {
+      color: var(--main-text-color,#fff) !important;
+      text-decoration: none;
+    }
   }
 `
 
@@ -39,25 +41,24 @@ interface MultipleLinkToPropTypes {
 const MultipleLinkTo: FC<MultipleLinkToPropTypes> = ({multipleLinks}) => {
     const {locale} = useRouter()
 
-    const renderLinks = ([...multipleLinks] || []).sort((a, b) => a.linkIndex - b.linkIndex).map((linkData,index) => {
-        const linkTitle = linkData.translations?.[locale]?.linkTitle || linkData.linkTitle;
-        const linkDescription = linkData.translations?.[locale]?.linkDescription || linkData.linkDescription;
-
-        return (
-            <li key={`${linkData.linkTitle}-${index}`} className='multiple-links-widget-item'>
-                {linkDescription ? <p>{linkDescription}</p> : null}
-                <Link href={linkData.linkTo}
-                      title={linkTitle}
-                      target={linkData.linkToWindowType || '_self'}>
-                        {linkTitle}
-                </Link>
-            </li>
-        )
-
-    })
     return (
         <MultipleLinkToStyledUl className='multiple-links-widget'>
-            {renderLinks}
+            {([...multipleLinks] || []).sort((a, b) => a.linkIndex - b.linkIndex).map((linkData,index) => {
+                const linkTitle = linkData.translations?.[locale]?.linkTitle || linkData.linkTitle;
+                const linkDescription = linkData.translations?.[locale]?.linkDescription || linkData.linkDescription;
+
+                return (
+                    <li key={`${linkData.linkTitle}-${index}`} className='multiple-links-widget-item'>
+                        {linkDescription ? <p>{linkDescription}</p> : null}
+                        <Link href={linkData.linkTo}
+                              title={linkTitle}
+                              target={linkData.linkToWindowType || '_self'}>
+                            {linkTitle}
+                        </Link>
+                    </li>
+                )
+
+            })}
         </MultipleLinkToStyledUl>
     );
 };

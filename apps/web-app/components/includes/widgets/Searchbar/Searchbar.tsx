@@ -9,7 +9,6 @@ import {faXmark} from "@fortawesome/free-solid-svg-icons/faXmark";
 const SearchbarStyledDiv = styled.div`
   position: relative;
   z-index: 11;
-
   
   .open-close-search-form {
     border: none;
@@ -19,7 +18,6 @@ const SearchbarStyledDiv = styled.div`
     background-color: transparent;
     outline: none;
     color: var(--main-text-color, #fff);
-
   }
 
   .searchbar-form {
@@ -93,7 +91,6 @@ const SearchbarStyledDiv = styled.div`
 const Searchbar = () => {
 
     const {t} = useTranslation();
-
     const {push, query} = useRouter()
     const [keyword, setKeyword] = useState('')
     const [open, setOpen] = useState(null)
@@ -135,9 +132,6 @@ const Searchbar = () => {
             setOpen(!open)
         }
     }
-
-
-
 
     return (
         <SearchbarStyledDiv className={'searchbar'} open={open}>

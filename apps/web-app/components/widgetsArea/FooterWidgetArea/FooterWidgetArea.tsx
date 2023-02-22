@@ -7,7 +7,9 @@ import {useRouter} from "next/router";
 const StyledFooter = styled.footer`
   background-color: var(--main-background-color,#000);
   grid-area: footer;
-  padding: 0 10px 15px;
+  //padding: 0 10px 15px;
+  padding: 0 8px;
+  box-sizing: border-box;
   .footer-content{
     display: flex;
     justify-content: space-evenly;

@@ -49,7 +49,7 @@ const Assets: FC<PropTypes> = ({}) => {
         if (query.assetsType === 'posts') {
             dispatch(getPostsAction(paramsQueries))
         } else if (query.assetsType === 'users') {
-            dispatch(getUsersAction({}))
+            dispatch(getUsersAction(paramsQueries))
         } else if (query.assetsType === 'metas') {
             dispatch(getMetasAction(paramsQueries))
         } else if (query.assetsType === 'comments') {

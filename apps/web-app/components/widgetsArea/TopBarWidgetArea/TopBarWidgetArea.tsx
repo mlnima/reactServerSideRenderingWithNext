@@ -17,8 +17,9 @@ let StyledDiv = styled.div`
     justify-content: space-between;
     flex-wrap: wrap;
     align-items: center;
-    margin: 0 5px;
-    padding: 0 5px;
+    //margin: 0 8px;
+    padding: 0 8px;
+    box-sizing: border-box;
     width: 100%;
     height: 100%;
   }

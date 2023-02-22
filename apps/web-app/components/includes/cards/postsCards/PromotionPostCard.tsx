@@ -29,7 +29,7 @@ interface PromotionPostCardStylePropTypes {
 }
 
 const Style = styled(DefaultPostCardStyle)`
-  
+
   .card-under-media-info {
     font-size: 14px;
     display: flex;
@@ -88,7 +88,7 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
         return (
             <Style className={'post-card'} cardWidth={cardWidth}>
                 <a href={post.redirectLink} className='promotion-card-link-external'
-                   onClick={() => viewPost(post._id) } target='_blank' rel="nofollow noopener external">
+                   onClick={() => viewPost(post._id)} target='_blank' rel="nofollow noopener external">
                     {post.mainThumbnail ?
                         <CardImageRenderer imageUrl={post.mainThumbnail}
                                            mediaAlt={title}
@@ -102,15 +102,15 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
                 </a>
 
 
-                    <CardTitle title={title} url={postUrl} targetLink={'_self'}/>
-                     <span className={'read-more-btn'}>
+                <CardTitle title={title} url={postUrl} targetLink={'_self'}/>
+                <span className={'read-more-btn'}>
 
                             <div className={'card-under-media-info'}>
                                 {!!views &&
-                                <CardViews views={views} className={'card-views card-under-media-info-data'}/>
+                                    <CardViews views={views} className={'card-views card-under-media-info-data'}/>
                                 }
                                 {!!rating &&
-                                <CardRating rating={rating} className={'card-rating card-under-media-info-data'}/>
+                                    <CardRating rating={rating} className={'card-rating card-under-media-info-data'}/>
                                 }
 
                             </div>

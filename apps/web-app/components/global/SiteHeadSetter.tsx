@@ -48,8 +48,8 @@ const SiteHeadSetter: FC = () => {
             }
             <meta name={'theme-color'} content={headData?.themeColor}/>
             {!!headData?.canonicalUrl && <link rel={'canonical'} href={headData?.canonicalUrl}/>}
-            <meta name={'apple-mobile-web-appex-status-bar-style'} content={headData?.themeColor}/>
-            <meta name={'viewport'} content={'width=device-width, initial-scale=1'}/>
+            <meta name={'apple-mobile-web-app-status-bar-style'} content={headData?.themeColor}/>
+            <meta name={'viewport'} content={'width=device-width, initial-scale=1, maximum-scale=1'}/>
             <meta charSet={'utf-8'}/>
             <meta httpEquiv={'X-UA-Compatible'} content={'IE=edge'}/>
             {!!headData?.applicationName && <meta property={'application-name'} content={headData?.applicationName}/>}

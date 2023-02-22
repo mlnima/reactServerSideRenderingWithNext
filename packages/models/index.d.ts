@@ -12,5 +12,6 @@ import searchKeywordSchema from "./src/searchKeywordSchema";
 import translateSchema from "./src/translateSchema";
 import userSchema from "./src/userSchema";
 import widgetSchema from "./src/widgetSchema";
-export { settingSchema, chatroomSchema, commentSchema, contactFromSchema, conversationSchema, formSchema, metaSchema, orderSchema, pageSchema, postSchema, searchKeywordSchema, translateSchema, userSchema, widgetSchema };
+import chatroomMessageSchema from "./src/chatroomMessageSchema";
+export { settingSchema, chatroomMessageSchema, chatroomSchema, commentSchema, contactFromSchema, conversationSchema, formSchema, metaSchema, orderSchema, pageSchema, postSchema, searchKeywordSchema, translateSchema, userSchema, widgetSchema };
 //# sourceMappingURL=index.d.ts.map

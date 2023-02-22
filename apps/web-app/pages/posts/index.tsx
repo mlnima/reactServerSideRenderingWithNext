@@ -6,7 +6,6 @@ import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_g
 import {Store} from "typescript-types";
 import getPostsAction from "@store_toolkit/clientReducers/postsReducer/getPostsAction";
 
-
 let StyledMain = styled.main`
   grid-area: main;
 

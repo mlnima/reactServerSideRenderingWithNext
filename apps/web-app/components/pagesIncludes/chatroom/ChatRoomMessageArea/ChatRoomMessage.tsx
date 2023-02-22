@@ -23,9 +23,9 @@ const ChatRoomLogMessageStyledDiv = styled.div`
 const ChatRoomMessageStyledDiv = styled.div`
   display: flex;
   justify-content: flex-start;
-  align-items: flex-end;
-  flex-wrap: wrap;
-  max-width: 70vw;
+  align-items: flex-start;
+  //flex-wrap: wrap;
+  max-width: 80%;
   border-radius: 5px;
   padding: 5px 10px;
   box-sizing: border-box;
@@ -43,6 +43,8 @@ const ChatRoomMessageStyledDiv = styled.div`
     margin: 5px;
     box-sizing: border-box;
     border-radius: 10px;
+//width: 100%;
+max-width: 100%;
     .chatroom-message-area-message-username {
       display: flex;
       justify-content: space-between;
@@ -53,8 +55,13 @@ const ChatRoomMessageStyledDiv = styled.div`
     .chatroom-message-area-message-text {
       color: var(--main-text-color, #fff);
       margin: 10px 20px;
+      //inline-size: 80vw;
       overflow-wrap: break-word;
+      max-width: calc(100% - 30px);
     }
+  }
+  @media only screen and (min-width: 768px){
+    max-width: calc(100vw - 180px);
   }
 `
 
@@ -93,7 +100,7 @@ class ChatRoomMessage extends PureComponent<ChatRoomMessagePropTypes> {
                         </p>
                     </div>
                     {/*//@ts-ignore*/}
-                    <AdminActionOnMessageMenu chatroomId={this?.props?.message?.chatroom} messageId={this?.props?.message?.author._id}/>
+                    <AdminActionOnMessageMenu chatroomId={this?.props?.message?.chatroom} messageId={this?.props?.message?._id}/>
                 </ChatRoomMessageStyledDiv>
             );
         }

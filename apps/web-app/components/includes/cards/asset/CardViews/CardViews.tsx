@@ -26,12 +26,8 @@ const CardViews = ({views, className}: CardViewsPropTypes) => {
 
     return (
         <CardViewsStyledDiv className={`card-views ${className || ''}`}>
-            {!!views   &&
-                <>
-                    <span>{shortNumber(views)}</span>
-                    <span >{t('common:Views')}</span>
-                </>
-            }
+            <span>{shortNumber(views)}</span>
+            <span >{t('common:Views')}</span>
         </CardViewsStyledDiv>
     );
 };

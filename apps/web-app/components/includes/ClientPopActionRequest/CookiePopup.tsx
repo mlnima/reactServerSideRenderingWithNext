@@ -11,7 +11,8 @@ const CookiePopupStyledDiv = styled.div`
   align-items: center;
   width: 100%;
   z-index: 1005;
-  background-color: #000;
+  background-color:var(--secondary-background-color,#fff);
+  color: var(--secondary-text-color,#fff);
   height: 40px;
   gap: 10px;
   p{

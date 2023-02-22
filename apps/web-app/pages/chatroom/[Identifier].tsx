@@ -61,9 +61,7 @@ const chatRoom: FC<PropTypes> = ({pageData}) => {
     const [isJoined, setIsJoined] = useState(false)
     const [headerSize, setHeaderSize] = useState(0)
     const isMaximized = useSelector(({chatroom}: Store) => chatroom.isMaximized)
-    // useEffect(() => {
-    //     console.log(!!pageData?.chatroom?._id , user.loggedIn, !isJoined , !!user.socketId)
-    // }, [user.loggedIn, pageData?.chatroom?._id]);
+
     useEffect(() => {
         if (!!pageData?.chatroom?._id && user.loggedIn && !isJoined && !!user.socketId) {
                 setIsJoined(true)

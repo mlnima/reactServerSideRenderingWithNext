@@ -7,7 +7,8 @@ import {Store} from "typescript-types";
 let HeaderWidgetAreaStyle = styled.div`
   grid-area: header;
   background-color: var(--main-background-color, #000);
-  
+  padding: 0 8px;
+  box-sizing: border-box;
   .header-content {
     display: flex;
     justify-content: space-evenly;

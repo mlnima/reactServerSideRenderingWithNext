@@ -21,6 +21,7 @@ const Style = styled.div`
 
   .user-info-profile-button-icon {
     cursor: pointer;
+    color: var(--secondary-text-color,#ccc);
   }
 `
 

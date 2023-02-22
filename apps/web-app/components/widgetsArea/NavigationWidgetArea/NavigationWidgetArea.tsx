@@ -11,6 +11,8 @@ let StyledNavigation = styled.nav`
   height: 56px;
   display: flex;
   align-items: center;
+  padding: 0 8px;
+  box-sizing: border-box;
   
   .navigation-content {
     display: flex;

@@ -12,10 +12,12 @@ import searchKeywordSchema from "./src/searchKeywordSchema";
 import translateSchema from "./src/translateSchema";
 import userSchema from "./src/userSchema";
 import widgetSchema from "./src/widgetSchema";
+import chatroomMessageSchema from "./src/chatroomMessageSchema";
 
 
 export {
     settingSchema,
+    chatroomMessageSchema,
     chatroomSchema,
     commentSchema,
     contactFromSchema,

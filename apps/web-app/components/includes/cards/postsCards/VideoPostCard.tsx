@@ -133,13 +133,15 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
                     </Link>
                 </div>
                 <CardTitle title={title} targetLink={targetLink} url={postUrl}/>
-                <div className={'card-under-media-info'}>
 
-                    <CardViews views={views}/>
+                {(!!views || !!rating ) &&        <div className={'card-under-media-info'}>
+
+                    {!!views && <CardViews views={views}/> }
                     {!!rating &&
                         <CardRating rating={rating} className={'card-rating card-under-title-info-data'}/>
                     }
-                </div>
+                </div>}
+
 
             </VideoPostCardStyle>
         )

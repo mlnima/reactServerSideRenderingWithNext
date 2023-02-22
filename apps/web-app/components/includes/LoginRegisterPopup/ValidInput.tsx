@@ -1,9 +1,12 @@
 import React, {FC} from 'react';
 import styled from "styled-components";
-import SvgRenderer from "../../global/commonComponents/SvgRenderer/SvgRenderer";
+import {faXmark} from "@fortawesome/free-solid-svg-icons/faXmark";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCheck} from "@fortawesome/free-solid-svg-icons/faCheck";
 
 const ValidInputStyledDiv = styled.div`
-  width: 4%;
+  width: 20px;
+  height: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,15 +23,12 @@ interface ValidInputPropTypes {
 
 const ValidInput: FC<ValidInputPropTypes> = ({valid}) => {
     return (
-        <ValidInputStyledDiv className='validator'> {
-            valid ?
-                <SvgRenderer svgUrl={'/asset/images/icons/check-solid.svg'}
-                             size={25}
-                             color={'green'}/> :
-                <SvgRenderer svgUrl={'/asset/images/icons/xmark-solid.svg'}
-                             size={25}
-                             color={'red'}/>
-        }</ValidInputStyledDiv>
+        <ValidInputStyledDiv className='validator inputs-action'>
+            {valid ?
+                <FontAwesomeIcon color={'green'} icon={faCheck} style={{width: 20, height: 20}}/> :
+                <FontAwesomeIcon color={'red'} icon={faXmark} style={{width: 20, height: 20}}/>
+            }
+        </ValidInputStyledDiv>
     );
 };
 export default ValidInput;

@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import adminUsersRouter from './adminUsersRouter';
+import adminUsersRouter from './users/usersRouter';
 import adminSettingsRouter from './adminSettingsRouter';
 import adminPostsRouter from './adminPostsRouter';
 import adminWidgetsRouter from './widgets/adminWidgetsRouter';

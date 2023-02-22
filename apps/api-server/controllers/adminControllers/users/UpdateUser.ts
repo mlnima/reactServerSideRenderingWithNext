@@ -1,6 +1,6 @@
 import {userSchema} from 'models';
 
-const adminUpdateUserData = (req, res) => {
+const updateUser = (req, res) => {
     const userID = req.body.data._id
     userSchema.findByIdAndUpdate(userID, {...req.body.data}, {new: true}).exec().then(savedData => {
         res.json({updatedData: savedData})
@@ -9,4 +9,4 @@ const adminUpdateUserData = (req, res) => {
         res.end()
     })
 }
-export default adminUpdateUserData
+export default updateUser

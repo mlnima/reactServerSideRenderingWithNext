@@ -10,6 +10,7 @@ import {Store} from "typescript-types";
 import getPostAction from "@store_toolkit/clientReducers/postsReducer/getPostAction";
 import getPostCommentsAction from "@store_toolkit/clientReducers/postsReducer/getPostCommentsAction";
 import viewPost from "api-requests/src/client/posts/viewPost";
+import {postTypes} from "data-structures";
 
 const Soft404 = dynamic(() =>
     import('../../../components/includes/Soft404/Soft404'))
@@ -74,8 +75,6 @@ const postPage = () => {
                 dispatch(getPostCommentsAction(_id as string));
                 viewPost(_id);
             },1000)
-
-
         }
     }, [_id])
 

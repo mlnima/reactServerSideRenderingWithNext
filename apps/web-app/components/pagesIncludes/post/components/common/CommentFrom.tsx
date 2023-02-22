@@ -13,7 +13,8 @@ const CommentFromStyledForm = styled.form`
 
   display: flex;
   flex-direction: column;
-  margin: 10px auto;
+  padding: 16px 8px;
+  box-sizing: border-box;
   
   .comment-form-container{
     display: flex;
@@ -21,26 +22,18 @@ const CommentFromStyledForm = styled.form`
     align-items: center;
     width: 100%;
     .user-profile-image{
-      margin-right: 20px;
+      margin-right: 5px;
+      align-self: flex-start;
     }
     .comment-form-input-wrapper{
       display: flex;
       position: relative;
       width: 100%;
-      .tail{
-        border-style: solid;
-        border-width: 0 10px 10px 0;
-        border-color: transparent #ccc transparent transparent;
-        width: 0;
-        height: 0;
-        left: -8px;
-        position: absolute;
-        top: 0;
-      }
       .comment-form-input{
         width: 100%;
         min-height: 35px;
         background-color: #ccc;
+        border-radius: 0;
         border: none;
         color: #000;
         outline:none;
@@ -49,7 +42,8 @@ const CommentFromStyledForm = styled.form`
   }
   
   .comment-form-submit-button {
-    margin: 10px 0 5px 0;
+    margin: 10px 0;
+    box-sizing: border-box;
     max-width: 150px;
   }
   @media only screen and (min-width: 768px) {
@@ -100,7 +94,7 @@ const CommentFrom: FC = () => {
             <div className={'comment-form-container'}>
                 <UserProfileImage size={40} profileRedirect={true}/>
                 <div className='comment-form-input-wrapper'>
-                    <div className={'tail'}/>
+                    {/*<div className={'tail'}/>*/}
                     <textarea className={'comment-form-input'}
                               ref={bodyInput}
                               required={true}
@@ -108,7 +102,7 @@ const CommentFrom: FC = () => {
                               name='body'/>
                 </div>
             </div>
-            <button className='comment-form-submit-button btn btn-dark' type='submit'>{t<string>(`Post Comment`)}</button>
+            <button className='comment-form-submit-button btn btn-primary' type='submit'>{t<string>(`Post Comment`)}</button>
         </CommentFromStyledForm>
     );
 };

@@ -2,58 +2,32 @@ import React, {useState, useEffect, FC} from 'react';
 import useTranslation from 'next-translate/useTranslation'
 import {useSelector} from 'react-redux';
 import styled from "styled-components";
-import {loginRegisterForm} from "../../../store_toolkit/clientReducers/globalStateReducer";
+import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 import Draggable from 'react-draggable';
 import _passwordValidator from "@_variables/_clientVariables/clientVariables/_passwordValidator";
 import ValidInput from "./ValidInput";
-import {fetchLogin, fetchUserRegister} from "../../../store_toolkit/clientReducers/userReducer";
-import {setAlert} from "../../../store_toolkit/clientReducers/globalStateReducer";
-import {useAppDispatch} from "../../../store_toolkit/hooks";
-import SvgRenderer from "../../global/commonComponents/SvgRenderer/SvgRenderer";
+import {fetchLogin, fetchUserRegister} from "@store_toolkit/clientReducers/userReducer";
+import {setAlert} from "@store_toolkit/clientReducers/globalStateReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 import {Store} from "typescript-types";
+import FormHeader from "@components/includes/LoginRegisterPopup/FormHeader";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faEye} from "@fortawesome/free-solid-svg-icons/faEye";
 
 const LoginRegisterPopupFormsStyledDiv = styled.div`
   background-color: var(--secondary-background-color, #181818);
   width: 100%;
   max-width: 320px;
-  padding: 0 5px 10px 5px;
+  padding: 5px;
+  box-sizing: border-box;
   color: var(--main-text-color, #fff);
   position: relative;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-
-  .form-header {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-
-    .close-form-button {
-      background-color: transparent;
-      color: var(--main-text-color, #fff);
-      border: none;
-      padding: 10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      svg {
-        margin: 5px 3px 0 3px;
-        width: 20px;
-        height: 20px;
-      }
-    }
-  }
-
-
-  .login-register-title {
-    text-align: center;
-    margin: 10px 0 10px 0;
-  }
-
+  border-radius: 10px;
 
   .login-register-switch-form-button {
-
     border: none;
     color: var(--main-text-color);
     width: 100%;
@@ -66,12 +40,6 @@ const LoginRegisterPopupFormsStyledDiv = styled.div`
     margin: 20px 0;
   }
 
-
-  .server-response {
-
-  }
-
-
   .login-register-form {
     flex-direction: column;
     display: flex;
@@ -79,64 +47,63 @@ const LoginRegisterPopupFormsStyledDiv = styled.div`
     align-items: center;
 
     .login-register-form-fields {
-      width: 95%;
-
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
 
       .login-register-form-field {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-
-
+        align-items: center;
+        
         p {
-          margin: 4px 0;
-          color: var(--main-text-color);
+          margin: 0;
+        }
+
+        .password-info {
+          color: var(--main-active-color);
+          font-size: 10px;
+          padding: 5px 0;
           width: 100%;
         }
 
-        .password {
-          width: 80%;
-        }
-
-        .show-password-wrapper {
-          width: calc(20% - 26px);
-          height: 36px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+        .input-validator{
+          width: 100%;
           position: relative;
-
-          .show-password {
-            position: absolute;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            //width: 14px;
-            //height: 14px;
-            //margin: 0 2px;
-          }
-        }
-
-      }
-
-
-      .password-info {
-        color: var(--main-active-color);
-        text-align: center;
-        font-size: 10px;
-        padding: 5px 0;
-        width: 100%;
-      }
-
-      .gender {
-        .gender-options {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          width: 100%;
-
           input {
             width: 100%;
+            box-sizing: border-box;
+            border: none;
+          }
+
+          .inputs-action {
+            position: absolute;
+            right: 2px;
+            top: 5px;
+           
+            background-color: transparent;
+            color: var(--main-text-color, #fff);
+            border: none;
+          }
+          .show-password-wrapper {
+            cursor: pointer;
+          }
+        }
+      }
+      
+      .gender {
+        display: flex;
+        justify-content: flex-start;
+        gap: 0 10px;
+        .gender-options {
+          display: flex;
+          align-items: center;
+          //width: 100%;
+
+          input {
+            //width: 100%;
           }
 
           .gender-icon {
@@ -194,6 +161,7 @@ const LoginRegisterPopupForms: FC = () => {
     const {t} = useTranslation('common');
     const dispatch = useAppDispatch()
     const globalState = useSelector(({globalState}: Store) => globalState)
+
     const [submitButtonDisable, setSubmitButtonDisable] = useState(true)
     const [state, setState] = useState<StateTypes>({
         username: '',
@@ -274,64 +242,46 @@ const LoginRegisterPopupForms: FC = () => {
     return (
         <Draggable handle='.handle'>
             <LoginRegisterPopupFormsStyledDiv className='login-register-content'
-                                              // response={response}
+                // response={response}
 
             >
-                <div className='form-header handle'>
-                    <button onClick={() => dispatch(loginRegisterForm(false))}
-                            onTouchStart={() => dispatch(loginRegisterForm(false))}
-                            className='close-form-button' title={t(`Close`)}
-                    >
 
-                        <SvgRenderer svgUrl={'/asset/images/icons/xmark-solid.svg'}
-                                     size={25}
-                                     customClassName={'close-form-button-icon'}
-                                     color={'var(--main-text-color, #fff)'}
-                        />
-                    </button>
-                </div>
+                <FormHeader/>
 
-                <h3 className='login-register-title'>
-                    {globalState.loginRegisterFormPopup === 'register' ? t<string>(`Register`) : t<string>(`Member login`)}
-                </h3>
-                {/*{response.message ?*/}
-                {/*    <p className='server-response'>*/}
-                {/*        {t<string>(`${response.message}`)}*/}
-                {/*    </p>*/}
-                {/*    : null*/}
-                {/*}*/}
 
                 {globalState.loginRegisterFormPopup === 'register' ?
                     <form className='login-register-form' onSubmit={e => onRegisterHandler(e)}>
                         <div className="login-register-form-fields">
                             <div className="login-register-form-field">
-                                <p>{t<string>(`Username`)}</p>
-                                <input className={'form-control-input form-control-input-validator'}
-                                       required={true}
-                                       name='username'
-                                       value={state.username}
-                                       onChange={e => onChangeHandler(e)}
-                                />
-                                <ValidInput valid={stateValidator.username}/>
+                                <div className={'input-validator'}>
+                                    <input className={'form-control-input form-control-input-validator'}
+                                           required={true}
+                                           name='username'
+                                           value={state.username}
+                                           placeholder={t<string>(`Username`)}
+                                           onChange={e => onChangeHandler(e)}
+                                    />
+                                    <ValidInput valid={stateValidator.username}/>
+                                </div>
                             </div>
                             <div className="login-register-form-field">
-                                <p>{t<string>(`Email`)}</p>
-                                <input className={'form-control-input form-control-input-validator'}
-                                       autoComplete="off"
-                                       required={true}
-                                       name='email'
-                                       value={state.email}
-                                       type='email'
-                                       onChange={e => onChangeHandler(e)}
-                                />
-
-                                <ValidInput valid={stateValidator.email}/>
+                                <div className={'input-validator'}>
+                                    <input className={'form-control-input form-control-input-validator'}
+                                           autoComplete="off"
+                                           required={true}
+                                           name='email'
+                                           value={state.email}
+                                           type='email'
+                                           placeholder={t<string>(`Email`)}
+                                           onChange={e => onChangeHandler(e)}
+                                    />
+                                    <ValidInput valid={stateValidator.email}/>
+                                </div>
                             </div>
                             <div className="login-register-form-field gender">
-                                <p>{t<string>(`Gender`)}</p>
+                                <p>{t<string>(`Gender`)}:</p>
                                 <div className='gender-options'
-                                     onChange={e => onChangeHandler(e)}
-                                >
+                                     onChange={e => onChangeHandler(e)}>
                                     <input type='radio'
                                            name='gender'
                                            value='male'
@@ -353,7 +303,17 @@ const LoginRegisterPopupForms: FC = () => {
                                 </div>
                             </div>
                             <div className="login-register-form-field">
-                                <p>{t<string>(`Password`)} </p>
+                                <div className={'input-validator'}>
+                                    <input className={'form-control-input form-control-input-validator'}
+                                           type={'password'}
+                                           autoComplete={'off'}
+                                           name={'password'}
+                                           placeholder={t<string>(`Password`)}
+                                           required={true} value={state.password}
+                                           onChange={e => onChangeHandler(e)}
+                                    />
+                                    <ValidInput valid={stateValidator.password}/>
+                                </div>
                                 {
                                     !stateValidator.password ?
                                         <span className='password-info'>
@@ -361,36 +321,30 @@ const LoginRegisterPopupForms: FC = () => {
                                         </span>
                                         : null
                                 }
-                                <input className={'form-control-input form-control-input-validator'}
-                                       type={'password'}
-                                       autoComplete={'off'}
-                                       name={'password'}
-                                       required={true} value={state.password}
-                                       onChange={e => onChangeHandler(e)}
-                                />
-
-
-                                <ValidInput valid={stateValidator.password}/>
                             </div>
                             <div className={'login-register-form-field'}>
-                                <p>{t<string>(`Repeat Password`)}</p>
-                                <input className={'form-control-input form-control-input-validator'}
-                                       type={'password'}
-                                       autoComplete={'off'}
-                                       name={'password2'}
-                                       required={true}
-                                       value={state.password2}
-                                       onChange={e => onChangeHandler(e)}
-                                />
-                                <ValidInput valid={stateValidator.password2}/>
+                                <div className={'input-validator'}>
+                                    <input className={'form-control-input form-control-input-validator'}
+                                           type={'password'}
+                                           autoComplete={'off'}
+                                           name={'password2'}
+                                           required={true}
+                                           placeholder={t<string>(`Repeat Password`)}
+                                           value={state.password2}
+                                           onChange={e => onChangeHandler(e)}
+                                    />
+                                    <ValidInput valid={stateValidator.password2}/>
+                                </div>
+
+
                             </div>
                         </div>
                         <button disabled={!stateValidator.username &&
-                        !stateValidator.username &&
-                        !stateValidator.email &&
-                        !stateValidator.password &&
-                        !stateValidator.password2 &&
-                        !stateValidator.gender
+                            !stateValidator.username &&
+                            !stateValidator.email &&
+                            !stateValidator.password &&
+                            !stateValidator.password2 &&
+                            !stateValidator.gender
                         }
                                 type={'submit'}
                                 className={'login-register-form-button btn btn-primary'}>
@@ -403,31 +357,35 @@ const LoginRegisterPopupForms: FC = () => {
                             <div className="login-register-form-fields">
                                 <div className="login-register-form-field">
                                     <p>{t<string>(`Username`)}</p>
-                                    <input className={'form-control-input form-control-input-validator'}
-                                           name={'username'}
-                                           value={state.username}
-                                           onChange={e => onChangeHandler(e)}
-                                    />
-                                    <ValidInput valid={stateValidator.username}/>
+                                    <div className={'input-validator'}>
+                                        <input className={'form-control-input form-control-input-validator'}
+                                               name={'username'}
+                                               value={state.username}
+                                               onChange={e => onChangeHandler(e)}
+                                        />
+                                        <ValidInput valid={stateValidator.username}/>
+                                    </div>
+
+
+
                                 </div>
                                 <div className="login-register-form-field">
                                     <p>{t<string>(`Password`)}</p>
-                                    <input className={'form-control-input password'}
-                                           // ref={passwordRef}
-                                           name={'password'}
-                                           value={state.password}
-                                           type={showPassword ? 'text' : 'password'}
-                                           onChange={e => onChangeHandler(e)}
-                                    />
-                                    {state.password && <div className={'show-password-wrapper '}
-                                                            onClick={() => setShowPassword(!showPassword)}
-                                                            onTouchStart={() => setShowPassword(!showPassword)}>
-                                        <SvgRenderer svgUrl={'/asset/images/icons/eye-regular.svg'}
-                                                     size={20}
-                                                     customClassName={'show-password'}
-                                                     color={'var(--main-text-color, #fff)'}
+                                    <div className={'input-validator'}>
+                                        <input className={'form-control-input password'}
+                                            // ref={passwordRef}
+                                               name={'password'}
+                                               value={state.password}
+                                               type={showPassword ? 'text' : 'password'}
+                                               onChange={e => onChangeHandler(e)}
                                         />
-                                    </div>}
+                                        <span className={'show-password-wrapper inputs-action'}
+                                              onClick={() => setShowPassword(!showPassword)}
+                                              onTouchStart={() => setShowPassword(!showPassword)}>
+                                        <FontAwesomeIcon icon={faEye} style={{width: 20, height: 20}}/>
+                                    </span>
+                                    </div>
+
                                 </div>
                             </div>
                             <button disabled={!stateValidator.username && !state.password}
