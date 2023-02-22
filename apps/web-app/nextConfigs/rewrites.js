@@ -1,6 +1,6 @@
 const {postTypes} = require("data-structures") ;
 
-const postTypeQueryMatcher = `:postType(${postTypes.join('|')})?`
+const postTypeQueryMatcher = `:postType(${(postTypes|'').join('|')})?`
 
 
 

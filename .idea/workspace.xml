@@ -20,60 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/apps/web-app/components/includes/LoginRegisterPopup/FormHeader.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminMainRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminMainRouter.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminUsersControllers/adminDeleteUser.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/users/adminDeleteUser.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminUsersControllers/adminGetUser.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/users/adminGetUser.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminUsersControllers/adminGetUsersList.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/users/getUsers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminUsersControllers/adminNewApiKey.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/users/adminNewApiKey.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminUsersControllers/adminUpdateUserData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/users/UpdateUser.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminUsersRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/users/usersRouter.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/chatrooms/deleteChatroomMessage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/chatrooms/deleteChatroomMessage.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/AdminDataSetter.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/SiteHeadSetter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/global/SiteHeadSetter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/ClientPopActionRequest/CookiePopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/ClientPopActionRequest/CookiePopup.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/LoginRegisterPopup/LoginRegisterPopupForms.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/LoginRegisterPopup/LoginRegisterPopupForms.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/LoginRegisterPopup/ValidInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/LoginRegisterPopup/ValidInput.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/UserProfileImage/UserProfileImage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/UserProfileImage/UserProfileImage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/CardViews/CardViews.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/CardViews/CardViews.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/PromotionPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/PromotionPostCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/VideoPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/VideoPostCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/MultipleLinkTo/MultipleLinkTo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/MultipleLinkTo/MultipleLinkTo.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/Searchbar/Searchbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/Searchbar/Searchbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/chatroom/ChatRoomMessageArea/ChatRoomMessage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/chatroom/ChatRoomMessageArea/ChatRoomMessage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/CommentFrom.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/CommentFrom.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/widgetsArea/FooterWidgetArea/FooterWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/widgetsArea/FooterWidgetArea/FooterWidgetArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/widgetsArea/HeaderWidgetArea/HeaderWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/widgetsArea/HeaderWidgetArea/HeaderWidgetArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/widgetsArea/NavigationWidgetArea/NavigationWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/widgetsArea/NavigationWidgetArea/NavigationWidgetArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/widgetsArea/TopBarWidgetArea/TopBarWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/widgetsArea/TopBarWidgetArea/TopBarWidgetArea.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/nextConfigs/rewrites.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/nextConfigs/rewrites.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/_app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/chatroom/[Identifier].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/chatroom/[Identifier].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/post/[postType]/[identifier].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/post/[postType]/[identifier].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/posts/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/posts/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Assets/Assets.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Assets/Assets.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/PostInformation/PostInformation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/PostInformation/PostInformation.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/client/posts/getPosts.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/client/posts/getPosts.d.ts.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/client/posts/getPosts.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/client/posts/getPosts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/client/posts/getPosts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/client/posts/getPosts.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/getUsers.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/getUsers.d.ts.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/getUsers.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/getUsers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/getUsers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/getUsers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/updateUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/updateUser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/updateUser.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/updateUser.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/api-requests/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/tsconfig.tsbuildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/index.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/index.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/index.d.ts.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/tsconfig.tsbuildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/ui/src/buttonsStyle.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/src/buttonsStyle.d.ts.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/ui/src/buttonsStyle.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/src/buttonsStyle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/ui/src/buttonsStyle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/src/buttonsStyle.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/ui/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/tsconfig.tsbuildinfo" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1565,7 +1513,7 @@
       <workItem from="1676920296924" duration="2679000" />
       <workItem from="1676932523169" duration="12646000" />
       <workItem from="1676968083151" duration="15830000" />
-      <workItem from="1677004895766" duration="12420000" />
+      <workItem from="1677004895766" duration="13187000" />
     </task>
     <servers />
   </component>
