@@ -84,6 +84,7 @@
   "Mismatch Passwords": "Neujemanje gesel",
   "Wrong Password": "Napačno geslo",
   "Nothing found": "Nič najdenega",
-  "Nothing found Description": "Zdi se, da ne moremo najti, kar iščete. Morda bo iskanje pomagalo"
+  "Nothing found Description": "Zdi se, da ne moremo najti, kar iščete. Morda bo iskanje pomagalo",
+  "This Post is Restricted, Deleted, or is Unpublished": "Ta objava je omejena, izbrisana ali neobjavljena"
 
 }

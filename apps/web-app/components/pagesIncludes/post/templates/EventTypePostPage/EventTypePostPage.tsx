@@ -1,4 +1,4 @@
-import React, {FC, useMemo, useRef} from "react";
+import React, { useMemo, useRef} from "react";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import PostTitle from "../../components/common/PostTitle";
@@ -14,7 +14,6 @@ import {Store} from "typescript-types";
 import StartDate from "@components/pagesIncludes/post/components/common/StartDate";
 import AddToCalendar from "@components/pagesIncludes/post/components/event/AddToCalendar";
 import AttendButtons from "@components/pagesIncludes/post/components/event/AttendButtons";
-
 
 const Style = styled(PostPageStyle)`
   
@@ -53,10 +52,7 @@ const Style = styled(PostPageStyle)`
   ${({postPageStyle}: { postPageStyle: string }) => postPageStyle || ''}
 `
 
-interface EventTypePostPagePropTypes {
-}
-
-const EventTypePostPage: FC<EventTypePostPagePropTypes> = () => {
+const EventTypePostPage = () => {
     const descriptionRef = useRef<HTMLDivElement>(null)
 
     const {postPageStyle, post, userData} = useSelector(({settings, posts, user}: Store) => {
@@ -111,12 +107,14 @@ const EventTypePostPage: FC<EventTypePostPagePropTypes> = () => {
                         <PostMetasRenderer type='categories'/>
                         <PostMetasRenderer type='tags'/>
                     </div>
-                    <CommentFrom/>
-                    {!!post?.comments?.length && <CommentsRenderer showComments={true}/>}
+
                     <div className='under-post-widget-area'>
                         <WidgetsRenderer position='underPost'/>
                     </div>
                     <RelatedPostsRenderer/>
+
+                    <CommentFrom/>
+                    {!!post?.comments?.length && <CommentsRenderer showComments={true}/> }
 
                 </article>
             </main>

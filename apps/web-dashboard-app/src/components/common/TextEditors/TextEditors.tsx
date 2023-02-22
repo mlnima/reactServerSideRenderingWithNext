@@ -9,7 +9,28 @@ const TextEditorsStyledDiv = styled.div`
       width: 200px;
     }
   }
+  
+  .text-editors-content{
+   
+    .sun-editor{
+    
+      .sun-editor-common{
+  
+        background-color: var(--secondary-background-color,#000);
+        .se-btn-tray{
+          *{
+            color: var(--main-text-color,#fff);
+            background-color: var(---main-background-color,#000);
+          }
+        }
+      }
+    }
+  }
 `
+
+
+
+
 
 interface TextEditorsPropTypes {
     name?: string;
@@ -37,7 +58,7 @@ const TextEditors = ({value, onChangeHandler, language, height, width, name, use
 
 
     return (
-        <TextEditorsStyledDiv className={'text-editors'}>
+        <TextEditorsStyledDiv className={'text-editors'} >
             <div className={'text-editors-header'}>
             </div>
             <div className={'text-editors-switcher'}>

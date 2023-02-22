@@ -15,7 +15,6 @@ import VideoTypeFields
 import {editPostField, setEditingPostImagesToUpload} from "@store_toolkit/clientReducers/postsReducer/postsReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
-import DynamicNoSSR from "../../../components/includes/WidgetsRenderer/DynamicNoSSR";
 import postDataCleanerBeforeSave from "@_variables/post-variables/postDataCleanerBeforeSave";
 import {Store} from "typescript-types";
 import EventDates from "@components/pagesIncludes/profile/post/event/EventDates";

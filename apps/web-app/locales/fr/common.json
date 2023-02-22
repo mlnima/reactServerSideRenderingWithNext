@@ -84,6 +84,7 @@
   "Mismatch Passwords": "Mots de passe incompatibles",
   "Wrong Password": "Mauvais mot de passe",
   "Nothing found": "Rien n'a été trouvé",
-  "Nothing found Description": "Il semble que nous ne trouvions pas ce que vous cherchez. Peut-être que la recherche peut aider"
+  "Nothing found Description": "Il semble que nous ne trouvions pas ce que vous cherchez. Peut-être que la recherche peut aider",
+  "This Post is Restricted, Deleted, or is Unpublished": "Ce message est restreint, supprimé ou n'est pas publié"
 
 }

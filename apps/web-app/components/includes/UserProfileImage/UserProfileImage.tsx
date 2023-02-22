@@ -4,7 +4,6 @@ import {useSelector} from "react-redux";
 import {Store} from "typescript-types";
 import Link from "next/link";
 import ImageContent from "@components/includes/UserProfileImage/ImageContent";
-import NoSSR from "next/dist/shared/lib/dynamic-no-ssr";
 
 const Style = styled.div`
   display: flex;

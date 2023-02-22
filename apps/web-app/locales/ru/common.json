@@ -84,7 +84,8 @@
   "Mismatch Passwords": "Несоответствие паролей",
   "Wrong Password": "Неправильный парольd",
   "Nothing found": "Ничего не найдено",
-  "Nothing found Description": "Кажется, мы не можем найти то, что вы ищете. Может поиск поможет"
+  "Nothing found Description": "Кажется, мы не можем найти то, что вы ищете. Может поиск поможет",
+  "This Post is Restricted, Deleted, or is Unpublished": "Это сообщение ограничено, удалено или не опубликовано"
 
 
 }

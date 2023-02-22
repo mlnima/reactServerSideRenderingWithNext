@@ -84,7 +84,8 @@
   "Mismatch Passwords": "Uoverensstemmende adgangskoder",
   "Wrong Password": "Forkert kodeord",
   "Nothing found": "Intet fundet",
-  "Nothing found Description": "Det ser ud til, at vi ikke kan finde det, du leder efter. Måske kan søgning hjælpe"
+  "Nothing found Description": "Det ser ud til, at vi ikke kan finde det, du leder efter. Måske kan søgning hjælpe",
+  "This Post is Restricted, Deleted, or is Unpublished": "Dette indlæg er begrænset, slettet eller er upubliceret"
 
 
 }

@@ -84,6 +84,7 @@
   "Mismatch Passwords": "Nem egyező jelszavak",
   "Wrong Password": "Rossz jelszó",
   "Nothing found": "Nincs találat",
-  "Nothing found Description": "Úgy tűnik, nem találjuk, amit keres. Talán a keresés segíthet"
+  "Nothing found Description": "Úgy tűnik, nem találjuk, amit keres. Talán a keresés segíthet",
+  "This Post is Restricted, Deleted, or is Unpublished": "Ez a bejegyzés korlátozott, törölve vagy még nincs közzétéve"
 
 }

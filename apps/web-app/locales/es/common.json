@@ -84,6 +84,7 @@
   "Mismatch Passwords": "Contraseñas no coincidentes",
   "Wrong Password": "Contraseña incorrecta",
   "Nothing found": "Nada Encontrado",
-  "Nothing found Description": "Parece que no podemos encontrar lo que estás buscando. Tal vez la búsqueda pueda ayudar"
+  "Nothing found Description": "Parece que no podemos encontrar lo que estás buscando. Tal vez la búsqueda pueda ayudar",
+  "This Post is Restricted, Deleted, or is Unpublished": "Esta publicación está restringida, eliminada o no está publicada"
 
 }

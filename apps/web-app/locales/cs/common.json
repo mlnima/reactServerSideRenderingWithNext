@@ -84,6 +84,7 @@
   "Mismatch Passwords": "Neshoda hesel",
   "Wrong Password": "Špatné heslo",
   "Nothing found": "Nic nalezeno",
-  "Nothing found Description": "Zdá se, že nemůžeme najít to, co hledáte. Možná pomůže hledání"
+  "Nothing found Description": "Zdá se, že nemůžeme najít to, co hledáte. Možná pomůže hledání",
+  "This Post is Restricted, Deleted, or is Unpublished": "Tento příspěvek je omezen, smazán nebo není publikován"
 
 }

@@ -84,6 +84,7 @@
   "Mismatch Passwords": "Salasanat eivät täsmää",
   "Wrong Password": "Väärä salasana",
   "Nothing found": "Mitään ei löytynyt",
-  "Nothing found Description": "Näyttää siltä, että emme löydä etsimääsi. Ehkä etsiminen auttaa"
+  "Nothing found Description": "Näyttää siltä, että emme löydä etsimääsi. Ehkä etsiminen auttaa",
+  "This Post is Restricted, Deleted, or is Unpublished": "Tämä viesti on rajoitettu, poistettu tai julkaisematon"
 
 }

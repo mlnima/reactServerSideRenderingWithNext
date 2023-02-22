@@ -84,6 +84,7 @@
   "Mismatch Passwords": "密码不匹配",
   "Wrong Password": "密码错误",
   "Nothing found": "什么都没找到",
-  "Nothing found Description": "我们似乎找不到您要查找的内容。 也许搜索可以帮助"
+  "Nothing found Description": "我们似乎找不到您要查找的内容。 也许搜索可以帮助",
+  "This Post is Restricted, Deleted, or is Unpublished": "此帖子已被限制、删除或未发布"
 
 }

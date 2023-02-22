@@ -84,6 +84,7 @@
   "Mismatch Passwords": "Felaktiga lösenord",
   "Wrong Password": "Fel lösenord",
   "Nothing found": "Inget hittat",
-  "Nothing found Description": "Det verkar som om vi inte kan hitta det du letar efter. Kanske kan sökning hjälpa"
+  "Nothing found Description": "Det verkar som om vi inte kan hitta det du letar efter. Kanske kan sökning hjälpa",
+  "This Post is Restricted, Deleted, or is Unpublished": "Detta inlägg är begränsat, raderat eller är opublicerat"
 
 }

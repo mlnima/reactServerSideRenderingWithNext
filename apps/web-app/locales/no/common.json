@@ -84,6 +84,7 @@
   "Mismatch Passwords": "Passord stemmer ikke overens",
   "Wrong Password": "Feil passord",
   "Nothing found": "Ingenting funnet",
-  "Nothing found Description": "Det ser ut til at vi ikke finner det du leter etter. Kanskje søk kan hjelpe"
+  "Nothing found Description": "Det ser ut til at vi ikke finner det du leter etter. Kanskje søk kan hjelpe",
+  "This Post is Restricted, Deleted, or is Unpublished": "Dette innlegget er begrenset, slettet eller er upublisert"
 
 }

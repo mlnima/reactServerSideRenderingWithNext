@@ -5,7 +5,7 @@ const getUsers = async (req, res) => {
         const limit = (req.query?.size || 20);
         const skip = (limit * (req.query?.page || 1)) - limit
         const totalCount = await userSchema.countDocuments({}).exec()
-        const users = await userSchema.find({}).limit(limit).skip(skip).exec()
+        const users = await userSchema.find({}).sort('-id').limit(limit).skip(skip).exec()
         res.json({users, totalCount})
     } catch (error) {
         console.log(error)

@@ -84,6 +84,7 @@
   "Mismatch Passwords": "비밀번호 불일치",
   "Wrong Password": "잘못된 비밀번호",
   "Nothing found": "아무것도 찾을 수 없음",
-  "Nothing found Description": "당신이 찾고 있는 것을 찾을 수 없는 것 같습니다. 아마도 검색이 도움이 될 것입니다"
+  "Nothing found Description": "당신이 찾고 있는 것을 찾을 수 없는 것 같습니다. 아마도 검색이 도움이 될 것입니다",
+  "This Post is Restricted, Deleted, or is Unpublished": "이 게시물은 제한, 삭제 또는 게시 취소되었습니다."
 
 }

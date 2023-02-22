@@ -72,14 +72,12 @@ const PostInformation: FC<PropTypes> = (props) => {
                 <button className={'btn btn-primary'}
                         onClick={()=>{
                             dispatch(getPostScrapedDataAction({
-                                url:post?.source,fields:['mainThumbnail','videoEmbedCode','quality']
+                                url:post?.source,fields:['mainThumbnail','videoEmbedCode','quality','duration']
                             }))}
                         }>
                     scrap limited
                 </button>
             </div>}
-
-
             <TextInput name='redirectLink' rendering={post?.postType === 'promotion'}
                        onChangeHandler={props.onChangeHandler}/>
             <TextInput name='redirectLink' rendering={!!post?.postType?.match(/^(promotion|out)$/)}

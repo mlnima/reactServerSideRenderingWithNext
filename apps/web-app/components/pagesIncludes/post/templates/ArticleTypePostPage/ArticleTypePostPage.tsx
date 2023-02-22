@@ -1,4 +1,4 @@
-import React, {FC, useMemo, useRef} from "react";
+import React, {useMemo, useRef} from "react";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import PostTitle from "../../components/common/PostTitle";
@@ -12,6 +12,7 @@ import PostPageStyle from "../../components/styles/PostPageStyle";
 import convertDateToIso from "@_variables/_clientVariables/clientVariables/convertDateToIso";
 import RatingButtons from "../../components/common/RatingButtons";
 import {Store} from "typescript-types";
+import Csr from "@components/global/commonComponents/Csr";
 
 const Style = styled(PostPageStyle)`
   margin: auto;
@@ -25,8 +26,9 @@ const Style = styled(PostPageStyle)`
       .entry-header {
         width: 100%;
       }
-      .entry-content{
-        .rating-price-download{
+
+      .entry-content {
+        .rating-price-download {
           display: flex;
           justify-content: flex-start;
         }
@@ -37,10 +39,7 @@ const Style = styled(PostPageStyle)`
   ${({postPageStyle}: { postPageStyle: string }) => postPageStyle || ''}
 `
 
-interface ArticleTypePostPagePropTypes {
-}
-
-const ArticleTypePostPage: FC<ArticleTypePostPagePropTypes> = (props) => {
+const ArticleTypePostPage = () => {
     const descriptionRef = useRef<HTMLDivElement>(null)
 
     const {postPageStyle, post} = useSelector(({settings, posts}: Store) => {
@@ -50,25 +49,26 @@ const ArticleTypePostPage: FC<ArticleTypePostPagePropTypes> = (props) => {
         }
     })
 
-    const datePublished = useMemo(()=>convertDateToIso(post.createdAt),[post.createdAt])
-    const dateModified = useMemo(()=>convertDateToIso(post.updatedAt),[post.updatedAt ])
-
     return (
         <Style id={'primary'} className='post-page' postPageStyle={postPageStyle}>
             <main id={'main'}>
                 <article itemScope itemType={'https://schema.org/BlogPosting'}>
                     <header className={'entry-header'}>
                         <PostTitle/>
-                        {!!post.title &&   <meta itemProp="name" content={post.title}/>}
-                        {!!post.title &&   <meta itemProp="headline" content={post.title}/>}
-                        {/*//@ts-ignore*/}
-                        {(!!descriptionRef?.current && !!descriptionRef?.current?.textContent)&&
-                        <meta itemProp="description" content={descriptionRef?.current?.textContent}/>}
-                        {!!post.mainThumbnail &&    <meta itemProp="thumbnailUrl" content={post.mainThumbnail}/>}
-                        {(!!descriptionRef?.current && !!descriptionRef?.current?.textContent) &&
-                        <meta itemProp="articleBody" content={ descriptionRef?.current?.textContent}/>}
-                        {!!datePublished && <meta itemProp="datePublished" content={datePublished}/>}
-                        {!!dateModified && <meta itemProp="dateModified" content={dateModified}/>}
+                        <Csr>
+                            {!!post.title && <meta itemProp="name" content={post.title}/>}
+                            {!!post.title && <meta itemProp="headline" content={post.title}/>}
+                            {(!!descriptionRef?.current && !!descriptionRef?.current?.textContent) &&
+                                <meta itemProp="description" content={descriptionRef?.current?.textContent}/>}
+                            {!!post.mainThumbnail && <meta itemProp="thumbnailUrl" content={post.mainThumbnail}/>}
+                            {(!!descriptionRef?.current && !!descriptionRef?.current?.textContent) &&
+                                <meta itemProp="articleBody" content={descriptionRef?.current?.textContent}/>}
+
+                            {!!post.createdAt &&
+                                <meta itemProp="datePublished" content={convertDateToIso(post.createdAt)}/>}
+                            {!!post.updatedAt &&
+                                <meta itemProp="dateModified" content={convertDateToIso(post.updatedAt)}/>}
+                        </Csr>
                     </header>
                     <div className="entry-content">
                         <PostDescription descriptionRef={descriptionRef}/>
@@ -78,12 +78,13 @@ const ArticleTypePostPage: FC<ArticleTypePostPagePropTypes> = (props) => {
                         <PostMetasRenderer type='categories'/>
                         <PostMetasRenderer type='tags'/>
                     </div>
-                    <CommentFrom/>
-                    {post?.comments?.length ? <CommentsRenderer showComments={true}/> : null}
+
                     <div className='under-post-widget-area'>
                         <WidgetsRenderer position='underPost'/>
                     </div>
                     <RelatedPostsRenderer/>
+                    <CommentFrom/>
+                    {!!post?.comments?.length && <CommentsRenderer showComments={true}/>}
 
                 </article>
             </main>

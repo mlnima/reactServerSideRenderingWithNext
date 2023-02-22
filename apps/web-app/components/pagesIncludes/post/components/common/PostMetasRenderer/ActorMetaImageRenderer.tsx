@@ -1,5 +1,7 @@
-import React, {FC} from "react";
+import React, {FC, useEffect, useState} from "react";
 import SvgRenderer from "../../../../../global/commonComponents/SvgRenderer/SvgRenderer";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
 
 interface ComponentPropTypes {
     imageUrl: string,
@@ -7,22 +9,32 @@ interface ComponentPropTypes {
 }
 
 const ActorMetaImageRenderer: FC<ComponentPropTypes> = ({imageUrl, name}) => {
+    const [gotError, setGotError] = useState(null)
 
-    if (!!imageUrl) {
+    useEffect(() => {
+        console.log(gotError)
+    }, [gotError]);
+
+
+    if (!!imageUrl && !gotError) {
         return (
             <img src={imageUrl}
                  alt={name}
+                 loading={'lazy'}
+                 onError={()=>setGotError(true)}
                  className={'item-image'}/>
         )
-    } else {
+    } else if (gotError) {
         return (
-            <SvgRenderer svgUrl={'/asset/images/icons/user-solid.svg'}
-                         size={20}
-                         customClassName={'actor-meta-svg'}
-                         color={'var(--secondary-text-color, #ccc)'}
-            />
+
+            <FontAwesomeIcon icon={faUser} style={{width: 20, height: 20}}/>
         )
-    }
+    } else return null
 
 };
 export default ActorMetaImageRenderer
+// <SvgRenderer svgUrl={'/asset/images/icons/user-solid.svg'}
+// size={20}
+// customClassName={'actor-meta-svg'}
+// color={'var(--secondary-text-color, #ccc)'}
+// />

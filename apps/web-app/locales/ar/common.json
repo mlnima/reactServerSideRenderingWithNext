@@ -84,6 +84,7 @@
   "Mismatch Passwords": "كلمات المرور غير متطابقة",
   "Wrong Password": "كلمة مرور خاطئة",
   "Nothing found": "لم يتم العثور على شيء",
-  "Nothing found Description": "يبدو أننا لا نستطيع العثور على ما تبحث عنه. ربما يمكن أن يساعد البحث"
+  "Nothing found Description": "يبدو أننا لا نستطيع العثور على ما تبحث عنه. ربما يمكن أن يساعد البحث",
+  "This Post is Restricted, Deleted, or is Unpublished": "هذا المنشور مقيد أو محذوف أو غير منشور"
 
 }

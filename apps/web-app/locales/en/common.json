@@ -85,6 +85,7 @@
   "Mismatch Passwords": "Mismatch Passwords",
   "Wrong Password": "Wrong Password",
   "Nothing found": "Nothing found",
-  "Nothing found Description": "It seems we can’t find what you’re looking for. Perhaps searching can help"
+  "Nothing found Description": "It seems we can’t find what you’re looking for. Perhaps searching can help",
+  "This Post is Restricted, Deleted, or is Unpublished": "This Post is Restricted, Deleted, or is Unpublished"
 
 }

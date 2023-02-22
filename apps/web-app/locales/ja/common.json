@@ -84,6 +84,7 @@
   "Mismatch Passwords": "パスワードの不一致",
   "Wrong Password": "間違ったパスワード",
   "Nothing found": "何も見つかりません",
-  "Nothing found Description": "お探しのものが見つからないようです。 おそらく検索が役立つかもしれません"
+  "Nothing found Description": "お探しのものが見つからないようです。 おそらく検索が役立つかもしれません",
+  "This Post is Restricted, Deleted, or is Unpublished": "この投稿は制限されているか、削除されているか、非公開です"
 
 }

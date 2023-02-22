@@ -1,4 +1,4 @@
-import React, {FC, useMemo, useRef} from "react";
+import React, { useMemo, useRef} from "react";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import PostTitle from "../../components/common/PostTitle";
@@ -12,6 +12,7 @@ import PostPageStyle from "../../components/styles/PostPageStyle";
 import convertDateToIso from "@_variables/_clientVariables/clientVariables/convertDateToIso";
 import RatingButtons from "../../components/common/RatingButtons";
 import {Store} from "typescript-types";
+import Csr from "@components/global/commonComponents/Csr";
 
 const Style = styled(PostPageStyle)`
   margin: auto;
@@ -47,12 +48,7 @@ const Style = styled(PostPageStyle)`
 
   ${({postPageStyle}: { postPageStyle: string }) => postPageStyle || ''}
 `
-
-interface PromotionTypePostPagePropTypes {
-
-}
-
-const PromotionTypePostPage: FC<PromotionTypePostPagePropTypes> = ({}) => {
+const PromotionTypePostPage = () => {
     const descriptionRef = useRef<HTMLDivElement>(null)
 
     const {postPageStyle, post} = useSelector(({settings, posts}: Store) => {
@@ -71,6 +67,7 @@ const PromotionTypePostPage: FC<PromotionTypePostPagePropTypes> = ({}) => {
                 <article itemProp={'BlogPosting'} itemScope itemType={'https://schema.org/BlogPosting'}>
                     <header className={'entry-header'}>
                         <PostTitle/>
+                        <Csr>
                         {!!post.title && <meta itemProp="name" content={post.title}/>}
                         {!!post.title && <meta itemProp="headline" content={post.title}/>}
                         {(!!descriptionRef?.current && !!descriptionRef?.current?.textContent) &&
@@ -86,6 +83,7 @@ const PromotionTypePostPage: FC<PromotionTypePostPagePropTypes> = ({}) => {
                             <a href={post?.redirectLink} className='redirect-link' target='_blank'>go
                                 to {post?.title}</a>
                         </div>
+                        </Csr>
                     </header>
 
                     <div className="entry-content">
@@ -101,7 +99,7 @@ const PromotionTypePostPage: FC<PromotionTypePostPagePropTypes> = ({}) => {
                     </div>
                     <RelatedPostsRenderer/>
                     <CommentFrom/>
-                    {post?.comments?.length ? <CommentsRenderer  showComments={true}/> : null}
+                    {!!post?.comments?.length && <CommentsRenderer showComments={true}/> }
                 </article>
             </main>
         </Style>

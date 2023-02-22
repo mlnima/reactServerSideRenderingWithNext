@@ -3,10 +3,10 @@ import {useSelector} from 'react-redux';
 import styled from "styled-components";
 import dynamic from "next/dynamic";
 import AuthenticationNotLoggedInItems from "./AuthenticationNotLoggedInItems";
-import SvgRenderer from "../../../global/commonComponents/SvgRenderer/SvgRenderer";
 import {Store} from "typescript-types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
+import {faXmark} from "@fortawesome/free-solid-svg-icons/faXmark";
 
 const AuthenticationLoggedInItems = dynamic(() => import('./AuthenticationLoggedInItems'))
 
@@ -153,20 +153,11 @@ const Authentication: FC = () => {
     return (
         <AuthenticationStyledDiv open={open}>
             <button className={'profile-icon'} onClick={onOpenCloseHandler} aria-label={'authentication panel'}>
-                {/*<SvgRenderer svgUrl={'/asset/images/icons/user-solid.svg'}*/}
-                {/*             size={24}*/}
-                {/*             customClassName={'user-info-profile-button-icon'}*/}
-                {/*             color={' var(--main-text-color, #fff)'}*/}
-                {/*/>*/}
                 <FontAwesomeIcon icon={faUser} style={{width:24,height:24, color:' var(--main-text-color, #fff)'}}/>
             </button>
             <div className={'authentication-widget-wrapper'}>
                 <button className={'logged-item btn btn-transparent-light close-btn'} onClick={onOpenCloseHandler}>
-                    <SvgRenderer svgUrl={'/asset/images/icons/times-solid.svg'}
-                                 size={24}
-                                 customClassName={'close icon'}
-                                 color={' var(--main-text-color, #fff)'}
-                    />
+                    <FontAwesomeIcon className={'close icon'} icon={faXmark} style={{width:25,height:25}}/>
                 </button>
                 {!loggedIn && <AuthenticationNotLoggedInItems onOpenCloseHandler={onOpenCloseHandler}/>}
                 {loggedIn && <AuthenticationLoggedInItems onOpenCloseHandler={onOpenCloseHandler}

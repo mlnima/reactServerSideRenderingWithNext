@@ -41,9 +41,8 @@ const VideoTypePostPageStyle = styled(PostPageStyle)`
 `
 
 const VideoTypePostPage = () => {
-    const pageContentRef = useRef()
     const descriptionRef = useRef<HTMLDivElement>(null)
-    const pageData = useSelector(({settings, posts}: Store) => {
+    const {postPageStyle,post} = useSelector(({settings, posts}: Store) => {
         return {
             postPageStyle: settings?.design.postPageStyle,
             post: posts.post
@@ -51,8 +50,7 @@ const VideoTypePostPage = () => {
     })
 
     return (
-        <VideoTypePostPageStyle id={'primary'} className='post-page' postPageStyle={pageData?.postPageStyle}
-                                ref={pageContentRef}>
+        <VideoTypePostPageStyle id={'primary'} className='post-page' postPageStyle={postPageStyle}>
             <main id={'main'}>
                 <article itemProp={'video'}
                          itemScope
@@ -64,9 +62,9 @@ const VideoTypePostPage = () => {
                             <PostTitle/>
                             <div className='entry-header-actions'>
                                 <RatingButtons rating={true}/>
-                                {(pageData?.post?.downloadLink || pageData?.post.source)&&
-                                    <DownloadLink downloadLink={pageData?.post.downloadLink || pageData?.post.source}
-                                        downloadLinks={pageData?.post?.downloadLinks || []}
+                                {(post?.downloadLink || post.source)&&
+                                    <DownloadLink downloadLink={post.downloadLink || post.source}
+                                        downloadLinks={post?.downloadLinks || []}
                                     />
                                 }
                             </div>
@@ -79,13 +77,13 @@ const VideoTypePostPage = () => {
                         <PostMetasRenderer type='categories'/>
                         <PostMetasRenderer type='tags'/>
                     </div>
-                    <CommentFrom/>
-                    {pageData?.post?.comments?.length ? <CommentsRenderer showComments={true}/> : null}
+
                     <div className='under-post-widget-area'>
                         <WidgetsRenderer position='underPost'/>
                     </div>
                     <RelatedPostsRenderer/>
-
+                    <CommentFrom/>
+                    {!!post?.comments?.length && <CommentsRenderer showComments={true}/> }
                 </article>
             </main>
 

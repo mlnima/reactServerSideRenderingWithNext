@@ -71,7 +71,6 @@ const PostMetaStyledDiv = styled.div`
 
 interface PostMetaPropType {
     type: string,
-    pageContentRef?: any
 }
 
 const PostMetasRenderer: FC<PostMetaPropType> = ({type}) => {

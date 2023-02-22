@@ -84,7 +84,8 @@
   "Mismatch Passwords": "Eşleşmeyen Şifreler",
   "Wrong Password": "Yanlış şifre",
   "Nothing found": "Hiçbirşey Bulunamadı",
-  "Nothing found Description": "Aradığınızı bulamayacağız gibi görünüyor. Belki arama yardımcı olabilir"
+  "Nothing found Description": "Aradığınızı bulamayacağız gibi görünüyor. Belki arama yardımcı olabilir",
+  "This Post is Restricted, Deleted, or is Unpublished": "Bu Gönderi Kısıtlanmış, Silinmiş veya Yayınlanmamış"
 
 
 }

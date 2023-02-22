@@ -87,5 +87,6 @@
   "Mismatch Passwords": "رمزهای عبور هماهنگی ندارند",
   "Wrong Password": "رمز عبور اشتباه است",
   "Nothing found": "مطلب مورد نظر پیدا نشد",
-  "Nothing found Description": "به نظر میرسد نمیتوانیم اطلاعات مورد نظر شما را پیدا کنیم, ممکن است جستجو کمک کند"
+  "Nothing found Description": "به نظر میرسد نمیتوانیم اطلاعات مورد نظر شما را پیدا کنیم, ممکن است جستجو کمک کند",
+  "This Post is Restricted, Deleted, or is Unpublished": "این پست محدود، حذف شده یا منتشر نشده است"
 }

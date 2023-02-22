@@ -26,20 +26,6 @@ const LearnTypePostPageStyledMain = styled(PostPageStyle)`
     }
   }
   
-  //.rating-price-download {
-  //  display: flex;
-  //  flex-wrap: wrap;
-  //  justify-content: space-between;
-  //  width: 98%;
-  //
-  //  .link-to-source {
-  //    display: flex;
-  //    justify-content: center;
-  //    align-items: center;
-  //    margin: 5px 0;
-  //  }
-  //}
-
   h1 {
     font-size: 4vw;
     width: 90%;

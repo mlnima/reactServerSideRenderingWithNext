@@ -1,8 +1,5 @@
 const {postTypes} = require("data-structures") ;
-
 const postTypeQueryMatcher = `:postType(${postTypes.join('|')})?`
-
-
 
 const apiServerProxy = process.env.NEXT_PUBLIC_API_SERVER_URL === process.env.NEXT_PUBLIC_PRODUCTION_URL ?
     [

@@ -1,10 +1,13 @@
 import {metaSchema} from "models";
 import fs from "fs";
+import fsExtra from "fs-extra";
 import path from "path";
 
 //, {imageUrl: {$ne: null}}
 export const findMetasAndCreateFile = async (metaType: string, fields: string,limit:number) => {
     try {
+
+        fsExtra.ensureDirSync(path.join(__dirname + `../../../../public/backups/`))
         //@ts-ignore
         const fieldsQuery = fields.map(field => `-${field}`).join(' ')
         //@ts-ignore

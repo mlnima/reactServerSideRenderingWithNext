@@ -32,7 +32,7 @@ const Assets: FC<PropTypes> = ({}) => {
 
     const assetPageData = useSelector(({posts, users, comments, forms, pages,chatrooms}: DashboardStore) => {
         return {
-            totalCount:posts.totalCount || comments.totalCount,
+            totalCount:posts.totalCount || comments.totalCount|| users.totalCount,
             posts: posts.posts,
             chatrooms: chatrooms.chatrooms,
             metas: posts.metas,

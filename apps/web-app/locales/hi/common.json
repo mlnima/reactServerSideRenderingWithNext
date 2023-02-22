@@ -84,6 +84,7 @@
   "Mismatch Passwords": "बेमेल पासवर्ड",
   "Wrong Password": "गलत पासवर्ड",
   "Nothing found": "कुछ नहीं मिला",
-  "Nothing found Description": "ऐसा लगता है कि आप जो खोज रहे हैं वह हमें नहीं मिल रहा है। शायद खोज मदद कर सकती है"
+  "Nothing found Description": "ऐसा लगता है कि आप जो खोज रहे हैं वह हमें नहीं मिल रहा है। शायद खोज मदद कर सकती है",
+  "This Post is Restricted, Deleted, or is Unpublished": "यह पोस्ट प्रतिबंधित, हटाई गई या अप्रकाशित है"
 
 }
