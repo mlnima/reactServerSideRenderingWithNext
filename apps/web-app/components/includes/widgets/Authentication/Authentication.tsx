@@ -38,6 +38,7 @@ const AuthenticationStyledDiv = styled.div`
     animation: ${({open}: { open: boolean }) => open ? 'userMenuSlide .3s linear alternate' : 'none'};
 
     .close-btn {
+      color: var(--main-text-color, #000);
       padding: 6px 0;
       margin-bottom: 20px;
       width: 100%;
