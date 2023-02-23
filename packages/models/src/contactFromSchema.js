@@ -11,5 +11,5 @@ var contactFormSchema = mongoose.Schema({
         type: Date,
         "default": Date.now()
     }
-});
+}, { timestamps: true });
 exports["default"] = mongoose.model("contact", contactFormSchema);

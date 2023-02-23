@@ -6,10 +6,10 @@ import {WidgetModelStyledDiv} from './WidgetModelStyle'
 import ActionButtons from "./ActionButtons";
 import UniqueFields from "./UniqueFields";
 import WidgetHeaderControl from "./WidgetHeaderControl/WidgetHeaderControl";
-import onChangeInputValueCorrector from "@variables/onChangeInputValueCorrector";
 import {Widget} from "typescript-types";
 import {useAppDispatch} from "@store/hooks";
 import {updateWidgetAction} from "@store/reducers/widgetsReducer";
+import inputValueSimplifier from "custom-util/src/inputsUtils/inputValueSimplifier";
 
 interface WidgetModelPropTypes {
     widget: Widget
@@ -58,7 +58,7 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({widget}) => {
     }
 
     const onChangeHandler = e => {
-        const value = onChangeInputValueCorrector(e)
+        const value = inputValueSimplifier(e)
         setWidgetData(prevState => ({
             ...prevState,
             [e.target.name]: value
@@ -69,7 +69,7 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({widget}) => {
     //     if (widgetSettings.activeEditingLanguage === 'default') {
     //         onChangeHandler(e)
     //     } else {
-    //         const value =   onChangeInputValueCorrector(e)
+    //         const value =   inputValueSimplifier(e)
     //         setWidgetData({
     //             ...widgetData,
     //             translations:{
@@ -89,7 +89,6 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({widget}) => {
             if (widgetSettings.activeEditingLanguage === 'default') {
                 onChangeHandler(e)
             } else {
-                // const value =   onChangeInputValueCorrector(e)
                 setWidgetData(prevState => (
                     {
                         ...prevState,
@@ -121,7 +120,7 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({widget}) => {
     }
 
     const onUniqueDataChangeHandler = (e) => {
-        const value = onChangeInputValueCorrector(e)
+        const value = inputValueSimplifier(e)
 
         setWidgetData(prevState => ({
             ...prevState,
@@ -133,7 +132,7 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({widget}) => {
     }
 
     const onUniqueDataChangeHandlerWithTranslate = (e) => {
-        const value = onChangeInputValueCorrector(e)
+        const value = inputValueSimplifier(e)
         if (widgetSettings.activeEditingLanguage === 'default') {
             onUniqueDataChangeHandler(e)
         } else {

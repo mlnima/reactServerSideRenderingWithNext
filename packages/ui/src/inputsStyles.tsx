@@ -11,6 +11,7 @@ const inputs = css`
     border: 1px solid #ced4da;
     border-radius: .25rem;
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    box-sizing: border-box;
   }
 `
 //"axios"

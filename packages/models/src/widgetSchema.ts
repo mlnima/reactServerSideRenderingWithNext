@@ -49,7 +49,7 @@ const widgetDataSchema = new Schema({
             ref: 'comment'
         }
     ]
-});
+}, {timestamps: true});
 
 const widgetSchema = new Schema({
     data: widgetDataSchema,

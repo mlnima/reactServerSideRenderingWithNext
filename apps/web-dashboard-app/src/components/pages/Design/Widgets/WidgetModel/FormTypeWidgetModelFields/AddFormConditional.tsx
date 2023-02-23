@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, {FC, useState} from 'react';
-import onChangeInputValueCorrector from "@variables/onChangeInputValueCorrector";
+import inputValueSimplifier from "custom-util/src/inputsUtils/inputValueSimplifier";
 
 interface AddFormConditionalPropTypes{
     setWidgetData:React.SetStateAction<any>
@@ -25,7 +25,7 @@ const AddFormConditional:FC<AddFormConditionalPropTypes> = ({setWidgetData}) => 
     });
 
     const onChangeHandler = (e) => {
-        const value =  onChangeInputValueCorrector(e)
+        const value =  inputValueSimplifier(e)
         setFieldData({
             ...fieldData,
             [e.target.name]: value

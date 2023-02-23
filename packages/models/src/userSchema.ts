@@ -34,8 +34,6 @@ const userSchema = new Schema({
         country: String,
         status: String,
         keyMaster: Boolean,
-    }
-    , {timestamps: true}
-);
+    }, {timestamps: true});
 
 export default model<User & Document>("user", userSchema)

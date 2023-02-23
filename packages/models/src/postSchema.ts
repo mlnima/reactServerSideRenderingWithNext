@@ -74,8 +74,7 @@ const postSchema = new Schema({
     premium: Boolean,
     rating: Boolean,
     uniqueData: Schema.Types.Mixed,
-    createdAt: Date,
-    updatedAt: Date
+
 
 }, {timestamps: true});
 

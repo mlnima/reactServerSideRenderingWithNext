@@ -10,6 +10,6 @@ const contactFormSchema = mongoose.Schema({
       type:Date,
       default:Date.now()
     }
-});
+}, {timestamps: true});
 
 export default mongoose.model("contact",contactFormSchema);

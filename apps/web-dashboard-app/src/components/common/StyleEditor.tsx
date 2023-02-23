@@ -69,7 +69,9 @@ const StyleEditor:FC<PropTypes> = props => {
             }
 
             <h1>{props.title}</h1>
+
             <div className='style-section-editor'>
+
                 <MonacoEditor
                     language={'scss'}
                     name={props.name}

@@ -73,8 +73,6 @@ var postSchema = new Schema({
     availableCount: Number,
     premium: Boolean,
     rating: Boolean,
-    uniqueData: Schema.Types.Mixed,
-    createdAt: Date,
-    updatedAt: Date
+    uniqueData: Schema.Types.Mixed
 }, { timestamps: true });
 exports["default"] = mongoose.model("post", postSchema);

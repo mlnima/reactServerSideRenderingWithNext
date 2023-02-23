@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect, useMemo} from 'react';
+import React, {ChangeEvent, useEffect, useMemo, useState} from 'react';
 import Editor from "@monaco-editor/react";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
@@ -16,6 +16,7 @@ import {useSearchParams} from "react-router-dom";
 let AdminEditCustomPageStyledDiv = styled.div`
   padding: 10px 1rem;
   .form-group {
+    margin: 5px 0;
     .form-control-input, .custom-select {
       max-width: 300px;
     }
@@ -36,6 +37,7 @@ const Page = (props: any) => {
 
     const dispatch = useAppDispatch()
     const [search, setSearch] = useSearchParams();
+    const [openStyleEditor, setOpenStyleEditor] = useState(false);
     const pageId = useMemo(()=>search.get('id'),[search])
 
     const pageData = useSelector(({pages}: DashboardStore) => pages.page)
@@ -125,7 +127,8 @@ const Page = (props: any) => {
                         <option value={'trash'}>Trash</option>
                     </select>
                 </div>
-                <Editor
+                <button className={'btn btn-primary'} onClick={()=>setOpenStyleEditor(!openStyleEditor)}>Custom Styles:</button>
+                {openStyleEditor &&                <Editor
                     language={'scss'}
                     width={props.width || '100%'}
                     height={props.height || '80vh'}
@@ -134,7 +137,8 @@ const Page = (props: any) => {
                     value={pageData?.pageStyle || ''}
                     //@ts-ignore
                     onChange={onStyleChangeHandler}
-                />
+                />}
+
                 <div className={'actions-btns'}>
                     <button onClick={onSaveHandler} className={'btn btn-primary'}>Save</button>
                     <button onClick={onDeleteHandler} className={'btn btn-danger'}>Delete</button>

@@ -94,8 +94,7 @@ const postPage = () => {
     if (status === 'published' || adminMode || author?._id === userId) {
         return (
             <>
-                {(status === 'published' || adminMode || author?._id === userId) &&
-                    <PostAdminQuickAccessBar role={role}/>}
+                {( adminMode || author?._id === userId) && <PostAdminQuickAccessBar role={role}/>}
                 <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
 
                     {
@@ -117,8 +116,7 @@ const postPage = () => {
         return <Soft404/>
     } else {
         return <>
-            {(!!adminMode && userId && author?._id === userId) &&
-                <PostAdminQuickAccessBar role={role}/>}
+            {( adminMode || author?._id === userId) && <PostAdminQuickAccessBar role={role}/>}
             <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
                 <NotFoundOrRestricted/>
                 <SidebarWidgetAreaRenderer sidebar={sidebar} position={'postPage'}/>

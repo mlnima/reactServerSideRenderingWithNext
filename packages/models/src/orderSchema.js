@@ -21,6 +21,6 @@ var orderSchema = new Schema({
         type: Schema.Types.Mixed,
         required: true
     }
-});
+}, { timestamps: true });
 exports["default"] = mongoose_1["default"].model("order", orderSchema);
 //plan

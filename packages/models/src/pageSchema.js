@@ -16,5 +16,5 @@ var pageSchema = new Schema({
     imageUrl: String,
     translation: Schema.Types.Mixed,
     pageStyle: String
-});
+}, { timestamps: true });
 exports["default"] = mongoose_1["default"].model("page", pageSchema);

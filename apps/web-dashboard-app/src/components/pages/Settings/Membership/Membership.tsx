@@ -5,8 +5,8 @@ import {postTypes} from "data-structures";
 import {convertVariableNameToName} from "custom-util";
 import {useAppDispatch} from "@store/hooks";
 import {useSelector} from "react-redux";
-import onChangeInputValueCorrector from "@variables/onChangeInputValueCorrector";
 import {editMembershipSettingsAction, updateSettingAction} from "@store/reducers/settingsReducer";
+import inputValueSimplifier from "custom-util/src/inputsUtils/inputValueSimplifier";
 
 const Style = styled.div`
 
@@ -42,7 +42,7 @@ const Membership = () => {
     })
 
     const onChangeHandler = (e:React.ChangeEvent<HTMLInputElement>) => {
-        const value = onChangeInputValueCorrector(e)
+        const value = inputValueSimplifier(e)
         dispatch(editMembershipSettingsAction({[e.target.name]: value}))
     }
 
@@ -51,7 +51,7 @@ const Membership = () => {
     }
 
     const onAllowedPostTypeUserCanCreateChangeHandler = (e:React.ChangeEvent<HTMLInputElement>) => {
-        const isChecked = onChangeInputValueCorrector(e)
+        const isChecked = inputValueSimplifier(e)
         if (isChecked) {
             dispatch(editMembershipSettingsAction({
                 allowedPostTypeUserCanCreate: [...(membershipSettings?.allowedPostTypeUserCanCreate || []), e.target.name]

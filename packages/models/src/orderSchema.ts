@@ -20,7 +20,7 @@ const orderSchema =  new Schema({
         type:Schema.Types.Mixed,
         required:true
     }
-})
+}, {timestamps: true})
 
 
 

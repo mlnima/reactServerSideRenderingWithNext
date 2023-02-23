@@ -23,23 +23,23 @@
       {"name": "categories", "url": "/dashboard/assets?assetsType=metas&metaType=categories&size=20"},
       {"name": "actors", "url": "/dashboard/assets?assetsType=metas&metaType=actors&size=20"}]
   },
-  "Pages": {
+  "PagesSettings": {
     "pathURL": "/dashboard/assets?assetsType=pages&size=20",
     "subItems": [
       {"name": "newPage", "url": "/dashboard/page?new=1"},
-      {"name": "home", "url": "/dashboard/page/home"},
-      {"name": "categories", "url": "/dashboard/page/categories"},
-      {"name": "tags", "url": "/dashboard/page/tags"},
-      {"name": "actors", "url": "/dashboard/page/actors"},
-      {"name": "category", "url": "/dashboard/page/category"},
-      {"name": "tag", "url": "/dashboard/page/tag"},
-      {"name": "actor", "url": "/dashboard/page/actor"},
-      {"name": "posts", "url": "/dashboard/page/posts"},
-      {"name": "post", "url": "/dashboard/page/post"},
-      {"name": "chatroom", "url": "/dashboard/page/chatroom"},
-      {"name": "messenger", "url": "/dashboard/page/messenger"},
-      {"name": "profile", "url": "/dashboard/page/profile"},
-      {"name": "user", "url": "/dashboard/page/user"}
+      {"name": "home", "url": "/dashboard/settings/pages/home"},
+      {"name": "categories", "url": "/dashboard/settings/pages/categories"},
+      {"name": "tags", "url": "/dashboard/settings/pages/tags"},
+      {"name": "actors", "url": "/dashboard/settings/pages/actors"},
+      {"name": "category", "url": "/dashboard/settings/pages/category"},
+      {"name": "tag", "url": "/dashboard/settings/pages/tag"},
+      {"name": "actor", "url": "/dashboard/settings/pages/actor"},
+      {"name": "posts", "url": "/dashboard/settings/pages/posts"},
+      {"name": "post", "url": "/dashboard/settings/pages/post"},
+      {"name": "chatroom", "url": "/dashboard/settings/pages/chatroom"},
+      {"name": "messenger", "url": "/dashboard/settings/pages/messenger"},
+      {"name": "profile", "url": "/dashboard/settings/pages/profile"},
+      {"name": "user", "url": "/dashboard/settings/pages/user"}
     ]
   },
   "Orders": {

@@ -49,7 +49,7 @@ var widgetDataSchema = new mongoose_1.Schema({
             ref: 'comment'
         }
     ]
-});
+}, { timestamps: true });
 var widgetSchema = new mongoose_1.Schema({
     data: widgetDataSchema
 });

@@ -77,8 +77,8 @@ const PostsCardsRenderer: FC<CardsRendererPropTypes> =
                         postsPerRawForMobile,
                         rating: post.likes || post.disLikes ? ratingCalculator(post.likes, post.disLikes) : null,
                         post,
-                        targetLink: post?.postType.includes('external') || post?.outPostType === 'promotion' ? '_blank' : '_self',
-                        postUrl: post?.postType.includes('external') ? post?.redirectLink || '#' :
+                        targetLink: post?.postType?.includes('external') || post?.outPostType === 'promotion' ? '_blank' : '_self',
+                        postUrl: post?.postType?.includes('external') ? post?.redirectLink || '#' :
                             `/post/${post?.postType}/${post._id}`,
                         title: process.env.NEXT_PUBLIC_DEFAULT_LOCAL === locale ?
                             post?.title :
