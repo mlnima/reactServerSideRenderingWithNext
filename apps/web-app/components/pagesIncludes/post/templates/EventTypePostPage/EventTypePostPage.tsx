@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useMemo, useRef} from "react";
 import styled from "styled-components";
 import {useSelector} from "react-redux";

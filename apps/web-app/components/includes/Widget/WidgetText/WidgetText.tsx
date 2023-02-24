@@ -18,6 +18,7 @@ const WidgetText:FC<PropTypes> = ({translations, text}) => {
     const {locale} = useRouter();
 
     const stringToRender = useMemo(() => {
+        //@ts-ignore
         return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? text : translations?.[locale]?.text || text || '';
     }, [text,translations,locale])
 

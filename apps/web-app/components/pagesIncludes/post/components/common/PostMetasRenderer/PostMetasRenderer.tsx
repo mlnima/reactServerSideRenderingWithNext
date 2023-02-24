@@ -75,8 +75,9 @@ interface PostMetaPropType {
 
 const PostMetasRenderer: FC<PostMetaPropType> = ({type}) => {
 
-    const containerRef = useRef<HTMLInputElement>()
+    const containerRef = useRef<HTMLDivElement>()
     const post = useSelector(({posts}: Store) => posts.post)
+    //@ts-ignore
     const metas = type == 'all' ? [...post?.actors, ...post?.categories, ...post?.tags] : post?.[type]
     const filterMeta = metas?.length ? metas.filter(m => m.name?.length > 1) : []
 
@@ -87,7 +88,10 @@ const PostMetasRenderer: FC<PostMetaPropType> = ({type}) => {
 
     if (filterMeta?.length) {
         return (
-            <PostMetaStyledDiv className={`${type}-container post-meta sub-content`} ref={containerRef} >
+
+            <PostMetaStyledDiv className={`${type}-container post-meta sub-content`}
+                               //@ts-ignore
+                               ref={containerRef} >
                 {(type !== 'all' && !!type) && <h2 className={'title'}>{capitalizeFirstLetters(type)}</h2>}
                 <div className="content">
                     {renderData}

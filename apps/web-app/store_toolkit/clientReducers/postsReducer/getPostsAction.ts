@@ -6,7 +6,7 @@ import getPosts from "api-requests/src/client/posts/getPosts";
 
 interface FetchPosts {
     context: any,
-    metaId: string,
+    metaId: string| null,
     options: {
         page: string,
         setHeadData?: boolean

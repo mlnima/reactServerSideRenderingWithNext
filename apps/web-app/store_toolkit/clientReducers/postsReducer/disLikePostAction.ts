@@ -4,7 +4,7 @@ import disLikePost from "api-requests/src/client/posts/disLikePost";
 
 export const disLikePostAction = createAsyncThunk(
     'posts/disLikePostAction',
-    async (id: string, thunkAPI) => {
+    async (id: string| undefined, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         return await disLikePost(id)
             .then(res => {

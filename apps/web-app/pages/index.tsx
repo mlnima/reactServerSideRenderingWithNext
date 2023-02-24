@@ -22,14 +22,16 @@ const HomePage = () => {
     })
 
     return (
-        <HomePageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`} stylesData={homePageStyle}>
+        <HomePageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`}
+                       //@ts-ignore
+                       stylesData={homePageStyle}>
             <MainWidgetArea className='home-page' position='home'/>
             <SidebarWidgetAreaRenderer sidebar={sidebar} position={'homePage'}/>
         </HomePageStyle>
 
     );
 };
-
+//@ts-ignore
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
 

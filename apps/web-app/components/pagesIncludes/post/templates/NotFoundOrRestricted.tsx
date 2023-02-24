@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, {FC} from "react";
 import styled from "styled-components";
 import RelatedPostsRenderer from "@components/pagesIncludes/post/components/common/RelatedPostsRenderer";

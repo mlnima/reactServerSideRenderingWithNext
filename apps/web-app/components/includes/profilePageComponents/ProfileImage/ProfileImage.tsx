@@ -62,10 +62,15 @@ const ProfileImage = () => {
     }
 
     const reSetProfileImage = ()=>{
-        imageElement.current.src = userData?.profileImage ? userData?.profileImage + '?date=' + Date.now() : '/asset/images/user/noGenderAvatar150.jpg'
+        if (imageElement.current){
+            //@ts-ignore
+            imageElement.current.src = userData?.profileImage ? userData?.profileImage + '?date=' + Date.now() : '/asset/images/user/noGenderAvatar150.jpg'
+        }
+
     }
     return (
         <ProfileImageStyledDiv className='profile-image'>
+            {/*//@ts-ignore*/}
             <img ref={imageElement} onClick={() => uploadInputElement.current.click()}
                  className='profile-image-img'
                  src={userData?.profileImage ? userData?.profileImage + '?date=' + Date.now() : '/asset/images/user/noGenderAvatar150.jpg'}/>

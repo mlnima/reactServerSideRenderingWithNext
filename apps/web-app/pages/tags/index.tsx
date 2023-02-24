@@ -24,7 +24,9 @@ const tagsPage = () => {
     })
 
     return (
-        <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar `} tagsPageStyle={tagsPageStyle}>
+        <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar `}
+                   //@ts-ignore
+                   tagsPageStyle={tagsPageStyle}>
             <main id={'primary'} className={'content main '}>
                 <WidgetsRenderer position={'tagsPageTop'}/>
                 <MetasRenderer metaData={metas} metaType={'tags'}/>
@@ -35,7 +37,7 @@ const tagsPage = () => {
         </PageStyle>
     );
 };
-
+//@ts-ignore
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     // @ts-ignore

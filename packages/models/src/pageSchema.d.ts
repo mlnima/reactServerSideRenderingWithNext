@@ -3,12 +3,12 @@ declare const _default: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    title?: string;
     description?: string;
-    keywords?: string;
-    sidebar?: string;
+    title?: string;
     status?: string;
     imageUrl?: string;
+    keywords?: string;
+    sidebar?: string;
     translation?: any;
     pageStyle?: string;
     pageName?: string;
@@ -18,12 +18,12 @@ declare const _default: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    title?: string;
     description?: string;
-    keywords?: string;
-    sidebar?: string;
+    title?: string;
     status?: string;
     imageUrl?: string;
+    keywords?: string;
+    sidebar?: string;
     translation?: any;
     pageStyle?: string;
     pageName?: string;

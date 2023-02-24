@@ -28,8 +28,8 @@ const PostTitle = () => {
     return (
         <PostTitleStyledH1 className='post-title sub-content'>
             {
-                    translations ? translations[locale] ?
-                    translations[locale]?.title || title :
+                    translations ? translations[locale as string] ?
+                    translations[locale as string]?.title || title :
                     title : title
             }
         </PostTitleStyledH1>

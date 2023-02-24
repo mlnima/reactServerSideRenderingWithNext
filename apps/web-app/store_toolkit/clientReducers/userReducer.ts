@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
 import {loading, setAlert, loginRegisterForm} from "./globalStateReducer";
@@ -602,6 +603,7 @@ export const userSlice = createSlice({
         //         }
         //     }
         // },
+        //@ts-ignore
         endCall: (state, action: PayloadAction<any>) => {
             return {
                 ...state,

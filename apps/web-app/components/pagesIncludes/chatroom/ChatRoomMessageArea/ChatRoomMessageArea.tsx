@@ -47,7 +47,10 @@ const ChatRoomMessageArea:FC<PropTypes> = ({chatroomId,headerSize}) => {
     })
 
     useEffect(() => {
+        if (messageAreaRef.current)
+            //@ts-ignore
         messageAreaRef.current.scroll({
+            //@ts-ignore
             top: messageAreaRef.current.scrollHeight + 45,
             behavior: "smooth"
         })
@@ -68,7 +71,7 @@ const ChatRoomMessageArea:FC<PropTypes> = ({chatroomId,headerSize}) => {
                         <ChatRoomMessage
                             message={message}
                             key={index}
-                            locale={locale}
+                            locale={locale as string}
                         />
                     )
                 })

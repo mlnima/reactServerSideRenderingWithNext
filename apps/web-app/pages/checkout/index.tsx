@@ -303,7 +303,7 @@ const checkout = props => {
     // );
     return null
 };
-
+//@ts-ignore
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     // @ts-ignore

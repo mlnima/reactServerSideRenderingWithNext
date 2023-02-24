@@ -37,7 +37,7 @@ const page = () => {
     }
 }
 
-//************SSR***************
+//@ts-ignore
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     await _getServerSideStaticPageData(

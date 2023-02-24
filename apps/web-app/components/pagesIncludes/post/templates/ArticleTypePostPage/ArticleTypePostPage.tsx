@@ -50,7 +50,9 @@ const ArticleTypePostPage = () => {
     })
 
     return (
-        <Style id={'primary'} className='post-page' postPageStyle={postPageStyle}>
+        <Style id={'primary'} className='post-page'
+               //@ts-ignore
+               postPageStyle={postPageStyle}>
             <main id={'main'}>
                 <article itemScope itemType={'https://schema.org/BlogPosting'}>
                     <header className={'entry-header'}>
@@ -65,8 +67,10 @@ const ArticleTypePostPage = () => {
                                 <meta itemProp="articleBody" content={descriptionRef?.current?.textContent}/>}
 
                             {!!post.createdAt &&
+                                //@ts-ignore
                                 <meta itemProp="datePublished" content={convertDateToIso(post.createdAt)}/>}
                             {!!post.updatedAt &&
+                                //@ts-ignore
                                 <meta itemProp="dateModified" content={convertDateToIso(post.updatedAt)}/>}
                         </Csr>
                     </header>

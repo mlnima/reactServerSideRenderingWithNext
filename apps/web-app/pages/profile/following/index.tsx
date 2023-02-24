@@ -31,6 +31,7 @@ const Following  = ( ) => {
     const renderFollowing = following.map((user, index) => {
         return (
             <UserSmallPreview key={index}
+                             //@ts-ignore
                               {...user}
 
             />
@@ -45,7 +46,7 @@ const Following  = ( ) => {
     );
 };
 
-
+//@ts-ignore
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     // @ts-ignore

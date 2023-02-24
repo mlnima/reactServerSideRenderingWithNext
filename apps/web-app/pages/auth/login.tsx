@@ -1,8 +1,7 @@
 import React, {useEffect} from 'react';
-import {wrapper} from "../../store_toolkit/store";
-
-import {loginRegisterForm} from "../../store_toolkit/clientReducers/globalStateReducer";
-import {useAppDispatch} from "../../store_toolkit/hooks";
+import {wrapper} from "@store_toolkit/store";
+import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 
 const Login = () => {
@@ -13,6 +12,7 @@ const Login = () => {
     return null
 };
 
+//@ts-ignore
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
 

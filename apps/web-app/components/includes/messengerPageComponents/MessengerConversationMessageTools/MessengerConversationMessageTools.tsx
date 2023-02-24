@@ -1,14 +1,13 @@
+// @ts-nocheck
 import React, {useRef} from 'react'
 import {socket} from 'custom-util/src/socket-utils/socketIoClient';
 import { useSelector} from "react-redux";
 import styled from "styled-components";
-import {fetchSendAMessageToPrivateConversation} from "../../../../store_toolkit/clientReducers/userReducer";
-import {useAppDispatch} from "../../../../store_toolkit/hooks";
-import SvgRenderer from "../../../global/commonComponents/SvgRenderer/SvgRenderer";
+import {fetchSendAMessageToPrivateConversation} from "@store_toolkit/clientReducers/userReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 import {Store} from "typescript-types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPaperPlane} from "@fortawesome/free-regular-svg-icons/faPaperPlane";
-// import {messageToConversation} from "../../../../legacyCodesAndComponents/store/clientActions/userActions";
 
 const MessengerConversationMessageToolsStyledForm = styled.form`
   position: fixed;

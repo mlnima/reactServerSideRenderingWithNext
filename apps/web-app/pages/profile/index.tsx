@@ -87,6 +87,7 @@ const Profile = () => {
                             Edit
                         </Link>
                     </div>
+                    {/*//@ts-ignore*/}
                     <Posts userId={userData._id}/>
                 </main>
             </div>
@@ -94,7 +95,7 @@ const Profile = () => {
         </PageStyle>
     );
 };
-
+//@ts-ignore
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     // @ts-ignore

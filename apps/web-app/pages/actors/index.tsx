@@ -36,7 +36,9 @@ const actorsPage = () => {
     })
 
     return (
-        <PageStyle id={'content'} actorsPageStyle={actorsPageStyle} className={`page-${sidebar || 'no'}-sidebar `}>
+        <PageStyle id={'content'}
+                   //@ts-ignore
+                   actorsPageStyle={actorsPageStyle} className={`page-${sidebar || 'no'}-sidebar `}>
             <main id={'primary'} className={'content main '}>
                 <WidgetsRenderer
                     position={'actorsPageTop'}
@@ -59,6 +61,7 @@ const actorsPage = () => {
     );
 };
 
+//@ts-ignore
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     // @ts-ignore

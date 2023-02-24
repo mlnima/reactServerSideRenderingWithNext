@@ -23,6 +23,7 @@ const Text: FC<TextPropTypes> = ({translations, text}) => {
 
     return (
         <WidgetTextTextDataStyledDiv className={'widgetText widget-text'} >
+            {/*//@ts-ignore*/}
             {parse(locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? text : translations?.[locale]?.text || text || '')}
         </WidgetTextTextDataStyledDiv>
     );

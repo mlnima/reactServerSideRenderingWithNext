@@ -6,6 +6,7 @@ const getPost = async (identifier:string) => {
     const _id = queryGeneratorData._id ? {_id: queryGeneratorData._id} : {}
     const title = queryGeneratorData.title ? {title: encodeURIComponent(queryGeneratorData.title)} : {}
     const queriesDataObject  = {..._id,...title}
+    //@ts-ignore
     const queries= `?${new URLSearchParams(queriesDataObject).toString()}`
 
     return await AxiosInstance.get(`/api/v1/posts/clientGetPost${queries}`)

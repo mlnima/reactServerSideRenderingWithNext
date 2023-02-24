@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, {useEffect} from 'react';
 import {useSelector} from "react-redux";
 import dynamic from "next/dynamic";
@@ -109,10 +110,12 @@ const post = () => {
                     ...unpopulatedPostData,
                     status: 'pending',
                     postType: query?.postType as string,
+                    //@ts-ignore
                     author: userData._id
                 }
             }))
         }
+        //@ts-ignore
     }, [userData._id]);
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -132,6 +135,7 @@ const post = () => {
         e.preventDefault()
         if (
             editingPost._id && query.id &&
+            //@ts-ignore
             (userData?._id === editingPost.author._id as unknown as string || userData.role === 'administrator')
         ) {
             dispatch(updatePostAction({

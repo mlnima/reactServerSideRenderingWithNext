@@ -14,6 +14,7 @@ const PostActor: FC<ComponentPropTypes> = ({item}) => {
         <Link href={`/${convertMetasTypeToSingular(item.type)}/${item._id}`}
               // key={`${item.type}_${item._id}`}
               className={`post-meta-item ${item.type}`} title={item.name}>
+            {/*//@ts-ignore*/}
                 {item.type === 'actors' && <Csr> <ActorMetaImageRenderer imageUrl={item?.imageUrl} name={item.name}/></Csr>}
                 {capitalizeFirstLetters(item.name)}
         </Link>

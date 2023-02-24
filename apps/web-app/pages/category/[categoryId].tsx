@@ -38,6 +38,7 @@ const categoryPage = () => {
     const { category, categoryPageStyle, sidebar} = useSelector(({user, posts, settings}: Store) => {
         return {
             category: posts.categoryData ,
+            //@ts-ignore
             categoryPageStyle: settings.design?.categoryPageStyle,
             sidebar: settings?.identity?.categoryPageSidebar
         }
@@ -66,7 +67,7 @@ const categoryPage = () => {
     )
 };
 
-
+//@ts-ignore
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     await _getServerSideStaticPageData(

@@ -117,7 +117,7 @@ const MetasRendererStyle = styled.div`
 `
 
 interface MetasRendererPropTypes {
-    metaData: Meta[],
+    metaData: Meta[] | undefined,
     metaType: string
 }
 
@@ -133,7 +133,7 @@ const MetasRenderer: FC<MetasRendererPropTypes> = ({metaType, metaData}) => {
     }, [metaData])
 
     const groupMetas = useMemo(() => {
-        if (!!metaData.length){
+        if (!!metaData?.length){
             return metaData.reduce((finalData, current) => {
                 const firstLetter = current?.name?.[0]
                 finalData[firstLetter] = [...(finalData?.[current.name?.[0]] || []), current]

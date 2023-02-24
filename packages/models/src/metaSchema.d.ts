@@ -4,13 +4,13 @@ declare const _default: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     translations?: any;
-    name?: string;
     type?: string;
     count?: number;
+    name?: string;
     description?: string;
     index?: number;
-    likes?: number;
     status?: string;
+    likes?: number;
     imageUrl?: string;
     coverImageUrl?: string;
     imageUrlLock?: boolean;
@@ -25,13 +25,13 @@ declare const _default: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     translations?: any;
-    name?: string;
     type?: string;
     count?: number;
+    name?: string;
     description?: string;
     index?: number;
-    likes?: number;
     status?: string;
+    likes?: number;
     imageUrl?: string;
     coverImageUrl?: string;
     imageUrlLock?: boolean;

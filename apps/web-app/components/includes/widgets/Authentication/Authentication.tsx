@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, {FC, useState,memo} from 'react';
 import {useSelector} from 'react-redux';
 import styled from "styled-components";

@@ -1,1 +1,1 @@
-{"version":3,"file":"getPosts.d.ts","sourceRoot":"","sources":["getPosts.ts"],"names":[],"mappings":"AAUA,QAAA,MAAM,QAAQ,iBAAuB,GAAG,WAAS,MAAM,qDAyBtD,CAAA;AACD,eAAe,QAAQ,CAAC"}
+{"version":3,"file":"getPosts.d.ts","sourceRoot":"","sources":["getPosts.ts"],"names":[],"mappings":"AAUA,QAAA,MAAM,QAAQ,iBAAuB,GAAG,WAAS,MAAM,GAAC,IAAI,qDAyB3D,CAAA;AACD,eAAe,QAAQ,CAAC"}

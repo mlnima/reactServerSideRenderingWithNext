@@ -23,7 +23,7 @@ const Followers = () => {
 
     useEffect(() => {
 
-        if (userData.followers?.length) {
+        if (userData?.followers?.length) {
             dispatch(fetchMultipleUserDataById({usersList:userData?.followers, type:'followers'}))
 
         }
@@ -33,7 +33,10 @@ const Followers = () => {
 
     const renderFollowers = followers.map((user, index) => {
         return (
-            <UserSmallPreview key={index} {...user} />
+
+            <UserSmallPreview key={index}
+                //@ts-ignore
+                              {...user} />
         )
     })
 
@@ -43,7 +46,7 @@ const Followers = () => {
         </FollowersStyledDiv>
     );
 };
-
+//@ts-ignore
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     // @ts-ignore

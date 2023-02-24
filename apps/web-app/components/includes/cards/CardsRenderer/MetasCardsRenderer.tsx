@@ -65,7 +65,8 @@ const MetasCardsRenderer: FC<MetasCardsRendererPropTypes> = ({uniqueData, metaTy
             uniqueData?.metaData || (metaType === 'categories' ? posts?.categoriesMetas :
             metaType === 'tags' ? posts?.tagsMetas : metaType === 'actors' ? posts?.actorsMetas : []))
 
-    const role = useSelector(({user}: Store) => user.userData.role)
+    //@ts-ignore
+    const {role} = useSelector(({user}: Store) => user.userData)
 
     const adminMode = useSelector(({globalState}: Store) => globalState.adminMode)
 

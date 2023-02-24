@@ -8,7 +8,7 @@ const postTypeValidator = (currentPostType)=>{
     return currentPostType ? postTypes.includes(currentPostType) : false
 }
 
-const getPosts = async (currentQuery:any,medaId?:string) => {
+const getPosts = async (currentQuery:any,medaId?:string|null )=> {
     const sort = !!currentQuery?.sort ? {sort: currentQuery?.sort} : {sort: 'updatedAt'}
     const postType = postTypeValidator(currentQuery?.postType) ? {postType: currentQuery?.postType} : {}
     const isValidMetaId = !!medaId ? mongoIdValidator(medaId) : false

@@ -15,7 +15,7 @@ const AppLayoutAdminDataInitializer: FC = () => {
 
     useEffect(() => {
         setTimeout(() => {
-            if (userData.role === 'administrator'){
+            if (userData?.role === 'administrator'){
                 dispatch(getUncachedWidgetsForAdminAction(null))
                 dispatch(getUncachedSettingsForAdmin(null))
             }

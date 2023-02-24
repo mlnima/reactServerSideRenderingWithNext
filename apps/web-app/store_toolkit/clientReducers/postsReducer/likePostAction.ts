@@ -4,7 +4,7 @@ import likePost from "api-requests/src/client/posts/likePost";
 
 export const likePostAction = createAsyncThunk(
     'posts/likePostAction',
-    async (id: string, thunkAPI) => {
+    async (id: string|undefined, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         return await likePost(id)
             .then(res => {

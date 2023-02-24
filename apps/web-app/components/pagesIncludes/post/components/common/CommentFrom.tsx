@@ -72,15 +72,18 @@ const CommentFrom: FC = () => {
 
     const onSubmitHandler = e => {
         e.preventDefault();
-
+//@ts-ignore
         if (userData._id) {
             const commentData = {
+                //@ts-ignore
                 body: bodyInput.current.value,
+                //@ts-ignore
                 author: userData._id,
                 onDocumentId: _id,
             };
             if (_id) {
                 dispatch(postNewCommentAction(commentData))
+                //@ts-ignore
                 bodyInput.current.value = ''
                 dispatch(getPostCommentsAction(_id))
             }

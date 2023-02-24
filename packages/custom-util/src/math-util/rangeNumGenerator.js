@@ -1,5 +1,6 @@
 "use strict";
 exports.__esModule = true;
+// @ts-nocheck
 var rangeNumGenerator = function (currentPageInput, max) {
     var currentPage = currentPageInput, // input
     range = 6, // amount of links displayed

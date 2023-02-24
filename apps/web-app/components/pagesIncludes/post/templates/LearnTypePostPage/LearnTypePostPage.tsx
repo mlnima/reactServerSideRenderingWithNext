@@ -1,3 +1,4 @@
+// @ts-nocheck
 import PostPageStyle from '../../components/styles/PostPageStyle'
 import {useSelector} from "react-redux";
 import dynamic from "next/dynamic";

@@ -1,5 +1,4 @@
-import React, {FC, useEffect, useState} from "react";
-import SvgRenderer from "../../../../../global/commonComponents/SvgRenderer/SvgRenderer";
+import React, {FC, useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
 
@@ -9,19 +8,14 @@ interface ComponentPropTypes {
 }
 
 const ActorMetaImageRenderer: FC<ComponentPropTypes> = ({imageUrl, name}) => {
-    const [gotError, setGotError] = useState(null)
-
-    useEffect(() => {
-        console.log(gotError)
-    }, [gotError]);
-
+    const [gotError, setGotError] = useState(false)
 
     if (!!imageUrl && !gotError) {
         return (
             <img src={imageUrl}
                  alt={name}
                  loading={'lazy'}
-                 onError={()=>setGotError(true)}
+                 onError={() => setGotError(true)}
                  className={'item-image'}/>
         )
     } else if (gotError) {
@@ -33,8 +27,3 @@ const ActorMetaImageRenderer: FC<ComponentPropTypes> = ({imageUrl, name}) => {
 
 };
 export default ActorMetaImageRenderer
-// <SvgRenderer svgUrl={'/asset/images/icons/user-solid.svg'}
-// size={20}
-// customClassName={'actor-meta-svg'}
-// color={'var(--secondary-text-color, #ccc)'}
-// />

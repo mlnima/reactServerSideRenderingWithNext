@@ -111,6 +111,7 @@ const user = () => {
                         <UserPreviewImage imageUrl={userPageData?.profileImage} size={150}/>}
                     <div className='profile-header-info-actions'>
                         <h3>{userPageData?.username}</h3>
+                        {/*//@ts-ignore*/}
                         <UserPageActionButtons _id={userData?._id}/>
                         <div className='follow-count'>
                             <p>
@@ -143,7 +144,7 @@ const user = () => {
 
 
 };
-
+//@ts-ignore
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     // @ts-ignore

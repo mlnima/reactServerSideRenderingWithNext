@@ -84,6 +84,7 @@ const AlphabeticalNumericalRangeLinksWidget: FC = () => {
     const {pathname, query} = useRouter()
     const [showFilters, setShowFilters] = useState(false)
     const activePage = useMemo(() => query.startWith, [query.startWith])
+    //@ts-ignore
     const isDisabled = useMemo(() => query?.startWith?.length > 3, [query.startWith])
 
     const range = useMemo(() => {

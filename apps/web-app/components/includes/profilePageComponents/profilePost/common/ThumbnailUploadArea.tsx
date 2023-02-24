@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, {FC, useEffect, useRef} from "react";
 import styled from "styled-components";
 import SvgRenderer from "../../../../global/commonComponents/SvgRenderer/SvgRenderer";

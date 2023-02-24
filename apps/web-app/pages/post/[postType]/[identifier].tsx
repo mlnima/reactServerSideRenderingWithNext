@@ -56,12 +56,7 @@ const postPage = () => {
 
     const {postType, _id, status, author} = useSelector(({posts}: Store) => posts?.post);
 
-    const {role, userId} = useSelector(({user}: Store) => {
-        return {
-            role: user?.userData?.role,
-            userId: user?.userData?._id,
-        }
-    });
+    const {userData} = useSelector(({user}: Store) => user)
 
     const {sidebar} = useSelector(({settings}: Store) => {
         return {
@@ -71,15 +66,6 @@ const postPage = () => {
 
     const adminMode = useSelector(({globalState}: Store) => globalState?.adminMode);
 
-    // const [authorizedToViewTheContent, setAuthorizedToViewTheContent] = useState(false)
-
-    // useEffect(() => {
-    //    setTimeout(()=>{
-    //        if(status === 'published' || (role === 'administrator' && !!status) || author?._id === userId){
-    //            setAuthorizedToViewTheContent(true)
-    //        }
-    //    },100)
-    // }, [role, userId]);
 
     useEffect(() => {
         if (_id) {
@@ -91,10 +77,10 @@ const postPage = () => {
     }, [_id])
 
 
-    if (status === 'published' || adminMode || author?._id === userId) {
+    if (status === 'published' || adminMode || author?._id === userData?._id) {
         return (
             <>
-                {( adminMode || author?._id === userId) && <PostAdminQuickAccessBar role={role}/>}
+                {( adminMode || author?._id === userData?._id) && <PostAdminQuickAccessBar role={userData?.role}/>}
                 <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
 
                     {
@@ -116,7 +102,7 @@ const postPage = () => {
         return <Soft404/>
     } else {
         return <>
-            {( adminMode || author?._id === userId) && <PostAdminQuickAccessBar role={role}/>}
+            {( adminMode || author?._id === userData?._id) && <PostAdminQuickAccessBar role={userData?.role}/>}
             <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
                 <NotFoundOrRestricted/>
                 <SidebarWidgetAreaRenderer sidebar={sidebar} position={'postPage'}/>
@@ -127,6 +113,8 @@ const postPage = () => {
 
 };
 
+
+//@ts-ignore
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     await _getServerSideStaticPageData(

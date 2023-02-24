@@ -3,8 +3,8 @@ declare const _default: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    name?: string;
     count?: number;
+    name?: string;
     description?: string;
 }, {}, {}, {}, mongoose.Schema<any, mongoose.Model<any, any, any, any, any>, {}, {}, {}, {}, mongoose.ResolveSchemaOptions<{
     timestamps: true;
@@ -12,8 +12,8 @@ declare const _default: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    name?: string;
     count?: number;
+    name?: string;
     description?: string;
 }>>;
 export default _default;

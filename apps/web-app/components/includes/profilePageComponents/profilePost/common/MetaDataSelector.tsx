@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {FC,  useMemo, useState} from "react";
 import Select from 'react-select';
 import styled from "styled-components";

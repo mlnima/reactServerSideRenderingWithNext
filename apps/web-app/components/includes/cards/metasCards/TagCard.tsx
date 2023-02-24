@@ -30,7 +30,7 @@ const TagCardStyle = styled.article`
 
 interface TagCardPropTypes {
     meta: Meta,
-    index?: number,
+    index: number,
     postsPerRawForMobile: number,
     cardWidth: number,
     adminMode: boolean,
@@ -52,6 +52,7 @@ const TagCard: FC<TagCardPropTypes> =
         const title = useMemo(() => {
             const checkedTitle = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?
                 meta?.name :
+                //@ts-ignore
                 meta?.translations?.[locale]?.name || meta?.name
             return capitalizeFirstLetter(checkedTitle)
         }, [meta?.name]);

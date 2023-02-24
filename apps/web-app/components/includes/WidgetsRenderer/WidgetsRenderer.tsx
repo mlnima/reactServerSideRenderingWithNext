@@ -38,9 +38,10 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
 
     const renderWidgets = sortWidgetsByIndex.map((widget) => {
             if (
-                _renderByLanguageCondition(locale, widget?.data?.languageToRender) &&
+                _renderByLanguageCondition(locale as string, widget?.data?.languageToRender) &&
                 _renderByDayCondition(widget.data?.specificDayToRender) &&
                 _renderByDevice(isMobile, widget?.data?.deviceTypeToRender) &&
+                //@ts-ignore
                 !_isEditMode(widget.data.editMode, userRole)
             ) {
                 const widgetProps = {

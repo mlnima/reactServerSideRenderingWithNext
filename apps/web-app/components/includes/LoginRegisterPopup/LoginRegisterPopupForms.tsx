@@ -198,7 +198,9 @@ const LoginRegisterPopupForms: FC = () => {
 
     const onLoginHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(fetchLogin({username: state.username, password: state.password}))
+        if (!!state.username && state.password){
+            dispatch(fetchLogin({username: state.username, password: state.password}))
+        }
     };
 
 

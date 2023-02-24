@@ -45,10 +45,10 @@ module.exports = () => {
                 destination: '/posts/old/:identifier',
                 has: [{type: 'query', key: 'identifier'}]
             },
-            {
-                source: `/posts/${postTypeQueryMatcher}`,
-                destination: '/posts?postType=:postType',
-            },
+            // {
+            //     source: `/posts/${postTypeQueryMatcher}`,
+            //     destination: '/posts?postType=:postType',
+            // },
             {
                 source: `/posts/${postTypeQueryMatcher}/:id`,
                 destination: '/post/old/:id',

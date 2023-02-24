@@ -40,8 +40,8 @@ const Logo: FC<LogoPropTypes> = ({uniqueData, LogoUrl}) => {
         // Logo Url must get Deleted after live sites widget data reSet
         return {
             logoUrlSource: uniqueData?.logoUrl || LogoUrl,
-            logoText: locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? uniqueData?.logoText || '' : uniqueData?.translations?.[locale]?.logoText || '',
-            headLineData: locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? uniqueData?.headLine : uniqueData?.translations?.[locale]?.headLine,
+            logoText: locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? uniqueData?.logoText || '' : uniqueData?.translations?.[locale as string]?.logoText || '',
+            headLineData: locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? uniqueData?.headLine : uniqueData?.translations?.[locale as string]?.headLine,
         }
     }, [uniqueData,LogoUrl])
 

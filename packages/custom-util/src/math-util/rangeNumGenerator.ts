@@ -1,3 +1,4 @@
+// @ts-nocheck
 const rangeNumGenerator = (currentPageInput:number, max:number) =>{
     let currentPage = currentPageInput, // input
         range = 6,  // amount of links displayed

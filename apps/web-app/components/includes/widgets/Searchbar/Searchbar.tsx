@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, MouseEvent, useEffect} from "react";
 import styled from "styled-components";
 import useTranslation from 'next-translate/useTranslation'

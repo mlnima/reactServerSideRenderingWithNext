@@ -1,6 +1,5 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC} from 'react';
 import {useRouter} from "next/router";
-// import {useTranslation} from 'next-i18next';
 import useTranslation from 'next-translate/useTranslation'
 import styled from "styled-components";
 import { useSelector} from "react-redux";
@@ -9,10 +8,11 @@ import {
     fetchSpecificUserData,
     fetchStartConversation,
     fetchUnFollowUser
-} from "../../../../store_toolkit/clientReducers/userReducer";
-import {loginRegisterForm} from "../../../../store_toolkit/clientReducers/globalStateReducer";
-import {useAppDispatch} from "../../../../store_toolkit/hooks";
+} from "@store_toolkit/clientReducers/userReducer";
+import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 import {Store} from "typescript-types";
+
 const UserPageActionButtonsStyledDiv = styled.div`
   display: flex;
   justify-content: center;
@@ -59,7 +59,7 @@ const UserPageActionButtons: FC<UserPageActionButtonsPropType> = ({_id}) => {
     //     console.log(loggedIn)
     // }, [userData]);
     const onFollowHandler = () => {
-        if (userPageData?._id && loggedIn && userData._id ) {
+        if (userPageData?._id && loggedIn && userData?._id ) {
             dispatch(fetchFollowUser(userPageData._id))
             dispatch(fetchSpecificUserData({fields:['following']}))
         } else {
@@ -68,14 +68,17 @@ const UserPageActionButtons: FC<UserPageActionButtonsPropType> = ({_id}) => {
     }
 
     const onUnFollowHandler = () => {
-        dispatch(fetchUnFollowUser(userPageData._id))
-        dispatch(fetchSpecificUserData({fields:['following']}))
+        if (userPageData?._id){
+            dispatch(fetchUnFollowUser(userPageData?._id))
+            dispatch(fetchSpecificUserData({fields:['following']}))
+        }
+
     }
 
 
     const onConversationHandler = () => {
 
-        if (userData._id && userPageData._id) {
+        if (!!userData?._id && !!userPageData?._id) {
             dispatch(fetchStartConversation({_id:userPageData._id, push}))
 
         } else {
@@ -93,7 +96,7 @@ const UserPageActionButtons: FC<UserPageActionButtonsPropType> = ({_id}) => {
             <button className='user-page-action-button action-client-button-link'
                     onClick={onConversationHandler}>{t<string>('Send Message')}</button>
             <div>
-                {userData?.following?.includes(userPageData._id) ?
+                {!!userPageData?._id && userData?.following?.includes(userPageData?._id) ?
                     <button className='user-page-action-button action-client-button-link'
                             onClick={onUnFollowHandler}>{t<string>('Unfollow')}  </button> :
                     <button className='user-page-action-button action-client-button-link'

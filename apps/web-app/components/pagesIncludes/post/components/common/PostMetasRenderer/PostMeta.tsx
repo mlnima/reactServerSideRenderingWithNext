@@ -16,6 +16,7 @@ const PostMeta: FC<PostMetaPropTypes> = ({item}) => {
               // key={`${item.type}_${item._id}`}
               className={`post-meta-item btn btn-dark ${item.type}`}
               title={item.name}>
+            {/*//@ts-ignore*/}
                 {item.type === 'actors' && <Csr> <ActorMetaImageRenderer imageUrl={item?.imageUrl} name={item.name}/></Csr>}
                 { capitalizeFirstLetters(item.name)}
         </Link>

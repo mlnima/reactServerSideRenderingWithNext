@@ -50,8 +50,11 @@ const TextToCanvasImage: FC<TextToCanvasImagePropTypes> =
         useEffect(() => {
             if (canvasElement?.current && title){
                 const ctx = canvasElement?.current?.getContext('2d')
+                //@ts-ignore
                 ctx.font = '30px serif';
+                //@ts-ignore
                 ctx.fillStyle = '#fff';
+                //@ts-ignore
                 ctx.fillText(title.substring(0,15) + '...',50,(cardWidth / 1.777)/2);
             }
         }, [canvasElement?.current]);

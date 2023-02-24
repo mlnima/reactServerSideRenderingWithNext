@@ -99,7 +99,9 @@ const RatingButtons: FC<RatingButtonsPropTypes> = ({rating}) => {
     }, [rating, likes, disLikes]);
 
     return (
-        <RatingButtonsStyledDiv className="rating-buttons sub-content" buttonsDisabledStatus={isRated}>
+        <RatingButtonsStyledDiv className="rating-buttons sub-content"
+                                //@ts-ignore
+                                buttonsDisabledStatus={isRated}>
             {views ?
                 <span className='like-disLike-count-items rating-item'
                       title={t<string>('Views')}>

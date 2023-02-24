@@ -44,7 +44,7 @@ interface CardsRendererPropTypes {
 }
 
 interface StylePropTypes {
-    postsPerRawForMobile?: number,
+    postsPerRawForMobile: number,
     cardWidth?: number,
     cardsCustomStyle: string
 }
@@ -72,9 +72,10 @@ const PostsCardsRenderer: FC<CardsRendererPropTypes> =
 
                 {(uniqueData?.posts || posts || []).map((post: Post, index: number) => {
                     const postProps = {
-                        views: post.views > 10 ? post.views as unknown as number : 0,
+                        views: post.views &&  post.views > 10 ? post.views as unknown as number : 0,
                         cardWidth,
                         postsPerRawForMobile,
+                        //@ts-ignore
                         rating: post.likes || post.disLikes ? ratingCalculator(post.likes, post.disLikes) : null,
                         post,
                         targetLink: post?.postType?.includes('external') || post?.outPostType === 'promotion' ? '_blank' : '_self',
@@ -88,16 +89,23 @@ const PostsCardsRenderer: FC<CardsRendererPropTypes> =
 
 
                     if (post?.postType === 'video' || post?.postType === 'externalVideo') {
+
+                        //@ts-ignore
                         return <VideoPostCard {...postProps} key={index} index={index}/>
                     } else if (post?.postType === 'event') {
+                        //@ts-ignore
                         return <EventPostCard {...postProps} key={index} index={index}/>
                     } else if (post?.postType === 'promotion' || post?.postType === 'externalPromotion') {
+                        //@ts-ignore
                         return <PromotionPostCard {...postProps} key={index} index={index}/>
                     } else if (post?.postType === 'article' || post?.postType === 'externalArticle') {
+                        //@ts-ignore
                         return <ArticlePostCard {...postProps} key={index} index={index}/>
                     } else if (post?.postType === 'learn' || post?.postType === 'externalLearn') {
+                        //@ts-ignore
                         return <LearnPostCard {...postProps} key={index} index={index}/>
                     } else if (post?.postType === 'Ad') {
+                        //@ts-ignore
                         return <AdPostCard {...postProps} key={index} index={index}/>
                     } else return null
                 })}

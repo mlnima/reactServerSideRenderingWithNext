@@ -11,7 +11,7 @@ interface MetaWidgetPropType {
 
 const MetaWidget: FC<MetaWidgetPropType> = ({metaType, uniqueData}) => {
     return(
-        <MetasRenderer metaData={uniqueData.metaData} metaType={metaType}/>
+        <MetasRenderer metaData={uniqueData?.metaData} metaType={metaType}/>
     )
 };
 

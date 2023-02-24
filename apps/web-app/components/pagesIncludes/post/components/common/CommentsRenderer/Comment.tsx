@@ -81,7 +81,7 @@ const Comment: FC<CommentPropTypes> = ({commentData}) => {
                     <span className='comment-date'>
                     {formatDistance(new Date(commentData?.createdAt), new Date(), {addSuffix: true, ...localeData})}
                 </span>
-                    {userData.role === 'administrator' ?
+                    {userData?.role === 'administrator' ?
                         <div className='comments-admin-action-btns'>
                             <button onClick={() => onDeleteHandler(commentData?._id)}
                                     className={'btn btn-danger'}>Delete

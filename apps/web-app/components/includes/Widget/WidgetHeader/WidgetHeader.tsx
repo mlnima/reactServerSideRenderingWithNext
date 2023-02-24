@@ -31,7 +31,8 @@ interface WidgetHeaderPropTypes {
 const WidgetHeader:FC<WidgetHeaderPropTypes> = ({translations,title,redirectLink,redirectToTitle,footerLink}) => {
 
     const {locale} = useRouter()
-    const widgetHeaderTitle = translations ? translations[locale] ? translations[locale]?.title || title : title : title
+    //@ts-ignore
+    const widgetHeaderTitle = translations ? translations?.[locale] ? translations?.[locale]?.title || title : title : title
 
         return (
             <WidgetHeaderStyledDiv className='widget-Header' >

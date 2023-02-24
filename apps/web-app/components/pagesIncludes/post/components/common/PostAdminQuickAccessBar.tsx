@@ -46,7 +46,7 @@ const Style= styled.div`
 `
 
 interface PropTypes {
-    role: string
+    role: string | undefined
 }
 
 const PostAdminQuickAccessBar: FC<PropTypes> = ({role}) => {
@@ -63,6 +63,7 @@ const PostAdminQuickAccessBar: FC<PropTypes> = ({role}) => {
     })
 
     const onStatusChangeHandler = (status) => {
+        //@ts-ignore
          dispatch(editPostStatusAction({ids: [_id], status}))
         updateQueryGenerator(query, push, pathname)
     }

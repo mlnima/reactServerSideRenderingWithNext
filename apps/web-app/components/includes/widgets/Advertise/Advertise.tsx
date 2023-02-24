@@ -38,6 +38,7 @@ const Advertise: FC<AdvertisePropTypes> = ({uniqueData}) => {
     const setAdCode = () => {
         if (uniqueData?.adCode) {
             setTimeout(() => {
+                //@ts-ignore
                 setAdCodeData(uniqueData?.adCode)
             }, 500)
         }

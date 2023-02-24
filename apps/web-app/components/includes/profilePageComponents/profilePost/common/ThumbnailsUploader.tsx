@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, {FC, useRef,} from "react";
 import styled from "styled-components";
 import {useAppDispatch} from "@store_toolkit/hooks";

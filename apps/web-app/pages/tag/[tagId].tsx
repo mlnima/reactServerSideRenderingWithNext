@@ -32,6 +32,7 @@ const tagPage = () => {
     const { tag, tagPageStyle, sidebar} = useSelector(({user, posts, settings}: Store) => {
         return {
             tag: posts.tagData,
+            //@ts-ignore
             tagPageStyle: settings.design?.tagPageStyle,
             sidebar: settings?.identity?.tagPageSidebar
         }
@@ -59,7 +60,7 @@ const tagPage = () => {
     )
 };
 
-
+//@ts-ignore
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     await _getServerSideStaticPageData(

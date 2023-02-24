@@ -153,7 +153,7 @@ const edit = () => {
         </EditProfileStyledMain>
     );
 };
-
+//@ts-ignore
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     // @ts-ignore

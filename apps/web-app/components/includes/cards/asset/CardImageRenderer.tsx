@@ -1,10 +1,10 @@
-import React, {FC, useEffect, useMemo, useState} from 'react';
+import React, {FC} from 'react';
 import styled from "styled-components";
 
 interface CardImageNextPropTypes {
     imageUrl: string,
     mediaAlt: string,
-    index?: number,
+    index: number,
     postsPerRawForMobile: number,
     cardWidth: number,
     title?: string,

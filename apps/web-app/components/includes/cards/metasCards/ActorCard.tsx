@@ -61,7 +61,7 @@ const ActorCardStyle = styled.article`
 
 interface ActorCardPropTypes {
     meta: Meta,
-    index?: number,
+    index: number,
     postsPerRawForMobile: number,
     cardWidth: number,
     role:string,

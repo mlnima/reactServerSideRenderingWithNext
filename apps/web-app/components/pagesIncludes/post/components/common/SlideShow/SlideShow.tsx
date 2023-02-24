@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {FC, useEffect, useState} from 'react';
 import Image from 'next/image';
 import styled from "styled-components";

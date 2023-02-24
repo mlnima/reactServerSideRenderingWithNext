@@ -4,8 +4,8 @@ declare const _default: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     type: string;
-    userID: string;
     status: string;
+    userID: string;
     payPalData: any;
     additionalData?: any;
 }, {}, {}, {}, mongoose.Schema<any, mongoose.Model<any, any, any, any, any>, {}, {}, {}, {}, mongoose.ResolveSchemaOptions<{
@@ -15,8 +15,8 @@ declare const _default: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     type: string;
-    userID: string;
     status: string;
+    userID: string;
     payPalData: any;
     additionalData?: any;
 }>>;

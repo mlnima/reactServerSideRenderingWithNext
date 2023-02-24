@@ -4,10 +4,11 @@ import {FC} from "react";
 
 const CardTitleStyle = styled.h3`
   margin: 4px 0;
-  padding:  4px 0;
+  padding: 4px 0;
   box-sizing: border-box;
   line-height: 2.5;
-  a{
+
+  a {
     color: var(--secondary-text-color, #ccc);
     display: -webkit-box;
     -webkit-line-clamp: 1;
@@ -27,16 +28,16 @@ const CardTitleStyle = styled.h3`
 `
 
 interface CardTitlePropTypes {
-    title: string,
-    url:string,
-    targetLink?:string
+    title: string | undefined,
+    url: string | undefined,
+    targetLink?: string
 }
 
-const CardTitle: FC<CardTitlePropTypes> = ({title,url,targetLink}) => {
+const CardTitle: FC<CardTitlePropTypes> = ({title, url, targetLink}) => {
 
     return (
         <CardTitleStyle className={'title'}>
-            <Link href={url} title={title} target={targetLink|| '_self'}>
+            <Link href={url || '#'} title={title} target={targetLink || '_self'}>
                 {title}
             </Link>
         </CardTitleStyle>

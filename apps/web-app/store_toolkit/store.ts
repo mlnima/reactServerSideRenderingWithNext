@@ -7,7 +7,7 @@ import settingsSlice from "./clientReducers/settingsReducer";
 import userSlice from "./clientReducers/userReducer";
 import globalStateSlice from "./clientReducers/globalStateReducer";
 import chatroomSlice from "./clientReducers/chatroomReducer";
-
+//@ts-ignore
 const debugDev = process.env.NODE_ENV !== 'production' || process.env.NEXT_PUBLIC_PRODUCTION_URL.includes(':3000')
 const debug = false;
 

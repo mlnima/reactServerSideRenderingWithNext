@@ -27,23 +27,28 @@ interface AppLayoutPropTypes {
 const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
     const dispatch = useAppDispatch()
     const {loggedIn} = useSelector(({user}: Store) => user)
-
-    const [renderCookiesBar,setRenderCookiesBar] = useState(false)
+    const {userData} = useSelector(({user}: Store) => user)
+    const [renderCookiesBar, setRenderCookiesBar] = useState(false)
 
     const {loginRegisterFormPopup, alert, loading, adminMode} = useSelector(({globalState}: Store) => globalState)
 
     const identity = useSelector(({settings}: Store) => settings?.identity);
 
     useEffect(() => {
-         setTimeout(()=>{
-             if (localStorage?.cookieAccepted !== 'true'){
-                 setRenderCookiesBar(true)
-             }
-             if (localStorage?.adminMode === 'true'){
-                 dispatch(setAdminMode(!adminMode))
-             }
-         },500)
+        setTimeout(() => {
+            if (localStorage?.cookieAccepted !== 'true') {
+                setRenderCookiesBar(true)
+            }
+        }, 10)
     }, []);
+
+    useEffect(() => {
+        setTimeout(() => {
+            if ( userData?.role === 'administrator' && localStorage?.adminMode === 'true') {
+                dispatch(setAdminMode(!adminMode))
+            }
+        }, 20)
+    }, [userData]);
 
     return (
         <>

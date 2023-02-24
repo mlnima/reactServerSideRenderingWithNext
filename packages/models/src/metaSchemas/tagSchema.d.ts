@@ -4,8 +4,8 @@ declare const _default: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     translations?: any;
-    name?: string;
     count?: number;
+    name?: string;
     description?: string;
     status?: string;
     imageUrl?: string;
@@ -16,8 +16,8 @@ declare const _default: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     translations?: any;
-    name?: string;
     count?: number;
+    name?: string;
     description?: string;
     status?: string;
     imageUrl?: string;

@@ -66,7 +66,9 @@ const VideoPostCardTrailer: FC<VideoPostCardMediaPropTypes> =
         const playTrailer = () => {
             try {
                 setTimeout(()=>{
-                    videoTrailer?.current?.play()
+                     //@ts-ignore
+                     videoTrailer?.current?.play()
+
                 },100)
 
             } catch (err) {
@@ -76,6 +78,7 @@ const VideoPostCardTrailer: FC<VideoPostCardMediaPropTypes> =
 
         const pauseTrailer  = ()=>{
             try {
+                //@ts-ignore
                 videoTrailer?.current?.pause()
             } catch (err) {
 

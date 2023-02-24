@@ -44,8 +44,8 @@ const MultipleLinkTo: FC<MultipleLinkToPropTypes> = ({multipleLinks}) => {
     return (
         <MultipleLinkToStyledUl className='multiple-links-widget'>
             {([...multipleLinks] || []).sort((a, b) => a.linkIndex - b.linkIndex).map((linkData,index) => {
-                const linkTitle = linkData.translations?.[locale]?.linkTitle || linkData.linkTitle;
-                const linkDescription = linkData.translations?.[locale]?.linkDescription || linkData.linkDescription;
+                const linkTitle = linkData.translations?.[locale as string]?.linkTitle || linkData.linkTitle;
+                const linkDescription = linkData.translations?.[locale as string]?.linkDescription || linkData.linkDescription;
 
                 return (
                     <li key={`${linkData.linkTitle}-${index}`} className='multiple-links-widget-item'>

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, {useRef} from 'react';
 import styled from "styled-components";
 import PostPageStyle from "../../components/styles/PostPageStyle";

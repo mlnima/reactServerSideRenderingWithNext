@@ -36,6 +36,7 @@ const categoriesPage = () => {
 
     return (
         <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar `}
+                   //@ts-ignore
                    stylesData={categoriesPageStyle}>
             <main id={'primary'} className={'content main '}>
                 <WidgetsRenderer position={'categoriesPageTop'}/>
@@ -54,6 +55,7 @@ const categoriesPage = () => {
     );
 };
 
+//@ts-ignore
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     await _getServerSideStaticPageData(

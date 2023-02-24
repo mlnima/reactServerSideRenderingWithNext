@@ -24,14 +24,16 @@ const PostDescriptionStyledDiv = styled.div`
 `
 
 const LearnTypePostPageDescription :FC = () => {
-    const router = useRouter();
+    const {locale} = useRouter();
 
     const {description,translations,source}  = useSelector(({posts}:Store)=>posts.post)
 
     const descriptionValue = useMemo(() => {
         return translations ?
-                  translations?.[router?.locale || process.env.NEXT_PUBLIC_DEFAULT_LOCAL] ?
-                      translations?.[router?.locale || process.env.NEXT_PUBLIC_DEFAULT_LOCAL]?.description || description
+            //@ts-ignore
+                  translations?.[locale as string || process.env.NEXT_PUBLIC_DEFAULT_LOCAL] ?
+                      //@ts-ignore
+                      translations?.[locale as string || process.env.NEXT_PUBLIC_DEFAULT_LOCAL]?.description || description
                   : description
                : description;
     },[description]);

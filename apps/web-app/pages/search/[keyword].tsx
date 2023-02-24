@@ -35,7 +35,9 @@ const searchPage = ( ) => {
     const router = useRouter()
 
     return (
-        <StyledMain id={'content'} className="main posts-page" stylesData={settings.design?.postsPageStyle || ''}>
+        <StyledMain id={'content'} className="main posts-page"
+                    //@ts-ignore
+                    stylesData={settings.design?.postsPageStyle || ''}>
 
             <WidgetsRenderer position={'searchPageTop'}/>
 
@@ -52,7 +54,7 @@ const searchPage = ( ) => {
         </StyledMain>
     )
 };
-
+//@ts-ignore
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     await _getServerSideStaticPageData(

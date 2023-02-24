@@ -2,7 +2,7 @@ import {FC} from "react";
 import SideBarWidgetArea from './SidebarWidgetArea';
 
 interface SidebarWidgetAreaRendererPropTypes {
-    sidebar:string|boolean
+    sidebar:string|boolean|undefined
     position:string
 }
 

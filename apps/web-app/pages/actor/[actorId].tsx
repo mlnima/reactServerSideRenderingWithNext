@@ -48,7 +48,9 @@ const actorPage = () => {
 
 
     return (
-        <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`} stylesData={actorPageStyle}>
+        <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`}
+                   //@ts-ignore
+                   stylesData={actorPageStyle}>
             <main id={'primary'} className="main posts-page">
                 {(!!adminMode && role === 'administrator') && <MetaAdminQuickAccessBar metaId={actor._id}/>}
 
@@ -67,6 +69,7 @@ const actorPage = () => {
 };
 
 //http://localhost:3000/actor/5f411023b4df305e903613ca
+//@ts-ignore
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     await _getServerSideStaticPageData(

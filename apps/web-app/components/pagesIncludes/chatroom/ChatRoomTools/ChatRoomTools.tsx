@@ -83,8 +83,8 @@ const ChatRoomTools:FC<PropTypes> = ({chatroomId}) => {
     const {loggedIn,_id,username} = useSelector(({user}: Store) => {
         return {
             loggedIn: user?.loggedIn,
-            _id:user.userData._id,
-            username:user.userData.username,
+            _id:user.userData?._id,
+            username:user.userData?.username,
         }
     })
     const router = useRouter()
