@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import React, {FC} from "react";
-import SvgRenderer from "../../../../global/commonComponents/SvgRenderer/SvgRenderer";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faThumbsUp} from "@fortawesome/free-solid-svg-icons/faThumbsUp";
 
 const CardRatingStyledDiv = styled.div`
   .icon {
-    margin: 0 3px;
+    margin: 0 2px 0 5px;
   }
 `
 
@@ -13,14 +14,11 @@ interface CardRatingPropTypes {
     className: string
 }
 
-const CardRating:FC<CardRatingPropTypes> = ({rating, className} ) => {
+const CardRating: FC<CardRatingPropTypes> = ({rating, className}) => {
 
     return (
         <CardRatingStyledDiv className={'card-rating ' + className}>
-            <SvgRenderer svgUrl={'/asset/images/icons/thumbs-up-solid.svg'}
-                         size={11}
-                         customClassName={'rating'}
-                         color={'var(--secondary-text-color, #ccc)'}/>
+            <FontAwesomeIcon className={'icon'} icon={faThumbsUp} style={{width: 11, height: 11}}/>
             <span>{rating || 0}%</span>
         </CardRatingStyledDiv>
     );

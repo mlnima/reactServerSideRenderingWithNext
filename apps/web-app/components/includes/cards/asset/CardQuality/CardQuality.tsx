@@ -1,10 +1,8 @@
 import styled from "styled-components";
-import {useMemo} from "react";
 
 const CardQualityStyledDiv = styled.div`
   font-size: 12px;
   font-weight: bold;
-
 `
 
 interface CardViewsPropTypes {
@@ -13,10 +11,9 @@ interface CardViewsPropTypes {
 }
 
 const CardQuality = ({quality, className}: CardViewsPropTypes) => {
-    const qualityMemo = useMemo(()=>quality,[quality])
     return (
         <CardQualityStyledDiv className={'card-quality ' + className}>
-            {qualityMemo.toUpperCase()}
+            {quality}
         </CardQualityStyledDiv>
     );
 };

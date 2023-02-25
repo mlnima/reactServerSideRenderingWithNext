@@ -54,10 +54,10 @@ const WidgetPagination: FC<WidgetPaginationPropTypes> = ({baseUrl, totalCount,co
                               href={`${baseUrl.includes('?') ? baseUrl + `&page=${pageNumber}` : baseUrl + `?page=${pageNumber}`}`}
                               className='pagination-item'
                               style={{
-                                  backgroundColor: pageNumber === 1 && postsCountPerPage === count?
+                                  backgroundColor: pageNumber === 1 && postsCountPerPage === (count || 20)?
                                       'var(--main-active-color,#f90)' :
                                       'var(--secondary-background-color, #181818)',
-                                  color: pageNumber === 1 && postsCountPerPage === count ?
+                                  color: pageNumber === 1 && postsCountPerPage === (count || 20) ?
                                       'var(--secondary-background-color, #181818)' :
                                       'var(--main-text-color, #fff)'
                               }}>

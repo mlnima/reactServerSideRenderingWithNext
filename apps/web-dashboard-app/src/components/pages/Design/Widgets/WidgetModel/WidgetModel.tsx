@@ -35,12 +35,6 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({widget}) => {
         stayOpen: false,
     })
 
-    //<iframe title='HomePageSideBarBanner ad-banner' border='0' frameBorder='0' marginHeight='0' marginWidth='0' width='300' height='100' scrolling='no' allowtransparency='true' src='https://adserver.juicyads.com/adshow.php?adzone=941535'/>
-
-    // useEffect(() => {
-    //     console.log(widgetData)
-    // }, [widgetData]);
-
     useEffect(() => {
         if (widget) {
             setWidgetData({
@@ -65,45 +59,27 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({widget}) => {
         }))
     };
 
-    // const onTextInputsDataChangeHandler = (e) => {
-    //     if (widgetSettings.activeEditingLanguage === 'default') {
-    //         onChangeHandler(e)
-    //     } else {
-    //         const value =   inputValueSimplifier(e)
-    //         setWidgetData({
-    //             ...widgetData,
-    //             translations:{
-    //                 ...(widgetData?.translations || {}),
-    //                 [widgetSettings.activeEditingLanguage]:{
-    //                     ...(widgetData?.translations?.[widgetSettings.activeEditingLanguage] || {}),
-    //                     [e.target.name]: value
-    //                 }
-    //             }
-    //         })
-    //     }
-    // }
+    // useEffect(() => {
+    //     console.log(widgetData)
+    // }, [widgetData]);
 
     const onChangeHandlerWithTranslate = (e) => {
-        // console.log(widgetSettings.activeEditingLanguage,e)
-        if (e?.target?.value) {
-            if (widgetSettings.activeEditingLanguage === 'default') {
-                onChangeHandler(e)
-            } else {
-                setWidgetData(prevState => (
-                    {
-                        ...prevState,
-                        translations: {
-                            ...(widgetData?.translations || {}),
-                            [widgetSettings.activeEditingLanguage]: {
-                                ...(widgetData?.translations?.[widgetSettings.activeEditingLanguage] || {}),
-                                [e.target.name]: e.target.value
-                            }
+        if (widgetSettings.activeEditingLanguage === 'default') {
+            onChangeHandler(e)
+        } else {
+            setWidgetData(prevState => (
+                {
+                    ...prevState,
+                    translations: {
+                        ...(widgetData?.translations || {}),
+                        [widgetSettings.activeEditingLanguage]: {
+                            ...(widgetData?.translations?.[widgetSettings.activeEditingLanguage] || {}),
+                            [e.target.name]: e.target.value
                         }
                     }
-                ))
-            }
+                }
+            ))
         }
-
     }
 
     const onObjectEditingModeChangeHandler = e => {
@@ -161,7 +137,7 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({widget}) => {
                 uniqueData: {
                     ...(prevState?.uniqueData || {}),
                     translations: {
-                      //@ts-ignore
+                        //@ts-ignore
                         ...(prevState?.uniqueData?.translations || {}),
                         [widgetSettings.activeEditingLanguage]: {
                             //@ts-ignore
@@ -223,9 +199,9 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({widget}) => {
                 stayOpen: !widgetData.stayOpen,
                 uniqueData: {
                     ...(widgetData?.uniqueData || {}),
-                    categoriesDataWithPosts:[],
-                    tagsDataWithPosts:[],
-                    ActorsDataWithPosts:[],
+                    categoriesDataWithPosts: [],
+                    tagsDataWithPosts: [],
+                    ActorsDataWithPosts: [],
                     posts: [],
                     metaData: []
                 }

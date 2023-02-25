@@ -7,8 +7,8 @@ import _qualityConvertor from "../asset/_qualityConvertor";
 import CardTitle from "../asset/CardTitle/CardTitle";
 import {Post} from "typescript-types";
 import DefaultPostCardStyle from "../asset/DefaultPostCardStyle";
-import CardViews from "@components/includes/cards/asset/CardViews/CardViews";
 
+const CardViews = dynamic(() => import('../asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('../asset/CardRating/CardRating'))
 const CardQuality = dynamic(() => import('../asset/CardQuality/CardQuality'))
 const CardDuration = dynamic(() => import('../asset/CardDuration/CardDuration'))
@@ -59,8 +59,6 @@ const VideoPostCardStyle = styled(DefaultPostCardStyle)`
         right: 5px;
       }
     }
-
-
   }
 
   @media only screen and (min-width: 768px) {
@@ -82,7 +80,7 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
          index
      }) => {
 
-        const [hover, setHover] = useState(null)
+        const [hover, setHover] = useState(false)
 
         const hoverHandler = (status) => {
             setHover(status)
@@ -134,13 +132,12 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
                 </div>
                 <CardTitle title={title} targetLink={targetLink} url={postUrl}/>
 
-                {(!!views || !!rating ) &&        <div className={'card-under-media-info'}>
-
-                    {!!views && <CardViews views={views}/> }
-                    {!!rating &&
-                        <CardRating rating={rating} className={'card-rating card-under-title-info-data'}/>
-                    }
-                </div>}
+                {(!!views || !!rating) && (
+                    <div className={'card-under-media-info'}>
+                        {!!views && <CardViews views={views}/>}
+                        {!!rating && <CardRating rating={rating} className={'card-rating card-under-title-info-data'}/>}
+                    </div>
+                )}
 
 
             </VideoPostCardStyle>
