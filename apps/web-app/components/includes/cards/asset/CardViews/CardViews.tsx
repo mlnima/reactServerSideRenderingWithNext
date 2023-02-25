@@ -22,7 +22,7 @@ interface CardViewsPropTypes {
 }
 
 const CardViews = ({views, className}: CardViewsPropTypes) => {
-    const {t} = useTranslation()
+    const {t} = useTranslation('common')
 
     return (
         <CardViewsStyledDiv className={`card-views ${className || ''}`}>

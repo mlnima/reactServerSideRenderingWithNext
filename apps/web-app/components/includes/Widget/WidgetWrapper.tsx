@@ -44,76 +44,62 @@ let WidgetStyledSection = styled.section`
 
 const WidgetWrapper: FC<WidgetComponentPropTypes> = ({data, widgetId, isSidebar, viewType}) => {
 
-    const idAttribute = useMemo(() => data?.extraId ? {id: data?.extraId} : {}, [data])
-
     const WidgetToRender = useMemo(() => {
         return data.type === 'postsSlider' ? PostSlider :
             data.type === 'posts' ? Posts :
-            data.type === 'postsList' ? PostsList :
-            data.type === 'postsListEntireByCategories' ? PostsListEntireByCategories :
-                data.type === 'imagesSlider' ? ImagesSlider :
-                    data.type === 'multipleLinkTo' ? MultipleLinkTo :
-                        data.type === 'media' ? MediaWidget :
-                            data.type === 'recentComments' ? RecentComments :
-                                data.type === 'meta' ? MetaWidget :
-                                    data.type === 'metaWithImage' ? MetasCardsRenderer :
-                                        data.type === 'searchBar' ? Searchbar :
-                                            data.type === 'searchButton' ? Searchbar :
-                                                data.type === 'searchbar' ? Searchbar :
-                                                    data.type === 'logo' ? Logo :
-                                                        data.type === 'alphabeticalNumericalRange' ?
-                                                            AlphabeticalNumericalRangeLinksWidget :
-                                                            data.type === 'language' ? LanguagesSwitcher :
-                                                                data.type === 'authentication' ? Authentication :
-                                                                    data.type === 'linkTo' ? LinkTo :
-                                                                        data.type === 'menu' ? MenuWidget :
-                                                                            data.type === 'shoppingCart' ? ShoppingCart :
-                                                                                data.type === 'advertise' ? Advertise :
-                                                                                    data.type === 'form' ? FormWidget :
-                                                                                        data.type === 'dayModeNightMode' ? DayModeNightMode
-                                                                                            : null;
+                data.type === 'postsList' ? PostsList :
+                    data.type === 'postsListEntireByCategories' ? PostsListEntireByCategories :
+                        data.type === 'imagesSlider' ? ImagesSlider :
+                            data.type === 'multipleLinkTo' ? MultipleLinkTo :
+                                data.type === 'media' ? MediaWidget :
+                                    data.type === 'recentComments' ? RecentComments :
+                                        data.type === 'meta' ? MetaWidget :
+                                            data.type === 'metaWithImage' ? MetasCardsRenderer :
+                                                data.type === 'searchBar' ? Searchbar :
+                                                    data.type === 'searchButton' ? Searchbar :
+                                                        data.type === 'searchbar' ? Searchbar :
+                                                            data.type === 'logo' ? Logo :
+                                                                data.type === 'alphabeticalNumericalRange' ?
+                                                                    AlphabeticalNumericalRangeLinksWidget :
+                                                                    data.type === 'language' ? LanguagesSwitcher :
+                                                                        data.type === 'authentication' ? Authentication :
+                                                                            data.type === 'linkTo' ? LinkTo :
+                                                                                data.type === 'menu' ? MenuWidget :
+                                                                                    data.type === 'shoppingCart' ? ShoppingCart :
+                                                                                        data.type === 'advertise' ? Advertise :
+                                                                                            data.type === 'form' ? FormWidget :
+                                                                                                data.type === 'dayModeNightMode' ? DayModeNightMode
+                                                                                                    : null;
     }, [])
 
 
-
     return (
-        <WidgetStyledSection {...idAttribute}
-                             className={'widget ' + (data?.extraClassName ?? '')}
-                             customStyles={data?.customStyles || ''}
-        >
-            {data?.title &&
-            <WidgetHeader translations={data?.translations}
-                          title={data?.title}
-                          redirectLink={data?.redirectLink}
-                          redirectToTitle={data?.redirectToTitle}
-                          footerLink={data?.footerLink}
+        <WidgetStyledSection className={'widget ' + (data?.extraClassName ?? '')}
+                             id={data?.extraId || undefined}
+                             customStyles={data?.customStyles || ''}>
 
-            />
+            {data?.title && <WidgetHeader translations={data?.translations}
+                                          title={data?.title}
+                                          redirectLink={data?.redirectLink}
+                                          redirectToTitle={data?.redirectToTitle}
+                                          footerLink={data?.footerLink}/>
             }
 
             {data?.text && <Text translations={data?.translations} text={data?.text}/>}
-            {WidgetToRender ?
-
-                <WidgetToRender
-                    {...data}
-                    //@ts-ignore
-                    widgetId={widgetId}
-                    isSidebar={isSidebar}
-                    viewType={viewType}
-
-                />
-                : null
+            {!!WidgetToRender && <WidgetToRender
+                {...data}
+                widgetId={widgetId}
+                isSidebar={isSidebar}
+                viewType={viewType}/>
             }
-            {data?.customScript &&
-            <WidgetCustomScript customScript={data?.customScript}
-                                customScriptStrategy={data?.customScriptStrategy}
-            />
+
+            {data?.customScript && <WidgetCustomScript customScript={data?.customScript}
+                                                       customScriptStrategy={data?.customScriptStrategy}/>
             }
-            {(data?.pagination && data?.redirectLink) &&
-                <WidgetPagination baseUrl={data?.redirectLink}
-                                  totalCount={data?.uniqueData?.totalCount}
-                                  count={data?.count}
-                />
+
+            {(!!data?.pagination && !!data?.redirectLink) && <WidgetPagination baseUrl={data?.redirectLink}
+                                                                               totalCount={data?.uniqueData?.totalCount}
+                                                                               count={data?.count}/>
             }
         </WidgetStyledSection>
     );

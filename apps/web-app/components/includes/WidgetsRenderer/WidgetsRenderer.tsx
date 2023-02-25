@@ -1,4 +1,4 @@
-import {useMemo,memo} from "react";
+import {memo} from "react";
 import {useRouter} from "next/router";
 import dynamic from "next/dynamic";
 import {useSelector} from "react-redux";
@@ -32,11 +32,36 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
 
     const isMobile = true
 
-    const sortWidgetsByIndex = useMemo(()=> {
-        return [...widgets]?.sort((a, b) => a?.data?.widgetIndex > b?.data?.widgetIndex ? 1 : -1);
-    },[widgets])
+    // const sortWidgetsByIndex = useMemo(()=> {
+    //     return [...widgets]?.sort((a, b) => a?.data?.widgetIndex > b?.data?.widgetIndex ? 1 : -1);
+    // },[widgets])
+    //
+    // const renderWidgets = sortWidgetsByIndex.map((widget) => {
+    //         if (
+    //             _renderByLanguageCondition(locale as string, widget?.data?.languageToRender) &&
+    //             _renderByDayCondition(widget.data?.specificDayToRender) &&
+    //             _renderByDevice(isMobile, widget?.data?.deviceTypeToRender) &&
+    //             //@ts-ignore
+    //             !_isEditMode(widget.data.editMode, userRole)
+    //         ) {
+    //             const widgetProps = {
+    //
+    //                 widgetId: widget._id,
+    //                 isSidebar: position ? position.includes('Sidebar') : false,
+    //                 viewType: widget.data?.viewType,
+    //                 ...widget
+    //             }
+    //
+    //             return widget.data.noSSR ?
+    //                 <DynamicNoSSR key={widget._id} >
+    //                     <WidgetWrapper{...widgetProps}/>
+    //                 </DynamicNoSSR> :
+    //                 <WidgetWrapper{...widgetProps} key={widget._id}/>
+    //         } else return null
+    //     })
 
-    const renderWidgets = sortWidgetsByIndex.map((widget) => {
+
+    const renderWidgets = [...widgets]?.sort((a, b) => a?.data?.widgetIndex > b?.data?.widgetIndex ? 1 : -1).map((widget) => {
             if (
                 _renderByLanguageCondition(locale as string, widget?.data?.languageToRender) &&
                 _renderByDayCondition(widget.data?.specificDayToRender) &&
