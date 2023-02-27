@@ -1,7 +1,7 @@
 import {FC, useEffect} from "react";
 import {useSelector} from "react-redux";
-import {fetchUserAutoLogin} from "../../../store_toolkit/clientReducers/userReducer";
-import {useAppDispatch} from "../../../store_toolkit/hooks";
+import {fetchUserAutoLogin} from "@store_toolkit/clientReducers/userReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 import {Store} from "typescript-types";
 
 interface UserAutoLoginPropTypes {

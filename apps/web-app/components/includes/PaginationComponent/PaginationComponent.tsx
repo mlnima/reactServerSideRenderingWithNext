@@ -9,7 +9,8 @@ const PaginationComponentStyledDiv = styled.div`
   justify-content: center;
   margin: 10px 0;
   flex-wrap: wrap;
-
+  height: 40px;
+  
   .pagination-item {
     color: var(--main-text-color, #fff);
     background-color:var(--secondary-background-color, #181818) ;

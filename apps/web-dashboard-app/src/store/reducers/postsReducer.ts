@@ -20,7 +20,6 @@ import generatePermaLinkForPosts from "api-requests/src/dashboard/posts/generate
 import exportPosts from "api-requests/src/dashboard/posts/exportPosts";
 import bulkActionOnMetas from "api-requests/src/dashboard/metas/bulkActionOnMetas";
 import scrapYoutubeInfo from "api-requests/src/dashboard/posts/scrapYoutubeInfo";
-import { redirect } from "react-router-dom";
 import postDataScrappers from "api-requests/src/dashboard/posts/postDataScrappers";
 
 
@@ -124,16 +123,17 @@ export const updatePostAction = createAsyncThunk(
 
 export const createNewPostAction = createAsyncThunk(
     'adminPanelPosts/createNewPostAction',
-    async ({data}: { data?: PostRaw }, thunkAPI) => {
+    async ({data,navigate}: { data?: PostRaw,navigate:any }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
         return await createNewPost(data)
-            .then((res: AxiosResponse<any>) => {
-                // thunkAPI.dispatch(setAlert({message: res.data.message || 'Post Saved', type: 'success'}))
-                setTimeout(() => {
-                    res.data?.savedPostData?._id  ? redirect('/dashboard/post?id=' + res.data.savedPostData._id) : null
-                }, 1500)
+            .then((response: AxiosResponse<any>) => {
+                console.log(response.data?.savedPostData?._id)
+                if (response.data?.savedPostData?._id){
+                    navigate(`/dashboard/post?id=${response.data.savedPostData._id}`  )
+                }
             }).catch((err) => {
+                console.log(err)
                 thunkAPI.dispatch(setAlert({message: err.response.data.message, type: 'error', err}))
             }).finally(() => {
                 thunkAPI.dispatch(loading(false))

@@ -1,8 +1,9 @@
 import styled from "styled-components";
-import { useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {createNewPostAction, editPostAction, updatePostAction} from "@store/reducers/postsReducer";
 import {DashboardStore} from "typescript-types";
 import {useAppDispatch} from "@store/hooks";
+import {useNavigate} from "react-router-dom";
 
 const ActionOnPostStyledDiv = styled.div`
   display: flex;
@@ -16,13 +17,13 @@ const ActionOnPostStyledDiv = styled.div`
 `
 
 const ActionOnPost = () => {
-
+    const navigate = useNavigate();
     const dispatch = useAppDispatch()
 
-    const ActionOnPostData = useSelector(({posts,users}: DashboardStore) =>{
-        return{
-            userId:users?.userData?._id,
-            post:posts?.post
+    const ActionOnPostData = useSelector(({posts, users}: DashboardStore) => {
+        return {
+            userId: users?.userData?._id,
+            post: posts?.post
         }
     })
 
@@ -31,20 +32,23 @@ const ActionOnPost = () => {
     }
 
     const onSaveHandler = async () => {
+
         try {
             if (ActionOnPostData?.post?._id) {
-
                 dispatch(updatePostAction(
-                    {...ActionOnPostData?.post,
-                        author: ActionOnPostData?.post?.author?._id  || ActionOnPostData?.userId}))
+                    {
+                        ...ActionOnPostData?.post,
+                        author: ActionOnPostData?.post?.author?._id || ActionOnPostData?.userId
+                    }))
             } else {
                 dispatch(createNewPostAction({
-                    //@ts-ignore
+                        //@ts-ignore
                         data: {
                             ...ActionOnPostData?.post,
-                            status : ActionOnPostData.post?.status || 'draft',
+                            status: ActionOnPostData.post?.status || 'draft',
                             author: ActionOnPostData?.userId
-                        }
+                        },
+                        navigate
                     }
                 ))
             }
@@ -52,8 +56,6 @@ const ActionOnPost = () => {
             // dispatch(setAlert({message: error.stack, type: 'error', active: true}))
         }
     }
-
-
 
 
     return (
@@ -70,7 +72,8 @@ const ActionOnPost = () => {
                 <option value='pending'>Pending</option>
                 <option value='reported'>Reported</option>
             </select>
-            <button className='btn btn-primary' onClick={() => onSaveHandler()}>{ActionOnPostData?.post?._id ? 'update' : 'save'}</button>
+            <button className='btn btn-primary'
+                    onClick={() => onSaveHandler()}>{ActionOnPostData?.post?._id ? 'update' : 'save'}</button>
         </ActionOnPostStyledDiv>
     );
 };

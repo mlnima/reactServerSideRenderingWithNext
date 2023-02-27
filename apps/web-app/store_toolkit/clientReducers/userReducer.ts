@@ -88,10 +88,7 @@ export const fetchLogin = createAsyncThunk(
                 }
             }
 
-
-
         }).catch((err) => {
-            console.log('err')
             thunkAPI.dispatch(setAlert({message: err?.response?.data?.message, type: 'error'}))
             return {
                 userData: {},
@@ -102,6 +99,25 @@ export const fetchLogin = createAsyncThunk(
         })
     }
 )
+
+export const fetchUserAutoLogin = createAsyncThunk(
+    'user/fetchUserAutoLogin',
+    async ({fields}: { fields: string[] }, thunkAPI) => {
+        if (localStorage.wt) {
+            return await getSignedInUserData(fields).then(res => {
+                return res.data?.userData
+            }).catch((error) => {
+                localStorage.removeItem('wt')
+                return {
+                    loggedIn: false
+                }
+            })
+        } else {
+            // thunkAPI.dispatch(setAlert({message: 'You Need To Login', type: 'error'}))
+        }
+    }
+)
+
 
 interface FetchOutgoingCall {
     conversation: string,
@@ -398,22 +414,6 @@ export const fetchMultipleUserDataById = createAsyncThunk(
     }
 )
 
-export const fetchUserAutoLogin = createAsyncThunk(
-    'user/fetchUserAutoLogin',
-    async ({fields}: { fields: string[] }, thunkAPI) => {
-        if (localStorage.wt) {
-            return await getSignedInUserData(fields).then(res => {
-                // thunkAPI.dispatch(setAlert({message: res.data.message, type: 'success'}))
-                return res.data?.userData
-            }).catch((err) => {
-                localStorage.removeItem('wt')
-                // thunkAPI.dispatch(setAlert({message: err.response?.data?.message, type: 'error'}))
-            })
-        } else {
-            // thunkAPI.dispatch(setAlert({message: 'You Need To Login', type: 'error'}))
-        }
-    }
-)
 
 
 // export const fetchUserPostImageUpload = createAsyncThunk(

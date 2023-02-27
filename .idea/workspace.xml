@@ -20,46 +20,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/widgets/getPopulatedWidgets.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/clientWidgetsControllers/getWidgets.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/PostInformation/ScraperOptions.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/initialSettings/cardsSettings/cardsSettings.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/initialSettings/initialSettings.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/custom-util/src/array-utils/sortArrayByPropertyOfObject.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminPostsControllers/postDataScrappers/xHamster.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminPostsControllers/postDataScrappers/xHamster.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/widgets/adminWidgetsRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/widgets/adminWidgetsRouter.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/clientWidgetsControllers/clientGetMultipleWidgetWithData.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/clientWidgetsRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/clientWidgetsRouter.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/Widget/WidgetWrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/Widget/WidgetWrapper.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/Authentication/Authentication.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/Authentication/Authentication.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/DayModeNightMode/DayModeNightMode.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/DayModeNightMode/DayModeNightMode.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayoutAdminDataInitializer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayoutAdminDataInitializer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/PaginationComponent/PaginationComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/PaginationComponent/PaginationComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/SiteSettingsSetter/UserAutoLogin.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/SiteSettingsSetter/UserAutoLogin.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/next-env.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/next-env.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/post/[postType]/[identifier].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/post/[postType]/[identifier].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/widgetsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/widgetsReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Main/Main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Main/Main.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Navigation/Menu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Navigation/Menu.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Navigation/Navigation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Navigation/Topbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Navigation/menuItems.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Navigation/menuItems.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/RootLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/RootLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/DesignSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/common/settings/DesignSection.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/PostInformation/PostInformation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/PostInformation/PostInformation.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/PostInformation/Quality/Quality.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/PostInformation/Quality/Quality.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/TitleDescription/TitleDescription.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/TitleDescription/TitleDescription.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Settings/CustomScripts/CustomScripts.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/initialSettings/CustomScripts.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Settings/General/General.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/initialSettings/General/General.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Settings/General/TitleDescriptionSettingFields.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/initialSettings/General/TitleDescriptionSettingFields.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Settings/Membership/Membership.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/initialSettings/Membership.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Settings/PageSettings/PageSettings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/customPagesSettings/PageSettings.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Settings/Settings.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/routers/MainRouter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/routers/MainRouter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/global/style/GlobalStyles.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/global/style/GlobalStyles.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/client/widgets/getUncachedWidgetsForAdmin.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/client/widgets/getUncachedWidgetsForAdmin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/client/widgets/getUncachedWidgetsForAdmin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/client/widgets/getUncachedWidgetsForAdmin.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/client/widgets/getWidgets.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/client/widgets/getWidgets.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/client/widgets/getWidgets.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/client/widgets/getWidgets.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/api-requests/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/tsconfig.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/userReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/userReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/ActionOnPost/ActionOnPost.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/ActionOnPost/ActionOnPost.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/postsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/postsReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/tsconfig.tsbuildinfo" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,8 +42,8 @@
         <option value="CSS File" />
         <option value="tsconfig.json" />
         <option value="JavaScript File" />
-        <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -204,9 +173,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.build:api-server" />
         <item itemvalue="npm.outdate:packages" />
       </list>
@@ -1562,7 +1531,7 @@
       <workItem from="1677340349381" duration="13294000" />
       <workItem from="1677373202177" duration="593000" />
       <workItem from="1677420129003" duration="1807000" />
-      <workItem from="1677457218064" duration="508000" />
+      <workItem from="1677457218064" duration="5593000" />
     </task>
     <servers />
   </component>
@@ -2039,6 +2008,9 @@
         <option value="$PROJECT_DIR$/packages/custom-util/src/inputsUtils/inputValueSimplifier.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/inputsUtils/inputValueSimplifier.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/inputsUtils/inputValueSimplifier.js" />
+        <option value="$PROJECT_DIR$/packages/custom-util/src/array-utils/sortArrayByPropertyOfObject.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/custom-util/src/array-utils/sortArrayByPropertyOfObject.js" />
+        <option value="$PROJECT_DIR$/packages/custom-util/src/array-utils/sortArrayByPropertyOfObject.d.ts" />
       </list>
     </option>
   </component>
