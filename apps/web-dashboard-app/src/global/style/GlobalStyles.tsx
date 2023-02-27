@@ -5,6 +5,7 @@ import buttons from 'ui/src/buttonsStyle';
 import inputs from 'ui/src/inputsStyles';
 import selects from 'ui/src/selectsStyle';
 import defaultColors from 'ui/src/defaultColors';
+import scrollBars from 'ui/src/scrollBars';
 
 const Styles = createGlobalStyle`
   
@@ -12,6 +13,7 @@ const Styles = createGlobalStyle`
   ${defaultColors}
   ${inputs}
   ${selects}
+  ${scrollBars}
   
   body {
     background-color: var(--main-background-color,#000);

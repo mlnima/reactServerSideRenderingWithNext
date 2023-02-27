@@ -49,7 +49,7 @@ const DayModeNightMode: FC<DayModeNightModePropTypes> = ({uniqueData}) => {
              if (localStorage.theme) {
                  setIsDefaultTheme(localStorage.theme === 'true')
              }
-         },100)
+         },50)
     }, []);
 
     return (

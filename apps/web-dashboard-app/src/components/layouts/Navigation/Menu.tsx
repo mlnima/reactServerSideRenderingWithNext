@@ -7,8 +7,8 @@ import menuItems from './menuItems.json'
 import {setSidebarStatus} from "@store/reducers/globalStateReducer";
 import {convertVariableNameToName} from "custom-util";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faSortDown, faUser} from "@fortawesome/free-solid-svg-icons";
 import {NavLink} from "react-router-dom";
+import {faPlusMinus} from "@fortawesome/free-solid-svg-icons/faPlusMinus";
 
 let StyledDiv = styled.div`
   position: absolute;
@@ -81,13 +81,17 @@ let StyledDiv = styled.div`
       top: 0;
       width: 100%;
       transition: opacity 300ms ease-in;
+      overflow-y: scroll;
+      max-height: 80vh;
+
 
       .SideBarItem-SubItem {
         color: white;
-        padding: 10px 0 10px 20px;
+        //padding: 10px 0 10px 20px;
         display: block;
         transition: 1s height;
-
+        padding: 8px 16px;
+        box-sizing: border-box;
         &:hover {
           transition: .5s;
           font-weight: bold;
@@ -112,6 +116,7 @@ const Menu: FC<PropTypes> = ({}) => {
                 <div className='SideBarItemTitle'>
                     {/*//@ts-ignore*/}
                     <NavLink to={menuItems[item].pathURL}
+                             onMouseOver={() => setHovered(item)}
                              className='SideBarItem'
                              onClick={() => dispatch(setSidebarStatus(false))}
                     >
@@ -124,12 +129,12 @@ const Menu: FC<PropTypes> = ({}) => {
                               onMouseOver={() => setHovered(item)}
                               onClick={() => hovered === item ? setHovered('') : setHovered(item)}
                         >
-                             <FontAwesomeIcon icon={faSortDown} className={'sidebar-items-switch-icon'}/>
+                             <FontAwesomeIcon icon={faPlusMinus} className={'sidebar-items-switch-icon'}/>
                        </span>
                         : null}
 
                 </div>
-                <div className='SideBarItemElementSubItems'>
+                <div className='SideBarItemElementSubItems custom-scroll'>
                     {/*//@ts-ignore*/}
                     {menuItems[item]?.subItems?.map(subItem => {
                         return (

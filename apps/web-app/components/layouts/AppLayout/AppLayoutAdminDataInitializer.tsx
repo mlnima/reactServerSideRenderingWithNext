@@ -14,12 +14,13 @@ const AppLayoutAdminDataInitializer: FC = () => {
 
 
     useEffect(() => {
-        setTimeout(() => {
-            if (userData?.role === 'administrator'){
+        if (userData?.role === 'administrator' && adminMode ){
+            setTimeout(() => {
                 dispatch(getUncachedWidgetsForAdminAction(null))
                 dispatch(getUncachedSettingsForAdmin(null))
-            }
-        }, 2000)
+            }, 10)
+        }
+
     }, [asPath, pathname,adminMode]);
 
 

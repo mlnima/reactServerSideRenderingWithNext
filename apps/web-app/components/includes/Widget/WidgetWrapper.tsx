@@ -88,6 +88,7 @@ const WidgetWrapper: FC<WidgetComponentPropTypes> = ({data, widgetId, isSidebar,
             {data?.text && <Text translations={data?.translations} text={data?.text}/>}
             {!!WidgetToRender && <WidgetToRender
                 {...data}
+                //@ts-ignore
                 widgetId={widgetId}
                 isSidebar={isSidebar}
                 viewType={viewType}/>

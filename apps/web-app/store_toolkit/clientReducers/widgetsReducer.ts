@@ -26,10 +26,9 @@ export const fetchWidgets = createAsyncThunk(
     async (options: { positions: string[], locale: string }, thunkAPI) => {
         try {
             const widgets = await getWidgets(options.positions, options.locale)
-
             return {
                 requestedWidgets: options.positions,
-                widgetInGroups: reduceWidgetsToGroups([...(widgets.data?.widgets || [])])
+                widgetInGroups: widgets.data?.widgets || {}
             }
         } catch (err) {
             console.log(err)
@@ -49,20 +48,22 @@ export const saveWidgetFormData = createAsyncThunk(
 
 export const getUncachedWidgetsForAdminAction = createAsyncThunk(
     'adminPanelWidgets/getUncachedWidgetsForAdminAction',
-    async (data:any, thunkAPI) => {
-        thunkAPI.dispatch(loading(true))
-        return await getUncachedWidgetsForAdmin()
-            .then((res: AxiosResponse<unknown | any>) => {
-                return {
-                    widgetInGroups: reduceWidgetsToGroups([...(res?.data?.widgets  || [])])
-                }
-            }).catch(err => {
+    async (data: any, thunkAPI) => {
+        try {
+            thunkAPI.dispatch(loading(true))
+            const widgets = await getUncachedWidgetsForAdmin()
+            thunkAPI.dispatch(loading(false))
+            return {
+                widgetInGroups: widgets.data?.widgets || {}
+            }
+        } catch (error) {
+
                 thunkAPI.dispatch(setAlert({
                     message: 'Error While Getting Widgets',
                     type: 'error',
-                    err
+                    error
                 }))
-            }).finally(()=>thunkAPI.dispatch(loading(false)))
+        }
     }
 )
 
@@ -77,29 +78,29 @@ export const widgetsSlice = createSlice({
         setRealTimeWidgetsForAdmin: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
-                widgetInGroups:  action?.payload || []
+                widgetInGroups: action?.payload || []
             };
         }
     },
     extraReducers: (builder) => builder
-            .addCase(fetchWidgets.fulfilled, (state, action: PayloadAction<any>) => {
-                return {
-                    ...state,
-                    requestedWidgets: [...new Set([...(state.requestedWidgets || []),...(action.payload?.requestedWidgets || [])])],
-                    widgetInGroups:action.payload?.widgetInGroups
+        .addCase(fetchWidgets.fulfilled, (state, action: PayloadAction<any>) => {
+            return {
+                ...state,
+                requestedWidgets: [...new Set([...(state.requestedWidgets || []), ...(action.payload?.requestedWidgets || [])])],
+                widgetInGroups: action.payload?.widgetInGroups
 
-                }
-            })
-            .addCase(getUncachedWidgetsForAdminAction.fulfilled, (state, action: PayloadAction<any>) => {
-                return {
-                    ...state,
-                    widgetInGroups: action.payload?.widgetInGroups
-                };
-            })
+            }
+        })
+        .addCase(getUncachedWidgetsForAdminAction.fulfilled, (state, action: PayloadAction<any>) => {
+            return {
+                ...state,
+                widgetInGroups: action.payload?.widgetInGroups
+            };
+        })
 
 })
 
-export const { clearRequestedWidgets,setRealTimeWidgetsForAdmin} = widgetsSlice.actions
+export const {clearRequestedWidgets, setRealTimeWidgetsForAdmin} = widgetsSlice.actions
 
 export const widgetsReducer = (state: RootState) => state?.widgets || null
 

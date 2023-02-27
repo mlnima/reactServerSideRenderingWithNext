@@ -8,6 +8,7 @@ let TitleDescriptionStyledDiv = styled.div`
   box-sizing: border-box;
   margin: auto;
   width: 100%;
+  height: 100%;
   .form-control-input {
     box-sizing: border-box;
   }
@@ -53,7 +54,7 @@ const TitleDescription = (props:any) => {
                              'SunEditor'
 
     return (
-        <TitleDescriptionStyledDiv className='title-description'>dsfdsf
+        <TitleDescriptionStyledDiv className='title-description'>
             <input type="text" name='title'
                    value={(activeEditingLanguage === 'default' ? post?.title : post?.translations?.[activeEditingLanguage]?.title) || ''}
                    className='form-control-input' placeholder='Enter The TextInput Here'
@@ -64,7 +65,7 @@ const TitleDescription = (props:any) => {
                          language={'html'}
                          onChangeHandler={props.onDescriptionChangeHandler}
                          width={'100%'}
-                         height={'25vh'}
+                         height={'50vh'}
             />
         </TitleDescriptionStyledDiv>
     );

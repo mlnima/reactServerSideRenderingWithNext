@@ -1,13 +1,13 @@
 import styled from "styled-components";
-import {NavLink, useNavigate} from 'react-router-dom';
+import {NavLink, useLocation, useNavigate} from 'react-router-dom';
 import {useAppDispatch} from "@store/hooks";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faBars} from '@fortawesome/free-solid-svg-icons'
 import {faUser} from '@fortawesome/free-solid-svg-icons'
-import { setSidebarStatus} from "@store/reducers/globalStateReducer";
+import {setSidebarStatus} from "@store/reducers/globalStateReducer";
 import {useSelector} from "react-redux";
 import {DashboardStore} from "typescript-types";
-import React from "react";
+import React, {useEffect} from "react";
 import {faHome} from "@fortawesome/free-solid-svg-icons/faHome";
 import {faEraser} from "@fortawesome/free-solid-svg-icons/faEraser";
 import clearCaches from "api-requests/src/dashboard/clearCaches";
@@ -21,15 +21,17 @@ const Style = styled.div`
   background-color: var(--secondary-background-color, #181818);
   grid-area: admin-panel-topbar;
   opacity: .9;
-  
-  .dashboard-navigation-item{
+
+  .dashboard-navigation-item {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     gap: 10px;
     cursor: pointer;
+
     .navigationLink {
       color: #fff;
+
       svg {
         width: 25px;
         height: 25px;
@@ -38,7 +40,7 @@ const Style = styled.div`
   }
 `
 
-const Navigation = () => {
+const Topbar = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch()
     const sidebar = useSelector(({globalState}: DashboardStore) => globalState?.sidebar)
@@ -53,10 +55,10 @@ const Navigation = () => {
                 <span className={'navigationLink'} onClick={AdminSideBarOpenCloseHandler}>
                     <FontAwesomeIcon icon={faBars}/>
                 </span>
-                <a className={'navigationLink'} href={'/'}  target={'_blank'}>
+                <a className={'navigationLink'} href={'/'} target={'_blank'}>
                     <FontAwesomeIcon icon={faHome}/>
                 </a>
-                <span className={'navigationLink'} onClick={() => clearCaches().then(()=>navigate(0))}>
+                <span className={'navigationLink'} onClick={() => clearCaches().then(() => navigate(0))}>
                     <FontAwesomeIcon icon={faEraser}/>
                 </span>
             </div>
@@ -64,9 +66,9 @@ const Navigation = () => {
 
             <div className={'dashboard-navigation-item'}>
 
-                <NavLink to="/dashboard/design/widgets" className={'navigationLink'}>Widgets</NavLink>
+                <NavLink to="/dashboard/settings/widgets" className={'navigationLink'}>Widgets</NavLink>
                 <NavLink to="/dashboard/assets?assetsType=posts&size=20" className={'navigationLink'}>Posts</NavLink>
-                <NavLink to="/dashboard/design/customColors" className={'navigationLink'}>Colors</NavLink>
+                <NavLink to="/dashboard/settings/customColors" className={'navigationLink'}>Colors</NavLink>
                 <NavLink to="/dashboard/settings/general" className={'navigationLink'}>General Settings</NavLink>
                 <NavLink to="/dashboard/fileManager" className={'navigationLink'}>File Manager</NavLink>
             </div>
@@ -80,4 +82,4 @@ const Navigation = () => {
         </Style>
     )
 };
-export default Navigation
+export default Topbar

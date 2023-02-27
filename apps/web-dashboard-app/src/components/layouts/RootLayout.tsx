@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Navigation from "./Navigation/Navigation";
+import Topbar from "./Navigation/Topbar";
 import Main from "./Main/Main";
 import Menu from "./Navigation/Menu";
 import {useSelector} from "react-redux";
@@ -19,7 +19,7 @@ const RootLayout = () => {
     return (
         <Style>
             {isLoading && <ActiveLoading onClickEvent={()=>dispatch(loading(false))} color={'var(--main-active-color,#f90)'}/>}
-            <Navigation/>
+            <Topbar/>
             <Menu/>
             <Main/>
         </Style>

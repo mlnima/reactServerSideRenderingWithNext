@@ -80,7 +80,7 @@ const postPage = () => {
     if (status === 'published' || adminMode || author?._id === userData?._id) {
         return (
             <>
-                {( adminMode || author?._id === userData?._id) && <PostAdminQuickAccessBar role={userData?.role}/>}
+                {(adminMode && userData?.role === 'administrator') && <PostAdminQuickAccessBar role={userData?.role}/>}
                 <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
 
                     {

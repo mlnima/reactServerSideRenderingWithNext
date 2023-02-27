@@ -13,6 +13,7 @@ import {DashboardStore} from "typescript-types";
 import {FC} from "react";
 import {useAppDispatch} from "@store/hooks";
 import {getPostScrapedDataAction} from "@store/reducers/postsReducer";
+import ScraperOptions from "@components/pages/Post/PostInformation/ScraperOptions";
 
 let StyledDiv = styled.div`
   width: 100%;
@@ -53,31 +54,18 @@ interface PropTypes {
 
 const PostInformation: FC<PropTypes> = (props) => {
     const post = useSelector(({posts}: DashboardStore) => posts.post);
-    const dispatch = useAppDispatch()
 
     return (
         <StyledDiv className='post-information  product-information admin-widget'>
-
+            <TextInput name='source' rendering={true} onChangeHandler={props.onChangeHandler}/>
+            {!!post?.source && <ScraperOptions sourceURL={post?.source}/>}
             <TextInput name='mainThumbnail' rendering={true} onChangeHandler={props.onChangeHandler}/>
             <ImagePreview/>
             <Quality rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
             <TextInput name='videoUrl' rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
             <TextInput name='videoEmbedCode' rendering={post?.postType === 'video'}
                        onChangeHandler={props.onChangeHandler}/>
-            <TextInput name='source' rendering={true} onChangeHandler={props.onChangeHandler}/>
-            {!!post?.source && <div className={'scrapper-buttons'}>
-                <button className={'btn btn-primary'} onClick={()=>dispatch(getPostScrapedDataAction({url:post?.source}))}>
-                    scrap All
-                </button>
-                <button className={'btn btn-primary'}
-                        onClick={()=>{
-                            dispatch(getPostScrapedDataAction({
-                                url:post?.source,fields:['mainThumbnail','videoEmbedCode','quality','duration']
-                            }))}
-                        }>
-                    scrap limited
-                </button>
-            </div>}
+
             <TextInput name='redirectLink' rendering={post?.postType === 'promotion'}
                        onChangeHandler={props.onChangeHandler}/>
             <TextInput name='redirectLink' rendering={!!post?.postType?.match(/^(promotion|out)$/)}

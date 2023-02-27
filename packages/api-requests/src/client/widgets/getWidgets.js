@@ -8,7 +8,7 @@ var getWidgets = function (widgets, locale) { return tslib_1.__awaiter(void 0, v
         switch (_a.label) {
             case 0:
                 widgetsQuery = "?".concat(locale ? "&locale=".concat(locale) : '', "&").concat(widgets.map(function (s) { return 'widget=' + s; }).join('&'));
-                return [4 /*yield*/, AxiosInstance_1["default"].get("/api/v1/widgets/getMultipleWidgetWithData".concat(widgetsQuery))];
+                return [4 /*yield*/, AxiosInstance_1["default"].get("/api/v1/widgets/getWidgets".concat(widgetsQuery))];
             case 1: return [2 /*return*/, _a.sent()];
         }
     });

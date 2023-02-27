@@ -16,29 +16,33 @@ const xHamster = async (url) => {
                 postType: "video",
                 sourceSite: "xhamster",
             }
-            videoData.title = videoPageDom.querySelector('h1').textContent
-            const DescriptionElementData = videoPageDom.querySelector('.ab-info').querySelector('p').textContent
-            DescriptionElementData ? videoData.description=DescriptionElementData :null;
-            // videoData.description = videoPageDom.querySelector('.ab-info').querySelector('p').textContent
-            const splitByDash = url.split('-')
-            const videoId = splitByDash[splitByDash.length - 1]
-            videoData.videoEmbedCode = 'https://xhamster.com/embed/' + videoId
-            const playerImageElement = videoPageDom.querySelector('#player-container')?.querySelector('noscript')?.outerHTML
-            const noScriptTag = new JSDOM(playerImageElement)?.window?.document;
-            videoData.mainThumbnail = noScriptTag?.querySelector('video')?.getAttribute('poster') || ''
-            videoData.source = url
+
+            const initialsScript = videoPageDom?.querySelector('#initials-script');
+            const initialsScriptAsText = initialsScript?.textContent;
+            const videoDataJson =initialsScriptAsText ? initialsScriptAsText.match(/(?<="videoModel":\s*).*?(?=\s*,"videoEntity":)/gs) :null;
+            if (videoDataJson){
+                const parsedJsonData = JSON.parse(videoDataJson)
+                videoData.quality = parsedJsonData?.isUHD ? '4K' : parsedJsonData?.isHD ? 'HD' : 'SD'
+                videoData.duration = parsedJsonData?.duration ? convertSecondsToTimeString(parsedJsonData?.duration) : '00:00'
+                videoData.videoTrailerUrl = parsedJsonData?.trailerURL || ''
+                videoData.mainThumbnail = parsedJsonData?.thumbURL || ''
+                videoData.title =parsedJsonData?.title || videoPageDom?.querySelector('h1')?.textContent
+                videoData.description = parsedJsonData?.description || ''
+                videoData.videoEmbedCode = `https://xhamster.com/embed/${parsedJsonData?.idHashSlug || parsedJsonData?.id || '' }`
+                videoData.source = parsedJsonData?.pageURL || url
+
+            }
+
             const categoriesContainer1 = videoPageDom.querySelector('.collapsable-list')
             const categoriesContainer2 = videoPageDom.querySelector('#video-tags-list-container')?.querySelector('ul')
             const categoriesContainer = (categoriesContainer1 || categoriesContainer2 )?.querySelectorAll('li')
-
-
 
             if (!!categoriesContainer){
                 for await (let categoriesContainerItem of categoriesContainer) {
                     const categoriesItem = categoriesContainerItem.querySelector('a').textContent.trim()
                     const categoriesItemUrl = categoriesContainerItem.querySelector('a').getAttribute('href')
                     if (categoriesItemUrl) {
-                        if (categoriesItemUrl.includes('/pornstars/')) {
+                        if (categoriesItemUrl?.includes('/pornstars/')) {
                             videoData.actors = [
                                 ...videoData.actors,
                                 {
@@ -46,7 +50,7 @@ const xHamster = async (url) => {
                                     type: "actors"
                                 }
                             ]
-                        } else if (categoriesItemUrl.includes('/categories/')) {
+                        } else if (categoriesItemUrl?.includes('/categories/')) {
                             videoData.categories = [
                                 ...videoData.categories,
                                 {
@@ -54,7 +58,7 @@ const xHamster = async (url) => {
                                     type: "categories"
                                 }
                             ]
-                        } else if (categoriesItemUrl.includes('/tags/')) {
+                        } else if (categoriesItemUrl?.includes('/tags/')) {
                             videoData.tags = [
                                 ...videoData.tags,
                                 {
@@ -67,22 +71,6 @@ const xHamster = async (url) => {
 
                 }
             }
-
-
-            //scrap duration from js script by regex
-            const durationScript = videoPageDom?.querySelector('#initials-script')?.textContent;
-            const durationsByRegex = durationScript ? durationScript.match(/(?<="duration":\s*).*?(?=\s*,)/gs) :null;
-            let scrapedDuration = 0
-
-            if (!!durationsByRegex && Array.isArray(durationsByRegex)){
-                scrapedDuration = durationsByRegex[0]
-            }else if (!!durationsByRegex && typeof durationsByRegex ==='string'){
-                scrapedDuration = durationsByRegex
-            }
-            if (scrapedDuration){
-                videoData.duration = convertSecondsToTimeString(scrapedDuration)
-            }
-
 
             return videoData
         })

@@ -12,7 +12,10 @@ name?:any
 const DesignSection: FC<PropTypes> = ({name}) => {
 
     return (
-        <StyleEditor name={name} title={convertVariableNameToName(name)}/>
+        <div>
+            <StyleEditor name={name} title={convertVariableNameToName(name)}/>
+        </div>
+
     )
 };
 export default DesignSection;

@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import styled from "styled-components";
-import MainRouter from "../../routers/MainRouter";
+import MainRouter from "../../../routers/MainRouter";
 
 const Style = styled.main`
   grid-area: main;
