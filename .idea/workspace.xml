@@ -20,15 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/packages/custom-util/src/array-utils/sortArrayByPropertyOfObject.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/PaginationComponent/PaginationComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/PaginationComponent/PaginationComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/SiteSettingsSetter/UserAutoLogin.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/SiteSettingsSetter/UserAutoLogin.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/workers/setMetaThumbnailsAndCount/worker.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/workers/setMetaThumbnailsAndCount/worker.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/next-env.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/next-env.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/userReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/userReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/ActionOnPost/ActionOnPost.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/ActionOnPost/ActionOnPost.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/postsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/postsReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/custom-util/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/tsconfig.tsbuildinfo" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,9 +167,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
-        <item itemvalue="npm.build" />
         <item itemvalue="npm.build:api-server" />
         <item itemvalue="npm.outdate:packages" />
       </list>
@@ -1531,7 +1525,7 @@
       <workItem from="1677340349381" duration="13294000" />
       <workItem from="1677373202177" duration="593000" />
       <workItem from="1677420129003" duration="1807000" />
-      <workItem from="1677457218064" duration="5593000" />
+      <workItem from="1677457218064" duration="9673000" />
     </task>
     <servers />
   </component>

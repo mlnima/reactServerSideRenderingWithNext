@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import {connectToDatabase} from 'custom-server-util';
 import {parentPort, workerData} from 'worker_threads';
-import {metaSchema,postSchema} from 'models';
+import {metaSchema, postSchema} from 'models';
 import mongoose from 'mongoose';
 
 dotenv.config();
@@ -64,7 +64,9 @@ const worker = async (workerData) => {
                     }
 
                     if (!meta?.imageUrlLock) {
-                        const skipDocuments = randomNumberGenerator(1, 10)
+                        //const skipDocuments = metaCount >= 1 && metaCount < 10 ? metaCount - 1 : randomNumberGenerator(1, 20)
+                        //const skipDocuments = metaCount - 1
+                        const skipDocuments = metaCount <= 1 ? 0 : randomNumberGenerator(1, metaCount) - 1
                         const randomPost = await postSchema.findOne({$and: [{[meta?.type]: meta?._id}, {status: 'published'}, excludeQuery]}).sort({updatedAt: -1}).skip(skipDocuments).exec()
                         if (randomPost?.mainThumbnail) {
                             //@ts-ignore
@@ -77,7 +79,9 @@ const worker = async (workerData) => {
                         {$set: {...updateData}},
                         {timestamps: false}
                     ).exec().finally(() => {
-                        console.log(`${meta?.type} ${meta?.name} set to ${JSON.stringify(updateData, null, '\t')}`)
+                        // console.log(`${meta?.type} ${meta?.name} set to ${JSON.stringify(updateData, null, '\t')}`)
+                        //@ts-ignore
+                        console.log(`${meta?.type} ${meta?.name} has ${metaCount} and image set to ${updateData?.imageUrl}`)
                     })
                 } else {
                     await metaSchema.findByIdAndUpdate(
