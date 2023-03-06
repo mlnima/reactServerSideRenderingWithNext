@@ -1,5 +1,6 @@
 import React from "react";
 import {Routes, Route} from 'react-router-dom';
+import InitialSettings from "@components/pages/settings/initialSettings/initialSettings";
 import Dashboard from "../components/pages/Dashboard";
 import NotFound from "../components/pages/NotFound";
 import Login from "../components/pages/Login";
@@ -9,8 +10,8 @@ import FileManager from "@components/pages/FileManager/FileManager";
 import DesignSection from "@components/common/settings/DesignSection";
 import Terminal from "@components/pages/Tools/Terminal/Terminal";
 import Tools from "@components/pages/Tools/Tools";
-import CustomScript from "@components/pages/initialSettings/CustomScripts";
-import Membership from "@components/pages/initialSettings/Membership";
+import CustomScript from "@components/pages/settings/initialSettings/CustomScripts";
+import Membership from "@components/pages/settings/initialSettings/Membership";
 import PostsExporter from "@components/pages/Backup/PostsExporter/PostsExporter";
 import Content from "@components/pages/Importer/Content";
 import Youtube from "@components/pages/Importer/Youtube";
@@ -20,11 +21,11 @@ import Page from "@components/pages/Page/Page";
 import Meta from "@components/pages/Meta/Meta";
 import Form from "@components/pages/Form/Form";
 import Translations from "@components/pages/Translations/Translations";
-import General from "@components/pages/initialSettings/General/General";
+import General from "@components/pages/settings/initialSettings/General/General";
 import Widgets from "@components/pages/Design/Widgets/Widgets";
 import Chatroom from "@components/pages/Chatroom/Chatroom";
 import Backup from "@components/pages/Backup/Backup";
-import PageSettings from "@components/pages/customPagesSettings/PageSettings";
+import DefaultPageSettings from "@components/pages/settings/defaultPagesSetttings/DefaultPageSettings";
 
 const MainRouter = () => {
     return (
@@ -40,7 +41,10 @@ const MainRouter = () => {
             <Route path="/dashboard/form/:id" element={<Form/>}/>
             <Route path="/dashboard/fileManager" element={<FileManager/>}/>
 
+            <Route path="/dashboard/settings/initialSettings" element={<InitialSettings/>}/>
             <Route path="/dashboard/settings/widgets" element={<Widgets/>}/>
+
+
             <Route path="/dashboard/settings/topBar" element={<DesignSection name={'topBarStyle'}/>}/>
             <Route path="/dashboard/settings/header" element={<DesignSection name={'headerStyle'}/>}/>
             <Route path="/dashboard/settings/navigation" element={<DesignSection name={'navigationStyle'}/>}/>
@@ -57,7 +61,7 @@ const MainRouter = () => {
             <Route path="/dashboard/settings/customStyles" element={<DesignSection name={'customStyles'}/>}/>
             <Route path="/dashboard/settings/customColors" element={<DesignSection name={'customColors'}/>}/>
             <Route path="/dashboard/settings/membershipSettings" element={<Membership/>}/>
-            <Route path="/dashboard/settings/pages/:pageName" element={<PageSettings/>}/>
+            <Route path="/dashboard/settings/defaultPages" element={<DefaultPageSettings/>}/>
 
             <Route path="/dashboard/settings/general" element={<General/>}/>
             <Route path="/dashboard/settings/customScript" element={<CustomScript/>}/>

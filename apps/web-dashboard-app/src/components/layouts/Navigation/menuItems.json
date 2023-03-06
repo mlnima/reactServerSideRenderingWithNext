@@ -6,45 +6,31 @@
   "InitialSettings": {
     "pathURL": "/dashboard/settings",
     "subItems": [
-      {"name": "customScript", "url": "/dashboard/settings/customScript"},
-      {"name": "general", "url": "/dashboard/settings/general"},
-      {"name": "membership", "url": "/dashboard/settings/membershipSettings"},
-      {"name": "eCommerce", "url": "/dashboard/settings/eCommerceSettings"},
-      {"name": "topBar", "url": "/dashboard/settings/topBar"},
-      {"name": "header", "url": "/dashboard/settings/header"},
-      {"name": "navigation", "url": "/dashboard/settings/navigation"},
+      {"name": "initialSettings", "url": "/dashboard/settings/initialSettings"},
       {"name": "widgets", "url": "/dashboard/settings/widgets"},
-      {"name": "postPage", "url": "/dashboard/settings/postPage"},
-      {"name": "postsPage", "url": "/dashboard/settings/postsPage"},
-      {"name": "actorPage", "url": "/dashboard/settings/actorPage"},
-      {"name": "actorsPage", "url": "/dashboard/settings/actorsPage"},
-      {"name": "categoryPage", "url": "/dashboard/settings/categoryPage"},
-      {"name": "categoriesPage", "url": "/dashboard/settings/categoriesPage"},
-      {"name": "tagPage", "url": "/dashboard/settings/tagPage"},
-      {"name": "tagsPage", "url": "/dashboard/settings/tagsPage"},
-      {"name": "metasPage", "url": "/dashboard/settings/metasPage"},
-      {"name": "cards", "url": "/dashboard/settings/cards"},
-      {"name": "footer", "url": "/dashboard/settings/footer"},
       {"name": "customStyles", "url": "/dashboard/settings/customStyles"},
       {"name": "customColors", "url": "/dashboard/settings/customColors"}
     ]
   },
-  "DefaultPagesSettings": {
+  "defaultPagesSettings": {
     "pathURL": "/dashboard/assets?assetsType=pages&size=20",
     "subItems": [
-      {"name": "home", "url": "/dashboard/settings/pages/home"},
-      {"name": "categories", "url": "/dashboard/settings/pages/categories"},
-      {"name": "tags", "url": "/dashboard/settings/pages/tags"},
-      {"name": "actors", "url": "/dashboard/settings/pages/actors"},
-      {"name": "category", "url": "/dashboard/settings/pages/category"},
-      {"name": "tag", "url": "/dashboard/settings/pages/tag"},
-      {"name": "actor", "url": "/dashboard/settings/pages/actor"},
-      {"name": "posts", "url": "/dashboard/settings/pages/posts"},
-      {"name": "post", "url": "/dashboard/settings/pages/post"},
-      {"name": "chatroom", "url": "/dashboard/settings/pages/chatroom"},
-      {"name": "messenger", "url": "/dashboard/settings/pages/messenger"},
-      {"name": "profile", "url": "/dashboard/settings/pages/profile"},
-      {"name": "user", "url": "/dashboard/settings/pages/user"}
+      {"name": "home", "url": "/dashboard/settings/defaultPages?pageName=homePageSettings"},
+      {"name": "categories", "url": "/dashboard/settings/defaultPages?pageName=categoriesPageSettings"},
+      {"name": "tags", "url": "/dashboard/settings/defaultPages?pageName=tagsPageSettings"},
+      {"name": "actors", "url": "/dashboard/settings/defaultPages?pageName=actorsPageSettings"},
+      {"name": "category", "url": "/dashboard/settings/defaultPages?pageName=categoryPageSettings"},
+      {"name": "tag", "url": "/dashboard/settings/defaultPages?pageName=tagPageSettings"},
+      {"name": "actor", "url": "/dashboard/settings/defaultPages?pageName=actorPageSettings"},
+      {"name": "posts", "url": "/dashboard/settings/defaultPages?pageName=postsPageSettings"},
+      {"name": "post", "url": "/dashboard/settings/defaultPages?pageName=postPageSettings"},
+
+      {"name": "messenger", "url": "/dashboard/settings/defaultPages?pageName=messengerPageSettings"},
+      {"name": "profile", "url": "/dashboard/settings/defaultPages?pageName=profilePageSettings"},
+      {"name": "user", "url": "/dashboard/settings/defaultPages?pageName=userPageSettings"},
+      {"name": "user", "url": "/dashboard/settings/defaultPages?pageName=usersPageSettings"},
+
+      {"name": "chatroom", "url": "/dashboard/settings/defaultPages?pageName=chatroomPageSettings"}
     ]
   },
   "customPagesSettings": {

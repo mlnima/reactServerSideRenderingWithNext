@@ -27,6 +27,4 @@ export interface DesignSettings {
     customColors: string,
     homePageSidebar: boolean,
     homePageStyle: string,
-    postElementImageLoader: string,
-    postElementImageLoaderType: string,
 }

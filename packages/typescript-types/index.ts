@@ -4,7 +4,9 @@ import {Chatroom} from "./src/Chatroom/Chatroom";
 import {ChatroomMessage} from "./src/Chatroom/ChatroomMessage";
 import {DesignSettings} from "./src/settings/DesignSettings";
 import {IdentitySettings} from "./src/settings/IdentitySettings";
+import {InitialSettings} from "./src/settings/InitialSettings";
 import {MembershipSettings} from "./src/settings/MembershipSettings";
+import {PageSettings} from "./src/settings/PageSettings";
 import {AdminPanelComments} from "./src/storeTypes/AdminPanelComments";
 import {AdminPanelFileManager} from "./src/storeTypes/AdminPanelFileManager";
 import {AdminPanelForms} from "./src/storeTypes/AdminPanelForms";
@@ -45,12 +47,14 @@ export type {
     Comment,
     WidgetData,
     WidgetSettingsPropTypes,
+    PageSettings,
     AxiosErrorTypes,
     PageTypes,
     AxiosResponseTypes,
     Widget,
     Chatroom,
     ChatroomMessage,
+    InitialSettings,
     DesignSettings,
     IdentitySettings,
     MembershipSettings,

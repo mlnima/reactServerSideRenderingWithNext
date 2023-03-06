@@ -37,6 +37,7 @@ const Page = (props: any) => {
 
     const dispatch = useAppDispatch()
     const [search, setSearch] = useSearchParams();
+
     const [openStyleEditor, setOpenStyleEditor] = useState(false);
     const pageId = useMemo(()=>search.get('id'),[search])
 

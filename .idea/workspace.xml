@@ -20,9 +20,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/settings/initialSettings/HeadDataSettings.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/settings/initialSettings/MembershipSettings.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/settings/initialSettings/layoutSettings.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/settings/getSettings.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/typescript-types/src/settings/InitialSettings.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/typescript-types/src/settings/PageSettings.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api-server/workers/setMetaThumbnailsAndCount/worker.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/workers/setMetaThumbnailsAndCount/worker.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/next-env.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/next-env.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminSettingsControllers/adminUpdateSettings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/adminSettingsControllers/adminUpdateSettings.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Navigation/menuItems.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Navigation/menuItems.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Page/Page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Page/Page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/customPagesSettings/PageSettings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/settings/defaultPagesSetttings/DefaultPageSettings.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/initialSettings/CustomScripts.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/settings/initialSettings/CustomScripts.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/initialSettings/General/General.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/settings/initialSettings/General/General.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/initialSettings/General/TitleDescriptionSettingFields.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/settings/initialSettings/General/TitleDescriptionSettingFields.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/initialSettings/Membership.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/settings/initialSettings/Membership.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/initialSettings/cardsSettings/cardsSettings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/settings/initialSettings/PostCardsSettings.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/initialSettings/initialSettings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/settings/initialSettings/initialSettings.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/routers/MainRouter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/routers/MainRouter.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/settingsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/settingsReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/variables/_getMultipleSettingsQueryGenerator.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/dashboard/settings/getMultipleSetting.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/settings/getSettings.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/dashboard/settings/getMultipleSetting.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/settings/getSettings.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/dashboard/settings/getMultipleSetting.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/settings/getSettings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/dashboard/settings/getMultipleSetting.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/tsconfig.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/tsconfig.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/tsconfig.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/typescript-types/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/typescript-types/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/typescript-types/src/dashboardStoreTypes/SettingsState.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/typescript-types/src/dashboardStoreTypes/SettingsState.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/typescript-types/src/settings/DesignSettings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/typescript-types/src/settings/DesignSettings.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/typescript-types/src/storeTypes/SettingsState.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/typescript-types/src/storeTypes/SettingsState.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,11 +132,11 @@
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\typescript-types\src\MessengerStoreTypes" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-dashboard-app\src\components\pages\settings\defaultPagesSetttings" />
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-dashboard-app\src\components\pages\settings\initialSettings" />
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-dashboard-app\src\components\pages\settings" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-dashboard-app\src\components\pages\customPagesSettings" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-dashboard-app\src\components\pages\initialSettings" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-dashboard-app\src\components\common\settings" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-dashboard-app\src" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\trash" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -167,9 +197,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
-        <item itemvalue="npm.start" />
         <item itemvalue="npm.build:api-server" />
         <item itemvalue="npm.outdate:packages" />
       </list>
@@ -1525,7 +1555,21 @@
       <workItem from="1677340349381" duration="13294000" />
       <workItem from="1677373202177" duration="593000" />
       <workItem from="1677420129003" duration="1807000" />
-      <workItem from="1677457218064" duration="9673000" />
+      <workItem from="1677457218064" duration="10333000" />
+      <workItem from="1677505409394" duration="194000" />
+      <workItem from="1677533218806" duration="45000" />
+      <workItem from="1677566198470" duration="1059000" />
+      <workItem from="1677610086074" duration="3242000" />
+      <workItem from="1677701632863" duration="6843000" />
+      <workItem from="1677745043660" duration="5437000" />
+      <workItem from="1677785107856" duration="12317000" />
+      <workItem from="1677831790904" duration="4786000" />
+      <workItem from="1677854908661" duration="12787000" />
+      <workItem from="1677925608152" duration="3921000" />
+      <workItem from="1677966447846" duration="2074000" />
+      <workItem from="1678039272539" duration="5956000" />
+      <workItem from="1678100072627" duration="145000" />
+      <workItem from="1678101504161" duration="4625000" />
     </task>
     <servers />
   </component>
@@ -1993,9 +2037,6 @@
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/settings/updateSetting.js" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/settings/updateSetting.d.ts" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/settings/updateSetting.d.ts.map" />
-        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/settings/getMultipleSetting.d.ts.map" />
-        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/settings/getMultipleSetting.js" />
-        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/settings/getMultipleSetting.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/date-utils/convertSecondsToTimeString.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/date-utils/convertSecondsToTimeString.js" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/date-utils/convertSecondsToTimeString.d.ts" />
@@ -2274,7 +2315,7 @@
           <option name="timeStamp" value="163" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/initialSettings/General/TitleDescriptionSettingFields.tsx</url>
+          <url>file://$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/settings/initialSettings/General/TitleDescriptionSettingFields.tsx</url>
           <option name="timeStamp" value="164" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -2294,7 +2335,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/apps/web-dashboard-app/src/routers/MainRouter.tsx</url>
-          <line>39</line>
+          <line>40</line>
           <option name="timeStamp" value="170" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -2346,6 +2387,11 @@
           <url>file://$PROJECT_DIR$/apps/web-app/components/includes/LoginRegisterPopup/LoginRegisterPopupForms.tsx</url>
           <line>16</line>
           <option name="timeStamp" value="181" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/settings/defaultPagesSetttings/DefaultPageSettings.tsx</url>
+          <line>79</line>
+          <option name="timeStamp" value="182" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -2,10 +2,13 @@ import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
 import {loading, setAlert} from "./globalStateReducer";
 import {AxiosResponse} from "axios";
-import getMultipleSetting from "api-requests/src/dashboard/settings/getMultipleSetting";
+import getSettings from "api-requests/src/dashboard/settings/getSettings";
 import updateSetting from "api-requests/src/dashboard/settings/updateSetting";
+import DefaultPageSettings from "@components/pages/settings/defaultPagesSetttings/DefaultPageSettings";
 
 interface AdminPanelSettingState {
+    initialSettings: {},
+    pageSettings:{},
     design: {},
     identity: {},
     membershipSettings:{}
@@ -14,6 +17,8 @@ interface AdminPanelSettingState {
 }
 
 const initialState:AdminPanelSettingState = {
+    initialSettings: {},
+    pageSettings:{},
     design: {},
     identity: {},
     membershipSettings:{},
@@ -27,10 +32,10 @@ export const getSettingsAction = createAsyncThunk(
     async (data:any, thunkAPI) => {
         try {
             thunkAPI.dispatch(loading(true))
-            const settingsRequestData = await getMultipleSetting()
+            const settingsRequestData = await getSettings(['initialSettings','identity','design','membershipSettings'])
             thunkAPI.dispatch(loading(false))
-
             return {
+                initialSettings: settingsRequestData?.data?.settings?.initialSettings?.data || {},
                 design: settingsRequestData?.data?.settings?.design?.data || {},
                 identity: settingsRequestData?.data?.settings?.identity?.data|| {},
                 membershipSettings: settingsRequestData?.data?.settings?.membershipSettings?.data|| {},
@@ -39,7 +44,6 @@ export const getSettingsAction = createAsyncThunk(
         } catch (err) {
             console.log(err)
         }
-
     }
 )
 
@@ -50,11 +54,9 @@ export const updateSettingAction = createAsyncThunk(
 
         await updateSetting( type,data)
             .then((res: AxiosResponse<any>) => {
-
             thunkAPI.dispatch(setAlert({message: res.data.message || 'updated', type: 'success'}))
         }).catch(error => {
             thunkAPI.dispatch(setAlert({message: error.response.data.message || 'Something Went Wrong', type: 'error', err:error}))
-
         }).finally(()=> thunkAPI.dispatch(loading(false)))
     }
 )
@@ -93,6 +95,18 @@ export const settingsSlice = createSlice({
                 }
             };
         },
+        editInitialSettings:(state, action: PayloadAction<any>) => {
+            return {
+                ...state,
+                initialSettings: {
+                    ...state.initialSettings,
+                    ...action.payload
+                }
+            };
+        },
+        editInitialSettingsJson:(state, action: PayloadAction<any>) => {
+           state.initialSettings = action.payload
+        },
 
 
     },
@@ -106,7 +120,7 @@ export const settingsSlice = createSlice({
     }
 })
 
-export const {editIdentityAction,editDesign,editMembershipSettingsAction} = settingsSlice.actions
+export const {editIdentityAction,editDesign,editMembershipSettingsAction,editInitialSettings,editInitialSettingsJson} = settingsSlice.actions
 
 export const settingsReducer = (state: RootState) => state?.settings || null;
 
