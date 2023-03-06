@@ -4,10 +4,9 @@ import inputValueSimplifier from "custom-util/src/inputsUtils/inputValueSimplifi
 import languagesOptions from "@variables/languagesOptions";
 import {updateSettingAction} from "@store/reducers/settingsReducer";
 import MonacoEditor from "@components/common/MonacoEditor";
-import {useSearchParams} from "react-router-dom";
+import { useSearchParams} from "react-router-dom";
 import {useAppDispatch} from "@store/hooks";
 import getSettings from "api-requests/src/dashboard/settings/getSettings";
-import {isEmptyObject} from "custom-util";
 
 const Style = styled.form`
 
@@ -27,7 +26,7 @@ const Style = styled.form`
     flex-wrap: wrap;
 
     .editor-wrapper {
-      width:100%;
+      width: 100%;
     }
   }
 
@@ -37,7 +36,7 @@ const Style = styled.form`
 
 
       .editor-wrapper {
-        width:50%;
+        width: 50%;
       }
     }
   }
@@ -52,7 +51,7 @@ const DefaultPageSettings: FC<PropTypes> = ({}) => {
     const pageName = useMemo(() => search.get('pageName'), [search])
     const [openStyleEditor, setOpenStyleEditor] = useState(false);
     const [language, setLanguage] = useState('default')
-    const [fieldsData, setFieldsData] = useState({
+    const defaultPageData = {
         pageName: '',
         title: '',
         description: '',
@@ -62,17 +61,18 @@ const DefaultPageSettings: FC<PropTypes> = ({}) => {
         customScriptsAsString: '',
         customStyles: '',
         translations: {}
-    })
+    }
+    const [fieldsData, setFieldsData] = useState(defaultPageData)
+
+
+
 
     useEffect(() => {
-
         if (!!pageName) {
             getSettings([pageName]).then(response => {
-                const settingData = response?.data?.settings?.[pageName]?.data
-                if (!isEmptyObject(settingData)) {
-                    setFieldsData({...settingData})
-                }
-                console.log(settingData)
+                const settingData = response?.data?.settings?.[pageName]?.data || defaultPageData
+                setFieldsData(settingData||{})
+
             })
         }
     }, [search, pageName]);
@@ -91,7 +91,7 @@ const DefaultPageSettings: FC<PropTypes> = ({}) => {
             setFieldsData({
                 ...fieldsData,
                 translations: {
-                    ...fieldsData?.translations,
+                    ...(fieldsData?.translations || {}),
                     [language]: {
                         //@ts-ignore
                         ...(fieldsData?.translations?.[language] || {}),
@@ -128,7 +128,7 @@ const DefaultPageSettings: FC<PropTypes> = ({}) => {
                 <input className={'form-control-input'}
                        type="text" onChange={(e) => onChangeHandlerWithTranslation(e)}
                     //@ts-ignore
-                       value={language === 'default' ? fieldsData.title : fieldsData?.translations?.[language]?.title || ''}
+                       value={language === 'default' ? fieldsData.title : fieldsData?.translations?.[language]?.title || {} }
                        name={'title'}
                        placeholder={'Title'}/>
             </div>
