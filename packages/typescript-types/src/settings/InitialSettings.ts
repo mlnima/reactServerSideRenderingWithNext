@@ -45,5 +45,8 @@ export interface InitialSettings{
         sidebarWidth:number,
         customStyles:string,
         customColors:string,
+    },
+    eCommerceSettings:{
+
     }
 }

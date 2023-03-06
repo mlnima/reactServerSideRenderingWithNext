@@ -1,6 +1,7 @@
-import React, {FC} from "react";
+import React, {FC, useState} from "react";
 import styled from "styled-components";
 import { InitialSettings} from "typescript-types";
+import MonacoEditor from "@components/common/MonacoEditor";
 
 const Style = styled.div``;
 
@@ -12,7 +13,7 @@ interface PropTypes {
 }
 
 const HeadDataSettings: FC<PropTypes> = ({onChangeHandler,onChangeHandlerWithTranslation,initialSettingsData,language}) => {
-
+    const [isHeadTagsEditorOpen,setIsHeadTagsEditorOpen] = useState(false)
     return (
         <Style className={'setting-section'}>
             <h2>Head Data Settings:</h2>
@@ -56,12 +57,28 @@ const HeadDataSettings: FC<PropTypes> = ({onChangeHandler,onChangeHandlerWithTra
                    name={'themeColor'}
                    value={initialSettingsData?.headDataSettings?.themeColor}
                    className={'form-control-input'}/>
-
-            <p>Custom Head Tags:</p>
+            <p>Fav Icon Url:</p>
             <input onChange={e => onChangeHandler(e, 'headDataSettings')}
-                   name={'customHeadTags'}
-                   value={initialSettingsData?.headDataSettings?.customHeadTags}
+                   name={'favIconUrl'}
+                   value={initialSettingsData?.headDataSettings?.favIconUrl}
                    className={'form-control-input'}/>
+            <p>PWA:</p>
+            <p>Custom Head Tags:</p>
+            <button className={'btn btn-primary'} onClick={()=>setIsHeadTagsEditorOpen(!isHeadTagsEditorOpen)}>
+                Head Tags Editor
+            </button>
+            {isHeadTagsEditorOpen &&
+                <MonacoEditor
+                    language={'html'}
+                    name={'customHeadTags'}
+                    defaultValue={ initialSettingsData?.headDataSettings?.customHeadTags || ''}
+                    value={initialSettingsData?.headDataSettings?.customHeadTags}
+                    className={'initialSettings-editor'}
+                    //@ts-ignore
+                    onChange={(e: string) => onChangeHandler(e, 'headDataSettings')}
+                    height={'80vh'}
+                />
+            }
             <p>Fav Icon Url:</p>
             <input onChange={e => onChangeHandler(e, 'headDataSettings')}
                    name={'favIconUrl'}

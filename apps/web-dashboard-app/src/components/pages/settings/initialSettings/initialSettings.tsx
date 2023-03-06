@@ -7,7 +7,7 @@ import HeadDataSettings from "@components/pages/settings/initialSettings/HeadDat
 import MembershipSettings from "@components/pages/settings/initialSettings/MembershipSettings";
 import LayoutSettings from "@components/pages/settings/initialSettings/layoutSettings";
 import {useAppDispatch} from "@store/hooks";
-import {editInitialSettings, editInitialSettingsJson, updateSettingAction} from "@store/reducers/settingsReducer";
+import {editInitialSettings, updateSettingAction} from "@store/reducers/settingsReducer";
 import inputValueSimplifier from "custom-util/src/inputsUtils/inputValueSimplifier";
 import languagesOptions from "@variables/languagesOptions";
 
@@ -115,14 +115,12 @@ const initialSettings: FC<PropTypes> = ({}) => {
     return (
         <Style>
             <h1>Initial Settings</h1>
-
             <select name='activeEditingLanguage' className={'custom-select active-editing-language'}
                     onChange={e => setLanguage(e.target.value)}>
                 <option value='default'>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?? 'default'}</option>
                 {languagesOptions}
             </select>
             <div className={'setting-sections'}>
-
                 <HeadDataSettings onChangeHandler={onChangeHandler}
                                   initialSettingsData={initialSettingsData}
                                   language={language}
@@ -132,12 +130,9 @@ const initialSettings: FC<PropTypes> = ({}) => {
                 <PostCardsSettings onChangeHandler={onChangeHandler} onJsonChangeHandler={onJsonChangeHandler} initialSettingsData={initialSettingsData}/>
                 <MembershipSettings onChangeHandler={onChangeHandler} initialSettingsData={initialSettingsData}/>
             </div>
-
-
             <button className={'btn btn-primary'} onClick={onSaveHandler}>
                 Save
             </button>
-
         </Style>
     )
 };
