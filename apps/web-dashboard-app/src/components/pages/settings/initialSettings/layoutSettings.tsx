@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, {FC, useState} from "react";
 import styled from "styled-components";
 import {InitialSettings} from "typescript-types";
 import MonacoEditor from "@components/common/MonacoEditor";
@@ -11,6 +11,7 @@ interface PropTypes {
 }
 
 const LayoutSettings: FC<PropTypes> = ({onChangeHandler, initialSettingsData}) => {
+    const [isStyleEditorOpen,setIsStyleEditorOpen] = useState(false)
     return (
         <Style  className={'setting-section'}>
             <h2>Layout Settings:</h2>
@@ -47,16 +48,22 @@ const LayoutSettings: FC<PropTypes> = ({onChangeHandler, initialSettingsData}) =
                        className={'form-control-input'}/>
             </div>
             <p>Custom Style:</p>
-            <MonacoEditor
-                language={'scss'}
-                name={'customStyles'}
-                defaultValue={initialSettingsData?.layoutSettings?.customStyles || ''}
-                value={initialSettingsData?.layoutSettings?.customStyles}
-                className={'initialSettings-editor'}
-                //@ts-ignore
-                onChange={(e: string) => onChangeHandler(e, 'layoutSettings')}
-                height={'80vh'}
-            />
+            <button className={'btn btn-primary'} onClick={()=>setIsStyleEditorOpen(!isStyleEditorOpen)}>
+                Styles Editor
+            </button>
+            {isStyleEditorOpen &&
+                <MonacoEditor
+                    language={'scss'}
+                    name={'customStyles'}
+                    defaultValue={initialSettingsData?.layoutSettings?.customStyles || ''}
+                    value={initialSettingsData?.layoutSettings?.customStyles}
+                    className={'initialSettings-editor'}
+                    //@ts-ignore
+                    onChange={(e: string) => onChangeHandler(e, 'layoutSettings')}
+                    height={'80vh'}
+                />
+            }
+
         </Style>
     )
 };

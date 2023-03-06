@@ -16,11 +16,7 @@ const HeadDataSettings: FC<PropTypes> = ({onChangeHandler,onChangeHandlerWithTra
     return (
         <Style className={'setting-section'}>
             <h2>Head Data Settings:</h2>
-            <p>Fav Icon Url:</p>
-            <input onChange={e => onChangeHandler(e, 'headDataSettings')}
-                   name={'favIconUrl'}
-                   value={initialSettingsData?.headDataSettings?.favIconUrl}
-                   className={'form-control-input'}/>
+
 
             <p>Google Analytics Id:</p>
             <input onChange={e => onChangeHandler(e, 'headDataSettings')}
@@ -66,7 +62,27 @@ const HeadDataSettings: FC<PropTypes> = ({onChangeHandler,onChangeHandlerWithTra
                    name={'customHeadTags'}
                    value={initialSettingsData?.headDataSettings?.customHeadTags}
                    className={'form-control-input'}/>
-
+            <p>Fav Icon Url:</p>
+            <input onChange={e => onChangeHandler(e, 'headDataSettings')}
+                   name={'favIconUrl'}
+                   value={initialSettingsData?.headDataSettings?.favIconUrl}
+                   className={'form-control-input'}/>
+            <p>PWA:</p>
+            <input onChange={e => onChangeHandler(e, 'headDataSettings')}
+                   name={'pwa192'}
+                   placeholder={'192px x 192px'}
+                   value={initialSettingsData?.headDataSettings?.pwa192}
+                   className={'form-control-input'}/>
+            <input onChange={e => onChangeHandler(e, 'headDataSettings')}
+                   name={'pwa384'}
+                   placeholder={'384px x 384px'}
+                   value={initialSettingsData?.headDataSettings?.pwa384}
+                   className={'form-control-input'}/>
+            <input onChange={e => onChangeHandler(e, 'headDataSettings')}
+                   name={'pwa512'}
+                   value={initialSettingsData?.headDataSettings?.pwa512}
+                   placeholder={'512px x 512px'}
+                   className={'form-control-input'}/>
             <div className={'checkbox-field'}>
                 <p>RTA:</p>
                 <input onChange={e => onChangeHandler(e, 'headDataSettings')}

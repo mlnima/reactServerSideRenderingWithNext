@@ -64,14 +64,9 @@ const initialSettings: FC<PropTypes> = ({}) => {
     const dispatch = useAppDispatch();
     const [language, setLanguage] = useState('default')
 
-    const onJsonChangeHandler = (value: string) => {
-        dispatch(editInitialSettingsJson(JSON.parse(value)))
-    }
-
     const onSaveHandler = () => {
         dispatch(updateSettingAction({type: 'initialSettings', data: initialSettingsData}))
     }
-
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>, key: string) => {
         const value = inputValueSimplifier(e)
@@ -80,6 +75,16 @@ const initialSettings: FC<PropTypes> = ({}) => {
                 //@ts-ignore
                 ...(initialSettingsData?.[key] || {}),
                 [e.target.name]: value
+            }
+        }))
+    }
+
+    const onJsonChangeHandler = (e: React.ChangeEvent<HTMLInputElement>,key: string) => {
+        dispatch(editInitialSettings({
+            [key]: {
+                //@ts-ignore
+                ...(initialSettingsData?.[key] || {}),
+                [e.target.name]: JSON.parse(e.target.value)
             }
         }))
     }
@@ -124,7 +129,7 @@ const initialSettings: FC<PropTypes> = ({}) => {
                                   onChangeHandlerWithTranslation={onChangeHandlerWithTranslation}/>
                 <LayoutSettings onChangeHandler={onChangeHandler} initialSettingsData={initialSettingsData}/>
 
-                <PostCardsSettings onChangeHandler={onChangeHandler} initialSettingsData={initialSettingsData}/>
+                <PostCardsSettings onChangeHandler={onChangeHandler} onJsonChangeHandler={onJsonChangeHandler} initialSettingsData={initialSettingsData}/>
                 <MembershipSettings onChangeHandler={onChangeHandler} initialSettingsData={initialSettingsData}/>
             </div>
 

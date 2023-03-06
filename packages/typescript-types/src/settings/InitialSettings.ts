@@ -2,11 +2,16 @@ export interface InitialSettings{
     postCardsSettings:{
         customStyles:string,
         numberOfCardsPerRow: number,
-        numberOfCardsPerPage?: number ,
-        cardsWidthDesktop: number
+        numberOfCardsPerPage?: number,
+        cardsWidthDesktop: number,
+        fallbackImageUrlOnError:string,
+        customCardBackgrounds: string[]
     },
     headDataSettings:{
         favIconUrl: string,
+        pwa192: string,
+        pwa384: string,
+        pwa512: string,
         googleAnalyticsId: string,
         keywords: string,
         title:string,

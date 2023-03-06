@@ -37,7 +37,7 @@ const MonacoEditor: FC<PropTypes> = (
     //@ts-ignore
     const onChangeHandler = (value: string, ev) => {
 
-        if (value) {
+        if (value || value === '') {
             const e = {
                 target: {
                     name: name,
