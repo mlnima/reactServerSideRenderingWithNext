@@ -42,6 +42,8 @@ export interface InitialSettings{
         header: boolean,
         navigation: boolean,
         footer: boolean,
+        sidebarWidth:number,
         customStyles:string,
+        customColors:string,
     }
 }

@@ -12,6 +12,7 @@ interface PropTypes {
 
 const LayoutSettings: FC<PropTypes> = ({onChangeHandler, initialSettingsData}) => {
     const [isStyleEditorOpen,setIsStyleEditorOpen] = useState(false)
+    const [isColorEditorOpen,setIsColorEditorOpen] = useState(false)
     return (
         <Style  className={'setting-section'}>
             <h2>Layout Settings:</h2>
@@ -47,6 +48,15 @@ const LayoutSettings: FC<PropTypes> = ({onChangeHandler, initialSettingsData}) =
                        checked={initialSettingsData?.layoutSettings?.footer}
                        className={'form-control-input'}/>
             </div>
+            <div className={'checkbox-field'}>
+                <p>Footer:</p>
+                <input onChange={e => onChangeHandler(e, 'layoutSettings')}
+                       type={'number'}
+                       name={'sidebarWidth'}
+                       value={initialSettingsData?.layoutSettings?.sidebarWidth}
+                       placeholder={'320px is default'}
+                       className={'form-control-input'}/>
+            </div>
             <p>Custom Style:</p>
             <button className={'btn btn-primary'} onClick={()=>setIsStyleEditorOpen(!isStyleEditorOpen)}>
                 Styles Editor
@@ -57,6 +67,22 @@ const LayoutSettings: FC<PropTypes> = ({onChangeHandler, initialSettingsData}) =
                     name={'customStyles'}
                     defaultValue={initialSettingsData?.layoutSettings?.customStyles || ''}
                     value={initialSettingsData?.layoutSettings?.customStyles}
+                    className={'initialSettings-editor'}
+                    //@ts-ignore
+                    onChange={(e: string) => onChangeHandler(e, 'layoutSettings')}
+                    height={'80vh'}
+                />
+            }
+            <p>Custom Colors:</p>
+            <button className={'btn btn-primary'} onClick={()=>setIsColorEditorOpen(!isColorEditorOpen)}>
+                Colors Editor
+            </button>
+            {isColorEditorOpen &&
+                <MonacoEditor
+                    language={'scss'}
+                    name={'customColors'}
+                    defaultValue={initialSettingsData?.layoutSettings?.customColors || ''}
+                    value={initialSettingsData?.layoutSettings?.customColors}
                     className={'initialSettings-editor'}
                     //@ts-ignore
                     onChange={(e: string) => onChangeHandler(e, 'layoutSettings')}
