@@ -29,10 +29,10 @@ const PostCardsSettings: FC<PropTypes> = ({onChangeHandler,initialSettingsData,o
                    value={initialSettingsData?.postCardsSettings?.numberOfCardsPerPage}
                    className={'form-control-input'}
                    type="number"/>
-            <p>Number of cards per row:</p>
+            <p>Number of cards per row In Mobile:</p>
             <input onChange={e => onChangeHandler(e, 'postCardsSettings')}
-                   name={'numberOfCardsPerRow'}
-                   value={initialSettingsData?.postCardsSettings?.numberOfCardsPerRow}
+                   name={'numberOfCardsPerRowInMobile'}
+                   value={initialSettingsData?.postCardsSettings?.numberOfCardsPerRowInMobile}
                    className={'form-control-input'}
                    type="number"/>
             <p>Fallback Image Url On Error:</p>

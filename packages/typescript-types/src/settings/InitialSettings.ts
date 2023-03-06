@@ -1,7 +1,7 @@
 export interface InitialSettings{
     postCardsSettings:{
         customStyles:string,
-        numberOfCardsPerRow: number,
+        numberOfCardsPerRowInMobile: number,
         numberOfCardsPerPage?: number,
         cardsWidthDesktop: number,
         fallbackImageUrlOnError:string,
