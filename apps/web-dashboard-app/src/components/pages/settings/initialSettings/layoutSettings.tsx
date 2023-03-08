@@ -49,7 +49,7 @@ const LayoutSettings: FC<PropTypes> = ({onChangeHandler, initialSettingsData}) =
                        className={'form-control-input'}/>
             </div>
             <div className={'checkbox-field'}>
-                <p>Footer:</p>
+                <p>Sidebar Width:</p>
                 <input onChange={e => onChangeHandler(e, 'layoutSettings')}
                        type={'number'}
                        name={'sidebarWidth'}

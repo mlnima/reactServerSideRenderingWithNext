@@ -24,7 +24,7 @@ export interface InitialSettings{
             [key: string]:{
                 title: string,
                 keywords: string,
-                description: string,
+                description: string
             }
         }
     },
@@ -34,8 +34,7 @@ export interface InitialSettings{
         anyoneCanRegister: boolean,
         usersCanFollowEachOther: boolean,
         usersCanMessageEachOther: boolean,
-        usersCanCommentOnThePosts: boolean,
-
+        usersCanCommentOnThePosts: boolean
     },
     layoutSettings:{
         topbar: boolean,
@@ -44,7 +43,7 @@ export interface InitialSettings{
         footer: boolean,
         sidebarWidth:number,
         customStyles:string,
-        customColors:string,
+        customColors:string
     },
     eCommerceSettings:{
 

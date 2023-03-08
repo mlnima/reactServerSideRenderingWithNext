@@ -57,12 +57,8 @@ const HeadDataSettings: FC<PropTypes> = ({onChangeHandler,onChangeHandlerWithTra
                    name={'themeColor'}
                    value={initialSettingsData?.headDataSettings?.themeColor}
                    className={'form-control-input'}/>
-            <p>Fav Icon Url:</p>
-            <input onChange={e => onChangeHandler(e, 'headDataSettings')}
-                   name={'favIconUrl'}
-                   value={initialSettingsData?.headDataSettings?.favIconUrl}
-                   className={'form-control-input'}/>
-            <p>PWA:</p>
+
+
             <p>Custom Head Tags:</p>
             <button className={'btn btn-primary'} onClick={()=>setIsHeadTagsEditorOpen(!isHeadTagsEditorOpen)}>
                 Head Tags Editor
