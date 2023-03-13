@@ -1,4 +1,4 @@
-import {FC, useState} from "react";
+import React, {FC, useState} from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import dynamic from "next/dynamic";
@@ -7,6 +7,10 @@ import _qualityConvertor from "../asset/_qualityConvertor";
 import CardTitle from "../asset/CardTitle/CardTitle";
 import {Post} from "typescript-types";
 import DefaultPostCardStyle from "../asset/DefaultPostCardStyle";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faVideo} from "@fortawesome/free-solid-svg-icons/faVideo";
+import {faVideoSlash} from "@fortawesome/free-solid-svg-icons/faVideoSlash";
+
 const CardViews = dynamic(() => import('../asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('../asset/CardRating/CardRating'))
 const CardQuality = dynamic(() => import('../asset/CardQuality/CardQuality'))
@@ -37,6 +41,7 @@ const VideoPostCardStyle = styled(DefaultPostCardStyle)`
     color: var(--secondary-text-color, #ccc);
 
     .card-link {
+   
       .card-quality, .card-duration {
         overflow: hidden;
         padding: 2.4px 4.8px;
@@ -57,10 +62,36 @@ const VideoPostCardStyle = styled(DefaultPostCardStyle)`
         bottom: 5px;
         right: 5px;
       }
+
+    }
+    .mobile-play-trailer-button{
+      opacity: 50%;
+      position: absolute;
+      background-color:var(--main-background-color,#000) ;
+      color:var(--main-text-color,#fff)  ;
+      border-radius: 50%;
+      padding: 5px;
+      border: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      top: 3%;
+      left: 3%;
+      cursor: pointer;
     }
   }
 
   @media only screen and (min-width: 768px) {
+    .video-post-card-media{
+      .card-link{
+        .mobile-play-trailer-button{
+          //display: none;
+        }
+      }
+    }
+    
+    
+    
     max-width: ${({cardWidth}: VideoPostCardStylePropTypes) => cardWidth}px;
   }
 `
@@ -88,16 +119,9 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
 
         return (
             <VideoPostCardStyle className={'post-card'}
-                                cardWidth={cardWidth}
-                                onMouseEnter={() => hoverHandler(true)}
-                                onMouseOut={() => hoverHandler(false)}
-                                onTouchStartCapture={() => hoverHandler(true)}
-                                onTouchEnd={() => hoverHandler(false)}>
-
-
+                                cardWidth={cardWidth}>
                 <div className={'video-post-card-media'}>
                     <Link href={postUrl} className={'card-link'} title={title} target={targetLink}>
-
 
 
 
@@ -119,7 +143,6 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
 
                         {(hover && !!post?.videoTrailerUrl) &&
                             <VideoPostCardTrailer videoTrailerUrl={post?.videoTrailerUrl}
-                                                  hoverHandler={hoverHandler}
                                                   hover={hover}
                                                   numberOfCardsPerRowInMobile={numberOfCardsPerRowInMobile}
                                                   cardWidth={cardWidth}/>
@@ -132,7 +155,14 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
 
                         {!!post?.duration &&
                             <CardDuration duration={post?.duration} className={'card-duration video-card-info-data'}/>}
+
+
                     </Link>
+                    {!!post?.videoTrailerUrl && <FontAwesomeIcon className={'mobile-play-trailer-button'}
+                                                                 onClick={() => hoverHandler(!hover)}
+                                                                 icon={hover ? faVideoSlash :faVideo}
+                                                                 style={{width: 25, height: 25}}/>
+                    }
                 </div>
                 <CardTitle title={title} targetLink={targetLink} url={postUrl}/>
 

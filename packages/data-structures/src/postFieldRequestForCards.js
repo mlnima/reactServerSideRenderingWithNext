@@ -8,7 +8,7 @@ var postFieldRequestForCards = [
     'duration',
     'views',
     'translations',
-    'VideoTrailerUrl',
+    'videoTrailerUrl',
     'postType',
     'likes',
     'disLikes',

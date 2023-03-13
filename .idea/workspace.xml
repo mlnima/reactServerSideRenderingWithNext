@@ -20,94 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/RootLayout.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/RootLayoutAdminDataInitializer.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/ui/src/animationskeyframes.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/CodeSnippet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/global/CodeSnippet.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/ErrorBoundary.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/SiteHeadSetter.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/Styles/GlobalStylesComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/global/Styles/GlobalStylesComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/Styles/buttons.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/Styles/inputs.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/Styles/keyframes.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/Styles/scrollBar.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/Styles/selects.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/commonComponents/AlertBox/AlertBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/global/commonComponents/AlertBox/AlertBox.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/commonComponents/HeadSetter/HeadSetter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/global/commonComponents/HeadSetter/HeadSetter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/commonComponents/ImageUploader/ImageUploader.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/commonComponents/Loading/Loading.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/global/commonComponents/Loading/Loading.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/commonComponents/SvgRenderer/SvgRenderer.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/BackToTopButton/BackToTopButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/common/BackToTopButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/ClientPopActionRequest/CookiePopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/common/CookiesInformerBar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/LoginRegisterPopup/FormHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/common/LoginRegisterPopup/FormHeader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/LoginRegisterPopup/LoginRegisterPopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/common/LoginRegisterPopup/LoginRegisterPopup.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/LoginRegisterPopup/LoginRegisterPopupForms.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/common/LoginRegisterPopup/LoginRegisterPopupForms.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/LoginRegisterPopup/ValidInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/common/LoginRegisterPopup/ValidInput.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/SiteSettingsSetter/SiteSettingsSetter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/SiteSettingsSetter/SiteSettingsSetter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/Soft404/Soft404.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/Soft404/Soft404.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/UserProfileImage/ImageContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/UserProfileImage/ImageContent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/CardRatingBar/CardRatingBar.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/CardTitle/CardTitle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/CardTitle/CardTitle.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/ResetMetaImageButton/ResetMetaImageButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/ResetMetaImageButton/ResetMetaImageButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/PromotionPostListCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/PromotionPostListCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/clientPostsControllers/clientGetPosts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/clientPostsControllers/clientGetPosts.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/VideoPostCardTrailer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/VideoPostCardTrailer.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/VideoPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/VideoPostCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/checkOutPageComponents/CheckoutPop/CheckOutSlideHeader/CheckOutSlideHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/checkOutPageComponents/CheckoutPop/CheckOutSlideHeader/CheckOutSlideHeader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/messengerPageComponents/MessengerCall/MessengerCall.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/messengerPageComponents/MessengerCall/MessengerCall.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/messengerPageComponents/MessengerConversationHeader/MessengerConversationHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/messengerPageComponents/MessengerConversationHeader/MessengerConversationHeader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/messengerPageComponents/MessengerConversationsList/MessengerConversationPreview.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/messengerPageComponents/MessengerConversationsList/MessengerConversationPreview.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/metasPage/MetasRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/metasPage/MetasRenderer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/profilePageComponents/profilePost/common/ImagePreview.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/profilePageComponents/profilePost/common/ImagePreview.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/profilePageComponents/profilePost/common/ThumbnailUploadArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/profilePageComponents/profilePost/common/ThumbnailUploadArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/profilePageComponents/profilePost/common/ThumbnailsUploader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/profilePageComponents/profilePost/common/ThumbnailsUploader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/AlphabeticalNumericalRangeLinksWidget/AlphabeticalNumericalRangeLinksWidget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/AlphabeticalNumericalRangeLinksWidget/AlphabeticalNumericalRangeLinksWidget.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/Authentication/Authentication.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/Authentication/Authentication.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/Authentication/AuthenticationNotLoggedInItems.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/Authentication/AuthenticationNotLoggedInItems.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/DayModeNightMode/DayModeNightMode.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/DayModeNightMode/DayModeNightMode.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/Logo/Logo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/Logo/Logo.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/MenuWidget/MenuWidget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/MenuWidget/MenuWidget.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayout.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayoutAdminDataInitializer.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/AddToBasket.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/AddToBasket.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/CommentFrom.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/CommentFrom.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/DownloadLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/DownloadLink.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/Price.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/Price.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/RatingButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/RatingButtons.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/ShowHideCommentsButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/ShowHideCommentsButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/widgetsArea/FooterWidgetArea/FooterWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/widgetsArea/FooterWidgetArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/widgetsArea/HeaderWidgetArea/HeaderWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/widgetsArea/HeaderWidgetArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/widgetsArea/MainWidgetArea/MainWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/widgetsArea/MainWidgetArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/widgetsArea/NavigationWidgetArea/NavigationWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/widgetsArea/NavigationWidgetArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/widgetsArea/SectionWidgetArea/SectionWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/widgetsArea/SectionWidgetArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/widgetsArea/SidebarWidgetArea/SidebarWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/widgetsArea/SidebarWidgetArea/SidebarWidgetArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/widgetsArea/TopBarWidgetArea/TopBarWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/widgetsArea/TopBarWidgetArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/_app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/actor/[actorId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/actor/[actorId].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/actors/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/actors/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/categories/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/categories/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/category/[categoryId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/category/[categoryId].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/checkout/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/checkout/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/page/[pageName].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/page/[pageName].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/post/[postType]/[identifier].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/post/[postType]/[identifier].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/profile/edit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/profile/edit.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/tag/[tagId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/tag/[tagId].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/tags/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/tags/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/user/[username].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/user/[username].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/_storeVariables/_getServerSideStaticPageData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/_storeVariables/_getServerSideStaticPageData.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/ActionButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/ActionButtons.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/ExportWidget/ExportWidget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/ExportWidget/ExportWidget.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/FormTypeWidgetModelFields/FieldPreview.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/FormTypeWidgetModelFields/FieldPreview.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/FileManager/FileManagerArea/FileManagerArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/FileManager/FileManagerArea/FileManagerArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/Meta/Meta.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/Meta/Meta.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/PostInformation/ImageGallery/ImageGallery.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/PostInformation/ImageGallery/ImageGallery.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/PostInformation/UploadFileBtn/uploadFileBtn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/PostInformation/UploadFileBtn/uploadFileBtn.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/settings/initialSettings/General/General.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/settings/initialSettings/General/General.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/ui/src/ActiveAlertBox.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/src/ActiveAlertBox.d.ts.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/ui/src/ActiveAlertBox.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/src/ActiveAlertBox.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/ui/src/ActiveAlertBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/src/ActiveAlertBox.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/ui/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/tsconfig.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/next-env.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/next-env.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/data-structures/src/postFieldRequestForCards.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/data-structures/src/postFieldRequestForCards.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -252,8 +170,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.build" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.build:api-server" />
         <item itemvalue="npm.outdate:packages" />
@@ -1636,7 +1554,7 @@
       <workItem from="1678534847544" duration="1119000" />
       <workItem from="1678631102291" duration="1904000" />
       <workItem from="1678656268360" duration="20561000" />
-      <workItem from="1678703916914" duration="22976000" />
+      <workItem from="1678703916914" duration="25633000" />
     </task>
     <servers />
   </component>

@@ -4,7 +4,6 @@ import styled from "styled-components";
 interface VideoPostCardMediaPropTypes {
     videoTrailerUrl: string,
     hover: boolean,
-    hoverHandler: any,
     numberOfCardsPerRowInMobile: number,
     cardWidth: number,
 }
@@ -51,7 +50,6 @@ const VideoPostCardTrailer: FC<VideoPostCardMediaPropTypes> =
     ({
          videoTrailerUrl,
          hover,
-         hoverHandler,
          cardWidth,
          numberOfCardsPerRowInMobile
      }) => {
@@ -89,9 +87,6 @@ const VideoPostCardTrailer: FC<VideoPostCardMediaPropTypes> =
             <VideoPostCardTrailerStyle numberOfCardsPerRowInMobile={numberOfCardsPerRowInMobile} cardWidth={cardWidth}>
                 <video ref={videoTrailer}
                        loop={false}
-                       onMouseDown={pauseTrailer}
-                       onMouseOut={()=>hoverHandler(false)}
-                       onTouchEnd={()=>hoverHandler(false)}
                        muted
                        playsInline
                        className={'video-card-trailer'}>
