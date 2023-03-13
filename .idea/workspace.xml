@@ -22,6 +22,10 @@
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/Styles/GlobalStylesComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/global/Styles/GlobalStylesComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/animationskeyframes.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/src/keyframes.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/animationskeyframes.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/src/keyframes.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/animationskeyframes.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/src/keyframes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/animationskeyframes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/src/keyframes.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1550,7 +1554,7 @@
       <workItem from="1678534847544" duration="1119000" />
       <workItem from="1678631102291" duration="1904000" />
       <workItem from="1678656268360" duration="20561000" />
-      <workItem from="1678703916914" duration="29014000" />
+      <workItem from="1678703916914" duration="29454000" />
     </task>
     <servers />
   </component>
@@ -2027,9 +2031,6 @@
         <option value="$PROJECT_DIR$/packages/custom-util/src/array-utils/sortArrayByPropertyOfObject.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/array-utils/sortArrayByPropertyOfObject.js" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/array-utils/sortArrayByPropertyOfObject.d.ts" />
-        <option value="$PROJECT_DIR$/packages/ui/src/animationskeyframes.d.ts.map" />
-        <option value="$PROJECT_DIR$/packages/ui/src/animationskeyframes.d.ts" />
-        <option value="$PROJECT_DIR$/packages/ui/src/animationskeyframes.js" />
       </list>
     </option>
   </component>

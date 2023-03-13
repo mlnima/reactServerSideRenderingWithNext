@@ -7,7 +7,7 @@ import buttons from 'ui/src/buttonsStyle';
 import inputs from 'ui/src/inputsStyles';
 import selects from 'ui/src/selectsStyle';
 import scrollBars from 'ui/src/scrollBars';
-import animationsKeyframes from 'ui/src/animationsKeyframes';
+import keyframes from 'ui/src/keyframes';
 
 interface GlobalStylesPropTypes {
     customColors?: string,
@@ -65,7 +65,7 @@ const GlobalStyles = createGlobalStyle`
   ${gridLayout}
   ${inputs}
   ${selects}
-  ${animationsKeyframes}
+  ${keyframes}
   ${scrollBars}
   
   ${({customStyles}: GlobalStylesPropTypes) => customStyles ? customStyles : ''}
