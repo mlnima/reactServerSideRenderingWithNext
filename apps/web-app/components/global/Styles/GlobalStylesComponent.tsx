@@ -22,12 +22,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   ${({customColors}: GlobalStylesPropTypes) => customColors?.includes(':root') ? customColors : `:root {${customColors}}`}
-  ${animationsKeyframes}
-  ${buttons}
-  ${gridLayout}
-  ${inputs}
-  ${selects}
-  ${scrollBars}
+
 
   body {
     background-color: var(--main-background-color, #000);
@@ -65,6 +60,12 @@ const GlobalStyles = createGlobalStyle`
   .form-control-input-validator {
     width: 80%;
   }
+  ${animationsKeyframes}
+  ${buttons}
+  ${gridLayout}
+  ${inputs}
+  ${selects}
+  ${scrollBars}
   
   ${({customStyles}: GlobalStylesPropTypes) => customStyles ? customStyles : ''}
 `
