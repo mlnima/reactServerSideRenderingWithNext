@@ -1,1 +1,1 @@
-{"version":3,"file":"animationskeyframes.d.ts","sourceRoot":"","sources":["animationskeyframes.ts"],"names":[],"mappings":"AAEA,QAAA,MAAM,mBAAmB,wDA2BxB,CAAA;AACD,eAAe,mBAAmB,CAAC"}
+{"version":3,"file":"keyframes.d.ts","sourceRoot":"","sources":["keyframes.ts"],"names":[],"mappings":"AAEA,QAAA,MAAM,SAAS,wDA2Bd,CAAA;AACD,eAAe,SAAS,CAAC"}

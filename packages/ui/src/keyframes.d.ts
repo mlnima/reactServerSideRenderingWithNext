@@ -1,3 +1,3 @@
-declare const animationsKeyframes: import("styled-components").FlattenSimpleInterpolation;
-export default animationsKeyframes;
-//# sourceMappingURL=animationskeyframes.d.ts.map
+declare const keyframes: import("styled-components").FlattenSimpleInterpolation;
+export default keyframes;
+//# sourceMappingURL=keyframes.d.ts.map
