@@ -1,12 +1,13 @@
-import  { useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import UserSmallPreview from "../../../components/includes/socialComponents/UserSmallPreview/UserSmallPreview";
-import {wrapper} from "../../../store_toolkit/store";
+import {wrapper} from "@store_toolkit/store";
 import { useSelector} from "react-redux";
 import styled from "styled-components";
-import {fetchMultipleUserDataById, fetchSpecificUserData} from "../../../store_toolkit/clientReducers/userReducer";
-import {useAppDispatch} from "../../../store_toolkit/hooks";
+import {fetchMultipleUserDataById, fetchSpecificUserData} from "@store_toolkit/clientReducers/userReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "../../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
+import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
 
 const FollowingStyledDiv = styled.div`
   max-width: 940px;
@@ -30,17 +31,14 @@ const Following  = ( ) => {
 
     const renderFollowing = following.map((user, index) => {
         return (
-            <UserSmallPreview key={index}
-                             //@ts-ignore
-                              {...user}
-
-            />
+            <UserSmallPreview key={index} user={user}/>
         )
     })
 
 
     return (
         <FollowingStyledDiv className='my-profile-following-list main'>
+            <HeadSetter title={'Following'}/>
             {renderFollowing}
         </FollowingStyledDiv>
     );
@@ -56,7 +54,11 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             'profilePageRightSidebar',
             'profilePageLeftSidebar',
             'profile'
-        ])
+        ],
+        {
+            setHeadData: true,
+            page: 'followingPage'
+        },store)
 
     return null
 })

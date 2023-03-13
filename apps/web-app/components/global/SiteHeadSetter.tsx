@@ -18,7 +18,7 @@ const SiteHeadSetter: FC = () => {
     return (
         <Head>
             {!!headData?.title && <title>{headData.title}</title>}
-            {(!!headData?.description && typeof headData.description === 'string') &&
+            {(!!headData?.description && typeof headData?.description === 'string') &&
                 <meta name="description" content={headData.description}/>
             }
             {(!!headData?.keywords && headData?.keywords?.length) &&

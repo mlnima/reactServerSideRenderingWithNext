@@ -36,23 +36,18 @@ const Style = styled(PostPageStyle)`
     }
   }
 
-  ${({postPageStyle}: { postPageStyle: string }) => postPageStyle || ''}
+  ${({customStyles}: { customStyles?: string }) => customStyles || ''}
 `
 
 const ArticleTypePostPage = () => {
     const descriptionRef = useRef<HTMLDivElement>(null)
 
-    const {postPageStyle, post} = useSelector(({settings, posts}: Store) => {
-        return {
-            postPageStyle: settings?.design.postPageStyle,
-            post: posts.post
-        }
-    })
+    const {post} = useSelector(({posts}: Store) => posts)
+    const {customStyles} = useSelector(({settings}: Store) => settings?.currentPageSettings)
 
     return (
-        <Style id={'primary'} className='post-page'
-               //@ts-ignore
-               postPageStyle={postPageStyle}>
+        //@ts-ignore
+        <Style id={'primary'} className='post-page' customStyles={customStyles}>
             <main id={'main'}>
                 <article itemScope itemType={'https://schema.org/BlogPosting'}>
                     <header className={'entry-header'}>

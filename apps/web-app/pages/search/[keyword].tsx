@@ -11,7 +11,6 @@ import getPostsAction from "@store_toolkit/clientReducers/postsReducer/getPostsA
 
 let StyledMain = styled.main`
   width: 100%;
-
   .posts-page-info {
     margin: 5px 0;
     h1 {
@@ -19,38 +18,26 @@ let StyledMain = styled.main`
       padding: 0 10px;
     }
   }
-
   .no-result-message {
     text-align: center;
     color: var(--main-text-color);
   }
-
-  ${(props:{stylesData:string}) => props.stylesData || ''}
+  ${({customStyles}:{customStyles?:string}) => customStyles || ''}
 `
 
 const searchPage = ( ) => {
 
-    const settings = useSelector((store: Store) => store.settings);
+    const {query} = useRouter()
     const posts = useSelector((store:Store) => store.posts.posts)
-    const router = useRouter()
+    const customStyles = useSelector(({settings}: Store) => settings?.currentPageSettings?.customStyles)
 
     return (
-        <StyledMain id={'content'} className="main posts-page"
-                    //@ts-ignore
-                    stylesData={settings.design?.postsPageStyle || ''}>
-
+        <StyledMain id={'content'} className="main posts-page" customStyles={customStyles}>
             <WidgetsRenderer position={'searchPageTop'}/>
-
-            {!!router.query.keyword && !!posts?.length &&
-                <PostsPageInfo titleEntry={router.query.keyword as string }/>
-            }
-
-            {!posts?.length && <h2 className='no-result-message'>No Result for {router.query.keyword}</h2>}
-
+            {!!query.keyword && !!posts?.length && <PostsPageInfo titleEntry={query.keyword as string }/>}
+            {!posts?.length && <h2 className='no-result-message'>No Result for {query.keyword}</h2>}
             <PostsPage renderPagination={true}  />
-
             <WidgetsRenderer position={'searchPageBottom'}/>
-
         </StyledMain>
     )
 };
@@ -67,12 +54,10 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         ],
         {
             setHeadData: false,
-            page: 'search'
+            page: 'searchPage'
         },
         store
     )
-    // // @ts-ignore
-    // await store.dispatch(getPosts(context, null, true,null,null,store))
 
     await store.dispatch(
         getPostsAction({
@@ -84,7 +69,6 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
                 }
             }
         ))
-
 
     return null
 })

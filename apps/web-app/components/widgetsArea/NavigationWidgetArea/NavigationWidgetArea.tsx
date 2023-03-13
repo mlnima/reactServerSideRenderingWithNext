@@ -1,9 +1,6 @@
 import {memo} from "react";
 import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
-import {useSelector} from "react-redux";
-import {useRouter} from "next/router";
-import {Store} from "typescript-types";
 
 let StyledNavigation = styled.nav`
   grid-area: navigation;
@@ -30,22 +27,16 @@ let StyledNavigation = styled.nav`
       align-items: center;
     }
   }
-
-  ${(props: { stylesData: string }) => props.stylesData ?? ''}
 `
 
 const NavigationWidgetArea = () => {
-    const {pathname} = useRouter()
-    const navigationStyle = useSelector(({settings}: Store) => settings?.design?.navigationStyle)
 
     return (
-        <>
-            <StyledNavigation stylesData={navigationStyle || ''} className={'widget-area navigation'}>
+            <StyledNavigation className={'widget-area navigation'}>
                 <div className='navigation-content'>
                     <WidgetsRenderer position={'navigation'}/>
                 </div>
             </StyledNavigation>
-        </>
     );
 };
 export default memo(NavigationWidgetArea);

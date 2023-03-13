@@ -16,10 +16,9 @@ import styled from "styled-components";
 import getChatroom from "api-requests/src/client/chatrooms/getChatroom";
 import dynamic from "next/dynamic";
 import ChatroomTopbar from "@components/pagesIncludes/chatroom/ChatroomTopbar";
+import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
+const Soft404 = dynamic(() => import('@components/includes/Soft404/Soft404'))
 
-const Soft404 = dynamic(() =>
-    import('@components/includes/Soft404/Soft404'))
-//onlineUserListVisibility
 const Style = styled.div`
 
   ${({isMaximized}) => isMaximized ? `
@@ -30,8 +29,7 @@ const Style = styled.div`
       bottom: 0;
       z-index: 11;
   ` : ''}
-
-
+  
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 150px;
@@ -121,6 +119,7 @@ const chatRoom: FC<PropTypes> = ({pageData}) => {
     if (pageData?.chatroom?._id) {
         return (
             <Style id={'full-width-content'} userList={onlineUserListVisibility} isMaximized={isMaximized}>
+                <HeadSetter title={pageData?.chatroom.name} description={pageData?.chatroom.description} keywords={pageData?.chatroom.tags}/>
                 <ChatroomTopbar chatrooms={pageData?.chatrooms}
                                 chatroomId={pageData?.chatroom?._id}
                                 onlineUserListVisibility={onlineUserListVisibility}

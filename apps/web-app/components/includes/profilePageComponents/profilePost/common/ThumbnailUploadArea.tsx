@@ -78,8 +78,6 @@ const ThumbnailUploadArea: FC<PropTypes> = ({onUploadHandler, image, postId}) =>
 
     const onSelectHandler = (files, e) => {
         if (files.length) {
-            // console.log(imageIndex, ': ', image)
-            // const imageUrlSplit = image.split('/')[image.split('/').length - 1]
             e.preventDefault()
             onUploadHandler(files, image.imageIndex)
         }

@@ -1,14 +1,13 @@
 import {memo} from "react";
 import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
 
 let HeaderWidgetAreaStyle = styled.div`
   grid-area: header;
   background-color: var(--main-background-color, #000);
   padding: 0 8px;
   box-sizing: border-box;
+
   .header-content {
     display: flex;
     justify-content: space-evenly;
@@ -24,19 +23,15 @@ let HeaderWidgetAreaStyle = styled.div`
       padding: 0 5px;
     }
   }
-  
-  ${(props: { stylesData: string }) => props.stylesData ?? ''}
 `
 
 const HeaderWidgetArea = () => {
-    const headerStyle = useSelector(({settings}: Store) => settings?.design?.headerStyle)
 
     return (
-        <HeaderWidgetAreaStyle stylesData={headerStyle || ''} className={'widget-area header'}>
+        <HeaderWidgetAreaStyle className={'widget-area header'}>
             <div className='header-content'>
                 <WidgetsRenderer position={'header'}/>
             </div>
-
         </HeaderWidgetAreaStyle>
     );
 };

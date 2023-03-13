@@ -15,7 +15,7 @@ const CardRating = dynamic(() => import('../asset/CardRating/CardRating'))
 interface LearnPostCardPropTypes {
     title: string,
     postUrl: string,
-    postsPerRawForMobile: number,
+    numberOfCardsPerRowInMobile: number,
     views: number,
     rating: number,
     index: number,
@@ -80,7 +80,7 @@ const LearnPostCard: FC<LearnPostCardPropTypes> =
          postUrl,
          views,
          rating,
-         postsPerRawForMobile,
+         numberOfCardsPerRowInMobile,
          cardWidth,
          targetLink,
          index
@@ -93,10 +93,10 @@ const LearnPostCard: FC<LearnPostCardPropTypes> =
                         <CardImageRenderer imageUrl={post.mainThumbnail}
                                            mediaAlt={title}
                                            index={index}
-                                           postsPerRawForMobile={postsPerRawForMobile}
+                                           numberOfCardsPerRowInMobile={numberOfCardsPerRowInMobile}
                                            cardWidth={cardWidth}/> :
                         <TextToCanvasImage title={title}
-                                           postsPerRawForMobile={postsPerRawForMobile}
+                                           numberOfCardsPerRowInMobile={numberOfCardsPerRowInMobile}
                                            cardWidth={cardWidth}/>
                     }
                 </Link>

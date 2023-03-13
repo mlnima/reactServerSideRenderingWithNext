@@ -34,8 +34,7 @@ const ModeStyles = createGlobalStyle`
 const DayModeNightMode: FC<DayModeNightModePropTypes> = ({uniqueData}) => {
 
     const [isDefaultTheme, setIsDefaultTheme] = useState(true)
-    const defaultColors = useSelector(({settings}: Store) => settings?.design?.customColors || '')
-
+    const defaultColors = useSelector(({settings}: Store) => settings?.initialSettings?.layoutSettings?.customColors || '')
     const currentColors = useMemo(() => isDefaultTheme ? defaultColors  : uniqueData?.dayNightModeData ,[isDefaultTheme])
 
     const onSelectHandler = () => {

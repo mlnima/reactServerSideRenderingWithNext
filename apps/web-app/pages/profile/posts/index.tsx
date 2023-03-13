@@ -7,6 +7,7 @@ import styled from "styled-components";
 import {wrapper} from "@store_toolkit/store";
 import _getServerSideStaticPageData from "../../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
+import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
 
 const PostsStyledDiv = styled.div`
   max-width: 940px;
@@ -54,6 +55,7 @@ const Posts = () => {
 
     return (
         <PostsStyledDiv className='my-profile-posts main'>
+            <HeadSetter title={'Profile Posts'}/>
             <ProfileImage/>
             <ProfileNavigation/>
             <Link href={'/profile.json/posts/newpost'} className='create-new-post-link'>
@@ -74,7 +76,11 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
                 'profilePageRightSidebar',
                 'profilePageLeftSidebar',
                 'profile'
-            ])
+            ],
+            {
+                setHeadData: true,
+                page: 'ProfilePostsPage'
+            },store)
 
     return null
     })

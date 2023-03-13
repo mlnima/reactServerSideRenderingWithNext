@@ -12,7 +12,7 @@ export const _getServerSideStaticPageData = async (context, dynamicWidgets, opti
     }))
 
     await store.dispatch(fetchSettings({
-        requireSettings: ['identity', 'design','membershipSettings'],
+        requireSettings: ['identity', 'design','membershipSettings','initialSettings',`${options.page}Settings`],
         options: {
             page: options.page,
             setHeadData: options.setHeadData

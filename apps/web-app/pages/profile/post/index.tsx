@@ -22,6 +22,7 @@ import EventDates from "@components/pagesIncludes/profile/post/event/EventDates"
 import getEditingPostAction from "@store_toolkit/clientReducers/postsReducer/getEditingPostAction";
 import createNewPostAction from "@store_toolkit/clientReducers/postsReducer/createNewPostAction";
 import updatePostAction from "@store_toolkit/clientReducers/postsReducer/updatePostAction";
+import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
 
 const AdMode = dynamic(() => import('@components/pagesIncludes/profile/post/ucgAd/AdMode'));
 const Price = dynamic(() => import('@components/pagesIncludes/profile/post/common/Price'));
@@ -92,7 +93,7 @@ const post = () => {
 
     const {loggedIn,userData, editingPost,sidebar} = useSelector(({settings,user,posts}: Store) => {
         return {
-            sidebar: settings?.identity?.profilePageSidebar,
+            sidebar: settings?.currentPageSettings?.sidebar,
             loggedIn: user.loggedIn,
             userData: user.userData,
             editingPost: posts?.editingPost,
@@ -154,6 +155,7 @@ const post = () => {
 
             <ProfilePostPageStyledDiv className={`profile-page create-new-post page-${sidebar || 'no'}-sidebar`}
                                       id={'content'}>
+                <HeadSetter title={'Edit Post'}/>
                 <div id={'primary'}>
                     <form className={'create-new-post-fields'} onSubmit={e => onSubmitHandler(e)}>
 

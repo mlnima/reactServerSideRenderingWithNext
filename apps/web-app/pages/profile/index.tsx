@@ -7,6 +7,7 @@ import {wrapper} from "@store_toolkit/store";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
 import Posts from "@components/pagesIncludes/profile/Posts";
+import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
 
 const PageStyle = styled.div`
   #primary{
@@ -68,12 +69,13 @@ const Profile = () => {
 
     const {sidebar} = useSelector(({settings}: Store) => {
         return {
-            sidebar: settings?.identity?.profilePageSidebar,
+            sidebar: settings?.currentPageSettings?.sidebar
         }
     });
 
     return (
         <PageStyle  className={`profile-page page-${sidebar || 'no'}-sidebar`} id={'content'}   >
+            <HeadSetter/>
             <div id={'primary'}>
                 <main id={'main'}>
 
@@ -88,7 +90,7 @@ const Profile = () => {
                         </Link>
                     </div>
                     {/*//@ts-ignore*/}
-                    <Posts userId={userData._id}/>
+                    <Posts userId={userData?._id}/>
                 </main>
             </div>
 
@@ -107,7 +109,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             'profile'
         ],
         {
-            page: 'profile',
+            page: 'profilePage',
             setHeadData: true
         },
         store

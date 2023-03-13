@@ -21,6 +21,7 @@ import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
 import styled from "styled-components";
+import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
 const Style = styled.div`
   position: relative;
   height: 80vh;
@@ -95,7 +96,7 @@ const conversation = () => {
 
     return (
         <Style id={'content'} className='messenger main'>
-
+            <HeadSetter title={'Messenger'}/>
             <MessengerConversationMessageArea
                 // @ts-ignore
                 userData={userData}
@@ -127,7 +128,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         [],
         {
             setHeadData: true,
-            page: 'messenger'
+            page: 'messengerPage'
         },
         store
     )

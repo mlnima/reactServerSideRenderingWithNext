@@ -2,13 +2,11 @@
 import React, {FC, useCallback, useEffect, useMemo,  useState} from 'react';
 import useEmblaCarousel from 'embla-carousel-react'
 import {useRouter} from "next/router";
-// import _shortNumber from "@_variables/_clientVariables/clientVariables/_shortNumber";
 import dynamic from "next/dynamic";
 import {useSelector} from "react-redux";
 import styled from "styled-components";
 import {ratingCalculator} from "custom-util";
 import Autoplay from "embla-carousel-autoplay";
-import {useAppDispatch} from "@store_toolkit/hooks";
 import {Post,Store} from "typescript-types";
 import shortNumber from "custom-util/src/math-util/shortNumber";
 
@@ -114,7 +112,7 @@ const PostsSliderStyledDiv = styled.div`
         .slide {
           position: relative;
 
-          flex: 0 0 ${({cardWidth}: { cardWidth: number }) => `${cardWidth}px`};
+          flex: 0 0 ${({cardsWidthDesktop}: { cardsWidthDesktop: number }) => `${cardsWidthDesktop}px`};
         }
       }
 
@@ -129,7 +127,6 @@ interface PostsSliderPropsTypes {
     postElementSize: number | string,
     widgetId: string,
     posts: Post[],
-    cardWidthDesktop?: number,
     isSidebar?: boolean,
     index?: number,
     uniqueData?: {
@@ -146,7 +143,7 @@ interface PostsSliderPropsTypes {
 
 const PostsSlider: FC<PostsSliderPropsTypes> =
     ({
-         cardWidthDesktop,
+
          posts,
          uniqueData,
          isSidebar,
@@ -178,14 +175,10 @@ const PostsSlider: FC<PostsSliderPropsTypes> =
             setNextBtnEnabled(sliderApi.canScrollNext());
         }, [sliderApi, setSelectedIndex]);
 
-        const {
-            postsPerRawForMobile,
-            cardWidth,
-        } = useSelector(({settings}: Store) => {
-            const elementSize = cardWidthDesktop ? cardWidthDesktop : settings?.design?.cardWidthDesktop || 255
-            return {
-                postsPerRawForMobile: 1,
-                cardWidth: elementSize,
+        const {numberOfCardsPerRowInMobile,cardsWidthDesktop} = useSelector(({settings}: Store) =>{
+            return{
+                numberOfCardsPerRowInMobile:settings?.initialSettings?.postCardsSettings?.numberOfCardsPerRowInMobile || 2,
+                cardsWidthDesktop:settings?.initialSettings?.postCardsSettings?.cardsWidthDesktop || 255,
             }
         })
 
@@ -202,8 +195,8 @@ const PostsSlider: FC<PostsSliderPropsTypes> =
 
             const postProps = {
                 views: shortNumber(post.views || 0) as unknown as number,
-                cardWidth,
-                postsPerRawForMobile,
+                cardsWidthDesktop,
+                numberOfCardsPerRowInMobile,
                 //@ts-ignore
                 rating: post?.likes || post?.disLikes ? ratingCalculator(post?.likes, post?.disLikes) : null,
                 post,
@@ -232,7 +225,7 @@ const PostsSlider: FC<PostsSliderPropsTypes> =
 
 
         return (
-            <PostsSliderStyledDiv cardWidth={cardWidth}>
+            <PostsSliderStyledDiv cardsWidthDesktop={cardsWidthDesktop}>
 
                 {uniqueData?.sliderConfig?.navigation ?
                     <>

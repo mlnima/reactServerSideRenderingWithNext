@@ -5,32 +5,28 @@ import {useSelector} from "react-redux";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
 import getPostsAction from "@store_toolkit/clientReducers/postsReducer/getPostsAction";
+import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
 
 let StyledMain = styled.main`
   grid-area: main;
-
   .posts-page-info {
     margin: 5px 0;
-
     h1 {
       margin: 0;
       padding: 0 10px;
     }
   }
 
-  ${({postsPageStyle}: { postsPageStyle: string }) => postsPageStyle || ''}
+  ${({customStyles}: { customStyles?: string }) => customStyles || ''}
 `
 
 const posts = () => {
 
-    const {postsPageStyle} = useSelector(({settings}: Store) => {
-        return {
-            postsPageStyle: settings?.design?.postsPageStyle
-        }
-    })
+    const customStyles = useSelector(({settings}: Store) => settings?.currentPageSettings?.customStyles)
 
     return (
-        <StyledMain id={'content'} className="main posts-page" postsPageStyle={postsPageStyle || ''}>
+        <StyledMain id={'content'} className="main posts-page" customStyles={customStyles}>
+            <HeadSetter/>
             <PostsPage renderPagination={true}/>
         </StyledMain>
     )
@@ -49,7 +45,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         ],
         {
             setHeadData: true,
-            page: 'posts'
+            page: 'postsPage'
         },
         store
     )

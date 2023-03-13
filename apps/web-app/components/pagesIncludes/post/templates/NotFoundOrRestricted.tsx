@@ -45,7 +45,7 @@ const Style = styled.div`
     }
   }
 
-  ${({postPageStyle}: { postPageStyle: string }) => postPageStyle || ''}
+  ${({customStyles}: { customStyles?: string }) => customStyles || ''}
 `;
 
 interface PropTypes {
@@ -53,14 +53,12 @@ interface PropTypes {
 
 const NotFoundOrRestricted: FC<PropTypes> = ({}) => {
     const {t} = useTranslation('common');
-    const pageData = useSelector(({settings, posts}: Store) => {
-        return {
-            postPageStyle: settings?.design.postPageStyle,
-            post: posts.post
-        }
-    })
+
+    const {post} = useSelector(({posts}: Store) => posts)
+    const {customStyles} = useSelector(({settings}: Store) => settings?.currentPageSettings)
+
     return (
-        <Style id={'primary'} className='post-page' postPageStyle={pageData?.postPageStyle}>
+        <Style id={'primary'} className='post-page' customStyles={customStyles}>
             <main id={'main'}>
                 <article>
                     <header className={'entry-header'}>
@@ -75,7 +73,7 @@ const NotFoundOrRestricted: FC<PropTypes> = ({}) => {
                         <PostMetasRenderer type='tags'/>
                     </div>
                     <CommentFrom/>
-                    {pageData?.post?.comments?.length ? <CommentsRenderer showComments={true}/> : null}
+                    {post?.comments?.length ? <CommentsRenderer showComments={true}/> : null}
                     <div className='under-post-widget-area'>
                         <WidgetsRenderer position='underPost'/>
                     </div>

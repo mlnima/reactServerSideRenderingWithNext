@@ -11,6 +11,9 @@ import getPostAction from "@store_toolkit/clientReducers/postsReducer/getPostAct
 import getPostCommentsAction from "@store_toolkit/clientReducers/postsReducer/getPostCommentsAction";
 import viewPost from "api-requests/src/client/posts/viewPost";
 import {postTypes} from "data-structures";
+import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
+import {_postCanonicalUrlGenerator} from "@_variables/_clientVariables/clientVariables/_canonicalUrlGenerators";
+import {useRouter} from "next/router";
 
 const Soft404 = dynamic(() =>
     import('@components/includes/Soft404/Soft404'))
@@ -53,16 +56,20 @@ const PageStyle = styled.div`
 const postPage = () => {
 
     const dispatch = useAppDispatch()
-
-    const {postType, _id, status, author} = useSelector(({posts}: Store) => posts?.post);
-
+    const {locale} = useRouter()
+    const {
+        postType,
+        _id,
+        status,
+        author,
+        title,
+        description,
+        tags,
+        categories,
+        actors
+    } = useSelector(({posts}: Store) => posts?.post);
     const {userData} = useSelector(({user}: Store) => user)
-
-    const {sidebar} = useSelector(({settings}: Store) => {
-        return {
-            sidebar: settings?.identity?.postPageSidebar,
-        }
-    });
+    const sidebar = useSelector(({settings}: Store) => settings?.currentPageSettings?.sidebar);
 
     const adminMode = useSelector(({globalState}: Store) => globalState?.adminMode);
 
@@ -80,6 +87,11 @@ const postPage = () => {
     if (status === 'published' || adminMode || author?._id === userData?._id) {
         return (
             <>
+                <HeadSetter title={title}
+                            disAllowIndexByRobots={status !== 'published'}
+                            canonicalUrl={_postCanonicalUrlGenerator(postType, _id,locale)}
+                            keywords={[...(tags || []), ...(categories || []), ...(actors || [])].map(meta => meta.name).join(',')}
+                            description={postType !== 'learn' && typeof description === 'string' ? description : undefined}/>
                 {(adminMode && userData?.role === 'administrator') && <PostAdminQuickAccessBar role={userData?.role}/>}
                 <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
 
@@ -102,7 +114,7 @@ const postPage = () => {
         return <Soft404/>
     } else {
         return <>
-            {( adminMode || author?._id === userData?._id) && <PostAdminQuickAccessBar role={userData?.role}/>}
+            {(adminMode || author?._id === userData?._id) && <PostAdminQuickAccessBar role={userData?.role}/>}
             <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
                 <NotFoundOrRestricted/>
                 <SidebarWidgetAreaRenderer sidebar={sidebar} position={'postPage'}/>

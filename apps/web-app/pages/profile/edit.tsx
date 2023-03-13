@@ -9,6 +9,7 @@ import {useAppDispatch, useAppSelector} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
+import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
 
 const EditProfileStyledMain = styled.main`
   grid-area: main;
@@ -95,6 +96,7 @@ const edit = () => {
 
     return (
         <EditProfileStyledMain className='main'>
+            <HeadSetter title={'Edit Profile'}/>
             <h1> {t('profile:Edit Profile', {},{fallback:'Edit Profile'})}</h1>
             <form className='reset-password-form' onSubmit={onSubmitHandler}>
 
@@ -114,8 +116,7 @@ const edit = () => {
 
                 <div className='reset-password-form-field'>
                     <p>{t('profile:New Password', {},{fallback:'New Password'})}</p>
-                    {
-                        !changePasswordDataValidator.newPassword ?
+                    {!changePasswordDataValidator.newPassword ?
                             <span className='password-info'>
                               {t('common:Minimum eight characters, at least one letter and one number',
                                   {},

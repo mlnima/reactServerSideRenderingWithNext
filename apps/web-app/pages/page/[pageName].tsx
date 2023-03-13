@@ -8,6 +8,8 @@ import getPageDataAction
     from "@store_toolkit/clientReducers/postsReducer/getPageDataAction";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
+import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
+import React from "react";
 const Soft404 = dynamic(() => import('../../components/includes/Soft404/Soft404'));
 
 const PageStyle = styled.div`
@@ -26,10 +28,12 @@ const page = () => {
 
     if (notFoundPage) {
         return <Soft404/>
+
     } else {
         return (
             <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`}
                        stylesData={pageData?.pageStyle || ''}>
+                <HeadSetter title={pageData?.title} description={pageData?.description}/>
                 <MainWidgetArea position={pageData?.pageName} className='page main'/>
                 <SidebarWidgetAreaRenderer sidebar={sidebar} position={pageData?.pageName}/>
             </PageStyle>

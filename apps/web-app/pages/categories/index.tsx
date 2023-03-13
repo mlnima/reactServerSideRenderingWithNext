@@ -10,47 +10,37 @@ import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_g
 import MetasCardsRenderer from "../../components/includes/cards/CardsRenderer/MetasCardsRenderer";
 import {Store} from "typescript-types";
 import getMetasAction from "@store_toolkit/clientReducers/postsReducer/getMetasAction";
+import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
+import textContentReplacer from "custom-util/src/string-util/textContentReplacer";
+import {getTextDataWithTranslation} from "custom-util";
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
 const PageStyle = styled.div`
-  ${({stylesData}: { stylesData: string }) => stylesData || ''}
+  ${({customStyles}: { customStyles: string }) => customStyles || ''}
 `
 
 const categoriesPage = () => {
-    const {query} = useRouter()
 
-    const {
-        categoriesPageStyle,
-        totalCount,
-        postsCountPerPage,
-        sidebar
-    } = useSelector(({settings, posts, widgets}: Store) => {
-        return {
-            categoriesPageStyle: settings?.design?.categoriesPageStyle,
-            sidebar: settings?.identity?.categoriesPageSidebar,
-            totalCount: posts.totalCount,
-            postsCountPerPage: query?.size ? parseInt(query?.size as string) : settings?.identity?.postsCountPerPage || 20
-        }
-    })
+    const {locale} = useRouter()
+    const currentPageSettings = useSelector(({settings}: Store) => settings?.currentPageSettings)
+    const headDataSettings = useSelector(({settings}: Store) => settings?.initialSettings?.headDataSettings)
 
     return (
-        <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar `}
+        <PageStyle id={'content'} className={`page-${currentPageSettings?.sidebar || 'no'}-sidebar `}
                    //@ts-ignore
-                   stylesData={categoriesPageStyle}>
+                   customStyles={currentPageSettings?.customStyles}>
+            <HeadSetter title={ currentPageSettings?.title ?
+                textContentReplacer(currentPageSettings?.title,
+                    {name:undefined,count:undefined,siteName:headDataSettings.siteName}
+                ): getTextDataWithTranslation(locale as string,'title',currentPageSettings)}  />
             <main id={'primary'} className={'content main '}>
                 <WidgetsRenderer position={'categoriesPageTop'}/>
                 <MetasCardsRenderer metaType={'categories'}/>
-                <PaginationComponent
-                    isActive={true}
-                    currentPage={query?.page ? parseInt(query?.page as string) : 1}
-                    totalCount={totalCount}
-                    size={postsCountPerPage}
-                    maxPage={Math.ceil(totalCount / postsCountPerPage)}
-                />
+                <PaginationComponent/>
                 <WidgetsRenderer position={'categoriesPageBottom'}/>
             </main>
-            <SidebarWidgetAreaRenderer sidebar={sidebar} position={'categoriesPage'}/>
+            <SidebarWidgetAreaRenderer sidebar={currentPageSettings?.sidebar} position={'categoriesPage'}/>
         </PageStyle>
     );
 };
@@ -68,7 +58,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         ],
         {
             setHeadData: true,
-            page: 'categories'
+            page: 'categoriesPage'
         },
         store
     )

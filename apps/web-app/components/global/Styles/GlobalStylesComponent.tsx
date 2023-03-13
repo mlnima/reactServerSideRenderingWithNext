@@ -11,9 +11,9 @@ import selects from 'ui/src/selectsStyle';
 import scrollBars from 'ui/src/scrollBars';
 
 interface GlobalStylesPropTypes {
-    customColors: string,
-    customStyles: string,
-    sideBarWidth: number,
+    customColors?: string,
+    customStyles?: string,
+    sidebarWidth?: number,
 }
 
 const GlobalStyles = createGlobalStyle`
@@ -71,16 +71,10 @@ const GlobalStyles = createGlobalStyle`
 `
 
 const GlobalStylesComponent: FC = () => {
-    const {customColors, customStyles, sideBarWidth} = useSelector(({settings}: Store) => {
-        return {
-            customColors: settings?.design?.customColors,
-            customStyles: settings?.design?.customStyles,
-            sideBarWidth: settings?.design?.sideBarWidth,
-        }
-    })
+
+    const {customColors, customStyles, sidebarWidth} = useSelector(({settings}: Store) => settings?.initialSettings?.layoutSettings)
     return (
-        <GlobalStyles customColors={customColors || ''} customStyles={customStyles || ''}
-                      sideBarWidth={sideBarWidth || 320}/>
+        <GlobalStyles customColors={customColors} customStyles={customStyles} sidebarWidth={sidebarWidth || 320}/>
     )
 }
 

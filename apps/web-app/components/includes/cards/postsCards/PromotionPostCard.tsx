@@ -15,7 +15,7 @@ const CardImageRenderer = dynamic(() => import('../asset/CardImageRenderer'))
 interface PromotionPostCardPropTypes {
     title: string,
     postUrl: string,
-    postsPerRawForMobile: number,
+    numberOfCardsPerRowInMobile: number,
     views: number,
     rating: number,
     index: number,
@@ -78,7 +78,7 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
          postUrl,
          views,
          rating,
-         postsPerRawForMobile,
+         numberOfCardsPerRowInMobile,
          cardWidth,
          index
      }) => {
@@ -93,10 +93,10 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
                         <CardImageRenderer imageUrl={post.mainThumbnail}
                                            mediaAlt={title}
                                            index={index}
-                                           postsPerRawForMobile={postsPerRawForMobile}
+                                           numberOfCardsPerRowInMobile={numberOfCardsPerRowInMobile}
                                            cardWidth={cardWidth}/> :
                         <TextToCanvasImage title={title}
-                                           postsPerRawForMobile={postsPerRawForMobile}
+                                           numberOfCardsPerRowInMobile={numberOfCardsPerRowInMobile}
                                            cardWidth={cardWidth}/>
                     }
                 </a>

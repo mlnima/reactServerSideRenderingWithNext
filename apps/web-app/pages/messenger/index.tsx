@@ -5,6 +5,8 @@ import { useSelector} from "react-redux";
 import styled from "styled-components";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
+import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
+import React from "react";
 
 const MessengerPageStyledMain = styled.main`
   display: flex;
@@ -25,11 +27,13 @@ const messengerPage = () => {
     if (userData?._id) {
         return (
             <div className='messenger-page main'>
+                <HeadSetter title={'Messenger'}/>
                 <MessengerConversationsList/>
             </div>
         );
     } else return (
         <MessengerPageStyledMain id={'content'} className='messenger-page main'>
+            <HeadSetter title={'Messenger'}/>
             <Link href={'/register'} className='messenger-page-register-page-link'>
                 You need to create an account in order to access this page
             </Link>

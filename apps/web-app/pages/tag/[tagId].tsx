@@ -9,6 +9,10 @@ import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_g
 import {Store} from "typescript-types";
 import getPostsAction from "@store_toolkit/clientReducers/postsReducer/getPostsAction";
 import MetaAdminQuickAccessBar from "@components/pagesIncludes/metas/MetaAdminQuickAccessBar";
+import {useRouter} from "next/router";
+import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
+import textContentReplacer from "custom-util/src/string-util/textContentReplacer";
+import {getTextDataWithTranslation} from "custom-util";
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
@@ -25,37 +29,32 @@ let PageStyle = styled.div`
     }
   }
 
-  ${({tagPageStyle}: { tagPageStyle: string }) => tagPageStyle || ''}
+  ${({customStyles}: { customStyles?: string }) => customStyles || ''}
 `
 const tagPage = () => {
 
-    const { tag, tagPageStyle, sidebar} = useSelector(({user, posts, settings}: Store) => {
-        return {
-            tag: posts.tagData,
-            //@ts-ignore
-            tagPageStyle: settings.design?.tagPageStyle,
-            sidebar: settings?.identity?.tagPageSidebar
-        }
-    })
-
+    const tag = useSelector(({posts}: Store) => posts.tagData)
     const role = useSelector(({user}: Store) => user?.userData?.role);
     const adminMode = useSelector(({globalState}: Store) =>  globalState?.adminMode);
+    const currentPageSettings = useSelector(({settings}: Store) => settings?.currentPageSettings)
+    const headDataSettings = useSelector(({settings}: Store) => settings?.initialSettings?.headDataSettings)
+    const {locale} = useRouter()
 
     return (
-        <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar `} tagPageStyle={tagPageStyle}>
+        <PageStyle id={'content'} className={`page-${currentPageSettings?.sidebar || 'no'}-sidebar `}
+                   customStyles={currentPageSettings?.customStyles}>
+            <HeadSetter title={ currentPageSettings?.title ?
+                textContentReplacer(currentPageSettings?.title,
+                    {name:tag?.name,count:tag?.count,siteName:headDataSettings.siteName}
+                ): getTextDataWithTranslation(locale as string,'title',tag,)}  />
             <main id={'primary'} className="main posts-page">
                 {(!!adminMode && role === 'administrator') && <MetaAdminQuickAccessBar metaId={tag._id}/>}
                 {!!tag && <PostsPageInfo titleEntry={tag.name}/> }
-
-                <WidgetsRenderer
-                    position={'tagPageTop'}
-                />
+                <WidgetsRenderer position={'tagPageTop'}/>
                 <PostsPage renderPagination={true}/>
-                <WidgetsRenderer
-                    position={'tagPageBottom'}
-                />
+                <WidgetsRenderer position={'tagPageBottom'}/>
             </main>
-            <SidebarWidgetAreaRenderer sidebar={sidebar} position={'tagPage'}/>
+            <SidebarWidgetAreaRenderer sidebar={currentPageSettings?.sidebar} position={'tagPage'}/>
         </PageStyle>
     )
 };
@@ -71,7 +70,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             'tagPageBottom',
             'tagPageRightSidebar'
         ], {
-            page: 'tag',
+            page: 'tagPage',
             setHeadData: false
         },
         store)

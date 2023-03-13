@@ -43,15 +43,11 @@ const VideoTypePostPageStyle = styled(PostPageStyle)`
 
 const VideoTypePostPage = () => {
     const descriptionRef = useRef<HTMLDivElement>(null)
-    const {postPageStyle,post} = useSelector(({settings, posts}: Store) => {
-        return {
-            postPageStyle: settings?.design.postPageStyle,
-            post: posts.post
-        }
-    })
+    const {post} = useSelector(({posts}: Store) => posts)
+    const {customStyles} = useSelector(({settings}: Store) => settings?.currentPageSettings)
 
     return (
-        <VideoTypePostPageStyle id={'primary'} className='post-page' postPageStyle={postPageStyle}>
+        <VideoTypePostPageStyle id={'primary'} className='post-page' customStyles={customStyles}>
             <main id={'main'}>
                 <article itemProp={'video'}
                          itemScope

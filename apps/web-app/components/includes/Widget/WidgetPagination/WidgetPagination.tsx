@@ -38,11 +38,11 @@ interface WidgetPaginationPropTypes {
 
 const WidgetPagination: FC<WidgetPaginationPropTypes> = ({baseUrl, totalCount,count}) => {
 
-    const postsCountPerPage = useSelector(({settings}:Store) => {
-        return settings?.identity?.postsCountPerPage || 20
+    const numberOfCardsPerPage = useSelector(({settings}:Store) => {
+        return settings?.initialSettings?.postCardsSettings?.numberOfCardsPerPage || 20
     })
 
-    const maxPage = totalCount ? Math.ceil(totalCount / postsCountPerPage) : 0
+    const maxPage = totalCount ? Math.ceil(totalCount / numberOfCardsPerPage) : 0
     const pages = [...rangeNumGenerator(1,maxPage),maxPage]
 
     return (
@@ -54,10 +54,10 @@ const WidgetPagination: FC<WidgetPaginationPropTypes> = ({baseUrl, totalCount,co
                               href={`${baseUrl.includes('?') ? baseUrl + `&page=${pageNumber}` : baseUrl + `?page=${pageNumber}`}`}
                               className='pagination-item'
                               style={{
-                                  backgroundColor: pageNumber === 1 && postsCountPerPage === (count || 20)?
+                                  backgroundColor: pageNumber === 1 && numberOfCardsPerPage === (count || 20)?
                                       'var(--main-active-color,#f90)' :
                                       'var(--secondary-background-color, #181818)',
-                                  color: pageNumber === 1 && postsCountPerPage === (count || 20) ?
+                                  color: pageNumber === 1 && numberOfCardsPerPage === (count || 20) ?
                                       'var(--secondary-background-color, #181818)' :
                                       'var(--main-text-color, #fff)'
                               }}>

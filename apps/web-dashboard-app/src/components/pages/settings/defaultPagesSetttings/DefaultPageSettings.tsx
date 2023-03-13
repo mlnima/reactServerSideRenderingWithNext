@@ -62,10 +62,8 @@ const DefaultPageSettings: FC<PropTypes> = ({}) => {
         customStyles: '',
         translations: {}
     }
+    const dynamicSettingsPageMatcher = /homePageSettings|postPageSettings/g
     const [fieldsData, setFieldsData] = useState(defaultPageData)
-
-
-
 
     useEffect(() => {
         if (!!pageName) {
@@ -123,33 +121,40 @@ const DefaultPageSettings: FC<PropTypes> = ({}) => {
                 </button>
             </div>
 
-            <div className="form-field">
-                <p>Title:</p>
-                <input className={'form-control-input'}
-                       type="text" onChange={(e) => onChangeHandlerWithTranslation(e)}
-                    //@ts-ignore
-                       value={language === 'default' ? fieldsData.title : fieldsData?.translations?.[language]?.title || {} }
-                       name={'title'}
-                       placeholder={'Title'}/>
-            </div>
-            <div className="form-field">
-                <p>Description:</p>
-                <textarea className={'form-control-input'}
-                          onChange={(e) => onChangeHandlerWithTranslation(e)}
-                    //@ts-ignore
-                          value={language === 'default' ? fieldsData.description : fieldsData?.translations?.[language]?.description || ''}
-                          name={'description'}
-                          placeholder={'Description'}/>
-            </div>
-            <div className="form-field">
-                <p>Keywords:</p>
-                <input className={'form-control-input'}
-                       type="text" onChange={(e) => onChangeHandlerWithTranslation(e)}
-                    //@ts-ignore
-                       value={language === 'default' ? fieldsData.keywords : fieldsData?.translations?.[language]?.keywords || ''}
-                       name={'keywords'}
-                       placeholder={'Keywords'}/>
-            </div>
+            {!dynamicSettingsPageMatcher.test(pageName as string)&& <>
+
+                <div className="form-field">
+                    <p>Title:</p>
+                    <input className={'form-control-input'}
+                           type="text" onChange={(e) => onChangeHandlerWithTranslation(e)}
+                        //@ts-ignore
+                           value={language === 'default' ? fieldsData.title : fieldsData?.translations?.[language]?.title || {} }
+                           name={'title'}
+                           placeholder={'Title'}/>
+                </div>
+                <div className="form-field">
+                    <p>Description:</p>
+                    <textarea className={'form-control-input'}
+                              onChange={(e) => onChangeHandlerWithTranslation(e)}
+                        //@ts-ignore
+                              value={language === 'default' ? fieldsData.description : fieldsData?.translations?.[language]?.description || ''}
+                              name={'description'}
+                              placeholder={'Description'}/>
+                </div>
+                <div className="form-field">
+                    <p>Keywords:</p>
+                    <input className={'form-control-input'}
+                           type="text" onChange={(e) => onChangeHandlerWithTranslation(e)}
+                        //@ts-ignore
+                           value={language === 'default' ? fieldsData.keywords : fieldsData?.translations?.[language]?.keywords || ''}
+                           name={'keywords'}
+                           placeholder={'Keywords'}/>
+                </div>
+
+
+
+                </>}
+
 
             <div className={'editors'}>
                 <div className={'editor-wrapper'}>

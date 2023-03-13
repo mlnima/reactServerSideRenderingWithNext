@@ -35,29 +35,26 @@ const LearnTypePostPageStyledMain = styled(PostPageStyle)`
   a {
     color: var(--main-active-color);
   }
-  ${({postPageStyle}: { postPageStyle: string }) => postPageStyle || ''}
+  ${({customStyles}: { customStyles?: string }) => customStyles || ''}
 `
 
 
 const LearnTypePostPage = () => {
 
-    const learnTypePostPageData = useSelector(({settings, posts}: Store) => {
-        return {
-            postPageStyle: settings?.design.postPageStyle,
-            post: posts.post,
-        }
-    })
+
+    const customStyles = useSelector(({settings}: Store) => settings?.currentPageSettings?.customStyles)
+    const post = useSelector(({posts}: Store) => posts.post)
 
     return (
-        <LearnTypePostPageStyledMain id={'primary'} className='main post-page' postPageStyle={learnTypePostPageData.postPageStyle}>
+        <LearnTypePostPageStyledMain id={'primary'} className='main post-page' customStyles={customStyles}>
             <main id={'main'}>
                 <article>
                     <PostTitle/>
                     <LearnTypePostPageDescription/>
                     <div className='entry-header-actions'>
                         <RatingButtons rating={true}/>
-                        {learnTypePostPageData.post?.source && learnTypePostPageData.post?.source.includes('http') ?
-                            <a href={learnTypePostPageData.post?.source} className={'link-to-source btn btn-dark'}
+                        {post?.source && post?.source.includes('http') ?
+                            <a href={post?.source} className={'link-to-source btn btn-dark'}
                                target={'_blank'}>Source</a>
                             : null
                         }
@@ -78,6 +75,3 @@ const LearnTypePostPage = () => {
     );
 };
 export default LearnTypePostPage;
-
-
-// {learnTypePostPageData.post?.comments?.length ? <CommentsRenderer/> : null}

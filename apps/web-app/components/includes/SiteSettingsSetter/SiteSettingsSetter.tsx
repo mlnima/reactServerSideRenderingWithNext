@@ -1,7 +1,6 @@
 import {FC, useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import dynamic from "next/dynamic";
-import SiteHeadSetter from "../../global/SiteHeadSetter";
 import {Store} from "typescript-types";
 
 const GoogleAnalytics = dynamic(() => import('./GoogleAnalytics'), {ssr: false})
@@ -10,7 +9,7 @@ const UserAutoLogin = dynamic(() => import('./UserAutoLogin'), {ssr: false})
 const SiteSettingSetter: FC = () => {
 
     const [renderAutoLogin, setRenderAutoLogin] = useState(false)
-    const settings = useSelector(({settings}: Store) => settings)
+    const headDataSettings = useSelector(({settings}: Store) => settings?.initialSettings?.headDataSettings)
 
     useEffect(() => {
         if (typeof window !== 'undefined' &&localStorage?.wt) {
@@ -22,9 +21,9 @@ const SiteSettingSetter: FC = () => {
 
     return (
         <>
-            <SiteHeadSetter/>
-            {!!settings?.identity.googleAnalyticsId &&
-            <GoogleAnalytics googleAnalyticsId={settings?.identity?.googleAnalyticsId}/>}
+            {/*<SiteHeadSetter/>*/}
+            {!!headDataSettings?.googleAnalyticsId &&
+            <GoogleAnalytics googleAnalyticsId={headDataSettings.googleAnalyticsId}/>}
             {renderAutoLogin ? <UserAutoLogin renderAutoLogin={renderAutoLogin}/> : null}
         </>
     )

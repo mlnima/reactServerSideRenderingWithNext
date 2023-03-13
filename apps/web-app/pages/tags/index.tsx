@@ -8,32 +8,35 @@ import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_g
 import {Store} from "typescript-types";
 import MetasRenderer from "../../components/includes/metasPage/MetasRenderer";
 import getTagsAction from "@store_toolkit/clientReducers/postsReducer/getTagsAction";
+import {useRouter} from "next/router";
+import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
+import textContentReplacer from "custom-util/src/string-util/textContentReplacer";
+import {getTextDataWithTranslation} from "custom-util";
 
 const PageStyle = styled.div`
-  ${({tagsPageStyle}: { tagsPageStyle: string }) => tagsPageStyle || ''}
+  ${({customStyles}: { customStyles?: string }) => customStyles || ''}
 `
 
 const tagsPage = () => {
-
-    const { tagsPageStyle, sidebar,metas} = useSelector(({settings, posts}: Store) => {
-        return {
-            tagsPageStyle: settings?.design.tagsPageStyle,
-            sidebar: settings?.identity?.tagsPageSidebar,
-            metas: posts?.tagsMetas,
-        }
-    })
+    const {locale} = useRouter()
+    const metas = useSelector(({posts}: Store) => posts?.tagsMetas)
+    const currentPageSettings = useSelector(({settings}: Store) => settings?.currentPageSettings)
+    const headDataSettings = useSelector(({settings}: Store) => settings?.initialSettings?.headDataSettings)
 
     return (
-        <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar `}
-                   //@ts-ignore
-                   tagsPageStyle={tagsPageStyle}>
+        <PageStyle id={'content'} className={`page-${currentPageSettings?.sidebar || 'no'}-sidebar `}
+                   customStyles={currentPageSettings?.customStyles}>
+            <HeadSetter title={currentPageSettings?.title ?
+                textContentReplacer(currentPageSettings?.title,
+                    {name: undefined, count: undefined, siteName: headDataSettings.siteName}
+                ) : getTextDataWithTranslation(locale as string, 'title', currentPageSettings)}/>
             <main id={'primary'} className={'content main '}>
                 <WidgetsRenderer position={'tagsPageTop'}/>
                 <MetasRenderer metaData={metas} metaType={'tags'}/>
 
                 <WidgetsRenderer position={'tagsPageBottom'}/>
             </main>
-            <SidebarWidgetAreaRenderer sidebar={sidebar} position={'tagsPage'}/>
+            <SidebarWidgetAreaRenderer sidebar={currentPageSettings?.sidebar} position={'tagsPage'}/>
         </PageStyle>
     );
 };
@@ -51,7 +54,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         ],
         {
             setHeadData: true,
-            page: 'tags'
+            page: 'tagsPage'
         },
         store
     )
@@ -65,18 +68,3 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 export default tagsPage;
 
 
-
-
-// await store.dispatch(fetchMetas({
-//     data:context.query,
-//     metaType:'tags'
-// }))
-
-// {/*<MetasCardsRenderer metaType={'tags'}/>*/}
-// {/*<PaginationComponent*/}
-// {/*    isActive={true}*/}
-// {/*    currentPage={query?.page ? parseInt(query?.page as string) : 1}*/}
-// {/*    totalCount={totalCount}*/}
-// {/*    size={postsCountPerPage}*/}
-// {/*    maxPage={Math.ceil(totalCount / postsCountPerPage)}*/}
-// {/*/>*/}

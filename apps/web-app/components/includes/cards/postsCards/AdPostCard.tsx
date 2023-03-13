@@ -20,7 +20,7 @@ interface StylePropTypes {
 interface PropTypes {
     title: string,
     postUrl: string,
-    postsPerRawForMobile: number,
+    numberOfCardsPerRowInMobile: number,
     views: number,
     rating: number,
     index: number,
@@ -42,7 +42,7 @@ const UcgAdPostCard: FC<PropTypes> =
          postUrl,
          views,
          rating,
-         postsPerRawForMobile,
+         numberOfCardsPerRowInMobile,
          cardWidth,
          targetLink,
          index
@@ -58,10 +58,10 @@ const UcgAdPostCard: FC<PropTypes> =
                         <CardImageRenderer imageUrl={post.mainThumbnail}
                                            mediaAlt={title}
                                            index={index}
-                                           postsPerRawForMobile={postsPerRawForMobile}
+                                           numberOfCardsPerRowInMobile={numberOfCardsPerRowInMobile}
                                            cardWidth={cardWidth}/> :
                         <TextToCanvasImage title={title}
-                                           postsPerRawForMobile={postsPerRawForMobile}
+                                           numberOfCardsPerRowInMobile={numberOfCardsPerRowInMobile}
                                            cardWidth={cardWidth}/>
                     }
                 </Link>

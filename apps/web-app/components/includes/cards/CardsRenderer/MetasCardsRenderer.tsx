@@ -10,10 +10,10 @@ const CategoryCard = dynamic(() => import('../metasCards/CategoryCard'))
 
 
 interface MetasCardsRendererStylePropType {
-    postsPerRawForMobile: number,
-    cardWidth: number,
+    numberOfCardsPerRowInMobile?: number,
+    cardWidth?: number,
     metaType: string,
-    cardsCustomStyle: string
+    customStyles?: string
 }
 
 interface MetasCardsRendererPropTypes {
@@ -32,12 +32,12 @@ let MetasCardsRendererStyle = styled.div`
   grid-gap: 5px;
   grid-template-columns: repeat(auto-fill, minmax(${
           ({
-             postsPerRawForMobile,
+             numberOfCardsPerRowInMobile,
              metaType,
              cardWidth
            }: MetasCardsRendererStylePropType) => {
 
-            return metaType === 'actors' ? `${cardWidth}px` : `${96 / postsPerRawForMobile}vw`
+            return metaType === 'actors' ? `${cardWidth}px` : `${96 / (numberOfCardsPerRowInMobile || 2)}vw`
           }}, 2fr));
 
 
@@ -47,19 +47,19 @@ let MetasCardsRendererStyle = styled.div`
       return `${cardWidth}px`
     }}, 1fr));
   }
-  ${({cardsCustomStyle}: MetasCardsRendererStylePropType) => cardsCustomStyle || ''}
+  ${({customStyles}: MetasCardsRendererStylePropType) => customStyles || ''}
 `
 
 const MetasCardsRenderer: FC<MetasCardsRendererPropTypes> = ({uniqueData, metaType}) => {
 
-    const {postsPerRawForMobile, cardWidth, cardsCustomStyle} = useSelector(
-        ({settings}: Store) => {
-            return {
-                postsPerRawForMobile: settings?.design?.postsPerRawForMobile || 2,
-                cardsCustomStyle: settings?.design?.cardsCustomStyle || '',
-                cardWidth: metaType === 'actors' ? 140 : settings?.design?.cardWidthDesktop || 255,
-            }
-        })
+    const {numberOfCardsPerRowInMobile,customStyles,cardWidth} = useSelector(({settings}: Store) =>{
+
+        return{
+            numberOfCardsPerRowInMobile:settings?.initialSettings?.postCardsSettings?.numberOfCardsPerRowInMobile || 2,
+            customStyles:settings?.initialSettings?.postCardsSettings?.customStyles,
+            cardWidth:metaType === 'actors' ? 140 : settings?.initialSettings?.postCardsSettings?.cardsWidthDesktop || 255,
+        }
+    })
 
     const metas = useSelector(({posts}: Store) =>
             uniqueData?.metaData || (metaType === 'categories' ? posts?.categoriesMetas :
@@ -79,8 +79,8 @@ const MetasCardsRenderer: FC<MetasCardsRendererPropTypes> = ({uniqueData, metaTy
         <MetasCardsRendererStyle className='metas-block'
                                  cardWidth={cardWidth}
                                  metaType={metaType}
-                                 cardsCustomStyle={cardsCustomStyle}
-                                 postsPerRawForMobile={postsPerRawForMobile}>
+                                 customStyles={customStyles}
+                                 numberOfCardsPerRowInMobile={numberOfCardsPerRowInMobile}>
 
             {metas?.map((meta, index) => {
                 return (
@@ -89,7 +89,7 @@ const MetasCardsRenderer: FC<MetasCardsRendererPropTypes> = ({uniqueData, metaTy
                                       role={role}
                                       adminMode={adminMode}
                                       cardWidth={cardWidth}
-                                      postsPerRawForMobile={postsPerRawForMobile}
+                                      numberOfCardsPerRowInMobile={numberOfCardsPerRowInMobile}
                                       index={index}/>
                 )
             })}

@@ -5,26 +5,20 @@ import styled from "styled-components";
 import SidebarWidgetAreaRenderer from "../components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import _getServerSideStaticPageData from "../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
-// import getCurrentPageData from "@_variables/_clientVariables/getCurrentPageData";
+import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
 
 const HomePageStyle = styled.div`
   display: grid;
-  ${({stylesData}: { stylesData: string }) => stylesData || ''}
+  ${({customStyles}: { customStyles?: string }) => customStyles || ''}
 `
 
 const HomePage = () => {
 
-    const {sidebar, homePageStyle} = useSelector(({settings}: Store) => {
-        return {
-            homePageStyle: settings?.design?.homePageStyle,
-            sidebar: settings?.identity?.homePageSidebar,
-        }
-    })
+    const {sidebar, customStyles} = useSelector(({settings}: Store) => settings?.currentPageSettings)
 
     return (
-        <HomePageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`}
-                       //@ts-ignore
-                       stylesData={homePageStyle}>
+        <HomePageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`} customStyles={customStyles}>
+            <HeadSetter/>
             <MainWidgetArea className='home-page' position='home'/>
             <SidebarWidgetAreaRenderer sidebar={sidebar} position={'homePage'}/>
         </HomePageStyle>
@@ -33,30 +27,15 @@ const HomePage = () => {
 };
 //@ts-ignore
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-
-
     await _getServerSideStaticPageData(
         context,
         ['homePageLeftSidebar', 'homePageRightSidebar', 'home'],
         {
             setHeadData: true,
-            page: 'home'
+            page: 'homePage'
         },
         store
     )
-
-    // const pageData = await getCurrentPageData({
-    //     dynamicWidgets: ['homePageLeftSidebar', 'homePageRightSidebar', 'home'],
-    //     locale: context.locale,
-    //     requireSettings: ['identity', 'design', 'membershipSettings']
-    // })
-    //
-    // return {
-    //     props: {
-    //         pageData
-    //     }
-    // }
-
     return null
 });
 

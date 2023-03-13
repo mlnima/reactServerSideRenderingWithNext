@@ -3,12 +3,13 @@ import {getTextDataWithTranslation, textContentReplacer,capitalizeFirstLetter} f
 import {_metasCanonicalUrlGenerator} from "@_variables/_clientVariables/clientVariables/_canonicalUrlGenerators";
 
 const _firstRequestHeadDataSetter = (context, page: string, setHeadData: boolean, identity: any) => {
-    const matchPathRegex = new RegExp('search|tags|categories|actors|home|profile|posts|chatroom|messenger|login|register|user', 'i')
+
+    const matchPathRegex = new RegExp('search|tags|categories|actors|homePage|profile|posts|chatroom|messenger|login|register|user', 'i')
 
     if (matchPathRegex.test(page) && setHeadData) {
         const title = page && page?.match('search|tags|categories|actors') ?
             textContentReplacer(
-                getTextDataWithTranslation(context.locale, `${page}PageTitle`, identity,process.env.NEXT_PUBLIC_DEFAULT_LOCAL)
+                getTextDataWithTranslation(context.locale, `${page}PageTitle`, identity)
                 + ` | ${identity?.siteName}`,
                 //@ts-ignore
                 {
@@ -21,11 +22,11 @@ const _firstRequestHeadDataSetter = (context, page: string, setHeadData: boolean
                         ` ${capitalizeFirstLetter(page as string)} `
                 }
             )
-            : getTextDataWithTranslation(context.locale, 'title', identity,process.env.NEXT_PUBLIC_DEFAULT_LOCAL)
+            : getTextDataWithTranslation(context.locale, 'title', identity)
 
         const description = page && page?.match('search|tags|categories|actors') ?
             textContentReplacer(
-                getTextDataWithTranslation(context.locale, `${page}PageDescription`, identity,process.env.NEXT_PUBLIC_DEFAULT_LOCAL)
+                getTextDataWithTranslation(context.locale, `${page}PageDescription`, identity)
                 + `| ${identity?.siteName}`,
                 //@ts-ignore
                 {
@@ -34,7 +35,7 @@ const _firstRequestHeadDataSetter = (context, page: string, setHeadData: boolean
                         `${capitalizeFirstLetter(page)}`
                 }
             )
-            : getTextDataWithTranslation(context.locale, 'description', identity,process.env.NEXT_PUBLIC_DEFAULT_LOCAL)
+            : getTextDataWithTranslation(context.locale, 'description', identity)
 
         const isMetaPageRegex = /categories|tags|actors/g
 
@@ -51,7 +52,7 @@ const _firstRequestHeadDataSetter = (context, page: string, setHeadData: boolean
         return {
             title: title || null,
             description: description?.substring(0, 155) || null,
-            keywords: [(page !== 'home' ? page : ''), ...(getTextDataWithTranslation(context.locale, 'keywords', identity,process.env.NEXT_PUBLIC_DEFAULT_LOCAL) || [])],
+            keywords: [(page !== 'home' ? page : ''), ...(getTextDataWithTranslation(context.locale, 'keywords', identity) || [])],
             themeColor: identity?.themeColor || '#000',
             ...ogUrls,
             favIcon: identity?.favIcon || '/asset/images/default/favIcon/favicon.png',

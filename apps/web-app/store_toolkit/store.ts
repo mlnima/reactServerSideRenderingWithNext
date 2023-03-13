@@ -23,7 +23,7 @@ const combinedReducer = combineReducers({
 const reducer = (state: ReturnType<typeof combinedReducer>, action: AnyAction) => {
 
     if (action.type === HYDRATE ) {
-        const nextState = {
+        return {
             ...state,
             ...action.payload,
             widgets: {
@@ -41,24 +41,18 @@ const reducer = (state: ReturnType<typeof combinedReducer>, action: AnyAction) =
             user: {
                 ...action?.payload?.user,
                 //@ts-ignore
-                ...state?.user,
-                // loggedIn:state?.user?.loggedIn || action?.payload?.user?.loggedIn
+                ...state?.user
             },
             settings: {
                 ...(action?.payload?.settings || {}),
-                identity: {
-                    ...(state?.settings?.identity || {}),
-                    ...(action?.payload?.settings?.identity || {})
-
-                },
-                design: {
-                    ...(state?.settings?.design || {}),
-                    ...(action?.payload?.settings?.design || {})
+                initialSettings: {
+                    ...(state?.settings?.initialSettings || {}),
+                    ...(action?.payload?.settings?.initialSettings || {})
                 }
             },
         }
 
-        return nextState
+
 
     } else {
         return combinedReducer(state, action);

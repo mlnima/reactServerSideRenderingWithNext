@@ -2,7 +2,6 @@ import PostsPage from "../../components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
 import PostsPageInfo from "../../components/includes/PostsPage/PostsPageInfo";
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
 import SidebarWidgetAreaRenderer from "../../components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
@@ -10,6 +9,10 @@ import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_g
 import {Store} from "typescript-types";
 import getPostsAction from "@store_toolkit/clientReducers/postsReducer/getPostsAction";
 import MetaAdminQuickAccessBar from "@components/pagesIncludes/metas/MetaAdminQuickAccessBar";
+import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
+import textContentReplacer from "custom-util/src/string-util/textContentReplacer";
+import {getTextDataWithTranslation} from "custom-util";
+import {useRouter} from "next/router";
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
@@ -30,38 +33,36 @@ let PageStyle = styled.div`
     }
   }
 
-  ${({categoryPageStyle}: { categoryPageStyle: string }) => categoryPageStyle || ''}
+  ${({customStyles}: { customStyles: string }) => customStyles || ''}
 `
 
 const categoryPage = () => {
 
-    const { category, categoryPageStyle, sidebar} = useSelector(({user, posts, settings}: Store) => {
-        return {
-            category: posts.categoryData ,
-            //@ts-ignore
-            categoryPageStyle: settings.design?.categoryPageStyle,
-            sidebar: settings?.identity?.categoryPageSidebar
-        }
-    })
-
+    const category = useSelector(({ posts}: Store) => posts.categoryData)
+    const {locale} = useRouter()
     const role = useSelector(({user}: Store) => user?.userData?.role);
     const adminMode = useSelector(({globalState}: Store) =>  globalState?.adminMode);
+    const currentPageSettings = useSelector(({settings}: Store) => settings?.currentPageSettings)
+    const headDataSettings = useSelector(({settings}: Store) => settings?.initialSettings?.headDataSettings)
 
 
     return (
 
-        <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar `} categoryPageStyle={categoryPageStyle}>
-
+        <PageStyle id={'content'} className={`page-${currentPageSettings?.sidebar || 'no'}-sidebar `}
+                   //@ts-ignore
+                   customStyles={currentPageSettings?.customStyles}>
+            <HeadSetter title={ currentPageSettings?.title ?
+                textContentReplacer(currentPageSettings?.title,
+                    {name:category?.name,count:category?.count,siteName:headDataSettings.siteName}
+                ): getTextDataWithTranslation(locale as string,'title',category)}  />
             <main id={'primary'} className="main posts-page">
                 {(!!adminMode && role === 'administrator') && <MetaAdminQuickAccessBar metaId={category._id}/>}
-
                 {category?.name && <PostsPageInfo titleEntry={category.name}/>}
                 <WidgetsRenderer position={'categoryPageTop'}/>
                 <PostsPage renderPagination={true}/>
                 <WidgetsRenderer position={'categoryPageBottom'}/>
-
             </main>
-            <SidebarWidgetAreaRenderer sidebar={sidebar} position={'categoryPage'}/>
+            <SidebarWidgetAreaRenderer sidebar={currentPageSettings?.sidebar} position={'categoryPage'}/>
         </PageStyle>
 
     )
@@ -79,7 +80,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             'categoryPageRightSidebar'
         ],
         {
-            page:'category',
+            page:'categoryPage',
             setHeadData:false
         },
         store

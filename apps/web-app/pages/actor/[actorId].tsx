@@ -1,18 +1,18 @@
 import PostsPage from "../../components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
-// import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
 import {useRouter} from "next/router";
-import {wrapper} from "../../store_toolkit/store";
+import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
-import Link from "next/link";
-
 import SidebarWidgetAreaRenderer from "../../components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import ActorBio from '../../components/includes/cards/CardsRenderer/ActorBio/ActorBio'
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
 import getPostsAction from "@store_toolkit/clientReducers/postsReducer/getPostsAction";
 import MetaAdminQuickAccessBar from "@components/pagesIncludes/metas/MetaAdminQuickAccessBar";
+import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
+import textContentReplacer from "custom-util/src/string-util/textContentReplacer";
+import {getTextDataWithTranslation} from "custom-util";
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
@@ -29,46 +29,38 @@ const PageStyle = styled.div`
     }
   }
 
-  ${(props: { stylesData: string }) => props.stylesData || ''}
+  ${({customStyles}: { customStyles?: string }) => customStyles || ''}
 
 `
 
 const actorPage = () => {
-
-    const {actor, actorPageStyle, sidebar} = useSelector(({user, settings,posts}: Store) => {
-        return {
-            actor:  posts?.actorData,
-            actorPageStyle: settings?.design?.actorPageStyle,
-            sidebar: settings?.identity?.actorPageSidebar
-        }
-    })
-
+    const {locale} = useRouter()
+    const actor = useSelector(({posts}: Store) => posts?.actorData)
+    const currentPageSettings = useSelector(({settings}: Store) => settings?.currentPageSettings)
+    const headDataSettings = useSelector(({settings}: Store) => settings?.initialSettings?.headDataSettings)
+    const adminMode = useSelector(({globalState}: Store) => globalState?.adminMode);
     const role = useSelector(({user}: Store) => user?.userData?.role);
-    const adminMode = useSelector(({globalState}: Store) =>  globalState?.adminMode);
-
 
     return (
-        <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`}
-                   //@ts-ignore
-                   stylesData={actorPageStyle}>
+        <PageStyle id={'content'} className={`page-${currentPageSettings?.sidebar || 'no'}-sidebar`}
+                   customStyles={currentPageSettings?.customStyles}>
+
+            <HeadSetter title={currentPageSettings?.title ?
+                textContentReplacer(currentPageSettings?.title,
+                    {name: actor?.name, count: actor?.count, siteName: headDataSettings.siteName}
+                ) : getTextDataWithTranslation(locale as string, 'title', actor,)}/>
             <main id={'primary'} className="main posts-page">
                 {(!!adminMode && role === 'administrator') && <MetaAdminQuickAccessBar metaId={actor._id}/>}
-
                 <ActorBio/>
-                <WidgetsRenderer
-                    position='actorPageTop'
-                />
+                <WidgetsRenderer position='actorPageTop'/>
                 <PostsPage renderPagination={true}/>
-                <WidgetsRenderer
-                    position='actorPageBottom'
-                />
+                <WidgetsRenderer position='actorPageBottom'/>
             </main>
-            <SidebarWidgetAreaRenderer sidebar={sidebar} position={'actorPage'}/>
+            <SidebarWidgetAreaRenderer sidebar={currentPageSettings?.sidebar} position={'actorPage'}/>
         </PageStyle>
     )
 };
 
-//http://localhost:3000/actor/5f411023b4df305e903613ca
 //@ts-ignore
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
@@ -81,7 +73,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             'actorPageRightSidebar'
         ],
         {
-            page: 'actor',
+            page: 'actorPage',
             setHeadData: false
         },
         store
@@ -100,8 +92,6 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 
     return null
 });
-
-
 
 
 export default actorPage;

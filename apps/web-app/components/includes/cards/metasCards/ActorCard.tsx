@@ -62,14 +62,14 @@ const ActorCardStyle = styled.article`
 interface ActorCardPropTypes {
     meta: Meta,
     index: number,
-    postsPerRawForMobile: number,
+    numberOfCardsPerRowInMobile: number,
     cardWidth: number,
     role:string,
     adminMode: boolean
 }
 
 interface ActorCardStylePropTypes {
-    postsPerRawForMobile: number,
+    numberOfCardsPerRowInMobile: number,
     cardWidth: number
 }
 
@@ -77,7 +77,7 @@ const ActorCard: FC<ActorCardPropTypes> =
     ({
          meta,
          index,
-         postsPerRawForMobile,
+         numberOfCardsPerRowInMobile,
          cardWidth,
          adminMode,
          role
@@ -86,16 +86,16 @@ const ActorCard: FC<ActorCardPropTypes> =
         const actorName = capitalizeFirstLetter(meta?.name)
 
         return (
-            <ActorCardStyle cardWidth={cardWidth} className={'actor-card'} postsPerRawForMobile={postsPerRawForMobile}>
+            <ActorCardStyle cardWidth={cardWidth} className={'actor-card'} numberOfCardsPerRowInMobile={numberOfCardsPerRowInMobile}>
                 <Link href={`/actor/${meta?._id}`} className='actor-card-link' title={actorName as string}>
                         {!!meta.imageUrl ?
                             <CardImageRenderer imageUrl={meta.imageUrl}
                                                mediaAlt={actorName}
                                                index={index}
-                                               postsPerRawForMobile={postsPerRawForMobile}
+                                               numberOfCardsPerRowInMobile={numberOfCardsPerRowInMobile}
                                                cardWidth={cardWidth}/> :
                             <TextToCanvasImage title={actorName}
-                                               postsPerRawForMobile={postsPerRawForMobile}
+                                               numberOfCardsPerRowInMobile={numberOfCardsPerRowInMobile}
                                                cardWidth={cardWidth}/>
                         }
 

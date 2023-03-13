@@ -24,6 +24,7 @@
       {"name": "actor", "url": "/dashboard/settings/defaultPages?pageName=actorPageSettings"},
       {"name": "posts", "url": "/dashboard/settings/defaultPages?pageName=postsPageSettings"},
       {"name": "post", "url": "/dashboard/settings/defaultPages?pageName=postPageSettings"},
+      {"name": "Search", "url": "/dashboard/settings/defaultPages?pageName=searchPageSettings"},
 
       {"name": "messenger", "url": "/dashboard/settings/defaultPages?pageName=messengerPageSettings"},
       {"name": "profile", "url": "/dashboard/settings/defaultPages?pageName=profilePageSettings"},

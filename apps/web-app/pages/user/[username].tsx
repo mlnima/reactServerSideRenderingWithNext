@@ -12,6 +12,7 @@ import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_g
 import SvgRenderer from "../../components/global/commonComponents/SvgRenderer/SvgRenderer";
 import UserPreviewImage from "ui/src/UserPreviewImage";
 import {Store} from "typescript-types";
+import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
 
 const UserPageStyledDiv = styled.div`
   color: var(--main-text-color);
@@ -76,7 +77,6 @@ const user = () => {
     const {t} = useTranslation('common');
     const dispatch = useAppDispatch()
     const router = useRouter()
-
     const {userData,userPageData} = useSelector(({user}:Store) =>user)
 
     useEffect(() => {
@@ -105,13 +105,13 @@ const user = () => {
     if (userPageData?._id && userPageData?.username){
         return (
             <UserPageStyledDiv className='user-page main'>
-
+                <HeadSetter title={userPageData?.username}/>
                 <div className='profile-header'>
                     {!!userPageData?.profileImage &&
                         <UserPreviewImage imageUrl={userPageData?.profileImage} size={150}/>}
                     <div className='profile-header-info-actions'>
                         <h3>{userPageData?.username}</h3>
-                        {/*//@ts-ignore*/}
+
                         <UserPageActionButtons _id={userData?._id}/>
                         <div className='follow-count'>
                             <p>

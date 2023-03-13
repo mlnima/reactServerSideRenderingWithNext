@@ -18,13 +18,13 @@ const Style = styled.div`
   width: 100%;
   margin: 10px auto;
   grid-gap: 5px;
-  grid-template-columns: repeat(auto-fill, minmax(${({postsPerRawForMobile}: StylePropTypes) => `${96 / postsPerRawForMobile}`}vw, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(${({numberOfCardsPerRowInMobile}: StylePropTypes) => `${96 / numberOfCardsPerRowInMobile}`}vw, 1fr));
 
   @media only screen and (min-width: 768px) {
     grid-template-columns: repeat(auto-fill, minmax(${({cardWidth}: StylePropTypes) => `${cardWidth}px`}, 1fr));
   }
 
-  ${({cardsCustomStyle}: StylePropTypes) => cardsCustomStyle || ''}
+  ${({customStyles}: StylePropTypes) => customStyles || ''}
 `
 
 interface CardsRendererPropTypes {
@@ -44,9 +44,9 @@ interface CardsRendererPropTypes {
 }
 
 interface StylePropTypes {
-    postsPerRawForMobile: number,
+    numberOfCardsPerRowInMobile: number,
     cardWidth?: number,
-    cardsCustomStyle: string
+    customStyles?: string
 }
 
 const PostsCardsRenderer: FC<CardsRendererPropTypes> =
@@ -56,25 +56,26 @@ const PostsCardsRenderer: FC<CardsRendererPropTypes> =
          isSidebar
      }) => {
         const {locale} = useRouter()
-        const {cardWidth, postsPerRawForMobile, cardsCustomStyle} = useSelector(({settings}: Store) => {
-            return {
-                cardWidth: settings?.design?.cardWidthDesktop || 255,
-                cardsCustomStyle: settings?.design?.cardsCustomStyle || '',
-                postsPerRawForMobile: settings?.design?.postsPerRawForMobile || 2,
+
+        const {numberOfCardsPerRowInMobile,customStyles,cardWidth} = useSelector(({settings}: Store) =>{
+            return{
+                numberOfCardsPerRowInMobile:settings?.initialSettings?.postCardsSettings?.numberOfCardsPerRowInMobile || 2,
+                customStyles:settings?.initialSettings?.postCardsSettings?.customStyles,
+                cardWidth:settings?.initialSettings?.postCardsSettings?.cardsWidthDesktop || 255,
             }
-        });
+        })
 
         return (
             <Style className={'posts-content'}
-                   postsPerRawForMobile={postsPerRawForMobile}
+                   numberOfCardsPerRowInMobile={numberOfCardsPerRowInMobile}
                    cardWidth={cardWidth}
-                   cardsCustomStyle={cardsCustomStyle}>
+                   customStyles={customStyles}>
 
                 {(uniqueData?.posts || posts || []).map((post: Post, index: number) => {
                     const postProps = {
                         views: post.views &&  post.views > 10 ? post.views as unknown as number : 0,
                         cardWidth,
-                        postsPerRawForMobile,
+                        numberOfCardsPerRowInMobile,
                         //@ts-ignore
                         rating: post.likes || post.disLikes ? ratingCalculator(post.likes, post.disLikes) : null,
                         post,

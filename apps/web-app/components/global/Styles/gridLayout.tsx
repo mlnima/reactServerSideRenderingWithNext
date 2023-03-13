@@ -5,7 +5,7 @@ import { css } from 'styled-components';
 interface GlobalStylesPropTypes {
     customColors: string,
     customStyles: string,
-    sideBarWidth: number,
+    sidebarWidth: number,
 }
 
 
@@ -80,7 +80,7 @@ const gridLayout = css`
       }
 
       .page-both-sidebar {
-        grid-template-columns: ${({sideBarWidth}: GlobalStylesPropTypes) => `${sideBarWidth}px 1fr ${sideBarWidth}px`};
+        grid-template-columns: ${({sidebarWidth}: GlobalStylesPropTypes) => `${sidebarWidth}px 1fr ${sidebarWidth}px`};
         grid-template-areas: 'left-sidebar primary right-sidebar';
       }
 
@@ -90,12 +90,12 @@ const gridLayout = css`
       }
 
       .page-left-sidebar {
-        grid-template-columns: ${({sideBarWidth}: GlobalStylesPropTypes) => `${sideBarWidth}px 1fr`};
+        grid-template-columns: ${({sidebarWidth}: GlobalStylesPropTypes) => `${sidebarWidth}px 1fr`};
         grid-template-areas: 'left-sidebar primary';
       }
 
       .page-right-sidebar {
-        grid-template-columns: ${({sideBarWidth}: GlobalStylesPropTypes) => ` 1fr ${sideBarWidth}px`};
+        grid-template-columns: ${({sidebarWidth}: GlobalStylesPropTypes) => ` 1fr ${sidebarWidth}px`};
         grid-template-areas: 'primary right-sidebar';
       }
 

@@ -1,15 +1,18 @@
+import React from "react";
 import {useRouter} from "next/router";
 import PaginationComponent from "../../components/includes/PaginationComponent/PaginationComponent";
 import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {wrapper} from "../../store_toolkit/store";
+import {wrapper} from "@store_toolkit/store";
 import SidebarWidgetAreaRenderer from "../../components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
-import React from "react";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import MetasCardsRenderer from "../../components/includes/cards/CardsRenderer/MetasCardsRenderer";
 import {Store} from "typescript-types";
 import getMetasAction from "@store_toolkit/clientReducers/postsReducer/getMetasAction";
+import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
+import textContentReplacer from "custom-util/src/string-util/textContentReplacer";
+import {getTextDataWithTranslation} from "custom-util";
 
 const PageStyle = styled.div`
   .actors {
@@ -20,43 +23,29 @@ const PageStyle = styled.div`
     max-width: 100%;
   }
 
-  ${({actorsPageStyle}: { actorsPageStyle: string }) => actorsPageStyle || ''}
+  ${({customStyles}: { customStyles?: string }) => customStyles || ''}
 `
 
 const actorsPage = () => {
-    const {query} = useRouter();
 
-    const {actorsPageStyle, totalCount,sidebar,postsCountPerPage} = useSelector(({settings, posts}: Store) => {
-        return {
-            actorsPageStyle: settings?.design?.actorsPageStyle,
-            totalCount: posts?.totalCount,
-            sidebar: settings?.identity?.actorsPageSidebar,
-            postsCountPerPage: query?.size ? parseInt(query?.size as string) : settings?.identity?.postsCountPerPage || 20
-        }
-    })
+    const {locale} = useRouter()
+    const currentPageSettings = useSelector(({settings}: Store) => settings?.currentPageSettings)
+    const headDataSettings = useSelector(({settings}: Store) => settings?.initialSettings?.headDataSettings)
 
     return (
-        <PageStyle id={'content'}
-                   //@ts-ignore
-                   actorsPageStyle={actorsPageStyle} className={`page-${sidebar || 'no'}-sidebar `}>
+        <PageStyle id={'content'} className={`page-${currentPageSettings?.sidebar || 'no'}-sidebar `}
+                   customStyles={currentPageSettings?.customStyles} >
+            <HeadSetter title={ currentPageSettings?.title ?
+                textContentReplacer(currentPageSettings?.title,
+                    {name:undefined,count:undefined,siteName:headDataSettings.siteName}
+                ): getTextDataWithTranslation(locale as string,'title',currentPageSettings)}  />
             <main id={'primary'} className={'content main '}>
-                <WidgetsRenderer
-                    position={'actorsPageTop'}
-                />
+                <WidgetsRenderer position={'actorsPageTop'}/>
                 <MetasCardsRenderer metaType={'actors'}/>
-                <PaginationComponent
-                    isActive={true}
-                    currentPage={query?.page ? parseInt(query?.page as string) : 1}
-                    totalCount={totalCount}
-                    size={postsCountPerPage}
-                    maxPage={Math.ceil(totalCount / postsCountPerPage)}
-                />
-                <WidgetsRenderer
-                    position={'actorsPageBottom'}
-
-                />
+                <PaginationComponent/>
+                <WidgetsRenderer position={'actorsPageBottom'}/>
             </main>
-            <SidebarWidgetAreaRenderer sidebar={sidebar} position={'actorsPage'}/>
+            <SidebarWidgetAreaRenderer sidebar={currentPageSettings.sidebar} position={'actorsPage'}/>
         </PageStyle>
     );
 };
@@ -75,14 +64,14 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         ],
         {
             setHeadData: true,
-            page: 'actors'
+            page: 'actorsPage'
         },
         store
     )
 
     await store.dispatch(getMetasAction({
-        data:context.query,
-        metaType:'actors'
+        data: context.query,
+        metaType: 'actors'
     }))
 
     return null

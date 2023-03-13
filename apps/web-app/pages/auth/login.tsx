@@ -3,13 +3,14 @@ import {wrapper} from "@store_toolkit/store";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
+import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
 
 const Login = () => {
     const dispatch = useAppDispatch()
     useEffect(() => {
         dispatch(loginRegisterForm('login'))
     }, []);
-    return null
+    return <HeadSetter/>
 };
 
 //@ts-ignore
@@ -21,12 +22,12 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         [],
         {
             setHeadData:true,
-            page:'login'
+            page:'loginPage'
         },
         store
     )
 
-    return null
+    return
 })
 
 

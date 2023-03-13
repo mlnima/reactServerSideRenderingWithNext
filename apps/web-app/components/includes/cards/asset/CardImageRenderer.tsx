@@ -5,26 +5,26 @@ interface CardImageNextPropTypes {
     imageUrl: string,
     mediaAlt: string,
     index: number,
-    postsPerRawForMobile: number,
+    numberOfCardsPerRowInMobile: number,
     cardWidth: number,
     title?: string,
 }
 
 interface CardImageRendererStylePropTypes {
-    postsPerRawForMobile: number,
+    numberOfCardsPerRowInMobile: number,
     cardWidth: number,
 }
 
 const CardImageRendererStyle = styled.div`
 
   width: 100%;
-  height: ${({postsPerRawForMobile}: CardImageRendererStylePropTypes) => 96 / postsPerRawForMobile / 1.777}vw;
+  height: ${({numberOfCardsPerRowInMobile}: CardImageRendererStylePropTypes) => 96 / numberOfCardsPerRowInMobile / 1.777}vw;
   aspect-ratio: 16 / 9;
   position: relative;
 
   img {
     width: 100%;
-    height: ${({postsPerRawForMobile}: CardImageRendererStylePropTypes) => 96 / postsPerRawForMobile / 1.777}vw !important;
+    height: ${({numberOfCardsPerRowInMobile}: CardImageRendererStylePropTypes) => 96 / numberOfCardsPerRowInMobile / 1.777}vw !important;
     aspect-ratio: 16 / 9;
     object-fit: cover;
   }
@@ -44,7 +44,7 @@ const CardImageRenderer: FC<CardImageNextPropTypes> =
     ({
          imageUrl,
          mediaAlt,
-         postsPerRawForMobile,
+         numberOfCardsPerRowInMobile,
          index,
          cardWidth,
      }) => {
@@ -59,7 +59,7 @@ const CardImageRenderer: FC<CardImageNextPropTypes> =
 
         const loadingAttr = index > 1 ? {loading: 'lazy'} : {}
         return (
-            <CardImageRendererStyle postsPerRawForMobile={postsPerRawForMobile}
+            <CardImageRendererStyle numberOfCardsPerRowInMobile={numberOfCardsPerRowInMobile}
                                     cardWidth={cardWidth}
                                     className={'card-image'}>
                 {/*// @ts-ignore*/}

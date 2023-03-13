@@ -57,7 +57,7 @@ const CategoryCardStyle = styled.article`
 interface CategoryCardPropTypes {
     meta: Meta,
     index: number,
-    postsPerRawForMobile: number,
+    numberOfCardsPerRowInMobile: number,
     cardWidth: number,
     role: string,
     adminMode: boolean,
@@ -67,7 +67,7 @@ const CategoryCard: FC<CategoryCardPropTypes> =
     ({
          meta,
          index,
-         postsPerRawForMobile,
+         numberOfCardsPerRowInMobile,
          cardWidth,
          adminMode,
          role
@@ -90,10 +90,10 @@ const CategoryCard: FC<CategoryCardPropTypes> =
                         <CardImageRenderer imageUrl={meta.imageUrl}
                                            mediaAlt={title}
                                            index={index}
-                                           postsPerRawForMobile={postsPerRawForMobile}
+                                           numberOfCardsPerRowInMobile={numberOfCardsPerRowInMobile}
                                            cardWidth={cardWidth}/> :
                         <TextToCanvasImage title={title}
-                                           postsPerRawForMobile={postsPerRawForMobile}
+                                           numberOfCardsPerRowInMobile={numberOfCardsPerRowInMobile}
                                            cardWidth={cardWidth}/>
                     }
                 </Link>

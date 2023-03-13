@@ -1,4 +1,4 @@
-import {useEffect, Fragment, FC} from 'react';
+import React, {useEffect, Fragment, FC} from 'react';
 import {useRouter} from "next/router";
 import PaginationComponent from "../PaginationComponent/PaginationComponent";
 import styled from "styled-components";
@@ -27,11 +27,11 @@ const PostsPage: FC<PostPageTypes> = ({renderPagination}) => {
 
     const {query} = useRouter()
 
-    const {posts, postsCountPerPage, totalCount} = useSelector(({posts, settings}: Store) => {
+    const {posts, numberOfCardsPerPage, totalCount} = useSelector(({posts, settings}: Store) => {
         return {
             posts: posts?.posts,
             totalCount: posts?.totalCount,
-            postsCountPerPage: settings?.identity?.postsCountPerPage || 20
+            numberOfCardsPerPage: settings?.initialSettings?.postCardsSettings?.numberOfCardsPerPage || 20
         }
     })
 
@@ -49,13 +49,7 @@ const PostsPage: FC<PostPageTypes> = ({renderPagination}) => {
             <PostsContainer className='posts-container'>
                 <PostsCardsRenderer posts={posts}/>
             </PostsContainer>
-            {!!renderPagination && <PaginationComponent
-                isActive={true}
-                currentPage={query?.page ? parseInt(query?.page as string) : 1}
-                totalCount={totalCount}
-                size={postsCountPerPage}
-                maxPage={Math.ceil(totalCount / postsCountPerPage)}
-            />}
+            {!!renderPagination && <PaginationComponent/>}
 
         </Fragment>
     );

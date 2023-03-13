@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import Link from "next/link";
 import styled from "styled-components";
 
@@ -29,25 +29,35 @@ const UserSmallPreviewStyledSpan = styled.span`
   }
 `
 
-const UserSmallPreview = ({username, role, profileImage, name, lastName, _id, gender}) => {
+interface PropTypes {
+    user: {
+        username: string,
+        profileImage: string,
+        gender: string,
+        name: string,
+        lastName: string,
+    }
+
+}
+
+const UserSmallPreview: FC<PropTypes> = ({user}) => {
     return (
         <UserSmallPreviewStyledSpan>
             <Link href={{
-                pathname: `/user/${username}`,
-                query: {username}
+                pathname: `/user/${user?.username}`,
+                query: {username: user?.username}
             }}
-                  as={`/user/${username}`}
-                  className='user'
-            >
+                  as={`/user/${user?.username}`}
+                  className='user'>
 
-                <img src={profileImage ? profileImage :
-                    gender === 'male' ? '/asset/images/user/maleAvatar50.jpg' :
-                        gender === 'female' ? '/asset/images/user/femaleAvatar50.jpg' :
+                <img src={user?.profileImage ? user?.profileImage :
+                    user?.gender === 'male' ? '/asset/images/user/maleAvatar50.jpg' :
+                        user?.gender === 'female' ? '/asset/images/user/femaleAvatar50.jpg' :
                             '/asset/images/user/noGenderAvatar50.jpg'
                 } alt="user-profile-image" className="user-profile-image"/>
                 <div className='user-names-info'>
-                    <p>{username}</p>
-                    <p>{name} {lastName}</p>
+                    <p>{user?.username}</p>
+                    <p>{user?.name} {user?.lastName}</p>
                 </div>
 
             </Link>

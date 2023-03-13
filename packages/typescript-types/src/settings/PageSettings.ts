@@ -3,9 +3,7 @@ export interface PageSettings{
     description?:string,
     keywords?:string,
     sidebar:boolean,
-    themeColor?: string,
     customStyles?:string,
-    customScriptsAsString?: string,
     translations?:{
         [key: string]:{
             title: string,

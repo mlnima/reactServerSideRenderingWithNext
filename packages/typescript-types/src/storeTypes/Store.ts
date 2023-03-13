@@ -29,7 +29,7 @@ export interface Store {
     adminPanelTerminalState: AdminPanelTerminalState,
     adminPanelWidgets: AdminPanelWidgets,
     chatroom: ChatroomState,
-    settings?: SettingsState,
+    settings: SettingsState,
     posts: PostStateTypes,
     user: UserState,
     widgets: WidgetsState,

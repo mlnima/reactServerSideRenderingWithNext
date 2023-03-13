@@ -2,29 +2,38 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
 import {getSettings,getUncachedSettings} from "api-requests";
-import {loading, setHeadData} from "./globalStateReducer";
-import _firstRequestHeadDataSetter from "../_storeVariables/_firstRequestHeadDataSetter";
-// import _getMultipleSettingsQueryGenerator from "@_variables/adminVariables/_getMultipleSettingsQueryGenerator";
+import {loading} from "./globalStateReducer";
 
 interface SettingsStateRaw {
+
+    //new settings structures
+    initialSettings:{},
+    currentPageSettings:{},
     ip?: string,
     isSettingSet: boolean,
-    design: {},
-    identity: {},
-    eCommerce: {},
     adminSettings: {
         [key: string]: {}
     },
     requestedSettings: string[]
+
+    //will be removed
+    design: {},
+    identity: {},
+    eCommerce: {},
+
 }
 
 const initialState: SettingsStateRaw = {
+    //new settings structures
+    initialSettings:{},
+    currentPageSettings:{},
     isSettingSet: false,
+    requestedSettings: [],
+    //will be removed
     design: {},
     identity: {},
     eCommerce: {},
     adminSettings: {},
-    requestedSettings: []
 }
 
 interface FetchSettingsProps {
@@ -43,23 +52,18 @@ export const fetchSettings = createAsyncThunk(
         thunkAPI) => {
         try {
             const fetchedSettings = await getSettings(config.requireSettings)
+            let reducedSettings = {}
 
-            thunkAPI.dispatch(
-                setHeadData(
-                    _firstRequestHeadDataSetter(
-                        config.context,
-                        config.options?.page,
-                        config.options?.setHeadData,
-                        // identityData.data
-                        fetchedSettings.data?.settings?.identity?.data
-                    )
-                )
-            )
+            for (const setting in (fetchedSettings?.data?.settings || {}) ){
+                if (setting === `${config.options.page}Settings`){
+                    reducedSettings.currentPageSettings = fetchedSettings?.data?.settings?.[setting]?.data ||{}
+                }else {
+                    reducedSettings[setting] = fetchedSettings?.data?.settings?.[setting]?.data ||{}
+                }
+            }
             return {
+                ...reducedSettings,
                 requestedSettings: config.requireSettings,
-                design: fetchedSettings.data?.settings?.design?.data || {},
-                identity: fetchedSettings.data?.settings?.identity?.data || {},
-                membershipSettings: fetchedSettings.data?.settings?.membershipSettings?.data  || {},
                 isSettingSet: true,
             }
         } catch (err) {
@@ -73,13 +77,12 @@ export const getUncachedSettingsForAdmin = createAsyncThunk('settings/getUncache
         thunkAPI) => {
         try {
             thunkAPI.dispatch(loading(true))
-            const settingsRequestData = await getUncachedSettings(['identity', 'design', 'adminSettings', 'membershipSettings'])
+            // const settingsRequestData = await getUncachedSettings(['identity', 'design', 'adminSettings', 'membershipSettings'])
+            const settingsRequestData = await getUncachedSettings(['initialSettings'])
             thunkAPI.dispatch(loading(false))
 
             return {
-                design: settingsRequestData?.data?.settings?.design?.data || {},
-                identity: settingsRequestData?.data?.settings?.identity?.data|| {},
-                membershipSettings: settingsRequestData?.data?.settings?.membershipSettings?.data|| {},
+                initialSettings:settingsRequestData?.data?.settings?.initialSettings
             }
 
         } catch (err) {
@@ -91,14 +94,7 @@ export const getUncachedSettingsForAdmin = createAsyncThunk('settings/getUncache
 export const settingsSlice = createSlice({
     name: 'settings',
     initialState,
-    reducers: {
-        setSettingsForAdmin: (state, action: PayloadAction<any>) => {
-            return {
-                ...state,
-                ...action.payload
-            }
-        },
-    },
+    reducers: {},
     extraReducers: (builder) => builder
         .addCase(fetchSettings.fulfilled, (state, action: PayloadAction<any>) => {
             return {
@@ -114,9 +110,7 @@ export const settingsSlice = createSlice({
         })
 })
 
-export const {
-    setSettingsForAdmin
-} = settingsSlice.actions
+export const {} = settingsSlice.actions
 
 export const settingsReducer = (state: RootState) => state?.settings || null
 

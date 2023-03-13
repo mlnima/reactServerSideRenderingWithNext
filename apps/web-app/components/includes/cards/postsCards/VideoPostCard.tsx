@@ -18,7 +18,7 @@ const CardImageRenderer = dynamic(() => import('../asset/CardImageRenderer'))
 interface VideoPostCardPropTypes {
     title: string,
     postUrl: string,
-    postsPerRawForMobile: number,
+    numberOfCardsPerRowInMobile: number,
     views: number,
     rating: number,
     index: number,
@@ -74,7 +74,7 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
          postUrl,
          views,
          rating,
-         postsPerRawForMobile,
+         numberOfCardsPerRowInMobile,
          cardWidth,
          targetLink,
          index
@@ -102,13 +102,13 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
                             <CardImageRenderer imageUrl={post.mainThumbnail}
                                                mediaAlt={title}
                                                index={index}
-                                               postsPerRawForMobile={postsPerRawForMobile}
+                                               numberOfCardsPerRowInMobile={numberOfCardsPerRowInMobile}
                                                cardWidth={cardWidth}/>
                         }
 
                         {((!hover || (hover && !post?.videoTrailerUrl)) && !post.mainThumbnail) &&
                             <TextToCanvasImage title={title}
-                                               postsPerRawForMobile={postsPerRawForMobile}
+                                               numberOfCardsPerRowInMobile={numberOfCardsPerRowInMobile}
                                                cardWidth={cardWidth}/>
                         }
 
@@ -117,7 +117,7 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
                             <VideoPostCardTrailer videoTrailerUrl={post?.videoTrailerUrl}
                                                   hoverHandler={hoverHandler}
                                                   hover={hover}
-                                                  postsPerRawForMobile={postsPerRawForMobile}
+                                                  numberOfCardsPerRowInMobile={numberOfCardsPerRowInMobile}
                                                   cardWidth={cardWidth}/>
                         }
 

@@ -9,9 +9,7 @@ interface PropTypes {
 }
 
 const PostsListEntireByCategories: FC<PropTypes> = ({uniqueData}) => {
-    useEffect(() => {
-        console.log(uniqueData)
-    }, [uniqueData]);
+
     const categoriesDataWithPosts = useMemo(()=>uniqueData?.categoriesDataWithPosts,[])
 
     return (

@@ -5,19 +5,19 @@ interface VideoPostCardMediaPropTypes {
     videoTrailerUrl: string,
     hover: boolean,
     hoverHandler: any,
-    postsPerRawForMobile: number,
+    numberOfCardsPerRowInMobile: number,
     cardWidth: number,
 }
 
 interface VideoPostCardTrailerStylePropTypes {
-    postsPerRawForMobile: number,
+    numberOfCardsPerRowInMobile: number,
     cardWidth: number,
 }
 
 const VideoPostCardTrailerStyle = styled.div`
 
   width: 100%;
-  height: ${({postsPerRawForMobile}: VideoPostCardTrailerStylePropTypes) => 96 / postsPerRawForMobile / 1.777}vw;
+  height: ${({numberOfCardsPerRowInMobile}: VideoPostCardTrailerStylePropTypes) => 96 / numberOfCardsPerRowInMobile / 1.777}vw;
   aspect-ratio: 16 / 9;
   position: relative;
   @keyframes opacityAnimationStart {
@@ -31,7 +31,7 @@ const VideoPostCardTrailerStyle = styled.div`
 
   .video-card-trailer {
     width: 100%;
-    height: ${({postsPerRawForMobile}: VideoPostCardTrailerStylePropTypes) => 96 / postsPerRawForMobile / 1.777}vw !important;
+    height: ${({numberOfCardsPerRowInMobile}: VideoPostCardTrailerStylePropTypes) => 96 / numberOfCardsPerRowInMobile / 1.777}vw !important;
     aspect-ratio: 16 / 9;
     object-fit: contain;
     animation: opacityAnimationStart 2s alternate;
@@ -53,7 +53,7 @@ const VideoPostCardTrailer: FC<VideoPostCardMediaPropTypes> =
          hover,
          hoverHandler,
          cardWidth,
-         postsPerRawForMobile
+         numberOfCardsPerRowInMobile
      }) => {
 
         const videoTrailer = useRef(null)
@@ -86,7 +86,7 @@ const VideoPostCardTrailer: FC<VideoPostCardMediaPropTypes> =
         }
 
         return (
-            <VideoPostCardTrailerStyle postsPerRawForMobile={postsPerRawForMobile} cardWidth={cardWidth}>
+            <VideoPostCardTrailerStyle numberOfCardsPerRowInMobile={numberOfCardsPerRowInMobile} cardWidth={cardWidth}>
                 <video ref={videoTrailer}
                        loop={false}
                        onMouseDown={pauseTrailer}

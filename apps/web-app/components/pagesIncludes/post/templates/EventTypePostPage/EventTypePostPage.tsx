@@ -50,20 +50,14 @@ const Style = styled(PostPageStyle)`
     }
   }
 
-  ${({postPageStyle}: { postPageStyle: string }) => postPageStyle || ''}
+  ${({customStyles}: { customStyles?: string }) => customStyles || ''}
 `
 
 const EventTypePostPage = () => {
     const descriptionRef = useRef<HTMLDivElement>(null)
-
-    const {postPageStyle, post, userData} = useSelector(({settings, posts, user}: Store) => {
-        return {
-            userData: user.userData,
-            postPageStyle: settings?.design.postPageStyle,
-            post: posts.post
-        }
-    })
-
+    const {userData} = useSelector(({user}: Store) => user)
+    const {post} = useSelector(({posts}: Store) => posts)
+    const {customStyles} = useSelector(({settings}: Store) => settings?.currentPageSettings)
     const datePublished = useMemo(() => convertDateToIso(post.createdAt), [post.createdAt])
     const dateModified = useMemo(() => convertDateToIso(post.updatedAt), [post.updatedAt])
 
@@ -72,7 +66,7 @@ const EventTypePostPage = () => {
     }, [post, userData])
 
     return (
-        <Style id={'primary'} className='post-page' postPageStyle={postPageStyle}>
+        <Style id={'primary'} className='post-page' customStyles={customStyles}>
             <main id={'main'}>
                 <article itemScope itemType={'https://schema.org/BlogPosting'}>
                     <header className={'entry-header'}>

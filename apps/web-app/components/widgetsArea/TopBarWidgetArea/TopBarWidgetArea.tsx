@@ -1,9 +1,6 @@
 import {memo} from "react";
 import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
-
 
 let StyledDiv = styled.div`
   grid-area: topbar;
@@ -17,19 +14,16 @@ let StyledDiv = styled.div`
     justify-content: space-between;
     flex-wrap: wrap;
     align-items: center;
-    //margin: 0 8px;
     padding: 0 8px;
     box-sizing: border-box;
     width: 100%;
     height: 100%;
   }
-  ${(props: { stylesData: string }) => props.stylesData || ''}
 `
 
 const TopBarWidgetArea = () => {
-    const topBarStyle = useSelector(({settings}: Store) => settings?.design?.topBarStyle)
     return (
-        <StyledDiv stylesData={topBarStyle || ''} className={'widget-area topbar'}>
+        <StyledDiv className={'widget-area topbar'}>
             <div className='top-bar-content'>
                 <WidgetsRenderer position={'topBar'}/>
             </div>

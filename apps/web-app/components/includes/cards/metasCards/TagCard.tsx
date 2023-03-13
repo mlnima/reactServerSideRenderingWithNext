@@ -31,7 +31,7 @@ const TagCardStyle = styled.article`
 interface TagCardPropTypes {
     meta: Meta,
     index: number,
-    postsPerRawForMobile: number,
+    numberOfCardsPerRowInMobile: number,
     cardWidth: number,
     adminMode: boolean,
     role:string
@@ -41,7 +41,7 @@ const TagCard: FC<TagCardPropTypes> =
     ({
          meta,
          index,
-         postsPerRawForMobile,
+         numberOfCardsPerRowInMobile,
          cardWidth,
          adminMode,
          role
@@ -65,10 +65,10 @@ const TagCard: FC<TagCardPropTypes> =
                             <CardImageRenderer imageUrl={meta?.imageUrl}
                                                mediaAlt={title}
                                                index={index}
-                                               postsPerRawForMobile={postsPerRawForMobile}
+                                               numberOfCardsPerRowInMobile={numberOfCardsPerRowInMobile}
                                                cardWidth={cardWidth}/> :
                             <TextToCanvasImage title={title}
-                                               postsPerRawForMobile={postsPerRawForMobile}
+                                               numberOfCardsPerRowInMobile={numberOfCardsPerRowInMobile}
                                                cardWidth={cardWidth}/>
                         }
 

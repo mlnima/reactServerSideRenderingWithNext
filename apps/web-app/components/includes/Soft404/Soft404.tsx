@@ -7,7 +7,7 @@ import Head from 'next/head'
 import PostsPage from "../PostsPage/PostsPage";
 import {useRouter} from "next/router";
 import getPostsAction from "@store_toolkit/clientReducers/postsReducer/getPostsAction";
-
+import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
 
 const Soft404StyledDiv = styled.div`
   display: flex;
@@ -30,9 +30,7 @@ const Soft404StyledDiv = styled.div`
 const Soft404 = () => {
     const {t} = useTranslation();
     const dispatch = useAppDispatch();
-    const {locale, pathname} = useRouter()
-
-
+    const {locale} = useRouter()
 
     useEffect(() => {
         dispatch(getPostsAction({
@@ -59,8 +57,8 @@ const Soft404 = () => {
     return (
         <>
             <Head>
+                <HeadSetter title={title} description={description}/>
                 <title>{title}</title>
-                <meta name="description" content={description}/>
             </Head>
 
             <Soft404StyledDiv>

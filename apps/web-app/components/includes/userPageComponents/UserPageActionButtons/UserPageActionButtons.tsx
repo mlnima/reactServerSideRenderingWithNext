@@ -45,7 +45,7 @@ const UserPageActionButtonsStyledDiv = styled.div`
 `
 
 interface UserPageActionButtonsPropType {
-    _id: string
+    _id?: string
 }
 
 const UserPageActionButtons: FC<UserPageActionButtonsPropType> = ({_id}) => {
@@ -55,9 +55,6 @@ const UserPageActionButtons: FC<UserPageActionButtonsPropType> = ({_id}) => {
     const {userData,loggedIn} = useSelector((store: Store) => store?.user)
     const userPageData = useSelector((store: Store) => store?.user?.userPageData)
 
-    // useEffect(() => {
-    //     console.log(loggedIn)
-    // }, [userData]);
     const onFollowHandler = () => {
         if (userPageData?._id && loggedIn && userData?._id ) {
             dispatch(fetchFollowUser(userPageData._id))
@@ -72,27 +69,19 @@ const UserPageActionButtons: FC<UserPageActionButtonsPropType> = ({_id}) => {
             dispatch(fetchUnFollowUser(userPageData?._id))
             dispatch(fetchSpecificUserData({fields:['following']}))
         }
-
     }
 
-
     const onConversationHandler = () => {
-
         if (!!userData?._id && !!userPageData?._id) {
             dispatch(fetchStartConversation({_id:userPageData._id, push}))
 
         } else {
             dispatch(loginRegisterForm('login'))
         }
-
     }
 
-
     return (
-
         <UserPageActionButtonsStyledDiv className='user-page-action-buttons'>
-
-
             <button className='user-page-action-button action-client-button-link'
                     onClick={onConversationHandler}>{t<string>('Send Message')}</button>
             <div>
@@ -115,12 +104,3 @@ const UserPageActionButtons: FC<UserPageActionButtonsPropType> = ({_id}) => {
 export default UserPageActionButtons;
 
 
-// {
-//     contextData?.userData?.pendingSentFriendRequests?.includes(_id) ?
-//         <button className='user-page-action-button' onClick={onCancelFriendRequest}>Cancel Request</button> :
-//         contextData?.userData?.friends?.includes(_id) ?
-//             <button className='user-page-action-button' onClick={onUnfriendHandler}>Unfriend</button> :
-//             contextData?.userData?.pendingReceivedFriendRequests?.includes(_id) ?
-//                 <button className='user-page-action-button' onClick={onAcceptFriendRequestHandler}>Accept Friend Request</button> :
-//                 <button className='user-page-action-button' onClick={onSendFriendRequestHandler}>Add Friend</button>
-// }

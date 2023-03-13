@@ -31,8 +31,7 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
     const [renderCookiesBar, setRenderCookiesBar] = useState(false)
 
     const {loginRegisterFormPopup, alert, loading, adminMode} = useSelector(({globalState}: Store) => globalState)
-
-    const identity = useSelector(({settings}: Store) => settings?.identity);
+    const {initialSettings} = useSelector(({settings}: Store) => settings)
 
     useEffect(() => {
         setTimeout(() => {
@@ -52,15 +51,15 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
 
     return (
         <>
-            {(identity?.topbar === 'enable' || identity?.topbar === undefined) && <TopBarWidgetArea/>}
-            {(identity?.header === 'enable' || identity?.header === undefined) && <HeaderWidgetArea/>}
-            {(identity?.navigation === 'enable' || identity?.navigation === undefined) && <NavigationWidgetArea/>}
+            {!!initialSettings?.layoutSettings?.topbar && <TopBarWidgetArea/>}
+            {!!initialSettings?.layoutSettings?.header  && <HeaderWidgetArea/>}
+            {!!initialSettings?.layoutSettings?.navigation && <NavigationWidgetArea/>}
 
             <div id={'page'} className={'App'}>
                 {children}
             </div>
 
-            {(identity?.footer === 'enable' || identity?.footer === undefined) && <FooterWidgetArea/>}
+            {!!initialSettings?.layoutSettings?.footer && <FooterWidgetArea/>}
             <BackToTopButton/>
 
             <Loading isLoading={loading}/>
