@@ -145,6 +145,7 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
                             <VideoPostCardTrailer videoTrailerUrl={post?.videoTrailerUrl}
                                                   hover={hover}
                                                   numberOfCardsPerRowInMobile={numberOfCardsPerRowInMobile}
+                                                  hoverHandler={hoverHandler}
                                                   cardWidth={cardWidth}/>
                         }
 

@@ -5,11 +5,13 @@ interface VideoPostCardMediaPropTypes {
     videoTrailerUrl: string,
     hover: boolean,
     numberOfCardsPerRowInMobile: number,
+    hoverHandler:Function
     cardWidth: number,
 }
 
 interface VideoPostCardTrailerStylePropTypes {
     numberOfCardsPerRowInMobile: number,
+
     cardWidth: number,
 }
 
@@ -50,6 +52,7 @@ const VideoPostCardTrailer: FC<VideoPostCardMediaPropTypes> =
     ({
          videoTrailerUrl,
          hover,
+         hoverHandler,
          cardWidth,
          numberOfCardsPerRowInMobile
      }) => {
@@ -74,19 +77,11 @@ const VideoPostCardTrailer: FC<VideoPostCardMediaPropTypes> =
             }
         }
 
-        const pauseTrailer  = ()=>{
-            try {
-                //@ts-ignore
-                videoTrailer?.current?.pause()
-            } catch (err) {
-
-            }
-        }
-
         return (
             <VideoPostCardTrailerStyle numberOfCardsPerRowInMobile={numberOfCardsPerRowInMobile} cardWidth={cardWidth}>
                 <video ref={videoTrailer}
                        loop={false}
+                       onEnded={()=>hoverHandler(false)}
                        muted
                        playsInline
                        className={'video-card-trailer'}>
@@ -97,5 +92,3 @@ const VideoPostCardTrailer: FC<VideoPostCardMediaPropTypes> =
         )
     };
 export default VideoPostCardTrailer
-// onMouseEnter={hoverHandler}
-// onTouchStartCapture={hoverHandler}

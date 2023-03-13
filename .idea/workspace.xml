@@ -21,11 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/clientPostsControllers/clientGetPosts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/clientPostsControllers/clientGetPosts.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/VideoPostCardTrailer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/VideoPostCardTrailer.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/VideoPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/VideoPostCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/next-env.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/next-env.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/data-structures/src/postFieldRequestForCards.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/data-structures/src/postFieldRequestForCards.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1554,7 +1551,7 @@
       <workItem from="1678534847544" duration="1119000" />
       <workItem from="1678631102291" duration="1904000" />
       <workItem from="1678656268360" duration="20561000" />
-      <workItem from="1678703916914" duration="25633000" />
+      <workItem from="1678703916914" duration="26919000" />
     </task>
     <servers />
   </component>
