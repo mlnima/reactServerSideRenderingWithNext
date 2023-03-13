@@ -60,11 +60,12 @@ const GlobalStyles = createGlobalStyle`
   .form-control-input-validator {
     width: 80%;
   }
-  ${animationsKeyframes}
+
   ${buttons}
   ${gridLayout}
   ${inputs}
   ${selects}
+  ${animationsKeyframes}
   ${scrollBars}
   
   ${({customStyles}: GlobalStylesPropTypes) => customStyles ? customStyles : ''}
