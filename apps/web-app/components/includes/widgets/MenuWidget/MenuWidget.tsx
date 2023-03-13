@@ -3,7 +3,9 @@ import {useMemo} from 'react';
 import styled from "styled-components";
 import MenuWidgetItem from "./MenuWidgetItem";
 import {MenuItem} from "typescript-types";
-import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faBars} from "@fortawesome/free-solid-svg-icons/faBars";
+import {faXmark} from "@fortawesome/free-solid-svg-icons/faXmark";
 
 const MenuWidgetStyledDiv = styled.div`
   z-index: 10;
@@ -118,18 +120,19 @@ const MenuWidget: FC<MenuWidgetPropTypes> = ({menuItems}) => {
             <button onClick={() => setOpen(!open)}
                 className='menu-widget-open-button btn btn-transparent-light'
                 aria-label="open navigation">
-                <SvgRenderer svgUrl={'/asset/images/icons/bars-solid.svg'}
-                             size={28}
-                             customClassName={'menu-widget-close-button-logo'}
-                             color={'var(--main-text-color, #fff)'}/>
+                <FontAwesomeIcon className={'menu-widget-close-button-logo'}
+                                 color={'var(--main-text-color, #fff)'}
+                                 icon={faBars}
+                                 style={{width:28,height:28}}/>
+
             </button>
             <div className='menu-widget-items'>
                 <button onClick={() => setOpen(!open)}
                     className='menu-widget-close-button  btn btn-transparent-light'>
-                    <SvgRenderer svgUrl={'/asset/images/icons/xmark-solid.svg'}
-                                 size={25}
-                                 customClassName={'menu-widget-close-button-logo'}
-                                 color={'var(--main-text-color, #fff)'}/>
+                    <FontAwesomeIcon className={'menu-widget-close-button-logo'}
+                                     color={'var(--main-text-color, #fff)'}
+                                     icon={faXmark}
+                                     style={{width:25,height:25}}/>
                 </button>
                 {menuItemsInOrder.map(menuItem => {
                     return (

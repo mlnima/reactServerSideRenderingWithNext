@@ -84,10 +84,7 @@ const ImageGallery: FC<ImageGalleryPropTypes> = ({onChangeHandler, rendering}) =
             <div className='product-information-image-preview' key={image + Date.now()}>
                 <img src={image}/>
                 <button className='image-remove-btn' onClick={() => onRemoveImageHandler()}>
-                    {/*<SvgRenderer svgUrl={'/asset/images/icons/xmark-solid.svg'}*/}
-                    {/*             size={25}*/}
-                    {/*             customClassName={'image-remove-btn-icon'}*/}
-                    {/*             color={'#fff'}/>*/}
+
                     <FontAwesomeIcon icon={faXmark} className={'image-remove-btn-icon'}/>
                 </button>
             </div>
@@ -123,19 +120,12 @@ const ImageGallery: FC<ImageGalleryPropTypes> = ({onChangeHandler, rendering}) =
                     <input value={state.imageFromUrl}
                            onChange={e => setState({...state, imageFromUrl: e.target.value})}/>
                     <button onClick={() => onAddImageFromUrlHandler()}>
-                        {/*<SvgRenderer svgUrl={'/asset/images/icons/plus-solid.svg'}*/}
-                        {/*             size={25}*/}
-                        {/*             color={'#fff'}/>*/}
                         <FontAwesomeIcon icon={faPlus}/>
                     </button>
                     <input ref={uploadInputElement} type="file" style={{display: 'none'}}
                            onChange={e => onUploadHandler(e)}/>
                     {/*//@ts-ignore*/}
                     <button onClick={() => uploadInputElement.current?.click()}>
-                        {/*<SvgRenderer svgUrl={'/asset/images/icons/upload-solid.svg'}*/}
-                        {/*             size={25}*/}
-                        {/*             customClassName={'show-password'}*/}
-                        {/*             color={'#fff'}/>*/}
                         <FontAwesomeIcon icon={faUpload} className={'show-password'}/>
                     </button>
                 </div>

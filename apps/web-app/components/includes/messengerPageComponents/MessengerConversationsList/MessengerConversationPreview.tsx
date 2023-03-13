@@ -4,7 +4,10 @@ import Link from "next/link";
 import styled from "styled-components";
 import {fetchDeleteConversation} from "@store_toolkit/clientReducers/userReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
-import SvgRenderer from "../../../global/commonComponents/SvgRenderer/SvgRenderer";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCircleUser} from "@fortawesome/free-solid-svg-icons/faCircleUser";
+import {faEnvelope} from "@fortawesome/free-solid-svg-icons/faEnvelope";
+import {faTrashCan} from "@fortawesome/free-solid-svg-icons/faTrashCan";
 // import {deleteConversation} from "../../../../store/clientActions/userActions";
 
 const MessengerConversationPreviewStyledDiv = styled.div`
@@ -118,37 +121,30 @@ const MessengerConversationPreview = ({conversationData, userId}) => {
         <MessengerConversationPreviewStyledDiv>
             <Link href={`/messenger/${conversationData._id}`} className='messenger-conversation-preview'>
 
-                    {state.profileImage ?
-                        <img className='messenger-conversation-preview-image' src={state.profileImage} alt=""/> :
-                        <SvgRenderer svgUrl={'/asset/images/icons/circle-user-solid.svg'}
-                                     size={20}
-                                     customClassName={'messenger-conversation-preview-image'}
-                                     color={'var(--main-text-color, #fff)'}/>
+                {state.profileImage ?
+                    <img className='messenger-conversation-preview-image' src={state.profileImage} alt=""/> :
+                    <FontAwesomeIcon className={'messenger-conversation-preview-image'}
+                                     icon={faCircleUser} style={{width: 20, height: 20}}/>
+                }
 
-                    }
-
-                    <div className='messenger-conversation-content-preview'>
-                        <div className='messenger-conversation-preview-username-date'>
-                            <p className='messenger-conversation-preview-username'>{state.username}</p>
-                            <p className='messenger-conversation-preview-date'>{state.date}</p>
-                        </div>
-                        <p className='messenger-conversation-preview-last-message'>{state.messageBody}</p>
+                <div className='messenger-conversation-content-preview'>
+                    <div className='messenger-conversation-preview-username-date'>
+                        <p className='messenger-conversation-preview-username'>{state.username}</p>
+                        <p className='messenger-conversation-preview-date'>{state.date}</p>
                     </div>
+                    <p className='messenger-conversation-preview-last-message'>{state.messageBody}</p>
+                </div>
             </Link>
             <span className={'conversation-clientActions'}>
         <span onClick={() => actionMenu ? setActionMenu(false) : setActionMenu(true)}>
-                   <SvgRenderer svgUrl={'/asset/images/icons/envelope-solid.svg'}
-                                size={20}
-                                color={'var(--main-text-color, #fff)'}/>
+                  <FontAwesomeIcon icon={faEnvelope} style={{width: 20, height: 20}}/>
         </span>
 
 
                 {actionMenu ?
                     <div className={'action-menu'}>
                         <button onClick={onDeleteConversationHandler} className={'btn btn-danger'}>
-                            <SvgRenderer svgUrl={'/asset/images/icons/trash-can-solid.svg'}
-                                         size={20}
-                                         color={'var(--main-text-color, #fff)'}/>
+                            <FontAwesomeIcon icon={faTrashCan} style={{width: 20, height: 20}}/>
                         </button>
                     </div> : null
                 }

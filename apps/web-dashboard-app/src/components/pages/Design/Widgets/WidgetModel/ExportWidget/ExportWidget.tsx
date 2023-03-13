@@ -39,9 +39,6 @@ const ExportWidget:FC<PropTypes> = ({widgetData}) => {
 
     return (
         <button className={'btn btn-primary'} title="export" onClick={() => onExportHandler()}>
-            {/*<SvgRenderer svgUrl={'/asset/images/icons/file-export-solid.svg'}*/}
-            {/*             size={20}*/}
-            {/*             color={'var(--primary-button-link-text-color, #000)'}/>*/}
             <FontAwesomeIcon icon={faFileExport} className={'meta-icon'}/>
         </button>
     );

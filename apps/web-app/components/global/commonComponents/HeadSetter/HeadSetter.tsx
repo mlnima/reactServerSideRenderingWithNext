@@ -24,7 +24,7 @@ const HeadSetter: FC<PropTypes> = (
         canonicalUrl
     }) => {
 
-    const {asPath, locale} = useRouter();
+    const {asPath, locale} =  useRouter() ;
     const headDataSettings = useSelector(({settings}: Store) => settings?.initialSettings?.headDataSettings)
     const siteLanguages = process.env.NEXT_PUBLIC_LOCALS?.split(' ') || [];
     const headTitle = useMemo(() => title || headDataSettings?.title || 'Title', [title, asPath])

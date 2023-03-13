@@ -2,13 +2,12 @@ import {createGlobalStyle} from "styled-components";
 import {useSelector} from "react-redux";
 import {FC} from "react";
 import {Store} from "typescript-types";
-import keyframes from './keyframes';
 import gridLayout from './gridLayout';
-// import scrollBar from './scrollBar';
 import buttons from 'ui/src/buttonsStyle';
 import inputs from 'ui/src/inputsStyles';
 import selects from 'ui/src/selectsStyle';
 import scrollBars from 'ui/src/scrollBars';
+import animationsKeyframes from 'ui/src/animationsKeyframes';
 
 interface GlobalStylesPropTypes {
     customColors?: string,
@@ -23,7 +22,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   ${({customColors}: GlobalStylesPropTypes) => customColors?.includes(':root') ? customColors : `:root {${customColors}}`}
-  ${keyframes}
+  ${animationsKeyframes}
   ${buttons}
   ${gridLayout}
   ${inputs}
@@ -72,7 +71,7 @@ const GlobalStyles = createGlobalStyle`
 
 const GlobalStylesComponent: FC = () => {
 
-    const {customColors, customStyles, sidebarWidth} = useSelector(({settings}: Store) => settings?.initialSettings?.layoutSettings)
+    const {customColors, customStyles, sidebarWidth} = useSelector(({settings}: Store) => settings?.initialSettings?.layoutSettings ?? {})
     return (
         <GlobalStyles customColors={customColors} customStyles={customStyles} sidebarWidth={sidebarWidth || 320}/>
     )

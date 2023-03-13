@@ -72,38 +72,18 @@ const ActiveAlertBox:FC<PropTypes> = ({alert,closeAlert}) => {
             <div className='alert-message'>
                 <div className='alert-message-header handle'>
                     <p className='alert-type'>
-                        {/*<SvgRenderer size={25}*/}
-                        {/*             svgUrl={alert.type === 'success' ? '/asset/images/icons/circle-check-solid.svg' :*/}
-                        {/*                 alert.type === 'error' ? '/asset/images/icons/triangle-exclamation-solid.svg' :*/}
-                        {/*                     '/asset/images/icons/circle-exclamation-solid.svg'}*/}
-                        {/*             customClassName={'download-logo'}*/}
-                        {/*             color={'var(--main-text-color, #fff)'}/>*/}
                         {alert.type === 'success' ? 'OK' : alert.type === 'error' ? 'X' : '!' }
                     </p>
                     <button className='close-alert' onClick={() => closeAlert()}>
                         <span className={'icon faTimes'}/>
-                        {/*<SvgRenderer svgUrl={'/asset/images/icons/xmark-solid.svg'}*/}
-                        {/*             size={25}*/}
-                        {/*             customClassName={'download-logo'}*/}
-                        {/*             color={alert.type === 'success' ? 'green' : alert.type === 'error' ? 'red' : '#ccc'}/>*/}
                         X
                     </button>
                 </div>
                 <p className='alert'>
-                    {/*{t(`common:${alert.message}`,*/}
-                    {/*    {},*/}
-                    {/*    {*/}
-                    {/*        fallback:*/}
-                    {/*            t(`customTranslation:${alert.message}`,*/}
-                    {/*                {},*/}
-                    {/*                {fallback: alert.message}*/}
-                    {/*            )*/}
-                    {/*    }*/}
-                    {/*)}*/}
                     {alert.message}
                 </p>
-                {/*//@ts-ignore*/}
-                {!!alert.err?.stack && <p>{alert.err?.stack}</p>}
+
+                {!!alert.err?.stack && <p>{alert.err.stack}</p>}
             </div>
         </Style>
     )

@@ -1,6 +1,7 @@
 import useTranslation from 'next-translate/useTranslation'
-import {FC} from "react";
-import SvgRenderer from "../../../../global/commonComponents/SvgRenderer/SvgRenderer";
+import React, {FC} from "react";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faDownload} from "@fortawesome/free-solid-svg-icons/faDownload";
 
 interface DownloadLinkPropTypes {
     downloadLink?: string,
@@ -18,17 +19,12 @@ const DownloadLink: FC<DownloadLinkPropTypes> = ({downloadLink, downloadLinks}) 
                        href={downloadLink}
                        target={'_blank'}
                        title={t(`common:Download`, {}, {fallback: 'Download'})}>
-
                         <span style={{display: 'none'}}>download link for post</span>
-                        <SvgRenderer svgUrl={'/asset/images/icons/download-solid.svg'}
-                                     size={16}
-                                     customClassName={'download-logo'}/>
+                        <FontAwesomeIcon className={'download-logo'} icon={faDownload} style={{width:16,height:16}}/>
                         <p className={'download-text'}>
                             {t(`common:Download`, {}, {fallback: 'Download'})}
                         </p>
-
                     </a>
-
         </div>
     );
 

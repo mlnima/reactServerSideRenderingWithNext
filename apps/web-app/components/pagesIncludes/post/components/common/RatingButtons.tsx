@@ -4,10 +4,13 @@ import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {Store} from "typescript-types";
-import SvgRenderer from "../../../../global/commonComponents/SvgRenderer/SvgRenderer";
 import shortNumber from "custom-util/src/math-util/shortNumber";
 import likePostAction from "@store_toolkit/clientReducers/postsReducer/likePostAction";
 import disLikePostAction from "@store_toolkit/clientReducers/postsReducer/disLikePostAction";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faEye} from "@fortawesome/free-regular-svg-icons/faEye";
+import {faThumbsUp} from "@fortawesome/free-solid-svg-icons/faThumbsUp";
+import {faThumbsDown} from "@fortawesome/free-solid-svg-icons/faThumbsDown";
 
 const RatingButtonsStyledDiv = styled.div`
   padding: 0 8px;
@@ -21,7 +24,7 @@ const RatingButtonsStyledDiv = styled.div`
   .rated-message {
     color: var(--secondary-text-color, #ccc);
   }
-  
+
   .rating-item {
     display: flex;
     justify-content: center;
@@ -33,10 +36,11 @@ const RatingButtonsStyledDiv = styled.div`
     border: none;
     
     .thumbs-up ,.thumbs-down{
-        background-color: ${({buttonsDisabledStatus}: { buttonsDisabledStatus: boolean }) => {
-        return buttonsDisabledStatus ? `#666` : ` var(--secondary-text-color, #ccc)`
+        color: ${({buttonsDisabledStatus}: { buttonsDisabledStatus: boolean }) => {
+        return buttonsDisabledStatus ? `#666` : ` var(--secondary-text-color,#ccc)`
       }};
     }
+
 
     .rating-item-value {
       padding: 0 5px;
@@ -103,12 +107,11 @@ const RatingButtons: FC<RatingButtonsPropTypes> = ({rating}) => {
                                 //@ts-ignore
                                 buttonsDisabledStatus={isRated}>
             {views ?
-                <span className='like-disLike-count-items rating-item'
+                <span className='like-disLike-count-items rating-item views'
                       title={t<string>('Views')}>
-                        <SvgRenderer svgUrl={'/asset/images/icons/eye-regular.svg'}
-                                     size={16}
-                                     customClassName={'rate-logo view'}
-                                     color={'var(--secondary-text-color,#ccc)'}/>
+                         <FontAwesomeIcon className={'rate-logo view'}
+                                          color={'var(--secondary-text-color,#ccc)'}
+                                          icon={faEye} style={{width: 16, height: 16}}/>
                         <p className='rating-item-value'>{shortNumber(views)} </p>
                     </span>
                 : null
@@ -120,24 +123,19 @@ const RatingButtons: FC<RatingButtonsPropTypes> = ({rating}) => {
                             onClick={() => dispatch(likePostAction(_id))}
                             disabled={!!isRated}
                             aria-label="like"
-                            title={t<string>('Like')}
-                    >
-                        <SvgRenderer svgUrl={'/asset/images/icons/thumbs-up-solid.svg'}
-                                     size={16}
-                                     customClassName={'rate-logo thumbs-up'}
-                                     color={'var(--secondary-text-color,#ccc)'}/>
+                            title={t<string>('Like')}>
+
+                        <FontAwesomeIcon className={'rate-logo thumbs-up'}
+                                         icon={faThumbsUp} style={{width: 16, height: 16}}/>
                         <p className='rating-item-value'>{likes}</p>
                     </button>
                     <button className='rating-item'
                             onClick={() => dispatch(disLikePostAction(_id))}
                             disabled={!!isRated}
                             aria-label="dislike"
-                            title={t<string>('Dislike')}
-                    >
-                        <SvgRenderer svgUrl={`/asset/images/icons/thumbs-down-solid.svg`}
-                                     size={16}
-                                     customClassName={'rate-logo thumbs-down'}
-                                     color={'var(--secondary-text-color,#ccc)'}/>
+                            title={t<string>('Dislike')}>
+                        <FontAwesomeIcon className={'rate-logo thumbs-down'}
+                                         icon={faThumbsDown} style={{width: 16, height: 16}}/>
                         <p className='rating-item-value'>{disLikes}</p>
                     </button>
                 </> : null

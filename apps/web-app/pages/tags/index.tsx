@@ -2,7 +2,7 @@ import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRe
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {wrapper} from "@store_toolkit/store";
-import SidebarWidgetAreaRenderer from "../../components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
+import SidebarWidgetAreaRenderer from "@components/RootLayout/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import React from "react";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";

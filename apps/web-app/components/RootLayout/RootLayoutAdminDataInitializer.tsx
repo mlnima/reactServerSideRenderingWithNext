@@ -6,12 +6,11 @@ import {useRouter} from "next/router";
 import {useSelector} from "react-redux";
 import {Store} from "typescript-types";
 
-const AppLayoutAdminDataInitializer: FC = () => {
+const RootLayoutAdminDataInitializer: FC = () => {
     const dispatch = useAppDispatch()
     const {asPath, pathname} = useRouter()
     const adminMode = useSelector(({globalState}: Store) => globalState.adminMode)
     const {userData} = useSelector(({user}: Store) =>user)
-
 
     useEffect(() => {
         if (userData?.role === 'administrator' && adminMode ){
@@ -20,11 +19,8 @@ const AppLayoutAdminDataInitializer: FC = () => {
                 dispatch(getUncachedSettingsForAdmin(null))
             }, 10)
         }
-
     }, [asPath, pathname,adminMode]);
-
-
 
     return null
 };
-export default AppLayoutAdminDataInitializer;
+export default RootLayoutAdminDataInitializer;

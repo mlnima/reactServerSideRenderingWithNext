@@ -1,6 +1,8 @@
 import React, {FC} from "react";
-import SvgRenderer from "../../../../global/commonComponents/SvgRenderer/SvgRenderer";
 import styled from "styled-components";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faTrashCan} from "@fortawesome/free-solid-svg-icons/faTrashCan";
+
 const Style = styled.div`
   position: relative;
   display: flex;
@@ -24,14 +26,9 @@ interface ImagePreviewPropTypes {
 
 const ImagePreview: FC<ImagePreviewPropTypes> = ({isUploaded, imageSource}) => {
 
-
     return (
         <Style className={'image-preview'}>
-            <SvgRenderer svgUrl={'/asset/images/icons/trash-can-solid.svg'}
-                         size={20}
-                         customClassName={'delete-image'}
-                         color={'var(--main-active-color,#000)'}
-            />
+            <FontAwesomeIcon color={'red'} icon={faTrashCan} style={{width:25,height:25}}/>
             <img src={isUploaded ? imageSource : URL.createObjectURL(imageSource)}/>
         </Style>
     )

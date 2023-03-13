@@ -2,7 +2,8 @@ import React, {FC, useMemo, useState} from "react";
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import styled from "styled-components";
-import SvgRenderer from "../../../global/commonComponents/SvgRenderer/SvgRenderer";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faArrowDownZA} from "@fortawesome/free-solid-svg-icons/faArrowDownZA";
 
 const AlphabeticalNumericalRangeLinksWidgetStyledDiv = styled.div`
   display: flex;
@@ -129,14 +130,9 @@ const AlphabeticalNumericalRangeLinksWidget: FC = () => {
 
             <button className={'filter-controller btn btn-primary'}
                     aria-label={'show filters'}
-                    onClick={() => setShowFilters(!showFilters)}
-            >
-                <SvgRenderer svgUrl={'/asset/images/icons/arrow-down-z-a-solid.svg'}
-                             size={20}
-                             customClassName={'show-filters'}
-                             color={'var(--primary-button-link-text-color,#000)'}
-                />
+                    onClick={() => setShowFilters(!showFilters)}>
 
+                <FontAwesomeIcon  icon={faArrowDownZA} style={{width:20,height:20}}/>
             </button>
             {!!showFilters && <div className={'alphabetical-range-content'}>
                 {query.startWith ?
@@ -148,8 +144,7 @@ const AlphabeticalNumericalRangeLinksWidget: FC = () => {
                         key={'X'} href={{
                         pathname: pathname,
                         query: {...query, startWith: query?.startWith?.slice(0, -1)}
-                    }}
-                    >
+                    }}>
 
                         {query?.startWith} X
 

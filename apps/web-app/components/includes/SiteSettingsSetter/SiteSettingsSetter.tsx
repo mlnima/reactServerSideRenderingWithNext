@@ -21,7 +21,6 @@ const SiteSettingSetter: FC = () => {
 
     return (
         <>
-            {/*<SiteHeadSetter/>*/}
             {!!headDataSettings?.googleAnalyticsId &&
             <GoogleAnalytics googleAnalyticsId={headDataSettings.googleAnalyticsId}/>}
             {renderAutoLogin ? <UserAutoLogin renderAutoLogin={renderAutoLogin}/> : null}

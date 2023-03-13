@@ -103,14 +103,11 @@ const FileManagerArea: FC = () => {
             return (
                 <Fragment>
                     <button key={data.fileName} name={data.fileName}>
-                        {/*<SvgRenderer svgUrl={logoToRender}*/}
-                        {/*             size={25}*/}
-                        {/*             customClassName={'file-manager-icons'}*/}
-                        {/*             color={logoColorToRender}/>*/}
 
 
-                        {/*//@ts-ignore*/}
-                        <FontAwesomeIcon icon={logoToRender} className={'meta-icon'}/>
+
+
+                        <FontAwesomeIcon icon={logoToRender as any} color={logoColorToRender} className={'meta-icon'}/>
                     </button>
                 </Fragment>
             )

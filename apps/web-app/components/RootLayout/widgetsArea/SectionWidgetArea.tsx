@@ -1,7 +1,7 @@
 import {memo} from "react";
 import React from 'react';
 import styled from "styled-components";
-import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
+import WidgetsRenderer from "@components/includes/WidgetsRenderer/WidgetsRenderer";
 const StyledSection = styled.section`${(props:{stylesData:string}) => props.stylesData ?? ''}`
 
 interface SectionWidgetAreaProps {

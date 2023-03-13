@@ -1,6 +1,7 @@
-import {useState, useRef, FC} from 'react';
+import React, {useState, useRef, FC} from 'react';
 import styled from "styled-components";
-import SvgRenderer from "../../../../global/commonComponents/SvgRenderer/SvgRenderer";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCartPlus} from "@fortawesome/free-solid-svg-icons/faCartPlus";
 
 const AddToBasketStyledFrom = styled.form`
   display: flex;
@@ -81,11 +82,7 @@ const AddToBasket: FC<AddToBasketPropTypes> = ({render}) => {
                        onChange={e => setCount(parseInt(e.target.value))}/>
 
                 <button onClick={onAddToBasketHandler} className='add-item-to-basket-action'>
-
-                    <SvgRenderer svgUrl={'/asset/images/icons/cart-plus-solid.svg'}
-                                 size={25}
-                                 color={'var(--primary-button-link-text-color, #000)'}/>
-
+                    <FontAwesomeIcon icon={faCartPlus} style={{width:25,height:25}}/>
                 </button>
 
             </AddToBasketStyledFrom>

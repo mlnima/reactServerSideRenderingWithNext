@@ -7,7 +7,6 @@ import _qualityConvertor from "../asset/_qualityConvertor";
 import CardTitle from "../asset/CardTitle/CardTitle";
 import {Post} from "typescript-types";
 import DefaultPostCardStyle from "../asset/DefaultPostCardStyle";
-
 const CardViews = dynamic(() => import('../asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('../asset/CardRating/CardRating'))
 const CardQuality = dynamic(() => import('../asset/CardQuality/CardQuality'))
@@ -98,6 +97,11 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
 
                 <div className={'video-post-card-media'}>
                     <Link href={postUrl} className={'card-link'} title={title} target={targetLink}>
+
+
+
+
+
                         {((!hover || (hover && !post?.videoTrailerUrl)) && !!post.mainThumbnail) &&
                             <CardImageRenderer imageUrl={post.mainThumbnail}
                                                mediaAlt={title}

@@ -20,105 +20,94 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/apps/web-app/components/global/commonComponents/HeadSetter/HeadSetter.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web-app/public/asset/images/default/favicon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/RootLayout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/RootLayoutAdminDataInitializer.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/ui/src/animationskeyframes.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api-server/_variables/serverGlobalVariable/findMetas.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/_variables/serverGlobalVariable/findMetas.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/SiteHeadSetter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/global/SiteHeadSetter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/Styles/AdminPanelGlobalStyles.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/CodeSnippet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/global/CodeSnippet.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/ErrorBoundary.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/SiteHeadSetter.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/Styles/GlobalStylesComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/global/Styles/GlobalStylesComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/Styles/gridLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/global/Styles/gridLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/AdminTools/AdminTools.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/PaginationComponent/PaginationComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/PaginationComponent/PaginationComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/PostsPage/PostsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/PostsPage/PostsPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/Styles/buttons.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/Styles/inputs.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/Styles/keyframes.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/Styles/scrollBar.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/Styles/selects.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/commonComponents/AlertBox/AlertBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/global/commonComponents/AlertBox/AlertBox.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/commonComponents/HeadSetter/HeadSetter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/global/commonComponents/HeadSetter/HeadSetter.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/commonComponents/ImageUploader/ImageUploader.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/commonComponents/Loading/Loading.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/global/commonComponents/Loading/Loading.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/commonComponents/SvgRenderer/SvgRenderer.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/BackToTopButton/BackToTopButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/common/BackToTopButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/ClientPopActionRequest/CookiePopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/common/CookiesInformerBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/LoginRegisterPopup/FormHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/common/LoginRegisterPopup/FormHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/LoginRegisterPopup/LoginRegisterPopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/common/LoginRegisterPopup/LoginRegisterPopup.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/LoginRegisterPopup/LoginRegisterPopupForms.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/common/LoginRegisterPopup/LoginRegisterPopupForms.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/LoginRegisterPopup/ValidInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/common/LoginRegisterPopup/ValidInput.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/SiteSettingsSetter/SiteSettingsSetter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/SiteSettingsSetter/SiteSettingsSetter.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/Soft404/Soft404.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/Soft404/Soft404.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/Widget/WidgetPagination/WidgetPagination.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/Widget/WidgetPagination/WidgetPagination.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/CardsRenderer/MetasCardsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/CardsRenderer/MetasCardsRenderer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/CardsRenderer/PostsCardsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/CardsRenderer/PostsCardsRenderer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/CardImageRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/CardImageRenderer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/TextToCanvasImage/TextToCanvasImage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/TextToCanvasImage/TextToCanvasImage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/VideoPostCardTrailer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/VideoPostCardTrailer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/metasCards/ActorCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/metasCards/ActorCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/metasCards/CategoryCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/metasCards/CategoryCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/metasCards/TagCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/metasCards/TagCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/AdPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/AdPostCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/ArticlePostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/ArticlePostCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/EventPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/EventPostCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/LearnPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/LearnPostCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/PromotionPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/PromotionPostCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/UserProfileImage/ImageContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/UserProfileImage/ImageContent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/CardRatingBar/CardRatingBar.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/CardTitle/CardTitle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/CardTitle/CardTitle.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/ResetMetaImageButton/ResetMetaImageButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/ResetMetaImageButton/ResetMetaImageButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/PromotionPostListCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/PromotionPostListCard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/VideoPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/VideoPostCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/profilePageComponents/profilePost/common/ImageUploading.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/profilePageComponents/profilePost/common/ImageUploading.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/checkOutPageComponents/CheckoutPop/CheckOutSlideHeader/CheckOutSlideHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/checkOutPageComponents/CheckoutPop/CheckOutSlideHeader/CheckOutSlideHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/messengerPageComponents/MessengerCall/MessengerCall.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/messengerPageComponents/MessengerCall/MessengerCall.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/messengerPageComponents/MessengerConversationHeader/MessengerConversationHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/messengerPageComponents/MessengerConversationHeader/MessengerConversationHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/messengerPageComponents/MessengerConversationsList/MessengerConversationPreview.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/messengerPageComponents/MessengerConversationsList/MessengerConversationPreview.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/metasPage/MetasRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/metasPage/MetasRenderer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/profilePageComponents/profilePost/common/ImagePreview.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/profilePageComponents/profilePost/common/ImagePreview.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/profilePageComponents/profilePost/common/ThumbnailUploadArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/profilePageComponents/profilePost/common/ThumbnailUploadArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/socialComponents/UserSmallPreview/UserSmallPreview.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/socialComponents/UserSmallPreview/UserSmallPreview.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/userPageComponents/UserPageActionButtons/UserPageActionButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/userPageComponents/UserPageActionButtons/UserPageActionButtons.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/profilePageComponents/profilePost/common/ThumbnailsUploader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/profilePageComponents/profilePost/common/ThumbnailsUploader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/AlphabeticalNumericalRangeLinksWidget/AlphabeticalNumericalRangeLinksWidget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/AlphabeticalNumericalRangeLinksWidget/AlphabeticalNumericalRangeLinksWidget.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/Authentication/Authentication.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/Authentication/Authentication.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/Authentication/AuthenticationNotLoggedInItems.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/Authentication/AuthenticationNotLoggedInItems.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/DayModeNightMode/DayModeNightMode.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/DayModeNightMode/DayModeNightMode.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/PostsListEntireByCategories/PostsListEntireByCategories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/PostsListEntireByCategories/PostsListEntireByCategories.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/PostsSlider/PostsSlider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/PostsSlider/PostsSlider.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/templates/ArticleTypePostPage/ArticleTypePostPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/templates/ArticleTypePostPage/ArticleTypePostPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/templates/EventTypePostPage/EventTypePostPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/templates/EventTypePostPage/EventTypePostPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/templates/LearnTypePostPage/LearnTypePostPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/templates/LearnTypePostPage/LearnTypePostPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/templates/NotFoundOrRestricted.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/templates/NotFoundOrRestricted.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/templates/PromotionTypePostPage/PromotionTypePostPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/templates/PromotionTypePostPage/PromotionTypePostPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/templates/VideoTypePostPage/VideoTypePostPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/templates/VideoTypePostPage/VideoTypePostPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/widgetsArea/FooterWidgetArea/FooterWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/widgetsArea/FooterWidgetArea/FooterWidgetArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/widgetsArea/HeaderWidgetArea/HeaderWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/widgetsArea/HeaderWidgetArea/HeaderWidgetArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/widgetsArea/NavigationWidgetArea/NavigationWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/widgetsArea/NavigationWidgetArea/NavigationWidgetArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/widgetsArea/TopBarWidgetArea/TopBarWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/widgetsArea/TopBarWidgetArea/TopBarWidgetArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/next-env.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/next-env.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/500.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/500.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/Logo/Logo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/Logo/Logo.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/MenuWidget/MenuWidget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/MenuWidget/MenuWidget.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/layouts/AppLayout/AppLayoutAdminDataInitializer.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/AddToBasket.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/AddToBasket.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/CommentFrom.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/CommentFrom.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/DownloadLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/DownloadLink.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/Price.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/Price.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/RatingButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/RatingButtons.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/ShowHideCommentsButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/ShowHideCommentsButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/widgetsArea/FooterWidgetArea/FooterWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/widgetsArea/FooterWidgetArea.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/widgetsArea/HeaderWidgetArea/HeaderWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/widgetsArea/HeaderWidgetArea.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/widgetsArea/MainWidgetArea/MainWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/widgetsArea/MainWidgetArea.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/widgetsArea/NavigationWidgetArea/NavigationWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/widgetsArea/NavigationWidgetArea.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/widgetsArea/SectionWidgetArea/SectionWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/widgetsArea/SectionWidgetArea.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/widgetsArea/SidebarWidgetArea/SidebarWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/widgetsArea/SidebarWidgetArea/SidebarWidgetArea.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/widgetsArea/TopBarWidgetArea/TopBarWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/widgetsArea/TopBarWidgetArea.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/_app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/_document.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/_document.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/pages/actor/[actorId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/actor/[actorId].tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/pages/actors/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/actors/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/auth/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/auth/login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/auth/register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/auth/register.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/pages/categories/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/categories/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/pages/category/[categoryId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/category/[categoryId].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/chatroom/[Identifier].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/chatroom/[Identifier].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/checkout/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/checkout/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/maintenance/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/maintenance/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/messenger/[conversation].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/messenger/[conversation].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/messenger/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/messenger/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/pages/page/[pageName].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/page/[pageName].tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/pages/post/[postType]/[identifier].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/post/[postType]/[identifier].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/posts/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/posts/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/pages/profile/edit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/profile/edit.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/profile/followers/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/profile/followers/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/profile/following/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/profile/following/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/profile/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/profile/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/profile/post/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/profile/post/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/profile/posts/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/profile/posts/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/search/[keyword].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/search/[keyword].tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/pages/tag/[tagId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/tag/[tagId].tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/pages/tags/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/tags/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/pages/user/[username].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/user/[username].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/public/asset/images/default/favIcon/favicon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/public/asset/images/default/pwa/192.png" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/public/asset/images/default/pwa/192.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/public/asset/images/default/pwa/384.png" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/public/asset/images/default/pwa/384.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/public/asset/images/default/pwa/512.png" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/public/asset/images/default/pwa/512.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/_storeVariables/_firstRequestHeadDataSetter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/_storeVariables/_firstRequestHeadDataSetter.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/_storeVariables/_getServerSideStaticPageData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/_storeVariables/_getServerSideStaticPageData.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/postsReducer/getPostAction.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/postsReducer/getPostAction.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/postsReducer/getPostsAction.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/postsReducer/getPostsAction.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/settingsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/settingsReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/store.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Navigation/menuItems.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/layouts/Navigation/menuItems.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/settings/defaultPagesSetttings/DefaultPageSettings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/settings/defaultPagesSetttings/DefaultPageSettings.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/api-requests/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/tsconfig.tsbuildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/object-util/getTextDataWithTranslation.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/src/object-util/getTextDataWithTranslation.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/object-util/getTextDataWithTranslation.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/src/object-util/getTextDataWithTranslation.d.ts.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/object-util/getTextDataWithTranslation.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/src/object-util/getTextDataWithTranslation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/object-util/getTextDataWithTranslation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/src/object-util/getTextDataWithTranslation.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/string-util/textContentReplacer.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/src/string-util/textContentReplacer.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/string-util/textContentReplacer.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/src/string-util/textContentReplacer.d.ts.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/string-util/textContentReplacer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/src/string-util/textContentReplacer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/custom-util/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/tsconfig.tsbuildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/tsconfig.tsbuildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/typescript-types/src/settings/PageSettings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/typescript-types/src/settings/PageSettings.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/typescript-types/src/storeTypes/SettingsState.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/typescript-types/src/storeTypes/SettingsState.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/typescript-types/src/storeTypes/Store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/typescript-types/src/storeTypes/Store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/ActionButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/ActionButtons.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/ExportWidget/ExportWidget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/ExportWidget/ExportWidget.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/FormTypeWidgetModelFields/FieldPreview.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Design/Widgets/WidgetModel/FormTypeWidgetModelFields/FieldPreview.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/FileManager/FileManagerArea/FileManagerArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/FileManager/FileManagerArea/FileManagerArea.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/Meta/Meta.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/Meta/Meta.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/PostInformation/ImageGallery/ImageGallery.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/PostInformation/ImageGallery/ImageGallery.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/PostInformation/UploadFileBtn/uploadFileBtn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/Post/PostInformation/UploadFileBtn/uploadFileBtn.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/settings/initialSettings/General/General.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/settings/initialSettings/General/General.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/ActiveAlertBox.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/src/ActiveAlertBox.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/ActiveAlertBox.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/src/ActiveAlertBox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/ActiveAlertBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/src/ActiveAlertBox.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/tsconfig.tsbuildinfo" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,8 +121,8 @@
         <option value="CSS File" />
         <option value="tsconfig.json" />
         <option value="JavaScript File" />
-        <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -175,34 +164,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;18.12.1&quot;,
-    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;18.11.18&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/Dev Project/reactServerSideRenderingWithNext/apps/api-server/controllers/clientControllers/chatroomControllers&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;F:\\Dev Project\\reactServerSideRenderingWithNext\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "javascript.nodejs.core.library.configured.version": "18.12.1",
+    "javascript.nodejs.core.library.typings.version": "18.11.18",
+    "last_opened_file_path": "F:/Dev Project/reactServerSideRenderingWithNext/apps/web-app/components/RootLayout",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "F:\\Dev Project\\reactServerSideRenderingWithNext\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-app\components\RootLayout" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\api-server\controllers\clientControllers\chatroomControllers" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-app\app\[lang]" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-app\app\[lang]\community" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\trash" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\typescript-types\src\MessengerStoreTypes" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-app\components\RootLayout\common" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\trash" />
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-app\components\RootLayout\widgetsArea" />
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-app\components\RootLayout" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-dashboard-app\src\components\pages\settings\defaultPagesSetttings" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-dashboard-app\src\components\pages\settings\initialSettings" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-dashboard-app\src\components\pages\settings" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-dashboard-app\src\components\pages\customPagesSettings" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -263,9 +252,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.start" />
         <item itemvalue="npm.build:api-server" />
         <item itemvalue="npm.outdate:packages" />
       </list>
@@ -1647,6 +1636,7 @@
       <workItem from="1678534847544" duration="1119000" />
       <workItem from="1678631102291" duration="1904000" />
       <workItem from="1678656268360" duration="20561000" />
+      <workItem from="1678703916914" duration="22976000" />
     </task>
     <servers />
   </component>
@@ -2123,6 +2113,9 @@
         <option value="$PROJECT_DIR$/packages/custom-util/src/array-utils/sortArrayByPropertyOfObject.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/array-utils/sortArrayByPropertyOfObject.js" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/array-utils/sortArrayByPropertyOfObject.d.ts" />
+        <option value="$PROJECT_DIR$/packages/ui/src/animationskeyframes.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/ui/src/animationskeyframes.d.ts" />
+        <option value="$PROJECT_DIR$/packages/ui/src/animationskeyframes.js" />
       </list>
     </option>
   </component>
@@ -2149,7 +2142,7 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/apps/web-app/components/widgetsArea/Footer/Footer.js</url>
+          <url>file://$PROJECT_DIR$/apps/web-app/components/RootLayout/widgetsArea/Footer/Footer.js</url>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -2180,7 +2173,7 @@
           <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/apps/web-app/components/widgetsArea/Header/Header.js</url>
+          <url>file://$PROJECT_DIR$/apps/web-app/components/RootLayout/widgetsArea/Header/Header.js</url>
           <option name="timeStamp" value="29" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -2225,12 +2218,12 @@
           <option name="timeStamp" value="88" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/apps/web-app/components/widgetsArea/SidebarWidgetArea/SidebarWidgetArea.tsx</url>
+          <url>file://$PROJECT_DIR$/apps/web-app/components/RootLayout/widgetsArea/SidebarWidgetArea/SidebarWidgetArea.tsx</url>
           <line>1</line>
           <option name="timeStamp" value="89" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/apps/web-app/components/includes/LoginRegisterPopup/ValidInput.tsx</url>
+          <url>file://$PROJECT_DIR$/apps/web-app/components/RootLayout/common/LoginRegisterPopup/ValidInput.tsx</url>
           <line>16</line>
           <option name="timeStamp" value="90" />
         </line-breakpoint>
@@ -2286,7 +2279,7 @@
           <option name="timeStamp" value="117" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/apps/web-app/components/widgetsArea/MainWidgetArea/MainWidgetArea.tsx</url>
+          <url>file://$PROJECT_DIR$/apps/web-app/components/RootLayout/widgetsArea/MainWidgetArea.tsx</url>
           <option name="timeStamp" value="120" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -2299,7 +2292,7 @@
           <option name="timeStamp" value="123" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/apps/web-app/components/includes/LoginRegisterPopup/LoginRegisterPopupForms.tsx</url>
+          <url>file://$PROJECT_DIR$/apps/web-app/components/RootLayout/common/LoginRegisterPopup/LoginRegisterPopupForms.tsx</url>
           <line>236</line>
           <option name="timeStamp" value="124" />
         </line-breakpoint>
@@ -2347,16 +2340,16 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/apps/web-app/components/includes/profilePageComponents/profilePost/common/ThumbnailsUploader.tsx</url>
-          <line>43</line>
+          <line>45</line>
           <option name="timeStamp" value="154" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/CommentFrom.tsx</url>
-          <line>94</line>
+          <line>95</line>
           <option name="timeStamp" value="155" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/apps/web-app/components/global/SiteHeadSetter.tsx</url>
+          <url>file://$PROJECT_DIR$/trash/SiteHeadSetter.tsx</url>
           <option name="timeStamp" value="156" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -2435,7 +2428,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/apps/web-app/components/includes/widgets/Authentication/Authentication.tsx</url>
-          <line>50</line>
+          <line>53</line>
           <option name="timeStamp" value="175" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -2456,12 +2449,12 @@
           <option name="timeStamp" value="179" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/apps/web-app/components/includes/LoginRegisterPopup/LoginRegisterPopupForms.tsx</url>
+          <url>file://$PROJECT_DIR$/apps/web-app/components/RootLayout/common/LoginRegisterPopup/LoginRegisterPopupForms.tsx</url>
           <line>48</line>
           <option name="timeStamp" value="180" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/apps/web-app/components/includes/LoginRegisterPopup/LoginRegisterPopupForms.tsx</url>
+          <url>file://$PROJECT_DIR$/apps/web-app/components/RootLayout/common/LoginRegisterPopup/LoginRegisterPopupForms.tsx</url>
           <line>16</line>
           <option name="timeStamp" value="181" />
         </line-breakpoint>

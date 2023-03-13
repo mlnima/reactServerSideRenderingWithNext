@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import styled from "styled-components";
-import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faAngleUp} from "@fortawesome/free-solid-svg-icons/faAngleUp";
 
 const BackToTopButtonStyledDiv = styled.div`
   position: fixed;
@@ -45,11 +46,7 @@ const BackToTopButton = () => {
         return (
             <BackToTopButtonStyledDiv onClick={() => scrollEvent()} title="Back to top">
                 <span aria-label={'scroll to top'}>
-                     <SvgRenderer svgUrl={'/asset/images/icons/angle-up-solid.svg'}
-                                  customID={'back-to-top-button'}
-                                  size={24}
-                                  customClassName={'view-profile'}
-                                  color={'var(--main-background-color, #000)'}/>
+                    <FontAwesomeIcon color={'var(--main-background-color, #000)'} icon={faAngleUp} style={{width:24,height:24}}/>
                 </span>
             </BackToTopButtonStyledDiv>
 

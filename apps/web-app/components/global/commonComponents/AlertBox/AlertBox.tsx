@@ -2,9 +2,13 @@ import React, {FC, useEffect} from 'react';
 import styled from "styled-components";
 import Draggable from 'react-draggable';
 import useTranslation from 'next-translate/useTranslation'
-import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {closeAlert} from "@store_toolkit/clientReducers/globalStateReducer";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCircleCheck} from "@fortawesome/free-solid-svg-icons/faCircleCheck";
+import {faTriangleExclamation} from "@fortawesome/free-solid-svg-icons/faTriangleExclamation";
+import {faCircleExclamation} from "@fortawesome/free-solid-svg-icons/faCircleExclamation";
+import {faXmark} from "@fortawesome/free-solid-svg-icons/faXmark";
 
 const StyledDiv = styled.div`
   position: fixed;
@@ -27,7 +31,6 @@ const StyledDiv = styled.div`
     border-radius: 5px;
 
     .alert-message-header {
-      background-color: var( --main-text-color, #fff);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -38,21 +41,10 @@ const StyledDiv = styled.div`
         color: var(--main-text-color, #fff);;
         background-color: transparent;
         border: none;
-        //margin: 0;
-        //padding: 0 10px;
         height: 25px;
         width: 40px;
         display: flex;
         justify-content: center;
-
-        //.faTimes {
-        //  width: 25px;
-        //  height: 25px;
-        //  margin: 0 2px;
-        //  background-color: var(--post-element-info-text-color, #ccc);
-        //  mask: url('/apps/mainNextApp/public/asset/images/icons/times-solid.svg') no-repeat center;
-        //  -webkit-mask: url('/apps/mainNextApp/public/asset/images/icons/times-solid.svg') no-repeat center;
-        //}
       }
 
       .alert-type {
@@ -67,33 +59,7 @@ const StyledDiv = styled.div`
           width: 25px;
           height: 25px;
         }
-
-        //.faCheckCircle {
-        //  width: 25px;
-        //  height: 25px;
-        //  margin: 0 2px;
-        //  background-color: green;
-        //  mask: url('/apps/mainNextApp/public/asset/images/icons/circle-check-solid.svg') no-repeat center;
-        //  -webkit-mask: url('/apps/mainNextApp/public/asset/images/icons/circle-check-solid.svg') no-repeat center;
-        //}
-        //
-        //.faExclamationCircle {
-        //  width: 25px;
-        //  height: 25px;
-        //  margin: 0 2px;
-        //  background-color: blue;
-        //  mask: url('/apps/mainNextApp/public/asset/images/icons/circle-exclamation-solid.svg') no-repeat center;
-        //  -webkit-mask: url('/apps/mainNextApp/public/asset/images/icons/circle-exclamation-solid.svg') no-repeat center;
-        //}
-        //
-        //.faExclamationTriangle {
-        //  width: 25px;
-        //  height: 25px;
-        //  margin: 0 2px;
-        //  background-color: red;
-        //  mask: url('/apps/mainNextApp/public/asset/images/icons/triangle-exclamation-solid.svg') no-repeat center;
-        //  -webkit-mask: url('/apps/mainNextApp/public/asset/images/icons/triangle-exclamation-solid.svg') no-repeat center;
-        //}
+        
       }
     }
 
@@ -129,19 +95,24 @@ const AlertBox:FC<PropTypes> = ({alert,}) => {
                     <div className='alert-message'>
                         <div className='alert-message-header handle'>
                             <p className='alert-type'>
-                                <SvgRenderer size={25}
-                                             svgUrl={alert.type === 'success' ? '/asset/images/icons/circle-check-solid.svg' :
-                                                 alert.type === 'error' ? '/asset/images/icons/triangle-exclamation-solid.svg' :
-                                                     '/asset/images/icons/circle-exclamation-solid.svg'}
-                                             customClassName={'download-logo'}
-                                             color={'var(--main-text-color, #fff)'}/>
+                                <FontAwesomeIcon icon={
+                                    alert.type === 'success' ? faCircleCheck :
+                                        alert.type === 'error'? faTriangleExclamation :
+                                            faCircleExclamation
+                                } style={
+                                    {
+                                        width:25,
+                                        height:25,
+                                        color:  alert.type === 'success' ? 'green' :
+                                            alert.type === 'error'? 'red' :
+                                                'yellow'
+                                    }
+                                }/>
+
                             </p>
                             <button className='close-alert' onClick={() =>  dispatch(closeAlert(null))}>
                                 <span className={'icon faTimes'}/>
-                                <SvgRenderer svgUrl={'/asset/images/icons/xmark-solid.svg'}
-                                             size={25}
-                                             customClassName={'download-logo'}
-                                             color={alert.type === 'success' ? 'green' : alert.type === 'error' ? 'red' : '#ccc'}/>
+                                <FontAwesomeIcon icon={faXmark} style={{width:25,height:25}}/>
                             </button>
                         </div>
                         <p className='alert'>
@@ -168,9 +139,3 @@ const AlertBox:FC<PropTypes> = ({alert,}) => {
 
 export default AlertBox;
 
-// {alert.type === 'success' ?
-//     <span className={'icon faCheckCircle'}/> :
-//     alert.type === 'error' ?
-//         <span className={'icon faExclamationTriangle'}/> :
-//         <span className={'icon faExclamationCircle'}/>
-// }

@@ -1,9 +1,10 @@
-import React, {FC, useMemo} from "react";
+import React, {FC} from "react";
 import styled from "styled-components";
 import {Post} from "typescript-types";
 import CardTitle from "@components/includes/cards/asset/CardTitle/CardTitle";
-import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 import Link from "next/link";
+import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons/faMagnifyingGlass";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const Style = styled.div`
   display: flex;
@@ -52,10 +53,9 @@ const PromotionPostListCard: FC<PropTypes> = ({post,index}) => {
             </div>
 
             <Link href={`/post/${post?.postType}/${post._id}`} className={'internal-link'}>
-                    <SvgRenderer svgUrl={'/asset/images/icons/magnifying-glass-solid.svg'}
-                                 size={15}
-                                 customClassName={'searchbar-submit-btn-icon'}
-                                 color={'var(--main-text-color, #fff)'}/>
+                <FontAwesomeIcon className={'searchbar-submit-btn-icon'}
+                                 icon={faMagnifyingGlass}
+                                 style={{width:15,height:15}}/>
             </Link>
         </Style>
     )

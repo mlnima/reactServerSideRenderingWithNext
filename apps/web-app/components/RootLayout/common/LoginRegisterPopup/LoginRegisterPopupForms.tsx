@@ -10,7 +10,7 @@ import {fetchLogin, fetchUserRegister} from "@store_toolkit/clientReducers/userR
 import {setAlert} from "@store_toolkit/clientReducers/globalStateReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {Store} from "typescript-types";
-import FormHeader from "@components/includes/LoginRegisterPopup/FormHeader";
+import FormHeader from "./FormHeader";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye} from "@fortawesome/free-solid-svg-icons/faEye";
 

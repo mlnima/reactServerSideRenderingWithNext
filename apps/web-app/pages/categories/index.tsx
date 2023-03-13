@@ -5,7 +5,7 @@ import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {wrapper} from "@store_toolkit/store";
 import dynamic from "next/dynamic";
-import SidebarWidgetAreaRenderer from "../../components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
+import SidebarWidgetAreaRenderer from "@components/RootLayout/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import MetasCardsRenderer from "../../components/includes/cards/CardsRenderer/MetasCardsRenderer";
 import {Store} from "typescript-types";

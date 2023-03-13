@@ -90,10 +90,6 @@ const Meta:FC<PropType> = props => {
         return (
             <button key={index} name={item?.name} onClick={(e) => deleteItem(e)} className='btn btn-danger'>
                 {item?.name}
-                {/*<SvgRenderer svgUrl={'/asset/images/icons/xmark-solid.svg'}*/}
-                {/*             size={16}*/}
-                {/*             customClassName={'meta-icon'}*/}
-                {/*             color={'#fff'}/>*/}
                 <FontAwesomeIcon icon={faXmark} className={'meta-icon'}/>
             </button>
         )
@@ -105,10 +101,6 @@ const Meta:FC<PropType> = props => {
             <form className="add-new-meta" onSubmit={e => addNewItem(e)}>
                 <input className={'form-control-input'} ref={newItemsElement} type='text'/>
                 <button className={'btn btn-success'} type='submit'>
-                    {/*<SvgRenderer svgUrl={'/asset/images/icons/plus-solid.svg'}*/}
-                    {/*             size={16}*/}
-                    {/*             customClassName={'add-new-meta-icon'}*/}
-                    {/*             color={'#fff'}/>*/}
                     <FontAwesomeIcon icon={faPlus} className={'add-new-meta-icon'}/>
                 </button>
             </form>

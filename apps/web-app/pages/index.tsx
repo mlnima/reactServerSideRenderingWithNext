@@ -1,11 +1,11 @@
-import MainWidgetArea from "../components/widgetsArea/MainWidgetArea/MainWidgetArea";
 import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
 import styled from "styled-components";
-import SidebarWidgetAreaRenderer from "../components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import _getServerSideStaticPageData from "../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
+import SidebarWidgetAreaRenderer from "@components/RootLayout/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
+import MainWidgetArea from "@components/RootLayout/widgetsArea/MainWidgetArea";
 
 const HomePageStyle = styled.div`
   display: grid;

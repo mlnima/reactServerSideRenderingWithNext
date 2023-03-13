@@ -30,10 +30,11 @@ const CommentFromStyledForm = styled.form`
       position: relative;
       width: 100%;
       .comment-form-input{
+        font-size: large;
         width: 100%;
-        min-height: 35px;
+        min-height: 120px;
         background-color: #ccc;
-        border-radius: 0;
+        border-radius: 5px;
         border: none;
         color: #000;
         outline:none;

@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import SvgRenderer from "../../../../global/commonComponents/SvgRenderer/SvgRenderer";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import React from "react";
+import {faXmark} from "@fortawesome/free-solid-svg-icons/faXmark";
 
 let StyledDiv = styled.div`
   display: flex;
@@ -13,7 +15,7 @@ let StyledDiv = styled.div`
   }
 `
 
-const CheckOutSlideHeader = props => {
+const CheckOutSlideHeader = () => {
 
     const onCloseCheckoutSlideHandler = () => {
 
@@ -21,11 +23,7 @@ const CheckOutSlideHeader = props => {
     return (
         <StyledDiv className='checkout-slide-header'>
             <button className='close-checkout-slide-button' onClick={onCloseCheckoutSlideHandler}>
-
-                <SvgRenderer svgUrl={'/asset/images/icons/xmark-solid.svg'}
-                             size={25}
-                             customClassName={'navigation-mobile-button-logo'}
-                             color={'var(--main-text-color, #fff)'}/>
+                <FontAwesomeIcon className={'navigation-mobile-button-logo'} icon={faXmark} style={{width:25,height:25}}/>
             </button>
         </StyledDiv>
     );

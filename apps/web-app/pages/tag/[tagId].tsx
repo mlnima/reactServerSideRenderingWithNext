@@ -4,7 +4,7 @@ import PostsPageInfo from "../../components/includes/PostsPage/PostsPageInfo";
 import dynamic from "next/dynamic";
 import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
-import SidebarWidgetAreaRenderer from "../../components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
+import SidebarWidgetAreaRenderer from "@components/RootLayout/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
 import getPostsAction from "@store_toolkit/clientReducers/postsReducer/getPostsAction";

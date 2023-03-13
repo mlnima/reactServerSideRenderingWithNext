@@ -6,7 +6,8 @@ import {capitalizeFirstLetter} from "custom-util";
 import MetaElement from "./MetaElement";
 import useTranslation from "next-translate/useTranslation";
 import {useRouter} from "next/router";
-import SvgRenderer from "../../global/commonComponents/SvgRenderer/SvgRenderer";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faSortUp} from "@fortawesome/free-solid-svg-icons/faSortUp";
 
 const MetasRendererStyle = styled.div`
 
@@ -15,12 +16,7 @@ const MetasRendererStyle = styled.div`
   align-items: center;
   flex-direction: column;
   max-width: 100vw;
-  //margin: 8px;
-  //box-sizing: border-box;
-
   .letters-container {
-    //margin: 0;
-    //box-sizing: border-box;
     width: 100%;
     .group-wrapper {
   
@@ -43,7 +39,6 @@ const MetasRendererStyle = styled.div`
           list-style: none;
           text-overflow: ellipsis;
           padding: 14px 10px;
-          //background-color: var(--secondary-background-color, #181818);
           overflow:hidden;
           a {
             overflow:hidden;
@@ -177,10 +172,9 @@ const MetasRenderer: FC<MetasRendererPropTypes> = ({metaType, metaData}) => {
                                 <Link href={`/${metaType}?startWith=${group === '#' ? 'digits' : group}`}>
                                         <span className={'view-all'}>
                                             {t('common:View All', {}, {fallback: 'View All'})}
-                                            <SvgRenderer svgUrl={'/asset/images/icons/sort-up-solid.svg'}
-                                                         size={20}
-                                                         customClassName={'view-all-arrow-icon'}
-                                                         color={'var(--main-active-color, #f90)'}/>
+                                            <FontAwesomeIcon color={'var(--main-active-color, #f90)'}
+                                                             icon={faSortUp}
+                                                             style={{width:20,height:20}}/>
                                         </span>
                                 </Link>
                                 }

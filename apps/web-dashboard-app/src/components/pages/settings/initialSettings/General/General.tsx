@@ -207,10 +207,6 @@ const General = () => {
             <div key={index} className='item'>
                 <p>{item}</p>
                 <button name={item} onClick={(e) => deleteItem(e)}>
-
-                    {/*<SvgRenderer svgUrl={'/asset/images/icons/icons/xmark-solid.svg'}*/}
-                    {/*             size={20}*/}
-                    {/*             color={'var(--main-text-color, #fff)'}/>*/}
                     <FontAwesomeIcon icon={faXmark}/>
                 </button>
             </div>

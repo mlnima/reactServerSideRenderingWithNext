@@ -1,10 +1,12 @@
 // @ts-nocheck
-import {useRef, useEffect} from "react";
+import React, {useRef, useEffect} from "react";
 import {useSelector} from "react-redux";
 import styled from "styled-components";
 import Draggable from 'react-draggable';
-import SvgRenderer from "../../../global/commonComponents/SvgRenderer/SvgRenderer";
 import {Store} from "typescript-types";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faPhone} from "@fortawesome/free-solid-svg-icons/faPhone";
+import {faPhoneSlash} from "@fortawesome/free-solid-svg-icons/faPhoneSlash";
 
 const MessengerCallStyledDiv = styled.div`
   position: fixed;
@@ -190,14 +192,10 @@ const MessengerCall = ({endCallHandler, callAccepted, attemptForAnswer, disableM
                             <p className='messenger-call-user-calling-message-call-type'>Incoming video call</p>
                             <div className='messenger-call-user-calling-message-answer-buttons'>
                                 <button className='messenger-call-user-calling-message-answer-button' onClick={answerCall}>
-                                    <SvgRenderer svgUrl={'/asset/images/icons/phone-solid.svg'}
-                                                 size={20}
-                                                 color={'var(--main-text-color, #fff)'}/>
+                                    <FontAwesomeIcon icon={faPhone} style={{width:20,height:20}}/>
                                 </button>
                                 <button className='messenger-call-user-calling-message-reject-button' onClick={endCallHandler}>
-                                    <SvgRenderer svgUrl={'/asset/images/icons/phone-slash-solid.svg'}
-                                                 size={20}
-                                                 color={'var(--main-text-color, #fff)'}/>
+                                    <FontAwesomeIcon icon={faPhoneSlash} style={{width:20,height:20}}/>
                                 </button>
                             </div>
 
@@ -207,9 +205,7 @@ const MessengerCall = ({endCallHandler, callAccepted, attemptForAnswer, disableM
                         {/*<button onClick={disableCamera} className='disable-video-button'></button>*/}
                         {/*<button onClick={disableMicrophone} className='disable-audio-button'> </button>*/}
                         <button onClick={endCallHandler} className='leave-call-button'>
-                            <SvgRenderer svgUrl={'/asset/images/icons/phone-slash-solid.svg'}
-                                         size={20}
-                                         color={'var(--main-text-color, #fff)'}/>
+                            <FontAwesomeIcon icon={faPhoneSlash} style={{width:20,height:20}}/>
                         </button>
                     </div> : null}
                 </div>

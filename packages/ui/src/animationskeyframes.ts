@@ -1,6 +1,6 @@
-import { css } from 'styled-components';
+import {css} from "styled-components";
 
-const keyframes = css`
+const animationsKeyframes = css`
   @keyframes navigationMobileSlide {
     from {
       left: -100%;
@@ -28,4 +28,4 @@ const keyframes = css`
     }
   }
 `
-export default keyframes;
+export default animationsKeyframes;

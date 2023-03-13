@@ -3,12 +3,14 @@ import React, {FC, useRef,} from "react";
 import styled from "styled-components";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import ThumbnailUploadArea from "./ThumbnailUploadArea";
-import SvgRenderer from "../../../../global/commonComponents/SvgRenderer/SvgRenderer";
 import {_ugcUploadPostImages}
     from "@store_toolkit/clientReducers/postsReducer/_ugcUploadPostImages";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCamera} from "@fortawesome/free-solid-svg-icons/faCamera";
+import {faCirclePlus} from "@fortawesome/free-solid-svg-icons/faCirclePlus";
 
 //experimental doc for dev
-//db.getCollection('posts').find({"_id":ObjectId("603adfacfb13c0091074fa0e")})
+
 const ThumbnailsUploaderStyledDiv = styled.div`
   width: 100%;
   margin: 20px 0;
@@ -94,17 +96,10 @@ const ThumbnailsUploader: FC<ThumbnailUploaderPropTypes> =
                            type="file"
                            ref={inputRef}
                            accept="image/x-png,image/gif,image/jpeg,image/webp"
-                        // multiple
                            style={{display: 'none'}}
                            onChange={e => onUploadHandler(e.target.files, images.length + 1)}/>
-                    <SvgRenderer svgUrl={'/asset/images/icons/camera-solid.svg'}
-                                 size={70}
-                                 customClassName={'camera'}
-                                 color={'var(--main-text-color, #fff)'}/>
-                    <SvgRenderer svgUrl={'/asset/images/icons/circle-plus-solid.svg'}
-                                 size={20}
-                                 customClassName={'plus'}
-                                 color={'var(--main-active-color, #f90)'}/>
+                    <FontAwesomeIcon className={'camera'} icon={faCamera} style={{width:70,height:70}}/>
+                    <FontAwesomeIcon className={'plus'} icon={faCirclePlus} style={{width:20,height:20}}/>
                 </div>}
 
             </ThumbnailsUploaderStyledDiv>

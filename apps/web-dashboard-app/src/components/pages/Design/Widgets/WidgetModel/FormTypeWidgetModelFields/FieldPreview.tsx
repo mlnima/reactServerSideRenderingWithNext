@@ -140,10 +140,6 @@ const FieldPreview :FC<FieldPreviewPropTypes>= ({setWidgetData,widgetData,field}
                             open: true
                         })}
                         className={'btn btn-secondary'}>
-                        {/*<SvgRenderer svgUrl={'/asset/images/icons/sliders-solid.svg'}*/}
-                        {/*             size={20}*/}
-                        {/*             color={'var(--secondary-button-link-text-color, #fff)'}/>*/}
-
                         <FontAwesomeIcon icon={faSliders} className={'meta-icon'}/>
 
                     </button>
@@ -152,21 +148,12 @@ const FieldPreview :FC<FieldPreviewPropTypes>= ({setWidgetData,widgetData,field}
                     <p>{field.fieldType + ' : ' + field.fieldName}</p>
                     <p>index:{field.fieldIndex}</p>
                     <button onClick={() => fieldIndexPlus(-1)} className={'btn btn-secondary'}>
-                        {/*<SvgRenderer svgUrl={'/asset/images/icons/sort-up-solid.svg'}*/}
-                        {/*             size={20}*/}
-                        {/*             color={'var(--secondary-button-link-text-color, #fff)'}/>*/}
                         <FontAwesomeIcon icon={faSortUp} className={'meta-icon'}/>
                     </button>
                     <button onClick={() => fieldIndexPlus(+1)} className={'btn btn-secondary'}>
-                        {/*<SvgRenderer svgUrl={'/asset/images/icons/sort-down-solid.svg'}*/}
-                        {/*             size={20}*/}
-                        {/*             color={'var(--secondary-button-link-text-color, #fff)'}/>*/}
                         <FontAwesomeIcon icon={faSortDown} className={'meta-icon'}/>
                     </button>
                     <button onClick={() => onDeleteHandler(field.fieldName)} className={'btn btn-secondary'}>
-                        {/*<SvgRenderer svgUrl={'/asset/images/icons/trash-can-solid.svg'}*/}
-                        {/*             size={20}*/}
-                        {/*             color={'var(--secondary-button-link-text-color, #fff)'}/>*/}
                         <FontAwesomeIcon icon={faTrashCan} className={'meta-icon'}/>
                     </button>
 

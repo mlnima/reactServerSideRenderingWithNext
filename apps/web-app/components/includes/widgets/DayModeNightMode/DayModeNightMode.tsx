@@ -3,7 +3,9 @@ import styled, {createGlobalStyle} from "styled-components";
 import {useSelector} from "react-redux";
 import {Store} from "typescript-types";
 import {UniqueDataTypes} from "typescript-types";
-import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faMoon} from "@fortawesome/free-solid-svg-icons/faMoon";
+import {faSun} from "@fortawesome/free-solid-svg-icons/faSun";
 
 interface DayModeNightModePropTypes {
     uniqueData: UniqueDataTypes
@@ -53,15 +55,10 @@ const DayModeNightMode: FC<DayModeNightModePropTypes> = ({uniqueData}) => {
 
     return (
         <DayModeNightModeStyledDiv>
-            <button className={'btn btn-primary'}
-                    aria-label={'theme mode'}
-                    onClick={onSelectHandler}>
-
-                <SvgRenderer
-                    svgUrl={ isDefaultTheme  ? '/asset/images/icons/moon-solid.svg' : '/asset/images/icons/sun.svg'}
-                    size={25}
-                    customClassName={'moon-sun'}
-                    color={'var(--main-text-color)'}/>
+            <button className={'btn btn-primary'} aria-label={'theme mode'} onClick={onSelectHandler}>
+                <FontAwesomeIcon className={'moon-sun'}
+                                 color={'var(--main-text-color)'}
+                                 icon={isDefaultTheme  ? faMoon : faSun} style={{width:25,height:25}}/>
             </button>
             <ModeStyles dayNightModeData={currentColors}/>
         </DayModeNightModeStyledDiv>

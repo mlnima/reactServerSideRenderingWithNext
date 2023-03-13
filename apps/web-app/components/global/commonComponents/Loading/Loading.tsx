@@ -49,13 +49,3 @@ const Loading: FC<PropTypes> = ({isLoading}) => {
 export default memo(Loading);
 
 
-
-// if (isLoadingByRouteChange || isLoading) {
-//     return (
-//         <StyledDiv className='Loading' onClick={() => dispatch(loading(false))}
-//                    onTouchStartCapture={() => dispatch(loading(false))}>
-//             <ReactLoading type={'spin'} color={'var(--main-active-color,#f90)'} height={100} width={100}/>
-//
-//         </StyledDiv>
-//     )
-// } else return null

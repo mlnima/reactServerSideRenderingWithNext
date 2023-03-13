@@ -9,10 +9,11 @@ import {useSelector} from "react-redux";
 import {fetchSpecificUserData, fetchUserPageData} from "@store_toolkit/clientReducers/userReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
-import SvgRenderer from "../../components/global/commonComponents/SvgRenderer/SvgRenderer";
 import UserPreviewImage from "ui/src/UserPreviewImage";
 import {Store} from "typescript-types";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCamera} from "@fortawesome/free-solid-svg-icons/faCamera";
 
 const UserPageStyledDiv = styled.div`
   color: var(--main-text-color);
@@ -128,10 +129,8 @@ const user = () => {
                 </div>
                 <div className='profile-posts'>
                     <div className='profile-no-posts'>
-                        <SvgRenderer svgUrl={'/asset/images/icons/camera-solid.svg'}
-                                     size={20}
-                                     customClassName={'upload-profile-image-btn-svg'}
-                                     color={'var(--main-text-color, #ccc)'}/>
+                        <FontAwesomeIcon className={'upload-profile-image-btn-svg'}
+                                         icon={faCamera} style={{width:20,height:20}}/>
                     </div>
                     <h2 className='profile-no-posts-title'>No Post Yet </h2>
                     <p className='profile-no-posts-title'> Coming Soon</p>

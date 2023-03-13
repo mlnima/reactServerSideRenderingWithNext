@@ -57,7 +57,7 @@ const Soft404 = () => {
     return (
         <>
             <Head>
-                <HeadSetter title={title} description={description}/>
+                {/*<HeadSetter title={title} description={description}/>*/}
                 <title>{title}</title>
             </Head>
 

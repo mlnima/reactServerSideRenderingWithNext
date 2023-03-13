@@ -1,6 +1,6 @@
 import {memo} from "react";
 import styled from "styled-components";
-import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
+import WidgetsRenderer from "@components/includes/WidgetsRenderer/WidgetsRenderer";
 
 let HeaderWidgetAreaStyle = styled.div`
   grid-area: header;

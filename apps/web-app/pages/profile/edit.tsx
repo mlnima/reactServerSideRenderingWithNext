@@ -4,7 +4,7 @@ import styled from "styled-components";
 import {wrapper} from "@store_toolkit/store";
 import {fetchUserResetPassword} from "@store_toolkit/clientReducers/userReducer";
 import _passwordValidator from "@_variables/_clientVariables/clientVariables/_passwordValidator";
-import ValidInput from "../../components/includes/LoginRegisterPopup/ValidInput";
+import ValidInput from "@components/RootLayout/common//LoginRegisterPopup/ValidInput";
 import {useAppDispatch, useAppSelector} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";

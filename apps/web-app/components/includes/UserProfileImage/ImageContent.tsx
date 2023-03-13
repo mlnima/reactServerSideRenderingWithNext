@@ -1,5 +1,4 @@
 import React, {FC, useMemo, useState} from "react";
-import SvgRenderer from "@components/global/commonComponents/SvgRenderer/SvgRenderer";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
 

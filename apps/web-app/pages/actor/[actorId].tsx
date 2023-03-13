@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import {useRouter} from "next/router";
 import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
-import SidebarWidgetAreaRenderer from "../../components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
+import SidebarWidgetAreaRenderer from "@components/RootLayout/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import ActorBio from '../../components/includes/cards/CardsRenderer/ActorBio/ActorBio'
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";

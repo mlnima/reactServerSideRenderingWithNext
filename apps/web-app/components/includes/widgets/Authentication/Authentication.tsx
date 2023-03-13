@@ -12,6 +12,9 @@ import {faUserGear} from "@fortawesome/free-solid-svg-icons/faUserGear";
 const AuthenticationLoggedInItems = dynamic(() => import('./AuthenticationLoggedInItems'))
 
 const AuthenticationStyledDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   .profile-icon{
     display: flex;
     justify-content: center;

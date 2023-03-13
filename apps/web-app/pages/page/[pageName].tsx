@@ -1,16 +1,18 @@
-import MainWidgetArea from "../../components/widgetsArea/MainWidgetArea/MainWidgetArea";
+import React from "react";
 import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
 import dynamic from "next/dynamic";
 import styled from "styled-components";
-import SidebarWidgetAreaRenderer from "../../components/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import getPageDataAction
     from "@store_toolkit/clientReducers/postsReducer/getPageDataAction";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
-import React from "react";
+import SidebarWidgetAreaRenderer from "@components/RootLayout/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
+import MainWidgetArea from "@components/RootLayout/widgetsArea/MainWidgetArea";
+
 const Soft404 = dynamic(() => import('../../components/includes/Soft404/Soft404'));
+
 
 const PageStyle = styled.div`
   ${({stylesData}: { stylesData: string }) => stylesData || ''}

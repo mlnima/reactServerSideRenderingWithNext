@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {useRouter} from "next/router";
 import styled from "styled-components";
-import {wrapper} from "../../store_toolkit/store";
-import {useAppDispatch} from "../../store_toolkit/hooks";
+import {wrapper} from "@store_toolkit/store";
+import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 // const PayWithPayPal = dynamic(() => import('../../components/includes/checkOutPageComponents/PayWithPaypal/PayWithPaypal'), {ssr: false})
 

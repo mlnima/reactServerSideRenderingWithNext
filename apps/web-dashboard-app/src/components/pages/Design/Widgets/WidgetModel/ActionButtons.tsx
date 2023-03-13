@@ -71,19 +71,12 @@ const ActionButtons: FC<ActionButtonsPropTypes> = ({widgetData, widgetId, widget
     return (
         <div className='control-buttons'>
             <button className={'btn btn-primary'} title="save" onClick={() => onSaveHandler()}>
-                {/*<SvgRenderer svgUrl={'/asset/images/icons/floppy-disk-solid.svg'}*/}
-                {/*             size={20}*/}
-                {/*             color={'var(--primary-button-link-text-color, #000)'}/>*/}
                 <FontAwesomeIcon icon={faFloppyDisk} className={'meta-icon'}/>
-
             </button>
 
 
             <ExportWidget widgetData={widgetData}/>
             <button className={'btn btn-primary'} title="clone" onClick={() => onCloneHandler()}>
-                {/*<SvgRenderer svgUrl={'/asset/images/icons/clone-solid.svg'}*/}
-                {/*             size={20}*/}
-                {/*             color={'var(--primary-button-link-text-color, #000)'}/>*/}
                 <FontAwesomeIcon icon={faClone} className={'meta-icon'}/>
             </button>
             <button className={'btn btn-primary'} title="delete"
@@ -94,9 +87,6 @@ const ActionButtons: FC<ActionButtonsPropTypes> = ({widgetData, widgetId, widget
                         ...widgetSettings,
                         renderDeleteBtn: true
                     })}>
-                {/*<SvgRenderer svgUrl={'/asset/images/icons/trash-can-solid.svg'}*/}
-                {/*             size={20}*/}
-                {/*             color={'var(--primary-button-link-text-color, #000)'}/>*/}
                 <FontAwesomeIcon icon={faTrash} className={'meta-icon'}/>
             </button>
             {widgetSettings.renderDeleteBtn ?

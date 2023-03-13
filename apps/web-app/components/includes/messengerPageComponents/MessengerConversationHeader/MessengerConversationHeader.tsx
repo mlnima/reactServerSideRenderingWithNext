@@ -1,7 +1,10 @@
 import {useRouter} from "next/router";
 import Link from "next/link";
 import styled from "styled-components";
-import SvgRenderer from "../../../global/commonComponents/SvgRenderer/SvgRenderer";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import React from "react";
+import {faArrowLeft} from "@fortawesome/free-solid-svg-icons/faArrowLeft";
+import {faVideo} from "@fortawesome/free-solid-svg-icons/faVideo";
 
 const MessengerConversationHeaderStyledDiv = styled.div`
   position: absolute;
@@ -82,10 +85,8 @@ const MessengerConversationHeader = ({profileImage, username, callUser}) => {
                     <Link href={`/messenger`}
                           className='messenger-conversation-header-back-btn'
                           rel='no-referrer'>
-                            <SvgRenderer svgUrl={'/asset/images/icons/arrow-left-solid.svg'}
-                                         size={25}
-                                         customClassName={'messenger-conversation-header-back-btn-svg'}
-                                         color={'var(--main-text-color, #fff)'}/>
+                        <FontAwesomeIcon className={'messenger-conversation-header-back-btn-svg'}
+                                         icon={faArrowLeft} style={{width:25,height:25}}/>
                     </Link>
                     <img onClick={() => router.push(`/user/${username}`)}
                          src={profileImage ? profileImage : '/asset/images/user/noGenderAvatar150.jpg'}
@@ -96,10 +97,8 @@ const MessengerConversationHeader = ({profileImage, username, callUser}) => {
                 </div>
                 <div className='call-buttons'>
                     <button onClick={callUser} className='messenger-conversation-header-video-call-btn'>
-                        <SvgRenderer svgUrl={'/asset/images/icons/video-solid.svg'}
-                                     size={25}
-                                     customClassName={'messenger-conversation-header-video-call-btn-svg'}
-                                     color={'var(--main-text-color, #fff)'}/>
+                        <FontAwesomeIcon className={'messenger-conversation-header-video-call-btn-svg'}
+                                         icon={faVideo} style={{width:25,height:25}}/>
                     </button>
                     {/*<button onClick={attemptForCall} className='messenger-conversation-header-call-btn'>*/}
                     {/*    <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--main-text-color, #fff)'}} icon={faPhoneAlt} className='messenger-conversation-header-video-call-btn-svg'/>*/}

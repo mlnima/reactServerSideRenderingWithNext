@@ -79,11 +79,6 @@ const UploadFileBtn:FC<PropType> = props => {
             <input className={'form-control-input'} ref={ uploadInputElement } type="file" style={ { display: 'none' } } onChange={ e => onUploadHandler(e) }/>
             {/*//@ts-ignore*/}
             <button  className={'btn btn-success'} onClick={ () => uploadInputElement.current?.click() } onDrop={e=>onDropFileHandler(e)} onDragOver={e=>e.preventDefault()}>
-
-                {/*<SvgRenderer svgUrl={'/asset/images/icons/upload-solid.svg'}*/}
-                {/*             size={25}*/}
-                {/*             color={'var(--main-text-color, #fff)'}*/}
-                {/*/>*/}
                 <FontAwesomeIcon icon={faUpload}/>
             </button>
         </UploadFileBtnStyledDiv>

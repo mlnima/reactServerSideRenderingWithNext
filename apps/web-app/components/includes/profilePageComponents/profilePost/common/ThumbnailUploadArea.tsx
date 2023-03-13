@@ -1,9 +1,11 @@
 // @ts-nocheck
 import React, {FC, useEffect, useRef} from "react";
 import styled from "styled-components";
-import SvgRenderer from "../../../../global/commonComponents/SvgRenderer/SvgRenderer";
-import {useAppDispatch} from "../../../../../store_toolkit/hooks";
+import {useAppDispatch} from "@store_toolkit/hooks";
 import {_ugcDeletePostImage} from "@store_toolkit/clientReducers/postsReducer/_ugcUploadPostImages";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faTimes} from "@fortawesome/free-solid-svg-icons/faTimes";
+import {faRotateRight} from "@fortawesome/free-solid-svg-icons/faRotateRight";
 
 const Style = styled.div`
   width: 160px;
@@ -124,10 +126,10 @@ const ThumbnailUploadArea: FC<PropTypes> = ({onUploadHandler, image, postId}) =>
                      onDragOver={e => e.preventDefault()}/>
                 <div className="action-buttons">
                     <button className={'btn  remove-btn'} onClick={e => onDeleteHandler(e)}>
-                        <SvgRenderer svgUrl={'/asset/images/icons/times-solid.svg'} size={15}/>
+                        <FontAwesomeIcon icon={faTimes} style={{width:15,height:15}}/>
                     </button>
                     <button className={'btn  change-image-btn'} onClick={(e) => clickOnRefElement(e)}>
-                        <SvgRenderer svgUrl={'/asset/images/icons/rotate-right-solid.svg'} size={15}/>
+                        <FontAwesomeIcon icon={faRotateRight} style={{width:15,height:15}}/>
                     </button>
                 </div>
             </>}
@@ -135,14 +137,8 @@ const ThumbnailUploadArea: FC<PropTypes> = ({onUploadHandler, image, postId}) =>
             {/*<div className={'add-new-image'}*/}
             {/*     onClick={() => inputRef.current.click()}*/}
             {/*     onDrop={e => onUploadHandler(e.dataTransfer.files, imageIndex + 1)}>*/}
-            {/*    <SvgRenderer svgUrl={'/public/asset/images/icons/camera-solid.svg'}*/}
-            {/*                 size={70}*/}
-            {/*                 customClassName={'camera'}*/}
-            {/*                 color={'var(--main-text-color, #fff)'}/>*/}
-            {/*    <SvgRenderer svgUrl={'/public/asset/images/icons/circle-plus-solid.svg'}*/}
-            {/*                 size={20}*/}
-            {/*                 customClassName={'plus'}*/}
-            {/*                 color={'var(--main-active-color, #f90)'}/>*/}
+
+
             {/*</div>}*/}
         </Style>
     )

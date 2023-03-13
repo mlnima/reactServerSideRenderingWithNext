@@ -1,7 +1,7 @@
 import React, {FC, useState} from 'react';
 import styled from "styled-components";
 
-const CookiePopupStyledDiv = styled.div`
+const Style = styled.div`
   position: fixed;
   left: 0;
   bottom: 0;
@@ -18,9 +18,8 @@ const CookiePopupStyledDiv = styled.div`
   p{
     text-align: center;
   }
-  
 `
-const CookiePopup: FC = () => {
+const CookiesInformerBar: FC = () => {
 
 
     const [state, setState] = useState({
@@ -39,16 +38,16 @@ const CookiePopup: FC = () => {
 
     if (!state.accepted) {
         return (
-            <CookiePopupStyledDiv className='cookie-popup-parent'>
+            <Style className='cookie-popup-parent'>
                 <p>
                     This website collects cookies to deliver better user experience
                 </p>
                 <button className='btn btn-primary' onClick={onAcceptHandler}>
                     OK
                 </button>
-            </CookiePopupStyledDiv>
+            </Style>
         );
     } else return null
 
 };
-export default CookiePopup;
+export default CookiesInformerBar;

@@ -3,10 +3,10 @@ import Link from "next/link";
 import {FC} from "react";
 
 const CardTitleStyle = styled.h3`
-  margin: 4px 0;
+  margin: 4px;
   padding: 4px 0;
   box-sizing: border-box;
-  line-height: 2.5;
+
 
   a {
     color: var(--secondary-text-color, #ccc);
