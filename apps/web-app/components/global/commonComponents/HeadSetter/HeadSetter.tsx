@@ -40,7 +40,7 @@ const HeadSetter: FC<PropTypes> = (
             <link rel="apple-touch-icon" href={headDataSettings?.favIconUrl || '/asset/images/default/favicon.png'}/>
             <meta name={'theme-color'} content={headDataSettings?.themeColor || '#000'}/>
             <meta name={'apple-mobile-web-app-status-bar-style'} content={headDataSettings?.themeColor || '#000'}/>
-            <meta name={'viewport'} content={'width=device-width, initial-scale=1, maximum-scale=1'}/>
+            <meta name={'viewport'} content={'width=device-width, initial-scale=1.0'}/>
             <meta charSet={'utf-8'}/>
             <meta httpEquiv={'X-UA-Compatible'} content={'IE=edge'}/>
             <meta property={'application-name'} content={headDataSettings?.siteName || ''}/>

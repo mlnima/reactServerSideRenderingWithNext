@@ -27,7 +27,7 @@ const nextConfigs = {
     reactStrictMode: false,
     experimental: {appDir: true},
     // runtime: 'experimental-edge',
-    redirects,
+    // redirects,
     swcMinify: true,
     eslint: {
         ignoreDuringBuilds: true

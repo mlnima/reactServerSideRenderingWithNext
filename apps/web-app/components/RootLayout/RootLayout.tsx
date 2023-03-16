@@ -13,12 +13,10 @@ const TopBarWidgetArea = dynamic(() => import('./widgetsArea/TopBarWidgetArea'))
 const HeaderWidgetArea = dynamic(() => import('./widgetsArea/HeaderWidgetArea'));
 const NavigationWidgetArea = dynamic(() => import('./widgetsArea/NavigationWidgetArea'));
 const FooterWidgetArea = dynamic(() => import('./widgetsArea/FooterWidgetArea'));
-
 const AlertBox = dynamic(() => import('../global/commonComponents/AlertBox/AlertBox'), {ssr: false});
 const LoginRegisterPopup = dynamic(() => import('./common/LoginRegisterPopup/LoginRegisterPopup'), {ssr: false});
 const CookiePopup = dynamic(() => import('./common/CookiesInformerBar'), {ssr: false});
 const BackToTopButton = dynamic(() => import('./common/BackToTopButton'), {ssr: false});
-
 
 interface RootLayoutPropTypes {
     children: React.ReactNode,
@@ -52,6 +50,8 @@ const RootLayout: FC<RootLayoutPropTypes> = ({children}) => {
 
     return (
         <>
+            <GlobalStylesComponent/>
+            <SiteSettingSetter/>
             {!!initialSettings?.layoutSettings?.topbar && <TopBarWidgetArea/>}
             {!!initialSettings?.layoutSettings?.header  && <HeaderWidgetArea/>}
             {!!initialSettings?.layoutSettings?.navigation && <NavigationWidgetArea/>}
@@ -69,10 +69,9 @@ const RootLayout: FC<RootLayoutPropTypes> = ({children}) => {
 
             {loginRegisterFormPopup && !loggedIn && <LoginRegisterPopup/>}
             <AlertBox alert={alert}/>
-            {!!adminMode && <RootLayoutAdminDataInitializer/>}
+            {adminMode && <RootLayoutAdminDataInitializer/>}
 
-            <GlobalStylesComponent/>
-            <SiteSettingSetter/>
+
         </>
     );
 };
