@@ -65,18 +65,21 @@ const VideoPostCardStyle = styled(DefaultPostCardStyle)`
 
     }
     .mobile-play-trailer-button{
-      opacity: 50%;
+      width: 45px;
+      height: 45px;
+      opacity: 40%;
       position: absolute;
       background-color:var(--main-background-color,#000) ;
       color:var(--main-text-color,#fff)  ;
-      border-radius: 50%;
-      padding: 5px;
+
+      padding: 4px;
+      margin: 0;
       border: none;
       display: flex;
       justify-content: center;
       align-items: center;
-      top: 3%;
-      left: 3%;
+      top: 0;
+      left: 0;
       cursor: pointer;
     }
   }
@@ -84,9 +87,14 @@ const VideoPostCardStyle = styled(DefaultPostCardStyle)`
   @media only screen and (min-width: 768px) {
     .video-post-card-media{
       .card-link{
-        .mobile-play-trailer-button{
-          //display: none;
-        }
+
+      }
+      .mobile-play-trailer-button{
+        width: 25px;
+        height: 25px;
+        padding: 4px;
+        margin: 4px;
+        border-radius: 50%;
       }
     }
     
@@ -117,15 +125,12 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
         }
 
 
+
         return (
             <VideoPostCardStyle className={'post-card'}
                                 cardWidth={cardWidth}>
                 <div className={'video-post-card-media'}>
                     <Link href={postUrl} className={'card-link'} title={title} target={targetLink}>
-
-
-
-
                         {((!hover || (hover && !post?.videoTrailerUrl)) && !!post.mainThumbnail) &&
                             <CardImageRenderer imageUrl={post.mainThumbnail}
                                                mediaAlt={title}

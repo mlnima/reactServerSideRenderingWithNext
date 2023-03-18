@@ -82,7 +82,7 @@ export const getUncachedSettingsForAdmin = createAsyncThunk('settings/getUncache
             thunkAPI.dispatch(loading(false))
 
             return {
-                initialSettings:settingsRequestData?.data?.settings?.initialSettings
+                initialSettings:settingsRequestData?.data?.settings?.initialSettings?.data
             }
 
         } catch (err) {
