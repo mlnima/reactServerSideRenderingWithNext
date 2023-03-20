@@ -6,7 +6,7 @@ import SidebarWidgetAreaRenderer from "@components/RootLayout/widgetsArea/Sideba
 import React from "react";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
-import MetasRenderer from "../../components/includes/metasPage/MetasRenderer";
+import MetasRenderer from "../../components/pagesIncludes/metas/MetasRenderer";
 import getTagsAction from "@store_toolkit/clientReducers/postsReducer/getTagsAction";
 import {useRouter} from "next/router";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";

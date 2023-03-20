@@ -1,6 +1,6 @@
-import {FC, useEffect, useMemo} from "react";
+import {FC} from "react";
 import {Meta} from "typescript-types";
-import MetasRenderer from "../../metasPage/MetasRenderer";
+import MetasRenderer from "@components/pagesIncludes/metas/MetasRenderer";
 
 interface MetaWidgetPropType {
     uniqueData?: {

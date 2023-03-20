@@ -3,11 +3,8 @@ import {Meta} from "typescript-types";
 import styled from "styled-components";
 import Link from "next/link";
 import {capitalizeFirstLetter} from "custom-util";
-import MetaElement from "./MetaElement";
 import useTranslation from "next-translate/useTranslation";
 import {useRouter} from "next/router";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faSortUp} from "@fortawesome/free-solid-svg-icons/faSortUp";
 
 const MetasRendererStyle = styled.div`
 
@@ -16,11 +13,13 @@ const MetasRendererStyle = styled.div`
   align-items: center;
   flex-direction: column;
   max-width: 100vw;
+
   .letters-container {
     width: 100%;
+
     .group-wrapper {
-  
-      
+
+
       .letter {
         margin: 10px;;
         font-size: xx-large;
@@ -38,18 +37,14 @@ const MetasRendererStyle = styled.div`
           display: block;
           list-style: none;
           text-overflow: ellipsis;
-          padding: 14px 10px;
-          overflow:hidden;
-          a {
-            overflow:hidden;
-            font-size: large;
-            min-height: 48px;
-            color: var(--secondary-text-color, #ccc);
-            cursor: pointer;
-            text-decoration: none;
-            overflow-wrap: break-word;
-        
-          }
+          padding: 13px 6px;
+          overflow: hidden;
+          font-size: large;
+          min-height: 48px;
+          color: var(--secondary-text-color, #ccc);
+          cursor: pointer;
+          text-decoration: none;
+          overflow-wrap: break-word;
         }
 
         .view-all {
@@ -58,10 +53,10 @@ const MetasRendererStyle = styled.div`
           color: var(--main-active-color, #f90);
           font-size: large;
           font-weight: bold;
-          //padding: 3px 6px;
           margin: 10px;;
           min-height: 48px;
-          .view-all-arrow-icon{
+
+          .view-all-arrow-icon {
             rotate: 90deg;
           }
         }
@@ -81,24 +76,21 @@ const MetasRendererStyle = styled.div`
       columns: 200px 5;
       margin: auto;
       padding: 0;
-      //width: 90%;
 
       .group-wrapper {
-        
-        a{
-          .letter{
+
+        a {
+          .letter {
             margin: 0;
             padding: 5px;
           }
         }
+
         .items {
           .meta-widget-item {
             padding: 5px;
-            a {
-              //padding: 2px;
-              font-size: initial;
-              min-height: auto;
-            }
+            font-size: initial;
+            min-height: auto;
           }
 
           .view-all {
@@ -119,7 +111,7 @@ interface MetasRendererPropTypes {
 const MetasRenderer: FC<MetasRendererPropTypes> = ({metaType, metaData}) => {
 
     const {t} = useTranslation()
-    const {query, pathname,push} = useRouter()
+    const {query, pathname, push} = useRouter()
 
     const typePath = useMemo(() => {
         return metaType === 'tags' ? 'tag' :
@@ -128,25 +120,25 @@ const MetasRenderer: FC<MetasRendererPropTypes> = ({metaType, metaData}) => {
     }, [metaData])
 
     const groupMetas = useMemo(() => {
-        if (!!metaData?.length){
+        if (!!metaData?.length) {
             return metaData.reduce((finalData, current) => {
                 const firstLetter = current?.name?.[0]
                 finalData[firstLetter] = [...(finalData?.[current.name?.[0]] || []), current]
                 return finalData
             }, {})
-        }else return []
+        } else return []
     }, [metaData])
 
     useEffect(() => {
-         if (!query.startWith && query.hasOwnProperty('startWith')){
-             const targetUrl ={
-                 pathname: pathname,
-                 query: {...query}
-             }
-             delete targetUrl.query.startWith
+        if (!query.startWith && query.hasOwnProperty('startWith')) {
+            const targetUrl = {
+                pathname: pathname,
+                query: {...query}
+            }
+            delete targetUrl.query.startWith
 
-             push(targetUrl)
-         }
+            push(targetUrl)
+        }
 
     }, [query]);
 
@@ -157,26 +149,28 @@ const MetasRenderer: FC<MetasRendererPropTypes> = ({metaType, metaData}) => {
                     return (
                         <div className={'group-wrapper'} key={group}>
                             <Link href={`/${metaType}?startWith=${group === '#' ? 'digits' : group}`}>
-                                    <h2 className={'letter'}>{capitalizeFirstLetter(group)}</h2>
+                                <h2 className={'letter'}>{capitalizeFirstLetter(group)}</h2>
                             </Link>
 
                             <div className={'items'}>
                                 {groupMetas[group].map(meta => {
+                                    const name = capitalizeFirstLetter(meta.name)
                                     return (
-                                        <MetaElement typePath={typePath} id={meta._id} key={meta._id}
-                                                     name={`${capitalizeFirstLetter(meta.name)}`}/>
+                                        <Link className='meta-widget-item'
+                                              key={meta._id}
+                                              href={`/${typePath}/${meta._id}`}
+                                              title={name}>
+                                            {name}
+                                        </Link>
                                     )
                                 })}
                                 {((!query?.startWith && /\/tags|\/categories/.test(pathname)) ||
-                                !/\/tags|\/categories/.test(pathname)) &&
-                                <Link href={`/${metaType}?startWith=${group === '#' ? 'digits' : group}`}>
+                                        !/\/tags|\/categories/.test(pathname)) &&
+                                    <Link href={`/${metaType}?startWith=${group === '#' ? 'digits' : group}`}>
                                         <span className={'view-all'}>
                                             {t('common:View All', {}, {fallback: 'View All'})}
-                                            <FontAwesomeIcon color={'var(--main-active-color, #f90)'}
-                                                             icon={faSortUp}
-                                                             style={{width:20,height:20}}/>
                                         </span>
-                                </Link>
+                                    </Link>
                                 }
                             </div>
 
