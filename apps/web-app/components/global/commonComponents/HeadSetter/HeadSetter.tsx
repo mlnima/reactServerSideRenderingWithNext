@@ -4,7 +4,7 @@ import {useSelector} from "react-redux";
 import {Store} from "typescript-types";
 import parse from 'html-react-parser';
 import {useRouter} from "next/router";
-import GoogleAnalyticsHeadScript from "@components/global/commonComponents/googleAnalytics/GoogleAnalyticsHeadScripts";
+// import GoogleAnalyticsHeadScript from "@components/global/commonComponents/googleAnalytics/GoogleAnalyticsHeadScripts";
 
 interface PropTypes {
     title?: string,
@@ -88,8 +88,8 @@ const HeadSetter: FC<PropTypes> = (
             {disAllowIndexByRobots &&
                 <>{parse(headDataSettings.customHeadTags, {trim: true})}</>
             }
-            {!!headDataSettings.googleAnalyticsId &&
-                <GoogleAnalyticsHeadScript googleAnalyticsId={headDataSettings.googleAnalyticsId}/>}
+            {/*{!!headDataSettings.googleAnalyticsId &&*/}
+            {/*    <GoogleAnalyticsHeadScript googleAnalyticsId={headDataSettings.googleAnalyticsId}/>}*/}
 
         </Head>
     )

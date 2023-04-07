@@ -25,9 +25,8 @@ interface StylePropTypes {
 }
 
 const Style = styled.div<StylePropTypes>`
-  ${({ isMaximized }) =>
-          isMaximized
-                  ? `
+  ${({isMaximized}) =>
+          isMaximized ? `
       position: fixed;
       top: 0;
       left: 0;
@@ -43,7 +42,7 @@ const Style = styled.div<StylePropTypes>`
   grid-template-rows: 45px 1fr;
   grid-template-areas:
     'chatroomTopbar chatroomTopbar'
-    'chatroomMessagingArea ${({ userList }: StylePropTypes) => userList ? 'chatroomOnlineUsersList' : 'chatroomMessagingArea'}';
+    'chatroomMessagingArea ${({userList}: StylePropTypes) => userList ? 'chatroomOnlineUsersList' : 'chatroomMessagingArea'}';
 `;
 
 interface PropTypes {
@@ -116,7 +115,8 @@ const chatRoom: FC<PropTypes> = ({pageData}) => {
             setHeaderSize(topbarHeight + headerHeight + navigationHeight + 90)
         }, 100)
     }, []);
-    console.log(headerSize)
+
+
     if (pageData?.chatroom?._id) {
         return (
             <Style id={'full-width-content'} userList={onlineUserListVisibility} isMaximized={isMaximized}>

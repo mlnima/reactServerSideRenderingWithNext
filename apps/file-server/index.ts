@@ -31,14 +31,13 @@ const runServer = () => {
     const staticPath = dev ? './static' : '../static';
     const publicPath = dev ? './public' : '../public';
     const publicPathFileServer = dev ? '../api-server/public' : '../../api-server/public';
-    const dashboardAppPath = dev ? '../web-dashboard-app/build' : '../../web-dashboard-app/build';
-    const dashboardBuiltPath = path.join(__dirname, dashboardAppPath);
-
     server.use('/static', express.static(path.join(__dirname, staticPath), {maxAge: "604800000"}));
-    server.use('/static', express.static(`${dashboardBuiltPath}/static`, {maxAge: "604800000"}));
-
     server.use('/public', express.static(path.join(__dirname, publicPath), {maxAge: "604800000"}));
     server.use('/public', express.static(path.join(__dirname, publicPathFileServer), {maxAge: "604800000"}));
+    //serving dashboard React app
+    const dashboardAppPath = dev ? '../web-dashboard-app/build' : '../../web-dashboard-app/build';
+    const dashboardBuiltPath = path.join(__dirname, dashboardAppPath)
+    server.use('/static', express.static(`${dashboardBuiltPath}/static`, {maxAge: "604800000"}));
 
     server.get('/dashboard', (req, res) => {
         res.sendFile(`${dashboardBuiltPath}/index.html`);

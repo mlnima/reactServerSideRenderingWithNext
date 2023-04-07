@@ -29,8 +29,6 @@ const GoogleAnalytics: FC<GoogleAnalyticsPropTypes> = ({googleAnalyticsId}) => {
     }, [asPath]);
 
 
-    console.log('googleAnalyticsId:',googleAnalyticsId)
-
     return (
         <>
             <Script async src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}

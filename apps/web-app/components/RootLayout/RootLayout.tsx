@@ -7,7 +7,7 @@ import RootLayoutAdminDataInitializer from "./RootLayoutAdminDataInitializer";
 import {setAdminMode} from "@store_toolkit/clientReducers/globalStateReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import GlobalStyles from "@components/global/Styles/GlobalStyles";
-import GoogleAnalyticsRouteChangeHandler from "@components/global/commonComponents/googleAnalytics/GoogleAnalyticsRouteChangeHandler";
+import GoogleAnalytics from "@components/includes/SiteSettingsSetter/GoogleAnalytics";
 
 const UserAutoLogin = dynamic(() => import('@components/includes/SiteSettingsSetter/UserAutoLogin'));
 const TopBarWidgetArea = dynamic(() => import('./widgetsArea/TopBarWidgetArea'));
@@ -86,7 +86,7 @@ const RootLayout: FC<RootLayoutPropTypes> = ({children}) => {
             {adminMode && <RootLayoutAdminDataInitializer/>}
             <GlobalStyles customColors={customColors} customStyles={customStyles}/>
             {!!initialSettings?.headDataSettings?.googleAnalyticsId &&
-                <GoogleAnalyticsRouteChangeHandler googleAnalyticsId={initialSettings?.headDataSettings?.googleAnalyticsId}/>}
+                <GoogleAnalytics googleAnalyticsId={initialSettings?.headDataSettings?.googleAnalyticsId}/>}
         </>
 
     );
