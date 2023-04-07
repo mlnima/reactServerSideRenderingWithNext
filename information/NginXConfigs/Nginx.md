@@ -51,6 +51,16 @@
             proxy_cache_bypass $http_upgrade;
         }
 
+        location /files {
+            # File server address
+            proxy_pass http://localhost:3003;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection 'upgrade';
+            proxy_set_header Host $host;
+            proxy_cache_bypass $http_upgrade;
+        }
+
 [//]: # (        location /messenger {)
 
 [//]: # (            # API server address)
