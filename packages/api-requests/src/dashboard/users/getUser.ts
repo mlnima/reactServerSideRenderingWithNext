@@ -1,10 +1,17 @@
-import AxiosInstance from "../../lib/AxiosInstance";
+import AxiosInstance from '../../lib/AxiosInstance';
 
-const getUser = async (_id)=>{
-    return await AxiosInstance.post(`/api/admin/users/getUser`,{
-        _id,
-        token: localStorage.wt
-    })
+interface GetUserParams {
+    _id?: string;
+    username?: string;
+    fields?: string[];
 }
+
+const getUser = async ({ _id, username, fields }: GetUserParams) => {
+    const fieldsQuery = fields ? `&fields=${fields.join(',')}` : '';
+
+    return await AxiosInstance.get(
+        `/api/admin/users/getUser?${_id ? `&_id=${_id}` : ''}${username ? `&username=${username}` : ''}${fieldsQuery}&token=${localStorage.wt}`,
+    );
+};
 
 export default getUser;

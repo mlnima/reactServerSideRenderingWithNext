@@ -1,19 +1,24 @@
 // @ts-nocheck
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
-import {getSettings,getUncachedSettings} from "api-requests";
+import {getSettings, getUncachedSettings} from "api-requests";
 import {loading} from "./globalStateReducer";
 
 interface SettingsStateRaw {
-    initialSettings:{},
-    currentPageSettings:{},
+    initialSettings: {},
+    currentPageSettings: {},
     isSettingSet: boolean,
     requestedSettings: string[]
 }
 
 const initialState: SettingsStateRaw = {
-    initialSettings:{},
-    currentPageSettings:{},
+    initialSettings: {
+        postCardsSettings:{},
+        membershipSettings:{},
+        layoutSettings:{},
+        headDataSettings:{}
+    },
+    currentPageSettings: {},
     isSettingSet: false,
     requestedSettings: [],
 }
@@ -29,14 +34,12 @@ interface FetchSettingsProps {
 
 export const fetchSettings = createAsyncThunk(
     'settings/fetchSettings',
-    async (
-        config: FetchSettingsProps,
-        thunkAPI) => {
+    async (config: FetchSettingsProps, thunkAPI) => {
         try {
             const fetchedSettings = await getSettings(config.requireSettings);
             return {
-                currentPageSettings:fetchedSettings?.data?.settings?.[`${config.options.page}Settings`]?.data || {},
-                initialSettings:fetchedSettings?.data?.settings?.initialSettings?.data ||{},
+                currentPageSettings: fetchedSettings?.data?.settings?.[`${config.options.page}Settings`] || {},
+                initialSettings: fetchedSettings?.data?.settings?.initialSettings || {},
                 requestedSettings: config.requireSettings,
                 isSettingSet: true,
             }
@@ -46,16 +49,16 @@ export const fetchSettings = createAsyncThunk(
     }
 )
 
-export const getUncachedSettingsForAdmin = createAsyncThunk('settings/getUncachedSettingsForAdmin', async (
-        config: any,
-        thunkAPI) => {
+export const getUncachedSettingsForAdmin = createAsyncThunk(
+    'settings/getUncachedSettingsForAdmin',
+    async (config: any, thunkAPI) => {
         try {
             thunkAPI.dispatch(loading(true))
-            const settingsRequestData = await getUncachedSettings([...(config?.requireSettings || []),'initialSettings'])
+            const settingsRequestData = await getUncachedSettings([...(config?.requireSettings || []), 'initialSettings'])
             thunkAPI.dispatch(loading(false))
 
             return {
-                initialSettings:settingsRequestData?.data?.settings?.initialSettings?.data
+                initialSettings: settingsRequestData?.data?.settings?.initialSettings?.data
             }
 
         } catch (err) {

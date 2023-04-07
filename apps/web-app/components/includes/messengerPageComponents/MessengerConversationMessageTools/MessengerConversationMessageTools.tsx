@@ -3,14 +3,15 @@ import React, {useRef} from 'react'
 import {socket} from 'custom-util/src/socket-utils/socketIoClient';
 import { useSelector} from "react-redux";
 import styled from "styled-components";
-import {fetchSendAMessageToPrivateConversation} from "@store_toolkit/clientReducers/userReducer";
+
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {Store} from "typescript-types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPaperPlane} from "@fortawesome/free-regular-svg-icons/faPaperPlane";
+import {sendPrivateMessageAction} from "@store_toolkit/clientReducers/userReducers/sendPrivateMessageAction";
 
 const MessengerConversationMessageToolsStyledForm = styled.form`
-  position: fixed;
+  position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
@@ -22,13 +23,14 @@ const MessengerConversationMessageToolsStyledForm = styled.form`
   width: 100%;
   margin: 0 auto;
   background-color: transparent;
+  box-sizing: border-box;
 
   .messaging-tools-text {
     display: flex;
     justify-content: center;
     width: 100%;
     background-color: var(--secondary-background-color, #181818);
-    padding:  8px;
+    padding: 8px;
     box-sizing: border-box;
 
     .messaging-tools-input {
@@ -81,7 +83,7 @@ const MessengerConversationMessageTools = props => {
             }
             socket.emit('sendMessageToConversation', messageData, props.conversationId)
             //@ts-ignore
-            dispatch(fetchSendAMessageToPrivateConversation({conversationId:props.conversationId, messageBody:messageInputData}))
+            dispatch(sendPrivateMessageAction({conversationId:props.conversationId, messageBody:messageInputData}))
             messageInput.current.value = '';
             // props.getAndSetConversationData();
             // messageToConversation(props.conversationId, messageInputData).then(() => {

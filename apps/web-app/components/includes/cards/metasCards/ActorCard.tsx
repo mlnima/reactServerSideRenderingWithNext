@@ -63,9 +63,7 @@ interface ActorCardPropTypes {
     meta: Meta,
     index: number,
     numberOfCardsPerRowInMobile: number,
-    cardWidth: number,
-    role:string,
-    adminMode: boolean
+    cardWidth: number
 }
 
 interface ActorCardStylePropTypes {
@@ -79,8 +77,6 @@ const ActorCard: FC<ActorCardPropTypes> =
          index,
          numberOfCardsPerRowInMobile,
          cardWidth,
-         adminMode,
-         role
      }) => {
 
         const actorName = capitalizeFirstLetter(meta?.name)

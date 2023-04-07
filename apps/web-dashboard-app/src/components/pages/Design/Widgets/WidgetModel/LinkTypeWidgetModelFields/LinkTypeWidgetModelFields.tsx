@@ -27,8 +27,7 @@ const LinkTypeWidgetModelFields: FC<LinkTypeWidgetModelFieldsPropTypes> =
                                          value={uniqueData.linkTo}
                                          classNameValue={'linkTo'}
                                          placeHolder={'linkTo'}
-                                         onChangeHandler={onUniqueDataChangeHandler}
-                />
+                                         onChangeHandler={onUniqueDataChangeHandler}/>
 
                 <TextInputFieldForWidget
                     inputTitle='Link To Text :'

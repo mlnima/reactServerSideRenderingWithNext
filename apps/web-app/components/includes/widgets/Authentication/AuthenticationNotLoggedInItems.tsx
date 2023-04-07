@@ -6,6 +6,8 @@ import {useAppDispatch} from "@store_toolkit/hooks";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
 import {faPen} from "@fortawesome/free-solid-svg-icons/faPen";
+import {useSelector} from "react-redux";
+import {Store} from "typescript-types";
 
 
 interface AuthenticationNotLoggedInItemsPropTypes {
@@ -16,6 +18,10 @@ const AuthenticationNotLoggedInItems: FC<AuthenticationNotLoggedInItemsPropTypes
     const {t} = useTranslation('common');
     const {pathname} = useRouter()
     const dispatch = useAppDispatch()
+
+    const {membership, anyoneCanRegister} = useSelector(
+        ({settings}: Store) => settings?.initialSettings?.membershipSettings || {}
+    );
 
     const onLoginButtonClickHandler = () => {
         dispatch(loginRegisterForm('login'))
@@ -43,9 +49,9 @@ const AuthenticationNotLoggedInItems: FC<AuthenticationNotLoggedInItemsPropTypes
 
                 </span>
 
-                <span className='logged-item logged-item-action'
-                      onClick={onRegisterButtonClickHandler}
-                      aria-label='logged-out-items'>
+                {(membership && anyoneCanRegister) && <span className='logged-item logged-item-action'
+                                                            onClick={onRegisterButtonClickHandler}
+                                                            aria-label='logged-out-items'>
 
                     <div className={'icon-wrapper'}>
                          <FontAwesomeIcon className={'register-button'} icon={faPen} style={{width: 45, height: 45}}/>
@@ -53,7 +59,8 @@ const AuthenticationNotLoggedInItems: FC<AuthenticationNotLoggedInItemsPropTypes
 
                     <p className={'text-data'}>{t<string>(`Register`)}</p>
 
-                </span>
+                </span>}
+
             </div>
 
             {/*<div className={'logged-items'}>*/}

@@ -10,6 +10,7 @@ var userSchema = new mongoose_1.Schema({
         type: String,
         unique: true
     },
+    draftPost: { type: mongoose_1.Schema.Types.ObjectId, ref: 'post' },
     password: String,
     role: String,
     firstName: String,
@@ -27,7 +28,8 @@ var userSchema = new mongoose_1.Schema({
     followers: Array,
     blockList: Array,
     conversation: [{ type: mongoose_1.Schema.Types.ObjectId, ref: 'conversation' }],
-    profileImage: String,
+    profileImage: mongoose_1.Schema.Types.Mixed,
+    images: [{ type: mongoose_1.Schema.Types.ObjectId, ref: 'file' }],
     gender: String,
     relationshipStatus: String,
     city: String,

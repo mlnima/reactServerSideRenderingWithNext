@@ -8,7 +8,7 @@ var getSettings = function (requireSettings) { return tslib_1.__awaiter(void 0, 
         switch (_a.label) {
             case 0:
                 settingsQuery = requireSettings.map(function (setting) { return "setting=".concat(setting); }).join('&');
-                return [4 /*yield*/, AxiosInstance_1["default"].get("/api/v1/settings/getMultipleSettings?".concat(settingsQuery))];
+                return [4 /*yield*/, AxiosInstance_1["default"].get("/api/v1/settings/getSettings?".concat(settingsQuery))];
             case 1: return [2 /*return*/, _a.sent()];
         }
     });

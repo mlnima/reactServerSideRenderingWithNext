@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, {FC, memo, useMemo} from "react";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {Store} from "typescript-types";
@@ -42,17 +42,18 @@ const UserProfileImage: FC<UserProfileImagePropTypes> = ({size, profileRedirect}
         }
     })
 
+    const profileImage = useMemo(() => userData?.profileImage?.filePath,[userData?.profileImage?.filePath])
+
+
     return (
         <Style className={'user-profile-image'} size={size}>
             {profileRedirect && loggedIn ?
-                <Link href={`/profile`}>
-                        <ImageContent profileImage={userData?.profileImage} size={size}/>
-                </Link> : <ImageContent profileImage={userData?.profileImage} size={size}/>
+                <Link href={`/profile`}><ImageContent profileImage={profileImage} size={size}/></Link> :
+                <ImageContent profileImage={userData?.profileImage?.filePath} size={size}/>
             }
         </Style>
     )
 
 
 };
-export default UserProfileImage;
-// <Link href={`/user/${userData?.username}`}>
+export default memo(UserProfileImage);

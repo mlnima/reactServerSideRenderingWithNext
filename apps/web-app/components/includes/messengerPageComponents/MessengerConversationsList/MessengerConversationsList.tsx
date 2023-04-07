@@ -3,8 +3,9 @@ import MessengerConversationPreview from "./MessengerConversationPreview";
 import {useSelector} from "react-redux";
 // import MessengerConversationListHeader from "./MessengerConversationListHeader";
 import styled from "styled-components";
-import { getConversationsAction} from "@store_toolkit/clientReducers/userReducer";
+
 import {useAppDispatch} from "@store_toolkit/hooks";
+import {getConversationsAction} from "@store_toolkit/clientReducers/userReducers/getConversationsAction";
 
 const MessengerConversationsListStyledDiv = styled.div`
   display: flex;

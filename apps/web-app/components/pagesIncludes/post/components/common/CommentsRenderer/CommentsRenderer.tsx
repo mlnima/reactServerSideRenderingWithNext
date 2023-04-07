@@ -21,7 +21,7 @@ interface CommentsRendererPropTypes{
 const CommentsRenderer :FC<CommentsRendererPropTypes> = ({showComments}) => {
 
     const comments = useSelector(({posts}:Store) => posts?.post?.comments || [])
-
+    const adminMode = useSelector(({globalState}: Store) => globalState?.adminMode);
 
     if (comments?.length){
         return (
@@ -29,7 +29,7 @@ const CommentsRenderer :FC<CommentsRendererPropTypes> = ({showComments}) => {
                 {showComments && <>
                     {comments.map((commentData, index) => {
                         //@ts-ignore
-                        return (<Comment key={index} commentData={commentData}/>)
+                        return (<Comment key={index} adminMode={adminMode} commentData={commentData}/>)
                     })}
                 </>
                 }

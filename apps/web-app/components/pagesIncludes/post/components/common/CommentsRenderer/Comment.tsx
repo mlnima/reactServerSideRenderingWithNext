@@ -5,7 +5,7 @@ import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {useRouter} from "next/router";
 import {FC} from "react";
-import deleteCommentByAdminInPostPageAction from "@store_toolkit/clientReducers/postsReducer/deleteCommentByAdminInPostPageAction";
+import deleteCommentByAdminInPostPageAction from "@store_toolkit/clientReducers/postsReducers/deleteCommentByAdminInPostPageAction";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {Store, Comment} from "typescript-types";
 
@@ -51,12 +51,12 @@ const CommentStyledDiv = styled.div`
 `
 
 interface CommentPropTypes {
-    commentData: Comment
+    commentData: Comment,
+    adminMode:boolean
 }
 
-const Comment: FC<CommentPropTypes> = ({commentData}) => {
+const Comment: FC<CommentPropTypes> = ({commentData,adminMode}) => {
     const {locale} = useRouter()
-    const userData = useSelector(({user}: Store) => user?.userData)
     const dispatch = useAppDispatch()
     const localeData = locale === 'fa' ? {locale: faIR} : {}
 
@@ -71,8 +71,8 @@ const Comment: FC<CommentPropTypes> = ({commentData}) => {
                 <div className='comment-header'>
 
                     <img className='comment-author-image'
-                         src={commentData?.author?.profileImage || '/asset/images/icons/profile-image.jpg'}
-                    />
+                         alt={'comment-author-image'}
+                         src={commentData?.author?.profileImage?.filePath || '/asset/images/icons/profile-image.jpg'}/>
 
                     <Link href={`/user/${commentData?.author?.username}`} className='comment-author'>
                         {commentData?.author?.username || ''}
@@ -81,7 +81,7 @@ const Comment: FC<CommentPropTypes> = ({commentData}) => {
                     <span className='comment-date'>
                     {formatDistance(new Date(commentData?.createdAt), new Date(), {addSuffix: true, ...localeData})}
                 </span>
-                    {userData?.role === 'administrator' ?
+                    {adminMode ?
                         <div className='comments-admin-action-btns'>
                             <button onClick={() => onDeleteHandler(commentData?._id)}
                                     className={'btn btn-danger'}>Delete

@@ -9,6 +9,7 @@ var widgetsTypes = [
     'dayModeNightMode',
     'multipleLinkTo',
     'posts',
+    'newPostButton',
     'postsList',
     'postsListEntireByCategories',
     'media',
@@ -22,8 +23,6 @@ var widgetsTypes = [
     'language',
     'authentication',
     'imagesSlider',
-    // 'postsSwiper',
-    // 'recentComments',
     'postsSlider',
 ];
 exports["default"] = widgetsTypes;

@@ -1,0 +1,94 @@
+import { Request, Response } from 'express';
+import {  userSchema } from 'models';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
+
+interface ILoginRequest extends Request {
+    body: {
+        username: string;
+        password: string;
+    };
+}
+
+const tokenExpireTime = '365d';
+
+const userLogin = async (req: ILoginRequest, res: Response) => {
+    try {
+        const { username, password } = req.body;
+
+        const user: any | null = await userSchema.findOne({ username }).populate({
+            path: 'profileImage',
+            select: 'filePath',
+            model: 'file',
+            options: { strictPopulate: false }
+        }).exec();
+
+        if (!user) {
+            return res.status(404).json({ message: 'Invalid username or password' });
+        }
+
+        const isPasswordCorrect: boolean = await bcrypt.compare(password, user.password);
+        if (!isPasswordCorrect) {
+            return res.status(401).json({ message: 'Invalid username or password' });
+        }
+
+        const token: string = jwt.sign({ username: user.username, _id: user._id }, process.env.JWT_KEY, {
+            expiresIn: tokenExpireTime
+        });
+
+        const { username: userDataUsername, draftPost, role, keyMaster, profileImage, _id } = user;
+        const userData = { username: userDataUsername, draftPost, role, keyMaster, profileImage, _id };
+
+        res.json({ token, userData, message: 'Login successful' });
+    } catch (err) {
+        console.log(err);
+        res.status(503).json({ message: 'Something went wrong. Please try again later.' });
+    }
+};
+
+export default userLogin;
+
+
+//
+// await userSchema.findOne({username})
+//     .then(user => {
+//         if (user) {
+//             bcrypt.compare(password, user.password, function (err, isCorrect) {
+//                 if (err || isCorrect === false) {
+//                     console.log(err)
+//                     res.status(401).json({message: 'You have entered an invalid username or password'})
+//
+//                 } else if (isCorrect) {
+//                     const token = jwt.sign({
+//                             username: user.username,
+//                             _id: user._id,
+//                         },
+//                         process.env.JWT_KEY,
+//                         {expiresIn: tokenExpireTime});
+//
+//
+//                     res.json({
+//                         token: token,
+//                         userData: {
+//                             username: user?.username,
+//                             draftPost: user?.draftPost,
+//                             role: user?.role,
+//                             keyMaster: user?.keyMaster,
+//                             profileImage: user?.profileImage,
+//                             _id: user._id,
+//                         },
+//                         message: 'Login successful',
+//                     });
+//
+//                 }
+//
+//             })
+//         } else if (!user) {
+//
+//             res.status(404).json({message: 'You have entered an invalid username or password'})
+//
+//         }
+//     }).catch(err => {
+//         console.log(err);
+//         res.status(503).json({message: 'Something went wrong please try again later'})
+//     });

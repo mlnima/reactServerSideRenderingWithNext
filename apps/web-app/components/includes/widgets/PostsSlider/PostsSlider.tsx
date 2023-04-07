@@ -148,7 +148,7 @@ const PostsSlider: FC<PostsSliderPropsTypes> =
          uniqueData,
          isSidebar,
      }) => {
-
+console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
         const options = {delay: 3000, stopOnInteraction: false}
         const autoplay = Autoplay(options)
 

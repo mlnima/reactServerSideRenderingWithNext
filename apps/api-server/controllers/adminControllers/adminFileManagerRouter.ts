@@ -1,5 +1,6 @@
 import {Router} from 'express';
-import adminAuthMiddleware from '../../middlewares/adminAuthMiddleware';
+// import adminAuthMiddleware from '../../middlewares/adminAuthMiddleware';
+import adminAuthMiddleware from 'custom-server-util/src/middleware-utils/adminAuthMiddleware';
 import adminReadPath from './adminFileManagerControllers/adminReadPath';
 import adminReadFile from './adminFileManagerControllers/adminReadFile';
 import adminDeleteFile from './adminFileManagerControllers/adminDeleteFile';

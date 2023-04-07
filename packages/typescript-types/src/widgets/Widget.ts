@@ -57,7 +57,7 @@ export interface Widget {
 }
 
 export interface WidgetSettingsPropTypes {
-    activeEditingLanguage?: string,
+    activeEditingLanguage: string,
     customStyleBox?: boolean,
     textBox?: boolean,
     customScriptBox?: boolean,

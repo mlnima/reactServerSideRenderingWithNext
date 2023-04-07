@@ -5,9 +5,7 @@ import {useSelector} from "react-redux";
 import {updateQueryGenerator} from "@_variables/variables";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {Store} from "typescript-types";
-import {
-    editPostStatusAction
-} from "@store_toolkit/clientReducers/postsReducer/editPostStatusAction";
+import {editPostStatusAction} from "@store_toolkit/clientReducers/postsReducers/editPostStatusAction";
 
 const Style= styled.div`
   display: flex;
@@ -46,10 +44,9 @@ const Style= styled.div`
 `
 
 interface PropTypes {
-    role: string | undefined
 }
 
-const PostAdminQuickAccessBar: FC<PropTypes> = ({role}) => {
+const PostAdminQuickAccessBar: FC<PropTypes> = () => {
     const dispatch = useAppDispatch()
     const {query, push, pathname} = useRouter()
 
@@ -63,53 +60,27 @@ const PostAdminQuickAccessBar: FC<PropTypes> = ({role}) => {
     })
 
     const onStatusChangeHandler = (status) => {
-        //@ts-ignore
-         dispatch(editPostStatusAction({ids: [_id], status}))
-        updateQueryGenerator(query, push, pathname)
+        if (_id){
+            dispatch(editPostStatusAction({ids: [_id], status}))
+            updateQueryGenerator(query, push, pathname)
+        }
     }
 
     return (
-
         <Style className='edit-as-admin handle'>
-
-            <a className='btn btn-primary' href={`/profile/post?id=${_id}`} target='_blank'>
-                Edit
-            </a>
-
-            {
-                role === 'administrator' &&
-                <>
-                    <a className='btn btn-primary' href={`/dashboard/post?id=${_id}`} target='_blank'>
-                        Edit As Admin
-                    </a>
-                    <span className={'btn btn-info'} onClick={() => onStatusChangeHandler('draft')}>
-                            Draft
-                        </span>
-                    <span className={'btn btn-primary'} onClick={() => onStatusChangeHandler('published')}>
-                            Publish
-                        </span>
-                    <span className={'btn btn-info'} onClick={() => onStatusChangeHandler('pending')}>
-                        Pending
-                        </span>
-                </>
-            }
-            <span className={'btn btn-danger'} onClick={() => onStatusChangeHandler('trash')}>
-                        Trash
-                </span>
-
-
+            {/*<a className='btn btn-primary' href={`/profile/post?id=${_id}`} target='_blank'>Edit</a>*/}
+            <a className='btn btn-primary' href={`/editPost/${_id}`} target='_blank'>Edit</a>
+            <a className='btn btn-primary' href={`/dashboard/post?id=${_id}`} target='_blank'>Edit As Admin</a>
+            <span className={'btn btn-info'} onClick={() => onStatusChangeHandler('draft')}>Draft</span>
+            <span className={'btn btn-primary'} onClick={() => onStatusChangeHandler('published')}>Publish</span>
+            <span className={'btn btn-info'} onClick={() => onStatusChangeHandler('pending')}>Pending</span>
+            <span className={'btn btn-danger'} onClick={() => onStatusChangeHandler('trash')}>Trash</span>
             <div className={'dates'}>
                 {createdAt && <span> Created At : {createdAt}</span>}
                 {updatedAt &&  <span> Updated At : {updatedAt}</span>}
-
-
             </div>
-
             <h4 className='status'>Status : {status}</h4>
-
         </Style>
-
-
     )
 };
 export default PostAdminQuickAccessBar;

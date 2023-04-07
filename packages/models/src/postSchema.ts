@@ -8,14 +8,21 @@ const downloadLinks = mongoose.Schema({
 })
 
 const postSchema = new Schema({
-    author: {type: Schema.Types.ObjectId, ref: 'user'},
-    title: String,
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: 'user',
+        required: true
+    },
+    title: {
+        type: String,
+        required: true
+    },
     permaLink: String,
     company: String,
     description: Schema.Types.Mixed,
     descriptionRenderer: String,
     mainThumbnail: String,
-    images: Array,
+    images: [Schema.Types.Mixed],
     videoTrailerUrl: String,
     quality: {
         type: String,

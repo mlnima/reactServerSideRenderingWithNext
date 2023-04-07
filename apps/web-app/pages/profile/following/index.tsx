@@ -3,11 +3,12 @@ import UserSmallPreview from "../../../components/includes/socialComponents/User
 import {wrapper} from "@store_toolkit/store";
 import { useSelector} from "react-redux";
 import styled from "styled-components";
-import {fetchMultipleUserDataById, fetchSpecificUserData} from "@store_toolkit/clientReducers/userReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "../../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
+import {getMultipleUserDataByIdAction} from "@store_toolkit/clientReducers/userReducers/getMultipleUserDataByIdAction";
+import {getSpecificUserDataAction} from "@store_toolkit/clientReducers/userReducers/getSpecificUserDataAction";
 
 const FollowingStyledDiv = styled.div`
   max-width: 940px;
@@ -19,13 +20,13 @@ const Following  = ( ) => {
     const [following, setFollowing] = useState([]);
 
     useEffect(() => {
-        dispatch(fetchSpecificUserData({fields:['following']}))
+        dispatch(getSpecificUserDataAction({fields:['following']}))
     }, []);
 
 
     useEffect(() => {
         if (userData?.following?.length) {
-            dispatch(fetchMultipleUserDataById({usersList:userData?.followers, type:'following'}))
+            dispatch(getMultipleUserDataByIdAction({usersList:userData?.followers, type:'following'}))
         }
     }, [userData?.following]);
 

@@ -1,6 +1,6 @@
 import { FC } from "react";
 interface PropTypes {
-    imageUrl: string;
+    imageUrl: any;
     size: number;
 }
 declare const UserPreviewImage: FC<PropTypes>;

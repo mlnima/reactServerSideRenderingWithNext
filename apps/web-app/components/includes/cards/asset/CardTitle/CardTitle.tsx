@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Link from "next/link";
 import {FC} from "react";
+import {capitalizeFirstLetter} from "custom-util";
 
 const CardTitleStyle = styled.h3`
   margin: 4px;
@@ -38,7 +39,7 @@ const CardTitle: FC<CardTitlePropTypes> = ({title, url, targetLink}) => {
     return (
         <CardTitleStyle className={'title'}>
             <Link href={url || '#'} title={title} target={targetLink || '_self'}>
-                {title}
+                { capitalizeFirstLetter(title)   }
             </Link>
         </CardTitleStyle>
     );

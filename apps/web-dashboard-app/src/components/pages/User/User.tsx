@@ -20,7 +20,8 @@ const UserStyledDiv = styled.div`
     justify-content: space-between;
     width: 400px;
     margin: auto;
-    input, textarea ,select {
+
+    input, textarea, select {
       max-width: 300px;
     }
 
@@ -60,8 +61,8 @@ const UserStyledDiv = styled.div`
 
 const User = () => {
     const dispatch = useAppDispatch()
-    const [search,setSearch] = useSearchParams()
-    const [userId,setUserId] = useState('')
+    const [search, setSearch] = useSearchParams()
+    const [userId, setUserId] = useState('')
     const userData = useSelector(({users}: DashboardStore) => users.user)
     const APIKeyElement = useRef(null)
 
@@ -107,11 +108,12 @@ const User = () => {
     useEffect(() => {
         const id = search.get('id')
 
-        if (id){
+        if (id) {
             setUserId(id)
+            dispatch(getUserDataAction(id))
         }
 
-        dispatch(getUserDataAction(id))
+
     }, []);
 
     return (
@@ -119,33 +121,40 @@ const User = () => {
         <UserStyledDiv className='user-admin-edit-profile-page'>
             <div className='user-admin-edit-profile-page-section'>
                 <p>Username :</p>
-                <input className={'form-control-input'} name='username' value={userData.username} onChange={e => onChangeHandler(e)}
+                <input className={'form-control-input'} name='username' value={userData.username}
+                       onChange={e => onChangeHandler(e)}
                        disabled={userData.username === 'admin' || userData.username === 'dashboard'}/>
             </div>
             <div className='user-admin-edit-profile-page-section'>
                 <p>Email :</p>
-                <input className={'form-control-input'} name='email' value={userData.email} onChange={e => onChangeHandler(e)}/>
+                <input className={'form-control-input'} name='email' value={userData.email}
+                       onChange={e => onChangeHandler(e)}/>
             </div>
             <div className='user-admin-edit-profile-page-section'>
                 <p>First Name :</p>
-                <input className={'form-control-input'} name='firstName' value={userData.firstName} onChange={e => onChangeHandler(e)}/>
+                <input className={'form-control-input'} name='firstName' value={userData.firstName}
+                       onChange={e => onChangeHandler(e)}/>
             </div>
             <div className='user-admin-edit-profile-page-section'>
                 <p>Last Name :</p>
-                <input className={'form-control-input'} name='lastName' value={userData.lastName} onChange={e => onChangeHandler(e)}/>
+                <input className={'form-control-input'} name='lastName' value={userData.lastName}
+                       onChange={e => onChangeHandler(e)}/>
             </div>
             <div className='user-admin-edit-profile-page-section'>
                 <p>Nick Name :</p>
-                <input className={'form-control-input'} name='nickName' value={userData.nickName} onChange={e => onChangeHandler(e)}/>
+                <input className={'form-control-input'} name='nickName' value={userData.nickName}
+                       onChange={e => onChangeHandler(e)}/>
             </div>
             <div className='user-admin-edit-profile-page-section'>
                 <p>About :</p>
-                <textarea className={'form-control-input'} name='about' value={userData.about} onChange={e => onChangeHandler(e)}/>
+                <textarea className={'form-control-input'} name='about' value={userData.about}
+                          onChange={e => onChangeHandler(e)}/>
             </div>
-            <div className='user-admin-edit-profile-page-section'>
-                <p>Profile Image: </p>
-                <input className={'form-control-input'} name='profileImage' value={userData.profileImage} onChange={e => onChangeHandler(e)}/>
-            </div>
+            {/*<div className='user-admin-edit-profile-page-section'>*/}
+            {/*    <p>Profile Image: </p>*/}
+            {/*    <input className={'form-control-input'} name='profileImage' value={userData.profileImage.filePath}*/}
+            {/*           onChange={e => onChangeHandler(e)}/>*/}
+            {/*</div>*/}
             <div className='user-admin-edit-profile-page-section'>
                 <p>Role :</p>
                 <select className={'custom-select'} value={userData.role}

@@ -3,7 +3,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
 
 interface PropTypes {
-    profileImage?: string,
+    profileImage: any,
     size?: number
 }
 

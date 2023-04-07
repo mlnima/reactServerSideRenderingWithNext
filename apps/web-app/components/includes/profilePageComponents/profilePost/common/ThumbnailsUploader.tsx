@@ -28,10 +28,11 @@ const ThumbnailsUploaderStyledDiv = styled.div`
     align-items: center;
     margin: 20px 0;
     position: relative;
-    .plus{
+
+    .plus {
       position: absolute;
-      top:60%;
-      left:60%;
+      top: 60%;
+      left: 60%;
     }
   }
 
@@ -47,8 +48,8 @@ interface ThumbnailUploaderPropTypes {
     mainThumbnail: string,
     postId: string,
     images: {
-        imageIndex:number,
-        imagePath:string
+        imageIndex: number,
+        imagePath: string
     }[],
 }
 
@@ -77,7 +78,7 @@ const ThumbnailsUploader: FC<ThumbnailUploaderPropTypes> =
         return (
             <ThumbnailsUploaderStyledDiv>
                 {!!images?.length && images.map((image, index) => {
-                    if (image){
+                    if (image) {
                         return (
                             <ThumbnailUploadArea key={image.imageIndex}
                                                  postId={postId}
@@ -89,18 +90,18 @@ const ThumbnailsUploader: FC<ThumbnailUploaderPropTypes> =
                 })}
 
                 {images?.length < 6 &&
-                <div className={'add-new-image'}
-                                             onClick={() => inputRef.current.click()}
-                                             onDrop={e => onUploadHandler(e.dataTransfer.files, images.length + 1)}>
-                    <input className={'form-control-input'}
-                           type="file"
-                           ref={inputRef}
-                           accept="image/x-png,image/gif,image/jpeg,image/webp"
-                           style={{display: 'none'}}
-                           onChange={e => onUploadHandler(e.target.files, images.length + 1)}/>
-                    <FontAwesomeIcon className={'camera'} icon={faCamera} style={{width:70,height:70}}/>
-                    <FontAwesomeIcon className={'plus'} icon={faCirclePlus} style={{width:20,height:20}}/>
-                </div>}
+                    <div className={'add-new-image'}
+                         onClick={() => inputRef.current.click()}
+                         onDrop={e => onUploadHandler(e.dataTransfer.files, images.length + 1)}>
+                        <input className={'form-control-input'}
+                               type="file"
+                               ref={inputRef}
+                               accept="image/x-png,image/gif,image/jpeg,image/webp"
+                               style={{display: 'none'}}
+                               onChange={e => onUploadHandler(e.target.files, images.length + 1)}/>
+                        <FontAwesomeIcon className={'camera'} icon={faCamera} style={{width: 70, height: 70}}/>
+                        <FontAwesomeIcon className={'plus'} icon={faCirclePlus} style={{width: 20, height: 20}}/>
+                    </div>}
 
             </ThumbnailsUploaderStyledDiv>
         )

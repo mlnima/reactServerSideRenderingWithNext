@@ -1,7 +1,7 @@
 const {postTypes} = require("data-structures") ;
 const postTypeQueryMatcher = `:postType(${postTypes.join('|')})?`
 
-const apiServerProxy = process.env.NEXT_PUBLIC_API_SERVER_URL === process.env.NEXT_PUBLIC_PRODUCTION_URL ?
+const apiAndFileServerProxy = process.env.NEXT_PUBLIC_API_SERVER_URL === process.env.NEXT_PUBLIC_PRODUCTION_URL ?
     [
         {
             source: "/api/:path*",
@@ -9,7 +9,7 @@ const apiServerProxy = process.env.NEXT_PUBLIC_API_SERVER_URL === process.env.NE
         },
         {
             source: "/public/:path*",
-            destination: `${process.env.NEXT_PUBLIC_API_SERVER_URL}/public/:path*`,
+            destination: `${process.env.NEXT_PUBLIC_FILE_SERVER_URL}/public/:path*`,
         },
     ] : []
 
@@ -17,14 +17,14 @@ const apiServerProxy = process.env.NEXT_PUBLIC_API_SERVER_URL === process.env.NE
 module.exports = () => {
     return {
         beforeFiles: [
-            ...apiServerProxy,
+            ...apiAndFileServerProxy,
             {
                 source: "/api/:path*",
                 destination: `${process.env.NEXT_PUBLIC_API_SERVER_URL}/api/:path*`,
             },
             {
                 source: "/public/:path*",
-                destination: `${process.env.NEXT_PUBLIC_API_SERVER_URL}/public/:path*`,
+                destination: `${process.env.NEXT_PUBLIC_FILE_SERVER_URL}/public/:path*`,
             },
             {
                 source: `/meta`,

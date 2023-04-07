@@ -59,7 +59,6 @@ interface CategoryCardPropTypes {
     index: number,
     numberOfCardsPerRowInMobile: number,
     cardWidth: number,
-    role: string,
     adminMode: boolean,
 }
 
@@ -70,7 +69,6 @@ const CategoryCard: FC<CategoryCardPropTypes> =
          numberOfCardsPerRowInMobile,
          cardWidth,
          adminMode,
-         role
      }) => {
 
         const {locale} = useRouter();
@@ -99,7 +97,7 @@ const CategoryCard: FC<CategoryCardPropTypes> =
                 </Link>
                 <CardTitle title={title} url={`/category/${meta?._id}`}/>
 
-                {(role === 'administrator' && adminMode) && <ResetMetaImageButton _id={meta._id}/>}
+                {adminMode && <ResetMetaImageButton _id={meta._id}/>}
             </CategoryCardStyle>
         )
     };

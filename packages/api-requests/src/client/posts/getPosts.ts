@@ -32,6 +32,6 @@ const getPosts = async (currentQuery:any,medaId?:string|null )=> {
     }
 
     const queries = new URLSearchParams(getPostsData as {}).toString()
-    return await AxiosInstance.get(`/api/v1/posts/clientGetPosts?${queries}&${postFieldRequestForCards.map(f => 'field=' + f).join('&')}`)
+    return await AxiosInstance.get(`/api/v1/posts/getPosts?${queries}&${postFieldRequestForCards.map(f => 'field=' + f).join('&')}`)
 }
 export default getPosts;

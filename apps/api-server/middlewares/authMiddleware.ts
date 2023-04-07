@@ -1,8 +1,7 @@
 import jwt from 'jsonwebtoken';
 
-const authMiddleware = (req,res,next)=>{
+const authMiddleware =  (req,res,next)=>{
     try{
-
         const token = req.body.token || req.query.token
         req.userData = jwt.verify(token , process.env.JWT_KEY);
         next()

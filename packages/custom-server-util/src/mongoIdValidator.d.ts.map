@@ -1,1 +1,1 @@
-{"version":3,"file":"mongoIdValidator.d.ts","sourceRoot":"","sources":["mongoIdValidator.ts"],"names":[],"mappings":"AAEA,QAAA,MAAM,gBAAgB,QAAQ,MAAM,6BAMnC,CAAA;AAED,eAAe,gBAAgB,CAAC"}
+{"version":3,"file":"mongoIdValidator.d.ts","sourceRoot":"","sources":["mongoIdValidator.ts"],"names":[],"mappings":"AAEA,QAAA,MAAM,gBAAgB,QAAQ,MAAM,YAMnC,CAAA;AAED,eAAe,gBAAgB,CAAC"}

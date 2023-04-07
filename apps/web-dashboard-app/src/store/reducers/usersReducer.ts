@@ -111,10 +111,10 @@ export const generateNewAPIKeyAction = createAsyncThunk(
 
 export const getUserDataAction = createAsyncThunk(
     'adminPanelUsers/getUserDataAction',
-    async (_id: string|null, thunkAPI) => {
+    async (_id: string, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
-        return await getUser(_id)
+        return await getUser({_id})
             .then(res => {
                 return res.data.user
             }).catch((error: AxiosError) => {

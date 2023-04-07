@@ -1,32 +1,37 @@
-import React, {useEffect, useRef} from 'react';
+import React, {FC, useEffect, useRef} from 'react';
 import MessengerConversationMessage from "./MessengerConversationMessage";
 import {useSelector} from "react-redux";
 import styled from "styled-components";
 import {Store} from "typescript-types";
 import {uniqArrayBy} from 'custom-util'
 
-interface MessengerConversationMessageAreaTypes {
+interface IProps {
     connectedUserData: object,
-    userData: object
+    userData: object,
+    headerSize:number
 }
 
+interface IStyles {
+    headerSize:number
+}
 
-const MessengerConversationMessageAreaStyledDiv = styled.div`
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 50px;
-  top: 0;
-  height: 70vh;
-  //margin:  0;
-  //padding: 0 8px;
-  //box-sizing: border-box;
+const MessengerConversationMessageAreaStyledDiv = styled.div<IStyles>`
+  grid-area: conversationMessageArea;
+  height: ${({headerSize})=> `calc(100vh - ${headerSize}px )` } ;
+  //height: calc(100% - 100px);
+  margin: 0;
+  width: 100%;
   overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 50px;
+  box-sizing: border-box;
+  background-color: var(--main-background-color,#000);
 `
 
-const MessengerConversationMessageArea = ({connectedUserData, userData}: MessengerConversationMessageAreaTypes) => {
+const MessengerConversationMessageArea:FC<IProps> = ({connectedUserData, userData,headerSize}) => {
 
-    const messages = useSelector((store: Store) => store.user.activeConversation?.messages);
+    const messages = useSelector(({user}: Store) => user.activeConversation?.messages);
     const messageArea = useRef<null | HTMLDivElement>(null)
 
     useEffect(() => {
@@ -42,8 +47,10 @@ const MessengerConversationMessageArea = ({connectedUserData, userData}: Messeng
         }
     }
 
+
+
     return (
-        <MessengerConversationMessageAreaStyledDiv className='messenger-conversation-message-area custom-scroll' ref={messageArea}>
+        <MessengerConversationMessageAreaStyledDiv className='messenger-conversation-message-area custom-scroll' ref={messageArea} headerSize={headerSize}>
 
             {messages?
                 uniqArrayBy((messages || []),'createdAt').map((message: any) => {
@@ -65,17 +72,3 @@ const MessengerConversationMessageArea = ({connectedUserData, userData}: Messeng
 export default MessengerConversationMessageArea;
 
 
-// {/*{messages?*/}
-// {/*    messages.map((message: any) => {*/}
-// {/*        return (*/}
-// {/*            <MessengerConversationMessage*/}
-// {/*                key={_.uniqueId('message_')}*/}
-// {/*                message={message}*/}
-// {/*                connectedUserData={connectedUserData}*/}
-// {/*                // @ts-ignore*/}
-// {/*                currentUserId={userData._id}*/}
-// {/*            />*/}
-// {/*        )*/}
-// {/*    })*/}
-// {/*    :null*/}
-// {/*}*/}

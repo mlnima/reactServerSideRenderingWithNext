@@ -32,9 +32,7 @@ interface TagCardPropTypes {
     meta: Meta,
     index: number,
     numberOfCardsPerRowInMobile: number,
-    cardWidth: number,
-    adminMode: boolean,
-    role:string
+    cardWidth: number
 }
 
 const TagCard: FC<TagCardPropTypes> =
@@ -42,9 +40,7 @@ const TagCard: FC<TagCardPropTypes> =
          meta,
          index,
          numberOfCardsPerRowInMobile,
-         cardWidth,
-         adminMode,
-         role
+         cardWidth
      }) => {
 
         const {locale} = useRouter();

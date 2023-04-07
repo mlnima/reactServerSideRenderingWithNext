@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {useRouter} from "next/router";
 import {postFieldRequestForCards} from "data-structures";
 import {useDispatch} from "react-redux";
-import {setPostsData} from "@store_toolkit/clientReducers/postsReducer/postsReducer";
+import {setPostsData} from "@store_toolkit/clientReducers/postsReducers/postsReducer";
 import PostsPage from "@components/includes/PostsPage/PostsPage";
 import getPosts from "api-requests/src/client/posts/getPosts";
 

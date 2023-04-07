@@ -6,7 +6,6 @@ import styled from "styled-components";
 import useTranslation from 'next-translate/useTranslation'
 import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
-import {fetchSpecificUserData, fetchUserPageData} from "@store_toolkit/clientReducers/userReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import UserPreviewImage from "ui/src/UserPreviewImage";
@@ -14,6 +13,8 @@ import {Store} from "typescript-types";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCamera} from "@fortawesome/free-solid-svg-icons/faCamera";
+import {getUserPageDataAction} from "@store_toolkit/clientReducers/userReducers/getUserPageDataAction";
+import {getSpecificUserDataAction} from "@store_toolkit/clientReducers/userReducers/getSpecificUserDataAction";
 
 const UserPageStyledDiv = styled.div`
   color: var(--main-text-color);
@@ -88,12 +89,12 @@ const user = () => {
 
     const getUserData = async () => {
         try {
-            dispatch(fetchUserPageData({
+            dispatch(getUserPageDataAction({
                 username: router.query.username as string,
                 _id: undefined,
                 fields: ['following', 'followers', 'blockList']
             }))
-            dispatch(fetchSpecificUserData({
+            dispatch(getSpecificUserDataAction({
                 fields: ['following', 'followers', 'blockList'
                 ]
             }))
@@ -109,7 +110,8 @@ const user = () => {
                 <HeadSetter title={userPageData?.username}/>
                 <div className='profile-header'>
                     {!!userPageData?.profileImage &&
-                        <UserPreviewImage imageUrl={userPageData?.profileImage} size={150}/>}
+                        //@ts-ignore
+                        <UserPreviewImage imageUrl={userPageData?.profileImage?.filePath} size={150}/>}
                     <div className='profile-header-info-actions'>
                         <h3>{userPageData?.username}</h3>
 

@@ -25,7 +25,7 @@ var getPosts = function (currentQuery, medaId) { return tslib_1.__awaiter(void 0
                 keyword = !!(currentQuery === null || currentQuery === void 0 ? void 0 : currentQuery.keyword) ? { keyword: encodeURIComponent((0, custom_util_1.queryUniquer)(currentQuery === null || currentQuery === void 0 ? void 0 : currentQuery.keyword)) } : {};
                 getPostsData = tslib_1.__assign(tslib_1.__assign(tslib_1.__assign(tslib_1.__assign(tslib_1.__assign(tslib_1.__assign(tslib_1.__assign({ size: currentQuery === null || currentQuery === void 0 ? void 0 : currentQuery.size, page: currentQuery === null || currentQuery === void 0 ? void 0 : currentQuery.page }, status), author), lang), metaId), postType), sort), keyword);
                 queries = new URLSearchParams(getPostsData).toString();
-                return [4 /*yield*/, AxiosInstance_1["default"].get("/api/v1/posts/clientGetPosts?".concat(queries, "&").concat(data_structures_1.postFieldRequestForCards.map(function (f) { return 'field=' + f; }).join('&')))];
+                return [4 /*yield*/, AxiosInstance_1["default"].get("/api/v1/posts/getPosts?".concat(queries, "&").concat(data_structures_1.postFieldRequestForCards.map(function (f) { return 'field=' + f; }).join('&')))];
             case 1: return [2 /*return*/, _a.sent()];
         }
     });

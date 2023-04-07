@@ -13,7 +13,7 @@ var getPost = function (identifier) { return tslib_1.__awaiter(void 0, void 0, v
                 title = queryGeneratorData.title ? { title: encodeURIComponent(queryGeneratorData.title) } : {};
                 queriesDataObject = tslib_1.__assign(tslib_1.__assign({}, _id), title);
                 queries = "?".concat(new URLSearchParams(queriesDataObject).toString());
-                return [4 /*yield*/, AxiosInstance_1["default"].get("/api/v1/posts/clientGetPost".concat(queries))];
+                return [4 /*yield*/, AxiosInstance_1["default"].get("/api/v1/posts/getPost".concat(queries))];
             case 1: return [2 /*return*/, _a.sent()];
         }
     });

@@ -9,7 +9,7 @@ const getPost = async (identifier:string) => {
     //@ts-ignore
     const queries= `?${new URLSearchParams(queriesDataObject).toString()}`
 
-    return await AxiosInstance.get(`/api/v1/posts/clientGetPost${queries}`)
+    return await AxiosInstance.get(`/api/v1/posts/getPost${queries}`)
 }
 
 export default getPost;

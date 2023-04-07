@@ -36,15 +36,16 @@ const ChatRoomMessageStyledDiv = styled.div`
     outline: none;
     margin-bottom: 7px;
   }
-  
+
   .chatroom-message-area-message-data {
     background-color: var(--secondary-background-color, #181818);
     padding: 10px;
     margin: 5px;
     box-sizing: border-box;
     border-radius: 10px;
-//width: 100%;
-max-width: 100%;
+    //width: 100%;
+    max-width: 100%;
+
     .chatroom-message-area-message-username {
       display: flex;
       justify-content: space-between;
@@ -59,9 +60,19 @@ max-width: 100%;
       overflow-wrap: break-word;
       max-width: calc(100% - 30px);
     }
+
+    .chatroom-message-area-message-image {
+      max-width: 100%;
+    }
   }
-  @media only screen and (min-width: 768px){
+
+  @media only screen and (min-width: 768px) {
     max-width: calc(100vw - 180px);
+    .chatroom-message-area-message-data{
+      .chatroom-message-area-message-image {
+        max-width: 400px;
+      }
+    }
   }
 `
 
@@ -82,12 +93,31 @@ class ChatRoomMessage extends PureComponent<ChatRoomMessagePropTypes> {
                     </p>
                 </ChatRoomLogMessageStyledDiv>
             )
+        } else if(this?.props?.message?.type === 'image') {
+            return (
+                <ChatRoomMessageStyledDiv className='chatroom-message-area-message'>
+
+                    <Link className={'user-profile-image'} href={`/user/${this?.props?.message?.author?.username}`}>
+                        <UserPreviewImage imageUrl={this?.props?.message?.author?.profileImage?.filePath} size={24}/>
+                    </Link>
+
+                    <div className='chatroom-message-area-message-data'>
+                    <span className='chatroom-message-area-message-username'
+                          title={formatDistance(new Date(this?.props?.message?.createdAt), new Date(), {addSuffix: true})}>
+                    {this?.props?.message?.author?.username}
+                    </span>
+                        <img alt={'message'} src={this?.props?.message?.messageData} className='chatroom-message-area-message-image'/>
+                    </div>
+                    {/*//@ts-ignore*/}
+                    <AdminActionOnMessageMenu chatroomId={this?.props?.message?.chatroom} messageId={this?.props?.message?._id}/>
+                </ChatRoomMessageStyledDiv>
+            );
         } else if(!!this?.props?.message?.author?.username) {
             return (
                 <ChatRoomMessageStyledDiv className='chatroom-message-area-message'>
 
                     <Link className={'user-profile-image'} href={`/user/${this?.props?.message?.author?.username}`}>
-                        <UserPreviewImage imageUrl={this?.props?.message?.author?.profileImage} size={24}/>
+                        <UserPreviewImage imageUrl={this?.props?.message?.author?.profileImage?.filePath} size={24}/>
                     </Link>
 
                     <div className='chatroom-message-area-message-data'>

@@ -1,9 +1,10 @@
 import React, {useRef} from 'react';
 import {useSelector} from "react-redux";
 import styled from "styled-components";
-import {fetchUserProfileImageUpload} from "@store_toolkit/clientReducers/userReducer";
+
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {Store} from "typescript-types";
+import {userProfileImageUploadAction} from "@store_toolkit/clientReducers/userReducers/userProfileImageUploadAction";
 
 const ProfileImageStyledDiv = styled.div`
   position: relative;
@@ -55,7 +56,7 @@ const ProfileImage = () => {
         filesData.append('token', localStorage.wt)
         filesData.append('profileImage', e.target.files[0], 'profile')
         filesData.append('type', 'profile')
-        dispatch(fetchUserProfileImageUpload(filesData))
+        dispatch(userProfileImageUploadAction(filesData))
         setTimeout(()=>{
             reSetProfileImage()
         },1000)
@@ -64,7 +65,7 @@ const ProfileImage = () => {
     const reSetProfileImage = ()=>{
         if (imageElement.current){
             //@ts-ignore
-            imageElement.current.src = userData?.profileImage ? userData?.profileImage + '?date=' + Date.now() : '/asset/images/user/noGenderAvatar150.jpg'
+            imageElement.current.src = userData?.profileImage?.filePath ? userData?.profileImage?.filePath + '?date=' + Date.now() : '/asset/images/user/noGenderAvatar150.jpg'
         }
 
     }
@@ -72,8 +73,9 @@ const ProfileImage = () => {
         <ProfileImageStyledDiv className='profile-image'>
             {/*//@ts-ignore*/}
             <img ref={imageElement} onClick={() => uploadInputElement.current.click()}
+                 alt={'profile-image'}
                  className='profile-image-img'
-                 src={userData?.profileImage ? userData?.profileImage + '?date=' + Date.now() : '/asset/images/user/noGenderAvatar150.jpg'}/>
+                 src={userData?.profileImage?.filePath ? userData.profileImage.filePath + '?date=' + Date.now() : '/asset/images/user/noGenderAvatar150.jpg'}/>
             <input ref={uploadInputElement} type="file" style={{display: 'none'}} onChange={e => onUploadHandler(e)}/>
 
         </ProfileImageStyledDiv>

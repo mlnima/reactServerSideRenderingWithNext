@@ -15,7 +15,7 @@ const getCurrentPageData = async ({dynamicWidgets, locale, requireSettings}: Pro
 
         const widgetsRequest = await getWidgets(widgetsPositionsToRequest, locale)
         const settingsRequest = await getSettings(requireSettings)
-
+console.log(settingsRequest.data)
         const widgets= reduceWidgetsToGroups([...(widgetsRequest.data?.widgets || [])])
         const settings= settingsRequest.data
 

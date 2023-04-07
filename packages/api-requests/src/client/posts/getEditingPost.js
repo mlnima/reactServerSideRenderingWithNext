@@ -8,7 +8,7 @@ var getEditingPost = function (postId) { return tslib_1.__awaiter(void 0, void 0
         switch (_a.label) {
             case 0:
                 queries = new URLSearchParams({ _id: postId }).toString();
-                return [4 /*yield*/, AxiosInstance_1["default"].get("/api/v1/posts/clientGetEditingPost?".concat(queries))];
+                return [4 /*yield*/, AxiosInstance_1["default"].get("/api/v1/posts/getEditingPost?".concat(queries))];
             case 1: return [2 /*return*/, _a.sent()];
         }
     });

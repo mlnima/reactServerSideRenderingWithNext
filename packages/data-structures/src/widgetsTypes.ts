@@ -7,6 +7,7 @@ const widgetsTypes  = [
     'dayModeNightMode',
     'multipleLinkTo',
     'posts',
+    'newPostButton',
     'postsList',
     'postsListEntireByCategories',
     'media',
@@ -20,8 +21,6 @@ const widgetsTypes  = [
     'language',
     'authentication',
     'imagesSlider',
-    // 'postsSwiper',
-    // 'recentComments',
     'postsSlider',
 ]
 

@@ -41,6 +41,20 @@ interface PropTypes {
 }
 
 const UserSmallPreview: FC<PropTypes> = ({user}) => {
+
+    const getAvatarPath = (user) => {
+        if (user?.profileImage?.filePath) {
+            return user.profileImage.filePath;
+        }
+        if (user?.gender === 'male') {
+            return '/asset/images/user/maleAvatar50.jpg';
+        }
+        if (user?.gender === 'female') {
+            return '/asset/images/user/femaleAvatar50.jpg';
+        }
+        return '/asset/images/user/noGenderAvatar50.jpg';
+    }
+
     return (
         <UserSmallPreviewStyledSpan>
             <Link href={{
@@ -50,11 +64,7 @@ const UserSmallPreview: FC<PropTypes> = ({user}) => {
                   as={`/user/${user?.username}`}
                   className='user'>
 
-                <img src={user?.profileImage ? user?.profileImage :
-                    user?.gender === 'male' ? '/asset/images/user/maleAvatar50.jpg' :
-                        user?.gender === 'female' ? '/asset/images/user/femaleAvatar50.jpg' :
-                            '/asset/images/user/noGenderAvatar50.jpg'
-                } alt="user-profile-image" className="user-profile-image"/>
+                <img src={getAvatarPath(user)} alt="user-profile-image" className="user-profile-image"/>
                 <div className='user-names-info'>
                     <p>{user?.username}</p>
                     <p>{user?.name} {user?.lastName}</p>

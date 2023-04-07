@@ -1,9 +1,10 @@
-import {FC, useMemo} from "react";
+import {FC, useEffect, useMemo, useState} from "react";
 import Head from 'next/head';
 import {useSelector} from "react-redux";
 import {Store} from "typescript-types";
 import parse from 'html-react-parser';
 import {useRouter} from "next/router";
+import GoogleAnalyticsHeadScript from "@components/global/commonComponents/googleAnalytics/GoogleAnalyticsHeadScripts";
 
 interface PropTypes {
     title?: string,
@@ -24,7 +25,7 @@ const HeadSetter: FC<PropTypes> = (
         canonicalUrl
     }) => {
 
-    const {asPath, locale} =  useRouter() ;
+    const {asPath, locale} = useRouter();
     const headDataSettings = useSelector(({settings}: Store) => settings?.initialSettings?.headDataSettings)
     const siteLanguages = process.env.NEXT_PUBLIC_LOCALS?.split(' ') || [];
     const headTitle = useMemo(() => title || headDataSettings?.title || 'Title', [title, asPath])
@@ -35,7 +36,7 @@ const HeadSetter: FC<PropTypes> = (
         <Head>
             <title>{headTitle}</title>
             <meta name="description" content={headDescription}/>
-            {!!headKeywords &&  <meta name="keywords" content={headKeywords}/>}
+            {!!headKeywords && <meta name="keywords" content={headKeywords}/>}
             <link rel="shortcut icon" href={headDataSettings?.favIconUrl || '/asset/images/default/favicon.png'}/>
             <link rel="apple-touch-icon" href={headDataSettings?.favIconUrl || '/asset/images/default/favicon.png'}/>
             <meta name={'theme-color'} content={headDataSettings?.themeColor || '#000'}/>
@@ -87,6 +88,9 @@ const HeadSetter: FC<PropTypes> = (
             {disAllowIndexByRobots &&
                 <>{parse(headDataSettings.customHeadTags, {trim: true})}</>
             }
+            {!!headDataSettings.googleAnalyticsId &&
+                <GoogleAnalyticsHeadScript googleAnalyticsId={headDataSettings.googleAnalyticsId}/>}
+
         </Head>
     )
 };

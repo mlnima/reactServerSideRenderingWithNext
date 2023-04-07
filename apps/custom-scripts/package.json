@@ -15,6 +15,7 @@
     "build": "tsc --project tsconfig.json",
     "run-script:setup": " ts-node ./src/setup.ts",
     "run-script:resetAdminPassword": "node --trace-warnings ./dist/src/resetAdminPassword.js",
+    "run-script:setImagesToFileCollection": "node --trace-warnings ./dist/src/setImagesToFileCollection.js",
     "test": "jest --watch"
   },
   "dependencies": {

@@ -3,7 +3,7 @@ import {useSelector} from "react-redux";
 import dynamic from "next/dynamic";
 import {Store} from "typescript-types";
 
-const GoogleAnalytics = dynamic(() => import('./GoogleAnalytics'), {ssr: false})
+// const GoogleAnalytics = dynamic(() => import('./GoogleAnalytics'), {ssr: false})
 const UserAutoLogin = dynamic(() => import('./UserAutoLogin'), {ssr: false})
 
 const SiteSettingSetter: FC = () => {
@@ -21,8 +21,8 @@ const SiteSettingSetter: FC = () => {
 
     return (
         <>
-            {!!headDataSettings?.googleAnalyticsId &&
-            <GoogleAnalytics googleAnalyticsId={headDataSettings.googleAnalyticsId}/>}
+            {/*{!!headDataSettings?.googleAnalyticsId &&*/}
+            {/*<GoogleAnalytics googleAnalyticsId={headDataSettings.googleAnalyticsId}/>}*/}
             {renderAutoLogin ? <UserAutoLogin renderAutoLogin={renderAutoLogin}/> : null}
         </>
     )

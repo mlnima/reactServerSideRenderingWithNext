@@ -3,15 +3,14 @@ import {useRouter} from "next/router";
 import useTranslation from 'next-translate/useTranslation'
 import styled from "styled-components";
 import { useSelector} from "react-redux";
-import {
-    fetchFollowUser,
-    fetchSpecificUserData,
-    fetchStartConversation,
-    fetchUnFollowUser
-} from "@store_toolkit/clientReducers/userReducer";
+
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {Store} from "typescript-types";
+import {followUserAction} from "@store_toolkit/clientReducers/userReducers/followUserAction";
+import {unfollowUserAction} from "@store_toolkit/clientReducers/userReducers/unfollowUserAction";
+import {startConversationAction} from "@store_toolkit/clientReducers/userReducers/startConversationAction";
+import {getSpecificUserDataAction} from "@store_toolkit/clientReducers/userReducers/getSpecificUserDataAction";
 
 const UserPageActionButtonsStyledDiv = styled.div`
   display: flex;
@@ -57,8 +56,8 @@ const UserPageActionButtons: FC<UserPageActionButtonsPropType> = ({_id}) => {
 
     const onFollowHandler = () => {
         if (userPageData?._id && loggedIn && userData?._id ) {
-            dispatch(fetchFollowUser(userPageData._id))
-            dispatch(fetchSpecificUserData({fields:['following']}))
+            dispatch(followUserAction(userPageData._id))
+            dispatch(getSpecificUserDataAction({fields:['following']}))
         } else {
             dispatch(loginRegisterForm('login'))
         }
@@ -66,14 +65,14 @@ const UserPageActionButtons: FC<UserPageActionButtonsPropType> = ({_id}) => {
 
     const onUnFollowHandler = () => {
         if (userPageData?._id){
-            dispatch(fetchUnFollowUser(userPageData?._id))
-            dispatch(fetchSpecificUserData({fields:['following']}))
+            dispatch(unfollowUserAction(userPageData?._id))
+            dispatch(getSpecificUserDataAction({fields:['following']}))
         }
     }
 
     const onConversationHandler = () => {
         if (!!userData?._id && !!userPageData?._id) {
-            dispatch(fetchStartConversation({_id:userPageData._id, push}))
+            dispatch(startConversationAction({_id:userPageData._id, push}))
 
         } else {
             dispatch(loginRegisterForm('login'))

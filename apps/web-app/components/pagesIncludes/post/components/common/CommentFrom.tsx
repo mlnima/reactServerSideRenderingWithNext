@@ -6,8 +6,8 @@ import {useAppDispatch} from "@store_toolkit/hooks";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 import {Store} from "typescript-types";
 import UserProfileImage from "../../../../includes/UserProfileImage/UserProfileImage";
-import postNewCommentAction from "@store_toolkit/clientReducers/postsReducer/postNewCommentAction";
-import getPostCommentsAction from "@store_toolkit/clientReducers/postsReducer/getPostCommentsAction";
+import postNewCommentAction from "@store_toolkit/clientReducers/postsReducers/postNewCommentAction";
+import getPostCommentsAction from "@store_toolkit/clientReducers/postsReducers/getPostCommentsAction";
 
 const CommentFromStyledForm = styled.form`
 

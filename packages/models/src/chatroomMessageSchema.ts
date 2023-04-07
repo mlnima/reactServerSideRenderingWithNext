@@ -5,6 +5,7 @@ import {ChatroomMessage} from "typescript-types";
 const chatroomMessageSchema = new Schema({
     chatroom: {type: Schema.Types.ObjectId, ref: 'chatroom'},
     author: {type: Schema.Types.ObjectId, ref: 'user'},
+    image:String,
     type:String,
     messageData:String,
 },{ timestamps: true })

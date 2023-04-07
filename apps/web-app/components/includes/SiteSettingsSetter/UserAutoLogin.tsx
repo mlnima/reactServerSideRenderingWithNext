@@ -1,6 +1,6 @@
 import {FC, useEffect} from "react";
 import {useSelector} from "react-redux";
-import {fetchUserAutoLogin} from "@store_toolkit/clientReducers/userReducer";
+import {autoLoginAction} from "@store_toolkit/clientReducers/userReducers/autoLoginAction";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {Store} from "typescript-types";
 
@@ -15,9 +15,9 @@ const UserAutoLogin: FC<UserAutoLoginPropTypes> = ({renderAutoLogin}) => {
     useEffect(() => {
         if (!loggedIn) {
             !!localStorage?.wt && dispatch(
-                fetchUserAutoLogin(
+                autoLoginAction(
                     {
-                        fields: ['username', 'role', 'keyMaster', 'profileImage', 'followingCount', 'followersCount']
+                        fields: ['username', 'role', 'keyMaster', 'profileImage', 'followingCount', 'followersCount','draftPost']
                     }
                 ))
         }

@@ -40,28 +40,20 @@ interface ChatRoomOnlineUsersListItemPropType {
     onlineUser: {
         username: string,
         id: string,
-        profileImage: string
+        profileImage: {
+            filePath:string
+        },
     }
 }
 
 const ChatRoomOnlineUsersListItem: FC<ChatRoomOnlineUsersListItemPropType> = ({onlineUser}) => {
-
-    // const dispatch = useAppDispatch()
-
-    // const onClickHandler = () => {
-    //     dispatch(setActiveVisibleProfile({
-    //         username: onlineUser.username,
-    //         _id: onlineUser.id,
-    //         profileImage: onlineUser.profileImage
-    //     }))
-    // }
 
     return (
         <ChatRoomOnlineUsersListItemStyledDiv className='chatroom-online-users-list-item'>
             <div className='chatroom-online-users-list-item-user-section'>
                 <div className='chatroom-online-users-list-item-user-data'>
                     <Link href={`/user/${onlineUser.username}`}>
-                        <UserPreviewImage imageUrl={onlineUser?.profileImage} size={16}/>
+                        <UserPreviewImage imageUrl={onlineUser?.profileImage?.filePath} size={16}/>
                         <p className='chatroom-online-users-list-item-username'>{onlineUser.username}</p>
                     </Link>
                 </div>

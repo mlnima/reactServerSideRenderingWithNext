@@ -1,5 +1,6 @@
 import {Router} from 'express';
-import adminAuthMiddleware from '../../../middlewares/adminAuthMiddleware';
+// import adminAuthMiddleware from '../../../middlewares/adminAuthMiddleware';
+import adminAuthMiddleware from 'custom-server-util/src/middleware-utils/adminAuthMiddleware';
 import createWidget from './createWidget';
 import {updateWidget} from './updateWidget';
 import adminDeleteWidget from './adminDeleteWidget';

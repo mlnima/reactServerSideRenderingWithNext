@@ -6,13 +6,14 @@ import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReduce
 import Draggable from 'react-draggable';
 import _passwordValidator from "@_variables/_clientVariables/clientVariables/_passwordValidator";
 import ValidInput from "./ValidInput";
-import {fetchLogin, fetchUserRegister} from "@store_toolkit/clientReducers/userReducer";
+import {loginAction} from "@store_toolkit/clientReducers/userReducers/loginAction";
 import {setAlert} from "@store_toolkit/clientReducers/globalStateReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {Store} from "typescript-types";
 import FormHeader from "./FormHeader";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye} from "@fortawesome/free-solid-svg-icons/faEye";
+import {registerUserAction} from "@store_toolkit/clientReducers/userReducers/registerUserAction";
 
 const LoginRegisterPopupFormsStyledDiv = styled.div`
   background-color: var(--secondary-background-color, #181818);
@@ -199,7 +200,7 @@ const LoginRegisterPopupForms: FC = () => {
     const onLoginHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!!state.username && state.password){
-            dispatch(fetchLogin({username: state.username, password: state.password}))
+            dispatch(loginAction({username: state.username, password: state.password}))
         }
     };
 
@@ -218,7 +219,7 @@ const LoginRegisterPopupForms: FC = () => {
         }
 
         if (checkUsername && checkPasswords) {
-            dispatch(fetchUserRegister({data: state}))
+            dispatch(registerUserAction({data: state}))
         }
 
 

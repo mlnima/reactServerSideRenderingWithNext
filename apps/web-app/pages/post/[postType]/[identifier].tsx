@@ -7,8 +7,8 @@ import SidebarWidgetAreaRenderer from "@components/RootLayout/widgetsArea/Sideba
 import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
-import getPostAction from "@store_toolkit/clientReducers/postsReducer/getPostAction";
-import getPostCommentsAction from "@store_toolkit/clientReducers/postsReducer/getPostCommentsAction";
+import getPostAction from "@store_toolkit/clientReducers/postsReducers/getPostAction";
+import getPostCommentsAction from "@store_toolkit/clientReducers/postsReducers/getPostCommentsAction";
 import viewPost from "api-requests/src/client/posts/viewPost";
 import {postTypes} from "data-structures";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
@@ -68,9 +68,8 @@ const postPage = () => {
         categories,
         actors
     } = useSelector(({posts}: Store) => posts?.post);
-    const {userData} = useSelector(({user}: Store) => user)
+    const {userData} = useSelector(({user}: Store) => user);
     const sidebar = useSelector(({settings}: Store) => settings?.currentPageSettings?.sidebar);
-
     const adminMode = useSelector(({globalState}: Store) => globalState?.adminMode);
 
 
@@ -92,7 +91,7 @@ const postPage = () => {
                             canonicalUrl={_postCanonicalUrlGenerator(postType, _id,locale)}
                             keywords={[...(tags || []), ...(categories || []), ...(actors || [])].map(meta => meta.name).join(',')}
                             description={postType !== 'learn' && typeof description === 'string' ? description : undefined}/>
-                {(adminMode && userData?.role === 'administrator') && <PostAdminQuickAccessBar role={userData?.role}/>}
+                {adminMode && <PostAdminQuickAccessBar/>}
                 <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
 
                     {
@@ -114,7 +113,7 @@ const postPage = () => {
         return <Soft404/>
     } else {
         return <>
-            {(adminMode || author?._id === userData?._id) && <PostAdminQuickAccessBar role={userData?.role}/>}
+            {adminMode && <PostAdminQuickAccessBar/>}
             <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
                 <NotFoundOrRestricted/>
                 <SidebarWidgetAreaRenderer sidebar={sidebar} position={'postPage'}/>

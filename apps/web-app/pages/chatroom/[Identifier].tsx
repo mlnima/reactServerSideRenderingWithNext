@@ -5,7 +5,7 @@ import ChatRoomTools from "@components/pagesIncludes/chatroom/ChatRoomTools/Chat
 import ChatRoomOnlineUsersList
     from "@components/pagesIncludes/chatroom/ChatRoomOnlineUsersList/ChatRoomOnlineUsersList";
 import {useSelector} from "react-redux";
-import {dispatchSocketId} from "@store_toolkit/clientReducers/userReducer";
+import {dispatchSocketId} from "@store_toolkit/clientReducers/userReducers/userReducer";
 import {setOnlineUsers, setMessages, newMessage} from '@store_toolkit/clientReducers/chatroomReducer';
 import {wrapper} from "@store_toolkit/store";
 import {useAppDispatch} from "@store_toolkit/hooks";
@@ -19,31 +19,32 @@ import ChatroomTopbar from "@components/pagesIncludes/chatroom/ChatroomTopbar";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
 const Soft404 = dynamic(() => import('@components/includes/Soft404/Soft404'))
 
-const Style = styled.div`
+interface StylePropTypes {
+    userList: boolean;
+    isMaximized: boolean;
+}
 
-  ${({isMaximized}) => isMaximized ? `
+const Style = styled.div<StylePropTypes>`
+  ${({ isMaximized }) =>
+          isMaximized
+                  ? `
       position: fixed;
       top: 0;
       left: 0;
-      right:0;
+      right: 0;
       bottom: 0;
       z-index: 11;
-  ` : ''}
-  
+  `
+                  : ''}
+
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 150px;
-
   grid-template-rows: 45px 1fr;
-  grid-template-areas:  'chatroomTopbar chatroomTopbar'
-                        'chatroomMessagingArea ${({userList}: StylePropTypes) => userList ? 'chatroomOnlineUsersList' : 'chatroomMessagingArea'}';
-
-`
-
-interface StylePropTypes {
-    userList: boolean,
-    isMaximized: boolean,
-}
+  grid-template-areas:
+    'chatroomTopbar chatroomTopbar'
+    'chatroomMessagingArea ${({ userList }: StylePropTypes) => userList ? 'chatroomOnlineUsersList' : 'chatroomMessagingArea'}';
+`;
 
 interface PropTypes {
     pageData: {
@@ -107,15 +108,15 @@ const chatRoom: FC<PropTypes> = ({pageData}) => {
             }
             //calculating available space for chat area
             //@ts-ignore
-            const topbarHeight = document.querySelector('.topbar')?.offsetHeight;
+            const topbarHeight = document.querySelector('.topbar')?.offsetHeight || 0;
             //@ts-ignore
-            const headerHeight = document.querySelector('.header')?.offsetHeight;
+            const headerHeight = document.querySelector('.header')?.offsetHeight || 0;
             //@ts-ignore
-            const navigationHeight = document.querySelector('.navigation')?.offsetHeight;
+            const navigationHeight = document.querySelector('.navigation')?.offsetHeight || 0;
             setHeaderSize(topbarHeight + headerHeight + navigationHeight + 90)
         }, 100)
     }, []);
-
+    console.log(headerSize)
     if (pageData?.chatroom?._id) {
         return (
             <Style id={'full-width-content'} userList={onlineUserListVisibility} isMaximized={isMaximized}>

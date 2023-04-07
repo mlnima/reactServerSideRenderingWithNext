@@ -1,24 +1,24 @@
 import {Router} from 'express';
-import clientUsersRouter from './clientUsersRouter';
-import clientSettingsRouter from './clientSettingsRouter';
-import clientPostsRouter from './clientPostsRouter';
+import usersRouter from './usersRouter';
+import settingsRouter from './settingsRouter';
+import postsRouter from './postsRouter';
 import chatroomsRouter from './chatroomsRouter';
-import clientWidgetsRouter from './clientWidgetsRouter';
+import widgetsRouter from './widgetsRouter';
 import clientFileManagerRouter from './clientFileManagerRouter';
-import clientPagesRouter from './clientPagesRouter';
-import clientFormsRouter from './clientFormsRouter';
+import pagesRouter from './pagesRouter';
+import formsRouter from './formsRouter';
 import clientOrdersRouter from './clientOrdersRouter';
 
 const router = Router();
 
-router.use('/users', clientUsersRouter);
-router.use('/posts', clientPostsRouter);
+router.use('/users', usersRouter);
+router.use('/posts', postsRouter);
 router.use('/chatrooms', chatroomsRouter);
-router.use('/settings', clientSettingsRouter);
-router.use('/widgets', clientWidgetsRouter);
+router.use('/settings', settingsRouter);
+router.use('/widgets', widgetsRouter);
 router.use('/fileManager', clientFileManagerRouter);
-router.use('/pages', clientPagesRouter);
-router.use('/forms', clientFormsRouter);
+router.use('/pages', pagesRouter);
+router.use('/forms', formsRouter);
 router.use('/orders', clientOrdersRouter);
 
 export default router;

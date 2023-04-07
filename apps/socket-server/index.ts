@@ -100,7 +100,16 @@ io.on('connection', socket => {
     //step1
     socket.on('JoinSocketAndGetInitialData', async ({chatroomId}) => {
         const recentChatRoomMessages = await chatroomMessageSchema.find({chatroom: chatroomId})
-            .populate({path: 'author', select: 'username profileImage', model: userSchema}).exec()
+            .populate({
+                path: 'author',
+                select: 'username profileImage',
+                model: userSchema,
+                populate: {
+                    path: 'profileImage',
+                    model: 'file',
+                }
+            }).exec()
+
         socket.join(chatroomId)
         const dataToSend = {
             recentChatRoomMessages: recentChatRoomMessages || [],

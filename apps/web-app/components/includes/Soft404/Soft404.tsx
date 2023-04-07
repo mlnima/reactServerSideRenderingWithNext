@@ -6,7 +6,7 @@ import {useAppDispatch} from "@store_toolkit/hooks";
 import Head from 'next/head'
 import PostsPage from "../PostsPage/PostsPage";
 import {useRouter} from "next/router";
-import getPostsAction from "@store_toolkit/clientReducers/postsReducer/getPostsAction";
+import getPostsAction from "@store_toolkit/clientReducers/postsReducers/getPostsAction";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
 
 const Soft404StyledDiv = styled.div`

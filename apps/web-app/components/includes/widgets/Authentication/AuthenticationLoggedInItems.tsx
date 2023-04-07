@@ -2,8 +2,7 @@ import React, {FC} from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import useTranslation from 'next-translate/useTranslation'
-import {useRouter} from "next/router";
-import {userLogout} from "@store_toolkit/clientReducers/userReducer";
+import {userLogout} from "@store_toolkit/clientReducers/userReducers/userReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 import UserProfileImage from "../../UserProfileImage/UserProfileImage";
@@ -11,6 +10,8 @@ import AuthenticationAdminItems from "@components/includes/widgets/Authenticatio
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSignOut} from "@fortawesome/free-solid-svg-icons/faSignOut";
 import {faEnvelope} from "@fortawesome/free-solid-svg-icons/faEnvelope";
+import {useSelector} from "react-redux";
+import {Store} from "typescript-types";
 
 const AuthenticationLoggedInItemsStyledDiv = styled.div`
   .user-info {
@@ -46,70 +47,68 @@ const AuthenticationLoggedInItemsStyledDiv = styled.div`
 
 interface AuthenticationLoggedInItemsPropTypes {
     onOpenCloseHandler: any,
-    profileImage: string,
-    membership: boolean,
-    allowUserToPost: boolean,
-    username: string,
-    role: string,
-    allowedPostTypeUserCanCreate: string[],
 }
 
-const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> =
-    ({
-         onOpenCloseHandler,
-         membership,
-         allowUserToPost,
-         username,
-         role,
-         allowedPostTypeUserCanCreate
-     }) => {
-        const {t} = useTranslation('common');
-        const dispatch = useAppDispatch()
+interface UserData {
+    username: string;
+    role: string;
+    // add any other properties you expect to be in userData
+}
 
-        return (
-            <AuthenticationLoggedInItemsStyledDiv className={'authentication-logged-in'}>
+const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> = ({onOpenCloseHandler}) => {
 
-                <div className={'user-info'}>
-                    <Link href={`/profile`} onClick={onOpenCloseHandler}>
-                        <div className='user-info-profile-icon'>
-                            <UserProfileImage size={40} profileRedirect={false}/>
-                        </div>
-                        <div className={'username-info'}>
-                            <span className={'username'}>{username}</span>
-                            <span className={'view-profile'}>View Profile</span>
-                        </div>
-                    </Link>
-                </div>
+    const {membership, usersCanMessageEachOther} = useSelector(
+        ({settings}: Store) => settings?.initialSettings?.membershipSettings || {}
+    );
 
+    const {username, role} = useSelector(({user}: Store) => user?.userData || {} as UserData);
+    const {t} = useTranslation('common');
+    const dispatch = useAppDispatch()
 
-                <div className={'logged-items'}>
-                    {membership && <Link href={`/messenger`}
-                                         className='logged-item logged-in'
-                                         onClick={onOpenCloseHandler}>
-                            <div className={'icon-wrapper'}>
-                                <FontAwesomeIcon icon={faEnvelope} style={{width:20,height:20}}/>
-                            </div>
-                            <p className={'text-data'}>{t<string>(`Messages`)}</p>
-                        </Link>}
+    return (
+        <AuthenticationLoggedInItemsStyledDiv className={'authentication-logged-in'}>
+
+            <div className={'user-info'}>
+                <Link href={`/profile`} onClick={onOpenCloseHandler}>
+                    <div className='user-info-profile-icon'>
+                        <UserProfileImage size={40} profileRedirect={false}/>
+                    </div>
+                    <div className={'username-info'}>
+                        <span className={'username'}>{username}</span>
+                        <span className={'view-profile'}>View Profile</span>
+                    </div>
+                </Link>
+            </div>
 
 
-                    {role === 'administrator' && <AuthenticationAdminItems/>}
+            <div className={'logged-items'}>
+                {(membership && usersCanMessageEachOther) && <Link href={`/messenger`}
+                                                                   className='logged-item logged-in'
+                                                                   onClick={onOpenCloseHandler}>
+                    <div className={'icon-wrapper'}>
+                        <FontAwesomeIcon icon={faEnvelope} style={{width: 20, height: 20}}/>
+                    </div>
+                    <p className={'text-data'}>{t<string>(`Messages`)}</p>
+                </Link>}
 
 
-                    <span className='logged-item logged-in sign-out' onClick={(e) => {
-                        dispatch(userLogout(null))
-                        dispatch(loginRegisterForm(false))
-                        onOpenCloseHandler(e)
-                    }}>
+                {role === 'administrator' && <AuthenticationAdminItems/>}
+
+
+                <span className='logged-item logged-in sign-out' onClick={(e) => {
+                    dispatch(userLogout(null))
+                    dispatch(loginRegisterForm(false))
+                    onOpenCloseHandler(e)
+                }}>
                         <div className={'icon-wrapper'}>
-                             <FontAwesomeIcon icon={faSignOut} style={{width:20,height:20}}/>
+                             <FontAwesomeIcon icon={faSignOut} style={{width: 20, height: 20}}/>
                         </div>
                         <p className={'text-data'}>{t<string>(`Logout`)}</p>
                     </span>
 
-                </div>
+            </div>
 
-            </AuthenticationLoggedInItemsStyledDiv>
-        )
-    };
+        </AuthenticationLoggedInItemsStyledDiv>
+    )
+};
 export default AuthenticationLoggedInItems

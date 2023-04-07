@@ -2,6 +2,8 @@ import sharp from 'sharp'
 import fsExtra from 'fs-extra'
 import {userSchema} from 'models';
 
+
+//need to move to file-server
 const userProfileImageUpload =  async (req, res) => {
     const file = req.files.profileImage
     const userId = req.userData._id

@@ -4,7 +4,7 @@ import {useSelector} from "react-redux";
 import dynamic from "next/dynamic";
 import styled from "styled-components";
 import getPageDataAction
-    from "@store_toolkit/clientReducers/postsReducer/getPageDataAction";
+    from "@store_toolkit/clientReducers/postsReducers/getPageDataAction";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";

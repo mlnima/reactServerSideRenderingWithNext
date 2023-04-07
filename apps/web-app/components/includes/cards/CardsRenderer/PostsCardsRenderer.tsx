@@ -57,11 +57,19 @@ const PostsCardsRenderer: FC<CardsRendererPropTypes> =
      }) => {
         const {locale} = useRouter()
 
-        const {numberOfCardsPerRowInMobile,customStyles,cardWidth} = useSelector(({settings}: Store) =>{
-            return{
-                numberOfCardsPerRowInMobile:settings?.initialSettings?.postCardsSettings?.numberOfCardsPerRowInMobile || 2,
-                customStyles:settings?.initialSettings?.postCardsSettings?.customStyles,
-                cardWidth:settings?.initialSettings?.postCardsSettings?.cardsWidthDesktop || 255,
+        const cardMatcher = {
+            'video': VideoPostCard,
+            'event': EventPostCard,
+            'article': ArticlePostCard,
+            'promotion': PromotionPostCard,
+            'Ad': AdPostCard,
+        }
+
+        const {numberOfCardsPerRowInMobile, customStyles, cardWidth} = useSelector(({settings}: Store) => {
+            return {
+                numberOfCardsPerRowInMobile: settings?.initialSettings?.postCardsSettings?.numberOfCardsPerRowInMobile || 2,
+                customStyles: settings?.initialSettings?.postCardsSettings?.customStyles,
+                cardWidth: settings?.initialSettings?.postCardsSettings?.cardsWidthDesktop || 255,
             }
         })
 
@@ -72,8 +80,9 @@ const PostsCardsRenderer: FC<CardsRendererPropTypes> =
                    customStyles={customStyles}>
 
                 {(uniqueData?.posts || posts || []).map((post: Post, index: number) => {
+                    const CardToRender = post?.postType ? cardMatcher?.[post?.postType] || null : null;
                     const postProps = {
-                        views: post.views &&  post.views > 10 ? post.views as unknown as number : 0,
+                        views: post.views && post.views > 10 ? post.views as unknown as number : 0,
                         cardWidth,
                         numberOfCardsPerRowInMobile,
                         //@ts-ignore
@@ -88,30 +97,35 @@ const PostsCardsRenderer: FC<CardsRendererPropTypes> =
                         isSidebar: isSidebar,
                     }
 
+                    if (!!CardToRender) {
+                        return <CardToRender {...postProps} key={index} index={index}/>
+                    }
 
-                    if (post?.postType === 'video' || post?.postType === 'externalVideo') {
-
-                        //@ts-ignore
-                        return <VideoPostCard {...postProps} key={index} index={index}/>
-                    } else if (post?.postType === 'event') {
-                        //@ts-ignore
-                        return <EventPostCard {...postProps} key={index} index={index}/>
-                    } else if (post?.postType === 'promotion' || post?.postType === 'externalPromotion') {
-                        //@ts-ignore
-                        return <PromotionPostCard {...postProps} key={index} index={index}/>
-                    } else if (post?.postType === 'article' || post?.postType === 'externalArticle') {
-                        //@ts-ignore
-                        return <ArticlePostCard {...postProps} key={index} index={index}/>
-                    } else if (post?.postType === 'learn' || post?.postType === 'externalLearn') {
-                        //@ts-ignore
-                        return <LearnPostCard {...postProps} key={index} index={index}/>
-                    } else if (post?.postType === 'Ad') {
-                        //@ts-ignore
-                        return <AdPostCard {...postProps} key={index} index={index}/>
-                    } else return null
                 })}
 
             </Style>
         )
     };
 export default PostsCardsRenderer
+
+
+// if (post?.postType === 'video' || post?.postType === 'externalVideo') {
+//
+//     //@ts-ignore
+//     return <VideoPostCard {...postProps} key={index} index={index}/>
+// } else if (post?.postType === 'event') {
+//     //@ts-ignore
+//     return <EventPostCard {...postProps} key={index} index={index}/>
+// } else if (post?.postType === 'promotion' || post?.postType === 'externalPromotion') {
+//     //@ts-ignore
+//     return <PromotionPostCard {...postProps} key={index} index={index}/>
+// } else if (post?.postType === 'article' || post?.postType === 'externalArticle') {
+//     //@ts-ignore
+//     return <ArticlePostCard {...postProps} key={index} index={index}/>
+// } else if (post?.postType === 'learn' || post?.postType === 'externalLearn') {
+//     //@ts-ignore
+//     return <LearnPostCard {...postProps} key={index} index={index}/>
+// } else if (post?.postType === 'Ad') {
+//     //@ts-ignore
+//     return <AdPostCard {...postProps} key={index} index={index}/>
+// } else return null

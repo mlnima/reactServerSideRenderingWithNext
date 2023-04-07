@@ -1,10 +1,10 @@
 import {AnyAction, combineReducers, configureStore, ThunkAction} from '@reduxjs/toolkit';
 import {Action} from 'redux';
 import {createWrapper, HYDRATE} from 'next-redux-wrapper';
-import postsSlice from "./clientReducers/postsReducer/postsReducer";
+import postsSlice from "./clientReducers/postsReducers/postsReducer";
 import widgetsSlice from "./clientReducers/widgetsReducer";
 import settingsSlice from "./clientReducers/settingsReducer";
-import userSlice from "./clientReducers/userReducer";
+import userSlice from "./clientReducers/userReducers/userReducer";
 import globalStateSlice from "./clientReducers/globalStateReducer";
 import chatroomSlice from "./clientReducers/chatroomReducer";
 //@ts-ignore

@@ -13,10 +13,12 @@ import translateSchema from "./src/translateSchema";
 import userSchema from "./src/userSchema";
 import widgetSchema from "./src/widgetSchema";
 import chatroomMessageSchema from "./src/chatroomMessageSchema";
+import fileSchema from "./src/fileSchema";
 
 
 export {
     settingSchema,
+    fileSchema,
     chatroomMessageSchema,
     chatroomSchema,
     commentSchema,

@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import useTranslation from 'next-translate/useTranslation'
 import styled from "styled-components";
 import {wrapper} from "@store_toolkit/store";
-import {fetchUserResetPassword} from "@store_toolkit/clientReducers/userReducer";
 import _passwordValidator from "@_variables/_clientVariables/clientVariables/_passwordValidator";
 import ValidInput from "@components/RootLayout/common//LoginRegisterPopup/ValidInput";
 import {useAppDispatch, useAppSelector} from "@store_toolkit/hooks";
@@ -10,6 +9,7 @@ import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_g
 import {Store} from "typescript-types";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
+import {resetPasswordAction} from "@store_toolkit/clientReducers/userReducers/resetPasswordAction";
 
 const EditProfileStyledMain = styled.main`
   grid-area: main;
@@ -82,7 +82,7 @@ const edit = () => {
             dispatch(loginRegisterForm('login'))
         }else{
             //@ts-ignore
-            dispatch(fetchUserResetPassword(changePasswordData))
+            dispatch(resetPasswordAction(changePasswordData))
         }
     }
 

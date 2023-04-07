@@ -1,4 +1,4 @@
-import {Post,Meta,PageTypes} from "typescript-types";
+import {Post,Meta,PageTypes,Comment} from "typescript-types";
 
 
 export interface PostStateTypes {
@@ -19,5 +19,5 @@ export interface PostStateTypes {
     totalCount: number,
     post: Post,
     editingPost: Post,
-    comments: {}[],
+    comments: Comment[],
 }

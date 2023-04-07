@@ -20,7 +20,7 @@ const Style = styled.div`
 `;
 
 interface PropTypes {
-    imageUrl: string,
+    imageUrl: any,
     size: number
 }
 

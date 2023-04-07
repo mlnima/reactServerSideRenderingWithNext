@@ -7,7 +7,7 @@ import {useSelector} from "react-redux";
 import SidebarWidgetAreaRenderer from "@components/RootLayout/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
-import getPostsAction from "@store_toolkit/clientReducers/postsReducer/getPostsAction";
+import getPostsAction from "@store_toolkit/clientReducers/postsReducers/getPostsAction";
 import MetaAdminQuickAccessBar from "@components/pagesIncludes/metas/MetaAdminQuickAccessBar";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
 import textContentReplacer from "custom-util/src/string-util/textContentReplacer";
@@ -56,7 +56,7 @@ const categoryPage = () => {
                     {name:category?.name,count:category?.count,siteName:headDataSettings.siteName}
                 ): getTextDataWithTranslation(locale as string,'title',category)}  />
             <main id={'primary'} className="main posts-page">
-                {(!!adminMode && role === 'administrator') && <MetaAdminQuickAccessBar metaId={category._id}/>}
+                {adminMode && <MetaAdminQuickAccessBar metaId={category._id}/>}
                 {category?.name && <PostsPageInfo titleEntry={category.name}/>}
                 <WidgetsRenderer position={'categoryPageTop'}/>
                 <PostsPage renderPagination={true}/>

@@ -7,11 +7,15 @@ import RootLayout from "@components/RootLayout/RootLayout";
 const MyApp: FC<AppProps> = ({Component, ...rest}) => {
     const {store} = wrapper.useWrappedStore(rest);
     return (
+
         <Provider store={store}>
+
             <RootLayout rest={rest}>
                 <Component {...rest.pageProps} />
             </RootLayout>
+
         </Provider>
+
     )
 };
 

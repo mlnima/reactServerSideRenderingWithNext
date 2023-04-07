@@ -2,7 +2,7 @@
 import React, {FC, useEffect, useRef} from "react";
 import styled from "styled-components";
 import {useAppDispatch} from "@store_toolkit/hooks";
-import {_ugcDeletePostImage} from "@store_toolkit/clientReducers/postsReducer/_ugcUploadPostImages";
+import {_ugcDeletePostImage} from "@store_toolkit/clientReducers/postsReducers/_ugcUploadPostImages";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTimes} from "@fortawesome/free-solid-svg-icons/faTimes";
 import {faRotateRight} from "@fortawesome/free-solid-svg-icons/faRotateRight";

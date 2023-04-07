@@ -2,13 +2,12 @@ import React, {useEffect, useState} from 'react';
 import {formatDistance} from 'date-fns';
 import Link from "next/link";
 import styled from "styled-components";
-import {fetchDeleteConversation} from "@store_toolkit/clientReducers/userReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleUser} from "@fortawesome/free-solid-svg-icons/faCircleUser";
 import {faEnvelope} from "@fortawesome/free-solid-svg-icons/faEnvelope";
 import {faTrashCan} from "@fortawesome/free-solid-svg-icons/faTrashCan";
-// import {deleteConversation} from "../../../../store/clientActions/userActions";
+import {deleteConversationAction} from "@store_toolkit/clientReducers/userReducers/deleteConversationAction";
 
 const MessengerConversationPreviewStyledDiv = styled.div`
   width: calc(100% - 20px);
@@ -90,7 +89,9 @@ const MessengerConversationPreview = ({conversationData, userId}) => {
     const dispatch = useAppDispatch()
     const [state, setState] = useState({
         username: '',
-        profileImage: '',
+        profileImage: {
+            filePath: ''
+        },
         messageBody: '',
         date: ''
     });
@@ -101,7 +102,7 @@ const MessengerConversationPreview = ({conversationData, userId}) => {
         setState({
             ...state,
             username: conversationData?.users ? conversationData.users.find(u => u._id !== userId)?.username : '',
-            profileImage: conversationData?.users ? conversationData.users.find(u => u._id !== userId)?.profileImage : '/asset/images/default/no-image-available.png',
+            profileImage: conversationData?.users ? conversationData.users.find(u => u._id !== userId)?.profileImage?.filePath : '/asset/images/default/no-image-available.png',
             messageBody: conversationData?.messages?.[0]?.messageBody,
             date: conversationData?.updatedAt ?
                 formatDistance(new Date(conversationData.updatedAt), new Date(), {addSuffix: true})
@@ -112,7 +113,7 @@ const MessengerConversationPreview = ({conversationData, userId}) => {
 
     const onDeleteConversationHandler = () => {
         conversationData._id ?
-            dispatch(fetchDeleteConversation(conversationData._id)) :
+            dispatch(deleteConversationAction(conversationData._id)) :
             null
     }
 
@@ -121,8 +122,8 @@ const MessengerConversationPreview = ({conversationData, userId}) => {
         <MessengerConversationPreviewStyledDiv>
             <Link href={`/messenger/${conversationData._id}`} className='messenger-conversation-preview'>
 
-                {state.profileImage ?
-                    <img className='messenger-conversation-preview-image' src={state.profileImage} alt=""/> :
+                {state?.profileImage?.filePath ?
+                    <img className='messenger-conversation-preview-image' src={state.profileImage.filePath} alt=""/> :
                     <FontAwesomeIcon className={'messenger-conversation-preview-image'}
                                      icon={faCircleUser} style={{width: 20, height: 20}}/>
                 }

@@ -4,7 +4,7 @@ import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
-import getPostsAction from "@store_toolkit/clientReducers/postsReducer/getPostsAction";
+import getPostsAction from "@store_toolkit/clientReducers/postsReducers/getPostsAction";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
 
 let StyledMain = styled.main`

@@ -6,6 +6,7 @@ cd app/apps/**/node_modules
 node_modules
 
 apps/api-server/public/*
+apps/file-server/public/*
 apps/web-app/public/uploads
 apps/web-app/locales/*/customTranslation.json
 apps/web-app/public/*.xml

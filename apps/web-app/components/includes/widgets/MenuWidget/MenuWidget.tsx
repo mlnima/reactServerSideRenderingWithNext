@@ -1,5 +1,4 @@
-import React, {FC, useState} from "react";
-import {useMemo} from 'react';
+import React, {FC,memo, useState} from "react";
 import styled from "styled-components";
 import MenuWidgetItem from "./MenuWidgetItem";
 import {MenuItem} from "typescript-types";
@@ -110,10 +109,20 @@ interface MenuWidgetPropTypes {
 const MenuWidget: FC<MenuWidgetPropTypes> = ({menuItems}) => {
 
     const [open, setOpen] = useState(false);
-    const menuItemsInOrder = useMemo(() => {
-        return [...menuItems.filter((menuItem: MenuItem) => !menuItem.parent)]
-            .sort((a, b) => a.itemIndex > b.itemIndex ? 1 : -1) || [];
-    }, [menuItems])
+
+
+    const renderMenuItems = [
+        ...menuItems?.filter((menuItem: MenuItem) => !menuItem.parent)
+            ?.sort((a, b) => a.itemIndex > b.itemIndex ? 1 : -1)]
+        .map(menuItem => {
+            return (
+                <MenuWidgetItem menuItem={menuItem}
+                                key={menuItem.itemIndex}
+                                setOpen={setOpen}
+                />
+            )
+        })
+
 
     return (
         <MenuWidgetStyledDiv open={open} className={'menu-widget'}>
@@ -134,17 +143,10 @@ const MenuWidget: FC<MenuWidgetPropTypes> = ({menuItems}) => {
                                      icon={faXmark}
                                      style={{width:25,height:25}}/>
                 </button>
-                {menuItemsInOrder.map(menuItem => {
-                    return (
-                        <MenuWidgetItem menuItem={menuItem}
-                                        key={menuItem.itemIndex}
-                                        setOpen={setOpen}
-                        />
-                    )
-                })}
+                {renderMenuItems}
             </div>
         </MenuWidgetStyledDiv>
     )
 
 };
-export default MenuWidget;
+export default memo(MenuWidget);

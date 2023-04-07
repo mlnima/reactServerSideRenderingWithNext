@@ -13,7 +13,6 @@ interface PropTypes {
 }
 
 const AdminActionOnMessageMenu: FC<PropTypes> = ({chatroomId, messageId}) => {
-    const role = useSelector(({user}) => user?.userData?.role)
     const adminMode = useSelector(({globalState}) => globalState?.adminMode)
 
     const onDeleteMessageHandler = () => {
@@ -22,7 +21,7 @@ const AdminActionOnMessageMenu: FC<PropTypes> = ({chatroomId, messageId}) => {
         }
     }
 
-    if (role === 'administrator' && adminMode) {
+    if (adminMode) {
         return (
             <Style>
                 <button className={'btn btn-danger'} onClick={onDeleteMessageHandler}>

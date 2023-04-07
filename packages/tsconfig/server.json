@@ -10,12 +10,12 @@
     "lib": [
       "es2017",
       "es2018",
-      "ES2021",
-      "ESNext.AsyncIterable",
-      "ESNext.Array",
-      "ESNext.Intl",
-      "ESNext.Symbol",
-      "ScriptHost"
+      "es2021",
+      "esnext.asynciterable",
+      "esnext.array",
+      "esnext.intl",
+      "esnext.symbol",
+      "scripthost"
     ],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true

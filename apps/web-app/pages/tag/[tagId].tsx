@@ -7,7 +7,7 @@ import {useSelector} from "react-redux";
 import SidebarWidgetAreaRenderer from "@components/RootLayout/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {Store} from "typescript-types";
-import getPostsAction from "@store_toolkit/clientReducers/postsReducer/getPostsAction";
+import getPostsAction from "@store_toolkit/clientReducers/postsReducers/getPostsAction";
 import MetaAdminQuickAccessBar from "@components/pagesIncludes/metas/MetaAdminQuickAccessBar";
 import {useRouter} from "next/router";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
@@ -48,7 +48,7 @@ const tagPage = () => {
                     {name:tag?.name,count:tag?.count,siteName:headDataSettings.siteName}
                 ): getTextDataWithTranslation(locale as string,'title',tag,)}  />
             <main id={'primary'} className="main posts-page">
-                {(!!adminMode && role === 'administrator') && <MetaAdminQuickAccessBar metaId={tag._id}/>}
+                {adminMode && <MetaAdminQuickAccessBar metaId={tag._id}/>}
                 {!!tag && <PostsPageInfo titleEntry={tag.name}/> }
                 <WidgetsRenderer position={'tagPageTop'}/>
                 <PostsPage renderPagination={true}/>
@@ -82,11 +82,9 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
                 options: {
                     page: 'tag',
                     setHeadData:true
-                },
+                }
             }
         ))
-
-
     return null
 });
 
