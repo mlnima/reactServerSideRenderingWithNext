@@ -23,12 +23,206 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/messengerControllers/getAConversation.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/messengerControllers/getConversationsList.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/messengerControllers/loadOlderMessages.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/messengerControllers/startAConversation.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/messengerRouter.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/usersControllers/followUser.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/usersControllers/getUserPageData.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/usersControllers/unfollowUser.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/file-server/_utils/fileRemover.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/file-server/controllers/dashboardControllers/fileManagerControllers/deleteFilesController/deleteFiles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/common/messengerAndChatroom/MultimediaInputBox/MultimediaInputBox.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/common/messengerAndChatroom/MultimediaInputBox/MultimediaInputBox.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/chatroom/ChatRoomMessageArea/ChatRoomMessage.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/chatroom/ChatRoomMessageArea/ChatRoomMessageArea.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/chatroom/ChatRoomTools/ChatRoomTools.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/chatroom/ChatRoomTools/RecordedAudioPreview.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/chatroom/ChatRoomTools/SomeoneIsTyping.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/chatroom/ChatRoomTools/Styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/chatroom/ChatRoomTools/UploadImageButton.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/chatroom/ChatRoomTools/VoiceRecorderButton.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/messenger/Message/Message.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/messenger/Message/Message.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/messenger/MessagingArea/MessagingArea.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/messenger/MessagingArea/MessagingArea.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/messenger/MessengerConfigs/MessengerConfigs.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/messenger/MessengerConfigs/MessengerConfigs.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/messenger/MessengerConversationsList/MessengerConversationPreview/MessengerConversationPreview.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/messenger/MessengerConversationsList/MessengerConversationPreview/MessengerConversationPreview.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/messenger/MessengerConversationsList/MessengerConversationsList.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/messenger/MessengerConversationsList/MessengerConversationsList.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/messenger/MessengerHeader/MessengerHeader.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/messenger/MessengerHeader/MessengerHeader.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/messenger/MessengerMultiMediaInputBox/AddedImagePreview.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/messenger/MessengerMultiMediaInputBox/AddedImagePreview.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/messenger/MessengerMultiMediaInputBox/MessengerMultiMediaInputBox.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/messenger/MessengerMultiMediaInputBox/MessengerMultiMediaInputBox.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/messenger/MessengerMultiMediaInputBox/RecordedAudioPreview.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/messenger/MessengerMultiMediaInputBox/RecordedAudioPreview.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/messenger/MessengerMultiMediaInputBox/SomeoneIsTyping.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/messenger/MessengerMultiMediaInputBox/TextInput.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/messenger/MessengerMultiMediaInputBox/TextInput.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/messenger/MessengerMultiMediaInputBox/UploadImageButton.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/messenger/MessengerMultiMediaInputBox/VoiceRecorderButton.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/messenger/page/Page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/messenger/page/Styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/profile/ProfileImage/ProfileImage.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/profile/ProfileImage/ProfileImage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/messengerActions/deleteAConversation.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/messengerActions/getAConversationAction.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/messengerActions/getConversationsListAction.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/messengerActions/loadOlderMessagesAction.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/messengerActions/startAConversationAction.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/messengerReducer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/userReducers/getPrivateMessagesAction.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/client/messenger/getAConversation.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/client/messenger/getConversationsList.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/client/messenger/loadOlderMessages.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/client/messenger/startAConversation.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/client/users/getPrivateMessages.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/client/users/getUserPageData.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/files/deleteFiles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/custom-util/src/file-utils/blobToBase64.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/custom-util/src/vanilla-ui-utils/headerSizeCalculator.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/models/src/messengerConversationMessageSchema.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/models/src/messengerConversationSchema.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/react-hooker-lib/dist/index.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/react-hooker-lib/dist/index.d.ts.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/react-hooker-lib/dist/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/react-hooker-lib/dist/src/useIsMobile.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/react-hooker-lib/dist/src/useIsMobile.d.ts.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/react-hooker-lib/dist/src/useIsMobile.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/react-hooker-lib/dist/tsconfig.tsbuildinfo" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/react-hooker-lib/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/react-hooker-lib/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/react-hooker-lib/src/useIsMobile.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/react-hooker-lib/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/typescript-types/src/messengerTypes/IMessengerConversation.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/typescript-types/src/messengerTypes/IMessengerConversationMessage.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/typescript-types/src/storeTypes/MessengerState.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/clientFileManagerRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/clientFileManagerRouter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/clientMainRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/clientMainRouter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/clientOrdersRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/clientOrdersRouter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/postsRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/postsRouter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/uersControllers/deleteConversation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/messengerControllers/deleteConversation.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/uersControllers/followUser.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/uersControllers/getConversation.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/uersControllers/getConversations.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/uersControllers/getSignedInUserData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/usersControllers/getSignedInUserData.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/uersControllers/getStartConversation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/usersControllers/getStartConversation.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/uersControllers/getUser.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/usersControllers/getUser.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/uersControllers/getUsers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/usersControllers/getUsers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/uersControllers/register.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/usersControllers/register.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/uersControllers/resetPassword.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/usersControllers/resetPassword.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/uersControllers/sendPrivateMessage.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/uersControllers/unfollowUser.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/uersControllers/updateUserData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/usersControllers/updateUserData.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/uersControllers/userLogin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/usersControllers/userLogin.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/usersRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/usersRouter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/middlewares/authMiddleware.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/custom-scripts/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/custom-scripts/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/custom-scripts/src/setImagesToFileCollection.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/custom-scripts/src/fixChanges.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/file-server/controllers/clientControllers/fileManagerControllers/uploadFilesControllers/uploadImage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/file-server/controllers/clientControllers/fileManagerControllers/uploadFilesControllers/uploadImage.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/file-server/controllers/clientControllers/fileManagerControllers/uploadFilesControllers/uploadRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/file-server/controllers/clientControllers/fileManagerControllers/uploadFilesControllers/uploadRouter.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/file-server/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/file-server/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/RootLayout/RootLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/RootLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/commonComponents/HeadSetter/HeadSetter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/global/commonComponents/HeadSetter/HeadSetter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/SiteSettingsSetter/GoogleAnalytics.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/SiteSettingsSetter/GoogleAnalytics.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/socket-server/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/socket-server/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/Styles/GlobalStyles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/global/Styles/GlobalStyles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/messengerPageComponents/MessengerConversationHeader/MessengerConversationHeader.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/messengerPageComponents/MessengerConversationMessageArea/MessengerConversationMessage.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/messengerPageComponents/MessengerConversationMessageArea/MessengerConversationMessage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/messengerPageComponents/MessengerConversationMessageArea/MessengerConversationMessageArea.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/messengerPageComponents/MessengerConversationsList/MessengerConversationPreview.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/messengerPageComponents/MessengerConversationsList/MessengerConversationsList.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/profilePageComponents/ProfileImage/ProfileImage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/userPageComponents/UserPageActionButtons/UserPageActionButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/userPageComponents/UserPageActionButtons/UserPageActionButtons.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/Authentication/AuthenticationLoggedInItems.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/Authentication/AuthenticationLoggedInItems.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/chatroom/ChatRoomMessageArea/ChatRoomMessage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/chatroom/ChatRoomMessageArea/ChatRoomMessage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/chatroom/ChatRoomMessageArea/ChatRoomMessageArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/chatroom/ChatRoomMessageArea/ChatRoomMessageArea.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/chatroom/ChatRoomTools/ChatRoomTools.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/chatroom/ChatRoomTools/ChatRoomTools.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/chatroom/ChatroomTopbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/chatroom/ChatroomTopbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/pages/chatroom/[Identifier].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/chatroom/[Identifier].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/messenger/[conversation].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/messenger/[conversation].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/messenger/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/messenger/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/profile/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/profile/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/profile/posts/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/profile/posts/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/pages/user/[username].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/pages/user/[username].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/chatroomReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/chatroomReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/globalStateReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/globalStateReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/userReducers/followUserAction.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/userReducers/followUserAction.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/userReducers/getSpecificUserDataAction.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/userReducers/getSpecificUserDataAction.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/userReducers/getUserPageDataAction.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/userReducers/getUserPageDataAction.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/userReducers/sendPrivateMessageAction.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/userReducers/sendPrivateMessageAction.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/userReducers/unfollowUserAction.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/userReducers/unfollowUserAction.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/userReducers/userProfileImageUploadAction.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/userReducers/userReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/userReducers/userReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/usersReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/usersReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/client/fileManager/uploadImage.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/client/fileManager/uploadImage.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/client/fileManager/uploadImage.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/client/fileManager/uploadImage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/client/fileManager/uploadImage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/client/fileManager/uploadImage.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/client/users/followUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/client/users/followUser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/client/users/followUser.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/client/users/followUser.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/client/users/getConversation.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/client/users/getConversation.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/client/users/getConversation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/client/users/getConversation.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/client/users/sendPrivateMessage.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/client/users/sendPrivateMessage.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/client/users/sendPrivateMessage.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/client/users/sendPrivateMessage.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/client/users/sendPrivateMessage.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/client/users/sendPrivateMessage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/client/users/sendPrivateMessage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/client/users/sendPrivateMessage.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/client/users/unFollowUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/client/users/unFollowUser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/client/users/unFollowUser.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/client/users/unFollowUser.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/client/users/userProfileImageUpload.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/client/users/userProfileImageUpload.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/client/users/userProfileImageUpload.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/client/users/userProfileImageUpload.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/deleteFile.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/deleteFile.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/lib/AxiosInstance.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/lib/AxiosInstance.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/lib/AxiosInstance.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/lib/AxiosInstance.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/lib/AxiosInstance.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/lib/AxiosInstance.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/lib/FileServerAxiosInstance.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/lib/FileServerAxiosInstance.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/lib/FileServerAxiosInstance.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/lib/FileServerAxiosInstance.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/lib/FileServerAxiosInstance.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/lib/FileServerAxiosInstance.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api-requests/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/tsconfig.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/middleware-utils/authMiddleware.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-server-util/src/middleware-utils/authMiddleware.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/middleware-utils/authMiddleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-server-util/src/middleware-utils/authMiddleware.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/middleware-utils/authMiddleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-server-util/src/middleware-utils/authMiddleware.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-server-util/tsconfig.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/array-utils/sortArrayByPropertyOfObject.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/src/array-utils/sortArrayByPropertyOfObject.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/array-utils/sortArrayByPropertyOfObject.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/src/array-utils/sortArrayByPropertyOfObject.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/array-utils/sortArrayByPropertyOfObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/src/array-utils/sortArrayByPropertyOfObject.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/array-utils/sortArrayByPropertyOfObject.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/src/array-utils/sortArrayByPropertyOfObject.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/tsconfig.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/index.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/index.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/chatroomMessageSchema.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/chatroomMessageSchema.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/chatroomMessageSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/chatroomMessageSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/chatroomMessageSchema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/chatroomMessageSchema.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/conversationSchema.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/conversationSchema.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/conversationSchema.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/conversationSchema.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/conversationSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/conversationSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/conversationSchema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/conversationSchema.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/userSchema.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/userSchema.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/userSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/userSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/userSchema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/userSchema.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/tsconfig.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/typescript-types/src/Chatroom/ChatroomMessage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/typescript-types/src/Chatroom/ChatroomMessage.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/typescript-types/src/storeTypes/ChatroomState.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/typescript-types/src/storeTypes/ChatroomState.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/typescript-types/src/storeTypes/GlobalState.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/typescript-types/src/storeTypes/GlobalState.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/typescript-types/src/storeTypes/Store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/typescript-types/src/storeTypes/Store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/typescript-types/src/storeTypes/UserState.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/typescript-types/src/storeTypes/UserState.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/buttonsStyle.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/src/buttonsStyle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/buttonsStyle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/src/buttonsStyle.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/tsconfig.tsbuildinfo" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,31 +289,31 @@
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;18.12.1&quot;,
     &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;18.15.11&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/Dev Project/reactServerSideRenderingWithNext/apps/file-server/workers/clientWorkers/uploadImage&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/Dev Project/reactServerSideRenderingWithNext/apps/web-app/components/common/messengerAndChatroom/MultimediaInputBox&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.breadcrumbs&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
     &quot;ts.external.directory.path&quot;: &quot;F:\\Dev Project\\reactServerSideRenderingWithNext\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-app\components\common\messengerAndChatroom\MultimediaInputBox" />
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\ssl" />
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\react-custom-hooks" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\file-server\workers\clientWorkers\uploadImage" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\file-server\controllers" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\file-server" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-app\components\RootLayout" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\api-server\controllers\clientControllers\chatroomControllers" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-app\components\global\commonComponents\googleAnalytics" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\custom-util\src\analytics-utils" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-app\store_toolkit\clientReducers\userReducers" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\trash" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-dashboard-app\src\components\pages\settings" />
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\trash\messengerLegacy\bk" />
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\trash\messengerLegacy" />
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\api-server\controllers\clientControllers\messengerControllers" />
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-app\components\pagesIncludes\messenger\MessengerMultiMediaInputBox" />
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\web-app\components\pagesIncludes\messenger\page" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -127,10 +321,7 @@
       <command value="nextEnv" />
     </option>
   </component>
-  <component name="RunManager" selected="Node.js.temp.js">
-    <configuration name="temp.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/tempFiles/temp.js" working-dir="$PROJECT_DIR$/tempFiles">
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="npm.build">
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -151,11 +342,11 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="setImagesToFileCollection" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+    <configuration name="outdate:web-app-packages" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
-        <script value="setImagesToFileCollection" />
+        <script value="outdate:web-app-packages" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -171,13 +362,23 @@
       <envs />
       <method v="2" />
     </configuration>
+    <configuration name="update:packages" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="update:packages" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.outdate:web-app-packages" />
         <item itemvalue="npm.dev" />
-        <item itemvalue="npm.setImagesToFileCollection" />
-        <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
-        <item itemvalue="Node.js.temp.js" />
+        <item itemvalue="npm.update:packages" />
+        <item itemvalue="npm.start" />
       </list>
     </recent_temporary>
   </component>
@@ -1604,7 +1805,36 @@
       <workItem from="1680671363421" duration="22677000" />
       <workItem from="1680725590283" duration="475000" />
       <workItem from="1680790436768" duration="8516000" />
-      <workItem from="1680844046744" duration="15813000" />
+      <workItem from="1680844046744" duration="20239000" />
+      <workItem from="1680943941244" duration="16190000" />
+      <workItem from="1681040514150" duration="10756000" />
+      <workItem from="1681110843606" duration="50113000" />
+      <workItem from="1681191117539" duration="26751000" />
+      <workItem from="1681243173918" duration="1663000" />
+      <workItem from="1681295576488" duration="11400000" />
+      <workItem from="1681373025767" duration="4971000" />
+      <workItem from="1681380555576" duration="16728000" />
+      <workItem from="1681408151967" duration="15402000" />
+      <workItem from="1681425698295" duration="4231000" />
+      <workItem from="1681457521911" duration="3680000" />
+      <workItem from="1681461285728" duration="22737000" />
+      <workItem from="1681495366582" duration="6594000" />
+      <workItem from="1681504306317" duration="13685000" />
+      <workItem from="1681546816212" duration="31362000" />
+      <workItem from="1681651776680" duration="2846000" />
+      <workItem from="1681718615718" duration="4462000" />
+      <workItem from="1681729721768" duration="9013000" />
+      <workItem from="1681762488912" duration="10542000" />
+      <workItem from="1681803267169" duration="5377000" />
+      <workItem from="1681835397540" duration="595000" />
+      <workItem from="1681849722615" duration="3201000" />
+      <workItem from="1681898577158" duration="30352000" />
+      <workItem from="1681998389449" duration="4035000" />
+      <workItem from="1682077907520" duration="19614000" />
+      <workItem from="1682159198204" duration="13831000" />
+      <workItem from="1682257084183" duration="23054000" />
+      <workItem from="1682334150759" duration="17278000" />
+      <workItem from="1682415874323" duration="22594000" />
     </task>
     <servers />
   </component>
@@ -1612,11 +1842,16 @@
     <option name="version" value="3" />
     <option name="exactExcludedFiles">
       <list>
+        <option value="$PROJECT_DIR$/packages/api-requests/src/client/messenger/getAConversation.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/client/messenger/getAConversation.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/client/messenger/getAConversation.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-server-util/src/shouldCompress.js" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/client/settings/getSettings.d.ts" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/metas/deleteMeta.js" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/common/users/loginUser.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/client/users/getUserPageData.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/socket-utils/socketIoClient.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/client/users/getPrivateMessages.d.ts" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/client/users/getStartConversation.js" />
         <option value="$PROJECT_DIR$/packages/models/src/conversationSchema.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/client/metas/resetMetaImage.d.ts.map" />
@@ -1624,6 +1859,7 @@
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/updatePost.js" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/client/widgets/saveFormData.d.ts" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/client/users/sendPrivateMessage.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/client/users/getUserPageData.d.ts" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/metas/updateMeta.d.ts" />
         <option value="$PROJECT_DIR$/packages/models/src/postSchema.js" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/client/widgets/getWidgets.js" />
@@ -1631,6 +1867,7 @@
         <option value="$PROJECT_DIR$/packages/models/src/metaSchemas/tagSchema.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/client/posts/likePost.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-server-util/src/file-utils/renameFile.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/client/users/getPrivateMessages.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/bulkActionOnPosts.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/metas/updateMeta.js" />
         <option value="$PROJECT_DIR$/packages/custom-server-util/src/connectToDatabase.d.ts" />
@@ -1693,10 +1930,10 @@
         <option value="$PROJECT_DIR$/packages/models/src/log.d.ts" />
         <option value="$PROJECT_DIR$/packages/ui/src/inputsStyles.d.ts" />
         <option value="$PROJECT_DIR$/packages/data-structures/src/widgetsStaticPositions.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/client/messenger/getConversationsList.d.ts" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/metas/setMetaThumbnailsAndCount.js" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/client/posts/likePost.js" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/url-util/isImageAllowedForNextImage.d.ts" />
-        <option value="$PROJECT_DIR$/packages/api-requests/src/client/users/userProfileImageUpload.js" />
         <option value="$PROJECT_DIR$/packages/custom-server-util/src/connectToDatabase.js" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/client/widgets/getUncachedWidgetsForAdmin.d.ts" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/readTranslationFile.d.ts" />
@@ -1747,12 +1984,14 @@
         <option value="$PROJECT_DIR$/packages/api-requests/src/client/posts/getPosts.d.ts" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/uploadFile.js" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/chatrooms/getChatroom.js" />
-        <option value="$PROJECT_DIR$/apps/web-app/components/includes/messengerPageComponents/MessengerConversationMessageArea/MessengerConversationMessage.d.ts" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/lib/FileServerAxiosInstance.d.ts" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/client/widgets/getUncachedWidgetsForAdmin.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/models/src/orderSchema.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/files/deleteFiles.d.ts" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/widgets/createNewWidget.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/files/deleteFiles.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/chatrooms/deleteChatroom.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/files/deleteFiles.js" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/chatrooms/updateChatroom.js" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/generateNewAPIKey.d.ts" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/generateNewAPIKey.js" />
@@ -1762,6 +2001,7 @@
         <option value="$PROJECT_DIR$/packages/models/src/postSchema.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/convertMetasTypeToPlural.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/url-util/isImageAllowedForNextImage.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/custom-util/src/vanilla-ui-utils/headerSizeCalculator.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/url-util/isUserFromExternalLink.js" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/scrapYoutubeInfo.d.ts" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/settings/updateSetting.d.ts" />
@@ -1841,15 +2081,17 @@
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/textContentReplacer.js" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/client/posts/disLikePost.js" />
         <option value="$PROJECT_DIR$/packages/models/src/orderSchema.js" />
-        <option value="$PROJECT_DIR$/packages/api-requests/src/client/users/getConversation.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/checkAndRemoveDeletedVideos.js" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/chatrooms/getChatrooms.d.ts" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/checkAndRemoveDeletedVideos.d.ts" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/client/posts/attendToEvent.d.ts" />
+        <option value="$PROJECT_DIR$/packages/custom-util/src/vanilla-ui-utils/headerSizeCalculator.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/exportPosts.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/deleteFile.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/client/messenger/getConversationsList.js" />
         <option value="$PROJECT_DIR$/packages/ui/src/SvgRenderer.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/common/users/loginUser.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/client/users/getPrivateMessages.js" />
         <option value="$PROJECT_DIR$/packages/custom-server-util/index.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/convertMetasTypeToPlural.d.ts" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/deleteUser.d.ts.map" />
@@ -1866,7 +2108,6 @@
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/convertMetasTypeToSingular.js" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/array-utils/arraySortRandom.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/createFile.d.ts.map" />
-        <option value="$PROJECT_DIR$/packages/api-requests/src/client/users/getConversation.d.ts" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/readPath.d.ts" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/client/metas/resetMetaImage.d.ts" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/bulkActionOnPosts.js" />
@@ -1951,7 +2192,6 @@
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/pages/updatePage.d.ts" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/updateTranslationFile.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/client/chatrooms/getChatroom.d.ts" />
-        <option value="$PROJECT_DIR$/packages/api-requests/src/client/users/userProfileImageUpload.d.ts" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/widgets/updateWidget.d.ts" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/exportPosts.d.ts" />
         <option value="$PROJECT_DIR$/packages/models/src/pageSchema.js" />
@@ -1996,7 +2236,6 @@
         <option value="$PROJECT_DIR$/packages/api-requests/src/common/users/loginUser.js" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/chatrooms/createChatroom.d.ts" />
         <option value="$PROJECT_DIR$/packages/models/src/userSchema.d.ts" />
-        <option value="$PROJECT_DIR$/packages/api-requests/src/client/users/userProfileImageUpload.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/models/src/commentSchema.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/users/changePassword.d.ts" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/fileManager/createFile.js" />
@@ -2022,7 +2261,6 @@
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/updatePost.d.ts" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/exportPosts.js" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/comments/deleteComments.js" />
-        <option value="$PROJECT_DIR$/packages/api-requests/src/client/users/getConversation.js" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/convertMetasTypeToPlural.js" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/client/posts/attendToEvent.js" />
         <option value="$PROJECT_DIR$/packages/data-structures/src/videoQualities.d.ts.map" />
@@ -2047,8 +2285,10 @@
         <option value="$PROJECT_DIR$/packages/api-requests/src/client/users/sendPrivateMessage.d.ts" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/client/settings/getUncachedSettings.d.ts" />
         <option value="$PROJECT_DIR$/packages/models/index.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/client/users/getUserPageData.js" />
         <option value="$PROJECT_DIR$/packages/data-structures/src/databaseSelectFieldsForPostCards.d.ts" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/client/users/followUser.d.ts" />
+        <option value="$PROJECT_DIR$/packages/custom-util/src/vanilla-ui-utils/headerSizeCalculator.js" />
         <option value="$PROJECT_DIR$/packages/models/src/metaSchema.js" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/device-util/touchDeviceDetector.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/posts/postDataScrappers.d.ts" />
@@ -2075,6 +2315,7 @@
         <option value="$PROJECT_DIR$/packages/custom-server-util/src/middleware-utils/adminAuthMiddleware.js" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/common/users/getSignedInUserData.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/metas/deleteMeta.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/client/messenger/getConversationsList.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/client/widgets/saveFormData.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/data-structures/src/databaseSelectFieldsForPostCards.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/client/posts/getPost.js" />
@@ -2096,6 +2337,15 @@
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/chatrooms/createChatroom.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/api-requests/src/dashboard/pages/deletePage.js" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/socket-utils/socketIoClient.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/models/src/messengerConversationSchema.js" />
+        <option value="$PROJECT_DIR$/packages/models/src/messengerConversationSchema.d.ts" />
+        <option value="$PROJECT_DIR$/packages/models/src/messengerConversationSchema.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/client/messenger/startAConversation.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/client/messenger/startAConversation.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/client/messenger/startAConversation.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/client/messenger/loadOlderMessages.js" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/client/messenger/loadOlderMessages.d.ts" />
+        <option value="$PROJECT_DIR$/packages/api-requests/src/client/messenger/loadOlderMessages.d.ts.map" />
       </list>
     </option>
   </component>
@@ -2462,10 +2712,28 @@
           <option name="timeStamp" value="187" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/apps/web-app/components/pagesIncludes/chatroom/ChatRoomTools/ChatRoomTools.tsx</url>
-          <line>12</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="188" />
+          <url>file://$PROJECT_DIR$/apps/socket-server/index.ts</url>
+          <line>137</line>
+          <option name="timeStamp" value="189" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/apps/web-app/components/pagesIncludes/chatroom/ChatRoomTools/VoiceRecorderButton.tsx</url>
+          <line>15</line>
+          <option name="timeStamp" value="192" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/apps/web-app/pages/profile/index.tsx</url>
+          <option name="timeStamp" value="194" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/apps/web-app/components/pagesIncludes/chatroom/ChatroomTopbar.tsx</url>
+          <line>88</line>
+          <option name="timeStamp" value="195" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/apps/web-app/components/pagesIncludes/messenger/MessengerMultiMediaInputBox/UploadImageButton.tsx</url>
+          <line>16</line>
+          <option name="timeStamp" value="196" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

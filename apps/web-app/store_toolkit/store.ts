@@ -7,11 +7,13 @@ import settingsSlice from "./clientReducers/settingsReducer";
 import userSlice from "./clientReducers/userReducers/userReducer";
 import globalStateSlice from "./clientReducers/globalStateReducer";
 import chatroomSlice from "./clientReducers/chatroomReducer";
+import messengerSlice from "@store_toolkit/clientReducers/messengerReducer";
 //@ts-ignore
 const debugDev = process.env.NODE_ENV !== 'production' || process.env.NEXT_PUBLIC_PRODUCTION_URL.includes(':3000')
 const debug = false;
 
 const combinedReducer = combineReducers({
+    messenger:messengerSlice,
     settings: settingsSlice,
     user: userSlice,
     widgets: widgetsSlice,

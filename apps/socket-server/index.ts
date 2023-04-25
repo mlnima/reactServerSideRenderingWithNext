@@ -8,9 +8,10 @@ connectToDatabase('Socket Server')
 import http from 'http'
 import express from 'express'
 import cors from 'cors'
-import {chatroomSchema, userSchema} from 'models'
+import {chatroomSchema, messengerConversationMessageSchema, messengerConversationSchema, userSchema} from 'models'
 import {uniqArrayBy} from "custom-util";
 import chatroomMessageSchema from "models/src/chatroomMessageSchema";
+
 
 const app = express();
 const server = http.createServer(app);
@@ -52,8 +53,7 @@ server.listen(process.env.SOCKET_SERVER_PORT || 3005, (error) => {
 const creatNewMessage = async (messageData) => {
     try {
         const messageToSave = new chatroomMessageSchema(messageData)
-        const savedMessage = await messageToSave.save()
-        return savedMessage
+        return await messageToSave.save()
     } catch (error) {
         console.log(error)
     }
@@ -61,7 +61,7 @@ const creatNewMessage = async (messageData) => {
 
 chatroomSchema.find({}).select('_id').exec().then(async (chatrooms) => {
     chatroomsList = chatrooms.reduce((final, current) => {
-        final = [...final,current._id.toString()]
+        final = [...final, current._id.toString()]
         return final
     }, [])
 })
@@ -69,10 +69,11 @@ chatroomSchema.find({}).select('_id').exec().then(async (chatrooms) => {
 
 io.on('connection', socket => {
 
+    //Common
     socket.on("disconnect", async () => {
         try {
             onlineUsers = onlineUsers.filter(u => u.socketId !== socket.id)
-            for await(const chatroom of chatroomsList){
+            for await(const chatroom of chatroomsList) {
                 io.in(chatroom.toString()).emit('userListUpdated', onlineUsers)
             }
         } catch (err) {
@@ -84,46 +85,97 @@ io.on('connection', socket => {
         socket.emit('takeSocketLists', (io.sockets?.server?.engine?.clientsCount || 1) - 1)
     })
 
-    socket.on('setIdAndJoinConversation', async (userID, conversationId) => {
-        socket.join(conversationId)
-    })
+
+    //Messenger
+
+    // socket.on('setIdAndJoinConversation', async (userID, conversationId) => {
+    //     socket.join(conversationId)
+    // })
 
     socket.on('joinConversation', conversation => {
+        console.log('console=> ', socket.id, 'joined to ', conversation)
         socket.join(conversation)
     })
 
-    socket.on('sendMessageToConversation', (messageData, conversation) => {
-        io.in(conversation).emit('receiveMessageFromConversation', messageData)
+    socket.on('sendPrivateMessage', async (messageData) => {
+
+        try {
+            const messageToSave = new messengerConversationMessageSchema(messageData)
+            const savedMessage = await messageToSave.save()
+
+            if (savedMessage){
+               await messengerConversationSchema.findByIdAndUpdate(messageData.conversation, {$push:{messages:savedMessage._id}})
+               io.in(messageData.conversation).emit('getPrivateMessage', savedMessage)
+            }
+
+        } catch (error) {
+
+        }
+
+
     })
 
-//--------------------chatroom--------------------------
+
+//Chatroom
+
     //step1
     socket.on('JoinSocketAndGetInitialData', async ({chatroomId}) => {
-        const recentChatRoomMessages = await chatroomMessageSchema.find({chatroom: chatroomId})
+        const recentChatRoomMessages = await chatroomMessageSchema
+            .find({chatroom: chatroomId})
             .populate({
                 path: 'author',
-                select: 'username profileImage',
+                select: ['username', 'profileImage', 'role'],
                 model: userSchema,
                 populate: {
                     path: 'profileImage',
                     model: 'file',
-                }
-            }).exec()
+                },
+            })
+            .sort({createdAt: -1})
+            .limit(10)
+            .exec();
 
-        socket.join(chatroomId)
         const dataToSend = {
             recentChatRoomMessages: recentChatRoomMessages || [],
             onlineUsersList: onlineUsers,
             socketId: socket.id
         }
-
+        socket.join(chatroomId)
         io.to(socket.id).emit('JoinSocketAndGetInitialData', dataToSend)
+    });
+
+
+    socket.on('loadOlderMessages', async data => {
+
+        try {
+            const currentlyLoadedMessagesCount = data.currentlyLoadedMessagesCount;
+
+            const olderMessages = await chatroomMessageSchema
+                .find({chatroom: data.chatroomId})
+                .populate({
+                    path: 'author',
+                    select: 'username profileImage',
+                    model: userSchema,
+                    populate: {
+                        path: 'profileImage',
+                        model: 'file',
+                    }
+                })
+                .skip(currentlyLoadedMessagesCount)
+                .sort({createdAt: -1})
+                .limit(5)
+                .exec();
+
+            io.to(socket.id).emit('olderMessagesLoaded', {messages: olderMessages});
+        } catch (error) {
+            console.log(error);
+        }
     });
 
     //step2
     socket.on('joinUserToTheRoom', async userData => {
         try {
-            onlineUsers =  uniqArrayBy([
+            onlineUsers = uniqArrayBy([
                 ...onlineUsers,
                 {...userData.author, socketId: socket.id}
             ], 'username');
@@ -136,13 +188,19 @@ io.on('connection', socket => {
     socket.on('messageToChatroom', async newMessageData => {
         try {
             const chatroomMessagesCount = await chatroomMessageSchema.countDocuments({chatroom: newMessageData?.chatroom}).exec()
-            if (chatroomMessagesCount > 20) {
+            if (chatroomMessagesCount > 200) {
                 await chatroomMessageSchema.findOneAndDelete({chatroom: newMessageData?.chatroom}).sort('_id').exec()
             }
+
             const savedMessage = await creatNewMessage(newMessageData)
             const savedMessageToReturn = await chatroomMessageSchema.findById(savedMessage).populate({
                 path: 'author',
-                select: 'username profileImage'
+                select: ['username', 'profileImage', 'role'],
+                model: userSchema,
+                populate: {
+                    path: 'profileImage',
+                    model: 'file',
+                },
             }).exec()
             io.in(newMessageData?.chatroom).emit('messageFromChatroom', savedMessageToReturn)
         } catch (err) {

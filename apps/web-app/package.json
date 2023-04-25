@@ -86,7 +86,8 @@
     "styled-components": "^5.3.9",
     "tsconfig": "*",
     "typescript-types": "*",
-    "ui": "*"
+    "ui": "*",
+    "react-hooker-lib": "*"
   },
   "_moduleAliases": {
     "@_variables": "_variables"

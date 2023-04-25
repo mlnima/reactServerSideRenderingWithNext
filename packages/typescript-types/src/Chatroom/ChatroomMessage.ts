@@ -2,7 +2,8 @@ import {Chatroom} from "./Chatroom";
 import {User} from "../User";
 
 export interface ChatroomMessage{
-    chatroom: Chatroom,
+    _id:string,
+    chatroom: string,
     author: User,
     type:string,
     messageData:string,
@@ -11,6 +12,7 @@ export interface ChatroomMessage{
 }
 
 export interface ChatroomMessageRaw{
+    _id:string,
     chatroom: string,
     author: string,
     type:string,

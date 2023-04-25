@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect, useRef, useState} from 'react';
 import {socket} from 'custom-util/src/socket-utils/socketIoClient';
 import ChatRoomMessageArea from "@components/pagesIncludes/chatroom/ChatRoomMessageArea/ChatRoomMessageArea";
 import ChatRoomTools from "@components/pagesIncludes/chatroom/ChatRoomTools/ChatRoomTools";
@@ -17,6 +17,10 @@ import getChatroom from "api-requests/src/client/chatrooms/getChatroom";
 import dynamic from "next/dynamic";
 import ChatroomTopbar from "@components/pagesIncludes/chatroom/ChatroomTopbar";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
+import Csr from "@components/global/commonComponents/Csr";
+import headerSizeCalculator from "custom-util/src/vanilla-ui-utils/headerSizeCalculator";
+import {loading} from "@store_toolkit/clientReducers/globalStateReducer";
+
 const Soft404 = dynamic(() => import('@components/includes/Soft404/Soft404'))
 
 interface StylePropTypes {
@@ -33,8 +37,7 @@ const Style = styled.div<StylePropTypes>`
       right: 0;
       bottom: 0;
       z-index: 11;
-  `
-                  : ''}
+  ` : ''}
 
   width: 100%;
   display: grid;
@@ -53,89 +56,144 @@ interface PropTypes {
 }
 
 const chatRoom: FC<PropTypes> = ({pageData}) => {
-    const dispatch = useAppDispatch()
-    const user = useSelector((store: Store) => store.user)
-    const [onlineUserListVisibility, setOnlineUserListVisibility] = useState(false)
-    const [isJoined, setIsJoined] = useState(false)
-    const [headerSize, setHeaderSize] = useState(0)
-    const isMaximized = useSelector(({chatroom}: Store) => chatroom.isMaximized)
+    const [autoScroll, setAutoScroll] = useState(true);
+    const messageAreaRef = useRef<HTMLDivElement | null>(null);
+    const dispatch = useAppDispatch();
+    const user = useSelector((store: Store) => store.user);
+    const [onlineUserListVisibility, setOnlineUserListVisibility] = useState(false);
+    const [isJoined, setIsJoined] = useState(false);
+    const [headerSize, setHeaderSize] = useState(0);
+    const {isMaximized} = useSelector(({chatroom}: Store) => chatroom);
 
     useEffect(() => {
-        if (!!pageData?.chatroom?._id && user.loggedIn && !isJoined && !!user.socketId) {
-                setIsJoined(true)
-                const userDataForJoiningRoom = {
-                    chatroomId: pageData?.chatroom?._id,
-                    author: {
-                        _id: user.userData?._id,
-                        username: user.userData?.username,
-                        profileImage: user.userData?.profileImage,
-                    },
-                    socketId: user.socketId
-                }
-                socket.emit('joinUserToTheRoom', userDataForJoiningRoom)
-        }
-    }, [user.loggedIn, pageData?.chatroom?._id,user.socketId]);
+        if (!pageData?.chatroom?._id || !user.loggedIn || isJoined || !user.socketId) return;
+        setIsJoined(true);
+        const userDataForJoiningRoom = {
+            chatroomId: pageData?.chatroom?._id,
+            author: {
+                _id: user.userData?._id,
+                username: user.userData?.username,
+                profileImage: user.userData?.profileImage,
+            },
+            socketId: user.socketId,
+        };
+        socket.emit('joinUserToTheRoom', userDataForJoiningRoom);
+    }, [user.loggedIn, pageData?.chatroom?._id, user.socketId]);
 
     useEffect(() => {
-        if (pageData?.chatroom?._id) {
-            setTimeout(() => {
-                socket.emit('JoinSocketAndGetInitialData', {chatroomId: pageData?.chatroom?._id})
-            }, 50)
-        }
+        if (!pageData?.chatroom?._id) return;
+        setTimeout(() => {
+            socket.emit('JoinSocketAndGetInitialData', {chatroomId: pageData?.chatroom?._id});
+        }, 50);
     }, [pageData?.chatroom?._id, pageData?.chatroom, user.loggedIn]);
 
     useEffect(() => {
-        socket.on('userListUpdated', (chatroomOnlineUsers: { username: string }[]) => {
-            dispatch(setOnlineUsers(uniqArrayBy(chatroomOnlineUsers, 'username')))
-        })
+        const handleUserListUpdated = (chatroomOnlineUsers: { username: string }[]) => {
+            dispatch(setOnlineUsers(uniqArrayBy(chatroomOnlineUsers, 'username')));
+        };
 
-        socket.on('messageFromChatroom', (newMessageData: object) => {
-            dispatch(newMessage(newMessageData))
-        })
+        const handleMessageFromChatroom = (newMessageData: object) => {
+            dispatch(newMessage(newMessageData));
+        };
 
-        socket.on('JoinSocketAndGetInitialData', (data: { socketId: string, recentChatRoomMessages: {}[], onlineUsersList: {}[] }) => {
-            dispatch(dispatchSocketId(data.socketId))
-            dispatch(setOnlineUsers(uniqArrayBy(data.onlineUsersList, 'username')))
-            dispatch(setMessages(data?.recentChatRoomMessages))
-        })
-    }, []);
+        const handleJoinSocketAndGetInitialData = (data: {
+            socketId: string,
+            recentChatRoomMessages: {}[],
+            onlineUsersList: {}[],
+        }) => {
+            dispatch(dispatchSocketId(data.socketId));
+            dispatch(setOnlineUsers(uniqArrayBy(data.onlineUsersList, 'username')));
+            dispatch(setMessages(data?.recentChatRoomMessages));
+            if (!messageAreaRef?.current) return;
+            setTimeout(() => {
+                if (messageAreaRef?.current) {
+                    (messageAreaRef.current as HTMLDivElement).scroll({
+                        top: (messageAreaRef.current as HTMLDivElement).scrollHeight + 50,
+                        behavior: 'smooth',
+                    });
+                }
 
-    useEffect(() => {
-        setTimeout(() => {
-            if (window.innerWidth > 768) {
-                setOnlineUserListVisibility(true)
+            }, 500);
+        };
+
+        const handleOlderMessagesLoaded = (data: { messages: {}[] }) => {
+            dispatch(setMessages(data?.messages));
+
+            setTimeout(() => {
+                dispatch(loading(false));
+                if (messageAreaRef.current){
+                    messageAreaRef.current.scroll({
+                        top: 1,
+                        behavior: 'smooth',
+                    });
+                }
+
+            }, 500);
+        };
+
+        socket.on('userListUpdated', handleUserListUpdated);
+        socket.on('messageFromChatroom', handleMessageFromChatroom);
+        socket.on('JoinSocketAndGetInitialData', handleJoinSocketAndGetInitialData);
+        socket.on('olderMessagesLoaded', handleOlderMessagesLoaded);
+
+        if (typeof window !== 'undefined'){
+            if (window.innerWidth > 768){
+                setOnlineUserListVisibility(true);
             }
-            //calculating available space for chat area
-            //@ts-ignore
-            const topbarHeight = document.querySelector('.topbar')?.offsetHeight || 0;
-            //@ts-ignore
-            const headerHeight = document.querySelector('.header')?.offsetHeight || 0;
-            //@ts-ignore
-            const navigationHeight = document.querySelector('.navigation')?.offsetHeight || 0;
-            setHeaderSize(topbarHeight + headerHeight + navigationHeight + 90)
-        }, 100)
+            setHeaderSize(headerSizeCalculator()+ 90)
+        }
+
+        return () => {
+            socket.off('userListUpdated', handleUserListUpdated);
+            socket.off('messageFromChatroom', handleMessageFromChatroom);
+            socket.off('JoinSocketAndGetInitialData', handleJoinSocketAndGetInitialData);
+            socket.off('olderMessagesLoaded', handleOlderMessagesLoaded);
+        };
+
     }, []);
 
+    if (!pageData?.chatroom?._id) {
+        return <Soft404/>;
+    }
 
-    if (pageData?.chatroom?._id) {
-        return (
-            <Style id={'full-width-content'} userList={onlineUserListVisibility} isMaximized={isMaximized}>
-                <HeadSetter title={pageData?.chatroom.name} description={pageData?.chatroom.description} keywords={pageData?.chatroom.tags}/>
-                <ChatroomTopbar chatrooms={pageData?.chatrooms}
-                                chatroomId={pageData?.chatroom?._id}
-                                onlineUserListVisibility={onlineUserListVisibility}
-                                onOnlineUserListVisibilityChangeHandler={() => setOnlineUserListVisibility(!onlineUserListVisibility)}/>
-                <ChatRoomMessageArea chatroomId={pageData?.chatroom?._id} headerSize={headerSize}/>
+    return (
+        <Csr>
+            <Style
+                id={"full-width-content"}
+                userList={onlineUserListVisibility}
+                isMaximized={isMaximized}
+            >
+                <HeadSetter
+                    title={pageData?.chatroom.name}
+                    description={pageData?.chatroom.description}
+                    keywords={pageData?.chatroom.tags}
+                />
+                <ChatroomTopbar
+                    chatrooms={pageData?.chatrooms}
+                    chatroomId={pageData?.chatroom?._id}
+                    setAutoScroll={setAutoScroll}
+                    autoScroll={autoScroll}
+                    onlineUserListVisibility={onlineUserListVisibility}
+                    onOnlineUserListVisibilityChangeHandler={() =>
+                        setOnlineUserListVisibility(!onlineUserListVisibility)
+                    }
+                />
+
+                <ChatRoomMessageArea
+                    chatroomId={pageData?.chatroom?._id}
+                    messageAreaRef={messageAreaRef}
+                    autoScroll={autoScroll}
+                    setAutoScroll={setAutoScroll}
+                    headerSize={headerSize}
+                />
+
                 <ChatRoomTools chatroomId={pageData?.chatroom?._id}/>
                 {onlineUserListVisibility && <ChatRoomOnlineUsersList/>}
             </Style>
-        );
-    } else {
-        return <Soft404/>
-    }
-
-
+        </Csr>
+    );
 };
+
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
@@ -163,3 +221,12 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 
 
 export default chatRoom;
+
+
+
+
+
+
+
+
+

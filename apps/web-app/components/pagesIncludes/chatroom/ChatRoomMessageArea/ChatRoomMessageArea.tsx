@@ -1,84 +1,100 @@
 import React, {useEffect, useRef, memo, FC} from 'react';
-import ChatRoomMessage from "./ChatRoomMessage";
-import {useSelector} from "react-redux";
-import styled from "styled-components";
-import {useRouter} from "next/router";
-import {Store,ChatroomMessage} from "typescript-types";
+import ChatRoomMessage from './ChatRoomMessage';
+import {useSelector} from 'react-redux';
+import {Store, ChatroomMessage} from 'typescript-types';
+import {socket} from 'custom-util/src/socket-utils/socketIoClient';
+import sortArrayByPropertyOfObject from 'custom-util/src/array-utils/sortArrayByPropertyOfObject';
+import {useAppDispatch} from '@store_toolkit/hooks';
+import {loading} from '@store_toolkit/clientReducers/globalStateReducer';
+import Styles from './ChatRoomMessageArea.styles';
 
-const ChatRoomMessageAreaStyledMain = styled.main`
-  height: ${({headerSize,isMaximized}:StylePropTypes)=> isMaximized? `calc(100vh - 90)`: `calc(100vh - ${headerSize}px )` } ;
-  margin: 0;
-  width: 100%;
-  overflow-y: scroll;
-  display: flex;
-  flex-direction: column;
-  grid-area: chatroomMessagingArea;
-  padding-bottom: 50px;
-  box-sizing: border-box;
-  background-color: var(--main-background-color,#000);
-  //margin-bottom: 50px;
-`
-
-interface StylePropTypes{
-    headerSize:number,
-    isMaximized:boolean
+interface IProp {
+    chatroomId: string;
+    headerSize: number;
+    messageAreaRef: any;
+    autoScroll: boolean;
+    setAutoScroll: Function;
 }
 
-interface PropTypes{
-    chatroomId:string,
-    headerSize:number
-}
-const ChatRoomMessageArea:FC<PropTypes> = ({chatroomId,headerSize}) => {
+const ChatRoomMessageArea: FC<IProp> = (
+    {
+        chatroomId,
+        headerSize,
+        messageAreaRef,
+        autoScroll,
+        setAutoScroll
+    }) => {
 
-    const {locale} = useRouter()
-    const messageAreaRef = useRef(null)
-    const isMaximized = useSelector(({chatroom}: Store) => chatroom.isMaximized)
-    const {chatroomMessages} = useSelector(({chatroom}: Store) => {
-
-        const currentMessages = chatroom?.messages || [];
-
-        return {
-            chatroomMessages: [...currentMessages].sort(
-                (message, nextMessage) =>
-                    //@ts-ignore
-                    message.createdAt > nextMessage.createdAt ? 1 : -1
-            )
-        }
-    })
+    const prevScrollPosition = useRef(0);
+    const dispatch = useAppDispatch();
+    const isMaximized = useSelector(({chatroom}: Store) => chatroom.isMaximized);
+    const chatroomMessages = useSelector(({chatroom}: Store) => chatroom?.messages || []);
 
     useEffect(() => {
-        if (messageAreaRef.current)
-            //@ts-ignore
-        messageAreaRef.current.scroll({
-            //@ts-ignore
-            top: messageAreaRef.current.scrollHeight + 45,
-            behavior: "smooth"
-        })
+        const handleScroll = (event) => {
+            const {scrollTop, clientHeight, scrollHeight} = event.target;
+
+            // Handle auto scroll toggle
+            if (prevScrollPosition.current > scrollTop) {
+                setAutoScroll(false);
+            } else if (scrollTop + clientHeight >= scrollHeight - 5) {
+                setAutoScroll(true);
+            }
+            prevScrollPosition.current = scrollTop;
+
+           // Handle load older messages
+            if (scrollTop === 0) {
+                dispatch(loading(true));
+                socket.emit('loadOlderMessages', {
+                    chatroomId,
+                    currentlyLoadedMessagesCount: chatroomMessages.length,
+                });
+                setTimeout(() => {
+                    dispatch(loading(false));
+                    if (messageAreaRef.current){
+                        messageAreaRef.current.scroll({
+                            top: 1,
+                            behavior: 'smooth',
+                        });
+                    }
+
+                }, 500);
+            }
+        };
+
+        const messageArea = messageAreaRef.current;
+        messageArea?.addEventListener('scroll', handleScroll);
+        return () => messageArea?.removeEventListener('scroll', handleScroll);
     }, [chatroomMessages]);
 
-    return (
-        <ChatRoomMessageAreaStyledMain
-            ref={messageAreaRef}
-            className='chatroom-message-area custom-scroll'
-            id='chatroom-message-area'
-            headerSize={headerSize}
-            isMaximized={isMaximized}
-        >
-            {chatroomMessages?.length ?
-                //@ts-ignore
-                chatroomMessages.filter((message)=>message.chatroom === chatroomId).map((message: ChatroomMessage, index: number) => {
-                    return (
-                        <ChatRoomMessage
-                            message={message}
-                            key={index}
-                            locale={locale as string}
-                        />
-                    )
-                })
-                : null
-            }
 
-        </ChatRoomMessageAreaStyledMain>
+
+    useEffect(() => {
+        if (autoScroll &&messageAreaRef.current) {
+            //@ts-ignore
+            messageAreaRef.current.scroll({
+                //@ts-ignore
+                top: messageAreaRef.current.scrollHeight + 50,
+                behavior: 'smooth',
+            });
+        }
+    }, [autoScroll, chatroomMessages]);
+
+    return (
+        <Styles
+            ref={messageAreaRef}
+            className="chatroom-message-area custom-scroll"
+            id="chatroom-message-area"
+            headerSize={headerSize}
+            isMaximized={isMaximized}>
+            {!!chatroomMessages?.length && sortArrayByPropertyOfObject(chatroomMessages, 'createdAt', 'asc')
+                .map((message: ChatroomMessage, index: number) => {
+                    return <ChatRoomMessage message={message} key={index}/>;
+                })
+            }
+        </Styles>
     );
 };
+
 export default memo(ChatRoomMessageArea);
+

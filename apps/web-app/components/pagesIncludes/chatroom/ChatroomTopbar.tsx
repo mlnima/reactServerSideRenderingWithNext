@@ -1,6 +1,5 @@
-import React, {FC, useEffect} from "react";
+import React, {FC, MouseEventHandler, useEffect} from "react";
 import styled from "styled-components";
-import Link from "next/link";
 import {capitalizeFirstLetters} from "custom-util";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUsers} from "@fortawesome/free-solid-svg-icons/faUsers";
@@ -11,6 +10,8 @@ import {Store} from "typescript-types";
 import {faMinimize} from "@fortawesome/free-solid-svg-icons/faMinimize";
 import {setMaximize} from "@store_toolkit/clientReducers/chatroomReducer";
 import {useRouter} from "next/router";
+import {faArrowDownWideShort} from "@fortawesome/free-solid-svg-icons/faArrowDownWideShort";
+
 
 const Style = styled.div`
   height: 45px;
@@ -24,89 +25,105 @@ const Style = styled.div`
   border-top: var(--default-border);
   border-bottom: var(--default-border);
   grid-area: chatroomTopbar;
-  
-  .chatroom-selector{
+
+  .chatroom-selector {
     width: auto;
     outline: none;
     border: none;
   }
+
   .chatroom-actions {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-
-    .open-online-user-list {
-      border: none;
-      outline: none;
-      background-color: transparent;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: var(--secondary-text-color, #ccc);
-      width: 45px;
-      height: 45px;
-    }
   }
-
 `;
+
+
+interface IButton {
+    active?: boolean
+}
+
+const StyledButton = styled.button<IButton>`
+  border: none;
+  outline: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${({active}) => active ? 'var(--main-active-color, #f90)' : 'var(--secondary-text-color, #ccc)'} ;
+  svg{
+     width: 25px;
+    height: 25px;
+  }
+`
+
 
 interface PropTypes {
     chatrooms: { name: string, _id: string }[],
     chatroomId: string,
     onOnlineUserListVisibilityChangeHandler: any,
     onlineUserListVisibility: boolean
+    autoScroll: boolean,
+    setAutoScroll: Function
 }
 
 const ChatroomTopbar: FC<PropTypes> = (
     {
         chatrooms,
         chatroomId,
+        autoScroll,
+        setAutoScroll,
         onlineUserListVisibility,
         onOnlineUserListVisibilityChangeHandler
     }) => {
-    const {push,asPath} = useRouter()
+    const {push, asPath} = useRouter()
     const isMaximized = useSelector(({chatroom}: Store) => chatroom.isMaximized)
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-         setTimeout(()=>{
-             if (localStorage.isMaximized === 'true'){
-                 dispatch(setMaximize(null))
-             }
-         },100)
+        setTimeout(() => {
+            if (localStorage.isMaximized === 'true') {
+                dispatch(setMaximize(null))
+            }
+        }, 100)
     }, [asPath]);
 
-    const onSetMaximizedHandler = ()=>{
+    const onSetMaximizedHandler = () => {
         dispatch(setMaximize(null))
-        localStorage.setItem('isMaximized',(!isMaximized).toString())
+        localStorage.setItem('isMaximized', (!isMaximized).toString())
     }
 
-    const onChatroomChangeHandler = (e)=>{
+    const onChatroomChangeHandler = (e) => {
         push(`/chatroom/${e.target.value}`)
     }
 
     return (
         <Style>
-            <select className={'custom-select chatroom-selector'}  onChange={e=>onChatroomChangeHandler(e)} value={chatroomId}>
+            <select className={'custom-select chatroom-selector'} onChange={e => onChatroomChangeHandler(e)}
+                    value={chatroomId}>
                 {(chatrooms || []).map(chatroom => {
                     return (
                         <option value={chatroom._id}
-                                key={chatroom._id}
-
-                            // className={`chatrooms-link${chatroomId === chatroom._id ? ' active' : ''}`}
-                        >
+                                key={chatroom._id}>
                             {capitalizeFirstLetters(chatroom.name)}
                         </option>
                     )
                 })}
             </select>
             <div className="chatroom-actions">
-                <button className='open-online-user-list' onClick={onSetMaximizedHandler}>
-                    <FontAwesomeIcon icon={isMaximized ? faMinimize : faMaximize} style={{width: 20, height: 20}}/>
-                </button>
-                <button className='open-online-user-list' onClick={onOnlineUserListVisibilityChangeHandler}>
-                    <FontAwesomeIcon icon={faUsers} style={{width: 25, height: 25}}/>
-                </button>
+                <StyledButton active={autoScroll} onClick={()=>setAutoScroll(!autoScroll)}
+                              className={'chatroomTopBarActionButton'}>
+                    <FontAwesomeIcon icon={faArrowDownWideShort}/>
+                </StyledButton>
+                <StyledButton active={isMaximized} className='chatroomTopBarActionButton'
+                              onClick={onSetMaximizedHandler}>
+                    <FontAwesomeIcon icon={isMaximized ? faMinimize : faMaximize}/>
+                </StyledButton>
+                <StyledButton active={onlineUserListVisibility} className='chatroomTopBarActionButton'
+                              onClick={onOnlineUserListVisibilityChangeHandler}>
+                    <FontAwesomeIcon icon={faUsers}/>
+                </StyledButton>
             </div>
 
         </Style>

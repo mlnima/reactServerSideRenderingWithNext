@@ -2,12 +2,14 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {RootState} from "../store";
 import {GlobalState} from "typescript-types";
+import headerSizeCalculator from "custom-util/src/vanilla-ui-utils/headerSizeCalculator";
 
 const initialState: GlobalState = {
     loginRegisterFormPopup: false,
     loading: false,
     adminMode: false,
     notFoundPage: false,
+    headerSize:0,
     headData: {
         allowIndexByRobots:true
     },
@@ -32,6 +34,9 @@ export const globalStateSlice = createSlice({
                     ...action.payload
                 }
             }
+        },
+        getHeaderSizeAction: (state, action: PayloadAction<any>) => {
+            state.headerSize = headerSizeCalculator() + action.payload || 0
         },
         loginRegisterForm: (state, action: PayloadAction<any>) => {
             state.loginRegisterFormPopup = action.payload
@@ -71,6 +76,7 @@ export const {
     setHeadData,
     loginRegisterForm,
     setNotFoundPage,
+    getHeaderSizeAction,
     loading,
     setAdminMode,
     setAlert,

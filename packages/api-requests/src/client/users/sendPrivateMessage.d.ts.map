@@ -1,1 +1,1 @@
-{"version":3,"file":"sendPrivateMessage.d.ts","sourceRoot":"","sources":["sendPrivateMessage.ts"],"names":[],"mappings":"AAGA,QAAA,MAAM,kBAAkB,6FAEvB,CAAA;AAED,eAAe,kBAAkB,CAAC"}
+{"version":3,"file":"sendPrivateMessage.d.ts","sourceRoot":"","sources":["sendPrivateMessage.ts"],"names":[],"mappings":"AAQA,QAAA,MAAM,kBAAkB,oDAA0C,QAAQ,IAAI,CAO7E,CAAA;AAED,eAAe,kBAAkB,CAAC"}

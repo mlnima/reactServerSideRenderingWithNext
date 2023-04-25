@@ -14,9 +14,13 @@ import userSchema from "./src/userSchema";
 import widgetSchema from "./src/widgetSchema";
 import chatroomMessageSchema from "./src/chatroomMessageSchema";
 import fileSchema from "./src/fileSchema";
+import messengerConversationMessageSchema from "./src/messengerConversationMessageSchema";
+import messengerConversationSchema from "./src/messengerConversationSchema";
 
 
 export {
+    messengerConversationSchema,
+    messengerConversationMessageSchema,
     settingSchema,
     fileSchema,
     chatroomMessageSchema,

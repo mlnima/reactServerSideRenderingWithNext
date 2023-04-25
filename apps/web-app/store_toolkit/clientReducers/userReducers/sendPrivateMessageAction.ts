@@ -15,7 +15,7 @@ export const sendPrivateMessageAction = createAsyncThunk<
 >('user/sendPrivateMessageAction', async ({ conversationId, messageBody }, thunkAPI) => {
     thunkAPI.dispatch(loading(true));
     try {
-        await sendPrivateMessage(conversationId, messageBody);
+        // await sendPrivateMessage(conversationId, messageBody);
     } catch (error) {
         console.log(error);
     } finally {

@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import authMiddleware from '../../middlewares/authMiddleware';
+import authMiddleware from "custom-server-util/src/middleware-utils/authMiddleware";
 import clientCreateOrder from './clientOrdersControllers/clientCreateOrder';
 
 const router = Router();

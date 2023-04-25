@@ -2,6 +2,8 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema
 
+
+//old schema it will be replace with conversationMessageSchema and after convert
 const systemMessage = new mongoose.Schema({
     message: String,
     type: String,

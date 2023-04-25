@@ -57,7 +57,6 @@ const UserPageActionButtons: FC<UserPageActionButtonsPropType> = ({_id}) => {
     const onFollowHandler = () => {
         if (userPageData?._id && loggedIn && userData?._id ) {
             dispatch(followUserAction(userPageData._id))
-            dispatch(getSpecificUserDataAction({fields:['following']}))
         } else {
             dispatch(loginRegisterForm('login'))
         }
@@ -66,7 +65,6 @@ const UserPageActionButtons: FC<UserPageActionButtonsPropType> = ({_id}) => {
     const onUnFollowHandler = () => {
         if (userPageData?._id){
             dispatch(unfollowUserAction(userPageData?._id))
-            dispatch(getSpecificUserDataAction({fields:['following']}))
         }
     }
 
@@ -84,7 +82,7 @@ const UserPageActionButtons: FC<UserPageActionButtonsPropType> = ({_id}) => {
             <button className='user-page-action-button action-client-button-link'
                     onClick={onConversationHandler}>{t<string>('Send Message')}</button>
             <div>
-                {!!userPageData?._id && userData?.following?.includes(userPageData?._id) ?
+                {!!userPageData?.isFollowed ?
                     <button className='user-page-action-button action-client-button-link'
                             onClick={onUnFollowHandler}>{t<string>('Unfollow')}  </button> :
                     <button className='user-page-action-button action-client-button-link'

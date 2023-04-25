@@ -82,19 +82,17 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> = ({
 
 
             <div className={'logged-items'}>
-                {(membership && usersCanMessageEachOther) && <Link href={`/messenger`}
-                                                                   className='logged-item logged-in'
-                                                                   onClick={onOpenCloseHandler}>
-                    <div className={'icon-wrapper'}>
-                        <FontAwesomeIcon icon={faEnvelope} style={{width: 20, height: 20}}/>
-                    </div>
-                    <p className={'text-data'}>{t<string>(`Messages`)}</p>
-                </Link>}
-
-
+                {(membership && usersCanMessageEachOther) &&
+                    <Link href={`/messenger`}
+                          className='logged-item logged-in'
+                          onClick={onOpenCloseHandler}>
+                        <div className={'icon-wrapper'}>
+                            <FontAwesomeIcon icon={faEnvelope} style={{width: 20, height: 20}}/>
+                        </div>
+                        <p className={'text-data'}>{t<string>(`Messages`)}</p>
+                    </Link>
+                }
                 {role === 'administrator' && <AuthenticationAdminItems/>}
-
-
                 <span className='logged-item logged-in sign-out' onClick={(e) => {
                     dispatch(userLogout(null))
                     dispatch(loginRegisterForm(false))

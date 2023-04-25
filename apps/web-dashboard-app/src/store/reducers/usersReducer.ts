@@ -118,8 +118,6 @@ export const getUserDataAction = createAsyncThunk(
             .then(res => {
                 return res.data.user
             }).catch((error: AxiosError) => {
-
-
                 thunkAPI.dispatch(setAlert({
                     active: true,
                     type: 'error',

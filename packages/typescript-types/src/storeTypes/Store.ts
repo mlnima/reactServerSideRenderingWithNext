@@ -15,6 +15,7 @@ import {WidgetsState} from "./WidgetsState";
 import {AdminPanelWidgets} from "./AdminPanelWidgets";
 import {AdminPanelGlobalState} from "./AdminPanelGlobalState";
 import {AdminPanelUsersState} from "./AdminPanelUsers";
+import {MessengerState} from "./MessengerState";
 
 export interface Store {
     adminPanelComments: AdminPanelComments;
@@ -29,6 +30,7 @@ export interface Store {
     adminPanelTerminalState: AdminPanelTerminalState,
     adminPanelWidgets: AdminPanelWidgets,
     chatroom: ChatroomState,
+    messenger:MessengerState,
     settings: SettingsState,
     posts: PostStateTypes,
     user: UserState,

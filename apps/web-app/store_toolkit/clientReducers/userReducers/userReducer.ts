@@ -1,29 +1,37 @@
 // @ts-nocheck
 import { createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
+import {UserState} from "typescript-types";
 import {loginAction} from "@store_toolkit/clientReducers/userReducers/loginAction";
 import {autoLoginAction} from "@store_toolkit/clientReducers/userReducers/autoLoginAction";
-import {getConversationsAction} from "@store_toolkit/clientReducers/userReducers/getConversationsAction";
-import {getConversationAction} from "@store_toolkit/clientReducers/userReducers/getConversationAction";
-import {deleteConversationAction} from "@store_toolkit/clientReducers/userReducers/deleteConversationAction";
+// import {getConversationsAction} from "@store_toolkit/clientReducers/userReducers/getConversationsAction";
+// import {getConversationAction} from "@store_toolkit/clientReducers/userReducers/getConversationAction";
+// import {deleteConversationAction} from "@store_toolkit/clientReducers/userReducers/deleteConversationAction";
 import {getUserPageDataAction} from "@store_toolkit/clientReducers/userReducers/getUserPageDataAction";
+
+import {getMultipleUserDataByIdAction} from "@store_toolkit/clientReducers/userReducers/getMultipleUserDataByIdAction";
+import {getSpecificUserDataAction} from "@store_toolkit/clientReducers/userReducers/getSpecificUserDataAction";
+
+
+import {unfollowUserAction} from "@store_toolkit/clientReducers/userReducers/unfollowUserAction";
+import {followUserAction} from "@store_toolkit/clientReducers/userReducers/followUserAction";
+
+
+import {
+    setCallAcceptedAction
+} from "@store_toolkit/clientReducers/userReducers/videoOrVoiceCallActions/setCallAcceptedAction";
 import {setMyVideoAction} from "@store_toolkit/clientReducers/userReducers/videoOrVoiceCallActions/setMyVideoAction";
 import {
     setPartnerVideoAction
 } from "@store_toolkit/clientReducers/userReducers/videoOrVoiceCallActions/setPartnerVideoAction";
-import {getMultipleUserDataByIdAction} from "@store_toolkit/clientReducers/userReducers/getMultipleUserDataByIdAction";
-import {getSpecificUserDataAction} from "@store_toolkit/clientReducers/userReducers/getSpecificUserDataAction";
-import {UserState} from "typescript-types";
-import {
-    setCallAcceptedAction
-} from "@store_toolkit/clientReducers/userReducers/videoOrVoiceCallActions/setCallAcceptedAction";
 
 const initialState: UserState = {
     userData: {},
     userRatingData: {},
     loggedIn: false,
     userPageData: {},
-    conversations: [],
+    // conversations: [],
+    privateMessages:[],
     activeConversation: {
         messages: [],
         users: []
@@ -102,15 +110,7 @@ export const userSlice = createSlice({
         //     }
         // },
         //@ts-ignore
-        newMessageInConversation: (state, action: PayloadAction<any>) => {
-            return {
-                ...state,
-                activeConversation: {
-                    ...state.activeConversation,
-                    messages: [...(state.activeConversation?.messages || []), action.payload]
-                }
-            }
-        },
+
         setMyVideo: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
@@ -202,30 +202,30 @@ export const userSlice = createSlice({
             .addCase(getSpecificUserDataAction.fulfilled, (state, action: PayloadAction<any>) => {
                 return {
                     ...state,
-                    userData: action.payload,
+                    userData: {
+                        ...state.userData,
+                        ...action.payload
+                    },
                     loggedIn: true
                 }
             })
-            .addCase(getConversationsAction.fulfilled, (state, action: PayloadAction<any>) => {
-                return {
-                    ...state,
-                    conversations: action.payload,
-                }
-            })
-            .addCase(getConversationAction.fulfilled, (state, action: PayloadAction<any>) => {
-                state.activeConversation = action.payload
-            })
-            .addCase(deleteConversationAction.fulfilled, (state, action: PayloadAction<any>) => {
 
-                if (action.payload) {
-                    // const newConversationList = [...state.conversations?.filter(conversation=> conversation._id !== action.payload)]
-                    // return {
-                    //     ...state,
-                    //     conversations:newConversationList,
-                    // }
-                }
+            // .addCase(getConversationAction.fulfilled, (state, action: PayloadAction<any>) => {
+            //     state.activeConversation = action.payload
+            // })
 
-            })
+            // .addCase(deleteConversationAction.fulfilled, (state, action: PayloadAction<any>) => {
+            //
+            //     if (action.payload) {
+            //         // const newConversationList = [...state.conversations?.filter(conversation=> conversation._id !== action.payload)]
+            //         // return {
+            //         //     ...state,
+            //         //     conversations:newConversationList,
+            //         // }
+            //     }
+            //
+            // })
+
             .addCase(getUserPageDataAction.fulfilled, (state, action: PayloadAction<any>) => {
                 if (action.payload) {
                     return {
@@ -249,6 +249,12 @@ export const userSlice = createSlice({
             .addCase(setCallAcceptedAction.fulfilled, (state, action: PayloadAction<any>) => {
                 state.callData.callAccepted = action.payload
             })
+            .addCase(unfollowUserAction.fulfilled, (state, action: PayloadAction<any>) => {
+                state.userPageData.isFollowed = false
+            })
+            .addCase(followUserAction.fulfilled, (state, action: PayloadAction<any>) => {
+                state.userPageData.isFollowed = true
+            })
             .addCase(setMyVideoAction.fulfilled, (state, action: PayloadAction<any>) => {
                 return {
                     ...state,
@@ -267,7 +273,7 @@ export const {
     getSpecificUserData,
     userLogout,
     dispatchSocketId,
-    newMessageInConversation,
+
     setMyVideo,
     setPartnerVideo,
     setCallingStatus,

@@ -3,6 +3,7 @@ exports.__esModule = true;
 var tslib_1 = require("tslib");
 var mongoose_1 = tslib_1.__importDefault(require("mongoose"));
 var Schema = mongoose_1["default"].Schema;
+//old schema it will be replace with conversationMessageSchema and after convert
 var systemMessage = new mongoose_1["default"].Schema({
     message: String,
     type: String,

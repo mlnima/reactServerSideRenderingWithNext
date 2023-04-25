@@ -1,5 +1,4 @@
 import ProfileNavigation from '../../components/includes/profilePageComponents/ProfileNavigation/ProfileNavigation';
-import ProfileImage from "../../components/includes/profilePageComponents/ProfileImage/ProfileImage";
 import styled from "styled-components";
 import Link from "next/link";
 import {useSelector} from "react-redux";
@@ -8,6 +7,7 @@ import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getSer
 import {Store} from "typescript-types";
 import Posts from "@components/pagesIncludes/profile/Posts";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
+import ProfileImage from "@components/pagesIncludes/profile/ProfileImage/ProfileImage";
 
 const PageStyle = styled.div`
   #primary{

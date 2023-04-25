@@ -41,10 +41,10 @@ const buttons = css`
     background-color: var(--info-button-link-background-color, #117a8b);
     color: var(--info-button-text-color, #fff);
   }
-  .btn-transparent-dark{
+  .btn-transparent{
     background-color: transparent;
-    color:  var(--transparent-dark-button-color, #343a40);
-    border-color:  transparent;
+    border:  none;
+    outline: none;
   }
   .btn-transparent-light{
     background-color: transparent;

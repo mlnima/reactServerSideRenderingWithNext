@@ -2,6 +2,7 @@ export interface GlobalState {
     loginRegisterFormPopup: boolean | string,
     loading: boolean,
     adminMode: boolean,
+    headerSize: number,
     notFoundPage: boolean,
     headData:{
         allowIndexByRobots?: Boolean;

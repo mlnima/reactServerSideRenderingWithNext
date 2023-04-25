@@ -8,7 +8,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import fileUpload from 'express-fileupload';
 import cookieParser from 'cookie-parser';
-import path from 'path';
+// import path from 'path';
 import adminAuthMiddleware from 'custom-server-util/src/middleware-utils/adminAuthMiddleware';
 import xmlParser from 'express-xml-bodyparser';
 import apiCache from 'apicache';

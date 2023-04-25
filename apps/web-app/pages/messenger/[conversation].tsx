@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {useRouter} from "next/router";
-import MessengerConversationHeader
-    from "../../components/includes/messengerPageComponents/MessengerConversationHeader/MessengerConversationHeader";
-import MessengerConversationMessageArea
-    from "@components/includes/messengerPageComponents/MessengerConversationMessageArea/MessengerConversationMessageArea";
+// import MessengerConversationHeader
+//     from "../../components/includes/messengerPageComponents/MessengerConversationHeader/MessengerConversationHeader";
+// import MessengerConversationMessageArea
+//     from "@components/includes/messengerPageComponents/MessengerConversationMessageArea/MessengerConversationMessageArea";
 import MessengerConversationMessageTools
     from "@components/includes/messengerPageComponents/MessengerConversationMessageTools/MessengerConversationMessageTools";
 import {socket} from 'custom-util/src/socket-utils/socketIoClient';
@@ -29,6 +29,7 @@ import {
     answerTheCallAction
 } from "@store_toolkit/clientReducers/userReducers/videoOrVoiceCallActions/answerTheCallAction";
 import {he} from "date-fns/locale";
+import headerSizeCalculator from "custom-util/src/vanilla-ui-utils/headerSizeCalculator";
 
 const Style = styled.div`
   //position: relative;
@@ -52,7 +53,7 @@ const conversation = () => {
     const [headerSize, setHeaderSize] = useState(0)
     const [connectedUserData, setConnectedUserData] = useState({
         profileImage: '',
-        username:''
+        username: ''
     });
     const [messageState, setMessageState] = useState({messageBody: ''})
     const [mySocketId, setMySocketId] = useState("")
@@ -137,30 +138,21 @@ const conversation = () => {
 
     useEffect(() => {
         setTimeout(() => {
-
-            //calculating available space for chat area
-            //@ts-ignore
-            const topbarHeight = document.querySelector('.topbar')?.offsetHeight || 0;
-
-            //@ts-ignore
-            const headerHeight = document.querySelector('.header')?.offsetHeight || 0;
-            //@ts-ignore
-            const navigationHeight = document.querySelector('.navigation')?.offsetHeight || 0;
-            setHeaderSize(topbarHeight + headerHeight + navigationHeight + 90)
-        }, 100)
+            setHeaderSize(headerSizeCalculator() + 90)
+        }, 10)
     }, []);
 
     return (
         <Style id={'full-width-content'} className='messenger'>
             <HeadSetter title={'Messenger'}/>
-            <MessengerConversationHeader callUser={null} profileImage={connectedUserData.profileImage} username={connectedUserData.username}/>
-            <MessengerConversationMessageArea
-                // @ts-ignore
-                userData={userData}
-                connectedUserData={connectedUserData}
-                headerSize={headerSize}
-                // setConnectedUserData={setConnectedUserData}
-            />
+            {/*<MessengerConversationHeader callUser={null} profileImage={connectedUserData.profileImage} username={connectedUserData.username}/>*/}
+            {/*<MessengerConversationMessageArea*/}
+            {/*    // @ts-ignore*/}
+            {/*    userData={userData}*/}
+            {/*    connectedUserData={connectedUserData}*/}
+            {/*    headerSize={headerSize}*/}
+            {/*    // setConnectedUserData={setConnectedUserData}*/}
+            {/*/>*/}
             <MessengerConversationMessageTools
                 setMessageState={setMessageState}
                 messageState={messageState}

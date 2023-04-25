@@ -8,11 +8,13 @@ import clientFileManagerRouter from './clientFileManagerRouter';
 import pagesRouter from './pagesRouter';
 import formsRouter from './formsRouter';
 import clientOrdersRouter from './clientOrdersRouter';
+import messengerRouter from './messengerRouter';
 
 const router = Router();
 
 router.use('/users', usersRouter);
 router.use('/posts', postsRouter);
+router.use('/messenger', messengerRouter);
 router.use('/chatrooms', chatroomsRouter);
 router.use('/settings', settingsRouter);
 router.use('/widgets', widgetsRouter);

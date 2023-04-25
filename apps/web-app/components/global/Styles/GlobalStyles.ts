@@ -18,7 +18,6 @@ const GlobalStyles = createGlobalStyle<GlobalStylesPropTypes>`
   }
 
   ${({customColors}) => customColors?.includes(':root') ? customColors : `:root {${customColors}}`}
-
   body {
     background-color: var(--main-background-color, #000);
     color: var(--main-text-color, '#ccc');
@@ -28,6 +27,7 @@ const GlobalStyles = createGlobalStyle<GlobalStylesPropTypes>`
     font-size: 0.875rem;
     margin: 0;
   }
+
 
   .sub-content {
     padding: 0 8px;
@@ -54,6 +54,12 @@ const GlobalStyles = createGlobalStyle<GlobalStylesPropTypes>`
 
   .form-control-input-validator {
     width: 80%;
+  }
+
+  @media only screen and (min-width: 768px) {
+    .mobile-only {
+      //display: none !important;
+    }
   }
 
   ${buttons}
