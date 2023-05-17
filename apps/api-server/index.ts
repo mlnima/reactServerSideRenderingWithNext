@@ -17,8 +17,6 @@ import clientMainRouter from './controllers/clientControllers/clientMainRouter';
 import clientMainFestController from './controllers/clientControllers/clientMainFestController'
 import clientRobotTxtController from './controllers/clientControllers/clientRobotTxtController'
 import loggerMiddleware from "./middlewares/loggerMiddleware";
-// import { createExpressServer } from 'custom-server-util';
-
 
 const server = express();
 

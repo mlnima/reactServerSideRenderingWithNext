@@ -11,6 +11,7 @@ const imageSaver = async (imageData) => {
     try {
         //@ts-ignore
         const ImageToSave = new fileSchema(imageData);
+        //@ts-ignore
         return await ImageToSave.save();
     } catch (error) {
         console.error('Error saving image:', error);

@@ -1,6 +1,8 @@
 import dotenv from 'dotenv';
+
 dotenv.config({path: '../../.env'});
 import {connectToDatabase, shouldCompress} from 'custom-server-util';
+
 connectToDatabase('Express Server')
 import express from 'express';
 import bodyParser from 'body-parser';
@@ -9,17 +11,17 @@ import cookieParser from 'cookie-parser';
 import xmlParser from 'express-xml-bodyparser';
 import cors from 'cors';
 import compression from 'compression';
-import clientFileManagerMainRouter from './controllers/clientControllers/fileManagerControllers/clientFileManagerMainRouter';
+import clientFileManagerMainRouter
+    from './controllers/clientControllers/fileManagerControllers/clientFileManagerMainRouter';
 import path from 'path';
 
 const server = express();
 const dev = process.env.NODE_ENV !== 'production';
 
-
 const runServer = () => {
     try {
         server.use(cors())
-        server.use(express.json({ limit: '2MB' }));
+        server.use(express.json({limit: '2MB'}));
         server.use(cookieParser());
         server.use(fileUpload());
         server.use(bodyParser.json());
@@ -57,8 +59,8 @@ const runServer = () => {
         server.listen(process.env.FILE_SERVER_PORT || 3003, () => {
             console.log(`process ${process.pid} : file server started at ${process.env.FILE_SERVER_PORT || 3003} `);
         })
-    }catch (error){
-console.log('console ',error)
+    } catch (error) {
+        console.log('console error=> ', error)
     }
 
 }

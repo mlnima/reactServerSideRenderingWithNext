@@ -25,7 +25,7 @@
     "strict": false,
     "checkJs": false,
     "strictNullChecks": false,
-    "noEmit": true,
+    "noEmit": false,
     "resolveJsonModule": true,
     "incremental": true,
     "downlevelIteration": true

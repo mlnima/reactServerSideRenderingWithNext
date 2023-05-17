@@ -100,8 +100,6 @@ const runSocketServer = async () => {
                 io.emit('takeSocketLists', Array.from(activeSockets));
             });
 
-
-
             socket.on('joinConversation', conversation => {
                 console.log('console=> ', socket.id, 'joined to ', conversation)
                 socket.join(conversation)
@@ -289,97 +287,5 @@ const runSocketServer = async () => {
     }
 }
 
-
-// const restartServer = async () => {
-//     let success = false;
-//
-//     while (!success) {
-//         console.log('Attempting to start server...');
-//         success = await runServer();
-//
-//         if (!success) {
-//             console.log('Waiting 5 seconds before retrying...');
-//             await new Promise((resolve) => setTimeout(resolve, 5000));
-//         }
-//     }
-// };
-
 runSocketServer()
 
-
-//@ts-ignore
-
-
-//Call and stream
-
-//
-//     socket.on("callToConversation", data => {
-//         // socket.to(data.conversation).emit("callToConversation", { callerStreamData: data.callerStreamData, callerId: data.callerId, callerName: data.callerName,conversation:data.conversation })
-//         socket.to(data.conversation).emit("incomingCallFromConversation", data)
-//     })
-
-// socket.on('callToConversation', ({ offer, targetSocketIds, roomId }) => {
-//     console.log('console=> calling to ',roomId,targetSocketIds)
-//     targetSocketIds.forEach((targetSocketId: string) => {
-//         socket.to(roomId).to(targetSocketId).emit('call', { offer });
-//     });
-// });
-
-// socket.on('answer', ({answer, targetSocketIds, roomId}) => {
-//     // Forward the call answer to the target users in the room
-//     targetSocketIds.forEach((targetSocketId: string) => {
-//         socket.to(roomId).to(targetSocketId).emit('answer', {answer});
-//     });
-// });
-//
-// socket.on('iceCandidate', ({candidate, targetSocketIds, roomId}) => {
-//     // Forward the ICE candidate to the target users in the room
-//     targetSocketIds.forEach((targetSocketId: string) => {
-//         socket.to(roomId).to(targetSocketId).emit('iceCandidate', {candidate});
-//     });
-// });
-
-
-//import http from 'http'
-// const server = http.createServer(app);
-// const app = createExpressApp;
-
-
-// socket.on('loadOlderMessages', async data => {
-//
-//     try {
-//         const currentlyLoadedMessagesCount = data.currentlyLoadedMessagesCount;
-//
-//         const olderMessages = await chatroomMessageSchema
-//             .find({chatroom: data.chatroomId})
-//             .populate({
-//                 path: 'author',
-//                 select: 'username profileImage',
-//                 model: userSchema,
-//                 populate: {
-//                     path: 'profileImage',
-//                     model: 'file',
-//                 }
-//             })
-//             .skip(currentlyLoadedMessagesCount)
-//             .sort({createdAt: -1})
-//             .limit(5)
-//             .exec();
-//
-//         io.to(socket.id).emit('olderMessagesLoaded', {messages: olderMessages});
-//     } catch (error) {
-//         console.log(error);
-//     }
-// });
-
-// socket.on('joinUserToTheRoom', async userData => {
-//     try {
-//         onlineUsers = uniqArrayBy([
-//             ...onlineUsers,
-//             {...userData.author, socketId: socket.id}
-//         ], 'username');
-//         io.in(userData.chatroomId).emit('userListUpdated', onlineUsers);
-//     } catch (error) {
-//         console.log(error)
-//     }
-// });
