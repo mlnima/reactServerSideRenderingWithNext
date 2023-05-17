@@ -9,6 +9,7 @@ import {metaSitemapGenerator} from './src/metaSitemap'
 import {pagesSitemapGenerator} from './src/pageSitemap'
 import {robotsTxtGenerator} from './src/robotsTxtGenerator'
 
+
 const baseOutputPath = '../web-app/public'
 
 const runAllGenerators = async ()=>{

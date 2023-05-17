@@ -10,6 +10,7 @@ import {getSettingsAction} from "@store/reducers/settingsReducer";
 import {getWidgetsAction} from "@store/reducers/widgetsReducer";
 import {getCustomPagesAction} from "@store/reducers/globalStateReducer";
 
+
 function App() {
     //@ts-ignore
     const {isUserLoggedIn, role} = useSelector(({users}: DashboardStore) => {

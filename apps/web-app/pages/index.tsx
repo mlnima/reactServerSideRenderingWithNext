@@ -12,6 +12,7 @@ const HomePageStyle = styled.div`
   ${({customStyles}: { customStyles?: string }) => customStyles || ''}
 `
 
+
 const HomePage = () => {
 
     const {sidebar, customStyles} = useSelector(({settings}: Store) => settings?.currentPageSettings)

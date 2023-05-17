@@ -15,6 +15,7 @@ import path from 'path';
 const server = express();
 const dev = process.env.NODE_ENV !== 'production';
 
+
 const runServer = () => {
     try {
         server.use(cors())
