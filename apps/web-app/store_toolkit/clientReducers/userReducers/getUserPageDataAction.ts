@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import getUser from "api-requests/src/client/users/getUser";
-import getUserPageData from "api-requests/src/client/users/getUserPageData";
+import {clientAPIRequestGetUserPageData} from "api-requests";
 
 interface GetUserPageDataActionArgs {
     username?: string;
@@ -15,7 +14,7 @@ interface GetUserPageDataActionResponse {
 export const getUserPageDataAction = createAsyncThunk<GetUserPageDataActionResponse, GetUserPageDataActionArgs>(
     'user/getUserPageDataAction',
     async ({ username, userWhoRequestIt, fields }, thunkAPI) => {
-        const response = await getUserPageData({ username, userWhoRequestIt, fields });
+        const response = await clientAPIRequestGetUserPageData({ username, userWhoRequestIt, fields });
         return response?.data;
     }
 );

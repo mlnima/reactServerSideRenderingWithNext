@@ -1,12 +1,12 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import getTags from "api-requests/src/client/posts/getTags";
+import {clientAPIRequestGetTags} from "api-requests";
 
 const getTagsAction = createAsyncThunk(
     'posts/getTags',
     async ({data}:{data:{}}, thunkAPI) => {
         try {
 
-            const apiData = await getTags(data)
+            const apiData = await clientAPIRequestGetTags(data)
             return {
                 //@ts-ignore
                 tagsMetas: apiData?.data?.metas || [],

@@ -1,10 +1,10 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import getPostComments from "api-requests/src/client/comments/getPostComments";
+import {clientAPIRequestGetPostComments} from "api-requests";
 
 const getPostCommentsAction = createAsyncThunk(
     'posts/getPostCommentsAction',
     async (_id: string, thunkAPI) => {
-        return await getPostComments(_id)
+        return await clientAPIRequestGetPostComments(_id)
             .then(res => {
                 return res.data?.comments
             }).catch(err => {

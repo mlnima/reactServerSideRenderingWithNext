@@ -8,9 +8,9 @@ import {useAppDispatch} from "@store_toolkit/hooks";
 import {useSelector} from "react-redux";
 import {Store} from "typescript-types";
 import {faMinimize} from "@fortawesome/free-solid-svg-icons/faMinimize";
-import {setMaximize} from "@store_toolkit/clientReducers/chatroomReducer";
 import {useRouter} from "next/router";
 import {faArrowDownWideShort} from "@fortawesome/free-solid-svg-icons/faArrowDownWideShort";
+import {setMessengerState} from "@store_toolkit/clientReducers/messengerReducer";
 
 
 const Style = styled.div`
@@ -84,13 +84,13 @@ const ChatroomTopbar: FC<PropTypes> = (
     useEffect(() => {
         setTimeout(() => {
             if (localStorage.isMaximized === 'true') {
-                dispatch(setMaximize(null))
+                dispatch(setMessengerState({isMaximized:true}))
             }
         }, 100)
     }, [asPath]);
 
     const onSetMaximizedHandler = () => {
-        dispatch(setMaximize(null))
+        dispatch(setMessengerState({isMaximized:true}))
         localStorage.setItem('isMaximized', (!isMaximized).toString())
     }
 

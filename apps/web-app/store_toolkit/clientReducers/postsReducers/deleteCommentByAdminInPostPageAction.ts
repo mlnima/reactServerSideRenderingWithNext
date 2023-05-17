@@ -1,12 +1,12 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {loading, setAlert} from "../globalStateReducer";
-import deleteCommentByAdmin from "api-requests/src/client/comments/deleteCommentByAdmin";
+import {clientAPIRequestDeleteCommentByAdmin} from "api-requests";
 
 export const deleteCommentByAdminInPostPageAction = createAsyncThunk(
     'posts/deleteCommentByAdminInPostPageAction',
     async (commentsListToDelete: string[], thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        await deleteCommentByAdmin(commentsListToDelete).then((res) => {
+        await clientAPIRequestDeleteCommentByAdmin(commentsListToDelete).then((res) => {
             thunkAPI.dispatch(setAlert({
                 message: res.data.message || 'Comment Deleted',
                 type: 'success'

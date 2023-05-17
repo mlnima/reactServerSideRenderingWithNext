@@ -9,7 +9,7 @@ import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getSer
 import {Store} from "typescript-types";
 import getPostAction from "@store_toolkit/clientReducers/postsReducers/getPostAction";
 import getPostCommentsAction from "@store_toolkit/clientReducers/postsReducers/getPostCommentsAction";
-import viewPost from "api-requests/src/client/posts/viewPost";
+import {clientAPIRequestViewPost} from "api-requests";
 import {postTypes} from "data-structures";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
 import {_postCanonicalUrlGenerator} from "@_variables/_clientVariables/clientVariables/_canonicalUrlGenerators";
@@ -77,7 +77,7 @@ const postPage = () => {
         if (_id) {
             setTimeout(() => {
                 dispatch(getPostCommentsAction(_id as string));
-                viewPost(_id);
+                clientAPIRequestViewPost(_id);
             }, 500)
         }
     }, [_id])

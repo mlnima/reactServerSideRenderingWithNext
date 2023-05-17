@@ -2,13 +2,13 @@
 
 
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import getSignedInUserData from "api-requests/src/common/users/getSignedInUserData";
+import {commonAPIRequestGetSignedInUserData} from "api-requests";
 
 export const getSpecificUserDataAction = createAsyncThunk(
     'user/getSpecificUserDataAction',
     async ({fields}: { fields: string[] }, thunkAPI) => {
         if (localStorage.wt) {
-            return await getSignedInUserData(fields).then(res => {
+            return await commonAPIRequestGetSignedInUserData(fields).then(res => {
                 return res.data?.userData
             }).catch((err) => {
                 // localStorage.removeItem('wt')

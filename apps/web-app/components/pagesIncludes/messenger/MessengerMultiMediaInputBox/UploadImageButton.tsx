@@ -1,20 +1,19 @@
 import React, {FC} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCamera} from "@fortawesome/free-solid-svg-icons/faCamera";
-
 import {ActionButtonStyle} from "@components/pagesIncludes/chatroom/ChatRoomTools/Styles";
+import {setDraftMessageData} from "@store_toolkit/clientReducers/messengerReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
-interface PropTypes {
+interface IProps {
     imageInputRef: React.RefObject<HTMLInputElement>,
-    setImageMessage: React.Dispatch<React.SetStateAction<unknown>>
 }
 
-const Component: FC<PropTypes> = ({imageInputRef, setImageMessage}) => {
+const Component: FC<IProps> = ({imageInputRef}) => {
 
-
+    const dispatch = useAppDispatch()
     const onSelectImageHandler = async (event) => {
         const file = event.target.files[0];
-
         const readerPromise = new Promise((resolve, reject) => {
             const reader = new FileReader();
             reader.onload = (event) => {
@@ -53,10 +52,9 @@ const Component: FC<PropTypes> = ({imageInputRef, setImageMessage}) => {
             reader.onerror = reject;
             reader.readAsDataURL(file);
         });
-
         try {
             const resizedImageBase64 = await readerPromise;
-            setImageMessage(resizedImageBase64);
+            dispatch(setDraftMessageData({imageContent:resizedImageBase64}))
             event.target.value = null;
         } catch (error) {
             console.error(error);
@@ -77,7 +75,7 @@ const Component: FC<PropTypes> = ({imageInputRef, setImageMessage}) => {
                    accept="image/*"
                    style={{display: 'none'}}
                    onChange={onSelectImageHandler}/>
-            <ActionButtonStyle type={'button'} className={'paperclip-button'} onClick={onClickHandler}>
+            <ActionButtonStyle type={'button'} className={'camera-button'} onClick={onClickHandler}>
                 <FontAwesomeIcon icon={faCamera} style={{width: 25, height: 25}}/>
             </ActionButtonStyle>
         </>

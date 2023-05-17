@@ -43,6 +43,7 @@ const buttons = css`
   }
   .btn-transparent{
     background-color: transparent;
+    color: var(--main-text-color, #fff);
     border:  none;
     outline: none;
   }

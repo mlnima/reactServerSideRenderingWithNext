@@ -1,5 +1,5 @@
 import Link from "next/link";
-import clearCaches from "api-requests/src/dashboard/clearCaches";
+import {commonAPIRequestClearCaches} from "api-requests";
 import {useRouter} from "next/router";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {setAdminMode} from "@store_toolkit/clientReducers/globalStateReducer";
@@ -33,7 +33,7 @@ const AuthenticationAdminItems = ({}) => {
 
                 Dashboard
             </Link>
-            <span className={'logged-item'} onClick={() => clearCaches().then(() => router.reload())}>
+            <span className={'logged-item'} onClick={() => commonAPIRequestClearCaches().then(() => router.reload())}>
                    <div className={'icon-wrapper'}>
                        <FontAwesomeIcon icon={faEraser} style={{width: 25, height: 25}}/>
                   </div>

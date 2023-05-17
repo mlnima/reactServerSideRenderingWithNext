@@ -8,6 +8,9 @@ import {setAdminMode} from "@store_toolkit/clientReducers/globalStateReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import GlobalStyles from "@components/global/Styles/GlobalStyles";
 import GoogleAnalytics from "@components/includes/SiteSettingsSetter/GoogleAnalytics";
+import {socket} from "custom-util";
+import MediaCall from "@components/global/commonComponents/mediaCall/MediaCall";
+import SocketEventHandler from "@components/global/commonComponents/SocketEventHandler";
 
 const UserAutoLogin = dynamic(() => import('@components/includes/SiteSettingsSetter/UserAutoLogin'));
 const TopBarWidgetArea = dynamic(() => import('./widgetsArea/TopBarWidgetArea'));
@@ -32,6 +35,7 @@ const RootLayout: FC<RootLayoutPropTypes> = ({children}) => {
     const [renderCookiesBar, setRenderCookiesBar] = useState(false)
     const {loginRegisterFormPopup, alert, loading, adminMode} = useSelector(({globalState}: Store) => globalState)
     const {initialSettings} = useSelector(({settings}: Store) => settings)
+    const {mediaCall} = useSelector(({mediaConnection}: Store) => mediaConnection)
 
     const {
         customColors,
@@ -52,6 +56,13 @@ const RootLayout: FC<RootLayoutPropTypes> = ({children}) => {
 
         }, 10)
     }, []);
+
+    useEffect(() => {
+        if (loggedIn && !!userData?._id) {
+            socket.emit('userSignedIn', {userId: userData._id});
+        }
+    }, [loggedIn]);
+
 
     useEffect(() => {
         setTimeout(() => {
@@ -87,6 +98,9 @@ const RootLayout: FC<RootLayoutPropTypes> = ({children}) => {
             <GlobalStyles customColors={customColors} customStyles={customStyles}/>
             {!!initialSettings?.headDataSettings?.googleAnalyticsId &&
                 <GoogleAnalytics googleAnalyticsId={initialSettings?.headDataSettings?.googleAnalyticsId}/>}
+
+            {loggedIn && <SocketEventHandler/>}
+            {(loggedIn && mediaCall) && <MediaCall/>}
         </>
 
     );

@@ -4,18 +4,16 @@ import messengerConversationSchema from "models/src/messengerConversationSchema"
 
 const startAConversation = async (req, res) => {
     try {
+
         const existingConversation = await messengerConversationSchema.findOne({
             users: {
                 $all: req.body.users,
                 $size: req.body.users.length
             }
-        })
-
-            .exec();
+        }).exec();
 
         if (existingConversation) {
             res.status(200).json({conversation: existingConversation})
-            return;
         }else{
             const conversationDataToSave = new messengerConversationSchema({
                 users: req.body?.users

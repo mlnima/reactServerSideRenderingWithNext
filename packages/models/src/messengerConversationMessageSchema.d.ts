@@ -3,12 +3,12 @@ declare const _default: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    createdAt: Date;
+    updatedAt: Date;
     conversation: mongoose.Types.ObjectId;
     sender: mongoose.Types.ObjectId;
     content: string;
     isRead: boolean;
-    createdAt: Date;
-    updatedAt: Date;
     type?: "privateMessage" | "eventLog";
     imageContent?: string;
     audioContent?: string;
@@ -18,12 +18,12 @@ declare const _default: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    createdAt: Date;
+    updatedAt: Date;
     conversation: mongoose.Types.ObjectId;
     sender: mongoose.Types.ObjectId;
     content: string;
     isRead: boolean;
-    createdAt: Date;
-    updatedAt: Date;
     type?: "privateMessage" | "eventLog";
     imageContent?: string;
     audioContent?: string;

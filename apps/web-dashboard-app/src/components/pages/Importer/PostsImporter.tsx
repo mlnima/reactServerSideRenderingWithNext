@@ -5,7 +5,7 @@ import {DashboardStore, Store} from "typescript-types";
 import {createNewPostAction} from "@store/reducers/postsReducer";
 import {useAppDispatch} from "@store/hooks";
 import qualityConvertor from "@variables/qualityConvertor";
-import createNewPost from "api-requests/src/dashboard/posts/createNewPost";
+import {dashboardAPIRequestCreateNewPost} from "api-requests";
 
 const PostsImporterStyledDiv = styled.div`
   display: flex;
@@ -51,7 +51,7 @@ const PostsImporter = () => {
                 author:  userData._id
             }
             //@ts-ignore
-            await createNewPost(postDataToSave)
+            await dashboardAPIRequestCreateNewPost(postDataToSave)
             // dispatch(createNewPostAction({data:postDataToSave, router:null}))
         }
     }

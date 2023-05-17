@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useState} from "react";
 import styled from "styled-components";
-import backupMetas from "api-requests/src/dashboard/backups/backupMetas";
+import {dashboardAPIRequestBackupMetas} from "api-requests";
 import FileDownload from 'js-file-download'
 
 const Style = styled.div``;
@@ -42,7 +42,7 @@ const MetasSection: FC<PropTypes> = ({}) => {
     const onBackupMetasHandler = (e: React.MouseEvent<HTMLElement>) => {
         const metaType = (e.target as any).name
         const now = Date.now()
-        backupMetas({
+        dashboardAPIRequestBackupMetas({
             metaType,
             fields :metasSelectedFields,
             limit:metasLimit

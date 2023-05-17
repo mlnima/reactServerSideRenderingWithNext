@@ -77,7 +77,7 @@ const Styles = styled.form`
       height: 25px;
     }
 
-    .audioRecordingAnimation {
+    .audio-recording-animation {
       position: fixed;
       bottom: 45px;
       left: 0;

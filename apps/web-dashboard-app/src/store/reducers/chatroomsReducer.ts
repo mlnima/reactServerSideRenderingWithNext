@@ -1,10 +1,13 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {loading} from "@store/reducers/globalStateReducer";
 import {AxiosError, AxiosResponse} from "axios";
-import getChatrooms from "api-requests/src/dashboard/chatrooms/getChatrooms";
+import {
+    dashboardAPIRequestGetChatrooms,
+    dashboardAPIRequestGetChatroom,
+    // dashboardAPIRequestCreateChatroom
+} from "api-requests";
 import {RootState} from "@store/store";
-import getChatroom from "api-requests/src/dashboard/chatrooms/getChatroom";
-import createChatroom from "api-requests/src/dashboard/chatrooms/createChatroom";
+
 
 const initialState = {
     chatrooms: [],
@@ -15,7 +18,7 @@ export const getChatroomsAction = createAsyncThunk(
     'adminPanelPages/getChatroomsAction',
     async ( data:null,thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await getChatrooms().then((response: AxiosResponse) => {
+        return await dashboardAPIRequestGetChatrooms().then((response: AxiosResponse) => {
             console.log(response.data)
             return response.data?.chatrooms
         }).catch((error: AxiosError) => {
@@ -28,7 +31,7 @@ export const getChatroomAction = createAsyncThunk(
     'adminPanelPages/getChatroomAction',
     async (chatroomId: string, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await getChatroom(chatroomId).then((response: AxiosResponse) => {
+        return await dashboardAPIRequestGetChatroom(chatroomId).then((response: AxiosResponse) => {
             return response.data?.chatroom
         }).catch((error: AxiosError) => {
 

@@ -7,4 +7,10 @@ export interface MessengerState {
     isMaximized:boolean,
     autoScroll:boolean,
     isConversationsMenuOpen:boolean,
+    draftMessage:{
+        imageContent:string,
+        videoContent:string,
+        audioContent:string,
+        textContent:string,
+    }
 }

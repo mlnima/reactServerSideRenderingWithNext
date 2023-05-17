@@ -1,12 +1,12 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {loading} from "../globalStateReducer";
-import likePost from "api-requests/src/client/posts/likePost";
+import {clientAPIRequestLikePost} from "api-requests";
 
 export const likePostAction = createAsyncThunk(
     'posts/likePostAction',
     async (id: string|undefined, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await likePost(id)
+        return await clientAPIRequestLikePost(id)
             .then(res => {
             return
         }).finally(() => thunkAPI.dispatch(loading(false)))

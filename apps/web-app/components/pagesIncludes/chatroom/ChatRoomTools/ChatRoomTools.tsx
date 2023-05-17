@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useRef, useState} from 'react';
-import {socket} from 'custom-util/src/socket-utils/socketIoClient';
+import { socket } from 'custom-util';
 import {useSelector} from "react-redux";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
@@ -118,8 +118,6 @@ const ChatRoomTools: FC<IProps> = ({chatroomId}) => {
                         <VoiceRecorderButton setAudioMessage={setAudioMessage}/>
                     </>
                 }
-
-
             </div>
         </Styles>
 

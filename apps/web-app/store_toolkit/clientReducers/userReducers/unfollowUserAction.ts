@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import unFollowUser from "api-requests/src/client/users/unFollowUser";
+import {clientAPIRequestUnFollowUser} from "api-requests";
 import { loading } from "@store_toolkit/clientReducers/globalStateReducer";
 
 export const unfollowUserAction = createAsyncThunk<void, string>(
@@ -7,7 +7,7 @@ export const unfollowUserAction = createAsyncThunk<void, string>(
     async (_id:string, thunkAPI) => {
         try {
             thunkAPI.dispatch(loading(true));
-            await unFollowUser(_id);
+            await clientAPIRequestUnFollowUser(_id);
         } catch (error) {
             // Consider adding error handling logic here, e.g., logging or dispatching an error action
         } finally {

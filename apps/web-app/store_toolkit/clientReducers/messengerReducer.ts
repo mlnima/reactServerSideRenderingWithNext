@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "@store_toolkit/store";
 import {getConversationsListAction} from "@store_toolkit/clientReducers/messengerActions/getConversationsListAction";
@@ -8,25 +9,27 @@ import {
 import {IMessengerConversation} from "typescript-types/src/messengerTypes/IMessengerConversation";
 import {deleteAConversationAction} from "@store_toolkit/clientReducers/messengerActions/deleteAConversation";
 import {startAConversationAction} from "@store_toolkit/clientReducers/messengerActions/startAConversationAction";
+import {MessengerState} from "typescript-types/src/storeTypes/MessengerState";
 
-interface MessengerStateRaw {
-    conversationsList: {}[],
-    isConversationsMenuOpen: boolean,
-    activeConversation: {
-        messages: {}[]
-    },
-    isMaximized: boolean,
-    autoScroll: boolean,
-}
-
-const initialState: MessengerStateRaw = {
+const initialState: MessengerState = {
     conversationsList: [],
     isConversationsMenuOpen: true,
     activeConversation: {
-        messages: []
+        _id: '',
+        messages: [],
+        users: [],
+        status: 'active',
+        createdAt: null,
+        updatedAt: null,
     },
     isMaximized: false,
     autoScroll: true,
+    draftMessage: {
+        imageContent: '',
+        videoContent: '',
+        audioContent: '',
+        textContent: '',
+    },
 }
 
 
@@ -34,26 +37,35 @@ export const messengerSlice = createSlice({
     name: 'messenger',
     initialState,
     reducers: {
-        setMaximize: (state, action: PayloadAction<any>) => {
-            state.isMaximized = !state.isMaximized
+        setMessengerState: (state, action: PayloadAction<any>) => {
+            return {
+                ...state,
+                ...action.payload
+            }
         },
-
-        setAutoScroll: (state, action: PayloadAction<any>) => {
-            state.autoScroll = action.payload
+        setDraftMessageData: (state, action: PayloadAction<any>) => {
+            return {
+                ...state,
+                draftMessage:{
+                    ...state.draftMessage,
+                    ...action.payload
+                }
+            }
         },
-        setIsConversationsMenuOpen: (state, action: PayloadAction<any>) => {
-            state.isConversationsMenuOpen= action.payload
-        },
-        cleanActiveConversation: (state, action) => {
+        cleanActiveConversation: (state) => {
             return {
                 ...state,
                 activeConversation: {
-                    messages: []
+                    _id: '',
+                    messages: [],
+                    users: [],
+                    status: 'active',
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
                 }
-
             }
         },
-        newMessageInActiveConversation: (state, action: PayloadAction<any>) => {
+        newMessageInActiveConversation: (state, action: PayloadAction<{messages:IMessengerConversation[]}>) => {
             return {
                 ...state,
                 activeConversation: {
@@ -75,28 +87,40 @@ export const messengerSlice = createSlice({
                 ]
             }
         }).addCase(startAConversationAction.fulfilled, (state, action: PayloadAction<any>) => {
-            state.activeConversation = action.payload
+            return {
+                ...state,
+                ...action.payload
+            }
         }).addCase(getAConversationAction.fulfilled, (state, action: PayloadAction<any>) => {
-            state.activeConversation = action.payload
+            return {
+                ...state,
+                activeConversation: action.payload.activeConversation
+            }
         }).addCase(deleteAConversationAction.fulfilled, (state, action: PayloadAction<any>) => {
 
             state.conversationsList = state.conversationsList.filter((conversation: IMessengerConversation) => {
                 return conversation?._id !== action.payload
             })
         }).addCase(loadOlderMessagesAction.fulfilled, (state, action: PayloadAction<any>) => {
-            state.activeConversation.messages = [...state.activeConversation.messages, ...action.payload.messages]
+            return {
+                ...state,
+                activeConversation: {
+                    ...state.activeConversation,
+                    messages: [...state.activeConversation.messages, ...action.payload.messages]
+                }
+            }
         })
 })
 
 
 export const {
-    setMaximize,
-    setIsConversationsMenuOpen,
+    setMessengerState,
     cleanActiveConversation,
-    setAutoScroll,
-    newMessageInActiveConversation
+    newMessageInActiveConversation,
+    setDraftMessageData,
 } = messengerSlice.actions
 
 export const settingsReducer = (state: RootState) => state?.messenger || null
 
+//@ts-ignore
 export default messengerSlice.reducer

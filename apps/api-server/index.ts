@@ -1,15 +1,12 @@
 import dotenv from 'dotenv';
-
 dotenv.config({path: '../../.env'});
 import {connectToDatabase,shouldCompress} from 'custom-server-util';
-
 connectToDatabase('Express Server')
 import express from 'express';
 import bodyParser from 'body-parser';
 import fileUpload from 'express-fileupload';
 import cookieParser from 'cookie-parser';
-// import path from 'path';
-import adminAuthMiddleware from 'custom-server-util/src/middleware-utils/adminAuthMiddleware';
+import {adminAuthMiddleware} from 'custom-server-util';
 import xmlParser from 'express-xml-bodyparser';
 import apiCache from 'apicache';
 import cors from 'cors';
@@ -20,9 +17,9 @@ import clientMainRouter from './controllers/clientControllers/clientMainRouter';
 import clientMainFestController from './controllers/clientControllers/clientMainFestController'
 import clientRobotTxtController from './controllers/clientControllers/clientRobotTxtController'
 import loggerMiddleware from "./middlewares/loggerMiddleware";
+// import { createExpressServer } from 'custom-server-util';
 
 const server = express();
-const dev = process.env.NODE_ENV !== 'production';
 
 const runServer = () => {
 
@@ -40,24 +37,6 @@ const runServer = () => {
         res.json({message: 'Deleting Cache Command Executed'})
     });
 
-    // const staticPath = dev ? './static' : '../static';
-    // const publicPath = dev ? './public' : '../public';
-    // const publicPathFileServer = dev ? '../file-server/public' : '../../file-server/public';
-    // const dashboardAppPath = dev ? '../web-dashboard-app/build' : '../../web-dashboard-app/build';
-    // const dashboardBuiltPath = path.join(__dirname, dashboardAppPath)
-    //
-    // server.use('/static', express.static(path.join(__dirname, staticPath), {maxAge: "604800000"}));
-    // server.use('/static', express.static(`${dashboardBuiltPath}/static`, {maxAge: "604800000"}));
-    // server.use('/public', express.static(path.join(__dirname, publicPathFileServer), {maxAge: "604800000"}));
-    // server.use('/public', express.static(path.join(__dirname, publicPath), {maxAge: "604800000"}));
-    //
-    // server.get('/dashboard', (req, res) => {
-    //     res.sendFile(`${dashboardBuiltPath}/index.html`);
-    // })
-    // server.get('/dashboard/*', (req, res) => {
-    //     res.sendFile(`${dashboardBuiltPath}/index.html`);
-    // })
-
     server.get('/api/alive', loggerMiddleware, (req, res) => {
         res.json({message: 'alive'})
     });
@@ -68,7 +47,6 @@ const runServer = () => {
     //api routes
     server.use('/api/admin', adminMainRouter);
     server.use('/api/v1', loggerMiddleware, clientMainRouter);
- //   server.use('/api/fileManager', loggerMiddleware, fileManagerMainRouter);
 
     server.listen(process.env.API_SERVER_PORT || 3002, () => {
         console.log(`process ${process.pid} : api server started at ${process.env.API_SERVER_PORT || 3002} `);

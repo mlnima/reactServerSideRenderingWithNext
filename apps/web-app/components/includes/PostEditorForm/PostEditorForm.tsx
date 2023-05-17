@@ -15,7 +15,7 @@ import {useSelector} from "react-redux";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import updatePostAction from "@store_toolkit/clientReducers/postsReducers/updatePostAction";
 import {reduceArrayOfDataToIds} from "custom-util";
-import uploadImage from "api-requests/src/client/fileManager/uploadImage";
+import {clientAPIRequestUploadImage} from "api-requests";
 import randomNumberGenerator from "custom-util/src/math-util/randomNumberGenerator";
 
 const PostLocation = dynamic(() => import('@components/includes/PostEditorForm/common/PostLocation'));
@@ -48,7 +48,7 @@ const PostEditorForm: FC<PropTypes> = ({data}) => {
         }));
 
         //upload images
-        await uploadImage(formData).then(response => {
+        await clientAPIRequestUploadImage(formData).then(response => {
             if (!!response.data?.images?.length){
                 setPostData(prevState => ({...prevState, images: [...prevState.images, ...response.data?.images]}))
             }

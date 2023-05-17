@@ -2,7 +2,7 @@ import {FC,  useMemo, useState} from "react";
 import Select from 'react-select';
 import styled from "styled-components";
 import {uniqArrayBy} from "custom-util";
-import getMetaSuggestion from "api-requests/src/client/metas/getMetaSuggestion";
+import {clientAPIRequestResetMetaImage} from "api-requests";
 import {Meta} from "typescript-types";
 
 const MetaDataSelectorStyledDiv = styled.div`
@@ -40,7 +40,8 @@ const MetaDataSelector: FC<ComponentPropTypes> =
 
         const onInputChangeHandler = (input) => {
             setIsLoading(true)
-            getMetaSuggestion(type, input).then(res => {
+            //@ts-ignore
+            clientAPIRequestResetMetaImage(type, input).then(res => {
                 //need to be tested for performance
                 setSuggestion((prevState) => ([...prevState, ...(res.data?.metas || [])]))
                 setIsLoading(false)

@@ -1,13 +1,17 @@
 import React, {FC, KeyboardEventHandler} from "react";
 import Styles from "./TextInput.styles";
+import {useAppDispatch} from "@store_toolkit/hooks";
+import {setDraftMessageData} from "@store_toolkit/clientReducers/messengerReducer";
+import {useSelector} from "react-redux";
+import {Store} from "typescript-types";
 
 interface IProps {
-    onChangeHandler :(value:string)=>void,
     onStartTypingHandler :KeyboardEventHandler<HTMLInputElement>,
-    value
 }
 
-const textInput: FC<IProps> = ({onChangeHandler,onStartTypingHandler,value}) => {
+const textInput: FC<IProps> = ({onStartTypingHandler}) => {
+    const dispatch = useAppDispatch()
+    const {draftMessage } = useSelector(({messenger}: Store) => messenger);
     return (
         <Styles>
             <input className={'chatroom-tools-input form-control-input'}
@@ -15,9 +19,9 @@ const textInput: FC<IProps> = ({onChangeHandler,onStartTypingHandler,value}) => 
                    type={'text'}
                    name={'messageData'}
                    placeholder={'Type a message'}
-                   onChange={e => onChangeHandler(e.target.value)}
+                   onChange={e =>dispatch(setDraftMessageData({textContent:e.target.value}))}
                    onKeyDown={onStartTypingHandler}
-                   value={value}
+                   value={draftMessage.textContent}
             />
         </Styles>
     )

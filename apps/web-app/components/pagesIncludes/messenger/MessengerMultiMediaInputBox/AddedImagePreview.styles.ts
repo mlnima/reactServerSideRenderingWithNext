@@ -2,22 +2,49 @@ import styled from "styled-components";
 
 
 export const Styles = styled.form`
-  position: absolute;
-  //top:-189px;
-  bottom: 60px;
-  right:50px;
-  background-color: var(--tertiary-background-color,#272727);
-  border-radius: 5px;
-  div{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, .50);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  
+  .added-image-preview {
+    height: 100%;
     width: 100%;
-    height:35px
-    padding: 4px;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: flex-end;
+    background-color: var( --secondary-background-color,#B3B3B3);
+    border-radius: 5px;
+    .image-preview-header {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      height: 32px;
+   
+      .close-btn{
+        color: var(--main-text-color, #fff);
+      }
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+    
+    .image-preview-footer{
+      display: grid;
+      grid-template-columns: 1fr 35px;
+    }
   }
-  img{
-    width: 150px;
-    height:150px; object-fit: contain;
+
+
+  @media only screen and (min-width: 768px) {
+    .added-image-preview {
+      width: 400px;
+      height: auto;
+    }
   }
 `

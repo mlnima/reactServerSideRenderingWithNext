@@ -3,14 +3,14 @@ import type {GetServerSidePropsContext, PreviewData} from "next";
 import {setHeadData, setNotFoundPage} from "../globalStateReducer";
 import {_customPageCanonicalUrlGenerator} from "@_variables/_clientVariables/clientVariables/_canonicalUrlGenerators";
 import {ParsedUrlQuery} from "querystring";
-import getPage from "api-requests/src/client/custom-pages/getPage";
+import {clientAPIRequestGetPage} from "api-requests";
 
 const getPageDataAction = createAsyncThunk(
     'posts/getPageDataAction',
     async (context :GetServerSidePropsContext<ParsedUrlQuery,PreviewData>, thunkAPI) => {
         const pageName = context.query?.pageName
 
-        return await getPage(pageName)
+        return await clientAPIRequestGetPage(pageName)
             .then(res => {
 
             if (res.data?.pageData && res.data?.pageData?.status === 'published') {

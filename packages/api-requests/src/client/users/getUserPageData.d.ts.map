@@ -1,1 +1,0 @@
-{"version":3,"file":"getUserPageData.d.ts","sourceRoot":"","sources":["getUserPageData.ts"],"names":[],"mappings":"AAIA,UAAU,aAAa;IACnB,gBAAgB,CAAC,EAAE,MAAM,CAAC;IAC1B,QAAQ,CAAC,EAAE,MAAM,CAAC;IAClB,MAAM,CAAC,EAAE,MAAM,EAAE,CAAC;CACrB;AAED,QAAA,MAAM,eAAe,2CAAkD,aAAa,qDAMnF,CAAC;AAEF,eAAe,eAAe,CAAC"}

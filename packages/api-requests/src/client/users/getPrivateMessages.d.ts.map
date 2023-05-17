@@ -1,1 +1,0 @@
-{"version":3,"file":"getPrivateMessages.d.ts","sourceRoot":"","sources":["getPrivateMessages.ts"],"names":[],"mappings":"AAEA,UAAU,wBAAwB;IAC9B,QAAQ,EAAE,MAAM,CAAC;IACjB,UAAU,EAAE,MAAM,CAAC;IACnB,MAAM,CAAC,EAAE,MAAM,CAAC;IAChB,IAAI,CAAC,EAAE,MAAM,CAAA;CAChB;AAED,QAAA,MAAM,kBAAkB,2CAA+C,wBAAwB,KAAG,QAAQ,IAAI,CAe7G,CAAC;AAEF,eAAe,kBAAkB,CAAC"}

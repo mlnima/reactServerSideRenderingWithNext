@@ -6,9 +6,8 @@ export const Styles = styled.div`
   padding: 8px;
   margin: 0;
   box-sizing: border-box;
-  cursor:pointer;
-
-
+  cursor: pointer;
+  
   .messenger-conversation-preview {
     width: 100%;
     height: 100%;
@@ -22,6 +21,7 @@ export const Styles = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
+      padding: 1px;
 
       img {
         width: 50px;
@@ -40,12 +40,13 @@ export const Styles = styled.div`
       //display: flex;
       height: 100%;
       grid-template-rows: 1fr 1fr;
-   
+
 
       .seen-content {
         display: grid;
         grid-template-columns: 25px 1fr;
         align-items: center;
+
         .content {
           overflow: hidden;
           white-space: nowrap;

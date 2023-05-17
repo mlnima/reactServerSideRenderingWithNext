@@ -6,9 +6,12 @@ import {useAppDispatch} from "@store/hooks";
 import {editChatroomFieldAction, getChatroomAction} from "@store/reducers/chatroomsReducer";
 import {useSelector} from "react-redux";
 import {DashboardStore} from "typescript-types";
-import updateChatroom from "api-requests/src/dashboard/chatrooms/updateChatroom";
-import createChatroom from "api-requests/src/dashboard/chatrooms/createChatroom";
-import deleteChatroom from "api-requests/src/dashboard/chatrooms/deleteChatroom";
+import {
+    dashboardAPIRequestUpdateChatroom,
+    dashboardAPIRequestCreateChatroom,
+    dashboardAPIRequestDeleteChatroom
+} from "api-requests";
+
 
 const Style = styled.div`
   margin: 8px;
@@ -54,9 +57,9 @@ const Chatroom: FC<PropTypes> = ({}) => {
 
     const onSaveHandler = () => {
         if (chatroomId) {
-            updateChatroom(chatroomData)
+            dashboardAPIRequestUpdateChatroom(chatroomData)
         } else if (!!isNewChatroom) {
-            createChatroom(chatroomData).then(response => {
+            dashboardAPIRequestCreateChatroom(chatroomData).then(response => {
                 console.log(response)
                 if (response?.data?.chatroom?._id) {
                     navigate(`/dashboard/chatroom?id=${response?.data?.chatroom?._id}`);
@@ -66,7 +69,7 @@ const Chatroom: FC<PropTypes> = ({}) => {
     }
 
     const onDeleteHandler = () => {
-        deleteChatroom(chatroomId as string).then(() => {
+        dashboardAPIRequestDeleteChatroom(chatroomId as string).then(() => {
             navigate(`/dashboard/assets?assetsType=chatrooms&size=20`);
         })
     }

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrashCan} from "@fortawesome/free-solid-svg-icons/faTrashCan";
-import deleteChatroomMessage from 'api-requests/src/client/users/deleteChatroomMessage'
+import {clientAPIRequestDeleteChatroomMessage} from 'api-requests'
 
 const Style = styled.div``;
 
@@ -17,7 +17,7 @@ const AdminActionOnMessageMenu: FC<PropTypes> = ({chatroomId, messageId}) => {
 
     const onDeleteMessageHandler = () => {
         if (chatroomId && messageId) {
-            deleteChatroomMessage(chatroomId, messageId)
+            clientAPIRequestDeleteChatroomMessage(chatroomId, messageId)
         }
     }
 

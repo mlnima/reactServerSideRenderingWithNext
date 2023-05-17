@@ -1,13 +1,10 @@
 // @ts-nocheck
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {RootState} from "../store";
-import {reduceWidgetsToGroups} from "custom-util";
 import {loading, setAlert} from "./globalStateReducer";
-import {AxiosResponse} from "axios";
 import {Widget} from "typescript-types";
-import getWidgets from "api-requests/src/client/widgets/getWidgets";
-import saveFormData from "api-requests/src/client/widgets/saveFormData";
-import getUncachedWidgetsForAdmin from "api-requests/src/client/widgets/getUncachedWidgetsForAdmin";
+import {clientAPIRequestGetWidgets,clientAPIRequestSaveFormData} from "api-requests";
+import {clientAPIRequestGetUncachedWidgetsForAdmin} from "api-requests";
 
 interface WidgetsState {
     widgetInGroups: {
@@ -25,7 +22,7 @@ export const fetchWidgets = createAsyncThunk(
     'widgets/fetchWidgets',
     async (options: { positions: string[], locale: string }, thunkAPI) => {
         try {
-            const widgets = await getWidgets(options.positions, options.locale)
+            const widgets = await clientAPIRequestGetWidgets(options.positions, options.locale)
             return {
                 requestedWidgets: options.positions,
                 widgetInGroups: widgets.data?.widgets || {}
@@ -40,7 +37,7 @@ export const saveWidgetFormData = createAsyncThunk(
     'widgets/saveWidgetFormData',
     async (data: {}, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await saveFormData(data).then(response => {
+        return await clientAPIRequestSaveFormData(data).then(response => {
         }).catch(error => {
         }).finally(() => thunkAPI.dispatch(loading(false)))
     }
@@ -51,7 +48,7 @@ export const getUncachedWidgetsForAdminAction = createAsyncThunk(
     async (data: any, thunkAPI) => {
         try {
             thunkAPI.dispatch(loading(true))
-            const widgets = await getUncachedWidgetsForAdmin()
+            const widgets = await clientAPIRequestGetUncachedWidgetsForAdmin()
             thunkAPI.dispatch(loading(false))
             return {
                 widgetInGroups: widgets.data?.widgets || {}

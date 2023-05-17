@@ -1,3 +1,5 @@
+ /** @type {import('next').NextConfig} */
+
 require('dotenv').config({path: '../../.env'})
 const withPlugins = require('next-compose-plugins');
 const pluginsConfig = require('./nextConfigs/next.configPlugins')
@@ -25,7 +27,7 @@ const nextConfigs = {
     // distDir: '../../.next',
     rewrites,
     reactStrictMode: false,
-    experimental: {appDir: true},
+    // experimental: {appDir: true},
     // runtime: 'experimental-edge',
     // redirects,
     swcMinify: true,
@@ -34,7 +36,13 @@ const nextConfigs = {
     },
     compiler: {
         styledComponents: true
-    }
+    },
+    transpilePackages: [
+        'api-requests',
+        'typescript-types',
+        'react-hooker-lib',
+        'ui',
+    ],
     // env: transformedEnv
 }
 

@@ -4,10 +4,12 @@ import {RootState} from "../store";
 import {AxiosError, AxiosResponse} from "axios";
 import {loading, setAlert} from "./globalStateReducer";
 import {Widget} from "typescript-types";
-import getWidgets from "api-requests/src/dashboard/widgets/getWidgets";
-import updateWidget from "api-requests/src/dashboard/widgets/updateWidget";
-import createNewWidget from "api-requests/src/dashboard/widgets/createNewWidget";
-import deleteWidget from "api-requests/src/dashboard/widgets/deleteWidget";
+import {
+    dashboardAPIRequestGetWidgets,
+    dashboardAPIRequestUpdateWidget,
+    dashboardAPIRequestCreateNewWidget,
+    dashboardAPIRequestDeleteWidget
+} from "api-requests";
 
 const initialState = {
     adminPanelWidgets: {}
@@ -17,7 +19,7 @@ export const getWidgetsAction = createAsyncThunk(
     'adminPanelWidgets/getWidgetsAction',
     async (data: any, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await getWidgets()
+        return await dashboardAPIRequestGetWidgets()
             .then((res: AxiosResponse<unknown | any>) => {
                 return reduceWidgetsToGroups(res?.data?.widgets || [])
             }).catch((error: AxiosError) => {
@@ -35,7 +37,7 @@ export const updateWidgetAction = createAsyncThunk(
     'adminPanelWidgets/fetchAdminPanelUpdateWidget',
     async (widgetData: any, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await updateWidget(widgetData)
+        return await dashboardAPIRequestUpdateWidget(widgetData)
             .then((res:AxiosResponse<unknown|any>)=>{
 
             }).catch((error: AxiosError)=>{
@@ -51,7 +53,7 @@ export const createNewWidgetAction = createAsyncThunk(
     'adminPanelWidgets/createNewWidgetAction',
     async (newWidgetData: Widget, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await createNewWidget(newWidgetData)
+        return await dashboardAPIRequestCreateNewWidget(newWidgetData)
             .then((res: AxiosResponse<unknown | any>) => {
                 if (res.data?.newWidgetData) {
                     thunkAPI.dispatch(setAlert({
@@ -75,7 +77,7 @@ export const deleteWidgetAction = createAsyncThunk(
     'adminPanelWidgets/deleteWidgetAction',
     async ({_id, position}: { _id: string, position: string }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        await deleteWidget(_id)
+        await dashboardAPIRequestDeleteWidget(_id)
             .then((res: AxiosResponse<unknown | any>) => {
             thunkAPI.dispatch(setAlert({
                 message: 'WidgetWrapper Deleted',

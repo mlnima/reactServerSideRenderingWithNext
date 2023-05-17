@@ -1,7 +1,6 @@
 import express from 'express';
 //middlewares
-// import adminAuthMiddleware from '../../middlewares/adminAuthMiddleware';
-import adminAuthMiddleware from 'custom-server-util/src/middleware-utils/adminAuthMiddleware';
+import {adminAuthMiddleware} from 'custom-server-util';
 import adminApiRequestMiddleware from '../../middlewares/apiRequestMiddleware';
 //API Controllers
 import adminCreateNewPostByApi from './adminPostsControllers/adminCreateNewPostByApi';

@@ -1,7 +1,7 @@
 import React, {useRef} from 'react';
 import {useSelector} from "react-redux";
 import {Store} from "typescript-types";
-import uploadImage from "api-requests/src/client/fileManager/uploadImage";
+import {clientAPIRequestUploadImage} from "api-requests";
 import {Styles} from "@components/pagesIncludes/profile/ProfileImage/ProfileImage.styles";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCirclePlus} from "@fortawesome/free-solid-svg-icons/faCirclePlus";
@@ -26,7 +26,7 @@ const ProfileImage = () => {
                     height:480
                 }));
 
-                await uploadImage(formData).then((response) => {
+                await clientAPIRequestUploadImage(formData).then((response) => {
                     const image = response.data.images[0]
                     if (imageElement.current){
                         imageElement.current.src = image.filePath

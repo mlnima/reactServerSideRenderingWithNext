@@ -29,4 +29,6 @@ export interface User {
     country: string;
     status: string;
     keyMaster: boolean;
+    createdAt:Date,
+    updatedAt:Date,
 }

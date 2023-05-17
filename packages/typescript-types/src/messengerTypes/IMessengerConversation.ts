@@ -6,8 +6,8 @@ export interface IMessengerConversation {
     users: User[],
     messages: IMessengerConversationMessage[],
     status: 'restricted'|'active'| 'archived',
-    createdAt: Date,
-    updatedAt: Date,
+    createdAt: Date | null,
+    updatedAt: Date | null,
 }
 
 export interface IMessengerConversationRaw {

@@ -1,13 +1,15 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {loading} from "./globalStateReducer";
-import {AxiosInstance} from "api-requests";
 import {AxiosError, AxiosResponse} from "axios";
 import {RootState} from "../store";
-import getPages from "api-requests/src/dashboard/pages/getPages";
-import getPage from "api-requests/src/dashboard/pages/getPage";
-import updatePage from "api-requests/src/dashboard/pages/updatePage";
-import createNewPage from "api-requests/src/dashboard/pages/createNewPage";
-import deletePage from "api-requests/src/dashboard/pages/deletePage";
+import {
+    dashboardAPIRequestCreateNewPage,
+    dashboardAPIRequestDeletePage,
+    dashboardAPIRequestGetPages,
+    dashboardAPIRequestGetPage,
+    dashboardAPIRequestUpdatePage
+} from "api-requests";
+
 
 
 const initialState = {
@@ -19,7 +21,7 @@ export const getPagesAction = createAsyncThunk(
     'adminPanelPages/getPagesAction',
     async (data: {}, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await getPages(data).then((response: AxiosResponse) => {
+        return await dashboardAPIRequestGetPages(data).then((response: AxiosResponse) => {
             return response.data?.pages
         }).catch((err: AxiosError) => {
 
@@ -36,7 +38,7 @@ export const getPageAction = createAsyncThunk(
             token: localStorage.wt
         };
 //@ts-ignore
-        return await getPage(id).then((response: AxiosResponse) => {
+        return await dashboardAPIRequestGetPage(id).then((response: AxiosResponse) => {
             return response.data?.pageData
         }).catch((err: AxiosError) => {
 
@@ -52,7 +54,7 @@ export const updatePageAction = createAsyncThunk(
             token: localStorage.wt
         };
 
-        return await updatePage(pageData).then((response: AxiosResponse) => {
+        return await dashboardAPIRequestUpdatePage(pageData).then((response: AxiosResponse) => {
 
         }).catch((err: AxiosError) => {
 
@@ -64,7 +66,7 @@ export const createNewPageAction = createAsyncThunk(
     async ({pageData}: { pageData: {} }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
-        return await createNewPage(pageData).then((response: AxiosResponse) => {
+        return await dashboardAPIRequestCreateNewPage(pageData).then((response: AxiosResponse) => {
             // const pageId = response.data.savedPageData._id
             // push(`/admin/page?id=${pageId}`)
         }).catch((err: AxiosError) => {
@@ -78,7 +80,7 @@ export const deletePageAction = createAsyncThunk(
     async (id:string, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
-        return  await deletePage(id).then(res=>{
+        return  await dashboardAPIRequestDeletePage(id).then(res=>{
 
         }).catch(err=>{
 

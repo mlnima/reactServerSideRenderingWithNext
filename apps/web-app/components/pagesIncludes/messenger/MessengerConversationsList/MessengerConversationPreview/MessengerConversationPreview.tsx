@@ -33,7 +33,7 @@ const MessengerConversationPreview: FC<IProps> = ({conversationData,onSelectConv
                 <div className={'profile-image'}>
                     {partnerData?.profileImage?.filePath ?
                         <img src={partnerData.profileImage.filePath} alt={partnerData.username}/> :
-                        <FontAwesomeIcon icon={faCircleUser} style={{width: 20, height: 20}}/>
+                        <FontAwesomeIcon icon={faCircleUser} style={{width: 50, height: 50}}/>
                     }
                 </div>
 

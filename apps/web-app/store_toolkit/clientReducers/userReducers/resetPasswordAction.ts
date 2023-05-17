@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import resetPassword from "api-requests/src/client/users/resetPassword";
+import {clientAPIRequestResetPassword} from "api-requests";
 import { setAlert } from "@store_toolkit/clientReducers/globalStateReducer";
 
 interface ResetPasswordActionArgs {
@@ -15,7 +15,7 @@ export const resetPasswordAction = createAsyncThunk<ResetPasswordActionResponse,
     'user/resetPasswordAction',
     async ({ data }, thunkAPI) => {
         try {
-            const response = await resetPassword(data);
+            const response = await clientAPIRequestResetPassword(data);
             thunkAPI.dispatch(
                 setAlert({ message: 'Password Successfully Changed', type: 'success' })
             );

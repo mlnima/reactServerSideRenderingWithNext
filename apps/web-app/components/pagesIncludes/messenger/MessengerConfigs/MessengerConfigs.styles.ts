@@ -3,6 +3,7 @@ interface  IProps {
 
 }
 export const Styles = styled.div<IProps>`
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;

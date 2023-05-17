@@ -4,7 +4,7 @@ import {bulkActionPostsAction} from "@store/reducers/postsReducer";
 import {deleteCommentsAction} from "@store/reducers/commentsReducer";
 import {useAppDispatch} from "@store/hooks";
 import {useSearchParams} from "react-router-dom";
-import deleteForm from "api-requests/src/dashboard/forms/deleteForm";
+import {dashboardAPIRequestDeleteForm} from "api-requests";
 
 interface TableBodyItemDirectActionPropTypes {
     assetsType: string,
@@ -99,7 +99,7 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({asse
             <div className='asset-page-table-body-item-hover-item'>
                 <Link to={'/dashboard/form/' + _id}>Edit</Link>
                 <span className={'btn btn-danger'} onClick={async () => {
-                    await deleteForm(_id).then(()=>{
+                    await dashboardAPIRequestDeleteForm(_id).then(()=>{
                         navigate(`/dashboard/assets?assetsType=forms&size=20&lastUpdate=${Date.now()}`)
                     })
                 }}>Delete</span>

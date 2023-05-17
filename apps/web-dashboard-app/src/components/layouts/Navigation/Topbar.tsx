@@ -10,7 +10,7 @@ import {DashboardStore} from "typescript-types";
 import React, {useEffect} from "react";
 import {faHome} from "@fortawesome/free-solid-svg-icons/faHome";
 import {faEraser} from "@fortawesome/free-solid-svg-icons/faEraser";
-import clearCaches from "api-requests/src/dashboard/clearCaches";
+import {commonAPIRequestClearCaches} from "api-requests";
 
 const Style = styled.div`
   display: flex;
@@ -58,7 +58,7 @@ const Topbar = () => {
                 <a className={'navigationLink'} href={'/'} target={'_blank'}>
                     <FontAwesomeIcon icon={faHome}/>
                 </a>
-                <span className={'navigationLink'} onClick={() => clearCaches().then(() => navigate(0))}>
+                <span className={'navigationLink'} onClick={() => commonAPIRequestClearCaches().then(() => navigate(0))}>
                     <FontAwesomeIcon icon={faEraser}/>
                 </span>
             </div>

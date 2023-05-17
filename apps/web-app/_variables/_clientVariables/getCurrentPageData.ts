@@ -1,5 +1,9 @@
-import getWidgets from "api-requests/src/client/widgets/getWidgets";
-import getSettings from "api-requests/src/client/settings/getSettings";
+
+import {
+    clientAPIRequestGetSettings,
+    clientAPIRequestGetWidgets
+} from "api-requests";
+
 import {reduceWidgetsToGroups} from "custom-util";
 
 interface PropTypes {
@@ -13,8 +17,8 @@ const getCurrentPageData = async ({dynamicWidgets, locale, requireSettings}: Pro
     try {
         const widgetsPositionsToRequest = ['footer', 'header', 'topBar', 'navigation', ...dynamicWidgets];
 
-        const widgetsRequest = await getWidgets(widgetsPositionsToRequest, locale)
-        const settingsRequest = await getSettings(requireSettings)
+        const widgetsRequest = await clientAPIRequestGetWidgets(widgetsPositionsToRequest, locale)
+        const settingsRequest = await clientAPIRequestGetSettings(requireSettings)
 console.log(settingsRequest.data)
         const widgets= reduceWidgetsToGroups([...(widgetsRequest.data?.widgets || [])])
         const settings= settingsRequest.data

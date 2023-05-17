@@ -1,12 +1,9 @@
-import React, {FC, useEffect, useRef, useState} from "react";
+import React, {FC, useEffect, useMemo, useRef, useState} from "react";
 import {Styles} from "@components/pagesIncludes/messenger/page/Styles";
-import {Styles as MessagingAreaStyle} from "../MessagingArea/MessagingArea.styles";
 import {useSelector} from "react-redux";
 import {Store} from "typescript-types";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {useIsMobile} from "react-hooker-lib";
-import {getHeaderSizeAction} from "@store_toolkit/clientReducers/globalStateReducer";
-import {getConversationsListAction} from "@store_toolkit/clientReducers/messengerActions/getConversationsListAction";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
 import MessengerConfigs from "@components/pagesIncludes/messenger/MessengerConfigs/MessengerConfigs";
 import MessengerConversationsList
@@ -16,50 +13,59 @@ import MessagingArea from "@components/pagesIncludes/messenger/MessagingArea/Mes
 import Link from "next/link";
 import MessengerMultiMediaInputBox
     from "@components/pagesIncludes/messenger/MessengerMultiMediaInputBox/MessengerMultiMediaInputBox";
-import {socket} from "custom-util/src/socket-utils/socketIoClient";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faComments} from "@fortawesome/free-solid-svg-icons/faComments";
+import {socket} from "custom-util";
 import {
     cleanActiveConversation,
-    newMessageInActiveConversation,
-    setIsConversationsMenuOpen
+    newMessageInActiveConversation, setDraftMessageData, setMessengerState,
 } from "@store_toolkit/clientReducers/messengerReducer";
 import {deleteAConversationAction} from "@store_toolkit/clientReducers/messengerActions/deleteAConversation";
-import {getAConversationAction} from "@store_toolkit/clientReducers/messengerActions/getAConversationAction";
+import {useRouter} from "next/router";
+import headerSizeCalculator from "custom-util/src/vanilla-ui-utils/headerSizeCalculator";
+import {IMessengerConversation} from "typescript-types/src/messengerTypes/IMessengerConversation";
 import {
-    loadOlderMessagesAction
-} from "@store_toolkit/clientReducers/messengerActions/loadOlderMessagesAction";
+    clientAPIRequestLoadOlderMessages,
+    clientAPIRequestGetConversationsList,
+    clientAPIRequestGetAConversation
+} from "api-requests";
+import {getAConversationAction} from "@store_toolkit/clientReducers/messengerActions/getAConversationAction";
+import {loadOlderMessagesAction} from "@store_toolkit/clientReducers/messengerActions/loadOlderMessagesAction";
+import {getHeaderSizeAction} from "@store_toolkit/clientReducers/globalStateReducer";
 
 interface IProps {
 
 }
 
 const Page: FC<IProps> = ({}) => {
-
     //hooks
+    const router = useRouter()
     const dispatch = useAppDispatch()
     const isMobile = useIsMobile();
 
-    //states
-    const [skip, setSkip] = useState(0)
+    const [conversationsList, setConversationsList] = useState([])
+    //const [activeConversation, setActiveConversation] = useState<IMessengerConversation | null>(null)
     const [audioMessage, setAudioMessage] = useState<string>('')
     const [imageMessage, setImageMessage] = useState<string>('')
     const [textMessage, setTextMessage] = useState('')
+    const messageAreaRef = useRef<null | HTMLDivElement>(null)
     //refs
     const imageInputRef = useRef<HTMLInputElement>(null);
     const hasRun = useRef(false);
     //storeContent
-    const {loggedIn} = useSelector(({user}: Store) => user)
-    const {userData} = useSelector(({user}: Store) => user)
-    const {headerSize} = useSelector(({globalState}: Store) => globalState);
+    const {loggedIn, userData} = useSelector(({user}: Store) => user)
+
     const {
+        activeConversation,
         isMaximized,
         isConversationsMenuOpen,
-        activeConversation,
-        conversationsList
+        draftMessage,
     } = useSelector(({messenger}: Store) => messenger);
-    const isActiveConversation = useSelector(({messenger}: Store) => !!messenger?.activeConversation?._id);
 
+
+    const isActiveConversation = useMemo(() => !!activeConversation?._id, [activeConversation?._id]);
+
+    useEffect(() => {
+        onGetConversationListHandler()
+    }, [loggedIn]);
 
     useEffect(() => {
         const handleGetPrivateMessage = (messageData) => {
@@ -69,12 +75,10 @@ const Page: FC<IProps> = ({}) => {
 
         socket.on("getPrivateMessage", handleGetPrivateMessage);
 
-        // Clean up the listener when the component unmounts
         return () => {
             socket.off("getPrivateMessage", handleGetPrivateMessage);
         };
-    }, []); // Empty dependency array ensures this effect runs only once
-
+    }, []);
 
     useEffect(() => {
         if (activeConversation?._id && !hasRun.current) {
@@ -83,94 +87,120 @@ const Page: FC<IProps> = ({}) => {
         }
     }, [activeConversation]);
 
-
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            dispatch(getHeaderSizeAction(null))
+            dispatch(getHeaderSizeAction(0))
         }
-    }, [isMobile]);
+    }, [isMobile, router]);
 
     useEffect(() => {
-        onGetConversationListHandler()
-    }, [skip]);
-
-
-    const onGetConversationListHandler = () =>{
-        dispatch(getConversationsListAction({limit: 10, skip: conversationsList?.length || 0}))
+        const conversationId = router.query._id as string
+        if (conversationId) {
+            onGetConversationHandler(conversationId)
+        }
+    }, [router]);
+    const onGetConversationHandler = async (conversationId: string) => {
+        try {
+            dispatch(getAConversationAction({conversationId}))
+            // await clientAPIRequestGetAConversation({conversationId}).then(response => {
+            //     //@ts-ignore
+            //     setActiveConversation(response?.data?.conversation)
+            // })
+        } catch (error) {
+            console.log('onGetConversationHandler=> ',)
+        }
     }
-
-
-    //handlers
-
+    const onGetConversationListHandler = () => {
+        if (loggedIn) {
+            clientAPIRequestGetConversationsList({limit: 10, skip: conversationsList?.length}).then(response => {
+                //@ts-ignore
+                setConversationsList([
+                    ...conversationsList,
+                    //@ts-ignore
+                    ...(response?.data?.conversationsList || [])
+                ])
+            })
+        }
+    }
     const onStartTypingHandler = () => {
 
     }
-
     const onDeleteConversationHandler = (conversationId) => {
         dispatch(deleteAConversationAction(conversationId))
     }
-
     const onSelectConversation = (conversationId) => {
-        dispatch(getAConversationAction({conversationId}))
+        router.push(`/messenger?_id=${conversationId}`)
+    }
+    const conversationsMenuTriggerHandler = (value: boolean) => {
+        dispatch(setMessengerState({isConversationsMenuOpen: !isConversationsMenuOpen}))
+        dispatch(cleanActiveConversation(null))
     }
 
-    const conversationsMenuTriggerHandler=(value)=>{
-        dispatch(setIsConversationsMenuOpen(value))
-    }
-
-    const loadOlderMessages = () => {
-        if (activeConversation?._id) {
+    const onLoadOlderMessages = () => {
+        if (!!activeConversation?._id) {
             dispatch(loadOlderMessagesAction({
                 limit: 10,
                 skip: activeConversation?.messages?.length || 0,
-                conversationId: activeConversation._id
+                conversationId: activeConversation?._id,
+                messageAreaRef
             }))
         }
     }
-
 
     const onSubmitHandler = (event) => {
         event.preventDefault()
         if (userData?._id && activeConversation?._id) {
             const messageData = {
-                content: textMessage,
-                imageContent: imageMessage,
-                audioContent: audioMessage,
+                content: draftMessage.textContent,
+                imageContent: draftMessage.imageContent,
+                audioContent: draftMessage.audioContent,
                 createdAt: Date.now(),
                 sender: userData._id,
                 conversation: activeConversation._id
             }
             socket.emit('sendPrivateMessage', messageData)
+
             setTimeout(() => {
-                setTextMessage('')
-            }, 100)
+                dispatch(setDraftMessageData({
+                    imageContent: '',
+                    videoContent: '',
+                    audioContent: '',
+                    textContent: '',
+                }))
+            }, 500)
+
         }
     }
 
     return (
-
         <Styles isConversationsMenuOpen={isConversationsMenuOpen}
+            //@ts-ignore
+                isActiveConversation={!!activeConversation?._id}
                 id={'full-width-content'}
                 isMaximized={isMaximized}
                 className={'messenger-page main'}>
 
             <HeadSetter title={'Messenger'}/>
+
             {loggedIn &&
                 <div className={'inner-content'}>
+
                     <div className={'conversations-controls'}>
 
-                        {isConversationsMenuOpen && <MessengerConfigs/>}
+                        {isConversationsMenuOpen &&
+                            <MessengerConfigs/>
+                        }
                         {isConversationsMenuOpen &&
                             <MessengerConversationsList onSelectConversation={onSelectConversation}
-                                                        onGetConversationListHandler={onGetConversationListHandler}/>
+                                                        onGetConversationListHandler={onGetConversationListHandler}
+                                                        conversationsList={conversationsList}/>
                         }
                     </div>
 
                     <div className={'messaging'}>
 
-                        <MessengerHeader isActiveConversation={!!activeConversation?._id} conversationsMenuTriggerHandler={conversationsMenuTriggerHandler}/>
-                        <MessagingArea isActiveConversation={isActiveConversation}
-                                       loadOlderMessages={loadOlderMessages}/>
+                        <MessengerHeader conversationsMenuTriggerHandler={conversationsMenuTriggerHandler}/>
+                        <MessagingArea onLoadOlderMessages={onLoadOlderMessages} messageAreaRef={messageAreaRef}/>
                         <MessengerMultiMediaInputBox
                             textMessage={textMessage}
                             setTextMessage={setTextMessage}
@@ -180,13 +210,13 @@ const Page: FC<IProps> = ({}) => {
                             setAudioMessage={setAudioMessage}
                             onStartTypingHandler={onStartTypingHandler}
                             imageInputRef={imageInputRef}
-                            isActive={isActiveConversation}
+                            isActive={!!activeConversation?._id}
                             onSubmitHandler={onSubmitHandler}/>
                     </div>
                 </div>
             }
             {!loggedIn &&
-                <div className={'inner-content'}>
+                <div className={'inner-content-not-logged-in'}>
                     <Link href={'/register'} className='messenger-page-register-page-link'>
                         You need to create an account in order to access this page
                     </Link>

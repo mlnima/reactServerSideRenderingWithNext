@@ -3,12 +3,12 @@ declare const _default: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    users: mongoose.Types.ObjectId[];
     messages: mongoose.Types.DocumentArray<{
         createdAt: Date;
-        messageBody?: string;
         author?: mongoose.Types.ObjectId;
+        messageBody?: string;
     }>;
+    users: mongoose.Types.ObjectId[];
     systemMessages: mongoose.Types.DocumentArray<{
         createdAt: Date;
         type?: string;
@@ -20,12 +20,12 @@ declare const _default: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    users: mongoose.Types.ObjectId[];
     messages: mongoose.Types.DocumentArray<{
         createdAt: Date;
-        messageBody?: string;
         author?: mongoose.Types.ObjectId;
+        messageBody?: string;
     }>;
+    users: mongoose.Types.ObjectId[];
     systemMessages: mongoose.Types.DocumentArray<{
         createdAt: Date;
         type?: string;

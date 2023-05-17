@@ -5,7 +5,7 @@ import {useAppDispatch} from "@store_toolkit/hooks";
 import CardTitle from "../asset/CardTitle/CardTitle";
 import {Post} from "typescript-types";
 import DefaultPostCardStyle from "../asset/DefaultPostCardStyle";
-import viewPost from "api-requests/src/client/posts/viewPost";
+import {clientAPIRequestViewPost} from "api-requests";
 
 const CardViews = dynamic(() => import('../asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('../asset/CardRating/CardRating'))
@@ -88,7 +88,7 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
         return (
             <Style className={'post-card'} cardWidth={cardWidth}>
                 <a href={post.redirectLink} className='promotion-card-link-external'
-                   onClick={() => viewPost(post._id)} target='_blank' rel="nofollow noopener external">
+                   onClick={() => clientAPIRequestViewPost(post._id)} target='_blank' rel="nofollow noopener external">
                     {post.mainThumbnail ?
                         <CardImageRenderer imageUrl={post.mainThumbnail}
                                            mediaAlt={title}

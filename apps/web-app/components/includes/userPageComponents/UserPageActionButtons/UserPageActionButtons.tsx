@@ -1,16 +1,14 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect} from 'react';
 import {useRouter} from "next/router";
 import useTranslation from 'next-translate/useTranslation'
 import styled from "styled-components";
-import { useSelector} from "react-redux";
-
+import {useSelector} from "react-redux";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {Store} from "typescript-types";
 import {followUserAction} from "@store_toolkit/clientReducers/userReducers/followUserAction";
 import {unfollowUserAction} from "@store_toolkit/clientReducers/userReducers/unfollowUserAction";
-import {startConversationAction} from "@store_toolkit/clientReducers/userReducers/startConversationAction";
-import {getSpecificUserDataAction} from "@store_toolkit/clientReducers/userReducers/getSpecificUserDataAction";
+import {startAConversationAction} from "@store_toolkit/clientReducers/messengerActions/startAConversationAction";
 
 const UserPageActionButtonsStyledDiv = styled.div`
   display: flex;
@@ -49,13 +47,16 @@ interface UserPageActionButtonsPropType {
 
 const UserPageActionButtons: FC<UserPageActionButtonsPropType> = ({_id}) => {
     const {t} = useTranslation('common');
-    const {push} = useRouter()
+    const [startedTheConversation, setStartedTheConversation] = React.useState(false)
+    const router = useRouter()
     const dispatch = useAppDispatch()
-    const {userData,loggedIn} = useSelector((store: Store) => store?.user)
-    const userPageData = useSelector((store: Store) => store?.user?.userPageData)
+    const {userData, loggedIn,userPageData} = useSelector(({user}: Store) => user)
+
+    const {activeConversation} = useSelector(({messenger}: Store) => messenger)
+
 
     const onFollowHandler = () => {
-        if (userPageData?._id && loggedIn && userData?._id ) {
+        if (userPageData?._id && loggedIn && userData?._id) {
             dispatch(followUserAction(userPageData._id))
         } else {
             dispatch(loginRegisterForm('login'))
@@ -63,15 +64,21 @@ const UserPageActionButtons: FC<UserPageActionButtonsPropType> = ({_id}) => {
     }
 
     const onUnFollowHandler = () => {
-        if (userPageData?._id){
+        if (userPageData?._id) {
             dispatch(unfollowUserAction(userPageData?._id))
         }
     }
+    useEffect(() => {
+        if (startedTheConversation && activeConversation?._id){
+            router.push('/messenger')
+        }
+
+    }, [startedTheConversation,activeConversation]);
 
     const onConversationHandler = () => {
         if (!!userData?._id && !!userPageData?._id) {
-            dispatch(startConversationAction({_id:userPageData._id, push}))
-
+            dispatch(startAConversationAction({users: [userPageData?._id, userData?._id]}))
+            setStartedTheConversation(true)
         } else {
             dispatch(loginRegisterForm('login'))
         }

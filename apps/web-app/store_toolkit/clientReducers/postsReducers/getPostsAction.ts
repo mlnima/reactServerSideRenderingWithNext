@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {convertMetasTypeToSingular} from "custom-util";
-import getPosts from "api-requests/src/client/posts/getPosts";
+import {clientAPIRequestGetPosts} from "api-requests";
 
 interface FetchPosts {
     context: any,
@@ -14,7 +14,7 @@ interface FetchPosts {
 const getPostsAction = createAsyncThunk(
     'posts/getPostsAction',
     async ({context, metaId, options}: FetchPosts, thunkAPI) => {
-        const apiData = await getPosts(context.query,metaId)
+        const apiData = await clientAPIRequestGetPosts(context.query,metaId)
         const metaType = apiData.data?.meta?.type
         const singularMetaForm = convertMetasTypeToSingular(metaType);
 

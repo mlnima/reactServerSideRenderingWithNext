@@ -80,7 +80,7 @@ const VoiceRecorderButton: FC<IProps> = ({setAudioMessage}) => {
     return (
         <>
             {isRecording &&
-                <div className={'audioRecordingAnimation'} onClick={handleRecordingStop}>
+                <div className={'audio-recording-animation'} onClick={handleRecordingStop}>
                     <FontAwesomeIcon icon={faMicrophone} style={{width: '120px', height: '120px'}}/>
                     {isRecording && <div className="counter">{elapsedTime.toFixed(1)}</div>}
                 </div>

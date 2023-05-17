@@ -7,7 +7,7 @@ import {Store} from "typescript-types";
 import {useRouter} from "next/router";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
-import createNewPost, {createNewPostResponse} from "api-requests/src/client/posts/createNewPost";
+import {clientAPIRequestCreateNewPost} from "api-requests";
 import {AxiosResponse} from "axios";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 
@@ -30,7 +30,7 @@ const newPost: FC<PropTypes> = ({}) => {
     const onCreateNewPost = async () => {
         try {
             if (loggedIn && userData?._id && router.query?.postType && !userData.draftPost) {
-                await createNewPost({
+                await clientAPIRequestCreateNewPost({
                     postType: router.query?.postType as string,
                     author: userData?._id,
                     title: "no title"

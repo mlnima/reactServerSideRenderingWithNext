@@ -1,6 +1,6 @@
 import {fileSchema, userSchema} from 'models'
 import fsExtra from "fs-extra";
-import getCurrentDatePath from "custom-server-util/src/path-utils/getCurrentDatePath";
+import {getCurrentDatePath} from "custom-server-util";
 import sharp from 'sharp'
 import removeFileExtension from "custom-util/src/file-utils/removeFileExtension";
 import fs from "fs";

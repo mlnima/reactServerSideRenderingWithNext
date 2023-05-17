@@ -2,8 +2,7 @@ import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
 import {loading, setAlert} from "./globalStateReducer";
 import {AxiosResponse} from "axios";
-import getSettings from "api-requests/src/dashboard/settings/getSettings";
-import updateSetting from "api-requests/src/dashboard/settings/updateSetting";
+import {dashboardAPIRequestGetSettings,dashboardAPIRequestUpdateSetting} from "api-requests";
 import DefaultPageSettings from "@components/pages/settings/defaultPagesSetttings/DefaultPageSettings";
 
 interface AdminPanelSettingState {
@@ -32,7 +31,7 @@ export const getSettingsAction = createAsyncThunk(
     async (data:any, thunkAPI) => {
         try {
             thunkAPI.dispatch(loading(true))
-            const settingsRequestData = await getSettings(['initialSettings','identity','design','membershipSettings'])
+            const settingsRequestData = await dashboardAPIRequestGetSettings(['initialSettings','identity','design','membershipSettings'])
             thunkAPI.dispatch(loading(false))
             return {
                 initialSettings: settingsRequestData?.data?.settings?.initialSettings?.data || {},
@@ -52,7 +51,7 @@ export const updateSettingAction = createAsyncThunk(
     async ({type,data}:{type:string,data:{}}, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
-        await updateSetting( type,data)
+        await dashboardAPIRequestUpdateSetting( type,data)
             .then((res: AxiosResponse<any>) => {
             thunkAPI.dispatch(setAlert({message: res.data.message || 'updated', type: 'success'}))
         }).catch(error => {

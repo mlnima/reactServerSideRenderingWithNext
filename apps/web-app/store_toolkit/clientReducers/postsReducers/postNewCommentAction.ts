@@ -1,13 +1,13 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {loading, setAlert} from "../globalStateReducer";
-import postNewComment from "api-requests/src/client/comments/postNewComment";
+import {clientAPIRequestPostNewComment} from "api-requests";
 
 const postNewCommentAction = createAsyncThunk(
     'posts/postNewCommentAction',
     async (commentData: {}, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         const storeData = thunkAPI.getState()
-        postNewComment(commentData)
+        clientAPIRequestPostNewComment(commentData)
             .then(()=>{
             const newCommentData = {
                 ...commentData,

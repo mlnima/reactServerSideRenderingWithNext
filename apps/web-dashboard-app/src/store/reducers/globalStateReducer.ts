@@ -1,10 +1,8 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {AxiosInstance} from "api-requests";
 import {AxiosResponse} from "axios";
 import {RootState} from "../store";
 import {AdminPanelGlobalState,PageTypes} from "typescript-types";
-import getPages from "api-requests/src/dashboard/pages/getPages";
-import clearCaches from "api-requests/src/dashboard/clearCaches";
+import {dashboardAPIRequestGetPages,commonAPIRequestClearCaches,AxiosInstance} from "api-requests";
 
 const initialState : AdminPanelGlobalState = {
     customPages: [],
@@ -21,7 +19,7 @@ const initialState : AdminPanelGlobalState = {
 export const getCustomPagesAction = createAsyncThunk(
     'adminPanelGlobalState/getCustomPagesAction',
     async (data:any , thunkAPI) => {
-        return await getPages({})
+        return await dashboardAPIRequestGetPages({})
         // return AxiosInstance.post('/api/dashboard/pages/getPagesData', {token: localStorage.wt})
             .then((response: AxiosResponse<unknown | any>) => {
                 if (response.data?.pages) {
@@ -38,7 +36,7 @@ export const clearCachesAction = createAsyncThunk(
     async ({} , thunkAPI) => {
         console.log('clearCachesAction')
          thunkAPI.dispatch(loading(true))
-        return await clearCaches().then((res: AxiosResponse<unknown | any>) => {
+        return await commonAPIRequestClearCaches().then((res: AxiosResponse<unknown | any>) => {
 
             thunkAPI.dispatch(setAlert({message: res.data.message || 'done', type: 'success'}))
         }).catch(err => {

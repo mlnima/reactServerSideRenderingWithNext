@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import styled from "styled-components";
 import {useRouter} from "next/router";
-import resetMetaImage from "api-requests/src/client/metas/resetMetaImage";
+import {clientAPIRequestResetMetaImage} from "api-requests";
 import {updateQueryGenerator} from "@_variables/variables";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faRotateRight} from "@fortawesome/free-solid-svg-icons/faRotateRight";
@@ -24,7 +24,7 @@ const ResetMetaImageButton: FC<PropTypes> = ({_id}) => {
     const {push, pathname, query} = useRouter()
 
     const onClickHandler = async ()=>{
-        await resetMetaImage(_id).then(()=>{
+        await clientAPIRequestResetMetaImage(_id).then(()=>{
             updateQueryGenerator(query,push,pathname)
         })
     }

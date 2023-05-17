@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useRef, useState} from 'react';
-import {socket} from 'custom-util/src/socket-utils/socketIoClient';
+import { socket } from 'custom-util';
 import ChatRoomMessageArea from "@components/pagesIncludes/chatroom/ChatRoomMessageArea/ChatRoomMessageArea";
 import ChatRoomTools from "@components/pagesIncludes/chatroom/ChatRoomTools/ChatRoomTools";
 import ChatRoomOnlineUsersList
@@ -13,7 +13,7 @@ import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_g
 import {Chatroom, Store} from "typescript-types";
 import {uniqArrayBy} from 'custom-util'
 import styled from "styled-components";
-import getChatroom from "api-requests/src/client/chatrooms/getChatroom";
+import {clientAPIRequestGetChatroom} from "api-requests";
 import dynamic from "next/dynamic";
 import ChatroomTopbar from "@components/pagesIncludes/chatroom/ChatroomTopbar";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
@@ -207,7 +207,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         store
     )
 
-    const chatroomData = await getChatroom(context.query.Identifier as string)
+    const chatroomData = await clientAPIRequestGetChatroom(context.query.Identifier as string)
 
     return {
         props: {

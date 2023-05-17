@@ -7,34 +7,35 @@ import {Styles} from "./MessagingArea.styles";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faComments} from "@fortawesome/free-solid-svg-icons/faComments";
-import {setAutoScroll} from "@store_toolkit/clientReducers/messengerReducer";
-import sortArrayByPropertyOfObject from "custom-util/src/array-utils/sortArrayByPropertyOfObject";
-
+import {sortArrayByPropertyOfObject} from 'custom-util';
+import {setMessengerState} from "@store_toolkit/clientReducers/messengerReducer";
 
 interface IProps {
-    isActiveConversation?: boolean,
-    loadOlderMessages?: () => void
+    onLoadOlderMessages: () => void
+    messageAreaRef: React.RefObject<HTMLDivElement>
 }
 
-
-const MessagingArea: FC<IProps> = ({isActiveConversation,loadOlderMessages}) => {
+const MessagingArea: FC<IProps> = ({onLoadOlderMessages, messageAreaRef}) => {
     const prevScrollPosition = useRef(0);
     const dispatch = useAppDispatch();
-    const messageAreaRef = useRef<null | HTMLDivElement>(null)
-    const {activeConversation, autoScroll, isMaximized} = useSelector(({messenger}: Store) => messenger);
+
+    const {autoScroll, isMaximized} = useSelector(({messenger}: Store) => messenger);
     const {headerSize} = useSelector(({globalState}: Store) => globalState);
     const {userData} = useSelector(({user}: Store) => user)
-
+    const {activeConversation} = useSelector(({messenger}: Store) => messenger);
 
     useEffect(() => {
-        if (autoScroll && messageAreaRef.current) {
-            //@ts-ignore
-            messageAreaRef.current.scroll({
-                //@ts-ignore
-                top: messageAreaRef.current.scrollHeight + 50,
-                behavior: 'smooth',
-            });
-        }
+
+        setTimeout(() => {
+            if (autoScroll && messageAreaRef?.current) {
+                messageAreaRef.current.scroll({
+                    //@ts-ignore
+                    top: messageAreaRef.current.scrollHeight + 50,
+                    behavior: 'smooth',
+                });
+            }
+        }, 500)
+
     }, [autoScroll, activeConversation?.messages]);
 
 
@@ -43,23 +44,14 @@ const MessagingArea: FC<IProps> = ({isActiveConversation,loadOlderMessages}) => 
             const {scrollTop, clientHeight, scrollHeight} = event.target;
 
             if (prevScrollPosition.current > scrollTop) {
-                dispatch(setAutoScroll(false))
+                dispatch(setMessengerState({autoScroll: false}))
             } else if (scrollTop + clientHeight >= scrollHeight - 5) {
-                dispatch(setAutoScroll(true))
+                dispatch(setMessengerState({autoScroll: true}))
             }
             prevScrollPosition.current = scrollTop;
 
             if (scrollTop === 0 && activeConversation?._id) {
-                //@ts-ignore
-                loadOlderMessages()
-                setTimeout(() => {
-                    if (messageAreaRef.current) {
-                        messageAreaRef.current.scroll({
-                            top: 1,
-                            behavior: 'smooth',
-                        });
-                    }
-                }, 500);
+                onLoadOlderMessages()
             }
         };
 
@@ -79,24 +71,23 @@ const MessagingArea: FC<IProps> = ({isActiveConversation,loadOlderMessages}) => 
                 <FontAwesomeIcon icon={faComments}/>
             </div>
 
-            {isActiveConversation &&
+            {!!activeConversation &&
                 <div className={'messages'}>
                     {activeConversation?.messages?.length ?
                         sortArrayByPropertyOfObject(
-                            uniqArrayBy((activeConversation?.messages || []), 'createdAt'),
+                            uniqArrayBy((activeConversation?.messages || []), '_id'),
                             'createdAt',
                             'asc'
                         )
-
-                        .map((message: any) => {
-                            return (
-                                <Message
-                                    key={message._id}
-                                    message={message}
-                                    isMine={message?.sender === userData?._id}
-                                />
-                            )
-                        })
+                            .map((message: any) => {
+                                return (
+                                    <Message
+                                        key={message._id}
+                                        messageData={message}
+                                        isMine={message?.sender === userData?._id}
+                                    />
+                                )
+                            })
                         : null
                     }
                 </div>

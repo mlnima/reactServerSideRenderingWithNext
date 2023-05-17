@@ -1,11 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { loading } from '@store_toolkit/clientReducers/globalStateReducer';
-import loadOlderMessages from '../../../../../packages/api-requests/src/client/messenger/loadOlderMessages';
+import {clientAPIRequestLoadOlderMessages} from 'api-requests';
+import React from "react";
 
 interface IArgs {
     limit: number;
     skip: number;
     conversationId: string;
+    messageAreaRef: React.RefObject<HTMLDivElement>
 }
 
 interface IResponse {
@@ -14,12 +16,20 @@ interface IResponse {
 
 export const loadOlderMessagesAction = createAsyncThunk<IResponse, IArgs>(
     'messenger/loadOlderMessages',
-    async ({ limit, skip, conversationId }, thunkAPI) => {
+    async ({ limit, skip, conversationId,messageAreaRef }, thunkAPI) => {
         try {
             thunkAPI.dispatch(loading(true));
 
-            const response = await loadOlderMessages({ limit, skip, conversationId });
+            const response = await clientAPIRequestLoadOlderMessages({ limit, skip, conversationId });
             thunkAPI.dispatch(loading(false));
+
+            if (messageAreaRef?.current) {
+                messageAreaRef.current.scroll({
+                    top: 1,
+                    behavior: 'smooth',
+                });
+            }
+
             //@ts-ignore
             return { messages: response?.data?.messages || [] };
         } catch (error) {

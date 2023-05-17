@@ -1,6 +1,6 @@
 import React, {ChangeEvent, ChangeEventHandler, FC, useEffect, useState} from "react";
 import styled from "styled-components";
-import backupMetas from "api-requests/src/dashboard/backups/backupMetas";
+
 import MetasSection from "@components/pages/Backup/MetasSection";
 
 const Style = styled.div`

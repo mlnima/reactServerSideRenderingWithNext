@@ -1,10 +1,9 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {loading, setAlert} from "./globalStateReducer";
-import {AxiosInstance} from "api-requests";
 import {AxiosError, AxiosResponse} from "axios";
 import {RootState} from "../store";
-import getComments from "api-requests/src/dashboard/comments/getComments";
-import deleteComments from "api-requests/src/dashboard/comments/deleteComments";
+import {dashboardAPIRequestGetComments,dashboardAPIRequestDeleteComments} from "api-requests";
+
 
 const initialState = {
     comments: [],
@@ -17,7 +16,7 @@ export const getCommentsAction = createAsyncThunk(
     async (data: {}, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
-        return await getComments(data).then((response: AxiosResponse) => {
+        return await dashboardAPIRequestGetComments(data).then((response: AxiosResponse) => {
             return response.data
         }).catch((error: AxiosError) => {
 
@@ -31,7 +30,7 @@ export const deleteCommentsAction = createAsyncThunk(
     async (commentsIds: string[], thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
-        return await deleteComments(commentsIds).then((res) => {
+        return await dashboardAPIRequestDeleteComments(commentsIds).then((res) => {
             thunkAPI.dispatch(setAlert({
                 message: res.data.message || 'Comment Deleted',
                 type: 'success'

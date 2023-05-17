@@ -7,6 +7,9 @@ import TextInput from "./TextInput";
 import UploadImageButton from "./UploadImageButton";
 import VoiceRecorderButton from "./VoiceRecorderButton";
 import AddedImagePreview from "@components/pagesIncludes/messenger/MessengerMultiMediaInputBox/AddedImagePreview";
+import {useSelector} from "react-redux";
+import {Store} from "typescript-types";
+import SubmitButton from "@components/pagesIncludes/messenger/MessengerMultiMediaInputBox/SubmitButton";
 
 interface IProps {
     audioMessage: string,
@@ -38,6 +41,8 @@ const MessengerMultiMediaInputBox: FC<IProps> = (
         isActive,
     }) => {
 
+    const {draftMessage } = useSelector(({messenger}: Store) => messenger);
+
     const handleSubmit = (event)=>{
         event.preventDefault()
         onSubmitHandler(event)
@@ -47,18 +52,18 @@ const MessengerMultiMediaInputBox: FC<IProps> = (
         <Styles onSubmit={handleSubmit}>
             {isActive &&
                 <>
-                    <TextInput onChangeHandler={setTextMessage}
-                               onStartTypingHandler={onStartTypingHandler}
-                               value={textMessage}/>
-                    <UploadImageButton imageInputRef={imageInputRef} setImageMessage={setImageMessage}/>
-                    <VoiceRecorderButton setAudioMessage={setAudioMessage}/>
+                    <TextInput onStartTypingHandler={onStartTypingHandler}/>
+                    <UploadImageButton imageInputRef={imageInputRef}/>
+                    <VoiceRecorderButton/>
 
-                    {!!audioMessage &&
-                        <RecordedAudioPreview audioMessage={audioMessage} setAudioMessage={setAudioMessage}/>}
-                    {!!imageMessage &&
-                        <AddedImagePreview imageMessage={imageMessage}
-                                           onRemoveImageHandler={() => setImageMessage('')}/>}
-
+                    {(!!draftMessage.audioContent ||!!draftMessage.imageContent) &&
+                        <div className={'media-content'}>
+                            {!!draftMessage.imageContent &&
+                                <AddedImagePreview handleSubmit={handleSubmit}/>}
+                            {!!draftMessage?.audioContent &&
+                                <RecordedAudioPreview />}
+                        </div>
+                    }
                 </>
             }
 

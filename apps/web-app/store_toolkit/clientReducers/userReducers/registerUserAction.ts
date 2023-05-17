@@ -1,12 +1,12 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import registerUser from "api-requests/src/client/users/registerUser";
+import {clientAPIRequestRegisterUser} from "api-requests";
 import {loading, loginRegisterForm, setAlert} from "@store_toolkit/clientReducers/globalStateReducer";
 
 export const registerUserAction = createAsyncThunk(
     'user/registerUserAction',
     async ({data}: { data: {} }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await registerUser(data).then(res => {
+        return await clientAPIRequestRegisterUser(data).then(res => {
             thunkAPI.dispatch(setAlert({message: res.data.message, type: 'success'}))
 
             setTimeout(() => {

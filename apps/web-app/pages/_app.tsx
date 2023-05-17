@@ -9,11 +9,9 @@ const MyApp: FC<AppProps> = ({Component, ...rest}) => {
     return (
 
         <Provider store={store}>
-
             <RootLayout rest={rest}>
                 <Component {...rest.pageProps} />
             </RootLayout>
-
         </Provider>
 
     )

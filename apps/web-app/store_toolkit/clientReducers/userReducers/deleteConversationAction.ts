@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import deleteConversation from "api-requests/src/client/users/deleteConversation";
+import {clientAPIRequestDeleteConversation} from "api-requests";
 import { setAlert } from "@store_toolkit/clientReducers/globalStateReducer";
 
 interface DeleteConversationActionResponse {
@@ -10,7 +10,7 @@ export const deleteConversationAction = createAsyncThunk<DeleteConversationActio
     'user/deleteConversationAction',
     async (_id, thunkAPI) => {
         try {
-            const response = await deleteConversation(_id);
+            const response = await clientAPIRequestDeleteConversation(_id);
             thunkAPI.dispatch(
                 setAlert({ message: response.data.message, type: 'success' })
             );

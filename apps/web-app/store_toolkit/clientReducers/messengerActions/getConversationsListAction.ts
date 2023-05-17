@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {loading} from "@store_toolkit/clientReducers/globalStateReducer";
-import getConversationsList from "api-requests/src/client/messenger/getConversationsList";
+import {clientAPIRequestGetConversationsList} from "api-requests";
 import {uniqArrayBy} from "custom-util";
 import {RootState} from "@store_toolkit/store";
 
@@ -22,7 +22,7 @@ export const getConversationsListAction = createAsyncThunk<IResponse, IArgs>(
         try {
             thunkAPI.dispatch(loading(true));
 
-            const response = await getConversationsList({limit, skip});
+            const response = await clientAPIRequestGetConversationsList({limit, skip});
 
             thunkAPI.dispatch(loading(false));
 

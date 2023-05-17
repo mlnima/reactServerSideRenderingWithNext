@@ -6,7 +6,7 @@ import {ImageListWithPreview} from '@components/includes/PostEditorForm/common/M
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCamera} from "@fortawesome/free-solid-svg-icons/faCamera";
 import {faCirclePlus} from "@fortawesome/free-solid-svg-icons/faCirclePlus";
-import touchDeviceDetector from "custom-util/src/device-util/touchDeviceDetector";
+import {touchDeviceDetector} from "custom-util";
 import {MultipleImageUploaderStyle} from "@components/includes/PostEditorForm/common/MultipleImageUploader/Styles";
 import {Post} from "typescript-types";
 

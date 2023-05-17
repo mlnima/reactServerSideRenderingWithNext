@@ -1,6 +1,6 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import loginUser from "api-requests/src/common/users/loginUser";
-import { loading, setAlert } from "@store_toolkit/clientReducers/globalStateReducer";
+import {createAsyncThunk} from "@reduxjs/toolkit";
+import {commonAPIRequestLoginUser} from "api-requests";
+import {loading, setAlert} from "@store_toolkit/clientReducers/globalStateReducer";
 
 interface LoginActionArgs {
     username: string;
@@ -14,10 +14,10 @@ interface LoginActionResponse {
 
 export const loginAction = createAsyncThunk<LoginActionResponse, LoginActionArgs>(
     'user/loginAction',
-    async ({ username, password }, thunkAPI) => {
+    async ({username, password}, thunkAPI) => {
         thunkAPI.dispatch(loading(true));
         try {
-            const response = await loginUser(username, password);
+            const response = await commonAPIRequestLoginUser(username, password);
             if (response?.data?.token) {
                 localStorage.setItem('wt', response.data.token);
                 return {
@@ -31,7 +31,7 @@ export const loginAction = createAsyncThunk<LoginActionResponse, LoginActionArgs
             }
         } catch (error) {
             thunkAPI.dispatch(
-                setAlert({ message: error?.response?.data?.message, type: 'error' })
+                setAlert({message: error?.response?.data?.message, type: 'error'})
             );
             return {
                 userData: {},
@@ -42,16 +42,6 @@ export const loginAction = createAsyncThunk<LoginActionResponse, LoginActionArgs
         }
     }
 );
-
-
-
-
-
-
-
-
-
-
 
 
 // import {createAsyncThunk} from "@reduxjs/toolkit";

@@ -1,18 +1,20 @@
 import React, {FC} from "react";
-import {useAppDispatch} from "@store_toolkit/hooks";
-import {setMaximize} from "@store_toolkit/clientReducers/messengerReducer";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMinimize} from "@fortawesome/free-solid-svg-icons/faMinimize";
 import {faMaximize} from "@fortawesome/free-solid-svg-icons/faMaximize";
 import styled from "styled-components";
+import {Styles} from "./MessengerConfigs.styles";
+import {useAppDispatch} from "@store_toolkit/hooks";
+import {setMessengerState} from "@store_toolkit/clientReducers/messengerReducer";
 import {useSelector} from "react-redux";
 import {Store} from "typescript-types";
-import {Styles} from "./MessengerConfigs.styles";
 
 interface IButton {
     active?: boolean
 }
-interface PropTypes {
+
+interface IProps {
+
 }
 
 
@@ -31,13 +33,11 @@ const StyledButton = styled.button<IButton>`
   }
 `
 
-const MessengerConfigs: FC<PropTypes> = () => {
-
-    const dispatch = useAppDispatch();
+const MessengerConfigs: FC<IProps> = () => {
+    const dispatch = useAppDispatch()
     const {isMaximized} = useSelector(({messenger}: Store) => messenger);
-
     const onSetMaximizedHandler = () => {
-        dispatch(setMaximize(null))
+        dispatch(setMessengerState({isMaximized:!isMaximized}))
         localStorage.setItem('isMaximized', (!isMaximized).toString())
     }
 
@@ -48,7 +48,6 @@ const MessengerConfigs: FC<PropTypes> = () => {
                           onClick={onSetMaximizedHandler}>
                 <FontAwesomeIcon icon={isMaximized ? faMinimize : faMaximize}/>
             </StyledButton>
-
         </Styles>
     )
 };

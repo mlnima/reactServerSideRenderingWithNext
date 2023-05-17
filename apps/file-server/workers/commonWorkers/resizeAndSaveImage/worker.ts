@@ -7,7 +7,7 @@ import {parentPort, workerData} from 'worker_threads';
 import sharp from 'sharp'
 import fs from 'fs'
 import path from "path";
-import getCurrentDatePath from "custom-server-util/src/path-utils/getCurrentDatePath";
+import {getCurrentDatePath} from "custom-server-util";
 
 interface WorkerDataTypes{
     tempPath:string,

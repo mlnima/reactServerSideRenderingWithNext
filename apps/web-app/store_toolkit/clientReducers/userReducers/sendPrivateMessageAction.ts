@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import sendPrivateMessage from "api-requests/src/client/users/sendPrivateMessage";
+import {clientAPIRequestSendPrivateMessage} from "api-requests";
 import { loading } from "@store_toolkit/clientReducers/globalStateReducer";
 
 interface SendPrivateMessageActionArgs {

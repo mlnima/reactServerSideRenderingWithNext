@@ -5,7 +5,7 @@ import {DashboardStore} from "typescript-types";
 import { getFormAction} from "@store/reducers/formsReducer";
 import {redirect, useNavigate, useParams, useSearchParams} from "react-router-dom";
 import {useAppDispatch} from "@store/hooks";
-import deleteForm from "api-requests/src/dashboard/forms/deleteForm";
+import {dashboardAPIRequestDeleteForm} from "api-requests";
 
 let StyledDiv = styled.div`
   .form-data-container {
@@ -40,7 +40,7 @@ const Form = () => {
     }, [search]);
 
     const onDeleteHandler = async () => {
-       await deleteForm(id).then(()=>{
+       await dashboardAPIRequestDeleteForm(id).then(()=>{
            navigate(`/dashboard/assets?assetsType=forms&size=20&lastUpdate=${Date.now()}`)
        })
     }

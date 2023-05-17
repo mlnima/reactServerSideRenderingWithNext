@@ -21,7 +21,6 @@ var messengerConversationMessageSchema = new mongoose_1["default"].Schema({
     },
     content: {
         type: String,
-        required: true
     },
     imageContent: {
         type: String

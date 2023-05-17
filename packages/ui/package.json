@@ -41,6 +41,6 @@
     "react-loading": "^2.0.3",
     "react-fontawesome": "^1.7.1",
     "tsconfig": "*",
-    "typescript": "^4.9.5"
+    "typescript": "latest"
   }
 }

@@ -1,26 +1,28 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
-import {AxiosInstance} from "api-requests";
 import {AxiosError, AxiosResponse} from "axios";
 import {Meta,Post} from "typescript-types";
 import {loading, setAlert} from "./globalStateReducer";
 import {PostRaw} from "typescript-types/src/Post";
-import getPosts from "api-requests/src/dashboard/posts/getPosts";
-import getMetas from "api-requests/src/dashboard/metas/getMetas";
-import getPost from "api-requests/src/dashboard/posts/getPost";
-import updatePost from "api-requests/src/dashboard/posts/updatePost";
-import createNewPost from "api-requests/src/dashboard/posts/createNewPost";
-import deleteMeta from "api-requests/src/dashboard/metas/deleteMeta";
-import updateMeta from "api-requests/src/dashboard/metas/updateMeta";
-import getMeta from "api-requests/src/dashboard/metas/getMeta";
-import bulkActionOnPosts from "api-requests/src/dashboard/posts/bulkActionOnPosts";
-import checkAndRemoveDeletedVideos from "api-requests/src/dashboard/posts/checkAndRemoveDeletedVideos";
-import setMetaThumbnailsAndCount from "api-requests/src/dashboard/metas/setMetaThumbnailsAndCount";
-import generatePermaLinkForPosts from "api-requests/src/dashboard/posts/generatePermaLinkForPosts";
-import exportPosts from "api-requests/src/dashboard/posts/exportPosts";
-import bulkActionOnMetas from "api-requests/src/dashboard/metas/bulkActionOnMetas";
-import scrapYoutubeInfo from "api-requests/src/dashboard/posts/scrapYoutubeInfo";
-import postDataScrappers from "api-requests/src/dashboard/posts/postDataScrappers";
+import {
+    AxiosInstance,
+    dashboardAPIRequestGetPosts,
+    dashboardAPIRequestGetMetas,
+    dashboardAPIRequestGetMeta,
+    dashboardAPIRequestGetPost,
+    dashboardAPIRequestUpdatePost,
+    dashboardAPIRequestCreateNewPost,
+    dashboardAPIRequestDeleteMeta,
+    dashboardAPIRequestUpdateMeta,
+    dashboardAPIRequestBulkActionOnPosts,
+    dashboardAPIRequestCheckAndRemoveDeletedVideos,
+    dashboardAPIRequestSetMetaThumbnailsAndCount,
+    dashboardAPIRequestGeneratePermaLinkForPosts,
+    dashboardAPIRequestExportPosts,
+    dashboardAPIRequestBulkActionOnMetas,
+    dashboardAPIRequestScrapYoutubeInfo,
+    dashboardAPIRequestPostDataScrappers,
+} from "api-requests";
 
 
 interface AdminPanelPosts {
@@ -51,7 +53,7 @@ export const getPostAction = createAsyncThunk(
     'adminPanelPosts/getPostAction',
     async (_id: string, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await getPost(_id)
+        return await dashboardAPIRequestGetPost(_id)
             .then((res: AxiosResponse<any>) => {
                 return res.data?.post
             }).catch((error) => {
@@ -66,7 +68,7 @@ export const getPostScrapedDataAction = createAsyncThunk(
     'adminPanelPosts/getPostScrapedDataAction',
     async ({url,fields}:{url: string,fields?:string[]}, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await postDataScrappers(url).then(async (res: AxiosResponse<any>) => {
+        return await dashboardAPIRequestPostDataScrappers(url).then(async (res: AxiosResponse<any>) => {
 
             //@ts-ignore
             if (!fields?.length){
@@ -91,7 +93,7 @@ export const getPostsAction = createAsyncThunk(
     'adminPanelPosts/getPostsAction',
     async (queriesData: string, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await getPosts(queriesData)
+        return await dashboardAPIRequestGetPosts(queriesData)
             .then((res: AxiosResponse<any>) => {
                 console.log(res)
                 return {
@@ -110,7 +112,7 @@ export const updatePostAction = createAsyncThunk(
     async (data: {}, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
-        return await updatePost(data)
+        return await dashboardAPIRequestUpdatePost(data)
             .then((res: AxiosResponse<any>) => {
                 thunkAPI.dispatch(setAlert({message: res.data?.message || 'Post Updated', type: 'success'}))
             }).catch((error) => {
@@ -126,7 +128,7 @@ export const createNewPostAction = createAsyncThunk(
     async ({data,navigate}: { data?: PostRaw,navigate:any }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
-        return await createNewPost(data)
+        return await dashboardAPIRequestCreateNewPost(data)
             .then((response: AxiosResponse<any>) => {
                 console.log(response.data?.savedPostData?._id)
                 if (response.data?.savedPostData?._id){
@@ -146,7 +148,7 @@ export const deleteMetaAction = createAsyncThunk(
     async (_id: string|null, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
-        return await deleteMeta(_id)
+        return await dashboardAPIRequestDeleteMeta(_id)
             .then((res: AxiosResponse<any>) => {
                 thunkAPI.dispatch(setAlert({message: res.data?.message || 'deleted', type: 'success'}))
 
@@ -166,7 +168,7 @@ export const updateMetaAction = createAsyncThunk(
             data,
             token: localStorage.wt
         };
-        await updateMeta(data)
+        await dashboardAPIRequestUpdateMeta(data)
             .then((res: AxiosResponse<any>) => {
                 thunkAPI.dispatch(setAlert({message: res.data?.message, type: 'success'}))
 
@@ -184,7 +186,7 @@ export const getMetasAction = createAsyncThunk(
     'adminPanelPosts/getMetasAction',
     async (queries: string, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await getMetas(queries)
+        return await dashboardAPIRequestGetMetas(queries)
             .then((res: AxiosResponse<any>) => {
                 return {
                     metas: res.data?.metas,
@@ -201,7 +203,7 @@ export const getMetaAction = createAsyncThunk(
     'adminPanelPosts/getMetaAction',
     async (_id: string|null, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await getMeta(_id)
+        return await dashboardAPIRequestGetMeta(_id)
             .then((res: AxiosResponse<any>) => {
                 if (res?.data?.meta) {
                     return {
@@ -222,7 +224,7 @@ export const bulkActionPostsAction = createAsyncThunk(
     async ({ids, status}: { ids: string| string[], status: string }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
-       await bulkActionOnPosts(ids, status).then((res: AxiosResponse<any>) => {
+       await dashboardAPIRequestBulkActionOnPosts(ids, status).then((res: AxiosResponse<any>) => {
             thunkAPI.dispatch(setAlert({message: res.data?.message, type: 'success'}))
 
         }).catch((err) => {
@@ -237,7 +239,7 @@ export const checkAndRemoveDeletedVideosAction = createAsyncThunk(
     'adminPanelPosts/checkAndRemoveDeletedVideosAction',
     async (data, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await checkAndRemoveDeletedVideos()
+        return await dashboardAPIRequestCheckAndRemoveDeletedVideos()
             .then((res: AxiosResponse<any>) => {
                 thunkAPI.dispatch(setAlert({
                     message: res.data?.message || 'Checking Removed Video Started',
@@ -257,7 +259,7 @@ export const setMetaThumbnailsAndCountAction = createAsyncThunk(
     'adminPanelPosts/setMetaThumbnailsAndCountAction',
     async (type: string | null, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        await setMetaThumbnailsAndCount(type)
+        await dashboardAPIRequestSetMetaThumbnailsAndCount(type)
             .then((res: AxiosResponse<any>) => {
                 thunkAPI.dispatch(setAlert({
                     message: res.data?.message || 'Setting New Image and Fix Count For Meta Data Started',
@@ -275,7 +277,7 @@ export const generatePermaLinkForPostsAction = createAsyncThunk(
     'adminPanelPosts/generatePermaLinkForPostsAction',
     async (type: string|null, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        await generatePermaLinkForPosts(type)
+        await dashboardAPIRequestGeneratePermaLinkForPosts(type)
             .then((res: AxiosResponse<any>) => {
                 thunkAPI.dispatch(setAlert({
                     message: res.data?.message || 'Generating PermaLinks for Posts Started',
@@ -293,7 +295,7 @@ export const getExportingPosts = createAsyncThunk(
     'adminPanelPosts/getExportingPosts',
     async (data, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        await exportPosts(data).then(res => {
+        await dashboardAPIRequestExportPosts(data).then(res => {
             const posts = res.data.exportedData.map((post:any) => {
                 post.mainThumbnail = post.mainThumbnail ? post.mainThumbnail.includes('http') ? post.mainThumbnail : process.env.NEXT_PUBLIC_PRODUCTION_URL + post.mainThumbnail : '';
                 //@ts-ignore
@@ -329,7 +331,7 @@ export const bulkActionMetaAction = createAsyncThunk(
     async ({type, status, ids}: { type: string, status: string, ids: string[] }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
-        await bulkActionOnMetas(type, status, ids)
+        await dashboardAPIRequestBulkActionOnMetas(type, status, ids)
             .then(res => {
 
         }).catch(err => {
@@ -353,7 +355,7 @@ export const getYoutubeDataScrapperAction = createAsyncThunk(
             return hours + min + sec
         }
 
-        await scrapYoutubeInfo(url).then(async res => {
+        await dashboardAPIRequestScrapYoutubeInfo(url).then(async res => {
             for await (let video of res.data.videos) {
                 if (video.id) {
                     const videoData = {

@@ -1,10 +1,10 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import viewPost from "api-requests/src/client/posts/viewPost";
+import {clientAPIRequestViewPost} from "api-requests";
 
 export const viewPostAction = createAsyncThunk(
     'posts/viewPostAction',
     async (id: string, thunkAPI) => {
-        return await viewPost(id)
+        return await clientAPIRequestViewPost(id)
     }
 )
 

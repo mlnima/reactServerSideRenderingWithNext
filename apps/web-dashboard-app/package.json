@@ -15,8 +15,8 @@
     "@monaco-editor/react": "^4.4.6",
     "@reduxjs/toolkit": "^1.9.1",
     "@svgr/webpack": "^6.5.1",
+    "api-requests": "*",
     "babel-jest": "^29.3.1",
-    "babel-loader": "^9.1.2",
     "babel-plugin-named-asset-import": "^0.3.8",
     "babel-preset-react-app": "^10.0.1",
     "bfj": "^7.0.2",
@@ -38,6 +38,7 @@
     "identity-obj-proxy": "^3.0.0",
     "js-file-download": "^0.4.12",
     "mini-css-extract-plugin": "^2.4.5",
+    "nsfwjs": "^2.4.2",
     "postcss": "^8.4.21",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-loader": "^ 7.0.2",
@@ -97,6 +98,7 @@
     ]
   },
   "devDependencies": {
+    "babel-loader": "^9.1.2",
     "cross-env": "^7.0.3",
     "eslint": "^8.36.0",
     "eslint-plugin-react": "^7.31.11"

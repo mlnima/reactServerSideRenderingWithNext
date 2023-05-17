@@ -1,7 +1,7 @@
 import React from "react";
 import {Routes, Route} from 'react-router-dom';
 import InitialSettings from "@components/pages/settings/initialSettings/initialSettings";
-import Dashboard from "../components/pages/Dashboard";
+import Dashboard from "../components/pages/Dashboard/Dashboard";
 import NotFound from "../components/pages/NotFound";
 import Login from "../components/pages/Login";
 import Assets from "../components/pages/Assets/Assets";

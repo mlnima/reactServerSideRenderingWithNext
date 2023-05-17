@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import getSignedInUserData from "api-requests/src/common/users/getSignedInUserData";
+import {commonAPIRequestGetSignedInUserData} from "api-requests";
 
 interface AutoLoginActionArgs {
     fields: string[];
@@ -15,7 +15,7 @@ export const autoLoginAction = createAsyncThunk<AutoLoginActionResponse, AutoLog
     async ({ fields }, thunkAPI) => {
         if (localStorage.wt) {
             try {
-                const response = await getSignedInUserData(fields);
+                const response = await commonAPIRequestGetSignedInUserData(fields);
                 return response.data?.userData;
             } catch (error) {
                 localStorage.removeItem('wt');

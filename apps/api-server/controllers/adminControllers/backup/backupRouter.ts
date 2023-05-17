@@ -1,6 +1,6 @@
 //backupRouter
 import {Router} from "express";
-import adminAuthMiddleware from "../../../middlewares/adminAuthMiddleware";
+import {adminAuthMiddleware} from 'custom-server-util';
 import metas from "../backup/metas";
 
 const router = Router();

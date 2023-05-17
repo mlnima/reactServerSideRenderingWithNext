@@ -2,16 +2,18 @@ import React, {Dispatch, FC, SetStateAction, useEffect, useRef, useState} from '
 import {ActionButtonStyle} from '@components/pagesIncludes/chatroom/ChatRoomTools/Styles';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faMicrophone} from '@fortawesome/free-solid-svg-icons/faMicrophone';
+import {setDraftMessageData} from "@store_toolkit/clientReducers/messengerReducer";
+import {useAppDispatch} from "@store_toolkit/hooks";
 
 interface IProps {
-    setAudioMessage: Dispatch<SetStateAction<string>>;
 }
 
-const VoiceRecorderButton: FC<IProps> = ({setAudioMessage}) => {
+const VoiceRecorderButton: FC<IProps> = () => {
     const [isRecording, setIsRecording] = useState(false);
     const [elapsedTime, setElapsedTime] = useState(0);
     const [recorder, setRecorder] = useState<MediaRecorder | null>(null);
     const audioChunksRef = useRef<Blob[]>([]);
+    const dispatch = useAppDispatch()
 
     const handleRecordingStart = async () => {
         setIsRecording(true);
@@ -34,7 +36,7 @@ const VoiceRecorderButton: FC<IProps> = ({setAudioMessage}) => {
             reader.readAsDataURL(audioBlob);
             reader.onloadend = () => {
                 const base64data = reader.result;
-                setAudioMessage(base64data as string);
+                dispatch(setDraftMessageData({audioContent:base64data}))
             };
 
             audioChunksRef.current = [];
@@ -80,7 +82,7 @@ const VoiceRecorderButton: FC<IProps> = ({setAudioMessage}) => {
     return (
         <>
             {isRecording &&
-                <div className={'audioRecordingAnimation'} onClick={handleRecordingStop}>
+                <div className={'audio-recording-animation'} onClick={handleRecordingStop}>
                     <FontAwesomeIcon icon={faMicrophone} style={{width: '120px', height: '120px'}}/>
                     {isRecording && <div className="counter">{elapsedTime.toFixed(1)}</div>}
                 </div>

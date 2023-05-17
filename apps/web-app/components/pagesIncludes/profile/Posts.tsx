@@ -5,7 +5,7 @@ import {postFieldRequestForCards} from "data-structures";
 import {useDispatch} from "react-redux";
 import {setPostsData} from "@store_toolkit/clientReducers/postsReducers/postsReducer";
 import PostsPage from "@components/includes/PostsPage/PostsPage";
-import getPosts from "api-requests/src/client/posts/getPosts";
+import {clientAPIRequestGetPost} from "api-requests";
 
 const Style = styled.div`
   width: 100%;
@@ -32,8 +32,8 @@ const Posts: FC<PropTypes> = ({userId}) => {
 
     useEffect(() => {
         if (userId){
-            //@ts-ignore
-            getPosts(requestQueries,null).then(response => {
+        //@ts-ignore
+            clientAPIRequestGetPost(requestQueries).then(response => {
                 dispatch(setPostsData(
                     {
                         posts: response.data?.posts || [],

@@ -1,7 +1,7 @@
 // @ts-nocheck
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
-import {getSettings, getUncachedSettings} from "api-requests";
+import {clientAPIRequestGetSettings, clientAPIRequestGetUncachedSettings} from "api-requests";
 import {loading} from "./globalStateReducer";
 
 interface SettingsStateRaw {
@@ -36,7 +36,7 @@ export const fetchSettings = createAsyncThunk(
     'settings/fetchSettings',
     async (config: FetchSettingsProps, thunkAPI) => {
         try {
-            const fetchedSettings = await getSettings(config.requireSettings);
+            const fetchedSettings = await clientAPIRequestGetSettings(config.requireSettings);
             return {
                 currentPageSettings: fetchedSettings?.data?.settings?.[`${config.options.page}Settings`] || {},
                 initialSettings: fetchedSettings?.data?.settings?.initialSettings || {},
@@ -54,7 +54,7 @@ export const getUncachedSettingsForAdmin = createAsyncThunk(
     async (config: any, thunkAPI) => {
         try {
             thunkAPI.dispatch(loading(true))
-            const settingsRequestData = await getUncachedSettings([...(config?.requireSettings || []), 'initialSettings'])
+            const settingsRequestData = await clientAPIRequestGetUncachedSettings([...(config?.requireSettings || []), 'initialSettings'])
             thunkAPI.dispatch(loading(false))
 
             return {

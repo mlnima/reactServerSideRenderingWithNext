@@ -6,7 +6,7 @@ import {updateSettingAction} from "@store/reducers/settingsReducer";
 import MonacoEditor from "@components/common/MonacoEditor";
 import { useSearchParams} from "react-router-dom";
 import {useAppDispatch} from "@store/hooks";
-import getSettings from "api-requests/src/dashboard/settings/getSettings";
+import {dashboardAPIRequestGetSettings} from "api-requests";
 
 const Style = styled.form`
 
@@ -67,7 +67,7 @@ const DefaultPageSettings: FC<PropTypes> = ({}) => {
 
     useEffect(() => {
         if (!!pageName) {
-            getSettings([pageName]).then(response => {
+            dashboardAPIRequestGetSettings([pageName]).then(response => {
                 const settingData = response?.data?.settings?.[pageName]?.data || defaultPageData
                 setFieldsData(settingData||{})
 

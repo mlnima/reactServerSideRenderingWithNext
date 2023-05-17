@@ -1,1 +1,1 @@
-{"version":3,"file":"socketIoClient.d.ts","sourceRoot":"","sources":["socketIoClient.ts"],"names":[],"mappings":"AAEA,eAAO,MAAM,MAAM,qJAAgD,CAAC"}
+{"version":3,"file":"socketIoClient.d.ts","sourceRoot":"","sources":["socketIoClient.ts"],"names":[],"mappings":"AAEA,QAAA,MAAM,MAAM,qJAAgD,CAAC;AAE7D,eAAgB,MAAM,CAAC"}

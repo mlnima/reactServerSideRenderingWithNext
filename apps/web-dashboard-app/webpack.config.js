@@ -1,7 +1,16 @@
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
-    //other rules
+    // module: {
+    //     rules: [
+    //         {
+    //             test: /\.jsx?$/,
+    //             exclude: /node_modules/,
+    //             loader: 'babel-loader',
+    //         },
+    //         //other rules
+    //     ],
+    // },
     resolve: {
         //@ts-ignore
         plugins: [new TsconfigPathsPlugin()],

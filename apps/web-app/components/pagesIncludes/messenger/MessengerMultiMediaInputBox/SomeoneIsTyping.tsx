@@ -1,5 +1,5 @@
 import {FC} from "react";
-import {SomeoneIsTypingStyle} from "./Styles";
+import Style from "./SomeoneIsTyping.styles";
 
 interface PropTypes {
     username
@@ -7,9 +7,9 @@ interface PropTypes {
 
 const SomeoneIsTyping: FC<PropTypes> = ({username}) => {
     return (
-        <SomeoneIsTypingStyle className={'chatroom-someone-typing'}>
+        <Style className={'chatroom-someone-typing'}>
             {username} is typing
-        </SomeoneIsTypingStyle>
+        </Style>
     )
 };
 export default SomeoneIsTyping;

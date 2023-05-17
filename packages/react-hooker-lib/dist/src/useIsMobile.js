@@ -9,7 +9,6 @@ var useIsMobile = function (breakpoint) {
         var checkIsMobile = function () {
             setIsMobile(window.innerWidth < breakpoint);
         };
-
         // Check if the window object is available
         if (typeof window !== 'undefined') {
             checkIsMobile(); // Set initial mobile status

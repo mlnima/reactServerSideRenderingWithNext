@@ -1,6 +1,5 @@
 import {Router} from 'express';
-// import adminAuthMiddleware from '../../middlewares/adminAuthMiddleware';
-import adminAuthMiddleware from 'custom-server-util/src/middleware-utils/adminAuthMiddleware';
+import {adminAuthMiddleware} from 'custom-server-util';
 import adminCreateNewPage from './adminPagesControllers/adminCreateNewPage';
 import adminUpdatePage from './adminPagesControllers/adminUpdatePage';
 import adminGetPagesData from './adminPagesControllers/adminGetPagesData';
