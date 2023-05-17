@@ -24,7 +24,7 @@ const WidgetText:FC<PropTypes> = ({translations, text}) => {
 
     return (
         <Style>
-            {parse(stringToRender)}
+            {!!stringToRender && parse(stringToRender)}
         </Style>
     )
 };

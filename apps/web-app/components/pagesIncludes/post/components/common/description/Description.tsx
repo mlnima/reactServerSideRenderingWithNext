@@ -40,7 +40,7 @@ const Description: FC<PropTypes> = ({descriptionRef}) => {
     if (descriptionValue){
         return (
             <PostDescriptionStyledDiv className={'description sub-content'} ref={descriptionRef}>
-                {descriptionValue ? parse(descriptionValue as string) : ''}
+                {!!descriptionValue && parse(descriptionValue as string)}
             </PostDescriptionStyledDiv>
         )
     }else return null

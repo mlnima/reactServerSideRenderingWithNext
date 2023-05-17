@@ -85,7 +85,7 @@ const HeadSetter: FC<PropTypes> = (
                 })
 
             }
-            {disAllowIndexByRobots &&
+            {(disAllowIndexByRobots && !!headDataSettings?.customHeadTags) &&
                 <>{parse(headDataSettings.customHeadTags, {trim: true})}</>
             }
             {/*{!!headDataSettings.googleAnalyticsId &&*/}

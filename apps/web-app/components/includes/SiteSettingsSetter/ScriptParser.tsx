@@ -8,7 +8,7 @@ interface ScriptParserPropTypes {
 const ScriptParser: FC<ScriptParserPropTypes> = ({script}) => {
     return (
         <>
-            {parse(script,{trim:true})}
+            {!!script && parse(script,{trim:true})}
         </>
     )
 };

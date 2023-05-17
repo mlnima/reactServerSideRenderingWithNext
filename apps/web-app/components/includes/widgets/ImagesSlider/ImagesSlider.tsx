@@ -256,7 +256,7 @@ const ImagesSlider: FC<PostsSliderPropsTypes> = ({uniqueData}) => {
                 }
                 {uniqueData?.details ?
                     <div className={'details'} style={{display: showDetails ? 'block' : 'none'}}>
-                        {parse(uniqueData?.details,{trim:true})}
+                        {!!uniqueData?.details && parse(uniqueData?.details,{trim:true})}
                     </div>
                     : null
                 }

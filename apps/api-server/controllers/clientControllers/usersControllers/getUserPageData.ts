@@ -10,6 +10,7 @@ interface QueryParams {
 
 const getUserPageData = async (req: Request, res: Response) => {
     try {
+        console.log('getUserPageData=>')
         const {username, userWhoRequestIt, fields} = req.query as unknown as QueryParams;
         const defaultFields = ['username', 'role', 'profileImage', 'following', 'followers', 'blockList'];
         const selectedFields = fields ? [...new Set([...defaultFields, ...fields])] : defaultFields;
@@ -29,6 +30,7 @@ const getUserPageData = async (req: Request, res: Response) => {
             .exec();
 
         console.log('userData=> ',userData)
+
         if (!userData) {
             return res.status(404).json({message: 'User not found'});
         }
