@@ -24,13 +24,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/usersControllers/getUserPageData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/usersControllers/getUserPageData.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/global/commonComponents/HeadSetter/HeadSetter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/global/commonComponents/HeadSetter/HeadSetter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/SiteSettingsSetter/ScriptParser.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/SiteSettingsSetter/ScriptParser.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/Widget/WidgetText/WidgetText.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/Widget/WidgetText/WidgetText.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/Advertise/Advertise.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/Advertise/Advertise.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/ImagesSlider/ImagesSlider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/widgets/ImagesSlider/ImagesSlider.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/description/Description.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/pagesIncludes/post/components/common/description/Description.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/usersRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/usersRouter.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,7 +125,7 @@
       <command value="nextEnv" />
     </option>
   </component>
-  <component name="RunManager" selected="npm.start">
+  <component name="RunManager" selected="npm.dev">
     <configuration name="temp.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/tempFiles/temp.js" working-dir="$PROJECT_DIR$/tempFiles">
       <method v="2" />
     </configuration>
@@ -177,9 +171,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.outdate:web-app-packages" />
         <item itemvalue="Node.js.temp.js" />
       </list>
@@ -1663,7 +1657,7 @@
       <workItem from="1684122700710" duration="24353000" />
       <workItem from="1684214644788" duration="9470000" />
       <workItem from="1684258912644" duration="14039000" />
-      <workItem from="1684300679590" duration="15364000" />
+      <workItem from="1684300679590" duration="18120000" />
     </task>
     <servers />
   </component>

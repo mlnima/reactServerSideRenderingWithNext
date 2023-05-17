@@ -1,8 +1,6 @@
 import dotenv from 'dotenv';
-
 dotenv.config({path: '../../.env'});
 import {connectToDatabase, shouldCompress} from 'custom-server-util';
-
 connectToDatabase('Express Server')
 import express from 'express';
 import bodyParser from 'body-parser';
@@ -13,7 +11,6 @@ import cors from 'cors';
 import compression from 'compression';
 import clientFileManagerMainRouter from './controllers/clientControllers/fileManagerControllers/clientFileManagerMainRouter';
 import path from 'path';
-import loggerMiddleware from "api-server/dist/middlewares/loggerMiddleware";
 
 const server = express();
 const dev = process.env.NODE_ENV !== 'production';
@@ -50,7 +47,7 @@ const runServer = () => {
         // const publicPath = dev ? './public' : '../public';
         // server.use('/public', express.static(path.join(__dirname, publicPath), {maxAge: "604800000"}));
 
-        server.get('/files/alive', loggerMiddleware, (req, res) => {
+        server.get('/files/alive', (req, res) => {
             res.json({message: 'alive'})
         });
 
