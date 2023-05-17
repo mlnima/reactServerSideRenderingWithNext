@@ -28,6 +28,7 @@ const getUserPageData = async (req: Request, res: Response) => {
             ])
             .exec();
 
+        console.log('userData=> ',userData)
         if (!userData) {
             return res.status(404).json({message: 'User not found'});
         }
