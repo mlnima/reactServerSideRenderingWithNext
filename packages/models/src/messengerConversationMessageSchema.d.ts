@@ -7,9 +7,9 @@ declare const _default: mongoose.Model<{
     updatedAt: Date;
     conversation: mongoose.Types.ObjectId;
     sender: mongoose.Types.ObjectId;
-    content: string;
     isRead: boolean;
     type?: "privateMessage" | "eventLog";
+    content?: string;
     imageContent?: string;
     audioContent?: string;
 }, {}, {}, {}, mongoose.Schema<any, mongoose.Model<any, any, any, any, any>, {}, {}, {}, {}, mongoose.ResolveSchemaOptions<{
@@ -22,9 +22,9 @@ declare const _default: mongoose.Model<{
     updatedAt: Date;
     conversation: mongoose.Types.ObjectId;
     sender: mongoose.Types.ObjectId;
-    content: string;
     isRead: boolean;
     type?: "privateMessage" | "eventLog";
+    content?: string;
     imageContent?: string;
     audioContent?: string;
 }>>;

@@ -1,1 +1,1 @@
-{"version":3,"file":"sortArrayByPropertyOfObject.d.ts","sourceRoot":"","sources":["sortArrayByPropertyOfObject.ts"],"names":[],"mappings":"AAAA,KAAK,SAAS,GAAG,KAAK,GAAG,MAAM,CAAC;AAEhC,iBAAS,2BAA2B,CAAC,CAAC,EAClC,KAAK,EAAE,CAAC,EAAE,EACV,GAAG,EAAE,MAAM,EACX,KAAK,GAAE,SAAiB,GACzB,CAAC,EAAE,CAeL;AAED,eAAe,2BAA2B,CAAA"}
+{"version":3,"file":"sortArrayByPropertyOfObject.d.ts","sourceRoot":"","sources":["sortArrayByPropertyOfObject.ts"],"names":[],"mappings":"AAAA,KAAK,SAAS,GAAG,KAAK,GAAG,MAAM,CAAC;AAGhC,QAAA,MAAM,2BAA2B,wCAAwC,SAAS,QAQjF,CAAC;AAEF,eAAe,2BAA2B,CAAC"}
