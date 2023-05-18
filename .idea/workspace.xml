@@ -23,37 +23,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/information/requirement.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/ui-components/dist/src/chatroomAndMessenger/Message/Message.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/ui-components/dist/src/chatroomAndMessenger/Message/Message.d.ts.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/ui-components/dist/src/chatroomAndMessenger/Message/Message.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/ui-components/dist/src/fullscreenComponentsProvider/fullScreenComponentsProvider.styles.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/ui-components/dist/src/fullscreenComponentsProvider/fullScreenComponentsProvider.styles.d.ts.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/ui-components/dist/src/fullscreenComponentsProvider/fullScreenComponentsProvider.styles.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/ui-components/dist/src/fullscreenComponentsProvider/fullscreenComponentsProvider.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/ui-components/dist/src/fullscreenComponentsProvider/fullscreenComponentsProvider.d.ts.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/ui-components/dist/src/fullscreenComponentsProvider/fullscreenComponentsProvider.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/ui-components/dist/src/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/ui-components/dist/src/index.d.ts.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/ui-components/dist/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/postsControllers/getPosts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/postsControllers/getPosts.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/user-utils/findUserData.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-server-util/src/user-utils/findUserData.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/user-utils/findUserData.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-server-util/src/user-utils/findUserData.d.ts.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-server-util/tsconfig.tsbuildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/array-utils/sortArrayByPropertyOfObject.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/src/array-utils/sortArrayByPropertyOfObject.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/array-utils/sortArrayByPropertyOfObject.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/src/array-utils/sortArrayByPropertyOfObject.d.ts.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/array-utils/sortArrayByPropertyOfObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/src/array-utils/sortArrayByPropertyOfObject.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/custom-util/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/tsconfig.tsbuildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/src/messengerConversationMessageSchema.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/messengerConversationMessageSchema.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/src/messengerConversationMessageSchema.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/messengerConversationMessageSchema.d.ts.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/src/messengerConversationMessageSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/messengerConversationMessageSchema.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/tsconfig.tsbuildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/react-hooker-lib/dist/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-hooker-lib/dist/tsconfig.tsbuildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/ui-components/dist/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui-components/dist/tsconfig.tsbuildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/ui/src/buttonsStyle.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/src/buttonsStyle.d.ts.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/ui/src/buttonsStyle.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/src/buttonsStyle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/ui/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/tsconfig.tsbuildinfo" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1687,7 +1657,7 @@
       <workItem from="1684214644788" duration="9470000" />
       <workItem from="1684258912644" duration="14039000" />
       <workItem from="1684300679590" duration="25689000" />
-      <workItem from="1684391308653" duration="5066000" />
+      <workItem from="1684391308653" duration="5599000" />
     </task>
     <servers />
   </component>
