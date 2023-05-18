@@ -45,12 +45,6 @@ const getPosts =  async (req, res) => {
 
         const totalCount = await postSchema.countDocuments(findingPostsOptions.findPostsQueries).exec();
 
-        console.log('console=> ', {
-            skip: (findingPostsOptions.size * findingPostsOptions.page) - findingPostsOptions.size,
-            limit: findingPostsOptions.size,
-            sort: findingPostsOptions.sortQuery
-        })
-
         const posts = await postSchema.find(findingPostsOptions.findPostsQueries, findingPostsOptions.selectedFields,
             {
                 skip: (findingPostsOptions.size * findingPostsOptions.page) - findingPostsOptions.size,
@@ -59,7 +53,7 @@ const getPosts =  async (req, res) => {
             })
             // .populate(populateMeta)
             .exec()
-console.log('console=> ',posts?.length)
+
         if (req.query?.keyword && totalCount > 0) {
             await saveSearchedKeyword(req.query?.keyword, totalCount)
         }
