@@ -24,6 +24,8 @@ export { default as convertMetasTypeToSingular } from './src/string-util/convert
 export { default as sortArrayByPropertyOfObject } from './src/array-utils/sortArrayByPropertyOfObject';
 export { default as convertSecondsToTimeString } from './src/date-utils/convertSecondsToTimeString';
 export { default as touchDeviceDetector } from './src/device-util/touchDeviceDetector';
+export { default as usernameValidatorRegisterForm } from './src/validators/usernameValidatorRegisterForm';
+export { default as passwordValidatorRegisterForm } from './src/validators/passwordValidatorRegisterForm';
 export { default as socket } from './src/socket-utils/socketIoClient';
 
 

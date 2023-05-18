@@ -23,8 +23,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change afterPath="$PROJECT_DIR$/packages/custom-util/src/validators/emailValidator.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/custom-util/src/validators/passwordValidatorRegisterForm.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/custom-util/src/validators/usernameValidatorRegisterForm.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/TextToCanvasImage/TextToCanvasImage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/asset/TextToCanvasImage/TextToCanvasImage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/usersControllers/register.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/usersControllers/register.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/RootLayout/common/LoginRegisterPopup/LoginRegisterPopupForms.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/common/LoginRegisterPopup/LoginRegisterPopupForms.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/userPageComponents/UserPageActionButtons/UserPageActionButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/userPageComponents/UserPageActionButtons/UserPageActionButtons.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/messengerActions/startAConversationAction.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/messengerActions/startAConversationAction.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/messengerReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/messengerReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/index.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/index.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/tsconfig.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/react-hooker-lib/dist/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-hooker-lib/dist/tsconfig.tsbuildinfo" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,8 +52,8 @@
         <option value="tsconfig.json" />
         <option value="JavaScript File" />
         <option value="Dockerfile" />
-        <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -1658,7 +1671,7 @@
       <workItem from="1684214644788" duration="9470000" />
       <workItem from="1684258912644" duration="14039000" />
       <workItem from="1684300679590" duration="25689000" />
-      <workItem from="1684391308653" duration="9766000" />
+      <workItem from="1684391308653" duration="14132000" />
     </task>
     <servers />
   </component>
@@ -1906,6 +1919,15 @@
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/convertMetasTypeToPlural.js" />
         <option value="$PROJECT_DIR$/packages/data-structures/src/videoQualities.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/getFileExtension.d.ts" />
+        <option value="$PROJECT_DIR$/packages/custom-util/src/validators/usernameValidatorRegisterForm.js" />
+        <option value="$PROJECT_DIR$/packages/custom-util/src/validators/usernameValidatorRegisterForm.d.ts" />
+        <option value="$PROJECT_DIR$/packages/custom-util/src/validators/usernameValidatorRegisterForm.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/custom-util/src/validators/passwordValidatorRegisterForm.js" />
+        <option value="$PROJECT_DIR$/packages/custom-util/src/validators/passwordValidatorRegisterForm.d.ts" />
+        <option value="$PROJECT_DIR$/packages/custom-util/src/validators/passwordValidatorRegisterForm.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/custom-util/src/validators/emailValidator.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/custom-util/src/validators/emailValidator.d.ts" />
+        <option value="$PROJECT_DIR$/packages/custom-util/src/validators/emailValidator.js" />
       </list>
     </option>
   </component>
@@ -2082,11 +2104,6 @@
           <option name="timeStamp" value="123" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/apps/web-app/components/RootLayout/common/LoginRegisterPopup/LoginRegisterPopupForms.tsx</url>
-          <line>237</line>
-          <option name="timeStamp" value="124" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/trash/desktop/ArticleTypeCard/ArticleTypeCardTitle.tsx</url>
           <option name="timeStamp" value="128" />
         </line-breakpoint>
@@ -2235,12 +2252,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/apps/web-app/components/RootLayout/common/LoginRegisterPopup/LoginRegisterPopupForms.tsx</url>
-          <line>49</line>
+          <line>51</line>
           <option name="timeStamp" value="180" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/apps/web-app/components/RootLayout/common/LoginRegisterPopup/LoginRegisterPopupForms.tsx</url>
-          <line>17</line>
+          <line>19</line>
           <option name="timeStamp" value="181" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">

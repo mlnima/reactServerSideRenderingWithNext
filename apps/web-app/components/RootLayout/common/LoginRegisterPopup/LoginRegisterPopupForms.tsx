@@ -4,7 +4,6 @@ import {useSelector} from 'react-redux';
 import styled from "styled-components";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 import Draggable from 'react-draggable';
-import _passwordValidator from "@_variables/_clientVariables/clientVariables/_passwordValidator";
 import ValidInput from "./ValidInput";
 import {loginAction} from "@store_toolkit/clientReducers/userReducers/loginAction";
 import {setAlert} from "@store_toolkit/clientReducers/globalStateReducer";
@@ -14,6 +13,9 @@ import FormHeader from "./FormHeader";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye} from "@fortawesome/free-solid-svg-icons/faEye";
 import {registerUserAction} from "@store_toolkit/clientReducers/userReducers/registerUserAction";
+import {usernameValidatorRegisterForm,passwordValidatorRegisterForm} from "custom-util";
+import emailValidator from "custom-util/src/validators/emailValidator";
+
 
 const LoginRegisterPopupFormsStyledDiv = styled.div`
   background-color: var(--secondary-background-color, #181818);
@@ -158,12 +160,11 @@ interface StateValidatorTypes {
 }
 
 const LoginRegisterPopupForms: FC = () => {
-    // const passwordRef = useRef()
+
     const {t} = useTranslation('common');
     const dispatch = useAppDispatch()
     const globalState = useSelector(({globalState}: Store) => globalState)
 
-    const [submitButtonDisable, setSubmitButtonDisable] = useState(true)
     const [state, setState] = useState<StateTypes>({
         username: '',
         email: '',
@@ -172,7 +173,6 @@ const LoginRegisterPopupForms: FC = () => {
     });
     const [stateValidator, setStateValidator] = useState<StateValidatorTypes>({});
     const [showPassword, setShowPassword] = useState<boolean>(false);
-    // const [response, setResponse] = useState<ResponseTypes>({});
 
     const onChangeHandler = (e: React.FormEvent<HTMLDivElement | HTMLFormElement>) => {
         setState({
@@ -191,11 +191,6 @@ const LoginRegisterPopupForms: FC = () => {
             password2: '',
         })
     };
-
-    // const showPasswordChangeHandler = () =>{
-    //     showPassword?
-    //     setShowPassword(!showPassword)
-    // }
 
     const onLoginHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -221,22 +216,16 @@ const LoginRegisterPopupForms: FC = () => {
         if (checkUsername && checkPasswords) {
             dispatch(registerUserAction({data: state}))
         }
-
-
     };
 
 
     useEffect(() => {
         setStateValidator({
-            username: state.username ? state?.username?.length <= 16 &&
-                state?.username?.length >= 6 &&
-                (/[a-zA-Z]/).test(state.username) &&
-                (/^((?!admin).)*$/i).test(state.username) || (
-                    globalState.loginRegisterFormPopup === 'login' &&
-                    state.username === 'dashboard'
-                ) : false,
-            email: state.email ? (/^[^\s@]+@[^\s@]+\.[^\s@]+$/).test(state.email) : false,
-            password: state.password ? _passwordValidator(state.password) : false,
+            username: globalState.loginRegisterFormPopup === 'register' ?
+                usernameValidatorRegisterForm(state?.username) :
+                !!state?.username,
+            email: emailValidator(state.email),
+            password: passwordValidatorRegisterForm(state.password),
             password2: state.password2 ? state.password === state.password2 : false,
             gender: state.gender ? state.gender === 'male' || state.gender === 'female' || state.gender === 'other' : false,
         })
@@ -244,14 +233,8 @@ const LoginRegisterPopupForms: FC = () => {
 
     return (
         <Draggable handle='.handle'>
-            <LoginRegisterPopupFormsStyledDiv className='login-register-content'
-                // response={response}
-
-            >
-
+            <LoginRegisterPopupFormsStyledDiv className='login-register-content' >
                 <FormHeader/>
-
-
                 {globalState.loginRegisterFormPopup === 'register' ?
                     <form className='login-register-form' onSubmit={e => onRegisterHandler(e)}>
                         <div className="login-register-form-fields">

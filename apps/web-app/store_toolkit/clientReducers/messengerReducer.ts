@@ -86,12 +86,14 @@ export const messengerSlice = createSlice({
                     ...action.payload
                 ]
             }
-        }).addCase(startAConversationAction.fulfilled, (state, action: PayloadAction<any>) => {
-            return {
-                ...state,
-                ...action.payload
-            }
-        }).addCase(getAConversationAction.fulfilled, (state, action: PayloadAction<any>) => {
+        })
+        // .addCase(startAConversationAction.fulfilled, (state, action: PayloadAction<any>) => {
+        //     return {
+        //         ...state,
+        //         ...action.payload
+        //     }
+        // })
+        .addCase(getAConversationAction.fulfilled, (state, action: PayloadAction<any>) => {
             return {
                 ...state,
                 activeConversation: action.payload.activeConversation

@@ -11,7 +11,7 @@ var __createBinding = (this && this.__createBinding) || (Object.create ? (functi
     o[k2] = m[k];
 }));
 exports.__esModule = true;
-exports.socket = exports.touchDeviceDetector = exports.convertSecondsToTimeString = exports.sortArrayByPropertyOfObject = exports.convertMetasTypeToSingular = exports.convertMetasTypeToPlural = exports.getTextDataWithTranslation = exports.textContentReplacer = exports.reduceWidgetsToGroups = exports.reduceArrayOfDataToIds = exports.uniqArrayBy = exports.ratingCalculator = exports.rangeNumGenerator = exports.randomNumberGenerator = exports.mongoIdValidator = exports.queryUniquer = exports.isUserFromExternalLink = exports.isJsonString = exports.isInternalUrl = exports.isImageAllowedForNextImage = exports.isEmptyObject = exports.isAbsolutePath = exports.fileTypeDetector = exports.convertVariableNameToName = exports.capitalizeFirstLetters = exports.capitalizeFirstLetter = exports.arraySortRandom = void 0;
+exports.socket = exports.passwordValidatorRegisterForm = exports.usernameValidatorRegisterForm = exports.touchDeviceDetector = exports.convertSecondsToTimeString = exports.sortArrayByPropertyOfObject = exports.convertMetasTypeToSingular = exports.convertMetasTypeToPlural = exports.getTextDataWithTranslation = exports.textContentReplacer = exports.reduceWidgetsToGroups = exports.reduceArrayOfDataToIds = exports.uniqArrayBy = exports.ratingCalculator = exports.rangeNumGenerator = exports.randomNumberGenerator = exports.mongoIdValidator = exports.queryUniquer = exports.isUserFromExternalLink = exports.isJsonString = exports.isInternalUrl = exports.isImageAllowedForNextImage = exports.isEmptyObject = exports.isAbsolutePath = exports.fileTypeDetector = exports.convertVariableNameToName = exports.capitalizeFirstLetters = exports.capitalizeFirstLetter = exports.arraySortRandom = void 0;
 var arraySortRandom_1 = require("./src/array-utils/arraySortRandom");
 __createBinding(exports, arraySortRandom_1, "default", "arraySortRandom");
 var capitalizeFirstLetter_1 = require("./src/string-util/capitalizeFirstLetter");
@@ -64,6 +64,10 @@ var convertSecondsToTimeString_1 = require("./src/date-utils/convertSecondsToTim
 __createBinding(exports, convertSecondsToTimeString_1, "default", "convertSecondsToTimeString");
 var touchDeviceDetector_1 = require("./src/device-util/touchDeviceDetector");
 __createBinding(exports, touchDeviceDetector_1, "default", "touchDeviceDetector");
+var usernameValidatorRegisterForm_1 = require("./src/validators/usernameValidatorRegisterForm");
+__createBinding(exports, usernameValidatorRegisterForm_1, "default", "usernameValidatorRegisterForm");
+var passwordValidatorRegisterForm_1 = require("./src/validators/passwordValidatorRegisterForm");
+__createBinding(exports, passwordValidatorRegisterForm_1, "default", "passwordValidatorRegisterForm");
 var socketIoClient_1 = require("./src/socket-utils/socketIoClient");
 __createBinding(exports, socketIoClient_1, "default", "socket");
 // import arraySortRandom from "./src/array-utils/arraySortRandom";

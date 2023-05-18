@@ -9,6 +9,7 @@ import {Store} from "typescript-types";
 import {followUserAction} from "@store_toolkit/clientReducers/userReducers/followUserAction";
 import {unfollowUserAction} from "@store_toolkit/clientReducers/userReducers/unfollowUserAction";
 import {startAConversationAction} from "@store_toolkit/clientReducers/messengerActions/startAConversationAction";
+import {clientAPIRequestStartAConversation} from "api-requests";
 
 const UserPageActionButtonsStyledDiv = styled.div`
   display: flex;
@@ -50,7 +51,7 @@ const UserPageActionButtons: FC<UserPageActionButtonsPropType> = ({_id}) => {
     const [startedTheConversation, setStartedTheConversation] = React.useState(false)
     const router = useRouter()
     const dispatch = useAppDispatch()
-    const {userData, loggedIn,userPageData} = useSelector(({user}: Store) => user)
+    const {userData, loggedIn, userPageData} = useSelector(({user}: Store) => user)
 
     const {activeConversation} = useSelector(({messenger}: Store) => messenger)
 
@@ -68,17 +69,17 @@ const UserPageActionButtons: FC<UserPageActionButtonsPropType> = ({_id}) => {
             dispatch(unfollowUserAction(userPageData?._id))
         }
     }
-    useEffect(() => {
-        if (startedTheConversation && activeConversation?._id){
-            router.push('/messenger')
-        }
 
-    }, [startedTheConversation,activeConversation]);
 
-    const onConversationHandler = () => {
+    const onConversationHandler = async () => {
         if (!!userData?._id && !!userPageData?._id) {
-            dispatch(startAConversationAction({users: [userPageData?._id, userData?._id]}))
-            setStartedTheConversation(true)
+            await clientAPIRequestStartAConversation({users: [userPageData?._id, userData?._id]}).then(response => {
+                //@ts-ignore
+                if (response?.data?.conversation?._id) {
+                    //@ts-ignore
+                    router.push(`/messenger?_id=${response.data.conversation._id}`)
+                }
+            })
         } else {
             dispatch(loginRegisterForm('login'))
         }
