@@ -8,7 +8,12 @@ const dashboardAPIRequestChangePassword = (oldPass, newPass, newPass2) => tslib_
 });
 exports.dashboardAPIRequestChangePassword = dashboardAPIRequestChangePassword;
 const dashboardAPIRequestDeleteUser = (id) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
-    return yield AxiosInstance_1.default.post('/api/admin/users/deleteUser', { id, token: localStorage.wt });
+    const token = localStorage.getItem('wt');
+    return yield AxiosInstance_1.default.delete(`/api/admin/users/deleteUser?_id=${id}`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
 });
 exports.dashboardAPIRequestDeleteUser = dashboardAPIRequestDeleteUser;
 const dashboardAPIRequestGenerateNewAPIKey = () => tslib_1.__awaiter(void 0, void 0, void 0, function* () {

@@ -11,8 +11,8 @@ const router = Router();
 
 router.post('/newAPIKey',adminAuthMiddleware,adminNewApiKey);
 router.get('/getUsers',adminAuthMiddleware,getUsers);
-router.post('/deleteUser',adminAuthMiddleware,adminDeleteUser);
-router.post('/getUser',adminAuthMiddleware,adminGetUser);
+router.delete('/deleteUser',adminAuthMiddleware,adminDeleteUser);
+router.get('/getUser',adminAuthMiddleware,adminGetUser);
 router.post('/updateUser',adminAuthMiddleware,updateUser);
 
 export default router;

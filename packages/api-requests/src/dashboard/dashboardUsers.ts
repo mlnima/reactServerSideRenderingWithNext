@@ -4,8 +4,13 @@ export const dashboardAPIRequestChangePassword = async (oldPass, newPass, newPas
     return await AxiosInstance.post('/api/v1/users/resetPassword',{oldPass, newPass, newPass2,token: localStorage.wt})
 }
 
-export const dashboardAPIRequestDeleteUser = async (id)=>{
-    return await AxiosInstance.post('/api/admin/users/deleteUser',{id,token: localStorage.wt})
+export const dashboardAPIRequestDeleteUser = async (id) => {
+    const token = localStorage.getItem('wt');
+    return await AxiosInstance.delete(`/api/admin/users/deleteUser?_id=${id}`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
 }
 
 

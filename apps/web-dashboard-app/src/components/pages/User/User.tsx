@@ -63,7 +63,7 @@ const User = () => {
     const dispatch = useAppDispatch()
     const [search, setSearch] = useSearchParams()
     const [userId, setUserId] = useState('')
-    const userData = useSelector(({users}: DashboardStore) => users.user)
+    const userData = useSelector(({users}: DashboardStore) => users?.user)
     const APIKeyElement = useRef(null)
 
     const [resetPasswordData, setResetPasswordData] = useState({
@@ -121,33 +121,33 @@ const User = () => {
         <UserStyledDiv className='user-admin-edit-profile-page'>
             <div className='user-admin-edit-profile-page-section'>
                 <p>Username :</p>
-                <input className={'form-control-input'} name='username' value={userData.username}
+                <input className={'form-control-input'} name='username' value={userData?.username}
                        onChange={e => onChangeHandler(e)}
-                       disabled={userData.username === 'admin' || userData.username === 'dashboard'}/>
+                       disabled={userData?.username === 'admin' || userData?.username === 'dashboard'}/>
             </div>
             <div className='user-admin-edit-profile-page-section'>
                 <p>Email :</p>
-                <input className={'form-control-input'} name='email' value={userData.email}
+                <input className={'form-control-input'} name='email' value={userData?.email}
                        onChange={e => onChangeHandler(e)}/>
             </div>
             <div className='user-admin-edit-profile-page-section'>
                 <p>First Name :</p>
-                <input className={'form-control-input'} name='firstName' value={userData.firstName}
+                <input className={'form-control-input'} name='firstName' value={userData?.firstName}
                        onChange={e => onChangeHandler(e)}/>
             </div>
             <div className='user-admin-edit-profile-page-section'>
                 <p>Last Name :</p>
-                <input className={'form-control-input'} name='lastName' value={userData.lastName}
+                <input className={'form-control-input'} name='lastName' value={userData?.lastName}
                        onChange={e => onChangeHandler(e)}/>
             </div>
             <div className='user-admin-edit-profile-page-section'>
                 <p>Nick Name :</p>
-                <input className={'form-control-input'} name='nickName' value={userData.nickName}
+                <input className={'form-control-input'} name='nickName' value={userData?.nickName}
                        onChange={e => onChangeHandler(e)}/>
             </div>
             <div className='user-admin-edit-profile-page-section'>
                 <p>About :</p>
-                <textarea className={'form-control-input'} name='about' value={userData.about}
+                <textarea className={'form-control-input'} name='about' value={userData?.about}
                           onChange={e => onChangeHandler(e)}/>
             </div>
             {/*<div className='user-admin-edit-profile-page-section'>*/}
@@ -157,10 +157,10 @@ const User = () => {
             {/*</div>*/}
             <div className='user-admin-edit-profile-page-section'>
                 <p>Role :</p>
-                <select className={'custom-select'} value={userData.role}
+                <select className={'custom-select'} value={userData?.role}
                         name='role'
                         onChange={e => onChangeHandler(e)}
-                        disabled={userData.keyMaster}>
+                        disabled={userData?.keyMaster}>
                     {userRoles.map((userRole: string, index: number) => {
                         return <option value={userRole} key={index}>{convertVariableNameToName(userRole)}</option>
                     })}
@@ -168,10 +168,10 @@ const User = () => {
             </div>
             <div className='user-admin-edit-profile-page-section'>
                 <p>Status :</p>
-                <select className={'custom-select'} value={userData.status}
+                <select className={'custom-select'} value={userData?.status}
                         name='status'
                         onChange={e => onChangeHandler(e)}
-                        disabled={userData.keyMaster}>
+                        disabled={userData?.keyMaster}>
                     {userStatus.map((status: string, index: number) => {
                         return <option value={status} key={index}>{convertVariableNameToName(status)}</option>
                     })}
@@ -183,23 +183,23 @@ const User = () => {
             <div className='user-admin-edit-profile-page-section-reset-password'>
                 <h2>Reset Password:</h2>
                 <p>Old Password:</p>
-                <input className={'form-control-input'} name='oldPassword' value={resetPasswordData.oldPassword}
+                <input className={'form-control-input'} name='oldPassword' value={resetPasswordData?.oldPassword}
                        onChange={e => onPasswordDataChangeHandler(e)}/>
                 <p>New Password:</p>
-                <input className={'form-control-input'} name='newPassword1' value={resetPasswordData.newPassword1}
+                <input className={'form-control-input'} name='newPassword1' value={resetPasswordData?.newPassword1}
                        onChange={e => onPasswordDataChangeHandler(e)}/>
                 <p>Repeat New Password:</p>
-                <input className={'form-control-input'} name='newPassword2' value={resetPasswordData.newPassword2}
+                <input className={'form-control-input'} name='newPassword2' value={resetPasswordData?.newPassword2}
                        onChange={e => onPasswordDataChangeHandler(e)}/>
                 <button className='saveBtn btn btn-primary' onClick={onPasswordResetHandler}>Reset The Password</button>
             </div>
             <div className='user-admin-edit-profile-page-section-API'>
                 <h2>API KEY</h2>
-                <label ref={APIKeyElement}>{userData.API_KEY}</label>
+                <label ref={APIKeyElement}>{userData?.API_KEY}</label>
                 <button className='btn btn-primary' onClick={onNewAPIKeyRequest}>Generate API Key</button>
             </div>
             {
-                !userData.keyMaster ?
+                !userData?.keyMaster ?
                     <div className='user-admin-edit-profile-page-delete-user'>
                         <h2>Delete User</h2>
                         <button className='delete-user-button' onClick={onDeleteUserHandler}>Delete User</button>

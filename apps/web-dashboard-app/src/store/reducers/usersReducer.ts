@@ -28,11 +28,12 @@ export const loginUserAction = createAsyncThunk(
         thunkAPI.dispatch(loading(true))
 
        return await commonAPIRequestLoginUser(username, password).then(response => {
-            if (response?.data?.token) {
-                localStorage.setItem('wt', response.data.token)
+            if (response?.data?.token && response.data.userData.role === 'administrator' ) {
+                localStorage.setItem('wt', response.data.token.toString())
+
 
                 return {
-                    userData: response.data,
+                    userData: response.data.userData,
                     isUserLoggedIn: true
                 }
             }
@@ -53,11 +54,16 @@ export const autologinUserAction = createAsyncThunk(
 
         if (localStorage.wt) {
             return await commonAPIRequestGetSignedInUserData(fields).then(response => {
-                thunkAPI.dispatch(setAlert({message: response.data.message, type: 'success'}))
-                return {
-                    userData: response.data?.userData,
-                    isUserLoggedIn: true
+
+                if ( response.data.userData.role === 'administrator' ) {
+
+                    thunkAPI.dispatch(setAlert({message: response.data.message, type: 'success'}))
+                    return {
+                        userData: response.data?.userData,
+                        isUserLoggedIn: true
+                    }
                 }
+                thunkAPI.dispatch(setAlert({message: 'forbidden', type: 'error'}))
             }).catch((err) => {
                 localStorage.removeItem('wt')
                 thunkAPI.dispatch(setAlert({message: err.response.data.message, type: 'error'}))
