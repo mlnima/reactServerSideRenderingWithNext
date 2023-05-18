@@ -62,6 +62,7 @@ const PostsCardsRenderer: FC<CardsRendererPropTypes> =
             'event': EventPostCard,
             'article': ArticlePostCard,
             'promotion': PromotionPostCard,
+            'learn': LearnPostCard,
             'Ad': AdPostCard,
         }
 

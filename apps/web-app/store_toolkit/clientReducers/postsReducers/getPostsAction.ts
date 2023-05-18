@@ -21,7 +21,7 @@ const getPostsAction = createAsyncThunk(
         const dataForm = metaType && singularMetaForm ? `${singularMetaForm}Data` : '';
         const meta = apiData?.data?.meta
         const metaData = dataForm && meta ? {[dataForm]: meta} : {}
-console.log('console=> ',apiData.data)
+
         return {
             posts: apiData.data?.posts || [],
             totalCount: apiData?.data?.totalCount || 0,

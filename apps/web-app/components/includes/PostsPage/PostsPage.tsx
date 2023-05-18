@@ -27,11 +27,9 @@ const PostsPage: FC<PostPageTypes> = ({renderPagination}) => {
 
     const {query} = useRouter()
 
-    const {posts, numberOfCardsPerPage, totalCount} = useSelector(({posts, settings}: Store) => {
+    const {posts} = useSelector(({posts}: Store) => {
         return {
             posts: posts?.posts,
-            totalCount: posts?.totalCount,
-            numberOfCardsPerPage: settings?.initialSettings?.postCardsSettings?.numberOfCardsPerPage || 20
         }
     })
 
@@ -39,7 +37,10 @@ const PostsPage: FC<PostPageTypes> = ({renderPagination}) => {
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            window.scrollTo({top: 0, behavior: 'smooth'})
+             setTimeout(()=>{
+                 window.scrollTo({top: 0, behavior: 'smooth'})
+             },500)
+
         }
     }, [query]);
 
@@ -49,7 +50,7 @@ const PostsPage: FC<PostPageTypes> = ({renderPagination}) => {
             <PostsContainer className='posts-container'>
                 <PostsCardsRenderer posts={posts}/>
             </PostsContainer>
-            {!!renderPagination && <PaginationComponent/>}
+            {renderPagination && <PaginationComponent/>}
 
         </Fragment>
     );

@@ -7,7 +7,6 @@ import TextToCanvasImage from "../asset/TextToCanvasImage/TextToCanvasImage";
 import {Post} from "typescript-types";
 import CardTitle from "../asset/CardTitle/CardTitle";
 import DefaultPostCardStyle from "../asset/DefaultPostCardStyle";
-import useTranslation from "next-translate/useTranslation";
 import CardViews from "@components/includes/cards/asset/CardViews/CardViews";
 
 const CardRating = dynamic(() => import('../asset/CardRating/CardRating'))

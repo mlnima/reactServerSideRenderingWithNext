@@ -24,7 +24,9 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/postsControllers/getPosts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/postsControllers/getPosts.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/PostsPage/PostsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/PostsPage/PostsPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/CardsRenderer/PostsCardsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/CardsRenderer/PostsCardsRenderer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/LearnPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/includes/cards/postsCards/LearnPostCard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/postsReducers/getPostsAction.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/store_toolkit/clientReducers/postsReducers/getPostsAction.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -1659,7 +1661,7 @@
       <workItem from="1684214644788" duration="9470000" />
       <workItem from="1684258912644" duration="14039000" />
       <workItem from="1684300679590" duration="25689000" />
-      <workItem from="1684391308653" duration="6227000" />
+      <workItem from="1684391308653" duration="7109000" />
     </task>
     <servers />
   </component>
