@@ -1,8 +1,7 @@
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-   // host: process.env.MAIL_SERVER_HOST,
-    host: '161.97.72.248',
+    host: 'mail.trdland.de',
     port: 587,
     secure: false,
     requireTLS: true,
@@ -16,7 +15,7 @@ const transporter = nodemailer.createTransport({
 });
 
 const mailOptions = {
-    from: 'no-reply@trdland.de',
+    from: 'welcome@trdland.de',
     to: 'mmlnima@gmail.com',
     subject: 'Welcome to MyApp!',
     text: 'Thank you for registering on MyApp.',

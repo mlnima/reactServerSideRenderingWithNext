@@ -126,7 +126,7 @@
       <command value="nextEnv" />
     </option>
   </component>
-  <component name="RunManager" selected="npm.build">
+  <component name="RunManager" selected="npm.dev">
     <configuration name="incomingEmailToOutSMTPServer.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/apps/mail-server/src/tests/incomingEmailToOutSMTPServer.js" working-dir="$PROJECT_DIR$/apps/mail-server/src/tests">
       <method v="2" />
     </configuration>
@@ -165,8 +165,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.build" />
         <item itemvalue="Node.js.incomingEmailToOutSMTPServer.js" />
         <item itemvalue="Node.js.temp.js" />
         <item itemvalue="npm.start" />
@@ -1659,7 +1659,7 @@
       <workItem from="1684497256326" duration="16720000" />
       <workItem from="1684595049010" duration="1482000" />
       <workItem from="1684612833084" duration="1736000" />
-      <workItem from="1684651528498" duration="29032000" />
+      <workItem from="1684651528498" duration="36249000" />
     </task>
     <servers />
   </component>
@@ -2357,7 +2357,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/apps/mail-server/index.ts</url>
-          <line>33</line>
+          <line>125</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="221" />
         </line-breakpoint>
