@@ -63,7 +63,7 @@ const createSMTPServer=(port)=> {
                         status: 'received'
                     }
 
-                    console.log(parsed)
+                    console.log('port=> ',port)
                     console.log('received email=> ', receivedEmailParsedData)
 
                     callback();
