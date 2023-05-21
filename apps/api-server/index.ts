@@ -18,6 +18,13 @@ import clientMainFestController from './controllers/clientControllers/clientMain
 import clientRobotTxtController from './controllers/clientControllers/clientRobotTxtController'
 import loggerMiddleware from "./middlewares/loggerMiddleware";
 
+import {settingSchema} from 'models';
+settingSchema.findOne({type:'initialSettings'}).exec().then((initialSettings)=>{
+    if (initialSettings){
+        global.initialSettings = initialSettings.data
+    }
+})
+
 const server = express();
 
 const runServer = () => {

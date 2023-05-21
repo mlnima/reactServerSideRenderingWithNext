@@ -11,7 +11,7 @@ const nextImageConfig = require('./nextConfigs/nextImageConfig')
 // const MY_PREFIX = /^REACT_APP_/i;
 //
 // const transformedEnv = Object.entries(process.env)
-//     .filter(([key, value]) => MY_PREFIX.test(key))
+//     .filter(([key, value]) => MY_PREFIX.tests(key))
 //     .reduce((finalEnvs, current) => {
 //         const envKey = current[0].replace('REACT_APP_', 'NEXT_PUBLIC_')
 //         finalEnvs[envKey] = current[1]

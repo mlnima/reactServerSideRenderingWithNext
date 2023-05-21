@@ -4,7 +4,7 @@ module.exports = {
     // module: {
     //     rules: [
     //         {
-    //             test: /\.jsx?$/,
+    //             tests: /\.jsx?$/,
     //             exclude: /node_modules/,
     //             loader: 'babel-loader',
     //         },

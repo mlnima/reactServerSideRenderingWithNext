@@ -13,6 +13,7 @@ export interface User {
     about: string;
     API_KEY: string;
     uuid: string;
+    verificationToken: string;
     age: number;
     followingCount: number;
     followersCount: number;

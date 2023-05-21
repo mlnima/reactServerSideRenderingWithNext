@@ -15,7 +15,7 @@ const transporter = nodemailer.createTransport({
 });
 
 const mailOptions = {
-    from: 'system@example.com',
+    from: 'no-reply@trdland.de',
     to: 'mmlnima@gmail.com',
     subject: 'Welcome to MyApp!',
     text: 'Thank you for registering on MyApp.',

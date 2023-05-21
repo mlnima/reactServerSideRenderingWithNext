@@ -23,18 +23,55 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change beforePath="$PROJECT_DIR$/.env.template" beforeDir="false" afterPath="$PROJECT_DIR$/.env.template" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/users/adminDeleteUser.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/users/adminDeleteUser.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/users/adminGetUser.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/users/adminGetUser.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/users/usersRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/adminControllers/users/usersRouter.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/User/User.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/User/User.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/usersReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/store/reducers/usersReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/api-requests/dist/src/dashboard/dashboardUsers.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/dist/src/dashboard/dashboardUsers.d.ts.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/api-requests/dist/src/dashboard/dashboardUsers.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/dist/src/dashboard/dashboardUsers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/api-requests/dist/src/dashboard/dashboardUsers.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/dist/src/dashboard/dashboardUsers.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/usersControllers/register.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/usersControllers/register.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/usersControllers/userLogin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/usersControllers/userLogin.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/widgetsControllers/getWidgets.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/widgetsControllers/getWidgets.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/workers/mailServer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mail-server/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mail-server/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mail-server/nodemon.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mail-server/nodemon.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mail-server/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mail-server/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mail-server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mail-server/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mail-server/src/tests/outGoingEmailFromOurServer.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mail-server/src/tests/outGoingEmailFromOurServer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mail-server/tests/emailTest.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/smpt-server/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/smpt-server/nodemon.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/smpt-server/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/smpt-server/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/smpt-server/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/config/env.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/config/env.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/config/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/config/webpack.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/config/webpackDevServer.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/config/webpackDevServer.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/settings/initialSettings/MembershipSettings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/settings/initialSettings/MembershipSettings.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/webpack.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/information/RequierEnvVariables.md" beforeDir="false" afterPath="$PROJECT_DIR$/information/RequierEnvVariables.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/api-requests/dist/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/dist/tsconfig.tsbuildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/api-requests/src/dashboard/dashboardUsers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/src/dashboard/dashboardUsers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-server-util/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/email-utils/emailSender.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/jwtTokenGenerator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-server-util/src/jwtTokenGenerator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-server-util/tsconfig.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/tsconfig.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/index.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/index.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/emailSchema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/emailSchema.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/userSchema.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/userSchema.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/userSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/userSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/userSchema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/userSchema.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/tsconfig.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/react-hooker-lib/dist/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-hooker-lib/dist/tsconfig.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/typescript-types/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/typescript-types/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/typescript-types/src/IEmail.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/typescript-types/src/IEmail.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/typescript-types/src/User.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/typescript-types/src/User.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/typescript-types/src/settings/InitialSettings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/typescript-types/src/settings/InitialSettings.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/typescript-types/src/settings/MembershipSettings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/typescript-types/src/settings/MembershipSettings.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/turbo.json" beforeDir="false" afterPath="$PROJECT_DIR$/turbo.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,9 +84,9 @@
         <option value="HTML File" />
         <option value="CSS File" />
         <option value="tsconfig.json" />
-        <option value="JavaScript File" />
         <option value="Dockerfile" />
         <option value="TypeScript JSX File" />
+        <option value="JavaScript File" />
         <option value="TypeScript File" />
       </list>
     </option>
@@ -103,7 +140,7 @@
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;18.12.1&quot;,
     &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;18.15.11&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/Dev Project/reactServerSideRenderingWithNext/packages/ui-jsx-components&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/Dev Project/nodejs/xnign&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -116,18 +153,18 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\smpt-server" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\ui-jsx-components" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\api-requests\src\dashboard" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\api-requests\src\common" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\api-requests\src" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\api-requests\src\client" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\ui-components\src\fullscreenComponentsProvider" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\trash" />
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\mail-server\src" />
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\ui-components\src\fullscreenComponentsProvider" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\api-requests\src\common" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\api-requests\src" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\api-requests-dashboard" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -135,7 +172,10 @@
       <command value="nextEnv" />
     </option>
   </component>
-  <component name="RunManager" selected="npm.dev">
+  <component name="RunManager" selected="npm.build">
+    <configuration name="incomingEmailToOutSMTPServer.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/apps/mail-server/src/tests/incomingEmailToOutSMTPServer.js" working-dir="$PROJECT_DIR$/apps/mail-server/src/tests">
+      <method v="2" />
+    </configuration>
     <configuration name="temp.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/tempFiles/temp.js" working-dir="$PROJECT_DIR$/tempFiles">
       <method v="2" />
     </configuration>
@@ -159,16 +199,6 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="outdate:web-app-packages" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="outdate:web-app-packages" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
     <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -181,11 +211,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.build" />
-        <item itemvalue="npm.start" />
-        <item itemvalue="npm.outdate:web-app-packages" />
+        <item itemvalue="npm.dev" />
+        <item itemvalue="Node.js.incomingEmailToOutSMTPServer.js" />
         <item itemvalue="Node.js.temp.js" />
+        <item itemvalue="npm.start" />
       </list>
     </recent_temporary>
   </component>
@@ -1669,6 +1699,13 @@
       <workItem from="1684258912644" duration="14039000" />
       <workItem from="1684300679590" duration="25689000" />
       <workItem from="1684391308653" duration="16628000" />
+      <workItem from="1684475996171" duration="5161000" />
+      <workItem from="1684484675731" duration="1868000" />
+      <workItem from="1684486668027" duration="7255000" />
+      <workItem from="1684497256326" duration="16720000" />
+      <workItem from="1684595049010" duration="1482000" />
+      <workItem from="1684612833084" duration="1736000" />
+      <workItem from="1684651528498" duration="26977000" />
     </task>
     <servers />
   </component>
@@ -1925,11 +1962,21 @@
         <option value="$PROJECT_DIR$/packages/custom-util/src/validators/emailValidator.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/validators/emailValidator.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/validators/emailValidator.js" />
+        <option value="$PROJECT_DIR$/packages/models/src/emailSchema.d.ts" />
+        <option value="$PROJECT_DIR$/packages/models/src/emailSchema.js" />
+        <option value="$PROJECT_DIR$/packages/models/src/emailSchema.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/custom-server-util/src/jwtTokenGenerator.d.ts" />
+        <option value="$PROJECT_DIR$/packages/custom-server-util/src/jwtTokenGenerator.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/custom-server-util/src/jwtTokenGenerator.js" />
+        <option value="$PROJECT_DIR$/packages/custom-server-util/index.js" />
+        <option value="$PROJECT_DIR$/packages/custom-server-util/index.d.ts" />
+        <option value="$PROJECT_DIR$/packages/custom-server-util/index.d.ts.map" />
       </list>
     </option>
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.env" />
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.template" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -2348,6 +2395,17 @@
           <url>file://$PROJECT_DIR$/apps/web-app/components/pagesIncludes/messenger/MessengerMultiMediaInputBox/VoiceRecorderButton.tsx</url>
           <line>10</line>
           <option name="timeStamp" value="219" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/packages/typescript-types/src/settings/MembershipSettings.ts</url>
+          <line>9</line>
+          <option name="timeStamp" value="220" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/apps/mail-server/index.ts</url>
+          <line>33</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="221" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -2,7 +2,7 @@ JWT_KEY = secretKey
 NODE_ENV=dev
 
 MAIL_SERVER= true
-MAIL_SERVER_PORT=465
+
 
 ##HTTPS Require for Socket 
 NEXT_PUBLIC_PRODUCTION_URL= "http://localhost:3000"

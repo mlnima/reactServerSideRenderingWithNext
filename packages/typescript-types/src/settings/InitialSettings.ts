@@ -34,7 +34,9 @@ export interface InitialSettings{
         anyoneCanRegister: boolean,
         usersCanFollowEachOther: boolean,
         usersCanMessageEachOther: boolean,
-        usersCanCommentOnThePosts: boolean
+        usersCanCommentOnThePosts: boolean,
+        usersPersonalEmailAddress: boolean,
+        verificationRequired: boolean,
     },
     layoutSettings:{
         topbar: boolean,

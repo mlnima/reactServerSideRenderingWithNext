@@ -38,6 +38,7 @@ import {UniqueDataTypes} from "./src/widgets/Widget";
 import {MenuItem} from "./src/widgets/MenuWidget/MenuItem";
 import {User} from "./src/User";
 import {CommentRaw} from "./src/Comment";
+import {IEmail} from "./src/IEmail";
 
 export type {
     CommentRaw,
@@ -79,5 +80,6 @@ export type {
     Post,
     Meta,
     UserState,
+    IEmail,
     WidgetsState
 }

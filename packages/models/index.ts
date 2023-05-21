@@ -16,6 +16,7 @@ import chatroomMessageSchema from "./src/chatroomMessageSchema";
 import fileSchema from "./src/fileSchema";
 import messengerConversationMessageSchema from "./src/messengerConversationMessageSchema";
 import messengerConversationSchema from "./src/messengerConversationSchema";
+import emailSchema from "./src/emailSchema";
 
 
 export {
@@ -36,5 +37,6 @@ export {
     searchKeywordSchema,
     translateSchema,
     userSchema,
+    emailSchema,
     widgetSchema
 }

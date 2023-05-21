@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.widgetSchema = exports.userSchema = exports.translateSchema = exports.searchKeywordSchema = exports.postSchema = exports.pageSchema = exports.orderSchema = exports.metaSchema = exports.formSchema = exports.conversationSchema = exports.contactFromSchema = exports.commentSchema = exports.chatroomSchema = exports.chatroomMessageSchema = exports.fileSchema = exports.settingSchema = exports.messengerConversationMessageSchema = exports.messengerConversationSchema = void 0;
+exports.widgetSchema = exports.emailSchema = exports.userSchema = exports.translateSchema = exports.searchKeywordSchema = exports.postSchema = exports.pageSchema = exports.orderSchema = exports.metaSchema = exports.formSchema = exports.conversationSchema = exports.contactFromSchema = exports.commentSchema = exports.chatroomSchema = exports.chatroomMessageSchema = exports.fileSchema = exports.settingSchema = exports.messengerConversationMessageSchema = exports.messengerConversationSchema = void 0;
 var tslib_1 = require("tslib");
 var settingSchema_1 = tslib_1.__importDefault(require("./src/settings/settingSchema"));
 exports.settingSchema = settingSchema_1["default"];
@@ -38,3 +38,5 @@ var messengerConversationMessageSchema_1 = tslib_1.__importDefault(require("./sr
 exports.messengerConversationMessageSchema = messengerConversationMessageSchema_1["default"];
 var messengerConversationSchema_1 = tslib_1.__importDefault(require("./src/messengerConversationSchema"));
 exports.messengerConversationSchema = messengerConversationSchema_1["default"];
+var emailSchema_1 = tslib_1.__importDefault(require("./src/emailSchema"));
+exports.emailSchema = emailSchema_1["default"];

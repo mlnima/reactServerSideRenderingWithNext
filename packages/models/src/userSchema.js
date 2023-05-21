@@ -32,6 +32,7 @@ var userSchema = new mongoose_1.Schema({
     city: String,
     country: String,
     status: String,
-    keyMaster: Boolean
+    keyMaster: Boolean,
+    verificationToken: String
 }, { timestamps: true });
 exports["default"] = (0, mongoose_1.model)("user", userSchema);

@@ -16,5 +16,6 @@ import chatroomMessageSchema from "./src/chatroomMessageSchema";
 import fileSchema from "./src/fileSchema";
 import messengerConversationMessageSchema from "./src/messengerConversationMessageSchema";
 import messengerConversationSchema from "./src/messengerConversationSchema";
-export { messengerConversationSchema, messengerConversationMessageSchema, settingSchema, fileSchema, chatroomMessageSchema, chatroomSchema, commentSchema, contactFromSchema, conversationSchema, formSchema, metaSchema, orderSchema, pageSchema, postSchema, searchKeywordSchema, translateSchema, userSchema, widgetSchema };
+import emailSchema from "./src/emailSchema";
+export { messengerConversationSchema, messengerConversationMessageSchema, settingSchema, fileSchema, chatroomMessageSchema, chatroomSchema, commentSchema, contactFromSchema, conversationSchema, formSchema, metaSchema, orderSchema, pageSchema, postSchema, searchKeywordSchema, translateSchema, userSchema, emailSchema, widgetSchema };
 //# sourceMappingURL=index.d.ts.map

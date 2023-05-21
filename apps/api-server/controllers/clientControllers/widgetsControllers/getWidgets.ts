@@ -3,6 +3,8 @@ import {databaseSelectFieldsForPostCards} from "data-structures";
 import {Widget} from "typescript-types";
 
 const getWidgets = async (req, res) => {
+
+
     try {
         const locale = req.query.locale
         const locales = process.env.NEXT_PUBLIC_LOCALS.split(' ')

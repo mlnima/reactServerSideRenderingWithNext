@@ -87,7 +87,7 @@ module.exports = function (proxy, allowedHost) {
       // It is important to tell WebpackDevServer to use the same "publicPath" path as
       // we specified in the webpack config. When homepage is '.', default to serving
       // from the root.
-      // remove last slash so user can land on `/test` instead of `/test/`
+      // remove last slash so user can land on `/tests` instead of `/tests/`
       publicPath: paths.publicUrlOrPath.slice(0, -1),
     },
 
