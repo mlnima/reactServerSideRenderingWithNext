@@ -1,0 +1,34 @@
+{
+  "name": "mail-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "keywords": [
+    "nextJs",
+    "turbo repo",
+    "next",
+    "ts"
+  ],
+  "author": "02dev",
+  "license": "MIT",
+  "scripts": {
+    "dev": "concurrently \"cross-env nodemon --trace-warnings\"",
+    "build": "npm run build:server",
+    "start": "concurrently \"NODE_ENV=production node ./dist/index.js\"",
+    "fixTimeStamsForPosts": "node tools/fixTimeStamsForPosts.js",
+    "mergeDuplicateMetaData": "node tools/mergeDuplicateMetaData.js",
+    "ResetAdminPassword": "node ./tools/resetAdminPassword.js",
+    "build:server": "tsc --project tsconfig.json",
+    "update:packages": "npm update --save/--save-dev -f",
+    "test": "jest --watch"
+  },
+  "dependencies": {
+    "mailparser": "^3.6.4",
+    "smtp-server": "^3.11.0",
+    "models": "*",
+    "mongoose": "^6.9.0",
+    "ts-node": "^10.9.1"
+  },
+  "_moduleAliases": {
+
+  }
+}
