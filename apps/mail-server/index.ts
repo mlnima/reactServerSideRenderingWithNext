@@ -28,7 +28,7 @@ const createSMTPServer=(port)=> {
                 callback(null, {user: 'system'});
             } else {
                 const userData = await userSchema.findById(auth?._id).exec();
-                const isPasswordCorrect: boolean = await bcrypt.compare(auth?.password, userData.password);
+                const isPasswordCorrect: boolean = await bcrypt.compare(auth?.pass, userData.password);
                 if (!isPasswordCorrect) {
                     //   return callback(new Error("Invalid username or password"));
                     return callback(null, {
