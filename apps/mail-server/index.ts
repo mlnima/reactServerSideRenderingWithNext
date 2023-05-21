@@ -77,6 +77,8 @@ server.on("error", err => {
     console.log("Error %s", err.message);
 });
 
+console.log('MailServer Report => ', process.env.MAIL_SERVER,process.env.SSL_CERT,process.env.SSL_KEY)
+
 if (process.env.MAIL_SERVER === 'true' && process.env.SSL_CERT && process.env.SSL_KEY) {
     server.listen(587);
     console.log('Mail server started on port 587');

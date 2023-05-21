@@ -1,13 +1,14 @@
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-    host: process.env.MAIL_SERVER_HOST,
+   // host: process.env.MAIL_SERVER_HOST,
+    host: '161.97.72.248',
     port: 587,
     secure: false,
     requireTLS: true,
     auth: {
         user: 'no-reply',
-        pass: 'secretKey',
+        pass: 'trdland$%',
     },
     tls: {
         rejectUnauthorized: false

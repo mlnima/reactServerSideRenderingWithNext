@@ -23,55 +23,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change beforePath="$PROJECT_DIR$/.env.template" beforeDir="false" afterPath="$PROJECT_DIR$/.env.template" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/usersControllers/register.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/usersControllers/register.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/usersControllers/userLogin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/usersControllers/userLogin.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/widgetsControllers/getWidgets.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/widgetsControllers/getWidgets.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api-server/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api-server/workers/mailServer.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/mail-server/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mail-server/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mail-server/nodemon.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mail-server/nodemon.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mail-server/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mail-server/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mail-server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mail-server/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/mail-server/src/tests/outGoingEmailFromOurServer.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mail-server/src/tests/outGoingEmailFromOurServer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mail-server/tests/emailTest.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/smpt-server/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/smpt-server/nodemon.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/smpt-server/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/smpt-server/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/smpt-server/tsconfig.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-app/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/next.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/config/env.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/config/env.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/config/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/config/webpack.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/config/webpackDevServer.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/config/webpackDevServer.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/settings/initialSettings/MembershipSettings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/src/components/pages/settings/initialSettings/MembershipSettings.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web-dashboard-app/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-dashboard-app/webpack.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/information/RequierEnvVariables.md" beforeDir="false" afterPath="$PROJECT_DIR$/information/RequierEnvVariables.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/api-requests/dist/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api-requests/dist/tsconfig.tsbuildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-server-util/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/email-utils/emailSender.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/jwtTokenGenerator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-server-util/src/jwtTokenGenerator.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-server-util/tsconfig.tsbuildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/custom-util/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/tsconfig.tsbuildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/index.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/index.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/index.d.ts.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/src/emailSchema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/emailSchema.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/src/userSchema.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/userSchema.d.ts.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/src/userSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/userSchema.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/src/userSchema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/userSchema.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/models/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/tsconfig.tsbuildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/react-hooker-lib/dist/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-hooker-lib/dist/tsconfig.tsbuildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/typescript-types/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/typescript-types/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/typescript-types/src/IEmail.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/typescript-types/src/IEmail.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/typescript-types/src/User.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/typescript-types/src/User.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/typescript-types/src/settings/InitialSettings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/typescript-types/src/settings/InitialSettings.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/typescript-types/src/settings/MembershipSettings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/typescript-types/src/settings/MembershipSettings.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/turbo.json" beforeDir="false" afterPath="$PROJECT_DIR$/turbo.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1705,7 +1659,7 @@
       <workItem from="1684497256326" duration="16720000" />
       <workItem from="1684595049010" duration="1482000" />
       <workItem from="1684612833084" duration="1736000" />
-      <workItem from="1684651528498" duration="26977000" />
+      <workItem from="1684651528498" duration="29032000" />
     </task>
     <servers />
   </component>
