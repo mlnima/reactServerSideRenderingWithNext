@@ -9,7 +9,7 @@ import {simpleParser} from 'mailparser';
 import fs from 'fs';
 import {emailSchema, settingSchema, userSchema} from 'models';
 import bcrypt from 'bcryptjs';
-import * as process from "process";
+console.log('mail server=> ',)
 
 // Function to create SMTP server
 const createSMTPServer=(port)=> {
@@ -22,9 +22,9 @@ const createSMTPServer=(port)=> {
             cert: fs.readFileSync(process.env.SSL_CERT),
         },
         onAuth: async (auth, session, callback) => {
-            console.log('onAuth=> ', auth?.username, auth?._id, auth?.password)
+            console.log('onAuth=> ', auth?.user, auth?._id, auth?.pass)
             const systemEmails = ['no-reply', 'verification', 'reset-password', 'welcome']
-            if (systemEmails.includes(auth?.username) && auth?.password === process.env.JWT_KEY) {
+            if (systemEmails.includes(auth?.user) && auth?.pass=== process.env.JWT_KEY) {
                 callback(null, {user: 'system'});
             } else {
                 const userData = await userSchema.findById(auth?._id).exec();
