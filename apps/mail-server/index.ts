@@ -22,27 +22,32 @@ const createSMTPServer=(port)=> {
             cert: fs.readFileSync(process.env.SSL_CERT),
         },
         onAuth: async (auth, session, callback) => {
-            console.log('onAuth=> ', auth?.user, auth?._id, auth?.pass)
-            const systemEmails = ['no-reply', 'verification', 'reset-password', 'welcome']
-            if (systemEmails.includes(auth?.user) && auth?.pass=== process.env.JWT_KEY) {
-                callback(null, {user: 'system'});
-            } else {
-                const userData = await userSchema.findById(auth?._id).exec();
-                const isPasswordCorrect: boolean = await bcrypt.compare(auth?.pass, userData.password);
-                if (!isPasswordCorrect) {
-                    //   return callback(new Error("Invalid username or password"));
-                    return callback(null, {
-                        data: {
-                            status: "401",
-                            schemes: "bearer mac",
-                            scope: "Invalid username or password"
-                        }
-                    })
-                } else {
-                    callback(null, {user: userData.username});
+            try {
+                console.log('onAuth=> ', auth?.user, auth?._id, auth?.pass)
+                const systemEmails = ['no-reply', 'verification', 'reset-password', 'welcome']
+                if (systemEmails.includes(auth?.user) && auth?.pass=== process.env.JWT_KEY) {
+                    callback(null, {user: 'system'});
+                } else if(auth?._id) {
+                    const userData = await userSchema.findById(auth?._id).exec();
+                    const isPasswordCorrect: boolean = await bcrypt.compare(auth?.pass, userData.password);
+                    if (!isPasswordCorrect) {
+                        //   return callback(new Error("Invalid username or password"));
+                        return callback(null, {
+                            data: {
+                                status: "401",
+                                schemes: "bearer mac",
+                                scope: "Invalid username or password"
+                            }
+                        })
+                    } else {
+                        callback(null, {user: userData.username});
+                    }
+
                 }
+            }catch (error){
 
             }
+
         },
         onData(stream, session, callback) {
                 console.log('email=> got email',)

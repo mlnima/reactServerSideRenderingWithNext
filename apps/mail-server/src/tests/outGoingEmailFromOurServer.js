@@ -5,17 +5,8 @@ const smtpTransport = require('nodemailer-smtp-transport');
 
 console.log('console=> ',process.env.JWT_KEY)
 
-// const transporter = nodemailer.createTransport({
-//     host: 'mail.trdland.de',
-//     port: 465,
-//     secure: true, // for port 465
-//     auth: {
-//         user: 'welcome',
-//         pass: process.env.JWT_KEY,
-//     },
-// });
-const transporter = nodemailer.createTransport(smtpTransport({
-    host: 'smtp.mail.trdland.de',
+const transporter = nodemailer.createTransport({
+    host: 'mail.trdland.de',
     port: 465,
     secure: true,
     secureConnection: false,
@@ -27,7 +18,23 @@ const transporter = nodemailer.createTransport(smtpTransport({
     tls: {
         rejectUnauthorized: false
     }
-}));
+});
+
+
+// const transporter = nodemailer.createTransport(smtpTransport({
+//     host: 'mail.trdland.de',
+//     port: 465,
+//     secure: true,
+//     secureConnection: false,
+//     // secure: true, // for port 465
+//     auth: {
+//         user: 'welcome',
+//         pass: process.env.JWT_KEY,
+//     },
+//     tls: {
+//         rejectUnauthorized: false
+//     }
+// }));
 
 const mailOptions = {
     from: 'welcome@trdland.de',
