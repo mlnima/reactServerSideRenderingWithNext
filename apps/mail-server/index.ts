@@ -30,10 +30,12 @@ const externalMailSender = async ({email, user, port}: IExternalMailSender) => {
         host: process.env.MAIL_SERVER_HOST,
         port,
         secure: false,
+
         auth: {
             user,
             pass: process.env.JWT_KEY,
-        }
+        },
+
     });
 
     const mailOptions = {
@@ -65,8 +67,8 @@ const externalMailSender = async ({email, user, port}: IExternalMailSender) => {
 const sslCert = fs.readFileSync(process.env.SSL_CERT)
 const sslKey = fs.readFileSync(process.env.SSL_KEY)
 
-console.log('sslCert=> ',sslCert)
-console.log('sslKey=> ',sslKey)
+// console.log('sslCert=> ',sslCert)
+// console.log('sslKey=> ',sslKey)
 const createSMTPServer = (port) => {
     const server = new SMTPServer({
         maxClients: 50,
@@ -75,7 +77,8 @@ const createSMTPServer = (port) => {
             key: sslKey,
             cert: sslCert ,
         },
-        // authOptional: true,
+        allowInsecureAuth:true,
+        authOptional: true,
         onAuth: async (auth, session, callback) => {
             try {
                 console.log('Auth Object:', auth);
