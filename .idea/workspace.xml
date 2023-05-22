@@ -25,6 +25,8 @@
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/mail-server/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mail-server/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mail-server/src/tests/incomingEmailToOurSMTPServer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mail-server/src/tests/outGoingEmailFromOurServer.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,8 +41,8 @@
         <option value="tsconfig.json" />
         <option value="Dockerfile" />
         <option value="TypeScript JSX File" />
-        <option value="JavaScript File" />
         <option value="TypeScript File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -113,11 +115,11 @@
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\api-requests\src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\mail-server" />
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\tempFiles" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\trash" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\mail-server\src" />
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\ui-components\src\fullscreenComponentsProvider" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\api-requests\src\common" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\api-requests\src" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -126,13 +128,13 @@
     </option>
   </component>
   <component name="RunManager" selected="Node.js.outGoingEmailFromOurServer.js">
-    <configuration name="incomingEmailToOurSMTPServer.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/apps/mail-server/src/tests/incomingEmailToOurSMTPServer.js" working-dir="$PROJECT_DIR$/apps/mail-server/src/tests">
+    <configuration name="incomingEmailToOurSMTPServer.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/apps/mail-server/testMailServer/incomingEmailToOurSMTPServer.js" working-dir="$PROJECT_DIR$/apps/mail-server/testMailServer">
       <method v="2" />
     </configuration>
-    <configuration name="outGoingEmailFromOurServer.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/apps/mail-server/src/tests/outGoingEmailFromOurServer.js" working-dir="$PROJECT_DIR$/apps/mail-server/src/tests">
+    <configuration name="outGoingEmailFromOurServer.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/apps/mail-server/testMailServer/outGoingEmailFromOurServer.js" working-dir="$PROJECT_DIR$/apps/mail-server/testMailServer">
       <method v="2" />
     </configuration>
-    <configuration name="temp.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/tempFiles/temp.js" working-dir="$PROJECT_DIR$/tempFiles">
+    <configuration name="sendEmail.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/apps/mail-server/testMailServer/sendEmail.js" working-dir="$PROJECT_DIR$/apps/mail-server/testMailServer">
       <method v="2" />
     </configuration>
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -158,10 +160,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Node.js.outGoingEmailFromOurServer.js" />
-        <item itemvalue="npm.build" />
+        <item itemvalue="Node.js.sendEmail.js" />
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.build" />
         <item itemvalue="Node.js.incomingEmailToOurSMTPServer.js" />
-        <item itemvalue="Node.js.temp.js" />
       </list>
     </recent_temporary>
   </component>
@@ -1652,7 +1654,7 @@
       <workItem from="1684595049010" duration="1482000" />
       <workItem from="1684612833084" duration="1736000" />
       <workItem from="1684651528498" duration="41071000" />
-      <workItem from="1684737397268" duration="19244000" />
+      <workItem from="1684737397268" duration="22349000" />
     </task>
     <servers />
   </component>
@@ -1691,7 +1693,6 @@
         <option value="$PROJECT_DIR$/packages/custom-server-util/src/user-utils/findUserData.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-server-util/src/middleware-utils/authMiddleware.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/object-util/isEmptyObject.d.ts.map" />
-        <option value="$PROJECT_DIR$/packages/custom-server-util/index.js" />
         <option value="$PROJECT_DIR$/packages/models/src/conversationSchema.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/inputsUtils/inputValueSimplifier.js" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/mongoIdValidatorClient.d.ts" />
@@ -1749,7 +1750,6 @@
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/getFileExtension.js" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/mongoIdValidatorClient.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-server-util/src/mongoIdValidator.d.ts.map" />
-        <option value="$PROJECT_DIR$/packages/custom-server-util/index.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/models/src/contactFromSchema.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/url-util/queryUniquer.js" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/math-util/shortNumber.d.ts.map" />
@@ -1811,16 +1811,21 @@
         <option value="$PROJECT_DIR$/packages/ui/src/scrollBars.js" />
         <option value="$PROJECT_DIR$/packages/ui/src/ActiveAlertBox.d.ts" />
         <option value="$PROJECT_DIR$/packages/data-structures/src/videoQualities.d.ts" />
+        <option value="$PROJECT_DIR$/packages/custom-server-util/src/jwtTokenGenerator.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/date-utils/convertSecondsToTimeString.js" />
+        <option value="$PROJECT_DIR$/packages/custom-server-util/src/jwtTokenGenerator.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/data-structures/index.d.ts" />
+        <option value="$PROJECT_DIR$/packages/custom-server-util/src/jwtTokenGenerator.js" />
         <option value="$PROJECT_DIR$/packages/models/src/settings/settingSchema.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/date-utils/convertSecondsToTimeString.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/url-util/isImageAllowedForNextImage.js" />
+        <option value="$PROJECT_DIR$/packages/custom-server-util/index.js" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/textContentReplacer.js" />
         <option value="$PROJECT_DIR$/packages/models/src/orderSchema.js" />
+        <option value="$PROJECT_DIR$/packages/custom-server-util/index.d.ts" />
+        <option value="$PROJECT_DIR$/packages/custom-server-util/index.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/vanilla-ui-utils/headerSizeCalculator.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/ui/src/SvgRenderer.d.ts.map" />
-        <option value="$PROJECT_DIR$/packages/custom-server-util/index.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/convertMetasTypeToPlural.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/capitalizeFirstLetters.d.ts" />
         <option value="$PROJECT_DIR$/packages/models/src/commentSchema.js" />
@@ -1839,9 +1844,11 @@
         <option value="$PROJECT_DIR$/packages/data-structures/src/widgetsTypes.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-server-util/src/createExpressServer.js" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/object-util/isEmptyObject.d.ts" />
+        <option value="$PROJECT_DIR$/packages/custom-util/src/validators/emailValidator.js" />
         <option value="$PROJECT_DIR$/packages/custom-server-util/src/middleware-utils/adminAuthMiddleware.d.ts" />
         <option value="$PROJECT_DIR$/packages/models/src/metaSchemas/categorySchema.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/url-util/ObjectToQuery.js" />
+        <option value="$PROJECT_DIR$/packages/custom-util/src/validators/usernameValidatorRegisterForm.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/math-util/shortNumber.js" />
         <option value="$PROJECT_DIR$/packages/ui/src/SvgRenderer.js" />
         <option value="$PROJECT_DIR$/packages/data-structures/src/userStatus.d.ts.map" />
@@ -1858,8 +1865,10 @@
         <option value="$PROJECT_DIR$/packages/custom-server-util/src/createExpressServer.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/url-util/isInternalUrl.js" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/url-util/queryUniquer.d.ts" />
+        <option value="$PROJECT_DIR$/packages/custom-util/src/validators/usernameValidatorRegisterForm.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/device-util/touchDeviceDetector.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/index.js" />
+        <option value="$PROJECT_DIR$/packages/custom-util/src/validators/emailValidator.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/convertMetasTypeToSingular.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/isJsonString.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/array-utils/reduceWidgetsToGroups.d.ts" />
@@ -1870,6 +1879,8 @@
         <option value="$PROJECT_DIR$/packages/custom-util/src/socket-utils/socketIoClient.js" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/device-util/touchDeviceDetector.js" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/array-utils/sortArrayByPropertyOfObject.js" />
+        <option value="$PROJECT_DIR$/packages/models/src/emailSchema.js" />
+        <option value="$PROJECT_DIR$/packages/custom-util/src/validators/usernameValidatorRegisterForm.js" />
         <option value="$PROJECT_DIR$/packages/ui/index.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/models/src/postSchema.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/models/src/chatroomSchema.d.ts" />
@@ -1896,28 +1907,16 @@
         <option value="$PROJECT_DIR$/packages/models/src/commentSchema.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/array-utils/sortArrayByPropertyOfObject.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/fileTypeDetector.d.ts.map" />
+        <option value="$PROJECT_DIR$/packages/models/src/emailSchema.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/index.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/convertMetasTypeToPlural.js" />
         <option value="$PROJECT_DIR$/packages/data-structures/src/videoQualities.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/getFileExtension.d.ts" />
-        <option value="$PROJECT_DIR$/packages/custom-util/src/validators/usernameValidatorRegisterForm.js" />
-        <option value="$PROJECT_DIR$/packages/custom-util/src/validators/usernameValidatorRegisterForm.d.ts" />
-        <option value="$PROJECT_DIR$/packages/custom-util/src/validators/usernameValidatorRegisterForm.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/validators/passwordValidatorRegisterForm.js" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/validators/passwordValidatorRegisterForm.d.ts" />
-        <option value="$PROJECT_DIR$/packages/custom-util/src/validators/passwordValidatorRegisterForm.d.ts.map" />
-        <option value="$PROJECT_DIR$/packages/custom-util/src/validators/emailValidator.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/validators/emailValidator.d.ts" />
-        <option value="$PROJECT_DIR$/packages/custom-util/src/validators/emailValidator.js" />
-        <option value="$PROJECT_DIR$/packages/models/src/emailSchema.d.ts" />
-        <option value="$PROJECT_DIR$/packages/models/src/emailSchema.js" />
+        <option value="$PROJECT_DIR$/packages/custom-util/src/validators/passwordValidatorRegisterForm.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/models/src/emailSchema.d.ts.map" />
-        <option value="$PROJECT_DIR$/packages/custom-server-util/src/jwtTokenGenerator.d.ts" />
-        <option value="$PROJECT_DIR$/packages/custom-server-util/src/jwtTokenGenerator.d.ts.map" />
-        <option value="$PROJECT_DIR$/packages/custom-server-util/src/jwtTokenGenerator.js" />
-        <option value="$PROJECT_DIR$/packages/custom-server-util/index.js" />
-        <option value="$PROJECT_DIR$/packages/custom-server-util/index.d.ts" />
-        <option value="$PROJECT_DIR$/packages/custom-server-util/index.d.ts.map" />
       </list>
     </option>
   </component>

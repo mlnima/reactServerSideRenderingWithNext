@@ -63,12 +63,13 @@ const externalMailSender = async ({email,user,port}:IExternalMailSender) => {
 
 const createSMTPServer = (port) => {
     const server = new SMTPServer({
+        maxClients:50,
         secure: false,
-        authOptional: true,
-
+        // authOptional: true,
         onAuth: async (auth, session, callback) => {
             try {
                 console.log('Auth Object:', auth);
+                console.log('session Object:', session);
                 const systemEmails = ['no-reply', 'verification', 'reset-password', 'welcome']
                 if (systemEmails.includes(auth?.username) && auth?.password === process.env.JWT_KEY) {
                     callback(null, {user: 'system'});
@@ -76,13 +77,7 @@ const createSMTPServer = (port) => {
                     const userData = await userSchema.findById(auth?.username).exec(); // change here from auth?._id to auth?.user
                     const isPasswordCorrect: boolean = await bcrypt.compare(auth?.password, userData.password);
                     if (!isPasswordCorrect) {
-                        return callback(null, {
-                            data: {
-                                status: "401",
-                                schemes: "bearer mac",
-                                scope: "Invalid username or password"
-                            }
-                        })
+                        return callback(new Error("Invalid username or password"));
                     } else {
                         callback(null, {user: userData.username});
                     }
