@@ -21,7 +21,7 @@ const createSMTPServer = (port) => {
         },
         onAuth: async (auth, session, callback) => {
             try {
-                console.log('onAuth=> ', auth?.user, auth?.pass)
+                console.log('Auth Object:', auth);
                 const systemEmails = ['no-reply', 'verification', 'reset-password', 'welcome']
                 if (systemEmails.includes(auth?.user) && auth?.pass === process.env.JWT_KEY) {
                     callback(null, {user: 'system'});
