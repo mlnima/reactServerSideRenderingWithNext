@@ -1,6 +1,8 @@
 import dotenv from 'dotenv';
+
 dotenv.config({path: '../../.env'});
 import {connectToDatabase} from 'custom-server-util';
+
 connectToDatabase('Mail Server')
 import {SMTPServer} from 'smtp-server';
 import {simpleParser} from 'mailparser';
@@ -11,19 +13,19 @@ import bcrypt from 'bcryptjs';
 import emailActionTypeDetector from "./src/utils/emailActionTypeDetector";
 import * as process from "process";
 
-interface IExternalMailSender{
-    email:{
+interface IExternalMailSender {
+    email: {
         from: string,
         to: string,
         subject: string,
         text: string,
-        html:string,
+        html: string,
     },
-    user:string,
-    port:number
+    user: string,
+    port: number
 }
 
-const externalMailSender = async ({email,user,port}:IExternalMailSender) => {
+const externalMailSender = async ({email, user, port}: IExternalMailSender) => {
     const transporter = nodemailer.createTransport({
         host: process.env.MAIL_SERVER_HOST,
         port,
@@ -63,8 +65,12 @@ const externalMailSender = async ({email,user,port}:IExternalMailSender) => {
 
 const createSMTPServer = (port) => {
     const server = new SMTPServer({
-        maxClients:50,
+        maxClients: 50,
         secure: false,
+        tls: {
+            key: fs.readFileSync(process.env.SSL_KEY),
+            cert: fs.readFileSync(process.env.SSL_CERT),
+        },
         // authOptional: true,
         onAuth: async (auth, session, callback) => {
             try {
@@ -82,7 +88,7 @@ const createSMTPServer = (port) => {
                         callback(null, {user: userData.username});
                     }
 
-                }else {
+                } else {
                     return callback(null, {
                         data: {
                             status: "401",
@@ -116,24 +122,24 @@ const createSMTPServer = (port) => {
                 }
                 console.log('Parsed the Email', parsedData)
 
-                const emailActionType = emailActionTypeDetector(parsedData.from,parsedData.to)
+                const emailActionType = emailActionTypeDetector(parsedData.from, parsedData.to)
 
-                console.log('emailActionType=> ',emailActionType)
+                console.log('emailActionType=> ', emailActionType)
 
-                if (emailActionType==='received'){
+                if (emailActionType === 'received') {
                     console.log('Received Email')
                     // Handle incoming email logic here
-                } else if (emailActionType==='toSend'){
+                } else if (emailActionType === 'toSend') {
                     console.log('Email To Send')
-                    if(parsed.headers.get('x-forwarded')) {
+                    if (parsed.headers.get('x-forwarded')) {
                         console.log('Email already forwarded. Ignoring to prevent loop.')
                         callback();
                         return;
                     }
 
-                   await externalMailSender({email: parsedData, user:'welcome',port})
+                    await externalMailSender({email: parsedData, user: 'welcome', port})
 
-                } else if (emailActionType==='internal'){
+                } else if (emailActionType === 'internal') {
                     // Handle internal email logic here
                 }
 
@@ -147,7 +153,7 @@ const createSMTPServer = (port) => {
         console.log("Error %s", err.message);
     });
 //&& process.env.SSL_CERT && process.env.SSL_KEY
-    if (process.env.MAIL_SERVER === 'true' ) {
+    if (process.env.MAIL_SERVER === 'true') {
         server.listen(port);
         console.log(`Mail server started on port ${port}`);
     } else {
@@ -155,20 +161,10 @@ const createSMTPServer = (port) => {
     }
 }
 
-const ports = [25,587];
+const ports = [25, 587];
 
 ports.forEach(port => createSMTPServer(port));
 
-
-
-
-
-
-
-// tls: {
-//     key: fs.readFileSync(process.env.SSL_KEY),
-//     cert: fs.readFileSync(process.env.SSL_CERT),
-// },
 
 // const email = new emailSchema(receivedEmailParsedData);
 //
