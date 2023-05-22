@@ -7,8 +7,6 @@ const emailActionTypeDetector = (from:string, to:string)=>{
         return 'received';
     }else if (toDomain !== process.env.MAIL_EXTENSION && fromDomain === process.env.MAIL_EXTENSION) {
         return 'toSend';
-    }else if (toDomain === process.env.MAIL_EXTENSION && fromDomain === process.env.MAIL_EXTENSION) {
-        return 'internal';
     }
 }
 

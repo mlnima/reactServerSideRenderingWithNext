@@ -1,8 +1,6 @@
 import dotenv from 'dotenv';
-
 dotenv.config({path: '../../.env'});
 import {connectToDatabase} from 'custom-server-util';
-
 connectToDatabase('Mail Server')
 import {SMTPServer} from 'smtp-server';
 import {simpleParser} from 'mailparser';
@@ -110,7 +108,7 @@ const createSMTPServer = (port) => {
             }
         },
         onData(stream, session, callback) {
-            console.log('Received an Email')
+            console.log('Received an Email on port: ', port)
             simpleParser(stream, async (err, parsed) => {
                 console.log('Parsing the Email')
                 if (err) {
@@ -146,8 +144,6 @@ const createSMTPServer = (port) => {
 
                     await externalMailSender({email: parsedData, user: 'welcome', port})
 
-                } else if (emailActionType === 'internal') {
-                    // Handle internal email logic here
                 }
 
                 callback();

@@ -3,6 +3,7 @@ const nodemailer = require('nodemailer');
 const SMTPConnection = require("nodemailer/lib/smtp-connection");
 
 console.log('process.env.MAIL_SERVER_HOST=> ',process.env.MAIL_SERVER_HOST)
+console.log('JWT_KEY=> ',process.env.JWT_KEY)
 
 const connectionOptions={
    host: process.env.MAIL_SERVER_HOST,

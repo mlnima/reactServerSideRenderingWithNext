@@ -25,6 +25,9 @@
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/mail-server/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mail-server/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mail-server/src/utils/emailActionTypeDetector.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mail-server/src/utils/emailActionTypeDetector.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mail-server/testMailServer/sendEmailByCreateTransport.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mail-server/testMailServer/sendEmailByCreateTransport.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mail-server/testMailServer/sendEmailBySMTPConnection.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mail-server/testMailServer/sendEmailBySMTPConnection.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +128,7 @@
       <command value="nextEnv" />
     </option>
   </component>
-  <component name="RunManager" selected="Node.js.sendEmailByCreateTransport.js">
+  <component name="RunManager" selected="Node.js.sendEmailBySMTPConnection.js">
     <configuration name="incomingEmailToOurSMTPServer.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/apps/mail-server/testMailServer/incomingEmailToOurSMTPServer.js" working-dir="$PROJECT_DIR$/apps/mail-server/testMailServer">
       <method v="2" />
     </configuration>
@@ -157,9 +160,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Node.js.sendEmailBySMTPConnection.js" />
         <item itemvalue="npm.dev" />
         <item itemvalue="Node.js.sendEmailByCreateTransport.js" />
-        <item itemvalue="Node.js.sendEmailBySMTPConnection.js" />
         <item itemvalue="npm.build" />
         <item itemvalue="Node.js.incomingEmailToOurSMTPServer.js" />
       </list>
@@ -1652,7 +1655,7 @@
       <workItem from="1684595049010" duration="1482000" />
       <workItem from="1684612833084" duration="1736000" />
       <workItem from="1684651528498" duration="41071000" />
-      <workItem from="1684737397268" duration="26123000" />
+      <workItem from="1684737397268" duration="27224000" />
     </task>
     <servers />
   </component>
