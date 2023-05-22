@@ -24,9 +24,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mail-server/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mail-server/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mail-server/src/tests/incomingEmailToOurSMTPServer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mail-server/src/tests/outGoingEmailFromOurServer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mail-server/testMailServer/sendEmailByCreateTransport.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mail-server/testMailServer/sendEmailByCreateTransport.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,14 +125,14 @@
       <command value="nextEnv" />
     </option>
   </component>
-  <component name="RunManager" selected="Node.js.outGoingEmailFromOurServer.js">
+  <component name="RunManager" selected="Node.js.sendEmailByCreateTransport.js">
     <configuration name="incomingEmailToOurSMTPServer.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/apps/mail-server/testMailServer/incomingEmailToOurSMTPServer.js" working-dir="$PROJECT_DIR$/apps/mail-server/testMailServer">
       <method v="2" />
     </configuration>
-    <configuration name="outGoingEmailFromOurServer.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/apps/mail-server/testMailServer/outGoingEmailFromOurServer.js" working-dir="$PROJECT_DIR$/apps/mail-server/testMailServer">
+    <configuration name="sendEmailByCreateTransport.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/apps/mail-server/testMailServer/sendEmailByCreateTransport.js" working-dir="$PROJECT_DIR$/apps/mail-server/testMailServer">
       <method v="2" />
     </configuration>
-    <configuration name="sendEmail.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/apps/mail-server/testMailServer/sendEmail.js" working-dir="$PROJECT_DIR$/apps/mail-server/testMailServer">
+    <configuration name="sendEmailBySMTPConnection.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/apps/mail-server/testMailServer/sendEmailBySMTPConnection.js" working-dir="$PROJECT_DIR$/apps/mail-server/testMailServer">
       <method v="2" />
     </configuration>
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -159,8 +157,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Node.js.outGoingEmailFromOurServer.js" />
-        <item itemvalue="Node.js.sendEmail.js" />
+        <item itemvalue="Node.js.sendEmailByCreateTransport.js" />
+        <item itemvalue="Node.js.sendEmailBySMTPConnection.js" />
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.build" />
         <item itemvalue="Node.js.incomingEmailToOurSMTPServer.js" />
@@ -1654,7 +1652,7 @@
       <workItem from="1684595049010" duration="1482000" />
       <workItem from="1684612833084" duration="1736000" />
       <workItem from="1684651528498" duration="41071000" />
-      <workItem from="1684737397268" duration="22349000" />
+      <workItem from="1684737397268" duration="22771000" />
     </task>
     <servers />
   </component>
