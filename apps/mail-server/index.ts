@@ -9,10 +9,8 @@ import {simpleParser} from 'mailparser';
 import fs from 'fs';
 import {emailSchema, settingSchema, userSchema} from 'models';
 import bcrypt from 'bcryptjs';
-console.log('mail server=> ',)
 
-// Function to create SMTP server
-const createSMTPServer=(port)=> {
+const createSMTPServer = (port) => {
     const server = new SMTPServer({
         secure: port === 465,
         requireTLS: port !== 465,
@@ -23,15 +21,14 @@ const createSMTPServer=(port)=> {
         },
         onAuth: async (auth, session, callback) => {
             try {
-                console.log('onAuth=> ', auth?.user, auth?._id, auth?.pass)
+                console.log('onAuth=> ', auth?.user, auth?.pass)
                 const systemEmails = ['no-reply', 'verification', 'reset-password', 'welcome']
-                if (systemEmails.includes(auth?.user) && auth?.pass=== process.env.JWT_KEY) {
+                if (systemEmails.includes(auth?.user) && auth?.pass === process.env.JWT_KEY) {
                     callback(null, {user: 'system'});
-                } else if(auth?._id) {
-                    const userData = await userSchema.findById(auth?._id).exec();
+                } else if (auth?.user) { // change here from auth?._id to auth?.user
+                    const userData = await userSchema.findById(auth?.user).exec(); // change here from auth?._id to auth?.user
                     const isPasswordCorrect: boolean = await bcrypt.compare(auth?.pass, userData.password);
                     if (!isPasswordCorrect) {
-                        //   return callback(new Error("Invalid username or password"));
                         return callback(null, {
                             data: {
                                 status: "401",
@@ -44,35 +41,35 @@ const createSMTPServer=(port)=> {
                     }
 
                 }
-            }catch (error){
-
+            } catch (error) {
+                console.error("SMTP Server Error: ", error);
+                callback(new Error("Server Error"));
             }
-
         },
         onData(stream, session, callback) {
-                console.log('email=> got email',)
-                simpleParser(stream, async (err, parsed) => {
-                    if (err) {
-                        console.error('Failed to parse email:', err);
-                        callback();
-                        return;
-                    }
-
-                    const receivedEmailParsedData = {
-                        from: parsed.from.text,
-                        to: parsed.to.text,
-                        subject: parsed.subject,
-                        text: parsed.text,
-                        html: parsed.html,
-                        date: parsed.date,
-                        status: 'received'
-                    }
-
-                    console.log('port=> ',port)
-                    console.log('received email=> ', receivedEmailParsedData)
-
+            console.log('email=> got email',)
+            simpleParser(stream, async (err, parsed) => {
+                if (err) {
+                    console.error('Failed to parse email:', err);
                     callback();
-                });
+                    return;
+                }
+
+                const receivedEmailParsedData = {
+                    from: parsed.from.text,
+                    to: parsed.to.text,
+                    subject: parsed.subject,
+                    text: parsed.text,
+                    html: parsed.html,
+                    date: parsed.date,
+                    status: 'received'
+                }
+
+                console.log('port=> ', port)
+                console.log('received email=> ', receivedEmailParsedData)
+
+                callback();
+            });
 
         },
     });
@@ -91,8 +88,37 @@ const createSMTPServer=(port)=> {
 
 const ports = [25, 465, 587, 2525];
 
-// Create SMTP server on each port
 ports.forEach(port => createSMTPServer(port));
+
+
+// onAuth: async (auth, session, callback) => {
+//     try {
+//         console.log('onAuth=> ', auth?.user, auth?._id, auth?.pass)
+//         const systemEmails = ['no-reply', 'verification', 'reset-password', 'welcome']
+//         if (systemEmails.includes(auth?.user) && auth?.pass=== process.env.JWT_KEY) {
+//             callback(null, {user: 'system'});
+//         } else if(auth?._id) {
+//             const userData = await userSchema.findById(auth?._id).exec();
+//             const isPasswordCorrect: boolean = await bcrypt.compare(auth?.pass, userData.password);
+//             if (!isPasswordCorrect) {
+//                 //   return callback(new Error("Invalid username or password"));
+//                 return callback(null, {
+//                     data: {
+//                         status: "401",
+//                         schemes: "bearer mac",
+//                         scope: "Invalid username or password"
+//                     }
+//                 })
+//             } else {
+//                 callback(null, {user: userData.username});
+//             }
+//
+//         }
+//     }catch (error){
+//
+//     }
+//
+// },
 
 
 // import dotenv from 'dotenv';

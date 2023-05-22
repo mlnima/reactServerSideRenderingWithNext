@@ -24,8 +24,10 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/mail-server/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mail-server/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/mail-server/src/tests/outGoingEmailFromOurServer.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mail-server/src/tests/outGoingEmailFromOurServer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,8 +128,11 @@
       <command value="nextEnv" />
     </option>
   </component>
-  <component name="RunManager" selected="npm.dev">
-    <configuration name="incomingEmailToOutSMTPServer.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/apps/mail-server/src/tests/incomingEmailToOutSMTPServer.js" working-dir="$PROJECT_DIR$/apps/mail-server/src/tests">
+  <component name="RunManager" selected="Node.js.outGoingEmailFromOurServer.js">
+    <configuration name="incomingEmailToOurSMTPServer.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/apps/mail-server/src/tests/incomingEmailToOurSMTPServer.js" working-dir="$PROJECT_DIR$/apps/mail-server/src/tests">
+      <method v="2" />
+    </configuration>
+    <configuration name="outGoingEmailFromOurServer.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/apps/mail-server/src/tests/outGoingEmailFromOurServer.js" working-dir="$PROJECT_DIR$/apps/mail-server/src/tests">
       <method v="2" />
     </configuration>
     <configuration name="temp.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/tempFiles/temp.js" working-dir="$PROJECT_DIR$/tempFiles">
@@ -153,23 +158,13 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="start" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Node.js.outGoingEmailFromOurServer.js" />
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.build" />
-        <item itemvalue="Node.js.incomingEmailToOutSMTPServer.js" />
+        <item itemvalue="Node.js.incomingEmailToOurSMTPServer.js" />
         <item itemvalue="Node.js.temp.js" />
-        <item itemvalue="npm.start" />
       </list>
     </recent_temporary>
   </component>
@@ -1659,7 +1654,8 @@
       <workItem from="1684497256326" duration="16720000" />
       <workItem from="1684595049010" duration="1482000" />
       <workItem from="1684612833084" duration="1736000" />
-      <workItem from="1684651528498" duration="36249000" />
+      <workItem from="1684651528498" duration="41071000" />
+      <workItem from="1684737397268" duration="3587000" />
     </task>
     <servers />
   </component>
@@ -2357,8 +2353,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/apps/mail-server/index.ts</url>
-          <line>125</line>
-          <properties lambdaOrdinal="-1" />
+          <line>156</line>
           <option name="timeStamp" value="221" />
         </line-breakpoint>
       </breakpoints>

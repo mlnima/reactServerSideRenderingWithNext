@@ -30,7 +30,7 @@ const server = express();
 const runServer = () => {
 
     server.use(cors())
-    server.use(express.json({ limit: '2MB' }));
+    server.use(express.json({ limit: '5MB' }));
     server.use(cookieParser());
     server.use(fileUpload());
     server.use(bodyParser.json());
