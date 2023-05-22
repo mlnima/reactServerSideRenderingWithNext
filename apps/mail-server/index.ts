@@ -27,7 +27,7 @@ const externalMailSender = async ({email,user,port}:IExternalMailSender) => {
     const transporter = nodemailer.createTransport({
         host: process.env.MAIL_SERVER_HOST,
         port,
-        secure: true,
+        secure: false,
         auth: {
             user,
             pass: process.env.JWT_KEY,
