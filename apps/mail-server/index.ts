@@ -23,11 +23,11 @@ const createSMTPServer = (port) => {
             try {
                 console.log('Auth Object:', auth);
                 const systemEmails = ['no-reply', 'verification', 'reset-password', 'welcome']
-                if (systemEmails.includes(auth?.user) && auth?.pass === process.env.JWT_KEY) {
+                if (systemEmails.includes(auth?.username) && auth?.password === process.env.JWT_KEY) {
                     callback(null, {user: 'system'});
-                } else if (auth?.user) { // change here from auth?._id to auth?.user
-                    const userData = await userSchema.findById(auth?.user).exec(); // change here from auth?._id to auth?.user
-                    const isPasswordCorrect: boolean = await bcrypt.compare(auth?.pass, userData.password);
+                } else if (auth?.username) { // change here from auth?._id to auth?.user
+                    const userData = await userSchema.findById(auth?.username).exec(); // change here from auth?._id to auth?.user
+                    const isPasswordCorrect: boolean = await bcrypt.compare(auth?.password, userData.password);
                     if (!isPasswordCorrect) {
                         return callback(null, {
                             data: {
