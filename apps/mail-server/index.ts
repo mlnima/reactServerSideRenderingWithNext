@@ -31,9 +31,6 @@ const externalMailSender = async ({email,user,port}:IExternalMailSender) => {
         auth: {
             user,
             pass: process.env.JWT_KEY,
-        },
-        tls: {
-            rejectUnauthorized: false
         }
     });
 
@@ -54,6 +51,10 @@ const externalMailSender = async ({email,user,port}:IExternalMailSender) => {
         } else {
             console.log('Email forwarded:', info.response);
         }
+    });
+
+    transporter.on('error', (error) => {
+        console.error('Nodemailer error:', error);
     });
 
 

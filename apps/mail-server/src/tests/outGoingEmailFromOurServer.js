@@ -3,7 +3,7 @@ const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
     host: 'mail.trdland.de',
-    port: 25,
+    port: 587,
     secure: false,
     auth: {
         user: 'welcome',
