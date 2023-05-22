@@ -25,7 +25,6 @@
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/mail-server/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mail-server/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mail-server/src/utils/emailActionTypeDetector.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mail-server/src/utils/emailActionTypeDetector.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/mail-server/testMailServer/sendEmailByCreateTransport.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mail-server/testMailServer/sendEmailByCreateTransport.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/mail-server/testMailServer/sendEmailBySMTPConnection.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mail-server/testMailServer/sendEmailBySMTPConnection.js" afterDir="false" />
     </list>
@@ -1655,7 +1654,7 @@
       <workItem from="1684595049010" duration="1482000" />
       <workItem from="1684612833084" duration="1736000" />
       <workItem from="1684651528498" duration="41071000" />
-      <workItem from="1684737397268" duration="27224000" />
+      <workItem from="1684737397268" duration="28707000" />
     </task>
     <servers />
   </component>

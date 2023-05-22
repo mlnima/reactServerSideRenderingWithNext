@@ -9,6 +9,7 @@ const connectionOptions={
    host: process.env.MAIL_SERVER_HOST,
     port: 587,
     secure: false,
+    requireTLS: true,
 }
 
 const authOption = {

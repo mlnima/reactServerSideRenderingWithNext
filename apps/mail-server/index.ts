@@ -71,6 +71,7 @@ const createSMTPServer = (port) => {
     const server = new SMTPServer({
         maxClients: 50,
         secure: false,
+        requireTLS: true,
         tls: {
             key: sslKey,
             cert: sslCert ,
