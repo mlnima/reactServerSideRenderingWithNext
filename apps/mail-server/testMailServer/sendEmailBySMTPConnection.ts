@@ -3,20 +3,21 @@ dotenv.config({path: '../../.env'});
 import nodemailer from 'nodemailer';
 import SMTPConnection from 'nodemailer/lib/smtp-connection';
 
-
 console.log('process.env.MAIL_SERVER_HOST=> ',process.env.MAIL_SERVER_HOST)
 console.log('JWT_KEY=> ',process.env.JWT_KEY)
 
 const connectionOptions={
    host: process.env.MAIL_SERVER_HOST,
+  //   host: 'mail.trdland.de',
     port: 587,
     secure: false,
-    requireTLS: true,
+    requireTLS: false,
 }
 
 const authOption = {
     user: 'welcome',
-    pass: process.env.JWT_KEY,
+   pass: process.env.JWT_KEY,
+   //  pass: 'trdland$%',
 }
 
 let connection = new SMTPConnection(connectionOptions);

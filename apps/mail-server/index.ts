@@ -28,7 +28,6 @@ const externalMailSender = async ({email, user, port}: IExternalMailSender) => {
         host: process.env.MAIL_SERVER_HOST,
         port,
         secure: false,
-
         auth: {
             user,
             pass: process.env.JWT_KEY,
@@ -65,13 +64,11 @@ const externalMailSender = async ({email, user, port}: IExternalMailSender) => {
 const sslCert = fs.readFileSync(process.env.SSL_CERT)
 const sslKey = fs.readFileSync(process.env.SSL_KEY)
 
-// console.log('sslCert=> ',sslCert)
-// console.log('sslKey=> ',sslKey)
 const createSMTPServer = (port) => {
     const server = new SMTPServer({
         maxClients: 50,
         secure: false,
-        requireTLS: true,
+        requireTLS: fals,
         tls: {
             key: sslKey,
             cert: sslCert ,
