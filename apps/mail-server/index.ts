@@ -1,14 +1,63 @@
 import dotenv from 'dotenv';
-
 dotenv.config({path: '../../.env'});
 import {connectToDatabase} from 'custom-server-util';
-
 connectToDatabase('Mail Server')
 import {SMTPServer} from 'smtp-server';
 import {simpleParser} from 'mailparser';
+import nodemailer from 'nodemailer';
 import fs from 'fs';
 import {emailSchema, settingSchema, userSchema} from 'models';
 import bcrypt from 'bcryptjs';
+import emailActionTypeDetector from "./src/utils/emailActionTypeDetector";
+import * as process from "process";
+
+interface IExternalMailSender{
+    email:{
+        from: string,
+        to: string,
+        subject: string,
+        text: string,
+        html:string,
+    },
+    user:string
+}
+
+const externalMailSender = async ({email,user}:IExternalMailSender) => {
+    const transporter = nodemailer.createTransport({
+        host: process.env.MAIL_SERVER_HOST,
+        port: 587,
+        secure: false,
+        auth: {
+            user,
+            pass: process.env.JWT_KEY,
+        },
+        tls: {
+            rejectUnauthorized: false
+        }
+    });
+
+    const mailOptions = {
+        from: email.from,
+        to: email.to,
+        subject: email.subject,
+        text: email.text,
+        html: email.html,
+        headers: {
+            'X-Forwarded': 'true'
+        }
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.error('Error sending email:', error);
+        } else {
+            console.log('Email forwarded:', info.response);
+        }
+    });
+
+
+}
+
 
 const createSMTPServer = (port) => {
     const server = new SMTPServer({
@@ -25,7 +74,7 @@ const createSMTPServer = (port) => {
                 const systemEmails = ['no-reply', 'verification', 'reset-password', 'welcome']
                 if (systemEmails.includes(auth?.username) && auth?.password === process.env.JWT_KEY) {
                     callback(null, {user: 'system'});
-                } else if (auth?.username) { // change here from auth?._id to auth?.user
+                } else if (auth?.username && !systemEmails.includes(auth?.username)) { // change here from auth?._id to auth?.user
                     const userData = await userSchema.findById(auth?.username).exec(); // change here from auth?._id to auth?.user
                     const isPasswordCorrect: boolean = await bcrypt.compare(auth?.password, userData.password);
                     if (!isPasswordCorrect) {
@@ -40,6 +89,14 @@ const createSMTPServer = (port) => {
                         callback(null, {user: userData.username});
                     }
 
+                }else {
+                    return callback(null, {
+                        data: {
+                            status: "401",
+                            schemes: "bearer mac",
+                            scope: "Invalid username or password"
+                        }
+                    })
                 }
             } catch (error) {
                 console.error("SMTP Server Error: ", error);
@@ -47,15 +104,15 @@ const createSMTPServer = (port) => {
             }
         },
         onData(stream, session, callback) {
-            console.log('email=> got email',)
+            console.log('Received an Email')
             simpleParser(stream, async (err, parsed) => {
+                console.log('Parsing the Email')
                 if (err) {
                     console.error('Failed to parse email:', err);
                     callback();
                     return;
                 }
-
-                const receivedEmailParsedData = {
+                const parsedData = {
                     from: parsed.from.text,
                     to: parsed.to.text,
                     subject: parsed.subject,
@@ -64,14 +121,65 @@ const createSMTPServer = (port) => {
                     date: parsed.date,
                     status: 'received'
                 }
+                console.log('Parsed the Email', parsedData)
 
-                console.log('port=> ', port)
-                console.log('received email=> ', receivedEmailParsedData)
+                const emailActionType = emailActionTypeDetector(parsedData.from,parsedData.to)
+
+                console.log('emailActionType=> ',emailActionType)
+
+                if (emailActionType==='received'){
+                    console.log('Received Email')
+                    // Handle incoming email logic here
+                } else if (emailActionType==='toSend'){
+                    console.log('Email To Send')
+                    if(parsed.headers.get('x-forwarded')) {
+                        console.log('Email already forwarded. Ignoring to prevent loop.')
+                        callback();
+                        return;
+                    }
+
+                   await externalMailSender({email: parsedData, user:'welcome'})
+
+                    // const transporter = nodemailer.createTransport({
+                    //     host: 'mail.trdland.de',
+                    //     port: 587,
+                    //     secure: false,
+                    //     auth: {
+                    //         user: 'welcome',
+                    //         pass: process.env.JWT_KEY,
+                    //     },
+                    //     tls: {
+                    //         rejectUnauthorized: false
+                    //     }
+                    // });
+                    //
+                    // const mailOptions = {
+                    //     from: parsedData.from,
+                    //     to: parsedData.to,
+                    //     subject: parsedData.subject,
+                    //     text: parsedData.text,
+                    //     html: parsedData.html,
+                    //     headers: {
+                    //         'X-Forwarded': 'true'
+                    //     }
+                    // };
+                    //
+                    // // Forward the email
+                    // transporter.sendMail(mailOptions, (error, info) => {
+                    //     if (error) {
+                    //         console.error('Error sending email:', error);
+                    //     } else {
+                    //         console.log('Email forwarded:', info.response);
+                    //     }
+                    // });
+                } else if (emailActionType==='internal'){
+                    // Handle internal email logic here
+                }
 
                 callback();
             });
-
         },
+
     });
 
     server.on("error", err => {
@@ -91,174 +199,54 @@ const ports = [25, 465, 587, 2525];
 ports.forEach(port => createSMTPServer(port));
 
 
-// onAuth: async (auth, session, callback) => {
-//     try {
-//         console.log('onAuth=> ', auth?.user, auth?._id, auth?.pass)
-//         const systemEmails = ['no-reply', 'verification', 'reset-password', 'welcome']
-//         if (systemEmails.includes(auth?.user) && auth?.pass=== process.env.JWT_KEY) {
-//             callback(null, {user: 'system'});
-//         } else if(auth?._id) {
-//             const userData = await userSchema.findById(auth?._id).exec();
-//             const isPasswordCorrect: boolean = await bcrypt.compare(auth?.pass, userData.password);
-//             if (!isPasswordCorrect) {
-//                 //   return callback(new Error("Invalid username or password"));
-//                 return callback(null, {
-//                     data: {
-//                         status: "401",
-//                         schemes: "bearer mac",
-//                         scope: "Invalid username or password"
-//                     }
-//                 })
-//             } else {
-//                 callback(null, {user: userData.username});
-//             }
-//
-//         }
-//     }catch (error){
-//
-//     }
-//
-// },
 
 
-// import dotenv from 'dotenv';
-// dotenv.config({path: '../../.env'});
-// import {connectToDatabase} from 'custom-server-util';
-// connectToDatabase('Mail Server')
-// import {SMTPServer} from 'smtp-server';
-// import {simpleParser} from 'mailparser';
-// import fs from 'fs';
-// import {emailSchema, settingSchema, userSchema} from 'models';
-// import bcrypt from 'bcryptjs';
-// import * as process from "process";
-//
-// const server = new SMTPServer({
-//     secure: false,
-//     requireTLS: true,
-//     authOptional: true,
-//     tls: {
-//         key: fs.readFileSync(process.env.SSL_KEY),
-//         cert: fs.readFileSync(process.env.SSL_CERT),
-//     },
-//     onAuth: async (auth, session, callback) => {
-//
-//         console.log('onAuth=> ',auth?.username,auth?._id,auth?.password)
-//         const systemEmails = ['no-reply','verification','reset-password','welcome']
-//         if (   systemEmails.includes(auth?.username) && auth?.password ===  process.env.JWT_KEY ){
-//             callback(null, { user: 'system' });
-//         }else {
-//             const userData = await userSchema.findById(auth?._id).exec();
-//             const isPasswordCorrect: boolean = await bcrypt.compare(auth?.password, userData.password);
-//             if (!isPasswordCorrect) {
-//              //   return callback(new Error("Invalid username or password"));
-//                 return callback(null, {
-//                     data: {
-//                         status: "401",
-//                         schemes: "bearer mac",
-//                         scope: "Invalid username or password"
-//                     }
-//                 })
-//             }else {
-//                 callback(null, { user: userData.username });
-//             }
-//
-//         }
-//     },
-//     onData(stream, session, callback) {
-//         console.log('email=> got email',)
-//         simpleParser(stream, async (err, parsed) => {
-//             if (err) {
-//                 console.error('Failed to parse email:', err);
-//                 callback();
-//                 return;
-//             }
-//
-//             const receivedEmailParsedData = {
-//                 from: parsed.from.text,
-//                 to: parsed.to.text,
-//                 subject: parsed.subject,
-//                 text: parsed.text,
-//                 html: parsed.html,
-//                 date: parsed.date,
-//                 status:'received'
-//             }
-//
-//             console.log(parsed)
-//             console.log('received email=> ',receivedEmailParsedData)
-//
-//             callback();
-//         });
-//     },
-// });
-//
-//
-// server.on("error", err => {
-//     console.log("Error %s", err.message);
-// });
-//
-// console.log('MailServer Report => ', process.env.MAIL_SERVER,process.env.SSL_CERT,process.env.SSL_KEY)
-//
-// if (process.env.MAIL_SERVER === 'true' && process.env.SSL_CERT && process.env.SSL_KEY) {
-//     server.listen(587);
-//     console.log('Mail server started on port 587');
-//
-// } else {
-//     console.log('Mail Server Is Disabled')
-// }
+
+
+
+
 
 // const email = new emailSchema(receivedEmailParsedData);
 //
 // await email.save();
 
 
-// onAuth(auth, session, callback) {
-//     if (auth.username !== 'x@x.x' || auth.password !== 'xxxxxx') {
-//         return callback(new Error('Invalid username or password'));
-//     }
-//     callback(null, { user: 'User' }); // where user is the authenticated user
+// onData(stream, session, callback) {
+//     console.log('Received an Email')
+//     simpleParser(stream, async (err, parsed) => {
+//         console.log('Parsing the Email')
+//         if (err) {
+//             console.error('Failed to parse email:', err);
+//             callback();
+//             return;
+//         }
+//         const parsedData = {
+//             from: parsed.from.text,
+//             to: parsed.to.text,
+//             subject: parsed.subject,
+//             text: parsed.text,
+//             html: parsed.html,
+//             date: parsed.date,
+//             status: 'received'
+//         }
+//         console.log('Parsed the Email', parsedData)
+//
+//         const emailActionType = emailActionTypeDetector(parsedData.from,parsedData.to)
+//
+//         console.log('emailActionType=> ',emailActionType)
+//
+//         if (emailActionType==='received'){
+//
+//         }else if (emailActionType==='toSend'){
+//
+//         }else if (emailActionType==='internal'){
+//
+//         }
+//
+//         callback();
+//     });
+//
 // },
-// const email = new emailSchema({
-//     from: parsed.from.text,
-//     to: parsed.to.text,
-//     subject: parsed.subject,
-//     text: parsed.text,
-//     html: parsed.html,
-//     date: parsed.date,
-// });
-//
-// await email.save();
 
 
-// const transporter = nodemailer.createTransport({
-//     secure: true,
-//     key: fs.readFileSync(privateKey),
-//     cert: fs.readFileSync(certificate),
-//     host: 'smtp.your-domain.com', // replace with your SMTP server host
-//     port: 465,
-//     auth: {
-//         user: process.env.SMTP_USER, // replace with your SMTP user
-//         pass: process.env.SMTP_PASSWORD, // replace with your SMTP password
-//     },
-// });
 
-
-// export const sendEmail = async (req, res) => {
-//     const { to, subject, text, html } = req.body;
-//
-//     try {
-//         let info = await transporter.sendMail({
-//             from: process.env.SMTP_USER,
-//             to,
-//             subject,
-//             text,
-//             html,
-//         });
-//
-//         console.log('Message sent:', info.messageId);
-//
-//         res.status(200).json({ message: 'Email sent successfully' });
-//     } catch (error) {
-//         console.error('Failed to send email:', error);
-//         res.status(500).json({ error: 'Failed to send email' });
-//     }
-// };

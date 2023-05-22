@@ -2,13 +2,13 @@ require('dotenv').config({path: '../../../../.env'})
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
+    name: 'mail.trdland.de',
     host: 'mail.trdland.de',
     port: 587,
     secure: false,
-    // secureConnection: false,
     auth: {
         user: 'welcome',
-        pass: process.env.JWT_KEY,
+        pass: 'trdland$%',
     },
     tls: {
         rejectUnauthorized: false

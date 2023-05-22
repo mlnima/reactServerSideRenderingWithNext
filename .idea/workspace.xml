@@ -23,7 +23,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change afterPath="$PROJECT_DIR$/apps/mail-server/src/utils/emailActionTypeDetector.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/mail-server/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mail-server/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mail-server/src/tests/outGoingEmailFromOurServer.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mail-server/src/tests/outGoingEmailFromOurServer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,7 +127,7 @@
       <command value="nextEnv" />
     </option>
   </component>
-  <component name="RunManager" selected="Node.js.outGoingEmailFromOurServer.js">
+  <component name="RunManager" selected="npm.build">
     <configuration name="incomingEmailToOurSMTPServer.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/apps/mail-server/src/tests/incomingEmailToOurSMTPServer.js" working-dir="$PROJECT_DIR$/apps/mail-server/src/tests">
       <method v="2" />
     </configuration>
@@ -156,8 +159,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Node.js.outGoingEmailFromOurServer.js" />
         <item itemvalue="npm.build" />
+        <item itemvalue="Node.js.outGoingEmailFromOurServer.js" />
         <item itemvalue="npm.dev" />
         <item itemvalue="Node.js.incomingEmailToOurSMTPServer.js" />
         <item itemvalue="Node.js.temp.js" />
@@ -1651,7 +1654,7 @@
       <workItem from="1684595049010" duration="1482000" />
       <workItem from="1684612833084" duration="1736000" />
       <workItem from="1684651528498" duration="41071000" />
-      <workItem from="1684737397268" duration="4065000" />
+      <workItem from="1684737397268" duration="10287000" />
     </task>
     <servers />
   </component>
@@ -2346,11 +2349,6 @@
           <url>file://$PROJECT_DIR$/packages/typescript-types/src/settings/MembershipSettings.ts</url>
           <line>9</line>
           <option name="timeStamp" value="220" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/apps/mail-server/index.ts</url>
-          <line>156</line>
-          <option name="timeStamp" value="221" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
