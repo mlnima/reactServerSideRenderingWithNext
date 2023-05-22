@@ -63,13 +63,9 @@ const externalMailSender = async ({email,user,port}:IExternalMailSender) => {
 
 const createSMTPServer = (port) => {
     const server = new SMTPServer({
-        secure: port === 465,
-        requireTLS: port !== 465,
+        secure: false,
         authOptional: true,
-        tls: {
-            key: fs.readFileSync(process.env.SSL_KEY),
-            cert: fs.readFileSync(process.env.SSL_CERT),
-        },
+
         onAuth: async (auth, session, callback) => {
             try {
                 console.log('Auth Object:', auth);
@@ -164,7 +160,7 @@ const createSMTPServer = (port) => {
     }
 }
 
-const ports = [25, 465, 587, 2525];
+const ports = [25,587];
 
 ports.forEach(port => createSMTPServer(port));
 
@@ -174,7 +170,10 @@ ports.forEach(port => createSMTPServer(port));
 
 
 
-
+// tls: {
+//     key: fs.readFileSync(process.env.SSL_KEY),
+//     cert: fs.readFileSync(process.env.SSL_CERT),
+// },
 
 // const email = new emailSchema(receivedEmailParsedData);
 //

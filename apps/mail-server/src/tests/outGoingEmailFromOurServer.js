@@ -3,15 +3,15 @@ const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
     host: 'mail.trdland.de',
-    port: 587,
+    port: 2525,
     secure: false,
     auth: {
         user: 'welcome',
         pass: 'trdland$%',
     },
-    tls: {
-        rejectUnauthorized: false
-    }
+    // tls: {
+    //     rejectUnauthorized: false
+    // }
 });
 
 const mailOptions = {
@@ -19,6 +19,7 @@ const mailOptions = {
     to: 'mmlnima@gmail.com',
     subject: 'Welcome to MyApp!',
     text: 'Thank you for registering on MyApp.',
+    html: '<p>Thank you for registering on MyApp.</p>',
 };
 
 transporter.sendMail(mailOptions, (error, info) => {
