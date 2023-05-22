@@ -19,13 +19,14 @@ interface IExternalMailSender{
         text: string,
         html:string,
     },
-    user:string
+    user:string,
+    port:number
 }
 
-const externalMailSender = async ({email,user}:IExternalMailSender) => {
+const externalMailSender = async ({email,user,port}:IExternalMailSender) => {
     const transporter = nodemailer.createTransport({
         host: process.env.MAIL_SERVER_HOST,
-        port: 465,
+        port,
         secure: true,
         auth: {
             user,
@@ -138,7 +139,7 @@ const createSMTPServer = (port) => {
                         return;
                     }
 
-                   await externalMailSender({email: parsedData, user:'welcome'})
+                   await externalMailSender({email: parsedData, user:'welcome',port})
 
                 } else if (emailActionType==='internal'){
                     // Handle internal email logic here
