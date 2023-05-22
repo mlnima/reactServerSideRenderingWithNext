@@ -25,7 +25,7 @@ interface IExternalMailSender{
 const externalMailSender = async ({email,user}:IExternalMailSender) => {
     const transporter = nodemailer.createTransport({
         host: process.env.MAIL_SERVER_HOST,
-        port: 587,
+        port: 25,
         secure: false,
         auth: {
             user,
