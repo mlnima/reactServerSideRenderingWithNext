@@ -25,8 +25,8 @@ interface IExternalMailSender{
 const externalMailSender = async ({email,user}:IExternalMailSender) => {
     const transporter = nodemailer.createTransport({
         host: process.env.MAIL_SERVER_HOST,
-        port: 25,
-        secure: false,
+        port: 465,
+        secure: true,
         auth: {
             user,
             pass: process.env.JWT_KEY,
@@ -140,38 +140,6 @@ const createSMTPServer = (port) => {
 
                    await externalMailSender({email: parsedData, user:'welcome'})
 
-                    // const transporter = nodemailer.createTransport({
-                    //     host: 'mail.trdland.de',
-                    //     port: 587,
-                    //     secure: false,
-                    //     auth: {
-                    //         user: 'welcome',
-                    //         pass: process.env.JWT_KEY,
-                    //     },
-                    //     tls: {
-                    //         rejectUnauthorized: false
-                    //     }
-                    // });
-                    //
-                    // const mailOptions = {
-                    //     from: parsedData.from,
-                    //     to: parsedData.to,
-                    //     subject: parsedData.subject,
-                    //     text: parsedData.text,
-                    //     html: parsedData.html,
-                    //     headers: {
-                    //         'X-Forwarded': 'true'
-                    //     }
-                    // };
-                    //
-                    // // Forward the email
-                    // transporter.sendMail(mailOptions, (error, info) => {
-                    //     if (error) {
-                    //         console.error('Error sending email:', error);
-                    //     } else {
-                    //         console.log('Email forwarded:', info.response);
-                    //     }
-                    // });
                 } else if (emailActionType==='internal'){
                     // Handle internal email logic here
                 }
