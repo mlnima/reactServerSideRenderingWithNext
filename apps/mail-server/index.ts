@@ -151,8 +151,8 @@ const createSMTPServer = (port) => {
     server.on("error", err => {
         console.log("Error %s", err.message);
     });
-
-    if (process.env.MAIL_SERVER === 'true' && process.env.SSL_CERT && process.env.SSL_KEY) {
+//&& process.env.SSL_CERT && process.env.SSL_KEY
+    if (process.env.MAIL_SERVER === 'true' ) {
         server.listen(port);
         console.log(`Mail server started on port ${port}`);
     } else {
