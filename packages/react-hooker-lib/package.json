@@ -1,11 +1,10 @@
 {
   "name": "react-hooker-lib",
   "version": "1.0.0",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
   "private": true,
   "license": "MIT",
-  "source": "./index.ts",
+  "types": "./dist/src/index.d.ts",
+  "main": "./dist/src/index.js",
   "files": [
     "dist/**"
   ],
@@ -31,6 +30,7 @@
     "jest-presets": "*",
     "eslint-config-custom": "*",
     "tsconfig": "*",
+    "custom-util": "*",
     "typescript": "latest"
   }
 }

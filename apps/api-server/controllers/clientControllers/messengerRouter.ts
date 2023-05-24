@@ -1,6 +1,6 @@
 import {Router} from 'express';
 import getConversationsList from "./messengerControllers/getConversationsList";
-import authMiddleware from "custom-server-util/src/middleware-utils/authMiddleware";
+import {authMiddleware} from "custom-server-util";
 import getAConversation from "./messengerControllers/getAConversation";
 import loadOlderMessages from "./messengerControllers/loadOlderMessages";
 import startAConversation from "./messengerControllers/startAConversation";

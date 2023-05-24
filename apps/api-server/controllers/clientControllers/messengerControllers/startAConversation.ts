@@ -1,6 +1,6 @@
 //startAConversation
 
-import messengerConversationSchema from "models/src/messengerConversationSchema";
+import {messengerConversationSchema} from "models";
 
 const startAConversation = async (req, res) => {
     try {

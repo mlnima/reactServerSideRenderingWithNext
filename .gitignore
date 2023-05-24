@@ -2,6 +2,9 @@ cd app/apps/**/node_modules
 /apps/**/.next
 /apps/**/dist
 /apps/**/.turbo
+/packages/**/.next
+/packages/**/dist
+/packages/**/.turbo
 .package-lock.json
 node_modules
 
@@ -31,3 +34,4 @@ custom-config.json
 
 /tempFiles
 /trash
+/additionalJobs

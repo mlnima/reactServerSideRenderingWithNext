@@ -73,6 +73,7 @@
     "ts-lib": "^0.0.5",
     "ts-loader": "^9.4.1",
     "tsc-alias": "^1.8.2",
+    "ts-node": "^10.9.1",
     "tsconfig": "*",
     "tsconfig-paths": "^4.1.2",
     "tscpaths": "^0.0.9",

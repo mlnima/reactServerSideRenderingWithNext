@@ -14,7 +14,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye} from "@fortawesome/free-solid-svg-icons/faEye";
 import {registerUserAction} from "@store_toolkit/clientReducers/userReducers/registerUserAction";
 import {usernameValidatorRegisterForm,passwordValidatorRegisterForm} from "custom-util";
-import emailValidator from "custom-util/src/validators/emailValidator";
+import {emailValidator} from "custom-util";
 
 
 const LoginRegisterPopupFormsStyledDiv = styled.div`

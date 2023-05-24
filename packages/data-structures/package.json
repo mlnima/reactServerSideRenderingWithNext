@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "license": "MIT",
-  "types": "index.ts",
-  "main": "./index.js",
-  "source": "./index.ts",
+  "types": "./dist/src/index.d.ts",
+  "main": "./dist/src/index.js",
   "files": [
     "dist/**"
   ],

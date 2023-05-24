@@ -2,7 +2,7 @@ import {fileSchema, userSchema} from 'models'
 import fsExtra from "fs-extra";
 import {getCurrentDatePath} from "custom-server-util";
 import sharp from 'sharp'
-import removeFileExtension from "custom-util/src/file-utils/removeFileExtension";
+import {removeFileExtension} from "custom-util";
 import fs from "fs";
 import fileRemover from "../../../../_utils/fileRemover";
 

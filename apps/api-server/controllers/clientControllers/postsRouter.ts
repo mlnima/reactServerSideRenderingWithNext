@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import authMiddleware from "custom-server-util/src/middleware-utils/authMiddleware";
+import {authMiddleware} from "custom-server-util";
 import authWithUserDataMiddleware from "../../middlewares/authWithUserDataMiddleware";
 import cacheSuccesses from '../../middlewares/apiCache';
 

@@ -23,10 +23,331 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/clientFileManagerRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/clientFileManagerRouter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/clientOrdersRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/clientOrdersRouter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/messengerRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/messengerRouter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/postsRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/postsRouter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/usersControllers/register.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/usersControllers/register.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/usersRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api-server/controllers/clientControllers/usersRouter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/file-server/controllers/clientControllers/fileManagerControllers/uploadFilesControllers/uploadImage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/file-server/controllers/clientControllers/fileManagerControllers/uploadFilesControllers/uploadImage.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/file-server/controllers/clientControllers/fileManagerControllers/uploadFilesControllers/uploadRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/file-server/controllers/clientControllers/fileManagerControllers/uploadFilesControllers/uploadRouter.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/mail-server/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mail-server/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mail-server/testMailServer/sendEmailByCreateTransport.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mail-server/testMailServer/sendEmailByCreateTransport.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mail-server/testMailServer/sendEmailBySMTPConnection.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mail-server/testMailServer/sendEmailBySMTPConnection.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mail-server/testMailServer/sendEmailBySMTPConnection.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mail-server/testMailServer/sendEmailBySMTPConnection.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/socket-server/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/socket-server/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/components/RootLayout/common/LoginRegisterPopup/LoginRegisterPopupForms.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/components/RootLayout/common/LoginRegisterPopup/LoginRegisterPopupForms.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/_devUtil/windowsNodeProccessBulkKiller.bat" beforeDir="false" afterPath="$PROJECT_DIR$/additionalJobs/windowsNodeProccessBulkKiller.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/index.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-server-util/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-server-util/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/connectToDatabase.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/connectToDatabase.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/connectToDatabase.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/createExpressServer.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/createExpressServer.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/createExpressServer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/file-utils/renameFile.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/file-utils/renameFile.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/file-utils/renameFile.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/fileDownloader.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/fileDownloader.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/fileDownloader.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/jwtTokenGenerator.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/jwtTokenGenerator.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/jwtTokenGenerator.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/middleware-utils/adminAuthMiddleware.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/middleware-utils/adminAuthMiddleware.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/middleware-utils/adminAuthMiddleware.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/middleware-utils/authMiddleware.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/middleware-utils/authMiddleware.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/middleware-utils/authMiddleware.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/mongoIdValidator.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/mongoIdValidator.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/mongoIdValidator.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/path-utils/getCurrentDatePath.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/path-utils/getCurrentDatePath.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/path-utils/getCurrentDatePath.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/shouldCompress.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/shouldCompress.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/shouldCompress.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/user-utils/findUserData.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/user-utils/findUserData.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/src/user-utils/findUserData.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-server-util/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-server-util/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/index.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/analytics-utils/google-analytics.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/analytics-utils/google-analytics.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/analytics-utils/google-analytics.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/array-utils/arraySortRandom.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/array-utils/arraySortRandom.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/array-utils/arraySortRandom.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/array-utils/reduceArrayOfDataToIds.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/array-utils/reduceArrayOfDataToIds.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/array-utils/reduceArrayOfDataToIds.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/array-utils/reduceWidgetsToGroups.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/array-utils/reduceWidgetsToGroups.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/array-utils/reduceWidgetsToGroups.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/array-utils/sortArrayByPropertyOfObject.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/array-utils/sortArrayByPropertyOfObject.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/array-utils/sortArrayByPropertyOfObject.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/array-utils/uniqArrayBy.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/array-utils/uniqArrayBy.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/array-utils/uniqArrayBy.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/date-utils/convertSecondsToTimeString.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/date-utils/convertSecondsToTimeString.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/date-utils/convertSecondsToTimeString.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/device-util/touchDeviceDetector.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/device-util/touchDeviceDetector.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/device-util/touchDeviceDetector.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/file-utils/blobToBase64.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/file-utils/blobToBase64.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/file-utils/blobToBase64.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/file-utils/removeFileExtension.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/file-utils/removeFileExtension.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/file-utils/removeFileExtension.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/inputsUtils/inputValueSimplifier.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/inputsUtils/inputValueSimplifier.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/inputsUtils/inputValueSimplifier.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/math-util/randomNumberGenerator.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/math-util/randomNumberGenerator.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/math-util/randomNumberGenerator.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/math-util/rangeNumGenerator.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/math-util/rangeNumGenerator.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/math-util/rangeNumGenerator.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/math-util/ratingCalculator.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/math-util/ratingCalculator.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/math-util/ratingCalculator.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/math-util/shortNumber.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/math-util/shortNumber.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/math-util/shortNumber.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/object-util/getTextDataWithTranslation.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/object-util/getTextDataWithTranslation.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/object-util/getTextDataWithTranslation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/object-util/isEmptyObject.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/object-util/isEmptyObject.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/object-util/isEmptyObject.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/socket-utils/socketIoClient.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/socket-utils/socketIoClient.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/socket-utils/socketIoClient.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/string-util/capitalizeFirstLetter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/string-util/capitalizeFirstLetter.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/string-util/capitalizeFirstLetter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/string-util/capitalizeFirstLetters.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/string-util/capitalizeFirstLetters.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/string-util/capitalizeFirstLetters.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/string-util/convertMetasTypeToPlural.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/string-util/convertMetasTypeToPlural.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/string-util/convertMetasTypeToPlural.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/string-util/convertMetasTypeToSingular.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/string-util/convertMetasTypeToSingular.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/string-util/convertMetasTypeToSingular.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/string-util/convertVariableNameToName.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/string-util/convertVariableNameToName.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/string-util/convertVariableNameToName.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/string-util/fileTypeDetector.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/string-util/fileTypeDetector.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/string-util/fileTypeDetector.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/string-util/getFileExtension.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/string-util/getFileExtension.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/string-util/getFileExtension.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/string-util/isJsonString.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/string-util/isJsonString.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/string-util/isJsonString.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/string-util/mongoIdValidatorClient.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/string-util/mongoIdValidatorClient.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/string-util/mongoIdValidatorClient.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/string-util/textContentReplacer.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/string-util/textContentReplacer.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/string-util/textContentReplacer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/url-util/ObjectToQuery.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/url-util/ObjectToQuery.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/url-util/ObjectToQuery.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/url-util/isAbsolutePath.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/url-util/isAbsolutePath.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/url-util/isAbsolutePath.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/url-util/isImageAllowedForNextImage.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/url-util/isImageAllowedForNextImage.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/url-util/isImageAllowedForNextImage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/url-util/isInternalUrl.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/url-util/isInternalUrl.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/url-util/isInternalUrl.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/url-util/isUserFromExternalLink.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/url-util/isUserFromExternalLink.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/url-util/isUserFromExternalLink.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/url-util/queryUniquer.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/url-util/queryUniquer.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/url-util/queryUniquer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/validators/emailValidator.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/validators/emailValidator.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/validators/emailValidator.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/validators/passwordValidatorRegisterForm.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/validators/passwordValidatorRegisterForm.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/validators/passwordValidatorRegisterForm.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/validators/usernameValidatorRegisterForm.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/validators/usernameValidatorRegisterForm.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/validators/usernameValidatorRegisterForm.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/vanilla-ui-utils/headerSizeCalculator.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/vanilla-ui-utils/headerSizeCalculator.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/src/vanilla-ui-utils/headerSizeCalculator.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/custom-util/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/custom-util/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/data-structures/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/data-structures/index.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/data-structures/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/data-structures/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/data-structures/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/data-structures/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/data-structures/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/data-structures/src/databaseSelectFieldsForPostCards.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/data-structures/src/databaseSelectFieldsForPostCards.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/data-structures/src/databaseSelectFieldsForPostCards.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/data-structures/src/postFieldRequestForCards.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/data-structures/src/postFieldRequestForCards.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/data-structures/src/postFieldRequestForCards.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/data-structures/src/postTypes.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/data-structures/src/postTypes.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/data-structures/src/postTypes.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/data-structures/src/userRoles.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/data-structures/src/userRoles.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/data-structures/src/userRoles.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/data-structures/src/userStatus.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/data-structures/src/userStatus.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/data-structures/src/userStatus.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/data-structures/src/videoQualities.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/data-structures/src/videoQualities.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/data-structures/src/videoQualities.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/data-structures/src/widgetsStaticPositions.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/data-structures/src/widgetsStaticPositions.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/data-structures/src/widgetsStaticPositions.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/data-structures/src/widgetsTypes.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/data-structures/src/widgetsTypes.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/data-structures/src/widgetsTypes.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/data-structures/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/data-structures/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/index.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/chatroomMessageSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/chatroomMessageSchema.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/chatroomMessageSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/chatroomSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/chatroomSchema.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/chatroomSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/commentSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/commentSchema.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/commentSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/contactFromSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/contactFromSchema.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/contactFromSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/conversationSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/conversationSchema.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/conversationSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/emailSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/emailSchema.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/emailSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/fileSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/fileSchema.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/fileSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/formSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/formSchema.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/formSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/log.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/log.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/log.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/messengerConversationMessageSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/messengerConversationMessageSchema.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/messengerConversationMessageSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/messengerConversationSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/messengerConversationSchema.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/messengerConversationSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/metaSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/metaSchema.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/metaSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/metaSchemas/actorSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/metaSchemas/actorSchema.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/metaSchemas/actorSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/metaSchemas/actorSchema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/actorSchema.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/metaSchemas/categorySchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/metaSchemas/categorySchema.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/metaSchemas/categorySchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/metaSchemas/categorySchema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/categorySchema.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/metaSchemas/tagSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/metaSchemas/tagSchema.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/metaSchemas/tagSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/metaSchemas/tagSchema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/tagSchema.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/orderSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/orderSchema.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/orderSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/pageSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/pageSchema.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/pageSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/postSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/postSchema.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/postSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/searchKeywordSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/searchKeywordSchema.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/searchKeywordSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/settings/settingSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/settings/settingSchema.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/settings/settingSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/settings/settingSchema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/src/settingSchema.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/translateSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/translateSchema.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/translateSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/userSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/userSchema.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/userSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/widgetSchema.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/widgetSchema.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/src/widgetSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/models/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/models/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/react-hooker-lib/dist/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-hooker-lib/dist/tsconfig.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/react-hooker-lib/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-hooker-lib/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/react-hooker-lib/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-hooker-lib/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/react-hooker-lib/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-hooker-lib/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/index.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/ActiveAlertBox.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/ActiveAlertBox.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/ActiveAlertBox.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/ActiveLoading.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/ActiveLoading.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/ActiveLoading.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/SvgRenderer.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/SvgRenderer.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/SvgRenderer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/UserPreviewImage.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/UserPreviewImage.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/UserPreviewImage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/buttonsStyle.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/buttonsStyle.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/buttonsStyle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/defaultColors.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/defaultColors.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/defaultColors.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/inputsStyles.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/inputsStyles.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/inputsStyles.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/keyframes.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/keyframes.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/keyframes.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/scrollBars.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/scrollBars.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/scrollBars.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/selectsStyle.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/selectsStyle.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/selectsStyle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,11 +436,11 @@
       <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\api-requests\src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\mail-server" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\tempFiles" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\trash" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\apps\mail-server\src" />
-      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\ui-components\src\fullscreenComponentsProvider" />
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\custom-util\src" />
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\ui\src" />
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\react-hooker-lib\src" />
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\models\src" />
+      <recent name="F:\Dev Project\reactServerSideRenderingWithNext\packages\data-structures\src" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -127,14 +448,11 @@
       <command value="nextEnv" />
     </option>
   </component>
-  <component name="RunManager" selected="Node.js.sendEmailBySMTPConnection.js">
-    <configuration name="incomingEmailToOurSMTPServer.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/apps/mail-server/testMailServer/incomingEmailToOurSMTPServer.js" working-dir="$PROJECT_DIR$/apps/mail-server/testMailServer">
+  <component name="RunManager" selected="npm.build">
+    <configuration name="sendEmailByCreateTransport.ts" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/apps/mail-server/testMailServer/sendEmailByCreateTransport.ts" working-dir="$PROJECT_DIR$/apps/mail-server/testMailServer">
       <method v="2" />
     </configuration>
-    <configuration name="sendEmailByCreateTransport.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/apps/mail-server/testMailServer/sendEmailByCreateTransport.js" working-dir="$PROJECT_DIR$/apps/mail-server/testMailServer">
-      <method v="2" />
-    </configuration>
-    <configuration name="sendEmailBySMTPConnection.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/apps/mail-server/testMailServer/sendEmailBySMTPConnection.js" working-dir="$PROJECT_DIR$/apps/mail-server/testMailServer">
+    <configuration name="sendEmailBySMTPConnection.ts" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/apps/mail-server/testMailServer/sendEmailBySMTPConnection.ts" working-dir="$PROJECT_DIR$/apps/mail-server/testMailServer">
       <method v="2" />
     </configuration>
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -157,13 +475,23 @@
       <envs />
       <method v="2" />
     </configuration>
+    <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Node.js.sendEmailBySMTPConnection.js" />
-        <item itemvalue="npm.dev" />
-        <item itemvalue="Node.js.sendEmailByCreateTransport.js" />
+        <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
-        <item itemvalue="Node.js.incomingEmailToOurSMTPServer.js" />
+        <item itemvalue="npm.dev" />
+        <item itemvalue="Node.js.sendEmailBySMTPConnection.ts" />
+        <item itemvalue="Node.js.sendEmailByCreateTransport.ts" />
       </list>
     </recent_temporary>
   </component>
@@ -1654,7 +1982,10 @@
       <workItem from="1684595049010" duration="1482000" />
       <workItem from="1684612833084" duration="1736000" />
       <workItem from="1684651528498" duration="41071000" />
-      <workItem from="1684737397268" duration="28707000" />
+      <workItem from="1684737397268" duration="37722000" />
+      <workItem from="1684840603602" duration="589000" />
+      <workItem from="1684916205308" duration="994000" />
+      <workItem from="1684959306742" duration="5920000" />
     </task>
     <servers />
   </component>
@@ -1663,12 +1994,9 @@
     <option name="exactExcludedFiles">
       <list>
         <option value="$PROJECT_DIR$/packages/data-structures/src/postTypes.d.ts.map" />
-        <option value="$PROJECT_DIR$/packages/models/index.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/object-util/getTextDataWithTranslation.d.ts" />
         <option value="$PROJECT_DIR$/packages/data-structures/src/postFieldRequestForCards.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/data-structures/src/widgetsTypes.js" />
-        <option value="$PROJECT_DIR$/packages/models/src/metaSchemas/actorSchema.d.ts.map" />
-        <option value="$PROJECT_DIR$/packages/models/index.d.ts" />
         <option value="$PROJECT_DIR$/packages/data-structures/src/databaseSelectFieldsForPostCards.d.ts" />
         <option value="$PROJECT_DIR$/packages/models/src/messengerConversationSchema.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/vanilla-ui-utils/headerSizeCalculator.js" />
@@ -1682,7 +2010,6 @@
         <option value="$PROJECT_DIR$/packages/custom-util/src/object-util/isEmptyObject.js" />
         <option value="$PROJECT_DIR$/packages/models/src/pageSchema.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/url-util/isAbsolutePath.d.ts" />
-        <option value="$PROJECT_DIR$/packages/models/src/settings/settingSchema.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/convertMetasTypeToSingular.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/models/src/formSchema.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/fileTypeDetector.js" />
@@ -1698,10 +2025,8 @@
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/mongoIdValidatorClient.d.ts" />
         <option value="$PROJECT_DIR$/packages/data-structures/src/videoQualities.js" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/array-utils/reduceWidgetsToGroups.js" />
-        <option value="$PROJECT_DIR$/packages/models/src/metaSchemas/tagSchema.js" />
         <option value="$PROJECT_DIR$/packages/models/src/postSchema.js" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/socket-utils/socketIoClient.d.ts.map" />
-        <option value="$PROJECT_DIR$/packages/models/src/metaSchemas/tagSchema.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-server-util/src/file-utils/renameFile.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-server-util/src/connectToDatabase.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/convertVariableNameToName.d.ts" />
@@ -1709,13 +2034,10 @@
         <option value="$PROJECT_DIR$/packages/custom-util/src/url-util/ObjectToQuery.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-server-util/src/shouldCompress.d.ts" />
         <option value="$PROJECT_DIR$/packages/models/src/widgetSchema.d.ts" />
-        <option value="$PROJECT_DIR$/packages/models/src/metaSchemas/tagSchema.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/capitalizeFirstLetters.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/ui/src/scrollBars.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/data-structures/src/userStatus.js" />
-        <option value="$PROJECT_DIR$/packages/models/src/metaSchemas/actorSchema.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/textContentReplacer.d.ts" />
-        <option value="$PROJECT_DIR$/packages/data-structures/index.js" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/object-util/getTextDataWithTranslation.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/url-util/isInternalUrl.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/convertVariableNameToName.d.ts.map" />
@@ -1723,11 +2045,9 @@
         <option value="$PROJECT_DIR$/packages/custom-util/src/array-utils/sortArrayByPropertyOfObject.d.ts" />
         <option value="$PROJECT_DIR$/packages/ui/src/inputsStyles.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/isJsonString.js" />
-        <option value="$PROJECT_DIR$/packages/models/index.js" />
         <option value="$PROJECT_DIR$/packages/models/src/formSchema.js" />
         <option value="$PROJECT_DIR$/packages/data-structures/src/postTypes.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/url-util/isInternalUrl.d.ts.map" />
-        <option value="$PROJECT_DIR$/packages/models/src/metaSchemas/categorySchema.js" />
         <option value="$PROJECT_DIR$/packages/custom-server-util/src/fileDownloader.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/math-util/randomNumberGenerator.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/data-structures/src/postFieldRequestForCards.js" />
@@ -1788,7 +2108,6 @@
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/getFileExtension.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/ui/src/scrollBars.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/math-util/randomNumberGenerator.d.ts" />
-        <option value="$PROJECT_DIR$/packages/models/src/metaSchemas/actorSchema.js" />
         <option value="$PROJECT_DIR$/packages/custom-server-util/src/middleware-utils/adminAuthMiddleware.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/data-structures/src/userRoles.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-server-util/src/mongoIdValidator.js" />
@@ -1798,7 +2117,6 @@
         <option value="$PROJECT_DIR$/packages/models/src/translateSchema.js" />
         <option value="$PROJECT_DIR$/packages/custom-server-util/src/connectToDatabase.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/url-util/isUserFromExternalLink.d.ts" />
-        <option value="$PROJECT_DIR$/packages/models/src/settings/settingSchema.js" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/array-utils/reduceArrayOfDataToIds.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/data-structures/src/postFieldRequestForCards.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/array-utils/uniqArrayBy.d.ts" />
@@ -1806,24 +2124,17 @@
         <option value="$PROJECT_DIR$/packages/models/src/contactFromSchema.js" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/capitalizeFirstLetters.js" />
         <option value="$PROJECT_DIR$/packages/data-structures/src/widgetsStaticPositions.d.ts" />
-        <option value="$PROJECT_DIR$/packages/custom-util/index.d.ts" />
-        <option value="$PROJECT_DIR$/packages/models/src/metaSchemas/categorySchema.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/ui/src/scrollBars.js" />
         <option value="$PROJECT_DIR$/packages/ui/src/ActiveAlertBox.d.ts" />
         <option value="$PROJECT_DIR$/packages/data-structures/src/videoQualities.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-server-util/src/jwtTokenGenerator.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/date-utils/convertSecondsToTimeString.js" />
         <option value="$PROJECT_DIR$/packages/custom-server-util/src/jwtTokenGenerator.d.ts.map" />
-        <option value="$PROJECT_DIR$/packages/data-structures/index.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-server-util/src/jwtTokenGenerator.js" />
-        <option value="$PROJECT_DIR$/packages/models/src/settings/settingSchema.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/date-utils/convertSecondsToTimeString.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/url-util/isImageAllowedForNextImage.js" />
-        <option value="$PROJECT_DIR$/packages/custom-server-util/index.js" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/textContentReplacer.js" />
         <option value="$PROJECT_DIR$/packages/models/src/orderSchema.js" />
-        <option value="$PROJECT_DIR$/packages/custom-server-util/index.d.ts" />
-        <option value="$PROJECT_DIR$/packages/custom-server-util/index.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/vanilla-ui-utils/headerSizeCalculator.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/ui/src/SvgRenderer.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/convertMetasTypeToPlural.d.ts" />
@@ -1838,7 +2149,6 @@
         <option value="$PROJECT_DIR$/packages/models/src/searchKeywordSchema.js" />
         <option value="$PROJECT_DIR$/packages/models/src/messengerConversationSchema.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/isJsonString.d.ts" />
-        <option value="$PROJECT_DIR$/packages/ui/index.d.ts" />
         <option value="$PROJECT_DIR$/packages/ui/src/defaultColors.d.ts" />
         <option value="$PROJECT_DIR$/packages/models/src/conversationSchema.js" />
         <option value="$PROJECT_DIR$/packages/data-structures/src/widgetsTypes.d.ts" />
@@ -1846,7 +2156,6 @@
         <option value="$PROJECT_DIR$/packages/custom-util/src/object-util/isEmptyObject.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/validators/emailValidator.js" />
         <option value="$PROJECT_DIR$/packages/custom-server-util/src/middleware-utils/adminAuthMiddleware.d.ts" />
-        <option value="$PROJECT_DIR$/packages/models/src/metaSchemas/categorySchema.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/url-util/ObjectToQuery.js" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/validators/usernameValidatorRegisterForm.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/math-util/shortNumber.js" />
@@ -1867,7 +2176,6 @@
         <option value="$PROJECT_DIR$/packages/custom-util/src/url-util/queryUniquer.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/validators/usernameValidatorRegisterForm.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/device-util/touchDeviceDetector.d.ts" />
-        <option value="$PROJECT_DIR$/packages/custom-util/index.js" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/validators/emailValidator.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/convertMetasTypeToSingular.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/isJsonString.d.ts.map" />
@@ -1881,7 +2189,6 @@
         <option value="$PROJECT_DIR$/packages/custom-util/src/array-utils/sortArrayByPropertyOfObject.js" />
         <option value="$PROJECT_DIR$/packages/models/src/emailSchema.js" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/validators/usernameValidatorRegisterForm.js" />
-        <option value="$PROJECT_DIR$/packages/ui/index.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/models/src/postSchema.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/models/src/chatroomSchema.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/date-utils/convertSecondsToTimeString.d.ts.map" />
@@ -1893,7 +2200,6 @@
         <option value="$PROJECT_DIR$/packages/models/src/userSchema.js" />
         <option value="$PROJECT_DIR$/packages/data-structures/src/postTypes.js" />
         <option value="$PROJECT_DIR$/packages/custom-server-util/src/shouldCompress.d.ts.map" />
-        <option value="$PROJECT_DIR$/packages/data-structures/index.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/ui/src/buttonsStyle.js" />
         <option value="$PROJECT_DIR$/packages/models/src/userSchema.d.ts" />
         <option value="$PROJECT_DIR$/packages/models/src/commentSchema.d.ts.map" />
@@ -1901,14 +2207,12 @@
         <option value="$PROJECT_DIR$/packages/ui/src/SvgRenderer.d.ts" />
         <option value="$PROJECT_DIR$/packages/ui/src/UserPreviewImage.js" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/capitalizeFirstLetter.d.ts" />
-        <option value="$PROJECT_DIR$/packages/ui/index.js" />
         <option value="$PROJECT_DIR$/packages/ui/src/buttonsStyle.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/models/src/searchKeywordSchema.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/models/src/commentSchema.d.ts" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/array-utils/sortArrayByPropertyOfObject.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/fileTypeDetector.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/models/src/emailSchema.d.ts" />
-        <option value="$PROJECT_DIR$/packages/custom-util/index.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/convertMetasTypeToPlural.js" />
         <option value="$PROJECT_DIR$/packages/data-structures/src/videoQualities.d.ts.map" />
         <option value="$PROJECT_DIR$/packages/custom-util/src/string-util/getFileExtension.d.ts" />

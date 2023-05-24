@@ -5,7 +5,7 @@
       "dom"
     ],
     "module": "CommonJS",
-    "outDir": ".",
+    "outDir": "./dist",
     "rootDir": "."
   },
   "exclude": ["node_modules"],

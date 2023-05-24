@@ -2,7 +2,7 @@
   "compilerOptions": {
     "lib": ["ES2015"],
     "module": "CommonJS",
-    "outDir": ".",
+    "outDir": "./dist",
     "rootDir": "."
   },
   "exclude": ["node_modules"],

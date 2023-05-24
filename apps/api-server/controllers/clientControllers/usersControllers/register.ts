@@ -1,8 +1,8 @@
 import bcrypt from 'bcryptjs';
 import {userSchema} from 'models';
 import {usernameValidatorRegisterForm, passwordValidatorRegisterForm} from "custom-util";
-import emailValidator from "custom-util/src/validators/emailValidator";
-import jwtTokenGenerator from "custom-server-util/src/jwtTokenGenerator";
+import {emailValidator} from "custom-util";
+import {jwtTokenGenerator} from "custom-server-util";
 import nodemailer from "nodemailer";
 import * as process from "process";
 let transporter

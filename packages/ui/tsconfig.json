@@ -6,7 +6,7 @@
     ],
     "jsx": "react",
     "module": "CommonJS",
-    "outDir": ".",
+    "outDir": "./dist",
     "rootDir": "."
   },
   "exclude": ["node_modules"],

@@ -2,7 +2,7 @@
 import {Router} from "express";
 import uploadFiles from "./uploadFiles";
 import uploadImage from "./uploadImage";
-import authMiddleware from "custom-server-util/src/middleware-utils/authMiddleware";
+import {authMiddleware} from "custom-server-util";
 
 const router = Router();
 

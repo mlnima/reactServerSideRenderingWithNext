@@ -1,1 +1,0 @@
-{"version":3,"file":"google-analytics.d.ts","sourceRoot":"","sources":["google-analytics.ts"],"names":[],"mappings":"AAAA,eAAO,MAAM,QAAQ,QAAS,MAAM,qBAAmB,MAAM,KAAG,IAO/D,CAAC;AAEF,UAAU,MAAM;IACZ,MAAM,EAAE,MAAM,CAAC;IACf,QAAQ,EAAE,MAAM,CAAC;IACjB,KAAK,EAAE,MAAM,CAAC;IACd,KAAK,CAAC,EAAE,MAAM,CAAC;CAClB;AAED,eAAO,MAAM,KAAK,uCAAwC,MAAM,KAAG,IASlE,CAAC"}
