@@ -1,10 +1,12 @@
-cd app/apps/**/node_modules
+/apps/**/node_modules
 /apps/**/.next
 /apps/**/dist
 /apps/**/.turbo
-/packages/**/.next
+
 /packages/**/dist
 /packages/**/.turbo
+/packages/**/node_modules
+
 .package-lock.json
 node_modules
 
