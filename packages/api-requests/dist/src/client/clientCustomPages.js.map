@@ -1,1 +1,0 @@
-{"version":3,"file":"clientCustomPages.js","sourceRoot":"","sources":["../../../src/client/clientCustomPages.ts"],"names":[],"mappings":";;;;AAAA,iFAAiD;AAE1C,MAAM,uBAAuB,GAAG,CAAO,QAAQ,EAAE,EAAE;IACtD,OAAO,MAAM,uBAAa,CAAC,GAAG,CAAC,kCAAkC,QAAQ,EAAE,CAAC,CAAC;AACjF,CAAC,CAAA,CAAA;AAFY,QAAA,uBAAuB,2BAEnC"}

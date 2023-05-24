@@ -1,9 +1,0 @@
-export declare const dashboardAPIRequestCreateFile: (fileName: any, filePath: any) => Promise<import("axios").AxiosResponse<any, any>>;
-export declare const dashboardAPIRequestCreateFileOrFolder: (data: any) => Promise<import("axios").AxiosResponse<any, any>>;
-export declare const dashboardAPIRequestCreateFolder: (folderName: any, folderPath: any) => Promise<import("axios").AxiosResponse<any, any>>;
-export declare const dashboardAPIRequestDeleteFile: (filePath: any) => Promise<import("axios").AxiosResponse<any, any>>;
-export declare const dashboardAPIRequestReadPath: (path: any) => Promise<import("axios").AxiosResponse<any, any>>;
-export declare const dashboardAPIRequestReadTranslationFile: (path: any) => Promise<import("axios").AxiosResponse<any, any>>;
-export declare const dashboardAPIRequestUpdateTranslationFile: (path: any, data: any) => Promise<import("axios").AxiosResponse<any, any>>;
-export declare const dashboardAPIRequestUploadFile: (file: any) => Promise<import("axios").AxiosResponse<any, any>>;
-//# sourceMappingURL=dashboardFileManager.d.ts.map
