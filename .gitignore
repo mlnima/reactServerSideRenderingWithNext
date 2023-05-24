@@ -33,6 +33,7 @@ apps/api-server/tools/testAPI.js
 .env.production.local
 *.env
 custom-config.json
+package-lock.json
 
 /tempFiles
 /trash
