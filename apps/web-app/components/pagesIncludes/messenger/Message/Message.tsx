@@ -3,7 +3,7 @@ import React, {PureComponent} from 'react';
 import {formatDistance} from "date-fns";
 import {Styles} from "./Message.styles";
 import Link from "next/link";
-import UserPreviewImage from "ui/src/UserPreviewImage";
+import {UserPreviewImage} from "ui";
 import AdminActionOnMessageMenu from "@components/pagesIncludes/chatroom/ChatRoomMessageArea/AdminActionOnMessageMenu";
 import {ChatroomMessage} from "typescript-types";
 import {IMessengerConversationMessage} from "typescript-types/src/messengerTypes/IMessengerConversationMessage";

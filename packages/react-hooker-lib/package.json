@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "license": "MIT",
-  "types": "./dist/src/index.d.ts",
+  "types": "./dist/src/index.ts",
   "main": "./dist/src/index.js",
   "files": [
     "dist/**"
@@ -31,6 +31,6 @@
     "eslint-config-custom": "*",
     "tsconfig": "*",
     "custom-util": "*",
-    "typescript": "latest"
+    "typescript": "^5.0.4"
   }
 }

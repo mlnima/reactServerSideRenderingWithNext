@@ -2,6 +2,9 @@
 /apps/**/.next
 /apps/**/dist
 /apps/**/.turbo
+/apps/**/.vscode
+/apps/**/.idea
+
 
 /packages/**/dist
 /packages/**/.turbo
@@ -25,6 +28,7 @@ apps/api-server/tools/testAPI.js
 /packages/_devUtil/generateFakeData.js
 
 .idea
+.vscode
 .turbo
 .generateFakeData.js
 .env.local

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "license": "MIT",
-  "types": "./dist/src/index.d.ts",
+  "types": "./dist/src/index.ts",
   "main": "./dist/src/index.js",
   "files": [
     "dist/**"
@@ -28,10 +28,10 @@
     "eslint-config-custom": "*",
     "socket.io-client": "^4.5.4",
     "tsconfig": "*",
-    "typescript": "latest"
+    "typescript": "^5.0.4"
   },
   "devDependencies": {
     "@types/jest": "^29.5.0",
-    "@types/node": "^18.15.11"
+    "@types/node": "^18.16.14"
   }
 }

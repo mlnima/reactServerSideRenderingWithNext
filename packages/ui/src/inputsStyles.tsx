@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 
-const inputs = css`
+const inputsStyles = css`
   .form-control-input {
     width: 100%;
     display: block;
@@ -15,4 +15,4 @@ const inputs = css`
   }
 `
 //"axios"
-export default inputs
+export default inputsStyles

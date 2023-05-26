@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import styled from "styled-components";
 import {setActiveVisibleProfile} from "@store_toolkit/clientReducers/chatroomReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
-import UserPreviewImage from "ui/src/UserPreviewImage";
+import {UserPreviewImage} from "ui";
 import Link from "next/link";
 
 const ChatRoomOnlineUsersListItemStyledDiv = styled.div`

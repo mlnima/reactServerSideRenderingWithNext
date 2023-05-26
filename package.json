@@ -33,6 +33,7 @@
     "outdate:api-server-packages": "npm outdated -w api-server",
     "outdate:socket-server-packages": "npm outdated -w socket-server",
     "outdate:web-app-packages": "npm outdated -w web-app",
+    "outdate:web-dashboard-app": "npm outdated -w web-dashboard-app",
     "outdate:sitemaps-generator-packages": "npm outdated -w sitemaps-generator",
     "outdate:custom-scripts-packages": "npm outdated -w custom-scripts",
     "killNodes": ".\\_devUtil\\windowsNodeProccessBulkKiller.bat"
@@ -52,7 +53,7 @@
     "@types/express": "^4.17.16",
     "@types/jest": "^29.5.0",
     "@types/lodash": "^4.14.188",
-    "@types/node": "^18.15.11",
+    "@types/node": "^18.16.14",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@types/react-fontawesome": "^1.6.5",
@@ -78,7 +79,7 @@
     "tsconfig-paths": "^4.1.2",
     "tscpaths": "^0.0.9",
     "tslib": "^2.5.0",
-    "typescript": "^4.9.5",
+    "typescript": "^5.0.4",
     "turbo": "^1.9.8"
   },
   "globalDependencies": [

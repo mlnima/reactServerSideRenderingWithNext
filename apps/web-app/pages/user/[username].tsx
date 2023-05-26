@@ -8,7 +8,7 @@ import {wrapper} from "@store_toolkit/store";
 import {useSelector} from "react-redux";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
-import UserPreviewImage from "ui/src/UserPreviewImage";
+import {UserPreviewImage} from "ui";
 import {Store} from "typescript-types";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";

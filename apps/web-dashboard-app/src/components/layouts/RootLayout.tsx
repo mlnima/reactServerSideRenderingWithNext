@@ -5,7 +5,7 @@ import Main from "./Main/Main";
 import Menu from "./Navigation/Menu";
 import {useSelector} from "react-redux";
 import {DashboardStore} from "typescript-types";
-import ActiveLoading from "ui/src/ActiveLoading";
+import {ActiveLoading} from "ui";
 import {useAppDispatch} from "@store/hooks";
 import {loading} from '@store/reducers/globalStateReducer'
 

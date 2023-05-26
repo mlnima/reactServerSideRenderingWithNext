@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 
-const buttons = css`
+const buttonsStyle = css`
   .btn{
     display: inline-block;
     font-weight: 400;
@@ -64,4 +64,4 @@ const buttons = css`
   }
 `
 
-export default buttons
+export default buttonsStyle

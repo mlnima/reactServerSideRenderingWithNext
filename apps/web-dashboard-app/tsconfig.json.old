@@ -28,13 +28,21 @@
     "jsx": "react-jsx",
     "baseUrl": "src",
     "paths": {
-      "@store/*": ["store/*"],
-      "@components/*": ["components/*"],
-      "@variables/*": ["variables/*"]
-    },
-    "typeRoots": ["node_modules/@types", "types"],
-    "types": ["node", "react", "react-dom"]
+      "@store/*": [
+        "store/*"
+      ],
+      "@components/*": [
+        "components/*"
+      ],
+      "@variables/*": [
+        "variables/*"
+      ]
+    }
   },
-  "include": ["src", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src",
+    "**/*.ts",
+    "**/*.tsx"
+  ]
+
 }

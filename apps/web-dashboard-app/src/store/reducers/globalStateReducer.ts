@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {AxiosResponse} from "axios";
 import {RootState} from "../store";

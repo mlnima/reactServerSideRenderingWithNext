@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "license": "MIT",
-  "types": "./dist/src/index.d.ts",
+  "types": "./dist/src/index.ts",
   "main": "./dist/src/index.js",
   "files": [
     "dist/**"
@@ -35,6 +35,6 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.9.0",
     "models": "*",
-    "typescript": "^4.9.5"
+    "typescript": "^5.0.4"
   }
 }

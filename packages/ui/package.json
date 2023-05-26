@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "license": "MIT",
-  "types": "./dist/src/index.d.ts",
+  "types": "./dist/src/index.ts",
   "main": "./dist/src/index.js",
   "files": [
     "dist/**"
@@ -40,6 +40,6 @@
     "react-loading": "^2.0.3",
     "react-fontawesome": "^1.7.1",
     "tsconfig": "*",
-    "typescript": "latest"
+    "typescript": "^5.0.4"
   }
 }

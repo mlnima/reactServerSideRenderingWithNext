@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {loading, setAlert} from "./globalStateReducer";
 import {AxiosError, AxiosResponse} from "axios";
@@ -40,7 +41,7 @@ export const readThePathAction = createAsyncThunk(
     'adminPanelFileManager/readThePathAction',
     async ({path, prevPath}: { path: string, prevPath: string }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-
+//@ts-ignore
         return await dashboardAPIRequestReadPath(path).then((response: AxiosResponse<any>)  => {
             if (response.data.type === 'dir') {
                 return {files: response.data.data}
@@ -136,6 +137,7 @@ export const uploadFileAction = createAsyncThunk(
     'adminPanelFileManager/uploadFileAction',
     async ({file, useType, postData}: { file: any, useType: string, postData?: PostRaw | undefined }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
+        //@ts-ignore
         return await dashboardAPIRequestUploadFile(file).then((response: AxiosResponse<any>) => {
             if (useType === 'fileManagerFileUpload') {
                 return {

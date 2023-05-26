@@ -1,18 +1,14 @@
 import React from 'react';
 import {createGlobalStyle} from "styled-components";
 import {FC} from "react";
-import buttons from 'ui/src/buttonsStyle';
-import inputs from 'ui/src/inputsStyles';
-import selects from 'ui/src/selectsStyle';
-import defaultColors from 'ui/src/defaultColors';
-import scrollBars from 'ui/src/scrollBars';
+import {buttonsStyle,inputsStyles,selectsStyle,defaultColors,scrollBars} from 'ui';
 
 const Styles = createGlobalStyle`
   
-  ${buttons}
+  ${buttonsStyle}
   ${defaultColors}
-  ${inputs}
-  ${selects}
+  ${inputsStyles}
+  ${selectsStyle}
   ${scrollBars}
   
   body {

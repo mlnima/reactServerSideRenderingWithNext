@@ -2,7 +2,7 @@ import React, {useEffect, FC, memo, useState} from 'react';
 import {useRouter} from "next/router";
 import {loading} from "@store_toolkit/clientReducers/globalStateReducer";
 import {useAppDispatch} from "@store_toolkit/hooks";
-import ActiveLoading from "ui/src/ActiveLoading";
+import {ActiveLoading} from "ui";
 
 interface PropTypes{
     isLoading:boolean

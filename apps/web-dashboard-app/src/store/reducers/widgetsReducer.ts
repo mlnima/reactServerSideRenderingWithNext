@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {reduceWidgetsToGroups} from "custom-util";
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";

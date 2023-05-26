@@ -4,7 +4,7 @@
   "extends": "./base.json",
   "compilerOptions": {
     "module": "commonjs",
-    "target": "es2021",
+    "target": "es5",
     "sourceMap": true,
     "jsx": "preserve",
     "lib": [
