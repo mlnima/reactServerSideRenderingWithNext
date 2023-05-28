@@ -4,7 +4,6 @@ require('dotenv').config({path: '../../.env'});
 const rewrites = require('./nextConfigs/rewrites')
 const pluginsConfig = require('./nextConfigs/next.configPlugins')
 const withPlugins = require('next-compose-plugins');
-const nextTranslate = require('next-translate-plugin')
 
 
 const nextConfig = {
