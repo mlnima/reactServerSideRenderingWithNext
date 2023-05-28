@@ -1,6 +1,6 @@
 import React, {ChangeEvent, FC, useEffect, useMemo, useState} from "react";
 import styled from "styled-components";
-import inputValueSimplifier from "custom-util/src/inputsUtils/inputValueSimplifier";
+import {inputValueSimplifier} from "custom-util";
 import languagesOptions from "@variables/languagesOptions";
 import {updateSettingAction} from "@store/reducers/settingsReducer";
 import MonacoEditor from "@components/common/MonacoEditor";

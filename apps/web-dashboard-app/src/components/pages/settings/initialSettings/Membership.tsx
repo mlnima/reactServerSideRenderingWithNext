@@ -6,7 +6,7 @@ import {convertVariableNameToName} from "custom-util";
 import {useAppDispatch} from "@store/hooks";
 import {useSelector} from "react-redux";
 import {editMembershipSettingsAction, updateSettingAction} from "@store/reducers/settingsReducer";
-import inputValueSimplifier from "custom-util/src/inputsUtils/inputValueSimplifier";
+import {inputValueSimplifier} from "custom-util";
 
 const Style = styled.div`
 

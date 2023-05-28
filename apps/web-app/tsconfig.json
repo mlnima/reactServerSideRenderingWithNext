@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "tsconfig/nextjs.json",
   "compilerOptions": {
-    "outDir": "./dist",
+    "outDir": ".next",
     "baseUrl": ".",
     "paths": {
       "@store_toolkit/*": [
@@ -20,7 +20,8 @@
         "name": "next"
       }
     ],
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "target": "esnext"
   },
   "include": [
     "next-env.d.ts",
@@ -30,6 +31,7 @@
     ".next/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    ".next"
   ]
 }

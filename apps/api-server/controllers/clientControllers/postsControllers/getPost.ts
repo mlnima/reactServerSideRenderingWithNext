@@ -1,6 +1,7 @@
 import {postSchema} from 'models';
 import {mongoIdValidator} from 'custom-server-util';
 import {arraySortRandom} from 'custom-util';
+import {Meta} from 'typescript-types'
 
 const defaultFieldForPosts = [
     'title',
@@ -67,21 +68,21 @@ const buildFindQuery = (req) => {
 const buildRelatedPosts = async (post) => {
     const relatedActors = await getRelatedPosts(
         'actors',
-        arraySortRandom((post?.actors || []))?.slice(0, 5)?.map(meta => meta._id),
+        arraySortRandom((post?.actors || []))?.slice(0, 5)?.map((meta:Meta) => meta._id),
         post._id,
         post.postType
     );
 
     const relatedCategories = await getRelatedPosts(
         'categories',
-        arraySortRandom((post?.categories || []))?.slice(0, 5)?.map(meta => meta._id),
+        arraySortRandom((post?.categories || []))?.slice(0, 5)?.map((meta:Meta) => meta._id),
         post._id,
         post.postType
     );
 
     const relatedTags = await getRelatedPosts(
         'tags',
-        arraySortRandom((post?.tags || [])).reverse()?.slice(0, 5)?.map(meta => meta._id),
+        arraySortRandom((post?.tags || [])).reverse()?.slice(0, 5)?.map((meta:Meta) => meta._id),
         post._id,
         post.postType
     );

@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useState} from "react";
 import styled from "styled-components";
-import inputValueSimplifier from "custom-util/src/inputsUtils/inputValueSimplifier";
+import {inputValueSimplifier} from "custom-util";
 import {useAppDispatch} from "@store/hooks";
 import {getPostScrapedDataAction} from "@store/reducers/postsReducer";
 

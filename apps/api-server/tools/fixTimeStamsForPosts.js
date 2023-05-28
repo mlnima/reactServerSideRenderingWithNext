@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 require('dotenv').config()
-const postSchema = require('reacticum-server/models/postSchema')
+const {postSchema} = require('models')
 
 const mongoDBConnectionUrl = process.env.DB_LOCAL === 'true' ?
     `mongodb://localhost:${process.env.DB_PORT}/${process.env.DB_NAME}` :

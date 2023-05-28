@@ -1,11 +1,21 @@
 import AxiosInstance from "../lib/AxiosInstance";
 import {queryUniquer} from 'custom-util'
 
-export const clientAPIRequestGetMetas = async (currentQuery, metaType) => {
+interface IGetMetasCurrentQuery{
+    sort?:string,
+    keyword?:string,
+    startWith?:string,
+    size?:string,
+    page?:string,
+    lang?:string,
+}
+
+
+export const clientAPIRequestGetMetas = async (currentQuery:IGetMetasCurrentQuery, metaType:string) => {
     const sort = currentQuery?.sort ? {sort: currentQuery?.sort} : {}
     const keyword = currentQuery?.keyword ? {keyword: encodeURIComponent(queryUniquer(currentQuery?.keyword))} : {}
     const startWith = currentQuery?.startWith ? {startWith: currentQuery?.startWith} : {}
-    const size = currentQuery.size ? {size: currentQuery.size} : {}
+    const size = currentQuery?.size ? {size: currentQuery.size} : {}
     const page = currentQuery?.page ? {page: currentQuery?.page} : {}
     const lang = currentQuery?.lang ? {lang: currentQuery?.lang} : {}
 
@@ -36,7 +46,16 @@ export const  clientAPIRequestResetMetaImage = async (_id: string) => {
     return await AxiosInstance.post('/api/v1/posts/resetMetaImage', body)
 }
 
-export const clientAPIRequestGetTags = async (queryData)=>{
+interface IGetTagsQuery{
+    sort?:string,
+    keyword?:string,
+    startWith?:string,
+    size?:string,
+    page?:string,
+    lang?:string,
+}
+
+export const clientAPIRequestGetTags = async (queryData:IGetTagsQuery)=>{
 
     const sort = queryData?.sort ? {sort: queryData?.sort} : {}
     const keyword = queryData?.keyword ? {keyword: encodeURIComponent(queryData?.keyword as string)} : {}

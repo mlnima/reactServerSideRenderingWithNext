@@ -15,6 +15,8 @@
     "start": " node next-production-server",
     "dev": "ts-node --transpile-only ./next-dev-server.js",
     "build:next": "next build",
+    "clean:bash": "rm -rf .next",
+    "clean:cmd": "rmdir /s /q .next",
     "test": "jest --watch"
   },
   "dependencies": {
@@ -33,6 +35,7 @@
     "@vercel/edge": "^0.3.1",
     "@vercel/og": "^0.5.6",
     "add-to-calendar-button": "^2.1.1",
+    "api-requests": "*",
     "axios": "^0.27.2",
     "cross-env": "^7.0.3",
     "custom-util": "*",
@@ -69,6 +72,7 @@
     "react-dropzone": "^14.2.3",
     "react-fontawesome": "^1.7.1",
     "react-grid-dnd": "^2.1.2",
+    "react-hooker-lib": "*",
     "react-icons": "^4.8.0",
     "react-images-uploading": "^3.1.7",
     "react-redux": "^8.0.2",
@@ -86,9 +90,7 @@
     "styled-components": "^5.3.9",
     "tsconfig": "*",
     "typescript-types": "*",
-    "api-requests":"*",
-    "ui": "*",
-    "react-hooker-lib": "*"
+    "ui": "*"
   },
   "_moduleAliases": {
     "@_variables": "_variables"

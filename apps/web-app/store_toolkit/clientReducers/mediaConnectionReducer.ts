@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "@store_toolkit/store";
-import {MediaConnectionState} from "typescript-types/src/storeTypes/MediaConnectionState";
+import {MediaConnectionState} from "typescript-types";
 
 const initialState: MediaConnectionState = {
     mediaCall: false,

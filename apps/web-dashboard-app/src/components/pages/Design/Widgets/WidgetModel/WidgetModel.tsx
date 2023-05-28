@@ -9,7 +9,7 @@ import WidgetHeaderControl from "./WidgetHeaderControl/WidgetHeaderControl";
 import {Widget} from "typescript-types";
 import {useAppDispatch} from "@store/hooks";
 import {updateWidgetAction} from "@store/reducers/widgetsReducer";
-import inputValueSimplifier from "custom-util/src/inputsUtils/inputValueSimplifier";
+import {inputValueSimplifier} from "custom-util";
 
 interface WidgetModelPropTypes {
     widget: Widget

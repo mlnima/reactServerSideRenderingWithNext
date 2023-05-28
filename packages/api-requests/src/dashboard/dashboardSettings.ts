@@ -6,6 +6,6 @@ export const dashboardAPIRequestGetSettings = async (settings:string[])=>{
     return await AxiosInstance.get(`/api/admin/settings/getMultipleSetting?${settingsQuery}&token=${localStorage.wt}`)
 }
 
-export const dashboardAPIRequestUpdateSetting = async (type,data)=>{
+export const dashboardAPIRequestUpdateSetting = async (type:string,data:{})=>{
     return await AxiosInstance.post('/api/admin/settings/update',{type,data,token: localStorage.wt})
 }

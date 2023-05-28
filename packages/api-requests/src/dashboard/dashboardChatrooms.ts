@@ -19,6 +19,6 @@ export const dashboardAPIRequestGetChatrooms  = async ()=>{
     return await AxiosInstance.get(`/api/admin/chatrooms/getChatrooms?token=${localStorage.wt}`)
 }
 
-export const dashboardAPIRequestUpdateChatroom  = async (data)=>{
+export const dashboardAPIRequestUpdateChatroom  = async (data:{})=>{
     return await AxiosInstance.patch(`/api/admin/chatrooms/updateChatroom`,{data,token:localStorage.wt})
 }

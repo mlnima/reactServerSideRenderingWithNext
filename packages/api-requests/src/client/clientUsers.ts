@@ -1,18 +1,18 @@
 import AxiosInstance from "../lib/AxiosInstance";
 
-export const clientAPIRequestDeleteChatroomMessage = async (chatroomId,messageId)=>{
+export const clientAPIRequestDeleteChatroomMessage = async (chatroomId:string,messageId:string)=>{
     return await AxiosInstance.delete(`/api/admin/chatrooms/deleteChatroomMessage?chatroomId=${chatroomId}&messageId=${messageId}&token=${localStorage.wt}`)
 }
 
-export const clientAPIRequestDeleteConversation = async (_id)=>{
+export const clientAPIRequestDeleteConversation = async (_id:string)=>{
     return await AxiosInstance.post(`/api/v1/users/deleteConversation?_id=${_id}&token=${localStorage.wt}`)
 }
 
-export const clientAPIRequestFollowUser = async (_id)=>{
+export const clientAPIRequestFollowUser = async (_id:string)=>{
     return await AxiosInstance.patch(`/api/v1/users/followUser`,{_id, token: localStorage.wt})
 }
 
-export const clientAPIRequestGetConversations = async (_id)=>{
+export const clientAPIRequestGetConversations = async (_id:string)=>{
     return await AxiosInstance.post(`/api/v1/users/getConversations`, {_id,token: localStorage.wt})
 }
 
@@ -71,22 +71,22 @@ export const clientAPIRequestGetUserPageData = async ({ userWhoRequestIt, userna
 };
 
 
-export const clientAPIRequestGetUsers = async (usersList)=>{
+export const clientAPIRequestGetUsers = async (usersList: { _id:string }[])=>{
     const userListQuery = usersList.map((user)=>`_id=${user._id}`).join('&');
     return await AxiosInstance.get(`/api/v1/users/getUsers?${userListQuery}&token=${localStorage.wt}`)
 }
 
-export const clientAPIRequestRegisterUser = async (data)=>{
+export const clientAPIRequestRegisterUser = async (data:{})=>{
     return await AxiosInstance.post(`/api/v1/users/register`,data)
 }
 
-export const clientAPIRequestResetPassword = async (data)=>{
+export const clientAPIRequestResetPassword = async (data:{})=>{
     return await AxiosInstance.post(`/api/v1/users/resetPassword`,{data, token: localStorage.wt})
 }
 
 
 //** it is unused and should be removed
-export const clientAPIRequestSendPrivateMessage = async (senderId, receiverId, content): Promise<void> => {
+export const clientAPIRequestSendPrivateMessage = async (senderId:string, receiverId:string, content:{}): Promise<void> => {
     return await AxiosInstance.post(`/api/v1/users/sendPrivateMessage`, {
         senderId,
         receiverId,
@@ -95,6 +95,6 @@ export const clientAPIRequestSendPrivateMessage = async (senderId, receiverId, c
     })
 }
 
-export const clientAPIRequestUnFollowUser = async (_id)=>{
+export const clientAPIRequestUnFollowUser = async (_id:string)=>{
     return await AxiosInstance.patch(`/api/v1/users/unFollowUser`,{_id, token: localStorage.wt})
 }

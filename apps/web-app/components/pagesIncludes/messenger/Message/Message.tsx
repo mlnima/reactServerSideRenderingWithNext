@@ -5,8 +5,7 @@ import {Styles} from "./Message.styles";
 import Link from "next/link";
 import {UserPreviewImage} from "ui";
 import AdminActionOnMessageMenu from "@components/pagesIncludes/chatroom/ChatRoomMessageArea/AdminActionOnMessageMenu";
-import {ChatroomMessage} from "typescript-types";
-import {IMessengerConversationMessage} from "typescript-types/src/messengerTypes/IMessengerConversationMessage";
+import {IMessengerConversationMessage,ChatroomMessage} from "typescript-types";
 
 interface IProps {
     message: IMessengerConversationMessage;

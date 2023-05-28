@@ -2,25 +2,19 @@
   "name": "ui-components",
   "version": "1.0.0",
   "private": true,
-  "license": "MIT",
-  "main": "src/index.ts",
-  "types": "src/index.ts",
-  "files": [
-    "dist/**"
-  ],
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "clean": "rm -rf dist",
+    "clean:bash": "rm -rf dist",
+    "clean:cmd": "rmdir /s /q dist",
     "dev": "tsc -w",
     "lint": "TIMING=1 eslint \"src/**/*.ts*\"",
     "test": "jest"
   },
-  "jest": {
-    "preset": "jest-presets/jest/node"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
+  "files": [
+    "dist/**"
+  ],
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -40,6 +34,6 @@
     "react-loading": "^2.0.3",
     "react-fontawesome": "^1.7.1",
     "tsconfig": "*",
-    "typescript": "^5.0.4"
+    "typescript": "latest"
   }
 }

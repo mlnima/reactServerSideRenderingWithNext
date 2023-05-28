@@ -1,4 +1,4 @@
-const ObjectToQuery = (data)=>{
+const ObjectToQuery = (data:{})=>{
 
     return '?' + new URLSearchParams(data).toString()
 }

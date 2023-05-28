@@ -1,10 +1,10 @@
 import {userSchema} from 'models';
 
-const fetchUserData = async(userId)=> {
+const fetchUserData = async(_id:string)=> {
     try {
-        return await userSchema.findById({_id: userId}).exec();
-    } catch (err) {
-        console.error(err);
+        return await userSchema.findById(_id).exec();
+    } catch (error) {
+        console.error(error);
         return null;
     }
 }

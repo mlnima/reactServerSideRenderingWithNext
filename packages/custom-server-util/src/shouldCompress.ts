@@ -1,6 +1,7 @@
 import compression from 'compression';
+import {Request, Response} from 'express';
 
-const shouldCompress = (req, res) => {
+const shouldCompress = (req:Request, res:Response) => {
     if (req.headers['x-no-compression']) {
         return false
     }

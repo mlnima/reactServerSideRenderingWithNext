@@ -11,7 +11,7 @@ import MetasCardsRenderer from "../../components/includes/cards/CardsRenderer/Me
 import {Store} from "typescript-types";
 import getMetasAction from "@store_toolkit/clientReducers/postsReducers/getMetasAction";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
-import textContentReplacer from "custom-util/src/string-util/textContentReplacer";
+import {textContentReplacer} from "custom-util";
 import {getTextDataWithTranslation} from "custom-util";
 
 const PageStyle = styled.div`

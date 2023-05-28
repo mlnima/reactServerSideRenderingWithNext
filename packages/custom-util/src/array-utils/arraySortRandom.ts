@@ -1,13 +1,12 @@
-const arraySortRandom = (arrayData:any)=>{
-    if (Array?.isArray(arrayData)){
+const arraySortRandom = (inputArray:any[])=>{
+    if (Array?.isArray(inputArray)){
         try {
-            return ([...arrayData] || [])?.sort(() => Math.random() - 0.5);
+            return ([...inputArray] || [])?.sort(() => Math.random() - 0.5);
 
         }catch (err){
-            return arrayData
+            return inputArray
         }
-    }else return arrayData
-
+    }else return inputArray
 
 }
 

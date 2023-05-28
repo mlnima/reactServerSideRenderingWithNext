@@ -4,7 +4,7 @@ import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {useAppDispatch} from "@store_toolkit/hooks";
 import {Store} from "typescript-types";
-import shortNumber from "custom-util/src/math-util/shortNumber";
+import {shortNumber} from "custom-util";
 import likePostAction from "@store_toolkit/clientReducers/postsReducers/likePostAction";
 import disLikePostAction from "@store_toolkit/clientReducers/postsReducers/disLikePostAction";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";

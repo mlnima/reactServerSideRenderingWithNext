@@ -10,7 +10,7 @@ import MetasRenderer from "../../components/pagesIncludes/metas/MetasRenderer";
 import getTagsAction from "@store_toolkit/clientReducers/postsReducers/getTagsAction";
 import {useRouter} from "next/router";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
-import textContentReplacer from "custom-util/src/string-util/textContentReplacer";
+import {textContentReplacer} from "custom-util";
 import {getTextDataWithTranslation} from "custom-util";
 
 const PageStyle = styled.div`

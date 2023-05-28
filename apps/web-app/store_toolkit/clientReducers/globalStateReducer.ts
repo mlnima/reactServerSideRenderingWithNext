@@ -2,7 +2,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {RootState} from "../store";
 import {GlobalState} from "typescript-types";
-import headerSizeCalculator from "custom-util/src/vanilla-ui-utils/headerSizeCalculator";
+import {headerSizeCalculator} from "custom-util";
 
 const initialState: GlobalState = {
     loginRegisterFormPopup: false,

@@ -19,6 +19,8 @@
     "ResetAdminPassword": "node ./tools/resetAdminPassword.js",
     "build:server": "tsc --project tsconfig.json",
     "update:packages": "npm update --save/--save-dev -f",
+    "clean:bash": "rm -rf dist",
+    "clean:cmd": "rmdir /s /q dist",
     "test": "jest --watch"
   },
   "dependencies": {

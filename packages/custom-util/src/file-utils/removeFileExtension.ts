@@ -1,4 +1,4 @@
-const removeFileExtension = async (fileName) => {
+const removeFileExtension = async (fileName:string) => {
     return new Promise((resolve, reject) => {
         const index = fileName.lastIndexOf('.');
         if (index > 0 && index < fileName.length - 1) {

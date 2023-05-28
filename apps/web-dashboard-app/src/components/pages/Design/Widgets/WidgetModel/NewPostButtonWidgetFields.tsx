@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {UniqueDataTypes, WidgetSettingsPropTypes} from "typescript-types";
 import TextInputFieldForWidget
     from "@components/pages/Design/Widgets/WidgetModel/TextInputFieldForWidget/TextInputFieldForWidget";
-import postTypes from "data-structures/src/postTypes";
+import {postTypes} from "data-structures";
 
 const Style = styled.div``;
 

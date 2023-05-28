@@ -1,13 +1,15 @@
+import * as process from "process";
 
 const hostnameChecker = (hostname:string)=>{
     const splitHostname = hostname.split('.')
     return splitHostname.slice(-2).join('.')
 }
 //process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES
-const isImageAllowedForNextImage = (url:string,AllowedSources)=>{
+const isImageAllowedForNextImage = (url:string)=>{
     try {
         if (!!url){
-            const AllowedSource = AllowedSources ? AllowedSources.split(' '):[]
+
+            const AllowedSource = process.env?.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES ? process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES.split(' '):[]
             //@ts-ignore
             const parseUrl = new URL(url)
 

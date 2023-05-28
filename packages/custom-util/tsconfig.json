@@ -1,14 +1,10 @@
 {
+  "extends": "tsconfig/internal-packages.json",
   "compilerOptions": {
-    "lib": [
-      "ES2015",
-      "dom"
-    ],
-    "module": "CommonJS",
-    "outDir": "./dist",
-    "rootDir": "."
+    "outDir": "dist",
+    "rootDir": ".",
+    "jsx": "react"
   },
-  "exclude": ["node_modules"],
-  "extends": "tsconfig/base.json",
-  "include": ["src","index.ts"]
+  "exclude": ["node_modules","dist"],
+  "include": ["src","src/**/*.ts","src/*.ts"]
 }

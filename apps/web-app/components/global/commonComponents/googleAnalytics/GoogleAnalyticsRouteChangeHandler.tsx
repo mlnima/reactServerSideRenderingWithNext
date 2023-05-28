@@ -1,6 +1,7 @@
 import {FC, useEffect} from "react";
 import {useRouter} from "next/router";
-import * as ga from 'custom-util/src/analytics-utils/google-analytics';
+import {googleAnalyticsEvent,googleAnalyticsPageView} from 'custom-util'
+
 
 
 interface PropTypes {
@@ -13,7 +14,7 @@ const GoogleAnalyticsRouteChangeHandler: FC<PropTypes> = ({googleAnalyticsId}) =
 
     useEffect(() => {
         const handleRouteChange = (url: string) => {
-            ga.pageView(url,googleAnalyticsId);
+            googleAnalyticsPageView(url,googleAnalyticsId);
         };
 
         // When the route changes, call `handleRouteChange`

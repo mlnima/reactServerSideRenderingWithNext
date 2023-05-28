@@ -2,25 +2,19 @@
   "name": "models",
   "version": "1.0.0",
   "private": true,
-  "license": "MIT",
-  "main": "src/index.ts",
-  "types": "src/index.ts",
-  "files": [
-    "dist/**"
-  ],
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "clean": "rm -rf dist",
+    "clean:bash": "rm -rf dist",
+    "clean:cmd": "rmdir /s /q dist",
     "dev": "tsc -w",
     "lint": "TIMING=1 eslint \"src/**/*.ts*\"",
     "test": "jest"
   },
-  "jest": {
-    "preset": "jest-presets/jest/node"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
+  "files": [
+    "dist/**"
+  ],
   "dependencies": {
     "@types/jest": "^29.5.0",
     "eslint": "^8.36.0",
@@ -28,7 +22,8 @@
     "jest-presets": "*",
     "eslint-config-custom": "*",
     "tsconfig": "*",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "mongoose": "^6.9.0"
   }
 
 }

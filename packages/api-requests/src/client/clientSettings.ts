@@ -1,7 +1,7 @@
 import AxiosInstance from "../lib/AxiosInstance";
 
-export const clientAPIRequestGetUncachedSettings = async (requireSettings)=>{
-    const settingsQuery = `?${requireSettings.map(s => 'setting=' + s).join('&')}`;
+export const clientAPIRequestGetUncachedSettings = async (requireSettings:string[])=>{
+    const settingsQuery = `?${requireSettings.map((setting:string) => 'setting=' + setting).join('&')}`;
     return await AxiosInstance.get(`/api/admin/settings/getMultipleSetting${settingsQuery}&token=${localStorage.wt}`);
 }
 

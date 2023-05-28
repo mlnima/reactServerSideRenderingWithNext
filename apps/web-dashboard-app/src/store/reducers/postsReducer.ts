@@ -4,7 +4,7 @@ import {RootState} from "../store";
 import {AxiosError, AxiosResponse} from "axios";
 import {Meta,Post} from "typescript-types";
 import {loading, setAlert} from "./globalStateReducer";
-import {PostRaw} from "typescript-types/src/Post";
+import {PostRaw} from "typescript-types";
 import {
     AxiosInstance,
     dashboardAPIRequestGetPosts,

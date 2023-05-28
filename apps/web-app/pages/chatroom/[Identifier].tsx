@@ -18,7 +18,7 @@ import dynamic from "next/dynamic";
 import ChatroomTopbar from "@components/pagesIncludes/chatroom/ChatroomTopbar";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
 import Csr from "@components/global/commonComponents/Csr";
-import headerSizeCalculator from "custom-util/src/vanilla-ui-utils/headerSizeCalculator";
+import {headerSizeCalculator} from "custom-util";
 import {loading} from "@store_toolkit/clientReducers/globalStateReducer";
 
 const Soft404 = dynamic(() => import('@components/includes/Soft404/Soft404'))

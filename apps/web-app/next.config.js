@@ -1,51 +1,33 @@
- /** @type {import('next').NextConfig} */
-
-require('dotenv').config({path: '../../.env'})
-const withPlugins = require('next-compose-plugins');
-const pluginsConfig = require('./nextConfigs/next.configPlugins')
+/** @type {import('next').NextConfig} */
+require('module-alias/register')
+require('dotenv').config({path: '../../.env'});
 const rewrites = require('./nextConfigs/rewrites')
-const redirects = require('./nextConfigs/redirects')
-const nextImageConfig = require('./nextConfigs/nextImageConfig')
+const pluginsConfig = require('./nextConfigs/next.configPlugins')
+const withPlugins = require('next-compose-plugins');
+const nextTranslate = require('next-translate-plugin')
 
 
-// const MY_PREFIX = /^REACT_APP_/i;
-//
-// const transformedEnv = Object.entries(process.env)
-//     .filter(([key, value]) => MY_PREFIX.tests(key))
-//     .reduce((finalEnvs, current) => {
-//         const envKey = current[0].replace('REACT_APP_', 'NEXT_PUBLIC_')
-//         finalEnvs[envKey] = current[1]
-//         return finalEnvs
-//     }, {})
-//
-//
-// import * as entry from
-
-
-const nextConfigs = {
-    ...nextImageConfig,
-    // distDir: '../../.next',
-    rewrites,
-    reactStrictMode: false,
-    // experimental: {appDir: true},
-    // runtime: 'experimental-edge',
-    // redirects,
-    swcMinify: true,
+const nextConfig = {
     eslint: {
-        ignoreDuringBuilds: true
+        ignoreDuringBuilds: true,
     },
-    compiler: {
-        styledComponents: true
-    },
+    reactStrictMode: false,
+    rewrites,
     transpilePackages: [
         'api-requests',
+        'custom-server-util',
+        'custom-util',
+        'data-structures',
         'typescript-types',
         'react-hooker-lib',
         'ui',
+        'ui-components',
     ],
-    // env: transformedEnv
-}
+    typescript: {
+        ignoreBuildErrors: true,
+    },
+};
 
-module.exports = withPlugins(pluginsConfig, nextConfigs);
-// module.exports = nextConfigs;
-
+//module.exports = nextConfig;
+module.exports = withPlugins(pluginsConfig, nextConfig)
+// module.exports = nextTranslate( nextConfig)

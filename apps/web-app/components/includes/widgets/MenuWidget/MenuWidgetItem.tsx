@@ -11,7 +11,7 @@ interface MenuWidgetItemPropTypes {
 
 const MenuWidgetItem: FC<MenuWidgetItemPropTypes> = ({menuItem, setOpen}) => {
 
-    const {t,lang} = useTranslation('event');
+    const {t,lang} = useTranslation('common');
     const {locale} = useRouter()
 
     const linkNameWithTranslate = useMemo(() => {

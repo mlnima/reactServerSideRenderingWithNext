@@ -4,7 +4,7 @@ import {faCircleUser} from "@fortawesome/free-solid-svg-icons/faCircleUser";
 import {useSelector} from "react-redux";
 import {Store, User} from "typescript-types";
 import {Styles} from "./MessengerConversationPreview.styles";
-import {IMessengerConversation} from "typescript-types/src/messengerTypes/IMessengerConversation";
+import {IMessengerConversation} from "typescript-types";
 import {formatDistance} from 'date-fns'
 import {faCheck} from "@fortawesome/free-solid-svg-icons/faCheck";
 

@@ -8,7 +8,7 @@ import styled from "styled-components";
 import {ratingCalculator} from "custom-util";
 import Autoplay from "embla-carousel-autoplay";
 import {Post,Store} from "typescript-types";
-import shortNumber from "custom-util/src/math-util/shortNumber";
+import {shortNumber} from "custom-util";
 
 const ArticlePostCard = dynamic(() => import('../../cards/postsCards/ArticlePostCard'))
 const PromotionPostCard = dynamic(() => import('../../cards/postsCards/PromotionPostCard'))

@@ -28,6 +28,7 @@ import {MessengerStore} from "./src/messengerStoreTypes/MessengerStore";
 import {UserState} from "./src/storeTypes/UserState";
 import {WidgetsState} from "./src/storeTypes/WidgetsState";
 import {Post} from "./src/Post";
+import {PostRaw} from "./src/Post";
 import {Meta} from "./src/Meta";
 import {Widget} from "./src/widgets/Widget";
 import {PageTypes} from "./src/Page";
@@ -78,6 +79,7 @@ export type {
     DashboardStore,
     MessengerStore,
     Post,
+    PostRaw,
     Meta,
     UserState,
     IEmail,

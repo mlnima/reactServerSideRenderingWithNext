@@ -1,6 +1,6 @@
 // import {isArray} from "lodash";
 
-export const uniqArrayBy = (dataArray : any[], key:string)=>{
+export const uniqArrayBy = (dataArray : {}[], key:string)=>{
     try {
         if (Array.isArray(dataArray)){
             return  [...new Map(dataArray.map((item:any) => [item[key], item])).values()]
@@ -12,8 +12,6 @@ export const uniqArrayBy = (dataArray : any[], key:string)=>{
         console.log(error)
         return dataArray || []
     }
-    //@ts-ignore
-
 }
 
 export default uniqArrayBy;

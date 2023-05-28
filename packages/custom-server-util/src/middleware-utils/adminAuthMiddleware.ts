@@ -1,25 +1,38 @@
 import jwt from 'jsonwebtoken';
 import {userSchema} from 'models';
+import {Request, Response, NextFunction} from 'express';
 
-const adminAuthMiddleware = async (req, res, next) => {
-    try {
-        const token = req.body.token || req.query.token
-        const verifiedToken = jwt.verify(token, process.env.JWT_KEY)
-        await userSchema.findById(verifiedToken._id).exec().then(user => {
-            if (user.role === 'administrator') {
-                req.userData = verifiedToken
-                next()
-            } else {
-                return res.status(401).json({
-                    message: 'Unauthorized'
-                })
-            }
-        })
+interface RequestWithUserData extends Request {
+    userData?: {};
+}
 
-    } catch ( error ) {
+const adminAuthMiddleware = async (req: RequestWithUserData, res: Response, next: NextFunction) => {
+    const token = req.body.token || req.query.token
+    if (!token) {
         return res.status(401).json({
-            message: 'Unauthorized'
-        })
+            message: 'No token provided'
+        });
+    }
+
+    let verifiedToken;
+
+    try {
+        verifiedToken = jwt.verify(token, process.env.JWT_KEY as string)
+    } catch (error) {
+        return res.status(401).json({
+            message: 'Invalid token'
+        });
+    }
+
+    //@ts-ignore
+    const user = await userSchema.findById(verifiedToken._id).exec();
+    if (user && user.role === 'administrator') {
+        req.userData = verifiedToken
+        next()
+    } else {
+        return res.status(401).json({
+            message: 'User not authorized'
+        });
     }
 };
 

@@ -1,3 +1,5 @@
+
+
 const {postTypes} = require("data-structures") ;
 const postTypeQueryMatcher = `:postType(${postTypes.join('|')})?`
 
@@ -15,6 +17,7 @@ const apiAndFileServerProxy = process.env.NEXT_PUBLIC_API_SERVER_URL === process
 
 
 module.exports = () => {
+
     return {
         beforeFiles: [
             ...apiAndFileServerProxy,

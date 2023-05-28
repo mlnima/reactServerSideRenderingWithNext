@@ -1,3 +1,8 @@
+export { default as googleAnalyticsEvent } from './analytics-utils/google-analytics/googleAnalyticsEvent';
+export { default as googleAnalyticsPageView } from './analytics-utils/google-analytics/googleAnalyticsPageView';
+export { default as headerSizeCalculator } from './vanilla-ui-utils/headerSizeCalculator';
+export { default as inputValueSimplifier } from './inputsUtils/inputValueSimplifier';
+export { default as shortNumber } from './math-utils/shortNumber';
 export { default as arraySortRandom } from './array-utils/arraySortRandom';
 export { default as capitalizeFirstLetter } from './string-util/capitalizeFirstLetter';
 export { default as capitalizeFirstLetters } from './string-util/capitalizeFirstLetters';
@@ -8,12 +13,11 @@ export { default as isEmptyObject } from './object-util/isEmptyObject';
 export { default as isImageAllowedForNextImage } from './url-util/isImageAllowedForNextImage';
 export { default as isInternalUrl } from './url-util/isInternalUrl';
 export { default as isJsonString } from './string-util/isJsonString';
-export { default as isUserFromExternalLink } from './url-util/isUserFromExternalLink';
 export { default as queryUniquer } from './url-util/queryUniquer';
 export { default as mongoIdValidator } from './string-util/mongoIdValidatorClient';
-export { default as randomNumberGenerator } from './math-util/randomNumberGenerator';
-export { default as rangeNumGenerator } from './math-util/rangeNumGenerator';
-export { default as ratingCalculator } from './math-util/ratingCalculator';
+export { default as randomNumberGenerator } from './math-utils/randomNumberGenerator';
+export { default as rangeNumGenerator } from './math-utils/rangeNumGenerator';
+export { default as ratingCalculator } from './math-utils/ratingCalculator';
 export { default as uniqArrayBy } from './array-utils/uniqArrayBy';
 export { default as reduceArrayOfDataToIds } from './array-utils/reduceArrayOfDataToIds';
 export { default as reduceWidgetsToGroups } from './array-utils/reduceWidgetsToGroups';
@@ -30,84 +34,3 @@ export { default as removeFileExtension } from './file-utils/removeFileExtension
 export { default as blobToBase64 } from './file-utils/blobToBase64';
 export { default as emailValidator } from './validators/emailValidator';
 export { default as socket } from './socket-utils/socketIoClient';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import arraySortRandom from "./array-utils/arraySortRandom";
-// import capitalizeFirstLetter from "./string-util/capitalizeFirstLetter";
-// import capitalizeFirstLetters from "./string-util/capitalizeFirstLetters";
-// import convertVariableNameToName from "./string-util/convertVariableNameToName";
-// import fileTypeDetector from "./string-util/fileTypeDetector";
-// import isAbsolutePath from "./url-util/isAbsolutePath";
-// import isEmptyObject from "./object-util/isEmptyObject"
-// import isImageAllowedForNextImage from "./url-util/isImageAllowedForNextImage";
-// import isInternalUrl from "./url-util/isInternalUrl";
-// import isJsonString from "./string-util/isJsonString";
-// import isUserFromExternalLink from "./url-util/isUserFromExternalLink";
-// import queryUniquer from "./url-util/queryUniquer";
-// import mongoIdValidator from "./string-util/mongoIdValidatorClient";
-// import randomNumberGenerator from "./math-util/randomNumberGenerator";
-// import rangeNumGenerator from "./math-util/rangeNumGenerator";
-// import ratingCalculator from "./math-util/ratingCalculator";
-// import uniqArrayBy from "./array-utils/uniqArrayBy";
-// import reduceArrayOfDataToIds from "./array-utils/reduceArrayOfDataToIds";
-// import reduceWidgetsToGroups from "./array-utils/reduceWidgetsToGroups";
-// import textContentReplacer from "./string-util/textContentReplacer";
-// import getTextDataWithTranslation from "./object-util/getTextDataWithTranslation";
-// import convertMetasTypeToPlural from "./string-util/convertMetasTypeToPlural";
-// import convertMetasTypeToSingular from "./string-util/convertMetasTypeToSingular";
-//
-// export {
-//     convertMetasTypeToPlural,
-//     convertMetasTypeToSingular,
-//     textContentReplacer,
-//     getTextDataWithTranslation,
-//     arraySortRandom,
-//     reduceWidgetsToGroups,
-//     reduceArrayOfDataToIds,
-//     capitalizeFirstLetter,
-//     capitalizeFirstLetters,
-//     convertVariableNameToName,
-//     fileTypeDetector,
-//     isAbsolutePath,
-//     isEmptyObject,
-//     isImageAllowedForNextImage,
-//     isInternalUrl,
-//     isJsonString,
-//     isUserFromExternalLink,
-//     mongoIdValidator,
-//     randomNumberGenerator,
-//     rangeNumGenerator,
-//     ratingCalculator,
-//     uniqArrayBy,
-//     queryUniquer
-// }

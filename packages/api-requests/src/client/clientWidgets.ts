@@ -11,6 +11,6 @@ export const clientAPIRequestGetWidgets = async (widgets: string[], locale: stri
     return await AxiosInstance.get(`/api/v1/widgets/getWidgets${widgetsQuery}`)
 }
 
-export const clientAPIRequestSaveFormData = async (data)=>{
+export const clientAPIRequestSaveFormData = async (data:{})=>{
     return await AxiosInstance.post(`/api/v1/forms/saveFormData`,{data})
 }

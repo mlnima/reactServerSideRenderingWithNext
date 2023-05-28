@@ -20,8 +20,7 @@ import {
 } from "@store_toolkit/clientReducers/messengerReducer";
 import {deleteAConversationAction} from "@store_toolkit/clientReducers/messengerActions/deleteAConversation";
 import {useRouter} from "next/router";
-import headerSizeCalculator from "custom-util/src/vanilla-ui-utils/headerSizeCalculator";
-import {IMessengerConversation} from "typescript-types/src/messengerTypes/IMessengerConversation";
+
 import {
     clientAPIRequestLoadOlderMessages,
     clientAPIRequestGetConversationsList,

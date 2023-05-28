@@ -21,6 +21,8 @@
     "update:packages": "npm update --save/--save-dev -f",
     "msmp": "ts-node ./testMailServer/sendEmailBySMTPConnection",
     "mtra": "ts-node ./testMailServer/sendEmailByCreateTransport",
+    "clean:bash": "rm -rf dist",
+    "clean:cmd": "rmdir /s /q dist",
     "test": "jest --watch"
   },
   "dependencies": {

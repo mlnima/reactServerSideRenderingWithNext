@@ -2,25 +2,20 @@
   "name": "custom-server-util",
   "version": "1.0.0",
   "private": true,
-  "license": "MIT",
-  "main": "src/index.ts",
-  "types": "src/index.ts",
-  "files": [
-    "dist/**"
-  ],
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "type": "commonjs",
   "scripts": {
     "build": "tsc",
-    "clean": "rm -rf dist",
+    "clean:bash": "rm -rf dist",
+    "clean:cmd": "rmdir /s /q dist",
     "dev": "tsc -w",
     "lint": "TIMING=1 eslint \"src/**/*.ts*\"",
     "test": "jest"
   },
-  "jest": {
-    "preset": "jest-presets/jest/node"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
+  "files": [
+    "dist/**"
+  ],
   "dependencies": {
     "fs": "^0.0.1-security",
     "http": "^0.0.0",
@@ -34,7 +29,8 @@
     "tsconfig": "*",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.9.0",
-    "models": "^1.0.0",
-    "typescript": "^5.0.4"
+    "models": "*",
+    "typescript": "latest",
+    "fs-extra": "^11.1.0"
   }
 }

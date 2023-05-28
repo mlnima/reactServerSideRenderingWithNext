@@ -16,7 +16,7 @@ import {useAppDispatch} from "@store_toolkit/hooks";
 import updatePostAction from "@store_toolkit/clientReducers/postsReducers/updatePostAction";
 import {reduceArrayOfDataToIds} from "custom-util";
 import {clientAPIRequestUploadImage} from "api-requests";
-import randomNumberGenerator from "custom-util/src/math-util/randomNumberGenerator";
+import {randomNumberGenerator} from "custom-util";
 
 const PostLocation = dynamic(() => import('@components/includes/PostEditorForm/common/PostLocation'));
 

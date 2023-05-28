@@ -6,7 +6,7 @@ import {getAConversationAction} from "@store_toolkit/clientReducers/messengerAct
 import {
     loadOlderMessagesAction
 } from "@store_toolkit/clientReducers/messengerActions/loadOlderMessagesAction";
-import {IMessengerConversation} from "typescript-types/src/messengerTypes/IMessengerConversation";
+import {IMessengerConversation} from "typescript-types";
 import {deleteAConversationAction} from "@store_toolkit/clientReducers/messengerActions/deleteAConversation";
 import {startAConversationAction} from "@store_toolkit/clientReducers/messengerActions/startAConversationAction";
 import {MessengerState} from "typescript-types/src/storeTypes/MessengerState";

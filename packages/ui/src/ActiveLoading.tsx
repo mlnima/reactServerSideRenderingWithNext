@@ -2,7 +2,6 @@ import React, {FC} from "react";
 import ReactLoading from 'react-loading';
 import styled from "styled-components";
 
-
 const Style = styled.div`
   position: fixed;
   top: 0;
@@ -39,8 +38,12 @@ const Style = styled.div`
   }
 `;
 
+interface IProps{
+    onClickEvent:React.ChangeEventHandler<any>,
+    color:string
+}
 
-const ActiveLoading = ({onClickEvent,color}:any) => {
+const ActiveLoading:FC<IProps> = ({onClickEvent,color}) => {
     return (
         <Style onClick={onClickEvent} onTouchStartCapture={onClickEvent}>
             <ReactLoading type={'spin'} color={color} height={100} width={100}/>

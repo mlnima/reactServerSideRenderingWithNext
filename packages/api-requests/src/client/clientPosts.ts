@@ -5,14 +5,14 @@ import {mongoIdValidator, queryUniquer} from "custom-util";
 import {postFieldRequestForCards} from "data-structures";
 import {postTypes} from "data-structures";
 
-const postTypeValidator = (currentPostType)=>{
+const postTypeValidator = (currentPostType:string)=>{
     //@ts-ignore
     return currentPostType ? postTypes.includes(currentPostType) : false
 }
 
 
 
-export const clientAPIRequestAttendToEvent = async (postId, userId, actionType) => {
+export const clientAPIRequestAttendToEvent = async (postId:string, userId:string, actionType:string) => {
     const body = {
         id: postId,
         userId,
@@ -23,7 +23,7 @@ export const clientAPIRequestAttendToEvent = async (postId, userId, actionType) 
 }
 
 
-export const clientAPIRequestCreateNewPost = async (data): Promise<{
+export const clientAPIRequestCreateNewPost = async (data:{}): Promise<{
     newPostId: string;
 }> => {
 
@@ -38,10 +38,10 @@ export const clientAPIRequestCreateNewPost = async (data): Promise<{
 }
 
 
-export const clientAPIRequestDisLikePost = async (postId) => {
+export const clientAPIRequestDisLikePost = async (postId:string) => {
     const ratingData = localStorage?.ratingData ? JSON.parse(localStorage.ratingData) : {likes: [], disLikes: []};
     ratingData.disLikes = [...new Set([...ratingData.disLikes, postId])]
-    ratingData.likes = ratingData.likes.filter(liked => liked !== postId)
+    ratingData.likes = ratingData.likes.filter((liked:string) => liked !== postId)
     localStorage.setItem('ratingData', JSON.stringify(ratingData))
 
     const body = {
@@ -53,7 +53,7 @@ export const clientAPIRequestDisLikePost = async (postId) => {
 }
 
 
-export const clientAPIRequestGetEditingPost = async (postId) => {
+export const clientAPIRequestGetEditingPost = async (postId:string) => {
     const queries= new URLSearchParams({_id: postId}).toString();
     return await AxiosInstance.get(`/api/v1/posts/getEditingPost?${queries}`);
 }
@@ -100,10 +100,10 @@ export const clientAPIRequestGetPosts = async (currentQuery:any,medaId?:string|n
 
 
 
-export const clientAPIRequestLikePost = async (postId) => {
+export const clientAPIRequestLikePost = async (postId:string) => {
     const ratingData = localStorage?.ratingData ? JSON.parse(localStorage.ratingData) : {likes: [], disLikes: []};
     ratingData.likes = [...new Set([...ratingData.likes, postId])]
-    ratingData.disLikes = ratingData.disLikes.filter(disLiked => disLiked !== postId)
+    ratingData.disLikes = ratingData.disLikes.filter((disLiked:string) => disLiked !== postId)
     localStorage.setItem('ratingData', JSON.stringify(ratingData))
 
     const body = {
@@ -114,11 +114,11 @@ export const clientAPIRequestLikePost = async (postId) => {
     return await AxiosInstance.post('/api/v1/posts/likeDislikeView', body)
 }
 
-export const clientAPIRequestUpdatePost = async (data) => {
+export const clientAPIRequestUpdatePost = async (data:{}) => {
     return await AxiosInstance.post(`/api/v1/posts/updatePost`, {data,token: localStorage.wt});
 }
 
-export const clientAPIRequestViewPost = async (postId) => {
+export const clientAPIRequestViewPost = async (postId:string) => {
     const body = {
         id:postId,
         type: 'views'

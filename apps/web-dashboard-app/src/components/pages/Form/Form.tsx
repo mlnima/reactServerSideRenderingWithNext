@@ -40,9 +40,12 @@ const Form = () => {
     }, [search]);
 
     const onDeleteHandler = async () => {
-       await dashboardAPIRequestDeleteForm(id).then(()=>{
-           navigate(`/dashboard/assets?assetsType=forms&size=20&lastUpdate=${Date.now()}`)
-       })
+        if(id){
+            await dashboardAPIRequestDeleteForm(id).then(()=>{
+                navigate(`/dashboard/assets?assetsType=forms&size=20&lastUpdate=${Date.now()}`)
+            })
+        }
+
     }
 
     return (

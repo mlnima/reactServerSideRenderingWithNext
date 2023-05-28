@@ -4,7 +4,7 @@ import {metaSchema} from 'models';
 import {searchKeywordSchema} from 'models'
 import _clientQueryGeneratorForGettingPosts from '../../../_variables/clientVariables/_clientQueryGeneratorForGettingPosts'
 import {mongoIdValidator} from 'custom-server-util';
-//import postFieldRequestForCards from "../../../../data-structures/postFieldRequestForCards";
+//import {postFieldRequestForCards} from "structures";
 
 const saveSearchedKeyword = async (keyword :string, count:number) => {
     if (keyword) {

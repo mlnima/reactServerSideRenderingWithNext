@@ -2,12 +2,19 @@
   "name": "typescript-types",
   "version": "1.0.0",
   "private": true,
-  "license": "MIT",
-  "main": "index.ts",
-  "types": "index.ts",
-  "publishConfig": {
-    "access": "public"
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "clean:bash": "rm -rf dist",
+    "clean:cmd": "rmdir /s /q dist",
+    "dev": "tsc -w",
+    "lint": "TIMING=1 eslint \"src/**/*.ts*\"",
+    "test": "jest"
   },
+  "files": [
+    "dist/**"
+  ],
   "dependencies": {
     "typescript": "^5.0.4"
   }

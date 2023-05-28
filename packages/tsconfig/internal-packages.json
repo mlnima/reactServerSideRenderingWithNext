@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "ES6",
+      "ES2015",
+      "ES2016",
+      "ES2022",
+      "ES2018",
+      "dom"
+    ],
+    "declaration": true,
+    "module": "commonjs",
+    "allowJs": true,
+    "importHelpers": true,
+    "pretty": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "target": "es5",
+    "forceConsistentCasingInFileNames": false,
+    "isolatedModules": true,
+    "moduleResolution": "node",
+    "preserveWatchOutput": true,
+    "skipLibCheck": true,
+    "types": ["node"],
+    "noEmit": false,
+    "strict": true,
+    "composite": false,
+    "inlineSources": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "checkJs": false,
+    "strictNullChecks": false,
+    "resolveJsonModule": true,
+    "incremental": false,
+    "downlevelIteration": true
+  }
+}
