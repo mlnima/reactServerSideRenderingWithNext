@@ -83,6 +83,7 @@ const CommentFrom: FC = () => {
                 onDocumentId: _id,
             };
             if (_id) {
+                //@ts-ignore
                 dispatch(postNewCommentAction(commentData))
                 //@ts-ignore
                 bodyInput.current.value = ''

@@ -1,6 +1,4 @@
 import React, {FC, useEffect, useMemo, useRef, useState} from "react";
-import SimplePeer from 'simple-peer';
-
 import {useSelector} from "react-redux";
 import {Store} from "typescript-types";
 import Draggable from "react-draggable";

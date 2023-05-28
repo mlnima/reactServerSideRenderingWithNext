@@ -1,7 +1,6 @@
 import {FC} from "react";
 import styled from "styled-components";
 import dynamic from "next/dynamic";
-import {useAppDispatch} from "@store_toolkit/hooks";
 import CardTitle from "../asset/CardTitle/CardTitle";
 import {Post} from "typescript-types";
 import DefaultPostCardStyle from "../asset/DefaultPostCardStyle";
@@ -83,12 +82,14 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
          index
      }) => {
 
-        const dispatch = useAppDispatch();
+        const onClickHandler = ()=>{
+            if (post._id) clientAPIRequestViewPost(post._id)
+        }
 
         return (
             <Style className={'post-card'} cardWidth={cardWidth}>
                 <a href={post.redirectLink} className='promotion-card-link-external'
-                   onClick={() => clientAPIRequestViewPost(post._id)} target='_blank' rel="nofollow noopener external">
+                   onClick={onClickHandler} target='_blank' rel="nofollow noopener external">
                     {post.mainThumbnail ?
                         <CardImageRenderer imageUrl={post.mainThumbnail}
                                            mediaAlt={title}

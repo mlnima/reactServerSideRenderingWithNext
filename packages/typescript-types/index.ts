@@ -40,8 +40,12 @@ import {MenuItem} from "./src/widgets/MenuWidget/MenuItem";
 import {User} from "./src/User";
 import {CommentRaw} from "./src/Comment";
 import {IEmail} from "./src/IEmail";
+import {IMessengerConversation} from "./src/messengerTypes/IMessengerConversation";
+import {MediaConnectionState} from "./src/storeTypes/MediaConnectionState";
 
 export type {
+    MediaConnectionState,
+    IMessengerConversation,
     CommentRaw,
     User,
     MenuItem,

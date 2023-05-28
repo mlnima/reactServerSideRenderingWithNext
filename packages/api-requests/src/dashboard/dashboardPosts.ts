@@ -1,6 +1,6 @@
 import AxiosInstance from "../lib/AxiosInstance";
 
-export const dashboardAPIRequestBulkActionOnPosts = async (ids:string[], status:string)=>{
+export const dashboardAPIRequestBulkActionOnPosts = async (ids: string[], status:string)=>{
     return await AxiosInstance.post('/api/admin/posts/postsBulkAction',{ids, status,token: localStorage.wt})
 }
 

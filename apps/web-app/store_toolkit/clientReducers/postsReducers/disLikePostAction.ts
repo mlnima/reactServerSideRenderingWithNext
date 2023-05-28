@@ -6,10 +6,13 @@ export const disLikePostAction = createAsyncThunk(
     'posts/disLikePostAction',
     async (id: string| undefined, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await clientAPIRequestDisLikePost(id)
-            .then(res => {
-            return
-        }).finally(() => thunkAPI.dispatch(loading(false)))
+        if (id){
+            return await clientAPIRequestDisLikePost(id)
+                .then(res => {
+                    return
+                }).finally(() => thunkAPI.dispatch(loading(false)))
+        }
+
     }
 )
 

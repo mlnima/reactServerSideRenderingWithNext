@@ -6,10 +6,13 @@ export const likePostAction = createAsyncThunk(
     'posts/likePostAction',
     async (id: string|undefined, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await clientAPIRequestLikePost(id)
-            .then(res => {
-            return
-        }).finally(() => thunkAPI.dispatch(loading(false)))
+        if (id){
+            return await clientAPIRequestLikePost(id)
+                .then(res => {
+                    return
+                }).finally(() => thunkAPI.dispatch(loading(false)))
+        }
+
     }
 )
 

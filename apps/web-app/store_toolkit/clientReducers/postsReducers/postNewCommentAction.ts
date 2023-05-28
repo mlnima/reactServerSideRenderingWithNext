@@ -1,20 +1,21 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {loading, setAlert} from "../globalStateReducer";
 import {clientAPIRequestPostNewComment} from "api-requests";
+import {Comment} from "typescript-types";
 
 const postNewCommentAction = createAsyncThunk(
     'posts/postNewCommentAction',
-    async (commentData: {}, thunkAPI) => {
+    async (commentData: Comment, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         const storeData = thunkAPI.getState()
+
         clientAPIRequestPostNewComment(commentData)
             .then(()=>{
-            const newCommentData = {
+                return {
                 ...commentData,
-          //@ts-ignore
+                //@ts-ignore
                 author: storeData.user.userData
             }
-            return newCommentData
         }).catch(() => {
             thunkAPI.dispatch(setAlert({
                 active: true,

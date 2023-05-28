@@ -10,7 +10,7 @@ const getPageDataAction = createAsyncThunk(
     async (context :GetServerSidePropsContext<ParsedUrlQuery,PreviewData>, thunkAPI) => {
         const pageName = context.query?.pageName
 
-        return await clientAPIRequestGetPage(pageName)
+        return await clientAPIRequestGetPage(pageName as string)
             .then(res => {
 
             if (res.data?.pageData && res.data?.pageData?.status === 'published') {
