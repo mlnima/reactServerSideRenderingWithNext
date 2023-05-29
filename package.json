@@ -17,8 +17,7 @@
   "scripts": {
     "graph": "turbo run build test lint --graph=graph.jpg",
     "build": "turbo run build --parallel ",
-    "clean:bash": "turbo run clean:bash --parallel  && rm -rf .turbo && rm -rf node_modules && rm -rf package-lock.json",
-    "clean:cmd": "turbo run clean:cmd --parallel && rmdir /s /q .turbo && rmdir /s /q node_modules && del /f package-lock.json",
+    "cleanup": "node cleanup.js",
     "start:api-server": "npm --prefix ./apps/api-server run start",
     "start:file-server": "npm --prefix ./apps/file-server run start",
     "start:mail-server": "npm --prefix ./apps/mail-server run start",

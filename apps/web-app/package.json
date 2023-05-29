@@ -15,8 +15,6 @@
     "start": " node next-production-server",
     "dev": "ts-node --transpile-only ./next-dev-server.js",
     "build:next": "next build",
-    "clean:bash": "rm -rf .next && rm -rf .turbo && rm -rf node_modules",
-    "clean:cmd": "rmdir /s /q .next && rmdir /s /q .turbo && rmdir /s /q node_modules",
     "test": "jest --watch"
   },
   "dependencies": {

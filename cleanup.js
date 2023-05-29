@@ -7,20 +7,26 @@ async function deleteIfExists(filePath) {
         await fs.access(filePath);
         const stats = await fs.lstat(filePath);
         if (stats.isDirectory()) {
+            console.log(`Attempting to delete directory: ${filePath}`);
             await fs.rm(filePath, { recursive: true, force: true });
+            console.log(`Directory ${filePath} has been deleted.`);
         } else {
+            console.log(`Attempting to delete file: ${filePath}`);
             await fs.unlink(filePath);
+            console.log(`File ${filePath} has been deleted.`);
         }
-        console.log(`${filePath} has been deleted`);
     } catch (err) {
         if (err.code !== 'ENOENT') {
             console.error(`Error while deleting ${filePath}:`, err);
+        } else {
+            console.log(`File or directory ${filePath} does not exist. Skipping...`);
         }
     }
 }
 
 // Function to delete specific files or folders in the given directory
 async function deleteInDirectory(directory, itemsToDelete) {
+    console.log(`Looking for items to delete in directory: ${directory}`);
     try {
         const subdirectories = await fs.readdir(directory, { withFileTypes: true });
 
@@ -44,6 +50,8 @@ async function deleteInDirectory(directory, itemsToDelete) {
 
 // Main function
 async function cleanup() {
+    console.log('Cleanup script started.');
+
     // Delete node_modules and package-lock.json in the current directory
     const rootItemsToDelete = ['node_modules', 'package-lock.json'];
     for (const item of rootItemsToDelete) {
@@ -51,11 +59,13 @@ async function cleanup() {
     }
 
     // Delete specific items in the './apps' and './packages' directories
-    const itemsToDelete = ['node_modules', '.turbo', 'dist', '.next', 'build'];
+    const itemsToDelete =  ['node_modules', '.turbo', 'dist', '.next', 'build'];
     const directories = ['./apps', './packages'];
     for (const directory of directories) {
         await deleteInDirectory(directory, itemsToDelete);
     }
+
+    console.log('Cleanup script finished.');
 }
 
 cleanup().catch(console.error);

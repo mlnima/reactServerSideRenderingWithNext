@@ -18,8 +18,6 @@
     "mergeDuplicateMetaData": "node tools/mergeDuplicateMetaData.js",
     "ResetAdminPassword": "node ./tools/resetAdminPassword.js",
     "update:packages": "npm update --save/--save-dev -f",
-    "clean:bash": "rm -rf dist && rm -rf .turbo && rm -rf node_modules",
-    "clean:cmd": "rmdir /s /q dist && rmdir /s /q .turbo && rmdir /s /q node_modules",
     "test": "jest --watch"
   },
   "dependencies": {

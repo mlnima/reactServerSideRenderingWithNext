@@ -9,9 +9,7 @@
     "build": "npm run build:generators",
     "build:generators": "tsc --project tsconfig.json",
     "start": "concurrently \"NODE_ENV=production node ./dist/index.js\"",
-    "update:packages": "npm update --save/--save-dev -f",
-    "clean:bash": "rm -rf dist && rm -rf .turbo && rm -rf node_modules",
-    "clean:cmd": "rmdir /s /q dist && rmdir /s /q .turbo && rmdir /s /q node_modules"
+    "update:packages": "npm update --save/--save-dev -f"
   },
   "dependencies": {
     "body-parser": "^1.20.0",

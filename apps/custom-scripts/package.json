@@ -16,8 +16,6 @@
     "run-script:setup": " ts-node ./src/setup.ts",
     "run-script:resetAdminPassword": "node --trace-warnings ./dist/src/resetAdminPassword.js",
     "run-script:fixChanges": "node --trace-warnings ./dist/src/fixChanges.js",
-    "clean:bash": "rm -rf dist && rm -rf .turbo && rm -rf node_modules",
-    "clean:cmd": "rmdir /s /q dist && rmdir /s /q .turbo && rmdir /s /q node_modules",
     "test": "jest --watch"
   },
   "dependencies": {

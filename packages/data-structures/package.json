@@ -6,8 +6,6 @@
   "types": "dist/src/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "clean:bash": "rm -rf dist && rm -rf .turbo && rm -rf node_modules",
-    "clean:cmd": "rmdir /s /q dist && rmdir /s /q .turbo && rmdir /s /q node_modules",
     "dev": "tsc -w",
     "lint": "TIMING=1 eslint \"src/**/*.ts*\"",
     "test": "jest"

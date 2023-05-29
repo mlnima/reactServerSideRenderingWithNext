@@ -5,8 +5,6 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**",".next/**",".build/**"]
     },
-    "clean:bash": {},
-    "clean:cmd": {},
     "dev": {
       "cache": false
     },
