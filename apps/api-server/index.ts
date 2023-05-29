@@ -1,7 +1,10 @@
 import dotenv from 'dotenv';
+
 dotenv.config({path: '../../.env'});
-import {connectToDatabase,shouldCompress} from 'custom-server-util';
+import {connectToDatabase, shouldCompress} from 'custom-server-util';
+
 connectToDatabase('Express Server')
+
 import express from 'express';
 import bodyParser from 'body-parser';
 import fileUpload from 'express-fileupload';
@@ -19,8 +22,9 @@ import clientRobotTxtController from './controllers/clientControllers/clientRobo
 import loggerMiddleware from "./middlewares/loggerMiddleware";
 
 import {settingSchema} from 'models';
-settingSchema.findOne({type:'initialSettings'}).exec().then((initialSettings)=>{
-    if (initialSettings){
+
+settingSchema.findOne({type: 'initialSettings'}).exec().then((initialSettings) => {
+    if (initialSettings) {
         global.initialSettings = initialSettings.data
     }
 })
@@ -30,7 +34,7 @@ const server = express();
 const runServer = () => {
 
     server.use(cors())
-    server.use(express.json({ limit: '5MB' }));
+    server.use(express.json({limit: '5MB'}));
     server.use(cookieParser());
     server.use(fileUpload());
     server.use(bodyParser.json());

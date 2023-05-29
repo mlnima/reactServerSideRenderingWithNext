@@ -4,6 +4,7 @@ dotenv.config({path: '../../.env'});
 import {connectToDatabase, shouldCompress} from 'custom-server-util';
 
 connectToDatabase('Express Server')
+
 import express from 'express';
 import bodyParser from 'body-parser';
 import fileUpload from 'express-fileupload';

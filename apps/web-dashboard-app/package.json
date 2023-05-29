@@ -78,8 +78,8 @@
     "dev": "set PORT=3008 && node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "clean:bash": "rm -rf build",
-    "clean:cmd": "rmdir /s /q build"
+    "clean:bash": "rm -rf build && rm -rf .turbo && rm -rf node_modules",
+    "clean:cmd": "rmdir /s /q build && rmdir /s /q .turbo && rmdir /s /q node_modules"
   },
   "eslintConfig": {
     "extends": [

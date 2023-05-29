@@ -16,8 +16,8 @@
     "build": "npm run build:server",
     "start": "concurrently \"NODE_ENV=production node ./dist/index.js\"",
     "build:server": "tsc --project tsconfig.json",
-    "clean:bash": "rm -rf dist",
-    "clean:cmd": "rmdir /s /q dist",
+    "clean:bash": "rm -rf dist && rm -rf .turbo && rm -rf node_modules",
+    "clean:cmd": "rmdir /s /q dist && rmdir /s /q .turbo && rmdir /s /q node_modules",
     "update:packages": "npm update --save/--save-dev -f",
     "test": "jest --watch"
   },

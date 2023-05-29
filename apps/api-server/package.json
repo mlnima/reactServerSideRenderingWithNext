@@ -12,15 +12,14 @@
   "license": "MIT",
   "scripts": {
     "dev": "concurrently \"cross-env nodemon --trace-warnings\"",
-    "build": "npm run build:server",
+    "build": "tsc --project tsconfig.json",
     "start": "concurrently \"NODE_ENV=production node ./dist/index.js\"",
     "fixTimeStamsForPosts": "node tools/fixTimeStamsForPosts.js",
     "mergeDuplicateMetaData": "node tools/mergeDuplicateMetaData.js",
     "ResetAdminPassword": "node ./tools/resetAdminPassword.js",
-    "build:server": "tsc --project tsconfig.json",
     "update:packages": "npm update --save/--save-dev -f",
-    "clean:bash": "rm -rf dist",
-    "clean:cmd": "rmdir /s /q dist",
+    "clean:bash": "rm -rf dist && rm -rf .turbo && rm -rf node_modules",
+    "clean:cmd": "rmdir /s /q dist && rmdir /s /q .turbo && rmdir /s /q node_modules",
     "test": "jest --watch"
   },
   "dependencies": {

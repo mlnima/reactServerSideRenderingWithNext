@@ -15,8 +15,8 @@
     "build": "tsc --project tsconfig.json",
     "start": "NODE_ENV=production node ./dist/index.js",
     "dev": "concurrently \"cross-env nodemon --trace-warnings\"",
-    "clean:bash": "rm -rf dist",
-    "clean:cmd": "rmdir /s /q dist",
+    "clean:bash": "rm -rf dist && rm -rf .turbo && rm -rf node_modules",
+    "clean:cmd": "rmdir /s /q dist && rmdir /s /q .turbo && rmdir /s /q node_modules",
     "test": "jest --watch"
   },
   "dependencies": {
