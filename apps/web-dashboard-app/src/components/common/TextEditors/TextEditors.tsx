@@ -19,8 +19,8 @@ const TextEditorsStyledDiv = styled.div`
         background-color: var(--secondary-background-color,#000);
         .se-btn-tray{
           *{
-            color: var(--main-text-color,#fff);
-            background-color: var(---main-background-color,#000);
+            color: var(--primary-text-color,#fff);
+            background-color: var(--primary-background-color,#000);
           }
         }
       }

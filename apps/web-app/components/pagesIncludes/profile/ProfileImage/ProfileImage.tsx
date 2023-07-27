@@ -1,15 +1,14 @@
 import React, {useRef} from 'react';
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
 import {clientAPIRequestUploadImage} from "api-requests";
 import {Styles} from "@components/pagesIncludes/profile/ProfileImage/ProfileImage.styles";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCirclePlus} from "@fortawesome/free-solid-svg-icons/faCirclePlus";
+import {useAppSelector} from "@store_toolkit/hooks";
 
 const ProfileImage = () => {
     const imageElement = useRef<HTMLImageElement>(null)
     const uploadInputElement = useRef<HTMLInputElement>(null)
-    const {userData,loggedIn} = useSelector(({user}:Store) => user)
+    const {userData,loggedIn} = useAppSelector(({user} ) => user)
 
     const onUploadHandler =async (event) => {
         try {
@@ -34,7 +33,7 @@ const ProfileImage = () => {
                 })
             }
         }catch (error){
-            console.log('console=> ',error)
+
         }
     }
 

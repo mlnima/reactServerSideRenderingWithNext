@@ -1,10 +1,8 @@
 import React, {FC, useEffect, useMemo, useRef, useState} from "react";
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
 import Draggable from "react-draggable";
-import {socket} from "custom-util";
+import socket from 'web-socket-client';
 import Style from "@components/global/commonComponents/mediaCall/MediaCall.styles";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAppDispatch, useAppSelector} from "@store_toolkit/hooks";
 import CallerInfo from "@components/global/commonComponents/mediaCall/CallerInfo";
 import InCallActionButtons from "@components/global/commonComponents/mediaCall/InCallActionButtons";
 import InitialMediaCall from "@components/global/commonComponents/mediaCall/InitialMediaCall";
@@ -23,8 +21,8 @@ const MediaCall: FC = () => {
     const [isCameraEnabled, setIsCameraEnabled] = useState(true);
     const [isMicrophoneEnabled, setIsMicrophoneEnabled] = useState(true);
     const [currentCameraIndex, setCurrentCameraIndex] = useState(0);
-    const {activeConversation} = useSelector(({messenger}: Store) => messenger);
-    const {userData} = useSelector(({user}: Store) => user)
+    const {activeConversation} = useAppSelector(({messenger}) => messenger);
+    const {userData} = useAppSelector(({user}) => user)
     const largeVideoStreamRef = useRef<HTMLVideoElement>(null)
     const smallVideoStreamRef = useRef<HTMLVideoElement>(null)
     const InCallButtonsRef = useRef(null)
@@ -50,7 +48,7 @@ const router = useRouter()
         callRejected,
         remoteSignal,
         callType,
-    } = useSelector(({mediaConnection}: Store) => mediaConnection);
+    } = useAppSelector(({mediaConnection}) => mediaConnection);
 
 
     useEffect(() => {
@@ -59,7 +57,6 @@ const router = useRouter()
 
         socket.on('cancelIncomingCall', ({conversationId, callerData}) => {
             if ((activeConversation?._id === conversationId) && incomingCall) {
-                console.log('cancelIncomingCall=> ')
                 // onTerminatedCallHandler()
                 dispatch(resetMediaConnectionAction(null))
             }
@@ -94,10 +91,6 @@ const router = useRouter()
 
     }, [remoteStream, localStream]);
 
-    useEffect(() => {
-        console.log('localStream=> ', localStream)
-        console.log('remoteStream=> ', remoteStream)
-    }, [localStream, remoteStream]);
     const cleanup1LocalAndRemoteStream = () => {
         if (!!localStream) {
             localStream.getTracks().forEach((track) => track.stop());
@@ -131,7 +124,6 @@ const router = useRouter()
                 peer._debug = console.log
 
                 peer.on('signal', (signal) => {
-                    console.log('signal=> ', signal)
                     socket.emit("makeMediaCall", {
                         signal,
                         targetSocketIds,
@@ -146,7 +138,6 @@ const router = useRouter()
                 });
 
                 socket.on('callTerminated', () => {
-                    console.log('callTerminated=>  peer.destroy()',)
 
                     cleanup1LocalAndRemoteStream()
                     dispatch(resetMediaConnectionAction(null))
@@ -168,7 +159,7 @@ const router = useRouter()
 
             }
         } catch (error) {
-            console.log('error=> ', error)
+
         }
 
     }
@@ -224,7 +215,7 @@ const router = useRouter()
 
 
         } catch (error) {
-            console.log('error=> ', error)
+
         }
 
     }
@@ -300,14 +291,14 @@ const router = useRouter()
                             });
                         })
                         .catch((error) => {
-                            console.log("error=> ", error);
+
                         });
 
                     return nextIndex;
                 });
             }
         } catch (error) {
-            console.log("error=> ", error);
+
         }
     };
     const onDisableCameraHandler = () => {
@@ -330,8 +321,8 @@ const router = useRouter()
                             localStream.addTrack(newVideoTrack);
                             setIsCameraEnabled(true);
                         })
-                        .catch((error) => {
-                            console.log('error=> ', error);
+                        .catch(() => {
+
                         });
                 }
             }
@@ -357,7 +348,6 @@ const router = useRouter()
         }
     }
     const onRejectCallHandler = () => {
-        console.log('onRejectCallHandler')
         socket.emit('callRejected', {
             _id: callerData._id,
         });

@@ -110,7 +110,7 @@ const defaultWidgetsData = {
         customStyles:'select{\n' +
             '  border: none;\n' +
             '  background-color: var(--main-background-color,#000);\n' +
-            '  color: var(--main-text-color);\n' +
+            '  color: var(--primary-text-color,#fff);\n' +
             '}'
     },
     'alphabeticalNumericalRange': {

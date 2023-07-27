@@ -18,7 +18,7 @@ const RootLayout = () => {
     const isLoading = useSelector(({globalState}:DashboardStore)=>globalState.loading)
     return (
         <Style>
-            {isLoading && <ActiveLoading onClickEvent={()=>dispatch(loading(false))} color={'var(--main-active-color,#f90)'}/>}
+            {isLoading && <ActiveLoading onClickEvent={()=>dispatch(loading(false))} color={'var(--primary-active-color,#f90)'}/>}
             <Topbar/>
             <Menu/>
             <Main/>

@@ -12,7 +12,6 @@ export const editPostStatusAction = createAsyncThunk(
             //@ts-ignore
             await dashboardAPIRequestBulkActionOnPosts(ids, status).then((res: AxiosResponse<any>) => {
             }).catch((error) => {
-                console.log(error)
 
             })
         }

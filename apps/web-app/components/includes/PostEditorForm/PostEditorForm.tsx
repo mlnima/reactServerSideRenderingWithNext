@@ -11,8 +11,7 @@ import TextInput from "@components/includes/profilePageComponents/profilePost/co
 import Price from "@components/includes/PostEditorForm/common/Price";
 import dynamic from "next/dynamic";
 import VideoTypeFields from "@components/includes/profilePageComponents/profilePost/VideoTypeFields/VideoTypeFields";
-import {useSelector} from "react-redux";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAppDispatch, useAppSelector} from "@store_toolkit/hooks";
 import updatePostAction from "@store_toolkit/clientReducers/postsReducers/updatePostAction";
 import {reduceArrayOfDataToIds} from "custom-util";
 import {clientAPIRequestUploadImage} from "api-requests";
@@ -28,7 +27,7 @@ const PostEditorForm: FC<PropTypes> = ({data}) => {
     const {t} = useTranslation('common');
     const dispatch = useAppDispatch();
     const [postData, setPostData] = useState<any>({})
-    const userData = useSelector(({user}: any) => user.userData);
+    const userData = useAppSelector(({user}) => user.userData);
 
     const onSelectImageHandler = async (event: any) => {
         const formData = new FormData();
@@ -97,7 +96,7 @@ const PostEditorForm: FC<PropTypes> = ({data}) => {
             dispatch(updatePostAction(editedPost))
 
         } catch (error) {
-            console.log(error)
+
         }
     }
 
@@ -108,7 +107,7 @@ const PostEditorForm: FC<PropTypes> = ({data}) => {
     }, [data]);
 
     useEffect(() => {
-        console.log(postData.images)
+
     }, [postData.images]);
 
     return (

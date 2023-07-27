@@ -1,8 +1,8 @@
-// @ts-nocheck
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {RootState} from "../store";
 import {GlobalState} from "typescript-types";
 import {headerSizeCalculator} from "custom-util";
+
 
 const initialState: GlobalState = {
     loginRegisterFormPopup: false,
@@ -15,8 +15,7 @@ const initialState: GlobalState = {
     },
     alert: {
         active: false,
-        type: null,
-        err: null,
+        type: '',
         message: ''
     }
 }
@@ -62,10 +61,10 @@ export const globalStateSlice = createSlice({
                 active: true,
             }
         },
-        closeAlert: (state, action: PayloadAction<any>) => {
+        closeAlert: (state) => {
             state.alert = {
                 active: false,
-                type: null,
+                type: '',
                 message: ''
             }
         }

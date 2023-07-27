@@ -1,11 +1,10 @@
 // @ts-nocheck
 import React, { useEffect, useState} from 'react';
-import {useSelector} from "react-redux";
 import PostsCardsRenderer from "../../cards/CardsRenderer/PostsCardsRenderer";
-import {Store} from "typescript-types";
+import {useAppSelector} from "@store_toolkit/hooks";
 
 const MyProfilePosts = props => {
-    const userData = useSelector(({user}:Store) => user.userData)
+    const userData = useAppSelector(({user}) => user.userData)
 
     const [ state, setState ] = useState({
         posts:[],

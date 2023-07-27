@@ -1,7 +1,7 @@
 import { IFile } from "./IFile";
 
 export interface User {
-    draftPost: string;
+    draftPost: string | {};
     _id: string;
     username: string;
     email: string;

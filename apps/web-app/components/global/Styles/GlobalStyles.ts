@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {createGlobalStyle} from "styled-components";
 import gridLayout from './gridLayout';
 import {buttonsStyle,inputsStyles,selectsStyle,scrollBars,keyframes} from 'ui';
@@ -16,8 +17,8 @@ const GlobalStyles = createGlobalStyle<GlobalStylesPropTypes>`
 
   ${({customColors}) => customColors?.includes(':root') ? customColors : `:root {${customColors}}`}
   body {
-    background-color: var(--main-background-color, #000);
-    color: var(--main-text-color, '#ccc');
+    background-color: var(--primary-background-color, #000);
+    color: var(--primary-text-color,#fff);
     font-family: Arial, serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -58,7 +59,6 @@ const GlobalStyles = createGlobalStyle<GlobalStylesPropTypes>`
       //display: none !important;
     }
   }
-
   ${buttonsStyle}
   ${gridLayout}
   ${inputsStyles}

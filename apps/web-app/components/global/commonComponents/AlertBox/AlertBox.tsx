@@ -19,7 +19,7 @@ const StyledDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--main-text-color, #fff);
+  color: var(--primary-text-color,#fff);
   background-color: rgba(0,0,0,.6);
   z-index: 1010;
 
@@ -38,7 +38,7 @@ const StyledDiv = styled.div`
       padding: 5px 0;
 
       .close-alert {
-        color: var(--main-text-color, #fff);;
+        color: var(--primary-text-color,#fff);
         background-color: transparent;
         border: none;
         height: 25px;

@@ -8,8 +8,8 @@ const selects = css`
     padding: .375rem .75rem .375rem .75rem;
     line-height: 1.5;
     vertical-align: middle;
-    color: var(--main-text-color, #fff);
-    background: var(--main-background-color, #000);
+    color: var(--primary-text-color,#fff);
+    background: var(--primary-background-color,#000);
     border: 1px solid #ced4da;
     border-radius: .25rem;
   }

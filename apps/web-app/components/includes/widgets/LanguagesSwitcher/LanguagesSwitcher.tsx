@@ -1,8 +1,8 @@
 import {useRouter} from "next/router";
-import {languagesOptions} from "@_variables/variables";
+import {LanguagesOptions} from "custom-util";
 import styled from "styled-components";
 import {FC} from "react";
-
+import * as process from "process";
 
 const LanguagesSwitcherStyledDiv = styled.div`
   display: flex;
@@ -25,15 +25,19 @@ const LanguagesSwitcherStyledDiv = styled.div`
     align-items: center;
     margin: 0 10px;
     font-size: 12px;
-    color: var(--main-text-color, #fff);
+    color: var(--primary-text-color,#fff);
   }
 
   .custom-select {
     border: none;
     width: 70px;
     font-size: initial;
-    background-color: var(--main-background-color, #000);
-    color: var(--main-text-color, #fff);
+    background-color: var(--primary-background-color,#000);
+    color: var(--primary-text-color,#fff);
+    option{
+      background-color: var(--primary-background-color,#000);
+      color: var(--primary-text-color,#fff);
+    }
   }
 `
 const LanguagesSwitcher :FC = () => {
@@ -42,30 +46,8 @@ const LanguagesSwitcher :FC = () => {
 
 
     const onChangeHandler = e => {
-
         const localToSet = e.target.value === 'default' ? process.env.NEXT_PUBLIC_DEFAULT_LOCAL : e.target.value
         router?.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale: localToSet})
-
-
-        // if (process.env.NEXT_PUBLIC_DOMAINS){
-        //
-        //     const locales = process.env.NEXT_PUBLIC_LOCALS?.split(' ') || [];
-        //     const domains = !process.env.NEXT_PUBLIC_DOMAINS ? {} :
-        //         process.env.NEXT_PUBLIC_DOMAINS.split(' ').map((domain, index) => {
-        //             return {
-        //                 domain,
-        //                 defaultLocale: locales[index],
-        //             }
-        //         })
-        //
-        // if (typeof window !=='undefined'){
-        //     window.location.assign('https://duckduckgo.com/')
-        // }
-        //
-        // }else{
-        //     const localToSet = e.target.value === 'default' ? process.env.NEXT_PUBLIC_DEFAULT_LOCAL : e.target.value
-        //     router?.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale: localToSet})
-        // }
     }
 
     return (
@@ -78,7 +60,7 @@ const LanguagesSwitcher :FC = () => {
                     title={'select language'}
             >
                 <option key='default' value='default'>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL || 'default'}</option>
-                {languagesOptions}
+                <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALS || ''}/>
             </select>
 
         </LanguagesSwitcherStyledDiv>

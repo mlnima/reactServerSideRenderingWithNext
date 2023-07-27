@@ -44,12 +44,27 @@ export interface WidgetData {
         }
     },
     uniqueData: UniqueDataTypes,
-    menuItems: {
-        [key: string]: any
-    },
+    menuItems:[],
     comments: [string],
     mobileNavigation: boolean
 }
+
+export interface IMenuItem{
+    name: string,
+    target: string,
+    as: string,
+    type: string,
+    parent: number | null,
+    itemIndex: number,
+    itemId: number,
+    subItems?:IMenuItem[]
+    translations: {
+        [key:string]:{
+
+        }
+    },
+}
+
 
 export interface Widget {
     _id: string,

@@ -1,12 +1,10 @@
-import React, {FC, MouseEventHandler, useEffect} from "react";
+import React, {FC, useEffect} from "react";
 import styled from "styled-components";
 import {capitalizeFirstLetters} from "custom-util";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUsers} from "@fortawesome/free-solid-svg-icons/faUsers";
 import {faMaximize} from "@fortawesome/free-solid-svg-icons/faMaximize";
-import {useAppDispatch} from "@store_toolkit/hooks";
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
+import {useAppDispatch, useAppSelector} from "@store_toolkit/hooks";
 import {faMinimize} from "@fortawesome/free-solid-svg-icons/faMinimize";
 import {useRouter} from "next/router";
 import {faArrowDownWideShort} from "@fortawesome/free-solid-svg-icons/faArrowDownWideShort";
@@ -51,7 +49,7 @@ const StyledButton = styled.button<IButton>`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: ${({active}) => active ? 'var(--main-active-color, #f90)' : 'var(--secondary-text-color, #ccc)'} ;
+  color: ${({active}) => active ? 'var(--primary-active-color, #f90)' : 'var(--secondary-text-color, #ccc)'} ;
   svg{
      width: 25px;
     height: 25px;
@@ -78,7 +76,7 @@ const ChatroomTopbar: FC<PropTypes> = (
         onOnlineUserListVisibilityChangeHandler
     }) => {
     const {push, asPath} = useRouter()
-    const isMaximized = useSelector(({chatroom}: Store) => chatroom.isMaximized)
+    const isMaximized = useAppSelector(({chatroom}) => chatroom.isMaximized)
     const dispatch = useAppDispatch();
 
     useEffect(() => {

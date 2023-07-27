@@ -48,7 +48,7 @@ async function deleteInDirectory(directory, itemsToDelete) {
     }
 }
 
-// Main function
+// MainWidgetArea function
 async function cleanup() {
     console.log('Cleanup script started.');
 

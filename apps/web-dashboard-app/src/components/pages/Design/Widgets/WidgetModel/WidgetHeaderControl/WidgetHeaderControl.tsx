@@ -12,7 +12,7 @@ let StyledDiv = styled.div`
   grid-template-columns: 10px 1fr 1fr 5fr 2fr;
   align-items: center;
   background-color: var(--secondary-background-color,#181818);
-  color: var(--main-text-color,#fff);
+  color: var(--primary-text-color,#fff);
   height: 50px;
   font-size: 12px;
   
@@ -36,7 +36,7 @@ let StyledDiv = styled.div`
       width: 25px;
       height: 25px;
       margin: 0 5px;
-      color: var(--main-text-color,#fff);
+      color: var(--primary-text-color,#fff);
       place-items: center;
     }
   }
@@ -49,7 +49,7 @@ let StyledDiv = styled.div`
   .widget-name-index {
     p {
 
-      color: var(--main-text-color,#fff);
+      color: var(--primary-text-color,#fff);
     }
   }
 
@@ -58,7 +58,7 @@ let StyledDiv = styled.div`
     grid-template-columns:  1fr 1fr;
 
     button, a {
-      color: var(--main-text-color,#fff);
+      color: var(--primary-text-color,#fff);
       display: flex;
       justify-content: center;
       align-items: center;

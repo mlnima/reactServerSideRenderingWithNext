@@ -4,7 +4,7 @@ import WidgetsRenderer from "@components/includes/WidgetsRenderer/WidgetsRendere
 
 let StyledNavigation = styled.nav`
   grid-area: navigation;
-  background-color: var(--main-background-color, #000);
+  background-color: var(--secondary-background-color,#181818);
   height: 56px;
   display: flex;
   align-items: center;

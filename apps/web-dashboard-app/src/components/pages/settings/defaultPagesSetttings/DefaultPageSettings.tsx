@@ -1,7 +1,6 @@
 import React, {ChangeEvent, FC, useEffect, useMemo, useState} from "react";
 import styled from "styled-components";
-import {inputValueSimplifier} from "custom-util";
-import languagesOptions from "@variables/languagesOptions";
+import {inputValueSimplifier, LanguagesOptions} from "custom-util";
 import {updateSettingAction} from "@store/reducers/settingsReducer";
 import MonacoEditor from "@components/common/MonacoEditor";
 import { useSearchParams} from "react-router-dom";
@@ -113,7 +112,7 @@ const DefaultPageSettings: FC<PropTypes> = ({}) => {
             <select name='activeEditingLanguage' className={'custom-select active-editing-language'}
                     onChange={e => setLanguage(e.target.value)}>
                 <option value='default'>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?? 'default'}</option>
-                {languagesOptions}
+                <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALS || ''}/>
             </select>
             <div className="form-field">
                 <button className={'btn btn-primary'} type={'submit'}>
@@ -157,19 +156,19 @@ const DefaultPageSettings: FC<PropTypes> = ({}) => {
 
 
             <div className={'editors'}>
-                <div className={'editor-wrapper'}>
-                    <p> Custom Styles:</p>
-                    <MonacoEditor
-                        language={'scss'}
-                        name={'customStyles'}
-                        defaultValue={fieldsData?.customStyles || ''}
-                        value={fieldsData?.customStyles || ''}
-                        className={'initialSettings-editor'}
-                        onChange={(e: any) => onChangeHandler(e)}
-                        height={'60vh'}
-                        width={'100%'}
-                    />
-                </div>
+                {/*<div className={'editor-wrapper'}>*/}
+                {/*    <p> Custom Styles:</p>*/}
+                {/*    <MonacoEditor*/}
+                {/*        language={'scss'}*/}
+                {/*        name={'customStyles'}*/}
+                {/*        defaultValue={fieldsData?.customStyles || ''}*/}
+                {/*        value={fieldsData?.customStyles || ''}*/}
+                {/*        className={'initialSettings-editor'}*/}
+                {/*        onChange={(e: any) => onChangeHandler(e)}*/}
+                {/*        height={'60vh'}*/}
+                {/*        width={'100%'}*/}
+                {/*    />*/}
+                {/*</div>*/}
                 <div className={'editor-wrapper'}>
                     <p>Custom Head Tags:</p>
                     <MonacoEditor

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
 import {clientAPIRequestGetSettings, clientAPIRequestGetUncachedSettings} from "api-requests";
@@ -34,7 +33,7 @@ interface FetchSettingsProps {
 
 export const fetchSettings = createAsyncThunk(
     'settings/fetchSettings',
-    async (config: FetchSettingsProps, thunkAPI) => {
+    async (config: FetchSettingsProps) => {
         try {
             const fetchedSettings = await clientAPIRequestGetSettings(config.requireSettings);
             return {
@@ -44,7 +43,7 @@ export const fetchSettings = createAsyncThunk(
                 isSettingSet: true,
             }
         } catch (err) {
-            console.log(err)
+
         }
     }
 )
@@ -62,7 +61,7 @@ export const getUncachedSettingsForAdmin = createAsyncThunk(
             }
 
         } catch (err) {
-            console.log(err)
+
         }
     }
 )
@@ -89,6 +88,10 @@ export const settingsSlice = createSlice({
 export const {} = settingsSlice.actions
 
 export const settingsReducer = (state: RootState) => state?.settings || null
+
+// export const initialSettings = (state: RootState) => state?.settings?.initialSettings || {}
+//
+// export const memorizedInitialSettings = createSelector([initialSettings],(initialSettings)=>initialSettings)
 
 export default settingsSlice.reducer
 

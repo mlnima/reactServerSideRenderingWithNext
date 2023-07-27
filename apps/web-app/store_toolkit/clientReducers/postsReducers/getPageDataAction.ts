@@ -1,9 +1,9 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import type {GetServerSidePropsContext, PreviewData} from "next";
 import {setHeadData, setNotFoundPage} from "../globalStateReducer";
-import {_customPageCanonicalUrlGenerator} from "@_variables/_clientVariables/clientVariables/_canonicalUrlGenerators";
 import {ParsedUrlQuery} from "querystring";
 import {clientAPIRequestGetPage} from "api-requests";
+import {customPageCanonicalUrlGenerator} from "custom-util";
 
 const getPageDataAction = createAsyncThunk(
     'posts/getPageDataAction',
@@ -15,7 +15,7 @@ const getPageDataAction = createAsyncThunk(
 
             if (res.data?.pageData && res.data?.pageData?.status === 'published') {
 
-                const canonicalUrl = _customPageCanonicalUrlGenerator(pageName,context.locale)
+                const canonicalUrl = customPageCanonicalUrlGenerator(pageName,context.locale)
 
                 thunkAPI.dispatch(setHeadData({
                     title: res.data?.pageData?.title || pageName,

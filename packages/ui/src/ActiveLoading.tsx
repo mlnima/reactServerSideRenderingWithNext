@@ -32,7 +32,7 @@ const Style = styled.div`
     .stop-loading-icon {
       width: 2rem !important;
       height: 2rem !important;
-      color: var(--main-active-color, #f90);
+      color: var(--primary-active-color, #f90);
       cursor: pointer;
     }
   }

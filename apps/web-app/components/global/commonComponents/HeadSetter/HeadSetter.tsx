@@ -1,9 +1,8 @@
-import {FC, useEffect, useMemo, useState} from "react";
+import {FC, useMemo} from "react";
 import Head from 'next/head';
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
 import parse from 'html-react-parser';
 import {useRouter} from "next/router";
+import {useAppSelector} from "@store_toolkit/hooks";
 // import GoogleAnalyticsHeadScript from "@components/global/commonComponents/googleAnalytics/GoogleAnalyticsHeadScripts";
 
 interface PropTypes {
@@ -26,7 +25,7 @@ const HeadSetter: FC<PropTypes> = (
     }) => {
 
     const {asPath, locale} = useRouter();
-    const headDataSettings = useSelector(({settings}: Store) => settings?.initialSettings?.headDataSettings)
+    const headDataSettings = useAppSelector(({settings}) => settings?.initialSettings?.headDataSettings)
     const siteLanguages = process.env.NEXT_PUBLIC_LOCALS?.split(' ') || [];
     const headTitle = useMemo(() => title || headDataSettings?.title || 'Title', [title, asPath])
     const headDescription = useMemo(() => description || headDataSettings?.description || '', [description, asPath])

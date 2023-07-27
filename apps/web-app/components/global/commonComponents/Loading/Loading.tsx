@@ -41,7 +41,7 @@ const Loading: FC<PropTypes> = ({isLoading}) => {
     }, []);
 
     if (isLoadingByRouteChange || isLoading) {
-        return <ActiveLoading onClickEvent={() => dispatch(loading(false))} color={'var(--main-active-color,#f90)'}/>
+        return <ActiveLoading onClickEvent={() => dispatch(loading(false))} color={'var(--primary-active-color,#f90)'}/>
     } else return null
 
 };

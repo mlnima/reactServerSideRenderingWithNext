@@ -9,7 +9,7 @@ interface PropTypes{
 }
 
 const Style = styled.div`
-  color: var(--main-text-color);
+  color: var(--primary-text-color,#fff);
   max-width: 100vw;
 `
 

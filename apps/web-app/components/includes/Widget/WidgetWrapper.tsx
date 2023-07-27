@@ -1,6 +1,5 @@
 import dynamic from "next/dynamic";
-import styled from "styled-components";
-import {FC, memo, useMemo} from "react";
+import {FC, memo} from "react";
 import {WidgetData} from "typescript-types";
 const WidgetHeader = dynamic(() => import('./WidgetHeader/WidgetHeader'))
 const WidgetCustomScript = dynamic(() => import('./WidgetCustomScript/WidgetCustomScript'))
@@ -37,10 +36,6 @@ interface WidgetComponentPropTypes {
     viewType?: string
 }
 
-let WidgetStyledSection = styled.section`
-  ${({customStyles}: { customStyles: string }) => customStyles || ''}
-`
-
 const WidgetWrapper: FC<WidgetComponentPropTypes> = ({data, widgetId, isSidebar, viewType}) => {
 
     const widgetMatcher = {
@@ -72,9 +67,8 @@ const WidgetWrapper: FC<WidgetComponentPropTypes> = ({data, widgetId, isSidebar,
     const WidgetToRender =  widgetMatcher?.[data.type] || null
 
     return (
-        <WidgetStyledSection className={'widget ' + (data?.extraClassName ?? '')}
-                             id={data?.extraId || undefined}
-                             customStyles={data?.customStyles || ''}>
+        <section className={'widget ' + (data?.extraClassName ?? '')}
+                             id={data?.extraId || undefined}>
 
             {data?.title && <WidgetHeader translations={data?.translations}
                                           title={data?.title}
@@ -100,7 +94,7 @@ const WidgetWrapper: FC<WidgetComponentPropTypes> = ({data, widgetId, isSidebar,
                                                                                totalCount={data?.uniqueData?.totalCount}
                                                                                count={data?.count}/>
             }
-        </WidgetStyledSection>
+        </section>
     );
 };
 export default memo(WidgetWrapper);

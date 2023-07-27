@@ -1,14 +1,12 @@
 import React, {useState, useEffect, FC} from 'react';
 import useTranslation from 'next-translate/useTranslation'
-import {useSelector} from 'react-redux';
 import styled from "styled-components";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 import Draggable from 'react-draggable';
 import ValidInput from "./ValidInput";
 import {loginAction} from "@store_toolkit/clientReducers/userReducers/loginAction";
 import {setAlert} from "@store_toolkit/clientReducers/globalStateReducer";
-import {useAppDispatch} from "@store_toolkit/hooks";
-import {Store} from "typescript-types";
+import {useAppDispatch, useAppSelector} from "@store_toolkit/hooks";
 import FormHeader from "./FormHeader";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye} from "@fortawesome/free-solid-svg-icons/faEye";
@@ -23,7 +21,7 @@ const LoginRegisterPopupFormsStyledDiv = styled.div`
   max-width: 320px;
   padding: 5px;
   box-sizing: border-box;
-  color: var(--main-text-color, #fff);
+  color: var(--primary-text-color,#fff);
   position: relative;
   overflow-y: auto;
   display: flex;
@@ -32,7 +30,7 @@ const LoginRegisterPopupFormsStyledDiv = styled.div`
 
   .login-register-switch-form-button {
     border: none;
-    color: var(--main-text-color);
+    color: var(--primary-text-color,#fff);
     width: 100%;
     display: flex;
     justify-content: center;
@@ -66,7 +64,7 @@ const LoginRegisterPopupFormsStyledDiv = styled.div`
         }
 
         .password-info {
-          color: var(--main-active-color);
+          color: var(--primary-active-color);
           font-size: 10px;
           padding: 5px 0;
           width: 100%;
@@ -87,7 +85,7 @@ const LoginRegisterPopupFormsStyledDiv = styled.div`
             top: 5px;
            
             background-color: transparent;
-            color: var(--main-text-color, #fff);
+            color: var(--primary-text-color,#fff);
             border: none;
           }
           .show-password-wrapper {
@@ -110,7 +108,7 @@ const LoginRegisterPopupFormsStyledDiv = styled.div`
           }
 
           .gender-icon {
-            color: var(--main-text-color);
+            color: var(--primary-text-color,#fff);
             padding: 0;
             margin: 0 20px 0 0;
           }
@@ -120,7 +118,7 @@ const LoginRegisterPopupFormsStyledDiv = styled.div`
 
     .login-register-form-button {
       border: none;
-      background-color: var(--main-active-color, #f90);
+      background-color: var(--primary-active-color, #f90);
       color: var(--secondary-background-color, #181818);
       font-weight: bold;
       font-size: 18px;
@@ -163,7 +161,7 @@ const LoginRegisterPopupForms: FC = () => {
 
     const {t} = useTranslation('common');
     const dispatch = useAppDispatch()
-    const globalState = useSelector(({globalState}: Store) => globalState)
+    const globalState = useAppSelector(({globalState}) => globalState)
 
     const [state, setState] = useState<StateTypes>({
         username: '',
@@ -403,4 +401,4 @@ export default LoginRegisterPopupForms;
 
 // color: ${(props: { response: ResponseTypes }) => props.response.type === 'success' ?
 //         'green' :
-//         props.response.type === 'error' ? 'red' : 'var(--main-text-color)'};
+//         props.response.type === 'error' ? 'red' : 'var(--primary-text-color,#fff)'};

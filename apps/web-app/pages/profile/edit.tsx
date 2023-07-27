@@ -2,14 +2,13 @@ import React, {useEffect, useState} from 'react';
 import useTranslation from 'next-translate/useTranslation'
 import styled from "styled-components";
 import {wrapper} from "@store_toolkit/store";
-import _passwordValidator from "@_variables/_clientVariables/clientVariables/_passwordValidator";
 import ValidInput from "@components/RootLayout/common//LoginRegisterPopup/ValidInput";
 import {useAppDispatch, useAppSelector} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
-import {Store} from "typescript-types";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
 import {resetPasswordAction} from "@store_toolkit/clientReducers/userReducers/resetPasswordAction";
+import passwordValidatorRegisterForm from "custom-util/dist/src/validators/passwordValidatorRegisterForm";
 
 const EditProfileStyledMain = styled.main`
   grid-area: main;
@@ -64,7 +63,7 @@ const edit = () => {
     const {t} = useTranslation();
     const dispatch = useAppDispatch()
 
-    const user = useAppSelector(({user}:Store)=>user)
+    const user = useAppSelector(({user})=>user)
 
     const [changePasswordData, setChangePasswordData] = useState<ChangePasswordData>({})
     const [changePasswordDataValidator, setChangePasswordDataValidator] = useState<ChangePasswordDataValidator>({})
@@ -89,7 +88,7 @@ const edit = () => {
     useEffect(() => {
 
         setChangePasswordDataValidator({
-            newPassword: changePasswordData.newPassword ? _passwordValidator(changePasswordData.newPassword) : false,
+            newPassword: changePasswordData.newPassword ? passwordValidatorRegisterForm(changePasswordData.newPassword) : false,
             repeatNewPassword: changePasswordData.repeatNewPassword ? changePasswordData.newPassword === changePasswordData.repeatNewPassword : false,
         })
     }, [changePasswordData]);
@@ -154,10 +153,9 @@ const edit = () => {
         </EditProfileStyledMain>
     );
 };
-//@ts-ignore
+
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-    // @ts-ignore
     await _getServerSideStaticPageData(
         context,
         [
@@ -172,7 +170,9 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         store
     )
 
-    return null
+    return {
+        props: {}
+    }
 })
 
 

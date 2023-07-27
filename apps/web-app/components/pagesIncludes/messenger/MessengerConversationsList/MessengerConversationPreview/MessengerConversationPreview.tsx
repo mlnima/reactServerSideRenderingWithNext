@@ -1,12 +1,12 @@
 import React, {FC, useEffect, useState} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleUser} from "@fortawesome/free-solid-svg-icons/faCircleUser";
-import {useSelector} from "react-redux";
-import {Store, User} from "typescript-types";
+import { User} from "typescript-types";
 import {Styles} from "./MessengerConversationPreview.styles";
 import {IMessengerConversation} from "typescript-types";
 import {formatDistance} from 'date-fns'
 import {faCheck} from "@fortawesome/free-solid-svg-icons/faCheck";
+import {useAppSelector} from "@store_toolkit/hooks";
 
 interface IProps {
     conversationData: IMessengerConversation
@@ -15,7 +15,7 @@ interface IProps {
 
 const MessengerConversationPreview: FC<IProps> = ({conversationData,onSelectConversation}) => {
 
-    const {userData} = useSelector(({user}: Store) => user)
+    const {userData} = useAppSelector(({user} ) => user)
     //@ts-ignore
     const [partnerData, setPartnerData] = useState<User>({})
 

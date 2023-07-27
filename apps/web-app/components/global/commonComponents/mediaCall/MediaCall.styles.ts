@@ -160,7 +160,7 @@ export default Style;
 //  padding: 5px 10px;
 //  align-items: flex-start;
 //  background-color: var(--secondary-background-color, #181818);
-//  color: var(--main-text-color, #fff);
+//  color: var(--primary-text-color,#fff);
 //  position: absolute;
 //  top: 5px;
 //  left: 0;
@@ -182,7 +182,7 @@ export default Style;
 //    z-index: 1001;
 //    .answer-button, .reject-button {
 //      background-color: transparent;
-//      color: var(--main-text-color, #fff);
+//      color: var(--primary-text-color,#fff);
 //      padding: 10px 20px;
 //      border: none;
 //      display: flex;
@@ -201,7 +201,7 @@ export default Style;
 //    z-index: 1001;
 //      .hangup-button{
 //        background-color: transparent;
-//        color: var(--main-text-color, #fff);
+//        color: var(--primary-text-color,#fff);
 //        padding: 10px 20px;
 //        border: none;
 //        display: flex;
@@ -258,7 +258,7 @@ export default Style;
 //  text-align: center;
 //  position: absolute;
 //  top: 50px;
-//  color: var(--main-text-color, #fff);
+//  color: var(--primary-text-color,#fff);
 //
 //  h2 {
 //    font-size: large;

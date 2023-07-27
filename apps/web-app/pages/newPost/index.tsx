@@ -1,26 +1,24 @@
 import {FC, useEffect} from "react";
 import styled from "styled-components";
-import {useAppDispatch} from "@store_toolkit/hooks";
-import {useSelector} from "react-redux";
+import {useAppDispatch, useAppSelector} from "@store_toolkit/hooks";
 import {wrapper} from "@store_toolkit/store";
-import {Store} from "typescript-types";
 import {useRouter} from "next/router";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
 import {clientAPIRequestCreateNewPost} from "api-requests";
-import {AxiosResponse} from "axios";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 
 const Style = styled.div``;
 
 interface PropTypes {
+
 }
 
 const newPost: FC<PropTypes> = ({}) => {
     const router = useRouter();
     const dispatch = useAppDispatch();
 
-    const {loggedIn, userData} = useSelector(({user}: Store) => {
+    const {loggedIn, userData} = useAppSelector(({user}) => {
         return {
             loggedIn: user.loggedIn,
             userData: user.userData,
@@ -62,12 +60,9 @@ const newPost: FC<PropTypes> = ({}) => {
         </Style>
     )
 };
-export default newPost;
-
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-    // @ts-ignore
     await _getServerSideStaticPageData(
         context,
         [
@@ -80,5 +75,10 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         },
         store)
 
-    return {props: {}}
+    return {
+        props: {}
+    }
 })
+
+
+export default newPost;

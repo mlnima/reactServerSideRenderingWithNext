@@ -4,7 +4,7 @@ import WidgetsRenderer from "@components/includes/WidgetsRenderer/WidgetsRendere
 import {useRouter} from "next/router";
 
 const StyledFooter = styled.footer`
-  background-color: var(--main-background-color,#000);
+  background-color: var(--secondary-background-color,#181818);
   grid-area: footer;
   padding: 0 8px;
   box-sizing: border-box;

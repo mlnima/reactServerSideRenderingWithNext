@@ -6,7 +6,12 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBars} from "@fortawesome/free-solid-svg-icons/faBars";
 import {faXmark} from "@fortawesome/free-solid-svg-icons/faXmark";
 
-const MenuWidgetStyledDiv = styled.div`
+
+interface IStyles{
+    open: boolean
+}
+
+const MenuWidgetStyledDiv = styled.div<IStyles>`
   z-index: 10;
 
   .menu-widget-open-button {
@@ -31,8 +36,8 @@ const MenuWidgetStyledDiv = styled.div`
     margin: 0;
     transition: all 0.5s ease 0s;
     position: fixed;
-    animation: ${(props: { open: boolean }) => props?.open ? `navigationMobileSlide .2s linear alternate` : `none`};
-    display: ${(props: { open: boolean }) => props.open ? 'flex' : 'none'};
+    animation: ${({open}) => open ? `navigationMobileSlide .2s linear alternate` : `none`};
+    display: ${({open}) => open ? 'flex' : 'none'};
     overflow-y: auto;
 
     .menu-widget-close-button {
@@ -45,7 +50,7 @@ const MenuWidgetStyledDiv = styled.div`
       align-items: center;
       background-color: transparent;
       border: none;
-      color: var(--main-text-color, #fff);
+      color: var(--primary-text-color,#fff);
       padding: 6px;
     }
 
@@ -55,7 +60,7 @@ const MenuWidgetStyledDiv = styled.div`
       width: 100%;
 
       .menu-item-link {
-        color: var(--main-text-color, #fff);
+        color:var(--primary-text-color,#fff);
         background-color: transparent;
         font-weight: bold;
         font-size: 1em;
@@ -130,7 +135,7 @@ const MenuWidget: FC<MenuWidgetPropTypes> = ({menuItems}) => {
                 className='menu-widget-open-button btn btn-transparent-light'
                 aria-label="open navigation">
                 <FontAwesomeIcon className={'menu-widget-close-button-logo'}
-                                 color={'var(--main-text-color, #fff)'}
+                                 color={'var(--primary-text-color,#fff)'}
                                  icon={faBars}
                                  style={{width:28,height:28}}/>
 
@@ -139,7 +144,7 @@ const MenuWidget: FC<MenuWidgetPropTypes> = ({menuItems}) => {
                 <button onClick={() => setOpen(!open)}
                     className='menu-widget-close-button  btn btn-transparent-light'>
                     <FontAwesomeIcon className={'menu-widget-close-button-logo'}
-                                     color={'var(--main-text-color, #fff)'}
+                                     color={'var(--primary-text-color,#fff)'}
                                      icon={faXmark}
                                      style={{width:25,height:25}}/>
                 </button>

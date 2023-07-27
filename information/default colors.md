@@ -1,5 +1,5 @@
 # dark mode
-    --main-text-color: #fff;
+    --primary-text-color: #fff;
     --secondary-text-color: #ccc;
     --tertiary-text-color: #c7c7c7;
     --main-background-color: #000;
@@ -37,7 +37,7 @@
 
 # light mode
 
-    --main-text-color: #000;
+    --primary-text-color: #000;
     --secondary-text-color: #010101;
     --tertiary-text-color: #222;
     --main-background-color: #fff;

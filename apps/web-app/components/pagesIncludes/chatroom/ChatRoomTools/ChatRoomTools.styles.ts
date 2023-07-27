@@ -36,7 +36,7 @@ const Styles = styled.form`
     top: -14px;
     left: 10px;
     background-color: var(--secondary-background-color, #181818);
-    color: var(--main-text-color, #fff);
+    color: var(--primary-text-color,#fff);
     font-size: 12px;
   }
 

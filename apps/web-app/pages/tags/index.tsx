@@ -1,27 +1,30 @@
 import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
 import styled from "styled-components";
-import {useSelector} from "react-redux";
 import {wrapper} from "@store_toolkit/store";
 import SidebarWidgetAreaRenderer from "@components/RootLayout/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import React from "react";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
-import {Store} from "typescript-types";
 import MetasRenderer from "../../components/pagesIncludes/metas/MetasRenderer";
 import getTagsAction from "@store_toolkit/clientReducers/postsReducers/getTagsAction";
 import {useRouter} from "next/router";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
 import {textContentReplacer} from "custom-util";
 import {getTextDataWithTranslation} from "custom-util";
+import {useAppSelector} from "@store_toolkit/hooks";
 
-const PageStyle = styled.div`
-  ${({customStyles}: { customStyles?: string }) => customStyles || ''}
+interface IStyles{
+    customStyles?: string
+}
+
+const PageStyle = styled.div<IStyles>`
+  ${({customStyles}) => customStyles || ''}
 `
 
 const tagsPage = () => {
     const {locale} = useRouter()
-    const metas = useSelector(({posts}: Store) => posts?.tagsMetas)
-    const currentPageSettings = useSelector(({settings}: Store) => settings?.currentPageSettings)
-    const headDataSettings = useSelector(({settings}: Store) => settings?.initialSettings?.headDataSettings)
+    const metas = useAppSelector(({posts}) => posts?.tagsMetas)
+    const currentPageSettings = useAppSelector(({settings}) => settings?.currentPageSettings)
+    const headDataSettings = useAppSelector(({settings}) => settings?.initialSettings?.headDataSettings)
 
     return (
         <PageStyle id={'content'} className={`page-${currentPageSettings?.sidebar || 'no'}-sidebar `}
@@ -40,10 +43,9 @@ const tagsPage = () => {
         </PageStyle>
     );
 };
-//@ts-ignore
+
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-    // @ts-ignore
     await _getServerSideStaticPageData(
         context,
         [
@@ -61,7 +63,9 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 
     await store.dispatch(getTagsAction({data: context.query}))
 
-    return null
+    return {
+        props: {}
+    }
 
 });
 

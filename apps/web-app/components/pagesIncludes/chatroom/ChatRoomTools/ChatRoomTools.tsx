@@ -1,9 +1,7 @@
 import React, {FC, useEffect, useRef, useState} from 'react';
-import { socket } from 'custom-util';
-import {useSelector} from "react-redux";
+import socket from 'web-socket-client';
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
-import {useAppDispatch} from "@store_toolkit/hooks";
-import {Store} from "typescript-types";
+import {useAppDispatch, useAppSelector} from "@store_toolkit/hooks";
 import Styles from './ChatRoomTools.styles';
 import SomeoneIsTyping from "@components/pagesIncludes/chatroom/ChatRoomTools/SomeoneIsTyping";
 import UploadImageButton from "@components/pagesIncludes/chatroom/ChatRoomTools/UploadImageButton";
@@ -17,7 +15,7 @@ interface IProps {
 const ChatRoomTools: FC<IProps> = ({chatroomId}) => {
     const inputRef = useRef<HTMLInputElement>(null);
     const dispatch = useAppDispatch()
-    const {loggedIn, _id, username} = useSelector(({user}: Store) => {
+    const {loggedIn, _id, username} = useAppSelector(({user}) => {
         return {
             loggedIn: user?.loggedIn,
             _id: user.userData?._id,

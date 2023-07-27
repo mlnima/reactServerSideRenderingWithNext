@@ -30,7 +30,7 @@ export const Styles = styled.div`
     
     .left,.right{
       .btn{
-        color: var(--main-text-color, #fff);
+        color: var(--primary-text-color,#fff);
       }
     }
     

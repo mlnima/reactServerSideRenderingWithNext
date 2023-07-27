@@ -1,15 +1,14 @@
 import React from 'react';
 import styled from "styled-components";
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
+import {useAppSelector} from "@store_toolkit/hooks";
 
 const MyProfileInfoStyledDiv = styled.div`
   p,h1,h2,h3,h4{
-    color:var(--main-text-color);
+    color:var(--primary-text-color,#fff);
   }
 `
 const MyProfileInfo = () => {
-    const userData = useSelector(({user}:Store) => user?.userData)
+    const userData = useAppSelector(({user}) => user?.userData)
 
     return (
         <MyProfileInfoStyledDiv className='my-profile-info'>

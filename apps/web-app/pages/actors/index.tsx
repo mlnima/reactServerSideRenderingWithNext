@@ -3,18 +3,21 @@ import {useRouter} from "next/router";
 import PaginationComponent from "../../components/includes/PaginationComponent/PaginationComponent";
 import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
 import styled from "styled-components";
-import {useSelector} from "react-redux";
 import {wrapper} from "@store_toolkit/store";
 import SidebarWidgetAreaRenderer from "@components/RootLayout/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import MetasCardsRenderer from "../../components/includes/cards/CardsRenderer/MetasCardsRenderer";
-import {Store} from "typescript-types";
 import getMetasAction from "@store_toolkit/clientReducers/postsReducers/getMetasAction";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
 import {textContentReplacer} from "custom-util";
 import {getTextDataWithTranslation} from "custom-util";
+import {useAppSelector} from "@store_toolkit/hooks";
 
-const PageStyle = styled.div`
+interface IStyles{
+    customStyles?: string
+}
+
+const PageStyle = styled.div<IStyles>`
   .actors {
     display: flex;
     flex-wrap: wrap;
@@ -23,14 +26,14 @@ const PageStyle = styled.div`
     max-width: 100%;
   }
 
-  ${({customStyles}: { customStyles?: string }) => customStyles || ''}
+  ${({customStyles}) => customStyles || ''}
 `
 
 const actorsPage = () => {
 
     const {locale} = useRouter()
-    const currentPageSettings = useSelector(({settings}: Store) => settings?.currentPageSettings)
-    const headDataSettings = useSelector(({settings}: Store) => settings?.initialSettings?.headDataSettings)
+    const currentPageSettings = useAppSelector(({settings}) => settings?.currentPageSettings)
+    const headDataSettings = useAppSelector(({settings}) => settings?.initialSettings?.headDataSettings)
 
     return (
         <PageStyle id={'content'} className={`page-${currentPageSettings?.sidebar || 'no'}-sidebar `}
@@ -50,10 +53,8 @@ const actorsPage = () => {
     );
 };
 
-//@ts-ignore
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-    // @ts-ignore
     await _getServerSideStaticPageData(
         context,
         [
@@ -74,8 +75,9 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         metaType: 'actors'
     }))
 
-    return null
-
+    return {
+        props: {}
+    }
 });
 
 export default actorsPage;

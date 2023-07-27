@@ -23,11 +23,11 @@ interface LearnPostCardPropTypes {
     post: Post,
 }
 
-interface LearnPostCardStylePropTypes {
+interface IStyles {
     cardWidth: number
 }
 
-const LearnPostCardStyle = styled(DefaultPostCardStyle)`
+const LearnPostCardStyle = styled(DefaultPostCardStyle)<IStyles>`
 
   .entry-header {
     margin-top: 2px;
@@ -67,7 +67,7 @@ const LearnPostCardStyle = styled(DefaultPostCardStyle)`
   }
 
   @media only screen and (min-width: 768px) {
-    max-width: ${({cardWidth}: LearnPostCardStylePropTypes) => cardWidth}px;
+    max-width: ${({cardWidth}) => cardWidth}px;
   }
 `
 

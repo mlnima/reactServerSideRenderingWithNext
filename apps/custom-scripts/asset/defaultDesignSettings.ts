@@ -3,7 +3,7 @@ const defaultDesignSettings = {
     data: {
         customColors:
             `:root{
-                --main-text-color: #fff;
+                --primary-text-color: #fff;
                 --secondary-text-color: #ccc;
                 --tertiary-text-color: #c7c7c7;
                 --main-background-color: #000;

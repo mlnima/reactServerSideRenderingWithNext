@@ -2,9 +2,7 @@ import React, {FC} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faXmark} from "@fortawesome/free-solid-svg-icons/faXmark";
 import {Styles} from "./AddedImagePreview.styles";
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAppDispatch, useAppSelector} from "@store_toolkit/hooks";
 import {setDraftMessageData} from "@store_toolkit/clientReducers/messengerReducer";
 import SubmitButton from "@components/pagesIncludes/messenger/MessengerMultiMediaInputBox/SubmitButton";
 
@@ -14,7 +12,7 @@ interface IProps {
 
 const AddedImagePreview: FC<IProps> = ({handleSubmit}) => {
     const dispatch = useAppDispatch()
-    const {draftMessage} = useSelector(({messenger}: Store) => messenger);
+    const {draftMessage} = useAppSelector(({messenger}) => messenger);
 
     return (
         <Styles>
@@ -25,7 +23,7 @@ const AddedImagePreview: FC<IProps> = ({handleSubmit}) => {
                             onClick={() => dispatch(setDraftMessageData({
                                 imageContent: ''
                             }))}>
-                        <FontAwesomeIcon icon={faXmark} style={{width: 25, height: 25}} />
+                        <FontAwesomeIcon icon={faXmark} style={{width: 25, height: 25}}/>
                     </button>
                 </div>
                 <img src={draftMessage.imageContent} alt="image"/>
@@ -35,8 +33,8 @@ const AddedImagePreview: FC<IProps> = ({handleSubmit}) => {
                            type={'text'}
                            name={'messageData'}
                            placeholder={'Type a message'}
-                           onChange={e =>dispatch(setDraftMessageData({textContent:e.target.value}))}
-                           // onKeyDown={onStartTypingHandler}
+                           onChange={e => dispatch(setDraftMessageData({textContent: e.target.value}))}
+                        // onKeyDown={onStartTypingHandler}
                     />
                     <SubmitButton handleSubmit={handleSubmit}/>
                 </div>

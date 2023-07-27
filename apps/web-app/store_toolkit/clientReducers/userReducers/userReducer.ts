@@ -1,4 +1,3 @@
-// @ts-nocheck
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../../store";
 import {UserState} from "typescript-types";
@@ -11,7 +10,10 @@ import {unfollowUserAction} from "@store_toolkit/clientReducers/userReducers/unf
 import {followUserAction} from "@store_toolkit/clientReducers/userReducers/followUserAction";
 
 const initialState: UserState = {
-    userData: {},
+    //@ts-ignore
+    userData: {
+        draftPost: {}
+    },
     userRatingData: {},
     loggedIn: false,
     userPageData: {},
@@ -61,6 +63,7 @@ export const userSlice = createSlice({
                 },
             }
         },
+        //@ts-ignore
         userLogout: (state) => {
             localStorage.removeItem('wt')
             return {
@@ -119,9 +122,11 @@ export const userSlice = createSlice({
                 }
             })
             .addCase(unfollowUserAction.fulfilled, (state) => {
+                //@ts-ignore
                 state.userPageData.isFollowed = false
             })
             .addCase(followUserAction.fulfilled, (state) => {
+                //@ts-ignore
                 state.userPageData.isFollowed = true
             })
     }
@@ -134,5 +139,4 @@ export const {
 
 export const userReducer = (state: RootState) => state?.user || null;
 
-// @ts-ignore
 export default userSlice.reducer;

@@ -30,7 +30,7 @@ import {WidgetsState} from "./src/storeTypes/WidgetsState";
 import {Post} from "./src/Post";
 import {PostRaw} from "./src/Post";
 import {Meta} from "./src/Meta";
-import {Widget} from "./src/widgets/Widget";
+import {IMenuItem, Widget} from "./src/widgets/Widget";
 import {PageTypes} from "./src/Page";
 import {WidgetData} from "./src/widgets/Widget";
 import {WidgetSettingsPropTypes} from "./src/widgets/Widget";
@@ -41,11 +41,14 @@ import {User} from "./src/User";
 import {CommentRaw} from "./src/Comment";
 import {IEmail} from "./src/IEmail";
 import {IMessengerConversation} from "./src/messengerTypes/IMessengerConversation";
+import {IMessengerConversationMessage} from "./src/messengerTypes/IMessengerConversationMessage";
 import {MediaConnectionState} from "./src/storeTypes/MediaConnectionState";
+
 
 export type {
     MediaConnectionState,
     IMessengerConversation,
+    IMessengerConversationMessage,
     CommentRaw,
     User,
     MenuItem,
@@ -58,6 +61,7 @@ export type {
     PageTypes,
     AxiosResponseTypes,
     Widget,
+    IMenuItem,
     Chatroom,
     ChatroomMessage,
     InitialSettings,

@@ -1,14 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import Editor from "@monaco-editor/react";
 import {useSelector} from "react-redux";
-import languagesOptions from "@variables/languagesOptions";
-import {DashboardStore, Store} from "typescript-types";
+import {DashboardStore} from "typescript-types";
 import {
     editTranslationsFileAction,
     readTranslationsFileAction,
     updateTranslationsFileAction
 } from "@store/reducers/fileManagerReducer";
 import {useAppDispatch} from "@store/hooks";
+import {LanguagesOptions} from "custom-util";
+
 
 const Translations = () => {
 
@@ -42,13 +43,14 @@ const Translations = () => {
     return (
 
         <div className='translations'>
-            translations
+            Translations
             <select onChange={e => onActiveEditingLanguageChangeHandler(e)} className={'custom-select'}>
                 <option
                     value={process.env.NEXT_PUBLIC_DEFAULT_LOCAL}>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL || 'Default'}
                 </option>
-                {languagesOptions}
+                <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALS || ''}/>
             </select>
+
             <div className='editor-area'>
                 <Editor
                     language='json'

@@ -1,9 +1,8 @@
 import React, {FC, useState} from "react";
 import styled from "styled-components";
-import {useSelector} from "react-redux";
 import {capitalizeFirstLetter} from "custom-util";
 import ActorDetails from "./ActorDetails";
-import {Store} from "typescript-types";
+import {useAppSelector} from "@store_toolkit/hooks";
 
 const ActorBioMobileStyledSection = styled.section`
   display: flex;
@@ -48,7 +47,7 @@ const ActorBioMobileStyledSection = styled.section`
 
 const ActorBioMobile: FC = () => {
 
-    const actorData = useSelector(({posts}: Store) => posts?.actorData);
+    const actorData = useAppSelector(({posts}) => posts?.actorData);
     const [showMore,setShowMore] = useState(false);
 
 

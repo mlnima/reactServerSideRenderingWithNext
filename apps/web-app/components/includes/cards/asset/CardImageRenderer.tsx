@@ -10,31 +10,31 @@ interface CardImageNextPropTypes {
     title?: string,
 }
 
-interface CardImageRendererStylePropTypes {
+interface IStyles{
     numberOfCardsPerRowInMobile: number,
     cardWidth: number,
 }
 
-const CardImageRendererStyle = styled.div`
+const CardImageRendererStyle = styled.div<IStyles>`
 
   width: 100%;
-  height: ${({numberOfCardsPerRowInMobile}: CardImageRendererStylePropTypes) => 96 / numberOfCardsPerRowInMobile / 1.777}vw;
+  height: ${({numberOfCardsPerRowInMobile}) => 96 / numberOfCardsPerRowInMobile / 1.777}vw;
   aspect-ratio: 16 / 9;
   position: relative;
 
   img {
     width: 100%;
-    height: ${({numberOfCardsPerRowInMobile}: CardImageRendererStylePropTypes) => 96 / numberOfCardsPerRowInMobile / 1.777}vw !important;
+    height: ${({numberOfCardsPerRowInMobile}) => 96 / numberOfCardsPerRowInMobile / 1.777}vw !important;
     aspect-ratio: 16 / 9;
     object-fit: cover;
   }
 
   @media only screen and (min-width: 768px) {
-    width: ${({cardWidth}: CardImageRendererStylePropTypes) => cardWidth}px;
-    height: ${({cardWidth}: CardImageRendererStylePropTypes) => cardWidth / 1.777}px !important;
+    width: ${({cardWidth}) => cardWidth}px;
+    height: ${({cardWidth}) => cardWidth / 1.777}px !important;
     img {
-      width: ${({cardWidth}: CardImageRendererStylePropTypes) => cardWidth}px;
-      height: ${({cardWidth}: CardImageRendererStylePropTypes) => cardWidth / 1.777}px !important;
+      width: ${({cardWidth}) => cardWidth}px;
+      height: ${({cardWidth}) => cardWidth / 1.777}px !important;
     }
   }
 `
@@ -57,15 +57,14 @@ const CardImageRenderer: FC<CardImageNextPropTypes> =
             }, 500)
         }
 
-        const loadingAttr = index > 1 ? {loading: 'lazy'} : {}
         return (
             <CardImageRendererStyle numberOfCardsPerRowInMobile={numberOfCardsPerRowInMobile}
                                     cardWidth={cardWidth}
                                     className={'card-image'}>
-                {/*// @ts-ignore*/}
-                <img src={imageUrl}
-                     alt={mediaAlt}
-                     {...loadingAttr}
+
+                <img src={imageUrl||''}
+                     alt={mediaAlt||''}
+                     loading={index > 1 ? 'lazy' : 'eager'}
                      className={'card-image'}
                      onError={(e) => onErrorHandler(e)}
                 />

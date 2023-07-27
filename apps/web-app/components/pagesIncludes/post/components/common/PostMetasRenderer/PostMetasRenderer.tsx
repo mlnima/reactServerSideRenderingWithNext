@@ -1,34 +1,35 @@
 import styled from "styled-components";
-import React, {FC, useEffect, useRef, useState} from "react";
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
+import React, {FC, useRef} from "react";
 import PostMeta from "./PostMeta";
 import PostActor from "./PostActor";
 import {capitalizeFirstLetters} from "custom-util";
+import {useAppSelector} from "@store_toolkit/hooks";
 
 
 const PostMetaStyledDiv = styled.div`
-  margin-top: 8px ;
-  margin-bottom: 8px ;
-  .title{
+  margin-top: 8px;
+  margin-bottom: 8px;
+
+  .title {
     font-weight: initial;
     font-size: initial;
   }
-  
-  .post-meta-toggle{
+
+  .post-meta-toggle {
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
-  
+
   .content {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    flex-wrap:wrap ;
+    flex-wrap: wrap;
     gap: 8px;
-    .post-meta-item{
+
+    .post-meta-item {
       display: flex;
       align-items: center;
       justify-content: flex-start;
@@ -47,13 +48,14 @@ const PostMetaStyledDiv = styled.div`
         background-color: var(--secondary-text-color, #ccc);
       }
     }
-    
+
     .actors {
       background-color: transparent;
+
       .item-image {
         padding: 0;
-        margin-right:4px;
-      
+        margin-right: 4px;
+
         width: 33px;
         height: 33px;
         border-radius: 50%;
@@ -63,8 +65,8 @@ const PostMetaStyledDiv = styled.div`
       .actor-meta-svg {
         padding: 0 5px;
       }
-      
-      
+
+
     }
   }
 `
@@ -76,13 +78,13 @@ interface PostMetaPropType {
 const PostMetasRenderer: FC<PostMetaPropType> = ({type}) => {
 
     const containerRef = useRef<HTMLDivElement>()
-    const post = useSelector(({posts}: Store) => posts.post)
+    const post = useAppSelector(({posts}) => posts.post)
     //@ts-ignore
     const metas = type == 'all' ? [...post?.actors, ...post?.categories, ...post?.tags] : post?.[type]
     const filterMeta = metas?.length ? metas.filter(m => m.name?.length > 1) : []
 
-    const renderData = filterMeta.map(item =>item.type === 'actors' ?
-        <PostActor key={item._id} item={item}/>:
+    const renderData = filterMeta.map(item => item.type === 'actors' ?
+        <PostActor key={item._id} item={item}/> :
         <PostMeta key={item._id} item={item}/>
     );
 
@@ -90,8 +92,8 @@ const PostMetasRenderer: FC<PostMetaPropType> = ({type}) => {
         return (
 
             <PostMetaStyledDiv className={`${type}-container post-meta sub-content`}
-                               //@ts-ignore
-                               ref={containerRef} >
+                //@ts-ignore
+                               ref={containerRef}>
                 {(type !== 'all' && !!type) && <h2 className={'title'}>{capitalizeFirstLetters(type)}</h2>}
                 <div className="content">
                     {renderData}

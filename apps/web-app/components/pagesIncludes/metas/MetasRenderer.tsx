@@ -50,7 +50,7 @@ const MetasRendererStyle = styled.div`
         .view-all {
           display: flex;
           align-items: center;
-          color: var(--main-active-color, #f90);
+          color: var(--primary-active-color, #f90);
           font-size: large;
           font-weight: bold;
           margin: 10px;;

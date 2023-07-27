@@ -13,7 +13,7 @@ let TitleDescriptionStyledDiv = styled.div`
     box-sizing: border-box;
   }
   .text-editors{
-    background-color: var(--main-background-color, #000);
+    background-color: var(--primary-background-color,#000);
     color: var(--secondary-text-color, #ccc);
     .text-editors-content{
       .quill{
@@ -21,7 +21,7 @@ let TitleDescriptionStyledDiv = styled.div`
           width: 100%;
           height: 80vh;
            color: var(--secondary-text-color, #ccc);
-          background-color: var(--main-background-color, #000);
+          background-color:var(--primary-background-color,#000);
         }
       }
         .sun-editor {
@@ -31,7 +31,7 @@ let TitleDescriptionStyledDiv = styled.div`
               height: 100%;
               .se-wrapper-inner {
                 color: var(--secondary-text-color, #ccc);
-                background-color: var(--main-background-color, #000);
+                background-color: var(--primary-background-color,#000);
               }
             }
           }

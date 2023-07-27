@@ -4,10 +4,9 @@ import {faMinimize} from "@fortawesome/free-solid-svg-icons/faMinimize";
 import {faMaximize} from "@fortawesome/free-solid-svg-icons/faMaximize";
 import styled from "styled-components";
 import {Styles} from "./MessengerConfigs.styles";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAppDispatch, useAppSelector} from "@store_toolkit/hooks";
 import {setMessengerState} from "@store_toolkit/clientReducers/messengerReducer";
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
+
 
 interface IButton {
     active?: boolean
@@ -25,7 +24,7 @@ const StyledButton = styled.button<IButton>`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: ${({active}) => active ? 'var(--main-active-color, #f90)' : 'var(--secondary-text-color, #ccc)'};
+  color: ${({active}) => active ? 'var(--primary-active-color, #f90)' : 'var(--secondary-text-color, #ccc)'};
 
   svg {
     width: 25px;
@@ -35,9 +34,9 @@ const StyledButton = styled.button<IButton>`
 
 const MessengerConfigs: FC<IProps> = () => {
     const dispatch = useAppDispatch()
-    const {isMaximized} = useSelector(({messenger}: Store) => messenger);
+    const {isMaximized} = useAppSelector(({messenger}) => messenger);
     const onSetMaximizedHandler = () => {
-        dispatch(setMessengerState({isMaximized:!isMaximized}))
+        dispatch(setMessengerState({isMaximized: !isMaximized}))
         localStorage.setItem('isMaximized', (!isMaximized).toString())
     }
 

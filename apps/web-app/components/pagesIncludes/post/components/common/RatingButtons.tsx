@@ -1,9 +1,7 @@
 import React, {FC, useEffect, useState} from "react";
 import useTranslation from 'next-translate/useTranslation'
 import styled from "styled-components";
-import {useSelector} from "react-redux";
-import {useAppDispatch} from "@store_toolkit/hooks";
-import {Store} from "typescript-types";
+import {useAppDispatch, useAppSelector} from "@store_toolkit/hooks";
 import {shortNumber} from "custom-util";
 import likePostAction from "@store_toolkit/clientReducers/postsReducers/likePostAction";
 import disLikePostAction from "@store_toolkit/clientReducers/postsReducers/disLikePostAction";
@@ -79,7 +77,7 @@ const RatingButtons: FC<RatingButtonsPropTypes> = ({rating}) => {
     const {t} = useTranslation('common');
     const dispatch = useAppDispatch();
     const [isRated, setIsRated] = useState(null)
-    const {likes, disLikes, views, _id} = useSelector(({posts}: Store) => {
+    const {likes, disLikes, views, _id} = useAppSelector(({posts} ) => {
         return {
             likes: posts.post?.likes,
             disLikes: posts.post?.disLikes,

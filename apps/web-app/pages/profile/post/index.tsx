@@ -1,6 +1,5 @@
 // @ts-nocheck
 import React, {useEffect, useState} from 'react';
-import {useSelector} from "react-redux";
 import dynamic from "next/dynamic";
 import {wrapper} from "@store_toolkit/store";
 import {useRouter} from "next/router";
@@ -11,15 +10,14 @@ import MetaDataSelector from "@components/includes/profilePageComponents/profile
 import VideoTypeFields
     from "@components/includes/profilePageComponents/profilePost/VideoTypeFields/VideoTypeFields";
 import {editPostField} from "@store_toolkit/clientReducers/postsReducers/postsReducer";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAppDispatch, useAppSelector} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
-import {Store} from "typescript-types";
 import EventDates from "@components/includes/PostEditorForm/event/EventDates";
 import getEditingPostAction from "@store_toolkit/clientReducers/postsReducers/getEditingPostAction";
 import updatePostAction from "@store_toolkit/clientReducers/postsReducers/updatePostAction";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
-import MultipleImageUploader from "@components/includes/PostEditorForm/common/MultipleImageUploader/MultipleImageUploader";
 import Csr from "@components/global/commonComponents/Csr";
+
 const AdMode = dynamic(() => import('@components/includes/PostEditorForm/ucgAd/AdMode'));
 const Price = dynamic(() => import('@components/includes/PostEditorForm/common/Price'));
 const Location = dynamic(() => import('@components/includes/PostEditorForm/common/PostLocation'));
@@ -28,7 +26,7 @@ import {ProfilePostPageStyle} from "@components/pagesIncludes/profile/post/Profi
 
 const post = () => {
     const dispatch = useAppDispatch();
-    const {loggedIn, userData, editingPost, sidebar} = useSelector(({settings, user, posts}: Store) => {
+    const {loggedIn, userData, editingPost, sidebar} = useAppSelector(({settings, user, posts} ) => {
         return {
             sidebar: settings?.currentPageSettings?.sidebar,
             loggedIn: user.loggedIn,
@@ -51,8 +49,6 @@ const post = () => {
         const newImages = Array.from(selectedFiles);
         //@ts-ignore
         setImages((prevImages) => [...prevImages, ...newImages]);
-        //@ts-ignore
-        // onUploadComplete([...images, ...newImages]);
     };
 
     useEffect(() => {
@@ -109,7 +105,7 @@ const post = () => {
     return (
 
         <ProfilePostPageStyle className={`profile-page create-new-post page-${sidebar || 'no'}-sidebar`}
-                                  id={'content'}>
+                              id={'content'}>
             <HeadSetter title={'Edit Post'}/>
             <div id={'primary'}>
 
@@ -119,7 +115,6 @@ const post = () => {
                         <label>Post Type: {editingPost?.postType}</label>}
                     {editingPost?.postType === 'ugcAd' && <AdMode onChangeHandler={onUniqueDataChangeHandler}/>}
                 </div>
-
 
 
                 <div className={'title-section field-section'}>
@@ -139,7 +134,6 @@ const post = () => {
                                   value={editingPost?.description}/>
 
                 </div>
-
 
 
                 <Csr>
@@ -212,7 +206,6 @@ const post = () => {
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-    // @ts-ignore
     await _getServerSideStaticPageData(
         context,
         [
@@ -225,7 +218,9 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         },
         store)
 
-    return null
+    return {
+        props: {}
+    }
 })
 
 

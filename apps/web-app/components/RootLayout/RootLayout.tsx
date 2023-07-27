@@ -1,14 +1,12 @@
 import React, {FC, useEffect, useState} from 'react';
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
 import Loading from "../global/commonComponents/Loading/Loading";
 import dynamic from "next/dynamic";
 import RootLayoutAdminDataInitializer from "./RootLayoutAdminDataInitializer";
 import {setAdminMode} from "@store_toolkit/clientReducers/globalStateReducer";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAppDispatch, useAppSelector} from "@store_toolkit/hooks";
 import GlobalStyles from "@components/global/Styles/GlobalStyles";
 import GoogleAnalytics from "@components/includes/SiteSettingsSetter/GoogleAnalytics";
-import {socket} from "custom-util";
+import socket from 'web-socket-client';
 import MediaCall from "@components/global/commonComponents/mediaCall/MediaCall";
 import SocketEventHandler from "@components/global/commonComponents/SocketEventHandler";
 
@@ -28,19 +26,16 @@ interface RootLayoutPropTypes {
 }
 
 const RootLayout: FC<RootLayoutPropTypes> = ({children}) => {
+
     const dispatch = useAppDispatch()
     const [renderAutoLogin, setRenderAutoLogin] = useState(false)
-    const {loggedIn} = useSelector(({user}: Store) => user)
-    const {userData} = useSelector(({user}: Store) => user)
     const [renderCookiesBar, setRenderCookiesBar] = useState(false)
-    const {loginRegisterFormPopup, alert, loading, adminMode} = useSelector(({globalState}: Store) => globalState)
-    const {initialSettings} = useSelector(({settings}: Store) => settings)
-    const {mediaCall} = useSelector(({mediaConnection}: Store) => mediaConnection)
 
-    const {
-        customColors,
-        customStyles
-    } = useSelector(({settings}: Store) => settings?.initialSettings?.layoutSettings ?? {})
+    const {loggedIn,userData} = useAppSelector(({user}) => user)
+    const {loginRegisterFormPopup, alert, loading, adminMode} = useAppSelector(({globalState}) => globalState)
+    const {initialSettings} = useAppSelector(({settings}) => settings)
+    const {mediaCall} = useAppSelector(({mediaConnection}) => mediaConnection)
+    const {customColors, customStyles} = useAppSelector(({settings}) => settings?.initialSettings?.layoutSettings ?? {})
 
     useEffect(() => {
         setTimeout(() => {
@@ -71,6 +66,8 @@ const RootLayout: FC<RootLayoutPropTypes> = ({children}) => {
             }
         }, 500)
     }, [userData]);
+
+
 
     return (
 

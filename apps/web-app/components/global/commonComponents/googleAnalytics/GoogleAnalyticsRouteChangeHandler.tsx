@@ -9,7 +9,6 @@ interface PropTypes {
 }
 
 const GoogleAnalyticsRouteChangeHandler: FC<PropTypes> = ({googleAnalyticsId}) => {
-    console.log('GoogleAnalyticsRouteChangeHandler')
     const router = useRouter();
 
     useEffect(() => {

@@ -29,7 +29,7 @@ const initialState: MessengerState = {
         videoContent: '',
         audioContent: '',
         textContent: '',
-    },
+    }
 }
 
 

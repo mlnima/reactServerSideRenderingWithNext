@@ -1,10 +1,8 @@
 import Link from "next/link";
 import {commonAPIRequestClearCaches} from "api-requests";
 import {useRouter} from "next/router";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAppDispatch, useAppSelector} from "@store_toolkit/hooks";
 import {setAdminMode} from "@store_toolkit/clientReducers/globalStateReducer";
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import React from "react";
 import {faUserShield} from "@fortawesome/free-solid-svg-icons/faUserShield";
@@ -15,7 +13,7 @@ import {faCheck} from "@fortawesome/free-solid-svg-icons/faCheck";
 const AuthenticationAdminItems = ({}) => {
     const router = useRouter()
     const dispatch = useAppDispatch()
-    const adminMode = useSelector(({globalState}: Store) => globalState.adminMode)
+    const adminMode = useAppSelector(({globalState}) => globalState.adminMode)
 
     const onSetAdminModeHandler = () => {
         dispatch(setAdminMode(!adminMode))

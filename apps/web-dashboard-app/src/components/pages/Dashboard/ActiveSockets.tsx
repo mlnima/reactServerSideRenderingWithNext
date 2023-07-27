@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { socket } from 'custom-util';
+import React, {useEffect, useState} from 'react';
+import socket from 'web-socket-client';
+
 
 const ActiveSockets = () => {
     const [activeSockets, setActiveSockets] = useState([]);
@@ -19,14 +20,14 @@ const ActiveSockets = () => {
     return (
         <div>
             {activeSockets?.length &&
-            <>
-                <h2>Active Sockets:</h2>
-                <ul>
-                    {activeSockets.map((socketId) => (
-                        <li key={socketId}>{socketId}</li>
-                    ))}
-                </ul>
-            </>
+                <>
+                    <h2>Active Sockets:</h2>
+                    <ul>
+                        {activeSockets.map((socketId) => (
+                            <li key={socketId}>{socketId}</li>
+                        ))}
+                    </ul>
+                </>
             }
 
         </div>

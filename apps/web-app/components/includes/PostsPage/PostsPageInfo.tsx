@@ -17,7 +17,7 @@ let PostsPageInfoStyledDiv = styled.div`
     padding: 8px;
     box-sizing: border-box;
     overflow-wrap: break-word;
-    color: var(--main-text-color);
+    color: var(--primary-text-color,#fff);
     text-align: center;
  
   }

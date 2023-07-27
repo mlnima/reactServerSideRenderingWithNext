@@ -4,7 +4,6 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import CardTitle from "../asset/CardTitle/CardTitle";
 import {Post} from "typescript-types";
-import useTranslation from "next-translate/useTranslation";
 import DefaultPostCardStyle from "../asset/DefaultPostCardStyle";
 import CardViews from "@components/includes/cards/asset/CardViews/CardViews";
 
@@ -24,14 +23,14 @@ interface ArticlePostCardPropTypes {
     post: Post,
 }
 
-interface ArticlePostCardStylePropTypes {
+interface IStyles {
     cardWidth: number
 }
 
-const ArticlePostCardStyle = styled(DefaultPostCardStyle)`
+const ArticlePostCardStyle = styled(DefaultPostCardStyle)<IStyles>`
 
   @media only screen and (min-width: 768px) {
-    max-width: ${({cardWidth}: ArticlePostCardStylePropTypes) => cardWidth}px;
+    max-width: ${({cardWidth}) => cardWidth}px;
   }
 `
 
@@ -48,8 +47,6 @@ const ArticlePostCard: FC<ArticlePostCardPropTypes> =
          targetLink,
          index
      }) => {
-
-        const {t} = useTranslation()
 
         return (
             <ArticlePostCardStyle className={'post-card'} cardWidth={cardWidth}>

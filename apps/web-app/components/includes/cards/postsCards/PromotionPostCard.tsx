@@ -5,7 +5,6 @@ import CardTitle from "../asset/CardTitle/CardTitle";
 import {Post} from "typescript-types";
 import DefaultPostCardStyle from "../asset/DefaultPostCardStyle";
 import {clientAPIRequestViewPost} from "api-requests";
-
 const CardViews = dynamic(() => import('../asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('../asset/CardRating/CardRating'))
 const TextToCanvasImage = dynamic(() => import('../asset/TextToCanvasImage/TextToCanvasImage'))
@@ -23,11 +22,11 @@ interface PromotionPostCardPropTypes {
     post: Post,
 }
 
-interface PromotionPostCardStylePropTypes {
+interface IStyles {
     cardWidth: number
 }
 
-const Style = styled(DefaultPostCardStyle)`
+const Style = styled(DefaultPostCardStyle)<IStyles>`
 
   .card-under-media-info {
     font-size: 14px;
@@ -65,7 +64,7 @@ const Style = styled(DefaultPostCardStyle)`
   }
 
   @media only screen and (min-width: 768px) {
-    max-width: ${({cardWidth}: PromotionPostCardStylePropTypes) => cardWidth}px;
+    max-width: ${({cardWidth}) => cardWidth}px;
   }
 `
 

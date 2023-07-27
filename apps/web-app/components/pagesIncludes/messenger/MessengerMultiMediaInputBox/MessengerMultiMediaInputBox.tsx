@@ -7,9 +7,8 @@ import TextInput from "./TextInput";
 import UploadImageButton from "./UploadImageButton";
 import VoiceRecorderButton from "./VoiceRecorderButton";
 import AddedImagePreview from "@components/pagesIncludes/messenger/MessengerMultiMediaInputBox/AddedImagePreview";
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
 import SubmitButton from "@components/pagesIncludes/messenger/MessengerMultiMediaInputBox/SubmitButton";
+import {useAppSelector} from "@store_toolkit/hooks";
 
 interface IProps {
     audioMessage: string,
@@ -41,9 +40,9 @@ const MessengerMultiMediaInputBox: FC<IProps> = (
         isActive,
     }) => {
 
-    const {draftMessage } = useSelector(({messenger}: Store) => messenger);
+    const {draftMessage} = useAppSelector(({messenger}) => messenger);
 
-    const handleSubmit = (event)=>{
+    const handleSubmit = (event) => {
         event.preventDefault()
         onSubmitHandler(event)
     }
@@ -56,12 +55,12 @@ const MessengerMultiMediaInputBox: FC<IProps> = (
                     <UploadImageButton imageInputRef={imageInputRef}/>
                     <VoiceRecorderButton/>
 
-                    {(!!draftMessage.audioContent ||!!draftMessage.imageContent) &&
+                    {(!!draftMessage.audioContent || !!draftMessage.imageContent) &&
                         <div className={'media-content'}>
                             {!!draftMessage.imageContent &&
                                 <AddedImagePreview handleSubmit={handleSubmit}/>}
                             {!!draftMessage?.audioContent &&
-                                <RecordedAudioPreview />}
+                                <RecordedAudioPreview/>}
                         </div>
                     }
                 </>

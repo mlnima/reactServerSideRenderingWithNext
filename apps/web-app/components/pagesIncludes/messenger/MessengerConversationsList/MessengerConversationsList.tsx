@@ -4,8 +4,7 @@ import {IMessengerConversation} from "typescript-types";
 import {sortArrayByPropertyOfObject} from 'custom-util';
 import {uniqArrayBy} from "custom-util";
 import {FC, useEffect, useRef} from "react";
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
+import {useAppSelector} from "@store_toolkit/hooks";
 
 interface IProps {
     onSelectConversation: (conversationId: string) => void
@@ -20,8 +19,8 @@ const MessengerConversationsList: FC<IProps> = ({onSelectConversation,onGetConve
     const {
         activeConversation,
         isMaximized,
-    } = useSelector(({messenger}: Store) => messenger);
-    const {headerSize} = useSelector(({globalState}: Store) => globalState);
+    } = useAppSelector(({messenger} ) => messenger);
+    const {headerSize} = useAppSelector(({globalState} ) => globalState);
 
     useEffect(() => {
         if (conversationListRef.current) {

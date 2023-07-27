@@ -3,9 +3,7 @@ import {convertVariableNameToName} from "custom-util";
 import styled from "styled-components";
 import {useRouter} from "next/router";
 import {saveWidgetFormData} from "@store_toolkit/clientReducers/widgetsReducer";
-import {useAppDispatch} from "@store_toolkit/hooks";
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
+import {useAppDispatch, useAppSelector} from "@store_toolkit/hooks";
 
 const FormWidgetStyledDiv = styled.div`
   display: flex;
@@ -27,7 +25,7 @@ const FormWidgetStyledDiv = styled.div`
   }
 
   .after-submit-message {
-    color: var(--main-text-color);
+    color: var(--primary-text-color,#fff);
   }
 
   .form-widget-field {
@@ -44,7 +42,7 @@ const FormWidgetStyledDiv = styled.div`
   }
 
   .form-widget-field-title {
-    color: var(--main-text-color);
+    color: var(--primary-text-color,#fff);
   }
 `
 
@@ -69,7 +67,7 @@ const FormWidget: FC<FormWidgetPropTypes> = ({widgetId, uniqueData}) => {
 
     const {locale} = useRouter()
     const dispatch = useAppDispatch()
-    const {userId, username, role} = useSelector(({user}: Store) => {
+    const {userId, username, role} = useAppSelector(({user}) => {
         return {
             userId: user?.userData?._id,
             username: user?.userData?.username,

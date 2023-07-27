@@ -4,7 +4,6 @@ import {RootState} from "../store";
 import {loading, setAlert} from "./globalStateReducer";
 import {AxiosResponse} from "axios";
 import {dashboardAPIRequestGetSettings,dashboardAPIRequestUpdateSetting} from "api-requests";
-import DefaultPageSettings from "@components/pages/settings/defaultPagesSetttings/DefaultPageSettings";
 
 interface AdminPanelSettingState {
     initialSettings: {},

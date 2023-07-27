@@ -1,10 +1,11 @@
-import React, {FC, useMemo} from 'react';
+import React, {FC,memo, useMemo} from 'react';
 import Link from "next/link";
 import {useRouter} from "next/router";
 import styled from "styled-components";
 import {UniqueDataTypes} from "typescript-types";
 
-const LogoStyledDiv = styled.div`
+
+const Styles = styled.div`
 
   a {
     display: flex;
@@ -12,7 +13,7 @@ const LogoStyledDiv = styled.div`
     align-items: center;
     flex-wrap: wrap;
     .logo-text, .logo-headline {
-      color: var(--main-text-color);
+      color: var(--primary-text-color,#fff);
     }
 
     .logo-text {
@@ -39,28 +40,25 @@ const Logo: FC<LogoPropTypes> = ({uniqueData, LogoUrl}) => {
         // Logo Url must get Deleted after live sites widget data reSet
         return {
             logoUrlSource: uniqueData?.logoUrl || LogoUrl,
-            logoText: locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? uniqueData?.logoText || '' : uniqueData?.translations?.[locale as string]?.logoText || '',
-            headLineData: locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? uniqueData?.headLine : uniqueData?.translations?.[locale as string]?.headLine,
+            logoText:  (uniqueData?.translations?.[locale as string]?.logoText ?? uniqueData?.logoText) ||'',
+            headLineData: uniqueData?.translations?.[locale as string]?.headLine ?? uniqueData?.headLine,
         }
-    }, [uniqueData,LogoUrl])
+    }, [])
 
 
     return (
-        <LogoStyledDiv className={'logo-wrapper'}>
+        <Styles className={'logo-wrapper'}>
             <Link href='/' className='logo'>
                     {logoUrlSource && <img alt={'logo'} src={logoUrlSource}/> }
-                    {logoText && !logoUrlSource ?
-                        <span className='logo-text'> {logoText} </span>
-                        : null
-                    }
+                    {logoText && !logoUrlSource ? <span className='logo-text'> {logoText} </span> : null}
                     {headLineData && <p className='logo-headline'>{headLineData}</p> }
             </Link>
-        </LogoStyledDiv>
+        </Styles>
 
     );
 };
 
-export default Logo;
+export default memo(Logo);
 
 
 

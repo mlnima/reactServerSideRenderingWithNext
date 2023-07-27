@@ -3,8 +3,7 @@ import PaginationComponentPageLink from "./PaginationComponentPageLink";
 import styled from "styled-components";
 import {useRouter} from "next/router";
 import {rangeNumGenerator} from "custom-util";
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
+import {useAppSelector} from "@store_toolkit/hooks";
 
 const PaginationComponentStyledDiv = styled.div`
   display: flex;
@@ -14,7 +13,7 @@ const PaginationComponentStyledDiv = styled.div`
   height: 40px;
 
   .pagination-item {
-    color: var(--main-text-color, #fff);
+    color: var(--primary-text-color,#fff);
     background-color: var(--secondary-background-color, #181818);
     padding: 5px 10px;
     margin: 5px;
@@ -24,7 +23,7 @@ const PaginationComponentStyledDiv = styled.div`
 
   .active-item {
     color: var(--secondary-background-color, #181818);
-    background-color: var(--main-active-color, #f90);
+    background-color: var(--primary-active-color, #f90);
   }
 
   @media only screen and (max-width: 768px) {
@@ -41,8 +40,8 @@ const PaginationComponentStyledDiv = styled.div`
 
 const PaginationComponent: FC = () => {
     const {query} = useRouter()
-    const numberOfCardsPerPage = useSelector(({settings}: Store) => settings?.initialSettings?.postCardsSettings?.numberOfCardsPerPage || 20)
-    const totalCount = useSelector(({posts}: Store) => posts?.totalCount)
+    const numberOfCardsPerPage = useAppSelector(({settings}) => settings?.initialSettings?.postCardsSettings?.numberOfCardsPerPage || 20)
+    const totalCount = useAppSelector(({posts}) => posts?.totalCount)
     const currentPage = query?.page ? parseInt(query?.page as string) : 1
     const maxPage = Math.ceil(totalCount / numberOfCardsPerPage)
 

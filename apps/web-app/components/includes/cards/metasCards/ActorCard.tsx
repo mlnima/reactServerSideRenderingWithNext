@@ -43,7 +43,7 @@ const ActorCardStyle = styled.article`
 
     .entry-header {
       .card-header {
-        color: var(--main-active-color) !important;
+        color: var(--primary-active-color) !important;
 
         &:hover {
           color: var(--secondary-text-color, #ccc) !important;

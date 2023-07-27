@@ -1,16 +1,17 @@
 import { css } from 'styled-components';
-
+//var(--primary-text-color,#fff)
+//var(--primary-background-color,#000)
 const defaultColors = css`
   :root{
-    --main-text-color: #fff;
+    --primary-text-color: #fff;
     --secondary-text-color: #ccc;
     --tertiary-text-color: #c7c7c7;
 
-    --main-background-color: #000;
+    --primary-background-color: #000;
     --secondary-background-color: #181818;
     --dim-background-color:rgba(0,0,0,.6);
-    --main-active-color :#f90;
-    --main-secondary-color :#6c757d;
+    
+    --primary-active-color :#f90;
     --primary-gradiant:linear-gradient(180deg,#fff,hsla(0,0%,100%,.6));
     //buttons
     --primary-button-link-background-color: #f90;

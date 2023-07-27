@@ -1,9 +1,8 @@
 import React, {FC, memo, useMemo} from "react";
 import styled from "styled-components";
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
 import Link from "next/link";
 import ImageContent from "@components/includes/UserProfileImage/ImageContent";
+import {useAppSelector} from "@store_toolkit/hooks";
 
 const Style = styled.div`
   display: flex;
@@ -13,8 +12,6 @@ const Style = styled.div`
 
   .user-info-profile-button-image {
     border-radius: 50%;
-    width: ${({size}: UserProfileImageStylePropTypes) => size || 48}px;
-    height: ${({size}: UserProfileImageStylePropTypes) => size || 48}px;
     box-sizing: border-box;
   }
 
@@ -24,36 +21,27 @@ const Style = styled.div`
   }
 `
 
-interface UserProfileImageStylePropTypes {
-    size?: number
-}
-
-interface UserProfileImagePropTypes {
+interface IProps {
     size?: number,
     profileRedirect?: boolean,
 }
 
-const UserProfileImage: FC<UserProfileImagePropTypes> = ({size, profileRedirect}) => {
+const UserProfileImage: FC<IProps> = ({size, profileRedirect}) => {
 
-    const {userData, loggedIn} = useSelector(({user}: Store) => {
-        return {
-            loggedIn: user.loggedIn,
-            userData: user?.userData
-        }
-    })
+    const {userData, loggedIn} = useAppSelector(({user}) => user)
 
     const profileImage = useMemo(() => userData?.profileImage?.filePath,[userData?.profileImage?.filePath])
 
-
     return (
-        <Style className={'user-profile-image'} size={size}>
+        <Style className={'user-profile-image'}>
             {profileRedirect && loggedIn ?
                 <Link href={`/profile`}><ImageContent profileImage={profileImage} size={size}/></Link> :
                 <ImageContent profileImage={userData?.profileImage?.filePath} size={size}/>
             }
         </Style>
     )
-
-
 };
 export default memo(UserProfileImage);
+
+// width: ${({size}) => size || 48}px;
+// height: ${({size}) => size || 48}px;

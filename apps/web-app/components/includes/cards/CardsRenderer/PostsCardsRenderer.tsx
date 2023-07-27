@@ -1,10 +1,10 @@
 import {FC} from "react";
 import dynamic from "next/dynamic";
 import {useRouter} from "next/router";
-import {useSelector} from "react-redux";
-import {Post, Store} from "typescript-types";
+import {Post} from "typescript-types";
 import {ratingCalculator} from "custom-util";
 import styled from "styled-components";
+import {useAppSelector} from "@store_toolkit/hooks";
 
 const ArticlePostCard = dynamic(() => import('../postsCards/ArticlePostCard'))
 const PromotionPostCard = dynamic(() => import('../postsCards/PromotionPostCard'))
@@ -13,18 +13,24 @@ const VideoPostCard = dynamic(() => import('../postsCards/VideoPostCard'))
 const EventPostCard = dynamic(() => import('../postsCards/EventPostCard'))
 const AdPostCard = dynamic(() => import('../postsCards/AdPostCard'))
 
-const Style = styled.div`
+interface StylePropTypes {
+    numberOfCardsPerRowInMobile: number,
+    cardWidth?: number,
+    customStyles?: string
+}
+
+const Style = styled.div<StylePropTypes>`
   display: grid;
   width: 100%;
   margin: 10px auto;
   grid-gap: 5px;
-  grid-template-columns: repeat(auto-fill, minmax(${({numberOfCardsPerRowInMobile}: StylePropTypes) => `${96 / numberOfCardsPerRowInMobile}`}vw, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(${({numberOfCardsPerRowInMobile}) => `${96 / numberOfCardsPerRowInMobile}`}vw, 1fr));
 
   @media only screen and (min-width: 768px) {
-    grid-template-columns: repeat(auto-fill, minmax(${({cardWidth}: StylePropTypes) => `${cardWidth}px`}, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(${({cardWidth}) => `${cardWidth}px`}, 1fr));
   }
 
-  ${({customStyles}: StylePropTypes) => customStyles || ''}
+  ${({customStyles}) => customStyles || ''}
 `
 
 interface CardsRendererPropTypes {
@@ -43,11 +49,7 @@ interface CardsRendererPropTypes {
     cardWidthDesktop?: number,
 }
 
-interface StylePropTypes {
-    numberOfCardsPerRowInMobile: number,
-    cardWidth?: number,
-    customStyles?: string
-}
+
 
 const PostsCardsRenderer: FC<CardsRendererPropTypes> =
     ({
@@ -66,7 +68,7 @@ const PostsCardsRenderer: FC<CardsRendererPropTypes> =
             'Ad': AdPostCard,
         }
 
-        const {numberOfCardsPerRowInMobile, customStyles, cardWidth} = useSelector(({settings}: Store) => {
+        const {numberOfCardsPerRowInMobile, customStyles, cardWidth} = useAppSelector(({settings}) => {
             return {
                 numberOfCardsPerRowInMobile: settings?.initialSettings?.postCardsSettings?.numberOfCardsPerRowInMobile || 2,
                 customStyles: settings?.initialSettings?.postCardsSettings?.customStyles,

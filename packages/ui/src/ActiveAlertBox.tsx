@@ -10,7 +10,7 @@ const Style = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--main-text-color, #fff);
+  color:var(--primary-text-color,#fff);
   background-color: rgba(0,0,0,.6);
   z-index: 1010;
 
@@ -22,7 +22,7 @@ const Style = styled.div`
     border-radius: 5px;
 
     .alert-message-header {
-      background-color: var( --main-text-color, #fff);
+      background-color: var( --primary-text-color, #fff);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -30,7 +30,7 @@ const Style = styled.div`
       padding: 5px 0;
 
       .close-alert {
-        color: var(--main-text-color, #fff);;
+        color: var(--primary-text-color,#fff);
         background-color: transparent;
         border: none;
         height: 25px;

@@ -1,27 +1,33 @@
-// @ts-nocheck
 import React, {useRef} from 'react';
 import styled from "styled-components";
 import PostPageStyle from "../../components/styles/PostPageStyle";
-import {useSelector} from "react-redux";
 import dynamic from "next/dynamic";
 import PostTitle from "../../components/common/PostTitle";
 import RelatedPostsRenderer from "../../components/common/RelatedPostsRenderer";
-import {Store} from "typescript-types";
+import {useAppSelector} from "@store_toolkit/hooks";
+
 const PostMetasRenderer = dynamic(() => import('../../components/common/PostMetasRenderer/PostMetasRenderer'))
 const CommentsRenderer = dynamic(() => import('../../components/common/CommentsRenderer/CommentsRenderer'))
 const CommentFrom = dynamic(() => import('../../components/common/CommentFrom'))
 const WidgetsRenderer = dynamic(() => import('../../../../includes/WidgetsRenderer/WidgetsRenderer'))
 const RatingButtons = dynamic(() => import('../../components/common/RatingButtons'))
 const DownloadLink = dynamic(() => import('../../components/common/DownloadLink'))
-const VideoPlayer = dynamic(() => import('../../components/video/VideoPlayer'),{ssr:false})
+const VideoPlayer = dynamic(() => import('../../components/video/VideoPlayer'), {ssr: false})
 const PostDescription = dynamic(() => import('../../components/common/description/Description'))
 
-const VideoTypePostPageStyle = styled(PostPageStyle)`
+interface IStyles {
+    customStyles?: string
+}
+
+const VideoTypePostPageStyle = styled(PostPageStyle)<IStyles>`
   margin: auto;
+
   #main {
     width: 100%;
+
     article {
       width: 100%;
+
       .entry-header {
         width: 100%;
       }
@@ -38,13 +44,13 @@ const VideoTypePostPageStyle = styled(PostPageStyle)`
     }
   }
 
-  ${({postPageStyle}: { postPageStyle: string }) => postPageStyle || ''}
+  ${({customStyles}) => customStyles || ''}
 `
 
 const VideoTypePostPage = () => {
     const descriptionRef = useRef<HTMLDivElement>(null)
-    const {post} = useSelector(({posts}: Store) => posts)
-    const {customStyles} = useSelector(({settings}: Store) => settings?.currentPageSettings)
+    const {post} = useAppSelector(({posts}) => posts)
+    const {customStyles} = useAppSelector(({settings}) => settings?.currentPageSettings)
 
     return (
         <VideoTypePostPageStyle id={'primary'} className='post-page' customStyles={customStyles}>
@@ -59,9 +65,9 @@ const VideoTypePostPage = () => {
                             <PostTitle/>
                             <div className='entry-header-actions'>
                                 <RatingButtons rating={true}/>
-                                {(post?.downloadLink || post.source)&&
+                                {(post?.downloadLink || post.source) &&
                                     <DownloadLink downloadLink={post.downloadLink || post.source}
-                                        downloadLinks={post?.downloadLinks || []}
+                                                  downloadLinks={post?.downloadLinks || []}
                                     />
                                 }
                             </div>
@@ -80,7 +86,7 @@ const VideoTypePostPage = () => {
                     </div>
                     <RelatedPostsRenderer/>
                     <CommentFrom/>
-                    {!!post?.comments?.length && <CommentsRenderer showComments={true}/> }
+                    {!!post?.comments?.length && <CommentsRenderer showComments={true}/>}
                 </article>
             </main>
 

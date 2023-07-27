@@ -2,8 +2,7 @@ import {FC} from "react";
 import Link from 'next/link'
 import styled from "styled-components";
 import {rangeNumGenerator} from "custom-util";
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
+import {useAppSelector} from "@store_toolkit/hooks";
 
 const WidgetPaginationStyledDiv = styled.div`
   display: flex;
@@ -12,7 +11,7 @@ const WidgetPaginationStyledDiv = styled.div`
   flex-wrap: wrap;
 
   .pagination-item {
-    color: var(--main-text-color);
+    color: var(--primary-text-color,#fff);
     padding: 5px 10px;
     margin: 5px;
     border-radius: 5px;
@@ -38,7 +37,7 @@ interface WidgetPaginationPropTypes {
 
 const WidgetPagination: FC<WidgetPaginationPropTypes> = ({baseUrl, totalCount,count}) => {
 
-    const numberOfCardsPerPage = useSelector(({settings}:Store) => {
+    const numberOfCardsPerPage = useAppSelector(({settings}) => {
         return settings?.initialSettings?.postCardsSettings?.numberOfCardsPerPage || 20
     })
 
@@ -55,11 +54,11 @@ const WidgetPagination: FC<WidgetPaginationPropTypes> = ({baseUrl, totalCount,co
                               className='pagination-item'
                               style={{
                                   backgroundColor: pageNumber === 1 && numberOfCardsPerPage === (count || 20)?
-                                      'var(--main-active-color,#f90)' :
+                                      'var(--primary-active-color,#f90)' :
                                       'var(--secondary-background-color, #181818)',
                                   color: pageNumber === 1 && numberOfCardsPerPage === (count || 20) ?
                                       'var(--secondary-background-color, #181818)' :
-                                      'var(--main-text-color, #fff)'
+                                      'var(--primary-text-color,#fff)'
                               }}>
                                 {pageNumber}
                         </Link>

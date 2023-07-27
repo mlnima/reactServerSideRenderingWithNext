@@ -1,10 +1,13 @@
-// @ts-nocheck
 import {FC, useEffect, useState} from 'react';
 import Image from 'next/image';
 import styled from "styled-components";
 import {Post} from "typescript-types";
 
-let StyledDiv = styled.div`
+interface IStyles{
+    customStyles?:string
+}
+
+let StyledDiv = styled.div<IStyles>`
   margin: 10px 0;
   position: relative;
   top: 0;
@@ -54,7 +57,7 @@ let StyledDiv = styled.div`
     left: 1%;
   }
 
-  ${({stylesData}: { stylesData?: string }) => stylesData || ''}
+  ${({customStyles}) => customStyles || ''}
 `;
 
 interface PropTypes {
@@ -69,12 +72,15 @@ const SlideShow: FC<PropTypes> = ({post, sidebar, deviceWidth}) => {
         activeImageIndex: 0,
         imagesArrayLength: 0
     });
+
     useEffect(() => {
+        if (post?.images?.length)
         setState({
             ...state,
             imagesArrayLength: post.images?.length
         })
     }, [post.images]);
+
     const nextImage = () => {
         setState({
             ...state,
@@ -108,10 +114,11 @@ const SlideShow: FC<PropTypes> = ({post, sidebar, deviceWidth}) => {
             return null
         }
     }
+
     const RenderImageElement = () => {
         const activeImageSrc = post.images?.length ? post.images[state.activeImageIndex] : post.mainThumbnail
 
-        if (activeImageSrc.includes('http')) {
+        if (activeImageSrc?.includes('http')) {
             if (post.images?.length) {
                 return (
                     <img className='active-image' src={activeImageSrc} alt="activeImageSrc"/>
@@ -126,7 +133,7 @@ const SlideShow: FC<PropTypes> = ({post, sidebar, deviceWidth}) => {
             let imageWidth = deviceWidth > 768 ? sidebar ? deviceWidth - 300 : deviceWidth : deviceWidth
 
             return (
-                <Image src={activeImageSrc} alt="activeImageSrc"
+                <Image src={activeImageSrc || ''} alt="activeImageSrc"
                        width={imageWidth || 640} height={(imageWidth || 640) / 1.777}
                        quality={85}
                        loading='eager'

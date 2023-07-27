@@ -2,9 +2,8 @@ import React, {useEffect, Fragment, FC} from 'react';
 import {useRouter} from "next/router";
 import PaginationComponent from "../PaginationComponent/PaginationComponent";
 import styled from "styled-components";
-import {useSelector} from "react-redux";
 import PostsCardsRenderer from "../cards/CardsRenderer/PostsCardsRenderer";
-import {Store} from "typescript-types";
+import {useAppSelector} from "@store_toolkit/hooks";
 
 let PostsContainer = styled.div`
   width: 100%;
@@ -27,7 +26,7 @@ const PostsPage: FC<PostPageTypes> = ({renderPagination}) => {
 
     const {query} = useRouter()
 
-    const {posts} = useSelector(({posts}: Store) => {
+    const {posts} = useAppSelector(({posts}) => {
         return {
             posts: posts?.posts,
         }

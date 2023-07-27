@@ -1,7 +1,7 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import languagesOptions from "@variables/languagesOptions";
+import {LanguagesOptions} from "custom-util";
 import {DashboardStore} from "typescript-types";
 import {useAppDispatch} from "@store/hooks";
 import {useSearchParams} from "react-router-dom";
@@ -142,7 +142,7 @@ const Meta = () => {
                     <p>Language :</p>
                     <select className={'custom-select'} onChange={e => onActiveEditingLanguageChangeHandler(e)}>
                         <option value='default'>Default</option>
-                        {languagesOptions}
+                        <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALS || ''}/>
                     </select>
                 </div>
                 <div className={'single-meta-page-section'}>

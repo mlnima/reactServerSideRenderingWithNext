@@ -8,8 +8,8 @@ import MembershipSettings from "@components/pages/settings/initialSettings/Membe
 import LayoutSettings from "@components/pages/settings/initialSettings/layoutSettings";
 import {useAppDispatch} from "@store/hooks";
 import {editInitialSettings, updateSettingAction} from "@store/reducers/settingsReducer";
-import {inputValueSimplifier} from "custom-util";
-import languagesOptions from "@variables/languagesOptions";
+import {inputValueSimplifier, LanguagesOptions} from "custom-util";
+
 
 const Style = styled.div`
   display: flex;
@@ -118,7 +118,7 @@ const initialSettings: FC<PropTypes> = ({}) => {
             <select name='activeEditingLanguage' className={'custom-select active-editing-language'}
                     onChange={e => setLanguage(e.target.value)}>
                 <option value='default'>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?? 'default'}</option>
-                {languagesOptions}
+                <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALS || ''}/>
             </select>
             <div className={'setting-sections'}>
                 <HeadDataSettings onChangeHandler={onChangeHandler}

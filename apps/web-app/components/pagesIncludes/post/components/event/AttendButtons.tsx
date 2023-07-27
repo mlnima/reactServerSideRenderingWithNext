@@ -1,10 +1,8 @@
 import {FC} from "react";
 import styled from "styled-components";
 import useTranslation from "next-translate/useTranslation";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAppDispatch, useAppSelector} from "@store_toolkit/hooks";
 import attendingToEvent from "@store_toolkit/clientReducers/postsReducers/attendToEvent";
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 
 const Style = styled.div`
@@ -21,7 +19,7 @@ const AttendButtons: FC<PropTypes> = ({isUserAttending, postId, userId}) => {
     const {t} = useTranslation();
     const dispatch = useAppDispatch()
 
-    const loggedIn = useSelector(({user}: Store) => user.loggedIn)
+    const loggedIn = useAppSelector(({user} ) => user.loggedIn)
 
     const onAttendHandler = () => {
         if (loggedIn){

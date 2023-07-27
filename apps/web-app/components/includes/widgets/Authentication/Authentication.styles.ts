@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-const Styles= styled.div `
+interface IStyles{
+    open: boolean
+}
+
+const Styles= styled.div<IStyles>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,16 +26,16 @@ const Styles= styled.div `
     position: fixed;
     right: 0;
     top: 0;
-    background: var(--main-background-color, #000);
+    background: var(--primary-background-color, #000);
     width: 85%;
     z-index: 12;
     height: 100vh;
-    display: ${({open}: { open: boolean }) => open ? 'flex' : 'none'};
+    display: ${({open}) => open ? 'flex' : 'none'};
     flex-direction: column;
-    animation: ${({open}: { open: boolean }) => open ? 'userMenuSlide .3s linear alternate' : 'none'};
+    animation: ${({open}) => open ? 'userMenuSlide .3s linear alternate' : 'none'};
 
     .close-btn {
-      color: var(--main-text-color, #000);
+      color: var(--primary-text-color,#fff);
       padding: 6px 0;
       margin-bottom: 20px;
       width: 100%;
@@ -56,7 +60,7 @@ const Styles= styled.div `
 
 
         a {
-          color: var(--main-text-color, #fff);
+          color:var(--primary-text-color,#fff);
         }
 
         .icon-wrapper {
@@ -91,7 +95,7 @@ const Styles= styled.div `
         width: 100%;
         height: 100%;
         min-height: 52px;
-        color: var(--main-text-color, #fff);
+        color: var(--primary-text-color,#fff);
         display: flex;
         align-items: center;
         justify-content: flex-start;

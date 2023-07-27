@@ -3,37 +3,38 @@ import Link from "next/link";
 import {useRouter} from "next/router";
 import {UniqueDataTypes} from "typescript-types";
 import useTranslation from "next-translate/useTranslation";
-import {i18LibTranslationWithCallback, widgetTranslationContentSelector} from "@_variables/translationVariables";
+import {nextTranslateWithCallback} from "custom-util";
 
 interface LinkToPropTypes {
     translations: {},
-    uniqueData:UniqueDataTypes
+    uniqueData: UniqueDataTypes
 }
 
 const LinkTo: FC<LinkToPropTypes> = ({translations, uniqueData}) => {
-        const {locale} = useRouter()
-        const {t} = useTranslation();
+    const {locale} = useRouter()
+    const {t} = useTranslation();
 
-        if (uniqueData?.linkTo) {
+    if (uniqueData?.linkTo) {
 
-            const linkContent = useMemo(() => {
-                return i18LibTranslationWithCallback(
+        const linkContent = useMemo(() => {
+            return nextTranslateWithCallback({
                     t,
-                    null,
-                    widgetTranslationContentSelector(locale,uniqueData,'linkToText')
-                )
-            }, [uniqueData,translations])
-
-            return (
-                <Link href={uniqueData?.linkTo}
-                      target={uniqueData?.linkToWindowType || '_self'}
-                      className={'link-to'}
-                      style={{color:'var(--main-text-color)'}}
-                      title={linkContent}>
-                        {linkContent}
-                </Link>
+                    primaryNamespace: null,
+                    originalString: translations?.[locale as string]?.linkToText || uniqueData?.linkToText || ''
+                }
             )
-        } else return null
+        }, [uniqueData, translations])
 
-    };
+        return (
+            <Link href={uniqueData?.linkTo}
+                  target={uniqueData?.linkToWindowType || '_self'}
+                  className={'link-to'}
+                  style={{color: 'var(--primary-text-color,#fff)'}}
+                  title={linkContent}>
+                {linkContent}
+            </Link>
+        )
+    } else return null
+
+};
 export default LinkTo;

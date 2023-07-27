@@ -1,20 +1,15 @@
-// @ts-nocheck
-import React, {PureComponent} from 'react';
+import React, {FC} from 'react';
 import {formatDistance} from "date-fns";
 import {Styles} from "./Message.styles";
-import Link from "next/link";
-import {UserPreviewImage} from "ui";
-import AdminActionOnMessageMenu from "@components/pagesIncludes/chatroom/ChatRoomMessageArea/AdminActionOnMessageMenu";
-import {IMessengerConversationMessage,ChatroomMessage} from "typescript-types";
+import {IMessengerConversationMessage} from "typescript-types";
 
 interface IProps {
-    message: IMessengerConversationMessage;
+    messageData: IMessengerConversationMessage;
     isMine: boolean
 }
 
-const Message = ({messageData, isMine}) => {
+const Message:FC<IProps> = ({messageData, isMine}) => {
 
-console.log('messageData=> ',messageData)
     return (
         <Styles className={'message'} isMine={isMine}>
             {messageData?.type === 'eventLog' &&
@@ -22,8 +17,6 @@ console.log('messageData=> ',messageData)
                     {messageData?.content}
                 </p>
             }
-
-
             <div className={'chatroom-message-data'}>
                 {(!!messageData?.createdAt || !!messageData?.updatedAt) &&
                     <span className={'chatroom-message-username'}
@@ -32,10 +25,8 @@ console.log('messageData=> ',messageData)
                               new Date(),
                               {addSuffix: true}
                           )}>
-                    {messageData?.author?.username}
+                    {messageData?.sender?.username}
                   </span>}
-
-
 
                 {!!messageData?.imageContent  &&
                     <img alt={'message'} src={messageData?.imageContent} className={'chatroom-message-image'}/>}
@@ -45,11 +36,6 @@ console.log('messageData=> ',messageData)
                     <p className={'chatroom-message-text'}>{messageData?.content}</p>}
 
             </div>
-            <AdminActionOnMessageMenu
-                chatroomId={messageData?.chatroom}
-                messageId={messageData?._id}
-            />
-
         </Styles>
     );
 
@@ -57,19 +43,3 @@ console.log('messageData=> ',messageData)
 
 export default Message;
 
-
-// <Styles className='message'
-//         isMine={this?.props?.isMine}>
-//
-//     <div className='message-data'>
-//         <p className='message-text'>
-//             {this?.props?.message?.content}
-//         </p>
-//         <span className='message-date'>
-//                     <p>
-//                         {formatDistance(new Date(this?.props?.message?.createdAt), new Date(), {addSuffix: true})}
-//                     </p>
-//                 </span>
-//     </div>
-//
-// </Styles>

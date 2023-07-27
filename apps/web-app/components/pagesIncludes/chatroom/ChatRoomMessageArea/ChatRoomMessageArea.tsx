@@ -1,10 +1,9 @@
 import React, {useEffect, useRef, memo, FC} from 'react';
 import ChatRoomMessage from './ChatRoomMessage';
-import {useSelector} from 'react-redux';
-import {Store, ChatroomMessage} from 'typescript-types';
-import { socket } from 'custom-util';
+import { ChatroomMessage} from 'typescript-types';
+import socket from 'web-socket-client';
 import {sortArrayByPropertyOfObject} from 'custom-util';
-import {useAppDispatch} from '@store_toolkit/hooks';
+import {useAppDispatch, useAppSelector} from '@store_toolkit/hooks';
 import {loading} from '@store_toolkit/clientReducers/globalStateReducer';
 import Styles from './ChatRoomMessageArea.styles';
 
@@ -27,8 +26,8 @@ const ChatRoomMessageArea: FC<IProp> = (
 
     const prevScrollPosition = useRef(0);
     const dispatch = useAppDispatch();
-    const isMaximized = useSelector(({chatroom}: Store) => chatroom.isMaximized);
-    const chatroomMessages = useSelector(({chatroom}: Store) => chatroom?.messages || []);
+    const isMaximized = useAppSelector(({chatroom}) => chatroom.isMaximized);
+    const chatroomMessages = useAppSelector(({chatroom}) => chatroom?.messages || []);
 
     useEffect(() => {
         const handleScroll = (event) => {
@@ -42,7 +41,7 @@ const ChatRoomMessageArea: FC<IProp> = (
             }
             prevScrollPosition.current = scrollTop;
 
-           // Handle load older messages
+            // Handle load older messages
             if (scrollTop === 0) {
                 dispatch(loading(true));
                 socket.emit('loadOlderMessages', {
@@ -51,7 +50,7 @@ const ChatRoomMessageArea: FC<IProp> = (
                 });
                 setTimeout(() => {
                     dispatch(loading(false));
-                    if (messageAreaRef.current){
+                    if (messageAreaRef.current) {
                         messageAreaRef.current.scroll({
                             top: 1,
                             behavior: 'smooth',
@@ -68,9 +67,8 @@ const ChatRoomMessageArea: FC<IProp> = (
     }, [chatroomMessages]);
 
 
-
     useEffect(() => {
-        if (autoScroll &&messageAreaRef.current) {
+        if (autoScroll && messageAreaRef.current) {
             //@ts-ignore
             messageAreaRef.current.scroll({
                 //@ts-ignore

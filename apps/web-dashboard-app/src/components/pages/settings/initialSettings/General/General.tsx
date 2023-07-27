@@ -1,7 +1,6 @@
 // @ts-nocheck
-import React, {useState,useEffect, useRef} from 'react';
-import languagesOptions from "@variables/languagesOptions";
-import {convertVariableNameToName} from "custom-util";
+import React, {useState,useRef} from 'react';
+import {convertVariableNameToName, LanguagesOptions} from "custom-util";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {DashboardStore, Store} from "typescript-types";
@@ -239,7 +238,7 @@ const General = () => {
                 <select name='activeEditingLanguage' className={'custom-select active-editing-language'}
                         onChange={e => onChangeLanguageHandler(e)}>
                     <option value='default'>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?? 'default'}</option>
-                    {languagesOptions}
+                    <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALS || ''}/>
                 </select>
                 <div className="siteIdentity site-settings-form-section-parent">
                     <div className={'site-settings-form-section'}>

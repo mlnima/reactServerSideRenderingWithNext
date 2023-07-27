@@ -1,5 +1,6 @@
 export interface GlobalState {
     loginRegisterFormPopup: boolean | string,
+    // theme:string,
     loading: boolean,
     adminMode: boolean,
     headerSize: number,
@@ -35,8 +36,5 @@ export interface GlobalState {
         active?: boolean,
         message?: string,
         type?: string,
-        err?: {
-            stack: any
-        }
     }
 }

@@ -35,6 +35,7 @@ apps/api-server/tools/testAPI.js
 .env.development.local
 .env.test.local
 .env.production.local
+.prettierrc
 *.env
 custom-config.json
 package-lock.json
@@ -42,3 +43,5 @@ package-lock.json
 /tempFiles
 /trash
 /additionalJobs
+
+/apps/web-application/tailwind-default.config.js

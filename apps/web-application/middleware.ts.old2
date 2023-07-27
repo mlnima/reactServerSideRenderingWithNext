@@ -1,0 +1,144 @@
+import {NextResponse} from 'next/server'
+import type {NextRequest} from 'next/server'
+import i18n from './i18n'
+import {doesUrlHasQueries} from 'custom-util'
+
+type Url = string;
+type Locale = string;
+
+//@ts-ignore
+const viewUrlProperty = (reqUrl)=>{
+    const urlProp = {
+        href : reqUrl.href,
+        // origin : reqUrl.origin,
+        // pathname : reqUrl.pathname,
+        // searchParams : reqUrl.searchParams,
+        // search   : reqUrl.search,
+    }
+    console.log('reqUrl.toString()=> ',reqUrl.toString())
+    console.log('viewUrlProperty=> ',urlProp)
+}
+
+const inComingRequestLanguageDetector = (url: Url, locales: Locale[]) => {
+    const pathname = new URL(url).pathname;
+    const segments = pathname.split('/').filter(segment => segment.trim() !== '');
+    if (segments.length > 0) {
+        const locale = segments[0];
+        if (locales.includes(locale)) {
+            return locale;
+        }
+    }
+    return null;
+};
+
+export function middleware(request: NextRequest) {
+    const requestedUrl = new URL(request.url)
+    const pathname = requestedUrl.pathname
+    const locale = inComingRequestLanguageDetector(request.url, i18n.locales)
+    // const isMiddlewareAllowed = matcherRegex.test(request.nextUrl.pathname)
+
+    const pathnameIsMissingLocale = i18n.locales.every(
+        (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
+    )
+
+    // console.log('pathname=> ', pathname)
+    // console.log('locale=> ', locale)
+    // console.log('pathnameIsMissingLocale=> ', pathnameIsMissingLocale)
+    // console.log('request.url=> ', request.url)
+    // console.log('request.nextUrl=> ', request.nextUrl)
+
+    if (!pathnameIsMissingLocale && locale) {
+        console.log('action route => ',0)
+        const requestedUrl = new URL(request.url)
+        requestedUrl.searchParams.set("lang",locale as string)
+        console.log(' requestedUrl.href=> ',requestedUrl.href)
+        console.log(' requestedUrl.pathname=> ',requestedUrl.pathname)
+        viewUrlProperty(requestedUrl)
+        return NextResponse.rewrite(requestedUrl)
+    }
+
+    if (pathnameIsMissingLocale && !locale) {
+        const requestedUrl = new URL(request.url)
+        console.log('action route => ',1)
+        // requestedUrl.href = requestedUrl.toString() + `${i18n.defaultLocale}`
+        requestedUrl.searchParams.set("lang",i18n.defaultLocale as string)
+        console.log(' requestedUrl.href=> ',requestedUrl.href)
+        console.log(' requestedUrl.pathname=> ',requestedUrl.pathname)
+        requestedUrl.pathname= `${i18n.defaultLocale}`
+        viewUrlProperty(requestedUrl)
+        return NextResponse.redirect(requestedUrl)
+    }
+
+
+    // if (!locale && pathname === '/' && pathnameIsMissingLocale) {
+    //     console.log('action route => ',1,locale)
+    //    return NextResponse.rewrite(new URL(`/${locale}?lang=${locale}`, request.url))
+    //    //  return NextResponse.redirect(new URL(`/en`, request.url))
+    // }
+
+    // if (pathname === '/' && pathnameIsMissingLocale) {
+    //     console.log('action route => ',2)
+    //     return NextResponse.rewrite(new URL(`/${locale}?lang=${locale}`, request.url))
+    // }
+    //
+    // if (pathname === '/' && !pathnameIsMissingLocale){
+    //     console.log('action route => ',3)
+    //     return NextResponse.rewrite(new URL(`/${locale}/?lang=${locale}`, request.url))
+    // }
+
+
+}
+
+export const config = {
+    matcher: [
+
+        '/((?!api|_next/static|_next/image|favicon.ico).*)',
+        '/',
+    ],
+}
+
+
+// else {
+// return NextResponse.redirect(
+//     new URL(`/${locale}/${pathname}`, request.url)
+// )
+// }
+
+
+// const isMiddlewareAllowed = matcherRegex.test(request.nextUrl.pathname)
+//
+// if (isMiddlewareAllowed) {
+//
+//     if (request.nextUrl.pathname === '/') {
+//
+//         const targetUrl =new URL(`/${i18n.defaultLocale}`, request.url)
+//         console.log('targetUrl=> ',targetUrl)
+//         return NextResponse.rewrite(targetUrl)
+//     }
+//
+// } else return
+
+// const targetUrl = new URL(`/${incomingRequestLanguage}?lang=${incomingRequestLanguage}`,request.url)
+// const incomingRequestLanguage = inComingRequestLanguageDetector(request.nextUrl.href, i18n.locales) || i18n.defaultLocale;
+// const isUrlWithQueries = doesUrlHasQueries(request.url)
+
+
+// console.log('request.url=> ',request.nextUrl)
+// console.log('request.url=> ',request.url)
+// console.log('targetUrl=> ',targetUrl.href)
+// console.log('targetUrl=> ',targetUrl.pathname)
+// return NextResponse.rewrite(targetUrl)
+// export const middleware = ()=> {}
+
+// export const config = {
+//     // matcher: '/:lng*'
+//     // matcher: ['/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js).*)']
+//     //
+//     // matcher: ['^(?!/(?:_next/static|favicon\\.ico|swc\\.js|api)(?:/|$))'],
+// }
+
+
+
+
+
+// const matcherRegex = new RegExp('^(?!/(?:_next/static|favicon\\.ico|swc\\.js|api)(?:/|$))');

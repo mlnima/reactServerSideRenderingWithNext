@@ -1,14 +1,13 @@
 import React, {FC} from "react";
-import {useSelector} from "react-redux";
 import TextInput from "../common/TextInput";
-import {Store} from "typescript-types";
+import {useAppSelector} from "@store_toolkit/hooks";
 
 interface VideoTypeFieldsPropTypes {
     onChangeHandler:any
 }
 
 const VideoTypeFields: FC<VideoTypeFieldsPropTypes> = ({onChangeHandler}) => {
-    const editingPost = useSelector((store: Store)=>store?.posts?.editingPost)
+    const editingPost = useAppSelector((store)=>store?.posts?.editingPost)
     return (
         <>
             <TextInput required={true} name={'videoEmbedCode'} type={'text'}

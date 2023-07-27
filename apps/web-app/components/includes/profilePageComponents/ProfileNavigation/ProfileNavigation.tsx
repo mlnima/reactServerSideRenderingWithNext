@@ -2,9 +2,8 @@ import React, {useEffect, useState} from 'react';
 import Link from 'next/link'
 // import {useTranslation} from 'next-i18next';
 import useTranslation from 'next-translate/useTranslation'
-import {useSelector} from "react-redux";
 import styled from "styled-components";
-import {Store} from "typescript-types";
+import {useAppSelector} from "@store_toolkit/hooks";
 
 const ProfileNavigationStyledDiv = styled.div`
   display: flex;
@@ -17,10 +16,10 @@ const ProfileNavigationStyledDiv = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: var(--main-text-color, #fff);
+    color: var(--primary-text-color,#fff);
 
     .profile-navigation-item {
-      color: var(--main-text-color, #fff);
+      color: var(--primary-text-color,#fff);
       padding: 5px;
       margin: 5px;
       font-size: small;
@@ -32,7 +31,7 @@ const ProfileNavigationStyledDiv = styled.div`
 
       &:active {
         color: var(--secondary-background-color, #181818);
-        background-color: var(--main-text-color, #fff);
+        background-color: var(--primary-text-color,#fff);
       }
     }
   }
@@ -47,7 +46,7 @@ const ProfileNavigationStyledDiv = styled.div`
 `
 const ProfileNavigation = () => {
     const {t} = useTranslation('common');
-    const userData = useSelector(({user}: Store) => user?.userData)
+    const userData = useAppSelector(({user}) => user?.userData)
 
     const [navigationData, setNavigationData] = useState({
         isOpen: false,

@@ -1,7 +1,7 @@
 import {FC} from "react";
 import styled from "styled-components";
-import {useDispatch, useSelector} from "react-redux";
-import {Store} from "typescript-types";
+import {useDispatch} from "react-redux";
+import {useAppSelector} from "@store_toolkit/hooks";
 
 const Style = styled.section`
 
@@ -12,7 +12,7 @@ interface ComponentPropTypes {
 
 const PostTypeSelector: FC<ComponentPropTypes> = ({}) => {
     const dispatch = useDispatch()
-    const allowedPostTypeUserCanCreate = useSelector(({settings}:Store)=>settings?.membershipSettings?.allowedPostTypeUserCanCreate)
+    const allowedPostTypeUserCanCreate = useAppSelector(({settings})=>settings?.membershipSettings?.allowedPostTypeUserCanCreate)
     return (
         <Style className={'post-editor-section'}>
             <select name={'postType'} className={'custom-select'}></select>

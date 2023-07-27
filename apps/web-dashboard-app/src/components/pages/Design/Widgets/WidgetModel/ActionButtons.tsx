@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import ExportWidget from './ExportWidget/ExportWidget'
 import {useSelector} from "react-redux";
-import {DashboardStore, Store, Widget} from "typescript-types";
+import {DashboardStore, Widget} from "typescript-types";
 // import updateRouteQuery from "@_variables/_clientVariables/clientVariables/updateRouteQuery";
 import {createNewWidgetAction, deleteWidgetAction, updateWidgetAction} from "@store/reducers/widgetsReducer";
 import {useAppDispatch} from "@store/hooks";

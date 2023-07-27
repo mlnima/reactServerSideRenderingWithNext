@@ -1,0 +1,54 @@
+{
+  "name": "next-13-app-router",
+  "description": "this app is not working yet. there is massive issue with i18n which is require for this project, also is excluded from build script",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "ts-node --transpile-only ./next-dev-server.js",
+    "build": "next build",
+    "start": "node next-production-server",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@formatjs/intl-localematcher": "^0.2.32",
+    "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/fontawesome-free-solid": "^5.0.13",
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
+    "@fortawesome/free-brands-svg-icons": "^6.4.0",
+    "@fortawesome/free-regular-svg-icons": "^6.4.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@types/node": "20.2.5",
+    "@types/react": "^18.2.7",
+    "@types/react-dom": "18.2.4",
+    "accept-language": "^3.0.18",
+    "eslint": "8.45.0",
+    "eslint-config-next": "^13.4.10",
+    "fetch-requests": "*",
+    "negotiator": "^0.6.3",
+    "next": "^13.4.12",
+    "next-translate": "^2.5.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-redux": "^8.1.1",
+    "redux": "^4.2.1",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-mock-store": "^1.5.4",
+    "simple-peer": "^9.11.1",
+    "styled-components": "^5.3.11",
+    "tailwind-css-components": "*",
+    "typescript": "^5.1.6"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.14",
+    "next-translate-plugin": "^2.4.4",
+    "postcss": "^8.4.14",
+    "tailwindcss": "^3.3.2"
+  },
+  "_moduleAliases": {
+    "@components": "./app/components",
+    "@lib": "./app/lib",
+    "@store": "./store",
+    "@providers": "./app/providers"
+  }
+}

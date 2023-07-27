@@ -12,13 +12,15 @@ const ImageContent: FC<PropTypes> = ({profileImage, size}) => {
     const imageSize = useMemo(()=>size  || 24,[])
 
     if (!!profileImage && !gotError) {
-        return <img className={'user-info-profile-button-image'} src={profileImage}
+        return <img className={'user-info-profile-button-image'}
+                    src={profileImage}
+                    style={{width:size || 48,height:size || 48}}
                     onError={() => setGotError(true)}
                     alt={'profile image'}/>
     } else {
-        return<FontAwesomeIcon icon={faUser}
+        return <FontAwesomeIcon icon={faUser}
                                className={'user-info-profile-button-icon'}
-                               style={{width:imageSize,height:imageSize, color:' var(--main-text-color, #fff)'}}/>
+                               style={{width:imageSize,height:imageSize, color:' var(--primary-text-color,#fff)'}}/>
     }
 };
 export default ImageContent;

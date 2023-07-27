@@ -7,7 +7,7 @@ interface IProps {
 
 // justify-content: ${({isMine}) => isMine ? 'flex-end' : 'flex-start'};
 // background-color: ${({isMine}) => isMine ? '#1877F2' : 'var(--tertiary-background-color,#404040)'};
-// color: ${({isMine}) => isMine ? '#fff' : 'var(--main-text-color,#FFFFFF)'};;
+// color: ${({isMine}) => isMine ? '#fff' : 'var(--primary-text-color,#fff)'};;
 export const Styles = styled.div<IProps>`
   display: flex;
   justify-content: ${({isMine}) => isMine ? 'flex-end' : 'flex-start'};
@@ -19,7 +19,7 @@ export const Styles = styled.div<IProps>`
   overflow-wrap: break-word;
 
   .chatroom-message-log{
-    color: var(--main-text-color, #fff);
+    color: var(--primary-text-color,#fff);
     text-align: center;
     word-wrap: break-word;
     padding: 5px;
@@ -28,7 +28,7 @@ export const Styles = styled.div<IProps>`
   
   .chatroom-message-data {
     background-color: ${({isMine}) => isMine ? '#1877F2' : 'var(--tertiary-background-color,#404040)'};
-    color: ${({isMine}) => isMine ? '#fff' : 'var(--main-text-color,#FFFFFF)'};;
+    color: ${({isMine}) => isMine ? '#fff' : 'var(--primary-text-color,#fff)'};;
     padding: 10px;
     margin: 5px;
     box-sizing: border-box;

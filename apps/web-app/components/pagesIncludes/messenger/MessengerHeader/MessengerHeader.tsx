@@ -6,9 +6,8 @@ import {Styles} from "./MessengerHeader.styles";
 import {faVideo} from "@fortawesome/free-solid-svg-icons/faVideo";
 import {faArrowDownWideShort} from "@fortawesome/free-solid-svg-icons/faArrowDownWideShort";
 import styled from "styled-components";
-import {useSelector} from "react-redux";
-import {Store, User} from "typescript-types";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import { User} from "typescript-types";
+import {useAppDispatch, useAppSelector} from "@store_toolkit/hooks";
 import {initialOutGoingCallAction} from "@store_toolkit/clientReducers/mediaConnectionReducer";
 import {setMessengerState} from "@store_toolkit/clientReducers/messengerReducer";
 
@@ -30,7 +29,7 @@ const StyledButton = styled.button<IButton>`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: ${({active}) => active ? 'var(--main-active-color, #f90)' : 'var(--secondary-text-color, #ccc)'};
+  color: ${({active}) => active ? 'var(--primary-active-color, #f90)' : 'var(--secondary-text-color, #ccc)'};
 
   svg {
     width: 25px;
@@ -41,8 +40,8 @@ const StyledButton = styled.button<IButton>`
 
 const MessengerHeader: FC<IProps> = ({ conversationsMenuTriggerHandler}) => {
     const dispatch = useAppDispatch();
-    const { activeConversation,isConversationsMenuOpen, autoScroll} = useSelector(({messenger}: Store) => messenger);
-    const {userData} = useSelector(({user}: Store) => user)
+    const { activeConversation,isConversationsMenuOpen, autoScroll} = useAppSelector(({messenger} ) => messenger);
+    const {userData} = useAppSelector(({user} ) => user)
     const [partnerData, setPartnerData] = useState<User | null>(null)
 
 

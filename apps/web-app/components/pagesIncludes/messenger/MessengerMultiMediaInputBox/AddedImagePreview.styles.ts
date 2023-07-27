@@ -25,7 +25,7 @@ export const Styles = styled.form`
       height: 32px;
    
       .close-btn{
-        color: var(--main-text-color, #fff);
+        color: var(--primary-text-color,#fff);
       }
     }
 

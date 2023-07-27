@@ -1,14 +1,13 @@
 import React, {FC} from "react";
 //import TextInput from "@components/includes/profilePageComponents/profilePost/common/TextInput";
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
+import {useAppSelector} from "@store_toolkit/hooks";
 
 interface CreateEditArticlePostPropTypes {
-    onChangeHandler:any
+    onChangeHandler: any
 }
 
 const CreateEditArticlePostField: FC<CreateEditArticlePostPropTypes> = ({onChangeHandler}) => {
-    const editingPostData = useSelector((store: Store) => store?.posts?.editingPost)
+    const editingPostData = useAppSelector((store) => store?.posts?.editingPost)
 
     return (
         <div>

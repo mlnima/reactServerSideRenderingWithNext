@@ -1,11 +1,9 @@
-import React, { useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import UserSmallPreview from "../../../components/includes/socialComponents/UserSmallPreview/UserSmallPreview";
 import {wrapper} from "@store_toolkit/store";
-import { useSelector} from "react-redux";
 import styled from "styled-components";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAppDispatch, useAppSelector} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "../../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
-import {Store} from "typescript-types";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
 import {getMultipleUserDataByIdAction} from "@store_toolkit/clientReducers/userReducers/getMultipleUserDataByIdAction";
 import {getSpecificUserDataAction} from "@store_toolkit/clientReducers/userReducers/getSpecificUserDataAction";
@@ -14,19 +12,20 @@ const FollowingStyledDiv = styled.div`
   max-width: 940px;
   margin: auto;
 `
-const Following  = ( ) => {
-    const userData = useSelector((store: Store) => store?.user?.userData)
+
+const Following = () => {
+    const userData = useAppSelector((store) => store?.user?.userData)
     const dispatch = useAppDispatch()
     const [following, setFollowing] = useState([]);
 
     useEffect(() => {
-        dispatch(getSpecificUserDataAction({fields:['following']}))
+        dispatch(getSpecificUserDataAction({fields: ['following']}))
     }, []);
 
 
     useEffect(() => {
         if (userData?.following?.length) {
-            dispatch(getMultipleUserDataByIdAction({usersList:userData?.followers, type:'following'}))
+            dispatch(getMultipleUserDataByIdAction({usersList: userData?.followers, type: 'following'}))
         }
     }, [userData?.following]);
 
@@ -45,10 +44,9 @@ const Following  = ( ) => {
     );
 };
 
-//@ts-ignore
+
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-    // @ts-ignore
     await _getServerSideStaticPageData(
         context,
         [
@@ -59,9 +57,11 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         {
             setHeadData: true,
             page: 'followingPage'
-        },store)
+        }, store)
 
-    return null
+    return {
+        props: {}
+    }
 })
 
 export default Following;

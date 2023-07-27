@@ -1,13 +1,10 @@
 import React, {FC} from "react";
 import styled from "styled-components";
 import {useRouter} from "next/router";
-import {useSelector} from "react-redux";
-import {updateQueryGenerator} from "@_variables/variables";
-import {useAppDispatch} from "@store_toolkit/hooks";
-import {Store} from "typescript-types";
+import {useAppDispatch, useAppSelector} from "@store_toolkit/hooks";
 import {editPostStatusAction} from "@store_toolkit/clientReducers/postsReducers/editPostStatusAction";
 
-const Style= styled.div`
+const Style = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,7 +47,7 @@ const PostAdminQuickAccessBar: FC<PropTypes> = () => {
     const dispatch = useAppDispatch()
     const {query, push, pathname} = useRouter()
 
-    const {_id, status, createdAt, updatedAt} = useSelector(({posts}: Store) => {
+    const {_id, status, createdAt, updatedAt} = useAppSelector(({posts}) => {
         return {
             _id: posts.post?._id,
             status: posts.post?.status,
@@ -60,9 +57,12 @@ const PostAdminQuickAccessBar: FC<PropTypes> = () => {
     })
 
     const onStatusChangeHandler = (status) => {
-        if (_id){
+        if (_id) {
             dispatch(editPostStatusAction({ids: [_id], status}))
-            updateQueryGenerator(query, push, pathname)
+            push({
+                pathname: pathname,
+                query: {...query, lastPageUpdate: Date.now()},
+            });
         }
     }
 
@@ -77,7 +77,7 @@ const PostAdminQuickAccessBar: FC<PropTypes> = () => {
             <span className={'btn btn-danger'} onClick={() => onStatusChangeHandler('trash')}>Trash</span>
             <div className={'dates'}>
                 {createdAt && <span> Created At : {createdAt}</span>}
-                {updatedAt &&  <span> Updated At : {updatedAt}</span>}
+                {updatedAt && <span> Updated At : {updatedAt}</span>}
             </div>
             <h4 className='status'>Status : {status}</h4>
         </Style>

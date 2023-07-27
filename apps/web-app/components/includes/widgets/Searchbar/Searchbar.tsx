@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useState, MouseEvent, useEffect} from "react";
 import styled from "styled-components";
 import useTranslation from 'next-translate/useTranslation'
@@ -7,7 +6,10 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons/faMagnifyingGlass";
 import {faXmark} from "@fortawesome/free-solid-svg-icons/faXmark";
 
-const SearchbarStyledDiv = styled.div`
+interface IStyles{
+    open:boolean
+}
+const SearchbarStyledDiv = styled.div<IStyles>`
   position: relative;
   z-index: 11;
   
@@ -18,23 +20,23 @@ const SearchbarStyledDiv = styled.div`
     align-items: center;
     background-color: transparent;
     outline: none;
-    color: var(--main-text-color, #fff);
+    color: var(--primary-text-color,#fff);
   }
 
   .searchbar-form {
-    display: ${({open}: { open: boolean }) => open ? 'flex' : 'none'};
-    animation: ${(props: { open: boolean }) => props.open ? `searchbarFall .3s linear alternate` : `none`};
+    display: ${({open}) => open ? 'flex' : 'none'};
+    animation: ${({open}) => open ? `searchbarFall .3s linear alternate` : `none`};
     justify-content: center;
     position: fixed;
     top: 1px;
     left: 0;
     right: 0;
     width: 100%;
-    background: var(--main-background-color, #000);
+    background: var(--primary-background-color,#000);
 
     .search-button-widget-close-btn, .searchbar-submit-btn, .search-button-widget-clear-keyword {
-      background: var(--main-background-color, #000);
-      color: var(--main-text-color, #fff);
+      background: var(--primary-background-color,#000);
+      color: var(--primary-text-color,#fff);
       border: none;
       outline: none;
       display: flex;
@@ -45,10 +47,10 @@ const SearchbarStyledDiv = styled.div`
     }
 
     .searchbar-input {
-      background: var(--main-background-color, #252525);
+      background: var(--primary-background-color,#000);
       border: none;
       outline: none;
-      color: var(--main-text-color, #fff);
+      color: var(--primary-text-color,#fff);
     }
 
     .search-button-widget-clear-keyword {
@@ -94,7 +96,7 @@ const Searchbar = () => {
     const {t} = useTranslation();
     const {push, query} = useRouter()
     const [keyword, setKeyword] = useState('')
-    const [open, setOpen] = useState(null)
+    const [open, setOpen] = useState(false)
 
     useEffect(() => {
         if (query?.keyword && query?.keyword !== keyword) {

@@ -151,7 +151,7 @@ export default TextToCanvasImage
 //     display: flex;
 //     justify-content: center;
 //     align-items: center;
-//     color: var(--main-text-color, #f90);
+//     color: var(--primary-text-color,#fff);
 //   }
 //
 //   @media only screen and (min-width: 768px) {

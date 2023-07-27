@@ -35,7 +35,7 @@ const UserPreviewImage: FC<PropTypes> = ({imageUrl,size}) => {
                      alt={'profile image'}/>:
                 <FontAwesomeIcon icon={faUser}
                                  className={'user-preview-image-icon'}
-                                 style={{width:size,height:size, color:' var(--main-text-color, #fff)'}}/>
+                                 style={{width:size,height:size, color:' var(--primary-text-color,#fff)'}}/>
             }
 
         </Style>

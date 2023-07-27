@@ -2,8 +2,7 @@ import React, {FC, useMemo} from "react";
 import {useRouter} from "next/router";
 import parse from "html-react-parser";
 import styled from "styled-components";
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
+import {useAppSelector} from "@store_toolkit/hooks";
 
 const PostDescriptionStyledDiv = styled.div`
   color: var(--secondary-text-color, #ccc);
@@ -24,7 +23,7 @@ interface PropTypes {
 const Description: FC<PropTypes> = ({descriptionRef}) => {
 
     const {locale} = useRouter();
-    const {description, translations} = useSelector(({posts}: Store) => {
+    const {description, translations} = useAppSelector(({posts} ) => {
         return {
             description: posts.post?.description,
             translations: posts.post?.translations,

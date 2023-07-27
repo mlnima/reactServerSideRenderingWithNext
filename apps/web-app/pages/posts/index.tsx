@@ -1,13 +1,16 @@
 import PostsPage from "../../components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
 import {wrapper} from "@store_toolkit/store";
-import {useSelector} from "react-redux";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
-import {Store} from "typescript-types";
 import getPostsAction from "@store_toolkit/clientReducers/postsReducers/getPostsAction";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
+import {useAppSelector} from "@store_toolkit/hooks";
 
-let StyledMain = styled.main`
+interface IStyles{
+    customStyles?: string
+}
+
+let StyledMain = styled.main<IStyles>`
   grid-area: main;
   .posts-page-info {
     margin: 5px 0;
@@ -17,12 +20,12 @@ let StyledMain = styled.main`
     }
   }
 
-  ${({customStyles}: { customStyles?: string }) => customStyles || ''}
+  ${({customStyles}) => customStyles || ''}
 `
 
 const posts = () => {
 
-    const customStyles = useSelector(({settings}: Store) => settings?.currentPageSettings?.customStyles)
+    const customStyles = useAppSelector(({settings}) => settings?.currentPageSettings?.customStyles)
 
     return (
         <StyledMain id={'content'} className="main posts-page" customStyles={customStyles}>
@@ -33,10 +36,10 @@ const posts = () => {
 };
 
 
-//@ts-ignore
+
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-    // @ts-ignore
+
     await _getServerSideStaticPageData(
         context,
         [
@@ -61,7 +64,9 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             }
         ))
 
-    return null
+    return {
+        props: {}
+    }
 });
 
 

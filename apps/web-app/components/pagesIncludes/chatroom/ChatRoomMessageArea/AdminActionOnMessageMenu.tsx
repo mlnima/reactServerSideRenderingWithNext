@@ -1,9 +1,9 @@
 import React, {FC} from "react";
 import styled from "styled-components";
-import {useSelector} from "react-redux";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrashCan} from "@fortawesome/free-solid-svg-icons/faTrashCan";
 import {clientAPIRequestDeleteChatroomMessage} from 'api-requests'
+import {useAppSelector} from "@store_toolkit/hooks";
 
 const Style = styled.div``;
 
@@ -13,7 +13,7 @@ interface PropTypes {
 }
 
 const AdminActionOnMessageMenu: FC<PropTypes> = ({chatroomId, messageId}) => {
-    const adminMode = useSelector(({globalState}) => globalState?.adminMode)
+    const adminMode = useAppSelector(({globalState}) => globalState?.adminMode)
 
     const onDeleteMessageHandler = () => {
         if (chatroomId && messageId) {

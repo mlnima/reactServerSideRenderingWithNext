@@ -1,13 +1,11 @@
-// @ts-nocheck
 import PostPageStyle from '../../components/styles/PostPageStyle'
-import {useSelector} from "react-redux";
 import dynamic from "next/dynamic";
 import styled from "styled-components";
 import PostTitle from '../../components/common/PostTitle'
 import LearnTypePostPageDescription from "../../components/learn/LearnTypePostPageDescription";
 import RelatedPostsRenderer from "../../components/common/RelatedPostsRenderer";
 import React from "react";
-import {Store} from "typescript-types";
+import {useAppSelector} from "@store_toolkit/hooks";
 
 const PostMeta = dynamic(() => import('../../components/common/PostMetasRenderer/PostMetasRenderer'))
 const CommentsRenderer = dynamic(() => import('../../components/common/CommentsRenderer/CommentsRenderer'))
@@ -15,35 +13,43 @@ const CommentFrom = dynamic(() => import('../../components/common/CommentFrom'))
 const WidgetsRenderer = dynamic(() => import('../../../../includes/WidgetsRenderer/WidgetsRenderer'))
 const RatingButtons = dynamic(() => import('../../components/common/RatingButtons'))
 
-const LearnTypePostPageStyledMain = styled(PostPageStyle)`
+interface IStyles {
+    customStyles?: string
+}
+
+const LearnTypePostPageStyledMain = styled(PostPageStyle)<IStyles>`
   margin: auto;
-  #main{
+
+  #main {
     width: 100%;
-    article{
+
+    article {
       width: 100%;
+
       .entry-header {
         width: 100%;
       }
     }
   }
-  
+
   h1 {
     font-size: 4vw;
     width: 90%;
   }
 
   a {
-    color: var(--main-active-color);
+    color: var(--primary-active-color);
   }
-  ${({customStyles}: { customStyles?: string }) => customStyles || ''}
+
+  ${({customStyles}) => customStyles || ''}
 `
 
 
 const LearnTypePostPage = () => {
 
 
-    const customStyles = useSelector(({settings}: Store) => settings?.currentPageSettings?.customStyles)
-    const post = useSelector(({posts}: Store) => posts.post)
+    const customStyles = useAppSelector(({settings}) => settings?.currentPageSettings?.customStyles)
+    const post = useAppSelector(({posts}) => posts.post)
 
     return (
         <LearnTypePostPageStyledMain id={'primary'} className='main post-page' customStyles={customStyles}>
@@ -68,9 +74,7 @@ const LearnTypePostPage = () => {
                     <CommentFrom/>
                     <CommentsRenderer showComments={true}/>
                 </article>
-
             </main>
-
         </LearnTypePostPageStyledMain>
     );
 };

@@ -1,10 +1,8 @@
 import React, {FC, useEffect, useRef} from 'react';
 import Message from "../Message/Message";
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
 import {uniqArrayBy} from 'custom-util'
 import {Styles} from "./MessagingArea.styles";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAppDispatch, useAppSelector} from "@store_toolkit/hooks";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faComments} from "@fortawesome/free-solid-svg-icons/faComments";
 import {sortArrayByPropertyOfObject} from 'custom-util';
@@ -19,10 +17,10 @@ const MessagingArea: FC<IProps> = ({onLoadOlderMessages, messageAreaRef}) => {
     const prevScrollPosition = useRef(0);
     const dispatch = useAppDispatch();
 
-    const {autoScroll, isMaximized} = useSelector(({messenger}: Store) => messenger);
-    const {headerSize} = useSelector(({globalState}: Store) => globalState);
-    const {userData} = useSelector(({user}: Store) => user)
-    const {activeConversation} = useSelector(({messenger}: Store) => messenger);
+    const {autoScroll, isMaximized} = useAppSelector(({messenger}) => messenger);
+    const {headerSize} = useAppSelector(({globalState}) => globalState);
+    const {userData} = useAppSelector(({user}) => user)
+    const {activeConversation} = useAppSelector(({messenger}) => messenger);
 
     useEffect(() => {
 

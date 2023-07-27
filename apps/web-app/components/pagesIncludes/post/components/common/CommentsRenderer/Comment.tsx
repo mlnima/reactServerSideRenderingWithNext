@@ -2,12 +2,12 @@ import Link from "next/link";
 import {formatDistance} from 'date-fns'
 import faIR from "date-fns/locale/fa-IR";
 import styled from "styled-components";
-import {useSelector} from "react-redux";
 import {useRouter} from "next/router";
 import {FC} from "react";
-import deleteCommentByAdminInPostPageAction from "@store_toolkit/clientReducers/postsReducers/deleteCommentByAdminInPostPageAction";
+import deleteCommentByAdminInPostPageAction
+    from "@store_toolkit/clientReducers/postsReducers/deleteCommentByAdminInPostPageAction";
 import {useAppDispatch} from "@store_toolkit/hooks";
-import {Store, Comment} from "typescript-types";
+import {Comment} from "typescript-types";
 
 const CommentStyledDiv = styled.div`
   display: flex;
@@ -32,30 +32,30 @@ const CommentStyledDiv = styled.div`
     }
 
     .comment-author {
-      color: var(--main-active-color, #f90);
+      color: var(--primary-active-color, #f90);
       margin: 4px 10px;
       font-weight: bold;
     }
 
     .comment-date {
-      color: var(--main-text-color, #fff);
+      color: var(--primary-text-color,#fff);
       font-size: 14px;
       margin: 4px 5px;
     }
   }
 
   .comment-body {
-    color: var(--main-text-color, #fff);
+    color: var(--primary-text-color,#fff);
     overflow-wrap: break-word;
   }
 `
 
 interface CommentPropTypes {
     commentData: Comment,
-    adminMode:boolean
+    adminMode: boolean
 }
 
-const Comment: FC<CommentPropTypes> = ({commentData,adminMode}) => {
+const Comment: FC<CommentPropTypes> = ({commentData, adminMode}) => {
     const {locale} = useRouter()
     const dispatch = useAppDispatch()
     const localeData = locale === 'fa' ? {locale: faIR} : {}

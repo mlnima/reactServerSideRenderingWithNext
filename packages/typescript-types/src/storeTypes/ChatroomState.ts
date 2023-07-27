@@ -12,6 +12,6 @@ export interface ChatroomState {
         username: string,
         _id: string,
         profileImage: string,
-    }
+    } | {}
 
 }

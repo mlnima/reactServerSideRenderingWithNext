@@ -1,7 +1,6 @@
 import {useRouter} from "next/router";
 import styled from "styled-components";
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
+import {useAppSelector} from "@store_toolkit/hooks";
 
 const PostTitleStyledH1 = styled.h1`
   color: var(--secondary-text-color,#ccc);
@@ -18,7 +17,7 @@ const PostTitleStyledH1 = styled.h1`
 const PostTitle = () => {
 
     const {locale} = useRouter()
-    const {title,translations} = useSelector(({posts}:Store)=>{
+    const {title,translations} = useAppSelector(({posts} )=>{
         return{
             title:posts?.post?.title,
             translations:posts?.post?.translations,

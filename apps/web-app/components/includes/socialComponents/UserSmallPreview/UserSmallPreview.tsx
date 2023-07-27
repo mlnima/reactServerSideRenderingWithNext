@@ -23,7 +23,7 @@ const UserSmallPreviewStyledSpan = styled.span`
       margin: 0 5px;
 
       p {
-        color: var(--main-text-color, #fff);
+        color: var(--primary-text-color,#fff);
       }
     }
   }

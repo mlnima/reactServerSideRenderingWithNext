@@ -5,7 +5,11 @@ import styled from "styled-components";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowDownZA} from "@fortawesome/free-solid-svg-icons/faArrowDownZA";
 
-const AlphabeticalNumericalRangeLinksWidgetStyledDiv = styled.div`
+interface IStyles{
+    showFilters: boolean
+}
+
+const AlphabeticalNumericalRangeLinksWidgetStyledDiv = styled.div<IStyles>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,7 +27,7 @@ const AlphabeticalNumericalRangeLinksWidgetStyledDiv = styled.div`
   }
 
   .alphabetical-range-content {
-    display: ${({showFilters}: { showFilters: boolean }) => showFilters ? 'flex' : 'none'};
+    display: ${({showFilters}) => showFilters ? 'flex' : 'none'};
     justify-content: center;
     flex-wrap: wrap;
 
@@ -36,11 +40,11 @@ const AlphabeticalNumericalRangeLinksWidgetStyledDiv = styled.div`
       border-radius: 5px;
       transition: width 2s linear 1s;
       background-color: var(--secondary-background-color, #181818);
-      color: var(--main-text-color, #ccc);
+      color: var(--primary-text-color,#fff);
     }
 
     .active-item {
-      background-color: var(--main-active-color, #f90);
+      background-color: var(--primary-active-color, #f90);
       color: var(--secondary-background-color, #181818);
     }
 

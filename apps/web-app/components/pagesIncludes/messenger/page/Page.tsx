@@ -1,8 +1,6 @@
 import React, {FC, useEffect, useMemo, useRef, useState} from "react";
 import {Styles} from "@components/pagesIncludes/messenger/page/Styles";
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAppDispatch, useAppSelector} from "@store_toolkit/hooks";
 import {useIsMobile} from "react-hooker-lib";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
 import MessengerConfigs from "@components/pagesIncludes/messenger/MessengerConfigs/MessengerConfigs";
@@ -13,7 +11,7 @@ import MessagingArea from "@components/pagesIncludes/messenger/MessagingArea/Mes
 import Link from "next/link";
 import MessengerMultiMediaInputBox
     from "@components/pagesIncludes/messenger/MessengerMultiMediaInputBox/MessengerMultiMediaInputBox";
-import {socket} from "custom-util";
+import socket from 'web-socket-client';
 import {
     cleanActiveConversation,
     newMessageInActiveConversation, setDraftMessageData, setMessengerState,
@@ -50,14 +48,14 @@ const Page: FC<IProps> = ({}) => {
     const imageInputRef = useRef<HTMLInputElement>(null);
     const hasRun = useRef(false);
     //storeContent
-    const {loggedIn, userData} = useSelector(({user}: Store) => user)
+    const {loggedIn, userData} = useAppSelector(({user}) => user)
 
     const {
         activeConversation,
         isMaximized,
         isConversationsMenuOpen,
         draftMessage,
-    } = useSelector(({messenger}: Store) => messenger);
+    } = useAppSelector(({messenger}) => messenger);
 
 
     const isActiveConversation = useMemo(() => !!activeConversation?._id, [activeConversation?._id]);
@@ -68,7 +66,6 @@ const Page: FC<IProps> = ({}) => {
 
     useEffect(() => {
         const handleGetPrivateMessage = (messageData) => {
-            console.log('console=> ', messageData)
             dispatch(newMessageInActiveConversation(messageData));
         };
 
@@ -106,7 +103,7 @@ const Page: FC<IProps> = ({}) => {
             //     setActiveConversation(response?.data?.conversation)
             // })
         } catch (error) {
-            console.log('onGetConversationHandler=> ',)
+
         }
     }
     const onGetConversationListHandler = () => {

@@ -1,9 +1,8 @@
 import ChatRoomOnlineUsersListItem from "./ChatRoomOnlineUsersListItem";
-import {useSelector} from "react-redux";
 import styled from "styled-components";
 import {uniqArrayBy} from "custom-util";
-import {Store} from "typescript-types";
-import {useEffect, useMemo} from "react";
+import {useMemo} from "react";
+import {useAppSelector} from "@store_toolkit/hooks";
 
 const ChatRoomOnlineUsersListStyledDiv = styled.div`
 
@@ -24,7 +23,7 @@ const ChatRoomOnlineUsersListStyledDiv = styled.div`
 
 const ChatRoomOnlineUsersList = () => {
 
-    const chatroomUsers = useSelector(({chatroom}: Store) => chatroom?.onlineUsers)
+    const chatroomUsers = useAppSelector(({chatroom}) => chatroom?.onlineUsers)
 
     const memoUsers = useMemo(()=> {
         return [...uniqArrayBy(chatroomUsers, 'username')].sort((a, b) => a.username > b.username ? 1 : -1)

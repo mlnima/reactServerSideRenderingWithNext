@@ -1,27 +1,25 @@
 import React, {FC, useEffect} from 'react';
 import ProfileNavigation from '../../../components/includes/profilePageComponents/ProfileNavigation/ProfileNavigation'
 import Link from "next/link";
-
-import {useSelector} from "react-redux";
 import styled from "styled-components";
 import {wrapper} from "@store_toolkit/store";
 import _getServerSideStaticPageData from "../../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
-import {Store} from "typescript-types";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
 import ProfileImage from "@components/pagesIncludes/profile/ProfileImage/ProfileImage";
+import {useAppSelector} from "@store_toolkit/hooks";
 
 const PostsStyledDiv = styled.div`
   max-width: 940px;
   margin: auto;
 
   .create-new-post-link {
-    color: var(--main-text-color);
-    border: solid .4px var(--main-text-color);
+    color: var(--primary-text-color,#fff);
+    border: solid .4px var(--primary-text-color,#fff);
     padding: 5px 10px;
   }
 `
 const Posts = () => {
-    const userData = useSelector((store: Store) => store?.user.userData)
+    const userData = useAppSelector((store) => store?.user.userData)
     // const router = useRouter();
     //
     // const [state, setState] = useState({
@@ -60,32 +58,32 @@ const Posts = () => {
             <ProfileImage/>
             <ProfileNavigation/>
             <Link href={'/profile.json/posts/newpost'} className='create-new-post-link'>
-               create new post
+                create new post
             </Link>
             {/*<PostsRenderer posts={ state.posts || [] }/>*/}
             {/*posts*/}
         </PostsStyledDiv>
     );
 };
-//@ts-ignore
+
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-        // @ts-ignore
-        await _getServerSideStaticPageData(
-            context,
-            [
-                'profilePageRightSidebar',
-                'profilePageLeftSidebar',
-                'profile'
-            ],
-            {
-                setHeadData: true,
-                page: 'ProfilePostsPage'
-            },store)
+    await _getServerSideStaticPageData(
+        context,
+        [
+            'profilePageRightSidebar',
+            'profilePageLeftSidebar',
+            'profile'
+        ],
+        {
+            setHeadData: true,
+            page: 'ProfilePostsPage'
+        }, store)
 
-    return null
-    })
-
+    return {
+        props: {}
+    }
+})
 
 
 export default Posts;

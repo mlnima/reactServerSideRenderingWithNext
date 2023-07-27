@@ -4,12 +4,15 @@ import PostsPageInfo from "../../components/includes/PostsPage/PostsPageInfo";
 import {useRouter} from "next/router";
 import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
 import {wrapper} from "@store_toolkit/store";
-import {useSelector} from "react-redux";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
-import {Store} from "typescript-types";
 import getPostsAction from "@store_toolkit/clientReducers/postsReducers/getPostsAction";
+import {useAppSelector} from "@store_toolkit/hooks";
 
-let StyledMain = styled.main`
+interface IStyles{
+    customStyles?: string
+}
+
+let StyledMain = styled.main<IStyles>`
   width: 100%;
   .posts-page-info {
     margin: 5px 0;
@@ -20,16 +23,16 @@ let StyledMain = styled.main`
   }
   .no-result-message {
     text-align: center;
-    color: var(--main-text-color);
+    color: var(--primary-text-color,#fff);
   }
-  ${({customStyles}:{customStyles?:string}) => customStyles || ''}
+  ${({customStyles}) => customStyles || ''}
 `
 
 const searchPage = ( ) => {
 
     const {query} = useRouter()
-    const posts = useSelector((store:Store) => store.posts.posts)
-    const customStyles = useSelector(({settings}: Store) => settings?.currentPageSettings?.customStyles)
+    const posts = useAppSelector((store ) => store.posts.posts)
+    const customStyles = useAppSelector(({settings} ) => settings?.currentPageSettings?.customStyles)
 
     return (
         <StyledMain id={'content'} className="main posts-page" customStyles={customStyles}>
@@ -41,9 +44,9 @@ const searchPage = ( ) => {
         </StyledMain>
     )
 };
-//@ts-ignore
-export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
+
+export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
     await _getServerSideStaticPageData(
         context,
         [
@@ -70,7 +73,9 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             }
         ))
 
-    return null
+    return {
+        props: {}
+    }
 })
 
 export default searchPage;

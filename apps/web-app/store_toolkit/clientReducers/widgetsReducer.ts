@@ -1,4 +1,4 @@
-// @ts-nocheck
+
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {RootState} from "../store";
 import {loading, setAlert} from "./globalStateReducer";
@@ -20,7 +20,7 @@ const initialState: WidgetsState = {
 
 export const fetchWidgets = createAsyncThunk(
     'widgets/fetchWidgets',
-    async (options: { positions: string[], locale: string }, thunkAPI) => {
+    async (options: { positions: string[], locale: string }) => {
         try {
             const widgets = await clientAPIRequestGetWidgets(options.positions, options.locale)
             return {
@@ -28,7 +28,7 @@ export const fetchWidgets = createAsyncThunk(
                 widgetInGroups: widgets.data?.widgets || {}
             }
         } catch (err) {
-            console.log(err)
+
         }
     }
 )
@@ -37,8 +37,8 @@ export const saveWidgetFormData = createAsyncThunk(
     'widgets/saveWidgetFormData',
     async (data: {}, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-        return await clientAPIRequestSaveFormData(data).then(response => {
-        }).catch(error => {
+        return await clientAPIRequestSaveFormData(data).then(() => {
+        }).catch(() => {
         }).finally(() => thunkAPI.dispatch(loading(false)))
     }
 )
@@ -69,7 +69,7 @@ export const widgetsSlice = createSlice({
     initialState,
     reducers: {
 
-        clearRequestedWidgets: (state, action: PayloadAction<any>) => {
+        clearRequestedWidgets: (state) => {
             state.requestedWidgets = []
         },
         setRealTimeWidgetsForAdmin: (state, action: PayloadAction<any>) => {
@@ -100,7 +100,11 @@ export const widgetsSlice = createSlice({
 export const {clearRequestedWidgets, setRealTimeWidgetsForAdmin} = widgetsSlice.actions
 
 export const widgetsReducer = (state: RootState) => state?.widgets || null
-
 export default widgetsSlice.reducer
 
+// export const widgetInGroups = (state: RootState) => state?.widgets?.widgetInGroups || null
+//
+// export const memorizedWidgetInGroups = createSelector([widgetInGroups],()=>{
+//     return widgetsReducer
+// })
 

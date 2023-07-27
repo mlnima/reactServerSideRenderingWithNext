@@ -13,20 +13,22 @@ const Register = () => {
     return <HeadSetter/>
 };
 
-//@ts-ignore
+
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     await _getServerSideStaticPageData(
         context,
         [],
         {
-            setHeadData:true,
-            page:'register'
+            setHeadData: true,
+            page: 'register'
         },
         store
     )
 
-    return null
+    return {
+        props: {}
+    }
 })
 
 export default Register;

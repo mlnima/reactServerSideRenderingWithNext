@@ -3,55 +3,11 @@
     "pathURL": "/dashboard",
     "subItems": []
   },
-  "InitialSettings": {
-    "pathURL": "/dashboard/settings",
-    "subItems": [
-      {"name": "initialSettings", "url": "/dashboard/settings/initialSettings"},
-      {"name": "widgets", "url": "/dashboard/settings/widgets"},
-      {"name": "customStyles", "url": "/dashboard/settings/customStyles"},
-      {"name": "customColors", "url": "/dashboard/settings/customColors"}
-    ]
-  },
-  "defaultPagesSettings": {
-    "pathURL": "/dashboard/assets?assetsType=pages&size=20",
-    "subItems": [
-      {"name": "home", "url": "/dashboard/settings/defaultPages?pageName=homePageSettings"},
-      {"name": "categories", "url": "/dashboard/settings/defaultPages?pageName=categoriesPageSettings"},
-      {"name": "tags", "url": "/dashboard/settings/defaultPages?pageName=tagsPageSettings"},
-      {"name": "actors", "url": "/dashboard/settings/defaultPages?pageName=actorsPageSettings"},
-      {"name": "category", "url": "/dashboard/settings/defaultPages?pageName=categoryPageSettings"},
-      {"name": "tag", "url": "/dashboard/settings/defaultPages?pageName=tagPageSettings"},
-      {"name": "actor", "url": "/dashboard/settings/defaultPages?pageName=actorPageSettings"},
-      {"name": "posts", "url": "/dashboard/settings/defaultPages?pageName=postsPageSettings"},
-      {"name": "post", "url": "/dashboard/settings/defaultPages?pageName=postPageSettings"},
-      {"name": "Search", "url": "/dashboard/settings/defaultPages?pageName=searchPageSettings"},
 
-      {"name": "messenger", "url": "/dashboard/settings/defaultPages?pageName=messengerPageSettings"},
-      {"name": "profile", "url": "/dashboard/settings/defaultPages?pageName=profilePageSettings"},
-      {"name": "user", "url": "/dashboard/settings/defaultPages?pageName=userPageSettings"},
-      {"name": "user", "url": "/dashboard/settings/defaultPages?pageName=usersPageSettings"},
-
-      {"name": "chatroom", "url": "/dashboard/settings/defaultPages?pageName=chatroomPageSettings"}
-    ]
-  },
-  "customPagesSettings": {
-    "pathURL": "/dashboard/assets?assetsType=pages&size=20",
-    "subItems": [
-      {"name": "newPage", "url": "/dashboard/page?new=1"}
-    ]
-  },
 
   "Posts": {
     "pathURL": "/dashboard/assets?assetsType=posts&size=20",
     "subItems": [{"name": "newPost", "url": "/dashboard/post?new=1"}]
-  },
-  "Chatrooms": {
-    "pathURL": "/dashboard/assets?assetsType=chatrooms&size=20",
-    "subItems": [{"name": "newChatroom", "url": "/dashboard/chatroom?new=1"}]
-  },
-  "Users": {
-    "pathURL": "/dashboard/assets?assetsType=users&size=20",
-    "subItems": []
   },
   "Metas": {
     "pathURL": "/dashboard/assets?assetsType=metas&metaType=categories",
@@ -59,11 +15,6 @@
       {"name": "tags", "url": "/dashboard/assets?assetsType=metas&metaType=tags&size=20"},
       {"name": "categories", "url": "/dashboard/assets?assetsType=metas&metaType=categories&size=20"},
       {"name": "actors", "url": "/dashboard/assets?assetsType=metas&metaType=actors&size=20"}]
-  },
-
-  "Orders": {
-    "pathURL": "/dashboard/assets?assetsType=orders&size=20",
-    "subItems": []
   },
   "Forms": {
     "pathURL": "/dashboard/assets?assetsType=forms&size=20",
@@ -73,6 +24,22 @@
     "pathURL": "/dashboard/assets?assetsType=comments&size=20",
     "subItems": []
   },
+  "Users": {
+    "pathURL": "/dashboard/assets?assetsType=users&size=20",
+    "subItems": []
+  },
+  "Chatrooms": {
+    "pathURL": "/dashboard/assets?assetsType=chatrooms&size=20",
+    "subItems": [{"name": "newChatroom", "url": "/dashboard/chatroom?new=1"}]
+  },
+
+
+
+  "Orders": {
+    "pathURL": "/dashboard/assets?assetsType=orders&size=20",
+    "subItems": []
+  },
+
 
   "FileManager": {
     "pathURL": "/dashboard/fileManager",
@@ -92,6 +59,40 @@
   "Translations": {
     "pathURL": "/dashboard/translations",
     "subItems": []
+  },
+  "InitialSettings": {
+    "pathURL": "/dashboard/settings",
+    "subItems": [
+      {"name": "initialSettings", "url": "/dashboard/settings/initialSettings"},
+      {"name": "widgets", "url": "/dashboard/settings/widgets"}
+    ]
+  },
+  "defaultPagesSettings": {
+    "pathURL": "/dashboard/assets?assetsType=pages&size=20",
+    "subItems": [
+      {"name": "home", "url": "/dashboard/settings/defaultPages?pageName=homePageSettings"},
+      {"name": "categories", "url": "/dashboard/settings/defaultPages?pageName=categoriesPageSettings"},
+      {"name": "tags", "url": "/dashboard/settings/defaultPages?pageName=tagsPageSettings"},
+      {"name": "actors", "url": "/dashboard/settings/defaultPages?pageName=actorsPageSettings"},
+      {"name": "category", "url": "/dashboard/settings/defaultPages?pageName=categoryPageSettings"},
+      {"name": "tag", "url": "/dashboard/settings/defaultPages?pageName=tagPageSettings"},
+      {"name": "actor", "url": "/dashboard/settings/defaultPages?pageName=actorPageSettings"},
+      {"name": "posts", "url": "/dashboard/settings/defaultPages?pageName=postsPageSettings"},
+      {"name": "post", "url": "/dashboard/settings/defaultPages?pageName=postPageSettings"},
+      {"name": "Search", "url": "/dashboard/settings/defaultPages?pageName=searchPageSettings"},
+      {"name": "messenger", "url": "/dashboard/settings/defaultPages?pageName=messengerPageSettings"},
+      {"name": "profile", "url": "/dashboard/settings/defaultPages?pageName=profilePageSettings"},
+      {"name": "user", "url": "/dashboard/settings/defaultPages?pageName=userPageSettings"},
+      {"name": "user", "url": "/dashboard/settings/defaultPages?pageName=usersPageSettings"},
+
+      {"name": "chatroom", "url": "/dashboard/settings/defaultPages?pageName=chatroomPageSettings"}
+    ]
+  },
+  "customPagesSettings": {
+    "pathURL": "/dashboard/assets?assetsType=pages&size=20",
+    "subItems": [
+      {"name": "newPage", "url": "/dashboard/page?new=1"}
+    ]
   },
   "Importer": {
     "pathURL": "/dashboard/importer",

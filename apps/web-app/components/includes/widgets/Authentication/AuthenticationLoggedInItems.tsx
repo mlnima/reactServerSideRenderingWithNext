@@ -3,15 +3,13 @@ import styled from "styled-components";
 import Link from "next/link";
 import useTranslation from 'next-translate/useTranslation'
 import {userLogout} from "@store_toolkit/clientReducers/userReducers/userReducer";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAppDispatch, useAppSelector} from "@store_toolkit/hooks";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
 import UserProfileImage from "../../UserProfileImage/UserProfileImage";
 import AuthenticationAdminItems from "@components/includes/widgets/Authentication/AuthenticationAdminItems";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSignOut} from "@fortawesome/free-solid-svg-icons/faSignOut";
 import {faEnvelope} from "@fortawesome/free-solid-svg-icons/faEnvelope";
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
 
 const AuthenticationLoggedInItemsStyledDiv = styled.div`
   .user-info {
@@ -19,7 +17,7 @@ const AuthenticationLoggedInItemsStyledDiv = styled.div`
       display: flex;
       justify-content: flex-start;
       align-items: center;
-      color: var(--main-text-color, #fff);
+      color: var(--primary-text-color,#fff);
       width: 100%;
 
       .user-profile-image {
@@ -57,11 +55,11 @@ interface UserData {
 
 const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> = ({onOpenCloseHandler}) => {
 
-    const {membership, usersCanMessageEachOther} = useSelector(
-        ({settings}: Store) => settings?.initialSettings?.membershipSettings || {}
+    const {membership, usersCanMessageEachOther} = useAppSelector(
+        ({settings}) => settings?.initialSettings?.membershipSettings || {}
     );
 
-    const {username, role} = useSelector(({user}: Store) => user?.userData || {} as UserData);
+    const {username, role} = useAppSelector(({user}) => user?.userData || {} as UserData);
     const {t} = useTranslation('common');
     const dispatch = useAppDispatch()
 

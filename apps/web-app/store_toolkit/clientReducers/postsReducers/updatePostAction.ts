@@ -9,7 +9,6 @@ const updatePostAction = createAsyncThunk(
         thunkAPI.dispatch(loading(true))
         await clientAPIRequestUpdatePost(editedPost).then(res => {
             if (res.data?.message) {
-                console.log(res.data)
                 thunkAPI.dispatch(setAlert({
                     active: true,
                     type: 'success',

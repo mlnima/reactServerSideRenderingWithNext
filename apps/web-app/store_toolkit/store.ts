@@ -11,7 +11,7 @@ import messengerSlice from "@store_toolkit/clientReducers/messengerReducer";
 import mediaConnectionSlice from "@store_toolkit/clientReducers/mediaConnectionReducer";
 // import {mediaStreamMiddleware} from "@store_toolkit/middlewares/mediaStreamMiddleware";
 //@ts-ignore
-const debugDev = process.env.NODE_ENV !== 'production' || process.env.NEXT_PUBLIC_PRODUCTION_URL.includes(':3000')
+const debugDev = process.env.NODE_ENV !== 'production' || process.env.NEXT_PUBLIC_PRODUCTION_URL.includes(':3000');
 const debug = false;
 
 const combinedReducer = combineReducers({
@@ -56,8 +56,6 @@ const reducer = (state: ReturnType<typeof combinedReducer>, action: AnyAction) =
                 }
             },
         }
-
-
 
     } else {
         return combinedReducer(state, action);

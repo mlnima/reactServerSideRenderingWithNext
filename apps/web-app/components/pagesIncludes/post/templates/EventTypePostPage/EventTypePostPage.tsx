@@ -1,7 +1,5 @@
-// @ts-nocheck
 import React, { useMemo, useRef} from "react";
 import styled from "styled-components";
-import {useSelector} from "react-redux";
 import PostTitle from "../../components/common/PostTitle";
 import PostDescription from "../../components/common/description/Description";
 import PostMetasRenderer from "../../components/common/PostMetasRenderer/PostMetasRenderer";
@@ -10,13 +8,17 @@ import WidgetsRenderer from "../../../../includes/WidgetsRenderer/WidgetsRendere
 import CommentFrom from "../../components/common/CommentFrom";
 import CommentsRenderer from "../../components/common/CommentsRenderer/CommentsRenderer";
 import PostPageStyle from "../../components/styles/PostPageStyle";
-import convertDateToIso from "@_variables/_clientVariables/clientVariables/convertDateToIso";
-import {Store} from "typescript-types";
+import {convertDateToIsoString} from "custom-util"
 import StartDate from "@components/pagesIncludes/post/components/common/StartDate";
 import AddToCalendar from "@components/pagesIncludes/post/components/event/AddToCalendar";
 import AttendButtons from "@components/pagesIncludes/post/components/event/AttendButtons";
+import {useAppSelector} from "@store_toolkit/hooks";
 
-const Style = styled(PostPageStyle)`
+interface IStyles{
+    customStyles?:string
+}
+
+const Style = styled(PostPageStyle)<IStyles>`
   
   #main {
     
@@ -50,16 +52,16 @@ const Style = styled(PostPageStyle)`
     }
   }
 
-  ${({customStyles}: { customStyles?: string }) => customStyles || ''}
+  ${({customStyles}) => customStyles || ''}
 `
 
 const EventTypePostPage = () => {
     const descriptionRef = useRef<HTMLDivElement>(null)
-    const {userData} = useSelector(({user}: Store) => user)
-    const {post} = useSelector(({posts}: Store) => posts)
-    const {customStyles} = useSelector(({settings}: Store) => settings?.currentPageSettings)
-    const datePublished = useMemo(() => convertDateToIso(post.createdAt), [post.createdAt])
-    const dateModified = useMemo(() => convertDateToIso(post.updatedAt), [post.updatedAt])
+    const {userData} = useAppSelector(({user} ) => user)
+    const {post} = useAppSelector(({posts} ) => posts)
+    const {customStyles} = useAppSelector(({settings} ) => settings?.currentPageSettings)
+    const datePublished = useMemo(() => convertDateToIsoString(post.createdAt), [post.createdAt])
+    const dateModified = useMemo(() => convertDateToIsoString(post.updatedAt), [post.updatedAt])
 
     const isUserAttending = useMemo(() => {
         return post.uniqueData?.attenders?.includes(userData._id)
@@ -70,13 +72,11 @@ const EventTypePostPage = () => {
             <main id={'main'}>
                 <article itemScope itemType={'https://schema.org/BlogPosting'}>
                     <header className={'entry-header'}>
-                        {/*//@ts-ignore*/}
                         <StartDate startDate={post?.uniqueData?.startDate}/>
                         <PostTitle/>
                         <p className={'sub-content'}>{post.uniqueData?.capacity - post.uniqueData?.attenders?.length } place left</p>
                         {!!post.title && <meta itemProp="name" content={post.title}/>}
                         {!!post.title && <meta itemProp="headline" content={post.title}/>}
-                        {/*//@ts-ignore*/}
                         {(!!descriptionRef?.current && !!descriptionRef?.current?.textContent) &&
                             <meta itemProp="description" content={descriptionRef?.current?.textContent}/>}
                         {!!post.mainThumbnail && <meta itemProp="thumbnailUrl" content={post.mainThumbnail}/>}
@@ -93,9 +93,9 @@ const EventTypePostPage = () => {
                                            postId={post._id}
                                            userId={userData._id}
                             />
-                            {!!isUserAttending && <AddToCalendar startDate={post.uniqueData.startDate}
-                                                                 endDate={post.uniqueData.startDate || post.uniqueData.startDate}
-                                                                 eventName={post.title}/>}
+                            {isUserAttending && <AddToCalendar startDate={post.uniqueData.startDate}
+                                                               endDate={post.uniqueData.startDate || post.uniqueData.startDate}
+                                                               eventName={post.title}/>}
                         </div>
 
 

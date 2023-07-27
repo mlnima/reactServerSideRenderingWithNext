@@ -13,23 +13,21 @@ const Login = () => {
     return <HeadSetter/>
 };
 
-//@ts-ignore
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-
 
     await _getServerSideStaticPageData(
         context,
         [],
         {
-            setHeadData:true,
-            page:'loginPage'
+            setHeadData: true,
+            page: 'loginPage'
         },
         store
     )
-
-    return
+    return {
+        props: {}
+    }
 })
-
 
 
 export default Login;

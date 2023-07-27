@@ -25,7 +25,7 @@ const ChatRoomOnlineUsersListItemStyledDiv = styled.div`
         display: flex;
         align-items: center;
         .chatroom-online-users-list-item-username {
-          color: var(--main-text-color, #fff);
+          color: var(--primary-text-color,#fff);
           margin-left: 5px;
           white-space: nowrap;
           overflow: hidden;

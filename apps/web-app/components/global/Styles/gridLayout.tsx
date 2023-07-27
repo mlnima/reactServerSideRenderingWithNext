@@ -1,5 +1,5 @@
 //grid-layout
-import { css } from 'styled-components';
+import {css} from 'styled-components';
 
 
 interface GlobalStylesPropTypes {
@@ -10,7 +10,7 @@ interface GlobalStylesPropTypes {
 
 
 const gridLayout = css`
-  
+
   .page-both-sidebar {
     grid-template-columns: 1fr;
     grid-template-areas: 'primary'
@@ -39,17 +39,19 @@ const gridLayout = css`
   #page {
     width: 100%;
     box-sizing: border-box;
+
     #content {
       margin: 0 auto;
       display: grid;
       grid-area: page;
       min-height: 40em;
+
       #primary {
         grid-area: primary;
       }
     }
   }
-  
+
   @media only screen and (min-width: 1024px) {
     body {
       font-size: 0.875rem;
@@ -61,19 +63,21 @@ const gridLayout = css`
       justify-content: center;
       flex-direction: column;
       align-items: center;
+
       #content {
-      
+
         width: 100%;
-        display: grid;
+        // display: grid;
         grid-area: page;
         min-height: 40em;
         min-width: 991px;
-        max-width: 1323px !important;
+        // max-width: 1323px !important;
 
         #primary {
           grid-area: primary;
           width: 100%;
-          #main{
+
+          #main {
             width: 100%;
           }
         }

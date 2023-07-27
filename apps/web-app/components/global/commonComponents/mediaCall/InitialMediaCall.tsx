@@ -1,11 +1,9 @@
 import React, {FC} from "react";
 import styled from "styled-components";
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleUser} from "@fortawesome/free-solid-svg-icons/faCircleUser";
 import {faXmark} from "@fortawesome/free-solid-svg-icons/faXmark";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAppDispatch, useAppSelector} from "@store_toolkit/hooks";
 import {resetMediaConnectionAction} from "@store_toolkit/clientReducers/mediaConnectionReducer";
 import {capitalizeFirstLetter} from "custom-util";
 
@@ -35,7 +33,7 @@ const Style = styled.div`
         
         width: 100%;
         height: 100%;
-        color: var(--main-text-color, #fff);
+        color: var(--primary-text-color,#fff);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -61,8 +59,8 @@ interface PropTypes {
 const InitialMediaCall: FC<PropTypes> = ({callType,outGoingCall,callAccepted}) => {
     const dispatch = useAppDispatch()
 
-    const {activeConversation} = useSelector(({messenger}: Store) => messenger);
-    const {userData} = useSelector(({user}: Store) => user)
+    const {activeConversation} = useAppSelector(({messenger}) => messenger);
+    const {userData} = useAppSelector(({user}) => user)
 
     return (
         <Style>

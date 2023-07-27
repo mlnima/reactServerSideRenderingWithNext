@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
-import RootLayout from "./components/layouts/RootLayout";
-import GlobalStyles from "./global/style/GlobalStyles";
+import RootLayout from "@components/layouts/RootLayout";
+import GlobalStyles from "@components/common/styles/GlobalStyles";
 import {useSelector} from "react-redux";
 import {DashboardStore} from "typescript-types";
 import Login from "@components/pages/Login";

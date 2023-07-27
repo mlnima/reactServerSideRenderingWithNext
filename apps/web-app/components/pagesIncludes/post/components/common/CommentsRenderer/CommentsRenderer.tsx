@@ -1,8 +1,7 @@
 import Comment from "./Comment";
 import styled from "styled-components";
-import {useSelector} from "react-redux";
 import React, {FC} from "react";
-import {Store} from "typescript-types";
+import {useAppSelector} from "@store_toolkit/hooks";
 
 const CommentsRendererStyledDiv = styled.div`
   display: flex;
@@ -15,15 +14,16 @@ const CommentsRendererStyledDiv = styled.div`
   box-sizing: border-box;
 `
 
-interface CommentsRendererPropTypes{
-    showComments:boolean
+interface CommentsRendererPropTypes {
+    showComments: boolean
 }
-const CommentsRenderer :FC<CommentsRendererPropTypes> = ({showComments}) => {
 
-    const comments = useSelector(({posts}:Store) => posts?.post?.comments || [])
-    const adminMode = useSelector(({globalState}: Store) => globalState?.adminMode);
+const CommentsRenderer: FC<CommentsRendererPropTypes> = ({showComments}) => {
 
-    if (comments?.length){
+    const comments = useAppSelector(({posts}) => posts?.post?.comments || [])
+    const adminMode = useAppSelector(({globalState}) => globalState?.adminMode);
+
+    if (comments?.length) {
         return (
             <CommentsRendererStyledDiv className='comments sub-content'>
                 {showComments && <>
@@ -36,7 +36,7 @@ const CommentsRenderer :FC<CommentsRendererPropTypes> = ({showComments}) => {
 
             </CommentsRendererStyledDiv>
         );
-    }else return null
+    } else return null
 
 };
 export default CommentsRenderer;

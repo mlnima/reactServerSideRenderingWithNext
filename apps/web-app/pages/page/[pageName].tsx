@@ -1,26 +1,28 @@
 import React from "react";
 import {wrapper} from "@store_toolkit/store";
-import {useSelector} from "react-redux";
 import dynamic from "next/dynamic";
 import styled from "styled-components";
 import getPageDataAction
     from "@store_toolkit/clientReducers/postsReducers/getPageDataAction";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
-import {Store} from "typescript-types";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
 import SidebarWidgetAreaRenderer from "@components/RootLayout/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import MainWidgetArea from "@components/RootLayout/widgetsArea/MainWidgetArea";
+import {useAppSelector} from "@store_toolkit/hooks";
 
 const Soft404 = dynamic(() => import('../../components/includes/Soft404/Soft404'));
 
+interface IStyles{
+    customStyles?: string
+}
 
-const PageStyle = styled.div`
-  ${({stylesData}: { stylesData: string }) => stylesData || ''}
+const PageStyle = styled.div<IStyles>`
+  ${({customStyles}) => customStyles || ''}
 `
 
 const page = () => {
 
-    const {pageData, sidebar, notFoundPage} = useSelector(({posts, globalState}: Store) => {
+    const {pageData, sidebar, notFoundPage} = useAppSelector(({posts, globalState}) => {
         return {
             sidebar: posts.pageData?.sidebar,
             pageData: posts.pageData,
@@ -34,7 +36,7 @@ const page = () => {
     } else {
         return (
             <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`}
-                       stylesData={pageData?.pageStyle || ''}>
+                       customStyles={pageData?.pageStyle || ''}>
                 <HeadSetter title={pageData?.title} description={pageData?.description}/>
                 <MainWidgetArea position={pageData?.pageName} className='page main'/>
                 <SidebarWidgetAreaRenderer sidebar={sidebar} position={pageData?.pageName}/>
@@ -43,7 +45,7 @@ const page = () => {
     }
 }
 
-//@ts-ignore
+
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     await _getServerSideStaticPageData(
@@ -59,10 +61,12 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         },
         store
     )
-//@ts-ignore
+
     await store.dispatch(getPageDataAction(context))
 
-    return null
+    return {
+        props: {}
+    }
 })
 
 export default page;

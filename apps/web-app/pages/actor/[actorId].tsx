@@ -3,20 +3,23 @@ import styled from "styled-components";
 import dynamic from "next/dynamic";
 import {useRouter} from "next/router";
 import {wrapper} from "@store_toolkit/store";
-import {useSelector} from "react-redux";
 import SidebarWidgetAreaRenderer from "@components/RootLayout/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
 import ActorBio from '../../components/includes/cards/CardsRenderer/ActorBio/ActorBio'
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
-import {Store} from "typescript-types";
 import getPostsAction from "@store_toolkit/clientReducers/postsReducers/getPostsAction";
 import MetaAdminQuickAccessBar from "@components/pagesIncludes/metas/MetaAdminQuickAccessBar";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
 import {textContentReplacer} from "custom-util";
 import {getTextDataWithTranslation} from "custom-util";
+import {useAppSelector} from "@store_toolkit/hooks";
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
-const PageStyle = styled.div`
+interface IStyles{
+    customStyles?: string
+}
+
+const PageStyle = styled.div<IStyles>`
   width: 100%;
   height: 100%;
 
@@ -29,16 +32,15 @@ const PageStyle = styled.div`
     }
   }
 
-  ${({customStyles}: { customStyles?: string }) => customStyles || ''}
-
+  ${({customStyles}) => customStyles || ''}
 `
 
 const actorPage = () => {
     const {locale} = useRouter()
-    const actor = useSelector(({posts}: Store) => posts?.actorData)
-    const currentPageSettings = useSelector(({settings}: Store) => settings?.currentPageSettings)
-    const headDataSettings = useSelector(({settings}: Store) => settings?.initialSettings?.headDataSettings)
-    const adminMode = useSelector(({globalState}: Store) => globalState?.adminMode);
+    const actor = useAppSelector(({posts}) => posts?.actorData)
+    const currentPageSettings = useAppSelector(({settings}) => settings?.currentPageSettings)
+    const headDataSettings = useAppSelector(({settings}) => settings?.initialSettings?.headDataSettings)
+    const adminMode = useAppSelector(({globalState}) => globalState?.adminMode);
 
     return (
         <PageStyle id={'content'} className={`page-${currentPageSettings?.sidebar || 'no'}-sidebar`}
@@ -60,7 +62,7 @@ const actorPage = () => {
     )
 };
 
-//@ts-ignore
+
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     await _getServerSideStaticPageData(
@@ -89,7 +91,9 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             }
         ))
 
-    return null
+    return {
+        props: {}
+    }
 });
 
 

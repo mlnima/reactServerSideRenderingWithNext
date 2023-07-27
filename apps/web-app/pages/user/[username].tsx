@@ -5,18 +5,16 @@ import {useRouter} from "next/router";
 import styled from "styled-components";
 import useTranslation from 'next-translate/useTranslation'
 import {wrapper} from "@store_toolkit/store";
-import {useSelector} from "react-redux";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAppDispatch, useAppSelector} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 import {UserPreviewImage} from "ui";
-import {Store} from "typescript-types";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCamera} from "@fortawesome/free-solid-svg-icons/faCamera";
 import {getUserPageDataAction} from "@store_toolkit/clientReducers/userReducers/getUserPageDataAction";
 
 const UserPageStyledDiv = styled.div`
-  color: var(--main-text-color);
+  color: var(--primary-text-color,#fff);
   max-width: 940px;
   margin: auto;
   font-size: 12px;
@@ -28,7 +26,7 @@ const UserPageStyledDiv = styled.div`
     align-items: center;
     margin: 10px 0;
     padding: 10px 0;
-    border-bottom: 0.5px solid var(--main-text-color);
+    border-bottom: 0.5px solid var(--primary-text-color,#fff);
     flex-direction: column;
 
     @media (min-width: 768px) {
@@ -61,7 +59,7 @@ const UserPageStyledDiv = styled.div`
     margin: 20px 0;
 
     .profile-no-posts {
-      border: 0.5px solid var(--main-text-color);
+      border: 0.5px solid var(--primary-text-color,#fff);
       border-radius: 50%;
       width: 150px;
       height: 150px;
@@ -77,7 +75,7 @@ const UserPageStyledDiv = styled.div`
     }
 
     .profile-no-posts-title {
-      color: var(--main-text-color);
+      color: var(--primary-text-color,#fff);
       text-align: center;
     }
   }
@@ -87,7 +85,7 @@ const UserPage = () => {
     const {t} = useTranslation('common');
     const dispatch = useAppDispatch();
     const router = useRouter();
-    const {userData, userPageData, loggedIn} = useSelector(({user}: Store) => user);
+    const {userData, userPageData, loggedIn} = useAppSelector(({user}) => user);
 
     useEffect(() => {
         const timerId = setTimeout(() => {
@@ -108,7 +106,7 @@ const UserPage = () => {
                 }),
             );
         } catch (err) {
-            console.log(err);
+
         }
     };
 
@@ -154,7 +152,6 @@ export default UserPage;
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-    // @ts-ignore
     await _getServerSideStaticPageData(
         context,
         [

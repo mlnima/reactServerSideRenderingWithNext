@@ -14,14 +14,14 @@ const Soft404StyledDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: var(--main-background-color, #000);
+  background-color: var(--primary-background-color,#000);
 
   h1 {
-    color: var(--main-text-color, #fff);
+    color: var(--primary-text-color,#fff);
   }
 
   .back-to-homepage {
-    color: var(--main-active-color, #f90);
+    color: var(--primary-active-color, #f90);
     text-decoration: none;
   }
 `

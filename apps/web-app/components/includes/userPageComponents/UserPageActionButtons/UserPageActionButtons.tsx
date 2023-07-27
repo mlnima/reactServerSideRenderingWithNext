@@ -2,10 +2,8 @@ import React, {FC, useEffect} from 'react';
 import {useRouter} from "next/router";
 import useTranslation from 'next-translate/useTranslation'
 import styled from "styled-components";
-import {useSelector} from "react-redux";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
-import {useAppDispatch} from "@store_toolkit/hooks";
-import {Store} from "typescript-types";
+import {useAppDispatch, useAppSelector} from "@store_toolkit/hooks";
 import {followUserAction} from "@store_toolkit/clientReducers/userReducers/followUserAction";
 import {unfollowUserAction} from "@store_toolkit/clientReducers/userReducers/unfollowUserAction";
 import {startAConversationAction} from "@store_toolkit/clientReducers/messengerActions/startAConversationAction";
@@ -19,7 +17,7 @@ const UserPageActionButtonsStyledDiv = styled.div`
 
   .user-page-action-button {
     background-color: transparent;
-    color: var(--main-text-color, #fff);
+    color: var(--primary-text-color,#fff);
     border: none;
     padding: 5px 10px;
     margin: 5px;
@@ -32,7 +30,7 @@ const UserPageActionButtonsStyledDiv = styled.div`
 
     &:active {
       color: var(--secondary-background-color, #181818);
-      background-color: var(--main-text-color, #fff);
+      background-color: var(--primary-text-color,#fff);
     }
   }
 
@@ -51,9 +49,9 @@ const UserPageActionButtons: FC<UserPageActionButtonsPropType> = ({_id}) => {
     const [startedTheConversation, setStartedTheConversation] = React.useState(false)
     const router = useRouter()
     const dispatch = useAppDispatch()
-    const {userData, loggedIn, userPageData} = useSelector(({user}: Store) => user)
+    const {userData, loggedIn, userPageData} = useAppSelector(({user}) => user)
 
-    const {activeConversation} = useSelector(({messenger}: Store) => messenger)
+    const {activeConversation} = useAppSelector(({messenger}) => messenger)
 
 
     const onFollowHandler = () => {

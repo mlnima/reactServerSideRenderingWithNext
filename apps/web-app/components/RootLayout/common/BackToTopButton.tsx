@@ -7,7 +7,7 @@ const BackToTopButtonStyledDiv = styled.div`
   position: fixed;
   bottom: 6rem;
   right: 2rem;
-  background-color: var(--main-active-color, #f90);
+  background-color: var(--primary-active-color, #f90);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,7 +46,7 @@ const BackToTopButton = () => {
         return (
             <BackToTopButtonStyledDiv onClick={() => scrollEvent()} title="Back to top">
                 <span aria-label={'scroll to top'}>
-                    <FontAwesomeIcon color={'var(--main-background-color, #000)'} icon={faAngleUp} style={{width:24,height:24}}/>
+                    <FontAwesomeIcon color={'var(--primary-background-color,#000)'} icon={faAngleUp} style={{width:24,height:24}}/>
                 </span>
             </BackToTopButtonStyledDiv>
 

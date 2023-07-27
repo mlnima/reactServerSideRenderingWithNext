@@ -6,7 +6,7 @@ interface PropTypes {
 }
 
 const GoogleAnalyticsHeadScript: FC<PropTypes> = ({googleAnalyticsId}) => {
-    console.log('GoogleAnalyticsHeadScript')
+
     return (
         <>
             <script async src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}

@@ -4,7 +4,7 @@ import WidgetsRenderer from "@components/includes/WidgetsRenderer/WidgetsRendere
 
 let HeaderWidgetAreaStyle = styled.div`
   grid-area: header;
-  background-color: var(--main-background-color, #000);
+  background-color: var(--secondary-background-color,#181818);
   padding: 0 8px;
   box-sizing: border-box;
 

@@ -14,11 +14,11 @@ const MultipleLinkToStyledUl = styled.ul`
   padding: 0;
   .multiple-links-widget-item {
     list-style: none;
-    color: var(--main-text-color, #fff);
+    color: var(--primary-text-color,#fff);
     padding:  8px;
     box-sizing: border-box;
     a {
-      color: var(--main-text-color,#fff) !important;
+      color: var(--primary-text-color,#fff) !important;
       text-decoration: none;
     }
   }

@@ -13,7 +13,7 @@ const Style = styled.div`
     .filed-checkbox {
       display: flex;
       align-items: center;
-      background-color: var(--main-background-color, #000);
+      background-color: var(--primary-background-color,#000);
       padding: 4px;
       box-sizing: border-box;
       border-radius: 5px;

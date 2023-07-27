@@ -59,8 +59,8 @@ const UniqueFields: FC<UniqueFieldsPropTypes> =
                 {widgetData.type === 'menu' &&
                     <MenuWidgetModelFields widgetData={widgetData}
                                            setWidgetData={setWidgetData}
-                                           onChangeHandler={onChangeHandler}
-                                           mobileNavigation={widgetData.mobileNavigation}
+                                           // onChangeHandler={onChangeHandler}
+                                           // mobileNavigation={widgetData.mobileNavigation}
                                            widgetSettings={widgetSettings}
 
                     />

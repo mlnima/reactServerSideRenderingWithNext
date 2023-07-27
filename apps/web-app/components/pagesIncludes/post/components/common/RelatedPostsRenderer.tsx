@@ -1,8 +1,7 @@
 import {FC} from "react";
-import {useSelector} from "react-redux";
 import styled from "styled-components";
 import PostsCardsRenderer from "../../../../includes/cards/CardsRenderer/PostsCardsRenderer";
-import {Store} from "typescript-types";
+import {useAppSelector} from "@store_toolkit/hooks";
 
 const RelatedPostsRendererStyledDiv = styled.div`
   width: 100%;
@@ -16,7 +15,7 @@ const RelatedPostsRendererStyledDiv = styled.div`
 
 const RelatedPostsRenderer: FC = () => {
 
-    const relatedPosts = useSelector((store: Store) => {
+    const relatedPosts = useAppSelector((store ) => {
         return [
             ...store?.posts?.relatedPosts.actorsRelatedPosts,
             ...store?.posts?.relatedPosts.categoriesRelatedPosts,

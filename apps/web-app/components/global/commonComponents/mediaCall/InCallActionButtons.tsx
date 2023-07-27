@@ -5,10 +5,9 @@ import {faRepeat} from "@fortawesome/free-solid-svg-icons";
 import {faVideoSlash} from "@fortawesome/free-solid-svg-icons/faVideoSlash";
 import {faMicrophoneSlash} from "@fortawesome/free-solid-svg-icons/faMicrophoneSlash";
 import {faPhoneSlash} from "@fortawesome/free-solid-svg-icons/faPhoneSlash";
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
 import {faVideo} from "@fortawesome/free-solid-svg-icons/faVideo";
 import {faPhone} from "@fortawesome/free-solid-svg-icons/faPhone";
+import {useAppSelector} from "@store_toolkit/hooks";
 
 const Style = styled.div<{ incomingCall: boolean }>`
   display: flex;
@@ -116,13 +115,11 @@ const InCallActionButtons: FC<PropTypes> = (
         incomingCall,
         callAccepted,
         callType,
-    } = useSelector(({mediaConnection}: Store) => mediaConnection);
+    } = useAppSelector(({mediaConnection}) => mediaConnection);
 
     useEffect(() => {
         if ((!outGoingCall || !incomingCall) && callAccepted) {
-            console.log('console=> ', outGoingCall)
-            console.log('console=> ', incomingCall)
-            console.log('console=> ', callAccepted)
+
             const hideButtons = setTimeout(() => {
                 setInCallButtonsVisible(false);
             }, 3000);
@@ -137,13 +134,10 @@ const InCallActionButtons: FC<PropTypes> = (
 
     const onRejectOrTerminateOrCancelOutGoingCallHandler = () => {
         if (onGoingCall) {
-            console.log('onTerminatedCallHandler',)
             onTerminatedCallHandler();
         }else if (outGoingCall){
-            console.log('onCancelOutGoingCallHandler',)
             onCancelOutGoingCallHandler();
         } else {
-            console.log('onRejectCallHandler',)
             onRejectCallHandler();
         }
     }

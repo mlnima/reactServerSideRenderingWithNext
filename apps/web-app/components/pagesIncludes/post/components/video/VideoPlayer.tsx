@@ -1,9 +1,8 @@
 import styled from "styled-components";
-import {useSelector} from "react-redux";
 import React, {FC, useMemo,memo} from "react";
-import convertDurationStringToIso8601 from "@_variables/_clientVariables/clientVariables/convertDurationStringToIso8601";
-import convertDateToIso from "@_variables/_clientVariables/clientVariables/convertDateToIso";
-import {Store} from "typescript-types";
+import {convertDurationStringToIso8601} from "custom-util";
+import {convertDateToIsoString} from "custom-util"
+import {useAppSelector} from "@store_toolkit/hooks";
 
 const VideoPlayerStyledDiv = styled.div`
   margin: 0 auto;
@@ -61,11 +60,11 @@ const VideoPlayer :FC<PropTypes> = ({descriptionRef}) => {
       createdAt,
       updatedAt,
       videoScriptCode
-  } = useSelector(({posts}:Store)=>posts.post)
+  } = useAppSelector(({posts} )=>posts.post)
 
 
 
-      const uploadDate = useMemo(()=>convertDateToIso(updatedAt || createdAt),[createdAt,updatedAt])
+      const uploadDate = useMemo(()=>convertDateToIsoString(updatedAt || createdAt),[createdAt,updatedAt])
 
 
     const playerSchemaData = useMemo(()=>{

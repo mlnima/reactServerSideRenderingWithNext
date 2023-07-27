@@ -13,7 +13,7 @@ export const Styles = styled.div`
   overflow-wrap: break-word;
   
   .chatroom-message-log{
-    color: var(--main-text-color, #fff);
+    color: var(--primary-text-color,#fff);
     text-align: center;
     word-wrap: break-word;
     padding: 5px;
@@ -39,12 +39,12 @@ export const Styles = styled.div`
     .chatroom-message-username {
       display: flex;
       justify-content: space-between;
-      color: var(--main-text-color, #fff);
+      color: var(--primary-text-color,#fff);
       font-size: small;
     }
 
     .chatroom-message--text {
-      color: var(--main-text-color, #fff);
+      color: var(--primary-text-color,#fff);
       margin: 10px 20px;
       word-wrap: break-word;
       max-width: calc(100% - 30px);

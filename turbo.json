@@ -6,7 +6,8 @@
       "outputs": ["dist/**",".next/**",".build/**"]
     },
     "dev": {
-      "cache": false
+      "cache": false,
+      "outputMode": "errors-only"
     },
     "graph": {
       "cache": false

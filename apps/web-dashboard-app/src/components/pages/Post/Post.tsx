@@ -7,13 +7,14 @@ import Meta from "./Meta/Meta";
 import {Link, useSearchParams} from 'react-router-dom'
 import RatingOption from './RatingOption/RatingOption'
 import PostInformation from "./PostInformation/PostInformation";
-import languagesOptions from "@variables/languagesOptions";
+// import languagesOptions from "@variables/languagesOptions";
 import styled from "styled-components";
 import { useSelector} from "react-redux";
 import {editPostAction} from "@store/reducers/postsReducer";
 import {getPostAction,defineNewPost,changeActiveEditingLanguage} from "@store/reducers/postsReducer";
 import {DashboardStore} from "typescript-types";
 import {useAppDispatch} from "@store/hooks";
+import {LanguagesOptions} from "custom-util";
 
 const AdminPostPageStyledDiv = styled.div`
   display: grid;
@@ -108,7 +109,7 @@ const Index = () => {
                         <select className={'custom-select language-selector'} ref={languageElement}
                                 onChange={e => dispatch(changeActiveEditingLanguage(e.target.value as string))}>
                             <option value={'default'}>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL || 'Default'}</option>
-                            {languagesOptions}
+                            <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALS || ''}/>
                         </select>
                     </div>
 

@@ -1,6 +1,5 @@
 import {getTextDataWithTranslation, textContentReplacer,capitalizeFirstLetter} from "custom-util";
-
-import {_metasCanonicalUrlGenerator} from "@_variables/_clientVariables/clientVariables/_canonicalUrlGenerators";
+import {metasCanonicalUrlGenerator} from "custom-util";
 
 const _firstRequestHeadDataSetter = (context, page: string, setHeadData: boolean, identity: any) => {
 
@@ -40,7 +39,7 @@ const _firstRequestHeadDataSetter = (context, page: string, setHeadData: boolean
         const isMetaPageRegex = /categories|tags|actors/g
 
         const pageUrl = isMetaPageRegex.test(page) ?
-            _metasCanonicalUrlGenerator(page, context.locale, context.query.page) :
+            metasCanonicalUrlGenerator(page, context.locale, context.query.page) :
             null
 
 

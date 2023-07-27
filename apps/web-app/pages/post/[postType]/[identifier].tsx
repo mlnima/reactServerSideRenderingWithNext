@@ -1,19 +1,17 @@
 import {useEffect, useMemo, useState} from "react";
 import {wrapper} from "../../../store_toolkit/store";
-import {useSelector} from "react-redux";
 import dynamic from "next/dynamic";
 import styled from "styled-components";
 import SidebarWidgetAreaRenderer from "@components/RootLayout/widgetsArea/SidebarWidgetArea/SidebarWidgetAreaRenderer";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAppDispatch, useAppSelector} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
-import {Store} from "typescript-types";
 import getPostAction from "@store_toolkit/clientReducers/postsReducers/getPostAction";
 import getPostCommentsAction from "@store_toolkit/clientReducers/postsReducers/getPostCommentsAction";
 import {clientAPIRequestViewPost} from "api-requests";
 import {postTypes} from "data-structures";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
-import {_postCanonicalUrlGenerator} from "@_variables/_clientVariables/clientVariables/_canonicalUrlGenerators";
 import {useRouter} from "next/router";
+import {postCanonicalUrlGenerator} from "custom-util";
 
 const Soft404 = dynamic(() =>
     import('@components/includes/Soft404/Soft404'))
@@ -67,10 +65,10 @@ const postPage = () => {
         tags,
         categories,
         actors
-    } = useSelector(({posts}: Store) => posts?.post);
-    const {userData} = useSelector(({user}: Store) => user);
-    const sidebar = useSelector(({settings}: Store) => settings?.currentPageSettings?.sidebar);
-    const adminMode = useSelector(({globalState}: Store) => globalState?.adminMode);
+    } = useAppSelector(({posts}) => posts?.post);
+    const {userData} = useAppSelector(({user}) => user);
+    const sidebar = useAppSelector(({settings}) => settings?.currentPageSettings?.sidebar);
+    const adminMode = useAppSelector(({globalState}) => globalState?.adminMode);
 
 
     useEffect(() => {
@@ -88,7 +86,7 @@ const postPage = () => {
             <>
                 <HeadSetter title={title}
                             disAllowIndexByRobots={status !== 'published'}
-                            canonicalUrl={_postCanonicalUrlGenerator(postType, _id,locale)}
+                            canonicalUrl={postCanonicalUrlGenerator(postType as string, _id as string,locale as string)}
                             keywords={[...(tags || []), ...(categories || []), ...(actors || [])].map(meta => meta.name).join(',')}
                             description={postType !== 'learn' && typeof description === 'string' ? description : undefined}/>
                 {adminMode && <PostAdminQuickAccessBar/>}
@@ -125,7 +123,7 @@ const postPage = () => {
 };
 
 
-//@ts-ignore
+
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     await _getServerSideStaticPageData(
@@ -152,7 +150,9 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         })
     )
 
-    return null
+    return {
+        props: {}
+    }
 });
 
 export default postPage;

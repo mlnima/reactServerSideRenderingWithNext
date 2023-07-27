@@ -19,6 +19,6 @@ export const Styles = styled.div<IProps>`
   position: relative;
   background-color: var(--main-background-color, #1A1A1A);
   .no-message {
-    color: var(--main-text-color, #fff);
+    color: var(--primary-text-color,#fff);
   }
 `

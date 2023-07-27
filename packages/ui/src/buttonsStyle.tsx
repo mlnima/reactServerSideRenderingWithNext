@@ -20,6 +20,9 @@ const buttonsStyle = css`
   .btn-primary{
     background-color: var(--primary-button-link-background-color, #f90);
     color: var(--primary-button-link-text-color, #000);
+    svg{
+      color: var(--primary-button-link-text-color, #000);
+    }
   }
   .btn-secondary{
     background-color: var(--secondary-button-link-background-color, #6c757d);
@@ -43,7 +46,7 @@ const buttonsStyle = css`
   }
   .btn-transparent{
     background-color: transparent;
-    color: var(--main-text-color, #fff);
+    color: var(--primary-text-color,#fff);
     border:  none;
     outline: none;
   }
@@ -59,7 +62,7 @@ const buttonsStyle = css`
   }
   .btn-navigation{
     background-color:var(--secondary-background-color, #181818);
-    color: var(--main-text-color, #fff);
+    color: var(--primary-text-color, #fff);
     border: none;
   }
 `

@@ -1,20 +1,20 @@
 import ProfileNavigation from '../../components/includes/profilePageComponents/ProfileNavigation/ProfileNavigation';
 import styled from "styled-components";
 import Link from "next/link";
-import {useSelector} from "react-redux";
 import {wrapper} from "@store_toolkit/store";
 import _getServerSideStaticPageData from "@store_toolkit/_storeVariables/_getServerSideStaticPageData";
-import {Store} from "typescript-types";
 import Posts from "@components/pagesIncludes/profile/Posts";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
 import ProfileImage from "@components/pagesIncludes/profile/ProfileImage/ProfileImage";
+import {useAppSelector} from "@store_toolkit/hooks";
 
 const PageStyle = styled.div`
-  #primary{
-    #main{
+  #primary {
+    #main {
       display: flex;
       flex-direction: column;
       align-items: center;
+
       .profile-header {
         display: flex;
         flex-direction: column;
@@ -22,15 +22,18 @@ const PageStyle = styled.div`
         justify-content: space-between;
         padding: 10px 0;
       }
+
       .profile-page-info {
         width: 300px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+
         .profile-page-info-edit-link {
-          color: var(--main-text-color);
+          color: var(--primary-text-color,#fff);
         }
       }
+
       .profile-posts {
         display: flex;
         justify-content: center;
@@ -39,7 +42,7 @@ const PageStyle = styled.div`
         margin: 20px 0;
 
         .profile-no-posts {
-          border: .5px solid var(--main-text-color);
+          border: .5px solid var(--primary-text-color,#fff);
           border-radius: 50%;
           width: 150px;
           height: 150px;
@@ -48,14 +51,14 @@ const PageStyle = styled.div`
           align-items: center;
 
           svg {
-            color: var(--main-text-color);
+            color: var(--primary-text-color,#fff);
             width: 75px;
             height: 75px;
           }
         }
 
         .profile-no-posts-title {
-          color: var(--main-text-color);
+          color: var(--primary-text-color,#fff);
         }
       }
     }
@@ -64,17 +67,12 @@ const PageStyle = styled.div`
 
 const Profile = () => {
 
-    // @ts-ignore
-    const userData = useSelector(({user}: Store) => user?.userData)
 
-    const {sidebar} = useSelector(({settings}: Store) => {
-        return {
-            sidebar: settings?.currentPageSettings?.sidebar
-        }
-    });
+    const userData = useAppSelector(({user}) => user?.userData)
+    const sidebar = useAppSelector(({settings}) => settings?.currentPageSettings?.sidebar);
 
     return (
-        <PageStyle  className={`profile-page page-${sidebar || 'no'}-sidebar`} id={'content'}   >
+        <PageStyle className={`profile-page page-${sidebar || 'no'}-sidebar`} id={'content'}>
             <HeadSetter/>
             <div id={'primary'}>
                 <main id={'main'}>
@@ -97,10 +95,9 @@ const Profile = () => {
         </PageStyle>
     );
 };
-//@ts-ignore
-export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-    // @ts-ignore
+
+export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
     await _getServerSideStaticPageData(
         context,
         [
@@ -114,8 +111,9 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         },
         store
     )
-
-    return null
+    return {
+        props: {}
+    }
 })
 
 export default Profile;

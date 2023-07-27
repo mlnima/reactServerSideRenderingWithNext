@@ -51,7 +51,7 @@ const ImagesSliderStyledDiv = styled.div`
     svg {
       width: 40px;
       height: 40px;
-      fill: var(--main-active-color, #f90);
+      fill: var(--primary-active-color, #f90);
     }
   }
 
@@ -87,7 +87,7 @@ const ImagesSliderStyledDiv = styled.div`
       opacity: .5;
 
       &:after {
-        background-color: var(--main-active-color, #f90);
+        background-color: var(--primary-active-color, #f90);
         width: 100%;
         height: 4px;
         border-radius: 2px;

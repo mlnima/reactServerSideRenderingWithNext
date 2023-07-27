@@ -41,7 +41,6 @@ const Posts: FC<PropTypes> = ({userId}) => {
                     }
                 ))
             }).catch(error => {
-                console.log(error)
             })
         }
 

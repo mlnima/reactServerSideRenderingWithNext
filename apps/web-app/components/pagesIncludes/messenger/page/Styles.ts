@@ -66,7 +66,7 @@ export const Styles = styled.main<IProps>`
 
 
   .messenger-page-register-page-link {
-    color: var(--main-text-color);
+    color: var(--primary-text-color,#fff);
   }
 
   @media only screen and (min-width: 768px) {

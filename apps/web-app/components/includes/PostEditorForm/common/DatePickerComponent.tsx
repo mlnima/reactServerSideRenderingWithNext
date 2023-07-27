@@ -6,8 +6,8 @@ import "react-datepicker/dist/react-datepicker.css";
 const Style = styled.div`
     .react-datepicker-wrapper,.react-datepicker__tab-loop{
       *{
-        color: var(--main-text-color, #ccc);
-        background: var(--main-background-color, #181818);
+        color: var(--primary-text-color,#fff);
+        background: var(--primary-background-color,#000);
       }
     }
 `;

@@ -17,7 +17,7 @@ export const Styles = styled.div`
     .profile-image {
       width: 100%;
       height: 100%;
-      color: var(--main-text-color, #fff);
+      color: var(--primary-text-color,#fff);
       display: flex;
       justify-content: center;
       align-items: center;

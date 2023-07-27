@@ -28,7 +28,7 @@
 //     const descriptionValue = useMemo(() => {
 //         return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?
 //             post.description :
-//             post.translations?.[locale]?.description || post.description;
+//             post.translations?.[lang]?.description || post.description;
 //     }, [post]);
 //
 //     return (

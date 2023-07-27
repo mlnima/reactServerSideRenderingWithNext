@@ -2,7 +2,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import MonacoEditor from "@components/common/MonacoEditor";
 import DefaultFields from "./DefaultFields";
-import {WidgetModelStyledDiv} from './WidgetModelStyle'
+import {WidgetModelStyledDiv} from './WidgetModel.style'
 import ActionButtons from "./ActionButtons";
 import UniqueFields from "./UniqueFields";
 import WidgetHeaderControl from "./WidgetHeaderControl/WidgetHeaderControl";

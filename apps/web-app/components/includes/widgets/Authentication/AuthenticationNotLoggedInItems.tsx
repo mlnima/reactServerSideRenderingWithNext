@@ -2,12 +2,11 @@ import React, {FC} from "react";
 import useTranslation from 'next-translate/useTranslation'
 import {useRouter} from "next/router";
 import {loginRegisterForm} from "@store_toolkit/clientReducers/globalStateReducer";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAppDispatch, useAppSelector} from "@store_toolkit/hooks";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
 import {faPen} from "@fortawesome/free-solid-svg-icons/faPen";
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
+
 
 
 interface AuthenticationNotLoggedInItemsPropTypes {
@@ -19,8 +18,8 @@ const AuthenticationNotLoggedInItems: FC<AuthenticationNotLoggedInItemsPropTypes
     const {pathname} = useRouter()
     const dispatch = useAppDispatch()
 
-    const {membership, anyoneCanRegister} = useSelector(
-        ({settings}: Store) => settings?.initialSettings?.membershipSettings || {}
+    const {membership, anyoneCanRegister} = useAppSelector(
+        ({settings}) => settings?.initialSettings?.membershipSettings || {}
     );
 
     const onLoginButtonClickHandler = () => {

@@ -2,7 +2,6 @@ import Document from 'next/document'
 import {ServerStyleSheet} from 'styled-components';
 import React from "react";
 
-
 declare global {
     interface Window {
         localStream: MediaStream | null;
@@ -10,15 +9,6 @@ declare global {
         remoteStreams: MediaStream[] | null;
     }
 }
-
-
-
-
-
-
-
-
-
 
 class MyDocument extends Document {
 

@@ -1,18 +1,20 @@
-// @ts-nocheck
 import React, {FC} from "react";
 import styled from "styled-components";
 import RelatedPostsRenderer from "@components/pagesIncludes/post/components/common/RelatedPostsRenderer";
 import dynamic from "next/dynamic";
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
 import useTranslation from "next-translate/useTranslation";
+import {useAppSelector} from "@store_toolkit/hooks";
 
 const PostMetasRenderer = dynamic(() => import('../components/common/PostMetasRenderer/PostMetasRenderer'))
 const CommentsRenderer = dynamic(() => import('../components/common/CommentsRenderer/CommentsRenderer'))
 const CommentFrom = dynamic(() => import('../components/common/CommentFrom'))
 const WidgetsRenderer = dynamic(() => import('../../../includes/WidgetsRenderer/WidgetsRenderer'))
 
-const Style = styled.div`
+interface IStyles{
+    customStyles?:string
+}
+
+const Style = styled.div<IStyles>`
   margin: auto;
 
   #main {
@@ -23,10 +25,11 @@ const Style = styled.div`
 
       .entry-header {
         width: 100%;
-        .entry-header-data{
-          h1{
+
+        .entry-header-data {
+          h1 {
             text-align: center;
-            color: var(--main-active-color,#f90);
+            color: var(--primary-active-color, #f90);
             padding: 8px;
             box-sizing: border-box;
           }
@@ -45,7 +48,7 @@ const Style = styled.div`
     }
   }
 
-  ${({customStyles}: { customStyles?: string }) => customStyles || ''}
+  ${({customStyles}) => customStyles || ''}
 `;
 
 interface PropTypes {
@@ -54,8 +57,8 @@ interface PropTypes {
 const NotFoundOrRestricted: FC<PropTypes> = ({}) => {
     const {t} = useTranslation('common');
 
-    const {post} = useSelector(({posts}: Store) => posts)
-    const {customStyles} = useSelector(({settings}: Store) => settings?.currentPageSettings)
+    const {post} = useAppSelector(({posts} ) => posts)
+    const {customStyles} = useAppSelector(({settings} ) => settings?.currentPageSettings)
 
     return (
         <Style id={'primary'} className='post-page' customStyles={customStyles}>

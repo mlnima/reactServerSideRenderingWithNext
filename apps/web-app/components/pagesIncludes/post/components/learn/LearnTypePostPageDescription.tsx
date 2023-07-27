@@ -2,8 +2,7 @@ import {FC, useMemo} from "react";
 import {useRouter} from "next/router";
 import dynamic from 'next/dynamic'
 import styled from "styled-components";
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
+import {useAppSelector} from "@store_toolkit/hooks";
 // const ReactPageDescriptionRenderer = dynamic(() => import('../../components/ReactPageDescriptionRenderer/ReactPageDescriptionRenderer'))
 const ObjectKeyDescriptionRenderer = dynamic(() => import('../common/description/ObjectKeyDescriptionRenderer'))
 
@@ -26,7 +25,7 @@ const PostDescriptionStyledDiv = styled.div`
 const LearnTypePostPageDescription :FC = () => {
     const {locale} = useRouter();
 
-    const {description,translations,source}  = useSelector(({posts}:Store)=>posts.post)
+    const {description,translations,source}  = useAppSelector(({posts} )=>posts.post)
 
     const descriptionValue = useMemo(() => {
         return translations ?

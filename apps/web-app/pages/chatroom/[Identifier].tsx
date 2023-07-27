@@ -1,16 +1,16 @@
 import React, {FC, useEffect, useRef, useState} from 'react';
-import { socket } from 'custom-util';
+import socket from 'web-socket-client';
 import ChatRoomMessageArea from "@components/pagesIncludes/chatroom/ChatRoomMessageArea/ChatRoomMessageArea";
 import ChatRoomTools from "@components/pagesIncludes/chatroom/ChatRoomTools/ChatRoomTools";
 import ChatRoomOnlineUsersList
     from "@components/pagesIncludes/chatroom/ChatRoomOnlineUsersList/ChatRoomOnlineUsersList";
-import {useSelector} from "react-redux";
+
 import {dispatchSocketId} from "@store_toolkit/clientReducers/userReducers/userReducer";
 import {setOnlineUsers, setMessages, newMessage} from '@store_toolkit/clientReducers/chatroomReducer';
 import {wrapper} from "@store_toolkit/store";
-import {useAppDispatch} from "@store_toolkit/hooks";
+import {useAppDispatch, useAppSelector} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
-import {Chatroom, Store} from "typescript-types";
+import {Chatroom} from "typescript-types";
 import {uniqArrayBy} from 'custom-util'
 import styled from "styled-components";
 import {clientAPIRequestGetChatroom} from "api-requests";
@@ -59,11 +59,11 @@ const chatRoom: FC<PropTypes> = ({pageData}) => {
     const [autoScroll, setAutoScroll] = useState(true);
     const messageAreaRef = useRef<HTMLDivElement | null>(null);
     const dispatch = useAppDispatch();
-    const user = useSelector((store: Store) => store.user);
+    const user = useAppSelector((store) => store.user);
     const [onlineUserListVisibility, setOnlineUserListVisibility] = useState(false);
     const [isJoined, setIsJoined] = useState(false);
     const [headerSize, setHeaderSize] = useState(0);
-    const {isMaximized} = useSelector(({chatroom}: Store) => chatroom);
+    const {isMaximized} = useAppSelector(({chatroom}) => chatroom);
 
     useEffect(() => {
         if (!pageData?.chatroom?._id || !user.loggedIn || isJoined || !user.socketId) return;
@@ -121,7 +121,7 @@ const chatRoom: FC<PropTypes> = ({pageData}) => {
 
             setTimeout(() => {
                 dispatch(loading(false));
-                if (messageAreaRef.current){
+                if (messageAreaRef.current) {
                     messageAreaRef.current.scroll({
                         top: 1,
                         behavior: 'smooth',
@@ -136,11 +136,11 @@ const chatRoom: FC<PropTypes> = ({pageData}) => {
         socket.on('JoinSocketAndGetInitialData', handleJoinSocketAndGetInitialData);
         socket.on('olderMessagesLoaded', handleOlderMessagesLoaded);
 
-        if (typeof window !== 'undefined'){
-            if (window.innerWidth > 768){
+        if (typeof window !== 'undefined') {
+            if (window.innerWidth > 768) {
                 setOnlineUserListVisibility(true);
             }
-            setHeaderSize(headerSizeCalculator()+ 90)
+            setHeaderSize(headerSizeCalculator() + 90)
         }
 
         return () => {

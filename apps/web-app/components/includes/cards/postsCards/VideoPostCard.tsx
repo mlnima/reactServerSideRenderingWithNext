@@ -19,7 +19,7 @@ const TextToCanvasImage = dynamic(() => import('../asset/TextToCanvasImage/TextT
 const CardImageRenderer = dynamic(() => import('../asset/CardImageRenderer'))
 
 interface VideoPostCardPropTypes {
-    title: string,
+    title: string ,
     postUrl: string,
     numberOfCardsPerRowInMobile: number,
     views: number,
@@ -30,11 +30,11 @@ interface VideoPostCardPropTypes {
     post: Post,
 }
 
-interface VideoPostCardStylePropTypes {
+interface IStyles {
     cardWidth: number
 }
 
-const VideoPostCardStyle = styled(DefaultPostCardStyle)`
+const VideoPostCardStyle = styled(DefaultPostCardStyle)<IStyles>`
 
   .video-post-card-media {
     position: relative;
@@ -69,8 +69,8 @@ const VideoPostCardStyle = styled(DefaultPostCardStyle)`
       height: 45px;
       opacity: 40%;
       position: absolute;
-      background-color:var(--main-background-color,#000) ;
-      color:var(--main-text-color,#fff)  ;
+      background-color:var(--primary-background-color,#000) ;
+      color:var(--primary-text-color,#fff)  ;
 
       padding: 4px;
       margin: 0;
@@ -100,7 +100,7 @@ const VideoPostCardStyle = styled(DefaultPostCardStyle)`
     
     
     
-    max-width: ${({cardWidth}: VideoPostCardStylePropTypes) => cardWidth}px;
+    max-width: ${({cardWidth}) => cardWidth}px;
   }
 `
 
@@ -123,8 +123,6 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
         const hoverHandler = (status) => {
             setHover(status)
         }
-
-
 
         return (
             <VideoPostCardStyle className={'post-card'}
@@ -178,7 +176,6 @@ const LearnPostCard: FC<VideoPostCardPropTypes> =
                         {!!rating && <CardRating rating={rating} className={'card-rating card-under-title-info-data'}/>}
                     </div>
                 )}
-
 
             </VideoPostCardStyle>
         )

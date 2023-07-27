@@ -30,7 +30,7 @@ export const sliderDefaultData = {
         "pagination":{
             "clickable": true
         },
-        "modules":["EffectFade", "Navigation", "Pagination"]
+        "modules":["EffectFade", "NavigationWidgetArea", "Pagination"]
     },
     coverflow:{
         "grabCursor":true,
@@ -54,7 +54,7 @@ export const sliderDefaultData = {
         "grabCursor":true,
         "pagination":true,
         "navigation":true,
-        "modules":["EffectFlip", "Pagination", "Navigation"]
+        "modules":["EffectFlip", "Pagination", "NavigationWidgetArea"]
     },
     cards:{
         "effect": "cards",

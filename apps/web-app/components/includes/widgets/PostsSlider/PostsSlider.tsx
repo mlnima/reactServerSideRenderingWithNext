@@ -1,24 +1,29 @@
-// @ts-nocheck
-import React, {FC, useCallback, useEffect, useMemo,  useState} from 'react';
+
+import React, {FC, useCallback, useEffect, useMemo, useState} from 'react';
 import useEmblaCarousel from 'embla-carousel-react'
 import {useRouter} from "next/router";
 import dynamic from "next/dynamic";
-import {useSelector} from "react-redux";
 import styled from "styled-components";
 import {ratingCalculator} from "custom-util";
 import Autoplay from "embla-carousel-autoplay";
-import {Post,Store} from "typescript-types";
+import {Post} from "typescript-types";
 import {shortNumber} from "custom-util";
+import {useAppSelector} from "@store_toolkit/hooks";
 
 const ArticlePostCard = dynamic(() => import('../../cards/postsCards/ArticlePostCard'))
 const PromotionPostCard = dynamic(() => import('../../cards/postsCards/PromotionPostCard'))
 const LearnPostCard = dynamic(() => import('../../cards/postsCards/LearnPostCard'))
 const VideoPostCard = dynamic(() => import('../../cards/postsCards/VideoPostCard'))
 
-const PostsSliderStyledDiv = styled.div`
+interface IStyles{
+    cardsWidthDesktop: number
+}
+
+const PostsSliderStyledDiv = styled.div<IStyles>`
   position: relative;
   max-width: 98vw;
   margin: auto;
+
   .slider-parent {
     overflow: hidden;
 
@@ -53,7 +58,7 @@ const PostsSliderStyledDiv = styled.div`
     svg {
       width: 40px;
       height: 40px;
-      fill: var(--main-active-color, #f90);
+      fill: var(--primary-active-color, #f90);
     }
   }
 
@@ -89,7 +94,7 @@ const PostsSliderStyledDiv = styled.div`
       opacity: .5;
 
       &:after {
-        background-color: var(--main-active-color, #f90);
+        background-color: var(--primary-active-color, #f90);
         width: 100%;
         height: 4px;
         border-radius: 2px;
@@ -112,7 +117,7 @@ const PostsSliderStyledDiv = styled.div`
         .slide {
           position: relative;
 
-          flex: 0 0 ${({cardsWidthDesktop}: { cardsWidthDesktop: number }) => `${cardsWidthDesktop}px`};
+          flex: 0 0 ${({cardsWidthDesktop}) => `${cardsWidthDesktop}px`};
         }
       }
 
@@ -140,15 +145,11 @@ interface PostsSliderPropsTypes {
     }
 }
 
-
 const PostsSlider: FC<PostsSliderPropsTypes> =
     ({
-
          posts,
          uniqueData,
-         isSidebar,
      }) => {
-console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
         const options = {delay: 3000, stopOnInteraction: false}
         const autoplay = Autoplay(options)
 
@@ -175,10 +176,10 @@ console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
             setNextBtnEnabled(sliderApi.canScrollNext());
         }, [sliderApi, setSelectedIndex]);
 
-        const {numberOfCardsPerRowInMobile,cardsWidthDesktop} = useSelector(({settings}: Store) =>{
-            return{
-                numberOfCardsPerRowInMobile:settings?.initialSettings?.postCardsSettings?.numberOfCardsPerRowInMobile || 2,
-                cardsWidthDesktop:settings?.initialSettings?.postCardsSettings?.cardsWidthDesktop || 255,
+        const {numberOfCardsPerRowInMobile, cardsWidthDesktop} = useAppSelector(({settings}) => {
+            return {
+                numberOfCardsPerRowInMobile: settings?.initialSettings?.postCardsSettings?.numberOfCardsPerRowInMobile || 2,
+                cardsWidthDesktop: settings?.initialSettings?.postCardsSettings?.cardsWidthDesktop || 255,
             }
         })
 
@@ -195,25 +196,22 @@ console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
             const postProps = {
                 views: shortNumber(post.views || 0) as unknown as number,
-                cardsWidthDesktop,
+                cardWidth:cardsWidthDesktop,
                 numberOfCardsPerRowInMobile,
-                //@ts-ignore
-                rating: post?.likes || post?.disLikes ? ratingCalculator(post?.likes, post?.disLikes) : null,
+                rating: post?.likes || post?.disLikes ? ratingCalculator(post?.likes || 0, post?.disLikes || 0) : 0,
                 post,
                 postUrl: post?.postType === 'out' ? post?.redirectLink || '#' :
                     `/post/${post?.postType}/${post._id}`,
-                targetLink: post?.postType === 'out' || post?.outPostType === 'promotion' ? '_blank':'_self',
-                title: process.env.NEXT_PUBLIC_DEFAULT_LOCAL === locale ?
-                    post?.title :
-                    post?.translations?.[locale as string]?.title || post?.title,
-                isSidebar: isSidebar,
-                onActivateLoadingHandler: () => null
+                targetLink: post?.postType === 'out' || post?.outPostType === 'promotion' ? '_blank' : '_self',
+                title: post?.translations?.[locale as string]?.title ?? post?.title as string
             }
 
 
             return (
+
                 <div className={'slide'} key={index}>
-                    {post?.postType === 'video' ? <VideoPostCard {...postProps} key={index} index={index}/> :
+
+                    {post?.postType === 'video' ? <VideoPostCard {...postProps}  index={index}/> :
                         post?.postType === 'promotion' ? <PromotionPostCard {...postProps} index={index}/> :
                             post?.postType === 'article' ? <ArticlePostCard {...postProps} index={index}/> :
                                 post?.postType === 'learn' ? <LearnPostCard {...postProps} index={index}/> :
@@ -269,7 +267,7 @@ console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
             </PostsSliderStyledDiv>
         );
-        // return null
+
     };
 
 

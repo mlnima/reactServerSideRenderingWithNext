@@ -1,7 +1,5 @@
-// @ts-nocheck
-import React, { useMemo, useRef} from "react";
+import React, {useMemo, useRef} from "react";
 import styled from "styled-components";
-import {useSelector} from "react-redux";
 import PostTitle from "../../components/common/PostTitle";
 import PostDescription from "../../components/common/description/Description";
 import PostMetasRenderer from "../../components/common/PostMetasRenderer/PostMetasRenderer";
@@ -10,12 +8,16 @@ import WidgetsRenderer from "../../../../includes/WidgetsRenderer/WidgetsRendere
 import CommentFrom from "../../components/common/CommentFrom";
 import CommentsRenderer from "../../components/common/CommentsRenderer/CommentsRenderer";
 import PostPageStyle from "../../components/styles/PostPageStyle";
-import convertDateToIso from "@_variables/_clientVariables/clientVariables/convertDateToIso";
+import {convertDateToIsoString} from "custom-util"
 import RatingButtons from "../../components/common/RatingButtons";
-import {Store} from "typescript-types";
 import Csr from "@components/global/commonComponents/Csr";
+import {useAppSelector} from "@store_toolkit/hooks";
 
-const Style = styled(PostPageStyle)`
+interface IStyles{
+    customStyles?:string
+}
+
+const Style = styled(PostPageStyle)<IStyles>`
   margin: auto;
 
   #main {
@@ -26,6 +28,7 @@ const Style = styled(PostPageStyle)`
 
       .entry-header {
         width: 100%;
+
         .promotion-thumbnail-link {
           display: flex;
           flex-direction: column;
@@ -38,25 +41,25 @@ const Style = styled(PostPageStyle)`
           }
 
           .redirect-link {
-            color: var(--main-text-color);
+            color: var(--primary-text-color,#fff);
             padding: 10px 20px;
-            border: var(--main-text-color) 1px solid;
+            border: var(--primary-text-color,#fff) 1px solid;
           }
         }
       }
     }
   }
 
-  ${({customStyles}: { customStyles?: string }) => customStyles || ''}
+  ${({customStyles}) => customStyles || ''}
 `
 const PromotionTypePostPage = () => {
     const descriptionRef = useRef<HTMLDivElement>(null)
 
-    const {post} = useSelector(({posts}: Store) => posts)
-    const {customStyles} = useSelector(({settings}: Store) => settings?.currentPageSettings)
+    const {post} = useAppSelector(({posts}) => posts)
+    const {customStyles} = useAppSelector(({settings}) => settings?.currentPageSettings)
 
-    const datePublished = useMemo(() => convertDateToIso(post.createdAt), [post.createdAt])
-    const dateModified = useMemo(() => convertDateToIso(post.updatedAt), [post.updatedAt])
+    const datePublished = useMemo(() => convertDateToIsoString(post.createdAt), [post.createdAt])
+    const dateModified = useMemo(() => convertDateToIsoString(post.updatedAt), [post.updatedAt])
 
     return (
         <Style id={'primary'} className='post-page' customStyles={customStyles}>
@@ -65,21 +68,21 @@ const PromotionTypePostPage = () => {
                     <header className={'entry-header'}>
                         <PostTitle/>
                         <Csr>
-                        {!!post.title && <meta itemProp="name" content={post.title}/>}
-                        {!!post.title && <meta itemProp="headline" content={post.title}/>}
-                        {(!!descriptionRef?.current && !!descriptionRef?.current?.textContent) &&
-                        <meta itemProp="description" content={descriptionRef?.current?.textContent}/>}
-                        {!!post.mainThumbnail && <meta itemProp="thumbnailUrl" content={post.mainThumbnail}/>}
-                        {(!!descriptionRef?.current && !!descriptionRef?.current?.textContent) &&
-                        <meta itemProp="articleBody" content={descriptionRef?.current?.textContent}/>}
-                        {!!datePublished && <meta itemProp="datePublished" content={datePublished}/>}
-                        {!!dateModified && <meta itemProp="dateModified" content={dateModified}/>}
-                        <div className='promotion-thumbnail-link'>
-                            <a href={post?.redirectLink}>
-                                <img className='main-thumbnail' src={post?.mainThumbnail} alt="title"/></a>
-                            <a href={post?.redirectLink} className='redirect-link' target='_blank'>go
-                                to {post?.title}</a>
-                        </div>
+                            {!!post.title && <meta itemProp="name" content={post.title}/>}
+                            {!!post.title && <meta itemProp="headline" content={post.title}/>}
+                            {(!!descriptionRef?.current && !!descriptionRef?.current?.textContent) &&
+                                <meta itemProp="description" content={descriptionRef?.current?.textContent}/>}
+                            {!!post.mainThumbnail && <meta itemProp="thumbnailUrl" content={post.mainThumbnail}/>}
+                            {(!!descriptionRef?.current && !!descriptionRef?.current?.textContent) &&
+                                <meta itemProp="articleBody" content={descriptionRef?.current?.textContent}/>}
+                            {!!datePublished && <meta itemProp="datePublished" content={datePublished}/>}
+                            {!!dateModified && <meta itemProp="dateModified" content={dateModified}/>}
+                            <div className='promotion-thumbnail-link'>
+                                <a href={post?.redirectLink}>
+                                    <img className='main-thumbnail' src={post?.mainThumbnail} alt="title"/></a>
+                                <a href={post?.redirectLink} className='redirect-link' target='_blank'>go
+                                    to {post?.title}</a>
+                            </div>
                         </Csr>
                     </header>
 
@@ -96,7 +99,7 @@ const PromotionTypePostPage = () => {
                     </div>
                     <RelatedPostsRenderer/>
                     <CommentFrom/>
-                    {!!post?.comments?.length && <CommentsRenderer showComments={true}/> }
+                    {!!post?.comments?.length && <CommentsRenderer showComments={true}/>}
                 </article>
             </main>
         </Style>

@@ -1,6 +1,5 @@
-import React, {useMemo, useRef} from "react";
+import React, { useRef} from "react";
 import styled from "styled-components";
-import {useSelector} from "react-redux";
 import PostTitle from "../../components/common/PostTitle";
 import PostDescription from "../../components/common/description/Description";
 import PostMetasRenderer from "../../components/common/PostMetasRenderer/PostMetasRenderer";
@@ -9,10 +8,10 @@ import WidgetsRenderer from "../../../../includes/WidgetsRenderer/WidgetsRendere
 import CommentFrom from "../../components/common/CommentFrom";
 import CommentsRenderer from "../../components/common/CommentsRenderer/CommentsRenderer";
 import PostPageStyle from "../../components/styles/PostPageStyle";
-import convertDateToIso from "@_variables/_clientVariables/clientVariables/convertDateToIso";
+import {convertDateToIsoString} from "custom-util"
 import RatingButtons from "../../components/common/RatingButtons";
-import {Store} from "typescript-types";
 import Csr from "@components/global/commonComponents/Csr";
+import {useAppSelector} from "@store_toolkit/hooks";
 
 const Style = styled(PostPageStyle)`
   margin: auto;
@@ -42,8 +41,8 @@ const Style = styled(PostPageStyle)`
 const ArticleTypePostPage = () => {
     const descriptionRef = useRef<HTMLDivElement>(null)
 
-    const {post} = useSelector(({posts}: Store) => posts)
-    const {customStyles} = useSelector(({settings}: Store) => settings?.currentPageSettings)
+    const {post} = useAppSelector(({posts} ) => posts)
+    const {customStyles} = useAppSelector(({settings} ) => settings?.currentPageSettings)
 
     return (
         //@ts-ignore
@@ -63,10 +62,10 @@ const ArticleTypePostPage = () => {
 
                             {!!post.createdAt &&
                                 //@ts-ignore
-                                <meta itemProp="datePublished" content={convertDateToIso(post.createdAt)}/>}
+                                <meta itemProp="datePublished" content={convertDateToIsoString(post.createdAt)}/>}
                             {!!post.updatedAt &&
                                 //@ts-ignore
-                                <meta itemProp="dateModified" content={convertDateToIso(post.updatedAt)}/>}
+                                <meta itemProp="dateModified" content={convertDateToIsoString(post.updatedAt)}/>}
                         </Csr>
                     </header>
                     <div className="entry-content">

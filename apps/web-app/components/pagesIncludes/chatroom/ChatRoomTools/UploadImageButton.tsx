@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCamera} from "@fortawesome/free-solid-svg-icons/faCamera";
-import {socket} from "custom-util";
+import socket from 'web-socket-client';
 import {ActionButtonStyle} from "@components/pagesIncludes/chatroom/ChatRoomTools/Styles";
 
 interface PropTypes {

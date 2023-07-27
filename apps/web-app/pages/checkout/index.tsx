@@ -1,101 +1,103 @@
-import React, {useState} from 'react';
-import {useRouter} from "next/router";
-import styled from "styled-components";
+
+// import {useRouter} from "next/router";
+// import styled from "styled-components";
 import {wrapper} from "@store_toolkit/store";
-import {useAppDispatch} from "@store_toolkit/hooks";
+// import {useAppDispatch} from "@store_toolkit/hooks";
 import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_getServerSideStaticPageData";
 // const PayWithPayPal = dynamic(() => import('../../components/includes/checkOutPageComponents/PayWithPaypal/PayWithPaypal'), {ssr: false})
 
-let StyledDiv = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
 
-  .checkout-items {
-    width: 90%;
-    max-width: 600px;
-    margin: auto;
-  }
+// let StyledDiv = styled.div`
+//   display: flex;
+//   flex-wrap: wrap;
+//   width: 100%;
+//
+//   .checkout-items {
+//     width: 90%;
+//     max-width: 600px;
+//     margin: auto;
+//   }
+//
+//   .checkout-purchase {
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     flex-direction: column;
+//     width: 80%;
+//     max-width: 600px;
+//
+//     background-color: white;
+//     margin: auto;
+//     padding: 15px;
+//
+//     .checkout-total {
+//       display: flex;
+//       align-items: center;
+//       flex-direction: column;
+//       width: 90%;
+//
+//       h3, p {
+//         border-bottom: .1px solid black;
+//         width: 100%;
+//         padding: 5%;
+//       }
+//
+//       .vat-included {
+//         font-size: .7rem;
+//       }
+//     }
+//
+//
+//     .check-out-pay-btn {
+//       border: .2px solid black;
+//       padding: 10px 20px;
+//       margin: 10px 20px;
+//       background-color: transparent;
+//     }
+//   }
+//
+//   @media only screen and (min-width: 769px) {
+//
+//     display: grid;
+//     grid-template-columns: 1fr 1fr;
+//     .checkout-items {
+//       // display: grid;
+//       margin-top: initial;
+//       width: 90%;
+//     }
+//
+//     .checkout-purchase {
+//       margin-top: initial;
+//       width: 90%;
+//
+//     }
+//
+//
+//   }
+// `
 
-  .checkout-purchase {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
-    width: 80%;
-    max-width: 600px;
-
-    background-color: white;
-    margin: auto;
-    padding: 15px;
-
-    .checkout-total {
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      width: 90%;
-
-      h3, p {
-        border-bottom: .1px solid black;
-        width: 100%;
-        padding: 5%;
-      }
-
-      .vat-included {
-        font-size: .7rem;
-      }
-    }
-
-
-    .check-out-pay-btn {
-      border: .2px solid black;
-      padding: 10px 20px;
-      margin: 10px 20px;
-      background-color: transparent;
-    }
-  }
-
-  @media only screen and (min-width: 769px) {
-
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    .checkout-items {
-      // display: grid;
-      margin-top: initial;
-      width: 90%;
-    }
-
-    .checkout-purchase {
-      margin-top: initial;
-      width: 90%;
-
-    }
-
-
-  }
-`
-const checkout = props => {
-    const dispatch = useAppDispatch()
+const checkout = () => {
+    // const dispatch = useAppDispatch()
     // const identity = useSelector(store => store?.settings.identity)
     // const userData = useSelector(store => store?.user.userData)
-    const router = useRouter()
-    const locale = (router.locale || router.query.locale) === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? '' : router.locale || router.query.locale || '';
-    const [state, setState] = useState({
-        paymentPage: false,
-        isPaid: false,
-        message: '',
-        gotError: false,
-        error: null,
-        isCheckout: false,
-        isEnabled: false,
-        loading: true,
-        isReady: false,
-        currency: props?.eCommerce?.data?.currency,
-        total: 0,
-        totalPrice: 0
-    });
-    const [itemsData, setItemsData] = useState([])
-    const [orderData, setOrderData] = useState({})
+    // const router = useRouter()
+    // const locale = (router.locale || router.query.locale) === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? '' : router.locale || router.query.locale || '';
+    // const [state, setState] = useState({
+    //     paymentPage: false,
+    //     isPaid: false,
+    //     message: '',
+    //     gotError: false,
+    //     error: null,
+    //     isCheckout: false,
+    //     isEnabled: false,
+    //     loading: true,
+    //     isReady: false,
+    //     currency: props?.eCommerce?.data?.currency,
+    //     total: 0,
+    //     totalPrice: 0
+    // });
+    // const [itemsData, setItemsData] = useState([])
+    // const [orderData, setOrderData] = useState({})
 
 
     //check if there is items in the basket and fetch data from DB
@@ -255,13 +257,13 @@ const checkout = props => {
     //         <div className='checkout-purchase'>
     //             {/*render subtotal text*/}
     //             <div className='checkout-total'>
-    //                 <h3>{props.eCommerce?.data?.translations?.[locale]?.summaryText || props.eCommerce?.data?.summaryText || 'Summary'}</h3>
+    //                 <h3>{props.eCommerce?.data?.translations?.[lang]?.summaryText || props.eCommerce?.data?.summaryText || 'Summary'}</h3>
     //                 <p>
-    //                     <span>{props.eCommerce?.data?.translations?.[locale]?.totalText || props.eCommerce?.data?.totalText || 'Subtotal'} :</span>
+    //                     <span>{props.eCommerce?.data?.translations?.[lang]?.totalText || props.eCommerce?.data?.totalText || 'Subtotal'} :</span>
     //
     //                     <span>{new Intl.NumberFormat(props?.eCommerce?.data?.shopLocale || 'de-DE', {style: 'currency', currency: props.eCommerce?.data?.currency || 'EUR'}).format(state.totalPrice)}</span>
     //                 </p>
-    //                 <span className='vat-included'>{props?.eCommerce?.data?.translations?.[locale]?.VAT_includedText || 'VAT included.'}</span>
+    //                 <span className='vat-included'>{props?.eCommerce?.data?.translations?.[lang]?.VAT_includedText || 'VAT included.'}</span>
     //             </div>
     //
     //
@@ -303,13 +305,27 @@ const checkout = props => {
     // );
     return null
 };
-//@ts-ignore
+
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-    // @ts-ignore
-    await _getServerSideStaticPageData(context, [])
+    await _getServerSideStaticPageData(
+        context,
+        [
+            'checkoutPageTop',
+            'checkoutPageLeftSidebar',
+            'checkoutPageBottom',
+            'checkoutPageRightSidebar'
+        ],
+        {
+            page: 'checkoutPage',
+            setHeadData: false
+        },
+        store
+    )
 
-    return null
+    return {
+        props: {}
+    }
 })
 
 

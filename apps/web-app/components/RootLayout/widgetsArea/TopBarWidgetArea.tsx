@@ -4,10 +4,10 @@ import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
 
 let StyledDiv = styled.div`
   grid-area: topbar;
-  background-color: var(--main-background-color, #000);
   height: 56px;
   display: flex;
   align-items: center;
+  background-color: var(--secondary-background-color,#181818);
 
   .top-bar-content {
     display: flex;
