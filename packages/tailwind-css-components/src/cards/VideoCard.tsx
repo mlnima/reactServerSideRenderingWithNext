@@ -1,5 +1,5 @@
 import React from 'react';
-import {Post} from "typescript-types/dist/src/Post";
+import {Post} from "typescript-types";
 import Link from 'next/link';
 import CardImage from "./components/CardImage";
 import CardQuality from "./components/CardQuality";
