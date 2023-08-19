@@ -7,7 +7,7 @@ let StyledSideBar = styled.aside`
   background-color: var(--primary-background-color,#000);
   display: flex;
   flex-direction: column;
-  ${(props:{gridArea:string})  => `grid-area:${props.gridArea ||''}` } ;
+ 
 `
 interface SideBarWidgetAreaProps {
     className: string;
@@ -17,7 +17,7 @@ interface SideBarWidgetAreaProps {
 
 const SidebarWidgetArea = ({className,position,gridArea}:SideBarWidgetAreaProps) => {
     return (
-        <StyledSideBar className={className + ' widget-area ' + position}  gridArea={gridArea}>
+        <StyledSideBar className={className + ' widget-area ' + position}  >
             <WidgetsRenderer
                 position={position}
             />
@@ -26,3 +26,6 @@ const SidebarWidgetArea = ({className,position,gridArea}:SideBarWidgetAreaProps)
 };
 
 export default memo(SidebarWidgetArea);
+
+//gridArea={gridArea}
+// ${(props:{gridArea:string})  => `grid-area:${props.gridArea ||''}` } ;

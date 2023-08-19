@@ -66,7 +66,9 @@ const PostPageStyle = styled.div`
       }
     }
   }
-  ${(props: { postPageStyle: string }) => props?.postPageStyle || ''}
+  // 
 `
 
 export default PostPageStyle
+
+//${(props: { postPageStyle: string }) => props?.postPageStyle || ''}

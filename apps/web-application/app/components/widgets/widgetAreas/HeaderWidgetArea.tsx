@@ -4,14 +4,17 @@ import WidgetsRenderer from "../widgetRenderer/WidgetsRenderer";
 
 interface IProps {
     widgets:Widget[],
-    locale:string
+    locale:string,
+    dictionary: {
+        [key: string]: string
+    }
 }
 
-const HeaderWidgetArea: FC<IProps> = ({widgets,locale}) => {
+const HeaderWidgetArea: FC<IProps> = ({widgets,locale,dictionary}) => {
     return (
-        <div className={'widget-area header bg-tertiary-background-color text-primary-text-Color w-full'}>
-            <div className={'header-content flex justify-between items-center p-2 box-border w-full h-full'}>
-                <WidgetsRenderer locale={locale} widgets={widgets} position={'header'}/>
+        <div className={'header-widget-area'}>
+            <div className={'inner-content'}>
+                <WidgetsRenderer dictionary={dictionary} locale={locale} widgets={widgets} position={'header'}/>
             </div>
         </div>
     )

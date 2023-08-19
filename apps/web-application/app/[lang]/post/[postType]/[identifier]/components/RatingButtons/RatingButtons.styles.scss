@@ -1,0 +1,53 @@
+.rating-buttons{
+  padding: 0 8px;
+  box-sizing: border-box;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  .rated-message {
+    color: var(--secondary-text-color, #ccc);
+  }
+
+  .rating-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: transparent;
+    color: var(--secondary-text-color, #ccc);
+    outline: none;
+    border: none;
+
+
+
+
+    .rating-item-value {
+      padding: 0 5px;
+      margin-top: 5px;
+      font-size: small;
+    }
+  }
+
+  .rating-item-value:disabled {
+    color: #33373c;
+  }
+
+  .rating-item-value:hover {
+    transition: all 1s;
+    transform: scale(1.2);
+  }
+  @media only screen and (min-width: 768px) {
+    .rating-item{
+      flex-direction: row;
+
+      .rating-item-value {
+        margin: 0 0 0 5px;
+        font-size: small;
+        padding: 0;
+      }
+    }
+  }
+}

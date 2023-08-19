@@ -7,26 +7,11 @@ import {faMoon} from "@fortawesome/free-solid-svg-icons/faMoon";
 import {faSun} from "@fortawesome/free-solid-svg-icons/faSun";
 import {useAppDispatch, useAppSelector} from "@store/hooks";
 import {setTheme} from "@store/reducers/globalStateReducer";
+import './DayModeNightMode.styles.scss';
 
 interface DayModeNightModePropTypes {
     uniqueData: UniqueDataTypes
 }
-
-const DayModeNightModeStyledDiv = styled.div`
-  position: relative;
-
-  .btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: transparent;
-    border: none;
-
-  }
-  .select-section {
-    position: absolute;
-  }
-`
 
 // const ModeStyles = createGlobalStyle`
 //   ${({dayNightModeData}: any) => dayNightModeData ? dayNightModeData : ''}
@@ -55,14 +40,12 @@ const DayModeNightMode: FC<DayModeNightModePropTypes> = ({uniqueData}) => {
     }, []);
 
     return (
-        <DayModeNightModeStyledDiv>
-            <button className={'btn btn-primary'} aria-label={'theme mode'} onClick={onSelectHandler}>
-                <FontAwesomeIcon className={'moon-sun'}
-                                 color={'var(--primary-text-color,#fff)'}
-                                 icon={theme === 'dark'  ? faMoon : faSun} style={{width:25,height:25}}/>
+        <div className={'theme-switcher-widget'}>
+            <button className={'btn btn-transparent'} aria-label={'theme mode'} onClick={onSelectHandler}>
+                <FontAwesomeIcon className={'moon-sun'}icon={theme === 'dark'  ? faMoon : faSun} />
             </button>
             {/*<ModeStyles dayNightModeData={currentColors}/>*/}
-        </DayModeNightModeStyledDiv>
+        </div>
     )
 };
 export default DayModeNightMode

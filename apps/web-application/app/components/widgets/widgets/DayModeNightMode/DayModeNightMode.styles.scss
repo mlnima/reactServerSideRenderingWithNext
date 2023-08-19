@@ -1,0 +1,21 @@
+.theme-switcher-widget{
+  position: relative;
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    color: var(--primary-text-color,#fff);
+    svg{
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .select-section {
+    position: absolute;
+  }
+
+}

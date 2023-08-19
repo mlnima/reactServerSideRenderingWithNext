@@ -4,14 +4,17 @@ import WidgetsRenderer from "../widgetRenderer/WidgetsRenderer";
 
 interface IProps {
     widgets:Widget[],
-    locale:string
+    locale:string,
+    dictionary: {
+        [key: string]: string
+    }
 }
 
-const NavigationWidgetArea: FC<IProps> = ({widgets,locale}) => {
+const NavigationWidgetArea: FC<IProps> = ({widgets,locale,dictionary}) => {
     return (
-        <nav className={'widget-area navigation bg-secondary-background-color text-primary-text-Color h-14 w-full'}>
-            <div className={'navigation-content flex justify-between items-center p-2 box-border w-full h-full'}>
-                <WidgetsRenderer locale={locale} widgets={widgets} position={'navigation'}/>
+        <nav className={'navigation-widget-area'}>
+            <div className={'inner-content'}>
+                <WidgetsRenderer dictionary={dictionary} locale={locale} widgets={widgets} position={'navigation'}/>
             </div>
         </nav>
     )

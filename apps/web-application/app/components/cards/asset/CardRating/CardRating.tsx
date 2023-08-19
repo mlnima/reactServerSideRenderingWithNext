@@ -1,6 +1,7 @@
 import React, {FC} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faThumbsUp} from "@fortawesome/free-solid-svg-icons/faThumbsUp";
+import {faThumbsUp} from "@fortawesome/free-regular-svg-icons/faThumbsUp";
+import './CardRating.styles.scss'
 
 interface CardRatingPropTypes {
     rating: number
@@ -9,8 +10,8 @@ interface CardRatingPropTypes {
 const CardRating: FC<CardRatingPropTypes> = ({rating}) => {
 
     return (
-        <span className={`card-rating text-xs flex items-center gap-0.5 py-0.25 text-secondary-text-color`}>
-            <FontAwesomeIcon className={'icon'} icon={faThumbsUp} style={{width: 11, height: 11}}/>
+        <span className={`card-rating`}>
+            <FontAwesomeIcon className={'rating-icon'} icon={faThumbsUp}/>
             <span>{rating || 0}%</span>
         </span>
     );

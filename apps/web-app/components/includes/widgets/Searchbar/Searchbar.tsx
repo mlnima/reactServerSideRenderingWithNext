@@ -57,6 +57,9 @@ const SearchbarStyledDiv = styled.div<IStyles>`
       display: none;
     }
   }
+  
+  
+  
 
   @media only screen and (min-width: 768px) {
     border:var(--default-border);

@@ -90,7 +90,7 @@ const postPage = () => {
                             keywords={[...(tags || []), ...(categories || []), ...(actors || [])].map(meta => meta.name).join(',')}
                             description={postType !== 'learn' && typeof description === 'string' ? description : undefined}/>
                 {adminMode && <PostAdminQuickAccessBar/>}
-                <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
+                <PageStyle id={'content'} className={`page-${sidebar || 'no'}-sideba-r`}>
 
                     {
                         postType === 'video' ? <VideoTypePostPage/> :

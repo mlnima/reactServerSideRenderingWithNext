@@ -12,6 +12,7 @@
     "apps/sitemaps-generator",
     "apps/socket-server",
     "apps/web-app",
+    "apps/web-application",
     "apps/web-dashboard-app"
   ],
   "scripts": {
@@ -25,7 +26,7 @@
     "start:web-app": "npm --prefix ./apps/web-app run start",
     "start:web-application": "npm --prefix ./apps/web-application run start",
     "start:sitemaps-generator": "npm --prefix ./apps/sitemaps-generator run start",
-    "start": "concurrently \"npm run start:sitemaps-generator\" \"npm run start:api-server\" \"npm run start:file-server\"  \"npm run start:socket-server\" \"npm run start:web-app\" \"npm run start:mail-server\" ",
+    "start": "concurrently \"npm run start:sitemaps-generator\" \"npm run start:api-server\" \"npm run start:file-server\"  \"npm run start:socket-server\" \"npm run start:web-app\" \"npm run start:mail-server\" \"npm run start:web-application\" ",
     "resetAdminPassword": "npm --prefix ./apps/custom-scripts run run-script:resetAdminPassword",
     "fixChanges": "npm --prefix ./apps/custom-scripts run run-script:fixChanges",
     "setup": "npm --prefix ./apps/custom-scripts run run-script:setup",
@@ -85,7 +86,7 @@
     "tsconfig-paths": "^4.2.0",
     "tscpaths": "^0.0.9",
     "tslib": "^2.5.0",
-    "turbo": "^1.10.7",
+    "turbo": "^1.10.12",
     "typescript": "^5.1.6"
   },
   "globalDependencies": [

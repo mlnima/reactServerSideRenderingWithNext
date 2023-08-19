@@ -1,0 +1,19 @@
+.logo{
+  .logo-link {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    .logo-text, .logo-headline {
+      color: var(--primary-text-color,#fff);
+    }
+
+    .logo-text {
+      font-weight: bold;
+    }
+
+    .logo-headline {
+      margin: 5px 0 0 0;
+    }
+  }
+}

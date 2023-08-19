@@ -3,15 +3,18 @@ import {Widget} from "typescript-types/dist/src/widgets/Widget";
 import WidgetsRenderer from "@components/widgets/widgetRenderer/WidgetsRenderer";
 
 interface IProps {
-    widgets:Widget[],
-    locale:string,
-    position:string
+    widgets: Widget[],
+    locale: string,
+    dictionary: {
+        [key: string]: string
+    }
+    position: string
 }
 
-const MainWidgetArea: FC<IProps> = ({widgets,locale,position}) =>  {
+const MainWidgetArea: FC<IProps> = ({widgets, locale, position,dictionary}) => {
     return (
-        <div className={'widget-area main bg-primary-background-color text-primary-text-Color w-full'}>
-             <WidgetsRenderer locale={locale} widgets={widgets} position={position}/>
+        <div className={'main-widget-area'}>
+            <WidgetsRenderer dictionary={dictionary} locale={locale} widgets={widgets} position={position}/>
         </div>
     )
 };

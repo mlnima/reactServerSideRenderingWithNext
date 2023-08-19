@@ -16,11 +16,7 @@ const WidgetText: FC<TextPropTypes> = ({translations, text,locale}) => {
 
     return (
         <WidgetTextStyles className={'widgetText widget-text'} >
-            {parse(
-                locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?
-                    text :
-                    translations?.[locale]?.text || text || '')
-            }
+            {parse(`${translations?.[locale]?.text || text || ''}`)}
         </WidgetTextStyles>
     );
 

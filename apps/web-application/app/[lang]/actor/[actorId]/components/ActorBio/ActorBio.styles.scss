@@ -1,0 +1,40 @@
+.actorBio {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--secondary-background-color);
+  color: var(--primary-text-color);
+  border: var(--default-border);
+
+  .actorImages {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .actorImage {
+      border-radius: 50%;
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+    }
+    .actorName {
+      margin: auto;
+    }
+  }
+
+  .actorDescriptionDetailsOpen {
+    display:initial;
+    width: 95%;
+  }
+  .actorDescriptionDetailsClosed {
+    display:none;
+    width: 95%;
+  }
+
+  .showMoreDetailBtn {
+    align-self: flex-end;
+    margin: auto;
+  }
+}

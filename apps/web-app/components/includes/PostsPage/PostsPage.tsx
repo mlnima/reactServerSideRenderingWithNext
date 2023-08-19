@@ -1,4 +1,4 @@
-import React, {useEffect, Fragment, FC} from 'react';
+import React, {useEffect,FC} from 'react';
 import {useRouter} from "next/router";
 import PaginationComponent from "../PaginationComponent/PaginationComponent";
 import styled from "styled-components";
@@ -45,13 +45,13 @@ const PostsPage: FC<PostPageTypes> = ({renderPagination}) => {
 
 
     return (
-        <Fragment>
+        <>
             <PostsContainer className='posts-container'>
                 <PostsCardsRenderer posts={posts}/>
             </PostsContainer>
             {renderPagination && <PaginationComponent/>}
 
-        </Fragment>
+        </>
     );
 };
 export default PostsPage;

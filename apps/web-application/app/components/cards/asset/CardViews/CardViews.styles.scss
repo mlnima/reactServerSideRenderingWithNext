@@ -1,0 +1,19 @@
+.card-views{
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  color: var(--secondary-text-color,#B3B3B3);
+  padding:  0;
+  .view-icon{
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+@media only screen and (min-width: 600px){
+  .card-views{
+    padding: 1px 0;
+    font-size: small;
+  }
+}

@@ -1,0 +1,16 @@
+.rating-price-download {
+  width: 100%;
+  background-color: var(--secondary-background-color, #181818);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media only screen and (min-width: 768px) {
+
+  .rating-price-download {
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+}

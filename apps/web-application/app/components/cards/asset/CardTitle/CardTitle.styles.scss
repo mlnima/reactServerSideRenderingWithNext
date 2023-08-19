@@ -1,0 +1,28 @@
+.card-title{
+  display: flex;
+  align-items: center;
+  height: 40px;
+  a{
+    box-sizing: border-box;
+    margin: 2px;
+    padding: 0 2px;
+    font-size: 1.2rem;
+    color: var(--primary-text-color,#fff);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .card-title{
+    height: initial;
+    a{
+      margin: 0;
+      padding: 0;
+      line-height: 1;
+      font-size: 1rem;
+    }
+  }
+}

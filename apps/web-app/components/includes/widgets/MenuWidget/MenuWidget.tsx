@@ -148,6 +148,7 @@ const MenuWidget: FC<MenuWidgetPropTypes> = ({menuItems}) => {
                                      icon={faXmark}
                                      style={{width:25,height:25}}/>
                 </button>
+
                 {renderMenuItems}
             </div>
         </MenuWidgetStyledDiv>

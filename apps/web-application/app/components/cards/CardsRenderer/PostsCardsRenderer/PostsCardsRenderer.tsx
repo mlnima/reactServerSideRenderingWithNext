@@ -1,83 +1,59 @@
-"use client";
 import {FC} from "react";
 import {Post} from "typescript-types";
-import {ratingCalculator} from "custom-util";
 import dynamic from "next/dynamic";
-import {useAppSelector} from "@store/hooks";
+import '../staticCardsWrapper.styles.scss'
 
-const ArticlePostCard = dynamic(() => import('../../postsCards/ArticlePostCard'))
-const PromotionPostCard = dynamic(() => import('../../postsCards/PromotionPostCard'))
-const LearnPostCard = dynamic(() => import('../../postsCards/LearnPostCard'))
-const VideoPostCard = dynamic(() => import('../../postsCards/VideoPostCard'))
-const AdPostCard = dynamic(() => import('../../postsCards/AdPostCard'))
+const ArticlePostCard = dynamic(() => import('../../cardsComponents/ArticlePostCard/ArticlePostCard'))
+const PromotionPostCard = dynamic(() => import('../../cardsComponents/PromotionPostCard/PromotionPostCard'))
+const LearnPostCard = dynamic(() => import('../../cardsComponents/LearnPostCard/LearnPostCard'))
+const VideoPostCard = dynamic(() => import('../../cardsComponents/VideoPostCard/VideoPostCard'))
+const AdPostCard = dynamic(() => import('../../cardsComponents/AdPostCard/AdPostCard'))
 
-interface CardsRendererPropTypes {
-    viewType?: string,
-    locale: string
-    posts?: Post[],
-    uniqueData?: {
-        speed: number;
-        posts: Post[],
-        sliderEffect: string,
-        spaceBetween: number,
-        totalCount: number
-    }
-    widgetId?: string,
+interface IProps {
     isSidebar?: boolean,
-    index?: number,
-    cardWidthDesktop?: number
+    locale: string,
+    posts?: Post[],
 }
 
-const PostsCardsRenderer: FC<CardsRendererPropTypes> = ({posts, uniqueData, locale}) => {
-
-    const cardMatcher = {
-        'video': VideoPostCard,
-        'article': ArticlePostCard,
-        'promotion': PromotionPostCard,
-        'learn': LearnPostCard,
-        'Ad': AdPostCard,
-    }
-
-    const {numberOfCardsPerRowInMobile} = useAppSelector(({settings}) => {
-        return {
-            //@ts-ignore
-            numberOfCardsPerRowInMobile: settings?.initialSettings?.postCardsSettings?.numberOfCardsPerRowInMobile || 2,
-            //@ts-ignore
-            customStyles: settings?.initialSettings?.postCardsSettings?.customStyles,
-            //@ts-ignore
-            cardWidth: settings?.initialSettings?.postCardsSettings?.cardsWidthDesktop || 255,
-        }
-    })
-
+const PostsCardsRenderer: FC<IProps> = ({posts, locale, isSidebar}) => {
 
     return (
-        <div className={`posts-content flex flex-wrap gap-4 justify-center items-center`}>
+        <div className={`staticCardsWrapper${isSidebar ? 'Sidebar' : ''}`}>
+            {(posts || []).map((post: Post, index: number) => {
 
-            {(uniqueData?.posts || posts || []).map((post: Post, index: number) => {
-                //@ts-ignore
-                const CardToRender = post?.postType ? cardMatcher?.[post?.postType] || null : null;
-                const postProps = {
-                    views: post.views && post.views > 10 ? post.views as unknown as number : 0,
-                    numberOfCardsPerRowInMobile,
-                    //@ts-ignore
-                    rating: post.likes || post.disLikes ? ratingCalculator(post.likes, post.disLikes) : null,
-                    post,
-                    targetLink: post?.postType?.includes('external') || post?.outPostType === 'promotion' ? '_blank' : '_self',
-                    postUrl: post?.postType?.includes('external') ? post?.redirectLink || '#' :
-                        `/post/${post?.postType}/${post._id}`,
-                    title: process.env.NEXT_PUBLIC_DEFAULT_LOCAL === locale ?
-                        post?.title :
-                        post?.translations?.[locale as string]?.title || post?.title,
-                    index:index
-                }
+                const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
 
-                if (!!CardToRender) {
-                    return <CardToRender {...postProps} key={index}/>
-                }
+                const postUrl = post?.redirectLink ? post?.redirectLink :
+                    locale === defaultLocale ? `/post/${post?.postType}/${post._id}` : `/${locale}${`/post/${post?.postType}/${post._id}`}`;
 
+                return post?.postType === 'video' ?
+                    <VideoPostCard index={index}
+                                   isSidebar={isSidebar}
+                                   postUrl={postUrl} post={post} locale={locale}
+                                   key={post._id}/> :
+                    post?.postType === 'article' ?
+                        <ArticlePostCard index={index}
+                                         isSidebar={isSidebar}
+                                         postUrl={postUrl} post={post} locale={locale}
+                                         key={post._id}/> :
+                        post?.postType === 'promotion' ?
+                            <PromotionPostCard numberOfCardsPerRowInMobile={2} index={index}
+                                               postUrl={postUrl} post={post} locale={locale}
+                                               isSidebar={isSidebar}
+                                               key={post._id}/> :
+                            post?.postType === 'learn' ?
+                                <LearnPostCard numberOfCardsPerRowInMobile={2} index={index}
+                                               postUrl={postUrl} post={post} locale={locale}
+                                               isSidebar={isSidebar}
+                                               key={post._id}/> :
+                                post?.postType === 'ad' ?
+                                    <AdPostCard numberOfCardsPerRowInMobile={2} index={index}
+                                                postUrl={postUrl} post={post} locale={locale}
+                                                isSidebar={isSidebar}
+                                                key={post._id}/> : null
             })}
 
         </div>
     )
 };
-export default PostsCardsRenderer
+export default PostsCardsRenderer;

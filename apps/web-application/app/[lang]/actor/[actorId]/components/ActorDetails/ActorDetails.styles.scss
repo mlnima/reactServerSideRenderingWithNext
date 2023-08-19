@@ -1,0 +1,40 @@
+.actorDataDetails {
+  width: 98%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 1%;
+
+  .actor-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 5px 0;
+
+    .actor-detail-name {
+      margin: 0 5px;
+      width: 90%;
+    }
+  ;
+
+    .actor-detail-value {
+      color: var(--primary-active-color);
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      transition: .5s;
+      width: 90%;
+
+      &:hover {
+        white-space: pre-wrap;
+      }
+    ;
+    }
+  ;
+  }
+;
+  @media only screen and (min-width: 768px) {
+    .actor-detail {
+      grid-template-columns: 1fr 1fr;
+    };
+  };
+}

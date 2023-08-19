@@ -1,14 +1,14 @@
-// "use client"
 import {FC} from "react";
 import {WidgetData} from "typescript-types";
 // import styled from "styled-components";
 import dynamic from "next/dynamic";
+
 const WidgetHeader = dynamic(() => import('./WidgetHeader/WidgetHeader'))
-const WidgetCustomScript = dynamic(() => import('./WidgetCustomScript'))
+// const WidgetCustomScript = dynamic(() => import('./WidgetCustomScript'))
 const WidgetPagination = dynamic(() => import('./WidgetPagination'))
-const PostsCardsRenderer = dynamic(() => import('../../cards/CardsRenderer/PostsCardsRenderer/PostsCardsRenderer'))
+// const PostsCardsRenderer = dynamic(() => import('../../cards/CardsRenderer/PostsCardsRenderer/PostsCardsRenderer'))
 // const PostsListEntireByCategories = dynamic(() => import('@components/includes/widgets/PostsListEntireByCategories/PostsListEntireByCategories'))
-const MetasCardsRenderer = dynamic(() => import('../../cards/CardsRenderer/MetasCardsRenderer'))
+// const MetasCardsRenderer = dynamic(() => import('../../cards/CardsRenderer/MetasCardsRenderer/MetasCardsRenderer'))
 // const RecentComments = dynamic(() => import('../widgets/RecentComments/RecentComments'))
 const MetaWidget = dynamic(() => import('../widgets/MetaWidget/MetaWidget'))
 // const MediaWidget = dynamic(() => import('../widgets/MediaWidget/MediaWidget'))
@@ -29,70 +29,73 @@ const Advertise = dynamic(() => import('../widgets/Advertise/Advertise'))
 const WidgetText = dynamic(() => import('./WidgetText/WidgetText'))
 const Authentication = dynamic(() => import('../widgets/Authentication/Authentication'))
 const Searchbar = dynamic(() => import('../widgets/Searchbar/Searchbar'))
+const MetasCardsWidget = dynamic(() => import('@components/widgets/widgets/MetasCardsWidget/MetasCardsWidget'))
+const PostsCardsWidget = dynamic(() => import('@components/widgets/widgets/PostsCardsWidget/PostsCardsWidget'))
 
 interface IProps {
     data: WidgetData,
     widgetId: string,
     locale: string,
-    isSidebar: boolean,
-    viewType?: string
+    isSidebar?: boolean,
+
+    viewType?: string,
+    dictionary: {
+        [key: string]: string
+    }
 }
 
 // let WidgetStyledSection = styled.section`
 //   ${({customStyles}: { customStyles: string }) => customStyles || ''}
 // `
 
-const WidgetWrapper: FC<IProps> = ({data, widgetId, isSidebar, viewType,locale}) => {
+const WidgetWrapper: FC<IProps> = ({data, widgetId, isSidebar, viewType, locale, dictionary}) => {
 
     const widgetMatcher = {
         // 'postsSlider': PostSlider,
         // 'postsList': PostsList,
         // 'postsListEntireByCategories': PostsListEntireByCategories,
-        // 'posts':PostsCardsRenderer,
+        'posts': PostsCardsWidget,
         // 'imagesSlider':ImagesSlider,
         // 'multipleLinkTo':MultipleLinkTo,
         // 'media':MediaWidget,
         // 'recentComments':RecentComments,
-        'meta':MetaWidget,
-        'metaWithImage':MetasCardsRenderer,
+        'meta': MetaWidget,
+        'metaWithImage': MetasCardsWidget,
         // 'searchBar':Searchbar,
         // 'searchButton':Searchbar,
-        'searchbar':Searchbar,
-        'logo':Logo,
+        'searchbar': Searchbar,
+        'logo': Logo,
         // 'alphabeticalNumericalRange':AlphabeticalNumericalRangeLinksWidget,
-        'language':LanguagesSwitcher,
-        'authentication':Authentication,
-        'linkTo':LinkTo,
-        'menu':MenuWidget,
+        'language': LanguagesSwitcher,
+        'authentication': Authentication,
+        'linkTo': LinkTo,
+        'menu': MenuWidget,
         // 'shoppingCart':ShoppingCart,
-        'advertise':Advertise,
-        'form':FormWidget,
-        'dayModeNightMode':DayModeNightMode,
+        'advertise': Advertise,
+        'form': FormWidget,
+        'dayModeNightMode': DayModeNightMode,
     }
 
     //@ts-ignore
-    const WidgetToRender =  widgetMatcher?.[data?.type as string] || null
+    const WidgetToRender = widgetMatcher?.[data?.type as string] || null
 
     return (
-        <div className={'widget ' + (data?.extraClassName ?? '')}  id={data?.extraId || undefined}>
-            {data?.title && <WidgetHeader translations={data?.translations}
-                                          title={data?.title}
-                                          locale={locale}
-                                          redirectLink={data?.redirectLink}
-                                          redirectToTitle={data?.redirectToTitle}
-                                          footerLink={data?.footerLink}/>
+        <div className={'widget ' + (data?.extraClassName ?? '')} id={data?.extraId || undefined}>
+            {(data?.title || data?.translations?.[locale]?.title) &&
+                <WidgetHeader title={data?.translations?.[locale]?.title || data?.title}
+                              redirectLink={data?.redirectLink}
+                              redirectToTitle={data?.translations?.[locale]?.redirectToTitle || data?.redirectToTitle}/>
             }
-            {data?.text && <WidgetText translations={data?.translations} text={data?.text}  locale={locale}/>}
+            {data?.text && <WidgetText translations={data?.translations} text={data?.text} locale={locale}/>}
 
-            {!!WidgetToRender && <WidgetToRender
-                locale={locale}
+            {!!WidgetToRender &&
+                <WidgetToRender
                 {...data}
+                dictionary={dictionary}
+                locale={locale}
+                isSidebar={isSidebar}
                 widgetId={widgetId}
                 viewType={viewType}/>
-            }
-
-            {data?.customScript && <WidgetCustomScript customScript={data?.customScript}
-                                                       customScriptStrategy={data?.customScriptStrategy}/>
             }
 
             {(!!data?.pagination && !!data?.redirectLink) && <WidgetPagination baseUrl={data?.redirectLink}

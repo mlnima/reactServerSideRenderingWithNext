@@ -25,7 +25,7 @@ const PostTitle = () => {
     })
 
     return (
-        <PostTitleStyledH1 className='post-title sub-content'>
+        <PostTitleStyledH1 className='post-title'>
             {
                     translations ? translations[locale as string] ?
                     translations[locale as string]?.title || title :

@@ -2,9 +2,9 @@
 require('module-alias/register')
 require('dotenv').config({path: '../../.env'});
 // const rewrites = require('./nextConfigs/rewrites')
-const nextTranslate = require('next-translate-plugin')
+// const nextTranslate = require('next-translate-plugin')
 // const pluginsConfig = require('./nextConfigs/next.configPlugins')
-const withPlugins = require('next-compose-plugins');
+// const withPlugins = require('next-compose-plugins');
 const i18n = require("./i18n");
 
 
@@ -45,11 +45,11 @@ const nextConfig = {
     // i18n:{ defaultLocale: i18n.defaultLocale}
 }
 
-// module.exports = nextConfig
+module.exports = nextConfig
 //
 // module.exports = withPlugins([
 //     nextTranslate
 // ], nextConfig)
 
 //@ts-ignore
-module.exports = nextTranslate(nextConfig) ;
+// module.exports = nextTranslate(nextConfig) ;

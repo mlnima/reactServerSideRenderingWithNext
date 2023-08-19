@@ -1,41 +1,45 @@
 "use client";
-import React, {FC, useState,memo} from "react";
+import React, {FC, useState, memo} from "react";
 import {usePathname, useRouter} from 'next/navigation';
-
-import useTranslation from "next-translate/useTranslation";
+import './LanguagesSwitcher.styles.scss'
 import * as process from "process";
 
 interface IProps {
-
+    locale: string,
 }
 
-const LanguagesSwitcher: FC<IProps> = () => {
+const LanguagesSwitcher: FC<IProps> = ({locale}) => {
     const {push} = useRouter()
-    const {lang} = useTranslation();
     const pathName = usePathname()
     const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const locales = process.env.NEXT_PUBLIC_LOCALS || '';
     const [isOpen, setIsOpen] = useState(false);
 
-    const redirectedPathName = (locale: string) => {
+    const redirectedPathName = (targetedLocale: string) => {
+        const locales = (process.env.NEXT_PUBLIC_LOCALS || '').split(' ');
         if (!pathName) return '/'
         const segments = pathName.split('/')
-        segments[1] = locale
-        push(segments.join('/'))
-        // return segments.join('/')
+        if (locales.some((locale: string) => pathName.includes(`/${locale}/`))) {
+            const newSegments = [...segments].map(segment => locales.includes(segment) ? targetedLocale : segment)
+            push(newSegments.join('/'));
+        } else if (!locales.includes(segments[1])) {
+            segments.splice(1, 0, targetedLocale);
+            push(segments.join('/'));
+        } else if (pathName === '/' || locales.some((locale: string) => pathName.includes(`/${locale}`))) {
+            if (targetedLocale === defaultLocale) {
+                push(`/`);
+            } else {
+                push(`/${targetedLocale}`);
+            }
+        }
     }
 
     return (
-        <div className="relative inline-block text-left z-10">
-            <div>
-                <button
-                    type="button"
-                    className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-primary-text-color bg-transparent hover:border hover:border-gray-300 rounded-md hover:bg-secondary-background-color"
-                    onClick={() => setIsOpen(!isOpen)}
-                >
-                    {/*{defaultLocale?.toUpperCase()}*/}
+        <div className={'languages-switcher-widget'}>
+            <div className={'languagesSwitcher-widget-current-languages-holder'}>
+                <button type={'button'} onClick={() => setIsOpen(!isOpen)}>
                     {/*//@ts-ignore*/}
-                    {(lang && locales.includes(lang) ?  lang.toUpperCase() : defaultLocale.toUpperCase())}
+                    {locale.toUpperCase()}
                     <svg className="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                          fill="currentColor">
                         <path
@@ -54,10 +58,7 @@ const LanguagesSwitcher: FC<IProps> = () => {
                         {locales.split(' ').map((locale) => (
                             <button
                                 key={locale}
-                                onClick={()=>redirectedPathName(locale)}
-                                // href={redirectedPathName(locale)}
-                                // locale={locale === defaultLocale ? false : locale}
-                                // passHref
+                                onClick={() => redirectedPathName(locale)}
                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white "
                                 role="menuitem">
                                 {locale.toUpperCase()}
@@ -71,4 +72,4 @@ const LanguagesSwitcher: FC<IProps> = () => {
 
 
 };
-export default memo(LanguagesSwitcher);
+export default LanguagesSwitcher;

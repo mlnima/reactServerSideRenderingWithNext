@@ -13,6 +13,7 @@ import getPostsAction from "@store/reducers/postsReducers/getPostsAction";
 import getEditingPostAction from "@store/reducers/postsReducers/getEditingPostAction";
 
 interface PostsState {
+    activeVideoTrailerId: string | null,
     posts: [],
     pageData: {},
     actorData: {},
@@ -41,6 +42,7 @@ interface PostsState {
 }
 
 const initialState: PostsState = {
+    activeVideoTrailerId:null,
     posts: [],
     pageData: {},
     actorData: {},
@@ -71,6 +73,9 @@ export const postsSlice = createSlice({
     name: 'posts',
     initialState,
     reducers: {
+        setActiveVideoTrailerId: (state, action: PayloadAction<any>) => {
+            state.activeVideoTrailerId = action.payload
+        },
         setEditingPostImagesToUpload: (state, action: PayloadAction<any>) => {
             state.editingPostImagesToUpload = action.payload
         },
@@ -238,6 +243,7 @@ export const {
     setEditingPostImagesToUpload,
     setPostsData,
     getPosts,
+    setActiveVideoTrailerId,
     initialPosts,
     setPost,
     getEditingPost,

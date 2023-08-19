@@ -8,8 +8,7 @@ import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_g
 import getPostsAction from "@store_toolkit/clientReducers/postsReducers/getPostsAction";
 import MetaAdminQuickAccessBar from "@components/pagesIncludes/metas/MetaAdminQuickAccessBar";
 import HeadSetter from "@components/global/commonComponents/HeadSetter/HeadSetter";
-import {textContentReplacer} from "custom-util";
-import {getTextDataWithTranslation} from "custom-util";
+import {textContentReplacer,getTextDataWithTranslation} from "custom-util";
 import {useRouter} from "next/router";
 import {useAppSelector} from "@store_toolkit/hooks";
 

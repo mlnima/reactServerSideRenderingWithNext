@@ -1,0 +1,19 @@
+@import "../post-card";
+
+.post-card-video{
+   .card-media{
+     position: relative;
+     .mobile-play-trailer-button{
+       position: absolute;
+       opacity: 50%;
+       background-color: var(--primary-background-color,#000);
+       color: var(--primary-text-color,#fff);
+       padding: 4px;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       top: 2px;
+       left: 2px;
+     }
+   }
+}

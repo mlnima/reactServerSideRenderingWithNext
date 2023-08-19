@@ -8,10 +8,11 @@ import {faAnglesDown} from "@fortawesome/free-solid-svg-icons";
 
 interface MetasRendererPropTypes {
     metaData: Meta[] | undefined,
-    metaType: string
+    metaType: string,
+    locale: string
 }
 
-const MetasRenderer: FC<MetasRendererPropTypes> = ({metaType, metaData}) => {
+const MetasRenderer: FC<MetasRendererPropTypes> = ({metaType, metaData, locale}) => {
 
     const typePath = convertMetasTypeToSingular(metaType)
     const groupMetas = groupingArrayOfObjectByKey(metaData as any, 'name')
@@ -22,15 +23,22 @@ const MetasRenderer: FC<MetasRendererPropTypes> = ({metaType, metaData}) => {
                 {Object.keys(groupMetas || []).sort((a, b) => a > b ? 1 : -1).map(group => {
                     return (
                         <article className={'group-wrapper'} key={group}>
-                            <Link href={`/${metaType}?startWith=${group === '#' ? 'digits' : group}`}>
+                            <Link href={`/${metaType}?startWith=${group === '#' ? 'digits' : group}`}
+                                  aria-label={metaType}
+                                  title={`all the ${metaType} starts with ${group}`}>
                                 <span
-                                    className={'letter m-2.5 text-2xl text-secondary-text-color'}>{capitalizeFirstLetter(group)}</span>
+                                    className={'letter m-2.5 text-2xl text-secondary-text-color'}>
+                                    {capitalizeFirstLetter(group)}
+                                </span>
                             </Link>
 
                             <div className={'items flex flex-wrap w-full gap-2 '}>
                                 {/*//@ts-ignore*/}
                                 {groupMetas[group].map((meta) => {
-                                    const name = capitalizeFirstLetter(meta.name)
+                                    const name = capitalizeFirstLetter(
+                                        meta?.translations?.[locale]?.name ??
+                                        meta.name
+                                    )
                                     return (
                                         <Link className={`meta-widget-item max-w-64 block
                                           list-none truncate py-3 px-1.5 min-h-12 rounded
@@ -44,10 +52,12 @@ const MetasRenderer: FC<MetasRendererPropTypes> = ({metaType, metaData}) => {
                                         </Link>
                                     )
                                 })}
-                                <Link href={`/${metaType}?startWith=${group === '#' ? 'digits' : group}`}>
+                                <Link href={`/${metaType}?startWith=${group === '#' ? 'digits' : group}`}
+                                      aria-label={metaType}
+                                      title={`all the ${metaType} starts with ${group}`}>
                                         <span className={`view-all flex items-center justify-start text-primary-active-color 
                                         text-lg font-bold m-2.5 min-h-12 md:text-sm md:h-auto`}>
-                                            <FontAwesomeIcon icon={faAnglesDown} />
+                                            <FontAwesomeIcon icon={faAnglesDown}/>
                                         </span>
                                 </Link>
 

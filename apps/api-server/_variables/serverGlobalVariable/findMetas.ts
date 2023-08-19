@@ -11,6 +11,7 @@ interface FindMetasQueryTypes{
 
 export const findMetas = async (query:FindMetasQueryTypes)=>{
     try {
+
         // @ts-ignore
         const initialSettings:{data:IdentitySettings} = query?.page ? await settingSchema.findOne({type: 'initialSettings'}).exec() : {}
         const statusQuery = {status: 'published'};

@@ -7,12 +7,16 @@ const WidgetWrapper = dynamic(() => import("../widgetWrapper/WidgetWrapper"))
 interface IProps {
     locale:string,
     widgets:Widget[],
-    position:string
+    position:string,
+    hasSidebar?: string,
+    dictionary: {
+        [key: string]: string
+    }
 }
 
-const WidgetsRenderer: FC<IProps> = ({widgets,locale,position}) => {
+const WidgetsRenderer: FC<IProps> = ({widgets,locale,position,dictionary,hasSidebar}) => {
 
-    const renderWidget = [...widgets]
+    const renderWidget = [...(widgets || [])]
         ?.sort((a, b) => a?.data?.widgetIndex > b?.data?.widgetIndex ? 1 : -1)
         ?.map((widget) => {
             if (
@@ -21,7 +25,9 @@ const WidgetsRenderer: FC<IProps> = ({widgets,locale,position}) => {
                 renderByDevice(true , widget?.data?.deviceTypeToRender)
             ){
                 const widgetProps = {
+                    dictionary,
                     locale,
+                    hasSidebar,
                     widgetId: widget._id,
                     isSidebar: position ? position.includes('Sidebar') : false,
                     // viewType: widget.data?.viewType,

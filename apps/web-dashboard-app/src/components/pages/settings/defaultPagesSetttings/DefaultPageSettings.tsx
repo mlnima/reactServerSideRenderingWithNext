@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {inputValueSimplifier, LanguagesOptions} from "custom-util";
 import {updateSettingAction} from "@store/reducers/settingsReducer";
 import MonacoEditor from "@components/common/MonacoEditor";
-import { useSearchParams} from "react-router-dom";
+import {useSearchParams} from "react-router-dom";
 import {useAppDispatch} from "@store/hooks";
 import {dashboardAPIRequestGetSettings} from "api-requests";
 
@@ -58,17 +58,21 @@ const DefaultPageSettings: FC<PropTypes> = ({}) => {
         sidebar: false,
         themeColor: '',
         customScriptsAsString: '',
-        customStyles: '',
         translations: {}
     }
     const dynamicSettingsPageMatcher = /homePageSettings|postPageSettings/g
     const [fieldsData, setFieldsData] = useState(defaultPageData)
 
+
+    useEffect(() => {
+        console.log(fieldsData)
+    }, [fieldsData]);
+
     useEffect(() => {
         if (!!pageName) {
             dashboardAPIRequestGetSettings([pageName]).then(response => {
                 const settingData = response?.data?.settings?.[pageName]?.data || defaultPageData
-                setFieldsData(settingData||{})
+                setFieldsData(settingData || {})
 
             })
         }
@@ -100,6 +104,7 @@ const DefaultPageSettings: FC<PropTypes> = ({}) => {
     }
 
     const onSaveHandler = (e: any) => {
+
         e.preventDefault()
         if (pageName) {
             dispatch(updateSettingAction({type: pageName, data: fieldsData}))
@@ -119,15 +124,24 @@ const DefaultPageSettings: FC<PropTypes> = ({}) => {
                     Save
                 </button>
             </div>
+            {/*//@ts-ignore*/}
+            <select name="sidebar" className={'custom-select'} onChange={onChangeHandler}
+                    //@ts-ignore
+                    value={fieldsData?.sidebar || 'no'}>
+                <option value={'both'}>Both</option>
+                <option value={'left'}>Left</option>
+                <option value={'right'}>Right</option>
+                <option value={'no'}>No</option>
+            </select>
 
-            {!dynamicSettingsPageMatcher.test(pageName as string)&& <>
+            {!dynamicSettingsPageMatcher.test(pageName as string) && <>
 
                 <div className="form-field">
                     <p>Title:</p>
                     <input className={'form-control-input'}
                            type="text" onChange={(e) => onChangeHandlerWithTranslation(e)}
                         //@ts-ignore
-                           value={language === 'default' ? fieldsData.title : fieldsData?.translations?.[language]?.title || {} }
+                           value={language === 'default' ? fieldsData.title : fieldsData?.translations?.[language]?.title || {}}
                            name={'title'}
                            placeholder={'Title'}/>
                 </div>
@@ -151,8 +165,7 @@ const DefaultPageSettings: FC<PropTypes> = ({}) => {
                 </div>
 
 
-
-                </>}
+            </>}
 
 
             <div className={'editors'}>

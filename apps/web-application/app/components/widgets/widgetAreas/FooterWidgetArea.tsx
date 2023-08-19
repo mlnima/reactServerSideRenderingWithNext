@@ -4,14 +4,17 @@ import WidgetsRenderer from "../widgetRenderer/WidgetsRenderer";
 
 interface IProps {
     widgets:Widget[],
-    locale:string
+    locale:string,
+    dictionary: {
+        [key: string]: string
+    }
 }
 
-const FooterWidgetArea: FC<IProps> = ({widgets,locale}) => {
+const FooterWidgetArea: FC<IProps> = ({widgets,locale,dictionary}) => {
     return (
-        <footer className={'widget-area footer bg-tertiary-background-color text-primary-text-Color w-full'}>
-            <div className={'footer-content flex justify-between items-center p-2 box-border w-full h-full'}>
-                <WidgetsRenderer locale={locale} widgets={widgets} position={'footer'}/>
+        <footer className={'footer-widget-area'}>
+            <div className={'inner-content'}>
+                <WidgetsRenderer dictionary={dictionary} locale={locale} widgets={widgets} position={'footer'}/>
             </div>
         </footer>
     )

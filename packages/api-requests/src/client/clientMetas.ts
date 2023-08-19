@@ -28,6 +28,7 @@ export const clientAPIRequestGetMetas = async (currentQuery:IGetMetasCurrentQuer
         ...sort,
         ...keyword,
     }
+    console.log('dataForGettingMeta=> ',`/api/v1/posts/getMetas?${new URLSearchParams(dataForGettingMeta as {}).toString()}`)
 
     return await AxiosInstance.get(`/api/v1/posts/getMetas?${new URLSearchParams(dataForGettingMeta as {}).toString()}`)
 }
