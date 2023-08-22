@@ -12,8 +12,8 @@ interface LogoPropTypes {
 const Logo: FC<LogoPropTypes> = ({uniqueData,LogoUrl,locale}) => {
 
     const logoUrlSource = uniqueData?.logoUrl || LogoUrl
-    const logoText = uniqueData?.translations?.[locale as string]?.logoText || uniqueData.logoText || ''
-    const headLineData = uniqueData?.translations?.[locale as string]?.headLine || uniqueData.headLine
+    const logoText = uniqueData?.translations?.[locale as string]?.logoText || uniqueData?.logoText || ''
+    const headLineData = uniqueData?.translations?.[locale as string]?.headLine || uniqueData?.headLine
 
     return (
         <div className={'logo'}>

@@ -50,7 +50,7 @@ const Logo: FC<LogoPropTypes> = ({uniqueData, LogoUrl}) => {
         <Styles className={'logo-wrapper'}>
             <Link href='/' className='logo'>
                     {logoUrlSource && <img alt={'logo'} src={logoUrlSource}/> }
-                    {logoText && !logoUrlSource ? <span className='logo-text'> {logoText} </span> : null}
+                    {(!!logoText && !logoUrlSource) && <span className='logo-text'> {logoText ||''} </span>}
                     {headLineData && <p className='logo-headline'>{headLineData}</p> }
             </Link>
         </Styles>
