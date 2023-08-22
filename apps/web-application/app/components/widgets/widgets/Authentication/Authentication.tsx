@@ -9,7 +9,14 @@ import {useAppSelector} from "@store/hooks";
 const AuthenticationLoggedInItems = dynamic(() => import('./AuthenticationLoggedInItems'))
 import './Authentication.styles.scss'
 
-const Authentication: FC = () => {
+interface IProps{
+    locale: string,
+    dictionary: {
+        [key: string]: string
+    }
+}
+
+const Authentication: FC<IProps>= ({locale,dictionary}) => {
     const [open, setOpen] = useState(false);
     const loggedIn = useAppSelector(({ user }) => user?.loggedIn);
 
@@ -26,8 +33,12 @@ const Authentication: FC = () => {
                 <button className="auth-widget-close-btn" onClick={onOpenCloseHandler}>
                     <FontAwesomeIcon className="w-6 h-6" icon={faXmark} />
                 </button>
-                {!loggedIn && (<AuthenticationNotLoggedInItems onOpenCloseHandler={onOpenCloseHandler}/>)}
-                {loggedIn && (<AuthenticationLoggedInItems onOpenCloseHandler={onOpenCloseHandler} />)}
+                {!loggedIn && <AuthenticationNotLoggedInItems onOpenCloseHandler={onOpenCloseHandler}
+                                                               locale={locale}
+                                                              dictionary={dictionary}/>}
+                {loggedIn && <AuthenticationLoggedInItems onOpenCloseHandler={onOpenCloseHandler}
+                                                           locale={locale}
+                                                           dictionary={dictionary} />}
             </div>
         </div>
     );

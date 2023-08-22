@@ -1,28 +1,29 @@
 import Link from "next/link";
 import {commonAPIRequestClearCaches} from "api-requests";
-import {useRouter} from "next/router";
 import {useAppDispatch} from "@store/hooks";
 import {setAdminMode} from "@store/reducers/globalStateReducer";
 import {useSelector} from "react-redux";
 import {Store} from "typescript-types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import React from "react";
 import {faUserShield} from "@fortawesome/free-solid-svg-icons/faUserShield";
 import {faEraser} from "@fortawesome/free-solid-svg-icons/faEraser";
 import {faShield} from "@fortawesome/free-solid-svg-icons/faShield";
 import {faCheck} from "@fortawesome/free-solid-svg-icons/faCheck";
 
 const AuthenticationAdminItems = ({}) => {
-    const router = useRouter()
     const dispatch = useAppDispatch()
     const adminMode = useSelector(({globalState}: Store) => globalState.adminMode)
 
     const onSetAdminModeHandler = () => {
         dispatch(setAdminMode(!adminMode))
-        localStorage.setItem('adminMode', localStorage?.adminMode === 'true' ? 'false': 'true')
+        localStorage.setItem('adminMode', localStorage?.adminMode === 'true' ? 'false' : 'true')
     }
 
-
+    const onReloadHandler = () => {
+        if (typeof window !== 'undefined') {
+            window.location.reload();
+        }
+    }
 
     return (
         <>
@@ -33,18 +34,16 @@ const AuthenticationAdminItems = ({}) => {
 
                 Dashboard
             </Link>
-            <span className={'logged-item'} onClick={() => commonAPIRequestClearCaches().then(() => router.reload())}>
+            <span className={'logged-item'} onClick={() => commonAPIRequestClearCaches().then(() => onReloadHandler())}>
                    <div className={'icon-wrapper'}>
                        <FontAwesomeIcon icon={faEraser} style={{width: 25, height: 25}}/>
                   </div>
-
                 Clear Cache
             </span>
             <span className={'logged-item'} onClick={() => onSetAdminModeHandler()}>
                    <div className={'icon-wrapper'}>
                        <FontAwesomeIcon icon={adminMode ? faCheck : faShield} style={{width: 25, height: 25}}/>
                   </div>
-
                 Admin Mode
             </span>
         </>

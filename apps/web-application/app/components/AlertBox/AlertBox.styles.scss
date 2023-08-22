@@ -1,0 +1,59 @@
+#alertBox{
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--primary-text-color,#fff);
+  background-color: rgba(0,0,0,.6);
+  z-index: 1010;
+
+  .alertMessage {
+    min-width: 300px;
+    max-width: 600px;
+    background-color: var(--secondary-background-color, #181818);
+    padding: 0;
+    border-radius: 5px;
+
+    .alertMessageHeader {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 5px 5px 0 0;
+      padding: 5px 0;
+
+      .closeAlert {
+        color: var(--primary-text-color,#fff);
+        background-color: transparent;
+        border: none;
+        height: 25px;
+        width: 40px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .alertType {
+        padding: 0 10px;
+        margin: 0;
+        height: 25px;
+        width: 25px;
+        display: flex;
+        justify-content: center;
+
+        .icon {
+          width: 25px;
+          height: 25px;
+        }
+
+      }
+    }
+
+    .alert {
+      text-align: center;
+      padding: 10px;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+.searchPage {
+  h1, h2 {
+    color: var(--primary-text-color, #fff);
+  }
+  .searchPageTitle {
+    padding: 8px;
+    box-sizing: border-box;
+    h1{
+      text-align: center;
+      font-size:  2.125rem;
+    }
+  }
+}
+

@@ -1,5 +1,4 @@
 import React, {FC} from "react";
-import useTranslation from 'next-translate/useTranslation'
 import {loginRegisterForm} from "@store/reducers/globalStateReducer";
 import {useAppDispatch} from "@store/hooks";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -7,14 +6,17 @@ import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
 import {faPen} from "@fortawesome/free-solid-svg-icons/faPen";
 import {useSelector} from "react-redux";
 import {Store} from "typescript-types";
+import './AuthenticationNotLoggedInItems.styles.scss';
 
-
-interface AuthenticationNotLoggedInItemsPropTypes {
-    onOpenCloseHandler: any,
+interface IProps{
+    onOpenCloseHandler: () => void,
+    locale: string,
+    dictionary: {
+        [key: string]: string
+    }
 }
+const AuthenticationNotLoggedInItems: FC<IProps> = ({onOpenCloseHandler,locale,dictionary}) => {
 
-const AuthenticationNotLoggedInItems: FC<AuthenticationNotLoggedInItemsPropTypes> = ({onOpenCloseHandler}) => {
-    const {t} = useTranslation('common');
     const dispatch = useAppDispatch()
 
     const {membership, anyoneCanRegister} = useSelector(
@@ -32,7 +34,7 @@ const AuthenticationNotLoggedInItems: FC<AuthenticationNotLoggedInItemsPropTypes
 
 
     return (
-        <div className={'authentication-not-logged-in'}>
+        <div className={'authenticationNotLoggedIn'}>
             <div className={'logged-items-auth-actions'}>
 
                <span onClick={onLoginButtonClickHandler}
@@ -43,7 +45,7 @@ const AuthenticationNotLoggedInItems: FC<AuthenticationNotLoggedInItemsPropTypes
                           <FontAwesomeIcon className={'sign-in-button'} icon={faUser} style={{width: 45, height: 45}}/>
                     </div>
 
-                    <p className={'text-data'}>{t<string>(`Login`)}</p>
+                    <p className={'text-data'}>{dictionary?.['Login'] || 'Login'}</p>
 
                 </span>
 
@@ -55,7 +57,7 @@ const AuthenticationNotLoggedInItems: FC<AuthenticationNotLoggedInItemsPropTypes
                          <FontAwesomeIcon className={'register-button'} icon={faPen} style={{width: 45, height: 45}}/>
                     </div>
 
-                    <p className={'text-data'}>{t<string>(`Register`)}</p>
+                    <p className={'text-data'}>{dictionary?.['Register'] || 'Register'}</p>
 
                 </span>}
 

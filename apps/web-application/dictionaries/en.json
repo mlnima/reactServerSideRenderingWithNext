@@ -2,6 +2,7 @@
   "Home": "Home",
   "Categories": "Categories",
   "Tags": "Tags",
+  "Actors": "Actors",
   "Email": "Email",
   "Login": "Login",
   "Not A Member Yet? Register Here": "Not A Member Yet? Register Here",
@@ -87,5 +88,6 @@
   "Nothing found": "Nothing found",
   "Nothing found Description": "It seems we can’t find what you’re looking for. Perhaps searching can help",
   "This Post is Restricted, Deleted, or is Unpublished": "This Post is Restricted, Deleted, or is Unpublished"
+
 
 }

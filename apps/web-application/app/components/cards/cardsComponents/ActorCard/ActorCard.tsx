@@ -25,17 +25,19 @@ const ActorCard: FC<ActorCardPropTypes> = ({
 
     return (
         <article className={`actor-card metaCard ${isSidebar && 'actorCardSidebar'}`}>
+            <div className={`card-info`}>
+                <CardTitle title={actorName} url={`/actor/${meta?._id}`}/>
+            </div>
             <Link href={`/actor/${meta?._id}`} className='actor-card-link' title={actorName as string}>
                 <CardImageRendererUseClient imageUrl={meta.imageUrl}
                                             mediaAlt={actorName}
                                             index={index}
                                             objectFit={'cover'}
-                                            aspectRatio={'1/1'}/>
+                                            aspectRatio={'3/4'}/>
 
             </Link>
-            <div className={`card-info`}>
-                <CardTitle title={actorName} url={`/actor/${meta?._id}`}/>
-            </div>
+
+
         </article>
     )
 };

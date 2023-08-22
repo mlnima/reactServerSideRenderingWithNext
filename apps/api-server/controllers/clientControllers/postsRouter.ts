@@ -17,10 +17,12 @@ import MetaSuggestion from './postsControllers/metaSuggestion'
 import attendToEvent from './postsControllers/attendToEvent'
 import tags from './postsControllers/tags'
 import updatePost from './postsControllers/updatePost'
+import getSearch from "./postsControllers/getSearch";
 
 const router = Router();
 
 router.get('/getPosts',cacheSuccesses,getPosts)
+router.get('/getSearch',cacheSuccesses,getSearch)
 router.get('/getPost',cacheSuccesses,getPost)
 router.get('/getEditingPost',getPost)
 router.post('/likeDislikeView',likeDislikeView)

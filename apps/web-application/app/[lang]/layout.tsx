@@ -3,12 +3,19 @@ import '@components/global/styles/globale.styles.scss'
 import dynamic from "next/dynamic";
 import {fetchSettings, fetchWidgets} from "fetch-requests";
 import ReduxProvider from "@store/ReduxProvider";
-import Csr from "@components/global/Csr";
 import * as process from "process";
 import {i18n} from '../../i18n-config'
 import {getDictionary} from "../../get-dictionary";
 import GlobalCustomStyles from "@components/global/styles/GlobalCustomStyles";
 import LayoutMetaGenerator from   "../components/LayoutMetaGenerator/LayoutMetaGenerator";
+import LoginRegisterPopup from "@components/LoginRegisterPopup/LoginRegisterPopup";
+import UserAutoLogin from "@components/UserAutoLogin";
+import BackToTopButton from "@components/BackToTopButton/BackToTopButton";
+import LoadingComponent from "@components/LoadingComponent/LoadingComponent";
+import CookiesInformerBar from "@components/CookiesInformerBar/CookiesInformerBar";
+import AlertBox from "@components/AlertBox/AlertBox";
+import GoogleAnalytics from "@components/GoogleAnalytics/GoogleAnalytics";
+import WebSocketInitializer from "@components/WebSocketInitializer/WebSocketInitializer";
 
 const TopbarWidgetArea = dynamic(() => import("@components/widgets/widgetAreas/TopbarWidgetArea"))
 const HeaderWidgetArea = dynamic(() => import("@components/widgets/widgetAreas/HeaderWidgetArea"))
@@ -19,13 +26,14 @@ export async function generateStaticParams() {
     return i18n.locales.map((lng: string) => ({lng}))
 }
 
-export const generateMetadata = LayoutMetaGenerator
+export const generateMetadata = LayoutMetaGenerator;
 
 const RootLayout = async ({children, params: {lang}}: { children: ReactNode, params: { lang: string } }) => {
 
     const locale = i18n.locales.includes(lang) ? lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCAL || 'en'
     const dictionary = await getDictionary(locale)
     const initialSettingsData = await fetchSettings(['initialSettings'])
+    const initialSettings = initialSettingsData?.settings?.initialSettings
     const staticWidgetsData = await fetchWidgets(['footer', 'header', 'topBar', 'navigation'], locale)
 
     return (
@@ -33,27 +41,32 @@ const RootLayout = async ({children, params: {lang}}: { children: ReactNode, par
         <body className={`dark `}>
         <ReduxProvider>
             <div className="flex flex-col min-h-screen">
-                {initialSettingsData?.settings?.initialSettings?.layoutSettings?.topbar &&
+                {initialSettings?.layoutSettings?.topbar &&
                     <TopbarWidgetArea dictionary={dictionary} widgets={staticWidgetsData?.widgets?.topBar}
                                       locale={locale}/>}
-                {initialSettingsData?.settings?.initialSettings?.layoutSettings?.header &&
+                {initialSettings?.layoutSettings?.header &&
                     <HeaderWidgetArea dictionary={dictionary} widgets={staticWidgetsData?.widgets?.header}
                                       locale={locale}/>}
-                {initialSettingsData?.settings?.initialSettings?.layoutSettings?.navigation &&
+                {initialSettings?.layoutSettings?.navigation &&
                     <NavigationWidgetArea dictionary={dictionary} widgets={staticWidgetsData?.widgets?.navigation}
                                           locale={locale}/>}
                 <div id={'page'} className={'App'}>
                     {children}
                 </div>
-                {initialSettingsData?.settings?.initialSettings?.layoutSettings?.footer &&
+                {initialSettings?.layoutSettings?.footer &&
                     <FooterWidgetArea dictionary={dictionary} widgets={staticWidgetsData?.widgets?.footer}
                                       locale={locale}/>}
             </div>
-            {/*<WebSocketInitializer/>*/}
-            <Csr>
-                <GlobalCustomStyles customColors={initialSettingsData?.settings?.layoutSettings?.customColors}
-                                    customStyles={initialSettingsData?.settings?.layoutSettings?.customStyles}/>
-            </Csr>
+            <CookiesInformerBar />
+            <UserAutoLogin/>
+            <WebSocketInitializer/>
+            <GoogleAnalytics googleAnalyticsId={initialSettings?.headDataSettings?.googleAnalyticsId}/>
+            <LoadingComponent/>
+            <AlertBox dictionary={dictionary}/>
+            <BackToTopButton/>
+            <LoginRegisterPopup locale={locale} dictionary={dictionary}/>
+            <GlobalCustomStyles customColors={initialSettingsData?.settings?.layoutSettings?.customColors}
+                                customStyles={initialSettingsData?.settings?.layoutSettings?.customStyles}/>
         </ReduxProvider>
         </body>
         </html>

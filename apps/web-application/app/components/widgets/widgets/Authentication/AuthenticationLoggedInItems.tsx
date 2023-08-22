@@ -1,7 +1,5 @@
 import React, {FC} from "react";
-import styled from "styled-components";
 import Link from "next/link";
-import useTranslation from 'next-translate/useTranslation'
 import {userLogout} from "@store/reducers/userReducers/userReducer";
 import {useAppDispatch, useAppSelector} from "@store/hooks";
 import {loginRegisterForm} from "@store/reducers/globalStateReducer";
@@ -12,41 +10,14 @@ import {faSignOut} from "@fortawesome/free-solid-svg-icons/faSignOut";
 import {faEnvelope} from "@fortawesome/free-solid-svg-icons/faEnvelope";
 import {useSelector} from "react-redux";
 import {Store} from "typescript-types";
+import './AuthenticationLoggedInItems.styles.scss';
 
-const AuthenticationLoggedInItemsStyledDiv = styled.div`
-  .user-info {
-    a {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      color: var(--primary-text-color,#fff);
-      width: 100%;
-
-      .user-profile-image {
-        margin: 10px 0;
-      }
-
-      .username-info {
-        padding: 0 20px;
-        display: flex;
-        flex-direction: column;
-
-        .username {
-          font-size: 18px;
-          font-weight: bold;
-        }
-
-        .view-profile {
-          font-size: 0.75em;
-        }
-      }
+interface IProps {
+    onOpenCloseHandler: () => void,
+    locale: string,
+    dictionary: {
+        [key: string]: string
     }
-
-  }
-`
-
-interface AuthenticationLoggedInItemsPropTypes {
-    onOpenCloseHandler: any,
 }
 
 interface UserData {
@@ -54,18 +25,23 @@ interface UserData {
     role: string;
 }
 
-const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> = ({onOpenCloseHandler}) => {
+const AuthenticationLoggedInItems: FC<IProps> = ({onOpenCloseHandler, locale, dictionary}) => {
 
     const {membership, usersCanMessageEachOther} = useSelector(
         ({settings}: Store) => settings?.initialSettings?.membershipSettings || {}
     );
 
     const {username, role} = useAppSelector(({user}) => user?.userData || {} as UserData);
-    const {t} = useTranslation('common');
     const dispatch = useAppDispatch()
 
+    const onSignOutHandler = () => {
+        dispatch(userLogout(null))
+        dispatch(loginRegisterForm(false))
+        onOpenCloseHandler()
+    }
+
     return (
-        <AuthenticationLoggedInItemsStyledDiv className={'authentication-logged-in'}>
+        <div className={'authenticationLoggedIn'}>
 
             <div className={'user-info'}>
                 <Link href={`/profile`} onClick={onOpenCloseHandler}>
@@ -81,6 +57,7 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> = ({
 
 
             <div className={'logged-items'}>
+
                 {(membership && usersCanMessageEachOther) &&
                     <Link href={`/messenger`}
                           className='logged-item logged-in'
@@ -88,25 +65,22 @@ const AuthenticationLoggedInItems: FC<AuthenticationLoggedInItemsPropTypes> = ({
                         <div className={'icon-wrapper'}>
                             <FontAwesomeIcon icon={faEnvelope} style={{width: 20, height: 20}}/>
                         </div>
-                        <p className={'text-data'}>{t<string>(`Messages`)}</p>
+                        <p className={'text-data'}>{dictionary?.['Messages'] || 'Messages'}</p>
                     </Link>
                 }
+
                 {role === 'administrator' && <AuthenticationAdminItems/>}
-                <span className='logged-item logged-in sign-out' onClick={(e) => {
-                    //@ts-ignore
-                    dispatch(userLogout(null))
-                    dispatch(loginRegisterForm(false))
-                    onOpenCloseHandler(e)
-                }}>
-                        <div className={'icon-wrapper'}>
-                             <FontAwesomeIcon icon={faSignOut} style={{width: 20, height: 20}}/>
-                        </div>
-                        <p className={'text-data'}>{t<string>(`Logout`)}</p>
-                    </span>
+
+                <span className='logged-item logged-in sign-out' onClick={onSignOutHandler}>
+                    <div className={'icon-wrapper'}>
+                         <FontAwesomeIcon icon={faSignOut} style={{width: 20, height: 20}}/>
+                    </div>
+                    <p className={'text-data'}>{dictionary?.['Logout'] || 'Logout'}</p>
+                </span>
 
             </div>
 
-        </AuthenticationLoggedInItemsStyledDiv>
+        </div>
     )
 };
 export default AuthenticationLoggedInItems

@@ -80,3 +80,22 @@ export const fetchTags = async ({queryObject, revalidate}:IFetchMetasProps)=>{
         // console.error('error=> ',error)
     }
 }
+
+//we need to handle pagination
+
+export const fetchSearch = async ({queryObject, revalidate}:IFetchMetasProps)=>{
+    try {
+        const requestParameter = removeEmptyProperties(queryObject)
+        const queries= `?${new URLSearchParams(requestParameter).toString()}`;
+
+        const response = await fetch(
+            `${APIServerUrl}/api/v1/posts/getSearch${queries}`,
+            //@ts-ignore
+            config(revalidate))
+
+        return await response.json()
+    }catch (error){
+        // console.error('error=> ',error)
+    }
+}
+

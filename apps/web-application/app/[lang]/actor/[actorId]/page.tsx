@@ -86,7 +86,7 @@ const ActorPage = async ({params, searchParams}: IProps) => {
                                        dictionary={dictionary}
                                        locale={locale}
                                        sidebar={sidebar || 'no'}
-                                       position={'postPage'}/>
+                                       position={'actorPage'}/>
         </div>
     )
 }

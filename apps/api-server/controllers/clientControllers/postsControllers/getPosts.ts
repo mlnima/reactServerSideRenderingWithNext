@@ -45,7 +45,8 @@ const getPosts =  async (req, res) => {
 
         const totalCount = await postSchema.countDocuments(findingPostsOptions.findPostsQueries).exec();
 
-        const posts = await postSchema.find(findingPostsOptions.findPostsQueries, findingPostsOptions.selectedFields,
+        const posts = await postSchema.find(
+            findingPostsOptions.findPostsQueries, findingPostsOptions.selectedFields,
             {
                 skip: (findingPostsOptions.size * findingPostsOptions.page) - findingPostsOptions.size,
                 limit: findingPostsOptions.size,

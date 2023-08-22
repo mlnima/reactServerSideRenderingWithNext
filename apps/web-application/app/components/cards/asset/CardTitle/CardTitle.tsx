@@ -12,11 +12,11 @@ interface CardTitlePropTypes {
 const CardTitle: FC<CardTitlePropTypes> = ({title, url, targetLink}) => {
 
     return (
-        <h1 className={'card-title'}>
+        <h5 className={'card-title'}>
             <Link href={url || '#'} title={title} target={targetLink || '_self'}  prefetch={false}>
                 { capitalizeFirstLetter(title)   }
             </Link>
-        </h1>
+        </h5>
     );
 };
 export default CardTitle;

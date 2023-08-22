@@ -1,7 +1,6 @@
 'use client';
 import React, {useState, MouseEvent} from 'react';
 import {useRouter} from 'next/navigation'
-import useTranslation from 'next-translate/useTranslation';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faEraser} from "@fortawesome/free-solid-svg-icons/faEraser";
 import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons/faMagnifyingGlass";
@@ -16,7 +15,6 @@ interface IProps {
 }
 
 const SearchBar: React.FC<IProps> = ({dictionary, locale}) => {
-    const {t} = useTranslation('common');
     const {push} = useRouter();
     const [keyword, setKeyword] = useState<string>('');
     const [open, setOpen] = useState<boolean>(false);
@@ -51,7 +49,7 @@ const SearchBar: React.FC<IProps> = ({dictionary, locale}) => {
 
             <button onClick={() => setOpen(!open)}
                     aria-label={'open close search form'}
-                    title={t('common:Search', {}, {fallback: 'Search'})}
+                    title={dictionary?.['Search'] || 'Search'}
                     className={'open-close-search-form'}>
 
                 <FontAwesomeIcon icon={faMagnifyingGlass} style={{width: 25, height: 25}}/>

@@ -1,0 +1,67 @@
+.userPage{
+  color: var(--primary-text-color,#fff);
+  max-width: 940px;
+  margin: auto;
+  font-size: 12px;
+  padding: 10px;
+
+  .profile-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+    padding: 10px 0;
+    border-bottom: 0.5px solid var(--primary-text-color,#fff);
+    flex-direction: column;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+    }
+
+    .profile-header-info-actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+      .follow-count {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        p {
+          margin: 5px 10px;
+        }
+      }
+    }
+  }
+
+  .profile-posts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 20px 0;
+
+    .profile-no-posts {
+      border: 0.5px solid var(--primary-text-color,#fff);
+      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 10px;
+
+      svg {
+        width: 75px;
+        height: 75px;
+      }
+    }
+
+    .profile-no-posts-title {
+      color: var(--primary-text-color,#fff);
+      text-align: center;
+    }
+  }
+}

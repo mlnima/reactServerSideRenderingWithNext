@@ -1,0 +1,60 @@
+import { fetchSettings, fetchWidgets} from "fetch-requests";
+import SidebarWidgetAreaRenderer
+    from "@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer";
+import {i18n} from "../../../../i18n-config";
+import {getDictionary} from "../../../../get-dictionary";
+
+interface IProps {
+    params: {
+        lang: string
+        username: string,
+    },
+    searchParams?: {
+        [key: string]: string | string[] | undefined
+    },
+    page: string | string[]
+}
+
+export const dynamic = 'force-dynamic';
+
+// export const generateMetadata = actorMetaGenerator;
+
+const userPage = async ({params, searchParams}: IProps) => {
+
+    const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCAL || 'en';
+    const dictionary = await getDictionary(locale);
+    const settingsData = await fetchSettings(['userPageSettings']);
+
+    const sidebar = settingsData?.settings?.userPageSettings?.sidebar;
+
+    const widgetsData = await fetchWidgets(
+        [
+            'userPageTop',
+            'userPageLeftSidebar',
+            'userPageBottom',
+            'userPageRightSidebar'
+        ],
+        params?.lang
+    );
+
+
+
+
+    return (
+        <div id={'content'} className={`page-${sidebar || 'no'}-sidebar inner-content`}>
+
+            <main id={'primary'} className={'main userPage'}>
+<h1>USER PAGE</h1>
+            </main>
+
+            <SidebarWidgetAreaRenderer leftSideWidgets={widgetsData.widgets?.['userPageLeftSidebar']}
+                                       rightSideWidgets={widgetsData.widgets?.['userPageRightSidebar']}
+                                       dictionary={dictionary}
+                                       locale={locale}
+                                       sidebar={sidebar || 'no'}
+                                       position={'userPage'}/>
+        </div>
+    )
+}
+
+export default userPage;
