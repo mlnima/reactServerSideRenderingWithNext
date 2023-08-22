@@ -36,12 +36,12 @@ const Logo: FC<LogoPropTypes> = ({uniqueData, LogoUrl}) => {
 
     const {locale} = useRouter()
 
-    const {logoUrlSource, logoText, headLineData} = useMemo(() => {
+    const {logoUrlSource,  headLineData} = useMemo(() => {
         // Logo Url must get Deleted after live sites widget data reSet
         return {
             logoUrlSource: uniqueData?.logoUrl || LogoUrl,
-            logoText:  (uniqueData?.translations?.[locale as string]?.logoText ?? uniqueData?.logoText) ||'',
-            headLineData: uniqueData?.translations?.[locale as string]?.headLine ?? uniqueData?.headLine,
+            // logoText:  uniqueData?.translations?.[locale as string]?.logoText ?? (uniqueData?.logoText ||''),
+            headLineData: uniqueData?.translations?.[locale as string]?.headLine ?? (uniqueData?.headLine || ''),
         }
     }, [])
 
@@ -50,7 +50,7 @@ const Logo: FC<LogoPropTypes> = ({uniqueData, LogoUrl}) => {
         <Styles className={'logo-wrapper'}>
             <Link href='/' className='logo'>
                     {logoUrlSource && <img alt={'logo'} src={logoUrlSource}/> }
-                    {(!!logoText && !logoUrlSource) && <span className='logo-text'> {logoText ||''} </span>}
+                    {/*{(!!logoText && !logoUrlSource) && <span className='logo-text'> {logoText ||''} </span>}*/}
                     {headLineData && <p className='logo-headline'>{headLineData}</p> }
             </Link>
         </Styles>
