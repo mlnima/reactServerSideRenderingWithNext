@@ -11,9 +11,9 @@ interface IProps {
     }
 }
 
-export const generateMetadata = async ()=>({
-    title: 'register',
-})
+// export const generateMetadata = async ()=>({
+//     title: 'register',
+// })
 
 const registerPage = ({params: {lang}}: IProps) => {
 
