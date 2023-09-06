@@ -2,23 +2,30 @@ import {Post} from "./Post";
 import {User} from "./User";
 
 interface Base {
-    _id: string,
-    createdAt: Date,
+    _id?: string,
+    createdAt?: Date,
     likes?: number,
     disLikes?: number,
     body: string,
-    status: string
+    status?: string
 }
 
 export interface Comment extends Base {
     author:  User,
     onDocumentId:  Post,
-    reply: [Comment],
+    _id:  string,
+    reply?: [Comment],
 }
 
 export interface CommentRaw extends Base {
     onDocumentId: string ,
     author: string ,
-    createdAt: Date,
-    reply: [string],
+    reply?: [string],
 }
+
+export interface NewComment extends Base {
+    body: string,
+    author: string,
+    onDocumentId: string,
+}
+

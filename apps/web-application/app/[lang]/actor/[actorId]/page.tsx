@@ -7,7 +7,6 @@ import WidgetsRenderer from "@components/widgets/widgetRenderer/WidgetsRenderer"
 import PostPage from "@components/PostsPage/PostsPage";
 import actorMetaGenerator from "./components/actorMetaGenerator/actorMetaGenerator";
 import MetaAdminQuickAccessBar from "@components/metas/MetaAdminQuickAccessBar";
-import PostsPageInfo from "@components/PostsPage/PostsPageInfo/PostsPageInfo";
 import ActorBio from "./components/ActorBio/ActorBio";
 
 interface IProps {
@@ -21,9 +20,7 @@ interface IProps {
     page: string | string[]
 }
 
-export const dynamic = 'force-dynamic';
 
-export const generateMetadata = actorMetaGenerator;
 
 const ActorPage = async ({params, searchParams}: IProps) => {
 
@@ -60,9 +57,9 @@ const ActorPage = async ({params, searchParams}: IProps) => {
     });
 
     return (
-        <div id={'content'} className={`page-${sidebar || 'no'}-sidebar inner-content`}>
+        <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
 
-            <main id={'primary'} className={'main posts-page'}>
+            <main id={'primary'} className={'main actorPage'}>
                 <MetaAdminQuickAccessBar metaId={params?.actorId}/>
                 <ActorBio actorData={postsData?.meta}/>
                 <WidgetsRenderer dictionary={dictionary}
@@ -92,3 +89,6 @@ const ActorPage = async ({params, searchParams}: IProps) => {
 }
 
 export default ActorPage;
+
+export const generateMetadata = actorMetaGenerator;
+export const dynamic = 'force-dynamic';

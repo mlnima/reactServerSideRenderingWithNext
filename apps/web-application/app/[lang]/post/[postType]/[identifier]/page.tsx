@@ -5,10 +5,15 @@ import {fetchPost, fetchSettings, fetchWidgets} from "fetch-requests";
 import SidebarWidgetAreaRenderer
     from "@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer";
 import './page.styles.scss'
-import  postMetaGenerator from './components/postMetaGenerator/postMetaGenerator';
+import postMetaGenerator from './components/postMetaGenerator/postMetaGenerator';
 import PostAdminQuickAccessBar from "./components/PostAdminQuickAccessBar/PostAdminQuickAccessBar";
+import Soft404 from "@components/Soft404/Soft404";
+import NotFoundOrRestricted from "./components/NotFoundOrRestricted/NotFoundOrRestricted";
 
 const VideoTypePostPage = dynamic(() => import('./components/VideoTypePostPage/VideoTypePostPage'))
+const ArticleTypePostPage = dynamic(() => import('./components/ArticleTypePostPage/ArticleTypePostPage'))
+const PromotionTypePostPage = dynamic(() => import('./components/PromotionTypePostPage/PromotionTypePostPage'))
+const LearnTypePostPage = dynamic(() => import('./components/LearnTypePostPage/LearnTypePostPage'))
 
 
 interface IProps {
@@ -19,10 +24,10 @@ interface IProps {
     }
 }
 
-export const generateMetadata = postMetaGenerator  ;
+export const generateMetadata = postMetaGenerator;
 
 
-const PostPage = async ({params: {lang, identifier, postType}}:IProps) => {
+const PostPage = async ({params: {lang, identifier, postType}}: IProps) => {
 
     const locale = i18n.locales.includes(lang) ? lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCAL || 'en';
     const dictionary = await getDictionary(locale)
@@ -31,15 +36,67 @@ const PostPage = async ({params: {lang, identifier, postType}}:IProps) => {
     const widgetsData = await fetchWidgets(['postPageLeftSidebar', 'postPageRightSidebar', 'underPost'], lang)
     const sidebar = settingsData?.settings?.postPageSettings?.sidebar
 
+    if (!postData?.post?._id) {
+        return <Soft404 dictionary={dictionary}/>
+    }
+
+    if (postData?.post?.status !== 'published') {
+        return (
+            <>
+                <PostAdminQuickAccessBar post={postData?.post}/>
+                <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
+
+                    <main id={'primary'} className='postPage'>
+
+                        <NotFoundOrRestricted dictionary={dictionary}
+                                              relatedPosts={postData.relatedPosts}
+                                              hasSidebar={sidebar}
+                                              locale={locale}
+                                              post={postData.post}
+                                              widgets={widgetsData.widgets?.['underPost']}/>
+
+
+                    </main>
+                    <SidebarWidgetAreaRenderer leftSideWidgets={widgetsData.widgets?.['postPageLeftSidebar']}
+                                               rightSideWidgets={widgetsData.widgets?.['postPageRightSidebar']}
+                                               dictionary={dictionary}
+                                               locale={locale}
+                                               sidebar={sidebar || 'no'}
+                                               position={'postPage'}/>
+                </div>
+            </>
+
+        )
+    }
+
     return (
-        <>
-            <main id={'content'} className={`page-${sidebar || 'no'}-sidebar inner-content`}>
-                <PostAdminQuickAccessBar post={postData.post}/>
+        <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
+            <PostAdminQuickAccessBar post={postData.post}/>
+            <main id={'primary'} className='postPage'>
+
                 {postType === 'video' ?
                     <VideoTypePostPage widgets={widgetsData.widgets?.['underPost']}
                                        post={postData.post}
                                        hasSidebar={sidebar}
-                                       dictionary={dictionary} locale={locale}/> : null}
+                                       relatedPosts={postData.relatedPosts}
+                                       dictionary={dictionary}
+                                       locale={locale}/> : postType === 'article' ?
+                        <ArticleTypePostPage widgets={widgetsData.widgets?.['underPost']}
+                                             post={postData.post}
+                                             hasSidebar={sidebar}
+                                             relatedPosts={postData.relatedPosts}
+                                             dictionary={dictionary} locale={locale}/> : postType === 'promotion' ?
+                            <PromotionTypePostPage widgets={widgetsData.widgets?.['underPost']}
+                                                   post={postData.post}
+                                                   hasSidebar={sidebar}
+                                                   relatedPosts={postData.relatedPosts}
+                                                   dictionary={dictionary} locale={locale}/> : postType === 'learn' ?
+                                <LearnTypePostPage widgets={widgetsData.widgets?.['underPost']}
+                                                   post={postData.post}
+                                                   hasSidebar={sidebar}
+                                                   relatedPosts={postData.relatedPosts}
+                                                   dictionary={dictionary} locale={locale}/> : null
+                }
 
                 <SidebarWidgetAreaRenderer leftSideWidgets={widgetsData.widgets?.['postPageLeftSidebar']}
                                            rightSideWidgets={widgetsData.widgets?.['postPageRightSidebar']}
@@ -48,7 +105,7 @@ const PostPage = async ({params: {lang, identifier, postType}}:IProps) => {
                                            sidebar={sidebar || 'no'}
                                            position={'postPage'}/>
             </main>
-        </>
+        </div>
     )
 }
 

@@ -1,32 +1,9 @@
-'use client';
-//@ts-ignore
 import {FC} from "react";
 import Link from "next/link";
-import {useRouter} from "next/router";
-import styled from "styled-components";
-
-
-const MultipleLinkToStyledUl = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  margin: 0;
-  padding: 0;
-  .multiple-links-widget-item {
-    list-style: none;
-    color: var(--primary-text-color,#fff);
-    padding:  8px;
-    box-sizing: border-box;
-    a {
-      color: var(--primary-text-color,#fff) !important;
-      text-decoration: none;
-    }
-  }
-`
+import './MultipleLinkTo.styles.scss';
 
 interface MultipleLinkToPropTypes {
+    locale:string,
     multipleLinks: {
         linkIndex: number,
         linkTitle: string,
@@ -36,21 +13,24 @@ interface MultipleLinkToPropTypes {
         linkRel: string,
         linkDescription: string,
         linkToType: string,
-        translations: {}
+        translations: {
+            [key: string]: {
+                linkTitle:string,
+                linkDescription:string,
+            }
+        }
     }[]
 }
 
-const MultipleLinkTo: FC<MultipleLinkToPropTypes> = ({multipleLinks}) => {
-    const {locale} = useRouter()
-
+const MultipleLinkTo: FC<MultipleLinkToPropTypes> = ({multipleLinks,locale}) => {
     return (
-        <MultipleLinkToStyledUl className='multiple-links-widget'>
+        <ul className='multipleLinksWidget'>
             {([...multipleLinks] || []).sort((a, b) => a.linkIndex - b.linkIndex).map((linkData,index) => {
-                const linkTitle = linkData.translations?.[locale as string]?.linkTitle || linkData.linkTitle;
-                const linkDescription = linkData.translations?.[locale as string]?.linkDescription || linkData.linkDescription;
+                const linkTitle = linkData?.translations?.[locale as string]?.linkTitle || linkData.linkTitle;
+                const linkDescription = linkData?.translations?.[locale as string]?.linkDescription || linkData.linkDescription;
 
                 return (
-                    <li key={`${linkData.linkTitle}-${index}`} className='multiple-links-widget-item'>
+                    <li key={`${linkData.linkTitle}-${index}`} className='multipleLinksWidgetItem'>
                         {linkDescription ? <p>{linkDescription}</p> : null}
                         <Link href={linkData.linkTo}
                               title={linkTitle}
@@ -59,9 +39,8 @@ const MultipleLinkTo: FC<MultipleLinkToPropTypes> = ({multipleLinks}) => {
                         </Link>
                     </li>
                 )
-
             })}
-        </MultipleLinkToStyledUl>
+        </ul>
     );
 };
 export default MultipleLinkTo;

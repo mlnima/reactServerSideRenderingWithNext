@@ -1,6 +1,4 @@
-
-
-const {postTypes} = require("data-structures") ;
+const {postTypes} = require("data-structures");
 const postTypeQueryMatcher = `:postType(${postTypes.join('|')})?`
 
 const apiAndFileServerProxy = process.env.NEXT_PUBLIC_API_SERVER_URL === process.env.NEXT_PUBLIC_PRODUCTION_URL ?
@@ -64,7 +62,6 @@ module.exports = () => {
         ],
         afterFiles: [
             {source: `/admin`, destination: '/admin', locale: false},
-
 
 
         ],

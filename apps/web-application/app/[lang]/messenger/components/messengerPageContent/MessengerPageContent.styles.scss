@@ -1,0 +1,106 @@
+.messengerPageContent {
+  width: 100%;
+  height: 100%;
+  color: var(--primary-text-color, #272727);
+
+  .conversationControls {
+    background-color: var(--tertiary-background-color, #272727);
+    grid-area: conversationControls;
+    width: 100%;
+
+    .messengerConfigs {
+      width: 100%;
+      height: 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--secondary-background-color, #181818);
+      padding: 8px;
+      box-sizing: border-box;
+
+      h1 {
+        font-size: large;
+      }
+
+      .chatroomTopBarActionButton {
+        border: none;
+        outline: none;
+        background-color: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        svg {
+          width: 25px;
+          height: 25px;
+        }
+      }
+
+    }
+  }
+
+  .messaging {
+    width: 100%;
+    display: none;
+    grid-area: messaging;
+    //display: ${({isConversationsMenuOpen,isActiveConversation}) => isConversationsMenuOpen && !isActiveConversation ? 'none ' : 'grid'};
+    grid-template-rows: 50px 1fr 50px;
+  }
+
+
+  .conversationControl {
+    display: grid;
+    grid-template-areas: 'conversationControl';
+  }
+
+  .messaging {
+    display: grid;
+    grid-area: messaging;
+    //grid-template-areas: 'messaging';
+    grid-template-rows: 50px 1fr 50px;
+    grid-template-areas:  'messengerHeader'
+                          'messagingArea'
+                          'mediaInputBox';
+  }
+}
+
+.messengerPageMaximized {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 11;
+}
+
+.conversationsMenuOpen {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 150px;
+  grid-template-rows: 45px 1fr;
+  grid-template-areas:
+    'chatroomTopbar chatroomTopbar'
+    'chatroomMessagingArea chatroomOnlineUsersList'
+}
+
+.inner-content-not-logged-in {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.messenger-page-register-page-link {
+  color: var(--primary-text-color, #fff);
+}
+
+@media only screen and (min-width: 768px) {
+  .messengerPageContent {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-template-areas: 'conversationControls messaging';
+    .conversationControls{
+
+    }
+  }
+}

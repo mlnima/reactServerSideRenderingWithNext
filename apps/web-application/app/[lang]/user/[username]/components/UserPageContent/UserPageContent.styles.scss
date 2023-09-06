@@ -1,0 +1,78 @@
+.userPageContent {
+  color: var(--primary-text-color, #fff);
+  font-size: 12px;
+  padding: 10px;
+
+  .profileHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+    padding: 10px 0;
+    border-bottom: var(--default-border);
+    flex-direction: row;
+    gap: 30px;
+
+    .profileHeaderInfoActions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+      h1 {
+        font-size: initial;
+      }
+
+      .followCount {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        p {
+          margin: 5px 10px;
+        }
+      }
+    }
+  }
+
+  .profile-posts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 20px 0;
+    .postsContainer{
+      width: 100%;
+    }
+
+    .profileNoPostsYet {
+      border: 0.5px solid var(--primary-text-color, #fff);
+      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 10px;
+
+      svg {
+        width: 75px;
+        height: 75px;
+      }
+    }
+
+    .profile-no-posts-title {
+      color: var(--primary-text-color, #fff);
+      text-align: center;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .userPage {
+    .profileHeader {
+      flex-direction: row;
+      gap: 30px;
+    }
+  }
+}

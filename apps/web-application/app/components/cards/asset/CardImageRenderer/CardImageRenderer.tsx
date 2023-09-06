@@ -25,7 +25,7 @@ const CardImageRenderer: FC<CardImageNextPropTypes> =
                 <img src={imageUrl}
                      alt={mediaAlt || ''}
                     // loading={'lazy'}
-                     loading={index > 1 ? 'lazy' : 'eager'}
+                     loading={index > 3 ? 'lazy' : 'eager'}
                      style={{
                          //@ts-ignore
                          objectFit: objectFit || 'contain',

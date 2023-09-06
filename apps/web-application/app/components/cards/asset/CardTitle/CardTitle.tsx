@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {FC} from "react";
 import {capitalizeFirstLetter} from "custom-util";
-import './CardTitle.styles.scss'
+import './CardTitle.styles.scss';
 
 interface CardTitlePropTypes {
     title: string | undefined,
@@ -12,11 +12,11 @@ interface CardTitlePropTypes {
 const CardTitle: FC<CardTitlePropTypes> = ({title, url, targetLink}) => {
 
     return (
-        <h5 className={'card-title'}>
+        <div className={'cardTitle'}>
             <Link href={url || '#'} title={title} target={targetLink || '_self'}  prefetch={false}>
                 { capitalizeFirstLetter(title)   }
             </Link>
-        </h5>
+        </div>
     );
 };
 export default CardTitle;

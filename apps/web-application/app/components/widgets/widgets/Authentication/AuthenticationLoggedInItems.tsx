@@ -1,3 +1,4 @@
+'use client';
 import React, {FC} from "react";
 import Link from "next/link";
 import {userLogout} from "@store/reducers/userReducers/userReducer";
@@ -27,15 +28,21 @@ interface UserData {
 
 const AuthenticationLoggedInItems: FC<IProps> = ({onOpenCloseHandler, locale, dictionary}) => {
 
-    const {membership, usersCanMessageEachOther} = useSelector(
-        ({settings}: Store) => settings?.initialSettings?.membershipSettings || {}
+
+
+    const {membership} = useAppSelector(
+        ({settings}: Store) =>  settings?.initialSettings?.membershipSettings
+    );
+
+    const {usersCanMessageEachOther} = useAppSelector(
+        ({settings}: Store) =>  settings?.initialSettings?.membershipSettings
     );
 
     const {username, role} = useAppSelector(({user}) => user?.userData || {} as UserData);
     const dispatch = useAppDispatch()
 
     const onSignOutHandler = () => {
-        dispatch(userLogout(null))
+        dispatch(userLogout())
         dispatch(loginRegisterForm(false))
         onOpenCloseHandler()
     }
@@ -44,7 +51,7 @@ const AuthenticationLoggedInItems: FC<IProps> = ({onOpenCloseHandler, locale, di
         <div className={'authenticationLoggedIn'}>
 
             <div className={'user-info'}>
-                <Link href={`/profile`} onClick={onOpenCloseHandler}>
+                <Link href={`/user/${username}`} onClick={onOpenCloseHandler}>
                     <div className='user-info-profile-icon'>
                         <UserProfileImage size={40} profileRedirect={false}/>
                     </div>

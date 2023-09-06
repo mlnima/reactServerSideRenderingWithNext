@@ -1,0 +1,30 @@
+.chatroomOnlineUsersListItem{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background-color: transparent;
+  border-radius: 10px;
+  padding: 2px 5px;
+
+  .onlineUserDataWrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .onlineUserData {
+      a{
+        display: flex;
+        align-items: center;
+        .onlineUserUsername{
+          color: var(--primary-text-color,#fff);
+          margin-left: 5px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
+}

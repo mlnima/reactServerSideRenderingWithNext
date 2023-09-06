@@ -1,18 +1,24 @@
 .logo{
-  .logo-link {
+  .logoLink {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
-    .logo-text, .logo-headline {
+
+    .logoImage{
+      filter: drop-shadow(3px 3px 3px black);
+      max-width: 300px;
+    }
+
+    .logoText, .logo-headline {
       color: var(--primary-text-color,#fff);
     }
 
-    .logo-text {
+    .logoText {
       font-weight: bold;
     }
 
-    .logo-headline {
+    .logoHeadline {
       margin: 5px 0 0 0;
     }
   }

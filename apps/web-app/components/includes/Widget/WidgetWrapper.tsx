@@ -103,7 +103,7 @@ export default memo(WidgetWrapper);
 // const WidgetToRender = useMemo(() => {
 //     return data.type === 'postsSlider' ? PostSlider :
 //         data.type === 'posts' ? Posts :
-//             data.type === 'postsList' ? PostsList :
+//             data.type === 'postsList' ? PostsListWidget :
 //                 data.type === 'postsListEntireByCategories' ? PostsListEntireByCategories :
 //                     data.type === 'imagesSlider' ? ImagesSlider :
 //                         data.type === 'multipleLinkTo' ? MultipleLinkTo :

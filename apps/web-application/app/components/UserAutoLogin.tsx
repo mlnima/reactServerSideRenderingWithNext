@@ -2,14 +2,16 @@
 import {FC, useEffect} from "react";
 import {autoLoginAction} from "@store/reducers/userReducers/autoLoginAction";
 import {useAppDispatch, useAppSelector} from "@store/hooks";
+import {setAdminMode} from "@store/reducers/globalStateReducer";
 
 const UserAutoLogin: FC = () => {
     const dispatch = useAppDispatch()
-    const loggedIn = useAppSelector((store) => store?.user?.loggedIn)
+    const {loggedIn,userData} = useAppSelector(({user}) =>user)
 
     useEffect(() => {
         if (!loggedIn) {
-            !!localStorage?.wt && dispatch(
+            const wt = localStorage.getItem('wt')
+            !!wt && dispatch(
                 autoLoginAction(
                     {
                         fields: [
@@ -25,6 +27,13 @@ const UserAutoLogin: FC = () => {
                 ))
         }
     }, []);
+
+    useEffect(() => {
+        const adminMode = localStorage.getItem('adminMode')
+        if (userData?.role === 'administrator' && adminMode === 'true') {
+            dispatch(setAdminMode(true))
+        }
+    }, [loggedIn]);
 
     return null
 };

@@ -1,5 +1,5 @@
 'use client';
-import React, {FC} from "react";
+import React, {FC, useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "@store/hooks";
 import {Post} from "typescript-types/dist/src/Post";
 import {editPostStatusAction} from "@store/reducers/postsReducers/editPostStatusAction";
@@ -8,7 +8,7 @@ import Link from "next/link";
 import './PostAdminQuickAccessBar.styles.scss'
 
 interface IProps {
-    post:Post
+    post: Post
 }
 
 const PostAdminQuickAccessBar: FC<IProps> = ({post}) => {
@@ -17,7 +17,7 @@ const PostAdminQuickAccessBar: FC<IProps> = ({post}) => {
     const pathname = usePathname()
     const router = useRouter()
 
-    const onStatusChangeHandler = (status:string) => {
+    const onStatusChangeHandler = (status: string) => {
         if (post._id) {
             dispatch(editPostStatusAction({ids: [post._id], status}))
             router.push(`${pathname}?lastPageUpdate=${Date.now()}`)
@@ -29,7 +29,8 @@ const PostAdminQuickAccessBar: FC<IProps> = ({post}) => {
     return (
         <div className={'PostAdminQuickAccessBar'}>
             <Link className='btn btn-primary' href={`/editPost/${post._id}`} target='_blank'>Edit</Link>
-            <Link className='btn btn-primary' href={`/dashboard/post?id=${post._id}`} target='_blank'>Edit As Admin</Link>
+            <Link className='btn btn-primary' href={`/dashboard/post?id=${post._id}`} target='_blank'>Edit As
+                Admin</Link>
             <span className={'btn btn-info'} onClick={() => onStatusChangeHandler('draft')}>Draft</span>
             <span className={'btn btn-primary'} onClick={() => onStatusChangeHandler('published')}>Publish</span>
             <span className={'btn btn-info'} onClick={() => onStatusChangeHandler('pending')}>Pending</span>

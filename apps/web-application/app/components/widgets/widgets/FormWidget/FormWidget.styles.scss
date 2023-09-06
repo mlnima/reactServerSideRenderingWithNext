@@ -1,0 +1,45 @@
+.formWidget {
+  display: flex;
+  justify-content: center;
+  padding: 12px;
+  box-sizing: border-box;
+  border: var(--default-border);
+  width: 100%;
+
+  .afterSubmitMessage {
+    color: var(--primary-text-color, #fff);
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .formWidgetDynamicForm {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+
+    .submitButton {
+      border: none;
+      padding: 5px 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+    }
+  }
+
+
+  .form-widget-field-title {
+    color: var(--primary-text-color, #fff);
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .formWidget {
+    width: clamp(300px, 678px, 678px);
+    margin-right: auto;
+    margin-left: auto;
+
+    .formWidgetDynamicForm {
+
+    }
+  }
+}

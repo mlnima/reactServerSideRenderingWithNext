@@ -16,12 +16,9 @@ interface IProps {
     }
 }
 
-
-export const generateMetadata = pageMetaGenerator
-
 const page = async ({params}: IProps) => {
-    const pageName =  params?.pageName
-    const locale = i18n.locales.includes(params.lang)  ?  params.lang :  process.env?.NEXT_PUBLIC_DEFAULT_LOCAL || 'en';
+    const pageName = params?.pageName
+    const locale = i18n.locales.includes(params.lang) ? params.lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCAL || 'en';
     const dictionary = await getDictionary(locale);
     const pageData = await fetchPage({pageName});
     const widgetsData = await fetchWidgets([`${pageName}LeftSidebar`, `${pageName}RightSidebar`, pageName], locale);
@@ -29,10 +26,12 @@ const page = async ({params}: IProps) => {
 
     return (
         <div id={'content'} className={`page-${sidebar || 'no'}-sidebar inner-content`}>
-            <MainWidgetArea dictionary={dictionary}
-                            widgets={widgetsData?.widgets?.[pageName]}
-                            locale={locale}
-                            position={'home'}/>
+            <main id={'primary'} className={'main page'}>
+                <MainWidgetArea dictionary={dictionary}
+                                widgets={widgetsData?.widgets?.[pageName]}
+                                locale={locale}
+                                position={'home'}/>
+            </main>
             <SidebarWidgetAreaRenderer leftSideWidgets={widgetsData.widgets?.[`${pageName}LeftSidebar`]}
                                        rightSideWidgets={widgetsData.widgets?.[`${pageName}RightSidebar`]}
                                        dictionary={dictionary}
@@ -44,3 +43,6 @@ const page = async ({params}: IProps) => {
 }
 
 export default page;
+
+export const generateMetadata = pageMetaGenerator;
+export const dynamic = 'force-dynamic';

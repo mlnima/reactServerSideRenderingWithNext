@@ -1,6 +1,7 @@
 import {FC} from "react";
 import {Widget} from "typescript-types/dist/src/widgets/Widget";
 import WidgetsRenderer from "../widgetRenderer/WidgetsRenderer";
+import './widgetAreas.styles.scss'
 
 interface IProps {
     widgets:Widget[],
@@ -19,4 +20,5 @@ const FooterWidgetArea: FC<IProps> = ({widgets,locale,dictionary}) => {
         </footer>
     )
 };
+
 export default FooterWidgetArea

@@ -1,0 +1,13 @@
+.comments{
+  padding: 20px 0;
+  box-sizing: border-box;
+  width: 100%;
+  max-height: 50vh;
+  overflow-y: scroll;
+
+  .noComments{
+    color: var(--primary-text-color,#fff);
+    font-size: large;
+  }
+}
+

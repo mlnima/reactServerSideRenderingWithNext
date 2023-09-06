@@ -1,0 +1,18 @@
+.advertiseWrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 102px;
+  min-width: 300px;
+  max-width: 98vw !important;
+  box-sizing: border-box;
+
+  .pre-load {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 102px;
+    min-width: 300px;
+    color: var(--primary-text-color,#fff);
+  }
+}

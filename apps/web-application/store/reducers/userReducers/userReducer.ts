@@ -1,7 +1,5 @@
-
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../../store";
-import {UserState} from "typescript-types";
 import {loginAction} from "@store/reducers/userReducers/loginAction";
 import {autoLoginAction} from "@store/reducers/userReducers/autoLoginAction";
 import {getUserPageDataAction} from "@store/reducers/userReducers/getUserPageDataAction";
@@ -10,8 +8,19 @@ import {getSpecificUserDataAction} from "@store/reducers/userReducers/getSpecifi
 import {unfollowUserAction} from "@store/reducers/userReducers/unfollowUserAction";
 import {followUserAction} from "@store/reducers/userReducers/followUserAction";
 
-const initialState: UserState = {
-    userData: {},
+
+const initialUserData = {
+    _id:'',
+    username: '',
+    profileImage: '',
+    draftPost:{}
+}
+
+
+
+
+const initialState = {
+    userData: initialUserData,
     userRatingData: {},
     loggedIn: false,
     userPageData: {},
@@ -65,7 +74,7 @@ export const userSlice = createSlice({
             localStorage.removeItem('wt')
             return {
                 ...state,
-                userData: {},
+                userData: initialUserData,
                 loggedIn: false
             }
         },
@@ -145,6 +154,5 @@ export const {
 } = userSlice.actions;
 
 export const userReducer = (state: RootState) => state?.user || null;
-
 
 export default userSlice.reducer;

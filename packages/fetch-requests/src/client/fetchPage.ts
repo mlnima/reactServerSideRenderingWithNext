@@ -7,15 +7,15 @@ interface IFetchPage{
 }
 
 export const fetchPage = async ({pageName, revalidate}:IFetchPage)=>{
-    console.log('console=> ',`${APIServerUrl}/api/v1/pages/getPage?pageName=${pageName}`)
     try {
         const response = await fetch(
             `${APIServerUrl}/api/v1/pages/getPage?pageName=${pageName}`,
-            //@ts-ignore
-            config(revalidate))
-        return await response.json()
+            config({revalidate})
+        );
+
+        return response.json()
     }catch (error){
-        // console.error('error=> ',error)
+
     }
 }
 

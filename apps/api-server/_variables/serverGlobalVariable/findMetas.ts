@@ -12,15 +12,14 @@ interface FindMetasQueryTypes{
 export const findMetas = async (query:FindMetasQueryTypes)=>{
     try {
 
-        // @ts-ignore
-        const initialSettings:{data:IdentitySettings} = query?.page ? await settingSchema.findOne({type: 'initialSettings'}).exec() : {}
+
+
         const statusQuery = {status: 'published'};
         const type = {type: query?.metaType}
         const notStartWithNumberRegex = /^(?![0-9].*$).*/g
         const startWithQuery = !query.startWith  ? {name: {$regex: notStartWithNumberRegex}} :  {name: {$regex: '^' + query.startWith}}
         const countQuery =  {count: {$gt: 0}}
-        //@ts-ignore
-        const limit = initialSettings?.data?.postCardsSettings?.numberOfCardsPerPage || 20
+        const limit = global?.initialSettings?.postCardsSettings?.numberOfCardsPerPage || 20
         const page = query?.page || 1
         const skip = page ? limit * (page - 1) : 0
 

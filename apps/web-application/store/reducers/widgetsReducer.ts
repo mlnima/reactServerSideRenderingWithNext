@@ -33,16 +33,6 @@ export const fetchWidgets = createAsyncThunk(
     }
 )
 
-export const saveWidgetFormData = createAsyncThunk(
-    'widgets/saveWidgetFormData',
-    async (data: {}, thunkAPI) => {
-        thunkAPI.dispatch(loading(true))
-        return await clientAPIRequestSaveFormData(data).then(response => {
-        }).catch(error => {
-        }).finally(() => thunkAPI.dispatch(loading(false)))
-    }
-)
-
 export const getUncachedWidgetsForAdminAction = createAsyncThunk(
     'adminPanelWidgets/getUncachedWidgetsForAdminAction',
     async (data: any, thunkAPI) => {

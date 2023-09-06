@@ -1,0 +1,54 @@
+#messengerHeader{
+  background-color: var(--secondary-background-color,#181818);
+  height: 50px;
+  display: flex;
+  align-items: center;
+  grid-area: messengerHeader;
+  .messenger-header-content{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    .button-group{
+      display: flex;
+
+      button {
+        margin: 0 5px;
+      }
+
+      &:first-child button {
+        margin-left: 0;
+      }
+
+      &:last-child button {
+        margin-right: 0;
+      }
+    }
+
+    .left,.right{
+      .btn{
+        color: var(--primary-text-color,#fff);
+      }
+    }
+
+  }
+
+  .chatroomTopBarActionButton{
+    border: none;
+    outline: none;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--secondary-text-color, #ccc);
+
+    svg {
+      width: 25px;
+      height: 25px;
+    }
+  }
+  .chatroomTopBarActionButton{
+    color: var(--primary-active-color, #f90);
+  }
+}

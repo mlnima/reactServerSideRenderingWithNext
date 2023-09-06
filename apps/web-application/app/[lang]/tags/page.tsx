@@ -17,9 +17,7 @@ interface IProps {
     }
 }
 
-export const generateMetadata = tagsMetaGenerator;
-
-const tagsPage = async ({params, searchParams}: IProps) => {
+const TagsPage = async ({params, searchParams}: IProps) => {
     const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCAL || 'en';
     const dictionary = await getDictionary(locale);
     const settingsData = await fetchSettings(['tagsPageSettings']);
@@ -44,9 +42,9 @@ const tagsPage = async ({params, searchParams}: IProps) => {
     });
 
     return (
-        <div id={'content'} className={`page-${sidebar || 'no'}-sidebar inner-content`}>
+        <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
 
-            <main id={'primary'} className={'content main '}>
+            <main id={'primary'} className={'main tagsPage'}>
                 <WidgetsRenderer dictionary={dictionary}
                                  locale={locale}
                                  widgets={widgetsData.widgets?.['tagsPageTop']}
@@ -59,14 +57,19 @@ const tagsPage = async ({params, searchParams}: IProps) => {
                                  widgets={widgetsData.widgets?.['tagsPageBottom']}
                                  position={'tagsPageBottom'}/>
             </main>
+
             <SidebarWidgetAreaRenderer leftSideWidgets={widgetsData.widgets?.['tagsPageLeftSidebar']}
                                        rightSideWidgets={widgetsData.widgets?.['tagsPageRightSidebar']}
                                        dictionary={dictionary}
                                        locale={locale}
                                        sidebar={sidebar || 'no'}
                                        position={'postPage'}/>
+
         </div>
     );
 };
 
-export default tagsPage;
+export default TagsPage;
+
+export const generateMetadata = tagsMetaGenerator;
+export const dynamic = 'force-dynamic';

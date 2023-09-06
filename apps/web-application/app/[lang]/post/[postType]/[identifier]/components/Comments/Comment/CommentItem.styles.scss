@@ -1,0 +1,40 @@
+.comment{
+  display: flex;
+  flex-direction: column;
+  max-width: 90vw;
+  border-bottom: var(--default-border);
+
+  width: 100%;
+  padding: 10px 0;
+
+  .comment-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 10px 0;
+
+    .comment-author-image {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+
+    }
+
+    .comment-author {
+      color: var(--primary-active-color, #f90);
+      margin: 4px 10px;
+      font-weight: bold;
+    }
+
+    .comment-date {
+      color: var(--primary-text-color,#fff);
+      font-size: 14px;
+      margin: 4px 5px;
+    }
+  }
+
+  .comment-body {
+    color: var(--primary-text-color,#fff);
+    overflow-wrap: break-word;
+  }
+}

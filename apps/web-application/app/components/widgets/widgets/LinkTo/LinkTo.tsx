@@ -3,7 +3,9 @@ import Link from "next/link";
 import {UniqueDataTypes} from "typescript-types";
 
 interface LinkToPropTypes {
-    translations: {},
+    translations: {
+        [key: string]: any
+    },
     locale: string,
     uniqueData: UniqueDataTypes
 }
@@ -15,10 +17,10 @@ const LinkTo: FC<LinkToPropTypes> = ({translations, uniqueData, locale}) => {
               target={uniqueData?.linkToWindowType || '_self'}
               className={'link-to'}
               style={{color: 'var(--primary-text-color,#fff)'}}
-              //@ts-ignore
               title={translations?.[locale]?.linkToText ?? uniqueData.linkToText}>
-            {/*//@ts-ignore*/}
+
             {translations?.[locale]?.linkToText ?? uniqueData.linkToText}
+
         </Link>
     )
 };

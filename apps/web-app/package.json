@@ -11,7 +11,7 @@
   "author": "02dev",
   "license": "MIT",
   "scripts": {
-    "build": "npm run build:next",
+    "build-not-use": "npm run build:next",
     "start": " node next-production-server",
     "dev": "ts-node --transpile-only ./next-dev-server.js",
     "build:next": "next build",

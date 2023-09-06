@@ -1,0 +1,26 @@
+.editPostPageContent{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--secondary-background-color, #181818);
+  color: var(--primary-text-color, #fff);
+  padding: 8px;
+  box-sizing: border-box;
+  .formSection {
+    width: 100%;
+  }
+
+  .imageUploader {
+
+  }
+
+  .description {
+    min-height: 90px;
+  }
+
+  .submitButton {
+    width: 100%;
+    max-width: 320px;
+  }
+}

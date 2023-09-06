@@ -1,8 +1,11 @@
-import { fetchSettings, fetchWidgets} from "fetch-requests";
+import {fetchSettings, fetchWidgets} from "fetch-requests";
 import SidebarWidgetAreaRenderer
     from "@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer";
 import {i18n} from "../../../../i18n-config";
 import {getDictionary} from "../../../../get-dictionary";
+import React from "react";
+import './page.styles.scss';
+import UserPageContent from "./components/UserPageContent/UserPageContent";
 
 interface IProps {
     params: {
@@ -14,8 +17,6 @@ interface IProps {
     },
     page: string | string[]
 }
-
-export const dynamic = 'force-dynamic';
 
 // export const generateMetadata = actorMetaGenerator;
 
@@ -38,15 +39,11 @@ const userPage = async ({params, searchParams}: IProps) => {
     );
 
 
-
-
     return (
         <div id={'content'} className={`page-${sidebar || 'no'}-sidebar inner-content`}>
-
             <main id={'primary'} className={'main userPage'}>
-<h1>USER PAGE</h1>
+                <UserPageContent dictionary={dictionary} username={params?.username} locale={locale}/>
             </main>
-
             <SidebarWidgetAreaRenderer leftSideWidgets={widgetsData.widgets?.['userPageLeftSidebar']}
                                        rightSideWidgets={widgetsData.widgets?.['userPageRightSidebar']}
                                        dictionary={dictionary}
@@ -58,3 +55,5 @@ const userPage = async ({params, searchParams}: IProps) => {
 }
 
 export default userPage;
+
+export const dynamic = 'force-dynamic';

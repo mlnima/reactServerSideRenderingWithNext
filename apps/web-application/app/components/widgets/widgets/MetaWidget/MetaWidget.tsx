@@ -6,12 +6,13 @@ interface MetaWidgetPropType {
     uniqueData?: {
         metaData?: Meta[],
     },
-    metaType: string
+    metaType: string,
+    locale:string
 }
 
-const MetaWidget: FC<MetaWidgetPropType> = ({metaType, uniqueData}) => {
+const MetaWidget: FC<MetaWidgetPropType> = ({metaType, uniqueData,locale}) => {
     return(
-        <MetasRenderer metaData={uniqueData?.metaData} metaType={metaType}/>
+        <MetasRenderer locale={locale} metaData={uniqueData?.metaData} metaType={metaType}/>
     )
 };
 

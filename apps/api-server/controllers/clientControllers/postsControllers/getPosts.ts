@@ -1,9 +1,9 @@
 import {postSchema} from 'models';
-import {settingSchema} from 'models';
 import {metaSchema} from 'models';
 import {searchKeywordSchema} from 'models'
 import _clientQueryGeneratorForGettingPosts from '../../../_variables/clientVariables/_clientQueryGeneratorForGettingPosts'
 import {mongoIdValidator} from 'custom-server-util';
+import {postFieldRequestForCards} from "data-structures";
 //import {postFieldRequestForCards} from "structures";
 
 const saveSearchedKeyword = async (keyword :string, count:number) => {
@@ -27,10 +27,8 @@ const getMetaForGettingPostsRequest = async (meta:string)=>{
     }
 }
 
-const getPosts =  async (req, res) => {
+export const getPosts =  async (req, res) => {
     try {
-
-        const identitySetting = await settingSchema.findOne({type:'identity'}).exec()
 
         const meta = req.query?.metaId || req.query?.selectedMetaForPosts ?
             await getMetaForGettingPostsRequest(req.query?.metaId || req.query?.selectedMetaForPosts) || {} : {}
@@ -38,7 +36,7 @@ const getPosts =  async (req, res) => {
         const findingPostsOptions = _clientQueryGeneratorForGettingPosts({
             ...req.query,
             //@ts-ignore
-            size: req.query.size === 'undefined' ? identitySetting?.data?.postsCountPerPage : parseInt(req.query.size),
+            size: req.query.size === 'undefined' ? (global?.initialSettings?.postCardsSettings?.numberOfCardsPerPage || 20): parseInt(req.query.size),
             page: req.query.page === 'undefined' ? 1 : parseInt(req.query.page)
             //@ts-ignore
         },meta?._id)
@@ -62,10 +60,34 @@ const getPosts =  async (req, res) => {
         res.json({posts, totalCount, meta})
     } catch (err) {
         console.log(err.stack)
-        return res.status(404).json({
+        return res.status(503).json({
             message: 'Server Error'
         })
     }
 };
 
 export default getPosts
+
+export const getUserPagePosts = async (req, res) => {
+    try {
+        const authorId = req.query.authorId;
+        const skip = req.query.skip || 0
+
+        const posts = await postSchema.find(
+            {author:authorId},
+            postFieldRequestForCards,
+            {
+                skip: skip,
+                limit: (global?.initialSettings?.postCardsSettings?.numberOfCardsPerPage || 20),
+            }
+            ).exec()
+
+        res.json({posts})
+
+    }catch (error){
+        console.log(error.stack)
+        res.status(503).json({
+            message: 'Server Error'
+        })
+    }
+}

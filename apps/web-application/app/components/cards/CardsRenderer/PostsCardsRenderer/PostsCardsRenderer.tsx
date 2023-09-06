@@ -23,8 +23,11 @@ const PostsCardsRenderer: FC<IProps> = ({posts, locale, isSidebar}) => {
 
                 const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
 
-                const postUrl = post?.redirectLink ? post?.redirectLink :
-                    locale === defaultLocale ? `/post/${post?.postType}/${post._id}` : `/${locale}${`/post/${post?.postType}/${post._id}`}`;
+                // const postUrl = post?.redirectLink ? post?.redirectLink :
+                //     locale === defaultLocale ? `/post/${post?.postType}/${post._id}` : `/${locale}${`/post/${post?.postType}/${post._id}`}`;
+                const postUrl = locale === defaultLocale ?
+                    `/post/${post?.postType}/${post._id}` :
+                    `/${locale}${`/post/${post?.postType}/${post._id}`}`;
 
                 return post?.postType === 'video' ?
                     <VideoPostCard index={index}

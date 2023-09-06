@@ -17,13 +17,14 @@ const Logo: FC<LogoPropTypes> = ({uniqueData,LogoUrl,locale}) => {
 
     return (
         <div className={'logo'}>
-            <Link href='/' className={'logo-link'}>
-                    {uniqueData?.logoUrl && <img alt={'logo'} src={logoUrlSource}/> }
-                    {uniqueData?.logoText && !uniqueData?.logoUrlSource ?
-                        <span className='logo-text'> {logoText} </span>
+            <Link href='/' className={'logoLink'}>
+
+                    {uniqueData?.logoUrl && <img alt={'logo'} className={'logoImage'} src={logoUrlSource}/> }
+                    {!!uniqueData?.logoText && !uniqueData?.logoUrlSource ?
+                        <span className='logoText'> {logoText} </span>
                         : null
                     }
-                    {uniqueData?.headLine && <p className='logo-headline'>{headLineData}</p> }
+                    {!!uniqueData?.headLine && <p className={'logoHeadline'}>{headLineData}</p> }
             </Link>
         </div>
 
@@ -32,7 +33,7 @@ const Logo: FC<LogoPropTypes> = ({uniqueData,LogoUrl,locale}) => {
 
 export default Logo;
 
-
+//   {uniqueData?.logoUrl && <img alt={'logo'} className={'logoImage'} src={logoUrlSource}/> }
 
 // {logoUrlSource ? <img alt={'logo'} src={logoUrlSource}/> : null}
 // <Link href='/'>

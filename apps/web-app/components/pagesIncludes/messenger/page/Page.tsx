@@ -172,7 +172,6 @@ const Page: FC<IProps> = ({}) => {
         <Styles isConversationsMenuOpen={isConversationsMenuOpen}
             //@ts-ignore
                 isActiveConversation={!!activeConversation?._id}
-                id={'full-width-content'}
                 isMaximized={isMaximized}
                 className={'messenger-page main'}>
 

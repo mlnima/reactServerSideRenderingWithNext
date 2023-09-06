@@ -1,8 +1,11 @@
 .searchbar {
   position: relative;
   z-index: 11;
-
-  .open-close-search-form {
+ // background-color: var(--tertiary-background-color, #404040);
+  background-color: transparent;
+  padding: 4px 12px;
+  box-sizing: border-box;
+  .openSearchFormButton{
     border: none;
     display: flex;
     justify-content: center;
@@ -10,19 +13,20 @@
     background-color: transparent;
     outline: none;
     color: var(--primary-text-color, #fff);
+
   }
 
-  .searchbar-form {
+  .searchbarForm {
     justify-content: center;
     position: fixed;
     top: 1px;
     left: 0;
     right: 0;
     width: 100%;
-    background: var(--primary-background-color, #000);
+    background-color: var(--tertiary-background-color, #404040);
 
-    .search-button-widget-close-btn, .searchbar-submit-btn, .search-button-widget-clear-keyword {
-      background: var(--primary-background-color, #000);
+    .searchbarFormCloseButton, .searchbarSubmitButton, .searchbarFormClearButton {
+      background-color: var(--tertiary-background-color, #404040);
       color: var(--primary-text-color, #fff);
       border: none;
       outline: none;
@@ -30,26 +34,27 @@
       justify-content: center;
       align-items: center;
       margin: 0;
-      padding: 9px;
+      padding: 5px 10px;
     }
 
-    .searchbar-input {
-      background: var(--primary-background-color, #000);
+    .searchbarInput {
+      background-color: var(--tertiary-background-color, #404040);
       border: none;
       outline: none;
       color: var(--primary-text-color, #fff);
+      padding: 12px;
     }
 
-    .search-button-widget-clear-keyword {
+    .searchbarFormClearButton {
       display: none;
     }
   }
 
-  .searchbar-form-open{
+  .searchbarFormOpen{
     display:flex;
     animation: searchbarFall .3s linear alternate;
   }
-  .searchbar-form-closed{
+  .searchbarFormClosed{
     display:none;
     animation: none;
   }
@@ -60,31 +65,39 @@
 @media only screen and (min-width: 768px) {
   .searchbar {
     border: var(--default-border);
-    width: clamp(300px, 400px, 650px);;
-
-    .open-close-search-form {
+    width: clamp(300px, 678px, 678px);;
+    padding: 0 12px;
+    border-radius: 2rem;
+    background-color: var(--tertiary-background-color, #404040);
+    .openSearchFormButton {
       display: none;
     }
 
-    .searchbar-form {
+    .searchbarForm{
       display: flex;
       position: initial;
-
-      .searchbar-submit-btn {
+      background-color: transparent;
+      .searchbarInput{
+        background-color: transparent;
+        padding: 2px;
+      }
+      .searchbarSubmitButton {
         display: flex;
         justify-content: center;
         align-items: center;
         right: 0;
+        background-color: transparent;
       }
 
-      .search-button-widget-close-btn {
+      .searchbarFormCloseButton {
         display: none;
       }
 
-      .search-button-widget-clear-keyword {
+      .searchbarFormClearButton {
         display: flex;
         justify-content: center;
         align-items: center;
+        background-color: transparent;
       }
     }
   }

@@ -8,6 +8,7 @@ import AuthenticationNotLoggedInItems from "./AuthenticationNotLoggedInItems";
 import {useAppSelector} from "@store/hooks";
 const AuthenticationLoggedInItems = dynamic(() => import('./AuthenticationLoggedInItems'))
 import './Authentication.styles.scss'
+import Csr from "@components/global/Csr";
 
 interface IProps{
     locale: string,
@@ -33,12 +34,16 @@ const Authentication: FC<IProps>= ({locale,dictionary}) => {
                 <button className="auth-widget-close-btn" onClick={onOpenCloseHandler}>
                     <FontAwesomeIcon className="w-6 h-6" icon={faXmark} />
                 </button>
+                <Csr>
+
+
                 {!loggedIn && <AuthenticationNotLoggedInItems onOpenCloseHandler={onOpenCloseHandler}
                                                                locale={locale}
                                                               dictionary={dictionary}/>}
                 {loggedIn && <AuthenticationLoggedInItems onOpenCloseHandler={onOpenCloseHandler}
                                                            locale={locale}
                                                            dictionary={dictionary} />}
+                </Csr>
             </div>
         </div>
     );

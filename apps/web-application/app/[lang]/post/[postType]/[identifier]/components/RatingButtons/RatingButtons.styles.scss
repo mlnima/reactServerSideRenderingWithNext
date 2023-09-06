@@ -1,11 +1,11 @@
 .rating-buttons{
-  padding: 0 8px;
+  padding: 12px 0;
   box-sizing: border-box;
   margin: 0;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  gap: 10px;
+  gap: 18px;
 
   .rated-message {
     color: var(--secondary-text-color, #ccc);
@@ -15,7 +15,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
     background-color: transparent;
     color: var(--secondary-text-color, #ccc);
     outline: none;

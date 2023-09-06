@@ -34,12 +34,8 @@ interface UserProfileImagePropTypes {
 
 const UserProfileImage: FC<UserProfileImagePropTypes> = ({size, profileRedirect}) => {
 
-    const {userData, loggedIn} = useAppSelector(({user}) => {
-        return {
-            loggedIn: user.loggedIn,
-            userData: user?.userData
-        }
-    })
+    const {userData} = useAppSelector(({user}) => user)
+    const {loggedIn} = useAppSelector(({user}) => user)
 
     const profileImage = useMemo(() => userData?.profileImage?.filePath,[userData?.profileImage?.filePath])
 

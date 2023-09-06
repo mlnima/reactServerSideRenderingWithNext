@@ -4,6 +4,7 @@ import React, {FC, useRef, useState} from 'react';
 import './CardImageRendererUseClient.styles.scss'
 import {useAppDispatch, useAppSelector} from "@store/hooks";
 import {setActiveVideoTrailerId} from "@store/reducers/postsReducers/postsReducer";
+import Csr from "@components/global/Csr";
 
 interface CardImageNextPropTypes {
     imageUrl: string | undefined,
@@ -79,7 +80,6 @@ const CardImageRendererUseClient: FC<CardImageNextPropTypes> =
         }
 
         const onImageErrorHandler = (error: any) => {
-            console.log('error=> ',error)
             if (imageRef?.current){
                imageRef.current.src = fallbackImage
             }
@@ -90,6 +90,7 @@ const CardImageRendererUseClient: FC<CardImageNextPropTypes> =
                 aspectRatio: aspectRatio || '16/9'
             }}>
                 {(!!videoTrailerUrl && activeVideoTrailerId === postId) && <div className="trailer-loading"/>}
+                <Csr>
                 {(!!videoTrailerUrl && activeVideoTrailerId === postId && loadingAnimationOver) ?
                     <video ref={videoTrailerRef}
                            muted
@@ -110,7 +111,7 @@ const CardImageRendererUseClient: FC<CardImageNextPropTypes> =
                     <img src={imageUrl||fallbackImage}
                          ref={imageRef}
                          alt={mediaAlt || ''}
-                         loading={index > 1 ? 'lazy' : 'eager'}
+                         loading={index > 3 ? 'lazy' : 'eager'}
                          onClick={onClickHandler}
                          onMouseEnter={() => onHoverHandler()}
                          onTouchStart={() => onHoverHandler()}
@@ -123,6 +124,7 @@ const CardImageRendererUseClient: FC<CardImageNextPropTypes> =
                          className={`card-image`}
                     />
                 }
+                </Csr>
             </div>
         )
 

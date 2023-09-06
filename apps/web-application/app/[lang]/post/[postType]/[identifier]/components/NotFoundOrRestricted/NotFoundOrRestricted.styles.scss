@@ -1,0 +1,22 @@
+.post-page{
+  width: 100%;
+  grid-column: 1;
+  .notFoundOrRestricted{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-background-color,#000);
+    .entry-header-data{
+      color: var(--primary-text-color,#fff);
+      font-size: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      h1,h2{
+        text-align: center;
+      }
+    }
+  }
+}

@@ -7,7 +7,7 @@ import resetPassword from './usersControllers/resetPassword';
 import getUsers from './usersControllers/getUsers';
 import followUser from './usersControllers/followUser';
 import unfollowUser from './usersControllers/unfollowUser';
-import getUser from './usersControllers/getUser';
+import {getUser, getUserPageInitialData} from './usersControllers/getUser';
 import getSignedInUserData from './usersControllers/getSignedInUserData';
 import getStartConversation from './usersControllers/getStartConversation';
 
@@ -25,6 +25,7 @@ router.post('/resetPassword', authMiddleware, resetPassword);
 router.post('/updateUserData', authMiddleware, updateUserData);
 
 router.get('/getUser', authMiddleware, getUser);
+router.get('/getUserPageInitialData', authMiddleware, getUserPageInitialData);
 router.get('/getUsers', getUsers);
 router.get('/getUserPageData', getUserPageData);
 

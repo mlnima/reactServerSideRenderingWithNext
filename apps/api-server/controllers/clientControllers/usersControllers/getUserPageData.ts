@@ -29,13 +29,12 @@ const getUserPageData = async (req: Request, res: Response) => {
             ])
             .exec();
 
-        console.log('userData=> ',userData)
 
         if (!userData) {
             return res.status(404).json({message: 'User not found'});
         }
 
-        res.status(200).json({
+        const responseData = {
             _id: userData._id,
             username: userData.username,
             profileImage: userData.profileImage,
@@ -43,7 +42,9 @@ const getUserPageData = async (req: Request, res: Response) => {
             followingCount: userData.following?.length || 0,
             isBlocked: (userWhoRequestItData?.blockList || []).includes(userData?._id) || (userData?.blockList || []).includes(userWhoRequestItData?._id) || false,
             isFollowed: (userData?.followers || []).includes(userWhoRequestItData?._id ? userWhoRequestItData?._id?.toString() : null) || false,
-        });
+        }
+
+        res.status(200).json(responseData);
 
     } catch (error) {
         console.error('Error in getUserPageData function:', error);

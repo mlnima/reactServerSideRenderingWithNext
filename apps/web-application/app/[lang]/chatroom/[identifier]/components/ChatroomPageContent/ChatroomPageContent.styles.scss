@@ -1,0 +1,28 @@
+.chatroomPageContent{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 150px;
+  grid-template-rows: 45px 1fr;
+  grid-template-areas:
+    'chatroomTopbar chatroomTopbar'
+    'chatroomMessagingArea chatroomMessagingArea'
+}
+
+.chatroomPageMaximized{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 11;
+}
+
+.visibleUserList{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 150px;
+  grid-template-rows: 45px 1fr;
+  grid-template-areas:
+    'chatroomTopbar chatroomTopbar'
+    'chatroomMessagingArea chatroomOnlineUsersList'
+}

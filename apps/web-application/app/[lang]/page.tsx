@@ -21,18 +21,22 @@ const homePage = async ({params: {lang}}:IProps) => {
     const sidebar = settingsData?.settings?.homePageSettings?.sidebar;
 
     return (
-        <main id={'content'} className={`page-${sidebar || 'no'}-sidebar inner-content`}>
-            <MainWidgetArea dictionary={dictionary}
-                            widgets={widgetsData?.widgets?.home}
-                            locale={locale}
-                            position={'home'}/>
+        <div id={'content'} className={`page-${sidebar || 'no'}-sidebar inner-content`}>
+
+            <main id={'primary'} className={'main homePage'}>
+                <MainWidgetArea dictionary={dictionary}
+                                widgets={widgetsData?.widgets?.home}
+                                locale={locale}
+                                position={'home'}/>
+            </main>
+
             <SidebarWidgetAreaRenderer leftSideWidgets={widgetsData.widgets?.['homePageLeftSidebar']}
                                        rightSideWidgets={widgetsData.widgets?.['homePageRightSidebar']}
                                        dictionary={dictionary}
                                        locale={locale}
                                        sidebar={sidebar || 'no'}
                                        position={'postPage'}/>
-        </main>
+        </div>
     )
 }
 

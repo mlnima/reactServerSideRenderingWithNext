@@ -21,18 +21,14 @@ const AssetSize = () => {
 
     const range = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 200, 300, 400, 500, 1000]
 
-    const {identity} = useSelector(({settings}: Store) => {
-        return {
-            identity: settings?.identity
-        }
-    })
+    const {initialSettings} = useSelector(({settings}: Store) => settings)
 
     const onChangeHandler = (e: React.ChangeEvent<any>) => {
         setSearch({...query, size: e.target.value})
     }
 
     useEffect(() => {
-        setCurrentSize(parseInt(query.size) || identity?.postsCountPerPage || 20 )
+        setCurrentSize(parseInt(query.size) || initialSettings?.postCardsSettings?.numberOfCardsPerPage || 20 )
     }, [query]);
 
     return (

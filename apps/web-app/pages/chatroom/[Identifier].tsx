@@ -159,7 +159,6 @@ const chatRoom: FC<PropTypes> = ({pageData}) => {
     return (
         <Csr>
             <Style
-                id={"full-width-content"}
                 userList={onlineUserListVisibility}
                 isMaximized={isMaximized}
             >

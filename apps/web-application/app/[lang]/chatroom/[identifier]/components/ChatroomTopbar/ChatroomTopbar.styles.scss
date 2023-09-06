@@ -1,0 +1,49 @@
+.chatroomTopbar {
+  height: 50px;
+  padding: 0 8px;
+  box-sizing: border-box;
+  background-color: var(--secondary-background-color, #181818);
+  color: var(--secondary-text-color, #ccc);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: var(--default-border);
+  border-bottom: var(--default-border);
+  grid-area: chatroomTopbar;
+
+  .chatroom-selector {
+    width: auto;
+    outline: none;
+    border: none;
+  }
+
+  .chatroomActionsButtons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    .chatroom-actions {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .topBarActionButton {
+      border: none;
+      outline: none;
+      background-color: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--secondary-text-color, #ccc);
+      svg {
+        width: 35px;
+        height: 35px;
+      }
+    }
+
+    .topBarActionButtonActive {
+      color: var(--primary-active-color, #f90);
+    }
+  }
+}

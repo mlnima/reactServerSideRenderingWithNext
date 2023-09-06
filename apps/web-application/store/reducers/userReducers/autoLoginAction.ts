@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {commonAPIRequestGetSignedInUserData} from "api-requests";
+import {loading} from "@store/reducers/globalStateReducer";
 
 interface AutoLoginActionArgs {
     fields: string[];
@@ -7,7 +8,7 @@ interface AutoLoginActionArgs {
 
 interface AutoLoginActionResponse {
     loggedIn: boolean;
-    userData?: any; // Replace "any" with actual type of userData
+    userData?: any;
 }
 
 export const autoLoginAction = createAsyncThunk<AutoLoginActionResponse, AutoLoginActionArgs>(
@@ -15,7 +16,9 @@ export const autoLoginAction = createAsyncThunk<AutoLoginActionResponse, AutoLog
     async ({ fields }, thunkAPI) => {
         if (localStorage.wt) {
             try {
+                thunkAPI.dispatch(loading(true))
                 const response = await commonAPIRequestGetSignedInUserData(fields);
+                thunkAPI.dispatch(loading(false))
                 return response.data?.userData;
             } catch (error) {
                 localStorage.removeItem('wt');

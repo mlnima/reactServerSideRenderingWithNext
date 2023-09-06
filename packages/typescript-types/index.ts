@@ -34,11 +34,12 @@ import {IMenuItem, Widget} from "./src/widgets/Widget";
 import {PageTypes} from "./src/Page";
 import {WidgetData} from "./src/widgets/Widget";
 import {WidgetSettingsPropTypes} from "./src/widgets/Widget";
-import {Comment} from "./src/Comment";
 import {UniqueDataTypes} from "./src/widgets/Widget";
 import {MenuItem} from "./src/widgets/MenuWidget/MenuItem";
 import {User} from "./src/User";
+import {Comment} from "./src/Comment";
 import {CommentRaw} from "./src/Comment";
+import {NewComment} from "./src/Comment";
 import {IEmail} from "./src/IEmail";
 import {IMessengerConversation} from "./src/messengerTypes/IMessengerConversation";
 import {IMessengerConversationMessage} from "./src/messengerTypes/IMessengerConversationMessage";
@@ -54,6 +55,7 @@ export type {
     MenuItem,
     UniqueDataTypes,
     Comment,
+    NewComment,
     WidgetData,
     WidgetSettingsPropTypes,
     PageSettings,

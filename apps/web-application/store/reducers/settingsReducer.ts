@@ -70,7 +70,14 @@ export const getUncachedSettingsForAdmin = createAsyncThunk(
 export const settingsSlice = createSlice({
     name: 'settings',
     initialState,
-    reducers: {},
+    reducers: {
+        setInitialSettings: (state, action: PayloadAction<any>) => {
+            return {
+                ...state,
+                initialSettings:action.payload
+            }
+        },
+    },
     extraReducers: (builder) => builder
         .addCase(fetchSettings.fulfilled, (state, action: PayloadAction<any>) => {
             return {
@@ -86,7 +93,7 @@ export const settingsSlice = createSlice({
         })
 })
 
-export const {} = settingsSlice.actions
+export const {setInitialSettings} = settingsSlice.actions
 
 export const settingsReducer = (state: RootState) => state?.settings || null
 

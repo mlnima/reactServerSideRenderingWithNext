@@ -1,0 +1,32 @@
+.userPageActionButtons{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+
+  .userPageActionButton {
+   // background-color: transparent;
+    background-color: var(--secondary-background-color,#2b2b2b);;
+    color: var(--primary-text-color,#fff);
+    border: none;
+    padding: 5px 10px;
+    margin: 5px;
+    cursor: pointer;
+
+
+    &:hover {
+      transition: .5s;
+      transform: scale(1.1);
+    }
+
+    &:active {
+      color: var(--secondary-background-color, #181818);
+      background-color: var(--primary-text-color,#fff);
+    }
+  }
+
+
+  @media only screen and (min-width: 768px) {
+    justify-content: flex-start;
+  }
+}

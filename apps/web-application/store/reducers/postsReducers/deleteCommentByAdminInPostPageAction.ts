@@ -8,14 +8,14 @@ export const deleteCommentByAdminInPostPageAction = createAsyncThunk(
         thunkAPI.dispatch(loading(true))
         await clientAPIRequestDeleteCommentByAdmin(commentsListToDelete).then((res) => {
             thunkAPI.dispatch(setAlert({
-                message: res.data.message || 'Comment Deleted',
+                message: res.data.message || 'CommentItem Deleted',
                 type: 'success'
             }))
             return commentsListToDelete
 
         }).catch(err => {
             thunkAPI.dispatch(setAlert({
-                message: 'Error While Deleting Comment',
+                message: 'Error While Deleting CommentItem',
                 type: 'error',
                 err
             }))

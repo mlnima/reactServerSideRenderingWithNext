@@ -1,5 +1,5 @@
 import React, {ReactNode} from 'react';
-import '@components/global/styles/globale.styles.scss'
+import '@components/global/styles/global.styles.scss'
 import dynamic from "next/dynamic";
 import {fetchSettings, fetchWidgets} from "fetch-requests";
 import ReduxProvider from "@store/ReduxProvider";
@@ -16,6 +16,8 @@ import CookiesInformerBar from "@components/CookiesInformerBar/CookiesInformerBa
 import AlertBox from "@components/AlertBox/AlertBox";
 import GoogleAnalytics from "@components/GoogleAnalytics/GoogleAnalytics";
 import WebSocketInitializer from "@components/WebSocketInitializer/WebSocketInitializer";
+import StoreDataInitializer from "@components/global/StoreDataInitializer";
+import MediaCall from "@components/MediaCall/MediaCall";
 
 const TopbarWidgetArea = dynamic(() => import("@components/widgets/widgetAreas/TopbarWidgetArea"))
 const HeaderWidgetArea = dynamic(() => import("@components/widgets/widgetAreas/HeaderWidgetArea"))
@@ -40,7 +42,7 @@ const RootLayout = async ({children, params: {lang}}: { children: ReactNode, par
         <html lang={locale}>
         <body className={`dark `}>
         <ReduxProvider>
-            <div className="flex flex-col min-h-screen">
+            <div className="layout">
                 {initialSettings?.layoutSettings?.topbar &&
                     <TopbarWidgetArea dictionary={dictionary} widgets={staticWidgetsData?.widgets?.topBar}
                                       locale={locale}/>}
@@ -67,6 +69,8 @@ const RootLayout = async ({children, params: {lang}}: { children: ReactNode, par
             <LoginRegisterPopup locale={locale} dictionary={dictionary}/>
             <GlobalCustomStyles customColors={initialSettingsData?.settings?.layoutSettings?.customColors}
                                 customStyles={initialSettingsData?.settings?.layoutSettings?.customStyles}/>
+            <StoreDataInitializer initialSettings={initialSettings}/>
+            {/*<MediaCall/>*/}
         </ReduxProvider>
         </body>
         </html>

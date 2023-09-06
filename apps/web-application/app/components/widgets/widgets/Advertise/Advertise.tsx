@@ -1,58 +1,52 @@
 'use client';
 import {FC, useState, useEffect, memo} from "react";
-import {useRouter} from "next/router";
-import styled from "styled-components";
-import parse from 'html-react-parser'
-
-const AdvertiseStyledDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 102px;
-  min-width: 300px;
-  max-width: 98vw !important;
-
-  .pre-load {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 102px;
-    min-width: 300px;
-  }
-`
+import parse from 'html-react-parser';
+import './Advertise.styles.scss';
+import {usePathname, useSearchParams} from "next/navigation";
+import Skeleton, {SkeletonTheme} from "react-loading-skeleton";
+import 'react-loading-skeleton/dist/skeleton.css'
+import SkeletonRenderer from "@components/Skeletons/SkeletonRenderer";
 
 interface AdvertisePropTypes {
     uniqueData: {
         adCode: string,
-    },
+    }
 }
 
 const Advertise: FC<AdvertisePropTypes> = ({uniqueData}) => {
-    const router = useRouter();
-    const [adCodeData, setAdCodeData] = useState(null)
+
+    const pathname = usePathname()
+    const searchParams = useSearchParams()
+    const [loading, setLoading] = useState(true)
+    const [adCodeData, setAdCodeData] = useState<null | string>(null)
 
     useEffect(() => {
+        setLoading(true)
         setAdCodeData(null)
         setAdCode()
-    }, [router.pathname, router.query]);
+    }, [pathname, searchParams]);
 
     const setAdCode = () => {
-        if (uniqueData?.adCode) {
+        if (!!uniqueData?.adCode) {
             setTimeout(() => {
-                //@ts-ignore
                 setAdCodeData(uniqueData?.adCode)
+                setLoading(false)
+            }, 500)
+        } else {
+            setTimeout(() => {
+                setLoading(false)
             }, 500)
         }
     }
 
+    if (loading) return <div className={'advertiseWrapper'}>
+        <SkeletonRenderer height={102} width={300} count={1}/>
+    </div>
+
     return (
-        <AdvertiseStyledDiv>
-            {!!adCodeData ? parse(adCodeData || '') :
-                <div className='pre-load'>
-                    <span>loading...</span>
-                </div>
-            }
-        </AdvertiseStyledDiv>
+        <div className={'advertiseWrapper'}>
+            {!!adCodeData && parse(adCodeData)}
+        </div>
     )
 };
 export default memo(Advertise)

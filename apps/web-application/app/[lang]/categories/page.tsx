@@ -17,9 +17,7 @@ interface IProps {
     }
 }
 
-export const generateMetadata = categoriesMetaGenerator;
-
-const categoriesPage = async ({params, searchParams}: IProps) => {
+const CategoriesPage = async ({params, searchParams}: IProps) => {
     const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCAL || 'en';
     const dictionary = await getDictionary(locale);
     const settingsData = await fetchSettings(['categoriesPageSettings']);
@@ -53,9 +51,9 @@ const categoriesPage = async ({params, searchParams}: IProps) => {
     });
 
     return (
-        <div id={'content'} className={`page-${sidebar || 'no'}-sidebar inner-content`}>
+        <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
 
-            <main id={'primary'} className={'content main '}>
+            <main id={'primary'} className={'main categoriesPage'}>
                 <WidgetsRenderer dictionary={dictionary}
                                  locale={locale}
                                  widgets={widgetsData.widgets?.['categoriesPageTop']}
@@ -73,14 +71,19 @@ const categoriesPage = async ({params, searchParams}: IProps) => {
                                  widgets={widgetsData.widgets?.['categoriesPageBottom']}
                                  position={'categoriesPageBottom'}/>
             </main>
+
             <SidebarWidgetAreaRenderer leftSideWidgets={widgetsData.widgets?.['categoriesPageLeftSidebar']}
                                        rightSideWidgets={widgetsData.widgets?.['categoriesPageRightSidebar']}
                                        dictionary={dictionary}
                                        locale={locale}
                                        sidebar={sidebar || 'no'}
                                        position={'postPage'}/>
+
         </div>
     );
 };
 
-export default categoriesPage;
+export default CategoriesPage;
+
+export const generateMetadata = categoriesMetaGenerator;
+export const dynamic = 'force-dynamic';

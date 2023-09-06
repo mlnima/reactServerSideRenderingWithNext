@@ -8,7 +8,7 @@ const postNewCommentAction = createAsyncThunk(
     async (commentData: Comment, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         const storeData = thunkAPI.getState()
-
+//@ts-ignore
         clientAPIRequestPostNewComment(commentData)
             .then(()=>{
                 return {

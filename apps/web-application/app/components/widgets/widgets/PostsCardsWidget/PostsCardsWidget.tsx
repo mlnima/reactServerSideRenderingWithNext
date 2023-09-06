@@ -1,6 +1,6 @@
 import {FC} from "react";
 import {Post} from "typescript-types";
-import PostsCardsRenderer from "@components/cards/CardsRenderer/PostsCardsRenderer/PostsCardsRenderer"
+import PostsCardsRenderer from "@components/cards/CardsRenderer/PostsCardsRenderer/PostsCardsRenderer";
 
 interface IProps{
     isSidebar?:boolean,

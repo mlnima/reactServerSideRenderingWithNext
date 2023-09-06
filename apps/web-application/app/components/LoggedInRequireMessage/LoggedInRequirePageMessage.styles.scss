@@ -1,0 +1,9 @@
+.loggedInRequireMessage{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--primary-text-color,#fff);
+  .messageTitle{
+    font-size: xx-large;
+  }
+}

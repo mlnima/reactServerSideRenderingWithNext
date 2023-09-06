@@ -5,9 +5,10 @@
   flex-wrap: wrap;
   background-color: var(--secondary-background-color, #181818);
   color: var(--secondary-text-color, #ccc);
-
-  top: 0;
+padding: 8px;
+  box-sizing: border-box;
   border-radius: 3px;
+  margin: 4px;
 
   .btn-primary {
     color: var(--primary-button-link-text-color);

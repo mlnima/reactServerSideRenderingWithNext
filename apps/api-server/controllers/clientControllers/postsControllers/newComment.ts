@@ -1,22 +1,23 @@
-import {commentSchema,postSchema} from 'models';
+import { Request, Response } from 'express';
+import { commentSchema, postSchema } from 'models';
 
-const newComment = (req, res) => {
-    const commentDataToSave = new commentSchema(req.body);
-    commentDataToSave.save((err,comment) => {
-        if (err){
-            res.status(500).json({message:'comment did not saved',type:'error'});
+const newComment = async (req: Request, res: Response) => {
+    try {
+        const commentDataToSave = new commentSchema(req.body);
+        const savedComment = await commentDataToSave.save();
 
+        if (!savedComment) {
+            return res.status(500).json({ message: 'Comment not saved', type: 'error' });
         }
-        postSchema.findByIdAndUpdate(req.body.onDocumentId,{$push:{comments:[comment._id]}},{new:true}).exec().then(updatePost=>{
-            res.json({updatePost})
 
-        }).catch(error=>{
-            res.status(500).json({message:'comment was saved but document did not updated',type:'error'})
+        await postSchema.findByIdAndUpdate(req.body.onDocumentId, { $push: { comments: [savedComment._id] } }, { new: true }).exec();
 
-        })
+        res.json({ savedComment });
 
-    })
-
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ message: 'Server Error', type: 'error' });
+    }
 };
 
-export default newComment
+export default newComment;

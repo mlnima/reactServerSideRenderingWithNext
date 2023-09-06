@@ -1,0 +1,15 @@
+.learn-post-description{
+  color: var(--secondary-text-color, #ccc);
+  margin: 0 5px;
+  padding: 50px 0;
+  width: 100%;
+  max-width: 98vw;
+  @media only screen and (min-width: 768px) {
+    max-width: 1300px;
+    .crayons-article__body{
+      max-width: 100%;
+      .js-code-highlight{
+      }
+    }
+  }
+}

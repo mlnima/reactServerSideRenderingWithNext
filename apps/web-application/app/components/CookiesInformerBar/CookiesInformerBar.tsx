@@ -18,6 +18,7 @@ const CookiesInformerBar: FC = () => {
     };
 
     if (!renderCookiesBar) return null
+
     return (
         <div id={'cookiePopupWrapper'}>
             <p>

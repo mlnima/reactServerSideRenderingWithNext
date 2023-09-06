@@ -1,0 +1,17 @@
+.soft404{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-background-color,#000);
+
+  h1 {
+    color: var(--primary-text-color,#fff);
+    font-size: xx-large;
+  }
+
+  .back-to-homepage {
+    color: var(--primary-active-color, #f90);
+    text-decoration: none;
+  }
+}

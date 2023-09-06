@@ -19,10 +19,6 @@ interface IProps {
     }
 }
 
-export const dynamic = 'force-dynamic';
-
-export const generateMetadata = categoryMetaGenerator
-
 const CategoryPage = async ({params, searchParams}: IProps) => {
 
     const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCAL || 'en';
@@ -58,9 +54,9 @@ const CategoryPage = async ({params, searchParams}: IProps) => {
     });
 
     return (
-        <div id={'content'} className={`page-${sidebar || 'no'}-sidebar inner-content`}>
+        <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
 
-            <main id={'primary'} className={'main posts-page'}>
+            <main id={'primary'} className={'main categoryPage'}>
                 <MetaAdminQuickAccessBar metaId={params?.categoryId}/>
                 <PostsPageInfo title={postsData?.meta?.translations?.[params?.lang]?.name ?? postsData?.meta?.name}
                                description={
@@ -94,3 +90,6 @@ const CategoryPage = async ({params, searchParams}: IProps) => {
 }
 
 export default CategoryPage;
+
+export const generateMetadata = categoryMetaGenerator;
+export const dynamic = 'force-dynamic';

@@ -11,7 +11,7 @@ interface MetasCardsRendererPropTypes {
 const ActorsCardsRenderer: FC<MetasCardsRendererPropTypes> = ({metas,isSidebar}) => {
 
     return (
-        <div className={`actorsCardsWrapper${isSidebar ? ' Sidebar' : ''}`}>
+        <div className={`actorsCardsWrapper ${isSidebar ? 'actorsCardsWrapperSidebar' : ''}`}>
             {metas?.map((meta, index) => {
                 return (
                     <ActorCard key={meta._id}

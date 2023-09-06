@@ -79,7 +79,7 @@ const Styles = styled.form`
 
     .audio-recording-animation {
       position: fixed;
-      bottom: 45px;
+      bottom: 60px;
       left: 0;
       right: 0;
       top: 0;

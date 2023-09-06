@@ -20,9 +20,6 @@ interface IProps {
     page: string | string[]
 }
 
-export const dynamic = 'force-dynamic';
-
-export const generateMetadata = tagMetaGenerator
 
 const TagPage = async ({params, searchParams}: IProps) => {
 
@@ -58,9 +55,9 @@ const TagPage = async ({params, searchParams}: IProps) => {
     });
 
     return (
-        <div id={'content'} className={`page-${sidebar || 'no'}-sidebar inner-content`}>
+        <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
 
-            <main id={'primary'} className={'main posts-page'}>
+            <main id={'primary'} className={'main tagPage'}>
                 <MetaAdminQuickAccessBar metaId={params?.tagId}/>
                 <PostsPageInfo title={postsData?.meta?.translations?.[params?.lang]?.name ?? postsData?.meta?.name}
                                description={
@@ -94,3 +91,7 @@ const TagPage = async ({params, searchParams}: IProps) => {
 }
 
 export default TagPage;
+
+export const generateMetadata = tagMetaGenerator;
+
+export const dynamic = 'force-dynamic';

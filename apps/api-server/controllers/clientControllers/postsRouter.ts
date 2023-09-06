@@ -3,7 +3,7 @@ import {authMiddleware} from "custom-server-util";
 import authWithUserDataMiddleware from "../../middlewares/authWithUserDataMiddleware";
 import cacheSuccesses from '../../middlewares/apiCache';
 
-import getPosts from './postsControllers/getPosts'
+import {getPosts, getUserPagePosts} from './postsControllers/getPosts'
 import getPost from './postsControllers/getPost'
 import likeDislikeView from './postsControllers/likeDislikeView'
 import newComment from './postsControllers/newComment'
@@ -22,6 +22,7 @@ import getSearch from "./postsControllers/getSearch";
 const router = Router();
 
 router.get('/getPosts',cacheSuccesses,getPosts)
+router.get('/getUserPagePosts',cacheSuccesses,getUserPagePosts)
 router.get('/getSearch',cacheSuccesses,getSearch)
 router.get('/getPost',cacheSuccesses,getPost)
 router.get('/getEditingPost',getPost)

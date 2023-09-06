@@ -33,13 +33,13 @@ export const deleteCommentsAction = createAsyncThunk(
 
         return await dashboardAPIRequestDeleteComments(commentsIds).then((res) => {
             thunkAPI.dispatch(setAlert({
-                message: res.data.message || 'Comment Deleted',
+                message: res.data.message || 'CommentItem Deleted',
                 type: 'success'
             }))
 
         }).catch(err => {
             thunkAPI.dispatch(setAlert({
-                message: 'Error While Deleting Comment',
+                message: 'Error While Deleting CommentItem',
                 type: 'error',
                 err
             }))

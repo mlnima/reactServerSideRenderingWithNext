@@ -7,7 +7,7 @@ import CardTitle from "@components/cards/asset/CardTitle/CardTitle";
 import '../metaCard.styles.scss'
 
 const TextToCanvasImage = dynamic(() => import('@components/cards/asset/TextToCanvasImage/TextToCanvasImage'))
-const CardImageRenderer = dynamic(() => import('@components/cards/asset/CardImageRenderer/CardImageRenderer'))
+const CardImageRendererUseClient = dynamic(() => import('@components/cards/asset/CardImageRenderer/CardImageRendererUseClient'))
 
 interface CategoryCardPropTypes {
     meta: Meta,
@@ -31,7 +31,7 @@ const CategoryCard: FC<CategoryCardPropTypes> =
                 <div className={'card-media'}>
                     <Link href={`/category/${meta?._id}`} className='category-card-link' title={title}>
                         {!!meta.imageUrl ?
-                            <CardImageRenderer imageUrl={meta.imageUrl}
+                            <CardImageRendererUseClient imageUrl={meta.imageUrl}
                                                mediaAlt={title}
                                                index={index}/> :
                             <TextToCanvasImage title={title}

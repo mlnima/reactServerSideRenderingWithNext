@@ -1,14 +1,15 @@
-import {metaSchema,postSchema,settingSchema} from 'models';
+import {metaSchema,postSchema} from 'models';
 import _adminQueryGeneratorForGettingPosts from '../../../_variables/adminVariables/_adminQueryGeneratorForGettingPosts';
 
 const adminGetPosts= async (req, res) => {
     try {
-        const identitySetting = await settingSchema.findOne({type:'identity'}).exec()
+
 
         const findingPostsOptions = _adminQueryGeneratorForGettingPosts(
             {
                 ...req.query,
-                size: !req.query.size? identitySetting?.data?.postsCountPerPage : parseInt(req.query.size),
+                //@ts-ignore
+                size: !req.query.size? (global?.initialSettings?.postCardsSettings?.numberOfCardsPerPage || 20) : parseInt(req.query.size),
                 page: !req.query.page ? 1 : parseInt(req.query.page)
             }
         )

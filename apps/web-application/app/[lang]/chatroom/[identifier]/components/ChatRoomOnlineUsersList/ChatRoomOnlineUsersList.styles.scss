@@ -1,0 +1,14 @@
+.chatroomOnlineUsersList{
+  width: 100%;
+  box-sizing: border-box;
+  grid-area: chatroomOnlineUsersList;
+  background-color: var(--secondary-background-color, #181818);
+  .user-list {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    flex-grow: 1;
+    max-height: 100vh;
+    overflow-y: scroll;
+  }
+}

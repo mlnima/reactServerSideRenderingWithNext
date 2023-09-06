@@ -1,8 +1,7 @@
-"use client";
-import React, {FC, useState, memo} from "react";
-import {usePathname, useRouter} from 'next/navigation';
+'use client';
+import React, {FC, useState} from "react";
+import {useParams, usePathname, useRouter} from 'next/navigation';
 import './LanguagesSwitcher.styles.scss'
-import * as process from "process";
 
 interface IProps {
     locale: string,
@@ -10,37 +9,51 @@ interface IProps {
 
 const LanguagesSwitcher: FC<IProps> = ({locale}) => {
     const {push} = useRouter()
-    const pathName = usePathname()
+    const pathname = usePathname()
+    const params = useParams()
+
     const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const locales = process.env.NEXT_PUBLIC_LOCALS || '';
     const [isOpen, setIsOpen] = useState(false);
 
     const redirectedPathName = (targetedLocale: string) => {
         const locales = (process.env.NEXT_PUBLIC_LOCALS || '').split(' ');
-        if (!pathName) return '/'
-        const segments = pathName.split('/')
-        if (locales.some((locale: string) => pathName.includes(`/${locale}/`))) {
-            const newSegments = [...segments].map(segment => locales.includes(segment) ? targetedLocale : segment)
-            push(newSegments.join('/'));
+
+        if (!pathname) return '/'
+
+        const segments = pathname.split('/')
+        if (locales.some((locale: string) => pathname.includes(`/${locale}/`))) {
+
+            if (targetedLocale === defaultLocale) {
+                const newSegments = [...segments].filter(segment => segment !== params?.lang)
+                push(newSegments.join('/'));
+            } else {
+                const newSegments = [...segments].map(segment => locales.includes(segment) ? targetedLocale : segment)
+                push(newSegments.join('/'));
+            }
+
         } else if (!locales.includes(segments[1])) {
+
             segments.splice(1, 0, targetedLocale);
             push(segments.join('/'));
-        } else if (pathName === '/' || locales.some((locale: string) => pathName.includes(`/${locale}`))) {
+
+        } else if (pathname === '/' || locales.some((locale: string) => pathname.includes(`/${locale}`))) {
+
             if (targetedLocale === defaultLocale) {
                 push(`/`);
             } else {
                 push(`/${targetedLocale}`);
             }
+
         }
     }
 
     return (
-        <div className={'languages-switcher-widget'}>
-            <div className={'languagesSwitcher-widget-current-languages-holder'}>
+        <div className={'languagesSwitcherWidget'}>
+            <div className={'languagesSwitcherWidgetActiveLanguage'}>
                 <button type={'button'} onClick={() => setIsOpen(!isOpen)}>
-                    {/*//@ts-ignore*/}
                     {locale.toUpperCase()}
-                    <svg className="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                          fill="currentColor">
                         <path
                             fillRule="evenodd"
@@ -52,18 +65,22 @@ const LanguagesSwitcher: FC<IProps> = ({locale}) => {
             </div>
 
             {isOpen && (
-                <div
-                    className="origin-top-right absolute right-0 mt-2 w-28 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-                    <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                <div className="languagesSwitcherWidgetLanguages">
+                    <div className={'languagesSwitcherWidgetLanguagesList'}
+                         role={'menu'}
+                         aria-orientation={'vertical'}
+                         aria-labelledby={'options-menu'}>
+
                         {locales.split(' ').map((locale) => (
                             <button
                                 key={locale}
                                 onClick={() => redirectedPathName(locale)}
-                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white "
+                                className={'languagesItem'}
                                 role="menuitem">
                                 {locale.toUpperCase()}
                             </button>
                         ))}
+
                     </div>
                 </div>
             )}

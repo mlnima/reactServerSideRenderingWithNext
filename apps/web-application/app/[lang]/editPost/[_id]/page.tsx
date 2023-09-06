@@ -1,0 +1,36 @@
+import {fetchSettings} from "fetch-requests";
+import {getDictionary} from "../../../../get-dictionary";
+import './page.styles.scss';
+import {i18n} from '../../../../i18n-config'
+import EditPostPageContent from "./components/EditPostPageContent/EditPostPageContent";
+
+interface IProps {
+    params: {
+        lang: string,
+        _id:string
+    }
+}
+
+const EditPostPage = async ({params: {lang,_id}}: IProps) => {
+    const locale = i18n.locales.includes(lang) ? lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCAL || 'en';
+    const dictionary = await getDictionary(locale);
+    const settingsData = await fetchSettings(['editPostPageSettings']);
+    const sidebar = settingsData?.settings?.editPostPageSettings?.sidebar;
+
+    return (
+        <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
+            <main id={'primary'} className={'main editPostPage'}>
+                <EditPostPageContent _id={_id} dictionary={dictionary}/>
+            </main>
+        </div>
+    )
+}
+
+export default EditPostPage;
+
+export const dynamic = 'force-dynamic';
+export const generateMetadata = async ()=>{
+    return{
+        title:'Edit Post'
+    }
+}

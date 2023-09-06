@@ -1,12 +1,13 @@
+'use client';
 import React, {FC} from "react";
 import {loginRegisterForm} from "@store/reducers/globalStateReducer";
-import {useAppDispatch} from "@store/hooks";
+import {useAppDispatch, useAppSelector} from "@store/hooks";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
 import {faPen} from "@fortawesome/free-solid-svg-icons/faPen";
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
 import './AuthenticationNotLoggedInItems.styles.scss';
+import {useSelector} from "react-redux";
+import {Store} from "typescript-types/dist/src/storeTypes/Store";
 
 interface IProps{
     onOpenCloseHandler: () => void,
@@ -19,9 +20,12 @@ const AuthenticationNotLoggedInItems: FC<IProps> = ({onOpenCloseHandler,locale,d
 
     const dispatch = useAppDispatch()
 
-    const {membership, anyoneCanRegister} = useSelector(
-        ({settings}: Store) => settings?.initialSettings?.membershipSettings || {}
-    );
+    const {membership, anyoneCanRegister} = useSelector(({settings}: Store) => {
+        return {
+            membership: settings?.initialSettings?.membershipSettings?.membership || false,
+            anyoneCanRegister: settings?.initialSettings?.membershipSettings?.anyoneCanRegister || false,
+        }
+    });
 
     const onLoginButtonClickHandler = () => {
         dispatch(loginRegisterForm('login'))

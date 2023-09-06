@@ -50,7 +50,7 @@ export function middleware(request: NextRequest) {
         const locale = getLocale(request)
         const params = request?.nextUrl?.searchParams;
 
-        // console.log('request=> ',request.nextUrl)
+
         // const params = request.url.searchParams;
         // e.g. incoming request is /products
         // The new URL is now /en-US/products
@@ -71,7 +71,7 @@ export function middleware(request: NextRequest) {
 
 export const config = {
     // Matcher ignoring `/_next/` and `/api/`
-    matcher: ['/((?!api|_next/static|_next/image|favicon.ico|asset|fonts).*)'],
+    matcher: ['/((?!api|_next/static|_next/image|favicon.ico|asset|fonts|public).*)'],
 }
 
 
