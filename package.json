@@ -39,7 +39,9 @@
     "outdate:web-dashboard-app": "npm outdated -w web-dashboard-app",
     "outdate:sitemaps-generator-packages": "npm outdated -w sitemaps-generator",
     "outdate:custom-scripts-packages": "npm outdated -w custom-scripts",
-    "killNodes": ".\\_devUtil\\windowsNodeProccessBulkKiller.bat"
+    "killNodesWindows": "cmd.exe /c additionalJobs\\windowsNodeProccessBulkKiller.bat",
+    "killNodesUbuntu": "chmod +x ./additionalJobs/kill-node-process.sh"
+
   },
   "dependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",

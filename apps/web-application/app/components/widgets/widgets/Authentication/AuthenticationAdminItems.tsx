@@ -9,8 +9,10 @@ import {faUserShield} from "@fortawesome/free-solid-svg-icons/faUserShield";
 import {faEraser} from "@fortawesome/free-solid-svg-icons/faEraser";
 import {faShield} from "@fortawesome/free-solid-svg-icons/faShield";
 import {faCheck} from "@fortawesome/free-solid-svg-icons/faCheck";
+import {useRouter} from "next/navigation";
 
 const AuthenticationAdminItems = ({}) => {
+    const {refresh} = useRouter()
     const dispatch = useAppDispatch()
     const adminMode = useSelector(({globalState}: Store) => globalState.adminMode)
 
@@ -25,6 +27,13 @@ const AuthenticationAdminItems = ({}) => {
         }
     }
 
+    const onClearCacheHandler = ()=>{
+        commonAPIRequestClearCaches().then(() => {
+            refresh()
+            onReloadHandler()
+        })
+    }
+
     return (
         <>
             <Link href={'/dashboard'} target={'_blank'} className={'logged-item'}>
@@ -34,7 +43,7 @@ const AuthenticationAdminItems = ({}) => {
 
                 Dashboard
             </Link>
-            <span className={'logged-item'} onClick={() => commonAPIRequestClearCaches().then(() => onReloadHandler())}>
+            <span className={'logged-item'} onClick={onClearCacheHandler}>
                    <div className={'icon-wrapper'}>
                        <FontAwesomeIcon icon={faEraser} style={{width: 25, height: 25}}/>
                   </div>
