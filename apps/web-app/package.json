@@ -13,7 +13,7 @@
   "scripts": {
     "build-not-use": "npm run build:next",
     "start": " node next-production-server",
-    "dev": "ts-node --transpile-only ./next-dev-server.js",
+    "dev-not-use": "ts-node --transpile-only ./next-dev-server.js",
     "build:next": "next build",
     "test": "jest --watch"
   },
