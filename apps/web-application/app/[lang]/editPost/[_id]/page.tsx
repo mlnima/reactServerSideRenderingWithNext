@@ -14,7 +14,7 @@ interface IProps {
 const EditPostPage = async ({params: {lang,_id}}: IProps) => {
     const locale = i18n.locales.includes(lang) ? lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCAL || 'en';
     const dictionary = await getDictionary(locale);
-    const settingsData = await fetchSettings(['editPostPageSettings']);
+    const settingsData = await fetchSettings({requireSettings: ['editPostPageSettings']});
     const sidebar = settingsData?.settings?.editPostPageSettings?.sidebar;
 
     return (

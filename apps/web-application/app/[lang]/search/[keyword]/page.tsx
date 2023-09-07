@@ -27,9 +27,9 @@ const searchPage = async ({params, searchParams}: IProps) => {
     const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCAL || 'en';
     const dictionary = await getDictionary(locale);
 
-    const settingsData = await fetchSettings(['searchPageSettings']);
+    const settingsData = await fetchSettings({requireSettings: ['searchPageSettings']});
     const sidebar = settingsData?.settings?.searchPageSettings?.sidebar;
-    const initialSettingsData = await fetchSettings(['initialSettings'])
+    const initialSettingsData = await fetchSettings({requireSettings: ['initialSettings']})
     const numberOfCardsPerPage = initialSettingsData?.settings?.initialSettings?.postCardsSettings?.numberOfCardsPerPage;
 
     const widgetsData = await fetchWidgets(

@@ -1,7 +1,7 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {loading, setAlert} from "../globalStateReducer";
 import {clientAPIRequestUpdatePost} from "api-requests";
-import getEditingPostAction from "@store/reducers/postsReducers/getEditingPostAction";
+// import getEditingPostAction from "@store/reducers/postsReducers/getEditingPostAction";
 
 const updatePostAction = createAsyncThunk(
     'posts/updatePostAction',
@@ -11,7 +11,6 @@ const updatePostAction = createAsyncThunk(
             if (res.data?.message) {
                 console.log(res.data)
                 thunkAPI.dispatch(setAlert({
-                    active: true,
                     type: 'success',
                     message: res.data.message
                 }))

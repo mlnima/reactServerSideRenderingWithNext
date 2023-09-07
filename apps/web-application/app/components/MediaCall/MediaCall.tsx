@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client';
 import React, {FC, useEffect, useMemo, useRef, useState} from "react";
 import Draggable from "react-draggable";
@@ -13,7 +14,6 @@ import {
 } from "@store/reducers/mediaConnectionReducer";
 import Peer from "simple-peer";
 import {setAlert} from "@store/reducers/globalStateReducer";
-import {useRouter} from "next/router";
 
 const MediaCall: FC = () => {
 
@@ -72,7 +72,7 @@ const MediaCall: FC = () => {
         socket.on('callRejected', () => {
             cleanup1LocalAndRemoteStream()
             dispatch(resetMediaConnectionAction(null))
-            dispatch(setAlert({message: 'Call Rejected'}))
+            dispatch(setAlert({message: 'Call Rejected',type:'info'}))
         });
 
         return () => {

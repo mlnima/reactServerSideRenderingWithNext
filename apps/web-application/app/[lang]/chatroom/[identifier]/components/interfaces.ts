@@ -10,6 +10,7 @@ export type TChatroomUser={
     profileImage: {
         filePath: string
     },
+    socketId?:string
 }
 
 export type IChatroomUsers=TChatroomUser[]

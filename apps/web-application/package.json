@@ -30,7 +30,7 @@
     "fetch-requests": "*",
     "lodash.throttle": "^4.1.1",
     "negotiator": "^0.6.3",
-    "next": "^13.4.16",
+    "next": "v13.4.20-canary.19",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-loading-skeleton": "^3.3.1",
@@ -45,7 +45,6 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",
-    "next-translate-plugin": "^2.4.4",
     "postcss": "^8.4.14",
     "sass": "^1.64.1",
     "tailwindcss": "^3.3.2"

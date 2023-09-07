@@ -16,7 +16,7 @@ const homePage = async ({params: {lang}}:IProps) => {
 
     const locale = i18n.locales.includes(lang)  ?  lang :  process.env?.NEXT_PUBLIC_DEFAULT_LOCAL || 'en';
     const dictionary = await getDictionary(locale);
-    const settingsData = await fetchSettings(['homePageSettings']);
+    const settingsData = await fetchSettings({requireSettings: ['homePageSettings']});
     const widgetsData = await fetchWidgets(['homePageLeftSidebar', 'homePageRightSidebar', 'home'], lang);
     const sidebar = settingsData?.settings?.homePageSettings?.sidebar;
 

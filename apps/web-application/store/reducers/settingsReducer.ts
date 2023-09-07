@@ -1,71 +1,23 @@
-// @ts-nocheck
-import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
-import {clientAPIRequestGetSettings, clientAPIRequestGetUncachedSettings} from "api-requests";
-import {loading} from "./globalStateReducer";
 
 interface SettingsStateRaw {
-    initialSettings: {},
-    currentPageSettings: {},
-    isSettingSet: boolean,
-    requestedSettings: string[]
+    initialSettings: {
+        postCardsSettings: {},
+        membershipSettings: {},
+        layoutSettings: {},
+        headDataSettings: {}
+    }
 }
 
 const initialState: SettingsStateRaw = {
     initialSettings: {
-        postCardsSettings:{},
-        membershipSettings:{},
-        layoutSettings:{},
-        headDataSettings:{}
-    },
-    currentPageSettings: {},
-    isSettingSet: false,
-    requestedSettings: [],
-}
-
-interface FetchSettingsProps {
-    requireSettings: string[],
-    options: {
-        page?: string
-        setHeadData: boolean
-    },
-    context
-}
-
-export const fetchSettings = createAsyncThunk(
-    'settings/fetchSettings',
-    async (config: FetchSettingsProps, thunkAPI) => {
-        try {
-            const fetchedSettings = await clientAPIRequestGetSettings(config.requireSettings);
-            return {
-                currentPageSettings: fetchedSettings?.data?.settings?.[`${config.options.page}Settings`] || {},
-                initialSettings: fetchedSettings?.data?.settings?.initialSettings || {},
-                requestedSettings: config.requireSettings,
-                isSettingSet: true,
-            }
-        } catch (err) {
-            console.log(err)
-        }
+        postCardsSettings: {},
+        membershipSettings: {},
+        layoutSettings: {},
+        headDataSettings: {}
     }
-)
-
-export const getUncachedSettingsForAdmin = createAsyncThunk(
-    'settings/getUncachedSettingsForAdmin',
-    async (config: any, thunkAPI) => {
-        try {
-            thunkAPI.dispatch(loading(true))
-            const settingsRequestData = await clientAPIRequestGetUncachedSettings([...(config?.requireSettings || []), 'initialSettings'])
-            thunkAPI.dispatch(loading(false))
-
-            return {
-                initialSettings: settingsRequestData?.data?.settings?.initialSettings?.data
-            }
-
-        } catch (err) {
-            console.log(err)
-        }
-    }
-)
+}
 
 export const settingsSlice = createSlice({
     name: 'settings',
@@ -74,23 +26,10 @@ export const settingsSlice = createSlice({
         setInitialSettings: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
-                initialSettings:action.payload
+                initialSettings: action.payload
             }
         },
-    },
-    extraReducers: (builder) => builder
-        .addCase(fetchSettings.fulfilled, (state, action: PayloadAction<any>) => {
-            return {
-                ...state,
-                ...action.payload
-            }
-        })
-        .addCase(getUncachedSettingsForAdmin.fulfilled, (state, action: PayloadAction<any>) => {
-            return {
-                ...state,
-                ...action.payload
-            }
-        })
+    }
 })
 
 export const {setInitialSettings} = settingsSlice.actions

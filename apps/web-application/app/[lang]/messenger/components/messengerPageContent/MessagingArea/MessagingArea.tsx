@@ -2,7 +2,7 @@
 import React, {FC, useEffect, useRef} from 'react';
 import Message from "../Message/Message";
 import {uniqArrayBy} from 'custom-util'
-import {useAppDispatch, useAppSelector} from "@store/hooks";
+import {useAppSelector} from "@store/hooks";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faComments} from "@fortawesome/free-solid-svg-icons/faComments";
 import {sortArrayByPropertyOfObject} from 'custom-util';
@@ -30,9 +30,7 @@ const MessagingArea: FC<IProps> =
          activeConversation
      }) => {
         const prevScrollPosition = useRef(0);
-        const dispatch = useAppDispatch();
 
-        // const {headerSize} = useAppSelector(({globalState}) => globalState);
         const {userData} = useAppSelector(({user}) => user)
 
         useEffect(() => {
@@ -70,9 +68,6 @@ const MessagingArea: FC<IProps> =
             messageArea?.addEventListener('scroll', handleScroll);
             return () => messageArea?.removeEventListener('scroll', handleScroll);
         }, [activeConversation?.messages]);
-        useEffect(() => {
-            console.log(headerSize)
-        }, [headerSize]);
 
         return (
             <div ref={messageAreaRef}

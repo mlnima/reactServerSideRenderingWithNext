@@ -1,18 +1,21 @@
-import React, {useEffect, useRef, memo, FC} from 'react';
+import React, {useEffect, useRef, FC} from 'react';
 import ChatRoomMessage from './ChatRoomMessage';
 import {ChatroomMessage} from 'typescript-types';
 import socket from 'web-socket-client';
 import {sortArrayByPropertyOfObject} from 'custom-util';
 import {useAppDispatch, useAppSelector} from '@store/hooks';
-import {loading} from '@store/reducers/globalStateReducer';
+import {loading, setAlert} from '@store/reducers/globalStateReducer';
 import './ChatRoomMessageArea.styles.scss';
 
 interface IProp {
-    chatroomId: string;
-    headerSize: number;
-    messageAreaRef: any;
-    autoScroll: boolean;
-    setAutoScroll: Function;
+    chatroomId: string,
+    headerSize: number,
+    messageAreaRef: any,
+    autoScroll: boolean,
+    setAutoScroll: Function,
+    isMaximized:boolean,
+    chatroomMessages: ChatroomMessage[],
+    gettingOlderMessages:boolean
 }
 
 const ChatRoomMessageArea: FC<IProp> = (
@@ -21,13 +24,16 @@ const ChatRoomMessageArea: FC<IProp> = (
         headerSize,
         messageAreaRef,
         autoScroll,
-        setAutoScroll
+        setAutoScroll,
+        isMaximized,
+        chatroomMessages,
+        gettingOlderMessages
     }) => {
 
     const prevScrollPosition = useRef(0);
     const dispatch = useAppDispatch();
-    const isMaximized = useAppSelector(({chatroom}) => chatroom.isMaximized);
-    const chatroomMessages = useAppSelector(({chatroom}) => chatroom?.messages || []);
+
+    // const chatroomMessages = useAppSelector(({chatroom}) => chatroom?.messages || []);
 
     useEffect(() => {
         //@ts-ignore
@@ -43,7 +49,7 @@ const ChatRoomMessageArea: FC<IProp> = (
             prevScrollPosition.current = scrollTop;
 
             // Handle load older messages
-            if (scrollTop === 0) {
+            if (scrollTop === 0 && gettingOlderMessages) {
                 dispatch(loading(true));
                 socket.emit('loadOlderMessages', {
                     chatroomId,
@@ -59,6 +65,13 @@ const ChatRoomMessageArea: FC<IProp> = (
                     }
 
                 }, 500);
+            }
+
+            if (!gettingOlderMessages){
+                dispatch(setAlert({
+                    message: 'No More Messages',
+                    type: 'info',
+                }))
             }
         };
 

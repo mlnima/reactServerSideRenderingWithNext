@@ -24,7 +24,7 @@ const userPage = async ({params, searchParams}: IProps) => {
 
     const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCAL || 'en';
     const dictionary = await getDictionary(locale);
-    const settingsData = await fetchSettings(['userPageSettings']);
+    const settingsData = await fetchSettings({requireSettings: ['userPageSettings']});
 
     const sidebar = settingsData?.settings?.userPageSettings?.sidebar;
 

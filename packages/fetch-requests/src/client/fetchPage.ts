@@ -12,10 +12,13 @@ export const fetchPage = async ({pageName, revalidate}:IFetchPage)=>{
             `${APIServerUrl}/api/v1/pages/getPage?pageName=${pageName}`,
             config({revalidate})
         );
-
+        if (!response.ok) {
+            const errorData = await response.text();
+            throw new Error(errorData);
+        }
         return response.json()
     }catch (error){
-
+        throw error;
     }
 }
 

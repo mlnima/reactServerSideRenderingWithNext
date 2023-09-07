@@ -2,7 +2,10 @@
 import React, {FC, useEffect, useState} from "react";
 import {usePathname, useSearchParams} from "next/navigation";
 import {useAppDispatch, useAppSelector} from "@store/hooks";
-import {clientAPIRequestGetEditingPost, clientAPIRequestUpdatePost, clientAPIRequestUploadImage} from "api-requests";
+import {
+    clientAPIRequestGetEditingPost,
+    clientAPIRequestUpdatePost,
+    clientAPIRequestUploadImage} from "api-requests";
 import {randomNumberGenerator, reduceArrayOfDataToIds} from "custom-util";
 import MultipleImageUploader from "../PostEditorForm/common/MultipleImageUploader/MultipleImageUploader";
 import MetaDataSelector from "../MetaDataSelector/MetaDataSelector";
@@ -11,7 +14,7 @@ import VideoTypeFields from "../PostEditorForm/VideoTypeFields/VideoTypeFields";
 import PostLocation from "../PostEditorForm/common/PostLocation";
 import './EditPostPageContent.styles.scss'
 import updatePostAction from "@store/reducers/postsReducers/updatePostAction";
-import {loading, setAlert} from "@store/reducers/globalStateReducer";
+// import {loading, setAlert} from "@store/reducers/globalStateReducer";
 
 interface IProps {
     _id: string,
@@ -30,6 +33,7 @@ const EditPostPageContent: FC<IProps> = ({_id, dictionary}) => {
     useEffect(() => {
         console.log(editingPost)
     }, [editingPost]);
+
     useEffect(() => {
         getEditingPostData()
     }, [_id]);
@@ -103,6 +107,7 @@ const EditPostPageContent: FC<IProps> = ({_id, dictionary}) => {
                 ...images,
                 ...comments,
                 ...categories,
+                //@ts-ignore
                 ...author,
                 ...tags,
                 ...actors,

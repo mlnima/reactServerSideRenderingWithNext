@@ -1,6 +1,6 @@
 import React, {ReactNode} from 'react';
 import '@components/global/styles/global.styles.scss'
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
 import {fetchSettings, fetchWidgets} from "fetch-requests";
 import ReduxProvider from "@store/ReduxProvider";
 import * as process from "process";
@@ -18,23 +18,26 @@ import GoogleAnalytics from "@components/GoogleAnalytics/GoogleAnalytics";
 import WebSocketInitializer from "@components/WebSocketInitializer/WebSocketInitializer";
 import StoreDataInitializer from "@components/global/StoreDataInitializer";
 import MediaCall from "@components/MediaCall/MediaCall";
+import TopbarWidgetArea from "@components/widgets/widgetAreas/TopbarWidgetArea";
+import HeaderWidgetArea from "@components/widgets/widgetAreas/HeaderWidgetArea";
+import NavigationWidgetArea from "@components/widgets/widgetAreas/NavigationWidgetArea";
+import FooterWidgetArea from "@components/widgets/widgetAreas/FooterWidgetArea";
 
-const TopbarWidgetArea = dynamic(() => import("@components/widgets/widgetAreas/TopbarWidgetArea"))
-const HeaderWidgetArea = dynamic(() => import("@components/widgets/widgetAreas/HeaderWidgetArea"))
-const NavigationWidgetArea = dynamic(() => import("@components/widgets/widgetAreas/NavigationWidgetArea"))
-const FooterWidgetArea = dynamic(() => import("@components/widgets/widgetAreas/FooterWidgetArea"))
+// const TopbarWidgetArea = dynamic(() => import("@components/widgets/widgetAreas/TopbarWidgetArea"))
+// const HeaderWidgetArea = dynamic(() => import("@components/widgets/widgetAreas/HeaderWidgetArea"))
+// const NavigationWidgetArea = dynamic(() => import("@components/widgets/widgetAreas/NavigationWidgetArea"))
+// const FooterWidgetArea = dynamic(() => import("@components/widgets/widgetAreas/FooterWidgetArea"))
 
 export async function generateStaticParams() {
     return i18n.locales.map((lng: string) => ({lng}))
 }
 
-export const generateMetadata = LayoutMetaGenerator;
 
 const RootLayout = async ({children, params: {lang}}: { children: ReactNode, params: { lang: string } }) => {
 
     const locale = i18n.locales.includes(lang) ? lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCAL || 'en'
     const dictionary = await getDictionary(locale)
-    const initialSettingsData = await fetchSettings(['initialSettings'])
+    const initialSettingsData = await fetchSettings({requireSettings:['initialSettings']})
     const initialSettings = initialSettingsData?.settings?.initialSettings
     const staticWidgetsData = await fetchWidgets(['footer', 'header', 'topBar', 'navigation'], locale)
 
@@ -78,3 +81,8 @@ const RootLayout = async ({children, params: {lang}}: { children: ReactNode, par
 }
 
 export default RootLayout;
+
+
+export const generateMetadata = LayoutMetaGenerator;
+// export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';

@@ -18,7 +18,6 @@ const postNewCommentAction = createAsyncThunk(
             }
         }).catch(() => {
             thunkAPI.dispatch(setAlert({
-                active: true,
                 type: 'error',
                 message: 'Something Went Wrong'
             }))

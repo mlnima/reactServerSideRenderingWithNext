@@ -11,9 +11,9 @@ const WebSocketInitializer: FC = () => {
 
     useEffect(() => {
         socket.on('incomingCallSocketEvent', ({callType, signal, callerData,conversationId}) => {
-            if (conversationId){
-                dispatch(getAConversationAction({conversationId}))
-            }
+            // if (conversationId){
+            //     dispatch(getAConversationAction({conversationId}))
+            // }
             //conversationId
 
             dispatch(initialIncomingCallAction({

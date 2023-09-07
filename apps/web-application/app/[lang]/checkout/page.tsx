@@ -16,8 +16,13 @@ const checkoutPage = async ({params: {lang}}:IProps) => {
 
     const locale = i18n.locales.includes(lang)  ?  lang :  process.env?.NEXT_PUBLIC_DEFAULT_LOCAL || 'en';
     const dictionary = await getDictionary(locale);
-    const settingsData = await fetchSettings(['checkoutPagePageSettings']);
-    const widgetsData = await fetchWidgets(['checkoutPageLeftSidebar', 'checkoutPageRightSidebar', 'checkoutPage'], lang);
+    const settingsData = await fetchSettings({requireSettings: ['checkoutPagePageSettings']});
+    const widgetsData = await fetchWidgets(
+        [
+            'checkoutPageLeftSidebar',
+            'checkoutPageRightSidebar',
+            'checkoutPage'
+        ], lang);
     const sidebar = settingsData?.settings?.checkoutPageSettings?.sidebar;
 
     return (

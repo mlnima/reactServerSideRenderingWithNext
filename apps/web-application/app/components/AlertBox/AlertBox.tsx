@@ -8,6 +8,8 @@ import {faCircleCheck} from "@fortawesome/free-solid-svg-icons/faCircleCheck";
 import {faTriangleExclamation} from "@fortawesome/free-solid-svg-icons/faTriangleExclamation";
 import {faCircleExclamation} from "@fortawesome/free-solid-svg-icons/faCircleExclamation";
 import {faXmark} from "@fortawesome/free-solid-svg-icons/faXmark";
+import Csr from "@components/global/Csr";
+import './AlertBox.styles.scss'
 
 interface IProps {
     dictionary: {
@@ -25,16 +27,18 @@ const AlertBox: FC<IProps> = ({dictionary}) => {
             const component = true
             setTimeout(() => {
                 if (component) {
-                    dispatch(closeAlert(null))
+                    dispatch(closeAlert({}))
                 }
-            }, 3000)
+            }, 5000)
         }
     }, [alert]);
+
 
     if (!alert.active) return null
 
     return (
-        <div id='alertBox' onClick={() => dispatch(closeAlert(null))}>
+        <Csr>
+        <div id='alertBox' onClick={() => dispatch(closeAlert({}))}>
             <Draggable handle=".handle">
                 <div className='alertMessage'>
                     <div className='alertMessageHeader handle'>
@@ -52,8 +56,7 @@ const AlertBox: FC<IProps> = ({dictionary}) => {
                                 }}/>
 
                         </p>
-                        <button className='closeAlert' onClick={() => dispatch(closeAlert(null))}>
-                            <span className={'icon faTimes'}/>
+                        <button className='closeAlert' onClick={() => dispatch(closeAlert({}))}>
                             <FontAwesomeIcon icon={faXmark} style={{width: 25, height: 25}}/>
                         </button>
                     </div>
@@ -65,6 +68,7 @@ const AlertBox: FC<IProps> = ({dictionary}) => {
                 </div>
             </Draggable>
         </div>
+        </Csr>
     );
 
 };

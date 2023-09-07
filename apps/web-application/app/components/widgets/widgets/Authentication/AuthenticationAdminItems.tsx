@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {commonAPIRequestClearCaches} from "api-requests";
 import {useAppDispatch} from "@store/hooks";
-import {setAdminMode} from "@store/reducers/globalStateReducer";
+import {setAdminMode, setAlert} from "@store/reducers/globalStateReducer";
 import {useSelector} from "react-redux";
 import {Store} from "typescript-types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -9,11 +9,15 @@ import {faUserShield} from "@fortawesome/free-solid-svg-icons/faUserShield";
 import {faEraser} from "@fortawesome/free-solid-svg-icons/faEraser";
 import {faShield} from "@fortawesome/free-solid-svg-icons/faShield";
 import {faCheck} from "@fortawesome/free-solid-svg-icons/faCheck";
-import {useRouter} from "next/navigation";
+import {usePathname, useSelectedLayoutSegment} from "next/navigation";
+import clearCachesByServerAction
+    from "@components/widgets/widgets/Authentication/adminServerActions/adminServerActions";
 
 const AuthenticationAdminItems = ({}) => {
-    const {refresh} = useRouter()
+
     const dispatch = useAppDispatch()
+    const pathname = usePathname()
+    const segment = useSelectedLayoutSegment()
     const adminMode = useSelector(({globalState}: Store) => globalState.adminMode)
 
     const onSetAdminModeHandler = () => {
@@ -21,17 +25,19 @@ const AuthenticationAdminItems = ({}) => {
         localStorage.setItem('adminMode', localStorage?.adminMode === 'true' ? 'false' : 'true')
     }
 
-    const onReloadHandler = () => {
-        if (typeof window !== 'undefined') {
-            window.location.reload();
-        }
-    }
+    const onClearCacheHandler = async () => {
+        try {
+            await commonAPIRequestClearCaches()
+            await clearCachesByServerAction({path: pathname, segment: segment as any})
 
-    const onClearCacheHandler = ()=>{
-        commonAPIRequestClearCaches().then(() => {
-            refresh()
-            onReloadHandler()
-        })
+            dispatch(setAlert({
+                message: 'Cache cleared',
+                type: 'info'
+            }))
+        } catch (error) {
+
+        }
+
     }
 
     return (

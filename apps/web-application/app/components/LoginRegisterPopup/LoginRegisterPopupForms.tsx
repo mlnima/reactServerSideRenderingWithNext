@@ -85,11 +85,11 @@ const LoginRegisterPopupForms: FC<IProps> = ({locale,dictionary}: IProps) => {
         const checkPasswords = state.password === state.password2;
 
         if (!checkUsername) {
-            dispatch(setAlert({message: 'you can not use this username', type: 'error', active: true}))
+            dispatch(setAlert({message: 'you can not use this username', type: 'error'}))
         }
 
         if (!checkPasswords) {
-            dispatch(setAlert({message: 'password is to short or is not match', type: 'error', active: true}))
+            dispatch(setAlert({message: 'password is to short or is not match', type: 'error'}))
         }
 
         if (checkUsername && checkPasswords) {

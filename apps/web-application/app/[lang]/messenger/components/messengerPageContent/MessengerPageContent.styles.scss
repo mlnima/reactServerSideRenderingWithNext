@@ -43,7 +43,6 @@
     width: 100%;
     display: none;
     grid-area: messaging;
-    //display: ${({isConversationsMenuOpen,isActiveConversation}) => isConversationsMenuOpen && !isActiveConversation ? 'none ' : 'grid'};
     grid-template-rows: 50px 1fr 50px;
   }
 

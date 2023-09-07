@@ -1,3 +1,5 @@
+// @ts-nocheck
+//not in use
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
 import {uniqArrayBy} from "custom-util";

@@ -1,10 +1,9 @@
 'use client';
-import React, {FC, useEffect, useRef, useState} from "react";
+import React, {FC, SetStateAction, useEffect, useRef, useState} from "react";
 import {useAppDispatch, useAppSelector} from "@store/hooks";
 import socket from "web-socket-client";
 import {headerSizeCalculator, uniqArrayBy} from "custom-util";
-import {loading} from "@store/reducers/globalStateReducer";
-import {newMessage, setMessages} from "@store/reducers/chatroomReducer";
+import {loading, setAlert} from "@store/reducers/globalStateReducer";
 import {dispatchSocketId} from "@store/reducers/userReducers/userReducer";
 import ChatroomTopbar from "../ChatroomTopbar/ChatroomTopbar";
 import ChatRoomMessageArea from "../ChatRoomMessageArea/ChatRoomMessageArea";
@@ -13,6 +12,7 @@ import ChatRoomOnlineUsersList from "../ChatRoomOnlineUsersList/ChatRoomOnlineUs
 import {IChatroomUsers, IPreference} from "../interfaces";
 import './ChatroomPageContent.styles.scss'
 import Soft404 from "@components/Soft404/Soft404";
+import {ChatroomMessage} from "typescript-types/dist/src/Chatroom/ChatroomMessage";
 
 interface IProps {
     identifier?: string,
@@ -22,8 +22,7 @@ interface IProps {
     },
 }
 
-
-const ChatroomPageContent: FC<IProps> = ({ identifier, dictionary, pageData}) => {
+const ChatroomPageContent: FC<IProps> = ({identifier, dictionary, pageData}) => {
 
     const [preference, setPreference] = useState<IPreference>({
         autoScroll: true,
@@ -32,6 +31,7 @@ const ChatroomPageContent: FC<IProps> = ({ identifier, dictionary, pageData}) =>
         isMaximized: false
     })
     const [chatroomUsers, setChatroomUsers] = useState<IChatroomUsers>([])
+    const [chatroomMessages, setChatroomMessages] = useState<ChatroomMessage[]>([])
 
     const [autoScroll, setAutoScroll] = useState(true);
     const messageAreaRef = useRef<HTMLDivElement | null>(null);
@@ -39,17 +39,13 @@ const ChatroomPageContent: FC<IProps> = ({ identifier, dictionary, pageData}) =>
     const user = useAppSelector((store) => store.user);
     const [isJoined, setIsJoined] = useState(false);
     const [headerSize, setHeaderSize] = useState(0);
+    const [gettingOlderMessages, setGettingOlderMessages] = useState(true);
 
-    const updatePreference = (key: string, value: any) => {
-        setPreference((prevState: IPreference) => {
-            const newPreference = {
-                ...prevState,
-                [key]: value
-            }
-            localStorage.setItem('chatroomPreference', JSON.stringify(newPreference))
-            return newPreference
-        })
-    }
+    useEffect(() => {
+        joinUserToChatroom()
+        //@ts-ignore
+    }, [user.loggedIn, pageData?.chatroom?._id, user.socketId]);
+
     useEffect(() => {
         const chatroomLocalStoragePreference = localStorage.getItem('chatroomPreference')
         const preferenceData = chatroomLocalStoragePreference ? JSON.parse(chatroomLocalStoragePreference) : null
@@ -60,21 +56,6 @@ const ChatroomPageContent: FC<IProps> = ({ identifier, dictionary, pageData}) =>
             })
         }
     }, []);
-
-    useEffect(() => {
-        if (!pageData?.chatroom?._id || !user.loggedIn || isJoined || !user.socketId) return;
-        setIsJoined(true);
-        const userDataForJoiningRoom = {
-            chatroomId: pageData?.chatroom?._id,
-            author: {
-                _id: user.userData?._id,
-                username: user.userData?.username,
-                profileImage: user.userData?.profileImage,
-            },
-            socketId: user.socketId,
-        };
-        socket.emit('joinUserToTheRoom', userDataForJoiningRoom);
-    }, [user.loggedIn, pageData?.chatroom?._id, user.socketId]);
 
     useEffect(() => {
         if (!pageData?.chatroom?._id) return;
@@ -90,20 +71,27 @@ const ChatroomPageContent: FC<IProps> = ({ identifier, dictionary, pageData}) =>
             setChatroomUsers(prevState => (uniqArrayBy([...prevState, ...chatroomOnlineUsers], 'username')))
         };
 
-        const handleMessageFromChatroom = (newMessageData: object) => {
-            dispatch(newMessage(newMessageData));
+        const handleMessageFromChatroom = (newMessageData: ChatroomMessage) => {
+            //@ts-ignore
+            setChatroomMessages((prevState: SetStateAction<ChatroomMessage>) => [...prevState, newMessageData])
         };
 
         const handleJoinSocketAndGetInitialData = (data: {
             socketId: string,
-            recentChatRoomMessages: {}[],
+            recentChatRoomMessages: ChatroomMessage[],
             onlineUsersList: {}[],
         }) => {
             dispatch(dispatchSocketId(data.socketId));
-            //@ts-ignore
-            setChatroomUsers(prevState => (uniqArrayBy([...prevState, ...data.onlineUsersList], 'username')))
 
-            dispatch(setMessages(data?.recentChatRoomMessages));
+            if (data.onlineUsersList?.length>0){
+                //@ts-ignore
+                setChatroomUsers(prevState => (uniqArrayBy([...prevState, ...data.onlineUsersList], 'username')))
+            }
+
+            if (data?.recentChatRoomMessages?.length > 0) {
+                setChatroomMessages(data?.recentChatRoomMessages)
+            }
+
             if (!messageAreaRef?.current) return;
             setTimeout(() => {
                 if (messageAreaRef?.current) {
@@ -116,8 +104,17 @@ const ChatroomPageContent: FC<IProps> = ({ identifier, dictionary, pageData}) =>
             }, 500);
         };
 
-        const handleOlderMessagesLoaded = (data: { messages: {}[] }) => {
-            dispatch(setMessages(data?.messages));
+        const handleOlderMessagesLoaded = (data: { messages: ChatroomMessage[] }) => {
+
+            if (data?.messages?.length > 0) {
+                setChatroomMessages((prevState) => [...data?.messages, ...prevState])
+            } else {
+                setGettingOlderMessages(false)
+                dispatch(setAlert({
+                    message: 'No More Messages',
+                    type: 'info',
+                }))
+            }
 
             setTimeout(() => {
                 dispatch(loading(false));
@@ -154,6 +151,34 @@ const ChatroomPageContent: FC<IProps> = ({ identifier, dictionary, pageData}) =>
 
     }, []);
 
+    const updatePreference = (key: string, value: any) => {
+        setPreference((prevState: IPreference) => {
+            const newPreference = {
+                ...prevState,
+                [key]: value
+            }
+            localStorage.setItem('chatroomPreference', JSON.stringify(newPreference))
+            return newPreference
+        })
+    }
+
+    const joinUserToChatroom = () => {
+        //@ts-ignore
+        if (!pageData?.chatroom?._id || !user.loggedIn || isJoined || !user.socketId) return;
+        setIsJoined(true);
+        const userDataForJoiningRoom = {
+            chatroomId: pageData?.chatroom?._id,
+            author: {
+                _id: user.userData?._id,
+                username: user.userData?.username,
+                profileImage: user.userData?.profileImage,
+            },
+            //@ts-ignore
+            socketId: user?.socketId,
+        };
+        socket.emit('joinUserToTheRoom', userDataForJoiningRoom);
+    }
+
     if (!pageData?.chatroom?._id) {
         return <Soft404 dictionary={dictionary}/>;
     }
@@ -177,6 +202,9 @@ const ChatroomPageContent: FC<IProps> = ({ identifier, dictionary, pageData}) =>
                 autoScroll={autoScroll}
                 setAutoScroll={setAutoScroll}
                 headerSize={headerSize}
+                isMaximized={preference?.isMaximized}
+                chatroomMessages={chatroomMessages}
+                gettingOlderMessages={gettingOlderMessages}
             />
 
             <ChatRoomTools chatroomId={pageData?.chatroom?._id}/>

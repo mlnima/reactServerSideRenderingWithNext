@@ -2,10 +2,6 @@ import {FC} from "react";
 import './ActorDetails.styles.scss';
 
 interface IProps {
-    // additionalInfo: {
-    //     name: string,
-    //     value: string
-    // }[]
     additionalInfo: any
 }
 

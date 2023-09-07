@@ -8,16 +8,15 @@ import {getSpecificUserDataAction} from "@store/reducers/userReducers/getSpecifi
 import {unfollowUserAction} from "@store/reducers/userReducers/unfollowUserAction";
 import {followUserAction} from "@store/reducers/userReducers/followUserAction";
 
-
 const initialUserData = {
     _id:'',
     username: '',
-    profileImage: '',
-    draftPost:{}
+    profileImage: {
+        filePath:''
+    },
+    draftPost:{},
+    socketId:''
 }
-
-
-
 
 const initialState = {
     userData: initialUserData,

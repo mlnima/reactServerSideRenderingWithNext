@@ -1,31 +1,9 @@
-import React, {FC, memo, useMemo} from "react";
-import styled from "styled-components";
+'use client';
+import React, {FC, memo} from "react";
 import Link from "next/link";
 import ImageContent from "./ImageContent";
 import {useAppSelector} from "@store/hooks";
-
-const Style = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-
-  .user-info-profile-button-image {
-    border-radius: 50%;
-    width: ${({size}: UserProfileImageStylePropTypes) => size || 48}px;
-    height: ${({size}: UserProfileImageStylePropTypes) => size || 48}px;
-    box-sizing: border-box;
-  }
-
-  .user-info-profile-button-icon {
-    cursor: pointer;
-    color: var(--secondary-text-color,#ccc);
-  }
-`
-
-interface UserProfileImageStylePropTypes {
-    size?: number
-}
+import Csr from "@components/global/Csr";
 
 interface UserProfileImagePropTypes {
     size?: number,
@@ -37,16 +15,17 @@ const UserProfileImage: FC<UserProfileImagePropTypes> = ({size, profileRedirect}
     const {userData} = useAppSelector(({user}) => user)
     const {loggedIn} = useAppSelector(({user}) => user)
 
-    const profileImage = useMemo(() => userData?.profileImage?.filePath,[userData?.profileImage?.filePath])
-
-
     return (
-        <Style className={'user-profile-image'} size={size}>
-            {profileRedirect && loggedIn ?
-                <Link href={`/profile`}><ImageContent profileImage={profileImage} size={size}/></Link> :
-                <ImageContent profileImage={userData?.profileImage?.filePath} size={size}/>
-            }
-        </Style>
+        <div className={'user-profile-image'}>
+            <Csr>
+                {profileRedirect && loggedIn ?
+                    <Link href={`/profile`}>
+                        <ImageContent profileImage={userData?.profileImage?.filePath} size={size || 48}/>
+                    </Link> :
+                    <ImageContent profileImage={userData?.profileImage?.filePath} size={size || 48}/>
+                }
+            </Csr>
+        </div>
     )
 
 

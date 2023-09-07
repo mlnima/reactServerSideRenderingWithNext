@@ -1,5 +1,5 @@
 'use client';
-import React, {FC, useRef, useState} from 'react';
+import React, {FC, useEffect, useRef, useState} from 'react';
 import {useAppDispatch, useAppSelector} from "@store/hooks";
 import {loading, loginRegisterForm, setAlert} from "@store/reducers/globalStateReducer";
 import './Comments.styles.scss'
@@ -25,6 +25,8 @@ const Comments: FC<IProps> = ({dictionary, postId}) => {
     const commentsAllowScrollRef = useRef<boolean>(true)
     const dispatch = useAppDispatch()
     const [showComments, setShowComments] = useState<boolean>(false)
+    const [allowFetchMoreComments, setAllowFetchMoreComments] = useState<boolean>(true)
+    const [allowUserToComment, setAllowUserToComment] = useState<boolean>(true)
     const [commentsData, setCommentsData] = useState<Comment[]>([])
     const [draftCommentBody, setDraftCommentBody] = useState<string>('')
     const adminMode = useAppSelector(({globalState}) => globalState?.adminMode);
@@ -49,22 +51,28 @@ const Comments: FC<IProps> = ({dictionary, postId}) => {
             } as NewComment
             commentsAllowScrollRef.current = false
             await postNewComment({commentData}).then((response: any) => {
+                if (!!response?.saveComment?._id){
+                    setCommentsData((prevState: Comment[]) => {
+                        const newCommentData = response?.savedComment;
+                        const completeCommentData = {
+                            ...newCommentData,
+                            author: {
+                                //@ts-ignore
+                                profileImage: userData?.profileImage,
+                                //@ts-ignore
+                                username: userData?.username,
+                                _id: userData?._id
+                            }
+                        };
 
-                setCommentsData((prevState: Comment[]) => {
-                    const newCommentData = response?.savedComment;
-                    const completeCommentData = {
-                        ...newCommentData,
-                        author: {
-                            //@ts-ignore
-                            profileImage: userData?.profileImage,
-                            //@ts-ignore
-                            username: userData?.username,
-                            _id: userData?._id
-                        }
-                    };
-
-                    return [completeCommentData, ...prevState];
-                })
+                        return [completeCommentData, ...prevState];
+                    })
+                }
+            }).catch(error=>{
+                dispatch(setAlert({
+                    message: error.message,
+                    type: 'error',
+                }))
             }).finally(() => {
                 setDraftCommentBody('')
                 dispatch(loading(false))
@@ -100,25 +108,28 @@ const Comments: FC<IProps> = ({dictionary, postId}) => {
         }
     }
 
-
     const onShowCommentsHandler = () => {
         setShowComments(!showComments)
-        if (commentsData?.length > 0) return
         onGetComments()
     }
 
     const onGetComments = async () => {
         try {
-            if (!postId) return
+            if (!postId || !allowFetchMoreComments) return
             dispatch(loading(true))
             commentsAllowScrollRef.current = true
+            const limit = 4
+
             await fetchComments({
                 onDocument: postId,
                 skip: commentsData?.length || 0,
-                limit: 4
+                limit,
             }).then((response: { comments: Comment[] }) => {
                 if (response?.comments?.length > 0) {
                     setCommentsData((prevState: Comment[]) => [...prevState, ...response?.comments])
+                }
+                if (response?.comments?.length < limit) {
+                    setAllowFetchMoreComments(false)
                 }
 
             }).finally(() => {
@@ -132,6 +143,10 @@ const Comments: FC<IProps> = ({dictionary, postId}) => {
             }))
         }
     }
+
+    // useEffect(() => {
+    //     console.log(allowFetchMoreComments)
+    // }, [allowFetchMoreComments]);
 
     return (
         <div className={'commentsContentWrapper'}>

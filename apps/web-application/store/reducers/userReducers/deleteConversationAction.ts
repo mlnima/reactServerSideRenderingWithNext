@@ -16,9 +16,9 @@ export const deleteConversationAction = createAsyncThunk<DeleteConversationActio
             );
             return { deletedConversationId: _id };
         } catch (error) {
-            thunkAPI.dispatch(
-                setAlert({ message: error.response.data.message, type: 'error' })
-            );
+            // thunkAPI.dispatch(
+            //     setAlert({ message: error.response.data.message, type: 'error' })
+            // );
             return {};
         }
     }

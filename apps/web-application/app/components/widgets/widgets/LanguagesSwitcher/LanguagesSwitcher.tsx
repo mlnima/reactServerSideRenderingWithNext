@@ -1,7 +1,7 @@
 'use client';
 import React, {FC, useState} from "react";
 import {useParams, usePathname, useRouter} from 'next/navigation';
-import './LanguagesSwitcher.styles.scss'
+import './LanguagesSwitcher.styles.scss';
 
 interface IProps {
     locale: string,
@@ -16,8 +16,10 @@ const LanguagesSwitcher: FC<IProps> = ({locale}) => {
     const locales = process.env.NEXT_PUBLIC_LOCALS || '';
     const [isOpen, setIsOpen] = useState(false);
 
+
     const redirectedPathName = (targetedLocale: string) => {
         const locales = (process.env.NEXT_PUBLIC_LOCALS || '').split(' ');
+        const queryString = window.location.search;
 
         if (!pathname) return '/'
 
@@ -26,16 +28,15 @@ const LanguagesSwitcher: FC<IProps> = ({locale}) => {
 
             if (targetedLocale === defaultLocale) {
                 const newSegments = [...segments].filter(segment => segment !== params?.lang)
-                push(newSegments.join('/'));
+                push(newSegments.join('/') + queryString);
             } else {
                 const newSegments = [...segments].map(segment => locales.includes(segment) ? targetedLocale : segment)
-                push(newSegments.join('/'));
+                push(newSegments.join('/') + queryString);
             }
 
         } else if (!locales.includes(segments[1])) {
-
             segments.splice(1, 0, targetedLocale);
-            push(segments.join('/'));
+            push(segments.join('/')+ queryString);
 
         } else if (pathname === '/' || locales.some((locale: string) => pathname.includes(`/${locale}`))) {
 

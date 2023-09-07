@@ -8,9 +8,9 @@ type Props = {
 }
 
 const actorMetaGenerator = async ({params, searchParams}: Props, parent?: ResolvingMetadata): Promise<Metadata> => {
-    const settingsData = await fetchSettings(['actorPageSettings']);
+    const settingsData = await fetchSettings({requireSettings: ['actorPageSettings']});
     const fallbackImage = '/asset/images/default/no-image-available.png'
-    const initialSettingsData = await fetchSettings(['initialSettings'])
+    const initialSettingsData = await fetchSettings({requireSettings: ['initialSettings']})
     const numberOfCardsPerPage = initialSettingsData?.settings?.initialSettings?.postCardsSettings?.numberOfCardsPerPage;
     const currentPageQuery = searchParams?.page;
     const currentPage = (currentPageQuery && typeof currentPageQuery === 'string') ?

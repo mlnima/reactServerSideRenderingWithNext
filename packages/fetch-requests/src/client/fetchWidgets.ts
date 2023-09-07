@@ -11,9 +11,14 @@ export const fetchWidgets = async (widgets: string[], locale: string,revalidate?
             config({revalidate})
         );
 
+        if (!response.ok) {
+            const errorData = await response.text();
+            throw new Error(errorData);
+        }
+
         return  response.json()
     }catch (error){
-        console.error('error=> ',error)
+        throw error;
     }
 }
 

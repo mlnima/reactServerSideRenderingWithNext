@@ -32,7 +32,7 @@ const PostPage = async ({params: {lang, identifier, postType}}: IProps) => {
     const locale = i18n.locales.includes(lang) ? lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCAL || 'en';
     const dictionary = await getDictionary(locale)
     const postData = await fetchPost(identifier)
-    const settingsData = await fetchSettings(['postPageSettings'])
+    const settingsData = await fetchSettings({requireSettings: ['postPageSettings']})
     const widgetsData = await fetchWidgets(['postPageLeftSidebar', 'postPageRightSidebar', 'underPost'], lang)
     const sidebar = settingsData?.settings?.postPageSettings?.sidebar
 
@@ -46,7 +46,7 @@ const PostPage = async ({params: {lang, identifier, postType}}: IProps) => {
                 <PostAdminQuickAccessBar post={postData?.post}/>
                 <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
 
-                    <main id={'primary'} className='postPage'>
+                    <main id={'primary'} className='main postPage'>
 
                         <NotFoundOrRestricted dictionary={dictionary}
                                               relatedPosts={postData.relatedPosts}
@@ -70,9 +70,12 @@ const PostPage = async ({params: {lang, identifier, postType}}: IProps) => {
     }
 
     return (
-        <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
+        <>
             <PostAdminQuickAccessBar post={postData.post}/>
-            <main id={'primary'} className='postPage'>
+
+        <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
+
+            <main id={'primary'} className={'main postPage'}>
 
                 {postType === 'video' ?
                     <VideoTypePostPage widgets={widgetsData.widgets?.['underPost']}
@@ -98,14 +101,16 @@ const PostPage = async ({params: {lang, identifier, postType}}: IProps) => {
                                                    dictionary={dictionary} locale={locale}/> : null
                 }
 
-                <SidebarWidgetAreaRenderer leftSideWidgets={widgetsData.widgets?.['postPageLeftSidebar']}
-                                           rightSideWidgets={widgetsData.widgets?.['postPageRightSidebar']}
-                                           dictionary={dictionary}
-                                           locale={locale}
-                                           sidebar={sidebar || 'no'}
-                                           position={'postPage'}/>
+
             </main>
+            <SidebarWidgetAreaRenderer leftSideWidgets={widgetsData.widgets?.['postPageLeftSidebar']}
+                                       rightSideWidgets={widgetsData.widgets?.['postPageRightSidebar']}
+                                       dictionary={dictionary}
+                                       locale={locale}
+                                       sidebar={sidebar || 'no'}
+                                       position={'postPage'}/>
         </div>
+        </>
     )
 }
 

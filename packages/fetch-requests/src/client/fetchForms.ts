@@ -13,10 +13,13 @@ export const postFormData =  async ({formDataToPost, revalidate}: IPostFormData)
             `${APIServerUrl}/api/v1/forms/saveFormData`,
             config({revalidate, method: 'POST', body: {data: formDataToPost}})
         );
-
+        if (!response.ok) {
+            const errorData = await response.text();
+            throw new Error(errorData);
+        }
         return await response.json()
 
     } catch (error) {
-
+        throw error;
     }
 }

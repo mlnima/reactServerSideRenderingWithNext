@@ -4,6 +4,7 @@ $grid-gap:8px;
   grid-gap: $grid-gap;
   justify-content: center;
   align-items: center;
+  padding: 8px 0;
 
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
 

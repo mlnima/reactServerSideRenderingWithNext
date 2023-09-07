@@ -10,9 +10,9 @@ type Props = {
 
 const categoryMetaGenerator = async ({params, searchParams}: Props, parent?: ResolvingMetadata): Promise<Metadata> => {
     const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCAL || 'en';
-    const settingsData = await fetchSettings(['categoryPageSettings']);
+    const settingsData = await fetchSettings({requireSettings: ['categoryPageSettings']});
     const fallbackImage = '/asset/images/default/no-image-available.png'
-    const initialSettingsData = await fetchSettings(['initialSettings'])
+    const initialSettingsData = await fetchSettings({requireSettings: ['initialSettings']})
     const numberOfCardsPerPage = initialSettingsData?.settings?.initialSettings?.postCardsSettings?.numberOfCardsPerPage;
     const currentPageQuery = searchParams?.page;
     const currentPage = (currentPageQuery && typeof currentPageQuery === 'string') ?

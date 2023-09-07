@@ -13,8 +13,12 @@ export const fetchUserPageInitialData = async ({userWhoRequestIt,username,revali
             `${APIServerUrl}/api/v1/users/getUserPageInitialData?userWhoRequestIt=${userWhoRequestIt}&username=${username}`,
             config({revalidate,useWtToken:true})
         );
+        if (!response.ok) {
+            const errorData = await response.text();
+            throw new Error(errorData);
+        }
         return response.json()
     }catch (error){
-
+        throw error;
     }
 }

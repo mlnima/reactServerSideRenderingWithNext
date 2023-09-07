@@ -24,10 +24,10 @@ const CategoryPage = async ({params, searchParams}: IProps) => {
     const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCAL || 'en';
     const dictionary = await getDictionary(locale);
 
-    const settingsData = await fetchSettings(['categoryPageSettings']);
+    const settingsData = await fetchSettings({requireSettings: ['categoryPageSettings']});
     const sidebar = settingsData?.settings?.categoryPageSettings?.sidebar;
 
-    const initialSettingsData = await fetchSettings(['initialSettings'])
+    const initialSettingsData = await fetchSettings({requireSettings: ['initialSettings']})
     const numberOfCardsPerPage = initialSettingsData?.settings?.initialSettings?.postCardsSettings?.numberOfCardsPerPage;
     const widgetsData = await fetchWidgets(
         [

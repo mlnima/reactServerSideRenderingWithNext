@@ -35,7 +35,7 @@
     "outdate:packages": "npm outdated",
     "outdate:api-server-packages": "npm outdated -w api-server",
     "outdate:socket-server-packages": "npm outdated -w socket-server",
-    "outdate:web-app-packages": "npm outdated -w web-app",
+    "outdate:web-application-packages": "npm outdated -w web-application",
     "outdate:web-dashboard-app": "npm outdated -w web-dashboard-app",
     "outdate:sitemaps-generator-packages": "npm outdated -w sitemaps-generator",
     "outdate:custom-scripts-packages": "npm outdated -w custom-scripts",

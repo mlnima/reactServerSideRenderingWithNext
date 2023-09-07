@@ -11,12 +11,14 @@
   background-color: rgba(0,0,0,.6);
   z-index: 1010;
 
+
   .alertMessage {
     min-width: 300px;
     max-width: 600px;
     background-color: var(--secondary-background-color, #181818);
-    padding: 0;
     border-radius: 5px;
+    padding: 8px;
+    box-sizing: border-box;
 
     .alertMessageHeader {
       display: flex;
@@ -24,13 +26,14 @@
       justify-content: space-between;
       border-radius: 5px 5px 0 0;
       padding: 5px 0;
+      border-bottom: var(--default-border);
 
       .closeAlert {
         color: var(--primary-text-color,#fff);
         background-color: transparent;
         border: none;
         height: 25px;
-        width: 40px;
+        width: 25px;
         display: flex;
         justify-content: center;
       }
@@ -41,6 +44,7 @@
         height: 25px;
         width: 25px;
         display: flex;
+
         justify-content: center;
 
         .icon {

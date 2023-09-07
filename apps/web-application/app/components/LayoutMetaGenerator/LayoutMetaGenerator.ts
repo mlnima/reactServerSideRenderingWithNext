@@ -11,7 +11,7 @@ type Props = {
 const LayoutMetaGenerator = async ({params: {lang}, searchParams}: Props, parent?: ResolvingMetadata): Promise<Metadata> => {
 
     const fallbackIcon = '/asset/images/default/favicon.png'
-    const settingsData = await fetchSettings(['initialSettings'])
+    const settingsData = await fetchSettings({requireSettings: ['initialSettings']})
 
     return {
         title: settingsData?.settings?.initialSettings?.headDataSettings?.translations?.[lang]?.title ??

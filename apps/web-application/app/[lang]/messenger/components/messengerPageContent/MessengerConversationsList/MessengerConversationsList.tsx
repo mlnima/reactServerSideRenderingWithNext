@@ -1,10 +1,8 @@
 import MessengerConversationPreview from "./MessengerConversationPreview/MessengerConversationPreview";
 import {IMessengerConversation} from "typescript-types";
 import {sortArrayByPropertyOfObject} from 'custom-util';
-import {useRouter} from "next/navigation";
 import {uniqArrayBy} from "custom-util";
 import {FC, useEffect, useRef} from "react";
-import {useAppSelector} from "@store/hooks";
 import './MessengerConversationsList.styles.scss'
 
 interface IProps {
@@ -22,15 +20,8 @@ const MessengerConversationsList: FC<IProps> = (
         headerSize
     }) => {
 
-
-
     const conversationListRef = useRef<null | HTMLDivElement>(null)
     const prevScrollPosition = useRef(0);
-    // const {
-    //     activeConversation,
-    //     isMaximized,
-    // } = useAppSelector(({messenger}) => messenger);
-    // const {headerSize} = useAppSelector(({globalState}) => globalState);
 
     useEffect(() => {
         if (conversationListRef.current) {
@@ -41,7 +32,6 @@ const MessengerConversationsList: FC<IProps> = (
         }
 
     }, []);
-
 
     useEffect(() => {
         //@ts-ignore

@@ -4,21 +4,12 @@ import {IPreference} from "../interfaces";
 import {useAppDispatch, useAppSelector} from "@store/hooks";
 import {clientAPIRequestGetAConversation, clientAPIRequestGetConversationsList} from "api-requests";
 import socket from 'web-socket-client';
-import {useRouter, useSearchParams, usePathname} from "next/navigation";
-// import {
-//     cleanActiveConversation,
-//     newMessageInActiveConversation,
-//     setDraftMessageData,
-//     setMessengerState
-// } from "@store/reducers/messengerReducer";
-// import {getHeaderSizeAction} from "@store/reducers/globalStateReducer";
+import {useSearchParams, usePathname} from "next/navigation";
 import {useIsMobile} from "react-hooker-lib";
-// import {getAConversationAction} from "@store/reducers/messengerActions/getAConversationAction";
 import {deleteAConversationAction} from "@store/reducers/messengerActions/deleteAConversation";
 import {loadOlderMessagesAction} from "@store/reducers/messengerActions/loadOlderMessagesAction";
 import './MessengerPageContent.styles.scss'
 import Link from "next/link";
-
 import MessengerConversationsList from "./MessengerConversationsList/MessengerConversationsList";
 import MessengerHeader from "./MessengerHeader/MessengerHeader";
 import MessagingArea from "./MessagingArea/MessagingArea";
@@ -36,7 +27,6 @@ interface IProps {
 }
 
 const messengerPageContent: FC<IProps> = ({dictionary}) => {
-    const router = useRouter()
     const pathname = usePathname()
     const dispatch = useAppDispatch()
     const isMobile = useIsMobile();
@@ -45,9 +35,6 @@ const messengerPageContent: FC<IProps> = ({dictionary}) => {
     const hasRun = useRef(false);
 
     const [conversationsList, setConversationsList] = useState([])
-    // const [audioMessage, setAudioMessage] = useState<string>('')
-    // const [imageMessage, setImageMessage] = useState<string>('')
-    // const [textMessage, setTextMessage] = useState('')
     const [headerSize, setHeaderSize] = useState(0)
     const [autoScroll, setAutoScroll] = useState<boolean>(true)
 
@@ -60,26 +47,15 @@ const messengerPageContent: FC<IProps> = ({dictionary}) => {
         createdAt: null,
         updatedAt: null,
     })
-    const [isConversationsMenuOpen, setIsConversationsMenuOpen] = useState<boolean>(true)
 
-    // const [draftMessage, setDraftMessage] = useState<IDraftMessage>({
-    //     imageContent: '',
-    //     videoContent: '',
-    //     audioContent: '',
-    //     textContent: '',
-    // })
+    const [isConversationsMenuOpen, setIsConversationsMenuOpen] = useState<boolean>(true)
 
     const [preference, setPreference] = useState<IPreference>({
         autoScroll: true,
         isMaximized: false,
     })
 
-    const {loggedIn, userData} = useAppSelector(({user}) => user)
-
-    // useEffect(() => {
-    //     console.log(activeConversation)
-    // }, [activeConversation]);
-
+    const {loggedIn} = useAppSelector(({user}) => user)
 
     useEffect(() => {
         const conversationId = searchParams.get('_id') as string;
@@ -153,7 +129,7 @@ const messengerPageContent: FC<IProps> = ({dictionary}) => {
                 ...prevState,
                 messages: [...(prevState?.messages || []), messageData]
             }))
-            // dispatch(newMessageInActiveConversation(messageData));
+
         };
 
         socket.on("getPrivateMessage", handleGetPrivateMessage);
@@ -170,13 +146,6 @@ const messengerPageContent: FC<IProps> = ({dictionary}) => {
         }
     }, [activeConversation]);
 
-    // useEffect(() => {
-    //     if (typeof window !== 'undefined') {
-    //         dispatch(getHeaderSizeAction(0))
-    //     }
-    // }, [isMobile, router]);
-
-
     const onGetConversationListHandler = () => {
         clientAPIRequestGetConversationsList({limit: 10, skip: conversationsList?.length}).then(response => {
             //@ts-ignore
@@ -191,6 +160,7 @@ const messengerPageContent: FC<IProps> = ({dictionary}) => {
     const onStartTypingHandler = () => {
 
     }
+
     const onDeleteConversationHandler = (conversationId: string) => {
         dispatch(deleteAConversationAction(conversationId))
     }
