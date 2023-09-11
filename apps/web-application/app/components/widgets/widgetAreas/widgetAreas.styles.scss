@@ -21,7 +21,10 @@
 
 
 .header-widget-area{
-  flex-wrap: wrap;
+
+  .inner-content{
+    flex-wrap: wrap;
+  }
 }
 
 
