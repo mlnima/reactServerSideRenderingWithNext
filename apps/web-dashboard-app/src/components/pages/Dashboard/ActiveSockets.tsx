@@ -1,21 +1,21 @@
 import React, {useEffect, useState} from 'react';
-import socket from 'web-socket-client';
+// import socket from 'web-socket-client';
 
 
 const ActiveSockets = () => {
     const [activeSockets, setActiveSockets] = useState([]);
 
-    useEffect(() => {
-        socket.emit('giveSocketsList');
-
-        socket.on('takeSocketLists', (sockets) => {
-            setActiveSockets(sockets);
-        });
-
-        return () => {
-            socket.off('takeSocketLists');
-        };
-    }, []);
+    // useEffect(() => {
+    //     socket.emit('giveSocketsList');
+    //
+    //     socket.on('takeSocketLists', (sockets) => {
+    //         setActiveSockets(sockets);
+    //     });
+    //
+    //     return () => {
+    //         socket.off('takeSocketLists');
+    //     };
+    // }, []);
 
     return (
         <div>

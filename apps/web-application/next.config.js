@@ -2,11 +2,10 @@
 require('module-alias/register')
 require('dotenv').config({path: '../../.env'});
 const rewrites = require('./nextConfigs/rewrites')
-const redirects = require('./nextConfigs/redirects')
 // const nextTranslate = require('next-translate-plugin')
 // const pluginsConfig = require('./nextConfigs/next.configPlugins')
 // const withPlugins = require('next-compose-plugins');
-const i18n = require("./i18n");
+// const i18n = require("./i18n");
 const {postTypes} = require("data-structures");
 const postTypeQueryMatcher = `:postType(${postTypes.join('|')})?`
 const languageQueryMatcher = `(${process.env.NEXT_PUBLIC_LOCALS.split(' ').join('|')})`;
@@ -16,7 +15,7 @@ const nextConfig = {
     eslint: {
         ignoreDuringBuilds: true,
     },
-    defaultLocale: i18n.defaultLocale,
+    // defaultLocale: i18n.defaultLocale,
     experimental: {
         serverActions: true,
     },

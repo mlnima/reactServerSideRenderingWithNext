@@ -41,13 +41,9 @@ const MainRouter = () => {
             <Route path="/dashboard/meta" element={<Meta/>}/>
             <Route path="/dashboard/form/:id" element={<Form/>}/>
             <Route path="/dashboard/fileManager" element={<FileManager/>}/>
-
             <Route path="/dashboard/settings/defaultPages" element={<DefaultPageSettings/>}/>
-
-
             <Route path="/dashboard/tools" element={<Tools/>}/>
             <Route path="/dashboard/tools/terminal" element={<Terminal/>}/>
-
             <Route path="/dashboard/translations" element={<Translations/>}/>
             <Route path="/dashboard/settings/initialSettings" element={<InitialSettings/>}/>
             <Route path="/dashboard/settings/widgets" element={<Widgets/>}/>
@@ -56,8 +52,6 @@ const MainRouter = () => {
             <Route path="/dashboard/importer/content" element={<Content/>}/>
             <Route path="/dashboard/importer/youtube" element={<Youtube/>}/>
             <Route path="/dashboard/importer/postsImporter" element={<PostsImporter/>}/>
-
-
             <Route path={'/dashboard/login'} element={<Login/>}/>
             <Route path="*" element={<NotFound/>}/>
 
