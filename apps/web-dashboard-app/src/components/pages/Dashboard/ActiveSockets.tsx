@@ -19,16 +19,16 @@ const ActiveSockets = () => {
 
     return (
         <div>
-            {activeSockets?.length &&
-                <>
-                    <h2>Active Sockets:</h2>
-                    <ul>
-                        {activeSockets.map((socketId) => (
-                            <li key={socketId}>{socketId}</li>
-                        ))}
-                    </ul>
-                </>
-            }
+            {/*{activeSockets?.length &&*/}
+            {/*    <>*/}
+            {/*        <h2>Active Sockets:</h2>*/}
+            {/*        <ul>*/}
+            {/*            {activeSockets.map((socketId) => (*/}
+            {/*                <li key={socketId}>{socketId}</li>*/}
+            {/*            ))}*/}
+            {/*        </ul>*/}
+            {/*    </>*/}
+            {/*}*/}
 
         </div>
     );
