@@ -19,6 +19,10 @@ apps/web-app/public/uploads
 apps/web-app/locales/*/customTranslation.json
 apps/web-app/public/*.xml
 apps/web-app/public/robots.txt
+apps/web-application/public/uploads
+apps/web-application/locales/*/customTranslation.json
+apps/web-application/public/*.xml
+apps/web-application/public/robots.txt
 ssl/**
 
 static
