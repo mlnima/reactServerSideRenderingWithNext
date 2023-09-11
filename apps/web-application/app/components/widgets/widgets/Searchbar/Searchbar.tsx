@@ -21,7 +21,7 @@ const SearchBar: React.FC<IProps> = ({dictionary, locale}) => {
     const pathname = usePathname()
     const [keyword, setKeyword] = useState<string>('');
     const [open, setOpen] = useState<boolean>(false);
-    const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+    const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCAL || 'en';
 
     const onSearchHandler = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();

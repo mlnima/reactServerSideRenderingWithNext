@@ -9,6 +9,7 @@ import {i18n} from './i18n-config'
 //     de: () => import('./dictionaries/de.json').then((module) => module.default),
 //     cs: () => import('./dictionaries/cs.json').then((module) => module.default),
 // }
+
 const dictionaries = i18n.locales.reduce((final : any,current :string)=>{
     try {
         final[current] = ()=>import(`./dictionaries/${current}.json`).then((module) => module.default)
@@ -20,6 +21,7 @@ const dictionaries = i18n.locales.reduce((final : any,current :string)=>{
 
 
 export const getDictionary = async (locale: Locale) => {
+
     try {
         return dictionaries[locale]()
     }catch (error){

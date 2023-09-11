@@ -12,7 +12,7 @@ const LanguagesSwitcher: FC<IProps> = ({locale}) => {
     const pathname = usePathname()
     const params = useParams()
 
-    const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+    const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCAL || 'en';
     const locales = process.env.NEXT_PUBLIC_LOCALS || '';
     const [isOpen, setIsOpen] = useState(false);
 
