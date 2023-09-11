@@ -78,8 +78,8 @@ import _getServerSideStaticPageData from "../../store_toolkit/_storeVariables/_g
 
 const checkout = () => {
     // const dispatch = useAppDispatch()
-    // const identity = useSelector(store => store?.settings.identity)
-    // const userData = useSelector(store => store?.user.userData)
+    // const identity = useSelector(utils => utils?.settings.identity)
+    // const userData = useSelector(utils => utils?.user.userData)
     // const router = useRouter()
     // const locale = (router.locale || router.query.locale) === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? '' : router.locale || router.query.locale || '';
     // const [state, setState] = useState({
@@ -181,7 +181,7 @@ const checkout = () => {
     //     // })
     // }
 
-    // create order data for paypal from itemsData and store it in orderData
+    // create order data for paypal from itemsData and utils it in orderData
     // useEffect(() => {
     //     if (itemsData.length ) {
     //         const VAT = props?.eCommerce?.data?.VAT ?? 0;

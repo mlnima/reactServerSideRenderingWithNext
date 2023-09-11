@@ -4,7 +4,7 @@ import {postTypes} from "data-structures";
 import {getExportingPosts} from "@store/reducers/postsReducer";
 import {useAppDispatch} from "@store/hooks";
 
-// import {adminExportPosts} from "@store/adminActions/adminPanelPostsActions";
+// import {adminExportPosts} from "@utils/adminActions/adminPanelPostsActions";
 
 const PostsExporterStyledDiv = styled.div`
   display: flex;

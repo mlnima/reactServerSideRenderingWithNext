@@ -1,12 +1,15 @@
+'use client';
 import React, {Dispatch, FC, SetStateAction, useEffect, useRef, useState} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faMicrophone} from '@fortawesome/free-solid-svg-icons/faMicrophone';
+import {useAppSelector} from "@store/hooks";
 
 interface IProps {
     setAudioMessage: Dispatch<SetStateAction<string>>;
 }
 
 const VoiceRecorderButton: FC<IProps> = ({setAudioMessage}) => {
+    const {userData} = useAppSelector(({user}) => user)
     const [isRecording, setIsRecording] = useState(false);
     const [elapsedTime, setElapsedTime] = useState(0);
     const [recorder, setRecorder] = useState<MediaRecorder | null>(null);
@@ -81,7 +84,7 @@ const VoiceRecorderButton: FC<IProps> = ({setAudioMessage}) => {
         <>
             {isRecording &&
                 <div className={'audio-recording-animation'} onClick={handleRecordingStop}>
-                    <FontAwesomeIcon icon={faMicrophone} style={{width: '120px', height: '120px'}}/>
+                    <FontAwesomeIcon icon={faMicrophone} style={{width: 120, height: 120}}/>
                     {isRecording && <div className="counter">{elapsedTime.toFixed(1)}</div>}
                 </div>
             }

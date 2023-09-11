@@ -31,7 +31,7 @@ const adminAuthMiddleware = async (req: RequestWithUserData, res: Response, next
         next()
     } else {
         return res.status(401).json({
-            message: 'User not authorized'
+            message: 'UserModel not authorized'
         });
     }
 };

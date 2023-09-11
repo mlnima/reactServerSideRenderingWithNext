@@ -1,40 +1,54 @@
+'use client';
 import React, {FC, useEffect, useRef, useState} from 'react';
 import socket from 'web-socket-client';
-import {loginRegisterForm} from "@store/reducers/globalStateReducer";
 import {useAppDispatch, useAppSelector} from "@store/hooks";
 import SomeoneIsTyping from "./SomeoneIsTyping";
 import UploadImageButton from "./UploadImageButton";
 import VoiceRecorderButton from "./VoiceRecorderButton";
 import RecordedAudioPreview from "./RecordedAudioPreview";
 import './ChatRoomTools.styles.scss'
+import {setAlert} from "@store/reducers/globalStateReducer";
 
 interface IProps {
-    chatroomId: string
+    chatroomId: string,
+
+    setAutoScroll(value: boolean): void
 }
 
-const ChatRoomTools: FC<IProps> = ({chatroomId}) => {
+const ChatRoomTools: FC<IProps> = ({chatroomId, setAutoScroll}) => {
     const inputRef = useRef<HTMLInputElement>(null);
-    const dispatch = useAppDispatch()
 
     const {loggedIn} = useAppSelector(({user}) => user)
-    const {_id} = useAppSelector(({user}) => user)
-    const {username} = useAppSelector(({user}) => user)
+    const {_id} = useAppSelector(({user}) => user?.userData)
+
+    const {username} = useAppSelector(({user}) => user?.userData)
+    const {userData} = useAppSelector(({user}) => user)
+
+    const dispatch = useAppDispatch()
 
     const [audioMessage, setAudioMessage] = useState<string>('')
     const [messageText, setMessageText] = useState('')
+    const [lastMessageTime, setLastMessageTime] = useState<any>(null)
     const [someoneTypes, setSomeoneTypes] = useState({
         username: '',
         active: false
     });
 
-    //@ts-ignore
-    const onSubmitHandler = e => {
-        e.preventDefault()
-        if (!loggedIn) {
-            dispatch(loginRegisterForm('register'))
-            return
-        }
+    const [iAmTyping, setIAmTyping] = useState(false)
 
+
+    const onSubmitHandler = (e: any) => {
+        e.preventDefault()
+
+        if (!loggedIn) return
+
+        if (lastMessageTime && Date.now() - lastMessageTime < 2 * 1000) {
+            dispatch(setAlert({
+                message: "You must wait 15 seconds between messages.",
+                type: 'info'
+            }))
+            return;
+        }
 
         if (messageText) {
             const messageBody = {
@@ -43,8 +57,19 @@ const ChatRoomTools: FC<IProps> = ({chatroomId}) => {
                 type: 'message',
                 messageData: messageText
             }
-            socket.emit('messageToChatroom', messageBody)
+            socket.emit('messageToChatroom', {
+                messageBody,
+                authorData: {
+                    profileImage: {
+                        filePath:userData.profileImage?.filePath
+                    },
+                    username: userData.username,
+                    _id: userData._id
+                }
+            })
             setMessageText('')
+            setLastMessageTime(Date.now())
+            setAutoScroll(true)
         } else if (audioMessage) {
             const messageBody = {
                 chatroom: chatroomId,
@@ -53,34 +78,39 @@ const ChatRoomTools: FC<IProps> = ({chatroomId}) => {
                 messageData: audioMessage
             }
             setAudioMessage('')
-            socket.emit('messageToChatroom', messageBody)
+            socket.emit('messageToChatroom', {
+                messageBody,
+                authorData: {
+                    profileImage: {
+                        filePath:userData.profileImage?.filePath
+                    },
+                    username: userData.username,
+                    _id: userData._id
+                }
+            })
         }
     }
 
     const onStartTypingHandler = () => {
-        if (username) {
-            socket.emit('startTyping', chatroomId, username)
+        if (username && !iAmTyping) {
+            socket.emit('iAmTyping', chatroomId, username)
         }
+        setIAmTyping(true)
+        setTimeout(() => {
+            setIAmTyping(false)
+        }, 60000)
     }
 
 
     useEffect(() => {
 
-        socket.on('startTyping', ({username, activeChatroomId}) => {
-            if (activeChatroomId === chatroomId && username) {
-                setSomeoneTypes({
-                    ...someoneTypes,
-                    username,
-                    active: true
-                })
-            }
+        socket.on('someoneIsTyping', ({username, chatroomId}) => {
+            setSomeoneTypes({
+                ...someoneTypes,
+                username,
+                active: true
+            })
 
-        });
-    }, []);
-
-
-    useEffect(() => {
-        if (someoneTypes.active) {
             setTimeout(() => {
                 setSomeoneTypes({
                     ...someoneTypes,
@@ -88,9 +118,9 @@ const ChatRoomTools: FC<IProps> = ({chatroomId}) => {
                     active: false
                 })
             }, 3000)
-        }
-    }, [someoneTypes]);
 
+        });
+    }, []);
 
     return (
         <form id={'chatroomToolBox'} onSubmit={e => onSubmitHandler(e)}>

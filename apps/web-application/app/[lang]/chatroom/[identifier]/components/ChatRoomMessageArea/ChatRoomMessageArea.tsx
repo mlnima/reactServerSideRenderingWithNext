@@ -1,21 +1,23 @@
+'use client';
 import React, {useEffect, useRef, FC} from 'react';
 import ChatRoomMessage from './ChatRoomMessage';
 import {ChatroomMessage} from 'typescript-types';
 import socket from 'web-socket-client';
 import {sortArrayByPropertyOfObject} from 'custom-util';
-import {useAppDispatch, useAppSelector} from '@store/hooks';
-import {loading, setAlert} from '@store/reducers/globalStateReducer';
+import {useAppDispatch} from '@store/hooks';
+import {loading} from '@store/reducers/globalStateReducer';
 import './ChatRoomMessageArea.styles.scss';
 
 interface IProp {
     chatroomId: string,
     headerSize: number,
-    messageAreaRef: any,
+    messageAreaRef: React.RefObject<HTMLDivElement>,
     autoScroll: boolean,
     setAutoScroll: Function,
-    isMaximized:boolean,
+    isMaximized: boolean,
     chatroomMessages: ChatroomMessage[],
-    gettingOlderMessages:boolean
+    gettingOlderMessages: React.MutableRefObject<boolean>,
+    onDeleteMessageHandler: (messageId: string) => void,
 }
 
 const ChatRoomMessageArea: FC<IProp> = (
@@ -27,20 +29,21 @@ const ChatRoomMessageArea: FC<IProp> = (
         setAutoScroll,
         isMaximized,
         chatroomMessages,
-        gettingOlderMessages
+        gettingOlderMessages,
+        onDeleteMessageHandler
     }) => {
 
     const prevScrollPosition = useRef(0);
     const dispatch = useAppDispatch();
 
-    // const chatroomMessages = useAppSelector(({chatroom}) => chatroom?.messages || []);
+
 
     useEffect(() => {
-        //@ts-ignore
-        const handleScroll = (event) => {
-            const {scrollTop, clientHeight, scrollHeight} = event.target;
 
-            // Handle auto scroll toggle
+        const handleScroll = (event: Event) => {
+            const target = event.target as HTMLDivElement;
+            const {scrollTop, clientHeight, scrollHeight} = target;
+
             if (prevScrollPosition.current > scrollTop) {
                 setAutoScroll(false);
             } else if (scrollTop + clientHeight >= scrollHeight - 5) {
@@ -48,30 +51,12 @@ const ChatRoomMessageArea: FC<IProp> = (
             }
             prevScrollPosition.current = scrollTop;
 
-            // Handle load older messages
-            if (scrollTop === 0 && gettingOlderMessages) {
+            if (scrollTop === 0 && gettingOlderMessages?.current) {
                 dispatch(loading(true));
                 socket.emit('loadOlderMessages', {
                     chatroomId,
                     currentlyLoadedMessagesCount: chatroomMessages.length,
                 });
-                setTimeout(() => {
-                    dispatch(loading(false));
-                    if (messageAreaRef?.current) {
-                        messageAreaRef.current.scroll({
-                            top: 1,
-                            behavior: 'smooth',
-                        });
-                    }
-
-                }, 500);
-            }
-
-            if (!gettingOlderMessages){
-                dispatch(setAlert({
-                    message: 'No More Messages',
-                    type: 'info',
-                }))
             }
         };
 
@@ -83,9 +68,7 @@ const ChatRoomMessageArea: FC<IProp> = (
 
     useEffect(() => {
         if (autoScroll && messageAreaRef.current) {
-            //@ts-ignore
             messageAreaRef.current.scroll({
-                //@ts-ignore
                 top: messageAreaRef.current.scrollHeight + 50,
                 behavior: 'smooth',
             });
@@ -96,13 +79,12 @@ const ChatRoomMessageArea: FC<IProp> = (
         <div ref={messageAreaRef}
              className={`custom-scroll`}
              style={{
-                 height: !isMaximized ? `calc(100vh - 100px)` : `calc(100vh - ${headerSize + 1}px)`
+                 height: isMaximized ? `calc(100vh - 100px)` : `calc(100vh - ${headerSize + 1}px)`
              }}
-             id="chatroomMessageArea">
+             id={'chatroomMessageArea'}>
             {!!chatroomMessages?.length && sortArrayByPropertyOfObject(chatroomMessages, 'createdAt', 'asc')
-                //@ts-ignore
                 .map((message: ChatroomMessage, index: number) => {
-                    return <ChatRoomMessage message={message} key={index}/>;
+                    return <ChatRoomMessage onDeleteMessageHandler={onDeleteMessageHandler} message={message} key={index}/>;
                 })
             }
         </div>
@@ -110,6 +92,3 @@ const ChatRoomMessageArea: FC<IProp> = (
 };
 
 export default ChatRoomMessageArea;
-
-//headerSize={headerSize}
-//             isMaximized={isMaximized}

@@ -8,7 +8,6 @@ import './MessengerConversationsList.styles.scss'
 interface IProps {
     onGetConversationListHandler: () => void,
     conversationsList: IMessengerConversation[],
-    isMaximized: boolean
     headerSize: number
 }
 
@@ -16,7 +15,6 @@ const MessengerConversationsList: FC<IProps> = (
     {
         onGetConversationListHandler,
         conversationsList,
-        isMaximized,
         headerSize
     }) => {
 
@@ -70,9 +68,10 @@ const MessengerConversationsList: FC<IProps> = (
     })
 
     return (
-        <div id={'messengerConversationsList custom-scroll'}
+        <div id={'messengerConversationsList'}
+             className={'custom-scroll'}
              ref={conversationListRef}
-             style={{height: isMaximized ? `calc(100vh - 100px)` : `calc(100vh - ${headerSize + 101}px)`}}>
+             style={{height: `calc(100vh - ${headerSize + 101}px)`}}>
             {renderConversationsPreview}
             {!conversationsList || conversationsList?.length < 1 ?
                 <p className='no-message'>there is no messages yet</p> : null}

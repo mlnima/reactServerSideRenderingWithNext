@@ -64,7 +64,7 @@ const RootLayout = async ({children, params: {lang}}: { children: ReactNode, par
             </div>
             <CookiesInformerBar />
             <UserAutoLogin/>
-            <WebSocketInitializer/>
+
             <GoogleAnalytics googleAnalyticsId={initialSettings?.headDataSettings?.googleAnalyticsId}/>
             <LoadingComponent/>
             <AlertBox dictionary={dictionary}/>
@@ -73,6 +73,7 @@ const RootLayout = async ({children, params: {lang}}: { children: ReactNode, par
             <GlobalCustomStyles customColors={initialSettingsData?.settings?.layoutSettings?.customColors}
                                 customStyles={initialSettingsData?.settings?.layoutSettings?.customStyles}/>
             <StoreDataInitializer initialSettings={initialSettings}/>
+            <WebSocketInitializer/>
             {/*<MediaCall/>*/}
         </ReduxProvider>
         </body>

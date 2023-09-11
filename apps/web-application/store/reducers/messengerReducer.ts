@@ -1,13 +1,13 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {RootState} from "@store/store";
-// import {getConversationsListAction} from "@store/reducers/messengerActions/getConversationsListAction";
-// import {getAConversationAction} from "@store/reducers/messengerActions/getAConversationAction";
+// import {getConversationsListAction} from "@utils/reducers/messengerActions/getConversationsListAction";
+// import {getAConversationAction} from "@utils/reducers/messengerActions/getAConversationAction";
 // import {
 //     loadOlderMessagesAction
-// } from "@store/reducers/messengerActions/loadOlderMessagesAction";
+// } from "@utils/reducers/messengerActions/loadOlderMessagesAction";
 // import {IMessengerConversation} from "typescript-types";
-// import {deleteAConversationAction} from "@store/reducers/messengerActions/deleteAConversation";
-// import {startAConversationAction} from "@store/reducers/messengerActions/startAConversationAction";
+// import {deleteAConversationAction} from "@utils/reducers/messengerActions/deleteAConversation";
+// import {startAConversationAction} from "@utils/reducers/messengerActions/startAConversationAction";
 import {MessengerState} from "typescript-types/src/storeTypes/MessengerState";
 
 const initialState: MessengerState = {

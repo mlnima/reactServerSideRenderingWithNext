@@ -23,11 +23,11 @@ const MessengerPage = async ({params: {lang, identifier}}: IProps) => {
 
     const locale = i18n.locales.includes(lang) ? lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCAL || 'en';
     const dictionary = await getDictionary(locale);
-    // const settingsData = await fetchSettings(['chatroomPageSettings']);
+    // const settingsData = await fetchSettings(['messengerPageSettings']);
     // const chatroomsData = await fetchChatroomData({identifier})
 
     return (
-        <div id={'content'} className={`page-no-sidebar inner-content`}>
+        <div id={'content'} className={`page-no-sidebar messengerPageParent`}>
             <main id={'primary'} className={'main messengerPage'}>
                 <MessengerPageContent dictionary={dictionary}/>
             </main>

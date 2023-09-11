@@ -3,21 +3,29 @@
   height: 100%;
   color: var(--primary-text-color, #272727);
 
-  .conversationControls {
-    background-color: var(--tertiary-background-color, #272727);
-    grid-area: conversationControls;
-    width: 100%;
+  //display: grid;
+  //grid-template-columns: 1fr;
 
-    .messengerConfigs {
+  .conversationsControls {
+
+    background-color: var(--secondary-background-color,#181818);
+    grid-area: conversationsControls;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 50px 1fr ;
+
+    .conversationsControlsHeader {
+      border:  var(--default-border);
       width: 100%;
       height: 50px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       background-color: var(--secondary-background-color, #181818);
-      padding: 8px;
+      padding-left: 12px;
+      padding-right: 12px;
       box-sizing: border-box;
-
       h1 {
         font-size: large;
       }
@@ -35,32 +43,31 @@
           height: 25px;
         }
       }
-
     }
   }
 
-  .messaging {
-    width: 100%;
+  .conversationsControlsHidden{
     display: none;
-    grid-area: messaging;
-    grid-template-rows: 50px 1fr 50px;
   }
 
-
-  .conversationControl {
+  .conversationArea {
+    width: 100%;
+    height: 100%;
+    grid-area: conversationArea;
     display: grid;
-    grid-template-areas: 'conversationControl';
-  }
-
-  .messaging {
-    display: grid;
-    grid-area: messaging;
-    //grid-template-areas: 'messaging';
-    grid-template-rows: 50px 1fr 50px;
     grid-template-areas:  'messengerHeader'
                           'messagingArea'
-                          'mediaInputBox';
+                           'mediaInputBox';
   }
+
+  .conversationAreaHidden{
+    display: none;
+  }
+
+  //.messaging {
+  //
+  //  //'mediaInputBox'
+  //}
 }
 
 .messengerPageMaximized {
@@ -72,34 +79,44 @@
   z-index: 11;
 }
 
-.conversationsMenuOpen {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 150px;
-  grid-template-rows: 45px 1fr;
-  grid-template-areas:
-    'chatroomTopbar chatroomTopbar'
-    'chatroomMessagingArea chatroomOnlineUsersList'
-}
+//.conversationsMenuOpen {
+//  width: 100%;
+//  display: grid;
+//  grid-template-columns: 1fr 150px;
+//  grid-template-rows: 45px 1fr;
+//  grid-template-areas:
+//    'chatroomTopbar chatroomTopbar'
+//    'chatroomMessagingArea chatroomOnlineUsersList'
+//}
 
-.inner-content-not-logged-in {
+.notLoggedInMessage {
   display: flex;
   justify-content: center;
   align-items: center;
+  .notLoggedInMessageLink {
+    color: var(--primary-text-color, #fff);
+  }
 }
 
 
-.messenger-page-register-page-link {
-  color: var(--primary-text-color, #fff);
-}
+
 
 @media only screen and (min-width: 768px) {
   .messengerPageContent {
     display: grid;
     grid-template-columns: 300px 1fr;
-    grid-template-areas: 'conversationControls messaging';
-    .conversationControls{
-
+    grid-template-areas: 'conversationsControls conversationArea';
+    .conversationsControls{
+      .conversationsControlsHeader{
+        .ControlsHeaderMaximizedButton{
+          display: none;
+        }
+      }
     }
+
+    .conversationAreaHidden,.conversationsControlsHidden{
+      display: grid;
+    }
+
   }
 }

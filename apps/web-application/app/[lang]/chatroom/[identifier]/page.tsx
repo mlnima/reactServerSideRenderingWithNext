@@ -22,15 +22,13 @@ const chatroomPage = async ({params: {lang, identifier}}: IProps) => {
 
     return (
         <div id={'content'} className={`page-no-sidebar`}>
-            <main id={'primary'} className={'main homePage'}>
-                <ChatroomPageContent pageData={chatroomsData}  dictionary={dictionary}
-                                     identifier={identifier}/>
+            <main id={'primary'} className={'main chatroom'}>
+                <ChatroomPageContent pageData={chatroomsData}  dictionary={dictionary}/>
             </main>
         </div>
     )
 }
 
 export default chatroomPage;
-
 export const generateMetadata = chatroomMetaGenerator
 export const dynamic = 'force-dynamic';

@@ -6,7 +6,7 @@ const adminDeleteUser = (req, res) => {
             if (!result) {
                 return res.status(404).json({message: 'No user found with this id'});
             }
-            res.json({message: 'User deleted'});
+            res.json({message: 'UserModel deleted'});
         })
         .catch((err) => {
             console.error(err);

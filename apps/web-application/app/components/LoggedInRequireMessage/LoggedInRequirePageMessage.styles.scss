@@ -1,9 +1,17 @@
-.loggedInRequireMessage{
+.notLoggedInMessage {
+  color: var(--primary-text-color, #fff);
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--primary-text-color,#fff);
-  .messageTitle{
-    font-size: xx-large;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+
+  .notLoggedInMessageActionButtons {
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
   }
 }

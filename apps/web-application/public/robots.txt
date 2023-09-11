@@ -1,0 +1,11 @@
+User-agent: *
+Crawl-delay: 10
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /dashboard
+Disallow: /dashboard/*
+Disallow: /profile/*
+Disallow: /chatroom/*
+Disallow: /page/test
+Sitemap: http://192.168.178.21:3000/sitemap.xml
+Host: http://192.168.178.21:3000

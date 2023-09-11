@@ -31,7 +31,7 @@ const getUserPageData = async (req: Request, res: Response) => {
 
 
         if (!userData) {
-            return res.status(404).json({message: 'User not found'});
+            return res.status(404).json({message: 'UserModel not found'});
         }
 
         const responseData = {
@@ -83,7 +83,7 @@ export default getUserPageData;
 //             .exec();
 //
 //         if (!userData) {
-//             return res.status(404).json({message: 'User not found'});
+//             return res.status(404).json({message: 'UserModel not found'});
 //         }
 //         //@ts-ignore
 //         const userDataDoc = {...userData?._doc}

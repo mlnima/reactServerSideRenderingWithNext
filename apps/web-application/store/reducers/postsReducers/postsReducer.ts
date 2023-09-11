@@ -6,11 +6,11 @@ import likePostAction from "./likePostAction";
 import disLikePostAction from "./disLikePostAction";
 // import postNewCommentAction from "./postNewCommentAction";
 // import getTagsAction from "./getTagsAction";
-// import attendingToEvent from "@store/reducers/postsReducers/attendToEvent";
-// import getPageDataAction from "@store/reducers/postsReducers/getPageDataAction";
-// import getPostCommentsAction from "@store/reducers/postsReducers/getPostCommentsAction";
-// import getPostsAction from "@store/reducers/postsReducers/getPostsAction";
-// import getEditingPostAction from "@store/reducers/postsReducers/getEditingPostAction";
+// import attendingToEvent from "@utils/reducers/postsReducers/attendToEvent";
+// import getPageDataAction from "@utils/reducers/postsReducers/getPageDataAction";
+// import getPostCommentsAction from "@utils/reducers/postsReducers/getPostCommentsAction";
+// import getPostsAction from "@utils/reducers/postsReducers/getPostsAction";
+// import getEditingPostAction from "@utils/reducers/postsReducers/getEditingPostAction";
 
 interface PostsState {
     activeVideoTrailerId: string | null,

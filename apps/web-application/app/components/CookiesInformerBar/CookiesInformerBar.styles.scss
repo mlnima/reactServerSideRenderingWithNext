@@ -1,7 +1,7 @@
 #cookiePopupWrapper{
   position: fixed;
   left: 0;
-  bottom: 0;
+  bottom: 10px;
   right: 0;
   display: flex;
   justify-content: center;
@@ -10,8 +10,11 @@
   z-index: 1005;
   background-color:var(--secondary-background-color,#fff);
   color: var(--secondary-text-color,#fff);
-  height: 40px;
+  height: 100px;
   gap: 10px;
+  padding: 12px;
+  box-sizing: border-box;
+  border-radius: 0.375rem;
   p{
     text-align: center;
   }

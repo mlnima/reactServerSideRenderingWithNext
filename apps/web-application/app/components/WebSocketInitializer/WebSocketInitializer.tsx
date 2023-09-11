@@ -8,6 +8,7 @@ import socket from 'web-socket-client';
 const WebSocketInitializer: FC = () => {
     const dispatch = useAppDispatch();
     const {loggedIn} = useAppSelector(({user}) => user)
+    const {userData} = useAppSelector(({user}) => user)
 
     useEffect(() => {
         socket.on('incomingCallSocketEvent', ({callType, signal, callerData,conversationId}) => {
@@ -22,6 +23,14 @@ const WebSocketInitializer: FC = () => {
                 callerData,
             }))
         });
+
+
+        //CHANGE SOCKET ID TO USER ID ON LOGIN
+        if (loggedIn && !!userData?._id){
+            socket.emit('initialLoggedInUserSocket', {userId:userData._id})
+        }
+
+
     }, [loggedIn]);
 
     return null

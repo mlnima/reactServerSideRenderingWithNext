@@ -17,7 +17,7 @@ const Logo: FC<LogoPropTypes> = ({uniqueData,LogoUrl,locale}) => {
 
     return (
         <div className={'logo'}>
-            <Link href='/' className={'logoLink'}>
+            <Link href='/' className={'logoLink'} aria-label={'logo'}>
 
                     {uniqueData?.logoUrl && <img alt={'logo'} className={'logoImage'} src={logoUrlSource}/> }
                     {!!uniqueData?.logoText && !uniqueData?.logoUrlSource ?

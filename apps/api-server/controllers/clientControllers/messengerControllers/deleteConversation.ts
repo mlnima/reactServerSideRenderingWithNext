@@ -7,7 +7,7 @@ const deleteConversation = async (req, res) => {
         // const conversationId = req.query._id;
         // const userData = await userSchema.findById(req.userData._id).exec();
         // const conversationData = await conversationSchema.findById(conversationId).exec();
-        // if (!userData || !conversationData ) res.status(404).json({message:'Can Not Find User Or Conversation Data'})
+        // if (!userData || !conversationData ) res.status(404).json({message:'Can Not Find UserModel Or Conversation Data'})
         // if (conversationData?.users.includes(userData._id)){
         //     await userSchema.findByIdAndUpdate(req.userData._id,{$pull:{conversations:[conversationId]}}).exec()
         //     await userSchema.findByIdAndUpdate(conversationData?.users.find(user=>user._id !== userData._id),{$pull:{conversations:[conversationId]}}).exec()

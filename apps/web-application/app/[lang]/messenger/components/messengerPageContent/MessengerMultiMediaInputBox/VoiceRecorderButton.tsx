@@ -80,12 +80,34 @@ const VoiceRecorderButton: FC<IProps> = ({ setDraftMessage}) => {
         };
     }, [isRecording]);
 
+    // return (
+    //     <>
+    //         {isRecording &&
+    //             <div className={'audio-recording-animation'}
+    //                  onClick={handleRecordingStop}
+    //                  onTouchStart={handleRecordingStop}>
+    //                 <FontAwesomeIcon icon={faMicrophone} style={{width: '120px', height: '120px'}}/>
+    //                 {isRecording && <div className="counter">{elapsedTime.toFixed(1)}</div>}
+    //             </div>
+    //         }
+    //         <button
+    //             onMouseDown={handleRecordingStart}
+    //             onMouseUp={handleRecordingStop}
+    //             onTouchStart={handleRecordingStart}
+    //             onTouchEnd={handleRecordingStop}
+    //             type={'button'}
+    //         >
+    //             <FontAwesomeIcon icon={faMicrophone} style={{width: 25, height: 25}}/>
+    //         </button>
+    //     </>
+    // );
+
     return (
         <>
             {isRecording &&
                 <div className={'audio-recording-animation'}
                      onClick={handleRecordingStop}
-                     onTouchStart={handleRecordingStop}>
+                     onTouchEnd={handleRecordingStop}> {/* changed onTouchStart to onTouchEnd */}
                     <FontAwesomeIcon icon={faMicrophone} style={{width: '120px', height: '120px'}}/>
                     {isRecording && <div className="counter">{elapsedTime.toFixed(1)}</div>}
                 </div>

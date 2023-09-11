@@ -102,13 +102,13 @@ export default page;
 // }
 //
 //
-// export const getStaticProps = wrapper.getServerSideProps(store =>
+// export const getStaticProps = wrapper.getServerSideProps(utils =>
 //
 //     async (context) => {
 //         const firstLoadData = await getFirstLoadDataStatic(
 //             // @ts-ignore
 //             [context.params.pageName, context.params.pageName + 'LeftSidebar', context.params.pageName + 'RightSidebar'],
-//             store
+//             utils
 //         )
 //         // @ts-ignore
 //         const pageData = await getPageData({pageName: context.params.pageName})

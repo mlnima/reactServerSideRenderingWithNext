@@ -96,9 +96,9 @@ export default MetasCardsRenderer;
 
 
 //@ts-ignore
-// const {role} = useSelector(({user}: Store) => user.userData)
+// const {role} = useSelector(({user}: utils) => user.userData)
 //
-// const adminMode = useSelector(({globalState}: Store) => globalState.adminMode)
+// const adminMode = useSelector(({globalState}: utils) => globalState.adminMode)
 
 // const MetaCardToRender = useMemo(() => {
 //     return metaType === 'categories' ? CategoryCard :

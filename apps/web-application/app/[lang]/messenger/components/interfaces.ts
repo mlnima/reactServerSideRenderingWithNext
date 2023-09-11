@@ -5,7 +5,7 @@ export interface IPreference{
 
 export type TChatroomUser={
     username: string,
-    id: string,
+    _id: string,
     profileImage: {
         filePath: string
     },

@@ -81,7 +81,7 @@ export const getUserPageInitialData = async (req: Request, res: Response) => {
         const [userData] = await userSchema.aggregate(pipeline).exec();
 
         if (!userData) {
-            return res.status(404).json({message: 'User not found'});
+            return res.status(404).json({message: 'UserModel not found'});
         }
 
         const [didRequesterBlockThisUser, didRequesterFollowThisUser,postsCount] = await Promise.all([

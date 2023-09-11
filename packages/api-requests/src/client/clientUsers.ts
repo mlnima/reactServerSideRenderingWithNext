@@ -1,8 +1,8 @@
 import AxiosInstance from "../lib/AxiosInstance";
 
-export const clientAPIRequestDeleteChatroomMessage = async (chatroomId:string,messageId:string)=>{
-    return await AxiosInstance.delete(`/api/admin/chatrooms/deleteChatroomMessage?chatroomId=${chatroomId}&messageId=${messageId}&token=${localStorage.wt}`)
-}
+// export const clientAPIRequestDeleteChatroomMessage = async (chatroomId:string,messageId:string)=>{
+//     return await AxiosInstance.delete(`/api/admin/chatrooms/deleteChatroomMessage?chatroomId=${chatroomId}&messageId=${messageId}&token=${localStorage.wt}`)
+// }
 
 export const clientAPIRequestDeleteConversation = async (_id:string)=>{
     return await AxiosInstance.post(`/api/v1/users/deleteConversation?_id=${_id}&token=${localStorage.wt}`)

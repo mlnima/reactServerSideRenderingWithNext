@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import LanguagesSwitcher from '../LanguagesSwitcher';
 import {Provider} from "react-redux";
-import configureStore from 'redux-mock-store';
+import configureStore from 'redux-mock-utils';
 const initialState = { id: 1 };
 const mockStore = configureStore();
 //@ts-ignore

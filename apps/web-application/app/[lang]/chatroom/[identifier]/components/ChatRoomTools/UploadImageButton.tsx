@@ -1,7 +1,9 @@
+'use client';
 import React, {ChangeEvent, FC} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCamera} from "@fortawesome/free-solid-svg-icons/faCamera";
 import socket from 'web-socket-client';
+import {useAppSelector} from "@store/hooks";
 
 interface PropTypes {
     inputRef: React.RefObject<HTMLInputElement>,
@@ -11,8 +13,7 @@ interface PropTypes {
 }
 
 const Component: FC<PropTypes> = ({inputRef, chatroomId, authorId, setMessageText}) => {
-
-
+    const {userData} = useAppSelector(({user}) => user)
     const onSelectImageHandler = async (event: ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files && event.target.files[0];
 
@@ -64,7 +65,16 @@ const Component: FC<PropTypes> = ({inputRef, chatroomId, authorId, setMessageTex
                     type: 'image',
                     messageData: messageData,
                 };
-                socket.emit('messageToChatroom', messageBody);
+                socket.emit('messageToChatroom', {
+                    messageBody,
+                    authorData: {
+                        profileImage: {
+                            filePath:userData.profileImage?.filePath
+                        },
+                        username: userData.username,
+                        _id: userData._id
+                    }
+                });
                 setMessageText('');
                 event.target.value = ''
             } catch (error) {

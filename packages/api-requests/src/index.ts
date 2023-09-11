@@ -62,7 +62,7 @@ export {
 
 //users
 export {
-    clientAPIRequestDeleteChatroomMessage,
+    // clientAPIRequestDeleteChatroomMessage,
     clientAPIRequestDeleteConversation,
     clientAPIRequestFollowUser,
     clientAPIRequestGetConversations,

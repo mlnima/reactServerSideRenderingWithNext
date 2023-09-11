@@ -15,7 +15,7 @@ const initialUserData = {
         filePath:''
     },
     draftPost:{},
-    socketId:''
+
 }
 
 const initialState = {
@@ -38,7 +38,8 @@ const initialState = {
         callerName: '',
         callerId: '',
         userStreamData: null
-    }
+    },
+    socketId:''
 }
 
 export const userSlice = createSlice({

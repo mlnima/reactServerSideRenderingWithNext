@@ -16,7 +16,6 @@ const nextConfig = {
     eslint: {
         ignoreDuringBuilds: true,
     },
-    // locales: i18n.locales,
     defaultLocale: i18n.defaultLocale,
     experimental: {
         serverActions: true,

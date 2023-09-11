@@ -164,7 +164,7 @@ export default PostsSliderWidget;
 // import {useSelector} from "react-redux";
 // import {ratingCalculator} from "custom-util";
 // import Autoplay from "embla-carousel-autoplay";
-// import {Post,Store} from "typescript-types";
+// import {Post,utils} from "typescript-types";
 // import {shortNumber} from "custom-util";
 // import './PostsSliderWidget.styles.scss';
 // import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -232,7 +232,7 @@ export default PostsSliderWidget;
 //             setNextBtnEnabled(sliderApi.canScrollNext());
 //         }, [sliderApi, setSelectedIndex]);
 //
-//         const {numberOfCardsPerRowInMobile,cardsWidthDesktop} = useSelector(({settings}: Store) =>{
+//         const {numberOfCardsPerRowInMobile,cardsWidthDesktop} = useSelector(({settings}: utils) =>{
 //             return{
 //                 numberOfCardsPerRowInMobile:settings?.initialSettings?.postCardsSettings?.numberOfCardsPerRowInMobile || 2,
 //                 cardsWidthDesktop:settings?.initialSettings?.postCardsSettings?.cardsWidthDesktop || 255,

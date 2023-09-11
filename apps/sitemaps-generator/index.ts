@@ -10,7 +10,7 @@ import {pagesSitemapGenerator} from './src/pageSitemap'
 import {robotsTxtGenerator} from './src/robotsTxtGenerator'
 
 
-const baseOutputPath = '../web-app/public'
+const baseOutputPath = '../web-application/public'
 
 const runAllGenerators = async ()=>{
    await rootSitemapGenerator(baseOutputPath)

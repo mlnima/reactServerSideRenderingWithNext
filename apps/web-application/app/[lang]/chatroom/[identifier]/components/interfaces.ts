@@ -6,12 +6,12 @@ export interface IPreference{
 }
 export type TChatroomUser={
     username: string,
-    id: string,
+    _id: string,
     profileImage: {
         filePath: string
     },
     socketId?:string
 }
 
-export type IChatroomUsers=TChatroomUser[]
+export type IChatroomUsers =TChatroomUser[]
 

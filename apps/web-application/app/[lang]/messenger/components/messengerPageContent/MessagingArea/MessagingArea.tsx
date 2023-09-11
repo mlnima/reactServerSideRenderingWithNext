@@ -3,8 +3,6 @@ import React, {FC, useEffect, useRef} from 'react';
 import Message from "../Message/Message";
 import {uniqArrayBy} from 'custom-util'
 import {useAppSelector} from "@store/hooks";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faComments} from "@fortawesome/free-solid-svg-icons/faComments";
 import {sortArrayByPropertyOfObject} from 'custom-util';
 import './MessagingArea.styles.scss'
 import {IMessengerConversation} from "typescript-types/dist/src/messengerTypes/IMessengerConversation";
@@ -14,8 +12,6 @@ interface IProps {
     messageAreaRef: React.RefObject<HTMLDivElement>,
     autoScroll: boolean,
     setAutoScroll: Function,
-    isMaximized: boolean,
-    headerSize: number,
     activeConversation: IMessengerConversation,
 }
 
@@ -25,11 +21,10 @@ const MessagingArea: FC<IProps> =
          messageAreaRef,
          autoScroll,
          setAutoScroll,
-         isMaximized,
-         headerSize,
          activeConversation
      }) => {
         const prevScrollPosition = useRef(0);
+
 
         const {userData} = useAppSelector(({user}) => user)
 
@@ -71,12 +66,7 @@ const MessagingArea: FC<IProps> =
 
         return (
             <div ref={messageAreaRef}
-                 className={'messengerConversationMessagingArea custom-scroll'}
-                 style={{height: isMaximized ? `calc(100vh - 101px)` : `calc(100vh - ${headerSize  + 101}px)`}}>
-
-                <div className={'messengerConversationBackground'}>
-                    <FontAwesomeIcon icon={faComments}/>
-                </div>
+                 className={'messengerConversationMessagingArea custom-scroll'}>
 
                 {!!activeConversation?._id &&
                     <div className={'messages'}>

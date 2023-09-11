@@ -1,18 +1,34 @@
-#MessengerMultiMediaInputBox{
-  background-color: var(--main-background-color, #1A1A1A);
+#MessengerMultiMediaInputBoxWrapper {
+  //position: relative;
+  //bottom: 210px;
+  width: 100%;
+  background-color: var(--secondary-background-color, #181818);
+  border-radius: 0.375rem;
+  border: var(--default-border);
+  padding: 12px;
+  box-sizing: border-box;
+  position: fixed;
+  bottom: calc(env(safe-area-inset-bottom) + 50px);
+  /* fallback for Chrome iOS */
+  bottom: calc(-webkit-safe-area-inset-bottom + 50px) ;
+}
+
+
+#MessengerMultiMediaInputBox {
+  background-color: var(--secondary-background-color, #181818);
+  grid-area: mediaInputBox;
   align-items: center;
   display: grid;
   grid-template-columns: 1fr 32px 32px;
+  grid-template-rows: 2fr;
   grid-gap: 3px;
   padding: 4px;
   box-sizing: border-box;
   height: 50px;
   width: 100%;
-  position: relative;
-  border-top:var(--default-border);
-  grid-area: mediaInputBox;
+  border-top: var(--default-border);
 
-  .media-content{
+  .media-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -25,7 +41,7 @@
     right: 0;
   }
 
-  .audio-recording-animation{
+  .audio-recording-animation {
     position: fixed;
     bottom: 45px;
     left: 0;
@@ -38,7 +54,8 @@
     align-items: center;
     z-index: 1000;
     animation: pulsing 2s infinite;
-    .counter{
+
+    .counter {
       font-size: 120px;
     }
   }

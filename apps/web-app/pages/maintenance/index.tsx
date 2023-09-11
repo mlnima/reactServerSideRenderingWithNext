@@ -19,7 +19,7 @@ const maintenance = () => {
     );
 };
 
-// export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
+// export const getServerSideProps = wrapper.getServerSideProps(utils => async (context) => {
 //     return {
 //         props: {
 //             ...(await serverSideTranslations(context.locale as string, ['common'])),

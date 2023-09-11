@@ -1,34 +1,27 @@
+'use client';
 import React, {FC} from "react";
-import styled from "styled-components";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrashCan} from "@fortawesome/free-solid-svg-icons/faTrashCan";
-import {clientAPIRequestDeleteChatroomMessage} from 'api-requests'
 import {useAppSelector} from "@store/hooks";
-
-const Style = styled.div``;
 
 interface PropTypes {
     messageId: string,
-    chatroomId: string,
+    onDeleteMessageHandler: (messageId: string) => void,
+    authorId: string
 }
 
-const AdminActionOnMessageMenu: FC<PropTypes> = ({chatroomId, messageId}) => {
+const AdminActionOnMessageMenu: FC<PropTypes> = ({ messageId,onDeleteMessageHandler,authorId}) => {
 
     const adminMode = useAppSelector(({globalState}) => globalState?.adminMode)
+    const {userData} = useAppSelector(({user}) => user)
 
-    const onDeleteMessageHandler = () => {
-        if (chatroomId && messageId) {
-            clientAPIRequestDeleteChatroomMessage(chatroomId, messageId)
-        }
-    }
-
-    if (adminMode) {
+    if (adminMode || authorId === userData?._id) {
         return (
-            <Style>
-                <button className={'btn btn-danger'} onClick={onDeleteMessageHandler}>
+            <div>
+                <button className={'btn btn-danger'} onClick={()=>onDeleteMessageHandler(messageId)}>
                     <FontAwesomeIcon icon={faTrashCan} style={{width: 15, height: 15}}/>
                 </button>
-            </Style>
+            </div>
         )
     } else return null
 

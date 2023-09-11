@@ -23,13 +23,18 @@ const AlertBox: FC<IProps> = ({dictionary}) => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
+        let clearAlertTimeout: NodeJS.Timeout;
         if (alert?.active) {
             const component = true
-            setTimeout(() => {
+           const clearAlertTimeout = setTimeout(() => {
                 if (component) {
                     dispatch(closeAlert({}))
                 }
             }, 5000)
+        }
+
+        return()=>{
+            clearTimeout(clearAlertTimeout)
         }
     }, [alert]);
 
@@ -39,10 +44,10 @@ const AlertBox: FC<IProps> = ({dictionary}) => {
     return (
         <Csr>
         <div id='alertBox' onClick={() => dispatch(closeAlert({}))}>
-            <Draggable handle=".handle">
+            {/*<Draggable handle=".handle">*/}
                 <div className='alertMessage'>
                     <div className='alertMessageHeader handle'>
-                        <p className='alertType'>
+                        <p className='alertType' onClick={() => dispatch(closeAlert({}))} >
                             <FontAwesomeIcon
                                 icon={alert.type === 'success' ? faCircleCheck :
                                     alert.type === 'error' ? faTriangleExclamation :
@@ -66,7 +71,6 @@ const AlertBox: FC<IProps> = ({dictionary}) => {
                     {/*//@ts-ignore*/}
                     {!!alert.err?.stack && <p>{alert.err?.stack}</p>}
                 </div>
-            </Draggable>
         </div>
         </Csr>
     );

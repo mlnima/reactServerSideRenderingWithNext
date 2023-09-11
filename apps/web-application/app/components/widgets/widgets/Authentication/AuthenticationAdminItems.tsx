@@ -12,6 +12,8 @@ import {faCheck} from "@fortawesome/free-solid-svg-icons/faCheck";
 import {usePathname, useSelectedLayoutSegment} from "next/navigation";
 import clearCachesByServerAction
     from "@components/widgets/widgets/Authentication/adminServerActions/adminServerActions";
+import socket from "web-socket-client";
+import {faBolt} from "@fortawesome/free-solid-svg-icons";
 
 const AuthenticationAdminItems = ({}) => {
 
@@ -19,11 +21,6 @@ const AuthenticationAdminItems = ({}) => {
     const pathname = usePathname()
     const segment = useSelectedLayoutSegment()
     const adminMode = useSelector(({globalState}: Store) => globalState.adminMode)
-
-    const onSetAdminModeHandler = () => {
-        dispatch(setAdminMode(!adminMode))
-        localStorage.setItem('adminMode', localStorage?.adminMode === 'true' ? 'false' : 'true')
-    }
 
     const onClearCacheHandler = async () => {
         try {
@@ -35,9 +32,16 @@ const AuthenticationAdminItems = ({}) => {
                 type: 'info'
             }))
         } catch (error) {
-
+            dispatch(setAlert({
+                message: 'Error While Clearing Cache',
+                type: 'error'
+            }))
         }
+    }
 
+    const onSetAdminModeHandler = () => {
+        dispatch(setAdminMode(!adminMode))
+        localStorage.setItem('adminMode', localStorage?.adminMode === 'true' ? 'false' : 'true')
     }
 
     return (
@@ -61,6 +65,15 @@ const AuthenticationAdminItems = ({}) => {
                   </div>
                 Admin Mode
             </span>
+            {pathname.includes('/chatroom/') &&
+                <button className={'logged-item'} onClick={()=>socket.emit('correctChatroomsMessages')}>
+                    <div className={'icon-wrapper'}>
+                    <FontAwesomeIcon icon={faBolt} style={{width: 25, height: 25}}/>
+                    </div>
+                    Correct Chatrooms Messages
+                </button>
+
+            }
         </>
     )
 };

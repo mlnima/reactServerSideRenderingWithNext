@@ -109,12 +109,31 @@ const messengerPageContent: FC<IProps> = ({dictionary}) => {
             })
         }
         if (typeof window !== 'undefined') {
+
+            // document.body.style.overflow = 'hidden';
+            //
+
+            const footerWidget = document.querySelector('.footer-widget-area');
+
+            if (footerWidget && footerWidget instanceof HTMLElement) {
+                footerWidget.style.display = 'none';
+            }
+
             setTimeout(() => {
                 setHeaderSize(headerSizeCalculator())
             }, 0)
         }
 
+        return () => {
+            // document.body.style.overflow = 'auto';
+            const footerWidget = document.querySelector('.footer-widget-area');
+            if (footerWidget && footerWidget instanceof HTMLElement) {
+                footerWidget.style.display = 'initial';
+            }
+        }
+
     }, []);
+
 
     useEffect(() => {
         if (loggedIn) {
@@ -190,58 +209,65 @@ const messengerPageContent: FC<IProps> = ({dictionary}) => {
 
 
     if (!loggedIn) return (
-        <main id={'primary'} className={'main'}>
-            <div className={'inner-content-not-logged-in'}>
-                <Link href={'/register'} className='messenger-page-register-page-link'>
-                    You need to create an account in order to access this page
-                </Link>
-            </div>
-        </main>
+        <div className={'notLoggedInMessage'}>
+            <Link href={'/register'} className='notLoggedInMessageLink'>
+                You need to create an account in order to access this page
+            </Link>
+        </div>
     )
 
 
     return (
-        <div className={`messengerPageContent ${preference.isMaximized && 'messengerPageMaximized'}`}>
-
-            {((isMobile && !activeConversation?._id) || !isMobile) &&
-                <div className={'conversationControls'}>
-                    <div className={'messengerConfigs'}>
-                        <h1> Messages</h1>
-                        <button className={`chatroomTopBarActionButton`}
-                                style={{
-                                    color: preference.isMaximized ? 'var(--primary-active-color, #f90)' :
-                                        'var(--secondary-text-color, #ccc)'
-                                }}
-                                onClick={() => updatePreference('isMaximized', !preference.isMaximized)}>
-                            <FontAwesomeIcon icon={preference.isMaximized ? faMinimize : faMaximize}/>
-                        </button>
-                    </div>
-                    <MessengerConversationsList isMaximized={preference.isMaximized}
-                                                headerSize={headerSize}
-                                                onGetConversationListHandler={onGetConversationListHandler}
-                                                conversationsList={conversationsList}/>
+        <div className={`messengerPageContent`}
+             style={{height: `calc(100vh - ${headerSize}px)`}}
+        >
+            <div className={`conversationsControls ${!!activeConversation?._id ? 'conversationsControlsHidden' : '' }`}
+                 style={{
+                     // display: !!activeConversation?._id ? 'none' : 'grid',
+                 }}>
+                <div className={'conversationsControlsHeader'}>
+                    <h1> Messages</h1>
+                    {/*<button className={`conversationsControlsHeaderButton ControlsHeaderMaximizedButton`}*/}
+                    {/*        style={{*/}
+                    {/*            color: preference.isMaximized ? 'var(--primary-active-color, #f90)' :*/}
+                    {/*                'var(--secondary-text-color, #ccc)'*/}
+                    {/*        }}*/}
+                    {/*        onClick={() => updatePreference('isMaximized', !preference.isMaximized)}>*/}
+                    {/*    <FontAwesomeIcon icon={preference.isMaximized ? faMinimize : faMaximize}/>*/}
+                    {/*</button>*/}
                 </div>
-            }
+                <MessengerConversationsList headerSize={headerSize}
+                                            onGetConversationListHandler={onGetConversationListHandler}
+                                            conversationsList={conversationsList}/>
+            </div>
 
-            {((isMobile && !!activeConversation?._id) || !isMobile) &&
-                <div className={'messaging'}>
+            <div className={`conversationArea ${!!activeConversation?._id ? '' : 'conversationAreaHidden' }`}
+                 style={{
+                     // gridTemplateRows: preference.isMaximized ?
+                     //     `50px calc(100vh - 100px) 50px` :
+                     //     `50px calc(100vh - ${headerSize + 100}px) 50px`,
+                     gridTemplateRows: preference.isMaximized ?
+                         `50px calc(100vh - 100px)` :
+                         `50px calc(100vh - ${headerSize + 100}px)`,
+                     height:preference.isMaximized ?
+                         `calc(100vh - 50px)` :
+                         `calc(100vh - ${headerSize + 50}px)`
+                 }}>
 
-                    <MessengerHeader conversationsMenuTriggerHandler={conversationsMenuTriggerHandler}
-                                     autoScroll={autoScroll}
-                                     setAutoScroll={setAutoScroll}
-                                     activeConversation={activeConversation}/>
-                    <MessagingArea onLoadOlderMessages={onLoadOlderMessages}
-                                   autoScroll={autoScroll}
-                                   setAutoScroll={setAutoScroll}
-                                   isMaximized={preference.isMaximized}
-                                   headerSize={headerSize}
-                                   activeConversation={activeConversation}
-                                   messageAreaRef={messageAreaRef}/>
-                    <MessengerMultiMediaInputBox dictionary={dictionary}
-                                                 onStartTypingHandler={onStartTypingHandler}
-                                                 activeConversation={activeConversation}/>
-                </div>
-            }
+                <MessengerHeader conversationsMenuTriggerHandler={conversationsMenuTriggerHandler}
+                                 autoScroll={autoScroll}
+                                 updatePreference={updatePreference}
+                                 setAutoScroll={setAutoScroll}
+                                 activeConversation={activeConversation}/>
+                <MessagingArea onLoadOlderMessages={onLoadOlderMessages}
+                               autoScroll={autoScroll}
+                               setAutoScroll={setAutoScroll}
+                               activeConversation={activeConversation}
+                               messageAreaRef={messageAreaRef}/>
+                <MessengerMultiMediaInputBox dictionary={dictionary}
+                                             onStartTypingHandler={onStartTypingHandler}
+                                             activeConversation={activeConversation}/>
+            </div>
         </div>
     )
 };

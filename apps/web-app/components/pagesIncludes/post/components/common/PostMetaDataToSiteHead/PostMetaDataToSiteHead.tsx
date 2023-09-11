@@ -1,15 +1,15 @@
 // import {FC, useMemo} from "react";
 // import Head from "next/head";
 // import {useSelector} from "react-redux";
-// import {Meta, Store} from "@custom-client-variables/TypeScriptTypes/GlobalTypes";
+// import {Meta, utils} from "@custom-client-variables/TypeScriptTypes/GlobalTypes";
 // import {useRouter} from "next/router";
 //
 // const PostMetaDataToSiteHead: FC = () => {
 //
 //     const {asPath,locale} = useRouter()
 //
-//     const {locals,keywords,post} = useSelector((store: Store) => {
-//         const post =  store.posts.post
+//     const {locals,keywords,post} = useSelector((utils: utils) => {
+//         const post =  utils.posts.post
 //         return {
 //             post,
 //             keywords: [...(post.tags || []), ...(post.categories || []), ...(post.actors || [])].map((i: Meta) => i.name).join(','),

@@ -131,7 +131,7 @@ export const getUserDataAction = createAsyncThunk(
                 thunkAPI.dispatch(setAlert({
                     active: true,
                     type: 'error',
-                    message: 'Can Not Get User Data'
+                    message: 'Can Not Get UserModel Data'
                 }))
             }).finally(() => thunkAPI.dispatch(loading(false)))
     }
@@ -151,7 +151,7 @@ export const updateUserDataAction = createAsyncThunk(
             thunkAPI.dispatch(setAlert({
                 active: true,
                 type: 'success',
-                message: 'User Updated'
+                message: 'UserModel Updated'
             }))
 
         }).catch((error: AxiosError) => {
@@ -159,7 +159,7 @@ export const updateUserDataAction = createAsyncThunk(
             thunkAPI.dispatch(setAlert({
                 active: true,
                 type: 'error',
-                message: 'Can Not Get User Data'
+                message: 'Can Not Get UserModel Data'
             }))
 
         }).finally(() => thunkAPI.dispatch(loading(false)))
@@ -178,14 +178,14 @@ export const deleteUserAction = createAsyncThunk(
             thunkAPI.dispatch(setAlert({
                 active: true,
                 type: 'success',
-                message: 'User Deleted'
+                message: 'UserModel Deleted'
             }))
 
         }).catch((error: AxiosError) => {
             thunkAPI.dispatch(setAlert({
                 active: true,
                 type: 'error',
-                message: 'Can Not Delete User'
+                message: 'Can Not Delete UserModel'
             }))
 
         }).finally(() => {

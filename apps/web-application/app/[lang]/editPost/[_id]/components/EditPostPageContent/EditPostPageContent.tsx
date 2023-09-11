@@ -14,7 +14,7 @@ import VideoTypeFields from "../PostEditorForm/VideoTypeFields/VideoTypeFields";
 import PostLocation from "../PostEditorForm/common/PostLocation";
 import './EditPostPageContent.styles.scss'
 import updatePostAction from "@store/reducers/postsReducers/updatePostAction";
-// import {loading, setAlert} from "@store/reducers/globalStateReducer";
+// import {loading, setAlert} from "@utils/reducers/globalStateReducer";
 
 interface IProps {
     _id: string,

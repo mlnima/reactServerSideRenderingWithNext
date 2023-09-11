@@ -1,5 +1,5 @@
 'use client';
-import React, { FC,  useRef, useState} from "react";
+import React, {FC, useRef, useState} from "react";
 import RecordedAudioPreview from "./RecordedAudioPreview";
 import TextInput from "./TextInput";
 import UploadImageButton from "./UploadImageButton";
@@ -10,12 +10,17 @@ import './MessengerMultiMediaInputBox.styles.scss'
 import socket from "web-socket-client";
 import {IMessengerConversation} from "typescript-types/dist/src/messengerTypes/IMessengerConversation";
 import {IDraftMessage} from "../../interfaces";
+import Draggable from 'react-draggable';
+import {faCamera} from "@fortawesome/free-solid-svg-icons/faCamera";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faArrowsUpDownLeftRight} from "@fortawesome/free-solid-svg-icons";
+import {faTimes} from "@fortawesome/free-solid-svg-icons/faTimes";
 
 interface IProps {
     onStartTypingHandler: () => void,
-    activeConversation:IMessengerConversation
-    dictionary:{
-        [key:string]:string
+    activeConversation: IMessengerConversation
+    dictionary: {
+        [key: string]: string
     }
 }
 
@@ -26,7 +31,8 @@ const MessengerMultiMediaInputBox: FC<IProps> = (
         dictionary
     }) => {
     const imageInputRef = useRef<HTMLInputElement>(null);
-    const { userData} = useAppSelector(({user}) => user)
+    const {userData} = useAppSelector(({user}) => user);
+    const [render,setRender]=useState(false)
 
     const [draftMessage, setDraftMessage] = useState<IDraftMessage>({
         imageContent: '',
@@ -60,35 +66,36 @@ const MessengerMultiMediaInputBox: FC<IProps> = (
 
 
     return (
-        <form id={'MessengerMultiMediaInputBox'} onSubmit={onSubmitHandler}>
-            {!!activeConversation &&
-                <>
-                    <TextInput onStartTypingHandler={onStartTypingHandler}
-                               dictionary={dictionary}
-                               draftMessage={draftMessage}
-                               setDraftMessage={setDraftMessage}/>
 
-                    <UploadImageButton imageInputRef={imageInputRef}
+
+                <form id={'MessengerMultiMediaInputBox'} onSubmit={onSubmitHandler}>
+                    {!!activeConversation &&
+                        <>
+                            <TextInput onStartTypingHandler={onStartTypingHandler}
+                                       dictionary={dictionary}
                                        draftMessage={draftMessage}
                                        setDraftMessage={setDraftMessage}/>
 
-                    <VoiceRecorderButton setDraftMessage={setDraftMessage}/>
+                            <UploadImageButton imageInputRef={imageInputRef}
+                                               draftMessage={draftMessage}
+                                               setDraftMessage={setDraftMessage}/>
 
-                    {(!!draftMessage.audioContent || !!draftMessage.imageContent) &&
-                        <div className={'media-content'}>
-                            {!!draftMessage.imageContent &&
-                                <AddedImagePreview handleSubmit={onSubmitHandler}
-                                                   setDraftMessage={setDraftMessage}
-                                                   draftMessage={draftMessage}/>}
-                            {!!draftMessage?.audioContent &&
-                                <RecordedAudioPreview setDraftMessage={setDraftMessage}
-                                                      draftMessage={draftMessage}/>}
-                        </div>
+                            <VoiceRecorderButton setDraftMessage={setDraftMessage}/>
+
+                            {(!!draftMessage.audioContent || !!draftMessage.imageContent) &&
+                                <div className={'media-content'}>
+                                    {!!draftMessage.imageContent &&
+                                        <AddedImagePreview handleSubmit={onSubmitHandler}
+                                                           setDraftMessage={setDraftMessage}
+                                                           draftMessage={draftMessage}/>}
+                                    {!!draftMessage?.audioContent &&
+                                        <RecordedAudioPreview setDraftMessage={setDraftMessage}
+                                                              draftMessage={draftMessage}/>}
+                                </div>
+                            }
+                        </>
                     }
-                </>
-            }
-
-        </form>
+                </form>
     )
 };
 export default MessengerMultiMediaInputBox;

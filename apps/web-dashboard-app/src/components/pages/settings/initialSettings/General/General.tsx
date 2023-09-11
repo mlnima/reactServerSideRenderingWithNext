@@ -3,10 +3,10 @@
 // import {convertVariableNameToName, LanguagesOptions} from "custom-util";
 // import styled from "styled-components";
 // import {useSelector} from "react-redux";
-// import {DashboardStore, Store} from "typescript-types";
+// import {DashboardStore, utils} from "typescript-types";
 // import TitleDescriptionSettingFields from "./TitleDescriptionSettingFields";
-// import {useAppDispatch} from "@store/hooks";
-// import {editIdentityAction, updateSettingAction} from "@store/reducers/settingsReducer";
+// import {useAppDispatch} from "@utils/hooks";
+// import {editIdentityAction, updateSettingAction} from "@utils/reducers/settingsReducer";
 // import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 // import {faXmark} from "@fortawesome/free-solid-svg-icons/faXmark";
 //

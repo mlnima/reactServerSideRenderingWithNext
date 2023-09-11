@@ -12,6 +12,6 @@
     "ts": "ts-node"
   },
   "ext": "js,ts,json",
-  "exec": "concurrently \"ts-node --transpile-only index.ts\"",
+  "exec": "concurrently \"ts-node --transpile-only socketServer.ts\"",
   "trace-warnings": true
 }

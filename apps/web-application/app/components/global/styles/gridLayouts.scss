@@ -2,12 +2,12 @@ $grid-gap: 4px;
 
 #page {
   width: 100%;
-  min-height: calc(100vh - 100px);
+  min-height: calc(100vh - 200px);
 
   #content {
     display: grid;
     grid-area: page;
-    min-height: 40em;
+    min-height: 80vh;
     //box-sizing: border-box;
     //padding-left: 4px;
     //padding-right: 4px;

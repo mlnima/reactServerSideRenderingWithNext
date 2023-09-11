@@ -16,7 +16,7 @@ const RecordedAudioPreview: FC<PropTypes> = ({audioMessage, setAudioMessage}) =>
                     onClick={() => setAudioMessage('')}>
                 <FontAwesomeIcon icon={faXmark} style={{width: 25, height: 25}}/>
             </button>
-            <audio className={'audio-player'} src={audioMessage} controls/>
+            <audio className={'audioPlayer'} src={audioMessage} controls/>
             <button className={'chatroomToolBoxActionBtn'} type={'submit'}>
                 <FontAwesomeIcon icon={faPaperPlane} style={{width: 25, height: 25}}/>
             </button>
