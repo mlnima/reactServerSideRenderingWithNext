@@ -32,6 +32,15 @@ export const globalStateSlice = createSlice({
                 }
             }
         },
+        setLoading: (state, action: PayloadAction<any>) => {
+
+            if (state.loading !== action.payload) {
+                return {
+                    ...state,
+                    loading: action.payload
+                }
+            }
+        },
         setLoadingTimeOut: (state, action: PayloadAction<any>) => {
             if (state.loading !== action.payload) {
                 state.loading = true
@@ -59,6 +68,7 @@ export const globalStateSlice = createSlice({
 export const {
     loginRegisterForm,
     loading,
+    setLoading,
     setLoadingTimeOut,
     setAdminMode,
     setAlert,

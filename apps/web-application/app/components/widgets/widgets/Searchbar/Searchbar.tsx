@@ -6,6 +6,8 @@ import {faEraser} from "@fortawesome/free-solid-svg-icons/faEraser";
 import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons/faMagnifyingGlass";
 import {faXmark} from "@fortawesome/free-solid-svg-icons/faXmark";
 import './Searchbar.styles.scss';
+import {useAppDispatch, useAppSelector} from "@store/hooks";
+import { setLoading} from "@store/reducers/globalStateReducer";
 
 interface IProps {
     locale: string,
@@ -20,18 +22,22 @@ const SearchBar: React.FC<IProps> = ({dictionary, locale}) => {
     const params = useParams()
     const pathname = usePathname()
     const [keyword, setKeyword] = useState<string>('');
+    const dispatch = useAppDispatch()
     const [open, setOpen] = useState<boolean>(false);
     const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCAL || 'en';
 
     const onSearchHandler = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+
         const formElement = event.currentTarget;
-        if (keyword?.length >= 3 && keyword?.length <= 50) {
+        if (keyword?.length >= 3 && keyword?.length <= 50 && params?.keyword !== keyword) {
             if (locale === defaultLocale) {
                 push(`/search/${keyword}?page=1`);
             } else {
                 push(`/${locale}/search/${keyword}?page=1`);
             }
+
+            dispatch(setLoading(true))
         } else {
             formElement.style.animation = 'none';
             setTimeout(() => formElement.style.animation = 'shake 0.5s ease-in-out', 0);
@@ -67,6 +73,8 @@ const SearchBar: React.FC<IProps> = ({dictionary, locale}) => {
         } else {
             setKeyword('')
         }
+
+
     }, [searchParams, pathname]);
 
 

@@ -70,7 +70,7 @@ const searchPage = async ({params, searchParams}: IProps) => {
         <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
             <main id={'primary'} className={'main searchPage'}>
                 <div className={'searchPageTitle'}>
-                    {!!queryObject.keyword && <h1>{capitalizeFirstLetters(queryObject.keyword)}</h1> }
+                    {!!queryObject.keyword && <h1>{capitalizeFirstLetters(decodeURIComponent(queryObject.keyword))}</h1> }
                 </div>
 
                 <WidgetsRenderer dictionary={dictionary}

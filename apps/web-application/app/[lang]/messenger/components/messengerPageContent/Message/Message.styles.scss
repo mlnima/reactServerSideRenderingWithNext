@@ -1,4 +1,4 @@
-.message{
+.message {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -9,8 +9,8 @@
   box-sizing: border-box;
   overflow-wrap: break-word;
 
-  .messengerLog{
-    color: var(--primary-text-color,#fff);
+  .messengerLog {
+    color: var(--primary-text-color, #fff);
     text-align: center;
     word-wrap: break-word;
     padding: 5px;
@@ -18,8 +18,8 @@
   }
 
   .messengerMessageData {
-    background-color: var(--tertiary-background-color,#404040);
-    color: var(--primary-text-color,#fff);
+    background-color: var(--tertiary-background-color, #404040);
+    color: var(--primary-text-color, #fff);
     padding: 10px;
     margin: 5px;
     box-sizing: border-box;
@@ -44,7 +44,7 @@
       border-radius: 4px;
     }
 
-    .audioPlayer{
+    .audioPlayer {
       max-width: 80%;
     }
 
@@ -61,12 +61,14 @@
   }
 }
 
-.myMessage{
+.myMessage {
   justify-content: flex-end;
+
   .messengerMessageData {
     background-color: #1877F2;
     color: #fff;
-    .audioPlayer{
+
+    .audioPlayer {
       max-width: 80%;
 
     }
