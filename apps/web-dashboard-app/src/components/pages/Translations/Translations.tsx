@@ -15,7 +15,7 @@ const Translations = () => {
 
     const dispatch = useAppDispatch()
     const translationsData = useSelector(({fileManager}: DashboardStore) => fileManager.translationsData)
-    const [activeEditingLanguage, seActiveEditingLanguage] = useState(() => process.env.NEXT_PUBLIC_DEFAULT_LOCAL ||process.env.REACT_APP_DEFAULT_LOCAL);
+    const [activeEditingLanguage, seActiveEditingLanguage] = useState(() => process.env.NEXT_PUBLIC_DEFAULT_LOCALE ||process.env.REACT_APP_DEFAULT_LOCALE);
     const [translationsFilePath, setTranslationsFilePath] = useState(
         () => `./locales/${activeEditingLanguage}/customTranslation.json`
     );
@@ -46,9 +46,9 @@ const Translations = () => {
             Translations
             <select onChange={e => onActiveEditingLanguageChangeHandler(e)} className={'custom-select'}>
                 <option
-                    value={process.env.NEXT_PUBLIC_DEFAULT_LOCAL}>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL || 'Default'}
+                    value={process.env.NEXT_PUBLIC_DEFAULT_LOCALE}>{process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'Default'}
                 </option>
-                <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALS || ''}/>
+                <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALES || ''}/>
             </select>
 
             <div className='editor-area'>

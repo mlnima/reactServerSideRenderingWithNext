@@ -10,7 +10,7 @@ type Props = {
 
 const categoriesMetaGenerator = async ({params}: Props, parent?: ResolvingMetadata): Promise<Metadata> => {
 
-    const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCAL || 'en';
+    const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const settingsData = await fetchSettings({requireSettings: ['categoriesPageSettings']});
     const initialSettingsData = await fetchSettings({requireSettings: ['initialSettings']})
 

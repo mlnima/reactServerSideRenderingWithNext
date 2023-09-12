@@ -32,8 +32,7 @@ const VideoPostCard: FC<IProps> = ({post, locale, postUrl, isSidebar, index}) =>
                 <div className={'card-media'}>
                     <Link href={postUrl}
                           className={'card-link'}
-                          title={post?.translations?.[locale as string]?.title ?? post?.title}
-                          prefetch={false}>
+                          title={post?.translations?.[locale as string]?.title ?? post?.title}>
                         <CardImageRendererUseClient
                             imageUrl={post.mainThumbnail}
                             videoTrailerUrl={post?.videoTrailerUrl}
@@ -60,5 +59,3 @@ const VideoPostCard: FC<IProps> = ({post, locale, postUrl, isSidebar, index}) =>
         )
     };
 export default VideoPostCard
-
-//flex ${(!!post.views && !!rating) ? 'justify-between' : 'justify-start'}

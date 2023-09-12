@@ -19,7 +19,7 @@ const WidgetText:FC<PropTypes> = ({translations, text}) => {
 
     const stringToRender = useMemo(() => {
         //@ts-ignore
-        return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? text : translations?.[locale]?.text || text || '';
+        return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? text : translations?.[locale]?.text || text || '';
     }, [text,translations,locale])
 
     return (

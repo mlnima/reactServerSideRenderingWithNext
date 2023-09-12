@@ -7,7 +7,7 @@ import {getPosts, getUserPagePosts} from './postsControllers/getPosts'
 import getPost from './postsControllers/getPost'
 import likeDislikeView from './postsControllers/likeDislikeView'
 import newComment from './postsControllers/newComment'
-import checkRemovedContent from './postsControllers/checkRemovedContent'
+// import checkRemovedContent from './postsControllers/checkRemovedContent'
 import getMetas from './postsControllers/getMetas'
 import getMeta from './postsControllers/getMeta'
 import getComments from './postsControllers/getComments'
@@ -29,7 +29,7 @@ router.get('/getPost',cacheSuccesses,getPost)
 router.get('/getEditingPost',getPost)
 router.post('/likeDislikeView',likeDislikeView)
 router.post('/newComment',rateLimitMiddleware(1,60*1000),newComment)
-router.post('/checkRemovedContent',checkRemovedContent)
+// router.post('/checkRemovedContent',checkRemovedContent)
 router.post('/resetMetaImage',resetMetaImage)
 router.get('/getMetas',cacheSuccesses,getMetas)
 router.get('/getMeta',cacheSuccesses,getMeta)

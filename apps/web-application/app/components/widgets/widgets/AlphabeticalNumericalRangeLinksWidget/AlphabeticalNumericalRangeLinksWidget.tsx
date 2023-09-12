@@ -7,6 +7,7 @@ import './AlphabeticalNumericalRangeLinksWidget.styles.scss';
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import {faArrowUpZA} from "@fortawesome/free-solid-svg-icons";
 import {faArrowLeft} from "@fortawesome/free-solid-svg-icons/faArrowLeft";
+import { v4 as uuidv4 } from 'uuid';
 
 const AlphabeticalNumericalRangeLinksWidget: FC = () => {
 
@@ -37,7 +38,7 @@ const AlphabeticalNumericalRangeLinksWidget: FC = () => {
                   style={{
                       pointerEvents: isDisabled ?  'none' : 'auto',
                   }}
-                  key={index}>
+                  key={uuidv4()}>
                 {startWith ? letter : letter.toUpperCase()}
             </Link>
         )

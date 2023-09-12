@@ -22,7 +22,7 @@ interface IProps {
 
 const userPage = async ({params, searchParams}: IProps) => {
 
-    const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCAL || 'en';
+    const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale);
     const settingsData = await fetchSettings({requireSettings: ['userPageSettings']});
 

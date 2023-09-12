@@ -2,6 +2,7 @@
 import React from 'react';
 import {ImageItem} from './ImageItem';
 import {Post} from "typescript-types";
+import { v4 as uuidv4 } from 'uuid';
 
 export interface ImageListProps {
     setPreviewImage: (file: any | null) => void;
@@ -29,7 +30,7 @@ export const ImageList: React.FC<ImageListProps> = (
     return (
         <div>
             {(editingPost?.images || []).map((image, index) => (
-                <ImageItem key={index + Date.now()}
+                <ImageItem key={uuidv4()}
                            removeImage={removeImage}
                            image={image}
                            index={index}

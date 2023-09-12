@@ -9,6 +9,7 @@ import {faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import {Post, Store} from 'typescript-types';
 import {shortNumber, ratingCalculator} from 'custom-util';
 import './PostsSliderWidget.styles.scss';
+import { v4 as uuidv4 } from 'uuid';
 
 const ArticlePostCard = dynamic(() => import('@components/cards/cardsComponents/ArticlePostCard/ArticlePostCard'));
 const PromotionPostCard = dynamic(() => import('@components/cards/cardsComponents/PromotionPostCard/PromotionPostCard'));
@@ -85,22 +86,22 @@ const PostsSliderWidget: FC<PostsSliderPropsTypes> = ({posts, uniqueData, isSide
             postUrl: post?.postType === 'out' ? post?.redirectLink || '#' :
                 `/post/${post?.postType}/${post._id}`,
             targetLink: post?.postType === 'out' || post?.outPostType === 'promotion' ? '_blank' : '_self',
-            title: process.env.NEXT_PUBLIC_DEFAULT_LOCAL === locale ?
+            title: process.env.NEXT_PUBLIC_DEFAULT_LOCALE === locale ?
                 post?.title :
                 post?.translations?.[locale as string]?.title || post?.title,
             isSidebar: isSidebar
         };
 
         return (
-            <div key={index} className='embla__slide postsSliderWidgetSlideResponsive'>
+            <div key={uuidv4()} className='embla__slide postsSliderWidgetSlideResponsive'>
                 {/*//@ts-ignore*/}
-                {post?.postType === 'video' ? <VideoPostCard {...postProps} key={index} index={index}/> :
+                {post?.postType === 'video' ? <VideoPostCard {...postProps} key={post?._id} index={index}/> :
                     //@ts-ignore
-                    post?.postType === 'promotion' ? <PromotionPostCard {...postProps} index={index}/> :
+                    post?.postType === 'promotion' ? <PromotionPostCard {...postProps} key={post?._id} index={index}/> :
                         //@ts-ignore
-                        post?.postType === 'article' ? <ArticlePostCard {...postProps} index={index}/> :
+                        post?.postType === 'article' ? <ArticlePostCard {...postProps} key={post?._id} index={index}/> :
                             //@ts-ignore
-                            post?.postType === 'learn' ? <LearnPostCard {...postProps} index={index}/> :
+                            post?.postType === 'learn' ? <LearnPostCard {...postProps} key={post?._id} index={index}/> :
                                 //@ts-ignore
                                 null
                 }
@@ -260,7 +261,7 @@ export default PostsSliderWidget;
 //                 postUrl: post?.postType === 'out' ? post?.redirectLink || '#' :
 //                     `/post/${post?.postType}/${post._id}`,
 //                 targetLink: post?.postType === 'out' || post?.outPostType === 'promotion' ? '_blank':'_self',
-//                 title: process.env.NEXT_PUBLIC_DEFAULT_LOCAL === locale ?
+//                 title: process.env.NEXT_PUBLIC_DEFAULT_LOCALE === locale ?
 //                     post?.title :
 //                     post?.translations?.[locale as string]?.title || post?.title,
 //                 isSidebar: isSidebar,

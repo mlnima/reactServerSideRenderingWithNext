@@ -46,7 +46,7 @@ const LanguagesSwitcher :FC = () => {
 
 
     const onChangeHandler = e => {
-        const localToSet = e.target.value === 'default' ? process.env.NEXT_PUBLIC_DEFAULT_LOCAL : e.target.value
+        const localToSet = e.target.value === 'default' ? process.env.NEXT_PUBLIC_DEFAULT_LOCALE : e.target.value
         router?.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale: localToSet})
     }
 
@@ -59,8 +59,8 @@ const LanguagesSwitcher :FC = () => {
                     onChange={e => onChangeHandler(e)}
                     title={'select language'}
             >
-                <option key='default' value='default'>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL || 'default'}</option>
-                <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALS || ''}/>
+                <option key='default' value='default'>{process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'default'}</option>
+                <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALES || ''}/>
             </select>
 
         </LanguagesSwitcherStyledDiv>

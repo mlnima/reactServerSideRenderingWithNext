@@ -93,6 +93,7 @@ const UniqueFields: FC<UniqueFieldsPropTypes> =
                         widgetData.type === 'postsSwiper' ||
                         widgetData.type === 'metaWithImage' ||
                         widgetData.type === 'meta' ||
+                        widgetData.type === 'postsListEntireByCategories' ||
                         widgetData.type === 'postsSlider') &&
                     <TextInputFieldForWidget
                         inputTitle='count :'
@@ -104,6 +105,7 @@ const UniqueFields: FC<UniqueFieldsPropTypes> =
                         onChangeHandler={onChangeHandler}
                     />
                 }
+
 
                 {(widgetData.type === 'posts' ||
                         widgetData.type === 'postsList' ||

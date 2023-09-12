@@ -5,6 +5,7 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 const CardLastUpdate = dynamic(() => import('./CardLastUpdate/CardLastUpdate'),
                {ssr:false,loading: () => <span className={'last-update'}>...</span>});
+import { v4 as uuidv4 } from 'uuid';
 // import CardLastUpdate from "@components/includes/cards/asset/CardLastUpdate/CardLastUpdate";
 
 interface VideoPostCardActorsPropTypes {
@@ -88,7 +89,7 @@ const VideoPostCardActors: FC<VideoPostCardActorsPropTypes> = ({actors, hover, u
                 <span className={'card-actors-wrapper'}>
                                 {actors?.map((actor, index) => {
                                     return (
-                                        <span key={actor?._id + index}>
+                                        <span key={uuidv4()}>
                                             <Link href={`/actor/${actor?._id}`} className={'card-actor'}>
                                                {actor.name}{index !== actors.length -1 ? ', ' :''}
                                             </Link>

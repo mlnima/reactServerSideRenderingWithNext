@@ -25,7 +25,7 @@ const ActorDetails:FC<IProps> = ({additionalInfo}) => {
 
 
             return (
-                <div className={'actor-detail'} key={index}>
+                <div className={'actor-detail'} key={detail?.name.trim().toLowerCase()}>
                     <span className={'actor-detail-name'}>
                         {detail?.name.trim() + ':'}
                     </span>

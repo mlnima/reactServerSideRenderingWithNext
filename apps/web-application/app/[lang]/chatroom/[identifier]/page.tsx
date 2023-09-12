@@ -15,7 +15,7 @@ interface IProps {
 
 const chatroomPage = async ({params: {lang, identifier}}: IProps) => {
 
-    const locale = i18n.locales.includes(lang) ? lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCAL || 'en';
+    const locale = i18n.locales.includes(lang) ? lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale);
     // const settingsData = await fetchSettings(['chatroomPageSettings']);
     const chatroomsData = await fetchChatroomData({identifier})

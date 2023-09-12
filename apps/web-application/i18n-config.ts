@@ -1,5 +1,5 @@
-export const locales = process.env.NEXT_PUBLIC_LOCALS?.split(' ') || [];
-export const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCAL;
+export const locales = process.env.NEXT_PUBLIC_LOCALES?.split(' ') || [];
+export const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE;
 
 export const i18n = {
     defaultLocale,

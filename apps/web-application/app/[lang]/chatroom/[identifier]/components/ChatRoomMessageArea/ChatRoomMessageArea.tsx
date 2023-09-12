@@ -84,7 +84,7 @@ const ChatRoomMessageArea: FC<IProp> = (
              id={'chatroomMessageArea'}>
             {!!chatroomMessages?.length && sortArrayByPropertyOfObject(chatroomMessages, 'createdAt', 'asc')
                 .map((message: ChatroomMessage, index: number) => {
-                    return <ChatRoomMessage onDeleteMessageHandler={onDeleteMessageHandler} message={message} key={index}/>;
+                    return <ChatRoomMessage onDeleteMessageHandler={onDeleteMessageHandler} message={message} key={message?._id || index}/>;
                 })
             }
         </div>

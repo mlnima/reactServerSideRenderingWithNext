@@ -7,7 +7,7 @@ const getWidgets = async (req, res) => {
 
     try {
         const locale = req.query.locale
-        const locales = process.env.NEXT_PUBLIC_LOCALS.split(' ')
+        const locales = process.env.NEXT_PUBLIC_LOCALES.split(' ')
         const excludeOtherLanguagesQuery = locale ? {select: locales.map(languageCode => languageCode !== locale ? `-data.translations.${languageCode}` : '').join(' ')} : {}
         const requestedWidgets = Array.isArray(req.query.widget) ? req.query.widget : [req.query.widget]
         const widgetsDataQuery = requestedWidgets.map(position => position === 'all' ? {} : {'data.position': position})

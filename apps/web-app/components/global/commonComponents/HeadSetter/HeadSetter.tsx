@@ -26,7 +26,7 @@ const HeadSetter: FC<PropTypes> = (
 
     const {asPath, locale} = useRouter();
     const headDataSettings = useAppSelector(({settings}) => settings?.initialSettings?.headDataSettings)
-    const siteLanguages = process.env.NEXT_PUBLIC_LOCALS?.split(' ') || [];
+    const siteLanguages = process.env.NEXT_PUBLIC_LOCALES?.split(' ') || [];
     const headTitle = useMemo(() => title || headDataSettings?.title || 'Title', [title, asPath])
     const headDescription = useMemo(() => description || headDataSettings?.description || '', [description, asPath])
     const headKeywords = useMemo(() => keywords || headDataSettings?.keywords, [keywords, asPath])
@@ -73,7 +73,7 @@ const HeadSetter: FC<PropTypes> = (
             {!!(siteLanguages && siteLanguages?.length) &&
                 siteLanguages.map((lang, index) => {
 
-                    const languageToRender = lang === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? '' : `/${lang}`
+                    const languageToRender = lang === process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? '' : `/${lang}`
                     const dynamicHref = `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${languageToRender}${asPath}`
 
                     return <link rel="alternate"

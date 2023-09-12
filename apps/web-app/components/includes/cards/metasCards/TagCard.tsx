@@ -46,7 +46,7 @@ const TagCard: FC<TagCardPropTypes> =
         const {locale} = useRouter();
 
         const title = useMemo(() => {
-            const checkedTitle = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?
+            const checkedTitle = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCALE ?
                 meta?.name :
                 //@ts-ignore
                 meta?.translations?.[locale]?.name || meta?.name

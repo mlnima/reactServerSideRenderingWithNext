@@ -1,5 +1,6 @@
 const widgetsStaticPositions = [
     'deactivated',
+    'trash',
     'topBar',
     'header',
     'navigation',

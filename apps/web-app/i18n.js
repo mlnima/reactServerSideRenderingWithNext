@@ -1,5 +1,5 @@
-const locales = process.env.NEXT_PUBLIC_LOCALS?.split(' ') || [];
-const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCAL;
+const locales = process.env.NEXT_PUBLIC_LOCALES?.split(' ') || [];
+const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE;
 
 const domains = !process.env.NEXT_PUBLIC_DOMAINS ? {} :
     process.env.NEXT_PUBLIC_DOMAINS.split(' ').map((domain, index) => {

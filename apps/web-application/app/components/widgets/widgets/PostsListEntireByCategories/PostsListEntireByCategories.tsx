@@ -1,37 +1,89 @@
-'use client';
-//@ts-ignore
-import {FC, useEffect, memo, useMemo} from "react";
-import styled from "styled-components";
-//import PromotionPostListCard from "@components/includes/cards/postsCards/PromotionPostListCard";
+import React, {FC} from "react";
+import './PostsListEntireByCategories.styles.scss'
+import Link from "next/link";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons/faMagnifyingGlass";
+import {capitalizeFirstLetters} from "custom-util";
 
-const Style = styled.div``;
-
-interface PropTypes {
-    uniqueData: any
+interface IProps {
+    locale: string,
+    count: number,
+    uniqueData: {
+        categoriesDataWithPosts: ICategory[]
+    },
+    dictionary: {
+        [key: string]: string
+    }
 }
 
-const PostsListEntireByCategories: FC<PropTypes> = ({uniqueData}) => {
+interface ICategory {
+    _id: string,
+    name: string,
+    description: string,
+    posts: {
+        title: string,
+        icon?: string,
+        redirectLink: string,
+        _id: string
+    }[],
+}
 
-    const categoriesDataWithPosts = useMemo(()=>uniqueData?.categoriesDataWithPosts,[])
-
+const PostsListEntireByCategories: FC<IProps> = ({uniqueData, locale, dictionary, count}) => {
+    const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     return (
-        <Style>
-            {/*{categoriesDataWithPosts.map(category=>{*/}
-            {/*    return(*/}
-            {/*        <div key={category.name}>*/}
-            {/*            <div>*/}
-            {/*                <h2>{category.name}</h2>*/}
-            {/*                <p>{category.description}</p>*/}
-            {/*                {category.posts.map((post,index)=>{*/}
-            {/*                    return(*/}
-            {/*                        <PromotionPostListCard post={post} index={index}/>*/}
-            {/*                    )*/}
-            {/*                })}*/}
-            {/*            </div>*/}
-            {/*        </div>*/}
-            {/*    )*/}
-            {/*})}*/}
-        </Style>
+        <div className={'postsListByCategories'}>
+            {uniqueData?.categoriesDataWithPosts?.map((category) => {
+                return (
+                    <div key={category?._id} className={'postsListByCategoriesGroup'}>
+
+                        <h2 className={'categoryGroupTitle'}>{capitalizeFirstLetters(category.name)}</h2>
+                        {!!category.description && <p className={'categoryGroupDescription'}>{category.description}</p>}
+                        <div className={'postsListByCategoriesWrapper custom-scroll'}>
+                            <ol className={'postsList'}>
+                                {category.posts.map((post) => {
+                                    const postUrl = locale === defaultLocale ?
+                                        `/post/promotion/${post._id}` :
+                                        `/${locale}${`/post/promotion/${post._id}`}`;
+
+                                    return (
+                                        <li className={'postsListItem'} key={post._id}>
+                                            <Link href={post.redirectLink || postUrl}
+                                                  className={'postsListItemExternalLink'}>
+                                                <h3 className="ellipsisText">  {post.title}</h3>
+
+                                            </Link>
+                                            <Link href={postUrl} className={'postsListItemInternalLink'}>
+                                                <FontAwesomeIcon className={'searchbar-submit-btn-icon'}
+                                                                 icon={faMagnifyingGlass}
+                                                                 style={{width: 15, height: 15}}/>
+                                            </Link>
+                                        </li>
+                                    )
+                                })}
+                            </ol>
+                        </div>
+
+                        {/*//@ts-ignore*/}
+                        {(category?.count > (uniqueData?.count || count)) &&
+                            <div className={'postsListGroupActionButtons'}>
+                                <Link href={`/category/${category?._id}`} className={'btn btn-primary seeAllButton'}>
+                                    {dictionary?.['See All'] || 'See All'}
+                                </Link>
+                            </div>
+                        }
+
+
+                    </div>
+                )
+            })}
+        </div>
     )
 };
-export default memo(PostsListEntireByCategories) ;
+export default PostsListEntireByCategories;
+
+
+// {category.posts.map((post) => {
+//     return (
+//         <PromotionPostListCard post={post} key={post._id}/>
+//     )
+// })}

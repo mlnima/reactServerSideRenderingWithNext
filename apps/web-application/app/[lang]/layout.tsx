@@ -35,7 +35,7 @@ export async function generateStaticParams() {
 
 const RootLayout = async ({children, params: {lang}}: { children: ReactNode, params: { lang: string } }) => {
 
-    const locale = i18n.locales.includes(lang) ? lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCAL || 'en'
+    const locale = i18n.locales.includes(lang) ? lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en'
     const dictionary = await getDictionary(locale)
     const initialSettingsData = await fetchSettings({requireSettings:['initialSettings']})
     const initialSettings = initialSettingsData?.settings?.initialSettings

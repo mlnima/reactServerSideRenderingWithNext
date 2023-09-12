@@ -19,7 +19,6 @@ const MenuWidgetItem: FC<MenuWidgetItemPropTypes> = ({menuItem, setOpen, diction
                   className={`menu-item-link`}
                   target={menuItem.target.includes('http') ? '_blank' : '_self'}
                   title={dictionary?.[menuItem.name] || menuItem.name || ''}
-                  prefetch={false}
                   onClick={() => setOpen(false)}>
                 {dictionary?.[menuItem.name] || menuItem.name || ''}
             </Link>

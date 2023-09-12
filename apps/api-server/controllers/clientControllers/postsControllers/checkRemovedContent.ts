@@ -1,6 +1,6 @@
 import {metaSchema,postSchema,widgetSchema} from 'models';
 import axios from 'axios'
-import {updatePostWidgetData} from '../../adminControllers/widgets/updateWidget'
+// import {updateWidget} from '../../adminControllers/widgets/updateWidget'
 
 const checkRemovedContent = (req, res) => {
     const checkUrl = req.body.checkUrl
@@ -11,9 +11,9 @@ const checkRemovedContent = (req, res) => {
                 await postSchema.findOneAndUpdate({mainThumbnail: checkUrl}, {$set: {status: 'pending'}}, {new: true}).exec().then(post => {
                     widgetSchema.findOne({'data.posts': post._id}).exec().then(widget => {
                         if (widget) {
-                            updatePostWidgetData(widget).then(updatedWidgets => {
-                                widgetSchema.findByIdAndUpdate(widget._id, {'data..uniqueData.posts': [...updatedWidgets.posts]}, {new: true}).exec()
-                            })
+                            // updatePostsWidget(widget).then(updatedWidgets => {
+                            //     widgetSchema.findByIdAndUpdate(widget._id, {'data..uniqueData.posts': [...updatedWidgets.posts]}, {new: true}).exec()
+                            // })
                         }
                     })
                 })

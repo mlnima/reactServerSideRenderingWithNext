@@ -76,7 +76,7 @@ let StyledDiv = styled.div`
 const CheckOutItemPreview = props => {
 
     const router = useRouter()
-    const locale = (router.locale || router.query.locale) === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? '' : router.locale || router.query.locale || ''
+    const locale = (router.locale || router.query.locale) === process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? '' : router.locale || router.query.locale || ''
     const onRemoveItemFromBasketHandler = () => {
         // const items = contextData.checkOutData.items.filter(i => i.productId !== props.productId)
         // contextData.setCheckOutData({

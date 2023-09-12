@@ -6,6 +6,7 @@ import './FormWidget.styles.scss'
 import FormWidgetField from "@components/widgets/widgets/FormWidget/FormWidgetField/FormWidgetField";
 import {loading, setAlert} from "@store/reducers/globalStateReducer";
 import {postFormData} from "fetch-requests";
+import { v4 as uuidv4 } from 'uuid';
 
 interface FormWidgetPropTypes {
     locale: string,
@@ -107,7 +108,7 @@ const FormWidget: FC<FormWidgetPropTypes> = ({widgetId, uniqueData, locale, dict
                             ?.sort((a, b) => (a?.fieldIndex > b?.fieldIndex) ? 1 : -1)
                             ?.map((field, index) => {
                                 return (
-                                    <FormWidgetField key={index}
+                                    <FormWidgetField key={uuidv4()}
                                                      onFormFieldsChangeHandler={onFormFieldsChangeHandler}
                                                      field={field}
                                                      dictionary={dictionary}/>

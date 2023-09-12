@@ -21,10 +21,8 @@ const PostsCardsRenderer: FC<IProps> = ({posts, locale, isSidebar}) => {
         <div className={`staticCardsWrapper${isSidebar ? 'Sidebar' : ''}`}>
             {(posts || []).map((post: Post, index: number) => {
 
-                const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCAL || 'en';
+                const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
 
-                // const postUrl = post?.redirectLink ? post?.redirectLink :
-                //     locale === defaultLocale ? `/post/${post?.postType}/${post._id}` : `/${locale}${`/post/${post?.postType}/${post._id}`}`;
                 const postUrl = locale === defaultLocale ?
                     `/post/${post?.postType}/${post._id}` :
                     `/${locale}${`/post/${post?.postType}/${post._id}`}`;

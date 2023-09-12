@@ -2,7 +2,7 @@ export const renderByLanguageCondition = (locale: string, widgetLanguageToRender
     return !widgetLanguageToRender ||
            widgetLanguageToRender === 'all' ||
            widgetLanguageToRender === locale ||
-           (widgetLanguageToRender === 'default' && locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL);
+           (widgetLanguageToRender === 'default' && locale === process.env.NEXT_PUBLIC_DEFAULT_LOCALE);
 }
 
 export default renderByLanguageCondition;

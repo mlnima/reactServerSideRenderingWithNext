@@ -18,13 +18,13 @@ const Text: FC<TextPropTypes> = ({translations, text}) => {
     const {locale} = useRouter();
 
     // const textToRender = useMemo(() => {
-    //     return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? text : translations?.[lang]?.text || text || '';
+    //     return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? text : translations?.[lang]?.text || text || '';
     // }, [text,translations,locale])
 
     return (
         <WidgetTextTextDataStyledDiv className={'widgetText widget-text'} >
             {/*//@ts-ignore*/}
-            {parse(locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? text : translations?.[locale]?.text || text || '')}
+            {parse(locale === process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? text : translations?.[locale]?.text || text || '')}
         </WidgetTextTextDataStyledDiv>
     );
 

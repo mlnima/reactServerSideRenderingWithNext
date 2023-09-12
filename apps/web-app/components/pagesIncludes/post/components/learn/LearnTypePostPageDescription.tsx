@@ -30,9 +30,9 @@ const LearnTypePostPageDescription :FC = () => {
     const descriptionValue = useMemo(() => {
         return translations ?
             //@ts-ignore
-                  translations?.[locale as string || process.env.NEXT_PUBLIC_DEFAULT_LOCAL] ?
+                  translations?.[locale as string || process.env.NEXT_PUBLIC_DEFAULT_LOCALE] ?
                       //@ts-ignore
-                      translations?.[locale as string || process.env.NEXT_PUBLIC_DEFAULT_LOCAL]?.description || description
+                      translations?.[locale as string || process.env.NEXT_PUBLIC_DEFAULT_LOCALE]?.description || description
                   : description
                : description;
     },[description]);

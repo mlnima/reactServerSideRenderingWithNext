@@ -12,8 +12,6 @@ interface FindMetasQueryTypes{
 export const findMetas = async (query:FindMetasQueryTypes)=>{
     try {
 
-
-
         const statusQuery = {status: 'published'};
         const type = {type: query?.metaType}
         const notStartWithNumberRegex = /^(?![0-9].*$).*/g

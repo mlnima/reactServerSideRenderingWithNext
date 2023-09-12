@@ -117,8 +117,8 @@ const initialSettings: FC<PropTypes> = ({}) => {
             <h1>Initial Settings</h1>
             <select name='activeEditingLanguage' className={'custom-select active-editing-language'}
                     onChange={e => setLanguage(e.target.value)}>
-                <option value='default'>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?? 'default'}</option>
-                <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALS || ''}/>
+                <option value='default'>{process.env.NEXT_PUBLIC_DEFAULT_LOCALE ?? 'default'}</option>
+                <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALES || ''}/>
             </select>
             <div className={'setting-sections'}>
                 <HeadDataSettings onChangeHandler={onChangeHandler}

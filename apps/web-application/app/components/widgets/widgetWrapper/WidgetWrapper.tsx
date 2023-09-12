@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 
 const WidgetHeader = dynamic(() => import('./WidgetHeader/WidgetHeader'))
 const WidgetPagination = dynamic(() => import('./WidgetPagination/WidgetPagination'))
-// const PostsListEntireByCategories = dynamic(() => import('@components/includes/widgets/PostsListEntireByCategories/PostsListEntireByCategories'))
+const PostsListEntireByCategories = dynamic(() => import('../widgets/PostsListEntireByCategories/PostsListEntireByCategories'))
 // const RecentComments = dynamic(() => import('../widgets/RecentComments/RecentComments'))
 const MetaWidget = dynamic(() => import('../widgets/MetaWidget/MetaWidget'))
 const MediaWidget = dynamic(() => import('../widgets/MediaWidget/MediaWidget'))
@@ -44,7 +44,7 @@ const WidgetWrapper: FC<IProps> = ({data, widgetId, isSidebar, viewType, locale,
     const widgetMatcher = {
         'postsSlider': PostsSliderWidget,
         'postsList': PostsListWidget,
-        // 'postsListEntireByCategories': PostsListEntireByCategories,
+        'postsListEntireByCategories': PostsListEntireByCategories,
         'posts': PostsCardsWidget,
         // 'imagesSlider':ImagesSlider,
         'multipleLinkTo': MultipleLinkTo,

@@ -31,7 +31,7 @@ const Description: FC<PropTypes> = ({descriptionRef}) => {
     })
 
     const descriptionValue = useMemo(() => {
-        return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?
+        return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCALE ?
             description :
             translations?.[locale as string]?.description || description
     }, [description, translations]);

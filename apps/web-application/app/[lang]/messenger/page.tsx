@@ -21,7 +21,7 @@ export const generateMetadata = async () => {
 
 const MessengerPage = async ({params: {lang, identifier}}: IProps) => {
 
-    const locale = i18n.locales.includes(lang) ? lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCAL || 'en';
+    const locale = i18n.locales.includes(lang) ? lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale);
     // const settingsData = await fetchSettings(['messengerPageSettings']);
     // const chatroomsData = await fetchChatroomData({identifier})

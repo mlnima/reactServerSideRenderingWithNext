@@ -9,6 +9,7 @@ import useEmblaCarousel , {
     UseEmblaCarouselType,
 }from 'embla-carousel-react'
 import styled from "styled-components";
+import { v4 as uuidv4 } from 'uuid';
 import Autoplay, {
     AutoplayType,
     AutoplayOptionsType,
@@ -194,7 +195,7 @@ const ImagesSlider: FC<PostsSliderPropsTypes> = ({uniqueData}) => {
         const renderSlides = slidesToRender.map((imageData, index) => {
 
             if (imageData.targetUrl) {
-                return <div className={'slide'} key={index}>
+                return <div className={'slide'} key={uuidv4()}>
                     <Link href={imageData.targetUrl} className='swiper-slide'>
                             <img src={imageData.imageUrl} alt={imageData.imageAlt}/>
                     </Link>

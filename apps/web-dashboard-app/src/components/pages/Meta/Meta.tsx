@@ -142,7 +142,7 @@ const Meta = () => {
                     <p>Language :</p>
                     <select className={'custom-select'} onChange={e => onActiveEditingLanguageChangeHandler(e)}>
                         <option value='default'>Default</option>
-                        <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALS || ''}/>
+                        <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALES || ''}/>
                     </select>
                 </div>
                 <div className={'single-meta-page-section'}>

@@ -9,12 +9,15 @@ import SidebarWidgetAreaRenderer
 interface IProps {
     params: {
         lang: string
+    },
+    searchParams: {
+        [key: string]: string | string[] | undefined
     }
 }
 
-const homePage = async ({params: {lang}}:IProps) => {
+const homePage = async ({params: {lang},searchParams}: IProps) => {
 
-    const locale = i18n.locales.includes(lang)  ?  lang :  process.env?.NEXT_PUBLIC_DEFAULT_LOCAL || 'en';
+    const locale = i18n.locales.includes(lang) ? lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale);
     const settingsData = await fetchSettings({requireSettings: ['homePageSettings']});
     const widgetsData = await fetchWidgets(['homePageLeftSidebar', 'homePageRightSidebar', 'home'], lang);

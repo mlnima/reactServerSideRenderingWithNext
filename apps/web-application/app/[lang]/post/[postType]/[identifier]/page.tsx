@@ -29,7 +29,7 @@ export const generateMetadata = postMetaGenerator;
 
 const PostPage = async ({params: {lang, identifier, postType}}: IProps) => {
 
-    const locale = i18n.locales.includes(lang) ? lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCAL || 'en';
+    const locale = i18n.locales.includes(lang) ? lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale)
     const postData = await fetchPost(identifier)
     const settingsData = await fetchSettings({requireSettings: ['postPageSettings']})

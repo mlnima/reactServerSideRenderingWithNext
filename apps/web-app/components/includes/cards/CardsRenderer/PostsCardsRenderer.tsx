@@ -94,7 +94,7 @@ const PostsCardsRenderer: FC<CardsRendererPropTypes> =
                         targetLink: post?.postType?.includes('external') || post?.outPostType === 'promotion' ? '_blank' : '_self',
                         postUrl: post?.postType?.includes('external') ? post?.redirectLink || '#' :
                             `/post/${post?.postType}/${post._id}`,
-                        title: process.env.NEXT_PUBLIC_DEFAULT_LOCAL === locale ?
+                        title: process.env.NEXT_PUBLIC_DEFAULT_LOCALE === locale ?
                             post?.title :
                             post?.translations?.[locale as string]?.title || post?.title,
                         isSidebar: isSidebar,

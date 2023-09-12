@@ -22,11 +22,11 @@
     "@types/react": "^18.2.7",
     "@types/react-dom": "18.2.4",
     "accept-language": "^3.0.18",
-    "eslint": "8.45.0",
-    "eslint-config-next": "^13.4.10",
     "embla-carousel": "^7.1.0",
     "embla-carousel-autoplay": "^7.1.0",
     "embla-carousel-react": "^7.1.0",
+    "eslint": "8.45.0",
+    "eslint-config-next": "^13.4.10",
     "fetch-requests": "*",
     "lodash.throttle": "^4.1.1",
     "negotiator": "^0.6.3",
@@ -41,7 +41,8 @@
     "simple-peer": "^9.11.1",
     "styled-components": "^5.3.11",
     "tailwind-css-components": "*",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",

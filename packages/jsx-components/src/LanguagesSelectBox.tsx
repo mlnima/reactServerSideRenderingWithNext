@@ -12,11 +12,11 @@ const LanguagesSelectBox: FC<IProps> = ({name, className, onChangeHandler}) => {
         ...(name ? {name} : {}),
     }
 
-    const languagesOptions = (process?.env?.NEXT_PUBLIC_LOCALS || '').split(" ").map((lang: string, index: number) => {
+    const languagesOptions = (process?.env?.NEXT_PUBLIC_LOCALES || '').split(" ").map((lang: string, index: number) => {
         return (
             //@ts-ignore
             <option key={lang + index}
-                    value={lang !== process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? 'default' : lang}>
+                    value={lang !== process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? 'default' : lang}>
                 {lang}
             </option>
         );

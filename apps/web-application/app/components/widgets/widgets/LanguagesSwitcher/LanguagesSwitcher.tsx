@@ -12,13 +12,12 @@ const LanguagesSwitcher: FC<IProps> = ({locale}) => {
     const pathname = usePathname()
     const params = useParams()
 
-    const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCAL || 'en';
-    const locales = process.env.NEXT_PUBLIC_LOCALS || '';
+    const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+    const locales = process.env.NEXT_PUBLIC_LOCALES || '';
     const [isOpen, setIsOpen] = useState(false);
 
-
     const redirectedPathName = (targetedLocale: string) => {
-        const locales = (process.env.NEXT_PUBLIC_LOCALS || '').split(' ');
+        const locales = (process.env.NEXT_PUBLIC_LOCALES || '').split(' ');
         const queryString = window.location.search;
 
         if (!pathname) return '/'
@@ -36,7 +35,7 @@ const LanguagesSwitcher: FC<IProps> = ({locale}) => {
 
         } else if (!locales.includes(segments[1])) {
             segments.splice(1, 0, targetedLocale);
-            push(segments.join('/')+ queryString);
+            push(segments.join('/') + queryString);
 
         } else if (pathname === '/' || locales.some((locale: string) => pathname.includes(`/${locale}`))) {
 

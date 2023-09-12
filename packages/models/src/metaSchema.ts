@@ -16,6 +16,7 @@ const metaSchema =  new Schema({
     imageUrl:String,
     coverImageUrl:String,
     imageUrlLock:Boolean,
+    icon:String,
     rankLock:Boolean,
     translations:Schema.Types.Mixed,
     count:Number,

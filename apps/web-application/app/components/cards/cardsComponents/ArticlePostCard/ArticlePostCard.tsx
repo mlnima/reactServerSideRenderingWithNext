@@ -33,8 +33,7 @@ const ArticlePostCard: FC<ArticlePostCardPropTypes> =
                 <div className={'card-media'}>
                     <Link href={postUrl}
                           className={'card-link'}
-                          title={post?.translations?.[locale as string]?.title ?? post?.title}
-                          prefetch={false}>
+                          title={post?.translations?.[locale as string]?.title ?? post?.title}>
 
                         <CardImageRendererUseClient imageUrl={post.mainThumbnail}
                                            mediaAlt={post?.translations?.[locale as string]?.title ?? post?.title}

@@ -10,7 +10,7 @@ const LanguagesOptions:FC<IProps> = ({languages})=>{
         <>
             {(
                 (languages || '').split(" ").filter(
-                    (lang) => lang !== process.env.NEXT_PUBLIC_DEFAULT_LOCAL
+                    (lang) => lang !== process.env.NEXT_PUBLIC_DEFAULT_LOCALE
                 ) || []
             ).map((lang: string) => {
                 return (

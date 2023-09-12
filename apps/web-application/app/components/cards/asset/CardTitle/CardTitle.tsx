@@ -13,7 +13,7 @@ const CardTitle: FC<CardTitlePropTypes> = ({title, url, targetLink}) => {
 
     return (
         <div className={'cardTitle'}>
-            <Link href={url || '#'} title={title} target={targetLink || '_self'}  prefetch={false}>
+            <Link href={url || '#'} title={title} target={targetLink || '_self'}>
                 { capitalizeFirstLetter(title)   }
             </Link>
         </div>

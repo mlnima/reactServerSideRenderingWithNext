@@ -2,6 +2,7 @@
 'use client';
 import './ObjectKeyDescriptionRenderer.styles.scss';
 import CodeSnippet from "@components/CodeSnippet/CodeSnippet";
+import { v4 as uuidv4 } from 'uuid';
 
 interface ComponentPropTypes {
     description: any
@@ -9,11 +10,11 @@ interface ComponentPropTypes {
 
 const ObjectKeyDescriptionRenderer = ({description}: ComponentPropTypes) => {
 
-    const renderParts = description.map((elementObject,index) => {
+    const renderParts = description.map((elementObject) => {
         const ElementType = Object.keys(elementObject)[0] as any
 
         return (
-            <div className={'learn-description-element'} key={ElementType + index}>
+            <div className={'learn-description-element'} key={uuidv4()}>
                 {
                     ElementType === 'img' ?
                         //@ts-ignore

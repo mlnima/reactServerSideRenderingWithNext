@@ -81,7 +81,7 @@ const checkout = () => {
     // const identity = useSelector(utils => utils?.settings.identity)
     // const userData = useSelector(utils => utils?.user.userData)
     // const router = useRouter()
-    // const locale = (router.locale || router.query.locale) === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? '' : router.locale || router.query.locale || '';
+    // const locale = (router.locale || router.query.locale) === process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? '' : router.locale || router.query.locale || '';
     // const [state, setState] = useState({
     //     paymentPage: false,
     //     isPaid: false,

@@ -108,8 +108,8 @@ const Index = () => {
                         </Link>
                         <select className={'custom-select language-selector'} ref={languageElement}
                                 onChange={e => dispatch(changeActiveEditingLanguage(e.target.value as string))}>
-                            <option value={'default'}>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL || 'Default'}</option>
-                            <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALS || ''}/>
+                            <option value={'default'}>{process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'Default'}</option>
+                            <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALES || ''}/>
                         </select>
                     </div>
 

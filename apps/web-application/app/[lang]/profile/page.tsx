@@ -11,7 +11,7 @@ interface IProps {
 //will be deleted after checking if it's needed
 const chatroomPage = async ({params: {lang}}: IProps) => {
 
-    const locale = i18n.locales.includes(lang) ? lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCAL || 'en';
+    const locale = i18n.locales.includes(lang) ? lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale);
     // const settingsData = await fetchSettings(['chatroomPageSettings']);
 

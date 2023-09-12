@@ -31,7 +31,7 @@ const RecentComments = props => {
 
     const renderComments = props.comments.map(comment => {
         return (
-            <div key={props.comments.indexOf(comment)} className='recent-comments-item'>
+            <div key={props.comments?._id} className='recent-comments-item'>
 
                 <Link href={`/post/${comment?.onDocumentTitle}?id=${comment.onDocumentId}`}>
                         <strong className='recent-comments-item-author'>{comment?.onDocumentTitle}</strong>

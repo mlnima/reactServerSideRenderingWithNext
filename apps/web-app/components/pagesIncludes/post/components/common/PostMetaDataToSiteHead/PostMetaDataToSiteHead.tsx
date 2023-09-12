@@ -13,7 +13,7 @@
 //         return {
 //             post,
 //             keywords: [...(post.tags || []), ...(post.categories || []), ...(post.actors || [])].map((i: Meta) => i.name).join(','),
-//             locals: process.env.NEXT_PUBLIC_LOCALS?.split(' '),
+//             locals: process.env.NEXT_PUBLIC_LOCALES?.split(' '),
 //         }
 //     });
 //
@@ -21,12 +21,12 @@
 //         return <link rel="alternate"
 //                      key={uniqueId('link_')}
 //                      hrefLang={local}
-//                      href={`${process.env.NEXT_PUBLIC_PRODUCTION_URL}${ (local === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? '' : `/${local}`) + asPath}`}
+//                      href={`${process.env.NEXT_PUBLIC_PRODUCTION_URL}${ (local === process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? '' : `/${local}`) + asPath}`}
 //         />
 //     })
 //
 //     const descriptionValue = useMemo(() => {
-//         return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?
+//         return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCALE ?
 //             post.description :
 //             post.translations?.[lang]?.description || post.description;
 //     }, [post]);

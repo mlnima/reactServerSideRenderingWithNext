@@ -237,8 +237,8 @@
 //                 <h3>Site Info:</h3>
 //                 <select name='activeEditingLanguage' className={'custom-select active-editing-language'}
 //                         onChange={e => onChangeLanguageHandler(e)}>
-//                     <option value='default'>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?? 'default'}</option>
-//                     <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALS || ''}/>
+//                     <option value='default'>{process.env.NEXT_PUBLIC_DEFAULT_LOCALE ?? 'default'}</option>
+//                     <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALES || ''}/>
 //                 </select>
 //                 <div className="siteIdentity site-settings-form-section-parent">
 //                     <div className={'site-settings-form-section'}>

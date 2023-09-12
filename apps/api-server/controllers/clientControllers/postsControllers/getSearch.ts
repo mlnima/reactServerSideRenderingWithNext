@@ -2,7 +2,7 @@ import {postSchema, searchKeywordSchema} from 'models';
 import {metaSchema} from 'models';
 import {postFieldRequestForCards} from "data-structures";
 
-const locals = process.env.NEXT_PUBLIC_LOCALS.split(' ');
+const locals = process.env.NEXT_PUBLIC_LOCALES.split(' ');
 
 interface ISaveSearchedKeyword {
     keyword: string,
