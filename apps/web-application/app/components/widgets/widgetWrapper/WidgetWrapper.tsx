@@ -1,7 +1,7 @@
 import {FC} from "react";
 import {WidgetData} from "typescript-types";
 import dynamic from "next/dynamic";
-import './WidgetWrapper.scss'
+import './WidgetWrapper.styles.scss'
 
 const WidgetHeader = dynamic(() => import('./WidgetHeader/WidgetHeader'))
 const WidgetPagination = dynamic(() => import('./WidgetPagination/WidgetPagination'))
