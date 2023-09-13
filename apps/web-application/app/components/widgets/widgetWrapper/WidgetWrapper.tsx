@@ -59,7 +59,7 @@ const WidgetWrapper: FC<IProps> = ({data, widgetId, isSidebar, viewType, locale,
         'authentication': Authentication,
         'linkTo': LinkTo,
         'menu': MenuWidget,
-        'shoppingCart':ShoppingCart,
+        'shoppingCart': ShoppingCart,
         'advertise': Advertise,
         'form': FormWidget,
         'dayModeNightMode': DayModeNightMode,
@@ -87,9 +87,11 @@ const WidgetWrapper: FC<IProps> = ({data, widgetId, isSidebar, viewType, locale,
                     viewType={viewType}/>
             }
 
-            {(!!data?.pagination && !!data?.redirectLink) && <WidgetPagination baseUrl={data?.redirectLink}
-                                                                               totalCount={data?.uniqueData?.totalCount}
-                                                                               count={data?.count}/>
+            {(!!data?.pagination && !!data?.redirectLink) &&
+                <WidgetPagination baseUrl={data?.redirectLink}
+                                  totalCount={data?.uniqueData?.totalCount}
+                                  count={data?.count}/>
+
             }
 
         </div>

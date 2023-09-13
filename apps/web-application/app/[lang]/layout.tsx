@@ -7,7 +7,7 @@ import * as process from "process";
 import {i18n} from '../../i18n-config'
 import {getDictionary} from "../../get-dictionary";
 import GlobalCustomStyles from "@components/global/styles/GlobalCustomStyles";
-import LayoutMetaGenerator from   "../components/LayoutMetaGenerator/LayoutMetaGenerator";
+import LayoutMetaGenerator from "../components/LayoutMetaGenerator/LayoutMetaGenerator";
 import LoginRegisterPopup from "@components/LoginRegisterPopup/LoginRegisterPopup";
 import UserAutoLogin from "@components/UserAutoLogin";
 import BackToTopButton from "@components/BackToTopButton/BackToTopButton";
@@ -22,11 +22,7 @@ import TopbarWidgetArea from "@components/widgets/widgetAreas/TopbarWidgetArea";
 import HeaderWidgetArea from "@components/widgets/widgetAreas/HeaderWidgetArea";
 import NavigationWidgetArea from "@components/widgets/widgetAreas/NavigationWidgetArea";
 import FooterWidgetArea from "@components/widgets/widgetAreas/FooterWidgetArea";
-
-// const TopbarWidgetArea = dynamic(() => import("@components/widgets/widgetAreas/TopbarWidgetArea"))
-// const HeaderWidgetArea = dynamic(() => import("@components/widgets/widgetAreas/HeaderWidgetArea"))
-// const NavigationWidgetArea = dynamic(() => import("@components/widgets/widgetAreas/NavigationWidgetArea"))
-// const FooterWidgetArea = dynamic(() => import("@components/widgets/widgetAreas/FooterWidgetArea"))
+import {rtlLanguages} from "data-structures";
 
 export async function generateStaticParams() {
     return i18n.locales.map((lng: string) => ({lng}))
@@ -37,13 +33,15 @@ const RootLayout = async ({children, params: {lang}}: { children: ReactNode, par
 
     const locale = i18n.locales.includes(lang) ? lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en'
     const dictionary = await getDictionary(locale)
-    const initialSettingsData = await fetchSettings({requireSettings:['initialSettings']})
+    const initialSettingsData = await fetchSettings({requireSettings: ['initialSettings']})
     const initialSettings = initialSettingsData?.settings?.initialSettings
     const staticWidgetsData = await fetchWidgets(['footer', 'header', 'topBar', 'navigation'], locale)
 
+
+//dir={rtlLanguages.includes(locale) ? 'rtl' : 'ltr'}
     return (
         <html lang={locale}>
-        <body className={`dark `}>
+        <body className={`dark `} >
         <ReduxProvider>
             <div className="layout">
                 {initialSettings?.layoutSettings?.topbar &&
@@ -62,7 +60,7 @@ const RootLayout = async ({children, params: {lang}}: { children: ReactNode, par
                     <FooterWidgetArea dictionary={dictionary} widgets={staticWidgetsData?.widgets?.footer}
                                       locale={locale}/>}
             </div>
-            <CookiesInformerBar />
+            <CookiesInformerBar/>
             <UserAutoLogin/>
 
             <GoogleAnalytics googleAnalyticsId={initialSettings?.headDataSettings?.googleAnalyticsId}/>

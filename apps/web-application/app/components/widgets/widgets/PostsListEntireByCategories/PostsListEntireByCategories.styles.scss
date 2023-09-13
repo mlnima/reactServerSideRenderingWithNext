@@ -14,11 +14,20 @@
     border-radius: .375rem;
     background-color: var(--secondary-background-color,#181818);;
     position: relative;
-    .categoryGroupTitle{
-      color: var(--main-active-color, #f90);
-      font-weight: bold;
-      border-bottom: var(--default-border);
+    .categoryGroupTitleLink{
+      display:flex ;
+      justify-content: space-between;
+      align-items: center;
+      .categoryGroupTitle{
+        color: var(--primary-text-color, #fff);g
+        font-weight: bold;
+        border-bottom: var(--default-border);
+      }
+      span{
+        color: var(--main-active-color, #f90);
+      }
     }
+
 
     .categoryGroupDescription{
       padding: 0 .5rem;

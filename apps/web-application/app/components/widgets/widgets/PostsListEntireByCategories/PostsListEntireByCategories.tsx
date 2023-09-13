@@ -36,7 +36,11 @@ const PostsListEntireByCategories: FC<IProps> = ({uniqueData, locale, dictionary
                 return (
                     <div key={category?._id} className={'postsListByCategoriesGroup'}>
 
-                        <h2 className={'categoryGroupTitle'}>{capitalizeFirstLetters(category.name)}</h2>
+                        <Link className={'categoryGroupTitleLink'} href={`/category/${category?._id}`}>
+                            <h2 className={'categoryGroupTitle'}>{capitalizeFirstLetters(category.name)}</h2>
+                            <span>{dictionary?.['See All'] || 'See All'}</span>
+                        </Link>
+
                         {!!category.description && <p className={'categoryGroupDescription'}>{category.description}</p>}
                         <div className={'postsListByCategoriesWrapper custom-scroll'}>
                             <ol className={'postsList'}>
@@ -63,14 +67,6 @@ const PostsListEntireByCategories: FC<IProps> = ({uniqueData, locale, dictionary
                             </ol>
                         </div>
 
-                        {/*//@ts-ignore*/}
-                        {(category?.count > (uniqueData?.count || count)) &&
-                            <div className={'postsListGroupActionButtons'}>
-                                <Link href={`/category/${category?._id}`} className={'btn btn-primary seeAllButton'}>
-                                    {dictionary?.['See All'] || 'See All'}
-                                </Link>
-                            </div>
-                        }
 
 
                     </div>
@@ -87,3 +83,12 @@ export default PostsListEntireByCategories;
 //         <PromotionPostListCard post={post} key={post._id}/>
 //     )
 // })}
+
+// {/*/!*//@ts-ignore*!/*/}
+//     {/*{(category?.count > (uniqueData?.count || count)) &&*/}
+//     {/*    <div className={'postsListGroupActionButtons'}>*/}
+//     {/*        <Link href={`/category/${category?._id}`} className={'btn btn-primary seeAllButton'}>*/}
+//     {/*            {dictionary?.['See All'] || 'See All'}*/}
+//     {/*        </Link>*/}
+//     {/*    </div>*/}
+//     {/*}*/}

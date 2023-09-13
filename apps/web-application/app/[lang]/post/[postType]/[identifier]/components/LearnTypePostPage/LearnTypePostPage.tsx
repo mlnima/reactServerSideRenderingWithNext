@@ -49,9 +49,8 @@ const LearnTypePostPage: FC<IProps> = ({widgets, post, locale, dictionary,hasSid
                                        views={post.views}
                                        _id={post._id}/>
                     </div>
-                    <PostMetasRenderer type='actors' metas={post.actors}/>
-                    <PostMetasRenderer type='categories' metas={post.categories}/>
-                    <PostMetasRenderer type='tags' metas={post.tags}/>
+                    <PostMetasRenderer type='categories' metas={post.categories} dictionary={dictionary}/>
+                    <PostMetasRenderer type='tags' metas={post.tags} dictionary={dictionary}/>
                 </div>
                 <div className='under-post-widget-area'>
                     <WidgetsRenderer widgets={widgets} position='underPost'  hasSidebar={hasSidebar} locale={locale} dictionary={dictionary}/>

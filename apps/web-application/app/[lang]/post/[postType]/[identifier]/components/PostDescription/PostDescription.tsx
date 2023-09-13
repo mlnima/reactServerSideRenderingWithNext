@@ -8,6 +8,7 @@ interface IProps {
 
 const PostDescription: FC<IProps> = ({description}) => {
 
+
     return (
         <div className={'postDescription'}>
             {typeof description === 'string' && description }

@@ -6,3 +6,4 @@ export { default as userRoles } from './userRoles';
 export { default as videoQualities } from './videoQualities';
 export { default as widgetsStaticPositions } from './widgetsStaticPositions';
 export { default as widgetsTypes } from './widgetsTypes';
+export { default as rtlLanguages } from './rtlLanguages';

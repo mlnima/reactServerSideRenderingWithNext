@@ -48,9 +48,9 @@ const VideoTypePostPage: FC<IProps> = ({widgets, post, locale, dictionary, hasSi
             </div>
             <div className="entry-content">
                 <PostDescription description={post?.translations?.[locale]?.description ?? post?.description}/>
-                <PostMetasRenderer type='actors' metas={post.actors}/>
-                <PostMetasRenderer type='categories' metas={post.categories}/>
-                <PostMetasRenderer type='tags' metas={post.tags}/>
+                <PostMetasRenderer type='actors' metas={post.actors} dictionary={dictionary}/>
+                <PostMetasRenderer type='categories' metas={post.categories} dictionary={dictionary}/>
+                <PostMetasRenderer type='tags' metas={post.tags} dictionary={dictionary}/>
             </div>
             <div className='under-post-widget-area'>
                 <WidgetsRenderer widgets={widgets} position='underPost' hasSidebar={hasSidebar} locale={locale}

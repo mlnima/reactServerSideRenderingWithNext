@@ -59,8 +59,8 @@ const UniqueFields: FC<UniqueFieldsPropTypes> =
                 {widgetData.type === 'menu' &&
                     <MenuWidgetModelFields widgetData={widgetData}
                                            setWidgetData={setWidgetData}
-                                           // onChangeHandler={onChangeHandler}
-                                           // mobileNavigation={widgetData.mobileNavigation}
+                        // onChangeHandler={onChangeHandler}
+                        // mobileNavigation={widgetData.mobileNavigation}
                                            widgetSettings={widgetSettings}
 
                     />
@@ -88,6 +88,18 @@ const UniqueFields: FC<UniqueFieldsPropTypes> =
                     />
                 }
 
+                {widgetData.type === 'postsListEntireByCategories' &&
+                    <TextInputFieldForWidget
+                        inputTitle='How Many Category Group?'
+                        name='categoryCount'
+                        type='number'
+                        value={widgetData?.uniqueData?.categoryCount}
+                        classNameValue='count'
+                        placeHolder='count'
+                        onChangeHandler={onUniqueDataChangeHandler}
+                    />
+                }
+
                 {(widgetData.type === 'posts' ||
                         widgetData.type === 'postsList' ||
                         widgetData.type === 'postsSwiper' ||
@@ -96,15 +108,17 @@ const UniqueFields: FC<UniqueFieldsPropTypes> =
                         widgetData.type === 'postsListEntireByCategories' ||
                         widgetData.type === 'postsSlider') &&
                     <TextInputFieldForWidget
-                        inputTitle='count :'
+                        inputTitle={widgetData.type === 'postsListEntireByCategories' ? 'How Many Posts Per Group' : 'Count :'}
                         name='count'
                         type='number'
-                        value={widgetData.count}
+                        value={widgetData.uniqueData?.count}
                         classNameValue='count'
                         placeHolder='count'
-                        onChangeHandler={onChangeHandler}
+                        onChangeHandler={onUniqueDataChangeHandler}
                     />
                 }
+
+
 
 
                 {(widgetData.type === 'posts' ||
@@ -113,10 +127,11 @@ const UniqueFields: FC<UniqueFieldsPropTypes> =
                         widgetData.type === 'postsSlider') &&
                     <TextInputFieldForWidget inputTitle='Selected Meta For PostsRenderer:'
                                              name='selectedMetaForPosts'
-                                             type='text' value={widgetData.selectedMetaForPosts}
+                                             type='text'
+                                             value={widgetData?.uniqueData?.selectedMetaForPosts}
                                              classNameValue='selectedMetaForPosts'
                                              placeHolder='selectedMetaForPosts'
-                                             onChangeHandler={onChangeHandler}
+                                             onChangeHandler={onUniqueDataChangeHandler}
                     />
                 }
 

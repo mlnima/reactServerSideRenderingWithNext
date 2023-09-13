@@ -10,7 +10,9 @@ const updatePostsListEntireByCategoriesWidget = async (widgetData: any, widgetId
                 {type: 'categories'},
                 {status: 'published'}
             ]
-        }).sort({'count': -1})
+        })
+            .sort({'count': -1})
+            .limit(widgetData?.uniqueData?.categoryCount || {})
             .select('name description status')
             .lean()
             .exec();
@@ -20,7 +22,7 @@ const updatePostsListEntireByCategoriesWidget = async (widgetData: any, widgetId
                 categories: category._id
             })
                 .select('title icon redirectLink')
-                .limit(widgetData?.uniqueData?.count || widgetData?.count || {})
+                .limit(widgetData?.uniqueData?.count || {})
                 .lean()
                 .exec();
 
@@ -37,7 +39,7 @@ const updatePostsListEntireByCategoriesWidget = async (widgetData: any, widgetId
 
         const final = await Promise.all(categories.map(fetchPostsForCategory));
 
-        console.log(final[0])
+        console.log('final=> ',final)
         const widgetDateUpdate = {
             ...widgetData,
             uniqueData: {
