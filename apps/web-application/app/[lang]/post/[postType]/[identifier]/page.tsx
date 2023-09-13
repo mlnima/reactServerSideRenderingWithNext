@@ -73,43 +73,44 @@ const PostPage = async ({params: {lang, identifier, postType}}: IProps) => {
         <>
             <PostAdminQuickAccessBar post={postData.post}/>
 
-        <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
+            <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
 
-            <main id={'primary'} className={'main postPage'}>
+                <main id={'primary'} className={'main postPage'}>
 
-                {postType === 'video' ?
-                    <VideoTypePostPage widgets={widgetsData.widgets?.['underPost']}
-                                       post={postData.post}
-                                       hasSidebar={sidebar}
-                                       relatedPosts={postData.relatedPosts}
-                                       dictionary={dictionary}
-                                       locale={locale}/> : postType === 'article' ?
-                        <ArticleTypePostPage widgets={widgetsData.widgets?.['underPost']}
-                                             post={postData.post}
-                                             hasSidebar={sidebar}
-                                             relatedPosts={postData.relatedPosts}
-                                             dictionary={dictionary} locale={locale}/> : postType === 'promotion' ?
-                            <PromotionTypePostPage widgets={widgetsData.widgets?.['underPost']}
-                                                   post={postData.post}
-                                                   hasSidebar={sidebar}
-                                                   relatedPosts={postData.relatedPosts}
-                                                   dictionary={dictionary} locale={locale}/> : postType === 'learn' ?
-                                <LearnTypePostPage widgets={widgetsData.widgets?.['underPost']}
-                                                   post={postData.post}
-                                                   hasSidebar={sidebar}
-                                                   relatedPosts={postData.relatedPosts}
-                                                   dictionary={dictionary} locale={locale}/> : null
-                }
+                    {postType === 'video' ?
+                        <VideoTypePostPage widgets={widgetsData.widgets?.['underPost']}
+                                           post={postData.post}
+                                           hasSidebar={sidebar}
+                                           relatedPosts={postData.relatedPosts}
+                                           dictionary={dictionary}
+                                           locale={locale}/> : postType === 'article' ?
+                            <ArticleTypePostPage widgets={widgetsData.widgets?.['underPost']}
+                                                 post={postData.post}
+                                                 hasSidebar={sidebar}
+                                                 relatedPosts={postData.relatedPosts}
+                                                 dictionary={dictionary} locale={locale}/> : postType === 'promotion' ?
+                                <PromotionTypePostPage widgets={widgetsData.widgets?.['underPost']}
+                                                       post={postData.post}
+                                                       hasSidebar={sidebar}
+                                                       relatedPosts={postData.relatedPosts}
+                                                       dictionary={dictionary}
+                                                       locale={locale}/> : postType === 'learn' ?
+                                    <LearnTypePostPage widgets={widgetsData.widgets?.['underPost']}
+                                                       post={postData.post}
+                                                       hasSidebar={sidebar}
+                                                       relatedPosts={postData.relatedPosts}
+                                                       dictionary={dictionary} locale={locale}/> : null
+                    }
 
 
-            </main>
-            <SidebarWidgetAreaRenderer leftSideWidgets={widgetsData.widgets?.['postPageLeftSidebar']}
-                                       rightSideWidgets={widgetsData.widgets?.['postPageRightSidebar']}
-                                       dictionary={dictionary}
-                                       locale={locale}
-                                       sidebar={sidebar || 'no'}
-                                       position={'postPage'}/>
-        </div>
+                </main>
+                <SidebarWidgetAreaRenderer leftSideWidgets={widgetsData.widgets?.['postPageLeftSidebar']}
+                                           rightSideWidgets={widgetsData.widgets?.['postPageRightSidebar']}
+                                           dictionary={dictionary}
+                                           locale={locale}
+                                           sidebar={sidebar || 'no'}
+                                           position={'postPage'}/>
+            </div>
         </>
     )
 }

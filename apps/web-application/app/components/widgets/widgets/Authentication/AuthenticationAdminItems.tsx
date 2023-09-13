@@ -9,23 +9,37 @@ import {faUserShield} from "@fortawesome/free-solid-svg-icons/faUserShield";
 import {faEraser} from "@fortawesome/free-solid-svg-icons/faEraser";
 import {faShield} from "@fortawesome/free-solid-svg-icons/faShield";
 import {faCheck} from "@fortawesome/free-solid-svg-icons/faCheck";
-import {usePathname, useSelectedLayoutSegment} from "next/navigation";
+import {useParams, usePathname, useSearchParams, useSelectedLayoutSegment} from "next/navigation";
 import clearCachesByServerAction
     from "@components/widgets/widgets/Authentication/adminServerActions/adminServerActions";
 import socket from "web-socket-client";
 import {faBolt} from "@fortawesome/free-solid-svg-icons";
+import {useEffect} from "react";
+
+
+type TClearCache = {
+    mode?: 'all'|'only'|'settings'|'widgets'|'similar',
+}
 
 const AuthenticationAdminItems = ({}) => {
 
     const dispatch = useAppDispatch()
     const pathname = usePathname()
+    const params = useParams()
+    const searchParams = useSearchParams()
     const segment = useSelectedLayoutSegment()
     const adminMode = useSelector(({globalState}: Store) => globalState.adminMode)
 
-    const onClearCacheHandler = async () => {
+    const onClearCacheHandler = async ({mode}: TClearCache): Promise<void> => {
         try {
             await commonAPIRequestClearCaches()
-            await clearCachesByServerAction({path: pathname, segment: segment as any})
+            await clearCachesByServerAction({
+                path:pathname,
+                segment,
+                mode,
+                searchParams,
+                params
+            })
 
             dispatch(setAlert({
                 message: 'Cache cleared',
@@ -50,15 +64,41 @@ const AuthenticationAdminItems = ({}) => {
                 <div className={'icon-wrapper'}>
                     <FontAwesomeIcon icon={faUserShield} style={{width: 25, height: 25}}/>
                 </div>
-
                 Dashboard
             </Link>
-            <span className={'logged-item'} onClick={onClearCacheHandler}>
+
+            <span className={'logged-item'}
+                  onClick={() => onClearCacheHandler({mode: 'only'})}>
                    <div className={'icon-wrapper'}>
                        <FontAwesomeIcon icon={faEraser} style={{width: 25, height: 25}}/>
                   </div>
-                Clear Cache
+                Clear Only This Page Caches
             </span>
+
+            <span className={'logged-item'}
+                  onClick={() => onClearCacheHandler({mode: 'widgets'})}>
+                   <div className={'icon-wrapper'}>
+                       <FontAwesomeIcon icon={faEraser} style={{width: 25, height: 25}}/>
+                  </div>
+                Clear Widgets Caches
+            </span>
+
+            <span className={'logged-item'}
+                  onClick={() => onClearCacheHandler({mode: 'settings'})}>
+                   <div className={'icon-wrapper'}>
+                       <FontAwesomeIcon icon={faEraser} style={{width: 25, height: 25}}/>
+                  </div>
+                Clear Settings Caches
+            </span>
+
+            <span className={'logged-item'}
+                  onClick={() => onClearCacheHandler({mode: 'all'})}>
+                   <div className={'icon-wrapper'}>
+                       <FontAwesomeIcon icon={faEraser} style={{width: 25, height: 25}}/>
+                  </div>
+                Clear Entire Website Caches
+            </span>
+
             <span className={'logged-item'} onClick={() => onSetAdminModeHandler()}>
                    <div className={'icon-wrapper'}>
                        <FontAwesomeIcon icon={adminMode ? faCheck : faShield} style={{width: 25, height: 25}}/>
@@ -66,9 +106,9 @@ const AuthenticationAdminItems = ({}) => {
                 Admin Mode
             </span>
             {pathname.includes('/chatroom/') &&
-                <button className={'logged-item'} onClick={()=>socket.emit('correctChatroomsMessages')}>
+                <button className={'logged-item'} onClick={() => socket.emit('correctChatroomsMessages')}>
                     <div className={'icon-wrapper'}>
-                    <FontAwesomeIcon icon={faBolt} style={{width: 25, height: 25}}/>
+                        <FontAwesomeIcon icon={faBolt} style={{width: 25, height: 25}}/>
                     </div>
                     Correct Chatrooms Messages
                 </button>

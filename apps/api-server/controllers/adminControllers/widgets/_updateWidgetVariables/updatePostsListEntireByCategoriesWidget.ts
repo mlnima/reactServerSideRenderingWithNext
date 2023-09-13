@@ -17,6 +17,13 @@ const updatePostsListEntireByCategoriesWidget = async (widgetData: any, widgetId
             .lean()
             .exec();
 
+        const categoriesCount = await metaSchema.countDocuments({
+            $and: [
+                {type: 'categories'},
+                {status: 'published'}
+            ]
+        }).exec()
+
         const fetchPostsForCategory = async (category: any) => {
             const postsOfCurrentCategory = await postSchema.find({
                 categories: category._id
@@ -26,13 +33,13 @@ const updatePostsListEntireByCategoriesWidget = async (widgetData: any, widgetId
                 .lean()
                 .exec();
 
-            const count = await postSchema.countDocuments({
+            const postsCount = await postSchema.countDocuments({
                 categories: category._id
             }).exec();
 
             return {
                 ...category,
-                count,
+                postsCount,
                 posts: postsOfCurrentCategory
             };
         };
@@ -44,7 +51,8 @@ const updatePostsListEntireByCategoriesWidget = async (widgetData: any, widgetId
             ...widgetData,
             uniqueData: {
                 ...widgetData.uniqueData,
-                categoriesDataWithPosts: final
+                categoriesData: final,
+                categoriesCount
             }
         };
 

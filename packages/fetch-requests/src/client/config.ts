@@ -1,25 +1,28 @@
 interface IConfig {
     revalidate?: number,
     method?: string,
+    cacheOption?: string,
     useWtToken?: boolean,
     body?: {},
     tags?: string[]
 }
 
-const config = ({revalidate, method, useWtToken, body, tags}: IConfig) => {
+const config = ({revalidate, method, useWtToken, body, tags, cacheOption}: IConfig) => {
 
     const wtToken = typeof window !== 'undefined' ? localStorage.getItem("wt") : null;
     const tokenHeader = wtToken && useWtToken ? {"Authorization": `Bearer ${wtToken}`} : {}
+    const cache = cacheOption ? {cache: cacheOption} : {}
 
     const options: any = {
         method: method || "GET",
         next: {
-            revalidate: revalidate ? revalidate : process.env.NODE_ENV === 'development' ? 0 : 604800,
+            revalidate: revalidate ? revalidate : process.env.NODE_ENV === 'development' ? 0 : 43200,
             tags: tags || []
         },
         headers: {
             ...tokenHeader
-        }
+        },
+        ...cache
     }
 
     if (body && (method === "POST" || method === "PUT" || method === "PATCH")) {

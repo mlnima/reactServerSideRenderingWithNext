@@ -18,8 +18,11 @@
     "eslint-config-custom": "*",
     "jest": "^29.6.1",
     "jest-presets": "*",
-    "socket.io-client": "^4.7.1",
+    "socket.io-client": "^4.7.2",
     "tsconfig": "*",
     "typescript": "^5.1.6"
+  },
+  "devDependencies": {
+    "utf-8-validate": "^5.0.10"
   }
 }

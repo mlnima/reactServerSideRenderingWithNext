@@ -4,13 +4,17 @@ import config from './config'
 interface IFetchPage{
     pageName:string,
     revalidate?:number|null
+    tags?:string[]
 }
 
-export const fetchPage = async ({pageName, revalidate}:IFetchPage)=>{
+export const fetchPage = async ({pageName, revalidate,tags}:IFetchPage)=>{
     try {
         const response = await fetch(
             `${APIServerUrl}/api/v1/pages/getPage?pageName=${pageName}`,
-            config({revalidate})
+            config({
+                    revalidate,
+                    tags:[...(tags || []),'cacheItem','pages',pageName]
+                })
         );
         if (!response.ok) {
             const errorData = await response.text();

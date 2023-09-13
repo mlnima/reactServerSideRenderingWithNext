@@ -2,13 +2,13 @@ import config from "./config";
 
 const APIServerUrl = process.env.NEXT_PUBLIC_API_SERVER_URL;
 
-export const fetchWidgets = async (widgets: string[], locale: string,revalidate?:number|null)=>{
+export const fetchWidgets = async (widgets: string[], locale: string,revalidate?:number|null,tags?:string[])=>{
     try {
         const widgetsQuery= `?${locale ? `&locale=${locale}` : ''}&${widgets.map(s => 'widget=' + s).join('&')}`
 
         const response = await fetch(
             `${APIServerUrl}/api/v1/widgets/getWidgets${widgetsQuery}`,
-            config({revalidate})
+            config({revalidate,tags:[...(tags || []),'cacheItem','widgets']})
         );
 
         if (!response.ok) {

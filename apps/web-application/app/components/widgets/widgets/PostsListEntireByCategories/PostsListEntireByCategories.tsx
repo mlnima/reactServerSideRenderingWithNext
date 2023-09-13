@@ -9,7 +9,8 @@ interface IProps {
     locale: string,
     count: number,
     uniqueData: {
-        categoriesDataWithPosts: ICategory[]
+        categoriesData: ICategory[]
+        categoriesCount: number
     },
     dictionary: {
         [key: string]: string
@@ -26,19 +27,26 @@ interface ICategory {
         redirectLink: string,
         _id: string
     }[],
+    postsCount: number
 }
 
 const PostsListEntireByCategories: FC<IProps> = ({uniqueData, locale, dictionary, count}) => {
     const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     return (
         <div className={'postsListByCategories'}>
-            {uniqueData?.categoriesDataWithPosts?.map((category) => {
+            <div className={'postsListByCategoriesContainer'}>
+            {uniqueData?.categoriesData?.map((category) => {
                 return (
                     <div key={category?._id} className={'postsListByCategoriesGroup'}>
 
+
                         <Link className={'categoryGroupTitleLink'} href={`/category/${category?._id}`}>
-                            <h2 className={'categoryGroupTitle'}>{capitalizeFirstLetters(category.name)}</h2>
-                            <span>{dictionary?.['See All'] || 'See All'}</span>
+                            <h3 className={'categoryGroupTitle'}>{capitalizeFirstLetters(category.name)}</h3>
+                            {
+                                category?.postsCount > category.posts.length &&
+                                <span>{dictionary?.['See All'] || 'See All'}</span>
+                            }
+
                         </Link>
 
                         {!!category.description && <p className={'categoryGroupDescription'}>{category.description}</p>}
@@ -53,7 +61,7 @@ const PostsListEntireByCategories: FC<IProps> = ({uniqueData, locale, dictionary
                                         <li className={'postsListItem'} key={post._id}>
                                             <Link href={post.redirectLink || postUrl}
                                                   className={'postsListItemExternalLink'}>
-                                                <h3 className="ellipsisText">  {post.title}</h3>
+                                                <h4 className="ellipsisText">  {post.title}</h4>
 
                                             </Link>
                                             <Link href={postUrl} className={'postsListItemInternalLink'}>
@@ -66,29 +74,18 @@ const PostsListEntireByCategories: FC<IProps> = ({uniqueData, locale, dictionary
                                 })}
                             </ol>
                         </div>
-
-
-
                     </div>
                 )
             })}
+            </div>
+            {uniqueData.categoriesCount > uniqueData.categoriesData.length &&
+                <div className={'seeAllCategoriesLink'}>
+                <Link className={'btn btn-primary'} href={`/categories`}>
+                    <span>{dictionary?.['All Categories'] || 'All Categories'}</span>
+                </Link>
+                </div>
+            }
         </div>
     )
 };
 export default PostsListEntireByCategories;
-
-
-// {category.posts.map((post) => {
-//     return (
-//         <PromotionPostListCard post={post} key={post._id}/>
-//     )
-// })}
-
-// {/*/!*//@ts-ignore*!/*/}
-//     {/*{(category?.count > (uniqueData?.count || count)) &&*/}
-//     {/*    <div className={'postsListGroupActionButtons'}>*/}
-//     {/*        <Link href={`/category/${category?._id}`} className={'btn btn-primary seeAllButton'}>*/}
-//     {/*            {dictionary?.['See All'] || 'See All'}*/}
-//     {/*        </Link>*/}
-//     {/*    </div>*/}
-//     {/*}*/}
