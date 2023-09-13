@@ -1,5 +1,5 @@
 import React, {useState, useRef} from 'react';
-import {animateScroll} from 'react-scroll'
+// import {animateScroll} from 'react-scroll'
 import styled from "styled-components";
 import { useSelector} from "react-redux";
 
@@ -79,9 +79,9 @@ const Terminal = () => {
         e.preventDefault()
         // dispatch(loading(true))
         dispatch(terminalCommandExecutor(command))
-        setTimeout(() => {
-            animateScroll.scrollToBottom({containerId: 'terminalLog'})
-        }, 500)
+        // setTimeout(() => {
+        //     animateScroll.scrollToBottom({containerId: 'terminalLog'})
+        // }, 500)
     }
 
 
