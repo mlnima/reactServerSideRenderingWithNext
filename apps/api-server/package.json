@@ -39,6 +39,7 @@
     "image-downloader": "^4.3.0",
     "js-cookie": "^3.0.1",
     "jsdom": "^21.1.0",
+    "jsonrepair": "^3.2.0",
     "jsonwebtoken": "^9.0.0",
     "jwt-decode": "^3.1.2",
     "lodash": "^4.14.181",

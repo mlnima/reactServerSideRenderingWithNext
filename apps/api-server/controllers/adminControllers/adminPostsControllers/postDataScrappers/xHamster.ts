@@ -19,25 +19,36 @@ const xHamster = async (url) => {
 
             const initialsScript = videoPageDom?.querySelector('#initials-script');
             const initialsScriptAsText = initialsScript?.textContent;
-            const videoDataJson =initialsScriptAsText ? initialsScriptAsText.match(/(?<="videoModel":\s*).*?(?=\s*,"videoEntity":)/gs) :null;
-            if (videoDataJson){
-                const parsedJsonData = JSON.parse(videoDataJson)
-                videoData.quality = parsedJsonData?.isUHD ? '4K' : parsedJsonData?.isHD ? 'HD' : 'SD'
-                videoData.duration = parsedJsonData?.duration ? convertSecondsToTimeString(parsedJsonData?.duration) : '00:00'
-                videoData.videoTrailerUrl = parsedJsonData?.trailerURL || ''
-                videoData.mainThumbnail = parsedJsonData?.thumbURL || ''
-                videoData.title =parsedJsonData?.title || videoPageDom?.querySelector('h1')?.textContent
-                videoData.description = parsedJsonData?.description || ''
-                videoData.videoEmbedCode = `https://xhamster.com/embed/${parsedJsonData?.idHashSlug || parsedJsonData?.id || '' }`
-                videoData.source = parsedJsonData?.pageURL || url
+
+
+            const initialsScriptContent = initialsScriptAsText ? initialsScriptAsText.replace('window.initials=', '') : null;
+            const videoDataJson = initialsScriptContent ? initialsScriptContent.slice(0, -1) : null;
+
+            if (videoDataJson) {
+
+                try {
+                    const parsedObject = eval('(' + videoDataJson + ')');
+                    const videoModel = parsedObject?.["videoModel"]
+
+                    videoData.quality = videoModel?.isUHD ? '4K' : videoModel?.isHD ? 'HD' : 'SD'
+                    videoData.duration = videoModel?.duration ? convertSecondsToTimeString(videoModel?.duration) : '00:00'
+                    videoData.videoTrailerUrl = videoModel?.trailerURL || ''
+                    videoData.mainThumbnail = videoModel?.thumbURL || ''
+                    videoData.title = videoModel?.title || videoPageDom?.querySelector('h1')?.textContent
+                    videoData.description = videoModel?.description || ''
+                    videoData.videoEmbedCode = `https://xhamster.com/embed/${videoModel?.idHashSlug || videoModel?.id || ''}`
+                    videoData.source = videoModel?.pageURL || url
+                } catch (error) {
+                    console.log('Error Parsing VideoData=> ', error)
+                }
 
             }
 
             const categoriesContainer1 = videoPageDom.querySelector('.collapsable-list')
             const categoriesContainer2 = videoPageDom.querySelector('#video-tags-list-container')?.querySelector('ul')
-            const categoriesContainer = (categoriesContainer1 || categoriesContainer2 )?.querySelectorAll('li')
+            const categoriesContainer = (categoriesContainer1 || categoriesContainer2)?.querySelectorAll('li')
 
-            if (!!categoriesContainer){
+            if (!!categoriesContainer) {
                 for await (let categoriesContainerItem of categoriesContainer) {
                     const categoriesItem = categoriesContainerItem.querySelector('a').textContent.trim()
                     const categoriesItemUrl = categoriesContainerItem.querySelector('a').getAttribute('href')

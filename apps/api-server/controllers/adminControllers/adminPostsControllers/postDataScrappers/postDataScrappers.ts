@@ -4,15 +4,15 @@ const postDataScrappers = async (req, res) => {
     try {
         const urlToScrap = req.body.urlToScrap
 
-
         if (urlToScrap.includes('xhamster')) {
 
-           await xHamster(urlToScrap).then(urlData=>{
+            await xHamster(urlToScrap).then(urlData => {
+                res.json({urlData})
+            })
 
-               res.json({urlData})
-           })
+            // res.end()
 
-        }else {
+        } else {
             res.end()
         }
     } catch (error) {

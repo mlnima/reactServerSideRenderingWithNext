@@ -5,6 +5,7 @@ import {capitalizeFirstLetter, convertMetasTypeToSingular} from "custom-util";
 import {groupingArrayOfObjectByKey} from "custom-util";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAnglesDown} from "@fortawesome/free-solid-svg-icons";
+import './MetasRenderer.styles.scss'
 
 interface MetasRendererPropTypes {
     metaData: Meta[] | undefined,
@@ -18,21 +19,19 @@ const MetasRenderer: FC<MetasRendererPropTypes> = ({metaType, metaData, locale})
     const groupMetas = groupingArrayOfObjectByKey(metaData as any, 'name')
 
     return (
-        <div className={`flex justify-center items-center flex-col max-w-full w-full`}>
-            <div className={'letters-container w-full md:columns-3xs md:m-auto md:p-0'}>
+        <div className={`metaRenderer`}>
+            <div className={'lettersContainer '}>
                 {Object.keys(groupMetas || []).sort((a, b) => a > b ? 1 : -1).map(group => {
                     return (
-                        <article className={'group-wrapper'} key={group}>
-                            <Link href={`/${metaType}?startWith=${group === '#' ? 'digits' : group}`}
-                                  aria-label={metaType}
-                                  title={`all the ${metaType} starts with ${group}`}>
-                                <span
-                                    className={'letter m-2.5 text-2xl text-secondary-text-color'}>
-                                    {capitalizeFirstLetter(group)}
-                                </span>
-                            </Link>
+                        <article className={'groupWrapper'} key={group}>
+                            <div className={'groupWrapperHeader'}>
+                                    <span className={'letter'}>
+                                        {capitalizeFirstLetter(group)}
+                                    </span>
+                            </div>
 
-                            <div className={'items flex flex-wrap w-full gap-2 '}>
+
+                            <div className={'items '}>
                                 {/*//@ts-ignore*/}
                                 {groupMetas[group].map((meta) => {
                                     const name = capitalizeFirstLetter(
@@ -40,11 +39,7 @@ const MetasRenderer: FC<MetasRendererPropTypes> = ({metaType, metaData, locale})
                                         meta.name
                                     )
                                     return (
-                                        <Link className={`meta-widget-item max-w-64 block
-                                          list-none truncate py-3 px-1.5 min-h-12 rounded
-                                          text-secondary-text-color cursor-pointer break-words
-                                          bg-secondary-background-color md:bg-primary-background-color
-                                          md:p-1`}
+                                        <Link className={`metaWidgetItem `}
                                               key={meta._id}
                                               href={`/${typePath}/${meta._id}`}
                                               title={name}>
@@ -57,7 +52,7 @@ const MetasRenderer: FC<MetasRendererPropTypes> = ({metaType, metaData, locale})
                                       title={`all the ${metaType} starts with ${group}`}>
                                         <span className={`view-all flex items-center justify-start text-primary-active-color 
                                         text-lg font-bold m-2.5 min-h-12 md:text-sm md:h-auto`}>
-                                            <FontAwesomeIcon icon={faAnglesDown}/>
+                                            <FontAwesomeIcon icon={faAnglesDown} style={{width: 28, height: 20}}/>
                                         </span>
                                 </Link>
 
@@ -72,3 +67,9 @@ const MetasRenderer: FC<MetasRendererPropTypes> = ({metaType, metaData, locale})
     )
 };
 export default MetasRenderer
+
+// max-w-64 block
+//   list-none truncate py-3 px-1.5 min-h-12 rounded
+//   text-secondary-text-color cursor-pointer break-words
+//   bg-secondary-background-color md:bg-primary-background-color
+//   md:p-1
