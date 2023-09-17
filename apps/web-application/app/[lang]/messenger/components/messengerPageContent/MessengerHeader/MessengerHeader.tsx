@@ -10,11 +10,9 @@ import './MessengerHeader.styles.scss';
 import {faCircleUser} from "@fortawesome/free-solid-svg-icons/faCircleUser";
 
 interface IProps {
-    conversationsMenuTriggerHandler: (value: boolean) => void,
     activeConversation: IMessengerConversation,
     autoScroll: boolean,
     setAutoScroll: Function,
-    updatePreference: Function,
 }
 
 const MessengerHeader: FC<IProps> = ({activeConversation,autoScroll,setAutoScroll}) => {
@@ -33,10 +31,10 @@ const MessengerHeader: FC<IProps> = ({activeConversation,autoScroll,setAutoScrol
     const router = useRouter()
 
     return (
-        <div id={'messengerHeader'} className='outerContent'>
+        <div id={'messengerHeader'}>
             {!!activeConversation?._id &&
 
-                <div className='messengerHeaderContent innerContent'>
+                <div className='messengerHeaderContent'>
 
 
                     <div className="messengerHeaderLeftContent">
@@ -56,10 +54,6 @@ const MessengerHeader: FC<IProps> = ({activeConversation,autoScroll,setAutoScrol
                         >
                             <FontAwesomeIcon icon={faArrowDownWideShort}/>
                         </button>
-                        {/*<img onClick={() => router.push(`/user/${username}`)}*/}
-                        {/*     src={profileImage?.filePath ? profileImage?.filePath : '/asset/images/user/noGenderAvatar150.jpg'}*/}
-                        {/*     alt="messenger-conversation-header-profile-image"*/}
-                        {/*     className="messenger-conversation-header-profile-image"/>*/}
                         {partnerData?.profileImage?.filePath ?
                             <img src={partnerData.profileImage.filePath}
                                  alt={partnerData.username}
@@ -84,9 +78,7 @@ const MessengerHeader: FC<IProps> = ({activeConversation,autoScroll,setAutoScrol
                         {/*        onClick={() => updatePreference('isMaximized', !isMaximized)}>*/}
                         {/*    <FontAwesomeIcon icon={isMaximized ? faMinimize : faMaximize} style={{width: 25, height: 25}}/>*/}
                         {/*</button>*/}
-
                     </div>
-
                 </div>
             }
         </div>

@@ -13,5 +13,12 @@ export type TChatroomUser={
     socketId?:string
 }
 
+export interface INewUserJoinData{
+    joiner: TChatroomUser,
+    chatroomId:string
+}
+
+
+
 export type IChatroomUsers =TChatroomUser[]
 

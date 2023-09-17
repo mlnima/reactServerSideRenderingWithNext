@@ -13,7 +13,7 @@ interface IProps {
 const NavigationWidgetArea: FC<IProps> = ({widgets,locale,dictionary}) => {
     return (
         <nav className={'navigation-widget-area'}>
-            <div className={'inner-content'}>
+            <div className={'innerContent'}>
                 <WidgetsRenderer dictionary={dictionary} locale={locale} widgets={widgets} position={'navigation'}/>
             </div>
         </nav>

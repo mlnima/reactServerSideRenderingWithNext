@@ -19,6 +19,8 @@ import {faMinimize} from "@fortawesome/free-solid-svg-icons/faMinimize";
 import {faMaximize} from "@fortawesome/free-solid-svg-icons/faMaximize";
 import {IMessengerConversation} from "typescript-types/dist/src/messengerTypes/IMessengerConversation";
 import {headerSizeCalculator} from "custom-util";
+import {faHome} from "@fortawesome/free-solid-svg-icons";
+import ConversationsControlsHeader from "./ConversationsControlsHeader/ConversationsControlsHeader";
 
 interface IProps {
     dictionary: {
@@ -29,15 +31,11 @@ interface IProps {
 const messengerPageContent: FC<IProps> = ({dictionary}) => {
     const pathname = usePathname()
     const dispatch = useAppDispatch()
-    const isMobile = useIsMobile();
     const searchParams = useSearchParams()
     const messageAreaRef = useRef<null | HTMLDivElement>(null)
     const hasRun = useRef(false);
-
     const [conversationsList, setConversationsList] = useState([])
-    const [headerSize, setHeaderSize] = useState(0)
     const [autoScroll, setAutoScroll] = useState<boolean>(true)
-
 
     const [activeConversation, setActiveConversation] = useState<IMessengerConversation>({
         _id: '',
@@ -49,11 +47,6 @@ const messengerPageContent: FC<IProps> = ({dictionary}) => {
     })
 
     const [isConversationsMenuOpen, setIsConversationsMenuOpen] = useState<boolean>(true)
-
-    const [preference, setPreference] = useState<IPreference>({
-        autoScroll: true,
-        isMaximized: false,
-    })
 
     const {loggedIn} = useAppSelector(({user}) => user)
 
@@ -88,51 +81,7 @@ const messengerPageContent: FC<IProps> = ({dictionary}) => {
         }
     }
 
-    const updatePreference = (key: string, value: any) => {
-        setPreference((prevState: IPreference) => {
-            const newPreference = {
-                ...prevState,
-                [key]: value
-            }
-            localStorage.setItem('messengerPreference', JSON.stringify(newPreference))
-            return newPreference
-        })
-    }
 
-    useEffect(() => {
-        const messengerLocalStoragePreference = localStorage.getItem('messengerPreference')
-        const preferenceData = messengerLocalStoragePreference ? JSON.parse(messengerLocalStoragePreference) : null
-        if (preferenceData) {
-            setPreference({
-                ...preference,
-                ...preferenceData
-            })
-        }
-        if (typeof window !== 'undefined') {
-
-            // document.body.style.overflow = 'hidden';
-            //
-
-            const footerWidget = document.querySelector('.footer-widget-area');
-
-            if (footerWidget && footerWidget instanceof HTMLElement) {
-                footerWidget.style.display = 'none';
-            }
-
-            setTimeout(() => {
-                setHeaderSize(headerSizeCalculator())
-            }, 0)
-        }
-
-        return () => {
-            // document.body.style.overflow = 'auto';
-            const footerWidget = document.querySelector('.footer-widget-area');
-            if (footerWidget && footerWidget instanceof HTMLElement) {
-                footerWidget.style.display = 'initial';
-            }
-        }
-
-    }, []);
 
 
     useEffect(() => {
@@ -218,55 +167,31 @@ const messengerPageContent: FC<IProps> = ({dictionary}) => {
 
 
     return (
-        <div className={`messengerPageContent`}
-             style={{height: `calc(100vh - ${headerSize}px)`}}
-        >
-            <div className={`conversationsControls ${!!activeConversation?._id ? 'conversationsControlsHidden' : '' }`}
-                 style={{
-                     // display: !!activeConversation?._id ? 'none' : 'grid',
-                 }}>
-                <div className={'conversationsControlsHeader'}>
-                    <h1> Messages</h1>
-                    {/*<button className={`conversationsControlsHeaderButton ControlsHeaderMaximizedButton`}*/}
-                    {/*        style={{*/}
-                    {/*            color: preference.isMaximized ? 'var(--primary-active-color, #f90)' :*/}
-                    {/*                'var(--secondary-text-color, #ccc)'*/}
-                    {/*        }}*/}
-                    {/*        onClick={() => updatePreference('isMaximized', !preference.isMaximized)}>*/}
-                    {/*    <FontAwesomeIcon icon={preference.isMaximized ? faMinimize : faMaximize}/>*/}
-                    {/*</button>*/}
-                </div>
-                <MessengerConversationsList headerSize={headerSize}
-                                            onGetConversationListHandler={onGetConversationListHandler}
+        <div className={`messengerPageContent ${!!activeConversation?._id ? 'messengerPageContentActive' : ''}`}>
+
+            <div className={`conversationsControls ${!!activeConversation?._id ? 'conversationsControlsHidden' : ''}`}>
+                <ConversationsControlsHeader/>
+                <MessengerConversationsList onGetConversationListHandler={onGetConversationListHandler}
                                             conversationsList={conversationsList}/>
             </div>
+            <div className={`conversationArea ${!!activeConversation?._id ? '' : 'conversationAreaHidden' }`}>
+                { !!activeConversation?._id &&
+                    <>
+                        <MessengerHeader autoScroll={autoScroll}
+                                         setAutoScroll={setAutoScroll}
+                                         activeConversation={activeConversation}/>
 
-            <div className={`conversationArea ${!!activeConversation?._id ? '' : 'conversationAreaHidden' }`}
-                 style={{
-                     // gridTemplateRows: preference.isMaximized ?
-                     //     `50px calc(100vh - 100px) 50px` :
-                     //     `50px calc(100vh - ${headerSize + 100}px) 50px`,
-                     gridTemplateRows: preference.isMaximized ?
-                         `50px calc(100vh - 100px)` :
-                         `50px calc(100vh - ${headerSize + 100}px)`,
-                     height:preference.isMaximized ?
-                         `calc(100vh - 50px)` :
-                         `calc(100vh - ${headerSize + 50}px)`
-                 }}>
+                        <MessagingArea onLoadOlderMessages={onLoadOlderMessages}
+                                       autoScroll={autoScroll}
+                                       setAutoScroll={setAutoScroll}
+                                       activeConversation={activeConversation}
+                                       messageAreaRef={messageAreaRef}/>
 
-                <MessengerHeader conversationsMenuTriggerHandler={conversationsMenuTriggerHandler}
-                                 autoScroll={autoScroll}
-                                 updatePreference={updatePreference}
-                                 setAutoScroll={setAutoScroll}
-                                 activeConversation={activeConversation}/>
-                <MessagingArea onLoadOlderMessages={onLoadOlderMessages}
-                               autoScroll={autoScroll}
-                               setAutoScroll={setAutoScroll}
-                               activeConversation={activeConversation}
-                               messageAreaRef={messageAreaRef}/>
-                <MessengerMultiMediaInputBox dictionary={dictionary}
-                                             onStartTypingHandler={onStartTypingHandler}
-                                             activeConversation={activeConversation}/>
+                        <MessengerMultiMediaInputBox dictionary={dictionary}
+                                                     onStartTypingHandler={onStartTypingHandler}
+                                                     activeConversation={activeConversation}/>
+                    </>
+                }
             </div>
         </div>
     )

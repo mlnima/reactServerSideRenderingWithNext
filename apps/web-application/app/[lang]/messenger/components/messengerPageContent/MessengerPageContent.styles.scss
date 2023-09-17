@@ -1,122 +1,69 @@
 .messengerPageContent {
-  width: 100%;
-  height: 100%;
-  color: var(--primary-text-color, #272727);
-
-  //display: grid;
-  //grid-template-columns: 1fr;
-
-  .conversationsControls {
-
-    background-color: var(--secondary-background-color,#181818);
-    grid-area: conversationsControls;
-    width: 100%;
-    height: 100%;
-    display: grid;
-    grid-template-rows: 50px 1fr ;
-
-    .conversationsControlsHeader {
-      border:  var(--default-border);
-      width: 100%;
-      height: 50px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: var(--secondary-background-color, #181818);
-      padding-left: 12px;
-      padding-right: 12px;
-      box-sizing: border-box;
-      h1 {
-        font-size: large;
-      }
-
-      .chatroomTopBarActionButton {
-        border: none;
-        outline: none;
-        background-color: transparent;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        svg {
-          width: 25px;
-          height: 25px;
-        }
-      }
-    }
-  }
-
-  .conversationsControlsHidden{
-    display: none;
-  }
-
-  .conversationArea {
-    width: 100%;
-    height: 100%;
-    grid-area: conversationArea;
-    display: grid;
-    grid-template-areas:  'messengerHeader'
-                          'messagingArea'
-                           'mediaInputBox';
-  }
-
-  .conversationAreaHidden{
-    display: none;
-  }
-
-  //.messaging {
-  //
-  //  //'mediaInputBox'
-  //}
-}
-
-.messengerPageMaximized {
+  //env(safe-area-inset-top,0)
   position: fixed;
+  color: var(--primary-text-color, #fff);
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 11;
-}
-
-//.conversationsMenuOpen {
-//  width: 100%;
-//  display: grid;
-//  grid-template-columns: 1fr 150px;
-//  grid-template-rows: 45px 1fr;
-//  grid-template-areas:
-//    'chatroomTopbar chatroomTopbar'
-//    'chatroomMessagingArea chatroomOnlineUsersList'
-//}
-
-.notLoggedInMessage {
   display: flex;
-  justify-content: center;
   align-items: center;
-  .notLoggedInMessageLink {
-    color: var(--primary-text-color, #fff);
+
+  .conversationsControls {
+    grid-area: conversationsControls;
+    background-color: var(--secondary-background-color, #181818);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
   }
-}
+
+  .conversationsControlsHidden {
+    display: none;
+  }
+
+  .conversationArea {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height:100%;
+    width: 100%;
+  }
+
+  .conversationAreaHidden {
+    display: none;
+    background-color: var(--secondary-background-color, #181818);
+  }
+
+  //.messengerPageContentActive{
+  //  grid-template-areas: 'conversationsControls';
+  //}
 
 
+  @media only screen and (min-width: 768px) {
+    .conversationsControls {
+      width: 300px;
 
-
-@media only screen and (min-width: 768px) {
-  .messengerPageContent {
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    grid-template-areas: 'conversationsControls conversationArea';
-    .conversationsControls{
-      .conversationsControlsHeader{
-        .ControlsHeaderMaximizedButton{
+      .conversationsControlsHeader {
+        .ControlsHeaderMaximizedButton {
           display: none;
         }
       }
     }
 
-    .conversationAreaHidden,.conversationsControlsHidden{
-      display: grid;
+    .conversationArea {
+      width: calc(100vw - 300px);
     }
 
+    .conversationsControlsHidden {
+      display: flex;
+    }
+
+    .conversationAreaHidden {
+      display: grid;
+    }
   }
 }

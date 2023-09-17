@@ -15,8 +15,8 @@
     cursor: pointer;
     color:var(--primary-text-color,#fff);
     svg{
-      width: 24px;
-      height: 24px;
+      width: 1.5rem;
+      height: 1.5rem;
     }
   }
 
@@ -37,13 +37,14 @@
       color: var(--primary-text-color, #fff);
       padding: 6px 0;
       margin-bottom: 20px;
-      width: 100%;
+      width: 1.5rem;
+      height: 1.5rem;
       display: flex;
       justify-content: flex-start;
       align-items: center;
       svg{
-        width: 24px;
-        height: 24px;
+        width: 1.5rem;
+        height: 1.5rem;
       }
     }
 

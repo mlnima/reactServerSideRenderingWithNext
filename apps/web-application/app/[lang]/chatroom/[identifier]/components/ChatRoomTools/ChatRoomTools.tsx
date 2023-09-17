@@ -4,7 +4,7 @@ import socket from 'web-socket-client';
 import {useAppDispatch, useAppSelector} from "@store/hooks";
 import SomeoneIsTyping from "./SomeoneIsTyping";
 import UploadImageButton from "./UploadImageButton";
-import VoiceRecorderButton from "./VoiceRecorderButton";
+// import VoiceRecorderButton from "./VoiceRecorderButton";
 import RecordedAudioPreview from "./RecordedAudioPreview";
 import './ChatRoomTools.styles.scss'
 import {setAlert} from "@store/reducers/globalStateReducer";
@@ -132,8 +132,8 @@ const ChatRoomTools: FC<IProps> = ({chatroomId, setAutoScroll}) => {
                     <RecordedAudioPreview audioMessage={audioMessage} setAudioMessage={setAudioMessage}/> :
                     <>
                         <input id={'chatroomToolBoxInput'}
-                               maxLength={300}
                                type={'text'}
+                               maxLength={300}
                                name={'messageData'}
                                placeholder={'Type a message'}
                                onChange={e => setMessageText(e.target.value)}
@@ -142,7 +142,7 @@ const ChatRoomTools: FC<IProps> = ({chatroomId, setAutoScroll}) => {
                         />
                         <UploadImageButton inputRef={inputRef} chatroomId={chatroomId} authorId={_id}
                                            setMessageText={setMessageText}/>
-                        <VoiceRecorderButton setAudioMessage={setAudioMessage}/>
+                        {/*<VoiceRecorderButton setAudioMessage={setAudioMessage}/>*/}
                     </>
                 }
             </div>

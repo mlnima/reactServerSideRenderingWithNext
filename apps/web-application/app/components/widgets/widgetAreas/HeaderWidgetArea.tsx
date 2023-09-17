@@ -14,7 +14,7 @@ interface IProps {
 const HeaderWidgetArea: FC<IProps> = ({widgets,locale,dictionary}) => {
     return (
         <div className={'header-widget-area'}>
-            <div className={'inner-content'}>
+            <div className={'innerContent'}>
                 <WidgetsRenderer dictionary={dictionary} locale={locale} widgets={widgets} position={'header'}/>
             </div>
         </div>

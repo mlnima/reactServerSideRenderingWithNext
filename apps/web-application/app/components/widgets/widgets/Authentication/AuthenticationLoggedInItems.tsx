@@ -5,13 +5,14 @@ import {userLogout} from "@store/reducers/userReducers/userReducer";
 import {useAppDispatch, useAppSelector} from "@store/hooks";
 import {loginRegisterForm} from "@store/reducers/globalStateReducer";
 import UserProfileImage from "@components/UserProfileImage/UserProfileImage";
-import AuthenticationAdminItems from "./AuthenticationAdminItems";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSignOut} from "@fortawesome/free-solid-svg-icons/faSignOut";
 import {faEnvelope} from "@fortawesome/free-solid-svg-icons/faEnvelope";
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
+import dynamic from "next/dynamic";
+const AuthenticationAdminItems = dynamic(() => import('./AuthenticationAdminItems'))
 import './AuthenticationLoggedInItems.styles.scss';
+import {useSelector} from "react-redux";
+import {Store} from "typescript-types/dist/src/storeTypes/Store";
 
 interface IProps {
     onOpenCloseHandler: () => void,
@@ -29,13 +30,10 @@ interface UserData {
 const AuthenticationLoggedInItems: FC<IProps> = ({onOpenCloseHandler, locale, dictionary}) => {
 
 
-
-    const {membership} = useAppSelector(
-        ({settings}: Store) =>  settings?.initialSettings?.membershipSettings
-    );
+    const {membership} = useAppSelector(({settings}) =>  settings?.initialSettings?.membershipSettings);
 
     const {usersCanMessageEachOther} = useAppSelector(
-        ({settings}: Store) =>  settings?.initialSettings?.membershipSettings
+        ({settings}) =>  settings?.initialSettings?.membershipSettings
     );
 
     const {username, role} = useAppSelector(({user}) => user?.userData || {} as UserData);
@@ -76,7 +74,7 @@ const AuthenticationLoggedInItems: FC<IProps> = ({onOpenCloseHandler, locale, di
                     </Link>
                 }
 
-                {role === 'administrator' && <AuthenticationAdminItems/>}
+                {(role === 'administrator') && <AuthenticationAdminItems/>}
 
                 <span className='logged-item logged-in sign-out' onClick={onSignOutHandler}>
                     <div className={'icon-wrapper'}>

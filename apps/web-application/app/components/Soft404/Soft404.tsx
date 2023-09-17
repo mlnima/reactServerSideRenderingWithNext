@@ -12,7 +12,7 @@ const Soft404: FC<IProps> = ({dictionary}) => {
 
     return (
         <div id={'primary'} className='post-page' >
-            <main id={'content'} className={`page-no-sidebar inner-content`}>
+            <main id={'content'} className={`page-no-sidebar`}>
             <div className={'soft404'}>
                 <h1>{dictionary?.['Nothing found'] || 'Nothing found'}</h1>
                 <p>{

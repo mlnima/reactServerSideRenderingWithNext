@@ -19,10 +19,15 @@ const VoiceRecorderButton: FC<IProps> = ({setAudioMessage}) => {
         setIsRecording(true);
         const mediaStream = await navigator.mediaDevices.getUserMedia({audio: true});
 
-        const newRecorder = new MediaRecorder(mediaStream, {
-            mimeType: 'audio/webm;codecs=opus',
-            audioBitsPerSecond: 16000,
-        });
+        let options;
+
+        if (MediaRecorder.isTypeSupported('audio/mp4;codecs=mp4a.40.2')) {
+            options = { mimeType: 'audio/mp4;codecs=mp4a.40.2', audioBitsPerSecond: 16000 };
+        } else {
+            // Fallback if AAC is not supported
+            options = { audioBitsPerSecond: 16000 };
+        }
+        const newRecorder = new MediaRecorder(mediaStream, options);
 
         newRecorder.addEventListener('dataavailable', (event) => {
             if (event.data.size > 0) {

@@ -3,7 +3,7 @@ import {commonAPIRequestClearCaches} from "api-requests";
 import {useAppDispatch} from "@store/hooks";
 import {setAdminMode, setAlert} from "@store/reducers/globalStateReducer";
 import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
+import {IClearCache, Store} from "typescript-types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUserShield} from "@fortawesome/free-solid-svg-icons/faUserShield";
 import {faEraser} from "@fortawesome/free-solid-svg-icons/faEraser";
@@ -14,12 +14,6 @@ import clearCachesByServerAction
     from "@components/widgets/widgets/Authentication/adminServerActions/adminServerActions";
 import socket from "web-socket-client";
 import {faBolt} from "@fortawesome/free-solid-svg-icons";
-import {useEffect} from "react";
-
-
-type TClearCache = {
-    mode?: 'all'|'only'|'settings'|'widgets'|'similar',
-}
 
 const AuthenticationAdminItems = ({}) => {
 
@@ -30,7 +24,7 @@ const AuthenticationAdminItems = ({}) => {
     const segment = useSelectedLayoutSegment()
     const adminMode = useSelector(({globalState}: Store) => globalState.adminMode)
 
-    const onClearCacheHandler = async ({mode}: TClearCache): Promise<void> => {
+    const onClearCacheHandler = async ({mode}: IClearCache): Promise<void> => {
         try {
             await commonAPIRequestClearCaches()
             await clearCachesByServerAction({
@@ -66,38 +60,41 @@ const AuthenticationAdminItems = ({}) => {
                 </div>
                 Dashboard
             </Link>
-
-            <span className={'logged-item'}
-                  onClick={() => onClearCacheHandler({mode: 'only'})}>
+            {adminMode &&
+                <>
+                 <span className={'logged-item'}
+                       onClick={() => onClearCacheHandler({mode: 'only'})}>
                    <div className={'icon-wrapper'}>
                        <FontAwesomeIcon icon={faEraser} style={{width: 25, height: 25}}/>
                   </div>
                 Clear Only This Page Caches
             </span>
 
-            <span className={'logged-item'}
-                  onClick={() => onClearCacheHandler({mode: 'widgets'})}>
+                    <span className={'logged-item'}
+                          onClick={() => onClearCacheHandler({mode: 'widgets'})}>
                    <div className={'icon-wrapper'}>
                        <FontAwesomeIcon icon={faEraser} style={{width: 25, height: 25}}/>
                   </div>
                 Clear Widgets Caches
             </span>
 
-            <span className={'logged-item'}
-                  onClick={() => onClearCacheHandler({mode: 'settings'})}>
+                    <span className={'logged-item'}
+                          onClick={() => onClearCacheHandler({mode: 'settings'})}>
                    <div className={'icon-wrapper'}>
                        <FontAwesomeIcon icon={faEraser} style={{width: 25, height: 25}}/>
                   </div>
                 Clear Settings Caches
             </span>
 
-            <span className={'logged-item'}
-                  onClick={() => onClearCacheHandler({mode: 'all'})}>
+                    <span className={'logged-item'}
+                          onClick={() => onClearCacheHandler({mode: 'all'})}>
                    <div className={'icon-wrapper'}>
                        <FontAwesomeIcon icon={faEraser} style={{width: 25, height: 25}}/>
                   </div>
                 Clear Entire Website Caches
             </span>
+                </>
+            }
 
             <span className={'logged-item'} onClick={() => onSetAdminModeHandler()}>
                    <div className={'icon-wrapper'}>
@@ -112,7 +109,6 @@ const AuthenticationAdminItems = ({}) => {
                     </div>
                     Correct Chatrooms Messages
                 </button>
-
             }
         </>
     )

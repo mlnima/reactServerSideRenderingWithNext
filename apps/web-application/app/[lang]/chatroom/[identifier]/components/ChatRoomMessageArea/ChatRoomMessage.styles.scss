@@ -2,12 +2,13 @@
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  max-width: 80%;
+  width: 100%;
   border-radius: 5px;
   padding: 5px 10px;
   box-sizing: border-box;
   overflow: hidden;
   overflow-wrap: break-word;
+
 
   .chatroomMessageLog{
     color: var(--primary-text-color,#fff);
@@ -31,7 +32,9 @@
     margin: 5px;
     box-sizing: border-box;
     border-radius: 10px;
+    width: clamp(160px , 300px, 100%);
     max-width: 100%;
+
 
     .chatroomMessageUsername {
       display: flex;
@@ -40,18 +43,27 @@
       font-size: small;
     }
 
-    .chatroomMessageText {
-      color: var(--primary-text-color,#fff);
-      margin: 10px 20px;
-      word-wrap: break-word;
-      max-width: calc(100% - 30px);
+    .chatroomMessageContent{
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      .chatroomMessageText {
+        color: var(--primary-text-color,#fff);
+        margin: 10px 20px;
+        word-wrap: break-word;
+        max-width: calc(100% - 30px);
+      }
+
+      .chatroomMessageImage {
+        margin: auto;
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+      }
     }
 
-    .chatroomMessageImage {
-      max-width: 100%;
-      height: auto;
-      border-radius: 4px;
-    }
+
 
   }
 

@@ -14,7 +14,7 @@ interface IProps {
 const TopbarWidgetArea: FC<IProps> = ({widgets,locale,dictionary}) => {
     return (
         <div className={'topbar-widget-area'}>
-            <div className={'inner-content'}>
+            <div className={'innerContent'}>
                 <WidgetsRenderer dictionary={dictionary} locale={locale} widgets={widgets} position={'navigation'}/>
             </div>
         </div>

@@ -1,29 +1,30 @@
 #messengerHeader {
   background-color: var(--secondary-background-color, #181818);
-  height: 50px;
   display: flex;
   align-items: center;
-  grid-area: messengerHeader;
-  border-top:  var(--default-border);
-  border-bottom:  var(--default-border);
+  width: 100%;
+  border-top: var(--default-border);
+  border-bottom: var(--default-border);
 
   .messengerHeaderContent {
+    height: 50px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
     padding: 0 12px;
     box-sizing: border-box;
     justify-content: space-between;
-    //width: 100%;
 
     .messengerHeaderLeftContent, .messengerHeaderRightContent {
       display: flex;
       justify-content: center;
       align-items: center;
       box-sizing: border-box;
+
       .btn {
         color: var(--primary-text-color, #fff);
       }
+
       button {
         margin: 0 5px;
       }
@@ -37,11 +38,14 @@
       }
     }
 
-    .messengerHeaderLeftContent{
+    .messengerHeaderLeftContent {
 
-      img{
+      img {
         border-radius: 50%;
         margin: 0 10px;
+      }
+      .messenger-conversation-header-username{
+        cursor: pointer;
       }
     }
 
@@ -67,8 +71,8 @@
   }
 }
 
-@media only screen and (min-width: 768px){
-  .chatroomTopHeaderActionButton{
+@media only screen and (min-width: 768px) {
+  .chatroomTopHeaderActionButton {
     display: none;
   }
 }

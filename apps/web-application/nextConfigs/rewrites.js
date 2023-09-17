@@ -8,7 +8,7 @@ module.exports = () => {
             {
                 source: "/public/:path*",
                 destination: `${process.env.NEXT_PUBLIC_FILE_SERVER_URL}/public/:path*`,
-            },
+            }
         ],
     }
 }

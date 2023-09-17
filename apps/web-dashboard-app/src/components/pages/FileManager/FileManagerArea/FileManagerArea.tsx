@@ -11,6 +11,7 @@ import {faSliders} from "@fortawesome/free-solid-svg-icons/faSliders";
 import {faFolder} from "@fortawesome/free-solid-svg-icons/faFolder";
 import {faSass} from "@fortawesome/free-brands-svg-icons/faSass";
 import {faCss3} from "@fortawesome/free-brands-svg-icons/faCss3";
+import {faFilePdf} from "@fortawesome/free-solid-svg-icons";
 
 const FileManagerAreaStyledDiv = styled.div`
   display: grid;
@@ -68,7 +69,7 @@ const FileManagerArea: FC = () => {
     const fileManagerData = useSelector(({fileManager}: DashboardStore) => fileManager)
 
 
-    const WhatToRender = (data:any) => {
+    const IconToRender = (data:any) => {
         const itemType = fileTypeDetector(data.fileName)
         if (itemType === 'image') {
             return (
@@ -90,6 +91,7 @@ const FileManagerArea: FC = () => {
                 data.fileName.includes('.env') ? faSliders :
                     !data.fileName.includes('.') ? faFolder :
                         data.fileName.includes('.scss') ? faSass :
+                        data.fileName.includes('.pdf') ? faFilePdf :
                             data.fileName.includes('.css') ? faCss3 :
                                 faFile
             }`
@@ -103,10 +105,6 @@ const FileManagerArea: FC = () => {
             return (
                 <Fragment>
                     <button key={data.fileName} name={data.fileName}>
-
-
-
-
                         <FontAwesomeIcon icon={logoToRender as any} color={logoColorToRender} className={'meta-icon'}/>
                     </button>
                 </Fragment>
@@ -126,9 +124,10 @@ const FileManagerArea: FC = () => {
 
 
     let renderDir = fileManagerData.files.map(item => {
+        console.log('item=> ',item)
         return (
             <div key={item} className='dirItem' onClick={() => onClickHandler(item)}>
-                <WhatToRender key={item} fileName={item}/>
+                <IconToRender fileName={item}/>
                 <p> {item}</p>
             </div>
         )

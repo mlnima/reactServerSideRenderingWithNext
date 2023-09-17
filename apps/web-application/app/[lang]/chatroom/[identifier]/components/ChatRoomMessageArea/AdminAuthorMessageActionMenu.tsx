@@ -10,7 +10,7 @@ interface PropTypes {
     authorId: string
 }
 
-const AdminActionOnMessageMenu: FC<PropTypes> = ({ messageId,onDeleteMessageHandler,authorId}) => {
+const AdminAuthorMessageActionMenu: FC<PropTypes> = ({ messageId,onDeleteMessageHandler,authorId}) => {
 
     const adminMode = useAppSelector(({globalState}) => globalState?.adminMode)
     const {userData} = useAppSelector(({user}) => user)
@@ -27,4 +27,4 @@ const AdminActionOnMessageMenu: FC<PropTypes> = ({ messageId,onDeleteMessageHand
 
 };
 
-export default AdminActionOnMessageMenu;
+export default AdminAuthorMessageActionMenu;

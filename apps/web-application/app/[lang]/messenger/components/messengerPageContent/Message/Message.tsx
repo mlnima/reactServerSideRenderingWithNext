@@ -2,6 +2,7 @@ import React, {FC} from 'react';
 import {formatDistance} from "date-fns";
 import {IMessengerConversationMessage} from "typescript-types";
 import './Message.styles.scss'
+import ReactAudioPlayer from "@components/ReactAudioPlayer/ReactAudioPlayer";
 
 interface IProps {
     messageData: IMessengerConversationMessage;
@@ -29,8 +30,10 @@ const Message: FC<IProps> = ({messageData, isMine}) => {
 
                 {!!messageData?.imageContent &&
                     <img alt={'message'} src={messageData?.imageContent} className={'messengerMessageImage'}/>}
+                {/*{!!messageData?.audioContent &&*/}
+                {/*    <audio className={'audioPlayer'} src={messageData?.audioContent} controls/>}*/}
                 {!!messageData?.audioContent &&
-                    <audio className={'audioPlayer'} src={messageData?.audioContent} controls/>}
+                    <ReactAudioPlayer  src={messageData?.audioContent} showControls={true}/>}
                 {!!messageData?.content &&
                     <p className={'messengerMessageText'}>{messageData?.content}</p>}
 

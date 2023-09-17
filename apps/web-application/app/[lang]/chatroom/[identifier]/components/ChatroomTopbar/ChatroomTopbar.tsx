@@ -2,39 +2,43 @@ import React, {FC} from "react";
 import {capitalizeFirstLetters} from "custom-util";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUsers} from "@fortawesome/free-solid-svg-icons/faUsers";
-import {faMaximize} from "@fortawesome/free-solid-svg-icons/faMaximize";
-import {faMinimize} from "@fortawesome/free-solid-svg-icons/faMinimize";
 import {useRouter} from "next/navigation";
 import {faArrowDownWideShort} from "@fortawesome/free-solid-svg-icons/faArrowDownWideShort";
 import './ChatroomTopbar.styles.scss'
 import {IPreference} from "../interfaces";
+import Link from "next/link";
+import {faHome} from "@fortawesome/free-solid-svg-icons";
 
-interface PropTypes {
+interface IProp {
     chatrooms: { name: string, _id: string }[],
     chatroomId: string,
     autoScroll: boolean,
     setAutoScroll: Function,
     preference: IPreference,
-    updatePreference: Function
+    updatePreference: Function,
 }
 
-const ChatroomTopbar: FC<PropTypes> = (
+const ChatroomTopbar: FC<IProp> = (
     {
         chatrooms,
         chatroomId,
         autoScroll,
         setAutoScroll,
         preference,
-        updatePreference
+        updatePreference,
     }) => {
     const {push} = useRouter()
     //@ts-ignore
     const onChatroomChangeHandler = (e) => {
+        updatePreference('onlineUserListVisibility',false)
         push(`/chatroom/${e.target.value}`)
     }
 
     return (
         <div className={'chatroomTopbar'}>
+            <Link href={'/'} className={'backToHomePageButton'}>
+                <FontAwesomeIcon icon={faHome}/>
+            </Link>
             <select className={'custom-select chatroom-selector'} onChange={e => onChatroomChangeHandler(e)}
                     value={chatroomId}>
                 {(chatrooms || []).map(chatroom => {
@@ -46,15 +50,17 @@ const ChatroomTopbar: FC<PropTypes> = (
                     )
                 })}
             </select>
+
+
             <div className={'chatroomActionsButtons'}>
                 <button onClick={() => setAutoScroll(!autoScroll)}
                         className={`topBarActionButton ${autoScroll && 'topBarActionButtonActive'}`}>
                     <FontAwesomeIcon icon={faArrowDownWideShort}/>
                 </button>
-                <button className={`topBarActionButton ${preference.isMaximized && 'topBarActionButtonActive'}`}
-                        onClick={() => updatePreference('isMaximized', !preference.isMaximized)}>
-                    <FontAwesomeIcon icon={preference.isMaximized ? faMinimize : faMaximize}/>
-                </button>
+                {/*<button className={`topBarActionButton ${preference.isMaximized && 'topBarActionButtonActive'}`}*/}
+                {/*        onClick={() => updatePreference('isMaximized', !preference.isMaximized)}>*/}
+                {/*    <FontAwesomeIcon icon={preference.isMaximized ? faMinimize : faMaximize}/>*/}
+                {/*</button>*/}
                 <button className={
                     `topBarActionButton ${preference.onlineUserListVisibility && 'topBarActionButtonActive'}`
                 }

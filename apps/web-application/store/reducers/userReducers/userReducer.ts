@@ -15,6 +15,7 @@ const initialUserData = {
         filePath:''
     },
     draftPost:{},
+    role:'subscriber'
 
 }
 

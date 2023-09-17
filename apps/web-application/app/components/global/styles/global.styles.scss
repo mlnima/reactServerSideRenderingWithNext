@@ -12,8 +12,8 @@
   --secondary-text-color: #b3b3b3;
   --tertiary-text-color: #8c8c8c;
   --primary-background-color: #000;
-  --secondary-background-color:#181818;
-  --tertiary-background-color: #404040;
+  --secondary-background-color:#0e0e0e;
+  --tertiary-background-color: #151515;
 
   --dim-background-color: rgba(0, 0, 0, .6);
   --primary-active-color: #f90;
@@ -123,11 +123,11 @@ a {
     box-sizing: border-box;
   }
 }
-
-.inner-content{
-  //max-width: 1323px;
-  margin: auto;
-}
+//
+//.inner-content{
+//  //max-width: 1323px;
+//  margin: auto;
+//}
 
 .dimFullScreen{
   position: fixed;

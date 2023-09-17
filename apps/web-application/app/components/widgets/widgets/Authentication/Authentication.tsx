@@ -1,7 +1,6 @@
 'use client';
 import { FC, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserGear } from "@fortawesome/free-solid-svg-icons";
 import { faTimes as faXmark } from "@fortawesome/free-solid-svg-icons";
 import dynamic from "next/dynamic";
 import AuthenticationNotLoggedInItems from "./AuthenticationNotLoggedInItems";
@@ -9,6 +8,8 @@ import {useAppSelector} from "@store/hooks";
 const AuthenticationLoggedInItems = dynamic(() => import('./AuthenticationLoggedInItems'))
 import './Authentication.styles.scss'
 import Csr from "@components/global/Csr";
+import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
+
 
 interface IProps{
     locale: string,
@@ -28,11 +29,11 @@ const Authentication: FC<IProps>= ({locale,dictionary}) => {
     return (
         <div className="auth-widget">
             <button className={'profile-icon cursor-pointer'} onClick={onOpenCloseHandler} aria-label={'authentication'}>
-                <FontAwesomeIcon icon={faUserGear}/>
+                <FontAwesomeIcon icon={faUser}/>
             </button>
             <div className={`auth-widget-wrapper ${open ? "auth-widget-wrapper-open" : "auth-widget-wrapper-closed"}`}>
                 <button className="auth-widget-close-btn" onClick={onOpenCloseHandler}>
-                    <FontAwesomeIcon className="w-6 h-6" icon={faXmark} />
+                    <FontAwesomeIcon icon={faXmark} />
                 </button>
                 <Csr>
 

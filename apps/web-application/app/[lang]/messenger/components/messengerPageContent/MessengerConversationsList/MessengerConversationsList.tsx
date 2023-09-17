@@ -8,14 +8,12 @@ import './MessengerConversationsList.styles.scss'
 interface IProps {
     onGetConversationListHandler: () => void,
     conversationsList: IMessengerConversation[],
-    headerSize: number
 }
 
 const MessengerConversationsList: FC<IProps> = (
     {
         onGetConversationListHandler,
         conversationsList,
-        headerSize
     }) => {
 
     const conversationListRef = useRef<null | HTMLDivElement>(null)
@@ -56,7 +54,7 @@ const MessengerConversationsList: FC<IProps> = (
     }, [conversationsList]);
 
 
-    //@ts-ignore
+   // @ts-ignore
     const renderConversationsPreview = sortArrayByPropertyOfObject(
         uniqArrayBy((conversationsList || []), '_id'),
         'updatedAt',
@@ -67,11 +65,11 @@ const MessengerConversationsList: FC<IProps> = (
                                              conversationData={conversationData}/>
     })
 
+
     return (
         <div id={'messengerConversationsList'}
              className={'custom-scroll'}
-             ref={conversationListRef}
-             style={{height: `calc(100vh - ${headerSize + 101}px)`}}>
+             ref={conversationListRef}>
             {renderConversationsPreview}
             {!conversationsList || conversationsList?.length < 1 ?
                 <p className='no-message'>there is no messages yet</p> : null}

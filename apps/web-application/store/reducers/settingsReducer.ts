@@ -4,7 +4,10 @@ import {RootState} from "../store";
 interface SettingsStateRaw {
     initialSettings: {
         postCardsSettings: {},
-        membershipSettings: {},
+        membershipSettings: {
+            membership:boolean,
+            usersCanMessageEachOther:boolean
+        },
         layoutSettings: {},
         headDataSettings: {}
     }
@@ -13,7 +16,10 @@ interface SettingsStateRaw {
 const initialState: SettingsStateRaw = {
     initialSettings: {
         postCardsSettings: {},
-        membershipSettings: {},
+        membershipSettings: {
+            membership:false,
+            usersCanMessageEachOther:false
+        },
         layoutSettings: {},
         headDataSettings: {}
     }

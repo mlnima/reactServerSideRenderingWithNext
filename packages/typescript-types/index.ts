@@ -44,9 +44,11 @@ import {IEmail} from "./src/IEmail";
 import {IMessengerConversation} from "./src/messengerTypes/IMessengerConversation";
 import {IMessengerConversationMessage} from "./src/messengerTypes/IMessengerConversationMessage";
 import {MediaConnectionState} from "./src/storeTypes/MediaConnectionState";
+import {IClearCache} from "./src/clearCaches";
 
 
 export type {
+    IClearCache,
     MediaConnectionState,
     IMessengerConversation,
     IMessengerConversationMessage,

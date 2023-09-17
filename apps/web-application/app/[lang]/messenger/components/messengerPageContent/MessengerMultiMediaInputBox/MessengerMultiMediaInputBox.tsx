@@ -10,11 +10,7 @@ import './MessengerMultiMediaInputBox.styles.scss'
 import socket from "web-socket-client";
 import {IMessengerConversation} from "typescript-types/dist/src/messengerTypes/IMessengerConversation";
 import {IDraftMessage} from "../../interfaces";
-import Draggable from 'react-draggable';
-import {faCamera} from "@fortawesome/free-solid-svg-icons/faCamera";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faArrowsUpDownLeftRight} from "@fortawesome/free-solid-svg-icons";
-import {faTimes} from "@fortawesome/free-solid-svg-icons/faTimes";
+
 
 interface IProps {
     onStartTypingHandler: () => void,
@@ -32,7 +28,6 @@ const MessengerMultiMediaInputBox: FC<IProps> = (
     }) => {
     const imageInputRef = useRef<HTMLInputElement>(null);
     const {userData} = useAppSelector(({user}) => user);
-    const [render,setRender]=useState(false)
 
     const [draftMessage, setDraftMessage] = useState<IDraftMessage>({
         imageContent: '',
@@ -67,34 +62,28 @@ const MessengerMultiMediaInputBox: FC<IProps> = (
 
     return (
 
-
                 <form id={'MessengerMultiMediaInputBox'} onSubmit={onSubmitHandler}>
-                    {!!activeConversation &&
-                        <>
-                            <TextInput onStartTypingHandler={onStartTypingHandler}
-                                       dictionary={dictionary}
+                    {(!!draftMessage.audioContent || !!draftMessage.imageContent) &&
+                        <div className={'media-content'}>
+                            {!!draftMessage.imageContent &&
+                                <AddedImagePreview handleSubmit={onSubmitHandler}
+                                                   setDraftMessage={setDraftMessage}
+                                                   draftMessage={draftMessage}/>}
+                            {!!draftMessage?.audioContent &&
+                                <RecordedAudioPreview setDraftMessage={setDraftMessage}
+                                                      draftMessage={draftMessage}/>}
+                        </div>
+                    }
+                    <TextInput onStartTypingHandler={onStartTypingHandler}
+                               dictionary={dictionary}
+                               draftMessage={draftMessage}
+                               setDraftMessage={setDraftMessage}/>
+
+                    <UploadImageButton imageInputRef={imageInputRef}
                                        draftMessage={draftMessage}
                                        setDraftMessage={setDraftMessage}/>
 
-                            <UploadImageButton imageInputRef={imageInputRef}
-                                               draftMessage={draftMessage}
-                                               setDraftMessage={setDraftMessage}/>
-
-                            <VoiceRecorderButton setDraftMessage={setDraftMessage}/>
-
-                            {(!!draftMessage.audioContent || !!draftMessage.imageContent) &&
-                                <div className={'media-content'}>
-                                    {!!draftMessage.imageContent &&
-                                        <AddedImagePreview handleSubmit={onSubmitHandler}
-                                                           setDraftMessage={setDraftMessage}
-                                                           draftMessage={draftMessage}/>}
-                                    {!!draftMessage?.audioContent &&
-                                        <RecordedAudioPreview setDraftMessage={setDraftMessage}
-                                                              draftMessage={draftMessage}/>}
-                                </div>
-                            }
-                        </>
-                    }
+                    {/*<VoiceRecorderButton setDraftMessage={setDraftMessage}/>*/}
                 </form>
     )
 };

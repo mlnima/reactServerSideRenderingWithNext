@@ -44,7 +44,7 @@ export const initializeSocket = (io: any) => {
 
                     socket.emit('initializeChatroomData', dataToSend);
                     if (!addUserToChatroomAndCheckIfExist) {
-                        socket.broadcast.to(chatroomId).emit('newUserJoined', joiner);
+                        socket.broadcast.to(chatroomId).emit('newUserJoined', ({joiner,chatroomId}));
                     }
                 }
             } catch (error) {

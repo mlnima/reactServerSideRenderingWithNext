@@ -1,0 +1,56 @@
+.audioPlayer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+  button {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    width: 2rem;
+    height: 2rem;
+    color: var(--primary-text-color,#fff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // Add more button styles here
+  }
+
+  input[type="range"] {
+    position: relative;
+    width: 100%;
+    flex: 1;
+    margin: 0 1rem;
+    cursor: pointer;
+
+    //// Default styles for the track
+    //&::-webkit-slider-runnable-track {
+    //  background: var(--primary-text-color,#fff); // Change this to your desired track color
+    //  //height: 4px;
+    //  border-radius: 0.375rem;
+    //}
+    //
+    //&::-moz-range-track {
+    //  background: #ddd; // Change this to your desired track color
+    //  height: 4px;
+    //  border-radius: 2px;
+    //}
+    //
+    //// Default styles for the thumb
+    //&::-webkit-slider-thumb {
+    //  width: 16px;
+    //  height: 16px;
+    //  background: var(--primary-active-color,#f90); // Change this to your desired thumb color
+    //  border-radius: 50%;
+    //  appearance: none; // This removes the default styling
+    //}
+    //
+    //&::-moz-range-thumb {
+    //  width: 16px;
+    //  height: 16px;
+    //  background: var(--primary-active-color,#f90); // Change this to your desired thumb color
+    //  border-radius: 50%;
+    //}
+
+  }
+}

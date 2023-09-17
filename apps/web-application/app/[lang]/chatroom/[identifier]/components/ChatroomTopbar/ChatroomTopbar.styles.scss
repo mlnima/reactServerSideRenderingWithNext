@@ -7,9 +7,20 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: var(--default-border);
   border-bottom: var(--default-border);
+
   grid-area: chatroomTopbar;
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  //.backToHomePageButton{
+  //  svg{
+  //    width: 24px;
+  //    height: 24px;
+  //  }
+  //}
 
   .chatroom-selector {
     width: auto;
@@ -36,10 +47,10 @@
       justify-content: center;
       align-items: center;
       color: var(--secondary-text-color, #ccc);
-      svg {
-        width: 35px;
-        height: 35px;
-      }
+      //svg {
+      //  width: 35px;
+      //  height: 35px;
+      //}
     }
 
     .topBarActionButtonActive {

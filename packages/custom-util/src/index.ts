@@ -6,6 +6,7 @@ export {default as shortNumber} from './math-utils/shortNumber';
 export {default as arraySortRandom} from './array-utils/arraySortRandom';
 export {default as groupingArrayOfObjectByKey} from './array-utils/groupingArrayOfObjectByKey';
 export {default as capitalizeFirstLetter} from './string-util/capitalizeFirstLetter';
+export {default as base64toBlobURL} from './string-util/base64toBlobURL';
 export {default as capitalizeFirstLetters} from './string-util/capitalizeFirstLetters';
 export {default as convertVariableNameToName} from './string-util/convertVariableNameToName';
 export {default as fileTypeDetector} from './string-util/fileTypeDetector';

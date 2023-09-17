@@ -79,7 +79,7 @@ const ChatRoomMessageArea: FC<IProp> = (
         <div ref={messageAreaRef}
              className={`custom-scroll`}
              style={{
-                 height: isMaximized ? `calc(100vh - 100px)` : `calc(100vh - ${headerSize + 1}px)`
+                 // height: isMaximized ? `calc(100vh - 100px)` : `calc(100vh - ${headerSize + 1}px)`
              }}
              id={'chatroomMessageArea'}>
             {!!chatroomMessages?.length && sortArrayByPropertyOfObject(chatroomMessages, 'createdAt', 'asc')

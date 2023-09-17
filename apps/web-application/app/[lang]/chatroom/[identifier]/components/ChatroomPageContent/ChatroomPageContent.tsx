@@ -8,7 +8,7 @@ import ChatroomTopbar from "../ChatroomTopbar/ChatroomTopbar";
 import ChatRoomMessageArea from "../ChatRoomMessageArea/ChatRoomMessageArea";
 import ChatRoomTools from "../ChatRoomTools/ChatRoomTools";
 import ChatRoomOnlineUsersList from "../ChatRoomOnlineUsersList/ChatRoomOnlineUsersList";
-import {IChatroomUsers, IPreference, TChatroomUser} from "../interfaces";
+import {IChatroomUsers, INewUserJoinData, IPreference} from "../interfaces";
 import './ChatroomPageContent.styles.scss'
 import Soft404 from "@components/Soft404/Soft404";
 import {ChatroomMessage} from "typescript-types/dist/src/Chatroom/ChatroomMessage";
@@ -21,6 +21,8 @@ interface IProps {
     },
 }
 
+
+
 const ChatroomPageContent: FC<IProps> = ({dictionary, pageData}) => {
 
     const [preference, setPreference] = useState<IPreference>({
@@ -29,6 +31,7 @@ const ChatroomPageContent: FC<IProps> = ({dictionary, pageData}) => {
         isJoined: false,
         isMaximized: false
     })
+
 
     const [chatroomUsers, setChatroomUsers] = useState<IChatroomUsers>([]);
     const [chatroomMessages, setChatroomMessages] = useState<ChatroomMessage[]>([])
@@ -115,14 +118,15 @@ const ChatroomPageContent: FC<IProps> = ({dictionary, pageData}) => {
         setChatroomMessages(prevMessages => prevMessages.filter(message => message._id !== messageId));
         socket.emit(
             'deleteThisMessageFromChatroom',
-            {messageId,chatroomId:pageData?.chatroom?._id}
+            {messageId, chatroomId: pageData?.chatroom?._id}
         )
     }
 
-    const onNewUserJoinedHandler = (newUserData: TChatroomUser) => {
-        const isUserExist = chatroomUsers.some(user => user._id === newUserData._id);
-        if (!isUserExist) {
-            setChatroomUsers(prevUsers => [...prevUsers, newUserData]);
+    const onNewUserJoinedHandler = ({joiner,chatroomId}:INewUserJoinData) => {
+        const isUserExist = chatroomUsers.some(user => user._id === joiner._id);
+        if (!isUserExist && chatroomId === pageData?.chatroom?._id) {
+            // console.log('newUserData=> ',joiner)
+            setChatroomUsers(prevUsers => [...prevUsers, joiner]);
         }
     };
 
@@ -150,17 +154,13 @@ const ChatroomPageContent: FC<IProps> = ({dictionary, pageData}) => {
         socket.on('olderMessagesLoaded', handleOlderMessagesLoaded);
 
         if (typeof window !== 'undefined') {
-            document.body.style.overflow = 'hidden';
-            const footerWidget = document.querySelector('.footer-widget-area');
-            if (footerWidget && footerWidget instanceof HTMLElement) {
-                footerWidget.style.display = 'none';
-            }
+            // document.body.style.overflow = 'hidden'
             if (window.innerWidth > 768 && !preference.onlineUserListVisibility) {
                 updatePreference('onlineUserListVisibility', true)
             }
-            setTimeout(() => {
-                setHeaderSize(headerSizeCalculator() + 100)
-            }, 0)
+            if (!headerSize){
+                setHeaderSize(headerSizeCalculator())
+            }
         }
 
 
@@ -169,12 +169,6 @@ const ChatroomPageContent: FC<IProps> = ({dictionary, pageData}) => {
                 chatroomId: pageData?.chatroom?._id
             });
 
-
-            document.body.style.overflow = 'auto';
-            const footerWidget = document.querySelector('.footer-widget-area');
-            if (footerWidget && footerWidget instanceof HTMLElement) {
-                footerWidget.style.display = 'block';
-            }
             socket.off('aMessageDeletedFromChatroom', onAMessageWasDeleted);
             socket.off('aUserDisconnected', onAUserDisconnectedHandler);
             socket.off('aUserLeftTheChatroom', onAUserLeftTheChatroomHandler);
@@ -207,10 +201,9 @@ const ChatroomPageContent: FC<IProps> = ({dictionary, pageData}) => {
     )
 
 
-    return (
-        <div className={`chatroomPageContent chatroomPage${preference.isMaximized ? 'Maximized' : ''}
-             ${preference.onlineUserListVisibility ? 'visibleUserList' : ''}`}>
 
+    return (
+        <div className={`chatroomPageContent chatroomPage${preference.isMaximized ? 'Maximized' : ''}`}>
             <ChatroomTopbar
                 chatrooms={pageData?.chatrooms}
                 chatroomId={pageData?.chatroom?._id}
@@ -233,7 +226,9 @@ const ChatroomPageContent: FC<IProps> = ({dictionary, pageData}) => {
             />
 
             <ChatRoomTools chatroomId={pageData?.chatroom?._id} setAutoScroll={setAutoScroll}/>
-            {preference.onlineUserListVisibility && <ChatRoomOnlineUsersList chatroomUsers={chatroomUsers}/>}
+            {preference.onlineUserListVisibility &&
+                <ChatRoomOnlineUsersList chatroomUsers={chatroomUsers}/>
+            }
 
         </div>
     )

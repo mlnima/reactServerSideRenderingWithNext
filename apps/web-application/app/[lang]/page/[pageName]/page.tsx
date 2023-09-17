@@ -25,7 +25,7 @@ const page = async ({params}: IProps) => {
     const sidebar = pageData?.pageData?.sidebar;
 
     return (
-        <div id={'content'} className={`page-${sidebar || 'no'}-sidebar inner-content`}>
+        <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
             <main id={'primary'} className={'main page'}>
                 <MainWidgetArea dictionary={dictionary}
                                 widgets={widgetsData?.widgets?.[pageName]}

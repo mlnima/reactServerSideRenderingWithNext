@@ -1,12 +1,9 @@
 #messengerConversationsList{
   border-right:  var(--default-border);
   margin: 0;
-  width: 100%;
-  height: 100%;
-  overflow-y: scroll;
   padding: 4px;
   box-sizing: border-box;
-  position: relative;
+  grid-area: messengerConversationsList;
 
   .no-message {
     color: var(--primary-text-color,#fff);

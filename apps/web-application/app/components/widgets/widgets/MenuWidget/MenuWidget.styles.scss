@@ -1,5 +1,6 @@
 .menu-widget{
   z-index: 10;
+
   .menu-widget-open-button {
     display: flex;
     align-items: center;
@@ -18,6 +19,7 @@
     justify-content: flex-start;
     padding: 50px 0 0 0;
     align-items: flex-start;
+    gap: 8px;
     margin: 0;
     transition: all 0.5s ease 0s;
     position: fixed;
@@ -37,25 +39,6 @@
       padding: 6px;
     }
 
-    .menu-item {
-      list-style-type: none;
-      width: 100%;
-
-
-      .menu-item-link {
-        color:var(--primary-text-color,#fff);
-        background-color: transparent;
-        font-weight: bold;
-        font-size: 1em;
-        text-decoration: none;
-        border-radius: 5px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 56px;
-      }
-    }
   }
 }
 
@@ -92,13 +75,9 @@
       padding: 0;
       transition: none;
       background-color: transparent;
+      gap: initial;
       .menu-widget-close-button {
         display: none;
-      }
-      .menu-item {
-        margin-right:  10px;
-        display: block;
-        white-space: nowrap;
       }
     }
   }

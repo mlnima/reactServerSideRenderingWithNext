@@ -1,6 +1,5 @@
 export interface IPreference{
     autoScroll: boolean;
-    isMaximized: boolean;
 }
 
 export type TChatroomUser={

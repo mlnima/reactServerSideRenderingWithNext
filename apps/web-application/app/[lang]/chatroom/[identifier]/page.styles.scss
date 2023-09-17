@@ -1,0 +1,12 @@
+#content{
+  display: none;
+  @supports (max-height: calc(100vh - env(safe-area-inset-bottom) )) {
+    display: none;
+    //height: calc(100vh - env(safe-area-inset-bottom,0));
+  }
+  .chatroom{
+
+
+
+  }
+}

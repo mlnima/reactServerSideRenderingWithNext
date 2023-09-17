@@ -12,7 +12,6 @@ interface IProps {
     }
 }
 
-
 const chatroomPage = async ({params: {lang, identifier}}: IProps) => {
 
     const locale = i18n.locales.includes(lang) ? lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';

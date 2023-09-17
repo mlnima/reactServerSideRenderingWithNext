@@ -3,23 +3,27 @@ import {formatDistance} from 'date-fns'
 import {ChatroomMessage} from "typescript-types";
 import {UserPreviewImage} from "ui";
 import Link from "next/link";
-import AdminActionOnMessageMenu from "./AdminActionOnMessageMenu";
+import AdminAuthorMessageActionMenu from "./AdminAuthorMessageActionMenu";
 import './ChatRoomMessage.styles.scss';
+import ReactAudioPlayer from "@components/ReactAudioPlayer/ReactAudioPlayer";
 
 interface IProps {
     message: ChatroomMessage,
     onDeleteMessageHandler: (messageId: string) => void
 }
 
-const ChatRoomMessage: React.FC<IProps> = ({message,onDeleteMessageHandler}) => {
+const ChatRoomMessage: React.FC<IProps> = ({message, onDeleteMessageHandler}) => {
+
+
+    // {message?.type === 'log' &&
+    // <p className={'chatroomMessageLog'}>
+    //     {message?.author?.username} joined the room
+    // </p>
+    // }
 
     return (
         <div className={'chatroomMessage'}>
-            {message?.type === 'log' &&
-                <p className={'chatroomMessageLog'}>
-                    {message?.author?.username} joined the room
-                </p>
-            }
+
             <Link className={'userProfileImage'} href={`/user/${message?.author?.username}`}>
                 <UserPreviewImage
 
@@ -37,14 +41,16 @@ const ChatRoomMessage: React.FC<IProps> = ({message,onDeleteMessageHandler}) => 
                         ) : 'Time Stamp Missing'}>
                     {message?.author?.username}
                   </span>
+                <div className={'chatroomMessageContent'}>
+                    {message?.type === 'message' && <p className={'chatroomMessageText'}>{message?.messageData}</p>}
+                    {message?.type === 'image' &&
+                        <img alt={'message'} src={message?.messageData} className={'chatroomMessageImage'}/>}
+                    {message?.type === 'audio' && <ReactAudioPlayer src={message?.messageData}/>}
+                </div>
 
-                {message?.type === 'message' && <p className={'chatroomMessageText'}>{message?.messageData}</p>}
-                {message?.type === 'image' &&
-                    <img alt={'message'} src={message?.messageData} className={'chatroomMessageImage'}/>}
-                {message?.type === 'audio' && <audio className={'audioPlayer'} src={message?.messageData} controls/>}
 
             </div>
-            <AdminActionOnMessageMenu
+            <AdminAuthorMessageActionMenu
                 onDeleteMessageHandler={onDeleteMessageHandler}
                 authorId={message?.author?._id}
                 messageId={message?._id}

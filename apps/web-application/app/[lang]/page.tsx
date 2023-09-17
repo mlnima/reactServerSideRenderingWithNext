@@ -24,7 +24,7 @@ const homePage = async ({params: {lang},searchParams}: IProps) => {
     const sidebar = settingsData?.settings?.homePageSettings?.sidebar;
 
     return (
-        <div id={'content'} className={`page-${sidebar || 'no'}-sidebar inner-content`}>
+        <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
 
             <main id={'primary'} className={'main homePage'}>
                 <MainWidgetArea dictionary={dictionary}

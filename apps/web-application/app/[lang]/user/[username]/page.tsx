@@ -40,7 +40,7 @@ const userPage = async ({params, searchParams}: IProps) => {
 
 
     return (
-        <div id={'content'} className={`page-${sidebar || 'no'}-sidebar inner-content`}>
+        <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
             <main id={'primary'} className={'main userPage'}>
                 <UserPageContent dictionary={dictionary} username={params?.username} locale={locale}/>
             </main>

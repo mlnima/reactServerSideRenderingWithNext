@@ -1,11 +1,10 @@
 'use server'
 import {revalidatePath, revalidateTag} from 'next/cache';
 import {ReadonlyURLSearchParams} from "next/navigation";
+import {IClearCache} from "typescript-types";
 
-
-interface TClearCachesByServerAction {
+interface TClearCachesByServerAction extends IClearCache{
     path: string,
-    mode?: 'all' | 'only' | 'settings' | 'widgets' | 'similar',
     segment: string | null,
     searchParams: ReadonlyURLSearchParams,
     params: any,

@@ -30,8 +30,8 @@ import DefaultPageSettings from "@components/pages/settings/defaultPagesSettting
 const MainRouter = () => {
     return (
         <Routes>
-
             <Route path="/dashboard" element={<Dashboard/>}/>
+            <Route path="/" element={<Dashboard/>}/>
             <Route path="/dashboard/assets" element={<Assets/>}/>
             <Route path="/dashboard/post" element={<Post/>}/>
             <Route path="/dashboard/chatroom" element={<Chatroom/>}/>
@@ -54,51 +54,8 @@ const MainRouter = () => {
             <Route path="/dashboard/importer/postsImporter" element={<PostsImporter/>}/>
             <Route path={'/dashboard/login'} element={<Login/>}/>
             <Route path="*" element={<NotFound/>}/>
-
-            {/*//to remove   */}
-
-                {/*<Route path="/dashboard/settings/general" element={<General/>}/>*/}
-                {/*<Route path="/dashboard/settings/customScript" element={<CustomScript/>}/>*/}
-            {/*   <Route path="/dashboard/settings/membershipSettings" element={<Membership/>}/>*/}
-            {/*<Route path="/dashboard/settings/customStyles" element={<DesignSection name={'customStyles'}/>}/>*/}
-            {/*<Route path="/dashboard/settings/customColors" element={<DesignSection name={'customColors'}/>}/>*/}
-            {/*<Route path="/dashboard/settings/topBar" element={<DesignSection name={'topBarStyle'}/>}/>*/}
-            {/*<Route path="/dashboard/settings/header" element={<DesignSection name={'headerStyle'}/>}/>*/}
-            {/*<Route path="/dashboard/settings/navigation" element={<DesignSection name={'navigationStyle'}/>}/>*/}
-            {/*<Route path="/dashboard/settings/postPage" element={<DesignSection name={'postPageStyle'}/>}/>*/}
-            {/*<Route path="/dashboard/settings/postsPage" element={<DesignSection name={'postsPageStyle'}/>}/>*/}
-            {/*<Route path="/dashboard/settings/actorPage" element={<DesignSection name={'actorPageStyle'}/>}/>*/}
-            {/*<Route path="/dashboard/settings/actorsPage" element={<DesignSection name={'actorsPageStyle'}/>}/>*/}
-            {/*<Route path="/dashboard/settings/categoryPage" element={<DesignSection name={'categoryPageStyle'}/>}/>*/}
-            {/*<Route path="/dashboard/settings/categoriesPage" element={<DesignSection name={'categoriesPageStyle'}/>}/>*/}
-            {/*<Route path="/dashboard/settings/tagPage" element={<DesignSection name={'tagPageStyle'}/>}/>*/}
-            {/*<Route path="/dashboard/settings/tagsPage" element={<DesignSection name={'tagsPageStyle'}/>}/>*/}
-            {/*<Route path="/dashboard/settings/cards" element={<DesignSection name={'cardsCustomStyle'}/>}/>*/}
-            {/*<Route path="/dashboard/settings/footer" element={<DesignSection name={'footerStyle'}/>}/>*/}
         </Routes>
     )
 };
 
 export default MainRouter
-// "DesignSettings": {
-//         "pathURL": "/dashboard/design/widgets",
-//             "subItems": [
-//                 {"name": "topBar", "url": "/dashboard/design/topBar"},
-//                 {"name": "header", "url": "/dashboard/design/header"},
-//                 {"name": "navigation", "url": "/dashboard/design/navigation"},
-//                 {"name": "widgets", "url": "/dashboard/design/widgets"},
-//                 {"name": "postPage", "url": "/dashboard/design/postPage"},
-//                 {"name": "postsPage", "url": "/dashboard/design/postsPage"},
-//                 {"name": "actorPage", "url": "/dashboard/design/actorPage"},
-//                 {"name": "actorsPage", "url": "/dashboard/design/actorsPage"},
-//                 {"name": "categoryPage", "url": "/dashboard/design/categoryPage"},
-//                 {"name": "categoriesPage", "url": "/dashboard/design/categoriesPage"},
-//                 {"name": "tagPage", "url": "/dashboard/design/tagPage"},
-//                 {"name": "tagsPage", "url": "/dashboard/design/tagsPage"},
-//                 {"name": "metasPage", "url": "/dashboard/design/metasPage"},
-//                 {"name": "cards", "url": "/dashboard/design/cards"},
-//                 {"name": "footer", "url": "/dashboard/design/footer"},
-//                 {"name": "customStyles", "url": "/dashboard/design/customStyles"},
-//                 {"name": "customColors", "url": "/dashboard/design/customColors"}
-//         ]
-// },
