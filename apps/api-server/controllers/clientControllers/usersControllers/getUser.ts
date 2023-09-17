@@ -87,7 +87,7 @@ export const getUserPageInitialData = async (req: Request, res: Response) => {
         const [didRequesterBlockThisUser, didRequesterFollowThisUser,postsCount] = await Promise.all([
             userSchema.exists({'blockList': {$in: [userData._id]}}),
             userSchema.exists({'following': {$in: [userData._id]}}),
-            postSchema.estimatedDocumentCount({author:userData._id})
+            postSchema.countDocuments({author:userData._id})
         ]);
 
         userData.didRequesterBlockThisUser = !!didRequesterBlockThisUser;
