@@ -83,6 +83,7 @@ const searchPage = async ({params, searchParams}: IProps) => {
                         <ActorsPageContentRenderer renderPagination={false}
                                                    totalCount={numberOfCardsPerPage}
                                                    currentPage={currentPage}
+                                                   locale={locale}
                                                    numberOfCardsPerPage={numberOfCardsPerPage}
                                                    metas={groupingMetas.actors}/>
                     </>

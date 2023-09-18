@@ -5,6 +5,31 @@ const {postTypes} = require("data-structures");
 const postTypeQueryMatcher = `:postType(${postTypes.join('|')})?`
 const languageQueryMatcher = `(${process.env.NEXT_PUBLIC_LOCALES.split(' ').join('|')})`;
 
+const imagesAllowedDomainsForNextImage = process.env?.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES?.split(' ') || []
+
+
+const allowedDomainsForNextImageConfig = imagesAllowedDomainsForNextImage.reduce((acc, source) => {
+    acc = [...acc,
+        {
+            protocol: 'https',
+            hostname: source,
+        },
+        {
+            protocol: 'http',
+            hostname: source,
+        },
+        {
+            protocol: 'https',
+            hostname: `**.${source}`,
+        },
+        {
+            protocol: 'http',
+            hostname: `**.${source}`,
+        }
+    ]
+    return acc
+}, [])
+
 const nextConfig = {
     eslint: {
         ignoreDuringBuilds: true,
@@ -98,7 +123,21 @@ const nextConfig = {
     },
     typescript: {
         ignoreBuildErrors: true,
-    }
+    },
+    images: {
+        formats: ['image/avif', 'image/webp'],
+        remotePatterns: allowedDomainsForNextImageConfig
+    },
+
 }
 
 module.exports = nextConfig
+
+// imagesX: {
+//     remotePatterns: [
+//         {
+//             protocol: 'https',
+//             hostname: '**.example.com',
+//         },
+//     ],
+// },

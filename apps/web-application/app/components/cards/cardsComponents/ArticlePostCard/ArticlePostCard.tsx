@@ -13,8 +13,9 @@ interface ArticlePostCardPropTypes {
     locale: string,
     postUrl: string,
     index: number,
-    isSidebar?:boolean,
+    isSidebar?: boolean,
     post: Post,
+    isNextIImageAllowed: boolean
 }
 
 const ArticlePostCard: FC<ArticlePostCardPropTypes> =
@@ -23,7 +24,8 @@ const ArticlePostCard: FC<ArticlePostCardPropTypes> =
          locale,
          postUrl,
          isSidebar,
-         index
+         index,
+         isNextIImageAllowed
      }) => {
 
         const rating = post.likes || post.disLikes ? ratingCalculator(post?.likes, post?.disLikes) : null
@@ -36,8 +38,9 @@ const ArticlePostCard: FC<ArticlePostCardPropTypes> =
                           title={post?.translations?.[locale as string]?.title ?? post?.title}>
 
                         <CardImageRendererUseClient imageUrl={post.mainThumbnail}
-                                           mediaAlt={post?.translations?.[locale as string]?.title ?? post?.title}
-                                           index={index}/>
+                                                    isNextIImageAllowed={isNextIImageAllowed}
+                                                    mediaAlt={post?.translations?.[locale as string]?.title ?? post?.title}
+                                                    index={index}/>
                     </Link>
                 </div>
 

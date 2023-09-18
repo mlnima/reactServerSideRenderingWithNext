@@ -13,7 +13,9 @@ interface CategoryCardPropTypes {
     meta: Meta,
     index: number,
     locale: string,
-    isSidebar?:boolean
+    isSidebar?: boolean,
+    metaUrl: string,
+    isNextIImageAllowed?: boolean,
 }
 
 const CategoryCard: FC<CategoryCardPropTypes> =
@@ -21,26 +23,29 @@ const CategoryCard: FC<CategoryCardPropTypes> =
          meta,
          index,
          locale,
-         isSidebar
+         metaUrl,
+         isSidebar,
+         isNextIImageAllowed = false
      }) => {
 
-        const title = capitalizeFirstLetter(meta?.translations?.[locale]?.name ?? meta?.name  )
+        const title = capitalizeFirstLetter(meta?.translations?.[locale]?.name ?? meta?.name)
 
         return (
             <article className={`category-card metaCard ${isSidebar && 'metaCardSidebar'}`}>
                 <div className={'card-media'}>
-                    <Link href={`/category/${meta?._id}`} className='category-card-link' title={title}>
+                    <Link href={metaUrl} className='category-card-link' title={title}>
                         {!!meta.imageUrl ?
                             <CardImageRendererUseClient imageUrl={meta.imageUrl}
-                                               mediaAlt={title}
-                                               index={index}/> :
+                                                        isNextIImageAllowed={isNextIImageAllowed}
+                                                        mediaAlt={title}
+                                                        index={index}/> :
                             <TextToCanvasImage title={title}
                                                numberOfCardsPerRowInMobile={1}/>
                         }
                     </Link>
                 </div>
                 <div className={`card-info`}>
-                <CardTitle title={title} url={`/category/${meta?._id}`}/>
+                    <CardTitle title={title} url={`/category/${meta?._id}`}/>
                 </div>
             </article>
         )

@@ -14,8 +14,9 @@ interface PropTypes {
     postUrl: string,
     numberOfCardsPerRowInMobile: number,
     index: number,
-    isSidebar?:boolean,
+    isSidebar?: boolean,
     post: Post,
+    isNextIImageAllowed: boolean
 }
 
 const UcgAdPostCard: FC<PropTypes> =
@@ -24,7 +25,8 @@ const UcgAdPostCard: FC<PropTypes> =
          locale,
          postUrl,
          isSidebar,
-         index
+         index,
+         isNextIImageAllowed
      }) => {
 
         const rating = post.likes || post.disLikes ? ratingCalculator(post?.likes, post?.disLikes) : null
@@ -35,9 +37,11 @@ const UcgAdPostCard: FC<PropTypes> =
                     <Link href={postUrl}
                           className={'card-link'}
                           title={post?.translations?.[locale as string]?.title ?? post?.title}>
-                        <CardImageRendererUseClient imageUrl={post.mainThumbnail}
-                                           mediaAlt={post?.translations?.[locale as string]?.title ?? post?.title}
-                                           index={index}/>
+                        <CardImageRendererUseClient
+                            imageUrl={post.mainThumbnail}
+                            isNextIImageAllowed={isNextIImageAllowed}
+                            mediaAlt={post?.translations?.[locale as string]?.title ?? post?.title}
+                            index={index}/>
                     </Link>
                 </div>
 

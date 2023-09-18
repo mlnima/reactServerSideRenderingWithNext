@@ -9,7 +9,7 @@ interface LogoPropTypes {
     locale: string,
 }
 
-const Logo: FC<LogoPropTypes> = ({uniqueData,LogoUrl,locale}) => {
+const Logo: FC<LogoPropTypes> = ({uniqueData, LogoUrl, locale}) => {
 
     const logoUrlSource = uniqueData?.logoUrl || LogoUrl
     const logoText = uniqueData?.translations?.[locale as string]?.logoText || uniqueData?.logoText || ''
@@ -19,12 +19,20 @@ const Logo: FC<LogoPropTypes> = ({uniqueData,LogoUrl,locale}) => {
         <div className={'logo'}>
             <Link href='/' className={'logoLink'} aria-label={'logo'}>
 
-                    {uniqueData?.logoUrl && <img alt={'logo'} className={'logoImage'} src={logoUrlSource}/> }
-                    {!!uniqueData?.logoText && !uniqueData?.logoUrlSource ?
-                        <span className='logoText'> {logoText} </span>
-                        : null
-                    }
-                    {!!uniqueData?.headLine && <p className={'logoHeadline'}>{headLineData}</p> }
+                {uniqueData?.logoUrl &&
+                    <img alt={'logo'}
+                         className={'logoImage'}
+                         style={{
+                             width: `${uniqueData.width || 300}px`,
+                             height: `${uniqueData.height || 100}px`,
+                         }}
+                         src={logoUrlSource}/>
+                }
+                {!!uniqueData?.logoText && !uniqueData?.logoUrlSource ?
+                    <span className='logoText'> {logoText} </span>
+                    : null
+                }
+                {!!uniqueData?.headLine && <p className={'logoHeadline'}>{headLineData}</p>}
             </Link>
         </div>
 

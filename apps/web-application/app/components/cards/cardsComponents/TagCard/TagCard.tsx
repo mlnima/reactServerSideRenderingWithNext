@@ -13,7 +13,9 @@ interface TagCardPropTypes {
     meta: Meta,
     index: number,
     locale: string,
-    isSidebar?: boolean
+    metaUrl: string,
+    isSidebar?: boolean,
+    isNextIImageAllowed?: boolean,
 }
 
 const TagCard: FC<TagCardPropTypes> =
@@ -21,7 +23,9 @@ const TagCard: FC<TagCardPropTypes> =
          meta,
          index,
          locale,
-         isSidebar
+         isSidebar,
+         metaUrl,
+         isNextIImageAllowed = false
      }) => {
 
         const title = capitalizeFirstLetter(meta?.translations?.[locale]?.name ?? meta?.name)
@@ -29,11 +33,12 @@ const TagCard: FC<TagCardPropTypes> =
         return (
             <article className={`tag-card metaCard ${isSidebar && 'metaCardSidebar'}`}>
                 <div className={'card-media'}>
-                    <Link href={`/tag/${meta?._id}`} className='tag-card-link' title={title as string}>
+                    <Link href={metaUrl} className='tag-card-link' title={title as string}>
                         {!!meta?.imageUrl ?
                             <CardImageRendererUseClient imageUrl={meta?.imageUrl}
-                                               mediaAlt={title}
-                                               index={index}/> :
+                                                        isNextIImageAllowed={isNextIImageAllowed}
+                                                        mediaAlt={title}
+                                                        index={index}/> :
                             <TextToCanvasImage title={title}
                                                numberOfCardsPerRowInMobile={1}/>
                         }

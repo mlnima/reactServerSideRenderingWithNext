@@ -8,7 +8,8 @@ interface MetasCardsRendererPropTypes {
     metas: Meta[],
     totalCount: number,
     currentPage: number,
-    numberOfCardsPerPage: number
+    numberOfCardsPerPage: number,
+    locale: string
 }
 
 const ActorsPageContentRenderer: FC<MetasCardsRendererPropTypes> =
@@ -17,12 +18,13 @@ const ActorsPageContentRenderer: FC<MetasCardsRendererPropTypes> =
          renderPagination,
          totalCount,
          currentPage,
+         locale,
          numberOfCardsPerPage
      }) => {
         return (
             <>
                 <div className={'actorsContainer'}>
-                    <ActorsCardsRenderer metas={metas}/>
+                    <ActorsCardsRenderer metas={metas} locale={locale}/>
                 </div>
                 {renderPagination && <Pagination totalCount={totalCount}
                                                  currentPage={currentPage}

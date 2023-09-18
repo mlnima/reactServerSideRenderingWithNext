@@ -19,11 +19,20 @@ interface IProps {
     locale: string,
     postUrl: string,
     index: number,
-    isSidebar?:boolean,
+    isSidebar?: boolean,
     post: Post,
+    isNextIImageAllowed: boolean
 }
 
-const VideoPostCard: FC<IProps> = ({post, locale, postUrl, isSidebar, index}) => {
+const VideoPostCard: FC<IProps> =
+    ({
+         post,
+         locale,
+         postUrl,
+         isSidebar,
+         index,
+         isNextIImageAllowed
+     }) => {
 
         const rating = post.likes || post.disLikes ? ratingCalculator(post?.likes, post?.disLikes) : null
 
@@ -35,6 +44,7 @@ const VideoPostCard: FC<IProps> = ({post, locale, postUrl, isSidebar, index}) =>
                           title={post?.translations?.[locale as string]?.title ?? post?.title}>
                         <CardImageRendererUseClient
                             imageUrl={post.mainThumbnail}
+                            isNextIImageAllowed={isNextIImageAllowed}
                             videoTrailerUrl={post?.videoTrailerUrl}
                             submitPostView={false}
                             postId={post?._id}

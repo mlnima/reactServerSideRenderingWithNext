@@ -50,6 +50,22 @@ const LogoTypeWidgetModelFields: FC<LogoTypeWidgetModelFieldsPropTypes> =
                                          placeHolder='Logo image URL'
                                          onChangeHandler={onUniqueDataChangeHandler}
                 />
+                <TextInputFieldForWidget inputTitle='Logo Width Size:'
+                                         name='width'
+                                         type='number'
+                                         value={widgetData?.uniqueData?.width}
+                                         classNameValue='width'
+                                         placeHolder='Logo width (default value is 300)'
+                                         onChangeHandler={onUniqueDataChangeHandler}
+                />
+                <TextInputFieldForWidget inputTitle='Logo height Size:'
+                                         name='height'
+                                         type='number'
+                                         value={widgetData?.uniqueData?.height}
+                                         classNameValue='height'
+                                         placeHolder='Logo height (default value is 100)'
+                                         onChangeHandler={onUniqueDataChangeHandler}
+                />
             </>
         );
     };

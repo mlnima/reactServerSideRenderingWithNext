@@ -13,8 +13,9 @@ interface PromotionPostCardPropTypes {
     postUrl: string,
     numberOfCardsPerRowInMobile: number,
     index: number,
-    isSidebar?:boolean,
+    isSidebar?: boolean,
     post: Post,
+    isNextIImageAllowed: boolean
 }
 
 const PromotionPostCard: FC<PromotionPostCardPropTypes> =
@@ -23,22 +24,25 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
          locale,
          postUrl,
          isSidebar,
-         index
+         index,
+         isNextIImageAllowed
 
      }) => {
 
         const rating = post.likes || post.disLikes ? ratingCalculator(post?.likes, post?.disLikes) : null
 
         return (
-            <article className={`post-card post-card-promotion ${isSidebar && 'postCardSidebar'}`} >
+            <article className={`post-card post-card-promotion ${isSidebar && 'postCardSidebar'}`}>
                 <div className={'card-media'}>
                     <a href={post.redirectLink} className={'promotion-card-link-external'}
                        target={'_blank'} rel={'nofollow noopener external'}>
-                        <CardImageRendererUseClient imageUrl={post.mainThumbnail}
-                                                    submitPostView={true}
-                                                    postId={post?._id}
-                                           mediaAlt={post?.translations?.[locale as string]?.title ?? post?.title}
-                                           index={index}/>
+                        <CardImageRendererUseClient
+                            imageUrl={post.mainThumbnail}
+                            isNextIImageAllowed={isNextIImageAllowed}
+                            submitPostView={true}
+                            postId={post?._id}
+                            mediaAlt={post?.translations?.[locale as string]?.title ?? post?.title}
+                            index={index}/>
                     </a>
                 </div>
                 <div className={`card-info`}>

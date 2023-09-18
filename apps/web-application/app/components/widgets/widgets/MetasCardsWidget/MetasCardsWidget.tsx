@@ -16,7 +16,7 @@ interface IProps {
 const MetasCardsWidget: FC<IProps> = ({uniqueData,metaType,locale,isSidebar}) =>{
 
     if (metaType === 'actors'){
-        return <ActorsCardsRenderer metas={uniqueData?.metaData} isSidebar={isSidebar}/>
+        return <ActorsCardsRenderer metas={uniqueData?.metaData} isSidebar={isSidebar} locale={locale}/>
     }else if (metaType === 'categories' ){
         return <MetasCardsRenderer locale={locale} metas={uniqueData?.metaData} metaType={'categories'} isSidebar={isSidebar}/>
     }else if ( metaType === 'tags'){

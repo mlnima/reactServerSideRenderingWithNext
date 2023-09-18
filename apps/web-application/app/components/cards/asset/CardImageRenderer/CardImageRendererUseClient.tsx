@@ -1,10 +1,15 @@
 'use client'
 import {clientAPIRequestViewPost} from "api-requests";
-import React, {FC, useRef, useState} from 'react';
+import React, {FC, useMemo, useRef, useState} from 'react';
 import './CardImageRendererUseClient.styles.scss'
 import {useAppDispatch, useAppSelector} from "@store/hooks";
 import {setActiveVideoTrailerId} from "@store/reducers/postsReducers/postsReducer";
-import Csr from "@components/global/Csr";
+// import Csr from "@components/global/Csr";
+import Image from "next/image";
+// import {tr} from "date-fns/locale";
+import {StaticImport} from "next/dist/shared/lib/get-img-props";
+
+const fallbackImage = '/asset/images/default/no-image-available.png'
 
 interface CardImageNextPropTypes {
     imageUrl: string | undefined,
@@ -14,7 +19,8 @@ interface CardImageNextPropTypes {
     submitPostView?: boolean,
     videoTrailerUrl?: string,
     postId?: string,
-    index: number
+    index: number,
+    isNextIImageAllowed: boolean
 }
 
 const CardImageRendererUseClient: FC<CardImageNextPropTypes> =
@@ -26,15 +32,20 @@ const CardImageRendererUseClient: FC<CardImageNextPropTypes> =
          submitPostView,
          videoTrailerUrl,
          postId,
-         index
+         index,
+         isNextIImageAllowed = false
      }) => {
+         const [gotError, setGotError] = useState(false)
 
-        const activeVideoTrailerId = useAppSelector(({posts}) => posts.activeVideoTrailerId)
+        const targetImageUrl = useMemo(()=>{
+            return gotError ? fallbackImage : imageUrl
+        },[gotError]) as string | StaticImport
+
+            const activeVideoTrailerId = useAppSelector(({posts}) => posts.activeVideoTrailerId)
         const dispatch = useAppDispatch()
         const [loadingAnimationOver, setLoadingAnimationOver] = useState(false)
         const videoTrailerRef = useRef<HTMLVideoElement>(null)
         const imageRef = useRef<HTMLImageElement>(null)
-        const fallbackImage = '/asset/images/default/no-image-available.png'
 
         const onClickHandler = async () => {
             if (submitPostView && postId) {
@@ -80,9 +91,15 @@ const CardImageRendererUseClient: FC<CardImageNextPropTypes> =
         }
 
         const onImageErrorHandler = (error: any) => {
-            if (imageRef?.current){
-               imageRef.current.src = fallbackImage
+            // console.log('error=> ',error)
+            if (imageRef?.current) {
+                imageRef.current.src = fallbackImage
             }
+        }
+
+        const onNextImageErrorHandler = (e: any) => {
+            setGotError(true)
+            // console.log('onNextImageErrorHandler=> ',e)
         }
 
         return (
@@ -90,41 +107,63 @@ const CardImageRendererUseClient: FC<CardImageNextPropTypes> =
                 aspectRatio: aspectRatio || '16/9'
             }}>
                 {(!!videoTrailerUrl && activeVideoTrailerId === postId) && <div className="trailer-loading"/>}
-                <Csr>
-                {(!!videoTrailerUrl && activeVideoTrailerId === postId && loadingAnimationOver) ?
-                    <video ref={videoTrailerRef}
-                           muted
-                           loop={false}
-                           onEnded={() => onHoverHandler()}
-                           onCanPlay={onCanPlayHandler}
-                           onMouseLeave={onUnHoverHandler}
-                           onTouchEnd={onUnHoverHandler}
-                           playsInline
-                           style={{
-                               objectFit: objectFit || 'contain',
-                               aspectRatio: aspectRatio || '16/9'
-                           }}
-                           className={'video-card-trailer'}>
-                        <source src={videoTrailerUrl}/>
-                        Sorry, your browser doesn't support embedded videos.
-                    </video> :
-                    <img src={imageUrl||fallbackImage}
-                         ref={imageRef}
-                         alt={mediaAlt || ''}
-                         loading={index > 3 ? 'lazy' : 'eager'}
-                         onClick={onClickHandler}
-                         onMouseEnter={() => onHoverHandler()}
-                         onTouchStart={() => onHoverHandler()}
-                         onTouchEnd={onUnHoverHandler}
-                         onError={error=>onImageErrorHandler(error)}
-                         style={{
-                             objectFit: objectFit || 'contain',
-                             aspectRatio: aspectRatio || '16/9'
-                         }}
-                         className={`card-image`}
-                    />
-                }
-                </Csr>
+                {/*<Csr>*/}
+                    {(!!videoTrailerUrl && activeVideoTrailerId === postId && loadingAnimationOver) ?
+                        <video ref={videoTrailerRef}
+                               muted
+                               loop={false}
+                               onEnded={() => onHoverHandler()}
+                               onCanPlay={onCanPlayHandler}
+                               onMouseLeave={onUnHoverHandler}
+                               onTouchEnd={onUnHoverHandler}
+                               playsInline
+                               style={{
+                                   objectFit: objectFit || 'contain',
+                                   aspectRatio: aspectRatio || '16/9'
+                               }}
+                               className={'video-card-trailer'}>
+                            <source src={videoTrailerUrl}/>
+                            Sorry, your browser doesn't support embedded videos.
+                        </video> :
+                        <>
+                            {(!!imageUrl && isNextIImageAllowed) ?
+                                <Image src={targetImageUrl}
+                                       ref={imageRef}
+                                       alt={mediaAlt || ''}
+                                       width={320}
+                                       height={240}
+                                       onClick={onClickHandler}
+                                       onMouseEnter={() => onHoverHandler()}
+                                       onTouchStart={() => onHoverHandler()}
+                                       onTouchEnd={onUnHoverHandler}
+                                       onError={e => onNextImageErrorHandler(e)}
+                                       loading={index > 3 ? 'lazy' : 'eager'}
+                                       style={{
+                                           objectFit: objectFit || 'contain',
+                                           aspectRatio: aspectRatio || '16/9'
+                                       }}
+                                       className={`card-image w-full aspect-${aspectRatio || 'video'} object-${objectFit || 'contain'}`}
+                                /> :
+                                <img src={imageUrl || fallbackImage}
+                                     ref={imageRef}
+                                     alt={mediaAlt || ''}
+                                     loading={index > 3 ? 'lazy' : 'eager'}
+                                     onClick={onClickHandler}
+                                     onMouseEnter={() => onHoverHandler()}
+                                     onTouchStart={() => onHoverHandler()}
+                                     onTouchEnd={onUnHoverHandler}
+                                     onError={error => onImageErrorHandler(error)}
+                                     style={{
+                                         objectFit: objectFit || 'contain',
+                                         aspectRatio: aspectRatio || '16/9'
+                                     }}
+                                     className={`card-image`}
+                                />
+
+                            }
+                        </>
+                    }
+                {/*</Csr>*/}
             </div>
         )
 
@@ -132,3 +171,19 @@ const CardImageRendererUseClient: FC<CardImageNextPropTypes> =
 
 export default CardImageRendererUseClient;
 
+
+// <img src={imageUrl||fallbackImage}
+//      ref={imageRef}
+//      alt={mediaAlt || ''}
+//      loading={index > 3 ? 'lazy' : 'eager'}
+//      onClick={onClickHandler}
+//      onMouseEnter={() => onHoverHandler()}
+//      onTouchStart={() => onHoverHandler()}
+//      onTouchEnd={onUnHoverHandler}
+//      onError={error=>onImageErrorHandler(error)}
+//      style={{
+//          objectFit: objectFit || 'contain',
+//          aspectRatio: aspectRatio || '16/9'
+//      }}
+//      className={`card-image`}
+// />
