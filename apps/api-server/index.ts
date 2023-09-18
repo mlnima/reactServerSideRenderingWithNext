@@ -22,6 +22,7 @@ import clientRobotTxtController from './controllers/clientControllers/clientRobo
 import loggerMiddleware from "./middlewares/loggerMiddleware";
 
 import {settingSchema} from 'models';
+import * as process from "process";
 
 settingSchema.findOne({type: 'initialSettings'}).exec().then((initialSettings) => {
     if (initialSettings) {
@@ -32,6 +33,30 @@ settingSchema.findOne({type: 'initialSettings'}).exec().then((initialSettings) =
 const server = express();
 
 const runServer = () => {
+
+// Base URL from environment variable
+    const baseDomain = process.env.NEXT_PUBLIC_PRODUCTION_URL;
+
+// Generate the "www" version of the domain if the base domain exists
+    const wwwDomain = baseDomain && new URL(baseDomain).protocol + '//www.' + new URL(baseDomain).hostname;
+
+    const allowedOrigins = [baseDomain, wwwDomain].filter(Boolean);
+
+    const corsOptions = {
+        origin: function (origin, callback) {
+            if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+                callback(null, true);
+            } else {
+                callback(new Error('Not allowed by CORS'));
+            }
+        },
+        credentials: true,
+        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+        allowedHeaders: ['Content-Type', 'Authorization']
+    };
+
+// Use the CORS middleware
+    server.use(cors(corsOptions));
 
     server.use(cors())
     server.use(express.json({limit: '5MB'}));
