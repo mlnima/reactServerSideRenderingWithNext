@@ -39,9 +39,11 @@ const CardImageRendererUseClient: FC<CardImageNextPropTypes> =
 
         const targetImageUrl = useMemo(()=>{
             return gotError ? fallbackImage : imageUrl
-        },[gotError]) as string | StaticImport
+        },[gotError,postId]) as string | StaticImport
 
-            const activeVideoTrailerId = useAppSelector(({posts}) => posts.activeVideoTrailerId)
+
+
+        const activeVideoTrailerId = useAppSelector(({posts}) => posts.activeVideoTrailerId)
         const dispatch = useAppDispatch()
         const [loadingAnimationOver, setLoadingAnimationOver] = useState(false)
         const videoTrailerRef = useRef<HTMLVideoElement>(null)
