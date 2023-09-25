@@ -27,7 +27,7 @@ const AddedImagePreview: FC<IProps> = ({handleSubmit, draftMessage, setDraftMess
                 </div>
                 <img src={draftMessage.imageContent} alt="image"/>
                 <div className={'image-preview-footer'}>
-                    <input className={'chatroom-tools-input form-control-input'}
+                    <input className={'chatroom-tools-input primaryInput'}
                            maxLength={300}
                            type={'text'}
                            name={'messageData'}

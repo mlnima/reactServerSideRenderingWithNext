@@ -36,11 +36,25 @@ const nextConfig = {
     },
     experimental: {
         serverActions: true,
+        turbo: {
+            rules: {
+                // Option format
+                '*.md': [
+                    {
+                        loader: '@mdx-js/loader',
+                        options: {
+                            format: 'md',
+                        },
+                    },
+                ],
+                // Option-less format
+                '*.mdx': ['@mdx-js/loader'],
+            },
+        },
     },
     rewrites,
     async redirects() {
         return [
-
             {
                 source: `/${languageQueryMatcher}/meta`,
                 destination: `/${process.env.NEXT_PUBLIC_DEFAULT_LOCALE}/categories`,

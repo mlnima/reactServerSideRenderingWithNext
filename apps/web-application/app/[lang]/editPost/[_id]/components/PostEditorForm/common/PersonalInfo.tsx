@@ -29,7 +29,7 @@ const PersonalInfo: FC<PropTypes> = ({onChangeHandler}) => {
             </div>
             <div className={'field-section'}>
                 <p>Name</p>
-                <input type={'text'} name={'name'} className={'form-control-input name'} onChange={onChangeHandler}/>
+                <input type={'text'} name={'name'} className={'primaryInput name'} onChange={onChangeHandler}/>
             </div>
         </Style>
     )

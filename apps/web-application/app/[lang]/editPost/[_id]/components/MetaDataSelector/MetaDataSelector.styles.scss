@@ -1,5 +1,33 @@
-.metaDataSelector{
+.metaDataSelector {
   width: 100%;
-  color: var( --secondary-text-color,#ccc);
-  background: var(--secondary-background-color,#181818) ;
+  color: var(--secondary-text-color, #ccc);
+  background: var(--secondary-background-color, #181818);
+
+  .react-select__control {
+    .react-select__value-container {
+      .react-select__multi-value {
+        background: var(--secondary-background-color, #181818);
+        .react-select__multi-value__label,.react-select__multi-value__remove{
+          color: var(--secondary-text-color, #ccc);
+          background: var(--secondary-background-color, #181818);
+        }
+      }
+    }
+  }
+
+  .react-select__menu{
+    color: var(--secondary-text-color, #ccc);
+    background: var(--secondary-background-color, #181818);
+    border: var(--default-border);
+    .react-select__menu-list{
+      .react-select__option{
+        border-bottom: var(--default-border);
+        color: var(--secondary-text-color, #ccc);
+        background: var(--secondary-background-color, #181818);
+        &:hover{
+          color: var(--primary-active-color, #f90);
+        }
+      }
+    }
+  }
 }

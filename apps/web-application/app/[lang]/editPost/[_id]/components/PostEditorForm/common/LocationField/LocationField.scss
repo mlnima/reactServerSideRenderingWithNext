@@ -1,0 +1,22 @@
+.locationField{
+  display: flex;
+  flex-direction: column;
+
+  div{
+    display: flex;
+    align-items: center;
+
+    .zip-code{
+      width: 20%;
+    }
+    .location{
+      width: 60%;
+    }
+    .street{
+      width: 80%;
+    }
+  }
+  .zip-area{
+
+  }
+}

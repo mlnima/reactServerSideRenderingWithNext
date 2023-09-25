@@ -52,6 +52,7 @@ export {
     clientAPIRequestLikePost,
     clientAPIRequestUpdatePost,
     clientAPIRequestViewPost,
+    clientDeletePostByAuthor
 } from './client/clientPosts';
 
 //settings
@@ -131,6 +132,7 @@ export {
     dashboardAPIRequestGetMetas,
     dashboardAPIRequestSetMetaThumbnailsAndCount,
     dashboardAPIRequestUpdateMeta,
+    dashboardAPIRequestSyncDuplicateMetas
 
 } from './dashboard/dashboardMetas'
 

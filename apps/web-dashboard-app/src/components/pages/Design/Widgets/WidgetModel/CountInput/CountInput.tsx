@@ -12,7 +12,7 @@ const CountInput: FC<CountInputPropTypes> = ({widgetData, onChangeHandler}) => {
         <>
             <p>Count:</p>
             <input name='count' type='number' value={widgetData.count} placeholder='count'
-                   className='count form-control-input' onChange={e => onChangeHandler(e)}/>
+                   className='count primaryInput' onChange={e => onChangeHandler(e)}/>
         </>
     )
 };

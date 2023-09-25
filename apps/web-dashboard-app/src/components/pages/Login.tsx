@@ -56,10 +56,10 @@ const Login: FC<PropTypes> = ({}) => {
     return (
         <Style>
             <form onSubmit={e => onLoginHandler(e)} className={'loginForm'}>
-                <input className={'form-control-input'} value={state.username} type="text" name={'username'}
+                <input className={'primaryInput'} value={state.username} type="text" name={'username'}
                        placeholder={'username'}
                        onChange={(e) => onChangeHandler(e)}/>
-                <input className={'form-control-input'} value={state.password} type="password" name={'password'}
+                <input className={'primaryInput'} value={state.password} type="password" name={'password'}
                        placeholder={'password'}
                        onChange={(e) => onChangeHandler(e)}/>
                 <button type={'submit'} className={'btn btn-primary'} onClick={onLoginHandler}>Login</button>

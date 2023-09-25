@@ -22,7 +22,7 @@ const LayoutSettings: FC<PropTypes> = ({onChangeHandler, initialSettingsData}) =
                        type={'checkbox'}
                        name={'topbar'}
                        checked={initialSettingsData?.layoutSettings?.topbar}
-                       className={'form-control-input'}/>
+                       className={'primaryInput'}/>
             </div>
             <div className={'checkbox-field'}>
                 <p>Header:</p>
@@ -30,7 +30,7 @@ const LayoutSettings: FC<PropTypes> = ({onChangeHandler, initialSettingsData}) =
                        type={'checkbox'}
                        name={'header'}
                        checked={initialSettingsData?.layoutSettings?.header}
-                       className={'form-control-input'}/>
+                       className={'primaryInput'}/>
             </div>
             <div className={'checkbox-field'}>
                 <p>Navigation:</p>
@@ -38,7 +38,7 @@ const LayoutSettings: FC<PropTypes> = ({onChangeHandler, initialSettingsData}) =
                        type={'checkbox'}
                        name={'navigation'}
                        checked={initialSettingsData?.layoutSettings?.navigation}
-                       className={'form-control-input'}/>
+                       className={'primaryInput'}/>
             </div>
             <div className={'checkbox-field'}>
                 <p>Footer:</p>
@@ -46,7 +46,7 @@ const LayoutSettings: FC<PropTypes> = ({onChangeHandler, initialSettingsData}) =
                        type={'checkbox'}
                        name={'footer'}
                        checked={initialSettingsData?.layoutSettings?.footer}
-                       className={'form-control-input'}/>
+                       className={'primaryInput'}/>
             </div>
             <div className={'checkbox-field'}>
                 <p>Sidebar Width:</p>
@@ -55,7 +55,7 @@ const LayoutSettings: FC<PropTypes> = ({onChangeHandler, initialSettingsData}) =
                        name={'sidebarWidth'}
                        value={initialSettingsData?.layoutSettings?.sidebarWidth}
                        placeholder={'320px is default'}
-                       className={'form-control-input'}/>
+                       className={'primaryInput'}/>
             </div>
             <p>Custom Style:</p>
             <button className={'btn btn-primary'} onClick={()=>setIsStyleEditorOpen(!isStyleEditorOpen)}>

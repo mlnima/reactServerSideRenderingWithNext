@@ -138,7 +138,7 @@ const DefaultPageSettings: FC<PropTypes> = ({}) => {
 
                 <div className="form-field">
                     <p>Title:</p>
-                    <input className={'form-control-input'}
+                    <input className={'primaryInput'}
                            type="text" onChange={(e) => onChangeHandlerWithTranslation(e)}
                         //@ts-ignore
                            value={language === 'default' ? fieldsData.title : fieldsData?.translations?.[language]?.title || {}}
@@ -147,7 +147,7 @@ const DefaultPageSettings: FC<PropTypes> = ({}) => {
                 </div>
                 <div className="form-field">
                     <p>Description:</p>
-                    <textarea className={'form-control-input'}
+                    <textarea className={'primaryInput'}
                               onChange={(e) => onChangeHandlerWithTranslation(e)}
                         //@ts-ignore
                               value={language === 'default' ? fieldsData.description : fieldsData?.translations?.[language]?.description || ''}
@@ -156,7 +156,7 @@ const DefaultPageSettings: FC<PropTypes> = ({}) => {
                 </div>
                 <div className="form-field">
                     <p>Keywords:</p>
-                    <input className={'form-control-input'}
+                    <input className={'primaryInput'}
                            type="text" onChange={(e) => onChangeHandlerWithTranslation(e)}
                         //@ts-ignore
                            value={language === 'default' ? fieldsData.keywords : fieldsData?.translations?.[language]?.keywords || ''}

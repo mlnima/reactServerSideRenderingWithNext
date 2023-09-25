@@ -86,7 +86,7 @@ const PostsExporter = () => {
             <h1>Export Posts Content :</h1>
             <div className={'data-inputs'}>
                 <div>
-                    <input value={data.limit} className={'form-control-input'} type={'number'} placeholder={'limit'} name={'limit'} onChange={e => onChangeHandler(e)}/>
+                    <input value={data.limit} className={'primaryInput'} type={'number'} placeholder={'limit'} name={'limit'} onChange={e => onChangeHandler(e)}/>
                 </div>
 
                 <div>
@@ -101,10 +101,10 @@ const PostsExporter = () => {
                 </div>
 
                 <div>
-                    <input value={data.metaId} className={'form-control-input'} type={'text'} placeholder={'metaId'} name={'metaId'} onChange={e => onChangeHandler(e)}/>
+                    <input value={data.metaId} className={'primaryInput'} type={'text'} placeholder={'metaId'} name={'metaId'} onChange={e => onChangeHandler(e)}/>
                 </div>
                 <div>
-                    <input value={data.author} className={'form-control-input'} type={'text'} placeholder={'author'} name={'author'} onChange={e => onChangeHandler(e)}/>
+                    <input value={data.author} className={'primaryInput'} type={'text'} placeholder={'author'} name={'author'} onChange={e => onChangeHandler(e)}/>
                 </div>
                 <div>
                     <select value={data.status} className={'custom-select'} name={'status'} onChange={e => onChangeHandler(e)}>
@@ -118,7 +118,7 @@ const PostsExporter = () => {
                 </div>
                 <div className={'data-inputs-item'}>
                     <p>ID </p>
-                    <input checked={data.ID} className={'form-control-input'} type={'checkbox'} placeholder={'ID'} name={'ID'} onChange={e => setData({...data, ID: e.target.checked})}/>
+                    <input checked={data.ID} className={'primaryInput'} type={'checkbox'} placeholder={'ID'} name={'ID'} onChange={e => setData({...data, ID: e.target.checked})}/>
                 </div>
             </div>
             {/*//@ts-ignore*/}

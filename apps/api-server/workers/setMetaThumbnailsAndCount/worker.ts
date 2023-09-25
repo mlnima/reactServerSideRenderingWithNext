@@ -70,7 +70,7 @@ const worker = async (workerData) => {
                         const randomPost = await postSchema.findOne({$and: [{[meta?.type]: meta?._id}, {status: 'published'}, excludeQuery]}).sort({updatedAt: -1}).skip(skipDocuments).exec()
                         if (randomPost?.mainThumbnail) {
                             //@ts-ignore
-                            updateData.imageUrl = randomPost.mainThumbnail
+                            updateData.imageUrl = randomPost?.mainThumbnail || '/asset/images/default/no-image-available.png'
                         }
                     }
 
@@ -81,7 +81,7 @@ const worker = async (workerData) => {
                     ).exec().finally(() => {
                         // console.log(`${meta?.type} ${meta?.name} set to ${JSON.stringify(updateData, null, '\t')}`)
                         //@ts-ignore
-                        console.log(`${meta?.type} ${meta?.name} has ${metaCount} and image set to ${updateData?.imageUrl}`)
+                        console.log(`${meta?.type} ${meta?.name} has ${metaCount} and image set to ${updateData?.imageUrl || '/asset/images/default/no-image-available.png'}`)
                     })
                 } else {
                     await metaSchema.findByIdAndUpdate(

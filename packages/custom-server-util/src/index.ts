@@ -9,4 +9,5 @@ export { default as authMiddleware } from './middleware-utils/authMiddleware';
 export { default as getCurrentDatePath } from './path-utils/getCurrentDatePath';
 export { default as fetchUserData } from './user-utils/findUserData';
 export { default as jwtTokenGenerator } from './jwtTokenGenerator';
+export { default as getLocalIP } from './network-util/getLocalIP';
 

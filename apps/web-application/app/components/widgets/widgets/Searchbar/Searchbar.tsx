@@ -115,7 +115,7 @@ const SearchBar: React.FC<IProps> = ({dictionary, locale}) => {
                 <input type="text"
                        onChange={e => setKeyword(e.target.value)}
                        name='keyword' value={keyword || ''}
-                       className={'searchbarInput form-control-input'}
+                       className={'searchbarInput primaryInput'}
                        placeholder={dictionary?.['Search'] || 'Search'}
                 />
                 <button type='submit'

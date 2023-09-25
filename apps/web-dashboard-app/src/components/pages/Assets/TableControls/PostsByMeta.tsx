@@ -13,7 +13,7 @@ const PostsByMetaStyledForm = styled.form`
     margin: 0 10px;
   }
 
-  .form-control-input {
+  .primaryInput {
     width: 160px;
   }
 
@@ -77,7 +77,7 @@ const PostsByMeta: FC = () => {
         <PostsByMetaStyledForm className='posts-by-meta' onSubmit={e => onSearchByMetaHandler(e)}>
             <p>Meta:</p>
 
-            <input className={'form-control-input'}
+            <input className={'primaryInput'}
                    type={'text'}
                    onChange={e => setMetaId(e.target.value)}
                    value={metaId}

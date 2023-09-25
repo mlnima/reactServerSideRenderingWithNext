@@ -27,6 +27,7 @@ import adminGetPost from './adminPostsControllers/adminGetPost';
 import adminGetPosts from './adminPostsControllers/adminGetPosts';
 import adminGeneratePermaLinkForPosts from './adminPostsControllers/adminGeneratePermaLinkForPosts';
 import postDataScrappers from "./adminPostsControllers/postDataScrappers/postDataScrappers";
+import syncDuplicateMetas from "./adminPostsControllers/syncDuplicateMetas";
 
 const router = express.Router();
 
@@ -39,6 +40,7 @@ router.post('/postsBulkAction',adminAuthMiddleware,adminPostsBulkAction)
 router.post('/bulkAction',adminAuthMiddleware,adminBulkAction)
 router.post('/exportPosts',adminAuthMiddleware,adminExportPosts)
 router.post('/updateMeta',adminAuthMiddleware,adminUpdateMeta)
+router.post('/syncDuplicateMetas',adminAuthMiddleware,syncDuplicateMetas)
 router.post('/deleteMeta',adminAuthMiddleware,adminDeleteMeta)
 router.post('/updateComment',adminAuthMiddleware,adminUpdateComment)
 router.post('/deleteComments',adminAuthMiddleware,adminDeleteComments)

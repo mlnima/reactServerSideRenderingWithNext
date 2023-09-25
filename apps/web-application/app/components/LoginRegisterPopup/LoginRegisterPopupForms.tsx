@@ -119,7 +119,7 @@ const LoginRegisterPopupForms: FC<IProps> = ({locale,dictionary}: IProps) => {
                         <div className="login-register-form-fields">
                             <div className="login-register-form-field">
                                 <div className={'input-validator'}>
-                                    <input className={'form-control-input form-control-input-validator'}
+                                    <input className={'primaryInput form-control-input-validator'}
                                            required={true}
                                            name='username'
                                            value={state.username}
@@ -131,7 +131,7 @@ const LoginRegisterPopupForms: FC<IProps> = ({locale,dictionary}: IProps) => {
                             </div>
                             <div className="login-register-form-field">
                                 <div className={'input-validator'}>
-                                    <input className={'form-control-input form-control-input-validator'}
+                                    <input className={'primaryInput form-control-input-validator'}
                                            autoComplete="off"
                                            required={true}
                                            name='email'
@@ -169,7 +169,7 @@ const LoginRegisterPopupForms: FC<IProps> = ({locale,dictionary}: IProps) => {
                             </div>
                             <div className="login-register-form-field">
                                 <div className={'input-validator'}>
-                                    <input className={'form-control-input form-control-input-validator'}
+                                    <input className={'primaryInput form-control-input-validator'}
                                            type={'password'}
                                            autoComplete={'off'}
                                            name={'password'}
@@ -191,7 +191,7 @@ const LoginRegisterPopupForms: FC<IProps> = ({locale,dictionary}: IProps) => {
                             </div>
                             <div className={'login-register-form-field'}>
                                 <div className={'input-validator'}>
-                                    <input className={'form-control-input form-control-input-validator'}
+                                    <input className={'primaryInput form-control-input-validator'}
                                            type={'password'}
                                            autoComplete={'off'}
                                            name={'password2'}
@@ -225,7 +225,7 @@ const LoginRegisterPopupForms: FC<IProps> = ({locale,dictionary}: IProps) => {
                                 <div className="login-register-form-field">
                                     <p>{dictionary['Username'] || 'Username'}</p>
                                     <div className={'input-validator'}>
-                                        <input className={'form-control-input form-control-input-validator'}
+                                        <input className={'primaryInput form-control-input-validator'}
                                                name={'username'}
                                                value={state.username}
                                                onChange={e => onChangeHandler(e)}
@@ -238,7 +238,7 @@ const LoginRegisterPopupForms: FC<IProps> = ({locale,dictionary}: IProps) => {
                                 <div className="login-register-form-field">
                                     <p>{dictionary['Password'] || 'Password'}</p>
                                     <div className={'input-validator'}>
-                                        <input className={'form-control-input password'}
+                                        <input className={'primaryInput password'}
                                             // ref={passwordRef}
                                                name={'password'}
                                                value={state.password}

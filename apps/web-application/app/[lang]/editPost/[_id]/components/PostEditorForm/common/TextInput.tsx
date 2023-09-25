@@ -28,14 +28,14 @@ const TextInput: FC<ComponentPropTypes> =
                     <textarea name={name}
                               value={value}
                               onChange={e => onChangeHandler(e)}
-                              className={`form-control-input ${className || ''}`}
+                              className={`primaryInput ${className || ''}`}
                               required={required || false}
                     /> :
                     <input name={name}
                            type={type}
                            value={value}
                            onChange={e => onChangeHandler(e)}
-                           className={`form-control-input ${className || ''}`}
+                           className={`primaryInput ${className || ''}`}
                            required={required || false}
                     />
                 }

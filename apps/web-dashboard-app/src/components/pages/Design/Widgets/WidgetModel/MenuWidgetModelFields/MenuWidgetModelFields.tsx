@@ -21,11 +21,12 @@ interface IProps{
 }
 
 const MenuWidgetModelFields:FC<IProps> = ({widgetSettings,setWidgetData,widgetData}) => {
+
     const [formData, setFormData] = useState<IMenuItem>({
         name: '',
         target: '',
         as: '',
-        parent:null,
+        parent:undefined,
         type: 'internal',
         itemIndex: 0,
         itemId: 0,
@@ -134,7 +135,7 @@ const MenuWidgetModelFields:FC<IProps> = ({widgetSettings,setWidgetData,widgetDa
     return (
         <MenuWidgetModelFieldsStyledDiv>
             <MenuWidgetEditForm
-                setFormData={setFormData}
+                onChangeHandler={onChangeHandler}
                 onSubmitHandler={onAddHandler}
                 onChangeHandlerWithTranslate={onChangeHandlerWithTranslate}
                 data={formData}

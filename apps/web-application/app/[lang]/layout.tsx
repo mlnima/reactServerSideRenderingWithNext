@@ -4,7 +4,7 @@ import '@components/global/styles/global.styles.scss'
 import {fetchSettings, fetchWidgets} from "fetch-requests";
 import ReduxProvider from "@store/ReduxProvider";
 import * as process from "process";
-import {i18n} from '../../i18n-config'
+import {i18n} from '@i18nConfig'
 import {getDictionary} from "../../get-dictionary";
 import GlobalCustomStyles from "@components/global/styles/GlobalCustomStyles";
 import LayoutMetaGenerator from "../components/LayoutMetaGenerator/LayoutMetaGenerator";

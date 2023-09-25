@@ -1,7 +1,7 @@
 import {fetchSettings} from "fetch-requests";
 import {getDictionary} from "../../../../get-dictionary";
 import './page.styles.scss';
-import {i18n} from '../../../../i18n-config'
+import {i18n} from '@i18nConfig'
 import EditPostPageContent from "./components/EditPostPageContent/EditPostPageContent";
 
 interface IProps {
@@ -31,6 +31,6 @@ export default EditPostPage;
 export const dynamic = 'force-dynamic';
 export const generateMetadata = async ()=>{
     return{
-        title:'Edit Post'
+        title:'Edit Post',
     }
 }

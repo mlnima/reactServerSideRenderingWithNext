@@ -29,7 +29,7 @@ const MultipleLinkWidgetSingleLinkPreviewStyledDiv = styled.div`
         align-self: flex-start;
       }
 
-      .form-control-input {
+      .primaryInput {
         width: 90%;
         background-color: #222;
         color: #ccc;
@@ -137,7 +137,7 @@ const MultipleLinkWidgetSingleLinkPreview = props => {
                         <p>Link title :</p>
                         <input name='linkTitle'
                                type='text'
-                               className={'form-control-input'}
+                               className={'primaryInput'}
                                onChange={e => onChangeHandlerWithTranslate(e)}
                                value={props.widgetSettings.activeEditingLanguage === 'default' ? editingData?.linkTitle ?? '' : editingData?.translations?.[props.widgetSettings.activeEditingLanguage]?.linkTitle ?? ''}/>
                     </div>
@@ -145,7 +145,7 @@ const MultipleLinkWidgetSingleLinkPreview = props => {
                     <div className='menu-form-textarea'>
                         <p>Link description :</p>
                         <textarea name='linkDescription'
-                                  className={'form-control-input'}
+                                  className={'primaryInput'}
                                   onChange={e => onChangeHandlerWithTranslate(e)}
                                   value={props.widgetSettings.activeEditingLanguage === 'default' ? editingData.linkDescription ?? '' : editingData?.translations?.[props.widgetSettings.activeEditingLanguage]?.linkDescription ?? ''}/>
                     </div>
@@ -153,7 +153,7 @@ const MultipleLinkWidgetSingleLinkPreview = props => {
                         <p>Url :</p>
                         <input name='linkTo'
                                type='text'
-                               className={'form-control-input'}
+                               className={'primaryInput'}
                                onChange={e => onChangeHandler(e)}
                                value={editingData.linkTo}/>
                     </div>
@@ -202,7 +202,7 @@ const MultipleLinkWidgetSingleLinkPreview = props => {
                     <div className='menu-form-field'>
                         <p>link Index :</p>
                         <input name='linkIndex'
-                               className={'form-control-input'}
+                               className={'primaryInput'}
                                onChange={e => onChangeHandler(e)}
                                type='number'
                                value={editingData.linkIndex}/>

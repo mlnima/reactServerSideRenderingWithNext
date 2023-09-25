@@ -4,7 +4,8 @@ const Schema = mongoose.Schema
 const metaSchema =  new Schema({
     name:{
         type:String,
-        uppercase: false,
+        trim:true,
+        uppercase: false
     },
     type: String,
     index:Number,
@@ -23,8 +24,13 @@ const metaSchema =  new Schema({
     likes:Number,
     views:Number,
     rank:Number,
-    additionalInfo:Schema.Types.Mixed
-
+    additionalInfo:Schema.Types.Mixed,
+    parentId: {
+        type: Schema.Types.ObjectId,
+        ref: 'meta'
+    }
 },{ timestamps: true });
+
+metaSchema.index({ name: 1, type: 1 }, { unique: true });
 
 export default mongoose.model("meta", metaSchema);

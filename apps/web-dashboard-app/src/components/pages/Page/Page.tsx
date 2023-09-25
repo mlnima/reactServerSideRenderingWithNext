@@ -17,7 +17,7 @@ let AdminEditCustomPageStyledDiv = styled.div`
   padding: 10px 1rem;
   .form-group {
     margin: 5px 0;
-    .form-control-input, .custom-select {
+    .primaryInput, .custom-select {
       max-width: 300px;
     }
   }
@@ -83,7 +83,7 @@ const Page = (props: any) => {
                 <div className={'form-group'}>
                     <p>Page Name (without Space):</p>
                     <input name={'pageName'}
-                           className={'form-control-input'}
+                           className={'primaryInput'}
                            type={'text'}
                            placeholder={'page name'}
                            value={pageData?.pageName}
@@ -92,7 +92,7 @@ const Page = (props: any) => {
                 <div className={'form-group'}>
                     <p>Title:</p>
                     <input name={'title'}
-                           className={'form-control-input'}
+                           className={'primaryInput'}
                            placeholder={'title'}
                            type={'text'}
                            value={pageData?.title}
@@ -101,7 +101,7 @@ const Page = (props: any) => {
                 <div className={'form-group'}>
                     <p>Description:</p>
                     <textarea name={'description'}
-                              className={'form-control-input'}
+                              className={'primaryInput'}
                               placeholder={'description'}
                               value={pageData?.description}
                         //@ts-ignore

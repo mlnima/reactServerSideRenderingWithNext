@@ -25,10 +25,10 @@ const FormWidgetField: FC<IProps> = ({field,dictionary,onFormFieldsChangeHandler
                 {convertVariableNameToName(field.fieldName)}
             </p>
             {field.fieldType === 'textarea' ?
-                <textarea className={'form-control-input'}
+                <textarea className={'primaryInput'}
                           {...fieldAttr}
                 /> :
-                <input className={'form-control-input'}
+                <input className={'primaryInput'}
                        {...fieldAttr}
                        type={field.fieldType || 'text'}
                 />

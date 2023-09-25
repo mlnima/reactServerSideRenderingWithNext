@@ -20,13 +20,16 @@ const ImagePreview = () => {
     const mainThumbnail = useSelector(({posts}:DashboardStore) => posts.post?.mainThumbnail);
 
     if (mainThumbnail) {
+        const imageUrl = mainThumbnail?.includes('http') ?
+            mainThumbnail :
+            `${process.env.NEXT_PUBLIC_FILE_SERVER_URL}${mainThumbnail}`;
         return (
             <ImagePreviewStyledDiv className=''>
                 <div className="title">
                     <p>Image Preview</p>
                 </div>
                 <div className="editor">
-                    <img src={mainThumbnail}/>
+                    <img src={imageUrl}/>
                 </div>
             </ImagePreviewStyledDiv>
         );

@@ -21,7 +21,7 @@ const SearchTypeInputFields: FC<SearchTypeInputFieldsPropTypes> =
             <>
                 <div className='textInputFieldForWidget widgetSection'>
                     <p>Search TextArea Place Holder</p>
-                    <input className='searchInputPlaceHolder form-control-input' name='searchInputPlaceHolder'
+                    <input className='searchInputPlaceHolder primaryInput' name='searchInputPlaceHolder'
                            placeholder='Search TextArea PlaceHolder'
                            value={
                                widgetSettings.activeEditingLanguage === 'default' ?

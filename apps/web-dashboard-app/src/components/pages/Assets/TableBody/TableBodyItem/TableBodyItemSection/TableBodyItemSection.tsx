@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import moment from "moment";
 
 import styled from "styled-components";
+import * as process from "process";
 
 let StyledDiv = styled.div`
   overflow-wrap: break-word;
@@ -126,11 +127,14 @@ const TableBodyItemSection: FC<TableBodyItemSectionPropTypes> = ({dataValue, dat
             </StyledDiv>
         )
     } else if (dataName === 'mainThumbnail' || dataName === 'noImageUrl' || dataName === 'imageUrl') {
+        const imageURl = dataValue?.includes('http') ?
+            dataValue :
+            `${process.env.NEXT_PUBLIC_FILE_SERVER_URL}${dataValue}`
         return (
             <StyledDiv className='asset-page-table-body-item-section'>
                 {gotError ?
                     <p>Error || No image</p>
-                    : <img src={dataValue} onError={(err) => {
+                    : <img src={imageURl} onError={(err) => {
                         // console.log(err)
                         setGotError(true)
                     }}/>

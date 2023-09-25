@@ -17,7 +17,7 @@ const Duration: FC<DurationPropTypes> = ({onChangeHandler, rendering}) => {
                     <p>Duration</p>
                 </div>
                 <div className="editor">
-                    <input className={'form-control-input'} type='text' name='duration' value={duration || ''}
+                    <input className={'primaryInput'} type='text' name='duration' value={duration || ''}
                            onChange={e => onChangeHandler(e)}/>
                 </div>
             </div>

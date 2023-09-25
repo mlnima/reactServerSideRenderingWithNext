@@ -1,4 +1,4 @@
-import {postSchema} from "models";
+import {postSchema, userSchema} from "models";
 import mongoose from "mongoose";
 
 const updatePost = async (req, res) => {
@@ -14,13 +14,17 @@ const updatePost = async (req, res) => {
             res.status(403).json({message: 'You are not authorized to update this post', type: 'error'});
         }
 
-        //create a post if it doesn't exist by upsert
         const updatedPost = await postSchema.findOneAndUpdate({_id:postData?._id}, {...postData}, {
             new: true,
             upsert: true
         }).exec()
 
-        res.status(200).json({updatedPost})
+        await userSchema.findByIdAndUpdate(req.userData._id, {$unset: {draftPost: 1}}).exec()
+
+        res.status(200).json({
+            updatedPost,
+            message:'Your Updates Are Pending Moderator Approval'
+        })
 
     } catch (error) {
         console.log(error)

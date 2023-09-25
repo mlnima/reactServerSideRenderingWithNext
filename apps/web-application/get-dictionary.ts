@@ -1,6 +1,6 @@
 import 'server-only'
-import type { Locale } from './i18n-config'
-import {i18n} from './i18n-config'
+import type { Locale } from '@i18nConfig'
+import {i18n} from '@i18nConfig'
 
 const dictionaries = i18n.locales.reduce((final : any,current :string)=>{
     try {

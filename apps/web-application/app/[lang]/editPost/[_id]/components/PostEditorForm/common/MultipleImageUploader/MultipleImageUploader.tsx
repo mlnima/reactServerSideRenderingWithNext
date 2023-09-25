@@ -13,7 +13,7 @@ import "./MultipleImageUploader.styles.scss";
 export interface MultipleImageUploaderProps {
     editingPost: { [key: string]: any },
     setEditingPost: Function;
-    onSelectImageHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onSelectImageHandler: (event: React.ChangeEvent<HTMLInputElement>) => void,
 }
 
 const MultipleImageUploader: React.FC<MultipleImageUploaderProps> = (
@@ -30,7 +30,9 @@ const MultipleImageUploader: React.FC<MultipleImageUploaderProps> = (
         const newFiles = [...(editingPost?.images || [])];
         newFiles.splice(index, 1);
         //@ts-ignore
-        setEditingPost(prevState => ({...prevState, images: newFiles}))
+        setEditingPost(prevState => ({
+            ...prevState, images: newFiles
+        }))
     };
 
     const onInputFileClickHandler = () => {
@@ -58,7 +60,8 @@ const MultipleImageUploader: React.FC<MultipleImageUploaderProps> = (
 
             <DndProvider backend={isTouchDevice ? TouchBackend : HTML5Backend}>
                 {/*//@ts-ignore*/}
-                <ImageListWithPreview editingPost={editingPost} setEditingPost={setEditingPost} removeImage={removeImage}/>
+                <ImageListWithPreview editingPost={editingPost} setEditingPost={setEditingPost}
+                                      removeImage={removeImage}/>
             </DndProvider>
         </div>
 

@@ -9,12 +9,15 @@ import styled from "styled-components";
 import {FC, useMemo} from "react";
 import {useSearchParams} from "react-router-dom";
 import paramsObjectGenerator from "@variables/paramsObjectGenerator";
+import MetasType from "@components/pages/Assets/TableControls/MetasTypes";
+import SortItemsBy from "@components/pages/Assets/TableControls/SortItemsBy";
 
 const TableControlsStyledDiv = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   align-items: center;
+  gap: 8px;
 
   * {
     font-size: 12px;
@@ -39,9 +42,11 @@ const TableControls: FC<TableControlsPropTypes> = ({selectedItems, setSelectedIt
             <AssetSize/>
             <AssetBulkAction selectedItems={selectedItems} setSelectedItems={setSelectedItems}/>
             {assetsType === 'posts' && <PostsTypes/> }
+            {assetsType === 'metas' && <MetasType/> }
             <AssetPagination assetPageData={assetPageData}/>
             <AssetSearch/>
             {assetsType === 'posts' && <PostsByMeta/> }
+            <SortItemsBy/>
         </TableControlsStyledDiv>
     );
 };

@@ -1,6 +1,7 @@
 import {Translations} from "./Translations";
 
 export interface Meta {
+    parentId: string |undefined,
     coverImageUrl?: string,
     _id: string,
     name: string,

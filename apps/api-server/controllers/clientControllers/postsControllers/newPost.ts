@@ -13,7 +13,7 @@ const setDraftPostToUserData = async (userId, draftPostId) => {
 const newPost = async (req, res) => {
 
     try {
-        const newPostDataToSave = new postSchema(req.body.data);
+
         const userData = await userSchema.findById(req.userData._id).select('draftPost').exec()
         if (userData?.draftPost) {
             res.json({
@@ -21,6 +21,7 @@ const newPost = async (req, res) => {
                 newPostId: userData.draftPost,
             });
         } else {
+            const newPostDataToSave = new postSchema(req.body.data);
             newPostDataToSave.save(async (error: any, savedPostData: { _id: any; }) => {
                 if (error) {
                     console.error('Error saving new post:', error);

@@ -1,26 +1,45 @@
-.auth-widget {
+.authWidget {
   display: flex;
   justify-content: center;
   align-items: center;
 
-  .profile-icon {
+  .authWidgetPreview{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: transparent;
-    padding: 0;
-    margin: 0;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    color:var(--primary-text-color,#fff);
-    svg{
-      width: 1.5rem;
-      height: 1.5rem;
+    gap: 16px;
+    .profileIcon,.messagesIcon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: transparent;
+      padding: 0;
+      margin: 0;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      color:var(--primary-text-color,#fff);
+
+    }
+
+    .profileIcon{
+      cursor: pointer;
+      svg{
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
+    .messagesIcon{
+      svg{
+        width: 1.75rem;
+        height: 1.75rem;
+      }
     }
   }
 
-  .auth-widget-wrapper {
+
+
+  .authWidgetSlideWrapper {
     border-left: var(--default-border);
     padding: 10px;
     box-sizing: border-box;
@@ -33,7 +52,7 @@
     height: 100vh;
     flex-direction: column;
 
-    .auth-widget-close-btn {
+    .authWidgetCloseBtn {
       color: var(--primary-text-color, #fff);
       padding: 6px 0;
       margin-bottom: 20px;
@@ -134,8 +153,8 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .auth-widget {
-    .auth-widget-wrapper {
+  .authWidget {
+    .authWidgetSlideWrapper {
       width: 300px;
     }
   }

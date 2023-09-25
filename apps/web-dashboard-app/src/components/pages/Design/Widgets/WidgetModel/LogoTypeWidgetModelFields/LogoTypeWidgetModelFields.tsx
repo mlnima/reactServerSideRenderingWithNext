@@ -24,7 +24,7 @@ const LogoTypeWidgetModelFields: FC<LogoTypeWidgetModelFieldsPropTypes> =
                 <div className='textInputFieldForWidget widgetSection'>
                     <p>Logo Text :</p>
                     <input name={'logoText'}
-                           className={'logoText form-control-input'}
+                           className={'logoText primaryInput'}
                            value={
                                    widgetSettings.activeEditingLanguage === 'default' ? widgetData?.uniqueData?.logoText :
                                    widgetData?.uniqueData?.translations?.[widgetSettings.activeEditingLanguage]?.logoText || ''
@@ -38,7 +38,7 @@ const LogoTypeWidgetModelFields: FC<LogoTypeWidgetModelFieldsPropTypes> =
                                    widgetSettings.activeEditingLanguage === 'default' ? widgetData?.uniqueData?.headLine :
                                    widgetData?.uniqueData?.translations?.[widgetSettings.activeEditingLanguage]?.headLine || ''
                            }
-                           className={'headLine form-control-input'}
+                           className={'headLine primaryInput'}
                            onChange={e => onUniqueDataChangeHandlerWithTranslate(e)}/>
 
                 </div>

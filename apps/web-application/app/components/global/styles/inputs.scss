@@ -1,0 +1,12 @@
+.primaryInput{
+  width: 100%;
+  display: block;
+  padding: .375rem .75rem;
+  line-height: 1.5;
+  color: var(--secondary-text-color,#b3b3b3);
+  background: var(--secondary-background-color,#0e0e0e);
+  border: var(--default-border);
+  border-radius: .375rem;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  box-sizing: border-box;
+}

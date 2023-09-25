@@ -9,7 +9,7 @@ let TitleDescriptionStyledDiv = styled.div`
   margin: auto;
   width: 100%;
   height: 100%;
-  .form-control-input {
+  .primaryInput {
     box-sizing: border-box;
   }
   .text-editors{
@@ -57,7 +57,7 @@ const TitleDescription = (props:any) => {
         <TitleDescriptionStyledDiv className='title-description'>
             <input type="text" name='title'
                    value={(activeEditingLanguage === 'default' ? post?.title : post?.translations?.[activeEditingLanguage]?.title) || ''}
-                   className='form-control-input' placeholder='Enter The TextInput Here'
+                   className='primaryInput' placeholder='Enter The TextInput Here'
                    onChange={e => props.onTranslatedInputChangeHandler(e)}/>
             <TextEditors value={activeEditingLanguage === 'default' ? post?.description : post?.translations?.[activeEditingLanguage]?.description || {}}
                          use={allowsEditorToUse}

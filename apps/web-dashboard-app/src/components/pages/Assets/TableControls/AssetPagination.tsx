@@ -51,8 +51,8 @@ const AssetPagination: FC<PropTypes> = ({assetPageData}) => {
             <input value={currentPage}
                    onChange={(e) => setSearch({...query, page: e.target.value || 1})}
                    placeholder={query.page as string || '1'}
-                   type='number'
-                   className='form-control-input'
+                   type={'number'}
+                   className={'primaryInput'}
             />
 
             <button onClick={() => setSearch({...query, page: currentPage + 1})} className='btn btn-navigation'>

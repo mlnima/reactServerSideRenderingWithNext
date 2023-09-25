@@ -107,7 +107,7 @@ const Terminal = () => {
                         onClick={e => onExecutorHandler(e, `pm2 restart ${processIdElement?.current.value || 'all'}`)}>
                     Restart Webserver
                 </button>
-                <input ref={processIdElement} className={'form-control-input process-id'} type="text" name={'processId'}
+                <input ref={processIdElement} className={'primaryInput process-id'} type="text" name={'processId'}
                        placeholder={'process ID or Name'}/>
             </div>
             <textarea ref={logElement}

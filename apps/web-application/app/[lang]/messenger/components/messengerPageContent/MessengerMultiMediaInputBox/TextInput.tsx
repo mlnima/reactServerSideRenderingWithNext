@@ -15,7 +15,7 @@ const TextInput: FC<IProps> = ({onStartTypingHandler, draftMessage, setDraftMess
 
     return (
         <div className={'textInput'}>
-            <input className={'chatroom-tools-input form-control-input'}
+            <input className={'chatroom-tools-input primaryInput'}
                    maxLength={300}
                    type={'text'}
                    name={'messageData'}

@@ -23,3 +23,7 @@ export const dashboardAPIRequestSetMetaThumbnailsAndCount = async (type:string)=
 export const dashboardAPIRequestUpdateMeta = async (data:{})=>{
     return await AxiosInstance.post('/api/admin/posts/updateMeta',{data,token: localStorage.wt})
 }
+
+export const dashboardAPIRequestSyncDuplicateMetas = async ()=>{
+    return await AxiosInstance.post('/api/admin/posts/syncDuplicateMetas',{token: localStorage.wt})
+}

@@ -30,8 +30,8 @@ interface IProps{
     parentsOption:[],
     activeEditingLanguage:string,
     mode:string,
+    onChangeHandler:Function,
     onChangeHandlerWithTranslate:Function,
-    setFormData:Function,
     onSubmitHandler:Function,
     onDeleteHandler:Function,
     state:{
@@ -44,19 +44,19 @@ const MenuWidgetEditForm:FC<IProps> = (
         parentsOption,
         activeEditingLanguage,
         onChangeHandlerWithTranslate,
-        setFormData,
         onSubmitHandler,
         onDeleteHandler,
+        onChangeHandler,
         mode,
         data
     }) => {
 
-    const onChangeHandler = (event:React.ChangeEvent<HTMLInputElement|HTMLSelectElement>) => {
-        setFormData((prevFormData:IMenuItem)=>({
-            ...prevFormData,
-            [event.target.name]: event.target.value
-        }))
-    }
+    // const onChangeHandler = (event:React.ChangeEvent<HTMLInputElement|HTMLSelectElement>) => {
+    //     setFormData((prevFormData:IMenuItem)=>({
+    //         ...prevFormData,
+    //         [event.target.name]: event.target.value
+    //     }))
+    // }
 
 
     const renderItemsForParent = parentsOption.map((parentOption,index) => {
@@ -72,24 +72,20 @@ const MenuWidgetEditForm:FC<IProps> = (
     return (
 
         <MenuWidgetEditFormStyledFrom className='menu-widget-form' onSubmit={e => onSubmitHandler(e)}>
-            {mode === 'Edit' ?
-                <label className='formId'> ID : {data.itemId}</label>
-                : null
-            }
-            {mode === 'Add' ?
+            {mode === 'Edit' && <label className='formId'> ID : {data.itemId}</label>}
+            {mode === 'Add' &&
                 <div className='menu-widget-form-form-field'>
                     <p>Parent:</p>
-                    {/*//@ts-ignore*/}
+
                     <select className={'custom-select'} name='parent' value={data.parent} onChange={e => onChangeHandler(e)}>
                         <option>select</option>
                         {renderItemsForParent}
                     </select>
                 </div>
-                : null
             }
             <div className='menu-widget-form-form-field'>
                 <p>Name:</p>
-                <input className={'form-control-input'}
+                <input className={'primaryInput'}
                        required={mode !== 'Edit'}
                        type="text"
                        name='name'
@@ -104,11 +100,10 @@ const MenuWidgetEditForm:FC<IProps> = (
 
             <div className='menu-widget-form-form-field'>
                 <p>Target:</p>
-                <input className={'form-control-input'}
+                <input className={'primaryInput'}
                        required={mode !== 'Edit'}
                        type="text" name='target' value={data.target || ''}
-                       onChange={e => onChangeHandler(e)}
-                />
+                       onChange={e => onChangeHandler(e)}/>
             </div>
 
             {/*<div className='menu-widget-form-form-field'>*/}
@@ -118,12 +113,11 @@ const MenuWidgetEditForm:FC<IProps> = (
             <div className='menu-widget-form-form-field'>
                 <p>Item Index:</p>
                 <input required={mode !== 'Edit'}
-                       className={'form-control-input'}
+                       className={'primaryInput'}
                        type='number'
                        name='itemIndex'
                        value={data.itemIndex || ''}
-                       onChange={e => onChangeHandler(e)}
-                />
+                       onChange={e => onChangeHandler(e)}/>
             </div>
             <div className='menu-widget-form-form-field'>
                 <p>Type:</p>
@@ -131,8 +125,7 @@ const MenuWidgetEditForm:FC<IProps> = (
                         className={'custom-select'}
                         name='type'
                         onChange={e => onChangeHandler(e)}
-                        value={data.type}
-                >
+                        value={data.type || 'internal'}>
                     <option>Select</option>
                     <option value='internal'>Internal</option>
                     <option value='external'>External</option>
@@ -141,9 +134,10 @@ const MenuWidgetEditForm:FC<IProps> = (
 
             <div className='menu-widget-form-form-field'>
                 <button className={'btn btn-primary'} type='submit'>{mode}</button>
-                {mode === 'Edit' ?
-                    <button className={'btn btn-danger'} onClick={() => onDeleteHandler(data.itemId)}>Delete</button>
-                    : null
+                {mode === 'Edit' &&
+                    <button className={'btn btn-danger'} onClick={() => onDeleteHandler(data.itemId)}>
+                        Delete
+                    </button>
                 }
             </div>
 

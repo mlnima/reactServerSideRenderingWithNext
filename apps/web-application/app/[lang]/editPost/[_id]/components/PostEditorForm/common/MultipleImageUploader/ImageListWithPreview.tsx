@@ -4,9 +4,9 @@ import { ImageList } from './ImageList';
 import {Post} from "typescript-types";
 
 export interface ImageListWithPreviewProps {
-    removeImage: (index: number) => void;
+    removeImage: Function;
     editingPost: Post,
-    setEditingPost: (postData: any) => void;
+    setEditingPost: Function;
 }
 
 export const ImageListWithPreview: React.FC<ImageListWithPreviewProps> = (

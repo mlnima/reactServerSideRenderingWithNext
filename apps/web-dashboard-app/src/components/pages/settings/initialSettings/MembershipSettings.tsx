@@ -19,7 +19,7 @@ const MembershipSettings: FC<PropTypes> = ({onChangeHandler, initialSettingsData
                        type={'checkbox'}
                        name={'membership'}
                        checked={initialSettingsData?.membershipSettings?.membership}
-                       className={'form-control-input'}/>
+                       className={'primaryInput'}/>
             </div>
 
 
@@ -31,7 +31,7 @@ const MembershipSettings: FC<PropTypes> = ({onChangeHandler, initialSettingsData
                            type={'checkbox'}
                            name={'allowUserToPost'}
                            checked={initialSettingsData?.membershipSettings?.allowUserToPost}
-                           className={'form-control-input'}/>
+                           className={'primaryInput'}/>
 
                 </div>
                 <div className={'checkbox-field'}>
@@ -40,7 +40,7 @@ const MembershipSettings: FC<PropTypes> = ({onChangeHandler, initialSettingsData
                            type={'checkbox'}
                            name={'anyoneCanRegister'}
                            checked={initialSettingsData?.membershipSettings?.anyoneCanRegister}
-                           className={'form-control-input'}/>
+                           className={'primaryInput'}/>
 
                 </div>
                 <div className={'checkbox-field'}>
@@ -49,7 +49,7 @@ const MembershipSettings: FC<PropTypes> = ({onChangeHandler, initialSettingsData
                            type={'checkbox'}
                            name={'usersCanFollowEachOther'}
                            checked={initialSettingsData?.membershipSettings?.usersCanFollowEachOther}
-                           className={'form-control-input'}/>
+                           className={'primaryInput'}/>
 
                 </div>
                 <div className={'checkbox-field'}>
@@ -58,7 +58,7 @@ const MembershipSettings: FC<PropTypes> = ({onChangeHandler, initialSettingsData
                            type={'checkbox'}
                            name={'usersCanMessageEachOther'}
                            checked={initialSettingsData?.membershipSettings?.usersCanMessageEachOther}
-                           className={'form-control-input'}/>
+                           className={'primaryInput'}/>
 
                 </div>
                 <div className={'checkbox-field'}>
@@ -67,7 +67,7 @@ const MembershipSettings: FC<PropTypes> = ({onChangeHandler, initialSettingsData
                            type={'checkbox'}
                            name={'usersCanCommentOnThePosts'}
                            checked={initialSettingsData?.membershipSettings?.usersCanCommentOnThePosts}
-                           className={'form-control-input'}/>
+                           className={'primaryInput'}/>
                 </div>
                 <div className={'checkbox-field'}>
                     <p>Users Personal Email Address(eg. username@domain.com):</p>
@@ -75,7 +75,7 @@ const MembershipSettings: FC<PropTypes> = ({onChangeHandler, initialSettingsData
                            type={'checkbox'}
                            name={'usersCanCommentOnThePosts'}
                            checked={initialSettingsData?.membershipSettings?.usersPersonalEmailAddress}
-                           className={'form-control-input'}/>
+                           className={'primaryInput'}/>
                 </div>
                 <div className={'checkbox-field'}>
                     <p>Users Personal Email Address(eg. username@domain.com):</p>
@@ -83,7 +83,7 @@ const MembershipSettings: FC<PropTypes> = ({onChangeHandler, initialSettingsData
                            type={'checkbox'}
                            name={'usersCanCommentOnThePosts'}
                            checked={initialSettingsData?.membershipSettings?.verificationRequired}
-                           className={'form-control-input'}/>
+                           className={'primaryInput'}/>
                 </div>
             </>
             }

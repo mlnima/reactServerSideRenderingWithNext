@@ -52,16 +52,16 @@ const AddFormConditional:FC<AddFormConditionalPropTypes> = ({setWidgetData}) => 
         <form className='add-new-filed' onSubmit={e => onCreateFieldHandler(e)}>
             <div className={'TextInputFieldForWidget'}>
                 <p>Filed Name :</p>
-                <input className={'form-control-input'} type='text' required={true} name='fieldName' value={fieldData.fieldName} onChange={e => onChangeHandler(e)}/>
+                <input className={'primaryInput'} type='text' required={true} name='fieldName' value={fieldData.fieldName} onChange={e => onChangeHandler(e)}/>
             </div>
             <div className={'TextInputFieldForWidget'}>
                 <p>Place Holder :</p>
-                <input className={'form-control-input'} type='text' name='fieldPlaceHolder' value={fieldData.fieldPlaceHolder} onChange={e => onChangeHandler(e)}/>
+                <input className={'primaryInput'} type='text' name='fieldPlaceHolder' value={fieldData.fieldPlaceHolder} onChange={e => onChangeHandler(e)}/>
             </div>
             <div className={'TextInputFieldForWidget'}>
                 <p>Index :</p>
 
-                <input className={'form-control-input'} type='number' name='fieldIndex' value={fieldData.fieldIndex} onChange={e => onChangeHandler(e)}/>
+                <input className={'primaryInput'} type='number' name='fieldIndex' value={fieldData.fieldIndex} onChange={e => onChangeHandler(e)}/>
             </div>
             <div className={'selectFieldForWidget'}>
                 <p>Required :</p>

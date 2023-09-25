@@ -89,7 +89,7 @@ const MetasSection: FC<PropTypes> = ({}) => {
             <div className={'limit-field'}>
                 Limit:
                 {/*//@ts-ignore*/}
-                <input className={'form-control-input limit'} type="number" value={metasLimit} onChange={e=>setMetasLimit(e.target.value)}/>
+                <input className={'primaryInput limit'} type="number" value={metasLimit} onChange={e=>setMetasLimit(e.target.value)}/>
             </div>
         </Style>
     )

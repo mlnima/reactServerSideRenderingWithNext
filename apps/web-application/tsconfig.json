@@ -24,7 +24,9 @@
       "@components/*": ["./app/components/*"],
       "@lib/*": ["./app/lib/*"],
       "@store/*": ["./store/*"],
-      "@providers/*": ["./app/providers/*"]
+      "@providers/*": ["./app/providers/*"],
+      "@i18nConfig": ["./i18n-config"],
+      "@customClientConfig": ["../../custom-client-config.json"]
     }
   },
   "include": [

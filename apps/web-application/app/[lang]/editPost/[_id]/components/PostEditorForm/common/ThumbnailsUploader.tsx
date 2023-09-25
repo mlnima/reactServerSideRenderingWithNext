@@ -93,7 +93,7 @@ const ThumbnailsUploader: FC<ThumbnailUploaderPropTypes> =
                     <div className={'add-new-image'}
                          onClick={() => inputRef.current.click()}
                          onDrop={e => onUploadHandler(e.dataTransfer.files, images.length + 1)}>
-                        <input className={'form-control-input'}
+                        <input className={'primaryInput'}
                                type="file"
                                ref={inputRef}
                                accept="image/x-png,image/gif,image/jpeg,image/webp"

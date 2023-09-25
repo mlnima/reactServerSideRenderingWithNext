@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client';
 import React, {useRef, useEffect, useCallback} from 'react';
 import {useDrag, useDrop, useDragLayer} from 'react-dnd';
@@ -10,10 +11,10 @@ import './ImageItem.styles.scss'
 export interface ImageItemProps {
     image: any;
     index: number;
-    moveImage: (from: number, to: number) => void;
-    setPreviewImage: (file: File | null) => void;
-    setPreviewStyle: (style: React.CSSProperties) => void;
-    removeImage: (index: number) => void;
+    moveImage: Function;
+    setPreviewImage: Function;
+    setPreviewStyle: Function;
+    removeImage: Function;
 }
 
 export const ImageItem: React.FC<ImageItemProps> = (

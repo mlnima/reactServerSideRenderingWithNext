@@ -104,7 +104,7 @@ const PostsImporter = () => {
                     <button className={'btn btn-primary'} onClick={() => onImportPostsHandler()}>Import Posts</button>
                 </div>
 
-                <textarea className={'form-control-input'} ref={dataPreview}/>
+                <textarea className={'primaryInput'} ref={dataPreview}/>
             </div>
 
         </PostsImporterStyledDiv>

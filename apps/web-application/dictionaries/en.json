@@ -9,6 +9,7 @@
   "Bug Report": "The Bug Report",
   "Cancel": "Canceled",
   "Categories": "Categories",
+  "Changes Saved Successfully": "Changes Saved Successfully",
   "Chat": "Chat",
   "Chatroom": "Chatroom",
   "City": "City",
@@ -19,10 +20,12 @@
   "Country": "Country",
   "Create New Post": "Create a new post",
   "Decline": "Decline",
+  "Description": "Description",
   "Details": "Details",
   "Dislike": "Dislike",
   "Do You Have An Account? Login Here": "Do you have an account? login here",
   "Download": "Download",
+  "Edit or Delete Your Existing Draft Before Creating a New Post": "Edit or Delete Your Existing Draft Before Creating a New Post",
   "Edit": "Edit",
   "Edit Profile": "Edit Profile",
   "Email": "Email",
@@ -84,6 +87,7 @@
   "This username already exists": "This username already exists",
   "This website collects cookies to deliver better user experience": "This website collects cookies to provide better user experience",
   "Too many requests. Please wait.": "Too many requests, please wait.",
+  "Title": "Title",
   "Unauthorized Access": "unauthorized access",
   "Unfollow": "Unfollowed",
   "Use 8 or more characters with a mix of letters, numbers & symbols": "Use 8 or more characters with a mix of letters, numbers and symbols.",
@@ -97,5 +101,6 @@
   "Yes": "Yes",
   "You Need To Log In": "You need to log in",
   "You have entered an invalid username or password": "You have entered an invalid username or password.",
-  "Your account has been successfully created you can login now": "Your account has been successfully created you can log in now"
+  "Your account has been successfully created you can login now": "Your account has been successfully created you can log in now",
+  "Your Updates Are Pending Moderator Approval": "Your Updates Are Pending Moderator Approval"
 }

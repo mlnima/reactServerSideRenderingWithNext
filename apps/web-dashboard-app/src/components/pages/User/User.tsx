@@ -121,38 +121,38 @@ const User = () => {
         <UserStyledDiv className='user-admin-edit-profile-page'>
             <div className='user-admin-edit-profile-page-section'>
                 <p>Username :</p>
-                <input className={'form-control-input'} name='username' value={userData?.username}
+                <input className={'primaryInput'} name='username' value={userData?.username}
                        onChange={e => onChangeHandler(e)}
                        disabled={userData?.username === 'admin' || userData?.username === 'dashboard'}/>
             </div>
             <div className='user-admin-edit-profile-page-section'>
                 <p>Email :</p>
-                <input className={'form-control-input'} name='email' value={userData?.email}
+                <input className={'primaryInput'} name='email' value={userData?.email}
                        onChange={e => onChangeHandler(e)}/>
             </div>
             <div className='user-admin-edit-profile-page-section'>
                 <p>First Name :</p>
-                <input className={'form-control-input'} name='firstName' value={userData?.firstName}
+                <input className={'primaryInput'} name='firstName' value={userData?.firstName}
                        onChange={e => onChangeHandler(e)}/>
             </div>
             <div className='user-admin-edit-profile-page-section'>
                 <p>Last Name :</p>
-                <input className={'form-control-input'} name='lastName' value={userData?.lastName}
+                <input className={'primaryInput'} name='lastName' value={userData?.lastName}
                        onChange={e => onChangeHandler(e)}/>
             </div>
             <div className='user-admin-edit-profile-page-section'>
                 <p>Nick Name :</p>
-                <input className={'form-control-input'} name='nickName' value={userData?.nickName}
+                <input className={'primaryInput'} name='nickName' value={userData?.nickName}
                        onChange={e => onChangeHandler(e)}/>
             </div>
             <div className='user-admin-edit-profile-page-section'>
                 <p>About :</p>
-                <textarea className={'form-control-input'} name='about' value={userData?.about}
+                <textarea className={'primaryInput'} name='about' value={userData?.about}
                           onChange={e => onChangeHandler(e)}/>
             </div>
             {/*<div className='user-admin-edit-profile-page-section'>*/}
             {/*    <p>Profile Image: </p>*/}
-            {/*    <input className={'form-control-input'} name='profileImage' value={userData.profileImage.filePath}*/}
+            {/*    <input className={'primaryInput'} name='profileImage' value={userData.profileImage.filePath}*/}
             {/*           onChange={e => onChangeHandler(e)}/>*/}
             {/*</div>*/}
             <div className='user-admin-edit-profile-page-section'>
@@ -183,13 +183,13 @@ const User = () => {
             <div className='user-admin-edit-profile-page-section-reset-password'>
                 <h2>Reset Password:</h2>
                 <p>Old Password:</p>
-                <input className={'form-control-input'} name='oldPassword' value={resetPasswordData?.oldPassword}
+                <input className={'primaryInput'} name='oldPassword' value={resetPasswordData?.oldPassword}
                        onChange={e => onPasswordDataChangeHandler(e)}/>
                 <p>New Password:</p>
-                <input className={'form-control-input'} name='newPassword1' value={resetPasswordData?.newPassword1}
+                <input className={'primaryInput'} name='newPassword1' value={resetPasswordData?.newPassword1}
                        onChange={e => onPasswordDataChangeHandler(e)}/>
                 <p>Repeat New Password:</p>
-                <input className={'form-control-input'} name='newPassword2' value={resetPasswordData?.newPassword2}
+                <input className={'primaryInput'} name='newPassword2' value={resetPasswordData?.newPassword2}
                        onChange={e => onPasswordDataChangeHandler(e)}/>
                 <button className='saveBtn btn btn-primary' onClick={onPasswordResetHandler}>Reset The Password</button>
             </div>

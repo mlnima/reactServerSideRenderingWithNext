@@ -76,7 +76,7 @@ const UploadFileBtn:FC<PropType> = props => {
 
     return (
         <UploadFileBtnStyledDiv>
-            <input className={'form-control-input'} ref={ uploadInputElement } type="file" style={ { display: 'none' } } onChange={ e => onUploadHandler(e) }/>
+            <input className={'primaryInput'} ref={ uploadInputElement } type="file" style={ { display: 'none' } } onChange={ e => onUploadHandler(e) }/>
             {/*//@ts-ignore*/}
             <button  className={'btn btn-success'} onClick={ () => uploadInputElement.current?.click() } onDrop={e=>onDropFileHandler(e)} onDragOver={e=>e.preventDefault()}>
                 <FontAwesomeIcon icon={faUpload}/>

@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 
 dotenv.config({path: '../../.env'});
-import {connectToDatabase, shouldCompress} from 'custom-server-util';
+import {connectToDatabase, getLocalIP, shouldCompress} from 'custom-server-util';
 
 connectToDatabase('Express Server')
 
@@ -23,12 +23,21 @@ import loggerMiddleware from "./middlewares/loggerMiddleware";
 
 import {settingSchema} from 'models';
 import * as process from "process";
+import syncAllIndexes from "./tools/syncModelsIndexes";
+
+// syncAllIndexes()
+
 
 settingSchema.findOne({type: 'initialSettings'}).exec().then((initialSettings) => {
     if (initialSettings) {
         global.initialSettings = initialSettings.data
     }
 })
+
+
+
+
+
 
 const server = express();
 
@@ -42,9 +51,18 @@ const runServer = () => {
 
     const allowedOrigins = [baseDomain, wwwDomain].filter(Boolean);
 
+    const isDevelopment = process.env.NODE_ENV !== 'production';
+    const isLocalhost = baseDomain && (
+        baseDomain.includes('localhost') ||
+        baseDomain.includes(getLocalIP()) ||
+        baseDomain.includes('127.0.0.1')
+    );
+
     const corsOptions = {
         origin: function (origin, callback) {
-            if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+            if (isDevelopment || isLocalhost) {
+                callback(null, true); // Allow any origin in development or if baseDomain is localhost
+            } else if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
                 callback(null, true);
             } else {
                 callback(new Error('Not allowed by CORS'));
@@ -52,7 +70,7 @@ const runServer = () => {
         },
         credentials: true,
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-        allowedHeaders: ['Content-Type', 'Authorization']
+        // allowedHeaders: ['Content-Type', 'Authorization']
     };
 
 // Use the CORS middleware

@@ -162,10 +162,10 @@ const FieldPreview :FC<FieldPreviewPropTypes>= ({setWidgetData,widgetData,field}
                     <div className='edit-form-fields'>
                         <form className='add-new-filed' onSubmit={e => onEditHandler(e)}>
                             <p>Filed Name :</p>
-                            <input className={'form-control-input'} required={true} name='fieldName'
+                            <input className={'primaryInput'} required={true} name='fieldName'
                                    value={fieldData.fieldName} onChange={e => onChangeHandler(e)}/>
                             <p>Place Holder :</p>
-                            <input className={'form-control-input'} name='fieldPlaceHolder'
+                            <input className={'primaryInput'} name='fieldPlaceHolder'
                                    value={fieldData.fieldPlaceHolder} onChange={e => onChangeHandler(e)}/>
 
                             <p>Required :</p>

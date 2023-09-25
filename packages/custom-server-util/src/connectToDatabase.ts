@@ -7,7 +7,10 @@ const mongoDBConnectionUrl = process.env.DB_LOCAL === 'true' ?
     `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`
 
 const options = {
-    useUnifiedTopology: true
+    // useUnifiedTopology: true,
+    // useNewUrlParser: true,
+    // useCreateIndex: true,
+    // autoIndex: true, //make this also true
 }
 
 const connectToDatabase = async (name?: string) => {

@@ -1,7 +1,7 @@
 import { css } from 'styled-components';
 
 const inputsStyles = css`
-  .form-control-input {
+  .primaryInput {
     width: 100%;
     display: block;
     padding: .375rem .75rem;

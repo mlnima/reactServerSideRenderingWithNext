@@ -21,25 +21,25 @@ const PostCardsSettings: FC<PropTypes> = ({onChangeHandler,initialSettingsData,o
             <input onChange={e => onChangeHandler(e, 'postCardsSettings')}
                    name={'cardsWidthDesktop'}
                    value={initialSettingsData?.postCardsSettings?.cardsWidthDesktop}
-                   className={'form-control-input'}
+                   className={'primaryInput'}
                    type="number"/>
             <p>Number of cards per page:</p>
             <input onChange={e => onChangeHandler(e, 'postCardsSettings')}
                    name={'numberOfCardsPerPage'}
                    value={initialSettingsData?.postCardsSettings?.numberOfCardsPerPage}
-                   className={'form-control-input'}
+                   className={'primaryInput'}
                    type="number"/>
             <p>Number of cards per row In Mobile:</p>
             <input onChange={e => onChangeHandler(e, 'postCardsSettings')}
                    name={'numberOfCardsPerRowInMobile'}
                    value={initialSettingsData?.postCardsSettings?.numberOfCardsPerRowInMobile}
-                   className={'form-control-input'}
+                   className={'primaryInput'}
                    type="number"/>
             <p>Fallback Image Url On Error:</p>
             <input onChange={e => onChangeHandler(e, 'postCardsSettings')}
                    name={'fallbackImageUrlOnError'}
                    value={initialSettingsData?.postCardsSettings?.fallbackImageUrlOnError}
-                   className={'form-control-input'}
+                   className={'primaryInput'}
                    type="number"/>
             <p>Custom Card Backgrounds:</p>
             <button className={'btn btn-primary'} onClick={()=>setIsCardBackgroundsEditorOpen(!isCardBackgroundsEditorOpen)}>

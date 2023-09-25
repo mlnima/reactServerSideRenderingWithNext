@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import './CardImageRenderer.styles.scss'
+import './CardImageRenderer.scss'
 
 interface CardImageNextPropTypes {
     imageUrl: string|undefined,

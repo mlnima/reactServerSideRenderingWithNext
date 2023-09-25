@@ -14,7 +14,7 @@ import MediaWidgetType from './MediaWidgetType/MediaWidgetType';
 import TextInputFieldForWidget from './TextInputFieldForWidget/TextInputFieldForWidget';
 import AdvertiseWidgetModelFields from './AdvertiseWidgetModelFields';
 import ImagesSliderTypeWidgetModelFields from './ImagesSliderTypeWidgetModelFields/ImagesSliderTypeWidgetModelFields';
-import SwiperWidgetFields from './SwiperWidgetFields/SwiperWidgetFields';
+// import SwiperWidgetFields from './SwiperWidgetFields/SwiperWidgetFields';
 import SliderWidgetFields from './SliderWidgetFields/SliderWidgetFields';
 
 interface UniqueFieldsPropTypes {

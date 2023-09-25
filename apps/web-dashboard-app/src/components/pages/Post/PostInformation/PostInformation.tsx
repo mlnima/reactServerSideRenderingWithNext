@@ -22,7 +22,7 @@ let StyledDiv = styled.div`
   background-color: var(--secondary-background-color, #181818);
   color: var(--secondary-text-color, #ccc);
 
-  .form-control-input {
+  .primaryInput {
     box-sizing: border-box;
   }
 

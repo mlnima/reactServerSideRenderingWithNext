@@ -21,7 +21,7 @@ const RenderTitleAndRedirectLink: FC<RenderTitleAndRedirectLinkPropTypes> =
                 <>
                     <div className='textInputFieldForWidget widgetSection'>
                         <p>Title:</p>
-                        <input name='title' className='form-control-input' placeholder='Title' value={
+                        <input name='title' className='primaryInput' placeholder='Title' value={
                             widgetSettings.activeEditingLanguage === 'default' ?
                                 widgetData.title :
                                 widgetData.translations ?
@@ -33,7 +33,7 @@ const RenderTitleAndRedirectLink: FC<RenderTitleAndRedirectLinkPropTypes> =
                     </div>
                     <div className={'textInputFieldForWidget widgetSection'}>
                         <p>Redirect Link TextInput</p>
-                        <input className='form-control-input' name='redirectToTitle'
+                        <input className='primaryInput' name='redirectToTitle'
                                placeholder='TextInput for Redirect Links'
                                value={
                                    widgetSettings.activeEditingLanguage === 'default' ?
@@ -47,7 +47,7 @@ const RenderTitleAndRedirectLink: FC<RenderTitleAndRedirectLinkPropTypes> =
                     </div>
                     <div className={'textInputFieldForWidget widgetSection'}>
                         <p>Redirect Link URL:</p>
-                        <input className='form-control-input' name='redirectLink' placeholder='Redirect'
+                        <input className='primaryInput' name='redirectLink' placeholder='Redirect'
                                value={widgetData.redirectLink}
                                onChange={e => onChangeHandlerWithTranslate(e)}/>
                     </div>

@@ -24,7 +24,7 @@ const TextInputFieldForWidget: FC<TextInputFieldForWidgetPropTypes> =
             <div className={`TextInputFieldForWidget ${classNameValue || ''}`}>
                 {inputTitle && <p>{inputTitle}</p>}
                 <input name={name} type={type} value={value} placeholder={placeHolder}
-                       className={'form-control-input'} onChange={onChangeHandler}/>
+                       className={'primaryInput'} onChange={onChangeHandler}/>
             </div>
         )
     };

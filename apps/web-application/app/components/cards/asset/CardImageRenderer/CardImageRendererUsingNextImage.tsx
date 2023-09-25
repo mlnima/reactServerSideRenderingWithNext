@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import Image from 'next/image'
-import './CardImageRenderer.styles.scss'
+import './CardImageRenderer.scss'
 
 interface CardImageNextPropTypes {
     imageUrl: string | undefined,

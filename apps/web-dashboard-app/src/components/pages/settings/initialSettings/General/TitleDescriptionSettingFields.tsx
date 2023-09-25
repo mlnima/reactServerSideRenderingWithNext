@@ -39,14 +39,14 @@ const TitleDescriptionSettingFields: FC<PropTypes> = (
         return(
             <Style key={page} className={'site-settings-form-section'}>
                     <p>{convertVariableNameToName(title)}:</p>
-                    <input className={'form-control-input'} type='text' name={title} value={
+                    <input className={'primaryInput'} type='text' name={title} value={
                         //@ts-ignore
                         activeEditingLanguage === 'default' ? identity?.[title] :
                             //@ts-ignore
                             identity.translations?.[activeEditingLanguage]?.[title] || ""
                     } onChange={e => onChangeHandlerWithTranslate(e)}/>
                     <p>{convertVariableNameToName(description)}:</p>
-                    <textarea className={'form-control-input'} name={description} value={
+                    <textarea className={'primaryInput'} name={description} value={
                         //@ts-ignore
                            activeEditingLanguage === 'default' ? identity?.[description] :
                                //@ts-ignore

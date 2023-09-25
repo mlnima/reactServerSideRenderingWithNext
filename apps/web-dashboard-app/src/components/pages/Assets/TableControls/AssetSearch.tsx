@@ -10,7 +10,7 @@ let StyledForm = styled.form`
   align-items: center;
   max-width: 300px;
 
-  .form-control-input {
+  .primaryInput {
     width: 160px;
   }
 
@@ -46,7 +46,7 @@ const AssetSearch: FC = () => {
 
         <StyledForm className={'asset-page-search'} onSubmit={e => onSubmitHandler(e)}>
 
-            <input className={'form-control-input'}
+            <input className={'primaryInput'}
                    value={keyword}
                    type={'text'}
                    onChange={e => setKeyword(e.target.value)}

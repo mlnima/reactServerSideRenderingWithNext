@@ -15,10 +15,11 @@ const updatePostAction = createAsyncThunk(
                     message: res.data.message
                 }))
             }
-            // thunkAPI.dispatch(getEditingPostAction(res.data.post._id))
-
         }).catch(error => {
-
+            thunkAPI.dispatch(setAlert({
+                type: 'error',
+                message: error.response.data.message
+            }))
         }).finally(() => thunkAPI.dispatch(loading(false)))
     }
 )

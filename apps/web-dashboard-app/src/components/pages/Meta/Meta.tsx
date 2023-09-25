@@ -72,10 +72,10 @@ const Meta = () => {
     const dispatch = useAppDispatch()
     const meta = useSelector(({posts}: DashboardStore) => posts.meta)
     const [search, setSearch] = useSearchParams();
-    const metaId = useMemo(()=>search.get('id'),[search])
-    const newMeta = useMemo(()=>search.get('new'),[search])
-    const metaType = useMemo(()=>search.get('metaType'),[search])
-    const lang = useMemo(()=>search.get('lang'),[search])
+    const metaId = useMemo(() => search.get('id'), [search])
+    const newMeta = useMemo(() => search.get('new'), [search])
+    const metaType = useMemo(() => search.get('metaType'), [search])
+    const lang = useMemo(() => search.get('lang'), [search])
 
     const [editingData, setEditingData] = useState({
         activeEditingLanguage: 'default'
@@ -84,11 +84,11 @@ const Meta = () => {
     const [deleteButton, setDeleteButton] = useState(false)
 
     useEffect(() => {
-        if (newMeta && metaType) {
+        if (newMeta) {
             dispatch(editMetaAction({
                 // @ts-ignore
                 name: '',
-                type: metaType,
+                type: metaType || 'categories',
                 description: '',
                 imageUrl: '',
                 imageUrlLock: false,
@@ -147,7 +147,7 @@ const Meta = () => {
                 </div>
                 <div className={'single-meta-page-section'}>
                     <p>Meta Name :</p>
-                    <input className={'form-control-input'} name='name' onChange={e => onInputChangeHandler(e)} value={
+                    <input className={'primaryInput'} name='name' onChange={e => onInputChangeHandler(e)} value={
                         // @ts-ignore
 
                         editingData.activeEditingLanguage === 'default' ? meta.name :
@@ -163,38 +163,47 @@ const Meta = () => {
                 <div className={'single-meta-page-section'}>
                     <p>Meta Image :</p>
                     {/*// @ts-ignore*/}
-                    <input className={'form-control-input'} name={'imageUrl'} onChange={e => onChangeHandler(e)}
+                    <input className={'primaryInput'} name={'imageUrl'} onChange={e => onChangeHandler(e)}
                            value={meta?.imageUrl || ''}/>
 
                 </div>
                 <div className={'single-meta-page-section'}>
                     <p>Count :</p>
                     {/*// @ts-ignore*/}
-                    <input type={'number'} className={'form-control-input'} name={'count'}
+                    <input type={'number'} className={'primaryInput'} name={'count'}
                            onChange={e => onChangeHandler(e)} value={meta?.count || 0}/>
 
                 </div>
                 <div className={'single-meta-page-section'}>
                     <p>Likes :</p>
                     {/*// @ts-ignore*/}
-                    <input type={'number'} className={'form-control-input'} name={'likes'}
+                    <input type={'number'} className={'primaryInput'} name={'likes'}
                            onChange={e => onChangeHandler(e)} value={meta?.likes || 0}/>
 
                 </div>
                 <div className={'single-meta-page-section'}>
                     <p>view :</p>
                     {/*// @ts-ignore*/}
-                    <input type={'number'} className={'form-control-input'} name={'views'}
+                    <input type={'number'} className={'primaryInput'} name={'views'}
                            onChange={e => onChangeHandler(e)} value={meta?.views || 0}/>
 
                 </div>
                 <div className={'single-meta-page-section'}>
                     <p>Rank :</p>
-                    {/*// @ts-ignore*/}
-                    <input type={'number'} className={'form-control-input'} name={'rank'}
+                    <input type={'number'} className={'primaryInput'} name={'rank'}
                            onChange={e => onChangeHandler(e)} value={meta?.rank || 0}/>
 
                 </div>
+                {meta?.type === 'categories' &&
+                    <div className={'single-meta-page-section'}>
+                        <p>Parent Id :</p>
+
+                        <input type={'text'} className={'primaryInput'} name={'parentId'}
+                               onChange={e => onChangeHandler(e)} value={meta?.parentId || ''}/>
+
+                    </div>
+                }
+
                 <div className={'single-meta-page-section preview-image'}>
                     {meta?.imageUrl ? <img src={meta.imageUrl} alt=""/> : null}
                 </div>
@@ -225,9 +234,10 @@ const Meta = () => {
                     </select>
                 </div>
 
+
                 <div className={'single-meta-page-section'}>
                     <p>Meta Description :</p>
-                    <textarea className={'form-control-input'}
+                    <textarea className={'primaryInput'}
                               name={'description'}
                               onChange={e => onInputChangeHandler(e)}
                               value={editingData?.activeEditingLanguage && editingData?.activeEditingLanguage === 'default' ? meta?.description || '' :

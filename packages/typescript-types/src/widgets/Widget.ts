@@ -54,7 +54,7 @@ export interface IMenuItem{
     target: string,
     as: string,
     type: string,
-    parent: number | null,
+    parent: string | number | readonly string[] | undefined,
     itemIndex: number,
     itemId: number,
     subItems?:IMenuItem[]

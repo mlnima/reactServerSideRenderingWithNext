@@ -23,10 +23,12 @@ export const clientAPIRequestAttendToEvent = async (postId:string, userId:string
 }
 
 
-export const clientAPIRequestCreateNewPost = async (data:{}): Promise<{
-    newPostId: string;
-}> => {
+export const clientDeletePostByAuthor = async (postId:string) => {
+    return await AxiosInstance.delete(`/api/v1/posts/deletePostByAuthor?postId=${postId}`)
+}
 
+
+export const  clientAPIRequestCreateNewPost = async (data:{}): Promise<{ newPostId: string }> => {
     const response: AxiosResponse<{
         newPostId: string;
     }> = await AxiosInstance.post<{

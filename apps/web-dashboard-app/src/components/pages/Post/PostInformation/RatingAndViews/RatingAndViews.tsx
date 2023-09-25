@@ -19,7 +19,7 @@ const RatingAndViews:FC<PropTypes> = props => {
                 </div>
                 <div className="editor">
                     {/*//@ts-ignore*/}
-                    <input type='number' className='form-control-input' name={props.name} value={post?.[props.name] || 0} onChange={e => props.onChangeHandler(e)}/>
+                    <input type='number' className='primaryInput' name={props.name} value={post?.[props.name] || 0} onChange={e => props.onChangeHandler(e)}/>
                 </div>
             </div>
         );

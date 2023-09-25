@@ -109,7 +109,7 @@ const ThumbnailUploadArea: FC<PropTypes> = ({onUploadHandler, image, postId}) =>
 
     return (
         <Style className={'uploader-area'}>
-            <input className={'form-control-input'}
+            <input className={'primaryInput'}
                    type="file"
                    ref={inputRef}
                    accept="image/x-png,image/gif,image/jpeg,image/webp"

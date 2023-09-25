@@ -22,7 +22,7 @@ const Price: FC<PropTypes> = ({onChangeHandler}) => {
         <Style>
             <div className={'field-section'}>
                 <p>Price</p>
-                <input type={'number'} name={'price'} className={'form-control-input'}/>
+                <input type={'number'} name={'price'} className={'primaryInput'}/>
                 <label >.00 EUR</label>
             </div>
             <div className={'field-section'}>

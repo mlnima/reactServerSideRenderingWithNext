@@ -41,7 +41,8 @@ apps/api-server/tools/testAPI.js
 .env.production.local
 .prettierrc
 *.env
-custom-config.json
+custom-client-config.json
+custom-server-config.json
 package-lock.json
 
 /tempFiles

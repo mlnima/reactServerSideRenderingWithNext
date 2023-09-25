@@ -1,7 +1,7 @@
 import {fetchSettings, fetchWidgets} from "fetch-requests";
 import SidebarWidgetAreaRenderer
     from "@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer";
-import {i18n} from "../../../../i18n-config";
+import {i18n} from "@i18nConfig";
 import {getDictionary} from "../../../../get-dictionary";
 import React from "react";
 import './page.styles.scss';
@@ -14,6 +14,7 @@ interface IProps {
     },
     searchParams?: {
         [key: string]: string | string[] | undefined
+
     },
     page: string | string[]
 }
@@ -22,7 +23,7 @@ interface IProps {
 
 const userPage = async ({params, searchParams}: IProps) => {
 
-    const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+    const locale = i18n.locales.includes(params?.lang) ? params?.lang : process?.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale);
     const settingsData = await fetchSettings({requireSettings: ['userPageSettings']});
 
@@ -42,7 +43,9 @@ const userPage = async ({params, searchParams}: IProps) => {
     return (
         <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
             <main id={'primary'} className={'main userPage'}>
-                <UserPageContent dictionary={dictionary} username={params?.username} locale={locale}/>
+                <UserPageContent dictionary={dictionary}
+                                 username={params?.username}
+                                 locale={locale}/>
             </main>
             <SidebarWidgetAreaRenderer leftSideWidgets={widgetsData.widgets?.['userPageLeftSidebar']}
                                        rightSideWidgets={widgetsData.widgets?.['userPageRightSidebar']}

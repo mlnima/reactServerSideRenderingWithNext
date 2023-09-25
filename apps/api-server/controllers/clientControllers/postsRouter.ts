@@ -19,6 +19,7 @@ import tags from './postsControllers/tags'
 import updatePost from './postsControllers/updatePost'
 import getSearch from "./postsControllers/getSearch";
 import rateLimitMiddleware from "../../middlewares/rateLimitMiddleware";
+import deletePostByAuthor from "./postsControllers/deletePostByAuthor";
 
 const router = Router();
 
@@ -27,6 +28,7 @@ router.get('/getUserPagePosts',cacheSuccesses,getUserPagePosts)
 router.get('/getSearch',cacheSuccesses,getSearch)
 router.get('/getPost',cacheSuccesses,getPost)
 router.get('/getEditingPost',getPost)
+router.delete('/deletePostByAuthor',authWithUserDataMiddleware,deletePostByAuthor)
 router.post('/likeDislikeView',likeDislikeView)
 router.post('/newComment',rateLimitMiddleware(1,60*1000),newComment)
 // router.post('/checkRemovedContent',checkRemovedContent)

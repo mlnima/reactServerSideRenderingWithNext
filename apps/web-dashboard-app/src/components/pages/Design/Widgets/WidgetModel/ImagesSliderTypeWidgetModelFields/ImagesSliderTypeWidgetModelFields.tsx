@@ -10,7 +10,7 @@ const style = styled.div`
   border-bottom: 1px #fff solid;
   width: 100%;
   
-  .form-control-input {
+  .primaryInput {
     width: 70%;
   }
 
@@ -20,7 +20,7 @@ const style = styled.div`
       justify-content: space-between;
       align-items: center;
 
-      .form-control-input {
+      .primaryInput {
         width: 70%;
       }
     }
@@ -216,7 +216,7 @@ const ImagesSliderTypeWidgetModelFields: FC<ImageSwiperTypeWidgetModelFieldsProp
                                    name='imageUrl'
                                    onChange={e => onChangeHandler(e)}
                                    value={state.imageUrl}
-                                   className={'form-control-input'}
+                                   className={'primaryInput'}
                             />
                         </div>
                         <div className={'image-Swiper-fields-form-section'}>
@@ -226,7 +226,7 @@ const ImagesSliderTypeWidgetModelFields: FC<ImageSwiperTypeWidgetModelFieldsProp
                                    name='imageAlt'
                                    onChange={e => onChangeHandler(e)}
                                    value={state.imageAlt}
-                                   className={'form-control-input'}
+                                   className={'primaryInput'}
                             />
                         </div>
                         <div className={'image-Swiper-fields-form-section'}>
@@ -235,7 +235,7 @@ const ImagesSliderTypeWidgetModelFields: FC<ImageSwiperTypeWidgetModelFieldsProp
                                    name='imageIndex'
                                    onChange={e => onChangeHandler(e)}
                                    value={state.imageIndex}
-                                   className={'form-control-input'}
+                                   className={'primaryInput'}
                             />
                         </div>
                         <div className={'image-Swiper-fields-form-section'}>
@@ -244,7 +244,7 @@ const ImagesSliderTypeWidgetModelFields: FC<ImageSwiperTypeWidgetModelFieldsProp
                                    name='targetUrl'
                                    onChange={e => onChangeHandler(e)}
                                    value={state.targetUrl}
-                                   className={'form-control-input'}
+                                   className={'primaryInput'}
                             />
                         </div>
                         <div className={'image-Swiper-fields-form-section'}>
@@ -274,7 +274,7 @@ const ImagesSliderTypeWidgetModelFields: FC<ImageSwiperTypeWidgetModelFieldsProp
                                name='moreDetailsButtonTextContent'
                                onChange={onUniqueDataChangeHandler}
                                value={uniqueData?.moreDetailsButtonTextContent}
-                               className={'form-control-input'}
+                               className={'primaryInput'}
                         />
                     </div>
                 </>

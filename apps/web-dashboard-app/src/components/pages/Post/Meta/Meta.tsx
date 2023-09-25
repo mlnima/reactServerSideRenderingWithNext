@@ -99,7 +99,7 @@ const Meta:FC<PropType> = props => {
     return (
         <MetaStyledDiv className='post-meta-editor'>
             <form className="add-new-meta" onSubmit={e => addNewItem(e)}>
-                <input className={'form-control-input'} ref={newItemsElement} type='text'/>
+                <input className={'primaryInput'} ref={newItemsElement} type='text'/>
                 <button className={'btn btn-success'} type='submit'>
                     <FontAwesomeIcon icon={faPlus} className={'add-new-meta-icon'}/>
                 </button>

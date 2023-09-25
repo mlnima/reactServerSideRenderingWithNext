@@ -243,7 +243,7 @@
 //                 <div className="siteIdentity site-settings-form-section-parent">
 //                     <div className={'site-settings-form-section'}>
 //                         <p>Site Name:</p>
-//                         <input className={'form-control-input'}
+//                         <input className={'primaryInput'}
 //                                type='text'
 //                                name='siteName'
 //                                value={identity.siteName}
@@ -263,7 +263,7 @@
 //
 //                     <div className="site-settings-form-section keywords">
 //                         <p>Keywords:</p>
-//                         <input className={'form-control-input'} ref={keywordsInput} name='keywords'/>
+//                         <input className={'primaryInput'} ref={keywordsInput} name='keywords'/>
 //                         <button type='button' onClick={() => addKeyword()}>add</button>
 //                         <span>Separate tags with commas</span>
 //
@@ -321,19 +321,19 @@
 //                                onChange={e => checkboxChangeHandler(e)}/>
 //                         <p> Cookie Read More Link</p>
 //
-//                         <input className={'form-control-input'} type="text" name='cookieReadMoreLink'
+//                         <input className={'primaryInput'} type="text" name='cookieReadMoreLink'
 //                             // @ts-ignore
 //                                value={identity.cookieReadMoreLink || ''}
 //                                onChange={e => onChangeHandler(e)}/>
 //                         <p> Cookie Title Text</p>
-//                         <input className={'form-control-input'} type='text' name='cookieTitleText' value={
+//                         <input className={'primaryInput'} type='text' name='cookieTitleText' value={
 //                             // @ts-ignore
 //                             editingSettings.activeEditingLanguage === 'default' ? identity.cookieTitleText :
 //                                 // @ts-ignore
 //                                 identity.translations?.[editingSettings.activeEditingLanguage]?.cookieTitleText || ""
 //                         } onChange={e => onChangeHandlerWithTranslate(e)}/>
 //                         <p> Cookie Message Text</p>
-//                         <textarea className={'form-control-input'} name='cookieMessageText' value={
+//                         <textarea className={'primaryInput'} name='cookieMessageText' value={
 //                             // @ts-ignore
 //                             editingSettings.activeEditingLanguage === 'default' ? identity.cookieMessageText :
 //                                 // @ts-ignore
@@ -376,7 +376,7 @@
 //
 //                         <input type='text'
 //                                value={identity.favIcon}
-//                                className={'form-control-input'}
+//                                className={'primaryInput'}
 //                                name='favIcon'
 //                                placeholder='Fav Icon Url..'
 //                                onChange={e => onChangeHandler(e)}/>
@@ -387,7 +387,7 @@
 //                         <input type='text'
 //                             // @ts-ignore
 //                                value={identity.googleAnalyticsId}
-//                                className={'form-control-input'}
+//                                className={'primaryInput'}
 //                                name='googleAnalyticsId'
 //                                placeholder='Google Analytics ID..'
 //                                onChange={e => onChangeHandler(e)}/>
@@ -396,7 +396,7 @@
 //                         <p>PWA icons</p>
 //
 //                         <input type='text'
-//                                className={'form-control-input'}
+//                                className={'primaryInput'}
 //                             // @ts-ignore
 //                                value={identity.pwa192}
 //                                name='pwa192'
@@ -405,7 +405,7 @@
 //                         />
 //
 //                         <input type='text'
-//                                className={'form-control-input'}
+//                                className={'primaryInput'}
 //                             // @ts-ignore
 //                                value={identity.pwa384}
 //                                name='pwa384'
@@ -413,7 +413,7 @@
 //                                onChange={e => onChangeHandler(e)}
 //                         />
 //                         <input type='text'
-//                                className={'form-control-input'}
+//                                className={'primaryInput'}
 //                             // @ts-ignore
 //                                value={identity.pwa512}
 //                                name='pwa512'
@@ -427,7 +427,7 @@
 //                     <p>Theme Color:</p>
 //                     <input type='text'
 //                            name='themeColor'
-//                            className={'form-control-input'}
+//                            className={'primaryInput'}
 //                         // @ts-ignore
 //                            value={identity.themeColor}
 //                            onChange={e => onChangeHandler(e)}/>
@@ -436,7 +436,7 @@
 //                     <p>Posts Per Page:</p>
 //                     <input type={'number'}
 //                            name={'postsCountPerPage'}
-//                            className={'form-control-input'}
+//                            className={'primaryInput'}
 //                            value={identity.postsCountPerPage}
 //                            onChange={e => onChangeHandler(e)}/>
 //                 </div>

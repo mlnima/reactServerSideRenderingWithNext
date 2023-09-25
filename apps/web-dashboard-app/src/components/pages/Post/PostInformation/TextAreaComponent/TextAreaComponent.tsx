@@ -19,7 +19,7 @@ const TextAreaComponent:FC<PropTypes> = props => {
                 </div>
                 <div className="editor">
                     {/*//@ts-ignore*/}
-                    <textarea className='form-control-input' name={props.name} value={post[props.name] || ''}
+                    <textarea className='primaryInput' name={props.name} value={post[props.name] || ''}
                               onChange={e => props.onChangeHandler(e)}/>
                 </div>
             </div>

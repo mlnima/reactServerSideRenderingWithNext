@@ -81,25 +81,25 @@ const Chatroom: FC<PropTypes> = ({}) => {
                    name={'name'}
                    value={chatroomData?.name}
                    onChange={e => onChangeHandler(e)}
-                   className={'form-control-input'}/>
+                   className={'primaryInput'}/>
             <p>Title:</p>
             <input type={'text'}
                    name={'title'}
                    value={chatroomData?.title}
                    onChange={e => onChangeHandler(e)}
-                   className={'form-control-input'}/>
+                   className={'primaryInput'}/>
             <p>Description:</p>
             <input type={'text'}
                    name={'description'}
                    value={chatroomData?.description}
                    onChange={e => onChangeHandler(e)}
-                   className={'form-control-input'}/>
+                   className={'primaryInput'}/>
             <p>Tags:</p>
             <input type={'text'}
                    name={'tags'}
                    value={chatroomData?.tags}
                    onChange={e => onChangeHandler(e)}
-                   className={'form-control-input'}/>
+                   className={'primaryInput'}/>
             <div className={'action-buttons'}>
                 <button className={'btn btn-primary'} onClick={() => onSaveHandler()}>Save</button>
                 <button className={'btn btn-danger'} onClick={() => onDeleteHandler()}>Delete</button>

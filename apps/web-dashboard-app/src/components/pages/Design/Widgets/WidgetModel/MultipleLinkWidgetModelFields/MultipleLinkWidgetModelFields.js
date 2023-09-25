@@ -18,7 +18,7 @@ const MultipleLinkWidgetModelFieldsStyledForm = styled.form`
       align-self: flex-start;
     }
 
-    .form-control-input {
+    .primaryInput {
       width: 90%;
       background-color: #333;
       color: #ccc;
@@ -99,7 +99,7 @@ const MultipleLinkWidgetModelFields = props => {
                 <div className='menu-form-field'>
                     <p>Link title :</p>
                     <input name='linkTitle'
-                           className={'form-control-input'}
+                           className={'primaryInput'}
                            type='text'
                            onChange={e => onChangeHandlerWithTranslate(e)}
                            value={props.widgetSettings.activeEditingLanguage === 'default' ? editingData.linkTitle ?? '' : editingData?.translations[props.widgetSettings.activeEditingLanguage]?.linkTitle ?? ''}/>
@@ -108,7 +108,7 @@ const MultipleLinkWidgetModelFields = props => {
                 <div className='menu-form-textarea'>
                     <p>Link description :</p>
                     <textarea name='linkDescription'
-                              className={'form-control-input'}
+                              className={'primaryInput'}
                               onChange={e => onChangeHandlerWithTranslate(e)}
                               value={props.widgetSettings.activeEditingLanguage === 'default' ? editingData.linkDescription ?? '' : editingData?.translations[props.widgetSettings.activeEditingLanguage]?.linkDescription ?? ''}/>
                 </div>
@@ -116,7 +116,7 @@ const MultipleLinkWidgetModelFields = props => {
                     <p>Url :</p>
                     <input name='linkTo'
                            type='text'
-                           className={'form-control-input'}
+                           className={'primaryInput'}
                            onChange={e => onChangeHandler(e)}
                            value={editingData.linkTo}/>
                 </div>
@@ -124,7 +124,7 @@ const MultipleLinkWidgetModelFields = props => {
                 {/*    <p>Link To As :</p>*/}
                 {/*    <input name='linkToAs'*/}
                 {/*           type='text'*/}
-                {/*           className={'form-control-input'}*/}
+                {/*           className={'primaryInput'}*/}
                 {/*           onChange={e => onChangeHandler(e)}*/}
                 {/*           value={editingData.linkToAs}/>*/}
                 {/*</div>*/}
@@ -181,7 +181,7 @@ const MultipleLinkWidgetModelFields = props => {
                     <p>link Index :</p>
                     <input name='linkIndex'
                            onChange={e => onChangeHandler(e)}
-                           className={'form-control-input'}
+                           className={'primaryInput'}
                            type='number'
                            value={editingData.linkIndex}/>
                 </div>
