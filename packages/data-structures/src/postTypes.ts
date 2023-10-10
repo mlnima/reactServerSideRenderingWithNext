@@ -1,4 +1,4 @@
-const postTypes = [
+const postTypes: string[] = [
     'video',
     'standard',
     'product',

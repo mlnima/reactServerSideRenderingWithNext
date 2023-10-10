@@ -170,13 +170,13 @@ const FieldPreview :FC<FieldPreviewPropTypes>= ({setWidgetData,widgetData,field}
 
                             <p>Required :</p>
                             {/*//@ts-ignore*/}
-                            <select className={'custom-select'} name='required' value={fieldData.required}
+                            <select className={'primarySelect'} name='required' value={fieldData.required}
                                     onChange={e => onChangeHandler(e)}>
                                 <option value='true'>True</option>
                                 <option value='false'>False</option>
                             </select>
                             <p>Filed Type :</p>
-                            <select className={'custom-select'} required={true} value={fieldData.fieldType}
+                            <select className={'primarySelect'} required={true} value={fieldData.fieldType}
                                     name='fieldType'
                                     onChange={e => onChangeHandler(e)}>
                                 <option>Select</option>

@@ -7,7 +7,10 @@
 
   img {
     width: 77px;
+    height: 77px;
     border-radius: 50%;
+    object-fit: cover;
+
   }
 
   svg {
@@ -19,8 +22,10 @@
 
   @media only screen and (min-width: 768px) {
     width: 100px;
+    height: 100px;
     img {
       width: 100px;
+      height: 100px;
     }
   }
 }

@@ -5,7 +5,7 @@ import {convertSecondsToTimeString} from 'custom-util'
 
 const {JSDOM} = jsdom;
 
-const xHamster = async (url) => {
+const xHScrapper = async (url) => {
     try {
         return await got(url).then(async videoPageData => {
             const videoPageDom = new JSDOM(videoPageData.body.toString()).window.document;
@@ -91,4 +91,4 @@ const xHamster = async (url) => {
 
 }
 
-export default xHamster;
+export default xHScrapper;

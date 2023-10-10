@@ -55,14 +55,14 @@
   --light-button-link-text-color: #212529;
 }
 
-body.light {
-  --primary-text-color: #222222;
-  --secondary-text-color: #4A4A4A;
-  --tertiary-text-color: #757575;
-  --primary-background-color: #F2F2F2;
-  --secondary-background-color: #E0E0E0;
-  --tertiary-background-color: #C8C8C8;
-}
+//body.light {
+//  --primary-text-color: #222222;
+//  --secondary-text-color: #4A4A4A;
+//  --tertiary-text-color: #757575;
+//  --primary-background-color: #F2F2F2;
+//  --secondary-background-color: #E0E0E0;
+//  --tertiary-background-color: #C8C8C8;
+//}
 
 body {
   color: var(--primary-text-color, #fff);

@@ -5,7 +5,7 @@ const DefaultPostCardStyle = styled.article`
   width: 100%;
 
   .card-under-media-info {
-    color: var(--secondary-text-color, #ccc);
+    color: var(--secondary-text-color, #b3b3b3);
     display: flex;
     justify-content: flex-start;
     align-items: center;

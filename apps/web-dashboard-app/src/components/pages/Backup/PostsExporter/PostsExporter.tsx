@@ -90,7 +90,7 @@ const PostsExporter = () => {
                 </div>
 
                 <div>
-                    <select value={data?.postType} className={'custom-select'} name={'postType'} onChange={e => onChangeHandler(e)}>
+                    <select value={data?.postType} className={'primarySelect'} name={'postType'} onChange={e => onChangeHandler(e)}>
                         <option value='' >Select</option>
                         {postTypes.map((postType, index) => {
                             return (
@@ -107,7 +107,7 @@ const PostsExporter = () => {
                     <input value={data.author} className={'primaryInput'} type={'text'} placeholder={'author'} name={'author'} onChange={e => onChangeHandler(e)}/>
                 </div>
                 <div>
-                    <select value={data.status} className={'custom-select'} name={'status'} onChange={e => onChangeHandler(e)}>
+                    <select value={data.status} className={'primarySelect'} name={'status'} onChange={e => onChangeHandler(e)}>
                         <option value='' >Select</option>
                         <option value='published'>Published</option>
                         <option value='draft'>Draft</option>

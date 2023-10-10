@@ -45,6 +45,8 @@ export {default as usernameValidatorRegisterForm} from './validators/usernameVal
 export {default as passwordValidatorRegisterForm} from './validators/passwordValidatorRegisterForm';
 export {default as removeFileExtension} from './file-utils/removeFileExtension';
 export {default as blobToBase64} from './file-utils/blobToBase64';
+export {default as imageCanvasCompressor} from './file-utils/imageCanvasCompressor';
+export {default as ImageCompressorByBrowser} from './file-utils/ImageCompressorByBrowser';
 export {default as emailValidator} from './validators/emailValidator';
 
 export {default as renderByLanguageCondition} from './widgets-util/renderByLanguageCondition';

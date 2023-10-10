@@ -6,6 +6,7 @@ import Link from "next/link";
 import AdminAuthorMessageActionMenu from "./AdminAuthorMessageActionMenu";
 import './ChatRoomMessage.styles.scss';
 import ReactAudioPlayer from "@components/ReactAudioPlayer/ReactAudioPlayer";
+import Image from 'next/image'
 
 interface IProps {
     message: ChatroomMessage,
@@ -45,6 +46,8 @@ const ChatRoomMessage: React.FC<IProps> = ({message, onDeleteMessageHandler}) =>
                     {message?.type === 'message' && <p className={'chatroomMessageText'}>{message?.messageData}</p>}
                     {message?.type === 'image' &&
                         <img alt={'message'} src={message?.messageData} className={'chatroomMessageImage'}/>}
+                    {/*{message?.type === 'image' &&*/}
+                    {/*    <Image width={100} height={100} alt={'message'} src={message?.messageData} className={'chatroomMessageImage'}/>}*/}
                     {message?.type === 'audio' && <ReactAudioPlayer src={message?.messageData}/>}
                 </div>
 

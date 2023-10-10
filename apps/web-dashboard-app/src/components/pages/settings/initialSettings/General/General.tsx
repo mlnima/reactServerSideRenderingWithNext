@@ -235,7 +235,7 @@
 //             <div className="forms">
 //                 <h2>site identity:</h2>
 //                 <h3>Site Info:</h3>
-//                 <select name='activeEditingLanguage' className={'custom-select active-editing-language'}
+//                 <select name='activeEditingLanguage' className={'primarySelect active-editing-language'}
 //                         onChange={e => onChangeLanguageHandler(e)}>
 //                     <option value='default'>{process.env.NEXT_PUBLIC_DEFAULT_LOCALE ?? 'default'}</option>
 //                     <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALES || ''}/>
@@ -275,7 +275,7 @@
 //                         <p>site Mod:</p>
 //                         <h4>Careful</h4>
 //                         <select name='siteMode'
-//                                 className={'custom-select'}
+//                                 className={'primarySelect'}
 //                             // @ts-ignore
 //                                 value={identity.siteMode}
 //                                 onChange={e => onChangeHandler(e)}>

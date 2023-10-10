@@ -26,7 +26,7 @@ const SelectFieldForWidget = (props: selectFieldTypes) => {
         <SelectFieldForWidgetStyledDiv className='selectFieldForWidget'>
             <p>{props.title}</p>
             <select name={props.name} onChange={e => props.onChangeHandler(e)} value={props.value}
-                    className={'custom-select'} placeholder={'post type'}>
+                    className={'primarySelect'} placeholder={'post type'}>
                 <option value=''>select</option>
                 {props.options.map((option: string | number, index: number) => {
                     return (

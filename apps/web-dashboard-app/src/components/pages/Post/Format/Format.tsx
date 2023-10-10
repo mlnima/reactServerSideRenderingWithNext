@@ -7,7 +7,7 @@ import {DashboardStore, Store} from "typescript-types";
 import {useAppDispatch} from "@store/hooks";
 
 const FormatStyledDiv = styled.div`
-  .custom-select {
+  .primarySelect {
     width: 100%;
   }
 `
@@ -31,7 +31,7 @@ const Format: FC<PostFormatPropTypes> = ({postType}) => {
 
     return (
         <FormatStyledDiv className='format-section'>
-            <select className={'custom-select'}
+            <select className={'primarySelect'}
                     name='postType'
                     value={post?.postType || postType || 'standard'}
                     onChange={e => onChangeHandlerAndSetPreferPostTypeToLocalStorage(e)}

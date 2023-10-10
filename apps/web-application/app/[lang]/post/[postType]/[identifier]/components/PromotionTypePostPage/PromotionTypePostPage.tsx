@@ -18,11 +18,12 @@ interface IProps {
         [key: string]: string
     },
     widgets: Widget[],
-    relatedPosts: {
-        actorsRelatedPosts: {}[],
-        categoriesRelatedPosts: {}[],
-        tagsRelatedPosts: {}[]
-    }
+    // relatedPosts: {
+    //     actorsRelatedPosts: {}[],
+    //     categoriesRelatedPosts: {}[],
+    //     tagsRelatedPosts: {}[]
+    // }
+    relatedPosts: Post[],
 }
 
 const PromotionTypePostPage: FC<IProps> = ({widgets, post, locale, dictionary,hasSidebar,relatedPosts}) => {

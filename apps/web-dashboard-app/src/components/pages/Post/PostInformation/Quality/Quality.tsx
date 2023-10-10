@@ -19,7 +19,7 @@ const Quality: FC<PropType> = ({rendering, onChangeHandler}) => {
                 </div>
                 <div className="editor">
                     <div className="option">
-                        <select className={'custom-select'} value={post?.quality || 'HD'} name='quality'
+                        <select className={'primarySelect'} value={post?.quality || 'HD'} name='quality'
                                 onChange={e => onChangeHandler(e)}>
                             {videoQualities.map((videoQuality: string,index:number) => {
                                 return <option value={videoQuality} key={`${videoQuality}${index}`}>{videoQuality}</option>

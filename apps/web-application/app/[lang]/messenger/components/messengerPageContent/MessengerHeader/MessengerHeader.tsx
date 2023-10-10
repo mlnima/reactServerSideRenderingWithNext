@@ -48,7 +48,7 @@ const MessengerHeader: FC<IProps> = ({activeConversation,autoScroll,setAutoScrol
                                 style={{
                                     color: autoScroll ?
                                         'var(--primary-active-color, #f90)' :
-                                        'var(--secondary-text-color, #ccc)'
+                                        'var(--secondary-text-color, #b3b3b3)'
                                 }}
                                 className={`chatroomTopBarActionButton ${autoScroll ? 'chatroomTopBarActionButton' :''}`}
                         >
@@ -73,7 +73,7 @@ const MessengerHeader: FC<IProps> = ({activeConversation,autoScroll,setAutoScrol
                         {/*<button className={`chatroomTopHeaderActionButton`}*/}
                         {/*        style={{*/}
                         {/*            color: isMaximized ? 'var(--primary-active-color, #f90)' :*/}
-                        {/*                'var(--secondary-text-color, #ccc)'*/}
+                        {/*                'var(--secondary-text-color, #b3b3b3)'*/}
                         {/*        }}*/}
                         {/*        onClick={() => updatePreference('isMaximized', !isMaximized)}>*/}
                         {/*    <FontAwesomeIcon icon={isMaximized ? faMinimize : faMaximize} style={{width: 25, height: 25}}/>*/}

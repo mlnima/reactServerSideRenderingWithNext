@@ -27,7 +27,7 @@ const Price: FC<PropTypes> = ({onChangeHandler}) => {
             </div>
             <div className={'field-section'}>
                 <p>Price Type</p>
-                <select className={'custom-select'} name={'priceType'} onChange={onChangeHandler}>
+                <select className={'primarySelect'} name={'priceType'} onChange={onChangeHandler}>
                     <option value={'fixed'}>Fixed Price</option>
                     <option value={'negotiable'}>Negotiable</option>
                     <option value={'free'}>Free</option>

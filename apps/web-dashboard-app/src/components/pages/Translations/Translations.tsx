@@ -44,7 +44,7 @@ const Translations = () => {
 
         <div className='translations'>
             Translations
-            <select onChange={e => onActiveEditingLanguageChangeHandler(e)} className={'custom-select'}>
+            <select onChange={e => onActiveEditingLanguageChangeHandler(e)} className={'primarySelect'}>
                 <option
                     value={process.env.NEXT_PUBLIC_DEFAULT_LOCALE}>{process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'Default'}
                 </option>

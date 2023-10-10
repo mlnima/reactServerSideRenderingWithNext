@@ -28,7 +28,7 @@ const SortItemsBy = () => {
     return (
         <Style className='post-type asset-page-asset-type-selector'>
             <p>Sort By:</p>
-            <select className={'custom-select'} onChange={e => onFormatChangeHandler(e)} value={query?.sort}>
+            <select className={'primarySelect'} onChange={e => onFormatChangeHandler(e)} value={query?.sort}>
                 <option value=''>Select</option>
                 <option value='createdAt'>Created At</option>
                 <option value='-createdAt'>- Created At</option>

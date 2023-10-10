@@ -140,7 +140,7 @@ const Meta = () => {
 
                 <div className={'single-meta-page-section'}>
                     <p>Language :</p>
-                    <select className={'custom-select'} onChange={e => onActiveEditingLanguageChangeHandler(e)}>
+                    <select className={'primarySelect'} onChange={e => onActiveEditingLanguageChangeHandler(e)}>
                         <option value='default'>Default</option>
                         <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALES || ''}/>
                     </select>
@@ -214,7 +214,7 @@ const Meta = () => {
                 </div>
                 <div className={'single-meta-page-section'}>
                     <p>Type :</p>
-                    <select className={'custom-select'} name={'type'} onChange={e => onChangeHandler(e)}
+                    <select className={'primarySelect'} name={'type'} onChange={e => onChangeHandler(e)}
                             value={meta?.type}>
                         <option value=''>Select</option>
                         <option value='tags'>Tag</option>
@@ -224,7 +224,7 @@ const Meta = () => {
                 </div>
                 <div className={'single-meta-page-section'}>
                     <p>Status :</p>
-                    <select className={'custom-select'} name={'status'} onChange={e => onChangeHandler(e)}
+                    <select className={'primarySelect'} name={'status'} onChange={e => onChangeHandler(e)}
                             value={meta?.status}>
                         <option value=''>Select</option>
                         <option value='draft'>Draft</option>

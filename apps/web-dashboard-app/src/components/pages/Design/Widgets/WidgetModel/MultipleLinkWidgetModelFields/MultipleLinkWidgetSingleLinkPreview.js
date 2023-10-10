@@ -35,7 +35,7 @@ const MultipleLinkWidgetSingleLinkPreviewStyledDiv = styled.div`
         color: #ccc;
       }
 
-      .custom-select {
+      .primarySelect {
         width: 95%;
         background-color: #222;
         color: #ccc;
@@ -159,7 +159,7 @@ const MultipleLinkWidgetSingleLinkPreview = props => {
                     </div>
                     <div className='menu-form-field'>
                         <p>rel :</p>
-                        <select className={'custom-select'} name='linkRel' value={editingData.linkRel}
+                        <select className={'primarySelect'} name='linkRel' value={editingData.linkRel}
                                 onChange={e => onChangeHandler(e)}>
                             <option value='' >Select</option>
                             <option value='alternate'>alternate</option>
@@ -192,7 +192,7 @@ const MultipleLinkWidgetSingleLinkPreview = props => {
 
                     <div className='menu-form-field'>
                         <p>Link To Window Type :</p>
-                        <select className={'custom-select'} name='linkToWindowType' value={editingData.linkToWindowType}
+                        <select className={'primarySelect'} name='linkToWindowType' value={editingData.linkToWindowType}
                                 onChange={e => onChangeHandler(e)}>
                             <option>select</option>
                             <option value='_blank'>Open New Window</option>

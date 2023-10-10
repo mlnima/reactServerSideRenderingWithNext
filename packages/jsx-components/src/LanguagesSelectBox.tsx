@@ -24,7 +24,7 @@ const LanguagesSelectBox: FC<IProps> = ({name, className, onChangeHandler}) => {
 
     return (
         //@ts-ignore
-        <select {...selectOptions} onChange={event =>onChangeHandler(event)} className={`custom-select ${className || ''}`}>
+        <select {...selectOptions} onChange={event =>onChangeHandler(event)} className={`primarySelect ${className || ''}`}>
             {languagesOptions}
         </select>
     )

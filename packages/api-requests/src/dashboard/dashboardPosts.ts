@@ -32,9 +32,19 @@ export const dashboardAPIRequestGetPosts = async (queriesData:string)=>{
 }
 
 export const dashboardAPIRequestPostDataScrappers = async (urlToScrap:string)=>{
-
     return await AxiosInstance.post('/api/admin/posts/postDataScrappers',{urlToScrap,token: localStorage.wt})
+};
 
+export const dashboardAPIRequestFindAnotherSimilarSourceLink = async (postId:string,relatedBy?:string,page?:number)=>{
+    return await AxiosInstance.get(
+        `/api/admin/posts/findAnotherSimilarSourceLink?postId=${
+            postId
+        }${
+            relatedBy ? `&relatedBy=${relatedBy}`:''
+        }${
+            page ? `&page=${page}`:''
+        }`
+    )
 };
 
 export const dashboardAPIRequestScrapYoutubeInfo = async (url:string)=>{

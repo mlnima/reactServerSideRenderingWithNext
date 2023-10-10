@@ -21,7 +21,7 @@ const DayModeNightModeFields: FC<DayModeNightModeFieldsPropTypes> =
                 <p>Default Mode:</p>
             <select name={'dayNightModeDefault'}
                     onChange={onChangeHandler}
-                    className={'custom-select'}
+                    className={'primarySelect'}
                     value={dayNightModeDefault}
             >
                  <option value='' >Select</option>

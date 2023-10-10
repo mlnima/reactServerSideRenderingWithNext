@@ -1,4 +1,4 @@
-import {model, Schema, Document} from "mongoose";
+import {model, Schema, Document,Model} from "mongoose";
 import {User} from "typescript-types";
 
 const userSchema = new Schema({
@@ -12,6 +12,10 @@ const userSchema = new Schema({
         },
         draftPost: {type: Schema.Types.ObjectId, ref: 'post'},
         password: String,
+        superAdministrator: {
+                type: Boolean,
+                default: false,
+        },
         role: String,
         firstName: String,
         lastName: String,
@@ -35,5 +39,27 @@ const userSchema = new Schema({
         keyMaster: Boolean,
         verificationToken: String,
     }, {timestamps: true});
+
+
+//******************* do not delete*************************
+// interface IUser extends Document {
+//         // your other fields
+//         superAdministrator: boolean;
+// }
+//
+// interface IUserModel extends Model<IUser> {
+//         // any static methods
+// }
+//
+// userSchema.pre('save', async function (this: IUser, next) {
+//         if (this.isModified('superAdministrator') && this.superAdministrator === true) {
+//                 const existingSuperAdmin = await (this.constructor as IUserModel).findOne({ superAdministrator: true });
+//                 if (existingSuperAdmin) {
+//                         // A super administrator already exists
+//                         throw new Error('A super administrator already exists.');
+//                 }
+//         }
+//         next();
+// });
 
 export default model<User & Document>("user", userSchema)

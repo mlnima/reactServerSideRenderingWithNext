@@ -34,13 +34,12 @@ interface IProps {
     widgetId: string,
     locale: string,
     isSidebar?: boolean,
-    viewType?: string,
     dictionary: {
         [key: string]: string
     }
 }
 
-const WidgetWrapper: FC<IProps> = ({data, widgetId, isSidebar, viewType, locale, dictionary}) => {
+const WidgetWrapper: FC<IProps> = ({data, widgetId, isSidebar, locale, dictionary}) => {
 
     const widgetMatcher = {
         'postsSlider': PostsSliderWidget,
@@ -84,8 +83,7 @@ const WidgetWrapper: FC<IProps> = ({data, widgetId, isSidebar, viewType, locale,
                     dictionary={dictionary}
                     locale={locale}
                     isSidebar={isSidebar}
-                    widgetId={widgetId}
-                    viewType={viewType}/>
+                    widgetId={widgetId}/>
             }
 
             {(!!data?.pagination && !!data?.redirectLink) &&

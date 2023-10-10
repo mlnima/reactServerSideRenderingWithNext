@@ -1,2 +1,2 @@
- const userRoles = ['superAdministrator','administrator','author','contributor','editor','subscriber','company','demo']
+ const userRoles = ['administrator','editor','author','subscriber','demo']
  export default userRoles

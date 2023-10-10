@@ -15,7 +15,15 @@ const newPost = async (req, res) => {
     try {
 
         const userData = await userSchema.findById(req.userData._id).select('draftPost').exec()
-        if (userData?.draftPost) {
+        const unFinishedPostsCount= await postSchema.countDocuments(
+            {
+                $and:[{$or:[{$ne: {status:'published'}},{$ne: {status:'trash'}}]},{author: req.userData._id}]
+            }
+        ).exec()
+
+        console.log('unFinishedPostsCount=> ',unFinishedPostsCount)
+
+        if (userData?.draftPost  ) {
             res.json({
                 message: 'There Is An Existing Draft Post.',
                 newPostId: userData.draftPost,

@@ -12,6 +12,10 @@
     padding: 5px 10px;
     margin: 5px;
     cursor: pointer;
+    gap: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 
     &:hover {

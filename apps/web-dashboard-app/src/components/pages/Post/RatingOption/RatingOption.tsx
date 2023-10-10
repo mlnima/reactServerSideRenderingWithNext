@@ -10,7 +10,7 @@ const RatingOption:FC = () => {
     const dispatch = useAppDispatch()
 
     return (
-        <select className={'custom-select'}
+        <select className={'primarySelect'}
                 name='rating'
                 value={post?.rating || 'enable'}
                 onChange={e=>{dispatch(editPostAction({[e.target.name]: e.target.value}))}}>

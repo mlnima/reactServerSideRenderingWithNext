@@ -72,10 +72,11 @@ export const getUserPagePosts = async (req, res) => {
     try {
         const authorId = req.query.authorId;
         const skip = req.query.skip || 0
-
+        // const status = req.query.status || 'published'
+        console.log('getUserPagePosts=> ',req.query)
         const posts = await postSchema.find(
-            {author:authorId},
-            postFieldRequestForCards,
+            {$and:[{author:authorId},{status:req.query.status || 'published'}]},
+            [...postFieldRequestForCards,'status'],
             {
                 skip: skip,
                 limit: (global?.initialSettings?.postCardsSettings?.numberOfCardsPerPage || 20),

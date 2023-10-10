@@ -23,7 +23,9 @@ const updatePost = async (req, res) => {
 
         res.status(200).json({
             updatedPost,
-            message:'Your Updates Are Pending Moderator Approval'
+            message:postData?.status === 'draft'? 'Saved' :
+                postData?.status === 'trash'? 'removed' :
+                'Your Updates Are Pending Moderator Approval'
         })
 
     } catch (error) {

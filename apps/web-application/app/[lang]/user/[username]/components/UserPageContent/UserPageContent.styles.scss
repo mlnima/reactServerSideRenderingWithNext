@@ -1,6 +1,5 @@
 .userPageContent {
   color: var(--primary-text-color, #fff);
-  font-size: 12px;
   padding: 10px;
 
   .profileHeader {
@@ -35,7 +34,7 @@
     }
   }
 
-  .profile-posts {
+  .profilePosts {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,23 +42,31 @@
     margin: 20px 0;
     .postsContainer{
       width: 100%;
-    }
-
-    .profileNoPostsYet {
-      border: 0.5px solid var(--primary-text-color, #fff);
-      border-radius: 50%;
-      width: 150px;
-      height: 150px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 10px;
-
-      svg {
-        width: 75px;
-        height: 75px;
+      .profilePostsNavigation{
+        color:var(--primary-active-color,#f90);
+        font-size: 1rem;
       }
     }
+
+    .noPosts{
+      margin-top: 3rem;
+      .profileNoPostsYet {
+        border: 0.5px solid var(--primary-text-color, #fff);
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10px;
+
+        svg {
+          width: 75px;
+          height: 75px;
+        }
+      }
+    }
+
 
     .profile-no-posts-title {
       color: var(--primary-text-color, #fff);

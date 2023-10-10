@@ -1,63 +1,91 @@
 'use client';
 import React, {FC, useEffect, useState} from "react";
-import {usePathname, useSearchParams} from "next/navigation";
 import {useAppDispatch, useAppSelector} from "@store/hooks";
-import {
-    clientAPIRequestGetEditingPost,
-    clientAPIRequestUpdatePost,
-    clientAPIRequestUploadImage, clientDeletePostByAuthor
-} from "api-requests";
-import {randomNumberGenerator, reduceArrayOfDataToIds} from "custom-util";
+import {clientAPIRequestGetEditingPost, clientDeletePostByAuthor} from "api-requests";
+import {capitalizeFirstLetter, reduceArrayOfDataToIds} from "custom-util";
 import MultipleImageUploader from "../PostEditorForm/common/MultipleImageUploader/MultipleImageUploader";
 import MetaDataSelector from "../MetaDataSelector/MetaDataSelector";
 import Price from "../PostEditorForm/common/Price";
-import VideoTypeFields from "../PostEditorForm/VideoTypeFields/VideoTypeFields";
-import './EditPostPageContent.styles.scss'
+import './EditPostPageContent.scss'
 import updatePostAction from "@store/reducers/postsReducers/updatePostAction";
 import LocationField from "../PostEditorForm/common/LocationField/LocationField";
 import Csr from "@components/global/Csr";
-import {useRouter} from "next/navigation";
+import {usePathname, useRouter} from "next/navigation";
 import {setAlert} from "@store/reducers/globalStateReducer";
+import {removeUserDraftPost} from "@store/reducers/userReducers/userReducer";
+import {postTypes} from "data-structures";
+import videoQualities from "data-structures/dist/src/videoQualities";
+import {clientAPIRequestDeletePostImages} from "api-requests";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faTrash} from "@fortawesome/free-solid-svg-icons/faTrash";
+import {faBinoculars, faFilePen, faFloppyDisk} from "@fortawesome/free-solid-svg-icons";
+import {UGCPostImagesLimit} from "data-structures";
+import {postStatuses} from "data-structures";
 
-// import {loading, setAlert} from "@utils/reducers/globalStateReducer";
 
 interface IProps {
     _id: string,
+    locale: string,
     dictionary: {
         [key: string]: string
     }
 }
 
-const EditPostPageContent: FC<IProps> = ({_id, dictionary}) => {
-    const searchParams = useSearchParams()
-    const pathname = usePathname()
+const EditPostPageContent: FC<IProps> = ({_id, dictionary, locale}) => {
+
     const router = useRouter()
+    const pathname = usePathname()
     const dispatch = useAppDispatch();
     const [editingPost, setEditingPost] = useState<{ [key: string]: any }>({})
+    const [prevEditingPost, setPrevEditingPost] = useState<{ [key: string]: any }>({})
+    const [isPreviewReady, setIsPreviewReady] = useState<boolean>(false)
     const {loggedIn, userData} = useAppSelector(({user}) => user)
+    const localeToSet = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? '' : `/${locale}`
 
     useEffect(() => {
-        console.log(editingPost)
-    }, [editingPost]);
+        if (_id && loggedIn) {
+            getEditingPostData()
+        }
+    }, [_id, loggedIn]);
 
-    useEffect(() => {
-        getEditingPostData()
-    }, [_id]);
+
+    // useEffect(() => {
+
+    //    return ()=>{
+    //        // console.log('createdAtupdatedAt=> ',       editingPost?.createdAt === editingPost?.updatedAt &&
+    //        //     !editingPost?.description &&
+    //        //     editingPost?.title ===' ')
+    //        //
+    //        // console.log('description=> ',!editingPost?.description)
+    //        // console.log('title=> ',!editingPost?.title)
+    //
+    //        if (
+    //            !!editingPost?._id &&
+    //            editingPost?.createdAt === editingPost?.updatedAt &&
+    //            !editingPost?.description &&
+    //            editingPost?.title ===' '
+    //        ) {
+    //            onDeletePostByAuthorHandler()
+    //        }
+    //    }
+    // }, [pathname,editingPost]);
+
 
     const getEditingPostData = async () => {
         if (_id) {
             await clientAPIRequestGetEditingPost(_id).then((postData) => {
-                setEditingPost(postData?.data?.post || {})
+                if (userData.role === 'administrator' || postData?.data?.post?.author?._id === userData?._id) {
+                    setEditingPost(postData?.data?.post || {})
+                }
             })
         }
     }
 
-
-    const onChangeHandler = (e: React.ChangeEvent<any>, isUniqueField?: boolean) => {
+    const onChangeHandler = (e: React.ChangeEvent<any>) => {
         setEditingPost(prevState => ({...prevState, [e.target.name]: e.target.value}))
     }
 
-    const onUniqueFieldsChangeHandler = (e: React.ChangeEvent<any>, isUniqueField?: boolean) => {
+    const onUniqueFieldsChangeHandler = (e: React.ChangeEvent<any>) => {
         setEditingPost(prevState => ({
             ...prevState,
             uniqueData: {...(prevState?.uniqueData || {}), [e.target.name]: e.target.value}
@@ -70,77 +98,60 @@ const EditPostPageContent: FC<IProps> = ({_id, dictionary}) => {
         setEditingPost(prevState => ({...prevState, [type]: metas}))
     }
 
+
+    const savePostData = async ({status}: { status: string }) => {
+        //clean post data
+        const comments = editingPost?.comments ? {comments: reduceArrayOfDataToIds(editingPost.comments)} : {}
+        const images = editingPost?.images ? {images: reduceArrayOfDataToIds(editingPost?.images)} : {}
+        const categories = editingPost?.categories ? {categories: reduceArrayOfDataToIds(editingPost.categories)} : {}
+        const tags = editingPost?.tags ? {tags: reduceArrayOfDataToIds(editingPost.tags)} : {}
+        const actors = editingPost?.actors ? {actors: reduceArrayOfDataToIds(editingPost.actors)} : {}
+        const author = !!editingPost?.author?._id ?
+            {author: editingPost?.author?._id} :
+            {author: userData?._id}
+
+        const editedPost = {
+            ...editingPost,
+            ...images,
+            ...comments,
+            ...categories,
+            ...author,
+            ...tags,
+            ...actors,
+            status,
+        }
+
+        if (status === 'draft' || status === 'pending') {
+            setIsPreviewReady(true)
+        }
+
+        if (status !=='draft'){
+            dispatch(removeUserDraftPost(null))
+        }
+
+        dispatch(updatePostAction(editedPost))
+    }
+
+
     const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         try {
             e.preventDefault();
-
-            //clean post data
-            const comments = editingPost?.comments ? {comments: reduceArrayOfDataToIds(editingPost.comments)} : {}
-            const images = editingPost?.images ? {images: reduceArrayOfDataToIds(editingPost?.images)} : {}
-            const categories = editingPost?.categories ? {categories: reduceArrayOfDataToIds(editingPost.categories)} : {}
-            const tags = editingPost?.tags ? {tags: reduceArrayOfDataToIds(editingPost.tags)} : {}
-            const actors = editingPost?.actors ? {actors: reduceArrayOfDataToIds(editingPost.actors)} : {}
-            const author = editingPost?.author ? {author: editingPost.author?._id} : userData?._id
-
-            const editedPost = {
-                ...editingPost,
-                ...images,
-                ...comments,
-                ...categories,
-                //@ts-ignore
-                ...author,
-                ...tags,
-                ...actors,
-                status: userData.role === 'administrator' ? editingPost.status : 'pending',
-            }
-
-
-            dispatch(updatePostAction(editedPost))
+            await savePostData({status: userData.role === 'administrator' ? editingPost.status : 'pending'})
         } catch (error) {
 
         }
     }
 
-
-    const onSelectImageHandler = async (event: any) => {
-        const formData = new FormData();
-        const selectedImages = event.target.files || event.dataTransfer.files;
-        if (!selectedImages?.length) return;
-
-        //rename files and append to form data
-        for await (const image of selectedImages) {
-            const newName = `${editingPost._id}-${userData._id}-${Date.now()}-${randomNumberGenerator(1, 10000)}${image.name.substr(image.name.lastIndexOf('.'))}`;
-            const renamedFile = new File([image], newName, {type: image.type})
-            formData.append('images', renamedFile);
-        }
-
-        //append images data to form data
-        formData.append('imagesData', JSON.stringify({
-            usageType: 'post'
-        }));
-
-        //upload images
-        await clientAPIRequestUploadImage(formData).then(response => {
-            if (response.data?.images?.length > 0) {
-
-                setEditingPost(prevState => {
-                    try {
-                        const allImages = [...(prevState?.images || []), ...response.data?.images]
-                        return ({
-                            ...prevState,
-                            mainThumbnail: allImages[0]?.filePath,
-                            images: allImages
-                        })
-                    } catch (error) {
-                        console.log('error=> ', error)
-                    }
-                })
-            }
-        })
-    };
+    const onDraftPostHandler = async () => {
+        await savePostData({status: 'draft'})
+    }
 
     const onDeletePostByAuthorHandler = async () => {
+        if (editingPost?.images?.length > 0) {
+            await clientAPIRequestDeletePostImages({postId: editingPost?._id})
+        }
         const deletePostRequestResult = await clientDeletePostByAuthor(editingPost?._id)
+        dispatch(removeUserDraftPost(null))
         dispatch(setAlert({
             message: deletePostRequestResult?.data?.message,
             type: 'success'
@@ -153,71 +164,217 @@ const EditPostPageContent: FC<IProps> = ({_id, dictionary}) => {
         <Csr>
             <div className={'editPostPageContent'}>
                 <form onSubmit={onSubmitHandler} className={'editPostForm primaryForm'}>
-                    <div className="formSection imageUploader">
-                        <MultipleImageUploader editingPost={editingPost}
-                                               setEditingPost={setEditingPost}
-                                               onSelectImageHandler={onSelectImageHandler}/>
-                    </div>
-                    <div className="formSection">
-                        <p>{dictionary?.["Title"] || "Title"}:</p>
-                        <input type="text"
-                               value={editingPost?.title || ''}
-                               onChange={onChangeHandler}
-                               className={'primaryInput'}
-                               name={'title'}/>
-                    </div>
 
-                    <div className="formSection description">
-                        <p>{dictionary?.["Description"] || "Description"}:</p>
-                        <textarea name={'description'}
-                                  className={'description primaryInput'}
-                                  onChange={onChangeHandler}
-                                  value={editingPost?.description as string}/>
+                    <div className={'mainFields'}>
+
+                        <div className="formSection">
+                            <p>{dictionary?.["Title"] || "Title"}:</p>
+                            <input type="text"
+                                   value={editingPost?.title || ''}
+                                   onChange={onChangeHandler}
+                                   className={'primaryInput'}
+                                   name={'title'}/>
+                        </div>
+                        <div className="formSection imageUploader">
+                            <MultipleImageUploader editingPost={editingPost}
+                                                   dictionary={dictionary}
+                                                   limit={userData?.role === 'administrator' ?
+                                                       20 : UGCPostImagesLimit?.[editingPost?.type as string] || 1
+                                                   }
+                                                   setEditingPost={setEditingPost}
+                                // onSelectImageHandler={onSelectImageHandler}
+                            />
+                        </div>
+                        <div className="formSection description">
+                            <div className={'descriptionHeader'}>
+                                <p>{dictionary?.["Description"] || "Description"}:</p>
+                                {/*<button className={'btn btn-primary'}*/}
+                                {/*        onClick={() => setAdvanceEditor(!advanceEditor)}>Advance*/}
+                                {/*</button>*/}
+                            </div>
+                            <textarea name={'description'}
+                                      className={'description primaryInput'}
+                                      onChange={onChangeHandler}
+                                      value={editingPost?.description as string}/>
+
+                        </div>
+
+                        {editingPost?.postType === 'video' &&
+                            <>
+
+                                <div className="formSection">
+                                    <p>Video Url:</p>
+                                    <input type={'text'}
+                                           required={true}
+                                           value={editingPost?.videoUrl || ''}
+                                           onChange={onChangeHandler}
+                                           className={'primaryInput'}
+                                           name={'videoUrl'}/>
+                                </div>
+                                <div className="formSection">
+                                    <p>Video Embed Code:</p>
+                                    <input type={'text'}
+                                           required={true}
+                                           value={editingPost?.videoEmbedCode || ''}
+                                           onChange={onChangeHandler}
+                                           className={'primaryInput'}
+                                           name={'videoEmbedCode'}/>
+                                </div>
+                                <div className="formSection">
+                                    <p>Video Trailer Url:</p>
+                                    <input type={'text'}
+                                           required={true}
+                                           value={editingPost?.videoTrailerUrl || ''}
+                                           onChange={onChangeHandler}
+                                           className={'primaryInput'}
+                                           name={'videoTrailerUrl'}/>
+                                </div>
+
+                            </>
+                        }
 
                     </div>
-                    <div className="formSection">
-                        <p>Categories:</p>
-                        <MetaDataSelector postData={editingPost} type={'categories'} maxLimit={1}
-                                          onMetaChangeHandler={onMetaChangeHandler}/>
-                    </div>
-                    <div className="formSection">
-                        <p>Tags:</p>
-                        <MetaDataSelector postData={editingPost} type={'tags'} maxLimit={5}
-                                          onMetaChangeHandler={onMetaChangeHandler}/>
-                    </div>
-                    {editingPost.postType === 'video' &&
-                        <div className="formSection"><p>Actors:</p>
-                            <MetaDataSelector postData={editingPost} type={'actors'} maxLimit={5}
+                    <div className={'sidebarField'}>
+
+                        {userData?.role === 'administrator' ?
+                            <div className="formSection">
+                                <p>Post Status:</p>
+                                <select value={editingPost?.status || ''}
+                                        name={'postType'}
+                                        className={'primarySelect'}
+                                        onChange={onChangeHandler}>
+                                    {postStatuses.map(postStatus => {
+                                        return <option value={postStatus} key={postStatus}>
+                                            {capitalizeFirstLetter(postStatus)}
+                                        </option>
+                                    })}
+                                </select>
+                            </div> : userData?.role !== 'administrator'?
+                                <div className="formSection">
+
+                                    <label>
+                                        {dictionary?.['Status'] || 'Status'}: &nbsp;
+                                        {dictionary?.[capitalizeFirstLetter(editingPost?.status)] || capitalizeFirstLetter(editingPost?.status)}
+                                    </label>
+                                </div> : null
+                        }
+                        {userData?.role === 'administrator' ?
+                            <div className="formSection">
+                                <p>Post Type:</p>
+                                <select value={editingPost?.postType || ''}
+                                        name={'postType'}
+                                        className={'primarySelect'}
+                                        onChange={onChangeHandler}>
+                                    {postTypes.map(postTypes => {
+                                        return <option value={postTypes} key={postTypes}>
+                                            {capitalizeFirstLetter(postTypes)}
+                                        </option>
+                                    })}
+                                </select>
+                            </div> : userData?.role !== 'administrator' && editingPost?.postType === 'video' ?
+                                <div className="formSection">
+                                    <label>
+                                        {dictionary?.['Post Type'] || 'Post Type'}: &nbsp;
+                                        {capitalizeFirstLetter(editingPost?.postType)}
+                                    </label>
+                                </div> : null
+                        }
+
+                        {userData?.role === 'administrator' || editingPost?.postType === 'video' ?
+                            <div className="formSection">
+                                <p>{dictionary?.['Categories'] || 'Categories'}:</p>
+                                <MetaDataSelector postData={editingPost} type={'categories'} maxLimit={1}
+                                                  onMetaChangeHandler={onMetaChangeHandler}/>
+                            </div> :
+                            <label>
+                                <span>{dictionary?.['Category'] || 'Category'}: </span>
+
+                                {editingPost?.categories?.map((category: any) => {
+                                    return <span className={'category'} key={category}>{category?.name}</span>
+                                })}
+                            </label>
+                        }
+
+                        <div className="formSection">
+                            <p>{dictionary?.['Tags'] || 'Tags'}:</p>
+                            <MetaDataSelector postData={editingPost} type={'tags'} maxLimit={5}
                                               onMetaChangeHandler={onMetaChangeHandler}/>
                         </div>
-                    }
-                    {editingPost?.postType === 'advertise' &&
-                        <div className="formSection">
-                            {/*//@ts-ignore*/}
-                            <Price onChangeHandler={e => onChangeHandler(e, true)}/>
-                        </div>
-                    }
+                        {editingPost.postType === 'video' &&
+                            <div className="formSection">
+                                <p>{dictionary?.['Actors'] || 'Actors'}:</p>
+                                <MetaDataSelector postData={editingPost} type={'actors'} maxLimit={5}
+                                                  onMetaChangeHandler={onMetaChangeHandler}/>
+                            </div>
+                        }
+                        {editingPost?.postType === 'advertise' &&
+                            <div className="formSection">
+                                {/*//@ts-ignore*/}
+                                <Price onChangeHandler={e => onChangeHandler(e, true)}/>
+                            </div>
+                        }
 
-                    {/ugcAd|event/.test(editingPost?.postType as string) &&
-                        <div className="formSection">
-                            <LocationField onUniqueFieldsChangeHandler={onUniqueFieldsChangeHandler}/>
-                        </div>
-                    }
+                        {/ugcAd|event/.test(editingPost?.postType as string) &&
+                            <div className="formSection">
+                                <LocationField onUniqueFieldsChangeHandler={onUniqueFieldsChangeHandler}/>
+                            </div>
+                        }
+                        {editingPost?.postType === 'video' &&
+                            <>
+                                <div className="formSection">
+                                    <p>quality:</p>
+                                    <select value={editingPost?.quality || ''}
+                                            name={'quality'}
+                                            className={'primarySelect'}
+                                            onChange={onChangeHandler}>
+                                        {videoQualities.map(quality => {
+                                            return <option value={quality} key={quality}>
+                                                {quality}
+                                            </option>
+                                        })}
+                                    </select>
+                                </div>
+                            </>
+                        }
 
-                    {editingPost?.postType === 'video' &&
-                        <div className="formSection">
-                            <VideoTypeFields onChangeHandler={onChangeHandler} editingPost={editingPost}/>
-                        </div>
-                    }
+
+                    </div>
                     <div className={'actionButtons'}>
                         <button type={'submit'} className={'btn btn-primary submitButton'}>
-                            {dictionary?.["Save"] || "Save"}
+                            <FontAwesomeIcon icon={faFloppyDisk} className={'meta-icon'}/>
+                            {dictionary?.["Publish"] || "Publish"}
+                        </button>
+                        {isPreviewReady &&
+                            <button type={'button'}
+                                    onClick={() => router.push(
+                                        `${localeToSet}/post/${editingPost?.postType}/${editingPost?._id}?preview=true`
+                                    )}
+                                    className={'btn btn-info submitButton'}>
+                                <FontAwesomeIcon icon={faBinoculars} className={'meta-icon'}/>
+                                {dictionary?.["Preview"] || "Preview"}
+                            </button>}
+
+                        <button type={'button'}
+                                onClick={async () => await savePostData({status: 'draft'})}
+                                className={'btn btn-info submitButton'}>
+                            <FontAwesomeIcon icon={faFilePen} className={'meta-icon'}/>
+                            {dictionary?.["Draft"] || "Draft"}
                         </button>
                         <button type={'button'}
-                                onClick={onDeletePostByAuthorHandler}
+                                onClick={async () => {
+                                    await savePostData({status: 'trash'})
+                                    setTimeout(() => router.push(`${localeToSet}`), 1000)
+                                }}
                                 className={'btn btn-danger'}>
-                            {dictionary?.["Delete"] || "Delete"}
+                            <FontAwesomeIcon icon={faTrash} className={'meta-icon'}/>
+                            {dictionary?.["Trash"] || "Trash"}
                         </button>
+                        {/*<button type={'button'}*/}
+                        {/*        onClick={onDeletePostByAuthorHandler}*/}
+                        {/*        className={'btn btn-danger'}>*/}
+                        {/*    <FontAwesomeIcon icon={faTrash} className={'meta-icon'}/>*/}
+                        {/*    {dictionary?.["Trash"] || "Trash"}*/}
+                        {/*</button>*/}
                     </div>
 
                 </form>
@@ -228,11 +385,3 @@ const EditPostPageContent: FC<IProps> = ({_id, dictionary}) => {
 };
 
 export default EditPostPageContent;
-
-
-//
-// setEditingPost(prevState => ({
-//     ...prevState,
-//     mainThumbnail: response.data?.images[0],
-//     images: [...(prevState?.images || []), ...response.data?.images]
-// }))

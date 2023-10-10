@@ -60,6 +60,7 @@ export const clientAPIRequestGetEditingPost = async (postId:string) => {
     return await AxiosInstance.get(`/api/v1/posts/getEditingPost?${queries}`);
 }
 
+
 export const clientAPIRequestGetPost = async (identifier:string) => {
     const queryGeneratorData = mongoIdValidator(identifier) ? {_id: identifier} : {title: identifier}
     const _id = queryGeneratorData._id ? {_id: queryGeneratorData._id} : {}

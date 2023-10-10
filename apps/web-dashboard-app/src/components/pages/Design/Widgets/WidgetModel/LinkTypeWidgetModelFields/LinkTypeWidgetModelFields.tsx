@@ -45,7 +45,7 @@ const LinkTypeWidgetModelFields: FC<LinkTypeWidgetModelFieldsPropTypes> =
                 </div>
                 <div className='selectInputFieldForWidget widgetSection'>
                     <p>Link To Window Type:</p>
-                    <select className={'custom-select'}
+                    <select className={'primarySelect'}
                             name='linkToWindowType'
                             value={uniqueData.linkToWindowType}
                             onChange={e => onUniqueDataChangeHandler(e)}

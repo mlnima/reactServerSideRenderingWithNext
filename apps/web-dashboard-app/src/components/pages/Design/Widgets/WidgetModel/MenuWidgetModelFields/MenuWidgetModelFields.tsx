@@ -1,9 +1,9 @@
 import React, {FC, useState} from 'react';
-import MenuWidgetModelFieldsPreview from "./MenuWidgetModelFieldsPreview";
 import {uniqueId} from "lodash";
-import MenuWidgetEditForm from "./MenuWidgetEditForm";
 import styled from "styled-components";
-import {WidgetData,IMenuItem} from "typescript-types";
+import {WidgetData, IMenuItem} from "typescript-types";
+import AddNewItemForm from "@components/pages/Design/Widgets/WidgetModel/MenuWidgetModelFields/AddNewItemForm";
+import ItemPreview from "@components/pages/Design/Widgets/WidgetModel/MenuWidgetModelFields/ItemPreview";
 
 const MenuWidgetModelFieldsStyledDiv = styled.div`
   .mobileNavigationLabel {
@@ -11,26 +11,25 @@ const MenuWidgetModelFieldsStyledDiv = styled.div`
   }
 `
 
-interface IProps{
-    widgetSettings:{
-        activeEditingLanguage:string
+interface IProps {
+    widgetSettings: {
+        activeEditingLanguage: string
     },
-    widgetData:WidgetData,
-    setWidgetData:Function,
+    widgetData: WidgetData,
+    setWidgetData: Function,
 
 }
 
-const MenuWidgetModelFields:FC<IProps> = ({widgetSettings,setWidgetData,widgetData}) => {
+const MenuWidgetModelFields: FC<IProps> = ({widgetSettings, setWidgetData, widgetData}) => {
 
     const [formData, setFormData] = useState<IMenuItem>({
         name: '',
         target: '',
-        as: '',
-        parent:undefined,
+        parent: undefined,
         type: 'internal',
         itemIndex: 0,
         itemId: 0,
-        subItems:[],
+        subItems: [],
         translations: {},
     });
 
@@ -38,14 +37,14 @@ const MenuWidgetModelFields:FC<IProps> = ({widgetSettings,setWidgetData,widgetDa
         activeEditingLanguage: 'default'
     })
 
-    const onChangeHandlerWithTranslate = (event:React.ChangeEvent<HTMLInputElement|HTMLSelectElement>) => {
-        if (widgetSettings.activeEditingLanguage === 'default'){
-            setFormData((prevFormData:IMenuItem)=>({
+    const onChangeHandlerWithTranslate = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        if (widgetSettings.activeEditingLanguage === 'default') {
+            setFormData((prevFormData: IMenuItem) => ({
                 ...prevFormData,
                 [event.target.name]: event.target.value
             }))
-        }else {
-            setFormData((prevFormData:IMenuItem)=>({
+        } else {
+            setFormData((prevFormData: IMenuItem) => ({
                 ...formData,
                 translations: {
                     ...formData.translations,
@@ -58,21 +57,21 @@ const MenuWidgetModelFields:FC<IProps> = ({widgetSettings,setWidgetData,widgetDa
         }
     }
 
-    const onChangeHandler = (event:React.ChangeEvent<HTMLInputElement|HTMLSelectElement>) => {
-        setFormData((prevFormData)=>({
+    const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        setFormData((prevFormData) => ({
             ...prevFormData,
             [event.target.name]: event.target.value
         }))
     }
 
 
-    const onAddHandler = (event:React.FormEvent<HTMLFormElement>) => {
+    const onAddHandler = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         if (!formData.parent) {
-            setWidgetData((prevState:WidgetData)=>({
+            setWidgetData((prevState: WidgetData) => ({
                 ...prevState,
                 menuItems: [
-                    prevState?.menuItems || [],
+                    ...prevState?.menuItems || [],
                     {
                         ...formData,
                         itemIndex: formData.itemIndex ? formData.itemIndex : (widgetData?.menuItems?.length || 0),
@@ -82,8 +81,8 @@ const MenuWidgetModelFields:FC<IProps> = ({widgetSettings,setWidgetData,widgetDa
             }))
         } else {
 
-            const findParentIndex = widgetData?.menuItems.findIndex((menuItem:IMenuItem) => menuItem.itemId === formData.parent)
-            const parentData = widgetData?.menuItems.find((menuItem:IMenuItem) => menuItem.itemId === formData.parent)
+            const findParentIndex = widgetData?.menuItems.findIndex((menuItem: IMenuItem) => menuItem.itemId === formData.parent)
+            const parentData = widgetData?.menuItems.find((menuItem: IMenuItem) => menuItem.itemId === formData.parent)
             const updatedParentData = {
                 ...(parentData || {}),
                 //@ts-ignore
@@ -119,32 +118,27 @@ const MenuWidgetModelFields:FC<IProps> = ({widgetSettings,setWidgetData,widgetDa
     //     })
     // }
 
-    const renderCurrentItems = ([...widgetData?.menuItems] || [])?.sort((a:IMenuItem, b:IMenuItem) => a.itemIndex > b.itemIndex ? 1 : -1).map(menuItem => {
+    const renderCurrentItems = ([...widgetData?.menuItems] || [])?.sort((a: IMenuItem, b: IMenuItem) => a.itemIndex > b.itemIndex ? 1 : -1).map(menuItem => {
         return (
-            <MenuWidgetModelFieldsPreview key={uniqueId('id_')}
-                                          data={menuItem}
-                                          widgetData={widgetData}
-                                          setWidgetData={setWidgetData}
-                                          activeEditingLanguage={widgetSettings.activeEditingLanguage}
-                                          parentsOption={widgetData.menuItems || []}
-                                          state={state}
+            <ItemPreview key={uniqueId('id_')}
+                         data={menuItem}
+                         widgetData={widgetData}
+                         setWidgetData={setWidgetData}
+                         activeEditingLanguage={widgetSettings.activeEditingLanguage}
+                         parentsOption={widgetData.menuItems || []}
             />
         )
     })
 
     return (
         <MenuWidgetModelFieldsStyledDiv>
-            <MenuWidgetEditForm
-                onChangeHandler={onChangeHandler}
-                onSubmitHandler={onAddHandler}
-                onChangeHandlerWithTranslate={onChangeHandlerWithTranslate}
-                data={formData}
-                state={state}
-                parentsOption={widgetData.menuItems || []}
-                activeEditingLanguage={widgetSettings.activeEditingLanguage}
-                onDeleteHandler={() => null}
-                mode='Add'
-            />
+            <AddNewItemForm onChangeHandler={onChangeHandler}
+                            onSubmitHandler={onAddHandler}
+                            onChangeHandlerWithTranslate={onChangeHandlerWithTranslate}
+                            data={formData}
+                            state={state}
+                            parentsOption={widgetData.menuItems || []}
+                            activeEditingLanguage={widgetSettings.activeEditingLanguage}/>
 
             <div className='menu-items'>
                 {renderCurrentItems}
@@ -155,3 +149,15 @@ const MenuWidgetModelFields:FC<IProps> = ({widgetSettings,setWidgetData,widgetDa
 };
 export default MenuWidgetModelFields;
 
+
+// {/*<MenuWidgetEditForm*/}
+// {/*    onChangeHandler={onChangeHandler}*/}
+// {/*    onSubmitHandler={onAddHandler}*/}
+// {/*    onChangeHandlerWithTranslate={onChangeHandlerWithTranslate}*/}
+// {/*    data={formData}*/}
+// {/*    state={state}*/}
+// {/*    parentsOption={widgetData.menuItems || []}*/}
+// {/*    activeEditingLanguage={widgetSettings.activeEditingLanguage}*/}
+// {/*    onDeleteHandler={() => null}*/}
+// {/*    mode='Add'*/}
+// {/*/>*/}

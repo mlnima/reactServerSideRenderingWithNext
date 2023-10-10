@@ -47,6 +47,12 @@ export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
+        replaceUserProfileImage: (state, action: PayloadAction<any>) => {
+            state.userData.profileImage = action.payload
+        },
+        removeUserDraftPost: (state, action: PayloadAction<any>) => {
+            state.userData.draftPost = ''
+        },
         setUserPageData: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
@@ -151,6 +157,8 @@ export const userSlice = createSlice({
 
 export const {
     userLogout,
+    removeUserDraftPost,
+    replaceUserProfileImage,
     dispatchSocketId,
 } = userSlice.actions;
 

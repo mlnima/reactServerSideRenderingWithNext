@@ -52,15 +52,14 @@ export interface WidgetData {
 export interface IMenuItem{
     name: string,
     target: string,
-    as: string,
     type: string,
-    parent: string | number | readonly string[] | undefined,
+    parent?: string | number | readonly string[] | undefined,
     itemIndex: number,
     itemId: number,
     subItems?:IMenuItem[]
-    translations: {
+    translations?: {
         [key:string]:{
-
+            [key:string]: string,
         }
     },
 }

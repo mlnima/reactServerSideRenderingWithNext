@@ -17,7 +17,7 @@ let AdminEditCustomPageStyledDiv = styled.div`
   padding: 10px 1rem;
   .form-group {
     margin: 5px 0;
-    .primaryInput, .custom-select {
+    .primaryInput, .primarySelect {
       max-width: 300px;
     }
   }
@@ -109,7 +109,7 @@ const Page = (props: any) => {
                 </div>
                 <div className={'form-group'}>
                     <p>Sidebar:</p>
-                    <select name={'sidebar'} className={'custom-select'} onChange={e => onChangeHandler(e)}
+                    <select name={'sidebar'} className={'primarySelect'} onChange={e => onChangeHandler(e)}
                             value={pageData?.sidebar}>
                         <option value={'no'}>No</option>
                         <option value={'left'}>Left</option>
@@ -120,7 +120,7 @@ const Page = (props: any) => {
                 </div>
                 <div className={'form-group'}>
                     <p>status:</p>
-                    <select name={'status'} className={'custom-select'} onChange={e => onChangeHandler(e)}
+                    <select name={'status'} className={'primarySelect'} onChange={e => onChangeHandler(e)}
                             value={pageData?.status} placeholder={'select'}>
                         <option >select</option>
                         <option value={'published'}>Published</option>

@@ -18,17 +18,15 @@ interface IProps {
         [key: string]: string
     },
     widgets: Widget[],
-    relatedPosts: {
-        actorsRelatedPosts: {}[],
-        categoriesRelatedPosts: {}[],
-        tagsRelatedPosts: {}[]
-    }
+    // relatedPosts: {
+    //     actorsRelatedPosts: {}[],
+    //     categoriesRelatedPosts: {}[],
+    //     tagsRelatedPosts: {}[]
+    // }
+    relatedPosts: Post[],
 }
 
 const LearnTypePostPage: FC<IProps> = ({widgets, post, locale, dictionary,hasSidebar,relatedPosts}) => {
-
-
-
 
     return (
         <div id={'primary'} className='post-page'>

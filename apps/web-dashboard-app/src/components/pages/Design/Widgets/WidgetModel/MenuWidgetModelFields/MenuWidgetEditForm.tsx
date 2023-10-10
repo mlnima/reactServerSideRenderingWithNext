@@ -77,7 +77,7 @@ const MenuWidgetEditForm:FC<IProps> = (
                 <div className='menu-widget-form-form-field'>
                     <p>Parent:</p>
 
-                    <select className={'custom-select'} name='parent' value={data.parent} onChange={e => onChangeHandler(e)}>
+                    <select className={'primarySelect'} name='parent' value={data.parent} onChange={e => onChangeHandler(e)}>
                         <option>select</option>
                         {renderItemsForParent}
                     </select>
@@ -122,7 +122,7 @@ const MenuWidgetEditForm:FC<IProps> = (
             <div className='menu-widget-form-form-field'>
                 <p>Type:</p>
                 <select required={mode !== 'Edit'}
-                        className={'custom-select'}
+                        className={'primarySelect'}
                         name='type'
                         onChange={e => onChangeHandler(e)}
                         value={data.type || 'internal'}>

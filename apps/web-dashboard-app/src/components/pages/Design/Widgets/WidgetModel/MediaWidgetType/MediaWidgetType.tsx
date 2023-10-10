@@ -11,7 +11,7 @@ const MediaWidgetType:FC<MediaWidgetTypePropTypes> = ({widgetData,onChangeHandle
     return (
         <div className={'selectInputFieldForWidget widgetSection'}>
             <p>Media Type:</p>
-            <select className={'custom-select'}
+            <select className={'primarySelect'}
                     name='mediaType'
                     value={widgetData.mediaType }
                     onChange={(e) => onChangeHandler(e)}>

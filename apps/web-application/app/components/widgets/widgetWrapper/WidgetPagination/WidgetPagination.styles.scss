@@ -14,8 +14,9 @@
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 0.25rem;
+
     a{
-      color: var(--primary-text-color, #fff);
+      color: var(--secondary-text-color, #b3b3b3);
     }
   }
   .paginationItemActive{

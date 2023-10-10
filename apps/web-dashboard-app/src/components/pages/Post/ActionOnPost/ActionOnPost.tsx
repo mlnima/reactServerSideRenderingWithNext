@@ -10,7 +10,7 @@ const ActionOnPostStyledDiv = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
 
-  .custom-select {
+  .primarySelect {
     width: 100%;
     margin: 10px 0;
   }
@@ -61,7 +61,7 @@ const ActionOnPost = () => {
     return (
         <ActionOnPostStyledDiv className='action-on-the-post'>
             <button className='btn btn-secondary' onClick={() => onViewHandler()}>View</button>
-            <select className='custom-select'
+            <select className='primarySelect'
                     name='status'
                     value={ActionOnPostData?.post?.status || 'draft'}
                     onChange={e => dispatch(editPostAction({[e.target.name]: e.target.value}))}

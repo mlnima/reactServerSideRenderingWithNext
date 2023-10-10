@@ -157,7 +157,7 @@ const User = () => {
             {/*</div>*/}
             <div className='user-admin-edit-profile-page-section'>
                 <p>Role :</p>
-                <select className={'custom-select'} value={userData?.role}
+                <select className={'primarySelect'} value={userData?.role}
                         name='role'
                         onChange={e => onChangeHandler(e)}
                         disabled={userData?.keyMaster}>
@@ -168,7 +168,7 @@ const User = () => {
             </div>
             <div className='user-admin-edit-profile-page-section'>
                 <p>Status :</p>
-                <select className={'custom-select'} value={userData?.status}
+                <select className={'primarySelect'} value={userData?.status}
                         name='status'
                         onChange={e => onChangeHandler(e)}
                         disabled={userData?.keyMaster}>

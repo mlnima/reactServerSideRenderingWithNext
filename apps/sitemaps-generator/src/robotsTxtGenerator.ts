@@ -7,11 +7,15 @@ export const robotsTxtGenerator = async (baseOutputPath) => {
 Crawl-delay: 10
 Disallow: /admin
 Disallow: /admin/*
+Disallow: /user
+Disallow: /user/*
+Disallow: /previewPost
 Disallow: /dashboard
 Disallow: /dashboard/*
 Disallow: /profile/*
 Disallow: /chatroom/*
 Disallow: /page/test
+Disallow: /*?preview=true*
 Sitemap: ${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemap.xml
 Host: ${process.env.NEXT_PUBLIC_PRODUCTION_URL}`,
         {

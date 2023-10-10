@@ -16,6 +16,7 @@ interface IProp {
     setAutoScroll: Function,
     preference: IPreference,
     updatePreference: Function,
+    locale: string,
 }
 
 const ChatroomTopbar: FC<IProp> = (
@@ -26,20 +27,21 @@ const ChatroomTopbar: FC<IProp> = (
         setAutoScroll,
         preference,
         updatePreference,
+        locale
     }) => {
     const {push} = useRouter()
-    //@ts-ignore
-    const onChatroomChangeHandler = (e) => {
+
+    const onChatroomChangeHandler = (e:React.ChangeEvent<HTMLSelectElement>) => {
         updatePreference('onlineUserListVisibility',false)
         push(`/chatroom/${e.target.value}`)
     }
 
     return (
         <div className={'chatroomTopbar'}>
-            <Link href={'/'} className={'backToHomePageButton'}>
+            <Link href={locale === process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? '/' : `/${locale}`} className={'backToHomePageButton'}>
                 <FontAwesomeIcon icon={faHome}/>
             </Link>
-            <select className={'custom-select chatroom-selector'} onChange={e => onChatroomChangeHandler(e)}
+            <select className={'primarySelect chatroom-selector'} onChange={e => onChatroomChangeHandler(e)}
                     value={chatroomId}>
                 {(chatrooms || []).map(chatroom => {
                     return (

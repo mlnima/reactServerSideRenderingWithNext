@@ -252,7 +252,7 @@ const ImagesSliderTypeWidgetModelFields: FC<ImageSwiperTypeWidgetModelFieldsProp
                             <select name='targetUrlType'
                                     onChange={e => onChangeHandler(e)}
                                     value={state.targetUrlType}
-                                    className={'custom-select'}
+                                    className={'primarySelect'}
                             >
                                 <option value=''>Select</option>
                                 <option value='_self'>Same Window</option>

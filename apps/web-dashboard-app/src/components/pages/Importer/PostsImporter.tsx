@@ -86,7 +86,7 @@ const PostsImporter = () => {
             <div className={'posts-importer-form'}>
 
                 <select ref={statusElement}
-                        className={'custom-select'}
+                        className={'primarySelect'}
                         name={'status'}
                         onChange={e => onChangeHandler(e)}>
 

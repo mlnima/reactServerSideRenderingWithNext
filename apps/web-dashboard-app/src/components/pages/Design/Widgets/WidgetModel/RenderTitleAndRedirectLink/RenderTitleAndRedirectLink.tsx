@@ -54,7 +54,7 @@ const RenderTitleAndRedirectLink: FC<RenderTitleAndRedirectLinkPropTypes> =
 
                     <div className='textInputFieldForWidget widgetSection'>
                         <p>Link to Widget Footer:</p>
-                        <select className={'custom-select'} name='footerLink' value={widgetData.footerLink}
+                        <select className={'primarySelect'} name='footerLink' value={widgetData.footerLink}
                                 onChange={onChangeHandler}>
                             <option value=''>Select</option>
                             <option value='true'>true</option>

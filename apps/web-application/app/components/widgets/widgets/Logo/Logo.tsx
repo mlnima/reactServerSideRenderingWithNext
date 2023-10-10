@@ -14,10 +14,9 @@ const Logo: FC<LogoPropTypes> = ({uniqueData, LogoUrl, locale}) => {
     const logoUrlSource = uniqueData?.logoUrl || LogoUrl
     const logoText = uniqueData?.translations?.[locale as string]?.logoText || uniqueData?.logoText || ''
     const headLineData = uniqueData?.translations?.[locale as string]?.headLine || uniqueData?.headLine
-
     return (
         <div className={'logo'}>
-            <Link href='/' className={'logoLink'} aria-label={'logo'}>
+            <Link href={locale === process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? '/' : `/${locale}`} className={'logoLink'} aria-label={'logo'}>
 
                 {uniqueData?.logoUrl &&
                     <img alt={'logo'}

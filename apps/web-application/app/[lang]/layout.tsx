@@ -17,7 +17,7 @@ import AlertBox from "@components/AlertBox/AlertBox";
 import GoogleAnalytics from "@components/GoogleAnalytics/GoogleAnalytics";
 import WebSocketInitializer from "@components/WebSocketInitializer/WebSocketInitializer";
 import StoreDataInitializer from "@components/global/StoreDataInitializer";
-import MediaCall from "@components/MediaCall/MediaCall";
+// import MediaCall from "@components/MediaCall/MediaCall";
 import TopbarWidgetArea from "@components/widgets/widgetAreas/TopbarWidgetArea";
 import HeaderWidgetArea from "@components/widgets/widgetAreas/HeaderWidgetArea";
 import NavigationWidgetArea from "@components/widgets/widgetAreas/NavigationWidgetArea";
@@ -40,7 +40,7 @@ const RootLayout = async ({children, params: {lang}}: { children: ReactNode, par
 
 //dir={rtlLanguages.includes(locale) ? 'rtl' : 'ltr'}
     return (
-        <html lang={locale}>
+        <html lang={locale} >
         <body className={`dark `} >
         <ReduxProvider>
             <div className="layout">

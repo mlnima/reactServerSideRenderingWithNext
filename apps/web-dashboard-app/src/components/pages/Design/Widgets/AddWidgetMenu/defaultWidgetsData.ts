@@ -58,7 +58,6 @@ const defaultWidgetsData = {
         ...generalModel,
         uniqueData:{
             count:8,
-            postElementSize:255,
             sortBy:'updatedAt'
         }
     },
@@ -106,12 +105,7 @@ const defaultWidgetsData = {
         }
     },
     'language': {
-        ...generalModel,
-        customStyles:'select{\n' +
-            '  border: none;\n' +
-            '  background-color: var(--main-background-color,#000);\n' +
-            '  color: var(--primary-text-color,#fff);\n' +
-            '}'
+        ...generalModel
     },
     'alphabeticalNumericalRange': {
         ...generalModel,

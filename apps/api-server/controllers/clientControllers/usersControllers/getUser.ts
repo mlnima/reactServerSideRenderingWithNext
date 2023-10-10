@@ -84,10 +84,10 @@ export const getUserPageInitialData = async (req: Request, res: Response) => {
             return res.status(404).json({message: 'UserModel not found'});
         }
 
-        const [didRequesterBlockThisUser, didRequesterFollowThisUser,postsCount] = await Promise.all([
+        const [didRequesterBlockThisUser, didRequesterFollowThisUser, postsCount] = await Promise.all([
             userSchema.exists({'blockList': {$in: [userData._id]}}),
             userSchema.exists({'following': {$in: [userData._id]}}),
-            postSchema.countDocuments({author:userData._id})
+            postSchema.countDocuments({$and: [{author: userData._id}, {status: 'published'}]})
         ]);
 
         userData.didRequesterBlockThisUser = !!didRequesterBlockThisUser;

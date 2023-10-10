@@ -1,12 +1,12 @@
-.custom-select {
+.primarySelect {
   display: inline-block;
-  width: 50%;
+  width: 100%;
   height: 2rem;
   padding: .375rem .75rem .375rem .75rem;
   line-height: 1.5;
   vertical-align: middle;
-  color: var(--primary-text-color,#fff);
-  background: var(--primary-background-color,#000);
+  color: var(--secondary-text-color,#b3b3b3);
+  background: var(--secondary-background-color,#0e0e0e);
   border: var(--default-border);
   border-radius: .25rem;
 }

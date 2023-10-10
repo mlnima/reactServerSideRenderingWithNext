@@ -65,7 +65,7 @@ const AddFormConditional:FC<AddFormConditionalPropTypes> = ({setWidgetData}) => 
             </div>
             <div className={'selectFieldForWidget'}>
                 <p>Required :</p>
-                <select className={'custom-select'} name='required' value={JSON.stringify(fieldData.required) } required={true} onChange={e => onChangeHandler(e)}>
+                <select className={'primarySelect'} name='required' value={JSON.stringify(fieldData.required) } required={true} onChange={e => onChangeHandler(e)}>
                     <option value='' >Select</option>
                     <option value='true'>True</option>
                     <option value='false'>False</option>
@@ -74,7 +74,7 @@ const AddFormConditional:FC<AddFormConditionalPropTypes> = ({setWidgetData}) => 
             <div className={'selectFieldForWidget'}>
                 <p>Filed Type :</p>
 
-                <select className={'custom-select'} value={fieldData.fieldType} required={true} name='fieldType' onChange={e => onChangeHandler(e)}>
+                <select className={'primarySelect'} value={fieldData.fieldType} required={true} name='fieldType' onChange={e => onChangeHandler(e)}>
                     <option>Select</option>
                     <option value='textarea'>Text Area</option>
                     <option value='text'>Text</option>

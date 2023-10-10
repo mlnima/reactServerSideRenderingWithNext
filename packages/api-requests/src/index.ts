@@ -23,7 +23,13 @@ export {
 export {clientAPIRequestGetPage} from './client/clientCustomPages';
 
 //fileManager
-export {clientAPIRequestUploadImage} from './client/clientFileManager';
+export {
+    clientAPIRequestUploadImage,
+    clientAPIRequestDeletePostImage,
+    clientAPIRequestDeletePostImages,
+    clientAPIRequestUploadPostImages,
+    clientAPIRequestUploadProfileImage
+} from './client/clientFileManager';
 
 //messenger
 export {
@@ -52,7 +58,8 @@ export {
     clientAPIRequestLikePost,
     clientAPIRequestUpdatePost,
     clientAPIRequestViewPost,
-    clientDeletePostByAuthor
+    clientDeletePostByAuthor,
+
 } from './client/clientPosts';
 
 //settings

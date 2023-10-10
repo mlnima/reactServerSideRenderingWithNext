@@ -18,11 +18,11 @@ export const fetchPost = async (identifier: string, revalidate?: number | null) 
         );
         if (!response.ok) {
             const errorData = await response.text();
-            throw new Error(errorData);
+            // throw new Error(errorData);
         }
         return await response.json()
     } catch (error) {
-        throw error;
+        // throw error;
     }
 }
 
@@ -126,16 +126,17 @@ export const fetchSearch = async ({queryObject, revalidate,tags}: IFetchMetasPro
 
 type IFetchUserPagePosts = {
     authorId?: string,
+    status:string,
     skip?: number,
     revalidate?: number | null
     tags?:string[]
 }
 
-export const fetchUserPagePosts = async ({authorId, skip, revalidate,tags}: IFetchUserPagePosts) => {
+export const fetchUserPagePosts = async ({authorId, skip, revalidate,tags,status}: IFetchUserPagePosts) => {
     try {
 
         const response = await fetch(
-            `${APIServerUrl}/api/v1/posts/getUserPagePosts?authorId=${authorId}&skip=${skip}`,
+            `${APIServerUrl}/api/v1/posts/getUserPagePosts?authorId=${authorId}&skip=${skip}&status=${status}`,
             config({revalidate,tags:[...(tags || []),'cacheItem','posts']})
         );
         if (!response.ok) {

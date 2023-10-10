@@ -49,13 +49,13 @@ const AuthenticationLoggedInItems: FC<IProps> = ({onOpenCloseHandler, locale, di
         <div className={'authenticationLoggedIn'}>
 
             <div className={'user-info'}>
-                <Link href={`/user/${username}`} onClick={onOpenCloseHandler}>
+                <Link href={`${locale === process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? '' : `/${locale}`}/user/${username}`} onClick={onOpenCloseHandler}>
                     <div className='user-info-profile-icon'>
                         <UserProfileImage size={40} profileRedirect={false}/>
                     </div>
                     <div className={'username-info'}>
                         <span className={'username'}>{username}</span>
-                        <span className={'view-profile'}>View Profile</span>
+                        <span className={'view-profile'}>{dictionary?.['View Profile'] || 'View Profile'}</span>
                     </div>
                 </Link>
             </div>

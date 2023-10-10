@@ -6,21 +6,18 @@ import {clientAPIRequestCreateNewPost} from "api-requests";
 import {loading, loginRegisterForm, setAlert} from "@store/reducers/globalStateReducer";
 
 interface IProps {
+    locale:string,
     dictionary: {
         [key: string]: string
     }
 }
 
-const NewPostPageContent: FC<IProps> = ({dictionary}) => {
+const NewPostPageContent: FC<IProps> = ({dictionary,locale}) => {
     const router = useRouter()
     const searchParams = useSearchParams()
     const dispatch = useAppDispatch();
-    const {loggedIn, userData} = useAppSelector(({user}) => {
-        return {
-            loggedIn: user.loggedIn,
-            userData: user.userData,
-        }
-    })
+    const {loggedIn} = useAppSelector(({user}) => user)
+    const {userData} = useAppSelector(({user}) => user)
 
     useEffect(() => {
         dispatch(loading(true));
@@ -34,23 +31,20 @@ const NewPostPageContent: FC<IProps> = ({dictionary}) => {
     const onCreateNewPost = async () => {
 
         try {
-            if (!loggedIn) {
-                await router.push(`/login`)
-            }
+            const localeToSet = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? '' : `/${locale}`
 
             if (!!userData?.draftPost) {
                 dispatch(setAlert({
                     message: dictionary?.[
-                        "Edit or Delete Your Existing Draft Before Creating a New Post."
-                        ] || "Edit or Delete Your Existing Draft Before Creating a New Post.",
+                        "Edit or Delete Your Existing Draft Before Creating a New Post"
+                        ] || "Edit or Delete Your Existing Draft Before Creating a New Post",
                     type: "error"
                 }))
-                await router.push(`/editPost/${userData?.draftPost}`)
-                return
+                await router.push(`${localeToSet}/editPost/${userData?.draftPost}`)
             }
 
             if (!searchParams.get('postType')) {
-                await router.push(`/`)
+                await router.push(`${localeToSet}/`)
             }
 
             if (
@@ -66,8 +60,9 @@ const NewPostPageContent: FC<IProps> = ({dictionary}) => {
                 }
 
                 await clientAPIRequestCreateNewPost({...initialData}).then((response) => {
+
                     if (response?.newPostId) {
-                        router.push(`/editPost/${response.newPostId as string}`)
+                        router.push(`${localeToSet}/editPost/${response.newPostId as string}`)
                     }
                 })
 

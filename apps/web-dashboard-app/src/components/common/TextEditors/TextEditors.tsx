@@ -5,7 +5,7 @@ import TextEditorSunEditor from './TextEditorSunEditor/TextEditorSunEditor'
 
 const TextEditorsStyledDiv = styled.div`
   .text-editors-switcher {
-    .custom-select {
+    .primarySelect {
       width: 200px;
     }
   }
@@ -62,7 +62,7 @@ const TextEditors = ({value, onChangeHandler, language, height, width, name, use
             <div className={'text-editors-header'}>
             </div>
             <div className={'text-editors-switcher'}>
-                <select className={'custom-select'} onChange={e => onChangeEditorHandler(e)} value={editor ?? ''}>
+                <select className={'primarySelect'} onChange={e => onChangeEditorHandler(e)} value={editor ?? ''}>
                     <option value={''}>Select</option>
                     {use?.map((editor:string,index:number)=>{
                         return(

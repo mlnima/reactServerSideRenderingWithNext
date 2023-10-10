@@ -2,7 +2,7 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
 import {AxiosError, AxiosResponse} from "axios";
-import {Meta,Post} from "typescript-types";
+import {Meta, Post} from "typescript-types";
 import {loading, setAlert} from "./globalStateReducer";
 import {PostRaw} from "typescript-types";
 import {
@@ -24,6 +24,7 @@ import {
     dashboardAPIRequestScrapYoutubeInfo,
     dashboardAPIRequestPostDataScrappers,
 } from "api-requests";
+import {dashboardAPIRequestFindAnotherSimilarSourceLink} from "api-requests/dist/src/dashboard/dashboardPosts";
 
 
 interface AdminPanelPosts {
@@ -43,6 +44,7 @@ const initialState = {
         title: '',
         description: ''
     },
+    relatedPosts: [],
     totalCount: 0,
     posts: [],
     meta: {},
@@ -67,16 +69,16 @@ export const getPostAction = createAsyncThunk(
 
 export const getPostScrapedDataAction = createAsyncThunk(
     'adminPanelPosts/getPostScrapedDataAction',
-    async ({url,fields}:{url: string,fields?:string[]}, thunkAPI) => {
+    async ({url, fields}: { url: string, fields?: string[] }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         return await dashboardAPIRequestPostDataScrappers(url).then(async (res: AxiosResponse<any>) => {
 
             //@ts-ignore
-            if (!fields?.length){
+            if (!fields?.length) {
                 return res.data?.urlData
-            }else {
+            } else {
                 let fieldToSet = {}
-                for await (const field of fields){
+                for await (const field of fields) {
                     //@ts-ignore
                     fieldToSet[field] = res.data?.urlData?.[field]
                 }
@@ -87,6 +89,21 @@ export const getPostScrapedDataAction = createAsyncThunk(
         }).finally(() => {
             thunkAPI.dispatch(loading(false))
         })
+    }
+)
+
+export const getSearchAndFindARelatedPostUrlAction = createAsyncThunk(
+    'adminPanelPosts/searchAndFindARelatedPostUrlAction',
+    async ({postId, relatedBy,page}: { postId?: string, relatedBy?: string ,page?:number}, thunkAPI) => {
+        thunkAPI.dispatch(loading(true))
+        return await dashboardAPIRequestFindAnotherSimilarSourceLink(postId, relatedBy,page).then(async (res: AxiosResponse<any>) => {
+            return res.data?.relatedPosts
+        }).catch((error) => {
+            thunkAPI.dispatch(setAlert({message: error.response?.data?.message, type: 'Error'}))
+        }).finally(() => {
+            thunkAPI.dispatch(loading(false))
+        })
+
     }
 )
 
@@ -126,14 +143,14 @@ export const updatePostAction = createAsyncThunk(
 
 export const createNewPostAction = createAsyncThunk(
     'adminPanelPosts/createNewPostAction',
-    async ({data,navigate}: { data?: PostRaw,navigate:any }, thunkAPI) => {
+    async ({data, navigate}: { data?: PostRaw, navigate: any }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
         return await dashboardAPIRequestCreateNewPost(data)
             .then((response: AxiosResponse<any>) => {
                 console.log(response.data?.savedPostData?._id)
-                if (response.data?.savedPostData?._id){
-                    navigate(`/dashboard/post?id=${response.data.savedPostData._id}`  )
+                if (response.data?.savedPostData?._id) {
+                    navigate(`/dashboard/post?id=${response.data.savedPostData._id}`)
                 }
             }).catch((err) => {
                 console.log(err)
@@ -146,7 +163,7 @@ export const createNewPostAction = createAsyncThunk(
 
 export const deleteMetaAction = createAsyncThunk(
     'adminPanelPosts/fetchAdminPanelDeleteMeta',
-    async (_id: string|null, thunkAPI) => {
+    async (_id: string | null, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
         return await dashboardAPIRequestDeleteMeta(_id)
@@ -202,7 +219,7 @@ export const getMetasAction = createAsyncThunk(
 )
 export const getMetaAction = createAsyncThunk(
     'adminPanelPosts/getMetaAction',
-    async (_id: string|null, thunkAPI) => {
+    async (_id: string | null, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         return await dashboardAPIRequestGetMeta(_id)
             .then((res: AxiosResponse<any>) => {
@@ -222,10 +239,10 @@ export const getMetaAction = createAsyncThunk(
 
 export const bulkActionPostsAction = createAsyncThunk(
     'adminPanelPosts/bulkActionPostsAction',
-    async ({ids, status}: { ids: string| string[], status: string }, thunkAPI) => {
+    async ({ids, status}: { ids: string | string[], status: string }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
 
-       await dashboardAPIRequestBulkActionOnPosts(ids, status).then((res: AxiosResponse<any>) => {
+        await dashboardAPIRequestBulkActionOnPosts(ids, status).then((res: AxiosResponse<any>) => {
             thunkAPI.dispatch(setAlert({message: res.data?.message, type: 'success'}))
 
         }).catch((err) => {
@@ -276,7 +293,7 @@ export const setMetaThumbnailsAndCountAction = createAsyncThunk(
 
 export const generatePermaLinkForPostsAction = createAsyncThunk(
     'adminPanelPosts/generatePermaLinkForPostsAction',
-    async (type: string|null, thunkAPI) => {
+    async (type: string | null, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         await dashboardAPIRequestGeneratePermaLinkForPosts(type)
             .then((res: AxiosResponse<any>) => {
@@ -297,7 +314,7 @@ export const getExportingPosts = createAsyncThunk(
     async (data, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         await dashboardAPIRequestExportPosts(data).then(res => {
-            const posts = res.data.exportedData.map((post:any) => {
+            const posts = res.data.exportedData.map((post: any) => {
                 post.mainThumbnail = post.mainThumbnail ? post.mainThumbnail.includes('http') ? post.mainThumbnail : process.env.NEXT_PUBLIC_PRODUCTION_URL + post.mainThumbnail : '';
                 //@ts-ignore
                 !data.ID ? delete post._id : null
@@ -335,15 +352,15 @@ export const bulkActionMetaAction = createAsyncThunk(
         await dashboardAPIRequestBulkActionOnMetas(type, status, ids)
             .then(res => {
 
-        }).catch(err => {
+            }).catch(err => {
 
-        }).finally(() => thunkAPI.dispatch(loading(false)))
+            }).finally(() => thunkAPI.dispatch(loading(false)))
     })
 
 export const getYoutubeDataScrapperAction = createAsyncThunk(
     'adminPanelPosts/getYoutubeDataScrapperAction',
     async (url: string, thunkAPI) => {
-        const durationToString = (duration :any) => {
+        const durationToString = (duration: any) => {
             const hours = duration.hours === 0 ? '' :
                 duration.hours < 10 ? '0' + duration.hours.toString() + ':' :
                     duration.hours.toString() + ':'
@@ -417,6 +434,9 @@ export const postsSlice = createSlice({
                 }
             }
         },
+        editPostSourceAction: (state, action: PayloadAction<any>) => {
+            state.post.source = action.payload
+        },
         editMetaAction: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
@@ -456,6 +476,8 @@ export const postsSlice = createSlice({
                     ...action.payload
                 }
             };
+        }).addCase(getSearchAndFindARelatedPostUrlAction.fulfilled, (state, action: PayloadAction<any>) => {
+            state.relatedPosts = action.payload;
         })
     }
 })
@@ -465,7 +487,8 @@ export const {
     editPostAction,
     editMetaAction,
     defineNewPost,
-    changeActiveEditingLanguage
+    changeActiveEditingLanguage,
+    editPostSourceAction
 } = postsSlice.actions
 
 export const postsReducer = (state: RootState) => state?.posts || null

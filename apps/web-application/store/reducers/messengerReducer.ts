@@ -121,7 +121,7 @@ export const {
     // newMessageInActiveConversation,
     // setDraftMessageData,
 } = messengerSlice.actions
-
+//@ts-ignore
 export const settingsReducer = (state: RootState) => state?.messenger || null
 
 //@ts-ignore

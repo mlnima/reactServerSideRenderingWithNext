@@ -16,9 +16,10 @@ interface IProps {
     isSidebar?: boolean,
     locale: string,
     posts?: Post[],
+    previewMode?: boolean
 }
 
-const PostsCardsRenderer: FC<IProps> = ({posts, locale, isSidebar}) => {
+const PostsCardsRenderer: FC<IProps> = ({posts, locale, isSidebar,previewMode}) => {
 
 
     return (
@@ -30,9 +31,10 @@ const PostsCardsRenderer: FC<IProps> = ({posts, locale, isSidebar}) => {
                 // console.log('defaultLocale=> ',defaultLocale)
                 const imagesAllowedDomainsForNextImage = process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES?.split(' ') || []
 
+                const previewModeQuery = previewMode && post?.status !== 'published'? '?preview=true' : ''
                 const postUrl = locale === defaultLocale ?
-                    `/post/${post?.postType}/${post._id}` :
-                    `/${locale}${`/post/${post?.postType}/${post._id}`}`;
+                    `/post/${post?.postType}/${post._id}${previewModeQuery}` :
+                    `/${locale}${`/post/${post?.postType}/${post._id}`}${previewModeQuery}`;
 
                 const isNextIImageAllowed = post.mainThumbnail ?
                     imagesAllowedDomainsForNextImage?.some(domain => post.mainThumbnail?.includes(domain)) :

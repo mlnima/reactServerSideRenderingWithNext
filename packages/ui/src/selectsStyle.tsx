@@ -1,7 +1,7 @@
 import { css } from 'styled-components';
 
 const selects = css`
-  .custom-select {
+  .primarySelect {
     display: inline-block;
     width: 50%;
     height: 2rem;

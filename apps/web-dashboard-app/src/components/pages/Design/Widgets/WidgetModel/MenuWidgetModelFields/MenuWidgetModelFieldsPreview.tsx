@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react';
+// @ts-nocheck
+import React, {FC, useEffect, useState} from 'react';
 import MenuWidgetEditForm from "./MenuWidgetEditForm";
 import EditSubMenuForm from "./subMenuComponenets/EditSubMenuForm";
 import styled from "styled-components";
@@ -46,7 +47,16 @@ const MenuWidgetModelFieldsPreviewStyledDiv = styled.div`
     }
   }
 `
-const MenuWidgetModelFieldsPreview = props => {
+
+interface IProps{
+    data:any,
+    widgetData:any
+    activeEditingLanguage:string
+    setWidgetData:any
+    parentsOption:any
+}
+
+const MenuWidgetModelFieldsPreview:FC<IProps> = props => {
 
     const [state, setState] = useState({
         open: false,

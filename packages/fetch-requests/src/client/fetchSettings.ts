@@ -18,7 +18,7 @@ export const fetchSettings = async ({requireSettings, revalidate,tags}: IFetchSe
         );
         if (!response.ok) {
             const errorData = await response.text();
-            throw new Error(errorData);
+            // throw new Error(errorData);
         }
         return await response.json()
     } catch (error) {

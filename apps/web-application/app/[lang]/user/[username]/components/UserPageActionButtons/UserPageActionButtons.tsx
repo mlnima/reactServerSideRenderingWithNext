@@ -103,7 +103,7 @@ const UserPageActionButtons: FC<IProps> = (
                     {didRequesterFollowThisUser ?
                         <button className={'userPageActionButton btn btn-transparent'}
                                 onClick={() => setFollowingOptionsPop(true)}>
-                            {dictionary?.['Following'] || 'Following'}
+                            {dictionary?.['Follow'] || 'Follow'}
                             <FontAwesomeIcon icon={faChevronDown} style={{width: 10, height: 10}}/>
 
                         </button> :

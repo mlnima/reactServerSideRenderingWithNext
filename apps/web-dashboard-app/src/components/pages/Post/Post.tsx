@@ -106,7 +106,7 @@ const Index = () => {
                         <Link to={'/dashboard/post?new=1'} className={'btn btn-info'}>
                             New Post
                         </Link>
-                        <select className={'custom-select language-selector'} ref={languageElement}
+                        <select className={'primarySelect language-selector'} ref={languageElement}
                                 onChange={e => dispatch(changeActiveEditingLanguage(e.target.value as string))}>
                             <option value={'default'}>{process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'Default'}</option>
                             <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALES || ''}/>

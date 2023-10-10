@@ -25,7 +25,7 @@ const MetasType = () => {
     return (
         <Style className='post-type asset-page-asset-type-selector'>
             <p>Metas Type:</p>
-            <select className={'custom-select'} onChange={e => onFormatChangeHandler(e)} value={query?.postType}>
+            <select className={'primarySelect'} onChange={e => onFormatChangeHandler(e)} value={query?.postType}>
                 <option value='categories' >Categories</option>
                 <option value='tags'>Tags</option>
                 <option value='actors'>Actors</option>

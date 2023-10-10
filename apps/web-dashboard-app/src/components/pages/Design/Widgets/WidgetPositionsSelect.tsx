@@ -16,7 +16,7 @@ const PositionSelectorStyledDiv = styled.div`
       display: flex;
       align-items: center;
       justify-content: space-between;
-     
+
 
       border-radius: 3px;
       padding: 1px;
@@ -65,7 +65,7 @@ const PositionSelector: FC<PositionSelectorPropTypes> = ({
                                                              availablePositions
                                                          }) => {
 
-    const renderCheckBoxes = availablePositions.map(position => {
+    const renderCheckBoxes = availablePositions?.sort((a, b) => a.localeCompare(b))?.map(position => {
         return (
             <div className={`btn ${filters.includes(position) ? 'btn-primary' : 'btn-dark'}`}
                  key={position}

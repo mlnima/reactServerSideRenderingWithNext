@@ -15,6 +15,7 @@ import {ChatroomMessage} from "typescript-types/dist/src/Chatroom/ChatroomMessag
 import LoggedInRequirePageMessage from "@components/LoggedInRequireMessage/LoggedInRequirePageMessage";
 
 interface IProps {
+    locale: string,
     pageData: any,
     dictionary: {
         [key: string]: string
@@ -23,7 +24,7 @@ interface IProps {
 
 
 
-const ChatroomPageContent: FC<IProps> = ({dictionary, pageData}) => {
+const ChatroomPageContent: FC<IProps> = ({dictionary, pageData,locale}) => {
 
     const [preference, setPreference] = useState<IPreference>({
         autoScroll: true,
@@ -206,6 +207,7 @@ const ChatroomPageContent: FC<IProps> = ({dictionary, pageData}) => {
         <div className={`chatroomPageContent chatroomPage${preference.isMaximized ? 'Maximized' : ''}`}>
             <ChatroomTopbar
                 chatrooms={pageData?.chatrooms}
+                locale={locale}
                 chatroomId={pageData?.chatroom?._id}
                 preference={preference}
                 updatePreference={updatePreference}

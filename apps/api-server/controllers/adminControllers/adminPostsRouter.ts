@@ -28,11 +28,13 @@ import adminGetPosts from './adminPostsControllers/adminGetPosts';
 import adminGeneratePermaLinkForPosts from './adminPostsControllers/adminGeneratePermaLinkForPosts';
 import postDataScrappers from "./adminPostsControllers/postDataScrappers/postDataScrappers";
 import syncDuplicateMetas from "./adminPostsControllers/syncDuplicateMetas";
+import findAnotherSimilarSourceLink from "./adminPostsControllers/postDataScrappers/findAnotherSimilarSourceLink";
 
 const router = express.Router();
 
 router.post('/createNewPost',adminAuthMiddleware,adminCreateNewPost)
 router.post('/postDataScrappers',adminAuthMiddleware,postDataScrappers)
+router.get('/findAnotherSimilarSourceLink',adminAuthMiddleware,findAnotherSimilarSourceLink)
 // router.post('/adminImportPosts',adminAuthMiddleware,adminImportPosts)
 router.post('/updatePost',adminAuthMiddleware,adminUpdatePost)
 router.post('/deletePost',adminAuthMiddleware,adminDeletePost)

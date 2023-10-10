@@ -18,4 +18,5 @@ const VideoTypeFields: FC<VideoTypeFieldsPropTypes> = ({onChangeHandler,editingP
         </>
     )
 };
+
 export default VideoTypeFields

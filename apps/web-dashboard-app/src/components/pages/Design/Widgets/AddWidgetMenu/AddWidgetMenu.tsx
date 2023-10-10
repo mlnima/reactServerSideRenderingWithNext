@@ -94,7 +94,7 @@ const AddWidgetMenu: FC = () => {
         <AddWidgetMenuStyledDiv className='add-export-widgets'>
 
             <form className={'add-new-widget-form'} onSubmit={e => onAddNewWidget(e)}>
-                <select name={'type'} className={'custom-select'} value={state.type} onChange={(e => onChangeHandler(e))}>
+                <select name={'type'} className={'primarySelect'} value={state.type} onChange={(e => onChangeHandler(e))}>
                     {widgetsTypes.map((type: string, index: number) => {
                         return (
                             <option key={index} value={type}>
@@ -103,7 +103,7 @@ const AddWidgetMenu: FC = () => {
                         )
                     })}
                 </select>
-                <select name={'position'} className={'custom-select'} value={state.position} onChange={(e => onChangeHandler(e))}>
+                <select name={'position'} className={'primarySelect'} value={state.position} onChange={(e => onChangeHandler(e))}>
                     {
                         widgetsStaticPositions.map((position) => {
                             return (

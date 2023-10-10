@@ -16,7 +16,10 @@
 
 .topbar-widget-area, .navigation-widget-area {
   background-color: var(--secondary-background-color, #181818);
-  height: 3.5rem;
+  min-height: 3.5rem;
+  .innerContent{
+   flex-wrap: wrap;
+  }
 }
 
 

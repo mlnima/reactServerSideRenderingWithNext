@@ -47,7 +47,7 @@ const RatingButtons: FC<IProps> = ({rating, likes, disLikes, views, dictionary, 
             <span className='like-disLike-count-items rating-item views'
                   title={dictionary?.['Views'] || 'Views'}>
                          <FontAwesomeIcon className={'rate-logo view'}
-                                          color={'var(--secondary-text-color,#ccc)'}
+                                          color={'var(--secondary-text-color,#b3b3b3)'}
                                           icon={faEye} style={{width: 24, height: 24}}/>
                         <p className='rating-item-value'>{shortNumber(views)} </p>
                     </span>
@@ -72,7 +72,7 @@ const RatingButtons: FC<IProps> = ({rating, likes, disLikes, views, dictionary, 
                         aria-label="dislike"
                         title={dictionary?.['Dislike'] || 'Dislike'}>
                     <FontAwesomeIcon className={'rate-logo thumbs-down'}
-                                     color={isRated ? '#666' : 'var(--secondary-text-color,#ccc)'}
+                                     color={isRated ? '#666' : 'var(--secondary-text-color,#b3b3b3)'}
                                      icon={faThumbsDown} style={{width: 24, height: 24}}/>
                     <p className='rating-item-value'>{disLikes}</p>
                 </button>

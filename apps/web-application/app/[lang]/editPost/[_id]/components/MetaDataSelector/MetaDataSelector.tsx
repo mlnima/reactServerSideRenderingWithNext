@@ -95,7 +95,7 @@ const MetaDataSelector: FC<ComponentPropTypes> =
                     styles={{
                         control: (baseStyles, state) => ({
                             ...baseStyles,
-                            color: 'var(--secondary-text-color,#fff)',
+                            color: 'var(--secondary-text-color,#b3b3b3)',
                             backgroundColor: 'var(--secondary-background-color,#000)',
                             border: 'var(--default-border)',
                             borderRadius: '.375rem'

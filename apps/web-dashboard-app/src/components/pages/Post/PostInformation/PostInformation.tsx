@@ -55,10 +55,12 @@ interface PropTypes {
 const PostInformation: FC<PropTypes> = (props) => {
     const post = useSelector(({posts}: DashboardStore) => posts.post);
 
+
+
     return (
         <StyledDiv className='post-information  product-information admin-widget'>
             <TextInput name='source' rendering={true} onChangeHandler={props.onChangeHandler}/>
-            {!!post?.source && <ScraperOptions sourceURL={post?.source}/>}
+            {!!post?.source && <ScraperOptions sourceURL={post?.source} postId={post?._id}  />}
             <TextInput name='mainThumbnail' rendering={true} onChangeHandler={props.onChangeHandler}/>
             <ImagePreview/>
             <Quality rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler}/>

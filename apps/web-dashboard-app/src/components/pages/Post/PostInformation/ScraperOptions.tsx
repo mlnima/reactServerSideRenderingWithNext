@@ -1,8 +1,16 @@
-import React, {FC, useEffect, useState} from "react";
+import React, {FC, useEffect, useRef, useState} from "react";
 import styled from "styled-components";
 import {inputValueSimplifier} from "custom-util";
 import {useAppDispatch} from "@store/hooks";
-import {getPostScrapedDataAction} from "@store/reducers/postsReducer";
+import {
+    editPostSourceAction,
+    getPostScrapedDataAction,
+    getSearchAndFindARelatedPostUrlAction
+} from "@store/reducers/postsReducer";
+import {useSelector} from "react-redux";
+import {DashboardStore} from "typescript-types/dist/src/dashboardStoreTypes/DashboardStore";
+import RelatedPostPreview
+    from "@components/pages/Post/PostInformation/RelatedPostScrapper/RelatedPostPreview/RelatedPostPreview";
 
 const Style = styled.div`
   .filed-checkboxes {
@@ -13,7 +21,7 @@ const Style = styled.div`
     .filed-checkbox {
       display: flex;
       align-items: center;
-      background-color: var(--primary-background-color,#000);
+      background-color: var(--primary-background-color, #000);
       padding: 4px;
       box-sizing: border-box;
       border-radius: 5px;
@@ -26,18 +34,54 @@ const Style = styled.div`
     box-sizing: border-box;
     border-radius: 5px;
     gap: 5px;
+
+    .actionSection {
+      margin-left: 20px;
+      margin-right: 20px;
+      gap: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      max-width: 600px;
+    }
   }
 
+  .relatedPostWrapper {
+    margin: 12px auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    .relatedPostsContent {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .loadMoreRelatedPosts {
+
+    }
+
+  }
 `;
 
 interface PropTypes {
-    sourceURL:string
+    sourceURL: string
+    postId?: string
 }
 
 
-const ScraperOptions: FC<PropTypes> = ({sourceURL}) => {
+const ScraperOptions: FC<PropTypes> = ({sourceURL, postId}) => {
+    const findARelatedPostUrlSelectRef = useRef<HTMLSelectElement>(null)
+    const findARelatedPostUrlInputRef = useRef<HTMLInputElement>(null)
+    const [relatedPostsPage, setRelatedPostsPage] = useState<number>(1)
+    const post = useSelector(({posts}) => posts.post);
     const dispatch = useAppDispatch()
     const [fields, setFields] = useState<any>([])
+    const relatedPosts = useSelector(({posts}) => posts.relatedPosts);
+
     const availableFields = [
         'actors',
         'categories',
@@ -69,9 +113,22 @@ const ScraperOptions: FC<PropTypes> = ({sourceURL}) => {
         }
     }, []);
 
-    // useEffect(() => {
-    //     console.log(fields)
-    // }, [fields]);
+    const onGetRelatedPostsHandler = (more?: boolean) => {
+        const nextPage = relatedPostsPage + 1
+        setRelatedPostsPage(() => nextPage)
+
+        dispatch(
+            getSearchAndFindARelatedPostUrlAction(
+                {
+                    postId,
+                    page: more ? nextPage : relatedPostsPage,
+                    relatedBy: findARelatedPostUrlSelectRef?.current?.value ||
+                        findARelatedPostUrlInputRef?.current?.value ||
+                        ''
+                }
+            )
+        )
+    }
 
     return (
         <Style>
@@ -95,20 +152,62 @@ const ScraperOptions: FC<PropTypes> = ({sourceURL}) => {
 
                 <button onClick={() => setFields(availableFields)} className={'btn btn-info'}>all</button>
                 <button onClick={() => setFields([])} className={'btn btn-info'}>clear</button>
-                <button onClick={() =>dispatch(getPostScrapedDataAction({url:sourceURL}))} className={'btn btn-primary'}>
+                <button onClick={() => dispatch(getPostScrapedDataAction({url: sourceURL}))}
+                        className={'btn btn-primary'}>
                     Scrap All
                 </button>
                 <button className={'btn btn-primary'}
-                        onClick={()=>{
-                            dispatch(getPostScrapedDataAction({
-                                url:sourceURL,
-                                fields
-                            }))}
-                        }>
+                        onClick={()=>onGetRelatedPostsHandler()}>
                     scrap limited
                 </button>
+                <div className={'actionSection'}>
+
+                    <button onClick={() => dispatch(
+                        getSearchAndFindARelatedPostUrlAction(
+                            {
+                                postId,
+                                page: relatedPostsPage,
+                                relatedBy: findARelatedPostUrlSelectRef?.current?.value ||
+                                    findARelatedPostUrlInputRef?.current?.value ||
+                                    ''
+                            }
+                        )
+                    )}
+                            className={'btn btn-primary'}>
+                        Find Similar
+                    </button>
+                    <span>By</span>
+                    <select className={'primarySelect'} ref={findARelatedPostUrlSelectRef}>
+                        <option value={''}>select</option>
+                        {[...(post?.actors || []), ...(post?.categories || []), ...(post?.tags || [])].map(item => {
+                            return (
+                                <option value={item?.name}>{item?.name}</option>
+                            )
+                        })}
+                    </select>
+                    <span>Or</span>
+                    <input className={'primaryInput'} ref={findARelatedPostUrlInputRef}/>
+                </div>
+
             </div>
 
+            {relatedPosts.length > 0 &&
+
+                <div className={'relatedPostWrapper'}>
+                    <div className={'relatedPostsContent'}>
+                        {relatedPosts.map((relatedPost: any) => {
+
+                            return <RelatedPostPreview cardData={relatedPost}/>
+                        })
+                        }
+                    </div>
+
+                    <button className={'btn btn-primary loadMoreRelatedPosts'}
+                            onClick={()=>onGetRelatedPostsHandler(true)}>
+                        More
+                    </button>
+                </div>
+            }
 
 
         </Style>

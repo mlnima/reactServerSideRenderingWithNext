@@ -9,13 +9,13 @@ import {faXmark} from "@fortawesome/free-solid-svg-icons/faXmark";
 
 interface MenuWidgetPropTypes {
     menuItems: MenuItem[],
-    locale:string,
+    locale: string,
     dictionary: {
         [key: string]: string
     }
 }
 
-const MenuWidget: FC<MenuWidgetPropTypes> = ({menuItems, dictionary,locale}) => {
+const MenuWidget: FC<MenuWidgetPropTypes> = ({menuItems, dictionary, locale}) => {
 
     const [open, setOpen] = useState(false);
 
@@ -23,16 +23,19 @@ const MenuWidget: FC<MenuWidgetPropTypes> = ({menuItems, dictionary,locale}) => 
         ...menuItems?.filter((menuItem: MenuItem) => !menuItem.parent)
             ?.sort((a, b) => a.itemIndex > b.itemIndex ? 1 : -1)]
         .map(menuItem => {
-            //menuItem.target
+
             const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
 
             const targetUrl = menuItem.target.includes('http') ? menuItem.target :
-                            locale === defaultLocale ? menuItem.target : `/${locale}${menuItem.target}`;
+                locale === defaultLocale ? menuItem.target : `/${locale}${menuItem.target}`;
 
             return (
                 <MenuWidgetItem menuItem={menuItem}
+                                title={menuItem?.translations?.[locale]?.name ||
+                                    dictionary?.[menuItem.name] ||
+                                    menuItem.name || ''}
+                                // title={'ddd'}
                                 targetUrl={targetUrl}
-                                dictionary={dictionary}
                                 key={menuItem.itemIndex}
                                 setOpen={setOpen}
 

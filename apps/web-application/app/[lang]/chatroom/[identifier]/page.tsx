@@ -1,6 +1,6 @@
 import {fetchChatroomData} from "fetch-requests";
 import {getDictionary} from "../../../../get-dictionary";
-import {i18n} from '../../../../i18n-config'
+import {i18n} from '@i18nConfig'
 import './page.styles.scss';
 import ChatroomPageContent from "./components/ChatroomPageContent/ChatroomPageContent";
 import chatroomMetaGenerator from "./components/chatroomMetaGenerator/chatroomMetaGenerator";
@@ -20,9 +20,9 @@ const chatroomPage = async ({params: {lang, identifier}}: IProps) => {
     const chatroomsData = await fetchChatroomData({identifier})
 
     return (
-        <div id={'content'} className={`page-no-sidebar`}>
+        <div id={'content'} className={`page-no-sidebar`} dir={'ltr'}>
             <main id={'primary'} className={'main chatroom'}>
-                <ChatroomPageContent pageData={chatroomsData}  dictionary={dictionary}/>
+                <ChatroomPageContent pageData={chatroomsData}  dictionary={dictionary} locale={locale}/>
             </main>
         </div>
     )

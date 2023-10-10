@@ -44,7 +44,7 @@ const NewPostButtonWidgetFields: FC<PropTypes> =
             </div>
             <div className='selectInputFieldForWidget widgetSection'>
                 <p>Post Type:</p>
-                <select className={'custom-select'}
+                <select className={'primarySelect'}
                         name='newPostButtonPostType'
                         value={uniqueData.newPostButtonPostType}
                         onChange={e => onUniqueDataChangeHandler(e)}>

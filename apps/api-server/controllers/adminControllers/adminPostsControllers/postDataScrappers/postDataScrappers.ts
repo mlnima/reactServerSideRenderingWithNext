@@ -1,4 +1,4 @@
-import xHamster from "./xHamster";
+import xHScrapper from "./xHScrapper";
 
 const postDataScrappers = async (req, res) => {
     try {
@@ -6,7 +6,7 @@ const postDataScrappers = async (req, res) => {
 
         if (urlToScrap.includes('xhamster')) {
 
-            await xHamster(urlToScrap).then(urlData => {
+            await xHScrapper(urlToScrap).then(urlData => {
                 res.json({urlData})
             })
 

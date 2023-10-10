@@ -57,7 +57,7 @@ const AssetBulkAction: FC<AssetBulkActionPropTypes> = ({selectedItems, setSelect
 
     return (
         <AssetBulkActionStyledDiv>
-            <select className={'custom-select'}
+            <select className={'primarySelect'}
                     placeholder='Bulk Actions'
                     value={status}
                     onChange={(e) => setStatus(e.target.value)}>

@@ -7,21 +7,19 @@ interface MenuWidgetItemPropTypes {
     menuItem: MenuItem,
     setOpen: any,
     targetUrl: string,
-    dictionary: {
-        [key: string]: string
-    }
+    title: string,
 }
 
-const MenuWidgetItem: FC<MenuWidgetItemPropTypes> = ({menuItem, setOpen, dictionary,targetUrl}) => {
+const MenuWidgetItem: FC<MenuWidgetItemPropTypes> = ({menuItem, setOpen, targetUrl, title}) => {
 
     return (
         <div className={'menuItem'}>
             <Link href={targetUrl}
                   className={`menu-item-link`}
                   target={menuItem.target.includes('http') ? '_blank' : '_self'}
-                  title={dictionary?.[menuItem.name] || menuItem.name || ''}
+                  title={title}
                   onClick={() => setOpen(false)}>
-                {dictionary?.[menuItem.name] || menuItem.name || ''}
+                {title}
             </Link>
         </div>
     )

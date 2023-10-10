@@ -114,7 +114,7 @@ const DefaultPageSettings: FC<PropTypes> = ({}) => {
     return (
         <Style className={'form-default'} onSubmit={onSaveHandler}>
             <h1>{pageName}:</h1>
-            <select name='activeEditingLanguage' className={'custom-select active-editing-language'}
+            <select name='activeEditingLanguage' className={'primarySelect active-editing-language'}
                     onChange={e => setLanguage(e.target.value)}>
                 <option value='default'>{process.env.NEXT_PUBLIC_DEFAULT_LOCALE ?? 'default'}</option>
                 <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALES || ''}/>
@@ -125,7 +125,7 @@ const DefaultPageSettings: FC<PropTypes> = ({}) => {
                 </button>
             </div>
             {/*//@ts-ignore*/}
-            <select name="sidebar" className={'custom-select'} onChange={onChangeHandler}
+            <select name="sidebar" className={'primarySelect'} onChange={onChangeHandler}
                     //@ts-ignore
                     value={fieldsData?.sidebar || 'no'}>
                 <option value={'both'}>Both</option>

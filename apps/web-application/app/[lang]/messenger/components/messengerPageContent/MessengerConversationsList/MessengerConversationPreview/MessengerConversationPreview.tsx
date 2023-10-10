@@ -2,7 +2,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleUser} from "@fortawesome/free-solid-svg-icons/faCircleUser";
-import { User} from "typescript-types";
+import {User} from "typescript-types";
 import {IMessengerConversation} from "typescript-types";
 import {formatDistance} from 'date-fns'
 import {faCheck} from "@fortawesome/free-solid-svg-icons/faCheck";
@@ -16,7 +16,7 @@ interface IProps {
 
 const MessengerConversationPreview: FC<IProps> = ({conversationData}) => {
     const {push} = useRouter()
-    const {userData} = useAppSelector(({user} ) => user)
+    const {userData} = useAppSelector(({user}) => user)
     //@ts-ignore
     const [partnerData, setPartnerData] = useState<User>({})
 
@@ -30,7 +30,7 @@ const MessengerConversationPreview: FC<IProps> = ({conversationData}) => {
     return (
         <div className={'messengerConversationPreview'}>
             <div className={'messenger-conversation-preview'}
-                 onClick={()=> push(`/messenger?_id=${conversationData._id}`)}>
+                 onClick={() => push(`/messenger?_id=${conversationData._id}`)}>
 
                 <div className={'profile-image'}>
                     {partnerData?.profileImage?.filePath ?
@@ -58,7 +58,9 @@ const MessengerConversationPreview: FC<IProps> = ({conversationData}) => {
                         <span>
                               <FontAwesomeIcon icon={faCheck}
                                                style={{width: 20, height: 20}}
-                                               color={conversationData?.messages?.[0]?.isRead ? '#3376d0' : 'var(--secondary-text-color)'}
+                                               color={conversationData?.messages?.[0]?.isRead ?
+                                                   '#3376d0' :
+                                                   'var(--secondary-text-color,#b3b3b3)'}
                               />
                         </span>
                         <p className={'content'}>

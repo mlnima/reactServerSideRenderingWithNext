@@ -5,5 +5,9 @@ export interface MenuItem {
     itemId: string,
     itemIndex: number,
     parent?: string
-    translations?: {}
+    translations?: {
+        [key: string]: {
+            name: string
+        }
+    }
 }

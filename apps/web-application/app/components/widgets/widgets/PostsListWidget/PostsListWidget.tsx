@@ -5,7 +5,6 @@ import './PostsListWidget.styles.scss'
 // import PromotionPostListCard from "@components/includes/cards/postsCards/PromotionPostListCard";
 
 interface PropTypes {
-    viewType?: string,
     posts?: Post[],
     uniqueData?: {
         speed: number;

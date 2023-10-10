@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+// const dns = require("dns");
+// dns.setDefaultResultOrder("ipv4first")
 const rewrites = require('./nextConfigs/rewrites')
 const {postTypes} = require("data-structures");
 
@@ -36,21 +38,21 @@ const nextConfig = {
     },
     experimental: {
         serverActions: true,
-        turbo: {
-            rules: {
-                // Option format
-                '*.md': [
-                    {
-                        loader: '@mdx-js/loader',
-                        options: {
-                            format: 'md',
-                        },
-                    },
-                ],
-                // Option-less format
-                '*.mdx': ['@mdx-js/loader'],
-            },
-        },
+        // turbo: {
+        //     rules: {
+        //         // Option format
+        //         '*.md': [
+        //             {
+        //                 loader: '@mdx-js/loader',
+        //                 options: {
+        //                     format: 'md',
+        //                 },
+        //             },
+        //         ],
+        //         // Option-less format
+        //         '*.mdx': ['@mdx-js/loader'],
+        //     },
+        // },
     },
     rewrites,
     async redirects() {
@@ -140,7 +142,7 @@ const nextConfig = {
     },
     images: {
         formats: ['image/avif', 'image/webp'],
-        remotePatterns: allowedDomainsForNextImageConfig
+        remotePatterns: allowedDomainsForNextImageConfig,
     },
 
 }

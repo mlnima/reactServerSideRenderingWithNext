@@ -24,7 +24,7 @@ const MultipleLinkWidgetModelFieldsStyledForm = styled.form`
       color: #ccc;
     }
 
-    .custom-select {
+    .primarySelect {
       width: 95%;
       background-color: #333;
       color: #ccc;
@@ -130,7 +130,7 @@ const MultipleLinkWidgetModelFields = props => {
                 {/*</div>*/}
                 {/*<div className='menu-form-field'>*/}
                 {/*    <p>Link Type :</p>*/}
-                {/*    <select className={'custom-select'} name='linkToType' value={editingData.linkToType} onChange={e => onChangeHandler(e)}>*/}
+                {/*    <select className={'primarySelect'} name='linkToType' value={editingData.linkToType} onChange={e => onChangeHandler(e)}>*/}
                 {/*        <option>select</option>*/}
                 {/*        <option value='internal'>Internal</option>*/}
                 {/*        <option value='external'>External</option>*/}
@@ -138,7 +138,7 @@ const MultipleLinkWidgetModelFields = props => {
                 {/*</div>*/}
                 <div className='menu-form-field'>
                     <p>rel :</p>
-                    <select className={'custom-select'} name='linkRel' value={editingData.linkRel} onChange={e => onChangeHandler(e)}>
+                    <select className={'primarySelect'} name='linkRel' value={editingData.linkRel} onChange={e => onChangeHandler(e)}>
                         <option value='' >Select</option>
                         <option value='alternate'>alternate</option>
                         <option value='author'>author</option>
@@ -170,7 +170,7 @@ const MultipleLinkWidgetModelFields = props => {
 
                 <div className='menu-form-field'>
                     <p>Link To Window Type :</p>
-                    <select className={'custom-select'} name='linkToWindowType' value={editingData.linkToWindowType} onChange={e => onChangeHandler(e)}>
+                    <select className={'primarySelect'} name='linkToWindowType' value={editingData.linkToWindowType} onChange={e => onChangeHandler(e)}>
                         <option>select</option>
                         <option value='_blank'>Open New Window</option>
                         <option value='_self'>Redirect To Link In The Same Window</option>

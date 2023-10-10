@@ -12,6 +12,8 @@ import PostsCardsRenderer from "@components/cards/CardsRenderer/PostsCardsRender
 import {Post} from "typescript-types";
 import {loading} from "@store/reducers/globalStateReducer";
 import ProfileImageWithEditing from "../PrfileImageWithEditing/ProfileImageWithEditing";
+import {postStatuses} from "data-structures";
+import {capitalizeFirstLetter} from "custom-util";
 
 interface IProps {
     username: string,
@@ -22,7 +24,9 @@ interface IProps {
 }
 
 interface IGetUserPostsData {
+    override?: boolean,
     authorId: string,
+    status: string,
     skip: number
 }
 
@@ -32,8 +36,12 @@ const userPageContent: FC<IProps> = ({dictionary, username, locale}) => {
     const dispatch = useAppDispatch();
     const {userData, loggedIn} = useAppSelector(({user}) => user);
     const [isUserOwnProfile, setIsUserOwnProfile] = useState(false)
+    const [noMorePostToFetch, setNMoMorePostToFetch] = useState<boolean>(false);
+    const [postStatusToFetch, setPostStatusToFetch] = useState<string>('published');
     const [userPagePosts, setUserPagePosts] = useState<Post[] | []>([])
     const isFetchingRef = useRef(false); // add this line
+    const {initialSettings} = useAppSelector(({settings}) => settings);
+
 
     const [userPageData, setUserPageData] = useState({
         followersCount: 0,
@@ -55,15 +63,35 @@ const userPageContent: FC<IProps> = ({dictionary, username, locale}) => {
         }
     }, [loggedIn]);
 
+    // useEffect(() => {
+    //
+    //     if (userPageData?._id) {
+    //         console.log('postStatusToFetch=> ', postStatusToFetch)
+    //         // await getUserPostsData({
+    //         //         status: postStatusToFetch || 'published',
+    //         //         authorId: userPageData?._id,
+    //         //         skip: userPagePosts.length
+    //         //     }
+    //         // )
+    //     }
+    //
+    //
+    // }, [postStatusToFetch, userPageData?._id]);
+
     useEffect(() => {
-        setIsUserOwnProfile(userData?._id === userPageData?._id)
+        if (!!userData?._id && !!userPageData?._id) {
+            setIsUserOwnProfile(userData?._id === userPageData?._id)
+        }
+
         if (!!userPageData?._id) {
             getUserPostsData({
+                override: true,
+                status: postStatusToFetch,
                 authorId: userPageData?._id,
-                skip: userPagePosts?.length
+                skip: 0
             })
         }
-    }, [userPageData?._id]);
+    }, [userPageData?._id, postStatusToFetch]);
 
     useEffect(() => {
         const handleScroll = async () => {
@@ -75,12 +103,15 @@ const userPageContent: FC<IProps> = ({dictionary, username, locale}) => {
             if (scrolled + viewportHeight >= fullHeight - 20) {
                 if (userPageData?._id) {
                     isFetchingRef.current = true;
-                    await getUserPostsData({
-                        authorId: userPageData._id,
-                        skip: userPagePosts.length
-                    });
-                    isFetchingRef.current = false;
-                    window.scrollTo(0, scrolled - 50);
+                    if (!noMorePostToFetch) {
+                        await getUserPostsData({
+                            status: postStatusToFetch,
+                            authorId: userPageData._id,
+                            skip: userPagePosts.length
+                        });
+                        isFetchingRef.current = false;
+                        window.scrollTo(0, scrolled - 20);
+                    }
                 }
             }
         };
@@ -90,7 +121,8 @@ const userPageContent: FC<IProps> = ({dictionary, username, locale}) => {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, [userPageData?._id, userPagePosts?.length]);
+    }, [userPageData?._id, userPagePosts?.length, noMorePostToFetch]);
+
 
     const getUserPageData = async () => {
         try {
@@ -101,36 +133,58 @@ const userPageContent: FC<IProps> = ({dictionary, username, locale}) => {
 
             if (responseData._id) {
                 await getUserPostsData({
+                        status: postStatusToFetch || 'published',
                         authorId: userPageData?._id,
                         skip: userPagePosts.length
                     }
                 )
             }
-
             setUserPageData(responseData)
         } catch (error) {
 
         }
     };
 
-    const getUserPostsData = async ({authorId, skip}: IGetUserPostsData) => {
-
+    const getUserPostsData = async ({
+                                        authorId,
+                                        skip = 0,
+                                        status = 'published',
+                                        override = false
+                                    }: IGetUserPostsData) => {
         try {
             if (authorId) {
                 dispatch(loading(true))
                 const postData = await fetchUserPagePosts({
+                    status,
                     authorId,
-                    skip
+                    skip,
+                    revalidate: 20
                 }).finally(() => {
                     dispatch(loading(false))
 
                 })
 
+                if (
+                    //@ts-ignore
+                    postData?.posts?.length < (initialSettings?.postCardsSettings?.numberOfCardsPerPage || 20) &&
+                    !noMorePostToFetch
+                ) {
+                    setNMoMorePostToFetch(true)
+
+                }
+
                 if (postData?.posts?.length > 0) {
-                    setUserPagePosts((prevState) => ([
-                        ...prevState,
-                        ...(postData?.posts || [])
-                    ]))
+                    const newData = [...(postData?.posts || [])]
+                    if (override) {
+                        setUserPagePosts(newData)
+                    } else {
+                        setUserPagePosts((prevState) => ([
+                            ...prevState,
+                            ...newData
+                        ]))
+                    }
+                } else {
+                    setUserPagePosts([])
                 }
             }
 
@@ -139,8 +193,12 @@ const userPageContent: FC<IProps> = ({dictionary, username, locale}) => {
         }
     }
 
+    // useEffect(() => {
+    //     console.log('userPagePosts=> ',userPagePosts)
+    // }, [userPagePosts]);
 
     if (!loggedIn) return <LoggedInRequirePageMessage dictionary={dictionary}/>
+
 
     return (
         <div className={'userPageContent'}>
@@ -168,23 +226,65 @@ const userPageContent: FC<IProps> = ({dictionary, username, locale}) => {
                             <span>{userPageData?.followersCount || 0} {dictionary?.['Followers'] || 'Followers'}</span>
                         </p>
                         <p>
-                            <span>{userPageData?.followingCount || 0} {dictionary?.['Following'] || 'Following'}</span>
+                            <span>{userPageData?.followingCount || 0} {dictionary?.['Followings'] || 'Followings'}</span>
                         </p>
                     </div>
                 </div>
             </div>
-            <div className="profile-posts">
-                {userPagePosts?.length > 0 ?
+            <div className="profilePosts">
+                {(isUserOwnProfile || userData.role === 'administrator') &&
+                    <div className={'profilePostsNavigation'}>
+                        {/*{postStatuses.filter(postStatus => postStatus !== 'trash' && postStatus !== 'draft').map(postStatus => {*/}
+                        {/*    return (*/}
+                        {/*        <button className={'btn btn-transparent'}*/}
+                        {/*                onClick={() => setPostStatusToFetch(postStatus)}>*/}
+                        {/*            {dictionary?.[capitalizeFirstLetter(postStatus)] || capitalizeFirstLetter(postStatus)}*/}
+                        {/*        </button>*/}
+                        {/*    )*/}
+                        {/*})}*/}
+
+                        <button className={'btn btn-transparent'}
+                                onClick={() => setPostStatusToFetch('published')}>
+                            {dictionary?.['Published'] || 'Published'}
+                        </button>
+                        <button className={'btn btn-transparent'}
+                                onClick={() => setPostStatusToFetch('pending')}>
+                            {dictionary?.['Pending'] || 'Pending'}
+                        </button>
+                        {userData.role === 'administrator' &&
+                            <>
+                            <button className={'btn btn-transparent'}
+                                    onClick={() => setPostStatusToFetch('draft')}>
+                                {dictionary?.['Draft'] || 'Draft'}
+                            </button>
+                            <button className={'btn btn-transparent'}
+                                    onClick={() => setPostStatusToFetch('trash')}>
+                                {dictionary?.['Trash'] || 'Trash'}
+                            </button>
+                            </>
+                        }
+
+
+                    </div>
+                }
+
+                {(userPagePosts?.length > 0) &&
                     <div className='postsContainer'>
-                        <PostsCardsRenderer locale={locale} posts={userPagePosts}/>
-                    </div> :
-                    <>
+                        <PostsCardsRenderer locale={locale}
+                                            previewMode={true}
+                                            posts={userPagePosts}/>
+                    </div>
+                }
+
+                {userPagePosts?.length === 0 &&
+                    <div className={'noPosts'}>
                         <div className={'profileNoPostsYet'}>
                             <FontAwesomeIcon icon={faCamera}/>
                         </div>
-                        <h2 className="profile-no-posts-title">No Post Yet</h2>
-
-                    </>
+                        <h2 className="profile-no-posts-title">
+                            {dictionary?.["Nothing Here"] || "Nothing Here"}
+                        </h2>
+                    </div>
                 }
 
             </div>
