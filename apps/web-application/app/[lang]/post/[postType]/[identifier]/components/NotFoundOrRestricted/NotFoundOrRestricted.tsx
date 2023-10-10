@@ -15,11 +15,7 @@ interface PropTypes {
     hasSidebar?: string,
     locale: string,
     post: Post,
-    relatedPosts: {
-        actorsRelatedPosts: {}[],
-        categoriesRelatedPosts: {}[],
-        tagsRelatedPosts: {}[]
-    }
+    relatedPosts: Post[],
 }
 
 const NotFoundOrRestricted: FC<PropTypes> = ({dictionary,widgets,relatedPosts,hasSidebar,locale,post}) => {

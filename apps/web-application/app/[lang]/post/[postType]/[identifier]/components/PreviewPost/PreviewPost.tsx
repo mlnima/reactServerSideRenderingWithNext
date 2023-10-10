@@ -1,7 +1,5 @@
 'use client';
-import {FC, useEffect} from "react";
-import SidebarWidgetAreaRenderer
-    from "@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer";
+import {FC} from "react";
 import {Post} from "typescript-types";
 import {Widget} from "typescript-types";
 import dynamic from "next/dynamic";
@@ -24,6 +22,9 @@ interface IProps {
     locale: string,
     sidebar: string,
     postType: string,
+    views:number,
+    likes:number,
+    disLikes:number,
     dictionary: {
         [key: string]: string
     },
@@ -32,14 +33,22 @@ interface IProps {
             [key: string]: Widget[]
         }
     }
-    relatedPosts: {
-        actorsRelatedPosts: {}[],
-        categoriesRelatedPosts: {}[],
-        tagsRelatedPosts: {}[]
-    }
+    relatedPosts: Post[],
 }
 
-const PreviewPost: FC<IProps> = ({post, locale, dictionary, relatedPosts, sidebar, widgetsData, postType}) => {
+const PreviewPost: FC<IProps> =
+    ({
+         post,
+         locale,
+         dictionary,
+         relatedPosts,
+         sidebar,
+         widgetsData,
+         postType,
+         views,
+         likes,
+         disLikes
+    }) => {
     const {userData} = useAppSelector(({user}) => user)
     const {loggedIn} = useAppSelector(({user}) => user)
 
@@ -53,6 +62,9 @@ const PreviewPost: FC<IProps> = ({post, locale, dictionary, relatedPosts, sideba
                     postType === 'video' ?
                         <VideoTypePostPage widgets={widgetsData.widgets?.['underPost']}
                                            post={post}
+                                           views={views}
+                                           likes={likes}
+                                           disLikes={disLikes}
                                            hasSidebar={sidebar}
                                            relatedPosts={relatedPosts}
                                            dictionary={dictionary}
@@ -60,18 +72,27 @@ const PreviewPost: FC<IProps> = ({post, locale, dictionary, relatedPosts, sideba
                         postType === 'article' ?
                             <ArticleTypePostPage widgets={widgetsData.widgets?.['underPost']}
                                                  post={post}
+                                                 views={views}
+                                                 likes={likes}
+                                                 disLikes={disLikes}
                                                  hasSidebar={sidebar}
                                                  relatedPosts={relatedPosts}
                                                  dictionary={dictionary} locale={locale}/> :
                             postType === 'promotion' ?
                                 <PromotionTypePostPage widgets={widgetsData.widgets?.['underPost']}
                                                        post={post}
+                                                       views={views}
+                                                       likes={likes}
+                                                       disLikes={disLikes}
                                                        hasSidebar={sidebar}
                                                        relatedPosts={relatedPosts}
                                                        dictionary={dictionary}
                                                        locale={locale}/> : postType === 'learn' ?
                                     <LearnTypePostPage widgets={widgetsData.widgets?.['underPost']}
                                                        post={post}
+                                                       views={views}
+                                                       likes={likes}
+                                                       disLikes={disLikes}
                                                        hasSidebar={sidebar}
                                                        relatedPosts={relatedPosts}
                                                        dictionary={dictionary} locale={locale}/> : null

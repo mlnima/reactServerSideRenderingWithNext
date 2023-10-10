@@ -1,5 +1,8 @@
+import { Response,Request } from "express";
+
 import {postSchema} from 'models';
 import {mongoIdValidator} from 'custom-server-util';
+import {Post} from "typescript-types";
 // import {arraySortRandom} from 'custom-util';
 // import {Meta} from 'typescript-types'
 
@@ -27,7 +30,7 @@ import {mongoIdValidator} from 'custom-server-util';
 //     {path: 'tags', select: {'name': 1, 'type': 1}}
 // ]
 
-const buildFindQuery = (req) => {
+export const buildFindQuery = (req:any) => {
     const hasId = req.query?._id && mongoIdValidator(req.query?._id);
     const decodeTitle = req.query?.title && decodeURIComponent(req.query?.title);
 
@@ -38,7 +41,7 @@ const buildFindQuery = (req) => {
 
 
 
-const findRelatedPosts = async (post) => {
+const findRelatedPosts = async (post:Post) => {
     try {
         const relatedByFields = ['actors', 'categories', 'tags'];
         return await postSchema.findRelatedPosts({post, relatedByFields, limit: 12});
@@ -49,12 +52,12 @@ const findRelatedPosts = async (post) => {
 }
 
 
-const getPost = async (req, res) => {
+export const getPost = async (req:Request, res:Response) => {
     try {
         const findQuery = buildFindQuery(req);
 
         if (findQuery) {
-            const post = await postSchema.findOne(findQuery, '-comments').populate([
+            const post = await postSchema.findOne(findQuery, '-comments -views -likes -disLikes').populate([
                 {
                     path: 'author',
                     select: ['username', 'profileImage', 'role'],
@@ -88,7 +91,49 @@ const getPost = async (req, res) => {
     }
 };
 
-export default getPost
+
+
+export const getPostViews = async (req:Request, res:Response) => {
+    try {
+        const findQuery = buildFindQuery(req);
+
+        const postData = await postSchema.findOne(findQuery).select('views').exec()
+
+        if (postData) {
+            res.status(200).json({
+                views: postData?.views,
+            });
+        } else {
+            res.status(404).json({message: 'not found'});
+        }
+    } catch (err) {
+        console.error(err, 'get post error');
+        res.status(500).json({message: 'Something went wrong please try again later'});
+    }
+};
+
+export const getPostRating = async (req:Request, res:Response) => {
+    console.log('findQuery=> ')
+
+
+    try {
+        const findQuery = buildFindQuery(req);
+
+        const postData = await postSchema.findOne(findQuery).select(['likes','disLikes']).exec()
+
+        if (postData) {
+            res.status(200).json({
+                likes: postData?.likes,
+                disLikes: postData?.disLikes,
+            });
+        } else {
+            res.status(404).json({message: 'not found'});
+        }
+    } catch (err) {
+        console.error(err, 'get post error');
+        res.status(500).json({message: 'Something went wrong please try again later'});
+    }
+};
 
 
 

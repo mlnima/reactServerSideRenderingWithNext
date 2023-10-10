@@ -13,5 +13,7 @@ export {
     fetchSearch,
     fetchUserPagePosts,
     fetchComments,
-    postNewComment
+    postNewComment,
+    fetchPostViews,
+    fetchPostRating
 } from './client/fetchPosts';

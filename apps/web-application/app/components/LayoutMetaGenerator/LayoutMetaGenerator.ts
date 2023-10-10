@@ -1,7 +1,7 @@
 //LayoutMetaGenerator
 
 import type {Metadata, ResolvingMetadata} from 'next'
-import {fetchPost, fetchSettings} from "fetch-requests";
+import { fetchSettings} from "fetch-requests";
 
 type Props = {
     params: { identifier: string ,lang:string}

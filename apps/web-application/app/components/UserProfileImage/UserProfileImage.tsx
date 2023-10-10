@@ -19,7 +19,7 @@ const UserProfileImage: FC<UserProfileImagePropTypes> = ({size, profileRedirect}
         <div className={'user-profile-image'}>
             <Csr>
                 {profileRedirect && loggedIn ?
-                    <Link href={`/profile`}>
+                    <Link href={`/user/${userData?.username}`}>
                         <ImageContent profileImage={userData?.profileImage?.filePath} size={size || 48}/>
                     </Link> :
                     <ImageContent profileImage={userData?.profileImage?.filePath} size={size || 48}/>

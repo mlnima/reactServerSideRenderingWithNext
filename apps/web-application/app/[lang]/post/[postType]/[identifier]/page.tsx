@@ -1,7 +1,7 @@
 import {i18n} from "@i18nConfig";
 import {getDictionary} from "../../../../../get-dictionary";
 import dynamic from "next/dynamic";
-import {fetchPost, fetchSettings, fetchWidgets} from "fetch-requests";
+import {fetchPost, fetchSettings, fetchWidgets, fetchPostViews, fetchPostRating} from "fetch-requests";
 import SidebarWidgetAreaRenderer
     from "@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer";
 import './page.styles.scss'
@@ -10,9 +10,6 @@ import PostAdminOrAuthorQuickAccessBar
     from "./components/PostAdminOrAuthorQuickAccessBar/PostAdminOrAuthorQuickAccessBar";
 import Soft404 from "@components/Soft404/Soft404";
 import NotFoundOrRestricted from "./components/NotFoundOrRestricted/NotFoundOrRestricted";
-import ViewPostClient from "./components/ViewPostClient/ViewPostClient";
-import {clientAPIRequestViewPost} from "api-requests";
-import Csr from "@components/global/Csr";
 
 const PreviewPost = dynamic(() => import("./components/PreviewPost/PreviewPost"))
 const VideoTypePostPage = dynamic(() => import('./components/VideoTypePostPage/VideoTypePostPage'))
@@ -39,11 +36,9 @@ const PostPage = async ({params: {lang, identifier, postType}, searchParams}: IP
 
     const locale = i18n.locales.includes(lang) ? lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale)
-    const postData = await fetchPost(identifier)
-    // if (postData?.post?._id){
-    //    await clientAPIRequestViewPost(postData?.post?._id)
-    // }
-
+    const postData = await fetchPost({identifier})
+    const postViewData = await fetchPostViews({identifier:postData?.post?._id,revalidate: 120})
+    const postRatingData = await fetchPostRating({identifier:postData?.post?._id})
     const settingsData = await fetchSettings({requireSettings: ['postPageSettings']})
     const widgetsData = await fetchWidgets(['postPageLeftSidebar', 'postPageRightSidebar', 'underPost'], lang)
     const sidebar = settingsData?.settings?.postPageSettings?.sidebar
@@ -63,6 +58,9 @@ const PostPage = async ({params: {lang, identifier, postType}, searchParams}: IP
                         {searchParams?.preview === 'true' ?
                             <PreviewPost widgetsData={widgetsData}
                                          post={postData.post}
+                                         views={postViewData?.views || 0}
+                                         likes={postRatingData?.likes || 0}
+                                         disLikes={postRatingData?.disLikes || 0}
                                          dictionary={dictionary}
                                          locale={locale}
                                          sidebar={sidebar || 'no'}
@@ -109,23 +107,35 @@ const PostPage = async ({params: {lang, identifier, postType}, searchParams}: IP
                     {postType === 'video' ?
                         <VideoTypePostPage widgets={widgetsData.widgets?.['underPost']}
                                            post={postData.post}
+                                           views={postViewData?.views || 0}
+                                           likes={postRatingData?.likes || 0}
+                                           disLikes={postRatingData?.disLikes || 0}
                                            hasSidebar={sidebar}
                                            relatedPosts={postData.relatedPosts}
                                            dictionary={dictionary}
                                            locale={locale}/> : postType === 'article' ?
                             <ArticleTypePostPage widgets={widgetsData.widgets?.['underPost']}
                                                  post={postData.post}
+                                                 views={postViewData?.views || 0}
+                                                 likes={postRatingData?.likes || 0}
+                                                 disLikes={postRatingData?.disLikes || 0}
                                                  hasSidebar={sidebar}
                                                  relatedPosts={postData.relatedPosts}
                                                  dictionary={dictionary} locale={locale}/> : postType === 'promotion' ?
                                 <PromotionTypePostPage widgets={widgetsData.widgets?.['underPost']}
                                                        post={postData.post}
+                                                       views={postViewData?.views || 0}
+                                                       likes={postRatingData?.likes || 0}
+                                                       disLikes={postRatingData?.disLikes || 0}
                                                        hasSidebar={sidebar}
                                                        relatedPosts={postData.relatedPosts}
                                                        dictionary={dictionary}
                                                        locale={locale}/> : postType === 'learn' ?
                                     <LearnTypePostPage widgets={widgetsData.widgets?.['underPost']}
                                                        post={postData.post}
+                                                       views={postViewData?.views || 0}
+                                                       likes={postRatingData?.likes || 0}
+                                                       disLikes={postRatingData?.disLikes || 0}
                                                        hasSidebar={sidebar}
                                                        relatedPosts={postData.relatedPosts}
                                                        dictionary={dictionary} locale={locale}/> : null

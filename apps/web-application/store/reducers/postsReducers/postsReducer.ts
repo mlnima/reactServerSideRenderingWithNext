@@ -2,8 +2,8 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../../store";
 // import getPostAction from "./getPostAction";
 // import getMetasAction from "./getMetasAction";
-import likePostAction from "./likePostAction";
-import disLikePostAction from "./disLikePostAction";
+// import likePostAction from "./likePostAction";
+// import disLikePostAction from "./disLikePostAction";
 // import postNewCommentAction from "./postNewCommentAction";
 // import getTagsAction from "./getTagsAction";
 // import attendingToEvent from "@utils/reducers/postsReducers/attendToEvent";
@@ -129,7 +129,7 @@ export const postsSlice = createSlice({
     },
     extraReducers: (builder) => {
         //@ts-ignore
-        builder
+        // builder
             // .addCase(getMetasAction.fulfilled, (state, action: PayloadAction<any>) => {
             //     return {
             //         ...state,
@@ -164,25 +164,25 @@ export const postsSlice = createSlice({
             //         }
             //     }
             // })
-            .addCase(likePostAction.fulfilled, (state, action: PayloadAction<any>) => {
-
-                return {
-                    ...state,
-                    post: {
-                        ...state.post,
-                        likes: (state.post.likes || 0) + 1
-                    }
-                }
-            })
-            .addCase(disLikePostAction.fulfilled, (state, action: PayloadAction<any>) => {
-                return {
-                    ...state,
-                    post: {
-                        ...state.post,
-                        disLikes: (state.post.disLikes || 0) + 1
-                    }
-                }
-            })
+            // .addCase(likePostAction.fulfilled, (state, action: PayloadAction<any>) => {
+            //
+            //     return {
+            //         ...state,
+            //         post: {
+            //             ...state.post,
+            //             likes: (state.post.likes || 0) + 1
+            //         }
+            //     }
+            // })
+            // .addCase(disLikePostAction.fulfilled, (state, action: PayloadAction<any>) => {
+            //     return {
+            //         ...state,
+            //         post: {
+            //             ...state.post,
+            //             disLikes: (state.post.disLikes || 0) + 1
+            //         }
+            //     }
+            // })
             // .addCase(getEditingPostAction.fulfilled, (state, action: PayloadAction<any>) => {
             //
             //     return {

@@ -1,7 +1,7 @@
 'use client'
 import {clientAPIRequestViewPost} from "api-requests";
 import React, {FC, useMemo, useRef, useState} from 'react';
-import './CardImageRendererUseClient.styles.scss'
+import './CardImageRendererUseClient.scss'
 import {useAppDispatch, useAppSelector} from "@store/hooks";
 import {setActiveVideoTrailerId} from "@store/reducers/postsReducers/postsReducer";
 // import Csr from "@components/global/Csr";

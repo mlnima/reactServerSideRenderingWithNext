@@ -4,7 +4,7 @@ import authWithUserDataMiddleware from "../../middlewares/authWithUserDataMiddle
 import cacheSuccesses from '../../middlewares/apiCache';
 
 import {getPosts, getUserPagePosts} from './postsControllers/getPosts'
-import getPost from './postsControllers/getPost'
+import {getPost, getPostRating, getPostViews} from './postsControllers/getPost'
 import likeDislikeView from './postsControllers/likeDislikeView'
 import newComment from './postsControllers/newComment'
 // import checkRemovedContent from './postsControllers/checkRemovedContent'
@@ -29,6 +29,8 @@ router.get('/getPosts',cacheSuccesses,getPosts)
 router.get('/getUserPagePosts',cacheSuccesses,getUserPagePosts)
 router.get('/getSearch',cacheSuccesses,getSearch)
 router.get('/getPost',cacheSuccesses,getPost)
+router.get('/getPostViews',getPostViews)
+router.get('/getPostRating',getPostRating)
 router.get('/getEditingPost',getEditingPost)
 router.delete('/deletePostByAuthor',authWithUserDataMiddleware,deletePostByAuthor)
 router.post('/likeDislikeView',likeDislikeView)

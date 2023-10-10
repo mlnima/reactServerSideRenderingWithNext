@@ -3,8 +3,16 @@ import {postFieldRequestForCards} from "data-structures";
 
 const APIServerUrl = process.env.NEXT_PUBLIC_API_SERVER_URL;
 import config from './config'
+import {getPostViews} from "api-server/controllers/clientControllers/postsControllers/getPost";
 
-export const fetchPost = async (identifier: string, revalidate?: number | null) => {
+
+interface IFetchPost{
+    identifier: string,
+    revalidate?: number | null
+    tags?: string[]
+}
+
+export const fetchPost = async ({identifier, revalidate}:IFetchPost) => {
     try {
         const queryGeneratorData = mongoIdValidator(identifier) ? {_id: identifier} : {title: identifier};
         const _id = queryGeneratorData._id ? {_id: queryGeneratorData._id} : {};
@@ -16,6 +24,55 @@ export const fetchPost = async (identifier: string, revalidate?: number | null) 
             `${APIServerUrl}/api/v1/posts/getPost${queries}`,
             config({revalidate,tags:[identifier,'post','cacheItem']})
         );
+        if (!response.ok) {
+            const errorData = await response.text();
+            // throw new Error(errorData);
+        }
+        return await response.json()
+    } catch (error) {
+        // throw error;
+    }
+}
+
+export const fetchPostViews = async ({identifier, revalidate}:IFetchPost) => {
+    try {
+        const queryGeneratorData = mongoIdValidator(identifier) ? {_id: identifier} : {title: identifier};
+        const _id = queryGeneratorData._id ? {_id: queryGeneratorData._id} : {};
+        const title = queryGeneratorData.title ? {title: encodeURIComponent(queryGeneratorData.title)} : {};
+        const queriesDataObject = {..._id, ...title};
+        const queries = `?${new URLSearchParams(queriesDataObject).toString()}`;
+
+        const response = await fetch(
+            `${APIServerUrl}/api/v1/posts/getPostViews${queries}`,
+            config({revalidate,tags:[identifier,'postViews','cacheItem']})
+        );
+
+        if (!response.ok) {
+            const errorData = await response.text();
+            // throw new Error(errorData);
+        }
+        return await response.json()
+    } catch (error) {
+        // throw error;
+    }
+}
+
+export const fetchPostRating = async ({identifier, revalidate}:IFetchPost) => {
+    try {
+        const queryGeneratorData = mongoIdValidator(identifier) ? {_id: identifier} : {title: identifier};
+        const _id = queryGeneratorData._id ? {_id: queryGeneratorData._id} : {};
+        const title = queryGeneratorData.title ? {title: encodeURIComponent(queryGeneratorData.title)} : {};
+        const queriesDataObject = {..._id, ...title};
+        const queries = `?${new URLSearchParams(queriesDataObject).toString()}`;
+
+        const response = await fetch(
+            `${APIServerUrl}/api/v1/posts/getPostRating${queries}`,
+            config(
+                {revalidate,tags:[`${identifier}Rating`,identifier,'postRating','cacheItem']}
+            )
+        );
+
+
         if (!response.ok) {
             const errorData = await response.text();
             // throw new Error(errorData);
@@ -49,7 +106,7 @@ export const fetchPosts = async ({queryObject, requestedFields, revalidate,tags}
         );
         if (!response.ok) {
             const errorData = await response.text();
-            throw new Error(errorData);
+            // throw new Error(errorData);
         }
         return await response.json()
     } catch (error) {

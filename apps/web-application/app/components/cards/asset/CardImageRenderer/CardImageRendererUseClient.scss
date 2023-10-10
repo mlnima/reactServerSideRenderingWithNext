@@ -25,5 +25,9 @@
     background-color: var(--primary-active-color,#f90);
     z-index: 10;
   }
+
+  img,video{
+    border-radius: 0.375rem;
+  }
 }
 

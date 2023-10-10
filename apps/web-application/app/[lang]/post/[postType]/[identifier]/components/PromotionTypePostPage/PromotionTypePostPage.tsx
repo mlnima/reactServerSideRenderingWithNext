@@ -12,21 +12,31 @@ import Comments from "../Comments/Comments";
 
 interface IProps {
     post: Post,
+    views:number,
+    likes:number,
+    disLikes:number,
     locale: string,
     hasSidebar?: string,
     dictionary: {
         [key: string]: string
     },
     widgets: Widget[],
-    // relatedPosts: {
-    //     actorsRelatedPosts: {}[],
-    //     categoriesRelatedPosts: {}[],
-    //     tagsRelatedPosts: {}[]
-    // }
     relatedPosts: Post[],
 }
 
-const PromotionTypePostPage: FC<IProps> = ({widgets, post, locale, dictionary,hasSidebar,relatedPosts}) => {
+const PromotionTypePostPage: FC<IProps> =
+    ({
+         widgets,
+         post,
+         locale,
+         dictionary,
+         hasSidebar,
+         relatedPosts,
+         views,
+         likes,
+         disLikes
+
+    }) => {
 
     return (
         <div id={'primary'} className='post-page'>
@@ -48,9 +58,9 @@ const PromotionTypePostPage: FC<IProps> = ({widgets, post, locale, dictionary,ha
                     <div className='entry-header-actions'>
                         <RatingButtons rating={true}
                                        dictionary={dictionary}
-                                       likes={post.likes}
-                                       disLikes={post.disLikes}
-                                       views={post.views}
+                                       likes={likes}
+                                       disLikes={disLikes}
+                                       views={views}
                                        _id={post._id}/>
                     </div>
                     <PostMetasRenderer type='categories' metas={post.categories} dictionary={dictionary}/>

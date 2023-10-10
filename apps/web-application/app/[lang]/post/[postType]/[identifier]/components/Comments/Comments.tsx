@@ -144,10 +144,6 @@ const Comments: FC<IProps> = ({dictionary, postId}) => {
         }
     }
 
-    // useEffect(() => {
-    //     console.log(allowFetchMoreComments)
-    // }, [allowFetchMoreComments]);
-
     return (
         <div className={'commentsContentWrapper'}>
             <form className={'commentForm'} onSubmit={e => onSubmitHandler(e)}>
