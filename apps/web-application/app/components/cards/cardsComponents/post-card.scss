@@ -6,7 +6,10 @@
   flex-direction: column;
   justify-content: flex-start;
   .card-info {
-    height: 66px;
+    //height: 66px;
+    height: 33px;
+    padding-top: .25rem;
+    box-sizing: border-box;
 
     .card-info-stats {
       display: flex;

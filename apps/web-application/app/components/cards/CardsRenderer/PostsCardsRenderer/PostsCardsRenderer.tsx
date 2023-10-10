@@ -29,7 +29,7 @@ const PostsCardsRenderer: FC<IProps> = ({posts, locale, isSidebar,previewMode}) 
 
                 const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
                 // console.log('defaultLocale=> ',defaultLocale)
-                const imagesAllowedDomainsForNextImage = process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES?.split(' ') || []
+                const imagesAllowedDomainsForNextImage = (process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES || '').split(' ') || []
 
                 const previewModeQuery = previewMode && post?.status !== 'published'? '?preview=true' : ''
                 const postUrl = locale === defaultLocale ?

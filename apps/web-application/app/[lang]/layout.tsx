@@ -68,8 +68,8 @@ const RootLayout = async ({children, params: {lang}}: { children: ReactNode, par
             <AlertBox dictionary={dictionary}/>
             <BackToTopButton/>
             <LoginRegisterPopup locale={locale} dictionary={dictionary}/>
-            <GlobalCustomStyles customColors={initialSettingsData?.settings?.layoutSettings?.customColors}
-                                customStyles={initialSettingsData?.settings?.layoutSettings?.customStyles}/>
+            <GlobalCustomStyles customColors={initialSettings?.layoutSettings?.customColors}
+                                customStyles={initialSettings?.layoutSettings?.customStyles}/>
             <StoreDataInitializer initialSettings={initialSettings}/>
             <WebSocketInitializer/>
             {/*<MediaCall/>*/}

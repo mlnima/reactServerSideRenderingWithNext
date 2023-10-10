@@ -4,11 +4,11 @@ import dynamic from "next/dynamic";
 import _qualityConvertor from "../../asset/_qualityConvertor";
 import {Post} from "typescript-types";
 import CardTitle from "../../asset/CardTitle/CardTitle";
-import {ratingCalculator} from "custom-util";
+// import {ratingCalculator} from "custom-util";
 import './VideoPostCard.styles.scss'
 
-const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
-const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
+// const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
+// const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
 const CardQuality = dynamic(() => import('../../asset/CardQuality/CardQuality'))
 const CardDuration = dynamic(() => import('../../asset/CardDuration/CardDuration'))
 const CardImageRendererUseClient = dynamic(() => import(
@@ -34,7 +34,7 @@ const VideoPostCard: FC<IProps> =
          isNextIImageAllowed
      }) => {
 
-        const rating = post.likes || post.disLikes ? ratingCalculator(post?.likes, post?.disLikes) : null
+        // const rating = post.likes || post.disLikes ? ratingCalculator(post?.likes, post?.disLikes) : null
 
         return (
             <article className={`post-card post-card-video ${isSidebar ? 'postCardSidebar' : ''}`}>
@@ -60,10 +60,10 @@ const VideoPostCard: FC<IProps> =
                 <div className={`card-info`}>
                     <CardTitle title={post?.translations?.[locale as string]?.title ?? post?.title}
                                url={postUrl}/>
-                    <div className={'card-info-stats'}>
-                        {!!post.views && <CardViews views={post.views}/>}
-                        {!!rating && <CardRating rating={rating}/>}
-                    </div>
+                    {/*<div className={'card-info-stats'}>*/}
+                    {/*    {!!post.views && <CardViews views={post.views}/>}*/}
+                    {/*    {!!rating && <CardRating rating={rating}/>}*/}
+                    {/*</div>*/}
                 </div>
             </article>
         )

@@ -3,11 +3,11 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import {Post} from "typescript-types";
 import CardTitle from "../../asset/CardTitle/CardTitle";
-import {ratingCalculator} from "custom-util";
-
-const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
+// import {ratingCalculator} from "custom-util";
+//
+// const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
 const CardImageRendererUseClient = dynamic(() => import('../../asset/CardImageRenderer/CardImageRendererUseClient'));
-const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'));
+// const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'));
 
 interface ArticlePostCardPropTypes {
     locale: string,
@@ -28,7 +28,7 @@ const ArticlePostCard: FC<ArticlePostCardPropTypes> =
          isNextIImageAllowed
      }) => {
 
-        const rating = post.likes || post.disLikes ? ratingCalculator(post?.likes, post?.disLikes) : null
+        // const rating = post.likes || post.disLikes ? ratingCalculator(post?.likes, post?.disLikes) : null
 
         return (
             <article className={`post-card post-card-article ${isSidebar && 'postCardSidebar'}`}>
@@ -47,10 +47,10 @@ const ArticlePostCard: FC<ArticlePostCardPropTypes> =
                 <div className={`card-info`}>
                     <CardTitle title={post?.translations?.[locale as string]?.title ?? post?.title}
                                url={postUrl}/>
-                    <div className={'card-info-stats'}>
-                        {!!post.views && <CardViews views={post.views}/>}
-                        {!!rating && <CardRating rating={rating}/>}
-                    </div>
+                    {/*<div className={'card-info-stats'}>*/}
+                    {/*    {!!post.views && <CardViews views={post.views}/>}*/}
+                    {/*    {!!rating && <CardRating rating={rating}/>}*/}
+                    {/*</div>*/}
                 </div>
 
                 {/*<CardTitle title={post?.translations?.[locale as string]?.title ?? post?.title}*/}

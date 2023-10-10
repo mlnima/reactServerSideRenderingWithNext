@@ -2,13 +2,13 @@ import React, {FC} from "react";
 import dynamic from "next/dynamic";
 import CardTitle from "../../asset/CardTitle/CardTitle";
 import {Post} from "typescript-types";
-import {ratingCalculator} from "custom-util";
-import {clientAPIRequestViewPost} from "api-requests";
+// import {ratingCalculator} from "custom-util";
+// import {clientAPIRequestViewPost} from "api-requests";
 import Link from "next/link";
-import UseClientProvider from "@components/UseClientProvider/UseClientProvider";
-
-const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
-const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
+// import UseClientProvider from "@components/UseClientProvider/UseClientProvider";
+//
+// const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
+// const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
 const CardImageRendererUseClient = dynamic(() => import('../../asset/CardImageRenderer/CardImageRendererUseClient'))
 
 interface PromotionPostCardPropTypes {
@@ -32,7 +32,7 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
 
      }) => {
 
-        const rating = post.likes || post.disLikes ? ratingCalculator(post?.likes, post?.disLikes) : null
+        // const rating = post.likes || post.disLikes ? ratingCalculator(post?.likes, post?.disLikes) : null
 
         return (
             <article className={`post-card post-card-promotion ${isSidebar && 'postCardSidebar'}`}>
@@ -58,10 +58,10 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
                 <div className={`card-info`}>
                     <CardTitle title={post?.translations?.[locale as string]?.title ?? post?.title}
                                url={postUrl}/>
-                    <div className={'card-info-stats'}>
-                        {!!post.views && <CardViews views={post.views}/>}
-                        {!!rating && <CardRating rating={rating}/>}
-                    </div>
+                    {/*<div className={'card-info-stats'}>*/}
+                    {/*    {!!post.views && <CardViews views={post.views}/>}*/}
+                    {/*    {!!rating && <CardRating rating={rating}/>}*/}
+                    {/*</div>*/}
                 </div>
             </article>
         )

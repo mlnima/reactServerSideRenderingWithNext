@@ -1,6 +1,6 @@
 import React from "react";
 import {fetchSettings, fetchTags, fetchWidgets} from "fetch-requests";
-import {i18n} from "../../../i18n-config";
+import {i18n} from "@i18nConfig";
 import {getDictionary} from "../../../get-dictionary";
 import WidgetsRenderer from "@components/widgets/widgetRenderer/WidgetsRenderer";
 import SidebarWidgetAreaRenderer
@@ -41,6 +41,7 @@ const TagsPage = async ({params, searchParams}: IProps) => {
         }
     });
 
+
     return (
         <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
 
@@ -50,7 +51,9 @@ const TagsPage = async ({params, searchParams}: IProps) => {
                                  widgets={widgetsData.widgets?.['tagsPageTop']}
                                  position={'tagsPageTop'}/>
 
-                <TagsPageContentRenderer locale={locale} metas={metasData?.metas}/>
+                <TagsPageContentRenderer locale={locale}
+                                         metas={metasData?.metas}
+                                         startWith={searchParams?.startWith as string}/>
 
                 <WidgetsRenderer dictionary={dictionary}
                                  locale={locale}

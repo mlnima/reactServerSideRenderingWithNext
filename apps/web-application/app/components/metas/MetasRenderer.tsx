@@ -10,10 +10,12 @@ import './MetasRenderer.styles.scss'
 interface MetasRendererPropTypes {
     metaData: Meta[] | undefined,
     metaType: string,
-    locale: string
+    locale: string,
+    startWith?: string
+    isWidget?: boolean
 }
 
-const MetasRenderer: FC<MetasRendererPropTypes> = ({metaType, metaData, locale}) => {
+const MetasRenderer: FC<MetasRendererPropTypes> = ({metaType, metaData, locale, startWith, isWidget}) => {
 
     const typePath = convertMetasTypeToSingular(metaType)
     const groupMetas = groupingArrayOfObjectByKey(metaData as any, 'name')
@@ -29,8 +31,6 @@ const MetasRenderer: FC<MetasRendererPropTypes> = ({metaType, metaData, locale})
                                         {capitalizeFirstLetter(group)}
                                     </span>
                             </div>
-
-
                             <div className={'items '}>
                                 {/*//@ts-ignore*/}
                                 {groupMetas[group].map((meta) => {
@@ -47,17 +47,17 @@ const MetasRenderer: FC<MetasRendererPropTypes> = ({metaType, metaData, locale})
                                         </Link>
                                     )
                                 })}
-                                <Link href={`/${metaType}?startWith=${group === '#' ? 'digits' : group}`}
-                                      aria-label={metaType}
-                                      title={`all the ${metaType} starts with ${group}`}>
+                                {!startWith &&
+                                    <Link href={`/${metaType}?startWith=${group === '#' ? 'digits' : group}`}
+                                          aria-label={metaType}
+                                          title={`all the ${metaType} starts with ${group}`}>
                                         <span className={`view-all flex items-center justify-start text-primary-active-color 
                                         text-lg font-bold m-2.5 min-h-12 md:text-sm md:h-auto`}>
                                             <FontAwesomeIcon icon={faAnglesDown} style={{width: 28, height: 20}}/>
                                         </span>
-                                </Link>
-
+                                    </Link>
+                                }
                             </div>
-
                         </article>
                     )
                 })}
@@ -67,9 +67,3 @@ const MetasRenderer: FC<MetasRendererPropTypes> = ({metaType, metaData, locale})
     )
 };
 export default MetasRenderer
-
-// max-w-64 block
-//   list-none truncate py-3 px-1.5 min-h-12 rounded
-//   text-secondary-text-color cursor-pointer break-words
-//   bg-secondary-background-color md:bg-primary-background-color
-//   md:p-1

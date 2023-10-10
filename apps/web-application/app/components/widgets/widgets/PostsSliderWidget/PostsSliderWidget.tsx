@@ -9,6 +9,7 @@ import {faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import {Post, Store} from 'typescript-types';
 import {shortNumber, ratingCalculator} from 'custom-util';
 import './PostsSliderWidget.styles.scss';
+//@ts-ignore
 import { v4 as uuidv4 } from 'uuid';
 
 const ArticlePostCard = dynamic(() => import('@components/cards/cardsComponents/ArticlePostCard/ArticlePostCard'));

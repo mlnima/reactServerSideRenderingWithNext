@@ -132,7 +132,7 @@ export const fetchMetas = async ({queryObject, revalidate,tags}: IFetchMetasProp
         );
         if (!response.ok) {
             const errorData = await response.text();
-            throw new Error(errorData);
+            // throw new Error(errorData);
         }
         return await response.json()
     } catch (error) {
@@ -143,7 +143,7 @@ export const fetchMetas = async ({queryObject, revalidate,tags}: IFetchMetasProp
 export const fetchTags = async ({queryObject, revalidate,tags}: IFetchMetasProps) => {
     try {
         const requestParameter = removeEmptyProperties(queryObject)
-        const queries = `?${new URLSearchParams(requestParameter).toString()}`;
+        const queries = `${new URLSearchParams(requestParameter).toString()}`;
 
         const response = await fetch(
             `${APIServerUrl}/api/v1/posts/tags?${queries}`,
@@ -151,7 +151,7 @@ export const fetchTags = async ({queryObject, revalidate,tags}: IFetchMetasProps
         );
         if (!response.ok) {
             const errorData = await response.text();
-            throw new Error(errorData);
+            // throw new Error(errorData);
         }
         return response.json()
     } catch (error) {
