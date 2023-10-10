@@ -12,7 +12,6 @@ type UploadEvent = React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLDiv
 
 const ProfileImageWithEditing = () => {
     const dispatch = useAppDispatch()
-    const imageElement = useRef<HTMLImageElement>(null)
     const uploadInputElement = useRef<HTMLInputElement>(null)
     const {userData, loggedIn} = useAppSelector(({user}) => user)
 
@@ -39,12 +38,10 @@ const ProfileImageWithEditing = () => {
                 }));
 
                 const response = await clientAPIRequestUploadProfileImage(formData);
-                const imageRes = response.data.newProfileImage;
 
-                if (imageElement?.current && !!imageRes) {
-                    dispatch(replaceUserProfileImage(imageRes))
-                    imageElement.current.src = imageRes;
-                }
+                const imageRes = response.data.newProfileImage;
+                dispatch(replaceUserProfileImage(imageRes))
+
 
             }
         } catch (error) {
@@ -66,7 +63,7 @@ const ProfileImageWithEditing = () => {
                  onUploadHandler(e);
              }}
              onDragOver={e => e.preventDefault()}>
-            <img ref={imageElement} onClick={onImageClickHandler}
+            <img onClick={onImageClickHandler}
                  alt={userData?.username || 'profile image'}
                  src={userData?.profileImage?.filePath || '/asset/images/user/noGenderAvatar150.jpg'}/>
             <FontAwesomeIcon className={'plus-icon'}

@@ -9,6 +9,7 @@ import {faCheck} from "@fortawesome/free-solid-svg-icons/faCheck";
 import {useAppSelector} from "@store/hooks";
 import './MessengerConversationPreview.styles.scss'
 import {useRouter} from "next/navigation";
+import {UserPreviewImage} from "ui";
 
 interface IProps {
     conversationData: IMessengerConversation
@@ -33,8 +34,12 @@ const MessengerConversationPreview: FC<IProps> = ({conversationData}) => {
                  onClick={() => push(`/messenger?_id=${conversationData._id}`)}>
 
                 <div className={'profile-image'}>
+                    {/*{partnerData?.profileImage?.filePath ?*/}
+                    {/*    <img src={partnerData.profileImage.filePath} alt={partnerData.username}/> :*/}
+                    {/*    <FontAwesomeIcon icon={faCircleUser} style={{width: 50, height: 50}}/>*/}
+                    {/*}*/}
                     {partnerData?.profileImage?.filePath ?
-                        <img src={partnerData.profileImage.filePath} alt={partnerData.username}/> :
+                        <UserPreviewImage imageUrl={partnerData.profileImage.filePath} size={50}/> :
                         <FontAwesomeIcon icon={faCircleUser} style={{width: 50, height: 50}}/>
                     }
                 </div>

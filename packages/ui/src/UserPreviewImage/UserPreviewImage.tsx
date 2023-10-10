@@ -11,6 +11,7 @@ const Style = styled.div`
   .user-preview-image {
     border-radius: 50%;
     box-sizing: border-box;
+    object-fit: cover;
     cursor: pointer;
   }
 
@@ -24,12 +25,12 @@ interface PropTypes {
     size: number
 }
 
-const UserPreviewImage: FC<PropTypes> = ({imageUrl,size}) => {
+const UserPreviewImage: FC<PropTypes> = ({imageUrl,size=77}) => {
     const [gotError, setGotError] = useState(false)
     return (
         <Style>
             {!!imageUrl && !gotError ?
-                <img className={'user-preview-image'} src={imageUrl}
+                <img className={'user-preview-image'} src={imageUrl || '/asset/images/user/noGenderAvatar150.jpg'}
                      onError={() => setGotError(true)}
                      style={{width:size,height:size}}
                      alt={'profile image'}/>:

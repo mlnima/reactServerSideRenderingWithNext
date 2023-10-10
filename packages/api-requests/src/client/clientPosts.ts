@@ -101,8 +101,6 @@ export const clientAPIRequestGetPosts = async (currentQuery:any,medaId?:string|n
 
 
 
-
-
 export const clientAPIRequestLikePost = async (postId:string) => {
     const ratingData = localStorage?.ratingData ? JSON.parse(localStorage.ratingData) : {likes: [], disLikes: []};
     ratingData.likes = [...new Set([...ratingData.likes, postId])]
@@ -115,6 +113,14 @@ export const clientAPIRequestLikePost = async (postId:string) => {
     };
 
     return await AxiosInstance.post('/api/v1/posts/likeDislikeView', body)
+}
+
+export const clientAPIRequestLikeDislikePost = async (_id:string,type:'likes'|'disLikes') => {
+    const body = {
+        _id,
+        type
+    };
+    return await AxiosInstance.patch('/api/v1/posts/likeDislikePost', body)
 }
 
 export const clientAPIRequestUpdatePost = async (data:{}) => {

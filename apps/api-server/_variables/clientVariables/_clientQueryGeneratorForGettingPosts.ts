@@ -9,7 +9,7 @@ const _clientQueryGeneratorForGettingPosts = (data, metaId) => {
 
     const excludeQuery = process.env.EXCLUDE_POSTS_SOURCE ? [{$or: excludeContent}] : []
 
-    const size = parseInt(data?.size || data?.count || '20') || 20;
+    const size = parseInt(data?.size || data?.count || data?.uniqueData?.count || '20') || 20;
     const sort = data?.sort || data?.sortBy;
 
     const metaQuery = metaId ? [{$or: [{categories: {$in: metaId}}, {tags: {$in: metaId}}, {actors: {$in: metaId}}]}] : [];

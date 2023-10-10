@@ -22,6 +22,7 @@ export {default as isEmptyObject} from './object-util/isEmptyObject';
 export {default as isImageAllowedForNextImage} from './url-util/isImageAllowedForNextImage';
 export {default as isInternalUrl} from './url-util/isInternalUrl';
 export {default as isJsonString} from './string-util/isJsonString';
+export {default as isNumericString} from './string-util/isNumericString';
 export {default as queryUniquer} from './url-util/queryUniquer';
 
 export {default as mongoIdValidator} from './string-util/mongoIdValidatorClient';

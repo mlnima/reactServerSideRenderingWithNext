@@ -8,6 +8,7 @@ import {IMessengerConversation, User} from "typescript-types";
 import { useAppSelector} from "@store/hooks";
 import './MessengerHeader.styles.scss';
 import {faCircleUser} from "@fortawesome/free-solid-svg-icons/faCircleUser";
+import {UserPreviewImage} from "ui";
 
 interface IProps {
     activeConversation: IMessengerConversation,
@@ -54,10 +55,14 @@ const MessengerHeader: FC<IProps> = ({activeConversation,autoScroll,setAutoScrol
                         >
                             <FontAwesomeIcon icon={faArrowDownWideShort}/>
                         </button>
+                        {/*{partnerData?.profileImage?.filePath ?*/}
+                        {/*    <img src={partnerData.profileImage.filePath}*/}
+                        {/*         alt={partnerData.username}*/}
+                        {/*         style={{width: 25, height: 25}}/> :*/}
+                        {/*    <FontAwesomeIcon icon={faCircleUser} style={{width: 25, height: 25}}/>*/}
+                        {/*}*/}
                         {partnerData?.profileImage?.filePath ?
-                            <img src={partnerData.profileImage.filePath}
-                                 alt={partnerData.username}
-                                 style={{width: 25, height: 25}}/> :
+                            <UserPreviewImage imageUrl={partnerData.profileImage.filePath} size={25}/> :
                             <FontAwesomeIcon icon={faCircleUser} style={{width: 25, height: 25}}/>
                         }
                         <p onClick={() => router.push(`/user/${partnerData?.username || ''}`)}

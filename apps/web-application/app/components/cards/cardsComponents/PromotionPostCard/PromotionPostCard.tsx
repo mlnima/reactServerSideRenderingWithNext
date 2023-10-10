@@ -3,6 +3,9 @@ import dynamic from "next/dynamic";
 import CardTitle from "../../asset/CardTitle/CardTitle";
 import {Post} from "typescript-types";
 import {ratingCalculator} from "custom-util";
+import {clientAPIRequestViewPost} from "api-requests";
+import Link from "next/link";
+import UseClientProvider from "@components/UseClientProvider/UseClientProvider";
 
 const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
@@ -34,7 +37,13 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
         return (
             <article className={`post-card post-card-promotion ${isSidebar && 'postCardSidebar'}`}>
                 <div className={'card-media'}>
-                    <a href={post.redirectLink} className={'promotion-card-link-external'}
+
+                    <Link href={post?.redirectLink || '#'} className={'promotion-card-link-external'}
+                       // onClick={()=>{
+                       //     if (post?._id) {
+                       //         clientAPIRequestViewPost(post?._id)
+                       //     }
+                       // }}
                        target={'_blank'} rel={'nofollow noopener external'}>
                         <CardImageRendererUseClient
                             imageUrl={post.mainThumbnail}
@@ -43,7 +52,8 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
                             postId={post?._id}
                             mediaAlt={post?.translations?.[locale as string]?.title ?? post?.title}
                             index={index}/>
-                    </a>
+                    </Link>
+
                 </div>
                 <div className={`card-info`}>
                     <CardTitle title={post?.translations?.[locale as string]?.title ?? post?.title}

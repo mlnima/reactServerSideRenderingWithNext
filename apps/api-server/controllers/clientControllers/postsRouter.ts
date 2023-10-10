@@ -21,6 +21,7 @@ import getSearch from "./postsControllers/getSearch";
 import rateLimitMiddleware from "../../middlewares/rateLimitMiddleware";
 import deletePostByAuthor from "./postsControllers/deletePostByAuthor";
 import getEditingPost from "./postsControllers/getEditingPost";
+import likeDislikePost from "./postsControllers/likeDislikePost";
 
 const router = Router();
 
@@ -31,6 +32,7 @@ router.get('/getPost',cacheSuccesses,getPost)
 router.get('/getEditingPost',getEditingPost)
 router.delete('/deletePostByAuthor',authWithUserDataMiddleware,deletePostByAuthor)
 router.post('/likeDislikeView',likeDislikeView)
+router.patch('/likeDislikePost',rateLimitMiddleware(3,60*1000),authMiddleware,likeDislikePost)
 router.post('/newComment',rateLimitMiddleware(1,60*1000),newComment)
 // router.post('/checkRemovedContent',checkRemovedContent)
 router.post('/resetMetaImage',resetMetaImage)

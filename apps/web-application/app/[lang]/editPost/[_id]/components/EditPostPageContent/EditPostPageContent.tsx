@@ -39,7 +39,9 @@ const EditPostPageContent: FC<IProps> = ({_id, dictionary, locale}) => {
     const [editingPost, setEditingPost] = useState<{ [key: string]: any }>({})
     const [prevEditingPost, setPrevEditingPost] = useState<{ [key: string]: any }>({})
     const [isPreviewReady, setIsPreviewReady] = useState<boolean>(false)
-    const {loggedIn, userData} = useAppSelector(({user}) => user)
+
+    const {loggedIn} = useAppSelector(({user}) => user)
+    const {userData} = useAppSelector(({user}) => user)
     const localeToSet = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? '' : `/${locale}`
 
     useEffect(() => {

@@ -48,7 +48,7 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         replaceUserProfileImage: (state, action: PayloadAction<any>) => {
-            state.userData.profileImage = action.payload
+            state.userData.profileImage.filePath = action.payload
         },
         removeUserDraftPost: (state, action: PayloadAction<any>) => {
             state.userData.draftPost = ''

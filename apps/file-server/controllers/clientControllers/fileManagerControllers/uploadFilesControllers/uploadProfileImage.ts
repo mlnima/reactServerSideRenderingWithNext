@@ -8,7 +8,6 @@ import {isValidObjectId} from "mongoose";
 const deletePreviousProfileImage = async (userId: string) => {
     try {
         const userData = await userSchema.findById(userId).select('profileImage').exec()
-        console.log('userData=> ', userData)
         if (isValidObjectId(userData?.profileImage)) {
             try {
                 const profileImageDocument = await fileSchema.findById(userData?.profileImage).exec()
@@ -67,7 +66,6 @@ const uploadProfileImage = async (req, res) => {
             await image.mv('.' + filePath)
             const updatedImageDoc = await fileSchema.findByIdAndUpdate(savedEmptyDoc?._id, {filePath}, {new: true}).exec()
             await userSchema.findByIdAndUpdate(userData._id, {profileImage: updatedImageDoc?._id}, {new: true}).exec()
-
             res.status(200).json({newProfileImage: filePath})
             return
         } catch (error) {
@@ -75,8 +73,6 @@ const uploadProfileImage = async (req, res) => {
             res.status(500).json({error})
             return
         }
-
-        res.end()
     } catch (error) {
         console.log('Upload Post Images:', error)
         res.status(500).json({error})

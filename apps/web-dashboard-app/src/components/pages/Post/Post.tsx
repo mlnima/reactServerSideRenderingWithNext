@@ -15,6 +15,7 @@ import {getPostAction,defineNewPost,changeActiveEditingLanguage} from "@store/re
 import {DashboardStore} from "typescript-types";
 import {useAppDispatch} from "@store/hooks";
 import {LanguagesOptions} from "custom-util";
+import isNumericString from "custom-util/dist/src/string-util/isNumericString";
 
 const AdminPostPageStyledDiv = styled.div`
   display: grid;
@@ -64,7 +65,11 @@ const Index = () => {
     }, [postId]);
 
     const onChangeHandler = (e: { target: { name: any; value: any; }; }) => {
-        dispatch(editPostAction({[e.target.name]: e.target.value}))
+        if (isNumericString(e.target.value)){
+            dispatch(editPostAction({[e.target.name]: parseInt(e.target.value)}))
+        }else {
+            dispatch(editPostAction({[e.target.name]: e.target.value}))
+        }
     };
 
     const onTranslatedInputChangeHandler = (e: { target: any; }) => {

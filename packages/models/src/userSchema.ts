@@ -26,6 +26,8 @@ const userSchema = new Schema({
         age: Number,
         following: [{type: Schema.Types.ObjectId, ref: 'user'}],
         posts: [{type: Schema.Types.ObjectId, ref: 'post'}],
+        LikedPosts: [{type: Schema.Types.ObjectId, ref: 'post'}],
+        disLikedPosts: [{type: Schema.Types.ObjectId, ref: 'post'}],
         followers: [{type: Schema.Types.ObjectId, ref: 'user'}],
         blockList: [{type: Schema.Types.ObjectId, ref: 'user'}],
         conversation: [{type: Schema.Types.ObjectId, ref: 'conversation'}],

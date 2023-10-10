@@ -8,6 +8,7 @@ import {setActiveVideoTrailerId} from "@store/reducers/postsReducers/postsReduce
 import Image from "next/image";
 // import {tr} from "date-fns/locale";
 import {StaticImport} from "next/dist/shared/lib/get-img-props";
+import viewPostAction from "@store/reducers/postsReducers/viewPostAction";
 
 const fallbackImage = '/asset/images/default/no-image-available.png'
 
@@ -20,7 +21,8 @@ interface CardImageNextPropTypes {
     videoTrailerUrl?: string,
     postId?: string,
     index: number,
-    isNextIImageAllowed: boolean
+    isNextIImageAllowed: boolean,
+    viewPostRequest?: boolean
 }
 
 const CardImageRendererUseClient: FC<CardImageNextPropTypes> =
@@ -33,14 +35,14 @@ const CardImageRendererUseClient: FC<CardImageNextPropTypes> =
          videoTrailerUrl,
          postId,
          index,
-         isNextIImageAllowed = false
+         isNextIImageAllowed = false,
+         viewPostRequest
      }) => {
-         const [gotError, setGotError] = useState(false)
+        const [gotError, setGotError] = useState(false)
 
-        const targetImageUrl = useMemo(()=>{
+        const targetImageUrl = useMemo(() => {
             return gotError ? fallbackImage : imageUrl
-        },[gotError,postId]) as string | StaticImport
-
+        }, [gotError, postId]) as string | StaticImport
 
 
         const activeVideoTrailerId = useAppSelector(({posts}) => posts.activeVideoTrailerId)
@@ -101,70 +103,74 @@ const CardImageRendererUseClient: FC<CardImageNextPropTypes> =
 
         const onNextImageErrorHandler = (e: any) => {
             setGotError(true)
-            // console.log('onNextImageErrorHandler=> ',e)
         }
 
         return (
             <div className={`card-image-wrapper`} style={{
                 aspectRatio: aspectRatio || '16/9'
-            }}>
+            }}
+                 onClick={() => {
+                     if (viewPostRequest && !!postId) {
+                         dispatch(viewPostAction(postId))
+                     }
+                 }}>
                 {(!!videoTrailerUrl && activeVideoTrailerId === postId) && <div className="trailer-loading"/>}
                 {/*<Csr>*/}
-                    {(!!videoTrailerUrl && activeVideoTrailerId === postId && loadingAnimationOver) ?
-                        <video ref={videoTrailerRef}
-                               muted
-                               loop={false}
-                               onEnded={() => onHoverHandler()}
-                               onCanPlay={onCanPlayHandler}
-                               onMouseLeave={onUnHoverHandler}
-                               onTouchEnd={onUnHoverHandler}
-                               playsInline
-                               style={{
-                                   objectFit: objectFit || 'contain',
-                                   aspectRatio: aspectRatio || '16/9'
-                               }}
-                               className={'video-card-trailer'}>
-                            <source src={videoTrailerUrl}/>
-                            Sorry, your browser doesn't support embedded videos.
-                        </video> :
-                        <>
-                            {(!!imageUrl && isNextIImageAllowed) ?
-                                <Image src={targetImageUrl}
-                                       ref={imageRef}
-                                       alt={mediaAlt || ''}
-                                       width={320}
-                                       height={240}
-                                       onClick={onClickHandler}
-                                       onMouseEnter={() => onHoverHandler()}
-                                       onTouchStart={() => onHoverHandler()}
-                                       onTouchEnd={onUnHoverHandler}
-                                       onError={e => onNextImageErrorHandler(e)}
-                                       loading={index > 3 ? 'lazy' : 'eager'}
-                                       style={{
-                                           objectFit: objectFit || 'contain',
-                                           aspectRatio: aspectRatio || '16/9'
-                                       }}
-                                       className={`card-image w-full aspect-${aspectRatio || 'video'} object-${objectFit || 'contain'}`}
-                                /> :
-                                <img src={imageUrl || fallbackImage}
-                                     ref={imageRef}
-                                     alt={mediaAlt || ''}
-                                     loading={index > 3 ? 'lazy' : 'eager'}
-                                     onClick={onClickHandler}
-                                     onMouseEnter={() => onHoverHandler()}
-                                     onTouchStart={() => onHoverHandler()}
-                                     onTouchEnd={onUnHoverHandler}
-                                     onError={error => onImageErrorHandler(error)}
-                                     style={{
-                                         objectFit: objectFit || 'contain',
-                                         aspectRatio: aspectRatio || '16/9'
-                                     }}
-                                     className={`card-image`}
-                                />
+                {(!!videoTrailerUrl && activeVideoTrailerId === postId && loadingAnimationOver) ?
+                    <video ref={videoTrailerRef}
+                           muted
+                           loop={false}
+                           onEnded={() => onHoverHandler()}
+                           onCanPlay={onCanPlayHandler}
+                           onMouseLeave={onUnHoverHandler}
+                           onTouchEnd={onUnHoverHandler}
+                           playsInline
+                           style={{
+                               objectFit: objectFit || 'contain',
+                               aspectRatio: aspectRatio || '16/9'
+                           }}
+                           className={'video-card-trailer'}>
+                        <source src={videoTrailerUrl}/>
+                        Sorry, your browser doesn't support embedded videos.
+                    </video> :
+                    <>
+                        {(!!imageUrl && isNextIImageAllowed) ?
+                            <Image src={targetImageUrl}
+                                   ref={imageRef}
+                                   alt={mediaAlt || ''}
+                                   width={320}
+                                   height={240}
+                                   onClick={onClickHandler}
+                                   onMouseEnter={() => onHoverHandler()}
+                                   onTouchStart={() => onHoverHandler()}
+                                   onTouchEnd={onUnHoverHandler}
+                                   onError={e => onNextImageErrorHandler(e)}
+                                   loading={index > 3 ? 'lazy' : 'eager'}
+                                   style={{
+                                       objectFit: objectFit || 'contain',
+                                       aspectRatio: aspectRatio || '16/9'
+                                   }}
+                                   className={`card-image w-full aspect-${aspectRatio || 'video'} object-${objectFit || 'contain'}`}
+                            /> :
+                            <img src={imageUrl || fallbackImage}
+                                 ref={imageRef}
+                                 alt={mediaAlt || ''}
+                                 loading={index > 3 ? 'lazy' : 'eager'}
+                                 onClick={onClickHandler}
+                                 onMouseEnter={() => onHoverHandler()}
+                                 onTouchStart={() => onHoverHandler()}
+                                 onTouchEnd={onUnHoverHandler}
+                                 onError={error => onImageErrorHandler(error)}
+                                 style={{
+                                     objectFit: objectFit || 'contain',
+                                     aspectRatio: aspectRatio || '16/9'
+                                 }}
+                                 className={`card-image`}
+                            />
 
-                            }
-                        </>
-                    }
+                        }
+                    </>
+                }
                 {/*</Csr>*/}
             </div>
         )

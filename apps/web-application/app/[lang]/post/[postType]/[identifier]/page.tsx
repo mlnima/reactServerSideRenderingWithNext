@@ -10,6 +10,9 @@ import PostAdminOrAuthorQuickAccessBar
     from "./components/PostAdminOrAuthorQuickAccessBar/PostAdminOrAuthorQuickAccessBar";
 import Soft404 from "@components/Soft404/Soft404";
 import NotFoundOrRestricted from "./components/NotFoundOrRestricted/NotFoundOrRestricted";
+import ViewPostClient from "./components/ViewPostClient/ViewPostClient";
+import {clientAPIRequestViewPost} from "api-requests";
+import Csr from "@components/global/Csr";
 
 const PreviewPost = dynamic(() => import("./components/PreviewPost/PreviewPost"))
 const VideoTypePostPage = dynamic(() => import('./components/VideoTypePostPage/VideoTypePostPage'))
@@ -37,8 +40,9 @@ const PostPage = async ({params: {lang, identifier, postType}, searchParams}: IP
     const locale = i18n.locales.includes(lang) ? lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale)
     const postData = await fetchPost(identifier)
-    console.log('postData?.relatedPosts=> ',postData?.relatedPosts?.length)
-    // const relatedPosts = uniqArrayBy(postData?.relatedPosts,"_id")
+    // if (postData?.post?._id){
+    //    await clientAPIRequestViewPost(postData?.post?._id)
+    // }
 
     const settingsData = await fetchSettings({requireSettings: ['postPageSettings']})
     const widgetsData = await fetchWidgets(['postPageLeftSidebar', 'postPageRightSidebar', 'underPost'], lang)
@@ -95,6 +99,7 @@ const PostPage = async ({params: {lang, identifier, postType}, searchParams}: IP
 
     return (
         <>
+            {/*<ViewPostClient _id={postData?.post?._id}/>*/}
             <PostAdminOrAuthorQuickAccessBar post={postData.post} dictionary={dictionary}/>
 
             <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
