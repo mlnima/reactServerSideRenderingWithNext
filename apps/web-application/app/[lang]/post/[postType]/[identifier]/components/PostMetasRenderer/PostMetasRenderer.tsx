@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import {capitalizeFirstLetters} from "custom-util";
-import './PostMetasRenderer.styles.scss';
+import './PostMetasRenderer.scss';
 import {Meta} from "typescript-types";
 import PostActor from "./PostActor";
 import PostMeta from "./PostMeta";

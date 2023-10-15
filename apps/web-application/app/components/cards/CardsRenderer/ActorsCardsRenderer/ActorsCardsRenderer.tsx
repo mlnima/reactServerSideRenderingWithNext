@@ -4,13 +4,13 @@ import { Meta} from "typescript-types";
 import './ActorsCardsRenderer.styles.scss'
 import {convertMetasTypeToSingular} from "custom-util";
 
-interface MetasCardsRendererPropTypes {
+interface IProps {
     metas?: Meta[],
     isSidebar?:boolean,
     locale:string
 }
 
-const ActorsCardsRenderer: FC<MetasCardsRendererPropTypes> = ({metas,isSidebar,locale}) => {
+const ActorsCardsRenderer: FC<IProps> = ({metas,isSidebar,locale}) => {
 
 
     return (

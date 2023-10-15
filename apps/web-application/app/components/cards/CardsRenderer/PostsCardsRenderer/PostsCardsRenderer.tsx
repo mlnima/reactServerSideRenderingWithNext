@@ -1,10 +1,7 @@
-
 import {FC} from "react";
 import {Post} from "typescript-types";
 import dynamic from "next/dynamic";
-import '../staticCardsWrapper.styles.scss';
-import {i18n} from "@i18nConfig";
-
+import './PostsCardsRenderer.scss';
 
 const ArticlePostCard = dynamic(() => import('../../cardsComponents/ArticlePostCard/ArticlePostCard'))
 const PromotionPostCard = dynamic(() => import('../../cardsComponents/PromotionPostCard/PromotionPostCard'))
@@ -23,10 +20,8 @@ const PostsCardsRenderer: FC<IProps> = ({posts, locale, isSidebar,previewMode}) 
 
 
     return (
-        <div className={`staticCardsWrapper${isSidebar ? 'Sidebar' : ''}`}>
+        <div className={`postsCardsWrapper${isSidebar ? 'Sidebar' : ''}`}>
             {(posts || []).map((post: Post, index: number) => {
-
-
                 const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
                 // console.log('defaultLocale=> ',defaultLocale)
                 const imagesAllowedDomainsForNextImage = (process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES || '').split(' ') || []

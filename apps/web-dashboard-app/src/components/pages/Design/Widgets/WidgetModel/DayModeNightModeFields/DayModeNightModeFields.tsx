@@ -1,13 +1,13 @@
 import React, {FC} from "react";
 import MonacoEditor from "@components/common/MonacoEditor";
 
-interface DayModeNightModeFieldsPropTypes {
+interface IProps {
     dayNightModeData:any,
     dayNightModeDefault:any,
     onChangeHandler:any
 }
 
-const DayModeNightModeFields: FC<DayModeNightModeFieldsPropTypes> =
+const DayModeNightModeFields: FC<IProps> =
     ({
          dayNightModeData,
          dayNightModeDefault,

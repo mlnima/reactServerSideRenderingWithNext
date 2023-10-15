@@ -82,6 +82,7 @@
     "react-select": "^5.7.4",
     "react-share": "^4.4.0",
     "react-spinners": "^0.13.8",
+    "react-switch": "^7.0.0",
     "react-syntax-highlighter": "^15.5.0",
     "redux": "^4.2.1",
     "redux-devtools-extension": "^2.13.9",

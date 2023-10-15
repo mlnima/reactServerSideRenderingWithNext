@@ -10,6 +10,7 @@ import {Widget} from "typescript-types";
 import {useAppDispatch} from "@store/hooks";
 import {updateWidgetAction} from "@store/reducers/widgetsReducer";
 import {inputValueSimplifier} from "custom-util";
+import isNumericString from "custom-util/dist/src/string-util/isNumericString";
 
 interface WidgetModelPropTypes {
     widget: Widget

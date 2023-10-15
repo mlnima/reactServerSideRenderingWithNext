@@ -1,7 +1,7 @@
-// @ts-nocheck
 'use client';
 import {createGlobalStyle} from "styled-components";
 import {FC} from "react";
+import defaultColorVariables from "@components/global/styles/defaultColorVariables";
 
 interface GlobalStylesPropTypes {
     customColors?: string;
@@ -9,7 +9,8 @@ interface GlobalStylesPropTypes {
 }
 
 const Styles = createGlobalStyle<GlobalStylesPropTypes>`
-  ${({customColors}) => customColors?.includes(':root') ? customColors : `:root {${customColors}}`}
+  ${({customColors}) =>
+          !!customColors ? customColors?.includes(':root') ? customColors : `:root {${customColors}}` : ''}
   ${({customStyles}) => customStyles ? customStyles : ''}
 `
 const GlobalCustomStyles: FC<GlobalStylesPropTypes> = ({customStyles, customColors}) => {

@@ -1,11 +1,12 @@
-.menuItem{
+.menuItem {
   list-style-type: none;
   width: 90%;
-  background-color: var(--tertiary-background-color,#404040);
+  background-color: var(--tertiary-background-color, #404040);
   border-radius: 0.375rem;
- margin: 0  auto;
+  margin: 0 auto;
+
   .menu-item-link {
-    color:var(--secondary-text-color,#b3b3b3);
+    color: var(--secondary-text-color, #b3b3b3);
     background-color: transparent;
     font-weight: bold;
     font-size: 1em;
@@ -20,16 +21,18 @@
 }
 
 
-@media only screen and (min-width: 768px) {
-  .menuItem{
+@media only screen and (min-width: 1025px) {
+  .menuItem {
     display: block;
     white-space: nowrap;
     border-left: var(--default-border);
     padding: 0 1rem;
     margin: 0;
     background-color: initial;
-    border-radius:initial;
-    &:last-child{
+    border-radius: initial;
+    width: initial;
+
+    &:last-child {
       border-right: var(--default-border);
     }
   }

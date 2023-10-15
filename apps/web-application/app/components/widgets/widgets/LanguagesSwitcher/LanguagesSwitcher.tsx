@@ -2,6 +2,7 @@
 import React, {FC, useState} from "react";
 import {useParams, usePathname, useRouter} from 'next/navigation';
 import './LanguagesSwitcher.styles.scss';
+import {languagesMapOrigin} from "data-structures";
 
 interface IProps {
     locale: string,
@@ -52,7 +53,8 @@ const LanguagesSwitcher: FC<IProps> = ({locale}) => {
         <div className={'languagesSwitcherWidget'}>
             <div className={'languagesSwitcherWidgetActiveLanguage'}>
                 <button type={'button'} onClick={() => setIsOpen(!isOpen)}>
-                    {locale.toUpperCase()}
+                    {/*//@ts-ignore*/}
+                    <span> {languagesMapOrigin?.[locale] || locale}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                          fill="currentColor">
                         <path
@@ -77,7 +79,9 @@ const LanguagesSwitcher: FC<IProps> = ({locale}) => {
                                 onClick={() => redirectedPathName(locale)}
                                 className={'languagesItem'}
                                 role="menuitem">
-                                {locale.toUpperCase()}
+                                {/*//@ts-ignore*/}
+                                {languagesMapOrigin?.[locale] || locale}
+                                {/*{locale.toUpperCase()}*/}
                             </button>
                         ))}
 

@@ -19,8 +19,10 @@
 
   --dim-background-color: rgba(0, 0, 0, .6);
   --primary-active-color: #f90;
-  --primary-secondary-color: #6c757d;
+  --secondary-active-color: #6c757d;
   --primary-gradiant: linear-gradient(180deg, #fff, hsla(0, 0%, 100%, .6));
+
+  --primary-text-shodow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 
   /*sidebar size*/
   --sidebar-desktop-width: 320px;
@@ -53,6 +55,12 @@
   --light-button-link-background-color: #f8f9fa;
   --light-button-link-border-color: #f8f9fa;
   --light-button-link-text-color: #212529;
+
+  //break points
+  --mobile-breakpoint : 481px;
+  --tablet-breakpoint : 769px;
+  --desktop-breakpoint : 1025px;
+
 }
 
 //body.light {
@@ -117,12 +125,14 @@ a {
   padding: 0;
 }
 
-@media only screen and (min-width: 600px) {
-  #content {
-    //padding: 0 .25rem;
-    box-sizing: border-box;
-  }
+.desktopOnly{
+  display: none !important;
 }
+
+.mobileOnly{
+  display: initial !important;
+}
+
 
 //
 //.inner-content{
@@ -130,7 +140,7 @@ a {
 //  margin: auto;
 //}
 
-.dimFullScreen {
+.darkenBackground {
   position: fixed;
   left: 0;
   top: 0;
@@ -139,3 +149,27 @@ a {
   background-color: rgba(0, 0, 0, .5);
 }
 
+.darkenBackgroundVisible{
+  display: initial;
+}
+.darkenBackgroundHidden{
+  display: none;
+}
+
+@media only screen and (min-width: 600px) {
+  #content {
+    //padding: 0 .25rem;
+    box-sizing: border-box;
+  }
+}
+
+
+
+@media only screen and (min-width: 768px){
+  .desktopOnly{
+    display: initial !important;
+  }
+  .mobileOnly{
+    display: none !important;
+  }
+}

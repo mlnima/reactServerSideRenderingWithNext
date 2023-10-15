@@ -2,13 +2,13 @@ import React, {FC} from 'react';
 import {Meta} from "typescript-types";
 import MetasRenderer from "@components/metas/MetasRenderer";
 
-interface MetasCardsRendererPropTypes {
+interface IProps {
     metas: Meta[],
     locale: string,
     startWith?:string
 }
 
-const TagsPageContentRenderer: FC<MetasCardsRendererPropTypes> =
+const TagsPageContentRenderer: FC<IProps> =
     ({
          metas,
          locale,

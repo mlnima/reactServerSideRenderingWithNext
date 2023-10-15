@@ -3,7 +3,7 @@ import {Meta} from "typescript-types";
 import Pagination from "@components/Pagination/Pagination";
 import ActorsCardsRenderer from "@components/cards/CardsRenderer/ActorsCardsRenderer/ActorsCardsRenderer";
 
-interface MetasCardsRendererPropTypes {
+interface IProps {
     renderPagination: boolean,
     metas: Meta[],
     totalCount: number,
@@ -12,7 +12,7 @@ interface MetasCardsRendererPropTypes {
     locale: string
 }
 
-const ActorsPageContentRenderer: FC<MetasCardsRendererPropTypes> =
+const ActorsPageContentRenderer: FC<IProps> =
     ({
          metas,
          renderPagination,

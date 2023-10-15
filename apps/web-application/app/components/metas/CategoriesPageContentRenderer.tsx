@@ -1,9 +1,9 @@
 import React, {FC} from 'react';
 import {Meta} from "typescript-types";
-import MetasCardsRenderer from "@components/cards/CardsRenderer/MetasCardsRenderer/MetasCardsRenderer";
+import CategoriesCardsRenderer from "@components/cards/CardsRenderer/CategoriesCardsRenderer/CategoriesCardsRenderer";
 import Pagination from "@components/Pagination/Pagination";
 
-interface MetasCardsRendererPropTypes {
+interface IProps {
     renderPagination:boolean,
     metas: Meta[],
     locale: string,
@@ -12,14 +12,14 @@ interface MetasCardsRendererPropTypes {
     numberOfCardsPerPage: number,
 }
 
-const CategoriesPageContentRenderer: FC<MetasCardsRendererPropTypes> = ({metas, locale,renderPagination,totalCount,currentPage,numberOfCardsPerPage}) => {
+const CategoriesPageContentRenderer: FC<IProps> = ({metas, locale,renderPagination,totalCount,currentPage,numberOfCardsPerPage}) => {
 
 
 
     return (
         <>
             <div className={'categoriesContainer'}>
-                <MetasCardsRenderer metaType={'categories'} metas={metas} locale={locale}/>
+                <CategoriesCardsRenderer metaType={'categories'} metas={metas} locale={locale}/>
             </div>
             {renderPagination && <Pagination totalCount={totalCount}
                                              currentPage={currentPage}

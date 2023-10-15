@@ -14,7 +14,7 @@ module.exports = {
         'secondary-background-color':'var(--secondary-background-color)',
         'tertiary-background-color':'var(--tertiary-background-color)',
         'primary-active-color':'var(--primary-active-color)',
-        'primary-secondary-color':'var(--primary-secondary-color)',
+        'primary-secondary-color':'var(--secondary-active-color)',
       },
       gridTemplateColumns:{
         '21': 'repeat(auto-fill, minmax(96vw, 1fr))',

@@ -184,40 +184,40 @@ const DefaultFields: FC<DefaultFieldsPropTypes> =
                     }
                 </div>
 
-                <SelectFieldForWidget title={'Custom Script Strategy:'}
-                                      name={'customScriptStrategy'}
-                                      value={widgetData.customScriptStrategy}
-                                      options={['lazyOnload', 'afterInteractive', 'beforeInteractive']}
-                                      onChangeHandler={onChangeHandler}
-                />
+                {/*<SelectFieldForWidget title={'Custom Script Strategy:'}*/}
+                {/*                      name={'customScriptStrategy'}*/}
+                {/*                      value={widgetData.customScriptStrategy}*/}
+                {/*                      options={['lazyOnload', 'afterInteractive', 'beforeInteractive']}*/}
+                {/*                      onChangeHandler={onChangeHandler}*/}
+                {/*/>*/}
 
-                <div className={'monaco-editor-section'}>
+                {/*<div className={'monaco-editor-section'}>*/}
 
-                    <div className={'editor-section'}>
-                        <p>Custom Script:</p>
-                        <button className={'btn btn-primary'}
-                                onClick={() => setWidgetSettings({
-                                    ...widgetSettings,
-                                    customScriptBox: !widgetSettings.customScriptBox
-                                })}>
-                            {widgetSettings.customScriptBox ? 'close' : 'open'}
-                        </button>
-                    </div>
+                {/*    <div className={'editor-section'}>*/}
+                {/*        <p>Custom Script:</p>*/}
+                {/*        <button className={'btn btn-primary'}*/}
+                {/*                onClick={() => setWidgetSettings({*/}
+                {/*                    ...widgetSettings,*/}
+                {/*                    customScriptBox: !widgetSettings.customScriptBox*/}
+                {/*                })}>*/}
+                {/*            {widgetSettings.customScriptBox ? 'close' : 'open'}*/}
+                {/*        </button>*/}
+                {/*    </div>*/}
 
-                    {widgetSettings.customScriptBox ?
-                        <MonacoEditor
-                            language={'javascript'}
-                            name={'customScript'}
-                            defaultValue={widgetData.customScript}
-                            value={widgetData.customScript}
-                            className={'customScriptTextarea'}
-                            onChange={onChangeHandler}
+                {/*    {widgetSettings.customScriptBox ?*/}
+                {/*        <MonacoEditor*/}
+                {/*            language={'javascript'}*/}
+                {/*            name={'customScript'}*/}
+                {/*            defaultValue={widgetData.customScript}*/}
+                {/*            value={widgetData.customScript}*/}
+                {/*            className={'customScriptTextarea'}*/}
+                {/*            onChange={onChangeHandler}*/}
 
-                        />
-                        : null
-                    }
+                {/*        />*/}
+                {/*        : null*/}
+                {/*    }*/}
 
-                </div>
+                {/*</div>*/}
             </>
         )
     };

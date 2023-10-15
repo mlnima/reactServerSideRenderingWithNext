@@ -79,14 +79,14 @@ const SearchBar: React.FC<IProps> = ({dictionary, locale}) => {
 
 
     return (
-        <div className={'searchbar'}>
+        <div className={'searchbarWidget'}>
 
             <button onClick={() => setOpen(!open)}
                     aria-label={'open close search form'}
                     title={dictionary?.['Search'] || 'Search'}
                     className={'openSearchFormButton'}>
 
-                <FontAwesomeIcon icon={faMagnifyingGlass} style={{width: 25, height: 25}}/>
+                <FontAwesomeIcon icon={faMagnifyingGlass} style={{width: 24, height: 24}}/>
             </button>
 
             <form className={`searchbarForm ${open ? 'searchbarFormOpen' : 'searchbarFormClosed'}`}
@@ -98,8 +98,8 @@ const SearchBar: React.FC<IProps> = ({dictionary, locale}) => {
                         onClick={e => onCloseForm(e)}>
                     {
                         keyword.length > 0 ?
-                            <FontAwesomeIcon icon={faEraser} style={{width: 25, height: 25}}/> :
-                            <FontAwesomeIcon icon={faXmark} style={{width: 25, height: 25}}/>
+                            <FontAwesomeIcon icon={faEraser} style={{width: 24, height: 24}}/> :
+                            <FontAwesomeIcon icon={faXmark} style={{width: 24, height: 24}}/>
                     }
 
                 </button>
@@ -109,7 +109,7 @@ const SearchBar: React.FC<IProps> = ({dictionary, locale}) => {
                             title={dictionary?.['Clear'] || 'Clear'}
                             type={'button'}
                             onClick={e => onClearHandler(e)}>
-                        <FontAwesomeIcon icon={faEraser} style={{width: 25, height: 25}}/>
+                        <FontAwesomeIcon icon={faEraser} style={{width: 24, height: 24}}/>
                     </button>
                 }
                 <input type="text"
@@ -121,7 +121,7 @@ const SearchBar: React.FC<IProps> = ({dictionary, locale}) => {
                 <button type='submit'
                         className='btn searchbarSubmitButton'
                         title={dictionary?.['Search'] || 'Search'}>
-                    <FontAwesomeIcon icon={faMagnifyingGlass} style={{width: 25, height: 25}}/>
+                    <FontAwesomeIcon icon={faMagnifyingGlass} style={{width: 24, height: 24}}/>
                 </button>
 
             </form>

@@ -4,10 +4,9 @@ import CardTitle from "../../asset/CardTitle/CardTitle";
 import dynamic from "next/dynamic";
 import {Post} from "typescript-types";
 import {ratingCalculator} from "custom-util";
+import '../postCard.scss'
 
-const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
 const CardImageRendererUseClient = dynamic(() => import('../../asset/CardImageRenderer/CardImageRendererUseClient'))
-const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
 
 interface PropTypes {
     locale: string,
@@ -29,13 +28,11 @@ const UcgAdPostCard: FC<PropTypes> =
          isNextIImageAllowed
      }) => {
 
-        const rating = post.likes || post.disLikes ? ratingCalculator(post?.likes, post?.disLikes) : null
-
         return (
-            <article className={`post-card post-card-ad ${isSidebar && 'postCardSidebar'}`}>
-                <div className={'card-media'}>
+            <article className={`postCard postCardAd ${isSidebar && 'postCardSidebar'}`}>
+                <div className={'cardMedia'}>
                     <Link href={postUrl}
-                          className={'card-link'}
+                          className={'cardLink'}
                           title={post?.translations?.[locale as string]?.title ?? post?.title}>
                         <CardImageRendererUseClient
                             imageUrl={post.mainThumbnail}
@@ -45,13 +42,9 @@ const UcgAdPostCard: FC<PropTypes> =
                     </Link>
                 </div>
 
-                <div className={`card-info`}>
+                <div className={`cardInfo`}>
                     <CardTitle title={post?.translations?.[locale as string]?.title ?? post?.title}
                                url={postUrl}/>
-                    <div className={'card-info-stats'}>
-                        {!!post.views && <CardViews views={post.views}/>}
-                        {!!rating && <CardRating rating={rating}/>}
-                    </div>
                 </div>
             </article>
         )

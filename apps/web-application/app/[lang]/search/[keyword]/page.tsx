@@ -79,7 +79,7 @@ const searchPage = async ({params, searchParams}: IProps) => {
                                  position={'searchPageTop'}/>
                 {groupingMetas.actors?.length > 0 &&
                     <>
-                        <h2>{dictionary['Actors'] || 'Actors'}</h2>
+                        <h2 className={'searchSectionTitle'}>{dictionary['Actors'] || 'Actors'}</h2>
                         <ActorsPageContentRenderer renderPagination={false}
                                                    totalCount={numberOfCardsPerPage}
                                                    currentPage={currentPage}
@@ -99,7 +99,7 @@ const searchPage = async ({params, searchParams}: IProps) => {
 
                 {groupingMetas.categories?.length > 0 &&
                     <>
-                        <h2>{dictionary['Categories'] || 'Categories'}</h2>
+                        <h2 className={'searchSectionTitle'}>{dictionary['Categories'] || 'Categories'}</h2>
                         <CategoriesPageContentRenderer renderPagination={false}
                                                        locale={locale}
                                                        totalCount={numberOfCardsPerPage}
@@ -110,7 +110,7 @@ const searchPage = async ({params, searchParams}: IProps) => {
                 }
                 {groupingMetas.tags.length > 0 &&
                     <>
-                        <h2>{dictionary['Tags'] || 'Tags'}</h2>
+                        <h2 className={'searchSectionTitle'}>{dictionary['Tags'] || 'Tags'}</h2>
                         <TagsPageContentRenderer locale={locale} metas={groupingMetas?.tags}/>
                     </>
                 }

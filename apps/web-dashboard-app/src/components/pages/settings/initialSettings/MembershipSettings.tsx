@@ -69,22 +69,15 @@ const MembershipSettings: FC<PropTypes> = ({onChangeHandler, initialSettingsData
                            checked={initialSettingsData?.membershipSettings?.usersCanCommentOnThePosts}
                            className={'primaryInput'}/>
                 </div>
-                <div className={'checkbox-field'}>
-                    <p>Users Personal Email Address(eg. username@domain.com):</p>
-                    <input onChange={e => onChangeHandler(e, 'membershipSettings')}
-                           type={'checkbox'}
-                           name={'usersCanCommentOnThePosts'}
-                           checked={initialSettingsData?.membershipSettings?.usersPersonalEmailAddress}
-                           className={'primaryInput'}/>
-                </div>
-                <div className={'checkbox-field'}>
-                    <p>Users Personal Email Address(eg. username@domain.com):</p>
-                    <input onChange={e => onChangeHandler(e, 'membershipSettings')}
-                           type={'checkbox'}
-                           name={'usersCanCommentOnThePosts'}
-                           checked={initialSettingsData?.membershipSettings?.verificationRequired}
-                           className={'primaryInput'}/>
-                </div>
+                {/*<div className={'checkbox-field'}>*/}
+                {/*    <p>Users Personal Email Address(eg. username@domain.com):</p>*/}
+                {/*    <input onChange={e => onChangeHandler(e, 'membershipSettings')}*/}
+                {/*           type={'checkbox'}*/}
+                {/*           name={'usersCanCommentOnThePosts'}*/}
+                {/*           checked={initialSettingsData?.membershipSettings?.usersPersonalEmailAddress}*/}
+                {/*           className={'primaryInput'}/>*/}
+                {/*</div>*/}
+
             </>
             }
 

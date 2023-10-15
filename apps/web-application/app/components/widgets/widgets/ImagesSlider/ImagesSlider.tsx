@@ -8,7 +8,6 @@ import useEmblaCarousel , {
     EmblaEventType,
     UseEmblaCarouselType,
 }from 'embla-carousel-react'
-import styled from "styled-components";
 import { v4 as uuidv4 } from 'uuid';
 import Autoplay, {
     AutoplayType,
@@ -17,114 +16,6 @@ import Autoplay, {
 import Link from "next/link";
 import parse from "html-react-parser";
 
-const ImagesSliderStyledDiv = styled.div`
-  position: relative;
-
-  .slider-parent {
-    overflow: hidden;
-
-    &:before {
-      display: none;
-      content: '{"draggable": true}';
-    }
-
-    .slider-container {
-      display: flex;
-
-      .slide {
-        position: relative;
-        flex: 0 0 100%;
-        margin: 5px;
-        width: 96vw;
-        img{
-          width: 100%;
-        }
-      }
-    }
-  }
-
-
-  .prev-btn, .next-btn {
-    position: absolute;
-    top: 40%;
-    z-index: 1;
-    background-color: transparent;
-    border: none;
-
-    svg {
-      width: 40px;
-      height: 40px;
-      fill: var(--primary-active-color, #f90);
-    }
-  }
-
-
-  .prev-btn {
-    left: 0;
-  }
-
-  .next-btn {
-    right: 0;
-  }
-
-  .slider-pagination-items {
-    display: flex;
-    list-style: none;
-    justify-content: center;
-    padding-top: 10px;
-    flex-wrap: wrap;
-
-    .slider-pagination-item {
-      background-color: transparent;
-      cursor: pointer;
-      position: relative;
-      padding: 0;
-      outline: 0;
-      border: 0;
-      width: 20px;
-      height: 20px;
-      margin-right: 7.5px;
-      margin-left: 7.5px;
-      display: flex;
-      align-items: center;
-      opacity: .5;
-
-      &:after {
-        background-color: var(--primary-active-color, #f90);
-        width: 100%;
-        height: 4px;
-        border-radius: 2px;
-        content: "";
-      }
-    }
-
-    .is-selected {
-      transform: scale(1.2);
-      opacity: 1;
-    }
-  }
-
-  @media only screen and (min-width: 768px) {
-    .slider-parent {
-
-      .slider-container {
-        display: flex;
-
-        .slide {
-          position: relative;
-           
-          flex: 0 0 300px;
-          img{
-            width: 100%;
-          }
-        }
-      }
-
-    }
-
-  }
-
-`
 
 
 interface PostsSliderPropsTypes {
@@ -171,7 +62,7 @@ const ImagesSlider: FC<PostsSliderPropsTypes> = ({uniqueData}) => {
         const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
         const scrollPrev = useCallback(() => sliderApi && sliderApi.scrollPrev(), [sliderApi]);
         const scrollNext = useCallback(() => sliderApi && sliderApi.scrollNext(), [sliderApi]);
-        const scrollTo = useCallback((index) => sliderApi && sliderApi.scrollTo(index), [
+        const scrollTo = useCallback((index:number) => sliderApi && sliderApi.scrollTo(index), [
             sliderApi
         ]);
 
@@ -209,7 +100,7 @@ const ImagesSlider: FC<PostsSliderPropsTypes> = ({uniqueData}) => {
 
 
         return (
-            <ImagesSliderStyledDiv className={'image-slider-content'} >
+            <div className={'imageSlider'} >
 
                 {uniqueData?.sliderConfig?.navigation ?
                     <>
@@ -264,7 +155,7 @@ const ImagesSlider: FC<PostsSliderPropsTypes> = ({uniqueData}) => {
                     : null
                 }
 
-            </ImagesSliderStyledDiv>
+            </div>
         );
     };
 

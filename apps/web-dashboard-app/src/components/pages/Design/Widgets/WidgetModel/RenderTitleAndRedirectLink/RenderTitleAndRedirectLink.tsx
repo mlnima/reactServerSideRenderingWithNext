@@ -53,12 +53,11 @@ const RenderTitleAndRedirectLink: FC<RenderTitleAndRedirectLinkPropTypes> =
                     </div>
 
                     <div className='textInputFieldForWidget widgetSection'>
-                        <p>Link to Widget Footer:</p>
-                        <select className={'primarySelect'} name='footerLink' value={widgetData.footerLink}
+                        <p>Redirect Link Position:</p>
+                        <select className={'primarySelect'} name='redirectLinkPosition' value={widgetData.redirectLinkPosition}
                                 onChange={onChangeHandler}>
-                            <option value=''>Select</option>
-                            <option value='true'>true</option>
-                            <option value='false'>false</option>
+                            <option value='header'>Header</option>
+                            <option value='bottom'>Bottom</option>
                         </select>
                     </div>
                 </>

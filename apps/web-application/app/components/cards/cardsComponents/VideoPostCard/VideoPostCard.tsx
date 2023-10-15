@@ -4,16 +4,18 @@ import dynamic from "next/dynamic";
 import _qualityConvertor from "../../asset/_qualityConvertor";
 import {Post} from "typescript-types";
 import CardTitle from "../../asset/CardTitle/CardTitle";
-// import {ratingCalculator} from "custom-util";
-import './VideoPostCard.styles.scss'
+import './VideoPostCard.scss'
+import '../postCard.scss'
 
-// const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
-// const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
 const CardQuality = dynamic(() => import('../../asset/CardQuality/CardQuality'))
 const CardDuration = dynamic(() => import('../../asset/CardDuration/CardDuration'))
 const CardImageRendererUseClient = dynamic(() => import(
     '../../asset/CardImageRenderer/CardImageRendererUseClient'
     ))
+
+// import {ratingCalculator} from "custom-util";
+// const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
+// const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
 
 interface IProps {
     locale: string,
@@ -37,8 +39,8 @@ const VideoPostCard: FC<IProps> =
         // const rating = post.likes || post.disLikes ? ratingCalculator(post?.likes, post?.disLikes) : null
 
         return (
-            <article className={`post-card post-card-video ${isSidebar ? 'postCardSidebar' : ''}`}>
-                <div className={'card-media'}>
+            <article className={`postCard postCardVideo ${isSidebar ? 'postCardSidebar' : ''}`}>
+                <div className={'cardMedia'}>
                     <Link href={postUrl}
                           className={'card-link'}
                           title={post?.translations?.[locale as string]?.title ?? post?.title}>
@@ -57,7 +59,7 @@ const VideoPostCard: FC<IProps> =
                             <CardDuration duration={post?.duration}/>}
                     </Link>
                 </div>
-                <div className={`card-info`}>
+                <div className={`cardInfo`}>
                     <CardTitle title={post?.translations?.[locale as string]?.title ?? post?.title}
                                url={postUrl}/>
                     {/*<div className={'card-info-stats'}>*/}

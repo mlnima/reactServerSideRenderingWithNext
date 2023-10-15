@@ -17,7 +17,6 @@ const LoginRegisterPopup: FC<IProps> = ({locale,dictionary}) => {
     const {loginRegisterFormPopup} = useAppSelector(({globalState}) => globalState)
     const {loggedIn} = useAppSelector(({user}) => user)
 
-
     if  (!loggedIn && (loginRegisterFormPopup === 'register' || loginRegisterFormPopup === 'login')){
         return (
             <div className='loginRegisterPopup'>
@@ -25,7 +24,6 @@ const LoginRegisterPopup: FC<IProps> = ({locale,dictionary}) => {
             </div>
         );
     }else return null
-
 };
 
 export default LoginRegisterPopup;

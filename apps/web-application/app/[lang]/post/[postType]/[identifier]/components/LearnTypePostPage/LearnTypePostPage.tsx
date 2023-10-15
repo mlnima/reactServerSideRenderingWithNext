@@ -12,9 +12,9 @@ import Comments from "../Comments/Comments";
 
 interface IProps {
     post: Post,
-    views:number,
-    likes:number,
-    disLikes:number,
+    views: number,
+    likes: number,
+    disLikes: number,
     locale: string,
     hasSidebar?: string,
     dictionary: {
@@ -35,38 +35,41 @@ const LearnTypePostPage: FC<IProps> =
          views,
          likes,
          disLikes
-    }) => {
+     }) => {
 
-    return (
-        <div id={'primary'} className='post-page'>
-            <main id={'main'}>
-                <div className={'entry-header'}>
-                    <div className='entry-header-data'>
-                        <PostTitle title={post?.translations?.[locale]?.title ?? post?.title}/>
+        return (
+            <div id={'primary'} className='post-page'>
+                <main id={'main'}>
+                    <div className={'entry-header'}>
+                        <div className='entry-header-data'>
+                            <PostTitle title={post?.translations?.[locale]?.title ?? post?.title}/>
+                        </div>
                     </div>
-                </div>
-                <LearnTypePostPageDescription description={post?.translations?.[locale]?.description ?? post?.description}
-                                              locale={locale}/>
-                <div className="entry-content">
-                    <div className='entry-header-actions'>
-                        <RatingButtons rating={true}
-                                       dictionary={dictionary}
-                                       likes={likes}
-                                       disLikes={disLikes}
-                                       views={views}
-                                       _id={post._id}/>
+                    <LearnTypePostPageDescription
+                        description={post?.translations?.[locale]?.description ?? post?.description}
+                        locale={locale}/>
+                    <div className="entry-content">
+                        <div className='entry-header-actions'>
+                            <RatingButtons rating={true}
+                                           dictionary={dictionary}
+                                           likes={likes}
+                                           disLikes={disLikes}
+                                           views={views}
+                                           _id={post._id}/>
+                        </div>
+                        <PostMetasRenderer type='categories' metas={post.categories} dictionary={dictionary}/>
+                        <PostMetasRenderer type='tags' metas={post.tags} dictionary={dictionary}/>
                     </div>
-                    <PostMetasRenderer type='categories' metas={post.categories} dictionary={dictionary}/>
-                    <PostMetasRenderer type='tags' metas={post.tags} dictionary={dictionary}/>
-                </div>
-                <div className='under-post-widget-area'>
-                    <WidgetsRenderer widgets={widgets} position='underPost'  hasSidebar={hasSidebar} locale={locale} dictionary={dictionary}/>
-                </div>
-                <Comments dictionary={dictionary} postId={post?._id}/>
-                <RelatedPostsRenderer locale={locale} relatedPosts={relatedPosts} dictionary={dictionary}/>
-            </main>
-        </div>
-    )
-}
+
+                    <Comments dictionary={dictionary} postId={post?._id}/>
+                    <RelatedPostsRenderer locale={locale} relatedPosts={relatedPosts} dictionary={dictionary}/>
+                    <div className='under-post-widget-area'>
+                        <WidgetsRenderer widgets={widgets} position='underPost' hasSidebar={hasSidebar} locale={locale}
+                                         dictionary={dictionary}/>
+                    </div>
+                </main>
+            </div>
+        )
+    }
 
 export default LearnTypePostPage;

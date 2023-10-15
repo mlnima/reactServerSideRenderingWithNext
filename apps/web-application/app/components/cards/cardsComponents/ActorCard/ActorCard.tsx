@@ -3,7 +3,7 @@ import {Meta} from "typescript-types";
 import Link from "next/link";
 import {capitalizeFirstLetter} from "custom-util";
 import CardTitle from "@components/cards/asset/CardTitle/CardTitle";
-import './ActorCard.styles.scss'
+import './ActorCard.scss'
 import CardImageRendererUseClient from '@components/cards/asset/CardImageRenderer/CardImageRendererUseClient'
 
 
@@ -27,13 +27,15 @@ const ActorCard: FC<ActorCardPropTypes> =
         const actorName = capitalizeFirstLetter(meta?.name)
 
         return (
-            <article className={`actor-card metaCard ${isSidebar && 'actorCardSidebar'}`}>
+            <article className={`actor-card metaCard ${isSidebar ? 'actorCardSidebar' : ''}`}>
                 <div className={`card-info`}>
                     <CardTitle title={actorName} url={`/actor/${meta?._id}`}/>
                 </div>
                 <Link href={actorUrl} className='actor-card-link' title={actorName as string}>
                     <CardImageRendererUseClient imageUrl={meta.imageUrl}
+                                                key={meta?._id}
                                                 mediaAlt={actorName}
+                                                overlayShadow
                                                 isNextIImageAllowed={isNextIImageAllowed}
                                                 index={index}
                                                 objectFit={'cover'}

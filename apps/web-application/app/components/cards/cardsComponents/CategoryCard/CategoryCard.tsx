@@ -3,11 +3,12 @@ import {Meta} from "typescript-types";
 import Link from "next/link";
 import {capitalizeFirstLetter} from "custom-util";
 import dynamic from "next/dynamic";
-import CardTitle from "@components/cards/asset/CardTitle/CardTitle";
-import '../metaCard.styles.scss'
+import './CategoryCard.scss'
 
-const TextToCanvasImage = dynamic(() => import('@components/cards/asset/TextToCanvasImage/TextToCanvasImage'))
-const CardImageRendererUseClient = dynamic(() => import('@components/cards/asset/CardImageRenderer/CardImageRendererUseClient'))
+const TextToCanvasImage = dynamic(() =>
+    import('@components/cards/asset/TextToCanvasImage/TextToCanvasImage'))
+const CardImageRendererUseClient = dynamic(() =>
+    import('@components/cards/asset/CardImageRenderer/CardImageRendererUseClient'))
 
 interface CategoryCardPropTypes {
     meta: Meta,
@@ -31,22 +32,28 @@ const CategoryCard: FC<CategoryCardPropTypes> =
         const title = capitalizeFirstLetter(meta?.translations?.[locale]?.name ?? meta?.name)
 
         return (
-            <article className={`category-card metaCard ${isSidebar && 'metaCardSidebar'}`}>
-                <div className={'card-media'}>
-                    <Link href={metaUrl} className='category-card-link' title={title}>
+            <article className={`categoryCard ${isSidebar && 'categoryCardSidebar'}`}>
+
+                <div className={'cardMedia'}>
+                    <Link href={metaUrl} className='categoryCardLink' title={title}>
                         {!!meta.imageUrl ?
                             <CardImageRendererUseClient imageUrl={meta.imageUrl}
+                                                        key={meta?._id}
                                                         isNextIImageAllowed={isNextIImageAllowed}
                                                         mediaAlt={title}
+                                                        overlayShadow
                                                         index={index}/> :
                             <TextToCanvasImage title={title}
                                                numberOfCardsPerRowInMobile={1}/>
                         }
                     </Link>
                 </div>
-                <div className={`card-info`}>
-                    <CardTitle title={title} url={`/category/${meta?._id}`}/>
+
+                <div className={`cardInfo`}>
+                    <strong className={'cardTitle'}>{title}</strong>
+                    {/*<CardTitle title={title} url={`/category/${meta?._id}`}/>*/}
                 </div>
+
             </article>
         )
     };

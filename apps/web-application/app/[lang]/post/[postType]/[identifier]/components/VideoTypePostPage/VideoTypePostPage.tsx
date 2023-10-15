@@ -12,9 +12,9 @@ import Comments from "../Comments/Comments";
 
 interface IProps {
     post: Post,
-    views:number,
-    likes:number,
-    disLikes:number,
+    views: number,
+    likes: number,
+    disLikes: number,
     locale: string,
     hasSidebar?: string,
     dictionary: {
@@ -35,41 +35,38 @@ const VideoTypePostPage: FC<IProps> =
          views,
          likes,
          disLikes
-    }) => {
+     }) => {
 
-    return (
-        <div id={'primary'} className='post-page'>
-            <div className={'entry-header'}>
-                <VideoPlayer post={post} dictionary={dictionary} locale={locale}/>
-                <div className='entry-header-data'>
-                    <PostTitle title={post?.translations?.[locale]?.title ?? post?.title}/>
-
-                    <div className='entry-header-actions'>
-                        <RatingButtons rating={true}
-                                       dictionary={dictionary}
-                                       likes={likes}
-                                       disLikes={disLikes}
-                                       views={views}
-                                       _id={post._id}/>
+        return (
+            <div id={'primary'} className='post-page'>
+                <div className={'entry-header'}>
+                    <VideoPlayer post={post} dictionary={dictionary} locale={locale}/>
+                    <div className='entry-header-data'>
+                        <PostTitle title={post?.translations?.[locale]?.title ?? post?.title}/>
+                        <div className='entry-header-actions'>
+                            <RatingButtons rating={true}
+                                           dictionary={dictionary}
+                                           likes={likes}
+                                           disLikes={disLikes}
+                                           views={views}
+                                           _id={post._id}/>
+                        </div>
                     </div>
-
                 </div>
-
+                <div className="entry-content">
+                    <PostDescription description={post?.translations?.[locale]?.description ?? post?.description}/>
+                    <PostMetasRenderer type='actors' metas={post.actors} dictionary={dictionary}/>
+                    <PostMetasRenderer type='categories' metas={post.categories} dictionary={dictionary}/>
+                    <PostMetasRenderer type='tags' metas={post.tags} dictionary={dictionary}/>
+                </div>
+                <Comments dictionary={dictionary} postId={post?._id}/>
+                <RelatedPostsRenderer locale={locale} relatedPosts={relatedPosts} dictionary={dictionary}/>
+                <div className='under-post-widget-area'>
+                    <WidgetsRenderer widgets={widgets} position='underPost' hasSidebar={hasSidebar} locale={locale}
+                                     dictionary={dictionary}/>
+                </div>
             </div>
-            <div className="entry-content">
-                <PostDescription description={post?.translations?.[locale]?.description ?? post?.description}/>
-                <PostMetasRenderer type='actors' metas={post.actors} dictionary={dictionary}/>
-                <PostMetasRenderer type='categories' metas={post.categories} dictionary={dictionary}/>
-                <PostMetasRenderer type='tags' metas={post.tags} dictionary={dictionary}/>
-            </div>
-            <div className='under-post-widget-area'>
-                <WidgetsRenderer widgets={widgets} position='underPost' hasSidebar={hasSidebar} locale={locale}
-                                 dictionary={dictionary}/>
-            </div>
-            <Comments dictionary={dictionary} postId={post?._id}/>
-            <RelatedPostsRenderer locale={locale} relatedPosts={relatedPosts} dictionary={dictionary}/>
-        </div>
-    )
-}
+        )
+    }
 
 export default VideoTypePostPage;

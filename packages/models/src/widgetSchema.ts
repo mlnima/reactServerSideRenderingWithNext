@@ -10,6 +10,7 @@ const widgetDataSchema = new Schema({
     name: String,
     redirectLink: String,
     redirectToTitle: String,
+    redirectLinkPosition: String,
     type: String,
     customStyles: String,
     customScript: String,

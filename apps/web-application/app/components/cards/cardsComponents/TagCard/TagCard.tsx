@@ -4,7 +4,7 @@ import Link from "next/link";
 import {capitalizeFirstLetter} from "custom-util";
 import dynamic from "next/dynamic";
 import CardTitle from "@components/cards/asset/CardTitle/CardTitle";
-import '../metaCard.styles.scss'
+import '../metaCard.scss'
 
 const TextToCanvasImage = dynamic(() => import('@components/cards/asset/TextToCanvasImage/TextToCanvasImage'))
 const CardImageRendererUseClient = dynamic(() => import('../../asset/CardImageRenderer/CardImageRendererUseClient'))
@@ -31,9 +31,9 @@ const TagCard: FC<TagCardPropTypes> =
         const title = capitalizeFirstLetter(meta?.translations?.[locale]?.name ?? meta?.name)
 
         return (
-            <article className={`tag-card metaCard ${isSidebar && 'metaCardSidebar'}`}>
-                <div className={'card-media'}>
-                    <Link href={metaUrl} className='tag-card-link' title={title as string}>
+            <article className={`metaCard metaCardTag ${isSidebar && 'metaCardSidebar'}`}>
+                <div className={'cardMedia'}>
+                    <Link href={metaUrl} className='tagCardLink' title={title as string}>
                         {!!meta?.imageUrl ?
                             <CardImageRendererUseClient imageUrl={meta?.imageUrl}
                                                         isNextIImageAllowed={isNextIImageAllowed}
@@ -44,7 +44,7 @@ const TagCard: FC<TagCardPropTypes> =
                         }
                     </Link>
                 </div>
-                <div className={`card-info`}>
+                <div className={`cardInfo`}>
                     <CardTitle title={title} url={`/tag/${meta?._id}`}/>
                 </div>
             </article>

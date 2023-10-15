@@ -43,7 +43,7 @@ const LoginRegisterPopupForms: FC<IProps> = ({locale,dictionary}: IProps) => {
 
     const dispatch = useAppDispatch()
     const globalState = useAppSelector(({globalState}) => globalState)
-
+    const {anyoneCanRegister} = useAppSelector(({settings}) => settings?.initialSettings?.membershipSettings);
     const [state, setState] = useState<StateTypes>({
         username: '',
         email: '',
@@ -114,7 +114,7 @@ const LoginRegisterPopupForms: FC<IProps> = ({locale,dictionary}: IProps) => {
         <Draggable handle='.handle'>
             <div className='loginRegisterContent'>
                 <FormHeader locale={locale} dictionary={dictionary}/>
-                {globalState.loginRegisterFormPopup === 'register' ?
+                {(globalState.loginRegisterFormPopup === 'register' && anyoneCanRegister) ?
                     <form className='login-register-form' onSubmit={e => onRegisterHandler(e)}>
                         <div className="login-register-form-fields">
                             <div className="login-register-form-field">
@@ -262,17 +262,21 @@ const LoginRegisterPopupForms: FC<IProps> = ({locale,dictionary}: IProps) => {
                         </form> : null
                 }
 
-                <span onClick={() => {
-                    globalState.loginRegisterFormPopup === 'register' ?
-                        dispatch(loginRegisterForm('login')) :
-                        dispatch(loginRegisterForm('register'))
-                    onrResetStateHandler()
-                }}
-                      className='btn btn-secondary'>
+                {anyoneCanRegister &&
+                    <span onClick={() => {
+                        globalState.loginRegisterFormPopup === 'register' ?
+                            dispatch(loginRegisterForm('login')) :
+                            dispatch(loginRegisterForm('register'))
+                        onrResetStateHandler()
+                    }}
+                          className='btn btn-secondary'>
                       {globalState.loginRegisterFormPopup === 'register' ?
                           dictionary['Do You Have An Account? Login Here'] || 'Do You Have An Account? Login Here' :
                           dictionary['Not A Member Yet? Register Here'] || 'Not A Member Yet? Register Here'}
                 </span>
+
+                }
+
 
             </div>
         </Draggable>

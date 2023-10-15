@@ -16,6 +16,8 @@ import AdvertiseWidgetModelFields from './AdvertiseWidgetModelFields';
 import ImagesSliderTypeWidgetModelFields from './ImagesSliderTypeWidgetModelFields/ImagesSliderTypeWidgetModelFields';
 // import SwiperWidgetFields from './SwiperWidgetFields/SwiperWidgetFields';
 import SliderWidgetFields from './SliderWidgetFields/SliderWidgetFields';
+import UserPreferenceConfigModelFields
+    from "@components/pages/Design/Widgets/WidgetModel/UserPreferenceConfigModelFields/UserPreferenceConfigModelFields";
 
 interface UniqueFieldsPropTypes {
     widgetData: any,
@@ -88,6 +90,11 @@ const UniqueFields: FC<UniqueFieldsPropTypes> =
                     />
                 }
 
+                {widgetData.type === 'userPreferenceConfig' &&
+                    <UserPreferenceConfigModelFields onChangeHandler={onUniqueDataChangeHandler}
+                                                     uniqueData={widgetData?.uniqueData}/>
+                }
+
                 {widgetData.type === 'postsListEntireByCategories' &&
                     <TextInputFieldForWidget
                         inputTitle='How Many Category Group?'
@@ -117,8 +124,6 @@ const UniqueFields: FC<UniqueFieldsPropTypes> =
                         onChangeHandler={onUniqueDataChangeHandler}
                     />
                 }
-
-
 
 
                 {(widgetData.type === 'posts' ||
@@ -163,7 +168,10 @@ const UniqueFields: FC<UniqueFieldsPropTypes> =
                     <SelectFieldForWidget title={'Meta Type:'}
                                           name={'metaType'}
                                           value={widgetData?.metaType}
-                                          options={['tags', 'categories', 'actors']}
+                                          options={widgetData.type === 'metaWithImage' ?
+                                              ['categories', 'actors'] :
+                                              ['tags', 'categories', 'actors']
+                                          }
                                           onChangeHandler={onChangeHandler}
                     />
                 }

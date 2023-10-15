@@ -27,28 +27,33 @@
 
       .items{
         display: flex;
+
         flex-wrap: wrap;
         width: 100%;
         gap: .5rem;
         .metaWidgetItem{
-          max-width: 16rem; // Equivalent to Tailwind's 'max-w-64'
-          display: block;
+          height: 48px;
+          min-width: 48px;
+          max-width: 16rem;
+          //display: block;
+          display: flex;
+
+          align-items: center;
           list-style-type: none;
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
-          padding: 0.75rem 0.375rem;
-          min-height: 3rem; // Equivalent to Tailwind's 'min-h-12'
-          border-radius: 0.25rem; // Equivalent to Tailwind's 'rounded'
-          color: var(--secondary-text-color,#b3b3b3);
+          border-radius: 0.25rem;
+          color: var(--secondary-text-color);
           cursor: pointer;
           word-wrap: break-word;
-          background-color: var(--secondary-background-color,#181818);
-          &:before {
-            content: "#";
-          }
+          background-color: var(--secondary-background-color);
+          box-sizing: border-box;
+
         }
         .view-all{
+          height: 48px;
+          min-width: 48px;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -73,9 +78,9 @@
         .items{
           gap: .1rem;
           .metaWidgetItem{
-            background-color: var(--primary-background,#000);
-            padding: 0.25rem;
-            min-height: 1rem;
+            //background-color: var(--primary-background-color);
+            //padding: 0.25rem;
+            //min-height: 1rem;
           }
 
         }

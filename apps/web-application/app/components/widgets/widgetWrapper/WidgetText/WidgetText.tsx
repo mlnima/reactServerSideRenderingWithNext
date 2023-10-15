@@ -1,6 +1,6 @@
 import {FC} from "react";
 import parse from 'html-react-parser'
-import WidgetTextStyles from "@components/widgets/widgetWrapper/WidgetText/WidgetText.styles";
+import './WidgetText.scss'
 
 interface TextPropTypes {
     translations: {
@@ -15,9 +15,9 @@ interface TextPropTypes {
 const WidgetText: FC<TextPropTypes> = ({translations, text,locale}) => {
 
     return (
-        <WidgetTextStyles className={'widgetText widget-text'} >
+        <div className={'widgetText widget-text'} >
             {parse(`${translations?.[locale]?.text || text || ''}`)}
-        </WidgetTextStyles>
+        </div>
     );
 
 };

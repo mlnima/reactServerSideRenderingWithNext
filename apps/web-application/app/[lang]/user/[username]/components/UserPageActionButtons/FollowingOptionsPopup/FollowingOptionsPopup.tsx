@@ -25,7 +25,7 @@ const FollowingOptionsPopup: FC<IProps> = (
     }) => {
     return (
         <div className={'followingOptionsPopup'}>
-            <div className={'dimFullScreen'}/>
+            <div className={'darkenBackground'}/>
             <div className={'followingOptionsButtons'}>
                 <div className={'followingOptionsHeader'}>
                     <button className={'followingOptionsCloseButton'}

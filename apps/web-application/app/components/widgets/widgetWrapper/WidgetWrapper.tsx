@@ -1,7 +1,8 @@
 import {FC} from "react";
 import {WidgetData} from "typescript-types";
 import dynamic from "next/dynamic";
-import './WidgetWrapper.styles.scss'
+import './WidgetWrapper.scss'
+import WidgetFooter from "@components/widgets/widgetWrapper/WidgetFooter/WidgetFooter";
 
 const WidgetHeader = dynamic(() => import('./WidgetHeader/WidgetHeader'))
 const WidgetPagination = dynamic(() => import('./WidgetPagination/WidgetPagination'))
@@ -28,6 +29,8 @@ const Authentication = dynamic(() => import('../widgets/Authentication/Authentic
 const Searchbar = dynamic(() => import('../widgets/Searchbar/Searchbar'))
 const MetasCardsWidget = dynamic(() => import('@components/widgets/widgets/MetasCardsWidget/MetasCardsWidget'))
 const PostsCardsWidget = dynamic(() => import('@components/widgets/widgets/PostsCardsWidget/PostsCardsWidget'))
+const UserPreferenceConfigWidget = dynamic(() =>
+    import('@components/widgets/widgets/UserPreferenceConfigWidget/UserPreferenceConfigWidget'))
 
 interface IProps {
     data: WidgetData,
@@ -62,6 +65,7 @@ const WidgetWrapper: FC<IProps> = ({data, widgetId, isSidebar, locale, dictionar
         'shoppingCart': ShoppingCart,
         'advertise': Advertise,
         'form': FormWidget,
+        'userPreferenceConfig': UserPreferenceConfigWidget,
         'dayModeNightMode': DayModeNightMode,
     }
 
@@ -69,9 +73,12 @@ const WidgetWrapper: FC<IProps> = ({data, widgetId, isSidebar, locale, dictionar
     const WidgetToRender = widgetMatcher?.[data?.type as string] || null
 
     return (
-        <div className={'widget ' + (data?.extraClassName ?? '')} id={data?.extraId || undefined}>
+        <div className={`widget${data?.extraClassName ? ` ${data?.extraClassName}` : ''}`}
+             id={data?.extraId || undefined}>
             {(data?.title || data?.translations?.[locale]?.title) &&
                 <WidgetHeader title={data?.translations?.[locale]?.title || data?.title}
+                              dictionary={dictionary}
+                              redirectLinkPosition={data?.redirectLinkPosition}
                               redirectLink={data?.redirectLink}
                               redirectToTitle={data?.translations?.[locale]?.redirectToTitle || data?.redirectToTitle}/>
             }
@@ -84,6 +91,12 @@ const WidgetWrapper: FC<IProps> = ({data, widgetId, isSidebar, locale, dictionar
                     locale={locale}
                     isSidebar={isSidebar}
                     widgetId={widgetId}/>
+            }
+
+            {data?.redirectLinkPosition === 'bottom' &&
+                <WidgetFooter redirectLink={data?.redirectLink}
+                              dictionary={dictionary}
+                              redirectToTitle={data?.translations?.[locale]?.redirectToTitle || data?.redirectToTitle}/>
             }
 
             {(!!data?.pagination && !!data?.redirectLink) &&

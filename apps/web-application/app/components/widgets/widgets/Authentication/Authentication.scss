@@ -1,0 +1,228 @@
+.authWidget {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+  .authWidgetPreview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+
+    .loginButton {
+
+      color: var(--secondary-text-color, #b3b3b3);
+
+      svg {
+
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
+
+
+    .profileIcon, .messagesIcon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: transparent;
+      padding: 0;
+      margin: 0;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      color: var(--secondary-text-color, #b3b3b3);
+
+    }
+
+    .profileIcon {
+      cursor: pointer;
+
+      svg {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
+
+    .messagesIcon {
+      svg {
+        width: 1.75rem;
+        height: 1.75rem;
+      }
+    }
+  }
+
+
+  .authWidgetSlideWrapper {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 11;
+
+
+    .authWidgetDimBackground {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 11;
+      background-color: rgba(0, 0, 0, 0.5);
+
+    }
+
+    .authWidgetSlide {
+
+      border-left: var(--default-border);
+      padding: 10px;
+      box-sizing: border-box;
+      position: absolute;
+      right: 0;
+      top: 0;
+      background-color: var(--tertiary-background-color);
+      width: 85%;
+      z-index: 12;
+      height: 100vh;
+      flex-direction: column;
+
+      .authWidgetCloseBtn {
+        position: absolute;
+        left: -48px;
+        color: var(--primary-text-color, #fff);
+        width: 48px;
+        height: 48px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        svg {
+          margin: auto;
+          width: 1.5rem;
+          height: 1.5rem;
+        }
+      }
+
+      .logged-items-auth-actions {
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
+        .logged-item {
+          height: 100px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          position: relative;
+
+
+          a {
+            color: var(--primary-text-color, #fff);
+          }
+
+          .icon-wrapper {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+
+            .icon {
+              position: relative;
+              width: 50%;
+              height: 50%;
+              margin: 0;
+            }
+          }
+
+          .text-data {
+            width: 100%;
+            text-align: center;
+          }
+        }
+      }
+
+      .logged-items {
+
+        .logged-item {
+          cursor: pointer;
+          position: relative;
+          width: 100%;
+          height: 100%;
+          min-height: 52px;
+          color: var(--primary-text-color, #fff);
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+
+          .icon-wrapper {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+        }
+
+        .sign-out {
+          align-self: flex-end;
+          justify-self: flex-end;
+        }
+      }
+    }
+
+
+  }
+
+
+  .authWidgetSlide {
+    display: flex;
+    animation: userMenuSlide .3s linear alternate;
+  }
+
+  //.authWidgetSlideClosed {
+  //  display: none;
+  //  animation: none;
+  //}
+}
+
+@media only screen and (min-width: 768px) {
+  .authWidget {
+    position: relative;
+
+    .authWidgetSlideWrapper {
+      position: absolute;
+      top: 100%;
+      left: auto;
+      right: auto;
+      bottom: auto;
+      width: auto;
+      height: auto;
+
+      .authWidgetDarkenBackground {
+        display: none;
+      }
+
+      .authWidgetSlide {
+        width: 300px;
+        height: initial;
+        border-radius: 0.375rem;
+        animation: none;
+        .authWidgetCloseBtn{
+          display: none;
+        }
+      }
+    }
+  }
+}

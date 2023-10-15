@@ -7,15 +7,21 @@ interface CardTitlePropTypes {
     title: string | undefined,
     url: string | undefined,
     targetLink?: string,
+    useLink?: boolean
 }
 
-const CardTitle: FC<CardTitlePropTypes> = ({title, url, targetLink}) => {
+const CardTitle: FC<CardTitlePropTypes> = ({title, url, targetLink, useLink = true}) => {
 
     return (
         <div className={'cardTitle'}>
-            <Link href={url || '#'} title={title} target={targetLink || '_self'}>
-                { capitalizeFirstLetter(title)   }
-            </Link>
+            {useLink ?
+                <Link href={url || '#'} title={title} target={targetLink || '_self'}>
+                    {capitalizeFirstLetter(title)}
+                </Link> :
+                <p>
+                    {capitalizeFirstLetter(title)}
+                </p>
+            }
         </div>
     );
 };

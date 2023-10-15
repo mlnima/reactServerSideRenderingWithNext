@@ -1,8 +1,9 @@
 .cardTitle{
   display: flex;
   align-items: center;
-  height: 40px;
+  height: 48px;
   a{
+    height: 48px;
     box-sizing: border-box;
     margin: 2px;
     padding: 0 2px;
@@ -13,6 +14,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     cursor: pointer;
+
   }
 }
 
@@ -20,6 +22,7 @@
   .cardTitle{
     height: initial;
     a{
+      height: initial;
       margin: 0;
       padding: 0;
       line-height: 1;

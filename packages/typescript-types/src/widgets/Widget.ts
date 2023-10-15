@@ -1,4 +1,5 @@
 export interface WidgetData {
+    redirectLinkPosition: string;
     extraClassName: string,
     extraId: string,
     position: string,
@@ -26,7 +27,6 @@ export interface WidgetData {
     cardWidthDesktop: number,
     linkToText: string,
     linkToAs: string,
-    footerLink: string,
     editMode: boolean,
     noSSR: boolean,
     linkTo: string,
@@ -98,5 +98,9 @@ export interface UniqueDataTypes {
         targetUrlType?: string,
         imageIndex?: number,
         imageId?: number
-    }[];
+    }[],
+    languagesSwitcher:boolean,
+    themeColorsSwitcher:boolean,
+    themeColorsSwitcherColors:string,
+
 }

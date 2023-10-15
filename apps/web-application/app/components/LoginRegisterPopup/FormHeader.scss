@@ -1,0 +1,24 @@
+.formHeader{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 30px 1fr 30px;
+  padding: 8px 0;
+  cursor: pointer;
+
+  h3 {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .close-form-button {
+    background-color: transparent;
+    color: var(--primary-text-color,#fff);
+    border: none;
+    padding: 0;
+    height: 30px;
+    width: 30px;
+  }
+}

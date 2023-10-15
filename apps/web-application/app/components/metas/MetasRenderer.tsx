@@ -39,7 +39,7 @@ const MetasRenderer: FC<MetasRendererPropTypes> = ({metaType, metaData, locale, 
                                         meta.name
                                     )
                                     return (
-                                        <Link className={`metaWidgetItem `}
+                                        <Link className={`metaWidgetItem btn`}
                                               key={meta._id}
                                               href={`/${typePath}/${meta._id}`}
                                               title={name}>
@@ -51,8 +51,7 @@ const MetasRenderer: FC<MetasRendererPropTypes> = ({metaType, metaData, locale, 
                                     <Link href={`/${metaType}?startWith=${group === '#' ? 'digits' : group}`}
                                           aria-label={metaType}
                                           title={`all the ${metaType} starts with ${group}`}>
-                                        <span className={`view-all flex items-center justify-start text-primary-active-color 
-                                        text-lg font-bold m-2.5 min-h-12 md:text-sm md:h-auto`}>
+                                        <span className={`view-all`}>
                                             <FontAwesomeIcon icon={faAnglesDown} style={{width: 28, height: 20}}/>
                                         </span>
                                     </Link>

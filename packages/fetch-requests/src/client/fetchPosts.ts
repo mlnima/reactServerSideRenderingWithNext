@@ -172,7 +172,7 @@ export const fetchSearch = async ({queryObject, revalidate,tags}: IFetchMetasPro
         );
         if (!response.ok) {
             const errorData = await response.text();
-            throw new Error(errorData);
+            // throw new Error(errorData);
         }
         return await response.json()
     } catch (error) {

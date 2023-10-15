@@ -1,0 +1,11 @@
+.widgetFooter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  a {
+    font-weight: bold;
+    min-width: 100px;
+    padding: 10px;
+    border-radius: 5px;
+  }
+}

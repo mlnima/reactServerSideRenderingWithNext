@@ -1,6 +1,10 @@
 import React, {ReactNode} from 'react';
+
+import '@fortawesome/fontawesome-svg-core/styles.css'
+import {config} from "@fortawesome/fontawesome-svg-core";
+
+config.autoAddCss = false;
 import '@components/global/styles/global.styles.scss'
-// import dynamic from "next/dynamic";
 import {fetchSettings, fetchWidgets} from "fetch-requests";
 import ReduxProvider from "@store/ReduxProvider";
 import * as process from "process";
@@ -17,12 +21,17 @@ import AlertBox from "@components/AlertBox/AlertBox";
 import GoogleAnalytics from "@components/GoogleAnalytics/GoogleAnalytics";
 import WebSocketInitializer from "@components/WebSocketInitializer/WebSocketInitializer";
 import StoreDataInitializer from "@components/global/StoreDataInitializer";
-// import MediaCall from "@components/MediaCall/MediaCall";
 import TopbarWidgetArea from "@components/widgets/widgetAreas/TopbarWidgetArea";
 import HeaderWidgetArea from "@components/widgets/widgetAreas/HeaderWidgetArea";
 import NavigationWidgetArea from "@components/widgets/widgetAreas/NavigationWidgetArea";
 import FooterWidgetArea from "@components/widgets/widgetAreas/FooterWidgetArea";
-import {rtlLanguages} from "data-structures";
+import StyledComponentsRegistry from "@lib/registry";
+// import Head from "next/head";
+
+// import {rtlLanguages} from "data-structures";
+// import MediaCall from "@components/MediaCall/MediaCall";
+// import dynamic from "next/dynamic";
+
 
 export async function generateStaticParams() {
     return i18n.locales.map((lng: string) => ({lng}))
@@ -40,9 +49,13 @@ const RootLayout = async ({children, params: {lang}}: { children: ReactNode, par
 
 //dir={rtlLanguages.includes(locale) ? 'rtl' : 'ltr'}
     return (
-        <html lang={locale} >
-        <body className={`dark `} >
+        <html lang={locale}>
+        {/*<Head>*/}
+        {/*    <link rel="stylesheet" href={dom.css()}/>*/}
+        {/*</Head>*/}
+        <body className={`dark `} style={{}}>
         <ReduxProvider>
+
             <div className="layout">
                 {initialSettings?.layoutSettings?.topbar &&
                     <TopbarWidgetArea dictionary={dictionary} widgets={staticWidgetsData?.widgets?.topBar}
@@ -68,11 +81,14 @@ const RootLayout = async ({children, params: {lang}}: { children: ReactNode, par
             <AlertBox dictionary={dictionary}/>
             <BackToTopButton/>
             <LoginRegisterPopup locale={locale} dictionary={dictionary}/>
-            <GlobalCustomStyles customColors={initialSettings?.layoutSettings?.customColors}
-                                customStyles={initialSettings?.layoutSettings?.customStyles}/>
+            <StyledComponentsRegistry>
+                <GlobalCustomStyles customColors={initialSettings?.layoutSettings?.customColors}
+                                    customStyles={initialSettings?.layoutSettings?.customStyles}/>
+            </StyledComponentsRegistry>
             <StoreDataInitializer initialSettings={initialSettings}/>
             <WebSocketInitializer/>
             {/*<MediaCall/>*/}
+
         </ReduxProvider>
         </body>
         </html>

@@ -48,15 +48,15 @@ const LayoutSettings: FC<PropTypes> = ({onChangeHandler, initialSettingsData}) =
                        checked={initialSettingsData?.layoutSettings?.footer}
                        className={'primaryInput'}/>
             </div>
-            <div className={'checkbox-field'}>
-                <p>Sidebar Width:</p>
-                <input onChange={e => onChangeHandler(e, 'layoutSettings')}
-                       type={'number'}
-                       name={'sidebarWidth'}
-                       value={initialSettingsData?.layoutSettings?.sidebarWidth}
-                       placeholder={'320px is default'}
-                       className={'primaryInput'}/>
-            </div>
+            {/*<div className={'checkbox-field'}>*/}
+            {/*    <p>Sidebar Width:</p>*/}
+            {/*    <input onChange={e => onChangeHandler(e, 'layoutSettings')}*/}
+            {/*           type={'number'}*/}
+            {/*           name={'sidebarWidth'}*/}
+            {/*           value={initialSettingsData?.layoutSettings?.sidebarWidth}*/}
+            {/*           placeholder={'320px is default'}*/}
+            {/*           className={'primaryInput'}/>*/}
+            {/*</div>*/}
             <p>Custom Style:</p>
             <button className={'btn btn-primary'} onClick={()=>setIsStyleEditorOpen(!isStyleEditorOpen)}>
                 Styles Editor

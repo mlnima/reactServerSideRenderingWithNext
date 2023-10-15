@@ -13,12 +13,18 @@ interface SettingsStateRaw {
     }
 }
 
-const initialState: SettingsStateRaw = {
+const initialState = {
     initialSettings: {
         postCardsSettings: {},
         membershipSettings: {
             membership:false,
-            usersCanMessageEachOther:false
+            usersCanMessageEachOther:false,
+            allowUserToPost: false,
+            anyoneCanRegister: false,
+            usersCanFollowEachOther: false,
+            usersCanCommentOnThePosts: false,
+            allowedPostTypeUserCanCreate:[],
+            usersPersonalEmailAddress: false,
         },
         layoutSettings: {},
         headDataSettings: {}

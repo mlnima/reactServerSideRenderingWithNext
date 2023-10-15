@@ -1,6 +1,8 @@
-import React, {FC} from "react";
+'use client';
+import React, {FC, useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
+import Csr from "@components/global/Csr";
+import {faPersonHalfDress} from "@fortawesome/free-solid-svg-icons";
 
 interface ComponentPropTypes {
     imageUrl?: string | undefined,
@@ -8,18 +10,20 @@ interface ComponentPropTypes {
 }
 
 const ActorMetaImageRenderer: FC<ComponentPropTypes> = ({imageUrl, name}) => {
+    const [gotError, setGotError] = useState(false)
 
-    if (!!imageUrl) {
-        return (
-            <img src={imageUrl}
-                 alt={name}
-                 loading={'lazy'}
-                 className={'item-image'}/>
-        )
-    } else  {
-        return (
-            <FontAwesomeIcon icon={faUser} />
-        )
-    }
+    return (
+        <Csr>
+            {!!imageUrl && !gotError ?
+                <img src={imageUrl}
+                     alt={name}
+                     loading={'lazy'}
+                     onError={() => setGotError(true)}
+                     className={'item-image'}/> :
+                <FontAwesomeIcon icon={faPersonHalfDress}/>
+
+            }
+        </Csr>
+    )
 };
 export default ActorMetaImageRenderer

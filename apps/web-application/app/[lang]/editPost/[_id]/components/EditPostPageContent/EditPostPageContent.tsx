@@ -5,7 +5,7 @@ import {clientAPIRequestGetEditingPost, clientDeletePostByAuthor} from "api-requ
 import {capitalizeFirstLetter, reduceArrayOfDataToIds} from "custom-util";
 import MultipleImageUploader from "../PostEditorForm/common/MultipleImageUploader/MultipleImageUploader";
 import MetaDataSelector from "../MetaDataSelector/MetaDataSelector";
-import Price from "../PostEditorForm/common/Price";
+import Price from "../Price/Price";
 import './EditPostPageContent.scss'
 import updatePostAction from "@store/reducers/postsReducers/updatePostAction";
 import LocationField from "../PostEditorForm/common/LocationField/LocationField";

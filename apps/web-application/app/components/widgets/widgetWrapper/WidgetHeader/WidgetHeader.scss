@@ -1,0 +1,14 @@
+.widget-Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--primary-text-color, #fff);
+  box-sizing: border-box;
+  height: 50px;
+  .widget-header-title {
+    font-weight: bold;
+  }
+  .widget-header-redirect-link {
+    font-weight: bold;
+  }
+}

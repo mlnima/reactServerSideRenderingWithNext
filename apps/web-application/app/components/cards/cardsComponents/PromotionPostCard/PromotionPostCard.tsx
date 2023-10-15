@@ -2,13 +2,8 @@ import React, {FC} from "react";
 import dynamic from "next/dynamic";
 import CardTitle from "../../asset/CardTitle/CardTitle";
 import {Post} from "typescript-types";
-// import {ratingCalculator} from "custom-util";
-// import {clientAPIRequestViewPost} from "api-requests";
+import '../postCard.scss'
 import Link from "next/link";
-// import UseClientProvider from "@components/UseClientProvider/UseClientProvider";
-//
-// const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
-// const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
 const CardImageRendererUseClient = dynamic(() => import('../../asset/CardImageRenderer/CardImageRendererUseClient'))
 
 interface PromotionPostCardPropTypes {
@@ -32,18 +27,11 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
 
      }) => {
 
-        // const rating = post.likes || post.disLikes ? ratingCalculator(post?.likes, post?.disLikes) : null
-
         return (
-            <article className={`post-card post-card-promotion ${isSidebar && 'postCardSidebar'}`}>
-                <div className={'card-media'}>
+            <article className={`postCard postCardPromotion ${isSidebar && 'postCardSidebar'}`}>
+                <div className={'cardMedia'}>
 
                     <Link href={post?.redirectLink || '#'} className={'promotion-card-link-external'}
-                       // onClick={()=>{
-                       //     if (post?._id) {
-                       //         clientAPIRequestViewPost(post?._id)
-                       //     }
-                       // }}
                        target={'_blank'} rel={'nofollow noopener external'}>
                         <CardImageRendererUseClient
                             imageUrl={post.mainThumbnail}
@@ -55,13 +43,9 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
                     </Link>
 
                 </div>
-                <div className={`card-info`}>
+                <div className={`cardInfo`}>
                     <CardTitle title={post?.translations?.[locale as string]?.title ?? post?.title}
                                url={postUrl}/>
-                    {/*<div className={'card-info-stats'}>*/}
-                    {/*    {!!post.views && <CardViews views={post.views}/>}*/}
-                    {/*    {!!rating && <CardRating rating={rating}/>}*/}
-                    {/*</div>*/}
                 </div>
             </article>
         )

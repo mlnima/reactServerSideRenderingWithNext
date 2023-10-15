@@ -44,7 +44,7 @@ export const buildFindQuery = (req:any) => {
 const findRelatedPosts = async (post:Post) => {
     try {
         const relatedByFields = ['actors', 'categories', 'tags'];
-        return await postSchema.findRelatedPosts({post, relatedByFields, limit: 12});
+        return await postSchema.findRelatedPosts({post, relatedByFields, limit: 8});
     } catch (error) {
         console.log(error);
         return [];

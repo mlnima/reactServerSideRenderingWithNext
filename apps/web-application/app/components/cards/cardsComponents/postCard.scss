@@ -1,0 +1,40 @@
+.postCard {
+  width: 100%;
+  max-width: 320px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-left: auto;
+  margin-right: auto;
+  .cardInfo {
+    height: 46px;
+    padding-top: .25rem;
+    box-sizing: border-box;
+  }
+}
+
+.postCardSidebar {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  max-width: 100%;
+  margin: 0 auto;
+  .cardInfo {
+    width: 100%;
+    height: 100% ;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .cardTitle {
+      //height: 100% !important;
+      padding: 0 4px;
+      box-sizing: border-box;
+    }
+  }
+}
+
+@media only screen and (min-width: 768px){
+  .postCard {
+    max-width: 320px;
+  }
+}

@@ -1,21 +1,53 @@
 .theme-switcher-widget{
   position: relative;
 
-  button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: transparent;
-    border: none;
-    color: var(--secondary-text-color,#b3b3b3);
-    svg{
-      width: 24px;
-      height: 24px;
+  //button {
+  //  display: flex;
+  //  justify-content: center;
+  //  align-items: center;
+  //  background-color: transparent;
+  //  border: none;
+  //  color: var(--secondary-text-color,#b3b3b3);
+  //  svg{
+  //    width: 24px;
+  //    height: 24px;
+  //  }
+  //}
+
+  //.select-section {
+  //  position: absolute;
+  //}
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .switchTheme{
+    border: var(--default-border);
+    box-sizing: border-box;
+   // border:none;
+    height: 26px;
+    width: 50px;
+    .react-switch-bg{
+     background-color: var(--secondary-background-color) !important;
+      div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
     }
   }
 
-  .select-section {
-    position: absolute;
+  .switchThemeActive{
+    .react-switch-bg{
+      background-color: var(--secondary-background-color) !important;
+
+    }
   }
 
+  .react-switch-handle{
+    width: 22px !important;
+    height: 22px !important;
+  }
 }

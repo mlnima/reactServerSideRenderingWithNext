@@ -1,0 +1,16 @@
+#relatedPosts {
+  width: 100%;
+  .relatedPostsHeader {
+    height: 50px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    h2 {
+      box-sizing: border-box;
+      margin: 0;
+      font-weight: bold;
+      color: var(--primary-text-color, #fff);
+    }
+  }
+}

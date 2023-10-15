@@ -1,11 +1,12 @@
-.searchbar {
+.searchbarWidget {
   position: relative;
   z-index: 11;
- // background-color: var(--tertiary-background-color, #404040);
+  // background-color: var(--tertiary-background-color, #404040);
   background-color: transparent;
   padding: 4px 12px;
   box-sizing: border-box;
-  .openSearchFormButton{
+
+  .openSearchFormButton {
     border: none;
     display: flex;
     justify-content: center;
@@ -50,12 +51,13 @@
     }
   }
 
-  .searchbarFormOpen{
-    display:flex;
+  .searchbarFormOpen {
+    display: flex;
     animation: searchbarFall .3s linear alternate;
   }
-  .searchbarFormClosed{
-    display:none;
+
+  .searchbarFormClosed {
+    display: none;
     animation: none;
   }
 
@@ -63,24 +65,28 @@
 
 
 @media only screen and (min-width: 768px) {
-  .searchbar {
-    border: var(--default-border);
-    width: clamp(300px, 678px, 678px);;
-    padding: 0 12px;
+  .searchbarWidget {
+    //border: var(--default-border);
+    width: clamp(300px, 450px, 678px);
     border-radius: 2rem;
     background-color: var(--tertiary-background-color, #404040);
+    padding: 4px 2px 4px 12px;
+
     .openSearchFormButton {
       display: none;
     }
 
-    .searchbarForm{
+    .searchbarForm {
+      width: 100%;
       display: flex;
       position: initial;
       background-color: transparent;
-      .searchbarInput{
+
+      .searchbarInput {
         background-color: transparent;
         padding: 2px;
       }
+
       .searchbarSubmitButton {
         display: flex;
         justify-content: center;

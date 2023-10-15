@@ -73,6 +73,7 @@
     "@types/react-scroll": "^1.8.6",
     "@types/simple-peer": "^9.11.5",
     "@types/styled-components": "^5.1.26",
+    "@types/uuid": "^9.0.5",
     "cookie-parser": "^1.4.6",
     "dotenv-cli": "^7.3.0",
     "eslint": "8.45.0",

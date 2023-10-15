@@ -12,7 +12,6 @@ interface PropTypes {
 }
 
 const PostCardsSettings: FC<PropTypes> = ({onChangeHandler,initialSettingsData,onJsonChangeHandler}) => {
- const [isStyleEditorOpen,setIsStyleEditorOpen] = useState(false)
  const [isCardBackgroundsEditorOpen,setIsCardBackgroundsEditorOpen] = useState(false)
     return (
         <Style className={'setting-section'}>
@@ -41,40 +40,22 @@ const PostCardsSettings: FC<PropTypes> = ({onChangeHandler,initialSettingsData,o
                    value={initialSettingsData?.postCardsSettings?.fallbackImageUrlOnError}
                    className={'primaryInput'}
                    type="number"/>
-            <p>Custom Card Backgrounds:</p>
-            <button className={'btn btn-primary'} onClick={()=>setIsCardBackgroundsEditorOpen(!isCardBackgroundsEditorOpen)}>
-                Backgrounds Editor
-            </button>
-            {isCardBackgroundsEditorOpen &&
-                <MonacoEditor
-                    language={'json'}
-                    name={'customCardBackgrounds'}
-                    defaultValue={ JSON.stringify(initialSettingsData?.postCardsSettings?.customCardBackgrounds, null, '\t' )}
-                    value={JSON.stringify(initialSettingsData?.postCardsSettings?.customCardBackgrounds, null, '\t')}
-                    className={'initialSettings-editor'}
-                    //@ts-ignore
-                    onChange={(e: string) => onJsonChangeHandler(e, 'postCardsSettings')}
-                    height={'80vh'}
-                />
-            }
-
-            <p>Custom Style:</p>
-            <button className={'btn btn-primary'} onClick={()=>setIsStyleEditorOpen(!isStyleEditorOpen)}>
-                Styles Editor
-            </button>
-            {isStyleEditorOpen &&
-                <MonacoEditor
-                    language={'scss'}
-                    name={'customStyles'}
-                    defaultValue={initialSettingsData?.postCardsSettings?.customStyles || ''}
-                    value={initialSettingsData?.postCardsSettings?.customStyles}
-                    className={'initialSettings-editor'}
-                    //@ts-ignore
-                    onChange={(e: string) => onChangeHandler(e, 'postCardsSettings')}
-                    height={'80vh'}
-                />
-            }
-
+            {/*<p>Custom Card Backgrounds:</p>*/}
+            {/*<button className={'btn btn-primary'} onClick={()=>setIsCardBackgroundsEditorOpen(!isCardBackgroundsEditorOpen)}>*/}
+            {/*    Backgrounds Editor*/}
+            {/*</button>*/}
+            {/*{isCardBackgroundsEditorOpen &&*/}
+            {/*    <MonacoEditor*/}
+            {/*        language={'json'}*/}
+            {/*        name={'customCardBackgrounds'}*/}
+            {/*        defaultValue={ JSON.stringify(initialSettingsData?.postCardsSettings?.customCardBackgrounds, null, '\t' )}*/}
+            {/*        value={JSON.stringify(initialSettingsData?.postCardsSettings?.customCardBackgrounds, null, '\t')}*/}
+            {/*        className={'initialSettings-editor'}*/}
+            {/*        //@ts-ignore*/}
+            {/*        onChange={(e: string) => onJsonChangeHandler(e, 'postCardsSettings')}*/}
+            {/*        height={'80vh'}*/}
+            {/*    />*/}
+            {/*}*/}
         </Style>
     )
 };
