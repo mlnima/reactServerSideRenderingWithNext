@@ -15,6 +15,7 @@ import {emailValidator} from "custom-util";
 import './LoginRegisterPopupForms.styles.scss'
 
 
+
 interface StateTypes {
     username?: string,
     email?: string,
@@ -144,28 +145,13 @@ const LoginRegisterPopupForms: FC<IProps> = ({locale,dictionary}: IProps) => {
                                 </div>
                             </div>
                             <div className="login-register-form-field gender">
-                                <p> {dictionary['Gender'] || 'Gender'}:</p>
-                                <div className='gender-options'
-                                     onChange={e => onChangeHandler(e)}>
-                                    <input type='radio'
-                                           name='gender'
-                                           value='male'
-                                           checked={state.gender === 'male'}
-                                    />
-                                    <p className='gender-icon'>{dictionary['Male'] || 'Male'}</p>
-                                    <input type='radio'
-                                           name='gender'
-                                           value='female'
-                                           checked={state.gender === 'female'}
-                                    />
-                                    <p className='gender-icon'>{dictionary['Female'] || 'Female'}</p>
-                                    <input type='radio'
-                                           name='gender'
-                                           value='other'
-                                           checked={state.gender === 'other'}
-                                    />
-                                    <p className='gender-icon'>{dictionary['Other'] || 'Other'}</p>
-                                </div>
+                                <label> {dictionary['Gender'] || 'Gender'}:</label>
+                                <select className={'primarySelect'} value={state.gender} required={true}>
+                                    <option value="">{dictionary['Select'] || 'Select'}</option>
+                                    <option value="female">{dictionary['Female'] || 'Female'}</option>
+                                    <option value="male">{dictionary['Male'] || 'Male'}</option>
+                                    <option value="other">{dictionary['Other'] || 'Other'}</option>
+                                </select>
                             </div>
                             <div className="login-register-form-field">
                                 <div className={'input-validator'}>

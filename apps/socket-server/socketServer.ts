@@ -1,6 +1,6 @@
 import 'module-alias/register';
-import dotenv from 'dotenv';
-dotenv.config({ path: '../../.env' });
+// import dotenv from 'dotenv';
+// dotenv.config({ path: '../../.env' });
 import { connectToDatabase, createExpressServer } from 'custom-server-util';
 connectToDatabase('Socket Server');
 import express from 'express';
@@ -24,7 +24,7 @@ const runSocketServer = async () => {
             res.end()
         });
 
-        server.listen(process.env.SOCKET_SERVER_PORT || 3005, (error) => {
+        server.listen(process.env.SOCKET_SERVER_PORT || 3005, () => {
             console.log(`process ${process.pid} : socket server is running at ${process.env.SOCKET_SERVER_PORT}`);
         });
 
@@ -47,7 +47,7 @@ const runSocketServer = async () => {
         initializeSocket(io);
 
     } catch (error) {
-        console.log('error=> ', error);
+        console.log('Socket Server Error=> ', error);
     }
 }
 

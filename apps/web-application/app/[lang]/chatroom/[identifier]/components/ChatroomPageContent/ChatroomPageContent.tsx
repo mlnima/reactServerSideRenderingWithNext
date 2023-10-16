@@ -3,7 +3,7 @@ import React, {FC, useEffect, useRef, useState} from "react";
 import {useAppDispatch, useAppSelector} from "@store/hooks";
 import socket from "web-socket-client";
 import {headerSizeCalculator} from "custom-util";
-import {loading, setAlert} from "@store/reducers/globalStateReducer";
+import {loading, loginRegisterForm, setAlert} from "@store/reducers/globalStateReducer";
 import ChatroomTopbar from "../ChatroomTopbar/ChatroomTopbar";
 import ChatRoomMessageArea from "../ChatRoomMessageArea/ChatRoomMessageArea";
 import ChatRoomTools from "../ChatRoomTools/ChatRoomTools";
@@ -44,6 +44,8 @@ const ChatroomPageContent: FC<IProps> = ({dictionary, pageData,locale}) => {
     const isJoined = useRef<boolean>(false);
     const [headerSize, setHeaderSize] = useState(0);
     const gettingOlderMessages = useRef<boolean>(true);
+
+
 
     useEffect(() => {
         if (!isJoined.current && user?.loggedIn && !!pageData?.chatroom?._id) {
@@ -191,6 +193,8 @@ const ChatroomPageContent: FC<IProps> = ({dictionary, pageData,locale}) => {
             return newPreference
         })
     }
+
+
 
 
     if (!pageData?.chatroom?._id) {

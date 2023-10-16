@@ -15,7 +15,7 @@ interface PropTypes {
     index: number,
     isSidebar?: boolean,
     post: Post,
-    isNextIImageAllowed: boolean
+    isNextImageAllowed: boolean
 }
 
 const UcgAdPostCard: FC<PropTypes> =
@@ -25,7 +25,7 @@ const UcgAdPostCard: FC<PropTypes> =
          postUrl,
          isSidebar,
          index,
-         isNextIImageAllowed
+         isNextImageAllowed
      }) => {
 
         return (
@@ -36,7 +36,8 @@ const UcgAdPostCard: FC<PropTypes> =
                           title={post?.translations?.[locale as string]?.title ?? post?.title}>
                         <CardImageRendererUseClient
                             imageUrl={post.mainThumbnail}
-                            isNextIImageAllowed={isNextIImageAllowed}
+                            isNextImageAllowed={isNextImageAllowed}
+                            key={post?._id}
                             mediaAlt={post?.translations?.[locale as string]?.title ?? post?.title}
                             index={index}/>
                     </Link>

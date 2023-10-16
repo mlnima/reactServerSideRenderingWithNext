@@ -14,7 +14,7 @@ interface ArticlePostCardPropTypes {
     index: number,
     isSidebar?: boolean,
     post: Post,
-    isNextIImageAllowed: boolean
+    isNextImageAllowed: boolean
 }
 
 const ArticlePostCard: FC<ArticlePostCardPropTypes> =
@@ -24,7 +24,7 @@ const ArticlePostCard: FC<ArticlePostCardPropTypes> =
          postUrl,
          isSidebar,
          index,
-         isNextIImageAllowed
+         isNextImageAllowed
      }) => {
 
 
@@ -36,7 +36,8 @@ const ArticlePostCard: FC<ArticlePostCardPropTypes> =
                           title={post?.translations?.[locale as string]?.title ?? post?.title}>
 
                         <CardImageRendererUseClient imageUrl={post.mainThumbnail}
-                                                    isNextIImageAllowed={isNextIImageAllowed}
+                                                    isNextImageAllowed={isNextImageAllowed}
+                                                    key={post?._id}
                                                     mediaAlt={post?.translations?.[locale as string]?.title ?? post?.title}
                                                     index={index}/>
                     </Link>

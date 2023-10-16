@@ -19,7 +19,7 @@ const CategoriesPageContentRenderer: FC<IProps> = ({metas, locale,renderPaginati
     return (
         <>
             <div className={'categoriesContainer'}>
-                <CategoriesCardsRenderer metaType={'categories'} metas={metas} locale={locale}/>
+                <CategoriesCardsRenderer metas={metas} locale={locale}/>
             </div>
             {renderPagination && <Pagination totalCount={totalCount}
                                              currentPage={currentPage}

@@ -1,6 +1,6 @@
-import dotenv from 'dotenv';
-
-dotenv.config({path: '../../.env'});
+// import dotenv from 'dotenv';
+//
+// dotenv.config({path: '../../.env'});
 import {connectToDatabase, shouldCompress} from 'custom-server-util';
 
 connectToDatabase('Express Server')
@@ -61,7 +61,7 @@ const runServer = () => {
             console.log(`process ${process.pid} : file server started at ${process.env.FILE_SERVER_PORT || 3003} `);
         })
     } catch (error) {
-        console.log('console error=> ', error)
+        console.log('API Server Error=> ', error)
     }
 
 }

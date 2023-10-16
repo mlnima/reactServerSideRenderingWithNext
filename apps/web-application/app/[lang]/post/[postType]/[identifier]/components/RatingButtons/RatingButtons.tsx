@@ -9,9 +9,9 @@ import {faThumbsDown} from "@fortawesome/free-solid-svg-icons/faThumbsDown";
 // import likePostAction from "@store/reducers/postsReducers/likePostAction";
 // import disLikePostAction from "@store/reducers/postsReducers/disLikePostAction";
 import './RatingButtons.styles.scss'
-import viewPostAction from "@store/reducers/postsReducers/viewPostAction";
+// import viewPostAction from "@store/reducers/postsReducers/viewPostAction";
 import {loginRegisterForm} from "@store/reducers/globalStateReducer";
-import {clientAPIRequestLikePost} from "api-requests";
+import {clientAPIRequestLikePost, clientAPIRequestViewPost} from "api-requests";
 import {clientAPIRequestLikeDislikePost} from "api-requests/dist/src/client/clientPosts";
 import {response} from "express";
 import clearACacheByTag from "@lib/serverActions/clearACacheByTag";
@@ -36,7 +36,8 @@ const RatingButtons: FC<IProps> = ({rating, likes, disLikes, views, dictionary, 
     useEffect(() => {
         if (_id && !didView) {
             setDidView(true)
-            dispatch(viewPostAction(_id))
+            clientAPIRequestViewPost(_id)
+            // dispatch(viewPostAction(_id))
         }
         return () => {
             setDidView(false)

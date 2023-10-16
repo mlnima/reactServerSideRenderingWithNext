@@ -1,15 +1,11 @@
 'use client'
 import {clientAPIRequestViewPost} from "api-requests";
-import React, {FC, useMemo, useRef, useState} from 'react';
+import React, {FC, useEffect, useMemo, useRef, useState} from 'react';
 import './CardImageRendererUseClient.scss'
 import {useAppDispatch, useAppSelector} from "@store/hooks";
 import {setActiveVideoTrailerId} from "@store/reducers/postsReducers/postsReducer";
-// import Csr from "@components/global/Csr";
 import Image from "next/image";
-// import {tr} from "date-fns/locale";
 import {StaticImport} from "next/dist/shared/lib/get-img-props";
-import viewPostAction from "@store/reducers/postsReducers/viewPostAction";
-
 const fallbackImage = '/asset/images/default/no-image-available.png'
 
 interface CardImageNextPropTypes {
@@ -20,10 +16,15 @@ interface CardImageNextPropTypes {
     submitPostView?: boolean,
     videoTrailerUrl?: string,
     postId?: string,
+    metaId?: string,
     index: number,
-    isNextIImageAllowed: boolean,
-    viewPostRequest?: boolean,
+    isNextImageAllowed: boolean,
     overlayShadow?: boolean
+}
+
+interface IImageStyle{
+    objectFit: "fill" | "contain" | "cover" | "none" | "scale-down"
+    aspectRatio : string
 }
 
 const CardImageRendererUseClient: FC<CardImageNextPropTypes> =
@@ -32,26 +33,41 @@ const CardImageRendererUseClient: FC<CardImageNextPropTypes> =
          mediaAlt,
          aspectRatio,
          objectFit,
-         submitPostView,
+         submitPostView = false,
          videoTrailerUrl,
          postId,
+         metaId,
          index,
-         isNextIImageAllowed = false,
-         viewPostRequest,
+         isNextImageAllowed = false,
          overlayShadow
      }) => {
-        const [gotError, setGotError] = useState(false)
-
-        const targetImageUrl = useMemo(() => {
-            return gotError ? fallbackImage : imageUrl
-        }, [gotError, postId]) as string | StaticImport
-
 
         const activeVideoTrailerId = useAppSelector(({posts}) => posts.activeVideoTrailerId)
         const dispatch = useAppDispatch()
         const [loadingAnimationOver, setLoadingAnimationOver] = useState(false)
         const videoTrailerRef = useRef<HTMLVideoElement>(null)
         const imageRef = useRef<HTMLImageElement>(null)
+        const [gotError, setGotError] = useState<boolean>(false)
+
+        const targetImageUrl = useMemo(() => {
+            if (gotError) {
+                return fallbackImage
+            }
+            return imageUrl
+        }, [postId, metaId, gotError]) as string | StaticImport
+
+        const imageStyle = useMemo(() => {
+           return {
+                    objectFit: objectFit || 'contain',
+                    aspectRatio: aspectRatio || '16/9',
+            }
+        }, [objectFit, aspectRatio]) as IImageStyle
+
+        useEffect(() => {
+            if (gotError) {
+                setGotError(false)
+            }
+        }, [postId, metaId]);
 
         const onClickHandler = async () => {
             if (submitPostView && postId) {
@@ -83,11 +99,8 @@ const CardImageRendererUseClient: FC<CardImageNextPropTypes> =
         }
 
         const onUnHoverHandler = async () => {
-            try {
-                dispatch(setActiveVideoTrailerId(null))
-            } catch (error) {
-
-            }
+            dispatch(setActiveVideoTrailerId(null))
+            setLoadingAnimationOver(false)
         }
 
         const onCanPlayHandler = () => {
@@ -96,29 +109,63 @@ const CardImageRendererUseClient: FC<CardImageNextPropTypes> =
             }
         }
 
-        const onImageErrorHandler = (error: any) => {
-            // console.log('error=> ',error)
-            if (imageRef?.current) {
-                imageRef.current.src = fallbackImage
-            }
-        }
-
-        const onNextImageErrorHandler = (e: any) => {
+        //we will use the error code to replace the content if it is possible
+        const onImageErrorHandler = (e: any) => {
             setGotError(true)
         }
 
         return (
-            <div className={`card-image-wrapper`}       style={{
-                aspectRatio: aspectRatio || '16/9'
-            }}
-                 onClick={() => {
-                     if (viewPostRequest && !!postId) {
-                         dispatch(viewPostAction(postId))
-                     }
-                 }}>
-                {(!!videoTrailerUrl && activeVideoTrailerId === postId) && <div className="trailer-loading"/>}
-                {/*<Csr>*/}
-                {(!!videoTrailerUrl && activeVideoTrailerId === postId && loadingAnimationOver) ?
+            <div className={`card-image-wrapper`}
+                 style={{aspectRatio: imageStyle.aspectRatio}}
+                 onClick={onClickHandler}>
+
+                {(!!videoTrailerUrl && activeVideoTrailerId === postId && targetImageUrl !== fallbackImage) &&
+                    <div className="trailer-loading"/>
+                }
+
+                {(isNextImageAllowed && !!imageUrl) &&
+                    <Image src={targetImageUrl}
+                           ref={imageRef}
+                           alt={mediaAlt || ''}
+                           width={320}
+                           height={240}
+                           onMouseEnter={() => onHoverHandler()}
+                           onTouchStart={() => onHoverHandler()}
+                           onTouchEnd={onUnHoverHandler}
+                           onError={e => onImageErrorHandler(e)}
+                           loading={index > 3 ? 'lazy' : 'eager'}
+                           style={imageStyle}
+                           className={`card-image`}
+                    />}
+
+                {(!isNextImageAllowed && !!imageUrl) &&
+                    <img src={targetImageUrl as string}
+                         ref={imageRef}
+                         alt={mediaAlt || ''}
+                         loading={index > 3 ? 'lazy' : 'eager'}
+                         onMouseEnter={() => onHoverHandler()}
+                         onTouchStart={() => onHoverHandler()}
+                         onTouchEnd={onUnHoverHandler}
+                         onError={e => onImageErrorHandler(e)}
+                         style={imageStyle}
+                         className={`card-image`}
+                    />
+                }
+
+                {overlayShadow &&
+                    <div className={'cardOverlay'}
+                         style={{
+                             position: 'absolute',
+                             width: '100%',
+                             height: '100%',
+                             top: 0,
+                             left: 0,
+                             background: 'linear-gradient(to bottom,rgba(0,0,0,.0001) 0,rgba(0,0,0,.5) 100%)'
+                         }}
+                    />
+                }
+
+                {(!!videoTrailerUrl && activeVideoTrailerId === postId && loadingAnimationOver) &&
                     <video ref={videoTrailerRef}
                            muted
                            loop={false}
@@ -127,89 +174,14 @@ const CardImageRendererUseClient: FC<CardImageNextPropTypes> =
                            onMouseLeave={onUnHoverHandler}
                            onTouchEnd={onUnHoverHandler}
                            playsInline
-                           style={{
-                               objectFit: objectFit || 'contain',
-                               aspectRatio: aspectRatio || '16/9'
-                           }}
+                           style={imageStyle}
                            className={'video-card-trailer'}>
                         <source src={videoTrailerUrl}/>
                         Sorry, your browser doesn't support embedded videos.
-                    </video> :
-                    <>
-                        {(!!imageUrl && isNextIImageAllowed) ?
-                            <Image src={targetImageUrl}
-                                   //@ts-ignore
-                                   // key={targetImageUrl}
-                                   ref={imageRef}
-                                   alt={mediaAlt || ''}
-                                   width={320}
-                                   height={240}
-                                   onClick={onClickHandler}
-                                   onMouseEnter={() => onHoverHandler()}
-                                   onTouchStart={() => onHoverHandler()}
-                                   onTouchEnd={onUnHoverHandler}
-                                   onError={e => onNextImageErrorHandler(e)}
-                                   loading={index > 3 ? 'lazy' : 'eager'}
-                                   style={{
-                                       objectFit: objectFit || 'contain',
-                                       aspectRatio: aspectRatio || '16/9',
-
-                                   }}
-                                   className={`card-image w-full aspect-${aspectRatio || 'video'} object-${objectFit || 'contain'}`}
-                            /> :
-                            <img src={imageUrl || fallbackImage}
-                                 ref={imageRef}
-                                 alt={mediaAlt || ''}
-                                 loading={index > 3 ? 'lazy' : 'eager'}
-                                 onClick={onClickHandler}
-                                 onMouseEnter={() => onHoverHandler()}
-                                 onTouchStart={() => onHoverHandler()}
-                                 onTouchEnd={onUnHoverHandler}
-                                 onError={error => onImageErrorHandler(error)}
-                                 style={{
-                                     objectFit: objectFit || 'contain',
-                                     aspectRatio: aspectRatio || '16/9'
-                                 }}
-                                 className={`card-image`}
-                            />
-
-                        }
-                        {overlayShadow &&
-                            <div className={'cardOverlay'}
-                                 style={{
-                                     position: 'absolute',
-                                     width:'100%',
-                                     height: '100%',
-                                     top: 0,
-                                     left: 0,
-                                     background: 'linear-gradient(to bottom,rgba(0,0,0,.0001) 0,rgba(0,0,0,.5) 100%)'
-                                 }}
-                            />
-                        }
-
-                    </>
-                }
-                {/*</Csr>*/}
+                    </video>}
             </div>
         )
 
     };
 
 export default CardImageRendererUseClient;
-
-
-// <img src={imageUrl||fallbackImage}
-//      ref={imageRef}
-//      alt={mediaAlt || ''}
-//      loading={index > 3 ? 'lazy' : 'eager'}
-//      onClick={onClickHandler}
-//      onMouseEnter={() => onHoverHandler()}
-//      onTouchStart={() => onHoverHandler()}
-//      onTouchEnd={onUnHoverHandler}
-//      onError={error=>onImageErrorHandler(error)}
-//      style={{
-//          objectFit: objectFit || 'contain',
-//          aspectRatio: aspectRatio || '16/9'
-//      }}
-//      className={`card-image`}
-// />

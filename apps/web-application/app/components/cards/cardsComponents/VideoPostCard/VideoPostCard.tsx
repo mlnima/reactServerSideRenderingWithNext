@@ -23,7 +23,7 @@ interface IProps {
     index: number,
     isSidebar?: boolean,
     post: Post,
-    isNextIImageAllowed: boolean
+    isNextImageAllowed: boolean
 }
 
 const VideoPostCard: FC<IProps> =
@@ -33,7 +33,7 @@ const VideoPostCard: FC<IProps> =
          postUrl,
          isSidebar,
          index,
-         isNextIImageAllowed
+         isNextImageAllowed
      }) => {
 
         // const rating = post.likes || post.disLikes ? ratingCalculator(post?.likes, post?.disLikes) : null
@@ -46,7 +46,8 @@ const VideoPostCard: FC<IProps> =
                           title={post?.translations?.[locale as string]?.title ?? post?.title}>
                         <CardImageRendererUseClient
                             imageUrl={post.mainThumbnail}
-                            isNextIImageAllowed={isNextIImageAllowed}
+                            isNextImageAllowed={isNextImageAllowed}
+                            key={post?._id}
                             videoTrailerUrl={post?.videoTrailerUrl}
                             submitPostView={false}
                             postId={post?._id}

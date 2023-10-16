@@ -34,6 +34,7 @@ const SkeletonRenderer: FC<IProps> = ({width,height,count=1}) => {
                          margin:0,
                          padding:0,
                          lineHeight: 1,
+                         borderRadius:'.375rem'
                      }}
                      height={height}
                      width={width}

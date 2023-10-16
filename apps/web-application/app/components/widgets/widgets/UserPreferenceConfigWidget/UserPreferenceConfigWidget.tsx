@@ -41,7 +41,7 @@ const UserPreferenceConfigWidget: FC<IProps> = ({uniqueData, locale, dictionary}
 
     return (
         <div className={'userPreference'}>
-            <button className={'btn openPreferenceMenuButton'} onClick={onOpenHandler}>
+            <button className={'btn openPreferenceMenuButton'} onClick={onOpenHandler} aria-label={'preference'}>
                 <FontAwesomeIcon className={'gearIcon'} icon={faGear} width={20} height={20}/>
                 <FontAwesomeIcon className={'earthIcon'} icon={faEarthAmerica} width={18} height={18}/>
             </button>

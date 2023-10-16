@@ -13,7 +13,7 @@ interface PromotionPostCardPropTypes {
     index: number,
     isSidebar?: boolean,
     post: Post,
-    isNextIImageAllowed: boolean
+    isNextImageAllowed: boolean
 }
 
 const PromotionPostCard: FC<PromotionPostCardPropTypes> =
@@ -23,7 +23,7 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
          postUrl,
          isSidebar,
          index,
-         isNextIImageAllowed
+         isNextImageAllowed
 
      }) => {
 
@@ -35,7 +35,8 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
                        target={'_blank'} rel={'nofollow noopener external'}>
                         <CardImageRendererUseClient
                             imageUrl={post.mainThumbnail}
-                            isNextIImageAllowed={isNextIImageAllowed}
+                            isNextImageAllowed={isNextImageAllowed}
+                            key={post?._id}
                             submitPostView={true}
                             postId={post?._id}
                             mediaAlt={post?.translations?.[locale as string]?.title ?? post?.title}

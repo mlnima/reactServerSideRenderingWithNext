@@ -15,7 +15,7 @@ interface TagCardPropTypes {
     locale: string,
     metaUrl: string,
     isSidebar?: boolean,
-    isNextIImageAllowed?: boolean,
+    isNextImageAllowed?: boolean,
 }
 
 const TagCard: FC<TagCardPropTypes> =
@@ -25,27 +25,26 @@ const TagCard: FC<TagCardPropTypes> =
          locale,
          isSidebar,
          metaUrl,
-         isNextIImageAllowed = false
+         isNextImageAllowed = false
      }) => {
-
-        const title = capitalizeFirstLetter(meta?.translations?.[locale]?.name ?? meta?.name)
 
         return (
             <article className={`metaCard metaCardTag ${isSidebar && 'metaCardSidebar'}`}>
                 <div className={'cardMedia'}>
-                    <Link href={metaUrl} className='tagCardLink' title={title as string}>
+                    <Link href={metaUrl} className='tagCardLink' title={meta?.translations?.[locale]?.name ?? meta?.name as string}>
                         {!!meta?.imageUrl ?
                             <CardImageRendererUseClient imageUrl={meta?.imageUrl}
-                                                        isNextIImageAllowed={isNextIImageAllowed}
-                                                        mediaAlt={title}
+                                                        isNextImageAllowed={isNextImageAllowed}
+                                                        key={meta?._id}
+                                                        mediaAlt={meta?.translations?.[locale]?.name ?? meta?.name}
                                                         index={index}/> :
-                            <TextToCanvasImage title={title}
+                            <TextToCanvasImage title={capitalizeFirstLetter(meta?.translations?.[locale]?.name ?? meta?.name)}
                                                numberOfCardsPerRowInMobile={1}/>
                         }
                     </Link>
                 </div>
                 <div className={`cardInfo`}>
-                    <CardTitle title={title} url={`/tag/${meta?._id}`}/>
+                    <CardTitle title={capitalizeFirstLetter(meta?.translations?.[locale]?.name ?? meta?.name)} url={`/tag/${meta?._id}`}/>
                 </div>
             </article>
         )

@@ -19,7 +19,7 @@ const ActorsCardsRenderer: FC<IProps> = ({metas,isSidebar,locale}) => {
                 const imagesAllowedDomainsForNextImage = process.env?.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES?.split(' ') || []
                 const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
 
-                const isNextIImageAllowed = meta.imageUrl ?
+                const isNextImageAllowed = meta.imageUrl ?
                     imagesAllowedDomainsForNextImage?.some(domain => meta.imageUrl?.includes(domain)) :
                     false
 
@@ -31,7 +31,7 @@ const ActorsCardsRenderer: FC<IProps> = ({metas,isSidebar,locale}) => {
                     <ActorCard key={meta._id}
                                index={index}
                                actorUrl={actorUrl}
-                               isNextIImageAllowed={isNextIImageAllowed}
+                               isNextImageAllowed={isNextImageAllowed}
                                isSidebar={isSidebar}
                                meta={meta}/>
                 )

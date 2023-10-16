@@ -3,6 +3,7 @@ import {WidgetData} from "typescript-types";
 import dynamic from "next/dynamic";
 import './WidgetWrapper.scss'
 import WidgetFooter from "@components/widgets/widgetWrapper/WidgetFooter/WidgetFooter";
+import SkeletonRenderer from "@components/Skeletons/SkeletonRenderer";
 
 const WidgetHeader = dynamic(() => import('./WidgetHeader/WidgetHeader'))
 const WidgetPagination = dynamic(() => import('./WidgetPagination/WidgetPagination'))
@@ -25,7 +26,11 @@ const PostsSliderWidget = dynamic(() => import('../widgets/PostsSliderWidget/Pos
 const PostsListWidget = dynamic(() => import('@components/widgets/widgets/PostsListWidget/PostsListWidget'))
 // const ImagesSlider = dynamic(() => import('../widgets/ImagesSlider/ImagesSlider'))
 const WidgetText = dynamic(() => import('./WidgetText/WidgetText'))
-const Authentication = dynamic(() => import('../widgets/Authentication/Authentication'))
+const Authentication = dynamic(() => import('../widgets/Authentication/Authentication'),
+    {
+        // ssr: false,
+        // loading:()=> <SkeletonRenderer height={50} width={200} count={1}/>
+    })
 const Searchbar = dynamic(() => import('../widgets/Searchbar/Searchbar'))
 const MetasCardsWidget = dynamic(() => import('@components/widgets/widgets/MetasCardsWidget/MetasCardsWidget'))
 const PostsCardsWidget = dynamic(() => import('@components/widgets/widgets/PostsCardsWidget/PostsCardsWidget'))

@@ -14,7 +14,7 @@ interface LearnPostCardPropTypes {
     index: number,
     isSidebar?: boolean,
     post: Post,
-    isNextIImageAllowed: boolean
+    isNextImageAllowed: boolean
 }
 
 const LearnPostCard: FC<LearnPostCardPropTypes> =
@@ -24,7 +24,7 @@ const LearnPostCard: FC<LearnPostCardPropTypes> =
          postUrl,
          isSidebar,
          index,
-         isNextIImageAllowed
+         isNextImageAllowed
      }) => {
 
 
@@ -36,7 +36,8 @@ const LearnPostCard: FC<LearnPostCardPropTypes> =
                           title={post?.translations?.[locale as string]?.title ?? post?.title}>
                         <CardImageRendererUseClient
                             imageUrl={post.mainThumbnail}
-                            isNextIImageAllowed={isNextIImageAllowed}
+                            isNextImageAllowed={isNextImageAllowed}
+                            key={post?._id}
                             mediaAlt={post?.translations?.[locale as string]?.title ?? post?.title}
                             index={index}/>
                     </Link>

@@ -1,6 +1,6 @@
-import dotenv from 'dotenv';
-
-dotenv.config({path: '../../.env'});
+// import dotenv from 'dotenv';
+//
+// dotenv.config({path: '../../.env'});
 import {connectToDatabase, getLocalIP, shouldCompress} from 'custom-server-util';
 
 connectToDatabase('Express Server')

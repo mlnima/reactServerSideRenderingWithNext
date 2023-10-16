@@ -18,12 +18,9 @@ const MetasCardsWidget: FC<IProps> = ({uniqueData,metaType,locale,isSidebar}) =>
     if (metaType === 'actors'){
         return <ActorsCardsRenderer metas={uniqueData?.metaData} isSidebar={isSidebar} locale={locale}/>
     }else if (metaType === 'categories' ){
-        return <CategoriesCardsRenderer locale={locale} metas={uniqueData?.metaData} metaType={'categories'} isSidebar={isSidebar}/>
+        return <CategoriesCardsRenderer locale={locale} metas={uniqueData?.metaData}  isSidebar={isSidebar}/>
     }
-    //No Longer Rendering Tags Cards
-    // else if ( metaType === 'tags'){
-    //     return <CategoriesCardsRenderer locale={locale} metas={uniqueData?.metaData} metaType={'tags'} isSidebar={isSidebar}/>
-    // }
+
     else return null
 }
 

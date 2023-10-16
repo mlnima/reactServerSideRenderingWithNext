@@ -31,7 +31,7 @@ const PostsCardsRenderer: FC<IProps> = ({posts, locale, isSidebar,previewMode}) 
                     `/post/${post?.postType}/${post._id}${previewModeQuery}` :
                     `/${locale}${`/post/${post?.postType}/${post._id}`}${previewModeQuery}`;
 
-                const isNextIImageAllowed = post.mainThumbnail ?
+                const isNextImageAllowed = post.mainThumbnail ?
                     imagesAllowedDomainsForNextImage?.some(domain => post.mainThumbnail?.includes(domain)) :
                     false
 
@@ -41,7 +41,7 @@ const PostsCardsRenderer: FC<IProps> = ({posts, locale, isSidebar,previewMode}) 
                                    postUrl={postUrl}
                                    post={post}
                                    locale={locale}
-                                   isNextIImageAllowed={isNextIImageAllowed}
+                                   isNextImageAllowed={isNextImageAllowed}
                                    key={post._id}/> :
                     post?.postType === 'article' ?
                         <ArticlePostCard index={index}
@@ -49,14 +49,14 @@ const PostsCardsRenderer: FC<IProps> = ({posts, locale, isSidebar,previewMode}) 
                                          postUrl={postUrl}
                                          post={post}
                                          locale={locale}
-                                         isNextIImageAllowed={isNextIImageAllowed}
+                                         isNextImageAllowed={isNextImageAllowed}
                                          key={post._id}/> :
                         post?.postType === 'promotion' ?
                             <PromotionPostCard numberOfCardsPerRowInMobile={2} index={index}
                                                postUrl={postUrl}
                                                post={post}
                                                locale={locale}
-                                               isNextIImageAllowed={isNextIImageAllowed}
+                                               isNextImageAllowed={isNextImageAllowed}
                                                isSidebar={isSidebar}
                                                key={post._id}/> :
                             post?.postType === 'learn' ?
@@ -64,7 +64,7 @@ const PostsCardsRenderer: FC<IProps> = ({posts, locale, isSidebar,previewMode}) 
                                                postUrl={postUrl}
                                                post={post}
                                                locale={locale}
-                                               isNextIImageAllowed={isNextIImageAllowed}
+                                               isNextImageAllowed={isNextImageAllowed}
                                                isSidebar={isSidebar}
                                                key={post._id}/> :
                                 post?.postType === 'ad' ?
@@ -72,7 +72,7 @@ const PostsCardsRenderer: FC<IProps> = ({posts, locale, isSidebar,previewMode}) 
                                                 postUrl={postUrl}
                                                 post={post}
                                                 locale={locale}
-                                                isNextIImageAllowed={isNextIImageAllowed}
+                                                isNextImageAllowed={isNextImageAllowed}
                                                 isSidebar={isSidebar}
                                                 key={post._id}/> :
                                     null
