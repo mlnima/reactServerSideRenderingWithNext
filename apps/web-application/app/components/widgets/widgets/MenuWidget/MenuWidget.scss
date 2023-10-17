@@ -5,6 +5,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 50px;
+    height: 50px;
+    padding: 4px;
     margin: 0;
   }
 
@@ -61,11 +64,13 @@
   .menu-widget{
     //width: 100%;
 
+
     .menu-widget-open-button {
       display: none;
     }
 
     .menu-widget-items {
+      height: 60%;
       width: 100%;
       position: initial;
       display: flex;

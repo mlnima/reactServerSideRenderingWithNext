@@ -7,17 +7,18 @@
     width: 50px;
     height: 50px;
     display: flex;
+    padding: 4px;
     justify-content: center;
     align-items: center;
 
     .gearIcon {
-      color: var(--secondary-text-color);
+      color: var(--primary-text-color);
       width: 24px;
       height: 24px;
     }
 
     .earthIcon {
-      color: var(--tertiary-text-color);
+      color: var(--secondary-text-color);
       position: absolute;
       width: 18px;
       height: 18px;
@@ -32,7 +33,7 @@
     top: 100%;
     background-color: var(--tertiary-background-color);
     color: var(--tertiary-text-color);
-    z-index: 2;
+    z-index: 11;
     padding: .25rem .5rem;
     box-sizing: border-box;
     border-radius: 0.375rem;
@@ -46,6 +47,7 @@
         justify-content: flex-start;
         gap: 2px;
         align-items: center;
+        color: var(--primary-text-color);
         svg{
           width: 20px;
           height: 20px;

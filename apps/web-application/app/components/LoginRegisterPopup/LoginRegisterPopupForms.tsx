@@ -1,7 +1,5 @@
 'use client';
 import React, {useState, useEffect, FC} from 'react';
-import {loginRegisterForm} from "@store/reducers/globalStateReducer";
-import Draggable from 'react-draggable';
 import ValidInput from "./ValidInput";
 import {loginAction} from "@store/reducers/userReducers/loginAction";
 import {setAlert} from "@store/reducers/globalStateReducer";
@@ -12,9 +10,8 @@ import {faEye} from "@fortawesome/free-solid-svg-icons/faEye";
 import {registerUserAction} from "@store/reducers/userReducers/registerUserAction";
 import {usernameValidatorRegisterForm, passwordValidatorRegisterForm} from "custom-util";
 import {emailValidator} from "custom-util";
-import './LoginRegisterPopupForms.styles.scss'
-
-
+import './LoginRegisterPopupForms.scss'
+import {faEyeSlash} from "@fortawesome/free-solid-svg-icons";
 
 interface StateTypes {
     username?: string,
@@ -40,7 +37,7 @@ interface IProps {
 }
 
 
-const LoginRegisterPopupForms: FC<IProps> = ({locale,dictionary}: IProps) => {
+const LoginRegisterPopupForms: FC<IProps> = ({locale, dictionary}: IProps) => {
 
     const dispatch = useAppDispatch()
     const globalState = useAppSelector(({globalState}) => globalState)
@@ -50,26 +47,16 @@ const LoginRegisterPopupForms: FC<IProps> = ({locale,dictionary}: IProps) => {
         email: '',
         password: '',
         password2: '',
+        gender:''
     });
     const [stateValidator, setStateValidator] = useState<StateValidatorTypes>({});
     const [showPassword, setShowPassword] = useState<boolean>(false);
 
-    const onChangeHandler = (e: React.FormEvent<HTMLDivElement | HTMLFormElement>) => {
+    const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setState({
             ...state,
-            // @ts-ignore
             [e.target.name]: e.target.value
         } as { [key: string]: string })
-    };
-
-
-    const onrResetStateHandler = () => {
-        setState({
-            username: '',
-            email: '',
-            password: '',
-            password2: '',
-        })
     };
 
     const onLoginHandler = (e: React.FormEvent<HTMLFormElement>) => {
@@ -112,165 +99,175 @@ const LoginRegisterPopupForms: FC<IProps> = ({locale,dictionary}: IProps) => {
     }, [state]);
 
     return (
-        <Draggable handle='.handle'>
-            <div className='loginRegisterContent'>
-                <FormHeader locale={locale} dictionary={dictionary}/>
-                {(globalState.loginRegisterFormPopup === 'register' && anyoneCanRegister) ?
-                    <form className='login-register-form' onSubmit={e => onRegisterHandler(e)}>
-                        <div className="login-register-form-fields">
-                            <div className="login-register-form-field">
-                                <div className={'input-validator'}>
-                                    <input className={'primaryInput form-control-input-validator'}
-                                           required={true}
-                                           name='username'
-                                           value={state.username}
-                                           placeholder={dictionary?.['Username'] || 'Username'}
-                                           onChange={e => onChangeHandler(e)}
-                                    />
+        <div className='loginRegisterContent'>
+            <FormHeader locale={locale} dictionary={dictionary}/>
+            {(globalState.loginRegisterFormPopup === 'register' && anyoneCanRegister) ?
+                <form className='login-register-form' onSubmit={e => onRegisterHandler(e)}>
+                    <div className="login-register-form-fields">
+                        <div className="login-register-form-field">
+                            <div className={'input-validator'}>
+                                <input className={'primaryInput form-control-input-validator'}
+                                       required={true}
+                                       name='username'
+                                       value={state.username}
+                                       placeholder={dictionary?.['Username'] || 'Username'}
+                                       onChange={e => onChangeHandler(e)}
+                                />
+                                <div className={'filedInfo'}>
                                     <ValidInput valid={stateValidator.username}/>
                                 </div>
+
                             </div>
-                            <div className="login-register-form-field">
-                                <div className={'input-validator'}>
-                                    <input className={'primaryInput form-control-input-validator'}
-                                           autoComplete="off"
-                                           required={true}
-                                           name='email'
-                                           value={state.email}
-                                           type='email'
-                                           placeholder={dictionary['Email'] || 'Email'}
-                                           onChange={e => onChangeHandler(e)}
-                                    />
+                        </div>
+                        <div className="login-register-form-field">
+                            <div className={'input-validator'}>
+                                <input className={'primaryInput form-control-input-validator'}
+                                       autoComplete="off"
+                                       required={true}
+                                       name='email'
+                                       value={state.email}
+                                       type='email'
+                                       placeholder={dictionary['Email'] || 'Email'}
+                                       onChange={e => onChangeHandler(e)}
+                                />
+                                <div className={'filedInfo'}>
+
+
                                     <ValidInput valid={stateValidator.email}/>
                                 </div>
+
                             </div>
-                            <div className="login-register-form-field gender">
-                                <label> {dictionary['Gender'] || 'Gender'}:</label>
-                                <select className={'primarySelect'} value={state.gender} required={true}>
-                                    <option value="">{dictionary['Select'] || 'Select'}</option>
-                                    <option value="female">{dictionary['Female'] || 'Female'}</option>
-                                    <option value="male">{dictionary['Male'] || 'Male'}</option>
-                                    <option value="other">{dictionary['Other'] || 'Other'}</option>
-                                </select>
+                        </div>
+                        <div className="login-register-form-field gender">
+                            <label> {dictionary['Gender'] || 'Gender'}:</label>
+                            <select className={'primarySelect'}
+                                    onChange={e => onChangeHandler(e)}
+                                    name={'gender'}
+                                    value={state.gender}
+                                    required={true}>
+                                <option value="">{dictionary['Select'] || 'Select'}</option>
+                                <option value="female">{dictionary['Female'] || 'Female'}</option>
+                                <option value="male">{dictionary['Male'] || 'Male'}</option>
+                                <option value="other">{dictionary['Other'] || 'Other'}</option>
+                            </select>
+                            <div className={'filedInfo'}>
+                                <ValidInput valid={!!state.gender}/>
                             </div>
-                            <div className="login-register-form-field">
-                                <div className={'input-validator'}>
-                                    <input className={'primaryInput form-control-input-validator'}
-                                           type={'password'}
-                                           autoComplete={'off'}
-                                           name={'password'}
-                                           placeholder={dictionary['Password'] || 'Password'}
-                                           required={true} value={state.password}
-                                           onChange={e => onChangeHandler(e)}
-                                    />
+                        </div>
+                        <div className="login-register-form-field">
+                            <div className={'input-validator'}>
+                                <input className={'primaryInput form-control-input-validator'}
+                                       type={showPassword ? 'text' : 'password'}
+                                       autoComplete={'off'}
+                                       name={'password'}
+                                       placeholder={dictionary['Password'] || 'Password'}
+                                       required={true} value={state.password}
+                                       onChange={e => onChangeHandler(e)}
+                                />
+                                <div className={'filedInfo'}>
+                                    <span className={'showPasswordButton'}
+                                            onClick={() => setShowPassword(!showPassword)}
+                                            onTouchStart={() => setShowPassword(!showPassword)}>
+                                         <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye}
+                                                          style={{width: 20, height: 20}}/>
+
+                                    </span>
                                     <ValidInput valid={stateValidator.password}/>
                                 </div>
-                                {
-                                    !stateValidator.password ?
-                                        <span className='password-info'>
+                            </div>
+                            {
+                                !stateValidator.password ?
+                                    <span className='password-info'>
                                             {dictionary['Minimum eight characters, at least one letter and one number'] ||
                                                 'Minimum eight characters, at least one letter and one number'
                                             }
                                         </span>
-                                        : null
-                                }
-                            </div>
-                            <div className={'login-register-form-field'}>
-                                <div className={'input-validator'}>
-                                    <input className={'primaryInput form-control-input-validator'}
-                                           type={'password'}
-                                           autoComplete={'off'}
-                                           name={'password2'}
-                                           required={true}
-                                           placeholder={dictionary['Repeat Password'] || 'Repeat Password'}
-                                           value={state.password2}
-                                           onChange={e => onChangeHandler(e)}
-                                    />
+                                    : null
+                            }
+                        </div>
+                        <div className={'login-register-form-field'}>
+                            <div className={'input-validator'}>
+                                <input className={'primaryInput form-control-input-validator'}
+                                       type={showPassword ? 'text' : 'password'}
+                                       autoComplete={'off'}
+                                       name={'password2'}
+                                       required={true}
+                                       placeholder={dictionary['Repeat Password'] || 'Repeat Password'}
+                                       value={state.password2}
+                                       onChange={e => onChangeHandler(e)}
+                                />
+                                <div className={'filedInfo'}>
                                     <ValidInput valid={stateValidator.password2}/>
                                 </div>
 
 
                             </div>
+
+
                         </div>
-                        <button disabled={!stateValidator.username &&
-                            !stateValidator.username &&
-                            !stateValidator.email &&
-                            !stateValidator.password &&
-                            !stateValidator.password2 &&
-                            !stateValidator.gender
-                        }
-                                type={'submit'}
-                                className={'login-register-form-button btn btn-primary'}>
-                            {dictionary['Register'] || 'Register'}
-                        </button>
-                    </form> : globalState.loginRegisterFormPopup === 'login' ?
-                        <form className='login-register-form'
-                              onSubmit={e => onLoginHandler(e)}
-                        >
-                            <div className="login-register-form-fields">
-                                <div className="login-register-form-field">
-                                    <p>{dictionary['Username'] || 'Username'}</p>
-                                    <div className={'input-validator'}>
-                                        <input className={'primaryInput form-control-input-validator'}
-                                               name={'username'}
-                                               value={state.username}
-                                               onChange={e => onChangeHandler(e)}
-                                        />
-                                        <ValidInput valid={stateValidator.username}/>
-                                    </div>
-
-
+                    </div>
+                    <button disabled={!stateValidator.username &&
+                        !stateValidator.username &&
+                        !stateValidator.email &&
+                        !stateValidator.password &&
+                        !stateValidator.password2 &&
+                        !stateValidator.gender
+                    }
+                            type={'submit'}
+                            className={'login-register-form-button btn btn-primary'}>
+                        {dictionary['Register'] || 'Register'}
+                    </button>
+                </form> : globalState.loginRegisterFormPopup === 'login' ?
+                    <form className='login-register-form'
+                          onSubmit={e => onLoginHandler(e)}
+                    >
+                        <div className="login-register-form-fields">
+                            <div className="login-register-form-field">
+                                <div className={'input-validator'}>
+                                    <input className={'primaryInput form-control-input-validator'}
+                                           name={'username'}
+                                           value={state.username}
+                                           placeholder={dictionary['Username'] || 'Username'}
+                                           onChange={e => onChangeHandler(e)}
+                                    />
                                 </div>
-                                <div className="login-register-form-field">
-                                    <p>{dictionary['Password'] || 'Password'}</p>
-                                    <div className={'input-validator'}>
-                                        <input className={'primaryInput password'}
-                                            // ref={passwordRef}
-                                               name={'password'}
-                                               value={state.password}
-                                               type={showPassword ? 'text' : 'password'}
-                                               onChange={e => onChangeHandler(e)}
-                                        />
-                                        <span className={'show-password-wrapper inputs-action'}
+                            </div>
+                            <div className="login-register-form-field">
+                                <div className={'input-validator'}>
+                                    <input className={'primaryInput password'}
+                                        // ref={passwordRef}
+                                           name={'password'}
+                                           placeholder={dictionary['Password'] || 'Password'}
+                                           value={state.password}
+                                           type={showPassword ? 'text' : 'password'}
+                                           onChange={e => onChangeHandler(e)}
+                                    />
+                                    <div className={'filedInfo'}>
+                                        <span className={'showPasswordButton showPasswordButtonLogin'}
                                               onClick={() => setShowPassword(!showPassword)}
                                               onTouchStart={() => setShowPassword(!showPassword)}>
-                                        <FontAwesomeIcon icon={faEye} style={{width: 20, height: 20}}/>
+                                        <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye}
+                                                         style={{width: 20, height: 20}}/>
                                     </span>
                                     </div>
 
                                 </div>
+
                             </div>
-                            <button disabled={!stateValidator.username && !state.password}
-                                    type={'submit'}
-                                    className={'login-register-form-button btn btn-primary'}>
-                                {dictionary['Login'] || 'Login'}
-                            </button>
-                        </form> : null
-                }
-
-                {anyoneCanRegister &&
-                    <span onClick={() => {
-                        globalState.loginRegisterFormPopup === 'register' ?
-                            dispatch(loginRegisterForm('login')) :
-                            dispatch(loginRegisterForm('register'))
-                        onrResetStateHandler()
-                    }}
-                          className='btn btn-secondary'>
-                      {globalState.loginRegisterFormPopup === 'register' ?
-                          dictionary['Do You Have An Account? Login Here'] || 'Do You Have An Account? Login Here' :
-                          dictionary['Not A Member Yet? Register Here'] || 'Not A Member Yet? Register Here'}
-                </span>
-
-                }
+                        </div>
+                        <button disabled={!stateValidator.username && !state.password}
+                                type={'submit'}
+                                className={'btn btn-primary login-register-form-button btn btn-primary'}>
+                            {dictionary['Login'] || 'Login'}
+                        </button>
+                    </form> : null
+            }
 
 
-            </div>
-        </Draggable>
+            {/*}*/}
+
+
+        </div>
     );
 };
 export default LoginRegisterPopupForms;
-
-
-// color: ${(props: { response: ResponseTypes }) => props.response.type === 'success' ?
-//         'green' :
-//         props.response.type === 'error' ? 'red' : 'var(--primary-text-color,#fff)'};

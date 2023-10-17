@@ -25,6 +25,7 @@ const SearchBar: React.FC<IProps> = ({dictionary, locale}) => {
     const dispatch = useAppDispatch()
     const [open, setOpen] = useState<boolean>(false);
     const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+    const [isOnFocus,setIsOnFocus] = useState(false)
 
     const onSearchHandler = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -46,6 +47,7 @@ const SearchBar: React.FC<IProps> = ({dictionary, locale}) => {
 
     const onClearHandler = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault()
+        setIsOnFocus(false)
         if (!!keyword) {
             setKeyword('');
         } else {
@@ -74,11 +76,18 @@ const SearchBar: React.FC<IProps> = ({dictionary, locale}) => {
             setKeyword('')
         }
 
-
+        setIsOnFocus(false)
     }, [searchParams, pathname]);
 
 
+    const onFocusHandler = () => {
+        setIsOnFocus(true)
+    }
+
     return (
+        <>
+            {isOnFocus && <div className={'fullPageBlurBackground'} style={{zIndex:10}}/>}
+
         <div className={'searchbarWidget'}>
 
             <button onClick={() => setOpen(!open)}
@@ -114,6 +123,9 @@ const SearchBar: React.FC<IProps> = ({dictionary, locale}) => {
                 }
                 <input type="text"
                        onChange={e => setKeyword(e.target.value)}
+                       onFocus={onFocusHandler}
+                       onBlur={()=>setIsOnFocus(false)}
+                       onClick={onFocusHandler}
                        name='keyword' value={keyword || ''}
                        className={'searchbarInput primaryInput'}
                        placeholder={dictionary?.['Search'] || 'Search'}
@@ -127,6 +139,7 @@ const SearchBar: React.FC<IProps> = ({dictionary, locale}) => {
             </form>
 
         </div>
+        </>
     )
 
 };

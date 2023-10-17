@@ -26,6 +26,7 @@ import HeaderWidgetArea from "@components/widgets/widgetAreas/HeaderWidgetArea";
 import NavigationWidgetArea from "@components/widgets/widgetAreas/NavigationWidgetArea";
 import FooterWidgetArea from "@components/widgets/widgetAreas/FooterWidgetArea";
 import StyledComponentsRegistry from "@lib/registry";
+// import './layout.scss'
 // import Head from "next/head";
 
 // import {rtlLanguages} from "data-structures";

@@ -113,9 +113,6 @@ export const getPostViews = async (req:Request, res:Response) => {
 };
 
 export const getPostRating = async (req:Request, res:Response) => {
-    console.log('findQuery=> ')
-
-
     try {
         const findQuery = buildFindQuery(req);
 

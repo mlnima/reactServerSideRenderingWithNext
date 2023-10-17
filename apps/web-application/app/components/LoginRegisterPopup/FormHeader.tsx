@@ -15,21 +15,31 @@ interface IProps{
 
 const FormHeader: FC<IProps> = ({locale,dictionary}) => {
 
-    const {loginRegisterFormPopup} = useAppSelector(({globalState}) => globalState);
     const dispatch = useAppDispatch();
+    const {loginRegisterFormPopup} = useAppSelector(({globalState}) => globalState);
+    const {anyoneCanRegister} = useAppSelector(({settings}) => settings?.initialSettings?.membershipSettings);
 
     return (
         <div className='formHeader handle'>
-            <div/>
-            <h3 className='login-register-title'>
-                {loginRegisterFormPopup === 'register' ?
-                    dictionary['Register'] || 'Register' :
-                    dictionary['Member login'] || 'Member login'
+
+            <div className={'switchForms'}>
+                <button onClick={()=>dispatch(loginRegisterForm('login'))}
+                        onTouchStart={()=>dispatch(loginRegisterForm('login'))}
+                className={`switchFormsTab ${loginRegisterFormPopup === 'login' ? 'activeTab' : 'inactiveTab'}`}>
+                    {dictionary['Login'] || 'Login'}
+                </button>
+                {anyoneCanRegister &&
+                    <button onClick={()=>dispatch(loginRegisterForm('register'))}
+                            onTouchStart={()=>dispatch(loginRegisterForm('register'))}
+                            className={`switchFormsTab ${loginRegisterFormPopup === 'register' ? 'activeTab' : 'inactiveTab'}`}>
+                        {dictionary['Register'] || 'Register'}
+                    </button>
                 }
-            </h3>
+            </div>
+
             <button onClick={() => dispatch(loginRegisterForm(false))}
                     onTouchStart={() => dispatch(loginRegisterForm(false))}
-                    className='close-form-button'
+                    className='closeFormButton'
                     title={dictionary['Close']}>
                 <FontAwesomeIcon icon={faXmark} style={{width: 30, height: 30}}/>
             </button>

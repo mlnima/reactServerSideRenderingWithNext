@@ -1,7 +1,7 @@
 'use client';
 import {FC} from 'react';
 import LoginRegisterPopupForms from "./LoginRegisterPopupForms";
-import './LoginRegisterPopup.styles.scss'
+import './LoginRegisterPopup.scss'
 import {useAppSelector} from "@store/hooks";
 
 interface IProps{
@@ -20,6 +20,7 @@ const LoginRegisterPopup: FC<IProps> = ({locale,dictionary}) => {
     if  (!loggedIn && (loginRegisterFormPopup === 'register' || loginRegisterFormPopup === 'login')){
         return (
             <div className='loginRegisterPopup'>
+                <div className={'fullPageBlurBackground'}/>
                 <LoginRegisterPopupForms locale={locale} dictionary={dictionary}/>
             </div>
         );

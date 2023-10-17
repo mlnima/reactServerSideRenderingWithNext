@@ -3,12 +3,12 @@ import React, {FC, useEffect, useRef, useState} from "react";
 import {UniqueDataTypes} from "typescript-types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEarthAmerica, faGear, faLightbulb} from "@fortawesome/free-solid-svg-icons";
-
-const LanguagesSwitcher = dynamic(() => import('../LanguagesSwitcher/LanguagesSwitcher'))
-const DayModeNightMode = dynamic(() => import('../DayModeNightMode/DayModeNightMode'))
 import './UserPreferenceConfigWidget.scss'
 import dynamic from "next/dynamic";
 import {faSun} from "@fortawesome/free-solid-svg-icons/faSun";
+
+const LanguagesSwitcher = dynamic(() => import('../LanguagesSwitcher/LanguagesSwitcher'))
+const DayModeNightMode = dynamic(() => import('../DayModeNightMode/DayModeNightMode'))
 
 interface IProps {
     uniqueData: UniqueDataTypes,

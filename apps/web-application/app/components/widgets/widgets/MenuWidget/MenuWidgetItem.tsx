@@ -1,7 +1,7 @@
 import {FC} from "react";
 import Link from "next/link";
 import {MenuItem} from "typescript-types";
-import './MenuWidgetItem.styles.scss'
+import './MenuWidgetItem.scss'
 
 interface MenuWidgetItemPropTypes {
     menuItem: MenuItem,

@@ -18,6 +18,7 @@
   --tertiary-background-color: #151515;
 
   --dim-background-color: rgba(0, 0, 0, .6);
+  --primary-background-filter : sepia(100%)  blur(10px);
   --primary-active-color: #f90;
   --secondary-active-color: #6c757d;
   --primary-gradiant: linear-gradient(180deg, #fff, hsla(0, 0%, 100%, .6));
@@ -120,10 +121,16 @@ a {
   box-sizing: border-box;
 }
 
+#page{
+  padding: 0 4px;
 
-#content {
-  padding: 0;
+  #content {
+    padding: 0;
+  }
 }
+
+
+
 
 .desktopOnly{
   display: none !important;
@@ -158,6 +165,18 @@ a {
 }
 .darkenBackgroundHidden{
   display: none;
+}
+
+
+.fullPageBlurBackground{
+  backdrop-filter: var(--primary-background-filter);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 @media only screen and (min-width: 600px) {

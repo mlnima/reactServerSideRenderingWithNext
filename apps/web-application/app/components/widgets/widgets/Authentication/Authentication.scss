@@ -10,12 +10,17 @@
     align-items: center;
     gap: 16px;
 
-    .loginButton {
+    .loginButton,.profileButton {
 
-      color: var(--secondary-text-color, #b3b3b3);
+      color: var(--primary-text-color, #b3b3b3);
+      width: 50px;
+      height: 50px;
+      padding: 4px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
       svg {
-
         width: 1.5rem;
         height: 1.5rem;
       }
@@ -32,7 +37,7 @@
       border: none;
       outline: none;
       cursor: pointer;
-      color: var(--secondary-text-color, #b3b3b3);
+      color: var(--primary-text-color, #b3b3b3);
 
     }
 
@@ -191,10 +196,6 @@
     animation: userMenuSlide .3s linear alternate;
   }
 
-  //.authWidgetSlideClosed {
-  //  display: none;
-  //  animation: none;
-  //}
 }
 
 @media only screen and (min-width: 768px) {

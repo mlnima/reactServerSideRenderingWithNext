@@ -43,7 +43,6 @@ const PostPage = async ({params: {lang, identifier, postType}, searchParams}: IP
     const widgetsData = await fetchWidgets(['postPageLeftSidebar', 'postPageRightSidebar', 'underPost'], lang)
     const sidebar = settingsData?.settings?.postPageSettings?.sidebar
 
-    console.log('postData?.relatedPosts=> ',postData?.relatedPosts?.length)
     if (!postData?.post?._id) {
         return <Soft404 dictionary={dictionary}/>
     }

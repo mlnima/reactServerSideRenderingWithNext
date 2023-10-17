@@ -1,24 +1,83 @@
 .formHeader{
   width: 100%;
-  display: grid;
-  grid-template-columns: 30px 1fr 30px;
-  padding: 8px 0;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   cursor: pointer;
+  box-sizing: border-box;
 
-  h3 {
-    padding: 0;
-    margin: 0;
+  .switchForms{
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+    gap: 8px;
+    .switchFormsTab{
+      padding: 6px 12px;
+      height: 50px;
+      font-weight: bold;
+    }
+    .activeTab{
+      background-color: var(--secondary-background-color);
+      border-radius: .375rem .375rem 0 0;
+      position: relative;
 
-  .close-form-button {
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: .5rem;
+        height: .5rem;
+        background-color: var(--secondary-background-color);
+        border-bottom-right-radius: .5rem;
+        margin-bottom: -.5rem;
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: .5rem;
+        height: .5rem;
+        background-color: var(--secondary-background-color);
+        border-bottom-left-radius: .5rem;
+        margin-bottom: -.5rem;
+      }
+    }
+    .inactiveTab{
+
+    }
+
+
+
+  }
+  .closeFormButton {
     background-color: transparent;
     color: var(--primary-text-color,#fff);
     border: none;
     padding: 0;
-    height: 30px;
-    width: 30px;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+}
+
+@media only screen and (min-width: 768px){
+  .formHeader{
+    height: initial;
+    .switchForms{
+      .switchFormsTab{
+        height: initial;
+      }
+    }
+    .closeFormButton{
+      height: 30px;
+      width: 30px;
+    }
   }
 }

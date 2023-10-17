@@ -21,7 +21,7 @@
           height: 100%;
           padding:  8px 1rem;
           font-size: 2rem; // Roughly equivalent to Tailwind's 'text-2xl'
-          color: var(--secondary-text-color,#b3b3b3); // Assuming you have this variable defined in your SCSS
+          color: var(--primary-text-color); // Assuming you have this variable defined in your SCSS
         }
       }
 
@@ -44,7 +44,7 @@
           text-overflow: ellipsis;
           white-space: nowrap;
           border-radius: 0.25rem;
-          color: var(--secondary-text-color);
+          color: var(--primary-text-color);
           cursor: pointer;
           word-wrap: break-word;
           background-color: var(--secondary-background-color);

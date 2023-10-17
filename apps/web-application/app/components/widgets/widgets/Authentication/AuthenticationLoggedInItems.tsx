@@ -1,21 +1,19 @@
 'use client';
 import React, {FC} from "react";
 import Link from "next/link";
-import {userLogout} from "@store/reducers/userReducers/userReducer";
-import {useAppDispatch, useAppSelector} from "@store/hooks";
-import {loginRegisterForm} from "@store/reducers/globalStateReducer";
+import {useAppSelector} from "@store/hooks";
 import UserProfileImage from "@components/UserProfileImage/UserProfileImage";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSignOut} from "@fortawesome/free-solid-svg-icons/faSignOut";
 import {faEnvelope} from "@fortawesome/free-solid-svg-icons/faEnvelope";
 import dynamic from "next/dynamic";
+
 const AuthenticationAdminItems = dynamic(() => import('./AuthenticationAdminItems'))
 import './AuthenticationLoggedInItems.styles.scss';
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types/dist/src/storeTypes/Store";
 
 interface IProps {
     onOpenCloseHandler: () => void,
+    onSignOutHandler: () => void,
     locale: string,
     dictionary: {
         [key: string]: string
@@ -27,29 +25,23 @@ interface UserData {
     role: string;
 }
 
-const AuthenticationLoggedInItems: FC<IProps> = ({onOpenCloseHandler, locale, dictionary}) => {
+const AuthenticationLoggedInItems: FC<IProps> = ({onOpenCloseHandler, locale, dictionary, onSignOutHandler}) => {
 
 
-    const {membership} = useAppSelector(({settings}) =>  settings?.initialSettings?.membershipSettings);
+    const {membership} = useAppSelector(({settings}) => settings?.initialSettings?.membershipSettings);
 
     const {usersCanMessageEachOther} = useAppSelector(
-        ({settings}) =>  settings?.initialSettings?.membershipSettings
+        ({settings}) => settings?.initialSettings?.membershipSettings
     );
 
     const {username, role} = useAppSelector(({user}) => user?.userData || {} as UserData);
-    const dispatch = useAppDispatch()
-
-    const onSignOutHandler = () => {
-        dispatch(userLogout())
-        dispatch(loginRegisterForm(false))
-        onOpenCloseHandler()
-    }
 
     return (
         <div className={'authenticationLoggedIn'}>
 
             <div className={'user-info'}>
-                <Link href={`${locale === process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? '' : `/${locale}`}/user/${username}`} onClick={onOpenCloseHandler}>
+                <Link href={`${locale === process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? '' : `/${locale}`}/user/${username}`}
+                      onClick={onOpenCloseHandler}>
                     <div className='user-info-profile-icon'>
                         <UserProfileImage size={40} profileRedirect={false}/>
                     </div>
