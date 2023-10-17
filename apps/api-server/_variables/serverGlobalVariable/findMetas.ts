@@ -1,25 +1,26 @@
-import {metaSchema,settingSchema} from 'models';
-import {IdentitySettings, InitialSettings} from "typescript-types";
+import {metaSchema} from 'models';
 
-interface FindMetasQueryTypes{
-    metaType:string,
-    page?:number,
-    limit?:number,
-    startWith?:number|string,
-    sort?:string,
+interface FindMetasQueryTypes {
+    metaType: string,
+    page?: number,
+    limit?: number,
+    startWith?: number | string,
+    sort?: string,
+    locale: string
 }
 
-export const findMetas = async (query:FindMetasQueryTypes)=>{
+export const findMetas = async (query: FindMetasQueryTypes) => {
     try {
-
+        const locale = query.locale
         const statusQuery = {status: 'published'};
         const type = {type: query?.metaType}
         const notStartWithNumberRegex = /^(?![0-9].*$).*/g
-        const startWithQuery = !query.startWith  ? {name: {$regex: notStartWithNumberRegex}} :  {name: {$regex: '^' + query.startWith}}
-        const countQuery =  {count: {$gt: 0}}
+        const startWithQuery = !query.startWith ? {name: {$regex: notStartWithNumberRegex}} : {name: {$regex: '^' + query.startWith}}
+        const countQuery = {count: {$gt: 0}}
         const limit = global?.initialSettings?.postCardsSettings?.numberOfCardsPerPage || 20
         const page = query?.page || 1
         const skip = page ? limit * (page - 1) : 0
+        const selectQuery = `name type ${query?.metaType !== 'tags' ? 'imageUrl' : ''} translations.${locale}.name`
 
         const sortQuery = !query.sort ? {
             'rank': 1,
@@ -29,25 +30,27 @@ export const findMetas = async (query:FindMetasQueryTypes)=>{
         const findQuery = {$and: [type, startWithQuery, statusQuery, countQuery]}
 
         const totalCount = await metaSchema.countDocuments(findQuery).exec()
+
+
         const metas = await metaSchema.find(
             findQuery,
             {},
             {sort: sortQuery})
             .limit(limit || (query?.startWith ? 0 : 1000))
             .skip(skip)
-            .select( query?.metaType ==='tags' ? 'name type' : 'name type imageUrl')
+            .select(selectQuery)
             .exec()
 
-        return{
+        return {
             metas,
             totalCount
         }
 
-    }catch (error){
+    } catch (error) {
         console.log(error)
-        return{
-            metas:[],
-            totalCount:0
+        return {
+            metas: [],
+            totalCount: 0
         }
     }
 }

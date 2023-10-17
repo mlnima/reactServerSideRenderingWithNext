@@ -85,12 +85,13 @@ export const fetchPostRating = async ({identifier, revalidate}:IFetchPost) => {
 
 type IFetchPostsProps = {
     queryObject: {},
+    locale?:string,
     requestedFields?: string[],
     revalidate?: number | null,
     tags?:string[]
 }
 
-export const fetchPosts = async ({queryObject, requestedFields, revalidate,tags}: IFetchPostsProps) => {
+export const fetchPosts = async ({queryObject,locale, requestedFields, revalidate,tags}: IFetchPostsProps) => {
     try {
         const requestParameter = removeEmptyProperties(queryObject)
         const queries = `?${new URLSearchParams(requestParameter).toString()}`;
@@ -100,7 +101,7 @@ export const fetchPosts = async ({queryObject, requestedFields, revalidate,tags}
         ).map(f => 'field=' + f).join('&');
 
         const response = await fetch(
-            `${APIServerUrl}/api/v1/posts/getPosts?${queries}&${requestedFieldsQuery}`,
+            `${APIServerUrl}/api/v1/posts/getPosts?${queries}&${requestedFieldsQuery}&locale=${locale}`,
             //@ts-ignore
             config({revalidate,tags:[...(tags || []),'cacheItem','posts']})
         );
@@ -116,18 +117,19 @@ export const fetchPosts = async ({queryObject, requestedFields, revalidate,tags}
 
 type IFetchMetasProps = {
     queryObject: {},
+    locale:string,
     requestedFields?: string[],
     revalidate?: number | null
     tags?:string[]
 }
 
-export const fetchMetas = async ({queryObject, revalidate,tags}: IFetchMetasProps) => {
+export const fetchMetas = async ({queryObject, locale,revalidate,tags}: IFetchMetasProps) => {
     try {
         const requestParameter = removeEmptyProperties(queryObject)
         const queries = `?${new URLSearchParams(requestParameter).toString()}`;
 
         const response = await fetch(
-            `${APIServerUrl}/api/v1/posts/getMetas${queries}`,
+            `${APIServerUrl}/api/v1/posts/getMetas${queries}&locale=${locale}`,
             config({revalidate,tags:[...(tags || []),'cacheItem','metas']})
         );
         if (!response.ok) {
@@ -161,13 +163,13 @@ export const fetchTags = async ({queryObject, revalidate,tags}: IFetchMetasProps
 
 //we need to handle pagination
 
-export const fetchSearch = async ({queryObject, revalidate,tags}: IFetchMetasProps) => {
+export const fetchSearch = async ({queryObject,locale, revalidate,tags}: IFetchMetasProps) => {
     try {
         const requestParameter = removeEmptyProperties(queryObject)
         const queries = `?${new URLSearchParams(requestParameter).toString()}`;
 
         const response = await fetch(
-            `${APIServerUrl}/api/v1/posts/getSearch${queries}`,
+            `${APIServerUrl}/api/v1/posts/getSearch${queries}&locale=${locale}`,
             config({revalidate,tags:[...(tags || []),'cacheItem','posts']})
         );
         if (!response.ok) {

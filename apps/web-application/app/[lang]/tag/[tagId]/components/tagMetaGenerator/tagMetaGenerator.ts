@@ -1,6 +1,7 @@
 import type {Metadata, ResolvingMetadata} from 'next'
 import {fetchPosts, fetchSettings} from "fetch-requests";
 import {textContentReplacer, getTextDataWithTranslation} from "custom-util";
+import {i18n} from "@i18nConfig";
 
 type Props = {
     params: { tagId: string, lang: string }
@@ -8,6 +9,7 @@ type Props = {
 }
 
 const tagMetaGenerator = async ({params, searchParams}: Props, parent?: ResolvingMetadata): Promise<Metadata> => {
+    const locale = i18n.locales.includes(params?.lang) ? params.lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const settingsData = await fetchSettings({requireSettings: ['tagPageSettings']});
     const fallbackImage = '/asset/images/default/no-image-available.png'
     const initialSettingsData = await fetchSettings({requireSettings: ['initialSettings']})
@@ -23,7 +25,8 @@ const tagMetaGenerator = async ({params, searchParams}: Props, parent?: Resolvin
             metaId: params?.tagId,
             page: currentPage,
             size: searchParams?.size || numberOfCardsPerPage
-        }
+        },
+        locale
     });
     const pageTitle = settingsData?.settings?.tagPageSettings?.title;
     const pageKeywords = settingsData?.settings?.tagPageSettings?.keywords;

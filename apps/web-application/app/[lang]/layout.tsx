@@ -45,8 +45,16 @@ const RootLayout = async ({children, params: {lang}}: { children: ReactNode, par
     const dictionary = await getDictionary(locale)
     const initialSettingsData = await fetchSettings({requireSettings: ['initialSettings']})
     const initialSettings = initialSettingsData?.settings?.initialSettings
-    const staticWidgetsData = await fetchWidgets(['footer', 'header', 'topBar', 'navigation'], locale)
 
+    const staticWidgetsData = await fetchWidgets({
+        widgets: [
+            'footer',
+            'header',
+            'topBar',
+            'navigation'
+        ],
+        locale
+    });
 
 //dir={rtlLanguages.includes(locale) ? 'rtl' : 'ltr'}
     return (

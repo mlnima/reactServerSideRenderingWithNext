@@ -1,9 +1,10 @@
 import {widgetSchema} from 'models';
 import {databaseSelectFieldsForPostCards} from "data-structures";
 import {Widget} from "typescript-types";
+import postFieldRequestForCards from "data-structures/dist/src/postFieldRequestForCards";
+import {Request,Response} from "express";
 
-const getWidgets = async (req, res) => {
-
+const getWidgets = async (req:Request, res:Response) => {
 
     try {
         const locale = req.query.locale
@@ -22,9 +23,10 @@ const getWidgets = async (req, res) => {
             {
                 model:'post',
                 path: 'data.uniqueData.posts',
-                select: databaseSelectFieldsForPostCards
+                select: [...postFieldRequestForCards,`translations.${locale}.title`]
             }
         ]).exec()
+
 
         const widgetsGroupedByPosition = widgets.reduce((widgetInPositions:any,widget:Widget)=>{
             widgetInPositions[widget.data.position] = [...(widgetInPositions[widget.data.position] || []) ,widget]

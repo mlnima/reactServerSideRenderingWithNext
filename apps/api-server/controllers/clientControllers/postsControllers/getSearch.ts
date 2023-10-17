@@ -36,11 +36,13 @@ const getSearch = async (req, res) => {
     }
     try {
 
+        const locale = req.query.locale
+
         const decodedKeyword = req.query.keyword ? decodeURIComponent(req.query.keyword) : '';
         const keyword = decodedKeyword.toLowerCase();
 
-        const size = req.query.size ? req.query.size > 100 ? 100 : 20  : 20;
-        const page = req.query.page ? req.query.page  : 20;
+        const size = req.query.size ? req.query.size > 100 ? 100 : 20 : 20;
+        const page = req.query.page ? req.query.page : 20;
 
         let postsTranslationsSearchQuery = [];
         let metasTranslationsSearchQuery = [];
@@ -67,7 +69,6 @@ const getSearch = async (req, res) => {
         }
 
 
-
         const metasSearchQuery = {
             $and: [
                 {$or: [{name: new RegExp(keyword, 'i')}, ...metasTranslationsSearchQuery]},
@@ -83,12 +84,12 @@ const getSearch = async (req, res) => {
                 limit: size,
                 skip: (size * page) - size,
             }
-        ).exec();
+        )
+        .select([...postFieldRequestForCards, `translations.${locale}.title`])
+        .exec();
         const totalCount = await postSchema.countDocuments(postSearchQuery).exec();
         const metas = await metaSchema.find(metasSearchQuery).limit(size).exec();
 
-
-console.log('totalCount=> ',totalCount)
         if (totalCount > 0) {
             await saveSearchedKeyword({
                 keyword,

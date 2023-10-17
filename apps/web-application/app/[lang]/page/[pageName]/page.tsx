@@ -21,7 +21,16 @@ const page = async ({params}: IProps) => {
     const locale = i18n.locales.includes(params.lang) ? params.lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale);
     const pageData = await fetchPage({pageName});
-    const widgetsData = await fetchWidgets([`${pageName}LeftSidebar`, `${pageName}RightSidebar`, pageName], locale);
+
+    const widgetsData = await fetchWidgets({
+        widgets: [
+            `${pageName}LeftSidebar`,
+            `${pageName}RightSidebar`,
+            pageName
+        ],
+        locale
+    });
+
     const sidebar = pageData?.pageData?.sidebar;
 
     return (

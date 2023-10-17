@@ -4,16 +4,16 @@ const postFieldRequestForCards = [
     'mainThumbnail',
     'quality',
     'duration',
-    'views',
-    'translations',
     'videoTrailerUrl',
     'postType',
-    'likes',
-    'disLikes',
-    'updatedAt',
-    'createdAt',
-    'outPostType',
-    'uniqueData'
+    // 'views',
+    // 'translations',
+    // 'likes',
+    // 'disLikes',
+    // 'updatedAt',
+    // 'createdAt',
+    // 'outPostType',
+    // 'uniqueData'
 ]
 
 

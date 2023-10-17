@@ -37,7 +37,7 @@ const VideoPostCard: FC<IProps> =
      }) => {
 
         // const rating = post.likes || post.disLikes ? ratingCalculator(post?.likes, post?.disLikes) : null
-
+// console.log('post=> ',post)
         return (
             <article className={`postCard postCardVideo ${isSidebar ? 'postCardSidebar' : ''}`}>
                 <div className={'cardMedia'}>

@@ -26,15 +26,15 @@ const actorsPage = async ({params, searchParams}: IProps) => {
     const initialSettingsData = await fetchSettings({requireSettings: ['initialSettings']})
     const numberOfCardsPerPage = initialSettingsData?.settings?.initialSettings?.postCardsSettings?.numberOfCardsPerPage;
 
-    const widgetsData = await fetchWidgets(
-        [
+    const widgetsData = await fetchWidgets({
+        widgets: [
             'actorsPageTop',
             'actorsPageLeftSidebar',
             'actorsPageBottom',
             'actorsPageRightSidebar'
         ],
-        params?.lang
-    );
+        locale
+    });
 
     const currentPageQuery = searchParams?.page;
     const currentPage = (currentPageQuery && typeof currentPageQuery === 'string') ?

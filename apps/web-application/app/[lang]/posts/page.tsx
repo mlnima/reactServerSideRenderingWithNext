@@ -30,15 +30,16 @@ const PostsPage = async ({params, searchParams}: IProps) => {
 
     const initialSettingsData = await fetchSettings({requireSettings: ['initialSettings']})
     const numberOfCardsPerPage = initialSettingsData?.settings?.initialSettings?.postCardsSettings?.numberOfCardsPerPage;
-    const widgetsData = await fetchWidgets(
-        [
+
+    const widgetsData = await fetchWidgets({
+        widgets: [
             'postsPageTop',
             'postsPageLeftSidebar',
             'postsPageBottom',
             'postsPageRightSidebar'
         ],
-        params?.lang
-    );
+        locale
+    });
 
     const currentPageQuery = searchParams?.page;
     const currentPage = (currentPageQuery) ?
@@ -51,7 +52,8 @@ const PostsPage = async ({params, searchParams}: IProps) => {
             page: currentPage,
             size: searchParams?.size || numberOfCardsPerPage,
             postType: searchParams?.postType
-        }
+        },
+        locale
     });
 
     return (

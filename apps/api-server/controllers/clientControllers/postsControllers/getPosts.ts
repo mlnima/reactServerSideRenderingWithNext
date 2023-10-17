@@ -29,6 +29,7 @@ const getMetaForGettingPostsRequest = async (meta:string)=>{
 
 export const getPosts =  async (req, res) => {
     try {
+        const locale = req.query.locale
 
         const meta = req.query?.metaId || req.query?.selectedMetaForPosts ?
             await getMetaForGettingPostsRequest(req.query?.metaId || req.query?.selectedMetaForPosts) || {} : {}
@@ -49,10 +50,9 @@ export const getPosts =  async (req, res) => {
                 skip: (findingPostsOptions.size * findingPostsOptions.page) - findingPostsOptions.size,
                 limit: findingPostsOptions.size,
                 sort: findingPostsOptions.sortQuery
-            })
+            }).select([...postFieldRequestForCards, `translations.${locale}.title`])
             // .populate(populateMeta)
             .exec()
-
         if (req.query?.keyword && totalCount > 0) {
             await saveSearchedKeyword(req.query?.keyword, totalCount)
         }

@@ -1,7 +1,7 @@
 import {fetchPosts, fetchSettings, fetchWidgets} from "fetch-requests";
 import SidebarWidgetAreaRenderer
     from "@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer";
-import {i18n} from "../../../../i18n-config";
+import {i18n} from "@i18nConfig";
 import {getDictionary} from "../../../../get-dictionary";
 import WidgetsRenderer from "@components/widgets/widgetRenderer/WidgetsRenderer";
 import PostPage from "@components/PostsPage/PostsPage";
@@ -29,15 +29,16 @@ const CategoryPage = async ({params, searchParams}: IProps) => {
 
     const initialSettingsData = await fetchSettings({requireSettings: ['initialSettings']})
     const numberOfCardsPerPage = initialSettingsData?.settings?.initialSettings?.postCardsSettings?.numberOfCardsPerPage;
-    const widgetsData = await fetchWidgets(
-        [
+
+    const widgetsData = await fetchWidgets({
+        widgets: [
             'categoryPageTop',
             'categoryPageLeftSidebar',
             'categoryPageBottom',
             'categoryPageRightSidebar'
         ],
-        params?.lang
-    );
+        locale
+    });
 
     const currentPageQuery = searchParams?.page;
     const currentPage = (currentPageQuery && typeof currentPageQuery === 'string') ?
@@ -50,7 +51,8 @@ const CategoryPage = async ({params, searchParams}: IProps) => {
             metaId: params?.categoryId,
             page: currentPage,
             size: searchParams?.size || numberOfCardsPerPage
-        }
+        },
+        locale
     });
 
     return (

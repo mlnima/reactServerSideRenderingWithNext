@@ -29,15 +29,15 @@ const userPage = async ({params, searchParams}: IProps) => {
 
     const sidebar = settingsData?.settings?.userPageSettings?.sidebar;
 
-    const widgetsData = await fetchWidgets(
-        [
-            'userPageTop',
-            'userPageLeftSidebar',
-            'userPageBottom',
-            'userPageRightSidebar'
-        ],
-        params?.lang
-    );
+    const widgetsData = await fetchWidgets({
+            widgets: [
+                'userPageTop',
+                'userPageLeftSidebar',
+                'userPageBottom',
+                'userPageRightSidebar'
+            ],
+            locale
+        });
 
 
     return (

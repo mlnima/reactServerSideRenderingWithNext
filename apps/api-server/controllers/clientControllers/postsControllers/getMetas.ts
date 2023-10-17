@@ -2,6 +2,7 @@ import {findMetas} from "../../../_variables/serverGlobalVariable/findMetas";
 
 const getMetas = async (req, res) => {
     try {
+
         const resultMetaFindQueries = await findMetas({...req.query, page: req.query.page || 1})
         res.json({...resultMetaFindQueries})
     } catch (err) {

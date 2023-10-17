@@ -40,7 +40,16 @@ const PostPage = async ({params: {lang, identifier, postType}, searchParams}: IP
     const postViewData = await fetchPostViews({identifier:postData?.post?._id,revalidate: 120})
     const postRatingData = await fetchPostRating({identifier:postData?.post?._id})
     const settingsData = await fetchSettings({requireSettings: ['postPageSettings']})
-    const widgetsData = await fetchWidgets(['postPageLeftSidebar', 'postPageRightSidebar', 'underPost'], lang)
+
+    const widgetsData = await fetchWidgets({
+        widgets: [
+            'postPageLeftSidebar',
+            'postPageRightSidebar',
+            'underPost'
+        ],
+        locale
+    });
+
     const sidebar = settingsData?.settings?.postPageSettings?.sidebar
 
     if (!postData?.post?._id) {

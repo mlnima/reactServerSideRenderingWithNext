@@ -23,15 +23,15 @@ const TagsPage = async ({params, searchParams}: IProps) => {
     const settingsData = await fetchSettings({requireSettings: ['tagsPageSettings']});
     const sidebar = settingsData?.settings?.tagsPageSettings?.sidebar;
 
-    const widgetsData = await fetchWidgets(
-        [
+    const widgetsData = await fetchWidgets({
+        widgets: [
             'tagsPageTop',
             'tagsPageLeftSidebar',
             'tagsPageBottom',
             'tagsPageRightSidebar'
         ],
-        params?.lang
-    );
+        locale
+    });
 
     const metasData = await fetchTags({
         queryObject: {

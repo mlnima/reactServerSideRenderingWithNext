@@ -20,8 +20,19 @@ const homePage = async ({params: {lang},searchParams}: IProps) => {
     const locale = i18n.locales.includes(lang) ? lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale);
     const settingsData = await fetchSettings({requireSettings: ['homePageSettings']});
-    const widgetsData = await fetchWidgets(['homePageLeftSidebar', 'homePageRightSidebar', 'home'], lang);
+
+    const widgetsData = await fetchWidgets({
+        widgets: [
+            'homePageLeftSidebar',
+            'homePageRightSidebar',
+            'home'
+        ],
+        locale
+    });
+
     const sidebar = settingsData?.settings?.homePageSettings?.sidebar;
+
+
 
     return (
         <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>

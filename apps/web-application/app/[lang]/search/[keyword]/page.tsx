@@ -32,15 +32,15 @@ const searchPage = async ({params, searchParams}: IProps) => {
     const initialSettingsData = await fetchSettings({requireSettings: ['initialSettings']})
     const numberOfCardsPerPage = initialSettingsData?.settings?.initialSettings?.postCardsSettings?.numberOfCardsPerPage;
 
-    const widgetsData = await fetchWidgets(
-        [
+    const widgetsData = await fetchWidgets({
+        widgets: [
             'searchPageTop',
             'searchPageLeftSidebar',
             'searchPageBottom',
             'searchPageRightSidebar'
         ],
-        params?.lang
-    );
+        locale
+    });
 
     const currentPageQuery = searchParams?.page;
     const currentPage = (currentPageQuery && typeof currentPageQuery === 'string') ?
@@ -55,7 +55,7 @@ const searchPage = async ({params, searchParams}: IProps) => {
         // searchType: searchParams?.searchType
     }
 
-    const searchData = await fetchSearch({queryObject});
+    const searchData = await fetchSearch({queryObject,locale});
 
 
     const groupingMetas = searchData.metas.reduce((acc: { [key: string]: Meta[] }, meta: Meta) => {

@@ -18,7 +18,6 @@ interface IProps {
 
 const PostsCardsRenderer: FC<IProps> = ({posts, locale, isSidebar,previewMode}) => {
 
-
     return (
         <div className={`postsCardsWrapper${isSidebar ? 'Sidebar' : ''}`}>
             {(posts || []).map((post: Post, index: number) => {

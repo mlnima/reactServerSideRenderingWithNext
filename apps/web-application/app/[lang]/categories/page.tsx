@@ -25,15 +25,15 @@ const CategoriesPage = async ({params, searchParams}: IProps) => {
     const initialSettingsData = await fetchSettings({requireSettings: ['initialSettings']})
     const numberOfCardsPerPage = initialSettingsData?.settings?.initialSettings?.postCardsSettings?.numberOfCardsPerPage;
 
-    const widgetsData = await fetchWidgets(
-        [
+    const widgetsData = await fetchWidgets({
+        widgets: [
             'categoriesPageTop',
             'categoriesPageLeftSidebar',
             'categoriesPageBottom',
             'categoriesPageRightSidebar'
         ],
-        params?.lang
-    );
+        locale
+    });
 
     const currentPageQuery = searchParams?.page;
     const currentPage = (currentPageQuery && typeof currentPageQuery === 'string') ?
@@ -43,11 +43,11 @@ const CategoriesPage = async ({params, searchParams}: IProps) => {
         queryObject: {
             metaType: 'categories',
             sort: searchParams?.sort || '',
-            lang: params?.lang,
             page: currentPage,
             size: searchParams?.size || numberOfCardsPerPage,
             startWith: searchParams?.startWith || undefined,
-        }
+        },
+        locale
     });
 
     return (

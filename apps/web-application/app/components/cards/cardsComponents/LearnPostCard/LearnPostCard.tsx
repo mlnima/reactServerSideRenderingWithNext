@@ -4,6 +4,8 @@ import dynamic from "next/dynamic";
 import {Post} from "typescript-types";
 import CardTitle from "../../asset/CardTitle/CardTitle";
 import '../postCard.scss'
+import './LearnPostCard.scss'
+import CardViews from "@components/cards/asset/CardViews/CardViews";
 const CardImageRendererUseClient = dynamic(() => import('../../asset/CardImageRenderer/CardImageRendererUseClient'))
 
 
@@ -27,26 +29,39 @@ const LearnPostCard: FC<LearnPostCardPropTypes> =
          isNextImageAllowed
      }) => {
 
-
         return (
             <article className={`postCard postCardLearn ${isSidebar && 'postCardSidebar'}`}>
-                <div className={'cardMedia'}>
-                    <Link href={postUrl}
-                          className={'cardLink'}
-                          title={post?.translations?.[locale as string]?.title ?? post?.title}>
-                        <CardImageRendererUseClient
-                            imageUrl={post.mainThumbnail}
-                            isNextImageAllowed={isNextImageAllowed}
-                            key={post?._id}
-                            mediaAlt={post?.translations?.[locale as string]?.title ?? post?.title}
-                            index={index}/>
-                    </Link>
-                </div>
-                <div className={`cardInfo`}>
-                    <CardTitle title={post?.translations?.[locale as string]?.title ?? post?.title}
-                               url={postUrl}/>
+                {post.mainThumbnail ?
+                <>
+                    <div className={'cardMedia'}>
+                        <Link href={postUrl}
+                              className={'cardLink'}
+                              title={post?.translations?.[locale as string]?.title ?? post?.title}>
 
-                </div>
+                            <CardImageRendererUseClient
+                                imageUrl={post.mainThumbnail}
+                                isNextImageAllowed={isNextImageAllowed}
+                                key={post?._id}
+                                mediaAlt={post?.translations?.[locale as string]?.title ?? post?.title}
+                                index={index}/>
+                        </Link>
+                    </div>
+                    <div className={`cardInfo`}>
+                        <CardTitle title={post?.translations?.[locale as string]?.title ?? post?.title}
+                                   url={postUrl}/>
+
+                    </div>
+                </>:
+
+                    <div className={'imageLessCard'}>
+                        <Link href={postUrl}
+                              className={'cardLink'}
+                              title={post?.translations?.[locale as string]?.title ?? post?.title}>
+                            {post?.translations?.[locale as string]?.title ?? post?.title}
+                        </Link>
+                    </div>
+                }
+
             </article>
         )
     };

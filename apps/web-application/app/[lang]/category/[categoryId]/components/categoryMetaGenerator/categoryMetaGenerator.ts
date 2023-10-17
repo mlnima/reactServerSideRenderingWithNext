@@ -25,7 +25,8 @@ const categoryMetaGenerator = async ({params, searchParams}: Props, parent?: Res
             metaId: params?.categoryId,
             page: currentPage,
             size: searchParams?.size || numberOfCardsPerPage
-        }
+        },
+        locale
     });
     const pageTitle = settingsData?.settings?.categoryPageSettings?.translations?.[locale]?.title ??
         settingsData?.settings?.categoryPageSettings?.title;
