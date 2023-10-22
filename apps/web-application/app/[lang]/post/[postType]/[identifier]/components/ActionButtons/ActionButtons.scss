@@ -1,0 +1,73 @@
+.actionButtons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0;
+  .actionButtonsLeftArea, .actionButtonsRightArea {
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    .actionItem {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      background-color: transparent;
+      color: var(--secondary-text-color, #b3b3b3);
+      outline: none;
+      border: none;
+      min-width: 48px;
+      height: 48px;
+
+      svg{
+        width: 30px;
+        height: 30px;
+      }
+
+      .ActionItemValue {
+        padding: 0 5px;
+        margin-top: 5px;
+        font-size: small;
+      }
+
+      .ActionItemValue:disabled {
+        color: #33373c;
+      }
+
+      .ActionItemValue:hover {
+        transition: all 1s;
+        transform: scale(1.2);
+      }
+    }
+  }
+
+  .ActionButtonsLeftArea {
+    justify-content: flex-start;
+  }
+
+  .ActionButtonsRightArea {
+    justify-content: flex-end;
+  }
+
+
+}
+
+@media only screen and (min-width: 768px) {
+  .actionButtons {
+    .ActionButtonsLeftArea, .ActionButtonsRightArea {
+      .ActionItem {
+        flex-direction: row;
+        .ActionItemValue {
+          margin: 0 5px;
+          font-size: small;
+          padding: 0;
+        }
+      }
+    }
+  }
+}

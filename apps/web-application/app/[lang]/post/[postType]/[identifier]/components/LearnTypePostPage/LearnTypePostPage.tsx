@@ -4,7 +4,7 @@ import PostTitle from "../PostTitle/PostTitle";
 import PostMetasRenderer from "../PostMetasRenderer/PostMetasRenderer";
 import WidgetsRenderer from "@components/widgets/widgetRenderer/WidgetsRenderer";
 import {Widget} from "typescript-types/dist/src/widgets/Widget";
-import RatingButtons from "../RatingButtons/RatingButtons";
+import ActionButtons from "../ActionButtons/ActionButtons";
 import './LearnTypePostPage.styles.scss'
 import RelatedPostsRenderer from "../RelatedPostsRenderer/RelatedPostsRenderer";
 import LearnTypePostPageDescription from "./LearnTypePostPageDescription/LearnTypePostPageDescription";
@@ -50,7 +50,7 @@ const LearnTypePostPage: FC<IProps> =
                         locale={locale}/>
                     <div className="entry-content">
                         <div className='entry-header-actions'>
-                            <RatingButtons rating={true}
+                            <ActionButtons rating={true}
                                            dictionary={dictionary}
                                            likes={likes}
                                            disLikes={disLikes}

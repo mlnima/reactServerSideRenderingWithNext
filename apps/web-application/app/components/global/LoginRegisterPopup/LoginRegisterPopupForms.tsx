@@ -1,8 +1,8 @@
 'use client';
-import React, {useState, useEffect, FC} from 'react';
+import React, {useState, useEffect, FC, useRef} from 'react';
 import ValidInput from "./ValidInput";
 import {loginAction} from "@store/reducers/userReducers/loginAction";
-import {setAlert} from "@store/reducers/globalStateReducer";
+import {setAlert, setBackgroundFilter} from "@store/reducers/globalStateReducer";
 import {useAppDispatch, useAppSelector} from "@store/hooks";
 import FormHeader from "./FormHeader";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -40,6 +40,7 @@ interface IProps {
 const LoginRegisterPopupForms: FC<IProps> = ({locale, dictionary}: IProps) => {
 
     const dispatch = useAppDispatch()
+    const LoginRegisterPopupFormsRef = useRef(null)
     const globalState = useAppSelector(({globalState}) => globalState)
     const {anyoneCanRegister} = useAppSelector(({settings}) => settings?.initialSettings?.membershipSettings);
     const [state, setState] = useState<StateTypes>({
@@ -88,6 +89,7 @@ const LoginRegisterPopupForms: FC<IProps> = ({locale, dictionary}: IProps) => {
 
     useEffect(() => {
         setStateValidator({
+            //@ts-ignore
             username: globalState.loginRegisterFormPopup === 'register' ?
                 usernameValidatorRegisterForm(state?.username) :
                 !!state?.username,
@@ -98,10 +100,24 @@ const LoginRegisterPopupForms: FC<IProps> = ({locale, dictionary}: IProps) => {
         })
     }, [state]);
 
+
+    // useEffect(() => {
+    //     if (LoginRegisterPopupFormsRef?.current){
+    //         if (!!globalState.loginRegisterFormPopup ){
+    //             dispatch(setBackgroundFilter(true))
+    //         }else{
+    //             dispatch(setBackgroundFilter(false))
+    //         }
+    //     }
+    // }, [globalState.loginRegisterFormPopup]);
+
     return (
-        <div className='loginRegisterContent'>
+        <div className='loginRegisterContent' ref={LoginRegisterPopupFormsRef}>
             <FormHeader locale={locale} dictionary={dictionary}/>
-            {(globalState.loginRegisterFormPopup === 'register' && anyoneCanRegister) ?
+
+            {
+                //@ts-ignore
+                (globalState.loginRegisterFormPopup === 'register' && anyoneCanRegister) ?
                 <form className='login-register-form' onSubmit={e => onRegisterHandler(e)}>
                     <div className="login-register-form-fields">
                         <div className="login-register-form-field">

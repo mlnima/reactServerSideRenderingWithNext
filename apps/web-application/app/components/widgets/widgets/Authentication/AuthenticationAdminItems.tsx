@@ -28,7 +28,7 @@ const AuthenticationAdminItems = ({}) => {
         try {
             await commonAPIRequestClearCaches()
             await clearCachesByServerAction({
-                path:pathname,
+                path: pathname,
                 segment,
                 mode,
                 searchParams,
@@ -54,61 +54,79 @@ const AuthenticationAdminItems = ({}) => {
 
     return (
         <>
-            <Link href={'/dashboard'} target={'_blank'} className={'logged-item'}>
-                <div className={'icon-wrapper'}>
-                    <FontAwesomeIcon icon={faUserShield} style={{width: 25, height: 25}}/>
-                </div>
-                Dashboard
-            </Link>
+            <div className="menuItemWrapper">
+                <Link href={'/dashboard'} target={'_blank'} className={'logged-item menuItem'}>
+                    <div className={'icon-wrapper'}>
+                        <FontAwesomeIcon icon={faUserShield} style={{width: 25, height: 25}}/>
+                    </div>
+                    Dashboard
+                </Link>
+            </div>
+
+
             {adminMode &&
                 <>
-                 <span className={'logged-item'}
-                       onClick={() => onClearCacheHandler({mode: 'only'})}>
-                   <div className={'icon-wrapper'}>
-                       <FontAwesomeIcon icon={faEraser} style={{width: 25, height: 25}}/>
-                  </div>
-                Clear Only This Page Caches
-            </span>
+                    <div className="menuItemWrapper">
+                        <span className={'menuItem'}
+                              onClick={() => onClearCacheHandler({mode: 'only'})}>
+                            <div className={'icon-wrapper'}>
+                            <FontAwesomeIcon icon={faEraser} style={{width: 25, height: 25}}/>
+                            </div>
+                            Clear Only This Page Caches
+                        </span>
+                    </div>
 
-                    <span className={'logged-item'}
-                          onClick={() => onClearCacheHandler({mode: 'widgets'})}>
+                    <div className="menuItemWrapper">
+                                            <span className={'menuItem'}
+                                                  onClick={() => onClearCacheHandler({mode: 'widgets'})}>
                    <div className={'icon-wrapper'}>
                        <FontAwesomeIcon icon={faEraser} style={{width: 25, height: 25}}/>
                   </div>
                 Clear Widgets Caches
             </span>
+                    </div>
 
-                    <span className={'logged-item'}
-                          onClick={() => onClearCacheHandler({mode: 'settings'})}>
+                    <div className="menuItemWrapper">
+                                            <span className={'menuItem'}
+                                                  onClick={() => onClearCacheHandler({mode: 'settings'})}>
                    <div className={'icon-wrapper'}>
                        <FontAwesomeIcon icon={faEraser} style={{width: 25, height: 25}}/>
                   </div>
                 Clear Settings Caches
             </span>
+                    </div>
 
-                    <span className={'logged-item'}
-                          onClick={() => onClearCacheHandler({mode: 'all'})}>
+                    <div className="menuItemWrapper">
+                                            <span className={'menuItem'}
+                                                  onClick={() => onClearCacheHandler({mode: 'all'})}>
                    <div className={'icon-wrapper'}>
                        <FontAwesomeIcon icon={faEraser} style={{width: 25, height: 25}}/>
                   </div>
                 Clear Entire Website Caches
             </span>
+                    </div>
+
+
                 </>
             }
-
-            <span className={'logged-item'} onClick={() => onSetAdminModeHandler()}>
+            <div className="menuItemWrapper">
+                            <span className={'menuItem'} onClick={() => onSetAdminModeHandler()}>
                    <div className={'icon-wrapper'}>
                        <FontAwesomeIcon icon={adminMode ? faCheck : faShield} style={{width: 25, height: 25}}/>
                   </div>
                 Admin Mode
             </span>
+            </div>
+
             {pathname.includes('/chatroom/') &&
-                <button className={'logged-item'} onClick={() => socket.emit('correctChatroomsMessages')}>
+                <div className="menuItemWrapper">
+                <button className={'menuItem'} onClick={() => socket.emit('correctChatroomsMessages')}>
                     <div className={'icon-wrapper'}>
                         <FontAwesomeIcon icon={faBolt} style={{width: 25, height: 25}}/>
                     </div>
                     Correct Chatrooms Messages
                 </button>
+                </div>
             }
         </>
     )

@@ -1,5 +1,6 @@
 export interface MenuItem {
     name: string,
+    icon?: any,
     target: string,
     type: string,
     itemId: string,

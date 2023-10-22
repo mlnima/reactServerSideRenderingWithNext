@@ -4,8 +4,7 @@ import {UniqueDataTypes} from "typescript-types";
 
 interface LogoPropTypes {
     uniqueData: UniqueDataTypes,
-    translations: {},
-    LogoUrl: string,
+    LogoUrl?: string,
     locale: string,
 }
 

@@ -145,7 +145,7 @@ const Comments: FC<IProps> = ({dictionary, postId}) => {
     }
 
     return (
-        <div className={'commentsContentWrapper'}>
+        <div className={'commentsContentWrapper'} id={'commentSection'}>
             <form className={'commentForm'} onSubmit={e => onSubmitHandler(e)}>
                 <div className={'comment-form-container'}>
                     <UserProfileImage size={40} profileRedirect={true}/>

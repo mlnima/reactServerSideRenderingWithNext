@@ -2,10 +2,11 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {RootState} from "../store";
 import {GlobalState} from "typescript-types";
 
-const initialState: GlobalState = {
+const initialState : GlobalState = {
     loginRegisterFormPopup: false,
     loading: false,
     adminMode: false,
+    backgroundFilter:false,
     alert: {
         active: false,
         type: null,
@@ -19,9 +20,13 @@ export const globalStateSlice = createSlice({
     reducers: {
         loginRegisterForm: (state, action: PayloadAction<any>) => {
             state.loginRegisterFormPopup = action.payload
+            state.backgroundFilter = !!action.payload
         },
         setAdminMode: (state, action: PayloadAction<any>) => {
             state.adminMode = action.payload
+        },
+        setBackgroundFilter: (state, action: PayloadAction<any>) => {
+            state.backgroundFilter = action.payload
         },
         loading: (state, action: PayloadAction<any>) => {
 
@@ -70,6 +75,7 @@ export const {
     loading,
     setLoading,
     setLoadingTimeOut,
+    setBackgroundFilter,
     setAdminMode,
     setAlert,
     closeAlert

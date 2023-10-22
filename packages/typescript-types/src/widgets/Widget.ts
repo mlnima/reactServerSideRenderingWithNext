@@ -50,6 +50,7 @@ export interface WidgetData {
 }
 
 export interface IMenuItem{
+    icon?: string;
     name: string,
     target: string,
     type: string,
@@ -80,7 +81,9 @@ export interface WidgetSettingsPropTypes {
 export interface UniqueDataTypes {
     [key: string]: any,
     translations?: {
-        [key: string]: any,
+        [key: string]: {
+            [key: string]: string
+        },
     },
     linkTo?: string,
     linkToWindowType?: string,
@@ -99,6 +102,13 @@ export interface UniqueDataTypes {
         imageIndex?: number,
         imageId?: number
     }[],
+    burgerMenuOnDesktop:boolean,
+    logoUrl:string,
+    width: number,
+    height: number,
+    LogoText: string,
+
+    userPreferenceConfig:boolean,
     languagesSwitcher:boolean,
     themeColorsSwitcher:boolean,
     themeColorsSwitcherColors:string,

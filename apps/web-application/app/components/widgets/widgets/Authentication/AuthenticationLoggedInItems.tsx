@@ -12,7 +12,7 @@ const AuthenticationAdminItems = dynamic(() => import('./AuthenticationAdminItem
 import './AuthenticationLoggedInItems.styles.scss';
 
 interface IProps {
-    onOpenCloseHandler: () => void,
+    onOpenCloseHandler: (status: boolean) => void,
     onSignOutHandler: () => void,
     locale: string,
     dictionary: {
@@ -37,47 +37,47 @@ const AuthenticationLoggedInItems: FC<IProps> = ({onOpenCloseHandler, locale, di
     const {username, role} = useAppSelector(({user}) => user?.userData || {} as UserData);
 
     return (
-        <div className={'authenticationLoggedIn'}>
+        <>
 
-            <div className={'user-info'}>
-                <Link href={`${locale === process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? '' : `/${locale}`}/user/${username}`}
-                      onClick={onOpenCloseHandler}>
-                    <div className='user-info-profile-icon'>
-                        <UserProfileImage size={40} profileRedirect={false}/>
-                    </div>
-                    <div className={'username-info'}>
-                        <span className={'username'}>{username}</span>
-                        <span className={'view-profile'}>{dictionary?.['View Profile'] || 'View Profile'}</span>
-                    </div>
-                </Link>
+            <div className="menuItemWrapper">
+                <div className={'userInfo menuItem'}>
+                    <Link
+                        href={`${locale === process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? '' : `/${locale}`}/user/${username}`}
+                        onClick={() => onOpenCloseHandler(false)}>
+                        <div className='userInfoProfileIcon'>
+                            <UserProfileImage size={40} profileRedirect={false}/>
+                            <span className={'username'}>{username}</span>
+                        </div>
+                    </Link>
+                </div>
             </div>
-
-
-            <div className={'logged-items'}>
-
-                {(membership && usersCanMessageEachOther) &&
+            {(membership && usersCanMessageEachOther) &&
+                <div className="menuItemWrapper">
                     <Link href={`/messenger`}
-                          className='logged-item logged-in'
-                          onClick={onOpenCloseHandler}>
+                          className={'menuItem logged-in'}
+                          onClick={() => onOpenCloseHandler(false)}>
                         <div className={'icon-wrapper'}>
                             <FontAwesomeIcon icon={faEnvelope} style={{width: 20, height: 20}}/>
                         </div>
                         <p className={'text-data'}>{dictionary?.['Messages'] || 'Messages'}</p>
                     </Link>
-                }
+                </div>
+            }
 
-                {(role === 'administrator') && <AuthenticationAdminItems/>}
+            {(role === 'administrator') && <AuthenticationAdminItems/>}
 
-                <span className='logged-item logged-in sign-out' onClick={onSignOutHandler}>
+
+            <div className="menuItemWrapper">
+                <span className='menuItem sign-out' onClick={onSignOutHandler}>
                     <div className={'icon-wrapper'}>
                          <FontAwesomeIcon icon={faSignOut} style={{width: 20, height: 20}}/>
                     </div>
                     <p className={'text-data'}>{dictionary?.['Logout'] || 'Logout'}</p>
                 </span>
-
             </div>
 
-        </div>
+
+        </>
     )
 };
 export default AuthenticationLoggedInItems

@@ -1,7 +1,6 @@
-.menu-widget{
-  z-index: 10;
+.menuWidget {
 
-  .menu-widget-open-button {
+  .menuWidgetOpenButton {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -11,79 +10,118 @@
     margin: 0;
   }
 
-  .menu-widget-items {
+  .menuItemsWrapper {
+    position: fixed;
     background-color: var(--secondary-background-color, #181818);
     top: 0;
     left: 0;
     bottom: 0;
-    width: 85%;
-    z-index: 1000;
+    max-width: 85%;
+    width: 300px;
+    z-index: 11;
+    display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding: 50px 0 0 0;
-    align-items: flex-start;
-    gap: 8px;
-    margin: 0;
+    gap: .5rem;
     transition: all 0.5s ease 0s;
-    position: fixed;
+    margin: 0;
     overflow-y: auto;
 
-    .menu-widget-close-button {
-      position: absolute;
-      top: 16px;
-      right: 25px;
-      align-self: flex-end;
+    .menuHeader{
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      background-color: transparent;
-      border: none;
-      color: var(--secondary-text-color,#b3b3b3);
-      padding: 6px;
+      flex-direction: row-reverse;
+      padding-left: 1rem;
+
+      .menu-widget-close-button {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+        border: none;
+        color: var(--secondary-text-color, #b3b3b3);
+      }
     }
 
+    .menuLinks, {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: .5rem;
+      margin: 0;
+
+
+    }
+
+
   }
+
+
 }
 
-.menu-widget-open{
-  .menu-widget-items{
-    animation: navigationMobileSlide .2s linear alternate ;
+.menuWidgetOpen {
+  .menuItemsWrapper {
+    animation: navigationMobileSlide .2s linear alternate;
     display: flex;
   }
 }
 
-.menu-widget-closed{
-  .menu-widget-items{
-    animation: none ;
+.menuWidgetClosed {
+  .menuItemsWrapper {
+    animation: none;
     display: none;
   }
 }
 
+
 @media only screen and (min-width: 1025px) {
+  .menuWidgetExpanded {
+    width: 100%;
 
-  .menu-widget{
-    //width: 100%;
-
-
-    .menu-widget-open-button {
+    .menuWidgetOpenButton {
       display: none;
     }
 
-    .menu-widget-items {
+    .menuItemsWrapper {
       height: 60%;
       width: 100%;
+      max-width: 100%;
       position: initial;
       display: flex;
-      justify-content: flex-start;
-      flex-direction: row;
-      overflow: hidden;
-      //margin: auto;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: row-reverse;
       padding: 0;
       transition: none;
       background-color: transparent;
       gap: initial;
-      .menu-widget-close-button {
+      overflow: initial;
+
+      .menuHeader{
         display: none;
+      }
+
+      .menuLinks, {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        height: 100%;
+
+        .menuItemDynamic {
+          .preferenceMenuItemTitle {
+            display: none;
+          }
+        }
+      }
+
+      .menuLinks {
+        flex-direction: row;
       }
     }
   }

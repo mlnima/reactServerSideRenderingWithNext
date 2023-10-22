@@ -28,7 +28,7 @@ const AlphabeticalNumericalRangeLinksWidget: FC = () => {
 
     const renderRange = range.map((letter, index) => {
         return (
-            <Link className={`alphabeticalRangeItem ${startWith?.includes(letter) ? 'activeItem' : ''}`}
+            <Link className={`alphabeticalRangeItem ${startWith?.includes(letter) ? 'activeItem' : ''} btn btn-dark`}
                   href={{
                       pathname,
                       query: {
@@ -47,22 +47,20 @@ const AlphabeticalNumericalRangeLinksWidget: FC = () => {
     return (
         <div className={`alphabeticalRange ${showFilters ? 'alphabeticalRangeShowFilters' : ''}`}>
 
-            <div className={'alphabeticalRangeFilters'}>
-                <button className={'filterStartWith btn btn-primary'}
-                        aria-label={'show filters'}
-                        onClick={() => setShowFilters(!showFilters)}>
-                    {showFilters ?
-                        <FontAwesomeIcon icon={faArrowUpZA} style={{width: 20, height: 20}}/> :
-                        <FontAwesomeIcon icon={faArrowDownZA} style={{width: 20, height: 20}}/>
-                    }
-                </button>
-            </div>
+            <button className={'filterStartWith btn btn-primary'}
+                    aria-label={'show filters'}
+                    onClick={() => setShowFilters(!showFilters)}>
+                {showFilters ?
+                    <FontAwesomeIcon icon={faArrowUpZA} style={{width: 20, height: 20}}/> :
+                    <FontAwesomeIcon icon={faArrowDownZA} style={{width: 20, height: 20}}/>
+                }
+            </button>
 
 
-            {showFilters && (
-                <div className={'alphabeticalRangeContent'}>
+            {showFilters &&
+              <>
                     {!!startWith && (
-                        <Link className={`alphabeticalRangeItem activeItem currentQuery${isDisabled && 'currentQueryOver'}`}
+                        <Link className={`alphabeticalRangeItem activeItem currentQuery${isDisabled && 'currentQueryOver'} btn btn-dark`}
                               key={'X'} href={{
                             pathname: pathname,
                             query: startWith.length > 1 ? { startWith: startWith.slice(0, -1) } : {}
@@ -77,9 +75,9 @@ const AlphabeticalNumericalRangeLinksWidget: FC = () => {
                     </Link>
 
                     {renderRange}
+              </>
 
-                </div>
-            )}
+            }
 
         </div>
     );
@@ -87,15 +85,24 @@ const AlphabeticalNumericalRangeLinksWidget: FC = () => {
 export default AlphabeticalNumericalRangeLinksWidget;
 
 
-// href={isDisabled ? '#' : {
-//         pathname: pathname,
-//         query: query.startWith ? {
-//             ...query,
-//             startWith: query?.startWith?.length <= 3 ? `${(query?.startWith || '') + Letter}` : query?.startWith,
-//             // page: 1
-//         } : {
-//             ...query,
-//             startWith: Letter,
-//             // page: 1
-//         }
-//     }}
+// {showFilters && (
+//     <div className={'alphabeticalRangeContent'}>
+//         {!!startWith && (
+//             <Link className={`alphabeticalRangeItem activeItem currentQuery${isDisabled && 'currentQueryOver'}`}
+//                   key={'X'} href={{
+//                 pathname: pathname,
+//                 query: startWith.length > 1 ? { startWith: startWith.slice(0, -1) } : {}
+//             }}>
+//                 <FontAwesomeIcon icon={faArrowLeft} style={{width: 20, height: 20}}/>
+//             </Link>
+//         )}
+//         <Link key={'all'}
+//               href={pathname}
+//               className={`alphabeticalRangeItem ${!startWith ? 'active-item' : ''}`}>
+//             All
+//         </Link>
+//
+//         {renderRange}
+//
+//     </div>
+// )}

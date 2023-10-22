@@ -38,7 +38,8 @@ const TagsPage = async ({params, searchParams}: IProps) => {
             metaType: 'tags',
             lang: params?.lang,
             startWith: searchParams?.startWith || undefined,
-        }
+        },
+        locale
     });
 
 

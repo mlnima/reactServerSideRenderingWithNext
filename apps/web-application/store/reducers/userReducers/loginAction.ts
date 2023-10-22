@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {commonAPIRequestLoginUser} from "api-requests";
-import {loading, setAlert} from "@store/reducers/globalStateReducer";
+import {loading, setAlert, setBackgroundFilter} from "@store/reducers/globalStateReducer";
 
 interface LoginActionArgs {
     username: string;
@@ -20,6 +20,7 @@ export const loginAction = createAsyncThunk<LoginActionResponse, LoginActionArgs
             const response = await commonAPIRequestLoginUser(username, password);
             if (response?.data?.token) {
                 localStorage.setItem('wt', response.data.token);
+                thunkAPI.dispatch(setBackgroundFilter(false));
                 return {
                     userData: response.data.userData,
                     loggedIn: true,

@@ -43,12 +43,12 @@ const actorsPage = async ({params, searchParams}: IProps) => {
     const metasData = await fetchMetas({
         queryObject: {
             metaType: 'actors',
-            sort: searchParams?.sort || '',
-            lang: params?.lang,
+            sort: searchParams?.sort || undefined,
             page: currentPage,
             size: searchParams?.size || numberOfCardsPerPage,
-            startWith: searchParams?.startWith || undefined,
-        }
+            startWith: searchParams?.startWith || undefined
+        },
+        locale
     });
 
     return (

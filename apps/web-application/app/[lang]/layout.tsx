@@ -12,20 +12,21 @@ import {i18n} from '@i18nConfig'
 import {getDictionary} from "../../get-dictionary";
 import GlobalCustomStyles from "@components/global/styles/GlobalCustomStyles";
 import LayoutMetaGenerator from "../components/LayoutMetaGenerator/LayoutMetaGenerator";
-import LoginRegisterPopup from "@components/LoginRegisterPopup/LoginRegisterPopup";
-import UserAutoLogin from "@components/UserAutoLogin";
-import BackToTopButton from "@components/BackToTopButton/BackToTopButton";
-import LoadingComponent from "@components/LoadingComponent/LoadingComponent";
-import CookiesInformerBar from "@components/CookiesInformerBar/CookiesInformerBar";
-import AlertBox from "@components/AlertBox/AlertBox";
-import GoogleAnalytics from "@components/GoogleAnalytics/GoogleAnalytics";
-import WebSocketInitializer from "@components/WebSocketInitializer/WebSocketInitializer";
+import LoginRegisterPopup from "@components/global/LoginRegisterPopup/LoginRegisterPopup";
+import UserAutoLogin from "@components/global/UserAutoLogin";
+import BackToTopButton from "@components/global/BackToTopButton/BackToTopButton";
+import LoadingComponent from "@components/global/LoadingComponent/LoadingComponent";
+import CookiesInformerBar from "@components/global/CookiesInformerBar/CookiesInformerBar";
+import AlertBox from "@components/global/AlertBox/AlertBox";
+import GoogleAnalytics from "@components/global/GoogleAnalytics/GoogleAnalytics";
+import WebSocketInitializer from "@components/global/WebSocketInitializer/WebSocketInitializer";
 import StoreDataInitializer from "@components/global/StoreDataInitializer";
 import TopbarWidgetArea from "@components/widgets/widgetAreas/TopbarWidgetArea";
 import HeaderWidgetArea from "@components/widgets/widgetAreas/HeaderWidgetArea";
 import NavigationWidgetArea from "@components/widgets/widgetAreas/NavigationWidgetArea";
 import FooterWidgetArea from "@components/widgets/widgetAreas/FooterWidgetArea";
 import StyledComponentsRegistry from "@lib/registry";
+import BackgroundFilterWholeScreen from "@components/global/BackgroundFilterWholeScreen/BackgroundFilterWholeScreen";
 // import './layout.scss'
 // import Head from "next/head";
 
@@ -82,9 +83,9 @@ const RootLayout = async ({children, params: {lang}}: { children: ReactNode, par
                     <FooterWidgetArea dictionary={dictionary} widgets={staticWidgetsData?.widgets?.footer}
                                       locale={locale}/>}
             </div>
+            <BackgroundFilterWholeScreen/>
             <CookiesInformerBar/>
             <UserAutoLogin/>
-
             <GoogleAnalytics googleAnalyticsId={initialSettings?.headDataSettings?.googleAnalyticsId}/>
             <LoadingComponent/>
             <AlertBox dictionary={dictionary}/>

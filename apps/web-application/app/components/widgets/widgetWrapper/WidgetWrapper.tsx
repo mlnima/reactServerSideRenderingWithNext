@@ -76,9 +76,11 @@ const WidgetWrapper: FC<IProps> = ({data, widgetId, isSidebar, locale, dictionar
 
     //@ts-ignore
     const WidgetToRender = widgetMatcher?.[data?.type as string] || null
+    const widgetExtraClass = data?.extraClassName ? ` ${data?.extraClassName}` : ''
+    const widgetClass =  `widget ${data?.type}WrapperWidget${widgetExtraClass}`
 
     return (
-        <div className={`widget${data?.extraClassName ? ` ${data?.extraClassName}` : ''}`}
+        <div className={widgetClass}
              id={data?.extraId || undefined}>
             {(data?.title || data?.translations?.[locale]?.title) &&
                 <WidgetHeader title={data?.translations?.[locale]?.title || data?.title}

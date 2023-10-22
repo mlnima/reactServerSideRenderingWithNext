@@ -1,6 +1,7 @@
 .userPreference {
   position: relative;
 
+
   .openPreferenceMenuButton {
     position: relative;
     border:none;
@@ -10,6 +11,7 @@
     padding: 4px;
     justify-content: center;
     align-items: center;
+    outline: none;
 
     .gearIcon {
       color: var(--primary-text-color);

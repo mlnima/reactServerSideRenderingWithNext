@@ -5,7 +5,7 @@ import PostDescription from "../PostDescription/PostDescription";
 import PostMetasRenderer from "../PostMetasRenderer/PostMetasRenderer";
 import WidgetsRenderer from "@components/widgets/widgetRenderer/WidgetsRenderer";
 import {Widget} from "typescript-types/dist/src/widgets/Widget";
-import RatingButtons from "../RatingButtons/RatingButtons";
+import ActionButtons from "../ActionButtons/ActionButtons";
 import './ArticleTypePostPage.styles.scss'
 import RelatedPostsRenderer from "../RelatedPostsRenderer/RelatedPostsRenderer";
 import Comments from "../Comments/Comments";
@@ -49,7 +49,7 @@ const ArticleTypePostPage: FC<IProps> =
                     <div className="entry-content">
                         <PostDescription description={post?.translations?.[locale]?.description ?? post?.description}/>
                         <div className='entry-header-actions'>
-                            <RatingButtons rating={true}
+                            <ActionButtons rating={true}
                                            dictionary={dictionary}
                                            likes={likes}
                                            disLikes={disLikes}

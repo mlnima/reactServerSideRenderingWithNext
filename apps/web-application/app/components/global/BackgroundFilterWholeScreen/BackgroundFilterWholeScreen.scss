@@ -1,0 +1,11 @@
+.backgroundFilterWholeScreen{
+  z-index: 10;
+  backdrop-filter: var(--primary-background-filter);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}

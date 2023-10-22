@@ -11,7 +11,7 @@ import {Meta} from "typescript-types/dist/src/Meta";
 import CategoriesPageContentRenderer from "@components/metas/CategoriesPageContentRenderer";
 import TagsPageContentRenderer from "@components/metas/TagsPageContentRenderer";
 import {capitalizeFirstLetters} from "custom-util";
-import './page.styles.scss'
+import './page.scss'
 
 interface IProps {
     params: {
@@ -69,24 +69,34 @@ const searchPage = async ({params, searchParams}: IProps) => {
     return (
         <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
             <main id={'primary'} className={'main searchPage'}>
+                {!!queryObject.keyword &&
                 <div className={'searchPageTitle'}>
-                    {!!queryObject.keyword && <h1>{capitalizeFirstLetters(decodeURIComponent(queryObject.keyword))}</h1> }
+                    <span>{`${dictionary['Search Result For'] || 'Search Result For'}:`}</span>
+                    <h1>{capitalizeFirstLetters(decodeURIComponent(queryObject.keyword))}</h1>
                 </div>
-
+                }
                 <WidgetsRenderer dictionary={dictionary}
                                  locale={locale}
                                  widgets={widgetsData.widgets?.['searchPageTop']}
                                  position={'searchPageTop'}/>
-                {groupingMetas.actors?.length > 0 &&
-                    <>
-                        <h2 className={'searchSectionTitle'}>{dictionary['Actors'] || 'Actors'}</h2>
-                        <ActorsPageContentRenderer renderPagination={false}
-                                                   totalCount={numberOfCardsPerPage}
-                                                   currentPage={currentPage}
-                                                   locale={locale}
-                                                   numberOfCardsPerPage={numberOfCardsPerPage}
-                                                   metas={groupingMetas.actors}/>
-                    </>
+                {(groupingMetas.actors?.length > 0 && currentPage === 1) &&
+                    <div className={'metaSection'}>
+                        <div className={'metaSectionHeader'}>
+                            <h2 className={'searchSectionTitle'}>
+                                {dictionary['Actors'] || 'Actors'}:
+                            </h2>
+                        </div>
+
+                        <div className={'metaSectionCardsWrapper'}>
+                            <ActorsPageContentRenderer renderPagination={false}
+                                                       totalCount={numberOfCardsPerPage}
+                                                       currentPage={currentPage}
+                                                       locale={locale}
+                                                       numberOfCardsPerPage={numberOfCardsPerPage}
+                                                       metas={groupingMetas.actors}/>
+                        </div>
+
+                    </div>
                 }
                 <PostPage renderPagination={searchData?.totalCount > numberOfCardsPerPage}
                           posts={searchData?.posts}
@@ -97,22 +107,39 @@ const searchPage = async ({params, searchParams}: IProps) => {
 
 
 
-                {groupingMetas.categories?.length > 0 &&
-                    <>
-                        <h2 className={'searchSectionTitle'}>{dictionary['Categories'] || 'Categories'}</h2>
-                        <CategoriesPageContentRenderer renderPagination={false}
-                                                       locale={locale}
-                                                       totalCount={numberOfCardsPerPage}
-                                                       currentPage={currentPage}
-                                                       numberOfCardsPerPage={numberOfCardsPerPage}
-                                                       metas={groupingMetas.categories}/>
-                    </>
+                {(groupingMetas.categories?.length > 0 && currentPage === 1) &&
+                        <div className={'metaSection'}>
+                            <div className={'metaSectionHeader'}>
+                                <h2 className={'searchSectionTitle'}>
+                                    {dictionary['Categories'] || 'Categories'}:
+                                </h2>
+                            </div>
+
+                            <div className={'metaSectionCardsWrapper'}>
+                                <CategoriesPageContentRenderer renderPagination={false}
+                                                               locale={locale}
+                                                               totalCount={numberOfCardsPerPage}
+                                                               currentPage={currentPage}
+                                                               numberOfCardsPerPage={numberOfCardsPerPage}
+                                                               metas={groupingMetas.categories}/>
+                            </div>
+
+                        </div>
+
                 }
-                {groupingMetas.tags.length > 0 &&
-                    <>
-                        <h2 className={'searchSectionTitle'}>{dictionary['Tags'] || 'Tags'}</h2>
-                        <TagsPageContentRenderer locale={locale} metas={groupingMetas?.tags}/>
-                    </>
+                {(groupingMetas.tags.length > 0 && currentPage === 1) &&
+                        <div className={'metaSection'}>
+                            <div className={'metaSectionHeader'}>
+                                <h2 className={'searchSectionTitle'}>
+                                    {dictionary['Tags'] || 'Tags'}:
+                                </h2>
+                            </div>
+
+                            <div className={'metaSectionCardsWrapper'}>
+                                <TagsPageContentRenderer locale={locale} metas={groupingMetas?.tags}/>
+                            </div>
+
+                        </div>
                 }
                 <WidgetsRenderer dictionary={dictionary}
                                  locale={locale}

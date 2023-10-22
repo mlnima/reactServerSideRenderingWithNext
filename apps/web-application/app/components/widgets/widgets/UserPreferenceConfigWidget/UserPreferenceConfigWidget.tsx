@@ -11,7 +11,7 @@ const LanguagesSwitcher = dynamic(() => import('../LanguagesSwitcher/LanguagesSw
 const DayModeNightMode = dynamic(() => import('../DayModeNightMode/DayModeNightMode'))
 
 interface IProps {
-    uniqueData: UniqueDataTypes,
+    uniqueData?: UniqueDataTypes,
     locale: string,
     dictionary: {
         [key: string]: string

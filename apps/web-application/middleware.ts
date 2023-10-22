@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { i18n } from './i18n-config'
+import { i18n } from '@i18nConfig'
 
 const getLocaleFromUrl = (request: NextRequest,) => {
     const newUrl = new URL(request.url);

@@ -18,6 +18,8 @@ import ImagesSliderTypeWidgetModelFields from './ImagesSliderTypeWidgetModelFiel
 import SliderWidgetFields from './SliderWidgetFields/SliderWidgetFields';
 import UserPreferenceConfigModelFields
     from "@components/pages/Design/Widgets/WidgetModel/UserPreferenceConfigModelFields/UserPreferenceConfigModelFields";
+import AuthenticationTypeWidgetModelFields
+    from "@components/pages/Design/Widgets/WidgetModel/AuthenticationTypeWidgetModelFields/AuthenticationTypeWidgetModelFields";
 
 interface UniqueFieldsPropTypes {
     widgetData: any,
@@ -61,6 +63,7 @@ const UniqueFields: FC<UniqueFieldsPropTypes> =
                 {widgetData.type === 'menu' &&
                     <MenuWidgetModelFields widgetData={widgetData}
                                            setWidgetData={setWidgetData}
+                                           onUniqueDataChangeHandler={onUniqueDataChangeHandler}
                         // onChangeHandler={onChangeHandler}
                         // mobileNavigation={widgetData.mobileNavigation}
                                            widgetSettings={widgetSettings}
@@ -176,13 +179,21 @@ const UniqueFields: FC<UniqueFieldsPropTypes> =
                     />
                 }
 
-                {widgetData.type === 'logo' &&
+                {widgetData.type === 'authentication' &&
+                <AuthenticationTypeWidgetModelFields onUniqueDataChangeHandler={onUniqueDataChangeHandler}
+                                                     widgetData={widgetData}/>
+
+                }
+
+                {(widgetData.type === 'logo' || widgetData.type === 'authentication' || widgetData.type === 'menu') &&
                     <LogoTypeWidgetModelFields widgetSettings={widgetSettings}
                                                onUniqueDataChangeHandler={onUniqueDataChangeHandler}
                                                widgetData={widgetData}
                                                onUniqueDataChangeHandlerWithTranslate={onUniqueDataChangeHandlerWithTranslate}
                     />
                 }
+
+
 
                 {widgetData.type === 'advertise' &&
                     <AdvertiseWidgetModelFields uniqueData={widgetData?.uniqueData}

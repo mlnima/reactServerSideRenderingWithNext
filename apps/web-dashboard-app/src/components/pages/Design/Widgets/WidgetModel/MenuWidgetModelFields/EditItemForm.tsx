@@ -74,10 +74,23 @@ const EditItemForm:FC<IProps> = (
             </div>
 
             <div className='menu-widget-form-form-field'>
+                <p>Icon:</p>
+                <input className={'primaryInput'}
+                       required={false}
+                       type="text"
+                       name='icon'
+                       onChange={e => onChangeHandler(e)}
+                       value={data.icon}
+                />
+            </div>
+
+            <div className='menu-widget-form-form-field'>
                 <p>Target:</p>
                 <input className={'primaryInput'}
                        required={false}
-                       type="text" name='target' value={data.target || ''}
+                       type="text"
+                       name='target'
+                       value={data.target || ''}
                        onChange={e => onChangeHandler(e)}/>
             </div>
             <div className='menu-widget-form-form-field'>

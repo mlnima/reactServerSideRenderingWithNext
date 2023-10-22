@@ -6,7 +6,7 @@ import PostDescription from "../PostDescription/PostDescription";
 import PostMetasRenderer from "../PostMetasRenderer/PostMetasRenderer";
 import WidgetsRenderer from "@components/widgets/widgetRenderer/WidgetsRenderer";
 import {Widget} from "typescript-types/dist/src/widgets/Widget";
-import RatingButtons from "../RatingButtons/RatingButtons";
+import ActionButtons from "../ActionButtons/ActionButtons";
 import RelatedPostsRenderer from "../RelatedPostsRenderer/RelatedPostsRenderer";
 import Comments from "../Comments/Comments";
 
@@ -44,7 +44,7 @@ const VideoTypePostPage: FC<IProps> =
                     <div className='entry-header-data'>
                         <PostTitle title={post?.translations?.[locale]?.title ?? post?.title}/>
                         <div className='entry-header-actions'>
-                            <RatingButtons rating={true}
+                            <ActionButtons rating={true}
                                            dictionary={dictionary}
                                            likes={likes}
                                            disLikes={disLikes}

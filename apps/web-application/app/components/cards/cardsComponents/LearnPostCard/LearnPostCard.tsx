@@ -5,7 +5,6 @@ import {Post} from "typescript-types";
 import CardTitle from "../../asset/CardTitle/CardTitle";
 import '../postCard.scss'
 import './LearnPostCard.scss'
-import CardViews from "@components/cards/asset/CardViews/CardViews";
 const CardImageRendererUseClient = dynamic(() => import('../../asset/CardImageRenderer/CardImageRendererUseClient'))
 
 

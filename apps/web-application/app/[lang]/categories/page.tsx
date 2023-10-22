@@ -42,10 +42,10 @@ const CategoriesPage = async ({params, searchParams}: IProps) => {
     const metasData = await fetchMetas({
         queryObject: {
             metaType: 'categories',
-            sort: searchParams?.sort || '',
+            sort: searchParams?.sort || undefined,
             page: currentPage,
             size: searchParams?.size || numberOfCardsPerPage,
-            startWith: searchParams?.startWith || undefined,
+            startWith: searchParams?.startWith || undefined
         },
         locale
     });
