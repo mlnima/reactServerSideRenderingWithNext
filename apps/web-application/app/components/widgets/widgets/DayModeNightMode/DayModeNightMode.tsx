@@ -1,48 +1,40 @@
 'use client';
-import React, {FC, useEffect, useState} from "react";
-import {createGlobalStyle} from "styled-components";
+import React, {FC} from "react";
 import {UniqueDataTypes} from "typescript-types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMoon} from "@fortawesome/free-solid-svg-icons/faMoon";
 import './DayModeNightMode.styles.scss';
 import Switch from "react-switch";
 import {faLightbulb} from "@fortawesome/free-solid-svg-icons";
+import {useAppDispatch, useAppSelector} from "@store/hooks";
+import {setUseSecondaryModeColors} from "@store/reducers/globalStateReducer";
 
 interface DayModeNightModePropTypes {
-    uniqueData: UniqueDataTypes
+    uniqueData?: UniqueDataTypes
 }
 
-const ModeStyles = createGlobalStyle<{dayNightModeData:string}>`
-  ${({dayNightModeData}) => dayNightModeData ? dayNightModeData : ''}
-`
+const DayModeNightMode: FC<DayModeNightModePropTypes> = () => {
 
-const DayModeNightMode: FC<DayModeNightModePropTypes> = ({uniqueData}) => {
-
-    const [active, setActive] = useState(false)
+    const dispatch = useAppDispatch()
+    const {useSecondaryModeColors} = useAppSelector(({globalState}) => globalState);
 
     const onSelectHandler = () => {
-        if (active) {
+
+        if (useSecondaryModeColors) {
             localStorage.setItem('lightMode', 'false')
-            setActive(false)
+            // setActive(false)
+            dispatch(setUseSecondaryModeColors(false))
         } else {
             localStorage.setItem('lightMode', 'true')
-            setActive(true)
+            // setActive(true)
+            dispatch(setUseSecondaryModeColors(true))
         }
     }
-
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const lightMode = localStorage.getItem('lightMode')
-            if (lightMode === 'true') {
-                setActive(true)
-            }
-        }
-    }, []);
 
     return (
         <div className={'theme-switcher-widget'}>
             <Switch onChange={onSelectHandler}
-                    className={`switchTheme ${active ? 'switchThemeActive' : ''}`}
+                    className={`switchTheme ${useSecondaryModeColors ? 'switchThemeActive' : ''}`}
                     uncheckedIcon={
                         <FontAwesomeIcon className={'moon-sun'} icon={faLightbulb} color={'#f90'} width={16}
                                          height={16}/>
@@ -51,11 +43,8 @@ const DayModeNightMode: FC<DayModeNightModePropTypes> = ({uniqueData}) => {
                         <FontAwesomeIcon className={'moon-sun'} icon={faMoon} color={'var(--secondary-text-color)'}
                                          width={16} height={16}/>
                     }
-                    checked={active}/>
-            {active && <ModeStyles dayNightModeData={
-                uniqueData?.dayNightModeData ||
-                uniqueData?.themeColorsSwitcherColors
-            }/>}
+                    checked={useSecondaryModeColors}/>
+            {/*{active && <ModeStyles dayNightModeData={secondaryModeColors}/>}*/}
         </div>
     )
 };

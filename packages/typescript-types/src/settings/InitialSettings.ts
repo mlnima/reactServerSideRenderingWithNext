@@ -44,8 +44,15 @@ export interface InitialSettings{
         navigation: boolean,
         footer: boolean,
         sidebarWidth:number,
+        languagesSwitcherInUserConfigMenu:boolean,
+        themeColorsSwitcherInUserConfigMenu:boolean,
         customStyles:string,
-        customColors:string
+        defaultTheme: 'dark' | 'light',
+        primaryModeColors:string,
+        secondaryModeColors:string,
+        logoUrl:string,
+        logoWidth:number,
+        logoHeight:number,
     },
     eCommerceSettings:{
 

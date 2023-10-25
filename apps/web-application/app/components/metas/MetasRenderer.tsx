@@ -4,7 +4,7 @@ import Link from "next/link";
 import {capitalizeFirstLetter, convertMetasTypeToSingular} from "custom-util";
 import {groupingArrayOfObjectByKey} from "custom-util";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faAnglesDown} from "@fortawesome/free-solid-svg-icons";
+import {faAnglesDown, faCaretDown} from "@fortawesome/free-solid-svg-icons";
 import './MetasRenderer.styles.scss'
 
 interface MetasRendererPropTypes {
@@ -52,7 +52,7 @@ const MetasRenderer: FC<MetasRendererPropTypes> = ({metaType, metaData, locale, 
                                           aria-label={metaType}
                                           title={`all the ${metaType} starts with ${group}`}>
                                         <span className={`view-all`}>
-                                            <FontAwesomeIcon icon={faAnglesDown} style={{width: 28, height: 20}}/>
+                                            <FontAwesomeIcon icon={faCaretDown} style={{width: 28, height: 20}}/>
                                         </span>
                                     </Link>
                                 }

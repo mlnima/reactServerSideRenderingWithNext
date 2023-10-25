@@ -4,9 +4,11 @@ import {GlobalState} from "typescript-types";
 
 const initialState : GlobalState = {
     loginRegisterFormPopup: false,
+    userConfigMenu: false,
     loading: false,
     adminMode: false,
     backgroundFilter:false,
+    useSecondaryModeColors:false,
     alert: {
         active: false,
         type: null,
@@ -22,10 +24,18 @@ export const globalStateSlice = createSlice({
             state.loginRegisterFormPopup = action.payload
             state.backgroundFilter = !!action.payload
         },
+        setUseSecondaryModeColors: (state, action: PayloadAction<any>) => {
+            state.useSecondaryModeColors = action.payload
+        },
+        setUserConfigMenu: (state, action: PayloadAction<any>) => {
+            state.userConfigMenu = action.payload
+            state.backgroundFilter = action.payload
+        },
         setAdminMode: (state, action: PayloadAction<any>) => {
             state.adminMode = action.payload
         },
         setBackgroundFilter: (state, action: PayloadAction<any>) => {
+
             state.backgroundFilter = action.payload
         },
         loading: (state, action: PayloadAction<any>) => {
@@ -72,8 +82,10 @@ export const globalStateSlice = createSlice({
 
 export const {
     loginRegisterForm,
+    setUserConfigMenu,
     loading,
     setLoading,
+    setUseSecondaryModeColors,
     setLoadingTimeOut,
     setBackgroundFilter,
     setAdminMode,

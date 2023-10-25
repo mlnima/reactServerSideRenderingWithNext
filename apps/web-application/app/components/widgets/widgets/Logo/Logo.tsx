@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
 import Link from "next/link";
 import {UniqueDataTypes} from "typescript-types";
+import {useAppSelector} from "@store/hooks";
 
 interface LogoPropTypes {
     uniqueData: UniqueDataTypes,
@@ -38,6 +39,12 @@ const Logo: FC<LogoPropTypes> = ({uniqueData, LogoUrl, locale}) => {
 };
 
 export default Logo;
+
+// const {
+//     logoUrl,
+//     logoWidth,
+//     logoHeight
+// } = useAppSelector(({settings}) => settings?.initialSettings?.layoutSettings);
 
 //   {uniqueData?.logoUrl && <img alt={'logo'} className={'logoImage'} src={logoUrlSource}/> }
 

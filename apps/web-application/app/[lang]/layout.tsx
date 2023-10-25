@@ -27,6 +27,8 @@ import NavigationWidgetArea from "@components/widgets/widgetAreas/NavigationWidg
 import FooterWidgetArea from "@components/widgets/widgetAreas/FooterWidgetArea";
 import StyledComponentsRegistry from "@lib/registry";
 import BackgroundFilterWholeScreen from "@components/global/BackgroundFilterWholeScreen/BackgroundFilterWholeScreen";
+import KeysListener from "@components/global/KeysListener";
+import UserConfigMenu from "@components/global/UserConfigMenu/UserConfigMenu";
 // import './layout.scss'
 // import Head from "next/head";
 
@@ -92,13 +94,14 @@ const RootLayout = async ({children, params: {lang}}: { children: ReactNode, par
             <BackToTopButton/>
             <LoginRegisterPopup locale={locale} dictionary={dictionary}/>
             <StyledComponentsRegistry>
-                <GlobalCustomStyles customColors={initialSettings?.layoutSettings?.customColors}
+                <GlobalCustomStyles primaryModeColors={initialSettings?.layoutSettings?.primaryModeColors}
                                     customStyles={initialSettings?.layoutSettings?.customStyles}/>
             </StyledComponentsRegistry>
             <StoreDataInitializer initialSettings={initialSettings}/>
             <WebSocketInitializer/>
             {/*<MediaCall/>*/}
-
+            <KeysListener/>
+            <UserConfigMenu locale={locale} dictionary={dictionary}/>
         </ReduxProvider>
         </body>
         </html>

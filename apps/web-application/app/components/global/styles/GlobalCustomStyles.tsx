@@ -1,20 +1,33 @@
 'use client';
 import {createGlobalStyle} from "styled-components";
-import {FC} from "react";
-import defaultColorVariables from "@components/global/styles/defaultColorVariables";
+import React, {FC} from "react";
+import {useAppSelector} from "@store/hooks";
 
 interface GlobalStylesPropTypes {
-    customColors?: string;
+    primaryModeColors?: string;
     customStyles?: string;
 }
 
 const Styles = createGlobalStyle<GlobalStylesPropTypes>`
-  ${({customColors}) =>
-          !!customColors ? customColors?.includes(':root') ? customColors : `:root {${customColors}}` : ''}
+  ${({primaryModeColors}) =>
+          !!primaryModeColors ? primaryModeColors?.includes(':root') ? primaryModeColors : `:root {${primaryModeColors}}` : ''}
   ${({customStyles}) => customStyles ? customStyles : ''}
 `
-const GlobalCustomStyles: FC<GlobalStylesPropTypes> = ({customStyles, customColors}) => {
-    return <Styles customColors={customColors} customStyles={customStyles}/>
+
+const ModeStyles = createGlobalStyle<{dayNightModeData:string}>`
+  ${({dayNightModeData}) => dayNightModeData ? dayNightModeData : ''}
+`
+
+const GlobalCustomStyles: FC<GlobalStylesPropTypes> = ({customStyles, primaryModeColors}) => {
+    const {secondaryModeColors} = useAppSelector(({settings}) => settings?.initialSettings?.layoutSettings);
+    const {useSecondaryModeColors} = useAppSelector(({globalState}) => globalState);
+
+    return (
+        <>
+            <Styles primaryModeColors={primaryModeColors} customStyles={customStyles}/>
+            {useSecondaryModeColors && <ModeStyles dayNightModeData={secondaryModeColors}/>}
+        </>
+    )
 }
 
 export default GlobalCustomStyles

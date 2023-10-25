@@ -1,3 +1,4 @@
+'use client';
 import React, {FC} from "react";
 
 interface SvgRendererPropTypes {
@@ -7,7 +8,6 @@ interface SvgRendererPropTypes {
     width?: number,
     height?: number,
     size?: number,
-    customStyle?: string,
 }
 
 const SvgRenderer: FC<SvgRendererPropTypes> =
@@ -17,20 +17,11 @@ const SvgRenderer: FC<SvgRendererPropTypes> =
          size,
          width,
          height,
-         color,
-         customStyle,
+         color
     }) => {
 
-    const elementProps = {
-        className: `${customClassName ? customClassName : ''} icon`,
-        svgUrl,
-        size,
-        color,
-        customStyle
-    }
-
     return (
-        <span {...elementProps}
+        <span className={`${customClassName ? customClassName : ''} icon`}
         style={{
             mask: `url(${svgUrl}) no-repeat center`,
             WebkitMask: `url(${svgUrl}) no-repeat center`,
@@ -42,3 +33,5 @@ const SvgRenderer: FC<SvgRendererPropTypes> =
 };
 
 export default SvgRenderer
+
+//{...elementProps}

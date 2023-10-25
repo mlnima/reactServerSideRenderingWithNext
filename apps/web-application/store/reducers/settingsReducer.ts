@@ -26,7 +26,16 @@ const initialState = {
             allowedPostTypeUserCanCreate:[],
             usersPersonalEmailAddress: false,
         },
-        layoutSettings: {},
+        layoutSettings: {
+            languagesSwitcherInUserConfigMenu:false,
+            themeColorsSwitcherInUserConfigMenu:false,
+            defaultTheme: 'dark',
+            primaryModeColors:'',
+            secondaryModeColors:'',
+            logoUrl:'',
+            logoWidth:150,
+            logoHeight:50
+        },
         headDataSettings: {}
     }
 }

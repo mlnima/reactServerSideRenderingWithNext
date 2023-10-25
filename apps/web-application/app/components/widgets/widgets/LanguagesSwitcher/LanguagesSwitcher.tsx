@@ -12,10 +12,11 @@ const LanguagesSwitcher: FC<IProps> = ({locale}) => {
     const {push} = useRouter()
     const pathname = usePathname()
     const params = useParams()
-
+ 
     const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const locales = process.env.NEXT_PUBLIC_LOCALES || '';
     const [isOpen, setIsOpen] = useState(false);
+
 
     const redirectedPathName = (targetedLocale: string) => {
         const locales = (process.env.NEXT_PUBLIC_LOCALES || '').split(' ');

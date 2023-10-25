@@ -9,9 +9,9 @@ import dynamic from "next/dynamic";
 import {useAppDispatch, useAppSelector} from "@store/hooks";
 import {setBackgroundFilter} from "@store/reducers/globalStateReducer";
 import './MenuWidget.scss';
+import Csr from "@components/global/Csr";
 
-const Logo = dynamic(() =>
-    import('../Logo/Logo'))
+const Logo = dynamic(() => import('../Logo/Logo'))
 
 // const LanguagesSwitcher = dynamic(() =>
 //     import('../LanguagesSwitcher/LanguagesSwitcher'))
@@ -44,19 +44,14 @@ const MenuWidget: FC<MenuWidgetPropTypes> =
         const MenuWidgetRef = useRef(null)
         const {backgroundFilter} = useAppSelector(({globalState}) => globalState);
 
-
-        // useEffect(() => {
-        //     if (MenuWidgetRef?.current && typeof window !== 'undefined') {
-        //         if ((uniqueData?.burgerMenuOnDesktop || window.innerWidth < 1025) && open) {
-        //             dispatch(setBackgroundFilter(true))
-        //         } else {
-        //             dispatch(setBackgroundFilter(false))
-        //         }
-        //     }
-        // }, [open]);
+        const {
+            logoUrl,
+            logoWidth,
+            logoHeight
+        } = useAppSelector(({settings}) => settings?.initialSettings?.layoutSettings);
 
         useEffect(() => {
-            if (!backgroundFilter && open){
+            if (!backgroundFilter && open) {
                 setOpen(false)
             }
         }, [backgroundFilter]);
@@ -126,21 +121,27 @@ const MenuWidget: FC<MenuWidgetPropTypes> =
                                              icon={faXmark}
                                              style={{width: 25, height: 25}}/>
                         </button>
-                        {uniqueData?.logoUrl && <Logo uniqueData={uniqueData} locale={locale}/>}
+                        <Csr>
+                            {logoUrl &&
+                                <Logo uniqueData={{
+                                    logoUrl,
+                                    width: (logoWidth || 150) / 2,
+                                    height: (logoHeight || 150) / 2
+                                }} locale={locale}/>
+                            }
+                        </Csr>
                     </div>
-
-
 
                     <div className='menuLinks'>
                         {renderMenuItems}
                     </div>
+
                 </div>
             </div>
         )
 
     };
 export default MenuWidget;
-
 
 
 //

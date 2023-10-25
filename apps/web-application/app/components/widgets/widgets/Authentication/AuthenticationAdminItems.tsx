@@ -54,8 +54,8 @@ const AuthenticationAdminItems = ({}) => {
 
     return (
         <>
-            <div className="menuItemWrapper">
-                <Link href={'/dashboard'} target={'_blank'} className={'logged-item menuItem'}>
+            <div className={'menuItem'}>
+                <Link href={'/dashboard'} target={'_blank'} className={'menuItemContent'}>
                     <div className={'icon-wrapper'}>
                         <FontAwesomeIcon icon={faUserShield} style={{width: 25, height: 25}}/>
                     </div>
@@ -66,8 +66,8 @@ const AuthenticationAdminItems = ({}) => {
 
             {adminMode &&
                 <>
-                    <div className="menuItemWrapper">
-                        <span className={'menuItem'}
+                    <div className={'menuItem'}>
+                        <span className={'menuItemContent'}
                               onClick={() => onClearCacheHandler({mode: 'only'})}>
                             <div className={'icon-wrapper'}>
                             <FontAwesomeIcon icon={faEraser} style={{width: 25, height: 25}}/>
@@ -76,18 +76,17 @@ const AuthenticationAdminItems = ({}) => {
                         </span>
                     </div>
 
-                    <div className="menuItemWrapper">
-                                            <span className={'menuItem'}
-                                                  onClick={() => onClearCacheHandler({mode: 'widgets'})}>
-                   <div className={'icon-wrapper'}>
-                       <FontAwesomeIcon icon={faEraser} style={{width: 25, height: 25}}/>
-                  </div>
-                Clear Widgets Caches
-            </span>
+                    <div className="menuItem">
+                        <span className={'menuItemContent'} onClick={() => onClearCacheHandler({mode: 'widgets'})}>
+                               <div className={'icon-wrapper'}>
+                                   <FontAwesomeIcon icon={faEraser} style={{width: 25, height: 25}}/>
+                               </div>
+                               Clear Widgets Caches
+                       </span>
                     </div>
 
-                    <div className="menuItemWrapper">
-                                            <span className={'menuItem'}
+                    <div className="menuItem">
+                                            <span className={'menuItemContent'}
                                                   onClick={() => onClearCacheHandler({mode: 'settings'})}>
                    <div className={'icon-wrapper'}>
                        <FontAwesomeIcon icon={faEraser} style={{width: 25, height: 25}}/>
@@ -96,8 +95,8 @@ const AuthenticationAdminItems = ({}) => {
             </span>
                     </div>
 
-                    <div className="menuItemWrapper">
-                                            <span className={'menuItem'}
+                    <div className="menuItem">
+                                            <span className={'menuItemContent'}
                                                   onClick={() => onClearCacheHandler({mode: 'all'})}>
                    <div className={'icon-wrapper'}>
                        <FontAwesomeIcon icon={faEraser} style={{width: 25, height: 25}}/>
@@ -109,8 +108,8 @@ const AuthenticationAdminItems = ({}) => {
 
                 </>
             }
-            <div className="menuItemWrapper">
-                            <span className={'menuItem'} onClick={() => onSetAdminModeHandler()}>
+            <div className="menuItem">
+                            <span className={'menuItemContent'} onClick={() => onSetAdminModeHandler()}>
                    <div className={'icon-wrapper'}>
                        <FontAwesomeIcon icon={adminMode ? faCheck : faShield} style={{width: 25, height: 25}}/>
                   </div>
@@ -119,13 +118,13 @@ const AuthenticationAdminItems = ({}) => {
             </div>
 
             {pathname.includes('/chatroom/') &&
-                <div className="menuItemWrapper">
-                <button className={'menuItem'} onClick={() => socket.emit('correctChatroomsMessages')}>
-                    <div className={'icon-wrapper'}>
-                        <FontAwesomeIcon icon={faBolt} style={{width: 25, height: 25}}/>
-                    </div>
-                    Correct Chatrooms Messages
-                </button>
+                <div className="menuItem">
+                    <button className={'menuItemContent'} onClick={() => socket.emit('correctChatroomsMessages')}>
+                        <div className={'icon-wrapper'}>
+                            <FontAwesomeIcon icon={faBolt} style={{width: 25, height: 25}}/>
+                        </div>
+                        Correct Chatroom's Messages
+                    </button>
                 </div>
             }
         </>
