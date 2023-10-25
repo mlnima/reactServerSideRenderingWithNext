@@ -185,7 +185,7 @@ const UniqueFields: FC<UniqueFieldsPropTypes> =
 
                 }
 
-                {(widgetData.type === 'logo' || widgetData.type === 'authentication' || widgetData.type === 'menu') &&
+                {(widgetData.type === 'logo') &&
                     <LogoTypeWidgetModelFields widgetSettings={widgetSettings}
                                                onUniqueDataChangeHandler={onUniqueDataChangeHandler}
                                                widgetData={widgetData}

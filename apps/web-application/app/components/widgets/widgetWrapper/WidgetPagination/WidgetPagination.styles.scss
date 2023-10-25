@@ -17,6 +17,11 @@
 
     a{
       color: var(--secondary-text-color, #b3b3b3);
+      width: 2.5rem;
+      height: 2.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
   .paginationItemActive{

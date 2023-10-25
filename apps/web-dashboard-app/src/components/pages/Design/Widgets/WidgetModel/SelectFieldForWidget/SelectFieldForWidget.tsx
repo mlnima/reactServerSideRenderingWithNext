@@ -10,6 +10,7 @@ const SelectFieldForWidgetStyledDiv = styled.div`
     width: 50%;
     margin: 0;
   }
+
 `
 
 interface selectFieldTypes {

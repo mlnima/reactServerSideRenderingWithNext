@@ -85,6 +85,7 @@ const WidgetWrapper: FC<IProps> = ({data, widgetId, isSidebar, locale, dictionar
             {(data?.title || data?.translations?.[locale]?.title) &&
                 <WidgetHeader title={data?.translations?.[locale]?.title || data?.title}
                               dictionary={dictionary}
+                              pagination={data?.pagination}
                               redirectLinkPosition={data?.redirectLinkPosition}
                               redirectLink={data?.redirectLink}
                               redirectToTitle={data?.translations?.[locale]?.redirectToTitle || data?.redirectToTitle}/>

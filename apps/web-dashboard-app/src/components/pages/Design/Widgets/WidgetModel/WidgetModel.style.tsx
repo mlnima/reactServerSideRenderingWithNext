@@ -43,9 +43,10 @@ export const WidgetModelStyledDiv = styled.div`
 
       margin: 0;
     }
+
+
   }
-
-
+  
   .objectEditingModeEditor {
     min-height: 1024px;
   }
@@ -69,7 +70,7 @@ export const WidgetModelStyledDiv = styled.div`
       display: flex;
       justify-content: space-between;
       align-items: center;
-      width: 95%;
+      width: 100%;
       margin: 10px auto;
 
       p {
@@ -101,5 +102,9 @@ export const WidgetModelStyledDiv = styled.div`
       justify-content: center;
       align-items: center;
     }
+  }
+
+  .primarySelect{
+    max-width: 200px;
   }
 `

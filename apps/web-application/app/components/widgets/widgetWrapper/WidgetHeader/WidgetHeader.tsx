@@ -7,6 +7,7 @@ interface WidgetHeaderPropTypes {
     redirectLink: string,
     redirectToTitle: string,
     redirectLinkPosition: string,
+    pagination:boolean,
     dictionary: {
         [key: string]: string
     }
@@ -18,17 +19,22 @@ const WidgetHeader: FC<WidgetHeaderPropTypes> = (
         redirectLink,
         redirectToTitle,
         redirectLinkPosition,
-        dictionary
+        dictionary,
+        pagination
     }) => {
 
     return (
         <div className='widget-Header'>
-            <h2 className='widget-header-title'> {dictionary?.[title] || title}</h2>
-            {(redirectLink && (redirectLinkPosition === 'header' || !redirectLinkPosition)) &&
+            <h2 className='widget-header-title'>{dictionary?.[title] || title}</h2>
+            {(
+                    redirectLink &&
+                    (redirectLinkPosition === 'header' || !redirectLinkPosition) &&
+                    !pagination
+                ) &&
                 <Link href={redirectLink}
                       className={'btn btn-primary widget-header-redirect-link'}
                       title={title + ' content'}
-                      aria-label={redirectToTitle}>
+                      aria-label={dictionary?.[redirectToTitle] || redirectToTitle}>
                     {dictionary?.[redirectToTitle] || redirectToTitle}
                 </Link>
             }
