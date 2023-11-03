@@ -3,9 +3,9 @@ import './NotFoundOrRestricted.styles.scss';
 import Link from "next/link";
 import WidgetsRenderer from "@components/widgets/widgetRenderer/WidgetsRenderer";
 import RelatedPostsRenderer from "../RelatedPostsRenderer/RelatedPostsRenderer";
-import {Widget} from "typescript-types/dist/src/widgets/Widget";
+import {Widget} from "typescript-types";
 import Comments from "../Comments/Comments";
-import {Post} from "typescript-types/dist/src/Post";
+import {Post} from "typescript-types";
 
 interface PropTypes {
     dictionary: {

@@ -1,5 +1,5 @@
 import {FC} from "react";
-import {Widget} from "typescript-types/dist/src/widgets/Widget";
+import {Widget} from "typescript-types";
 import WidgetsRenderer from "../widgetRenderer/WidgetsRenderer";
 
 interface IProps {

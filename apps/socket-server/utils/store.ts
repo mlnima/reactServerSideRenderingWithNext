@@ -1,4 +1,4 @@
-import {ChatroomMessage} from "typescript-types/dist/src/Chatroom/ChatroomMessage";
+import {ChatroomMessage} from "typescript-types";
 import {IChatroomUsers, TChatroomUser} from "web-application/app/[lang]/messenger/components/interfaces";
 
 class Store {

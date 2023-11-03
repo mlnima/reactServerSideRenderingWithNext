@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React, {FC} from "react";
-import {IMenuItem} from "typescript-types/dist/src/widgets/Widget";
+import {IMenuItem} from "typescript-types";
 
 const MenuWidgetEditFormStyledFrom = styled.form`
   width: 95%;

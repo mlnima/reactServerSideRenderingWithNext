@@ -17,7 +17,7 @@ import MessengerMultiMediaInputBox from "./MessengerMultiMediaInputBox/Messenger
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMinimize} from "@fortawesome/free-solid-svg-icons/faMinimize";
 import {faMaximize} from "@fortawesome/free-solid-svg-icons/faMaximize";
-import {IMessengerConversation} from "typescript-types/dist/src/messengerTypes/IMessengerConversation";
+import {IMessengerConversation} from "typescript-types";
 import {headerSizeCalculator} from "custom-util";
 import {faHome} from "@fortawesome/free-solid-svg-icons";
 import ConversationsControlsHeader from "./ConversationsControlsHeader/ConversationsControlsHeader";

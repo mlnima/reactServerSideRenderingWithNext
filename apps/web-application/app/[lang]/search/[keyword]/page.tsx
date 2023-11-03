@@ -7,7 +7,7 @@ import WidgetsRenderer from "@components/widgets/widgetRenderer/WidgetsRenderer"
 import PostPage from "@components/PostsPage/PostsPage";
 import ActorsPageContentRenderer from "@components/metas/ActorsPageContentRenderer";
 import React from "react";
-import {Meta} from "typescript-types/dist/src/Meta";
+import {Meta} from "typescript-types";
 import CategoriesPageContentRenderer from "@components/metas/CategoriesPageContentRenderer";
 import TagsPageContentRenderer from "@components/metas/TagsPageContentRenderer";
 import {capitalizeFirstLetters} from "custom-util";

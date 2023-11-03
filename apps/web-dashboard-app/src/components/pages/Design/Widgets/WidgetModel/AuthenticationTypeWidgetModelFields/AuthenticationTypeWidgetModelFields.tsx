@@ -1,5 +1,5 @@
 import {FC, useEffect, useState} from "react";
-import {WidgetData} from "typescript-types/dist/src/widgets/Widget";
+import {WidgetData} from "typescript-types";
 import MonacoEditor from "@components/common/MonacoEditor";
 
 interface IProps {

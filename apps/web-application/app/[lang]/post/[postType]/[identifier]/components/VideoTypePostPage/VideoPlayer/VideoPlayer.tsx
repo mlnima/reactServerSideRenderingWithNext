@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import {convertDurationStringToIso8601} from "custom-util";
 import {convertDateToIsoString} from "custom-util";
-import {Post} from "typescript-types/dist/src/Post";
+import {Post} from "typescript-types";
 import './VideoPlayer.styles.scss';
 
 interface PropTypes {

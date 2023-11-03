@@ -16,11 +16,7 @@
       background-color: var(--secondary-background-color);
       border:var(--default-border)
     }
-    .menuItemIcon{
-      max-width: 20px;
-      max-height: 20px;
-      color: var(--primary-text-color);
-    }
+
 
     .menuItemLink {
       color: var(--primary-text-color);
@@ -33,7 +29,12 @@
       justify-content: center;
       align-items: center;
       height: 48px;
-
+      gap: .5rem;
+      .menuItemIcon{
+        max-width: 20px;
+        max-height: 20px;
+        color: var(--primary-text-color);
+      }
     }
   }
 }
@@ -57,8 +58,14 @@
       box-sizing: border-box;
       gap: .25rem;
       padding: 0 .5rem;
+      border:none;
+      &:hover{
+        background-color: var(--secondary-background-color);
+        border:none;
+      }
       .menuItemLink{
         height: 60px;
+        gap: .2rem;
       }
     }
   }

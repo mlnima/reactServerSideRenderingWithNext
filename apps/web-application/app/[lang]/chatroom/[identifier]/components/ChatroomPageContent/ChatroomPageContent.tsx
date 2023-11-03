@@ -11,7 +11,7 @@ import ChatRoomOnlineUsersList from "../ChatRoomOnlineUsersList/ChatRoomOnlineUs
 import {IChatroomUsers, INewUserJoinData, IPreference} from "../interfaces";
 import './ChatroomPageContent.styles.scss'
 import Soft404 from "@components/Soft404/Soft404";
-import {ChatroomMessage} from "typescript-types/dist/src/Chatroom/ChatroomMessage";
+import {ChatroomMessage} from "typescript-types";
 import LoggedInRequirePageMessage from "@components/LoggedInRequireMessage/LoggedInRequirePageMessage";
 
 interface IProps {

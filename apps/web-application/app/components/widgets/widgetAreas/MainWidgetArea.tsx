@@ -1,7 +1,6 @@
 import {FC} from "react";
-import {Widget} from "typescript-types/dist/src/widgets/Widget";
+import {Widget} from "typescript-types";
 import WidgetsRenderer from "@components/widgets/widgetRenderer/WidgetsRenderer";
-import './widgetAreas.styles.scss';
 
 interface IProps {
     widgets: Widget[],

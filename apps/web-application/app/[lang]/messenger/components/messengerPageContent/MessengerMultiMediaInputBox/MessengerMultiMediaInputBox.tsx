@@ -8,7 +8,7 @@ import AddedImagePreview from "./AddedImagePreview";
 import {useAppSelector} from "@store/hooks";
 import './MessengerMultiMediaInputBox.styles.scss'
 import socket from "web-socket-client";
-import {IMessengerConversation} from "typescript-types/dist/src/messengerTypes/IMessengerConversation";
+import {IMessengerConversation} from "typescript-types";
 import {IDraftMessage} from "../../interfaces";
 
 

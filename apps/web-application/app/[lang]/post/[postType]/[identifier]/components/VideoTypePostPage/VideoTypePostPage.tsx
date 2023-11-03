@@ -1,11 +1,11 @@
 import React, {FC} from "react";
-import {Post} from "typescript-types/dist/src/Post";
+import {Post} from "typescript-types";
 import VideoPlayer from "./VideoPlayer/VideoPlayer";
 import PostTitle from "../PostTitle/PostTitle";
 import PostDescription from "../PostDescription/PostDescription";
 import PostMetasRenderer from "../PostMetasRenderer/PostMetasRenderer";
 import WidgetsRenderer from "@components/widgets/widgetRenderer/WidgetsRenderer";
-import {Widget} from "typescript-types/dist/src/widgets/Widget";
+import {Widget} from "typescript-types";
 import ActionButtons from "../ActionButtons/ActionButtons";
 import RelatedPostsRenderer from "../RelatedPostsRenderer/RelatedPostsRenderer";
 import Comments from "../Comments/Comments";

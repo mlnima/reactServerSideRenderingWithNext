@@ -7,7 +7,7 @@ import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
 import {faPen} from "@fortawesome/free-solid-svg-icons/faPen";
 import './AuthenticationNotLoggedInItems.styles.scss';
 import {useSelector} from "react-redux";
-import {Store} from "typescript-types/dist/src/storeTypes/Store";
+import {Store} from "typescript-types";
 
 interface IProps{
     onOpenCloseHandler: () => void,

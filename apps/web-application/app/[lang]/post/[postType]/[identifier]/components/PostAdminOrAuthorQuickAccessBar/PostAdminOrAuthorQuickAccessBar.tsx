@@ -1,7 +1,7 @@
 'use client';
 import React, {FC, useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "@store/hooks";
-import {Post} from "typescript-types/dist/src/Post";
+import {Post} from "typescript-types";
 import {editPostStatusAction} from "@store/reducers/postsReducers/editPostStatusAction";
 import {usePathname, useRouter} from "next/navigation";
 import Link from "next/link";

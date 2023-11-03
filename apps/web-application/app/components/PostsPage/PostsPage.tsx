@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import {Post} from "typescript-types/dist/src/Post";
+import {Post} from "typescript-types";
 import PostsCardsRenderer from "@components/cards/CardsRenderer/PostsCardsRenderer/PostsCardsRenderer";
 import Pagination from "@components/Pagination/Pagination";
 

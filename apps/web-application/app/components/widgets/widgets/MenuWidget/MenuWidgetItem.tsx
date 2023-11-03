@@ -24,6 +24,11 @@ const MenuWidgetItem: FC<MenuWidgetItemPropTypes> =
         return (
             <div className={`menuItem${burgerMenuOnDesktop ? '' : ' menuItemExpanded'}`}>
                 <div className={'menuItemWrapper'}>
+                    <Link href={targetUrl}
+                          className={`menuItemLink`}
+                          target={menuItem.target.includes('http') ? '_blank' : '_self'}
+                          title={title}
+                          onClick={onCloseBurgerMenuHandler}>
                     {
                         !!menuItem?.icon &&
                         <SvgRenderer customClassName={'menuItemIcon'} svgUrl={
@@ -35,11 +40,7 @@ const MenuWidgetItem: FC<MenuWidgetItemPropTypes> =
                                      size={20}
                         />
                     }
-                    <Link href={targetUrl}
-                          className={`menuItemLink`}
-                          target={menuItem.target.includes('http') ? '_blank' : '_self'}
-                          title={title}
-                          onClick={onCloseBurgerMenuHandler}>
+
                         {title}
                     </Link>
                 </div>
