@@ -27,7 +27,7 @@ function rateLimitMiddleware(limit: number, withinMillis: number) {
         if (dev) {
             next()
         }else {
-            const userID = String(req.headers['x-real-ip'] || req.connection.remoteAddress);
+            const userID = String(req?.headers['x-real-ip'] || req.connection.remoteAddress);
 
             if (!userCounts[userID]) {
                 userCounts[userID] = {count: 0, timestamp: Date.now()};

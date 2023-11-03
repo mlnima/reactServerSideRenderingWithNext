@@ -7,7 +7,7 @@ interface RequestWithUserData extends Request {
 
 const authMiddleware =  (req:RequestWithUserData,res:Response,next:NextFunction)=>{
 
-    const authHeader = req.headers.authorization;
+    const authHeader = req?.headers?.authorization;
     const token = req.body.token || req.query.token || (authHeader && authHeader.split(' ')[1]);
 
     if (!token) {

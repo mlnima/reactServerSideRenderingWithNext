@@ -13,7 +13,7 @@ FileServerAxiosInstance.interceptors.request.use(
             const jwt = localStorage.getItem('wt');
             if (jwt) {
                 // Include JWT in Authorization header
-                config.headers.Authorization = `Bearer ${jwt}`;
+                config?.headers?.Authorization = `Bearer ${jwt}`;
             }
         }
         return config;

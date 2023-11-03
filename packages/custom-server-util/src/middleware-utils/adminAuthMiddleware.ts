@@ -8,7 +8,7 @@ interface RequestWithUserData extends Request {
 
 const adminAuthMiddleware = async (req: RequestWithUserData, res: Response, next: NextFunction) => {
     let token = req.body.token || req.query.token || null;
-    const authHeader = req.headers.authorization;
+    const authHeader = req?.headers?.authorization;
     if (!token && authHeader && authHeader.startsWith('Bearer ')) {
         token = authHeader.split(' ')[1];
     }

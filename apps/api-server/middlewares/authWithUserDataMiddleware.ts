@@ -6,7 +6,7 @@ const authWithUserDataMiddleware = async (req, res, next) => {
     try {
         // Extract token from different sources
         let token = req.body.token || req.query.token || null;
-        const authHeader = req.headers.authorization;
+        const authHeader = req?.headers?.authorization;
         // If token is not found in body or query, try header
         if (!token && authHeader && authHeader.startsWith('Bearer ')) {
             token = authHeader.split(' ')[1];

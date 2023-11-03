@@ -122,7 +122,7 @@ const createSMTPServer = (port) => {
                     // Handle incoming email logic here
                 } else if (emailActionType === 'toSend') {
                     console.log('Email To Send')
-                    if (parsed.headers.get('x-forwarded')) {
+                    if (parsed?.headers?.get('x-forwarded')) {
                         console.log('Email already forwarded. Ignoring to prevent loop.')
                         callback();
                         return;

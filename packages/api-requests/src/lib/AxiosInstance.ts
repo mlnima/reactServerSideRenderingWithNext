@@ -12,7 +12,7 @@ const createAxiosInstance = (useUrl?: string): AxiosInstance => {
             if (typeof window !== 'undefined') {
                 const jwt = localStorage.getItem('wt');
                 if (jwt) {
-                    config.headers.Authorization = `Bearer ${jwt}`;
+                    config?.headers?.Authorization = `Bearer ${jwt}`;
                 }
             }
             return config;

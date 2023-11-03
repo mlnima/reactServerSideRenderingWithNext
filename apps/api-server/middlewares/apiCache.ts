@@ -5,7 +5,7 @@ apiCache.options({
     // debug: process.env.NODE_ENV !== 'production',
     // debug: true,
     appendKey: (req, res) => {
-        const userAgent = req.headers['user-agent'];
+        const userAgent = req?.headers?.['user-agent'];
         const isMobile = Boolean(userAgent?.match(
             /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
         ))
