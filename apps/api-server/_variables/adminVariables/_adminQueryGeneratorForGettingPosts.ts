@@ -12,7 +12,7 @@ const _adminQueryGeneratorForGettingPosts = (data) => {
     const excludeQuery = process.env.EXCLUDE_POSTS_SOURCE ? [{$or: excludeContent}] : []
     const size = data?.size;
     const sort = data?.sort || data?.sortBy;
-    const meta = data.metaId || data?.selectedMetaForPosts;
+    const meta = data.metaId || data?.uniqueData?.selectedMetaForPosts || data?.selectedMetaForPosts;
     const validateId = meta ? isValidObjectId(meta) && meta?.match(/^[0-9a-fA-F]{24}$/) : false;
     const metaQuery = validateId ? [{$or: [{categories: {$in: meta}}, {tags: {$in: meta}}, {actors: {$in: meta}}]}] : [];
     const keyword = data.keyword ? decodeURIComponent(data.keyword) : ''

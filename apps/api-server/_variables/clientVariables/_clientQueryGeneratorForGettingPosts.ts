@@ -36,9 +36,11 @@ const _clientQueryGeneratorForGettingPosts = (data, metaId) => {
     const postTypeQuery = data?.postType ? [{postType: data.postType}] : []
     const authorQuery = data.author ? [{author: data.author}] : []
 
-    const sortQuery = sort === 'createdAt' || sort === 'random' || !sort ? {} :
-        sort === 'updatedAt' ? {updatedAt: -1, createdAt: -1} :
-            {[sort]: -1}
+    const sortQuery = !sort ? {updatedAt: -1} :
+                      sort === 'updatedAt'  ? {[sort]: -1} : {}
+    // sort === 'createdAt' || sort === 'random'?
+    //         {}
+
 
     // console.log('data.status',data.status)
     // const statusQuery = (data.status === 'undefined' || data.status === 'published')  ?

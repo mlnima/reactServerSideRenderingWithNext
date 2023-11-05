@@ -12,7 +12,7 @@ const updatePostsWidget = async (widgetData: any,widgetId:string, res: Response)
                 return;
             }
 
-            const findingPostsOptions = _clientQueryGeneratorForGettingPosts(widgetData, widgetData?.selectedMetaForPosts)
+            const findingPostsOptions = _clientQueryGeneratorForGettingPosts(widgetData, widgetData?.uniqueData?.selectedMetaForPosts || widgetData?.selectedMetaForPosts)
             // console.log('widgetData=> ',widgetData)
             let totalCount = await postSchema.countDocuments(findingPostsOptions.findPostsQueries).exec()
             let posts = await postSchema.find(findingPostsOptions.findPostsQueries, ['_id'],
