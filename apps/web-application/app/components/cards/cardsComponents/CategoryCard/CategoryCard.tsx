@@ -32,7 +32,7 @@ const CategoryCard: FC<CategoryCardPropTypes> =
         return (
             <article className={`categoryCard ${isSidebar && 'categoryCardSidebar'}`}>
 
-                <div className={'cardMedia'}>
+                {/*<div className={'cardMedia'}>*/}
                     <Link href={metaUrl} className='categoryCardLink'
                           title={meta?.translations?.[locale]?.name ?? meta?.name}>
                         {!!meta.imageUrl ?
@@ -48,15 +48,16 @@ const CategoryCard: FC<CategoryCardPropTypes> =
                             }
                                                numberOfCardsPerRowInMobile={1}/>
                         }
+                        <div className={`cardInfo`}>
+                            <strong className={'cardTitle'}>
+                                {capitalizeFirstLetter(meta?.translations?.[locale]?.name ?? meta?.name)}
+                            </strong>
+                            {/*<CardTitle title={title} url={`/category/${meta?._id}`}/>*/}
+                        </div>
                     </Link>
-                </div>
+                {/*</div>*/}
 
-                <div className={`cardInfo`}>
-                    <strong className={'cardTitle'}>
-                        {capitalizeFirstLetter(meta?.translations?.[locale]?.name ?? meta?.name)}
-                    </strong>
-                    {/*<CardTitle title={title} url={`/category/${meta?._id}`}/>*/}
-                </div>
+
 
             </article>
         )

@@ -3,8 +3,6 @@ import {WidgetData} from "typescript-types";
 import dynamic from "next/dynamic";
 import './WidgetWrapper.scss'
 import WidgetFooter from "@components/widgets/widgetWrapper/WidgetFooter/WidgetFooter";
-import SkeletonRenderer from "@components/Skeletons/SkeletonRenderer";
-
 const WidgetHeader = dynamic(() => import('./WidgetHeader/WidgetHeader'))
 const WidgetPagination = dynamic(() => import('./WidgetPagination/WidgetPagination'))
 const PostsListEntireByCategories = dynamic(() => import('../widgets/PostsListEntireByCategories/PostsListEntireByCategories'))
@@ -77,7 +75,7 @@ const WidgetWrapper: FC<IProps> = ({data, widgetId, isSidebar, locale, dictionar
     //@ts-ignore
     const WidgetToRender = widgetMatcher?.[data?.type as string] || null
     const widgetExtraClass = data?.extraClassName ? ` ${data?.extraClassName}` : ''
-    const widgetClass =  `widget ${data?.type}WrapperWidget${widgetExtraClass}`
+    const widgetClass = `widget ${data?.type}WrapperWidget${widgetExtraClass}`
 
     return (
         <div className={widgetClass}
@@ -107,10 +105,14 @@ const WidgetWrapper: FC<IProps> = ({data, widgetId, isSidebar, locale, dictionar
                               redirectToTitle={data?.translations?.[locale]?.redirectToTitle || data?.redirectToTitle}/>
             }
 
-            {(!!data?.pagination && !!data?.redirectLink) &&
+            {
+                (
+                    (!!data?.pagination && !!data?.redirectLink) &&
+                    (data?.uniqueData?.totalCount > (data?.count || data?.uniqueData?.count))
+                )  &&
                 <WidgetPagination baseUrl={data?.redirectLink}
                                   totalCount={data?.uniqueData?.totalCount}
-                                  count={data?.count}/>
+                                  count={data?.count || data?.uniqueData?.count}/>
 
             }
 

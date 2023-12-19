@@ -16,7 +16,7 @@ interface SideBarWidgetAreaProps {
 
 const SidebarWidgetArea:FC<SideBarWidgetAreaProps> = ({dictionary,locale,className,position,gridArea,widgets}) => {
     return (
-        <aside className={className + ' widget-area custom-scroll sidebarWidgetArea ' + position}
+        <aside className={className + ' widget-area sidebarWidgetArea ' + position}
                style={{gridArea}}>
             <WidgetsRenderer dictionary={dictionary} locale={locale} position={position} widgets={widgets}/>
         </aside>

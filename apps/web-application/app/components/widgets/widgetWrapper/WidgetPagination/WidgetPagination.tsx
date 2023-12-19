@@ -1,9 +1,6 @@
-'use client';
 import {FC} from "react";
 import Link from 'next/link'
 import {rangeNumGenerator} from "custom-util";
-import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
 import './WidgetPagination.styles.scss'
 
 interface WidgetPaginationPropTypes {
