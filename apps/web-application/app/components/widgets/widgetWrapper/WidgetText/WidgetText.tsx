@@ -1,6 +1,7 @@
 import {FC} from "react";
 import parse from 'html-react-parser'
 import './WidgetText.scss'
+import textContentReplacer from "custom-util/dist/src/string-util/textContentReplacer";
 
 interface TextPropTypes {
     translations: {
@@ -16,10 +17,11 @@ const WidgetText: FC<TextPropTypes> = ({translations, text,locale}) => {
 
     return (
         <div className={'widgetText widget-text'} >
-            {parse(`${translations?.[locale]?.text || text || ''}`)}
+            {parse(`${ textContentReplacer(translations?.[locale]?.text || text || '')}`)}
         </div>
     );
 
 };
 
 export default WidgetText;
+// {parse(`${translations?.[locale]?.text || text || ''}`)}

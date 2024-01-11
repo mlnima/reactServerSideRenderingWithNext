@@ -1,6 +1,6 @@
 import React from "react";
 import {fetchMetas, fetchSettings, fetchWidgets} from "fetch-requests";
-import {i18n} from "../../../i18n-config";
+import {i18n} from "@i18nConfig";
 import {getDictionary} from "../../../get-dictionary";
 import WidgetsRenderer from "@components/widgets/widgetRenderer/WidgetsRenderer";
 import SidebarWidgetAreaRenderer

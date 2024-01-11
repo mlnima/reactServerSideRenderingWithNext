@@ -31,7 +31,7 @@ const LayoutMetaGenerator = async ({params: {lang}, searchParams}: Props, parent
         //     initialScale: 1,
         //     maximumScale: 1,
         // },
-        themeColor:settingsData?.settings?.initialSettings?.headDataSettings?.themeColor,
+        themeColor:settingsData?.settings?.initialSettings?.headDataSettings?.themeColor || 'black',
         applicationName:settingsData?.settings?.initialSettings?.headDataSettings?.siteName,
         openGraph:{
             title: settingsData?.settings?.initialSettings?.headDataSettings?.translations?.[lang]?.title ??

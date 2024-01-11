@@ -5,10 +5,12 @@ interface Replaces {
 }
 
 const getMonthName = (monthNumber: number): string | null => {
-    const monthNames: string[] = ['January', 'February', 'March',
+    const monthNames: string[] = [
+        'January', 'February', 'March',
         'April', 'May', 'June',
         'July', 'August', 'September',
-        'October', 'November', 'December'];
+        'October', 'November', 'December'
+    ];
     return monthNumber >= 1 && monthNumber <= 12 ? monthNames[monthNumber - 1] : null;
 };
 
