@@ -24,20 +24,22 @@ const WidgetHeader: FC<WidgetHeaderPropTypes> = (
     }) => {
 
     return (
-        <div className='widget-Header'>
-            <h2 className='widget-header-title'>{dictionary?.[title] || title}</h2>
-            {(
-                    redirectLink &&
-                    (redirectLinkPosition === 'header' || !redirectLinkPosition) &&
-                    !pagination
-                ) &&
-                <Link href={redirectLink}
-                      className={'btn btn-primary widget-header-redirect-link'}
-                      title={title + ' content'}
-                      aria-label={dictionary?.[redirectToTitle] || redirectToTitle}>
-                    {dictionary?.[redirectToTitle] || redirectToTitle}
-                </Link>
-            }
+        <div className='widgetHeader'>
+            <div className="widgetHeaderContent">
+                <h2 className='widget-header-title'>{dictionary?.[title] || title}</h2>
+                {(
+                        redirectLink &&
+                        (redirectLinkPosition === 'header' || !redirectLinkPosition) &&
+                        !pagination
+                    ) &&
+                    <Link href={redirectLink}
+                          className={'btn btn-primary widget-header-redirect-link'}
+                          title={title + ' content'}
+                          aria-label={dictionary?.[redirectToTitle] || redirectToTitle}>
+                        {dictionary?.[redirectToTitle] || redirectToTitle}
+                    </Link>
+                }
+            </div>
         </div>
     );
 };

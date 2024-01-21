@@ -65,7 +65,7 @@ const VideoPostCard: FC<IProps> =
                                url={postUrl}/>
                     {/*<div className={'card-info-stats'}>*/}
                     {/*    {!!post.views && <CardViews views={post.views}/>}*/}
-                    {/*    {!!rating && <CardRating rating={rating}/>}*/}
+                    {/*    {!!post.rating && <CardRating rating={post.rating}/>}*/}
                     {/*</div>*/}
                 </div>
             </article>

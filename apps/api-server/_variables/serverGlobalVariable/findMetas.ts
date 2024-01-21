@@ -1,13 +1,16 @@
 import {metaSchema} from 'models';
 
 interface FindMetasQueryTypes {
-    metaType: string,
-    page?: number,
-    limit?: number,
-    startWith?: number | string,
-    sort?: string,
-    locale: string
+    [key: string]: any
+
 }
+
+// metaType: string,
+// page?: number,
+// limit?: number,
+// startWith?: number | string,
+// sort?: string,
+// locale: string
 
 export const findMetas = async (query: FindMetasQueryTypes) => {
     try {
@@ -15,7 +18,10 @@ export const findMetas = async (query: FindMetasQueryTypes) => {
         const statusQuery = {status: 'published'};
         const type = {type: query?.metaType}
         const notStartWithNumberRegex = /^(?![0-9].*$).*/g
-        const startWithQuery = !query.startWith ? {name: {$regex: notStartWithNumberRegex}} : {name: {$regex: '^' + query.startWith}}
+        const notStartWithAlphabetRegex = /^(?![A-Za-z].*$).*/g;
+        const startWithQuery = query.startWith === 'other' ? {name: {$regex: notStartWithAlphabetRegex}} :
+            !query.startWith ? {name: {$regex: notStartWithNumberRegex}} :
+                {name: {$regex: '^' + query.startWith}}
         const countQuery = {count: {$gt: 0}}
         const limit = global?.initialSettings?.postCardsSettings?.numberOfCardsPerPage || 20
         const page = query?.page || 1

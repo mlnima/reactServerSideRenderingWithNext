@@ -1,78 +1,73 @@
-.alphabeticalRange {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 4px;
-  margin: auto;
+.lettersWrapper {
+  width: 100%;
 
-  .filterStartWith,.alphabeticalRangeItem{
-    width: 48px;
-    height: 48px;
+  .alphabeticalRangeControls {
+
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
+    gap: 4px;
+    padding: 4px 2px;
+
+    .alphabeticalRangeItemOpenBtn, .alphabeticalRangeActiveItem {
+      width: 48px;
+      height: 48px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .alphabeticalRangeItemOpenBtn {
+      display: none;
+    }
+
   }
 
 
+  .lettersItems {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
 
-  //.alphabeticalRangeContent {
-  //  padding: 10px;
-  //  box-sizing: border-box;
-  //  display: flex;
-  //  justify-content: center;
-  //  flex-wrap: wrap;
-  //
-  //  .alphabeticalRangeItem {
-  //    display: flex;
-  //    justify-content: center;
-  //    align-items: center;
-  //    padding: 5px 10px;
-  //    margin: 5px;
-  //    border-radius: 5px;
-  //    transition: width 2s linear 1s;
-  //
-  //    background-color: var(--tertiary-background-color, #404040);
-  //    color: var(--primary-text-color, #fff);
-  //  }
-  //
-  //  .activeItem {
-  //    background-color: var(--primary-active-color, #f90);
-  //    color: var(--secondary-background-color, #181818);
-  //  }
-  //
-  //  .currentQuery {
-  //    display: flex;
-  //    justify-content: center;
-  //    align-items: center;
-  //  }
-  //
-  //  .currentQueryOver {
-  //    background-color: var(--danger-button-link-background-color, #dc3545);
-  //    color: var(--danger-button-link-text-color, #fff);
-  //  }
-  //}
+    .alphabeticalRangeItem {
+      width: 48px;
+      height: 48px;
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 }
 
 @media only screen and (min-width: 768px) {
-  //align-items: flex-end;
-  //.alphabeticalRangeContent {
-  //  .alphabeticalRangeItem {
-  //    width: 30px;
-  //    height: 30px;
-  //    display: flex;
-  //    justify-content: center;
-  //    align-items: center;
-  //    font-size: 1rem;
-  //  }
-  //
-  //  .currentQuery {
-  //    display: flex;
-  //    justify-content: center;
-  //    align-items: center;
-  //    width: 100% !important;
-  //    max-width: 200px;
-  //
-  //  }
-  //}
+  .lettersWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .alphabeticalRangeControls {
+
+    }
+
+    .lettersItems {
+      justify-content: center;
+
+      .alphabeticalRangeItem {
+        display: flex !important;
+      }
+    }
+  }
 }
+
+
+//.lettersWrapperOpen {
+//  .alphabeticalRangePreviewItem {
+//    grid-column: 1 / -1;
+//    width: 100px;
+//    place-self: center;
+//    font-weight: bold;
+//    font-size: 1.2rem;
+//    border: var(--default-border);
+//  }
+//}

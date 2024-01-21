@@ -29,6 +29,7 @@ const getMetaForGettingPostsRequest = async (meta:string)=>{
 
 export const getPosts =  async (req, res) => {
     try {
+
         const locale = req.query.locale
 
         const meta = req.query?.metaId || req.query?.selectedMetaForPosts ?

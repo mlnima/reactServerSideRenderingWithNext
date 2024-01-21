@@ -4,105 +4,66 @@ import Link from 'next/link'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowDownZA} from "@fortawesome/free-solid-svg-icons/faArrowDownZA";
 import './AlphabeticalNumericalRangeLinksWidget.styles.scss';
-import {usePathname, useRouter, useSearchParams} from "next/navigation";
+import {usePathname, useSearchParams} from "next/navigation";
 import {faArrowUpZA} from "@fortawesome/free-solid-svg-icons";
-import {faArrowLeft} from "@fortawesome/free-solid-svg-icons/faArrowLeft";
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
+import AlphabeticalNumericalRangeItem
+    from "@components/widgets/widgets/AlphabeticalNumericalRangeLinksWidget/AlphabeticalNumericalRangeItem";
+import {faEraser} from "@fortawesome/free-solid-svg-icons/faEraser";
 
 const AlphabeticalNumericalRangeLinksWidget: FC = () => {
 
     const pathname = usePathname()
-    const {push} = useRouter()
     const searchParams = useSearchParams()
-
     const startWith = useMemo(() => searchParams.get('startWith') || '', [pathname, searchParams]) as string
-    const isDisabled = useMemo(() => startWith?.length > 2, [startWith])
-
-    const [showFilters, setShowFilters] = useState(false)
+    const [isOpen, setIsOpen] = useState(false)
 
     const range = useMemo(() => {
-        return pathname.includes('/actors') ?
-            'abcdefghijklmnopqrstuvwxyz'.split('') :
-            'abcdefghijklmnopqrstuvwxyz0123456789'.split('');
+        return ((pathname.includes('/actors') ? '' : '#') + 'abcdefghijklmnopqrstuvwxyz').split('')
     }, [])
 
-    const renderRange = range.map((letter, index) => {
-        return (
-            <Link className={`alphabeticalRangeItem ${startWith?.includes(letter) ? 'activeItem' : ''} btn btn-dark`}
-                  href={{
-                      pathname,
-                      query: {
-                          startWith: !!startWith ? `${startWith + letter}` : letter,
-                      }
-                  }}
-                  style={{
-                      pointerEvents: isDisabled ?  'none' : 'auto',
-                  }}
-                  key={uuidv4()}>
-                {startWith ? letter : letter.toUpperCase()}
-            </Link>
-        )
-    })
-
     return (
-        <div className={`alphabeticalRange ${showFilters ? 'alphabeticalRangeShowFilters' : ''}`}>
+        <div className={'lettersWrapper'}>
 
-            <button className={'filterStartWith btn btn-primary'}
-                    aria-label={'show filters'}
-                    onClick={() => setShowFilters(!showFilters)}>
-                {showFilters ?
-                    <FontAwesomeIcon icon={faArrowUpZA} style={{width: 20, height: 20}}/> :
-                    <FontAwesomeIcon icon={faArrowDownZA} style={{width: 20, height: 20}}/>
-                }
-            </button>
+            <div className='alphabeticalRangeControls'>
 
-
-            {showFilters &&
-              <>
-                    {!!startWith && (
-                        <Link className={`alphabeticalRangeItem activeItem currentQuery${isDisabled && 'currentQueryOver'} btn btn-dark`}
-                              key={'X'} href={{
-                            pathname: pathname,
-                            query: startWith.length > 1 ? { startWith: startWith.slice(0, -1) } : {}
-                        }}>
-                            <FontAwesomeIcon icon={faArrowLeft} style={{width: 20, height: 20}}/>
-                        </Link>
-                    )}
+                {!!startWith &&
                     <Link key={'all'}
                           href={pathname}
-                          className={`alphabeticalRangeItem ${!startWith ? 'active-item' : ''}`}>
-                        All
+                          style={{
+                              pointerEvents: 'auto',
+                              display: isOpen ? 'flex' : "none"
+                          }}
+                          className={`alphabeticalRangeActiveItem btn btn-dark`}>
+                        <FontAwesomeIcon icon={faEraser} style={{width: 20, height: 20}}/>
                     </Link>
+                }
 
-                    {renderRange}
-              </>
+                <button className={'alphabeticalRangeItemOpenBtn btn btn-primary mobileOnly'}
+                        aria-label={'show filters'}
+                        onClick={() => setIsOpen(!isOpen)}>
+                    {isOpen ?
+                        <FontAwesomeIcon icon={faArrowUpZA} style={{width: 20, height: 20}}/> :
+                        <FontAwesomeIcon icon={faArrowDownZA} style={{width: 20, height: 20}}/>
+                    }
+                </button>
 
-            }
+            </div>
+
+            <div className={'lettersItems'} style={{justifyContent: isOpen ? 'center' : 'flex-start'}}>
+                {range.map(letter => {
+                    return (
+                        <AlphabeticalNumericalRangeItem key={uuidv4()}
+                                                        letter={letter}
+                                                        isOpen={isOpen}
+                                                        pathname={pathname}
+                                                        startWith={startWith}/>
+                    )
+                })}
+            </div>
 
         </div>
     );
 };
 export default AlphabeticalNumericalRangeLinksWidget;
 
-
-// {showFilters && (
-//     <div className={'alphabeticalRangeContent'}>
-//         {!!startWith && (
-//             <Link className={`alphabeticalRangeItem activeItem currentQuery${isDisabled && 'currentQueryOver'}`}
-//                   key={'X'} href={{
-//                 pathname: pathname,
-//                 query: startWith.length > 1 ? { startWith: startWith.slice(0, -1) } : {}
-//             }}>
-//                 <FontAwesomeIcon icon={faArrowLeft} style={{width: 20, height: 20}}/>
-//             </Link>
-//         )}
-//         <Link key={'all'}
-//               href={pathname}
-//               className={`alphabeticalRangeItem ${!startWith ? 'active-item' : ''}`}>
-//             All
-//         </Link>
-//
-//         {renderRange}
-//
-//     </div>
-// )}

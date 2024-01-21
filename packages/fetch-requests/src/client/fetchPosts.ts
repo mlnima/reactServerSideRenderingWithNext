@@ -94,12 +94,13 @@ type IFetchPostsProps = {
 export const fetchPosts = async ({queryObject,locale, requestedFields, revalidate,tags}: IFetchPostsProps) => {
     try {
         const requestParameter = removeEmptyProperties(queryObject)
-        const queries = `?${new URLSearchParams(requestParameter).toString()}`;
+        const queries = `${new URLSearchParams(requestParameter).toString()}`;
 
         const requestedFieldsQuery = (
             [...postFieldRequestForCards, ...(requestedFields || [])]
         ).map(f => 'field=' + f).join('&');
 
+        // console.log('requestUrl=> ',`${APIServerUrl}/api/v1/posts/getPosts?${queries}&${requestedFieldsQuery}&locale=${locale}`)
         const response = await fetch(
             `${APIServerUrl}/api/v1/posts/getPosts?${queries}&${requestedFieldsQuery}&locale=${locale}`,
             //@ts-ignore

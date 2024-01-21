@@ -6,10 +6,11 @@ import './WidgetPagination.styles.scss'
 interface WidgetPaginationPropTypes {
     baseUrl: string,
     totalCount: number,
-    count: number
+    count: number,
+    sortBy: string
 }
 
-const WidgetPagination: FC<WidgetPaginationPropTypes> = ({baseUrl, totalCount, count}) => {
+const WidgetPagination: FC<WidgetPaginationPropTypes> = ({baseUrl, totalCount, count, sortBy}) => {
 
     const numberOfCardsPerPage = 20
     const maxPage = totalCount ? Math.ceil(totalCount / numberOfCardsPerPage) : 0
@@ -19,12 +20,19 @@ const WidgetPagination: FC<WidgetPaginationPropTypes> = ({baseUrl, totalCount, c
 
             {[...rangeNumGenerator(1, maxPage), maxPage].map((pageNumber) => {
                 if (pageNumber && typeof pageNumber === "number") {
-                    const itemClassName =  pageNumber === 1  ? 'paginationItem paginationItemActive' : 'paginationItem'
+                    const itemClassName = pageNumber === 1 && sortBy !== 'random' ?
+                        'paginationItem paginationItemActive' :
+                        'paginationItem'
+
+                    const isBaseUrlWithQuery = baseUrl.includes('?');
+                    const sortQuery = sortBy !== 'random' ? sortBy : null
+                    const targetUrlWithPageQuery = isBaseUrlWithQuery ? baseUrl + `&page=${pageNumber}` : baseUrl + `?page=${pageNumber}`
+                    const targetUrl = sortQuery ? targetUrlWithPageQuery + `&sort=${sortBy}` : targetUrlWithPageQuery
+// console.log('targetUrl=> ',targetUrl)
                     return (
                         <div key={pageNumber}
                              className={itemClassName}>
-                            <Link
-                                href={`${baseUrl.includes('?') ? baseUrl + `&page=${pageNumber}` : baseUrl + `?page=${pageNumber}`}`}>
+                            <Link href={targetUrl}>
                                 {pageNumber}
                             </Link>
                         </div>
@@ -36,3 +44,4 @@ const WidgetPagination: FC<WidgetPaginationPropTypes> = ({baseUrl, totalCount, c
     )
 };
 export default WidgetPagination
+//href={`${baseUrl.includes('?') ? baseUrl + `&page=${pageNumber}` : baseUrl + `?page=${pageNumber}`}`}

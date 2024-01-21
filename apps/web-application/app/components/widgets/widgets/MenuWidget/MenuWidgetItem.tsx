@@ -22,7 +22,7 @@ const MenuWidgetItem: FC<MenuWidgetItemPropTypes> =
          burgerMenuOnDesktop
      }) => {
         return (
-            <div className={`menuItem${burgerMenuOnDesktop ? '' : ' menuItemExpanded'}`}>
+            <div className={`menuItem${burgerMenuOnDesktop ? ' menuItemBurger' : ' menuItemExpanded'}`}>
                 <div className={'menuItemWrapper'}>
                     <Link href={targetUrl}
                           className={`menuItemLink`}

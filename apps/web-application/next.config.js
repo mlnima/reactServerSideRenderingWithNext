@@ -37,7 +37,7 @@ const nextConfig = {
         ignoreDuringBuilds: true,
     },
     experimental: {
-        serverActions: true,
+        // serverActions: true,
         // turbo: {
         //     rules: {
         //         // Option format

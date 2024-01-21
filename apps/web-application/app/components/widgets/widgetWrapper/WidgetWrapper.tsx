@@ -111,6 +111,7 @@ const WidgetWrapper: FC<IProps> = ({data, widgetId, isSidebar, locale, dictionar
                     (data?.uniqueData?.totalCount > (data?.count || data?.uniqueData?.count))
                 )  &&
                 <WidgetPagination baseUrl={data?.redirectLink}
+                                  sortBy={data?.sortBy}
                                   totalCount={data?.uniqueData?.totalCount}
                                   count={data?.count || data?.uniqueData?.count}/>
 

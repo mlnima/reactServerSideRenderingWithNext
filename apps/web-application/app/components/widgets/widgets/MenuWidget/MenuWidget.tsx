@@ -13,15 +13,6 @@ import Csr from "@components/global/Csr";
 
 const Logo = dynamic(() => import('../Logo/Logo'))
 
-// const LanguagesSwitcher = dynamic(() =>
-//     import('../LanguagesSwitcher/LanguagesSwitcher'))
-// const DayModeNightMode = dynamic(() =>
-//     import('../DayModeNightMode/DayModeNightMode'))
-// const Authentication = dynamic(() =>
-//     import('../Authentication/Authentication'))
-// const UserPreferenceConfigWidget = dynamic(() =>
-//     import('../UserPreferenceConfigWidget/UserPreferenceConfigWidget'))
-
 interface MenuWidgetPropTypes {
     menuItems: MenuItem[],
     locale: string,
@@ -143,60 +134,3 @@ const MenuWidget: FC<MenuWidgetPropTypes> =
     };
 export default MenuWidget;
 
-
-//
-// {/*{*/}
-// {/*    (*/}
-// {/*        uniqueData?.languagesSwitcherWidget ||*/}
-// {/*        uniqueData?.themeColorsSwitcherWidget ||*/}
-// {/*        uniqueData?.userPreferenceConfigWidget ||*/}
-// {/*        uniqueData?.authenticationWidget*/}
-// {/*    ) &&*/}
-//
-// {/*    <div className={'menuExtraWidgets'}>*/}
-// {/*        {uniqueData?.authenticationWidget &&*/}
-// {/*            <div className={`menuItem authentication${*/}
-// {/*                uniqueData?.burgerMenuOnDesktop ? '' : ' menuItemDynamic'}`}>*/}
-// {/*              /!*<span className={'preferenceMenuItemTitle'}>*!/*/}
-// {/*              /!*      <FontAwesomeIcon icon={faKey}/>*!/*/}
-// {/*              /!*    /!*{dictionary?.['Language'] || 'Language'}:*!/*!/*/}
-// {/*              /!*</span>*!/*/}
-// {/*                <Authentication locale={locale} dictionary={dictionary} isChildWidget={true}/>*/}
-// {/*            </div>*/}
-// {/*        }*/}
-// {/*        {uniqueData?.languagesSwitcherWidget &&*/}
-// {/*            <div className={`menuItem languagesSwitcher${*/}
-// {/*                uniqueData?.burgerMenuOnDesktop ? '' : ' menuItemDynamic'}`}>*/}
-// {/*              <span className={'preferenceMenuItemTitle'}>*/}
-// {/*                    <FontAwesomeIcon icon={faEarthAmerica}/>*/}
-// {/*                  /!*{dictionary?.['Language'] || 'Language'}:*!/*/}
-// {/*              </span>*/}
-// {/*                <LanguagesSwitcher locale={locale}/>*/}
-// {/*            </div>*/}
-// {/*        }*/}
-//
-// {/*        {uniqueData?.userPreferenceConfigWidget &&*/}
-// {/*            <div className={`menuItem userPreferenceConfigWidget${*/}
-// {/*                uniqueData?.burgerMenuOnDesktop ? '' : ' menuItemDynamic'}`}>*/}
-// {/*              <span className={'preferenceMenuItemTitle'}>*/}
-// {/*                    <FontAwesomeIcon icon={faEarthAmerica}/>*/}
-// {/*                  /!*{dictionary?.['Language'] || 'Language'}:*!/*/}
-// {/*              </span>*/}
-// {/*                <UserPreferenceConfigWidget locale={locale} dictionary={dictionary}*/}
-// {/*                                            uniqueData={uniqueData}/>*/}
-// {/*            </div>*/}
-// {/*        }*/}
-//
-//
-// {/*        {uniqueData?.themeColorsSwitcherWidget &&*/}
-// {/*            <div className={`menuItem themeColorsSwitcher${*/}
-// {/*                uniqueData?.burgerMenuOnDesktop ? '' : ' menuItemDynamic'}`}>*/}
-// {/*            <span className={'preferenceMenuItemTitle'}>*/}
-// {/*                  <FontAwesomeIcon icon={faSun}/>*/}
-// {/*                /!*{dictionary?.['Theme'] || 'Theme'}:*!/*/}
-// {/*            </span>*/}
-// {/*                <DayModeNightMode uniqueData={uniqueData}/>*/}
-// {/*            </div>*/}
-// {/*        }*/}
-// {/*    </div>*/}
-// {/*}*/}

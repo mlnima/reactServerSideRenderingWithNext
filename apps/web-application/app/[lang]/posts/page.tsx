@@ -1,11 +1,10 @@
 import {fetchPosts, fetchSettings, fetchWidgets} from "fetch-requests";
 import SidebarWidgetAreaRenderer
     from "@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer";
-import {i18n} from "../../../i18n-config";
+import {i18n} from "@i18nConfig";
 import {getDictionary} from "../../../get-dictionary";
 import WidgetsRenderer from "@components/widgets/widgetRenderer/WidgetsRenderer";
 import PostPage from "@components/PostsPage/PostsPage";
-
 import PostsPageInfo from "@components/PostsPage/PostsPageInfo/PostsPageInfo";
 import postsMetaGenerator from "./components/postsMetaGenerator/postsMetaGenerator";
 
@@ -44,6 +43,7 @@ const PostsPage = async ({params, searchParams}: IProps) => {
     const currentPageQuery = searchParams?.page;
     const currentPage = (currentPageQuery) ?
         parseInt(currentPageQuery, 10) : 1
+
 
     const postsData = await fetchPosts({
         queryObject: {
@@ -93,6 +93,5 @@ const PostsPage = async ({params, searchParams}: IProps) => {
 }
 
 export default PostsPage;
-
 export const generateMetadata = postsMetaGenerator;
 export const dynamic = 'force-dynamic';
