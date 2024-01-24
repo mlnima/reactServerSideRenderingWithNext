@@ -21,6 +21,14 @@ const postsMetaGenerator = async ({params, searchParams}: Props) => {
     const postType = `${capitalizeFirstLetter(searchParams?.postType)}s` || 'posts'
 
     return {
+        // alternates: {
+        //     canonical: '/posts',
+        //     languages: process.env.NEXT_PUBLIC_LOCALES?.replace(`${process.env.NEXT_PUBLIC_DEFAULT_LOCALE} `,'')
+        //         ?.split(' ').reduce((finalValue:{[key:string]:string},currentLocale)=>{
+        //             finalValue[currentLocale] = `/${currentLocale}/posts`
+        //             return finalValue
+        //         },{}),
+        // },
         title: `${siteName} | ${dictionary?.[postType] || postType } ${dictionary?.['Page'] || 'Page'} ${searchParams?.page || 1}`
     }
 }

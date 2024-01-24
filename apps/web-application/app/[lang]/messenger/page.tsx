@@ -1,10 +1,7 @@
-// import {fetchChatroomData} from "fetch-requests";
 import {getDictionary} from "../../../get-dictionary";
-import {i18n} from '../../../i18n-config'
+import {i18n} from '@i18nConfig'
 import './page.styles.scss';
 import MessengerPageContent from "./components/messengerPageContent/MessengerPageContent";
-
-// import chatroomMetaGenerator from "./components/chatroomMetaGenerator/chatroomMetaGenerator";
 
 interface IProps {
     params: {
@@ -15,6 +12,14 @@ interface IProps {
 
 export const generateMetadata = async () => {
     return {
+        // alternates: {
+        //     canonical: '/messenger',
+        //     languages: process.env.NEXT_PUBLIC_LOCALES?.replace(`${process.env.NEXT_PUBLIC_DEFAULT_LOCALE} `,'')
+        //         ?.split(' ').reduce((finalValue:{[key:string]:string},currentLocale)=>{
+        //             finalValue[currentLocale] = `/${currentLocale}/messenger`
+        //             return finalValue
+        //         },{}),
+        // },
         title: 'Messenger'
     }
 }
@@ -23,8 +28,6 @@ const MessengerPage = async ({params: {lang, identifier}}: IProps) => {
 
     const locale = i18n.locales.includes(lang) ? lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale);
-    // const settingsData = await fetchSettings(['messengerPageSettings']);
-    // const chatroomsData = await fetchChatroomData({identifier})
 
     return (
         <div id={'content'} className={`page-no-sidebar messengerPageParent`}>

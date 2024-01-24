@@ -12,6 +12,7 @@ interface IProps {
 
 // export const generateMetadata = async ()=>({
 //     title: 'Login',
+//
 // })
 
 const loginPage = ({params: {lang}}: IProps) => {

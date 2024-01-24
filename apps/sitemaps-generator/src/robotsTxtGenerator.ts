@@ -15,6 +15,7 @@ Disallow: /dashboard/*
 Disallow: /profile/*
 Disallow: /chatroom/*
 Disallow: /page/test
+Disallow: /editPost/*
 Disallow: /*?preview=true*
 Sitemap: ${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemap.xml
 Host: ${process.env.NEXT_PUBLIC_PRODUCTION_URL}`,

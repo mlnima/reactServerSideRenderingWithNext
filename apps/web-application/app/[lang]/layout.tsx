@@ -1,5 +1,4 @@
 import React, {ReactNode} from 'react';
-
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import {config} from "@fortawesome/fontawesome-svg-core";
 
@@ -29,6 +28,8 @@ import StyledComponentsRegistry from "@lib/registry";
 import BackgroundFilterWholeScreen from "@components/global/BackgroundFilterWholeScreen/BackgroundFilterWholeScreen";
 import KeysListener from "@components/global/KeysListener";
 import UserConfigMenu from "@components/global/UserConfigMenu/UserConfigMenu";
+import type { Viewport } from 'next'
+import LayoutViewportGenerator from "@components/LayoutMetaGenerator/LayoutViewportGenerator";
 // import './layout.scss'
 // import Head from "next/head";
 
@@ -112,5 +113,7 @@ export default RootLayout;
 
 
 export const generateMetadata = LayoutMetaGenerator;
+
+export const generateViewport = LayoutViewportGenerator;
 // export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';

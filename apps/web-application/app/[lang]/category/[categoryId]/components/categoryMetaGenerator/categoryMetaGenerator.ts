@@ -44,6 +44,14 @@ const categoryMetaGenerator = async ({params, searchParams}: Props, parent?: Res
         getTextDataWithTranslation(params?.lang, 'description', postsData?.meta)
 
     return {
+        // alternates: {
+        //     canonical: `/category/${params?.categoryId}`,
+        //     languages: process.env.NEXT_PUBLIC_LOCALES?.replace(`${process.env.NEXT_PUBLIC_DEFAULT_LOCALE} `,'')
+        //         ?.split(' ').reduce((finalValue:{[key:string]:string},currentLocale)=>{
+        //         finalValue[currentLocale] = `/${currentLocale}/category/${params?.categoryId}`
+        //         return finalValue
+        //     },{}),
+        // },
         title: pageTitle ?
             textContentReplacer(pageTitle, {
                 name: postsData?.meta?.name,

@@ -13,6 +13,19 @@ interface IProps {
     }
 }
 
+export const generateMetadata = async () => {
+    return {
+        // alternates: {
+        //     canonical: '/newPost',
+        //     languages: process.env.NEXT_PUBLIC_LOCALES?.replace(`${process.env.NEXT_PUBLIC_DEFAULT_LOCALE} `,'')
+        //         ?.split(' ').reduce((finalValue:{[key:string]:string},currentLocale)=>{
+        //             finalValue[currentLocale] = `/${currentLocale}/newPost`
+        //             return finalValue
+        //         },{}),
+        // },
+        title: 'Messenger'
+    }
+}
 
 const NewPostPage = async ({params: {lang}, searchParams}: IProps) => {
 

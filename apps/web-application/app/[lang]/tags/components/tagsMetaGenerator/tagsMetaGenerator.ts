@@ -21,6 +21,14 @@ const tagsMetaGenerator = async ({params}: Props, parent?: ResolvingMetadata): P
         settingsData?.settings?.tagsPageSettings?.description
 
     return {
+        // alternates: {
+        //     canonical: `/tags`,
+        //     languages: process.env.NEXT_PUBLIC_LOCALES?.replace(`${process.env.NEXT_PUBLIC_DEFAULT_LOCALE} `,'')
+        //         ?.split(' ').reduce((finalValue:{[key:string]:string},currentLocale)=>{
+        //             finalValue[currentLocale] = `/${currentLocale}/tags`
+        //             return finalValue
+        //         },{}),
+        // },
         title: pageTitle ?
             textContentReplacer(pageTitle, {
                 siteName: initialSettingsData?.settings?.initialSettings?.headDataSettings?.siteName

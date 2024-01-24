@@ -2,6 +2,8 @@
 
 import type {Metadata, ResolvingMetadata} from 'next'
 import { fetchSettings} from "fetch-requests";
+import * as process from "process";
+import alternatesCanonicalGenerator from "@lib/alternatesCanonicalGenerator";
 
 type Props = {
     params: { identifier: string ,lang:string}
@@ -13,7 +15,11 @@ const LayoutMetaGenerator = async ({params: {lang}, searchParams}: Props, parent
     const fallbackIcon = '/asset/images/default/favicon.png'
     const settingsData = await fetchSettings({requireSettings: ['initialSettings']})
 
+    // const alternates = alternatesCanonicalGenerator({lang,currentPath:'/'})
+    //
     return {
+        metadataBase: new URL(process.env.NEXT_PUBLIC_PRODUCTION_URL as string),
+        // alternates,
         title: settingsData?.settings?.initialSettings?.headDataSettings?.translations?.[lang]?.title ??
                (settingsData?.settings?.initialSettings?.headDataSettings?.title || 'CMS'),
 
@@ -31,7 +37,7 @@ const LayoutMetaGenerator = async ({params: {lang}, searchParams}: Props, parent
         //     initialScale: 1,
         //     maximumScale: 1,
         // },
-        themeColor:settingsData?.settings?.initialSettings?.headDataSettings?.themeColor || 'black',
+        // themeColor:settingsData?.settings?.initialSettings?.headDataSettings?.themeColor || 'black',
         applicationName:settingsData?.settings?.initialSettings?.headDataSettings?.siteName,
         openGraph:{
             title: settingsData?.settings?.initialSettings?.headDataSettings?.translations?.[lang]?.title ??
@@ -43,7 +49,16 @@ const LayoutMetaGenerator = async ({params: {lang}, searchParams}: Props, parent
 
             siteName:settingsData?.settings?.initialSettings?.headDataSettings?.siteName,
             locale:lang,
-        }
+        },
+
+        // alternates: {
+        //     canonical: '/',
+        //     languages: {
+        //         'en-US': '/en-US',
+        //         'de-DE': '/de-DE',
+        //     },
+        // },
+
 
     }
 }
