@@ -1,12 +1,11 @@
 'use client';
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect, useMemo, useState} from 'react';
 import {useAppDispatch} from "@store/hooks";
 import {useSelector} from "react-redux";
 import './FormWidget.styles.scss'
 import FormWidgetField from "@components/widgets/widgets/FormWidget/FormWidgetField/FormWidgetField";
 import {loading, setAlert} from "@store/reducers/globalStateReducer";
 import {postFormData} from "fetch-requests";
-import { v4 as uuidv4 } from 'uuid';
 
 interface FormWidgetPropTypes {
     locale: string,
@@ -32,15 +31,15 @@ interface FormWidgetPropTypes {
 const FormWidget: FC<FormWidgetPropTypes> = ({widgetId, uniqueData, locale, dictionary}) => {
 
     const dispatch = useAppDispatch()
-    const {userId} = useSelector(({user}) => user)
-    const {username} = useSelector(({user}) => user)
-    const {role} = useSelector(({user}) => user)
+    const userId = useSelector(({user}) => user?.userData?._id)
+    const {username} = useSelector(({user}) => user?.userData)
+    const {role} = useSelector(({user}) => user?.userData)
 
     const [state, setState] = useState(() => {
         return {
-            language: locale,
-            widgetId: widgetId,
-            formName: uniqueData.formName,
+            language: '',
+            widgetId: '',
+            formName: '',
             data: {}
         }
     })
@@ -48,6 +47,9 @@ const FormWidget: FC<FormWidgetPropTypes> = ({widgetId, uniqueData, locale, dict
     useEffect(() => {
         setState(prevState => ({
             ...prevState,
+            language: locale,
+            widgetId: widgetId,
+            formName: uniqueData.formName,
             data: {
                 ...prevState.data,
                 userId,
@@ -60,14 +62,18 @@ const FormWidget: FC<FormWidgetPropTypes> = ({widgetId, uniqueData, locale, dict
     const [isSubmit, setIsSubmit] = useState(false)
 
     const onFormFieldsChangeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setState({
-            ...state,
-            data: {
-                ...state.data,
-                [e.target.name]: e.target.value
+        setState(prevState => (
+            {
+                ...prevState,
+                data: {
+                    ...prevState?.data,
+                    [e.target.name]: e.target.value
+                }
+
             }
-        })
+        ))
     }
+
 
     const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -89,6 +95,10 @@ const FormWidget: FC<FormWidgetPropTypes> = ({widgetId, uniqueData, locale, dict
         }
     };
 
+    const formFieldsToRender = useMemo(() => {
+        return [...(uniqueData?.formFields || [])]
+            ?.sort((a, b) => (a?.fieldIndex > b?.fieldIndex) ? 1 : -1)
+    }, [])
 
     return (
         <div className='formWidget'>
@@ -103,17 +113,15 @@ const FormWidget: FC<FormWidgetPropTypes> = ({widgetId, uniqueData, locale, dict
                 </h3> :
                 <form onSubmit={e => onSubmitHandler(e)} className='formWidgetDynamicForm'>
                     <h2>{dictionary?.[uniqueData?.formTitle] || uniqueData?.formTitle}</h2>
-                    {
-                        [...(uniqueData?.formFields || [])]
-                            ?.sort((a, b) => (a?.fieldIndex > b?.fieldIndex) ? 1 : -1)
-                            ?.map((field, index) => {
-                                return (
-                                    <FormWidgetField key={uuidv4()}
-                                                     onFormFieldsChangeHandler={onFormFieldsChangeHandler}
-                                                     field={field}
-                                                     dictionary={dictionary}/>
-                                )
-                            })}
+                    {formFieldsToRender.map((field) => {
+                        return (
+                            <FormWidgetField key={field.fieldName}
+                                             onFormFieldsChangeHandler={onFormFieldsChangeHandler}
+                                             field={field}
+                                             state={state}
+                                             dictionary={dictionary}/>
+                        )
+                    })}
                     <button type='submit' className='btn btn-primary submitButton'>
                         {uniqueData?.submitButtonText || 'Submit'}
                     </button>
@@ -125,32 +133,3 @@ const FormWidget: FC<FormWidgetPropTypes> = ({widgetId, uniqueData, locale, dict
 };
 export default FormWidget;
 
-
-// const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
-//     e.preventDefault()
-//     try {
-//         dispatch(loading(true))
-//         await postFormData({
-//             //modified after moving to nextjs 13 app router ,might need to modify due to createdAt at db
-//             formDataToPost: {
-//                 ...state,
-//                 date: Date.now()
-//             }
-//         }).then(() => {
-//             setIsSubmit(true)
-//         }).catch(() => {
-//             dispatch(setAlert({
-//                 message: "Something went wrong please try again later",
-//                 type: "error"
-//             }))
-//         })
-//
-//     } catch (error) {
-//         dispatch(setAlert({
-//             message: "Something went wrong please try again later",
-//             type: "error"
-//         }))
-//     } finally {
-//         dispatch(loading(false))
-//     }
-// }
