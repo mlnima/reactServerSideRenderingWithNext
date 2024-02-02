@@ -1,6 +1,6 @@
 import {fetchSettings} from "fetch-requests";
 import {getDictionary} from "../../../../../get-dictionary";
-import {i18n} from "../../../../../i18n-config";
+import {i18n} from "@i18nConfig";
 import {capitalizeFirstLetter} from "custom-util";
 
 type Props = {

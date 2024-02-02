@@ -12,6 +12,7 @@ import CategoriesPageContentRenderer from "@components/metas/CategoriesPageConte
 import TagsPageContentRenderer from "@components/metas/TagsPageContentRenderer";
 import {capitalizeFirstLetters} from "custom-util";
 import './page.scss'
+import searchMetaGenerator from "./components/searchMetaGenerator";
 
 interface IProps {
     params: {
@@ -71,7 +72,7 @@ const searchPage = async ({params, searchParams}: IProps) => {
             <main id={'primary'} className={'main searchPage'}>
                 {!!queryObject.keyword &&
                 <div className={'searchPageTitle'}>
-                    <span>{`${dictionary['Search Result For'] || 'Search Result For'}:`}</span>
+                    <span>{`${dictionary['Search Result For'] || 'Search Result For'}: `}</span>
                     <h1>{capitalizeFirstLetters(decodeURIComponent(queryObject.keyword))}</h1>
                 </div>
                 }
@@ -156,4 +157,5 @@ const searchPage = async ({params, searchParams}: IProps) => {
     )
 }
 
+export const generateMetadata = searchMetaGenerator;
 export default searchPage;
