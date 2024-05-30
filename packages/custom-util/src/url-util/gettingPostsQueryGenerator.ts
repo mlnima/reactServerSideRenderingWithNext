@@ -1,6 +1,6 @@
 import {NextRouter} from "next/router";
 import {mongoIdValidator} from "../index";
-import {postFieldRequestForCards} from "data-structures";
+import {postFieldRequestForCards} from "data-structure";
 
 //not in use
 const gettingPostsQueryGenerator  = (queryData: NextRouter['query'], metaIdData: string) => {

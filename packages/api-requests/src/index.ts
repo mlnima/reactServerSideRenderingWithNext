@@ -196,3 +196,7 @@ export {
     dashboardAPIRequestUpdateWidget
 
 } from './dashboard/dashboardWidgets'
+
+export {
+    dashboardAPIRequestGenerateSiteMaps
+} from './dashboard/sitemaps'

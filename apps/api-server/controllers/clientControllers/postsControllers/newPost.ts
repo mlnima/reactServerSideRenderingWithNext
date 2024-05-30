@@ -1,4 +1,4 @@
-import {postSchema, userSchema} from "models";
+import {PostSchema, UserSchema} from "shared-schemas";
 
 const setDraftPostToUserData = async (userId, draftPostId) => {
     try {
@@ -14,8 +14,8 @@ const newPost = async (req, res) => {
 
     try {
 
-        const userData = await userSchema.findById(req.userData._id).select('draftPost').exec()
-        const unFinishedPostsCount= await postSchema.countDocuments(
+        const userData = await UserSchema.findById(req.userData._id).select('draftPost').exec()
+        const unFinishedPostsCount= await PostSchema.countDocuments(
             {
                 $and:[{$or:[{$ne: {status:'published'}},{$ne: {status:'trash'}}]},{author: req.userData._id}]
             }
@@ -29,7 +29,7 @@ const newPost = async (req, res) => {
                 newPostId: userData.draftPost,
             });
         } else {
-            const newPostDataToSave = new postSchema(req.body.data);
+            const newPostDataToSave = new PostSchema(req.body.data);
             newPostDataToSave.save(async (error: any, savedPostData: { _id: any; }) => {
                 if (error) {
                     console.error('Error saving new post:', error);

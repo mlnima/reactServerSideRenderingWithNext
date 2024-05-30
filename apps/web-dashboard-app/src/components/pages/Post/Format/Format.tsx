@@ -2,7 +2,7 @@ import React, {FC} from "react";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import { editPostAction} from "@store/reducers/postsReducer";
-import {postTypes} from "data-structures";
+import {postTypes} from "data-structure";
 import {DashboardStore, Store} from "typescript-types";
 import {useAppDispatch} from "@store/hooks";
 

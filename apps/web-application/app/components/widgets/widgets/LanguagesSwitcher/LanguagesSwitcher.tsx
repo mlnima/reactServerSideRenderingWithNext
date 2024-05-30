@@ -2,7 +2,7 @@
 import React, {FC, useState} from "react";
 import {useParams, usePathname, useRouter} from 'next/navigation';
 import './LanguagesSwitcher.styles.scss';
-import {languagesMapOrigin} from "data-structures";
+import {languagesMapOrigin} from "data-structure";
 
 interface IProps {
     locale: string,

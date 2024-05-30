@@ -1,4 +1,6 @@
-const clientRobotTxtController = async (req, res) =>{
+import {Request, Response} from "express";
+
+const clientRobotTxtController = async (req:Request, res:Response) =>{
     res.set('Content-Type', 'text/plain;charset=utf-8');
     const robotTxtData = `User-agent: *
 Crawl-delay: 10

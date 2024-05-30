@@ -2,8 +2,7 @@ import AxiosInstance from "../lib/AxiosInstance";
 import {AxiosResponse} from "axios";
 // import {createNewPostResponse} from "./posts/createNewPost";
 import {mongoIdValidator, queryUniquer} from "custom-util";
-import {postFieldRequestForCards} from "data-structures";
-import {postTypes} from "data-structures";
+import {postFieldRequestForCards,postTypes} from "data-structure";
 
 const postTypeValidator = (currentPostType:string)=>{
     //@ts-ignore

@@ -129,7 +129,7 @@ const TableBodyItemSection: FC<TableBodyItemSectionPropTypes> = ({dataValue, dat
     } else if (dataName === 'mainThumbnail' || dataName === 'noImageUrl' || dataName === 'imageUrl') {
         const imageURl = dataValue?.includes('http') ?
             dataValue :
-            `${process.env.NEXT_PUBLIC_FILE_SERVER_URL}${dataValue}`
+            `${process.env.NEXT_PUBLIC_API_SERVER_URL}${dataValue}`
         return (
             <StyledDiv className='asset-page-table-body-item-section'>
                 {gotError ?

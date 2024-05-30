@@ -9,14 +9,13 @@ const getLocaleFromUrl = (request: NextRequest,) => {
 }
 
 export function middleware(request: NextRequest) {
+
     const pathname = request.nextUrl.pathname
 
-    // Check if there is any supported locale in the pathname
     const pathnameIsMissingLocale = i18n.locales.every(
         (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
     )
 
-    // Rewrite if there is no locale
     if (pathnameIsMissingLocale) {
         const locale = getLocaleFromUrl(request)
         const params = request?.nextUrl?.searchParams;
@@ -28,11 +27,10 @@ export function middleware(request: NextRequest) {
             )
         )
     }
-
 }
 
 export const config = {
-    matcher: ['/((?!api|_next/static|_next/image|favicon.ico|asset|fonts|public).*)'],
+    matcher: ['/((?!api|_next/static|_next/image|favicon.ico|asset|fonts|public|sitemap).*)'],
 }
 
 

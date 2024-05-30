@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import {userSchema} from 'models';
+import {UserSchema} from 'shared-schemas';
 import {Request, Response, NextFunction} from 'express';
 
 interface RequestWithUserData extends Request {
@@ -30,7 +30,7 @@ const adminAuthMiddleware = async (req: RequestWithUserData, res: Response, next
     }
 
     //@ts-ignore
-    const user = await userSchema.findById(verifiedToken._id).exec();
+    const user = await UserSchema.findById(verifiedToken._id).exec();
     if (user && user.role === 'administrator') {
         req.userData = verifiedToken
         next()

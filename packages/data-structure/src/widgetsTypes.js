@@ -1,0 +1,28 @@
+const widgetsTypes  = [
+    'text',
+    'advertise',
+    'textEditor',
+    'menu',
+    'linkTo',
+    'userPreferenceConfig',
+    'dayModeNightMode',
+    'language',
+    'multipleLinkTo',
+    'posts',
+    'newPostButton',
+    'postsList',
+    'postsListEntireByCategories',
+    'media',
+    'searchbar',
+    'meta',
+    'metaWithImage',
+    'logo',
+    'form',
+    'shoppingCart',
+    'alphabeticalNumericalRange',
+    'authentication',
+    'imagesSlider',
+    'postsSlider',
+]
+
+module.exports = widgetsTypes;

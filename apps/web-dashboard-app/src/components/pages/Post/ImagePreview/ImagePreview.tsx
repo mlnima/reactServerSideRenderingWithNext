@@ -22,7 +22,7 @@ const ImagePreview = () => {
     if (mainThumbnail) {
         const imageUrl = mainThumbnail?.includes('http') ?
             mainThumbnail :
-            `${process.env.NEXT_PUBLIC_FILE_SERVER_URL}${mainThumbnail}`;
+            `${process.env.NEXT_PUBLIC_API_SERVER_URL}${mainThumbnail}`;
         return (
             <ImagePreviewStyledDiv className=''>
                 <div className="title">

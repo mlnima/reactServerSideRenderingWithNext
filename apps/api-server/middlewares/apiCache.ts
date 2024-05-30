@@ -46,7 +46,7 @@ const cacheSuccesses = cache('30 minutes', cacheOn);
 export default cacheSuccesses
 
 
-//const dynamicUrlMatch = req.url.includes('/sitemaps/') || req.url.includes('/sitemap/')
+//const dynamicUrlMatch = req.url.includes('/sitemapsAndStaticAsset/') || req.url.includes('/sitemap/')
 
 
 //const isCacheOn = checkAbsoluteConditions &&  (checkStaticRouteForCacheOption || dynamicUrlMatch || notCacheUrls)
@@ -65,7 +65,7 @@ export default cacheSuccesses
 // const checkStatusForCacheOption =  res.statusCode === 200;
 // //const checkEnvForCacheOption = process.env.NODE_ENV === 'production'
 // const checkEnvForCacheOption =true
-// const dynamicUrlMatch = req.url.includes('/sitemaps/') || req.url.includes('/sitemap/')
+// const dynamicUrlMatch = req.url.includes('/sitemapsAndStaticAsset/') || req.url.includes('/sitemap/')
 // const checkStaticRouteForCacheOption = req.url.match( /\/manifest.json|\/robots.txt|\/sitemap.xml|\/sitemap|\/sw.js/g )
 //
 // const notCacheUrls =  !req.url.includes('/_next') &&

@@ -33,7 +33,7 @@ import LayoutViewportGenerator from "@components/LayoutMetaGenerator/LayoutViewp
 // import './layout.scss'
 // import Head from "next/head";
 
-// import {rtlLanguages} from "data-structures";
+// import {rtlLanguages} from "data-structure";
 // import MediaCall from "@components/MediaCall/MediaCall";
 // import dynamic from "next/dynamic";
 

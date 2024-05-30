@@ -46,7 +46,7 @@ const authWithUserDataMiddleware = async (req, res, next) => {
 export default authWithUserDataMiddleware;
 
 // import jwt from 'jsonwebtoken';
-// import {userSchema} from "models";
+// import {userSchema} from "shared-schemas";
 //
 // const authWithUserDataMiddleware = async (req, res, next)=>{
 //     try{

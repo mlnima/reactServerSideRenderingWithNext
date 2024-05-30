@@ -2,6 +2,7 @@
   width: 100%;
   padding: 0 1rem;
   box-sizing: border-box;
+
   .menuItemWrapper{
     background-color: var(--tertiary-background-color);
     border-radius: 0.375rem;
@@ -42,8 +43,13 @@
 
 
 .menuItemExpanded{
+  border-right: 1px solid var(--primary-background-color);
   .menuItemWrapper{
+    padding: 0 !important;
+    //margin: 0 .5rem !important;
+    border:none;
     .menuItemLink{
+      padding: 0 .5rem !important;
       width: 100%;
       justify-content: flex-start;
     }

@@ -1,6 +1,6 @@
 import React, {ChangeEvent,useState} from 'react';
 import styled from "styled-components";
-import {postTypes} from "data-structures";
+import {postTypes} from "data-structure";
 import {getExportingPosts} from "@store/reducers/postsReducer";
 import {useAppDispatch} from "@store/hooks";
 

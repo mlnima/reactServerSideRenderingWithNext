@@ -49,7 +49,7 @@ export const pagesSitemapsController = async () =>{
 
 
 
-const pagesDataToXmlString = (pages) => pages.reduce((sitemap,currentPageData)=>{
+const pagesDataToXmlString = (pages:any[]) => pages.reduce((sitemap,currentPageData)=>{
     const pagesUrl = `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/page/${currentPageData.pageName}`
     const date = (currentPageData.updatedAt || currentPageData.createdAt || currentPageData._id.getTimestamp() || Date.now()).toISOString()
     sitemap += `<url>

@@ -1,4 +1,4 @@
-import {postSchema, userSchema} from "models";
+import {PostSchema, UserSchema} from "shared-schemas";
 import mongoose from "mongoose";
 
 const likeDislikePost = async (req, res) => {
@@ -8,7 +8,7 @@ const likeDislikePost = async (req, res) => {
         const type = req.body.type; // 'likes' or 'disLikes'
         const oppositeType = type === 'likes' ? 'disLikes' : 'likes';
 
-        const user = await userSchema.findById(userId);
+        const user = await UserSchema.findById(userId);
 
         const userField = type === 'likes' ? 'LikedPosts' : 'disLikedPosts';
         const oppositeField = type === 'likes' ? 'disLikedPosts' : 'LikedPosts';
@@ -35,10 +35,10 @@ const likeDislikePost = async (req, res) => {
         }
 
         // Update user
-        await userSchema.findByIdAndUpdate(userId, userUpdateQuery);
+        await UserSchema.findByIdAndUpdate(userId, userUpdateQuery);
 
         // Update post
-        const updatedPost = await postSchema.findByIdAndUpdate(
+        const updatedPost = await PostSchema.findByIdAndUpdate(
             postId,
             { $inc: postIncQuery },
             { new: true }

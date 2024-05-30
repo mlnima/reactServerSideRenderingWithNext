@@ -1,10 +1,5 @@
-// import dotenv from 'dotenv';
-//
-// dotenv.config({path: '../../.env'});
 import {connectToDatabase, getLocalIP, shouldCompress} from 'custom-server-util';
-
 connectToDatabase('Express Server')
-
 import express from 'express';
 import bodyParser from 'body-parser';
 import fileUpload from 'express-fileupload';
@@ -23,10 +18,20 @@ import loggerMiddleware from "./middlewares/loggerMiddleware";
 
 import {settingSchema} from 'models';
 import * as process from "process";
-import syncAllIndexes from "./tools/syncModelsIndexes";
+// import syncAllIndexes from "./tools/syncModelsIndexes";
+import path from "path";
+import clientFileManagerMainRouter
+    from "./controllers/fileManagerControllers/clientControllers/fileManagerControllers/clientFileManagerMainRouter";
 
 // syncAllIndexes()
 
+declare global {
+    namespace Express {
+        interface Request {
+            userData?: { _id: string };
+        }
+    }
+}
 
 settingSchema.findOne({type: 'initialSettings'}).exec().then((initialSettings) => {
     if (initialSettings) {
@@ -35,11 +40,8 @@ settingSchema.findOne({type: 'initialSettings'}).exec().then((initialSettings) =
 })
 
 
-
-
-
-
 const server = express();
+const dev = process.env.NODE_ENV !== 'production';
 
 const runServer = () => {
 
@@ -97,12 +99,38 @@ const runServer = () => {
     server.get('/robots.txt', (req, res) => clientRobotTxtController(req, res));
     server.get('/alive', (req, res) => res.send('alive'));
     server.get('/manifest.json', cacheSuccesses, (req, res) => clientMainFestController(req, res));
-    //api routes
+    //----------------- Api routes handler-----------------------
     server.use('/api/admin', adminMainRouter);
     server.use('/api/v1', loggerMiddleware, clientMainRouter);
 
-    server.listen(process.env.API_SERVER_PORT || 3002, () => {
-        console.log(`process ${process.pid} : api server started at ${process.env.API_SERVER_PORT || 3002} `);
+    //----------------- File routes handlers-----------------------
+
+    const staticPath = dev ? './static' : '../static';
+    const publicPath = dev ? './public' : '../public';
+    const publicPathFileServer = dev ? '../api-server/public' : '../../api-server/public';
+    server.use('/static', express.static(path.join(__dirname, staticPath), {maxAge: "604800000"}));
+    server.use('/public', express.static(path.join(__dirname, publicPath), {maxAge: "604800000"}));
+    server.use('/public', express.static(path.join(__dirname, publicPathFileServer), {maxAge: "604800000"}));
+   server.use('/files/v1/', clientFileManagerMainRouter);
+
+
+
+    //----------------- Serving Production Dashboard React App------------------------
+    const dashboardAppPath = dev ? '../web-dashboard-app/build' : '../../web-dashboard-app/build';
+    const dashboardBuiltPath = path.join(__dirname, dashboardAppPath)
+    server.use('/static', express.static(`${dashboardBuiltPath}/static`, {maxAge: "604800000"}));
+
+    server.get('/dashboard', (req, res) => {
+        res.sendFile(`${dashboardBuiltPath}/index.html`);
+    })
+    server.get('/dashboard/*', (req, res) => {
+        res.sendFile(`${dashboardBuiltPath}/index.html`);
+    })
+    //---------------------------------------------------------------------------------
+
+    const serverPort = parseInt(process.env.API_SERVER_PORT || '3002')
+    server.listen(serverPort, () => {
+        console.log(`process ${process.pid} : api server started at ${serverPort} `);
     })
 }
 

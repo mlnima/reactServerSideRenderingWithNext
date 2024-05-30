@@ -29,6 +29,6 @@
     "uuid-apikey": "^1.5.3",
     "custom-server-util": "*",
     "custom-util": "*",
-    "models": "*"
+    "shared-schemas": "*"
   }
 }

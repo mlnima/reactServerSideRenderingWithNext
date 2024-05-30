@@ -1,5 +1,5 @@
 import {mongoIdValidator, removeEmptyProperties} from "custom-util";
-import {postFieldRequestForCards} from "data-structures";
+import {postFieldRequestForCards} from "data-structure";
 
 const APIServerUrl = process.env.NEXT_PUBLIC_API_SERVER_URL;
 import config from './config'

@@ -1,9 +1,9 @@
-import {messengerConversationSchema} from "models";
+import {MessengerConversationSchema} from "shared-schemas";
 
 const getAConversation = async (req, res) => {
     try {
 
-        const conversation = await messengerConversationSchema
+        const conversation = await MessengerConversationSchema
             .findOne({$and:[{ _id: { $in: req.query?.conversationId } },{ users: { $in: [req.userData._id] } }]})
             .select('users messages')
             .populate([

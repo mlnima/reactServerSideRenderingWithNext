@@ -4,8 +4,9 @@ import {rootTemplate, sitemapItemTemplate} from "../../_variables/sitemapVariabl
 import {searchSitemapsController} from "./searchSitemapController";
 import {metasSitemapsController} from "./metaSitemapController";
 import {pagesSitemapsController} from "./pageSitemapController";
+import {Request, Response} from "express";
 
-const monthsSitemapGenerator = async (allMonthsSinceStart) => {
+const monthsSitemapGenerator = async (allMonthsSinceStart:string[]) => {
     let finalXML = ''
     for await (const month of allMonthsSinceStart) {
         const fixedMonth = month.includes('/') ? month.replace('/', '-') : month;
@@ -52,7 +53,7 @@ const monthsSitemapGenerator = async (allMonthsSinceStart) => {
 }
 
 
-const getDates = (firstCreatedPostDate, lastUpdatedPostDate) => {
+const getDates = (firstCreatedPostDate:string, lastUpdatedPostDate:string) => {
     try {
         let dateArray = [];
         let beginDate = moment(new Date(firstCreatedPostDate + '/01'));
@@ -71,7 +72,7 @@ const getDates = (firstCreatedPostDate, lastUpdatedPostDate) => {
 };
 
 
-export const rootSitemap = async (req, res) => {
+export const rootSitemap = async (req:Request, res:Response) => {
 
     try {
         const oldestPost = await postSchema.findOne({status: 'published'})

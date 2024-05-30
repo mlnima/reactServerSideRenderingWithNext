@@ -1,6 +1,7 @@
 import {settingSchema} from 'models';
+import {Request,Response} from "express";
 
-const clientMainFestController = async (req, res) =>{
+const clientMainFestController = async (req:Request, res:Response) =>{
 
     try {
         const identityData = await settingSchema.findOne({type: 'identity'})

@@ -1,24 +1,24 @@
-import {chatroomMessageSchema, chatroomSchema, fileSchema, userSchema} from "models";
+import {ChatroomMessageSchema, ChatroomSchema, FileSchema, UserSchema} from "shared-schemas";
 import Store from "./store";
 
 
 const initializeChatroomsToStore = async ()=>{
-    const chatrooms = await chatroomSchema.find()
+    const chatrooms = await ChatroomSchema.find()
         .select(['name','messages'])
         .populate({
             path: 'messages',
-            model: chatroomMessageSchema,
+            model: ChatroomMessageSchema,
             options: {
                 sort: { createdAt: -1 },
                 limit: 20
             },
             populate: {
                 path: 'author',
-                model: userSchema,
+                model: UserSchema,
                 select: 'username profileImage role',
                 populate:{
                     path: 'profileImage',
-                    model: fileSchema,
+                    model: FileSchema,
                     select: 'filePath',
                 }
             }

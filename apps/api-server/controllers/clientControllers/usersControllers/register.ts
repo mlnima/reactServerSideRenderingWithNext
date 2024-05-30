@@ -5,6 +5,7 @@ import {emailValidator} from "custom-util";
 import {jwtTokenGenerator} from "custom-server-util";
 import nodemailer from "nodemailer";
 import * as process from "process";
+import {Request, Response} from "express";
 let transporter
 const shouldSendVerificationEmail = process.env.MAIL_SERVER === 'true' &&
     global.initialSettings?.membershipSettings?.verificationRequired;
@@ -28,13 +29,11 @@ if (shouldSendVerificationEmail){
 
 
 
-const register = (req, res) => {
-    console.log('console=> ',global.initialSettings?.membershipSettings)
+const register = (req:Request, res:Response) => {
 
     if (!global.initialSettings?.membershipSettings?.anyoneCanRegister) {
         return res.status(400).json({message: 'Registration Is Disabled'});
     }
-
 
     const {username, email, password, password2} = req.body;
 

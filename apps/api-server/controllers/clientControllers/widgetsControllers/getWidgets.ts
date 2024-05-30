@@ -1,7 +1,7 @@
 import {widgetSchema} from 'models';
-import {databaseSelectFieldsForPostCards} from "data-structures";
+import {databaseSelectFieldsForPostCards} from "data-structure";
 import {Widget} from "typescript-types";
-import postFieldRequestForCards from "data-structures/dist/src/postFieldRequestForCards";
+import {postFieldRequestForCards} from "data-structure";
 import {Request,Response} from "express";
 
 const getWidgets = async (req:Request, res:Response) => {

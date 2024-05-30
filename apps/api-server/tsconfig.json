@@ -6,7 +6,8 @@
     "outDir": "./dist",
     "rootDir": ".",
     "paths": {
-      "@_variables/*": ["_variables/*"]
+      "@_variables/*": ["_variables/*"],
+      "@env/*": ["../../.env"]
     },
     "lib": [
       "dom"

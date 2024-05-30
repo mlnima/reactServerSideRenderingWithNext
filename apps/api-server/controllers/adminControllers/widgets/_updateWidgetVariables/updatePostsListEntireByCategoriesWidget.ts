@@ -1,11 +1,11 @@
 import {Response} from "express";
-import {metaSchema, postSchema, widgetSchema} from "models";
+import {MetaSchema, PostSchema, WidgetSchema} from "shared-schemas";
 
 const updatePostsListEntireByCategoriesWidget = async (widgetData: any, widgetId: string, res: Response) => {
     try {
 
 
-        const categories = await metaSchema.find({
+        const categories = await MetaSchema.find({
             $and: [
                 {type: 'categories'},
                 {status: 'published'}
@@ -17,7 +17,7 @@ const updatePostsListEntireByCategoriesWidget = async (widgetData: any, widgetId
             .lean()
             .exec();
 
-        const categoriesCount = await metaSchema.countDocuments({
+        const categoriesCount = await MetaSchema.countDocuments({
             $and: [
                 {type: 'categories'},
                 {status: 'published'}
@@ -25,7 +25,7 @@ const updatePostsListEntireByCategoriesWidget = async (widgetData: any, widgetId
         }).exec()
 
         const fetchPostsForCategory = async (category: any) => {
-            const postsOfCurrentCategory = await postSchema.find({
+            const postsOfCurrentCategory = await PostSchema.find({
                 categories: category._id
             })
                 .select('title icon redirectLink')
@@ -33,7 +33,7 @@ const updatePostsListEntireByCategoriesWidget = async (widgetData: any, widgetId
                 .lean()
                 .exec();
 
-            const postsCount = await postSchema.countDocuments({
+            const postsCount = await PostSchema.countDocuments({
                 categories: category._id
             }).exec();
 
@@ -56,7 +56,7 @@ const updatePostsListEntireByCategoriesWidget = async (widgetData: any, widgetId
             }
         };
 
-        await widgetSchema.findByIdAndUpdate(widgetId, {data: widgetDateUpdate}, {new: true}).exec();
+        await WidgetSchema.findByIdAndUpdate(widgetId, {data: widgetDateUpdate}, {new: true}).exec();
 
         res.status(200).send({message: "Updated successfully"});
     } catch (error) {
@@ -69,12 +69,12 @@ export default updatePostsListEntireByCategoriesWidget;
 
 
 // import {Response} from "express";
-// import {metaSchema, postSchema, widgetSchema} from "models";
+// import {MetaSchema, postSchema, widgetSchema} from "shared-schemas";
 //
 // const updatePostsListEntireByCategoriesWidget = async (widgetData: any, widgetId: string, res: Response) => {
 //     try {
 //         let final = []
-//         const categories = await metaSchema.find({$and: [{type: 'categories'}, {status: 'published'}]})
+//         const categories = await MetaSchema.find({$and: [{type: 'categories'}, {status: 'published'}]})
 //             .select('name description status')
 //             .exec()
 //

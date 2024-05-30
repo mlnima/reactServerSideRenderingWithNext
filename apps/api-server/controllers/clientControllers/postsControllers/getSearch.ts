@@ -1,6 +1,6 @@
 import {postSchema, searchKeywordSchema} from 'models';
 import {metaSchema} from 'models';
-import {postFieldRequestForCards} from "data-structures";
+import {postFieldRequestForCards} from "data-structure";
 
 const locals = process.env.NEXT_PUBLIC_LOCALES.split(' ');
 

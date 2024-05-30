@@ -13,14 +13,14 @@ import Csr from "@components/global/Csr";
 import {usePathname, useRouter} from "next/navigation";
 import {setAlert} from "@store/reducers/globalStateReducer";
 import {removeUserDraftPost} from "@store/reducers/userReducers/userReducer";
-import {postTypes} from "data-structures";
-import videoQualities from "data-structures/dist/src/videoQualities";
+import {postTypes} from "data-structure";
+import {videoQualities} from "data-structure";
 import {clientAPIRequestDeletePostImages} from "api-requests";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrash} from "@fortawesome/free-solid-svg-icons/faTrash";
 import {faBinoculars, faFilePen, faFloppyDisk} from "@fortawesome/free-solid-svg-icons";
-import {UGCPostImagesLimit} from "data-structures";
-import {postStatuses} from "data-structures";
+import {UGCPostImagesLimit} from "data-structure";
+import {postStatuses} from "data-structure";
 
 
 interface IProps {

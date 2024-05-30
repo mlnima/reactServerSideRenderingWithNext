@@ -1,4 +1,4 @@
-import {postSchema, userSchema} from "models";
+import {PostSchema, UserSchema} from "shared-schemas";
 import mongoose from "mongoose";
 
 const updatePost = async (req, res) => {
@@ -14,12 +14,12 @@ const updatePost = async (req, res) => {
             res.status(403).json({message: 'You are not authorized to update this post', type: 'error'});
         }
 
-        const updatedPost = await postSchema.findOneAndUpdate({_id:postData?._id}, {...postData}, {
+        const updatedPost = await PostSchema.findOneAndUpdate({_id:postData?._id}, {...postData}, {
             new: true,
             upsert: true
         }).exec()
 
-        await userSchema.findByIdAndUpdate(req.userData._id, {$unset: {draftPost: 1}}).exec()
+        await UserSchema.findByIdAndUpdate(req.userData._id, {$unset: {draftPost: 1}}).exec()
 
         res.status(200).json({
             updatedPost,

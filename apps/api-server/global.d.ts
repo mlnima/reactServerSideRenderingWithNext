@@ -1,0 +1,3 @@
+interface RequestBody {
+    imagesData?: string;
+}

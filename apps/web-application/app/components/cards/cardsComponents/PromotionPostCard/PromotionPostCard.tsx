@@ -4,6 +4,7 @@ import CardTitle from "../../asset/CardTitle/CardTitle";
 import {Post} from "typescript-types";
 import '../postCard.scss'
 import Link from "next/link";
+import './PromotionPostCard.scss'
 const CardImageRendererUseClient = dynamic(() => import('../../asset/CardImageRenderer/CardImageRendererUseClient'))
 
 interface PromotionPostCardPropTypes {
@@ -29,6 +30,12 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
 
         return (
             <article className={`postCard postCardPromotion ${isSidebar && 'postCardSidebar'}`}>
+                <div className={`cardInfo`}>
+                    <Link href={postUrl} aria-label={`open ${post?.translations?.[locale as string]?.title ?? post?.title} details`}>
+                        <CardTitle title={post?.translations?.[locale as string]?.title ?? post?.title}
+                                   useLink={false}/>
+                    </Link>
+                </div>
                 <div className={'cardMedia'}>
 
                     <Link href={post?.redirectLink || '#'} className={'promotion-card-link-external'}
@@ -44,10 +51,7 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
                     </Link>
 
                 </div>
-                <div className={`cardInfo`}>
-                    <CardTitle title={post?.translations?.[locale as string]?.title ?? post?.title}
-                               url={postUrl}/>
-                </div>
+
             </article>
         )
     };

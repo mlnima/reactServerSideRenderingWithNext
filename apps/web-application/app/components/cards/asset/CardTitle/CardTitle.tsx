@@ -5,7 +5,7 @@ import './CardTitle.styles.scss';
 
 interface CardTitlePropTypes {
     title: string | undefined,
-    url: string | undefined,
+    url?: string | undefined,
     targetLink?: string,
     useLink?: boolean
 }

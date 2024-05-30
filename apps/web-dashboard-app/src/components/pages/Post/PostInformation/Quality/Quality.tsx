@@ -1,5 +1,5 @@
 import {useSelector} from "react-redux";
-import {videoQualities} from "data-structures";
+import {videoQualities} from "data-structure";
 import {FC} from "react";
 import {DashboardStore} from "typescript-types";
 

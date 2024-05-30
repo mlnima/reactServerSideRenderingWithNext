@@ -7,7 +7,8 @@ import {
     setMetaThumbnailsAndCountAction
 } from "@store/reducers/postsReducer";
 import {useAppDispatch} from "@store/hooks";
-import {dashboardAPIRequestSyncDuplicateMetas} from "api-requests";
+import {dashboardAPIRequestSyncDuplicateMetas,dashboardAPIRequestGenerateSiteMaps} from "api-requests";
+
 
 let StyledDiv = styled.div`
 
@@ -76,6 +77,9 @@ const Tools = () => {
             </button>
             <button className={'btn btn-primary'} onClick={() => dashboardAPIRequestSyncDuplicateMetas()}>
                 Sync Duplicate Metas
+            </button>
+            <button className={'btn btn-primary'} onClick={() => dashboardAPIRequestGenerateSiteMaps()}>
+                Generate Sitemaps
             </button>
         </StyledDiv>
     );

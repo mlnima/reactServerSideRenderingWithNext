@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React, {useMemo} from "react";
-import {postTypes} from "data-structures";
+import {postTypes} from "data-structure";
 import {convertVariableNameToName} from "custom-util";
 import {useSearchParams} from "react-router-dom";
 import paramsObjectGenerator from "../../../../variables/paramsObjectGenerator";

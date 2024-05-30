@@ -12,6 +12,7 @@ import {faFolder} from "@fortawesome/free-solid-svg-icons/faFolder";
 import {faSass} from "@fortawesome/free-brands-svg-icons/faSass";
 import {faCss3} from "@fortawesome/free-brands-svg-icons/faCss3";
 import {faFilePdf} from "@fortawesome/free-solid-svg-icons";
+import * as process from "process";
 
 const FileManagerAreaStyledDiv = styled.div`
   display: grid;
@@ -45,9 +46,8 @@ const FileManagerAreaStyledDiv = styled.div`
       &:hover {
         transform: scale(1.2);
       }
-
-      .file-manager-icons {
-        color: white;
+      
+      .meta-icon{
         width: 50px;
         height: 50px;
       }
@@ -75,7 +75,8 @@ const FileManagerArea: FC = () => {
             return (
                 <Fragment>
                     <img className='file-manager-image-item'
-                         src={fileManagerData.path.replace('.', '') + '/' + data.fileName}
+                         //src={fileManagerData.path.replace('.', '') + '/' + data.fileName}
+                         src={`${fileManagerData.path.replace('.', process.env?.NEXT_PUBLIC_API_SERVER_URL || '')}/${data.fileName}`}
                     />
                 </Fragment>
 
@@ -87,14 +88,14 @@ const FileManagerArea: FC = () => {
                 </video>
             )
         } else {
-            const logoToRender = `/asset/images/icons/${data.fileName.includes('.js') ? faFile :
+            const logoToRender = data.fileName.includes('.js') ? faFile :
                 data.fileName.includes('.env') ? faSliders :
                     !data.fileName.includes('.') ? faFolder :
                         data.fileName.includes('.scss') ? faSass :
-                        data.fileName.includes('.pdf') ? faFilePdf :
-                            data.fileName.includes('.css') ? faCss3 :
-                                faFile
-            }`
+                            data.fileName.includes('.pdf') ? faFilePdf :
+                                data.fileName.includes('.css') ? faCss3 :
+                                    faFile
+
             const logoColorToRender = data.fileName.includes('.js') ? '#efd81d' :
                 data.fileName.includes('.env') ? 'red' :
                     !data.fileName.includes('.') ? '#ffe8a0' :
@@ -124,7 +125,6 @@ const FileManagerArea: FC = () => {
 
 
     let renderDir = fileManagerData.files.map(item => {
-        console.log('item=> ',item)
         return (
             <div key={item} className='dirItem' onClick={() => onClickHandler(item)}>
                 <IconToRender fileName={item}/>

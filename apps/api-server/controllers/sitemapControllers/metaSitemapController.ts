@@ -6,8 +6,9 @@ import {
     metaXmlTemplateGenerator,
     urlSetXmlTemplate
 } from "../../_variables/sitemapVariables/xmlTemplateGenerators";
+import {Request, Response} from "express";
 
-export const metasSitemapsController = async (metaType)=>{
+export const metasSitemapsController = async (metaType:string)=>{
     let finalXML = ''
     const findMetaQuery = {$and:[{count: {$gt:0}},{status:'published'},{type:metaType}]}
     const metasCount = await metaSchema.countDocuments(findMetaQuery).exec();
@@ -15,7 +16,7 @@ export const metasSitemapsController = async (metaType)=>{
 
     if (metasCount<500){
         return sitemapItemTemplate(
-            // `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemaps/${metaType}-1.xml`,
+            // `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemapsAndStaticAsset/${metaType}-1.xml`,
             `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemap-tax-${metaType}-1.xml`,
             toDay.toISOString()
         )
@@ -35,7 +36,7 @@ export const metasSitemapsController = async (metaType)=>{
 
         for (const currentPage of rangeOfSitemaps){
             finalXML += sitemapItemTemplate(
-                // `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemaps/${metaType}-${currentPage+1}.xml`,
+                // `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemapsAndStaticAsset/${metaType}-${currentPage+1}.xml`,
                 `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemap-tax-${metaType}-${currentPage+1}.xml`,
                 lastUpdate.toISOString()
             )
@@ -46,7 +47,7 @@ export const metasSitemapsController = async (metaType)=>{
 }
 
 
-export const metaSitemapController= async (req,metaType,metaUrlFormat)=>{
+export const metaSitemapController= async (req:Request,metaType:string,metaUrlFormat:string)=>{
     try {
         const findMetaQuery = {$and:[{count: {$gt:0}},{status:'published'},{type:metaType}]}
         const cleanParams = req.params['0'].replace('.xml', '')
@@ -60,7 +61,7 @@ export const metaSitemapController= async (req,metaType,metaUrlFormat)=>{
 }
 
 
-export const categories = async (req, res) => {
+export const categories = async (req:Request, res:Response) => {
     try {
         res.set('Content-Type', 'text/xml');
         res.send(await metaSitemapController(req,'categories','category'))
@@ -71,7 +72,7 @@ export const categories = async (req, res) => {
 }
 
 
-export const tags = async (req, res) => {
+export const tags = async (req:Request, res:Response) => {
     try {
         res.set('Content-Type', 'text/xml');
         res.send(await metaSitemapController(req,'tags','tag'))
@@ -81,7 +82,7 @@ export const tags = async (req, res) => {
     }
 }
 
-export const actors = async (req, res) => {
+export const actors = async (req:Request, res:Response) => {
     try {
         res.set('Content-Type', 'text/xml');
         res.send(await metaSitemapController(req,'actors','actor'))

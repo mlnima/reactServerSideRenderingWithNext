@@ -4,7 +4,7 @@ import {connectToDatabase} from 'custom-server-util';
 connectToDatabase()
 const {Worker, parentPort, workerData} = require('worker_threads');
 const sharp = require('sharp');
-const postSchema = require("models");
+const PostSchema = require("shared-schemas");
 const updateSaveMetas = require("../_variables/adminVariables/_updateSaveMetas");
 const download = require('image-downloader')
 const fsExtra = require("fs-extra");
@@ -70,7 +70,7 @@ const savePostWithDuplicateContent = async (newPost, downloadImageContent) => {
             actors: newPost.actors ? await updateSaveMetas(newPost.actors) : [],
             mainThumbnail: downloadImageContent ? await imageDownloader(newPost) : newPost.mainThumbnail
         };
-        const newPostDataToSave = new postSchema(newPostWithMeta)
+        const newPostDataToSave = new PostSchema(newPostWithMeta)
         await newPostDataToSave.save((err, createdPost) => {
             if (err) {
                 parentPort.postMessage({message: 'Something Went Wrong While Saving! ' + newPost.title})
@@ -86,7 +86,7 @@ const savePostWithDuplicateContent = async (newPost, downloadImageContent) => {
 const savePostIfThereIsNoDuplicate = async (newPost, downloadImageContent) => {
 
     try {
-        await postSchema.find({$or: [{title: newPost.title}]})
+        await PostSchema.find({$or: [{title: newPost.title}]})
             .exec()
             .then(async posts => {
                 try {
@@ -102,7 +102,7 @@ const savePostIfThereIsNoDuplicate = async (newPost, downloadImageContent) => {
                             mainThumbnail: downloadImageContent ? await imageDownloader(newPost) : newPost.mainThumbnail
                         }
 
-                        const newPostDataToSave = await new postSchema(editedNewPost);
+                        const newPostDataToSave = await new PostSchema(editedNewPost);
 
                         await newPostDataToSave.save((err, createdPost) => {
                             if (err) {
@@ -191,7 +191,7 @@ if (Array.isArray(workerData?.newPost)){
 //                     actors: index.actors ? await metasSaver(index.actors) : [],
 //                     mainThumbnail: filePath.replace('./static/', '/static/')
 //                 }
-//                 const newPostDataToSave = new postSchema(editedNewPost);
+//                 const newPostDataToSave = new PostSchema(editedNewPost);
 //                 newPostDataToSave.save().then(savedPostData => {
 //                     res.json({message: 'post ' + index.title + ' has been saved'})
 //                 }).catch(err => {

@@ -45,6 +45,7 @@ import {IMessengerConversation} from "./src/messengerTypes/IMessengerConversatio
 import {IMessengerConversationMessage} from "./src/messengerTypes/IMessengerConversationMessage";
 import {MediaConnectionState} from "./src/storeTypes/MediaConnectionState";
 import {IClearCache} from "./src/clearCaches";
+import './src/env'
 
 
 export type {

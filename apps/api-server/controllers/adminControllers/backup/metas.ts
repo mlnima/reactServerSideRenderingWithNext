@@ -1,4 +1,4 @@
-import {metaSchema} from "models";
+import {MetaSchema} from "shared-schemas";
 import fs from "fs";
 import fsExtra from "fs-extra";
 import path from "path";
@@ -12,10 +12,10 @@ export const findMetasAndCreateFile = async (metaType: string, fields: string,li
         const fieldsQuery = fields.map(field => `-${field}`).join(' ')
         //@ts-ignore
         const metaTypeQuery = metaType ? {$and: [{type: metaType}]} : {}
-        const metas = await metaSchema.find(metaTypeQuery).select(fieldsQuery).limit(limit || -1).sort('-count').exec()
+        const metas = await MetaSchema.find(metaTypeQuery).select(fieldsQuery).limit(limit || -1).sort('-count').exec()
         const filePath = `/public/backups/${metaType}.json`
         const fileAbsolutePath = path.join(__dirname + `../../../../${filePath}`)
-        await fs.writeFileSync(
+        fs.writeFileSync(
             fileAbsolutePath,
             JSON.stringify(metas),
             {

@@ -26,6 +26,7 @@
     "craco-alias": "^3.0.1",
     "css-loader": "^6.5.1",
     "css-minimizer-webpack-plugin": "^4.2.2",
+    "data-structure": "*",
     "dotenv": "^16.0.3",
     "dotenv-expand": "^10.0.0",
     "dotenv-webpack": "^8.0.1",

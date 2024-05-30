@@ -12,7 +12,7 @@ import PostsCardsRenderer from "@components/cards/CardsRenderer/PostsCardsRender
 import {Post} from "typescript-types";
 import {loading} from "@store/reducers/globalStateReducer";
 import ProfileImageWithEditing from "../PrfileImageWithEditing/ProfileImageWithEditing";
-import {postStatuses} from "data-structures";
+import {postStatuses} from "data-structure";
 import {capitalizeFirstLetter} from "custom-util";
 
 interface IProps {

@@ -4,6 +4,7 @@ import {
     sitemapItemTemplate,
     urlSetXmlTemplate
 } from "../../_variables/sitemapVariables/xmlTemplateGenerators";
+import {Request, Response} from "express";
 
 export const searchSitemapsController= async ()=>{
     try {
@@ -47,7 +48,7 @@ export const searchSitemapsController= async ()=>{
     }
 }
 
-export const searchSitemapController = async (req,res)=>{
+export const searchSitemapController = async (req:Request, res:Response)=>{
 
     try {
         const cleanParams = req.params['0'].replace('.xml', '')

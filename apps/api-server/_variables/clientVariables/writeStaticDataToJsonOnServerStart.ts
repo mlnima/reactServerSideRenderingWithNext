@@ -1,5 +1,5 @@
 import {widgetSchema,settingSchema} from 'models';
-import {databaseSelectFieldsForPostCards} from "data-structures";
+import {databaseSelectFieldsForPostCards} from "data-structure";
 import fs from "fs";
 import path from "path";
 import createFileIfDoesntExist from "../serverGlobalVariable/createFileIfDoesntExist";

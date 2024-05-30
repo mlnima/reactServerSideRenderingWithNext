@@ -147,11 +147,12 @@ const createSMTPServer = (port) => {
 }
 
 
-if (process.env.MAIL_SERVER) {
+if (process.env.MAIL_SERVER === 'true') {
     const ports = [25, 587];
     ports.forEach(port => createSMTPServer(port));
 } else {
     console.log('MAIL SERVER IS DISABLED')
+    process.exit(1);
 }
 
 

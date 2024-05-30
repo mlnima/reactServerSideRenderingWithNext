@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import styled from "styled-components";
 import {DashboardStore} from "typescript-types";
-import {postTypes} from "data-structures";
+import {postTypes} from "data-structure";
 import {convertVariableNameToName} from "custom-util";
 import {useAppDispatch} from "@store/hooks";
 import {useSelector} from "react-redux";

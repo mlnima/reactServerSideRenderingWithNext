@@ -26,7 +26,7 @@
     "tsconfig": "*",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.9.0",
-    "models": "*",
+    "shared-schemas": "*",
     "typescript": "^5.1.6",
     "fs-extra": "^11.1.0"
   }

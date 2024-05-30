@@ -11,6 +11,7 @@ import adminDataScrappersRouter from './adminDataScrappersRouter';
 import adminOrdersRouter from './adminOrdersRouter';
 import chatroomsRouter from "./chatrooms/chatroomsRouter";
 import backupRouter from "./backup/backupRouter";
+import sitemapsAndStaticAssetRouter from "./sitemapsAndStaticAsset/sitemapsAndStaticAssetRouter";
 
 const router = Router();
 
@@ -26,5 +27,6 @@ router.use('/pages',adminPagesRouter);
 router.use('/forms',adminFormsRouter);
 router.use('/scrapper',adminDataScrappersRouter);
 router.use('/orders',adminOrdersRouter);
+router.use('/sitemapsAndStaticAsset',sitemapsAndStaticAssetRouter);
 
 export default router
