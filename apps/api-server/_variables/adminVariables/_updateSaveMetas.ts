@@ -1,4 +1,4 @@
-import {metaSchema,postSchema} from 'models';
+import {MetaSchema,PostSchema} from 'shared-schemas';
 
 const _updateSaveMetas = async (metas) => {
     const metasData = metas ?? []
@@ -13,9 +13,9 @@ const _updateSaveMetas = async (metas) => {
                     status:'published',
                 }
                 const findQuery = {$and:[{name: meta.name},{type: meta.type}]}
-                await metaSchema.findOneAndUpdate(findQuery, {$set:{...metaData}},{new:true, upsert: true}).exec().then(async meta=>{
-                    const count = await postSchema.countDocuments({$and:[{[meta.type]: meta._id},{status:'published'}]}).exec()
-                    await metaSchema.findOneAndUpdate({name: meta.name}, {$set:{count}}).exec()
+                await MetaSchema.findOneAndUpdate(findQuery, {$set:{...metaData}},{new:true, upsert: true}).exec().then(async meta=>{
+                    const count = await PostSchema.countDocuments({$and:[{[meta.type]: meta._id},{status:'published'}]}).exec()
+                    await MetaSchema.findOneAndUpdate({name: meta.name}, {$set:{count}}).exec()
                     finalData = [...finalData, meta._id]
                 })
             }

@@ -1,6 +1,6 @@
 import {AxiosErrorTypes} from "./src/axiosTypes/AxiosErrorTypes";
 import {AxiosResponseTypes} from "./src/axiosTypes/AxiosResponseTypes";
-import {Chatroom} from "./src/Chatroom/Chatroom";
+import {Chatroom,ChatroomRaw} from "./src/Chatroom/Chatroom";
 import {ChatroomMessage} from "./src/Chatroom/ChatroomMessage";
 import {DesignSettings} from "./src/settings/DesignSettings";
 import {IdentitySettings} from "./src/settings/IdentitySettings";
@@ -46,6 +46,7 @@ import {IMessengerConversationMessage} from "./src/messengerTypes/IMessengerConv
 import {MediaConnectionState} from "./src/storeTypes/MediaConnectionState";
 import {IClearCache} from "./src/clearCaches";
 import './src/env'
+import './src/global'
 
 
 export type {
@@ -69,6 +70,7 @@ export type {
     IMenuItem,
     Chatroom,
     ChatroomMessage,
+    ChatroomRaw,
     InitialSettings,
     DesignSettings,
     IdentitySettings,

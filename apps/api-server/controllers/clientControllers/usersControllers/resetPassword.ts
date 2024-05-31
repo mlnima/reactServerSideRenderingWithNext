@@ -1,10 +1,10 @@
 import bcrypt from 'bcryptjs';
-import {userSchema} from 'models';
+import {UserSchema} from 'shared-schemas';
 
 const resetPassword = (req, res) => {
     const userId = req.userData._id
     if (!userId) return res.status(403).json({message:'Unauthorized Access'})
-    userSchema.findById(userId).exec().then(userData => {
+   UserSchema.findById(userId).exec().then(userData => {
         bcrypt.compare(req.body.data.password, userData.password, async function (err, isCorrect) {
             if (err || isCorrect === false) {
                 res.status(403).json({message:'Wrong Password'})
@@ -15,7 +15,7 @@ const resetPassword = (req, res) => {
                             console.log(err)
                             res.status(400).json({message:'Something went wrong please try again later'})
                         } else if (hash) {
-                            userSchema.findByIdAndUpdate(userId, { $set: { password: hash } },{new:true}).exec().then(()=>{
+                            UserSchema.findByIdAndUpdate(userId, { $set: { password: hash } },{new:true}).exec().then(()=>{
                                 res.json({ message: 'Your Password Has Been Changed' });
                             })
                         }

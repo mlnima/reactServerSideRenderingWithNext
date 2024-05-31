@@ -1,4 +1,4 @@
-import {widgetSchema} from 'models';
+import {WidgetSchema} from 'shared-schemas';
 import updatePostsWidget from "./_updateWidgetVariables/updatePostsWidget";
 import updateMetasWidget from "./_updateWidgetVariables/updateMetasWidget";
 import updatePostsListEntireByCategoriesWidget from "./_updateWidgetVariables/updatePostsListEntireByCategoriesWidget";
@@ -15,7 +15,7 @@ export const updateWidget = async (req, res) => {
         } else if (widgetData.type === 'postsListEntireByCategories') {
             await updatePostsListEntireByCategoriesWidget(widgetData,widgetId,res)
         } else {
-            widgetSchema.findByIdAndUpdate(req.body?.widgetData._id, {data: widgetData}, {new: true}).exec().then(updatedWidget => {
+            WidgetSchema.findByIdAndUpdate(req.body?.widgetData._id, {data: widgetData}, {new: true}).exec().then(updatedWidget => {
                 res.json({updatedWidget})
             }).catch(err => {
                 console.log(err)

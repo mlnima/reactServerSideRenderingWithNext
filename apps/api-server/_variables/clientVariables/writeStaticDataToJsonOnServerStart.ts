@@ -1,4 +1,4 @@
-import {widgetSchema,settingSchema} from 'models';
+import {WidgetSchema,SettingSchema} from 'shared-schemas';
 import {databaseSelectFieldsForPostCards} from "data-structure";
 import fs from "fs";
 import path from "path";
@@ -23,7 +23,7 @@ export const writeStaticWidgetsToJson = async ()=>{
         ]
 
         for await (const position of staticWidgets){
-            const widgetsInCurrentPosition = await widgetSchema.find({'data.position':position}).populate(populateWidgetsQuery).exec()
+            const widgetsInCurrentPosition = await WidgetSchema.find({'data.position':position}).populate(populateWidgetsQuery).exec()
             const pathToSave = path.join(__dirname,`../../../public/asset/jsons/widgets/${position}.json`)
             const dataToSave = [...widgetsInCurrentPosition]
             await createFileIfDoesntExist(pathToSave).then(()=>{
@@ -44,7 +44,7 @@ export const writeStaticWidgetsToJson = async ()=>{
 
 export const writeStaticSettingsToJson = async ()=>{
     for await (const setting of staticSettings){
-        const settingsInCurrentPosition = await settingSchema.findOne({type: setting}).exec()
+        const settingsInCurrentPosition = await SettingSchema.findOne({type: setting}).exec()
         const pathToSave = path.join(__dirname,`../../../public/asset/jsons/settings/${setting}.json`)
 
         await createFileIfDoesntExist(pathToSave).then(()=>{

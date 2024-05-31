@@ -1,8 +1,8 @@
-import {pageSchema} from 'models';
+import {PageSchema} from 'shared-schemas';
 
 const adminGetPageData = async (req, res) =>{
     try {
-        await  pageSchema.findById(req.body._id).exec().then(pageData=>{
+        await  PageSchema.findById(req.body._id).exec().then(pageData=>{
             res.json({pageData,error:false})
         }).catch(err=>{
             res.status(404).json({message:'Not Found'})

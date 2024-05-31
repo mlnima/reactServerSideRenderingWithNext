@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import {  userSchema } from 'models';
+import {  UserSchema } from 'shared-schemas';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 
@@ -16,7 +16,7 @@ const userLogin = async (req: ILoginRequest, res: Response) => {
     try {
         const { username, password } = req.body;
 
-        const user: any | null = await userSchema.findOne({ username }).populate({
+        const user: any | null = await UserSchema.findOne({ username }).populate({
             path: 'profileImage',
             select: 'filePath',
             model: 'file',

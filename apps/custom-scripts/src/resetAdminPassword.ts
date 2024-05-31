@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 dotenv.config({path: '../../.env'});
 import {connectToDatabase} from 'custom-server-util';
 connectToDatabase().finally()
-import {userSchema} from 'models';
+import {UserSchema} from 'shared-schemas';
 import bcrypt from 'bcryptjs';
 import defaultAdminAccountData from "../asset/defaultAdminAccountData";
 
@@ -12,7 +12,7 @@ const resetAdminPassword = async ()=>{
             console.log(error)
             process.exit()
         } else if (hash) {
-            userSchema.findOneAndUpdate({username:'dashboard'},{$set:{password:hash}}).then(()=>{
+            UserSchema.findOneAndUpdate({username:'dashboard'},{$set:{password:hash}}).then(()=>{
                 console.log('dashboard Password Reset Was successfully')
             }).catch((error)=>{
                 console.log(error)

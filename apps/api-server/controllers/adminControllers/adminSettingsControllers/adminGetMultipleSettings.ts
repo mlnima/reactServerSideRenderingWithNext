@@ -1,4 +1,4 @@
-import {settingSchema} from 'models';
+import {SettingSchema} from 'shared-schemas';
 
 const adminGetMultipleSettings = async (req, res) => {
     try {
@@ -9,7 +9,7 @@ const adminGetMultipleSettings = async (req, res) => {
         for await (const setting of requestedSettings){
             responseData = {
                 ...responseData,
-                [setting]: await settingSchema.findOne({type: setting}).exec() || {}
+                [setting]: await SettingSchema.findOne({type: setting}).exec() || {}
             }
         }
 

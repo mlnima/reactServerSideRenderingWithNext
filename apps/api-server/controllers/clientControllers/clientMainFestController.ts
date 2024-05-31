@@ -1,10 +1,10 @@
-import {settingSchema} from 'models';
+import {SettingSchema} from 'shared-schemas';
 import {Request,Response} from "express";
 
 const clientMainFestController = async (req:Request, res:Response) =>{
 
     try {
-        const identityData = await settingSchema.findOne({type: 'identity'})
+        const identityData = await SettingSchema.findOne({type: 'identity'})
         const manifestJsonData = {
             "theme_color": identityData.data.themeColor || '#000',
             "background_color": identityData.data.themeColor || '#000',

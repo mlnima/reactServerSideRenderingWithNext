@@ -1,5 +1,5 @@
 import {Request, Response} from 'express';
-import {userSchema} from 'models';
+import {UserSchema} from 'shared-schemas';
 
 interface QueryParams {
     username: string;
@@ -16,10 +16,10 @@ const getUserPageData = async (req: Request, res: Response) => {
         const selectedFields = fields ? [...new Set([...defaultFields, ...fields])] : defaultFields;
 
         const userWhoRequestItData = userWhoRequestIt
-            ? await userSchema.findById(userWhoRequestIt).lean().select('blockList _id').exec()
+            ? await UserSchema.findById(userWhoRequestIt).lean().select('blockList _id').exec()
             : null;
 
-        const userData = await userSchema
+        const userData = await UserSchema
             .findOne({username})
             .lean()
             .select(selectedFields.join(' '))

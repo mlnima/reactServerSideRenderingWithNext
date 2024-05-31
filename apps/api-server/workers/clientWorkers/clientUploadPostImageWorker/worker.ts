@@ -8,7 +8,12 @@ dotenv.config();
 
 connectToDatabase('client upload post image :').finally();
 
-const worker = async (workerData) => {
+interface IProps{
+    postId:string,
+    imageIndex:number
+}
+
+const worker = async (workerData:IProps) => {
     try {
         const dev = process.env.NODE_ENV !== 'production';
         const tempPathAddress = `../../../../${dev ? '' : '../'}api-server/public/uploads/posts/${workerData.postId}/temp`
@@ -17,12 +22,13 @@ const worker = async (workerData) => {
         const targetPath = path.join(__dirname, targetPathAddress)
         sharp.cache({files:0})
         return await sharp(tempPath).webp({lossless: true})
+            //@ts-ignore
             .resize({width: 640, height: 360, fit: sharp.fit.contain})
             .toFile(targetPath)
             .then(async () => {
                 sharp.cache({files:0})
                 try {
-                    await fs.unlinkSync(tempPath)
+                    fs.unlinkSync(tempPath);
                 } catch (error) {
                     console.log("tempPath remove file", error)
                 }

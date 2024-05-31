@@ -1,4 +1,4 @@
-import {metaSchema} from 'models';
+import {MetaSchema} from 'shared-schemas';
 
 const adminUpdateMeta = async (req, res) => {
     try {
@@ -9,9 +9,9 @@ const adminUpdateMeta = async (req, res) => {
         }
 
         if (metaData._id) {
-            await metaSchema.syncIndexes();
+            await MetaSchema.syncIndexes();
             try {
-                const updatedMeta = await metaSchema.findByIdAndUpdate(
+                const updatedMeta = await MetaSchema.findByIdAndUpdate(
                     metaData._id,
                     {...metaData},
                     {new: true}
@@ -25,7 +25,7 @@ const adminUpdateMeta = async (req, res) => {
         } else {
             try {
 
-                const metaToSave = new metaSchema(metaData);
+                const metaToSave = new MetaSchema(metaData);
                 const savedMeta = await metaToSave.save();
                 return res.json({updated: savedMeta, message: 'updated'});
             } catch (err) {
@@ -108,7 +108,7 @@ export default adminUpdateMeta;
 // }
 
 
-// import {metaSchema} from 'models';
+// import {metaSchema} from 'shared-schemas';
 //
 // const adminUpdateMeta = async (req, res) => {
 //     try {

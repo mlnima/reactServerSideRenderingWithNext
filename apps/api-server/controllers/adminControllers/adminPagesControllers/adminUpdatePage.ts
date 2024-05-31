@@ -1,8 +1,8 @@
-import {pageSchema} from 'models';
+import {PageSchema} from 'shared-schemas';
 
 const adminUpdatePage = (req, res) =>{
     const updateData = req.body.pageData
-    pageSchema.findByIdAndUpdate(updateData._id,updateData, {new: true}).exec().then(updated=>{
+    PageSchema.findByIdAndUpdate(updateData._id,updateData, {new: true}).exec().then(updated=>{
         res.json({updated})
     })
 }

@@ -15,7 +15,7 @@ const PostSchema = require('./src/post')
 const SearchKeywordSchema = require('./src/searchKeyword')
 const SettingSchema = require('./src/setting')
 const UserSchema = require('./src/user')
-const WidgetDataSchema = require('./src/widget')
+const WidgetSchema = require('./src/widget')
 
 
 module.exports = {
@@ -36,5 +36,5 @@ module.exports = {
     SearchKeywordSchema,
     SettingSchema,
     UserSchema,
-    WidgetDataSchema
+    WidgetSchema
 };

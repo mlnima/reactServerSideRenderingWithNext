@@ -1,8 +1,8 @@
-import {widgetSchema} from 'models';
+import {WidgetSchema} from 'shared-schemas';
 
 const createWidget = (req, res) =>{
     const data = req.body.data;
-    let dataToSave = new widgetSchema({data})
+    let dataToSave = new WidgetSchema({data})
     dataToSave?.save((err,newWidgetData)=>{
         if (err){
             res.end({newWidgetData})

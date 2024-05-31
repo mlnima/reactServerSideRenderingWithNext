@@ -1,4 +1,4 @@
-import {formSchema} from 'models';
+import {FormSchema} from 'shared-schemas';
 
 const getForms = async (req, res) => {
     
@@ -8,8 +8,8 @@ const getForms = async (req, res) => {
         const page = req.query.page || 1;
         let sortQuery = (req.query.sort === 'latest' || !req.query.sort ) ? {_id:-1} : {[req.query.sort]: -1}
         //@ts-ignore
-        const forms = await formSchema.find().limit(size).sort(sortQuery).exec();
-        const totalCount = await formSchema.countDocuments({}).exec()
+        const forms = await FormSchema.find().limit(size).sort(sortQuery).exec();
+        const totalCount = await FormSchema.countDocuments({}).exec()
 
         res.json({forms, error: false, totalCount})
     }catch (error) {

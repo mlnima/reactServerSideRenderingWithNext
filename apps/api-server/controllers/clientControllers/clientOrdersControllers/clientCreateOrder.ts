@@ -1,9 +1,9 @@
-import {orderSchema} from 'models';
+import {OrderSchema} from 'shared-schemas';
 
 const clientCreateOrder = (req, res) => {
 
     try {
-        const orderData = new orderSchema(req.body.data)
+        const orderData = new OrderSchema(req.body.data)
         orderData.save().then(createdOrder=>{
             res.json({createdOrder,error:false});
         }).catch(err=>{

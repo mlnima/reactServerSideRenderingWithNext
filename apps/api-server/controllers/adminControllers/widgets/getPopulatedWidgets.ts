@@ -1,10 +1,10 @@
-import {widgetSchema} from 'models';
+import {WidgetSchema} from 'shared-schemas';
 import {databaseSelectFieldsForPostCards} from "data-structure";
 import {Widget} from "typescript-types";
 
 const getPopulatedWidgets = async (req, res) => {
     try {
-        const widgets = await widgetSchema.find({}).populate([
+        const widgets = await WidgetSchema.find({}).populate([
             {
                 model: 'meta',
                 path: 'data.uniqueData.metaData'

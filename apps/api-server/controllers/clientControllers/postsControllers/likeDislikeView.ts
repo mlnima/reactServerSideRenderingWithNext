@@ -1,7 +1,7 @@
-import {postSchema} from 'models';
+import {PostSchema} from 'shared-schemas';
 
 const likeDislikeView = (req, res) => {
-    postSchema.findByIdAndUpdate(
+    PostSchema.findByIdAndUpdate(
         req.body.id,
         {$inc: {[req.body.type]: 1}},
         {new: true,timestamps: false

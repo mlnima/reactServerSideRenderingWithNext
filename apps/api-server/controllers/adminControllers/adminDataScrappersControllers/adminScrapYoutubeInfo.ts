@@ -1,11 +1,11 @@
-import {settingSchema} from 'models';
+import {SettingSchema} from 'shared-schemas';
 import simpleYoutubeApiLib from 'simple-youtube-api';
 
 const adminScrapYoutubeInfo = async (req, res) => {
     const url = req.body.url
 
     let finalData = []
-    const findYoutubeApiKey = await settingSchema.findOne({type:'youtubeApiKey'}).exec()
+    const findYoutubeApiKey = await SettingSchema.findOne({type:'youtubeApiKey'}).exec()
     const youtubeApiKey = findYoutubeApiKey.data.apiKey
     const youtube = new simpleYoutubeApiLib(youtubeApiKey);
     if(url.includes('/channel/')){

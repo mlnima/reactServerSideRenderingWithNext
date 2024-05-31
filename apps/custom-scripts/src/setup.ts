@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 dotenv.config({path: '../../.env'});
 import {connectToDatabase} from 'custom-server-util';
 
-import {settingSchema, widgetSchema, userSchema,postSchema} from 'models';
+import {SettingSchema, WidgetSchema, UserSchema,PostSchema} from 'shared-schemas';
 import bcrypt from 'bcryptjs';
 import uuidAPIKey from 'uuid-apikey';
 import defaultIdentitySettings from "../asset/defaultIdentitySettings";
@@ -14,7 +14,7 @@ import defaultWidgets from "../asset/defaultWidgets";
 import {isEmptyObject} from 'custom-util'
 
 const createHelloWorldPost = async ()=>{
-    const postDataToSave = new postSchema(defaultHelloWorldPost)
+    const postDataToSave = new PostSchema(defaultHelloWorldPost)
     postDataToSave.save().catch(err => {
         console.log(err)
         console.log('Error on HelloWorldPost')
@@ -23,7 +23,7 @@ const createHelloWorldPost = async ()=>{
 const setWidgets = async () => {
     try {
         for await (const widget of defaultWidgets) {
-            const dataToSave = new widgetSchema(widget)
+            const dataToSave = new WidgetSchema(widget)
             dataToSave.save().catch(err => {
                 console.log(err)
                 console.log('Error on widget set')
@@ -52,13 +52,13 @@ const setSettings = async () => {
         //     await siteDesignToSave.save(error => console.log(error))
         // }
 
-        const identityToSave = new settingSchema(defaultIdentitySettings)
+        const identityToSave = new SettingSchema(defaultIdentitySettings)
         await identityToSave.save(error => console.log(error || ''))
 
-        const siteDesignToSave = new settingSchema(defaultDesignSettings)
+        const siteDesignToSave = new SettingSchema(defaultDesignSettings)
         await siteDesignToSave.save(error => console.log(error || ''))
 
-        const membershipSettings = new settingSchema(defaultMembershipSettings)
+        const membershipSettings = new SettingSchema(defaultMembershipSettings)
         await membershipSettings.save(error => console.log(error || ''))
 
     } catch (error) {
@@ -83,7 +83,7 @@ const createAdminAccount = async () => {
                         API_KEY: APIKey.apiKey,
                         uuid: APIKey.uuid
                     }
-                    const adminDataToSave = new userSchema(adminAccountData)
+                    const adminDataToSave = new UserSchema(adminAccountData)
                     adminDataToSave.save()
                     console.log('admin account created , username: Admin , password: Admin')
                 }

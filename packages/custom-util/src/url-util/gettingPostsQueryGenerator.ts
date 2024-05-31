@@ -28,7 +28,7 @@ const gettingPostsQueryGenerator  = (queryData: NextRouter['query'], metaIdData:
 
     const queries = new URLSearchParams(getPostsData as {}).toString()
 
-    return `?${queries}&${postFieldRequestForCards.map(f => 'field=' + f).join('&')}`
+    return `?${queries}&${postFieldRequestForCards.map((f:string) => 'field=' + f).join('&')}`
 
 }
 

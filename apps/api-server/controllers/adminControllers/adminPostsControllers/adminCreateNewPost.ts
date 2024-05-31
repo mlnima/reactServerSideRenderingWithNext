@@ -1,4 +1,4 @@
-import {postSchema} from 'models';
+import {PostSchema} from 'shared-schemas';
 import updateSaveMetas from '../../../_variables/adminVariables/_updateSaveMetas';
 
 const adminCreateNewPost = async (req, res) => {
@@ -10,7 +10,7 @@ const adminCreateNewPost = async (req, res) => {
             categories: newPost.categories ? await updateSaveMetas(newPost.categories) : [],
             actors: newPost.actors ? await updateSaveMetas(newPost.actors) : []
         }
-        const newPostDataToSave = new postSchema(editedNewPost);
+        const newPostDataToSave = new PostSchema(editedNewPost);
         newPostDataToSave.save().then(savedPostData => {
             res.json({savedPostData, message: 'Post Has Been Saved'});
         }).catch(error => {

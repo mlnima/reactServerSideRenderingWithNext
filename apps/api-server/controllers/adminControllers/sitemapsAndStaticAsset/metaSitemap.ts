@@ -1,4 +1,4 @@
-import {metaSchema} from 'models';
+import {MetaSchema} from 'shared-schemas';
 import {sitemapItemTemplate, metaXmlTemplateGenerator, urlSetXmlTemplate} from "./xmlTemplateGenerators";
 import fs from "fs";
 import {convertMetasTypeToSingular} from 'custom-util';
@@ -7,7 +7,7 @@ export const metasSitemapsLinkForRoot = async (metaType:string) => {
     try {
         let finalXML = ''
         const findMetaQuery = {$and: [{count: {$gt: 0}}, {status: 'published'}, {type: metaType}]}
-        const metasCount = await metaSchema.countDocuments(findMetaQuery).exec();
+        const metasCount = await MetaSchema.countDocuments(findMetaQuery).exec();
         const currentDayDate = new Date();
         const maxPage = metasCount <= 500 ? 1 : Math.ceil(metasCount / 500)
         const amountOfPages = maxPage > 1 ? [...Array(maxPage).keys()] : [0]
@@ -33,13 +33,13 @@ export const metaSitemapGenerator = async (baseOutputPath:string) => {
 
         for await (const metaType of metaTypes) {
             const findMetaQuery = {$and: [{count: {$gt: 0}}, {status: 'published'}, {type: metaType}]}
-            const metasCount = await metaSchema.countDocuments(findMetaQuery).exec();
+            const metasCount = await MetaSchema.countDocuments(findMetaQuery).exec();
             const maxPage = metasCount <= 500 ? 1 : Math.ceil(metasCount / 500)
             const amountOfPages = maxPage > 1 ? [...Array(maxPage).keys()] : [0]
 
             for await (const currentPage of amountOfPages) {
                 const page = currentPage + 1
-                const metas = await metaSchema.find(findMetaQuery).limit(500).skip(500 * (page - 1)).exec()
+                const metas = await MetaSchema.find(findMetaQuery).limit(500).skip(500 * (page - 1)).exec()
                 fs.writeFileSync(
                     `${baseOutputPath}/sitemap-tax-${metaType}-${page}.xml`,
                     urlSetXmlTemplate(metaXmlTemplateGenerator(metas, metaType, '1', 'hourly', convertMetasTypeToSingular(metaType))),

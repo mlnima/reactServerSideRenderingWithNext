@@ -1,4 +1,4 @@
-// import {userSchema,conversationSchema} from 'models';
+// import {UserSchema,ConversationSchema} from 'shared-schemas';
 
 
 const deleteConversation = async (req, res) => {

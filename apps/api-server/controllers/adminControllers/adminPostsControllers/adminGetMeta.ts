@@ -1,4 +1,4 @@
-import {metaSchema} from 'models';
+import {MetaSchema} from 'shared-schemas';
 import mongoose from 'mongoose';
 // const ObjectId = mongoose.Types.ObjectId;
 
@@ -6,7 +6,7 @@ const adminGetMeta = async (req, res) => {
     try {
         const validateId = req.query._id ? mongoose.isValidObjectId(req.query._id) && req.query._id?.match(/^[0-9a-fA-F]{24}$/) : false;
         if (validateId) {
-            await metaSchema.findById(req.query._id).exec().then(meta => {
+            await MetaSchema.findById(req.query._id).exec().then(meta => {
                 if (meta) {
                     res.json({meta})
                 } else {

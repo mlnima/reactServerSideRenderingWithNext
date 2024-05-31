@@ -1,6 +1,4 @@
-import {postSchema} from 'models';
-import {metaSchema} from 'models';
-import {searchKeywordSchema} from 'models'
+import {PostSchema,MetaSchema,SearchKeywordSchema} from 'shared-schemas';
 import _clientQueryGeneratorForGettingPosts from '../../../_variables/clientVariables/_clientQueryGeneratorForGettingPosts'
 import {mongoIdValidator} from 'custom-server-util';
 import {postFieldRequestForCards} from "data-structure";
@@ -8,7 +6,7 @@ import {postFieldRequestForCards} from "data-structure";
 
 const saveSearchedKeyword = async (keyword :string, count:number) => {
     if (keyword) {
-        await searchKeywordSchema.findOneAndUpdate(
+        await SearchKeywordSchema.findOneAndUpdate(
             {name: keyword},
             {name: keyword, count},
             {upsert: true}).exec()
@@ -18,9 +16,9 @@ const saveSearchedKeyword = async (keyword :string, count:number) => {
 const getMetaForGettingPostsRequest = async (meta:string)=>{
     try {
         if (mongoIdValidator(meta)){
-            return await metaSchema.findById(meta).exec()
+            return await MetaSchema.findById(meta).exec()
         }else {
-            return await metaSchema.findOne({name:{$regex:decodeURIComponent(meta),$options:'i'}})
+            return await MetaSchema.findOne({name:{$regex:decodeURIComponent(meta),$options:'i'}})
         }
     }catch (err){
         return {}
@@ -43,9 +41,9 @@ export const getPosts =  async (req, res) => {
             //@ts-ignore
         },meta?._id)
 
-        const totalCount = await postSchema.countDocuments(findingPostsOptions.findPostsQueries).exec();
+        const totalCount = await PostSchema.countDocuments(findingPostsOptions.findPostsQueries).exec();
 
-        const posts = await postSchema.find(
+        const posts = await PostSchema.find(
             findingPostsOptions.findPostsQueries, findingPostsOptions.selectedFields,
             {
                 skip: (findingPostsOptions.size * findingPostsOptions.page) - findingPostsOptions.size,
@@ -74,7 +72,7 @@ export const getUserPagePosts = async (req, res) => {
         const authorId = req.query.authorId;
         const skip = req.query.skip || 0
 
-        const posts = await postSchema.find(
+        const posts = await PostSchema.find(
             {$and:[{author:authorId},{status:req.query.status || 'published'}]},
             [...postFieldRequestForCards,'status'],
             {

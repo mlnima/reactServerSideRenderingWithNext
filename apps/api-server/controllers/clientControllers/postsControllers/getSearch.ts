@@ -1,5 +1,4 @@
-import {postSchema, searchKeywordSchema} from 'models';
-import {metaSchema} from 'models';
+import {PostSchema, SearchKeywordSchema,MetaSchema} from 'shared-schemas';
 import {postFieldRequestForCards} from "data-structure";
 
 const locals = process.env.NEXT_PUBLIC_LOCALES.split(' ');
@@ -13,7 +12,7 @@ interface ISaveSearchedKeyword {
 const saveSearchedKeyword = async ({keyword, postsCount}: ISaveSearchedKeyword) => {
     if (!keyword) return
     try {
-        await searchKeywordSchema.findOneAndUpdate(
+        await SearchKeywordSchema.findOneAndUpdate(
             {name: keyword},
             {
                 $set: {
@@ -77,7 +76,7 @@ const getSearch = async (req, res) => {
         }
 
 
-        const posts = await postSchema.find(
+        const posts = await PostSchema.find(
             postSearchQuery,
             postFieldRequestForCards,
             {
@@ -87,8 +86,8 @@ const getSearch = async (req, res) => {
         )
         .select([...postFieldRequestForCards, `translations.${locale}.title`])
         .exec();
-        const totalCount = await postSchema.countDocuments(postSearchQuery).exec();
-        const metas = await metaSchema.find(metasSearchQuery).limit(size).exec();
+        const totalCount = await PostSchema.countDocuments(postSearchQuery).exec();
+        const metas = await MetaSchema.find(metasSearchQuery).limit(size).exec();
 
         if (totalCount > 0) {
             await saveSearchedKeyword({

@@ -16,7 +16,7 @@ import clientMainFestController from './controllers/clientControllers/clientMain
 import clientRobotTxtController from './controllers/clientControllers/clientRobotTxtController'
 import loggerMiddleware from "./middlewares/loggerMiddleware";
 
-import {settingSchema} from 'models';
+import {SettingSchema} from 'shared-schemas';
 import * as process from "process";
 // import syncAllIndexes from "./tools/syncModelsIndexes";
 import path from "path";
@@ -33,7 +33,7 @@ declare global {
     }
 }
 
-settingSchema.findOne({type: 'initialSettings'}).exec().then((initialSettings) => {
+SettingSchema.findOne({type: 'initialSettings'}).exec().then((initialSettings) => {
     if (initialSettings) {
         global.initialSettings = initialSettings.data
     }

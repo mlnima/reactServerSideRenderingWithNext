@@ -2,7 +2,7 @@ import {
     urlSetXmlTemplate,
     postXmlTemplateGenerator, sitemapItemTemplate
 } from "./xmlTemplateGenerators";
-import {postSchema} from 'models';
+import {PostSchema} from 'shared-schemas';
 import moment from 'moment';
 import mongoDocumentDateCorrector from "./mongoDocumentDateCorrector";
 import fs from "fs";
@@ -28,12 +28,12 @@ const getRangeOfTheDates = (firstCreatedPostDate:string, lastUpdatedPostDate:str
 
 export const postSitemapLinkForTheRoot = async (baseOutputPath:string) => {
     try {
-        const oldestPost = await postSchema.findOne({status: 'published'})
+        const oldestPost = await PostSchema.findOne({status: 'published'})
             .select(['createdAt'])
             .sort({'_id': 1})
             .exec();
 
-        const lastPost = await postSchema.findOne({status: 'published'})
+        const lastPost = await PostSchema.findOne({status: 'published'})
             .select(['createdAt'])
             .sort({'_id': -1})
             .exec();
@@ -65,14 +65,14 @@ export const postSitemapLinkForTheRoot = async (baseOutputPath:string) => {
                 ]
             }
 
-            const postCountInThisMonth = await postSchema.countDocuments(postQuery).exec();
+            const postCountInThisMonth = await PostSchema.countDocuments(postQuery).exec();
 
 
             if (postCountInThisMonth){
                 const maxPage = postCountInThisMonth <= 500 ? 1 : Math.ceil(postCountInThisMonth / 500)
                 const amountOfPages = maxPage > 1 ? [...Array(maxPage).keys()] : [0]
 
-                const lastDocumentUpdatedDate = await postSchema.findOne(postQuery)
+                const lastDocumentUpdatedDate = await PostSchema.findOne(postQuery)
                     .select(['createdAt'])
                     .sort('-_id').exec()
 
@@ -81,7 +81,7 @@ export const postSitemapLinkForTheRoot = async (baseOutputPath:string) => {
 
                         const page = currentPage + 1
                         const skip = 500 * (page - 1) || 0;
-                        const posts = await postSchema.find(postQuery).limit(500).skip(skip).exec();
+                        const posts = await PostSchema.find(postQuery).limit(500).skip(skip).exec();
                         const lastUpdate = new Date(mongoDocumentDateCorrector(lastDocumentUpdatedDate.createdAt, lastDocumentUpdatedDate._id));
 
                         const targetUrl =  `/sitemap-pt-post-${fixedMonth}-page${page}.xml`

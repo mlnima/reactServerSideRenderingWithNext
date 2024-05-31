@@ -1,10 +1,11 @@
 import Store from '../utils/store';
 import {
-    chatroomMessageSchema,
-    messengerConversationSchema,
-    messengerConversationMessageSchema,
-    userSchema, chatroomSchema
-} from 'models';
+    ChatroomMessageSchema,
+    ChatroomSchema,
+    MessengerConversationSchema,
+    MessengerConversationMessageSchema,
+    UserSchema
+} from 'shared-schemas';
 import {correctChatroomsMessages} from "../opersations/correctChatroomsMessages";
 import {ILoadOlderMessages} from "../TypesNInterfaces";
 
@@ -64,7 +65,7 @@ export const initializeSocket = (io: any) => {
 
         socket.on('messageToChatroom', async newMessageData => {
             try {
-                const messageToSave = new chatroomMessageSchema(newMessageData.messageBody);
+                const messageToSave = new ChatroomMessageSchema(newMessageData.messageBody);
                 const savedMessage = await messageToSave.save();
                 const messageToSetInStoreAndSendToClient = {
                     //issue
@@ -74,7 +75,7 @@ export const initializeSocket = (io: any) => {
                     }
                 }
 
-                await chatroomSchema.findByIdAndUpdate(
+                await ChatroomSchema.findByIdAndUpdate(
                     savedMessage.chatroom,
                     {
                         $addToSet: {messages: savedMessage._id}
@@ -99,12 +100,12 @@ export const initializeSocket = (io: any) => {
         socket.on('loadOlderMessages', async ({chatroomId, currentlyLoadedMessagesCount}: ILoadOlderMessages) => {
             try {
                 if (currentlyLoadedMessagesCount < 100) {
-                    const olderMessages = await chatroomMessageSchema
+                    const olderMessages = await ChatroomMessageSchema
                         .find({chatroom: chatroomId})
                         .populate({
                             path: 'author',
                             select: 'username profileImage',
-                            model: userSchema,
+                            model: UserSchema,
                             populate: {
                                 path: 'profileImage',
                                 model: 'file',
@@ -128,10 +129,10 @@ export const initializeSocket = (io: any) => {
 
         socket.on('deleteThisMessageFromChatroom', ({messageId,chatroomId}) => {
             try {
-                chatroomMessageSchema.findByIdAndDelete(messageId).then(() => {
+                ChatroomMessageSchema.findByIdAndDelete(messageId).then(() => {
                     io.in(messageId).emit('messageDeletedFromChatroom');
                 })
-                chatroomSchema.findByIdAndUpdate( chatroomId, {$pull: {messages: messageId}})
+                ChatroomSchema.findByIdAndUpdate( chatroomId, {$pull: {messages: messageId}})
                 Store.removeMessageFromChatroom(chatroomId,messageId)
                 io.in(chatroomId).emit('aMessageDeletedFromChatroom', messageId);
             } catch (error) {
@@ -153,10 +154,10 @@ export const initializeSocket = (io: any) => {
 
         socket.on('sendPrivateMessage', async (messageData) => {
             try {
-                const messageToSave = new messengerConversationMessageSchema(messageData);
+                const messageToSave = new MessengerConversationMessageSchema(messageData);
                 const savedMessage = await messageToSave.save();
                 if (savedMessage) {
-                    await messengerConversationSchema.findByIdAndUpdate(messageData.conversation, {$push: {messages: savedMessage._id}});
+                    await MessengerConversationSchema.findByIdAndUpdate(messageData.conversation, {$push: {messages: savedMessage._id}});
                     io.in(messageData.conversation).emit('getPrivateMessage', savedMessage);
                 }
             } catch (error) {

@@ -1,4 +1,4 @@
-import { userSchema } from 'models';
+import { UserSchema } from 'shared-schemas';
 import mongoose from 'mongoose';
 
 const followUser = async (req, res) => {
@@ -7,12 +7,12 @@ const followUser = async (req, res) => {
         const receiverFollowReqUserId = new mongoose.Types.ObjectId(req.body._id);
         const senderFollowReqUserId = new mongoose.Types.ObjectId(senderFollowReqUser._id);
 
-        await userSchema.findByIdAndUpdate(
+        await UserSchema.findByIdAndUpdate(
             receiverFollowReqUserId,
             { $addToSet: { followers: senderFollowReqUserId } }
         ).exec();
 
-        await userSchema.findByIdAndUpdate(
+        await UserSchema.findByIdAndUpdate(
             senderFollowReqUserId,
             { $addToSet: { following: receiverFollowReqUserId } },
             { new: true }
@@ -28,7 +28,7 @@ const followUser = async (req, res) => {
 export default followUser;
 
 
-// import {userSchema} from 'models';
+// import {UserSchema} from 'shared-schemas';
 //
 // const followUser = async (req, res) => {
 //     try {

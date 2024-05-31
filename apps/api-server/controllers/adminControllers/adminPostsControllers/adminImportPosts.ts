@@ -1,4 +1,4 @@
-import {postSchema} from 'models';
+import {PostSchema} from 'shared-schemas';
 import updateSaveMetas from '../../../_variables/adminVariables/_updateSaveMetas';
 
 const adminImportPosts = async (req, res) => {
@@ -14,7 +14,7 @@ const adminImportPosts = async (req, res) => {
             }
             // console.log(newPostData)
 
-            // const newPostDataToSave = new postSchema(newPostData);
+            // const newPostDataToSave = new PostSchema(newPostData);
             // newPostDataToSave.save()
         }
 

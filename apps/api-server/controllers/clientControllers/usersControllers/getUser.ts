@@ -1,5 +1,5 @@
 import {Request, Response} from 'express';
-import {postSchema, userSchema} from 'models';
+import {PostSchema, UserSchema} from 'shared-schemas';
 
 interface IGetUserQuery {
     username: string;
@@ -13,7 +13,7 @@ export const getUser = async (req: Request, res: Response) => {
         const defaultFields = ['username', 'role', 'profileImage', 'about', 'firstName', 'lastName', 'nickName'];
         const selectedFields = fields ? [...defaultFields, ...fields] : defaultFields;
 
-        userSchema
+        UserSchema
             .findOne({$or: [{username}, {_id}]})
             .select(selectedFields)
             .populate([
@@ -78,16 +78,16 @@ export const getUserPageInitialData = async (req: Request, res: Response) => {
             }
         ];
 
-        const [userData] = await userSchema.aggregate(pipeline).exec();
+        const [userData] = await UserSchema.aggregate(pipeline).exec();
 
         if (!userData) {
             return res.status(404).json({message: 'UserModel not found'});
         }
 
         const [didRequesterBlockThisUser, didRequesterFollowThisUser, postsCount] = await Promise.all([
-            userSchema.exists({'blockList': {$in: [userData._id]}}),
-            userSchema.exists({'following': {$in: [userData._id]}}),
-            postSchema.countDocuments({$and: [{author: userData._id}, {status: 'published'}]})
+            UserSchema.exists({'blockList': {$in: [userData._id]}}),
+            UserSchema.exists({'following': {$in: [userData._id]}}),
+            PostSchema.countDocuments({$and: [{author: userData._id}, {status: 'published'}]})
         ]);
 
         userData.didRequesterBlockThisUser = !!didRequesterBlockThisUser;

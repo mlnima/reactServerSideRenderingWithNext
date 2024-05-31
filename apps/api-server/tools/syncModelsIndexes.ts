@@ -1,46 +1,44 @@
 import {
-    settingSchema,
-    chatroomSchema,
-    commentSchema,
-    contactFromSchema,
-    conversationSchema,
-    formSchema,
-    metaSchema,
-    orderSchema,
-    pageSchema,
-    postSchema,
-    searchKeywordSchema,
-    translateSchema,
-    userSchema,
-    widgetSchema,
-    chatroomMessageSchema,
-    fileSchema,
-    messengerConversationMessageSchema,
-    messengerConversationSchema,
-    emailSchema,
-} from 'models';
+    SettingSchema,
+    ChatroomSchema,
+    CommentSchema,
+    ContactFormSchema,
+    ConversationSchema,
+    FormSchema,
+    MetaSchema,
+    OrderSchema,
+    PageSchema,
+    PostSchema,
+    SearchKeywordSchema,
+    UserSchema,
+    WidgetSchema,
+    ChatroomMessageSchema,
+    FileSchema,
+    MessengerConversationMessageSchema,
+    MessengerConversationSchema,
+    EmailSchema,
+} from 'shared-schemas';
 
 const syncAllIndexes = async () => {
     try {
-        await settingSchema.syncIndexes();
-        await chatroomSchema.syncIndexes();
-        await commentSchema.syncIndexes();
-        await contactFromSchema.syncIndexes();
-        await conversationSchema.syncIndexes();
-        await formSchema.syncIndexes();
-        await metaSchema.syncIndexes();
-        await orderSchema.syncIndexes();
-        await pageSchema.syncIndexes();
-        await postSchema.syncIndexes();
-        await searchKeywordSchema.syncIndexes();
-        await translateSchema.syncIndexes();
-        await userSchema.syncIndexes();
-        await widgetSchema.syncIndexes();
-        await chatroomMessageSchema.syncIndexes();
-        await fileSchema.syncIndexes();
-        await messengerConversationMessageSchema.syncIndexes();
-        await messengerConversationSchema.syncIndexes();
-        await emailSchema.syncIndexes();
+        await SettingSchema.syncIndexes();
+        await ChatroomSchema.syncIndexes();
+        await CommentSchema.syncIndexes();
+        await ContactFormSchema.syncIndexes();
+        await ConversationSchema.syncIndexes();
+        await FormSchema.syncIndexes();
+        await MetaSchema.syncIndexes();
+        await OrderSchema.syncIndexes();
+        await PageSchema.syncIndexes();
+        await PostSchema.syncIndexes();
+        await SearchKeywordSchema.syncIndexes();
+        await UserSchema.syncIndexes();
+        await WidgetSchema.syncIndexes();
+        await ChatroomMessageSchema.syncIndexes();
+        await FileSchema.syncIndexes();
+        await MessengerConversationMessageSchema.syncIndexes();
+        await MessengerConversationSchema.syncIndexes();
+        await EmailSchema.syncIndexes();
         console.log('All indexes synced successfully.');
     } catch (error) {
         console.error('Error syncing indexes:', error);

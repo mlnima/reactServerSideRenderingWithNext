@@ -7,7 +7,7 @@ connectToDatabase('Mail Server')
 import {SMTPServer} from 'smtp-server';
 import {simpleParser} from 'mailparser';
 import nodemailer from 'nodemailer';
-import {emailSchema, settingSchema, userSchema} from 'models';
+import {EmailSchema, SettingSchema, UserSchema} from 'shared-schemas';
 import bcrypt from 'bcryptjs';
 import emailActionTypeDetector from "./src/utils/emailActionTypeDetector";
 import * as process from "process";
@@ -71,7 +71,7 @@ const createSMTPServer = (port) => {
                 if (systemEmails.includes(auth?.username) && auth?.password === process.env.JWT_KEY) {
                     callback(null, {user: 'system'});
                 } else if (auth?.username && !systemEmails.includes(auth?.username)) { // change here from auth?._id to auth?.user
-                    const userData = await userSchema.findById(auth?.username).exec(); // change here from auth?._id to auth?.user
+                    const userData = await UserSchema.findById(auth?.username).exec(); // change here from auth?._id to auth?.user
                     const isPasswordCorrect: boolean = await bcrypt.compare(auth?.password, userData.password);
                     if (!isPasswordCorrect) {
                         return callback(new Error("Invalid username or password"));

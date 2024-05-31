@@ -1,8 +1,8 @@
-import {widgetSchema} from 'models';
+import {WidgetSchema} from 'shared-schemas';
 
 const getWidgets = async (req, res) => {
     try {
-        const widgets = await widgetSchema.find({}).exec()
+        const widgets = await WidgetSchema.find({}).exec()
         Promise.all(widgets).then(widgetsWithData => {
             res.json({widgets: widgetsWithData})
         }).catch(err => {

@@ -1,8 +1,8 @@
-import {formSchema} from 'models';
+import {FormSchema} from 'shared-schemas';
 
 const deleteForm = async (req, res) => {
     try {
-        formSchema.findByIdAndDelete(req.query._id,{useFindAndModify: false}).exec().then(()=>{
+        FormSchema.findByIdAndDelete(req.query._id,{useFindAndModify: false}).exec().then(()=>{
             res.json({message:'form deleted'})
         }).catch(error=>{
             console.log(error)

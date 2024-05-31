@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs';
-import {userSchema} from 'models';
+import {UserSchema} from 'shared-schemas';
 import {usernameValidatorRegisterForm, passwordValidatorRegisterForm} from "custom-util";
 import {emailValidator} from "custom-util";
 import {jwtTokenGenerator} from "custom-server-util";
@@ -37,7 +37,7 @@ const register = (req:Request, res:Response) => {
 
     const {username, email, password, password2} = req.body;
 
-    userSchema.findOne({$or: [{username}, {email}]}).exec()
+    UserSchema.findOne({$or: [{username}, {email}]}).exec()
         .then(user => {
             if (user) {
                 return res.status(409).json({message: 'Username or Email already exists'});
@@ -69,7 +69,7 @@ const register = (req:Request, res:Response) => {
                         jwtTokenGenerator('1h',{type:'accountVerification'})
                         : ''
                 };
-                const newUserData = new userSchema(userData);
+                const newUserData = new UserSchema(userData);
                 newUserData.save().then(() => {
                     if (shouldSendVerificationEmail && newUserData.verificationToken){
 

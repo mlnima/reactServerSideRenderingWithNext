@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import {connectToDatabase} from 'custom-server-util';
 import {parentPort, workerData} from 'worker_threads';
-import {metaSchema, postSchema} from 'models';
+import {MetaSchema, PostSchema} from 'shared-schemas';
 import mongoose from 'mongoose';
 
 dotenv.config();
@@ -23,16 +23,16 @@ const worker = async (workerData) => {
         const excludeQuery = {$or: excludeContent}
 
 
-        await metaSchema.syncIndexes()
+        await MetaSchema.syncIndexes()
         const type = workerData.type ? {type: workerData.type} : {}
-        await metaSchema.find(type).exec().then(async (metas) => {
+        await MetaSchema.find(type).exec().then(async (metas) => {
             for await (let meta of metas) {
-                //const metaCount = await postSchema.countDocuments({$and: [{[meta?.type]: meta?._id}, {status: 'published'},excludeQuery]}).exec()
-                const metaCount = await postSchema.countDocuments({$and: [{[meta?.type]: {$in: meta?._id}}, {status: 'published'}, excludeQuery]}).exec()
+                //const metaCount = await PostSchema.countDocuments({$and: [{[meta?.type]: meta?._id}, {status: 'published'},excludeQuery]}).exec()
+                const metaCount = await PostSchema.countDocuments({$and: [{[meta?.type]: {$in: meta?._id}}, {status: 'published'}, excludeQuery]}).exec()
 
                 if (metaCount > 0 && meta?._id) {
                     //***************************
-                    const totalSumData = await postSchema.aggregate(
+                    const totalSumData = await PostSchema.aggregate(
                         [
                             {
                                 $match: {
@@ -67,14 +67,14 @@ const worker = async (workerData) => {
                         //const skipDocuments = metaCount >= 1 && metaCount < 10 ? metaCount - 1 : randomNumberGenerator(1, 20)
                         //const skipDocuments = metaCount - 1
                         const skipDocuments = metaCount <= 1 ? 0 : randomNumberGenerator(1, metaCount) - 1
-                        const randomPost = await postSchema.findOne({$and: [{[meta?.type]: meta?._id}, {status: 'published'}, excludeQuery]}).sort({updatedAt: -1}).skip(skipDocuments).exec()
+                        const randomPost = await PostSchema.findOne({$and: [{[meta?.type]: meta?._id}, {status: 'published'}, excludeQuery]}).sort({updatedAt: -1}).skip(skipDocuments).exec()
                         if (randomPost?.mainThumbnail) {
                             //@ts-ignore
                             updateData.imageUrl = randomPost?.mainThumbnail || '/asset/images/default/no-image-available.png'
                         }
                     }
 
-                    await metaSchema.findByIdAndUpdate(
+                    await MetaSchema.findByIdAndUpdate(
                         meta?._id,
                         {$set: {...updateData}},
                         {timestamps: false}
@@ -84,7 +84,7 @@ const worker = async (workerData) => {
                         console.log(`${meta?.type} ${meta?.name} has ${metaCount} and image set to ${updateData?.imageUrl || '/asset/images/default/no-image-available.png'}`)
                     })
                 } else {
-                    await metaSchema.findByIdAndUpdate(
+                    await MetaSchema.findByIdAndUpdate(
                         meta?._id,
                         {$set: {status: 'draft'}},
                         {timestamps: false}

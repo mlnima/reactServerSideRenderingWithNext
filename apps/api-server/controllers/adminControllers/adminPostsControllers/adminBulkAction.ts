@@ -1,15 +1,15 @@
-import {postSchema,metaSchema,userSchema,commentSchema} from 'models';
+import {PostSchema,MetaSchema,UserSchema,CommentSchema} from 'shared-schemas';
 
 const adminBulkAction = async (req, res) => {
     const type = req.body.type
     const status = req.body.status
     const ids = req.body.ids
-    let actionsPromise;
+    let actionsPromise:{}[];
 
-    const targetSchema = type === 'posts' ? postSchema :
-        type === 'metas' ? metaSchema :
-            type === 'comments' ? commentSchema :
-                type === 'users' ? userSchema : null
+    const targetSchema = type === 'posts' ? PostSchema :
+        type === 'metas' ? MetaSchema :
+            type === 'comments' ? CommentSchema :
+                type === 'users' ? UserSchema : null
     if (status === 'delete') {
         actionsPromise = ids.map(id => {
             targetSchema.findByIdAndDelete(id)

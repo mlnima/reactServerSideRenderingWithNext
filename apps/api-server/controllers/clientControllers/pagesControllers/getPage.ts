@@ -1,5 +1,5 @@
 import {Request, Response} from 'express';
-import {pageSchema} from 'models';
+import {PageSchema} from 'shared-schemas';
 
 interface GetPageRequestQuery {
     pageName: string;
@@ -8,7 +8,7 @@ interface GetPageRequestQuery {
 const getPage = async (req: Request<{}, {}, GetPageRequestQuery>, res: Response): Promise<void> => {
     const {pageName} = req.query;
     try {
-        const pageData = await pageSchema.findOne({pageName}).exec();
+        const pageData = await PageSchema.findOne({pageName}).exec();
         if (pageData) {
             res.json({pageData, error: false});
         } else {
@@ -23,14 +23,14 @@ export default getPage
 
 
 // if (pageId){
-//     pageSchema.findById(_id).exec().then(pageData=>{
+//     PageSchema.findById(_id).exec().then(pageData=>{
 //         res.json({pageData,error:false})
 //     }).catch(err=>{
 //         console.log(err)
 //         res.status(404).json({message:'not found'})
 //     })
 // }else if (pageName){
-//     pageSchema.findOne({pageName}).exec().then(pageData=>{
+//     PageSchema.findOne({pageName}).exec().then(pageData=>{
 //         res.json({pageData,error:false})
 //     }).catch(err=>{
 //         console.log(err)

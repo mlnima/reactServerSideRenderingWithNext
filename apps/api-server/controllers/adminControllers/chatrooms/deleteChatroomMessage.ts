@@ -1,9 +1,9 @@
-import {chatroomSchema, chatroomMessageSchema} from 'models';
+import {ChatroomSchema, ChatroomMessageSchema} from 'shared-schemas';
 
 const deleteChatroomMessage = async (req, res) => {
 
     try {
-        await chatroomMessageSchema.findByIdAndRemove(req.query.messageId, {useFindAndModify: false}).exec()
+        await ChatroomMessageSchema.findByIdAndRemove(req.query.messageId, {useFindAndModify: false}).exec()
         res.end()
     } catch (error) {
         res.end()

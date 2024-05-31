@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 require('dotenv').config()
-const {postSchema} = require('models')
+const {PostSchema} = require('shared-schemas')
 
 const mongoDBConnectionUrl = process.env.DB_LOCAL === 'true' ?
     `mongodb://localhost:${process.env.DB_PORT}/${process.env.DB_NAME}` :
@@ -14,7 +14,7 @@ mongoose.connect(mongoDBConnectionUrl, {
     .catch(err => console.log('DB not connected', err.stack));
 
 
-postSchema.countDocuments({}).exec().then(count => {
+PostSchema.countDocuments({}).exec().then(count => {
 
     const size = 100
     let page = 0

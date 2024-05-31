@@ -1,15 +1,15 @@
-import {userSchema} from 'models';
+import {UserSchema} from 'shared-schemas';
 
 const unfollowUser = async (req, res) => {
     try {
         const senderUnFollowReqUser = req.userData;
         const receiverUnFollowReqUserId = req.body._id;
 
-        await userSchema.findByIdAndUpdate(
+        await UserSchema.findByIdAndUpdate(
             receiverUnFollowReqUserId, {$pull: {followers: senderUnFollowReqUser._id}}
         ).exec();
 
-        await userSchema.findByIdAndUpdate(
+        await UserSchema.findByIdAndUpdate(
             senderUnFollowReqUser._id, {$pull: {following: receiverUnFollowReqUserId}}, {new: true}
         ).exec();
 

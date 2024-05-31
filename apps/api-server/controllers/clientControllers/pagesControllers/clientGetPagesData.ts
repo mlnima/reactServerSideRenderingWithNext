@@ -1,7 +1,7 @@
-import {pageSchema} from 'models';
+import {PageSchema} from 'shared-schemas';
 
 const clientGetPagesData = (req, res) =>{
-    pageSchema.find({}).exec().then(pagesData=>{
+    PageSchema.find({}).exec().then(pagesData=>{
         res.json({pagesData,error:false})
     }).catch(err=>{
         console.log(err)

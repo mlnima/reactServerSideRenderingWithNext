@@ -1,8 +1,8 @@
-import {userSchema} from 'models';
+import {UserSchema} from 'shared-schemas';
 
 const fetchUserData = async(_id:string)=> {
     try {
-        return await userSchema.findById(_id).exec();
+        return await UserSchema.findById(_id).exec();
     } catch (error) {
         console.error(error);
         return null;

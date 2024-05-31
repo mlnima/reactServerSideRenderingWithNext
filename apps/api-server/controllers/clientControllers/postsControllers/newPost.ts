@@ -2,7 +2,7 @@ import {PostSchema, UserSchema} from "shared-schemas";
 
 const setDraftPostToUserData = async (userId, draftPostId) => {
     try {
-        return await userSchema.findByIdAndUpdate(userId, {$set: {draftPost: draftPostId}}, {new: true}).exec();
+        return await UserSchema.findByIdAndUpdate(userId, {$set: {draftPost: draftPostId}}, {new: true}).exec();
     } catch (error) {
         console.error('Error updating user draft post:', error);
         throw error;

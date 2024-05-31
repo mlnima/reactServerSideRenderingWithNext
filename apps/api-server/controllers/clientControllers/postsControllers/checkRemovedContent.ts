@@ -1,4 +1,4 @@
-import {metaSchema,postSchema,widgetSchema} from 'models';
+import {MetaSchema,PostSchema,WidgetSchema} from 'shared-schemas';
 import axios from 'axios'
 // import {updateWidget} from '../../adminControllers/widgets/updateWidget'
 
@@ -8,8 +8,8 @@ const checkRemovedContent = (req, res) => {
         axios(checkUrl).then(result => {
         }).catch(async err => {
             if (err?.response?.status >= 400 && err?.response?.status < 499 || err.code === 'ENOTFOUND') {
-                await postSchema.findOneAndUpdate({mainThumbnail: checkUrl}, {$set: {status: 'pending'}}, {new: true}).exec().then(post => {
-                    widgetSchema.findOne({'data.posts': post._id}).exec().then(widget => {
+                await PostSchema.findOneAndUpdate({mainThumbnail: checkUrl}, {$set: {status: 'pending'}}, {new: true}).exec().then(post => {
+                    WidgetSchema.findOne({'data.posts': post._id}).exec().then(widget => {
                         if (widget) {
                             // updatePostsWidget(widget).then(updatedWidgets => {
                             //     widgetSchema.findByIdAndUpdate(widget._id, {'data..uniqueData.posts': [...updatedWidgets.posts]}, {new: true}).exec()
@@ -20,11 +20,11 @@ const checkRemovedContent = (req, res) => {
 
 
                 //update meta if has this post image
-                await metaSchema.findOne({imageUrl: checkUrl}).exec().then(meta => {
+                await MetaSchema.findOne({imageUrl: checkUrl}).exec().then(meta => {
                     if (meta) {
-                        postSchema.findOne({$and: [{[meta.type]: meta._id}, {status: 'published'}]}).exec().then(post => {
+                        PostSchema.findOne({$and: [{[meta.type]: meta._id}, {status: 'published'}]}).exec().then(post => {
                             if (post) {
-                                metaSchema.findByIdAndUpdate(meta._id, {$set: {imageUrl: post.mainThumbnail}}, {new: true}).exec().then(updatedMeta => {
+                                MetaSchema.findByIdAndUpdate(meta._id, {$set: {imageUrl: post.mainThumbnail}}, {new: true}).exec().then(updatedMeta => {
                                     res.json({newImageUrl: updatedMeta.imageUrl})
 
                                 }).catch(err => {

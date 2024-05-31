@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import {connectToDatabase} from 'custom-server-util';
 import {parentPort} from 'worker_threads';
-import {postSchema} from 'models';
+import {PostSchema} from 'shared-schemas';
 
 dotenv.config();
 connectToDatabase('generatePermaLink :').finally();
@@ -9,12 +9,12 @@ connectToDatabase('generatePermaLink :').finally();
 const worker = async () => {
 
     try {
-        await postSchema.syncIndexes()
+        await PostSchema.syncIndexes()
         const findingPostsQuery = {permaLink: {$exists: false}}
-        await postSchema.find(findingPostsQuery).exec().then(async posts => {
+        await PostSchema.find(findingPostsQuery).exec().then(async posts => {
             for await (let post of posts) {
                 const permaLink = post?.title ? post.title.replaceAll(' ', '-') : null
-                await postSchema.findByIdAndUpdate(post._id, {$set: {permaLink}}, {
+                await PostSchema.findByIdAndUpdate(post._id, {$set: {permaLink}}, {
                     new: true,
                     timestamps: false
                 }).exec().then(updatedPost => {

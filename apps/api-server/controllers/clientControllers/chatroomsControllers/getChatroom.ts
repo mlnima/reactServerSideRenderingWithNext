@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { chatroomSchema } from 'models';
+import { ChatroomSchema } from 'shared-schemas';
 import { mongoIdValidator } from 'custom-server-util';
 
 interface GetChatroomQuery {
@@ -9,10 +9,10 @@ interface GetChatroomQuery {
 const getChatroom = async (req: Request<{}, {}, {}, GetChatroomQuery>, res: Response): Promise<void> => {
     try {
         const isValidId = mongoIdValidator(req.query.identifier);
-        const currentChatroom = await chatroomSchema.findOne(
+        const currentChatroom = await ChatroomSchema.findOne(
             isValidId ? { _id: req.query.identifier } : { name: req.query.identifier }
         ).exec();
-        const allTheChatrooms = await chatroomSchema.find({}).select('name').exec();
+        const allTheChatrooms = await ChatroomSchema.find({}).select('name').exec();
 
         res.json({ chatroom: currentChatroom, chatrooms: allTheChatrooms });
     } catch (error) {

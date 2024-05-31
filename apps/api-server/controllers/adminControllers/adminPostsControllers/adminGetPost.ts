@@ -1,10 +1,10 @@
-import {postSchema} from 'models';
+import {PostSchema} from 'shared-schemas';
 
 const adminGetPost = async (req, res) => {
     const _id = req.query._id;
     try {
         if (_id){
-            postSchema.findById(_id).populate([
+            PostSchema.findById(_id).populate([
                 {path: 'categories',select:{'name':1,'type':1}},
                 {path: 'tags',select:{'name':1,'type':1}},
                 {path: 'actors',select:{'name':1,'type':1}},

@@ -1,4 +1,4 @@
-import {commentSchema} from 'models';
+import {CommentSchema} from 'shared-schemas';
 import {mongoIdValidator} from 'custom-server-util';
 
 const getComments = async (req, res) => {
@@ -8,7 +8,7 @@ const getComments = async (req, res) => {
         const limit = req.query?.limit ? parseInt(req.query.limit)  : 0
 
         if (mongoIdValidator && req.query?.onDocument){
-            await commentSchema.find(onDocument,{},{sort:{createdAt:-1}})
+            await CommentSchema.find(onDocument,{},{sort:{createdAt:-1}})
                 .populate([{
                     path:'author',
                     select:[

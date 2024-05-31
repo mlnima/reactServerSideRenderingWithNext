@@ -1,6 +1,6 @@
 import sharp from 'sharp'
 import fsExtra from 'fs-extra'
-import {userSchema} from 'models';
+import {UserSchema} from 'shared-schemas';
 
 
 //need to move to file-server
@@ -25,7 +25,7 @@ const userProfileImageUpload =  async (req, res) => {
                     } else {
                         const imageUrl = process.env.NEXT_PUBLIC_PRODUCTION_URL + filePath.replace('.','')
 
-                        userSchema.findByIdAndUpdate(req.userData._id,{profileImage:imageUrl}).exec().then(()=>{
+                        UserSchema.findByIdAndUpdate(req.userData._id,{profileImage:imageUrl}).exec().then(()=>{
                             fsExtra.remove(filePathOriginalSize)
                             res.json({response: 'Uploaded', path: imageUrl})
                         }).catch(()=>{

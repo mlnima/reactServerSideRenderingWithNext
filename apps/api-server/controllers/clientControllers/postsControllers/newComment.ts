@@ -1,5 +1,5 @@
 import {Request, Response} from 'express';
-import {commentSchema, postSchema} from 'models';
+import {CommentSchema, PostSchema} from 'shared-schemas';
 import mongoose from "mongoose";
 
 const newComment = async (req: Request, res: Response) => {
@@ -10,7 +10,7 @@ const newComment = async (req: Request, res: Response) => {
             author: new mongoose.Types.ObjectId(req.body.commentData?.author),
         }
 
-        const commentDataToSave = new commentSchema(commentData);
+        const commentDataToSave = new CommentSchema(commentData);
 
         const savedComment = await commentDataToSave.save();
 
@@ -18,7 +18,7 @@ const newComment = async (req: Request, res: Response) => {
             return res.status(500).json({message: 'Comment not saved', type: 'error'});
         }
 
-        await postSchema.findByIdAndUpdate(req.body.onDocumentId, {$push: {comments: [savedComment._id]}}, {new: true}).exec();
+        await PostSchema.findByIdAndUpdate(req.body.onDocumentId, {$push: {comments: [savedComment._id]}}, {new: true}).exec();
 
         res.json({savedComment});
 

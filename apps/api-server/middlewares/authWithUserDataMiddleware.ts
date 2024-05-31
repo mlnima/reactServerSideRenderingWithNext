@@ -1,6 +1,6 @@
 // @ts-nocheck
 import jwt from 'jsonwebtoken';
-import { userSchema } from 'models';
+import { UserSchema } from 'shared-schemas';
 
 const authWithUserDataMiddleware = async (req, res, next) => {
     try {
@@ -23,7 +23,7 @@ const authWithUserDataMiddleware = async (req, res, next) => {
         const decodedToken = jwt.verify(token, process.env.JWT_KEY);
 
         // Fetch user data
-        const user = await userSchema.findById(decodedToken._id).select('username role keyMaster').exec();
+        const user = await UserSchema.findById(decodedToken._id).select('username role keyMaster').exec();
 
         // If user is not found, return unauthorized
         if (!user) {

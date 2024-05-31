@@ -1,7 +1,7 @@
-import {commentSchema} from 'models';
+import {CommentSchema} from 'shared-schemas';
 
 const adminUpdateComment = (req, res) => {
-    commentSchema.findByIdAndUpdate(req.body._id, req.body.update, {new: true}).exec().then(updated => {
+    CommentSchema.findByIdAndUpdate(req.body._id, req.body.update, {new: true}).exec().then(updated => {
         res.end()
     })
 };

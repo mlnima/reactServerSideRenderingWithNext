@@ -1,5 +1,5 @@
 import {Request, Response} from 'express';
-import {settingSchema} from 'models';
+import {SettingSchema} from 'shared-schemas';
 
 interface GetSettingsQuery {
     setting: string | string[];
@@ -9,10 +9,10 @@ const getSettings = async (req: Request<{}, {}, {}, GetSettingsQuery>, res: Resp
         try {
             const requestedSettings = Array.isArray(req.query.setting) ? req.query.setting : [req.query.setting];
 
-            const settings = await settingSchema.find({type: {$in: requestedSettings}}).exec();
-            const reduceSettings = settings.reduce<Record<string, unknown>>((acc, setting) => {
-                acc[setting.type] = setting.data
-                return acc
+            const settings = await SettingSchema.find({type: {$in: requestedSettings}}).exec();
+            const reduceSettings = settings.reduce((final:{}, current:{type:string,data:{}}) => {
+                final[current.type] = current.data
+                return final
             }, {})
 
             res.json({settings: reduceSettings});
