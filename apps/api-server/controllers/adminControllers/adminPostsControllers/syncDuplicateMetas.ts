@@ -1,10 +1,10 @@
 //syncDuplicateMetas
-import {MetaSchema, PostSchema} from 'shared-schemas';
-
+import postSchema from "@schemas/postSchema";
+import metaSchema from "@schemas/metaSchema";
 
 const findDuplicateMetas = async () => {
     try {
-        const duplicates = await MetaSchema.aggregate([
+        const duplicates = await metaSchema.aggregate([
             {
                 $group: {
                     _id: {name: "$name", type: "$type"},
@@ -33,7 +33,7 @@ const findPostsWithDuplicatedMeta = async (duplicate) => {
         let metasWithCount = []
 
         for await (const item of duplicate.ids) {
-            const postsWithThisMeta = await PostSchema.countDocuments({
+            const postsWithThisMeta = await postSchema.countDocuments({
                 $or: [
                     {categories: item},
                     {tags: item},
@@ -51,24 +51,24 @@ const findPostsWithDuplicatedMeta = async (duplicate) => {
 
         for await(const wrongMeta of itemsToRemoveFromPosts) {
 
-            const postWithWrongMeta = await PostSchema.find({[duplicate._id.type]: wrongMeta._id}).exec()
+            const postWithWrongMeta = await postSchema.find({[duplicate._id.type]: wrongMeta._id}).exec()
 
 
             for await(const post of postWithWrongMeta) {
-                await PostSchema.findByIdAndUpdate(post._id, {
+                await postSchema.findByIdAndUpdate(post._id, {
                     $pull: {
                         [duplicate._id.type]: wrongMeta._id,
                     }
                 }, {new: true}).exec()
 
-                await PostSchema.findByIdAndUpdate(post._id, {
+                await postSchema.findByIdAndUpdate(post._id, {
                     $push: {
                         [duplicate._id.type]: itemWithHighestCount._id,
                     },
                 }, {new: true}).exec()
             }
 
-            await MetaSchema.findByIdAndDelete(wrongMeta?._id).exec();
+            await metaSchema.findByIdAndDelete(wrongMeta?._id).exec();
 
         }
 

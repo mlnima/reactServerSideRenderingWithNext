@@ -1,11 +1,13 @@
-import {FileSchema, UserSchema} from 'shared-schemas'
+
 import fsExtra from "fs-extra";
-import {getCurrentDatePath} from "custom-server-util";
+import {getCurrentDatePath} from "@util/path-utils";
 import sharp from 'sharp'
-import {removeFileExtension} from "custom-util";
+import {removeFileExtension} from "@util/file-utils";
 import fs from "fs";
-import fileRemover from "../../../../../_variables/fileRemover";
+import fileRemover from "@_variables/fileRemover";
 import {Request,Response} from "express";
+import userSchema from "@schemas/userSchema";
+import fileSchema from "@schemas/fileSchema";
 
 // interface RequestBody {
 //     imagesData?: string;
@@ -13,8 +15,8 @@ import {Request,Response} from "express";
 
 const profileImageTypeHandler = async (userId:string, profileImageId:string) => {
     try {
-        const user = await UserSchema.findById(userId).exec();
-        await UserSchema.findByIdAndUpdate(userId, {$set: {profileImage: profileImageId}}).exec();
+        const user = await userSchema.findById(userId).exec();
+        await userSchema.findByIdAndUpdate(userId, {$set: {profileImage: profileImageId}}).exec();
         await fileRemover(user?.profileImage);
     } catch (error) {
         console.log(error)
@@ -38,7 +40,7 @@ const uploadImage = async (req:Request<{}, {}, RequestBody>, res:Response) => {
             await image.mv(tempPath)
             sharp.cache({files: 0})
 
-            const imageDataToSave = new FileSchema({
+            const imageDataToSave = new fileSchema({
                 usageType: imagesData.usageType,
                 filePath: `/public/uploads/images/${getCurrentDatePath()}/${fileName}.webp`,
                 mimeType: image.mimetype,

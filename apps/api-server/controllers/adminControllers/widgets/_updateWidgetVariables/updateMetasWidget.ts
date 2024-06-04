@@ -1,5 +1,7 @@
-import {MetaSchema, WidgetSchema} from "shared-schemas";
+
 import {Response} from "express";
+import widgetSchema from "@schemas/widgetSchema";
+import metaSchema from "@schemas/metaSchema";
 
 const updateMetasWidget = async (widgetData: any, widgetId: string, res: Response) => {
 
@@ -19,8 +21,8 @@ const updateMetasWidget = async (widgetData: any, widgetId: string, res: Respons
         };
         const findQuery = {$and: [type, statusQuery, countQuery]};
 
-        const totalCount = await MetaSchema.countDocuments(findQuery).exec();
-        const metas = await MetaSchema.find(findQuery, {}, {sort: sortQuery})
+        const totalCount = await metaSchema.countDocuments(findQuery).exec();
+        const metas = await metaSchema.find(findQuery, {}, {sort: sortQuery})
             .limit(limit)
             .select('_id')
             .exec();
@@ -33,7 +35,7 @@ const updateMetasWidget = async (widgetData: any, widgetId: string, res: Respons
             }
         };
 
-        const updatedWidget = await WidgetSchema.findByIdAndUpdate(widgetId, {data: updateData}, {new: true}).exec();
+        const updatedWidget = await widgetSchema.findByIdAndUpdate(widgetId, {data: updateData}, {new: true}).exec();
 
         res.status(200).json({updatedWidget});
     } catch (err) {
@@ -43,58 +45,3 @@ const updateMetasWidget = async (widgetData: any, widgetId: string, res: Respons
 };
 
 export default updateMetasWidget;
-
-
-// import {MetaSchema, WidgetSchema} from "shared-schemas";
-// import {Meta} from "typescript-types";
-// import {Response} from "express";
-//
-// const updateMetasWidget = async (widgetData: any,res:Response)=>{
-//
-//     try {
-//         if (!widgetData?._id) return
-//
-//         const statusQuery = {status: 'published'};
-//         const type = {type: widgetData?.metaType || widgetData?.uniqueData?.metaType}
-//         const countQuery =  {count: {$gt: 0}}
-//         const limit = widgetData?.count ||
-//             widgetData?.uniqueData?.count  ||
-//             global?.initialSettings?.postCardsSettings?.numberOfCardsPerPage
-//             || 20
-//
-//         const widgetDataSort = widgetData?.sort || widgetData?.uniqueData?.sort
-//         const sortQuery = !widgetDataSort ? {'rank': 1, 'count': -1} : {'updatedAt': -1}
-//         const findQuery = {$and: [type, statusQuery, countQuery]}
-//         const totalCount = await MetaSchema.countDocuments(findQuery).exec()
-//
-//         const metas = await MetaSchema.find(
-//             findQuery,
-//             {},
-//             {sort: sortQuery})
-//             .limit(limit)
-//             .select( '_id')
-//             .exec()
-//
-//         const updateData = {
-//             ...widgetData,
-//             uniqueData: {
-//                 //@ts-ignore
-//                 metaData: metas?.map((meta: Meta) => meta._id),
-//                 totalCount
-//             }
-//         }
-//
-//       await widgetSchema.findByIdAndUpdate(widgetData._id, {data: updateData}, {new: true}).exec().then(updatedWidget => {
-//           res.json({updatedWidget})
-//       }).catch(err => {
-//           console.log(err)
-//           res.status(503).json({message: 'something went wrong please try again later'})
-//       })
-//
-//     } catch (err) {
-//         console.log(err)
-//         return null
-//     }
-// }
-//
-// export default updateMetasWidget;

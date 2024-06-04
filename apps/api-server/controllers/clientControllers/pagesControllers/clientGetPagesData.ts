@@ -1,12 +1,16 @@
-import {PageSchema} from 'shared-schemas';
+import pageSchema from '@schemas/pageSchema';
 
-const clientGetPagesData = (req, res) =>{
-    PageSchema.find({}).exec().then(pagesData=>{
-        res.json({pagesData,error:false})
-    }).catch(err=>{
-        console.log(err)
-        res.status(404).json({message:'not found'})
-    })
-}
+const clientGetPagesData = (req, res) => {
+    pageSchema
+        .find({})
+        .exec()
+        .then(pagesData => {
+            res.json({ pagesData, error: false });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(404).json({ message: 'not found' });
+        });
+};
 
-export default clientGetPagesData
+export default clientGetPagesData;

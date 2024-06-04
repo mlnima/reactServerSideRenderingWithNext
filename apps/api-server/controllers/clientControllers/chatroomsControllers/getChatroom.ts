@@ -1,18 +1,28 @@
 import { Request, Response } from 'express';
-import { ChatroomSchema } from 'shared-schemas';
-import { mongoIdValidator } from 'custom-server-util';
+import { mongoIdValidator } from '@util/data-validators';
+import chatroomSchema from '@schemas/chatroomSchema';
 
 interface GetChatroomQuery {
     identifier: string;
 }
 
-const getChatroom = async (req: Request<{}, {}, {}, GetChatroomQuery>, res: Response): Promise<void> => {
+const getChatroom = async (
+    req: Request<{}, {}, {}, GetChatroomQuery>,
+    res: Response,
+): Promise<void> => {
     try {
         const isValidId = mongoIdValidator(req.query.identifier);
-        const currentChatroom = await ChatroomSchema.findOne(
-            isValidId ? { _id: req.query.identifier } : { name: req.query.identifier }
-        ).exec();
-        const allTheChatrooms = await ChatroomSchema.find({}).select('name').exec();
+        const currentChatroom = await chatroomSchema
+            .findOne(
+                isValidId
+                    ? { _id: req.query.identifier }
+                    : { name: req.query.identifier },
+            )
+            .exec();
+        const allTheChatrooms = await chatroomSchema
+            .find({})
+            .select('name')
+            .exec();
 
         res.json({ chatroom: currentChatroom, chatrooms: allTheChatrooms });
     } catch (error) {

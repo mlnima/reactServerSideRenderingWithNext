@@ -1,4 +1,4 @@
-import {MetaSchema} from 'shared-schemas';
+import metaSchema from "@schemas/metaSchema";
 
 const MetaSuggestion = async (req, res) => {
 
@@ -8,7 +8,7 @@ const MetaSuggestion = async (req, res) => {
         const size = 10;
         const startWithQuery = req.query?.startWith === 'any' ? {} :
             {name: {$regex: '^' + req.query?.startWith, $options: 'i'}}
-        await MetaSchema.find(
+        await metaSchema.find(
             {$and: [type, startWithQuery, statusQuery]},
             'name type',
             {sort: {'updatedAt': -1}}

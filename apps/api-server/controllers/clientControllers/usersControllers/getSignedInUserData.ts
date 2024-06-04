@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
-import { UserSchema } from 'shared-schemas';
-import {User} from "typescript-types";
+import userSchema from "@schemas/userSchema";
 
 interface ISignedInUserDataRequest extends Request {
     userData: { _id: string };
@@ -15,7 +14,7 @@ const getSignedInUserData = async (req: ISignedInUserDataRequest, res: Response)
         const { _id } = req.userData;
         const { fields } = req.body;
 
-        const user: User | null = await UserSchema.findById(_id)
+        const user = await userSchema.findById(_id)
             .select(fields || ['username', 'role', 'profileImage'])
             .populate({
                 path: 'profileImage',

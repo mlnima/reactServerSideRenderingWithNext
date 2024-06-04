@@ -1,5 +1,5 @@
 import {Request, Response} from 'express';
-import {PageSchema} from 'shared-schemas';
+import pageSchema from "@schemas/pageSchema";
 
 interface GetPageRequestQuery {
     pageName: string;
@@ -8,7 +8,7 @@ interface GetPageRequestQuery {
 const getPage = async (req: Request<{}, {}, GetPageRequestQuery>, res: Response): Promise<void> => {
     const {pageName} = req.query;
     try {
-        const pageData = await PageSchema.findOne({pageName}).exec();
+        const pageData = await pageSchema.findOne({pageName}).exec();
         if (pageData) {
             res.json({pageData, error: false});
         } else {

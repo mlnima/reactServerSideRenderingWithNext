@@ -1,7 +1,7 @@
-import {ChatroomSchema} from 'shared-schemas';
+import chatroomSchema from "@schemas/chatroomSchema";
 
 const updateChatroom = async (req, res) => {
-    await ChatroomSchema.findByIdAndUpdate(req.body.data._id,req.body.data,{new:true}).exec().then(chatroom => {
+    await chatroomSchema.findByIdAndUpdate(req.body.data._id,req.body.data,{new:true}).exec().then(chatroom => {
         res.json({ chatroom });
     }).catch(error=>{
         console.log(error)

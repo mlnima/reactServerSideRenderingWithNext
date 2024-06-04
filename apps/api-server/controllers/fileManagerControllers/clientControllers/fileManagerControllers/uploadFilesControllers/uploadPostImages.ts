@@ -1,8 +1,11 @@
+// @ts-nocheck
 //-----------AI improved code------------
-import { getCurrentDatePath } from "custom-server-util";
+import {getCurrentDatePath} from "@util/path-utils";
 import fsExtra from "fs-extra";
-import { FileSchema, PostSchema } from "shared-schemas";
+
 import { Request, Response } from "express";
+import postSchema from "@schemas/postSchema";
+import fileSchema from "@schemas/fileSchema";
 
 const uploadPostImages = async (req: Request<{}, {}, RequestBody>, res: Response) => {
     try {
@@ -23,7 +26,7 @@ const uploadPostImages = async (req: Request<{}, {}, RequestBody>, res: Response
         for await (const image of images) {
             try {
                 // Create an empty file document
-                const emptyFileDocument = new FileSchema({
+                const emptyFileDocument = new fileSchema({
                     usageType: parsedImagesData.usageType, // Use parsedImagesData instead of imagesData
                     filePath: 'temp',
                     mimeType: image.mimetype,
@@ -32,8 +35,8 @@ const uploadPostImages = async (req: Request<{}, {}, RequestBody>, res: Response
                 const savedEmptyDoc = await emptyFileDocument.save();
                 const filePath = `/public/uploads/images/${getCurrentDatePath()}/${savedEmptyDoc._id}.webp`;
                 await image.mv('.' + filePath);
-                const updatedImageDoc = await FileSchema.findByIdAndUpdate(savedEmptyDoc._id, { filePath }, { new: true }).exec();
-                await PostSchema.findByIdAndUpdate(parsedImagesData.postId, { $push: { images: updatedImageDoc._id } }).exec();
+                const updatedImageDoc = await fileSchema.findByIdAndUpdate(savedEmptyDoc._id, { filePath }, { new: true }).exec();
+                await postSchema.findByIdAndUpdate(parsedImagesData.postId, { $push: { images: updatedImageDoc._id } }).exec();
                 responseImages.push(updatedImageDoc);
             } catch (error) {
                 console.error('Error saving image:', error);
@@ -42,12 +45,12 @@ const uploadPostImages = async (req: Request<{}, {}, RequestBody>, res: Response
         }
 
         // Update post with mainThumbnail
-        const postImages = await PostSchema.findById(parsedImagesData.postId)
+        const postImages = await postSchema.findById(parsedImagesData.postId)
             .select('images')
             .populate([{ path: 'images', select: { 'filePath': 1 }, model: 'file' },]).exec();
 
         if (postImages?.images?.[0]?.filePath) {
-            await PostSchema.findByIdAndUpdate(parsedImagesData.postId, { mainThumbnail: postImages.images[0].filePath }).exec();
+            await postSchema.findByIdAndUpdate(parsedImagesData.postId, { mainThumbnail: postImages.images[0].filePath }).exec();
         }
 
         return res.status(200).json({ images: responseImages });
@@ -60,9 +63,9 @@ const uploadPostImages = async (req: Request<{}, {}, RequestBody>, res: Response
 export default uploadPostImages;
 
 //-----------my code------------
-// import {getCurrentDatePath} from "custom-server-util";
+// import {getCurrentDatePath} from "@repo/shared-server-util";
 // import fsExtra from "fs-extra";
-// import {fileSchema, postSchema} from "shared-schemas";
+// import {fileSchema, postSchema} from "@repo/shared-schemas";
 // import {Request, Response} from "express";
 //
 // const uploadPostImages = async (req:Request<{}, {}, RequestBody>, res:Response) => {

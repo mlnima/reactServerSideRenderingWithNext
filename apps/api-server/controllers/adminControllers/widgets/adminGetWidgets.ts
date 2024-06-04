@@ -1,9 +1,10 @@
-import {WidgetSchema} from 'shared-schemas';
-import {databaseSelectFieldsForPostCards} from "data-structure";
+
+import {databaseSelectFieldsForPostCards} from "@repo/data-structures";
+import widgetSchema from "@schemas/widgetSchema";
 
 const adminGetWidgets = async (req, res) => {
     try {
-        const widgets = await WidgetSchema.find({}).populate([
+        const widgets = await widgetSchema.find({}).populate([
             {
                 model: 'meta',
                 path: 'data.uniqueData.metaData'

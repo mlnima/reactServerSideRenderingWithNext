@@ -1,8 +1,8 @@
-import {ChatroomSchema} from 'shared-schemas';
+import chatroomSchema from "@schemas/chatroomSchema";
 
 const getChatrooms = async (req, res) => {
-    const totalCount = await ChatroomSchema.countDocuments({}).exec()
-    await ChatroomSchema.find({}).exec().then(chatrooms => {
+    const totalCount = await chatroomSchema.countDocuments({}).exec()
+    await chatroomSchema.find({}).exec().then(chatrooms => {
         res.json({ chatrooms,totalCount });
     }).catch(error=>{
         console.log(error)

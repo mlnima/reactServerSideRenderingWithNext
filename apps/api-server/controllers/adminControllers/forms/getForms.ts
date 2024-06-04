@@ -1,4 +1,4 @@
-import {FormSchema} from 'shared-schemas';
+import formSchema from "@schemas/formSchema";
 
 const getForms = async (req, res) => {
     
@@ -9,7 +9,7 @@ const getForms = async (req, res) => {
         let sortQuery = (req.query.sort === 'latest' || !req.query.sort ) ? {_id:-1} : {[req.query.sort]: -1}
         //@ts-ignore
         const forms = await FormSchema.find().limit(size).sort(sortQuery).exec();
-        const totalCount = await FormSchema.countDocuments({}).exec()
+        const totalCount = await formSchema.countDocuments({}).exec()
 
         res.json({forms, error: false, totalCount})
     }catch (error) {

@@ -1,12 +1,13 @@
 import {Request, Response} from 'express';
-import {FormSchema} from 'shared-schemas';
+import formSchema from "@schemas/formSchema";
+
 interface SaveFormDataRequestBody {
     data: Record<string, unknown>;
 }
 const saveFormData = async (req: Request<{}, {}, SaveFormDataRequestBody>, res: Response): Promise<void> => {
     try {
         const {data} = req.body;
-        const formDataDataToSave = new FormSchema(data);
+        const formDataDataToSave = new formSchema(data);
 
         await formDataDataToSave.save((error, savedData) => {
             if (error) {

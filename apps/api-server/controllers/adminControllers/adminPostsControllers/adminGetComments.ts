@@ -1,5 +1,4 @@
-import {CommentSchema} from 'shared-schemas';
-
+import commentSchema from "@schemas/commentSchema";
 const adminGetComments = async (req, res) => {
 
     try {
@@ -17,7 +16,7 @@ const adminGetComments = async (req, res) => {
         };
 
 
-        const comments = await CommentSchema.find({$and: [onDocument, status, searchQuery]})
+        const comments = await commentSchema.find({$and: [onDocument, status, searchQuery]})
             .skip(size * (page - 1))
             .limit(size)
             // @ts-ignore
@@ -28,7 +27,7 @@ const adminGetComments = async (req, res) => {
                 {path: 'onDocumentId', select: {'title': 1, 'postType': 1}},
             ])
             .exec()
-        const totalCount = await CommentSchema.countDocuments({$and: [onDocument, status, searchQuery]}).exec()
+        const totalCount = await commentSchema.countDocuments({$and: [onDocument, status, searchQuery]}).exec()
 
         res.json({comments, totalCount})
 

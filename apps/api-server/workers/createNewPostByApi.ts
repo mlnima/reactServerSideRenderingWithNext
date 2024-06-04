@@ -1,15 +1,15 @@
 import dotenv from 'dotenv';
 dotenv.config();
-import {connectToDatabase} from 'custom-server-util';
+import {connectToDatabase} from '@util/database-util';
+import postSchema from "@schemas/postSchema";
 connectToDatabase()
 const {Worker, parentPort, workerData} = require('worker_threads');
 const sharp = require('sharp');
-const PostSchema = require("shared-schemas");
 const updateSaveMetas = require("../_variables/adminVariables/_updateSaveMetas");
 const download = require('image-downloader')
 const fsExtra = require("fs-extra");
 const fs = require("fs");
-// const {fileDownloader} = require('custom-server-util');
+// const {fileDownloader} = require('@repo/shared-server-util');
 
 const imageDownloader = async (newPost) => {
 
@@ -70,7 +70,7 @@ const savePostWithDuplicateContent = async (newPost, downloadImageContent) => {
             actors: newPost.actors ? await updateSaveMetas(newPost.actors) : [],
             mainThumbnail: downloadImageContent ? await imageDownloader(newPost) : newPost.mainThumbnail
         };
-        const newPostDataToSave = new PostSchema(newPostWithMeta)
+        const newPostDataToSave = new postSchema(newPostWithMeta)
         await newPostDataToSave.save((err, createdPost) => {
             if (err) {
                 parentPort.postMessage({message: 'Something Went Wrong While Saving! ' + newPost.title})
@@ -86,7 +86,7 @@ const savePostWithDuplicateContent = async (newPost, downloadImageContent) => {
 const savePostIfThereIsNoDuplicate = async (newPost, downloadImageContent) => {
 
     try {
-        await PostSchema.find({$or: [{title: newPost.title}]})
+        await postSchema.find({$or: [{title: newPost.title}]})
             .exec()
             .then(async posts => {
                 try {
@@ -102,7 +102,7 @@ const savePostIfThereIsNoDuplicate = async (newPost, downloadImageContent) => {
                             mainThumbnail: downloadImageContent ? await imageDownloader(newPost) : newPost.mainThumbnail
                         }
 
-                        const newPostDataToSave = await new PostSchema(editedNewPost);
+                        const newPostDataToSave = await new postSchema(editedNewPost);
 
                         await newPostDataToSave.save((err, createdPost) => {
                             if (err) {

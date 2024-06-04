@@ -1,9 +1,9 @@
-import {PageSchema} from 'shared-schemas';
+import pageSchema from "@schemas/pageSchema";
 
-const adminDeleteCustomPage = (req, res) => {
+const adminDeleteCustomPage = async (req, res) => {
     const pageId = req.body.id
     if (pageId) {
-        PageSchema.findByIdAndDelete(pageId).exec().then(pageData => {
+       await pageSchema.findByIdAndDelete(pageId).exec().then(pageData => {
             res.json({message: 'Page Deleted'})
         }).catch(err => {
             console.log(err)

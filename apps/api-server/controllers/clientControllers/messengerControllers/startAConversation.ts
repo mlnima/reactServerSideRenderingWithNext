@@ -1,11 +1,9 @@
-//startAConversation
-
-import {MessengerConversationSchema} from "shared-schemas";
+import messengerConversationSchema from "@schemas/messengerConversationSchema";
 
 const startAConversation = async (req, res) => {
     try {
 
-        const existingConversation = await MessengerConversationSchema.findOne({
+        const existingConversation = await messengerConversationSchema.findOne({
             users: {
                 $all: req.body.users,
                 $size: req.body.users.length
@@ -15,7 +13,7 @@ const startAConversation = async (req, res) => {
         if (existingConversation) {
             res.status(200).json({conversation: existingConversation})
         }else{
-            const conversationDataToSave = new MessengerConversationSchema({
+            const conversationDataToSave = new messengerConversationSchema({
                 users: req.body?.users
             })
             const conversation = await conversationDataToSave.save();

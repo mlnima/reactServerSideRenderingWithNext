@@ -1,12 +1,15 @@
 {
   "extends": "tsconfig/server.json",
   "include": ["**/*.ts"],
-  "exclude": ["node_modules",".turbo", "coverage","dist/**/*"],
+  "exclude": ["node_modules", ".turbo", "coverage", "dist/**/*"],
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": ".",
+    "baseUrl": ".",
     "paths": {
-      "@_variables/*": ["_variables/*"],
+      "@_variables/*": ["./_variables/*"],
+      "@schemas/*": ["./schemas/*"],
+      "@util/*": ["./util/*"],
       "@env/*": ["../../.env"]
     },
     "lib": [

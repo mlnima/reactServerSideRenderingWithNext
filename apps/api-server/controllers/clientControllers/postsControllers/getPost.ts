@@ -1,9 +1,9 @@
+// @ts-nocheck
 import { Response,Request } from "express";
-
-import {PostSchema} from 'shared-schemas';
-import {mongoIdValidator} from 'custom-server-util';
+import { mongoIdValidator } from '@util/data-validators';
 import {Post} from "typescript-types";
-// import {arraySortRandom} from 'custom-util';
+import postSchema from "@schemas/postSchema";
+// import {arraySortRandom} from 'shared-util';
 // import {Meta} from 'typescript-types'
 
 // const defaultFieldForPosts = [
@@ -44,7 +44,7 @@ export const buildFindQuery = (req:any) => {
 const findRelatedPosts = async (post:Post) => {
     try {
         const relatedByFields = ['actors', 'categories', 'tags'];
-        return await PostSchema.findRelatedPosts({post, relatedByFields, limit: 8});
+        return await postSchema.findRelatedPosts({post, relatedByFields, limit: 8});
     } catch (error) {
         console.log(error);
         return [];
@@ -57,7 +57,7 @@ export const getPost = async (req:Request, res:Response) => {
         const findQuery = buildFindQuery(req);
 
         if (findQuery) {
-            const post = await PostSchema.findOne(findQuery, '-comments -views -likes -disLikes').populate([
+            const post = await postSchema.findOne(findQuery, '-comments -views -likes -disLikes').populate([
                 {
                     path: 'author',
                     select: ['username', 'profileImage', 'role'],
@@ -97,7 +97,7 @@ export const getPostViews = async (req:Request, res:Response) => {
     try {
         const findQuery = buildFindQuery(req);
 
-        const postData = await PostSchema.findOne(findQuery).select('views').exec()
+        const postData = await postSchema.findOne(findQuery).select('views').exec()
 
         if (postData) {
             res.status(200).json({
@@ -116,7 +116,7 @@ export const getPostRating = async (req:Request, res:Response) => {
     try {
         const findQuery = buildFindQuery(req);
 
-        const postData = await PostSchema.findOne(findQuery).select(['likes','disLikes']).exec()
+        const postData = await postSchema.findOne(findQuery).select(['likes','disLikes']).exec()
 
         if (postData) {
             res.status(200).json({

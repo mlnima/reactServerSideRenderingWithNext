@@ -1,29 +1,56 @@
-import {connectToDatabase, getLocalIP, shouldCompress} from 'custom-server-util';
-connectToDatabase('Express Server')
+import 'module-alias/register';
+import { register } from 'tsconfig-paths';
+import dotenv from 'dotenv';
+dotenv.config({ path: '../.env' });
+
+const baseUrl = __dirname; // usually __dirname
+const cleanup = register({
+    baseUrl,
+    paths: {
+        '@_variables/*': ['./_variables/*'],
+        '@schemas/*': ['./schemas/*'],
+        '@util/*': ['./util/*'],
+        '@env/*': ['../../.env'],
+    },
+});
+
+import { connectToDatabase } from '@util/database-util';
+
+
+import adminAuthMiddleware from '@util/middlewares/adminAuthMiddleware';
+import { getLocalIP } from '@util/network-util';
+import shouldCompress from '@util/shouldCompress';
 import express from 'express';
 import bodyParser from 'body-parser';
 import fileUpload from 'express-fileupload';
 import cookieParser from 'cookie-parser';
-import {adminAuthMiddleware} from 'custom-server-util';
 import xmlParser from 'express-xml-bodyparser';
 import apiCache from 'apicache';
 import cors from 'cors';
 import compression from 'compression';
+import path from 'path';
+// import mongoose from 'mongoose';
+import http from 'http';
 import cacheSuccesses from './middlewares/apiCache';
 import adminMainRouter from './controllers/adminControllers/adminMainRouter';
 import clientMainRouter from './controllers/clientControllers/clientMainRouter';
-import clientMainFestController from './controllers/clientControllers/clientMainFestController'
-import clientRobotTxtController from './controllers/clientControllers/clientRobotTxtController'
-import loggerMiddleware from "./middlewares/loggerMiddleware";
-
-import {SettingSchema} from 'shared-schemas';
+import clientMainFestController from './controllers/clientControllers/clientMainFestController';
+import clientRobotTxtController from './controllers/clientControllers/clientRobotTxtController';
+import loggerMiddleware from './middlewares/loggerMiddleware';
+import clientFileManagerMainRouter from './controllers/fileManagerControllers/clientControllers/fileManagerControllers/clientFileManagerMainRouter';
+import { initializeSocket } from './controllers/socketController/socketController';
+import initializeChatroomsToStore from './controllers/socketController/initializeChatroomsToStore';
+import { createProxyMiddleware } from 'http-proxy-middleware';
 import * as process from "process";
-// import syncAllIndexes from "./tools/syncModelsIndexes";
-import path from "path";
-import clientFileManagerMainRouter
-    from "./controllers/fileManagerControllers/clientControllers/fileManagerControllers/clientFileManagerMainRouter";
 
-// syncAllIndexes()
+// Create an Express application
+const app = express();
+const server = http.createServer(app); // Create an HTTP server
+
+const dev = process.env.NODE_ENV !== 'production';
+
+// mongoose.Promise = global.Promise;
+// mongoose.set('strictQuery', true);
 
 declare global {
     namespace Express {
@@ -33,41 +60,41 @@ declare global {
     }
 }
 
-SettingSchema.findOne({type: 'initialSettings'}).exec().then((initialSettings) => {
-    if (initialSettings) {
-        global.initialSettings = initialSettings.data
-    }
-})
-
-
-const server = express();
-const dev = process.env.NODE_ENV !== 'production';
+// export const connectToDatabase = async () => {
+//     try {
+//         await mongoose.connect(mongoDBConnectionQueryGenerator());
+//     } catch (error) {
+//         console.log('Error connecting to Database', error);
+//         process.exit(1);
+//     }
+// };
 
 const runServer = () => {
-
-// Base URL from environment variable
     const baseDomain = process.env.NEXT_PUBLIC_PRODUCTION_URL;
-
-// Generate the "www" version of the domain if the base domain exists
-    const wwwDomain = baseDomain && new URL(baseDomain).protocol + '//www.' + new URL(baseDomain).hostname;
+    const wwwDomain =
+        baseDomain &&
+        new URL(baseDomain).protocol + '//www.' + new URL(baseDomain).hostname;
 
     const allowedOrigins = [baseDomain, wwwDomain].filter(Boolean);
 
     const isDevelopment = process.env.NODE_ENV !== 'production';
-    const isLocalhost = baseDomain && (
-        baseDomain.includes('localhost') ||
-        baseDomain.includes(getLocalIP()) ||
-        baseDomain.includes('127.0.0.1')
-    );
+    const isLocalhost =
+        baseDomain &&
+        (baseDomain.includes('localhost') ||
+            baseDomain.includes(getLocalIP()) ||
+            baseDomain.includes('127.0.0.1'));
 
     const corsOptions = {
-        origin: function (origin, callback) {
+        origin: function (
+            origin: string,
+            callback: (arg0: Error, arg1: boolean) => void,
+        ) {
             if (isDevelopment || isLocalhost) {
                 callback(null, true); // Allow any origin in development or if baseDomain is localhost
             } else if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
                 callback(null, true);
             } else {
-                callback(new Error('Not allowed by CORS'));
+                callback(new Error('Not allowed by CORS'), false);
             }
         },
         credentials: true,
@@ -75,64 +102,142 @@ const runServer = () => {
         // allowedHeaders: ['Content-Type', 'Authorization']
     };
 
-// Use the CORS middleware
-    server.use(cors(corsOptions));
+    app.use(cors(corsOptions));
 
-    server.use(cors())
-    server.use(express.json({limit: '5MB'}));
-    server.use(cookieParser());
-    server.use(fileUpload());
-    server.use(bodyParser.json());
-    server.use(xmlParser());
-    server.use(compression({filter: shouldCompress}));
+    app.use(cors());
+    app.use(express.json({ limit: '5MB' }));
+    app.use(cookieParser());
+    app.use(fileUpload());
+    app.use(bodyParser.json());
+    app.use(xmlParser());
+    app.use(compression({ filter: shouldCompress }));
 
-    server.get('/api/admin/settings/clearCaches', adminAuthMiddleware, (req, res) => {
-        //@ts-ignore
-        apiCache.clear(req.params?.collection)
-        res.json({message: 'Deleting Cache Command Executed'})
+    app.get(
+        '/api/admin/settings/clearCaches',
+        adminAuthMiddleware,
+        (req, res) => {
+            //@ts-ignore
+            apiCache.clear(req.params?.collection);
+            res.json({ message: 'Deleting Cache Command Executed' });
+        },
+    );
+
+    app.get('/api/alive', loggerMiddleware, (req, res) => {
+        res.json({ message: 'alive' });
     });
 
-    server.get('/api/alive', loggerMiddleware, (req, res) => {
-        res.json({message: 'alive'})
-    });
+    app.get('/robots.txt', (req, res) => clientRobotTxtController(req, res));
+    app.get('/alive', (req, res) => res.send('alive'));
+    app.get('/manifest.json', cacheSuccesses, (req, res) =>
+        clientMainFestController(req, res),
+    );
 
-    server.get('/robots.txt', (req, res) => clientRobotTxtController(req, res));
-    server.get('/alive', (req, res) => res.send('alive'));
-    server.get('/manifest.json', cacheSuccesses, (req, res) => clientMainFestController(req, res));
     //----------------- Api routes handler-----------------------
-    server.use('/api/admin', adminMainRouter);
-    server.use('/api/v1', loggerMiddleware, clientMainRouter);
+    app.use('/api/admin', adminMainRouter);
+    app.use('/api/v1', loggerMiddleware, clientMainRouter);
 
     //----------------- File routes handlers-----------------------
 
     const staticPath = dev ? './static' : '../static';
     const publicPath = dev ? './public' : '../public';
-    const publicPathFileServer = dev ? '../api-server/public' : '../../api-server/public';
-    server.use('/static', express.static(path.join(__dirname, staticPath), {maxAge: "604800000"}));
-    server.use('/public', express.static(path.join(__dirname, publicPath), {maxAge: "604800000"}));
-    server.use('/public', express.static(path.join(__dirname, publicPathFileServer), {maxAge: "604800000"}));
-   server.use('/files/v1/', clientFileManagerMainRouter);
-
-
+    const publicPathFileServer = dev
+        ? '../api-server/public'
+        : '../../api-server/public';
+    app.use(
+        '/static',
+        express.static(path.join(__dirname, staticPath), {
+            maxAge: '604800000',
+        }),
+    );
+    app.use(
+        '/public',
+        express.static(path.join(__dirname, publicPath), {
+            maxAge: '604800000',
+        }),
+    );
+    app.use(
+        '/public',
+        express.static(path.join(__dirname, publicPathFileServer), {
+            maxAge: '604800000',
+        }),
+    );
+    app.use('/files/v1/', clientFileManagerMainRouter);
 
     //----------------- Serving Production Dashboard React App------------------------
-    const dashboardAppPath = dev ? '../web-dashboard-app/build' : '../../web-dashboard-app/build';
-    const dashboardBuiltPath = path.join(__dirname, dashboardAppPath)
-    server.use('/static', express.static(`${dashboardBuiltPath}/static`, {maxAge: "604800000"}));
+    const dashboardAppPath = dev
+        ? '../web-dashboard-app/build'
+        : '../../web-dashboard-app/build';
+    const dashboardBuiltPath = path.join(__dirname, dashboardAppPath);
 
-    server.get('/dashboard', (req, res) => {
+    app.use(
+        '/static',
+        express.static(`${dashboardBuiltPath}/static`, { maxAge: '604800000' }),
+    );
+
+    app.get('/dashboard', (req, res) => {
         res.sendFile(`${dashboardBuiltPath}/index.html`);
-    })
-    server.get('/dashboard/*', (req, res) => {
+    });
+
+
+    if (dev) {
+        app.get(
+            '/',
+            createProxyMiddleware({
+                target: `http://localhost:3008`,
+                changeOrigin: true,
+            }),
+        );
+    } else {
+        //in case of direct request to ip and api server port user will redirect to production url
+        app.get('/', (req, res) => {
+            res.redirect(process.env.NEXT_PUBLIC_PRODUCTION_URL);
+        });
+
+        // app.get(
+        //     '/',
+        //     createProxyMiddleware({
+        //         target: process.env.NEXT_PUBLIC_PRODUCTION_URL,
+        //         changeOrigin: true,
+        //     }),
+        // );
+    }
+
+    app.get('/', (req, res) => {});
+    app.get('/dashboard/*', (req, res) => {
         res.sendFile(`${dashboardBuiltPath}/index.html`);
-    })
+    });
+
+    //-----------------  Setup Socket.IO------------------------
+    const io = require('socket.io')(server, {
+        cors: {
+            origin: [process.env.NEXT_PUBLIC_PRODUCTION_URL, '*'],
+            methods: ['GET', 'POST'],
+            allowedHeaders: ['my-custom-header'],
+            credentials: true,
+        },
+    });
+
+    io.on('connection', socket => {
+        console.log(`New client connected: ${socket.id}`);
+        socket.on('disconnect', () => {
+            console.log(`Client disconnected: ${socket.id}`);
+        });
+    });
+
+    initializeSocket(io);
     //---------------------------------------------------------------------------------
-
-    const serverPort = parseInt(process.env.API_SERVER_PORT || '3002')
+    // Start the server
+    const serverPort = parseInt(process.env.API_SERVER_PORT || '3002');
     server.listen(serverPort, () => {
-        console.log(`process ${process.pid} : api server started at ${serverPort} `);
-    })
-}
+        console.log(
+            `process ${process.pid} : API server started at ${serverPort}`,
+        );
+    });
+};
 
-runServer()
+connectToDatabase('API server ').then(() => {
+    runServer();
+    initializeChatroomsToStore();
+});
+
 

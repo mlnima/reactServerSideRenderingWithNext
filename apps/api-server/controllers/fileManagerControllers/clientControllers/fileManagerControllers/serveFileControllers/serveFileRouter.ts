@@ -1,8 +1,9 @@
 import {request} from "express";
 import {isValidObjectId} from "mongoose";
-import {FileSchema} from "shared-schemas";
+
 import fs from "fs";
 import path from "path";
+import fileSchema from "@schemas/fileSchema";
 
 //http://localhost:3000/files/v1/serve/6519824e460e72e975b3597d
 
@@ -17,7 +18,7 @@ const serveFileRouter = async (req, res) => {
             return
         }
 
-        const fileDoc = await FileSchema.findById(fileId)
+        const fileDoc = await fileSchema.findById(fileId)
 
 
         if (!fileDoc) {

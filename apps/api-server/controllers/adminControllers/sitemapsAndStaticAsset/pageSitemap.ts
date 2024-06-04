@@ -1,12 +1,13 @@
-import {PageSchema} from 'shared-schemas';
+
 import {sitemapItemTemplate} from "./xmlTemplateGenerators";
 import fs from "fs";
+import pageSchema from "@schemas/pageSchema";
 
 export const pagesSitemapsLinksForRoot = async () =>{
     try {
         let finalXML = ''
         const findPageQuery = {status:'published'}
-        const pagesCount = await PageSchema.countDocuments(findPageQuery).exec();
+        const pagesCount = await pageSchema.countDocuments(findPageQuery).exec();
         const currentDayDate = new Date();
         const maxPage = pagesCount <= 500 ? 1 : Math.ceil(pagesCount / 500)
         const amountOfPages = maxPage > 1 ? [...Array(maxPage).keys()] : [0]
@@ -52,7 +53,7 @@ const templateGenerator = (pages:any[]) => {
 
 export const pagesSitemapGenerator = async (baseOutputPath:string) => {
     try {
-        const pages = await PageSchema.find({status: 'published'}).exec() || []
+        const pages = await pageSchema.find({status: 'published'}).exec() || []
         fs.writeFileSync(
             `${baseOutputPath}/sitemap-pt-page-1.xml`,
             templateGenerator(pages),

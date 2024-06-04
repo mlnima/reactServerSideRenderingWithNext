@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
-import {connectToDatabase} from 'custom-server-util';
-connectToDatabase('worker getPosts')
+import {connectToDatabase} from '@util/database-util';
+connectToDatabase()
 import  {parentPort, workerData} from 'worker_threads'
 
 

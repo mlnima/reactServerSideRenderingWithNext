@@ -1,4 +1,4 @@
-// import {UserSchema,ConversationSchema} from 'shared-schemas';
+// import {UserSchema,ConversationSchema} from '@repo/shared-schemas';
 
 
 const deleteConversation = async (req, res) => {

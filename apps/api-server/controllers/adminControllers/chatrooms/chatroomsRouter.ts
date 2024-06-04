@@ -2,7 +2,7 @@ import {Router} from 'express';
 import getChatrooms from "./getChatrooms";
 import getChatroom from "./getChatroom";
 import deleteChatroom from "./deleteChatroom";
-import {adminAuthMiddleware} from 'custom-server-util';
+import adminAuthMiddleware from '@util/middlewares/adminAuthMiddleware';
 import updateChatroom from "./updateChatroom";
 import deleteChatroomMessage from "./deleteChatroomMessage";
 import createChatroom from "./createChatroom";

@@ -3,7 +3,8 @@
   "ignore": [
     "node_modules",
     ".next",
-    "./public/locales/*/customTranslation.json"
+    "./public/locales/*/customTranslation.json",
+    "./tools/*"
   ],
   "watch": [
     "**/*",
@@ -14,7 +15,5 @@
   },
   "ext": "js,ts,json",
   "exec": "concurrently \"ts-node --transpile-only index.ts\"",
-  "//oldExec2": "concurrently \"ts-node --transpile-only index.ts\" \"ts-node --transpile-only socketServer/index.ts\"",
-  "//oldExec": "concurrently \"ts-node --transpile-only ./expressServer/index.ts\" \"ts-node --transpile-only ./expressServer/socketServer/index.ts\"",
   "trace-warnings": true
 }

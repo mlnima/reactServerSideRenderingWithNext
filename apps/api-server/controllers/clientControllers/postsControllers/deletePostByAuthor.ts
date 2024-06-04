@@ -1,4 +1,5 @@
-import {PostSchema, UserSchema} from "shared-schemas";
+import postSchema from "@schemas/postSchema";
+import userSchema from "@schemas/userSchema";
 
 const deletePostByAuthor = async (req, res) => {
     try {
@@ -12,15 +13,15 @@ const deletePostByAuthor = async (req, res) => {
         const userData = req.userData
         const postId = req.query.postId
 
-        const postData = await PostSchema.findById(postId).select('author').exec()
+        const postData = await postSchema.findById(postId).select('author').exec()
         if (postData.author.toString() !== userData._id.toString()) {
             return res.status(401).json({
                 message: 'Unauthorized'
             })
         }
 
-        await PostSchema.findByIdAndDelete(postId).exec()
-        await UserSchema.findByIdAndUpdate(req.userData._id, {$unset: {draftPost: 1}}).exec()
+        await postSchema.findByIdAndDelete(postId).exec()
+        await userSchema.findByIdAndUpdate(req.userData._id, {$unset: {draftPost: 1}}).exec()
 
 
         res.status(200).json({message: 'Post Deleted Successfully'})

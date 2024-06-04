@@ -1,4 +1,4 @@
-import {ConversationSchema} from 'shared-schemas';
+import conversationSchema from "@schemas/conversationSchema";
 
 const getStartConversation = async (req, res) => {
     try{
@@ -8,7 +8,7 @@ const getStartConversation = async (req, res) => {
             users:[senderId,receiverId].sort()
         }
 
-        const conversation = await ConversationSchema.findOneAndUpdate({users:{ "$eq" : [senderId,receiverId].sort()}}, {...conversationData},{new:true,upsert:true}).exec()
+        const conversation = await conversationSchema.findOneAndUpdate({users:{ "$eq" : [senderId,receiverId].sort()}}, {...conversationData},{new:true,upsert:true}).exec()
 
         res.json({conversation})
 

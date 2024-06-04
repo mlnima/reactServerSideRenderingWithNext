@@ -1,5 +1,5 @@
-import {MetaSchema} from 'shared-schemas';
-
+import metaSchema from '@schemas/metaSchema';
+import settingSchema from '@schemas/settingSchema';
 interface FindMetasQueryTypes {
     [key: string]: any
 
@@ -35,10 +35,10 @@ export const findMetas = async (query: FindMetasQueryTypes) => {
 
         const findQuery = {$and: [type, startWithQuery, statusQuery, countQuery]}
 
-        const totalCount = await MetaSchema.countDocuments(findQuery).exec()
+        const totalCount = await metaSchema.countDocuments(findQuery).exec()
 
 
-        const metas = await MetaSchema.find(
+        const metas = await metaSchema.find(
             findQuery,
             {},
             {sort: sortQuery})

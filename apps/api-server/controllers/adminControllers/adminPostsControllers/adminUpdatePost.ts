@@ -1,4 +1,4 @@
-import {PostSchema} from 'shared-schemas';
+import postSchema from "@schemas/postSchema";
 import updateSaveMetas from '../../../_variables/adminVariables/_updateSaveMetas';
 
 const adminUpdatePost =  async (req, res) => {
@@ -13,7 +13,7 @@ const adminUpdatePost =  async (req, res) => {
             actors: postUpdatedData.actors ? await updateSaveMetas(postUpdatedData.actors) : []
         }
 
-        await PostSchema.findByIdAndUpdate(postUpdatedData._id, {...finalPostUpdatedData}, {new: true}).exec().then(updated => {
+        await postSchema.findByIdAndUpdate(postUpdatedData._id, {...finalPostUpdatedData}, {new: true}).exec().then(updated => {
             res.json({message:'Post Has Been Successfully Updated'})
         }).catch(err => {
             console.log(err)

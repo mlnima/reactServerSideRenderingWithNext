@@ -1,7 +1,7 @@
-import {UserSchema} from 'shared-schemas';
+import userSchema from "@schemas/userSchema";
 
 const adminDeleteUser = (req, res) => {
-    UserSchema.findByIdAndDelete(req.query._id).exec()
+    userSchema.findByIdAndDelete(req.query._id).exec()
         .then((result) => {
             if (!result) {
                 return res.status(404).json({message: 'No user found with this id'});

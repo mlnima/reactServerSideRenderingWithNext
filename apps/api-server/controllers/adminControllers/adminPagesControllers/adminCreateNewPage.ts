@@ -1,7 +1,7 @@
-import {PageSchema} from 'shared-schemas';
+import pageSchema from "@schemas/pageSchema";
 
 const adminCreateNewPage = (req, res) => {
-    const newPageDataToSave = new PageSchema(req.body.pageData)
+    const newPageDataToSave = new pageSchema(req.body.pageData)
     newPageDataToSave?.save().then(savedPage => {
         res.json({savedPageData: savedPage, error: false})
     }).catch(err => {

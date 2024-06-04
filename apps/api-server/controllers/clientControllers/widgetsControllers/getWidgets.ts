@@ -1,8 +1,9 @@
-import {WidgetSchema} from 'shared-schemas';
-import {databaseSelectFieldsForPostCards} from "data-structure";
+
+import {databaseSelectFieldsForPostCards} from "@repo/data-structures";
 import {Widget} from "typescript-types";
-import {postFieldRequestForCards} from "data-structure";
+import {postFieldRequestForCards} from "@repo/data-structures";
 import {Request,Response} from "express";
+import widgetSchema from "@schemas/widgetSchema";
 
 const getWidgets = async (req:Request, res:Response) => {
 
@@ -12,7 +13,7 @@ const getWidgets = async (req:Request, res:Response) => {
         const excludeOtherLanguagesQuery = locale ? {select: locales.map(languageCode => languageCode !== locale ? `-data.translations.${languageCode}` : '').join(' ')} : {}
         const requestedWidgets = Array.isArray(req.query.widget) ? req.query.widget : [req.query.widget]
         const widgetsDataQuery = requestedWidgets.map(position => position === 'all' ? {} : {'data.position': position})
-        const widgets = await WidgetSchema.find(
+        const widgets = await widgetSchema.find(
             {$or: [...widgetsDataQuery]},
             {},
             excludeOtherLanguagesQuery).populate([

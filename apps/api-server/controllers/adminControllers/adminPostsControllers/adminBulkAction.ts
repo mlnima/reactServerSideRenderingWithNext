@@ -1,4 +1,7 @@
-import {PostSchema,MetaSchema,UserSchema,CommentSchema} from 'shared-schemas';
+import postSchema from "@schemas/postSchema";
+import metaSchema from "@schemas/metaSchema";
+import commentSchema from "@schemas/commentSchema";
+import userSchema from "@schemas/userSchema";
 
 const adminBulkAction = async (req, res) => {
     const type = req.body.type
@@ -6,16 +9,17 @@ const adminBulkAction = async (req, res) => {
     const ids = req.body.ids
     let actionsPromise:{}[];
 
-    const targetSchema = type === 'posts' ? PostSchema :
-        type === 'metas' ? MetaSchema :
-            type === 'comments' ? CommentSchema :
-                type === 'users' ? UserSchema : null
+    const targetSchema = type === 'posts' ? postSchema :
+        type === 'metas' ? metaSchema :
+            type === 'comments' ? commentSchema :
+                type === 'users' ? userSchema : null
     if (status === 'delete') {
         actionsPromise = ids.map(id => {
             targetSchema.findByIdAndDelete(id)
         })
     } else {
-        actionsPromise = ids.map(id => {
+        actionsPromise = ids.map((id:string) => {
+            //@ts-ignore
             return targetSchema.findByIdAndUpdate(id, {$set: {status}})
         })
     }

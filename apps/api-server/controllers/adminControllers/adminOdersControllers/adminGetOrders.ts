@@ -1,4 +1,4 @@
-import {OrderSchema} from 'shared-schemas';
+import orderSchema from "@schemas/orderSchema";
 
 const adminGetOrders = (req, res) => {
 
@@ -16,7 +16,7 @@ const adminGetOrders = (req, res) => {
 
 
     let sortQuery = req.body.sort === 'latest' || req.body.sort === 'random' ? {lastModify: -1} : {[req.body.sort]: -1};
-    const ordersCount = OrderSchema.countDocuments({$and: [statusQuery, orderTypeQuery, searchQuery]}).exec();
+    const ordersCount = orderSchema.countDocuments({$and: [statusQuery, orderTypeQuery, searchQuery]}).exec();
     //@ts-ignore
     const orders = orderSchema.find({$and: [orderTypeQuery, statusQuery, searchQuery]}).skip(size * (pageNo - 1)).limit(size).sort(sortQuery).exec();
     Promise.all([orders, ordersCount]).then(async data => {

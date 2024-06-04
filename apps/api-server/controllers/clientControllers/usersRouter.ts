@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import {authMiddleware} from 'custom-server-util';
+import authMiddleware from "@util/middlewares/authMiddleware";
 import updateUserData from './usersControllers/updateUserData';
 import register from './usersControllers/register';
 import userLogin from './usersControllers/userLogin';

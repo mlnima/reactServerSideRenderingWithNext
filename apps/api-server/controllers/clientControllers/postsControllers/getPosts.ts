@@ -1,12 +1,15 @@
-import {PostSchema,MetaSchema,SearchKeywordSchema} from 'shared-schemas';
+// @ts-nocheck
 import _clientQueryGeneratorForGettingPosts from '../../../_variables/clientVariables/_clientQueryGeneratorForGettingPosts'
-import {mongoIdValidator} from 'custom-server-util';
-import {postFieldRequestForCards} from "data-structure";
+import { mongoIdValidator } from '@util/data-validators';
+import {postFieldRequestForCards} from "@repo/data-structures";
+import postSchema from "@schemas/postSchema";
+import metaSchema from "@schemas/metaSchema";
+import searchKeywordSchema from "@schemas/searchKeywordSchema";
 //import {postFieldRequestForCards} from "structures";
 
 const saveSearchedKeyword = async (keyword :string, count:number) => {
     if (keyword) {
-        await SearchKeywordSchema.findOneAndUpdate(
+        await searchKeywordSchema.findOneAndUpdate(
             {name: keyword},
             {name: keyword, count},
             {upsert: true}).exec()
@@ -16,9 +19,9 @@ const saveSearchedKeyword = async (keyword :string, count:number) => {
 const getMetaForGettingPostsRequest = async (meta:string)=>{
     try {
         if (mongoIdValidator(meta)){
-            return await MetaSchema.findById(meta).exec()
+            return await metaSchema.findById(meta).exec()
         }else {
-            return await MetaSchema.findOne({name:{$regex:decodeURIComponent(meta),$options:'i'}})
+            return await metaSchema.findOne({name:{$regex:decodeURIComponent(meta),$options:'i'}})
         }
     }catch (err){
         return {}
@@ -41,9 +44,9 @@ export const getPosts =  async (req, res) => {
             //@ts-ignore
         },meta?._id)
 
-        const totalCount = await PostSchema.countDocuments(findingPostsOptions.findPostsQueries).exec();
+        const totalCount = await postSchema.countDocuments(findingPostsOptions.findPostsQueries).exec();
 
-        const posts = await PostSchema.find(
+        const posts = await postSchema.find(
             findingPostsOptions.findPostsQueries, findingPostsOptions.selectedFields,
             {
                 skip: (findingPostsOptions.size * findingPostsOptions.page) - findingPostsOptions.size,
@@ -72,7 +75,7 @@ export const getUserPagePosts = async (req, res) => {
         const authorId = req.query.authorId;
         const skip = req.query.skip || 0
 
-        const posts = await PostSchema.find(
+        const posts = await postSchema.find(
             {$and:[{author:authorId},{status:req.query.status || 'published'}]},
             [...postFieldRequestForCards,'status'],
             {

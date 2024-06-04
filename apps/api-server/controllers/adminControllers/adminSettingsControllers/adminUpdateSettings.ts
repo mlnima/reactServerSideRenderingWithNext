@@ -1,9 +1,9 @@
-import {SettingSchema} from 'shared-schemas';
+import settingSchema from "@schemas/settingSchema";
 
 const adminUpdateSettings = (req, res) => {
     const type = req.body.type;
     const data = req.body.data;
-    SettingSchema.findOneAndUpdate({type: type}, {data}, {new: true,upsert:true}).exec().then(() => {
+    settingSchema.findOneAndUpdate({type: type}, {data}, {new: true,upsert:true}).exec().then(() => {
         res.json({message:'Updated'})
     }).catch(err => {
         console.log(err)

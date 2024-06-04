@@ -1,11 +1,13 @@
 import {Response} from "express";
-import {MetaSchema, PostSchema, WidgetSchema} from "shared-schemas";
+import widgetSchema from "@schemas/widgetSchema";
+import postSchema from "@schemas/postSchema";
+import metaSchema from "@schemas/metaSchema";
 
 const updatePostsListEntireByCategoriesWidget = async (widgetData: any, widgetId: string, res: Response) => {
     try {
 
 
-        const categories = await MetaSchema.find({
+        const categories = await metaSchema.find({
             $and: [
                 {type: 'categories'},
                 {status: 'published'}
@@ -17,7 +19,7 @@ const updatePostsListEntireByCategoriesWidget = async (widgetData: any, widgetId
             .lean()
             .exec();
 
-        const categoriesCount = await MetaSchema.countDocuments({
+        const categoriesCount = await metaSchema.countDocuments({
             $and: [
                 {type: 'categories'},
                 {status: 'published'}
@@ -25,7 +27,7 @@ const updatePostsListEntireByCategoriesWidget = async (widgetData: any, widgetId
         }).exec()
 
         const fetchPostsForCategory = async (category: any) => {
-            const postsOfCurrentCategory = await PostSchema.find({
+            const postsOfCurrentCategory = await postSchema.find({
                 categories: category._id
             })
                 .select('title icon redirectLink')
@@ -33,7 +35,7 @@ const updatePostsListEntireByCategoriesWidget = async (widgetData: any, widgetId
                 .lean()
                 .exec();
 
-            const postsCount = await PostSchema.countDocuments({
+            const postsCount = await postSchema.countDocuments({
                 categories: category._id
             }).exec();
 
@@ -56,7 +58,7 @@ const updatePostsListEntireByCategoriesWidget = async (widgetData: any, widgetId
             }
         };
 
-        await WidgetSchema.findByIdAndUpdate(widgetId, {data: widgetDateUpdate}, {new: true}).exec();
+        await widgetSchema.findByIdAndUpdate(widgetId, {data: widgetDateUpdate}, {new: true}).exec();
 
         res.status(200).send({message: "Updated successfully"});
     } catch (error) {
@@ -67,53 +69,3 @@ const updatePostsListEntireByCategoriesWidget = async (widgetData: any, widgetId
 
 export default updatePostsListEntireByCategoriesWidget;
 
-
-// import {Response} from "express";
-// import {MetaSchema, postSchema, widgetSchema} from "shared-schemas";
-//
-// const updatePostsListEntireByCategoriesWidget = async (widgetData: any, widgetId: string, res: Response) => {
-//     try {
-//         let final = []
-//         const categories = await MetaSchema.find({$and: [{type: 'categories'}, {status: 'published'}]})
-//             .select('name description status')
-//             .exec()
-//
-//         for await (const category of categories) {
-//             const postsOfCurrentCategory = await postSchema.find({$inc: {categories: category._id}})
-//                 .select('_id title icon redirectLink')
-//                 .exec()
-//
-//             final = [
-//                 ...final,
-//                 {
-//                     ...category.toObject(),
-//                     posts: postsOfCurrentCategory
-//                 }]
-//         }
-//
-//         console.log(final[0])
-//
-//
-//         const widgetDateUpdate = {
-//             ...widgetData,
-//             uniqueData: {
-//                 ...widgetData.uniqueData,
-//                 categoriesDataWithPosts: final
-//             }
-//         }
-//
-//         await widgetSchema.findByIdAndUpdate(widgetId, {data: widgetDateUpdate}, {new: true}).exec()
-//
-//
-//         res.status(200)
-//
-//     } catch (error) {
-//         console.error(error);
-//         res.status(503).json({message: 'Something went wrong. Please try again later.'});
-//     }
-// }
-//
-// export default updatePostsListEntireByCategoriesWidget;
-
-
-// res.status(200).json({ updatedWidget });

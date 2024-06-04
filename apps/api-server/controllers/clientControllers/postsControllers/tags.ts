@@ -1,4 +1,4 @@
-import {MetaSchema} from "shared-schemas";
+import metaSchema from "@schemas/metaSchema";
 
 const tags = async (req, res) => {
     try {
@@ -15,7 +15,7 @@ const tags = async (req, res) => {
 
         if (req.query.startWith){
             const findQuery = {$and: [type, startWithQuery, statusQuery, countQuery]}
-            const metas = await MetaSchema.find(
+            const metas = await metaSchema.find(
                 findQuery,
                 {},
                 {sort: sortQuery})
@@ -25,7 +25,7 @@ const tags = async (req, res) => {
             res.status(200).json({metas})
         }else {
             const findQuery = {$and: [type, statusQuery, countQuery]}
-            const metas = await MetaSchema.find(
+            const metas = await metaSchema.find(
                 findQuery,
                 {},
                 {sort: sortQuery})

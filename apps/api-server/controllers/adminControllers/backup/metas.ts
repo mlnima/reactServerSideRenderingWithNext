@@ -1,7 +1,8 @@
-import {MetaSchema} from "shared-schemas";
+
 import fs from "fs";
 import fsExtra from "fs-extra";
 import path from "path";
+import metaSchema from "@schemas/metaSchema";
 
 //, {imageUrl: {$ne: null}}
 export const findMetasAndCreateFile = async (metaType: string, fields: string,limit:number) => {
@@ -12,7 +13,7 @@ export const findMetasAndCreateFile = async (metaType: string, fields: string,li
         const fieldsQuery = fields.map(field => `-${field}`).join(' ')
         //@ts-ignore
         const metaTypeQuery = metaType ? {$and: [{type: metaType}]} : {}
-        const metas = await MetaSchema.find(metaTypeQuery).select(fieldsQuery).limit(limit || -1).sort('-count').exec()
+        const metas = await metaSchema.find(metaTypeQuery).select(fieldsQuery).limit(limit || -1).sort('-count').exec()
         const filePath = `/public/backups/${metaType}.json`
         const fileAbsolutePath = path.join(__dirname + `../../../../${filePath}`)
         fs.writeFileSync(

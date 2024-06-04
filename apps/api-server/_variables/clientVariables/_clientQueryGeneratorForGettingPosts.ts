@@ -1,4 +1,4 @@
-import {postFieldRequestForCards} from "data-structure";
+import {postFieldRequestForCards} from "@repo/data-structures";
 
 const _clientQueryGeneratorForGettingPosts = (data, metaId) => {
 

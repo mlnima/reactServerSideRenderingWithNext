@@ -1,16 +1,17 @@
 import {Request, Response} from 'express';
-import {SettingSchema} from 'shared-schemas';
+import settingSchema from "@schemas/settingSchema";
 
 interface GetSettingsQuery {
     setting: string | string[];
 }
 
+
 const getSettings = async (req: Request<{}, {}, {}, GetSettingsQuery>, res: Response): Promise<void> => {
         try {
             const requestedSettings = Array.isArray(req.query.setting) ? req.query.setting : [req.query.setting];
 
-            const settings = await SettingSchema.find({type: {$in: requestedSettings}}).exec();
-            const reduceSettings = settings.reduce((final:{}, current:{type:string,data:{}}) => {
+            const settings = await settingSchema.find({type: {$in: requestedSettings}}).exec();
+            const reduceSettings = settings.reduce((final, current) => {
                 final[current.type] = current.data
                 return final
             }, {})

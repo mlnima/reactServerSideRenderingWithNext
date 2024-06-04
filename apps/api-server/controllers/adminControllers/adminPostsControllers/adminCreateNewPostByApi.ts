@@ -2,7 +2,7 @@ import fs from 'fs';
 import download from 'image-downloader';
 import sharp from 'sharp';
 import fsExtra from 'fs-extra';
-import {PostSchema} from 'shared-schemas';
+import postSchema from "@schemas/postSchema";
 import updateSaveMetas from '../../../_variables/adminVariables/_updateSaveMetas';
 
 const imageDownloader = async (newPost) => {
@@ -62,7 +62,7 @@ const savePostWithDuplicateContent = async (newPost, downloadImageContent) => {
             actors: newPost.actors ? await updateSaveMetas(newPost.actors) : [],
             mainThumbnail: downloadImageContent ? await imageDownloader(newPost) : newPost.mainThumbnail
         };
-        const newPostDataToSave = new PostSchema(newPostWithMeta)
+        const newPostDataToSave = new postSchema(newPostWithMeta)
         await newPostDataToSave.save((err, createdPost) => {
             if (err) {
                 return{message: 'Something Went Wrong While Saving! ' + newPost.title}
@@ -123,7 +123,7 @@ const savePostIfThereIsNoDuplicate = async (newPost, downloadImageContent) => {
             mainThumbnail: downloadImageContent ? await imageDownloader(newPost) : newPost.mainThumbnail
         }
 
-      return await PostSchema.findOneAndUpdate({title: newPost.title},editedNewPost,{new:true,upsert:true})
+      return await postSchema.findOneAndUpdate({title: newPost.title},editedNewPost,{new:true,upsert:true})
             .exec()
             .then(async createdPost => {
                 return {message: `${createdPost.title} Has Been Saved : ${createdPost._id} `}

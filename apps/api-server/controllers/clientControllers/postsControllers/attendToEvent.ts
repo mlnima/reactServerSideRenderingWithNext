@@ -1,4 +1,4 @@
-import {PostSchema} from 'shared-schemas';
+import postSchema from "@schemas/postSchema";
 
 const attendToEvent =async (req, res) => {
     try {
@@ -11,7 +11,7 @@ const attendToEvent =async (req, res) => {
             update = {$pull: {'uniqueData.attenders': req.body.userId}}
         }
 
-       await PostSchema.findByIdAndUpdate(req.body.id, update, {new: true, timestamps: true})
+       await postSchema.findByIdAndUpdate(req.body.id, update, {new: true, timestamps: true})
             .select('uniqueData')
             .exec().then(updatedPost => {
             res.json({updatedPost})

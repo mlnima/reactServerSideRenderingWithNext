@@ -1,7 +1,8 @@
-import {WidgetSchema} from 'shared-schemas';
+
 import updatePostsWidget from "./_updateWidgetVariables/updatePostsWidget";
 import updateMetasWidget from "./_updateWidgetVariables/updateMetasWidget";
 import updatePostsListEntireByCategoriesWidget from "./_updateWidgetVariables/updatePostsListEntireByCategoriesWidget";
+import widgetSchema from "@schemas/widgetSchema";
 
 export const updateWidget = async (req, res) => {
     const widgetData = req.body?.widgetData?.data
@@ -15,7 +16,7 @@ export const updateWidget = async (req, res) => {
         } else if (widgetData.type === 'postsListEntireByCategories') {
             await updatePostsListEntireByCategoriesWidget(widgetData,widgetId,res)
         } else {
-            WidgetSchema.findByIdAndUpdate(req.body?.widgetData._id, {data: widgetData}, {new: true}).exec().then(updatedWidget => {
+            widgetSchema.findByIdAndUpdate(req.body?.widgetData._id, {data: widgetData}, {new: true}).exec().then(updatedWidget => {
                 res.json({updatedWidget})
             }).catch(err => {
                 console.log(err)

@@ -1,0 +1,9 @@
+{
+  "name": "shared-schemas",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "mongoose": "^6.9.0",
+    "data-structure": "*"
+  }
+}

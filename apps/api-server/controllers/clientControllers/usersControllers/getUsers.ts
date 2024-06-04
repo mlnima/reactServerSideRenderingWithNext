@@ -1,5 +1,5 @@
 import {Request, Response} from 'express';
-import {UserSchema} from 'shared-schemas';
+import userSchema from "@schemas/userSchema";
 
 interface GetUsersRequestBody {
     usersList: string[];
@@ -9,7 +9,7 @@ const getUsers = async (req: Request<{}, {}, GetUsersRequestBody>, res: Response
     try {
         const {usersList} = req.body;
 
-        const users = await UserSchema
+        const users = await userSchema
             .find({_id: {$in: usersList}})
             .select(['username', 'role', 'profileImage', 'name', 'lastName', 'gender'])
             .populate([

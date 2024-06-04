@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import {adminAuthMiddleware} from 'custom-server-util';
+import adminAuthMiddleware from '@util/middlewares/adminAuthMiddleware';
 import updateUser from './UpdateUser';
 import adminNewApiKey from './adminNewApiKey';
 import getUsers from './getUsers';

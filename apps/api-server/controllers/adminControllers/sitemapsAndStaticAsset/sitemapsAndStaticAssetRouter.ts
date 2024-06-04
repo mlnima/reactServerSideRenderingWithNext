@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import {adminAuthMiddleware} from 'custom-server-util';
+import adminAuthMiddleware from '@util/middlewares/adminAuthMiddleware';
 import generateSitemapsAndStaticAssets from "./generateSitemapsAndStaticAssets";
 
 const router = Router();

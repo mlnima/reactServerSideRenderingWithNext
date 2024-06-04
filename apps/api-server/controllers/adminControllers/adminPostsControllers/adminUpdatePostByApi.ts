@@ -1,9 +1,9 @@
-import {PostSchema} from 'shared-schemas';
+import postSchema from "@schemas/postSchema";
 
 const adminUpdatePostByApi = async (req, res) => {
     try {
         const updatedPostData = req.body.updatedPostData
-        PostSchema.findByIdAndUpdate(updatedPostData._id, updatedPostData).exec().then(() => {
+        postSchema.findByIdAndUpdate(updatedPostData._id, updatedPostData).exec().then(() => {
             res.json({message: updatedPostData._id + ' updated'})
         })
 

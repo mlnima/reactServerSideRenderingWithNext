@@ -1,9 +1,9 @@
-import {MetaSchema} from 'shared-schemas';
+import metaSchema from "@schemas/metaSchema";
 
 
 const getMeta = async (req, res) => {
     try {
-                await  MetaSchema.findById(req.query.id).exec().then(meta => {
+                await  metaSchema.findById(req.query.id).exec().then(meta => {
                     if (meta){
                         res.json({meta})
                     }else {

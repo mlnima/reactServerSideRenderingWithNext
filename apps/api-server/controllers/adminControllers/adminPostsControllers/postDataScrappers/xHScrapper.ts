@@ -1,7 +1,7 @@
 // @ts-nocheck
 import got from 'got'
 import jsdom from 'jsdom'
-import {convertSecondsToTimeString} from 'custom-util'
+import {convertSecondsToTimeString} from '@util/units-convertor'
 
 const {JSDOM} = jsdom;
 

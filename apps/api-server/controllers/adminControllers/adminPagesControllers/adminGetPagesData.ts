@@ -1,6 +1,7 @@
-import {PageSchema} from 'shared-schemas';
+import pageSchema from "@schemas/pageSchema";
+
 const adminGetPagesData = (req, res) => {
-    PageSchema.find({}).exec().then(pages => {
+    pageSchema.find({}).exec().then(pages => {
         res.json({pages, error: false})
     }).catch(err => {
         console.log(err)

@@ -1,10 +1,10 @@
-import {UserSchema} from 'shared-schemas';
+import userSchema from "@schemas/userSchema";
 
 const apiRequestMiddleware = async (req, res, next) => {
     const apiKey = req.body.apiKey
     const username = req.body.username
     try {
-        const userData = await UserSchema.findOne({username}).exec()
+        const userData = await userSchema.findOne({username}).exec()
         if(!username || !apiKey || !userData.role || !userData.API_KEY){
             // throw new Error('Unauthorized')
 

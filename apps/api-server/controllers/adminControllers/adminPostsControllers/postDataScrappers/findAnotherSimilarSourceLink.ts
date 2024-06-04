@@ -1,9 +1,9 @@
-import {PostSchema} from "shared-schemas";
+import postSchema from "@schemas/postSchema";
 import xHSimilarFinder from "./xHSimilarFinder";
 
 const findAnotherSimilarSourceLink = async (req, res) => {
     try {
-        const postData = await PostSchema.findById(req.query.postId).select('source');
+        const postData = await postSchema.findById(req.query.postId).select('source');
 
         if (postData.source) {
             if (postData.source.includes("xhamster")) {

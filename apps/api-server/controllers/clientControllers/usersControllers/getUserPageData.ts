@@ -1,5 +1,6 @@
+// @ts-nocheck
 import {Request, Response} from 'express';
-import {UserSchema} from 'shared-schemas';
+import userSchema from "@schemas/userSchema";
 
 interface QueryParams {
     username: string;
@@ -16,10 +17,10 @@ const getUserPageData = async (req: Request, res: Response) => {
         const selectedFields = fields ? [...new Set([...defaultFields, ...fields])] : defaultFields;
 
         const userWhoRequestItData = userWhoRequestIt
-            ? await UserSchema.findById(userWhoRequestIt).lean().select('blockList _id').exec()
+            ? await userSchema.findById(userWhoRequestIt).lean().select('blockList _id').exec()
             : null;
 
-        const userData = await UserSchema
+        const userData = await userSchema
             .findOne({username})
             .lean()
             .select(selectedFields.join(' '))
@@ -33,6 +34,7 @@ const getUserPageData = async (req: Request, res: Response) => {
         if (!userData) {
             return res.status(404).json({message: 'UserModel not found'});
         }
+
 
         const responseData = {
             _id: userData._id,

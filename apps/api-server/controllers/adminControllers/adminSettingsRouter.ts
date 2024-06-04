@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import {adminAuthMiddleware} from 'custom-server-util';
+import adminAuthMiddleware from '@util/middlewares/adminAuthMiddleware';
 import adminUpdateSettings from './adminSettingsControllers/adminUpdateSettings';
 import adminGetSettings from './adminSettingsControllers/adminGetSettings';
 import adminGetMultipleSettings from './adminSettingsControllers/adminGetMultipleSettings';

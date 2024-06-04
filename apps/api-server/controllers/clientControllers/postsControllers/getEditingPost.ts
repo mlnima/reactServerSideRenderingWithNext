@@ -1,5 +1,5 @@
-import {PostSchema} from 'shared-schemas';
-import {mongoIdValidator} from 'custom-server-util';
+import { mongoIdValidator } from '@util/data-validators';
+import postSchema from "@schemas/postSchema";
 
 
 const buildFindQuery = (req) => {
@@ -16,7 +16,7 @@ const getEditingPost = async (req, res) => {
         const findQuery = buildFindQuery(req);
 
         if (findQuery) {
-            const post = await PostSchema.findOne(findQuery, '-comments').populate([
+            const post = await postSchema.findOne(findQuery, '-comments').populate([
                 {
                     path: 'author',
                     select: ['username', 'profileImage', 'role'],

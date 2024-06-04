@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import {adminAuthMiddleware} from 'custom-server-util';
+import adminAuthMiddleware from '@util/middlewares/adminAuthMiddleware';
 import getForms from './getForms';
 import getFrom from './getFrom';
 import deleteForm from './deleteForm';

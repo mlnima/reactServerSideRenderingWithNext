@@ -1,4 +1,4 @@
-import {PostSchema} from 'shared-schemas';
+
 import updateSaveMetas from '../../../_variables/adminVariables/_updateSaveMetas';
 
 const adminImportPosts = async (req, res) => {

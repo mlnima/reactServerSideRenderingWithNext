@@ -1,7 +1,8 @@
-import {UserSchema} from 'shared-schemas';
+
+import userSchema from "@schemas/userSchema";
 
 const adminGetUser = (req, res) => {
-    UserSchema.findById(req.query._id).exec().then(user => {
+    userSchema.findById(req.query._id).exec().then(user => {
         res.json({user});
     })
 }

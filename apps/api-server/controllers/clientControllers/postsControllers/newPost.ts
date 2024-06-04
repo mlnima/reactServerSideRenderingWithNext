@@ -1,8 +1,9 @@
-import {PostSchema, UserSchema} from "shared-schemas";
+import postSchema from "@schemas/postSchema";
+import userSchema from "@schemas/userSchema";
 
 const setDraftPostToUserData = async (userId, draftPostId) => {
     try {
-        return await UserSchema.findByIdAndUpdate(userId, {$set: {draftPost: draftPostId}}, {new: true}).exec();
+        return await userSchema.findByIdAndUpdate(userId, {$set: {draftPost: draftPostId}}, {new: true}).exec();
     } catch (error) {
         console.error('Error updating user draft post:', error);
         throw error;
@@ -14,8 +15,8 @@ const newPost = async (req, res) => {
 
     try {
 
-        const userData = await UserSchema.findById(req.userData._id).select('draftPost').exec()
-        const unFinishedPostsCount= await PostSchema.countDocuments(
+        const userData = await userSchema.findById(req.userData._id).select('draftPost').exec()
+        const unFinishedPostsCount= await postSchema.countDocuments(
             {
                 $and:[{$or:[{$ne: {status:'published'}},{$ne: {status:'trash'}}]},{author: req.userData._id}]
             }
@@ -29,7 +30,7 @@ const newPost = async (req, res) => {
                 newPostId: userData.draftPost,
             });
         } else {
-            const newPostDataToSave = new PostSchema(req.body.data);
+            const newPostDataToSave = new postSchema(req.body.data);
             newPostDataToSave.save(async (error: any, savedPostData: { _id: any; }) => {
                 if (error) {
                     console.error('Error saving new post:', error);

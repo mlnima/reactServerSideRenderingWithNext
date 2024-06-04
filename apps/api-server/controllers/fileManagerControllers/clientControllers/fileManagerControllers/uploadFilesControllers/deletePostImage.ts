@@ -1,8 +1,10 @@
-import {FileSchema, PostSchema} from "shared-schemas";
+
 import path from "path";
 import fsExtra from "fs-extra";
+import postSchema from "@schemas/postSchema";
+import fileSchema from "@schemas/fileSchema";
 
-const deleteFile = async (filePath) => {
+const deleteFile = async (filePath:string) => {
     try {
         console.log('console=> ',path.join(__dirname, '../../../../', filePath))
         await fsExtra.unlink(path.join(__dirname, '../../../../', filePath));
@@ -20,8 +22,8 @@ const deletePostImage = async (req, res) => {
         const thumbnailToReplace = req.query.thumbnailToReplace;
         const postId = req.query.postId;
 
-        const postDocument = postId ? await PostSchema.findById(postId) : null;
-        const imageDocument = imageId ? await FileSchema.findById(imageId) : null;
+        const postDocument = postId ? await postSchema.findById(postId) : null;
+        const imageDocument = imageId ? await fileSchema.findById(imageId) : null;
 
         if (
             req.userData?._id?.toString() !== postDocument?.author?.toString() ||
@@ -53,8 +55,8 @@ const deletePostImage = async (req, res) => {
                 updateObj['mainThumbnail'] = thumbnailToReplace;
             }
 
-            await PostSchema.findByIdAndUpdate(postId, updateObj, {new: true}).exec();
-            await FileSchema.findByIdAndDelete(imageId).exec();
+            await postSchema.findByIdAndUpdate(postId, updateObj, {new: true}).exec();
+            await fileSchema.findByIdAndDelete(imageId).exec();
 
             res.status(200).json({
                 message: 'Image deleted successfully'

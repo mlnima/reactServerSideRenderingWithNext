@@ -1,11 +1,11 @@
-import {MessengerConversationSchema} from "shared-schemas";
+import messengerConversationSchema from "@schemas/messengerConversationSchema";
 
 const getConversationsList = async (req, res) => {
     try {
         const limit = parseInt(req.query.limit) || 20;
         const skip = parseInt(req.query.skip) || 0;
 
-        const conversationsList = await MessengerConversationSchema
+        const conversationsList = await messengerConversationSchema
             .find({users: {$in: [req.userData._id]}}, {messages: {$slice: -1}})
             .limit(limit)
             .skip(skip)

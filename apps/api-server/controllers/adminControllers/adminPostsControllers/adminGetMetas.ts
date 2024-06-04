@@ -1,4 +1,4 @@
-import {MetaSchema} from 'shared-schemas';
+import metaSchema from "@schemas/metaSchema";
 
 const adminGetMetas = async (req, res) => {
     try {
@@ -30,9 +30,9 @@ const adminGetMetas = async (req, res) => {
         // let sortQuery = !req.query.sort ? {} : req.query.sort ? req.query.sort : {[req.query.sort]: -1}
         let sortQuery = req.query.sort ? {[req.query.sort]: -1} : {updatedAt: -1}
 
-        const metaCount = await MetaSchema.countDocuments({$and: [type, searchQuery, startWithQuery, statusQuery, countQuery]}).exec()
+        const metaCount = await metaSchema.countDocuments({$and: [type, searchQuery, startWithQuery, statusQuery, countQuery]}).exec()
 
-        await MetaSchema.find({$and: [type, searchQuery, startWithQuery, statusQuery, countQuery]}, {}, {sort: req.query.sort === 'createdAt' || !req.query.sort ? {} : {[req.query.sort]: -1}})
+        await metaSchema.find({$and: [type, searchQuery, startWithQuery, statusQuery, countQuery]}, {}, {sort: req.query.sort === 'createdAt' || !req.query.sort ? {} : {[req.query.sort]: -1}})
             .limit(size)
             .skip(size * (page - 1))
             //@ts-ignore

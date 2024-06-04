@@ -1,9 +1,10 @@
-import { ChatroomSchema } from 'shared-schemas';
+
 import { ChatroomRaw } from 'typescript-types';
+import chatroomSchema from "@schemas/chatroomSchema";
 
 const getChatroom = async (req, res) => {
     try {
-        const chatroom = await ChatroomSchema.findById(req.query._id).exec();
+        const chatroom = await chatroomSchema.findById(req.query._id).exec();
 
         if (!chatroom) {
             res.end();

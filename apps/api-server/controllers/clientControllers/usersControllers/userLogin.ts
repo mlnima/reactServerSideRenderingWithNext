@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
-import {  UserSchema } from 'shared-schemas';
+
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
+import userSchema from "@schemas/userSchema";
 
 interface ILoginRequest extends Request {
     body: {
@@ -16,7 +17,7 @@ const userLogin = async (req: ILoginRequest, res: Response) => {
     try {
         const { username, password } = req.body;
 
-        const user: any | null = await UserSchema.findOne({ username }).populate({
+        const user: any | null = await userSchema.findOne({ username }).populate({
             path: 'profileImage',
             select: 'filePath',
             model: 'file',

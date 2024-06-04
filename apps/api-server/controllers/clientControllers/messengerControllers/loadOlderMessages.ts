@@ -1,8 +1,8 @@
-import {MessengerConversationSchema} from "shared-schemas";
+import messengerConversationSchema from "@schemas/messengerConversationSchema";
 
 const loadOlderMessages = async (req, res) => {
     try {
-        const conversationData = await MessengerConversationSchema
+        const conversationData = await messengerConversationSchema
             .findById(req.query.conversationId)
             .select('messages')
             .populate([

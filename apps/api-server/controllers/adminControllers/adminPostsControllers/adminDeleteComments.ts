@@ -1,10 +1,10 @@
-import {CommentSchema} from 'shared-schemas';
+import commentSchema from "@schemas/commentSchema";
 
 const adminDeleteComments = (req, res) => {
     const commentsIds = req.body.commentsIds || []
 
     const mapIdAndReturnDeletePromise = commentsIds.map(commentId => {
-        return CommentSchema.findByIdAndDelete(commentId, {useFindAndModify: false}).exec()
+        return commentSchema.findByIdAndDelete(commentId, {useFindAndModify: false}).exec()
     })
 
     Promise.all(mapIdAndReturnDeletePromise).then(() => {

@@ -1,5 +1,6 @@
-import {UserSchema} from 'shared-schemas';
+
 import uuidAPIKey from 'uuid-apikey';
+import userSchema from "@schemas/userSchema";
 
 const adminNewApiKey = (req, res) => {
     const newAPIKey = uuidAPIKey.create()
@@ -8,7 +9,7 @@ const adminNewApiKey = (req, res) => {
         API_KEY: newAPIKey.apiKey,
         uuid: newAPIKey.uuid
     }
-    UserSchema.findByIdAndUpdate(req.userData._id, newUserData).exec().then(savedData => {
+    userSchema.findByIdAndUpdate(req.userData._id, newUserData).exec().then(savedData => {
         res.json({updatedData: savedData})
 
     }).catch(err => {

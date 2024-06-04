@@ -1,78 +1,111 @@
 import bcrypt from 'bcryptjs';
-import {UserSchema} from 'shared-schemas';
-import {usernameValidatorRegisterForm, passwordValidatorRegisterForm} from "custom-util";
-import {emailValidator} from "custom-util";
-import {jwtTokenGenerator} from "custom-server-util";
-import nodemailer from "nodemailer";
-import * as process from "process";
-import {Request, Response} from "express";
-let transporter
-const shouldSendVerificationEmail = process.env.MAIL_SERVER === 'true' &&
-    global.initialSettings?.membershipSettings?.verificationRequired;
+import jwt from 'jsonwebtoken';
+import {
+    usernameValidatorRegisterForm,
+    passwordValidatorRegisterForm,
+    emailValidator,
+} from '@util/data-validators';
 
-if (shouldSendVerificationEmail){
-    transporter = nodemailer.createTransport({
-        host: process.env.MAIL_SERVER_HOST,
-        port: 587,
-        secure: false,
-        requireTLS: true,
-        auth: {
-            user: 'verification',
-            pass: process.env.JWT_KEY,
-        },
-        tls: {
-            rejectUnauthorized: false
+import nodemailer from 'nodemailer';
+import * as process from 'process';
+import { Request, Response } from 'express';
+import { SentMessageInfo } from 'nodemailer/lib/smtp-transport';
+import settingSchema from '@schemas/settingSchema';
+import userSchema from '@schemas/userSchema';
+
+let transporter: nodemailer.Transporter<SentMessageInfo>;
+
+const register = async (req: Request, res: Response) => {
+    try {
+        const initialSettings = await settingSchema
+            .findOne({
+                type: 'initialSettings',
+            })
+            .exec()
+            .then((initialSettings) => initialSettings.data);
+
+        const shouldSendVerificationEmail =
+            process.env.MAIL_SERVER === 'true' &&
+            initialSettings?.membershipSettings?.verificationRequired;
+
+        if (shouldSendVerificationEmail) {
+            transporter = nodemailer.createTransport({
+                host: process.env.MAIL_SERVER_HOST,
+                port: 587,
+                secure: false,
+                requireTLS: true,
+                auth: {
+                    user: 'verification',
+                    pass: process.env.JWT_KEY,
+                },
+                tls: {
+                    rejectUnauthorized: false,
+                },
+            });
         }
-    });
-}
 
+        if (!initialSettings?.membershipSettings?.anyoneCanRegister) {
+            return res
+                .status(400)
+                .json({ message: 'Registration Is Disabled' });
+        }
 
+        const { username, email, password, password2 } = req.body;
 
+        const user = await userSchema
+            .findOne({
+                $or: [{ username }, { email }],
+            })
+            .exec();
 
-const register = (req:Request, res:Response) => {
-
-    if (!global.initialSettings?.membershipSettings?.anyoneCanRegister) {
-        return res.status(400).json({message: 'Registration Is Disabled'});
-    }
-
-    const {username, email, password, password2} = req.body;
-
-    UserSchema.findOne({$or: [{username}, {email}]}).exec()
-        .then(user => {
-            if (user) {
-                return res.status(409).json({message: 'Username or Email already exists'});
+        if (user) {
+            return res
+                .status(409)
+                .json({ message: 'Username or Email already exists' });
+        }
+        if (!usernameValidatorRegisterForm(username)) {
+            return res.status(400).json({ message: 'Invalid Username' });
+        }
+        if (!passwordValidatorRegisterForm(password)) {
+            return res.status(400).json({ message: 'Invalid Password' });
+        }
+        if (!emailValidator(email)) {
+            return res.status(400).json({ message: 'Invalid Email' });
+        }
+        if (password !== password2) {
+            return res.status(400).json({ message: 'Passwords Do Not Match' });
+        }
+        bcrypt.hash(password, 10, (err, hash) => {
+            if (err) {
+                console.error(err);
+                return res.status(503).json({
+                    message:
+                        'Unable to process your request at this time, please try again later',
+                });
             }
-            if (!usernameValidatorRegisterForm(username)) {
-                return res.status(400).json({message: 'Invalid Username'});
-            }
-            if (!passwordValidatorRegisterForm(password)) {
-                return res.status(400).json({message: 'Invalid Password'});
-            }
-            if (!emailValidator(email)) {
-                return res.status(400).json({message: 'Invalid Email'});
-            }
-            if (password !== password2) {
-                return res.status(400).json({message: 'Passwords Do Not Match'});
-            }
-            bcrypt.hash(password, 10, (err, hash) => {
-                if (err) {
-                    console.error(err);
-                    return res.status(503).json({message: 'Unable to process your request at this time, please try again later'});
-                }
-                const userData = {
-                    username,
-                    email,
-                    role: 'subscriber',
-                    password: hash,
-                    keyMaster: false,
-                    verificationToken: global.initialSettings?.membershipSettings?.verificationRequired ?
-                        jwtTokenGenerator('1h',{type:'accountVerification'})
-                        : ''
-                };
-                const newUserData = new UserSchema(userData);
-                newUserData.save().then(() => {
-                    if (shouldSendVerificationEmail && newUserData.verificationToken){
-
+            const userData = {
+                username,
+                email,
+                role: 'subscriber',
+                password: hash,
+                keyMaster: false,
+                verificationToken: initialSettings?.membershipSettings
+                    ?.verificationRequired
+                    ? jwt.sign(
+                          { type: 'accountVerification' },
+                          process.env.JWT_KEY,
+                          { expiresIn: '1h' },
+                      )
+                    : '',
+            };
+            const newUserData = new userSchema(userData);
+            newUserData
+                .save()
+                .then(() => {
+                    if (
+                        shouldSendVerificationEmail &&
+                        newUserData.verificationToken
+                    ) {
                         const mailOptions = {
                             from: `verification@${process.env.MAIL_EXTENSION}`,
                             to: email,
@@ -87,38 +120,71 @@ const register = (req:Request, res:Response) => {
                             text: 'Thank you for registering on MyApp.',
                         };
 
-                        transporter.sendMail(mailOptions, (error, info) => {
-                            if (error) {
-                                console.error('Error sending email:', error);
-                            } else {
-                                console.log('Email sent:', info.response);
-                            }
+                        transporter.sendMail(
+                            mailOptions,
+                            (
+                                error: any,
+                                info: {
+                                    response: any;
+                                },
+                            ) => {
+                                if (error) {
+                                    console.error(
+                                        'Error sending email:',
+                                        error,
+                                    );
+                                } else {
+                                    console.log('Email sent:', info.response);
+                                }
+                            },
+                        );
+
+                        res.json({
+                            message:
+                                'Verification Email Has Been Sent To Your Email Address. Please Check Your Email To Verify Your Account.',
                         });
-
-                        res.json({message: 'Verification Email Has Been Sent To Your Email Address. Please Check Your Email To Verify Your Account.'});
-                    }else{
-                        res.json({message: 'Your account has been successfully created. You can login now.'});
+                    } else {
+                        res.json({
+                            message:
+                                'Your account has been successfully created. You can login now.',
+                        });
                     }
-
-
-                }).catch(err => {
-                    console.error(err);
-                    res.status(503).json({message: 'Unable to process your request at this time, please try again later'});
+                })
+                .catch((error: any) => {
+                    console.log(error);
+                    res.status(503).json({
+                        message:
+                            'Unable to process your request at this time, please try again later',
+                    });
                 });
-            });
-        }).catch(err => {
-        console.error(err);
-        res.status(503).json({message: 'Unable to process your request at this time, please try again later'});
-    })
-}
+        });
+    } catch (error) {
+        console.log(`error=> `, error);
+
+        res.status(503).json({
+            message:
+                'Unable to process your request at this time, please try again later',
+        });
+    }
+};
 
 export default register;
 
-
-
+// await UserSchema.findOne({ $or: [{ username }, { email }] })
+//     .exec()
+//     .then(user => {
+//
+//     })
+//     .catch(err => {
+//         console.error(err);
+//         res.status(503).json({
+//             message:
+//                 'Unable to process your request at this time, please try again later',
+//         });
+//     });
 // import bcrypt from 'bcryptjs';
 // import {userSchema} from 'models';
-// import {usernameValidatorRegisterForm, passwordValidatorRegisterForm} from "custom-util";
+// import {usernameValidatorRegisterForm, passwordValidatorRegisterForm} from "@repo/shared-server-util";
 //
 // const register = (req, res) => {
 //     const username = req.body.username;

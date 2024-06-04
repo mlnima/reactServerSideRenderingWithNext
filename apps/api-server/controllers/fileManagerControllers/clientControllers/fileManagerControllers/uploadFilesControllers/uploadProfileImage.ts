@@ -1,20 +1,22 @@
 //uploadProfileImage
-import {getCurrentDatePath} from "custom-server-util";
+import {getCurrentDatePath} from "@util/path-utils";
 import fsExtra from "fs-extra";
-import {FileSchema, UserSchema} from "shared-schemas";
+
 import path from "path";
 import {isValidObjectId} from "mongoose";
+import userSchema from "@schemas/userSchema";
+import fileSchema from "@schemas/fileSchema";
 
 const deletePreviousProfileImage = async (userId: string) => {
     try {
-        const userData = await UserSchema.findById(userId).select('profileImage').exec()
+        const userData = await userSchema.findById(userId).select('profileImage').exec()
         if (isValidObjectId(userData?.profileImage)) {
             try {
-                const profileImageDocument = await FileSchema.findById(userData?.profileImage).exec()
+                const profileImageDocument = await fileSchema.findById(userData?.profileImage).exec()
                 console.log('profileImageDocument=> ', profileImageDocument)
                 if (!profileImageDocument?.filePath.includes('http')) {
                     await fsExtra.unlink(path.join(__dirname, '../../../../', profileImageDocument.filePath));
-                    await FileSchema.findByIdAndDelete(userData?.profileImage).exec();
+                    await fileSchema.findByIdAndDelete(userData?.profileImage).exec();
                 }
             } catch (error) {
                 console.log('error=> ', error)
@@ -31,7 +33,7 @@ const deletePreviousProfileImage = async (userId: string) => {
         }
 
         if (!!userData?.profileImage) {
-            await UserSchema.findByIdAndUpdate(userId, {$unset: {profileImage: 1}}).exec()
+            await userSchema.findByIdAndUpdate(userId, {$unset: {profileImage: 1}}).exec()
         }
 
         return
@@ -55,7 +57,7 @@ const uploadProfileImage = async (req, res) => {
 
         try {
             // creating a empty file document
-            const emptyFileDocument = new FileSchema({
+            const emptyFileDocument = new fileSchema({
                 usageType: imagesData.usageType,
                 filePath: 'temp',
                 mimeType: image.mimetype,
@@ -64,8 +66,8 @@ const uploadProfileImage = async (req, res) => {
             const savedEmptyDoc = await emptyFileDocument.save()
             const filePath = `/public/uploads/images/${getCurrentDatePath()}/${savedEmptyDoc?._id}.webp`
             await image.mv('.' + filePath)
-            const updatedImageDoc = await FileSchema.findByIdAndUpdate(savedEmptyDoc?._id, {filePath}, {new: true}).exec()
-            await UserSchema.findByIdAndUpdate(userData._id, {profileImage: updatedImageDoc?._id}, {new: true}).exec()
+            const updatedImageDoc = await fileSchema.findByIdAndUpdate(savedEmptyDoc?._id, {filePath}, {new: true}).exec()
+            await userSchema.findByIdAndUpdate(userData._id, {profileImage: updatedImageDoc?._id}, {new: true}).exec()
             res.status(200).json({newProfileImage: filePath})
             return
         } catch (error) {

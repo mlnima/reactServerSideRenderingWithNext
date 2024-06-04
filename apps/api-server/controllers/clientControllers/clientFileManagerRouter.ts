@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import {authMiddleware} from "custom-server-util";
+import authMiddleware from "@util/middlewares/authMiddleware";
 import userProfileImageUpload from './clientFileManagerControllers/userProfileImageUpload';
 
 const router = Router();

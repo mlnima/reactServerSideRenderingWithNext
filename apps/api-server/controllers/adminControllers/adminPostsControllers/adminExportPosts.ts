@@ -1,5 +1,4 @@
-import {PostSchema} from 'shared-schemas';
-
+import postSchema from "@schemas/postSchema";
 const adminExportPosts = (req, res) => {
 
     const postType = req.body.data?.postType ? {postType: req.body.data.postType} : {}
@@ -12,7 +11,7 @@ const adminExportPosts = (req, res) => {
     }
 
 
-    PostSchema.find({$and: [postType, metaId, author]}, {}, options).populate([
+    postSchema.find({$and: [postType, metaId, author]}, {}, options).populate([
         {path: 'categories'},
         {path: 'tags'},
         {path: 'actors'},

@@ -1,8 +1,8 @@
-import {WidgetSchema} from 'shared-schemas';
+import widgetSchema from "@schemas/widgetSchema";
 
 const getWidget = (req, res) => {
     const position = req.body.position = 'all' ? {} : {position: req.body.position};
-    WidgetSchema.find(position).exec().then(widgets => {
+    widgetSchema.find(position).exec().then(widgets => {
         res.json({widgets})
     }).catch(err => {
         console.log(err)

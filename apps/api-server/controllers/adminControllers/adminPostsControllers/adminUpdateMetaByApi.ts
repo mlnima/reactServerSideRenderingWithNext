@@ -1,13 +1,12 @@
-import {MetaSchema} from 'shared-schemas';
-
+import metaSchema from "@schemas/metaSchema";
 const adminUpdateMetaByApi =async (req, res) => {
     try {
         const metaData = req.body.metaData;
         const findQuery = {$and:[{name: metaData.name},{type: metaData.type}]}
-        const existingMeta =  await  MetaSchema.findOne(findQuery).exec()
+        const existingMeta =  await  metaSchema.findOne(findQuery).exec()
 
         if (existingMeta){
-            MetaSchema.findByIdAndUpdate(existingMeta._id, {$set:{...metaData}}, {new: true})
+            metaSchema.findByIdAndUpdate(existingMeta._id, {$set:{...metaData}}, {new: true})
                 .exec()
                 .then(updatedMeta => {
                 res.json({updated: updatedMeta,message: existingMeta?.name + ' updated'})
@@ -16,7 +15,7 @@ const adminUpdateMetaByApi =async (req, res) => {
             })
         }
         else {
-            const newMetaDataToSave = new MetaSchema({
+            const newMetaDataToSave = new metaSchema({
                 ...metaData,
                 count:0,
                 status:'draft'

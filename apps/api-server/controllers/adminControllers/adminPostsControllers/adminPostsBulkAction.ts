@@ -1,4 +1,4 @@
-import {PostSchema} from 'shared-schemas';
+import postSchema from "@schemas/postSchema";
 import fs from 'fs';
 
 const adminPostsBulkAction = async (req, res) => {
@@ -8,7 +8,7 @@ const adminPostsBulkAction = async (req, res) => {
 
     if (status === 'delete') {
         actions = ids.map(async id => {
-            return PostSchema.findByIdAndDelete(id).exec().then(doc=>{
+            return postSchema.findByIdAndDelete(id).exec().then(doc=>{
                 if (!doc.mainThumbnail.includes('http')){
                     fs.unlinkSync(`.${doc.mainThumbnail}`);
                 }
@@ -16,7 +16,7 @@ const adminPostsBulkAction = async (req, res) => {
         })
     } else {
         actions = ids.map(async id => {
-            return PostSchema.findByIdAndUpdate(id, {$set: {status}})
+            return postSchema.findByIdAndUpdate(id, {$set: {status}})
         })
     }
     Promise.all(actions).then(() => {

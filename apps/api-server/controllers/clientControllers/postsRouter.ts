@@ -1,6 +1,6 @@
 import {Router} from 'express';
-import {authMiddleware} from "custom-server-util";
-import authWithUserDataMiddleware from "../../middlewares/authWithUserDataMiddleware";
+import authMiddleware from "@util/middlewares/authMiddleware";
+import authWithUserDataMiddleware from "@util/middlewares/authWithUserDataMiddleware";
 import cacheSuccesses from '../../middlewares/apiCache';
 
 import {getPosts, getUserPagePosts} from './postsControllers/getPosts'
