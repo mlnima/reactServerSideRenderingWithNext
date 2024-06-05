@@ -27,8 +27,12 @@ const LoadingComponent: FC = () => {
 
     if (!isLoading) return null
 
+
+
     return <ActiveLoading onClickEvent={() => dispatch(loading(false))}
                           color={'var(--primary-active-color,#f90)'}/>
+
+    // return null
 
 };
 

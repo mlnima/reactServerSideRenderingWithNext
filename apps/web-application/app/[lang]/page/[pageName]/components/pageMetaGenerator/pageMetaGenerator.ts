@@ -1,4 +1,4 @@
-import {fetchPage} from "fetch-requests";
+import {fetchPage} from "@lib/fetch-requests/client/fetchPage";
 
 type Props = {
     params: { pageName: string, lang: string }

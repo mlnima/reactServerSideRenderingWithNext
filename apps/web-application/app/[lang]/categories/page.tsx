@@ -1,5 +1,7 @@
 import React from "react";
-import {fetchMetas, fetchSettings, fetchWidgets} from "fetch-requests";
+import {fetchMetas} from "@lib/fetch-requests/client/fetchPosts";
+import {fetchSettings} from "@lib/fetch-requests/client/fetchSettings";
+import {fetchWidgets} from "@lib/fetch-requests/client/fetchWidgets";
 import {i18n} from "@i18nConfig";
 import {getDictionary} from "../../../get-dictionary";
 import WidgetsRenderer from "@components/widgets/widgetRenderer/WidgetsRenderer";

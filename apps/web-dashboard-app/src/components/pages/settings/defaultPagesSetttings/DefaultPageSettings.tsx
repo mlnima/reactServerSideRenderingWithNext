@@ -1,11 +1,12 @@
 import React, {ChangeEvent, FC, useEffect, useMemo, useState} from "react";
 import styled from "styled-components";
-import {inputValueSimplifier, LanguagesOptions} from "custom-util";
+import {inputValueSimplifier} from "shared-util";
+import {LanguagesOptions} from "ui";
 import {updateSettingAction} from "@store/reducers/settingsReducer";
 import MonacoEditor from "@components/common/MonacoEditor";
 import {useSearchParams} from "react-router-dom";
 import {useAppDispatch} from "@store/hooks";
-import {dashboardAPIRequestGetSettings} from "api-requests";
+import {dashboardAPIRequestGetSettings} from "@repo/api-requests";
 
 const Style = styled.form`
 
@@ -70,7 +71,7 @@ const DefaultPageSettings: FC<PropTypes> = ({}) => {
 
     useEffect(() => {
         if (!!pageName) {
-            dashboardAPIRequestGetSettings([pageName]).then(response => {
+            dashboardAPIRequestGetSettings([pageName]).then((response:{data:any}) => {
                 const settingData = response?.data?.settings?.[pageName]?.data || defaultPageData
                 setFieldsData(settingData || {})
 

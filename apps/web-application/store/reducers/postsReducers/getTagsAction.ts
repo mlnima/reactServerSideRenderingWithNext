@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {clientAPIRequestGetTags} from "api-requests";
+import {clientAPIRequestGetTags} from "@repo/api-requests";
 
 const getTagsAction = createAsyncThunk(
     'posts/getTags',

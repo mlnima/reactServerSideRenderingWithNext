@@ -2,7 +2,7 @@ import React, {FC} from "react";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import { editPostAction} from "@store/reducers/postsReducer";
-import {postTypes} from "data-structure";
+import {postTypes} from "@repo/data-structures";
 import {DashboardStore, Store} from "typescript-types";
 import {useAppDispatch} from "@store/hooks";
 
@@ -36,7 +36,7 @@ const Format: FC<PostFormatPropTypes> = ({postType}) => {
                     value={post?.postType || postType || 'standard'}
                     onChange={e => onChangeHandlerAndSetPreferPostTypeToLocalStorage(e)}
             >
-                {postTypes.map((postType) => {
+                {postTypes.map((postType:string) => {
                     return (
                         <option value={postType} key={postType}>{postType}</option>
                     )

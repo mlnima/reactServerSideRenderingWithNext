@@ -1,8 +1,8 @@
 'use client';
 import React, {FC, useEffect, useRef, useState} from "react";
 import {useAppDispatch, useAppSelector} from "@store/hooks";
-import socket from "web-socket-client";
-import {headerSizeCalculator} from "custom-util";
+import socket from '@lib/web-socket-client';
+import {headerSizeCalculator} from "shared-util";
 import {loading, loginRegisterForm, setAlert} from "@store/reducers/globalStateReducer";
 import ChatroomTopbar from "../ChatroomTopbar/ChatroomTopbar";
 import ChatRoomMessageArea from "../ChatRoomMessageArea/ChatRoomMessageArea";

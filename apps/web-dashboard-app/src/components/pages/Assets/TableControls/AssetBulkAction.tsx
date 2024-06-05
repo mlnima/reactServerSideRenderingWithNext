@@ -58,7 +58,6 @@ const AssetBulkAction: FC<AssetBulkActionPropTypes> = ({selectedItems, setSelect
     return (
         <AssetBulkActionStyledDiv>
             <select className={'primarySelect'}
-                    placeholder='Bulk Actions'
                     value={status}
                     onChange={(e) => setStatus(e.target.value)}>
                 <option value=''>Bulk Actions</option>

@@ -1,6 +1,8 @@
 import {i18n} from "../../../../i18n-config";
 import {getDictionary} from "../../../../get-dictionary";
-import {fetchSearch, fetchSettings, fetchWidgets} from "fetch-requests";
+import {fetchSearch} from "@lib/fetch-requests/client/fetchPosts";
+import {fetchSettings} from "@lib/fetch-requests/client/fetchSettings";
+import {fetchWidgets} from "@lib/fetch-requests/client/fetchWidgets";
 import SidebarWidgetAreaRenderer
     from "@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer";
 import WidgetsRenderer from "@components/widgets/widgetRenderer/WidgetsRenderer";
@@ -10,7 +12,7 @@ import React from "react";
 import {Meta} from "typescript-types";
 import CategoriesPageContentRenderer from "@components/metas/CategoriesPageContentRenderer";
 import TagsPageContentRenderer from "@components/metas/TagsPageContentRenderer";
-import {capitalizeFirstLetters} from "custom-util";
+import {capitalizeFirstLetters} from "shared-util";
 import './page.scss'
 import searchMetaGenerator from "./components/searchMetaGenerator";
 

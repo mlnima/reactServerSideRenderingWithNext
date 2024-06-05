@@ -14,6 +14,7 @@ export const fetchSettings = async ({requireSettings, revalidate,tags}: IFetchSe
 
         const response = await fetch(
             `${APIServerUrl}/api/v1/settings/getSettings?${settingsQuery}`,
+            //@ts-ignore
             config({revalidate, tags: [...(tags || []),'cacheItem','settings']})
         );
         if (!response.ok) {

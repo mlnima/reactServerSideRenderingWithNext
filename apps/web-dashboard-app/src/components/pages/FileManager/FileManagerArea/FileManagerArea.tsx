@@ -1,6 +1,6 @@
 import React,{FC,Fragment} from 'react';
 import styled from "styled-components";
-import {fileTypeDetector} from "custom-util";
+import {fileTypeDetector} from "shared-util";
 import {useSelector} from "react-redux";
 import {DashboardStore, Store} from "typescript-types";
 import {fileManagerEditState, uploadFileAction} from "@store/reducers/fileManagerReducer";

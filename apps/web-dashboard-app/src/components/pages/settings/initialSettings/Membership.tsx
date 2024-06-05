@@ -1,12 +1,12 @@
 import React, {useState} from "react";
 import styled from "styled-components";
 import {DashboardStore} from "typescript-types";
-import {postTypes} from "data-structure";
-import {convertVariableNameToName} from "custom-util";
+import {postTypes} from "@repo/data-structures";
+import {convertVariableNameToName} from "shared-util";
 import {useAppDispatch} from "@store/hooks";
 import {useSelector} from "react-redux";
 import {editMembershipSettingsAction, updateSettingAction} from "@store/reducers/settingsReducer";
-import {inputValueSimplifier} from "custom-util";
+import {inputValueSimplifier} from "shared-util";
 
 const Style = styled.div`
 
@@ -85,7 +85,7 @@ const Membership = () => {
             {membershipSettings?.allowUserToPost &&
                 <div className="settingSection allowedPostTypeUserCanCreate">
                     <h3>Allowed Post Types User Can Create </h3>
-                    {postTypes.map(postType => {
+                    {postTypes.map((postType:string) => {
                         return (
                             <div key={postType} className={'item'}>
                                 {convertVariableNameToName(postType)}

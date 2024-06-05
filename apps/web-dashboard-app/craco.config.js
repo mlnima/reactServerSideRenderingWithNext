@@ -11,13 +11,6 @@ const allowedEnvVariables = Object.entries(envVariablesFromFile)
         return finalEnvs
     },{})
 
-
-// const envVariables = Object.fromEntries(allowedEnvVariables)
-
-
-console.log('process.env.NEXT_PUBLIC_SOCKET_SERVER_URL', allowedEnvVariables)
-
-
 module.exports = {
 
     plugins: [
@@ -31,30 +24,7 @@ module.exports = {
         }
     ],
     webpack: {
-        // alias: {
-        //     environment: JSON.stringify(allowedEnvVariables)
-        // }
         plugins: [
-        //     // new Dotenv(),
-        //     // new DefinePlugin({
-        //     //     'process.env': JSON.stringify(allowedEnvVariables)
-        //     // })
-        //     new DefinePlugin({
-        //         'process.env.NEXT_PUBLIC_PRODUCTION_URL': JSON.stringify(allowedEnvVariables.NEXT_PUBLIC_PRODUCTION_URL)
-        //         'process.env.BROWSER':JSON.stringify('none')
-        //     })
-        //     new DefinePlugin({
-        //         'process.env':{
-        //             'REACT_APP_PRODUCTION_URL': JSON.stringify('REACT_APP_PRODUCTION_URL'),
-        //             'API_URL': JSON.stringify('http://localhost:8080/bands')
-        //         }
-        //     })
         ]
     },
-    // babel: {
-    //     loaderOptions: (babelLoaderOptions, { env, paths }) => {
-    //        console.log('loaderOptions',paths)
-    //         return babelLoaderOptions;
-    //     },
-    // },
 };

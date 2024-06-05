@@ -1,7 +1,7 @@
 'use client';
 import {FC} from "react";
 import {useParams, usePathname, useSearchParams} from "next/navigation";
-import {rangeNumGenerator} from "custom-util";
+import {rangeNumGenerator} from "shared-util";
 import Link from 'next/link'
 import './Pagination.styles.scss'
 

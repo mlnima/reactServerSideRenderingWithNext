@@ -1,9 +1,9 @@
 'use client';
 import React, {FC, useEffect, useState} from "react";
 import {useAppDispatch, useAppSelector} from "@store/hooks";
-import {clientAPIRequestGetEditingPost, clientDeletePostByAuthor} from "api-requests";
-import {capitalizeFirstLetter, reduceArrayOfDataToIds} from "custom-util";
-import MultipleImageUploader from "../PostEditorForm/common/MultipleImageUploader/MultipleImageUploader";
+import {clientAPIRequestGetEditingPost, clientDeletePostByAuthor} from "@repo/api-requests";
+import {capitalizeFirstLetter, reduceArrayOfDataToIds} from "shared-util";
+// import MultipleImageUploader from "../PostEditorForm/common/MultipleImageUploader/MultipleImageUploader";
 import MetaDataSelector from "../MetaDataSelector/MetaDataSelector";
 import Price from "../Price/Price";
 import './EditPostPageContent.scss'
@@ -13,14 +13,13 @@ import Csr from "@components/global/Csr";
 import {usePathname, useRouter} from "next/navigation";
 import {setAlert} from "@store/reducers/globalStateReducer";
 import {removeUserDraftPost} from "@store/reducers/userReducers/userReducer";
-import {postTypes} from "data-structure";
-import {videoQualities} from "data-structure";
-import {clientAPIRequestDeletePostImages} from "api-requests";
+import {postTypes,videoQualities,postStatuses,UGCPostImagesLimit} from "@repo/data-structures";
+import {clientAPIRequestDeletePostImages} from "@repo/api-requests";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrash} from "@fortawesome/free-solid-svg-icons/faTrash";
 import {faBinoculars, faFilePen, faFloppyDisk} from "@fortawesome/free-solid-svg-icons";
-import {UGCPostImagesLimit} from "data-structure";
-import {postStatuses} from "data-structure";
+
+
 
 
 interface IProps {
@@ -75,7 +74,7 @@ const EditPostPageContent: FC<IProps> = ({_id, dictionary, locale}) => {
 
     const getEditingPostData = async () => {
         if (_id) {
-            await clientAPIRequestGetEditingPost(_id).then((postData) => {
+            await clientAPIRequestGetEditingPost(_id).then((postData:{data:any}) => {
                 if (userData.role === 'administrator' || postData?.data?.post?.author?._id === userData?._id) {
                     setEditingPost(postData?.data?.post || {})
                 }
@@ -178,14 +177,22 @@ const EditPostPageContent: FC<IProps> = ({_id, dictionary, locale}) => {
                                    name={'title'}/>
                         </div>
                         <div className="formSection imageUploader">
-                            <MultipleImageUploader editingPost={editingPost}
-                                                   dictionary={dictionary}
-                                                   limit={userData?.role === 'administrator' ?
-                                                       20 : UGCPostImagesLimit?.[editingPost?.type as string] || 1
-                                                   }
-                                                   setEditingPost={setEditingPost}
-                                // onSelectImageHandler={onSelectImageHandler}
-                            />
+                            MultipleImageUploader is disabled due to package conflict
+                            "react-dnd": "^16.0.1",
+                            "react-dnd-grid": "^1.0.27",
+                            "react-dnd-html5-backend": "^16.0.1",
+                            "react-dnd-multi-backend": "^8.0.1",
+                            "react-dnd-touch-backend": "^16.0.1",
+                            "dnd-multi-backend": "^8.0.1",
+                            "react-grid-dnd": "^2.1.2",
+                            {/*<MultipleImageUploader editingPost={editingPost}*/}
+                            {/*                       dictionary={dictionary}*/}
+                            {/*                       limit={userData?.role === 'administrator' ?*/}
+                            {/*                           20 : UGCPostImagesLimit?.[editingPost?.type as string] || 1*/}
+                            {/*                       }*/}
+                            {/*                       setEditingPost={setEditingPost}*/}
+                            {/*    // onSelectImageHandler={onSelectImageHandler}*/}
+                            {/*/>*/}
                         </div>
                         <div className="formSection description">
                             <div className={'descriptionHeader'}>
@@ -245,7 +252,7 @@ const EditPostPageContent: FC<IProps> = ({_id, dictionary, locale}) => {
                                         name={'postType'}
                                         className={'primarySelect'}
                                         onChange={onChangeHandler}>
-                                    {postStatuses.map(postStatus => {
+                                    {postStatuses.map((postStatus:string) => {
                                         return <option value={postStatus} key={postStatus}>
                                             {capitalizeFirstLetter(postStatus)}
                                         </option>
@@ -267,7 +274,7 @@ const EditPostPageContent: FC<IProps> = ({_id, dictionary, locale}) => {
                                         name={'postType'}
                                         className={'primarySelect'}
                                         onChange={onChangeHandler}>
-                                    {postTypes.map(postTypes => {
+                                    {postTypes.map((postTypes:string) => {
                                         return <option value={postTypes} key={postTypes}>
                                             {capitalizeFirstLetter(postTypes)}
                                         </option>
@@ -329,7 +336,7 @@ const EditPostPageContent: FC<IProps> = ({_id, dictionary, locale}) => {
                                             name={'quality'}
                                             className={'primarySelect'}
                                             onChange={onChangeHandler}>
-                                        {videoQualities.map(quality => {
+                                        {videoQualities.map((quality:string) => {
                                             return <option value={quality} key={quality}>
                                                 {quality}
                                             </option>

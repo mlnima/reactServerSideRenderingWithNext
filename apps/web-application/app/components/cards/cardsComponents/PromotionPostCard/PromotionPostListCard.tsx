@@ -4,7 +4,7 @@ import Link from "next/link";
 import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons/faMagnifyingGlass";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import './PromotionPostListCard.styles.scss'
-import {clientAPIRequestViewPost} from "api-requests";
+import {clientAPIRequestViewPost} from "@repo/api-requests";
 
 interface PropTypes {
     post:{

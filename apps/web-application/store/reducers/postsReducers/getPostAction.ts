@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {clientAPIRequestGetPost} from "api-requests";
+import {clientAPIRequestGetPost} from "@repo/api-requests";
 
 interface GetPostAction {
     identifier: string,

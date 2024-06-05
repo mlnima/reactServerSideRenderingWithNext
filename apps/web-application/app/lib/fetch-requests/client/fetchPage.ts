@@ -12,6 +12,7 @@ export const fetchPage = async ({pageName, revalidate,tags}:IFetchPage)=>{
         const response = await fetch(
             `${APIServerUrl}/api/v1/pages/getPage?pageName=${pageName}`,
             config({
+                //@ts-ignore
                     revalidate,
                     tags:[...(tags || []),'cacheItem','pages',pageName]
                 })

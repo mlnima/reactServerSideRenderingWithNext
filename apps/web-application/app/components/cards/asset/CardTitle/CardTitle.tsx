@@ -1,6 +1,6 @@
 import Link from "next/link";
 import {FC} from "react";
-import {capitalizeFirstLetter} from "custom-util";
+import {capitalizeFirstLetter} from "shared-util";
 import './CardTitle.styles.scss';
 
 interface CardTitlePropTypes {

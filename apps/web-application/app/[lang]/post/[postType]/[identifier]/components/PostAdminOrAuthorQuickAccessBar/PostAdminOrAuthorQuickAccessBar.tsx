@@ -7,7 +7,7 @@ import {usePathname, useRouter} from "next/navigation";
 import Link from "next/link";
 import './PostAdminOrAuthorQuickAccessBar.scss'
 import {formatDistance} from 'date-fns'
-import {capitalizeFirstLetter} from "custom-util";
+import {capitalizeFirstLetter} from "shared-util";
 
 interface IProps {
     post: Post,

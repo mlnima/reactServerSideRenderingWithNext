@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {clientAPIRequestRegisterUser} from "api-requests";
+import {clientAPIRequestRegisterUser} from "@repo/api-requests";
 import {loading, loginRegisterForm, setAlert} from "@store/reducers/globalStateReducer";
 
 export const registerUserAction = createAsyncThunk(

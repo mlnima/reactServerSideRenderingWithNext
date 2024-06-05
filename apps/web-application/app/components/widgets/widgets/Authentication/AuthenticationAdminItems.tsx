@@ -1,5 +1,5 @@
 import Link from "next/link";
-import {commonAPIRequestClearCaches} from "api-requests";
+import {commonAPIRequestClearCaches} from "@repo/api-requests";
 import {useAppDispatch} from "@store/hooks";
 import {setAdminMode, setAlert} from "@store/reducers/globalStateReducer";
 import {useSelector} from "react-redux";
@@ -12,7 +12,7 @@ import {faCheck} from "@fortawesome/free-solid-svg-icons/faCheck";
 import {useParams, usePathname, useSearchParams, useSelectedLayoutSegment} from "next/navigation";
 import clearCachesByServerAction
     from "@components/widgets/widgets/Authentication/adminServerActions/adminServerActions";
-import socket from "web-socket-client";
+import socket from '@lib/web-socket-client';
 import {faBolt} from "@fortawesome/free-solid-svg-icons";
 
 const AuthenticationAdminItems = ({}) => {

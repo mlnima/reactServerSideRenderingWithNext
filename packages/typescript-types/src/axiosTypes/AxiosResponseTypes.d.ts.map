@@ -1,0 +1,1 @@
+{"version":3,"file":"AxiosResponseTypes.d.ts","sourceRoot":"","sources":["AxiosResponseTypes.ts"],"names":[],"mappings":"AAAA,OAAO,EAAC,IAAI,EAAC,MAAM,SAAS,CAAC;AAE7B,MAAM,WAAW,kBAAkB;IAC/B,OAAO,CAAC,EAAE,MAAM,CAAC;IACjB,KAAK,EAAE,IAAI,EAAE,CAAA;IACb,IAAI,EAAE,IAAI,CAAA;CACb"}

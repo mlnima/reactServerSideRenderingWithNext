@@ -1,6 +1,10 @@
-const getTextDataWithTranslation = (locale : string,name: string,parentObject :any)=>{
+const getTextDataWithTranslation = (locale, name, parentObject) => {
     const isDefaultLocale = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCALE;
-    return isDefaultLocale ? parentObject?.[name] : parentObject.translations?.[locale]?.[name] || parentObject?.[name] || null
-}
+    return isDefaultLocale
+        ? parentObject?.[name]
+        : parentObject.translations?.[locale]?.[name] ||
+              parentObject?.[name] ||
+              null;
+};
 
-export default getTextDataWithTranslation;
+module.exports =  getTextDataWithTranslation;

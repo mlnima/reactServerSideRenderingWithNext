@@ -1,17 +1,17 @@
 'use client';
 import React, {useRef} from 'react';
-import {DndProvider} from 'react-dnd';
-import {HTML5Backend} from 'react-dnd-html5-backend';
-import {TouchBackend} from 'react-dnd-touch-backend';
-import {ImageListWithPreview} from './ImageListWithPreview';
+// import {DndProvider} from 'react-dnd';
+// import {HTML5Backend} from 'react-dnd-html5-backend';
+// import {TouchBackend} from 'react-dnd-touch-backend';
+// import {ImageListWithPreview} from './ImageListWithPreview';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCamera} from "@fortawesome/free-solid-svg-icons/faCamera";
 import {faCirclePlus} from "@fortawesome/free-solid-svg-icons/faCirclePlus";
-import {touchDeviceDetector} from "custom-util";
+import {touchDeviceDetector} from "shared-util";
 import "./MultipleImageUploader.styles.scss";
-import {clientAPIRequestDeletePostImage} from "api-requests";
-import {imageCanvasCompressor} from "custom-util";
-import {clientAPIRequestUploadPostImages} from "api-requests";
+import {clientAPIRequestDeletePostImage , clientAPIRequestUploadPostImages} from "@repo/api-requests";
+import {imageCanvasCompressor} from "shared-util";
+
 import {setAlert} from "@store/reducers/globalStateReducer";
 import {useAppDispatch} from "@store/hooks";
 
@@ -96,7 +96,7 @@ const MultipleImageUploader: React.FC<MultipleImageUploaderProps> = (
         }));
 
         //upload images
-        await clientAPIRequestUploadPostImages(formData).then(response => {
+        await clientAPIRequestUploadPostImages(formData).then((response:{data:any}) => {
             if (response.data?.images?.length > 0) {
 
                 setEditingPost((prevState:React.SetStateAction<any>) => {
@@ -140,12 +140,11 @@ const MultipleImageUploader: React.FC<MultipleImageUploaderProps> = (
                                      style={{width: 10, height: 10}}/>
                 </div>
             }
-            <DndProvider backend={isTouchDevice ? TouchBackend : HTML5Backend}>
-                {/*//@ts-ignore*/}
-                <ImageListWithPreview editingPost={editingPost}
-                                      setEditingPost={setEditingPost}
-                                      removeImage={removeImage}/>
-            </DndProvider>
+            {/*<DndProvider backend={isTouchDevice ? TouchBackend : HTML5Backend}>*/}
+            {/*    <ImageListWithPreview editingPost={editingPost}*/}
+            {/*                          setEditingPost={setEditingPost}*/}
+            {/*                          removeImage={removeImage}/>*/}
+            {/*</DndProvider>*/}
         </div>
 
     );

@@ -10,7 +10,7 @@ import {DashboardStore} from "typescript-types";
 import React, {useEffect} from "react";
 import {faHome} from "@fortawesome/free-solid-svg-icons/faHome";
 import {faEraser} from "@fortawesome/free-solid-svg-icons/faEraser";
-import {commonAPIRequestClearCaches} from "api-requests";
+import {commonAPIRequestClearCaches} from "@repo/api-requests";
 
 const Style = styled.div`
   display: flex;

@@ -4,8 +4,8 @@ import './ProfileImageWithEditing.scss'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCirclePlus} from "@fortawesome/free-solid-svg-icons/faCirclePlus";
 import {useAppDispatch, useAppSelector} from "@store/hooks";
-import {imageCanvasCompressor} from "custom-util";
-import {clientAPIRequestUploadProfileImage} from "api-requests";
+import {imageCanvasCompressor} from "shared-util";
+import {clientAPIRequestUploadProfileImage} from "@repo/api-requests";
 import {replaceUserProfileImage} from "@store/reducers/userReducers/userReducer";
 
 type UploadEvent = React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLDivElement>;

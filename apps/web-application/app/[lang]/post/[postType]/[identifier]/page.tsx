@@ -1,7 +1,9 @@
 import {i18n} from "@i18nConfig";
 import {getDictionary} from "../../../../../get-dictionary";
 import dynamic from "next/dynamic";
-import {fetchPost, fetchSettings, fetchWidgets, fetchPostViews, fetchPostRating} from "fetch-requests";
+import {fetchPost,fetchPostViews,fetchPostRating} from "@lib/fetch-requests/client/fetchPosts";
+import {fetchSettings} from "@lib/fetch-requests/client/fetchSettings";
+import {fetchWidgets} from "@lib/fetch-requests/client/fetchWidgets";
 import SidebarWidgetAreaRenderer
     from "@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer";
 import './page.styles.scss'

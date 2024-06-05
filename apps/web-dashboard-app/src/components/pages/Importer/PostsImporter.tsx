@@ -5,7 +5,7 @@ import {DashboardStore, Store} from "typescript-types";
 import {createNewPostAction} from "@store/reducers/postsReducer";
 import {useAppDispatch} from "@store/hooks";
 import qualityConvertor from "@variables/qualityConvertor";
-import {dashboardAPIRequestCreateNewPost} from "api-requests";
+import {dashboardAPIRequestCreateNewPost} from "@repo/api-requests";
 
 const PostsImporterStyledDiv = styled.div`
   display: flex;

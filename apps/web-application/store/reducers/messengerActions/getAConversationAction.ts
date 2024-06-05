@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {loading} from "@store/reducers/globalStateReducer";
-import {clientAPIRequestGetAConversation} from "api-requests";
+import {clientAPIRequestGetAConversation} from "@repo/api-requests";
 
 interface IArgs {
     conversationId: string

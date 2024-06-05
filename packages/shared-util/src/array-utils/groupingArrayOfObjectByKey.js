@@ -1,7 +1,16 @@
-type Item = { [key: string]: any };
+/**
+ * @typedef {Object.<string, any>} Item
+ */
 
-const groupingArrayOfObjectByKey = (array: Item[], key: string): { [letter: string]: Item[] } => {
-    const grouped: { [letter: string]: Item[] } = {};
+/**
+ * Groups an array of objects by the first letter of a specified key.
+ *
+ * @param {Item[]} array - The array of objects to be grouped.
+ * @param {string} key - The key to group by.
+ * @returns {{ [letter: string]: Item[] }} The grouped objects.
+ */
+const groupingArrayOfObjectByKey = (array, key) => {
+    const grouped = {};
 
     for (const item of array) {
         // Extract the first letter
@@ -20,20 +29,4 @@ const groupingArrayOfObjectByKey = (array: Item[], key: string): { [letter: stri
     return grouped;
 };
 
-export default groupingArrayOfObjectByKey;
-
-
-
-//--old
-// const groupingArrayOfObjectByKey =  (dataArray:Array<any>,key:string)=>{
-//     if(!dataArray.length) return {}
-//     if(!key) return {}
-//
-//     dataArray.reduce((finalData, current) => {
-//         const firstLetter =current?.[key]?.[0]
-//         finalData[firstLetter] = [...(finalData?.[firstLetter] || []), current]
-//         return finalData
-//     }, {})
-// }
-//
-// export default groupingArrayOfObjectByKey;
+module.exports = groupingArrayOfObjectByKey;

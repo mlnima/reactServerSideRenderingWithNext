@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import {clientAPIRequestGetUserPageData} from "api-requests";
+import {clientAPIRequestGetUserPageData} from "@repo/api-requests";
 
 interface GetUserPageDataActionArgs {
     username?: string;

@@ -1,7 +1,7 @@
 import {FC} from "react";
 import {Meta} from "typescript-types";
 import Link from "next/link";
-import {capitalizeFirstLetter} from "custom-util";
+import {capitalizeFirstLetter} from "shared-util";
 import CardTitle from "@components/cards/asset/CardTitle/CardTitle";
 import './ActorCard.scss'
 import CardImageRendererUseClient from '@components/cards/asset/CardImageRenderer/CardImageRendererUseClient'

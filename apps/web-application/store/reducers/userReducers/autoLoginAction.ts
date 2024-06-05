@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import {commonAPIRequestGetSignedInUserData} from "api-requests";
+import {commonAPIRequestGetSignedInUserData} from "@repo/api-requests";
 import {loading} from "@store/reducers/globalStateReducer";
 
 interface AutoLoginActionArgs {

@@ -12,7 +12,7 @@ import {
     commonAPIRequestGetSignedInUserData,
     commonAPIRequestLoginUser,
     dashboardAPIRequestGetUser
-} from "api-requests";
+} from "@repo/api-requests";
 
 
 const initialState = {

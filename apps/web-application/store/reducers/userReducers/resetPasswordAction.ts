@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import {clientAPIRequestResetPassword} from "api-requests";
+import {clientAPIRequestResetPassword} from "@repo/api-requests";
 import { setAlert } from "@store/reducers/globalStateReducer";
 
 interface ResetPasswordActionArgs {

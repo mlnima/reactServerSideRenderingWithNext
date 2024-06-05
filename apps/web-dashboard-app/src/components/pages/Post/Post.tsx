@@ -7,15 +7,14 @@ import Meta from "./Meta/Meta";
 import {Link, useSearchParams} from 'react-router-dom'
 import RatingOption from './RatingOption/RatingOption'
 import PostInformation from "./PostInformation/PostInformation";
-// import languagesOptions from "@variables/languagesOptions";
 import styled from "styled-components";
 import { useSelector} from "react-redux";
 import {editPostAction} from "@store/reducers/postsReducer";
 import {getPostAction,defineNewPost,changeActiveEditingLanguage} from "@store/reducers/postsReducer";
 import {DashboardStore} from "typescript-types";
 import {useAppDispatch} from "@store/hooks";
-import {LanguagesOptions} from "custom-util";
-import isNumericString from "custom-util/dist/src/string-util/isNumericString";
+import {LanguagesOptions} from "ui";
+import { isNumericString } from 'shared-util';
 
 const AdminPostPageStyledDiv = styled.div`
   display: grid;

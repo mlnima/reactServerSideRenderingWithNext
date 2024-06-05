@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import { loading } from "../globalStateReducer";
-import {clientAPIRequestGetUsers} from "api-requests";
+import {clientAPIRequestGetUsers} from "@repo/api-requests";
 
 export const getMultipleUserDataByIdAction = createAsyncThunk(
     'user/getMultipleUserDataByIdAction',

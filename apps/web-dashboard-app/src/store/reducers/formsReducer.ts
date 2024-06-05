@@ -3,7 +3,7 @@ import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {loading} from "./globalStateReducer";
 import {AxiosError, AxiosResponse} from "axios";
 import {RootState} from "../store";
-import {dashboardAPIRequestGetForms,dashboardAPIRequestGetForm} from "api-requests";
+import {dashboardAPIRequestGetForms,dashboardAPIRequestGetForm} from "@repo/api-requests";
 
 
 const initialState = {

@@ -2,7 +2,7 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {loading} from "./globalStateReducer";
 import {AxiosError, AxiosResponse} from "axios";
-import {AxiosInstance} from "api-requests";
+import {AxiosInstance} from "@repo/api-requests";
 import {RootState} from "../store";
 
 const initialState = {

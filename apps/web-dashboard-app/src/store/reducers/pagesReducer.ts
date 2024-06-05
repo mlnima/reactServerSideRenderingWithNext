@@ -9,7 +9,7 @@ import {
     dashboardAPIRequestGetPages,
     dashboardAPIRequestGetPage,
     dashboardAPIRequestUpdatePage
-} from "api-requests";
+} from "@repo/api-requests";
 
 
 

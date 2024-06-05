@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import {clientAPIRequestUnFollowUser} from "api-requests";
+import {clientAPIRequestUnFollowUser} from "@repo/api-requests";
 import { loading } from "@store/reducers/globalStateReducer";
 
 export const unfollowUserAction = createAsyncThunk<void, string>(

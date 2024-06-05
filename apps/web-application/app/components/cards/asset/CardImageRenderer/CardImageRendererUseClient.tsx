@@ -1,5 +1,5 @@
 'use client'
-import {clientAPIRequestViewPost} from "api-requests";
+import {clientAPIRequestViewPost} from "@repo/api-requests";
 import React, {FC, useEffect, useMemo, useRef, useState} from 'react';
 import './CardImageRendererUseClient.scss'
 import {useAppDispatch, useAppSelector} from "@store/hooks";

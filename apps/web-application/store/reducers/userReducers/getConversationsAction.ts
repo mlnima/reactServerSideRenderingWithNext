@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {clientAPIRequestGetConversations} from "api-requests";
+import {clientAPIRequestGetConversations} from "@repo/api-requests";
 
 
 export const getConversationsAction = createAsyncThunk(

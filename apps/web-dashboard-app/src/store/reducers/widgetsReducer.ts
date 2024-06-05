@@ -1,5 +1,5 @@
 // @ts-nocheck
-import {reduceWidgetsToGroups} from "custom-util";
+import {reduceWidgetsToGroups} from "shared-util";
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
 import {AxiosError, AxiosResponse} from "axios";
@@ -10,7 +10,7 @@ import {
     dashboardAPIRequestUpdateWidget,
     dashboardAPIRequestCreateNewWidget,
     dashboardAPIRequestDeleteWidget
-} from "api-requests";
+} from "@repo/api-requests";
 
 const initialState = {
     adminPanelWidgets: {}

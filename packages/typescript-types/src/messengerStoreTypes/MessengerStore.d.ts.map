@@ -1,0 +1,1 @@
+{"version":3,"file":"MessengerStore.d.ts","sourceRoot":"","sources":["MessengerStore.ts"],"names":[],"mappings":"AAAA,OAAO,EAAC,UAAU,EAAC,MAAM,mCAAmC,CAAC;AAC7D,OAAO,EAAC,aAAa,EAAC,MAAM,sCAAsC,CAAC;AACnE,OAAO,EAAC,WAAW,EAAC,MAAM,oCAAoC,CAAC;AAE/D,MAAM,WAAW,cAAc;IAC3B,WAAW,EAAE,WAAW,CAAC;IACzB,QAAQ,EAAE,aAAa,CAAC;IACxB,KAAK,EAAE,UAAU,CAAC;CACrB"}

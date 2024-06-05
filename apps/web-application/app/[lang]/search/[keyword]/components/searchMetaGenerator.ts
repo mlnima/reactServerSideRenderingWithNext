@@ -1,8 +1,9 @@
-import {fetchSearch, fetchSettings} from "fetch-requests";
+import {fetchSearch} from "@lib/fetch-requests/client/fetchPosts";
+import {fetchSettings} from "@lib/fetch-requests/client/fetchSettings";
 import {getDictionary} from "../../../../../get-dictionary";
 import {i18n} from "@i18nConfig";
-import {capitalizeFirstLetter, capitalizeFirstLetters} from "custom-util";
-// import {capitalizeFirstLetter} from "custom-util";
+import {capitalizeFirstLetter, capitalizeFirstLetters} from "shared-util";
+// import {capitalizeFirstLetter} from "shared-util";
 
 type Props = {
     params: { keyword: string, lang: string }

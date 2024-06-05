@@ -1,4 +1,4 @@
-import {fetchChatroomData} from "fetch-requests";
+import {fetchChatroomData} from "@lib/fetch-requests/client/fetchChatrooms";
 import {getDictionary} from "../../../../get-dictionary";
 import {i18n} from '@i18nConfig'
 import './page.styles.scss';

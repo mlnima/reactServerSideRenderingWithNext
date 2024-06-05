@@ -1,4 +1,7 @@
-import {fetchPosts, fetchSettings, fetchWidgets} from "fetch-requests";
+
+import {fetchPosts} from "@lib/fetch-requests/client/fetchPosts";
+import {fetchSettings} from "@lib/fetch-requests/client/fetchSettings";
+import {fetchWidgets} from "@lib/fetch-requests/client/fetchWidgets";
 import SidebarWidgetAreaRenderer
     from "@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer";
 import {i18n} from "@i18nConfig";

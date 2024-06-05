@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {loading, setAlert} from "../globalStateReducer";
-import {clientAPIRequestUpdatePost} from "api-requests";
+import {clientAPIRequestUpdatePost} from "@repo/api-requests";
 // import getEditingPostAction from "@utils/reducers/postsReducers/getEditingPostAction";
 
 const updatePostAction = createAsyncThunk(

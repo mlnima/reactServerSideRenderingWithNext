@@ -1,4 +1,4 @@
-const nextTranslateWithCallback = ({ t, primaryNamespace, originalString }) => {
+export const nextTranslateWithCallback = ({ t, primaryNamespace, originalString }) => {
     return t(
         `${primaryNamespace || 'common'}:${originalString}`,
         {},
@@ -12,4 +12,3 @@ const nextTranslateWithCallback = ({ t, primaryNamespace, originalString }) => {
     );
 };
 
-module.exports = nextTranslateWithCallback;

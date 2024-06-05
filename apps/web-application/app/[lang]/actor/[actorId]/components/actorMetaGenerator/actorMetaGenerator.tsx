@@ -1,6 +1,7 @@
 import type {Metadata, ResolvingMetadata} from 'next'
-import {fetchPosts, fetchSettings} from "fetch-requests";
-import {textContentReplacer, getTextDataWithTranslation} from "custom-util";
+import {fetchPosts} from "@lib/fetch-requests/client/fetchPosts";
+import {fetchSettings} from "@lib/fetch-requests/client/fetchSettings";
+import {textContentReplacer, getTextDataWithTranslation} from "shared-util";
 import {i18n} from "@i18nConfig";
 
 type Props = {

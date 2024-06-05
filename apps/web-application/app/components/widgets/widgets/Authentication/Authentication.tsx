@@ -21,7 +21,6 @@ const Authentication: FC = () => {
 
     return (
         <div className={'authWidget'}>
-
             <button className={'authMenuOpenButton  btn btn-transparent'}
                     onClick={() => dispatch(setUserConfigMenu(true))}
                     aria-label={'user Menu'}>

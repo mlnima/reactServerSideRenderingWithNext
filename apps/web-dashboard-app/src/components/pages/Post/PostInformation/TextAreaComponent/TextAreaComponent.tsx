@@ -1,4 +1,4 @@
-import {convertVariableNameToName} from "custom-util";
+import {convertVariableNameToName} from "shared-util";
 import {useSelector} from "react-redux";
 import {DashboardStore} from "typescript-types";
 import {FC} from "react";

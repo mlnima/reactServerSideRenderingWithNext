@@ -1,8 +1,8 @@
 'use client';
 import React, {FC, useState, useMemo, useEffect} from 'react';
 import Select from 'react-select';
-import {uniqArrayBy} from 'custom-util';
-import {clientAPIRequestGetMetaSuggestion} from 'api-requests';
+import {uniqArrayBy} from 'shared-util';
+import {clientAPIRequestGetMetaSuggestion} from '@repo/api-requests';
 import {Meta} from 'typescript-types';
 import './MetaDataSelector.styles.scss';
 import {setAlert} from "@store/reducers/globalStateReducer";
@@ -111,8 +111,8 @@ export default MetaDataSelector;
 
 // import {FC,  useMemo, useState} from "react";
 // import Select from 'react-select';
-// import {uniqArrayBy} from "custom-util";
-// import {clientAPIRequestResetMetaImage} from "api-requests";
+// import {uniqArrayBy} from "shared-util";
+// import {clientAPIRequestResetMetaImage} from "@repo/api-requests";
 // import {Meta} from "typescript-types";
 // import './MetaDataSelector.styles.scss'
 //

@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useState} from "react";
 import styled from "styled-components";
-import {dashboardAPIRequestBackupMetas} from "api-requests";
+import {dashboardAPIRequestBackupMetas} from "@repo/api-requests";
 import FileDownload from 'js-file-download'
 
 const Style = styled.div``;
@@ -46,13 +46,11 @@ const MetasSection: FC<PropTypes> = ({}) => {
             metaType,
             fields :metasSelectedFields,
             limit:metasLimit
-        }).then(response=>{
+        }).then((response:{data:any})=>{
             FileDownload(response.data,`${metaType}${now.toLocaleString()}.json`)
         })
     }
-    useEffect(() => {
-        console.log(metasLimit)
-    }, [metasLimit]);
+
     return (
         <Style className={'export-type-container'}>
             <h2>Metas:</h2>

@@ -2,7 +2,7 @@ import React, {FC, useEffect, useRef, useState} from "react";
 import './ReactAudioPlayer.styles.scss';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPause, faPlay} from "@fortawesome/free-solid-svg-icons";
-import {base64toBlobURL} from "custom-util";
+import {base64toBlobURL} from "shared-util";
 
 interface IProps {
     src: string;

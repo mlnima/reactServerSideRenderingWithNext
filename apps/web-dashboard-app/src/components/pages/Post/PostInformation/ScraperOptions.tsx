@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useRef, useState} from "react";
 import styled from "styled-components";
-import {inputValueSimplifier} from "custom-util";
+import {inputValueSimplifier} from "shared-util";
 import {useAppDispatch} from "@store/hooks";
 import {
     editPostSourceAction,

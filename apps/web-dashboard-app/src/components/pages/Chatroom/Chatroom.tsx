@@ -10,7 +10,7 @@ import {
     dashboardAPIRequestUpdateChatroom,
     dashboardAPIRequestCreateChatroom,
     dashboardAPIRequestDeleteChatroom
-} from "api-requests";
+} from "@repo/api-requests";
 
 
 const Style = styled.div`
@@ -59,7 +59,7 @@ const Chatroom: FC<PropTypes> = ({}) => {
         if (chatroomId) {
             dashboardAPIRequestUpdateChatroom(chatroomData)
         } else if (!!isNewChatroom) {
-            dashboardAPIRequestCreateChatroom(chatroomData).then(response => {
+            dashboardAPIRequestCreateChatroom(chatroomData).then((response:{data:any}) => {
                 console.log(response)
                 if (response?.data?.chatroom?._id) {
                     navigate(`/dashboard/chatroom?id=${response?.data?.chatroom?._id}`);

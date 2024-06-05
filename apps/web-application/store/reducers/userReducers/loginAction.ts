@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {commonAPIRequestLoginUser} from "api-requests";
+import {commonAPIRequestLoginUser} from "@repo/api-requests";
 import {loading, setAlert, setBackgroundFilter} from "@store/reducers/globalStateReducer";
 
 interface LoginActionArgs {

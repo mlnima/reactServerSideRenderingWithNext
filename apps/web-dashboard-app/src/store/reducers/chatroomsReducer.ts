@@ -6,7 +6,7 @@ import {
     dashboardAPIRequestGetChatrooms,
     dashboardAPIRequestGetChatroom,
     // dashboardAPIRequestCreateChatroom
-} from "api-requests";
+} from "@repo/api-requests";
 import {RootState} from "@store/store";
 
 

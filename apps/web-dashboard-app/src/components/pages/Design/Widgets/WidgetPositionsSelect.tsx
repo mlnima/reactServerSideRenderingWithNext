@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {FC} from "react";
-import {convertVariableNameToName} from "custom-util";
+import {convertVariableNameToName} from "shared-util";
 
 const PositionSelectorStyledDiv = styled.div`
 

@@ -7,7 +7,7 @@ interface IProps {
 }
 
 const ThemeProvider: FC<IProps> = ({ children }) => {
-    const theme = useAppSelector(({globalState})=>globalState.theme)
+    const theme = useAppSelector(({globalState})=>globalState?.theme||'dark')
 
     useEffect(() => {
         if (theme){

@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {loading} from "@store/reducers/globalStateReducer";
-import {clientAPIRequestStartAConversation} from "api-requests";
+import {clientAPIRequestStartAConversation} from "@repo/api-requests";
 import {NextRouter} from "next/router";
 
 interface IArgs {

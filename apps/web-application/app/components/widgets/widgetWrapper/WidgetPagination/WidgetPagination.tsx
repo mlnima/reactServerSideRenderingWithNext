@@ -1,6 +1,6 @@
 import {FC} from "react";
 import Link from 'next/link'
-import {rangeNumGenerator} from "custom-util";
+import {rangeNumGenerator} from "shared-util";
 import './WidgetPagination.styles.scss'
 
 interface WidgetPaginationPropTypes {

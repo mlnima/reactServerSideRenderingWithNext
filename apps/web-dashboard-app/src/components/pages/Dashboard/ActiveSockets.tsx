@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-// import socket from 'web-socket-client';
+// import socket from '@lib/web-socket-client';
 
 
 const ActiveSockets = () => {

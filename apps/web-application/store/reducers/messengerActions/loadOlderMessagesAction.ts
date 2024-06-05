@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { loading } from '@store/reducers/globalStateReducer';
-import {clientAPIRequestLoadOlderMessages} from 'api-requests';
+import {clientAPIRequestLoadOlderMessages} from '@repo/api-requests';
 import React from "react";
 
 interface IArgs {

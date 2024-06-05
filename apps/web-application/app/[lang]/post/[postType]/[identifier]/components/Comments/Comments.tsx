@@ -5,8 +5,8 @@ import {loading, loginRegisterForm, setAlert} from "@store/reducers/globalStateR
 import './Comments.styles.scss'
 import UserProfileImage from "@components/UserProfileImage/UserProfileImage";
 import {Comment, NewComment} from "typescript-types";
-import {clientAPIRequestDeleteCommentByAdmin} from "api-requests";
-import {fetchComments, postNewComment} from "fetch-requests";
+import {clientAPIRequestDeleteCommentByAdmin} from "@repo/api-requests";
+import {fetchComments,postNewComment} from "@lib/fetch-requests/client/fetchPosts";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAnglesDown, faAnglesUp, faPlus} from "@fortawesome/free-solid-svg-icons";
 import CommentsRenderer from "./CommentsRenderer/CommentsRenderer";

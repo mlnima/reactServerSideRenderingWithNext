@@ -5,7 +5,7 @@ import {loginRegisterForm} from "@store/reducers/globalStateReducer";
 import {useAppDispatch, useAppSelector} from "@store/hooks";
 import {followUserAction} from "@store/reducers/userReducers/followUserAction";
 import {unfollowUserAction} from "@store/reducers/userReducers/unfollowUserAction";
-import {clientAPIRequestStartAConversation} from "api-requests";
+import {clientAPIRequestStartAConversation} from "@repo/api-requests";
 import './UserPageActionButtons.styles.scss'
 import FollowingOptionsPopup from "./FollowingOptionsPopup/FollowingOptionsPopup";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";

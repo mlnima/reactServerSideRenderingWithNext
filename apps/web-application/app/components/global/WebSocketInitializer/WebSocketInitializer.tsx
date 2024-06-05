@@ -3,7 +3,7 @@ import {FC, useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "@store/hooks";
 import {initialIncomingCallAction} from "@store/reducers/mediaConnectionReducer";
 // import {getAConversationAction} from "@store/reducers//messengerActions/getAConversationAction";
-import socket from 'web-socket-client';
+import socket from '@lib/web-socket-client';
 
 const WebSocketInitializer: FC = () => {
     const dispatch = useAppDispatch();

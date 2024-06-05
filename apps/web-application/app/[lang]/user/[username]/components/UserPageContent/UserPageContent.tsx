@@ -6,14 +6,15 @@ import {useAppDispatch, useAppSelector} from "@store/hooks";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCamera} from "@fortawesome/free-solid-svg-icons/faCamera";
 import './UserPageContent.styles.scss'
-import {fetchUserPageInitialData, fetchUserPagePosts} from "fetch-requests";
+import {fetchUserPagePosts} from "@lib/fetch-requests/client/fetchPosts";
+import {fetchUserPageInitialData} from "@lib/fetch-requests/client/fetchUsers";
 import LoggedInRequirePageMessage from "@components/LoggedInRequireMessage/LoggedInRequirePageMessage";
 import PostsCardsRenderer from "@components/cards/CardsRenderer/PostsCardsRenderer/PostsCardsRenderer";
 import {Post} from "typescript-types";
 import {loading} from "@store/reducers/globalStateReducer";
 import ProfileImageWithEditing from "../PrfileImageWithEditing/ProfileImageWithEditing";
-import {postStatuses} from "data-structure";
-import {capitalizeFirstLetter} from "custom-util";
+import {postStatuses} from "@repo/data-structures";
+import {capitalizeFirstLetter} from "shared-util";
 
 interface IProps {
     username: string,

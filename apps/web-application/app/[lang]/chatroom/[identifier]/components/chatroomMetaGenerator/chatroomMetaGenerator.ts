@@ -1,5 +1,5 @@
-import {fetchChatroomData} from "fetch-requests";
-import {capitalizeFirstLetter} from "custom-util";
+import {fetchChatroomData} from "@lib/fetch-requests/client/fetchChatrooms";
+import {capitalizeFirstLetter} from "shared-util";
 
 interface IProps {
     params: {

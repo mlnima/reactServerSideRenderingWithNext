@@ -1,6 +1,6 @@
 import React, {ChangeEvent,useState} from 'react';
 import styled from "styled-components";
-import {postTypes} from "data-structure";
+import {postTypes} from "@repo/data-structures";
 import {getExportingPosts} from "@store/reducers/postsReducer";
 import {useAppDispatch} from "@store/hooks";
 
@@ -92,7 +92,7 @@ const PostsExporter = () => {
                 <div>
                     <select value={data?.postType} className={'primarySelect'} name={'postType'} onChange={e => onChangeHandler(e)}>
                         <option value='' >Select</option>
-                        {postTypes.map((postType, index) => {
+                        {postTypes.map((postType:string, index:number) => {
                             return (
                                 <option value={postType} key={index}>{postType}</option>
                             )

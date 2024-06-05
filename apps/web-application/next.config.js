@@ -2,7 +2,7 @@
 // const dns = require("dns");
 // dns.setDefaultResultOrder("ipv4first")
 const rewrites = require('./nextConfigs/rewrites')
-const {postTypes} = require("data-structure");
+const {postTypes} = require("@repo/data-structures");
 
 const postTypeQueryMatcher = `:postType(${postTypes.join('|')})?`
 const languageQueryMatcher = `(${process.env.NEXT_PUBLIC_LOCALES.split(' ').join('|')})`;

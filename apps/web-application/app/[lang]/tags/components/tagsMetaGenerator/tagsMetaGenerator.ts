@@ -1,7 +1,7 @@
 import type {Metadata, ResolvingMetadata} from 'next'
 import {i18n} from "../../../../../i18n-config";
-import {fetchSettings} from "fetch-requests";
-import {getTextDataWithTranslation, textContentReplacer} from "custom-util";
+import {fetchSettings} from "@lib/fetch-requests/client/fetchSettings";
+import {getTextDataWithTranslation, textContentReplacer} from "shared-util";
 
 type Props = {
     params: { lang: string }

@@ -1,4 +1,5 @@
-import {fetchSettings, fetchWidgets} from "fetch-requests";
+import {fetchSettings} from "@lib/fetch-requests/client/fetchSettings";
+import {fetchWidgets} from "@lib/fetch-requests/client/fetchWidgets";
 import MainWidgetArea from "@components/widgets/widgetAreas/MainWidgetArea"
 import {getDictionary} from "../../get-dictionary";
 import './page.styles.scss';
@@ -29,7 +30,7 @@ const homePage = async ({params: {lang},searchParams}: IProps) => {
         ],
         locale
     });
-
+//@ts-ignore
     const sidebar = settingsData?.settings?.homePageSettings?.sidebar;
 
 

@@ -1,5 +1,5 @@
-const isEditMode = (editMode: boolean, userRole: string) => {
+const isEditMode = (editMode, userRole) => {
     return editMode && userRole !== 'administrator';
-}
+};
 
-export default isEditMode;
+module.exports = isEditMode;

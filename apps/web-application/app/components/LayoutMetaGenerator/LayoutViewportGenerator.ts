@@ -1,4 +1,4 @@
-import {fetchSettings} from "fetch-requests";
+import {fetchSettings} from "@lib/fetch-requests/client/fetchSettings";
 
 const LayoutViewportGenerator = async () => {
 

@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {dashboardAPIRequestBulkActionOnPosts} from "api-requests";
+import {dashboardAPIRequestBulkActionOnPosts} from "@repo/api-requests";
 import {AxiosResponse} from "axios";
 
 export const editPostStatusAction = createAsyncThunk(

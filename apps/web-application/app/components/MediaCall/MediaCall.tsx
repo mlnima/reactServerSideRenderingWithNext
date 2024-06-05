@@ -2,7 +2,7 @@
 'use client';
 import React, {FC, useEffect, useMemo, useRef, useState} from "react";
 import Draggable from "react-draggable";
-import socket from 'web-socket-client';
+import socket from '@lib/web-socket-client';
 import './MediaCall.styles.scss'
 import {useAppDispatch, useAppSelector} from "@store/hooks";
 import CallerInfo from "./CallerInfo";

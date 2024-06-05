@@ -1,5 +1,5 @@
 {
-  "name": "data-structures",
+  "name": "@repo/data-structures",
   "version": "1.0.0",
   "private": true,
   "main": "dist/src/index.js",
@@ -20,6 +20,6 @@
     "jest-presets": "*",
     "eslint-config-custom": "*",
     "tsconfig": "*",
-    "typescript": "^5.1.6"
+    "typescript": "^5.4.5"
   }
 }

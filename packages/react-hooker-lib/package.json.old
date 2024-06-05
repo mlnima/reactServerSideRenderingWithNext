@@ -30,7 +30,7 @@
     "jest-presets": "*",
     "eslint-config-custom": "*",
     "tsconfig": "*",
-    "custom-util": "*",
+    "shared-util": "*",
     "typescript": "^5.0.4"
   }
 }

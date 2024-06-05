@@ -9,8 +9,8 @@ import WidgetHeaderControl from "./WidgetHeaderControl/WidgetHeaderControl";
 import {Widget} from "typescript-types";
 import {useAppDispatch} from "@store/hooks";
 import {updateWidgetAction} from "@store/reducers/widgetsReducer";
-import {inputValueSimplifier} from "custom-util";
-import isNumericString from "custom-util/dist/src/string-util/isNumericString";
+import {inputValueSimplifier} from "shared-util";
+import { isNumericString } from 'shared-util';
 
 interface WidgetModelPropTypes {
     widget: Widget

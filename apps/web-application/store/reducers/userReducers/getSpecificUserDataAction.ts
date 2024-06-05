@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {commonAPIRequestGetSignedInUserData} from "api-requests";
+import {commonAPIRequestGetSignedInUserData} from "@repo/api-requests";
 
 export const getSpecificUserDataAction = createAsyncThunk(
     'user/getSpecificUserDataAction',

@@ -23,8 +23,9 @@ import {
     dashboardAPIRequestBulkActionOnMetas,
     dashboardAPIRequestScrapYoutubeInfo,
     dashboardAPIRequestPostDataScrappers,
-} from "api-requests";
-import {dashboardAPIRequestFindAnotherSimilarSourceLink} from "api-requests/dist/src/dashboard/dashboardPosts";
+    dashboardAPIRequestFindAnotherSimilarSourceLink
+} from "@repo/api-requests";
+
 
 
 interface AdminPanelPosts {

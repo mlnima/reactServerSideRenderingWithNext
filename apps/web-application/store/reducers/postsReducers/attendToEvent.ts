@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {loading} from "../globalStateReducer";
-import {clientAPIRequestAttendToEvent} from "api-requests";
+import {clientAPIRequestAttendToEvent} from "@repo/api-requests";
 
 export const attendingToEvent = createAsyncThunk(
     'posts/attendToEvent',

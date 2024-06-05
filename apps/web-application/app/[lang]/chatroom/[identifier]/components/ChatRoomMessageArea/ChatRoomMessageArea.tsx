@@ -2,8 +2,8 @@
 import React, {useEffect, useRef, FC} from 'react';
 import ChatRoomMessage from './ChatRoomMessage';
 import {ChatroomMessage} from 'typescript-types';
-import socket from 'web-socket-client';
-import {sortArrayByPropertyOfObject} from 'custom-util';
+import socket from '@lib/web-socket-client';
+import {sortArrayByPropertyOfObject} from 'shared-util';
 import {useAppDispatch} from '@store/hooks';
 import {loading} from '@store/reducers/globalStateReducer';
 import './ChatRoomMessageArea.styles.scss';

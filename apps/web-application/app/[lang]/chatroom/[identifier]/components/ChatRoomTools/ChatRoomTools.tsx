@@ -1,6 +1,6 @@
 'use client';
 import React, {FC, useEffect, useRef, useState} from 'react';
-import socket from 'web-socket-client';
+import socket from '@lib/web-socket-client';
 import {useAppDispatch, useAppSelector} from "@store/hooks";
 import SomeoneIsTyping from "./SomeoneIsTyping";
 import UploadImageButton from "./UploadImageButton";

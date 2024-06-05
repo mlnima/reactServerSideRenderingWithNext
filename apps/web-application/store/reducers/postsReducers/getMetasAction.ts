@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {clientAPIRequestGetMetas} from "api-requests";
+import {clientAPIRequestGetMetas} from "@repo/api-requests";
 
 const getMetasAction = createAsyncThunk(
     'posts/getMetasAction',

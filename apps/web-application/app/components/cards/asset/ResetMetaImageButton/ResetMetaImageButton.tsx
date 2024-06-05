@@ -1,7 +1,7 @@
 "use client";
 import React, {FC} from "react";
 import { useRouter } from 'next/navigation'
-import {clientAPIRequestResetMetaImage} from "api-requests";
+import {clientAPIRequestResetMetaImage} from "@repo/api-requests";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faRotateRight} from "@fortawesome/free-solid-svg-icons/faRotateRight";
 import './ResetMetaImageButton.scss'

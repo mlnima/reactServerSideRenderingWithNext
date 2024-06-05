@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { clientAPIRequestDeleteConversation } from "api-requests";
+import { clientAPIRequestDeleteConversation } from "@repo/api-requests";
 import { setAlert } from "@store/reducers/globalStateReducer";
 
 interface IProps {

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React, {useMemo} from "react";
-import {postTypes} from "data-structure";
-import {convertVariableNameToName} from "custom-util";
+import {postTypes} from "@repo/data-structures";
+import {convertVariableNameToName} from "shared-util";
 import {useSearchParams} from "react-router-dom";
 import paramsObjectGenerator from "../../../../variables/paramsObjectGenerator";
 
@@ -36,7 +36,7 @@ const PostsTypes = () => {
             <select className={'primarySelect'} onChange={e => onFormatChangeHandler(e)} value={query?.postType}>
                 <option value='' >Select</option>
                 <option value='all'>All</option>
-                {postTypes.map(postType=><option key={postType} value={postType}>{convertVariableNameToName(postType)}</option>)}
+                {postTypes.map((postType:string)=><option key={postType} value={postType}>{convertVariableNameToName(postType)}</option>)}
             </select>
         </PostsTypesStyledDiv>
     );

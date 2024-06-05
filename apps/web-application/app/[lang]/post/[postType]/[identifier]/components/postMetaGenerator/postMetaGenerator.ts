@@ -1,5 +1,5 @@
 import type {Metadata, ResolvingMetadata} from 'next'
-import {fetchPost} from "fetch-requests";
+import {fetchPost} from "@lib/fetch-requests/client/fetchPosts";
 
 type Props = {
     params: { identifier: string,lang:string,postType:string }

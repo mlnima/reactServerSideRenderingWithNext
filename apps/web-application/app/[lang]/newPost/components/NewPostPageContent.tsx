@@ -2,7 +2,7 @@
 import {FC, useEffect} from "react";
 import {useParams, useRouter, useSearchParams} from "next/navigation";
 import {useAppDispatch, useAppSelector} from "@store/hooks";
-import {clientAPIRequestCreateNewPost} from "api-requests";
+import {clientAPIRequestCreateNewPost} from "@repo/api-requests";
 import {loading, loginRegisterForm, setAlert} from "@store/reducers/globalStateReducer";
 
 interface IProps {

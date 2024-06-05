@@ -1,7 +1,4 @@
-type SortOrder = 'asc' | 'desc';
-
-//GPT4
-const sortArrayByPropertyOfObject = <T>(array: T[], key: keyof T, order: SortOrder = 'asc'): T[] => {
+const sortArrayByPropertyOfObject = (array, key, order) => {
     const instanceArray = [...array];
 
     return instanceArray.sort((a, b) => {
@@ -11,4 +8,4 @@ const sortArrayByPropertyOfObject = <T>(array: T[], key: keyof T, order: SortOrd
     });
 };
 
-export default sortArrayByPropertyOfObject;
+module.exports = sortArrayByPropertyOfObject;

@@ -14,7 +14,7 @@
 node_modules
 
 apps/api-server/public/*
-apps/file-server/public/*
+
 apps/web-app/public/uploads
 apps/web-app/locales/*/customTranslation.json
 apps/web-app/public/*.xml
@@ -41,7 +41,6 @@ apps/api-server/tools/testAPI.js
 .env.production.local
 .prettierrc
 *.env
-custom-client-config.json
 custom-server-config.json
 package-lock.json
 

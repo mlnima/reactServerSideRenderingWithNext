@@ -3,7 +3,7 @@ import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {loading, setAlert} from "./globalStateReducer";
 import {AxiosError, AxiosResponse} from "axios";
 import {RootState} from "../store";
-import {dashboardAPIRequestGetComments,dashboardAPIRequestDeleteComments} from "api-requests";
+import {dashboardAPIRequestGetComments,dashboardAPIRequestDeleteComments} from "@repo/api-requests";
 
 
 const initialState = {

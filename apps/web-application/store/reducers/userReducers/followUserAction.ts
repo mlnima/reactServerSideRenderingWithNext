@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import {clientAPIRequestFollowUser} from "api-requests";
+import {clientAPIRequestFollowUser} from "@repo/api-requests";
 import { loading } from "@store/reducers/globalStateReducer";
 
 export const followUserAction = createAsyncThunk<void, string>(

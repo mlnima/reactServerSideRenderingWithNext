@@ -2,9 +2,9 @@
 import React, {ChangeEvent, FC} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCamera} from "@fortawesome/free-solid-svg-icons/faCamera";
-import socket from 'web-socket-client';
+import socket from '@lib/web-socket-client';
 import {useAppSelector} from "@store/hooks";
-import {imageCanvasCompressor} from "custom-util";
+import {imageCanvasCompressor} from "shared-util";
 
 interface PropTypes {
     inputRef: React.RefObject<HTMLInputElement>,

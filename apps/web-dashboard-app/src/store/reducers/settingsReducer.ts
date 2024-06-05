@@ -3,7 +3,7 @@ import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
 import {loading, setAlert} from "./globalStateReducer";
 import {AxiosResponse} from "axios";
-import {dashboardAPIRequestGetSettings,dashboardAPIRequestUpdateSetting} from "api-requests";
+import {dashboardAPIRequestGetSettings,dashboardAPIRequestUpdateSetting} from "@repo/api-requests";
 
 interface AdminPanelSettingState {
     initialSettings: {},

@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {clientAPIRequestGetPostComments} from "api-requests";
+import {clientAPIRequestGetPostComments} from "@repo/api-requests";
 
 const getPostCommentsAction = createAsyncThunk(
     'posts/getPostCommentsAction',

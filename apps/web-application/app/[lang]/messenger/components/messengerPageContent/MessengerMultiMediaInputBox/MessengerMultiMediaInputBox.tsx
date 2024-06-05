@@ -7,7 +7,7 @@ import VoiceRecorderButton from "./VoiceRecorderButton";
 import AddedImagePreview from "./AddedImagePreview";
 import {useAppSelector} from "@store/hooks";
 import './MessengerMultiMediaInputBox.styles.scss'
-import socket from "web-socket-client";
+import socket from '@lib/web-socket-client';
 import {IMessengerConversation} from "typescript-types";
 import {IDraftMessage} from "../../interfaces";
 

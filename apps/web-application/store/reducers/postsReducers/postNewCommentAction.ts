@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {loading, setAlert} from "../globalStateReducer";
-import {clientAPIRequestPostNewComment} from "api-requests";
+import {clientAPIRequestPostNewComment} from "@repo/api-requests";
 import {Comment} from "typescript-types";
 
 const postNewCommentAction = createAsyncThunk(

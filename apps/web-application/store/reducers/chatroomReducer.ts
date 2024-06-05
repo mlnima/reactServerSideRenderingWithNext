@@ -2,7 +2,7 @@
 //not in use
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
-import {uniqArrayBy} from "custom-util";
+import {uniqArrayBy} from "shared-util";
 import {ChatroomState} from "typescript-types";
 
 const initialState:ChatroomState = {

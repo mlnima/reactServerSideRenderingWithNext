@@ -2,8 +2,8 @@
 import React, {FC, useEffect, useRef, useState} from "react";
 import {IPreference} from "../interfaces";
 import {useAppDispatch, useAppSelector} from "@store/hooks";
-import {clientAPIRequestGetAConversation, clientAPIRequestGetConversationsList} from "api-requests";
-import socket from 'web-socket-client';
+import {clientAPIRequestGetAConversation, clientAPIRequestGetConversationsList} from "@repo/api-requests";
+import socket from '@lib/web-socket-client';
 import {useSearchParams, usePathname} from "next/navigation";
 import {useIsMobile} from "react-hooker-lib";
 import {deleteAConversationAction} from "@store/reducers/messengerActions/deleteAConversation";
@@ -18,7 +18,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMinimize} from "@fortawesome/free-solid-svg-icons/faMinimize";
 import {faMaximize} from "@fortawesome/free-solid-svg-icons/faMaximize";
 import {IMessengerConversation} from "typescript-types";
-import {headerSizeCalculator} from "custom-util";
+import {headerSizeCalculator} from "shared-util";
 import {faHome} from "@fortawesome/free-solid-svg-icons";
 import ConversationsControlsHeader from "./ConversationsControlsHeader/ConversationsControlsHeader";
 

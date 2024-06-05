@@ -1,0 +1,1 @@
+{"version":3,"file":"AdminPanelSettings.d.ts","sourceRoot":"","sources":["AdminPanelSettings.ts"],"names":[],"mappings":"AAAA,OAAO,EAAC,cAAc,EAAC,gBAAgB,EAAC,kBAAkB,EAAC,MAAM,kBAAkB,CAAC;AAGpF,MAAM,WAAW,kBAAkB;IAC/B,EAAE,CAAC,EAAE,MAAM,CAAC;IACZ,MAAM,EAAE,cAAc,CAAC;IACvB,QAAQ,EAAE,gBAAgB,CAAC;IAC3B,kBAAkB,EAAC,kBAAkB,CAAA;IACrC,SAAS,CAAC,EAAE,EAAE,CAAC;CAClB"}

@@ -1,4 +1,4 @@
-const googleAnalyticsEvent = ({ action, category, label, value }): void => {
+const googleAnalyticsEvent = ({ action, category, label, value }) => {
     if (typeof window !== 'undefined') {
         //@ts-ignore
         window.gtag('event', action, {

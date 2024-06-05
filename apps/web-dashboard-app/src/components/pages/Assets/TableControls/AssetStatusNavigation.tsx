@@ -1,6 +1,6 @@
 import {FC, useMemo} from "react";
 import {Link, useLocation, useNavigate, useSearchParams,Navigate } from 'react-router-dom';
-import {convertVariableNameToName} from "custom-util";
+import {convertVariableNameToName} from "shared-util";
 import styled from "styled-components";
 import paramsObjectGenerator from "@variables/paramsObjectGenerator";
 

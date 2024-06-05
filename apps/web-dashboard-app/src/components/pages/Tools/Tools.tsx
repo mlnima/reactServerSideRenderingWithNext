@@ -7,7 +7,7 @@ import {
     setMetaThumbnailsAndCountAction
 } from "@store/reducers/postsReducer";
 import {useAppDispatch} from "@store/hooks";
-import {dashboardAPIRequestSyncDuplicateMetas,dashboardAPIRequestGenerateSiteMaps} from "api-requests";
+import {dashboardAPIRequestSyncDuplicateMetas,dashboardAPIRequestGenerateSiteMaps} from "@repo/api-requests";
 
 
 let StyledDiv = styled.div`

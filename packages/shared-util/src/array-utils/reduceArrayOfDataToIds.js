@@ -1,3 +1,4 @@
-const reduceArrayOfDataToIds = (dataArr:any)=> Array.isArray(dataArr) ?  dataArr.map(data=>data._id) : []
+const reduceArrayOfDataToIds = dataArr =>
+    Array.isArray(dataArr) ? dataArr.map(data => data._id) : [];
 
-export default reduceArrayOfDataToIds;
+module.exports = reduceArrayOfDataToIds;

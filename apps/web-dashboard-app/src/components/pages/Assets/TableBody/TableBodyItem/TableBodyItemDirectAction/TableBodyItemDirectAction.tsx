@@ -1,10 +1,9 @@
 import React, {FC} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link, useNavigate,useSearchParams} from 'react-router-dom';
 import {bulkActionPostsAction} from "@store/reducers/postsReducer";
 import {deleteCommentsAction} from "@store/reducers/commentsReducer";
 import {useAppDispatch} from "@store/hooks";
-import {useSearchParams} from "react-router-dom";
-import {dashboardAPIRequestDeleteForm} from "api-requests";
+import {dashboardAPIRequestDeleteForm} from "@repo/api-requests";
 
 interface TableBodyItemDirectActionPropTypes {
     assetsType: string,

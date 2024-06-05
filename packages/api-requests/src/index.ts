@@ -59,7 +59,7 @@ export {
     clientAPIRequestUpdatePost,
     clientAPIRequestViewPost,
     clientDeletePostByAuthor,
-
+    clientAPIRequestLikeDislikePost
 } from './client/clientPosts';
 
 //settings

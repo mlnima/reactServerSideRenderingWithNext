@@ -1,8 +1,10 @@
-export const renderByDevice = (isMobile: boolean, deviceTypeToRender: string) => {
-    return deviceTypeToRender === 'all' ||
-        isMobile && deviceTypeToRender === 'mobile' ||
-        !isMobile && deviceTypeToRender === 'desktop' ||
-        !deviceTypeToRender;
-}
+export const renderByDevice = (isMobile, deviceTypeToRender) => {
+    return (
+        deviceTypeToRender === 'all' ||
+        (isMobile && deviceTypeToRender === 'mobile') ||
+        (!isMobile && deviceTypeToRender === 'desktop') ||
+        !deviceTypeToRender
+    );
+};
 
-export default renderByDevice;
+module.exports = renderByDevice;

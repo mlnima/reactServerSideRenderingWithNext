@@ -1,6 +1,6 @@
 // import {createAsyncThunk} from "@reduxjs/toolkit";
 // import {loading} from "../globalStateReducer";
-// import {clientAPIRequestLikePost} from "api-requests";
+// import {clientAPIRequestLikePost} from "@repo/api-requests";
 //
 // export const likePostAction = createAsyncThunk(
 //     'posts/likePostAction',

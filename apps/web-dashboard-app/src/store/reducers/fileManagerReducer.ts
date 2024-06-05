@@ -13,7 +13,7 @@ import {
     dashboardAPIRequestUploadFile,
     dashboardAPIRequestReadTranslationFile,
     dashboardAPIRequestCreateFileOrFolder,
-} from "api-requests";
+} from "@repo/api-requests";
 
 const initialState = {
     path: './public',

@@ -2,7 +2,7 @@
 import {FC, useEffect} from "react";
 import {useAppDispatch} from "@store/hooks";
 // import viewPostAction from "@store/reducers/postsReducers/viewPostAction";
-import {clientAPIRequestViewPost} from "api-requests";
+import {clientAPIRequestViewPost} from "@repo/api-requests";
 
 interface IProps {
     _id: string

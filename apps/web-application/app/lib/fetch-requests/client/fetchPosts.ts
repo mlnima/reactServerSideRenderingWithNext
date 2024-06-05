@@ -1,5 +1,6 @@
+// @ts-nocheck
 import { mongoIdValidator, removeEmptyProperties } from 'shared-util';
-import { postFieldRequestForCards } from '@repo/data-structure';
+import { postFieldRequestForCards } from '@repo/data-structures';
 import config from './config';
 
 const APIServerUrl = process.env.NEXT_PUBLIC_API_SERVER_URL;

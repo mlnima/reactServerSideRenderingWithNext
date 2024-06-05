@@ -5,7 +5,7 @@ import {DashboardStore} from "typescript-types";
 import { getFormAction} from "@store/reducers/formsReducer";
 import {redirect, useNavigate, useParams, useSearchParams} from "react-router-dom";
 import {useAppDispatch} from "@store/hooks";
-import {dashboardAPIRequestDeleteForm} from "api-requests";
+import {dashboardAPIRequestDeleteForm} from "@repo/api-requests";
 
 let StyledDiv = styled.div`
   .form-data-container {

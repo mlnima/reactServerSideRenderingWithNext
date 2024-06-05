@@ -8,7 +8,8 @@ import MembershipSettings from "@components/pages/settings/initialSettings/Membe
 import LayoutSettings from "@components/pages/settings/initialSettings/layoutSettings";
 import {useAppDispatch} from "@store/hooks";
 import {editInitialSettings, updateSettingAction} from "@store/reducers/settingsReducer";
-import {inputValueSimplifier, LanguagesOptions} from "custom-util";
+import {inputValueSimplifier} from "shared-util";
+import {LanguagesOptions} from "ui";
 
 
 const Style = styled.div`

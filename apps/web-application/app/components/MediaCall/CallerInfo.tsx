@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import {capitalizeFirstLetter} from "custom-util";
+import {capitalizeFirstLetter} from "shared-util";
 
 interface PropTypes {
     profileImage: string,

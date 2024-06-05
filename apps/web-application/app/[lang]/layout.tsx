@@ -4,7 +4,8 @@ import {config} from "@fortawesome/fontawesome-svg-core";
 
 config.autoAddCss = false;
 import '@components/global/styles/global.styles.scss'
-import {fetchSettings, fetchWidgets} from "fetch-requests";
+import {fetchSettings} from "@lib/fetch-requests/client/fetchSettings";
+import {fetchWidgets} from "@lib/fetch-requests/client/fetchWidgets";
 import ReduxProvider from "@store/ReduxProvider";
 import * as process from "process";
 import {i18n} from '@i18nConfig'
@@ -33,7 +34,7 @@ import LayoutViewportGenerator from "@components/LayoutMetaGenerator/LayoutViewp
 // import './layout.scss'
 // import Head from "next/head";
 
-// import {rtlLanguages} from "data-structure";
+// import {rtlLanguages} from "@repo/data-structures";
 // import MediaCall from "@components/MediaCall/MediaCall";
 // import dynamic from "next/dynamic";
 

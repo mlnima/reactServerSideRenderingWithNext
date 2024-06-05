@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {loading, setAlert} from "../globalStateReducer";
-import {clientAPIRequestDeleteCommentByAdmin} from "api-requests";
+import {clientAPIRequestDeleteCommentByAdmin} from "@repo/api-requests";
 
 export const deleteCommentByAdminInPostPageAction = createAsyncThunk(
     'posts/deleteCommentByAdminInPostPageAction',

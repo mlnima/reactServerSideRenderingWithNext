@@ -7,3 +7,5 @@ export { default as keyframes} from './keyframes'
 export { default as scrollBars} from './scrollBars'
 export { default as selectsStyle} from './selectsStyle'
 export { default as UserPreviewImage} from './UserPreviewImage/UserPreviewImage'
+export { default as LanguagesOptions} from './LanguagesOptions'
+

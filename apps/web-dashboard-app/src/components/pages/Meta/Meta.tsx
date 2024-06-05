@@ -1,13 +1,13 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {LanguagesOptions} from "custom-util";
+import {LanguagesOptions} from "ui";
 import {DashboardStore} from "typescript-types";
 import {useAppDispatch} from "@store/hooks";
 import {useSearchParams} from "react-router-dom";
 import {deleteMetaAction, editMetaAction, getMetaAction, updateMetaAction} from "@store/reducers/postsReducer";
 
-let AdminMetaPageStyledDiv = styled.div`
+let AdminMetaPageStyledDiv =  styled.div`
   width: 95%;
   max-width: 1300px;
   display: flex;

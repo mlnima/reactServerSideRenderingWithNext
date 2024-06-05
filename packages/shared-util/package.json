@@ -1,9 +1,10 @@
 {
-  "name": "shared-schemas",
+  "name": "shared-util",
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
-    "mongoose": "^6.9.0",
-    "data-structure": "*"
+    "@repo/data-structures": "*",
+    "filereader": "^0.10.3",
+    "browser-image-compression": "^2.0.2"
   }
 }
