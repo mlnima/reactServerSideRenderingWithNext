@@ -8,7 +8,6 @@ PORT=${portBase}000
 API_SERVER_PORT=${portBase}002
 DEV_DASHBOARD_PORT = ${portBase}008
 
-DB_LOCAL= true
 DB_NAME= myDB
 DB_HOST= "localhost"
 DB_USER=

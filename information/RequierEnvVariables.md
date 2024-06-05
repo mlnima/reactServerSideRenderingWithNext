@@ -24,8 +24,6 @@ NEXT_PUBLIC_SOCKET= true
 
 NEXT_PUBLIC_ANALYZE=false
 
-DB_LOCAL= true
-
 DB_NAME = MyDBName
 
 DB_HOST=

@@ -9,7 +9,6 @@ declare namespace NodeJS {
         PORT: string; // Ports are typically passed as strings in environment variables
         API_SERVER_PORT: string; // Keep as string, you can parse it as number later if needed
         DEV_DASHBOARD_PORT: string; // Same as above
-        DB_LOCAL: string; // Environment variables are usually strings, you can convert to boolean as needed
         DB_NAME: string;
         DB_HOST: string;
         DB_USER: string;

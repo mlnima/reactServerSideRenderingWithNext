@@ -4,6 +4,8 @@ mongoose.set('strictQuery', true);
 export const mongoDBConnectionQueryGenerator = () => {
     const dbUser = process.env.DB_USER ? `${process.env.DB_USER}:` : '';
     const dbPass = process.env.DB_PASS ? `${process.env.DB_PASS}@` : '';
+    const dbHost = process.env.DB_HOST ? process.env.DB_HOST : 'localhost';
+
     return `mongodb://${dbUser}${dbPass}${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`;
 };
 
