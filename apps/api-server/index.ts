@@ -208,12 +208,26 @@ const runServer = () => {
     });
 
     //-----------------  Setup Socket.IO------------------------
+    // const io = require('socket.io')(server, {
+    //     cors: {
+    //         origin: [process.env.NEXT_PUBLIC_PRODUCTION_URL, '*'],
+    //         methods: ['GET', 'POST'],
+    //         allowedHeaders: ['my-custom-header'],
+    //         credentials: true,
+    //     },
+    // });
     const io = require('socket.io')(server, {
-        cors: {
-            origin: [process.env.NEXT_PUBLIC_PRODUCTION_URL, '*'],
-            methods: ['GET', 'POST'],
-            allowedHeaders: ['my-custom-header'],
-            credentials: true,
+        origin: [process.env.NEXT_PUBLIC_PRODUCTION_URL, '*'],
+        cors: true,
+        handlePreflightRequest: (req, res) => {
+            res.writeHead(200, {
+                'Access-Control-Allow-Origin':
+                process.env.NEXT_PUBLIC_PRODUCTION_URL,
+                'Access-Control-Allow-Methods': 'GET,POST',
+                'Access-Control-Allow-Headers': 'my-custom-header',
+                'Access-Control-Allow-Credentials': true,
+            });
+            res.end();
         },
     });
 
