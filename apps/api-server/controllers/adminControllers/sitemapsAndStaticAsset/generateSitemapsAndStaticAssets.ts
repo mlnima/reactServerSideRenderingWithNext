@@ -11,9 +11,11 @@ import axios from 'axios';
 import settingSchema from "@schemas/settingSchema";
 
 const productionUrl = process.env.NEXT_PUBLIC_PRODUCTION_URL;
+const dev = process.env.NODE_ENV !== 'production';
+
 const productionPublicDirPath = path.join(
     __dirname,
-    `../../../../web-application/public`,
+    dev? `../../../../web-application/public` : `../../../../../web-application/public`,
 );
 
 const generateSitemapsAndStaticAssets = async (req: Request, res: Response) => {
@@ -22,7 +24,7 @@ const generateSitemapsAndStaticAssets = async (req: Request, res: Response) => {
         await searchKeywordsSitemapsGenerator(productionPublicDirPath);
         await metaSitemapGenerator(productionPublicDirPath);
         await pagesSitemapGenerator(productionPublicDirPath);
-        await GenerateSitemapXlsStyle(productionPublicDirPath);
+        // await GenerateSitemapXlsStyle(productionPublicDirPath);
     } catch (e) {
         console.log(`Error while generating sitemap=> `, e);
     }

@@ -9,7 +9,7 @@
 
 - curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash - &&\
   sudo apt-get install -y nodejs 
-> (https://github.com/nodesource/distributions) (Node.js v18.x:)
+> (https://github.com/nodesource/distributions) (Node.js v20.x:)
 
 
 - npm install concurrently -g
