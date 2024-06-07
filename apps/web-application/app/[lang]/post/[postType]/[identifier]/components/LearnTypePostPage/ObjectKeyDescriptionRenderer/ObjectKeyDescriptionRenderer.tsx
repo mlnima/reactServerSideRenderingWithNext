@@ -20,9 +20,12 @@ const ObjectKeyDescriptionRenderer = ({description}: ComponentPropTypes) => {
                         //@ts-ignore
                         <img  className={'learn-description-element-child learn-description-element-image'} src={elementObject?.[ElementType]}/> :
                         ElementType === 'code' ?
+
                             <CodeSnippet code={elementObject?.[ElementType]}
                                          language={elementObject?.language || 'js'}
-                            /> :
+                            />
+                    :
+
                             <ElementType  className={'learn-description-element-child'}
                                           dangerouslySetInnerHTML={{__html:elementObject?.[ElementType]}}
                             />

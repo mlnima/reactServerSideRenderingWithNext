@@ -9,4 +9,5 @@ export {default as widgetsTypes} from './widgetsTypes';
 export {default as rtlLanguages} from './rtlLanguages';
 export {default as postStatuses} from './postStatuses';
 export {default as UGCPostImagesLimit} from './UGCPostImagesLimit';
+export {default as imageLessCardColors} from './imageLessCardColors';
 export {languagesMapOrigin, languagesMapInEnglish} from './languagesMap';
