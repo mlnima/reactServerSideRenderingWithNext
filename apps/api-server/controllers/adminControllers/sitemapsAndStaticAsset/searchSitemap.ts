@@ -1,7 +1,7 @@
 import {keywordXmlTemplateGenerator, sitemapItemTemplate, urlSetXmlTemplate} from "./xmlTemplateGenerators";
 import fs from "fs";
 import searchKeywordSchema from "@schemas/searchKeywordSchema";
-const perPage = 10;
+const perPage = 500;
 
 
 const searchSitemapsPageCalculator = async ()=>{
