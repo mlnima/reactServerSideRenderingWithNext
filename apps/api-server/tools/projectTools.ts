@@ -32,39 +32,19 @@ class ProjectTools {
         console.log(`copyOldFileToNewAPIServer`);
         console.log(`syncSchemasIndexes`);
     }
-    async resetAdminPassword() {
-        try {
-            const hash = await bcrypt.hash(defaultAdminAccountData.password, 10);
-            await userSchema.findOneAndUpdate(
-                { username: 'dashboard' },
-                { $set: { password: hash } },
-            );
-            console.log('admin password did reset');
-        } catch (error) {
-            console.log(`Error on restarting admin password=> `, error);
-            console.log('Something Went Wrong');
-        }
-    }
-
-
 
     async copyOldFileToNewAPIServer() {
         try {
             const sourceDir = path.join(__dirname, '../../file-server/public');
             const destDir = path.join(__dirname, '../../api-server/public');
-            const targetPath = await fs.readdir( sourceDir)
+            const targetPath = await fs.readdir(sourceDir);
             try {
                 await fs.copy(sourceDir, destDir, { overwrite: true });
                 console.log('Files copied successfully!');
             } catch (err) {
                 console.error('Error copying files:', err);
             }
-
-        }catch (error){
-
-        }
-
-
+        } catch (error) {}
     }
 
     async syncSchemasIndexes() {
@@ -93,17 +73,65 @@ class ProjectTools {
         }
     }
 
-    async setupProject() {
+    async resetAdminPassword() {
         try {
-            // const initialSettingToSave = new settingSchema(
-            //     defaultInitialSettings,
-            // );
-            // // const savedSetting = await initialSettingToSave.save();
-            console.log(`console=> `,defaultDotEnvData())
+            const hash = await bcrypt.hash(
+                defaultAdminAccountData.password,
+                10,
+            );
+            await userSchema.findOneAndUpdate(
+                { username: 'Admin' },
+                { $set: { password: hash } },
+            );
+            console.log('admin password did reset');
         } catch (error) {
-            console.log(`Error on setting up the project=> `, error);
+            console.log(`Error on restarting admin password=> `, error);
         }
     }
+
+    async initialAdmin() {
+        try {
+            const hash = await bcrypt.hash(
+                defaultAdminAccountData.password,
+                10,
+            );
+            const adminDataToSave = new userSchema({
+                ...defaultAdminAccountData,
+                password: hash,
+            });
+            const savedAdminAccount = await adminDataToSave.save();
+            console.log('admin password did reset :', savedAdminAccount);
+        } catch (error) {
+            console.log(`Error on initial Admin=> `, error);
+        }
+    }
+
+    async initialSettings() {
+        try {
+            const initialSettingToSave = new settingSchema(
+                defaultInitialSettings,
+            );
+            const savedSettings = await initialSettingToSave.save();
+
+            console.log('initialized settings :', savedSettings);
+        } catch (error) {
+            console.log(`Error on initial settings => `, error);
+        }
+    }
+
+    // async setupProject() {
+    //     try {
+    //         const initialSettingToSave = new settingSchema(
+    //             defaultInitialSettings,
+    //         );
+    //         await initialSettingToSave.save();
+    //         await this.initialAdmin();
+    //
+    //         // console.log(`console=> `, defaultDotEnvData());
+    //     } catch (error) {
+    //         console.log(`Error on setting up the project=> `, error);
+    //     }
+    // }
 }
 
 export default ProjectTools;
