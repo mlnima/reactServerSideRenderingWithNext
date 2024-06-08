@@ -1,15 +1,8 @@
 import {isValidObjectId}  from 'mongoose';
+import {excludePostsBySourceQueryGenerator} from "@util/database-util";
 
 const _adminQueryGeneratorForGettingPosts = (data) => {
 
-    const excludeContent = (process.env.EXCLUDE_POSTS_SOURCE ? process.env.EXCLUDE_POSTS_SOURCE.split(' ') : []).map(excludeWord => {
-
-        const expression = `.*${excludeWord}.*`
-
-        return {'videoEmbedCode': {$not: new RegExp(expression, "g")}}
-    })
-
-    const excludeQuery = process.env.EXCLUDE_POSTS_SOURCE ? [{$or: excludeContent}] : []
     const size = data?.size;
     const sort = data?.sort || data?.sortBy;
     const meta = data.metaId || data?.uniqueData?.selectedMetaForPosts || data?.selectedMetaForPosts;
@@ -37,7 +30,7 @@ const _adminQueryGeneratorForGettingPosts = (data) => {
         findPostsQueries:{$and:[
                 ...postTypeQuery,
                 ...authorQuery,
-                ...excludeQuery,
+                ...excludePostsBySourceQueryGenerator(),
                 ...searchQuery,
                 ...metaQuery,
                 ...statusQuery

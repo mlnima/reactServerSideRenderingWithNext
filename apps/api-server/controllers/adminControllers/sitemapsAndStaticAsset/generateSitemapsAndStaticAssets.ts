@@ -1,14 +1,14 @@
-import path from 'path';
 import { Request, Response } from 'express';
-import fs from 'fs-extra';
 import { rootSitemapGenerator } from './rootSiteMap';
 import { searchKeywordsSitemapsGenerator } from './searchSitemap';
 import { metaSitemapGenerator } from './metaSitemap';
 import { pagesSitemapGenerator } from './pageSitemap';
 import { robotsTxtGenerator } from './robotsTxtGenerator';
-import { GenerateSitemapXlsStyle } from './GenerateSitemapXlsStyle';
+// import { GenerateSitemapXlsStyle } from './GenerateSitemapXlsStyle';
 import axios from 'axios';
 import settingSchema from "@schemas/settingSchema";
+import fs from 'fs-extra';
+import path from 'path';
 
 const productionUrl = process.env.NEXT_PUBLIC_PRODUCTION_URL;
 const dev = process.env.NODE_ENV !== 'production';
@@ -18,8 +18,23 @@ const productionPublicDirPath = path.join(
     dev? `../../../../web-application/public` : `../../../../../web-application/public`,
 );
 
+const cleanupOldPublicFolder = async (targetPath: string) => {
+    try {
+        const files = await fs.readdir(targetPath);
+        const xmlFiles = files.filter(file => path.extname(file) === '.xml');
+
+        const deletePromises = xmlFiles.map(file => {
+           return fs.remove(path.join(targetPath, file));
+        });
+        await Promise.all(deletePromises);
+    } catch (error) {
+        console.log(`Error on cleanupOldPublicFolder=> `,error)
+    }
+};
+
 const generateSitemapsAndStaticAssets = async (req: Request, res: Response) => {
     try {
+        await cleanupOldPublicFolder(productionPublicDirPath)
         await rootSitemapGenerator(productionPublicDirPath);
         await searchKeywordsSitemapsGenerator(productionPublicDirPath);
         await metaSitemapGenerator(productionPublicDirPath);

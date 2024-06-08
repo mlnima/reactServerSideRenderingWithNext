@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+
 mongoose.Promise = global.Promise;
 mongoose.set('strictQuery', true);
 export const mongoDBConnectionQueryGenerator = () => {
@@ -11,11 +12,39 @@ export const mongoDBConnectionQueryGenerator = () => {
 
 export const connectToDatabase = async (connectorName?: string) => {
     try {
-console.log(`mongoDBConnectionQueryGenerator()=> `,mongoDBConnectionQueryGenerator())
+        console.log(
+            `mongoDBConnectionQueryGenerator()=> `,
+            mongoDBConnectionQueryGenerator(),
+        );
         await mongoose.connect(mongoDBConnectionQueryGenerator());
         console.log(`${connectorName || ''}* connected to Database *`);
     } catch (error) {
         console.log('Error connecting to Database', error);
         process.exit(1);
+    }
+};
+
+export const excludePostsBySourceQueryGenerator =  () => {
+    if (!process.env.EXCLUDE_POSTS_SOURCE) {
+        return [];
+    }
+    try {
+        let queriesArr = [];
+        const excludesUrls = process.env.EXCLUDE_POSTS_SOURCE.split(' ');
+        for  (const excludeUrl of excludesUrls) {
+            queriesArr = [
+                ...queriesArr,
+                {
+                    videoEmbedCode: {
+                        $not: new RegExp(`.*${excludeUrl}.*`, 'g'),
+                    },
+                },
+            ];
+        }
+
+        return queriesArr;
+    } catch (error) {
+        console.log(`Error excludePostsBySourceQueryGenerator=> `, error);
+        return [];
     }
 };

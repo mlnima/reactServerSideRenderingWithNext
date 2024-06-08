@@ -1,13 +1,7 @@
 import {postFieldRequestForCards} from "@repo/data-structures";
+import {excludePostsBySourceQueryGenerator} from "@util/database-util";
 
 const _clientQueryGeneratorForGettingPosts = (data, metaId) => {
-
-    const excludeContent = (process.env.EXCLUDE_POSTS_SOURCE ? process.env.EXCLUDE_POSTS_SOURCE.split(' ') : []).map(excludeWord => {
-        const expression = `.*${excludeWord}.*`
-        return {'videoEmbedCode': {$not: new RegExp(expression, "g")}}
-    })
-
-    const excludeQuery = process.env.EXCLUDE_POSTS_SOURCE ? [{$or: excludeContent}] : []
 
     const size = parseInt(data?.size || data?.count || data?.uniqueData?.count || '20') || 20;
     const sort = data?.sort || data?.sortBy;
@@ -39,16 +33,6 @@ const _clientQueryGeneratorForGettingPosts = (data, metaId) => {
     const allowSortOption = ['updatedAt','createdAt','likes','dislikes']
     const sortQuery = !sort || sort === 'updatedAt'  ? {updatedAt: -1} : allowSortOption.includes(sort) ? {[sort]: -1} : {}
 
-    // console.log('sort=> ',sort)
-    // console.log('req.sortQuery=> ',sortQuery)
-
-    // sort === 'createdAt' || sort === 'random'?
-    //         {}
-
-
-    // console.log('data.status',data.status)
-    // const statusQuery = (data.status === 'undefined' || data.status === 'published')  ?
-    //                     [{status: 'published'}] : data.status ==='all' ?  []:[]
     const statusQuery = [{status: 'published'}]
 
     return {
@@ -56,7 +40,7 @@ const _clientQueryGeneratorForGettingPosts = (data, metaId) => {
             $and: [
                 ...postTypeQuery,
                 ...authorQuery,
-                ...excludeQuery,
+                ...excludePostsBySourceQueryGenerator(),
                 ...searchQuery,
                 ...metaQuery,
                 ...statusQuery,

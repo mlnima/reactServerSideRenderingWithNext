@@ -14,7 +14,7 @@ const randomNumberGenerator = (min, max) => {
 
 const worker = async (workerData) => {
     try {
-        const excludesPostFromSources = process.env.EXCLUDE_POSTS_SOURCE ? process.env.EXCLUDE_POSTS_SOURCE.split(' ') : [];
+        const excludesPostFromSources = !!process.env.EXCLUDE_POSTS_SOURCE ? process.env.EXCLUDE_POSTS_SOURCE.split(' ') : [];
 
         const excludeContent = excludesPostFromSources.map(excludeWord => {
             const expression = `.*${excludeWord}.*`
