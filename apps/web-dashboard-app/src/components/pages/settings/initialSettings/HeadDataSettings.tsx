@@ -14,6 +14,7 @@ interface PropTypes {
 
 const HeadDataSettings: FC<PropTypes> = ({onChangeHandler,onChangeHandlerWithTranslation,initialSettingsData,language}) => {
     const [isHeadTagsEditorOpen,setIsHeadTagsEditorOpen] = useState(false)
+    const [is3rdPartyScriptEditorOpen,setIs3rdPartyScriptEditorOpen] = useState(false)
     return (
         <Style className={'setting-section'}>
             <h2>Head Data Settings:</h2>
@@ -69,6 +70,22 @@ const HeadDataSettings: FC<PropTypes> = ({onChangeHandler,onChangeHandlerWithTra
                     name={'customHeadTags'}
                     defaultValue={ initialSettingsData?.headDataSettings?.customHeadTags || ''}
                     value={initialSettingsData?.headDataSettings?.customHeadTags}
+                    className={'initialSettings-editor'}
+                    //@ts-ignore
+                    onChange={(e: string) => onChangeHandler(e, 'headDataSettings')}
+                    height={'80vh'}
+                />
+            }
+            <p> 3rd Party Scripts:</p>
+            <button className={'btn btn-primary'} onClick={()=>setIs3rdPartyScriptEditorOpen(!is3rdPartyScriptEditorOpen)}>
+                3rd Party Scripts
+            </button>
+            {is3rdPartyScriptEditorOpen &&
+                <MonacoEditor
+                    language={'text'}
+                    name={'custom3rdPartyScripts'}
+                    defaultValue={ initialSettingsData?.headDataSettings?.custom3rdPartyScripts || ''}
+                    value={initialSettingsData?.headDataSettings?.custom3rdPartyScripts}
                     className={'initialSettings-editor'}
                     //@ts-ignore
                     onChange={(e: string) => onChangeHandler(e, 'headDataSettings')}

@@ -14,6 +14,9 @@ const CustomHeadTagsInitializer: FC<PropTypes> = ({}) => {
 
     if (!customHeadTags) return null;
 
-    return <span>{parse(customHeadTags)}</span>;
+    return (
+        <span>{parse(customHeadTags)}</span>
+    )
+
 };
 export default CustomHeadTagsInitializer;
