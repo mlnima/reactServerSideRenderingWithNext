@@ -59,8 +59,10 @@ const generateSitemapsAndStaticAssets = async (req: Request, res: Response) => {
             .then((initialSettings: { data: any }) => initialSettings.data);
 
         if (initialSettings?.headDataSettings?.favIconUrl) {
+            const isAbsolute = initialSettings?.headDataSettings?.favIconUrl.includes('http')
+
             const response = await axios({
-                url: `${productionUrl}${initialSettings?.headDataSettings?.favIconUrl}`,
+                url: `${isAbsolute ? '' : productionUrl}${initialSettings?.headDataSettings?.favIconUrl}`,
                 responseType: 'arraybuffer',
             });
             if (!!response.data) {

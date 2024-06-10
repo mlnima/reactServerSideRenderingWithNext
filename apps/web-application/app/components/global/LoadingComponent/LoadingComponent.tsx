@@ -1,7 +1,7 @@
 'use client';
 import React, {useEffect, FC} from 'react';
 import {useAppDispatch, useAppSelector} from "@store/hooks";
-import {ActiveLoading} from "ui";
+import {ActiveLoading} from "@repo/ui";
 import {loading, setLoading} from "@store/reducers/globalStateReducer";
 import {usePathname, useSearchParams} from "next/navigation";
 
@@ -29,8 +29,7 @@ const LoadingComponent: FC = () => {
 
 
 
-    return <ActiveLoading onClickEvent={() => dispatch(loading(false))}
-                          color={'var(--primary-active-color,#f90)'}/>
+    return <ActiveLoading onClickEvent={() => dispatch(loading(false))}/>
 
     // return null
 

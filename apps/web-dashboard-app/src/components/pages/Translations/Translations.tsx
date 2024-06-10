@@ -8,7 +8,7 @@ import {
     updateTranslationsFileAction
 } from "@store/reducers/fileManagerReducer";
 import {useAppDispatch} from "@store/hooks";
-import {LanguagesOptions} from "ui";
+import {LanguagesOptions} from "@repo/ui";
 
 
 const Translations = () => {

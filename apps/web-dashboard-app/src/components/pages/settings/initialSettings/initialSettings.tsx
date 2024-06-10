@@ -9,7 +9,7 @@ import LayoutSettings from "@components/pages/settings/initialSettings/layoutSet
 import {useAppDispatch} from "@store/hooks";
 import {editInitialSettings, updateSettingAction} from "@store/reducers/settingsReducer";
 import {inputValueSimplifier} from "shared-util";
-import {LanguagesOptions} from "ui";
+import {LanguagesOptions} from "@repo/ui";
 
 
 const Style = styled.div`

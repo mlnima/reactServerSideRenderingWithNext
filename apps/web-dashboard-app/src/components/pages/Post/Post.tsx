@@ -13,7 +13,7 @@ import {editPostAction} from "@store/reducers/postsReducer";
 import {getPostAction,defineNewPost,changeActiveEditingLanguage} from "@store/reducers/postsReducer";
 import {DashboardStore} from "typescript-types";
 import {useAppDispatch} from "@store/hooks";
-import {LanguagesOptions} from "ui";
+import {LanguagesOptions} from "@repo/ui";
 import { isNumericString } from 'shared-util';
 
 const AdminPostPageStyledDiv = styled.div`

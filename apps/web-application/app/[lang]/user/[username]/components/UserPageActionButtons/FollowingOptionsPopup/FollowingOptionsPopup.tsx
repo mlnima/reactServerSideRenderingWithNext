@@ -3,7 +3,7 @@ import React, {FC} from "react";
 import './FollowingOptionsPopup.styles.scss'
 import {faXmark} from "@fortawesome/free-solid-svg-icons/faXmark";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {UserPreviewImage} from "ui";
+import {UserPreviewImage} from "@repo/ui";
 
 interface IProps {
     onUnFollowHandler:()=>void,

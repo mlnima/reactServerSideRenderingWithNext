@@ -72,7 +72,7 @@ const LearnPostCard: FC<LearnPostCardPropTypes> = ({
                 </>
             ) : (
                 <div
-                    className={'imageLessCard'}
+                    className={'postCard imageLessCard'}
                     style={{
                         backgroundColor: !post.mainThumbnail
                             ? randomColor?.background ||

@@ -1,6 +1,6 @@
 'use client';
 import React, {FC, useEffect, useRef, useState} from "react";
-import {UserPreviewImage} from "ui";
+import {UserPreviewImage} from "@repo/ui";
 import UserPageActionButtons from "../UserPageActionButtons/UserPageActionButtons";
 import {useAppDispatch, useAppSelector} from "@store/hooks";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";

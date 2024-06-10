@@ -1,74 +1,73 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "./buttons";
-@import "./forms";
-@import "./ainimations";
-@import "./scrollbars";
 @import "./gridLayouts";
-@import "./selects";
-@import "./inputs";
 @import "./widgetAreas.styles";
+@import "@repo/shared-style";
+//@import "./selects";
+//@import "./inputs";
+//@import "./buttons";
+//@import "./forms";
+//@import "./ainimations";
+//@import "./scrollbars";
 
-:root {
-  --primary-text-color: #fff;
-  --secondary-text-color: #b3b3b3;
-  --tertiary-text-color: #8c8c8c;
-  --primary-background-color: #000;
-  --secondary-background-color: #0e0e0e;
-  --tertiary-background-color: #151515;
-
-  --dim-background-color: rgba(0, 0, 0, .6);
-  --primary-background-filter :  blur(10px);
-  --primary-active-color: #f90;
-  --secondary-active-color: #6c757d;
-  --primary-gradiant: linear-gradient(180deg, #fff, hsla(0, 0%, 100%, .6));
-
-  --primary-text-shodow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-
-  /*sidebar size*/
-  --sidebar-desktop-width: 320px;
-  /*borders*/
-  --default-border-color: rgba(138, 145, 158, .2);
-  --default-border: solid var(--default-border-color, #ccc) .2px;
-  /*buttons*/
-  --primary-button-link-background-color: #f90;
-  --primary-button-link-text-color: #000;
-
-  --secondary-button-link-background-color: #6c757d;
-  --secondary-button-link-text-color: #fff;
-
-  --success-button-link-background-color: #28a745;
-  --success-button-link-text-color: #fff;
-
-  --danger-button-link-background-color: #dc3545;
-  --danger-button-link-text-color: #fff;
-
-  --warning-button-link-background-color: #f90;
-  --warning-button-link-text-color: #212529;
-
-  --info-button-link-background-color: #117a8b;
-  --info-button-link-text-color: #fff;
-
-  --dark-button-link-background-color: #1b1b1b;
-  --dark-button-link-border-color: #1b1b1b;
-  --dark-button-link-text-color: #fff;
-
-  --light-button-link-background-color: #f8f9fa;
-  --light-button-link-border-color: #f8f9fa;
-  --light-button-link-text-color: #212529;
-
-  //break points
-  --mobile-breakpoint : 481px;
-  --tablet-breakpoint : 769px;
-  --desktop-breakpoint : 1025px;
-
-}
+//:root {
+//  --primary-text-color: #fff;
+//  --secondary-text-color: #b3b3b3;
+//  --primary-background-color: #000;
+//  --secondary-background-color: #0e0e0e;
+//  --tertiary-background-color: #151515;
+//
+//  --dim-background-color: rgba(0, 0, 0, .6);
+//  --primary-background-filter :  blur(10px);
+//  --primary-active-color: #f90;
+//  --secondary-active-color: #6c757d;
+//  --primary-gradiant: linear-gradient(180deg, #fff, hsla(0, 0%, 100%, .6));
+//
+//  --primary-text-shodow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+//
+//  /*sidebar size*/
+//  --sidebar-desktop-width: 320px;
+//  /*borders*/
+//  --default-border-color: rgba(138, 145, 158, .2);
+//  --default-border: solid var(--default-border-color, #ccc) .2px;
+//  /*buttons*/
+//  --primary-button-link-background-color: #f90;
+//  --primary-button-link-text-color: #000;
+//
+//  --secondary-button-link-background-color: #6c757d;
+//  --secondary-button-link-text-color: #fff;
+//
+//  --success-button-link-background-color: #28a745;
+//  --success-button-link-text-color: #fff;
+//
+//  --danger-button-link-background-color: #dc3545;
+//  --danger-button-link-text-color: #fff;
+//
+//  --warning-button-link-background-color: #f90;
+//  --warning-button-link-text-color: #212529;
+//
+//  --info-button-link-background-color: #117a8b;
+//  --info-button-link-text-color: #fff;
+//
+//  --dark-button-link-background-color: #1b1b1b;
+//  --dark-button-link-border-color: #1b1b1b;
+//  --dark-button-link-text-color: #fff;
+//
+//  --light-button-link-background-color: #f8f9fa;
+//  --light-button-link-border-color: #f8f9fa;
+//  --light-button-link-text-color: #212529;
+//
+//  //break points
+//  --mobile-breakpoint : 481px;
+//  --tablet-breakpoint : 769px;
+//  --desktop-breakpoint : 1025px;
+//
+//}
 
 //body.light {
 //  --primary-text-color: #222222;
 //  --secondary-text-color: #4A4A4A;
-//  --tertiary-text-color: #757575;
 //  --primary-background-color: #F2F2F2;
 //  --secondary-background-color: #E0E0E0;
 //  --tertiary-background-color: #C8C8C8;

@@ -9,7 +9,6 @@ module.exports = {
       colors: {
         'primary-text-color':'var(--primary-text-color)',
         'secondary-text-color':'var(--secondary-text-color)',
-        'tertiary-text-color':'var(--tertiary-text-color)',
         'primary-background-color':'var(--primary-background-color)',
         'secondary-background-color':'var(--secondary-background-color)',
         'tertiary-background-color':'var(--tertiary-background-color)',

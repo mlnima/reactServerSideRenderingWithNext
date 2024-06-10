@@ -1,6 +1,6 @@
 .topbar-widget-area, .header-widget-area, .navigation-widget-area, .footer-widget-area {
 
-  color: var(--primary-text-color, #FFFFFF);
+  color: var(--primary-text-color);
   width: 100%;
   padding: 0 8px;
 
@@ -13,8 +13,9 @@
   //  height: 100%;
   //}
 }
- .header-widget-area,.footer-widget-area {
-  .innerContent{
+
+.header-widget-area, .footer-widget-area {
+  .innerContent {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -24,11 +25,19 @@
   }
 }
 
+.footer-widget-area{
+  padding: 1rem;
+  box-sizing: border-box;
+  background-color: var(--secondary-background-color);
+}
+
+
+
 .topbar-widget-area, .navigation-widget-area {
-  background-color: var(--secondary-background-color, #181818);
+  background-color: var(--secondary-background-color);
   min-height: 60px;
 
-  .innerContent{
+  .innerContent {
     //overflow-x: hidden;
     display: flex;
     justify-content: space-between;
@@ -41,11 +50,13 @@
 }
 
 
+
 .header-widget-area {
   display: flex;
   align-items: center;
   justify-content: center;
-
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   .innerContent {
     justify-content: space-evenly;
     flex-wrap: wrap;
@@ -54,8 +65,8 @@
 
 
 .main-widget-area {
-  background-color: var(--primary-background-color, #2B2B2B);
-  color: var(--primary-text-color, #fff);
+  background-color: var(--primary-background-color);
+  color: var(--primary-text-color);
   width: 100%;
   box-sizing: border-box;
 }
@@ -68,7 +79,8 @@
 }
 
 .sidebarWidgetArea {
-  background-color: var(--primary-background-color, #000);
+  //background-color: var(--primary-background-color, #000);
+  background-color: var(--secondary-background-color);
   display: flex;
   flex-direction: column;
   @media only screen and (min-width: 768px) {

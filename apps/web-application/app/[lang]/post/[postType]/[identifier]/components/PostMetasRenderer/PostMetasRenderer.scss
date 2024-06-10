@@ -5,7 +5,7 @@
   .title {
     font-weight: initial;
     font-size: initial;
-    color: var(--primary-active-color, #f90);
+    color: var(--primary-text-color);
   }
 
   .post-meta-toggle {
@@ -25,8 +25,8 @@
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      color: var(--secondary-text-color);
-      background-color: var(--secondary-background-color);
+      color: var(--primary-text-color);
+      background-color: var(--quaternary-background-color);
       text-decoration: none;
       min-height: 48px;
 

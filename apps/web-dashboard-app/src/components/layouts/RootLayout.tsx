@@ -5,7 +5,7 @@ import Main from "./Main/Main";
 import Menu from "./Navigation/Menu";
 import {useSelector} from "react-redux";
 import {DashboardStore} from "typescript-types";
-import {ActiveLoading} from "ui";
+import {ActiveLoading} from "@repo/ui";
 import {useAppDispatch} from "@store/hooks";
 import {loading} from '@store/reducers/globalStateReducer'
 
@@ -18,7 +18,7 @@ const RootLayout = () => {
     const isLoading = useSelector(({globalState}:DashboardStore)=>globalState.loading)
     return (
         <Style>
-            {isLoading && <ActiveLoading onClickEvent={()=>dispatch(loading(false))} color={'var(--primary-active-color,#f90)'}/>}
+            {isLoading && <ActiveLoading onClickEvent={()=>dispatch(loading(false))}  />}
             <Topbar/>
             <Menu/>
             <Main/>

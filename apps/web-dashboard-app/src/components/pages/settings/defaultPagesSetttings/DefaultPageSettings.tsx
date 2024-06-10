@@ -1,7 +1,7 @@
 import React, {ChangeEvent, FC, useEffect, useMemo, useState} from "react";
 import styled from "styled-components";
 import {inputValueSimplifier} from "shared-util";
-import {LanguagesOptions} from "ui";
+import {LanguagesOptions} from "@repo/ui";
 import {updateSettingAction} from "@store/reducers/settingsReducer";
 import MonacoEditor from "@components/common/MonacoEditor";
 import {useSearchParams} from "react-router-dom";

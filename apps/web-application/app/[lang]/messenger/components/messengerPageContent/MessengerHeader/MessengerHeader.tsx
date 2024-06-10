@@ -8,7 +8,7 @@ import {IMessengerConversation, User} from "typescript-types";
 import { useAppSelector} from "@store/hooks";
 import './MessengerHeader.styles.scss';
 import {faCircleUser} from "@fortawesome/free-solid-svg-icons/faCircleUser";
-import {UserPreviewImage} from "ui";
+import {UserPreviewImage} from "@repo/ui";
 
 interface IProps {
     activeConversation: IMessengerConversation,

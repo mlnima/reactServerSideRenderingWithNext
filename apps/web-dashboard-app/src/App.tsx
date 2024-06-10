@@ -9,7 +9,7 @@ import {useAppDispatch} from "@store/hooks";
 import {getSettingsAction} from "@store/reducers/settingsReducer";
 import {getWidgetsAction} from "@store/reducers/widgetsReducer";
 import {getCustomPagesAction} from "@store/reducers/globalStateReducer";
-
+import "@repo/shared-style"
 
 function App() {
     //@ts-ignore

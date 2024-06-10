@@ -17,6 +17,7 @@
     "@reduxjs/toolkit": "^1.9.1",
     "@svgr/webpack": "^6.5.1",
     "@repo/api-requests": "*",
+    "@repo/shared-style": "*",
     "babel-jest": "^29.3.1",
     "babel-plugin-named-asset-import": "^0.3.8",
     "babel-preset-react-app": "^10.0.1",
@@ -71,7 +72,7 @@
     "typescript": "^5.4.5",
     "typescript-types": "*",
 
-    "ui": "*",
+    "@repo/ui": "*",
     "web-vitals": "^3.1.1",
     "webpack": "^5.64.4",
     "webpack-dev-server": "^4.6.0",

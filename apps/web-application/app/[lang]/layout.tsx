@@ -31,6 +31,7 @@ import KeysListener from "@components/global/KeysListener";
 import UserConfigMenu from "@components/global/UserConfigMenu/UserConfigMenu";
 import type { Viewport } from 'next'
 import LayoutViewportGenerator from "@components/LayoutMetaGenerator/LayoutViewportGenerator";
+import CustomHeadTagsInitializer from "@components/CustomHeadTagsInitializer";
 // import './layout.scss'
 // import Head from "next/head";
 
@@ -104,6 +105,7 @@ const RootLayout = async ({children, params: {lang}}: { children: ReactNode, par
             {/*<MediaCall/>*/}
             <KeysListener/>
             <UserConfigMenu locale={locale} dictionary={dictionary}/>
+            <CustomHeadTagsInitializer/>
         </ReduxProvider>
         </body>
         </html>

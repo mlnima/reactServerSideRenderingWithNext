@@ -9,7 +9,7 @@ import {faCheck} from "@fortawesome/free-solid-svg-icons/faCheck";
 import {useAppSelector} from "@store/hooks";
 import './MessengerConversationPreview.styles.scss'
 import {useRouter} from "next/navigation";
-import {UserPreviewImage} from "ui";
+import {UserPreviewImage} from "@repo/ui";
 
 interface IProps {
     conversationData: IMessengerConversation

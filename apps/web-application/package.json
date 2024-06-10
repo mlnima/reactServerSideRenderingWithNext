@@ -26,6 +26,7 @@
     "@reduxjs/toolkit": "^1.9.7",
     "@repo/api-requests": "*",
     "@repo/data-structures": "*",
+    "@repo/shared-style": "*",
     "@types/node": "20.2.5",
     "@types/react": "^18.3.3",
     "@types/react-dom": "18.2.4",
@@ -87,7 +88,7 @@
     "tsconfig": "*",
     "typescript": "^5.4.5",
     "typescript-types": "*",
-    "ui": "*",
+    "@repo/ui": "*",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
