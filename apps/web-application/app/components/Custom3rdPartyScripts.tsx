@@ -1,35 +1,41 @@
 'use client';
-import {FC, useEffect, useState} from "react";
-import styled from "styled-components";
-import {useAppSelector} from "@store/hooks";
-import Script from 'next/script'
+import { FC, useEffect, useState } from 'react';
+import { useAppSelector } from '@store/hooks';
+import { usePathname } from 'next/navigation';
+import Script from 'next/script';
 
-interface PropTypes {
-}
+interface PropTypes {}
 
 const Custom3rdPartyScripts: FC<PropTypes> = ({}) => {
-    const [scriptsToRender,setScriptsToRender] = useState([])
+    const pathname = usePathname();
+    const [scriptsToRender, setScriptsToRender] = useState([]);
+
     const custom3rdPartyScripts = useAppSelector(
         ({ settings }) =>
             //@ts-ignore
-            settings?.initialSettings?.headDataSettings?.custom3rdPartyScripts
+            settings?.initialSettings?.headDataSettings?.custom3rdPartyScripts,
     );
 
     useEffect(() => {
-        if (!!custom3rdPartyScripts){
-            setScriptsToRender(custom3rdPartyScripts.split(','))
+        if (!!custom3rdPartyScripts) {
+            setScriptsToRender(custom3rdPartyScripts.split(','));
         }
-    }, [custom3rdPartyScripts]);
-
-
-    if (!custom3rdPartyScripts) return null;
+    }, [custom3rdPartyScripts,pathname]);
 
     return (
         <>
-            {scriptsToRender.map((scriptToRender,index)=>{
-                return <Script key={index} strategy={'worker'} src={scriptToRender} />
+            {scriptsToRender.map((scriptToRender, index) => {
+                return (
+                    <Script
+                        async
+                        key={index}
+                        strategy={'afterInteractive'}
+                        src={scriptToRender}
+                    />
+                );
             })}
         </>
-    )
+    );
+
 };
 export default Custom3rdPartyScripts;
