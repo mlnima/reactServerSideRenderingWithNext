@@ -26,8 +26,8 @@ const Custom3rdPartyScripts: FC<PropTypes> = ({}) => {
 
     return (
         <>
-            {scriptsToRender.map(scriptToRender=>{
-                return <Script strategy={'lazyOnload'} src={scriptToRender} />
+            {scriptsToRender.map((scriptToRender,index)=>{
+                return <Script key={index} strategy={'worker'} src={scriptToRender} />
             })}
         </>
     )

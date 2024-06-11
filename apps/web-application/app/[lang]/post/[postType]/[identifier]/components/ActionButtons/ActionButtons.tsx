@@ -99,7 +99,7 @@ const ActionButtons: FC<IProps> = ({
                     >
                         <FontAwesomeIcon
                             className={'rate-logo view'}
-                            color={'var(--secondary-text-color,#b3b3b3)'}
+                            color={'var(--primary-text-color)'}
                             icon={faEye}
                         />
                         <p className="ActionItemValue">
@@ -122,7 +122,7 @@ const ActionButtons: FC<IProps> = ({
                                 color={
                                     disableRatingButtons
                                         ? '#666'
-                                        : 'var(--secondary-text-color,#b3b3b3)'
+                                        : 'var(--primary-text-color)'
                                 }
                                 icon={faThumbsUp}
                             />
@@ -140,7 +140,7 @@ const ActionButtons: FC<IProps> = ({
                                 color={
                                     disableRatingButtons
                                         ? '#666'
-                                        : 'var(--secondary-text-color,#b3b3b3)'
+                                        : 'var(--primary-text-color)'
                                 }
                                 icon={faThumbsDown}
                             />

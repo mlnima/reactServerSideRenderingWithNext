@@ -168,16 +168,27 @@ const UniqueFields: FC<UniqueFieldsPropTypes> =
                 }
 
                 {(widgetData.type === 'meta' || widgetData.type === 'metaWithImage') &&
-                    <SelectFieldForWidget title={'Meta Type:'}
-                                          name={'metaType'}
-                                          value={widgetData?.metaType}
-                                          options={widgetData.type === 'metaWithImage' ?
-                                              ['categories', 'actors'] :
-                                              ['tags', 'categories', 'actors']
-                                          }
-                                          onChangeHandler={onChangeHandler}
-                    />
+                    <>
+                        <SelectFieldForWidget title={'Meta Type:'}
+                                              name={'metaType'}
+                                              //widgetData?.metaType will be removed
+                                              value={widgetData?.uniqueData?.metaType || widgetData?.metaType}
+                                              options={widgetData.type === 'metaWithImage' ?
+                                                  ['categories', 'actors'] :
+                                                  ['tags', 'categories', 'actors']
+                                              }
+                                              onChangeHandler={onUniqueDataChangeHandler}
+                        />
+                        <div className='checkInputFieldForWidget widgetSection'>
+                            <p>Grouping Metas:</p>
+                            {/*//@ts-ignore*/}
+                            <input type='checkbox' name='grouping' checked={widgetData?.uniqueData?.grouping}
+                                   onChange={e => onUniqueDataChangeHandler(e)}/>
+                        </div>
+                    </>
+
                 }
+
 
                 {widgetData.type === 'authentication' &&
                 <AuthenticationTypeWidgetModelFields onUniqueDataChangeHandler={onUniqueDataChangeHandler}

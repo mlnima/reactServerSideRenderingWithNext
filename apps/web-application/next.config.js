@@ -37,6 +37,7 @@ const nextConfig = {
         ignoreDuringBuilds: true,
     },
     experimental: {
+        nextScriptWorkers: true,
         // serverActions: true,
         // turbo: {
         //     rules: {

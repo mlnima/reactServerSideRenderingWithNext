@@ -9,6 +9,7 @@ export { inputValueSimplifier } from './src/inputs-util';
 export {
     arraySortRandom,
     groupingArrayOfObjectByKey,
+    groupingArrayOfMetas,
     uniqArrayBy,
     sortArrayByPropertyOfObject,
     reduceWidgetsToGroups,

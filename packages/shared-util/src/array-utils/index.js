@@ -28,6 +28,24 @@ export const groupingArrayOfObjectByKey = (array, key) => {
     return grouped;
 };
 
+export const groupingArrayOfMetas = (array, key) => {
+    const grouped = {};
+    const numberRegex = /^\d+$/;
+    for (const item of array) {
+
+        const firstLetter = item[key].charAt(0).toLowerCase();
+        const groupName = numberRegex.test(firstLetter) ? '0' : firstLetter
+
+        if (!grouped[groupName]) {
+            grouped[groupName] = [];
+        }
+
+        grouped[groupName].push(item);
+    }
+
+    return grouped;
+};
+
 export const reduceArrayOfDataToIds = dataArr =>
     Array.isArray(dataArr) ? dataArr.map(data => data._id) : [];
 

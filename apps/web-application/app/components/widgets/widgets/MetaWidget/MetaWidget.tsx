@@ -5,6 +5,8 @@ import MetasRenderer from "@components/metas/MetasRenderer";
 interface MetaWidgetPropType {
     uniqueData?: {
         metaData?: Meta[],
+        grouping?:boolean,
+        metaType?:string
     },
     metaType: string,
     locale:string
@@ -12,7 +14,7 @@ interface MetaWidgetPropType {
 
 const MetaWidget: FC<MetaWidgetPropType> = ({metaType, uniqueData,locale}) => {
     return(
-        <MetasRenderer locale={locale} metaData={uniqueData?.metaData} metaType={metaType}/>
+        <MetasRenderer locale={locale} metaData={uniqueData?.metaData} metaType={metaType || uniqueData?.metaType} grouping={uniqueData?.grouping}/>
     )
 };
 

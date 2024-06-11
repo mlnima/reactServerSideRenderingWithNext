@@ -3,15 +3,6 @@
   color: var(--primary-text-color);
   width: 100%;
   padding: 0 8px;
-
-  //.innerContent{
-  //  display: flex;
-  //  justify-content: space-between;
-  //  align-items: center;
-  //  box-sizing: border-box;
-  //  width: 100%;
-  //  height: 100%;
-  //}
 }
 
 .header-widget-area, .footer-widget-area {
@@ -79,13 +70,7 @@
 }
 
 .sidebarWidgetArea {
-  //background-color: var(--primary-background-color, #000);
   background-color: var(--secondary-background-color);
   display: flex;
   flex-direction: column;
-  @media only screen and (min-width: 768px) {
-    //pos
-    //max-height: 100vh;
-    //overflow-y: auto;
-  }
 }

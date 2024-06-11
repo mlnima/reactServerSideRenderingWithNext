@@ -55,7 +55,7 @@ export const fetchPostViews = async ({
             : {};
         const queriesDataObject = { ..._id, ...title };
         const queries = `?${new URLSearchParams(queriesDataObject).toString()}`;
-        const tag = identifier ? [identifier] : []
+        const tag = identifier ? [identifier] : [];
         const response = await fetch(
             `${APIServerUrl}/api/v1/posts/getPostViews${queries}`,
 

@@ -1,11 +1,11 @@
 .postsPageInfo{
   overflow: hidden;
+  text-align: center;
   h1 {
     padding: 8px;
     box-sizing: border-box;
     overflow-wrap: break-word;
     color: var(--primary-text-color, #fff);
-    text-align: center;
     font-size: 2rem;
   }
 }

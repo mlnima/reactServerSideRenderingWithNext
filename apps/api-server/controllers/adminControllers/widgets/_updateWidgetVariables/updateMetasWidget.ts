@@ -9,6 +9,7 @@ const updateMetasWidget = async (widgetData: any, widgetId: string, res: Respons
         res.status(400).json({message: 'Missing widget ID'});
         return;
     }
+    console.log(`widgetData=> `,widgetData?.uniqueData)
 
     try {
         const statusQuery = {status: 'published'};
@@ -31,9 +32,14 @@ const updateMetasWidget = async (widgetData: any, widgetId: string, res: Respons
             ...widgetData,
             uniqueData: {
                 metaData: metas?.map((meta) => meta._id),
+                grouping:!!widgetData?.uniqueData?.grouping,
+                metaType: widgetData?.uniqueData?.metaType|| widgetData?.metaType || 'tags',
+                count: widgetData?.uniqueData?.count || 20,
                 totalCount
             }
         };
+
+        delete updateData.metaType
 
         const updatedWidget = await widgetSchema.findByIdAndUpdate(widgetId, {data: updateData}, {new: true}).exec();
 
