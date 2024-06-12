@@ -29,6 +29,7 @@ export {
     clientAPIRequestDeletePostImages,
     clientAPIRequestUploadPostImages,
     clientAPIRequestUploadProfileImage
+
 } from './client/clientFileManager';
 
 //messenger
@@ -165,7 +166,7 @@ export {
     dashboardAPIRequestPostDataScrappers,
     dashboardAPIRequestScrapYoutubeInfo,
     dashboardAPIRequestUpdatePost,
-
+    dashboardAPIRequestFindAnotherSimilarSourceLink
 } from './dashboard/dashboardPosts'
 
 //settings

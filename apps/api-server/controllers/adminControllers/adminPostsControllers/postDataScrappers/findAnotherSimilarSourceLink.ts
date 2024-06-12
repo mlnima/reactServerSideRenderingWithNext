@@ -1,15 +1,17 @@
 import postSchema from "@schemas/postSchema";
 import xHSimilarFinder from "./xHSimilarFinder";
+import {Request,Response} from "express";
 
-const findAnotherSimilarSourceLink = async (req, res) => {
+
+const findAnotherSimilarSourceLink = async (req:Request, res:Response) => {
     try {
         const postData = await postSchema.findById(req.query.postId).select('source');
 
         if (postData.source) {
             if (postData.source.includes("xhamster")) {
                 const relatedPosts = await xHSimilarFinder({
-                    relatedBy: req.query.relatedBy,
-                    page: req.query.page,
+                    relatedBy: req.query.relatedBy as string,
+                    page: parseInt(req.query.page as string) ,
                 });
                 res.status(200).json({relatedPosts})
                 return

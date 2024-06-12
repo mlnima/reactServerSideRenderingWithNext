@@ -134,9 +134,9 @@ const ScraperOptions: FC<PropTypes> = ({sourceURL, postId}) => {
         <Style>
             <span>Scrapper Options:</span>
             <div className={'filed-checkboxes'}>
-                {availableFields.map((field: string) => {
+                {availableFields.map((field: string,index:number) => {
                     return (
-                        <div className={'filed-checkbox'}>
+                        <div className={'filed-checkbox'} key={index}>
                             <label>{field}</label>
                             <input type={'checkbox'}
                                    name={field}
@@ -157,7 +157,8 @@ const ScraperOptions: FC<PropTypes> = ({sourceURL, postId}) => {
                     Scrap All
                 </button>
                 <button className={'btn btn-primary'}
-                        onClick={()=>onGetRelatedPostsHandler()}>
+                        onClick={() => dispatch(getPostScrapedDataAction({url: sourceURL,fields}))}
+                >
                     scrap limited
                 </button>
                 <div className={'actionSection'}>
@@ -181,7 +182,7 @@ const ScraperOptions: FC<PropTypes> = ({sourceURL, postId}) => {
                         <option value={''}>select</option>
                         {[...(post?.actors || []), ...(post?.categories || []), ...(post?.tags || [])].map(item => {
                             return (
-                                <option value={item?.name}>{item?.name}</option>
+                                <option value={item?.name} key={item?.name}>{item?.name}</option>
                             )
                         })}
                     </select>
@@ -195,9 +196,9 @@ const ScraperOptions: FC<PropTypes> = ({sourceURL, postId}) => {
 
                 <div className={'relatedPostWrapper'}>
                     <div className={'relatedPostsContent'}>
-                        {relatedPosts.map((relatedPost: any) => {
+                        {relatedPosts.map((relatedPost: any,index:number) => {
 
-                            return <RelatedPostPreview cardData={relatedPost}/>
+                            return <RelatedPostPreview key={index} cardData={relatedPost}/>
                         })
                         }
                     </div>
