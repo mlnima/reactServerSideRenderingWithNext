@@ -1,6 +1,7 @@
 import 'module-alias/register';
 import { register } from 'tsconfig-paths';
 import dotenv from 'dotenv';
+
 dotenv.config({ path: '../.env' });
 
 const baseUrl = __dirname; // usually __dirname
@@ -15,7 +16,6 @@ const cleanup = register({
 });
 
 import { connectToDatabase } from '@util/database-util';
-
 
 import adminAuthMiddleware from '@util/middlewares/adminAuthMiddleware';
 import { getLocalIP } from '@util/network-util';
@@ -41,7 +41,7 @@ import clientFileManagerMainRouter from './controllers/fileManagerControllers/cl
 import { initializeSocket } from './controllers/socketController/socketController';
 import initializeChatroomsToStore from './controllers/socketController/initializeChatroomsToStore';
 import { createProxyMiddleware } from 'http-proxy-middleware';
-import * as process from "process";
+import * as process from 'process';
 
 // Create an Express application
 const app = express();
@@ -72,12 +72,14 @@ declare global {
 const runServer = () => {
     const baseDomain = process.env.NEXT_PUBLIC_PRODUCTION_URL;
     const wwwDomain =
-        baseDomain &&
-        new URL(baseDomain).protocol + '//www.' + new URL(baseDomain).hostname;
+        baseDomain && new URL(baseDomain).protocol + '//www.' + new URL(baseDomain).hostname;
 
+    console.log(`wwwDomain=> `, wwwDomain);
+    console.log(`baseDomain=> `, baseDomain);
     const allowedOrigins = [baseDomain, wwwDomain].filter(Boolean);
 
     const isDevelopment = process.env.NODE_ENV !== 'production';
+
     const isLocalhost =
         baseDomain &&
         (baseDomain.includes('localhost') ||
@@ -85,10 +87,7 @@ const runServer = () => {
             baseDomain.includes('127.0.0.1'));
 
     const corsOptions = {
-        origin: function (
-            origin: string,
-            callback: (arg0: Error, arg1: boolean) => void,
-        ) {
+        origin: function (origin: string, callback: (arg0: Error, arg1: boolean) => void) {
             if (isDevelopment || isLocalhost) {
                 callback(null, true); // Allow any origin in development or if baseDomain is localhost
             } else if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
@@ -112,15 +111,11 @@ const runServer = () => {
     app.use(xmlParser());
     app.use(compression({ filter: shouldCompress }));
 
-    app.get(
-        '/api/admin/settings/clearCaches',
-        adminAuthMiddleware,
-        (req, res) => {
-            //@ts-ignore
-            apiCache.clear(req.params?.collection);
-            res.json({ message: 'Deleting Cache Command Executed' });
-        },
-    );
+    app.get('/api/admin/settings/clearCaches', adminAuthMiddleware, (req, res) => {
+        //@ts-ignore
+        apiCache.clear(req.params?.collection);
+        res.json({ message: 'Deleting Cache Command Executed' });
+    });
 
     app.get('/api/alive', loggerMiddleware, (req, res) => {
         res.json({ message: 'alive' });
@@ -128,9 +123,7 @@ const runServer = () => {
 
     app.get('/robots.txt', (req, res) => clientRobotTxtController(req, res));
     app.get('/alive', (req, res) => res.send('alive'));
-    app.get('/manifest.json', cacheSuccesses, (req, res) =>
-        clientMainFestController(req, res),
-    );
+    app.get('/manifest.json', cacheSuccesses, (req, res) => clientMainFestController(req, res));
 
     //----------------- Api routes handler-----------------------
     app.use('/api/admin', adminMainRouter);
@@ -140,9 +133,7 @@ const runServer = () => {
 
     const staticPath = dev ? './static' : '../static';
     const publicPath = dev ? './public' : '../public';
-    const publicPathFileServer = dev
-        ? '../api-server/public'
-        : '../../api-server/public';
+    const publicPathFileServer = dev ? '../api-server/public' : '../../api-server/public';
     app.use(
         '/static',
         express.static(path.join(__dirname, staticPath), {
@@ -164,20 +155,14 @@ const runServer = () => {
     app.use('/files/v1/', clientFileManagerMainRouter);
 
     //----------------- Serving Production Dashboard React App------------------------
-    const dashboardAppPath = dev
-        ? '../web-dashboard-app/build'
-        : '../../web-dashboard-app/build';
+    const dashboardAppPath = dev ? '../web-dashboard-app/build' : '../../web-dashboard-app/build';
     const dashboardBuiltPath = path.join(__dirname, dashboardAppPath);
 
-    app.use(
-        '/static',
-        express.static(`${dashboardBuiltPath}/static`, { maxAge: '604800000' }),
-    );
+    app.use('/static', express.static(`${dashboardBuiltPath}/static`, { maxAge: '604800000' }));
 
     app.get('/dashboard', (req, res) => {
         res.sendFile(`${dashboardBuiltPath}/index.html`);
     });
-
 
     if (dev) {
         app.get(
@@ -221,8 +206,7 @@ const runServer = () => {
         cors: true,
         handlePreflightRequest: (req, res) => {
             res.writeHead(200, {
-                'Access-Control-Allow-Origin':
-                process.env.NEXT_PUBLIC_PRODUCTION_URL,
+                'Access-Control-Allow-Origin': process.env.NEXT_PUBLIC_PRODUCTION_URL,
                 'Access-Control-Allow-Methods': 'GET,POST',
                 'Access-Control-Allow-Headers': 'my-custom-header',
                 'Access-Control-Allow-Credentials': true,
@@ -243,9 +227,7 @@ const runServer = () => {
     // Start the server
     const serverPort = parseInt(process.env.API_SERVER_PORT || '3002');
     server.listen(serverPort, () => {
-        console.log(
-            `process ${process.pid} : API server started at ${serverPort}`,
-        );
+        console.log(`process ${process.pid} : API server started at ${serverPort}`);
     });
 };
 
@@ -253,5 +235,3 @@ connectToDatabase('API server ').then(() => {
     runServer();
     initializeChatroomsToStore();
 });
-
-
