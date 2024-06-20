@@ -1,8 +1,11 @@
 import {fetchPage} from "@lib/fetch-requests/client/fetchPage";
+import {AlternatesGenerators} from "@lib/alternatesCanonicalGenerator";
 
 type Props = {
     params: { pageName: string, lang: string }
 }
+
+const alternatesGenerators = new AlternatesGenerators()
 
 const pageMetaGenerator = async ({params:{pageName,lang}}:Props)=>{
 
@@ -10,14 +13,7 @@ const pageMetaGenerator = async ({params:{pageName,lang}}:Props)=>{
     const pageTitle = pageData.pageData?.translations?.[lang]?.title || pageData.pageData.title|| pageData.pageData.pageName
 
     return {
-        // alternates: {
-        //     canonical: `/page/${pageTitle}`,
-        //     languages: process.env.NEXT_PUBLIC_LOCALES?.replace(`${process.env.NEXT_PUBLIC_DEFAULT_LOCALE} `,'')
-        //         ?.split(' ').reduce((finalValue:{[key:string]:string},currentLocale)=>{
-        //             finalValue[currentLocale] = `/${currentLocale}/page/${pageTitle}`
-        //             return finalValue
-        //         },{}),
-        // },
+        alternates: alternatesGenerators.customPage(lang,pageData.pageData.pageName),
         title:pageTitle,
         description: pageData.pageData?.translations?.[lang]?.description || pageData.pageData.description,
     }

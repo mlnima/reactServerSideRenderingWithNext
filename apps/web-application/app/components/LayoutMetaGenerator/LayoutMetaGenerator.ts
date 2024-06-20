@@ -3,23 +3,26 @@
 import type {Metadata, ResolvingMetadata} from 'next'
 import {fetchSettings} from "@lib/fetch-requests/client/fetchSettings";
 import * as process from "process";
-import alternatesCanonicalGenerator from "@lib/alternatesCanonicalGenerator";
+import {AlternatesGenerators} from "@lib/alternatesCanonicalGenerator";
+// import alternatesCanonicalGenerator from "@lib/alternatesCanonicalGenerator";
 
 type Props = {
     params: { identifier: string ,lang:string}
     searchParams: { [key: string]: string | string[] | undefined }
 }
 
+const alternatesGenerators = new AlternatesGenerators()
+
 const LayoutMetaGenerator = async ({params: {lang}, searchParams}: Props, parent?: ResolvingMetadata): Promise<Metadata> => {
 
     const fallbackIcon = '/asset/images/default/favicon.png'
     const settingsData = await fetchSettings({requireSettings: ['initialSettings']})
 
-    // const alternates = alternatesCanonicalGenerator({lang,currentPath:'/'})
-    //
+    const alternates = alternatesGenerators.homePage(lang)
+
     return {
         metadataBase: new URL(process.env.NEXT_PUBLIC_PRODUCTION_URL as string),
-        // alternates,
+        alternates,
         title: settingsData?.settings?.initialSettings?.headDataSettings?.translations?.[lang]?.title ??
                (settingsData?.settings?.initialSettings?.headDataSettings?.title || 'CMS'),
 

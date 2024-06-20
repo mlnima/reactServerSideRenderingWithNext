@@ -1,13 +1,19 @@
-import {ChatroomMessage} from "typescript-types";
+import { ChatroomMessage } from 'typescript-types';
 
 class Store {
     private onlineUsers: { [chatroomId: string]: any } = {};
-    private chatroomsList: Array<{ _id: string, name: string, messages: Array<ChatroomMessage> }> = [];
+    private chatroomsList: Array<{
+        _id: string;
+        name: string;
+        messages: Array<ChatroomMessage>;
+    }> = [];
     private activeSockets: Map<string, any> = new Map();
 
     userDisconnectedHandler(userId: string): void {
         for (const onlineUsersInChatroom in this.onlineUsers) {
-            this.onlineUsers[onlineUsersInChatroom] = this.onlineUsers[onlineUsersInChatroom].filter(user => user._id !== userId);
+            this.onlineUsers[onlineUsersInChatroom] = this.onlineUsers[
+                onlineUsersInChatroom
+            ].filter(user => user._id !== userId);
         }
     }
 
@@ -19,19 +25,23 @@ class Store {
         return this.chatroomsList;
     }
 
-    getChatroomNames(): Array<{ _id: string, name: string }> {
+    getChatroomNames(): Array<{ _id: string; name: string }> {
         return this.chatroomsList.map(chatroom => ({
             _id: chatroom._id,
-            name: chatroom.name
+            name: chatroom.name,
         }));
     }
 
-    getChatroomById(chatroomId: string): { _id: string, messages: Array<any> } | undefined {
+    getChatroomById(
+        chatroomId: string,
+    ): { _id: string; messages: Array<any> } | undefined {
         return this.chatroomsList.find(chatroom => chatroom._id === chatroomId);
     }
 
     getChatroomMessagesById(chatroomId: string): ChatroomMessage[] | undefined {
-        const findChatroom = this.chatroomsList.find(chatroom => chatroom._id.toString() === chatroomId);
+        const findChatroom = this.chatroomsList.find(
+            chatroom => chatroom._id.toString() === chatroomId,
+        );
         return findChatroom?.messages;
     }
 
@@ -51,22 +61,26 @@ class Store {
         if (!this.onlineUsers[chatroomId]) {
             this.onlineUsers[chatroomId] = [];
         }
-        const userExists = this.onlineUsers[chatroomId].some(existingUser => existingUser._id === user._id);
+        const userExists = this.onlineUsers[chatroomId].some(
+            existingUser => existingUser._id === user._id,
+        );
         if (!userExists) {
             this.onlineUsers[chatroomId].push(user);
         }
-        return userExists
+        return userExists;
     }
 
-
-
-    setChatroomsList(chatrooms: Array<{ _id: string, name: string, messages: Array<any> }>): void {
+    setChatroomsList(
+        chatrooms: Array<{ _id: string; name: string; messages: Array<any> }>,
+    ): void {
         this.chatroomsList = chatrooms;
     }
 
-
     addMessageToChatroom(newMessageData): void {
-        const chatroom = this.chatroomsList.find(chatroom => chatroom._id.toString() === newMessageData.chatroom.toString());
+        const chatroom = this.chatroomsList.find(
+            chatroom =>
+                chatroom._id.toString() === newMessageData.chatroom.toString(),
+        );
 
         if (!!chatroom?._id) {
             chatroom.messages.push(newMessageData);
@@ -81,16 +95,22 @@ class Store {
         this.activeSockets.delete(socketId);
     }
 
-    removeMessageFromChatroom(chatroomId: string, messageId: string): void  {
-        const chatroom = this.chatroomsList.find(chatroom => chatroom._id.toString() === chatroomId);
+    removeMessageFromChatroom(chatroomId: string, messageId: string): void {
+        const chatroom = this.chatroomsList.find(
+            chatroom => chatroom._id.toString() === chatroomId,
+        );
         if (!!chatroom?._id) {
-            chatroom.messages = chatroom.messages.filter(message => message._id.toString() !== messageId);
+            chatroom.messages = chatroom.messages.filter(
+                message => message._id.toString() !== messageId,
+            );
         }
     }
 
     removeOnlineUserFromChatroom(chatroomId: string, userId: string): void {
         if (this.onlineUsers?.[chatroomId]) {
-            this.onlineUsers[chatroomId] = this.onlineUsers[chatroomId].filter(user => user._id !== userId);
+            this.onlineUsers[chatroomId] = this.onlineUsers[chatroomId].filter(
+                user => user._id !== userId,
+            );
         }
     }
 }

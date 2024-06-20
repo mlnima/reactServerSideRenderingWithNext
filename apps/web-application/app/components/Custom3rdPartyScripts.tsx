@@ -3,12 +3,13 @@ import { FC, useEffect, useState } from 'react';
 import { useAppSelector } from '@store/hooks';
 import { usePathname } from 'next/navigation';
 import Script from 'next/script';
+import parse from 'html-react-parser'
 
 interface PropTypes {}
 
 const Custom3rdPartyScripts: FC<PropTypes> = ({}) => {
     const pathname = usePathname();
-    const [scriptsToRender, setScriptsToRender] = useState([]);
+    const [scriptsToRender, setScriptsToRender] = useState('');
 
     const custom3rdPartyScripts = useAppSelector(
         ({ settings }) =>
@@ -18,24 +19,37 @@ const Custom3rdPartyScripts: FC<PropTypes> = ({}) => {
 
     useEffect(() => {
         if (!!custom3rdPartyScripts) {
-            setScriptsToRender(custom3rdPartyScripts.split(','));
+
+            setTimeout(()=>{
+                setScriptsToRender(custom3rdPartyScripts)
+            },100)
+        }
+
+        return()=>{
+            setScriptsToRender('');
         }
     }, [custom3rdPartyScripts,pathname]);
 
-    return (
-        <>
-            {scriptsToRender.map((scriptToRender, index) => {
-                return (
-                    <Script
-                        async
-                        key={index}
-                        strategy={'afterInteractive'}
-                        src={scriptToRender}
-                    />
-                );
-            })}
-        </>
-    );
+    if (!!scriptsToRender){
+        return (
+            <>
+                {parse(scriptsToRender)}
+            </>
+        );
+    }else return  null
+
 
 };
 export default Custom3rdPartyScripts;
+
+
+{/*{scriptsToRender.map((scriptToRender, index) => {*/}
+{/*    return (*/}
+{/*        <Script*/}
+{/*            async*/}
+{/*            key={index}*/}
+{/*            strategy={'afterInteractive'}*/}
+{/*            src={scriptToRender}*/}
+{/*        />*/}
+{/*    );*/}
+{/*})}*/}

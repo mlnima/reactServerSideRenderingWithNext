@@ -2,13 +2,15 @@ import type {Metadata, ResolvingMetadata} from 'next'
 import {fetchPosts} from "@lib/fetch-requests/client/fetchPosts";
 import {fetchSettings} from "@lib/fetch-requests/client/fetchSettings";
 import {textContentReplacer, getTextDataWithTranslation} from "shared-util";
-import {i18n} from "../../../../../../i18n-config";
+import {i18n} from "@i18nConfig";
+import {AlternatesGenerators} from "@lib/alternatesCanonicalGenerator";
 
 type Props = {
     params: { categoryId: string, lang: string }
     searchParams: { [key: string]: string | string[] | undefined }
 }
 
+const alternatesGenerators = new AlternatesGenerators()
 const categoryMetaGenerator = async ({params, searchParams}: Props, parent?: ResolvingMetadata): Promise<Metadata> => {
     const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const settingsData = await fetchSettings({requireSettings: ['categoryPageSettings']});
@@ -45,14 +47,7 @@ const categoryMetaGenerator = async ({params, searchParams}: Props, parent?: Res
         getTextDataWithTranslation(params?.lang, 'description', postsData?.meta)
 
     return {
-        // alternates: {
-        //     canonical: `/category/${params?.categoryId}`,
-        //     languages: process.env.NEXT_PUBLIC_LOCALES?.replace(`${process.env.NEXT_PUBLIC_DEFAULT_LOCALE} `,'')
-        //         ?.split(' ').reduce((finalValue:{[key:string]:string},currentLocale)=>{
-        //         finalValue[currentLocale] = `/${currentLocale}/category/${params?.categoryId}`
-        //         return finalValue
-        //     },{}),
-        // },
+        alternates: alternatesGenerators.metaPage(params?.lang,'category',params?.categoryId),
         title: pageTitle ?
             textContentReplacer(pageTitle, {
                 name: postsData?.meta?.name,

@@ -93,5 +93,9 @@
   "Yes": "Oui",
   "You Need To Log In": "Vous devez vous connecter",
   "You have entered an invalid username or password": "Vous avez entré un nom d'utilisateur ou un mot de passe invalide.",
-  "Your account has been successfully created you can login now": "Votre compte a été créé avec succès vous pouvez vous connecter maintenant"
+  "Your account has been successfully created you can login now": "Votre compte a été créé avec succès vous pouvez vous connecter maintenant",
+  "Results": "Résultats",
+  "Result": "Résultat",
+  "Search Results": "Résultats de recherche",
+  "Live": "En direct"
 }

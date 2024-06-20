@@ -1,28 +1,151 @@
-interface IArg{
-    lang:string
-    currentPath:string
+import { headers } from 'next/headers';
+
+interface IArg {
+    lang: string;
 }
 
-const alternatesCanonicalGenerator = ({lang,currentPath}:IArg) =>{
-    const isDefaultLanguage = lang === process.env.NEXT_PUBLIC_DEFAULT_LOCALE;
-    const canonicalBase = isDefaultLanguage ? '/'  : `/${lang}`;
-    let siteLanguages = process.env.NEXT_PUBLIC_LOCALES
-        ?.split(' ')
-        .filter((language=>language !== process.env.NEXT_PUBLIC_DEFAULT_LOCALE )) as []
+type LanguageReducer = {
+    [key: string]: string;
+};
 
-    const alternatesLanguagesList = isDefaultLanguage ?
-        siteLanguages  :
-        ['',...siteLanguages].filter(language=>language!== lang)
+export class AlternatesGenerators {
 
-    const alternateLanguages = alternatesLanguagesList.reduce((finalValue:{[key:string]:string},currentLocale)=>{
-        finalValue[currentLocale] = `/${currentLocale}`
-        return finalValue
-    },{})
+    baseUrlPath:string
+    defaultLocale:string
+    locales:string[]
 
-    return{
-        canonical:canonicalBase,
-        languages:alternateLanguages
+    constructor() {
+        this.baseUrlPath = process.env.NEXT_PUBLIC_PRODUCTION_URL;
+        this.defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE;
+        this.locales = process.env.NEXT_PUBLIC_LOCALES
+            // ?.replace(`${process.env.NEXT_PUBLIC_DEFAULT_LOCALE} `,'')
+            ?.split(' ');
     }
 
+    alternateLanguagesCorrector(lang: string) {
+        return this.locales.filter((locale: string) => locale !== lang);
+    }
+
+    alternatePathReducer(lang: string, path: string = '') {
+        const languagesToRender =
+            lang === this.defaultLocale
+                ? this.alternateLanguagesCorrector(lang)
+                : [...this.alternateLanguagesCorrector(lang), 'x-default'];
+
+        return languagesToRender.reduce((finalValue: LanguageReducer, currentLocale: string) => {
+            if (currentLocale !== this.defaultLocale) {
+                finalValue[currentLocale] =
+                    `/${currentLocale === 'x-default' ? '' : currentLocale}${path}`;
+            }
+            return finalValue;
+        }, {});
+    }
+
+    baseCanonicalPathGenerator(lang: string) {
+        return `/${lang === this.defaultLocale || lang === 'x-default' ? '' : lang}`;
+    }
+
+    // pages
+    homePage(lang: string) {
+        return {
+            canonical: `${this.baseCanonicalPathGenerator(lang)}`,
+            languages: this.alternatePathReducer(lang),
+        };
+    }
+
+    postPage(lang: string, identifier: string, postType: string) {
+        const targetPath = `/post/${postType}/${identifier}`;
+        return {
+            canonical: `${this.baseCanonicalPathGenerator(lang)}${targetPath}`,
+            languages: this.alternatePathReducer(lang, targetPath),
+        };
+    }
+
+    actorPage(lang: string,actorId: string) {
+        const targetPath = `/actor/${actorId}`;
+        return {
+            canonical: `${this.baseCanonicalPathGenerator(lang)}${targetPath}`,
+            languages: this.alternatePathReducer(lang, targetPath),
+        };
+    }
+    metaPage(lang: string,metaType:string,metaId: string) {
+        const targetPath = `/${metaType}/${metaId}`;
+        return {
+            canonical: `${this.baseCanonicalPathGenerator(lang)}${targetPath}`,
+            languages: this.alternatePathReducer(lang, targetPath),
+        };
+    }
+    metasPage(lang: string,metaType: string) {
+        const targetPath = `/${metaType}`;
+        return {
+            canonical: `${this.baseCanonicalPathGenerator(lang)}${targetPath}`,
+            languages: this.alternatePathReducer(lang, targetPath),
+        };
+    }
+    chatroomPage(lang: string,chatroomId: string) {
+        const targetPath = `/chatroom/${chatroomId}`;
+        return {
+            canonical: `${this.baseCanonicalPathGenerator(lang)}${targetPath}`,
+            languages: this.alternatePathReducer(lang, targetPath),
+        };
+    }
+
+    staticPage(lang: string,pageName: string) {
+        const targetPath = `/${pageName}`;
+        return {
+            canonical: `${this.baseCanonicalPathGenerator(lang)}${targetPath}`,
+            languages: this.alternatePathReducer(lang, targetPath),
+        };
+    }
+    customPage(lang: string,pageName: string) {
+        const targetPath = `/page/${pageName}`;
+        return {
+            canonical: `${this.baseCanonicalPathGenerator(lang)}${targetPath}`,
+            languages: this.alternatePathReducer(lang, targetPath),
+        };
+    }
+
+    searchPage(lang: string,keyword: string) {
+        const targetPath = `/search/${keyword}`;
+        return {
+            canonical: `${this.baseCanonicalPathGenerator(lang)}${targetPath}`,
+            languages: this.alternatePathReducer(lang, targetPath),
+        };
+    }
 }
-export default  alternatesCanonicalGenerator
+
+// const alternatesCanonicalGenerator = ({ lang }: IArg) => {
+//     const headersList = headers();
+//     const pathname = headersList.get('x-invoke-path') || '';
+//     console.log(`headers=> `, JSON.stringify(headersList));
+//     console.log(`pathname=> `, pathname);
+//
+//     const isDefaultLanguage = lang === process.env.NEXT_PUBLIC_DEFAULT_LOCALE;
+//     const canonicalBase = isDefaultLanguage ? '/' : `/${lang}`;
+//     let siteLanguages = process.env.NEXT_PUBLIC_LOCALES?.split(' ').filter(
+//         language => language !== process.env.NEXT_PUBLIC_DEFAULT_LOCALE,
+//     ) as [];
+//
+//     const alternatesLanguagesList = isDefaultLanguage
+//         ? siteLanguages
+//         : ['', ...siteLanguages].filter(language => language !== lang);
+//
+//     const alternateLanguages = alternatesLanguagesList.reduce(
+//         (
+//             finalValue: {
+//                 [key: string]: string;
+//             },
+//             currentLocale,
+//         ) => {
+//             finalValue[currentLocale] = `/${currentLocale}`;
+//             return finalValue;
+//         },
+//         {},
+//     );
+//
+//     return {
+//         canonical: canonicalBase,
+//         languages: alternateLanguages,
+//     };
+// };
+// export default alternatesCanonicalGenerator;

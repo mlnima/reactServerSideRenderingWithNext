@@ -3,12 +3,14 @@ import {fetchPosts} from "@lib/fetch-requests/client/fetchPosts";
 import {fetchSettings} from "@lib/fetch-requests/client/fetchSettings";
 import {textContentReplacer, getTextDataWithTranslation} from "shared-util";
 import {i18n} from "@i18nConfig";
+import {AlternatesGenerators} from "@lib/alternatesCanonicalGenerator";
 
 type Props = {
     params: { actorId: string, lang: string }
     searchParams: { [key: string]: string | string[] | undefined }
 }
 
+const alternatesGenerators = new AlternatesGenerators()
 const actorMetaGenerator = async ({params, searchParams}: Props, parent?: ResolvingMetadata): Promise<Metadata> => {
     const locale = i18n.locales.includes(params?.lang) ? params.lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const settingsData = await fetchSettings({requireSettings: ['actorPageSettings']});
@@ -29,6 +31,7 @@ const actorMetaGenerator = async ({params, searchParams}: Props, parent?: Resolv
         },
         locale
     });
+
     const pageTitle = settingsData?.settings?.actorPageSettings?.title;
     const pageKeywords = settingsData?.settings?.actorPageSettings?.keywords;
     const pageDescription = settingsData?.settings?.actorPageSettings?.description;
@@ -42,14 +45,7 @@ const actorMetaGenerator = async ({params, searchParams}: Props, parent?: Resolv
         getTextDataWithTranslation(params?.lang, 'description', postsData?.meta)
 
     return {
-        // alternates: {
-        //     canonical: `/actor/${params?.actorId}`,
-        //     languages: process.env.NEXT_PUBLIC_LOCALES?.replace(`${process.env.NEXT_PUBLIC_DEFAULT_LOCALE} `,'')
-        //         ?.split(' ').reduce((finalValue:{[key:string]:string},currentLocale)=>{
-        //         finalValue[currentLocale] = `/${currentLocale}/actor/${params?.actorId}`
-        //         return finalValue
-        //     },{}),
-        // },
+        alternates: alternatesGenerators.metaPage(params?.lang,'actor',params?.actorId),
         title: pageTitle ?
             textContentReplacer(pageTitle, {
                 name: postsData?.meta?.name,

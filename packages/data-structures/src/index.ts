@@ -10,4 +10,5 @@ export {default as rtlLanguages} from './rtlLanguages';
 export {default as postStatuses} from './postStatuses';
 export {default as UGCPostImagesLimit} from './UGCPostImagesLimit';
 export {default as imageLessCardColors} from './imageLessCardColors';
+export { advertiseType,advertisePlaceType} from './advertiseType';
 export {languagesMapOrigin, languagesMapInEnglish} from './languagesMap';

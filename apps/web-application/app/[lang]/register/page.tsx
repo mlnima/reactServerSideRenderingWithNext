@@ -1,8 +1,5 @@
-'use client';
-import {useEffect} from "react";
-import {loginRegisterForm} from "@store/reducers/globalStateReducer";
-import {useAppDispatch, useAppSelector} from "@store/hooks";
-import {useRouter} from "next/navigation";
+import ClientSideLogic from "./components/ClientSideLogic";
+import {AlternatesGenerators} from "@lib/alternatesCanonicalGenerator";
 
 interface IProps {
     params: {
@@ -10,29 +7,17 @@ interface IProps {
     }
 }
 
-// export const generateMetadata = async ()=>({
-//     title: 'register',
-// })
-
+const alternatesGenerators = new AlternatesGenerators()
+export const generateMetadata = async ({params: {lang}}: IProps)=>({
+    title: 'Register',
+    alternates: alternatesGenerators.staticPage(lang,'register')
+})
 const registerPage = ({params: {lang}}: IProps) => {
-
-    const dispatch = useAppDispatch()
-    const loggedIn = useAppSelector((store) => store?.user?.loggedIn)
-    const router = useRouter()
-
-    useEffect(() => {
-
-        if (loggedIn) {
-            router.push('/')
-        } else {
-            dispatch(loginRegisterForm('register'))
-        }
-    }, []);
 
     return (
         <div id={'content'} className={`page-no-sidebar`}>
             <main id={'primary'} className={'main registerPage'}>
-                <h1>Register</h1>
+                <ClientSideLogic/>
             </main>
         </div>
     )

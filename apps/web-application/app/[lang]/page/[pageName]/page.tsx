@@ -1,11 +1,12 @@
 import MainWidgetArea from "@components/widgets/widgetAreas/MainWidgetArea";
-import {i18n} from "../../../../i18n-config";
+import {i18n} from "@i18nConfig";
 import {getDictionary} from "../../../../get-dictionary";
 import {fetchPage} from "@lib/fetch-requests/client/fetchPage";
 import {fetchWidgets} from "@lib/fetch-requests/client/fetchWidgets";
 import pageMetaGenerator from "./components/pageMetaGenerator/pageMetaGenerator";
 import SidebarWidgetAreaRenderer
     from "@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer";
+import {AlternatesGenerators} from "@lib/alternatesCanonicalGenerator";
 
 interface IProps {
     params: {
@@ -16,6 +17,7 @@ interface IProps {
         [key: string]: string | string[] | undefined
     }
 }
+
 
 const page = async ({params}: IProps) => {
     const pageName = params?.pageName

@@ -1,22 +1,23 @@
-import {i18n} from "../../../../i18n-config";
-import {getDictionary} from "../../../../get-dictionary";
-import React from "react";
+import { i18n } from '@i18nConfig';
+import { getDictionary } from '../../../../get-dictionary';
+import React from 'react';
 import './page.styles.scss';
 
 interface IProps {
     params: {
-        lang: string
-        username: string
-    },
+        lang: string;
+        username: string;
+    };
     searchParams?: {
-        [key: string]: string | string[] | undefined
-    },
-    page: string | string[]
+        [key: string]: string | string[] | undefined;
+    };
+    page: string | string[];
 }
 
-const editAccountPage = async ({params, searchParams}: IProps) => {
-
-    const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+const editAccountPage = async ({ params, searchParams }: IProps) => {
+    const locale = i18n.locales.includes(params?.lang)
+        ? params?.lang
+        : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale);
 
     return (
@@ -28,8 +29,7 @@ const editAccountPage = async ({params, searchParams}: IProps) => {
                 </div>
             </main>
         </div>
-    )
-}
+    );
+};
 
 export default editAccountPage;
-

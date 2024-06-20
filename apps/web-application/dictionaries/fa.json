@@ -128,5 +128,10 @@
   "You Need To Log In": "شما باید وارد",
   "You have entered an invalid username or password": "شما یک نام کاربری یا رمز عبور نادرست وارد کرده اید.",
   "Your account has been successfully created you can login now": "حساب شما با موفقیت ایجاد شده است شما می توانید در حال حاضر وارد",
-  "Your Updates Are Pending Moderator Approval": "بروزرسانی های شما در انتظار تأیید ادمین هستند"
+  "Your Updates Are Pending Moderator Approval": "بروزرسانی های شما در انتظار تأیید ادمین هستند",
+  "newTranslation**": "###",
+  "Results": "نتایج",
+  "Result": "نتیجه",
+  "Search Results": "نتایج جستجو",
+  "Live": "زنده"
 }

@@ -2,6 +2,7 @@ import {getDictionary} from "../../../get-dictionary";
 import {i18n} from '@i18nConfig'
 import './page.styles.scss';
 import NewPostPageContent from "./components/NewPostPageContent";
+import {AlternatesGenerators} from "@lib/alternatesCanonicalGenerator";
 
 
 interface IProps {
@@ -13,16 +14,10 @@ interface IProps {
     }
 }
 
-export const generateMetadata = async () => {
+
+export const generateMetadata = async ({params: {lang}, searchParams}: IProps) => {
     return {
-        // alternates: {
-        //     canonical: '/newPost',
-        //     languages: process.env.NEXT_PUBLIC_LOCALES?.replace(`${process.env.NEXT_PUBLIC_DEFAULT_LOCALE} `,'')
-        //         ?.split(' ').reduce((finalValue:{[key:string]:string},currentLocale)=>{
-        //             finalValue[currentLocale] = `/${currentLocale}/newPost`
-        //             return finalValue
-        //         },{}),
-        // },
+
         title: 'Messenger'
     }
 }

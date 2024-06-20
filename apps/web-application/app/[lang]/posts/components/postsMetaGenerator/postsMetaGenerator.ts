@@ -1,36 +1,34 @@
-import {fetchSettings} from "@lib/fetch-requests/client/fetchSettings";
-import {getDictionary} from "../../../../../get-dictionary";
-import {i18n} from "@i18nConfig";
-import {capitalizeFirstLetter} from "shared-util";
+import { fetchSettings } from '@lib/fetch-requests/client/fetchSettings';
+import { getDictionary } from '../../../../../get-dictionary';
+import { i18n } from '@i18nConfig';
+import { capitalizeFirstLetter } from 'shared-util';
+import { AlternatesGenerators } from '@lib/alternatesCanonicalGenerator';
 
 type Props = {
-    params: { categoryId: string, lang: string }
+    params: { categoryId: string; lang: string };
     searchParams: {
-        [key: string]: string | string[] | undefined
-        postType?: string,
-        page?: string,
-    }
-}
+        [key: string]: string | string[] | undefined;
+        postType?: string;
+        page?: string;
+    };
+};
+
+const alternatesGenerators = new AlternatesGenerators();
 
 //can be improved by fetching total count of the existing posts
-const postsMetaGenerator = async ({params, searchParams}: Props) => {
-    const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+const postsMetaGenerator = async ({ params, searchParams }: Props) => {
+    const locale = i18n.locales.includes(params?.lang)
+        ? params?.lang
+        : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale);
-    const settingsData = await fetchSettings({requireSettings: ['initialSettings']})
-    const siteName = settingsData?.settings?.initialSettings?.headDataSettings?.siteName || ''
-    const postType = `${capitalizeFirstLetter(searchParams?.postType)}s` || 'posts'
+    const settingsData = await fetchSettings({ requireSettings: ['initialSettings'] });
+    const siteName = settingsData?.settings?.initialSettings?.headDataSettings?.siteName || '';
+    const postType = `${capitalizeFirstLetter(searchParams?.postType)}s` || 'posts';
 
     return {
-        // alternates: {
-        //     canonical: '/posts',
-        //     languages: process.env.NEXT_PUBLIC_LOCALES?.replace(`${process.env.NEXT_PUBLIC_DEFAULT_LOCALE} `,'')
-        //         ?.split(' ').reduce((finalValue:{[key:string]:string},currentLocale)=>{
-        //             finalValue[currentLocale] = `/${currentLocale}/posts`
-        //             return finalValue
-        //         },{}),
-        // },
-        title: `${siteName} | ${dictionary?.[postType] || postType } ${dictionary?.['Page'] || 'Page'} ${searchParams?.page || 1}`
-    }
-}
+        alternates: alternatesGenerators.staticPage(params?.lang, 'posts'),
+        title: `${siteName} | ${dictionary?.[postType] || postType} ${dictionary?.['Page'] || 'Page'} ${searchParams?.page || 1}`,
+    };
+};
 
 export default postsMetaGenerator;

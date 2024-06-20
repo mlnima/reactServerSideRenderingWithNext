@@ -1,12 +1,18 @@
 import type {Metadata, ResolvingMetadata} from 'next'
 import {fetchPost} from "@lib/fetch-requests/client/fetchPosts";
+import {AlternatesGenerators} from "@lib/alternatesCanonicalGenerator";
 
 type Props = {
     params: { identifier: string,lang:string,postType:string }
     searchParams: { [key: string]: string | string[] | undefined }
 }
 
+const alternatesGenerators = new AlternatesGenerators()
+
 const postMetaGenerator = async ({params:{identifier,lang,postType}, searchParams}: Props, parent?: ResolvingMetadata): Promise<Metadata> => {
+
+
+
     const fallbackImage = '/asset/images/default/no-image-available.png'
     const postData = await fetchPost({identifier})
     if (!postData?.post?._id) return {
@@ -18,14 +24,7 @@ const postMetaGenerator = async ({params:{identifier,lang,postType}, searchParam
     const description = descriptionValue.substring(0, 300)
 
     return {
-        // alternates: {
-        //     canonical: `/post/${postType}/${identifier}`,
-        //     languages: process.env.NEXT_PUBLIC_LOCALES?.replace(`${process.env.NEXT_PUBLIC_DEFAULT_LOCALE} `,'')
-        //         ?.split(' ').reduce((finalValue:{[key:string]:string},currentLocale)=>{
-        //             finalValue[currentLocale] = `/${currentLocale}/post/${postType}/${identifier}`
-        //             return finalValue
-        //         },{}),
-        // },
+        alternates: alternatesGenerators.postPage(lang,identifier,postType),
         title,
         description,
         keywords:[...(post.tags || []), ...(post.categories || []), ...(post.actors || [])].map(

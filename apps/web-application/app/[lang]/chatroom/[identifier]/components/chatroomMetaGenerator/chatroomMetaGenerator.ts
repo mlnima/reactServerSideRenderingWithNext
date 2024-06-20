@@ -1,5 +1,6 @@
 import {fetchChatroomData} from "@lib/fetch-requests/client/fetchChatrooms";
 import {capitalizeFirstLetter} from "shared-util";
+import {AlternatesGenerators} from "@lib/alternatesCanonicalGenerator";
 
 interface IProps {
     params: {
@@ -7,19 +8,12 @@ interface IProps {
         identifier: string,
     }
 }
-
+const alternatesGenerators = new AlternatesGenerators()
 const chatroomMetaGenerator = async ({params}: IProps) => {
 
     const chatroomsData = await fetchChatroomData({identifier: params.identifier})
     return {
-        // alternates: {
-        //     canonical: `/chatroom/${params?.identifier}`,
-        //     languages: process.env.NEXT_PUBLIC_LOCALES?.replace(`${process.env.NEXT_PUBLIC_DEFAULT_LOCALE} `,'')
-        //         ?.split(' ').reduce((finalValue:{[key:string]:string},currentLocale)=>{
-        //             finalValue[currentLocale] = `/${currentLocale}/chatroom/${params?.identifier}`
-        //             return finalValue
-        //         },{}),
-        // },
+        alternates: alternatesGenerators.chatroomPage(params?.lang,params.identifier),
         title: chatroomsData?.chatroom?.name ? `${capitalizeFirstLetter(chatroomsData?.chatroom?.name)} Chatroom` : 'Chatroom',
         description: chatroomsData?.chatroom?.description || '',
         keywords: chatroomsData?.chatroom?.tags || '',

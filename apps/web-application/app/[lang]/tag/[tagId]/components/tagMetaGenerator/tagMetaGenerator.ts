@@ -3,12 +3,14 @@ import {fetchPosts} from "@lib/fetch-requests/client/fetchPosts";
 import {fetchSettings} from "@lib/fetch-requests/client/fetchSettings";
 import {textContentReplacer, getTextDataWithTranslation} from "shared-util";
 import {i18n} from "@i18nConfig";
+import {AlternatesGenerators} from "@lib/alternatesCanonicalGenerator";
 
 type Props = {
     params: { tagId: string, lang: string }
     searchParams: { [key: string]: string | string[] | undefined }
 }
 
+const alternatesGenerators = new AlternatesGenerators()
 const tagMetaGenerator = async ({params, searchParams}: Props, parent?: ResolvingMetadata): Promise<Metadata> => {
     const locale = i18n.locales.includes(params?.lang) ? params.lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const settingsData = await fetchSettings({requireSettings: ['tagPageSettings']});
@@ -42,14 +44,7 @@ const tagMetaGenerator = async ({params, searchParams}: Props, parent?: Resolvin
         getTextDataWithTranslation(params?.lang, 'description', postsData?.meta)
 
     return {
-        // alternates: {
-        //     canonical: `/tag/${params?.tagId}`,
-        //     languages: process.env.NEXT_PUBLIC_LOCALES?.replace(`${process.env.NEXT_PUBLIC_DEFAULT_LOCALE} `,'')
-        //         ?.split(' ').reduce((finalValue:{[key:string]:string},currentLocale)=>{
-        //         finalValue[currentLocale] = `/${currentLocale}/tag/${params?.tagId}`
-        //         return finalValue
-        //     },{}),
-        // },
+        alternates: alternatesGenerators.metaPage(params?.lang,'tag',params?.tagId),
         title: pageTitle ?
             textContentReplacer(pageTitle, {
                 name: postsData?.meta?.name,

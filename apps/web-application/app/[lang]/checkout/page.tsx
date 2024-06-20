@@ -3,7 +3,7 @@ import {fetchWidgets} from "@lib/fetch-requests/client/fetchWidgets";
 import MainWidgetArea from "@components/widgets/widgetAreas/MainWidgetArea"
 import {getDictionary} from "../../../get-dictionary";
 import './page.styles.scss';
-import {i18n} from '../../../i18n-config'
+import {i18n} from '@i18nConfig'
 import SidebarWidgetAreaRenderer
     from "@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer";
 

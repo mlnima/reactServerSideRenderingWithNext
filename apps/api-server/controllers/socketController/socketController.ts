@@ -51,7 +51,7 @@ export const initializeSocket = (io: any) => {
         });
 
 
-        socket.on('iAmTyping', (chatroomId, username) => {
+        socket.on('iAmTyping', (chatroomId:string, username:string) => {
             try {
                 socket.broadcast.to(chatroomId).emit('someoneIsTyping', {username, chatroomId});
 
@@ -76,7 +76,8 @@ export const initializeSocket = (io: any) => {
                     savedMessage.chatroom,
                     {
                         $addToSet: {messages: savedMessage._id}
-                    }
+                    },
+                    { timestamps: false }
                 );
 
                 Store.addMessageToChatroom(messageToSetInStoreAndSendToClient)
@@ -128,7 +129,7 @@ export const initializeSocket = (io: any) => {
                 chatroomMessageSchema.findByIdAndDelete(messageId).then(() => {
                     io.in(messageId).emit('messageDeletedFromChatroom');
                 })
-                chatroomSchema.findByIdAndUpdate( chatroomId, {$pull: {messages: messageId}})
+                chatroomSchema.findByIdAndUpdate( chatroomId, {$pull: {messages: messageId}},{ timestamps: false })
                 Store.removeMessageFromChatroom(chatroomId,messageId)
                 io.in(chatroomId).emit('aMessageDeletedFromChatroom', messageId);
             } catch (error) {
