@@ -21,7 +21,8 @@ const productionPublicDirPath = path.join(
 const cleanupOldPublicFolder = async (targetPath: string) => {
     try {
         const files = await fs.readdir(targetPath);
-        const xmlFiles = files.filter(file => path.extname(file) === '.xml');
+        console.log(`files=> `,files)
+        const xmlFiles = files.filter(file => path.extname(file) === '.xml' || file === 'robots.txt' );
 
         const deletePromises = xmlFiles.map(file => {
            return fs.remove(path.join(targetPath, file));
@@ -35,20 +36,22 @@ const cleanupOldPublicFolder = async (targetPath: string) => {
 const generateSitemapsAndStaticAssets = async (req: Request, res: Response) => {
     try {
         await cleanupOldPublicFolder(productionPublicDirPath)
-        await rootSitemapGenerator(productionPublicDirPath);
+
         await searchKeywordsSitemapsGenerator(productionPublicDirPath);
         await metaSitemapGenerator(productionPublicDirPath);
         await pagesSitemapGenerator(productionPublicDirPath);
+        await rootSitemapGenerator(productionPublicDirPath);
+
         // await GenerateSitemapXlsStyle(productionPublicDirPath);
     } catch (e) {
         console.log(`Error while generating sitemap=> `, e);
     }
 
-    try {
-        await robotsTxtGenerator(productionPublicDirPath);
-    } catch (e) {
-        console.log(`Error while generating robots.txt=> `, e);
-    }
+    // try {
+    //     await robotsTxtGenerator(productionPublicDirPath);
+    // } catch (e) {
+    //     console.log(`Error while generating robots.txt=> `, e);
+    // }
 
     try {
         const initialSettings = await settingSchema.findOne({

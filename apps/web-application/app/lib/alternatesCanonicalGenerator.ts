@@ -1,18 +1,11 @@
-import { headers } from 'next/headers';
-
-interface IArg {
-    lang: string;
-}
-
 type LanguageReducer = {
     [key: string]: string;
 };
 
 export class AlternatesGenerators {
-
-    baseUrlPath:string
-    defaultLocale:string
-    locales:string[]
+    baseUrlPath: string;
+    defaultLocale: string;
+    locales: string[];
 
     constructor() {
         this.baseUrlPath = process.env.NEXT_PUBLIC_PRODUCTION_URL;
@@ -61,28 +54,31 @@ export class AlternatesGenerators {
         };
     }
 
-    actorPage(lang: string,actorId: string) {
+    actorPage(lang: string, actorId: string) {
         const targetPath = `/actor/${actorId}`;
         return {
             canonical: `${this.baseCanonicalPathGenerator(lang)}${targetPath}`,
             languages: this.alternatePathReducer(lang, targetPath),
         };
     }
-    metaPage(lang: string,metaType:string,metaId: string) {
+
+    metaPage(lang: string, metaType: string, metaId: string) {
         const targetPath = `/${metaType}/${metaId}`;
         return {
             canonical: `${this.baseCanonicalPathGenerator(lang)}${targetPath}`,
             languages: this.alternatePathReducer(lang, targetPath),
         };
     }
-    metasPage(lang: string,metaType: string) {
+
+    metasPage(lang: string, metaType: string) {
         const targetPath = `/${metaType}`;
         return {
             canonical: `${this.baseCanonicalPathGenerator(lang)}${targetPath}`,
             languages: this.alternatePathReducer(lang, targetPath),
         };
     }
-    chatroomPage(lang: string,chatroomId: string) {
+
+    chatroomPage(lang: string, chatroomId: string) {
         const targetPath = `/chatroom/${chatroomId}`;
         return {
             canonical: `${this.baseCanonicalPathGenerator(lang)}${targetPath}`,
@@ -90,14 +86,15 @@ export class AlternatesGenerators {
         };
     }
 
-    staticPage(lang: string,pageName: string) {
+    staticPage(lang: string, pageName: string) {
         const targetPath = `/${pageName}`;
         return {
             canonical: `${this.baseCanonicalPathGenerator(lang)}${targetPath}`,
             languages: this.alternatePathReducer(lang, targetPath),
         };
     }
-    customPage(lang: string,pageName: string) {
+
+    customPage(lang: string, pageName: string) {
         const targetPath = `/page/${pageName}`;
         return {
             canonical: `${this.baseCanonicalPathGenerator(lang)}${targetPath}`,
@@ -105,7 +102,7 @@ export class AlternatesGenerators {
         };
     }
 
-    searchPage(lang: string,keyword: string) {
+    searchPage(lang: string, keyword: string) {
         const targetPath = `/search/${keyword}`;
         return {
             canonical: `${this.baseCanonicalPathGenerator(lang)}${targetPath}`,
@@ -113,39 +110,3 @@ export class AlternatesGenerators {
         };
     }
 }
-
-// const alternatesCanonicalGenerator = ({ lang }: IArg) => {
-//     const headersList = headers();
-//     const pathname = headersList.get('x-invoke-path') || '';
-//     console.log(`headers=> `, JSON.stringify(headersList));
-//     console.log(`pathname=> `, pathname);
-//
-//     const isDefaultLanguage = lang === process.env.NEXT_PUBLIC_DEFAULT_LOCALE;
-//     const canonicalBase = isDefaultLanguage ? '/' : `/${lang}`;
-//     let siteLanguages = process.env.NEXT_PUBLIC_LOCALES?.split(' ').filter(
-//         language => language !== process.env.NEXT_PUBLIC_DEFAULT_LOCALE,
-//     ) as [];
-//
-//     const alternatesLanguagesList = isDefaultLanguage
-//         ? siteLanguages
-//         : ['', ...siteLanguages].filter(language => language !== lang);
-//
-//     const alternateLanguages = alternatesLanguagesList.reduce(
-//         (
-//             finalValue: {
-//                 [key: string]: string;
-//             },
-//             currentLocale,
-//         ) => {
-//             finalValue[currentLocale] = `/${currentLocale}`;
-//             return finalValue;
-//         },
-//         {},
-//     );
-//
-//     return {
-//         canonical: canonicalBase,
-//         languages: alternateLanguages,
-//     };
-// };
-// export default alternatesCanonicalGenerator;
