@@ -74,8 +74,6 @@ const runServer = () => {
     const wwwDomain =
         baseDomain && new URL(baseDomain).protocol + '//www.' + new URL(baseDomain).hostname;
 
-    console.log(`wwwDomain=> `, wwwDomain);
-    console.log(`baseDomain=> `, baseDomain);
     const allowedOrigins = [baseDomain, wwwDomain].filter(Boolean);
 
     const isDevelopment = process.env.NODE_ENV !== 'production';
