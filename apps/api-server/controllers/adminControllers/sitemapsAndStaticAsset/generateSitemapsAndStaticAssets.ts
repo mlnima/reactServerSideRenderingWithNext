@@ -21,7 +21,6 @@ const productionPublicDirPath = path.join(
 const cleanupOldPublicFolder = async (targetPath: string) => {
     try {
         const files = await fs.readdir(targetPath);
-        console.log(`files=> `,files)
         const xmlFiles = files.filter(file => path.extname(file) === '.xml' || file === 'robots.txt' );
 
         const deletePromises = xmlFiles.map(file => {
