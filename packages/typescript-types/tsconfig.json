@@ -1,9 +1,5 @@
 {
   "extends": "tsconfig/internal-packages.json",
-  "compilerOptions": {
-    "outDir": "dist",
-    "rootDir": "."
-  },
   "exclude": ["node_modules","dist"],
   "include": ["src","src/**/*.ts","src/*.ts"]
 }

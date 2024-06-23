@@ -16,9 +16,7 @@ export const fetchPost = async ({ identifier, revalidate }: IFetchPost) => {
         const queryGeneratorData = mongoIdValidator(identifier)
             ? { _id: identifier }
             : { title: identifier };
-        const _id = queryGeneratorData._id
-            ? { _id: queryGeneratorData._id }
-            : {};
+        const _id = queryGeneratorData._id ? { _id: queryGeneratorData._id } : {};
         const title = queryGeneratorData.title
             ? { title: encodeURIComponent(queryGeneratorData.title) }
             : {};
@@ -39,17 +37,12 @@ export const fetchPost = async ({ identifier, revalidate }: IFetchPost) => {
     }
 };
 
-export const fetchPostViews = async ({
-    identifier,
-    revalidate,
-}: IFetchPost) => {
+export const fetchPostViews = async ({ identifier, revalidate }: IFetchPost) => {
     try {
         const queryGeneratorData = mongoIdValidator(identifier)
             ? { _id: identifier }
             : { title: identifier };
-        const _id = queryGeneratorData._id
-            ? { _id: queryGeneratorData._id }
-            : {};
+        const _id = queryGeneratorData._id ? { _id: queryGeneratorData._id } : {};
         const title = queryGeneratorData.title
             ? { title: encodeURIComponent(queryGeneratorData.title) }
             : {};
@@ -75,33 +68,27 @@ export const fetchPostViews = async ({
     }
 };
 
-export const fetchPostRating = async ({
-    identifier,
-    revalidate,
-}: IFetchPost) => {
+export const fetchPostRating = async ({ identifier, revalidate }: IFetchPost) => {
     try {
         const queryGeneratorData = mongoIdValidator(identifier)
             ? { _id: identifier }
             : { title: identifier };
-        const _id = queryGeneratorData._id
-            ? { _id: queryGeneratorData._id }
-            : {};
+        const _id = queryGeneratorData._id ? { _id: queryGeneratorData._id } : {};
         const title = queryGeneratorData.title
             ? { title: encodeURIComponent(queryGeneratorData.title) }
             : {};
         const queriesDataObject = { ..._id, ...title };
         const queries = `?${new URLSearchParams(queriesDataObject).toString()}`;
 
+        const cacheTags = identifier
+            ? [`${identifier}Rating`, identifier, 'postRating', 'cacheItem']
+            : ['postRating', 'cacheItem'];
+        console.log(`cacheTags=> `, cacheTags);
         const response = await fetch(
             `${APIServerUrl}/api/v1/posts/getPostRating${queries}`,
             config({
                 revalidate,
-                tags: [
-                    `${identifier}Rating`,
-                    identifier,
-                    'postRating',
-                    'cacheItem',
-                ],
+                tags: cacheTags,
             }),
         );
 
@@ -134,10 +121,7 @@ export const fetchPosts = async ({
         const requestParameter = removeEmptyProperties(queryObject);
         const queries = `${new URLSearchParams(requestParameter).toString()}`;
 
-        const requestedFieldsQuery = [
-            ...postFieldRequestForCards,
-            ...(requestedFields || []),
-        ]
+        const requestedFieldsQuery = [...postFieldRequestForCards, ...(requestedFields || [])]
             .map(f => 'field=' + f)
             .join('&');
 
@@ -168,12 +152,7 @@ type IFetchMetasProps = {
     tags?: string[];
 };
 
-export const fetchMetas = async ({
-    queryObject,
-    locale,
-    revalidate,
-    tags,
-}: IFetchMetasProps) => {
+export const fetchMetas = async ({ queryObject, locale, revalidate, tags }: IFetchMetasProps) => {
     try {
         const requestParameter = removeEmptyProperties(queryObject);
         const queries = `?${new URLSearchParams(requestParameter).toString()}`;
@@ -195,11 +174,7 @@ export const fetchMetas = async ({
     }
 };
 
-export const fetchTags = async ({
-    queryObject,
-    revalidate,
-    tags,
-}: IFetchMetasProps) => {
+export const fetchTags = async ({ queryObject, revalidate, tags }: IFetchMetasProps) => {
     try {
         const requestParameter = removeEmptyProperties(queryObject);
         const queries = `${new URLSearchParams(requestParameter).toString()}`;
@@ -223,12 +198,7 @@ export const fetchTags = async ({
 
 //we need to handle pagination
 
-export const fetchSearch = async ({
-    queryObject,
-    locale,
-    revalidate,
-    tags,
-}: IFetchMetasProps) => {
+export const fetchSearch = async ({ queryObject, locale, revalidate, tags }: IFetchMetasProps) => {
     try {
         const requestParameter = removeEmptyProperties(queryObject);
         const queries = `?${new URLSearchParams(requestParameter).toString()}`;
@@ -321,10 +291,7 @@ type IPostNewComment = {
     revalidate?: number | null;
 };
 
-export const postNewComment = async ({
-    commentData,
-    revalidate,
-}: IPostNewComment) => {
+export const postNewComment = async ({ commentData, revalidate }: IPostNewComment) => {
     try {
         const response = await fetch(
             `${APIServerUrl}/api/v1/posts/newComment`,

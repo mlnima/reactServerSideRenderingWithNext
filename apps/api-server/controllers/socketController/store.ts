@@ -32,9 +32,7 @@ class Store {
         }));
     }
 
-    getChatroomById(
-        chatroomId: string,
-    ): { _id: string; messages: Array<any> } | undefined {
+    getChatroomById(chatroomId: string): { _id: string; messages: Array<any> } | undefined {
         return this.chatroomsList.find(chatroom => chatroom._id === chatroomId);
     }
 
@@ -42,6 +40,7 @@ class Store {
         const findChatroom = this.chatroomsList.find(
             chatroom => chatroom._id.toString() === chatroomId,
         );
+        // console.log(`findChatroom?.messages=> `,findChatroom?.messages[findChatroom?.messages.length - 1])
         return findChatroom?.messages;
     }
 
@@ -70,21 +69,20 @@ class Store {
         return userExists;
     }
 
-    setChatroomsList(
-        chatrooms: Array<{ _id: string; name: string; messages: Array<any> }>,
-    ): void {
+    setChatroomsList(chatrooms: Array<{ _id: string; name: string; messages: Array<any> }>): void {
         this.chatroomsList = chatrooms;
     }
 
     addMessageToChatroom(newMessageData): void {
+
         const chatroom = this.chatroomsList.find(
-            chatroom =>
-                chatroom._id.toString() === newMessageData.chatroom.toString(),
+            chatroom => chatroom._id.toString() === newMessageData.chatroom.toString(),
         );
 
         if (!!chatroom?._id) {
             chatroom.messages.push(newMessageData);
         }
+
     }
 
     addActiveSocket(socketId: string, value: any): void {

@@ -82,7 +82,8 @@ const runServer = () => {
         baseDomain &&
         (baseDomain.includes('localhost') ||
             baseDomain.includes(getLocalIP()) ||
-            baseDomain.includes('127.0.0.1'));
+            baseDomain.includes('192.168') ||
+            baseDomain.includes('127.0.0.1'))
 
     const corsOptions = {
         origin: function (origin: string, callback: (arg0: Error, arg1: boolean) => void) {

@@ -2,6 +2,8 @@ import {FC} from "react";
 import parse from 'html-react-parser'
 import './WidgetText.scss'
 import { textContentReplacer } from 'shared-util';
+import {rtlLanguages} from "@repo/data-structures";
+import * as process from "process";
 
 interface TextPropTypes {
     translations: {
@@ -14,9 +16,16 @@ interface TextPropTypes {
 }
 
 const WidgetText: FC<TextPropTypes> = ({translations, text,locale}) => {
-
+//  locale === process.env.NEXT_PUBLIC_DEFAULT_LOCALE
     return (
-        <div className={'widgetText widget-text'} >
+        <div className={'widgetText widget-text'} style={{
+            textAlign: rtlLanguages.includes(locale) &&
+            (
+                rtlLanguages.includes(process.env.NEXT_PUBLIC_DEFAULT_LOCALE) || !!translations?.[locale]?.text
+            )  ?
+                'right' :
+                'left'
+        }} >
             {parse(`${ textContentReplacer(translations?.[locale]?.text || text || '')}`)}
         </div>
     );

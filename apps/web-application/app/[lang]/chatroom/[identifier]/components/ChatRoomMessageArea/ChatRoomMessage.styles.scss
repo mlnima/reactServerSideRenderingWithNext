@@ -11,7 +11,7 @@
 
 
   .chatroomMessageLog{
-    color: var(--primary-text-color);
+    color: var(--secondary-text-color);
     text-align: center;
     word-wrap: break-word;
     padding: 5px;
@@ -41,6 +41,9 @@
       justify-content: space-between;
       color: var(--primary-text-color);
       font-size: small;
+      .messageTimeStamp{
+        font-size: .5rem;
+      }
     }
 
     .chatroomMessageContent{
@@ -55,12 +58,30 @@
         max-width: calc(100% - 30px);
       }
 
+
+
       .chatroomMessageImage {
         margin: auto;
         max-width: 100%;
         height: auto;
         border-radius: 4px;
       }
+
+      .chatroomMessageLargeViewWrapper{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--dim-background-color);
+        z-index: 2;
+      }
+
     }
 
 

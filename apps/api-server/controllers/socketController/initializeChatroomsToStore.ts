@@ -29,7 +29,11 @@ const initializeChatroomsToStore = async () => {
             })
             .exec();
 
-        Store.setChatroomsList(chatrooms);
+        //converting chatrooms data from mongodb doc to object before initializing them into the store
+        const plainChatrooms = chatrooms.map(chatroom => chatroom.toObject());
+
+        //@ts-ignore
+        Store.setChatroomsList(plainChatrooms);
     } catch (error) {
         console.log(`initializeChatroomsToStore Error=> `, error);
     }

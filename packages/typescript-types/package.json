@@ -2,10 +2,9 @@
   "name": "typescript-types",
   "version": "1.0.0",
   "private": true,
-  "main": "dist/src/index.js",
-  "types": "dist/src/index.d.ts",
+  "main": "./index.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "echo 'No build necessary for types package'",
     "dev": "tsc -w",
     "lint": "TIMING=1 eslint \"src/**/*.ts*\"",
     "test": "jest"

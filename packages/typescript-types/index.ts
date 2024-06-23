@@ -1,7 +1,7 @@
 import {AxiosErrorTypes} from "./src/axiosTypes/AxiosErrorTypes";
 import {AxiosResponseTypes} from "./src/axiosTypes/AxiosResponseTypes";
-import {Chatroom,ChatroomRaw} from "./src/Chatroom/Chatroom";
-import {ChatroomMessage} from "./src/Chatroom/ChatroomMessage";
+import {Chatroom,ChatroomRaw} from "./src/chatroom/Chatroom";
+import {ChatroomMessage} from "./src/chatroom/ChatroomMessage";
 import {DesignSettings} from "./src/settings/DesignSettings";
 import {IdentitySettings} from "./src/settings/IdentitySettings";
 import {InitialSettings} from "./src/settings/InitialSettings";
@@ -45,11 +45,13 @@ import {IMessengerConversation} from "./src/messengerTypes/IMessengerConversatio
 import {IMessengerConversationMessage} from "./src/messengerTypes/IMessengerConversationMessage";
 import {MediaConnectionState} from "./src/storeTypes/MediaConnectionState";
 import {IClearCache} from "./src/clearCaches";
+import {ILoadOlderMessages} from "./src/chatroom/socketServer";
 import './src/env'
 import './src/global'
 
 
 export type {
+    ILoadOlderMessages,
     IClearCache,
     MediaConnectionState,
     IMessengerConversation,
