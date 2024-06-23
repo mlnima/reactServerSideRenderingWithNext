@@ -7,6 +7,7 @@ const CategoriesCardsRenderer = dynamic(() => import('@components/cards/CardsRen
 interface IProps {
     uniqueData: {
         metaData?: Meta[],
+        metaType:string,
     },
     metaType:string,
     locale:string,
@@ -15,9 +16,9 @@ interface IProps {
 
 const MetasCardsWidget: FC<IProps> = ({uniqueData,metaType,locale,isSidebar}) =>{
 
-    if (metaType === 'actors'){
+    if (metaType === 'actors' || uniqueData?.metaType === 'actors'){
         return <ActorsCardsRenderer metas={uniqueData?.metaData} isSidebar={isSidebar} locale={locale}/>
-    }else if (metaType === 'categories' ){
+    }else if (metaType === 'categories' || uniqueData?.metaType === 'categories' ){
         return <CategoriesCardsRenderer locale={locale} metas={uniqueData?.metaData}  isSidebar={isSidebar}/>
     }
 
