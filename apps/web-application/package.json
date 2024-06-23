@@ -36,7 +36,7 @@
     "@vercel/og": "^0.5.20",
     "accept-language": "^3.0.18",
     "add-to-calendar-button": "^2.6.16",
-    "axios": "^0.27.2",
+    "axios": "^0.28.0",
     "browser-image-compression": "^2.0.2",
     "compressorjs": "^1.2.1",
     "cross-env": "^7.0.3",

@@ -68,8 +68,10 @@ const generateSitemapsAndStaticAssets = async (req: Request, res: Response) => {
                 responseType: 'arraybuffer',
             });
             if (!!response.data) {
-                await fs.writeFile(
+
+               fs.writeFile(
                     `${productionPublicDirPath}/favicon.ico`,
+                   //@ts-ignore
                     response.data,
                 );
             }
