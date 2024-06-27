@@ -3,7 +3,7 @@ import config from './config'
 
 type fetchChatroomDataArgs = {
     identifier: string,
-    revalidate?: number | null
+    revalidate?: number | undefined
 }
 
 export const fetchChatroomData = async ({identifier, revalidate}: fetchChatroomDataArgs) => {

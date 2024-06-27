@@ -25,7 +25,7 @@ const CategoriesPage = async ({params, searchParams}: IProps) => {
     const settingsData = await fetchSettings({requireSettings: ['categoriesPageSettings']});
     const sidebar = settingsData?.settings?.categoriesPageSettings?.sidebar;
     const initialSettingsData = await fetchSettings({requireSettings: ['initialSettings']})
-    const numberOfCardsPerPage = initialSettingsData?.settings?.initialSettings?.postCardsSettings?.numberOfCardsPerPage;
+    const numberOfCardsPerPage = initialSettingsData?.settings?.initialSettings?.layoutSettings?.numberOfCardsPerPage;
 
     const widgetsData = await fetchWidgets({
         widgets: [

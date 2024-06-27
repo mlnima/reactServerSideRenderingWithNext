@@ -5,7 +5,7 @@
   "main": "./index.ts",
   "scripts": {
     "build": "echo 'No build necessary for types package'",
-    "dev": "tsc -w",
+    "dev": "echo 'No build necessary for types package'",
     "lint": "TIMING=1 eslint \"src/**/*.ts*\"",
     "test": "jest"
   },

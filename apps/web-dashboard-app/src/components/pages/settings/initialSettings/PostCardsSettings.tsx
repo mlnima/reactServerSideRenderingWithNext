@@ -17,27 +17,27 @@ const PostCardsSettings: FC<PropTypes> = ({onChangeHandler,initialSettingsData,o
         <Style className={'setting-section'}>
             <h2>Post Cards Settings:</h2>
             <p>Cards Width in Desktop:</p>
-            <input onChange={e => onChangeHandler(e, 'postCardsSettings')}
+            <input onChange={e => onChangeHandler(e, 'layoutSettings')}
                    name={'cardsWidthDesktop'}
-                   value={initialSettingsData?.postCardsSettings?.cardsWidthDesktop}
+                   value={initialSettingsData?.layoutSettings?.cardsWidthDesktop}
                    className={'primaryInput'}
                    type="number"/>
             <p>Number of cards per page:</p>
-            <input onChange={e => onChangeHandler(e, 'postCardsSettings')}
+            <input onChange={e => onChangeHandler(e, 'layoutSettings')}
                    name={'numberOfCardsPerPage'}
-                   value={initialSettingsData?.postCardsSettings?.numberOfCardsPerPage}
+                   value={initialSettingsData?.layoutSettings?.numberOfCardsPerPage}
                    className={'primaryInput'}
                    type="number"/>
             <p>Number of cards per row In Mobile:</p>
-            <input onChange={e => onChangeHandler(e, 'postCardsSettings')}
+            <input onChange={e => onChangeHandler(e, 'layoutSettings')}
                    name={'numberOfCardsPerRowInMobile'}
-                   value={initialSettingsData?.postCardsSettings?.numberOfCardsPerRowInMobile}
+                   value={initialSettingsData?.layoutSettings?.numberOfCardsPerRowInMobile}
                    className={'primaryInput'}
                    type="number"/>
             <p>Fallback Image Url On Error:</p>
-            <input onChange={e => onChangeHandler(e, 'postCardsSettings')}
+            <input onChange={e => onChangeHandler(e, 'layoutSettings')}
                    name={'fallbackImageUrlOnError'}
-                   value={initialSettingsData?.postCardsSettings?.fallbackImageUrlOnError}
+                   value={initialSettingsData?.layoutSettings?.fallbackImageUrlOnError}
                    className={'primaryInput'}
                    type="number"/>
             {/*<p>Custom Card Backgrounds:</p>*/}
@@ -48,11 +48,11 @@ const PostCardsSettings: FC<PropTypes> = ({onChangeHandler,initialSettingsData,o
             {/*    <MonacoEditor*/}
             {/*        language={'json'}*/}
             {/*        name={'customCardBackgrounds'}*/}
-            {/*        defaultValue={ JSON.stringify(initialSettingsData?.postCardsSettings?.customCardBackgrounds, null, '\t' )}*/}
-            {/*        value={JSON.stringify(initialSettingsData?.postCardsSettings?.customCardBackgrounds, null, '\t')}*/}
+            {/*        defaultValue={ JSON.stringify(initialSettingsData?.layoutSettings?.customCardBackgrounds, null, '\t' )}*/}
+            {/*        value={JSON.stringify(initialSettingsData?.layoutSettings?.customCardBackgrounds, null, '\t')}*/}
             {/*        className={'initialSettings-editor'}*/}
             {/*        //@ts-ignore*/}
-            {/*        onChange={(e: string) => onJsonChangeHandler(e, 'postCardsSettings')}*/}
+            {/*        onChange={(e: string) => onJsonChangeHandler(e, 'layoutSettings')}*/}
             {/*        height={'80vh'}*/}
             {/*    />*/}
             {/*}*/}

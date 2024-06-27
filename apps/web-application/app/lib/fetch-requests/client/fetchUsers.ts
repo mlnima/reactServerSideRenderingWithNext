@@ -4,7 +4,7 @@ import config from './config'
 type IUserPageInitialData = {
     userWhoRequestIt: string;
     username: string;
-    revalidate?:number|null,
+    revalidate?:number | undefined,
     tags?:string[]
 }
 

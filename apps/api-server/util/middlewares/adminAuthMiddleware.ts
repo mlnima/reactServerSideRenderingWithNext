@@ -30,11 +30,15 @@ const adminAuthMiddleware = async (
     }
 
     const user = await userSchema
-        .findById((verifiedToken as JwtPayload)._id)
+        .findById((verifiedToken as JwtPayload)._id,null,{lean:true})
         .exec();
     if (user && user.role === 'administrator') {
-        //@ts-ignore
-        req.userData = verifiedToken;
+
+        req.userData = {
+            //@ts-ignore
+            ...verifiedToken,
+            isAdmin:true
+        };
         next();
     } else {
         return res.status(401).json({

@@ -1,10 +1,11 @@
 import dotenv from 'dotenv';
-import {connectToDatabase} from '@util/database-util';
 import {parentPort} from 'worker_threads';
 import postSchema from "@schemas/postSchema";
+import GlobalStore from "@store/GlobalStore";
+
 
 dotenv.config();
-connectToDatabase().finally();
+GlobalStore.connectToDatabase('Worker').finally();
 
 const worker = async () => {
 

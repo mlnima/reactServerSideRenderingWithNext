@@ -1,5 +1,6 @@
 import path from "path";
 import {promises as fs} from "fs";
+import fsExtra from "fs-extra";
 
 export const renameFile = async (oldPath:string, newBaseName:string) => {
     const ext = path.extname(oldPath);
@@ -26,3 +27,11 @@ export const removeFileExtension = async (fileName:string) => {
         }
     });
 };
+
+export const createFileIfDoesntExist = async (filePath:string)=>{
+    try {
+        await fsExtra.ensureFile(filePath)
+    } catch (err) {
+        console.error(err)
+    }
+}

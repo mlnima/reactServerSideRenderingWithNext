@@ -257,7 +257,7 @@ export const initializeSocket = (io: any) => {
 //
 //         const dataToSend = {
 //             recentChatRoomMessages: recentChatRoomMessages || [],
-//             onlineUsersList: Store.getOnlineUsers(),
+//             onlineUsersList: GlobalStore.getOnlineUsers(),
 //             socketId: socket.id
 //         };
 //

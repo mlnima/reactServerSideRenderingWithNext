@@ -5,7 +5,7 @@ const FileServerAxiosInstance = getAxiosInstance('fileServer');
 
 
 export const clientAPIRequestUploadImage = async (formData: FormData) => {
-    return await AxiosInstance.post(`/files/v1/upload/uploadImage`, formData, {
+    return await AxiosInstance.post(`/api/v1/fileManager/uploadImage`, formData, {
         headers: {
             'Content-Type': 'multipart/form-data',
             Authorization: `Bearer ${localStorage.wt}`,
@@ -15,7 +15,7 @@ export const clientAPIRequestUploadImage = async (formData: FormData) => {
 
 
 export const clientAPIRequestUploadPostImages = async (formData: FormData) => {
-    return await AxiosInstance.post(`/files/v1/upload/uploadPostImages`, formData, {
+    return await AxiosInstance.post(`/api/v1/fileManager/uploadPostImages`, formData, {
         headers: {
             'Content-Type': 'multipart/form-data',
             Authorization: `Bearer ${localStorage.wt}`,
@@ -24,7 +24,7 @@ export const clientAPIRequestUploadPostImages = async (formData: FormData) => {
 }
 
 export const clientAPIRequestUploadProfileImage = async (formData: FormData) => {
-    return await AxiosInstance.post(`/files/v1/upload/uploadProfileImage`, formData, {
+    return await AxiosInstance.post(`/api/v1/fileManager/uploadProfileImage`, formData, {
         headers: {
             'Content-Type': 'multipart/form-data',
             Authorization: `Bearer ${localStorage.wt}`,
@@ -40,7 +40,7 @@ interface IDeletePostImage {
 
 export const clientAPIRequestDeletePostImage = async ({postId, imageId, thumbnailToReplace}: IDeletePostImage) => {
     const queries = new URLSearchParams({postId, imageId, thumbnailToReplace}).toString();
-    return await AxiosInstance.delete(`/files/v1/upload/deletePostImage?${queries}`);
+    return await AxiosInstance.delete(`/api/v1/fileManager/deletePostImage?${queries}`);
 }
 
 interface IDeletePostImages {
@@ -48,7 +48,7 @@ interface IDeletePostImages {
 }
 
 export const clientAPIRequestDeletePostImages = async ({postId}: IDeletePostImages) => {
-    return await AxiosInstance.delete(`/files/v1/upload/deletePostImages?postId=${postId}`);
+    return await AxiosInstance.delete(`/api/v1/fileManager/deletePostImages?postId=${postId}`);
 }
 
 

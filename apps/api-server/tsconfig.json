@@ -10,7 +10,8 @@
       "@_variables/*": ["./_variables/*"],
       "@schemas/*": ["./schemas/*"],
       "@util/*": ["./util/*"],
-      "@env/*": ["../../.env"]
+      "@env/*": ["../../.env"],
+      "@store/*": ["./store/*"]
     },
     "lib": [
       "dom"

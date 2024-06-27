@@ -1,6 +1,7 @@
 export {default as databaseSelectFieldsForPostCards} from './databaseSelectFieldsForPostCards';
 export {default as postFieldRequestForCards} from './postFieldRequestForCards';
 export {default as postTypes} from './postTypes';
+export {default as clientAllowedSortOptions} from './clientAllowedSortOptions';
 export {default as userStatus} from './userStatus';
 export {default as userRoles} from './userRoles';
 export {default as videoQualities} from './videoQualities';

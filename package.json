@@ -30,6 +30,7 @@
     "@types/socket.io": "^3.0.2",
     "franc": "^6.1.0",
     "langmap": "^0.0.16",
+    "qs": "^6.12.1",
     "react-refresh": "^0.11.0"
   },
   "devDependencies": {

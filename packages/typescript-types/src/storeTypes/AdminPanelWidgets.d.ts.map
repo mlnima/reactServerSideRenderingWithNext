@@ -1,1 +1,0 @@
-{"version":3,"file":"AdminPanelWidgets.d.ts","sourceRoot":"","sources":["AdminPanelWidgets.ts"],"names":[],"mappings":"AAAA,OAAO,EAAC,MAAM,EAAC,MAAM,kBAAkB,CAAC;AAExC,MAAM,WAAW,iBAAiB;IAC9B,iBAAiB,EAAE;QACf,CAAC,GAAG,EAAE,MAAM,GAAE,MAAM,EAAE,CAAA;KACzB,CAAA;CACJ"}

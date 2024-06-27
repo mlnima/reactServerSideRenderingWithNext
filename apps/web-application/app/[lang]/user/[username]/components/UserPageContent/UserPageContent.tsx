@@ -167,7 +167,7 @@ const userPageContent: FC<IProps> = ({dictionary, username, locale}) => {
 
                 if (
                     //@ts-ignore
-                    postData?.posts?.length < (initialSettings?.postCardsSettings?.numberOfCardsPerPage || 20) &&
+                    postData?.posts?.length < (initialSettings?.layoutSettings?.numberOfCardsPerPage || 20) &&
                     !noMorePostToFetch
                 ) {
                     setNMoMorePostToFetch(true)

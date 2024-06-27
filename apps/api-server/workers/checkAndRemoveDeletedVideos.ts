@@ -1,13 +1,14 @@
 import dotenv from 'dotenv';
-import {connectToDatabase} from '@util/database-util';
 import {parentPort, workerData} from 'worker_threads';
 
 import axios from 'axios';
 import metaSchema from "@schemas/metaSchema";
 import postSchema from "@schemas/postSchema";
-dotenv.config();
-connectToDatabase()
+import GlobalStore from "@store/GlobalStore";
 
+
+dotenv.config();
+GlobalStore.connectToDatabase('Worker').finally();
 const checkAndRemoveDeletedVideos = async ()=>{
     try {
         await metaSchema.syncIndexes()

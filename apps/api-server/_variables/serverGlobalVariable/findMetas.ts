@@ -19,7 +19,7 @@ export const findMetas = async (query: FindMetasQueryTypes) => {
                   : { name: { $regex: '^' + query.startWith } };
         const countQuery = { count: { $gt: 0 } };
         const limit =
-            global?.initialSettings?.postCardsSettings?.numberOfCardsPerPage ||
+            global?.initialSettings?.layoutSettings?.numberOfCardsPerPage ||
             20;
         const page = query?.page || 1;
         const skip = page ? limit * (page - 1) : 0;

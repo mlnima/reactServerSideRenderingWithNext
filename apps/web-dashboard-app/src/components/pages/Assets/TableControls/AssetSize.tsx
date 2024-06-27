@@ -28,7 +28,7 @@ const AssetSize = () => {
     }
 
     useEffect(() => {
-        setCurrentSize(parseInt(query.size) || initialSettings?.postCardsSettings?.numberOfCardsPerPage || 20 )
+        setCurrentSize(parseInt(query.size) || initialSettings?.layoutSettings?.numberOfCardsPerPage || 20 )
     }, [query]);
 
     return (

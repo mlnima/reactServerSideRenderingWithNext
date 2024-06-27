@@ -26,7 +26,7 @@ const actorsPage = async ({params, searchParams}: IProps) => {
     const settingsData = await fetchSettings({requireSettings: ['actorsPageSettings']});
     const sidebar = settingsData?.settings?.actorsPageSettings?.sidebar;
     const initialSettingsData = await fetchSettings({requireSettings: ['initialSettings']})
-    const numberOfCardsPerPage = initialSettingsData?.settings?.initialSettings?.postCardsSettings?.numberOfCardsPerPage;
+    const numberOfCardsPerPage = initialSettingsData?.settings?.initialSettings?.layoutSettings?.numberOfCardsPerPage;
 
     const widgetsData = await fetchWidgets({
         widgets: [

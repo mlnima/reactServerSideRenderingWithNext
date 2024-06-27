@@ -1,14 +1,22 @@
 import dotenv from 'dotenv';
+import GlobalStore from "@store/GlobalStore";
+
 dotenv.config();
-import {connectToDatabase} from '@util/database-util';
+GlobalStore.connectToDatabase('Worker').finally();
 import postSchema from "@schemas/postSchema";
-connectToDatabase()
-const {Worker, parentPort, workerData} = require('worker_threads');
-const sharp = require('sharp');
-const updateSaveMetas = require("../_variables/adminVariables/_updateSaveMetas");
-const download = require('image-downloader')
-const fsExtra = require("fs-extra");
-const fs = require("fs");
+import {Worker, parentPort, workerData} from 'worker_threads'
+
+import sharp from 'sharp';
+
+// Importing the updateSaveMetas module
+import updateSaveMetas from '@util/_updateSaveMetas';
+
+// Importing the image-downloader library
+import * as download from 'image-downloader';
+
+// Importing fs-extra and fs libraries
+import fsExtra from 'fs-extra';
+import fs from 'fs';
 // const {fileDownloader} = require('@repo/shared-server-util');
 
 const imageDownloader = async (newPost) => {

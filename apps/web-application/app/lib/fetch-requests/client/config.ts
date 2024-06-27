@@ -1,5 +1,5 @@
 interface IConfig {
-    revalidate?: number,
+    revalidate?: number | undefined,
     method?: string,
     cacheOption?: string,
     useWtToken?: boolean,

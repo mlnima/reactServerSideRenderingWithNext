@@ -5,7 +5,7 @@ const APIServerUrl = process.env.NEXT_PUBLIC_API_SERVER_URL;
 interface IFetchWidget{
     widgets:string[],
     locale:string,
-    revalidate?:number|null,
+    revalidate?:number | undefined,
     tags?:string[]
 }
 

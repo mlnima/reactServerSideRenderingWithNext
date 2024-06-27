@@ -16,7 +16,7 @@ const categoryMetaGenerator = async ({params, searchParams}: Props, parent?: Res
     const settingsData = await fetchSettings({requireSettings: ['categoryPageSettings']});
     const fallbackImage = '/asset/images/default/no-image-available.png'
     const initialSettingsData = await fetchSettings({requireSettings: ['initialSettings']})
-    const numberOfCardsPerPage = initialSettingsData?.settings?.initialSettings?.postCardsSettings?.numberOfCardsPerPage;
+    const numberOfCardsPerPage = initialSettingsData?.settings?.initialSettings?.layoutSettings?.numberOfCardsPerPage;
     const currentPageQuery = searchParams?.page;
     const currentPage = (currentPageQuery && typeof currentPageQuery === 'string') ?
         parseInt(currentPageQuery, 10) : 1

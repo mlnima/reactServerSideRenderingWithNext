@@ -1,12 +1,13 @@
 import dotenv from 'dotenv';
-import {connectToDatabase} from '@util/database-util';
 import {parentPort, workerData} from 'worker_threads';
 import postSchema from "@schemas/postSchema";
 import metaSchema from "@schemas/metaSchema";
 import mongoose from 'mongoose';
+import GlobalStore from "@store/GlobalStore";
+
 
 dotenv.config();
-connectToDatabase().finally();
+GlobalStore.connectToDatabase('Worker').finally();
 
 const randomNumberGenerator = (min, max) => {
     return Math.ceil(Math.random() * (max - min) + min);

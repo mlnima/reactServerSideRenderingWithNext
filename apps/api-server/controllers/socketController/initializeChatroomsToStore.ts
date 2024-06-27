@@ -7,7 +7,7 @@ import fileSchema from '@schemas/fileSchema';
 const initializeChatroomsToStore = async () => {
     try {
         const chatrooms = await chatroomSchema
-            .find({})
+            .find({},null,{ leanWithId: true })
             .select(['name', 'messages'])
             .populate({
                 path: 'messages',
@@ -30,10 +30,10 @@ const initializeChatroomsToStore = async () => {
             .exec();
 
         //converting chatrooms data from mongodb doc to object before initializing them into the store
-        const plainChatrooms = chatrooms.map(chatroom => chatroom.toObject());
+        // const plainChatrooms = chatrooms.map(chatroom => chatroom.toObject());
 
         //@ts-ignore
-        Store.setChatroomsList(plainChatrooms);
+        Store.setChatroomsList(chatrooms);
     } catch (error) {
         console.log(`initializeChatroomsToStore Error=> `, error);
     }

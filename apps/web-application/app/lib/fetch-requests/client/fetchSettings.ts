@@ -4,7 +4,7 @@ const APIServerUrl = process.env.NEXT_PUBLIC_API_SERVER_URL;
 
 interface IFetchSettings {
     requireSettings: string[],
-    revalidate?: number | null,
+    revalidate?:number | undefined,
     tags?:string[]
 }
 

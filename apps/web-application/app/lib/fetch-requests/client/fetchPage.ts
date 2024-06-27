@@ -3,7 +3,7 @@ import config from './config'
 
 interface IFetchPage{
     pageName:string,
-    revalidate?:number|null
+    revalidate?:number | undefined
     tags?:string[]
 }
 

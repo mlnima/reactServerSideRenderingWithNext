@@ -1,9 +1,7 @@
 import 'module-alias/register';
 import { register } from 'tsconfig-paths';
 import dotenv from 'dotenv';
-
 dotenv.config({ path: '../.env' });
-
 const baseUrl = __dirname; // usually __dirname
 const cleanup = register({
     baseUrl,
@@ -12,11 +10,10 @@ const cleanup = register({
         '@schemas/*': ['./schemas/*'],
         '@util/*': ['./util/*'],
         '@env/*': ['../../.env'],
+        '@store/*': ['./store/*'],
     },
 });
-
-import { connectToDatabase } from '@util/database-util';
-
+import GlobalStore from "@store/GlobalStore";
 import adminAuthMiddleware from '@util/middlewares/adminAuthMiddleware';
 import { getLocalIP } from '@util/network-util';
 import shouldCompress from '@util/shouldCompress';
@@ -29,28 +26,20 @@ import apiCache from 'apicache';
 import cors from 'cors';
 import compression from 'compression';
 import path from 'path';
-// import mongoose from 'mongoose';
 import http from 'http';
 import cacheSuccesses from './middlewares/apiCache';
-import adminMainRouter from './controllers/adminControllers/adminMainRouter';
-import clientMainRouter from './controllers/clientControllers/clientMainRouter';
-import clientMainFestController from './controllers/clientControllers/clientMainFestController';
-import clientRobotTxtController from './controllers/clientControllers/clientRobotTxtController';
 import loggerMiddleware from './middlewares/loggerMiddleware';
-import clientFileManagerMainRouter from './controllers/fileManagerControllers/clientControllers/fileManagerControllers/clientFileManagerMainRouter';
 import { initializeSocket } from './controllers/socketController/socketController';
 import initializeChatroomsToStore from './controllers/socketController/initializeChatroomsToStore';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import * as process from 'process';
+import rootRouter from "./routers/rootRouter";
 
 // Create an Express application
 const app = express();
 const server = http.createServer(app); // Create an HTTP server
 
 const dev = process.env.NODE_ENV !== 'production';
-
-// mongoose.Promise = global.Promise;
-// mongoose.set('strictQuery', true);
 
 declare global {
     namespace Express {
@@ -59,15 +48,6 @@ declare global {
         }
     }
 }
-
-// export const connectToDatabase = async () => {
-//     try {
-//         await mongoose.connect(mongoDBConnectionQueryGenerator());
-//     } catch (error) {
-//         console.log('Error connecting to Database', error);
-//         process.exit(1);
-//     }
-// };
 
 const runServer = () => {
     const baseDomain = process.env.NEXT_PUBLIC_PRODUCTION_URL;
@@ -120,13 +100,14 @@ const runServer = () => {
         res.json({ message: 'alive' });
     });
 
-    app.get('/robots.txt', (req, res) => clientRobotTxtController(req, res));
     app.get('/alive', (req, res) => res.send('alive'));
-    app.get('/manifest.json', cacheSuccesses, (req, res) => clientMainFestController(req, res));
 
     //----------------- Api routes handler-----------------------
-    app.use('/api/admin', adminMainRouter);
-    app.use('/api/v1', loggerMiddleware, clientMainRouter);
+
+    app.use('/api', rootRouter);
+
+    // app.use('/api/admin', adminMainRouter);
+    // app.use('/api/v1', loggerMiddleware, clientMainRouter);
 
     //----------------- File routes handlers-----------------------
 
@@ -151,7 +132,8 @@ const runServer = () => {
             maxAge: '604800000',
         }),
     );
-    app.use('/files/v1/', clientFileManagerMainRouter);
+
+    // app.use('/files/v1/', clientFileManagerMainRouter);
 
     //----------------- Serving Production Dashboard React App------------------------
     const dashboardAppPath = dev ? '../web-dashboard-app/build' : '../../web-dashboard-app/build';
@@ -176,14 +158,6 @@ const runServer = () => {
         app.get('/', (req, res) => {
             res.redirect(process.env.NEXT_PUBLIC_PRODUCTION_URL);
         });
-
-        // app.get(
-        //     '/',
-        //     createProxyMiddleware({
-        //         target: process.env.NEXT_PUBLIC_PRODUCTION_URL,
-        //         changeOrigin: true,
-        //     }),
-        // );
     }
 
     app.get('/', (req, res) => {});
@@ -191,15 +165,6 @@ const runServer = () => {
         res.sendFile(`${dashboardBuiltPath}/index.html`);
     });
 
-    //-----------------  Setup Socket.IO------------------------
-    // const io = require('socket.io')(server, {
-    //     cors: {
-    //         origin: [process.env.NEXT_PUBLIC_PRODUCTION_URL, '*'],
-    //         methods: ['GET', 'POST'],
-    //         allowedHeaders: ['my-custom-header'],
-    //         credentials: true,
-    //     },
-    // });
     const io = require('socket.io')(server, {
         origin: [process.env.NEXT_PUBLIC_PRODUCTION_URL, '*'],
         cors: true,
@@ -230,7 +195,9 @@ const runServer = () => {
     });
 };
 
-connectToDatabase('API server ').then(() => {
+GlobalStore.connectToDatabase('API server').then(() => {
     runServer();
     initializeChatroomsToStore();
+    GlobalStore.setInitialSettings()
 });
+

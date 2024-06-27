@@ -7,7 +7,7 @@ const APIServerUrl = process.env.NEXT_PUBLIC_API_SERVER_URL;
 
 interface IFetchPost {
     identifier: string;
-    revalidate?: number | null;
+    revalidate?:number | undefined;
     tags?: string[];
 }
 
@@ -106,7 +106,7 @@ type IFetchPostsProps = {
     queryObject: {};
     locale?: string;
     requestedFields?: string[];
-    revalidate?: number | null;
+    revalidate?: number | undefined;
     tags?: string[];
 };
 
@@ -148,7 +148,7 @@ type IFetchMetasProps = {
     queryObject: {};
     locale: string;
     requestedFields?: string[];
-    revalidate?: number | null;
+    revalidate?: number | undefined;
     tags?: string[];
 };
 
@@ -224,7 +224,7 @@ type IFetchUserPagePosts = {
     authorId?: string;
     status: string;
     skip?: number;
-    revalidate?: number | null;
+    revalidate?: number | undefined;
     tags?: string[];
 };
 
@@ -257,7 +257,7 @@ type IFetchComments = {
     onDocument?: string;
     skip?: number;
     limit?: number;
-    revalidate?: number | null;
+    revalidate?: number | undefined;
     tags?: string[];
 };
 
@@ -288,7 +288,7 @@ export const fetchComments = async ({
 
 type IPostNewComment = {
     commentData?: {};
-    revalidate?: number | null;
+    revalidate?: number | undefined;
 };
 
 export const postNewComment = async ({ commentData, revalidate }: IPostNewComment) => {
