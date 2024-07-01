@@ -67,7 +67,7 @@
     "react-datepicker": "^4.25.0",
     "react-draggable": "^4.4.6",
     "react-fontawesome": "^1.7.1",
-    "react-hooker-lib": "*",
+    "@repo/react-hooker-lib": "*",
     "react-images-uploading": "^3.1.7",
     "react-loading-skeleton": "^3.4.0",
     "react-redux": "^8.1.3",

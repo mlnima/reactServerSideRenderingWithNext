@@ -13,34 +13,26 @@ export const dashboardAPIRequestCreateFolder = async (folderName:string,folderPa
 }
 
 export const dashboardAPIRequestDeleteFile = async (filePath:string)=>{
-    return await AxiosInstance.post('/api/admin/fileManager/deleteFile',{filePath,token: localStorage.wt})
+    return await AxiosInstance.post('/api/dashboard/file/delete/file',{filePath,token: localStorage.wt})
 }
 
 export const dashboardAPIRequestReadPath = async (path:string)=>{
-    return await AxiosInstance.post('/api/admin/fileManager/readPath',{path,token: localStorage.wt})
+    return await AxiosInstance.post('/api/dashboard/file/readPath',{path,token: localStorage.wt})
 }
 
 export const dashboardAPIRequestReadTranslationFile = async (path:string)=>{
-    return await AxiosInstance.post('/api/admin/fileManager/readTranslationsFile',{path,token: localStorage.wt})
+    return await AxiosInstance.get('/api/dashboard/file/translationFile',{
+        params:{
+            path
+        }
+    })
 }
 
 export const dashboardAPIRequestUpdateTranslationFile = async (path:string, data:{})=>{
-    return await AxiosInstance.post('/api/admin/fileManager/updateTranslationsFile',{path, data,token: localStorage.wt})
+    return await AxiosInstance.put('/api/dashboard/file/translationFile',{path, data,token: localStorage.wt})
 }
 
 export const dashboardAPIRequestUploadFile = async (file:File)=>{
-    return await AxiosInstance.post('/api/admin/fileManager/uploadFile',file)
+    return await AxiosInstance.post('/api/dashboard/file/upload/file',file)
 }
 
-//** did not find any usage
-// const deleteFiles = async (ids) => {
-//     const params = new URLSearchParams({ids: ids.join(',')});
-//     return await AxiosInstance.delete('/files/admin/fileManager/deleteFile', {
-//             params,
-//             headers: {
-//                 'Content-Type': 'multipart/form-data',
-//                 Authorization: `Bearer ${localStorage.wt}`,
-//             },
-//         }
-//     )
-// }

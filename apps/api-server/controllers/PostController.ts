@@ -94,30 +94,6 @@ class PostController {
         }
     }
 
-    static async findDuplicateMetas() {
-        try {
-            const duplicates = await metaSchema.aggregate([
-                {
-                    $group: {
-                        _id: { name: '$name', type: '$type' },
-                        ids: { $push: '$_id' },
-                        count: { $sum: 1 },
-                    },
-                },
-                {
-                    $match: {
-                        count: { $gt: 1 },
-                    },
-                },
-            ]);
-
-            return duplicates;
-        } catch (err) {
-            console.error('Error while finding duplicates:', err);
-            return null;
-        }
-    }
-
     static async findPostsWithDuplicatedMeta(duplicate: any[]) {
         try {
             let metasWithCount = [];
@@ -218,7 +194,47 @@ class PostController {
         }
     }
 
-    static async getPostViews(req: Request, res: Response) {
+    static async getEditingPost(req: Request, res: Response) {
+        try {
+            const findQuery = PostController.findPostQueryGenerator(req);
+
+            if (findQuery) {
+                const post = await postSchema
+                    .findOne(findQuery, '-comments')
+                    .populate([
+                        {
+                            path: 'author',
+                            select: ['username', 'profileImage', 'role'],
+                            populate: { path: 'profileImage', model: 'file' },
+                        },
+                        { path: 'categories', select: { name: 1, type: 1 } },
+                        { path: 'images', select: { filePath: 1 }, model: 'file' },
+                        { path: 'tags', select: { name: 1, type: 1 } },
+                        { path: 'actors', select: { name: 1, type: 1, imageUrl: 1 } },
+                        // {
+                        //     path: 'uniqueData.attenders',
+                        //     select: { username: 1, profileImage: 1, role: 1 },
+                        // },
+                    ])
+                    .exec();
+
+                if (post) {
+                    res.json({
+                        post,
+                    });
+                } else {
+                    res.status(404).json({ message: 'not found' });
+                }
+            } else {
+                res.status(404).json({ message: 'not found' });
+            }
+        } catch (err) {
+            console.error(err, 'get post error');
+            res.status(500).json({ message: 'Something went wrong please try again later' });
+        }
+    }
+
+    static async getPostView(req: Request, res: Response) {
         try {
             const findQuery = PostController.findPostQueryGenerator(req);
 
@@ -344,7 +360,7 @@ class PostController {
         }
     }
 
-    static async getSearch(req: Request, res: Response) {
+    static async searchPosts(req: Request, res: Response) {
         if (!req.query.keyword) {
             res.status(400).json({ message: 'Bad Request' });
             return;
@@ -422,65 +438,27 @@ class PostController {
         }
     }
 
-    static async getEditingPost(req: Request, res: Response) {
+    static async deletePost(req: Request, res: Response) {
         try {
-            const findQuery = PostController.findPostQueryGenerator(req);
-
-            if (findQuery) {
-                const post = await postSchema
-                    .findOne(findQuery, '-comments')
-                    .populate([
-                        {
-                            path: 'author',
-                            select: ['username', 'profileImage', 'role'],
-                            populate: { path: 'profileImage', model: 'file' },
-                        },
-                        { path: 'categories', select: { name: 1, type: 1 } },
-                        { path: 'images', select: { filePath: 1 }, model: 'file' },
-                        { path: 'tags', select: { name: 1, type: 1 } },
-                        { path: 'actors', select: { name: 1, type: 1, imageUrl: 1 } },
-                        {
-                            path: 'uniqueData.attenders',
-                            select: { username: 1, profileImage: 1, role: 1 },
-                        },
-                    ])
-                    .exec();
-
-                if (post) {
-                    res.json({
-                        post,
-                    });
-                } else {
-                    res.status(404).json({ message: 'not found' });
-                }
-            } else {
-                res.status(404).json({ message: 'not found' });
-            }
-        } catch (err) {
-            console.error(err, 'get post error');
-            res.status(500).json({ message: 'Something went wrong please try again later' });
-        }
-    }
-
-    static async deletePostByAuthor(req: Request, res: Response) {
-        try {
-            if (!req.query.postId) {
+            if (!req.query._id) {
                 return res.status(400).json({
                     message: 'Bad Request',
                 });
             }
 
             const userData = req.userData;
-            const postId = req.query.postId;
+            const _id = req.query._id;
 
-            const postData = await postSchema.findById(postId).select('author').exec();
-            if (postData.author.toString() !== userData._id.toString()) {
+            const postData = await postSchema.findById(_id).select('author').lean().exec();
+
+
+            if (postData.author !== userData._id) {
                 return res.status(401).json({
                     message: 'Unauthorized',
                 });
             }
 
-            await postSchema.findByIdAndDelete(postId).exec();
+            await postSchema.findByIdAndDelete(_id).exec();
             await userSchema
                 .findByIdAndUpdate(req.userData._id, { $unset: { draftPost: 1 } })
                 .exec();
@@ -510,7 +488,7 @@ class PostController {
             });
     }
 
-    static async likeDislikePost(req: Request, res: Response) {
+    static async likeDislike(req: Request, res: Response) {
         try {
             const userId = req.userData._id;
             const postId = new mongoose.Types.ObjectId(req.body._id);
@@ -563,207 +541,26 @@ class PostController {
         }
     }
 
-    static async newComment(req: Request, res: Response) {
-        try {
-            const commentData = {
-                body: req.body.commentData?.body,
-                onDocumentId: new mongoose.Types.ObjectId(req.body.commentData?.onDocumentId),
-                author: new mongoose.Types.ObjectId(req.body.commentData?.author),
-            };
 
-            const commentDataToSave = new commentSchema(commentData);
 
-            const savedComment = await commentDataToSave.save();
 
-            if (!savedComment) {
-                return res.status(500).json({ message: 'Comment not saved', type: 'error' });
-            }
 
-            await postSchema
-                .findByIdAndUpdate(
-                    req.body.onDocumentId,
-                    { $push: { comments: [savedComment._id] } },
-                    { new: true },
-                )
-                .exec();
 
-            res.json({ savedComment });
-        } catch (error) {
-            console.error('Error:', error);
-            res.status(500).json({ message: 'Server Error', type: 'error' });
-        }
-    }
-
-    static async resetMetaImage(req: Request, res: Response) {
-        try {
-            const metaId = req.body._id;
-            const metaDocument = await metaSchema.findById(metaId).exec();
-            const metaCount = await postSchema
-                .countDocuments({
-                    $and: [{ [metaDocument.type]: metaDocument._id }, { status: 'published' }],
-                })
-                .exec();
-            const randomSkip = randomNumberGenerator(1, metaCount);
-
-            if (!isEmptyObject(metaDocument) && !metaDocument?.imageUrlLock) {
-                const findPostWithSameMeta = await postSchema
-                    .findOne({
-                        $and: [{ [metaDocument.type]: metaDocument._id }, { status: 'published' }],
-                    })
-                    .skip(randomSkip)
-                    .exec();
-                if (findPostWithSameMeta) {
-                    await metaSchema
-                        .findByIdAndUpdate(
-                            metaId,
-                            { imageUrl: findPostWithSameMeta.mainThumbnail },
-                            { new: true },
-                        )
-                        .exec()
-                        .then(updatedMeta => {
-                            res.json({ newImageUrl: updatedMeta.imageUrl });
-                        })
-                        .catch(err => {
-                            console.log(err);
-                            res.end();
-                        });
-                } else {
-                    res.end();
-                }
-            } else {
-                res.json({ newImageUrl: metaDocument?.imageUrl });
-            }
-        } catch (err) {
-            console.log(err);
-            res.end();
-        }
-    }
-
-    static async getMetas(req: Request, res: Response) {
-        try {
-            const page = parseInt(req.query.page as string) || 1;
-            const resultMetaFindQueries = await findMetas({ ...req.query, page });
-
-            res.json({ ...resultMetaFindQueries });
-        } catch (err) {
-            console.error(err);
-            res.sendStatus(500);
-        }
-    }
-
-    static async getMeta(req: Request, res: Response) {
-        try {
-            await metaSchema
-                .findById(req.query.id)
-                .exec()
-                .then(meta => {
-                    if (meta) {
-                        res.json({ meta });
-                    } else {
-                        res.status(404).json({ message: 'Not Found' });
-                    }
-                })
-                .catch(err => {
-                    res.status(400).json({ message: 'Bad Request' });
-                });
-        } catch (err) {
-            res.status(500).json({ message: 'Server Error' });
-        }
-    }
-
-    static async getTags(req: Request, res: Response) {
-        try {
-            const statusQuery = { status: 'published' };
-            const startWithNumberRegex = /^[0-9]/g;
-
-            const startWithQuery = !req.query.startWith
-                ? {}
-                : req.query.startWith === 'other'
-                  ? { name: { $regex: startWithNumberRegex } }
-                  : { name: { $regex: '^' + req.query.startWith } };
-
-            const countQuery = { count: { $gt: 0 } };
-            const type = { type: 'tags' };
-
-            const sortQuery = !req.query.sort
-                ? {
-                      // 'rank': 1,
-                      count: -1,
-                  }
-                : { [req.query?.sort as string]: -1 };
-
-            if (req.query.startWith) {
-                const findQuery = {
-                    $and: [type, startWithQuery, statusQuery, countQuery],
-                };
-                const metas = await metaSchema
-                    .find(findQuery, {}, { sort: sortQuery })
-                    .select('name type')
-                    .exec();
-
-                res.status(200).json({ metas });
-            } else {
-                const findQuery = { $and: [type, statusQuery, countQuery] };
-                const metas = await metaSchema
-                    .find(findQuery, {}, { sort: sortQuery })
-                    .limit(500)
-                    .select('name type')
-                    .exec();
-
-                res.status(200).json({ metas });
-            }
-        } catch (err) {
-            console.log(err);
-            res.end();
-        }
-    }
-
-    static async getComments(req: Request, res: Response) {
-        try {
-            const onDocument = req.query?.onDocument ? { onDocumentId: req.query.onDocument } : {};
-            const skip = req.query?.skip ? parseInt(req.query.skip) : 0;
-            const limit = req.query?.limit ? parseInt(req.query.limit) : 0;
-
-            if (mongoIdValidator && req.query?.onDocument) {
-                await commentSchema
-                    .find(onDocument, {}, { sort: { createdAt: -1 } })
-                    .populate([
-                        {
-                            path: 'author',
-                            select: ['username', 'profileImage'],
-                            populate: {
-                                path: 'profileImage',
-                                model: 'file',
-                            },
-                        },
-                    ])
-                    .skip(skip)
-                    .limit(limit)
-                    .exec()
-                    .then(comments => {
-                        res.json({ comments });
-                    });
-            } else {
-                res.status(500).json({ message: 'Request Is Invalid' });
-            }
-        } catch (err) {
-            res.status(500).json({ message: 'Something Went Wrong' });
-        }
-    }
 
     static async newPost(req: Request, res: Response) {
         try {
             const userData = await userSchema.findById(req.userData._id).select('draftPost').exec();
-            const unFinishedPostsCount = await postSchema
-                .countDocuments({
-                    $and: [
-                        { $or: [{ $ne: { status: 'published' } }, { $ne: { status: 'trash' } }] },
-                        { author: req.userData._id },
-                    ],
-                })
-                .exec();
 
-            console.log('unFinishedPostsCount=> ', unFinishedPostsCount);
+
+            // const unFinishedPostsCount = await postSchema
+            //     .countDocuments({
+            //         $and: [
+            //             { $or: [{ $ne: { status: 'published' } }, { $ne: { status: 'trash' } }] },
+            //             { author: req.userData._id },
+            //         ],
+            //     })
+            //     .exec();
+
 
             if (userData?.draftPost) {
                 res.json({
@@ -803,7 +600,7 @@ class PostController {
 
     static async MetaSuggestion(req: Request, res: Response) {
         try {
-            const type = { type: req.query?.metaType };
+            const type = { type: req.query?.type };
             const statusQuery = { status: 'published' };
             const size = 10;
             const startWithQuery =
@@ -984,22 +781,9 @@ class PostController {
         }
     }
 
-    static async dashboardDeletePost(req: Request, res: Response) {
-        const _id = req.body._id;
-        postSchema
-            .findByIdAndDelete(_id)
-            .then(() => {
-                res.json({ message: `${_id} Deleted Permanently`, error: false });
-            })
-            .catch(() => {
-                res.json({
-                    message: `Can Not Delete ${_id} Something Went Wrong`,
-                    error: true,
-                });
-            });
-    }
 
-    static async dashboardPostsBulkAction(req: Request, res: Response) {
+
+    static async dashboardUpdatePosts(req: Request, res: Response) {
         const ids = req.body.ids || [];
         const status = req.body.status;
         let actions;
@@ -1109,148 +893,6 @@ class PostController {
             });
     }
 
-    static async dashboardUpdateMeta(req: Request, res: Response) {
-        try {
-            const metaData = req.body.data;
-
-            if (!metaData) {
-                return res.status(400).json({ message: 'No meta data provided' });
-            }
-
-            if (metaData._id) {
-                await metaSchema.syncIndexes();
-                try {
-                    const updatedMeta = await metaSchema
-                        .findByIdAndUpdate(metaData._id, { ...metaData }, { new: true })
-                        .exec();
-
-                    return res.json({ updated: updatedMeta, message: 'updated' });
-                } catch (err) {
-                    console.error('Error While Trying To Update Meta:', err);
-                    return res
-                        .status(500)
-                        .json({ message: 'Error While Trying To Update Meta', error: err });
-                }
-            } else {
-                try {
-                    const metaToSave = new metaSchema(metaData);
-                    const savedMeta = await metaToSave.save();
-                    return res.json({ updated: savedMeta, message: 'updated' });
-                } catch (err) {
-                    console.error('Error While Trying To Save Meta:', err);
-                    return res
-                        .status(500)
-                        .json({ message: 'Error While Trying To Save Meta', error: err });
-                }
-            }
-        } catch (error) {
-            console.error('General Error:', error);
-            return res.status(500).json({ message: 'An unexpected error occurred', error });
-        }
-    }
-
-    static async dashboardSyncDuplicateMetas(req: Request, res: Response) {
-        try {
-            const duplicates = await PostController.findDuplicateMetas();
-
-            for await (const duplicate of duplicates) {
-                await PostController.findPostsWithDuplicatedMeta(duplicate);
-            }
-
-            res.end();
-        } catch (error) {
-            res.end();
-        }
-    }
-
-    static async dashboardDeleteMeta(req: Request, res: Response) {
-        const _id = req.body._id;
-        metaSchema
-            .findByIdAndDelete(_id)
-            .exec()
-            .then(() => {
-                res.json({ message: 'deleted' });
-            })
-            .catch(err => {
-                res.status(500).json({ message: 'Can Not Delete', err });
-            });
-    }
-
-    static async dashboardUpdateComment(req: Request, res: Response) {
-        commentSchema
-            .findByIdAndUpdate(req.body._id, req.body.update, { new: true })
-            .exec()
-            .then(updated => {
-                res.end();
-            });
-    }
-
-    static async dashboardDeleteComments(req: Request, res: Response) {
-        const commentsIds = req.body.commentsIds || [];
-
-        const mapIdAndReturnDeletePromise = commentsIds.map(commentId => {
-            return commentSchema.findByIdAndDelete(commentId, { useFindAndModify: false }).exec();
-        });
-
-        Promise.all(mapIdAndReturnDeletePromise)
-            .then(() => {
-                res.json({ message: 'Comments Deleted' });
-            })
-            .catch(err => {
-                res.status(500).send({
-                    message: 'Something Went Wrong While Deleting Comments',
-                    err,
-                });
-            });
-    }
-
-    static async dashboardGetComments(req: Request, res: Response) {
-        try {
-            const size = req.query.size
-                ? parseInt(req.query.size) > 50
-                    ? 50
-                    : parseInt(req.query.size)
-                : 40;
-            const page = req.query.page ? parseInt(req.query.page) : 1;
-            const onDocument = req.query.onDocument ? { onDocumentId: req.query.onDocument } : {};
-            const status =
-                !req.query.status || req.query.status === 'all'
-                    ? { status: 'approved' }
-                    : { status: req.query.status };
-            const sortQuery =
-                req.query.sort === 'latest' || !req.query.sort
-                    ? { _id: -1 }
-                    : { [req.query.sort]: -1 };
-            const searchQuery = !req.query.keyword
-                ? {}
-                : {
-                      $or: [
-                          { author: new RegExp(req.query.keyword, 'i') },
-                          { body: new RegExp(req.query.keyword, 'i') },
-                          { email: new RegExp(req.query.keyword, 'i') },
-                      ],
-                  };
-
-            const comments = await commentSchema
-                .find({ $and: [onDocument, status, searchQuery] })
-                .skip(size * (page - 1))
-                .limit(size)
-                // @ts-ignore
-                .sort(sortQuery)
-                // .populate({$and:['author','onDocumentId']})
-                .populate([
-                    { path: 'author', select: { username: 1 } },
-                    { path: 'onDocumentId', select: { title: 1, postType: 1 } },
-                ])
-                .exec();
-            const totalCount = await commentSchema
-                .countDocuments({ $and: [onDocument, status, searchQuery] })
-                .exec();
-
-            res.json({ comments, totalCount });
-        } catch (error) {}
-    }
-
     static async dashboardGetPost(req: Request, res: Response) {
         const _id = req.query._id;
         try {
@@ -1339,80 +981,6 @@ class PostController {
         }
     };
 
-    static async dashboardGetMeta(req: Request, res: Response){
-        try {
-            const validateId = req.query._id ? mongoose.isValidObjectId(req.query._id) && req.query._id?.match(/^[0-9a-fA-F]{24}$/) : false;
-            if (validateId) {
-                await metaSchema.findById(req.query._id).exec().then(meta => {
-                    if (meta) {
-                        res.json({meta})
-                    } else {
-                        res.status(404).json({message: 'Not Found'})
-                    }
-
-                }).catch(err => {
-                    console.log(err.stack)
-                    res.status(400).json({message: 'Bad Request'})
-                })
-            } else {
-                res.status(404).json({message: 'Not Found'})
-            }
-        } catch (err) {
-            console.log(err.stack)
-            res.status(500).json({message: 'Server Error'})
-        }
-    }
-
-    static async dashboardGetMetas(req: Request, res: Response){
-        try {
-
-            const type = {type: req.query?.metaType}
-
-            const size = !req.query.size ? (global?.initialSettings?.layoutSettings?.numberOfCardsPerPage || 20) : parseInt(req.query.size)
-
-            const statusQuery = req.query.status === 'all' ? {status: {$ne: 'trash'}} : !req.query.status ? {} : {status: req.query.status};
-            const page = (req.query.page === 'undefined' || !req.query.page) ? 1 : parseInt(req.query.page);
-
-            const startWithQuery = req.query?.startWith === 'any' || !req.query?.startWith ? {} : {
-                name: {
-                    $regex: '^' + req.query?.startWith,
-                    $options: 'i'
-                }
-            }
-            const countQuery = {}
-            const searchQuery = req.query.keyword === '' || !req.query.keyword ? {} :
-                !req.query.lang || req.query.lang === 'default' ? {$or: [{name: new RegExp(req.query.keyword, 'i')}, {description: new RegExp(req.query.keyword, 'i')}]} :
-                    {
-                        $or: [
-                            {name: new RegExp(req.query.keyword, 'i')},
-                            {description: new RegExp(req.query.keyword, 'i')},
-                            {[`translations.${req.query.lang}.name`]: new RegExp(req.query.keyword, 'i')},
-                            {[`translations.${req.query.lang}.description`]: new RegExp(req.query.keyword, 'i')},]
-                    }
-
-            // let sortQuery = !req.query.sort ? {} : req.query.sort ? req.query.sort : {[req.query.sort]: -1}
-            let sortQuery = req.query.sort ? {[req.query.sort]: -1} : {updatedAt: -1}
-
-            const metaCount = await metaSchema.countDocuments({$and: [type, searchQuery, startWithQuery, statusQuery, countQuery]}).exec()
-
-            await metaSchema.find({$and: [type, searchQuery, startWithQuery, statusQuery, countQuery]}, {}, {sort: req.query.sort === 'createdAt' || !req.query.sort ? {} : {[req.query.sort]: -1}})
-                .limit(size)
-                .skip(size * (page - 1))
-                //@ts-ignore
-                .sort(sortQuery)
-                .exec()
-                .then(async metas => {
-                    res.json({metas, totalCount: metaCount})
-                }).catch(err => {
-                    console.log(err)
-                    res.end()
-                })
-        } catch (err) {
-            console.log(err)
-        }
-
-    }
-
     static async dashboardCheckAndRemoveDeletedVideos(req: Request, res: Response){
         res.end()
         if (isMainThread){
@@ -1435,41 +1003,6 @@ class PostController {
         }else{
             parentPort.on("message", (commandFromMainThread) => {
                 if (commandFromMainThread.exit) {
-                    process.exit(0);
-                }
-            });
-        }
-    }
-
-    static async dashboardSetMetaThumbnailsAndCount(req: Request, res: Response){
-        res.end()
-        if (isMainThread){
-            const workerPath = path.join(__dirname,'../../../workers/setMetaThumbnailsAndCount/worker.js') ;
-            const worker = new Worker(
-                workerPath,
-                {
-                    workerData:{
-                        type:req.query.type
-                    }
-                }
-            )
-
-            worker.once('message',() =>{
-                worker.postMessage({ exit: true })
-            })
-
-            worker.on('error', error => {
-                console.log('error:',error);
-            });
-
-            worker.on('exit', exitCode => {
-                console.log('exitCode : ',exitCode);
-            })
-        }else{
-
-            parentPort.on("message", (commandFromMainThread) => {
-                if (commandFromMainThread.exit) {
-                    console.log('terminating thread')
                     process.exit(0);
                 }
             });
@@ -1509,7 +1042,7 @@ class PostController {
         }
     }
 
-    static async dashboardCreateNewPostByApi(req: Request, res: Response){
+    static async apiNewPost(req: Request, res: Response){
         try {
             const newPost = req.body.postData
             const hasDuplicate = await postSchema.exists({title: newPost.title})
@@ -1534,7 +1067,7 @@ class PostController {
         }
     }
 
-    static async dashboardUpdatePostByApi(req: Request, res: Response){
+    static async  apiUpdatePost(req: Request, res: Response){
         try {
             const updatedPostData = req.body.updatedPostData
             postSchema.findByIdAndUpdate(updatedPostData._id, updatedPostData).exec().then(() => {
@@ -1546,7 +1079,7 @@ class PostController {
         }
     }
 
-    static async dashboardUpdateMetaByApi(req: Request, res: Response){
+    static async apiUpdateMeta(req: Request, res: Response){
         try {
             const metaData = req.body.metaData;
             const findQuery = {$and:[{name: metaData.name},{type: metaData.type}]}
@@ -1582,3 +1115,20 @@ class PostController {
 }
 
 export default PostController;
+
+
+
+// static async dashboardDeletePost(req: Request, res: Response) {
+//     const _id = req.body._id;
+//     postSchema
+//         .findByIdAndDelete(_id)
+//         .then(() => {
+//             res.json({ message: `${_id} Deleted Permanently`, error: false });
+//         })
+//         .catch(() => {
+//             res.json({
+//                 message: `Can Not Delete ${_id} Something Went Wrong`,
+//                 error: true,
+//             });
+//         });
+// }

@@ -1,14 +1,14 @@
 import AxiosInstance from "../lib/AxiosInstance";
 
-
-
 export const dashboardAPIRequestGetComments = async (queriesData:string)=>{
-    return await AxiosInstance.get(`/api/admin/posts/getComments${queriesData}&token=${localStorage.wt}`)
+    return await AxiosInstance.get(`/api/dashboard/comment${queriesData}`)
 }
 
-export const  dashboardAPIRequestDeleteComments = async (commentsIds:string)=>{
-    return await AxiosInstance.post(`/api/admin/posts/deleteComments`, {
-        commentsIds: commentsIds,
-        token: localStorage.wt
-    })
+export const  dashboardAPIRequestDeleteComments = async (commentsIds:string[])=>{
+    const ids = commentsIds.join(',');
+    return await AxiosInstance.delete(`/api/dashboard/comment`, {
+        params: {
+            commentsIds: ids
+        }
+    });
 }

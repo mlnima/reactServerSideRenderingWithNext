@@ -1,10 +1,17 @@
 import AxiosInstance from "../lib/AxiosInstance";
 
-export const dashboardAPIRequestBackupMetas  = async (data:any)=>{
-    return await AxiosInstance.post(`/api/admin/backups/metas`,{
-        token:localStorage.wt,
-        ...data
-    },{
-        responseType:'blob'
-    })
+interface IProps{
+    metaType : string,
+    fields:string[],
+    limit:number
 }
+export const dashboardAPIRequestBackupMetas = async ({ metaType, fields, limit }:IProps) => {
+    return await AxiosInstance.get(`/api/dashboard/backups/metas`, {
+        responseType: 'blob',
+        params: {
+            metaType,
+            fields,
+            limit
+        },
+    });
+};

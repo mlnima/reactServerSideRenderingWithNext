@@ -10,7 +10,7 @@ export const postFormData =  async ({formDataToPost, revalidate}: IPostFormData)
     try {
 
         const response = await fetch(
-            `${APIServerUrl}/api/v1/forms/saveFormData`,
+            `${APIServerUrl}/api/v1/form`,
             config({revalidate, method: 'POST', body: {data: formDataToPost}})
         );
         if (!response.ok) {

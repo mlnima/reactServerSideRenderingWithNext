@@ -8,7 +8,7 @@
     "apps/*"
   ],
   "scripts": {
-    "dev": "dotenv -- turbo run dev",
+    "dev": "dotenv -- turbo run dev --log-order=stream",
     "start": "dotenv -- concurrently  \"npm run start:api-server\" \"npm run start:web-application\" ",
     "build": "dotenv -- turbo run build",
     "delete-cache": "rmdir /s /q node_modules\\.cache\\turbo",
@@ -87,10 +87,11 @@
     "tsconfig-paths": "^4.2.0",
     "tscpaths": "^0.0.9",
     "tslib": "^2.5.0",
-    "turbo": "^1.13.3",
+    "turbo": "^2.0.5",
     "typescript": "^5.4.5"
   },
   "globalDependencies": [
     ".env"
-  ]
+  ],
+  "packageManager": "npm@10.2.3"
 }

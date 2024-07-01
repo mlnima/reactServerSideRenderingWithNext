@@ -54,6 +54,7 @@ const RootLayout = async ({
         ? lang
         : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale);
+
     const initialSettingsData = await fetchSettings({
         requireSettings: ['initialSettings'],
     });

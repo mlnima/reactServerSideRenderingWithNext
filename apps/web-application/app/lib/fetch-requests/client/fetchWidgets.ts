@@ -14,7 +14,7 @@ export const fetchWidgets = async ({widgets, locale, revalidate, tags}:IFetchWid
         const widgetsQuery= `?${locale ? `&locale=${locale}` : ''}&${widgets.map(s => 'widget=' + s).join('&')}`
 
         const response = await fetch(
-            `${APIServerUrl}/api/v1/widgets/getWidgets${widgetsQuery}`,
+            `${APIServerUrl}/api/v1/widget${widgetsQuery}`,
             config({revalidate,tags:[...(tags || []),'cacheItem','widgets']})
         );
 
@@ -35,7 +35,7 @@ export const fetchWidgets = async ({widgets, locale, revalidate, tags}:IFetchWid
 //         const widgetsQuery= `?${locale ? `&locale=${locale}` : ''}&${widgets.map(s => 'widget=' + s).join('&')}`
 //
 //         const response = await fetch(
-//             `${APIServerUrl}/api/v1/widgets/getWidgets${widgetsQuery}`,
+//             `${APIServerUrl}/api/v1/widget${widgetsQuery}`,
 //             config({revalidate,tags:[...(tags || []),'cacheItem','widgets']})
 //         );
 //

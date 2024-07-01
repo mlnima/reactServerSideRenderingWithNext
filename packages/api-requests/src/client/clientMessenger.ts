@@ -1,10 +1,8 @@
 import AxiosInstance from "../lib/AxiosInstance";
 
-export const clientAPIRequestGetAConversation = async ({conversationId}: {
-    conversationId: string
-}): Promise<void> => {
-    return await AxiosInstance.get(`/api/v1/messenger/getAConversation`, {
-        params: {conversationId}
+export const clientAPIRequestGetAConversation = async (_id:string): Promise<void> => {
+    return await AxiosInstance.get(`/api/v1/messenger/conversation`, {
+        params: {_id}
     });
 };
 
@@ -13,7 +11,7 @@ export const clientAPIRequestGetConversationsList = async ({limit, skip}: {
     skip?: number
 }): Promise<void> => {
 
-    return await AxiosInstance.get(`/api/v1/messenger/getConversationsList`, {
+    return await AxiosInstance.get(`/api/v1/messenger/conversations`, {
         params: {
             limit,
             skip
@@ -27,7 +25,7 @@ export const clientAPIRequestLoadOlderMessages = async ({limit, skip, conversati
     conversationId: string
 }): Promise<void> => {
 
-    return await AxiosInstance.get(`/api/v1/messenger/loadOlderMessages`, {
+    return await AxiosInstance.get(`/api/v1/messenger/messages`, {
         params: {limit, skip, conversationId}
     });
 };
@@ -36,7 +34,7 @@ export const clientAPIRequestLoadOlderMessages = async ({limit, skip, conversati
 export const clientAPIRequestStartAConversation = async ({users}: {
     users: string[]
 }): Promise<void> => {
-    return await AxiosInstance.post(`/api/v1/messenger/startAConversation`, {
+    return await AxiosInstance.post(`/api/v1/messenger/conversation`, {
         users
     });
 };

@@ -10,11 +10,11 @@ export {default as commonAPIRequestClearCaches} from './common/clearCaches'
 
 //______CLIENT (Web-App) USE IT NOW______
 //chatrooms
-export {clientAPIRequestGetChatroom} from './client/clientChatrooms';
+// export {clientAPIRequestGetChatroom} from './client/clientChatrooms';
 
 //comments
 export {
-    clientAPIRequestDeleteCommentByAdmin,
+
     clientAPIRequestGetPostComments,
     clientAPIRequestPostNewComment
 } from './client/clientComments';
@@ -24,7 +24,7 @@ export {clientAPIRequestGetPage} from './client/clientCustomPages';
 
 //fileManager
 export {
-    clientAPIRequestUploadImage,
+    // clientAPIRequestUploadImage,
     clientAPIRequestDeletePostImage,
     clientAPIRequestDeletePostImages,
     clientAPIRequestUploadPostImages,
@@ -42,21 +42,17 @@ export {
 
 //metas
 export {
-    clientAPIRequestGetMetas,
     clientAPIRequestGetMetaSuggestion,
     clientAPIRequestResetMetaImage,
-    clientAPIRequestGetTags
 } from './client/clientMetas';
 
 //posts
 export {
-    clientAPIRequestAttendToEvent,
     clientAPIRequestCreateNewPost,
-    clientAPIRequestDisLikePost,
+    // clientAPIRequestDisLikePost,
     clientAPIRequestGetEditingPost,
-    clientAPIRequestGetPost,
     clientAPIRequestGetPosts,
-    clientAPIRequestLikePost,
+    // clientAPIRequestLikePost,
     clientAPIRequestUpdatePost,
     clientAPIRequestViewPost,
     clientDeletePostByAuthor,
@@ -66,7 +62,7 @@ export {
 //settings
 export {
     clientAPIRequestGetUncachedSettings,
-    clientAPIRequestGetSettings,
+    // clientAPIRequestGetSettings,
 } from './client/clientSettings';
 
 //users
@@ -75,19 +71,18 @@ export {
     clientAPIRequestDeleteConversation,
     clientAPIRequestFollowUser,
     clientAPIRequestGetConversations,
-    clientAPIRequestGetUserPageData,
-    clientAPIRequestGetUsers,
+    // clientAPIRequestGetUserPageData,
+    // clientAPIRequestGetUsers,
     clientAPIRequestRegisterUser,
     clientAPIRequestResetPassword,
-    clientAPIRequestSendPrivateMessage,
+    // clientAPIRequestSendPrivateMessage,
     clientAPIRequestUnFollowUser,
 } from './client/clientUsers';
 
 //widgets
 export {
-    clientAPIRequestGetUncachedWidgetsForAdmin,
+    // clientAPIRequestGetUncachedWidgetsForAdmin,
     clientAPIRequestSaveFormData,
-    clientAPIRequestGetWidgets
 } from './client/clientWidgets';
 
 //______DASHBOARD PANEL (Web-DASHBOARD-App) USE IT NOW______

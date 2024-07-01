@@ -10,7 +10,7 @@ interface IFetchPage{
 export const fetchPage = async ({pageName, revalidate,tags}:IFetchPage)=>{
     try {
         const response = await fetch(
-            `${APIServerUrl}/api/v1/pages/getPage?pageName=${pageName}`,
+            `${APIServerUrl}/api/v1/page?pageName=${pageName}`,
             config({
                 //@ts-ignore
                     revalidate,

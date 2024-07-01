@@ -566,7 +566,7 @@ export const getYoutubeDataScrapperAction = createAsyncThunk(
                         views: 0,
                     };
                     // @ts-ignore
-                    await AxiosInstance.post(`/api/admin/posts/createNewPost`, {
+                    await AxiosInstance.post(`/api/dashboard/post`, {
                         postData: videoData,
                         token: localStorage.wt,
                     });

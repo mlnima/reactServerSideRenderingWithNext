@@ -48,6 +48,56 @@ export const reqQueryToMongooseOptions = (req: Request) => {
     };
 };
 
+
+export const searchQueryGenerator = (keyword: string, isAdmin: boolean, lang?: string) => {
+    if (!keyword){
+        return {}
+    }
+
+    if (isAdmin) {
+        const locales = GlobalStore.getLocales();
+        const allLocalesQuery = locales.reduce((final: { [key: string]: any }[], current: string) => {
+            final = [
+                ...final,
+                { [`translations.${current}.title`]: new RegExp(keyword, 'i') },
+                { [`translations.${current}.name`]: new RegExp(keyword, 'i') },
+                { [`translations.${current}.description`]: new RegExp(keyword, 'i') }
+            ];
+            return final;
+        }, []);
+
+        return  {
+            $or: [
+                ...allLocalesQuery,
+                {name: new RegExp(keyword, 'i')},
+                {description: new RegExp(keyword, 'i')},
+            ]
+        }
+
+    } else {
+        return !lang || lang === 'default' ?
+            [{
+                $or: [
+                    {title: new RegExp(keyword, 'i')},
+                    {name: new RegExp(keyword, 'i')},
+                    {description: new RegExp(keyword, 'i')}
+                ]
+            }] :
+            [{
+                $or: [
+                    {title: new RegExp(keyword, 'i')},
+                    {name: new RegExp(keyword, 'i')},
+                    {description: new RegExp(keyword, 'i')},
+                    {[`translations.${lang}.title`]: new RegExp(keyword, 'i')},
+                    {[`translations.${lang}.name`]: new RegExp(keyword, 'i')},
+                    {[`translations.${lang}.description`]: new RegExp(keyword, 'i')},
+                ]
+            }]
+    }
+};
+
+
+
 const searchQueryGeneratorForPosts = (keyword: string, isAdmin: boolean, lang?: string) => {
     if (isAdmin) {
         const locales = GlobalStore.getLocales();
@@ -87,7 +137,7 @@ export const requestToMongooseQueryForPosts = (req: Request) => {
     try {
         console.log(`req.query=> `, req.userData.isAdmin);
 
-        const searchQuery = req.query.keyword ? searchQueryGeneratorForPosts(
+        const searchQuery = req.query.keyword ? searchQueryGenerator(
                   decodeURIComponent(multiQueryUniquer(req.query.keyword)),
                   req.userData.isAdmin,
                   multiQueryUniquer(req.query.lang)

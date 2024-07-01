@@ -106,6 +106,7 @@ const runServer = () => {
 
     app.use('/api', rootRouter);
 
+
     // app.use('/api/admin', adminMainRouter);
     // app.use('/api/v1', loggerMiddleware, clientMainRouter);
 

@@ -203,7 +203,7 @@ class ChatroomController{
     };
 
     //might be not for dashboard
-    static async dashboardDeleteChatroomMessage(req: Request, res: Response){
+    static async dashboardDeleteMessage(req: Request, res: Response){
 
         try {
             await chatroomMessageSchema.findByIdAndRemove(req.query.messageId, {useFindAndModify: false}).exec()

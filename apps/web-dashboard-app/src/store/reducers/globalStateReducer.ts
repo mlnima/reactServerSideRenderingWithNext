@@ -3,7 +3,7 @@ import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {AxiosResponse} from "axios";
 import {RootState} from "../store";
 import {AdminPanelGlobalState,PageTypes} from "typescript-types";
-import {dashboardAPIRequestGetPages,commonAPIRequestClearCaches,AxiosInstance} from "@repo/api-requests";
+import {dashboardAPIRequestGetPages,commonAPIRequestClearCaches} from "@repo/api-requests";
 
 const initialState : AdminPanelGlobalState = {
     customPages: [],

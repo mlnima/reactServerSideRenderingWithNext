@@ -1,35 +1,10 @@
 {
   "$schema": "https://turborepo.org/schema.json",
-  "globalDotEnv": [".env"],
-  "pipeline": {
-    "build": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**",".next/**",".build/**"]
-    },
-    "dev": {
-      "cache": false,
-      "outputMode": "errors-only"
-    },
-    "graph": {
-      "cache": false
-    },
-    "test": {
-      "dependsOn": ["build"],
-      "outputs": [],
-      "inputs": ["src/**/*.tsx", "src/**/*.ts", "test/**/*.ts", "test/**/*.tsx"]
-    },
-    "lint": {
-      "outputs": []
-    },
-    "deploy": {
-      "dependsOn": ["build", "test", "lint"],
-      "outputs": []
-    }
-  },
+  "ui":  "stream",
   "globalDependencies": [
+    ".env",
     ".env"
   ],
-
   "globalEnv": [
     "JWT_KEY",
     "NODE_ENV",
@@ -50,5 +25,47 @@
     "DB_PORT",
     "NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES",
     "EXCLUDE_POSTS_SOURCE"
-  ]
+  ],
+  "tasks": {
+    "build": {
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "dist/**",
+        ".next/**",
+        ".build/**"
+      ]
+    },
+    "dev": {
+      "cache": false,
+      "outputLogs": "errors-only"
+    },
+    "graph": {
+      "cache": false
+    },
+    "test": {
+      "dependsOn": [
+        "build"
+      ],
+      "outputs": [],
+      "inputs": [
+        "src/**/*.tsx",
+        "src/**/*.ts",
+        "test/**/*.ts",
+        "test/**/*.tsx"
+      ]
+    },
+    "lint": {
+      "outputs": []
+    },
+    "deploy": {
+      "dependsOn": [
+        "build",
+        "test",
+        "lint"
+      ],
+      "outputs": []
+    }
+  }
 }

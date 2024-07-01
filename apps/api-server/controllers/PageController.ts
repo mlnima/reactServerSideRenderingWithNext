@@ -16,18 +16,7 @@ class PageController{
             res.status(500).json({message: 'Something went wrong'});
         }
     };
-    static async clientGetPagesData(req: Request, res: Response){
-        pageSchema
-            .find({})
-            .exec()
-            .then(pagesData => {
-                res.json({ pagesData, error: false });
-            })
-            .catch(err => {
-                console.log(err);
-                res.status(404).json({ message: 'not found' });
-            });
-    };
+
 
     //---------------------Dashboard--------------------
 
@@ -53,17 +42,10 @@ class PageController{
         } catch (error) {}
     };
 
-    static async dashboardGetPagesData(req: Request, res: Response){
-        pageSchema.find({}).exec().then(pages => {
-            res.json({pages, error: false})
-        }).catch(err => {
-            console.log(err)
-            res.end()
-        })
-    }
 
-    static async dashboardDeleteCustomPage(req: Request, res: Response){
-        const pageId = req.body.id
+
+    static async dashboardDeletePage(req: Request, res: Response){
+        const pageId = req.query._id
         if (pageId) {
             await pageSchema.findByIdAndDelete(pageId).exec().then(pageData => {
                 res.json({message: 'Page Deleted'})
@@ -76,7 +58,7 @@ class PageController{
         }
     }
 
-    static async dashboardGetPageData(req: Request, res: Response){
+    static async dashboardGetPage(req: Request, res: Response){
         try {
             await  pageSchema.findById(req.body._id).exec().then(pageData=>{
                 res.json({pageData,error:false})
@@ -87,8 +69,30 @@ class PageController{
             res.status(500).json({message:'Something Went Wrong'})
         }
     }
+    static async dashboardGetPages(req: Request, res: Response){
+        pageSchema.find({}).exec().then(pages => {
+            res.json({pages, error: false})
+        }).catch(err => {
+            console.log(err)
+            res.end()
+        })
+    }
 
 
 }
 
 export default PageController;
+
+
+// static async clientGetPagesData(req: Request, res: Response){
+//     pageSchema
+//         .find({})
+//         .exec()
+//         .then(pagesData => {
+//             res.json({ pagesData, error: false });
+//         })
+//         .catch(err => {
+//             console.log(err);
+//             res.status(404).json({ message: 'not found' });
+//         });
+// };

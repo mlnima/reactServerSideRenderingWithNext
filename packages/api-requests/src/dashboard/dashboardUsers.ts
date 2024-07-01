@@ -1,42 +1,38 @@
-import AxiosInstance from "../lib/AxiosInstance";
+import AxiosInstance from '../lib/AxiosInstance';
 
-export const dashboardAPIRequestChangePassword = async (oldPass:string, newPass:string, newPass2:string)=>{
-    return await AxiosInstance.post('/api/v1/users/resetPassword',{oldPass, newPass, newPass2,token: localStorage.wt})
-}
+export const dashboardAPIRequestChangePassword = async (oldPass: string, newPass: string, newPass2: string) => {
+    return await AxiosInstance.post('/api/v1/user/resetPassword', { oldPass, newPass, newPass2, token: localStorage.wt });
+};
 
-export const dashboardAPIRequestDeleteUser = async (id:string) => {
-    const token = localStorage.getItem('wt');
-    return await AxiosInstance.delete(`/api/admin/users/deleteUser?_id=${id}`, {
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
+export const dashboardAPIRequestDeleteUser = async (_id: string) => {
+    return await AxiosInstance.delete(`/api/dashboard/user`, {
+        params: {
+            _id,
+        },
     });
-}
+};
 
+export const dashboardAPIRequestGenerateNewAPIKey = async () => {
+    return await AxiosInstance.get('/api/dashboard/user/newAPIKey');
+};
 
-export const dashboardAPIRequestGenerateNewAPIKey = async ()=>{
-    return await AxiosInstance.post('/api/admin/users/newAPIKey',{token: localStorage.wt})
-}
-
-export const dashboardAPIRequestGetUser = async ({ _id, username, fields }: {
-    _id?: string;
-    username?: string;
-    fields?: string[];
-}) => {
-    const fieldsQuery = fields ? `&fields=${fields.join(',')}` : '';
-
+export const dashboardAPIRequestGetUser = async ({ _id, username, fields }: { _id?: string; username?: string; fields?: string[] }) => {
     return await AxiosInstance.get(
-        `/api/admin/users/getUser?${_id ? `&_id=${_id}` : ''}${username ? `&username=${username}` : ''}${fieldsQuery}&token=${localStorage.wt}`,
+        `/api/dashboard/user`,
+        {
+            params:{
+                _id,
+                username,
+                fields
+            }
+        }
     );
 };
 
+export const dashboardAPIRequestGetUsers = async (queriesData: string) => {
+    return await AxiosInstance.get(`/api/dashboard/users${queriesData}`);
+};
 
-export const dashboardAPIRequestGetUsers = async (queriesData:string)=>{
-
-    return await AxiosInstance.get(`/api/admin/users/getUsers${queriesData}&token=${localStorage.wt}`)
-}
-
-
-export const dashboardAPIRequestUpdateUser = async (data:{})=>{
-    return await AxiosInstance.post('/api/v1/users/updateUser',{data,token: localStorage.wt})
-}
+export const dashboardAPIRequestUpdateUser = async (data: {}) => {
+    return await AxiosInstance.post('/api/v1/users/updateUser', { data, token: localStorage.wt });
+};

@@ -1,4 +1,5 @@
 import apiCache from 'apicache';
+import {Request, Response} from "express";
 const cache = apiCache.middleware;
 
 apiCache.options({
@@ -19,7 +20,7 @@ apiCache.options({
     enable:process.env.NODE_ENV === 'production'
 })
 
-const cacheOn = (req, res) => {
+const cacheOn = (req: Request, res: Response) => {
 
     const checkAbsoluteConditions = (req.body.cache === 'true' || !req.body.cache) &&
                                          (req.query.cache === 'true' || !req.query.cache) &&

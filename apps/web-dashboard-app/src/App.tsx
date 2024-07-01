@@ -10,9 +10,9 @@ import { getSettingsAction } from '@store/reducers/settingsReducer';
 import { getWidgetsAction } from '@store/reducers/widgetsReducer';
 import { getCustomPagesAction } from '@store/reducers/globalStateReducer';
 import '@repo/shared-style';
-import * as process from "process";
 
 function App() {
+    console.log(`console=> `,process.env)
     //@ts-ignore
     const { isUserLoggedIn, role } = useSelector(({ users }: DashboardStore) => {
         return {
@@ -54,10 +54,6 @@ function App() {
             console.log(err);
         }
     };
-
-    useEffect(() => {
-        console.log('console=> ',process.env.NEXT_PUBLIC_PRODUCTION_URL);
-    }, []);
 
     return (
         <div className="App">

@@ -24,7 +24,7 @@ export const fetchPost = async ({ identifier, revalidate }: IFetchPost) => {
         const queries = `?${new URLSearchParams(queriesDataObject).toString()}`;
 
         const response = await fetch(
-            `${APIServerUrl}/api/v1/posts/getPost${queries}`,
+            `${APIServerUrl}/api/v1/post${queries}`,
             config({ revalidate, tags: [identifier, 'post', 'cacheItem'] }),
         );
         if (!response.ok) {
@@ -50,7 +50,7 @@ export const fetchPostViews = async ({ identifier, revalidate }: IFetchPost) => 
         const queries = `?${new URLSearchParams(queriesDataObject).toString()}`;
         const tag = identifier ? [identifier] : [];
         const response = await fetch(
-            `${APIServerUrl}/api/v1/posts/getPostViews${queries}`,
+            `${APIServerUrl}/api/v1/post/view${queries}`,
 
             config({
                 revalidate,
@@ -85,7 +85,7 @@ export const fetchPostRating = async ({ identifier, revalidate }: IFetchPost) =>
             : ['postRating', 'cacheItem'];
         console.log(`cacheTags=> `, cacheTags);
         const response = await fetch(
-            `${APIServerUrl}/api/v1/posts/getPostRating${queries}`,
+            `${APIServerUrl}/api/v1/post/rating${queries}`,
             config({
                 revalidate,
                 tags: cacheTags,
@@ -125,9 +125,9 @@ export const fetchPosts = async ({
             .map(f => 'field=' + f)
             .join('&');
 
-        // console.log('requestUrl=> ',`${APIServerUrl}/api/v1/posts/getPosts?${queries}&${requestedFieldsQuery}&locale=${locale}`)
+        // console.log('requestUrl=> ',`${APIServerUrl}/api/v1/posts?${queries}&${requestedFieldsQuery}&locale=${locale}`)
         const response = await fetch(
-            `${APIServerUrl}/api/v1/posts/getPosts?${queries}&${requestedFieldsQuery}&locale=${locale}`,
+            `${APIServerUrl}/api/v1/posts?${queries}&${requestedFieldsQuery}&locale=${locale}`,
             //@ts-ignore
             config({
                 revalidate,
@@ -158,7 +158,7 @@ export const fetchMetas = async ({ queryObject, locale, revalidate, tags }: IFet
         const queries = `?${new URLSearchParams(requestParameter).toString()}`;
 
         const response = await fetch(
-            `${APIServerUrl}/api/v1/posts/getMetas${queries}&locale=${locale}`,
+            `${APIServerUrl}/api/v1/metas${queries}&locale=${locale}`,
             config({
                 revalidate,
                 tags: [...(tags || []), 'cacheItem', 'metas'],
@@ -180,7 +180,7 @@ export const fetchTags = async ({ queryObject, revalidate, tags }: IFetchMetasPr
         const queries = `${new URLSearchParams(requestParameter).toString()}`;
 
         const response = await fetch(
-            `${APIServerUrl}/api/v1/posts/tags?${queries}`,
+            `${APIServerUrl}/api/v1/tags?${queries}`,
             config({
                 revalidate,
                 tags: [...(tags || []), 'cacheItem', 'metas'],
@@ -204,7 +204,7 @@ export const fetchSearch = async ({ queryObject, locale, revalidate, tags }: IFe
         const queries = `?${new URLSearchParams(requestParameter).toString()}`;
 
         const response = await fetch(
-            `${APIServerUrl}/api/v1/posts/getSearch${queries}&locale=${locale}`,
+            `${APIServerUrl}/api/v1/posts/search${queries}&locale=${locale}`,
             config({
                 revalidate,
                 tags: [...(tags || []), 'cacheItem', 'posts'],
@@ -253,62 +253,4 @@ export const fetchUserPagePosts = async ({
     }
 };
 
-type IFetchComments = {
-    onDocument?: string;
-    skip?: number;
-    limit?: number;
-    revalidate?: number | undefined;
-    tags?: string[];
-};
 
-export const fetchComments = async ({
-    onDocument,
-    skip = 0,
-    limit = 5,
-    revalidate = 10,
-    tags,
-}: IFetchComments) => {
-    try {
-        const response = await fetch(
-            `${APIServerUrl}/api/v1/posts/getComments?onDocument=${onDocument}&skip=${skip}&limit=${limit}`,
-            config({
-                revalidate,
-                tags: [...(tags || []), 'cacheItem', 'comments'],
-            }),
-        );
-        if (!response.ok) {
-            const errorData = await response.text();
-            throw new Error(errorData);
-        }
-        return await response.json();
-    } catch (error) {
-        throw error;
-    }
-};
-
-type IPostNewComment = {
-    commentData?: {};
-    revalidate?: number | undefined;
-};
-
-export const postNewComment = async ({ commentData, revalidate }: IPostNewComment) => {
-    try {
-        const response = await fetch(
-            `${APIServerUrl}/api/v1/posts/newComment`,
-            config({
-                revalidate,
-                method: 'POST',
-                body: { commentData },
-            }),
-        );
-
-        if (!response.ok) {
-            const errorData = await response.text();
-            throw new Error(errorData);
-        }
-
-        return await response.json();
-    } catch (error) {
-        throw error;
-    }
-};

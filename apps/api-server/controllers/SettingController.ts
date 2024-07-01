@@ -5,6 +5,7 @@ import GlobalStore from "@store/GlobalStore";
 
 class SettingController{
     static async getSettings(req: Request, res: Response){
+
         try {
             const requestedSettings = Array.isArray(req.query.setting) ? req.query.setting : [req.query.setting];
 
@@ -23,7 +24,7 @@ class SettingController{
     }
 
     //---------------------Dashboard--------------------
-    static async dashboardUpdateSettings(req: Request, res: Response){
+    static async dashboardUpdateSetting(req: Request, res: Response){
         try {
             const type = req.body.type;
             const data = req.body.data;
@@ -43,11 +44,12 @@ class SettingController{
         }
 
     };
+
+    // static async dashboardGetSettings(req: Request, res: Response){
+    //     const setting = await settingSchema.findOne({type: req.query.type}).exec();
+    //     res.json({setting})
+    // };
     static async dashboardGetSettings(req: Request, res: Response){
-        const setting = await settingSchema.findOne({type: req.query.type}).exec();
-        res.json({setting})
-    };
-    static async dashboardGetMultipleSettings(req: Request, res: Response){
         try {
 
             const requestedSettings = Array.isArray(req.query.setting) ? req.query.setting : [req.query.setting]

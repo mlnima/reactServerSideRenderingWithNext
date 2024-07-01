@@ -32,7 +32,8 @@ const authWithUserDataMiddleware = async (
         const user = await userSchema
             .findById(decodedToken._id)
             .select('username role keyMaster')
-            .exec();
+            .lean()
+            .exec()
 
         // If user is not found, return unauthorized
         if (!user) {

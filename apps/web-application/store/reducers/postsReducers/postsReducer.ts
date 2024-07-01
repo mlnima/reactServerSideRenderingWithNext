@@ -1,16 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../../store";
-// import getPostAction from "./getPostAction";
-// import getMetasAction from "./getMetasAction";
-// import likePostAction from "./likePostAction";
-// import disLikePostAction from "./disLikePostAction";
-// import postNewCommentAction from "./postNewCommentAction";
-// import getTagsAction from "./getTagsAction";
-// import attendingToEvent from "@utils/reducers/postsReducers/attendToEvent";
-// import getPageDataAction from "@utils/reducers/postsReducers/getPageDataAction";
-// import getPostCommentsAction from "@utils/reducers/postsReducers/getPostCommentsAction";
-// import getPostsAction from "@utils/reducers/postsReducers/getPostsAction";
-// import getEditingPostAction from "@utils/reducers/postsReducers/getEditingPostAction";
 
 interface PostsState {
     activeVideoTrailerId: string | null,
@@ -130,12 +119,7 @@ export const postsSlice = createSlice({
     extraReducers: (builder) => {
         //@ts-ignore
         // builder
-            // .addCase(getMetasAction.fulfilled, (state, action: PayloadAction<any>) => {
-            //     return {
-            //         ...state,
-            //         ...action.payload
-            //     }
-            // })
+
             // .addCase(getTagsAction.fulfilled, (state, action: PayloadAction<any>) => {
             //     return {
             //         ...state,
@@ -227,15 +211,7 @@ export const postsSlice = createSlice({
             //         }
             //     }
             // })
-            // .addCase(attendingToEvent.fulfilled, (state, action: PayloadAction<any>) => {
-            //     return {
-            //         ...state,
-            //         post:{
-            //             ...state.post,
-            //             ...action.payload
-            //         }
-            //     }
-            // })
+
     }
 })
 

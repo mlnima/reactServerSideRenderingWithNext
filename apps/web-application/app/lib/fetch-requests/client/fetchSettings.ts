@@ -13,10 +13,11 @@ export const fetchSettings = async ({requireSettings, revalidate,tags}: IFetchSe
         const settingsQuery = requireSettings.map((setting) => `setting=${setting}`).join('&');
 
         const response = await fetch(
-            `${APIServerUrl}/api/v1/settings/getSettings?${settingsQuery}`,
+            `${APIServerUrl}/api/v1/settings?${settingsQuery}`,
             //@ts-ignore
             config({revalidate, tags: [...(tags || []),'cacheItem','settings']})
         );
+
         if (!response.ok) {
             const errorData = await response.text();
             // throw new Error(errorData);

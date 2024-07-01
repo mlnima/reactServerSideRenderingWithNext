@@ -174,7 +174,7 @@ class UserController {
 
     static async login(req: Request, res: Response) {
         try {
-            const {username, password} = req.body;
+            const {username, password} = req.query;
 
             const user: any | null = await userSchema.findOne({username}).populate({
                 path: 'profileImage',
@@ -274,34 +274,7 @@ class UserController {
         })
     }
 
-    static async getUser(req: Request, res: Response) {
-        try {
-            const {username, _id, fields} = req.query
-            const defaultFields = ['username', 'role', 'profileImage', 'about', 'firstName', 'lastName', 'nickName'];
-            const selectedFields = fields ? [...defaultFields, ...fields] : defaultFields;
-
-            userSchema
-                .findOne({$or: [{username}, {_id}]})
-                .select(selectedFields)
-                .populate([
-                    {path: 'profileImage', select: {'filePath': 1}, model: 'file'},
-                    {path: 'images', select: {'filePath': 1}, model: 'file'},
-                ])
-                .exec()
-                .then((user) => {
-                    res.json({userData: user});
-                })
-                .catch((err) => {
-                    console.error('Error fetching user:', err);
-                    res.status(500).json({message: 'Something went wrong'});
-                });
-        } catch (e) {
-            console.error('Error in getUser function:', e);
-            res.status(500).json({message: 'Something went wrong'});
-        }
-    };
-
-    static async getUserPageInitialData(req: Request, res: Response) {
+    static async getInitialPageData(req: Request, res: Response) {
         try {
             const {username, userWhoRequestIt, fields} = req.query
 
@@ -359,78 +332,9 @@ class UserController {
         }
     };
 
-    static async getUsers(req: Request, res: Response) {
-        try {
-            const {usersList} = req.body;
-
-            const users = await userSchema
-                .find({_id: {$in: usersList}})
-                .select(['username', 'role', 'profileImage', 'name', 'lastName', 'gender'])
-                .populate([
-                    {
-                        path: 'users',
-                        select: ['username', 'profileImage'],
-                        populate: {
-                            path: 'profileImage',
-                            model: 'file',
-                        }
-                    },
-                ])
-                .exec();
-
-            res.json({users});
-        } catch (err) {
-            console.error('Error fetching users:', err);
-            res.status(500).json({message: 'Something went wrong'});
-        }
-    };
-
-    static async getUserPageData(req: Request, res: Response) {
-        try {
-            console.log('getUserPageData=>')
-            const {username, userWhoRequestIt, fields} = req.query
-            const defaultFields = ['username', 'role', 'profileImage', 'following', 'followers', 'blockList'];
-            const selectedFields = fields ? [...new Set([...defaultFields, ...fields])] : defaultFields;
-
-            const userWhoRequestItData = userWhoRequestIt
-                ? await userSchema.findById(userWhoRequestIt).lean().select('blockList _id').exec()
-                : null;
-
-            const userData = await userSchema
-                .findOne({username})
-                .lean()
-                .select(selectedFields.join(' '))
-                .populate([
-                    {path: 'profileImage', select: 'filePath', model: 'file'},
-                    {path: 'images', select: 'filePath', model: 'file'},
-                ])
-                .exec();
 
 
-            if (!userData) {
-                return res.status(404).json({message: 'UserModel not found'});
-            }
-
-
-            const responseData = {
-                _id: userData._id,
-                username: userData.username,
-                profileImage: userData.profileImage,
-                followersCount: userData.followers?.length || 0,
-                followingCount: userData.following?.length || 0,
-                isBlocked: (userWhoRequestItData?.blockList || []).includes(userData?._id) || (userData?.blockList || []).includes(userWhoRequestItData?._id) || false,
-                isFollowed: (userData?.followers || []).includes(userWhoRequestItData?._id ? userWhoRequestItData?._id?.toString() : null) || false,
-            }
-
-            res.status(200).json(responseData);
-
-        } catch (error) {
-            console.error('Error in getUserPageData function:', error);
-            res.status(500).json({message: 'Something went wrong'});
-        }
-    };
-
-    static async followUser(req: Request, res: Response) {
+    static async follow(req: Request, res: Response) {
         try {
             const senderFollowReqUser = req.userData;
             const receiverFollowReqUserId = new mongoose.Types.ObjectId(req.body._id);
@@ -454,7 +358,7 @@ class UserController {
         }
     }
 
-    static async unfollowUser(req: Request, res: Response) {
+    static async unfollow(req: Request, res: Response) {
         try {
             const senderUnFollowReqUser = req.userData;
             const receiverUnFollowReqUserId = req.body._id;
@@ -475,22 +379,6 @@ class UserController {
 
     }
 
-    static async getStartConversation(req: Request, res: Response) {
-        try {
-            const senderId = req.userData._id;
-            const receiverId = req.body._id;
-            const conversationData = {
-                users: [senderId, receiverId].sort()
-            }
-
-            const conversation = await conversationSchema.findOneAndUpdate({users: {"$eq": [senderId, receiverId].sort()}}, {...conversationData}, {new: true, upsert: true}).exec()
-
-            res.json({conversation})
-
-        } catch (err) {
-            res.status(500);
-        }
-    }
 
     //---------------------Dashboard--------------------
 
@@ -543,14 +431,131 @@ class UserController {
         })
     }
 
-    static async dashboardUpdateUser(req: Request, res: Response) {
-        const userID = req.body.data._id
-        userSchema.findByIdAndUpdate(userID, {...req.body.data}, {new: true}).exec().then(savedData => {
-            res.json({updatedData: savedData})
-        }).catch(err => {
-            console.log(err)
-            res.end()
-        })
-    }
+
 }
 export default UserController
+
+// static async getUser(req: Request, res: Response) {
+//     try {
+//         const {username, _id, fields} = req.query
+//         const defaultFields = ['username', 'role', 'profileImage', 'about', 'firstName', 'lastName', 'nickName'];
+//         const selectedFields = fields ? [...defaultFields, ...fields] : defaultFields;
+//
+//         userSchema
+//             .findOne({$or: [{username}, {_id}]})
+//             .select(selectedFields)
+//             .populate([
+//                 {path: 'profileImage', select: {'filePath': 1}, model: 'file'},
+//                 {path: 'images', select: {'filePath': 1}, model: 'file'},
+//             ])
+//             .exec()
+//             .then((user) => {
+//                 res.json({userData: user});
+//             })
+//             .catch((err) => {
+//                 console.error('Error fetching user:', err);
+//                 res.status(500).json({message: 'Something went wrong'});
+//             });
+//     } catch (e) {
+//         console.error('Error in getUser function:', e);
+//         res.status(500).json({message: 'Something went wrong'});
+//     }
+// };
+
+// static async getUsers(req: Request, res: Response) {
+//     try {
+//         const {usersList} = req.body;
+//
+//         const users = await userSchema
+//             .find({_id: {$in: usersList}})
+//             .select(['username', 'role', 'profileImage', 'name', 'lastName', 'gender'])
+//             .populate([
+//                 {
+//                     path: 'users',
+//                     select: ['username', 'profileImage'],
+//                     populate: {
+//                         path: 'profileImage',
+//                         model: 'file',
+//                     }
+//                 },
+//             ])
+//             .exec();
+//
+//         res.json({users});
+//     } catch (err) {
+//         console.error('Error fetching users:', err);
+//         res.status(500).json({message: 'Something went wrong'});
+//     }
+// };
+
+// static async getUserPageData(req: Request, res: Response) {
+//     try {
+//         console.log('getUserPageData=>')
+//         const {username, userWhoRequestIt, fields} = req.query
+//         const defaultFields = ['username', 'role', 'profileImage', 'following', 'followers', 'blockList'];
+//         const selectedFields = fields ? [...new Set([...defaultFields, ...fields])] : defaultFields;
+//
+//         const userWhoRequestItData = userWhoRequestIt
+//             ? await userSchema.findById(userWhoRequestIt).lean().select('blockList _id').exec()
+//             : null;
+//
+//         const userData = await userSchema
+//             .findOne({username})
+//             .lean()
+//             .select(selectedFields.join(' '))
+//             .populate([
+//                 {path: 'profileImage', select: 'filePath', model: 'file'},
+//                 {path: 'images', select: 'filePath', model: 'file'},
+//             ])
+//             .exec();
+//
+//
+//         if (!userData) {
+//             return res.status(404).json({message: 'UserModel not found'});
+//         }
+//
+//
+//         const responseData = {
+//             _id: userData._id,
+//             username: userData.username,
+//             profileImage: userData.profileImage,
+//             followersCount: userData.followers?.length || 0,
+//             followingCount: userData.following?.length || 0,
+//             isBlocked: (userWhoRequestItData?.blockList || []).includes(userData?._id) || (userData?.blockList || []).includes(userWhoRequestItData?._id) || false,
+//             isFollowed: (userData?.followers || []).includes(userWhoRequestItData?._id ? userWhoRequestItData?._id?.toString() : null) || false,
+//         }
+//
+//         res.status(200).json(responseData);
+//
+//     } catch (error) {
+//         console.error('Error in getUserPageData function:', error);
+//         res.status(500).json({message: 'Something went wrong'});
+//     }
+// };
+
+// static async getStartConversation(req: Request, res: Response) {
+//     try {
+//         const senderId = req.userData._id;
+//         const receiverId = req.body._id;
+//         const conversationData = {
+//             users: [senderId, receiverId].sort()
+//         }
+//
+//         const conversation = await conversationSchema.findOneAndUpdate({users: {"$eq": [senderId, receiverId].sort()}}, {...conversationData}, {new: true, upsert: true}).exec()
+//
+//         res.json({conversation})
+//
+//     } catch (err) {
+//         res.status(500);
+//     }
+// }
+
+// static async dashboardUpdateUser(req: Request, res: Response) {
+//     const userID = req.body.data._id
+//     userSchema.findByIdAndUpdate(userID, {...req.body.data}, {new: true}).exec().then(savedData => {
+//         res.json({updatedData: savedData})
+//     }).catch(err => {
+//         console.log(err)
+//         res.end()
+//     })
+// }

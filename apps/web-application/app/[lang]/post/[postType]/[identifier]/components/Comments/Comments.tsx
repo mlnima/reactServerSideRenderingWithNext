@@ -5,8 +5,8 @@ import {loading, loginRegisterForm, setAlert} from "@store/reducers/globalStateR
 import './Comments.styles.scss'
 import UserProfileImage from "@components/UserProfileImage/UserProfileImage";
 import {Comment, NewComment} from "typescript-types";
-import {clientAPIRequestDeleteCommentByAdmin} from "@repo/api-requests";
-import {fetchComments,postNewComment} from "@lib/fetch-requests/client/fetchPosts";
+import { dashboardAPIRequestDeleteComments} from "@repo/api-requests";
+import {fetchComments,postNewComment} from "@lib/fetch-requests/client/comment";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAnglesDown, faAnglesUp, faPlus} from "@fortawesome/free-solid-svg-icons";
 import CommentsRenderer from "./CommentsRenderer/CommentsRenderer";
@@ -51,11 +51,11 @@ const Comments: FC<IProps> = ({dictionary, postId}) => {
             } as NewComment
             commentsAllowScrollRef.current = false
             await postNewComment({commentData}).then((response: any) => {
-                if (!!response?.saveComment?._id){
+                let savedComment = response?.savedComment;
+                if (!!savedComment?._id){
                     setCommentsData((prevState: Comment[]) => {
-                        const newCommentData = response?.savedComment;
                         const completeCommentData = {
-                            ...newCommentData,
+                            ...savedComment,
                             author: {
                                 //@ts-ignore
                                 profileImage: userData?.profileImage,
@@ -86,7 +86,7 @@ const Comments: FC<IProps> = ({dictionary, postId}) => {
     const onDeleteCommentHandler = async (id: string) => {
         try {
             dispatch(loading(true))
-            await clientAPIRequestDeleteCommentByAdmin([id]).then((res) => {
+            await dashboardAPIRequestDeleteComments([id]).then((res) => {
                 dispatch(setAlert({
                     message: res.data.message || 'CommentItem Deleted',
                     type: 'success'

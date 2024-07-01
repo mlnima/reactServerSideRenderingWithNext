@@ -1,6 +1,6 @@
 'use client';
 import {FC, useEffect} from "react";
-import {useParams, useRouter, useSearchParams} from "next/navigation";
+import {useRouter, useSearchParams} from "next/navigation";
 import {useAppDispatch, useAppSelector} from "@store/hooks";
 import {clientAPIRequestCreateNewPost} from "@repo/api-requests";
 import {loading, loginRegisterForm, setAlert} from "@store/reducers/globalStateReducer";
@@ -40,11 +40,11 @@ const NewPostPageContent: FC<IProps> = ({dictionary,locale}) => {
                         ] || "Edit or Delete Your Existing Draft Before Creating a New Post",
                     type: "error"
                 }))
-                await router.push(`${localeToSet}/editPost/${userData?.draftPost}`)
+                router.push(`${localeToSet}/editPost/${userData?.draftPost}`);
             }
 
             if (!searchParams.get('postType')) {
-                await router.push(`${localeToSet}/`)
+                router.push(`${localeToSet}/`);
             }
 
             if (

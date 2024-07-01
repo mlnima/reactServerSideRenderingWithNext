@@ -6,13 +6,9 @@ import { faEye } from '@fortawesome/free-regular-svg-icons/faEye';
 import { shortNumber } from 'shared-util';
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons/faThumbsUp';
 import { faThumbsDown } from '@fortawesome/free-solid-svg-icons/faThumbsDown';
-// import likePostAction from "@store/reducers/postsReducers/likePostAction";
-// import disLikePostAction from "@store/reducers/postsReducers/disLikePostAction";
 import './ActionButtons.scss';
-// import viewPostAction from "@store/reducers/postsReducers/viewPostAction";
 import { loginRegisterForm } from '@store/reducers/globalStateReducer';
 import {
-    clientAPIRequestLikePost,
     clientAPIRequestViewPost,
     clientAPIRequestLikeDislikePost,
 } from '@repo/api-requests';

@@ -17,7 +17,7 @@ const perPage = 500;
 
 const baseOutputPath = path.join(
     __dirname,
-    dev? `../../../../web-application/public` : `../../../../../web-application/public`,
+    dev? `../../web-application/public` : `../../../web-application/public`,
 );
 
 class SitemapController{
@@ -404,7 +404,7 @@ class SitemapController{
 
     //---------------------Dashboard--------------------
 
-    static async generateSitemapsAndStaticAssets(req: Request, res: Response) {
+    static async generateSitemaps(req: Request, res: Response) {
         try {
             await SitemapController.cleanupOldPublicFolder()
             await SitemapController.searchKeywordsSitemapsGenerator();
@@ -418,7 +418,7 @@ class SitemapController{
         try {
             const initialSettings = globalStore.getInitialSettings()
 
-            if (initialSettings?.headDataSettings?.favIconUrl) {
+            if (!!initialSettings?.headDataSettings?.favIconUrl) {
                 const isAbsolute = initialSettings?.headDataSettings?.favIconUrl.includes('http')
 
                 const response = await axios({

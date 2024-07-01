@@ -10,7 +10,7 @@ export const fetchChatroomData = async ({identifier, revalidate}: fetchChatroomD
     try {
 
         const response = await fetch(
-            `${APIServerUrl}/api/v1/chatrooms/getChatroom?identifier=${identifier}`,
+            `${APIServerUrl}/api/v1/chatroom?identifier=${identifier}`,
             config({revalidate, tags: ['cacheItem']})
         );
         if (!response.ok) {

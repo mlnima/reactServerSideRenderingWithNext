@@ -11,12 +11,12 @@ type IUserPageInitialData = {
 export const fetchUserPageInitialData = async ({userWhoRequestIt,username,revalidate,tags}:IUserPageInitialData)=>{
     try {
         const response = await fetch(
-            `${APIServerUrl}/api/v1/users/getUserPageInitialData?userWhoRequestIt=${userWhoRequestIt}&username=${username}`,
+            `${APIServerUrl}/api/v1/user/initialPageData?userWhoRequestIt=${userWhoRequestIt}&username=${username}`,
             config({revalidate,useWtToken:true,cacheOption:'no-store'})
         );
         if (!response.ok) {
             const errorData = await response.text();
-            throw new Error(errorData);
+            // throw new Error(errorData);
         }
         return response.json()
     }catch (error){

@@ -5,7 +5,7 @@ import {useAppDispatch, useAppSelector} from "@store/hooks";
 import {clientAPIRequestGetAConversation, clientAPIRequestGetConversationsList} from "@repo/api-requests";
 import socket from '@lib/web-socket-client';
 import {useSearchParams, usePathname} from "next/navigation";
-import {useIsMobile} from "react-hooker-lib";
+import {useIsMobile} from "@repo/react-hooker-lib";
 import {deleteAConversationAction} from "@store/reducers/messengerActions/deleteAConversation";
 import {loadOlderMessagesAction} from "@store/reducers/messengerActions/loadOlderMessagesAction";
 import './MessengerPageContent.styles.scss'
@@ -67,9 +67,9 @@ const messengerPageContent: FC<IProps> = ({dictionary}) => {
 
     }, [pathname, searchParams]);
 
-    const onGetConversationHandler = async (conversationId: string) => {
+    const onGetConversationHandler = async (_id: string) => {
         try {
-            const conversation = await clientAPIRequestGetAConversation({conversationId});
+            const conversation = await clientAPIRequestGetAConversation(_id);
             setActiveConversation(prevState => ({
                 ...prevState,
                 //@ts-ignore

@@ -5,34 +5,14 @@ import sharp from 'sharp';
 import userSchema from '@schemas/userSchema';
 import fs from "fs";
 import download from "image-downloader";
-import adminReadPath from "./adminControllers/adminFileManagerControllers/adminReadPath";
-import adminReadFile from "./adminControllers/adminFileManagerControllers/adminReadFile";
-import adminDeleteFile from "./adminControllers/adminFileManagerControllers/adminDeleteFile";
-import adminUploadFile from "./adminControllers/adminFileManagerControllers/adminUploadFile";
-import adminUploadFiles from "./adminControllers/adminFileManagerControllers/adminUploadFiles";
-import adminPostThumbnailsUpload from "./adminControllers/adminFileManagerControllers/adminPostThumbnailsUpload";
-import adminCreateNewFileOrFolder from "./adminControllers/adminFileManagerControllers/adminCreateNewFileOrFolder";
-import adminUpdateTranslationsFile from "./adminControllers/adminFileManagerControllers/adminUpdateTranslationsFile";
 import path from "path";
-import adminReadTranslationsFile from "./adminControllers/adminFileManagerControllers/adminReadTranslationsFile";
-import uploadFiles
-    from "./fileManagerControllers/clientControllers/fileManagerControllers/uploadFilesControllers/uploadFiles";
 import fileRemover from "@_variables/fileRemover";
-import uploadImage
-    from "./fileManagerControllers/clientControllers/fileManagerControllers/uploadFilesControllers/uploadImage";
 import {getCurrentDatePath} from "@util/path-utils";
 import {removeFileExtension} from "@util/file-utils";
 import fileSchema from "@schemas/fileSchema";
-import uploadPostImages
-    from "./fileManagerControllers/clientControllers/fileManagerControllers/uploadFilesControllers/uploadPostImages";
 import postSchema from "@schemas/postSchema";
-import uploadProfileImage
-    from "./fileManagerControllers/clientControllers/fileManagerControllers/uploadFilesControllers/uploadProfileImage";
 import {isValidObjectId} from "mongoose";
-import deletePostImage
-    from "./fileManagerControllers/clientControllers/fileManagerControllers/uploadFilesControllers/deletePostImage";
-import deletePostImages
-    from "./fileManagerControllers/clientControllers/fileManagerControllers/uploadFilesControllers/deletePostImages";
+
 
 class FileManagerController {
     //---------------------helpers--------------------
@@ -85,7 +65,6 @@ class FileManagerController {
 
     static async deleteFile(filePath: string){
         try {
-            console.log('console=> ',path.join(__dirname, '../../../../', filePath))
             await fsExtra.unlink(path.join(__dirname, '../../../../', filePath));
             console.log('File deleted successfully', filePath);
         } catch (err) {
@@ -96,53 +75,53 @@ class FileManagerController {
 
     //---------------------client--------------------
 
-    static async userProfileImageUpload(req: Request, res: Response) {
-        const file = req.files.profileImage;
-        const userId = req.userData._id;
-        const directoryPath = './public/uploads/users/' + userId + '/';
-        const filePath = directoryPath + file.name + '.png';
-        const filePathOriginalSize = directoryPath + 'originalSize_' + file.name;
-        fsExtra
-            .ensureDir(directoryPath)
-            .then(() => {
-                file.mv(filePathOriginalSize, function (err) {
-                    if (err) {
-                        console.log(err);
-                        res.json({ response: 'something is wrong', type: 'error', error: err });
-                    } else {
-                        sharp(filePathOriginalSize)
-                            .resize(180, 180)
-                            .toFile(filePath, (err, info) => {
-                                if (err) {
-                                    console.log(err);
-                                    res.status(500);
-                                } else {
-                                    const imageUrl =
-                                        process.env.NEXT_PUBLIC_PRODUCTION_URL +
-                                        filePath.replace('.', '');
-
-                                    userSchema
-                                        .findByIdAndUpdate(req.userData._id, {
-                                            profileImage: imageUrl,
-                                        })
-                                        .exec()
-                                        .then(() => {
-                                            fsExtra.remove(filePathOriginalSize);
-                                            res.json({ response: 'Uploaded', path: imageUrl });
-                                        })
-                                        .catch(() => {
-                                            res.status(500);
-                                        });
-                                }
-                            });
-                    }
-                });
-            })
-            .catch(err => {
-                console.log(err);
-                res.end();
-            });
-    }
+    // static async userProfileImageUpload(req: Request, res: Response) {
+    //     const file = req.files.profileImage;
+    //     const userId = req.userData._id;
+    //     const directoryPath = './public/uploads/users/' + userId + '/';
+    //     const filePath = directoryPath + file.name + '.png';
+    //     const filePathOriginalSize = directoryPath + 'originalSize_' + file.name;
+    //     fsExtra
+    //         .ensureDir(directoryPath)
+    //         .then(() => {
+    //             file.mv(filePathOriginalSize, function (err) {
+    //                 if (err) {
+    //                     console.log(err);
+    //                     res.json({ response: 'something is wrong', type: 'error', error: err });
+    //                 } else {
+    //                     sharp(filePathOriginalSize)
+    //                         .resize(180, 180)
+    //                         .toFile(filePath, (err, info) => {
+    //                             if (err) {
+    //                                 console.log(err);
+    //                                 res.status(500);
+    //                             } else {
+    //                                 const imageUrl =
+    //                                     process.env.NEXT_PUBLIC_PRODUCTION_URL +
+    //                                     filePath.replace('.', '');
+    //
+    //                                 userSchema
+    //                                     .findByIdAndUpdate(req.userData._id, {
+    //                                         profileImage: imageUrl,
+    //                                     })
+    //                                     .exec()
+    //                                     .then(() => {
+    //                                         fsExtra.remove(filePathOriginalSize);
+    //                                         res.json({ response: 'Uploaded', path: imageUrl });
+    //                                     })
+    //                                     .catch(() => {
+    //                                         res.status(500);
+    //                                     });
+    //                             }
+    //                         });
+    //                 }
+    //             });
+    //         })
+    //         .catch(err => {
+    //             console.log(err);
+    //             res.end();
+    //         });
+    // }
 
     static async downloadCreatedPostByApiThumbnail(newPost:any){
         const formats = ['.jpeg', '.jpg', '.jfif', '.pjpeg', '.pjp', '.png', '.svg', '.webp']
@@ -190,66 +169,7 @@ class FileManagerController {
         }
     }
 
-    static async uploadImage(req: Request, res: Response){
-        try {
 
-            const imagesData = JSON.parse(req.body.imagesData || '{}')
-            const images = Array.isArray(req.files?.images) ? req.files?.images : [req.files?.images]
-            const directoryPath = `./public/uploads/images/${getCurrentDatePath()}`;
-            await fsExtra.ensureDir(directoryPath);
-            let responseImages = []
-
-            const imagePromises = images.map(async (image:any) => {
-                const fileName = await removeFileExtension(image.name)
-                const tempPath = `${directoryPath}/temp-${fileName}`;
-                const targetPath = `${directoryPath}/${fileName}.webp`
-
-                await image.mv(tempPath)
-                sharp.cache({files: 0})
-
-                const imageDataToSave = new fileSchema({
-                    usageType: imagesData.usageType,
-                    filePath: `/public/uploads/images/${getCurrentDatePath()}/${fileName}.webp`,
-                    mimeType: image.mimetype,
-                })
-
-
-                // const fitImage = imagesData.usageType === 'post' ? sharp.fit.contain :
-                //     imagesData.usageType === 'profileImage' ? sharp.fit.cover : sharp.fit.cover
-                //
-
-                return sharp(tempPath).webp({nearLossless: true, quality: 50})
-                    //@ts-ignore
-                    .resize({
-                        width: imagesData?.width || 640,
-                        height: imagesData?.height || 480,
-                        fit: imagesData.usageType === 'post' ? sharp.fit.contain : sharp.fit.cover})
-                    .toFile(targetPath)
-                    .then(async () => {
-                        if (fs.existsSync(tempPath)) {
-                            try {
-                                fs.unlinkSync(tempPath)
-                            } catch (_) {
-                            }
-                        }
-
-                        await imageDataToSave.save()
-                        responseImages = [...responseImages, imageDataToSave]
-                    })
-            })
-
-            await Promise.all(imagePromises)
-
-            if (imagesData.usageType === 'profileImage' && req.userData?._id && responseImages?.[0]?._id) {
-                await profileImageTypeHandler(req.userData._id, responseImages?.[0]?._id)
-            }
-
-            res.status(200).json({images: responseImages})
-        } catch (error) {
-            console.log('upload image error:', error)
-            res.status(500).json({error})
-        }
-    }
 
     static async uploadPostImages(req: Request, res: Response){
         try {
@@ -308,7 +228,7 @@ class FileManagerController {
         try {
 
             const userData = req.userData
-            await deletePreviousProfileImage(userData._id)
+            await FileManagerController.deletePreviousProfileImage(userData._id)
             const imagesData = JSON.parse(req.body?.imagesData || '{}')
             const images = Array.isArray(req.files?.images) ? req.files?.images : [req.files?.images]
             const image = images[0]
@@ -332,12 +252,12 @@ class FileManagerController {
                 return
             } catch (error) {
                 console.log('saving images', error)
-                res.status(500).json({error})
+                res.status(500).json({message:'uploadProfileImage1',error})
                 return
             }
         } catch (error) {
             console.log('Upload Post Images:', error)
-            res.status(500).json({error})
+            res.status(500).json({message:'uploadProfileImage2',error})
             return
         }
     }
@@ -373,7 +293,7 @@ class FileManagerController {
             }
 
             if (imageDocument.filePath && imageDocument.filePath.startsWith('/public/')) {
-                await deleteFile(imageDocument.filePath);
+                await FileManagerController.deleteFile(imageDocument.filePath);
 
                 const updateObj = {$pull: {images: imageId}};
 
@@ -452,7 +372,7 @@ class FileManagerController {
                         imageDocument.filePath.startsWith('/public/')
                     ) {
                         try {
-                            await deleteFile(imageDocument.filePath);
+                            await FileManagerController.deleteFile(imageDocument.filePath);
                             await fileSchema
                                 .findByIdAndDelete(imageDocument?._id)
                                 .exec();
@@ -503,16 +423,6 @@ class FileManagerController {
         })
     };
 
-    static async dashboardReadFile(req: Request, res: Response){
-        const path = req.body.path;
-        fs.readFile(path, (err, fileData) => {
-            if (err) {
-                res.json({error: true, data: [], type: undefined});
-            } else {
-                res.json({error: false, data: fileData.toString('utf8'), type: 'file'});
-            }
-        })
-    }
 
     static async dashboardDeleteFile(req: Request, res: Response){
         const filePath = req.body.filePath;
@@ -561,119 +471,10 @@ class FileManagerController {
         })
     }
 
-    static async dashboardUploadFiles(req: Request, res: Response){
-        const file = req.files.uploadingFile;
-        const fileType = file.mimetype.split('/')[0];
-        const today = new Date(Date.now());
-        const year = today.getFullYear();
-        const month = today.getMonth() + 1;
-        const directoryPath = './public/uploads/' + fileType + '/' + year + '/' + month + '/';
-
-        fsExtra.ensureDir(directoryPath).then(() => {
-            const filePath = directoryPath + file.name;
-            const filePathOriginalSize = directoryPath + 'originalSize_' + file.name;
-
-            if (fileType === 'image') {
-                file.mv(filePathOriginalSize, function (err) {
-                    if (err) {
-                        console.log(err)
-                        res.json({response: 'something is wrong', type: 'error', error: err})
-                    } else {
-                        let imageHeight = req.body.type === 'thumbnail' ? 180 :
-                            req.body.type === 'gallery' ? 720 : 720;
-
-                        let imageWidth = req.body.type === 'thumbnail' ? 320 :
-                            req.body.type === 'gallery' ? 1280 : 1280;
-
-                        sharp(filePathOriginalSize).resize(imageWidth, imageHeight).toFile(filePath, (err, info) => {
-                            if (err) {
-                                console.log(err)
-                                res.status(500);
-                            } else {
-                                fsExtra.remove(filePathOriginalSize)
-                                res.json({response: 'Uploaded', path: filePath})
-                            }
-                        })
-                    }
-                });
-            } else {
-                file.mv(filePath, function (err) {
-                    if (err) {
-                        console.log(err)
-                        res.json({response: 'something is wrong', type: 'error', error: err})
-                    } else {
-
-                        res.json({response: 'Uploaded', path: filePath})
-                    }
-                });
-            }
 
 
-        }).catch(err => {
-            console.log(err)
-            res.end()
-        })
-    }
-
-    static async dashboardPostThumbnailsUpload(req: Request, res: Response){
-        const file = req.files?.uploadingFile
-        const fileType = file.mimetype.split('/')[0]
-        const today = new Date(Date.now())
-        const year = today.getFullYear()
-        const month = today.getMonth() + 1
-        const directoryPath = './static/uploads/' + fileType + '/' + year + '/' + month + '/';
-        fsExtra.ensureDir(directoryPath).then(() => {
-            const filePath = directoryPath + file.name
-            const filePathOriginalSize = directoryPath + 'originalSize_' + file.name
-
-            file.mv(filePathOriginalSize, function (err) {
-                if (err) {
-                    console.log(err)
-                    res.json({response: 'something is wrong', type: 'error', error: err})
-                } else {
-                    sharp(filePathOriginalSize).resize(320, 240).toFile(filePath, (err, info) => {
-                        if (err) {
-                            console.log(err)
-                            res.status(500);
-                        } else {
-                            fsExtra.remove(filePathOriginalSize)
-                            res.json({response: 'Uploaded', path: filePath})
-                        }
-
-                    })
 
 
-                }
-            });
-
-        }).catch(err => {
-            console.log(err)
-            res.end()
-        })
-
-    }
-
-    static async dashboardCreateNewFileOrFolder(req: Request, res: Response){
-        const Path = req.body.Path === '.' ? './' : req.body.Path;
-        const fileFolderName = req.body.fileFolderName;
-        const type = req.body.type;
-
-        if (type === 'file') {
-            fs.writeFile(Path + '/' + fileFolderName, '', (err) => {
-                if (err) {
-                    console.log(err)
-
-                } else {
-
-                }
-            });
-        } else {
-            fs.mkdirSync(Path + '/' + fileFolderName)
-
-        }
-        res.end()
-
-    }
 
     static async dashboardUpdateTranslationsFile(req: Request, res: Response){
 
@@ -698,8 +499,8 @@ class FileManagerController {
 
     }
 
-    static async dashboardReadTranslationsFile(req: Request, res: Response){
-        const filePath = req.body.path.replace('./','/');
+    static async dashboardGetTranslationsFile(req: Request, res: Response){
+        const filePath = req.query.path.replace('./','/');
         const targetPath = path.join(__dirname , `../../../../web-app${filePath}`)
 
         try {
@@ -721,3 +522,194 @@ class FileManagerController {
 }
 
 export default FileManagerController;
+
+
+// static async dashboardCreateNewFileOrFolder(req: Request, res: Response){
+//     const Path = req.body.Path === '.' ? './' : req.body.Path;
+//     const fileFolderName = req.body.fileFolderName;
+//     const type = req.body.type;
+//
+//     if (type === 'file') {
+//         fs.writeFile(Path + '/' + fileFolderName, '', (err) => {
+//             if (err) {
+//                 console.log(err)
+//
+//             } else {
+//
+//             }
+//         });
+//     } else {
+//         fs.mkdirSync(Path + '/' + fileFolderName)
+//
+//     }
+//     res.end()
+//
+// }
+
+
+// static async dashboardPostThumbnailsUpload(req: Request, res: Response){
+//     const file = req.files?.uploadingFile
+//     const fileType = file.mimetype.split('/')[0]
+//     const today = new Date(Date.now())
+//     const year = today.getFullYear()
+//     const month = today.getMonth() + 1
+//     const directoryPath = './static/uploads/' + fileType + '/' + year + '/' + month + '/';
+//     fsExtra.ensureDir(directoryPath).then(() => {
+//         const filePath = directoryPath + file.name
+//         const filePathOriginalSize = directoryPath + 'originalSize_' + file.name
+//
+//         file.mv(filePathOriginalSize, function (err) {
+//             if (err) {
+//                 console.log(err)
+//                 res.json({response: 'something is wrong', type: 'error', error: err})
+//             } else {
+//                 sharp(filePathOriginalSize).resize(320, 240).toFile(filePath, (err, info) => {
+//                     if (err) {
+//                         console.log(err)
+//                         res.status(500);
+//                     } else {
+//                         fsExtra.remove(filePathOriginalSize)
+//                         res.json({response: 'Uploaded', path: filePath})
+//                     }
+//
+//                 })
+//
+//
+//             }
+//         });
+//
+//     }).catch(err => {
+//         console.log(err)
+//         res.end()
+//     })
+//
+// }
+
+// static async dashboardUploadFiles(req: Request, res: Response){
+//     const file = req.files.uploadingFile;
+//     const fileType = file.mimetype.split('/')[0];
+//     const today = new Date(Date.now());
+//     const year = today.getFullYear();
+//     const month = today.getMonth() + 1;
+//     const directoryPath = './public/uploads/' + fileType + '/' + year + '/' + month + '/';
+//
+//     fsExtra.ensureDir(directoryPath).then(() => {
+//         const filePath = directoryPath + file.name;
+//         const filePathOriginalSize = directoryPath + 'originalSize_' + file.name;
+//
+//         if (fileType === 'image') {
+//             file.mv(filePathOriginalSize, function (err) {
+//                 if (err) {
+//                     console.log(err)
+//                     res.json({response: 'something is wrong', type: 'error', error: err})
+//                 } else {
+//                     let imageHeight = req.body.type === 'thumbnail' ? 180 :
+//                         req.body.type === 'gallery' ? 720 : 720;
+//
+//                     let imageWidth = req.body.type === 'thumbnail' ? 320 :
+//                         req.body.type === 'gallery' ? 1280 : 1280;
+//
+//                     sharp(filePathOriginalSize).resize(imageWidth, imageHeight).toFile(filePath, (err, info) => {
+//                         if (err) {
+//                             console.log(err)
+//                             res.status(500);
+//                         } else {
+//                             fsExtra.remove(filePathOriginalSize)
+//                             res.json({response: 'Uploaded', path: filePath})
+//                         }
+//                     })
+//                 }
+//             });
+//         } else {
+//             file.mv(filePath, function (err) {
+//                 if (err) {
+//                     console.log(err)
+//                     res.json({response: 'something is wrong', type: 'error', error: err})
+//                 } else {
+//
+//                     res.json({response: 'Uploaded', path: filePath})
+//                 }
+//             });
+//         }
+//
+//
+//     }).catch(err => {
+//         console.log(err)
+//         res.end()
+//     })
+// }
+
+
+
+
+// static async dashboardReadFile(req: Request, res: Response){
+//     const path = req.body.path;
+//     fs.readFile(path, (err, fileData) => {
+//         if (err) {
+//             res.json({error: true, data: [], type: undefined});
+//         } else {
+//             res.json({error: false, data: fileData.toString('utf8'), type: 'file'});
+//         }
+//     })
+// }
+
+// static async uploadImage(req: Request, res: Response){
+//     try {
+//
+//         const imagesData = JSON.parse(req.body.imagesData || '{}')
+//         const images = Array.isArray(req.files?.images) ? req.files?.images : [req.files?.images]
+//         const directoryPath = `./public/uploads/images/${getCurrentDatePath()}`;
+//         await fsExtra.ensureDir(directoryPath);
+//         let responseImages = []
+//
+//         const imagePromises = images.map(async (image:any) => {
+//             const fileName = await removeFileExtension(image.name)
+//             const tempPath = `${directoryPath}/temp-${fileName}`;
+//             const targetPath = `${directoryPath}/${fileName}.webp`
+//
+//             await image.mv(tempPath)
+//             sharp.cache({files: 0})
+//
+//             const imageDataToSave = new fileSchema({
+//                 usageType: imagesData.usageType,
+//                 filePath: `/public/uploads/images/${getCurrentDatePath()}/${fileName}.webp`,
+//                 mimeType: image.mimetype,
+//             })
+//
+//
+//             // const fitImage = imagesData.usageType === 'post' ? sharp.fit.contain :
+//             //     imagesData.usageType === 'profileImage' ? sharp.fit.cover : sharp.fit.cover
+//             //
+//
+//             return sharp(tempPath).webp({nearLossless: true, quality: 50})
+//                 //@ts-ignore
+//                 .resize({
+//                     width: imagesData?.width || 640,
+//                     height: imagesData?.height || 480,
+//                     fit: imagesData.usageType === 'post' ? sharp.fit.contain : sharp.fit.cover})
+//                 .toFile(targetPath)
+//                 .then(async () => {
+//                     if (fs.existsSync(tempPath)) {
+//                         try {
+//                             fs.unlinkSync(tempPath)
+//                         } catch (_) {
+//                         }
+//                     }
+//
+//                     await imageDataToSave.save()
+//                     responseImages = [...responseImages, imageDataToSave]
+//                 })
+//         })
+//
+//         await Promise.all(imagePromises)
+//
+//         if (imagesData.usageType === 'profileImage' && req.userData?._id && responseImages?.[0]?._id) {
+//             await FileManagerController.profileImageTypeHandler(req.userData._id, responseImages?.[0]?._id)
+//         }
+//
+//         res.status(200).json({images: responseImages})
+//     } catch (error) {
+//         console.log('upload image error:', error)
+//         res.status(500).json({error})
+//     }
+// }
