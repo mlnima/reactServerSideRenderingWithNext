@@ -16,6 +16,15 @@ export function middleware(request: NextRequest) {
         (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
     )
 
+    if (pathname === '/manifest.json'){
+        return NextResponse.rewrite(
+            new URL(
+                `/manifest.webmanifest`,
+                request.url
+            )
+        )
+    }
+
     if (pathnameIsMissingLocale) {
         const locale = getLocaleFromUrl(request)
         const params = request?.nextUrl?.searchParams;
@@ -29,10 +38,12 @@ export function middleware(request: NextRequest) {
     }
 }
 
-export const config = {
-    matcher: ['/((?!api|_next/static|_next/image|favicon.ico|asset|fonts|public|sitemap|robots.txt|manifest.json).*)'],
-}
 
+export const config = {
+    matcher: ['/((?!api|_next/static|_next/image|favicon.ico|asset|fonts|public|sitemap|robots.txt|manifest.webmanifest).*)'],
+
+}
+// |manifest.json
 
 // //This function detect accepted language and return the best one but is not in use due to the bug
 // function getLocale(request: NextRequest): string | undefined {

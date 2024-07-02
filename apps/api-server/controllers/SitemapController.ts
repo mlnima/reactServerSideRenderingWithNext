@@ -10,6 +10,7 @@ import pageSchema from "@schemas/pageSchema";
 import {Request, Response} from "express";
 import globalStore from "@store/GlobalStore";
 import axios from "axios";
+import ManifestController from "./ManifestController";
 
 const productionUrl = process.env.NEXT_PUBLIC_PRODUCTION_URL;
 const dev = process.env.NODE_ENV !== 'production';
@@ -397,10 +398,15 @@ class SitemapController{
                     flag: 'w',
                 },
             );
+
+
+
         } catch (error) {
             console.log(error);
         }
     };
+
+
 
     //---------------------Dashboard--------------------
 
@@ -411,6 +417,7 @@ class SitemapController{
             await SitemapController.metaSitemapGenerator();
             await SitemapController.pagesSitemapGenerator();
             await SitemapController.rootSitemapGenerator();
+            // ManifestController.generateManifestJson()
         } catch (e) {
             console.log(`Error while generating sitemap=> `, e);
         }

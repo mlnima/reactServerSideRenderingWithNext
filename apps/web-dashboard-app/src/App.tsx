@@ -12,7 +12,7 @@ import { getCustomPagesAction } from '@store/reducers/globalStateReducer';
 import '@repo/shared-style';
 
 function App() {
-    console.log(`console=> `,process.env)
+
     //@ts-ignore
     const { isUserLoggedIn, role } = useSelector(({ users }: DashboardStore) => {
         return {

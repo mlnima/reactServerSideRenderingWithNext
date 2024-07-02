@@ -185,7 +185,6 @@ class MetaController {
                 res.status(404).json({ message: 'Not Found' });
             }
         } catch (error) {
-            console.log(`console=> `, error, req.query);
             res.status(500).json({ message: 'Server Error', error });
         }
     }

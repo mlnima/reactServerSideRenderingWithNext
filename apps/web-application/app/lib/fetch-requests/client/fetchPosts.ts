@@ -83,7 +83,7 @@ export const fetchPostRating = async ({ identifier, revalidate }: IFetchPost) =>
         const cacheTags = identifier
             ? [`${identifier}Rating`, identifier, 'postRating', 'cacheItem']
             : ['postRating', 'cacheItem'];
-        console.log(`cacheTags=> `, cacheTags);
+
         const response = await fetch(
             `${APIServerUrl}/api/v1/post/rating${queries}`,
             config({

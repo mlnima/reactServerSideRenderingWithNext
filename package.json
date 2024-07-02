@@ -89,7 +89,6 @@
     "tsconfig-paths": "^4.2.0",
     "tscpaths": "^0.0.9",
     "tslib": "^2.5.0",
-    "turbo": "^2.0.5",
     "typescript": "^5.4.5"
   },
   "globalDependencies": [
