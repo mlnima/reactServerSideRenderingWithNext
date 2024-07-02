@@ -1,4 +1,4 @@
-import { fetchSettings } from '@lib/fetch-requests/client/fetchSettings';
+import { fetchSettings } from '@lib/fetch-requests/fetchSettings';
 import { getDictionary } from '../../../../../get-dictionary';
 import { i18n } from '@i18nConfig';
 import { capitalizeFirstLetter } from 'shared-util';

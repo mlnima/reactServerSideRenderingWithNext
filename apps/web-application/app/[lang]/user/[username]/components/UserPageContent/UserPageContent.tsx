@@ -6,8 +6,8 @@ import {useAppDispatch, useAppSelector} from "@store/hooks";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCamera} from "@fortawesome/free-solid-svg-icons/faCamera";
 import './UserPageContent.styles.scss'
-import {fetchUserPagePosts} from "@lib/fetch-requests/client/fetchPosts";
-import {fetchUserPageInitialData} from "@lib/fetch-requests/client/fetchUsers";
+import {fetchUserPagePosts} from "@lib/fetch-requests/fetchPosts";
+import {fetchUserPageInitialData} from "@lib/fetch-requests/fetchUsers";
 import LoggedInRequirePageMessage from "@components/LoggedInRequireMessage/LoggedInRequirePageMessage";
 import PostsCardsRenderer from "@components/cards/CardsRenderer/PostsCardsRenderer/PostsCardsRenderer";
 import {Post} from "typescript-types";

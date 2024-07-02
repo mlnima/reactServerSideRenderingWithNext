@@ -1,4 +1,4 @@
-import {fetchSettings} from "@lib/fetch-requests/client/fetchSettings";
+import {fetchSettings} from "@lib/fetch-requests/fetchSettings";
 import {getDictionary} from "../../../../get-dictionary";
 import './page.scss';
 import {i18n} from '@i18nConfig'

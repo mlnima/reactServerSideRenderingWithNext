@@ -1,6 +1,6 @@
 import type {Metadata, ResolvingMetadata} from 'next'
 import {i18n} from "../../../../../i18n-config";
-import {fetchSettings} from "@lib/fetch-requests/client/fetchSettings";
+import {fetchSettings} from "@lib/fetch-requests/fetchSettings";
 import {getTextDataWithTranslation, textContentReplacer} from "shared-util";
 import {AlternatesGenerators} from "@lib/alternatesCanonicalGenerator";
 

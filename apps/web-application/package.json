@@ -105,6 +105,7 @@
     "@components": "./app/components",
     "@lib": "./app/lib",
     "@store": "./store",
-    "@providers": "./app/providers"
+    "@providers": "./app/providers",
+    "@public": "./public"
   }
 }

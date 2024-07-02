@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import './FormWidget.scss';
 import FormWidgetField from '@components/widgets/widgets/FormWidget/FormWidgetField/FormWidgetField';
 import { loading, setAlert } from '@store/reducers/globalStateReducer';
-import { postFormData } from '@lib/fetch-requests/client/fetchForms';
+import { postFormData } from '@lib/fetch-requests/fetchForms';
 
 interface FormWidgetPropTypes {
     locale: string;

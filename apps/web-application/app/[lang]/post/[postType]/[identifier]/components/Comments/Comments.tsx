@@ -6,7 +6,7 @@ import './Comments.styles.scss'
 import UserProfileImage from "@components/UserProfileImage/UserProfileImage";
 import {Comment, NewComment} from "typescript-types";
 import { dashboardAPIRequestDeleteComments} from "@repo/api-requests";
-import {fetchComments,postNewComment} from "@lib/fetch-requests/client/comment";
+import {fetchComments,postNewComment} from "@lib/fetch-requests/comment";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAnglesDown, faAnglesUp, faPlus} from "@fortawesome/free-solid-svg-icons";
 import CommentsRenderer from "./CommentsRenderer/CommentsRenderer";

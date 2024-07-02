@@ -1,5 +1,5 @@
-import {fetchSettings} from "@lib/fetch-requests/client/fetchSettings";
-import {fetchWidgets} from "@lib/fetch-requests/client/fetchWidgets";
+import {fetchSettings} from "@lib/fetch-requests/fetchSettings";
+import {fetchWidgets} from "@lib/fetch-requests/fetchWidgets";
 import MainWidgetArea from "@components/widgets/widgetAreas/MainWidgetArea"
 import {getDictionary} from "../../../get-dictionary";
 import './page.styles.scss';

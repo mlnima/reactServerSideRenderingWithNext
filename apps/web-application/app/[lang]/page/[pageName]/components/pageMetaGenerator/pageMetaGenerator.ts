@@ -1,4 +1,4 @@
-import {fetchPage} from "@lib/fetch-requests/client/fetchPage";
+import {fetchPage} from "@lib/fetch-requests/fetchPage";
 import {AlternatesGenerators} from "@lib/alternatesCanonicalGenerator";
 
 type Props = {

@@ -1,4 +1,4 @@
-import config from '@lib/fetch-requests/client/config';
+import config from '@lib/fetch-requests/config';
 
 const APIServerUrl = process.env.NEXT_PUBLIC_API_SERVER_URL;
 

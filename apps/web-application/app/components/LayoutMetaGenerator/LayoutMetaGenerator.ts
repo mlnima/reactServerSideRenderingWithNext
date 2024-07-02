@@ -1,7 +1,7 @@
 //LayoutMetaGenerator
 
 import type {Metadata, ResolvingMetadata} from 'next'
-import {fetchSettings} from "@lib/fetch-requests/client/fetchSettings";
+import {fetchSettings} from "@lib/fetch-requests/fetchSettings";
 import * as process from "process";
 import {AlternatesGenerators} from "@lib/alternatesCanonicalGenerator";
 // import alternatesCanonicalGenerator from "@lib/alternatesCanonicalGenerator";

@@ -1,8 +1,8 @@
 import MainWidgetArea from "@components/widgets/widgetAreas/MainWidgetArea";
 import {i18n} from "@i18nConfig";
 import {getDictionary} from "../../../../get-dictionary";
-import {fetchPage} from "@lib/fetch-requests/client/fetchPage";
-import {fetchWidgets} from "@lib/fetch-requests/client/fetchWidgets";
+import {fetchPage} from "@lib/fetch-requests/fetchPage";
+import {fetchWidgets} from "@lib/fetch-requests/fetchWidgets";
 import pageMetaGenerator from "./components/pageMetaGenerator/pageMetaGenerator";
 import SidebarWidgetAreaRenderer
     from "@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer";

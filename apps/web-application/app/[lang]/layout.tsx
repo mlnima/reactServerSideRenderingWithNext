@@ -4,8 +4,8 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 
 config.autoAddCss = false;
 import '@components/global/styles/global.styles.scss';
-import { fetchSettings } from '@lib/fetch-requests/client/fetchSettings';
-import { fetchWidgets } from '@lib/fetch-requests/client/fetchWidgets';
+import { fetchSettings } from '@lib/fetch-requests/fetchSettings';
+import { fetchWidgets } from '@lib/fetch-requests/fetchWidgets';
 import ReduxProvider from '@store/ReduxProvider';
 import * as process from 'process';
 import { i18n } from '@i18nConfig';

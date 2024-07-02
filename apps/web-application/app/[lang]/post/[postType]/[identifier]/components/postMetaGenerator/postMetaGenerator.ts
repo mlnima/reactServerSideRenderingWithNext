@@ -1,5 +1,5 @@
 import type {Metadata, ResolvingMetadata} from 'next'
-import {fetchPost} from "@lib/fetch-requests/client/fetchPosts";
+import {fetchPost} from "@lib/fetch-requests/fetchPosts";
 import {AlternatesGenerators} from "@lib/alternatesCanonicalGenerator";
 
 type Props = {

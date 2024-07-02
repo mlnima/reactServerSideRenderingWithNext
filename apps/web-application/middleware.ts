@@ -43,7 +43,7 @@ export const config = {
     matcher: ['/((?!api|_next/static|_next/image|favicon.ico|asset|fonts|public|sitemap|robots.txt|manifest.webmanifest).*)'],
 
 }
-// |manifest.json
+// |manifest.json |manifest.webmanifest
 
 // //This function detect accepted language and return the best one but is not in use due to the bug
 // function getLocale(request: NextRequest): string | undefined {

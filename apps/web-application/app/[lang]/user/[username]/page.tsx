@@ -1,5 +1,5 @@
-import {fetchSettings} from "@lib/fetch-requests/client/fetchSettings";
-import {fetchWidgets} from "@lib/fetch-requests/client/fetchWidgets";
+import {fetchSettings} from "@lib/fetch-requests/fetchSettings";
+import {fetchWidgets} from "@lib/fetch-requests/fetchWidgets";
 import SidebarWidgetAreaRenderer
     from "@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer";
 import {i18n} from "@i18nConfig";

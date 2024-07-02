@@ -1,8 +1,8 @@
 import {i18n} from "../../../../i18n-config";
 import {getDictionary} from "../../../../get-dictionary";
-import {fetchSearch} from "@lib/fetch-requests/client/fetchPosts";
-import {fetchSettings} from "@lib/fetch-requests/client/fetchSettings";
-import {fetchWidgets} from "@lib/fetch-requests/client/fetchWidgets";
+import {fetchSearch} from "@lib/fetch-requests/fetchPosts";
+import {fetchSettings} from "@lib/fetch-requests/fetchSettings";
+import {fetchWidgets} from "@lib/fetch-requests/fetchWidgets";
 import SidebarWidgetAreaRenderer
     from "@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer";
 import WidgetsRenderer from "@components/widgets/widgetRenderer/WidgetsRenderer";

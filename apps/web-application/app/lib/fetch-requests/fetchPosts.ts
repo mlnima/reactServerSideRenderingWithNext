@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { mongoIdValidator, removeEmptyProperties } from 'shared-util';
+import { mongoIdValidator, removeEmptyProperties } from '../../../../../packages/shared-util';
 import { postFieldRequestForCards } from '@repo/data-structures';
 import config from './config';
 

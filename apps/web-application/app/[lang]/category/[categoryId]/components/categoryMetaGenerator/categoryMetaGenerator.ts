@@ -1,6 +1,6 @@
 import type {Metadata, ResolvingMetadata} from 'next'
-import {fetchPosts} from "@lib/fetch-requests/client/fetchPosts";
-import {fetchSettings} from "@lib/fetch-requests/client/fetchSettings";
+import {fetchPosts} from "@lib/fetch-requests/fetchPosts";
+import {fetchSettings} from "@lib/fetch-requests/fetchSettings";
 import {textContentReplacer, getTextDataWithTranslation} from "shared-util";
 import {i18n} from "@i18nConfig";
 import {AlternatesGenerators} from "@lib/alternatesCanonicalGenerator";
