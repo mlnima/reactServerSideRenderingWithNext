@@ -10,10 +10,10 @@ import {faEraser} from "@fortawesome/free-solid-svg-icons/faEraser";
 import {faShield} from "@fortawesome/free-solid-svg-icons/faShield";
 import {faCheck} from "@fortawesome/free-solid-svg-icons/faCheck";
 import {useParams, usePathname, useSearchParams, useSelectedLayoutSegment} from "next/navigation";
-import clearCachesByServerAction
-    from "@components/widgets/widgets/Authentication/adminServerActions/adminServerActions";
+
 import socket from '@lib/web-socket-client';
 import {faBolt} from "@fortawesome/free-solid-svg-icons";
+import ServerActions from "@lib/serverActions";
 
 const AuthenticationAdminItems = ({}) => {
 
@@ -27,7 +27,7 @@ const AuthenticationAdminItems = ({}) => {
     const onClearCacheHandler = async ({mode}: IClearCache): Promise<void> => {
         try {
             await commonAPIRequestClearCaches()
-            await clearCachesByServerAction({
+            await ServerActions.clearCachesByServerAction({
                 path: pathname,
                 segment,
                 mode,

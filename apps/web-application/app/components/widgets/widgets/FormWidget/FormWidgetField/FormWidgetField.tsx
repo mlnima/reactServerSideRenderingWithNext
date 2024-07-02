@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import './FormWidgetField.styles.scss'
+import './FormWidgetField.scss'
 import {convertVariableNameToName} from "shared-util";
 
 interface IProps {

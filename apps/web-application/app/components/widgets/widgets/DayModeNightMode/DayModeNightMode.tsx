@@ -3,7 +3,7 @@ import React, {FC} from "react";
 import {UniqueDataTypes} from "typescript-types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMoon} from "@fortawesome/free-solid-svg-icons/faMoon";
-import './DayModeNightMode.styles.scss';
+import './DayModeNightMode.scss';
 import Switch from "react-switch";
 import {faLightbulb} from "@fortawesome/free-solid-svg-icons";
 import {useAppDispatch, useAppSelector} from "@store/hooks";

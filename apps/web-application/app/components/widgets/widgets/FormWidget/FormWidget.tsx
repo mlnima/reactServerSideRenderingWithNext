@@ -2,7 +2,7 @@
 import React, { FC, useEffect, useMemo, useState } from 'react';
 import { useAppDispatch } from '@store/hooks';
 import { useSelector } from 'react-redux';
-import './FormWidget.styles.scss';
+import './FormWidget.scss';
 import FormWidgetField from '@components/widgets/widgets/FormWidget/FormWidgetField/FormWidgetField';
 import { loading, setAlert } from '@store/reducers/globalStateReducer';
 import { postFormData } from '@lib/fetch-requests/client/fetchForms';
@@ -108,12 +108,15 @@ const FormWidget: FC<FormWidgetPropTypes> = ({
     return (
         <div className="formWidget">
             {isSubmit ? (
-                <h3 className="afterSubmitMessage">
-                    {dictionary?.[
+                <div className={'formSubmitted'}>
+                    <h3 className="afterSubmitMessage">
+                        {dictionary?.[
                         uniqueData?.afterSubmitMessage ||
-                            'Your Form Has Been Submitted'
-                    ] || 'Your Form Has Been Submitted'}
-                </h3>
+                        'Your Form Has Been Submitted'
+                            ] || 'Your Form Has Been Submitted'}
+                    </h3>
+                </div>
+
             ) : (
                 <form
                     onSubmit={e => onSubmitHandler(e)}

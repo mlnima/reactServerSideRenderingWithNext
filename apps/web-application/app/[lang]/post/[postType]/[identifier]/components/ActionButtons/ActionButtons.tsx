@@ -13,9 +13,8 @@ import {
     clientAPIRequestLikeDislikePost,
 } from '@repo/api-requests';
 
-import { response } from 'express';
-import clearACacheByTag from '@lib/serverActions/clearACacheByTag';
 import { faComments } from '@fortawesome/free-solid-svg-icons';
+import ServerActions from "@lib/serverActions";
 
 interface IProps {
     rating: boolean;
@@ -66,7 +65,7 @@ const ActionButtons: FC<IProps> = ({
                 })
                 .finally(() => {
                     setDisableRatingButtons(false);
-                    clearACacheByTag(`${_id}Rating`);
+                    ServerActions.clearACacheByTag(`${_id}Rating`);
                 });
         } else {
             dispatch(loginRegisterForm('register'));

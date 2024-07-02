@@ -1,19 +1,17 @@
 .formWidget {
   display: flex;
   justify-content: center;
-  padding: 12px;
+  //padding: 12px;
   box-sizing: border-box;
-  border: var(--default-border);
+
   width: 100%;
 
-  .afterSubmitMessage {
-    color: var(--primary-text-color, #fff);
-    font-size: 1.5rem;
-    text-align: center;
-  }
+
+
 
   .formWidgetDynamicForm {
-
+    border: var(--default-border);
+    padding: 12px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -31,6 +29,19 @@
   .form-widget-field-title {
     color: var(--primary-text-color, #fff);
   }
+}
+
+.formSubmitted{
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .afterSubmitMessage {
+    color: var(--primary-text-color, #fff);
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
 }
 
 @media only screen and (min-width: 768px) {
