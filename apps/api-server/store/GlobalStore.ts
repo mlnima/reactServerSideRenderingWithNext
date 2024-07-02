@@ -1,7 +1,10 @@
 import settingSchema from "@schemas/settingSchema";
 import mongoose from 'mongoose';
 import defaultInitialSettings from '../tools/asset/defaultInitialSettings';
+import { exec } from'child_process';
 import * as process from "process";
+import path from "path";
+import {Worker} from "worker_threads";
 
 mongoose.Promise = global.Promise;
 mongoose.set('strictQuery', true);
@@ -45,6 +48,33 @@ class GlobalStore {
 
     getLocales(){
         return process.env.NEXT_PUBLIC_LOCALES.split(' ')
+    }
+
+    async execCommand(command:string){
+        try {
+            const workerPath = path.join(__dirname,'../workers/commandExecutor/worker.js') ;
+
+            const worker = new Worker(
+                workerPath,
+                {workerData:{command}}
+            )
+
+            worker.once('message',result =>{
+                worker.postMessage({ exit: true })
+                return result.response
+            })
+
+            worker.on('error', error => {
+                console.log('error:',error);
+            });
+
+            worker.on('exit', exitCode => {
+                console.log('exitCode : ',exitCode);
+            })
+
+        }catch (err){
+            console.log(err)
+        }
     }
 
 }

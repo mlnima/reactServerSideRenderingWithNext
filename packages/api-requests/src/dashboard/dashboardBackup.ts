@@ -1,17 +1,49 @@
+import qs from 'qs';
 import AxiosInstance from "../lib/AxiosInstance";
 
-interface IProps{
+interface IMetasProps{
     metaType : string,
     fields:string[],
-    limit:number
 }
-export const dashboardAPIRequestBackupMetas = async ({ metaType, fields, limit }:IProps) => {
-    return await AxiosInstance.get(`/api/dashboard/backups/metas`, {
+interface IPostsProps{
+    postType : string,
+    fields:string[],
+}
+export const dashboardAPIRequestBackupMetas = async ({ metaType, fields }:IMetasProps) => {
+
+    return await AxiosInstance.get(`/api/dashboard/backup/metas`, {
         responseType: 'blob',
         params: {
             metaType,
-            fields,
-            limit
+            fields
         },
+        paramsSerializer: {
+            indexes: null, // no brackets at all
+        }
     });
 };
+
+export const backupPosts = async ({ postType, fields }:IPostsProps) => {
+
+    return await AxiosInstance.get(`/api/dashboard/backup/posts`, {
+        responseType: 'blob',
+        params: {
+            postType,
+            fields
+        },
+        paramsSerializer: {
+            indexes: null, // no brackets at all
+        }
+    });
+};
+
+export const backup = async () => {
+
+    return await AxiosInstance.get(`/api/dashboard/backup`, {
+        responseType: 'blob',
+    });
+
+
+};
+
+//, { arrayFormat: 'repeat' }

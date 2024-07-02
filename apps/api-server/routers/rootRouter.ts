@@ -140,7 +140,9 @@ router.delete('/dashboard/page', adminAuthMiddleware, PageController.dashboardDe
 router.get('/dashboard/pages', adminAuthMiddleware, PageController.dashboardGetPages);
 
 //---------------------backups----------------------------
-router.get('/dashboard/backups/metas', adminAuthMiddleware, BackupController.metas);
+router.get('/dashboard/backup/metas', adminAuthMiddleware, BackupController.metas);
+router.get('/dashboard/backup/posts', adminAuthMiddleware, BackupController.posts);
+router.get('/dashboard/backup', adminAuthMiddleware, BackupController.backup);
 
 //---------------------Order----------------------------
 router.post('/v1/order/payPal', authMiddleware, OrderController.clientCreateOrder);

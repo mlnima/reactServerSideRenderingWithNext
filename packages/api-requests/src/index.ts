@@ -88,7 +88,7 @@ export {
 //______DASHBOARD PANEL (Web-DASHBOARD-App) USE IT NOW______
 
 //backup
-export {dashboardAPIRequestBackupMetas} from './dashboard/dashboardBackup'
+export {dashboardAPIRequestBackupMetas,backupPosts,backup} from './dashboard/dashboardBackup'
 
 //chatrooms
 export {

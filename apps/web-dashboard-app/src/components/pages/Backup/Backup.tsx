@@ -2,6 +2,8 @@ import React, {ChangeEvent, ChangeEventHandler, FC, useEffect, useState} from "r
 import styled from "styled-components";
 
 import MetasSection from "@components/pages/Backup/MetasSection";
+import PostsSection from "@components/pages/Backup/PostsSection";
+import {backup} from "@repo/api-requests";
 
 const Style = styled.div`
   display: flex;
@@ -60,10 +62,23 @@ interface PropTypes {
 
 const Backup: FC<PropTypes> = ({}) => {
 
+    const onBackupHandler = async ()=>{
+        try {
+            const backupResult = await backup()
+            console.log(`backupData=> `,backupResult.data)
+        }catch (error){
+            console.log(`error=> `,error)
+        }
+
+    }
 
     return (
         <Style>
-            <MetasSection/>
+            <button className={'btn btn-primary'} onClick={onBackupHandler}>
+                Backup
+            </button>
+            {/*<MetasSection/>*/}
+            {/*<PostsSection/>*/}
             {/*<div className={'export-type-container'}>*/}
             {/*    <h2>General Backup config:</h2>*/}
             {/*</div>*/}

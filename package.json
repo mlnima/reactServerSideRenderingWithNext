@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
+    "@types/archiver": "^6.0.2",
     "@types/socket.io": "^3.0.2",
     "franc": "^6.1.0",
     "langmap": "^0.0.16",
@@ -64,6 +65,7 @@
     "@types/react-redux": "^7.1.25",
     "@types/react-scroll": "^1.8.6",
     "@types/sharp": "^0.22.1",
+    "@types/shelljs": "^0.8.15",
     "@types/simple-peer": "^9.11.5",
     "@types/styled-components": "^5.1.26",
     "@types/uuid": "^9.0.5",

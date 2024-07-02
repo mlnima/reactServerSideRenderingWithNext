@@ -44,10 +44,12 @@ const MetasSection: FC<PropTypes> = ({}) => {
         const now = Date.now()
         dashboardAPIRequestBackupMetas({
             metaType,
-            fields :metasSelectedFields,
-            limit:metasLimit
+            fields :metasSelectedFields
+
         }).then((response:{data:any})=>{
-            FileDownload(response.data,`${metaType}${now.toLocaleString()}.json`)
+            if (response?.data?.size){
+                FileDownload(response.data,`${metaType}${now.toLocaleString()}.json`)
+            }
         })
     }
 
