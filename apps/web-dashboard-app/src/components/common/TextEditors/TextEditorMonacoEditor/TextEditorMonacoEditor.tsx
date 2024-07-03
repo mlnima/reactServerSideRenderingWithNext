@@ -1,5 +1,5 @@
 import React from 'react';
-import {isJsonString} from 'shared-util'
+import {isJsonString} from '@repo/shared-util'
 import Editor from "@monaco-editor/react";
 
 interface MonacoEditorProTypes {

@@ -14,7 +14,7 @@ import {getPostAction,defineNewPost,changeActiveEditingLanguage} from "@store/re
 import {DashboardStore} from "typescript-types";
 import {useAppDispatch} from "@store/hooks";
 import {LanguagesOptions} from "@repo/ui";
-import { isNumericString } from 'shared-util';
+import { isNumericString } from '@repo/shared-util';
 
 const AdminPostPageStyledDiv = styled.div`
   display: grid;

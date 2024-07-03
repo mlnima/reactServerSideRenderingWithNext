@@ -1,7 +1,7 @@
 'use client';
-import React, {FC, useState, useMemo, useEffect} from 'react';
+import React, {FC, useState, useEffect} from 'react';
 import Select from 'react-select';
-import {uniqArrayBy} from 'shared-util';
+import {uniqArrayBy} from '@repo/shared-util';
 import {clientAPIRequestGetMetaSuggestion} from '@repo/api-requests';
 import {Meta} from 'typescript-types';
 import './MetaDataSelector.styles.scss';
@@ -111,7 +111,7 @@ export default MetaDataSelector;
 
 // import {FC,  useMemo, useState} from "react";
 // import Select from 'react-select';
-// import {uniqArrayBy} from "shared-util";
+// import {uniqArrayBy} from "@repo/shared-util";
 // import {clientAPIRequestResetMetaImage} from "@repo/api-requests";
 // import {Meta} from "typescript-types";
 // import './MetaDataSelector.styles.scss'

@@ -5,8 +5,8 @@ import { Post } from 'typescript-types';
 import CardTitle from '../../asset/CardTitle/CardTitle';
 import '../postCard.scss';
 import './LearnPostCard.scss';
-import { imageLessCardColors } from '@repo/data-structures';
-import { randomNumberGenerator } from 'shared-util';
+import { imageLessCardColors } from '@repo/data-structures/dist/src';
+import { randomNumberGenerator } from '@repo/shared-util';
 
 const CardImageRendererUseClient = dynamic(
     () => import('../../asset/CardImageRenderer/CardImageRendererUseClient'),

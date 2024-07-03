@@ -52,7 +52,7 @@
     "normalize-url": "^8.0.0",
     "path": "^0.12.7",
     "peerjs": "^1.4.7",
-    "shared-util": "*",
+    "@repo/shared-util": "*",
     "sharp": "^0.32.6",
     "shelljs": "^0.8.5",
     "simple-peer": "^9.11.1",

@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import ActorCard from '@components/cards/cardsComponents/ActorCard/ActorCard';
 import { Meta} from "typescript-types";
 import './ActorsCardsRenderer.styles.scss'
-import {convertMetasTypeToSingular} from "shared-util";
+import {convertMetasTypeToSingular} from "@repo/shared-util";
 
 interface IProps {
     metas?: Meta[],

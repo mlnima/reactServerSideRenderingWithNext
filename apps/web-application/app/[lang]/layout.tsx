@@ -31,13 +31,6 @@ import KeysListener from '@components/global/KeysListener';
 import UserConfigMenu from '@components/global/UserConfigMenu/UserConfigMenu';
 import LayoutViewportGenerator from '@components/LayoutMetaGenerator/LayoutViewportGenerator';
 import Custom3rdPartyScripts from '@components/Custom3rdPartyScripts';
-// import CustomHeadTagsInitializer from "@components/CustomHeadTagsInitializer";
-// import './layout.scss'
-// import Head from "next/head";
-// import type { Viewport } from 'next'
-// import {rtlLanguages} from "@repo/data-structures";
-// import MediaCall from "@components/MediaCall/MediaCall";
-// import dynamic from "next/dynamic";
 
 export async function generateStaticParams() {
     return i18n.locales.map((lng: string) => ({ lng }));

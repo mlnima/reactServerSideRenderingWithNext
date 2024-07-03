@@ -3,7 +3,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-regular-svg-icons/faEye';
-import { shortNumber } from 'shared-util';
+import { shortNumber } from '@repo/shared-util';
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons/faThumbsUp';
 import { faThumbsDown } from '@fortawesome/free-solid-svg-icons/faThumbsDown';
 import './ActionButtons.scss';

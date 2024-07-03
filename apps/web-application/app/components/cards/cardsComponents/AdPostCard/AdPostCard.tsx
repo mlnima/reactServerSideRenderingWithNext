@@ -3,7 +3,7 @@ import Link from "next/link";
 import CardTitle from "../../asset/CardTitle/CardTitle";
 import dynamic from "next/dynamic";
 import {Post} from "typescript-types";
-import {ratingCalculator} from "shared-util";
+import {ratingCalculator} from "@repo/shared-util";
 import '../postCard.scss'
 
 const CardImageRendererUseClient = dynamic(() => import('../../asset/CardImageRenderer/CardImageRendererUseClient'))

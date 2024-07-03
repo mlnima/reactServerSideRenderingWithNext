@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { capitalizeFirstLetter } from 'shared-util';
+import { capitalizeFirstLetter } from '@repo/shared-util';
 import './PostsPageInfo.styles.scss';
 
 interface PostsPageInfoPropTypes {

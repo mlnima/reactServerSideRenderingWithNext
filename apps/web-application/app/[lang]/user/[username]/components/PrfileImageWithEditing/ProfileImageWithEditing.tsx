@@ -4,7 +4,7 @@ import './ProfileImageWithEditing.scss'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCirclePlus} from "@fortawesome/free-solid-svg-icons/faCirclePlus";
 import {useAppDispatch, useAppSelector} from "@store/hooks";
-import {imageCanvasCompressor} from "shared-util";
+import {imageCanvasCompressor} from "@repo/shared-util";
 import {clientAPIRequestUploadProfileImage} from "@repo/api-requests";
 import {replaceUserProfileImage} from "@store/reducers/userReducers/userReducer";
 

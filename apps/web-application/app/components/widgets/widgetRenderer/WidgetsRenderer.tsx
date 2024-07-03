@@ -40,7 +40,7 @@ export default WidgetsRenderer
 
     //***************DO NOT DELETE THIS COMMENT****************************
 
-//import {renderByDayCondition, renderByDevice, renderByLanguageCondition} from "shared-util";
+//import {renderByDayCondition, renderByDevice, renderByLanguageCondition} from "@repo/shared-util";
 
 
 // if (

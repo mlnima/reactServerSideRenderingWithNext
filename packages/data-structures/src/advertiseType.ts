@@ -1,3 +1,3 @@
-export const advertiseType: string[] = ['banner','script']
-export const advertisePlaceType: string[] = ['body','initial']
+export const advertiseType = ['banner','script']
+export const advertisePlaceType = ['body','initial']
 

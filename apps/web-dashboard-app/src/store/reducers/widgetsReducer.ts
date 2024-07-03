@@ -1,5 +1,5 @@
 // @ts-nocheck
-import {reduceWidgetsToGroups} from "shared-util";
+import {reduceWidgetsToGroups} from "@repo/shared-util";
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
 import {AxiosError, AxiosResponse} from "axios";

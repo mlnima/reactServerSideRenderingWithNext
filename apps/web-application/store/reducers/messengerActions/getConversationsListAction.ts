@@ -1,7 +1,7 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {loading} from "@store/reducers/globalStateReducer";
 import {clientAPIRequestGetConversationsList} from "@repo/api-requests";
-import {uniqArrayBy} from "shared-util";
+import {uniqArrayBy} from "@repo/shared-util";
 import {RootState} from "@store/store";
 
 

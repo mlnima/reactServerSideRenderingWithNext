@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React, {useMemo} from "react";
-import {postTypes} from "@repo/data-structures";
-import {convertVariableNameToName} from "shared-util";
+import {postTypes} from "@repo/data-structures/dist/src";
+import {convertVariableNameToName} from "@repo/shared-util";
 import {useSearchParams} from "react-router-dom";
 import paramsObjectGenerator from "../../../../variables/paramsObjectGenerator";
 

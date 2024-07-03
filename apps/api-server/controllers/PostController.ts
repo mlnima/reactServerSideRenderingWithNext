@@ -4,31 +4,26 @@ import { mongoIdValidator } from '@util/data-validators';
 import postSchema from '@schemas/postSchema';
 import searchKeywordSchema from '@schemas/searchKeywordSchema';
 import metaSchema from '@schemas/metaSchema';
-import _clientQueryGeneratorForGettingPosts from '@util/_clientQueryGeneratorForGettingPosts';
-import { postFieldRequestForCards } from '@repo/data-structures';
+import { postFieldRequestForCards } from '@repo/data-structures/dist/src';
 import userSchema from '@schemas/userSchema';
 import mongoose from 'mongoose';
 import commentSchema from '@schemas/commentSchema';
-import { randomNumberGenerator } from '@util/math-util';
-import { isEmptyObject } from '@util/object-util';
-import { findMetas } from '@_variables/serverGlobalVariable/findMetas';
 import { multiQueryUniquer } from '@util/queryUtil';
-import { Post } from 'typescript-types';
+import { Post, Meta } from 'typescript-types';
 import { reqQueryToMongooseOptions } from '@util/database-util';
 import updateSaveMetas from '@util/_updateSaveMetas';
 import xHScrapper from '@util/scrappers/xHScrapper';
 import xHSimilarFinder from '@util/scrappers/xHSimilarFinder';
 import fs from 'fs';
-import _adminQueryGeneratorForGettingPosts from "@util/_adminQueryGeneratorForGettingPosts";
-import {isMainThread, parentPort, Worker} from "worker_threads";
-import path from "path";
-import FileManagerController from "./FileManagerController";
+import { isMainThread, parentPort, Worker } from 'worker_threads';
+import GlobalStore from '@store/GlobalStore';
 
 class PostController {
     //---------------------helpers-------------------
     static async findRelatedPosts(post: Post) {
         try {
             const relatedByFields = ['actors', 'categories', 'tags'];
+            //@ts-ignore
             return await postSchema.findRelatedPosts({ post, relatedByFields, limit: 8 });
         } catch (error) {
             console.log(error);
@@ -47,17 +42,18 @@ class PostController {
                             name: keyword,
                             count: postsCount,
                         },
-                        $inc: { searchHits: 1 },
+                        // $inc: { searchHits: 1 },
                     },
                     { upsert: true },
                 )
                 .exec();
+            console.log(`keyword ${keyword} Saved in DB with ${postsCount} result`)
         } catch (error) {
             console.log('error=> ', error);
         }
     }
 
-    static async getMetaForGettingPostsRequest(meta: string) {
+    static async findMeta(meta: string) {
         try {
             if (mongoIdValidator(meta)) {
                 return await metaSchema.findById(meta).exec();
@@ -73,28 +69,26 @@ class PostController {
 
     static findPostQueryGenerator(req: Request) {
         const hasId = req.query?._id && mongoIdValidator(multiQueryUniquer(req.query?._id));
-        const decodeTitle =
-            req.query?.title && decodeURIComponent(multiQueryUniquer(req.query?.title));
+        const decodeTitle = req.query?.title ? decodeURIComponent(multiQueryUniquer(req.query?.title)) : '';
 
         return hasId
             ? { _id: req.query._id }
             : decodeTitle
-              ? { $or: [{ title: decodeTitle }, { permaLink: decodeTitle?.replaceAll(' ', '-') }] }
+              ? //@ts-ignore
+                { $or: [{ title: decodeTitle }, { permaLink: decodeTitle.replaceAll(' ', '-') }] }
               : null;
     }
 
     static async setDraftPostToUserData(userId: string, draftPostId: string) {
         try {
-            return await userSchema
-                .findByIdAndUpdate(userId, { $set: { draftPost: draftPostId } }, { new: true })
-                .exec();
+            return await userSchema.findByIdAndUpdate(userId, { $set: { draftPost: draftPostId } }, { new: true }).exec();
         } catch (error) {
             console.error('Error updating user draft post:', error);
             throw error;
         }
     }
 
-    static async findPostsWithDuplicatedMeta(duplicate: any[]) {
+    static async findPostsWithDuplicatedMeta(duplicate: Meta[]) {
         try {
             let metasWithCount = [];
 
@@ -108,17 +102,11 @@ class PostController {
             }
 
             const highestCountMeta = Math.max(...metasWithCount.map(item => item.count));
-            const itemWithHighestCount = metasWithCount.find(
-                item => item.count === highestCountMeta,
-            );
-            const itemsToRemoveFromPosts = metasWithCount.filter(
-                meta => meta._id !== itemWithHighestCount._id,
-            );
+            const itemWithHighestCount = metasWithCount.find(item => item.count === highestCountMeta);
+            const itemsToRemoveFromPosts = metasWithCount.filter(meta => meta._id !== itemWithHighestCount._id);
 
             for await (const wrongMeta of itemsToRemoveFromPosts) {
-                const postWithWrongMeta = await postSchema
-                    .find({ [duplicate._id.type]: wrongMeta._id })
-                    .exec();
+                const postWithWrongMeta = await postSchema.find({ [duplicate._id.type]: wrongMeta._id }).exec();
 
                 for await (const post of postWithWrongMeta) {
                     await postSchema
@@ -150,9 +138,6 @@ class PostController {
             }
         } catch (error) {}
     }
-
-
-
 
     //---------------------client--------------------
     static async getPost(req: Request, res: Response) {
@@ -257,10 +242,7 @@ class PostController {
         try {
             const findQuery = PostController.findPostQueryGenerator(req);
 
-            const postData = await postSchema
-                .findOne(findQuery)
-                .select(['likes', 'disLikes'])
-                .exec();
+            const postData = await postSchema.findOne(findQuery).select(['likes', 'disLikes']).exec();
 
             if (postData) {
                 res.status(200).json({
@@ -278,57 +260,26 @@ class PostController {
 
     static async getPosts(req: Request, res: Response) {
         try {
-            const locale = req.query.locale;
-            const metaIdentifier = req.query?.metaId
-                ? multiQueryUniquer(req.query?.metaId)
-                : req.query?.selectedMetaForPosts
-                  ? multiQueryUniquer(req.query?.selectedMetaForPosts)
-                  : null;
-            const meta = metaIdentifier
-                ? (await PostController.getMetaForGettingPostsRequest(metaIdentifier)) || {}
-                : {};
+            const { locale, metaId, postType } = req.query;
+            const meta = metaId ? await PostController.findMeta(multiQueryUniquer(metaId)) : null;
+            const metaQuery = metaId
+                ? [{ $or: [{ categories: { $in: metaId } }, { tags: { $in: metaId } }, { actors: { $in: metaId } }] }]
+                : [];
+            const postTypeQuery = postType ? [{ postType: postType }] : [];
 
-            const findingPostsOptions = _clientQueryGeneratorForGettingPosts(
-                {
-                    ...req.query,
-                    //@ts-ignore
-                    size:
-                        req.query.size === 'undefined'
-                            ? global?.initialSettings?.layoutSettings?.numberOfCardsPerPage || 20
-                            : parseInt(req.query.size),
-                    page: req.query.page === 'undefined' ? 1 : parseInt(req.query.page),
-                    //@ts-ignore
-                },
-                meta?._id,
-            );
+            const findPostsQueries = {
+                $and: [...metaQuery, ...postTypeQuery, { status: 'published' }],
+            };
 
-            const totalCount = await postSchema
-                .countDocuments(findingPostsOptions.findPostsQueries)
-                .exec();
+            const totalCount = await postSchema.countDocuments(findPostsQueries).exec();
 
             const posts = await postSchema
-                .find(
-                    findingPostsOptions.findPostsQueries,
-                    findingPostsOptions.selectedFields,
-                    reqQueryToMongooseOptions(req),
-                )
-                // .find(findingPostsOptions.findPostsQueries, findingPostsOptions.selectedFields, {
-                //     skip:
-                //         findingPostsOptions.size * findingPostsOptions.page -
-                //         findingPostsOptions.size,
-                //     limit: findingPostsOptions.size,
-                //     sort: findingPostsOptions.sortQuery,
-                // })
+                .find(findPostsQueries, null, reqQueryToMongooseOptions(req))
                 .select([...postFieldRequestForCards, `translations.${locale}.title`])
-                // .populate(populateMeta)
                 .exec();
-            if (req.query?.keyword && totalCount > 0) {
-                await saveSearchedKeyword(req.query?.keyword, totalCount);
-            }
-
             res.json({ posts, totalCount, meta });
         } catch (err) {
-            console.log(err.stack);
+            console.log(err);
             return res.status(503).json({
                 message: 'Server Error',
             });
@@ -337,6 +288,7 @@ class PostController {
 
     static async getUserPagePosts(req: Request, res: Response) {
         try {
+            const cardAmountPerPage = GlobalStore.getCardAmountPerPage();
             const authorId = req.query.authorId;
             const skip = req.query.skip || 0;
 
@@ -346,7 +298,7 @@ class PostController {
                     [...postFieldRequestForCards, 'status'],
                     {
                         skip: skip,
-                        limit: global?.initialSettings?.layoutSettings?.numberOfCardsPerPage || 20,
+                        limit: cardAmountPerPage || 20,
                     },
                 )
                 .exec();
@@ -365,8 +317,10 @@ class PostController {
             res.status(400).json({ message: 'Bad Request' });
             return;
         }
+
         try {
             const locale = req.query.locale;
+            const locales = GlobalStore.getLocalesExceptDefault();
 
             const decodedKeyword = req.query.keyword ? decodeURIComponent(req.query.keyword) : '';
             const keyword = decodedKeyword.toLowerCase();
@@ -377,18 +331,20 @@ class PostController {
             let postsTranslationsSearchQuery = [];
             let metasTranslationsSearchQuery = [];
 
-            for await (const locale of locals) {
-                metasTranslationsSearchQuery.push({
-                    [`translations.${locale}.name`]: new RegExp(keyword, 'i'),
-                });
-            }
-            for await (const locale of locals) {
-                postsTranslationsSearchQuery.push({
-                    [`translations.${locale}.title`]: new RegExp(keyword, 'i'),
-                });
-                postsTranslationsSearchQuery.push({
-                    [`translations.${locale}.description`]: new RegExp(keyword, 'i'),
-                });
+            if (locale) {
+                for await (const locale of locales) {
+                    metasTranslationsSearchQuery.push({
+                        [`translations.${locale}.name`]: new RegExp(keyword, 'i'),
+                    });
+                }
+                for await (const locale of locales) {
+                    postsTranslationsSearchQuery.push({
+                        [`translations.${locale}.title`]: new RegExp(keyword, 'i'),
+                    });
+                    postsTranslationsSearchQuery.push({
+                        [`translations.${locale}.description`]: new RegExp(keyword, 'i'),
+                    });
+                }
             }
 
             const postSearchQuery = {
@@ -405,10 +361,7 @@ class PostController {
             };
 
             const metasSearchQuery = {
-                $and: [
-                    { $or: [{ name: new RegExp(keyword, 'i') }, ...metasTranslationsSearchQuery] },
-                    { status: 'published' },
-                ],
+                $and: [{ $or: [{ name: new RegExp(keyword, 'i') }, ...metasTranslationsSearchQuery] }, { status: 'published' }],
             };
 
             const posts = await postSchema
@@ -422,10 +375,10 @@ class PostController {
             const metas = await metaSchema.find(metasSearchQuery).limit(size).exec();
 
             if (totalCount > 0) {
-                await saveSearchedKeyword({
+                await PostController.saveSearchedKeyword(
                     keyword,
-                    postsCount: totalCount,
-                });
+                    totalCount
+                )
             }
 
             res.json({
@@ -434,6 +387,7 @@ class PostController {
                 metas,
             });
         } catch (err) {
+            console.log(`err=> `, err);
             res.status(500).json({ message: 'Server Error' });
         }
     }
@@ -451,7 +405,6 @@ class PostController {
 
             const postData = await postSchema.findById(_id).select('author').lean().exec();
 
-
             if (postData.author !== userData._id) {
                 return res.status(401).json({
                     message: 'Unauthorized',
@@ -459,9 +412,7 @@ class PostController {
             }
 
             await postSchema.findByIdAndDelete(_id).exec();
-            await userSchema
-                .findByIdAndUpdate(req.userData._id, { $unset: { draftPost: 1 } })
-                .exec();
+            await userSchema.findByIdAndUpdate(req.userData._id, { $unset: { draftPost: 1 } }).exec();
 
             res.status(200).json({ message: 'Post Deleted Successfully' });
         } catch (error) {}
@@ -525,11 +476,7 @@ class PostController {
             await userSchema.findByIdAndUpdate(userId, userUpdateQuery);
 
             // Update post
-            const updatedPost = await postSchema.findByIdAndUpdate(
-                postId,
-                { $inc: postIncQuery },
-                { new: true },
-            );
+            const updatedPost = await postSchema.findByIdAndUpdate(postId, { $inc: postIncQuery }, { new: true });
 
             res.status(200).json({
                 likes: updatedPost.likes,
@@ -541,16 +488,9 @@ class PostController {
         }
     }
 
-
-
-
-
-
-
     static async newPost(req: Request, res: Response) {
         try {
             const userData = await userSchema.findById(req.userData._id).select('draftPost').exec();
-
 
             // const unFinishedPostsCount = await postSchema
             //     .countDocuments({
@@ -560,7 +500,6 @@ class PostController {
             //         ],
             //     })
             //     .exec();
-
 
             if (userData?.draftPost) {
                 res.json({
@@ -572,16 +511,11 @@ class PostController {
                 newPostDataToSave.save(async (error: any, savedPostData: { _id: any }) => {
                     if (error) {
                         console.error('Error saving new post:', error);
-                        return res
-                            .status(500)
-                            .json({ message: 'Something Went Wrong', type: 'error' });
+                        return res.status(500).json({ message: 'Something Went Wrong', type: 'error' });
                     }
 
                     try {
-                        await PostController.setDraftPostToUserData(
-                            userData._id,
-                            savedPostData._id,
-                        );
+                        await PostController.setDraftPostToUserData(userData._id, savedPostData._id);
                         res.json({
                             message: 'Post successfully created. After a moderator review',
                             newPostId: savedPostData._id,
@@ -603,10 +537,7 @@ class PostController {
             const type = { type: req.query?.type };
             const statusQuery = { status: 'published' };
             const size = 10;
-            const startWithQuery =
-                req.query?.startWith === 'any'
-                    ? {}
-                    : { name: { $regex: '^' + req.query?.startWith, $options: 'i' } };
+            const startWithQuery = req.query?.startWith === 'any' ? {} : { name: { $regex: '^' + req.query?.startWith, $options: 'i' } };
             await metaSchema
                 .find({ $and: [type, startWithQuery, statusQuery] }, 'name type', {
                     sort: { updatedAt: -1 },
@@ -632,8 +563,7 @@ class PostController {
 
             const userId = new mongoose.Types.ObjectId(req.userData._id);
             const authorId = new mongoose.Types.ObjectId(postData?.author);
-            const isAuthorizedToUpdate =
-                userId.toString() === authorId.toString() || req.userData.role === 'administrator';
+            const isAuthorizedToUpdate = userId.toString() === authorId.toString() || req.userData.role === 'administrator';
 
             if (!isAuthorizedToUpdate) {
                 res.status(403).json({
@@ -653,9 +583,7 @@ class PostController {
                 )
                 .exec();
 
-            await userSchema
-                .findByIdAndUpdate(req.userData._id, { $unset: { draftPost: 1 } })
-                .exec();
+            await userSchema.findByIdAndUpdate(req.userData._id, { $unset: { draftPost: 1 } }).exec();
 
             res.status(200).json({
                 updatedPost,
@@ -759,9 +687,7 @@ class PostController {
                 ...postUpdatedData,
                 lastModify: Date.now(),
                 tags: postUpdatedData.tags ? await updateSaveMetas(postUpdatedData.tags) : [],
-                categories: postUpdatedData.categories
-                    ? await updateSaveMetas(postUpdatedData.categories)
-                    : [],
+                categories: postUpdatedData.categories ? await updateSaveMetas(postUpdatedData.categories) : [],
                 actors: postUpdatedData.actors ? await updateSaveMetas(postUpdatedData.actors) : [],
             };
 
@@ -780,8 +706,6 @@ class PostController {
             res.status(500).json({ message: 'I Tried But Something Went Wrong', err });
         }
     }
-
-
 
     static async dashboardUpdatePosts(req: Request, res: Response) {
         const ids = req.body.ids || [];
@@ -860,11 +784,7 @@ class PostController {
         const postType = req.body.data?.postType ? { postType: req.body.data.postType } : {};
         const metaId = req.body.data.metaId
             ? {
-                  $or: [
-                      { categories: req.body.data.metaId },
-                      { tags: req.body.data.metaId },
-                      { actors: req.body.data.metaId },
-                  ],
+                  $or: [{ categories: req.body.data.metaId }, { tags: req.body.data.metaId }, { actors: req.body.data.metaId }],
               }
             : {};
         const author = req.body.data.author ? { author: req.body.data.author } : {};
@@ -921,19 +841,26 @@ class PostController {
         }
     }
 
-    static async dashboardGetPosts(req: Request, res: Response){
-
+    static async dashboardGetPosts(req: Request, res: Response) {
         try {
+            const { metaId, keyword, status } = req.query;
 
-            const findingPostsOptions = _adminQueryGeneratorForGettingPosts({
-                ...req.query,
-                //@ts-ignore
-                size: !req.query.size
-                    ? global?.initialSettings?.layoutSettings
-                    ?.numberOfCardsPerPage || 20
-                    : parseInt(req.query.size),
-                page: !req.query.page ? 1 : parseInt(req.query.page),
-            });
+            const decodedKeyword = keyword? decodeURIComponent(keyword) : '';
+            const metaQuery = metaId
+                ? [{ $or: [{ categories: { $in: metaId } }, { tags: { $in: metaId } }, { actors: { $in: metaId } }] }]
+                : [];
+            const searchQuery = !decodedKeyword ? [] : [{ $or: [{ title: new RegExp(decodedKeyword, 'i') }] }];
+            const statusQuery = !status
+                ? [{ status: 'published' }]
+                : status === 'all'
+                  ? [{ status: { $ne: 'trash' } }]
+                  : [{ status: status }];
+            const findQuery = {$and:[
+                    ...metaQuery,
+                    ...searchQuery,
+                    ...statusQuery
+                ]}
+
 
             const populateMeta = [
                 { path: 'author', select: ['username', 'profileImage', 'role'] },
@@ -942,86 +869,61 @@ class PostController {
                 { path: 'tags', select: { name: 1, type: 1 } },
             ];
 
-            const totalCount = await postSchema
-                .countDocuments(findingPostsOptions.findPostsQueries)
-                .exec();
+            const totalCount = await postSchema.countDocuments(findQuery).exec();
 
             const posts = await postSchema
                 .find(
-                    findingPostsOptions.findPostsQueries,
-                    findingPostsOptions.selectedFields,
-                    reqQueryToMongooseOptions(req)
-                    // {
-                    //     skip:
-                    //         findingPostsOptions.size * findingPostsOptions.page -
-                    //         findingPostsOptions.size,
-                    //     limit: findingPostsOptions.size,
-                    // },
+                    findQuery,
+                    null,
+                    reqQueryToMongooseOptions(req),
                 )
-                //@ts-ignore
-                .sort(findingPostsOptions.sortQuery)
                 .populate(populateMeta)
                 .exec();
 
-            const meta =
-                req.query?.metaId || req.query?.selectedMetaForPosts
-                    ? await metaSchema
-                        .findById(
-                            req.query?.metaId || req.query?.selectedMetaForPosts,
-                        )
-                        .exec()
-                    : {};
-
-            res.json({ posts, totalCount, meta });
+            res.json({ posts, totalCount });
         } catch (err) {
             console.log(err.stack);
             return res.status(404).json({
                 message: 'Server Error',
             });
         }
-    };
+    }
 
-    static async dashboardCheckAndRemoveDeletedVideos(req: Request, res: Response){
-        res.end()
-        if (isMainThread){
-            const worker = new Worker(
-                './expressServer/workers/checkAndRemoveDeletedVideos.js',
-                {workerData:{type:req.query.type}}
-            )
+    static async dashboardCheckAndRemoveDeletedVideos(req: Request, res: Response) {
+        res.end();
+        if (isMainThread) {
+            const worker = new Worker('./expressServer/workers/checkAndRemoveDeletedVideos.js', { workerData: { type: req.query.type } });
 
-            worker.once('message',() =>{
-                worker.postMessage({ exit: true })
-            })
+            worker.once('message', () => {
+                worker.postMessage({ exit: true });
+            });
 
             worker.on('error', error => {
-                console.log('error:',error);
+                console.log('error:', error);
             });
 
             worker.on('exit', exitCode => {
-                console.log('exitCode : ',exitCode);
-            })
-        }else{
-            parentPort.on("message", (commandFromMainThread) => {
+                console.log('exitCode : ', exitCode);
+            });
+        } else {
+            parentPort.on('message', commandFromMainThread => {
                 if (commandFromMainThread.exit) {
-                    process.exit(0);
+                    // process.exit(0);
                 }
             });
         }
     }
 
-    static async dashboardGeneratePermaLinkForPosts(req: Request, res: Response){
-        res.end()
+    static async dashboardGeneratePermaLinkForPosts(req: Request, res: Response) {
+        res.end();
         if (isMainThread) {
-            const worker = new Worker(
-                './expressServer/workers/generatePermaLink.js',
-                {workerData: {}}
-            )
+            const worker = new Worker('./expressServer/workers/generatePermaLink.js', { workerData: {} });
 
-            worker.on('message', (data) => {
+            worker.on('message', data => {
                 // data.type === 'log' && console.log(data.message)
 
                 if (data.exit) {
-                    data.exit && worker.postMessage({exit: true})
+                    data.exit && worker.postMessage({ exit: true });
                 }
             });
 
@@ -1031,22 +933,22 @@ class PostController {
 
             worker.on('exit', exitCode => {
                 console.log('exitCode : ', exitCode);
-            })
+            });
         } else {
-            parentPort.on("message", (commandFromMainThread) => {
+            parentPort.on('message', commandFromMainThread => {
                 if (commandFromMainThread.exit) {
-                    console.log('terminating thread')
-                    process.exit(0);
+                    console.log('terminating thread');
+                    // process.exit(0);
                 }
             });
         }
     }
 
-    static async apiNewPost(req: Request, res: Response){
+    static async apiNewPost(req: Request, res: Response) {
         try {
-            const newPost = req.body.postData
-            const hasDuplicate = await postSchema.exists({title: newPost.title})
-            if (hasDuplicate){
+            const newPost = req.body.postData;
+            const hasDuplicate = await postSchema.exists({ title: newPost.title });
+            if (hasDuplicate) {
                 return res.status(409).json({ message: 'Duplicate document exists' });
             }
 
@@ -1055,68 +957,66 @@ class PostController {
                 tags: newPost.tags ? await updateSaveMetas(newPost.tags) : [],
                 categories: newPost.categories ? await updateSaveMetas(newPost.categories) : [],
                 actors: newPost.actors ? await updateSaveMetas(newPost.actors) : [],
-                mainThumbnail: downloadImageContent ? await FileManagerController.downloadCreatedPostByApiThumbnail(newPost) : newPost.mainThumbnail
-            })
+                // mainThumbnail: downloadImageContent ? await FileManagerController.downloadCreatedPostByApiThumbnail(newPost) : newPost.mainThumbnail
+                mainThumbnail: newPost.mainThumbnail,
+            });
 
-            const savedDocument = await documentToSave.save()
+            const savedDocument = await documentToSave.save();
 
-            res.json({message: `${savedDocument.title} Has Been Saved : ${savedDocument._id} `})
-
-        }catch (error){
+            res.json({ message: `${savedDocument.title} Has Been Saved : ${savedDocument._id} ` });
+        } catch (error) {
             res.status(500).json({ message: 'Something Went Wrong' });
         }
     }
 
-    static async  apiUpdatePost(req: Request, res: Response){
+    static async apiUpdatePost(req: Request, res: Response) {
         try {
-            const updatedPostData = req.body.updatedPostData
-            postSchema.findByIdAndUpdate(updatedPostData._id, updatedPostData).exec().then(() => {
-                res.json({message: updatedPostData._id + ' updated'})
-            })
-
+            const updatedPostData = req.body.updatedPostData;
+            postSchema
+                .findByIdAndUpdate(updatedPostData._id, updatedPostData)
+                .exec()
+                .then(() => {
+                    res.json({ message: updatedPostData._id + ' updated' });
+                });
         } catch (err) {
-            console.log(err)
+            console.log(err);
         }
     }
 
-    static async apiUpdateMeta(req: Request, res: Response){
+    static async apiUpdateMeta(req: Request, res: Response) {
         try {
             const metaData = req.body.metaData;
-            const findQuery = {$and:[{name: metaData.name},{type: metaData.type}]}
-            const existingMeta =  await  metaSchema.findOne(findQuery).exec()
+            const findQuery = { $and: [{ name: metaData.name }, { type: metaData.type }] };
+            const existingMeta = await metaSchema.findOne(findQuery).exec();
 
-            if (existingMeta){
-                metaSchema.findByIdAndUpdate(existingMeta._id, {$set:{...metaData}}, {new: true})
+            if (existingMeta) {
+                metaSchema
+                    .findByIdAndUpdate(existingMeta._id, { $set: { ...metaData } }, { new: true })
                     .exec()
                     .then(updatedMeta => {
-                        res.json({updated: updatedMeta,message: existingMeta?.name + ' updated'})
-                    }).catch(err => {
-                    res.status(500).json({message:'Error While Trying To Save New Meta From API',err})
-                })
-            }
-            else {
+                        res.json({ updated: updatedMeta, message: existingMeta?.name + ' updated' });
+                    })
+                    .catch(err => {
+                        res.status(500).json({ message: 'Error While Trying To Save New Meta From API', err });
+                    });
+            } else {
                 const newMetaDataToSave = new metaSchema({
                     ...metaData,
-                    count:0,
-                    status:'draft'
-                })
+                    count: 0,
+                    status: 'draft',
+                });
                 await newMetaDataToSave.save((err, savedDocument) => {
                     if (err) {
-                        res.status(500).json({message: 'Error While Trying To Save New Meta From API', err})
+                        res.status(500).json({ message: 'Error While Trying To Save New Meta From API', err });
                     }
-                    res.json({updated: savedDocument, message: savedDocument.name + ' created'})
-                })
+                    res.json({ updated: savedDocument, message: savedDocument.name + ' created' });
+                });
             }
-        }catch (err){
-
-        }
-
+        } catch (err) {}
     }
 }
 
 export default PostController;
-
-
 
 // static async dashboardDeletePost(req: Request, res: Response) {
 //     const _id = req.body._id;
@@ -1132,3 +1032,11 @@ export default PostController;
 //             });
 //         });
 // }
+
+
+// const findingPostsOptions = _adminQueryGeneratorForGettingPosts({
+//     ...req.query,
+//     //@ts-ignore
+//     size: !req.query.size ? cardAmountPerPage || 20 : parseInt(req.query.size),
+//     page: !req.query.page ? 1 : parseInt(req.query.page),
+// });

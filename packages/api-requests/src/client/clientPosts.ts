@@ -1,6 +1,6 @@
 import AxiosInstance from '../lib/AxiosInstance';
 import { AxiosResponse } from 'axios';
-import { mongoIdValidator, queryUniquer } from 'shared-util';
+import { mongoIdValidator, queryUniquer } from '@repo/shared-util';
 
 import { postFieldRequestForCards, postTypes } from '@repo/data-structures';
 

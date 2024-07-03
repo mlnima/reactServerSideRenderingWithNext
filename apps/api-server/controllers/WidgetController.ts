@@ -1,13 +1,63 @@
 import {Request, Response} from "express";
 import widgetSchema from "@schemas/widgetSchema";
-import {databaseSelectFieldsForPostCards, postFieldRequestForCards} from "@repo/data-structures";
+import { postFieldRequestForCards} from "@repo/data-structures/dist/src";
 import {Widget} from "typescript-types";
-import updatePostsWidget from "@util/widgets/updatePostsWidget";
 import updateMetasWidget from "@util/widgets/updateMetasWidget";
 import updatePostsListEntireByCategoriesWidget
     from "@util/widgets/updatePostsListEntireByCategoriesWidget";
+import postSchema from "@schemas/postSchema";
+import {clientAllowedSortOptions} from "@repo/data-structures";
+import GlobalStore from "@store/GlobalStore";
 
 class WidgetController{
+
+    static async updatePostsWidget(widgetData,widgetId,res){
+        try {
+            const cardAmountPerPage = GlobalStore.getCardAmountPerPage()
+            const metaId = widgetData?.uniqueData?.selectedMetaForPosts || widgetData?.selectedMetaForPosts;
+            const postType = widgetData?.uniqueData?.postType || widgetData?.postType;
+            const sort = widgetData?.uniqueData?.sort || widgetData?.sort;
+            const metaQuery = metaId ? [{$or: [{categories: {$in: metaId}}, {tags: {$in: metaId}}, {actors: {$in: metaId}}]}] : [];
+            const postTypeQuery = postType ? [{postType}] : []
+            const limit = widgetData?.uniqueData?.count ||  widgetData?.count || cardAmountPerPage ;
+            const sortQuery = !sort || sort === 'updatedAt'  ? {updatedAt: -1} : clientAllowedSortOptions.includes(sort) ? {[sort]: -1} : {}
+
+            const findQuery  = { $and:[
+                    {status: 'published'},
+                    ...metaQuery,
+                    ...postTypeQuery
+                ]}
+
+            let totalCount = await postSchema.countDocuments(findQuery).exec()
+            let posts = await postSchema.find(
+                findQuery,
+                ['_id'],
+                {
+                    skip: widgetData.sortBy === 'random' ? Math.floor(Math.random() * totalCount) : 0,
+                    limit,
+                    sort: sortQuery,
+                }
+            ).exec()
+
+
+            const updateData =  {
+                ...widgetData,
+                uniqueData: {
+                    ...(widgetData?.uniqueData || {}),
+                    posts: posts.map((post) => post?._id),
+                    totalCount
+                }
+            }
+
+            const updatedWidget = await widgetSchema.findByIdAndUpdate(widgetId, {data: updateData}, {new: true}).exec()
+            res.status(200).json({ updatedWidget });
+        } catch (error) {
+            console.error(error);
+            res.status(503).json({ message: 'Something went wrong. Please try again later.' });
+        }
+    }
+
+    //---------------------Client----------------------
     static async getWidgets(req: Request, res: Response){
 
         try {
@@ -64,9 +114,14 @@ class WidgetController{
         const widgetData = req.body?.widgetData?.data
         const widgetId = req.body?.widgetData?._id
 
+        if (!widgetId || !widgetData) {
+            res.status(400).json({ message: 'Missing widget ID' });
+            return;
+        }
+
         try {
             if (widgetData.type === 'posts' || widgetData.type === 'postsList' || widgetData.type === 'postsSlider' || widgetData.type === 'postsSwiper') {
-                await updatePostsWidget(widgetData,widgetId,res)
+                await WidgetController.updatePostsWidget(widgetData,widgetId,res)
             } else if (widgetData.type === 'meta' || widgetData.type === 'metaWithImage') {
                 await updateMetasWidget(widgetData,widgetId,res)
             } else if (widgetData.type === 'postsListEntireByCategories') {

@@ -1,17 +1,9 @@
 'use server';
-import {fetchSettings} from "@lib/fetch-requests/fetchSettings";
-import HelperFunctions from "../../../HelperFunctions";
-
-
+import HelperFunctions from '../../../HelperFunctions';
 
 const manifest = async () => {
     try {
-        // const initialSettingsData = await fetchSettings({
-        //     requireSettings: ['initialSettings'],
-        // });
-        // console.log(`initialSettingsData=> `,initialSettingsData)
-
-        const initialSettingsData = await HelperFunctions.getSettings('initialSettings')
+        const initialSettingsData = await HelperFunctions.getSettings('initialSettings');
         const headDataSettings = initialSettingsData?.data?.headDataSettings;
 
         const name = headDataSettings.title ? { name: headDataSettings.title } : {};
@@ -19,7 +11,7 @@ const manifest = async () => {
         const description = headDataSettings.description ? { description: headDataSettings.description } : {};
         const display = { display: headDataSettings.display || 'standalone' };
         const start_url = { start_url: headDataSettings.start_url || '/' };
-        const orientation = { orientation: headDataSettings.orientation || '/' };
+        const orientation = { orientation: headDataSettings.orientation || 'portrait' };
         const theme_color = { theme_color: headDataSettings.themeColor || '#000' };
         const background_color = { background_color: headDataSettings.themeColor || '#000' };
 
@@ -56,7 +48,6 @@ const manifest = async () => {
             //@ts-ignore
             icons: icons,
         };
-
     } catch (error) {
         console.log(`manifest error=> `, error);
         return {};

@@ -1,5 +1,5 @@
 {
-  "name": "shared-util",
+  "name": "@repo/shared-util",
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {

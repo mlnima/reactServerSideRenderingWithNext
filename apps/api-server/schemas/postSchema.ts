@@ -1,6 +1,6 @@
 // @ts-nocheck
 import mongoose from 'mongoose'
-import {postTypes, videoQualities} from "@repo/data-structures";
+import {postTypes, videoQualities} from "@repo/data-structures/dist/src";
 
 const downloadLinks = new mongoose.Schema({
     title: String,

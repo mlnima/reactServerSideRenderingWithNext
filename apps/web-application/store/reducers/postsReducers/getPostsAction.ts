@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {convertMetasTypeToSingular} from "shared-util";
+import {convertMetasTypeToSingular} from "@repo/shared-util";
 import {clientAPIRequestGetPosts} from "@repo/api-requests";
 
 interface IFetchPosts {

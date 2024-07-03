@@ -1,6 +1,6 @@
 import React, {ChangeEvent, FC, useEffect, useMemo, useState} from "react";
 import styled from "styled-components";
-import {inputValueSimplifier} from "shared-util";
+import {inputValueSimplifier} from "@repo/shared-util";
 import {LanguagesOptions} from "@repo/ui";
 import {updateSettingAction} from "@store/reducers/settingsReducer";
 import MonacoEditor from "@components/common/MonacoEditor";

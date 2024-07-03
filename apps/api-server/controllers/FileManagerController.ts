@@ -8,7 +8,6 @@ import download from "image-downloader";
 import path from "path";
 import fileRemover from "@_variables/fileRemover";
 import {getCurrentDatePath} from "@util/path-utils";
-import {removeFileExtension} from "@util/file-utils";
 import fileSchema from "@schemas/fileSchema";
 import postSchema from "@schemas/postSchema";
 import {isValidObjectId} from "mongoose";
@@ -65,7 +64,8 @@ class FileManagerController {
 
     static async deleteFile(filePath: string){
         try {
-            await fsExtra.unlink(path.join(__dirname, '../../../../', filePath));
+            const pathToUploadFolder = path.join(__dirname, '../', filePath)
+            await fsExtra.unlink(pathToUploadFolder);
             console.log('File deleted successfully', filePath);
         } catch (err) {
             console.error(`Error deleting file: ${err}`);

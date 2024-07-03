@@ -122,7 +122,7 @@ router.get('/dashboard/widget', adminAuthMiddleware, WidgetController.dashboardG
 // router.post('/v1/fileManager/uploadImage', authMiddleware, FileManagerController.uploadImage);
 router.post('/v1/file/upload/postImages', authMiddleware, FileManagerController.uploadPostImages);
 router.patch('/v1/file/upload/profileImage', authMiddleware, FileManagerController.uploadProfileImage);
-router.post('/v1/file/delete/postImage', authMiddleware, FileManagerController.deletePostImage);
+router.delete('/v1/file/delete/postImage', authMiddleware, FileManagerController.deletePostImage);
 router.post('/v1/file/delete/postImages', authMiddleware, FileManagerController.deletePostImages);
 router.post('/dashboard/file/readPath', adminAuthMiddleware, FileManagerController.dashboardReadPath);
 router.post('/dashboard/file/delete/file', adminAuthMiddleware, FileManagerController.dashboardDeleteFile);

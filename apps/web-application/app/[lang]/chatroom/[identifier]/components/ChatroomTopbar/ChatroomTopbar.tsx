@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import {capitalizeFirstLetters} from "shared-util";
+import {capitalizeFirstLetters} from "@repo/shared-util";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUsers} from "@fortawesome/free-solid-svg-icons/faUsers";
 import {useRouter} from "next/navigation";

@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import styled from 'styled-components';
-import { postTypes } from '@repo/data-structures';
+import { postTypes } from '@repo/data-structures/dist/src';
 
 const Style = styled.div``;
 

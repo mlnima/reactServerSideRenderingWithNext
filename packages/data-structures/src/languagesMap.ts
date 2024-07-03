@@ -1,7 +1,5 @@
-type LanguagesMap = {[key:string]:string}
 
-
-export const languagesMapOrigin:LanguagesMap = {
+export const languagesMapOrigin = {
     'en': 'English',
     'de': 'Deutsch',
     'ar': 'العربية',
@@ -29,7 +27,7 @@ export const languagesMapOrigin:LanguagesMap = {
     'zh': '中文'
 };
 
-export const languagesMapInEnglish:LanguagesMap = {
+export const languagesMapInEnglish = {
     'en': 'English',
     'de': 'German',
     'ar': 'Arabic',

@@ -1,5 +1,4 @@
 import AxiosInstance from "../lib/AxiosInstance";
-import {queryUniquer} from 'shared-util'
 
 interface IGetMetasCurrentQuery{
     sort?:string,

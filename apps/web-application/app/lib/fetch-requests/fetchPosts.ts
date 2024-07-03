@@ -1,6 +1,6 @@
 // @ts-nocheck
-import { mongoIdValidator, removeEmptyProperties } from '../../../../../packages/shared-util';
-import { postFieldRequestForCards } from '@repo/data-structures';
+import { mongoIdValidator, removeEmptyProperties } from '@repo/shared-util';
+import { postFieldRequestForCards } from '@repo/data-structures/dist/src';
 import config from './config';
 
 const APIServerUrl = process.env.NEXT_PUBLIC_API_SERVER_URL;
@@ -216,7 +216,8 @@ export const fetchSearch = async ({ queryObject, locale, revalidate, tags }: IFe
         }
         return await response.json();
     } catch (error) {
-        throw error;
+        console.log(`error=> `,error)
+
     }
 };
 

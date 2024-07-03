@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import {shortNumber} from "shared-util";
+import {shortNumber} from "@repo/shared-util";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye} from "@fortawesome/free-regular-svg-icons/faEye";
 import './CardViews.styles.scss';

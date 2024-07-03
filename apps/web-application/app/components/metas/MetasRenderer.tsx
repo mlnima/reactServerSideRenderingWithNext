@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { Meta } from 'typescript-types';
 import Link from 'next/link';
-import { capitalizeFirstLetter, convertMetasTypeToSingular } from 'shared-util';
-import { groupingArrayOfMetas } from 'shared-util';
+import { capitalizeFirstLetter, convertMetasTypeToSingular } from '@repo/shared-util';
+import { groupingArrayOfMetas } from '@repo/shared-util';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAnglesDown, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import './MetasRenderer.styles.scss';

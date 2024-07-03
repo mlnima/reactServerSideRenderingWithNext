@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import './FormWidgetField.scss'
-import {convertVariableNameToName} from "shared-util";
+import {convertVariableNameToName} from "@repo/shared-util";
 
 interface IProps {
     field: {

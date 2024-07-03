@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {convertVariableNameToName} from "shared-util";
+import {convertVariableNameToName} from "@repo/shared-util";
 import WidgetModel from "./WidgetModel/WidgetModel";
 import styled from "styled-components";
 import {useSelector} from "react-redux";

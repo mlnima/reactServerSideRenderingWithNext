@@ -4,7 +4,7 @@ import React, { useEffect, useRef, FC } from 'react';
 import ChatRoomMessage from './ChatRoomMessage';
 import { ChatroomMessage } from 'typescript-types';
 import socket from '@lib/web-socket-client';
-import { sortArrayByPropertyOfObject } from 'shared-util';
+import { sortArrayByPropertyOfObject } from '@repo/shared-util';
 import './ChatRoomMessageArea.styles.scss';
 import { Spinner } from '@repo/ui';
 

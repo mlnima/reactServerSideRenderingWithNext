@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import {capitalizeFirstLetters} from "shared-util";
+import {capitalizeFirstLetters} from "@repo/shared-util";
 import './PostMetasRenderer.scss';
 import {Meta} from "typescript-types";
 import PostActor from "./PostActor";

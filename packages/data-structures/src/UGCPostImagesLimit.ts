@@ -1,4 +1,4 @@
-const UGCPostImagesLimit:{[key:string]:number} = {
+const UGCPostImagesLimit  = {
     'video':1,
     'promotion':1,
     'article':1,

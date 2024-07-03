@@ -1,7 +1,7 @@
 // import {createAsyncThunk} from "@reduxjs/toolkit";
 // import type {GetServerSidePropsContext, PreviewData} from "next";
 // import {setHeadData, setNotFoundPage} from "../globalStateReducer";
-// import {customPageCanonicalUrlGenerator} from "shared-util";
+// import {customPageCanonicalUrlGenerator} from "@repo/shared-util";
 // import {ParsedUrlQuery} from "querystring";
 // import {clientAPIRequestGetPage} from "@repo/api-requests";
 //

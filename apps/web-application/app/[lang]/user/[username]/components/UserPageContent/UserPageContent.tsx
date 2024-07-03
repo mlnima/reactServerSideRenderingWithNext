@@ -13,8 +13,7 @@ import PostsCardsRenderer from "@components/cards/CardsRenderer/PostsCardsRender
 import {Post} from "typescript-types";
 import {loading} from "@store/reducers/globalStateReducer";
 import ProfileImageWithEditing from "../PrfileImageWithEditing/ProfileImageWithEditing";
-import {postStatuses} from "@repo/data-structures";
-import {capitalizeFirstLetter} from "shared-util";
+
 
 interface IProps {
     username: string,

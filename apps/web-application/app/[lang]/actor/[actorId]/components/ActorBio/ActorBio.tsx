@@ -1,6 +1,6 @@
 'use client';
 import React, {FC, useState} from "react";
-import {capitalizeFirstLetter} from "shared-util";
+import {capitalizeFirstLetter} from "@repo/shared-util";
 import ActorDetails from "../ActorDetails/ActorDetails";
 import './ActorBio.styles.scss'
 import {Meta} from "typescript-types";

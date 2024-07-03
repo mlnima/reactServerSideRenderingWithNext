@@ -13,7 +13,7 @@ const CardImageRendererUseClient = dynamic(() => import(
     '../../asset/CardImageRenderer/CardImageRendererUseClient'
     ))
 
-// import {ratingCalculator} from "shared-util";
+// import {ratingCalculator} from "@repo/shared-util";
 // const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
 // const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
 

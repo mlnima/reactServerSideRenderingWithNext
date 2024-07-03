@@ -46,8 +46,15 @@ class GlobalStore {
         return this.initialSettings
     }
 
+    getCardAmountPerPage(){
+        return this.initialSettings?.layoutSettings?.numberOfCardsPerPage
+    }
+
     getLocales(){
         return process.env.NEXT_PUBLIC_LOCALES.split(' ')
+    }
+    getLocalesExceptDefault(){
+        return process.env.NEXT_PUBLIC_LOCALES.replace(process.env.NEXT_PUBLIC_DEFAULT_LOCALE ,'').split(' ')
     }
 
     async execCommand(command:string){

@@ -23,7 +23,7 @@
     "jest-presets": "*",
     "eslint-config-custom": "*",
     "tsconfig": "*",
-    "shared-util": "*",
-    "typescript": "^5.4.5"
+    "@repo/shared-util": "*",
+    "typescript": "^5.5.3"
   }
 }

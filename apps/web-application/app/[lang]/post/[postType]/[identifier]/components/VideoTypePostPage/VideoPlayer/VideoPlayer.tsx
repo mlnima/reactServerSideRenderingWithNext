@@ -1,6 +1,6 @@
 import React, {FC} from "react";
-import {convertDurationStringToIso8601} from "shared-util";
-import {convertDateToIsoString} from "shared-util";
+import {convertDurationStringToIso8601} from "@repo/shared-util";
+import {convertDateToIsoString} from "@repo/shared-util";
 import {Post} from "typescript-types";
 import './VideoPlayer.styles.scss';
 

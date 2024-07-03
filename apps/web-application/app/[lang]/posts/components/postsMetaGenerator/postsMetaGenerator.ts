@@ -1,7 +1,7 @@
 import { fetchSettings } from '@lib/fetch-requests/fetchSettings';
 import { getDictionary } from '../../../../../get-dictionary';
 import { i18n } from '@i18nConfig';
-import { capitalizeFirstLetter } from 'shared-util';
+import { capitalizeFirstLetter } from '@repo/shared-util';
 import { AlternatesGenerators } from '@lib/alternatesCanonicalGenerator';
 
 type Props = {

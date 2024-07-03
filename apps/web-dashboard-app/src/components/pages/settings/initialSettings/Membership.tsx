@@ -1,12 +1,12 @@
 import React, {useState} from "react";
 import styled from "styled-components";
 import {DashboardStore} from "typescript-types";
-import {postTypes} from "@repo/data-structures";
-import {convertVariableNameToName} from "shared-util";
+import {postTypes} from "@repo/data-structures/dist/src";
+import {convertVariableNameToName} from "@repo/shared-util";
 import {useAppDispatch} from "@store/hooks";
 import {useSelector} from "react-redux";
 import {editMembershipSettingsAction, updateSettingAction} from "@store/reducers/settingsReducer";
-import {inputValueSimplifier} from "shared-util";
+import {inputValueSimplifier} from "@repo/shared-util";
 
 const Style = styled.div`
 

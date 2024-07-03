@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import {Meta} from "typescript-types";
 import Link from "next/link";
-import {capitalizeFirstLetter} from "shared-util";
+import {capitalizeFirstLetter} from "@repo/shared-util";
 //import dynamic from "next/dynamic";
 import './CategoryCard.scss'
 

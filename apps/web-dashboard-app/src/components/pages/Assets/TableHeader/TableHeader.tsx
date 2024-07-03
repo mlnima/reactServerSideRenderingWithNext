@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, FC, useMemo} from 'react';
-import {convertVariableNameToName} from "shared-util";
+import {convertVariableNameToName} from "@repo/shared-util";
 import styled from "styled-components";
 import tableItemProperties from "../tableBodyItemProperties";
 import {useSearchParams} from "react-router-dom";

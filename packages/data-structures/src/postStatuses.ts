@@ -1,4 +1,4 @@
-const postStatuses: string[] = [
+const postStatuses  = [
     'published',
     'pending',
     'draft',

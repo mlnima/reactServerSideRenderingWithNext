@@ -1,6 +1,6 @@
 declare module 'api-requests';
-declare module 'shared-util';
-declare module '@repo/data-structures';
+declare module '@repo/shared-util';
+declare module 'packages/data-structures';
 declare module 'fetch-requests';
 declare module 'initialized-socket-io';
 declare module '@repo/react-hooker-lib';

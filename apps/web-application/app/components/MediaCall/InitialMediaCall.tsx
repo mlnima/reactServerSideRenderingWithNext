@@ -6,7 +6,7 @@ import {faCircleUser} from "@fortawesome/free-solid-svg-icons/faCircleUser";
 import {faXmark} from "@fortawesome/free-solid-svg-icons/faXmark";
 import {useAppDispatch, useAppSelector} from "@store/hooks";
 import {resetMediaConnectionAction} from "@store/reducers/mediaConnectionReducer";
-import {capitalizeFirstLetter} from "shared-util";
+import {capitalizeFirstLetter} from "@repo/shared-util";
 
 interface PropTypes {
     callType: 'video' | 'audio' | 'stream' | null,

@@ -8,8 +8,8 @@ import FormHeader from "./FormHeader";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye} from "@fortawesome/free-solid-svg-icons/faEye";
 import {registerUserAction} from "@store/reducers/userReducers/registerUserAction";
-import {usernameValidatorRegisterForm, passwordValidatorRegisterForm} from "shared-util";
-import {emailValidator} from "shared-util";
+import {usernameValidatorRegisterForm, passwordValidatorRegisterForm} from "@repo/shared-util";
+import {emailValidator} from "@repo/shared-util";
 import './LoginRegisterPopupForms.scss'
 import {faEyeSlash} from "@fortawesome/free-solid-svg-icons";
 
