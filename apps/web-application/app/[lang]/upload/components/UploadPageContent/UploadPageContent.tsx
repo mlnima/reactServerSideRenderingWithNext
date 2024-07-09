@@ -19,6 +19,8 @@ import './UploadPageContent.scss';
 import { faEye } from '@fortawesome/free-solid-svg-icons/faEye';
 import deepEqual from 'deep-equal';
 import { formatDistance } from 'date-fns';
+import LoggedInRequirePageMessage from "@components/LoggedInRequireMessage/LoggedInRequirePageMessage";
+import ForbiddenMessage from "@components/ForbiddenMessage/ForbiddenMessage";
 
 interface IProps {
     _id: string;
@@ -207,7 +209,14 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
     //     return null
     // }
 
-    if (!postByUserSettings?.[editingPost?.postType]?.allow ) return null
+
+
+    if (!loggedIn) return <LoggedInRequirePageMessage dictionary={dictionary} />;
+
+    if (
+        !postByUserSettings?.[editingPost?.postType]?.allow ||
+        (!!_id && userData?._id !== editingPost?.author?._id)
+    ) return <ForbiddenMessage/>
 
     return (
         <Csr>

@@ -1,0 +1,17 @@
+.forbiddenAccessMessage{
+  color: var(--primary-text-color, #fff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  h1{
+    font-size: 2rem;
+  }
+  svg{
+    width: 4rem;
+    height:  4rem;
+  }
+
+}
