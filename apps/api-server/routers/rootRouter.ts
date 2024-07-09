@@ -43,7 +43,7 @@ router.get('/dashboard/metas', adminAuthMiddleware, MetaController.dashboardGetM
 router.get('/dashboard/meta/setMetaThumbnailsAndCount', adminAuthMiddleware, MetaController.dashboardSetMetaThumbnailsAndCount);
 //---------------------Post----------------------------
 router.get('/v1/posts', PostController.getPosts);
-router.get('/v1/posts/getUserPagePosts', cacheSuccesses, PostController.getUserPagePosts);
+router.get('/v1/posts/author', cacheSuccesses, PostController.getUserPagePosts);
 router.get('/v1/posts/search', PostController.searchPosts);
 router.get('/v1/post', PostController.getPost);
 router.get('/v1/post/editing', PostController.getPost);

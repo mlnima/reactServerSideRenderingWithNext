@@ -21,7 +21,7 @@ const ChatRoomMessage: React.FC<IProps> = ({ message, onDeleteMessageHandler }) 
         ? formatDistance(new Date(message?.createdAt), new Date(), {
             addSuffix: true,
         })
-        : 'Time Stamp Missing'
+        : ''
 
     return (
         <div className={'chatroomMessage'}>

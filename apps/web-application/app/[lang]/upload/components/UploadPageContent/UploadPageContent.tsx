@@ -44,10 +44,6 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
     const postByUserSettings = useAppSelector(({ settings }) => settings.initialSettings?.membershipSettings?.postByUserSettings);
 
     useEffect(() => {
-        console.log('postByUserSettings=> ',postByUserSettings);
-    }, [postByUserSettings]);
-
-    useEffect(() => {
         if (_id && loggedIn) {
             getEditingPostData();
         } else {

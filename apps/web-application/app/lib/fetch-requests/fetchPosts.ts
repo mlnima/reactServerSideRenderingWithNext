@@ -238,7 +238,7 @@ export const fetchUserPagePosts = async ({
 }: IFetchUserPagePosts) => {
     try {
         const response = await fetch(
-            `${APIServerUrl}/api/v1/posts/getUserPagePosts?authorId=${authorId}&skip=${skip}&status=${status}`,
+            `${APIServerUrl}/api/v1/posts/author?authorId=${authorId}&skip=${skip}&status=${status}`,
             config({
                 revalidate,
                 tags: [...(tags || []), 'cacheItem', 'posts'],

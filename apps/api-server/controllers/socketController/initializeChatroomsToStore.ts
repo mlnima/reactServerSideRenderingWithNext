@@ -27,6 +27,7 @@ const initializeChatroomsToStore = async () => {
                     },
                 },
             })
+            .lean()
             .exec();
 
         //converting chatrooms data from mongodb doc to object before initializing them into the store

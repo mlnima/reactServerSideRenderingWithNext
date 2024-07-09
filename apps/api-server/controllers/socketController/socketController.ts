@@ -75,8 +75,6 @@ export const initializeSocket = (io: any) => {
                     author: newMessageData.authorData,
                 };
 
-                console.log(`messageToSetInStoreAndSendToClient=> `,messageToSetInStoreAndSendToClient)
-
                 await chatroomSchema.findByIdAndUpdate(
                     savedMessage.chatroom,
                     {
@@ -86,6 +84,7 @@ export const initializeSocket = (io: any) => {
                 );
 
                 Store.addMessageToChatroom(messageToSetInStoreAndSendToClient);
+
                 io.in(newMessageData.messageBody?.chatroom).emit(
                     'messageFromChatroom',
                     messageToSetInStoreAndSendToClient,

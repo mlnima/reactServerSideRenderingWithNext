@@ -279,55 +279,6 @@ class PostController {
         }
     }
 
-    // static async updatePost(req: Request, res: Response) {
-    //     try {
-    //         const {_id} = req.body?.data
-    //
-    //         const postData = req.body?.data;
-    //
-    //         const post = await postSchema.findById(_id).lean().exec();
-    //
-    //         if (!postData) {
-    //             res.status(500).json({ message: 'Something Went Wrong', type: 'error' });
-    //         }
-    //
-    //         if (req.userData._id.toString() !== post?.author.toString()) {
-    //             res.status(403).json({
-    //                 message: 'You are not authorized to update this post',
-    //                 type: 'error',
-    //             });
-    //         }
-    //
-    //         const updatedPost = await postSchema
-    //             .findOneAndUpdate(
-    //                 { _id: postData?._id },
-    //                 { ...postData },
-    //                 {
-    //                     new: true,
-    //                     upsert: true,
-    //                 },
-    //             )
-    //             .exec();
-    //
-    //         if (postData.status !== 'draft'){
-    //             await userSchema.findByIdAndUpdate(req.userData._id, { $unset: { draftPost: 1 } }).exec();
-    //         }
-    //
-    //         res.status(200).json({
-    //             updatedPost,
-    //             message:
-    //                 postData?.status === 'draft'
-    //                     ? 'Saved'
-    //                     : postData?.status === 'trash'
-    //                         ? 'removed'
-    //                         : 'Your Updates Are Pending Moderator Approval',
-    //         });
-    //     } catch (error) {
-    //         console.log(error);
-    //         //@ts-ignore
-    //         res.status(500).json({ message: 'Something Went Wrong', type: 'error' });
-    //     }
-    // }
     static async getPost(req: Request, res: Response) {
         try {
             const findQuery = PostController.findPostQueryGenerator(req);
@@ -350,6 +301,7 @@ class PostController {
                     .exec();
 
                 if (post) {
+                    //@ts-ignore
                     const relatedPosts = await PostController.findRelatedPosts(post);
                     res.json({
                         post,
@@ -460,9 +412,12 @@ class PostController {
 
             const posts = await postSchema
                 .find(findPostsQueries, null, reqQueryToMongooseOptions(req))
-                .populate( [{ path: 'thumbnail', select: { filePath: 1 } }])
+                .populate( [
+                    { path: 'thumbnail', select: { filePath: 1 } }
+                ])
                 .select([...postFieldRequestForCards, `translations.${locale}.title`])
                 .exec();
+
             res.json({ posts, totalCount, meta });
         } catch (err) {
             console.log(err);
@@ -478,8 +433,7 @@ class PostController {
             const authorId = req.query.authorId;
             const skip = req.query.skip || 0;
 
-            const posts = await postSchema
-                .find(
+            const posts = await postSchema.find(
                     { $and: [{ author: authorId }, { status: req.query.status || 'published' }] },
                     [...postFieldRequestForCards, 'status'],
                     {
@@ -780,17 +734,7 @@ class PostController {
         }
     }
 
-    // static async checkPostExist(req: Request, res: Response) {
-    //     try {
-    //         const { _id } = req.query;
-    //         if (!_id) {
-    //             res.status(400).json({ message: 'No id provided' });
-    //         }
-    //         const exist = await postSchema.exists({ _id }).exec();
-    //
-    //         res.json({ exist });
-    //     } catch (error) {}
-    // }
+
 
     //---------------------Dashboard--------------------
 
@@ -1220,3 +1164,65 @@ export default PostController;
 //     size: !req.query.size ? cardAmountPerPage || 20 : parseInt(req.query.size),
 //     page: !req.query.page ? 1 : parseInt(req.query.page),
 // });
+
+// static async updatePost(req: Request, res: Response) {
+//     try {
+//         const {_id} = req.body?.data
+//
+//         const postData = req.body?.data;
+//
+//         const post = await postSchema.findById(_id).lean().exec();
+//
+//         if (!postData) {
+//             res.status(500).json({ message: 'Something Went Wrong', type: 'error' });
+//         }
+//
+//         if (req.userData._id.toString() !== post?.author.toString()) {
+//             res.status(403).json({
+//                 message: 'You are not authorized to update this post',
+//                 type: 'error',
+//             });
+//         }
+//
+//         const updatedPost = await postSchema
+//             .findOneAndUpdate(
+//                 { _id: postData?._id },
+//                 { ...postData },
+//                 {
+//                     new: true,
+//                     upsert: true,
+//                 },
+//             )
+//             .exec();
+//
+//         if (postData.status !== 'draft'){
+//             await userSchema.findByIdAndUpdate(req.userData._id, { $unset: { draftPost: 1 } }).exec();
+//         }
+//
+//         res.status(200).json({
+//             updatedPost,
+//             message:
+//                 postData?.status === 'draft'
+//                     ? 'Saved'
+//                     : postData?.status === 'trash'
+//                         ? 'removed'
+//                         : 'Your Updates Are Pending Moderator Approval',
+//         });
+//     } catch (error) {
+//         console.log(error);
+//         //@ts-ignore
+//         res.status(500).json({ message: 'Something Went Wrong', type: 'error' });
+//     }
+// }
+
+// static async checkPostExist(req: Request, res: Response) {
+//     try {
+//         const { _id } = req.query;
+//         if (!_id) {
+//             res.status(400).json({ message: 'No id provided' });
+//         }
+//         const exist = await postSchema.exists({ _id }).exec();
+//
+//         res.json({ exist });
+//     } catch (error) {}
+// }
