@@ -1,42 +1,47 @@
-import styled from "styled-components";
-import React, {useMemo} from "react";
-import {postTypes} from "@repo/data-structures/dist/src";
-import {convertVariableNameToName} from "@repo/shared-util";
-import {useSearchParams} from "react-router-dom";
-import paramsObjectGenerator from "../../../../variables/paramsObjectGenerator";
+import styled from 'styled-components';
+import React, { useMemo } from 'react';
+import { postTypes } from '@repo/data-structures/dist/src';
+import { convertVariableNameToName } from '@repo/shared-util';
+import { useSearchParams } from 'react-router-dom';
+import paramsObjectGenerator from '../../../../variables/paramsObjectGenerator';
 
 const PostsTypesStyledDiv = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
 
-  p {
-    margin: 0 10px;
-  }
-`
+    p {
+        width: 100px;
+        white-space: nowrap;
+        margin: 0 0.25rem;
+    }
+`;
 const PostsTypes = () => {
-    // const {push,pathname,query} = useRouter()
-
     const [search, setSearch] = useSearchParams();
     //@ts-ignore
-    const query = useMemo(()=>paramsObjectGenerator(search),[search])
-    
-    const onFormatChangeHandler = (e:React.ChangeEvent<any>) => {
+    const query = useMemo(() => paramsObjectGenerator(search), [search]);
 
-        setSearch({...query,postType: e.target.value})
-        // push({
-        //     pathname: pathname,
-        //     query: {...query, postType: e.target.value}
-        // }).finally()
-    }
+    const onFormatChangeHandler = (e: React.ChangeEvent<any>) => {
+        if (e.target.value) {
+            setSearch({ ...query, postType: e.target.value });
+        } else {
+            const newQuery = { ...query };
+            delete newQuery.postType;
+            setSearch({ ...newQuery });
+        }
+    };
 
     return (
-        <PostsTypesStyledDiv className='post-type asset-page-asset-type-selector'>
-            <p>Post Type :</p>
+        <PostsTypesStyledDiv className="assetControlItem">
+            <p>Type:</p>
             <select className={'primarySelect'} onChange={e => onFormatChangeHandler(e)} value={query?.postType}>
-                <option value='' >Select</option>
-                <option value='all'>All</option>
-                {postTypes.map((postType:string)=><option key={postType} value={postType}>{convertVariableNameToName(postType)}</option>)}
+                <option value="">Select</option>
+                {postTypes.map((postType: string) => (
+                    <option key={postType} value={postType}>
+                        {convertVariableNameToName(postType)}
+                    </option>
+                ))}
             </select>
         </PostsTypesStyledDiv>
     );

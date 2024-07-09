@@ -39,13 +39,13 @@ const VideoPostCard: FC<IProps> =
         // const rating = post.likes || post.disLikes ? ratingCalculator(post?.likes, post?.disLikes) : null
 // console.log('post=> ',post)
         return (
-            <article className={`postCard postCardVideo ${isSidebar ? 'postCardSidebar' : ''}`}>
+            <article className={`postCard postCardVideo${isSidebar ? ' postCardSidebar' : ''}`}>
                 <div className={'cardMedia'}>
                     <Link href={postUrl}
                           className={'card-link'}
                           title={post?.translations?.[locale as string]?.title ?? post?.title}>
                         <CardImageRendererUseClient
-                            imageUrl={post.mainThumbnail}
+                            imageUrl={post.mainThumbnail|| post?.thumbnail?.filePath}
                             isNextImageAllowed={isNextImageAllowed}
                             key={post?._id}
                             videoTrailerUrl={post?.videoTrailerUrl}

@@ -1,11 +1,8 @@
 'use client';
-import { FC } from 'react';
 import { useAppSelector } from '@store/hooks';
 import parse from 'html-react-parser';
 
-interface PropTypes {}
-
-const CustomHeadTagsInitializer: FC<PropTypes> = ({}) => {
+const CustomHeadTagsInitializer = () => {
     const customHeadTags = useAppSelector(
         ({ settings }) =>
             //@ts-ignore
@@ -15,7 +12,9 @@ const CustomHeadTagsInitializer: FC<PropTypes> = ({}) => {
     if (!customHeadTags) return null;
 
     return (
-        <span>{parse(customHeadTags)}</span>
+        <span>
+            {parse(customHeadTags)}
+        </span>
     )
 
 };

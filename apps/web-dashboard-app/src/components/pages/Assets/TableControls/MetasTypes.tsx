@@ -12,6 +12,7 @@ const Style = styled.div`
     margin: 0 10px;
   }
 `
+
 const MetasType = () => {
 
     const [search, setSearch] = useSearchParams();
@@ -23,9 +24,11 @@ const MetasType = () => {
     }
 
     return (
-        <Style className='post-type asset-page-asset-type-selector'>
+        <Style className='assetControlItem'>
             <p>Metas Type:</p>
-            <select className={'primarySelect'} onChange={e => onFormatChangeHandler(e)} value={query?.postType}>
+            <select className={'primarySelect'}
+                    onChange={e => onFormatChangeHandler(e)}
+                    value={query?.metaType}>
                 <option value='categories' >Categories</option>
                 <option value='tags'>Tags</option>
                 <option value='actors'>Actors</option>

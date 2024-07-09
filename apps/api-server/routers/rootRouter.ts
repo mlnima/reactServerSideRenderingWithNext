@@ -22,8 +22,10 @@ import rateLimitMiddleware from '../middlewares/rateLimitMiddleware';
 import cacheSuccesses from '../middlewares/apiCache';
 import CommentController from '../controllers/CommentController';
 import MetaController from '../controllers/MetaController';
+import multer from "multer"
 
 const router = Router();
+const upload = multer();
 
 //---------------------Comments-------------------
 router.delete('/dashboard/comment', adminAuthMiddleware, CommentController.deleteComments);
@@ -44,6 +46,8 @@ router.get('/v1/posts', PostController.getPosts);
 router.get('/v1/posts/getUserPagePosts', cacheSuccesses, PostController.getUserPagePosts);
 router.get('/v1/posts/search', PostController.searchPosts);
 router.get('/v1/post', PostController.getPost);
+router.get('/v1/post/editing', PostController.getPost);
+// router.get('/v1/post/exist', PostController.checkPostExist);
 router.get('/v1/post/view', PostController.getPostView);
 router.get('/v1/post/rating', PostController.getPostRating);
 router.delete('/v1/post', authWithUserDataMiddleware, PostController.deletePost);
@@ -122,8 +126,8 @@ router.get('/dashboard/widget', adminAuthMiddleware, WidgetController.dashboardG
 // router.post('/v1/fileManager/uploadImage', authMiddleware, FileManagerController.uploadImage);
 router.post('/v1/file/upload/postImages', authMiddleware, FileManagerController.uploadPostImages);
 router.patch('/v1/file/upload/profileImage', authMiddleware, FileManagerController.uploadProfileImage);
-router.delete('/v1/file/delete/postImage', authMiddleware, FileManagerController.deletePostImage);
-router.post('/v1/file/delete/postImages', authMiddleware, FileManagerController.deletePostImages);
+// router.delete('/v1/file/delete/postImage', authMiddleware, FileManagerController.deletePostImage);
+// router.delete('/v1/file/delete/postImages', authMiddleware, FileManagerController.deletePostImages);
 router.post('/dashboard/file/readPath', adminAuthMiddleware, FileManagerController.dashboardReadPath);
 router.post('/dashboard/file/delete/file', adminAuthMiddleware, FileManagerController.dashboardDeleteFile);
 router.post('/dashboard/file/upload/file', adminAuthMiddleware, FileManagerController.dashboardUploadFile);

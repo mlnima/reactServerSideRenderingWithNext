@@ -3,7 +3,7 @@ import parse from 'html-react-parser'
 import './WidgetText.scss'
 import { textContentReplacer } from '@repo/shared-util';
 import {rtlLanguages} from "@repo/data-structures/dist/src";
-import * as process from "process";
+
 
 interface TextPropTypes {
     translations: {

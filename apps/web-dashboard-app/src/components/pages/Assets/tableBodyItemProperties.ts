@@ -1,5 +1,5 @@
 const tableItemProperties = {
-    posts:['title', 'author', 'status', 'tags', 'categories', 'mainThumbnail', 'createdAt', 'updatedAt'],
+    posts:['title', 'author', 'status', 'tags', 'categories', 'mainThumbnail', 'thumbnail', 'createdAt', 'updatedAt'],
     chatrooms:['name', 'status', 'createdAt', 'updatedAt'],
     users:['username', 'email', 'status', 'role', 'createdAt', 'updatedAt'],
     comments:['_id','author','status', 'body', 'onDocumentId','createdAt', 'updatedAt'],

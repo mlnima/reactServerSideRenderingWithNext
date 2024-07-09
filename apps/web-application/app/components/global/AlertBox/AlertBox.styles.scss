@@ -60,4 +60,14 @@
       padding: 10px;
     }
   }
+
+  .alertActionButtons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    button{
+      min-width: 100px;
+    }
+  }
 }

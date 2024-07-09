@@ -100,6 +100,10 @@ const Index = () => {
         onTranslatedInputChangeHandler(e)
     }
 
+
+    if (!post){
+        return <h1>Not Found</h1>
+    }
     return (
         <div>
 

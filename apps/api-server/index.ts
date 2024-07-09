@@ -82,11 +82,14 @@ const runServer = () => {
 
     app.use(cors(corsOptions));
 
-    app.use(cors());
+
     app.use(express.json({ limit: '5MB' }));
     app.use(cookieParser());
     app.use(fileUpload());
-    app.use(bodyParser.json());
+
+    app.use(bodyParser());
+    // app.use(bodyParser.json());
+    // app.use(bodyParser.urlencoded({ extended: false }));
     app.use(xmlParser());
     app.use(compression({ filter: shouldCompress }));
 

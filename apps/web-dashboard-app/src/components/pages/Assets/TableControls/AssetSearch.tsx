@@ -27,8 +27,11 @@ const AssetSearch: FC = () => {
     const query = useMemo(()=>paramsObjectGenerator(search),[search])
 
     const onSubmitHandler = (e:React.FormEvent) => {
+        const queryData = { ...query, keyword };
+        delete queryData.page;
+
         e.preventDefault()
-        setSearch({...query,keyword})
+        setSearch({...queryData})
     }
 
     const onDeleteKeywordHandler = () => {
@@ -44,7 +47,7 @@ const AssetSearch: FC = () => {
 
     return (
 
-        <StyledForm className={'asset-page-search'} onSubmit={e => onSubmitHandler(e)}>
+        <StyledForm className={'assetControlItem'} onSubmit={e => onSubmitHandler(e)}>
 
             <input className={'primaryInput'}
                    value={keyword}

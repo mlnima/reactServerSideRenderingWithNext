@@ -2,9 +2,8 @@ import React, {useState, FC} from 'react';
 import RenderArraySection from './RenderArraySection';
 import {Link} from 'react-router-dom'
 import moment from "moment";
-
 import styled from "styled-components";
-import * as process from "process";
+
 
 let StyledDiv = styled.div`
   overflow-wrap: break-word;
@@ -126,10 +125,13 @@ const TableBodyItemSection: FC<TableBodyItemSectionPropTypes> = ({dataValue, dat
                 <RenderArraySection data={dataValue}/>
             </StyledDiv>
         )
-    } else if (dataName === 'mainThumbnail' || dataName === 'noImageUrl' || dataName === 'imageUrl') {
-        const imageURl = dataValue?.includes('http') ?
-            dataValue :
-            `${process.env.NEXT_PUBLIC_API_SERVER_URL}${dataValue}`
+    } else if (dataName === 'mainThumbnail' || dataName === 'noImageUrl' || dataName === 'imageUrl'|| dataName === 'thumbnail') {
+        const imagePath = dataValue?.filePath || dataValue
+
+        const imageURl = imagePath?.includes('http') ?
+            imagePath :
+            `${process.env.NEXT_PUBLIC_API_SERVER_URL}${ imagePath}`
+
         return (
             <StyledDiv className='asset-page-table-body-item-section'>
                 {gotError ?

@@ -7,6 +7,7 @@ import MonacoEditor from "@components/common/MonacoEditor";
 import {useSearchParams} from "react-router-dom";
 import {useAppDispatch} from "@store/hooks";
 import {dashboardAPIRequestGetSettings} from "@repo/api-requests";
+import EditPostPageSettings from "@components/pages/settings/defaultPagesSetttings/EditPostPageSettings";
 
 const Style = styled.form`
 
@@ -51,6 +52,9 @@ const DefaultPageSettings: FC<PropTypes> = ({}) => {
     const pageName = useMemo(() => search.get('pageName'), [search])
     const [openStyleEditor, setOpenStyleEditor] = useState(false);
     const [language, setLanguage] = useState('default')
+    const [headEditor, setHeadEditor] = useState(false)
+
+
     const defaultPageData = {
         pageName: '',
         title: '',
@@ -107,6 +111,7 @@ const DefaultPageSettings: FC<PropTypes> = ({}) => {
     const onSaveHandler = (e: any) => {
 
         e.preventDefault()
+        console.log(`submited=> `,)
         if (pageName) {
             dispatch(updateSettingAction({type: pageName, data: fieldsData}))
         }
@@ -114,17 +119,20 @@ const DefaultPageSettings: FC<PropTypes> = ({}) => {
 
     return (
         <Style className={'form-default'} onSubmit={onSaveHandler}>
+
             <h1>{pageName}:</h1>
-            <select name='activeEditingLanguage' className={'primarySelect active-editing-language'}
-                    onChange={e => setLanguage(e.target.value)}>
-                <option value='default'>{process.env.NEXT_PUBLIC_DEFAULT_LOCALE ?? 'default'}</option>
-                <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALES || ''}/>
-            </select>
             <div className="form-field">
                 <button className={'btn btn-primary'} type={'submit'}>
                     Save
                 </button>
             </div>
+            <p>Editing language</p>
+            <select name='activeEditingLanguage' className={'primarySelect active-editing-language'}
+                    onChange={e => setLanguage(e.target.value)}>
+                <option value='default'>{process.env.NEXT_PUBLIC_DEFAULT_LOCALE ?? 'default'}</option>
+                <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALES || ''}/>
+            </select>
+            <p>Sidebar</p>
             {/*//@ts-ignore*/}
             <select name="sidebar" className={'primarySelect'} onChange={onChangeHandler}
                     //@ts-ignore
@@ -168,36 +176,32 @@ const DefaultPageSettings: FC<PropTypes> = ({}) => {
 
             </>}
 
+            {pageName === 'editPostPage' && <EditPostPageSettings />}
 
-            <div className={'editors'}>
-                {/*<div className={'editor-wrapper'}>*/}
-                {/*    <p> Custom Styles:</p>*/}
-                {/*    <MonacoEditor*/}
-                {/*        language={'scss'}*/}
-                {/*        name={'customStyles'}*/}
-                {/*        defaultValue={fieldsData?.customStyles || ''}*/}
-                {/*        value={fieldsData?.customStyles || ''}*/}
-                {/*        className={'initialSettings-editor'}*/}
-                {/*        onChange={(e: any) => onChangeHandler(e)}*/}
-                {/*        height={'60vh'}*/}
-                {/*        width={'100%'}*/}
-                {/*    />*/}
-                {/*</div>*/}
-                <div className={'editor-wrapper'}>
-                    <p>Custom Head Tags:</p>
-                    <MonacoEditor
-                        language={'html'}
-                        name={'customHeadTags'}
-                        defaultValue={fieldsData?.customScriptsAsString || ''}
-                        value={fieldsData?.customScriptsAsString || ''}
-                        className={'initialSettings-editor'}
-                        //@ts-ignore
-                        onChange={(e: any) => onChangeHandler(e)}
-                        height={'60vh'}
-                        width={'100%'}
-                    />
+
+            <button className={'btn btn-primary'} type={'button'} onClick={()=>setHeadEditor(!headEditor)}>
+                Head Editor
+            </button>
+            {headEditor &&
+                <div className={'editors'}>
+                    <div className={'editor-wrapper'}>
+                        <p>Custom Head Tags:</p>
+                        <MonacoEditor
+                            language={'html'}
+                            name={'customHeadTags'}
+                            defaultValue={fieldsData?.customScriptsAsString || ''}
+                            value={fieldsData?.customScriptsAsString || ''}
+                            className={'initialSettings-editor'}
+                            //@ts-ignore
+                            onChange={(e: any) => onChangeHandler(e)}
+                            height={'60vh'}
+                            width={'100%'}
+                        />
+                    </div>
                 </div>
-            </div>
+
+            }
+
 
 
             <div className="form-field">

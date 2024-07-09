@@ -31,7 +31,7 @@ export const clientAPIRequestCreateNewPost = async (data: {}): Promise<{ newPost
 export const clientAPIRequestGetEditingPost = async (_id: string) => {
 
     //return await AxiosInstance.get(`/api/v1/posts/getEditingPost?${queries}`);
-    return await AxiosInstance.get(`/api/v1/post`,{
+    return await AxiosInstance.get(`/api/v1/post/editing`,{
         params:{
             _id
         }
@@ -77,11 +77,18 @@ export const clientAPIRequestGetPosts = async (currentQuery: any, medaId?: strin
     );
 };
 
-export const clientAPIRequestUpdatePost = async (data: {}) => {
-    return await AxiosInstance.post(`/api/v1/post`, { data });
+export const updatePost = async (formData:FormData) => {
+
+    return await AxiosInstance.put(`/api/v1/post`, formData);
 };
 
-
+// export const checkPostExist = async (_id: {}) => {
+//     return await AxiosInstance.get(`/api/v1/post/exist`, {
+//         params:{
+//             _id
+//         }
+//      });
+// };
 
 
 export const clientAPIRequestLikeDislikePost = async (_id: string, type: 'likes' | 'disLikes') => {

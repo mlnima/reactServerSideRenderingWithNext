@@ -1,4 +1,4 @@
-import imageCompression from "browser-image-compression";
+import imageCompression from 'browser-image-compression';
 
 export const blobToBase64 = blob => {
     return new Promise((resolve, reject) => {
@@ -18,12 +18,7 @@ export const blobToBase64 = blob => {
     });
 };
 
-export const imageCanvasCompressor = async ({
-                                                image,
-                                                maxWidth = 640,
-                                                maxHeight = 640,
-                                                outputType = 'base64',
-                                            }) => {
+export const imageCanvasCompressor = async ({ image, maxWidth = 640, maxHeight = 640, outputType = 'base64' }) => {
     try {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
@@ -64,13 +59,9 @@ export const imageCanvasCompressor = async ({
                                     reject(new Error('Compression failed.'));
                                     return;
                                 }
-                                const file = new File(
-                                    [blob],
-                                    'compressed_image.webp',
-                                    {
-                                        type: 'image/webp',
-                                    },
-                                );
+                                const file = new File([blob], 'compressed_image.webp', {
+                                    type: 'image/webp',
+                                });
                                 resolve(file);
                             },
                             'image/webp',

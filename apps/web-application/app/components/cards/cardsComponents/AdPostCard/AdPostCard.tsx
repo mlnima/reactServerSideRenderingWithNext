@@ -29,7 +29,7 @@ const UcgAdPostCard: FC<PropTypes> =
      }) => {
 
         return (
-            <article className={`postCard postCardAd ${isSidebar && 'postCardSidebar'}`}>
+            <article className={`postCard postCardAd${isSidebar ? ' postCardSidebar':''}`}>
                 <div className={'cardMedia'}>
                     <Link href={postUrl}
                           className={'cardLink'}

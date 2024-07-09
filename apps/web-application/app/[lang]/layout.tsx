@@ -30,7 +30,8 @@ import BackgroundFilterWholeScreen from '@components/global/BackgroundFilterWhol
 import KeysListener from '@components/global/KeysListener';
 import UserConfigMenu from '@components/global/UserConfigMenu/UserConfigMenu';
 import LayoutViewportGenerator from '@components/LayoutMetaGenerator/LayoutViewportGenerator';
-import Custom3rdPartyScripts from '@components/Custom3rdPartyScripts';
+import CustomScripts from '@components/CustomScripts';
+import CustomHeadTagsInitializer from "@components/CustomHeadTagsInitializer";
 
 export async function generateStaticParams() {
     return i18n.locales.map((lng: string) => ({ lng }));
@@ -51,6 +52,7 @@ const RootLayout = async ({
     const initialSettingsData = await fetchSettings({
         requireSettings: ['initialSettings'],
     });
+
     const initialSettings = initialSettingsData?.settings?.initialSettings;
 
     const staticWidgetsData = await fetchWidgets({
@@ -127,8 +129,8 @@ const RootLayout = async ({
                     {/*<MediaCall/>*/}
                     <KeysListener />
                     <UserConfigMenu locale={locale} dictionary={dictionary} />
-                    {/*<CustomHeadTagsInitializer/>*/}
-                    <Custom3rdPartyScripts />
+                    <CustomHeadTagsInitializer/>
+                    <CustomScripts />
                 </ReduxProvider>
             </body>
         </html>

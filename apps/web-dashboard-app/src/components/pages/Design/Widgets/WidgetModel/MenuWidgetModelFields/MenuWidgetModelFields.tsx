@@ -4,6 +4,7 @@ import styled from "styled-components";
 import {WidgetData, IMenuItem} from "typescript-types";
 import AddNewItemForm from "@components/pages/Design/Widgets/WidgetModel/MenuWidgetModelFields/AddNewItemForm";
 import ItemPreview from "@components/pages/Design/Widgets/WidgetModel/MenuWidgetModelFields/ItemPreview";
+import {inputValueSimplifier} from "@repo/shared-util";
 
 
 const MenuWidgetModelFieldsStyledDiv = styled.div`
@@ -65,13 +66,13 @@ const MenuWidgetModelFields: FC<IProps> =
             }
         }
 
-        const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+            const value = inputValueSimplifier(e)
             setFormData((prevFormData) => ({
                 ...prevFormData,
-                [event.target.name]: event.target.value
+                [e.target.name]: value
             }))
         }
-
 
         const onAddHandler = (event: React.FormEvent<HTMLFormElement>) => {
             event.preventDefault()

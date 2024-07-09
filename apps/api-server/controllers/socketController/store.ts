@@ -1,12 +1,15 @@
 import { ChatroomMessage } from 'typescript-types';
 
 class Store {
+
     private onlineUsers: { [chatroomId: string]: any } = {};
+
     private chatroomsList: Array<{
         _id: string;
         name: string;
         messages: Array<ChatroomMessage>;
     }> = [];
+
     private activeSockets: Map<string, any> = new Map();
 
     userDisconnectedHandler(userId: string): void {

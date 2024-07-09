@@ -3,6 +3,8 @@ import {Link, useLocation, useNavigate, useSearchParams,Navigate } from 'react-r
 import {convertVariableNameToName} from "@repo/shared-util";
 import styled from "styled-components";
 import paramsObjectGenerator from "@variables/paramsObjectGenerator";
+import postStatuses from "@repo/data-structures/dist/src/postStatuses";
+import userStatus from "@repo/data-structures/dist/src/userStatus";
 
 const AssetStatusNavigationStyledDiv = styled.div`
   display: flex;
@@ -19,7 +21,8 @@ const AssetStatusNavigation: FC = () => {
     const [search, setSearch] = useSearchParams();
     //@ts-ignore
     const query = useMemo(()=>paramsObjectGenerator(search),[search]);
-    const postsStatus = ['all', 'draft', 'published', 'pending', 'trash', 'reported'];
+    const postsStatus = query.assetsType ==='posts' ||  query.assetsType ==='metas'  ? ['all', ...postStatuses]:
+        query.assetsType ==='users' ? ['all',...userStatus] : [];
 
 
     const renderStatus = postsStatus.map((type: string) => {
@@ -36,8 +39,7 @@ const AssetStatusNavigation: FC = () => {
     })
 
     return (
-        <AssetStatusNavigationStyledDiv className='asset-page-status-navigation'>
-
+        <AssetStatusNavigationStyledDiv className='assetControlItem'>
             {renderStatus}
         </AssetStatusNavigationStyledDiv>
     );

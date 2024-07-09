@@ -24,7 +24,7 @@ const ActorCard: FC<ActorCardPropTypes> =
      }) => {
 
         return (
-            <article className={`actor-card metaCard ${isSidebar ? 'actorCardSidebar' : ''}`}>
+            <article className={`actor-card metaCard${isSidebar ? ' actorCardSidebar' : ''}`}>
                 <div className={`card-info`}>
                     <CardTitle title={capitalizeFirstLetter(meta?.name)} url={`/actor/${meta?._id}`}/>
                 </div>

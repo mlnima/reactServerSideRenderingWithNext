@@ -5,6 +5,7 @@ import {ChatroomMessage} from "./src/chatroom/ChatroomMessage";
 import {DesignSettings} from "./src/settings/DesignSettings";
 import {IdentitySettings} from "./src/settings/IdentitySettings";
 import {InitialSettings} from "./src/settings/InitialSettings";
+import {UgcSettings} from "./src/settings/UgcSettings";
 import {MembershipSettings} from "./src/settings/MembershipSettings";
 import {PageSettings} from "./src/settings/PageSettings";
 import {AdminPanelComments} from "./src/storeTypes/AdminPanelComments";
@@ -74,6 +75,7 @@ export type {
     ChatroomMessage,
     ChatroomRaw,
     InitialSettings,
+    UgcSettings,
     DesignSettings,
     IdentitySettings,
     MembershipSettings,

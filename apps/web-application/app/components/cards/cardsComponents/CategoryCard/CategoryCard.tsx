@@ -30,7 +30,7 @@ const CategoryCard: FC<CategoryCardPropTypes> =
      }) => {
 
         return (
-            <article className={`categoryCard ${isSidebar && 'categoryCardSidebar'}`}>
+            <article className={`categoryCard${isSidebar ? ' categoryCardSidebar' :''}`}>
 
                 {/*<div className={'cardMedia'}>*/}
                     <Link href={metaUrl} className='categoryCardLink'

@@ -38,11 +38,14 @@ export function middleware(request: NextRequest) {
     }
 }
 
-
 export const config = {
+     //matcher: [matcher],
     matcher: ['/((?!api|_next/static|_next/image|favicon.ico|asset|fonts|public|sitemap|robots.txt|manifest.webmanifest).*)'],
 
 }
+
+//|manifest.webmanifest
+
 // |manifest.json |manifest.webmanifest
 
 // //This function detect accepted language and return the best one but is not in use due to the bug

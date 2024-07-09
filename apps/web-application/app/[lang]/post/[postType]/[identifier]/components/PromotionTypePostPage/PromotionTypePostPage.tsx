@@ -47,7 +47,7 @@ const PromotionTypePostPage: FC<IProps> =
                         </div>
                         <div className='promotion-thumbnail-link'>
                             <a href={post?.redirectLink}>
-                                <img className='main-thumbnail' src={post?.mainThumbnail} alt="title"/></a>
+                                <img className='main-thumbnail' src={post?.mainThumbnail || post?.thumbnail?.filePath} alt="title"/></a>
                             <a href={post?.redirectLink} className='redirect-link' target='_blank'>go
                                 to {post?.title}</a>
                         </div>

@@ -7,4 +7,7 @@ export interface MembershipSettings{
     usersCanCommentOnThePosts: boolean,
     allowedPostTypeUserCanCreate:string[],
     usersPersonalEmailAddress: boolean,
+    postByUserSettings:{
+        [key:string]:any
+    }[]
 }

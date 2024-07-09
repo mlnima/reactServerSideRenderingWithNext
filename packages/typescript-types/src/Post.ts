@@ -45,6 +45,10 @@ interface Base {
     quality?:string,
     _id?:string,
     mainThumbnail?:string,
+    thumbnail?:{
+        _id:string,
+        filePath:string
+    },
     VideoTrailerUrl?:string,
     uniqueData: uniqueDataPossibility;
 }

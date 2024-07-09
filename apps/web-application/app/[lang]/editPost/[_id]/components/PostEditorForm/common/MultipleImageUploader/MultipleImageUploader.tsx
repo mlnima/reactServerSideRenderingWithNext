@@ -19,7 +19,6 @@ export interface MultipleImageUploaderProps {
     dictionary: {
         [key: string]: string;
     };
-    // onSelectImageHandler: (event: React.ChangeEvent<HTMLInputElement>) => void,
 }
 
 const MultipleImageUploader: React.FC<MultipleImageUploaderProps> = ({
@@ -113,14 +112,16 @@ const MultipleImageUploader: React.FC<MultipleImageUploaderProps> = ({
 
     return (
         <div className={'multipleImageUploader'}>
-            <input
-                ref={inputRef}
-                type="file"
-                multiple={limit > 1}
-                accept="image/*"
-                style={{ display: 'none' }}
-                onChange={onSelectImageHandler}
-            />
+            {editingPost?.images?.length < limit && (
+                <input
+                    ref={inputRef}
+                    type="file"
+                    multiple={limit > 1}
+                    accept="image/*"
+                    style={{ display: 'none' }}
+                    onChange={onSelectImageHandler}
+                />
+            )}
 
             {editingPost?.images?.length < limit && (
                 <div className={'add-images-area'} onClick={onInputFileClickHandler}>

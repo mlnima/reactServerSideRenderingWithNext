@@ -29,7 +29,7 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
      }) => {
 
         return (
-            <article className={`postCard postCardPromotion ${isSidebar && 'postCardSidebar'}`}>
+            <article className={`postCard postCardPromotion${isSidebar ?' postCardSidebar' : ''}`}>
                 <div className={`cardInfo`}>
                     <Link href={postUrl} aria-label={`open ${post?.translations?.[locale as string]?.title ?? post?.title} details`}>
                         <CardTitle title={post?.translations?.[locale as string]?.title ?? post?.title}
@@ -41,7 +41,7 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> =
                     <Link href={post?.redirectLink || '#'} className={'promotion-card-link-external'}
                        target={'_blank'} rel={'nofollow noopener external'}>
                         <CardImageRendererUseClient
-                            imageUrl={post.mainThumbnail}
+                            imageUrl={post?.mainThumbnail || post?.thumbnail?.filePath}
                             isNextImageAllowed={isNextImageAllowed}
                             key={post?._id}
                             submitPostView={true}

@@ -5,10 +5,10 @@ import { clientAPIRequestGetEditingPost, clientDeletePostByAuthor } from '@repo/
 import { capitalizeFirstLetter, reduceArrayOfDataToIds } from '@repo/shared-util';
 import MultipleImageUploader from '../PostEditorForm/common/MultipleImageUploader/MultipleImageUploader';
 import MetaDataSelector from '../MetaDataSelector/MetaDataSelector';
-import Price from '../Price/Price';
+// import Price from '../Price/Price';
 import './EditPostPageContent.scss';
 import updatePostAction from '@store/reducers/postsReducers/updatePostAction';
-import LocationField from '../PostEditorForm/common/LocationField/LocationField';
+// import LocationField from '../PostEditorForm/common/LocationField/LocationField';
 import Csr from '@components/global/Csr';
 import { usePathname, useRouter } from 'next/navigation';
 import { setAlert } from '@store/reducers/globalStateReducer';
@@ -49,6 +49,7 @@ const EditPostPageContent: FC<IProps> = ({ _id, dictionary, locale }) => {
                 if (userData.role === 'administrator' || postData?.data?.post?.author?._id === userData?._id) {
                     setEditingPost(postData?.data?.post || {});
                 }
+
             });
         }
     };
@@ -110,10 +111,24 @@ const EditPostPageContent: FC<IProps> = ({ _id, dictionary, locale }) => {
         await savePostData({ status: 'draft' });
     };
 
-    const onDeletePostByAuthorHandler = async () => {
-        if (editingPost?.images?.length > 0) {
-            await clientAPIRequestDeletePostImages({ postId: editingPost?._id });
-        }
+
+    const onDeleteRequestHandler = () =>{
+        dispatch(
+            setAlert({
+                message: 'Do you want to delete this post?',
+                type: 'deleteAction',
+                actionFunctions: onDeleteHandler
+            }),
+        );
+    }
+
+    const onDeleteHandler = async () => {
+        // await clientDeletePostByAuthor(editingPost?._id);
+        // if (editingPost?.images?.length > 0) {
+        //     await clientAPIRequestDeletePostImages(_id);
+        // }
+
+
         const deletePostRequestResult = await clientDeletePostByAuthor(editingPost?._id);
         dispatch(removeUserDraftPost(null));
         dispatch(
@@ -147,29 +162,44 @@ const EditPostPageContent: FC<IProps> = ({ _id, dictionary, locale }) => {
                                 name={'title'}
                             />
                         </div>
+
+                        {editingPost?.postType ==='promotion' &&
+                            <div className="formSection">
+                                <p>{dictionary?.['Redirect Link'] || 'Redirect Link'}:</p>
+                                <input
+                                    type="text"
+                                    required={true}
+                                    value={editingPost?.redirectLink || ''}
+                                    onChange={onChangeHandler}
+                                    className={'primaryInput'}
+                                    name={'redirectLink'}
+                                />
+                            </div>
+
+                        }
+
                         <div className="formSection imageUploader">
                             <MultipleImageUploader
                                 editingPost={editingPost}
                                 dictionary={dictionary}
-                                limit={userData?.role === 'administrator' ? 20 : UGCPostImagesLimit?.[editingPost?.type as string] || 1}
+                                limit={UGCPostImagesLimit?.[editingPost?.type as string] || 1 }
                                 setEditingPost={setEditingPost}
-                                // onSelectImageHandler={onSelectImageHandler}
                             />
                         </div>
                         <div className="formSection description">
                             <div className={'descriptionHeader'}>
                                 <p>{dictionary?.['Description'] || 'Description'}:</p>
-                                {/*<button className={'btn btn-primary'}*/}
-                                {/*        onClick={() => setAdvanceEditor(!advanceEditor)}>Advance*/}
-                                {/*</button>*/}
                             </div>
                             <textarea
                                 name={'description'}
+
                                 className={'description primaryInput'}
                                 onChange={onChangeHandler}
                                 value={editingPost?.description as string}
                             />
                         </div>
+
+
 
                         {editingPost?.postType === 'video' && (
                             <>
@@ -210,7 +240,7 @@ const EditPostPageContent: FC<IProps> = ({ _id, dictionary, locale }) => {
                         )}
                     </div>
                     <div className={'sidebarField'}>
-                        {userData?.role === 'administrator' ? (
+                        {userData?.role === 'administrator' ?
                             <div className="formSection">
                                 <p>Post Status:</p>
                                 <select
@@ -228,14 +258,14 @@ const EditPostPageContent: FC<IProps> = ({ _id, dictionary, locale }) => {
                                     })}
                                 </select>
                             </div>
-                        ) : userData?.role !== 'administrator' ? (
+                         :
                             <div className="formSection">
                                 <label>
                                     {dictionary?.['Status'] || 'Status'}: &nbsp;
                                     {dictionary?.[capitalizeFirstLetter(editingPost?.status)] || capitalizeFirstLetter(editingPost?.status)}
                                 </label>
                             </div>
-                        ) : null}
+                       }
                         {userData?.role === 'administrator' ? (
                             <div className="formSection">
                                 <p>Post Type:</p>
@@ -263,7 +293,7 @@ const EditPostPageContent: FC<IProps> = ({ _id, dictionary, locale }) => {
                             </div>
                         ) : null}
 
-                        {userData?.role === 'administrator' || editingPost?.postType === 'video' ? (
+                        {userData?.role === 'administrator' || editingPost?.postType === 'video' || editingPost?.postType === 'promotion'  ? (
                             <div className="formSection">
                                 <p>{dictionary?.['Categories'] || 'Categories'}:</p>
                                 <MetaDataSelector
@@ -287,10 +317,13 @@ const EditPostPageContent: FC<IProps> = ({ _id, dictionary, locale }) => {
                             </label>
                         )}
 
-                        <div className="formSection">
-                            <p>{dictionary?.['Tags'] || 'Tags'}:</p>
-                            <MetaDataSelector postData={editingPost} type={'tags'} maxLimit={5} onMetaChangeHandler={onMetaChangeHandler} />
-                        </div>
+                        {editingPost.postType !== 'promotion' &&
+                            <div className="formSection">
+                                <p>{dictionary?.['Tags'] || 'Tags'}:</p>
+                                <MetaDataSelector postData={editingPost} type={'tags'} maxLimit={5} onMetaChangeHandler={onMetaChangeHandler} />
+                            </div>
+                        }
+
                         {editingPost.postType === 'video' && (
                             <div className="formSection">
                                 <p>{dictionary?.['Actors'] || 'Actors'}:</p>
@@ -302,18 +335,7 @@ const EditPostPageContent: FC<IProps> = ({ _id, dictionary, locale }) => {
                                 />
                             </div>
                         )}
-                        {editingPost?.postType === 'advertise' && (
-                            <div className="formSection">
-                                {/*//@ts-ignore*/}
-                                <Price onChangeHandler={e => onChangeHandler(e, true)} />
-                            </div>
-                        )}
 
-                        {/ugcAd|event/.test(editingPost?.postType as string) && (
-                            <div className="formSection">
-                                <LocationField onUniqueFieldsChangeHandler={onUniqueFieldsChangeHandler} />
-                            </div>
-                        )}
                         {editingPost?.postType === 'video' && (
                             <>
                                 <div className="formSection">
@@ -339,36 +361,48 @@ const EditPostPageContent: FC<IProps> = ({ _id, dictionary, locale }) => {
                     <div className={'actionButtons'}>
                         <button type={'submit'} className={'btn btn-primary submitButton'}>
                             <FontAwesomeIcon icon={faFloppyDisk} className={'meta-icon'} />
-                            {dictionary?.['Publish'] || 'Publish'}
+                            {dictionary?.['Send For Review'] || 'Send For Review'}
                         </button>
 
-                        {isPreviewReady && (
+                        {/*{isPreviewReady && (*/}
+                        {/*    <button*/}
+                        {/*        type={'button'}*/}
+                        {/*        onClick={() => router.push(`${localeToSet}/post/${editingPost?.postType}/${editingPost?._id}?preview=true`)}*/}
+                        {/*        className={'btn btn-info submitButton'}*/}
+                        {/*    >*/}
+                        {/*        <FontAwesomeIcon icon={faBinoculars} className={'meta-icon'} />*/}
+                        {/*        {dictionary?.['Preview'] || 'Preview'}*/}
+                        {/*    </button>*/}
+                        {/*)}*/}
+
+
+
+
+                        {editingPost.status !== 'published' &&
                             <button
                                 type={'button'}
-                                onClick={() => router.push(`${localeToSet}/post/${editingPost?.postType}/${editingPost?._id}?preview=true`)}
+                                onClick={async () => onDeleteRequestHandler()}
+                                className={'btn btn-danger'}
+                            >
+                                <FontAwesomeIcon icon={faTrash} className={'meta-icon'} />
+                                {/*{dictionary?.['Trash'] || 'Trash'}*/}
+                                {dictionary?.['Delete'] || 'Delete'}
+                            </button>
+                        }
+
+                        {editingPost.status !== 'published' &&
+                            <button
+                                type={'button'}
+                                onClick={async () => await savePostData({ status: 'draft' })}
                                 className={'btn btn-info submitButton'}
                             >
-                                <FontAwesomeIcon icon={faBinoculars} className={'meta-icon'} />
-                                {dictionary?.['Preview'] || 'Preview'}
+                                <FontAwesomeIcon icon={faFilePen} className={'meta-icon'} />
+                                {dictionary?.['Draft'] || 'Draft'}
                             </button>
-                        )}
+                        }
 
-                        <button
-                            type={'button'}
-                            onClick={async () => await savePostData({ status: 'draft' })}
-                            className={'btn btn-info submitButton'}
-                        >
-                            <FontAwesomeIcon icon={faFilePen} className={'meta-icon'} />
-                            {dictionary?.['Draft'] || 'Draft'}
-                        </button>
-                        <button
-                            type={'button'}
-                            onClick={async () => onTrashHandler()}
-                            className={'btn btn-danger'}
-                        >
-                            <FontAwesomeIcon icon={faTrash} className={'meta-icon'} />
-                            {dictionary?.['Trash'] || 'Trash'}
-                        </button>
+
+
                         {/*<button type={'button'}*/}
                         {/*        onClick={onDeletePostByAuthorHandler}*/}
                         {/*        className={'btn btn-danger'}>*/}
@@ -383,3 +417,17 @@ const EditPostPageContent: FC<IProps> = ({ _id, dictionary, locale }) => {
 };
 
 export default EditPostPageContent;
+
+
+// {/*{editingPost?.postType === 'advertise' && (*/}
+// {/*    <div className="formSection">*/}
+// {/*        /!*//@ts-ignore*!/*/}
+//     {/*        <Price onChangeHandler={e => onChangeHandler(e, true)} />*/}
+//     {/*    </div>*/}
+//     {/*)}*/}
+//
+//     {/*{/ugcAd|event/.test(editingPost?.postType as string) && (*/}
+//     {/*    <div className="formSection">*/}
+//     {/*        <LocationField onUniqueFieldsChangeHandler={onUniqueFieldsChangeHandler} />*/}
+//     {/*    </div>*/}
+//     {/*)}*/}

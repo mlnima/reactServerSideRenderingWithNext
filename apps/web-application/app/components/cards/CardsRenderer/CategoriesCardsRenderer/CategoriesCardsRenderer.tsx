@@ -16,7 +16,7 @@ const CategoriesCardsRenderer: FC<IProps> = ({metas,locale,isSidebar}) => {
         <div className={`categoriesCardsWrapper${isSidebar ? 'Sidebar' : ''} `}>
             {metas?.map((meta, index) => {
 
-                const imagesAllowedDomainsForNextImage = process.env?.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES?.split(' ') || []
+                const imagesAllowedDomainsForNextImage = process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES?.split(' ') || []
                 const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
 
                 const isNextImageAllowed = meta.imageUrl ?

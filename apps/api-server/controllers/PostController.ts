@@ -17,6 +17,12 @@ import xHSimilarFinder from '@util/scrappers/xHSimilarFinder';
 import fs from 'fs';
 import { isMainThread, parentPort, Worker } from 'worker_threads';
 import GlobalStore from '@store/GlobalStore';
+import FileManagerController from './FileManagerController';
+import path from 'path';
+import fsExtra from 'fs-extra';
+import { getCurrentDatePath } from '@util/path-utils';
+import { UploadedFile } from 'express-fileupload';
+import fileSchema from '@schemas/fileSchema';
 
 class PostController {
     //---------------------helpers-------------------
@@ -47,7 +53,7 @@ class PostController {
                     { upsert: true },
                 )
                 .exec();
-            console.log(`keyword ${keyword} Saved in DB with ${postsCount} result`)
+            console.log(`keyword ${keyword} Saved in DB with ${postsCount} result`);
         } catch (error) {
             console.log('error=> ', error);
         }
@@ -85,6 +91,14 @@ class PostController {
         } catch (error) {
             console.error('Error updating user draft post:', error);
             throw error;
+        }
+    }
+
+    static async deleteDraftPostFromUserData(userId: string) {
+        try {
+            await userSchema.findByIdAndUpdate(userId, { $unset: { draftPost: '' } });
+        } catch (error) {
+            console.log(`error deleteDraftPostFromUserData=> `, error);
         }
     }
 
@@ -139,7 +153,181 @@ class PostController {
         } catch (error) {}
     }
 
+    static async savePostThumbnail(file: UploadedFile | UploadedFile[],postTitle:string) {
+        const image = file;
+        const nowTime = Date.now();
+
+        const uploadFolderPath = `/public/uploads/images/${getCurrentDatePath()}`;
+        const uploadFilePath = `${uploadFolderPath}/${encodeURIComponent(postTitle)}-${nowTime}.webp`;
+        const targetDirectoryPath = path.join(process.cwd(), uploadFolderPath);
+        const targetFilePath = path.join(process.cwd(), uploadFilePath);
+
+        await fsExtra.ensureDir(targetDirectoryPath);
+        try {
+            await image.mv( targetFilePath);
+            const imageDocumentToSave = new fileSchema({
+                usageType: 'thumbnail',
+                filePath: uploadFilePath,
+                mimeType: image.mimetype,
+            });
+            const savedImage = await imageDocumentToSave.save();
+            return savedImage
+        } catch (error) {
+            console.log(`savePostImages=> `, error);
+        }
+    }
+
+    static async deletePostThumbnail(_id){
+        try {
+            const imageDocument = await fileSchema.findById(_id).lean().exec();
+            if (imageDocument) {
+                await fsExtra.unlink(path.join(process.cwd(), imageDocument.filePath), () => null);
+                await fileSchema.findByIdAndDelete(_id).exec();
+            }
+        }catch (error){
+            console.log(`error deletePostThumbnail=> `,error)
+        }
+    }
     //---------------------client--------------------
+    static async updatePost(req: Request, res: Response) {
+        try {
+            let postData ;
+
+            try {
+                postData = JSON.parse(req.body?.data)
+            }catch (error){
+
+            }
+
+            if (!postData) {
+                res.status(400).json({ message: 'Post data is missing' });
+                return
+            }
+
+            const countUserPendingPosts = await postSchema.countDocuments({
+                $and:[
+                    {author:req.userData._id},
+                    {status:'pending'}
+                ]
+            })
+
+            if (countUserPendingPosts >= 10 && !postData._id){
+                res.status(400)
+                    .json({
+                        message: 'You can not have more than 5 pending posts. Please wait for previous posts to be approved'
+                    });
+                return
+            }
+
+            const image = Array.isArray(req.files) ? req.files[0] : req.files;
+            const postThumbnail = !!image ? await PostController.savePostThumbnail(image?.thumbnail,postData?.title) : [];
+            const thumbnailSavingData = postThumbnail?._id ? {thumbnail: postThumbnail._id} : {}
+
+            const postDataToSet = {
+                ...postData,
+                ...thumbnailSavingData,
+                status : 'pending'
+            }
+
+
+            if (postData._id) {
+                const post = await postSchema.findById(postData._id).lean().exec();
+
+                if (req.userData._id.toString() !== post?.author.toString()) {
+                    res.status(401).json({
+                        message: 'unauthorized'
+                    });
+                    return
+                }
+
+                if (
+                    (!postData?.thumbnail && !!post?.thumbnail) ||
+                    (!!post.thumbnail && !!image)
+                ){
+                    await PostController.deletePostThumbnail(post?.thumbnail)
+                }
+
+
+                // if (post.thumbnail._id && !!image){
+                //     await PostController.deletePostThumbnail(post.thumbnail)
+                // }
+
+                const updatedPost = await postSchema
+                    .findByIdAndUpdate(postData?._id, postDataToSet, {new: true})
+                    .exec();
+
+                res.json({
+                    message: 'Your changes are pending for Moderator Approval',
+                    postId: updatedPost._id,
+                });
+
+
+            } else {
+
+                const newPostDataToSave = new postSchema(postDataToSet);
+
+                const savedPost = await newPostDataToSave.save();
+                res.json({
+                    message: 'Saved, Your post is pending for moderator Approval',
+                    postId: savedPost._id,
+                });
+                return
+            }
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ message: 'Something Went Wrong', type: 'error' });
+        }
+    }
+
+    // static async updatePost(req: Request, res: Response) {
+    //     try {
+    //         const {_id} = req.body?.data
+    //
+    //         const postData = req.body?.data;
+    //
+    //         const post = await postSchema.findById(_id).lean().exec();
+    //
+    //         if (!postData) {
+    //             res.status(500).json({ message: 'Something Went Wrong', type: 'error' });
+    //         }
+    //
+    //         if (req.userData._id.toString() !== post?.author.toString()) {
+    //             res.status(403).json({
+    //                 message: 'You are not authorized to update this post',
+    //                 type: 'error',
+    //             });
+    //         }
+    //
+    //         const updatedPost = await postSchema
+    //             .findOneAndUpdate(
+    //                 { _id: postData?._id },
+    //                 { ...postData },
+    //                 {
+    //                     new: true,
+    //                     upsert: true,
+    //                 },
+    //             )
+    //             .exec();
+    //
+    //         if (postData.status !== 'draft'){
+    //             await userSchema.findByIdAndUpdate(req.userData._id, { $unset: { draftPost: 1 } }).exec();
+    //         }
+    //
+    //         res.status(200).json({
+    //             updatedPost,
+    //             message:
+    //                 postData?.status === 'draft'
+    //                     ? 'Saved'
+    //                     : postData?.status === 'trash'
+    //                         ? 'removed'
+    //                         : 'Your Updates Are Pending Moderator Approval',
+    //         });
+    //     } catch (error) {
+    //         console.log(error);
+    //         //@ts-ignore
+    //         res.status(500).json({ message: 'Something Went Wrong', type: 'error' });
+    //     }
+    // }
     static async getPost(req: Request, res: Response) {
         try {
             const findQuery = PostController.findPostQueryGenerator(req);
@@ -157,6 +345,7 @@ class PostController {
                         { path: 'images', select: { filePath: 1 }, model: 'file' },
                         { path: 'tags', select: { name: 1, type: 1 } },
                         { path: 'actors', select: { name: 1, type: 1, imageUrl: 1 } },
+                        { path: 'thumbnail', select: { filePath: 1 } },
                     ])
                     .exec();
 
@@ -196,10 +385,6 @@ class PostController {
                         { path: 'images', select: { filePath: 1 }, model: 'file' },
                         { path: 'tags', select: { name: 1, type: 1 } },
                         { path: 'actors', select: { name: 1, type: 1, imageUrl: 1 } },
-                        // {
-                        //     path: 'uniqueData.attenders',
-                        //     select: { username: 1, profileImage: 1, role: 1 },
-                        // },
                     ])
                     .exec();
 
@@ -275,6 +460,7 @@ class PostController {
 
             const posts = await postSchema
                 .find(findPostsQueries, null, reqQueryToMongooseOptions(req))
+                .populate( [{ path: 'thumbnail', select: { filePath: 1 } }])
                 .select([...postFieldRequestForCards, `translations.${locale}.title`])
                 .exec();
             res.json({ posts, totalCount, meta });
@@ -301,6 +487,7 @@ class PostController {
                         limit: cardAmountPerPage || 20,
                     },
                 )
+                .populate( [{ path: 'thumbnail', select: { filePath: 1 } }])
                 .exec();
 
             res.json({ posts });
@@ -375,10 +562,7 @@ class PostController {
             const metas = await metaSchema.find(metasSearchQuery).limit(size).exec();
 
             if (totalCount > 0) {
-                await PostController.saveSearchedKeyword(
-                    keyword,
-                    totalCount
-                )
+                await PostController.saveSearchedKeyword(keyword, totalCount);
             }
 
             res.json({
@@ -395,27 +579,63 @@ class PostController {
     static async deletePost(req: Request, res: Response) {
         try {
             if (!req.query._id) {
-                return res.status(400).json({
+                res.status(400).json({
                     message: 'Bad Request',
                 });
+                return;
             }
 
             const userData = req.userData;
             const _id = req.query._id;
 
-            const postData = await postSchema.findById(_id).select('author').lean().exec();
+            const deletingPost = await postSchema
+                .findById(_id)
+                .select('author images')
+                .populate([
+                    {
+                        path: 'images',
+                        select: { filePath: 1 },
+                        model: 'file',
+                    },
+                    {
+                        path: 'thumbnail',
+                        select: { filePath: 1 },
+                        model: 'file',
+                    },
+                ])
+                .lean()
+                .exec();
 
-            if (postData.author !== userData._id) {
-                return res.status(401).json({
+            if (deletingPost.author.toString() !== userData._id.toString()) {
+                res.status(401).json({
                     message: 'Unauthorized',
                 });
+                return;
+            }
+
+            if (deletingPost.images.length > 0) {
+                for await (const image of deletingPost.images) {
+                    const absoluteImagePath = path.join(process.cwd(), image.filePath);
+                    await fsExtra.unlink(absoluteImagePath, () => null);
+                    await fileSchema.findByIdAndDelete(image._id).exec();
+                }
+            }
+            if (deletingPost?.thumbnail?._id) {
+                const absoluteImagePath = path.join(process.cwd(), deletingPost?.thumbnail.filePath);
+                await fsExtra.unlink(absoluteImagePath, () => null);
+                await fileSchema.findByIdAndDelete(deletingPost?.thumbnail?._id).exec();
             }
 
             await postSchema.findByIdAndDelete(_id).exec();
             await userSchema.findByIdAndUpdate(req.userData._id, { $unset: { draftPost: 1 } }).exec();
 
             res.status(200).json({ message: 'Post Deleted Successfully' });
-        } catch (error) {}
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({
+                message: 'Server Error',
+            });
+        }
     }
 
     static async likeDislikeView(req: Request, res: Response) {
@@ -492,40 +712,36 @@ class PostController {
         try {
             const userData = await userSchema.findById(req.userData._id).select('draftPost').exec();
 
-            // const unFinishedPostsCount = await postSchema
-            //     .countDocuments({
-            //         $and: [
-            //             { $or: [{ $ne: { status: 'published' } }, { $ne: { status: 'trash' } }] },
-            //             { author: req.userData._id },
-            //         ],
-            //     })
-            //     .exec();
-
             if (userData?.draftPost) {
-                res.json({
-                    message: 'There Is An Existing Draft Post.',
-                    newPostId: userData.draftPost,
-                });
-            } else {
-                const newPostDataToSave = new postSchema(req.body.data);
-                newPostDataToSave.save(async (error: any, savedPostData: { _id: any }) => {
-                    if (error) {
-                        console.error('Error saving new post:', error);
-                        return res.status(500).json({ message: 'Something Went Wrong', type: 'error' });
-                    }
-
-                    try {
-                        await PostController.setDraftPostToUserData(userData._id, savedPostData._id);
-                        res.json({
-                            message: 'Post successfully created. After a moderator review',
-                            newPostId: savedPostData._id,
-                        });
-                    } catch (e) {
-                        console.error('Error updating user draft post:', e);
-                        res.status(500).json({ message: 'Something Went Wrong', type: 'error' });
-                    }
-                });
+                const exist = await postSchema.exists({ _id: userData?.draftPost }).exec();
+                console.log(`exist=> `, exist);
+                if (exist) {
+                    res.json({
+                        message: 'Edit or Delete Your Existing Draft Before Creating a New Post',
+                        postId: userData.draftPost,
+                    });
+                    return;
+                }
             }
+
+            const newPostDataToSave = new postSchema(req.body.data);
+            newPostDataToSave.save(async (error: any, savedPostData: { _id: any }) => {
+                if (error) {
+                    console.error('Error saving new post:', error);
+                    return res.status(500).json({ message: 'Something Went Wrong', type: 'error' });
+                }
+
+                try {
+                    await PostController.setDraftPostToUserData(userData._id, savedPostData._id);
+                    res.json({
+                        //message: 'Post successfully created. After a moderator review',
+                        postId: savedPostData._id,
+                    });
+                } catch (error) {
+                    console.error('Error updating user draft post:', error);
+                    res.status(500).json({ message: 'Something Went Wrong', type: 'error' });
+                }
+            });
         } catch (error) {
             console.error('Error creating new post:', error);
             res.status(500).json({ message: 'Something Went Wrong', type: 'error' });
@@ -537,7 +753,15 @@ class PostController {
             const type = { type: req.query?.type };
             const statusQuery = { status: 'published' };
             const size = 10;
-            const startWithQuery = req.query?.startWith === 'any' ? {} : { name: { $regex: '^' + req.query?.startWith, $options: 'i' } };
+            const startWithQuery =
+                req.query?.startWith === 'any'
+                    ? {}
+                    : {
+                          name: {
+                              $regex: '^' + req.query?.startWith,
+                              $options: 'i',
+                          },
+                      };
             await metaSchema
                 .find({ $and: [type, startWithQuery, statusQuery] }, 'name type', {
                     sort: { updatedAt: -1 },
@@ -556,50 +780,17 @@ class PostController {
         }
     }
 
-    static async updatePost(req: Request, res: Response) {
-        try {
-            const postData = req.body?.data;
-            if (!postData) res.status(500).json({ message: 'Something Went Wrong', type: 'error' });
-
-            const userId = new mongoose.Types.ObjectId(req.userData._id);
-            const authorId = new mongoose.Types.ObjectId(postData?.author);
-            const isAuthorizedToUpdate = userId.toString() === authorId.toString() || req.userData.role === 'administrator';
-
-            if (!isAuthorizedToUpdate) {
-                res.status(403).json({
-                    message: 'You are not authorized to update this post',
-                    type: 'error',
-                });
-            }
-
-            const updatedPost = await postSchema
-                .findOneAndUpdate(
-                    { _id: postData?._id },
-                    { ...postData },
-                    {
-                        new: true,
-                        upsert: true,
-                    },
-                )
-                .exec();
-
-            await userSchema.findByIdAndUpdate(req.userData._id, { $unset: { draftPost: 1 } }).exec();
-
-            res.status(200).json({
-                updatedPost,
-                message:
-                    postData?.status === 'draft'
-                        ? 'Saved'
-                        : postData?.status === 'trash'
-                          ? 'removed'
-                          : 'Your Updates Are Pending Moderator Approval',
-            });
-        } catch (error) {
-            console.log(error);
-            //@ts-ignore
-            res.status(500).json({ message: 'Something Went Wrong', type: 'error' });
-        }
-    }
+    // static async checkPostExist(req: Request, res: Response) {
+    //     try {
+    //         const { _id } = req.query;
+    //         if (!_id) {
+    //             res.status(400).json({ message: 'No id provided' });
+    //         }
+    //         const exist = await postSchema.exists({ _id }).exec();
+    //
+    //         res.json({ exist });
+    //     } catch (error) {}
+    // }
 
     //---------------------Dashboard--------------------
 
@@ -843,9 +1034,9 @@ class PostController {
 
     static async dashboardGetPosts(req: Request, res: Response) {
         try {
-            const { metaId, keyword, status } = req.query;
+            const { metaId, keyword, status, postType } = req.query;
 
-            const decodedKeyword = keyword? decodeURIComponent(keyword) : '';
+            const decodedKeyword = keyword ? decodeURIComponent(keyword) : '';
             const metaQuery = metaId
                 ? [{ $or: [{ categories: { $in: metaId } }, { tags: { $in: metaId } }, { actors: { $in: metaId } }] }]
                 : [];
@@ -855,30 +1046,20 @@ class PostController {
                 : status === 'all'
                   ? [{ status: { $ne: 'trash' } }]
                   : [{ status: status }];
-            const findQuery = {$and:[
-                    ...metaQuery,
-                    ...searchQuery,
-                    ...statusQuery
-                ]}
+            const postTypeQuery = postType && postType !== 'all' ? [{ postType }] : {};
+            const findQuery = { $and: [...metaQuery, ...searchQuery, ...statusQuery, ...postTypeQuery] };
 
-
-            const populateMeta = [
+            const populateOptions = [
                 { path: 'author', select: ['username', 'profileImage', 'role'] },
                 { path: 'actors', select: { name: 1, type: 1 } },
                 { path: 'categories', select: { name: 1, type: 1, imageUrl: 1 } },
                 { path: 'tags', select: { name: 1, type: 1 } },
+                { path: 'thumbnail', select: { filePath: 1 } },
             ];
 
             const totalCount = await postSchema.countDocuments(findQuery).exec();
 
-            const posts = await postSchema
-                .find(
-                    findQuery,
-                    null,
-                    reqQueryToMongooseOptions(req),
-                )
-                .populate(populateMeta)
-                .exec();
+            const posts = await postSchema.find(findQuery, null, reqQueryToMongooseOptions(req)).populate(populateOptions).exec();
 
             res.json({ posts, totalCount });
         } catch (err) {
@@ -1032,7 +1213,6 @@ export default PostController;
 //             });
 //         });
 // }
-
 
 // const findingPostsOptions = _adminQueryGeneratorForGettingPosts({
 //     ...req.query,

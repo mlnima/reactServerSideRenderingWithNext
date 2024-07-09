@@ -1,10 +1,10 @@
 import settingSchema from "@schemas/settingSchema";
 import mongoose from 'mongoose';
 import defaultInitialSettings from '../tools/asset/defaultInitialSettings';
-import { exec } from'child_process';
-import * as process from "process";
 import path from "path";
 import {Worker} from "worker_threads";
+import * as process from "process";
+
 
 mongoose.Promise = global.Promise;
 mongoose.set('strictQuery', true);
@@ -40,6 +40,10 @@ class GlobalStore {
         }catch (error){
             this.initialSettings = defaultInitialSettings.data;
         }
+    }
+
+    getApiServerRootPath(){
+        return path.join(process.cwd())
     }
 
     getInitialSettings(){

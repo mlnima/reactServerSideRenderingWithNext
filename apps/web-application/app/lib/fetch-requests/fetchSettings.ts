@@ -18,6 +18,7 @@ export const fetchSettings = async ({requireSettings, revalidate,tags}: IFetchSe
             config({revalidate, tags: [...(tags || []),'cacheItem','settings']})
         );
 
+
         if (!response.ok) {
             const errorData = await response.text();
             // throw new Error(errorData);

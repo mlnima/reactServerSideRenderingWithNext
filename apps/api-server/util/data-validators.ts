@@ -8,10 +8,12 @@ export const mongoIdValidator = (_id:string) => {
     }
 };
 
-export const usernameValidatorRegisterForm = (username:string) => {
+export const usernameValidatorRegisterForm = username => {
+
     if (!username) return false;
-    const regex = /^[a-z0-9]{6,16}$/;
+    const regex = /^[a-zA-Z][a-zA-Z0-9]{5,14}$/;
     let isValid = regex.test(username);
+
     if (username.toLowerCase().includes('admin')) {
         isValid = false;
     }

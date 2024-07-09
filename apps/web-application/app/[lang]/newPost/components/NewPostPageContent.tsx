@@ -33,25 +33,27 @@ const NewPostPageContent: FC<IProps> = ({dictionary,locale}) => {
         try {
             const localeToSet = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? '' : `/${locale}`
 
-            if (!!userData?.draftPost) {
-                dispatch(setAlert({
-                    message: dictionary?.[
-                        "Edit or Delete Your Existing Draft Before Creating a New Post"
-                        ] || "Edit or Delete Your Existing Draft Before Creating a New Post",
-                    type: "error"
-                }))
-                router.push(`${localeToSet}/editPost/${userData?.draftPost}`);
-            }
+            // if (!!userData?.draftPost) {
+            //   await checkPostExist(userData?.draftPost).then(res=>{
+            //         if (res.data.exist){
+            //             console.log(`res.data.exist=> `,res.data.exist)
+            //             dispatch(setAlert({
+            //                 message: dictionary?.[
+            //                     "Edit or Delete Your Existing Draft Before Creating a New Post"
+            //                     ] || "Edit or Delete Your Existing Draft Before Creating a New Post",
+            //                 type: "error"
+            //             }))
+            //             router.push(`${localeToSet}/editPost/${userData?.draftPost}`);
+            //         }
+            //     })
+            // }
 
             if (!searchParams.get('postType')) {
                 router.push(`${localeToSet}/`);
             }
 
-            if (
-                !userData.draftPost &&
-                searchParams.get('postType') &&
-                loggedIn
-            ) {
+            if (!!searchParams.get('postType') && loggedIn) {
+
                 const initialData = {
                     author: userData?._id,
                     title: " ",
@@ -60,9 +62,14 @@ const NewPostPageContent: FC<IProps> = ({dictionary,locale}) => {
                 }
 
                 await clientAPIRequestCreateNewPost({...initialData}).then((response) => {
-
-                    if (response?.newPostId) {
-                        router.push(`${localeToSet}/editPost/${response.newPostId as string}`)
+                    if (response?.postId) {
+                        if (!!response?.message){
+                            dispatch(setAlert({
+                                message: dictionary?.[response.message] || response.message,
+                                type: "error"
+                            }))
+                        }
+                        router.push(`${localeToSet}/editPost/${response.postId as string}`)
                     }
                 })
 

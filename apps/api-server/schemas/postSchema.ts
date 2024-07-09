@@ -21,10 +21,8 @@ const postSchema = new mongoose.Schema({
     company: String,
     description: mongoose.Schema.Types.Mixed,
     descriptionRenderer: String,
-    //accept any url
     mainThumbnail: String,
-    //uploaded image Id
-    // mainThumbnailImage: {type: Schema.Types.ObjectId, ref: 'file'},
+    thumbnail: {type: mongoose.Schema.Types.ObjectId, ref: 'file'},
     images: [{type: mongoose.Schema.Types.ObjectId, ref: 'file'}],
     videoTrailerUrl: String,
     quality: {
@@ -59,11 +57,8 @@ const postSchema = new mongoose.Schema({
         required:true,
         default:'draft'
     },
-    // priceType: String,
-    // production: String,
     posts: [{type: mongoose.Schema.Types.ObjectId, ref: 'post'}],
     comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'comment'}],
-    // widgets: Array,
     categories: [{type: mongoose.Schema.Types.ObjectId, ref: 'meta'}],
     actors: [{type: mongoose.Schema.Types.ObjectId, ref: 'meta'}],
     tags: [{type: mongoose.Schema.Types.ObjectId, ref: 'meta'}],

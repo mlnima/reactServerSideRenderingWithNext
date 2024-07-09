@@ -7,20 +7,26 @@ import {dashboardAPIRequestGetSettings,dashboardAPIRequestUpdateSetting} from "@
 
 interface AdminPanelSettingState {
     initialSettings: {},
+    ugcSettings: {},
     pageSettings:{},
     design: {},
     identity: {},
-    membershipSettings:{}
+    membershipSettings:{
+        allowedPostTypesByUser:string[]
+    }
     eCommerce: {},
     ip: string,
 }
 
 const initialState:AdminPanelSettingState = {
     initialSettings: {},
+    ugcSettings: {},
     pageSettings:{},
     design: {},
     identity: {},
-    membershipSettings:{},
+    membershipSettings:{
+        allowedPostTypesByUser:[]
+    },
     eCommerce: {},
     ip: '',
 }
@@ -103,9 +109,29 @@ export const settingsSlice = createSlice({
                 }
             };
         },
+        editUgcSettings:(state, action: PayloadAction<any>) => {
+            return {
+                ...state,
+                ugcSettings: {
+                    ...state.ugcSettings,
+                    ...action.payload
+                }
+            };
+        },
         editInitialSettingsJson:(state, action: PayloadAction<any>) => {
            state.initialSettings = action.payload
         },
+
+        // editAllowedPostTypeByUserSettings:(state, action: PayloadAction<any>) => {
+        //    state.initialSettings.membershipSettings.allowedPostTypesByUser = [
+        //        ...state.initialSettings.membershipSettings.allowedPostTypesByUser,
+        //        action.payload
+        //    ]
+        // },
+        // removeAllowedPostTypeByUserSettings:(state, action: PayloadAction<any>) => {
+        //    state.initialSettings.membershipSettings.allowedPostTypesByUser =
+        //        state.initialSettings.membershipSettings.allowedPostTypesByUser.filter(item => item !== action.payload)
+        // },
 
 
     },
@@ -119,7 +145,15 @@ export const settingsSlice = createSlice({
     }
 })
 
-export const {editIdentityAction,editDesign,editMembershipSettingsAction,editInitialSettings,editInitialSettingsJson} = settingsSlice.actions
+export const {
+    editIdentityAction,
+    editDesign,
+    editMembershipSettingsAction,
+    editInitialSettings,
+    editInitialSettingsJson,
+    // editAllowedPostTypeByUserSettings,
+
+} = settingsSlice.actions
 
 export const settingsReducer = (state: RootState) => state?.settings || null;
 

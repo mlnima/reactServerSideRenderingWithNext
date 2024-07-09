@@ -26,6 +26,7 @@ import Widgets from "@components/pages/Design/Widgets/Widgets";
 import Chatroom from "@components/pages/Chatroom/Chatroom";
 import Backup from "@components/pages/Backup/Backup";
 import DefaultPageSettings from "@components/pages/settings/defaultPagesSetttings/DefaultPageSettings";
+import EditPostPageSettings from "@components/pages/settings/defaultPagesSetttings/EditPostPageSettings";
 
 const MainRouter = () => {
     return (
@@ -42,6 +43,7 @@ const MainRouter = () => {
             <Route path="/dashboard/form/:id" element={<Form/>}/>
             <Route path="/dashboard/fileManager" element={<FileManager/>}/>
             <Route path="/dashboard/settings/defaultPages" element={<DefaultPageSettings/>}/>
+            <Route path="/dashboard/settings/editPostPage" element={<EditPostPageSettings/>}/>
             <Route path="/dashboard/tools" element={<Tools/>}/>
             <Route path="/dashboard/tools/terminal" element={<Terminal/>}/>
             <Route path="/dashboard/translations" element={<Translations/>}/>

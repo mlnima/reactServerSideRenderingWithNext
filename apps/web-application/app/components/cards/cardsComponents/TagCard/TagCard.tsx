@@ -29,7 +29,7 @@ const TagCard: FC<TagCardPropTypes> =
      }) => {
 
         return (
-            <article className={`metaCard metaCardTag ${isSidebar && 'metaCardSidebar'}`}>
+            <article className={`metaCard metaCardTag${isSidebar ? ' metaCardSidebar':''}`}>
                 <div className={'cardMedia'}>
                     <Link href={metaUrl} className='tagCardLink' title={meta?.translations?.[locale]?.name ?? meta?.name as string}>
                         <CardImageRendererUseClient imageUrl={meta?.imageUrl}

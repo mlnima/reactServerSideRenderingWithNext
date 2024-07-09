@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {clientAPIRequestResetPassword} from "@repo/api-requests";
 import { setAlert } from "@store/reducers/globalStateReducer";
+const dev = process.env.NODE_ENV !== 'production';
 
 interface ResetPasswordActionArgs {
     // Replace "any" with actual type of data
@@ -24,7 +25,8 @@ export const resetPasswordAction = createAsyncThunk<ResetPasswordActionResponse,
             thunkAPI.dispatch(
                 setAlert({ message: 'Old Password Is Not Valid', type: 'error' })
             );
-            localStorage.removeItem('wt');
+            if (!dev)  localStorage.removeItem('wt');
+
             return {};
         }
     }

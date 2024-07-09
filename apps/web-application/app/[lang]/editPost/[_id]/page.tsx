@@ -26,6 +26,7 @@ const EditPostPage = async ({params: {lang, _id}}: IProps) => {
     )
 }
 
+
 export default EditPostPage;
 
 export const dynamic = 'force-dynamic';

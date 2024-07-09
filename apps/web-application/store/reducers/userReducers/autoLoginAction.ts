@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { commonAPIRequestGetSignedInUserData } from '@repo/api-requests';
 import { loading } from '@store/reducers/globalStateReducer';
+const dev = process.env.NODE_ENV !== 'production';
 
 interface AutoLoginActionArgs {
     fields: string[];
@@ -15,7 +16,7 @@ export const autoLoginAction = createAsyncThunk<
     AutoLoginActionResponse,
     AutoLoginActionArgs
 >('user/autoLoginAction', async ({ fields }, thunkAPI) => {
-    if (localStorage.wt) {
+    if (localStorage.getItem('wt')) {
         try {
             thunkAPI.dispatch(loading(true));
             const response = await commonAPIRequestGetSignedInUserData(fields);
@@ -27,7 +28,8 @@ export const autoLoginAction = createAsyncThunk<
             if (status >= 500 && status <= 599) {
                 console.log(`server 5** error on login`);
             } else {
-                localStorage.removeItem('wt');
+                if (!dev)  localStorage.removeItem('wt');
+
             }
 
             return { loggedIn: false };

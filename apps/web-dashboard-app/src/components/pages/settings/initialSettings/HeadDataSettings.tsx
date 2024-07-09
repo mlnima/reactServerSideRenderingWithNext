@@ -83,9 +83,9 @@ const HeadDataSettings: FC<PropTypes> = ({onChangeHandler,onChangeHandlerWithTra
             {is3rdPartyScriptEditorOpen &&
                 <MonacoEditor
                     language={'text'}
-                    name={'custom3rdPartyScripts'}
-                    defaultValue={ initialSettingsData?.headDataSettings?.custom3rdPartyScripts || ''}
-                    value={initialSettingsData?.headDataSettings?.custom3rdPartyScripts}
+                    name={'customScripts'}
+                    defaultValue={ initialSettingsData?.headDataSettings?.customScripts || ''}
+                    value={initialSettingsData?.headDataSettings?.customScripts}
                     className={'initialSettings-editor'}
                     //@ts-ignore
                     onChange={(e: string) => onChangeHandler(e, 'headDataSettings')}

@@ -29,13 +29,13 @@ const ArticlePostCard: FC<ArticlePostCardPropTypes> =
 
 
         return (
-            <article className={`postCard postCardArticle ${isSidebar && 'postCardSidebar'}`}>
+            <article className={`postCard postCardArticle${isSidebar ? 'postCardSidebar':''}`}>
                 <div className={'cardMedia'}>
                     <Link href={postUrl}
                           className={'cardLink'}
                           title={post?.translations?.[locale as string]?.title ?? post?.title}>
 
-                        <CardImageRendererUseClient imageUrl={post.mainThumbnail}
+                        <CardImageRendererUseClient imageUrl={post.mainThumbnail|| post?.thumbnail?.filePath}
                                                     isNextImageAllowed={isNextImageAllowed}
                                                     key={post?._id}
                                                     mediaAlt={post?.translations?.[locale as string]?.title ?? post?.title}

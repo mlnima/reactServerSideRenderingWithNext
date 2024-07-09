@@ -53,7 +53,8 @@ export {
     clientAPIRequestGetEditingPost,
     clientAPIRequestGetPosts,
     // clientAPIRequestLikePost,
-    clientAPIRequestUpdatePost,
+    updatePost,
+    // checkPostExist,
     clientAPIRequestViewPost,
     clientDeletePostByAuthor,
     clientAPIRequestLikeDislikePost
@@ -62,7 +63,9 @@ export {
 //settings
 export {
     clientAPIRequestGetUncachedSettings,
-    // clientAPIRequestGetSettings,
+    clientAPIRequestGetSettings,
+    getSettingsBuild,
+    shutdownBuildServer
 } from './client/clientSettings';
 
 //users

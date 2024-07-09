@@ -12,7 +12,8 @@ const initialState : GlobalState = {
     alert: {
         active: false,
         type: null,
-        message: ''
+        message: '',
+        actionFunctions: null
     }
 }
 

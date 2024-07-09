@@ -46,8 +46,12 @@ interface IDeletePostImages {
     postId?: string
 }
 
-export const clientAPIRequestDeletePostImages = async ({postId}: IDeletePostImages) => {
-    return await AxiosInstance.delete(`/api/v1/file/delete/postImages?postId=${postId}`);
+export const clientAPIRequestDeletePostImages = async (_id:string) => {
+    return await AxiosInstance.delete(`/api/v1/file/delete/postImages`,{
+        params:{
+            _id
+        }
+    });
 }
 
 

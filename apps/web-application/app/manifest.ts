@@ -1,10 +1,26 @@
-'use server';
-import HelperFunctions from '../../../HelperFunctions';
 
+import {getSettingsBuild,shutdownBuildServer,clientAPIRequestGetSettings} from "@repo/api-requests";
+
+const dev = process.env.NODE_ENV !== 'production';
 const manifest = async () => {
+
     try {
-        const initialSettingsData = await HelperFunctions.getSettings('initialSettings');
-        const headDataSettings = initialSettingsData?.data?.headDataSettings;
+
+        const requestSettings = {
+            requireSettings: ['initialSettings'],
+        }
+
+        const initialSettingsData = dev  ? await clientAPIRequestGetSettings(requestSettings) : await getSettingsBuild(requestSettings)
+
+        if (!dev){
+            shutdownBuildServer()
+        }
+
+        const headDataSettings = initialSettingsData?.data?.settings?.initialSettings?.headDataSettings
+
+        if (!headDataSettings) {
+            return {};
+        }
 
         const name = headDataSettings.title ? { name: headDataSettings.title } : {};
         const short_name = { short_name: headDataSettings.siteName || headDataSettings.title || 'positron' };
@@ -49,7 +65,7 @@ const manifest = async () => {
             icons: icons,
         };
     } catch (error) {
-        console.log(`manifest error=> `, error);
+        // console.log(`manifest error=> `, error);
         return {};
     }
 };

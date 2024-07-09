@@ -35,7 +35,7 @@ const LearnPostCard: FC<LearnPostCardPropTypes> = ({
 
     return (
         <article
-            className={`postCard postCardLearn ${isSidebar && 'postCardSidebar'}`}
+            className={`postCard postCardLearn${isSidebar ? ' postCardSidebar':''}`}
         >
             {!!post.mainThumbnail ? (
                 <>
@@ -49,11 +49,10 @@ const LearnPostCard: FC<LearnPostCardPropTypes> = ({
                             }
                         >
                             <CardImageRendererUseClient
-                                imageUrl={post.mainThumbnail}
+                                imageUrl={post.mainThumbnail|| post?.thumbnail?.filePath}
                                 isNextImageAllowed={isNextImageAllowed}
                                 key={post?._id}
-                                mediaAlt={
-                                    post?.translations?.[locale as string]
+                                mediaAlt={post?.translations?.[locale as string]
                                         ?.title ?? post?.title
                                 }
                                 index={index}

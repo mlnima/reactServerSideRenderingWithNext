@@ -12,7 +12,6 @@ import {faFolder} from "@fortawesome/free-solid-svg-icons/faFolder";
 import {faSass} from "@fortawesome/free-brands-svg-icons/faSass";
 import {faCss3} from "@fortawesome/free-brands-svg-icons/faCss3";
 import {faFilePdf} from "@fortawesome/free-solid-svg-icons";
-import * as process from "process";
 
 const FileManagerAreaStyledDiv = styled.div`
   display: grid;

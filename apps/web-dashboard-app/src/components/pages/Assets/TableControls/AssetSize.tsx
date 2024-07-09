@@ -33,7 +33,7 @@ const AssetSize = () => {
 
     return (
         //@ts-ignore
-        <Styled>
+        <Styled className={'assetControlItem'}>
             <select className={'primarySelect'}
                     value={currentSize}
                     onChange={e => onChangeHandler(e)}>

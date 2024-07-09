@@ -57,7 +57,17 @@ export const getPostAction = createAsyncThunk(
         thunkAPI.dispatch(loading(true));
         return await dashboardAPIRequestGetPost(_id)
             .then((res: AxiosResponse<any>) => {
-                return res.data?.post;
+                if (!!res.data?.post){
+                    return res.data?.post;
+                }else {
+                    thunkAPI.dispatch(
+                        setAlert({
+                            message: error.response?.data?.message,
+                            type: 'Error',
+                        }),
+                    );
+                }
+
             })
             .catch(error => {
                 thunkAPI.dispatch(

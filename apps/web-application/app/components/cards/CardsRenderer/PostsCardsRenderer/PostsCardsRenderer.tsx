@@ -25,7 +25,8 @@ const PostsCardsRenderer: FC<IProps> = ({posts, locale, isSidebar,previewMode}) 
                 // console.log('defaultLocale=> ',defaultLocale)
                 const imagesAllowedDomainsForNextImage = (process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES || '').split(' ') || []
 
-                const previewModeQuery = previewMode && post?.status !== 'published'? '?preview=true' : ''
+                const previewModeQuery = previewMode ? '?preview=true' : ''
+                //&& post?.status !== 'published'
                 const postUrl = locale === defaultLocale ?
                     `/post/${post?.postType}/${post._id}${previewModeQuery}` :
                     `/${locale}${`/post/${post?.postType}/${post._id}`}${previewModeQuery}`;

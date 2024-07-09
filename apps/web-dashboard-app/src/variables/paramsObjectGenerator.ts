@@ -2,6 +2,7 @@
 const paramsObjectGenerator = (searchParams:any)=>{
     try{
         const sort = searchParams.get('sort') ? {sort: searchParams.get('sort')} : {}
+        const role = searchParams.get('role') ? {role: searchParams.get('role')} : {}
         const size = searchParams.get('size')  ? {size:searchParams.get('size')} : {}
         const assetsType = searchParams.get('assetsType')  ? {assetsType:searchParams.get('assetsType')} : {}
         const page = searchParams.get('page') ? {page: searchParams.get('page')} : {}
@@ -25,6 +26,7 @@ const paramsObjectGenerator = (searchParams:any)=>{
             ...postType,
             ...sort,
             ...keyword,
+            ...role
         }
     }catch (error){
         return {}

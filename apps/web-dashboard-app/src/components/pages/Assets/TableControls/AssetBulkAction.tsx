@@ -6,7 +6,7 @@ import {useAppDispatch} from "@store/hooks";
 import {useLocation, useNavigate, useSearchParams} from "react-router-dom";
 import paramsObjectGenerator from "../../../../variables/paramsObjectGenerator";
 
-const AssetBulkActionStyledDiv = styled.div`
+const Styles = styled.div`
   select {
     width: 150px;
 
@@ -56,7 +56,7 @@ const AssetBulkAction: FC<AssetBulkActionPropTypes> = ({selectedItems, setSelect
 
 
     return (
-        <AssetBulkActionStyledDiv>
+        <Styles className={'assetControlItem'}>
             <select className={'primarySelect'}
                     value={status}
                     onChange={(e) => setStatus(e.target.value)}>
@@ -68,7 +68,7 @@ const AssetBulkAction: FC<AssetBulkActionPropTypes> = ({selectedItems, setSelect
                 {query.status === 'trash' ? <option value='delete'>Delete</option> : null}
             </select>
             <button className={'btn btn-primary'} onClick={onApplyHandler}>Apply</button>
-        </AssetBulkActionStyledDiv>
+        </Styles>
 
     )
 

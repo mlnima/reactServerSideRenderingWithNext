@@ -2,6 +2,7 @@ const postFieldRequestForCards = [
     'redirectLink',
     'title',
     'mainThumbnail',
+    'thumbnail',
     'quality',
     'duration',
     'videoTrailerUrl',

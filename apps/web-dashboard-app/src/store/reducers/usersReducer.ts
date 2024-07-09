@@ -13,6 +13,7 @@ import {
     commonAPIRequestLoginUser,
     dashboardAPIRequestGetUser
 } from "@repo/api-requests";
+const dev = process.env.NODE_ENV !== 'production';
 
 
 const initialState = {
@@ -66,8 +67,10 @@ export const autologinUserAction = createAsyncThunk(
                 }
                 thunkAPI.dispatch(setAlert({message: 'forbidden', type: 'error'}))
             }).catch((err) => {
-                localStorage.removeItem('wt')
-                thunkAPI.dispatch(setAlert({message: err.response.data.message, type: 'error'}))
+                if(!dev){
+                    localStorage.removeItem('wt')
+                    thunkAPI.dispatch(setAlert({message: err.response.data.message, type: 'error'}))
+                }
             })
         }
     }
@@ -85,7 +88,6 @@ export const getUsersAction = createAsyncThunk(
     'adminPanelUsers/getUsersAction',
     async (data: {}, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
-
         return await dashboardAPIRequestGetUsers(data).then((res: AxiosResponse<any>) => {
             return {
                 users: res.data.users,
@@ -227,9 +229,12 @@ export const fetchAdminAutoLogin = createAsyncThunk(
                 thunkAPI.dispatch(setAlert({message: response.data.message, type: 'success'}))
                 return response.data?.userData
             }).catch((error: AxiosError) => {
-                localStorage.removeItem('wt')
-                //@ts-ignore
-                thunkAPI.dispatch(setAlert({message: error?.response?.data?.message, type: 'error'}))
+                if(!dev){
+                    localStorage.removeItem('wt')
+                    //@ts-ignore
+                    thunkAPI.dispatch(setAlert({message: error?.response?.data?.message, type: 'error'}))
+                }
+
             })
         } else {
             thunkAPI.dispatch(setAlert({message: 'You Need To Login', type: 'error'}))

@@ -11,7 +11,7 @@ export interface InitialSettings{
         themeColor: string,
         description: string,
         customHeadTags: string,
-        custom3rdPartyScripts: string,
+        customScripts: string,
         rtaContent: boolean,
         translations:{
             [key: string]:{

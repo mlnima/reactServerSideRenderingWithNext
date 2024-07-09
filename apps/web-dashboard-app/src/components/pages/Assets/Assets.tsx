@@ -44,6 +44,7 @@ const Assets: FC<PropTypes> = ({}) => {
     })
 
     const getData = () => {
+
         const paramsQueries = paramsQueryGenerator(search)
 
         if (query.assetsType === 'posts') {

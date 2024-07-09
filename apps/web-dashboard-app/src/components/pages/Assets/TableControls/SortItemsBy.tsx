@@ -11,6 +11,7 @@ const Style = styled.div`
 
   p {
     margin: 0 10px;
+
   }
 `
 const SortItemsBy = () => {
@@ -26,8 +27,8 @@ const SortItemsBy = () => {
 
 
     return (
-        <Style className='post-type asset-page-asset-type-selector'>
-            <p>Sort By:</p>
+        <Style className='assetControlItem'>
+            <p>Sort:</p>
             <select className={'primarySelect'} onChange={e => onFormatChangeHandler(e)} value={query?.sort}>
                 <option value=''>Select</option>
                 <option value='createdAt'>Created At</option>
