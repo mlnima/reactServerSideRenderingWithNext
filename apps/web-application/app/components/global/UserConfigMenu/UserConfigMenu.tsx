@@ -25,7 +25,7 @@ interface IProps {
     }
 }
 
-const UserConfigMenu: FC<IProps> =
+const UserConfigMenu: ({locale, dictionary}: IProps) => (React.JSX.Element | null) =
     ({
          locale,
          dictionary,

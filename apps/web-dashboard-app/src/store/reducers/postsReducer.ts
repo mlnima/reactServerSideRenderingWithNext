@@ -577,8 +577,7 @@ export const getYoutubeDataScrapperAction = createAsyncThunk(
                     };
                     // @ts-ignore
                     await AxiosInstance.post(`/api/dashboard/post`, {
-                        postData: videoData,
-                        token: localStorage.wt,
+                        postData: videoData
                     });
                 }
             }

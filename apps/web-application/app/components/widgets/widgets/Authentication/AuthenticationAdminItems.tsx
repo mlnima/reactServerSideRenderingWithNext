@@ -13,7 +13,7 @@ import {useParams, usePathname, useSearchParams, useSelectedLayoutSegment} from 
 
 import socket from '@lib/web-socket-client';
 import {faBolt} from "@fortawesome/free-solid-svg-icons";
-import ServerActions from "@lib/serverActions";
+import {clearCachesByServerAction} from "@lib/serverActions";
 
 const AuthenticationAdminItems = ({}) => {
 
@@ -27,7 +27,8 @@ const AuthenticationAdminItems = ({}) => {
     const onClearCacheHandler = async ({mode}: IClearCache): Promise<void> => {
         try {
             await commonAPIRequestClearCaches()
-            await ServerActions.clearCachesByServerAction({
+
+            await clearCachesByServerAction({
                 path: pathname,
                 segment,
                 mode,
@@ -40,6 +41,7 @@ const AuthenticationAdminItems = ({}) => {
                 type: 'info'
             }))
         } catch (error) {
+            console.log(`onClearCacheHandler=> `,error)
             dispatch(setAlert({
                 message: 'Error While Clearing Cache',
                 type: 'error'

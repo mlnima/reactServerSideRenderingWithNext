@@ -1,7 +1,4 @@
-import AxiosInstance, {getAxiosInstance} from '../lib/AxiosInstance';
-
-const FileServerAxiosInstance = getAxiosInstance('fileServer');
-
+import AxiosInstance from '../lib/AxiosInstance';
 
 
 // export const clientAPIRequestUploadImage = async (formData: FormData) => {
@@ -16,18 +13,18 @@ const FileServerAxiosInstance = getAxiosInstance('fileServer');
 
 export const clientAPIRequestUploadPostImages = async (formData: FormData) => {
     return await AxiosInstance.post(`/api/v1/file/upload/postImages`, formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${localStorage.wt}`,
-        },
+        // headers: {
+        //     'Content-Type': 'multipart/form-data',
+        //     Authorization: `Bearer ${localStorage.wt}`,
+        // },
     })
 }
 
 export const clientAPIRequestUploadProfileImage = async (formData: FormData) => {
     return await AxiosInstance.patch(`/api/v1/file/upload/profileImage`, formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data',
-        },
+        // headers: {
+        //     'Content-Type': 'multipart/form-data',
+        // },
     })
 }
 
