@@ -19,7 +19,7 @@ async function deleteIfExists(filePath) {
         if (err.code !== 'ENOENT') {
             console.error(`Error while deleting ${filePath}:`, err);
         } else {
-            console.log(`File or directory ${filePath} does not exist. Skipping...`);
+           // console.log(`File or directory ${filePath} does not exist. Skipping...`);
         }
     }
 }

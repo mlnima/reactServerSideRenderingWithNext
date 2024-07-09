@@ -28,7 +28,7 @@
   "tasks": {
     "buildServer": {
       "dependsOn": [
-        "^build"
+
       ]
     },
     "build": {
