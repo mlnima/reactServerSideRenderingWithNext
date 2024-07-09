@@ -10,8 +10,9 @@
   "scripts": {
     "dev": "dotenv -- turbo run dev --log-order=stream",
     "start": "dotenv -- concurrently  \"npm run start:api-server\" \"npm run start:web-application\" ",
-    "build2": "dotenv -- turbo run build",
-    "build": "dotenv -- concurrently  \"npm --prefix ./apps/api-server run buildServer\" \"turbo run build\" ",
+    "build before": "dotenv -- turbo run build",
+    "build": "dotenv -- turbo run build",
+    "buildServer": "dotenv -- npm --prefix ./apps/api-server run buildServer",
     "delete-cache": "rmdir /s /q node_modules\\.cache\\turbo",
     "killNodesWindows": "cmd.exe /c additionalJobs\\windowsNodeProccessBulkKiller.bat",
     "killNodesUbuntu": "chmod +x additionalTools/kill-node-process.sh",

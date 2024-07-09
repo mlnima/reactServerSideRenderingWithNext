@@ -35,8 +35,6 @@ const runServer = () => {
         }catch (error){
             console.log(`Build Server:`,' Error Shutting Down' , error)
         }
-
-
     });
 
     const port =parseInt(process.env.PORT || '3000') + 9
