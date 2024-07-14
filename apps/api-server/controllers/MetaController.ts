@@ -262,7 +262,7 @@ class MetaController {
     static async dashboardSetMetaThumbnailsAndCount(req: Request, res: Response) {
         res.end();
         if (isMainThread) {
-            const workerPath = path.join(__dirname, '../../../workers/setMetaThumbnailsAndCount/worker.js');
+            const workerPath = path.join(__dirname, '../workers/setMetaThumbnailsAndCount/worker.js');
             const worker = new Worker(workerPath, {
                 workerData: {
                     type: req.query.type,

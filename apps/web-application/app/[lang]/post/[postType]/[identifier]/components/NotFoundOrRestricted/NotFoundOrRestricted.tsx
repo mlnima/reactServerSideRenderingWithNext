@@ -20,13 +20,15 @@ interface PropTypes {
 
 const NotFoundOrRestricted: FC<PropTypes> = ({dictionary,widgets,relatedPosts,hasSidebar,locale,post}) => {
     return (
-        <div id={'primary'} className='post-page'>
+        <div id={'primary'} className='post-page notFoundOrRestrictedPage'>
                 <div className={'notFoundOrRestricted'}>
                     <div className='entry-header-data'>
-                        <h1>{
+                        <h1>
+                            {
                             dictionary?.['This Content is Restricted, Deleted, or is Unpublished'] ||
                             'This Content is Restricted, Deleted, or is Unpublished'
-                        }</h1>
+                        }
+                        </h1>
                         <Link href="/" className='back-to-homepage'>
                             <h2>
                                 {dictionary?.['Go To Homepage'] || 'Go To Homepage'}

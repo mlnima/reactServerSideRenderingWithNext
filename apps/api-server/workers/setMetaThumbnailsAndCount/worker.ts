@@ -1,9 +1,27 @@
+import 'module-alias/register';
+import { register } from 'tsconfig-paths';
 import dotenv from 'dotenv';
+dotenv.config({ path: '../../../.env' });
+const baseUrl = process.cwd();
+const cleanup = register({
+    baseUrl,
+    paths: {
+        '@_variables/*': ['./_variables/*'],
+        '@schemas/*': ['./schemas/*'],
+        '@util/*': ['./util/*'],
+        '@env/*': ['../../.env'],
+        '@store/*': ['./store/*'],
+    },
+});
+
+
 import {parentPort, workerData} from 'worker_threads';
 import postSchema from "@schemas/postSchema";
 import metaSchema from "@schemas/metaSchema";
 import mongoose from 'mongoose';
 import GlobalStore from "@store/GlobalStore";
+
+
 
 
 dotenv.config();
@@ -15,22 +33,23 @@ const randomNumberGenerator = (min, max) => {
 
 const worker = async (workerData) => {
     try {
-        const excludesPostFromSources = !!process.env.EXCLUDE_POSTS_SOURCE ? process.env.EXCLUDE_POSTS_SOURCE.split(' ') : [];
+        // const excludesPostFromSources = !!process.env.EXCLUDE_POSTS_SOURCE ? process.env.EXCLUDE_POSTS_SOURCE.split(' ') : [];
 
-        const excludeContent = excludesPostFromSources.map(excludeWord => {
-            const expression = `.*${excludeWord}.*`
-            return {'videoEmbedCode': {$not: new RegExp(expression, "g")}}
-        })
+        // const excludeContent = excludesPostFromSources.map(excludeWord => {
+        //     const expression = `.*${excludeWord}.*`
+        //     return {'videoEmbedCode': {$not: new RegExp(expression, "g")}}
+        // })
 
-        const excludeQuery = {$or: excludeContent}
+        // const excludeQuery = {$or: excludeContent}
 
 
         await metaSchema.syncIndexes()
         const type = workerData.type ? {type: workerData.type} : {}
+        console.log(`type=> `,type)
         await metaSchema.find(type).exec().then(async (metas) => {
             for await (let meta of metas) {
                 //const metaCount = await PostSchema.countDocuments({$and: [{[meta?.type]: meta?._id}, {status: 'published'},excludeQuery]}).exec()
-                const metaCount = await postSchema.countDocuments({$and: [{[meta?.type]: {$in: meta?._id}}, {status: 'published'}, excludeQuery]}).exec()
+                const metaCount = await postSchema.countDocuments({$and: [{[meta?.type]: {$in: meta?._id}}, {status: 'published'}]}).exec()
 
                 if (metaCount > 0 && meta?._id) {
                     //***************************
@@ -66,10 +85,9 @@ const worker = async (workerData) => {
                     }
 
                     if (!meta?.imageUrlLock) {
-                        //const skipDocuments = metaCount >= 1 && metaCount < 10 ? metaCount - 1 : randomNumberGenerator(1, 20)
-                        //const skipDocuments = metaCount - 1
+
                         const skipDocuments = metaCount <= 1 ? 0 : randomNumberGenerator(1, metaCount) - 1
-                        const randomPost = await postSchema.findOne({$and: [{[meta?.type]: meta?._id}, {status: 'published'}, excludeQuery]}).sort({updatedAt: -1}).skip(skipDocuments).exec()
+                        const randomPost = await postSchema.findOne({$and: [{[meta?.type]: meta?._id}, {status: 'published'}]}).sort({updatedAt: -1}).skip(skipDocuments).exec()
                         if (randomPost?.mainThumbnail) {
                             //@ts-ignore
                             updateData.imageUrl = randomPost?.mainThumbnail || '/asset/images/default/no-image-available.png'
