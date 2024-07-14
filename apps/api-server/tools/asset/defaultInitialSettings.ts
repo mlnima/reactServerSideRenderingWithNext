@@ -24,8 +24,6 @@ const defaultInitialSettings = {
             "logoUrl" : "/asset/images/default/logo/Logo.png",
             "logoWidth" : 300,
             "logoHeight" : 100,
-            "numberOfCardsPerRowInMobile" : 2,
-            "numberOfCardsPerPage" : 20
         },
         "headDataSettings" : {
             "title" : "Website",
@@ -36,6 +34,10 @@ const defaultInitialSettings = {
             "themeColor" : "#000",
             "customHeadTags" : "",
             "googleAnalyticsId" : ""
+        },
+        "contentSettings":{
+            "numberOfCardsPerRowInMobile" : 2,
+            "numberOfCardsPerPage" : 20,
         }
     }
 }

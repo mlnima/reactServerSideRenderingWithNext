@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
+import SettingStore from '@store/SettingStore'
 
 config.autoAddCss = false;
 import '@components/global/styles/global.styles.scss';
@@ -54,6 +55,9 @@ const RootLayout = async ({
     });
 
     const initialSettings = initialSettingsData?.settings?.initialSettings;
+
+    SettingStore.setInitialSettings(initialSettings)
+
 
     const staticWidgetsData = await fetchWidgets({
         widgets: ['footer', 'header', 'topBar', 'navigation'],

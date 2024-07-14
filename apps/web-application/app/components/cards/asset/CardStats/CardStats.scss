@@ -1,0 +1,29 @@
+.cardStats{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+
+  .cardStat{
+    display: flex;
+    flex: 1 1 45%;
+    &:nth-child(odd) {
+      justify-content: flex-start;
+    }
+
+    &:nth-child(even) {
+      justify-content: flex-end;
+    }
+  }
+
+  //&:first-child ,&:nth-child(3){
+  //  justify-content: flex-start;
+  //}
+  //
+  //&:nth-child(2),&:nth-child(4) {
+  //  justify-content: flex-end;
+  //
+  //}
+
+
+}

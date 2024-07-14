@@ -10,7 +10,7 @@ interface SidebarWidgetAreaRendererPropTypes {
     rightSideWidgets:Widget[]
     dictionary: {
         [key: string]: string
-    },
+    }
 }
 
 const SidebarWidgetAreaRenderer: FC<SidebarWidgetAreaRendererPropTypes> = ({leftSideWidgets,rightSideWidgets,sidebar,position,locale,dictionary}) => {

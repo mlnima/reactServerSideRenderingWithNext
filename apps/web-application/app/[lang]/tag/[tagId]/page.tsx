@@ -31,9 +31,6 @@ const TagPage = async ({params, searchParams}: IProps) => {
     const settingsData = await fetchSettings({requireSettings: ['tagPageSettings']});
     const sidebar = settingsData?.settings?.tagPageSettings?.sidebar;
 
-    const initialSettingsData = await fetchSettings({requireSettings: ['initialSettings']})
-    const numberOfCardsPerPage = initialSettingsData?.settings?.initialSettings?.layoutSettings?.numberOfCardsPerPage;
-
     const widgetsData = await fetchWidgets({
         widgets: [
             'tagPageTop',
@@ -54,7 +51,7 @@ const TagPage = async ({params, searchParams}: IProps) => {
             lang: params?.lang,
             metaId: params?.tagId,
             page: currentPage,
-            size: searchParams?.size || numberOfCardsPerPage
+            size: searchParams?.size
         },
         locale
     });
@@ -76,9 +73,10 @@ const TagPage = async ({params, searchParams}: IProps) => {
                 <PostPage renderPagination
                           posts={postsData?.posts}
                           locale={locale}
+                          dictionary={dictionary}
                           totalCount={postsData?.totalCount}
                           currentPage={currentPage}
-                          numberOfCardsPerPage={numberOfCardsPerPage}/>
+                          />
                 <WidgetsRenderer dictionary={dictionary}
                                  locale={locale}
                                  widgets={widgetsData.widgets?.['categoryPageBottom']}

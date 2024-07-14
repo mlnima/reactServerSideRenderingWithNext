@@ -18,7 +18,7 @@ const RelatedPostsRenderer: FC<IProps> = ({relatedPosts,locale,dictionary}) => {
                 <h2 className={'sub-content'}>{dictionary?.['Related Posts'] || 'Related Posts'}</h2>
             </div>
             {relatedPosts?.length > 0 &&
-                <PostsCardsRenderer posts={relatedPosts} locale={locale}/>
+                <PostsCardsRenderer posts={relatedPosts} locale={locale} dictionary={dictionary}/>
             }
         </div>
     )

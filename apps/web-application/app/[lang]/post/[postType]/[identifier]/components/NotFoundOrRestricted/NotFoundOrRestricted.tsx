@@ -34,12 +34,12 @@ const NotFoundOrRestricted: FC<PropTypes> = ({dictionary,widgets,relatedPosts,ha
                         </Link>
                     </div>
                 </div>
-            <div className='under-post-widget-area'>
-                <WidgetsRenderer widgets={widgets} position='underPost' hasSidebar={hasSidebar} locale={locale}
-                                 dictionary={dictionary}/>
-            </div>
-            <Comments dictionary={dictionary} postId={post?._id}/>
-            <RelatedPostsRenderer locale={locale} relatedPosts={relatedPosts} dictionary={dictionary}/>
+            {/*<div className='under-post-widget-area'>*/}
+            {/*    <WidgetsRenderer widgets={widgets} position='underPost' hasSidebar={hasSidebar} locale={locale}*/}
+            {/*                     dictionary={dictionary}/>*/}
+            {/*</div>*/}
+            {/*<Comments dictionary={dictionary} postId={post?._id}/>*/}
+            {/*<RelatedPostsRenderer locale={locale} relatedPosts={relatedPosts} dictionary={dictionary}/>*/}
         </div>
 
     )

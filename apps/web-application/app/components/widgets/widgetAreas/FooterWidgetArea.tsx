@@ -7,15 +7,19 @@ interface IProps {
     locale: string;
     dictionary: {
         [key: string]: string;
-    };
+    },
+    postSettings: {
+        [key: string]: string
+    }
 }
 
-const FooterWidgetArea: FC<IProps> = ({ widgets, locale, dictionary }) => {
+const FooterWidgetArea: FC<IProps> = ({ widgets, locale, dictionary,postSettings }) => {
     return (
         <footer className={'footer-widget-area'}>
             <div className={'innerContent'}>
                 <WidgetsRenderer
                     dictionary={dictionary}
+                    postSettings={postSettings}
                     locale={locale}
                     widgets={widgets}
                     position={'footer'}

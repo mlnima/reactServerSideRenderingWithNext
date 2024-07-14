@@ -25,7 +25,7 @@ const searchMetaGenerator = async ({ params: { lang, keyword }, searchParams }: 
     const siteName = settingsData?.settings?.initialSettings?.headDataSettings?.siteName || '';
     const initialSettingsData = await fetchSettings({ requireSettings: ['initialSettings'] });
     const numberOfCardsPerPage =
-        initialSettingsData?.settings?.initialSettings?.layoutSettings?.numberOfCardsPerPage;
+        initialSettingsData?.settings?.initialSettings?.contentSettings?.numberOfCardsPerPage;
 
     const currentPageQuery = searchParams?.page;
     const currentPage =

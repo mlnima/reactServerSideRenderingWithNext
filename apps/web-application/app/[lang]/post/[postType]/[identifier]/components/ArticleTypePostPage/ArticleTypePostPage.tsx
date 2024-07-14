@@ -60,7 +60,7 @@ const ArticleTypePostPage: FC<IProps> =
                         <PostMetasRenderer type='tags' metas={post.tags} dictionary={dictionary}/>
                     </div>
 
-                    <Comments dictionary={dictionary} postId={post?._id}/>
+                    {post?.status === 'published' && <Comments dictionary={dictionary} postId={post?._id}/>}
                     <RelatedPostsRenderer locale={locale} relatedPosts={relatedPosts} dictionary={dictionary}/>
                     <div className='under-post-widget-area'>
                         <WidgetsRenderer widgets={widgets} position='underPost' hasSidebar={hasSidebar} locale={locale}

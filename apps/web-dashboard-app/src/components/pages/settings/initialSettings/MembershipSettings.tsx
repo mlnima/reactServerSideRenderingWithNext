@@ -14,8 +14,12 @@ interface PropTypes {
 const MembershipSettings: FC<PropTypes> = ({ onChangeHandler, initialSettingsData }) => {
     return (
         <Style className={'setting-section'}>
-            <h2>Membership Settings:</h2>
-            <div className={'checkbox-field'}>
+            <div className={'field'}>
+                <h2>Membership Settings:</h2>
+            </div>
+
+
+            <div className={'checkboxField'}>
                 <p>Membership:</p>
                 <input
                     onChange={e => onChangeHandler(e, 'membershipSettings')}
@@ -28,7 +32,7 @@ const MembershipSettings: FC<PropTypes> = ({ onChangeHandler, initialSettingsDat
 
             {!!initialSettingsData?.membershipSettings?.membership && (
                 <>
-                    <div className={'checkbox-field'}>
+                    <div className={'checkboxField'}>
                         <p>Anyone Can Register:</p>
                         <input
                             onChange={e => onChangeHandler(e, 'membershipSettings')}
@@ -38,7 +42,7 @@ const MembershipSettings: FC<PropTypes> = ({ onChangeHandler, initialSettingsDat
                             className={'primaryInput'}
                         />
                     </div>
-                    <div className={'checkbox-field'}>
+                    <div className={'checkboxField'}>
                         <p>Users Can Follow EachOther:</p>
                         <input
                             onChange={e => onChangeHandler(e, 'membershipSettings')}
@@ -48,7 +52,7 @@ const MembershipSettings: FC<PropTypes> = ({ onChangeHandler, initialSettingsDat
                             className={'primaryInput'}
                         />
                     </div>
-                    <div className={'checkbox-field'}>
+                    <div className={'checkboxField'}>
                         <p>Users Can Message EachOther:</p>
                         <input
                             onChange={e => onChangeHandler(e, 'membershipSettings')}
@@ -58,7 +62,7 @@ const MembershipSettings: FC<PropTypes> = ({ onChangeHandler, initialSettingsDat
                             className={'primaryInput'}
                         />
                     </div>
-                    <div className={'checkbox-field'}>
+                    <div className={'checkboxField'}>
                         <p>Users Can Comment On the Posts:</p>
                         <input
                             onChange={e => onChangeHandler(e, 'membershipSettings')}
@@ -69,7 +73,7 @@ const MembershipSettings: FC<PropTypes> = ({ onChangeHandler, initialSettingsDat
                         />
                     </div>
 
-                    <div className={'checkbox-field'}>
+                    <div className={'checkboxField'}>
                         <p>Allow User To Post:</p>
                         <input
                             onChange={e => onChangeHandler(e, 'membershipSettings')}
@@ -82,7 +86,7 @@ const MembershipSettings: FC<PropTypes> = ({ onChangeHandler, initialSettingsDat
 
                     {initialSettingsData?.membershipSettings?.allowUserToPost && <PostByUserSettings/>}
 
-                    {/*<div className={'checkbox-field'}>*/}
+                    {/*<div className={'checkboxField'}>*/}
                     {/*    <p>Users Personal Email Address(eg. username@domain.com):</p>*/}
                     {/*    <input onChange={e => onChangeHandler(e, 'membershipSettings')}*/}
                     {/*           type={'checkbox'}*/}

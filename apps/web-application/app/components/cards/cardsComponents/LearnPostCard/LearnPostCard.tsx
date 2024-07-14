@@ -5,12 +5,11 @@ import { Post } from 'typescript-types';
 import CardTitle from '../../asset/CardTitle/CardTitle';
 import '../postCard.scss';
 import './LearnPostCard.scss';
-import { imageLessCardColors } from '@repo/data-structures/dist/src';
+import { imageLessCardColors } from '@repo/data-structures';
 import { randomNumberGenerator } from '@repo/shared-util';
+import CardStats from '@components/cards/asset/CardStats/CardStats';
 
-const CardImageRendererUseClient = dynamic(
-    () => import('../../asset/CardImageRenderer/CardImageRendererUseClient'),
-);
+const CardImageRendererUseClient = dynamic(() => import('../../asset/CardImageRenderer/CardImageRendererUseClient'));
 
 interface LearnPostCardPropTypes {
     locale: string;
@@ -20,6 +19,12 @@ interface LearnPostCardPropTypes {
     isSidebar?: boolean;
     post: Post;
     isNextImageAllowed: boolean;
+    dictionary: {
+        [key: string]: string;
+    };
+    settings: {
+        [key: string]: string;
+    };
 }
 
 const LearnPostCard: FC<LearnPostCardPropTypes> = ({
@@ -29,43 +34,41 @@ const LearnPostCard: FC<LearnPostCardPropTypes> = ({
     isSidebar,
     index,
     isNextImageAllowed,
+    dictionary,
+    settings,
 }) => {
     const randomNumberFortColors = randomNumberGenerator(0, 10);
     const randomColor = imageLessCardColors[randomNumberFortColors];
 
     return (
-        <article
-            className={`postCard postCardLearn${isSidebar ? ' postCardSidebar':''}`}
-        >
+        <article className={`postCard postCardLearn${isSidebar ? ' postCardSidebar' : ''}`}>
             {!!post.mainThumbnail ? (
                 <>
                     <div className={'cardMedia'}>
                         <Link
                             href={postUrl}
                             className={'cardLink'}
-                            title={
-                                post?.translations?.[locale as string]?.title ??
-                                post?.title
-                            }
+                            title={post?.translations?.[locale as string]?.title ?? post?.title}
                         >
                             <CardImageRendererUseClient
-                                imageUrl={post.mainThumbnail|| post?.thumbnail?.filePath}
+                                imageUrl={post.mainThumbnail || post?.thumbnail?.filePath}
                                 isNextImageAllowed={isNextImageAllowed}
                                 key={post?._id}
-                                mediaAlt={post?.translations?.[locale as string]
-                                        ?.title ?? post?.title
-                                }
+                                mediaAlt={post?.translations?.[locale as string]?.title ?? post?.title}
                                 index={index}
                             />
                         </Link>
                     </div>
                     <div className={`cardInfo`}>
-                        <CardTitle
-                            title={
-                                post?.translations?.[locale as string]?.title ??
-                                post?.title
-                            }
-                            url={postUrl}
+                        <CardTitle title={post?.translations?.[locale as string]?.title ?? post?.title} url={postUrl} />
+                        <CardStats
+                            views={post?.views}
+                            dictionary={dictionary}
+                            likes={post?.likes}
+                            dislikes={post?.dislikes}
+                            createdAt={post?.createdAt}
+                            updatedAt={post?.updatedAt}
+                            settings={settings}
                         />
                     </div>
                 </>
@@ -74,8 +77,7 @@ const LearnPostCard: FC<LearnPostCardPropTypes> = ({
                     className={'postCard imageLessCard'}
                     style={{
                         backgroundColor: !post.mainThumbnail
-                            ? randomColor?.background ||
-                              'var(--primary-background-color)'
+                            ? randomColor?.background || 'var(--primary-background-color)'
                             : 'var(--primary-background-color)',
                     }}
                 >
@@ -83,18 +85,13 @@ const LearnPostCard: FC<LearnPostCardPropTypes> = ({
                         href={postUrl}
                         className={'cardLink'}
                         style={{
-                            color:
-                                randomColor?.text ||
-                                'var(--primary-text-color)',
+                            color: randomColor?.text || 'var(--primary-text-color)',
                         }}
-                        title={
-                            post?.translations?.[locale as string]?.title ??
-                            post?.title
-                        }
+                        title={post?.translations?.[locale as string]?.title ?? post?.title}
                     >
-                        {post?.translations?.[locale as string]?.title ??
-                            post?.title}
+                        {post?.translations?.[locale as string]?.title ?? post?.title}
                     </Link>
+
                 </div>
             )}
         </article>

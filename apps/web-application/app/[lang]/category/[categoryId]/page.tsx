@@ -29,9 +29,6 @@ const CategoryPage = async ({params, searchParams}: IProps) => {
     const settingsData = await fetchSettings({requireSettings: ['categoryPageSettings']});
     const sidebar = settingsData?.settings?.categoryPageSettings?.sidebar;
 
-    const initialSettingsData = await fetchSettings({requireSettings: ['initialSettings']})
-    const numberOfCardsPerPage = initialSettingsData?.settings?.initialSettings?.layoutSettings?.numberOfCardsPerPage;
-
     const widgetsData = await fetchWidgets({
         widgets: [
             'categoryPageTop',
@@ -52,7 +49,7 @@ const CategoryPage = async ({params, searchParams}: IProps) => {
             lang: params?.lang,
             metaId: params?.categoryId,
             page: currentPage,
-            size: searchParams?.size || numberOfCardsPerPage
+            size: searchParams?.size
         },
         locale
     });
@@ -74,9 +71,9 @@ const CategoryPage = async ({params, searchParams}: IProps) => {
                 <PostPage renderPagination
                           posts={postsData?.posts}
                           locale={locale}
+                          dictionary={dictionary}
                           totalCount={postsData?.totalCount}
-                          currentPage={currentPage}
-                          numberOfCardsPerPage={numberOfCardsPerPage}/>
+                          currentPage={currentPage}/>
                 <WidgetsRenderer dictionary={dictionary}
                                  locale={locale}
                                  widgets={widgetsData.widgets?.['categoryPageBottom']}

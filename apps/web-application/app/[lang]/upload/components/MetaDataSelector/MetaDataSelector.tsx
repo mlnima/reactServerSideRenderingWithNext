@@ -61,7 +61,7 @@ const MetaDataSelector: FC<ComponentPropTypes> = ({ type, onMetaChangeHandler, m
         } else if (!!selected && selected.length > maxLimit && user.userData?.role !== 'administrator') {
             dispatch(
                 setAlert({
-                    message: 'Maximum limit reached',
+                    message: `Maximum ${type} reached`,
                     type: 'error',
                 }),
             );

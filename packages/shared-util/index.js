@@ -59,6 +59,7 @@ export {
     convertSecondsToTimeString,
     convertDateToIsoString,
     convertDurationStringToIso8601,
+    formatDatePostCard
 } from './src/date-utils';
 export {
     removeFileExtension,

@@ -9,10 +9,11 @@
   z-index: 11;
   display: flex;
   align-items: center;
+  background-color: var(--tertiary-background-color);
 
   .conversationsControls {
     grid-area: conversationsControls;
-    background-color: var(--secondary-background-color, #181818);
+   // background-color: var(--tertiary-background-color);
     width: 100%;
     height: 100%;
     display: flex;
@@ -35,7 +36,7 @@
 
   .conversationAreaHidden {
     display: none;
-    background-color: var(--secondary-background-color, #181818);
+    //background-color: var(--tertiary-background-color);
   }
 
   //.messengerPageContentActive{

@@ -8,10 +8,15 @@
   margin-left: auto;
   margin-right: auto;
   .cardInfo {
-    height: 46px;
+    height: 100%;
     padding-top: .25rem;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
+
+
 }
 
 .postCardSidebar {
@@ -26,7 +31,6 @@
     flex-direction: column;
     justify-content: center;
     .cardTitle {
-      //height: 100% !important;
       padding: 0 4px;
       box-sizing: border-box;
     }

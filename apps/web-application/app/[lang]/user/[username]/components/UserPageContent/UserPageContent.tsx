@@ -166,7 +166,7 @@ const userPageContent: FC<IProps> = ({dictionary, username, locale}) => {
 
                 if (
                     //@ts-ignore
-                    postData?.posts?.length < (initialSettings?.layoutSettings?.numberOfCardsPerPage || 20) &&
+                    postData?.posts?.length < (initialSettings?.contentSettings?.numberOfCardsPerPage || 20) &&
                     !noMorePostToFetch
                 ) {
                     setNMoMorePostToFetch(true)
@@ -272,6 +272,7 @@ const userPageContent: FC<IProps> = ({dictionary, username, locale}) => {
                     <div className='postsContainer'>
                         <PostsCardsRenderer locale={locale}
                                             previewMode={true}
+                                            dictionary={dictionary}
                                             posts={userPagePosts}/>
                     </div>
                 }

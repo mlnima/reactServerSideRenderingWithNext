@@ -1,19 +1,20 @@
 'use client';
 import { FC } from 'react';
-import { useParams, usePathname, useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { rangeNumGenerator } from '@repo/shared-util';
 import Link from 'next/link';
 import './Pagination.styles.scss';
+import SettingStore from '@store/SettingStore';
 
 interface IProps {
     totalCount: number;
-    numberOfCardsPerPage?: number;
     currentPage?: number;
 }
 
-const Pagination: FC<IProps> = ({ totalCount, numberOfCardsPerPage = 20, currentPage = 1 }) => {
+const Pagination: FC<IProps> = ({ totalCount, currentPage = 1 }) => {
     const searchParams = useSearchParams();
     const pathname = usePathname();
+    const numberOfCardsPerPage = SettingStore.getNumberOfCardsPerPage();
     const maxPage = Math.ceil(totalCount / numberOfCardsPerPage);
 
     if (totalCount > numberOfCardsPerPage) {

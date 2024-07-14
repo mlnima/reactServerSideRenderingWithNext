@@ -1,16 +1,19 @@
 import Link from "next/link";
-import {FC} from "react";
+import React, {FC} from "react";
 import {capitalizeFirstLetter} from "@repo/shared-util";
-import './CardTitle.styles.scss';
+import './CardTitle.scss';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faArrowUpRightFromSquare} from "@fortawesome/free-solid-svg-icons";
 
 interface CardTitlePropTypes {
     title: string | undefined,
     url?: string | undefined,
     targetLink?: string,
+    useIcon?: string,
     useLink?: boolean
 }
 
-const CardTitle: FC<CardTitlePropTypes> = ({title, url, targetLink, useLink = true}) => {
+const CardTitle: FC<CardTitlePropTypes> = ({title, url, targetLink, useLink = true,useIcon=false}) => {
 
     return (
         <div className={'cardTitle'}>
@@ -22,6 +25,8 @@ const CardTitle: FC<CardTitlePropTypes> = ({title, url, targetLink, useLink = tr
                     {capitalizeFirstLetter(title)}
                 </p>
             }
+            {useIcon &&  <FontAwesomeIcon className={'rating-icon'} icon={faArrowUpRightFromSquare}/>}
+
         </div>
     );
 };

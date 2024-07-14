@@ -1,6 +1,10 @@
 .post-page{
   width: 100%;
   grid-column: 1;
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   .notFoundOrRestricted{
     display: flex;
     flex-direction: column;

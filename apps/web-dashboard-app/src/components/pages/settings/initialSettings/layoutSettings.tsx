@@ -3,6 +3,8 @@ import styled from "styled-components";
 import {InitialSettings} from "typescript-types";
 import MonacoEditor from "@components/common/MonacoEditor";
 import UserConfigMenu from "web-application/app/components/global/UserConfigMenu/UserConfigMenu";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faChevronDown, faChevronUp} from "@fortawesome/free-solid-svg-icons";
 
 const Style = styled.div``;
 
@@ -17,8 +19,12 @@ const LayoutSettings: FC<PropTypes> = ({onChangeHandler, initialSettingsData}) =
     const [isSecondaryColorEditorOpen,setIsSecondaryColorEditorOpen] = useState(false)
     return (
         <Style  className={'setting-section'}>
-            <h2>Layout Settings:</h2>
-            <div className={'checkbox-field'}>
+            <div className={'field'}>
+                <h2>Layout Settings:</h2>
+
+
+            </div>
+            <div className={'checkboxField'}>
                 <p>Topbar:</p>
                 <input onChange={e => onChangeHandler(e, 'layoutSettings')}
                        type={'checkbox'}
@@ -26,7 +32,9 @@ const LayoutSettings: FC<PropTypes> = ({onChangeHandler, initialSettingsData}) =
                        checked={initialSettingsData?.layoutSettings?.topbar}
                        className={'primaryInput'}/>
             </div>
-            <div className={'checkbox-field'}>
+
+
+            <div className={'checkboxField'}>
                 <p>Header:</p>
                 <input onChange={e => onChangeHandler(e, 'layoutSettings')}
                        type={'checkbox'}
@@ -34,7 +42,7 @@ const LayoutSettings: FC<PropTypes> = ({onChangeHandler, initialSettingsData}) =
                        checked={initialSettingsData?.layoutSettings?.header}
                        className={'primaryInput'}/>
             </div>
-            <div className={'checkbox-field'}>
+            <div className={'checkboxField'}>
                 <p>Navigation:</p>
                 <input onChange={e => onChangeHandler(e, 'layoutSettings')}
                        type={'checkbox'}
@@ -42,7 +50,7 @@ const LayoutSettings: FC<PropTypes> = ({onChangeHandler, initialSettingsData}) =
                        checked={initialSettingsData?.layoutSettings?.navigation}
                        className={'primaryInput'}/>
             </div>
-            <div className={'checkbox-field'}>
+            <div className={'checkboxField'}>
                 <p>Footer:</p>
                 <input onChange={e => onChangeHandler(e, 'layoutSettings')}
                        type={'checkbox'}
@@ -50,7 +58,7 @@ const LayoutSettings: FC<PropTypes> = ({onChangeHandler, initialSettingsData}) =
                        checked={initialSettingsData?.layoutSettings?.footer}
                        className={'primaryInput'}/>
             </div>
-            <div className={'checkbox-field'}>
+            <div className={'checkboxField'}>
                 <p>Languages Switcher in User Config Menu:</p>
                 <input onChange={e => onChangeHandler(e, 'layoutSettings')}
                        type={'checkbox'}
@@ -58,7 +66,7 @@ const LayoutSettings: FC<PropTypes> = ({onChangeHandler, initialSettingsData}) =
                        checked={initialSettingsData?.layoutSettings?.languagesSwitcherInUserConfigMenu}
                        className={'primaryInput'}/>
             </div>
-            <div className={'checkbox-field'}>
+            <div className={'checkboxField'}>
                 <p>Theme Colors Switcher in User Config Menu:</p>
                 <input onChange={e => onChangeHandler(e, 'layoutSettings')}
                        type={'checkbox'}
@@ -66,7 +74,7 @@ const LayoutSettings: FC<PropTypes> = ({onChangeHandler, initialSettingsData}) =
                        checked={initialSettingsData?.layoutSettings?.themeColorsSwitcherInUserConfigMenu}
                        className={'primaryInput'}/>
             </div>
-            <div className={'input-field'}>
+            <div className={'inputField'}>
                 <p>Logo Url:</p>
                 <input onChange={e => onChangeHandler(e, 'layoutSettings')}
                        type={'text'}
@@ -74,7 +82,7 @@ const LayoutSettings: FC<PropTypes> = ({onChangeHandler, initialSettingsData}) =
                        value={initialSettingsData?.layoutSettings?.logoUrl}
                        className={'primaryInput'}/>
             </div>
-            <div className={'input-field'}>
+            <div className={'inputField'}>
                 <p>Logo Width:</p>
                 <input onChange={e => onChangeHandler(e, 'layoutSettings')}
                        type={'number'}
@@ -82,7 +90,7 @@ const LayoutSettings: FC<PropTypes> = ({onChangeHandler, initialSettingsData}) =
                        value={initialSettingsData?.layoutSettings?.logoWidth}
                        className={'primaryInput'}/>
             </div>
-            <div className={'input-field'}>
+            <div className={'inputField'}>
                 <p>Logo Height:</p>
                 <input onChange={e => onChangeHandler(e, 'layoutSettings')}
                        type={'number'}
@@ -90,57 +98,74 @@ const LayoutSettings: FC<PropTypes> = ({onChangeHandler, initialSettingsData}) =
                        value={initialSettingsData?.layoutSettings?.logoHeight}
                        className={'primaryInput'}/>
             </div>
-            <div className={'styleSection'}>
-                <button className={'btn btn-primary'} onClick={()=>setIsStyleEditorOpen(!isStyleEditorOpen)}>
-                    Custom Styles
-                </button>
-                {isStyleEditorOpen &&
-                    <MonacoEditor
-                        language={'scss'}
-                        name={'customStyles'}
-                        defaultValue={initialSettingsData?.layoutSettings?.customStyles || ''}
-                        value={initialSettingsData?.layoutSettings?.customStyles}
-                        className={'initialSettings-editor'}
-                        //@ts-ignore
-                        onChange={(e: string) => onChangeHandler(e, 'layoutSettings')}
-                        height={'80vh'}
-                    />
-                }
+            <div className={'inputField'}>
+                <p>Desktop Max Inner Content Width:</p>
+                <input onChange={e => onChangeHandler(e, 'layoutSettings')}
+                       type={'number'}
+                       name={'maxInnerContentWidth'}
+                       value={initialSettingsData?.contentSettings?.maxInnerContentWidth}
+                       className={'primaryInput'}/>
             </div>
-            <div className={'styleSection'}>
-                <button className={'btn btn-primary'} onClick={()=>setIsPrimaryColorEditorOpen(!isPrimaryColorEditorOpen)}>
-                    Primary Mode Colors
-                </button>
+            <div className={'field'}>
 
-                {isPrimaryColorEditorOpen &&
-                    <MonacoEditor
-                        language={'scss'}
-                        name={'primaryModeColors'}
-                        defaultValue={initialSettingsData?.layoutSettings?.primaryModeColors || ''}
-                        value={initialSettingsData?.layoutSettings?.primaryModeColors}
-                        className={'initialSettings-editor'}
-                        //@ts-ignore
-                        onChange={(e: string) => onChangeHandler(e, 'layoutSettings')}
-                        height={'80vh'}
-                    />
-                }
+                    <button className={'btn btn-dark'} onClick={()=>setIsStyleEditorOpen(!isStyleEditorOpen)}>
+                        Custom Styles
+                        <FontAwesomeIcon icon={isStyleEditorOpen ? faChevronUp: faChevronDown} style={{width: 16, height: 16}}/>
+                    </button>
+                    {isStyleEditorOpen &&
+                        <MonacoEditor
+                            language={'scss'}
+                            name={'customStyles'}
+                            defaultValue={initialSettingsData?.layoutSettings?.customStyles || ''}
+                            value={initialSettingsData?.layoutSettings?.customStyles}
+                            className={'initialSettings-editor'}
+                            //@ts-ignore
+                            onChange={(e: string) => onChangeHandler(e, 'layoutSettings')}
+                            height={'80vh'}
+                        />
+                    }
+
+
             </div>
-            <div className={'styleSection'}>
-                <button className={'btn btn-primary'} onClick={()=>setIsSecondaryColorEditorOpen(!isSecondaryColorEditorOpen)}>
-                    Secondary Mode Colors
-                </button>
-                {isSecondaryColorEditorOpen &&
-                    <MonacoEditor
-                        language={'scss'}
-                        name={'secondaryModeColors'}
-                        defaultValue={initialSettingsData?.layoutSettings?.secondaryModeColors || ''}
-                        value={initialSettingsData?.layoutSettings?.secondaryModeColors}
-                        className={'initialSettings-editor'}
-                        //@ts-ignore
-                        onChange={(e: string) => onChangeHandler(e, 'layoutSettings')}
-                        height={'80vh'}
-                    />
-                }
+            <div className={'field'}>
+
+                    <button className={'btn btn-dark'} onClick={()=>setIsPrimaryColorEditorOpen(!isPrimaryColorEditorOpen)}>
+                        Primary Mode Colors
+                        <FontAwesomeIcon icon={isPrimaryColorEditorOpen ? faChevronUp: faChevronDown} style={{width: 16, height: 16}}/>
+                    </button>
+
+                    {isPrimaryColorEditorOpen &&
+                        <MonacoEditor
+                            language={'scss'}
+                            name={'primaryModeColors'}
+                            defaultValue={initialSettingsData?.layoutSettings?.primaryModeColors || ''}
+                            value={initialSettingsData?.layoutSettings?.primaryModeColors}
+                            className={'initialSettings-editor'}
+                            //@ts-ignore
+                            onChange={(e: string) => onChangeHandler(e, 'layoutSettings')}
+                            height={'80vh'}
+                        />
+                    }
+
+
+            </div>
+            <div className={'field'}>
+                    <button className={'btn btn-dark'} onClick={()=>setIsSecondaryColorEditorOpen(!isSecondaryColorEditorOpen)}>
+                        Secondary Mode Colors
+                        <FontAwesomeIcon icon={isSecondaryColorEditorOpen ? faChevronUp: faChevronDown} style={{width: 16, height: 16}}/>
+                    </button>
+                    {isSecondaryColorEditorOpen &&
+                        <MonacoEditor
+                            language={'scss'}
+                            name={'secondaryModeColors'}
+                            defaultValue={initialSettingsData?.layoutSettings?.secondaryModeColors || ''}
+                            value={initialSettingsData?.layoutSettings?.secondaryModeColors}
+                            className={'initialSettings-editor'}
+                            //@ts-ignore
+                            onChange={(e: string) => onChangeHandler(e, 'layoutSettings')}
+                            height={'80vh'}
+                        />
+                    }
             </div>
         </Style>
     )

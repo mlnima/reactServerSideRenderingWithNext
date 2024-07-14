@@ -32,6 +32,9 @@ interface AdminPanelPosts {
         description: string;
     };
     totalCount: number;
+    statusesCount?: {
+        [key: string]: number;
+    }
     posts: [];
     meta: Meta;
     metas: [Meta];
@@ -45,6 +48,7 @@ const initialState = {
     },
     relatedPosts: [],
     totalCount: 0,
+    statusesCount:{},
     posts: [],
     meta: {},
     metas: [],
@@ -159,6 +163,7 @@ export const getPostsAction = createAsyncThunk(
                 return {
                     posts: res.data?.posts,
                     totalCount: res.data?.totalCount,
+                    statusesCount:res.data?.statusesCount
                 };
             })
             .catch(error => {
@@ -300,6 +305,7 @@ export const getMetasAction = createAsyncThunk(
                 return {
                     metas: res.data?.metas,
                     totalCount: res.data?.totalCount,
+                    statusesCount:res.data?.statusesCount
                 };
             })
             .catch(err => {

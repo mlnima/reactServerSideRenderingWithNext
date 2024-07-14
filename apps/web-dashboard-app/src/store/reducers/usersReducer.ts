@@ -53,26 +53,23 @@ export const autologinUserAction = createAsyncThunk(
     'users/autologinUserAction',
     async ({fields}:{ fields: string[] }, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
+        return await commonAPIRequestGetSignedInUserData(fields).then(response => {
 
-        if (localStorage.wt) {
-            return await commonAPIRequestGetSignedInUserData(fields).then(response => {
+            if ( response.data.userData.role === 'administrator' ) {
 
-                if ( response.data.userData.role === 'administrator' ) {
-
-                    thunkAPI.dispatch(setAlert({message: response.data.message, type: 'success'}))
-                    return {
-                        userData: response.data?.userData,
-                        isUserLoggedIn: true
-                    }
+                // thunkAPI.dispatch(setAlert({message: response.data.message, type: 'success'}))
+                return {
+                    userData: response.data?.userData,
+                    isUserLoggedIn: true
                 }
-                thunkAPI.dispatch(setAlert({message: 'forbidden', type: 'error'}))
-            }).catch((err) => {
-                if(!dev){
-                    localStorage.removeItem('wt')
-                    thunkAPI.dispatch(setAlert({message: err.response.data.message, type: 'error'}))
-                }
-            })
-        }
+            }
+            thunkAPI.dispatch(setAlert({message: 'forbidden', type: 'error'}))
+        }).catch((err) => {
+            if(!dev){
+                localStorage.removeItem('wt')
+                thunkAPI.dispatch(setAlert({message: err.response.data.message, type: 'error'}))
+            }
+        })
     }
 )
 
@@ -91,7 +88,8 @@ export const getUsersAction = createAsyncThunk(
         return await dashboardAPIRequestGetUsers(data).then((res: AxiosResponse<any>) => {
             return {
                 users: res.data.users,
-                totalCount: res.data.totalCount || 0
+                totalCount: res.data.totalCount || 0,
+                statusesCount: res.data?.statusesCount
             }
 
         }).catch((error: AxiosError) => {

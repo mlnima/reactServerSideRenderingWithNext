@@ -9,6 +9,7 @@ import path from 'path';
 import { multiQueryUniquer } from '@util/queryUtil';
 import { mongoIdValidator } from '@util/data-validators';
 import { reqQueryToMongooseOptions, searchQueryGenerator } from '@util/database-util';
+import {postStatuses} from "@repo/data-structures";
 
 class MetaController {
     static async resetMetaImage(req: Request, res: Response) {
@@ -63,7 +64,26 @@ class MetaController {
             res.sendStatus(500);
         }
     }
+    static async getMeta(req: Request, res: Response) {
+        try {
+            const { _id } = req.query;
+            if (!_id){
+                res.status(400).json({message:"No meta id provided"});
+            }
+            const meta = await metaSchema.findById(_id).exec();
 
+            if (!meta){
+                res.status(404).json({message:"Meta not found"});
+            }
+            res.json({meta});
+
+        } catch (err) {
+            console.error(err);
+            res.sendStatus(500);
+        }
+    }
+
+    
     static async getTags(req: Request, res: Response) {
         try {
             const statusQuery = { status: 'published' };
@@ -209,16 +229,31 @@ class MetaController {
 
             const metaCount = await metaSchema.countDocuments({ $and: [{ type: multiQueryUniquer(metaType) }, searchQuery, statusQuery] }).exec();
 
-            await metaSchema
+            let statusesCount ={}
+
+            for await (const status of postStatuses){
+                statusesCount[status] = await metaSchema.countDocuments({$and:[{status},type]}).exec();
+            }
+
+            const metas = await metaSchema
                 .find({ $and: [type, searchQuery, statusQuery] }, {}, reqQueryToMongooseOptions(req))
                 .exec()
-                .then(async metas => {
-                    res.json({ metas, totalCount: metaCount });
-                })
-                .catch(err => {
-                    console.log(err);
-                    res.end();
-                });
+
+            res.json({ metas, totalCount: metaCount, statusesCount });
+
+            // await metaSchema
+            //     .find({ $and: [type, searchQuery, statusQuery] }, {}, reqQueryToMongooseOptions(req))
+            //     .exec()
+            //     .then(async metas => {
+            //         res.json({ metas, totalCount: metaCount });
+            //     })
+            //     .catch(err => {
+            //         console.log(err);
+            //         res.end();
+            //     });
+
+
+
         } catch (err) {
             console.log(err);
         }

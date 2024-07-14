@@ -47,13 +47,26 @@ export interface InitialSettings{
         logoUrl:string,
         logoWidth:number,
         logoHeight:number,
+    },
+    eCommerceSettings?:{
+
+    },
+    contentSettings?:{
         numberOfCardsPerRowInMobile: number,
         numberOfCardsPerPage?: number,
         cardsWidthDesktop: number,
-        fallbackImageUrlOnError:string,
-        customCardBackgrounds: string[]
-    },
-    eCommerceSettings?:{
+        maxInnerContentWidth: number,
+        postSettings:{
+            [key: string]: {
+                viewSystem: boolean,
+                showViewsOnCard: boolean,
+                ratingSystem: boolean,
+                showRatingOnCard: boolean,
+                showDateOnCard: boolean,
+                showDateInPostPage: boolean,
+                allowComment: boolean,
+            }
+        }
 
     }
 }

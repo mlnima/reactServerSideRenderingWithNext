@@ -33,7 +33,7 @@ export const reqQueryToMongooseOptions = (req: Request) => {
     const initialSettings  = GlobalStore.getInitialSettings();
     const limit = req.query.size
         ? { limit: parseInt(multiQueryUniquer(req.query.size)) }
-        : { limit: initialSettings?.layoutSettings?.numberOfCardsPerPage || 20 };
+        : { limit: initialSettings?.contentSettings?.numberOfCardsPerPage || 20 };
     const skip = req.query.page
         ? { skip: limit.limit * parseInt(multiQueryUniquer(req.query.page)) - limit.limit }
         : {};

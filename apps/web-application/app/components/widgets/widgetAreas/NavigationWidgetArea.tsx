@@ -1,24 +1,32 @@
-import {FC} from "react";
-import {Widget} from "typescript-types";
-import WidgetsRenderer from "../widgetRenderer/WidgetsRenderer";
+import { FC } from 'react';
+import { Widget } from 'typescript-types';
+import WidgetsRenderer from '../widgetRenderer/WidgetsRenderer';
 
 interface IProps {
-    widgets:Widget[],
-    locale:string,
+    widgets: Widget[];
+    locale: string;
     dictionary: {
-        [key: string]: string
-    }
+        [key: string]: string;
+    };
+    postSettings: {
+        [key: string]: string;
+    };
 }
 
-const NavigationWidgetArea: FC<IProps> = ({widgets,locale,dictionary}) => {
-
+const NavigationWidgetArea: FC<IProps> = ({ widgets, locale, dictionary,postSettings }) => {
     return (
         <nav className={'navigation-widget-area'}>
             <div className={'innerContent'}>
-                <WidgetsRenderer dictionary={dictionary} locale={locale} widgets={widgets} position={'navigation'}/>
+                <WidgetsRenderer
+                    postSettings={postSettings}
+                    dictionary={dictionary}
+                    locale={locale}
+                    widgets={widgets}
+                    position={'navigation'}
+                />
             </div>
         </nav>
-    )
+    );
 };
 
-export default NavigationWidgetArea
+export default NavigationWidgetArea;

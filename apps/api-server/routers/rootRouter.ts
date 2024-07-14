@@ -35,6 +35,7 @@ router.get('/v1/comment', CommentController.getComments);
 //---------------------Metas-------------------
 router.post('/v1/meta/resetMetaImage', MetaController.resetMetaImage);
 router.get('/v1/metas', MetaController.getMetas);
+router.get('/v1/meta', MetaController.getMeta);
 router.get('/v1/tags', MetaController.getTags);
 router.put('/dashboard/meta', adminAuthMiddleware, MetaController.dashboardUpdateMeta);
 router.delete('/dashboard/meta', adminAuthMiddleware, MetaController.dashboardDeleteMeta);

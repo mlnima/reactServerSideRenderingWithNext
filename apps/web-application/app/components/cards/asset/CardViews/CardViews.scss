@@ -1,10 +1,10 @@
-.card-views{
-  font-size: 1rem;
+.cardViews{
   display: flex;
   align-items: center;
   gap: 2px;
-  color: var(--primary-text-color,#b3b3b3);
+  color: var(--secondary-text-color,#b3b3b3);
   padding:  0;
+
   .view-icon{
     width: 1rem;
     height: 1rem;
@@ -12,8 +12,7 @@
 }
 
 @media only screen and (min-width: 600px){
-  .card-views{
+  .cardViews{
     padding: 1px 0;
-    font-size: small;
   }
 }

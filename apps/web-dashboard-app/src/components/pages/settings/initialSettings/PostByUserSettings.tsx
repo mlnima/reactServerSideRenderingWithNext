@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch } from '@store/hooks';
 import { editInitialSettings } from '@store/reducers/settingsReducer';
-import postTypes from '@repo/data-structures/dist/src/postTypes';
+import { postTypes } from '@repo/data-structures';
 import { useSelector } from 'react-redux';
 import { DashboardStore } from 'typescript-types';
 import { inputValueSimplifier } from '@repo/shared-util';
@@ -31,9 +31,14 @@ const Style = styled.div`
               align-items: center;
               justify-content: space-between;
               flex-direction: column;
+              gap: .5rem;
+              align-content: flex-start;
+              height: 100%;
               p{
-                text-align: center;
-  
+                //text-align: center;
+                place-items: flex-start;
+             
+            
               }
               input{
                 max-width: 4rem;
@@ -72,14 +77,19 @@ const PostByUserSettings: FC<PropTypes> = ({}) => {
     };
 
     return (
-        <Style className={'checkboxFieldVertical'}>
-            <p>Allowed Post Type By User:</p>
+        <Style className={'checkboxFieldVertical field'}>
+            <div className={'field'}>
+                <p>Allowed Post Type By User:</p>
+            </div>
+
+
             <div className={'checkboxFieldItems'}>
                 {postTypes.map(postType => {
                     return (
                         <div className={'checkboxFieldItem'}>
-                            <p> {postType}</p>
-
+                            <div className={'checkboxFieldItemSection'}>
+                            <p> {postType} :</p>
+                            </div>
                             <div className={'checkboxFieldItemSection'}>
                                 <p> Allow</p>
                                 <input

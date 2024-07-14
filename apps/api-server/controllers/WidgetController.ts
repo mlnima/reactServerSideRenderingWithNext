@@ -66,8 +66,11 @@ class WidgetController{
             const excludeOtherLanguagesQuery = locale ? {select: locales.map(languageCode => languageCode !== locale ? `-data.translations.${languageCode}` : '').join(' ')} : {}
             const requestedWidgets = Array.isArray(req.query.widget) ? req.query.widget : [req.query.widget]
             const widgetsDataQuery = requestedWidgets.map(position => position === 'all' ? {} : {'data.position': position})
+            const fields = locale && locale !== process.env.NEXT_PUBLIC_DEFAULT_LOCALE ?
+                [...postFieldRequestForCards,`translations.${locale}.title`]: postFieldRequestForCards
+
             const widgets = await widgetSchema.find(
-                {$or: [...widgetsDataQuery]},
+                {$and:[{$or: [...widgetsDataQuery]}]},
                 {},
                 excludeOtherLanguagesQuery).populate([
                 {
@@ -77,7 +80,11 @@ class WidgetController{
                 {
                     model:'post',
                     path: 'data.uniqueData.posts',
-                    select: [...postFieldRequestForCards,`translations.${locale}.title`]
+                    select: fields,
+                    populate: {
+                        path: 'thumbnail',
+                        select: 'filePath'
+                    }
                 }
             ]).exec()
 

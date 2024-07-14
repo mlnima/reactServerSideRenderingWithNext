@@ -27,6 +27,17 @@ export const  clientAPIRequestResetMetaImage = async (_id: string) => {
     return await AxiosInstance.post('/api/v1/meta/resetMetaImage', body)
 }
 
+export const  getMeta = async (_id: string) => {
+    return await AxiosInstance.get('/api/v1/meta', {
+        params:{
+            _id
+        }
+    })
+}
+
+
+
+
 interface IGetTagsQuery{
     sort?:string,
     keyword?:string,

@@ -23,6 +23,7 @@ import fsExtra from 'fs-extra';
 import { getCurrentDatePath } from '@util/path-utils';
 import { UploadedFile } from 'express-fileupload';
 import fileSchema from '@schemas/fileSchema';
+import {postStatuses, postTypes} from "@repo/data-structures";
 
 class PostController {
     //---------------------helpers-------------------
@@ -984,7 +985,17 @@ class PostController {
             const metaQuery = metaId
                 ? [{ $or: [{ categories: { $in: metaId } }, { tags: { $in: metaId } }, { actors: { $in: metaId } }] }]
                 : [];
-            const searchQuery = !decodedKeyword ? [] : [{ $or: [{ title: new RegExp(decodedKeyword, 'i') }] }];
+            const searchQuery = !decodedKeyword ? [] : [{ $or: [
+                { title: new RegExp(decodedKeyword, 'i') },
+                { description: new RegExp(decodedKeyword, 'i') },
+                { mainThumbnail: new RegExp(decodedKeyword, 'i') },
+                { videoTrailerUrl: new RegExp(decodedKeyword, 'i') },
+                { videoUrl: new RegExp(decodedKeyword, 'i') },
+                { downloadLink: new RegExp(decodedKeyword, 'i') },
+                { iframe: new RegExp(decodedKeyword, 'i') },
+                { videoEmbedCode: new RegExp(decodedKeyword, 'i') },
+                { videoScriptCode: new RegExp(decodedKeyword, 'i') },
+                ] }];
             const statusQuery = !status
                 ? [{ status: 'published' }]
                 : status === 'all'
@@ -1005,7 +1016,17 @@ class PostController {
 
             const posts = await postSchema.find(findQuery, null, reqQueryToMongooseOptions(req)).populate(populateOptions).exec();
 
-            res.json({ posts, totalCount });
+            let statusesCount ={}
+
+            for await (const status of postStatuses){
+                statusesCount[status] = await postSchema.countDocuments({status}).exec();
+            }
+
+            res.json({
+                posts,
+                totalCount,
+                statusesCount
+            });
         } catch (err) {
             console.log(err.stack);
             return res.status(404).json({

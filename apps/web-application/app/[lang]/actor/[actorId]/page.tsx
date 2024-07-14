@@ -29,12 +29,8 @@ const ActorPage = async ({params, searchParams}: IProps) => {
 
     const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale);
-
     const settingsData = await fetchSettings({requireSettings: ['actorPageSettings']});
     const sidebar = settingsData?.settings?.actorPageSettings?.sidebar;
-
-    const initialSettingsData = await fetchSettings({requireSettings: ['initialSettings']})
-    const numberOfCardsPerPage = initialSettingsData?.settings?.initialSettings?.layoutSettings?.numberOfCardsPerPage;
 
     const widgetsData = await fetchWidgets({
         widgets: [
@@ -56,7 +52,7 @@ const ActorPage = async ({params, searchParams}: IProps) => {
             lang: params?.lang,
             metaId: params?.actorId,
             page: currentPage,
-            size: searchParams?.size || numberOfCardsPerPage
+            size: searchParams?.size
         },
         locale
     });
@@ -76,7 +72,7 @@ const ActorPage = async ({params, searchParams}: IProps) => {
                           locale={locale}
                           totalCount={postsData?.totalCount}
                           currentPage={currentPage}
-                          numberOfCardsPerPage={numberOfCardsPerPage}/>
+                          />
                 <WidgetsRenderer dictionary={dictionary}
                                  locale={locale}
                                  widgets={widgetsData.widgets?.['actorPageBottom']}

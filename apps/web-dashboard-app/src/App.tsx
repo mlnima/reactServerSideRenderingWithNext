@@ -23,7 +23,7 @@ function App() {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        if (localStorage.wt) {
+        if (localStorage.getItem('wt')) {
             dispatch(
                 autologinUserAction({
                     fields: [

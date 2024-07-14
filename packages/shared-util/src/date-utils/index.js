@@ -31,3 +31,10 @@ export const convertSecondsToTimeString = seconds => {
         ('0' + Math.floor(seconds % 60)).slice(-2)
     );
 };
+
+export const formatDatePostCard = (dateString) => {
+    const date = new Date(dateString);
+    const options = { day: '2-digit', month: 'short', year: 'numeric' };
+    return new Intl.DateTimeFormat('en-GB', options).format(date);
+    // return 'xxxx'
+};

@@ -44,6 +44,7 @@ export {
 export {
     clientAPIRequestGetMetaSuggestion,
     clientAPIRequestResetMetaImage,
+    getMeta
 } from './client/clientMetas';
 
 //posts

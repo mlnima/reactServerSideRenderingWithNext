@@ -15,7 +15,7 @@ const updateMetasWidget = async (widgetData: any, widgetId: string, res: Respons
         const statusQuery = {status: 'published'};
         const type = {type: widgetData?.metaType || widgetData?.uniqueData?.metaType};
         const countQuery = {count: {$gt: 0}};
-        const limit = widgetData?.uniqueData?.count || global?.initialSettings?.layoutSettings?.numberOfCardsPerPage || 20;
+        const limit = widgetData?.uniqueData?.count || global?.initialSettings?.contentSettings?.numberOfCardsPerPage || 20;
         const sortQuery = widgetData?.sort || widgetData?.uniqueData?.sort ? {'updatedAt': -1} : {
             'rank': 1,
             'count': -1

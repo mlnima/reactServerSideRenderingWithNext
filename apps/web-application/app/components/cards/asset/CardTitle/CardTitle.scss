@@ -1,7 +1,22 @@
 .cardTitle{
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  height: 48px;
+  overflow: hidden;
+  width: 100%;
+
+  a,p,svg{
+    color: var(--primary-text-color,#fff);
+    display: flex;
+    &:nth-child(odd) {
+      justify-content: flex-start;
+    }
+
+    &:nth-child(even) {
+      justify-content: flex-end;
+    }
+  }
+
   a{
     height: 48px;
     box-sizing: border-box;
@@ -9,21 +24,15 @@
     padding: 0 2px;
     font-size: 1rem;
     max-width: 100%;
-    color: var(--primary-text-color,#fff);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    text-overflow: fade;
     cursor: pointer;
+  }
 
-  }
-  p{
-    color: var(--primary-text-color,#fff);
-  }
+
 }
 
 @media only screen and (min-width: 600px) {
   .cardTitle{
-    height: initial;
     a{
       height: initial;
       margin: 0;

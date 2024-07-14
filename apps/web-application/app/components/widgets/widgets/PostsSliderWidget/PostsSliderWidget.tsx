@@ -63,8 +63,8 @@ const PostsSliderWidget: FC<PostsSliderPropsTypes> = ({posts, uniqueData, isSide
     }, [sliderApi]);
 
     const {numberOfCardsPerRowInMobile, cardsWidthDesktop} = useSelector((store: Store) => ({
-        numberOfCardsPerRowInMobile: store.settings?.initialSettings?.layoutSettings?.numberOfCardsPerRowInMobile ?? 2,
-        cardsWidthDesktop: store.settings?.initialSettings?.layoutSettings?.cardsWidthDesktop ?? 255,
+        numberOfCardsPerRowInMobile: store.settings?.initialSettings?.contentSettings?.numberOfCardsPerRowInMobile ?? 2,
+        cardsWidthDesktop: store.settings?.initialSettings?.contentSettings?.cardsWidthDesktop ?? 255,
     }));
 
     useEffect(() => {
@@ -237,7 +237,7 @@ export default PostsSliderWidget;
 //         const {numberOfCardsPerRowInMobile,cardsWidthDesktop} = useSelector(({settings}: utils) =>{
 //             return{
 //                 numberOfCardsPerRowInMobile:settings?.initialSettings?.layoutSettings?.numberOfCardsPerRowInMobile || 2,
-//                 cardsWidthDesktop:settings?.initialSettings?.postCardsSettings?.cardsWidthDesktop || 255,
+//                 cardsWidthDesktop:settings?.initialSettings?.contentSettings?.cardsWidthDesktop || 255,
 //             }
 //         })
 //

@@ -1,23 +1,23 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { DashboardStore } from 'typescript-types';
-import PostCardsSettings from '@components/pages/settings/initialSettings/PostCardsSettings';
+import ContentSettings from '@components/pages/settings/initialSettings/ContentSettings';
 import HeadDataSettings from '@components/pages/settings/initialSettings/HeadDataSettings';
 import MembershipSettings from '@components/pages/settings/initialSettings/MembershipSettings';
 import LayoutSettings from '@components/pages/settings/initialSettings/layoutSettings';
 import { useAppDispatch } from '@store/hooks';
-import {editInitialSettings, updateSettingAction} from '@store/reducers/settingsReducer';
+import { editInitialSettings, updateSettingAction } from '@store/reducers/settingsReducer';
 import { inputValueSimplifier } from '@repo/shared-util';
 import { LanguagesOptions } from '@repo/ui';
-import PostByUserSettings from "@components/pages/settings/initialSettings/PostByUserSettings";
 
 const Style = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 8px;
+  //gap: 8px;
+
 
   .active-editing-language {
     width: 100px;
@@ -31,31 +31,58 @@ const Style = styled.div`
     align-items: center;
     flex-direction: column;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 1rem;
+
 
     .setting-section {
       width: 100%;
       max-width: 1300px;
       border-radius: 5px;
-      background-color: var(--secondary-background-color, #181818);
-      padding: 8px;
+      padding: .25rem 0;
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      background-color: var(--tertiary-background-color);
+      
+      p {
+        place-items: flex-start;
+        margin: 0;
+      }
 
       input,
       textarea {
         max-width: 600px;
       }
+      .checkboxField,.inputField,.field{
+        padding: .5rem 1rem  ;
+        box-sizing: border-box;
+        &:nth-child(even) {
+          background-color: var(--secondary-background-color);
+        }
+        &:nth-child(even) {
+          background-color: var(--secondary-background-color);
+        }
+      }
+    
 
-      .checkbox-field {
+      .checkboxField {
         width: 100%;
         display: grid;
         grid-template-columns: 1fr 1fr;
         align-items: center;
+
+ 
       }
-      
+
+      .inputField {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+
+
+      }
+
     }
   }
 `;
@@ -120,6 +147,10 @@ const initialSettings: FC<PropTypes> = ({}) => {
         }
     };
 
+    useEffect(() => {
+        console.log('initialSettingsData=> ',initialSettingsData);
+    }, [initialSettingsData]);
+
     return (
         <Style>
             <h1>Initial Settings</h1>
@@ -140,15 +171,12 @@ const initialSettings: FC<PropTypes> = ({}) => {
                 />
                 <LayoutSettings onChangeHandler={onChangeHandler} initialSettingsData={initialSettingsData} />
 
-                <PostCardsSettings
-                    onChangeHandler={onChangeHandler}
-                    onJsonChangeHandler={onJsonChangeHandler}
-                    initialSettingsData={initialSettingsData}
-                />
-                <MembershipSettings
+                <ContentSettings
                     onChangeHandler={onChangeHandler}
                     initialSettingsData={initialSettingsData}
+                    onSaveHandler={onSaveHandler}
                 />
+                <MembershipSettings onChangeHandler={onChangeHandler} initialSettingsData={initialSettingsData} />
             </div>
             <button className={'btn btn-primary'} onClick={onSaveHandler}>
                 Save

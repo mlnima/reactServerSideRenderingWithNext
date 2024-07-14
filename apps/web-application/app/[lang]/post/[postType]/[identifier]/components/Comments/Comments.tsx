@@ -144,6 +144,9 @@ const Comments: FC<IProps> = ({dictionary, postId}) => {
         }
     }
 
+
+
+
     return (
         <div className={'commentsContentWrapper'} id={'commentSection'}>
             <form className={'commentForm'} onSubmit={e => onSubmitHandler(e)}>

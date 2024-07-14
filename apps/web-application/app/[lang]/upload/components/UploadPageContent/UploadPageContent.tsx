@@ -1,7 +1,7 @@
 'use client';
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { clientAPIRequestGetEditingPost, clientDeletePostByAuthor, updatePost } from '@repo/api-requests';
+import {clientAPIRequestGetEditingPost, clientDeletePostByAuthor, getMeta, updatePost} from '@repo/api-requests';
 import { capitalizeFirstLetter, imageCanvasCompressor, reduceArrayOfDataToIds } from '@repo/shared-util';
 import MultipleImageUploader from '../MultipleImageUploader/MultipleImageUploader';
 import MetaDataSelector from '../MetaDataSelector/MetaDataSelector';
@@ -19,8 +19,10 @@ import './UploadPageContent.scss';
 import { faEye } from '@fortawesome/free-solid-svg-icons/faEye';
 import deepEqual from 'deep-equal';
 import { formatDistance } from 'date-fns';
-import LoggedInRequirePageMessage from "@components/LoggedInRequireMessage/LoggedInRequirePageMessage";
-import ForbiddenMessage from "@components/ForbiddenMessage/ForbiddenMessage";
+import LoggedInRequirePageMessage from '@components/LoggedInRequireMessage/LoggedInRequirePageMessage';
+import ForbiddenMessage from '@components/ForbiddenMessage/ForbiddenMessage';
+import { useSearchParams } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 interface IProps {
     _id: string;
@@ -36,6 +38,8 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
     dictionary,
     locale,
 }) => {
+    const searchParams = useSearchParams();
+    const pathname = usePathname();
     const router = useRouter();
     const dispatch = useAppDispatch();
     const [editingPost, setEditingPost] = useState<Post | {}>({});
@@ -58,6 +62,27 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
             }
         }
     }, [_id, loggedIn]);
+
+
+    const getPostMeta = async (_id)=>{
+        try {
+            const metaData = await getMeta(_id)
+            setEditingPost(prevState => ({ ...prevState, categories: [metaData.data?.meta]  }));
+            // console.log(`metaData=> `,metaData.data?.meta)
+        }catch (error){
+
+        }
+    }
+
+    useEffect(() => {
+        const categoryParams = searchParams.get('category')
+        const category = !!categoryParams ? Array.isArray(categoryParams) ? categoryParams[0] :categoryParams : null
+
+        if (!!category) {
+            getPostMeta(category)
+        }
+
+    }, [searchParams,pathname]);
 
     const getEditingPostData = () => {
         if (_id) {
@@ -209,14 +234,10 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
     //     return null
     // }
 
-
-
     if (!loggedIn) return <LoggedInRequirePageMessage dictionary={dictionary} />;
 
-    if (
-        !postByUserSettings?.[editingPost?.postType]?.allow ||
-        (!!_id && userData?._id !== editingPost?.author?._id)
-    ) return <ForbiddenMessage/>
+    if (!postByUserSettings?.[editingPost?.postType]?.allow || (!!_id && userData?._id !== editingPost?.author?._id))
+        return <ForbiddenMessage />;
 
     return (
         <Csr>
@@ -239,8 +260,11 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
                         {editingPost?.postType === 'promotion' && (
                             <div className="formSection">
                                 <p>
-                                    <span>URL  </span>
-                                    <span className={'smallText'}> - Must be HTTPS (ex: https://example.com or https://www.example.com)</span>
+                                    <span>URL </span>
+                                    <span className={'smallText'}>
+                                        {' '}
+                                        - Must be HTTPS (ex: https://example.com or https://www.example.com)
+                                    </span>
                                 </p>
                                 <input
                                     type="url"
@@ -256,7 +280,7 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
                         )}
 
                         <div className="formSection imageUploader">
-                            <span className={'smallText'}> Expected size: 320px  * 180px </span>
+                            <span className={'smallText'}> Expected size: 320px * 180px </span>
                             <MultipleImageUploader fileInputRef={fileInputRef} editingPost={editingPost} setEditingPost={setEditingPost} />
                         </div>
                         <div className="formSection description">
@@ -407,7 +431,7 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
                             </div>
                         )}
 
-                        {(editingPost.postType === 'video' && !!postByUserSettings?.[editingPost?.postType]?.maxActors) && (
+                        {editingPost.postType === 'video' && !!postByUserSettings?.[editingPost?.postType]?.maxActors && (
                             <div className="formSection">
                                 <p>{dictionary?.['Actors'] || 'Actors'}:</p>
                                 <MetaDataSelector
@@ -497,7 +521,6 @@ export default UploadPageContent;
 //     {dictionary?.['Draft'] || 'Draft'}
 // </button>
 // }
-
 
 // <label>
 //     <span>{dictionary?.['Category'] || 'Category'}: </span>

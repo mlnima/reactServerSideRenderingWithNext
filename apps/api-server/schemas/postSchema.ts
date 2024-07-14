@@ -46,7 +46,7 @@ const postSchema = new mongoose.Schema({
     },
     videoEmbedCode: String,
     videoScriptCode: String,
-    VideoTrailerUrl: String,
+
     downloadLink: String,
     downloadLinks: [downloadLinks],
     redirectLink: String,

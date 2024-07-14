@@ -1,0 +1,48 @@
+@import "../postPageStyle.styles";
+
+.promotionEntryHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.promotionThumbnailLink {
+  float: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 320px;
+  gap: .5rem;
+
+  .thumbnail {
+    margin: auto;
+    max-width: 320px;
+    border-radius: .375rem;
+
+    &:hover {
+      animation: glowActiveColorAnimation 1s ease-in-out infinite;
+      color: initial;
+
+    }
+  }
+
+  .redirectLink {
+    width: 300px;
+
+    &:hover {
+      animation: glowActiveColorAnimation 1s ease-in-out infinite;
+      color: initial;
+
+    }
+
+    h1 {
+      font-size: 1.3rem;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+}

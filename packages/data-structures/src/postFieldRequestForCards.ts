@@ -7,12 +7,12 @@ const postFieldRequestForCards = [
     'duration',
     'videoTrailerUrl',
     'postType',
-    // 'views',
+    'views',
     // 'translations',
-    // 'likes',
-    // 'disLikes',
-    // 'updatedAt',
-    // 'createdAt',
+    'likes',
+    'disLikes',
+    'updatedAt',
+    'createdAt',
     // 'outPostType',
     // 'uniqueData'
 ]

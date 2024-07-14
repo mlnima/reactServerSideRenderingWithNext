@@ -3,8 +3,6 @@ import mongoose from 'mongoose';
 import defaultInitialSettings from '../tools/asset/defaultInitialSettings';
 import path from "path";
 import {Worker} from "worker_threads";
-import * as process from "process";
-
 
 mongoose.Promise = global.Promise;
 mongoose.set('strictQuery', true);
@@ -51,7 +49,7 @@ class GlobalStore {
     }
 
     getCardAmountPerPage(){
-        return this.initialSettings?.layoutSettings?.numberOfCardsPerPage
+        return this.initialSettings?.contentSettings?.numberOfCardsPerPage
     }
 
     getLocales(){

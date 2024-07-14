@@ -1,31 +1,16 @@
 .postCardPromotion{
-  background-color: var(--tertiary-background-color);
-  border-radius: .375rem;
-  .cardInfo{
-    width: 100%;
-    margin: auto;
-    border-radius: .25rem;
-    padding: 0 .5rem;
-    a{
-      height: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: relative;
 
-      &:hover::after {
-        content: "\2139";
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 18px;
-        display: block;
-      }
-      .cardTitle{
-        display: flex;
-        justify-content: center;
-      }
-    }
+  img{
+    border-radius: 0.375rem 0.375rem 0 0;
   }
+    a{
+      .cardInfo{
+        border-radius: 0 0  0.375rem 0.375rem;
+        background-color: var(--tertiary-background-color);
+          padding: 0 .5rem;
+        box-sizing: border-box;
+      }
+
+    }
+
 }

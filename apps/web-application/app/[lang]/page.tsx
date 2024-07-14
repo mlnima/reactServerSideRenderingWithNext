@@ -22,6 +22,8 @@ const homePage = async ({params: {lang},searchParams}: IProps) => {
     const dictionary = await getDictionary(locale);
     const settingsData = await fetchSettings({requireSettings: ['homePageSettings']});
 
+    // const initialSettingsData = await fetchSettings({requireSettings: ['initialSettings']})
+    // const postSettings = initialSettingsData?.settings?.initialSettings?.contentSettings?.postSettings;
     const widgetsData = await fetchWidgets({
         widgets: [
             'homePageLeftSidebar',
@@ -41,6 +43,7 @@ const homePage = async ({params: {lang},searchParams}: IProps) => {
             <main id={'primary'} className={'main homePage'}>
                 <MainWidgetArea dictionary={dictionary}
                                 widgets={widgetsData?.widgets?.home}
+                                 // postSettings={postSettings}
                                 locale={locale}
                                 position={'home'}/>
             </main>
@@ -49,6 +52,7 @@ const homePage = async ({params: {lang},searchParams}: IProps) => {
                                        rightSideWidgets={widgetsData.widgets?.['homePageRightSidebar']}
                                        dictionary={dictionary}
                                        locale={locale}
+                                       // postSettings={postSettings}
                                        sidebar={sidebar || 'no'}
                                        position={'postPage'}/>
         </div>

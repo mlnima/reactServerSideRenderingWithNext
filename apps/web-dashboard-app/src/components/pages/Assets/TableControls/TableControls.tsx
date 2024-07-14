@@ -42,6 +42,7 @@ const TableControls: FC<TableControlsPropTypes> = ({ selectedItems, setSelectedI
     const [search, setSearch] = useSearchParams();
     const assetsType = useMemo(() => search.get('assetsType'), [search]);
 
+
     return (
         <TableControlsStyledDiv className="asset-page-table-head">
             <AssetStatusNavigation />

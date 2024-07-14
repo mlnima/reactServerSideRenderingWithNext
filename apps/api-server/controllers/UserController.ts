@@ -11,6 +11,7 @@ import mongoose from 'mongoose';
 import { SentMessageInfo } from 'nodemailer/lib/smtp-transport';
 import uuidAPIKey from 'uuid-apikey';
 import { reqQueryToMongooseOptions } from '@util/database-util';
+import {postStatuses, userStatus} from "@repo/data-structures";
 
 let transporter: nodemailer.Transporter<SentMessageInfo>;
 const tokenExpireTime = '365d';
@@ -399,8 +400,21 @@ class UserController {
             } : {}
 
             const totalCount = await userSchema.countDocuments(findUsersQuery).exec();
+
+            let statusesCount ={}
+
+            for await (const status of userStatus){
+                statusesCount[status] = await userSchema.countDocuments({status}).exec();
+            }
+
+
+
             const users = await userSchema.find(findUsersQuery, null, reqQueryToMongooseOptions(req)).exec();
-            res.json({ users, totalCount });
+
+
+
+
+            res.json({ users, totalCount,statusesCount });
         } catch (error) {
             console.log(error);
             res.end();

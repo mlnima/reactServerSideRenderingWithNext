@@ -29,9 +29,6 @@ const PostsPage = async ({params, searchParams}: IProps) => {
     const settingsData = await fetchSettings({requireSettings: ['postsPageSettings']});
     const sidebar = settingsData?.settings?.postsPageSettings?.sidebar;
 
-    const initialSettingsData = await fetchSettings({requireSettings: ['initialSettings']})
-    const numberOfCardsPerPage = initialSettingsData?.settings?.initialSettings?.layoutSettings?.numberOfCardsPerPage;
-
     const widgetsData = await fetchWidgets({
         widgets: [
             'postsPageTop',
@@ -52,7 +49,7 @@ const PostsPage = async ({params, searchParams}: IProps) => {
             sort: searchParams?.sort,
             lang: params?.lang,
             page: currentPage,
-            size: searchParams?.size || numberOfCardsPerPage,
+            size: searchParams?.size ,
             postType: searchParams?.postType
         },
         locale
@@ -75,9 +72,9 @@ const PostsPage = async ({params, searchParams}: IProps) => {
                 <PostPage renderPagination
                           posts={postsData?.posts}
                           locale={locale}
+                          dictionary={dictionary}
                           totalCount={postsData?.totalCount}
-                          currentPage={currentPage}
-                          numberOfCardsPerPage={numberOfCardsPerPage}/>
+                          currentPage={currentPage}/>
                 <WidgetsRenderer dictionary={dictionary}
                                  locale={locale}
                                  widgets={widgetsData.widgets?.['postsPageBottom']}

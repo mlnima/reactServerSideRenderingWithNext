@@ -32,7 +32,7 @@ const searchPage = async ({ params, searchParams }: IProps) => {
     const settingsData = await fetchSettings({ requireSettings: ['searchPageSettings'] });
     const sidebar = settingsData?.settings?.searchPageSettings?.sidebar;
     const initialSettingsData = await fetchSettings({ requireSettings: ['initialSettings'] });
-    const numberOfCardsPerPage = initialSettingsData?.settings?.initialSettings?.layoutSettings?.numberOfCardsPerPage;
+    const numberOfCardsPerPage = initialSettingsData?.settings?.initialSettings?.contentSettings?.numberOfCardsPerPage;
 
     const widgetsData = await fetchWidgets({
         widgets: ['searchPageTop', 'searchPageLeftSidebar', 'searchPageBottom', 'searchPageRightSidebar'],
@@ -47,7 +47,6 @@ const searchPage = async ({ params, searchParams }: IProps) => {
         lang: params?.lang,
         keyword: params?.keyword,
         page: currentPage,
-        size: numberOfCardsPerPage,
         // searchType: searchParams?.searchType
     };
 
@@ -101,7 +100,6 @@ const searchPage = async ({ params, searchParams }: IProps) => {
                     locale={locale}
                     totalCount={searchData?.totalCount}
                     currentPage={currentPage}
-                    numberOfCardsPerPage={numberOfCardsPerPage}
                 />
 
                 {groupingMetas.categories?.length > 0 && currentPage === 1 && (
