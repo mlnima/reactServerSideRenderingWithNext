@@ -1,5 +1,7 @@
 import databaseSelectFieldsForPostCards from './databaseSelectFieldsForPostCards';
 import postFieldRequestForCards from './postFieldRequestForCards';
+//@ts-ignore
+import metaFieldsRequestForCard from './metaFieldsRequestForCard';
 import postTypes from './postTypes';
 import clientAllowedSortOptions from './clientAllowedSortOptions';
 import userStatus from './userStatus';
@@ -23,6 +25,7 @@ export {
     userRoles,
     videoQualities,
     widgetsStaticPositions,
+    metaFieldsRequestForCard,
     widgetsTypes,
     rtlLanguages,
     postStatuses,

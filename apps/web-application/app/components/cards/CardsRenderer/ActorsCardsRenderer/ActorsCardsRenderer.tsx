@@ -30,6 +30,7 @@ const ActorsCardsRenderer: FC<IProps> = ({metas,isSidebar,locale}) => {
                 return (
                     <ActorCard key={meta._id}
                                index={index}
+                               locale={locale}
                                actorUrl={actorUrl}
                                isNextImageAllowed={isNextImageAllowed}
                                isSidebar={isSidebar}

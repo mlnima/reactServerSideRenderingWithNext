@@ -1,4 +1,4 @@
-.actor-card{
+.actor-card {
   width: 100%;
   //max-width: 150px;
   max-width: 45vw;
@@ -8,7 +8,8 @@
   align-items: center;
   margin: 0 auto;
   overflow: hidden;
-  .card-info{
+
+  .card-info {
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -20,9 +21,9 @@
     z-index: 1;
     text-shadow: var(--primary-text-shodow);
 
-    .cardTitle{
+    .cardTitle {
 
-      a{
+      a {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -30,21 +31,34 @@
     }
   }
 
-  .actor-card-link{
-    box-shadow: 0 0 1rem -0.1rem var(--primary-background-color,#000);
-    .card-image-wrapper{
-      img{
+  .actor-card-link {
+    box-shadow: 0 0 1rem -0.1rem var(--primary-background-color, #000);
+    position: relative;
+
+    .card-image-wrapper {
+      img {
         border-radius: 0.5rem;
 
       }
     }
+
+    .actorCardCounts {
+      position: absolute;
+      bottom: .25rem;
+      right: .25rem;
+      color: var(--primary-text-color);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
   }
 }
 
-@media only screen and (min-width: 1025px){
-  .actor-card{
+@media only screen and (min-width: 1025px) {
+  .actor-card {
     max-width: 250px;
-    .card-info{
+
+    .card-info {
       //height: 50%;
     }
   }

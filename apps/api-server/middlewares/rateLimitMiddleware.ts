@@ -11,7 +11,6 @@ const userCounts: Record<string, UserRate> = {};
 
 const cleanupIntervalMillis = 600000; // 1H for cleanup
 
-// Periodically clean up old entries
 setInterval(() => {
     const now = Date.now();
     for (const userID in userCounts) {

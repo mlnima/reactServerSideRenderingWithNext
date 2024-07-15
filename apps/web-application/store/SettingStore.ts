@@ -1,13 +1,25 @@
 class SettingStore {
     initialSettings: any;
+    dictionary: any;
 
     constructor() {
         this.initialSettings = {};
+        this.dictionary = {};
+
     }
 
     setInitialSettings(settings: any) {
         this.initialSettings = settings;
     }
+
+    setDictionary(dictionary: any) {
+        this.dictionary = dictionary;
+    }
+
+    getDictionary() {
+        return this.dictionary;
+    }
+
 
     getInitialSettings() {
         return this.initialSettings;

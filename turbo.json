@@ -26,14 +26,14 @@
     "EXCLUDE_POSTS_SOURCE"
   ],
   "tasks": {
-    "buildServer": {
-      "dependsOn": [
-
-      ]
+    "generateStaticConfig": {
+      "cache": false,
+      "outputLogs": "errors-only"
     },
+
     "build": {
       "dependsOn": [
-        "buildServer",
+        "generateStaticConfig",
         "^build"
       ],
       "outputs": [
@@ -43,6 +43,9 @@
       ]
     },
     "dev": {
+      "dependsOn": [
+        "generateStaticConfig"
+      ],
       "cache": false,
       "outputLogs": "errors-only"
     },

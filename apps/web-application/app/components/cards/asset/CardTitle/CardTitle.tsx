@@ -16,18 +16,16 @@ interface CardTitlePropTypes {
 const CardTitle: FC<CardTitlePropTypes> = ({title, url, targetLink, useLink = true,useIcon=false}) => {
 
     return (
-        <div className={'cardTitle'}>
+        <h2 className={'cardTitle'}>
             {useLink ?
                 <Link href={url || '#'} title={title} target={targetLink || '_self'}>
                     {capitalizeFirstLetter(title)}
                 </Link> :
-                <p>
-                    {capitalizeFirstLetter(title)}
-                </p>
+                capitalizeFirstLetter(title)
             }
             {useIcon &&  <FontAwesomeIcon className={'rating-icon'} icon={faArrowUpRightFromSquare}/>}
 
-        </div>
+        </h2>
     );
 };
 export default CardTitle;

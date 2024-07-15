@@ -48,7 +48,9 @@ const RootLayout = async ({
     const locale = i18n.locales.includes(lang)
         ? lang
         : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+
     const dictionary = await getDictionary(locale);
+    SettingStore.setDictionary(dictionary)
 
     const initialSettingsData = await fetchSettings({
         requireSettings: ['initialSettings'],

@@ -1,22 +1,10 @@
-
-import {getSettingsBuild,shutdownBuildServer,clientAPIRequestGetSettings} from "@repo/api-requests";
+import initialSettings from '../public/initialSettings.json'
 
 const dev = process.env.NODE_ENV !== 'production';
 const manifest = async () => {
 
     try {
-
-        const requestSettings = {
-            requireSettings: ['initialSettings'],
-        }
-
-        const initialSettingsData = dev  ? await clientAPIRequestGetSettings(requestSettings) : await getSettingsBuild(requestSettings)
-
-        if (!dev){
-            shutdownBuildServer()
-        }
-
-        const headDataSettings = initialSettingsData?.data?.settings?.initialSettings?.headDataSettings
+        const headDataSettings = initialSettings?.headDataSettings
 
         if (!headDataSettings) {
             return {};

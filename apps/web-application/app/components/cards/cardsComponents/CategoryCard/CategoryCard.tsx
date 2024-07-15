@@ -2,12 +2,10 @@ import React, {FC} from "react";
 import {Meta} from "typescript-types";
 import Link from "next/link";
 import {capitalizeFirstLetter} from "@repo/shared-util";
-//import dynamic from "next/dynamic";
 import './CategoryCard.scss'
-
-// const TextToCanvasImage = dynamic(() =>
-//     import('@components/cards/asset/TextToCanvasImage/TextToCanvasImage'))
 import CardImageRendererUseClient from '@components/cards/asset/CardImageRenderer/CardImageRendererUseClient'
+import {getDictionary} from "../../../../../get-dictionary";
+import SettingStore from "@store/SettingStore";
 
 
 interface CategoryCardPropTypes {
@@ -29,10 +27,10 @@ const CategoryCard: FC<CategoryCardPropTypes> =
          isNextImageAllowed = false
      }) => {
 
+       const dictionary = SettingStore.getDictionary(locale)
+
         return (
             <article className={`categoryCard${isSidebar ? ' categoryCardSidebar' :''}`}>
-
-                {/*<div className={'cardMedia'}>*/}
                     <Link href={metaUrl} className='categoryCardLink'
                           title={meta?.translations?.[locale]?.name ?? meta?.name}>
 
@@ -43,30 +41,19 @@ const CategoryCard: FC<CategoryCardPropTypes> =
                                                     mediaAlt={meta?.translations?.[locale]?.name ?? meta?.name}
                                                     overlayShadow
                                                     index={index}/>
-                        {/*{!!meta.imageUrl ?*/}
-                        {/*    <CardImageRendererUseClient imageUrl={meta.imageUrl}*/}
-                        {/*                                key={meta?._id}*/}
-                        {/*                                metaId={meta?._id}*/}
-                        {/*                                isNextImageAllowed={isNextImageAllowed}*/}
-                        {/*                                mediaAlt={meta?.translations?.[locale]?.name ?? meta?.name}*/}
-                        {/*                                overlayShadow*/}
-                        {/*                                index={index}/> :*/}
-                        {/*    <TextToCanvasImage title={*/}
-                        {/*        capitalizeFirstLetter(meta?.translations?.[locale]?.name ?? meta?.name)*/}
-                        {/*    }*/}
-                        {/*                       numberOfCardsPerRowInMobile={1}/>*/}
-                        {/*}*/}
                         <div className={`cardInfo`}>
-                            <strong className={'cardTitle'}>
+                            <h2 className={'cardTitle'}>
                                 {capitalizeFirstLetter(meta?.translations?.[locale]?.name ?? meta?.name)}
-                            </strong>
-                            {/*<CardTitle title={title} url={`/category/${meta?._id}`}/>*/}
+                            </h2>
+                            <span className={'cardCounts smallText'}>
+                                {meta?.count}
+                                <span>
+                                          {dictionary['Post'] || 'Post'}
+                                </span>
+                            </span>
+
                         </div>
                     </Link>
-                {/*</div>*/}
-
-
-
             </article>
         )
     };

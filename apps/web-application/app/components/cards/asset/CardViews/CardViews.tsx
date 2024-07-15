@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { shortNumber } from '@repo/shared-util';
-
 import './CardViews.scss';
 
 interface CardViewsPropTypes {
@@ -9,24 +8,15 @@ interface CardViewsPropTypes {
         [key: string]: string;
     };
 }
-
+//dataNosnippet
 const CardViews: FC<CardViewsPropTypes> = ({ views, dictionary, showViewsOnCard }) => {
-
-    if (!showViewsOnCard) return null;
+    if (!showViewsOnCard || views === 0) return null;
 
     return (
-        <span
-            className={`cardViews smallText cardStat`}
-            style={{
-                visibility: views > 0 ? 'initial' : 'hidden',
-            }}
-        >
-            {views > 0 && (
-                <span data-nosnippet>
-                    {' '}
-                    {shortNumber(views)} {dictionary?.['Views'] || 'Views'}
-                </span>
-            )}
+        <span className={`cardViews smallText cardStat`}>
+            <span >
+                {shortNumber(views)} {dictionary?.['Views'] || 'Views'}
+            </span>
         </span>
     );
 };

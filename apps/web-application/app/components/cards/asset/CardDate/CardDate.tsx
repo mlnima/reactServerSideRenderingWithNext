@@ -9,9 +9,9 @@ interface IProps {
 }
 
 const CardDate: FC<IProps> = ({ updatedAt, createdAt, showDateOnCard }) => {
-    if (!showDateOnCard) return null;
+    if (!showDateOnCard || (!updatedAt && !createdAt)) return null;
     return (
-        <div className={'cardDate smallText cardStat'} style={{ visibility: showDateOnCard ? 'initial' : 'hidden' }}>
+        <div className={'cardDate smallText cardStat'}>
             {!!updatedAt && !!createdAt ? formatDatePostCard(updatedAt || createdAt) : ''}
         </div>
     );

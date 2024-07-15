@@ -74,7 +74,7 @@
   "Passwords are not matched": "رمز عبور مطابقت ندارد",
   "Pending": "انتظار",
   "Please Log In To Access This Page": "لطفا برای دسترسی به این صفحه وارد شوید.",
-  "Post": "پست ها",
+  "Post": "پست",
   "Post Comment": "پست کامنت",
   "Posts": "پست ها",
   "Preview": "پیش نمایش",
@@ -133,5 +133,7 @@
   "Results": "نتایج",
   "Result": "نتیجه",
   "Search Results": "نتایج جستجو",
-  "Live": "زنده"
+  "Live": "زنده",
+  "Redirect Link": "لینک",
+  "Submit": "ارسال"
 }

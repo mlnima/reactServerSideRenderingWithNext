@@ -1,0 +1,114 @@
+{
+  "postCardsSettings": {
+    "customStyle": "dasddasd",
+    "customStyles": "",
+    "customCardBackgrounds": [
+      {
+        "name": "bla ck"
+      }
+    ],
+    "numberOfCardsPerPage": "20",
+    "numberOfCardsPerRowInMobile": "2"
+  },
+  "membershipSettings": {
+    "membership": true,
+    "anyoneCanRegister": true,
+    "usersCanFollowEachOther": true,
+    "usersCanMessageEachOther": true,
+    "usersCanCommentOnThePosts": true,
+    "allowUserToPost": true,
+    "postByUserSettings": {
+      "video": {
+        "allow": false,
+        "maxTag": 3,
+        "maxActors": 5
+      },
+      "promotion": {
+        "allow": true,
+        "maxCategories": 1,
+        "maxTag": 1,
+        "maxTags": 1
+      },
+      "article": {
+        "allow": true,
+        "maxCategories": 1,
+        "maxTags": 5
+      }
+    }
+  },
+  "layoutSettings": {
+    "topbar": false,
+    "header": true,
+    "navigation": true,
+    "footer": true,
+    "customStyles": "// .navigation-widget-area{\r\n//   .innerContent{\r\n//     .userPreferenceWidget,.authenticationWidget{\r\n//         margin-left: auto;\r\n//      }\r\n//      .navigationWidget{\r\n//        flex-grow: 4;\r\n//      }\r\n   \r\n//   }\r\n// }\r\n\r\n\r\n// .topbar-widget-area{\r\n//   background-color: var(--primary-background-color);\r\n//   color: var(--primary-text-color);\r\n// }",
+    "customColors": "",
+    "sidebarWidth": "320",
+    "secondaryModeColors": ":root{\r\n  --primary-text-color: #000000;\r\n  --secondary-text-color: #333333;\r\n  --tertiary-text-color: #666666;\r\n  --quaternary-text-color: #999999;\r\n  --primary-background-color: #FFFFFF;\r\n  --secondary-background-color: #F5F5F5;\r\n  --tertiary-background-color: #E0E0E0;\r\n  --quaternary-background-color: #CCCCCC;\r\n}",
+    "languagesSwitcherInUserConfigMenu": true,
+    "themeColorsSwitcherInUserConfigMenu": true,
+    "logoUrl": "https://porninhub.com/public/uploads/image/2022/4/porninhub-logo.svg",
+    "logoWidth": 160,
+    "logoHeight": 40,
+    "primaryModeColors": "",
+    "numberOfCardsPerPage": 25
+  },
+  "headDataSettings": {
+    "title": "Positron Local Tests",
+    "translations": {
+      "de": {
+        "title": "xxxxd",
+        "description": "dddddddddddddddddddd"
+      },
+      "fa": {
+        "description": "fffffffffffffffffffff"
+      }
+    },
+    "description": "Advance CMS Platform",
+    "favIconUrl": "\\asset\\images\\default\\favicon.ico",
+    "siteName": "Positron ",
+    "themeColor": "#000",
+    "customHeadTags": "<meta name=\"db1d1ade29c401598b8a4da99b27141b56591f89\" content=\"db1d1ade29c401598b8a4da99b27141b56591f89\" />\r\n<meta name=\"db1d1ade29c401598b8a4da99b27141b56591f89\" content=\"db1d1ade29c401598b8a4da99b27141b56591f89\" />\r\n<meta name=\"db1d1ade29c401598b8a4da99b27141b56591f89\" content=\"db1d1ade29c401598b8a4da99b27141b56591f89\" />",
+    "googleAnalyticsId": "",
+    "custom3rdPartyScripts": "<script data-cfasync=\"false\" type=\"text/javascript\" src=\"//clobberprocurertightwad.com/t/9/fret/meow4/2027359/62a4813d.js\"></script>"
+  },
+  "contentSettings": {
+    "postSettings": {
+      "video": {
+        "viewSystem": true,
+        "showViewOnCard": false,
+        "ratingSystem": true,
+        "showRatingOnCard": true,
+        "showDateOnCard": true,
+        "showDateInPostPage": true,
+        "allowComment": true,
+        "showViewsOnCard": true
+      },
+      "promotion": {
+        "viewSystem": true,
+        "showViewOnCard": true,
+        "ratingSystem": true,
+        "showDateOnCard": false,
+        "showRatingOnCard": true,
+        "showViewsOnCard": true
+      },
+      "article": {
+        "viewSystem": true,
+        "showViewOnCard": true,
+        "ratingSystem": true,
+        "showRatingOnCard": true,
+        "showDateOnCard": true,
+        "showDateInPostPage": true,
+        "allowComment": true
+      },
+      "learn": {
+        "showRatingOnCard": true,
+        "ratingSystem": true,
+        "showViewOnCard": true,
+        "viewSystem": true,
+        "showViewsOnCard": true,
+        "showDateOnCard": true
+      }
+    }
+  }
+}

@@ -1,4 +1,6 @@
 import metaSchema from '@schemas/metaSchema';
+import { metaFieldsRequestForCard } from '@repo/data-structures';
+import {multiQueryUniquer} from "@util/queryUtil";
 
 interface FindMetasQueryTypes {
     [key: string]: any;
@@ -23,7 +25,10 @@ export const findMetas = async (query: FindMetasQueryTypes) => {
             20;
         const page = query?.page || 1;
         const skip = page ? limit * (page - 1) : 0;
-        const selectQuery = `name type ${query?.metaType !== 'tags' ? 'imageUrl' : ''} translations.${locale}.name`;
+      //  const selectQuery = `name type ${query?.metaType !== 'tags' ? 'imageUrl' : ''} translations.${locale}.name`;
+      //   const selectQuery =query?.metaType === 'tags'  ?
+      //       [metaFieldsRequestForCard,`translations.${locale}.name`] :
+      //       [...metaFieldsRequestForCard,'imageUrl','translations.${locale}.name']  `name type ${query?.metaType !== 'tags' ? 'imageUrl' : ''} translations.${locale}.name`;
 
         const sortQuery = !query.sort
             ? {
@@ -42,7 +47,7 @@ export const findMetas = async (query: FindMetasQueryTypes) => {
             .find(findQuery, {}, { sort: sortQuery })
             .limit(limit || (query?.startWith ? 0 : 1000))
             .skip(skip)
-            .select(selectQuery)
+            .select(metaFieldsRequestForCard(multiQueryUniquer(query?.metaType),locale))
             .exec();
 
         return {

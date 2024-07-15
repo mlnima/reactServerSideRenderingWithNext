@@ -45,7 +45,6 @@ const worker = async (workerData) => {
 
         await metaSchema.syncIndexes()
         const type = workerData.type ? {type: workerData.type} : {}
-        console.log(`type=> `,type)
         await metaSchema.find(type).exec().then(async (metas) => {
             for await (let meta of metas) {
                 //const metaCount = await PostSchema.countDocuments({$and: [{[meta?.type]: meta?._id}, {status: 'published'},excludeQuery]}).exec()
@@ -84,7 +83,7 @@ const worker = async (workerData) => {
                         views: totalSumData?.[0]?.views || 0,
                     }
 
-                    if (!meta?.imageUrlLock) {
+                    if (!meta?.imageUrlLock && workerData.type !== 'tags' ) {
 
                         const skipDocuments = metaCount <= 1 ? 0 : randomNumberGenerator(1, metaCount) - 1
                         const randomPost = await postSchema.findOne({$and: [{[meta?.type]: meta?._id}, {status: 'published'}]}).sort({updatedAt: -1}).skip(skipDocuments).exec()

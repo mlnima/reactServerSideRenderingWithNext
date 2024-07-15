@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import './CardRating.styles.scss';
+import './CardRating.scss';
 import { ratingCalculator } from '@repo/shared-util';
 
 interface CardRatingPropTypes {
@@ -11,16 +11,10 @@ interface CardRatingPropTypes {
 const CardRating: FC<CardRatingPropTypes> = ({ like = 0, dislike = 0, showRatingOnCard }) => {
     const ratingValue = ratingCalculator(like, dislike);
 
-    if (!showRatingOnCard) return null;
+    if (!showRatingOnCard || ratingValue === 0) return null;
 
     return (
-        <span
-            className={`cardRating smallText cardStat`}
-            data-nosnippet
-            style={{
-                visibility: ratingValue > 0 ? 'initial' : 'hidden',
-            }}
-        >
+        <span className={`cardRating smallText cardStat`} data-nosnippet>
             <span>{ratingValue}%</span>
         </span>
     );

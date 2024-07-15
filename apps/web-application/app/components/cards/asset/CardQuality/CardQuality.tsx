@@ -1,5 +1,5 @@
 import {FC} from "react";
-import './CardQuality.styles.scss'
+import './CardQuality.scss'
 
 interface CardViewsPropTypes {
     quality: string,

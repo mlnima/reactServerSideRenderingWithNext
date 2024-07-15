@@ -10,6 +10,8 @@ import { multiQueryUniquer } from '@util/queryUtil';
 import { mongoIdValidator } from '@util/data-validators';
 import { reqQueryToMongooseOptions, searchQueryGenerator } from '@util/database-util';
 import {postStatuses} from "@repo/data-structures";
+const dev = process.env.NODE_ENV !== 'production';
+
 
 class MetaController {
     static async resetMetaImage(req: Request, res: Response) {
@@ -262,7 +264,7 @@ class MetaController {
     static async dashboardSetMetaThumbnailsAndCount(req: Request, res: Response) {
         res.end();
         if (isMainThread) {
-            const workerPath = path.join(__dirname, '../workers/setMetaThumbnailsAndCount/worker.js');
+            const workerPath = path.join(__dirname, `${dev ? ''  : '../'}../workers/setMetaThumbnailsAndCount/worker.js`);
             const worker = new Worker(workerPath, {
                 workerData: {
                     type: req.query.type,

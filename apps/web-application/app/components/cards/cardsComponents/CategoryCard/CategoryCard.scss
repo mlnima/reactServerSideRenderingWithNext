@@ -9,20 +9,35 @@
 
   .cardInfo {
     position: absolute;
-    bottom: 4px;
-    left: 4px;
-    display: flex;
-    align-items: center;
-    height: 1.2rem;
-
+    bottom: 0;
+    left:0;
+    right:0;
+    top:0;
+    //display: flex;
+    //align-items: center;
+    //height: 1.2rem;
+    text-shadow: var(--primary-text-shodow);
+    color: #fff;
     .cardTitle {
-      display: flex;
-      justify-content: center;
+      //display: flex;
+      //justify-content: center;
       align-items: flex-end;
       font-size: 1rem;
+      font-weight: bold;
       height: 1.2rem;
-      color: #fff;
-      text-shadow: var(--primary-text-shodow);
+      position: absolute;
+      bottom: .25rem;
+      left: .25rem;
+
+    }
+
+    .cardCounts{
+      display: flex;
+      align-items: center;
+      position: absolute;
+      top: .5rem;
+      right: .5rem;
+      gap: .25rem;
     }
   }
 }
