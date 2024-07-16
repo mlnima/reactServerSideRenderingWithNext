@@ -140,7 +140,7 @@ export const fetchPosts = async ({
         }
         return await response.json();
     } catch (error) {
-        throw error;
+        return null;
     }
 };
 

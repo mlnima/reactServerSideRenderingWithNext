@@ -62,6 +62,7 @@ class PostController {
 
     static async findMeta(meta: string) {
         try {
+            console.log(`findMeta meta=> `,meta)
             if (mongoIdValidator(meta)) {
                 return await metaSchema.findById(meta).exec();
             } else {
@@ -70,6 +71,7 @@ class PostController {
                 });
             }
         } catch (err) {
+            console.log(`findMeta=> `,err)
             return {};
         }
     }

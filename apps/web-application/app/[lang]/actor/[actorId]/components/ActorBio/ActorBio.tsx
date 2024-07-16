@@ -22,6 +22,8 @@ const ActorBio: FC<IProps> = ({actorData}) => {
         }
     }
 
+    if (!actorData) return null
+
     return (
         <div className={'actorBio'}>
             <div className={'actorImages'}>
@@ -30,7 +32,7 @@ const ActorBio: FC<IProps> = ({actorData}) => {
                     : null
                 }
             </div>
-            <h1 className={'actorName'}>{capitalizeFirstLetter(actorData.name)}</h1>
+            <h1 className={'actorName'}>{capitalizeFirstLetter(actorData?.name)}</h1>
             <div className={`actorDescriptionDetails${showMore ? 'Open':'Closed'}`}>
                 {
                     // @ts-ignore
@@ -42,7 +44,7 @@ const ActorBio: FC<IProps> = ({actorData}) => {
                 {actorData?.description &&
                     <section className={'actorDescription'}>
                         <h1>
-                            About {actorData.name}
+                            About {actorData?.name}
                         </h1>
                         {actorData.description}
                     </section>

@@ -1,14 +1,12 @@
 import React, { ReactNode } from 'react';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
-import SettingStore from '@store/SettingStore'
-
+import ServerSideStore from '@store/ServerSideStore';
 config.autoAddCss = false;
 import '@components/global/styles/global.styles.scss';
 import { fetchSettings } from '@lib/fetch-requests/fetchSettings';
 import { fetchWidgets } from '@lib/fetch-requests/fetchWidgets';
 import ReduxProvider from '@store/ReduxProvider';
-import * as process from 'process';
 import { i18n } from '@i18nConfig';
 import { getDictionary } from '../../get-dictionary';
 import GlobalCustomStyles from '@components/global/styles/GlobalCustomStyles';
@@ -32,25 +30,17 @@ import KeysListener from '@components/global/KeysListener';
 import UserConfigMenu from '@components/global/UserConfigMenu/UserConfigMenu';
 import LayoutViewportGenerator from '@components/LayoutMetaGenerator/LayoutViewportGenerator';
 import CustomScripts from '@components/CustomScripts';
-import CustomHeadTagsInitializer from "@components/CustomHeadTagsInitializer";
+import CustomHeadTagsInitializer from '@components/CustomHeadTagsInitializer';
 
 export async function generateStaticParams() {
     return i18n.locales.map((lng: string) => ({ lng }));
 }
 
-const RootLayout = async ({
-    children,
-    params: { lang },
-}: {
-    children: ReactNode;
-    params: { lang: string };
-}) => {
-    const locale = i18n.locales.includes(lang)
-        ? lang
-        : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+const RootLayout = async ({ children, params: { lang } }: { children: ReactNode; params: { lang: string } }) => {
 
+    const locale = i18n.locales.includes(lang) ? lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale);
-    SettingStore.setDictionary(dictionary)
+
 
     const initialSettingsData = await fetchSettings({
         requireSettings: ['initialSettings'],
@@ -58,8 +48,7 @@ const RootLayout = async ({
 
     const initialSettings = initialSettingsData?.settings?.initialSettings;
 
-    SettingStore.setInitialSettings(initialSettings)
-
+    ServerSideStore.setInitialSettings(initialSettings);
 
     const staticWidgetsData = await fetchWidgets({
         widgets: ['footer', 'header', 'topBar', 'navigation'],
@@ -67,67 +56,48 @@ const RootLayout = async ({
     });
 
     //dir={rtlLanguages.includes(locale) ? 'rtl' : 'ltr'}
+
+    const widgetAreasSharedProps ={
+        locale,
+        dictionary,
+    }
+
     return (
         <html lang={locale}>
             <body className={`dark `} style={{}}>
                 <ReduxProvider>
                     <div className="layout">
                         {initialSettings?.layoutSettings?.topbar && (
-                            <TopbarWidgetArea
-                                dictionary={dictionary}
-                                widgets={staticWidgetsData?.widgets?.topBar}
-                                locale={locale}
-                            />
+                            <TopbarWidgetArea {...widgetAreasSharedProps} widgets={staticWidgetsData?.widgets?.topBar} />
                         )}
                         {initialSettings?.layoutSettings?.header && (
-                            <HeaderWidgetArea
-                                dictionary={dictionary}
-                                widgets={staticWidgetsData?.widgets?.header}
-                                locale={locale}
-                            />
+                            <HeaderWidgetArea {...widgetAreasSharedProps} widgets={staticWidgetsData?.widgets?.header} />
                         )}
                         {initialSettings?.layoutSettings?.navigation && (
                             <NavigationWidgetArea
-                                dictionary={dictionary}
+                                {...widgetAreasSharedProps}
                                 widgets={staticWidgetsData?.widgets?.navigation}
-                                locale={locale}
                             />
                         )}
                         <div id={'page'} className={'App'}>
                             {children}
                         </div>
                         {initialSettings?.layoutSettings?.footer && (
-                            <FooterWidgetArea
-                                dictionary={dictionary}
-                                widgets={staticWidgetsData?.widgets?.footer}
-                                locale={locale}
-                            />
+                            <FooterWidgetArea {...widgetAreasSharedProps} widgets={staticWidgetsData?.widgets?.footer} />
                         )}
                     </div>
                     <BackgroundFilterWholeScreen />
                     <CookiesInformerBar />
                     <UserAutoLogin />
-                    <GoogleAnalytics
-                        googleAnalyticsId={
-                            initialSettings?.headDataSettings?.googleAnalyticsId
-                        }
-                    />
+                    <GoogleAnalytics googleAnalyticsId={initialSettings?.headDataSettings?.googleAnalyticsId} />
                     <LoadingComponent />
                     <AlertBox dictionary={dictionary} />
                     <BackToTopButton />
-                    <LoginRegisterPopup
-                        locale={locale}
-                        dictionary={dictionary}
-                    />
+                    <LoginRegisterPopup locale={locale} dictionary={dictionary} />
                     <StyledComponentsRegistry>
                         <GlobalCustomStyles
-                            primaryModeColors={
-                                initialSettings?.layoutSettings
-                                    ?.primaryModeColors
-                            }
-                            customStyles={
-                                initialSettings?.layoutSettings?.customStyles
-                            }
+                            primaryModeColors={initialSettings?.layoutSettings?.primaryModeColors}
+                            customStyles={initialSettings?.layoutSettings?.customStyles}
                         />
                     </StyledComponentsRegistry>
                     <StoreDataInitializer initialSettings={initialSettings} />
@@ -135,7 +105,7 @@ const RootLayout = async ({
                     {/*<MediaCall/>*/}
                     <KeysListener />
                     <UserConfigMenu locale={locale} dictionary={dictionary} />
-                    <CustomHeadTagsInitializer/>
+                    <CustomHeadTagsInitializer />
                     <CustomScripts />
                 </ReduxProvider>
             </body>

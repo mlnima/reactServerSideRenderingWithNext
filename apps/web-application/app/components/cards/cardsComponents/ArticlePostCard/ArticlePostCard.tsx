@@ -4,8 +4,6 @@ import dynamic from 'next/dynamic';
 import { Post } from 'typescript-types';
 import CardTitle from '../../asset/CardTitle/CardTitle';
 import '../postCard.scss';
-import CardViews from '@components/cards/asset/CardViews/CardViews';
-import CardRating from '@components/cards/asset/CardRating/CardRating';
 import CardStats from '@components/cards/asset/CardStats/CardStats';
 
 const CardImageRendererUseClient = dynamic(() => import('../../asset/CardImageRenderer/CardImageRendererUseClient'));

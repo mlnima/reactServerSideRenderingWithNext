@@ -11,6 +11,8 @@ import PostPage from "@components/PostsPage/PostsPage";
 import actorMetaGenerator from "./components/actorMetaGenerator/actorMetaGenerator";
 import MetaAdminQuickAccessBar from "@components/metas/MetaAdminQuickAccessBar";
 import ActorBio from "./components/ActorBio/ActorBio";
+import Soft404 from "@components/Soft404/Soft404";
+import {mongoIdValidatorByRegex} from "@repo/shared-util";
 
 interface IProps {
     params: {
@@ -27,8 +29,13 @@ interface IProps {
 
 const ActorPage = async ({params, searchParams}: IProps) => {
 
-    const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+    const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale);
+
+    if (!mongoIdValidatorByRegex(params?.actorId)) {
+        return <Soft404 dictionary={dictionary} />;
+    }
+
     const settingsData = await fetchSettings({requireSettings: ['actorPageSettings']});
     const sidebar = settingsData?.settings?.actorPageSettings?.sidebar;
 
@@ -57,36 +64,47 @@ const ActorPage = async ({params, searchParams}: IProps) => {
         locale
     });
 
+    if (!!params?.actorId && !postsData?.meta){
+        return <Soft404 dictionary={dictionary}/>
+    }
+
     return (
         <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
-
             <main id={'primary'} className={'main actorPage'}>
-                <MetaAdminQuickAccessBar metaId={params?.actorId}/>
-                <ActorBio actorData={postsData?.meta}/>
-                <WidgetsRenderer dictionary={dictionary}
-                                 locale={locale}
-                                 widgets={widgetsData.widgets?.['actorPageTop']}
-                                 position={'actorPageTop'}/>
-                <PostPage renderPagination
-                          posts={postsData?.posts}
-                          locale={locale}
-                          totalCount={postsData?.totalCount}
-                          currentPage={currentPage}
-                          />
-                <WidgetsRenderer dictionary={dictionary}
-                                 locale={locale}
-                                 widgets={widgetsData.widgets?.['actorPageBottom']}
-                                 position={'actorPageBottom'}/>
+                <MetaAdminQuickAccessBar metaId={params?.actorId} />
+                <ActorBio actorData={postsData?.meta} />
+                <WidgetsRenderer
+                    dictionary={dictionary}
+                    locale={locale}
+                    widgets={widgetsData.widgets?.['actorPageTop']}
+                    position={'actorPageTop'}
+                />
+                <PostPage
+                    renderPagination
+                    posts={postsData?.posts}
+                    dictionary={dictionary}
+                    locale={locale}
+                    totalCount={postsData?.totalCount}
+                    currentPage={currentPage}
+                />
+                <WidgetsRenderer
+                    dictionary={dictionary}
+                    locale={locale}
+                    widgets={widgetsData.widgets?.['actorPageBottom']}
+                    position={'actorPageBottom'}
+                />
             </main>
 
-            <SidebarWidgetAreaRenderer leftSideWidgets={widgetsData.widgets?.['actorPageLeftSidebar']}
-                                       rightSideWidgets={widgetsData.widgets?.['actorPageRightSidebar']}
-                                       dictionary={dictionary}
-                                       locale={locale}
-                                       sidebar={sidebar || 'no'}
-                                       position={'actorPage'}/>
+            <SidebarWidgetAreaRenderer
+                leftSideWidgets={widgetsData.widgets?.['actorPageLeftSidebar']}
+                rightSideWidgets={widgetsData.widgets?.['actorPageRightSidebar']}
+                dictionary={dictionary}
+                locale={locale}
+                sidebar={sidebar || 'no'}
+                position={'actorPage'}
+            />
         </div>
-    )
+    );
 }
 
 export default ActorPage;

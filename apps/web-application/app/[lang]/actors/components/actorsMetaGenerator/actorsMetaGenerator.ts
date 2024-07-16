@@ -16,7 +16,7 @@ const actorsMetaGenerator = async (
 ): Promise<Metadata> => {
     const locale = i18n.locales.includes(params?.lang)
         ? params?.lang
-        : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+        : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const settingsData = await fetchSettings({ requireSettings: ['actorsPageSettings'] });
     const initialSettingsData = await fetchSettings({ requireSettings: ['initialSettings'] });
 

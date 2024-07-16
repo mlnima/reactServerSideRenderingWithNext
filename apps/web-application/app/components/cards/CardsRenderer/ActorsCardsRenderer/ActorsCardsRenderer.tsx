@@ -8,15 +8,18 @@ interface IProps {
     metas?: Meta[],
     isSidebar?:boolean,
     locale:string
+    dictionary: {
+        [key: string]: string
+    }
 }
 
-const ActorsCardsRenderer: FC<IProps> = ({metas,isSidebar,locale}) => {
+const ActorsCardsRenderer: FC<IProps> = ({metas,isSidebar,locale,dictionary}) => {
 
 
     return (
         <div className={`actorsCardsWrapper ${isSidebar ? 'actorsCardsWrapperSidebar' : ''}`}>
             {metas?.map((meta, index) => {
-                const imagesAllowedDomainsForNextImage = process.env?.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES?.split(' ') || []
+                const imagesAllowedDomainsForNextImage = process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES?.split(' ') || []
                 const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
 
                 const isNextImageAllowed = meta.imageUrl ?
@@ -30,6 +33,7 @@ const ActorsCardsRenderer: FC<IProps> = ({metas,isSidebar,locale}) => {
                 return (
                     <ActorCard key={meta._id}
                                index={index}
+                               dictionary={dictionary}
                                locale={locale}
                                actorUrl={actorUrl}
                                isNextImageAllowed={isNextImageAllowed}

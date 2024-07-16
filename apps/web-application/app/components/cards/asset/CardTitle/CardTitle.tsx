@@ -16,7 +16,13 @@ interface CardTitlePropTypes {
 const CardTitle: FC<CardTitlePropTypes> = ({title, url, targetLink, useLink = true,useIcon=false}) => {
 
     return (
-        <h2 className={'cardTitle'}>
+        <h2 className={'cardTitle'}
+        style={{
+            display:useIcon ? 'flex' :'initial',
+            alignItems:useIcon ? 'center' :'initial' ,
+            justifyContent:useIcon ? 'space-between' :'initial'
+        }}
+        >
             {useLink ?
                 <Link href={url || '#'} title={title} target={targetLink || '_self'}>
                     {capitalizeFirstLetter(title)}

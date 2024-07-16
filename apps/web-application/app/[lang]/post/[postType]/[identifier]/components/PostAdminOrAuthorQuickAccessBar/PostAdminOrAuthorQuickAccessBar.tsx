@@ -8,6 +8,7 @@ import Link from 'next/link';
 import './PostAdminOrAuthorQuickAccessBar.scss';
 import { formatDistance } from 'date-fns';
 import { capitalizeFirstLetter } from '@repo/shared-util';
+import PostQuickAccessPostInformation from './PostQuickAccessPostInformation';
 
 interface IProps {
     post: Post;
@@ -16,10 +17,13 @@ interface IProps {
     };
 }
 
-const PostAdminOrAuthorQuickAccessBar: ({ post, dictionary }: { post: any; dictionary: any }) => React.JSX.Element | null = ({
+const PostAdminOrAuthorQuickAccessBar: ({
     post,
     dictionary,
-}) => {
+}: {
+    post: any;
+    dictionary: any;
+}) => React.JSX.Element | null = ({ post, dictionary }) => {
     const adminMode = useAppSelector(({ globalState }) => globalState?.adminMode);
     const { userData } = useAppSelector(({ user }) => user);
     const dispatch = useAppDispatch();
@@ -33,12 +37,25 @@ const PostAdminOrAuthorQuickAccessBar: ({ post, dictionary }: { post: any; dicti
         }
     };
 
-    if ((adminMode && userData.role === 'administrator') || post?.author?._id === userData?._id) {
+    if (userData.role !== 'administrator' && post?.author?._id === userData?._id) {
         return (
             <div className={'PostAdminQuickAccessBar'}>
                 <Link className="btn btn-primary" href={`/upload?_id=${post._id}`}>
                     Edit
                 </Link>
+                <PostQuickAccessPostInformation
+                    status={post?.status}
+                    dictionary={dictionary}
+                    createdAt={post?.createdAt}
+                    updatedAt={post?.updatedAt}
+                />
+            </div>
+        );
+    }
+
+    if (adminMode && userData.role === 'administrator') {
+        return (
+            <div className={'PostAdminQuickAccessBar'}>
                 {adminMode && userData.role === 'administrator' && (
                     <>
                         <Link className="btn btn-primary" href={`/dashboard/post?id=${post._id}`} target="_blank">
@@ -59,22 +76,12 @@ const PostAdminOrAuthorQuickAccessBar: ({ post, dictionary }: { post: any; dicti
                     </>
                 )}
 
-                <div className={'dates'}>
-                    {post.createdAt && (
-                        <span title={post.createdAt}>
-                            {dictionary?.['Created At'] || 'Created At'}: {formatDistance(new Date(post.createdAt), new Date())}
-                        </span>
-                    )}
-                    {post.updatedAt && (
-                        <span title={post.updatedAt}>
-                            {dictionary?.['Updated At'] || 'Updated At'}:{formatDistance(new Date(post.updatedAt), new Date())}
-                        </span>
-                    )}
-                </div>
-                <h4 className="status">
-                    {dictionary?.['Status'] || 'Status'} :{' '}
-                    {dictionary?.[capitalizeFirstLetter(post.status)] || capitalizeFirstLetter(post.status)}
-                </h4>
+                <PostQuickAccessPostInformation
+                    status={post?.status}
+                    dictionary={dictionary}
+                    createdAt={post?.createdAt}
+                    updatedAt={post?.updatedAt}
+                />
             </div>
         );
     } else return null;

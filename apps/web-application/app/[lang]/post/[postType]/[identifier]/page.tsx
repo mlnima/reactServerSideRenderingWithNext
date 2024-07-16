@@ -36,7 +36,7 @@ export const generateMetadata = postMetaGenerator;
 
 const PostPage = async ({params: {lang, identifier, postType}, searchParams}: IProps) => {
 
-    const locale = i18n.locales.includes(lang) ? lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+    const locale = i18n.locales.includes(lang) ? lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale)
     const postData = await fetchPost({identifier})
     const postViewData = await fetchPostViews({identifier:postData?.post?._id,revalidate: 120})

@@ -21,6 +21,11 @@ export const usernameValidatorRegisterForm = username => {
     return isValid;
 };
 
+export const mongoIdValidatorByRegex = (_id)=>{
+    const objectIdPattern = /^[0-9a-fA-F]{24}$/;
+    return objectIdPattern.test(_id)
+}
+
 // export const usernameValidatorRegisterForm = username => {
 //     if (!username) return false;
 //     const regex = /^[a-z0-9]{6,16}$/;

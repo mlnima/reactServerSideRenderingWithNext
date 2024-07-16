@@ -19,7 +19,7 @@ const CardImageRendererUsingNextImage: FC<CardImageNextPropTypes> =
          index
      }) => {
 
-        const imagesAllowedDomainsForNextImage = process.env?.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES?.split(' ') || []
+        const imagesAllowedDomainsForNextImage = process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES?.split(' ') || []
         const fallbackImage = '/asset/images/default/no-image-available.png'
         const isImageAllowed = imagesAllowedDomainsForNextImage.some(domain => imageUrl?.includes(domain))
 

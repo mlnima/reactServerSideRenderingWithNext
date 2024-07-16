@@ -18,3 +18,5 @@ export const getDictionary = async (locale: Locale) => {
         console.log('getDictionary error on locale=> ', locale);
     }
 };
+
+

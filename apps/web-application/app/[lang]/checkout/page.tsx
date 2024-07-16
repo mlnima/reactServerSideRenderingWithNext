@@ -15,7 +15,7 @@ interface IProps {
 
 const checkoutPage = async ({params: {lang}}:IProps) => {
 
-    const locale = i18n.locales.includes(lang)  ?  lang :  process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+    const locale = i18n.locales.includes(lang)  ?  lang :  process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale);
     const settingsData = await fetchSettings({requireSettings: ['checkoutPagePageSettings']});
 

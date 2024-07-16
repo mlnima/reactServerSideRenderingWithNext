@@ -1,47 +1,39 @@
-import {FC} from "react";
-import {Widget} from "typescript-types";
-import dynamic from "next/dynamic";
-const WidgetWrapper = dynamic(() => import("../widgetWrapper/WidgetWrapper"))
+import { FC } from 'react';
+import { Widget } from 'typescript-types';
+import WidgetWrapper from '../widgetWrapper/WidgetWrapper';
 
 interface IProps {
-    locale: string,
-    widgets: Widget[],
-    position: string,
-    hasSidebar?: string,
+    widgets: Widget[];
+    position: string;
+    locale: string;
+    hasSidebar?: string;
     dictionary: {
-        [key: string]: string
-    }
+        [key: string]: string;
+    };
 }
 
-const WidgetsRenderer: FC<IProps> = ({widgets, locale, position, dictionary, hasSidebar}) => {
-
+const WidgetsRenderer: FC<IProps> = ({ widgets, position, dictionary, hasSidebar, locale }) => {
     const renderWidget = [...(widgets || [])]
-        ?.sort((a, b) => a?.data?.widgetIndex > b?.data?.widgetIndex ? 1 : -1)
-        ?.map((widget) => {
-
+        ?.sort((a, b) => (a?.data?.widgetIndex > b?.data?.widgetIndex ? 1 : -1))
+        ?.map(widget => {
             const widgetProps = {
                 dictionary,
-                locale,
                 hasSidebar,
+                locale,
                 widgetId: widget._id,
                 isSidebar: position ? position.includes('Sidebar') : false,
-                ...widget
-            }
-            return <WidgetWrapper  {...widgetProps} key={widget._id}/>
-        })
+                ...widget,
+            };
+            return <WidgetWrapper {...widgetProps} key={widget._id} />;
+        });
 
-    return (
-        <>
-            {renderWidget}
-        </>
-    )
+    return <>{renderWidget}</>;
 };
-export default WidgetsRenderer
+export default WidgetsRenderer;
 
-    //***************DO NOT DELETE THIS COMMENT****************************
+//***************DO NOT DELETE THIS COMMENT****************************
 
 //import {renderByDayCondition, renderByDevice, renderByLanguageCondition} from "@repo/shared-util";
-
 
 // if (
 //     renderByLanguageCondition(locale, widget?.data?.languageToRender) &&

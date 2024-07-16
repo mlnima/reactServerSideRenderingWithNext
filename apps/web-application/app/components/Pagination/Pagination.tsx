@@ -4,7 +4,7 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import { rangeNumGenerator } from '@repo/shared-util';
 import Link from 'next/link';
 import './Pagination.styles.scss';
-import SettingStore from '@store/SettingStore';
+import ServerSideStore from '@store/ServerSideStore';
 
 interface IProps {
     totalCount: number;
@@ -14,7 +14,7 @@ interface IProps {
 const Pagination: FC<IProps> = ({ totalCount, currentPage = 1 }) => {
     const searchParams = useSearchParams();
     const pathname = usePathname();
-    const numberOfCardsPerPage = SettingStore.getNumberOfCardsPerPage();
+    const numberOfCardsPerPage = ServerSideStore.getNumberOfCardsPerPage();
     const maxPage = Math.ceil(totalCount / numberOfCardsPerPage);
 
     if (totalCount > numberOfCardsPerPage) {

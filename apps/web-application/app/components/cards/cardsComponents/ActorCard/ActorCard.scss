@@ -20,6 +20,7 @@
     border-bottom-left-radius: 0.5rem;
     z-index: 1;
     text-shadow: var(--primary-text-shodow);
+    position: relative;
 
     .cardTitle {
 
@@ -28,6 +29,17 @@
         align-items: center;
         justify-content: center;
       }
+
+    }
+
+    .actorCardCounts {
+      position: absolute;
+      bottom: .25rem;
+      right: .25rem;
+      color: var(--primary-text-color);
+      display: flex;
+      align-items: center;
+      gap: 4px;
     }
   }
 
@@ -42,15 +54,7 @@
       }
     }
 
-    .actorCardCounts {
-      position: absolute;
-      bottom: .25rem;
-      right: .25rem;
-      color: var(--primary-text-color);
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
+
   }
 }
 

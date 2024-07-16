@@ -5,7 +5,7 @@ import { capitalizeFirstLetter } from '@repo/shared-util';
 import CardTitle from '@components/cards/asset/CardTitle/CardTitle';
 import './ActorCard.scss';
 import CardImageRendererUseClient from '@components/cards/asset/CardImageRenderer/CardImageRendererUseClient';
-import SettingStore from '@store/SettingStore';
+import ServerSideStore from '@store/ServerSideStore';
 
 interface ActorCardPropTypes {
     meta: Meta;
@@ -13,7 +13,9 @@ interface ActorCardPropTypes {
     isSidebar?: boolean;
     actorUrl: string;
     isNextImageAllowed: boolean;
-    locale: string;
+    dictionary: {
+        [key: string]: string;
+    };
 }
 
 const ActorCard: FC<ActorCardPropTypes> = ({
@@ -22,13 +24,16 @@ const ActorCard: FC<ActorCardPropTypes> = ({
     isSidebar,
     actorUrl,
     isNextImageAllowed = false,
-    locale,
+    dictionary,
 }) => {
-    const dictionary = SettingStore.getDictionary(locale);
     return (
         <article className={`actor-card metaCard${isSidebar ? ' actorCardSidebar' : ''}`}>
             <div className={`card-info`}>
-                <CardTitle title={capitalizeFirstLetter(meta?.name)} url={`/actor/${meta?._id}`} />
+                <CardTitle title={capitalizeFirstLetter(meta?.name)} url={actorUrl} />
+                <span className={'actorCardCounts smallText'}>
+                    {meta?.count}
+                    <span>{dictionary?.['Post'] || 'Post'}</span>
+                </span>
             </div>
             <Link href={actorUrl} className="actor-card-link" title={meta?.name as string}>
                 <CardImageRendererUseClient
@@ -42,10 +47,7 @@ const ActorCard: FC<ActorCardPropTypes> = ({
                     objectFit={'cover'}
                     aspectRatio={'3/4'}
                 />
-                <span className={'actorCardCounts smallText'}>
-                    {meta?.count}
-                    <span>{dictionary['Post'] || 'Post'}</span>
-                </span>
+
             </Link>
         </article>
     );

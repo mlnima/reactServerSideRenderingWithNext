@@ -19,7 +19,7 @@ const alternatesGenerators = new AlternatesGenerators();
 const searchMetaGenerator = async ({ params: { lang, keyword }, searchParams }: Props) => {
     const locale = i18n.locales.includes(lang)
         ? lang
-        : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+        : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale);
     const settingsData = await fetchSettings({ requireSettings: ['initialSettings'] });
     const siteName = settingsData?.settings?.initialSettings?.headDataSettings?.siteName || '';

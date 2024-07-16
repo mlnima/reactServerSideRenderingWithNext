@@ -75,7 +75,7 @@ const FileManagerArea: FC = () => {
                 <Fragment>
                     <img className='file-manager-image-item'
                          //src={fileManagerData.path.replace('.', '') + '/' + data.fileName}
-                         src={`${fileManagerData.path.replace('.', process.env?.NEXT_PUBLIC_API_SERVER_URL || '')}/${data.fileName}`}
+                         src={`${fileManagerData.path.replace('.', process.env.NEXT_PUBLIC_API_SERVER_URL || '')}/${data.fileName}`}
                     />
                 </Fragment>
 

@@ -1,4 +1,4 @@
-const allowedDomainForImages = process.env?.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES?.split(' ') ||[]
+const allowedDomainForImages = process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES?.split(' ') ||[]
 
 module.exports = {
     images: {

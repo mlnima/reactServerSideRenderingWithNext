@@ -1,22 +1,12 @@
-import {FC} from "react";
-import {Widget} from "typescript-types";
-import WidgetsRenderer from "../widgetRenderer/WidgetsRenderer";
+import WidgetsRenderer from '../widgetRenderer/WidgetsRenderer';
 
-interface IProps {
-    widgets:Widget[],
-    locale:string,
-    dictionary: {
-        [key: string]: string
-    }
-}
-
-const HeaderWidgetArea: FC<IProps> = ({widgets,locale,dictionary}) => {
+const HeaderWidgetArea = props => {
     return (
         <div className={'header-widget-area'}>
             <div className={'innerContent'}>
-                <WidgetsRenderer dictionary={dictionary} locale={locale} widgets={widgets} position={'header'}/>
+                <WidgetsRenderer {...props} position={'header'} />
             </div>
         </div>
-    )
+    );
 };
-export default HeaderWidgetArea
+export default HeaderWidgetArea;

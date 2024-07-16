@@ -78,6 +78,7 @@ export {
     usernameValidatorRegisterForm,
     passwordValidatorRegisterForm,
     emailValidator,
+    mongoIdValidatorByRegex
 } from './src/validators';
 
 export { touchDeviceDetector } from './src/device-util';

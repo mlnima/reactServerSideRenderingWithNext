@@ -12,29 +12,19 @@ interface SideBarWidgetAreaProps {
     dictionary: {
         [key: string]: string;
     };
-    postSettings: {
-        [key: string]: string;
-    };
 }
 
 const SidebarWidgetArea: FC<SideBarWidgetAreaProps> = ({
     dictionary,
-    locale,
     className,
     position,
     gridArea,
     widgets,
-    postSettings,
+    locale,
 }) => {
     return (
         <aside className={className + ' widget-area sidebarWidgetArea ' + position} style={{ gridArea }}>
-            <WidgetsRenderer
-                postSettings={postSettings}
-                dictionary={dictionary}
-                locale={locale}
-                position={position}
-                widgets={widgets}
-            />
+            <WidgetsRenderer dictionary={dictionary} locale={locale} position={position} widgets={widgets} />
         </aside>
     );
 };

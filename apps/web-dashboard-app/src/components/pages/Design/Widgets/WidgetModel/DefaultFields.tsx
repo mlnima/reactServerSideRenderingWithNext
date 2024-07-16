@@ -80,7 +80,7 @@ const DefaultFields: FC<DefaultFieldsPropTypes> =
                                       value={widgetSettings.activeEditingLanguage}
                                       options={[
                                           'default',
-                                          ...process.env?.NEXT_PUBLIC_LOCALES?.split(' ')
+                                          ...process.env.NEXT_PUBLIC_LOCALES?.split(' ')
                                               .filter(lang => lang !== process.env.NEXT_PUBLIC_DEFAULT_LOCALE)
                                       ]}
                                       onChangeHandler={onChangeLanguageHandler}
@@ -102,7 +102,7 @@ const DefaultFields: FC<DefaultFieldsPropTypes> =
                 <SelectFieldForWidget title={'Language To Render:'}
                                       name={'languageToRender'}
                                       value={widgetData.languageToRender}
-                                      options={['all', 'default', ...process.env?.NEXT_PUBLIC_LOCALES?.split(' ').filter(lang => lang !== process.env.NEXT_PUBLIC_DEFAULT_LOCALE)]}
+                                      options={['all', 'default', ...process.env.NEXT_PUBLIC_LOCALES?.split(' ').filter(lang => lang !== process.env.NEXT_PUBLIC_DEFAULT_LOCALE)]}
                                       onChangeHandler={onChangeHandler}
                 />
 

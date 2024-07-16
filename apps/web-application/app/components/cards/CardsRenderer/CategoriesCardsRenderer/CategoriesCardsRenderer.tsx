@@ -7,10 +7,13 @@ import CategoryCard from "@components/cards/cardsComponents/CategoryCard/Categor
 interface IProps {
     metas?: Meta[],
     locale:string,
-    isSidebar?:boolean
+    isSidebar?:boolean,
+    dictionary: {
+        [key: string]: string
+    }
 }
 
-const CategoriesCardsRenderer: FC<IProps> = ({metas,locale,isSidebar}) => {
+const CategoriesCardsRenderer: FC<IProps> = ({metas,locale,isSidebar,dictionary}) => {
 
     return (
         <div className={`categoriesCardsWrapper${isSidebar ? 'Sidebar' : ''} `}>
@@ -34,6 +37,7 @@ const CategoriesCardsRenderer: FC<IProps> = ({metas,locale,isSidebar}) => {
                                       meta={meta}
                                       isSidebar={isSidebar}
                                       locale={locale}
+                                  dictionary={dictionary}
                                       index={index}/>
                 )
             })}

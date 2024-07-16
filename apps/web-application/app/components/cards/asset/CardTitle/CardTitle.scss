@@ -1,44 +1,78 @@
-.cardTitle{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.cardTitle {
+  color: var(--primary-text-color, #fff);
   overflow: hidden;
-  width: 100%;
-  color: var(--primary-text-color,#fff);
-  a,p,svg,h2{
-    color: var(--primary-text-color,#fff);
-    display: flex;
-    &:nth-child(odd) {
-      justify-content: flex-start;
-    }
+  white-space: nowrap;
+  text-overflow: ellipsis;
 
-    &:nth-child(even) {
-      justify-content: flex-end;
-    }
-  }
-
-  a{
-    height: 48px;
-    box-sizing: border-box;
-    margin: 2px;
-    padding: 0 2px;
-    font-size: 1rem;
+  a {
+    color: var(--primary-text-color, #fff);
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     max-width: 100%;
-    text-overflow: fade;
-    cursor: pointer;
   }
 
-
-}
-
-@media only screen and (min-width: 600px) {
-  .cardTitle{
-    a{
-      height: initial;
-      margin: 0;
-      padding: 0;
-      line-height: 1;
-      font-size: 1rem;
-    }
+  .rating-icon {
+    margin-left: 8px;
+    flex-shrink: 0;
   }
 }
+
+.cardTitle.flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  a {
+    flex: 1;
+  }
+}
+
+
+//.cardTitle{
+//  display: flex;
+//  justify-content: space-between;
+//  align-items: center;
+//  overflow: hidden;
+//  width: 100%;
+//  color: var(--primary-text-color,#fff);
+//  a,p,svg,h2{
+//    color: var(--primary-text-color,#fff);
+//    display: flex;
+//    &:nth-child(odd) {
+//      justify-content: flex-start;
+//    }
+//
+//    &:nth-child(even) {
+//      justify-content: flex-end;
+//    }
+//  }
+//
+//  a,p,h2{
+//    white-space: nowrap;
+//    overflow: hidden;
+//    text-overflow: ellipsis;
+//  }
+//
+//  a{
+//    height: 1.5rem;
+//    box-sizing: border-box;
+//    font-size: 1rem;
+//    max-width: 100%;
+//    cursor: pointer;
+//    white-space: nowrap;
+//    overflow: hidden;
+//    text-overflow: ellipsis;
+//
+//  }
+//}
+//
+//@media only screen and (min-width: 600px) {
+//  .cardTitle{
+//    a{
+//
+//      font-size: 1rem;
+//    }
+//  }
+//}

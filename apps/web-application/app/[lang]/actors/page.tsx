@@ -21,7 +21,7 @@ interface IProps {
 }
 
 const actorsPage = async ({params, searchParams}: IProps) => {
-    const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+    const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale);
     const settingsData = await fetchSettings({requireSettings: ['actorsPageSettings']});
     const sidebar = settingsData?.settings?.actorsPageSettings?.sidebar;
@@ -66,6 +66,7 @@ const actorsPage = async ({params, searchParams}: IProps) => {
                                            totalCount={metasData?.totalCount}
                                            currentPage={currentPage}
                                            locale={locale}
+                                           dictionary={dictionary}
                                            numberOfCardsPerPage={numberOfCardsPerPage}
                                            metas={metasData?.metas}/>
 

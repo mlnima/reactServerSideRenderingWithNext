@@ -5,15 +5,16 @@ import {Widget} from "typescript-types";
 interface SidebarWidgetAreaRendererPropTypes {
     sidebar:string|boolean|undefined
     position:string
-    locale:string,
     leftSideWidgets:Widget[]
     rightSideWidgets:Widget[]
     dictionary: {
         [key: string]: string
-    }
+    },
+    locale:string
 }
 
-const SidebarWidgetAreaRenderer: FC<SidebarWidgetAreaRendererPropTypes> = ({leftSideWidgets,rightSideWidgets,sidebar,position,locale,dictionary}) => {
+const SidebarWidgetAreaRenderer: FC<SidebarWidgetAreaRendererPropTypes> = ({leftSideWidgets,rightSideWidgets,sidebar,position,dictionary,locale}) => {
+
 
     return (
         <>

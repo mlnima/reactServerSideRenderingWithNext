@@ -10,6 +10,8 @@ import PostPage from "@components/PostsPage/PostsPage";
 import categoryMetaGenerator from "./components/categoryMetaGenerator/categoryMetaGenerator";
 import MetaAdminQuickAccessBar from "@components/metas/MetaAdminQuickAccessBar";
 import PostsPageInfo from "@components/PostsPage/PostsPageInfo/PostsPageInfo";
+import Soft404 from "@components/Soft404/Soft404";
+import {mongoIdValidatorByRegex} from "@repo/shared-util";
 
 interface IProps {
     params: {
@@ -23,8 +25,12 @@ interface IProps {
 
 const CategoryPage = async ({params, searchParams}: IProps) => {
 
-    const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+    const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale);
+
+    if (!mongoIdValidatorByRegex(params?.categoryId)) {
+        return <Soft404 dictionary={dictionary} />;
+    }
 
     const settingsData = await fetchSettings({requireSettings: ['categoryPageSettings']});
     const sidebar = settingsData?.settings?.categoryPageSettings?.sidebar;
@@ -53,6 +59,10 @@ const CategoryPage = async ({params, searchParams}: IProps) => {
         },
         locale
     });
+
+    if (!!params?.categoryId && !postsData?.meta){
+        return <Soft404 dictionary={dictionary}/>
+    }
 
     return (
         <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>

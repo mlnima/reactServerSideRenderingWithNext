@@ -6,6 +6,7 @@ import './page.styles.scss';
 import {i18n} from '@i18nConfig'
 import SidebarWidgetAreaRenderer
     from "@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer";
+import ServerSideStore from "@store/ServerSideStore";
 
 interface IProps {
     params: {
@@ -18,7 +19,8 @@ interface IProps {
 
 const homePage = async ({params: {lang},searchParams}: IProps) => {
 
-    const locale = i18n.locales.includes(lang) ? lang : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+    const locale = i18n.locales.includes(lang) ? lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+
     const dictionary = await getDictionary(locale);
     const settingsData = await fetchSettings({requireSettings: ['homePageSettings']});
 
@@ -35,16 +37,13 @@ const homePage = async ({params: {lang},searchParams}: IProps) => {
 //@ts-ignore
     const sidebar = settingsData?.settings?.homePageSettings?.sidebar;
 
-
-
     return (
         <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
 
             <main id={'primary'} className={'main homePage'}>
                 <MainWidgetArea dictionary={dictionary}
-                                widgets={widgetsData?.widgets?.home}
-                                 // postSettings={postSettings}
                                 locale={locale}
+                                widgets={widgetsData?.widgets?.home}
                                 position={'home'}/>
             </main>
 
@@ -52,7 +51,6 @@ const homePage = async ({params: {lang},searchParams}: IProps) => {
                                        rightSideWidgets={widgetsData.widgets?.['homePageRightSidebar']}
                                        dictionary={dictionary}
                                        locale={locale}
-                                       // postSettings={postSettings}
                                        sidebar={sidebar || 'no'}
                                        position={'postPage'}/>
         </div>

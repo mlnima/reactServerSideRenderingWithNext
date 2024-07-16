@@ -1,11 +1,22 @@
 import mongoose from "mongoose";
 
 export const mongoIdValidator = (_id:string) => {
+    const objectIdPattern = /^[0-9a-fA-F]{24}$/;
+
+    if (!_id || !objectIdPattern.test(_id)) {
+        return false;
+    }
+
     try {
-        return _id ? mongoose.isValidObjectId(_id) : false;
+        return mongoose.isValidObjectId(_id);
     } catch (err) {
         return false;
     }
+    // try {
+    //     return _id ? mongoose.isValidObjectId(_id) : false;
+    // } catch (err) {
+    //     return false;
+    // }
 };
 
 export const usernameValidatorRegisterForm = username => {

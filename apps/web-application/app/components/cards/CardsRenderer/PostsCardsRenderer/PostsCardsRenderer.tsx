@@ -2,7 +2,7 @@ import {FC} from "react";
 import {Post} from "typescript-types";
 import dynamic from "next/dynamic";
 import './PostsCardsRenderer.scss';
-import SettingStore from "@store/SettingStore";
+import ServerSideStore from "@store/ServerSideStore";
 
 const ArticlePostCard = dynamic(() => import('../../cardsComponents/ArticlePostCard/ArticlePostCard'))
 const PromotionPostCard = dynamic(() => import('../../cardsComponents/PromotionPostCard/PromotionPostCard'))
@@ -39,7 +39,7 @@ const PostsCardsRenderer: FC<IProps> = ({posts, locale, isSidebar,previewMode,di
                     imagesAllowedDomainsForNextImage?.some(domain => post.mainThumbnail?.includes(domain)) :
                     false
 
-                const settings =  SettingStore.getPostSettings(post?.postType)
+                const settings =  ServerSideStore.getPostSettings(post?.postType)
 
                 // console.log(`settings=> `,settings)
 

@@ -10,6 +10,9 @@ interface IProps {
     currentPage: number,
     numberOfCardsPerPage: number,
     locale: string
+    dictionary: {
+        [key: string]: string
+    }
 }
 
 const ActorsPageContentRenderer: FC<IProps> =
@@ -19,12 +22,13 @@ const ActorsPageContentRenderer: FC<IProps> =
          totalCount,
          currentPage,
          locale,
-         numberOfCardsPerPage
+         numberOfCardsPerPage,
+         dictionary
      }) => {
         return (
             <>
                 <div className={'actorsContainer'}>
-                    <ActorsCardsRenderer metas={metas} locale={locale}/>
+                    <ActorsCardsRenderer metas={metas} locale={locale} dictionary={dictionary}/>
                 </div>
                 {renderPagination && <Pagination totalCount={totalCount}
                                                  currentPage={currentPage}
