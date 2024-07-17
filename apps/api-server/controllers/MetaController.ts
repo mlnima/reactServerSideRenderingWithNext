@@ -172,23 +172,55 @@ class MetaController {
         }
     }
 
-    static async mergeDuplicateMeta(req: Request, res: Response){
+    static async mergeDuplicateMeta(req: Request, res: Response) {
         const duplicates = await metaSchema.aggregate([
             {
                 $group: {
                     _id: { name: '$name', type: '$type' },
                     count: { $sum: 1 },
-                    docs: { $push: '$$ROOT' }
-                }
+                    docs: { $push: '$$ROOT' },
+                },
             },
             {
                 $match: {
-                    count: { $gt: 1 }
-                }
-            }
+                    count: { $gt: 1 },
+                },
+            },
         ]);
 
-        res.json({ message: 'duplicates',duplicates});
+        for await (const group of duplicates) {
+            const docs = group.docs;
+
+            docs.sort((a, b) => b.count - a.count);
+
+            const [docToKeep, ...docsToRemove] = docs;
+
+            for await (const meta of docsToRemove) {
+                await postSchema
+                    .updateMany(
+                        { [meta?.type]: { $in: [meta._id] } },
+                        {
+                            $push: { [docToKeep.type]: docToKeep._id },
+                        },
+                    )
+                    .exec();
+
+                await postSchema
+                    .updateMany(
+                        { [meta?.type]: { $in: [meta._id] } },
+                        {
+                            $pull: { [meta?.type]: meta._id },
+                        },
+                    )
+                    .exec();
+
+                await metaSchema.findByIdAndDelete(meta._id as unknown, { useFindAndModify: false }).exec();
+            }
+
+            console.log(`Kept document: ${docToKeep._id} with ${docToKeep.posts} posts`);
+            console.log(`Removed ${docsToRemove.length} duplicates`);
+        }
+        res.json({ message: 'duplicates', duplicates });
     }
 
     static async dashboardDeleteMeta(req: Request, res: Response) {
@@ -200,7 +232,7 @@ class MetaController {
                 return;
             }
             const idsArray = Array.isArray(metaIds) ? metaIds : [metaIds];
-            for await (const metaId of idsArray){
+            for await (const metaId of idsArray) {
                 const meta = await metaSchema.findById(metaId).exec();
                 if (meta) {
                     await postSchema
@@ -208,9 +240,9 @@ class MetaController {
                             { [meta?.type]: { $in: [meta._id] } }, // Find all posts with the specified meta ID
                             { $pull: { [meta?.type]: meta._id } }, // Remove the specified meta ID from the array
                         )
-                        .exec()
+                        .exec();
                     await metaSchema.findByIdAndDelete(meta._id as unknown, { useFindAndModify: false }).exec();
-                    console.log(`${meta.name} was deleted`)
+                    console.log(`${meta.name} was deleted`);
                 }
             }
             res.json({ message: 'Metas Deleted' });
@@ -336,7 +368,6 @@ class MetaController {
 }
 
 export default MetaController;
-
 
 
 // const deletePromises = idsArray.map(commentId => {
