@@ -172,24 +172,48 @@ class MetaController {
         }
     }
 
+    static async mergeDuplicateMeta(req: Request, res: Response){
+        const duplicates = await metaSchema.aggregate([
+            {
+                $group: {
+                    _id: { name: '$name', type: '$type' },
+                    count: { $sum: 1 },
+                    docs: { $push: '$$ROOT' }
+                }
+            },
+            {
+                $match: {
+                    count: { $gt: 1 }
+                }
+            }
+        ]);
+
+        res.json({ message: 'duplicates',duplicates});
+    }
+
     static async dashboardDeleteMeta(req: Request, res: Response) {
         try {
             const { metaIds } = req.query;
 
             if (!metaIds) {
-                res.status(400).json({ message: 'No ID provided' });
+                res.status(400).json({ message: 'No ids was provided' });
                 return;
             }
-
             const idsArray = Array.isArray(metaIds) ? metaIds : [metaIds];
-
-            const deletePromises = idsArray.map(commentId => {
-                return metaSchema.findByIdAndDelete(commentId as string, { useFindAndModify: false }).exec();
-            });
-
-            await Promise.all(deletePromises);
-
-            res.json({ message: 'Meta Deleted' });
+            for await (const metaId of idsArray){
+                const meta = await metaSchema.findById(metaId).exec();
+                if (meta) {
+                    await postSchema
+                        .updateMany(
+                            { [meta?.type]: { $in: [meta._id] } }, // Find all posts with the specified meta ID
+                            { $pull: { [meta?.type]: meta._id } }, // Remove the specified meta ID from the array
+                        )
+                        .exec()
+                    await metaSchema.findByIdAndDelete(meta._id as unknown, { useFindAndModify: false }).exec();
+                    console.log(`${meta.name} was deleted`)
+                }
+            }
+            res.json({ message: 'Metas Deleted' });
         } catch (error) {
             res.status(500).json({ message: 'Can Not Delete', error });
         }
@@ -312,3 +336,28 @@ class MetaController {
 }
 
 export default MetaController;
+
+
+
+// const deletePromises = idsArray.map(commentId => {
+//     const meta = metaSchema.findById(commentId).exec();
+//     if (!!meta) {
+//         // const postsWithThisMeta = postSchema.find({ [meta?.type]: { $in: [meta?._id] } }).exec();
+//         await postSchema
+//             .updateMany(
+//                 { [meta?.type]: { $in: [meta?._id] } }, // Find all posts with the specified meta ID
+//                 { $pull: { [meta?.type]: meta?._id } }, // Remove the specified meta ID from the array
+//             )
+//             .exec()
+//             .then(result => {
+//                 console.log(result); // { n: number of matched docs, nModified: number of modified docs, ... }
+//             })
+//             .catch(err => {
+//                 console.error(err);
+//             });
+//
+//
+//     }
+//
+//
+// });

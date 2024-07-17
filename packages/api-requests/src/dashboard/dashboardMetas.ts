@@ -24,6 +24,10 @@ export const dashboardAPIRequestUpdateMeta = async (data:{})=>{
     return await AxiosInstance.put('/api/dashboard/meta',{data})
 }
 
-export const dashboardAPIRequestSyncDuplicateMetas = async ()=>{
-    return await AxiosInstance.post('/api/admin/posts/syncDuplicateMetas',{token: localStorage.wt})
+// export const dashboardAPIRequestSyncDuplicateMetas = async ()=>{
+//     return await AxiosInstance.post('/api/admin/posts/syncDuplicateMetas',{token: localStorage.wt})
+// }
+
+export const dashboardDeleteDuplicateMetas = async ()=>{
+    return await AxiosInstance.delete('/api/dashboard/meta/duplicate')
 }

@@ -41,6 +41,7 @@ router.put('/dashboard/meta', adminAuthMiddleware, MetaController.dashboardUpdat
 router.delete('/dashboard/meta', adminAuthMiddleware, MetaController.dashboardDeleteMeta);
 router.get('/dashboard/meta', adminAuthMiddleware, MetaController.dashboardGetMeta);
 router.get('/dashboard/metas', adminAuthMiddleware, MetaController.dashboardGetMetas);
+router.delete('/dashboard/meta/duplicate', adminAuthMiddleware, MetaController.mergeDuplicateMeta);
 router.get('/dashboard/meta/setMetaThumbnailsAndCount', adminAuthMiddleware, MetaController.dashboardSetMetaThumbnailsAndCount);
 //---------------------Post----------------------------
 router.get('/v1/posts', PostController.getPosts);

@@ -7,7 +7,7 @@ import {
     setMetaThumbnailsAndCountAction
 } from "@store/reducers/postsReducer";
 import {useAppDispatch} from "@store/hooks";
-import {dashboardAPIRequestSyncDuplicateMetas,dashboardAPIRequestGenerateSiteMaps} from "@repo/api-requests";
+import {dashboardDeleteDuplicateMetas,dashboardAPIRequestGenerateSiteMaps} from "@repo/api-requests";
 
 
 let StyledDiv = styled.div`
@@ -75,8 +75,8 @@ const Tools = () => {
             <button className={'btn btn-primary'} onClick={() => dispatch(setMetaThumbnailsAndCountAction('actors'))}>
                 Set New Thumbnails And Count for actors
             </button>
-            <button className={'btn btn-primary'} onClick={() => dashboardAPIRequestSyncDuplicateMetas()}>
-                Sync Duplicate Metas
+            <button className={'btn btn-primary'} onClick={() => dashboardDeleteDuplicateMetas()}>
+                Delete Duplicate Metas
             </button>
             <button className={'btn btn-primary'} onClick={() => dashboardAPIRequestGenerateSiteMaps()}>
                 Generate Sitemaps

@@ -13,7 +13,7 @@
     "build": "dotenv -- turbo run build",
     "generateStaticConfig": "dotenv -- npm --prefix ./apps/api-server run generateStaticConfig",
     "delete-cache": "rmdir /s /q node_modules\\.cache\\turbo",
-    "killNodesWindows": "cmd.exe /c additionalJobs\\windowsNodeProccessBulkKiller.bat",
+    "killNodesWindows": "taskkill /f /im node.exe",
     "killNodesUbuntu": "chmod +x additionalTools/kill-node-process.sh",
     "cleanup": "node cleanup.js",
     "start:api-server": "npm --prefix ./apps/api-server run start",

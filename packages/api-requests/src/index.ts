@@ -139,7 +139,7 @@ export {
     dashboardAPIRequestGetMetas,
     dashboardAPIRequestSetMetaThumbnailsAndCount,
     dashboardAPIRequestUpdateMeta,
-    dashboardAPIRequestSyncDuplicateMetas
+    dashboardDeleteDuplicateMetas
 
 } from './dashboard/dashboardMetas'
 

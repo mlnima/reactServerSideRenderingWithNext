@@ -56,7 +56,7 @@ const TagPage = async ({ params, searchParams }: IProps) => {
         locale,
     });
 
-    if (!!params?.actorId && !postsData?.meta) {
+    if (!postsData?.meta) {
         return <Soft404 dictionary={dictionary} />;
     }
 
