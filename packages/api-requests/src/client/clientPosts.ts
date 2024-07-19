@@ -10,10 +10,10 @@ const postTypeValidator = (currentPostType: string) => {
 };
 
 export const clientDeletePostByAuthor = async (_id: string) => {
-    return await AxiosInstance.delete(`/api/v1/post`,{
-        params:{
-            _id
-        }
+    return await AxiosInstance.delete(`/api/v1/post`, {
+        params: {
+            _id,
+        },
     });
 };
 
@@ -26,23 +26,18 @@ export const clientAPIRequestCreateNewPost = async (data: {}): Promise<{ newPost
     return response.data;
 };
 
-
-
 export const clientAPIRequestGetEditingPost = async (_id: string) => {
-
     //return await AxiosInstance.get(`/api/v1/posts/getEditingPost?${queries}`);
-    return await AxiosInstance.get(`/api/v1/post/editing`,{
-        params:{
-            _id
-        }
+    return await AxiosInstance.get(`/api/v1/post/editing`, {
+        params: {
+            _id,
+        },
     });
 };
 
 export const clientAPIRequestGetPosts = async (currentQuery: any, medaId?: string | null) => {
     const sort = !!currentQuery?.sort ? { sort: currentQuery?.sort } : { sort: 'updatedAt' };
-    const postType = postTypeValidator(currentQuery?.postType)
-        ? { postType: currentQuery?.postType }
-        : {};
+    const postType = postTypeValidator(currentQuery?.postType) ? { postType: currentQuery?.postType } : {};
     const isValidMetaId = !!medaId ? mongoIdValidator(medaId) : false;
     const metaId =
         !!medaId && isValidMetaId
@@ -52,12 +47,8 @@ export const clientAPIRequestGetPosts = async (currentQuery: any, medaId?: strin
               : {};
     const lang = !!currentQuery?.lang ? { lang: currentQuery?.lang } : {};
     const author = !!currentQuery?.author ? { author: currentQuery?.author } : {};
-    const status = !!currentQuery?.status
-        ? { status: currentQuery?.status }
-        : { status: 'published' };
-    const keyword = !!currentQuery?.keyword
-        ? { keyword: encodeURIComponent(queryUniquer(currentQuery?.keyword)) }
-        : {};
+    const status = !!currentQuery?.status ? { status: currentQuery?.status } : { status: 'published' };
+    const keyword = !!currentQuery?.keyword ? { keyword: encodeURIComponent(queryUniquer(currentQuery?.keyword)) } : {};
 
     const getPostsData = {
         size: currentQuery?.size,
@@ -77,8 +68,7 @@ export const clientAPIRequestGetPosts = async (currentQuery: any, medaId?: strin
     );
 };
 
-export const updatePost = async (formData:FormData) => {
-
+export const updatePost = async (formData: FormData) => {
     return await AxiosInstance.put(`/api/v1/post`, formData);
 };
 
@@ -90,13 +80,26 @@ export const updatePost = async (formData:FormData) => {
 //      });
 // };
 
-
 export const clientAPIRequestLikeDislikePost = async (_id: string, type: 'likes' | 'disLikes') => {
     const body = {
         _id,
         type,
     };
     return await AxiosInstance.patch('/api/v1/post/likeDislike', body);
+};
+
+interface ICheckDeletedVideo {
+    postId?: string;
+    mainThumbnail?: string;
+    videoEmbedCode?: string;
+}
+
+export const clientCheckDeletedVideo = async ({ postId, mainThumbnail, videoEmbedCode }: ICheckDeletedVideo) => {
+    return await AxiosInstance.patch('/api/v1/post/checkDeletedVideo', {
+        postId,
+        mainThumbnail,
+        videoEmbedCode,
+    });
 };
 
 export const clientAPIRequestViewPost = async (postId: string) => {

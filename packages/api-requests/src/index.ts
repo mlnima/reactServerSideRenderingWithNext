@@ -6,6 +6,10 @@ export {
     commonAPIRequestLoginUser
 } from './common/commonUsers'
 
+// export {
+//     checkImageStatusCode,
+// } from './common/checkExternalContent'
+
 export {default as commonAPIRequestClearCaches} from './common/clearCaches'
 
 //______CLIENT (Web-App) USE IT NOW______
@@ -58,7 +62,8 @@ export {
     // checkPostExist,
     clientAPIRequestViewPost,
     clientDeletePostByAuthor,
-    clientAPIRequestLikeDislikePost
+    clientAPIRequestLikeDislikePost,
+    clientCheckDeletedVideo
 } from './client/clientPosts';
 
 //settings

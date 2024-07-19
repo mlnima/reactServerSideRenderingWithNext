@@ -58,6 +58,7 @@ router.patch('/v1/post/likeDislike', rateLimitMiddleware(3, 60 * 1000), authMidd
 router.get('/v1/post/edit/metaSuggestion', PostController.MetaSuggestion);
 router.put('/v1/post', authWithUserDataMiddleware, PostController.updatePost);
 router.post('/v1/post', authMiddleware, PostController.newPost);
+router.patch('/v1/post/checkDeletedVideo', authMiddleware, PostController.checkDeletedVideo);
 router.post('/dashboard/post', adminAuthMiddleware, PostController.dashboardCreateNewPost);
 router.put('/dashboard/post', adminAuthMiddleware, PostController.dashboardUpdatePost);
 router.get('/dashboard/post', adminAuthMiddleware, PostController.dashboardGetPost);

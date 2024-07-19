@@ -121,7 +121,6 @@ interface IFindRelatedPosts {
     relatedByFields: string[];
     limit?: number;
 }
-
 //*****************Author will be added  later******************
 postSchema.statics.findRelatedPosts = async function ({post, relatedByFields, limit = 8}: IFindRelatedPosts) {
     try {
@@ -171,6 +170,31 @@ postSchema.statics.findRelatedPosts = async function ({post, relatedByFields, li
         return [];
     }
 };
+
+
+interface IFindPosts {
+    post: any;  // You can replace 'any' with the actual post document type
+    relatedByFields: string[];
+    limit?: number;
+}
+
+postSchema.statics.findPosts = async  ({
+                                           locale,
+                                           postType,
+                                           metaId,
+                                           size,
+                                           limit,
+                                           sort
+}: IFindPosts) =>{
+
+}
+
+
+
+
+
+
+
 
 export default mongoose.model("post", postSchema);
 

@@ -72,6 +72,7 @@ const Topbar = () => {
                 <NavLink to="/dashboard/settings/initialSettings" className={'navigationLink'}>Initial Settings</NavLink>
                 <NavLink to="/dashboard/fileManager" className={'navigationLink'}>File Manager</NavLink>
                 <NavLink to="/dashboard/meta?new=1" className={'navigationLink'}>New Meta</NavLink>
+                <NavLink to="/dashboard/tools" className={'navigationLink'}>Tools</NavLink>
             </div>
 
             <nav id={'main-navigation'} className={'dashboard-navigation-item'}>

@@ -1,12 +1,14 @@
 'use client'
-import {clientAPIRequestViewPost} from "@repo/api-requests";
+import { clientAPIRequestViewPost, clientCheckDeletedVideo} from "@repo/api-requests";
 import React, {FC, useEffect, useMemo, useRef, useState} from 'react';
 import './CardImageRendererUseClient.scss'
 import {useAppDispatch, useAppSelector} from "@store/hooks";
 import {setActiveVideoTrailerId} from "@store/reducers/postsReducers/postsReducer";
 import Image from "next/image";
 import {StaticImport} from "next/dist/shared/lib/get-img-props";
+import {clearACacheByTag} from "@lib/serverActions";
 const fallbackImage = '/asset/images/default/no-image-available.png'
+
 
 interface CardImageNextPropTypes {
     imageUrl: string | undefined,
@@ -110,8 +112,23 @@ const CardImageRendererUseClient: FC<CardImageNextPropTypes> =
         }
 
         //we will use the error code to replace the content if it is possible
-        const onImageErrorHandler = (e: any) => {
+        const onImageErrorHandler =async (error: any) => {
             setGotError(true)
+            try {
+                if (
+                    !!postId &&
+                    !imageUrl?.includes(process.env.NEXT_PUBLIC_PRODUCTION_URL) &&
+                    imageUrl?.includes('http')
+                ) {
+                    const checkDeletedContent = await clientCheckDeletedVideo({ postId });
+                    if (checkDeletedContent.data.status === 404) {
+                        clearACacheByTag('posts');
+                        clearACacheByTag('widgets');
+                    }
+                }
+            }catch (error){
+                //console.log(`checkImageStatus=> `,error)
+            }
         }
 
         return (
