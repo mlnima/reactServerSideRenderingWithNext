@@ -12,16 +12,18 @@ const fallbackImage = '/asset/images/default/no-image-available.png'
 
 interface CardImageNextPropTypes {
     imageUrl: string | undefined,
+    isNextImageAllowed: boolean,
+    postType?:string,
+    videoTrailerUrl?: string,
+    submitPostView?: boolean,
+    postId?: string,
     mediaAlt: undefined | string,
+    index: number,
     aspectRatio?: string | undefined,
     objectFit?: 'fill' | 'contain' | 'cover' | 'none' | 'scale-down' | undefined,
-    submitPostView?: boolean,
-    videoTrailerUrl?: string,
-    postId?: string,
     metaId?: string,
-    index: number,
-    isNextImageAllowed: boolean,
-    overlayShadow?: boolean
+    overlayShadow?: boolean,
+
 }
 
 interface IImageStyle{
@@ -39,6 +41,7 @@ const CardImageRendererUseClient: FC<CardImageNextPropTypes> =
          videoTrailerUrl,
          postId,
          metaId,
+         postType,
          index,
          isNextImageAllowed = false,
          overlayShadow
@@ -114,21 +117,22 @@ const CardImageRendererUseClient: FC<CardImageNextPropTypes> =
         //we will use the error code to replace the content if it is possible
         const onImageErrorHandler =async (error: any) => {
             setGotError(true)
-            try {
-                if (
-                    !!postId &&
-                    !imageUrl?.includes(process.env.NEXT_PUBLIC_PRODUCTION_URL) &&
-                    imageUrl?.includes('http')
-                ) {
-                    const checkDeletedContent = await clientCheckDeletedVideo({ postId });
-                    if (checkDeletedContent.data.status === 404) {
-                        clearACacheByTag('posts');
-                        clearACacheByTag('widgets');
-                    }
-                }
-            }catch (error){
-                //console.log(`checkImageStatus=> `,error)
-            }
+            // try {
+            //     if (
+            //         !!postId &&
+            //         postType ==='video' &&
+            //         !imageUrl?.includes(process.env.NEXT_PUBLIC_PRODUCTION_URL) &&
+            //         imageUrl?.includes('http')
+            //     ) {
+            //         const checkDeletedContent = await clientCheckDeletedVideo({ postId });
+            //         if (checkDeletedContent.data.status === 404) {
+            //             clearACacheByTag('posts');
+            //             clearACacheByTag('widgets');
+            //         }
+            //     }
+            // }catch (error){
+            //     //console.log(`checkImageStatus=> `,error)
+            // }
         }
 
         return (

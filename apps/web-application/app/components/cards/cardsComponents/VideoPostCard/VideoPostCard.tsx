@@ -6,8 +6,6 @@ import { Post } from 'typescript-types';
 import CardTitle from '../../asset/CardTitle/CardTitle';
 import './VideoPostCard.scss';
 import '../postCard.scss';
-import CardViews from '@components/cards/asset/CardViews/CardViews';
-import CardRating from '@components/cards/asset/CardRating/CardRating';
 import CardStats from '@components/cards/asset/CardStats/CardStats';
 
 const CardQuality = dynamic(() => import('../../asset/CardQuality/CardQuality'));
@@ -55,7 +53,7 @@ const VideoPostCard: FC<IProps> = ({
                     <CardImageRendererUseClient
                         imageUrl={post.mainThumbnail || post?.thumbnail?.filePath}
                         isNextImageAllowed={isNextImageAllowed}
-                        key={post?._id}
+                        postType={'video'}
                         videoTrailerUrl={post?.videoTrailerUrl}
                         submitPostView={false}
                         postId={post?._id}
