@@ -3,6 +3,9 @@ import mongoose from 'mongoose';
 import defaultInitialSettings from '../tools/asset/defaultInitialSettings';
 import path from "path";
 import {Worker} from "worker_threads";
+import {Widget} from "typescript-types";
+import widgetSchema from "@schemas/widgetSchema";
+import {postFieldRequestForCards} from "@repo/data-structures";
 
 mongoose.Promise = global.Promise;
 mongoose.set('strictQuery', true);
@@ -10,8 +13,13 @@ mongoose.set('strictQuery', true);
 class GlobalStore {
 
     initialSettings: any
+    widgets:{
+        [key:string]:Widget[]
+    }
+
     constructor() {
         this.initialSettings  = {};
+        this.widgets = {}
     }
     async connectToDatabase(connectorName?: string){
         try {
@@ -40,8 +48,40 @@ class GlobalStore {
         }
     }
 
-    getApiServerRootPath(){
-        return path.join(process.cwd())
+    async setWidgets(){
+
+        const allWidgets = await widgetSchema.find({
+            'data.position': { $nin: ['deactivated', 'trash'] }
+        }).populate([
+            {
+                model: 'meta',
+                path: 'data.uniqueData.metaData',
+            },
+            {
+                model: 'post',
+                path: 'data.uniqueData.posts',
+                select: [...postFieldRequestForCards, `translations`],
+                populate: {
+                    path: 'thumbnail',
+                    select: 'filePath',
+                },
+            }
+        ]).lean().exec();
+
+        this.widgets = allWidgets.reduce((widgetInPositions: any, widget: Widget) => {
+            widgetInPositions[widget.data.position] = [
+                ...(widgetInPositions[widget.data.position] || []),
+                widget,
+            ];
+            return widgetInPositions;
+        }, {});
+    }
+
+    getWidgets(positions:string[],locale?:string){
+        return positions.reduce((result, position) => {
+            result[position] = this.widgets?.[position] || [];
+            return result;
+        }, {});
     }
 
     getInitialSettings(){
@@ -55,6 +95,7 @@ class GlobalStore {
     getLocales(){
         return process.env.NEXT_PUBLIC_LOCALES.split(' ')
     }
+
     getLocalesExceptDefault(){
         return process.env.NEXT_PUBLIC_LOCALES.replace(process.env.NEXT_PUBLIC_DEFAULT_LOCALE ,'').split(' ')
     }

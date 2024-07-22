@@ -10,6 +10,7 @@ import { clientAllowedSortOptions } from '@repo/data-structures';
 import GlobalStore from '@store/GlobalStore';
 
 class WidgetController {
+
     static async findWidgetPosts(widgetData: any) {
         try {
             const cardAmountPerPage = GlobalStore.getCardAmountPerPage();
@@ -134,6 +135,8 @@ class WidgetController {
 
     static async getWidgets(req: Request, res: Response) {
         try {
+            // const widgetFromStore = GlobalStore.getWidgets(['home'])
+            // console.log(`console=> `,widgetFromStore?.home?.[1]?.data)
             const locale = req.query.locale;
             const locales = process.env.NEXT_PUBLIC_LOCALES.split(' ');
             const excludeOtherLanguagesQuery = locale

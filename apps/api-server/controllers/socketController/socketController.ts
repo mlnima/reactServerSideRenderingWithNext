@@ -53,6 +53,18 @@ export const initializeSocket = (io: any) => {
             }
         });
 
+        socket.on('iWantToPreviewAChatroom', async ({ chatroomId })=>{
+            if (!!chatroomId){
+                socket.join(chatroomId);
+                const dataToSend = {
+                    recentChatRoomMessages: Store.getChatroomMessagesById(chatroomId),
+                    onlineUsersList: Store.getOnlineUsersForChatroom(chatroomId),
+                };
+
+                socket.emit('initializeChatroomData', dataToSend);
+            }
+        })
+
         socket.on('iAmTyping', (chatroomId: string, username: string) => {
             try {
                 socket.broadcast.to(chatroomId).emit('someoneIsTyping', { username, chatroomId });

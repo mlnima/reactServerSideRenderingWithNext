@@ -7,15 +7,18 @@ import UploadImageButton from "./UploadImageButton";
 // import VoiceRecorderButton from "./VoiceRecorderButton";
 import RecordedAudioPreview from "./RecordedAudioPreview";
 import './ChatRoomTools.styles.scss'
-import {setAlert} from "@store/reducers/globalStateReducer";
+import {loginRegisterForm, setAlert} from "@store/reducers/globalStateReducer";
 
 interface IProps {
     chatroomId: string,
+    dictionary: {
+        [key: string]: string;
+    };
 
     setAutoScroll(value: boolean): void
 }
 
-const ChatRoomTools: FC<IProps> = ({chatroomId, setAutoScroll}) => {
+const ChatRoomTools: FC<IProps> = ({chatroomId, setAutoScroll,dictionary}) => {
     const inputRef = useRef<HTMLInputElement>(null);
 
     const {loggedIn} = useAppSelector(({user}) => user)
@@ -103,51 +106,65 @@ const ChatRoomTools: FC<IProps> = ({chatroomId, setAutoScroll}) => {
 
 
     useEffect(() => {
-
-        socket.on('someoneIsTyping', ({username, chatroomId}) => {
+        socket.on('someoneIsTyping', ({ username, chatroomId }) => {
             setSomeoneTypes({
                 ...someoneTypes,
                 username,
-                active: true
-            })
+                active: true,
+            });
 
             setTimeout(() => {
                 setSomeoneTypes({
                     ...someoneTypes,
                     username: '',
-                    active: false
-                })
-            }, 3000)
-
+                    active: false,
+                });
+            }, 3000);
         });
     }, []);
 
+    if (!loggedIn)
+        return (
+            <div className={'chatroomToolBoxNotLoggedIn'}>
+                <button className={'btn btn-primary'} onClick={() => dispatch(loginRegisterForm('login'))}>
+                    {dictionary?.['Login'] || 'Login'}
+                </button>
+                <button className={'btn btn-primary'} onClick={() => dispatch(loginRegisterForm('register'))}>
+                    {dictionary?.['Register'] || 'Register'}
+                </button>
+            </div>
+        );
+
     return (
         <form id={'chatroomToolBox'} onSubmit={e => onSubmitHandler(e)}>
-            {someoneTypes.active && <SomeoneIsTyping username={someoneTypes.username}/>}
+            {someoneTypes.active && <SomeoneIsTyping username={someoneTypes.username} />}
 
             <div id={'chatroomToolBoxItems'}>
-
-                {!!audioMessage ?
-                    <RecordedAudioPreview audioMessage={audioMessage} setAudioMessage={setAudioMessage}/> :
+                {!!audioMessage ? (
+                    <RecordedAudioPreview audioMessage={audioMessage} setAudioMessage={setAudioMessage} />
+                ) : (
                     <>
-                        <input id={'chatroomToolBoxInput'}
-                               type={'text'}
-                               maxLength={300}
-                               name={'messageData'}
-                               placeholder={'Type a message'}
-                               onChange={e => setMessageText(e.target.value)}
-                               onKeyDown={onStartTypingHandler}
-                               value={messageText}
+                        <input
+                            id={'chatroomToolBoxInput'}
+                            type={'text'}
+                            maxLength={300}
+                            name={'messageData'}
+                            placeholder={'Type a message'}
+                            onChange={e => setMessageText(e.target.value)}
+                            onKeyDown={onStartTypingHandler}
+                            value={messageText}
                         />
-                        <UploadImageButton inputRef={inputRef} chatroomId={chatroomId} authorId={_id}
-                                           setMessageText={setMessageText}/>
+                        <UploadImageButton
+                            inputRef={inputRef}
+                            chatroomId={chatroomId}
+                            authorId={_id}
+                            setMessageText={setMessageText}
+                        />
                         {/*<VoiceRecorderButton setAudioMessage={setAudioMessage}/>*/}
                     </>
-                }
+                )}
             </div>
         </form>
-
     );
 };
 export default ChatRoomTools;

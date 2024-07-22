@@ -13,7 +13,7 @@ export const dashboardAPIRequestBulkActionOnPosts = async (
 
 export const dashboardAPIRequestCheckAndRemoveDeletedVideos = async () => {
     return await AxiosInstance.get(
-        `/dashboard/posts/checkAndRemoveDeletedVideos`,
+        `/api/dashboard/posts/checkAndRemoveDeletedVideos`,
     );
 };
 
@@ -79,7 +79,7 @@ export const dashboardAPIRequestScrapYoutubeInfo = async (url: string) => {
 };
 
 export const dashboardAPIRequestUpdatePost = async (postData: {}) => {
-    return await AxiosInstance.put('/dashboard/post', {
+    return await AxiosInstance.put('/api/dashboard/post', {
         postData
     });
 };

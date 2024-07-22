@@ -13,7 +13,7 @@ export const dashboardAPIRequestDeletePage = async (_id:string)=>{
 }
 
 export const dashboardAPIRequestGetPage = async (_id:string)=>{
-    return await AxiosInstance.get('/dashboard/page',{
+    return await AxiosInstance.get('/api/dashboard/page',{
         params:{
             _id
         }

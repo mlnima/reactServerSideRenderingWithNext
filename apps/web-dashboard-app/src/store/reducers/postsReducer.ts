@@ -218,7 +218,7 @@ export const createNewPostAction = createAsyncThunk(
                 console.log(response.data?.savedPostData?._id);
                 if (response.data?.savedPostData?._id) {
                     navigate(
-                        `/dashboard/post?id=${response.data.savedPostData._id}`,
+                        `/api/dashboard/post?id=${response.data.savedPostData._id}`,
                     );
                 }
             })

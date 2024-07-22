@@ -858,6 +858,7 @@ class PostController {
 
     static async dashboardCreateNewPost(req: Request, res: Response) {
         const newPost = req.body.postData;
+
         try {
             const editedNewPost = {
                 ...newPost,
@@ -934,7 +935,6 @@ class PostController {
 
     static async dashboardUpdatePost(req: Request, res: Response) {
         const postUpdatedData = req.body.postData;
-
         try {
             const finalPostUpdatedData = {
                 ...postUpdatedData,

@@ -53,6 +53,12 @@ const ChatroomPageContent: FC<IProps> = ({ dictionary, pageData, locale }) => {
             };
             socket.emit('iWantToJoinToAChatroom', userDataForJoiningRoom);
         }
+
+        if (!user?.loggedIn){
+            socket.emit('iWantToPreviewAChatroom',{ chatroomId: pageData?.chatroom?._id});
+        }
+
+
     }, [user?.loggedIn, pageData?.chatroom?._id, user?.socketId]);
 
     useEffect(() => {
@@ -154,6 +160,7 @@ const ChatroomPageContent: FC<IProps> = ({ dictionary, pageData, locale }) => {
 
     useEffect(() => {
         socket.on('initializeChatroomData', initializeChatroomDataHandler);
+        socket.on('initializeChatroomData', initializeChatroomDataHandler);
         socket.on('aMessageDeletedFromChatroom', onAMessageWasDeleted);
         socket.on('aUserDisconnected', onAUserDisconnectedHandler);
         socket.on('aUserLeftTheChatroom', onAUserLeftTheChatroomHandler);
@@ -201,7 +208,7 @@ const ChatroomPageContent: FC<IProps> = ({ dictionary, pageData, locale }) => {
         return <Soft404 dictionary={dictionary} />;
     }
 
-    if (!user?.loggedIn) return <LoggedInRequirePageMessage dictionary={dictionary} />;
+    // if (!user?.loggedIn) return <LoggedInRequirePageMessage dictionary={dictionary} />;
 
     return (
         <div
@@ -228,7 +235,7 @@ const ChatroomPageContent: FC<IProps> = ({ dictionary, pageData, locale }) => {
                 gettingOlderMessages={gettingOlderMessages}
             />
 
-            <ChatRoomTools chatroomId={pageData?.chatroom?._id} setAutoScroll={setAutoScroll} />
+            <ChatRoomTools dictionary={dictionary} chatroomId={pageData?.chatroom?._id} setAutoScroll={setAutoScroll} />
             {preference.onlineUserListVisibility && (
                 <ChatRoomOnlineUsersList chatroomUsers={chatroomUsers} />
             )}

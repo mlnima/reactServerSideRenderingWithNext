@@ -1,3 +1,13 @@
+.chatroomToolBoxNotLoggedIn{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--secondary-background-color, #181818);
+}
+
+
 #chatroomToolBox{
   height: 50px;
   z-index: 1;

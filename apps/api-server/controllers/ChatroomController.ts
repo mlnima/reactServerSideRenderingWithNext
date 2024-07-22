@@ -124,9 +124,6 @@ class ChatroomController{
         }
     };
 
-
-
-
     static async getChatroom(req: Request, res: Response){
         try {
             const isValidId = mongoIdValidator(req.query.identifier);
