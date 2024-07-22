@@ -203,6 +203,6 @@ GlobalStore.connectToDatabase('API server').then(() => {
     runServer();
     initializeChatroomsToStore();
     GlobalStore.setInitialSettings()
-    GlobalStore.setWidgets()
+    // GlobalStore.setWidgets()
 });
 
