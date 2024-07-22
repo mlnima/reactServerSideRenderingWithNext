@@ -33,10 +33,10 @@ const CardImageRendererUsingNextImage: FC<CardImageNextPropTypes> =
                        height={240}
                        loading={index > 3 ? 'lazy' : 'eager'}
                        style={{
-                           objectFit: objectFit || 'contain',
+                           objectFit: objectFit || 'cover',
                            aspectRatio: aspectRatio || '16/9'
                        }}
-                       className={`card-image w-full aspect-${aspectRatio || 'video'} object-${objectFit || 'contain'}`}
+                       // className={`card-image w-full aspect-${aspectRatio || 'video'} object-${objectFit || 'cover'}`}
                 />
 
             </div>
@@ -50,10 +50,10 @@ const CardImageRendererUsingNextImage: FC<CardImageNextPropTypes> =
                      alt={mediaAlt || ''}
                      loading={index > 3 ? 'lazy' : 'eager'}
                      style={{
-                         objectFit: objectFit || 'contain',
+                         objectFit: objectFit || 'cover',
                          aspectRatio: aspectRatio || '16/9'
                      }}
-                     className={`card-image w-full aspect-${aspectRatio || 'video'} object-${objectFit || 'contain'}`}
+                     // className={`card-image w-full aspect-${aspectRatio || 'video'} object-${objectFit || 'cover'}`}
                 />
             </div>
         )

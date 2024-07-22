@@ -63,7 +63,7 @@ const CardImageRendererUseClient: FC<CardImageNextPropTypes> =
 
         const imageStyle = useMemo(() => {
            return {
-                    objectFit: objectFit || 'contain',
+                    objectFit: objectFit || 'cover',
                     aspectRatio: aspectRatio || '16/9',
             }
         }, [objectFit, aspectRatio]) as IImageStyle
