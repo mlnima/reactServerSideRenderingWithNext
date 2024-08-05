@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import _qualityConvertor from '../../asset/_qualityConvertor';
-import { Post } from 'typescript-types';
+import { Post } from "@repo/typescript-types";
 import CardTitle from '../../asset/CardTitle/CardTitle';
 import './VideoPostCard.scss';
 import '../postCard.scss';

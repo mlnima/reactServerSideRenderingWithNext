@@ -1,6 +1,6 @@
 'use client';
 import React, {FC} from "react";
-import {UniqueDataTypes} from "typescript-types";
+import {UniqueDataTypes} from "@repo/typescript-types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMoon} from "@fortawesome/free-solid-svg-icons/faMoon";
 import './DayModeNightMode.scss';

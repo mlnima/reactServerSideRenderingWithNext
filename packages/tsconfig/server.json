@@ -3,7 +3,8 @@
   "display": "expressServer",
   "extends": "./base.json",
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES2020",
+    "downlevelIteration": true,
     "allowSyntheticDefaultImports": true,
     "module": "CommonJS",
     "baseUrl": ".",
@@ -18,6 +19,10 @@
       "scripthost"
     ],
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
-  }
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "esModuleInterop": true
+  },
+  "exclude": ["node_modules", "dist"]
 }

@@ -6,7 +6,7 @@ import {WidgetModelStyledDiv} from './WidgetModel.style'
 import ActionButtons from "./ActionButtons";
 import UniqueFields from "./UniqueFields";
 import WidgetHeaderControl from "./WidgetHeaderControl/WidgetHeaderControl";
-import {Widget} from "typescript-types";
+import {Widget} from "@repo/typescript-types";
 import {useAppDispatch} from "@store/hooks";
 import {updateWidgetAction} from "@store/reducers/widgetsReducer";
 import {inputValueSimplifier} from "@repo/shared-util";

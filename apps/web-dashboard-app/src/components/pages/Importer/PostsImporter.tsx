@@ -1,7 +1,7 @@
 import React, {useState, useRef, ChangeEvent} from 'react';
 import { useSelector} from "react-redux";
 import styled from "styled-components";
-import {DashboardStore, Store} from "typescript-types";
+import {DashboardStore} from "@repo/typescript-types";
 import {createNewPostAction} from "@store/reducers/postsReducer";
 import {useAppDispatch} from "@store/hooks";
 import qualityConvertor from "@variables/qualityConvertor";

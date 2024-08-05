@@ -9,7 +9,7 @@ import ImageGallery from "./ImageGallery/ImageGallery";
 import ProductPrice from "./ProductPrice/ProductPrice";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {DashboardStore} from "typescript-types";
+import {DashboardStore} from "@repo/typescript-types";
 import {FC} from "react";
 import {useAppDispatch} from "@store/hooks";
 import {getPostScrapedDataAction} from "@store/reducers/postsReducer";

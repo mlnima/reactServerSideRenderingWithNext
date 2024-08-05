@@ -10,7 +10,7 @@ import {fetchUserPagePosts} from "@lib/fetch-requests/fetchPosts";
 import {fetchUserPageInitialData} from "@lib/fetch-requests/fetchUsers";
 import LoggedInRequirePageMessage from "@components/LoggedInRequireMessage/LoggedInRequirePageMessage";
 import PostsCardsRenderer from "@components/cards/CardsRenderer/PostsCardsRenderer/PostsCardsRenderer";
-import {Post} from "typescript-types";
+import {Post} from "@repo/typescript-types";
 import {loading} from "@store/reducers/globalStateReducer";
 import ProfileImageWithEditing from "../PrfileImageWithEditing/ProfileImageWithEditing";
 
@@ -166,7 +166,7 @@ const userPageContent: FC<IProps> = ({dictionary, username, locale}) => {
 
                 if (
                     //@ts-ignore
-                    postData?.posts?.length < (initialSettings?.contentSettings?.numberOfCardsPerPage || 20) &&
+                    postData?.posts?.length < (initialSettings?.contentSettings?.contentPerPage || 20) &&
                     !noMorePostToFetch
                 ) {
                     setNMoMorePostToFetch(true)

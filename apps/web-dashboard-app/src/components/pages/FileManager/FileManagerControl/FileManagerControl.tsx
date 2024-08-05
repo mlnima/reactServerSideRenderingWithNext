@@ -2,7 +2,7 @@ import React, { useRef, FC} from 'react';
 import styled from "styled-components";
 import { useSelector} from "react-redux";
 import {fileManagerEditState, uploadFileAction} from "@store/reducers/fileManagerReducer";
-import {DashboardStore, Store} from "typescript-types";
+import {DashboardStore, Store} from "@repo/typescript-types";
 import {useAppDispatch} from "@store/hooks";
 
 const FileManagerControlStyledDiv = styled.div`

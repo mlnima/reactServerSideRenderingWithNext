@@ -13,7 +13,7 @@ class PageController{
             }
         } catch (error) {
             console.error('Error fetching page:', error);
-            res.status(500).json({message: 'Something went wrong'});
+            return res.status(500).json({ message: 'Something Went Wrong' });
         }
     };
 
@@ -66,7 +66,7 @@ class PageController{
                 res.status(404).json({message:'Not Found'})
             })
         }catch (err){
-            res.status(500).json({message:'Something Went Wrong'})
+            return res.status(500).json({ message: 'Something Went Wrong' });
         }
     }
     static async dashboardGetPages(req: Request, res: Response){

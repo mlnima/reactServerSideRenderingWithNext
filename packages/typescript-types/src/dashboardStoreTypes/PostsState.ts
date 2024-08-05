@@ -7,5 +7,8 @@ export interface PostsState {
     posts?: Post[],
     meta?: Meta,
     metas?: Meta[],
+    statusesCount?: {
+        [key: string]: number;
+    }
     activeEditingLanguage: string
 }

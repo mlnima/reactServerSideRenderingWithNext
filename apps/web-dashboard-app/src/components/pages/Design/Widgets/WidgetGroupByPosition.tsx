@@ -4,7 +4,7 @@ import WidgetModel from "./WidgetModel/WidgetModel";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import Draggable from 'react-draggable';
-import {DashboardStore, Store} from "typescript-types";
+import {DashboardStore, Store} from "@repo/typescript-types";
 
 const WidgetGroupByPositionStyledDiv = styled.div`
   background-color: transparent;

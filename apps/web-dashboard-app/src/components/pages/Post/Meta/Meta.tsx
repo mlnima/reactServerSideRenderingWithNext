@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useSelector} from "react-redux";
 import { editPostAction} from "@store/reducers/postsReducer";
 import {uniqArrayBy} from "@repo/shared-util";
-import {DashboardStore, Store} from "typescript-types";
+import {DashboardStore, Store} from "@repo/typescript-types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useAppDispatch} from "@store/hooks";
 import {faXmark} from "@fortawesome/free-solid-svg-icons/faXmark";

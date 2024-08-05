@@ -1,5 +1,5 @@
 'use server';
-import {IClearCache} from "typescript-types";
+import {IClearCache} from "@repo/typescript-types";
 import {ReadonlyURLSearchParams} from "next/navigation";
 import {revalidatePath, revalidateTag} from "next/cache";
 

@@ -8,7 +8,7 @@ import WidgetsRenderer from '@components/widgets/widgetRenderer/WidgetsRenderer'
 import PostPage from '@components/PostsPage/PostsPage';
 import ActorsPageContentRenderer from '@components/metas/ActorsPageContentRenderer';
 import React from 'react';
-import { Meta } from 'typescript-types';
+import { Meta } from "@repo/typescript-types";
 import CategoriesPageContentRenderer from '@components/metas/CategoriesPageContentRenderer';
 import TagsPageContentRenderer from '@components/metas/TagsPageContentRenderer';
 import { capitalizeFirstLetters } from '@repo/shared-util';
@@ -32,7 +32,7 @@ const searchPage = async ({ params, searchParams }: IProps) => {
     const settingsData = await fetchSettings({ requireSettings: ['searchPageSettings'] });
     const sidebar = settingsData?.settings?.searchPageSettings?.sidebar;
     const initialSettingsData = await fetchSettings({ requireSettings: ['initialSettings'] });
-    const numberOfCardsPerPage = initialSettingsData?.settings?.initialSettings?.contentSettings?.numberOfCardsPerPage;
+    const contentPerPage = initialSettingsData?.settings?.initialSettings?.contentSettings?.contentPerPage;
 
     const widgetsData = await fetchWidgets({
         widgets: ['searchPageTop', 'searchPageLeftSidebar', 'searchPageBottom', 'searchPageRightSidebar'],
@@ -85,17 +85,17 @@ const searchPage = async ({ params, searchParams }: IProps) => {
                         <div className={'metaSectionCardsWrapper'}>
                             <ActorsPageContentRenderer
                                 renderPagination={false}
-                                totalCount={numberOfCardsPerPage}
+                                totalCount={contentPerPage}
                                 currentPage={currentPage}
                                 locale={locale}
-                                numberOfCardsPerPage={numberOfCardsPerPage}
+                                contentPerPage={contentPerPage}
                                 metas={groupingMetas.actors}
                             />
                         </div>
                     </div>
                 )}
                 <PostPage
-                    renderPagination={searchData?.totalCount > numberOfCardsPerPage}
+                    renderPagination={searchData?.totalCount > contentPerPage}
                     posts={searchData?.posts}
                     locale={locale}
                     totalCount={searchData?.totalCount}
@@ -112,9 +112,9 @@ const searchPage = async ({ params, searchParams }: IProps) => {
                             <CategoriesPageContentRenderer
                                 renderPagination={false}
                                 locale={locale}
-                                totalCount={numberOfCardsPerPage}
+                                totalCount={contentPerPage}
                                 currentPage={currentPage}
-                                numberOfCardsPerPage={numberOfCardsPerPage}
+                                contentPerPage={contentPerPage}
                                 metas={groupingMetas.categories}
                             />
                         </div>

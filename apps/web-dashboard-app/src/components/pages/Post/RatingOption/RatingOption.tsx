@@ -1,6 +1,6 @@
 import { useSelector} from "react-redux";
 import {FC} from "react";
-import {DashboardStore, } from "typescript-types";
+import {DashboardStore, } from "@repo/typescript-types";
 import {useAppDispatch} from "@store/hooks";
 import {editPostAction} from "@store/reducers/postsReducer";
 

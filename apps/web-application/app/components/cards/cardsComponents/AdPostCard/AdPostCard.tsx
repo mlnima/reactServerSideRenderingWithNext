@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import Link from 'next/link';
 import CardTitle from '../../asset/CardTitle/CardTitle';
 import dynamic from 'next/dynamic';
-import { Post } from 'typescript-types';
+import { Post } from "@repo/typescript-types";
 import { ratingCalculator } from '@repo/shared-util';
 import '../postCard.scss';
 import CardStats from '@components/cards/asset/CardStats/CardStats';

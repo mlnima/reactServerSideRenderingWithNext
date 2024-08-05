@@ -8,8 +8,8 @@ import TextInputFieldForWidget
     from "./TextInputFieldForWidget/TextInputFieldForWidget";
 import {useSelector} from "react-redux";
 import {widgetsStaticPositions} from "@repo/data-structures/dist/src";
-import {DashboardStore, Store} from "typescript-types";
-import { WidgetSettingsPropTypes} from "typescript-types";
+import {DashboardStore, Store} from "@repo/typescript-types";
+import { WidgetSettingsPropTypes} from "@repo/typescript-types";
 
 interface DefaultFieldsPropTypes {
     widgetData: any,

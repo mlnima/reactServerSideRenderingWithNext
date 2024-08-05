@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import MonacoEditor from "@components/common/MonacoEditor";
-import {UniqueDataTypes} from "typescript-types";
+import {UniqueDataTypes} from "@repo/typescript-types";
 
 interface AdvertiseWidgetModelFieldsPropTypes {
     uniqueData: UniqueDataTypes,

@@ -25,7 +25,7 @@ const CategoriesPage = async ({params, searchParams}: IProps) => {
     const settingsData = await fetchSettings({requireSettings: ['categoriesPageSettings']});
     const sidebar = settingsData?.settings?.categoriesPageSettings?.sidebar;
     const initialSettingsData = await fetchSettings({requireSettings: ['initialSettings']})
-    const numberOfCardsPerPage = initialSettingsData?.settings?.initialSettings?.contentSettings?.numberOfCardsPerPage;
+    const contentPerPage = initialSettingsData?.settings?.initialSettings?.contentSettings?.contentPerPage;
 
     const widgetsData = await fetchWidgets({
         widgets: [
@@ -46,7 +46,7 @@ const CategoriesPage = async ({params, searchParams}: IProps) => {
             metaType: 'categories',
             sort: searchParams?.sort || undefined,
             page: currentPage,
-            size: searchParams?.size || numberOfCardsPerPage,
+            size: searchParams?.size  ,
             startWith: searchParams?.startWith || undefined
         },
         locale
@@ -66,7 +66,7 @@ const CategoriesPage = async ({params, searchParams}: IProps) => {
                                                dictionary={dictionary}
                                                totalCount={metasData?.totalCount}
                                                currentPage={currentPage}
-                                               numberOfCardsPerPage={numberOfCardsPerPage}
+                                               contentPerPage={contentPerPage}
                                                metas={metasData?.metas}/>
 
                 <WidgetsRenderer dictionary={dictionary}

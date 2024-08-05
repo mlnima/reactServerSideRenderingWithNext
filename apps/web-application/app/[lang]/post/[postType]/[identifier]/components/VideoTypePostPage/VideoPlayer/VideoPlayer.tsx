@@ -2,7 +2,7 @@
 import React, { FC } from 'react';
 import { convertDurationStringToIso8601 } from '@repo/shared-util';
 import { convertDateToIsoString } from '@repo/shared-util';
-import { Post } from 'typescript-types';
+import { Post } from "@repo/typescript-types";
 import './VideoPlayer.styles.scss';
 import { clientCheckDeletedVideo } from '@repo/api-requests';
 import { clearACacheByTag } from '@lib/serverActions';

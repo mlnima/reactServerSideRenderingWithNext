@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Post } from 'typescript-types';
+import { Post } from "@repo/typescript-types";
 import PostsCardsRenderer from '@components/cards/CardsRenderer/PostsCardsRenderer/PostsCardsRenderer';
 
 interface IProps {

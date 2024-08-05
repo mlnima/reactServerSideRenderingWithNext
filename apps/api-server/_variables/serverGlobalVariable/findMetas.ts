@@ -1,6 +1,7 @@
 import metaSchema from '@schemas/metaSchema';
 import { metaFieldsRequestForCard } from '@repo/data-structures';
 import {multiQueryUniquer} from "@util/queryUtil";
+import GlobalStore from "@store/GlobalStore";
 
 interface FindMetasQueryTypes {
     [key: string]: any;
@@ -8,6 +9,7 @@ interface FindMetasQueryTypes {
 
 export const findMetas = async (query: FindMetasQueryTypes) => {
     try {
+        const contentPerPage = GlobalStore.getContentPerPage();
         const locale = query.locale;
         const statusQuery = { status: 'published' };
         const type = { type: query?.metaType };
@@ -20,9 +22,7 @@ export const findMetas = async (query: FindMetasQueryTypes) => {
                   ? { name: { $regex: notStartWithNumberRegex } }
                   : { name: { $regex: '^' + query.startWith } };
         const countQuery = { count: { $gt: 0 } };
-        const limit =
-            global?.initialSettings?.contentSettings?.numberOfCardsPerPage ||
-            20;
+        const limit = contentPerPage
         const page = query?.page || 1;
         const skip = page ? limit * (page - 1) : 0;
       //  const selectQuery = `name type ${query?.metaType !== 'tags' ? 'imageUrl' : ''} translations.${locale}.name`;

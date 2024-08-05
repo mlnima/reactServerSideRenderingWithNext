@@ -1,27 +1,30 @@
-import settingSchema from "@schemas/settingSchema";
+import settingSchema from '@schemas/settingSchema';
 import mongoose from 'mongoose';
-import defaultInitialSettings from '../tools/asset/defaultInitialSettings';
-import path from "path";
-import {Worker} from "worker_threads";
-import {Widget} from "typescript-types";
-import widgetSchema from "@schemas/widgetSchema";
-import {postFieldRequestForCards} from "@repo/data-structures";
+import path from 'path';
+import { Worker } from 'worker_threads';
+import { Widget } from '@repo/typescript-types';
+import widgetSchema from '@schemas/widgetSchema';
+import WidgetController from "../controllers/WidgetController";
 
 mongoose.Promise = global.Promise;
 mongoose.set('strictQuery', true);
 
 class GlobalStore {
-
-    initialSettings: any
-    widgets:{
-        [key:string]:Widget[]
-    }
+    initialSettings: any;
+    settings: {
+        [key: string]: {}[];
+    };
+    widgets: {
+        [key: string]: Widget[];
+    };
 
     constructor() {
-        this.initialSettings  = {};
-        this.widgets = {}
+        this.initialSettings = {};
+        this.widgets = {};
+        this.settings = {};
     }
-    async connectToDatabase(connectorName?: string){
+
+    async connectToDatabase(connectorName?: string) {
         try {
             const dbUser = process.env.DB_USER ? `${process.env.DB_USER}:` : '';
             const dbPass = process.env.DB_PASS ? `${process.env.DB_PASS}@` : '';
@@ -31,103 +34,205 @@ class GlobalStore {
             console.log(`mongoDBConnectionQueryGenerator()=> `, dbConnectQuery);
             await mongoose.connect(dbConnectQuery);
             console.log(`${connectorName || ''}* connected to Database *`);
-        }catch (error){
+        } catch (error) {
             console.log('Error connecting to Database', error);
             process.exit(1);
         }
     }
 
-    async setInitialSettings(){
-        try {
-            const initialSettings = await settingSchema
-                .findOne({ type: 'initialSettings' },null,{ lean: true })
-                .exec();
-            this.initialSettings = initialSettings.data;
-        }catch (error){
-            this.initialSettings = defaultInitialSettings.data;
+    async setServerStartupData() {
+        this.setSettings();
+        this.setWidgets();
+    }
+
+    async setWidgets() {
+        const allWidgets = await widgetSchema
+            .find({
+                'data.position': { $nin: ['deactivated', 'trash'] },
+            })
+            .populate([
+                {
+                    model: 'meta',
+                    path: 'data.uniqueData.metaData',
+                }
+            ])
+            .lean()
+            .exec();
+
+        for await (const widget of allWidgets) {
+            if (
+                widget?.data?.type === 'posts' ||
+                widget?.data?.type === 'postsList' ||
+                widget?.data?.type === 'postsSlider' ||
+                widget?.data?.type === 'postsSwiper'
+            ) {
+                //@ts-ignore
+                const { posts, totalCount } = await WidgetController.findWidgetPosts(widget.data);
+
+                widget.data.uniqueData = {
+                    ...widget.data.uniqueData,
+                    posts,
+                    totalCount
+                }
+            }
+        }
+
+        this.widgets = allWidgets.reduce((widgetInPositions: any, widget: Widget) => {
+            if (!widgetInPositions[widget?.data?.position]) {
+                widgetInPositions[widget.data.position] = [];
+            }
+            widgetInPositions[widget.data.position].push(widget);
+            return widgetInPositions;
+        }, {});
+
+        for (const position in this.widgets) {
+            this.widgets[position].sort((a, b) => a.data.widgetIndex - b.data.widgetIndex);
         }
     }
 
-    async setWidgets(){
-
-        const allWidgets = await widgetSchema.find({
-            'data.position': { $nin: ['deactivated', 'trash'] }
-        }).populate([
-            {
-                model: 'meta',
-                path: 'data.uniqueData.metaData',
-            },
-            {
-                model: 'post',
-                path: 'data.uniqueData.posts',
-                select: [...postFieldRequestForCards, `translations`],
-                populate: {
-                    path: 'thumbnail',
-                    select: 'filePath',
-                },
-            }
-        ]).lean().exec();
-
-        this.widgets = allWidgets.reduce((widgetInPositions: any, widget: Widget) => {
-            widgetInPositions[widget.data.position] = [
-                ...(widgetInPositions[widget.data.position] || []),
-                widget,
-            ];
-            return widgetInPositions;
+    async setSettings() {
+        const allSettings = await settingSchema.find({}).lean().exec();
+        this.settings = allSettings.reduce((final, current) => {
+            final[current.type] = current.data;
+            return final;
         }, {});
     }
 
-    getWidgets(positions:string[],locale?:string){
+    async setSetting(settingType: string, data) {
+        console.log(`${settingType} has been changed`)
+        this.settings[settingType] = data;
+    }
+
+    getSettings(requestedSettings: string[]) {
+        const SettingsToSend = requestedSettings.reduce((final, current) => {
+            final[current] = this.settings?.[current] || {};
+            return final;
+        }, {});
+
+        return SettingsToSend;
+    }
+
+    getSetting(requestedSetting: string) : {[key:string]:any} {
+        return this.settings?.[requestedSetting];
+    }
+
+    getWidgets(positions: string[], locale?: string) {
+        const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE;
         return positions.reduce((result, position) => {
-            result[position] = this.widgets?.[position] || [];
+            if (!this.widgets?.[position]) {
+                result[position] = [];
+                return result;
+            }
+
+            result[position] = this.widgets[position].map(widget => {
+                if (!!locale && locale !== defaultLocale) {
+                    if (
+                        widget?.data?.type === 'posts' ||
+                        widget?.data?.type === 'postsList' ||
+                        widget?.data?.type === 'postsSlider' ||
+                        widget?.data?.type === 'postsSwiper'
+                    ) {
+                        return {
+                            ...widget,
+                            data: {
+                                ...widget.data,
+                                translations: {
+                                    [locale]: widget.data.translations?.[locale],
+                                },
+                                uniqueData: {
+                                    ...widget.data.uniqueData,
+                                    posts: (widget.data?.uniqueData?.posts).map(post => {
+                                        return {
+                                            ...post,
+                                            translations: {
+                                                [locale]: post?.translations?.[locale] || {},
+                                            },
+                                        };
+                                    }),
+                                },
+                            },
+                        };
+                    }
+
+                    if (widget?.data?.type === 'meta' || widget?.data?.type === 'metaWithImage') {
+                        return {
+                            ...widget,
+                            data: {
+                                ...widget.data,
+                                translations: {
+                                    [locale]: widget.data.translations?.[locale],
+                                },
+                                uniqueData: {
+                                    ...widget.data.uniqueData,
+                                    metaData: (widget.data?.uniqueData?.metaData).map(meta => {
+                                        return {
+                                            ...meta,
+                                            translations: {
+                                                [locale]: meta?.translations?.[locale] || {},
+                                            },
+                                        };
+                                    }),
+                                },
+                            },
+                        };
+                    }
+
+                    return {
+                        ...widget,
+                        data: {
+                            ...widget.data,
+                            translations: {
+                                [locale]: widget.data.translations?.[locale],
+                            },
+                        },
+                    };
+                } else {
+                    const { translations, ...dataWithoutTranslations } = widget.data;
+                    return {
+                        ...widget,
+                        data: dataWithoutTranslations,
+                    };
+                }
+            });
+
             return result;
         }, {});
     }
 
-    getInitialSettings(){
-        return this.initialSettings
+    getContentPerPage() {
+        const initialSettings =  this.getSetting('initialSettings')
+        return initialSettings?.contentSettings?.contentPerPage || 20;
     }
 
-    getCardAmountPerPage(){
-        return this.initialSettings?.contentSettings?.numberOfCardsPerPage
+    getLocales({withDefault=true}) {
+        if (!withDefault){
+            return process.env.NEXT_PUBLIC_LOCALES.replace(process.env.NEXT_PUBLIC_DEFAULT_LOCALE, '').split(' ');
+        }
+        return process.env.NEXT_PUBLIC_LOCALES.split(' ');
     }
 
-    getLocales(){
-        return process.env.NEXT_PUBLIC_LOCALES.split(' ')
-    }
-
-    getLocalesExceptDefault(){
-        return process.env.NEXT_PUBLIC_LOCALES.replace(process.env.NEXT_PUBLIC_DEFAULT_LOCALE ,'').split(' ')
-    }
-
-    async execCommand(command:string){
+    async execCommand(command: string) {
         try {
-            const workerPath = path.join(__dirname,'../workers/commandExecutor/worker.js') ;
+            const workerPath = path.join(__dirname, '../workers/commandExecutor/worker.js');
 
-            const worker = new Worker(
-                workerPath,
-                {workerData:{command}}
-            )
+            const worker = new Worker(workerPath, { workerData: { command } });
 
-            worker.once('message',result =>{
-                worker.postMessage({ exit: true })
-                return result.response
-            })
+            worker.once('message', result => {
+                worker.postMessage({ exit: true });
+                return result.response;
+            });
 
             worker.on('error', error => {
-                console.log('error:',error);
+                console.log('error:', error);
             });
 
             worker.on('exit', exitCode => {
-                console.log('exitCode : ',exitCode);
-            })
-
-        }catch (err){
-            console.log(err)
+                console.log('exitCode : ', exitCode);
+            });
+        } catch (err) {
+            console.log(err);
         }
     }
-
 }
 
-
-export default new GlobalStore()
+export default new GlobalStore();

@@ -2,6 +2,7 @@
 import { Request } from 'express';
 import GlobalStore from '@store/GlobalStore';
 import { multiQueryUniquer } from './queryUtil';
+import globalStore from "@store/GlobalStore";
 
 
 export const excludePostsBySourceQueryGenerator = () => {
@@ -30,10 +31,8 @@ export const excludePostsBySourceQueryGenerator = () => {
 };
 
 export const reqQueryToMongooseOptions = (req: Request) => {
-    const initialSettings  = GlobalStore.getInitialSettings();
-    const limit = req.query.size
-        ? { limit: parseInt(multiQueryUniquer(req.query.size)) }
-        : { limit: initialSettings?.contentSettings?.numberOfCardsPerPage || 20 };
+    const contentPerPage = GlobalStore.getContentPerPage();
+    const limit = { limit: req.query.size?  parseInt(multiQueryUniquer(req.query.size)) : contentPerPage};
     const skip = req.query.page
         ? { skip: limit.limit * parseInt(multiQueryUniquer(req.query.page)) - limit.limit }
         : {};

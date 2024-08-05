@@ -12,11 +12,11 @@ type Props = {
 
 const alternatesGenerators = new AlternatesGenerators()
 const actorMetaGenerator = async ({params, searchParams}: Props, parent?: ResolvingMetadata): Promise<Metadata> => {
+
     const locale = i18n.locales.includes(params?.lang) ? params.lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const settingsData = await fetchSettings({requireSettings: ['actorPageSettings']});
     const fallbackImage = '/asset/images/default/no-image-available.png'
     const initialSettingsData = await fetchSettings({requireSettings: ['initialSettings']})
-    const numberOfCardsPerPage = initialSettingsData?.settings?.initialSettings?.contentSettings?.numberOfCardsPerPage;
     const currentPageQuery = searchParams?.page;
     const currentPage = (currentPageQuery && typeof currentPageQuery === 'string') ?
         parseInt(currentPageQuery, 10) : 1
@@ -27,7 +27,7 @@ const actorMetaGenerator = async ({params, searchParams}: Props, parent?: Resolv
             lang: params?.lang,
             metaId: params?.actorId,
             page: currentPage,
-            size: searchParams?.size || numberOfCardsPerPage
+            size: searchParams?.size
         },
         locale
     });

@@ -1,6 +1,6 @@
 'use client';
 import {FC} from "react";
-import {Post} from "typescript-types";
+import {Post} from "@repo/typescript-types";
 import './PostsListWidget.styles.scss'
 // import PromotionPostListCard from "@components/includes/cards/postsCards/PromotionPostListCard";
 

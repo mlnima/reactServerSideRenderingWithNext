@@ -37,7 +37,7 @@ const defaultInitialSettings = {
         },
         "contentSettings":{
             "numberOfCardsPerRowInMobile" : 2,
-            "numberOfCardsPerPage" : 20,
+            "contentPerPage" : 20,
         }
     }
 }

@@ -4,7 +4,7 @@ import Topbar from "./Navigation/Topbar";
 import Main from "./Main/Main";
 import Menu from "./Navigation/Menu";
 import {useSelector} from "react-redux";
-import {DashboardStore} from "typescript-types";
+import {DashboardStore} from "@repo/typescript-types";
 import {ActiveLoading} from "@repo/ui";
 import {useAppDispatch} from "@store/hooks";
 import {loading} from '@store/reducers/globalStateReducer'

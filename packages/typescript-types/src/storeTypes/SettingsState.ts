@@ -1,4 +1,4 @@
-import {DesignSettings, IdentitySettings, InitialSettings, MembershipSettings, PageSettings,UgcSettings} from "typescript-types";
+import {DesignSettings, IdentitySettings, InitialSettings, MembershipSettings, PageSettings,UgcSettings} from "@repo/typescript-types";
 
 export interface SettingsState {
     membershipSettings: MembershipSettings;

@@ -2,7 +2,7 @@
 'use client';
 import React, { useEffect, useRef, FC } from 'react';
 import ChatRoomMessage from './ChatRoomMessage';
-import { ChatroomMessage } from 'typescript-types';
+import { ChatroomMessage } from "@repo/typescript-types";
 import socket from '@lib/web-socket-client';
 import { sortArrayByPropertyOfObject } from '@repo/shared-util';
 import './ChatRoomMessageArea.styles.scss';

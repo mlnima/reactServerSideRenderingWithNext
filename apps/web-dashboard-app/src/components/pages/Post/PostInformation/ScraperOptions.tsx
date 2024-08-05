@@ -8,7 +8,7 @@ import {
     getSearchAndFindARelatedPostUrlAction
 } from "@store/reducers/postsReducer";
 import {useSelector} from "react-redux";
-import {DashboardStore} from "typescript-types";
+import {DashboardStore} from "@repo/typescript-types";
 import RelatedPostPreview
     from "@components/pages/Post/PostInformation/RelatedPostScrapper/RelatedPostPreview/RelatedPostPreview";
 

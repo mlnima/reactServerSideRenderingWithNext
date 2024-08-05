@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {WidgetData} from "typescript-types";
+import {WidgetData} from "@repo/typescript-types";
 
 interface MediaWidgetTypePropTypes{
     widgetData:WidgetData,

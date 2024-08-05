@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {DashboardStore} from "typescript-types";
+import {DashboardStore} from "@repo/typescript-types";
 import TextEditors from '@components/common/TextEditors/TextEditors'
 
 let TitleDescriptionStyledDiv = styled.div`

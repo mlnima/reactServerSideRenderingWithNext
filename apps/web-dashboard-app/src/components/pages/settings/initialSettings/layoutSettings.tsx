@@ -1,6 +1,6 @@
 import React, {FC, useState} from "react";
 import styled from "styled-components";
-import {InitialSettings} from "typescript-types";
+import {InitialSettings} from "@repo/typescript-types";
 import MonacoEditor from "@components/common/MonacoEditor";
 import UserConfigMenu from "web-application/app/components/global/UserConfigMenu/UserConfigMenu";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";

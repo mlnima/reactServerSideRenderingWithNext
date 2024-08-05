@@ -1,5 +1,5 @@
 import {FC} from "react";
-import {IdentitySettings} from "typescript-types";
+import {IdentitySettings} from "@repo/typescript-types";
 import {convertVariableNameToName} from "@repo/shared-util";
 import styled from "styled-components";
 const Style = styled.div`

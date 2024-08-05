@@ -1,7 +1,7 @@
 import {convertVariableNameToName} from "@repo/shared-util";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {DashboardStore, Store} from "typescript-types";
+import {DashboardStore, Store} from "@repo/typescript-types";
 import {FC} from "react";
 
 let StyledTextarea = styled.textarea`

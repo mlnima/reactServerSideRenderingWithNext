@@ -3,7 +3,7 @@ import React, { FC, useState, useEffect } from 'react';
 import Select from 'react-select';
 import { uniqArrayBy } from '@repo/shared-util';
 import { clientAPIRequestGetMetaSuggestion } from '@repo/api-requests';
-import { Meta } from 'typescript-types';
+import { Meta } from "@repo/typescript-types";
 import './MetaDataSelector.styles.scss';
 import { setAlert } from '@store/reducers/globalStateReducer';
 import { useAppDispatch, useAppSelector } from '@store/hooks';

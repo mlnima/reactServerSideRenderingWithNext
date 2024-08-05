@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {Meta} from "typescript-types";
+import {Meta} from "@repo/typescript-types";
 import './CategoriesCardsRenderer.scss'
 import {convertMetasTypeToSingular} from "@repo/shared-util";
 import CategoryCard from "@components/cards/cardsComponents/CategoryCard/CategoryCard";

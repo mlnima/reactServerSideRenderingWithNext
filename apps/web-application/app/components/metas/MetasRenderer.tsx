@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Meta } from 'typescript-types';
+import { Meta } from "@repo/typescript-types";
 import Link from 'next/link';
 import { capitalizeFirstLetter, convertMetasTypeToSingular } from '@repo/shared-util';
 import { groupingArrayOfMetas } from '@repo/shared-util';

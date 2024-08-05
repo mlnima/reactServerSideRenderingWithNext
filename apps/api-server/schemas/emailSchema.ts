@@ -1,5 +1,5 @@
 import {model, Schema, Document} from "mongoose";
-import {IEmail} from "typescript-types";
+import {IEmail} from "@repo/typescript-types";
 
 const emailSchema = new Schema({
     from: {

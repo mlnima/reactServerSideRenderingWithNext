@@ -16,7 +16,6 @@ const tagMetaGenerator = async ({params, searchParams}: Props, parent?: Resolvin
     const settingsData = await fetchSettings({requireSettings: ['tagPageSettings']});
     const fallbackImage = '/asset/images/default/no-image-available.png'
     const initialSettingsData = await fetchSettings({requireSettings: ['initialSettings']})
-    const numberOfCardsPerPage = initialSettingsData?.settings?.initialSettings?.contentSettings?.numberOfCardsPerPage;
     const currentPageQuery = searchParams?.page;
     const currentPage = (currentPageQuery && typeof currentPageQuery === 'string') ?
         parseInt(currentPageQuery, 10) : 1
@@ -27,7 +26,7 @@ const tagMetaGenerator = async ({params, searchParams}: Props, parent?: Resolvin
             lang: params?.lang,
             metaId: params?.tagId,
             page: currentPage,
-            size: searchParams?.size || numberOfCardsPerPage
+            size: searchParams?.size
         },
         locale
     });

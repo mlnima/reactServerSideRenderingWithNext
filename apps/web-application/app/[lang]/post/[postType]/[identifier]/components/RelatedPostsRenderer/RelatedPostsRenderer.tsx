@@ -1,7 +1,7 @@
 import {FC} from "react";
 import './RelatedPostsRenderer.scss';
 import PostsCardsRenderer from "@components/cards/CardsRenderer/PostsCardsRenderer/PostsCardsRenderer";
-import {Post} from "typescript-types";
+import {Post} from "@repo/typescript-types";
 
 interface IProps{
     locale:string,

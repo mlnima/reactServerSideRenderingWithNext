@@ -3,7 +3,7 @@ import {useSelector} from "react-redux";
 import styled from "styled-components";
 import {userStatus, userRoles} from "@repo/data-structures/dist/src";
 import {convertVariableNameToName} from "@repo/shared-util";
-import {DashboardStore, Store} from "typescript-types";
+import {DashboardStore, Store} from "@repo/typescript-types";
 import {useAppDispatch} from "@store/hooks";
 import {useParams, useSearchParams} from "react-router-dom";
 import {
@@ -96,7 +96,7 @@ const User = () => {
     }
 
     const onNewAPIKeyRequest = () => {
-        dispatch(generateNewAPIKeyAction(null))
+        dispatch(generateNewAPIKeyAction())
         dispatch(getUserDataAction(userId))
     }
 

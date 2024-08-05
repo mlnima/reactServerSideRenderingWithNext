@@ -2,7 +2,7 @@ import React,{FC,Fragment} from 'react';
 import styled from "styled-components";
 import {fileTypeDetector} from "@repo/shared-util";
 import {useSelector} from "react-redux";
-import {DashboardStore, Store} from "typescript-types";
+import {DashboardStore, Store} from "@repo/typescript-types";
 import {fileManagerEditState, uploadFileAction} from "@store/reducers/fileManagerReducer";
 import {useAppDispatch} from "@store/hooks";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";

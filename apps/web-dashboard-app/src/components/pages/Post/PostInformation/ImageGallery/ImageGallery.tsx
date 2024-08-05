@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useRef, FC} from 'react';
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {DashboardStore, Store} from "typescript-types";
+import {DashboardStore, Store} from "@repo/typescript-types";
 import {uploadFileAction} from "@store/reducers/fileManagerReducer";
 import {useAppDispatch} from "@store/hooks";
 import {faXmark} from "@fortawesome/free-solid-svg-icons/faXmark";

@@ -25,7 +25,7 @@ class MessengerController {
             res.json({ messages: conversationData?.messages || [] });
         } catch (err) {
             console.log(err);
-            res.status(500);
+      return      res.status(500).json({ message: 'Something Went Wrong' });
         }
     }
 
@@ -56,7 +56,7 @@ class MessengerController {
             res.json({ conversationsList });
         } catch (err) {
             console.log(err);
-            res.status(500);
+            return res.status(500).json({ message: 'Something Went Wrong' });
         }
     }
 
@@ -85,7 +85,7 @@ class MessengerController {
             res.json({ conversation });
         } catch (err) {
             console.log(err);
-            res.status(500);
+            return res.status(500).json({ message: 'Something Went Wrong' });
         }
     }
 
@@ -110,7 +110,7 @@ class MessengerController {
                 res.status(200).json({ conversation });
             }
         } catch (error) {
-            res.status(500);
+            return res.status(500).json({ message: 'Something Went Wrong' });
         }
     }
 }

@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import styled from "styled-components";
 import { useSelector} from "react-redux";
 import MonacoEditor from "./MonacoEditor";
-import {DashboardStore, Store} from "typescript-types";
+import {DashboardStore, Store} from "@repo/typescript-types";
 import {useAppDispatch} from "@store/hooks";
 import {editDesign,updateSettingAction} from "@store/reducers/settingsReducer";
 

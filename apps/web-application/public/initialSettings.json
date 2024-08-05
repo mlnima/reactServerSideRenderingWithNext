@@ -51,7 +51,7 @@
     "logoWidth": 160,
     "logoHeight": 40,
     "primaryModeColors": "",
-    "numberOfCardsPerPage": 25
+    "numberOfCardsPerPage": 30
   },
   "headDataSettings": {
     "title": "Positron Local Tests",
@@ -109,6 +109,7 @@
         "showViewsOnCard": true,
         "showDateOnCard": true
       }
-    }
+    },
+    "numberOfCardsPerPage": 40
   }
 }

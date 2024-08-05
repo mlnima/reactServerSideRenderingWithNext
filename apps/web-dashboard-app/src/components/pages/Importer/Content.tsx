@@ -1,6 +1,6 @@
 import React, {useState, useRef} from 'react';
 import {useSelector} from "react-redux";
-import {DashboardStore, Store} from "typescript-types";
+import {DashboardStore} from "@repo/typescript-types";
 import {createNewPostAction} from "@store/reducers/postsReducer";
 import {useAppDispatch} from "@store/hooks";
 

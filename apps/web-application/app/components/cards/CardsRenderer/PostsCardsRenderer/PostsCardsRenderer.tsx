@@ -1,5 +1,5 @@
 import {FC} from "react";
-import {Post} from "typescript-types";
+import {Post} from "@repo/typescript-types";
 import dynamic from "next/dynamic";
 import './PostsCardsRenderer.scss';
 import ServerSideStore from "@store/ServerSideStore";

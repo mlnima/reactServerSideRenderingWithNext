@@ -35,6 +35,14 @@ export const clientAPIRequestGetEditingPost = async (_id: string) => {
     });
 };
 
+export const APISearchSuggestions = async (userInput: string) => {
+    return await AxiosInstance.get(`/api/v1/posts/search/suggest`, {
+        params: {
+            userInput,
+        },
+    });
+};
+
 export const clientAPIRequestGetPosts = async (currentQuery: any, medaId?: string | null) => {
     const sort = !!currentQuery?.sort ? { sort: currentQuery?.sort } : { sort: 'updatedAt' };
     const postType = postTypeValidator(currentQuery?.postType) ? { postType: currentQuery?.postType } : {};

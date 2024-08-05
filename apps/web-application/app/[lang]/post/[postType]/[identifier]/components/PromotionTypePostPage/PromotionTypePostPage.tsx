@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
-import { Post } from 'typescript-types';
+import { Post } from "@repo/typescript-types";
 import PostDescription from '../PostDescription/PostDescription';
 import PostMetasRenderer from '../PostMetasRenderer/PostMetasRenderer';
 import WidgetsRenderer from '@components/widgets/widgetRenderer/WidgetsRenderer';
-import { Widget } from 'typescript-types';
+import { Widget } from "@repo/typescript-types";
 import ActionButtons from '../ActionButtons/ActionButtons';
 import './PromotionTypePostPage.scss';
 import RelatedPostsRenderer from '../RelatedPostsRenderer/RelatedPostsRenderer';

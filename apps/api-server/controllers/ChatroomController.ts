@@ -32,7 +32,7 @@ class ChatroomController{
             res.json({messages:conversationData?.messages||[]});
         } catch (err) {
             console.log(err);
-            res.status(500);
+            res.status(500).json({ message: 'Something Went Wrong' });
         }
     };
     static async getConversationsList(req: Request, res: Response){
@@ -67,7 +67,7 @@ class ChatroomController{
             res.json({conversationsList});
         } catch (err) {
             console.log(err);
-            res.status(500);
+            res.status(500).json({ message: 'Something Went Wrong' });
         }
     };
     static async getAConversation(req: Request, res: Response){
@@ -96,7 +96,7 @@ class ChatroomController{
             res.json({ conversation });
         } catch (err) {
             console.log(err);
-            res.status(500);
+            res.status(500).json({ message: 'Something Went Wrong' });
         }
     };
     static async startAConversation(req: Request, res: Response){
@@ -120,7 +120,7 @@ class ChatroomController{
             }
 
         } catch (error) {
-            res.status(500)
+            res.status(500).json({ message: 'Something Went Wrong' });
         }
     };
 
@@ -142,7 +142,7 @@ class ChatroomController{
             res.json({ chatroom: currentChatroom, chatrooms: allTheChatrooms });
         } catch (error) {
             console.error('Error fetching chatrooms:', error);
-            res.status(500).json({ message: 'Something went wrong' });
+            res.status(500).json({ message: 'Something Went Wrong' });
         }
     };
 

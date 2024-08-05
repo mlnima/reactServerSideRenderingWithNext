@@ -24,7 +24,7 @@
     "skipLibCheck": true,
     "types": ["node"],
     "noEmit": false,
-    "strict": true,
+    "strict": false,
     "composite": false,
     "inlineSources": false,
     "noUnusedLocals": false,

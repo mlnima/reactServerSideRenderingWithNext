@@ -6,7 +6,7 @@ import {convertVariableNameToName} from "@repo/shared-util";
 import {widgetsTypes,widgetsStaticPositions} from "@repo/data-structures/dist/src";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {DashboardStore, Store} from "typescript-types";
+import {DashboardStore, Store} from "@repo/typescript-types";
 import defaultWidgetsData from "./defaultWidgetsData";
 import {useAppDispatch} from "@store/hooks";
 import {createNewWidgetAction} from "@store/reducers/widgetsReducer";

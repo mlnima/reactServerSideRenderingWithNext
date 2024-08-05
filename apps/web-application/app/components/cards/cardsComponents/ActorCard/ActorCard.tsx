@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Meta } from 'typescript-types';
+import { Meta } from "@repo/typescript-types";
 import Link from 'next/link';
 import { capitalizeFirstLetter } from '@repo/shared-util';
 import CardTitle from '@components/cards/asset/CardTitle/CardTitle';

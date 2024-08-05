@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import dynamic from 'next/dynamic';
 import CardTitle from '../../asset/CardTitle/CardTitle';
-import { Post } from 'typescript-types';
+import { Post } from "@repo/typescript-types";
 import '../postCard.scss';
 import Link from 'next/link';
 import CardViews from '@components/cards/asset/CardViews/CardViews';

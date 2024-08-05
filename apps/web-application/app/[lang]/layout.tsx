@@ -47,7 +47,6 @@ const RootLayout = async ({ children, params: { lang } }: { children: ReactNode;
     });
 
     const initialSettings = initialSettingsData?.settings?.initialSettings;
-
     ServerSideStore.setInitialSettings(initialSettings);
 
     const staticWidgetsData = await fetchWidgets({

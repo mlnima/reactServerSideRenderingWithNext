@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { WidgetData } from 'typescript-types';
+import { WidgetData } from "@repo/typescript-types";
 import dynamic from 'next/dynamic';
 import './WidgetWrapper.scss';
 import WidgetFooter from '@components/widgets/widgetWrapper/WidgetFooter/WidgetFooter';

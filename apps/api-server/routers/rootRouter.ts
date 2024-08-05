@@ -47,6 +47,7 @@ router.get('/dashboard/meta/setMetaThumbnailsAndCount', adminAuthMiddleware, Met
 router.get('/v1/posts', PostController.getPosts);
 router.get('/v1/posts/author', cacheSuccesses, PostController.getUserPagePosts);
 router.get('/v1/posts/search', PostController.searchPosts);
+router.get('/v1/posts/search/suggest', PostController.searchSuggestions);
 router.get('/v1/post', PostController.getPost);
 router.get('/v1/post/editing', PostController.getPost);
 // router.get('/v1/post/exist', PostController.checkPostExist);

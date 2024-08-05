@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import { DashboardStore } from 'typescript-types';
+import { DashboardStore } from "@repo/typescript-types";
 import ContentSettings from '@components/pages/settings/initialSettings/ContentSettings';
 import HeadDataSettings from '@components/pages/settings/initialSettings/HeadDataSettings';
 import MembershipSettings from '@components/pages/settings/initialSettings/MembershipSettings';

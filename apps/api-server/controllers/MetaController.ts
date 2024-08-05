@@ -63,7 +63,7 @@ class MetaController {
             res.json({ ...resultMetaFindQueries });
         } catch (err) {
             console.error(err);
-            res.sendStatus(500);
+            return res.status(500).json({ message: 'Something Went Wrong' });
         }
     }
 
@@ -88,7 +88,7 @@ class MetaController {
             res.json({ meta });
         } catch (err) {
             console.error(err);
-            res.sendStatus(500);
+            return res.status(500).json({ message: 'Something Went Wrong' });
         }
     }
 
@@ -154,7 +154,7 @@ class MetaController {
                     return res.json({ updated: updatedMeta, message: 'updated' });
                 } catch (err) {
                     console.error('Error While Trying To Update Meta:', err);
-                    return res.status(500).json({ message: 'Error While Trying To Update Meta', error: err });
+                    return res.status(500).json({ message: 'Something Went Wrong' });
                 }
             } else {
                 try {
@@ -163,12 +163,12 @@ class MetaController {
                     return res.json({ updated: savedMeta, message: 'updated' });
                 } catch (err) {
                     console.error('Error While Trying To Save Meta:', err);
-                    return res.status(500).json({ message: 'Error While Trying To Save Meta', error: err });
+                    return res.status(500).json({ message: 'Something Went Wrong' });
                 }
             }
         } catch (error) {
             console.error('General Error:', error);
-            return res.status(500).json({ message: 'An unexpected error occurred', error });
+            return res.status(500).json({ message: 'Something Went Wrong' });
         }
     }
 
@@ -247,7 +247,7 @@ class MetaController {
             }
             res.json({ message: 'Metas Deleted' });
         } catch (error) {
-            res.status(500).json({ message: 'Can Not Delete', error });
+            return res.status(500).json({ message: 'Something Went Wrong' });
         }
     }
 
@@ -275,7 +275,7 @@ class MetaController {
                 res.status(404).json({ message: 'Not Found' });
             }
         } catch (error) {
-            res.status(500).json({ message: 'Server Error', error });
+            return res.status(500).json({ message: 'Something Went Wrong' });
         }
     }
 

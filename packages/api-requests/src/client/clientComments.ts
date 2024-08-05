@@ -1,5 +1,5 @@
 import AxiosInstance from "../lib/AxiosInstance";
-import {NewComment} from "typescript-types";
+import {NewComment} from "@repo/typescript-types";
 
 export const clientAPIRequestGetPostComments = async (postId:string) => {
     return await AxiosInstance.get(`/api/v1/posts/getComments?onDocument=${postId}`)

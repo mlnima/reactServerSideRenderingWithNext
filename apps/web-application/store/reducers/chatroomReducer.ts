@@ -3,7 +3,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
 import {uniqArrayBy} from "@repo/shared-util";
-import {ChatroomState} from "typescript-types";
+import {ChatroomState} from "@repo/typescript-types";
 
 const initialState:ChatroomState = {
     autoScroll: true,

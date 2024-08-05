@@ -5,7 +5,7 @@ import {useSearchParams} from "react-router-dom";
 import {useAppDispatch} from "@store/hooks";
 import {editChatroomFieldAction, getChatroomAction} from "@store/reducers/chatroomsReducer";
 import {useSelector} from "react-redux";
-import {DashboardStore} from "typescript-types";
+import {DashboardStore} from "@repo/typescript-types";
 import {
     dashboardAPIRequestUpdateChatroom,
     dashboardAPIRequestCreateChatroom,

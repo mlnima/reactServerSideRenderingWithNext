@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {Store} from "typescript-types";
+import {Store} from "@repo/typescript-types";
 import {useSearchParams} from "react-router-dom";
 import React, {useEffect, useMemo, useState} from "react";
 import paramsObjectGenerator from "../../../../variables/paramsObjectGenerator";
@@ -28,7 +28,7 @@ const AssetSize = () => {
     }
 
     useEffect(() => {
-        setCurrentSize(parseInt(query.size) || initialSettings?.contentSettings?.numberOfCardsPerPage || 20 )
+        setCurrentSize(parseInt(query.size) || initialSettings?.contentSettings?.contentPerPage || 20 )
     }, [query]);
 
     return (

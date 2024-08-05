@@ -24,8 +24,8 @@ const searchMetaGenerator = async ({ params: { lang, keyword }, searchParams }: 
     const settingsData = await fetchSettings({ requireSettings: ['initialSettings'] });
     const siteName = settingsData?.settings?.initialSettings?.headDataSettings?.siteName || '';
     const initialSettingsData = await fetchSettings({ requireSettings: ['initialSettings'] });
-    const numberOfCardsPerPage =
-        initialSettingsData?.settings?.initialSettings?.contentSettings?.numberOfCardsPerPage;
+    const contentPerPage =
+        initialSettingsData?.settings?.initialSettings?.contentSettings?.contentPerPage;
 
     const currentPageQuery = searchParams?.page;
     const currentPage =
@@ -38,7 +38,6 @@ const searchMetaGenerator = async ({ params: { lang, keyword }, searchParams }: 
         lang: locale,
         keyword: keyword,
         page: currentPage,
-        size: numberOfCardsPerPage,
     };
 
     const searchData = await fetchSearch({ queryObject, locale });

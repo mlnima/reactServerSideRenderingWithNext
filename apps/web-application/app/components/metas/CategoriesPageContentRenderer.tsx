@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Meta } from 'typescript-types';
+import { Meta } from "@repo/typescript-types";
 import CategoriesCardsRenderer from '@components/cards/CardsRenderer/CategoriesCardsRenderer/CategoriesCardsRenderer';
 import Pagination from '@components/Pagination/Pagination';
 
@@ -9,7 +9,7 @@ interface IProps {
     locale: string;
     totalCount: number;
     currentPage: number;
-    numberOfCardsPerPage: number;
+    contentPerPage: number;
     dictionary: {
         [key: string]: string;
     };
@@ -21,7 +21,7 @@ const CategoriesPageContentRenderer: FC<IProps> = ({
     renderPagination,
     totalCount,
     currentPage,
-    numberOfCardsPerPage,
+                                                       contentPerPage,
     dictionary,
 }) => {
     return (
@@ -36,7 +36,7 @@ const CategoriesPageContentRenderer: FC<IProps> = ({
                 <Pagination
                     totalCount={totalCount}
                     currentPage={currentPage}
-                    numberOfCardsPerPage={numberOfCardsPerPage}
+                    contentPerPage={contentPerPage}
                 />
             )}
         </>

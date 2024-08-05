@@ -3,7 +3,7 @@
 // import {convertVariableNameToName, LanguagesOptions} from "@repo/shared-util";
 // import styled from "styled-components";
 // import {useSelector} from "react-redux";
-// import {DashboardStore, utils} from "typescript-types";
+// import {DashboardStore, utils} from "@repo/typescript-types";
 // import TitleDescriptionSettingFields from "./TitleDescriptionSettingFields";
 // import {useAppDispatch} from "@utils/hooks";
 // import {editIdentityAction, updateSettingAction} from "@utils/reducers/settingsReducer";

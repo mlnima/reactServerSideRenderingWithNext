@@ -6,7 +6,7 @@ import {faBars} from '@fortawesome/free-solid-svg-icons'
 import {faUser} from '@fortawesome/free-solid-svg-icons'
 import {setSidebarStatus} from "@store/reducers/globalStateReducer";
 import {useSelector} from "react-redux";
-import {DashboardStore} from "typescript-types";
+import {DashboardStore} from "@repo/typescript-types";
 import React, {useEffect} from "react";
 import {faHome} from "@fortawesome/free-solid-svg-icons/faHome";
 import {faEraser} from "@fortawesome/free-solid-svg-icons/faEraser";

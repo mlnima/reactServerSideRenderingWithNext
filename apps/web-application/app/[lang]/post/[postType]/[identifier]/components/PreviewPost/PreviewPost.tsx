@@ -1,7 +1,7 @@
 'use client';
 import {FC} from "react";
-import {Post} from "typescript-types";
-import {Widget} from "typescript-types";
+import {Post} from "@repo/typescript-types";
+import {Widget} from "@repo/typescript-types";
 import dynamic from "next/dynamic";
 import Csr from "@components/global/Csr";
 import {useAppSelector} from "@store/hooks";

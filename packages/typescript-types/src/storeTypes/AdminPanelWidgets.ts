@@ -1,4 +1,4 @@
-import {Widget} from "typescript-types";
+import {Widget} from "@repo/typescript-types";
 
 export interface AdminPanelWidgets {
     adminPanelWidgets: {

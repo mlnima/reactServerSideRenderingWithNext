@@ -1,7 +1,7 @@
 import {FC} from "react";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {DashboardStore} from "typescript-types";
+import {DashboardStore} from "@repo/typescript-types";
 
 const Style = styled.div``;
 

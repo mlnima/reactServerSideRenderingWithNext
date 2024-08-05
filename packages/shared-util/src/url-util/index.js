@@ -112,3 +112,11 @@ export const doesUrlHasQueries = url => {
         return false;
     }
 };
+
+export const urlSearchParamsToObject =  (searchParams)=>{
+    const params = {};
+    for (let [key, value] of searchParams.entries()) {
+        params[key] = value;
+    }
+    return params;
+}

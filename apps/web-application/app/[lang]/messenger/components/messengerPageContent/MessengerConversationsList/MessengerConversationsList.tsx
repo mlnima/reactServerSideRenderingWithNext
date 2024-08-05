@@ -1,5 +1,5 @@
 import MessengerConversationPreview from "./MessengerConversationPreview/MessengerConversationPreview";
-import {IMessengerConversation} from "typescript-types";
+import {IMessengerConversation} from "@repo/typescript-types";
 import {sortArrayByPropertyOfObject} from '@repo/shared-util';
 import {uniqArrayBy} from "@repo/shared-util";
 import {FC, useEffect, useRef} from "react";

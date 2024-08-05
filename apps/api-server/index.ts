@@ -27,12 +27,11 @@ import cors from 'cors';
 import compression from 'compression';
 import path from 'path';
 import http from 'http';
-import cacheSuccesses from './middlewares/apiCache';
+// import cacheSuccesses from './middlewares/apiCache';
 import loggerMiddleware from './middlewares/loggerMiddleware';
 import { initializeSocket } from './controllers/socketController/socketController';
 import initializeChatroomsToStore from './controllers/socketController/initializeChatroomsToStore';
 import { createProxyMiddleware } from 'http-proxy-middleware';
-import * as process from 'process';
 import rootRouter from "./routers/rootRouter";
 
 // Create an Express application
@@ -87,9 +86,12 @@ const runServer = () => {
     app.use(cookieParser());
     app.use(fileUpload());
 
-    app.use(bodyParser());
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: true }));
+    // app.use(bodyParser());
+    // app.use(bodyParser.urlencoded({ extended: false }))
     // app.use(bodyParser.json());
-    // app.use(bodyParser.urlencoded({ extended: false }));
+
     app.use(xmlParser());
     app.use(compression({ filter: shouldCompress }));
 
@@ -202,7 +204,9 @@ const runServer = () => {
 GlobalStore.connectToDatabase('API server').then(() => {
     runServer();
     initializeChatroomsToStore();
-    GlobalStore.setInitialSettings()
+    // GlobalStore.setInitialSettings()
     // GlobalStore.setWidgets()
+    GlobalStore.setServerStartupData()
+    // GlobalStore.setSettings()
 });
 

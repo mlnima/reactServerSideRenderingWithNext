@@ -53,7 +53,7 @@ export interface InitialSettings{
     },
     contentSettings?:{
         numberOfCardsPerRowInMobile: number,
-        numberOfCardsPerPage?: number,
+        contentPerPage ?: number,
         cardsWidthDesktop: number,
         maxInnerContentWidth: number,
         postSettings:{

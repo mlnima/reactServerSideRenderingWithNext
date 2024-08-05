@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Editor from "@monaco-editor/react";
 import {useSelector} from "react-redux";
-import {DashboardStore} from "typescript-types";
+import {DashboardStore} from "@repo/typescript-types";
 import {
     editTranslationsFileAction,
     readTranslationsFileAction,

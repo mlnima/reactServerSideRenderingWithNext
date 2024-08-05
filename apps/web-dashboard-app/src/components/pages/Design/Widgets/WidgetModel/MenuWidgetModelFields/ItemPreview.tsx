@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import styled from "styled-components";
 import EditItemForm from "@components/pages/Design/Widgets/WidgetModel/MenuWidgetModelFields/EditItemForm";
-import {IMenuItem, WidgetData} from "typescript-types";
+import {IMenuItem, WidgetData} from "@repo/typescript-types";
 import {inputValueSimplifier} from "@repo/shared-util";
 
 const Styles = styled.div`

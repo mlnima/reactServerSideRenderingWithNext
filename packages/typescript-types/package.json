@@ -1,5 +1,5 @@
 {
-  "name": "typescript-types",
+  "name": "@repo/typescript-types",
   "version": "1.0.0",
   "private": true,
   "main": "./index.ts",
@@ -13,6 +13,6 @@
     "dist/**"
   ],
   "dependencies": {
-    "typescript": "^5.5.3"
+
   }
 }

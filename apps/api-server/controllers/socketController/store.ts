@@ -1,4 +1,4 @@
-import { ChatroomMessage } from 'typescript-types';
+import { ChatroomMessage } from '@repo/typescript-types';
 
 class Store {
 

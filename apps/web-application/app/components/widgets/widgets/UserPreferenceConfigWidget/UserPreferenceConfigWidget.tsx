@@ -1,6 +1,6 @@
 'use client';
 import React, {FC, useEffect, useRef, useState} from "react";
-import {UniqueDataTypes} from "typescript-types";
+import {UniqueDataTypes} from "@repo/typescript-types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEarthAmerica, faGear, faLightbulb} from "@fortawesome/free-solid-svg-icons";
 import './UserPreferenceConfigWidget.scss'

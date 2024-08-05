@@ -217,7 +217,7 @@ class UserController {
             res.json({ userData: user });
         } catch (err) {
             console.error(err);
-            res.status(500).send();
+            return res.status(500).json({ message: 'Something Went Wrong' });
         }
     }
 
@@ -322,7 +322,7 @@ class UserController {
             res.status(200).json(userData);
         } catch (error) {
             console.error('Error in getUserPageData function:', error);
-            res.status(500).json({ message: 'Something went wrong' });
+            return res.status(500).json({ message: 'Something Went Wrong' });
         }
     }
 
@@ -341,7 +341,7 @@ class UserController {
             res.status(200).json({ message: 'Followed successfully' });
         } catch (err) {
             console.log(err);
-            res.status(500);
+            return res.status(500).json({ message: 'Something Went Wrong' });
         }
     }
 
@@ -359,7 +359,7 @@ class UserController {
             res.status(200).json({ message: 'Unfollowed successfully' });
         } catch (err) {
             console.log(err);
-            res.status(500);
+            return res.status(500).json({ message: 'Something Went Wrong' });
         }
     }
 
@@ -433,7 +433,7 @@ class UserController {
             })
             .catch(err => {
                 console.error(err);
-                res.status(500).json({ message: 'Something went wrong. Please try again later.' });
+                return res.status(500).json({ message: 'Something Went Wrong' });
             });
     }
 

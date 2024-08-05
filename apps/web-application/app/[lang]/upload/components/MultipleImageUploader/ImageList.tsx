@@ -1,7 +1,7 @@
 'use client';
 import React, { MouseEventHandler, useState } from 'react';
 import { ImageItem } from './ImageItem';
-import { Post } from 'typescript-types';
+import { Post } from "@repo/typescript-types";
 import { v4 as uuidv4 } from 'uuid';
 import './ImageList.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

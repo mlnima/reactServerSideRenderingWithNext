@@ -2,7 +2,7 @@ import React, {useEffect, useMemo, useState} from 'react';
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {LanguagesOptions} from "@repo/ui";
-import {DashboardStore} from "typescript-types";
+import {DashboardStore} from "@repo/typescript-types";
 import {useAppDispatch} from "@store/hooks";
 import {useSearchParams} from "react-router-dom";
 import {deleteMetaAction, editMetaAction, getMetaAction, updateMetaAction} from "@store/reducers/postsReducer";

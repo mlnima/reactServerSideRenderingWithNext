@@ -5,7 +5,7 @@ import {RootState} from "@store/store";
 // import {
 //     loadOlderMessagesAction
 // } from "@utils/reducers/messengerActions/loadOlderMessagesAction";
-// import {IMessengerConversation} from "typescript-types";
+// import {IMessengerConversation} from "@repo/typescript-types";
 // import {deleteAConversationAction} from "@utils/reducers/messengerActions/deleteAConversation";
 // import {startAConversationAction} from "@utils/reducers/messengerActions/startAConversationAction";
 import {MessengerState} from "typescript-types/src/storeTypes/MessengerState";

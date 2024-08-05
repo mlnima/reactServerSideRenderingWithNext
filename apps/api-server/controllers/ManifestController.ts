@@ -11,7 +11,8 @@ const baseOutputPath = path.join(
 class ManifestController{
 
     static generateManifestJson (){
-        const initialSettings = globalStore.getInitialSettings()
+       // const initialSettings = globalStore.getInitialSettings()
+        const initialSettings = globalStore.getSetting('initialSettings')
         const headDataSettings = initialSettings?.headDataSettings
 
         const name = headDataSettings.title ? {name:headDataSettings.title} :{};

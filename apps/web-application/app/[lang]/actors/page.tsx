@@ -26,7 +26,7 @@ const actorsPage = async ({params, searchParams}: IProps) => {
     const settingsData = await fetchSettings({requireSettings: ['actorsPageSettings']});
     const sidebar = settingsData?.settings?.actorsPageSettings?.sidebar;
     const initialSettingsData = await fetchSettings({requireSettings: ['initialSettings']})
-    const numberOfCardsPerPage = initialSettingsData?.settings?.initialSettings?.contentSettings?.numberOfCardsPerPage;
+    const contentPerPage = initialSettingsData?.settings?.initialSettings?.contentSettings?.contentPerPage;
 
     const widgetsData = await fetchWidgets({
         widgets: [
@@ -47,7 +47,7 @@ const actorsPage = async ({params, searchParams}: IProps) => {
             metaType: 'actors',
             sort: searchParams?.sort || undefined,
             page: currentPage,
-            size: searchParams?.size || numberOfCardsPerPage,
+            size: searchParams?.size  ,
             startWith: searchParams?.startWith || undefined
         },
         locale
@@ -67,7 +67,7 @@ const actorsPage = async ({params, searchParams}: IProps) => {
                                            currentPage={currentPage}
                                            locale={locale}
                                            dictionary={dictionary}
-                                           numberOfCardsPerPage={numberOfCardsPerPage}
+                                           contentPerPage={contentPerPage}
                                            metas={metasData?.metas}/>
 
 

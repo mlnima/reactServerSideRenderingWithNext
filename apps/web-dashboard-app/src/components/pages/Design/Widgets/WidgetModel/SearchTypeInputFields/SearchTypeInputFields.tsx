@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, {FC} from 'react';
-import {UniqueDataTypes, WidgetSettingsPropTypes} from "typescript-types";
+import {UniqueDataTypes, WidgetSettingsPropTypes} from "@repo/typescript-types";
 
 interface SearchTypeInputFieldsPropTypes {
     uniqueData: UniqueDataTypes,

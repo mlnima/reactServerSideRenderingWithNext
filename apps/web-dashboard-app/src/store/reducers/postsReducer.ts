@@ -2,9 +2,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import { AxiosResponse } from 'axios';
-import { Meta } from 'typescript-types';
+import { Meta ,PostRaw} from '@repo/typescript-types';
 import { loading, setAlert } from './globalStateReducer';
-import { PostRaw } from 'typescript-types';
+
 import {
     AxiosInstance,
     dashboardAPIRequestGetPosts,
@@ -26,14 +26,15 @@ import {
     dashboardAPIRequestFindAnotherSimilarSourceLink,
 } from '@repo/api-requests';
 
-interface AdminPanelPosts {
+interface IInitialState {
     post: {
         title: string;
         description: string;
     };
+    relatedPosts: [];
     totalCount: number;
-    statusesCount?: {
-        [key: string]: number;
+    statusesCount: {
+        // [key: string]: number;
     }
     posts: [];
     meta: Meta;
@@ -41,7 +42,7 @@ interface AdminPanelPosts {
     activeEditingLanguage: 'default';
 }
 
-const initialState = {
+const initialState:IInitialState = {
     post: {
         title: '',
         description: '',
@@ -159,7 +160,6 @@ export const getPostsAction = createAsyncThunk(
         thunkAPI.dispatch(loading(true));
         return await dashboardAPIRequestGetPosts(queriesData)
             .then((res: AxiosResponse<any>) => {
-                console.log(res);
                 return {
                     posts: res.data?.posts,
                     totalCount: res.data?.totalCount,

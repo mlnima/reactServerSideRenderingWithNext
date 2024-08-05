@@ -1,6 +1,6 @@
 import {convertVariableNameToName} from "@repo/shared-util";
 import {useSelector} from "react-redux";
-import {DashboardStore, Store} from "typescript-types";
+import {DashboardStore, Store} from "@repo/typescript-types";
 import {FC} from "react";
 
 interface PropTypes{

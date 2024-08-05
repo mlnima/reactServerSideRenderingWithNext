@@ -1,6 +1,6 @@
 import {FC} from "react";
 import SideBarWidgetArea from './SidebarWidgetArea';
-import {Widget} from "typescript-types";
+import {Widget} from "@repo/typescript-types";
 
 interface SidebarWidgetAreaRendererPropTypes {
     sidebar:string|boolean|undefined

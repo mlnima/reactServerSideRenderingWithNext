@@ -1,5 +1,5 @@
 import {FC} from "react";
-import {Meta} from "typescript-types";
+import {Meta} from "@repo/typescript-types";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 const CardLastUpdate = dynamic(() => import('../CardLastUpdate/CardLastUpdate'),

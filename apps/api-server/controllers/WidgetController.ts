@@ -2,7 +2,7 @@
 import { Request, Response } from 'express';
 import widgetSchema from '@schemas/widgetSchema';
 import { postFieldRequestForCards } from '@repo/data-structures/dist/src';
-import { Widget } from 'typescript-types';
+import { Widget } from '@repo/typescript-types';
 import updateMetasWidget from '@util/widgets/updateMetasWidget';
 import updatePostsListEntireByCategoriesWidget from '@util/widgets/updatePostsListEntireByCategoriesWidget';
 import postSchema from '@schemas/postSchema';
@@ -13,7 +13,7 @@ class WidgetController {
 
     static async findWidgetPosts(widgetData: any) {
         try {
-            const cardAmountPerPage = GlobalStore.getCardAmountPerPage();
+            const cardAmountPerPage = GlobalStore.getContentPerPage();
             const metaId = widgetData?.uniqueData?.selectedMetaForPosts || widgetData?.selectedMetaForPosts;
             const postType = widgetData?.uniqueData?.postType || widgetData?.postType;
             const sort = widgetData?.uniqueData?.sort || widgetData?.sort;
@@ -53,28 +53,28 @@ class WidgetController {
         }
     }
 
-    // static async updatePostsWidget(widgetData, widgetId, res) {
-    //     try {
-    //         const { posts, totalCount } = await WidgetController.findWidgetPosts(widgetData);
-    //
-    //         const updateData = {
-    //             ...widgetData,
-    //             uniqueData: {
-    //                 ...(widgetData?.uniqueData || {}),
-    //                 posts: posts.map(post => post?._id),
-    //                 totalCount,
-    //             },
-    //         };
-    //
-    //         const updatedWidget = await widgetSchema
-    //             .findByIdAndUpdate(widgetId, { data: updateData }, { new: true })
-    //             .exec();
-    //         res.status(200).json({ updatedWidget });
-    //     } catch (error) {
-    //         console.error(error);
-    //         res.status(503).json({ message: 'Something went wrong. Please try again later.' });
-    //     }
-    // }
+    static async updatePostsWidget(widgetData, widgetId, res) {
+        try {
+            // const { posts, totalCount } = await WidgetController.findWidgetPosts(widgetData);
+
+            const updateData = {
+                ...widgetData,
+                uniqueData: {
+                    ...(widgetData?.uniqueData || {}),
+                    // posts: posts.map(post => post?._id),
+                    // totalCount,
+                },
+            };
+
+            const updatedWidget = await widgetSchema
+                .findByIdAndUpdate(widgetId, { data: updateData }, { new: true })
+                .exec();
+            res.status(200).json({ updatedWidget });
+        } catch (error) {
+            console.error(error);
+            res.status(503).json({ message: 'Something went wrong. Please try again later.' });
+        }
+    }
 
     //---------------------Client----------------------
 
@@ -135,36 +135,28 @@ class WidgetController {
 
     static async getWidgets(req: Request, res: Response) {
         try {
-            // const widgetFromStore = GlobalStore.getWidgets(['home'])
-            // console.log(`console=> `,widgetFromStore?.home?.[1]?.data)
             const locale = req.query.locale;
-            const locales = process.env.NEXT_PUBLIC_LOCALES.split(' ');
-            const excludeOtherLanguagesQuery = locale
-                ? {
-                      select: locales
-                          .map(languageCode => (languageCode !== locale ? `-data.translations.${languageCode}` : ''))
-                          .join(' '),
-                  }
-                : {};
             const requestedWidgets = Array.isArray(req.query.widget) ? req.query.widget : [req.query.widget];
-            const widgetsDataQuery = requestedWidgets.map(position =>
-                position === 'all' ? {} : { 'data.position': position },
-            );
-            const fields =
-                locale && locale !== process.env.NEXT_PUBLIC_DEFAULT_LOCALE
-                    ? [...postFieldRequestForCards, `translations.${locale}.title`]
-                    : postFieldRequestForCards;
 
-            let widgets = await widgetSchema
-                .find({ $and: [{ $or: [...widgetsDataQuery] }] }, {}, excludeOtherLanguagesQuery)
-                .populate([
-                    {
-                        model: 'meta',
-                        path: 'data.uniqueData.metaData',
-                    },
-                ])
-                .lean()
-                .exec();
+
+            // const widgetsDataQuery = requestedWidgets.map(position =>
+            //     position === 'all' ? {} : { 'data.position': position },
+            // );
+            // const fields =
+            //     locale && locale !== process.env.NEXT_PUBLIC_DEFAULT_LOCALE
+            //         ? [...postFieldRequestForCards, `translations.${locale}.title`]
+            //         : postFieldRequestForCards;
+            //
+            // let widgets = await widgetSchema
+            //     .find({ $and: [{ $or: [...widgetsDataQuery] }] }, {}, excludeOtherLanguagesQuery)
+            //     .populate([
+            //         {
+            //             model: 'meta',
+            //             path: 'data.uniqueData.metaData',
+            //         },
+            //     ])
+            //     .lean()
+            //     .exec();
 
             // {
             //     model: 'post',
@@ -204,35 +196,44 @@ class WidgetController {
             //     return widgetInPositions;
             // }, {});
 
-            const widgetsGroupedByPosition = await Promise.all(
-                widgets.map(async widget => {
-                    if (
-                        widget?.data?.type === 'posts' ||
-                        widget?.data?.type === 'postsList' ||
-                        widget?.data?.type === 'postsSlider' ||
-                        widget?.data?.type === 'postsSwiper'
-                    ) {
-                        const { posts, totalCount } = await WidgetController.findWidgetPosts(widget.data);
-                        // @ts-ignore
-                        widget.data.uniqueData.posts = posts;
-                        widget.data.uniqueData.totalCount = totalCount;
-                    }
-                    return widget;
-                }),
-            ).then(modifiedWidgets => {
-                return modifiedWidgets.reduce((widgetInPositions: any, widget: Widget) => {
-                    widgetInPositions[widget.data.position] = [
-                        ...(widgetInPositions[widget.data.position] || []),
-                        widget,
-                    ];
-                    return widgetInPositions;
-                }, {});
-            });
+            // const widgetsGroupedByPosition = await Promise.all(
+            //     widgets.map(async widget => {
+            //         if (
+            //             widget?.data?.type === 'posts' ||
+            //             widget?.data?.type === 'postsList' ||
+            //             widget?.data?.type === 'postsSlider' ||
+            //             widget?.data?.type === 'postsSwiper'
+            //         ) {
+            //             const { posts, totalCount } = await WidgetController.findWidgetPosts(widget.data);
+            //             // @ts-ignore
+            //             widget.data.uniqueData.posts = posts;
+            //             widget.data.uniqueData.totalCount = totalCount;
+            //         }
+            //         return widget;
+            //     }),
+            // ).then(modifiedWidgets => {
+            //     return modifiedWidgets.reduce((widgetInPositions: any, widget: Widget) => {
+            //         widgetInPositions[widget.data.position] = [
+            //             ...(widgetInPositions[widget.data.position] || []),
+            //             widget,
+            //         ];
+            //         return widgetInPositions;
+            //     }, {});
+            // });
 
-            // console.log(`console=> `,widgetsGroupedByPosition?.home?.[0]?.data?.uniqueData)
+
+
+
+            const widgetFromStore = GlobalStore.getWidgets(requestedWidgets,locale)
+
+            // if (requestedWidgets.includes('home')){
+            //     console.log(`widgetFromStore=> `,widgetFromStore?.home?.[0]?.data)
+            // }
+
 
             res.json({
-                widgets: widgetsGroupedByPosition,
+                //widgets: widgetsGroupedByPosition,
+                widgets: widgetFromStore,
             });
         } catch (err) {
             console.log(err);
@@ -271,7 +272,8 @@ class WidgetController {
             // ) {
             //     await WidgetController.updatePostsWidget(widgetData, widgetId, res);
             // } else
-            if (widgetData.type === 'meta' || widgetData.type === 'metaWithImage') {
+
+                if (widgetData.type === 'meta' || widgetData.type === 'metaWithImage') {
                 await updateMetasWidget(widgetData, widgetId, res);
             } else if (widgetData.type === 'postsListEntireByCategories') {
                 await updatePostsListEntireByCategoriesWidget(widgetData, widgetId, res);
@@ -280,12 +282,14 @@ class WidgetController {
                     .findByIdAndUpdate(req.body?.widgetData._id, { data: widgetData }, { new: true })
                     .exec()
                     .then(updatedWidget => {
+
                         res.json({ updatedWidget });
                     })
                     .catch(err => {
                         console.log(err);
                     });
             }
+            GlobalStore.setWidgets()
         } catch (error) {
             console.log(error);
         }

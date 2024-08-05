@@ -1,6 +1,6 @@
 import got from 'got';
 import jsdom from 'jsdom';
-import { Post } from 'typescript-types';
+import { Post } from '@repo/typescript-types';
 import { Simulate } from 'react-dom/test-utils';
 import error = Simulate.error;
 

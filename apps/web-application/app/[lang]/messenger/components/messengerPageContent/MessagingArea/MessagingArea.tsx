@@ -5,7 +5,7 @@ import {uniqArrayBy} from '@repo/shared-util'
 import {useAppSelector} from "@store/hooks";
 import {sortArrayByPropertyOfObject} from '@repo/shared-util';
 import './MessagingArea.styles.scss'
-import {IMessengerConversation} from "typescript-types";
+import {IMessengerConversation} from "@repo/typescript-types";
 
 interface IProps {
     onLoadOlderMessages: () => void

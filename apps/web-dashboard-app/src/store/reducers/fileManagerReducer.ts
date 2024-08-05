@@ -3,7 +3,7 @@ import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {loading, setAlert} from "./globalStateReducer";
 import {AxiosError, AxiosResponse} from "axios";
 import {RootState} from "../store";
-import {PostRaw} from "typescript-types";
+import {PostRaw} from "@repo/typescript-types";
 import {
     dashboardAPIRequestReadPath,
     dashboardAPIRequestDeleteFile,

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Post } from 'typescript-types';
+import { Post } from "@repo/typescript-types";
 import PostsCardsRenderer from '@components/cards/CardsRenderer/PostsCardsRenderer/PostsCardsRenderer';
 import Pagination from '@components/Pagination/Pagination';
 
@@ -8,14 +8,10 @@ interface PostPageTypes {
     posts: Post[];
     locale: string;
     totalCount: number;
-    numberOfCardsPerPage: number;
     currentPage: number;
     dictionary: {
         [key: string]: string;
-    };
-    contentSettings: {
-        [key: string]: string;
-    };
+    }
 }
 
 const PostsPage: FC<PostPageTypes> = ({

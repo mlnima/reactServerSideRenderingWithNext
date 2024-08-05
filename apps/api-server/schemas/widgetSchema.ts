@@ -1,5 +1,5 @@
 import {model, Schema, Document} from "mongoose";
-import {Widget} from "typescript-types";
+import {Widget} from "@repo/typescript-types";
 
 const widgetDataSchema = new Schema({
     extraClassName: String,

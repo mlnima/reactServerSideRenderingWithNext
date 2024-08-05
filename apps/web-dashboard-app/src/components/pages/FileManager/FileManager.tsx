@@ -4,7 +4,7 @@ import FileManagerArea from './FileManagerArea/FileManagerArea';
 import UploadedPopView from './UploadedPopView/UploadedPopView'
 import CreateNewFileFolderPop from "./CreateNewFileFolderPop/CreateNewFileFolderPop";
 import {useSelector} from "react-redux";
-import {DashboardStore, Store} from "typescript-types";
+import {DashboardStore, Store} from "@repo/typescript-types";
 import {readThePathAction} from "@store/reducers/fileManagerReducer";
 import {useAppDispatch} from "@store/hooks";
 

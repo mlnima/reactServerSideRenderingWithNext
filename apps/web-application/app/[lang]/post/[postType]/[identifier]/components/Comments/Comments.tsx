@@ -4,7 +4,7 @@ import {useAppDispatch, useAppSelector} from "@store/hooks";
 import {loading, loginRegisterForm, setAlert} from "@store/reducers/globalStateReducer";
 import './Comments.styles.scss'
 import UserProfileImage from "@components/UserProfileImage/UserProfileImage";
-import {Comment, NewComment} from "typescript-types";
+import {Comment, NewComment} from "@repo/typescript-types";
 import { dashboardAPIRequestDeleteComments} from "@repo/api-requests";
 import {fetchComments,postNewComment} from "@lib/fetch-requests/comment";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";

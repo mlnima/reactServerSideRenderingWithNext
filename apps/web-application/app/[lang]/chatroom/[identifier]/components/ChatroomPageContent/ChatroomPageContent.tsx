@@ -11,8 +11,7 @@ import ChatRoomOnlineUsersList from '../ChatRoomOnlineUsersList/ChatRoomOnlineUs
 import { IChatroomUsers, INewUserJoinData, IPreference } from '../interfaces';
 import './ChatroomPageContent.styles.scss';
 import Soft404 from '@components/Soft404/Soft404';
-import { ChatroomMessage } from 'typescript-types';
-import LoggedInRequirePageMessage from '@components/LoggedInRequireMessage/LoggedInRequirePageMessage';
+import { ChatroomMessage } from "@repo/typescript-types";
 
 interface IProps {
     locale: string;
@@ -42,7 +41,10 @@ const ChatroomPageContent: FC<IProps> = ({ dictionary, pageData, locale }) => {
     const isLoading = useRef<boolean>(false);
 
     useEffect(() => {
+        // console.log(`iWantToJoinToAChatroom=> `,!isJoined.current , user?.loggedIn , !!pageData?.chatroom?._id)
+        isJoined.current = false;
         if (!isJoined.current && user?.loggedIn && !!pageData?.chatroom?._id) {
+
             const userDataForJoiningRoom = {
                 chatroomId: pageData?.chatroom?._id,
                 joiner: {
@@ -159,7 +161,6 @@ const ChatroomPageContent: FC<IProps> = ({ dictionary, pageData, locale }) => {
     };
 
     useEffect(() => {
-        socket.on('initializeChatroomData', initializeChatroomDataHandler);
         socket.on('initializeChatroomData', initializeChatroomDataHandler);
         socket.on('aMessageDeletedFromChatroom', onAMessageWasDeleted);
         socket.on('aUserDisconnected', onAUserDisconnectedHandler);

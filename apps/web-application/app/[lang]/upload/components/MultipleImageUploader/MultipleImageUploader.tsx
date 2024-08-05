@@ -5,7 +5,7 @@ import { faCamera } from '@fortawesome/free-solid-svg-icons/faCamera';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons/faCirclePlus';
 import './MultipleImageUploader.styles.scss';
 import { clientAPIRequestDeletePostImage } from '@repo/api-requests';
-import { Post } from 'typescript-types';
+import { Post } from "@repo/typescript-types";
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 
 export interface MultipleImageUploaderProps {

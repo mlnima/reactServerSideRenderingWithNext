@@ -5,7 +5,7 @@ import { useAppDispatch } from '@store/hooks';
 import { editInitialSettings } from '@store/reducers/settingsReducer';
 import { postTypes } from '@repo/data-structures';
 import { useSelector } from 'react-redux';
-import { DashboardStore } from 'typescript-types';
+import { DashboardStore } from "@repo/typescript-types";
 import { inputValueSimplifier } from '@repo/shared-util';
 
 const Style = styled.div`

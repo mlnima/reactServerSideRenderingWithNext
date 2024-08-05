@@ -1,7 +1,7 @@
 'use client';
 import Link from "next/link";
 import {FC} from "react";
-import {Comment} from 'typescript-types'
+import {Comment} from "@repo/typescript-types"
 
 interface IProps{
     comments:Comment[]

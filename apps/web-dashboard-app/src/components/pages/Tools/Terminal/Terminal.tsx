@@ -1,9 +1,8 @@
 import React, {useState, useRef} from 'react';
-// import {animateScroll} from 'react-scroll'
 import styled from "styled-components";
 import { useSelector} from "react-redux";
 
-import {DashboardStore, Store} from "typescript-types";
+import {DashboardStore, Store} from "@repo/typescript-types";
 import {useAppDispatch} from "@store/hooks";
 import {terminalCommandExecutor} from "@store/reducers/terminalReducer";
 

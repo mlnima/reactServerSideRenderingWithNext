@@ -1,5 +1,5 @@
 // @ts-nocheck
-import {AdminPanelOrders} from "typescript-types";
+import {AdminPanelOrders} from "@repo/typescript-types";
 
 
 const initialState = {

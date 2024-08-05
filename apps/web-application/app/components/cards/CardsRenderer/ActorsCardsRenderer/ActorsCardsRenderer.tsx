@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import ActorCard from '@components/cards/cardsComponents/ActorCard/ActorCard';
-import { Meta} from "typescript-types";
+import { Meta} from "@repo/typescript-types";
 import './ActorsCardsRenderer.styles.scss'
 import {convertMetasTypeToSingular} from "@repo/shared-util";
 

@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, {FC} from 'react';
 import TextInputFieldForWidget from "../TextInputFieldForWidget/TextInputFieldForWidget";
-import {UniqueDataTypes, WidgetSettingsPropTypes} from "typescript-types";
+import {UniqueDataTypes, WidgetSettingsPropTypes} from "@repo/typescript-types";
 
 interface LinkTypeWidgetModelFieldsPropTypes {
     widgetSettings: WidgetSettingsPropTypes,

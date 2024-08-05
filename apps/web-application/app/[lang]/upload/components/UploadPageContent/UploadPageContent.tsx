@@ -14,7 +14,7 @@ import { postTypes, videoQualities, postStatuses, UGCPostImagesLimit } from '@re
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
-import { Post } from 'typescript-types';
+import { Post } from "@repo/typescript-types";
 import './UploadPageContent.scss';
 import { faEye } from '@fortawesome/free-solid-svg-icons/faEye';
 import deepEqual from 'deep-equal';

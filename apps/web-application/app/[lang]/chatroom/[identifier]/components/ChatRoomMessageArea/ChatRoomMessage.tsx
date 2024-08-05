@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { formatDistance } from 'date-fns';
-import { ChatroomMessage } from 'typescript-types';
+import { ChatroomMessage } from "@repo/typescript-types";
 import { UserPreviewImage } from '@repo/ui';
 import Link from 'next/link';
 import AdminAuthorMessageActionMenu from './AdminAuthorMessageActionMenu';

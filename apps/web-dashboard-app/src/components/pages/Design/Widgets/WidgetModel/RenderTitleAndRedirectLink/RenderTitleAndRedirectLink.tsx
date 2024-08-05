@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, {FC} from 'react';
-import {WidgetData, WidgetSettingsPropTypes} from "typescript-types";
+import {WidgetData, WidgetSettingsPropTypes} from "@repo/typescript-types";
 
 interface RenderTitleAndRedirectLinkPropTypes {
     widgetData: WidgetData,

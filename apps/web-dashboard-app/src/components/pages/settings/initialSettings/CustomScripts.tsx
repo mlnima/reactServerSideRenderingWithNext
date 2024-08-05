@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import { useSelector} from "react-redux";
-import {DashboardStore} from "typescript-types";
+import {DashboardStore} from "@repo/typescript-types";
 import {editIdentityAction, updateSettingAction} from "@store/reducers/settingsReducer";
 import {useAppDispatch} from "@store/hooks";
 import Editor from '@monaco-editor/react'

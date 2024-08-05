@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {useSelector} from "react-redux";
-import {DashboardStore, Store} from "typescript-types";
+import {DashboardStore, Store} from "@repo/typescript-types";
 
 interface DurationPropTypes {
     onChangeHandler: any,

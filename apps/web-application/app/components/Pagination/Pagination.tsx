@@ -14,10 +14,10 @@ interface IProps {
 const Pagination: FC<IProps> = ({ totalCount, currentPage = 1 }) => {
     const searchParams = useSearchParams();
     const pathname = usePathname();
-    const numberOfCardsPerPage = ServerSideStore.getNumberOfCardsPerPage();
-    const maxPage = Math.ceil(totalCount / numberOfCardsPerPage);
+    const contentPerPage = ServerSideStore.getContentPerPage();
+    const maxPage = Math.ceil(totalCount / contentPerPage);
 
-    if (totalCount > numberOfCardsPerPage) {
+    if (totalCount > contentPerPage) {
         const range = rangeNumGenerator(currentPage, maxPage).filter(
             (n: number) => n !== (1 || maxPage) && n < maxPage && n > 0,
         );

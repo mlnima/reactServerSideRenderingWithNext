@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {formatDistance} from "date-fns";
-import {IMessengerConversationMessage} from "typescript-types";
+import {IMessengerConversationMessage} from "@repo/typescript-types";
 import './Message.styles.scss'
 import ReactAudioPlayer from "@components/ReactAudioPlayer/ReactAudioPlayer";
 

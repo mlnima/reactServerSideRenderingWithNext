@@ -1,4 +1,4 @@
-import {Post,Meta,PageTypes,Comment} from "typescript-types";
+import {Post,Meta,PageTypes,Comment} from "@repo/typescript-types";
 
 
 export interface PostStateTypes {

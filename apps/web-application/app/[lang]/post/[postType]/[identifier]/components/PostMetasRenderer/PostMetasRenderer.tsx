@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import {capitalizeFirstLetters} from "@repo/shared-util";
 import './PostMetasRenderer.scss';
-import {Meta} from "typescript-types";
+import {Meta} from "@repo/typescript-types";
 import PostActor from "./PostActor";
 import PostMeta from "./PostMeta";
 

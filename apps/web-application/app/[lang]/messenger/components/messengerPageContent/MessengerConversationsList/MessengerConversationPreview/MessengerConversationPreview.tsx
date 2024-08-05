@@ -2,8 +2,8 @@
 import React, {FC, useEffect, useState} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleUser} from "@fortawesome/free-solid-svg-icons/faCircleUser";
-import {User} from "typescript-types";
-import {IMessengerConversation} from "typescript-types";
+import {User} from "@repo/typescript-types";
+import {IMessengerConversation} from "@repo/typescript-types";
 import {formatDistance} from 'date-fns'
 import {faCheck} from "@fortawesome/free-solid-svg-icons/faCheck";
 import {useAppSelector} from "@store/hooks";

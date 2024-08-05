@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import React from 'react';
-import { Widget } from 'typescript-types';
+import { Widget } from "@repo/typescript-types";
 import WidgetsRenderer from '@components/widgets/widgetRenderer/WidgetsRenderer';
 
 interface SideBarWidgetAreaProps {

@@ -11,7 +11,7 @@ import styled from "styled-components";
 import { useSelector} from "react-redux";
 import {editPostAction} from "@store/reducers/postsReducer";
 import {getPostAction,defineNewPost,changeActiveEditingLanguage} from "@store/reducers/postsReducer";
-import {DashboardStore} from "typescript-types";
+import {DashboardStore} from "@repo/typescript-types";
 import {useAppDispatch} from "@store/hooks";
 import {LanguagesOptions} from "@repo/ui";
 import { isNumericString } from '@repo/shared-util';

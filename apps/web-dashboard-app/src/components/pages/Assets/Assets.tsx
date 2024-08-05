@@ -9,7 +9,7 @@ import {getCommentsAction} from "@store/reducers/commentsReducer";
 import {getFormsAction} from "@store/reducers/formsReducer";
 import {getPagesAction} from "@store/reducers/pagesReducer";
 import {useSelector} from "react-redux";
-import {DashboardStore} from "typescript-types";
+import {DashboardStore} from "@repo/typescript-types";
 import TableControls from "@components/pages/Assets/TableControls/TableControls";
 import paramsObjectGenerator from "@variables/paramsObjectGenerator";
 import TableHeader from "@components/pages/Assets/TableHeader/TableHeader";
@@ -60,7 +60,7 @@ const Assets: FC<PropTypes> = ({}) => {
         } else if (query.assetsType === 'pages') {
             dispatch(getPagesAction(paramsQueries))
         } else if (query.assetsType === 'chatrooms') {
-            dispatch(getChatroomsAction(null))
+            dispatch(getChatroomsAction())
         }
 
     }

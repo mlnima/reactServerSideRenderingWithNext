@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {Meta} from "typescript-types";
+import {Meta} from "@repo/typescript-types";
 import Pagination from "@components/Pagination/Pagination";
 import ActorsCardsRenderer from "@components/cards/CardsRenderer/ActorsCardsRenderer/ActorsCardsRenderer";
 
@@ -8,7 +8,7 @@ interface IProps {
     metas: Meta[],
     totalCount: number,
     currentPage: number,
-    numberOfCardsPerPage: number,
+    contentPerPage: number,
     locale: string
     dictionary: {
         [key: string]: string
@@ -22,7 +22,7 @@ const ActorsPageContentRenderer: FC<IProps> =
          totalCount,
          currentPage,
          locale,
-         numberOfCardsPerPage,
+         contentPerPage,
          dictionary
      }) => {
         return (
@@ -32,7 +32,7 @@ const ActorsPageContentRenderer: FC<IProps> =
                 </div>
                 {renderPagination && <Pagination totalCount={totalCount}
                                                  currentPage={currentPage}
-                                                 numberOfCardsPerPage={numberOfCardsPerPage}/>}
+                                                 contentPerPage={contentPerPage}/>}
             </>
         );
     };

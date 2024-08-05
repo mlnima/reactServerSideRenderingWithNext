@@ -9,7 +9,7 @@ import userSchema from '@schemas/userSchema';
 import mongoose from 'mongoose';
 import commentSchema from '@schemas/commentSchema';
 import {multiQueryUniquer} from '@util/queryUtil';
-import {Post, Meta} from 'typescript-types';
+import {Post, Meta} from '@repo/typescript-types';
 import {reqQueryToMongooseOptions} from '@util/database-util';
 import updateSaveMetas from '@util/_updateSaveMetas';
 import xHScrapper from '@util/scrappers/xHScrapper';
@@ -28,16 +28,16 @@ import axios from 'axios';
 
 class PostController {
     //---------------------helpers-------------------
-    static async findRelatedPosts(post: Post) {
-        try {
-            const relatedByFields = ['actors', 'categories', 'tags'];
-            //@ts-ignore
-            return await postSchema.findRelatedPosts({post, relatedByFields, limit: 8});
-        } catch (error) {
-            console.log(error);
-            return [];
-        }
-    }
+    // static async findRelatedPosts(post: Post) {
+    //     try {
+    //         const relatedByFields = ['actors', 'categories', 'tags'];
+    //         //@ts-ignore
+    //         return await postSchema.findRelatedPosts({post, relatedByFields, limit: 8});
+    //     } catch (error) {
+    //         console.log(error);
+    //         return [];
+    //     }
+    // }
 
     static async saveSearchedKeyword(keyword: string, postsCount: number) {
         if (!keyword) return;
@@ -280,7 +280,7 @@ class PostController {
             }
         } catch (error) {
             console.log(error);
-            res.status(500).json({message: 'Something Went Wrong', type: 'error'});
+            return res.status(500).json({ message: 'Something Went Wrong' });
         }
     }
 
@@ -307,7 +307,12 @@ class PostController {
 
                 if (post) {
                     //@ts-ignore
-                    const relatedPosts = await PostController.findRelatedPosts(post);
+                  //  const relatedPosts = await PostController.findRelatedPosts(post);
+                    const relatedPosts = await postSchema.findRelatedPosts({
+                        post,
+                        relatedByFields:['actors', 'categories', 'tags'],
+                        limit: 8
+                    });
                     res.json({
                         post,
                         relatedPosts,
@@ -434,7 +439,8 @@ class PostController {
 
     static async getUserPagePosts(req: Request, res: Response) {
         try {
-            const cardAmountPerPage = GlobalStore.getCardAmountPerPage();
+            const contentPerPage = GlobalStore.getContentPerPage();
+
             const authorId = req.query.authorId;
             const skip = req.query.skip || 0;
 
@@ -443,7 +449,7 @@ class PostController {
                 [...postFieldRequestForCards, 'status'],
                 {
                     skip: skip,
-                    limit: cardAmountPerPage || 20,
+                    limit: contentPerPage || 20,
                 },
             )
                 .populate([{path: 'thumbnail', select: {filePath: 1}}])
@@ -458,6 +464,31 @@ class PostController {
         }
     }
 
+    static async searchSuggestions(req: Request, res: Response){
+        try {
+            const { userInput } = req.query;
+
+            // Ensure userInput is a string
+            if (typeof userInput !== 'string') {
+                return res.status(400).json({ message: 'Invalid input' });
+            }
+
+            // Use a regular expression to find keywords that start with the user input
+            const regex = new RegExp(`^${userInput}`, 'i');
+            const suggestions = await searchKeywordSchema.find(
+                { name: regex },
+                {
+                    name:1,
+                    count:1
+                }
+            ).exec();
+
+            res.status(200).json(suggestions);
+        } catch (error) {
+            return res.status(500).json({ message: 'Something Went Wrong' });
+        }
+    }
+
     static async searchPosts(req: Request, res: Response) {
         if (!req.query.keyword) {
             res.status(400).json({message: 'Bad Request'});
@@ -466,7 +497,7 @@ class PostController {
 
         try {
             const locale = req.query.locale;
-            const locales = GlobalStore.getLocalesExceptDefault();
+            const locales = GlobalStore.getLocales({withDefault:false});
 
             const decodedKeyword = req.query.keyword ? decodeURIComponent(req.query.keyword) : '';
             const keyword = decodedKeyword.toLowerCase();
@@ -531,7 +562,7 @@ class PostController {
             });
         } catch (err) {
             console.log(`err=> `, err);
-            res.status(500).json({message: 'Server Error'});
+            return res.status(500).json({ message: 'Something Went Wrong' });
         }
     }
 
@@ -591,9 +622,7 @@ class PostController {
             res.status(200).json({message: 'Post Deleted Successfully'});
         } catch (error) {
             console.log(error);
-            res.status(500).json({
-                message: 'Server Error',
-            });
+            return res.status(500).json({ message: 'Something Went Wrong' });
         }
     }
 
@@ -617,7 +646,6 @@ class PostController {
                 res.end();
             });
     }
-
 
     static async likeDislike(req: Request, res: Response) {
         try {
@@ -664,7 +692,7 @@ class PostController {
             });
         } catch (error) {
             console.log('error=> ', error);
-            res.status(500).send('Internal Server Error');
+            return res.status(500).json({ message: 'Something Went Wrong' });
         }
     }
 
@@ -688,7 +716,7 @@ class PostController {
             newPostDataToSave.save(async (error: any, savedPostData: { _id: any }) => {
                 if (error) {
                     console.error('Error saving new post:', error);
-                    return res.status(500).json({message: 'Something Went Wrong', type: 'error'});
+                    return res.status(500).json({ message: 'Something Went Wrong' });
                 }
 
                 try {
@@ -699,12 +727,12 @@ class PostController {
                     });
                 } catch (error) {
                     console.error('Error updating user draft post:', error);
-                    res.status(500).json({message: 'Something Went Wrong', type: 'error'});
+                    return res.status(500).json({ message: 'Something Went Wrong' });
                 }
             });
         } catch (error) {
             console.error('Error creating new post:', error);
-            res.status(500).json({message: 'Something Went Wrong', type: 'error'});
+            return res.status(500).json({ message: 'Something Went Wrong' });
         }
     }
 
@@ -849,7 +877,7 @@ class PostController {
 
         } catch (error) {
             console.log(error);
-            res.status(500).json({message: 'Internal server error', err: error});
+            return res.status(500).json({ message: 'Something Went Wrong' });
         }
     }
 
@@ -880,10 +908,7 @@ class PostController {
                             error,
                         });
                     } else {
-                        res.status(500).send({
-                            message: 'Something Went Wrong While Saving The Post',
-                            error,
-                        });
+                        return res.status(500).json({ message: 'Something Went Wrong' });
                     }
                 });
         } catch (error) {
@@ -929,7 +954,7 @@ class PostController {
             return;
         } catch (error) {
             console.log(error);
-            res.status(500).json({message: 'Internal Server Error'});
+            return res.status(500).json({ message: 'Something Went Wrong' });
         }
     }
 
@@ -956,7 +981,7 @@ class PostController {
                 });
         } catch (err) {
             console.log(err);
-            res.status(500).json({message: 'I Tried But Something Went Wrong', err});
+            return res.status(500).json({ message: 'Something Went Wrong' });
         }
     }
 
@@ -988,9 +1013,7 @@ class PostController {
                 });
             })
             .catch(err => {
-                return res.status(500).json({
-                    message: 'Server Error',
-                });
+                return res.status(500).json({ message: 'Something Went Wrong' });
             });
     }
 
@@ -1027,9 +1050,7 @@ class PostController {
                 });
             })
             .catch(err => {
-                return res.status(500).json({
-                    message: 'Server Error',
-                });
+                return res.status(500).json({ message: 'Something Went Wrong' });
             });
     }
 
@@ -1090,7 +1111,7 @@ class PostController {
             }
         } catch (err) {
             console.error(err);
-            res.status(500).json({message: 'Something went wrong please try again later'});
+            return res.status(500).json({ message: 'Something Went Wrong' });
         }
     }
 

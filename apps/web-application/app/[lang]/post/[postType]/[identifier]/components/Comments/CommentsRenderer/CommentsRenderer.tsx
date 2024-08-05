@@ -1,7 +1,7 @@
 'use client';
 import React, {FC, useEffect, useRef} from "react";
 import CommentItem from "../Comment/CommentItem";
-import {Comment} from 'typescript-types';
+import {Comment} from "@repo/typescript-types";
 import './CommentsRenderer.styles.scss'
 
 interface IProps {

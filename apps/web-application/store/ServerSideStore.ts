@@ -20,8 +20,8 @@ class ServerSideStore {
         }
     }
 
-    static getNumberOfCardsPerPage() {
-        return this.initialSettings?.contentSettings?.numberOfCardsPerPage || 20;
+    static getContentPerPage() {
+        return this.initialSettings?.contentSettings?.contentPerPage || 20;
     }
 }
 

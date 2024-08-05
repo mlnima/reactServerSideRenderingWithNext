@@ -1,4 +1,4 @@
-import {User} from "typescript-types";
+import {User} from "@repo/typescript-types";
 
 export interface AdminPanelUsersState {
     loggedIn: boolean;

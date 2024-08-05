@@ -1,42 +1,48 @@
-import React, {FC, MouseEventHandler, useState} from 'react';
+// @ts-nocheck
+import React, {FC, MouseEventHandler, useEffect, useState} from 'react';
 import styled from 'styled-components';
-import { InitialSettings } from 'typescript-types';
-import { postTypes } from '@repo/data-structures';
-import {inputValueSimplifier} from "@repo/shared-util";
-import {editInitialSettings} from "@store/reducers/settingsReducer";
-import {useAppDispatch} from "@store/hooks";
-import {faMicrophone} from "@fortawesome/free-solid-svg-icons/faMicrophone";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faChevronDown, faChevronUp} from "@fortawesome/free-solid-svg-icons";
-import {convertVariableNameToName,capitalizeFirstLetter} from  "@repo/shared-util";
+import {InitialSettings} from "@repo/typescript-types";
+import {postTypes} from '@repo/data-structures';
+import {inputValueSimplifier} from '@repo/shared-util';
+import {editInitialSettings} from '@store/reducers/settingsReducer';
+import {useAppDispatch} from '@store/hooks';
+import {faMicrophone} from '@fortawesome/free-solid-svg-icons/faMicrophone';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faChevronDown, faChevronUp} from '@fortawesome/free-solid-svg-icons';
+import {convertVariableNameToName, capitalizeFirstLetter} from '@repo/shared-util';
+
+interface StyleProps {
+    className?: any;
+}
+
 const Style = styled.div`
+    .actionButtons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
 
+    .postSettings {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.5rem;
 
-  .actionButtons{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
-    .postSettings{
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: .5rem;
+        .postSetting {
+            width: 300px;
 
-      .postSetting{
-        width: 300px;
-        .field{
-          h3{
-            padding: .25rem;
-            margin: 0;
-          }
+            .field {
+                h3 {
+                    padding: 0.25rem;
+                    margin: 0;
+                }
+            }
+
+            .checkboxField {
+                grid-template-columns: 1fr 50px;
+            }
         }
-
-        .checkboxField{
-          grid-template-columns: 1fr 50px;
-        }
-      }
     }
 `;
 
@@ -46,9 +52,9 @@ interface PropTypes {
     initialSettingsData: InitialSettings;
 }
 
-const ContentSettings: FC<PropTypes> = ({ onChangeHandler, initialSettingsData, onSaveHandler }) => {
+const ContentSettings: FC<PropTypes> = ({onChangeHandler, initialSettingsData, onSaveHandler}) => {
     const dispatch = useAppDispatch();
-    const [openPostSettings,setOpenPostSettings] = useState(false)
+    const [openPostSettings, setOpenPostSettings] = useState(false);
     const postConfigTypes = [
         'viewSystem',
         'showViewsOnCard',
@@ -56,8 +62,8 @@ const ContentSettings: FC<PropTypes> = ({ onChangeHandler, initialSettingsData, 
         'showRatingOnCard',
         'showDateOnCard',
         'showDateInPostPage',
-        'allowComment'
-    ]
+        'allowComment',
+    ];
     const onPostTypeSettingChangeHandler = (e: React.ChangeEvent<HTMLInputElement>, postType: string) => {
         const value = inputValueSimplifier(e);
         //@ts-ignore
@@ -78,6 +84,11 @@ const ContentSettings: FC<PropTypes> = ({ onChangeHandler, initialSettingsData, 
             }),
         );
     };
+
+
+    useEffect(() => {
+        console.log(`initialSettingsData=> `,initialSettingsData)
+    }, []);
     return (
         <Style className={'setting-section'}>
             <div className={'field'}>
@@ -87,7 +98,7 @@ const ContentSettings: FC<PropTypes> = ({ onChangeHandler, initialSettingsData, 
             <div className="inputField">
                 <p>Cards Width in Desktop:</p>
                 <input
-                    onChange={e => onChangeHandler(e, 'layoutSettings')}
+                    onChange={e => onChangeHandler(e, 'contentSettings')}
                     name={'cardsWidthDesktop'}
                     value={initialSettingsData?.contentSettings?.cardsWidthDesktop}
                     className={'primaryInput'}
@@ -95,11 +106,11 @@ const ContentSettings: FC<PropTypes> = ({ onChangeHandler, initialSettingsData, 
                 />
             </div>
             <div className="inputField">
-                <p>Number of cards per page:</p>
+                <p>Content per page:</p>
                 <input
-                    onChange={e => onChangeHandler(e, 'layoutSettings')}
-                    name={'numberOfCardsPerPage'}
-                    value={initialSettingsData?.contentSettings?.numberOfCardsPerPage}
+                    onChange={e => onChangeHandler(e, 'contentSettings')}
+                    name={'contentPerPage'}
+                    value={initialSettingsData?.contentSettings?.contentPerPage}
                     className={'primaryInput'}
                     type="number"
                 />
@@ -107,7 +118,7 @@ const ContentSettings: FC<PropTypes> = ({ onChangeHandler, initialSettingsData, 
             <div className="inputField">
                 <p>Number of cards per row In Mobile:</p>
                 <input
-                    onChange={e => onChangeHandler(e, 'layoutSettings')}
+                    onChange={e => onChangeHandler(e, 'contentSettings')}
                     name={'numberOfCardsPerRowInMobile'}
                     value={initialSettingsData?.contentSettings?.numberOfCardsPerRowInMobile}
                     className={'primaryInput'}
@@ -115,9 +126,12 @@ const ContentSettings: FC<PropTypes> = ({ onChangeHandler, initialSettingsData, 
                 />
             </div>
             <div className="field actionButtons ">
-                <button className="btn btn-dark" onClick={()=>setOpenPostSettings(!openPostSettings)}>
+                <button className="btn btn-dark" onClick={() => setOpenPostSettings(!openPostSettings)}>
                     PostSettings
-                    <FontAwesomeIcon icon={openPostSettings ? faChevronUp: faChevronDown} style={{width: 16, height: 16}}/>
+                    <FontAwesomeIcon
+                        icon={openPostSettings ? faChevronUp : faChevronDown}
+                        style={{width: 16, height: 16}}
+                    />
                 </button>
                 <button className={'btn btn-primary'} onClick={onSaveHandler}>
                     Save
@@ -125,36 +139,37 @@ const ContentSettings: FC<PropTypes> = ({ onChangeHandler, initialSettingsData, 
             </div>
 
             <div className="postSettings">
-                {openPostSettings && postTypes.map((postType, index) => {
-                    return (
-                        <div key={postType} className={'postSetting'}>
-                            <div className={'field'}>
-                                <h3>{capitalizeFirstLetter(postType)}:</h3>
+                {openPostSettings &&
+                    postTypes.map((postType, index) => {
+                        return (
+                            <div key={postType} className={'postSetting'}>
+                                <div className={'field'}>
+                                    <h3>{capitalizeFirstLetter(postType)}:</h3>
+                                </div>
 
+                                {postConfigTypes.map(postTypeSetting => {
+                                    return (
+                                        <div className={'checkboxField'}>
+                                            <p>{convertVariableNameToName(postTypeSetting)}:</p>
+                                            <input
+                                                onChange={e => onPostTypeSettingChangeHandler(e, postType)}
+                                                type={'checkbox'}
+                                                name={postTypeSetting}
+                                                //@ts-ignore
+                                                checked={
+                                                    initialSettingsData?.contentSettings?.postSettings?.[postType]?.[
+                                                        postTypeSetting
+                                                        ]
+                                                }
+                                                className={'primaryInput'}
+                                            />
+                                        </div>
+                                    );
+                                })}
                             </div>
-
-                            {postConfigTypes.map((postTypeSetting)=>{
-                                return(
-                                    <div className={'checkboxField'}>
-                                        <p>{convertVariableNameToName(postTypeSetting)}:</p>
-                                        <input
-                                            onChange={e => onPostTypeSettingChangeHandler(e, postType)}
-                                            type={'checkbox'}
-                                            name={postTypeSetting}
-                                            //@ts-ignore
-                                            checked={initialSettingsData?.contentSettings?.postSettings?.[postType]?.[postTypeSetting]}
-                                            className={'primaryInput'}
-                                        />
-                                    </div>
-                                )
-                            })}
-
-                        </div>
-                    );
-                })}
+                        );
+                    })}
             </div>
-
-
         </Style>
     );
 };

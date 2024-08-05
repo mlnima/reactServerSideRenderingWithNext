@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { InitialSettings } from 'typescript-types';
+import { InitialSettings } from "@repo/typescript-types";
 import postTypes from '@repo/data-structures/dist/src/postTypes';
 import PostByUserSettings from "@components/pages/settings/initialSettings/PostByUserSettings";
 

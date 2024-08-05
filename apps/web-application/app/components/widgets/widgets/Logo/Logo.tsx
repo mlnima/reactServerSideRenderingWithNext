@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import Link from "next/link";
-import {UniqueDataTypes} from "typescript-types";
+import {UniqueDataTypes} from "@repo/typescript-types";
 import {useAppSelector} from "@store/hooks";
 
 interface LogoPropTypes {

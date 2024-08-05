@@ -1,5 +1,5 @@
 import {loading} from "@store/reducers/globalStateReducer";
-import {WidgetData} from "typescript-types";
+import {WidgetData} from "@repo/typescript-types";
 import React, {FC} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFileExport} from "@fortawesome/free-solid-svg-icons/faFileExport";

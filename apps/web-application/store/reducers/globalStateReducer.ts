@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {RootState} from "../store";
-import {GlobalState} from "typescript-types";
+import {GlobalState} from "@repo/typescript-types";
 
 const initialState : GlobalState = {
     loginRegisterFormPopup: false,

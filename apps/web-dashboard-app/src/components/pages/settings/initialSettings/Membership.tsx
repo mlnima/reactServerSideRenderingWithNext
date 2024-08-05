@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import styled from "styled-components";
-import {DashboardStore} from "typescript-types";
+import {DashboardStore} from "@repo/typescript-types";
 import {postTypes} from "@repo/data-structures/dist/src";
 import {convertVariableNameToName} from "@repo/shared-util";
 import {useAppDispatch} from "@store/hooks";

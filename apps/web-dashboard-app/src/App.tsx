@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import RootLayout from '@components/layouts/RootLayout';
 import GlobalStyles from '@components/common/styles/GlobalStyles';
 import { useSelector } from 'react-redux';
-import { DashboardStore } from 'typescript-types';
+import { DashboardStore } from "@repo/typescript-types";
 import Login from '@components/pages/Login';
 import { autologinUserAction } from '@store/reducers/usersReducer';
 import { useAppDispatch } from '@store/hooks';

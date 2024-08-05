@@ -423,7 +423,8 @@ class SitemapController{
         }
 
         try {
-            const initialSettings = globalStore.getInitialSettings()
+            //const initialSettings = globalStore.getInitialSettings()
+            const initialSettings = globalStore.getSetting('initialSettings')
 
             if (!!initialSettings?.headDataSettings?.favIconUrl) {
                 const isAbsolute = initialSettings?.headDataSettings?.favIconUrl.includes('http')

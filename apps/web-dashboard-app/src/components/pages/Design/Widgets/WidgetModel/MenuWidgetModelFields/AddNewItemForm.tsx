@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React, {FC} from "react";
-import {IMenuItem} from "typescript-types";
+import {IMenuItem} from "@repo/typescript-types";
 
 const Styles = styled.form`
   width: 95%;

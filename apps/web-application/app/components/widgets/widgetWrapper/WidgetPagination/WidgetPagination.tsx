@@ -12,8 +12,8 @@ interface WidgetPaginationPropTypes {
 
 const WidgetPagination: FC<WidgetPaginationPropTypes> = ({baseUrl, totalCount, count, sortBy}) => {
 
-    const numberOfCardsPerPage = 20
-    const maxPage = totalCount ? Math.ceil(totalCount / numberOfCardsPerPage) : 0
+    const contentPerPage = 20
+    const maxPage = totalCount ? Math.ceil(totalCount / contentPerPage) : 0
 
     return (
         <div className={'widgetPagination'}>

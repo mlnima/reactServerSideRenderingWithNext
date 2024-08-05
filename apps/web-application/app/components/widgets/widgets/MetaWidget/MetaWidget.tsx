@@ -1,5 +1,5 @@
 import {FC} from "react";
-import {Meta} from "typescript-types";
+import {Meta} from "@repo/typescript-types";
 import MetasRenderer from "@components/metas/MetasRenderer";
 
 interface MetaWidgetPropType {

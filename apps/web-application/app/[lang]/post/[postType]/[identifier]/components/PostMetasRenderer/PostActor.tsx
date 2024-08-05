@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import {convertMetasTypeToSingular, capitalizeFirstLetters} from "@repo/shared-util";
 import ActorMetaImageRenderer from "./ActorMetaImageRenderer";
-import {Meta} from "typescript-types";
+import {Meta} from "@repo/typescript-types";
 import Link from "next/link";
 
 interface ComponentPropTypes {

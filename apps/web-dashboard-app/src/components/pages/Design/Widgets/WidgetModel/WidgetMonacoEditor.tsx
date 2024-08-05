@@ -1,7 +1,7 @@
 // @ts-nocheck
 import Editor from "@monaco-editor/react";
 import {FC,useMemo} from 'react';
-import {WidgetData} from "typescript-types";
+import {WidgetData} from "@repo/typescript-types";
 
 
 interface PropTypes {

@@ -18,7 +18,7 @@ const categoryMetaGenerator = async ({params, searchParams}: Props, parent?: Res
         const settingsData = await fetchSettings({requireSettings: ['categoryPageSettings']});
         const fallbackImage = '/asset/images/default/no-image-available.png'
         const initialSettingsData = await fetchSettings({requireSettings: ['initialSettings']})
-        const numberOfCardsPerPage = initialSettingsData?.settings?.initialSettings?.contentSettings?.numberOfCardsPerPage;
+        const contentPerPage = initialSettingsData?.settings?.initialSettings?.contentSettings?.contentPerPage;
         const currentPageQuery = searchParams?.page;
         const currentPage = (currentPageQuery && typeof currentPageQuery === 'string') ?
             parseInt(currentPageQuery, 10) : 1
@@ -29,7 +29,7 @@ const categoryMetaGenerator = async ({params, searchParams}: Props, parent?: Res
                 lang: params?.lang,
                 metaId: params?.categoryId,
                 page: currentPage,
-                size: searchParams?.size || numberOfCardsPerPage
+                size: searchParams?.size
             },
             locale
         });

@@ -24,15 +24,14 @@ const homePage = async ({params: {lang},searchParams}: IProps) => {
     const dictionary = await getDictionary(locale);
     const settingsData = await fetchSettings({requireSettings: ['homePageSettings']});
 
-    // const initialSettingsData = await fetchSettings({requireSettings: ['initialSettings']})
-    // const postSettings = initialSettingsData?.settings?.initialSettings?.contentSettings?.postSettings;
     const widgetsData = await fetchWidgets({
         widgets: [
             'homePageLeftSidebar',
             'homePageRightSidebar',
             'home'
         ],
-        locale
+        locale,
+        revalidate:86400
     });
 //@ts-ignore
     const sidebar = settingsData?.settings?.homePageSettings?.sidebar;

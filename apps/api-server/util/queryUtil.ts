@@ -1,9 +1,10 @@
-import {isArray} from "lodash";
+
 import GlobalStore from "@store/GlobalStore";
 import { ParsedQs } from 'qs';
+import globalStore from "@store/GlobalStore";
 
 export const multiQueryUniquer = (query: any): string => {
-    return typeof query === 'string' ? query : isArray(query) ? query[0] : null;
+    return typeof query === 'string' ? query : Array.isArray(query) ? query[0] : null;
 };
 
 // export const multiQueryUniquer = (query: string | ParsedQs | string[] | ParsedQs[]): string | ParsedQs| null => {
@@ -24,6 +25,7 @@ export const multiQueryUniquer = (query: any): string => {
 
 
 export const paginationQueryGenerator = (limit:number,)=>{
-    const initialSettings = GlobalStore.getInitialSettings();
+    //const initialSettings = GlobalStore.getInitialSettings();
+    const initialSettings = globalStore.getSetting('initialSettings')
 
 }

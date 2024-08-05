@@ -2,6 +2,7 @@
 import {Response} from "express";
 import widgetSchema from "@schemas/widgetSchema";
 import metaSchema from "@schemas/metaSchema";
+import GlobalStore from "@store/GlobalStore";
 
 const updateMetasWidget = async (widgetData: any, widgetId: string, res: Response) => {
 
@@ -9,13 +10,14 @@ const updateMetasWidget = async (widgetData: any, widgetId: string, res: Respons
         res.status(400).json({message: 'Missing widget ID'});
         return;
     }
-    console.log(`widgetData=> `,widgetData?.uniqueData)
+
+    const contentPerPage = GlobalStore.getContentPerPage();
 
     try {
         const statusQuery = {status: 'published'};
         const type = {type: widgetData?.metaType || widgetData?.uniqueData?.metaType};
         const countQuery = {count: {$gt: 0}};
-        const limit = widgetData?.uniqueData?.count || global?.initialSettings?.contentSettings?.numberOfCardsPerPage || 20;
+        const limit = widgetData?.uniqueData?.count || contentPerPage;
         const sortQuery = widgetData?.sort || widgetData?.uniqueData?.sort ? {'updatedAt': -1} : {
             'rank': 1,
             'count': -1

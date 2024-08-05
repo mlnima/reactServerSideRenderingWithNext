@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {createNewPostAction, editPostAction, updatePostAction} from "@store/reducers/postsReducer";
-import {DashboardStore} from "typescript-types";
+import {DashboardStore} from "@repo/typescript-types";
 import {useAppDispatch} from "@store/hooks";
 import {useNavigate} from "react-router-dom";
 

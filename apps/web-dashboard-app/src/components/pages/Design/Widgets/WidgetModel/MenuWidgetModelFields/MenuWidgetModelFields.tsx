@@ -1,7 +1,7 @@
 import React, {FC, useState} from 'react';
 import {uniqueId} from "lodash";
 import styled from "styled-components";
-import {WidgetData, IMenuItem} from "typescript-types";
+import {WidgetData, IMenuItem} from "@repo/typescript-types";
 import AddNewItemForm from "@components/pages/Design/Widgets/WidgetModel/MenuWidgetModelFields/AddNewItemForm";
 import ItemPreview from "@components/pages/Design/Widgets/WidgetModel/MenuWidgetModelFields/ItemPreview";
 import {inputValueSimplifier} from "@repo/shared-util";
@@ -92,7 +92,9 @@ const MenuWidgetModelFields: FC<IProps> =
 
                 const findParentIndex = widgetData?.menuItems.findIndex((menuItem: IMenuItem) => menuItem.itemId === formData.parent)
                 const parentData = widgetData?.menuItems.find((menuItem: IMenuItem) => menuItem.itemId === formData.parent)
+
                 const updatedParentData = {
+                    // @ts-ignore
                     ...(parentData || {}),
                     //@ts-ignore
                     subItems: [...((widgetData?.menuItems?.[findParentIndex] || {})?.subItems || []), {

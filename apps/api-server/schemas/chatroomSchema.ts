@@ -1,5 +1,5 @@
 import {model, Schema, Document} from "mongoose";
-import {Chatroom} from "typescript-types";
+import {Chatroom} from "@repo/typescript-types";
 
 const chatroomSchema = new Schema({
     name:{

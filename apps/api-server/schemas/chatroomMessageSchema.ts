@@ -1,5 +1,5 @@
 import {model, Schema, Document} from "mongoose";
-import {ChatroomMessage} from "typescript-types";
+import {ChatroomMessage} from "@repo/typescript-types";
 
 const chatroomMessageSchema = new Schema({
     chatroom: {type: Schema.Types.ObjectId, ref: 'chatroom'},

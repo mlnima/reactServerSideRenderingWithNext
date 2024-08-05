@@ -3,7 +3,7 @@ import {commonAPIRequestClearCaches} from "@repo/api-requests";
 import {useAppDispatch} from "@store/hooks";
 import {setAdminMode, setAlert} from "@store/reducers/globalStateReducer";
 import {useSelector} from "react-redux";
-import {IClearCache, Store} from "typescript-types";
+import {IClearCache, Store} from "@repo/typescript-types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUserShield} from "@fortawesome/free-solid-svg-icons/faUserShield";
 import {faEraser} from "@fortawesome/free-solid-svg-icons/faEraser";

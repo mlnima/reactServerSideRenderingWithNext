@@ -2,7 +2,7 @@
 import React from 'react';
 import {useSelector} from "react-redux";
 import {loading} from "@store/reducers/globalStateReducer";
-import {DashboardStore, Store} from "typescript-types";
+import {DashboardStore, Store} from "@repo/typescript-types";
 import {useAppDispatch} from "@store/hooks";
 
 const WidgetExporter = () => {

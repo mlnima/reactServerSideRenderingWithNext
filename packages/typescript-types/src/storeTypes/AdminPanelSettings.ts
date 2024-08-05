@@ -1,4 +1,4 @@
-import {DesignSettings,IdentitySettings,MembershipSettings} from "typescript-types";
+import {DesignSettings,IdentitySettings,MembershipSettings} from "@repo/typescript-types";
 
 
 export interface AdminPanelSettings {

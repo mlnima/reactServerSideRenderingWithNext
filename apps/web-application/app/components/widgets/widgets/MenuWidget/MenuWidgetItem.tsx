@@ -1,7 +1,7 @@
 "use client"
 import {FC} from "react";
 import Link from "next/link";
-import {MenuItem} from "typescript-types";
+import {MenuItem} from "@repo/typescript-types";
 import './MenuWidgetItem.scss'
 import SvgRenderer from "@components/global/SVGRenderer/SVGRenderer";
 

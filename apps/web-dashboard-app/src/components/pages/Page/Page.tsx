@@ -2,7 +2,7 @@ import React, {ChangeEvent, useEffect, useMemo, useState} from 'react';
 import Editor from "@monaco-editor/react";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {DashboardStore} from "typescript-types";
+import {DashboardStore} from "@repo/typescript-types";
 import {
     createNewPageAction,
     deletePageAction,

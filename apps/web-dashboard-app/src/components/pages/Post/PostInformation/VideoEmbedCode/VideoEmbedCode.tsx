@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {Post} from "typescript-types";
+import {Post} from "@repo/typescript-types";
 
 interface PropType{
     postData:Post,

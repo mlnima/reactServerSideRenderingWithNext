@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 declare namespace NodeJS {
     interface ProcessEnv {
         NODE_ENV: string;
@@ -23,3 +25,6 @@ declare namespace NodeJS {
         JWT_KEY: string;
     }
 }
+
+export {}
+

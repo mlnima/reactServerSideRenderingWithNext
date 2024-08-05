@@ -2,7 +2,7 @@ import React, {FC,  useState} from "react";
 import styled from "styled-components";
 import {useAppDispatch} from "@store/hooks";
 import {useSelector} from "react-redux";
-import {DashboardStore} from "typescript-types";
+import {DashboardStore} from "@repo/typescript-types";
 import menuItems from './menuItems.json'
 import {setSidebarStatus} from "@store/reducers/globalStateReducer";
 import {convertVariableNameToName} from "@repo/shared-util";

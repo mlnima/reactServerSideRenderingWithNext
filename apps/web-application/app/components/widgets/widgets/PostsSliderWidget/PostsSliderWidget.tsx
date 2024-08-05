@@ -6,7 +6,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons';
-import {Post, Store} from 'typescript-types';
+import {Post, Store} from "@repo/typescript-types";
 import {shortNumber, ratingCalculator} from '@repo/shared-util';
 import './PostsSliderWidget.styles.scss';
 //@ts-ignore
@@ -166,7 +166,7 @@ export default PostsSliderWidget;
 // import {useSelector} from "react-redux";
 // import {ratingCalculator} from "@repo/shared-util";
 // import Autoplay from "embla-carousel-autoplay";
-// import {Post,utils} from "typescript-types";
+// import {Post,utils} from "@repo/typescript-types";
 // import {shortNumber} from "@repo/shared-util";
 // import './PostsSliderWidget.styles.scss';
 // import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";

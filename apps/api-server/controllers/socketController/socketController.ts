@@ -1,6 +1,6 @@
 import Store from './store';
 import { correctChatroomsMessages } from './correctChatroomsMessages';
-import { ILoadOlderMessages } from 'typescript-types';
+import { ILoadOlderMessages } from '@repo/typescript-types';
 import chatroomMessageSchema from '@schemas/chatroomMessageSchema';
 import chatroomSchema from '@schemas/chatroomSchema';
 import messengerConversationMessageSchema from '@schemas/messengerConversationMessageSchema';

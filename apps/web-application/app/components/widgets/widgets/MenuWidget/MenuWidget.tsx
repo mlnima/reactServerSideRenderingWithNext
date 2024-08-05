@@ -1,6 +1,6 @@
 "use client"
 import React, {FC, useEffect, useRef, useState} from "react";
-import {MenuItem, UniqueDataTypes} from "typescript-types";
+import {MenuItem, UniqueDataTypes} from "@repo/typescript-types";
 import MenuWidgetItem from "@components/widgets/widgets/MenuWidget/MenuWidgetItem";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBars} from "@fortawesome/free-solid-svg-icons/faBars";

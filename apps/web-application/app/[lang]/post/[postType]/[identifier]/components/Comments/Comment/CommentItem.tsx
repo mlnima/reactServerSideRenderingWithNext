@@ -2,7 +2,7 @@ import Link from "next/link";
 import {formatDistance} from 'date-fns'
 // import faIR from "date-fns/locale/fa-IR";
 import {FC} from "react";
-import {Comment} from "typescript-types";
+import {Comment} from "@repo/typescript-types";
 import './CommentItem.styles.scss'
 
 interface CommentPropTypes {

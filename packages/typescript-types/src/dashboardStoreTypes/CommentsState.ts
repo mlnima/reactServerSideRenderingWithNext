@@ -1,4 +1,4 @@
-import {Comment} from "typescript-types";
+import {Comment} from "@repo/typescript-types";
 
 export interface CommentsState {
     comments: Comment[],

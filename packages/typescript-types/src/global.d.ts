@@ -1,0 +1,42 @@
+// @ts-nocheck
+declare module '@repo/api-requests';
+declare module '@repo/shared-util';
+declare module '@repo/data-structures';
+declare module '@repo/react-hooker-lib';
+declare module 'tsconfig';
+declare module '@repo/ui';
+declare module '@repo/shared-style';
+declare module 'simple-youtube-api';
+
+// declare module '*';
+// export {};
+//
+// declare namespace NodeJS {
+//     interface ProcessEnv {
+//         NODE_ENV: string;
+//         JWT_KEY:string;
+//         NEXT_PUBLIC_PRODUCTION_URL:string;
+//         NEXT_PUBLIC_API_SERVER_URL:string;
+//         NEXT_PUBLIC_LOCALES:string;
+//         NEXT_PUBLIC_DEFAULT_LOCALE:string;
+//         NEXT_PUBLIC_SOCKET:string;
+//         NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES:string;
+//         PORT:string;
+//         API_SERVER_PORT:string;
+//         REACT_APP_DEV_DASHBOARD_PORT:string;
+//         DB_NAME:string;
+//         DB_HOST:string;
+//         DB_USER:string;
+//         DB_PASS:string;
+//         DB_PORT:string;
+//         MAIL_SERVER:string;
+//         MAIL_SERVER_HOST:string;
+//         MAIL_EXTENSION:string;
+//         SSL_CERT:string;
+//         SSL_KEY:string;
+//
+//         // Add any other environment variables here
+//     }
+// }
+
+

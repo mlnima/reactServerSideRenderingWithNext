@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { Request, Response } from 'express';
+import {Request, Response} from 'express';
 import fsExtra from 'fs-extra';
 import sharp from 'sharp';
 import userSchema from '@schemas/userSchema';
@@ -7,10 +7,10 @@ import fs from 'fs';
 import download from 'image-downloader';
 import path from 'path';
 import fileRemover from '@_variables/fileRemover';
-import { getCurrentDatePath } from '@util/path-utils';
+import {getCurrentDatePath} from '@util/path-utils';
 import fileSchema from '@schemas/fileSchema';
 import postSchema from '@schemas/postSchema';
-import { isValidObjectId } from 'mongoose';
+import {isValidObjectId} from 'mongoose';
 
 class FileManagerController {
     static dev = process.env.NODE_ENV !== 'production';
@@ -20,7 +20,7 @@ class FileManagerController {
     static async profileImageTypeHandler(userId: string, profileImageId: string) {
         try {
             const user = await userSchema.findById(userId).exec();
-            await userSchema.findByIdAndUpdate(userId, { $set: { profileImage: profileImageId } }).exec();
+            await userSchema.findByIdAndUpdate(userId, {$set: {profileImage: profileImageId}}).exec();
             await fileRemover(user?.profileImage);
         } catch (error) {
             console.log(error);
@@ -53,7 +53,7 @@ class FileManagerController {
             }
 
             if (!!userData?.profileImage) {
-                await userSchema.findByIdAndUpdate(userId, { $unset: { profileImage: 1 } }).exec();
+                await userSchema.findByIdAndUpdate(userId, {$unset: {profileImage: 1}}).exec();
             }
 
             return;
@@ -129,7 +129,7 @@ class FileManagerController {
         const imageformat = formats.find(format => newPost?.mainThumbnail?.includes(format));
         const today = new Date(Date.now());
         const directoryPath = `./public/uploads/image/${today.getFullYear()}/${today.getMonth() + 1}/`;
-        !fs.existsSync(directoryPath) ? fs.mkdirSync(directoryPath, { recursive: true }) : null;
+        !fs.existsSync(directoryPath) ? fs.mkdirSync(directoryPath, {recursive: true}) : null;
         const fileName = `${newPost.title.replace(/[^a-zA-Z ]/g, '')}${Date.now()}`;
         const filePathOriginalSize = `${directoryPath}originalSize_${fileName + imageformat}`;
         const filePath = `${directoryPath}${fileName + imageformat}`;
@@ -141,7 +141,7 @@ class FileManagerController {
         try {
             return await download
                 .image(options)
-                .then(async ({ filename }) => {
+                .then(async ({filename}) => {
                     try {
                         return await sharp(filePathOriginalSize)
                             .resize(320, 180)
@@ -177,7 +177,7 @@ class FileManagerController {
         try {
             // Validate request data
             if (!req.body?.imagesData || !req.files?.images || !req.body?.imagesData?.includes('postId')) {
-                return res.status(400).json({ error: 'Bad request. Missing imagesData or images.' });
+                return res.status(400).json({error: 'Bad request. Missing imagesData or images.'});
             }
 
             const parsedImagesData = JSON.parse(req.body.imagesData);
@@ -201,12 +201,12 @@ class FileManagerController {
                     const savedEmptyDoc = await emptyFileDocument.save();
                     const filePath = `/public/uploads/images/${getCurrentDatePath()}/${savedEmptyDoc._id}.webp`;
                     await image.mv('.' + filePath);
-                    const updatedImageDoc = await fileSchema.findByIdAndUpdate(savedEmptyDoc._id, { filePath }, { new: true }).exec();
-                    await postSchema.findByIdAndUpdate(parsedImagesData.postId, { $push: { images: updatedImageDoc._id } }).exec();
+                    const updatedImageDoc = await fileSchema.findByIdAndUpdate(savedEmptyDoc._id, {filePath}, {new: true}).exec();
+                    await postSchema.findByIdAndUpdate(parsedImagesData.postId, {$push: {images: updatedImageDoc._id}}).exec();
                     responseImages.push(updatedImageDoc);
                 } catch (error) {
                     console.error('Error saving image:', error);
-                    return res.status(500).json({ error: 'Error saving image.' });
+                    return res.status(500).json({message: 'Something Went Wrong'});
                 }
             }
 
@@ -214,17 +214,17 @@ class FileManagerController {
             const postImages = await postSchema
                 .findById(parsedImagesData.postId)
                 .select('images')
-                .populate([{ path: 'images', select: { filePath: 1 }, model: 'file' }])
+                .populate([{path: 'images', select: {filePath: 1}, model: 'file'}])
                 .exec();
 
             if (postImages?.images?.[0]?.filePath) {
-                await postSchema.findByIdAndUpdate(parsedImagesData.postId, { mainThumbnail: postImages.images[0].filePath }).exec();
+                await postSchema.findByIdAndUpdate(parsedImagesData.postId, {mainThumbnail: postImages.images[0].filePath}).exec();
             }
 
-            return res.status(200).json({ images: responseImages });
+            return res.status(200).json({images: responseImages});
         } catch (error) {
             console.error('Upload Post Images:', error);
-            return res.status(500).json({ error: 'Internal server error.' });
+            return res.status(500).json({message: 'Something Went Wrong'});
         }
     }
 
@@ -249,19 +249,19 @@ class FileManagerController {
                 const savedEmptyDoc = await emptyFileDocument.save();
                 const filePath = `/public/uploads/images/${getCurrentDatePath()}/${savedEmptyDoc?._id}.webp`;
                 await image.mv('.' + filePath);
-                const updatedImageDoc = await fileSchema.findByIdAndUpdate(savedEmptyDoc?._id, { filePath }, { new: true }).exec();
-                await userSchema.findByIdAndUpdate(userData._id, { profileImage: updatedImageDoc?._id }, { new: true }).exec();
-                res.status(200).json({ newProfileImage: filePath });
+                const updatedImageDoc = await fileSchema.findByIdAndUpdate(savedEmptyDoc?._id, {filePath}, {new: true}).exec();
+                await userSchema.findByIdAndUpdate(userData._id, {profileImage: updatedImageDoc?._id}, {new: true}).exec();
+                res.status(200).json({newProfileImage: filePath});
                 return;
             } catch (error) {
                 console.log('saving images', error);
-                res.status(500).json({ message: 'uploadProfileImage1', error });
-                return;
+                return res.status(500).json({message: 'Something Went Wrong'});
+
             }
         } catch (error) {
             console.log('Upload Post Images:', error);
-            res.status(500).json({ message: 'uploadProfileImage2', error });
-            return;
+            return res.status(500).json({message: 'Something Went Wrong'});
+
         }
     }
 
@@ -389,16 +389,16 @@ class FileManagerController {
                 if (err.code === 'ENOTDIR') {
                     fs.readFile(path, (err, fileData) => {
                         if (err) {
-                            res.json({ error: true, data: [], type: undefined });
+                            res.json({error: true, data: [], type: undefined});
                         } else {
-                            res.json({ error: true, data: fileData.toString('utf8'), type: 'file' });
+                            res.json({error: true, data: fileData.toString('utf8'), type: 'file'});
                         }
                     });
                 } else {
-                    res.json({ error: true, data: [], type: undefined });
+                    res.json({error: true, data: [], type: undefined});
                 }
             } else {
-                res.json({ error: false, data, type: 'dir' });
+                res.json({error: false, data, type: 'dir'});
             }
         });
     }
@@ -407,9 +407,9 @@ class FileManagerController {
         const filePath = req.body.filePath;
         fs.unlink(filePath, err => {
             if (err) {
-                res.json({ error: true, data: 'something happened', type: undefined });
+                res.json({error: true, data: 'something happened', type: undefined});
             } else {
-                res.json({ error: false, data: 'deleted' });
+                res.json({error: false, data: 'deleted'});
             }
         });
     }
@@ -437,9 +437,9 @@ class FileManagerController {
 
                     file.mv(filePath, function (err) {
                         if (err) {
-                            res.json({ response: 'something is wrong', type: 'error', error: err });
+                            res.json({response: 'something is wrong', type: 'error', error: err});
                         } else {
-                            res.json({ response: 'Uploaded', path: filePath });
+                            res.json({response: 'Uploaded', path: filePath});
                         }
                     });
                 } catch (err) {
@@ -461,7 +461,7 @@ class FileManagerController {
             fs.writeFile(targetPath, data, err => {
                 if (err) {
                 } else {
-                    res.json({ message: 'file updated' });
+                    res.json({message: 'file updated'});
                 }
             });
         } catch (error) {
@@ -477,9 +477,9 @@ class FileManagerController {
             fs.readFile(targetPath, (error, fileData) => {
                 if (error) {
                     console.log(error);
-                    res.json({ error: true, data: '', type: undefined });
+                    res.json({error: true, data: '', type: undefined});
                 } else {
-                    res.json({ error: false, data: fileData.toString('utf8'), type: 'file' });
+                    res.json({error: false, data: fileData.toString('utf8'), type: 'file'});
                 }
             });
         } catch (error) {

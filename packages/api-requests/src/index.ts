@@ -6,9 +6,6 @@ export {
     commonAPIRequestLoginUser
 } from './common/commonUsers'
 
-// export {
-//     checkImageStatusCode,
-// } from './common/checkExternalContent'
 
 export {default as commonAPIRequestClearCaches} from './common/clearCaches'
 
@@ -59,6 +56,7 @@ export {
     clientAPIRequestGetPosts,
     // clientAPIRequestLikePost,
     updatePost,
+    APISearchSuggestions,
     // checkPostExist,
     clientAPIRequestViewPost,
     clientDeletePostByAuthor,

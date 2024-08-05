@@ -37,7 +37,7 @@ class CommentController {
             const savedComment = await commentObjectToSave.save();
 
             if (!savedComment) {
-                return res.status(500).json({ message: 'Comment not saved', type: 'error' });
+                return      res.status(500).json({ message: 'Something Went Wrong' });
             }
 
             await postSchema
@@ -51,7 +51,7 @@ class CommentController {
             res.json({ savedComment });
         } catch (error) {
             console.error('Error:', error);
-            res.status(500).json({ message: 'Server Error', type: 'error' });
+            res.status(500).json({ message: 'Something Went Wrong' });
         }
     }
     static async getComments(req: Request, res: Response) {
@@ -92,7 +92,7 @@ class CommentController {
                         res.json({ comments });
                     });
             } else {
-                res.status(500).json({ message: 'Request Is Invalid' });
+                res.status(500).json({ message: 'Something Went Wrong' });
             }
         } catch (err) {
 
@@ -120,7 +120,7 @@ class CommentController {
             res.json({ message: 'Comments Deleted' });
         } catch (error) {
             console.error('Error deleting comments:', error);
-            res.status(500).json({ message: 'Something Went Wrong While Deleting Comments', error });
+            res.status(500).json({ message: 'Something Went Wrong' });
         }
     }
     static async dashboardGetComments(req: Request, res: Response) {

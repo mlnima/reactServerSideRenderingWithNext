@@ -4,7 +4,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import React, {FC, useEffect, useState} from "react";
 import {faArrowLeft} from "@fortawesome/free-solid-svg-icons/faArrowLeft";
 import {faArrowDownWideShort} from "@fortawesome/free-solid-svg-icons/faArrowDownWideShort";
-import {IMessengerConversation, User} from "typescript-types";
+import {IMessengerConversation, User} from "@repo/typescript-types";
 import { useAppSelector} from "@store/hooks";
 import './MessengerHeader.styles.scss';
 import {faCircleUser} from "@fortawesome/free-solid-svg-icons/faCircleUser";
