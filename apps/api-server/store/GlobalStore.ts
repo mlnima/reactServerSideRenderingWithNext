@@ -4,7 +4,7 @@ import path from 'path';
 import { Worker } from 'worker_threads';
 import { Widget } from '@repo/typescript-types';
 import widgetSchema from '@schemas/widgetSchema';
-import WidgetController from "../controllers/WidgetController";
+import WidgetController from '../controllers/WidgetController';
 
 mongoose.Promise = global.Promise;
 mongoose.set('strictQuery', true);
@@ -41,8 +41,8 @@ class GlobalStore {
     }
 
     async setServerStartupData() {
-        this.setSettings();
-        this.setWidgets();
+        await this.setSettings();
+        await this.setWidgets();
     }
 
     async setWidgets() {
@@ -54,7 +54,7 @@ class GlobalStore {
                 {
                     model: 'meta',
                     path: 'data.uniqueData.metaData',
-                }
+                },
             ])
             .lean()
             .exec();
@@ -72,8 +72,8 @@ class GlobalStore {
                 widget.data.uniqueData = {
                     ...widget.data.uniqueData,
                     posts,
-                    totalCount
-                }
+                    totalCount,
+                };
             }
         }
 
@@ -99,7 +99,7 @@ class GlobalStore {
     }
 
     async setSetting(settingType: string, data) {
-        console.log(`${settingType} has been changed`)
+        console.log(`${settingType} has been changed`);
         this.settings[settingType] = data;
     }
 
@@ -112,7 +112,7 @@ class GlobalStore {
         return SettingsToSend;
     }
 
-    getSetting(requestedSetting: string) : {[key:string]:any} {
+    getSetting(requestedSetting: string): { [key: string]: any } {
         return this.settings?.[requestedSetting];
     }
 
@@ -200,12 +200,12 @@ class GlobalStore {
     }
 
     getContentPerPage() {
-        const initialSettings =  this.getSetting('initialSettings')
+        const initialSettings = this.getSetting('initialSettings');
         return initialSettings?.contentSettings?.contentPerPage || 20;
     }
 
-    getLocales({withDefault=true}) {
-        if (!withDefault){
+    getLocales({ withDefault = true }) {
+        if (!withDefault) {
             return process.env.NEXT_PUBLIC_LOCALES.replace(process.env.NEXT_PUBLIC_DEFAULT_LOCALE, '').split(' ');
         }
         return process.env.NEXT_PUBLIC_LOCALES.split(' ');

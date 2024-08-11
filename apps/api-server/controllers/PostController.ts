@@ -406,13 +406,14 @@ class PostController {
     }
 
     static async getPosts(req: Request, res: Response) {
+        console.log(`______________________getPosts fired=> `,)
         try {
             const {locale, metaId, postType} = req.query;
             const meta = metaId ? await PostController.findMeta(multiQueryUniquer(metaId)) : null;
             const metaQuery = metaId
                 ? [{$or: [{categories: {$in: metaId}}, {tags: {$in: metaId}}, {actors: {$in: metaId}}]}]
                 : [];
-            const postTypeQuery = postType ? [{postType: postType}] : [];
+            const postTypeQuery = postType ? [{postType: postType}] : [{}];
 
             const findPostsQueries = {
                 $and: [...metaQuery, ...postTypeQuery, {status: 'published'}],
@@ -1141,7 +1142,7 @@ class PostController {
                 : status === 'all'
                     ? [{status: {$ne: 'trash'}}]
                     : [{status: status}];
-            const postTypeQuery = postType && postType !== 'all' ? [{postType}] : {};
+            const postTypeQuery = postType && postType !== 'all' ? [{postType}] : [{}];
             const findQuery = {$and: [...metaQuery, ...searchQuery, ...statusQuery, ...postTypeQuery]};
 
             const populateOptions = [

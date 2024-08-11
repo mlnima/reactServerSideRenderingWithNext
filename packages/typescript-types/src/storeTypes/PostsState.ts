@@ -13,6 +13,9 @@ export interface PostStateTypes {
         categoriesRelatedPosts:Post[],
         tagsRelatedPosts:Post[],
     },
+    statusesCount:{
+        [key:string]:number
+    }
     actorData: Meta,
     categoryData: Meta,
     tagData: Meta,

@@ -1,47 +1,31 @@
-
 export const customPageCanonicalUrlGenerator = (page, locale) => {
-    const localeQuery =
-        locale && locale !== process.env.NEXT_PUBLIC_DEFAULT_LOCALE
-            ? `${locale}/`
-            : '';
+    const localeQuery = locale && locale !== process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? `${locale}/` : '';
     return `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${localeQuery}${page}`;
 };
 
+//check the array not string
 export const queryUniquer = query => {
     return typeof query === 'string' ? query : query[0];
 };
-export const postsCanonicalUrlGenerator = (
-    metaType,
-    metaId,
-    locale,
-    pageNo,
-    keyword,
-) => {
+
+export const postsCanonicalUrlGenerator = (metaType, metaId, locale, pageNo, keyword) => {
     const pageTypeQuery = keyword ? 'search' : metaType ? metaType : 'posts';
     const pageNoQuery = pageNo ? `?page=${pageNo}` : '';
-    const localeQuery =
-        locale && locale !== process.env.NEXT_PUBLIC_DEFAULT_LOCALE
-            ? `${locale}/`
-            : '';
+    const localeQuery = locale && locale !== process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? `${locale}/` : '';
     const metaIdKeywordQuery = metaId || keyword || '';
 
     return `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${localeQuery}${pageTypeQuery}/${metaIdKeywordQuery}${pageNoQuery}`;
 };
+
 export const postCanonicalUrlGenerator = (postType, _id, locale) => {
-    const localeQuery =
-        locale && locale !== process.env.NEXT_PUBLIC_DEFAULT_LOCALE
-            ? `${locale}/`
-            : '';
+    const localeQuery = locale && locale !== process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? `${locale}/` : '';
     return `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${localeQuery}post/${postType || 'article'}/${_id}`;
 };
 export const ObjectToQuery = data => {
     return '?' + new URLSearchParams(data).toString();
 };
 export const metasCanonicalUrlGenerator = (page, locale, pageNo) => {
-    const localeQuery =
-        locale && locale !== process.env.NEXT_PUBLIC_DEFAULT_LOCALE
-            ? `${locale}/`
-            : '';
+    const localeQuery = locale && locale !== process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? `${locale}/` : '';
     const pageNoQuery = pageNo ? `?page=${pageNo}` : '';
     return `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${localeQuery}${page}${pageNoQuery}`;
 };
@@ -81,8 +65,7 @@ export const hostnameChecker = hostname => {
 export const isImageAllowedForNextImage = url => {
     try {
         if (!!url) {
-            const AllowedSource = process.env
-                ?.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES
+            const AllowedSource = process.env?.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES
                 ? process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES.split(' ')
                 : [];
             //@ts-ignore
@@ -96,10 +79,7 @@ export const isImageAllowedForNextImage = url => {
 };
 export const isAbsolutePath = url => url.includes('http');
 export const homePageCanonicalUrlGenerator = locale => {
-    const localeQuery =
-        locale && locale !== process.env.NEXT_PUBLIC_DEFAULT_LOCALE
-            ? `${locale}/`
-            : '';
+    const localeQuery = locale && locale !== process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? `${locale}/` : '';
     return `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${localeQuery}`;
 };
 
@@ -113,10 +93,15 @@ export const doesUrlHasQueries = url => {
     }
 };
 
-export const urlSearchParamsToObject =  (searchParams)=>{
+export const searchParamsToObject = searchParams => {
     const params = {};
     for (let [key, value] of searchParams.entries()) {
         params[key] = value;
     }
     return params;
-}
+};
+
+export const searchParamsToUrlQuery = queryParams => {
+    const queries = new URLSearchParams(queryParams).toString();
+    return `?${queries}`;
+};

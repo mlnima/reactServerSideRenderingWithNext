@@ -48,7 +48,8 @@ export {
     isImageAllowedForNextImage,
     isInternalUrl,
     queryUniquer,
-    urlSearchParamsToObject
+    searchParamsToObject,
+    searchParamsToUrlQuery
 } from './src/url-util';
 
 export {

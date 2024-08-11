@@ -1,11 +1,10 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { convertVariableNameToName } from '@repo/shared-util';
 import styled from 'styled-components';
-import postStatuses from '@repo/data-structures/dist/src/postStatuses';
-import userStatus from '@repo/data-structures/dist/src/userStatus';
-// import { useAppSelector } from '@store/hooks';
+import { postStatuses, userStatus } from '@repo/data-structures';
 import { useSelector } from 'react-redux';
+import { Store } from '@repo/typescript-types';
 
 const AssetStatusNavigationStyledDiv = styled.div`
     display: flex;
@@ -18,26 +17,13 @@ const AssetStatusNavigationStyledDiv = styled.div`
     }
 `;
 
-const AssetStatusNavigation: FC = () => {
-    const [currentQuery, setCurrentQuery] = useState<any>({});
+interface IProps {
+    currentQuery: { [key: string]: string };
+}
+
+const AssetStatusNavigation: FC<IProps> = ({ currentQuery }) => {
     const [search, setSearch] = useSearchParams();
-
-    const getQueries = (searchParams: URLSearchParams) => {
-        const params: {
-            [key: string]: string;
-        } = {};
-        //@ts-ignore
-        for (let [key, value] of searchParams.entries()) {
-            params[key] = value;
-        }
-        return params;
-    };
-
-    useEffect(() => {
-        setCurrentQuery(getQueries(search));
-    }, [search]);
-
-    const statusesCount = useSelector(({ posts }) => posts.statusesCount);
+    const statusesCount = useSelector(({ posts }: Store) => posts.statusesCount);
 
     const postsStatus =
         currentQuery.assetsType === 'posts' || currentQuery.assetsType === 'metas'
@@ -52,7 +38,11 @@ const AssetStatusNavigation: FC = () => {
         };
 
         return (
-            <button className={'btn btn-navigation'} key={type} onClick={onNavigate}>
+            <button
+                className={`btn  ${currentQuery?.status === type ? 'btn-primary' : 'btn-navigation'}`}
+                key={type}
+                onClick={onNavigate}
+            >
                 {convertVariableNameToName(type)}
                 {statusesCount?.[type] ? ` (${statusesCount?.[type]}) ` : ''}
             </button>

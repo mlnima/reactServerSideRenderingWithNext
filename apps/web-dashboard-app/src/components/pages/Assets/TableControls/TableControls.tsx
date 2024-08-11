@@ -36,16 +36,17 @@ interface TableControlsPropTypes {
     selectedItems: any[];
     setSelectedItems: any;
     assetPageData: {};
+    currentQuery: {[key: string]: string };
 }
 
-const TableControls: FC<TableControlsPropTypes> = ({ selectedItems, setSelectedItems, assetPageData }) => {
+const TableControls: FC<TableControlsPropTypes> = ({ selectedItems, setSelectedItems, assetPageData,currentQuery }) => {
     const [search, setSearch] = useSearchParams();
     const assetsType = useMemo(() => search.get('assetsType'), [search]);
 
 
     return (
         <TableControlsStyledDiv className="asset-page-table-head">
-            <AssetStatusNavigation />
+            <AssetStatusNavigation currentQuery={currentQuery} />
             <AssetSize />
             {
                 (assetsType === 'posts' || assetsType === 'metas') && <AssetBulkAction selectedItems={selectedItems} setSelectedItems={setSelectedItems} />}
