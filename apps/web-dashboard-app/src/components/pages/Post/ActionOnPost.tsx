@@ -4,16 +4,18 @@ import {createNewPostAction, editPostAction, updatePostAction} from "@store/redu
 import {DashboardStore} from "@repo/typescript-types";
 import {useAppDispatch} from "@store/hooks";
 import {useNavigate} from "react-router-dom";
+import {setAlert} from "@store/reducers/globalStateReducer";
 
 const ActionOnPostStyledDiv = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-
-  .primarySelect {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
     width: 100%;
-    margin: 10px 0;
-  }
+
+    .primarySelect {
+        width: 100%;
+        margin: 10px 0;
+    }
 `
 
 const ActionOnPost = () => {
@@ -38,7 +40,6 @@ const ActionOnPost = () => {
                 dispatch(updatePostAction(
                     {
                         ...ActionOnPostData?.post,
-                        author: ActionOnPostData?.post?.author?._id || ActionOnPostData?.userId
                     }))
             } else {
                 dispatch(createNewPostAction({
@@ -53,7 +54,7 @@ const ActionOnPost = () => {
                 ))
             }
         } catch (error) {
-            // dispatch(setAlert({message: error.stack, type: 'error', active: true}))
+            dispatch(setAlert({message: error.stack, type: 'error', active: true}))
         }
     }
 

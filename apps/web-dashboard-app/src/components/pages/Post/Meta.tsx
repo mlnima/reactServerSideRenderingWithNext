@@ -11,6 +11,7 @@ import {faXmark} from "@fortawesome/free-solid-svg-icons/faXmark";
 import {faPlus} from "@fortawesome/free-solid-svg-icons/faPlus";
 
 const MetaStyledDiv = styled.div`
+    width: 100%;
   .add-new-meta {
     display: flex;
     justify-content: flex-start;
@@ -22,7 +23,7 @@ const MetaStyledDiv = styled.div`
     }
   }
   .small-info {
-    font-size: 12px;
+    font-size: var(--font-sizes-s);
   }
   .items {
     display: flex;

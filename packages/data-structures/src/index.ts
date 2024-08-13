@@ -15,6 +15,8 @@ import UGCPostImagesLimit from './UGCPostImagesLimit';
 import imageLessCardColors from './imageLessCardColors';
 import { advertiseType, advertisePlaceType } from './advertiseType';
 import { languagesMapOrigin, languagesMapInEnglish } from './languagesMap';
+import errorMessages from './errorMessages';
+import { reactSelectPrimaryTheme } from './reactSelectGlobalConfig';
 
 export {
     databaseSelectFieldsForPostCards,
@@ -34,7 +36,9 @@ export {
     advertiseType,
     advertisePlaceType,
     languagesMapOrigin,
-    languagesMapInEnglish
+    languagesMapInEnglish,
+    errorMessages,
+    reactSelectPrimaryTheme
 };
 
 

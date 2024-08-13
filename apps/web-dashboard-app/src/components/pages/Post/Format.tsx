@@ -1,24 +1,20 @@
-import React, {FC} from "react";
+import React from "react";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import { editPostAction} from "@store/reducers/postsReducer";
 import {postTypes} from "@repo/data-structures/dist/src";
-import {DashboardStore, Store} from "@repo/typescript-types";
+import {DashboardStore} from "@repo/typescript-types";
 import {useAppDispatch} from "@store/hooks";
 
 const FormatStyledDiv = styled.div`
-  .primarySelect {
     width: 100%;
-  }
+
+    .primarySelect {
+        width: 100%;
+    }
 `
 
-interface PostFormatPropTypes {
-    onChangeHandler: any,
-    postType: string
-
-}
-
-const Format: FC<PostFormatPropTypes> = ({postType}) => {
+const Format = () => {
     const dispatch = useAppDispatch()
     const post = useSelector(({posts}:DashboardStore) => posts.post);
 
@@ -33,7 +29,7 @@ const Format: FC<PostFormatPropTypes> = ({postType}) => {
         <FormatStyledDiv className='format-section'>
             <select className={'primarySelect'}
                     name='postType'
-                    value={post?.postType || postType || 'standard'}
+                    value={post?.postType || 'standard'}
                     onChange={e => onChangeHandlerAndSetPreferPostTypeToLocalStorage(e)}
             >
                 {postTypes.map((postType:string) => {

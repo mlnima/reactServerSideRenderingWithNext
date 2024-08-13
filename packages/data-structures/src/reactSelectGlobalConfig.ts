@@ -1,0 +1,32 @@
+
+export const reactSelectPrimaryTheme = {
+    control: (baseStyles, state) => ({
+        ...baseStyles,
+        color: 'var(--secondary-text-color)',
+        backgroundColor: 'var(--secondary-background-color)',
+        border: 'var(--default-border)',
+        borderRadius: '.375rem',
+        width: '100%',
+    }),
+    singleValue: (baseStyles) => ({
+        ...baseStyles,
+        color: 'var(--secondary-text-color)',
+    }),
+    input: (baseStyles) => ({
+        ...baseStyles,
+        color: 'var(--secondary-text-color)',
+    }),
+    menu: (baseStyles) => ({
+        ...baseStyles,
+        backgroundColor: 'var(--secondary-background-color)',
+    }),
+    option: (baseStyles, state) => ({
+        ...baseStyles,
+        backgroundColor: state.isSelected
+            ? 'var(--secondary-background-color)'
+            : state.isFocused
+                ? 'var(--secondary-hover-background-color)'
+                : undefined,
+        color: 'var(--secondary-text-color)',
+    })
+}

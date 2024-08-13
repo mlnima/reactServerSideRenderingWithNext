@@ -4,7 +4,7 @@ import TextAreaComponent from "./TextAreaComponent/TextAreaComponent";
 import RenderIframe from "./RenderIframe/RenderIframe";
 import Duration from "./Duration/Duration";
 import RatingAndViews from "./RatingAndViews/RatingAndViews";
-import ImagePreview from "../ImagePreview/ImagePreview";
+import ImagePreview from "../ImagePreview";
 import ImageGallery from "./ImageGallery/ImageGallery";
 import ProductPrice from "./ProductPrice/ProductPrice";
 import styled from "styled-components";

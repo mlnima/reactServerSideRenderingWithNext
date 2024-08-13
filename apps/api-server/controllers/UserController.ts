@@ -7,11 +7,11 @@ import { emailValidator, passwordValidatorRegisterForm, usernameValidatorRegiste
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import postSchema from '@schemas/postSchema';
-import mongoose from 'mongoose';
+import mongoose, {isValidObjectId} from 'mongoose';
 import { SentMessageInfo } from 'nodemailer/lib/smtp-transport';
 import uuidAPIKey from 'uuid-apikey';
 import { reqQueryToMongooseOptions } from '@util/database-util';
-import {postStatuses, userStatus} from "@repo/data-structures";
+import {postStatuses, userStatus,errorMessages} from "@repo/data-structures";
 
 let transporter: nodemailer.Transporter<SentMessageInfo>;
 const tokenExpireTime = '365d';
@@ -363,6 +363,38 @@ class UserController {
         }
     }
 
+    static async suggestionList(req: Request, res: Response){
+        try {
+            const {keyword} = req.query
+            const isMongoObjectId = isValidObjectId(keyword)
+            const selectedFields = []
+            if (isMongoObjectId){
+                const user = await userSchema.findById(keyword)
+                    .select([
+                        // 'profileImage',
+                        'username'
+                    ])
+                    .exec()
+                if (user){
+                    res.json({users:[user]})
+                }else {
+                    res.status(404).json({message:'user not found'})
+                }
+            }else{
+                const users = await userSchema.find({
+                    username: {
+                        $regex: '^' + keyword,
+                        $options: 'i',
+                    },
+                }).limit(20).exec()
+                res.json({users})
+            }
+
+        }catch (error){
+            res.status(500).json({message:errorMessages['500']})
+        }
+    }
+
     //---------------------Dashboard--------------------
 
     static async dashboardNewApiKey(req: Request, res: Response) {
@@ -445,6 +477,8 @@ class UserController {
                 res.json({ user });
             });
     }
+
+
 }
 
 export default UserController;

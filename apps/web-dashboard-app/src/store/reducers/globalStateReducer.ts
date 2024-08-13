@@ -83,7 +83,13 @@ export const globalStateSlice = createSlice({
     }
 })
 
-export const {setSidebarStatus,loading,setAlert,closeAlert} = globalStateSlice.actions
+export const {
+    setSidebarStatus,
+    loading,
+    setAlert,
+    closeAlert,
+
+} = globalStateSlice.actions
 
 export const globalStateReducer = (state: RootState) => state?.globalState || null
 

@@ -12,3 +12,13 @@ export const commonAPIRequestLoginUser = async (username:string, password:string
         }
     })
 }
+
+
+export const getUserSuggestionList = async (keyword:string)=>{
+    return await AxiosInstance.get(`/api/v1/user/suggestionList`,{
+        params:{
+            keyword
+        }
+    })
+}
+

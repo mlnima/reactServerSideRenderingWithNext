@@ -3,7 +3,8 @@ export {getAxiosInstance} from './lib/AxiosInstance';
 //______COMMON______
 export {
     commonAPIRequestGetSignedInUserData,
-    commonAPIRequestLoginUser
+    commonAPIRequestLoginUser,
+    getUserSuggestionList
 } from './common/commonUsers'
 
 

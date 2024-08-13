@@ -106,11 +106,12 @@ router.get('/dashboard/settings', adminAuthMiddleware, SettingController.dashboa
 
 //---------------------User-------------------------------
 router.post('/v1/user', UserController.register);
-router.get('/v1/user/login', UserController.login);
+router.get('/v1/user/suggestionList',cacheSuccesses, UserController.suggestionList);
+router.get('/v1/user/login',cacheSuccesses, UserController.login);
 router.post('/v1/user/getSignedInUserData', authMiddleware, UserController.getSignedInUserData);
 router.post('/v1/user/resetPassword', authMiddleware, UserController.resetPassword);
 router.put('/v1/user', authMiddleware, UserController.updateUserData);
-router.get('/v1/user/initialPageData', authMiddleware, UserController.getInitialPageData);
+router.get('/v1/user/initialPageData', authMiddleware,cacheSuccesses, UserController.getInitialPageData);
 router.patch('/v1/user/follow', authMiddleware, UserController.follow);
 router.patch('/v1/user/unfollow', authMiddleware, UserController.unfollow);
 
