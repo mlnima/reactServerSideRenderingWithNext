@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
-import {clientAPIRequestGetEditingPost, clientDeletePostByAuthor, getMeta, updatePost} from '@repo/api-requests';
+import { clientAPIRequestGetEditingPost, clientDeletePostByAuthor, getMeta, updatePost } from '@repo/api-requests';
 import { capitalizeFirstLetter, imageCanvasCompressor, reduceArrayOfDataToIds } from '@repo/shared-util';
 import MultipleImageUploader from '../MultipleImageUploader/MultipleImageUploader';
 import MetaDataSelector from '../MetaDataSelector/MetaDataSelector';
@@ -10,11 +10,11 @@ import LocationField from '../LocationField/LocationField';
 import Csr from '@components/global/Csr';
 import { useRouter } from 'next/navigation';
 import { setAlert } from '@store/reducers/globalStateReducer';
-import { postTypes, videoQualities, postStatuses, UGCPostImagesLimit } from '@repo/data-structures/dist/src';
+import {postTypes, videoQualities, postStatuses, reactSelectPrimaryTheme} from '@repo/data-structures';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
-import { Post } from "@repo/typescript-types";
+import { Post } from '@repo/typescript-types';
 import './UploadPageContent.scss';
 import { faEye } from '@fortawesome/free-solid-svg-icons/faEye';
 import deepEqual from 'deep-equal';
@@ -23,9 +23,12 @@ import LoggedInRequirePageMessage from '@components/LoggedInRequireMessage/Logge
 import ForbiddenMessage from '@components/ForbiddenMessage/ForbiddenMessage';
 import { useSearchParams } from 'next/navigation';
 import { usePathname } from 'next/navigation';
+import { AxiosError, AxiosResponse } from 'axios';
+import Select from 'react-select';
 
 interface IProps {
     _id: string;
+    postType: string;
     locale: string;
     dictionary: {
         [key: string]: string;
@@ -42,12 +45,18 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
     const pathname = usePathname();
     const router = useRouter();
     const dispatch = useAppDispatch();
-    const [editingPost, setEditingPost] = useState<Post | {}>({});
-    const [editingPostOriginal, setEditingPostOriginal] = useState<Post | {}>({});
+    const [editingPost, setEditingPost] = useState<any>(null);
+    const [editingPostOriginal, setEditingPostOriginal] = useState<Post>(null);
     const fileInputRef = useRef<any>(null);
     const { loggedIn, userData } = useAppSelector(({ user }) => user);
     const localeToSet = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? '' : `/${locale}`;
-    const postByUserSettings = useAppSelector(({ settings }) => settings.initialSettings?.membershipSettings?.postByUserSettings);
+    const postByUserSettings = useAppSelector(
+        ({ settings }) => settings.initialSettings?.membershipSettings?.postByUserSettings,
+    );
+
+    useEffect(() => {
+        console.log(`postByUserSettings=> `, postByUserSettings);
+    }, [postByUserSettings]);
 
     useEffect(() => {
         if (_id && loggedIn) {
@@ -55,7 +64,6 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
         } else {
             setEditingPost({
                 postType,
-                images: [],
             });
             if (fileInputRef.current) {
                 fileInputRef.current.value = '';
@@ -63,26 +71,21 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
         }
     }, [_id, loggedIn]);
 
-
-    const getPostMeta = async (_id)=>{
+    const getPostMeta = async (_id: string) => {
         try {
-            const metaData = await getMeta(_id)
-            setEditingPost(prevState => ({ ...prevState, categories: [metaData.data?.meta]  }));
-            // console.log(`metaData=> `,metaData.data?.meta)
-        }catch (error){
-
-        }
-    }
+            const metaData = await getMeta(_id);
+            setEditingPost((prevState: any) => ({ ...prevState, categories: [metaData.data?.meta] }));
+        } catch (error) {}
+    };
 
     useEffect(() => {
-        const categoryParams = searchParams.get('category')
-        const category = !!categoryParams ? Array.isArray(categoryParams) ? categoryParams[0] :categoryParams : null
+        const categoryParams = searchParams.get('category');
+        const category = !!categoryParams ? (Array.isArray(categoryParams) ? categoryParams[0] : categoryParams) : null;
 
         if (!!category) {
-            getPostMeta(category)
+            void getPostMeta(category);
         }
-
-    }, [searchParams,pathname]);
+    }, [searchParams, pathname]);
 
     const getEditingPostData = () => {
         if (_id) {
@@ -96,18 +99,27 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
     };
 
     const onChangeHandler = (e: React.ChangeEvent<any>) => {
-        setEditingPost(prevState => ({ ...prevState, [e.target.name]: e.target.value }));
+        console.log(`onChangeHandler=> `, e);
+        console.log(`onChangeHandler=> `, typeof e);
+        setEditingPost((prevState: any) => ({ ...prevState, [e.target.name]: e.target.value }));
+    };
+
+    const onReactSelectChangeHandler = (name:string,value:string) => {
+        setEditingPost((prevState: any) => ({ ...prevState, [name]: value }));
     };
 
     const onUniqueFieldsChangeHandler = (e: React.ChangeEvent<any>) => {
-        setEditingPost(prevState => ({
+        setEditingPost((prevState: any) => ({
             ...prevState,
             uniqueData: { ...(prevState?.uniqueData || {}), [e.target.name]: e.target.value },
         }));
     };
     //@ts-ignore
-    const onMetaChangeHandler = (metas, type) => {
-        setEditingPost(prevState => ({ ...prevState, [type]: metas }));
+    const onMetaChangeHandler = (metas: {}, metaType: string) => {
+        setEditingPost((prevState: any) => ({
+            ...prevState,
+            [metaType]: metas,
+        }));
     };
 
     const onSaveHandler = async () => {
@@ -139,7 +151,9 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
 
         const comments = editingPost?.comments ? { comments: reduceArrayOfDataToIds(editingPost.comments) } : {};
         const images = editingPost?.images ? { images: reduceArrayOfDataToIds(editingPost?.images) } : {};
-        const categories = editingPost?.categories ? { categories: reduceArrayOfDataToIds(editingPost.categories) } : {};
+        const categories = editingPost?.categories
+            ? { categories: reduceArrayOfDataToIds(editingPost.categories) }
+            : {};
         const tags = editingPost?.tags ? { tags: reduceArrayOfDataToIds(editingPost.tags) } : {};
         const actors = editingPost?.actors ? { actors: reduceArrayOfDataToIds(editingPost.actors) } : {};
         const author = !!editingPost?.author?._id
@@ -163,7 +177,7 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
         formData.append('data', JSON.stringify(editedPost));
 
         await updatePost(formData)
-            .then(res => {
+            .then((res: AxiosResponse) => {
                 dispatch(
                     setAlert({
                         type: 'success',
@@ -178,23 +192,24 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
                     getEditingPostData();
                 }
             })
-            .catch(error => {
+            .catch((error: AxiosError) => {
                 console.log('error=> ', error);
                 dispatch(
                     setAlert({
                         type: 'error',
-                        message: error.response.data.message,
+                        message: error.response?.data?.message,
                     }),
                 );
             });
     };
 
-    const onSubmitHandler = async e => {
+    const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (editingPost.status === 'published') {
             dispatch(
                 setAlert({
-                    message: 'Your post wont be visible to public until a moderator approval, Do you still want to apply the changes?',
+                    message:
+                        'Your post wont be visible to public until a moderator approval, Do you still want to apply the changes?',
                     type: 'confirmAction',
                     actionFunctions: onSaveHandler,
                 }),
@@ -226,18 +241,17 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
         router.push(locale === process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? '/' : `/${locale}`);
     };
 
-    // useEffect(() => {
-    //     console.log('console=> ',editingPost);
-    // }, [editingPost]);
-
-    // if (userData._id !== editingPost.author._id) {
-    //     return null
-    // }
-
     if (!loggedIn) return <LoggedInRequirePageMessage dictionary={dictionary} />;
 
-    if (!postByUserSettings?.[editingPost?.postType]?.allow || (!!_id && userData?._id !== editingPost?.author?._id))
-        return <ForbiddenMessage />;
+    if (
+        !postByUserSettings?.[editingPost?.postType]?.allow || (
+            !!_id && (
+                userData?._id !== editingPost?.author?._id &&
+                userData?.role !== 'administrator'
+            )
+        )
+    )
+        return <ForbiddenMessage dictionary={dictionary} />;
 
     return (
         <Csr>
@@ -281,7 +295,11 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
 
                         <div className="formSection imageUploader">
                             <span className={'smallText'}> Expected size: 320px * 180px </span>
-                            <MultipleImageUploader fileInputRef={fileInputRef} editingPost={editingPost} setEditingPost={setEditingPost} />
+                            <MultipleImageUploader
+                                fileInputRef={fileInputRef}
+                                editingPost={editingPost}
+                                setEditingPost={setEditingPost}
+                            />
                         </div>
                         <div className="formSection description">
                             <div className={'descriptionHeader'}>
@@ -340,7 +358,7 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
                                 <p>Post Status:</p>
                                 <select
                                     value={editingPost?.status || ''}
-                                    name={'postType'}
+                                    name={'status'}
                                     className={'primarySelect'}
                                     onChange={onChangeHandler}
                                 >
@@ -352,6 +370,17 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
                                         );
                                     })}
                                 </select>
+
+                                {/*<Select    name={'postType'}*/}
+                                {/*    onChange={(value)=>onReactSelectChangeHandler('postType',value as string)}*/}
+                                {/*    options={postStatuses.map((postStatus: string) => {*/}
+                                {/*        return {*/}
+                                {/*            locale: capitalizeFirstLetter(postStatus),*/}
+                                {/*            value: postStatus,*/}
+                                {/*        };*/}
+                                {/*    })}*/}
+                                {/*    styles={reactSelectPrimaryTheme}*/}
+                                {/*/>*/}
                             </div>
                         )}
 
@@ -412,7 +441,7 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
                                 <p>{dictionary?.['Categories'] || 'Categories'}:</p>
                                 <MetaDataSelector
                                     postData={editingPost}
-                                    type={'categories'}
+                                    metaType={'categories'}
                                     maxLimit={postByUserSettings?.[editingPost?.postType]?.maxCategories}
                                     onMetaChangeHandler={onMetaChangeHandler}
                                 />
@@ -424,29 +453,29 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
                                 <p>{dictionary?.['Tags'] || 'Tags'}:</p>
                                 <MetaDataSelector
                                     postData={editingPost}
-                                    type={'tags'}
+                                    metaType={'tags'}
                                     maxLimit={postByUserSettings?.[editingPost?.postType]?.maxTags}
                                     onMetaChangeHandler={onMetaChangeHandler}
                                 />
                             </div>
                         )}
 
-                        {editingPost.postType === 'video' && !!postByUserSettings?.[editingPost?.postType]?.maxActors && (
-                            <div className="formSection">
-                                <p>{dictionary?.['Actors'] || 'Actors'}:</p>
-                                <MetaDataSelector
-                                    postData={editingPost}
-                                    type={'actors'}
-                                    maxLimit={postByUserSettings?.[editingPost?.postType]?.maxActors}
-                                    onMetaChangeHandler={onMetaChangeHandler}
-                                />
-                            </div>
-                        )}
+                        {editingPost.postType === 'video' &&
+                            !!postByUserSettings?.[editingPost?.postType]?.maxActors && (
+                                <div className="formSection">
+                                    <p>{dictionary?.['Actors'] || 'Actors'}:</p>
+                                    <MetaDataSelector
+                                        postData={editingPost}
+                                        metaType={'actors'}
+                                        maxLimit={postByUserSettings?.[editingPost?.postType]?.maxActors}
+                                        onMetaChangeHandler={onMetaChangeHandler}
+                                    />
+                                </div>
+                            )}
 
                         {editingPost?.postType === 'advertise' && (
                             <div className="formSection">
-                                {/*//@ts-ignore*/}
-                                <Price onChangeHandler={e => onChangeHandler(e, true)} />
+                                <Price onChangeHandler={onChangeHandler} />
                             </div>
                         )}
 
@@ -482,7 +511,11 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
                             </button>
 
                             {!!editingPost._id && (
-                                <button type={'button'} onClick={async () => onDeleteRequestHandler()} className={'btn btn-danger'}>
+                                <button
+                                    type={'button'}
+                                    onClick={async () => onDeleteRequestHandler()}
+                                    className={'btn btn-danger'}
+                                >
                                     <FontAwesomeIcon icon={faTrash} className={'meta-icon'} />
                                     {/*{dictionary?.['Trash'] || 'Trash'}*/}
                                     {dictionary?.['Delete'] || 'Delete'}
@@ -493,7 +526,9 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
                                 <button
                                     type={'button'}
                                     onClick={() =>
-                                        router.push(`${localeToSet}/post/${editingPost?.postType}/${editingPost?._id}?preview=true`)
+                                        router.push(
+                                            `${localeToSet}/post/${editingPost?.postType}/${editingPost?._id}?preview=true`,
+                                        )
                                     }
                                     className={'btn btn-info submitButton'}
                                 >

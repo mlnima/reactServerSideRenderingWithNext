@@ -10,7 +10,19 @@ export const reactSelectPrimaryTheme = {
     }),
     singleValue: (baseStyles) => ({
         ...baseStyles,
-        color: 'var(--secondary-text-color)',
+        backgroundColor: 'var(--primary-button-link-background-color, #f90)',
+        color: 'var(--primary-button-link-text-color, #000)',
+        padding:'.25rem',
+        boxSizing:'border-box',
+        borderRadius: 'var(--primary-border-radius)'
+    }),
+    multiValue: (baseStyles) => ({
+        ...baseStyles,
+        backgroundColor: 'var(--primary-button-link-background-color, #f90)',
+        color: 'var(--primary-button-link-text-color, #000)',
+        padding:'.25rem',
+        boxSizing:'border-box',
+        borderRadius: 'var(--primary-border-radius)'
     }),
     input: (baseStyles) => ({
         ...baseStyles,

@@ -25,6 +25,7 @@ const initialState = {
             usersCanCommentOnThePosts: false,
             allowedPostTypeUserCanCreate:[],
             usersPersonalEmailAddress: false,
+            postByUserSettings:{}
         },
         layoutSettings: {
             languagesSwitcherInUserConfigMenu:false,

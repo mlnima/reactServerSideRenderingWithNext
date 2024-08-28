@@ -29,3 +29,13 @@ export const getTextDataWithTranslation = (locale, name, parentObject) => {
               parentObject?.[name] ||
               null;
 };
+
+//(obj: any, path: string[], value: any)
+export const nestedObjectModifier = (obj, path, value) => {
+    return path.reduceRight((acc, key, index) => {
+        return {
+            ...obj,
+            [key]: index === path.length - 1 ? value : acc,
+        };
+    }, {});
+};

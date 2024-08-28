@@ -12,7 +12,7 @@ interface uniqueDataPossibility{
 
 interface Base {
     outPostType?: string,
-    images?: [string],
+    images?: string[],
     rating: string,
     videoEmbedCode: string,
     videoUrl: string,

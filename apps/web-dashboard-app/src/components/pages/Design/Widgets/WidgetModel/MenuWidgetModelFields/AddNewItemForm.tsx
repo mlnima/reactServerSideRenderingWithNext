@@ -32,16 +32,7 @@ const Styles = styled.form`
 `
 
 interface IProps {
-    parentsOption: {
-        itemId: number,
-        name: string,
-        translations: {
-            [key: string]: {
-                name: string,
-
-            }
-        }
-    }[],
+    parentsOption: IMenuItem[],
     activeEditingLanguage: string,
     onChangeHandler: Function,
     onChangeHandlerWithTranslate: Function,
@@ -100,7 +91,6 @@ const MenuWidgetEditForm: FC<IProps> = (
             <div className='menu-widget-form-form-field'>
                 <p>Icon:</p>
                 <input className={'primaryInput'}
-                       required={true}
                        type="text"
                        name='icon'
                        onChange={e => onChangeHandler(e)}

@@ -1,170 +1,189 @@
-import React, {FC, useState} from 'react';
-import {uniqueId} from "lodash";
-import styled from "styled-components";
-import {WidgetData, IMenuItem} from "@repo/typescript-types";
-import AddNewItemForm from "@components/pages/Design/Widgets/WidgetModel/MenuWidgetModelFields/AddNewItemForm";
-import ItemPreview from "@components/pages/Design/Widgets/WidgetModel/MenuWidgetModelFields/ItemPreview";
-import {inputValueSimplifier} from "@repo/shared-util";
 
+import React, {FC, useEffect, useState} from 'react';
+import { uniqueId } from 'lodash';
+import { nanoid } from 'nanoid';
+import styled from 'styled-components';
+import { WidgetData, IMenuItem } from '@repo/typescript-types';
+import AddNewItemForm from '@components/pages/Design/Widgets/WidgetModel/MenuWidgetModelFields/AddNewItemForm';
+import ItemPreview from '@components/pages/Design/Widgets/WidgetModel/MenuWidgetModelFields/ItemPreview';
+import { inputValueSimplifier,nestedObjectModifier } from '@repo/shared-util';
 
 const MenuWidgetModelFieldsStyledDiv = styled.div`
-  .mobileNavigationLabel {
-    padding: 0 25px;
-  }
-`
+    .mobileNavigationLabel {
+        padding: 0 25px;
+    }
+`;
 
 interface IProps {
     widgetSettings: {
-        activeEditingLanguage: string
-    },
-    widgetData: WidgetData,
-    setWidgetData: Function,
-    onUniqueDataChangeHandler: Function
-
+        activeEditingLanguage: string;
+    };
+    widgetData: WidgetData;
+    setWidgetData: Function;
+    onUniqueDataChangeHandler: Function;
 }
 
-const MenuWidgetModelFields: FC<IProps> =
-    ({
-         widgetSettings,
-         setWidgetData,
-         widgetData,
-         onUniqueDataChangeHandler
-     }) => {
+const MenuWidgetModelFields: FC<IProps> = ({
+    widgetSettings,
+    setWidgetData,
+    widgetData,
+    onUniqueDataChangeHandler,
+}) => {
+    const [formData, setFormData] = useState<IMenuItem>({
+        name: '',
+        target: '',
+        parent: undefined,
+        type: 'internal',
+        itemIndex: 0,
+        itemId: 0,
+        subItems: [],
+        translations: {},
+    });
 
-        const [formData, setFormData] = useState<IMenuItem>({
-            name: '',
-            target: '',
-            parent: undefined,
-            type: 'internal',
-            itemIndex: 0,
-            itemId: 0,
-            subItems: [],
-            translations: {},
-        });
+    const [state, setState] = useState({
+        activeEditingLanguage: 'default',
+    });
 
-        const [state, setState] = useState({
-            activeEditingLanguage: 'default'
-        })
-
-        const onChangeHandlerWithTranslate = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-            if (widgetSettings.activeEditingLanguage === 'default') {
-                setFormData((prevFormData: IMenuItem) => ({
-                    ...prevFormData,
-                    [event.target.name]: event.target.value
-                }))
-            } else {
-                setFormData((prevFormData: IMenuItem) => ({
-                    ...formData,
-                    translations: {
-                        ...formData.translations,
-                        [widgetSettings.activeEditingLanguage]: {
-                            ...prevFormData.translations?.[widgetSettings?.activeEditingLanguage] ?? {},
-                            [event.target.name]: event.target.value
-                        }
-                    }
-                }))
-            }
+    // useEffect(() => {
+    //     console.log(`console=> `,widgetData.menuItems);
+    // }, [widgetData.menuItems]);
+    const onChangeHandlerWithTranslate = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const { name, value } = event.target;
+        if (widgetSettings.activeEditingLanguage === 'default') {
+            const modifiedState = nestedObjectModifier(formData,[name],value)
+            console.log(`modifiedState=> `,modifiedState)
+            // setFormData((prevFormData: IMenuItem) => ({
+            //     ...prevFormData,
+            //     [event.target.name]: event.target.value,
+            // }));
+        } else {
+            const modifiedState = nestedObjectModifier(formData,[
+                'translations',
+                widgetSettings.activeEditingLanguage,
+                name
+            ],value)
+            console.log(`modifiedStateT=> `,modifiedState)
+            // setFormData((prevFormData: IMenuItem) => ({
+            //     ...formData,
+            //     translations: {
+            //         ...formData.translations,
+            //         [widgetSettings.activeEditingLanguage]: {
+            //             ...(prevFormData.translations?.[widgetSettings?.activeEditingLanguage] ?? {}),
+            //             [event.target.name]: event.target.value,
+            //         },
+            //     },
+            // }));
         }
+    };
 
-        const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-            const value = inputValueSimplifier(e)
-            setFormData((prevFormData) => ({
-                ...prevFormData,
-                [e.target.name]: value
-            }))
-        }
+    const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
 
-        const onAddHandler = (event: React.FormEvent<HTMLFormElement>) => {
-            event.preventDefault()
-            if (!formData.parent) {
-                setWidgetData((prevState: WidgetData) => ({
-                    ...prevState,
-                    menuItems: [
-                        ...prevState?.menuItems || [],
-                        {
-                            ...formData,
-                            itemIndex: formData.itemIndex ? formData.itemIndex : (widgetData?.menuItems?.length || 0),
-                            itemId: uniqueId('id_') + prevState?.menuItems?.length || uniqueId('id_')
-                        }
-                    ]
-                }))
-            } else {
+        const value = inputValueSimplifier(e);
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            [e.target.name]: value,
+        }));
+    };
 
-                const findParentIndex = widgetData?.menuItems.findIndex((menuItem: IMenuItem) => menuItem.itemId === formData.parent)
-                const parentData = widgetData?.menuItems.find((menuItem: IMenuItem) => menuItem.itemId === formData.parent)
 
-                const updatedParentData = {
-                    // @ts-ignore
-                    ...(parentData || {}),
-                    //@ts-ignore
-                    subItems: [...((widgetData?.menuItems?.[findParentIndex] || {})?.subItems || []), {
+
+    const onAddHandler = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        if (!formData.parent) {
+            setWidgetData((prevState: WidgetData) => ({
+                ...prevState,
+                menuItems: [
+                    ...(prevState?.menuItems || []),
+                    {
+                        ...formData,
+                        itemIndex: formData.itemIndex ? formData.itemIndex : widgetData?.menuItems?.length || 0,
+                        itemId: nanoid() + prevState?.menuItems?.length || nanoid(),
+                    },
+                ],
+            }));
+        } else {
+            const findParentIndex = widgetData?.menuItems.findIndex(
+                (menuItem: IMenuItem) => menuItem.itemId === formData.parent,
+            );
+            const parentData = widgetData?.menuItems.find((menuItem: IMenuItem) => menuItem.itemId === formData.parent);
+
+            const updatedParentData = {
+                // @ts-ignore
+                ...(parentData || {}),
+                //@ts-ignore
+                subItems: [
+                    ...((widgetData?.menuItems?.[findParentIndex] || {})?.subItems || []),
+                    {
                         ...formData,
 
-                        itemId: uniqueId('sub_') + widgetData?.menuItems?.length || uniqueId('sub_'),
+                        itemId: nanoid() + widgetData?.menuItems?.length || nanoid(),
                         //@ts-ignore
                         itemIndex: parentData?.subItems?.length + 1 || 0,
-                    }]
-                }
+                    },
+                ],
+            };
 
-                const newMenuData = [
-                    ...widgetData.menuItems.slice(0, findParentIndex),
-                    updatedParentData,
-                    ...widgetData.menuItems.slice(findParentIndex + 1),
-                ]
+            const newMenuData = [
+                ...widgetData.menuItems.slice(0, findParentIndex),
+                updatedParentData,
+                ...widgetData.menuItems.slice(findParentIndex + 1),
+            ];
 
-                setWidgetData({
-                    ...widgetData,
-                    menuItems: newMenuData
-                })
-
-
-            }
-
+            setWidgetData({
+                ...widgetData,
+                menuItems: newMenuData,
+            });
         }
-
-        // const onMenuStyleChangeHandler = e => {
-        //     setWidgetData({
-        //         ...widgetData,
-        //         mobileNavigation: e.target.value
-        //     })
-        // }
-
-        const renderCurrentItems = ([...widgetData?.menuItems] || [])?.sort((a: IMenuItem, b: IMenuItem) => a.itemIndex > b.itemIndex ? 1 : -1).map(menuItem => {
-            return (
-                <ItemPreview key={uniqueId('id_')}
-                             data={menuItem}
-                             widgetData={widgetData}
-                             setWidgetData={setWidgetData}
-                             activeEditingLanguage={widgetSettings.activeEditingLanguage}
-                             parentsOption={widgetData.menuItems || []}
-                />
-            )
-        })
-
-        return (
-            <MenuWidgetModelFieldsStyledDiv>
-                <div className='checkInputFieldForWidget widgetSection'>
-                    <p>Burger Menu On Desktop:</p>
-                    <input type='checkbox' name='burgerMenuOnDesktop'
-                           checked={widgetData?.uniqueData?.burgerMenuOnDesktop}
-                           onChange={e => onUniqueDataChangeHandler(e)}/>
-                </div>
-
-                <AddNewItemForm onChangeHandler={onChangeHandler}
-                                onSubmitHandler={onAddHandler}
-                                onChangeHandlerWithTranslate={onChangeHandlerWithTranslate}
-                                data={formData}
-                                state={state}
-                                parentsOption={widgetData.menuItems || []}
-                                activeEditingLanguage={widgetSettings.activeEditingLanguage}/>
-
-                <div className='menu-items'>
-                    {renderCurrentItems}
-                </div>
-            </MenuWidgetModelFieldsStyledDiv>
-        );
-
     };
+
+    // const onMenuStyleChangeHandler = e => {
+    //     setWidgetData({
+    //         ...widgetData,
+    //         mobileNavigation: e.target.value
+    //     })
+    // }
+
+    const renderCurrentItems = ([...widgetData?.menuItems] || [])
+        ?.sort((a: IMenuItem, b: IMenuItem) => (a.itemIndex > b.itemIndex ? 1 : -1))
+        .map(menuItem => {
+            return (
+                <ItemPreview
+                    key={nanoid()}
+                    data={menuItem}
+                    widgetData={widgetData}
+                    setWidgetData={setWidgetData}
+                    activeEditingLanguage={widgetSettings.activeEditingLanguage}
+                    parentsOption={widgetData.menuItems || []}
+                />
+            );
+        });
+
+    return (
+        <MenuWidgetModelFieldsStyledDiv>
+            <div className="checkInputFieldForWidget widgetSection">
+                <p>Burger Menu On Desktop:</p>
+                <input
+                    type="checkbox"
+                    name="burgerMenuOnDesktop"
+                    checked={widgetData?.uniqueData?.burgerMenuOnDesktop}
+                    onChange={e => onUniqueDataChangeHandler(e)}
+                />
+            </div>
+
+            <AddNewItemForm
+                onChangeHandler={onChangeHandler}
+                onSubmitHandler={onAddHandler}
+                onChangeHandlerWithTranslate={onChangeHandlerWithTranslate}
+                data={formData}
+                state={state}
+                parentsOption={widgetData.menuItems || []}
+                activeEditingLanguage={widgetSettings.activeEditingLanguage}
+            />
+
+            <div className="menu-items">{renderCurrentItems}</div>
+        </MenuWidgetModelFieldsStyledDiv>
+    );
+};
 export default MenuWidgetModelFields;
 
 

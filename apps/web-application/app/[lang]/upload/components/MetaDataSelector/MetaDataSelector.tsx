@@ -1,17 +1,18 @@
 'use client';
-import React, { FC, useState, useEffect } from 'react';
-import Select from 'react-select';
+import React, { FC, useState } from 'react';
+import AsyncSelect from 'react-select/async';
 import { uniqArrayBy } from '@repo/shared-util';
 import { clientAPIRequestGetMetaSuggestion } from '@repo/api-requests';
-import { Meta } from "@repo/typescript-types";
+import { Meta } from '@repo/typescript-types';
 import './MetaDataSelector.styles.scss';
 import { setAlert } from '@store/reducers/globalStateReducer';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { reactSelectPrimaryTheme } from '@repo/data-structures';
 
 interface ComponentPropTypes {
-    type: string;
+    metaType: string;
     maxLimit: number;
-    onMetaChangeHandler: (selectedMetas: Meta[], type: string) => void;
+    onMetaChangeHandler: (selectedMetas: Meta[], metaType: string) => void;
     postData: Record<string, Meta[]>;
 }
 
@@ -20,83 +21,151 @@ interface SelectOption {
     label: string;
 }
 
-const MetaDataSelector: FC<ComponentPropTypes> = ({ type, onMetaChangeHandler, maxLimit, postData }) => {
-    const [suggestion, setSuggestion] = useState<any[]>([]);
-    const [options, setOptions] = useState<SelectOption[]>([]);
-    const [isLoading, setIsLoading] = useState(false);
+const MetaDataSelector: FC<ComponentPropTypes> = ({ metaType, onMetaChangeHandler, maxLimit, postData }) => {
     const dispatch = useAppDispatch();
-    const user = useAppSelector(({ user }) => user);
-
-    const onInputChangeHandler = (input: string) => {
-        if (!!input) {
-            setIsLoading(true);
-            clientAPIRequestGetMetaSuggestion(type, input)
-                .then(response => {
-                    setSuggestion(response.data?.metas || []);
-                    setIsLoading(false);
-                })
-                .catch(error => {
-                    console.log('error=> ', error);
-                });
-        }
-    };
-
-    useEffect(() => {
-        setOptions(
-            suggestion.map((meta): SelectOption => {
-                return { value: meta._id, label: meta.name };
-            }),
-        );
-    }, [suggestion]);
 
     const onSelectHandler = (selected: SelectOption[] | null) => {
         if (!selected) return;
 
-        if (!!selected && selected.length < (postData?.[type]?.length || 0)) {
-            const selectedIds = new Set(selected.map(meta => meta.value));
-            //removing a meta
-            const findSelectedMeta = [...suggestion, ...(postData[type] || [])].filter(meta => selectedIds.has(meta._id));
-            //@ts-ignore
-            onMetaChangeHandler(uniqArrayBy(findSelectedMeta, '_id'), type);
-        } else if (!!selected && selected.length > maxLimit && user.userData?.role !== 'administrator') {
+        if (selected?.length > maxLimit) {
             dispatch(
                 setAlert({
-                    message: `Maximum ${type} reached`,
+                    message: `Maximum ${metaType} reached`,
                     type: 'error',
                 }),
             );
-        } else {
-            const selectedIds = new Set(selected.map(meta => meta.value));
-            const findSelectedMeta = [...suggestion, ...(postData[type] || [])].filter(meta => selectedIds.has(meta._id));
-            //@ts-ignore
-            onMetaChangeHandler(uniqArrayBy(findSelectedMeta, '_id'), type);
+            return
+        }
+
+        const convertSelectedMetas = selected.map(selectedMeta => ({
+            name: selectedMeta.label,
+            _id: selectedMeta.value,
+        }));
+
+        onMetaChangeHandler(uniqArrayBy(convertSelectedMetas, '_id'), metaType);
+
+
+    };
+
+    const onLoadOptionsHandler = async (input: string) => {
+        try {
+            const suggestionList = await clientAPIRequestGetMetaSuggestion(metaType, input);
+            if (suggestionList.data?.metas?.length) {
+                const reducedResult = suggestionList.data.metas.reduce(
+                    (
+                        final: {
+                            value: string;
+                            label: string;
+                        }[],
+                        current: { _id: string; name: string },
+                    ) => {
+                        final = [...final, { value: current._id, label: current.name }];
+                        return final;
+                    },
+                    [],
+                );
+                return reducedResult;
+            } else return [];
+        } catch (error) {
+            return [];
         }
     };
 
+
+
     return (
-        <div className="metaDataSelector" onClick={onInputChangeHandler}>
-            <Select
-                name={type}
-                value={(postData?.[type] || []).map((meta): SelectOption => ({ value: meta._id, label: meta.name }))}
-                onChange={val => onSelectHandler(val as SelectOption[])}
-                onInputChange={input => onInputChangeHandler(input)}
-                isLoading={isLoading}
-                options={options}
+        <div className="metaDataSelector">
+
+
+            <AsyncSelect
+                name={metaType}
                 className={'reactSelectComponent'}
-                classNamePrefix={'react-select'}
+                onChange={val => onSelectHandler(val as SelectOption[])}
+                loadOptions={onLoadOptionsHandler}
                 isMulti
-                styles={{
-                    control: (baseStyles, state) => ({
-                        ...baseStyles,
-                        color: 'var(--secondary-text-color,#b3b3b3)',
-                        backgroundColor: 'var(--secondary-background-color,#000)',
-                        border: 'var(--default-border)',
-                        borderRadius: '.375rem',
-                    }),
-                }}
+                value={(postData?.[metaType] || []).map(
+                    (meta): SelectOption => ({ value: meta._id, label: meta.name }),
+                )}
+                styles={reactSelectPrimaryTheme}
             />
         </div>
     );
 };
 
 export default MetaDataSelector;
+
+// const onInputChangeHandler = (input: string) => {
+//     if (!!input) {
+//         setIsLoading(true);
+//         clientAPIRequestGetMetaSuggestion(metaType, input)
+//             .then(response => {
+//                 setSuggestion(response.data?.metas || []);
+//                 setIsLoading(false);
+//             })
+//             .catch(error => {
+//                 console.log('error=> ', error);
+//             });
+//     }
+// };
+
+// useEffect(() => {
+//     setOptions(
+//         suggestion.map((meta): SelectOption => {
+//             return { value: meta._id, label: meta.name };
+//         }),
+//     );
+// }, [suggestion]);
+
+// else if (!!selected && selected.length > maxLimit && user.userData?.role !== 'administrator') {
+//
+//
+//         dispatch(
+//             setAlert({
+//                 message: `Maximum ${metaType} reached`,
+//                 type: 'error',
+//             }),
+//         );
+//     }
+
+// <Select
+//     name={type}
+//     value={(postData?.[type] || []).map((meta): SelectOption => ({ value: meta._id, label: meta.name }))}
+//     onChange={val => onSelectHandler(val as SelectOption[])}
+//     onInputChange={input => onInputChangeHandler(input)}
+//     isLoading={isLoading}
+//     options={options}
+//     className={'reactSelectComponent'}
+//     classNamePrefix={'react-select'}
+//     isMulti
+//     styles={{
+//         control: (baseStyles, state) => ({
+//             ...baseStyles,
+//             color: 'var(--secondary-text-color,#b3b3b3)',
+//             backgroundColor: 'var(--secondary-background-color,#000)',
+//             border: 'var(--default-border)',
+//             borderRadius: '.375rem',
+//         }),
+//     }}
+// />
+
+// if (selected?.length > 0) {
+//     const convertSelectedMetas = selected.map(selectedMeta => ({
+//         name: selectedMeta.label,
+//         _id: selectedMeta.value,
+//     }));
+//
+//     // const selectedIds = new Set(convertSelectedMetas.map(meta => meta._id));
+//     //removing a meta
+//     // const findSelectedMeta = [...suggestion, ...(postData[metaType] || [])].filter(meta =>
+//     //     selectedIds.has(meta._id),
+//     // );
+//     //@ts-ignore
+//     onMetaChangeHandler(uniqArrayBy(convertSelectedMetas, '_id'), metaType);
+// } else {
+//     const selectedIds = new Set(selected.map(meta => meta._id));
+//     const findSelectedMeta = [...suggestion, ...(postData[metaType] || [])].filter(meta =>
+//         selectedIds.has(meta._id),
+//     );
+//     //@ts-ignore
+//     onMetaChangeHandler(uniqArrayBy(findSelectedMeta, '_id'), metaType);
+// }

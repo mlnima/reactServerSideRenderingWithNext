@@ -8,19 +8,25 @@ interface IProps {
         lang: string;
         _id: string;
     };
+    searchParams: {
+        _id: string;
+        postType: string;
+    };
 }
 
-const uploader = async ({ params: { lang, _id }, searchParams }: IProps) => {
+const uploader = async ({ params: { lang }, searchParams }: IProps) => {
     const locale = i18n.locales.includes(lang) ? lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale);
 
     return (
         <div id={'content'} className={`page-no-sidebar`}>
             <main id={'primary'} className={'main uploadPage'}>
-                <UploadPageContent _id={searchParams?._id}
-                                   postType={searchParams?.postType}
-                                   dictionary={dictionary}
-                                   locale={locale} />
+                <UploadPageContent
+                    _id={searchParams?._id}
+                    postType={searchParams?.postType}
+                    dictionary={dictionary}
+                    locale={locale}
+                />
             </main>
         </div>
     );

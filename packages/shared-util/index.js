@@ -56,6 +56,7 @@ export {
     isEmptyObject,
     getTextDataWithTranslation,
     removeEmptyProperties,
+    nestedObjectModifier,
 } from './src/object-util';
 export {
     convertSecondsToTimeString,

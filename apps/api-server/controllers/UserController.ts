@@ -366,14 +366,17 @@ class UserController {
     static async suggestionList(req: Request, res: Response){
         try {
             const {keyword} = req.query
+
+            if (!keyword){
+                const users = await userSchema.find().limit(20).exec()
+                res.json({users})
+            }
+
             const isMongoObjectId = isValidObjectId(keyword)
-            const selectedFields = []
+            const selectedFields = ['username']
             if (isMongoObjectId){
                 const user = await userSchema.findById(keyword)
-                    .select([
-                        // 'profileImage',
-                        'username'
-                    ])
+                    .select(selectedFields)
                     .exec()
                 if (user){
                     res.json({users:[user]})

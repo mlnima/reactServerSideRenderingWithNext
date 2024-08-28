@@ -44,7 +44,7 @@ export interface WidgetData {
         }
     },
     uniqueData: UniqueDataTypes,
-    menuItems:[],
+    menuItems:IMenuItem[],
     comments: [string],
     mobileNavigation: boolean
 }
@@ -56,7 +56,7 @@ export interface IMenuItem{
     type: string,
     parent?: string | number | readonly string[] | undefined,
     itemIndex: number,
-    itemId: number,
+    itemId: any,
     subItems?:IMenuItem[]
     translations?: {
         [key:string]:{
