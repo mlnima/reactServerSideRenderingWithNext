@@ -35,9 +35,9 @@ import CustomHeadTagsInitializer from '@components/CustomHeadTagsInitializer';
 export async function generateStaticParams() {
     return i18n.locales.map((lng: string) => ({ lng }));
 }
-
-const RootLayout = async ({ children, params: { lang } }: { children: ReactNode; params: { lang: string } }) => {
-
+//: { children: ReactNode; params: { lang: string } }
+const RootLayout = async ({ children, params }) => {
+    const { lang } = await params;
     const locale = i18n.locales.includes(lang) ? lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale);
 
