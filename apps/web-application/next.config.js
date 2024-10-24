@@ -37,6 +37,9 @@ const nextConfig = {
         ignoreDuringBuilds: true,
     },
     experimental: {
+        staleTimes: {
+            dynamic: 30,
+        },
         nextScriptWorkers: true,
         // serverActions: true,
         // turbo: {

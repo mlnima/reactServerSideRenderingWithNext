@@ -11,7 +11,7 @@ interface TClearCachesByServerAction extends IClearCache {
 }
 
 
-export const clearACacheByTag=(tag:string)=>{
+export const clearACacheByTag= async (tag:string)=>{
     try {
         revalidateTag(tag)
     }catch (error){
@@ -19,7 +19,7 @@ export const clearACacheByTag=(tag:string)=>{
     }
 }
 
-export const clearCachesByServerAction=({ path, segment, mode, searchParams, params }: TClearCachesByServerAction)=>{
+export const clearCachesByServerAction= async ({ path, segment, mode, searchParams, params }: TClearCachesByServerAction)=>{
     const onlyTagsOptions = {
         post: params?.identifier,
         categories: 'metas',
