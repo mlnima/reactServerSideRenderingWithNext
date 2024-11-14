@@ -3,7 +3,7 @@ import React, {FC, useMemo} from "react";
 import styled from "styled-components";
 import {useSearchParams} from "react-router-dom";
 import paramsObjectGenerator from "@variables/paramsObjectGenerator";
-import userRoles from "@repo/data-structures/dist/src/userRoles";
+import { userRoles } from '@repo/data-structures';
 import {capitalizeFirstLetter} from "@repo/shared-util";
 
 const Style = styled.div``;

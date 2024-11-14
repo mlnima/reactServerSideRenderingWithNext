@@ -2,19 +2,18 @@ import { getDictionary } from '../../../get-dictionary';
 import './page.scss';
 import { i18n } from '@i18nConfig';
 import UploadPageContent from './components/UploadPageContent/UploadPageContent';
+import {IPageProps} from "@repo/typescript-types";
 
-interface IProps {
-    params: {
-        lang: string;
-        _id: string;
-    };
-    searchParams: {
-        _id: string;
-        postType: string;
-    };
-}
 
-const uploader = async ({ params: { lang }, searchParams }: IProps) => {
+
+const uploader = async (props: IPageProps) => {
+    const searchParams = await props.searchParams;
+    const params = await props.params;
+
+    const {
+        lang
+    } = params;
+
     const locale = i18n.locales.includes(lang) ? lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale);
 
@@ -22,8 +21,8 @@ const uploader = async ({ params: { lang }, searchParams }: IProps) => {
         <div id={'content'} className={`page-no-sidebar`}>
             <main id={'primary'} className={'main uploadPage'}>
                 <UploadPageContent
-                    _id={searchParams?._id}
-                    postType={searchParams?.postType}
+                    _id={searchParams?._id as string}
+                    postType={searchParams?.postType as string}
                     dictionary={dictionary}
                     locale={locale}
                 />

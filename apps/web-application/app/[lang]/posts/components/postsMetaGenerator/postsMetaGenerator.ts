@@ -3,20 +3,15 @@ import { getDictionary } from '../../../../../get-dictionary';
 import { i18n } from '@i18nConfig';
 import { capitalizeFirstLetter } from '@repo/shared-util';
 import { AlternatesGenerators } from '@lib/alternatesCanonicalGenerator';
-
-type Props = {
-    params: { categoryId: string; lang: string };
-    searchParams: {
-        [key: string]: string | string[] | undefined;
-        postType?: string;
-        page?: string;
-    };
-};
+import {IPageProps} from "@repo/typescript-types";
 
 const alternatesGenerators = new AlternatesGenerators();
 
 //can be improved by fetching total count of the existing posts
-const postsMetaGenerator = async ({ params, searchParams }: Props) => {
+const postsMetaGenerator = async (props: IPageProps) => {
+    const searchParams = await props.searchParams;
+    const params = await props.params;
+
     const locale = i18n.locales.includes(params?.lang)
         ? params?.lang
         : process.env?.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';

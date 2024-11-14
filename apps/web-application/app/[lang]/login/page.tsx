@@ -1,19 +1,20 @@
 import {AlternatesGenerators} from "@lib/alternatesCanonicalGenerator";
 import ClientSideLogic from "./components/ClientSideLogic";
+import {IPageProps} from "@repo/typescript-types";
 
-interface IProps {
-    params: {
-        lang: string
+const alternatesGenerators = new AlternatesGenerators()
+
+export const generateMetadata = async (props: IPageProps) => {
+    const params = await props.params;
+    return {
+        title: 'Login',
+        alternates: alternatesGenerators.staticPage(params.lang,'login')
     }
 }
 
-const alternatesGenerators = new AlternatesGenerators()
-export const generateMetadata = async ({params: {lang}}: IProps)=>({
-    title: 'Login',
-    alternates: alternatesGenerators.staticPage(lang,'login')
-})
-
-const loginPage = ({params: {lang}}: IProps) => {
+const loginPage = async (props: IPageProps) => {
+    const params = await props.params;
+    const {lang} = params;
 
 
     return (
@@ -24,7 +25,6 @@ const loginPage = ({params: {lang}}: IProps) => {
             </main>
         </div>
     )
-
 }
 
 export default loginPage;

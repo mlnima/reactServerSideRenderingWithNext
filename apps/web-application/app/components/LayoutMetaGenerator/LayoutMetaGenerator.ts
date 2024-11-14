@@ -5,14 +5,18 @@ import {fetchSettings} from "@lib/fetch-requests/fetchSettings";
 import {AlternatesGenerators} from "@lib/alternatesCanonicalGenerator";
 // import alternatesCanonicalGenerator from "@lib/alternatesCanonicalGenerator";
 
+type Params = Promise<{ lang: string }>
+
 type Props = {
-    params: { identifier: string ,lang:string}
+    params: Params
     searchParams: { [key: string]: string | string[] | undefined }
 }
 
 const alternatesGenerators = new AlternatesGenerators()
 
-const LayoutMetaGenerator = async ({params: {lang}, searchParams}: Props, parent?: ResolvingMetadata): Promise<Metadata> => {
+const LayoutMetaGenerator = async ({params, searchParams}: Props, parent?: ResolvingMetadata): Promise<Metadata> => {
+
+    const { lang } = await params
 
     const fallbackIcon = '/asset/images/default/favicon.png'
     const settingsData = await fetchSettings({requireSettings: ['initialSettings']})

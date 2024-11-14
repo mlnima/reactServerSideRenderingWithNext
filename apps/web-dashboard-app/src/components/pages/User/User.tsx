@@ -1,7 +1,7 @@
 import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {useSelector} from "react-redux";
 import styled from "styled-components";
-import {userStatus, userRoles} from "@repo/data-structures/dist/src";
+import {userStatus, userRoles} from "@repo/data-structures";
 import {convertVariableNameToName} from "@repo/shared-util";
 import {DashboardStore, Store} from "@repo/typescript-types";
 import {useAppDispatch} from "@store/hooks";

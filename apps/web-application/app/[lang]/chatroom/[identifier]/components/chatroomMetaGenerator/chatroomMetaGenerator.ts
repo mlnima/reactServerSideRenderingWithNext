@@ -1,15 +1,13 @@
 import {fetchChatroomData} from "@lib/fetch-requests/fetchChatrooms";
 import {capitalizeFirstLetter} from "@repo/shared-util";
 import {AlternatesGenerators} from "@lib/alternatesCanonicalGenerator";
+import {IPageProps} from "@repo/typescript-types";
 
-interface IProps {
-    params: {
-        lang: string,
-        identifier: string,
-    }
-}
 const alternatesGenerators = new AlternatesGenerators()
-const chatroomMetaGenerator = async ({params}: IProps) => {
+
+const chatroomMetaGenerator = async (props: IPageProps) => {
+    //const searchParams = await props.searchParams;
+    const params = await props.params;
 
     const chatroomsData = await fetchChatroomData({identifier: params.identifier})
     return {

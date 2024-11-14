@@ -1,24 +1,21 @@
-import { i18n } from '@i18nConfig';
-import { getDictionary } from '../../../../get-dictionary';
+// import { i18n } from '@i18nConfig';
+// import { getDictionary } from '../../../../get-dictionary';
 import React from 'react';
 import './page.styles.scss';
+import {PageParams, PageSearchParams} from "@repo/typescript-types";
 
 interface IProps {
-    params: {
-        lang: string;
-        username: string;
-    };
-    searchParams?: {
-        [key: string]: string | string[] | undefined;
-    };
-    page: string | string[];
+    params: PageParams,
+    searchParams?: PageSearchParams,
+    // page: string | string[];
 }
 
-const editAccountPage = async ({ params, searchParams }: IProps) => {
-    const locale = i18n.locales.includes(params?.lang)
-        ? params?.lang
-        : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
-    const dictionary = await getDictionary(locale);
+const editAccountPage = async (props: IProps) => {
+    // const params = await props.params;
+    // const locale = i18n.locales.includes(params?.lang)
+    //     ? params?.lang
+    //     : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+    // const dictionary = await getDictionary(locale);
 
     return (
         <div id={'content'} className={`page-no-sidebar`}>

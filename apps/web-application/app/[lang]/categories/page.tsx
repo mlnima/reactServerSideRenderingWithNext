@@ -9,17 +9,16 @@ import SidebarWidgetAreaRenderer
     from "@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer";
 import CategoriesPageContentRenderer from "@components/metas/CategoriesPageContentRenderer";
 import categoriesMetaGenerator from "./components/categoriesMetaGenerator/categoriesMetaGenerator";
+import {PageParams, PageSearchParams} from "@repo/typescript-types";
 
 interface IProps {
-    params: {
-        lang: string
-    },
-    searchParams?: {
-        [key: string]: string | string[] | undefined
-    }
+    params: PageParams,
+    searchParams?: PageSearchParams,
 }
 
-const CategoriesPage = async ({params, searchParams}: IProps) => {
+const CategoriesPage = async (props: IProps) => {
+    const searchParams = await props.searchParams;
+    const params = await props.params;
     const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale);
     const settingsData = await fetchSettings({requireSettings: ['categoriesPageSettings']});

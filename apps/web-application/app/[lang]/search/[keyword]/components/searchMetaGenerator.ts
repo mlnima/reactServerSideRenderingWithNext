@@ -4,21 +4,18 @@ import { getDictionary } from '../../../../../get-dictionary';
 import { i18n } from '@i18nConfig';
 import { capitalizeFirstLetters } from '@repo/shared-util';
 import { AlternatesGenerators } from '@lib/alternatesCanonicalGenerator';
+import {IPageProps} from "@repo/typescript-types";
 
-type Props = {
-    params: { keyword: string; lang: string };
-    searchParams: {
-        [key: string]: string | string[] | undefined;
-        postType?: string;
-        page?: string;
-    };
-};
 
 const alternatesGenerators = new AlternatesGenerators();
 
-const searchMetaGenerator = async ({ params: { lang, keyword }, searchParams }: Props) => {
-    const locale = i18n.locales.includes(lang)
-        ? lang
+const searchMetaGenerator = async (props: IPageProps) => {
+    const searchParams = await props.searchParams;
+    const params = await props.params;
+
+
+    const locale = i18n.locales.includes(params.lang)
+        ? params.lang
         : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale);
     const settingsData = await fetchSettings({ requireSettings: ['initialSettings'] });
@@ -36,7 +33,7 @@ const searchMetaGenerator = async ({ params: { lang, keyword }, searchParams }: 
     const queryObject = {
         sort: searchParams?.sort,
         lang: locale,
-        keyword: keyword,
+        keyword: params.keyword,
         page: currentPage,
     };
 
@@ -46,7 +43,7 @@ const searchMetaGenerator = async ({ params: { lang, keyword }, searchParams }: 
     } ${dictionary['Search Results'] || 'Search Results'} ${siteName || ''}`;
 
     return {
-        alternates: alternatesGenerators.searchPage(lang, keyword),
+        alternates: alternatesGenerators.searchPage(params.lang, params.keyword),
         title,
     };
 };

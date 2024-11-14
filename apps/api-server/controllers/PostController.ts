@@ -406,7 +406,6 @@ class PostController {
     }
 
     static async getPosts(req: Request, res: Response) {
-        console.log(`______________________getPosts fired=> `,)
         try {
             const {locale, metaId, postType} = req.query;
             const meta = metaId ? await PostController.findMeta(multiQueryUniquer(metaId)) : null;

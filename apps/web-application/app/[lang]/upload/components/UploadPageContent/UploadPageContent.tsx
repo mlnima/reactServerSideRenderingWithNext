@@ -24,7 +24,7 @@ import ForbiddenMessage from '@components/ForbiddenMessage/ForbiddenMessage';
 import { useSearchParams } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 import { AxiosError, AxiosResponse } from 'axios';
-import Select from 'react-select';
+
 
 interface IProps {
     _id: string;
@@ -197,6 +197,7 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
                 dispatch(
                     setAlert({
                         type: 'error',
+                        //@ts-ignore
                         message: error.response?.data?.message,
                     }),
                 );

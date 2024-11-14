@@ -4,14 +4,17 @@ import {fetchSettings} from "@lib/fetch-requests/fetchSettings";
 import {textContentReplacer, getTextDataWithTranslation} from "@repo/shared-util";
 import {i18n} from "@i18nConfig";
 import {AlternatesGenerators} from "@lib/alternatesCanonicalGenerator";
+import {PageParams, PageSearchParams} from "@repo/typescript-types";
 
-type Props = {
-    params: { categoryId: string, lang: string }
-    searchParams: { [key: string]: string | string[] | undefined }
+interface IProps {
+    params: PageParams,
+    searchParams?: PageSearchParams,
 }
 
 const alternatesGenerators = new AlternatesGenerators()
-const categoryMetaGenerator = async ({params, searchParams}: Props, parent?: ResolvingMetadata): Promise<Metadata> => {
+const categoryMetaGenerator = async (props: IProps, parent?: ResolvingMetadata): Promise<Metadata> => {
+    const searchParams = await props.searchParams;
+    const params = await props.params;
 
     try {
         const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';

@@ -4,14 +4,14 @@ import {fetchSettings} from "@lib/fetch-requests/fetchSettings";
 import {textContentReplacer, getTextDataWithTranslation} from "@repo/shared-util";
 import {i18n} from "@i18nConfig";
 import {AlternatesGenerators} from "@lib/alternatesCanonicalGenerator";
+import {IPageProps} from "@repo/typescript-types";
 
-type Props = {
-    params: { tagId: string, lang: string }
-    searchParams: { [key: string]: string | string[] | undefined }
-}
+const alternatesGenerators = new AlternatesGenerators();
 
-const alternatesGenerators = new AlternatesGenerators()
-const tagMetaGenerator = async ({params, searchParams}: Props, parent?: ResolvingMetadata): Promise<Metadata> => {
+const tagMetaGenerator = async (props: IPageProps, parent?: ResolvingMetadata): Promise<Metadata> => {
+    const searchParams = await props.searchParams;
+    const params = await props.params;
+
     const locale = i18n.locales.includes(params?.lang) ? params.lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const settingsData = await fetchSettings({requireSettings: ['tagPageSettings']});
     const fallbackImage = '/asset/images/default/no-image-available.png'

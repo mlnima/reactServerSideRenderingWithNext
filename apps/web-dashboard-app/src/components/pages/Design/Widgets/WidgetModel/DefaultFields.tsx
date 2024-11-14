@@ -7,7 +7,7 @@ import RenderTitleAndRedirectLink from './RenderTitleAndRedirectLink/RenderTitle
 import TextInputFieldForWidget
     from "./TextInputFieldForWidget/TextInputFieldForWidget";
 import {useSelector} from "react-redux";
-import {widgetsStaticPositions} from "@repo/data-structures/dist/src";
+import {widgetsStaticPositions} from "@repo/data-structures";
 import {DashboardStore, Store} from "@repo/typescript-types";
 import { WidgetSettingsPropTypes} from "@repo/typescript-types";
 

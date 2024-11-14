@@ -11,20 +11,12 @@ import MetaAdminQuickAccessBar from '@components/metas/MetaAdminQuickAccessBar';
 import PostsPageInfo from '@components/PostsPage/PostsPageInfo/PostsPageInfo';
 import Soft404 from '@components/Soft404/Soft404';
 import { mongoIdValidatorByRegex } from '@repo/shared-util';
+import {IPageProps} from "@repo/typescript-types";
 
 
-interface IProps {
-    params: {
-        lang: string;
-        tagId: string;
-    };
-    searchParams?: {
-        [key: string]: string | string[] | undefined;
-    };
-    page: string | string[];
-}
-
-const TagPage = async ({ params, searchParams }: IProps) => {
+const TagPage = async (props: IPageProps) => {
+    const searchParams = await props.searchParams;
+    const params = await props.params;
 
     const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
 

@@ -4,15 +4,20 @@ import {i18n} from '@i18nConfig'
 import './page.styles.scss';
 import ChatroomPageContent from "./components/ChatroomPageContent/ChatroomPageContent";
 import chatroomMetaGenerator from "./components/chatroomMetaGenerator/chatroomMetaGenerator";
+import {PageParams, PageSearchParams} from "@repo/typescript-types";
 
 interface IProps {
-    params: {
-        lang: string,
-        identifier: string,
-    }
+    params: PageParams,
+    searchParams?: PageSearchParams,
 }
 
-const chatroomPage = async ({params: {lang, identifier}}: IProps) => {
+const chatroomPage = async (props: IProps) => {
+    const params = await props.params;
+
+    const {
+        lang,
+        identifier
+    } = params;
 
     const locale = i18n.locales.includes(lang) ? lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale);

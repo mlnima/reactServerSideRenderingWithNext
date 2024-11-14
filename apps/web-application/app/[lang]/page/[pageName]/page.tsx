@@ -6,20 +6,12 @@ import {fetchWidgets} from "@lib/fetch-requests/fetchWidgets";
 import pageMetaGenerator from "./components/pageMetaGenerator/pageMetaGenerator";
 import SidebarWidgetAreaRenderer
     from "@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer";
-import {AlternatesGenerators} from "@lib/alternatesCanonicalGenerator";
-
-interface IProps {
-    params: {
-        lang: string
-        pageName: string,
-    },
-    searchParams?: {
-        [key: string]: string | string[] | undefined
-    }
-}
+import {IPageProps} from "@repo/typescript-types";
 
 
-const page = async ({params}: IProps) => {
+
+const page = async (props: IPageProps) => {
+    const params = await props.params;
     const pageName = params?.pageName
     const locale = i18n.locales.includes(params.lang) ? params.lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale);

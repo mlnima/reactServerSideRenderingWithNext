@@ -2,7 +2,7 @@ import {FC} from "react";
 import parse from 'html-react-parser'
 import './WidgetText.scss'
 import { textContentReplacer } from '@repo/shared-util';
-import {rtlLanguages} from "@repo/data-structures/dist/src";
+import {rtlLanguages} from "@repo/data-structures";
 
 
 interface TextPropTypes {

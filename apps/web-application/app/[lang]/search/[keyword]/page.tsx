@@ -8,24 +8,17 @@ import WidgetsRenderer from '@components/widgets/widgetRenderer/WidgetsRenderer'
 import PostPage from '@components/PostsPage/PostsPage';
 import ActorsPageContentRenderer from '@components/metas/ActorsPageContentRenderer';
 import React from 'react';
-import { Meta } from "@repo/typescript-types";
+import {IPageProps, Meta} from "@repo/typescript-types";
 import CategoriesPageContentRenderer from '@components/metas/CategoriesPageContentRenderer';
 import TagsPageContentRenderer from '@components/metas/TagsPageContentRenderer';
 import { capitalizeFirstLetters } from '@repo/shared-util';
 import './page.scss';
 import searchMetaGenerator from './components/searchMetaGenerator';
 
-interface IProps {
-    params: {
-        lang: string;
-        keyword: string;
-    };
-    searchParams?: {
-        [key: string]: string | string[] | undefined;
-    };
-}
+const searchPage = async (props: IPageProps) => {
+    const searchParams = await props.searchParams;
+    const params = await props.params;
 
-const searchPage = async ({ params, searchParams }: IProps) => {
     const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale);
 
@@ -87,8 +80,8 @@ const searchPage = async ({ params, searchParams }: IProps) => {
                                 renderPagination={false}
                                 totalCount={contentPerPage}
                                 currentPage={currentPage}
+                                dictionary={dictionary}
                                 locale={locale}
-                                contentPerPage={contentPerPage}
                                 metas={groupingMetas.actors}
                             />
                         </div>
@@ -98,6 +91,7 @@ const searchPage = async ({ params, searchParams }: IProps) => {
                     renderPagination={searchData?.totalCount > contentPerPage}
                     posts={searchData?.posts}
                     locale={locale}
+                    dictionary={dictionary}
                     totalCount={searchData?.totalCount}
                     currentPage={currentPage}
                 />
@@ -114,6 +108,7 @@ const searchPage = async ({ params, searchParams }: IProps) => {
                                 locale={locale}
                                 totalCount={contentPerPage}
                                 currentPage={currentPage}
+                                dictionary={dictionary}
                                 contentPerPage={contentPerPage}
                                 metas={groupingMetas.categories}
                             />

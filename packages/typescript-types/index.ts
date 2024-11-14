@@ -32,7 +32,7 @@ import {Post} from "./src/Post";
 import {PostRaw} from "./src/Post";
 import {Meta} from "./src/Meta";
 import {IMenuItem, Widget} from "./src/widgets/Widget";
-import {PageTypes} from "./src/Page";
+import {PageTypes,PageSearchParams,PageParams,IPageProps,ILayoutProps} from "./src/Page";
 import {WidgetData} from "./src/widgets/Widget";
 import {WidgetSettingsPropTypes} from "./src/widgets/Widget";
 import {UniqueDataTypes} from "./src/widgets/Widget";
@@ -54,6 +54,10 @@ import './src/global'
 
 export type {
     ILoadOlderMessages,
+    PageParams,
+    IPageProps,
+    ILayoutProps,
+    PageSearchParams,
     IClearCache,
     MediaConnectionState,
     IMessengerConversation,

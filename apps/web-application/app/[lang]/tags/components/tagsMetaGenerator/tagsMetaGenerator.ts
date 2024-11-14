@@ -3,14 +3,13 @@ import {i18n} from "@i18nConfig";
 import {fetchSettings} from "@lib/fetch-requests/fetchSettings";
 import {getTextDataWithTranslation, textContentReplacer} from "@repo/shared-util";
 import {AlternatesGenerators} from "@lib/alternatesCanonicalGenerator";
-
-type Props = {
-    params: { lang: string }
-}
+import {IPageProps} from "@repo/typescript-types";
 
 const alternatesGenerators = new AlternatesGenerators();
 
-const tagsMetaGenerator = async ({params}: Props, parent?: ResolvingMetadata): Promise<Metadata> => {
+const tagsMetaGenerator = async (props: IPageProps, parent?: ResolvingMetadata): Promise<Metadata> => {
+    //const searchParams = await props.searchParams;
+    const params = await props.params;
 
     const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const settingsData = await fetchSettings({requireSettings: ['tagsPageSettings']});

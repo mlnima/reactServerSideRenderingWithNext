@@ -13,28 +13,30 @@ import PostAdminOrAuthorQuickAccessBar
 import Soft404 from "@components/Soft404/Soft404";
 import NotFoundOrRestricted from "./components/NotFoundOrRestricted/NotFoundOrRestricted";
 
-const PreviewPost = dynamic(() => import("./components/PreviewPost/PreviewPost"))
-const VideoTypePostPage = dynamic(() => import('./components/VideoTypePostPage/VideoTypePostPage'))
-const ArticleTypePostPage = dynamic(() => import('./components/ArticleTypePostPage/ArticleTypePostPage'))
-const PromotionTypePostPage = dynamic(() => import('./components/PromotionTypePostPage/PromotionTypePostPage'))
-const LearnTypePostPage = dynamic(() => import('./components/LearnTypePostPage/LearnTypePostPage'))
+// const PreviewPost = dynamic(() => import("./components/PreviewPost/PreviewPost"))
+// const VideoTypePostPage = dynamic(() => import('./components/VideoTypePostPage/VideoTypePostPage'))
+// const ArticleTypePostPage = dynamic(() => import('./components/ArticleTypePostPage/ArticleTypePostPage'))
+// const PromotionTypePostPage = dynamic(() => import('./components/PromotionTypePostPage/PromotionTypePostPage'))
+// const LearnTypePostPage = dynamic(() => import('./components/LearnTypePostPage/LearnTypePostPage'))
 
-
-interface IProps {
-    params: {
-        lang: string
-        identifier: string,
-        postType: string
-    },
-    searchParams?: {
-        [key: string]: string | string[] | undefined
-    },
-}
+import PreviewPost from "./components/PreviewPost/PreviewPost";
+import VideoTypePostPage from './components/VideoTypePostPage/VideoTypePostPage';
+import ArticleTypePostPage from './components/ArticleTypePostPage/ArticleTypePostPage';
+import PromotionTypePostPage from './components/PromotionTypePostPage/PromotionTypePostPage';
+import LearnTypePostPage from './components/LearnTypePostPage/LearnTypePostPage';
+import {IPageProps} from "@repo/typescript-types";
 
 export const generateMetadata = postMetaGenerator;
 
+const PostPage = async (props: IPageProps) => {
+    const searchParams = await props.searchParams;
+    const params = await props.params;
 
-const PostPage = async ({params: {lang, identifier, postType}, searchParams}: IProps) => {
+    const {
+        lang,
+        identifier,
+        postType
+    } = params;
 
     const locale = i18n.locales.includes(lang) ? lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale)

@@ -8,17 +8,12 @@ import WidgetsRenderer from '@components/widgets/widgetRenderer/WidgetsRenderer'
 import SidebarWidgetAreaRenderer from '@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer';
 import tagsMetaGenerator from './components/tagsMetaGenerator/tagsMetaGenerator';
 import TagsPageContentRenderer from '@components/metas/TagsPageContentRenderer';
+import {IPageProps} from "@repo/typescript-types";
 
-interface IProps {
-    params: {
-        lang: string;
-    };
-    searchParams?: {
-        [key: string]: string | string[] | undefined;
-    };
-}
+const TagsPage = async (props: IPageProps) => {
+    const searchParams = await props.searchParams;
+    const params = await props.params;
 
-const TagsPage = async ({ params, searchParams }: IProps) => {
     const locale = i18n.locales.includes(params?.lang)
         ? params?.lang
         : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';

@@ -8,15 +8,15 @@ declare module '@repo/ui';
 declare module '@repo/shared-style';
 declare module 'simple-youtube-api';
 
-declare module 'axios' {
-    export interface AxiosResponse<T = any> {
-        data: T & { message?: string }; // Extend response data with an optional message property
-    }
-
-    export interface AxiosError<T = any> {
-        response?: AxiosResponse<T>;
-    }
-}
+// declare module 'axios' {
+//     export interface AxiosResponse<T = any> {
+//         data: T & { message?: string }; // Extend response data with an optional message property
+//     }
+//
+//     export interface AxiosError<T = any> {
+//         response?: AxiosResponse<T>;
+//     }
+// }
 
 // declare module '*';
 // export {};

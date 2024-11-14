@@ -13,21 +13,16 @@ import MetaAdminQuickAccessBar from "@components/metas/MetaAdminQuickAccessBar";
 import ActorBio from "./components/ActorBio/ActorBio";
 import Soft404 from "@components/Soft404/Soft404";
 import {mongoIdValidatorByRegex} from "@repo/shared-util";
+import {PageParams, PageSearchParams} from "@repo/typescript-types";
 
 interface IProps {
-    params: {
-        lang: string
-        actorId: string,
-    },
-    searchParams?: {
-        [key: string]: string | string[] | undefined
-    },
-    page: string | string[]
+    params: PageParams,
+    searchParams?: PageSearchParams,
 }
 
-
-
-const ActorPage = async ({params, searchParams}: IProps) => {
+const ActorPage = async (props: IProps) => {
+    const searchParams = await props.searchParams;
+    const params = await props.params;
 
     const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale);

@@ -5,7 +5,7 @@ import { getDictionary } from '../../get-dictionary';
 import './page.styles.scss';
 import { i18n } from '@i18nConfig';
 import SidebarWidgetAreaRenderer from '@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer';
-import ServerSideStore from '@store/ServerSideStore';
+import {IPageProps} from "@repo/typescript-types";
 
 interface IProps {
     params: {
@@ -16,9 +16,9 @@ interface IProps {
     };
 }
 
-const homePage = async ({ params }) => {
-    const { lang } = await params;
-    const locale = i18n.locales.includes(lang) ? lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+const homePage = async (props: IPageProps) => {
+    const params = await props.params;
+    const locale = i18n.locales.includes(params.lang) ? params.lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
 
     const dictionary = await getDictionary(locale);
     const settingsData = await fetchSettings({ requireSettings: ['homePageSettings'] });

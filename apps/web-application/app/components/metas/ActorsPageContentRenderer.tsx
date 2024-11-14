@@ -8,7 +8,6 @@ interface IProps {
     metas: Meta[],
     totalCount: number,
     currentPage: number,
-    contentPerPage: number,
     locale: string
     dictionary: {
         [key: string]: string
@@ -22,7 +21,6 @@ const ActorsPageContentRenderer: FC<IProps> =
          totalCount,
          currentPage,
          locale,
-         contentPerPage,
          dictionary
      }) => {
         return (
@@ -31,8 +29,7 @@ const ActorsPageContentRenderer: FC<IProps> =
                     <ActorsCardsRenderer metas={metas} locale={locale} dictionary={dictionary}/>
                 </div>
                 {renderPagination && <Pagination totalCount={totalCount}
-                                                 currentPage={currentPage}
-                                                 contentPerPage={contentPerPage}/>}
+                                                 currentPage={currentPage}/>}
             </>
         );
     };

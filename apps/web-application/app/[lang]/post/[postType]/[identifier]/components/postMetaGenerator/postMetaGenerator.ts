@@ -1,16 +1,20 @@
 import type {Metadata, ResolvingMetadata} from 'next'
 import {fetchPost} from "@lib/fetch-requests/fetchPosts";
 import {AlternatesGenerators} from "@lib/alternatesCanonicalGenerator";
+import {IPageProps, PageParams} from "@repo/typescript-types";
 
-type Props = {
-    params: { identifier: string,lang:string,postType:string }
-    searchParams: { [key: string]: string | string[] | undefined }
-}
 
 const alternatesGenerators = new AlternatesGenerators()
 
-const postMetaGenerator = async ({params:{identifier,lang,postType}, searchParams}: Props, parent?: ResolvingMetadata): Promise<Metadata> => {
+const postMetaGenerator = async (props: IPageProps, parent?: ResolvingMetadata): Promise<Metadata> => {
+    const searchParams = await props.searchParams;
+    const params = await props.params;
 
+    const {
+        lang,
+        identifier,
+        postType
+    } =  params;
 
 
     const fallbackImage = '/asset/images/default/no-image-available.png'

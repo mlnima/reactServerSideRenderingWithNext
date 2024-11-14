@@ -4,8 +4,10 @@
 const rewrites = require('./nextConfigs/rewrites')
 const {postTypes} = require("@repo/data-structures/dist/src");
 
+const projectLocales = process.env.NEXT_PUBLIC_LOCALES || 'en'
+
 const postTypeQueryMatcher = `:postType(${postTypes.join('|')})?`
-const languageQueryMatcher = `(${process.env.NEXT_PUBLIC_LOCALES.split(' ').join('|')})`;
+const languageQueryMatcher = `(${projectLocales.split(' ').join('|')})`;
 
 const imagesAllowedDomainsForNextImage = process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES?.split(' ') || []
 

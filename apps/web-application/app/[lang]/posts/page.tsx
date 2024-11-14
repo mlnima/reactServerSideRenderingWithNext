@@ -9,19 +9,12 @@ import WidgetsRenderer from "@components/widgets/widgetRenderer/WidgetsRenderer"
 import PostPage from "@components/PostsPage/PostsPage";
 import PostsPageInfo from "@components/PostsPage/PostsPageInfo/PostsPageInfo";
 import postsMetaGenerator from "./components/postsMetaGenerator/postsMetaGenerator";
+import {IPageProps} from "@repo/typescript-types";
 
-interface IProps {
-    params: {
-        lang: string
-    },
-    searchParams?: {
-        [key: string]: string | string[] | undefined
-        postType?:string,
-        page?: string,
-    }
-}
 
-const PostsPage = async ({params, searchParams}: IProps) => {
+const PostsPage = async (props: IPageProps) => {
+    const searchParams = await props.searchParams;
+    const params = await props.params;
 
     const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale);
@@ -39,9 +32,9 @@ const PostsPage = async ({params, searchParams}: IProps) => {
         locale
     });
 
-    const currentPageQuery = searchParams?.page;
+    const currentPageQuery = searchParams?.page || '0';
     const currentPage = (currentPageQuery) ?
-        parseInt(currentPageQuery, 10) : 1
+        parseInt(currentPageQuery as string, 10) : 1
 
 
     const postsData = await fetchPosts({

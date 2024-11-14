@@ -7,6 +7,9 @@ module.exports = {
     ecmaVersion: 2020,
     sourceType: 'module'
   },
+  plugins: [
+    'react-hooks'
+  ],
   settings: {
     react: {
       version: 'detect'
@@ -21,6 +24,7 @@ module.exports = {
     "next/core-web-vitals"
   ],
   rules: {
-    // Add your custom rules here
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn'
   }
 };

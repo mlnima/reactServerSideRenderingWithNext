@@ -6,14 +6,15 @@ import './page.styles.scss';
 import {i18n} from '@i18nConfig'
 import SidebarWidgetAreaRenderer
     from "@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer";
+import {IPageProps} from "@repo/typescript-types";
 
-interface IProps {
-    params: {
-        lang: string
-    }
-}
 
-const checkoutPage = async ({params: {lang}}:IProps) => {
+const checkoutPage = async (props: IPageProps) => {
+    const params = await props.params;
+
+    const {
+        lang
+    } = params;
 
     const locale = i18n.locales.includes(lang)  ?  lang :  process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale);

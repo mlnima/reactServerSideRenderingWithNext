@@ -10,17 +10,16 @@ import SidebarWidgetAreaRenderer
 import actorsMetaGenerator from "./components/actorsMetaGenerator/actorsMetaGenerator";
 import ActorsPageContentRenderer from "@components/metas/ActorsPageContentRenderer";
 import './page.styles.scss';
+import {PageParams, PageSearchParams} from "@repo/typescript-types";
 
 interface IProps {
-    params: {
-        lang: string
-    },
-    searchParams?: {
-        [key: string]: string | string[] | undefined
-    }
+    params: PageParams,
+    searchParams?: PageSearchParams,
 }
 
-const actorsPage = async ({params, searchParams}: IProps) => {
+const actorsPage = async (props: IProps) => {
+    const searchParams = await props.searchParams;
+    const params = await props.params;
     const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale);
     const settingsData = await fetchSettings({requireSettings: ['actorsPageSettings']});
@@ -67,7 +66,6 @@ const actorsPage = async ({params, searchParams}: IProps) => {
                                            currentPage={currentPage}
                                            locale={locale}
                                            dictionary={dictionary}
-                                           contentPerPage={contentPerPage}
                                            metas={metasData?.metas}/>
 
 

@@ -3,17 +3,17 @@ import { i18n } from '@i18nConfig';
 import { fetchSettings } from '@lib/fetch-requests/fetchSettings';
 import { getTextDataWithTranslation, textContentReplacer } from '@repo/shared-util';
 import { AlternatesGenerators } from '@lib/alternatesCanonicalGenerator';
+import {PageParams, PageSearchParams} from "@repo/typescript-types";
 
-type Props = {
-    params: { lang: string };
-};
+interface IProps {
+    params: PageParams,
+    searchParams?: PageSearchParams,
+}
 
 const alternatesGenerators = new AlternatesGenerators();
 
-const actorsMetaGenerator = async (
-    { params }: Props,
-    parent?: ResolvingMetadata,
-): Promise<Metadata> => {
+const actorsMetaGenerator = async (props: IProps, parent?: ResolvingMetadata,): Promise<Metadata> => {
+    const params = await props.params;
     const locale = i18n.locales.includes(params?.lang)
         ? params?.lang
         : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';

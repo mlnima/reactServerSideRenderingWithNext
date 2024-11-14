@@ -7,22 +7,12 @@ import {getDictionary} from "../../../../get-dictionary";
 import React from "react";
 import './page.styles.scss';
 import UserPageContent from "./components/UserPageContent/UserPageContent";
-
-interface IProps {
-    params: {
-        lang: string
-        username: string,
-    },
-    searchParams?: {
-        [key: string]: string | string[] | undefined
-
-    },
-    page: string | string[]
-}
+import {IPageProps} from "@repo/typescript-types";
 
 // export const generateMetadata = actorMetaGenerator;
 
-const userPage = async ({params, searchParams}: IProps) => {
+const userPage = async (props: IPageProps) => {
+    const params = await props.params;
 
     const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale);

@@ -2,13 +2,7 @@ import {getDictionary} from "../../../get-dictionary";
 import {i18n} from '@i18nConfig'
 import './page.styles.scss';
 import MessengerPageContent from "./components/messengerPageContent/MessengerPageContent";
-
-interface IProps {
-    params: {
-        lang: string,
-        identifier: string,
-    }
-}
+import {IPageProps} from "@repo/typescript-types";
 
 export const generateMetadata = async () => {
     return {
@@ -24,7 +18,13 @@ export const generateMetadata = async () => {
     }
 }
 
-const MessengerPage = async ({params: {lang, identifier}}: IProps) => {
+const MessengerPage = async (props: IPageProps) => {
+    const params = await props.params;
+
+    const {
+        lang,
+        identifier
+    } = params;
 
     const locale = i18n.locales.includes(lang) ? lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     const dictionary = await getDictionary(locale);

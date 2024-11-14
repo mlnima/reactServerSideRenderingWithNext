@@ -2,7 +2,7 @@
 import React, {useState, useEffect, useMemo} from 'react';
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {widgetsStaticPositions} from "@repo/data-structures/dist/src";
+import {widgetsStaticPositions} from "@repo/data-structures";
 import {DashboardStore, Store} from "@repo/typescript-types";
 import {useAppDispatch} from "@store/hooks";
 import {getWidgetsAction} from "@store/reducers/widgetsReducer";
