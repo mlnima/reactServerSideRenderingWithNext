@@ -33,8 +33,8 @@
 
     "build": {
       "dependsOn": [
-        "^build",
-        "generateStaticConfig"
+        "generateStaticConfig",
+        "^build"
       ],
       "outputs": [
         "dist/**",
