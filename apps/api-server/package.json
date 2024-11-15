@@ -14,7 +14,7 @@
   "scripts": {
     "dev": "concurrently \"cross-env nodemon --trace-warnings\"",
     "build": "tsc --project tsconfig.json",
-    "generateStaticConfig": "ts-node --project tsconfig.json --transpile-only generateStaticConfig.ts ",
+    "generateStaticConfig": "ts-node --project tsconfig.json --transpile-only generateStaticConfig.ts",
     "build-check": "ts-node --transpile-only -P tsconfig.json",
     "start": "concurrently \"NODE_ENV=production node ./dist/index.js\"",
     "operator": "ts-node ./tools/operator.ts",
