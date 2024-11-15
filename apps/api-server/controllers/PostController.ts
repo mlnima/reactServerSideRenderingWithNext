@@ -4,7 +4,7 @@ import {mongoIdValidator} from '@util/data-validators';
 import postSchema from '@schemas/postSchema';
 import searchKeywordSchema from '@schemas/searchKeywordSchema';
 import metaSchema from '@schemas/metaSchema';
-import {postFieldRequestForCards} from '@repo/data-structures/dist/src';
+import {postFieldRequestForCards} from '@repo/data-structures';
 import userSchema from '@schemas/userSchema';
 import mongoose from 'mongoose';
 import commentSchema from '@schemas/commentSchema';

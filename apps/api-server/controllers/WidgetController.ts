@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { Request, Response } from 'express';
 import widgetSchema from '@schemas/widgetSchema';
-import { postFieldRequestForCards } from '@repo/data-structures/dist/src';
+import { postFieldRequestForCards } from '@repo/data-structures';
 import { Widget } from '@repo/typescript-types';
 import updateMetasWidget from '@util/widgets/updateMetasWidget';
 import updatePostsListEntireByCategoriesWidget from '@util/widgets/updatePostsListEntireByCategoriesWidget';
