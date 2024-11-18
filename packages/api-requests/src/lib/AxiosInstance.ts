@@ -1,7 +1,7 @@
-import axios, { AxiosInstance as AxiosInstanceType } from 'axios';
+import axios from 'axios';
 
-const createAxiosInstance = (useUrl?: string): AxiosInstanceType => {
-    //const baseURL = useUrl === 'fileServer' ?  process.env.NEXT_PUBLIC_FILE_SERVER_URL : process.env.NEXT_PUBLIC_API_SERVER_URL
+const createAxiosInstance = () => {
+
     const instance = axios.create({
         baseURL:process.env.NEXT_PUBLIC_API_SERVER_URL,
     });
@@ -28,11 +28,7 @@ const createAxiosInstance = (useUrl?: string): AxiosInstanceType => {
 const AxiosInstance = createAxiosInstance();
 
 // Function to get AxiosInstance with custom base URL
-export const getAxiosInstance = (useUrl?: string): AxiosInstanceType => {
-    if (useUrl) {
-        return createAxiosInstance(useUrl);
-    }
-
+export const getAxiosInstance = () => {
     return AxiosInstance;
 };
 

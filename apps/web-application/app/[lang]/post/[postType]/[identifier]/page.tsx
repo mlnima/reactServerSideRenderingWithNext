@@ -1,6 +1,6 @@
 import {i18n} from "@i18nConfig";
 import {getDictionary} from "../../../../../get-dictionary";
-import dynamic from "next/dynamic";
+//import dynamic from "next/dynamic";
 import {fetchPost,fetchPostViews,fetchPostRating} from "@lib/fetch-requests/fetchPosts";
 import {fetchSettings} from "@lib/fetch-requests/fetchSettings";
 import {fetchWidgets} from "@lib/fetch-requests/fetchWidgets";

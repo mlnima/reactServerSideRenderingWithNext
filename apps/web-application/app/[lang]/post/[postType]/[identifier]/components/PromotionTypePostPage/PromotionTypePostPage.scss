@@ -1,4 +1,5 @@
-@import "../postPageStyle.styles";
+//@import "../postPageStyle.styles";
+@use '../postPageStyle.styles' as postPageStyle;
 
 .promotionEntryHeader {
   display: flex;

@@ -12,6 +12,7 @@
 /packages/**/node_modules
 
 .package-lock.json
+npm-list.txt
 node_modules
 
 apps/api-server/public/*

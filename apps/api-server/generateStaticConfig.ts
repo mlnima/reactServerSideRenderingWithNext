@@ -1,5 +1,6 @@
 // import 'module-alias/register';
 // import { register } from 'tsconfig-paths';
+//@ts-ignore
 import dotenv from 'dotenv';
 import { promises as fs } from 'fs';
 dotenv.config({ path: '../../.env' });

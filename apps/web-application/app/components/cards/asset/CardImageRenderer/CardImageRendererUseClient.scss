@@ -1,4 +1,5 @@
-@import "CardImageRenderer";
+//@import "CardImageRenderer";
+@use 'CardImageRenderer' as CardImageRenderer;
 
 @keyframes loading-trailer-animation {
   from{

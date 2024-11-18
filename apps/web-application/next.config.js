@@ -150,6 +150,9 @@ const nextConfig = {
         formats: ['image/avif', 'image/webp'],
         remotePatterns: allowedDomainsForNextImageConfig,
     },
+    sassOptions: {
+        silenceDeprecations: ['legacy-js-api'],
+    }
 
 }
 
