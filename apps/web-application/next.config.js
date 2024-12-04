@@ -39,9 +39,9 @@ const nextConfig = {
         ignoreDuringBuilds: true,
     },
     experimental: {
-        staleTimes: {
-            dynamic: 30,
-        },
+        // staleTimes: {
+        //     dynamic: 30,
+        // },
         nextScriptWorkers: true,
         // serverActions: true,
         // turbo: {
@@ -144,7 +144,7 @@ const nextConfig = {
         styledComponents: true,
     },
     typescript: {
-        ignoreBuildErrors: true,
+        ignoreBuildErrors: false,
     },
     images: {
         formats: ['image/avif', 'image/webp'],

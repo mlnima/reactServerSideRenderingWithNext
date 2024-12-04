@@ -5,7 +5,7 @@ import {setInitialSettings} from "@store/reducers/settingsReducer";
 import {setUseSecondaryModeColors} from "@store/reducers/globalStateReducer";
 
 interface IProps {
-    initialSettings: {}
+    initialSettings: object
 }
 
 const StoreDataInitializer: FC<IProps> = ({initialSettings}) => {

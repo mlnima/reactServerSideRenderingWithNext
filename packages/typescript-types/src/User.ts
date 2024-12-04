@@ -33,3 +33,17 @@ export interface User {
     createdAt:Date,
     updatedAt:Date,
 }
+
+export interface IUserPageData {
+    followersCount:number
+    followingCount: number,
+    postsCount: number,
+    profileImage: string,
+    didRequesterBlockThisUser: boolean,
+    didThisUserBlockRequester: boolean,
+    didRequesterFollowThisUser: boolean,
+    isFollowed: boolean,
+    username: string,
+    about: string,
+    _id: string,
+}

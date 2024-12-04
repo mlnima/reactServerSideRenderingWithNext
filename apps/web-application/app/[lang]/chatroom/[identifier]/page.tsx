@@ -1,10 +1,10 @@
 import {fetchChatroomData} from "@lib/fetch-requests/fetchChatrooms";
 import {getDictionary} from "../../../../get-dictionary";
-import {i18n} from '@i18nConfig'
-import './page.styles.scss';
+import './page.scss';
 import ChatroomPageContent from "./components/ChatroomPageContent/ChatroomPageContent";
 import chatroomMetaGenerator from "./components/chatroomMetaGenerator/chatroomMetaGenerator";
 import {PageParams, PageSearchParams} from "@repo/typescript-types";
+import localDetector from "@lib/localDetector";
 
 interface IProps {
     params: PageParams,
@@ -15,14 +15,12 @@ const chatroomPage = async (props: IProps) => {
     const params = await props.params;
 
     const {
-        lang,
         identifier
     } = params;
 
-    const locale = i18n.locales.includes(lang) ? lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+    const locale = localDetector(params.lang);
     const dictionary = await getDictionary(locale);
-    // const settingsData = await fetchSettings(['chatroomPageSettings']);
-    const chatroomsData = await fetchChatroomData({identifier})
+    const chatroomsData = identifier ? await fetchChatroomData({identifier}) : {}
 
     return (
         <div id={'content'} className={`page-no-sidebar`} dir={'ltr'}>

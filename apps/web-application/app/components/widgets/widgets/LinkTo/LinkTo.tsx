@@ -4,7 +4,9 @@ import { UniqueDataTypes } from "@repo/typescript-types";
 
 interface LinkToPropTypes {
     translations: {
-        [key: string]: any;
+        [key: string]: {
+            [key: string]: string
+        };
     };
     dictionary: {
         [key: string]: string;

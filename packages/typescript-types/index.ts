@@ -30,14 +30,14 @@ import {UserState} from "./src/storeTypes/UserState";
 import {WidgetsState} from "./src/storeTypes/WidgetsState";
 import {Post} from "./src/Post";
 import {PostRaw} from "./src/Post";
-import {Meta} from "./src/Meta";
+import {Meta,MetaType,MetasType} from "./src/Meta";
 import {IMenuItem, Widget} from "./src/widgets/Widget";
 import {PageTypes,PageSearchParams,PageParams,IPageProps,ILayoutProps} from "./src/Page";
 import {WidgetData} from "./src/widgets/Widget";
-import {WidgetSettingsPropTypes} from "./src/widgets/Widget";
-import {UniqueDataTypes} from "./src/widgets/Widget";
+import {WidgetSettingsPropTypes,ISuggestion,UniqueDataTypes} from "./src/widgets/Widget";
+
 import {MenuItem} from "./src/widgets/MenuWidget/MenuItem";
-import {User} from "./src/User";
+import {User,IUserPageData} from "./src/User";
 import {Comment} from "./src/Comment";
 import {CommentRaw} from "./src/Comment";
 import {NewComment} from "./src/Comment";
@@ -64,6 +64,7 @@ export type {
     IMessengerConversationMessage,
     CommentRaw,
     User,
+    IUserPageData,
     MenuItem,
     UniqueDataTypes,
     Comment,
@@ -75,6 +76,7 @@ export type {
     PageTypes,
     AxiosResponseTypes,
     Widget,
+    ISuggestion,
     IMenuItem,
     Chatroom,
     ChatroomMessage,
@@ -105,6 +107,8 @@ export type {
     Post,
     PostRaw,
     Meta,
+    MetaType,
+    MetasType,
     UserState,
     IEmail,
     WidgetsState

@@ -6,7 +6,7 @@ import './CommentsRenderer.styles.scss'
 
 interface IProps {
     comments: Comment[],
-    onDeleteCommentHandler: (id: string) => void,
+    onDeleteCommentHandler:  (_id: string) => Promise<void> ,
     adminMode: boolean,
     commentsRef: React.RefObject<HTMLDivElement>,
     commentsAllowScrollRef: React.MutableRefObject<boolean>,

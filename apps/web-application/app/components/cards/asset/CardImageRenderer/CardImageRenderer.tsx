@@ -5,7 +5,7 @@ interface CardImageNextPropTypes {
     imageUrl: string|undefined,
     mediaAlt: undefined | string,
     aspectRatio?: string | undefined,
-    objectFit?: string | undefined,
+    objectFit?: 'fill' | 'contain' | 'cover' | 'none' | 'scale-down',
     index: number
 }
 
@@ -27,7 +27,6 @@ const CardImageRenderer: FC<CardImageNextPropTypes> =
                     // loading={'lazy'}
                      loading={index > 3 ? 'lazy' : 'eager'}
                      style={{
-                         //@ts-ignore
                          objectFit: objectFit || 'contain',
                          aspectRatio: aspectRatio || '16/9'
                      }}

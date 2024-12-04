@@ -4,8 +4,6 @@ import CardTitle from '../../asset/CardTitle/CardTitle';
 import { Post } from "@repo/typescript-types";
 import '../postCard.scss';
 import Link from 'next/link';
-import CardViews from '@components/cards/asset/CardViews/CardViews';
-import CardRating from '@components/cards/asset/CardRating/CardRating';
 import CardStats from '@components/cards/asset/CardStats/CardStats';
 import './PromotionPostCard.scss'
 const CardImageRendererUseClient = dynamic(() => import('../../asset/CardImageRenderer/CardImageRendererUseClient'));
@@ -22,7 +20,9 @@ interface PromotionPostCardPropTypes {
         [key: string]: string;
     };
     settings: {
-        [key: string]: string;
+        showViewsOnCard:  boolean,
+        showRatingOnCard:  boolean,
+        showDateOnCard:  boolean,
     };
 }
 
@@ -66,7 +66,7 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> = ({
                         views={post?.views}
                         dictionary={dictionary}
                         likes={post?.likes}
-                        dislikes={post?.dislikes}
+                        dislikes={post?.disLikes}
                         createdAt={post?.createdAt}
                         updatedAt={post?.updatedAt}
                     />

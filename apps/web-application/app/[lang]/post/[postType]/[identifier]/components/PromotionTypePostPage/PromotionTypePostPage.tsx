@@ -49,12 +49,14 @@ const PromotionTypePostPage: FC<IProps> = ({
                                 alt="title"
                             />
                         </a>
-                        <Link href={post?.redirectLink} className="btn btn-primary redirectLink" target="_blank">
+                        {post?.redirectLink &&
+                            <Link href={post?.redirectLink} className="btn btn-primary redirectLink" target="_blank">
                             <h1>
                                 {post?.translations?.[locale]?.title ?? post?.title}
                                 <FontAwesomeIcon className={'rating-icon'} icon={faArrowUpRightFromSquare}/>
                             </h1>
                         </Link>
+                        }
                     </div>
 
                 </div>

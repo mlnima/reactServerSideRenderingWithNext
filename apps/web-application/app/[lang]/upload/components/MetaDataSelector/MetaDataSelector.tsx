@@ -1,19 +1,19 @@
 'use client';
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import AsyncSelect from 'react-select/async';
 import { uniqArrayBy } from '@repo/shared-util';
 import { clientAPIRequestGetMetaSuggestion } from '@repo/api-requests';
-import { Meta } from '@repo/typescript-types';
-import './MetaDataSelector.styles.scss';
+import {MetasType, Post} from '@repo/typescript-types';
+import './MetaDataSelector.scss';
 import { setAlert } from '@store/reducers/globalStateReducer';
-import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { useAppDispatch } from '@store/hooks';
 import { reactSelectPrimaryTheme } from '@repo/data-structures';
 
 interface ComponentPropTypes {
-    metaType: string;
+    metaType: MetasType;
     maxLimit: number;
-    onMetaChangeHandler: (selectedMetas: Meta[], metaType: string) => void;
-    postData: Record<string, Meta[]>;
+    setEditingPost: React.Dispatch<React.SetStateAction<Post>>;
+    postData: Post;
 }
 
 interface SelectOption {
@@ -21,7 +21,7 @@ interface SelectOption {
     label: string;
 }
 
-const MetaDataSelector: FC<ComponentPropTypes> = ({ metaType, onMetaChangeHandler, maxLimit, postData }) => {
+const MetaDataSelector: FC<ComponentPropTypes> = ({ metaType, setEditingPost, maxLimit, postData }) => {
     const dispatch = useAppDispatch();
 
     const onSelectHandler = (selected: SelectOption[] | null) => {
@@ -34,7 +34,7 @@ const MetaDataSelector: FC<ComponentPropTypes> = ({ metaType, onMetaChangeHandle
                     type: 'error',
                 }),
             );
-            return
+            return;
         }
 
         const convertSelectedMetas = selected.map(selectedMeta => ({
@@ -42,16 +42,17 @@ const MetaDataSelector: FC<ComponentPropTypes> = ({ metaType, onMetaChangeHandle
             _id: selectedMeta.value,
         }));
 
-        onMetaChangeHandler(uniqArrayBy(convertSelectedMetas, '_id'), metaType);
-
-
+        setEditingPost(prevState => ({
+            ...prevState,
+            [metaType]: uniqArrayBy(convertSelectedMetas, '_id'),
+        }));
     };
 
     const onLoadOptionsHandler = async (input: string) => {
         try {
             const suggestionList = await clientAPIRequestGetMetaSuggestion(metaType, input);
             if (suggestionList.data?.metas?.length) {
-                const reducedResult = suggestionList.data.metas.reduce(
+                return suggestionList.data.metas.reduce(
                     (
                         final: {
                             value: string;
@@ -64,26 +65,21 @@ const MetaDataSelector: FC<ComponentPropTypes> = ({ metaType, onMetaChangeHandle
                     },
                     [],
                 );
-                return reducedResult;
             } else return [];
-        } catch (error) {
+        } catch {
             return [];
         }
     };
 
-
-
     return (
         <div className="metaDataSelector">
-
-
             <AsyncSelect
                 name={metaType}
                 className={'reactSelectComponent'}
                 onChange={val => onSelectHandler(val as SelectOption[])}
                 loadOptions={onLoadOptionsHandler}
                 isMulti
-                value={(postData?.[metaType] || []).map(
+                value={(postData[metaType]  || []).map(
                     (meta): SelectOption => ({ value: meta._id, label: meta.name }),
                 )}
                 styles={reactSelectPrimaryTheme}

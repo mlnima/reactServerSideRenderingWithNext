@@ -1,6 +1,5 @@
 'use client';
-import React, { FC, useEffect } from 'react';
-import Draggable from 'react-draggable';
+import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { closeAlert } from '@store/reducers/globalStateReducer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,7 +8,7 @@ import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons/faTrian
 import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons/faCircleExclamation';
 import { faXmark } from '@fortawesome/free-solid-svg-icons/faXmark';
 import Csr from '@components/global/Csr';
-import './AlertBox.styles.scss';
+import './AlertBox.scss';
 
 interface IProps {
     dictionary: {
@@ -17,12 +16,13 @@ interface IProps {
     };
 }
 
-const AlertBox: ({ dictionary }: { dictionary: any }) => null | React.JSX.Element = ({ dictionary }) => {
+const AlertBox: ({ dictionary }: IProps) => null | React.JSX.Element = ({ dictionary }) => {
     const { alert } = useAppSelector(({ globalState }) => globalState);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        let clearAlertTimeout: NodeJS.Timeout;
+        let clearAlertTimeout:ReturnType<typeof setTimeout> | null = null;
+
         if (!alert?.actionFunctions) {
             if (alert?.active) {
                 const component = true;
@@ -35,9 +35,17 @@ const AlertBox: ({ dictionary }: { dictionary: any }) => null | React.JSX.Elemen
         }
 
         return () => {
-            clearTimeout(clearAlertTimeout);
+            if (clearAlertTimeout){
+                clearTimeout(clearAlertTimeout);
+            }
         };
     }, [alert]);
+
+    const onClickHandler = ()=>{
+        if (alert?.actionFunctions){
+            alert.actionFunctions()
+        }
+    }
 
     if (!alert.active) return null;
 
@@ -68,8 +76,8 @@ const AlertBox: ({ dictionary }: { dictionary: any }) => null | React.JSX.Elemen
                         </button>
                     </div>
                     <p className="alert">{(!!alert?.message && dictionary?.[alert?.message]) || alert?.message}</p>
-                    {/*//@ts-ignore*/}
-                    {!!alert.err?.stack && <p>{alert.err?.stack}</p>}
+
+                    {/*{!!alert.err?.stack && <p>{alert.err?.stack}</p>}*/}
 
                     <div className={'alertActionButtons'}>
                         {alert?.type === 'deleteAction' || alert?.type === 'confirmAction' ? (
@@ -77,7 +85,7 @@ const AlertBox: ({ dictionary }: { dictionary: any }) => null | React.JSX.Elemen
                                 <button className={'btn btn-info'} onClick={() => dispatch(closeAlert({}))}>
                                     {dictionary?.['No'] || 'No'}
                                 </button>
-                                <button className={'btn btn-danger'} onClick={() => alert.actionFunctions()}>
+                                <button className={'btn btn-danger'} onClick={onClickHandler}>
                                     {alert?.type === 'deleteAction' ? dictionary?.['Delete'] || 'Delete' : dictionary?.['Yes'] || 'Yes'}
                                 </button>
                             </>

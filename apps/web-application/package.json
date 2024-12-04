@@ -12,10 +12,13 @@
     "lint": "next lint"
   },
   "devDependencies": {
-    "@types/node": "20.2.5",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "18.2.4",
-    "@types/styled-components": "^5.1.34"
+    "autoprefixer": "^10.4.14",
+    "cross-env": "^7.0.3",
+    "dotenv-cli": "^7.3.0",
+    "postcss": "^8.4.14",
+    "sass": "^1.64.1",
+    "tailwindcss": "^3.3.2",
+    "utf-8-validate": "^5.0.10"
   },
   "dependencies": {
     "@builder.io/partytown": "0.10.2",
@@ -36,6 +39,7 @@
     "@repo/react-hooker-lib": "*",
     "@repo/shared-style": "*",
     "@repo/shared-util": "*",
+    "@repo/typescript-types": "*",
     "@repo/ui": "*",
     "@vercel/edge": "^0.3.4",
     "@vercel/og": "^0.5.20",
@@ -56,6 +60,7 @@
     "html-react-parser": "^3.0.16",
     "jsdom": "^22.1.0",
     "lodash.throttle": "^4.1.1",
+    "mongodb": "^6.11.0",
     "negotiator": "^0.6.3",
     "next": "^15.0.3",
     "next-compose-plugins": "^2.2.1",
@@ -87,17 +92,7 @@
     "socket.io-client": "^4.7.1",
     "styled-components": "^5.3.11",
     "tsconfig": "*",
-    "@repo/typescript-types": "*",
     "uuid": "^9.0.1"
-  },
-  "devDependencies": {
-    "autoprefixer": "^10.4.14",
-    "cross-env": "^7.0.3",
-    "dotenv-cli": "^7.3.0",
-    "postcss": "^8.4.14",
-    "sass": "^1.64.1",
-    "tailwindcss": "^3.3.2",
-    "utf-8-validate": "^5.0.10"
   },
   "_moduleAliases": {
     "@components": "./app/components",

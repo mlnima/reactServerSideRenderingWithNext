@@ -3,62 +3,98 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons/faCamera';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons/faCirclePlus';
-import './MultipleImageUploader.styles.scss';
-import { clientAPIRequestDeletePostImage } from '@repo/api-requests';
-import { Post } from "@repo/typescript-types";
+import './MultipleImageUploader.scss';
+import { Post } from '@repo/typescript-types';
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 
 export interface MultipleImageUploaderProps {
-    editingPost: {} | Post;
-    setEditingPost: Function;
-    fileInputRef: any;
+  editingPost: Post;
+  setEditingPost: React.Dispatch<React.SetStateAction<Post>>;
+  fileInputRef: React.RefObject<HTMLInputElement>;
 }
 
-const MultipleImageUploader: React.FC<MultipleImageUploaderProps> = ({ editingPost, setEditingPost, fileInputRef }) => {
-    const [image, setImage] = useState(null);
-    const removeImage = async (index: number) => {
-        setEditingPost(prevState => ({ ...prevState, mainThumbnail: null, thumbnail: null }));
-        setImage(null)
-        fileInputRef.current.value = '';
-    };
+const MultipleImageUploader: React.FC<MultipleImageUploaderProps> = ({
+  editingPost,
+  setEditingPost,
+  fileInputRef,
+}) => {
+  const [image, setImage] = useState<string | null>(null);
 
-    const onChangeHandler = () => {
-        const image = fileInputRef.current.files?.[0] || fileInputRef.current.files?.[0];
-        if (image) {
-            setImage(URL.createObjectURL(image));
-        }
-    };
+  const onChangeHandler = () => {
+    if (!fileInputRef.current || !fileInputRef.current.files) {
+      return;
+    }
+    const file = fileInputRef.current.files[0];
+    if (file instanceof Blob) {
+      setImage(URL.createObjectURL(file));
+    }
+  };
 
-    return (
-        <div className={'multipleImageUploader'}>
-            <input
-                ref={fileInputRef}
-                type="file"
-                multiple={false}
-                accept="image/*"
-                style={{ display: 'none' }}
-                onChange={onChangeHandler}
-            />
+  const removeImage = async () => {
+    // @ts-expect-error: need to be fixed
+    setEditingPost((prevState) => ({
+      ...prevState,
+      mainThumbnail: 'null',
+      thumbnail: null,
+    }));
+    setImage(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
 
-            {(!image && !editingPost?.mainThumbnail && !editingPost?.thumbnail?.filePath) && (
-                <>
-                    <div className={'add-images-area'} onClick={() => fileInputRef?.current?.click()}>
-                        <FontAwesomeIcon className={'camera'} icon={faCamera} style={{ width: 40, height: 40 }} />
-                        <FontAwesomeIcon className={'plus'} icon={faCirclePlus} style={{ width: 10, height: 10 }} />
-                    </div>
-                </>
-            )}
+  return (
+    <div className={'multipleImageUploader'}>
+      <input
+        ref={fileInputRef}
+        type="file"
+        multiple={false}
+        accept="image/*"
+        style={{ display: 'none' }}
+        onChange={onChangeHandler}
+      />
 
-            {(!!image || !!editingPost?.mainThumbnail || !!editingPost?.thumbnail?.filePath) && (
-                <div className={'imagePreview'}>
-                    <div className={'imageActionButtons'}>
-                        <FontAwesomeIcon onClick={() => removeImage(1)} icon={faTrash} />
-                    </div>
-                    <img src={image || editingPost?.mainThumbnail || editingPost?.thumbnail?.filePath} alt="" />
-                </div>
-            )}
+      {!image &&
+        !editingPost?.mainThumbnail &&
+        !editingPost?.thumbnail?.filePath && (
+          <>
+            <div
+              className={'add-images-area'}
+              onClick={() => fileInputRef?.current?.click()}
+            >
+              <FontAwesomeIcon
+                className={'camera'}
+                icon={faCamera}
+                style={{ width: 40, height: 40 }}
+              />
+              <FontAwesomeIcon
+                className={'plus'}
+                icon={faCirclePlus}
+                style={{ width: 10, height: 10 }}
+              />
+            </div>
+          </>
+        )}
+
+      {(!!image ||
+        !!editingPost?.mainThumbnail ||
+        !!editingPost?.thumbnail?.filePath) && (
+        <div className={'imagePreview'}>
+          <div className={'imageActionButtons'}>
+            <FontAwesomeIcon onClick={() => removeImage()} icon={faTrash} />
+          </div>
+          <img
+            src={
+              image ||
+              editingPost?.mainThumbnail ||
+              editingPost?.thumbnail?.filePath
+            }
+            alt=""
+          />
         </div>
-    );
+      )}
+    </div>
+  );
 };
 
 export default MultipleImageUploader;

@@ -1,27 +1,32 @@
-export interface InitialSettings{
-    headDataSettings:{
-        favIconUrl: string,
-        pwa192: string,
-        pwa384: string,
-        pwa512: string,
-        googleAnalyticsId: string,
-        keywords: string,
-        title:string,
-        siteName: string,
-        themeColor: string,
-        description: string,
-        customHeadTags: string,
-        customScripts: string,
-        rtaContent: boolean,
-        translations:{
-            [key: string]:{
-                title: string,
-                keywords: string,
-                description: string
-            }
-        },
-
+export interface IHeadDataSettings{
+    favIconUrl: string,
+    pwa192: string,
+    pwa384: string,
+    pwa512: string,
+    googleAnalyticsId: string,
+    keywords: string,
+    title:string,
+    siteName: string,
+    themeColor: string,
+    description: string,
+    display: string,
+    start_url: string,
+    orientation: string,
+    customHeadTags: string,
+    customScripts: string,
+    rtaContent: boolean,
+    translations:{
+        [key: string]:{
+            title: string,
+            keywords: string,
+            description: string
+        }
     },
+}
+
+
+export interface InitialSettings{
+    headDataSettings:IHeadDataSettings,
     membershipSettings:{
         allowUserToPost: boolean,
         membership: boolean,

@@ -1,13 +1,11 @@
 'use client';
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { Post } from "@repo/typescript-types";
+import { Post } from '@repo/typescript-types';
 import { editPostStatusAction } from '@store/reducers/postsReducers/editPostStatusAction';
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import './PostAdminOrAuthorQuickAccessBar.scss';
-import { formatDistance } from 'date-fns';
-import { capitalizeFirstLetter } from '@repo/shared-util';
 import PostQuickAccessPostInformation from './PostQuickAccessPostInformation';
 
 interface IProps {
@@ -17,13 +15,7 @@ interface IProps {
     };
 }
 
-const PostAdminOrAuthorQuickAccessBar: ({
-    post,
-    dictionary,
-}: {
-    post: any;
-    dictionary: any;
-}) => React.JSX.Element | null = ({ post, dictionary }) => {
+const PostAdminOrAuthorQuickAccessBar: FC<IProps> = ({ post, dictionary }) => {
     const adminMode = useAppSelector(({ globalState }) => globalState?.adminMode);
     const { userData } = useAppSelector(({ user }) => user);
     const dispatch = useAppDispatch();

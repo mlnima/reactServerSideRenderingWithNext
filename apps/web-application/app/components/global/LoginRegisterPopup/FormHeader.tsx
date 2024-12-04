@@ -13,7 +13,7 @@ interface IProps{
     }
 }
 
-const FormHeader: FC<IProps> = ({locale,dictionary}) => {
+const FormHeader: FC<IProps> = ({dictionary}) => {
 
     const dispatch = useAppDispatch();
     const {loginRegisterFormPopup} = useAppSelector(({globalState}) => globalState);

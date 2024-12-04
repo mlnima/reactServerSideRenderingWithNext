@@ -1,12 +1,12 @@
-import {FC, Fragment as ReactFragment} from "react";
+import {FC, Fragment as ReactFragment, ReactNode} from "react";
 import dynamic from 'next/dynamic'
 
 interface PropTypes {
-    children: any
+    children: ReactNode
 }
 
-const Csr: FC<PropTypes> = (props) => {
-    return <ReactFragment>{props.children}</ReactFragment>
+const Csr: FC<PropTypes> = ({children}) => {
+    return <ReactFragment>{children}</ReactFragment>
 };
 
 export default dynamic(() => Promise.resolve(Csr), {

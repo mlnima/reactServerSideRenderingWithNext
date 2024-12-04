@@ -2,6 +2,7 @@ import {IMessengerConversation} from "./IMessengerConversation";
 import {User} from "../User";
 
 export interface IMessengerConversationMessage {
+    _id: string;
     type: 'privateMessage' | 'eventLog',
     conversation: IMessengerConversation,
     sender: User,

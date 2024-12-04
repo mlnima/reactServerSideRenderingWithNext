@@ -1,78 +1,67 @@
+/* eslint-disable */
 // @ts-nocheck
 'use client';
-import React, {FC, useEffect, useMemo, useRef, useState} from "react";
-import Draggable from "react-draggable";
+import React, { FC, useEffect, useMemo, useRef, useState } from 'react';
+import Draggable from 'react-draggable';
 import socket from '@lib/web-socket-client';
-import './MediaCall.styles.scss'
-import {useAppDispatch, useAppSelector} from "@store/hooks";
-import CallerInfo from "./CallerInfo";
-import InCallActionButtons from "./InCallActionButtons";
-import InitialMediaCall from "./InitialMediaCall";
+import './MediaCall.styles.scss';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import CallerInfo from './CallerInfo';
+import InCallActionButtons from './InCallActionButtons';
+import InitialMediaCall from './InitialMediaCall';
 import {
-    initialAcceptIncomingCall, initialAcceptOutGoingCall,
-    initialOutGoingCallConfirmAction, resetMediaConnectionAction
-} from "@store/reducers/mediaConnectionReducer";
-import Peer from "simple-peer";
-import {setAlert} from "@store/reducers/globalStateReducer";
+    initialAcceptIncomingCall,
+    initialAcceptOutGoingCall,
+    initialOutGoingCallConfirmAction,
+    resetMediaConnectionAction,
+} from '@store/reducers/mediaConnectionReducer';
+import Peer from 'simple-peer';
+import { setAlert } from '@store/reducers/globalStateReducer';
 
 const MediaCall: FC = () => {
-
-    const [localStream, setLocalStream] = useState<MediaStream | null>(null)
-    const [remoteStream, setRemoteStream] = useState<MediaStream | null>(null)
+    const [localStream, setLocalStream] = useState<MediaStream | null>(null);
+    const [remoteStream, setRemoteStream] = useState<MediaStream | null>(null);
     const [isCameraEnabled, setIsCameraEnabled] = useState(true);
     const [isMicrophoneEnabled, setIsMicrophoneEnabled] = useState(true);
     const [currentCameraIndex, setCurrentCameraIndex] = useState(0);
-    const {activeConversation} = useAppSelector(({messenger}) => messenger);
-    const {userData,loggedIn} = useAppSelector(({user}) => user)
-    const {mediaCall} = useAppSelector(({mediaConnection}) => mediaConnection)
-    const largeVideoStreamRef = useRef<HTMLVideoElement>(null)
-    const smallVideoStreamRef = useRef<HTMLVideoElement>(null)
-    const InCallButtonsRef = useRef(null)
-    const [inCallButtonsVisible, setInCallButtonsVisible] = React.useState(true)
-    const dispatch = useAppDispatch()
+    const { activeConversation } = useAppSelector(({ messenger }) => messenger);
+    const { userData, loggedIn } = useAppSelector(({ user }) => user);
+    const { mediaCall } = useAppSelector(({ mediaConnection }) => mediaConnection);
+    const largeVideoStreamRef = useRef<HTMLVideoElement>(null);
+    const smallVideoStreamRef = useRef<HTMLVideoElement>(null);
+    const InCallButtonsRef = useRef(null);
+    const [inCallButtonsVisible, setInCallButtonsVisible] = React.useState(true);
+    const dispatch = useAppDispatch();
     // const router = useRouter()
 
     const targetSocketIds = useMemo(() => {
-        return activeConversation?.users?.reduce((finalData: string[], currentUser:{_id:string}) => {
+        return activeConversation?.users?.reduce((finalData: string[], currentUser: { _id: string }) => {
             if (currentUser._id !== userData?._id) {
-                finalData = [...finalData, currentUser._id]
+                finalData = [...finalData, currentUser._id];
             }
-            return finalData
-        }, [])
-    }, [activeConversation?.users])
+            return finalData;
+        }, []);
+    }, [activeConversation?.users]);
 
-
-    const {
-        onGoingCall,
-        incomingCall,
-        outGoingCall,
-        callAccepted,
-        callerData,
-        callRejected,
-        remoteSignal,
-        callType,
-    } = useAppSelector(({mediaConnection}) => mediaConnection);
-
+    const { onGoingCall, incomingCall, outGoingCall, callAccepted, callerData, callRejected, remoteSignal, callType } =
+        useAppSelector(({ mediaConnection }) => mediaConnection);
 
     useEffect(() => {
-
-
-        socket.on('cancelIncomingCall', ({conversationId, callerData}) => {
-            if ((activeConversation?._id === conversationId) && incomingCall) {
+        socket.on('cancelIncomingCall', ({ conversationId, callerData }) => {
+            if (activeConversation?._id === conversationId && incomingCall) {
                 // onTerminatedCallHandler()
-                dispatch(resetMediaConnectionAction(null))
+                dispatch(resetMediaConnectionAction(null));
             }
-        })
-
-        socket.on('disconnect', () => {
-            onTerminatedCallHandler()
         });
 
+        socket.on('disconnect', () => {
+            onTerminatedCallHandler();
+        });
 
         socket.on('callRejected', () => {
-            cleanup1LocalAndRemoteStream()
-            dispatch(resetMediaConnectionAction(null))
-            dispatch(setAlert({message: 'Call Rejected',type:'info'}))
+            cleanup1LocalAndRemoteStream();
+            dispatch(resetMediaConnectionAction(null));
+            dispatch(setAlert({ message: 'Call Rejected', type: 'info' }));
         });
 
         return () => {
@@ -84,144 +73,134 @@ const MediaCall: FC = () => {
 
     useEffect(() => {
         if (!!localStream && !remoteStream && largeVideoStreamRef?.current) {
-            largeVideoStreamRef.current.srcObject = localStream
+            largeVideoStreamRef.current.srcObject = localStream;
         }
         if (!!localStream && !!remoteStream && largeVideoStreamRef?.current && smallVideoStreamRef?.current) {
-            largeVideoStreamRef.current.srcObject = remoteStream
-            smallVideoStreamRef.current.srcObject = localStream
+            largeVideoStreamRef.current.srcObject = remoteStream;
+            smallVideoStreamRef.current.srcObject = localStream;
         }
-
     }, [remoteStream, localStream]);
 
     const cleanup1LocalAndRemoteStream = () => {
-        if (!!localStream) {
-            localStream.getTracks().forEach((track) => track.stop());
+        if (localStream) {
+            localStream.getTracks().forEach(track => track.stop());
             setLocalStream(null);
         }
 
-        if (!!remoteStream) {
-            remoteStream.getTracks().forEach((track) => track.stop());
+        if (remoteStream) {
+            remoteStream.getTracks().forEach(track => track.stop());
             setRemoteStream(null);
         }
-    }
+    };
     const onCallHandler = async () => {
         try {
             if (activeConversation?._id && userData?._id) {
-                const mediaDevice = await navigator?.mediaDevices?.getUserMedia({video: true, audio: true});
+                const mediaDevice = await navigator?.mediaDevices?.getUserMedia({ video: true, audio: true });
 
                 if (!mediaDevice) {
-                    dispatch(setAlert({message: 'Can Not Access The Camera or Microphone', type: 'error'}));
-                    return
+                    dispatch(setAlert({ message: 'Can Not Access The Camera or Microphone', type: 'error' }));
+                    return;
                 }
 
-                setLocalStream(mediaDevice)
-                dispatch(initialOutGoingCallConfirmAction(null))
+                setLocalStream(mediaDevice);
+                dispatch(initialOutGoingCallConfirmAction(null));
 
                 const peer = new Peer({
                     initiator: true,
                     trickle: false,
-                    stream: mediaDevice
+                    stream: mediaDevice,
                 });
 
-                peer._debug = console.log
+                peer._debug = console.log;
 
-                peer.on('signal', (signal) => {
-                    socket.emit("makeMediaCall", {
+                peer.on('signal', signal => {
+                    socket.emit('makeMediaCall', {
                         signal,
                         targetSocketIds,
                         conversationId: activeConversation._id,
                         callerData: {
                             _id: userData._id,
                             profileImage: userData?.profileImage?.filePath,
-                            username: userData?.username
+                            username: userData?.username,
                         },
-                        callType
+                        callType,
                     });
                 });
 
                 socket.on('callTerminated', () => {
-
-                    cleanup1LocalAndRemoteStream()
-                    dispatch(resetMediaConnectionAction(null))
-                    peer.destroy()
+                    cleanup1LocalAndRemoteStream();
+                    dispatch(resetMediaConnectionAction(null));
+                    peer.destroy();
                     //should fix , for now threw error about can not signal after peer is destroyed
                     // router.reload()
-                })
+                });
 
-                socket.on('callAccepted', ({signal}) => {
-                    dispatch(initialAcceptOutGoingCall(null))
+                socket.on('callAccepted', ({ signal }) => {
+                    dispatch(initialAcceptOutGoingCall(null));
                     peer.signal(signal);
                 });
 
                 // Listen for the remote stream
-                peer.on('stream', (remoteStream) => {
-                    setRemoteStream(remoteStream)
+                peer.on('stream', remoteStream => {
+                    setRemoteStream(remoteStream);
                 });
-
-
             }
-        } catch (error) {
-
+        } catch {
+            return;
         }
-
-    }
+    };
     const onCancelOutGoingCallHandler = () => {
         if (outGoingCall && activeConversation?._id && userData?._id) {
-            cleanup1LocalAndRemoteStream()
-            dispatch(resetMediaConnectionAction(null))
+            cleanup1LocalAndRemoteStream();
+            dispatch(resetMediaConnectionAction(null));
             setTimeout(() => {
-                socket.emit("cancelOutGoingCall", {
+                socket.emit('cancelOutGoingCall', {
                     targetSocketIds,
                     conversationId: activeConversation._id,
                     callerData: {
                         _id: userData._id,
                         profileImage: userData?.profileImage?.filePath,
-                        username: userData?.username
+                        username: userData?.username,
                     },
-                    callType
+                    callType,
                 });
-            }, 1000)
+            }, 1000);
         }
-    }
+    };
     const onAcceptCallHandler = async () => {
         try {
-            const mediaDevice = await navigator?.mediaDevices?.getUserMedia({video: true, audio: true});
+            const mediaDevice = await navigator?.mediaDevices?.getUserMedia({ video: true, audio: true });
 
             if (!mediaDevice) {
-                dispatch(setAlert({message: 'Can Not Access The Camera or Microphone', type: 'error'}));
-                return
+                dispatch(setAlert({ message: 'Can Not Access The Camera or Microphone', type: 'error' }));
+                return;
             }
 
-            setLocalStream(mediaDevice)
+            setLocalStream(mediaDevice);
 
             dispatch(initialAcceptIncomingCall(null));
-
 
             const peer = new Peer({
                 initiator: false,
                 trickle: false,
-                stream: mediaDevice
+                stream: mediaDevice,
             });
 
-            peer._debug = console.log
+            peer._debug = console.log;
 
-            peer.on('signal', (signal) => {
-                socket.emit('callAccepted', {signal, _id: callerData._id});
+            peer.on('signal', signal => {
+                socket.emit('callAccepted', { signal, _id: callerData._id });
             });
 
-            peer.on('stream', (remoteStream) => {
-                setRemoteStream(remoteStream)
+            peer.on('stream', remoteStream => {
+                setRemoteStream(remoteStream);
             });
 
             peer.signal(remoteSignal);
-
-
-        } catch (error) {
-
+        } catch {
+            return;
         }
-
-    }
-
+    };
 
     const onScreenTapHandler = () => {
         if (!inCallButtonsVisible) {
@@ -233,37 +212,35 @@ const MediaCall: FC = () => {
         }
     };
     const onHangupTheCallHandler = () => {
-        cleanup1LocalAndRemoteStream()
-        dispatch(resetMediaConnectionAction(null))
-    }
+        cleanup1LocalAndRemoteStream();
+        dispatch(resetMediaConnectionAction(null));
+    };
 
     const onTerminatedCallHandler = () => {
-        cleanup1LocalAndRemoteStream()
+        cleanup1LocalAndRemoteStream();
 
-        dispatch(resetMediaConnectionAction(null))
+        dispatch(resetMediaConnectionAction(null));
 
         if (targetSocketIds?.length) {
-            socket.emit('callTerminated', {targetSocketIds});
+            socket.emit('callTerminated', { targetSocketIds });
         } else if (callerData?._id) {
-            socket.emit('callTerminated', {targetSocketIds: [callerData?._id]});
+            socket.emit('callTerminated', { targetSocketIds: [callerData?._id] });
         }
         //should fix , for now threw error about can not signal after peer is destroyed
         // router.reload()
-    }
+    };
     const onSwitchCameraHandler = async () => {
         try {
             const devices = await navigator.mediaDevices.enumerateDevices();
-            const videoDevices = devices.filter(
-                (device) => device.kind === "videoinput"
-            );
+            const videoDevices = devices.filter(device => device.kind === 'videoinput');
 
             if (videoDevices.length > 1) {
-                setCurrentCameraIndex((prevIndex) => {
+                setCurrentCameraIndex(prevIndex => {
                     const nextIndex = (prevIndex + 1) % videoDevices.length;
 
                     const newConstraints = {
                         video: {
-                            deviceId: {exact: videoDevices[nextIndex].deviceId},
+                            deviceId: { exact: videoDevices[nextIndex].deviceId },
                         },
                         audio: true,
                     };
@@ -274,33 +251,26 @@ const MediaCall: FC = () => {
 
                     navigator.mediaDevices
                         .getUserMedia(newConstraints)
-                        .then((newStream) => {
+                        .then(newStream => {
                             const newVideoTrack = newStream.getVideoTracks()[0];
 
                             if (localStream) {
                                 localStream.addTrack(newVideoTrack);
                                 localStream.removeTrack(localStream.getVideoTracks()[0]);
                             }
-                            //@ts-ignore
-                            setLocalStream((prevStream) => {
+                            setLocalStream(prevStream => {
                                 if (prevStream) {
-                                    return new MediaStream([
-                                        ...prevStream.getAudioTracks(),
-                                        newVideoTrack,
-                                    ]);
+                                    return new MediaStream([...prevStream.getAudioTracks(), newVideoTrack]);
                                 }
-
                             });
                         })
-                        .catch((error) => {
-
-                        });
+                        .catch(error => {});
 
                     return nextIndex;
                 });
             }
-        } catch (error) {
-
+        } catch {
+            return
         }
     };
     const onDisableCameraHandler = () => {
@@ -317,15 +287,13 @@ const MediaCall: FC = () => {
                 // If the camera is disabled, enable it
                 else {
                     navigator.mediaDevices
-                        .getUserMedia({video: true})
-                        .then((newStream) => {
+                        .getUserMedia({ video: true })
+                        .then(newStream => {
                             const newVideoTrack = newStream.getVideoTracks()[0];
                             localStream.addTrack(newVideoTrack);
                             setIsCameraEnabled(true);
                         })
-                        .catch(() => {
-
-                        });
+                        .catch(() => {});
                 }
             }
         }
@@ -348,69 +316,59 @@ const MediaCall: FC = () => {
                 }
             }
         }
-    }
+    };
     const onRejectCallHandler = () => {
         socket.emit('callRejected', {
             _id: callerData._id,
         });
 
-        dispatch(resetMediaConnectionAction(null))
+        dispatch(resetMediaConnectionAction(null));
     };
-
 
     if (loggedIn && mediaCall) {
         return (
             <div className={'mediaCallContainer'}>
-                <div className={'blur-background'}/>
+                <div className={'blur-background'} />
                 <div className={'inner-content'} onClick={onScreenTapHandler} onTouchStartCapture={onScreenTapHandler}>
+                    {!onGoingCall && !incomingCall && !outGoingCall && (
+                        <InitialMediaCall callAccepted={callAccepted} outGoingCall={outGoingCall} callType={callType} />
+                    )}
 
-                    {(!onGoingCall && !incomingCall && !outGoingCall) &&
-                        <InitialMediaCall callAccepted={callAccepted} outGoingCall={outGoingCall} callType={callType}/>}
-
-                    {(!onGoingCall && incomingCall && !callAccepted) &&
-                        <CallerInfo profileImage={callerData.profileImage}
-                                    username={callerData.username}
-                                    callType={callType}/>
-                    }
-
-                    {(onGoingCall || outGoingCall) &&
-                        <video className={`large-stream`}
-                               playsInline
-                               muted
-                               ref={largeVideoStreamRef}
-                               autoPlay
+                    {!onGoingCall && incomingCall && !callAccepted && (
+                        <CallerInfo
+                            profileImage={callerData.profileImage}
+                            username={callerData.username}
+                            callType={callType}
                         />
-                    }
+                    )}
 
-                    {(onGoingCall) &&
+                    {(onGoingCall || outGoingCall) && (
+                        <video className={`large-stream`} playsInline muted ref={largeVideoStreamRef} autoPlay />
+                    )}
+
+                    {onGoingCall && (
                         <Draggable handle=".small-stream">
-                            <video className={'small-stream'}
-                                   ref={smallVideoStreamRef}
-                                   muted
-                                   playsInline
-                                   autoPlay
-                            />
+                            <video className={'small-stream'} ref={smallVideoStreamRef} muted playsInline autoPlay />
                         </Draggable>
-                    }
+                    )}
 
-                    <InCallActionButtons InCallButtonsRef={InCallButtonsRef}
-                                         onCallHandler={onCallHandler}
-                                         onCancelOutGoingCallHandler={onCancelOutGoingCallHandler}
-                                         onMuteCallHandler={onMuteCallHandler}
-                                         onAcceptCallHandler={onAcceptCallHandler}
-                                         inCallButtonsVisible={inCallButtonsVisible}
-                                         setInCallButtonsVisible={setInCallButtonsVisible}
-                                         onTerminatedCallHandler={onTerminatedCallHandler}
-                                         onSwitchCameraHandler={onSwitchCameraHandler}
-                                         onRejectCallHandler={onRejectCallHandler}
-                                         isCameraEnabled={isCameraEnabled}
-                                         onDisableCameraHandler={onDisableCameraHandler}/>
+                    <InCallActionButtons
+                        InCallButtonsRef={InCallButtonsRef}
+                        onCallHandler={onCallHandler}
+                        onCancelOutGoingCallHandler={onCancelOutGoingCallHandler}
+                        onMuteCallHandler={onMuteCallHandler}
+                        onAcceptCallHandler={onAcceptCallHandler}
+                        inCallButtonsVisible={inCallButtonsVisible}
+                        setInCallButtonsVisible={setInCallButtonsVisible}
+                        onTerminatedCallHandler={onTerminatedCallHandler}
+                        onSwitchCameraHandler={onSwitchCameraHandler}
+                        onRejectCallHandler={onRejectCallHandler}
+                        isCameraEnabled={isCameraEnabled}
+                        onDisableCameraHandler={onDisableCameraHandler}
+                    />
                 </div>
-
             </div>
-        )
-    } else return null
-
+        );
+    } else return null;
 };
 export default MediaCall;
-

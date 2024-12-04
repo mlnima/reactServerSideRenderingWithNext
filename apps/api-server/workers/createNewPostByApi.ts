@@ -1,8 +1,8 @@
 import dotenv from 'dotenv';
-import GlobalStore from "@store/GlobalStore";
+import {connectToDatabase} from "@repo/db";
 
 dotenv.config();
-GlobalStore.connectToDatabase('Worker').finally();
+connectToDatabase('Worker').finally();
 import postSchema from "@schemas/postSchema";
 import {Worker, parentPort, workerData} from 'worker_threads'
 

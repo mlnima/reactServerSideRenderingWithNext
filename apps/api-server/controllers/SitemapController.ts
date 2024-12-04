@@ -11,6 +11,7 @@ import {Request, Response} from "express";
 import globalStore from "@store/GlobalStore";
 import axios from "axios";
 import ManifestController from "./ManifestController";
+import {MetasType} from "@repo/typescript-types";
 
 const productionUrl = process.env.NEXT_PUBLIC_PRODUCTION_URL;
 const dev = process.env.NODE_ENV !== 'production';
@@ -153,7 +154,7 @@ class SitemapController{
             return documentDate
         }
     }
-    static async metasSitemapsLinkForRoot(metaType:string){
+    static async metasSitemapsLinkForRoot(metaType:MetasType){
         try {
             let finalXML = ''
             const findMetaQuery = {$and: [{count: {$gt: 0}}, {status: 'published'}, {type: metaType}]}

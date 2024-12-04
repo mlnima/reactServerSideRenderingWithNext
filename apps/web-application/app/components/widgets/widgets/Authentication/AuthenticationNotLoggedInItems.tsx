@@ -1,11 +1,11 @@
 'use client';
 import React, {FC} from "react";
 import {loginRegisterForm} from "@store/reducers/globalStateReducer";
-import {useAppDispatch, useAppSelector} from "@store/hooks";
+import {useAppDispatch} from "@store/hooks";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
 import {faPen} from "@fortawesome/free-solid-svg-icons/faPen";
-import './AuthenticationNotLoggedInItems.styles.scss';
+import './AuthenticationNotLoggedInItems.scss';
 import {useSelector} from "react-redux";
 import {Store} from "@repo/typescript-types";
 
@@ -16,7 +16,7 @@ interface IProps{
         [key: string]: string
     }
 }
-const AuthenticationNotLoggedInItems: FC<IProps> = ({onOpenCloseHandler,locale,dictionary}) => {
+const AuthenticationNotLoggedInItems: FC<IProps> = ({onOpenCloseHandler,dictionary}) => {
 
     const dispatch = useAppDispatch()
 

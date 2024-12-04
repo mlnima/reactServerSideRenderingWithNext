@@ -87,7 +87,6 @@ const LoginRegisterPopupForms: FC<IProps> = ({ locale, dictionary }: IProps) => 
 
     useEffect(() => {
         setStateValidator({
-            //@ts-ignore
             username:
                 globalState.loginRegisterFormPopup === 'register' ? usernameValidatorRegisterForm(state?.username) : !!state?.username,
             email: emailValidator(state.email),
@@ -102,7 +101,6 @@ const LoginRegisterPopupForms: FC<IProps> = ({ locale, dictionary }: IProps) => 
             <FormHeader locale={locale} dictionary={dictionary} />
 
             {
-                //@ts-ignore
                 globalState.loginRegisterFormPopup === 'register' && anyoneCanRegister ? (
                     <form className="login-register-form" onSubmit={e => onRegisterHandler(e)}>
                         <div className="login-register-form-fields">

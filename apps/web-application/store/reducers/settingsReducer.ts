@@ -9,7 +9,9 @@ interface SettingsStateRaw {
             usersCanMessageEachOther:boolean
         },
         layoutSettings: {},
-        headDataSettings: {}
+        headDataSettings: {
+
+        }
     }
 }
 
@@ -37,7 +39,13 @@ const initialState = {
             logoWidth:150,
             logoHeight:50
         },
-        headDataSettings: {}
+        headDataSettings: {
+            customHeadTags:'',
+            customScripts:''
+        },
+        contentSettings:{
+            contentPerPage: 0
+        }
     }
 }
 

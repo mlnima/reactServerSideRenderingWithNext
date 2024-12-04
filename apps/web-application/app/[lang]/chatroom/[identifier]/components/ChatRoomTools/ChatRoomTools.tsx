@@ -31,7 +31,7 @@ const ChatRoomTools: FC<IProps> = ({chatroomId, setAutoScroll,dictionary}) => {
 
     const [audioMessage, setAudioMessage] = useState<string>('')
     const [messageText, setMessageText] = useState('')
-    const [lastMessageTime, setLastMessageTime] = useState<any>(null)
+    const [lastMessageTime, setLastMessageTime] = useState<number | null>(null);
     const [someoneTypes, setSomeoneTypes] = useState({
         username: '',
         active: false
@@ -40,18 +40,26 @@ const ChatRoomTools: FC<IProps> = ({chatroomId, setAutoScroll,dictionary}) => {
     const [iAmTyping, setIAmTyping] = useState(false)
 
 
-    const onSubmitHandler = (e: any) => {
+    const onSubmitHandler = (e: React.FormEvent) => {
         e.preventDefault()
 
         if (!loggedIn) return
 
-        if (lastMessageTime && Date.now() - lastMessageTime < 2 * 1000) {
+        if (typeof lastMessageTime === 'number' && Date.now() - lastMessageTime < 2 * 1000) {
             dispatch(setAlert({
                 message: "You must wait 15 seconds between messages.",
                 type: 'info'
-            }))
+            }));
             return;
         }
+
+        // if (lastMessageTime && Date.now() - lastMessageTime < 2 * 1000) {
+        //     dispatch(setAlert({
+        //         message: "You must wait 15 seconds between messages.",
+        //         type: 'info'
+        //     }))
+        //     return;
+        // }
 
         if (messageText) {
             const messageBody = {
@@ -106,7 +114,7 @@ const ChatRoomTools: FC<IProps> = ({chatroomId, setAutoScroll,dictionary}) => {
 
 
     useEffect(() => {
-        socket.on('someoneIsTyping', ({ username, chatroomId }) => {
+        socket.on('someoneIsTyping', ({ username} : {username:string}) => {
             setSomeoneTypes({
                 ...someoneTypes,
                 username,
@@ -140,7 +148,7 @@ const ChatRoomTools: FC<IProps> = ({chatroomId, setAutoScroll,dictionary}) => {
             {someoneTypes.active && <SomeoneIsTyping username={someoneTypes.username} />}
 
             <div id={'chatroomToolBoxItems'}>
-                {!!audioMessage ? (
+                {audioMessage ? (
                     <RecordedAudioPreview audioMessage={audioMessage} setAudioMessage={setAudioMessage} />
                 ) : (
                     <>

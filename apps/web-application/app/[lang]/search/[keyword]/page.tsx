@@ -1,4 +1,3 @@
-import { i18n } from '../../../../i18n-config';
 import { getDictionary } from '../../../../get-dictionary';
 import { fetchSearch } from '@lib/fetch-requests/fetchPosts';
 import { fetchSettings } from '@lib/fetch-requests/fetchSettings';
@@ -14,12 +13,13 @@ import TagsPageContentRenderer from '@components/metas/TagsPageContentRenderer';
 import { capitalizeFirstLetters } from '@repo/shared-util';
 import './page.scss';
 import searchMetaGenerator from './components/searchMetaGenerator';
+import localDetector from "@lib/localDetector";
 
 const searchPage = async (props: IPageProps) => {
     const searchParams = await props.searchParams;
     const params = await props.params;
 
-    const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+    const locale = localDetector(params.lang);
     const dictionary = await getDictionary(locale);
 
     const settingsData = await fetchSettings({ requireSettings: ['searchPageSettings'] });
@@ -37,7 +37,7 @@ const searchPage = async (props: IPageProps) => {
 
     const queryObject = {
         sort: searchParams?.sort,
-        lang: params?.lang,
+        lang: locale,
         keyword: params?.keyword,
         page: currentPage,
         // searchType: searchParams?.searchType
@@ -109,7 +109,7 @@ const searchPage = async (props: IPageProps) => {
                                 totalCount={contentPerPage}
                                 currentPage={currentPage}
                                 dictionary={dictionary}
-                                contentPerPage={contentPerPage}
+                                // contentPerPage={contentPerPage}
                                 metas={groupingMetas.categories}
                             />
                         </div>

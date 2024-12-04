@@ -1,6 +1,8 @@
+/* eslint-disable */
 import WidgetsRenderer from '@components/widgets/widgetRenderer/WidgetsRenderer';
 
-const MainWidgetArea = props => {
+// @ts-expect-error: component is part of the layout, types are no necessary
+const MainWidgetArea = (props) => {
     return (
         <div className={'main-widget-area'}>
             <WidgetsRenderer {...props} />

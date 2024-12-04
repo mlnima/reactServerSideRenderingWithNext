@@ -3,7 +3,6 @@ import Link from 'next/link';
 import CardTitle from '../../asset/CardTitle/CardTitle';
 import dynamic from 'next/dynamic';
 import { Post } from "@repo/typescript-types";
-import { ratingCalculator } from '@repo/shared-util';
 import '../postCard.scss';
 import CardStats from '@components/cards/asset/CardStats/CardStats';
 
@@ -21,7 +20,9 @@ interface PropTypes {
         [key: string]: string;
     };
     settings: {
-        [key: string]: string;
+        showViewsOnCard:  boolean,
+        showRatingOnCard:  boolean,
+        showDateOnCard:  boolean,
     };
 }
 
@@ -59,7 +60,7 @@ const UcgAdPostCard: FC<PropTypes> = ({
                     views={post?.views}
                     dictionary={dictionary}
                     likes={post?.likes}
-                    dislikes={post?.dislikes}
+                    dislikes={post?.disLikes}
                     createdAt={post?.createdAt}
                     updatedAt={post?.updatedAt}
                     settings={settings}

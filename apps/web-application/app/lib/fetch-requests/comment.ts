@@ -26,13 +26,13 @@ export const fetchComments = async ({
             }),
         );
         return await response.json();
-    } catch (error) {
-        throw error;
+    } catch  {
+        return
     }
 };
 
 type IPostNewComment = {
-    commentData?: {};
+    commentData?: object;
     revalidate?: number | undefined;
 };
 
@@ -48,7 +48,7 @@ export const postNewComment = async ({ commentData, revalidate }: IPostNewCommen
         );
 
         return await response.json();
-    } catch (error) {
-        throw error;
+    } catch {
+        return
     }
 };

@@ -1,31 +1,29 @@
-import React, { FC } from 'react';
-import { Meta } from "@repo/typescript-types";
+import {Meta, MetasType} from "@repo/typescript-types";
 import dynamic from 'next/dynamic';
+import React from "react";
 
 const ActorsCardsRenderer = dynamic(
     () => import('@components/cards/CardsRenderer/ActorsCardsRenderer/ActorsCardsRenderer'),
 );
+
 const CategoriesCardsRenderer = dynamic(
     () => import('@components/cards/CardsRenderer/CategoriesCardsRenderer/CategoriesCardsRenderer'),
 );
 
-const MetasCardsWidget: ({
-    uniqueData,
-    metaType,
-    locale,
-    isSidebar,
-}: {
+interface IProps{
     uniqueData: {
         metaData?: Meta[];
-        metaType: string;
+        metaType: MetasType;
     };
-    metaType: string;
+    metaType: MetasType;
     locale: string;
     isSidebar: boolean;
     dictionary: {
         [key: string]: string;
     };
-}) => React.JSX.Element | null = ({ uniqueData, metaType, locale, isSidebar, dictionary }) => {
+}
+
+const MetasCardsWidget : React.FC<IProps>= ({ uniqueData, metaType, locale, isSidebar, dictionary }) => {
     if (metaType === 'actors' || uniqueData?.metaType === 'actors') {
         return (
             <ActorsCardsRenderer

@@ -9,7 +9,7 @@ interface CardTitlePropTypes {
     title: string | undefined,
     url?: string | undefined,
     targetLink?: string,
-    useIcon?: string,
+    useIcon?: boolean,
     useLink?: boolean
 }
 

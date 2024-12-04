@@ -21,29 +21,54 @@ const initialState = {
 export const getPagesAction = createAsyncThunk(
     'adminPanelPages/getPagesAction',
     async (data: {}, thunkAPI) => {
-        thunkAPI.dispatch(loading(true))
-        return await dashboardAPIRequestGetPages(data).then((response: AxiosResponse) => {
+        try {
+            thunkAPI.dispatch(loading(true))
+            const response : AxiosResponse = await dashboardAPIRequestGetPages(data)
             return response.data?.pages
-        }).catch((err: AxiosError) => {
-
-        }).finally(() => thunkAPI.dispatch(loading(false)))
+        }catch (err){
+            console.log(`getPagesAction err=> `,err)
+            return []
+        }finally {
+            thunkAPI.dispatch(loading(false))
+        }
     }
 )
+
+// return await dashboardAPIRequestGetPages(data).then((response: AxiosResponse) => {
+//     console.log(`payload=> `,response?.data)
+//     return response.data?.pages
+// }).catch((err: AxiosError) => {
+//     console.log(`err=> `,err)
+// }).finally(() => thunkAPI.dispatch(loading(false)))
 
 export const getPageAction = createAsyncThunk(
     'adminPanelPages/getPageAction',
     async (id: string|null, thunkAPI) => {
-        thunkAPI.dispatch(loading(true))
-        const body = {
-            _id: id,
-            token: localStorage.wt
-        };
-//@ts-ignore
-        return await dashboardAPIRequestGetPage(id).then((response: AxiosResponse) => {
-            return response.data?.pageData
-        }).catch((err: AxiosError) => {
 
-        }).finally(() => thunkAPI.dispatch(loading(false)))
+        try {
+            thunkAPI.dispatch(loading(true))
+            const response : AxiosResponse = await dashboardAPIRequestGetPage(id)
+            return response.data?.pageData
+        }catch (err){
+            console.log(`getPagesAction err=> `,err)
+            return []
+        }finally {
+            thunkAPI.dispatch(loading(false))
+        }
+
+
+
+//         thunkAPI.dispatch(loading(true))
+//         const body = {
+//             _id: id,
+//             token: localStorage.wt
+//         };
+// //@ts-ignore
+//         return await dashboardAPIRequestGetPage(id).then((response: AxiosResponse) => {
+//             return response.data?.pageData
+//         }).catch((err: AxiosError) => {
+//
+//         }).finally(() => thunkAPI.dispatch(loading(false)))
     }
 )
 export const updatePageAction = createAsyncThunk(
@@ -107,6 +132,7 @@ export const pagesSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(getPagesAction.fulfilled, (state, action: PayloadAction<any>) => {
+
                 return {
                     ...state,
                     pages: action.payload

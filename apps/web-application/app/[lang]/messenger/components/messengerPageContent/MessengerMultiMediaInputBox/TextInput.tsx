@@ -5,7 +5,7 @@ import {IDraftMessage} from "../../interfaces";
 interface IProps {
     onStartTypingHandler: KeyboardEventHandler<HTMLInputElement>,
     draftMessage: IDraftMessage,
-    setDraftMessage: Function,
+    setDraftMessage: React.Dispatch<React.SetStateAction<IDraftMessage>>;
     dictionary: {
         [key: string]: string
     }

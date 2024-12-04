@@ -8,7 +8,7 @@ import {IDraftMessage} from "../../interfaces";
 interface IProps {
     handleSubmit: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
     draftMessage: IDraftMessage,
-    setDraftMessage: Function,
+    setDraftMessage: React.Dispatch<React.SetStateAction<IDraftMessage>>;
 }
 
 const AddedImagePreview: FC<IProps> = ({handleSubmit, draftMessage, setDraftMessage}) => {

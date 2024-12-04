@@ -1,8 +1,8 @@
-import {getDictionary} from "../../../get-dictionary";
-import {i18n} from '@i18nConfig'
+import { getDictionary } from '../../../get-dictionary';
 import './page.styles.scss';
-import MessengerPageContent from "./components/messengerPageContent/MessengerPageContent";
-import {IPageProps} from "@repo/typescript-types";
+import MessengerPageContent from './components/messengerPageContent/MessengerPageContent';
+import { IPageProps } from '@repo/typescript-types';
+import localDetector from "@lib/localDetector";
 
 export const generateMetadata = async () => {
     return {
@@ -14,28 +14,25 @@ export const generateMetadata = async () => {
         //             return finalValue
         //         },{}),
         // },
-        title: 'Messenger'
-    }
-}
+        title: 'Messenger',
+    };
+};
 
 const MessengerPage = async (props: IPageProps) => {
     const params = await props.params;
 
-    const {
-        lang,
-        identifier
-    } = params;
+    const { lang } = params;
 
-    const locale = i18n.locales.includes(lang) ? lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+    const locale = localDetector(params.lang);
     const dictionary = await getDictionary(locale);
 
     return (
         <div id={'content'} className={`page-no-sidebar messengerPageParent`}>
             <main id={'primary'} className={'main messengerPage'}>
-                <MessengerPageContent dictionary={dictionary}/>
+                <MessengerPageContent dictionary={dictionary} />
             </main>
         </div>
-    )
-}
+    );
+};
 
 export default MessengerPage;

@@ -1,5 +1,4 @@
 import MainWidgetArea from "@components/widgets/widgetAreas/MainWidgetArea";
-import {i18n} from "@i18nConfig";
 import {getDictionary} from "../../../../get-dictionary";
 import {fetchPage} from "@lib/fetch-requests/fetchPage";
 import {fetchWidgets} from "@lib/fetch-requests/fetchWidgets";
@@ -7,24 +6,25 @@ import pageMetaGenerator from "./components/pageMetaGenerator/pageMetaGenerator"
 import SidebarWidgetAreaRenderer
     from "@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer";
 import {IPageProps} from "@repo/typescript-types";
+import localDetector from "@lib/localDetector";
 
 
 
 const page = async (props: IPageProps) => {
     const params = await props.params;
-    const pageName = params?.pageName
-    const locale = i18n.locales.includes(params.lang) ? params.lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+    const {lang ,pageName } = params
+    const locale = localDetector(lang);
     const dictionary = await getDictionary(locale);
-    const pageData = await fetchPage({pageName});
+    const pageData = pageName ?  await fetchPage({pageName}) : {};
 
-    const widgetsData = await fetchWidgets({
+    const widgetsData = pageName ? await fetchWidgets({
         widgets: [
             `${pageName}LeftSidebar`,
             `${pageName}RightSidebar`,
             pageName
         ],
         locale
-    });
+    }): {};
 
     const sidebar = pageData?.pageData?.sidebar;
 
@@ -32,7 +32,7 @@ const page = async (props: IPageProps) => {
         <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
             <main id={'primary'} className={'main page'}>
                 <MainWidgetArea dictionary={dictionary}
-                                widgets={widgetsData?.widgets?.[pageName]}
+                                widgets={pageName ? widgetsData?.widgets?.[pageName] : []}
                                 locale={locale}
                                 position={'home'}/>
             </main>

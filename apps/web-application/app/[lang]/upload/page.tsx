@@ -1,8 +1,8 @@
 import { getDictionary } from '../../../get-dictionary';
 import './page.scss';
-import { i18n } from '@i18nConfig';
 import UploadPageContent from './components/UploadPageContent/UploadPageContent';
 import {IPageProps} from "@repo/typescript-types";
+import localDetector from "@lib/localDetector";
 
 
 
@@ -14,7 +14,7 @@ const uploader = async (props: IPageProps) => {
         lang
     } = params;
 
-    const locale = i18n.locales.includes(lang) ? lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+    const locale = localDetector(params.lang);
     const dictionary = await getDictionary(locale);
 
     return (

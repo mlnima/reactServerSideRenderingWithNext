@@ -87,7 +87,7 @@ const FormWidget: FC<FormWidgetPropTypes> = ({
             };
             await postFormData({ formDataToPost: formData });
             setIsSubmit(true);
-        } catch (error) {
+        } catch {
             dispatch(
                 setAlert({
                     message: 'Something went wrong, please try again later.',

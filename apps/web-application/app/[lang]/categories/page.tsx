@@ -2,7 +2,6 @@ import React from "react";
 import {fetchMetas} from "@lib/fetch-requests/fetchPosts";
 import {fetchSettings} from "@lib/fetch-requests/fetchSettings";
 import {fetchWidgets} from "@lib/fetch-requests/fetchWidgets";
-import {i18n} from "@i18nConfig";
 import {getDictionary} from "../../../get-dictionary";
 import WidgetsRenderer from "@components/widgets/widgetRenderer/WidgetsRenderer";
 import SidebarWidgetAreaRenderer
@@ -10,6 +9,7 @@ import SidebarWidgetAreaRenderer
 import CategoriesPageContentRenderer from "@components/metas/CategoriesPageContentRenderer";
 import categoriesMetaGenerator from "./components/categoriesMetaGenerator/categoriesMetaGenerator";
 import {PageParams, PageSearchParams} from "@repo/typescript-types";
+import localDetector from "@lib/localDetector";
 
 interface IProps {
     params: PageParams,
@@ -19,12 +19,10 @@ interface IProps {
 const CategoriesPage = async (props: IProps) => {
     const searchParams = await props.searchParams;
     const params = await props.params;
-    const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+    const locale = localDetector(params.lang);
     const dictionary = await getDictionary(locale);
     const settingsData = await fetchSettings({requireSettings: ['categoriesPageSettings']});
     const sidebar = settingsData?.settings?.categoriesPageSettings?.sidebar;
-    const initialSettingsData = await fetchSettings({requireSettings: ['initialSettings']})
-    const contentPerPage = initialSettingsData?.settings?.initialSettings?.contentSettings?.contentPerPage;
 
     const widgetsData = await fetchWidgets({
         widgets: [
@@ -65,7 +63,6 @@ const CategoriesPage = async (props: IProps) => {
                                                dictionary={dictionary}
                                                totalCount={metasData?.totalCount}
                                                currentPage={currentPage}
-                                               contentPerPage={contentPerPage}
                                                metas={metasData?.metas}/>
 
                 <WidgetsRenderer dictionary={dictionary}

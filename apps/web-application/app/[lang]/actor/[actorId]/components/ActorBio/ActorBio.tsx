@@ -35,9 +35,9 @@ const ActorBio: FC<IProps> = ({actorData}) => {
             <h1 className={'actorName'}>{capitalizeFirstLetter(actorData?.name)}</h1>
             <div className={`actorDescriptionDetails${showMore ? 'Open':'Closed'}`}>
                 {
-                    // @ts-ignore
-                    actorData?.additionalInfo?.length ?
-
+                    // @ts-expect-error: types need to be fixed
+                    (actorData?.additionalInfo || []).length > 0 ?
+                        // @ts-expect-error: types need to be fixed
                         <ActorDetails additionalInfo={actorData.additionalInfo}/>
                         : null
                 }
@@ -51,8 +51,8 @@ const ActorBio: FC<IProps> = ({actorData}) => {
                 }
             </div>
             {
-             //@ts-ignore
-                actorData?.additionalInfo?.length || actorData?.description ?
+                // @ts-expect-error: types need to be fixed
+                (actorData?.additionalInfo || []).length > 0 || actorData?.description ?
                     <button onClick={onShowDetailsHandler}
                             className={'btn btn-info showMoreDetailBtn'}
                             aria-label={'More Info'}>

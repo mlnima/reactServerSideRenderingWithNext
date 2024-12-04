@@ -1,17 +1,22 @@
 "use client";
-import {FC, useEffect} from "react";
+import { useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "@store/hooks";
 import {initialIncomingCallAction} from "@store/reducers/mediaConnectionReducer";
 // import {getAConversationAction} from "@store/reducers//messengerActions/getAConversationAction";
 import socket from '@lib/web-socket-client';
 
-const WebSocketInitializer: FC = () => {
+const WebSocketInitializer = () => {
     const dispatch = useAppDispatch();
     const {loggedIn} = useAppSelector(({user}) => user)
     const {userData} = useAppSelector(({user}) => user)
 
     useEffect(() => {
-        socket.on('incomingCallSocketEvent', ({callType, signal, callerData,conversationId}) => {
+        socket.on('incomingCallSocketEvent', ({
+                                                  callType,
+                                                  signal,
+                                                  callerData,
+                                                  //conversationId
+        }) => {
             // if (conversationId){
             //     dispatch(getAConversationAction({conversationId}))
             // }

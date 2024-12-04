@@ -1,14 +1,14 @@
 'use client';
-import React, {FC, useEffect, useRef, useState} from 'react';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faMicrophone} from '@fortawesome/free-solid-svg-icons/faMicrophone';
-import {IDraftMessage} from "../../interfaces";
+import React, { FC, useEffect, useRef, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMicrophone } from '@fortawesome/free-solid-svg-icons/faMicrophone';
+import { IDraftMessage } from '../../interfaces';
 
 interface IProps {
-    setDraftMessage: Function,
+    setDraftMessage: React.Dispatch<React.SetStateAction<IDraftMessage>>;
 }
 
-const VoiceRecorderButton: FC<IProps> = ({ setDraftMessage}) => {
+const VoiceRecorderButton: FC<IProps> = ({ setDraftMessage }) => {
     const [isRecording, setIsRecording] = useState(false);
     const [elapsedTime, setElapsedTime] = useState(0);
     const [recorder, setRecorder] = useState<MediaRecorder | null>(null);
@@ -16,7 +16,7 @@ const VoiceRecorderButton: FC<IProps> = ({ setDraftMessage}) => {
 
     const handleRecordingStart = async () => {
         setIsRecording(true);
-        const mediaStream = await navigator.mediaDevices.getUserMedia({audio: true});
+        const mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
 
         let options;
 
@@ -29,19 +29,20 @@ const VoiceRecorderButton: FC<IProps> = ({ setDraftMessage}) => {
 
         const newRecorder = new MediaRecorder(mediaStream, options);
 
-        newRecorder.addEventListener('dataavailable', (event) => {
+        newRecorder.addEventListener('dataavailable', event => {
             if (event.data.size > 0) {
                 audioChunksRef.current.push(event.data);
             }
         });
 
         newRecorder.addEventListener('stop', () => {
-            const audioBlob = new Blob(audioChunksRef.current, {type: 'audio/webm;codecs=opus'});
+            const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm;codecs=opus' });
             const reader = new FileReader();
             reader.readAsDataURL(audioBlob);
             reader.onloadend = () => {
                 const base64data = reader.result;
-                setDraftMessage((prevState: IDraftMessage) => ({...prevState, audioContent: base64data}))
+                //@ts-expect-error: types need to be fixed
+                setDraftMessage((prevState) => ({ ...prevState, audioContent: base64data }));
             };
 
             audioChunksRef.current = [];
@@ -53,7 +54,7 @@ const VoiceRecorderButton: FC<IProps> = ({ setDraftMessage}) => {
         setTimeout(() => {
             if (newRecorder.state === 'recording') {
                 newRecorder.stop();
-                mediaStream.getTracks().forEach((track) => track.stop());
+                mediaStream.getTracks().forEach(track => track.stop());
                 setRecorder(null);
             }
         }, 15000);
@@ -62,40 +63,42 @@ const VoiceRecorderButton: FC<IProps> = ({ setDraftMessage}) => {
     const handleRecordingStop = () => {
         if (recorder) {
             recorder.stop();
-            recorder.stream.getTracks().forEach((track) => track.stop());
+            recorder.stream.getTracks().forEach(track => track.stop());
             setRecorder(null);
-            setIsRecording(false)
+            setIsRecording(false);
         }
     };
 
     useEffect(() => {
-        //@ts-ignore
-        let interval;
+        let interval : ReturnType<typeof setTimeout> | null = null;
 
         if (isRecording) {
             interval = setInterval(() => {
-                setElapsedTime((prevElapsedTime) => prevElapsedTime + 0.1);
+                setElapsedTime(prevElapsedTime => prevElapsedTime + 0.1);
             }, 100);
         } else {
             setElapsedTime(0);
         }
 
         return () => {
-            //@ts-ignore
             if (interval) clearInterval(interval);
         };
     }, [isRecording]);
 
     return (
         <>
-            {isRecording &&
-                <div className={'audio-recording-animation'}
-                     onClick={handleRecordingStop}
-                     onTouchEnd={handleRecordingStop}> {/* changed onTouchStart to onTouchEnd */}
-                    <FontAwesomeIcon icon={faMicrophone} style={{width: '120px', height: '120px'}}/>
+            {isRecording && (
+                <div
+                    className={'audio-recording-animation'}
+                    onClick={handleRecordingStop}
+                    onTouchEnd={handleRecordingStop}
+                >
+                    {' '}
+                    {/* changed onTouchStart to onTouchEnd */}
+                    <FontAwesomeIcon icon={faMicrophone} style={{ width: '120px', height: '120px' }} />
                     {isRecording && <div className="counter">{elapsedTime.toFixed(1)}</div>}
                 </div>
-            }
+            )}
             <button
                 onMouseDown={handleRecordingStart}
                 onMouseUp={handleRecordingStop}
@@ -103,7 +106,7 @@ const VoiceRecorderButton: FC<IProps> = ({ setDraftMessage}) => {
                 onTouchEnd={handleRecordingStop}
                 type={'button'}
             >
-                <FontAwesomeIcon icon={faMicrophone} style={{width: 25, height: 25}}/>
+                <FontAwesomeIcon icon={faMicrophone} style={{ width: 25, height: 25 }} />
             </button>
         </>
     );

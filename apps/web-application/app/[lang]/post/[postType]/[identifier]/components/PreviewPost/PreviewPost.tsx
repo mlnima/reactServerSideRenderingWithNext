@@ -103,12 +103,7 @@ const PreviewPost: FC<IProps> =
         )
     } else {
         return (
-            <NotFoundOrRestricted dictionary={dictionary}
-                                  relatedPosts={relatedPosts}
-                                  hasSidebar={sidebar}
-                                  locale={locale}
-                                  post={post}
-                                  widgets={widgetsData.widgets?.['underPost']}/>
+            <NotFoundOrRestricted dictionary={dictionary}/>
         )
     }
 

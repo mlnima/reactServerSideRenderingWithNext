@@ -3,14 +3,15 @@ import { shortNumber } from '@repo/shared-util';
 import './CardViews.scss';
 
 interface CardViewsPropTypes {
-    views: number;
+    views: number | undefined;
     dictionary: {
         [key: string]: string;
-    };
+    },
+    showViewsOnCard:boolean
 }
-//dataNosnippet
+
 const CardViews: FC<CardViewsPropTypes> = ({ views, dictionary, showViewsOnCard }) => {
-    if (!showViewsOnCard || views === 0) return null;
+    if (!views) return null;
 
     return (
         <span className={`cardViews smallText cardStat`}>

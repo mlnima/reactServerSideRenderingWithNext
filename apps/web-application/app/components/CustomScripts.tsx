@@ -2,39 +2,27 @@
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '@store/hooks';
 import { usePathname } from 'next/navigation';
-import parse from 'html-react-parser'
+import parse from 'html-react-parser';
 
 const CustomScripts = () => {
     const pathname = usePathname();
     const [scriptsToRender, setScriptsToRender] = useState('');
 
-    const customScripts = useAppSelector(
-        ({ settings }) =>
-            //@ts-ignore
-            settings?.initialSettings?.headDataSettings?.customScripts,
-    );
+    const customScripts = useAppSelector(({ settings }) => settings?.initialSettings?.headDataSettings?.customScripts);
 
     useEffect(() => {
-        if (!!customScripts) {
-
-            setTimeout(()=>{
-                setScriptsToRender(customScripts)
-            },100)
+        if (customScripts) {
+            setTimeout(() => {
+                setScriptsToRender(customScripts);
+            }, 100);
         }
-
-        return()=>{
+        return () => {
             setScriptsToRender('');
-        }
-    }, [customScripts,pathname]);
+        };
+    }, [customScripts, pathname]);
 
-    if (!!scriptsToRender){
-        return (
-            <>
-                {parse(scriptsToRender)}
-            </>
-        );
-    }else return  null
+    if (!scriptsToRender) return null;
 
-
+    return <>{parse(scriptsToRender)}</>;
 };
 export default CustomScripts;

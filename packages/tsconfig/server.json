@@ -3,7 +3,7 @@
   "display": "expressServer",
   "extends": "./base.json",
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "es2021",
     "downlevelIteration": true,
     "allowSyntheticDefaultImports": true,
     "module": "CommonJS",
@@ -13,6 +13,7 @@
       "es2018",
       "es2021",
       "esnext.asynciterable",
+      "ES2021.String",
       "esnext.array",
       "esnext.intl",
       "esnext.symbol",

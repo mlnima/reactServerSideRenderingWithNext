@@ -1,7 +1,6 @@
 import React, {FC} from 'react';
 import Link from "next/link";
 import {UniqueDataTypes} from "@repo/typescript-types";
-import {useAppSelector} from "@store/hooks";
 
 interface LogoPropTypes {
     uniqueData: UniqueDataTypes,
@@ -39,27 +38,3 @@ const Logo: FC<LogoPropTypes> = ({uniqueData, LogoUrl, locale}) => {
 };
 
 export default Logo;
-
-// const {
-//     logoUrl,
-//     logoWidth,
-//     logoHeight
-// } = useAppSelector(({settings}) => settings?.initialSettings?.layoutSettings);
-
-//   {uniqueData?.logoUrl && <img alt={'logo'} className={'logoImage'} src={logoUrlSource}/> }
-
-// {logoUrlSource ? <img alt={'logo'} src={logoUrlSource}/> : null}
-// <Link href='/'>
-//     <a className='logo' href='/'>
-//         {logoData?.logoUrlSource && logoData?.isImageAllowedForNextImage ?
-//             <LogoUsingNextImage logoUrl={logoData?.logoUrlSource} alt={'logo'}/> :
-//             logoData?.logoUrlSource ?
-//                 <img alt={'logo'} src={logoData?.logoUrlSource}/>
-//                 : null}
-//         {logoData.logoText && !logoData?.logoUrlSource ?
-//             <span className='logo-text'> {logoData.logoText} </span>
-//             : null
-//         }
-//         {logoData.headLineData ? <p className='logo-headline'>{logoData.headLineData}</p> : null}
-//     </a>
-// </Link>

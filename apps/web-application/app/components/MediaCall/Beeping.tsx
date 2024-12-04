@@ -8,7 +8,7 @@ interface PropTypes {
     callAccepted: boolean;
 }
 
-const Beeping: FC<PropTypes> = ({ outGoingCall, callAccepted }) => {
+const Beeping: FC<PropTypes> = ({ outGoingCall }) => {
     return (
         <div className={`beeping beeping${outGoingCall ? 'OutGoingCall': 'IncomingCall'}`}  >
             <FontAwesomeIcon className="icon" icon={faWifi} style={{width:130,height: 130}} />

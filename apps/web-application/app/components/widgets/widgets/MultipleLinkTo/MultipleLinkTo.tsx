@@ -1,8 +1,6 @@
 import {FC} from "react";
 import Link from "next/link";
-import { getDictionary } from '../../../../../get-dictionary';
-import { i18n } from '@i18nConfig';
-import './MultipleLinkTo.styles.scss';
+import './MultipleLinkTo.scss';
 
 
 interface MultipleLinkToPropTypes {

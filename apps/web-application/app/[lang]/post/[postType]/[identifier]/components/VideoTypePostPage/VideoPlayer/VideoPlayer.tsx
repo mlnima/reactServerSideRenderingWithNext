@@ -3,9 +3,8 @@ import React, { FC } from 'react';
 import { convertDurationStringToIso8601 } from '@repo/shared-util';
 import { convertDateToIsoString } from '@repo/shared-util';
 import { Post } from "@repo/typescript-types";
-import './VideoPlayer.styles.scss';
-import { clientCheckDeletedVideo } from '@repo/api-requests';
-import { clearACacheByTag } from '@lib/serverActions';
+import './VideoPlayer.scss';
+// import { clientCheckDeletedVideo } from '@repo/api-requests';
 
 interface PropTypes {
     post: Post;
@@ -21,19 +20,18 @@ const VideoPlayer: FC<PropTypes> = ({ post }) => {
         ? post.mainThumbnail
         : `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${post.mainThumbnail}`;
 
-    const onErrorHandler = async (error: any) => {
-        console.log(`error=> `,error)
-        try {
-            const checkDeletedContent = await clientCheckDeletedVideo({ videoEmbedCode: post.videoEmbedCode });
-            console.log(`checkDeletedContent=> `,videoEmbedCode.data)
-            if (checkDeletedContent.data.status === 404) {
-                // clearACacheByTag('posts')
-                // clearACacheByTag('widgets')
-            }
-        } catch (error) {
-            console.log(`checkImageStatus=> `, error);
-        }
-    };
+    // const onErrorHandler = async () => {
+    //     try {
+    //         const checkDeletedContent = await clientCheckDeletedVideo({ videoEmbedCode: post.videoEmbedCode });
+    //         console.log(`checkDeletedContent=> `,videoEmbedCode.data)
+    //         if (checkDeletedContent.data.status === 404) {
+    //             clearACacheByTag('posts')
+    //             clearACacheByTag('widgets')
+    //         }
+    //     } catch (error) {
+    //         console.log(`checkImageStatus=> `, error);
+    //     }
+    // };
 
     return (
         <div className="video-player">
@@ -68,11 +66,11 @@ const VideoPlayer: FC<PropTypes> = ({ post }) => {
                         allow="fullscreen"
                         title={post.title}
                         src={post.videoEmbedCode}
-                        frameBorder="0"
+                        // frameBorder="0"
                         width="640"
                         height="360"
-                        onError={onErrorHandler}
-                        onErrorCapture={onErrorHandler}
+                        // onError={onErrorHandler}
+                        // onErrorCapture={onErrorHandler}
                     />
                 ) : !post.videoUrl && !post.videoEmbedCode && post.videoScriptCode ? (
                     post.videoScriptCode

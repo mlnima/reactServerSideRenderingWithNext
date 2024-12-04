@@ -1,7 +1,7 @@
 'use client';
 import {FC} from "react";
 import {Post} from "@repo/typescript-types";
-import './PostsListWidget.styles.scss'
+import './PostsListWidget.scss'
 // import PromotionPostListCard from "@components/includes/cards/postsCards/PromotionPostListCard";
 
 interface PropTypes {
@@ -20,7 +20,9 @@ interface PropTypes {
 }
 
 //Might be Removed
-const PostsListWidget: FC<PropTypes> = ({uniqueData}) => {
+const PostsListWidget: FC<PropTypes> = (
+    // {uniqueData}
+) => {
 
     return (
         <div className={'postsListWidget'}>

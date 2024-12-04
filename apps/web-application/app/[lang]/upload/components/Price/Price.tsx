@@ -1,17 +1,17 @@
-import {FC} from "react";
-import './Price.scss'
+import { FC, ChangeEventHandler } from 'react';
+import './Price.scss';
 
 interface PropTypes {
-    onChangeHandler:any
+    onChangeHandler: ChangeEventHandler<HTMLSelectElement>;
 }
 
-const Price: FC<PropTypes> = ({onChangeHandler}) => {
+const Price: FC<PropTypes> = ({ onChangeHandler }) => {
     return (
         <div className={'price'}>
             <div className={'field-section'}>
                 <p>Price</p>
-                <input type={'number'} name={'price'} className={'primaryInput'}/>
-                <label >.00 EUR</label>
+                <input type={'number'} name={'price'} className={'primaryInput'} />
+                <label>.00 EUR</label>
             </div>
             <div className={'field-section'}>
                 <p>Price Type</p>
@@ -21,8 +21,7 @@ const Price: FC<PropTypes> = ({onChangeHandler}) => {
                     <option value={'free'}>Free</option>
                 </select>
             </div>
-
         </div>
-    )
+    );
 };
-export default Price
+export default Price;

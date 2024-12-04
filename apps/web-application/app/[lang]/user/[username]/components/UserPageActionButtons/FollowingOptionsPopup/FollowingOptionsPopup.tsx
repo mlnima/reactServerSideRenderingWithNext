@@ -7,7 +7,7 @@ import {UserPreviewImage} from "@repo/ui";
 
 interface IProps {
     onUnFollowHandler:()=>void,
-    setFollowingOptionsPop:(value:boolean)=>void,
+    setFollowingOptionsPop:React.Dispatch<React.SetStateAction<boolean>>,
     dictionary: {
         [key: string]: string
     },

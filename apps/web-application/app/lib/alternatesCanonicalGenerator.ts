@@ -1,3 +1,5 @@
+import {MetasType, MetaType} from "@repo/typescript-types";
+
 type LanguageReducer = {
     [key: string]: string;
 };
@@ -8,11 +10,11 @@ export class AlternatesGenerators {
     locales: string[];
 
     constructor() {
-        this.baseUrlPath = process.env.NEXT_PUBLIC_PRODUCTION_URL;
-        this.defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE;
-        this.locales = process.env.NEXT_PUBLIC_LOCALES
+        this.baseUrlPath = process.env.NEXT_PUBLIC_PRODUCTION_URL ? process.env.NEXT_PUBLIC_PRODUCTION_URL : '';
+        this.defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? process.env.NEXT_PUBLIC_DEFAULT_LOCALE : 'en';
+        this.locales = process.env.NEXT_PUBLIC_LOCALES ? process.env.NEXT_PUBLIC_LOCALES
             // ?.replace(`${process.env.NEXT_PUBLIC_DEFAULT_LOCALE} `,'')
-            ?.split(' ');
+            ?.split(' ') : []
     }
 
     alternateLanguagesCorrector(lang: string) {
@@ -62,7 +64,7 @@ export class AlternatesGenerators {
         };
     }
 
-    metaPage(lang: string, metaType: string, metaId: string) {
+    metaPage(lang: string, metaType: MetaType, metaId: string) {
         const targetPath = `/${metaType}/${metaId}`;
         return {
             canonical: `${this.baseCanonicalPathGenerator(lang)}${targetPath}`,
@@ -70,7 +72,7 @@ export class AlternatesGenerators {
         };
     }
 
-    metasPage(lang: string, metaType: string) {
+    metasPage(lang: string, metaType: MetasType) {
         const targetPath = `/${metaType}`;
         return {
             canonical: `${this.baseCanonicalPathGenerator(lang)}${targetPath}`,

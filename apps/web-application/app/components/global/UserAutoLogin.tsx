@@ -1,19 +1,19 @@
 'use client';
-import {FC, useEffect} from "react";
-import {autoLoginAction} from "@store/reducers/userReducers/autoLoginAction";
-import {useAppDispatch, useAppSelector} from "@store/hooks";
-import {setAdminMode} from "@store/reducers/globalStateReducer";
+import { useEffect } from 'react';
+import { autoLoginAction } from '@store/reducers/userReducers/autoLoginAction';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { setAdminMode } from '@store/reducers/globalStateReducer';
 
-const UserAutoLogin: FC = () => {
-    const dispatch = useAppDispatch()
-    const {loggedIn,userData} = useAppSelector(({user}) =>user)
+const UserAutoLogin = () => {
+    const dispatch = useAppDispatch();
+    const { loggedIn, userData } = useAppSelector(({ user }) => user);
 
     useEffect(() => {
         if (!loggedIn) {
-            const wt = localStorage.getItem('wt')
-            !!wt && dispatch(
-                autoLoginAction(
-                    {
+            const wt = localStorage.getItem('wt');
+            if (wt) {
+                dispatch(
+                    autoLoginAction({
                         fields: [
                             'username',
                             'role',
@@ -21,20 +21,21 @@ const UserAutoLogin: FC = () => {
                             'profileImage',
                             'followingCount',
                             'followersCount',
-                            'draftPost'
-                        ]
-                    }
-                ))
+                            'draftPost',
+                        ],
+                    }),
+                );
+            }
         }
     }, []);
 
     useEffect(() => {
-        const adminMode = localStorage.getItem('adminMode')
+        const adminMode = localStorage.getItem('adminMode');
         if (userData?.role === 'administrator' && adminMode === 'true') {
-            dispatch(setAdminMode(true))
+            dispatch(setAdminMode(true));
         }
     }, [loggedIn]);
 
-    return null
+    return null;
 };
 export default UserAutoLogin;

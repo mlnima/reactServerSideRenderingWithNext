@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {dashboardAPIRequestBulkActionOnPosts} from "@repo/api-requests";
-import {AxiosResponse} from "axios";
+import {AxiosError, AxiosResponse} from "axios";
 
 export const editPostStatusAction = createAsyncThunk(
     'adminPanelPosts/editPostStatusAction',
@@ -8,7 +8,7 @@ export const editPostStatusAction = createAsyncThunk(
         if (ids){
             //@ts-ignore
             await dashboardAPIRequestBulkActionOnPosts(ids, status).then((res: AxiosResponse<any>) => {
-            }).catch((error) => {
+            }).catch((error:AxiosError) => {
                 console.log(error)
 
             })

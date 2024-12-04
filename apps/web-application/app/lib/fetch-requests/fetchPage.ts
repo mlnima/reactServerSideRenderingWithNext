@@ -12,18 +12,17 @@ export const fetchPage = async ({pageName, revalidate,tags}:IFetchPage)=>{
         const response = await fetch(
             `${APIServerUrl}/api/v1/page?pageName=${pageName}`,
             config({
-                //@ts-ignore
                     revalidate,
                     tags:[...(tags || []),'cacheItem','pages',pageName]
                 })
         );
-        if (!response.ok) {
-            const errorData = await response.text();
-            throw new Error(errorData);
-        }
+        // if (!response.ok) {
+        //     const errorData = await response.text();
+        //     throw new Error(errorData);
+        // }
         return response.json()
-    }catch (error){
-        throw error;
+    }catch {
+        return
     }
 }
 

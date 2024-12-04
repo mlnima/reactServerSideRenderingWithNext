@@ -8,7 +8,7 @@ import ReactAudioPlayer from "@components/ReactAudioPlayer/ReactAudioPlayer";
 
 interface IProps {
     draftMessage: IDraftMessage,
-    setDraftMessage: Function
+    setDraftMessage: React.Dispatch<React.SetStateAction<IDraftMessage>>;
 }
 
 const RecordedAudioPreview: FC<IProps> = ({draftMessage, setDraftMessage}) => {

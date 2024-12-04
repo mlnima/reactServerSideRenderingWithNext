@@ -56,13 +56,13 @@ const ActionButtons: FC<IProps> = ({
         if (loggedIn && _id) {
             setDisableRatingButtons(true);
             await clientAPIRequestLikeDislikePost(_id, type)
-                .then(response => {
-                    // setDisLikesValue(response.data.disLikes || 0)
-                    // setLikesValue(response.data.likes || 0)
-                })
-                .catch(error => {
-                    console.log('error=> ', error);
-                })
+                // .then(response => {
+                //     // setDisLikesValue(response.data.disLikes || 0)
+                //     // setLikesValue(response.data.likes || 0)
+                // })
+                // .catch(error => {
+                //     console.log('error=> ', error);
+                // })
                 .finally(() => {
                     setDisableRatingButtons(false);
                     clearACacheByTag(`${_id}Rating`);
@@ -88,18 +88,13 @@ const ActionButtons: FC<IProps> = ({
         <div className={'actionButtons'}>
             <div className="actionButtonsLeftArea">
                 {views ? (
-                    <span
-                        className={'actionItem views'}
-                        title={dictionary?.['Views'] || 'Views'}
-                    >
+                    <span className={'actionItem views'} title={dictionary?.['Views'] || 'Views'}>
                         <FontAwesomeIcon
                             className={'rate-logo view'}
                             color={'var(--primary-text-color)'}
                             icon={faEye}
                         />
-                        <p className="ActionItemValue">
-                            {shortNumber(views + 1)}{' '}
-                        </p>
+                        <p className="ActionItemValue">{shortNumber(views + 1)} </p>
                     </span>
                 ) : null}
 
@@ -114,11 +109,7 @@ const ActionButtons: FC<IProps> = ({
                         >
                             <FontAwesomeIcon
                                 className={'rate-logo thumbs-up'}
-                                color={
-                                    disableRatingButtons
-                                        ? '#666'
-                                        : 'var(--primary-text-color)'
-                                }
+                                color={disableRatingButtons ? '#666' : 'var(--primary-text-color)'}
                                 icon={faThumbsUp}
                             />
                             <p className="ActionItemValue">{likes}</p>
@@ -132,27 +123,18 @@ const ActionButtons: FC<IProps> = ({
                         >
                             <FontAwesomeIcon
                                 className={'rate-logo thumbs-down'}
-                                color={
-                                    disableRatingButtons
-                                        ? '#666'
-                                        : 'var(--primary-text-color)'
-                                }
+                                color={disableRatingButtons ? '#666' : 'var(--primary-text-color)'}
                                 icon={faThumbsDown}
                             />
+                            <p className="ActionItemValue">{disLikes}</p>
                         </button>
                     </>
                 ) : null}
             </div>
 
             <div className="actionButtonsRightArea">
-                <button
-                    onClick={onCommentsButtonClickHandler}
-                    className={'actionItem'}
-                >
-                    <FontAwesomeIcon
-                        className={'commentsIcon'}
-                        icon={faComments}
-                    />
+                <button onClick={onCommentsButtonClickHandler} className={'actionItem'}>
+                    <FontAwesomeIcon className={'commentsIcon'} icon={faComments} />
                 </button>
             </div>
         </div>

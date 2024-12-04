@@ -5,14 +5,14 @@ import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
 import './ImageContent.styles.scss'
 
 interface PropTypes {
-    profileImage: any,
+    profileImage: string,
     size?: number
 }
 
 const ImageContent: FC<PropTypes> = ({profileImage, size}) => {
     const [gotError, setGotError] = useState(false)
 
-    if (!!profileImage && !gotError) {
+    if (profileImage && !gotError) {
         return <img className={'user-info-profile-button-image'} src={profileImage}
                     onError={() => setGotError(true)}
                     style={{width:size,height:size}}

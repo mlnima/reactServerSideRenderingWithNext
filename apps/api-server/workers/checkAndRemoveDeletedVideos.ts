@@ -4,11 +4,11 @@ import {parentPort, workerData} from 'worker_threads';
 import axios from 'axios';
 import metaSchema from "@schemas/metaSchema";
 import postSchema from "@schemas/postSchema";
-import GlobalStore from "@store/GlobalStore";
+import {connectToDatabase} from "@repo/db";
 
 
 dotenv.config();
-GlobalStore.connectToDatabase('Worker').finally();
+connectToDatabase('Worker').finally();
 const checkAndRemoveDeletedVideos = async ()=>{
     try {
         await metaSchema.syncIndexes()

@@ -1,26 +1,32 @@
 'use server';
-import {IClearCache} from "@repo/typescript-types";
-import {ReadonlyURLSearchParams} from "next/navigation";
-import {revalidatePath, revalidateTag} from "next/cache";
+import { IClearCache, PageParams } from '@repo/typescript-types';
+import { ReadonlyURLSearchParams } from 'next/navigation';
+import { revalidatePath, revalidateTag } from 'next/cache';
 
 interface TClearCachesByServerAction extends IClearCache {
     path: string;
     segment: string | null;
     searchParams: ReadonlyURLSearchParams;
-    params: any;
+    params: object;
 }
 
-
-export const clearACacheByTag= async (tag:string)=>{
+export const clearACacheByTag = async (tag: string) => {
     try {
-        revalidateTag(tag)
-    }catch (error){
-        console.log(`error clearACacheByTag=> `,error)
+        revalidateTag(tag);
+    } catch (error) {
+        console.log(`error clearACacheByTag=> `, error);
     }
-}
+};
 
-export const clearCachesByServerAction= async ({ path, segment, mode, searchParams, params }: TClearCachesByServerAction)=>{
+export const clearCachesByServerAction = async ({
+    //path,
+    //searchParams,
+    segment,
+    mode,
+    params,
+}: TClearCachesByServerAction) => {
     const onlyTagsOptions = {
+        // @ts-expect-error: need fix
         post: params?.identifier,
         categories: 'metas',
         actors: 'metas',
@@ -32,6 +38,7 @@ export const clearCachesByServerAction= async ({ path, segment, mode, searchPara
 
     if (mode === 'all') {
         revalidateTag('cacheItem');
+        revalidateTag('post');
         return;
     }
 
@@ -40,9 +47,8 @@ export const clearCachesByServerAction= async ({ path, segment, mode, searchPara
         return;
     }
 
-    if (mode === 'only' && !!segment) {
-        //@ts-ignore
-        if (!!onlyTagsOptions?.[segment]) {
+    if (mode === 'only' && segment) {
+        if (onlyTagsOptions?.[segment]) {
             revalidateTag(onlyTagsOptions?.[segment]);
         }
 
@@ -58,11 +64,7 @@ export const clearCachesByServerAction= async ({ path, segment, mode, searchPara
     revalidatePath('/[lang]');
 
     return;
-}
-
-
-
-
+};
 
 
 // class ServerActions{

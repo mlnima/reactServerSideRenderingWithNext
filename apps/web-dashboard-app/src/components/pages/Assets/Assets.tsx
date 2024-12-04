@@ -54,18 +54,21 @@ const Assets: FC<PropTypes> = ({}) => {
         } else if (assetsType === 'forms') {
             dispatch(getFormsAction(paramsQueries));
         } else if (assetsType === 'pages') {
-            dispatch(getPagesAction(paramsQueries));
+            dispatch(getPagesAction(currentQuery));
         } else if (assetsType === 'chatrooms') {
             dispatch(getChatroomsAction());
         }
     };
+    useEffect(() => {
+        console.log(`assetPageData=> `,assetPageData);
+    }, []);
 
     useEffect(() => {
         getData();
         const hasStatus = !!currentQuery?.status && currentQuery?.status !== 'all';
         const headerItems = currentQuery?.assetsType ? tableItemProperties?.[currentQuery?.assetsType as string] : [];
-        const listOfFields  = hasStatus ? headerItems.filter((item: string) => item !== 'status') : headerItems
-        setTableItemsType(listOfFields)
+        const listOfFields = hasStatus ? headerItems.filter((item: string) => item !== 'status') : headerItems;
+        setTableItemsType(listOfFields);
     }, [currentQuery]);
 
     useEffect(() => {

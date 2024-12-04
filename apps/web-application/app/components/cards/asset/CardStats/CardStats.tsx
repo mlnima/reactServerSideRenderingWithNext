@@ -5,25 +5,36 @@ import './CardStats.scss';
 import CardDate from '@components/cards/asset/CardDate/CardDate';
 
 interface IProps {
-    views: number;
-    dislikes: number;
-    likes: number;
+    views: number | undefined;
+    dislikes: number | undefined;
+    likes: number | undefined;
     updatedAt?: string;
     createdAt?: string;
     dictionary: {
         [key: string]: string;
     };
     settings: {
-        [key: string]: string;
+        showViewsOnCard:  boolean,
+        showRatingOnCard:  boolean,
+        showDateOnCard:  boolean,
     };
 }
 
 const CardStats: FC<IProps> = ({ views, dislikes, likes, dictionary, updatedAt, createdAt, settings }) => {
     return (
         <div className={'cardStats'}>
-            <CardViews views={views} dictionary={dictionary} showViewsOnCard={settings?.showViewsOnCard} />
-            <CardRating dislike={dislikes} like={likes} showRatingOnCard={settings?.showRatingOnCard} />
-            <CardDate updatedAt={updatedAt} createdAt={createdAt} showDateOnCard={settings?.showDateOnCard} />
+            {(settings?.showViewsOnCard && views != 0) &&
+                <CardViews views={views} dictionary={dictionary} showViewsOnCard={settings?.showViewsOnCard} />
+            }
+            {settings?.showRatingOnCard &&
+                <CardRating dislikes={dislikes} likes={likes} showRatingOnCard={settings?.showRatingOnCard} />
+            }
+
+            {settings?.showDateOnCard &&
+                <CardDate updatedAt={updatedAt} createdAt={createdAt} showDateOnCard={settings?.showDateOnCard} />
+            }
+
+
         </div>
     );
 };

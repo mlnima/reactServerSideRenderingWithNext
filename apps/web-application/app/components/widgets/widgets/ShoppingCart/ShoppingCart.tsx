@@ -1,11 +1,7 @@
-import React, {FC} from 'react';
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
 
-interface IProps {
-}
-
-const ShoppingCart: FC<IProps> = ({}) => {
-
+const ShoppingCart = () => {
     return (
         <Link href={'/checkout'} className={'shoppingCardButton'}>
             card

@@ -114,3 +114,8 @@ export interface UniqueDataTypes {
     // themeColorsSwitcherColors:string,
 
 }
+
+export interface ISuggestion {
+    name: string;
+    count: number;
+}

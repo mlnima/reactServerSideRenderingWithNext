@@ -18,8 +18,7 @@ interface TableBodyPropTypes {
 
 const TableBody: FC<TableBodyPropTypes> = ({assetPageData, selectedItems, setSelectedItems,tableItemsType,currentQuery}) => {
     const [search, setSearch] = useSearchParams();
-    //@ts-ignore
-    const query = useMemo(()=>paramsObjectGenerator(search),[search])
+    // const query = useMemo(()=>paramsObjectGenerator(search),[search])
 
     const renderItems = (assetPageData[currentQuery.assetsType] || []).map((item:{_id:string,data:{}}) => {
         return (

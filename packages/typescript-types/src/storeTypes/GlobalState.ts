@@ -9,6 +9,6 @@ export interface GlobalState {
         active?: boolean,
         message?: string,
         type?: string | null,
-        actionFunctions:null| Function
+        actionFunctions?:null| Function
     }
 }

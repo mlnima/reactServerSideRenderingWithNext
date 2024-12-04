@@ -13,7 +13,7 @@ const Authentication: FC = () => {
     const [renderUserProfileImage, setRenderUserProfileImage] = useState(false);
 
     useEffect(() => {
-        if (!!profileImage) {
+        if (profileImage) {
             setRenderUserProfileImage(true);
         }
     }, [profileImage]);

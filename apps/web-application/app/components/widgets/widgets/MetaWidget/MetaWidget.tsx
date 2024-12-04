@@ -1,5 +1,5 @@
 import {FC} from "react";
-import {Meta} from "@repo/typescript-types";
+import {Meta, MetasType} from "@repo/typescript-types";
 import MetasRenderer from "@components/metas/MetasRenderer";
 
 interface MetaWidgetPropType {
@@ -8,7 +8,7 @@ interface MetaWidgetPropType {
         grouping?:boolean,
         metaType?:string
     },
-    metaType: string,
+    metaType: MetasType,
     locale:string
 }
 

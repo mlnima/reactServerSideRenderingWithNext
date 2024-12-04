@@ -1,48 +1,40 @@
-import {FC} from "react";
-import './ActorDetails.styles.scss';
+import { FC } from 'react';
+import './ActorDetails.scss';
 
 interface IProps {
-    additionalInfo: any
+    additionalInfo: {
+        [key: string]: string;
+    }[];
 }
 
-const ActorDetails:FC<IProps> = ({additionalInfo}) => {
+const ActorDetails: FC<IProps> = ({ additionalInfo }) => {
+    const renderDetails = additionalInfo
+        .filter(detail => !detail?.name?.includes('Views'))
 
-    //@ts-ignore
-    const renderDetails = additionalInfo.filter((detail) => !detail?.name?.includes('Views'))
-        //@ts-ignore
-        .map((detail,index) => {
-
-            //@ts-ignore
-            const convertNumberDate = (numberDate) => {
+        .map((detail) => {
+            const convertNumberDate = (numberDate: string) => {
                 if (numberDate?.length === 8) {
-                    return `${numberDate.slice(0, 4)}/${numberDate.slice(4, 6)}/${numberDate.slice(6, 8)}`
+                    return `${numberDate.slice(0, 4)}/${numberDate.slice(4, 6)}/${numberDate.slice(6, 8)}`;
                 }
-                return numberDate
-            }
+                return numberDate;
+            };
 
-            const value = detail?.name === 'Born' ? convertNumberDate(detail?.value) :
-                detail?.value
-
+            const value = detail?.name === 'Born' ? convertNumberDate(detail?.value) : detail?.value;
 
             return (
                 <div className={'actor-detail'} key={detail?.name.trim().toLowerCase()}>
-                    <span className={'actor-detail-name'}>
-                        {detail?.name.trim() + ':'}
-                    </span>
-                    {!!value && value?.includes('http') ?
+                    <span className={'actor-detail-name'}>{detail?.name.trim() + ':'}</span>
+                    {!!value && value?.includes('http') ? (
                         <a href={value} className={'actor-detail-value'} target={'_blank'} title={detail?.name}>
                             External Link
-                        </a> :
+                        </a>
+                    ) : (
                         <span className={'actor-detail-value'}>{value}</span>
-                    }
+                    )}
                 </div>
-            )
-        })
+            );
+        });
 
-    return (
-        <div className={'actorDataDetails'}>
-            {renderDetails}
-        </div>
-    );
+    return <div className={'actorDataDetails'}>{renderDetails}</div>;
 };
 export default ActorDetails;

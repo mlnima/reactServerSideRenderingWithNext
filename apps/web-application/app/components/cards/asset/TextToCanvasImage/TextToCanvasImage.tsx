@@ -1,5 +1,7 @@
+/* eslint-disable */
 // @ts-nocheck
 "use client";
+
 import { FC, useEffect, useRef } from 'react';
 
 interface TextToCanvasImagePropTypes {

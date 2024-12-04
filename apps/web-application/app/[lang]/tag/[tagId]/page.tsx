@@ -2,7 +2,6 @@ import { fetchPosts } from '@lib/fetch-requests/fetchPosts';
 import { fetchSettings } from '@lib/fetch-requests/fetchSettings';
 import { fetchWidgets } from '@lib/fetch-requests/fetchWidgets';
 import SidebarWidgetAreaRenderer from '@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer';
-import { i18n } from '@i18nConfig';
 import { getDictionary } from '../../../../get-dictionary';
 import WidgetsRenderer from '@components/widgets/widgetRenderer/WidgetsRenderer';
 import PostPage from '@components/PostsPage/PostsPage';
@@ -12,13 +11,14 @@ import PostsPageInfo from '@components/PostsPage/PostsPageInfo/PostsPageInfo';
 import Soft404 from '@components/Soft404/Soft404';
 import { mongoIdValidatorByRegex } from '@repo/shared-util';
 import {IPageProps} from "@repo/typescript-types";
+import localDetector from "@lib/localDetector";
 
 
 const TagPage = async (props: IPageProps) => {
     const searchParams = await props.searchParams;
     const params = await props.params;
 
-    const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+    const locale = localDetector(params.lang);
 
     const dictionary = await getDictionary(locale);
 
@@ -40,7 +40,7 @@ const TagPage = async (props: IPageProps) => {
     const postsData = await fetchPosts({
         queryObject: {
             sort: searchParams?.sort,
-            lang: params?.lang,
+            lang: locale,
             metaId: params?.tagId,
             page: currentPage,
             size: searchParams?.size,
@@ -55,11 +55,12 @@ const TagPage = async (props: IPageProps) => {
     return (
         <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
             <main id={'primary'} className={'main tagPage'}>
-                <MetaAdminQuickAccessBar metaId={params?.tagId} />
+                {params.tagId &&  <MetaAdminQuickAccessBar metaId={params?.tagId} /> }
+
                 <PostsPageInfo
-                    title={postsData?.meta?.translations?.[params?.lang]?.name ?? postsData?.meta?.name}
+                    title={postsData?.meta?.translations?.[locale]?.name ?? postsData?.meta?.name}
                     description={
-                        postsData?.meta?.translations?.[params?.lang]?.description ?? postsData?.meta?.description
+                        postsData?.meta?.translations?.[locale]?.description ?? postsData?.meta?.description
                     }
                 />
                 <WidgetsRenderer

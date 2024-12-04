@@ -1,18 +1,18 @@
-import type {Metadata, ResolvingMetadata} from 'next'
+import type {Metadata} from 'next'
 import {fetchPosts} from "@lib/fetch-requests/fetchPosts";
 import {fetchSettings} from "@lib/fetch-requests/fetchSettings";
 import {textContentReplacer, getTextDataWithTranslation} from "@repo/shared-util";
-import {i18n} from "@i18nConfig";
 import {AlternatesGenerators} from "@lib/alternatesCanonicalGenerator";
 import {IPageProps} from "@repo/typescript-types";
+import localDetector from "@lib/localDetector";
 
 const alternatesGenerators = new AlternatesGenerators();
 
-const tagMetaGenerator = async (props: IPageProps, parent?: ResolvingMetadata): Promise<Metadata> => {
+const tagMetaGenerator = async (props: IPageProps): Promise<Metadata> => {
     const searchParams = await props.searchParams;
     const params = await props.params;
 
-    const locale = i18n.locales.includes(params?.lang) ? params.lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+    const locale = localDetector(params.lang);
     const settingsData = await fetchSettings({requireSettings: ['tagPageSettings']});
     const fallbackImage = '/asset/images/default/no-image-available.png'
     const initialSettingsData = await fetchSettings({requireSettings: ['initialSettings']})
@@ -23,7 +23,7 @@ const tagMetaGenerator = async (props: IPageProps, parent?: ResolvingMetadata): 
     const postsData = await fetchPosts({
         queryObject: {
             sort: searchParams?.sort,
-            lang: params?.lang,
+            lang: locale,
             metaId: params?.tagId,
             page: currentPage,
             size: searchParams?.size
@@ -40,17 +40,22 @@ const tagMetaGenerator = async (props: IPageProps, parent?: ResolvingMetadata): 
             count: postsData?.meta?.count,
             siteName: initialSettingsData?.settings?.initialSettings?.headDataSettings?.siteName
         }) :
-        getTextDataWithTranslation(params?.lang, 'description', postsData?.meta)
+        getTextDataWithTranslation(locale, 'description', postsData?.meta)
 
+    const alternates = params?.tagId
+        ? {
+            alternates: alternatesGenerators.metaPage(locale,'tag',params?.tagId),
+        }
+        : {};
     return {
-        alternates: alternatesGenerators.metaPage(params?.lang,'tag',params?.tagId),
+        ...alternates,
         title: pageTitle ?
             textContentReplacer(pageTitle, {
                 name: postsData?.meta?.name,
                 count: postsData?.meta?.count,
                 siteName: initialSettingsData?.settings?.initialSettings?.headDataSettings?.siteName
             }) :
-            getTextDataWithTranslation(params?.lang, 'title', postsData?.meta),
+            getTextDataWithTranslation(locale, 'title', postsData?.meta),
         description: description || initialSettingsData?.settings?.initialSettings?.headDataSettings?.description || '',
         keywords: `${postsData?.meta?.name}${pageKeywords ? `, ${pageKeywords}` : ''}`,
         openGraph: {

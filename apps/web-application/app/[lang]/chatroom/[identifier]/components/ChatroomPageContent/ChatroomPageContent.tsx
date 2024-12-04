@@ -9,13 +9,16 @@ import ChatRoomMessageArea from '../ChatRoomMessageArea/ChatRoomMessageArea';
 import ChatRoomTools from '../ChatRoomTools/ChatRoomTools';
 import ChatRoomOnlineUsersList from '../ChatRoomOnlineUsersList/ChatRoomOnlineUsersList';
 import { IChatroomUsers, INewUserJoinData, IPreference } from '../interfaces';
-import './ChatroomPageContent.styles.scss';
+import './ChatroomPageContent.scss';
 import Soft404 from '@components/Soft404/Soft404';
-import { ChatroomMessage } from "@repo/typescript-types";
+import { Chatroom, ChatroomMessage, User } from '@repo/typescript-types';
 
 interface IProps {
     locale: string;
-    pageData: any;
+    pageData: {
+        chatroom: Chatroom;
+        chatrooms: Chatroom[];
+    };
     dictionary: {
         [key: string]: string;
     };
@@ -44,7 +47,6 @@ const ChatroomPageContent: FC<IProps> = ({ dictionary, pageData, locale }) => {
         // console.log(`iWantToJoinToAChatroom=> `,!isJoined.current , user?.loggedIn , !!pageData?.chatroom?._id)
         isJoined.current = false;
         if (!isJoined.current && user?.loggedIn && !!pageData?.chatroom?._id) {
-
             const userDataForJoiningRoom = {
                 chatroomId: pageData?.chatroom?._id,
                 joiner: {
@@ -56,18 +58,14 @@ const ChatroomPageContent: FC<IProps> = ({ dictionary, pageData, locale }) => {
             socket.emit('iWantToJoinToAChatroom', userDataForJoiningRoom);
         }
 
-        if (!user?.loggedIn){
-            socket.emit('iWantToPreviewAChatroom',{ chatroomId: pageData?.chatroom?._id});
+        if (!user?.loggedIn) {
+            socket.emit('iWantToPreviewAChatroom', { chatroomId: pageData?.chatroom?._id });
         }
-
-
     }, [user?.loggedIn, pageData?.chatroom?._id, user?.socketId]);
 
     useEffect(() => {
         const chatroomLocalStoragePreference = localStorage.getItem('chatroomPreference');
-        const preferenceData = chatroomLocalStoragePreference
-            ? JSON.parse(chatroomLocalStoragePreference)
-            : null;
+        const preferenceData = chatroomLocalStoragePreference ? JSON.parse(chatroomLocalStoragePreference) : null;
         if (preferenceData) {
             setPreference({
                 ...preference,
@@ -77,8 +75,9 @@ const ChatroomPageContent: FC<IProps> = ({ dictionary, pageData, locale }) => {
     }, []);
 
     const handleOlderMessagesLoaded = (data: { messages: ChatroomMessage[] }) => {
-        if (data?.messages?.length > 0) {
-            setChatroomMessages(prevState => [...data?.messages, ...prevState]);
+        const messages = data?.messages || [];
+        if (messages.length > 0) {
+            setChatroomMessages(prevState => [...messages, ...prevState]);
         } else {
             if (gettingOlderMessages.current) {
                 gettingOlderMessages.current = false;
@@ -106,20 +105,22 @@ const ChatroomPageContent: FC<IProps> = ({ dictionary, pageData, locale }) => {
         setChatroomMessages(prevState => [...prevState, newMessageData]);
     };
 
-    const initializeChatroomDataHandler = (data: any) => {
+    const initializeChatroomDataHandler = (data: {
+        recentChatRoomMessages: ChatroomMessage[];
+        onlineUsersList: User[];
+    }) => {
         isJoined.current = true;
-        if (data?.recentChatRoomMessages?.length > 0) {
+
+        if ((data?.recentChatRoomMessages || []).length > 0) {
             setChatroomMessages(data?.recentChatRoomMessages);
         }
-        if (data?.onlineUsersList?.length > 0) {
+        if ((data?.onlineUsersList || []).length > 0) {
             setChatroomUsers(data?.onlineUsersList);
         }
     };
 
     const onDeleteMessageHandler = (messageId: string) => {
-        setChatroomMessages(prevMessages =>
-            prevMessages.filter(message => message._id !== messageId),
-        );
+        setChatroomMessages(prevMessages => prevMessages.filter(message => message._id !== messageId));
         socket.emit('deleteThisMessageFromChatroom', {
             messageId,
             chatroomId: pageData?.chatroom?._id,
@@ -132,7 +133,7 @@ const ChatroomPageContent: FC<IProps> = ({ dictionary, pageData, locale }) => {
             setChatroomUsers(prevUsers => [...prevUsers, joiner]);
 
             if (joiner.username !== 'Admin') {
-                //@ts-ignore
+                //@ts-expect-error: we are adding a join message manually it can be done by server emit as well
                 setChatroomMessages(prevState => {
                     return [
                         ...prevState,
@@ -155,9 +156,7 @@ const ChatroomPageContent: FC<IProps> = ({ dictionary, pageData, locale }) => {
     };
 
     const onAMessageWasDeleted = (messageId: string) => {
-        setChatroomMessages(prevMessages =>
-            prevMessages.filter(message => message._id !== messageId),
-        );
+        setChatroomMessages(prevMessages => prevMessages.filter(message => message._id !== messageId));
     };
 
     useEffect(() => {
@@ -194,7 +193,7 @@ const ChatroomPageContent: FC<IProps> = ({ dictionary, pageData, locale }) => {
         };
     }, []);
 
-    const updatePreference = (key: string, value: any) => {
+    const updatePreference = (key: string, value: string | boolean) => {
         setPreference((prevState: IPreference) => {
             const newPreference = {
                 ...prevState,
@@ -209,12 +208,8 @@ const ChatroomPageContent: FC<IProps> = ({ dictionary, pageData, locale }) => {
         return <Soft404 dictionary={dictionary} />;
     }
 
-    // if (!user?.loggedIn) return <LoggedInRequirePageMessage dictionary={dictionary} />;
-
     return (
-        <div
-            className={`chatroomPageContent chatroomPage${preference.isMaximized ? 'Maximized' : ''}`}
-        >
+        <div className={`chatroomPageContent chatroomPage${preference.isMaximized ? 'Maximized' : ''}`}>
             <ChatroomTopbar
                 chatrooms={pageData?.chatrooms}
                 locale={locale}
@@ -237,9 +232,7 @@ const ChatroomPageContent: FC<IProps> = ({ dictionary, pageData, locale }) => {
             />
 
             <ChatRoomTools dictionary={dictionary} chatroomId={pageData?.chatroom?._id} setAutoScroll={setAutoScroll} />
-            {preference.onlineUserListVisibility && (
-                <ChatRoomOnlineUsersList chatroomUsers={chatroomUsers} />
-            )}
+            {preference.onlineUserListVisibility && <ChatRoomOnlineUsersList chatroomUsers={chatroomUsers} />}
         </div>
     );
 };

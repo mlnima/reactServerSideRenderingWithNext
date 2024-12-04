@@ -14,7 +14,6 @@ interface PostMetaPropType {
 }
 
 const PostMetasRenderer: FC<PostMetaPropType> = ({type, metas,dictionary}) => {
-
     if (metas?.length) {
         return (
             <div className={`post-meta`}>

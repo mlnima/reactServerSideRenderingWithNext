@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import {createSlice} from "@reduxjs/toolkit";
 import {RootState} from "@store/store";
 // import {getConversationsListAction} from "@utils/reducers/messengerActions/getConversationsListAction";

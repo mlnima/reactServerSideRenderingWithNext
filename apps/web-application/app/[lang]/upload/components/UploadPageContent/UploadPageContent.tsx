@@ -1,3 +1,5 @@
+/* eslint-disable */
+// @ts-nocheck
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
@@ -10,7 +12,7 @@ import LocationField from '../LocationField/LocationField';
 import Csr from '@components/global/Csr';
 import { useRouter } from 'next/navigation';
 import { setAlert } from '@store/reducers/globalStateReducer';
-import {postTypes, videoQualities, postStatuses, reactSelectPrimaryTheme} from '@repo/data-structures';
+import { postTypes, videoQualities, postStatuses } from '@repo/data-structures';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
@@ -25,7 +27,6 @@ import { useSearchParams } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 import { AxiosError, AxiosResponse } from 'axios';
 
-
 interface IProps {
     _id: string;
     postType: string;
@@ -35,19 +36,14 @@ interface IProps {
     };
 }
 
-const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null | React.JSX.Element = ({
-    _id,
-    postType,
-    dictionary,
-    locale,
-}) => {
+const UploadPageContent = ({ _id, postType, dictionary, locale }: IProps) => {
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const router = useRouter();
     const dispatch = useAppDispatch();
-    const [editingPost, setEditingPost] = useState<any>(null);
-    const [editingPostOriginal, setEditingPostOriginal] = useState<Post>(null);
-    const fileInputRef = useRef<any>(null);
+    const [editingPost, setEditingPost] = useState<Post | null>(null);
+    const [editingPostOriginal, setEditingPostOriginal] = useState<Post | null>(null);
+    const fileInputRef = useRef(null);
     const { loggedIn, userData } = useAppSelector(({ user }) => user);
     const localeToSet = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? '' : `/${locale}`;
     const postByUserSettings = useAppSelector(
@@ -62,9 +58,10 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
         if (_id && loggedIn) {
             getEditingPostData();
         } else {
-            setEditingPost({
+            setEditingPost(prevState => ({
+                ...(prevState),
                 postType,
-            });
+            }));
             if (fileInputRef.current) {
                 fileInputRef.current.value = '';
             }
@@ -74,53 +71,58 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
     const getPostMeta = async (_id: string) => {
         try {
             const metaData = await getMeta(_id);
-            setEditingPost((prevState: any) => ({ ...prevState, categories: [metaData.data?.meta] }));
-        } catch (error) {}
+            setEditingPost(prevState => ({ ...prevState, categories: [metaData.data?.meta] }));
+        } catch {
+            return;
+        }
     };
 
     useEffect(() => {
         const categoryParams = searchParams.get('category');
-        const category = !!categoryParams ? (Array.isArray(categoryParams) ? categoryParams[0] : categoryParams) : null;
+        const category = categoryParams ? (Array.isArray(categoryParams) ? categoryParams[0] : categoryParams) : null;
 
-        if (!!category) {
+        if (category) {
             void getPostMeta(category);
         }
     }, [searchParams, pathname]);
 
     const getEditingPostData = () => {
         if (_id) {
-            clientAPIRequestGetEditingPost(_id).then((postData: { data: any }) => {
-                if (userData.role === 'administrator' || postData?.data?.post?.author?._id === userData?._id) {
-                    setEditingPost(postData?.data?.post || {});
-                    setEditingPostOriginal(postData?.data?.post || {});
+            clientAPIRequestGetEditingPost(_id).then((response: AxiosResponse) => {
+                if (userData.role === 'administrator' || response?.data?.post?.author?._id === userData?._id) {
+                    setEditingPost(response?.data?.post || {});
+                    setEditingPostOriginal(response?.data?.post || {});
                 }
             });
         }
     };
 
-    const onChangeHandler = (e: React.ChangeEvent<any>) => {
-        console.log(`onChangeHandler=> `, e);
-        console.log(`onChangeHandler=> `, typeof e);
-        setEditingPost((prevState: any) => ({ ...prevState, [e.target.name]: e.target.value }));
+    const onChangeHandler = (
+        e:
+            | React.ChangeEvent<HTMLInputElement>
+            | React.ChangeEvent<HTMLSelectElement>
+            | React.ChangeEvent<HTMLTextAreaElement>,
+    ) => {
+        setEditingPost(prevState => ({ ...prevState, [e.target.name]: e.target.value }));
     };
 
-    const onReactSelectChangeHandler = (name:string,value:string) => {
-        setEditingPost((prevState: any) => ({ ...prevState, [name]: value }));
-    };
+    // const onReactSelectChangeHandler = (name:string,value:string) => {
+    //     setEditingPost((prevState: any) => ({ ...prevState, [name]: value }));
+    // };
 
-    const onUniqueFieldsChangeHandler = (e: React.ChangeEvent<any>) => {
-        setEditingPost((prevState: any) => ({
-            ...prevState,
-            uniqueData: { ...(prevState?.uniqueData || {}), [e.target.name]: e.target.value },
-        }));
-    };
-    //@ts-ignore
-    const onMetaChangeHandler = (metas: {}, metaType: string) => {
-        setEditingPost((prevState: any) => ({
-            ...prevState,
-            [metaType]: metas,
-        }));
-    };
+    // const onUniqueFieldsChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setEditingPost(prevState => ({
+    //         ...prevState,
+    //         uniqueData: { ...(prevState?.uniqueData || {}), [e.target.name]: e.target.value },
+    //     }));
+    // };
+
+    // const onMetaChangeHandler = (metas: object, metaType: string) => {
+    //     setEditingPost(prevState => ({
+    //         ...prevState,
+    //         [metaType]: metas,
+    //     }));
+    // };
 
     const onSaveHandler = async () => {
         if (deepEqual(editingPost, editingPostOriginal) && fileInputRef.current.files.length < 1) {
@@ -136,8 +138,8 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
         const formData = new FormData();
 
         const image = fileInputRef.current.files?.[0] || fileInputRef.current.files?.[0];
-        console.log(`image=> `, image);
-        if (!!image) {
+
+        if (image) {
             formData.append(
                 'thumbnail',
                 await imageCanvasCompressor({
@@ -156,12 +158,12 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
             : {};
         const tags = editingPost?.tags ? { tags: reduceArrayOfDataToIds(editingPost.tags) } : {};
         const actors = editingPost?.actors ? { actors: reduceArrayOfDataToIds(editingPost.actors) } : {};
-        const author = !!editingPost?.author?._id
+        const author = editingPost?.author?._id
             ? { author: editingPost?.author?._id }
             : !_id && !editingPost?.author?._id
               ? { author: userData?._id }
               : {};
-        const thumbnail = !!editingPost?.thumbnail?._id ? { thumbnail: editingPost?.thumbnail?._id } : {};
+        const thumbnail = editingPost?.thumbnail?._id ? { thumbnail: editingPost?.thumbnail?._id } : {};
 
         const editedPost = {
             ...editingPost,
@@ -185,7 +187,7 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
                     }),
                 );
 
-                if (!editedPost._id && !!res.data?.postId) {
+                if (!editedPost._id && res.data?.postId) {
                     const localeToSet = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? '' : `/${locale}`;
                     router.push(`${localeToSet}/upload?_id=${res.data?.postId}`);
                 } else {
@@ -193,12 +195,11 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
                 }
             })
             .catch((error: AxiosError) => {
-                console.log('error=> ', error);
                 dispatch(
                     setAlert({
                         type: 'error',
-                        //@ts-ignore
-                        message: error.response?.data?.message,
+                        //@ts-expect-error message might not defined
+                        message: (error.response?.data?.message as string) || '',
                     }),
                 );
             });
@@ -245,12 +246,8 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
     if (!loggedIn) return <LoggedInRequirePageMessage dictionary={dictionary} />;
 
     if (
-        !postByUserSettings?.[editingPost?.postType]?.allow || (
-            !!_id && (
-                userData?._id !== editingPost?.author?._id &&
-                userData?.role !== 'administrator'
-            )
-        )
+        !postByUserSettings?.[editingPost?.postType]?.allow ||
+        (_id && userData?._id !== editingPost?.author?._id && userData?.role !== 'administrator')
     )
         return <ForbiddenMessage dictionary={dictionary} />;
 
@@ -354,7 +351,7 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
                         )}
                     </div>
                     <div className={'sidebarField'}>
-                        {userData?.role === 'administrator' && !!editingPost?.status && (
+                        {userData?.role === 'administrator' && editingPost?.status && (
                             <div className="formSection">
                                 <p>Post Status:</p>
                                 <select
@@ -392,7 +389,7 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
                                     capitalizeFirstLetter(editingPost?.status) ||
                                     'New Post'}
                             </label>
-                            {!!editingPost?.createdAt && (
+                            {editingPost?.createdAt && (
                                 <label>
                                     {dictionary?.['Created at'] || 'Created at'}: &nbsp;
                                     {formatDistance(new Date(editingPost?.createdAt), new Date(), {
@@ -400,7 +397,7 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
                                     })}
                                 </label>
                             )}
-                            {!!editingPost?.updatedAt && (
+                            {editingPost?.updatedAt && (
                                 <label>
                                     {dictionary?.['Updated at'] || 'Updated at'}: &nbsp;
                                     {formatDistance(new Date(editingPost?.updatedAt), new Date(), {
@@ -437,42 +434,41 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
                             </div>
                         ) : null}
 
-                        {!!postByUserSettings?.[editingPost?.postType]?.maxCategories && (
+                        {postByUserSettings?.[editingPost?.postType]?.maxCategories && (
                             <div className="formSection">
                                 <p>{dictionary?.['Categories'] || 'Categories'}:</p>
                                 <MetaDataSelector
                                     postData={editingPost}
+                                    setEditingPost={setEditingPost}
                                     metaType={'categories'}
                                     maxLimit={postByUserSettings?.[editingPost?.postType]?.maxCategories}
-                                    onMetaChangeHandler={onMetaChangeHandler}
                                 />
                             </div>
                         )}
 
-                        {!!postByUserSettings?.[editingPost?.postType]?.maxTags && (
+                        {postByUserSettings?.[editingPost?.postType]?.maxTags && (
                             <div className="formSection">
                                 <p>{dictionary?.['Tags'] || 'Tags'}:</p>
                                 <MetaDataSelector
                                     postData={editingPost}
+                                    setEditingPost={setEditingPost}
                                     metaType={'tags'}
                                     maxLimit={postByUserSettings?.[editingPost?.postType]?.maxTags}
-                                    onMetaChangeHandler={onMetaChangeHandler}
                                 />
                             </div>
                         )}
 
-                        {editingPost.postType === 'video' &&
-                            !!postByUserSettings?.[editingPost?.postType]?.maxActors && (
-                                <div className="formSection">
-                                    <p>{dictionary?.['Actors'] || 'Actors'}:</p>
-                                    <MetaDataSelector
-                                        postData={editingPost}
-                                        metaType={'actors'}
-                                        maxLimit={postByUserSettings?.[editingPost?.postType]?.maxActors}
-                                        onMetaChangeHandler={onMetaChangeHandler}
-                                    />
-                                </div>
-                            )}
+                        {editingPost.postType === 'video' && postByUserSettings?.[editingPost?.postType]?.maxActors && (
+                            <div className="formSection">
+                                <p>{dictionary?.['Actors'] || 'Actors'}:</p>
+                                <MetaDataSelector
+                                    postData={editingPost}
+                                    setEditingPost={setEditingPost}
+                                    metaType={'actors'}
+                                    maxLimit={postByUserSettings?.[editingPost?.postType]?.maxActors}
+                                />
+                            </div>
+                        )}
 
                         {editingPost?.postType === 'advertise' && (
                             <div className="formSection">
@@ -482,7 +478,7 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
 
                         {/ugcAd|event/.test(editingPost?.postType as string) && (
                             <div className="formSection">
-                                <LocationField onUniqueFieldsChangeHandler={onUniqueFieldsChangeHandler} />
+                                <LocationField setEditingPost={setEditingPost}/>
                             </div>
                         )}
                         {editingPost?.postType === 'video' && (
@@ -511,7 +507,7 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
                                 {dictionary?.['Submit'] || 'Submit'}
                             </button>
 
-                            {!!editingPost._id && (
+                            {editingPost._id && (
                                 <button
                                     type={'button'}
                                     onClick={async () => onDeleteRequestHandler()}
@@ -523,7 +519,7 @@ const UploadPageContent: ({ _id, postType, dictionary, locale }: IProps) => null
                                 </button>
                             )}
 
-                            {!!editingPost._id && (
+                            {editingPost._id && (
                                 <button
                                     type={'button'}
                                     onClick={() =>

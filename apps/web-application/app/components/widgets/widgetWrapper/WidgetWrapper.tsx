@@ -3,7 +3,7 @@ import { WidgetData } from "@repo/typescript-types";
 import dynamic from 'next/dynamic';
 import './WidgetWrapper.scss';
 import WidgetFooter from '@components/widgets/widgetWrapper/WidgetFooter/WidgetFooter';
-import ServerSideStore from '@store/ServerSideStore';
+//import ServerSideStore from '@store/ServerSideStore';
 
 const WidgetHeader = dynamic(() => import('./WidgetHeader/WidgetHeader'));
 const WidgetPagination = dynamic(() => import('./WidgetPagination/WidgetPagination'));
@@ -44,7 +44,7 @@ interface IProps {
     data: WidgetData;
     widgetId: string;
     isSidebar?: boolean;
-    locale;
+    locale:string;
     dictionary: {
         [key: string]: string;
     };
@@ -76,8 +76,9 @@ const WidgetWrapper: FC<IProps> = ({ data, widgetId, isSidebar, dictionary, loca
         dayModeNightMode: DayModeNightMode,
     };
 
-    //@ts-ignore
-    const WidgetToRender = widgetMatcher?.[data?.type as string] || null;
+    // @ts-expect-error: it's fine
+    const WidgetToRender = data?.type && widgetMatcher.hasOwnProperty(data?.type) ? widgetMatcher[data.type] : null;
+
     const widgetExtraClass = data?.extraClassName ? ` ${data?.extraClassName}` : '';
     const widgetClass = `widget ${data?.type}WrapperWidget${widgetExtraClass}`;
 

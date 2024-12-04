@@ -14,6 +14,7 @@ export interface PageTypes {
 
 export type PageParams = Promise<{
     identifier?: string,
+
     lang?:string,
     postType?:string,
     actorId?:string,

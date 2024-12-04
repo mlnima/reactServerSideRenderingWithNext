@@ -4,14 +4,14 @@ import Message from "../Message/Message";
 import {uniqArrayBy} from '@repo/shared-util'
 import {useAppSelector} from "@store/hooks";
 import {sortArrayByPropertyOfObject} from '@repo/shared-util';
-import './MessagingArea.styles.scss'
-import {IMessengerConversation} from "@repo/typescript-types";
+import './MessagingArea.scss'
+import {IMessengerConversation, IMessengerConversationMessage} from "@repo/typescript-types";
 
 interface IProps {
     onLoadOlderMessages: () => void
     messageAreaRef: React.RefObject<HTMLDivElement>,
     autoScroll: boolean,
-    setAutoScroll: Function,
+    setAutoScroll: React.Dispatch<React.SetStateAction<boolean>>,
     activeConversation: IMessengerConversation,
 }
 
@@ -23,7 +23,7 @@ const MessagingArea: FC<IProps> =
          setAutoScroll,
          activeConversation
      }) => {
-        const prevScrollPosition = useRef(0);
+        const prevScrollPosition = useRef<number>(0);
 
 
         const {userData} = useAppSelector(({user}) => user)
@@ -33,7 +33,6 @@ const MessagingArea: FC<IProps> =
             setTimeout(() => {
                 if (autoScroll && messageAreaRef?.current) {
                     messageAreaRef.current.scroll({
-                        //@ts-ignore
                         top: messageAreaRef.current.scrollHeight + 50,
                         behavior: 'smooth',
                     });
@@ -42,27 +41,47 @@ const MessagingArea: FC<IProps> =
 
         }, [autoScroll, activeConversation?.messages]);
 
-
         useEffect(() => {
-            const handleScroll = (event: any) => {
-                const {scrollTop, clientHeight, scrollHeight} = event.target;
+            const handleScroll = (event: Event) => {
+                const target = event.currentTarget as HTMLDivElement;
+                const { scrollTop, clientHeight, scrollHeight } = target;
 
                 if (prevScrollPosition.current > scrollTop) {
-                    setAutoScroll(false)
+                    setAutoScroll(false);
                 } else if (scrollTop + clientHeight >= scrollHeight - 5) {
-                    setAutoScroll(true)
+                    setAutoScroll(true);
                 }
                 prevScrollPosition.current = scrollTop;
 
                 if (scrollTop === 0 && activeConversation?._id) {
-                    onLoadOlderMessages()
+                    onLoadOlderMessages();
                 }
             };
 
             const messageArea = messageAreaRef.current;
-            messageArea?.addEventListener('scroll', handleScroll);
-            return () => messageArea?.removeEventListener('scroll', handleScroll);
+            messageArea?.addEventListener('scroll', handleScroll as unknown as EventListener);
+            return () => messageArea?.removeEventListener('scroll', handleScroll as unknown as EventListener);
         }, [activeConversation?.messages]);
+        // useEffect(() => {
+        //     const handleScroll = (event : React.UIEvent<HTMLDivElement>) => {
+        //         const {scrollTop, clientHeight, scrollHeight} = event.currentTarget;
+        //
+        //         if (prevScrollPosition.current > scrollTop) {
+        //             setAutoScroll(false)
+        //         } else if (scrollTop + clientHeight >= scrollHeight - 5) {
+        //             setAutoScroll(true)
+        //         }
+        //         prevScrollPosition.current = scrollTop;
+        //
+        //         if (scrollTop === 0 && activeConversation?._id) {
+        //             onLoadOlderMessages()
+        //         }
+        //     };
+        //
+        //     const messageArea = messageAreaRef.current;
+        //     messageArea?.addEventListener('scroll', handleScroll);
+        //     return () => messageArea?.removeEventListener('scroll', handleScroll);
+        // }, [activeConversation?.messages]);
 
         return (
             <div ref={messageAreaRef}
@@ -76,12 +95,13 @@ const MessagingArea: FC<IProps> =
                                 'createdAt',
                                 'asc'
                             )
-                                .map((message: any) => {
+                                .map((message:IMessengerConversationMessage) => {
                                     return (
                                         <Message
                                             key={message._id}
                                             messageData={message}
-                                            isMine={message?.sender === userData?._id}
+                                            // @ts-expect-error: types and logic need to be fixed
+                                            isMine={(message?.sender || message?.sender?._id) === userData?._id}
                                         />
                                     )
                                 })

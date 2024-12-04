@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import ActorCard from '@components/cards/cardsComponents/ActorCard/ActorCard';
 import { Meta} from "@repo/typescript-types";
-import './ActorsCardsRenderer.styles.scss'
+import './ActorsCardsRenderer.scss'
 import {convertMetasTypeToSingular} from "@repo/shared-util";
 
 interface IProps {
@@ -34,7 +34,6 @@ const ActorsCardsRenderer: FC<IProps> = ({metas,isSidebar,locale,dictionary}) =>
                     <ActorCard key={meta._id}
                                index={index}
                                dictionary={dictionary}
-                               locale={locale}
                                actorUrl={actorUrl}
                                isNextImageAllowed={isNextImageAllowed}
                                isSidebar={isSidebar}

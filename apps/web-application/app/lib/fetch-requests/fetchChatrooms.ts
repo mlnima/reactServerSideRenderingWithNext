@@ -13,12 +13,12 @@ export const fetchChatroomData = async ({identifier, revalidate}: fetchChatroomD
             `${APIServerUrl}/api/v1/chatroom?identifier=${identifier}`,
             config({revalidate, tags: ['cacheItem']})
         );
-        if (!response.ok) {
-            const errorData = await response.text();
-            throw new Error(errorData);
-        }
+        // if (!response.ok) {
+        //     const errorData = await response.text();
+        //     throw new Error(errorData);
+        // }
         return response.json()
-    } catch (error) {
-        throw error;
+    } catch  {
+      return
     }
 }

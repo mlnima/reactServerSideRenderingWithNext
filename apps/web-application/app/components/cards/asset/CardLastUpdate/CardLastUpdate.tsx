@@ -14,7 +14,7 @@ const CardLastUpdate: FC<CardLastUpdatePropTypes> = ({targetedDate,locale}) => {
         const options = {...activeLocaleData, addSuffix: true}
         try {
             return formatDistance(new Date(targetedDate), new Date(), options)
-        } catch (err) {
+        } catch {
             return null
         }
     }, [targetedDate,locale])

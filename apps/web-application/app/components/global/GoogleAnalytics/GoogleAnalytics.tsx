@@ -1,44 +1,20 @@
-"use client"
-import {FC, useEffect} from "react";
-import Script from 'next/script'
-import {useRouter} from "next/router";
+'use client';
+import { FC } from 'react';
+import Script from 'next/script';
 
 interface GoogleAnalyticsPropTypes {
-    googleAnalyticsId: string
+    googleAnalyticsId: string;
 }
 
-const GoogleAnalytics: FC<GoogleAnalyticsPropTypes> = ({googleAnalyticsId}) => {
-    // const {asPath,events} = useRouter()
-    //
-    // // @ts-ignore
-    // const handleRouteChange = (url) => {
-    //     if (typeof window !== 'undefined'){
-    //         //@ts-ignore
-    //         if (window?.gtag){
-    //             //@ts-ignore
-    //             window?.gtag('config', googleAnalyticsId, {
-    //                 page_path: url,
-    //             });
-    //         }
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     events.on('routeChangeComplete', handleRouteChange);
-    //     return () => {
-    //         events.off('routeChangeComplete', handleRouteChange);
-    //     };
-    // }, [asPath]);
-
-
+const GoogleAnalytics: FC<GoogleAnalyticsPropTypes> = ({ googleAnalyticsId }) => {
     return (
         <>
-            <Script async src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}
-                    strategy={'afterInteractive'}
+            <Script
+                async
+                src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}
+                strategy={'afterInteractive'}
             />
-            <Script id={'google-analytics'}
-                    strategy={'afterInteractive'}
-            >
+            <Script id={'google-analytics'} strategy={'afterInteractive'}>
                 {`
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer?.push(arguments)}
@@ -47,7 +23,6 @@ const GoogleAnalytics: FC<GoogleAnalyticsPropTypes> = ({googleAnalyticsId}) => {
                 `}
             </Script>
         </>
-    )
-
+    );
 };
-export default GoogleAnalytics
+export default GoogleAnalytics;

@@ -4,18 +4,19 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUsers} from "@fortawesome/free-solid-svg-icons/faUsers";
 import {useRouter} from "next/navigation";
 import {faArrowDownWideShort} from "@fortawesome/free-solid-svg-icons/faArrowDownWideShort";
-import './ChatroomTopbar.styles.scss'
+import './ChatroomTopbar.scss'
 import {IPreference} from "../interfaces";
 import Link from "next/link";
 import {faHome} from "@fortawesome/free-solid-svg-icons";
+import {Chatroom} from "@repo/typescript-types";
 
 interface IProp {
-    chatrooms: { name: string, _id: string }[],
+    chatrooms: Chatroom[],
     chatroomId: string,
     autoScroll: boolean,
-    setAutoScroll: Function,
+    setAutoScroll: React.Dispatch<React.SetStateAction<boolean>>,
     preference: IPreference,
-    updatePreference: Function,
+    updatePreference: (key: string, value: string | boolean)=> void,
     locale: string,
 }
 

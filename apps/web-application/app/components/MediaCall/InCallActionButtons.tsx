@@ -6,7 +6,7 @@ import {faMicrophoneSlash} from "@fortawesome/free-solid-svg-icons/faMicrophoneS
 import {faPhoneSlash} from "@fortawesome/free-solid-svg-icons/faPhoneSlash";
 import {faVideo} from "@fortawesome/free-solid-svg-icons/faVideo";
 import {faPhone} from "@fortawesome/free-solid-svg-icons/faPhone";
-import {useAppSelector} from "@store/hooks";
+import {useSelector} from "react-redux";
 
 interface PropTypes {
     inCallButtonsVisible: boolean,
@@ -19,7 +19,7 @@ interface PropTypes {
     onCallHandler: () => void,
     onAcceptCallHandler: () => void,
     setInCallButtonsVisible: (value:boolean) => void,
-    InCallButtonsRef: any
+    InCallButtonsRef: React.LegacyRef<HTMLDivElement>
     isCameraEnabled: boolean
 }
 
@@ -45,7 +45,7 @@ const InCallActionButtons: FC<PropTypes> = (
         incomingCall,
         callAccepted,
         callType,
-    } = useAppSelector(({mediaConnection}) => mediaConnection);
+    } = useSelector(({mediaConnection}) => mediaConnection);
 
     useEffect(() => {
         if ((!outGoingCall || !incomingCall) && callAccepted) {

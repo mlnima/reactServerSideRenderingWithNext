@@ -27,6 +27,7 @@
   "dependencies": {
     "@repo/data-structures": "*",
     "@repo/shared-util": "*",
+    "@repo/db": "*",
     "apicache": "^1.6.3",
     "archiver": "^7.0.1",
     "axios": "^0.28.0",

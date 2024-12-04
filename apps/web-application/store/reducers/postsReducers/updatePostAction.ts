@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { loading, setAlert } from '../globalStateReducer';
 import {updatePost} from "@repo/api-requests";
+import {AxiosError, AxiosResponse} from "axios";
 
 const updatePostAction = createAsyncThunk(
     'posts/updatePostAction',
@@ -8,7 +9,7 @@ const updatePostAction = createAsyncThunk(
         thunkAPI.dispatch(loading(true));
 
         await updatePost(editedPost)
-            .then(res => {
+            .then((res:AxiosResponse) => {
                 if (res.data?.message) {
                     console.log(res.data);
                     thunkAPI.dispatch(
@@ -19,11 +20,12 @@ const updatePostAction = createAsyncThunk(
                     );
                 }
             })
-            .catch(error => {
+            .catch((error:AxiosError) => {
                 thunkAPI.dispatch(
                     setAlert({
                         type: 'error',
-                        message: error.response.data.message,
+                        // @ts-expect-error: need fix
+                        message: error.response?.data?.message ? error.response.data.message : '',
                     }),
                 );
             })

@@ -2,7 +2,7 @@
 import React, {FC, useEffect, useRef, useState} from "react";
 import {UniqueDataTypes} from "@repo/typescript-types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEarthAmerica, faGear, faLightbulb} from "@fortawesome/free-solid-svg-icons";
+import {faEarthAmerica, faGear} from "@fortawesome/free-solid-svg-icons";
 import './UserPreferenceConfigWidget.scss'
 import dynamic from "next/dynamic";
 import {faSun} from "@fortawesome/free-solid-svg-icons/faSun";
@@ -18,7 +18,7 @@ interface IProps {
     }
 }
 
-const UserPreferenceConfigWidget: FC<IProps> = ({uniqueData, locale, dictionary}) => {
+const UserPreferenceConfigWidget: FC<IProps> = ({uniqueData, locale}) => {
     const [open, setOpen] = useState(false);
     const preferenceMenuRef = useRef<HTMLDivElement | null>(null)
 

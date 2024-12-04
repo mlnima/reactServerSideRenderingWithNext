@@ -2,21 +2,19 @@ import React from 'react';
 import { fetchTags } from '@lib/fetch-requests/fetchPosts';
 import { fetchSettings } from '@lib/fetch-requests/fetchSettings';
 import { fetchWidgets } from '@lib/fetch-requests/fetchWidgets';
-import { i18n } from '@i18nConfig';
 import { getDictionary } from '../../../get-dictionary';
 import WidgetsRenderer from '@components/widgets/widgetRenderer/WidgetsRenderer';
 import SidebarWidgetAreaRenderer from '@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer';
 import tagsMetaGenerator from './components/tagsMetaGenerator/tagsMetaGenerator';
 import TagsPageContentRenderer from '@components/metas/TagsPageContentRenderer';
 import {IPageProps} from "@repo/typescript-types";
+import localDetector from "@lib/localDetector";
 
 const TagsPage = async (props: IPageProps) => {
     const searchParams = await props.searchParams;
     const params = await props.params;
 
-    const locale = i18n.locales.includes(params?.lang)
-        ? params?.lang
-        : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+    const locale = localDetector(params.lang);
     const dictionary = await getDictionary(locale);
     const settingsData = await fetchSettings({
         requireSettings: ['tagsPageSettings'],
@@ -36,7 +34,7 @@ const TagsPage = async (props: IPageProps) => {
     const metasData = await fetchTags({
         queryObject: {
             metaType: 'tags',
-            lang: params?.lang,
+            lang: locale,
             startWith: searchParams?.startWith || undefined,
         },
         locale,

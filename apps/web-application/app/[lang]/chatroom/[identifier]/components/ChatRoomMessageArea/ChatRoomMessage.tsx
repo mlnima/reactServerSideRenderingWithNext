@@ -17,7 +17,7 @@ interface IProps {
 
 const ChatRoomMessage: React.FC<IProps> = ({ message, onDeleteMessageHandler }) => {
 
-    const timeStamp = !!message?.createdAt
+    const timeStamp = message?.createdAt
         ? formatDistance(new Date(message?.createdAt), new Date(), {
             addSuffix: true,
         })

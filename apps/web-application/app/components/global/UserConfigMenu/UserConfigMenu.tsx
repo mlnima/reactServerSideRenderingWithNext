@@ -1,5 +1,5 @@
 'use client';
-import React, {FC, useEffect} from "react";
+import React, { useEffect} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEarthAmerica, faTimes} from "@fortawesome/free-solid-svg-icons";
 import Logo from "@components/widgets/widgets/Logo/Logo";

@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
 import { Post } from "@repo/typescript-types";
 import CardTitle from '../../asset/CardTitle/CardTitle';
 import '../postCard.scss';
@@ -8,8 +7,7 @@ import './LearnPostCard.scss';
 import { imageLessCardColors } from '@repo/data-structures';
 import { randomNumberGenerator } from '@repo/shared-util';
 import CardStats from '@components/cards/asset/CardStats/CardStats';
-
-const CardImageRendererUseClient = dynamic(() => import('../../asset/CardImageRenderer/CardImageRendererUseClient'));
+import CardImageRendererUseClient from '@components/cards/asset/CardImageRenderer/CardImageRendererUseClient';
 
 interface LearnPostCardPropTypes {
     locale: string;
@@ -23,7 +21,9 @@ interface LearnPostCardPropTypes {
         [key: string]: string;
     };
     settings: {
-        [key: string]: string;
+        showViewsOnCard:  boolean,
+        showRatingOnCard:  boolean,
+        showDateOnCard:  boolean,
     };
 }
 
@@ -42,7 +42,7 @@ const LearnPostCard: FC<LearnPostCardPropTypes> = ({
 
     return (
         <article className={`postCard postCardLearn${isSidebar ? ' postCardSidebar' : ''}`}>
-            {!!post.mainThumbnail ? (
+            {post.mainThumbnail ? (
                 <>
                     <div className={'cardMedia'}>
                         <Link
@@ -65,7 +65,7 @@ const LearnPostCard: FC<LearnPostCardPropTypes> = ({
                             views={post?.views}
                             dictionary={dictionary}
                             likes={post?.likes}
-                            dislikes={post?.dislikes}
+                            dislikes={post?.disLikes}
                             createdAt={post?.createdAt}
                             updatedAt={post?.updatedAt}
                             settings={settings}

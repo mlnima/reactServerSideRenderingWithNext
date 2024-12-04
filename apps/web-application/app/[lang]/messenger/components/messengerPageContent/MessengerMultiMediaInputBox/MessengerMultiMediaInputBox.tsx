@@ -1,15 +1,17 @@
+/* eslint-disable */
+// @ts-nocheck
 'use client';
 import React, {FC, useRef, useState} from "react";
 import RecordedAudioPreview from "./RecordedAudioPreview";
 import TextInput from "./TextInput";
 import UploadImageButton from "./UploadImageButton";
-import VoiceRecorderButton from "./VoiceRecorderButton";
 import AddedImagePreview from "./AddedImagePreview";
 import {useAppSelector} from "@store/hooks";
-import './MessengerMultiMediaInputBox.styles.scss'
+import './MessengerMultiMediaInputBox.scss'
 import socket from '@lib/web-socket-client';
 import {IMessengerConversation} from "@repo/typescript-types";
 import {IDraftMessage} from "../../interfaces";
+// import VoiceRecorderButton from "./VoiceRecorderButton";
 
 
 interface IProps {

@@ -5,7 +5,6 @@ import { capitalizeFirstLetter } from '@repo/shared-util';
 import CardTitle from '@components/cards/asset/CardTitle/CardTitle';
 import './ActorCard.scss';
 import CardImageRendererUseClient from '@components/cards/asset/CardImageRenderer/CardImageRendererUseClient';
-import ServerSideStore from '@store/ServerSideStore';
 
 interface ActorCardPropTypes {
     meta: Meta;

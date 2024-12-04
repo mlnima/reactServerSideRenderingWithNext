@@ -13,7 +13,7 @@ const cleanup = register({
         '@store/*': ['./store/*'],
     },
 });
-import GlobalStore from "@store/GlobalStore";
+
 import adminAuthMiddleware from '@util/middlewares/adminAuthMiddleware';
 import { getLocalIP } from '@util/network-util';
 import shouldCompress from '@util/shouldCompress';
@@ -33,6 +33,7 @@ import { initializeSocket } from './controllers/socketController/socketControlle
 import initializeChatroomsToStore from './controllers/socketController/initializeChatroomsToStore';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import rootRouter from "./routers/rootRouter";
+import GlobalStore from "./store/GlobalStore";
 
 // Create an Express application
 const app = express();

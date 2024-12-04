@@ -1,6 +1,4 @@
-//LayoutMetaGenerator
-
-import type {Metadata, ResolvingMetadata} from 'next'
+import type {Metadata} from 'next'
 import {fetchSettings} from "@lib/fetch-requests/fetchSettings";
 import {AlternatesGenerators} from "@lib/alternatesCanonicalGenerator";
 // import alternatesCanonicalGenerator from "@lib/alternatesCanonicalGenerator";
@@ -14,7 +12,7 @@ type Props = {
 
 const alternatesGenerators = new AlternatesGenerators()
 
-const LayoutMetaGenerator = async ({params, searchParams}: Props, parent?: ResolvingMetadata): Promise<Metadata> => {
+const LayoutMetaGenerator = async ({params}: Props): Promise<Metadata> => {
 
     const { lang } = await params
 

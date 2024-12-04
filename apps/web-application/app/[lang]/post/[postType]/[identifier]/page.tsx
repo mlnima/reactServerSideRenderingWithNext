@@ -1,6 +1,5 @@
-import {i18n} from "@i18nConfig";
+import { unstable_cache } from 'next/cache'
 import {getDictionary} from "../../../../../get-dictionary";
-//import dynamic from "next/dynamic";
 import {fetchPost,fetchPostViews,fetchPostRating} from "@lib/fetch-requests/fetchPosts";
 import {fetchSettings} from "@lib/fetch-requests/fetchSettings";
 import {fetchWidgets} from "@lib/fetch-requests/fetchWidgets";
@@ -13,18 +12,16 @@ import PostAdminOrAuthorQuickAccessBar
 import Soft404 from "@components/Soft404/Soft404";
 import NotFoundOrRestricted from "./components/NotFoundOrRestricted/NotFoundOrRestricted";
 
-// const PreviewPost = dynamic(() => import("./components/PreviewPost/PreviewPost"))
-// const VideoTypePostPage = dynamic(() => import('./components/VideoTypePostPage/VideoTypePostPage'))
-// const ArticleTypePostPage = dynamic(() => import('./components/ArticleTypePostPage/ArticleTypePostPage'))
-// const PromotionTypePostPage = dynamic(() => import('./components/PromotionTypePostPage/PromotionTypePostPage'))
-// const LearnTypePostPage = dynamic(() => import('./components/LearnTypePostPage/LearnTypePostPage'))
-
 import PreviewPost from "./components/PreviewPost/PreviewPost";
 import VideoTypePostPage from './components/VideoTypePostPage/VideoTypePostPage';
 import ArticleTypePostPage from './components/ArticleTypePostPage/ArticleTypePostPage';
 import PromotionTypePostPage from './components/PromotionTypePostPage/PromotionTypePostPage';
 import LearnTypePostPage from './components/LearnTypePostPage/LearnTypePostPage';
 import {IPageProps} from "@repo/typescript-types";
+import localDetector from "@lib/localDetector";
+//-------------------------------
+import PostController from "@lib/database/controllers/PostController";
+
 
 export const generateMetadata = postMetaGenerator;
 
@@ -33,14 +30,23 @@ const PostPage = async (props: IPageProps) => {
     const params = await props.params;
 
     const {
-        lang,
         identifier,
         postType
     } = params;
 
-    const locale = i18n.locales.includes(lang) ? lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+
+    const post = await PostController.getPostCached(identifier as string);
+
+    console.log(`post=> `,post)
+
+
+
+    const locale = localDetector(params.lang);
     const dictionary = await getDictionary(locale)
-    const postData = await fetchPost({identifier})
+    const postData = {
+        post
+    }
+    // const postData = identifier ? await fetchPost({identifier}) : {};
     const postViewData = await fetchPostViews({identifier:postData?.post?._id,revalidate: 120})
     const postRatingData = await fetchPostRating({identifier:postData?.post?._id})
     const settingsData = await fetchSettings({requireSettings: ['postPageSettings']})
@@ -68,7 +74,7 @@ const PostPage = async (props: IPageProps) => {
 
                     <main id={'primary'} className='main postPage'>
 
-                        {searchParams?.preview === 'true' ?
+                        {searchParams?.preview === 'true' && postType ?
                             <PreviewPost widgetsData={widgetsData}
                                          post={postData.post}
                                          views={postViewData?.views || 0}
@@ -81,12 +87,7 @@ const PostPage = async (props: IPageProps) => {
                                          relatedPosts={postData?.relatedPosts}
 
                             /> :
-                            <NotFoundOrRestricted dictionary={dictionary}
-                                                  relatedPosts={postData.relatedPosts}
-                                                  hasSidebar={sidebar}
-                                                  locale={locale}
-                                                  post={postData.post}
-                                                  widgets={widgetsData.widgets?.['underPost']}/>
+                            <NotFoundOrRestricted dictionary={dictionary}/>
                         }
 
 
@@ -168,6 +169,9 @@ const PostPage = async (props: IPageProps) => {
 }
 
 export default PostPage;
+export const dynamic = 'force-dynamic'
+
+
 
 //
 // else if (postData?.post?.status !== 'published' && searchParams?.preview) {

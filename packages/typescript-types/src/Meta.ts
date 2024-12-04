@@ -19,3 +19,6 @@ export interface Meta {
     createdAt?: Date,
     updatedAt?: Date,
 }
+
+export type MetasType = 'tags' | 'actors' | 'categories';
+export type MetaType = 'tag' | 'actor' | 'category';

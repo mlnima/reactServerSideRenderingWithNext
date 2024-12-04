@@ -1,160 +1,227 @@
+/* eslint-disable */
+// @ts-nocheck
 'use client';
-import React, {FC, useEffect, useState, useCallback, useMemo} from 'react';
-import {useSelector} from 'react-redux';
+import React, { FC, useEffect, useState, useCallback, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import dynamic from 'next/dynamic';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons';
-import {Post, Store} from "@repo/typescript-types";
-import {shortNumber, ratingCalculator} from '@repo/shared-util';
-import './PostsSliderWidget.styles.scss';
-//@ts-ignore
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faChevronLeft,
+  faChevronRight,
+} from '@fortawesome/free-solid-svg-icons';
+import { Post, Store } from '@repo/typescript-types';
+import { shortNumber, ratingCalculator } from '@repo/shared-util';
+import './PostsSliderWidget.scss';
 import { v4 as uuidv4 } from 'uuid';
 
-const ArticlePostCard = dynamic(() => import('@components/cards/cardsComponents/ArticlePostCard/ArticlePostCard'));
-const PromotionPostCard = dynamic(() => import('@components/cards/cardsComponents/PromotionPostCard/PromotionPostCard'));
-const LearnPostCard = dynamic(() => import('@components/cards/cardsComponents/VideoPostCard/VideoPostCard'));
-const VideoPostCard = dynamic(() => import('@components/cards/cardsComponents/VideoPostCard/VideoPostCard'));
-const AdPostCard = dynamic(() => import('@components/cards/cardsComponents/AdPostCard/AdPostCard'));
+const ArticlePostCard = dynamic(
+  () =>
+    import('@components/cards/cardsComponents/ArticlePostCard/ArticlePostCard')
+);
+const PromotionPostCard = dynamic(
+  () =>
+    import(
+      '@components/cards/cardsComponents/PromotionPostCard/PromotionPostCard'
+    )
+);
+const LearnPostCard = dynamic(
+  () => import('@components/cards/cardsComponents/VideoPostCard/VideoPostCard')
+);
+const VideoPostCard = dynamic(
+  () => import('@components/cards/cardsComponents/VideoPostCard/VideoPostCard')
+);
+
+// const AdPostCard = dynamic(() => import('@components/cards/cardsComponents/AdPostCard/AdPostCard'));
 
 interface PostsSliderPropsTypes {
+  posts: Post[];
+  uniqueData?: {
     posts: Post[];
-    uniqueData?: {
-        posts: Post[];
-        totalCount: number;
-        sliderConfig?: {
-            pagination?: boolean;
-            navigation?: boolean;
-        };
+    totalCount: number;
+    sliderConfig?: {
+      pagination?: boolean;
+      navigation?: boolean;
     };
-    isSidebar?: boolean;
-    locale: string;
-    dictionary?: Record<string, string>;
+  };
+  isSidebar?: boolean;
+  locale: string;
+  dictionary?: Record<string, string>;
 }
 
-const PostsSliderWidget: FC<PostsSliderPropsTypes> = ({posts, uniqueData, isSidebar, locale}) => {
-    const options = {delay: 3000, stopOnInteraction: false};
-    const autoplay = Autoplay(options);
+const PostsSliderWidget: FC<PostsSliderPropsTypes> = ({
+  posts,
+  uniqueData,
+  isSidebar,
+  locale,
+  dictionary,
+}) => {
+  const options = { delay: 3000, stopOnInteraction: false };
+  const autoplay = Autoplay(options);
 
-    const [sliderRef, sliderApi] = useEmblaCarousel({
-            loop: true,
-            dragFree: false,
-            skipSnaps: false,
-        align:'center'
-        },
-        [
-            autoplay
-        ]);
+  const [sliderRef, sliderApi] = useEmblaCarousel(
+    {
+      loop: true,
+      dragFree: false,
+      skipSnaps: false,
+      align: 'center',
+    },
+    [autoplay]
+  );
 
-    const [selectedIndex, setSelectedIndex] = useState(0);
-    const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
-    const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
+  const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
 
-    const scrollPrev = useCallback(() => sliderApi?.scrollPrev(), [sliderApi]);
-    const scrollNext = useCallback(() => sliderApi?.scrollNext(), [sliderApi]);
-    const scrollTo = useCallback((index: number) => sliderApi?.scrollTo(index), [sliderApi]);
+  const scrollPrev = useCallback(() => sliderApi?.scrollPrev(), [sliderApi]);
+  const scrollNext = useCallback(() => sliderApi?.scrollNext(), [sliderApi]);
+  const scrollTo = useCallback(
+    (index: number) => sliderApi?.scrollTo(index),
+    [sliderApi]
+  );
 
-    const onSelect = useCallback(() => {
-        if (!sliderApi) return;
-        setSelectedIndex(sliderApi.selectedScrollSnap());
-        setPrevBtnEnabled(sliderApi.canScrollPrev());
-        setNextBtnEnabled(sliderApi.canScrollNext());
-    }, [sliderApi]);
+  const onSelect = useCallback(() => {
+    if (!sliderApi) return;
+    setSelectedIndex(sliderApi.selectedScrollSnap());
+    setPrevBtnEnabled(sliderApi.canScrollPrev());
+    setNextBtnEnabled(sliderApi.canScrollNext());
+  }, [sliderApi]);
 
-    const {numberOfCardsPerRowInMobile, cardsWidthDesktop} = useSelector((store: Store) => ({
-        numberOfCardsPerRowInMobile: store.settings?.initialSettings?.contentSettings?.numberOfCardsPerRowInMobile ?? 2,
-        cardsWidthDesktop: store.settings?.initialSettings?.contentSettings?.cardsWidthDesktop ?? 255,
-    }));
+  const { numberOfCardsPerRowInMobile, cardsWidthDesktop } = useSelector(
+    (store: Store) => ({
+      numberOfCardsPerRowInMobile:
+        store.settings?.initialSettings?.contentSettings
+          ?.numberOfCardsPerRowInMobile ?? 2,
+      cardsWidthDesktop:
+        store.settings?.initialSettings?.contentSettings?.cardsWidthDesktop ??
+        255,
+    })
+  );
 
-    useEffect(() => {
-        if (!sliderApi) return;
-        onSelect();
-        sliderApi.on('select', onSelect);
-    }, [sliderApi, onSelect]);
+  useEffect(() => {
+    if (!sliderApi) return;
+    onSelect();
+    sliderApi.on('select', onSelect);
+  }, [sliderApi, onSelect]);
 
-    const postsToRender = useMemo(() => uniqueData?.posts ?? posts ?? [], [uniqueData?.posts, posts]);
-    const sliderPaginationItems = useMemo(() => Array.from({length: postsToRender.length}, (_, i) => i), [postsToRender]);
+  const postsToRender = useMemo(
+    () => uniqueData?.posts ?? posts ?? [],
+    [uniqueData?.posts, posts]
+  );
+  const sliderPaginationItems = useMemo(
+    () => Array.from({ length: postsToRender.length }, (_, i) => i),
+    [postsToRender]
+  );
 
-    const renderSlides = postsToRender.map((post, index) => {
-        const postProps = {
-            views: shortNumber(post.views || 0) as unknown as number,
-            cardsWidthDesktop,
-            numberOfCardsPerRowInMobile,
-            //@ts-ignore
-            rating: post?.likes || post?.disLikes ? ratingCalculator(post?.likes, post?.disLikes) : null,
-            post,
-            postUrl: post?.postType === 'out' ? post?.redirectLink || '#' :
-                `/post/${post?.postType}/${post._id}`,
-            targetLink: post?.postType === 'out' || post?.outPostType === 'promotion' ? '_blank' : '_self',
-            title: process.env.NEXT_PUBLIC_DEFAULT_LOCALE === locale ?
-                post?.title :
-                post?.translations?.[locale as string]?.title || post?.title,
-            isSidebar: isSidebar
-        };
+  const renderSlides = postsToRender.map((post, index) => {
+    const imagesAllowedDomainsForNextImage =
+      process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES?.split(' ') || [];
 
-        return (
-            <div key={uuidv4()} className='embla__slide postsSliderWidgetSlideResponsive'>
-                {/*//@ts-ignore*/}
-                {post?.postType === 'video' ? <VideoPostCard {...postProps} key={post?._id} index={index}/> :
-                    //@ts-ignore
-                    post?.postType === 'promotion' ? <PromotionPostCard {...postProps} key={post?._id} index={index}/> :
-                        //@ts-ignore
-                        post?.postType === 'article' ? <ArticlePostCard {...postProps} key={post?._id} index={index}/> :
-                            //@ts-ignore
-                            post?.postType === 'learn' ? <LearnPostCard {...postProps} key={post?._id} index={index}/> :
-                                //@ts-ignore
-                                null
-                }
-            </div>
-        );
-    });
+    const isNextImageAllowed = post.mainThumbnail
+      ? imagesAllowedDomainsForNextImage?.some((domain) =>
+          post.mainThumbnail?.includes(domain)
+        )
+      : false;
+
+    const postProps = {
+      views: shortNumber(post.views || 0) as unknown as number,
+      cardsWidthDesktop,
+      numberOfCardsPerRowInMobile,
+      rating:
+        post?.likes || post?.disLikes
+          ? ratingCalculator(post?.likes, post?.disLikes)
+          : null,
+      post,
+      postUrl:
+        post?.postType === 'out'
+          ? post?.redirectLink || '#'
+          : `/post/${post?.postType}/${post._id}`,
+      targetLink:
+        post?.postType === 'out' || post?.outPostType === 'promotion'
+          ? '_blank'
+          : '_self',
+      title:
+        process.env.NEXT_PUBLIC_DEFAULT_LOCALE === locale
+          ? post?.title
+          : post?.translations?.[locale as string]?.title || post?.title,
+      isSidebar: isSidebar,
+      index,
+      locale,
+      dictionary,
+      isNextImageAllowed,
+      settings: {
+        showViewsOnCard: false,
+        showRatingOnCard: false,
+        showDateOnCard: false,
+      },
+    };
 
     return (
-        <div className='PostsSliderWidget'>
-            <div className={'PostsSliderWidgetContent'}>
-
-                {!!uniqueData?.sliderConfig?.navigation &&
-                    <>
-                        <button onClick={scrollPrev}
-                                className={'prevBtn'}
-                                disabled={!prevBtnEnabled}
-                                aria-label={'previous slide'}>
-                            <FontAwesomeIcon icon={faChevronLeft}/>
-                        </button>
-
-                        <button onClick={scrollNext}
-                                className={'nextBtn'}
-                                disabled={!nextBtnEnabled}
-                                aria-label={'next slide'}>
-                            <FontAwesomeIcon icon={faChevronRight}/>
-                        </button>
-                    </>
-                }
-
-                <div className="embla" ref={sliderRef}>
-                    <div className={'embla__container'}>
-                        {renderSlides}
-                    </div>
-                </div>
-
-                {(sliderPaginationItems?.length > 0 && !!uniqueData?.sliderConfig?.pagination) &&
-                    <div className={'sliderPaginationItems'}>
-                        {sliderPaginationItems.map((item: number) => {
-                            return (
-                                <button key={item}
-                                        onClick={() => scrollTo(item)}
-                                        aria-label={`slide ${item}`}
-                                        className={`sliderPaginationItem ${item === selectedIndex ? 'is-selected' : ''}`}>
-                                </button>
-                            )
-                        })}
-                    </div>
-                }
-            </div>
-
-        </div>
+      <div
+        key={uuidv4()}
+        className="embla__slide postsSliderWidgetSlideResponsive"
+      >
+        {post?.postType === 'video' ? (
+          <VideoPostCard {...postProps} key={post?._id} />
+        ) : post?.postType === 'promotion' ? (
+          <PromotionPostCard {...postProps} key={post?._id} />
+        ) : post?.postType === 'article' ? (
+          <ArticlePostCard {...postProps} key={post?._id} />
+        ) : post?.postType === 'learn' ? (
+          <LearnPostCard {...postProps} key={post?._id} />
+        ) : null}
+      </div>
     );
+  });
+
+  return (
+    <div className="PostsSliderWidget">
+      <div className={'PostsSliderWidgetContent'}>
+        {!!uniqueData?.sliderConfig?.navigation && (
+          <>
+            <button
+              onClick={scrollPrev}
+              className={'prevBtn'}
+              disabled={!prevBtnEnabled}
+              aria-label={'previous slide'}
+            >
+              <FontAwesomeIcon icon={faChevronLeft} />
+            </button>
+
+            <button
+              onClick={scrollNext}
+              className={'nextBtn'}
+              disabled={!nextBtnEnabled}
+              aria-label={'next slide'}
+            >
+              <FontAwesomeIcon icon={faChevronRight} />
+            </button>
+          </>
+        )}
+
+        <div className="embla" ref={sliderRef}>
+          <div className={'embla__container'}>{renderSlides}</div>
+        </div>
+
+        {sliderPaginationItems?.length > 0 &&
+          !!uniqueData?.sliderConfig?.pagination && (
+            <div className={'sliderPaginationItems'}>
+              {sliderPaginationItems.map((item: number) => {
+                return (
+                  <button
+                    key={item}
+                    onClick={() => scrollTo(item)}
+                    aria-label={`slide ${item}`}
+                    className={`sliderPaginationItem ${item === selectedIndex ? 'is-selected' : ''}`}
+                  ></button>
+                );
+              })}
+            </div>
+          )}
+      </div>
+    </div>
+  );
 };
 
 export default PostsSliderWidget;

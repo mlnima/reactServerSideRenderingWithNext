@@ -15,7 +15,7 @@ import socket from '@lib/web-socket-client';
 import {faBolt} from "@fortawesome/free-solid-svg-icons";
 import {clearCachesByServerAction} from "@lib/serverActions";
 
-const AuthenticationAdminItems = ({}) => {
+const AuthenticationAdminItems = () => {
 
     const dispatch = useAppDispatch()
     const pathname = usePathname()

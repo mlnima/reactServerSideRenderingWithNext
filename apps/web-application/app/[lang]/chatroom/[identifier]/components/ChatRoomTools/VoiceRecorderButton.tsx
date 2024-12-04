@@ -2,14 +2,12 @@
 import React, {Dispatch, FC, SetStateAction, useEffect, useRef, useState} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faMicrophone} from '@fortawesome/free-solid-svg-icons/faMicrophone';
-import {useAppSelector} from "@store/hooks";
 
 interface IProps {
     setAudioMessage: Dispatch<SetStateAction<string>>;
 }
 
 const VoiceRecorderButton: FC<IProps> = ({setAudioMessage}) => {
-    const {userData} = useAppSelector(({user}) => user)
     const [isRecording, setIsRecording] = useState(false);
     const [elapsedTime, setElapsedTime] = useState(0);
     const [recorder, setRecorder] = useState<MediaRecorder | null>(null);
@@ -69,7 +67,7 @@ const VoiceRecorderButton: FC<IProps> = ({setAudioMessage}) => {
     };
 
     useEffect(() => {
-        let interval: any;
+        let interval : ReturnType<typeof setTimeout> | null = null;
 
         if (isRecording) {
             interval = setInterval(() => {
@@ -80,7 +78,6 @@ const VoiceRecorderButton: FC<IProps> = ({setAudioMessage}) => {
         }
 
         return () => {
-            //@ts-ignore
             if (interval) clearInterval(interval);
         };
     }, [isRecording]);

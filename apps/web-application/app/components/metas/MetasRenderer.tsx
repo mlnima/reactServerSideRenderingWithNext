@@ -4,15 +4,14 @@ import Link from 'next/link';
 import { capitalizeFirstLetter, convertMetasTypeToSingular } from '@repo/shared-util';
 import { groupingArrayOfMetas } from '@repo/shared-util';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAnglesDown, faCaretDown } from '@fortawesome/free-solid-svg-icons';
-import './MetasRenderer.styles.scss';
+import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import './MetasRenderer.scss';
 
 interface MetasRendererPropTypes {
     metaData: Meta[] | undefined;
     metaType?: string;
     locale: string;
     startWith?: string;
-    isWidget?: boolean;
     grouping?: boolean;
 }
 
@@ -21,13 +20,12 @@ const MetasRenderer: FC<MetasRendererPropTypes> = ({
     metaData,
     locale,
     startWith,
-    isWidget,
     grouping,
 }) => {
     const typePath = convertMetasTypeToSingular(metaType);
 
-    if (!!grouping) {
-        const groupMetas = groupingArrayOfMetas(metaData as any, 'name');
+    if (grouping) {
+        const groupMetas = groupingArrayOfMetas(metaData, 'name');
         return (
             <div className={`metaRenderer`}>
                 <div className={'lettersContainer '}>
@@ -44,8 +42,7 @@ const MetasRenderer: FC<MetasRendererPropTypes> = ({
                                         </span>
                                     </div>
                                     <div className={'items '}>
-                                        {/*//@ts-ignore*/}
-                                        {groupMetas[group].map(meta => {
+                                        {groupMetas[group].map((meta:Meta) => {
                                             const name = capitalizeFirstLetter(
                                                 meta?.translations?.[locale]
                                                     ?.name ?? meta.name,

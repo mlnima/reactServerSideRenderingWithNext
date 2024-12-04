@@ -1,22 +1,23 @@
-import {fetchPage} from "@lib/fetch-requests/fetchPage";
-import {AlternatesGenerators} from "@lib/alternatesCanonicalGenerator";
-import {IPageProps} from "@repo/typescript-types";
+import { fetchPage } from '@lib/fetch-requests/fetchPage';
+import { AlternatesGenerators } from '@lib/alternatesCanonicalGenerator';
+import { IPageProps } from '@repo/typescript-types';
+import localDetector from '@lib/localDetector';
 
-const alternatesGenerators = new AlternatesGenerators()
+const alternatesGenerators = new AlternatesGenerators();
 
-const pageMetaGenerator = async (props: IPageProps)=>{
-    //const searchParams = await props.searchParams;
+const pageMetaGenerator = async (props: IPageProps) => {
     const params = await props.params;
-
-    const pageData = await fetchPage({pageName:params.pageName});
-    const pageTitle = pageData.pageData?.translations?.[params.lang]?.title || pageData.pageData.title|| pageData.pageData.pageName
+    const { lang, pageName } = params;
+    const locale = localDetector(lang);
+    const pageData = pageName ? await fetchPage({ pageName }) : {};
+    const pageTitle =
+        pageData.pageData?.translations?.[locale]?.title || pageData.pageData.title || pageData.pageData.pageName;
 
     return {
-        alternates: alternatesGenerators.customPage(params.lang,pageData.pageData.pageName),
-        title:pageTitle,
-        description: pageData.pageData?.translations?.[params.lang]?.description || pageData.pageData.description,
-    }
+        alternates: alternatesGenerators.customPage(locale, pageData.pageData.pageName),
+        title: pageTitle,
+        description: pageData.pageData?.translations?.[locale]?.description || pageData.pageData.description,
+    };
+};
 
-}
-
-export default pageMetaGenerator
+export default pageMetaGenerator;

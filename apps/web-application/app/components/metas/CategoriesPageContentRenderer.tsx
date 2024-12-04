@@ -9,7 +9,6 @@ interface IProps {
     locale: string;
     totalCount: number;
     currentPage: number;
-    contentPerPage: number;
     dictionary: {
         [key: string]: string;
     };
@@ -21,7 +20,6 @@ const CategoriesPageContentRenderer: FC<IProps> = ({
     renderPagination,
     totalCount,
     currentPage,
-                                                       contentPerPage,
     dictionary,
 }) => {
     return (
@@ -36,7 +34,6 @@ const CategoriesPageContentRenderer: FC<IProps> = ({
                 <Pagination
                     totalCount={totalCount}
                     currentPage={currentPage}
-                    contentPerPage={contentPerPage}
                 />
             )}
         </>

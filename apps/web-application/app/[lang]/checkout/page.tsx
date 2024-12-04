@@ -7,6 +7,7 @@ import {i18n} from '@i18nConfig'
 import SidebarWidgetAreaRenderer
     from "@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer";
 import {IPageProps} from "@repo/typescript-types";
+import localDetector from "@lib/localDetector";
 
 
 const checkoutPage = async (props: IPageProps) => {
@@ -16,7 +17,7 @@ const checkoutPage = async (props: IPageProps) => {
         lang
     } = params;
 
-    const locale = i18n.locales.includes(lang)  ?  lang :  process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+    const locale = localDetector(params.lang);
     const dictionary = await getDictionary(locale);
     const settingsData = await fetchSettings({requireSettings: ['checkoutPagePageSettings']});
 

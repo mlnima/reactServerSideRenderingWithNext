@@ -1,34 +1,23 @@
 import { fetchSearch } from '@lib/fetch-requests/fetchPosts';
 import { fetchSettings } from '@lib/fetch-requests/fetchSettings';
 import { getDictionary } from '../../../../../get-dictionary';
-import { i18n } from '@i18nConfig';
 import { capitalizeFirstLetters } from '@repo/shared-util';
 import { AlternatesGenerators } from '@lib/alternatesCanonicalGenerator';
-import {IPageProps} from "@repo/typescript-types";
-
+import { IPageProps } from '@repo/typescript-types';
+import localDetector from '@lib/localDetector';
 
 const alternatesGenerators = new AlternatesGenerators();
 
 const searchMetaGenerator = async (props: IPageProps) => {
     const searchParams = await props.searchParams;
     const params = await props.params;
-
-
-    const locale = i18n.locales.includes(params.lang)
-        ? params.lang
-        : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+    const locale = localDetector(params.lang);
     const dictionary = await getDictionary(locale);
     const settingsData = await fetchSettings({ requireSettings: ['initialSettings'] });
     const siteName = settingsData?.settings?.initialSettings?.headDataSettings?.siteName || '';
-    const initialSettingsData = await fetchSettings({ requireSettings: ['initialSettings'] });
-    const contentPerPage =
-        initialSettingsData?.settings?.initialSettings?.contentSettings?.contentPerPage;
 
     const currentPageQuery = searchParams?.page;
-    const currentPage =
-        currentPageQuery && typeof currentPageQuery === 'string'
-            ? parseInt(currentPageQuery, 10)
-            : 1;
+    const currentPage = currentPageQuery && typeof currentPageQuery === 'string' ? parseInt(currentPageQuery, 10) : 1;
 
     const queryObject = {
         sort: searchParams?.sort,
@@ -38,12 +27,17 @@ const searchMetaGenerator = async (props: IPageProps) => {
     };
 
     const searchData = await fetchSearch({ queryObject, locale });
-    const title = `${capitalizeFirstLetters(decodeURIComponent(queryObject.keyword))} - ${
+    const title = `${params.keyword ? capitalizeFirstLetters(decodeURIComponent(params.keyword)) : ''} - ${
         searchData?.totalCount
     } ${dictionary['Search Results'] || 'Search Results'} ${siteName || ''}`;
 
+    const alternates = params.keyword
+        ? {
+              alternates: alternatesGenerators.searchPage(locale, params.keyword),
+          }
+        : {};
     return {
-        alternates: alternatesGenerators.searchPage(params.lang, params.keyword),
+        ...alternates,
         title,
     };
 };

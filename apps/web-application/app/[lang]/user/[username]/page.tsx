@@ -2,19 +2,17 @@ import {fetchSettings} from "@lib/fetch-requests/fetchSettings";
 import {fetchWidgets} from "@lib/fetch-requests/fetchWidgets";
 import SidebarWidgetAreaRenderer
     from "@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer";
-import {i18n} from "@i18nConfig";
 import {getDictionary} from "../../../../get-dictionary";
 import React from "react";
 import './page.styles.scss';
 import UserPageContent from "./components/UserPageContent/UserPageContent";
 import {IPageProps} from "@repo/typescript-types";
-
-// export const generateMetadata = actorMetaGenerator;
+import localDetector from "@lib/localDetector";
 
 const userPage = async (props: IPageProps) => {
     const params = await props.params;
 
-    const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+    const locale = localDetector(params.lang);
     const dictionary = await getDictionary(locale);
     const settingsData = await fetchSettings({requireSettings: ['userPageSettings']});
 
@@ -34,9 +32,12 @@ const userPage = async (props: IPageProps) => {
     return (
         <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
             <main id={'primary'} className={'main userPage'}>
-                <UserPageContent dictionary={dictionary}
-                                 username={params?.username}
-                                 locale={locale}/>
+                {params?.username &&
+                    <UserPageContent dictionary={dictionary}
+                                     username={params.username}
+                                     locale={locale}/>
+                }
+
             </main>
             <SidebarWidgetAreaRenderer leftSideWidgets={widgetsData.widgets?.['userPageLeftSidebar']}
                                        rightSideWidgets={widgetsData.widgets?.['userPageRightSidebar']}

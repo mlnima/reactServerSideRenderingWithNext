@@ -3,23 +3,13 @@ import { fetchWidgets } from '@lib/fetch-requests/fetchWidgets';
 import MainWidgetArea from '@components/widgets/widgetAreas/MainWidgetArea';
 import { getDictionary } from '../../get-dictionary';
 import './page.styles.scss';
-import { i18n } from '@i18nConfig';
 import SidebarWidgetAreaRenderer from '@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer';
 import {IPageProps} from "@repo/typescript-types";
-
-interface IProps {
-    params: {
-        lang: string;
-    };
-    searchParams: {
-        [key: string]: string | string[] | undefined;
-    };
-}
+import localDetector from "@lib/localDetector";
 
 const homePage = async (props: IPageProps) => {
     const params = await props.params;
-    const locale = i18n.locales.includes(params.lang) ? params.lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
-
+    const locale = localDetector(params.lang);
     const dictionary = await getDictionary(locale);
     const settingsData = await fetchSettings({ requireSettings: ['homePageSettings'] });
 
@@ -28,7 +18,7 @@ const homePage = async (props: IPageProps) => {
         locale,
         revalidate: 86400,
     });
-    //@ts-ignore
+
     const sidebar = settingsData?.settings?.homePageSettings?.sidebar;
 
     return (

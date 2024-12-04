@@ -10,7 +10,7 @@ interface GlobalStylesPropTypes {
 
 const Styles = createGlobalStyle<GlobalStylesPropTypes>`
   ${({primaryModeColors}) =>
-          !!primaryModeColors ? primaryModeColors?.includes(':root') ? primaryModeColors : `:root {${primaryModeColors}}` : ''}
+          primaryModeColors ? primaryModeColors?.includes(':root') ? primaryModeColors : `:root {${primaryModeColors}}` : ''}
   ${({customStyles}) => customStyles ? customStyles : ''}
 `
 

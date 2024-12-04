@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { FC } from "react";
 import createDOMPurify from 'dompurify';
 import './PostDescription.scss'

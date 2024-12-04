@@ -25,7 +25,7 @@ const Advertise: FC<AdvertisePropTypes> = ({ uniqueData }) => {
     }, [pathname, searchParams]);
 
     const setAdCode = () => {
-        if (!!uniqueData?.adCode) {
+        if (uniqueData?.adCode) {
             setTimeout(() => {
                 setAdCodeData(uniqueData?.adCode);
                 setLoading(false);
@@ -44,6 +44,6 @@ const Advertise: FC<AdvertisePropTypes> = ({ uniqueData }) => {
             </div>
         );
 
-    return <div className={'advertiseWrapper'}>{!!adCodeData && parse(adCodeData)}</div>;
+    return <div className={'advertiseWrapper'}>{adCodeData && parse(adCodeData)}</div>;
 };
 export default memo(Advertise);

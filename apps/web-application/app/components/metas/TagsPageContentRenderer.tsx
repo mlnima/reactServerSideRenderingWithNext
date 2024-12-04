@@ -17,7 +17,6 @@ const TagsPageContentRenderer: FC<IProps> = ({ metas, locale, startWith }) => {
                 locale={locale}
                 startWith={startWith}
                 grouping={true}
-                isWidget={false}
             />
         </div>
     );

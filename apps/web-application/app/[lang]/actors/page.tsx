@@ -11,6 +11,7 @@ import actorsMetaGenerator from "./components/actorsMetaGenerator/actorsMetaGene
 import ActorsPageContentRenderer from "@components/metas/ActorsPageContentRenderer";
 import './page.styles.scss';
 import {PageParams, PageSearchParams} from "@repo/typescript-types";
+import localDetector from "@lib/localDetector";
 
 interface IProps {
     params: PageParams,
@@ -20,12 +21,10 @@ interface IProps {
 const actorsPage = async (props: IProps) => {
     const searchParams = await props.searchParams;
     const params = await props.params;
-    const locale = i18n.locales.includes(params?.lang) ? params?.lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+    const locale = localDetector(params.lang);
     const dictionary = await getDictionary(locale);
     const settingsData = await fetchSettings({requireSettings: ['actorsPageSettings']});
     const sidebar = settingsData?.settings?.actorsPageSettings?.sidebar;
-    const initialSettingsData = await fetchSettings({requireSettings: ['initialSettings']})
-    const contentPerPage = initialSettingsData?.settings?.initialSettings?.contentSettings?.contentPerPage;
 
     const widgetsData = await fetchWidgets({
         widgets: [

@@ -11,7 +11,7 @@ interface ValidInputPropTypes {
 const ValidInput: FC<ValidInputPropTypes> = ({ valid }) => {
     return (
         <div className="validator inputs-action">
-            {!!valid ? (
+            {valid ? (
                 <FontAwesomeIcon color={'green'} icon={faCheck} style={{ width: 20, height: 20 }} />
             ) : (
                 <FontAwesomeIcon color={'red'} icon={faXmark} style={{ width: 20, height: 20 }} />

@@ -1,24 +1,18 @@
 'use client';
-import {FC, useEffect} from "react";
-import {useAppDispatch} from "@store/hooks";
-// import viewPostAction from "@store/reducers/postsReducers/viewPostAction";
-import {clientAPIRequestViewPost} from "@repo/api-requests";
+import { FC, useEffect } from 'react';
+import { clientAPIRequestViewPost } from '@repo/api-requests';
 
 interface IProps {
-    _id: string
+    _id: string;
 }
 
-const ViewPostClient: FC<IProps> = ({_id}) => {
-    const dispatch = useAppDispatch()
-
+const ViewPostClient: FC<IProps> = ({ _id }) => {
     useEffect(() => {
-        if (_id){
-            clientAPIRequestViewPost(_id)
-            // dispatch(viewPostAction(_id))
+        if (_id) {
+            clientAPIRequestViewPost(_id);
         }
     }, [_id]);
 
-
-    return null
+    return null;
 };
-export default ViewPostClient
+export default ViewPostClient;

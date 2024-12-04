@@ -49,7 +49,7 @@ const Component: FC<PropTypes> = ({inputRef, chatroomId, authorId, setMessageTex
         }
     };
 
-    const onClickHandler = (event: ChangeEvent<HTMLButtonElement>) => {
+    const onClickHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
         if (inputRef?.current) {
             inputRef.current.click()
@@ -63,10 +63,9 @@ const Component: FC<PropTypes> = ({inputRef, chatroomId, authorId, setMessageTex
                    accept="image/*"
                    style={{display: 'none'}}
                    onChange={onSelectImageHandler}/>
-            {/*//@ts-ignore*/}
+
             <button className={'chatroomToolBoxActionBtn paperclip-button'}
                     type={'button'}
-                    //@ts-ignore
                     onClick={e => onClickHandler(e)}>
                 <FontAwesomeIcon icon={faCamera} style={{width: 25, height: 25}}/>
             </button>

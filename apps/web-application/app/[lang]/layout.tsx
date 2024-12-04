@@ -1,14 +1,11 @@
-import  { ReactNode,use } from 'react';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import ServerSideStore from '@store/ServerSideStore';
-
 config.autoAddCss = false;
 import '@components/global/styles/global.styles.scss';
 import { fetchSettings } from '@lib/fetch-requests/fetchSettings';
 import { fetchWidgets } from '@lib/fetch-requests/fetchWidgets';
 import ReduxProvider from '@store/ReduxProvider';
-import { i18n } from '@i18nConfig';
 import { getDictionary } from '../../get-dictionary';
 import GlobalCustomStyles from '@components/global/styles/GlobalCustomStyles';
 import LayoutMetaGenerator from '../components/LayoutMetaGenerator/LayoutMetaGenerator';
@@ -33,17 +30,16 @@ import LayoutViewportGenerator from '@components/LayoutMetaGenerator/LayoutViewp
 import CustomScripts from '@components/CustomScripts';
 import CustomHeadTagsInitializer from '@components/CustomHeadTagsInitializer';
 import {ILayoutProps} from "@repo/typescript-types";
+import localDetector from "@lib/localDetector";
 
 
 // export async function generateStaticParams() {
 //     return i18n.locales.map((lng: string) => ({ lng }));
 // }
 
-type Params = Promise<{ lang: string }>
-
 const RootLayout = async (props:ILayoutProps) => {
     const params = await props.params;
-    const locale = i18n.locales.includes(params.lang) ? params.lang : process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+    const locale = localDetector(params.lang);
     const dictionary = await getDictionary(locale);
 
     const initialSettingsData = await fetchSettings({

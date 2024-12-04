@@ -19,7 +19,9 @@ interface ArticlePostCardPropTypes {
         [key: string]: string;
     };
     settings: {
-        [key: string]: string;
+        showViewsOnCard:  boolean,
+        showRatingOnCard:  boolean,
+        showDateOnCard:  boolean,
     };
 }
 
@@ -57,7 +59,7 @@ const ArticlePostCard: FC<ArticlePostCardPropTypes> = ({
                     views={post?.views}
                     dictionary={dictionary}
                     likes={post?.likes}
-                    dislikes={post?.dislikes}
+                    dislikes={post?.disLikes}
                     createdAt={post?.createdAt}
                     updatedAt={post?.updatedAt}
                     settings={settings}
