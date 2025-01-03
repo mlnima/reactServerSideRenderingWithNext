@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import { fetchPosts } from '@lib/fetch-requests/fetchPosts';
-import { fetchSettings } from '@lib/fetch-requests/fetchSettings';
 import { textContentReplacer, getTextDataWithTranslation } from '@repo/shared-util';
 import { AlternatesGenerators } from '@lib/alternatesCanonicalGenerator';
 import { PageParams, PageSearchParams } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
+import {getSettings} from "@lib/database/operations/settings";
+import {getPosts} from "@lib/database/operations/posts";
 
 interface IProps {
     params: PageParams;
@@ -19,9 +20,10 @@ const actorMetaGenerator = async (props: IProps): Promise<Metadata> => {
         const params = await props.params;
 
         const locale = localDetector(params.lang);
-        const settingsData = await fetchSettings({ requireSettings: ['actorPageSettings'] });
+        const { actorPageSettings  } = await getSettings(['actorPageSettings']);
+        const {  initialSettings } = await getSettings(['initialSettings']);
+
         const fallbackImage = '/asset/images/default/no-image-available.png';
-        const initialSettingsData = await fetchSettings({ requireSettings: ['initialSettings'] });
         const currentPageQuery = searchParams?.page;
         const currentPage =
             currentPageQuery && typeof currentPageQuery === 'string' ? parseInt(currentPageQuery, 10) : 1;
@@ -37,17 +39,24 @@ const actorMetaGenerator = async (props: IProps): Promise<Metadata> => {
             locale,
         });
 
-        const pageTitle = settingsData?.settings?.actorPageSettings?.title;
-        const pageKeywords = settingsData?.settings?.actorPageSettings?.keywords;
-        const pageDescription = settingsData?.settings?.actorPageSettings?.description;
+        const { meta, totalCount } = await getPosts({
+            locale,
+            metaId: params?.actorId,
+            page: currentPageQuery && typeof currentPageQuery === 'string' ? parseInt(currentPageQuery, 10) : 1,
+            returnPosts:false
+        });
+
+        const pageTitle = actorPageSettings?.title;
+        const pageKeywords = actorPageSettings?.keywords;
+        const pageDescription = actorPageSettings?.description;
 
         const description = pageDescription
             ? textContentReplacer(pageDescription, {
-                  name: postsData?.meta?.name,
-                  count: postsData?.meta?.count,
-                  siteName: initialSettingsData?.settings?.initialSettings?.headDataSettings?.siteName,
+                  name: meta?.name,
+                  count: meta?.count,
+                  siteName: initialSettings?.headDataSettings?.siteName,
               })
-            : getTextDataWithTranslation(locale, 'description', postsData?.meta);
+            : getTextDataWithTranslation(locale, 'description', meta);
 
         const alternates = params.actorId
             ? {
@@ -59,16 +68,16 @@ const actorMetaGenerator = async (props: IProps): Promise<Metadata> => {
             ...alternates,
             title: pageTitle
                 ? textContentReplacer(pageTitle, {
-                      name: postsData?.meta?.name,
-                      count: postsData?.meta?.count,
-                      siteName: initialSettingsData?.settings?.initialSettings?.headDataSettings?.siteName,
+                      name: meta?.name,
+                      count: meta?.count,
+                      siteName: initialSettings?.headDataSettings?.siteName,
                   })
-                : getTextDataWithTranslation(locale, 'title', postsData?.meta),
+                : getTextDataWithTranslation(locale, 'title', meta),
             description:
-                description || initialSettingsData?.settings?.initialSettings?.headDataSettings?.description || '',
-            keywords: `${postsData?.meta?.name}${pageKeywords ? `, ${pageKeywords}` : ''}`,
+                description || initialSettings?.headDataSettings?.description || '',
+            keywords: `${meta?.name}${pageKeywords ? `, ${pageKeywords}` : ''}`,
             openGraph: {
-                images: [postsData?.meta?.imageUrl || fallbackImage],
+                images: [meta?.imageUrl || fallbackImage],
             },
         };
     } catch (error) {

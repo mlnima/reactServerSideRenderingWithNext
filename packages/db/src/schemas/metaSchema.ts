@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import mongooseLeanVirtuals from "mongoose-lean-virtuals";
 const Schema = mongoose.Schema
 
 const metaSchema =  new Schema({
@@ -30,7 +31,7 @@ const metaSchema =  new Schema({
         ref: 'meta'
     }
 },{ timestamps: true });
-
+metaSchema.plugin(mongooseLeanVirtuals);
 metaSchema.index({ name: 1, type: 1 }, { unique: true });
 
 export default mongoose.model("meta", metaSchema);

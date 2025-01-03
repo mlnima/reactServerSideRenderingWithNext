@@ -43,7 +43,7 @@ interface Base {
     price?:string,
     duration?:string,
     quality?:string,
-    _id?:string,
+    _id:string,
     mainThumbnail?:string,
     thumbnail?:{
         _id:string,

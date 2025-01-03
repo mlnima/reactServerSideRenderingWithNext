@@ -83,7 +83,7 @@ const FormWidget: FC<FormWidgetPropTypes> = ({
         try {
             const formData = {
                 ...state,
-                date: Date.now(),
+                date: performance.timeOrigin + performance.now(),
             };
             await postFormData({ formDataToPost: formData });
             setIsSubmit(true);

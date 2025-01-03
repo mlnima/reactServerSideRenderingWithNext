@@ -8,9 +8,9 @@ import {postFieldRequestForCards} from '@repo/data-structures';
 import userSchema from '@schemas/userSchema';
 import mongoose from 'mongoose';
 import commentSchema from '@schemas/commentSchema';
-import {multiQueryUniquer} from '@util/queryUtil';
+import { multiQueryUniquer } from '@util/queryUtil';
 import {Post, Meta} from '@repo/typescript-types';
-import {reqQueryToMongooseOptions} from '@util/database-util';
+import { reqQueryToMongooseOptions } from '@util/database-util';
 import updateSaveMetas from '@util/_updateSaveMetas';
 import xHScrapper from '@util/scrappers/xHScrapper';
 import xHSimilarFinder from '@util/scrappers/xHSimilarFinder';
@@ -306,8 +306,6 @@ class PostController {
                     .exec();
 
                 if (post) {
-                    //@ts-ignore
-                    //  const relatedPosts = await PostController.findRelatedPosts(post);
                     const relatedPosts = await postSchema.findRelatedPosts({
                         post,
                         relatedByFields: ['actors', 'categories', 'tags'],

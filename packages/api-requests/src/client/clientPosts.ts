@@ -5,79 +5,72 @@ import { mongoIdValidator, queryUniquer } from '@repo/shared-util';
 import { postFieldRequestForCards, postTypes } from '@repo/data-structures';
 
 const postTypeValidator = (currentPostType: string) => {
-    //@ts-ignore
-    return currentPostType ? postTypes.includes(currentPostType) : false;
+  //@ts-ignore
+  return currentPostType ? postTypes.includes(currentPostType) : false;
 };
 
 export const clientDeletePostByAuthor = async (_id: string) => {
-    return await AxiosInstance.delete(`/api/v1/post`, {
-        params: {
-            _id,
-        },
-    });
+  return await AxiosInstance.delete(`/api/v1/post`, {
+    params: {
+      _id,
+    },
+  });
 };
 
 export const clientAPIRequestCreateNewPost = async (data: {}): Promise<{ newPostId: string }> => {
-    const response: AxiosResponse<{
-        newPostId: string;
-    }> = await AxiosInstance.post<{
-        newPostId: string;
-    }>('/api/v1/post', { data, token: localStorage.wt });
-    return response.data;
+  const response: AxiosResponse<{
+    newPostId: string;
+  }> = await AxiosInstance.post<{
+    newPostId: string;
+  }>('/api/v1/post', { data, token: localStorage.wt });
+  return response.data;
 };
 
 export const clientAPIRequestGetEditingPost = async (_id: string) => {
-    //return await AxiosInstance.get(`/api/v1/posts/getEditingPost?${queries}`);
-    return await AxiosInstance.get(`/api/v1/post/editing`, {
-        params: {
-            _id,
-        },
-    });
+  //return await AxiosInstance.get(`/api/v1/posts/getEditingPost?${queries}`);
+  return await AxiosInstance.get(`/api/v1/post/editing`, {
+    params: {
+      _id,
+    },
+  });
 };
 
 export const APISearchSuggestions = async (userInput: string) => {
-    return await AxiosInstance.get(`/api/v1/posts/search/suggest`, {
-        params: {
-            userInput,
-        },
-    });
+  return await AxiosInstance.get(`/api/v1/posts/search/suggest`, {
+    params: {
+      userInput,
+    },
+  });
 };
 
 export const clientAPIRequestGetPosts = async (currentQuery: any, medaId?: string | null) => {
-    const sort = !!currentQuery?.sort ? { sort: currentQuery?.sort } : { sort: 'updatedAt' };
-    const postType = postTypeValidator(currentQuery?.postType) ? { postType: currentQuery?.postType } : {};
-    const isValidMetaId = !!medaId ? mongoIdValidator(medaId) : false;
-    const metaId =
-        !!medaId && isValidMetaId
-            ? { metaId: medaId }
-            : medaId && !isValidMetaId
-              ? { metaId: encodeURIComponent(medaId) }
-              : {};
-    const lang = !!currentQuery?.lang ? { lang: currentQuery?.lang } : {};
-    const author = !!currentQuery?.author ? { author: currentQuery?.author } : {};
-    const status = !!currentQuery?.status ? { status: currentQuery?.status } : { status: 'published' };
-    const keyword = !!currentQuery?.keyword ? { keyword: encodeURIComponent(queryUniquer(currentQuery?.keyword)) } : {};
+  const sort = !!currentQuery?.sort ? { sort: currentQuery?.sort } : { sort: 'updatedAt' };
+  const postType = postTypeValidator(currentQuery?.postType) ? { postType: currentQuery?.postType } : {};
+  const isValidMetaId = !!medaId ? mongoIdValidator(medaId) : false;
+  const metaId = !!medaId && isValidMetaId ? { metaId: medaId } : medaId && !isValidMetaId ? { metaId: encodeURIComponent(medaId) } : {};
+  const lang = !!currentQuery?.lang ? { lang: currentQuery?.lang } : {};
+  const author = !!currentQuery?.author ? { author: currentQuery?.author } : {};
+  const status = !!currentQuery?.status ? { status: currentQuery?.status } : { status: 'published' };
+  const keyword = !!currentQuery?.keyword ? { keyword: encodeURIComponent(queryUniquer(currentQuery?.keyword)) } : {};
 
-    const getPostsData = {
-        size: currentQuery?.size,
-        page: currentQuery?.page,
-        ...status,
-        ...author,
-        ...lang,
-        ...metaId,
-        ...postType,
-        ...sort,
-        ...keyword,
-    };
+  const getPostsData = {
+    size: currentQuery?.size,
+    page: currentQuery?.page,
+    ...status,
+    ...author,
+    ...lang,
+    ...metaId,
+    ...postType,
+    ...sort,
+    ...keyword,
+  };
 
-    const queries = new URLSearchParams(getPostsData as {}).toString();
-    return await AxiosInstance.get(
-        `/api/v1/posts?${queries}&${postFieldRequestForCards.map((f: string) => 'field=' + f).join('&')}`,
-    );
+  const queries = new URLSearchParams(getPostsData as {}).toString();
+  return await AxiosInstance.get(`/api/v1/posts?${queries}&${postFieldRequestForCards.map((f: string) => 'field=' + f).join('&')}`);
 };
 
 export const updatePost = async (formData: FormData) => {
-    return await AxiosInstance.put(`/api/v1/post`, formData);
+  return await AxiosInstance.put(`/api/v1/post`, formData);
 };
 
 // export const checkPostExist = async (_id: {}) => {
@@ -89,34 +82,35 @@ export const updatePost = async (formData: FormData) => {
 // };
 
 export const clientAPIRequestLikeDislikePost = async (_id: string, type: 'likes' | 'disLikes') => {
-    const body = {
-        _id,
-        type,
-    };
-    return await AxiosInstance.patch('/api/v1/post/likeDislike', body);
+  const body = {
+    _id,
+    type,
+  };
+  return await AxiosInstance.patch('/api/v1/post/likeDislike', body);
 };
 
 interface ICheckDeletedVideo {
-    postId?: string;
-    mainThumbnail?: string;
-    videoEmbedCode?: string;
+  postId?: string;
+  mainThumbnail?: string;
+  videoEmbedCode?: string;
 }
 
 export const clientCheckDeletedVideo = async ({ postId, mainThumbnail, videoEmbedCode }: ICheckDeletedVideo) => {
-    return await AxiosInstance.patch('/api/v1/post/checkDeletedVideo', {
-        postId,
-        mainThumbnail,
-        videoEmbedCode,
-    });
+  return await AxiosInstance.patch('/api/v1/post/checkDeletedVideo', {
+    postId,
+    mainThumbnail,
+    videoEmbedCode,
+  });
 };
 
-export const clientAPIRequestViewPost = async (postId: string) => {
-    const body = {
-        id: postId,
-        type: 'views',
-    };
+export const clientAPIRequestViewPost = (postId: string) => {
+  const body = {
+    id: postId,
+    type: 'views',
+  };
+  AxiosInstance.post('/api/v1/post/view', body);
 
-    return await AxiosInstance.post('/api/v1/post/view', body);
+  return
 };
 
 // export const clientAPIRequestLikePost = async (postId: string) => {

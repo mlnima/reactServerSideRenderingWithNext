@@ -2,7 +2,7 @@ import {fetchSettings} from "@lib/fetch-requests/fetchSettings";
 import {fetchWidgets} from "@lib/fetch-requests/fetchWidgets";
 import MainWidgetArea from "@components/widgets/widgetAreas/MainWidgetArea"
 import {getDictionary} from "../../../get-dictionary";
-import './page.styles.scss';
+import './page.scss';
 import {i18n} from '@i18nConfig'
 import SidebarWidgetAreaRenderer
     from "@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer";
@@ -53,4 +53,3 @@ const checkoutPage = async (props: IPageProps) => {
 
 export default checkoutPage;
 
-export const dynamic = 'force-dynamic';

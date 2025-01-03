@@ -26,7 +26,7 @@ const WidgetText: FC<TextPropTypes> = ({translations, text,locale}) => {
                 'right' :
                 'left'
         }} >
-            {parse(`${ textContentReplacer(translations?.[locale]?.text || text || '')}`)}
+            {parse(`${textContentReplacer(translations?.[locale]?.text || text || '')}`)}
         </div>
     );
 

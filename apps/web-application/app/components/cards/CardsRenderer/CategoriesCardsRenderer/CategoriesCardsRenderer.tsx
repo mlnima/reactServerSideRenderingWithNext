@@ -1,47 +1,55 @@
-import React, {FC} from 'react';
-import {Meta} from "@repo/typescript-types";
-import './CategoriesCardsRenderer.scss'
-import {convertMetasTypeToSingular} from "@repo/shared-util";
-import CategoryCard from "@components/cards/cardsComponents/CategoryCard/CategoryCard";
+import React, { FC } from 'react';
+import { Meta } from '@repo/typescript-types';
+import './CategoriesCardsRenderer.scss';
+import CategoryCard from '@components/cards/cardsComponents/CategoryCard/CategoryCard';
 
 interface IProps {
-    metas?: Meta[],
-    locale:string,
-    isSidebar?:boolean,
-    dictionary: {
-        [key: string]: string
-    }
+  metas?: Meta[];
+  locale: string;
+  isSidebar?: boolean;
+  dictionary: {
+    [key: string]: string;
+  };
 }
 
-const CategoriesCardsRenderer: FC<IProps> = ({metas,locale,isSidebar,dictionary}) => {
+const CategoriesCardsRenderer: FC<IProps> = ({
+  metas,
+  locale,
+  isSidebar,
+  dictionary,
+}) => {
+  return (
+    <div className={`categoriesCardsWrapper${isSidebar ? 'Sidebar' : ''} `}>
+      {metas?.map((meta, index) => {
+        const imagesAllowedDomainsForNextImage =
+          process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES?.split(' ') || [];
+        const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
 
-    return (
-        <div className={`categoriesCardsWrapper${isSidebar ? 'Sidebar' : ''} `}>
-            {metas?.map((meta, index) => {
+        const isNextImageAllowed = meta.imageUrl
+          ? imagesAllowedDomainsForNextImage?.some((domain) =>
+              meta.imageUrl?.includes(domain)
+            )
+          : false;
 
-                const imagesAllowedDomainsForNextImage = process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES?.split(' ') || []
-                const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+        const metaUrl =
+          locale === defaultLocale
+            ? `/category/${meta._id}`
+            : `/${locale}/category/${meta._id}`;
 
-                const isNextImageAllowed = meta.imageUrl ?
-                    imagesAllowedDomainsForNextImage?.some(domain => meta.imageUrl?.includes(domain)) :
-                    false
-
-                const metaUrl = locale === defaultLocale ?
-                    `/${convertMetasTypeToSingular(meta?.type)}/${meta._id}` :
-                    `/${locale}/${convertMetasTypeToSingular(meta?.type)}/${meta._id}`;
-
-                return (
-                    <CategoryCard key={meta._id}
-                                      isNextImageAllowed={isNextImageAllowed}
-                                      metaUrl={metaUrl}
-                                      meta={meta}
-                                      isSidebar={isSidebar}
-                                      locale={locale}
-                                  dictionary={dictionary}
-                                      index={index}/>
-                )
-            })}
-        </div>
-    );
+        return (
+          <CategoryCard
+            key={meta._id}
+            isNextImageAllowed={isNextImageAllowed}
+            metaUrl={metaUrl}
+            meta={meta}
+            isSidebar={isSidebar}
+            locale={locale}
+            dictionary={dictionary}
+            index={index}
+          />
+        );
+      })}
+    </div>
+  );
 };
 export default CategoriesCardsRenderer;

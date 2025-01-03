@@ -6,6 +6,7 @@ import localDetector from '@lib/localDetector';
 
 const alternatesGenerators = new AlternatesGenerators();
 
+//const now = new Date(performance.timeOrigin + performance.now());
 const chatroomMetaGenerator = async (props: IPageProps) => {
     const params = await props.params;
     const locale = localDetector(params.lang);

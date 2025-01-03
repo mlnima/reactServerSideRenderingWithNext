@@ -1,88 +1,92 @@
-import React from "react";
-import {fetchMetas} from "@lib/fetch-requests/fetchPosts";
-import {fetchSettings} from "@lib/fetch-requests/fetchSettings";
-import {fetchWidgets} from "@lib/fetch-requests/fetchWidgets";
-import {getDictionary} from "../../../get-dictionary";
-import WidgetsRenderer from "@components/widgets/widgetRenderer/WidgetsRenderer";
-import SidebarWidgetAreaRenderer
-    from "@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer";
-import CategoriesPageContentRenderer from "@components/metas/CategoriesPageContentRenderer";
-import categoriesMetaGenerator from "./components/categoriesMetaGenerator/categoriesMetaGenerator";
-import {PageParams, PageSearchParams} from "@repo/typescript-types";
-import localDetector from "@lib/localDetector";
+import React from 'react';
+import { getDictionary } from '../../../get-dictionary';
+import WidgetsRenderer from '@components/widgets/widgetRenderer/WidgetsRenderer';
+import SidebarWidgetAreaRenderer from '@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer';
+import CategoriesPageContentRenderer from '@components/metas/CategoriesPageContentRenderer';
+import categoriesMetaGenerator from './components/categoriesMetaGenerator/categoriesMetaGenerator';
+import { PageParams, PageSearchParams } from '@repo/typescript-types';
+import localDetector from '@lib/localDetector';
+import { getMetas } from '@lib/database/operations/metas';
+import { getWidgets } from '@lib/database/operations/widgets';
+import {getSettings} from "@lib/database/operations/settings";
 
 interface IProps {
-    params: PageParams,
-    searchParams?: PageSearchParams,
+  params: PageParams;
+  searchParams?: PageSearchParams;
 }
 
 const CategoriesPage = async (props: IProps) => {
-    const searchParams = await props.searchParams;
-    const params = await props.params;
-    const locale = localDetector(params.lang);
-    const dictionary = await getDictionary(locale);
-    const settingsData = await fetchSettings({requireSettings: ['categoriesPageSettings']});
-    const sidebar = settingsData?.settings?.categoriesPageSettings?.sidebar;
+  const searchParams = await props.searchParams;
+  const params = await props.params;
+  const locale = localDetector(params.lang);
+  const dictionary = await getDictionary(locale);
+  const { categoriesPageSettings } = await getSettings(['categoriesPageSettings']);
+  const sidebar = categoriesPageSettings?.sidebar;
 
-    const widgetsData = await fetchWidgets({
-        widgets: [
-            'categoriesPageTop',
-            'categoriesPageLeftSidebar',
-            'categoriesPageBottom',
-            'categoriesPageRightSidebar'
-        ],
-        locale
-    });
+  const widgets = await getWidgets(
+    [
+      'categoriesPageTop',
+      'categoriesPageLeftSidebar',
+      'categoriesPageBottom',
+      'categoriesPageRightSidebar',
+    ],
+    locale
+  );
 
-    const currentPageQuery = searchParams?.page;
-    const currentPage = (currentPageQuery && typeof currentPageQuery === 'string') ?
-        parseInt(currentPageQuery, 10) : 1
+  const currentPageQuery = searchParams?.page;
+  const currentPage =
+    currentPageQuery && typeof currentPageQuery === 'string'
+      ? parseInt(currentPageQuery, 10)
+      : 1;
 
-    const metasData = await fetchMetas({
-        queryObject: {
-            metaType: 'categories',
-            sort: searchParams?.sort || undefined,
-            page: currentPage,
-            size: searchParams?.size  ,
-            startWith: searchParams?.startWith || undefined
-        },
-        locale
-    });
+  const { metas, totalCount } = await getMetas({
+    locale,
+    startWith: Array.isArray(searchParams?.startWith)
+      ? searchParams?.startWith[0]
+      : searchParams?.startWith,
+    metaType: 'categories',
+    page: currentPage,
+  });
 
-    return (
-        <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
+  return (
+    <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
+      <main id={'primary'} className={'main categoriesPage'}>
+        <WidgetsRenderer
+          dictionary={dictionary}
+          locale={locale}
+          widgets={widgets?.['categoriesPageTop']}
+          position={'categoriesPageTop'}
+        />
 
-            <main id={'primary'} className={'main categoriesPage'}>
-                <WidgetsRenderer dictionary={dictionary}
-                                 locale={locale}
-                                 widgets={widgetsData.widgets?.['categoriesPageTop']}
-                                 position={'categoriesPageTop'}/>
+        <CategoriesPageContentRenderer
+          renderPagination
+          locale={locale}
+          dictionary={dictionary}
+          totalCount={totalCount || 0}
+          currentPage={currentPage}
+          metas={metas || []}
+        />
 
-                <CategoriesPageContentRenderer renderPagination
-                                               locale={locale}
-                                               dictionary={dictionary}
-                                               totalCount={metasData?.totalCount}
-                                               currentPage={currentPage}
-                                               metas={metasData?.metas}/>
+        <WidgetsRenderer
+          dictionary={dictionary}
+          locale={locale}
+          widgets={widgets?.['categoriesPageBottom']}
+          position={'categoriesPageBottom'}
+        />
+      </main>
 
-                <WidgetsRenderer dictionary={dictionary}
-                                 locale={locale}
-                                 widgets={widgetsData.widgets?.['categoriesPageBottom']}
-                                 position={'categoriesPageBottom'}/>
-            </main>
-
-            <SidebarWidgetAreaRenderer leftSideWidgets={widgetsData.widgets?.['categoriesPageLeftSidebar']}
-                                       rightSideWidgets={widgetsData.widgets?.['categoriesPageRightSidebar']}
-                                       dictionary={dictionary}
-                                       locale={locale}
-                                       sidebar={sidebar || 'no'}
-                                       position={'postPage'}/>
-
-        </div>
-    );
+      <SidebarWidgetAreaRenderer
+        leftSideWidgets={widgets?.['categoriesPageLeftSidebar']}
+        rightSideWidgets={widgets?.['categoriesPageRightSidebar']}
+        dictionary={dictionary}
+        locale={locale}
+        sidebar={sidebar || 'no'}
+        position={'postPage'}
+      />
+    </div>
+  );
 };
 
 export default CategoriesPage;
 
 export const generateMetadata = categoriesMetaGenerator;
-export const dynamic = 'force-dynamic';

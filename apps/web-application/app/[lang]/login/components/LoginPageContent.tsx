@@ -4,7 +4,7 @@ import {useAppDispatch, useAppSelector} from "@store/hooks";
 import {useRouter} from "next/navigation";
 import {loginRegisterForm} from "@store/reducers/globalStateReducer";
 
-const ClientSideLogic = () => {
+const LoginPageContent = () => {
     const dispatch = useAppDispatch()
 
     const loggedIn = useAppSelector((store) => store?.user?.loggedIn)
@@ -23,4 +23,4 @@ const ClientSideLogic = () => {
 
     return null
 };
-export default ClientSideLogic
+export default LoginPageContent

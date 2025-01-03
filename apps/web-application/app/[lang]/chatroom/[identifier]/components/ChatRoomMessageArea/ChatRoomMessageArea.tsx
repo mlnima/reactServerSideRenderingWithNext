@@ -49,9 +49,40 @@ const ChatRoomMessageArea: FC<IProp> = ({
 
 
 
+    // useEffect(() => {
+    //     const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
+    //         const { scrollTop, clientHeight, scrollHeight } = event.currentTarget;
+    //
+    //         if (prevScrollPosition.current > scrollTop) {
+    //             setAutoScroll(false);
+    //         } else if (scrollTop + clientHeight >= scrollHeight - 5) {
+    //             setAutoScroll(true);
+    //         }
+    //         prevScrollPosition.current = scrollTop;
+    //
+    //         if (scrollTop < 50 && gettingOlderMessages.current) {
+    //             isLoading.current = true;
+    //             socket.emit('loadOlderMessages', {
+    //                 chatroomId,
+    //                 currentlyLoadedMessagesCount: chatroomMessages.length,
+    //             });
+    //         }
+    //     };
+    //
+    //     // @ts-expect-error: it's just a stupid ts error
+    //     const debouncedHandleScroll = debounce(handleScroll, 500);
+    //
+    //     const messageArea = messageAreaRef.current;
+    //     messageArea?.addEventListener('scroll', debouncedHandleScroll);
+    //     return () => messageArea?.removeEventListener('scroll', debouncedHandleScroll);
+    // }, [chatroomMessages]);
+
     useEffect(() => {
         const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
-            const { scrollTop, clientHeight, scrollHeight } = event.currentTarget;
+            const target = event.currentTarget;
+            if (!target) return;
+
+            const { scrollTop, clientHeight, scrollHeight } = target;
 
             if (prevScrollPosition.current > scrollTop) {
                 setAutoScroll(false);
@@ -69,13 +100,26 @@ const ChatRoomMessageArea: FC<IProp> = ({
             }
         };
 
-        // @ts-expect-error: it's just a stupid ts error
-        const debouncedHandleScroll = debounce(handleScroll, 500);
+        const debouncedHandleScroll = debounce((event: Event) => {
+            // Ensure the event's target is the intended element
+            const target = event.target as HTMLDivElement | null;
+            if (target) {
+                handleScroll({ currentTarget: target } as React.UIEvent<HTMLDivElement>);
+            }
+        }, 500);
 
         const messageArea = messageAreaRef.current;
-        messageArea?.addEventListener('scroll', debouncedHandleScroll);
-        return () => messageArea?.removeEventListener('scroll', debouncedHandleScroll);
+        if (messageArea) {
+            messageArea.addEventListener('scroll', debouncedHandleScroll);
+        }
+
+        return () => {
+            if (messageArea) {
+                messageArea.removeEventListener('scroll', debouncedHandleScroll);
+            }
+        };
     }, [chatroomMessages]);
+
 
     useEffect(() => {
         if (autoScroll && messageAreaRef.current) {

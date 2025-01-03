@@ -51,4 +51,3 @@ const userPage = async (props: IPageProps) => {
 
 export default userPage;
 
-export const dynamic = 'force-dynamic';

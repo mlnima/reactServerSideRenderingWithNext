@@ -49,4 +49,3 @@ const page = async (props: IPageProps) => {
 export default page;
 
 export const generateMetadata = pageMetaGenerator;
-export const dynamic = 'force-dynamic';

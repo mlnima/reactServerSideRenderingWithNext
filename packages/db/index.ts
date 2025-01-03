@@ -22,10 +22,16 @@ import tagSchema from './src/schemas/tagSchema';
 import translateSchema from './src/schemas/translateSchema';
 import userSchema from './src/schemas/userSchema';
 import widgetSchema from './src/schemas/widgetSchema';
-
+//----------------------------------------------------------------------
+import {
+    isValidObjectId,
+    flatDocumentToObject,
+    flatArrayOdDocumentToObject
+} from './src/tools';
 
 export {
     connectToDatabase,
+
     actorSchema,
     categorySchema,
     chatroomMessageSchema,
@@ -49,4 +55,8 @@ export {
     translateSchema,
     userSchema,
     widgetSchema,
+
+    isValidObjectId,
+    flatDocumentToObject,
+    flatArrayOdDocumentToObject
 }

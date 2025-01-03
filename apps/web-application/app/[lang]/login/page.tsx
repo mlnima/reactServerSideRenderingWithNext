@@ -1,5 +1,5 @@
 import {AlternatesGenerators} from "@lib/alternatesCanonicalGenerator";
-import ClientSideLogic from "./components/ClientSideLogic";
+import LoginPageContent from "./components/LoginPageContent";
 import {IPageProps} from "@repo/typescript-types";
 import localDetector from "@lib/localDetector";
 
@@ -19,7 +19,7 @@ const loginPage =  () => {
         <div id={'content'} className={`page-no-sidebar`}>
             <main id={'primary'} className={'main loginPage'}>
                 <h1>Login</h1>
-                <ClientSideLogic/>
+                <LoginPageContent/>
             </main>
         </div>
     )

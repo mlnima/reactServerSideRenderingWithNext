@@ -15,16 +15,14 @@ import { Chatroom, ChatroomMessage, User } from '@repo/typescript-types';
 
 interface IProps {
     locale: string;
-    pageData: {
-        chatroom: Chatroom;
-        chatrooms: Chatroom[];
-    };
+    chatroom: Chatroom;
+    chatrooms: Chatroom[];
     dictionary: {
         [key: string]: string;
     };
 }
 
-const ChatroomPageContent: FC<IProps> = ({ dictionary, pageData, locale }) => {
+const ChatroomPageContent: FC<IProps> = ({ dictionary, locale,chatroom,chatrooms }) => {
     const [preference, setPreference] = useState<IPreference>({
         autoScroll: true,
         onlineUserListVisibility: false,
@@ -46,9 +44,9 @@ const ChatroomPageContent: FC<IProps> = ({ dictionary, pageData, locale }) => {
     useEffect(() => {
         // console.log(`iWantToJoinToAChatroom=> `,!isJoined.current , user?.loggedIn , !!pageData?.chatroom?._id)
         isJoined.current = false;
-        if (!isJoined.current && user?.loggedIn && !!pageData?.chatroom?._id) {
+        if (!isJoined.current && user?.loggedIn && !!chatroom?._id) {
             const userDataForJoiningRoom = {
-                chatroomId: pageData?.chatroom?._id,
+                chatroomId: chatroom?._id,
                 joiner: {
                     _id: user.userData?._id,
                     username: user.userData?.username,
@@ -59,9 +57,9 @@ const ChatroomPageContent: FC<IProps> = ({ dictionary, pageData, locale }) => {
         }
 
         if (!user?.loggedIn) {
-            socket.emit('iWantToPreviewAChatroom', { chatroomId: pageData?.chatroom?._id });
+            socket.emit('iWantToPreviewAChatroom', { chatroomId: chatroom?._id });
         }
-    }, [user?.loggedIn, pageData?.chatroom?._id, user?.socketId]);
+    }, [user?.loggedIn, chatroom?._id, user?.socketId]);
 
     useEffect(() => {
         const chatroomLocalStoragePreference = localStorage.getItem('chatroomPreference');
@@ -123,13 +121,13 @@ const ChatroomPageContent: FC<IProps> = ({ dictionary, pageData, locale }) => {
         setChatroomMessages(prevMessages => prevMessages.filter(message => message._id !== messageId));
         socket.emit('deleteThisMessageFromChatroom', {
             messageId,
-            chatroomId: pageData?.chatroom?._id,
+            chatroomId: chatroom?._id,
         });
     };
 
     const onNewUserJoinedHandler = ({ joiner, chatroomId }: INewUserJoinData) => {
         const isUserExist = chatroomUsers.some(user => user._id === joiner._id);
-        if (!isUserExist && chatroomId === pageData?.chatroom?._id) {
+        if (!isUserExist && chatroomId === chatroom?._id) {
             setChatroomUsers(prevUsers => [...prevUsers, joiner]);
 
             if (joiner.username !== 'Admin') {
@@ -180,7 +178,7 @@ const ChatroomPageContent: FC<IProps> = ({ dictionary, pageData, locale }) => {
 
         return () => {
             socket.emit('iLeftTheChatroom', {
-                chatroomId: pageData?.chatroom?._id,
+                chatroomId: chatroom?._id,
             });
 
             socket.off('aMessageDeletedFromChatroom', onAMessageWasDeleted);
@@ -204,16 +202,12 @@ const ChatroomPageContent: FC<IProps> = ({ dictionary, pageData, locale }) => {
         });
     };
 
-    if (!pageData?.chatroom?._id) {
-        return <Soft404 dictionary={dictionary} />;
-    }
-
     return (
         <div className={`chatroomPageContent chatroomPage${preference.isMaximized ? 'Maximized' : ''}`}>
             <ChatroomTopbar
-                chatrooms={pageData?.chatrooms}
+                chatrooms={chatrooms}
                 locale={locale}
-                chatroomId={pageData?.chatroom?._id}
+                chatroomId={chatroom._id}
                 preference={preference}
                 updatePreference={updatePreference}
                 setAutoScroll={setAutoScroll}
@@ -221,7 +215,7 @@ const ChatroomPageContent: FC<IProps> = ({ dictionary, pageData, locale }) => {
             />
 
             <ChatRoomMessageArea
-                chatroomId={pageData?.chatroom?._id}
+                chatroomId={chatroom._id}
                 onDeleteMessageHandler={onDeleteMessageHandler}
                 messageAreaRef={messageAreaRef}
                 autoScroll={autoScroll}
@@ -231,7 +225,7 @@ const ChatroomPageContent: FC<IProps> = ({ dictionary, pageData, locale }) => {
                 gettingOlderMessages={gettingOlderMessages}
             />
 
-            <ChatRoomTools dictionary={dictionary} chatroomId={pageData?.chatroom?._id} setAutoScroll={setAutoScroll} />
+            <ChatRoomTools dictionary={dictionary} chatroomId={chatroom._id} setAutoScroll={setAutoScroll} />
             {preference.onlineUserListVisibility && <ChatRoomOnlineUsersList chatroomUsers={chatroomUsers} />}
         </div>
     );

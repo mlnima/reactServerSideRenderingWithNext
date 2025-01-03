@@ -21,7 +21,7 @@ class ServerSideStore {
     }
 
     static getPostSettings(postType?: string) {
-        const { postSettings } = this.initialSettings.contentSettings || {};
+        const { postSettings } = this.initialSettings?.contentSettings || {};
         if (postType) {
             return postSettings?.[postType] || {};
         }
@@ -29,7 +29,7 @@ class ServerSideStore {
     }
 
     static getContentPerPage() {
-        return this.initialSettings.contentSettings?.contentPerPage || 20;
+        return this.initialSettings?.contentSettings?.contentPerPage || 20;
     }
 
     // async connectToDatabase(connectorName?: string) {

@@ -3,7 +3,8 @@ import {User} from "./User";
 
 interface Base {
     _id?: string,
-    createdAt?: Date,
+    createdAt: Date,
+    updatedAt ?: string
     likes?: number,
     disLikes?: number,
     body: string,
@@ -12,15 +13,15 @@ interface Base {
 
 export interface Comment extends Base {
     author:  User,
-    onDocumentId:  Post,
+    onDocumentId:  string,
     _id:  string,
-    reply?: [Comment],
+    reply?: [Comment]
 }
 
 export interface CommentRaw extends Base {
     onDocumentId: string ,
     author: string ,
-    reply?: [string],
+    reply?: [string]
 }
 
 export interface NewComment extends Base {

@@ -18,9 +18,9 @@ export const autoLoginAction = createAsyncThunk<
 >('user/autoLoginAction', async ({ fields }, thunkAPI) => {
     if (localStorage.getItem('wt')) {
         try {
-            thunkAPI.dispatch(loading(true));
+            //thunkAPI.dispatch(loading(true));
             const response = await commonAPIRequestGetSignedInUserData(fields);
-            thunkAPI.dispatch(loading(false));
+           // thunkAPI.dispatch(loading(false));
             return response.data?.userData;
         } catch (error) {
             //@ts-ignore

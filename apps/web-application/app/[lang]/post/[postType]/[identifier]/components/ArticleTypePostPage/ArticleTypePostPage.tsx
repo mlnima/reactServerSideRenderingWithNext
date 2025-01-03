@@ -1,74 +1,73 @@
-import React, {FC} from "react";
-import {Post} from "@repo/typescript-types";
-import PostTitle from "../PostTitle/PostTitle";
-import PostDescription from "../PostDescription/PostDescription";
-import PostMetasRenderer from "../PostMetasRenderer/PostMetasRenderer";
-import WidgetsRenderer from "@components/widgets/widgetRenderer/WidgetsRenderer";
-import {Widget} from "@repo/typescript-types";
-import ActionButtons from "../ActionButtons/ActionButtons";
-import './ArticleTypePostPage.styles.scss'
-import RelatedPostsRenderer from "../RelatedPostsRenderer/RelatedPostsRenderer";
-import Comments from "../Comments/Comments";
+import React, { FC } from 'react';
+import { Post } from '@repo/typescript-types';
+import PostTitle from '../PostTitle/PostTitle';
+import PostDescription from '../PostDescription/PostDescription';
+import PostMetasRenderer from '../PostMetasRenderer/PostMetasRenderer';
+import { Widget } from '@repo/typescript-types';
+import ActionButtons from '../ActionButtons/ActionButtons';
+import './ArticleTypePostPage.styles.scss';
 
 interface IProps {
-    post: Post,
-    views: number,
-    likes: number,
-    disLikes: number,
-    locale: string,
-    hasSidebar?: string,
-    dictionary: {
-        [key: string]: string
-    },
-    widgets: Widget[],
-    relatedPosts: Post[],
+  post: Post;
+  views: number;
+  likes: number;
+  disLikes: number;
+  locale: string;
+  hasSidebar?: string;
+  dictionary: {
+    [key: string]: string;
+  };
+  widgets: Widget[];
+  relatedPosts: Post[];
 }
 
-const ArticleTypePostPage: FC<IProps> =
-    ({
-         widgets,
-         post,
-         locale,
-         dictionary,
-         hasSidebar,
-         relatedPosts,
-         views,
-         likes,
-         disLikes
-     }) => {
+const ArticleTypePostPage: FC<IProps> = ({
+  post,
+  locale,
+  dictionary,
+  views,
+  likes,
+  disLikes,
+}) => {
+  return (
+    <>
+      <div className={'entry-header'}>
+        <div className="entry-header-data">
+          <PostTitle
+            title={post?.translations?.[locale]?.title ?? post?.title}
+          />
+        </div>
+      </div>
 
-        return (
-            <div id={'primary'} className='post-page'>
-                <main id={'main'}>
-                    <div className={'entry-header'}>
-                        <div className='entry-header-data'>
-                            <PostTitle title={post?.translations?.[locale]?.title ?? post?.title}/>
-                        </div>
-                    </div>
-
-                    <div className="entry-content">
-                        <PostDescription description={post?.translations?.[locale]?.description ?? post?.description}/>
-                        <div className='entry-header-actions'>
-                            <ActionButtons rating={true}
-                                           dictionary={dictionary}
-                                           likes={likes}
-                                           disLikes={disLikes}
-                                           views={views}
-                                           _id={post._id}/>
-                        </div>
-                        <PostMetasRenderer type='categories' metas={post.categories} dictionary={dictionary}/>
-                        <PostMetasRenderer type='tags' metas={post.tags} dictionary={dictionary}/>
-                    </div>
-
-                    {post?.status === 'published' && <Comments dictionary={dictionary} postId={post?._id}/>}
-                    <RelatedPostsRenderer locale={locale} relatedPosts={relatedPosts} dictionary={dictionary}/>
-                    <div className='under-post-widget-area'>
-                        <WidgetsRenderer widgets={widgets} position='underPost' hasSidebar={hasSidebar} locale={locale}
-                                         dictionary={dictionary}/>
-                    </div>
-                </main>
-            </div>
-        )
-    }
+      <div className="entry-content">
+        <PostDescription
+          description={
+            post?.translations?.[locale]?.description ?? post?.description
+          }
+        />
+        <div className="entry-header-actions">
+          <ActionButtons
+            rating={true}
+            dictionary={dictionary}
+            likes={likes}
+            disLikes={disLikes}
+            views={views}
+            _id={post._id}
+          />
+        </div>
+        <PostMetasRenderer
+          type="categories"
+          metas={post.categories}
+          dictionary={dictionary}
+        />
+        <PostMetasRenderer
+          type="tags"
+          metas={post.tags}
+          dictionary={dictionary}
+        />
+      </div>
+    </>
+  );
+};
 
 export default ArticleTypePostPage;

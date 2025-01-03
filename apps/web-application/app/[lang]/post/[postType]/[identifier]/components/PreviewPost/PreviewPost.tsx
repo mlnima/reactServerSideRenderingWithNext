@@ -28,11 +28,11 @@ interface IProps {
     dictionary: {
         [key: string]: string
     },
-    widgetsData: {
+
         widgets: {
             [key: string]: Widget[]
         }
-    }
+
     relatedPosts: Post[],
 }
 
@@ -43,7 +43,7 @@ const PreviewPost: FC<IProps> =
          dictionary,
          relatedPosts,
          sidebar,
-         widgetsData,
+         widgets,
          postType,
          views,
          likes,
@@ -60,7 +60,7 @@ const PreviewPost: FC<IProps> =
                 <Csr>
                 {
                     postType === 'video' ?
-                        <VideoTypePostPage widgets={widgetsData.widgets?.['underPost']}
+                        <VideoTypePostPage widgets={widgets?.['underPost']}
                                            post={post}
                                            views={views}
                                            likes={likes}
@@ -70,7 +70,7 @@ const PreviewPost: FC<IProps> =
                                            dictionary={dictionary}
                                            locale={locale}/> :
                         postType === 'article' ?
-                            <ArticleTypePostPage widgets={widgetsData.widgets?.['underPost']}
+                            <ArticleTypePostPage widgets={widgets?.['underPost']}
                                                  post={post}
                                                  views={views}
                                                  likes={likes}
@@ -79,7 +79,7 @@ const PreviewPost: FC<IProps> =
                                                  relatedPosts={relatedPosts}
                                                  dictionary={dictionary} locale={locale}/> :
                             postType === 'promotion' ?
-                                <PromotionTypePostPage widgets={widgetsData.widgets?.['underPost']}
+                                <PromotionTypePostPage widgets={widgets?.['underPost']}
                                                        post={post}
                                                        views={views}
                                                        likes={likes}
@@ -88,7 +88,7 @@ const PreviewPost: FC<IProps> =
                                                        relatedPosts={relatedPosts}
                                                        dictionary={dictionary}
                                                        locale={locale}/> : postType === 'learn' ?
-                                    <LearnTypePostPage widgets={widgetsData.widgets?.['underPost']}
+                                    <LearnTypePostPage widgets={widgets?.['underPost']}
                                                        post={post}
                                                        views={views}
                                                        likes={likes}

@@ -1,6 +1,6 @@
 import metaSchema from '@schemas/metaSchema';
 import { metaFieldsRequestForCard } from '@repo/data-structures';
-import {multiQueryUniquer} from "@util/queryUtil";
+import { multiQueryUniquer } from '@util/queryUtil';
 import GlobalStore from "@store/GlobalStore";
 
 interface FindMetasQueryTypes {

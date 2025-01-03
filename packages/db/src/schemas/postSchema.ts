@@ -1,6 +1,20 @@
 // @ts-nocheck
 import mongoose from 'mongoose'
 import {postTypes, videoQualities} from "@repo/data-structures";
+import mongooseLeanVirtuals from "mongoose-lean-virtuals";
+import { postFieldRequestForCards } from '@repo/data-structures';
+
+interface IFindRelatedPostsByField {
+    currentPostId: string,
+    relatedByField: string,
+    limit: number
+}
+
+interface IFindRelatedPosts {
+    post: any;  // You can replace 'any' with the actual post document type
+    relatedByFields: string[];
+    limit?: number;
+}
 
 const downloadLinks = new mongoose.Schema({
     title: String,
@@ -53,9 +67,9 @@ const postSchema = new mongoose.Schema({
     currency: String,
     iframe: String,
     status: {
-        type:String,
-        required:true,
-        default:'draft'
+        type: String,
+        required: true,
+        default: 'draft'
     },
     posts: [{type: mongoose.Schema.Types.ObjectId, ref: 'post'}],
     comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'comment'}],
@@ -87,15 +101,19 @@ const postSchema = new mongoose.Schema({
 
 }, {timestamps: true});
 
-interface IFindRelatedPostsByField{
-    currentPostId:string,
-    relatedByField:string,
-    limit:number
-}
 
-postSchema.statics.findRelatedPostsByField = async function ({currentPostId, relatedByField, limit=8}:IFindRelatedPostsByField) {
+postSchema.plugin(mongooseLeanVirtuals);
+
+
+
+postSchema.statics.findRelatedPostsByField = async function (
+    {
+        currentPostId,
+        relatedByField,
+        limit = 8
+    }: IFindRelatedPostsByField) {
     try {
-        if (!['actors', 'categories', 'tags','author'].includes(relatedByField)) {
+        if (!['actors', 'categories', 'tags', 'author'].includes(relatedByField)) {
             return [];
         }
 
@@ -109,18 +127,18 @@ postSchema.statics.findRelatedPostsByField = async function ({currentPostId, rel
             [relatedByField]: {$in: post[relatedByField]},
             _id: {$ne: currentPostId},
             status: 'published'
-        }).sort({updatedAt: -1, createdAt: -1}).limit(limit);
-    }catch (error){
-        console.log('findRelatedPosts=> ',error)
+        })
+            .sort({updatedAt: -1, createdAt: -1})
+            .limit(limit)
+            .lean();
+    } catch (error) {
+        console.log('findRelatedPosts=> ', error)
         return []
     }
 };
 
-interface IFindRelatedPosts {
-    post: any;  // You can replace 'any' with the actual post document type
-    relatedByFields: string[];
-    limit?: number;
-}
+
+
 //*****************Author will be added  later******************
 postSchema.statics.findRelatedPosts = async function ({post, relatedByFields, limit = 8}: IFindRelatedPosts) {
     try {
@@ -132,12 +150,20 @@ postSchema.statics.findRelatedPosts = async function ({post, relatedByFields, li
             const remainingLimit = limit - relatedPosts.length;  // Calculate remaining posts needed
 
             const postsByField = await this.find({
-                [field]: { $in: post[field] },
-                _id: { $ne: post._id, $nin: Array.from(seenPosts) },  // Exclude seen posts
+                [field]: {$in: post[field]},
+                _id: {$ne: post._id, $nin: Array.from(seenPosts)},  // Exclude seen posts
                 status: 'published'
             })
-                .sort({ updatedAt: -1, createdAt: -1 })
-                .limit(remainingLimit);
+                .select(postFieldRequestForCards)
+                .sort({updatedAt: -1, createdAt: -1})
+                .limit(remainingLimit)
+                .lean({ virtuals: true, transform: (doc) => {
+                        if (doc?._id) {
+                            doc._id = doc._id.toString();
+                        }
+                        return doc;
+                    }})
+            //.lean({virtuals: true});
 
             // Add the IDs to seenPosts and the posts to relatedPosts
             for (const p of postsByField) {
@@ -152,12 +178,17 @@ postSchema.statics.findRelatedPosts = async function ({post, relatedByFields, li
         const remainingLimit = limit - relatedPosts.length;
         if (remainingLimit > 0) {
             const fallbackPosts = await this.find({
-                _id: { $ne: post._id, $nin: Array.from(seenPosts) },
+                _id: {$ne: post._id, $nin: Array.from(seenPosts)},
                 status: 'published'
             })
-                .sort({ updatedAt: -1, createdAt: -1 })
-                .limit(remainingLimit);
-
+                .sort({updatedAt: -1, createdAt: -1})
+                .limit(remainingLimit).lean()
+                .lean({ virtuals: true, transform: (doc) => {
+                        if (doc._id) {
+                            doc._id = doc._id.toString();
+                        }
+                        return doc;
+                    }})
             relatedPosts = [...relatedPosts, ...fallbackPosts];
         }
 
@@ -178,22 +209,16 @@ interface IFindPosts {
     limit?: number;
 }
 
-postSchema.statics.findPosts = async  ({
-                                           locale,
-                                           postType,
-                                           metaId,
-                                           size,
-                                           limit,
-                                           sort
-}: IFindPosts) =>{
-
-}
-
-
-
-
-
-
+// postSchema.statics.findPosts = async ({
+//                                           locale,
+//                                           postType,
+//                                           metaId,
+//                                           size,
+//                                           limit,
+//                                           sort
+//                                       }: IFindPosts) => {
+//
+// }
 
 
 export default mongoose.model("post", postSchema);

@@ -4,7 +4,7 @@ import commentSchema from '@schemas/commentSchema';
 import postSchema from '@schemas/postSchema';
 import { mongoIdValidator } from '@util/data-validators';
 import { reqQueryToMongooseOptions } from '@util/database-util';
-import {multiQueryUniquer} from "@util/queryUtil";
+import { multiQueryUniquer } from '@util/queryUtil';
 
 interface RequestCommentData {
     body: string;
@@ -71,7 +71,7 @@ class CommentController {
 
             if (mongoIdValidator(onDocument) && onDocument) {
                 await commentSchema
-                    .find({ onDocument }, {}, {
+                    .find({ onDocumentId : onDocument }, {}, {
                         //@ts-ignore
                             skip,
                             limit,

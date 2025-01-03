@@ -43,7 +43,6 @@ const VideoPostCard: FC<IProps> = ({
     settings,
 }) => {
     // const rating = post.likes || post.disLikes ? ratingCalculator(post?.likes, post?.disLikes) : null
-    // console.log('post=> ',post)
     return (
         <article className={`postCard postCardVideo${isSidebar ? ' postCardSidebar' : ''}`}>
             <div className={'cardMedia'}>
@@ -58,7 +57,7 @@ const VideoPostCard: FC<IProps> = ({
                         postType={'video'}
                         videoTrailerUrl={post?.videoTrailerUrl}
                         submitPostView={false}
-                        postId={post?._id}
+                        postId={post?._id.toString()}
                         mediaAlt={post?.translations?.[locale as string]?.title ?? post?.title}
                         index={index}
                     />

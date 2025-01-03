@@ -1,4 +1,5 @@
-// @ts-nocheck
+
+import { Schema } from "mongoose";
 declare module '@repo/api-requests';
 declare module '@repo/shared-util';
 declare module '@repo/data-structures';
@@ -7,6 +8,21 @@ declare module 'tsconfig';
 declare module '@repo/ui';
 declare module '@repo/shared-style';
 declare module 'simple-youtube-api';
+
+declare function mongooseLeanVirtuals(schema: Schema): void;
+
+declare namespace mongooseLeanVirtuals {}
+
+export = mongooseLeanVirtuals;
+
+
+
+
+
+
+
+
+
 
 // declare module 'axios' {
 //     export interface AxiosResponse<T = any> {

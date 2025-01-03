@@ -39,26 +39,10 @@ const nextConfig = {
         ignoreDuringBuilds: true,
     },
     experimental: {
-        // staleTimes: {
-        //     dynamic: 30,
-        // },
+        dynamicIO: true,
         nextScriptWorkers: true,
-        // serverActions: true,
-        // turbo: {
-        //     rules: {
-        //         // Option format
-        //         '*.md': [
-        //             {
-        //                 loader: '@mdx-js/loader',
-        //                 options: {
-        //                     format: 'md',
-        //                 },
-        //             },
-        //         ],
-        //         // Option-less format
-        //         '*.mdx': ['@mdx-js/loader'],
-        //     },
-        // },
+        esmExternals: "loose", // <-- add this
+        serverComponentsExternalPackages: ["mongoose"]
     },
     rewrites,
     async redirects() {

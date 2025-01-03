@@ -1,8 +1,4 @@
 import React from "react";
-import {fetchMetas} from "@lib/fetch-requests/fetchPosts";
-import {fetchSettings} from "@lib/fetch-requests/fetchSettings";
-import {fetchWidgets} from "@lib/fetch-requests/fetchWidgets";
-import {i18n} from "../../../i18n-config";
 import {getDictionary} from "../../../get-dictionary";
 import WidgetsRenderer from "@components/widgets/widgetRenderer/WidgetsRenderer";
 import SidebarWidgetAreaRenderer
@@ -12,6 +8,9 @@ import ActorsPageContentRenderer from "@components/metas/ActorsPageContentRender
 import './page.styles.scss';
 import {PageParams, PageSearchParams} from "@repo/typescript-types";
 import localDetector from "@lib/localDetector";
+import {getWidgets} from "@lib/database/operations/widgets";
+import {getMetas} from "@lib/database/operations/metas";
+import {getSettings} from "@lib/database/operations/settings";
 
 interface IProps {
     params: PageParams,
@@ -23,32 +22,32 @@ const actorsPage = async (props: IProps) => {
     const params = await props.params;
     const locale = localDetector(params.lang);
     const dictionary = await getDictionary(locale);
-    const settingsData = await fetchSettings({requireSettings: ['actorsPageSettings']});
-    const sidebar = settingsData?.settings?.actorsPageSettings?.sidebar;
 
-    const widgetsData = await fetchWidgets({
-        widgets: [
+    const { actorsPageSettings } = await getSettings(['actorsPageSettings']);
+    const sidebar = actorsPageSettings?.sidebar;
+
+    const widgets = await getWidgets(
+        [
             'actorsPageTop',
             'actorsPageLeftSidebar',
             'actorsPageBottom',
             'actorsPageRightSidebar'
         ],
         locale
-    });
+    );
 
     const currentPageQuery = searchParams?.page;
     const currentPage = (currentPageQuery && typeof currentPageQuery === 'string') ?
         parseInt(currentPageQuery, 10) : 1
 
-    const metasData = await fetchMetas({
-        queryObject: {
-            metaType: 'actors',
-            sort: searchParams?.sort || undefined,
-            page: currentPage,
-            size: searchParams?.size  ,
-            startWith: searchParams?.startWith || undefined
-        },
-        locale
+
+    const { metas, totalCount } = await getMetas({
+        locale,
+        startWith: Array.isArray(searchParams?.startWith)
+            ? searchParams?.startWith[0]
+            : searchParams?.startWith,
+        metaType: 'actors',
+        page: currentPage,
     });
 
     return (
@@ -57,24 +56,24 @@ const actorsPage = async (props: IProps) => {
             <main id={'primary'} className={'main actorsPage'}>
                 <WidgetsRenderer dictionary={dictionary}
                                  locale={locale}
-                                 widgets={widgetsData.widgets?.['actorsPageTop']}
+                                 widgets={widgets?.['actorsPageTop']}
                                  position={'actorsPageTop'}/>
 
                 <ActorsPageContentRenderer renderPagination
-                                           totalCount={metasData?.totalCount}
+                                           totalCount={totalCount || 0}
                                            currentPage={currentPage}
                                            locale={locale}
                                            dictionary={dictionary}
-                                           metas={metasData?.metas}/>
+                                           metas={metas || []}/>
 
 
                 <WidgetsRenderer dictionary={dictionary}
                                  locale={locale}
-                                 widgets={widgetsData.widgets?.['actorsPageBottom']}
+                                 widgets={widgets?.['actorsPageBottom']}
                                  position={'actorsPageBottom'}/>
             </main>
-            <SidebarWidgetAreaRenderer leftSideWidgets={widgetsData.widgets?.['actorsPageLeftSidebar']}
-                                       rightSideWidgets={widgetsData.widgets?.['actorsPageRightSidebar']}
+            <SidebarWidgetAreaRenderer leftSideWidgets={widgets?.['actorsPageLeftSidebar']}
+                                       rightSideWidgets={widgets?.['actorsPageRightSidebar']}
                                        dictionary={dictionary}
                                        locale={locale}
                                        sidebar={sidebar || 'no'}
@@ -86,4 +85,3 @@ const actorsPage = async (props: IProps) => {
 export default actorsPage;
 
 export const generateMetadata = actorsMetaGenerator;
-export const dynamic = 'force-dynamic';

@@ -144,7 +144,7 @@ export const getMonthName = monthNumber => {
 };
 
 export const textContentReplacer = (textString, replaces) => {
-    const now = new Date();
+    const now = new Date(performance.timeOrigin + performance.now());
     try {
         return textString
             .replaceAll('__NAME', replaces?.name || '')
@@ -156,3 +156,18 @@ export const textContentReplacer = (textString, replaces) => {
         return textString;
     }
 };
+
+// export const textContentReplacer = (textString, replaces) => {
+//     const now = performance.timeOrigin + performance.now();
+//     try {
+//         return textString
+//             .replaceAll('__NAME', replaces?.name || '')
+//             .replaceAll('__SITE_NAME', replaces?.siteName || '')
+//             .replaceAll('__COUNT', replaces?.count || '')
+//             .replaceAll('__YEAR', now.getFullYear().toString())
+//             .replaceAll('__MONTH', getMonthName(now.getMonth()));
+//     } catch (err) {
+//         console.log('\x1b[33m%s\x1b[0m','textString => ', err);
+//         return textString;
+//     }
+// };

@@ -33,7 +33,7 @@ const uploader = async (props: IPageProps) => {
 
 export default uploader;
 
-export const dynamic = 'force-dynamic';
+
 export const generateMetadata = async () => {
     return {
         title: 'Edit Post',

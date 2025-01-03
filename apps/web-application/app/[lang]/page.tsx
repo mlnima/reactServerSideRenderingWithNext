@@ -1,43 +1,44 @@
-import { fetchSettings } from '@lib/fetch-requests/fetchSettings';
-import { fetchWidgets } from '@lib/fetch-requests/fetchWidgets';
 import MainWidgetArea from '@components/widgets/widgetAreas/MainWidgetArea';
 import { getDictionary } from '../../get-dictionary';
 import './page.styles.scss';
 import SidebarWidgetAreaRenderer from '@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer';
 import {IPageProps} from "@repo/typescript-types";
 import localDetector from "@lib/localDetector";
+import {getSettings} from "@lib/database/operations/settings";
+import {getWidgets} from "@lib/database/operations/widgets";
+import connectToDatabase from "@lib/database/databaseConnection";
+
+
 
 const homePage = async (props: IPageProps) => {
+
     const params = await props.params;
     const locale = localDetector(params.lang);
     const dictionary = await getDictionary(locale);
-    const settingsData = await fetchSettings({ requireSettings: ['homePageSettings'] });
+    const { homePageSettings } = await getSettings(['homePageSettings']);
 
-    const widgetsData = await fetchWidgets({
-        widgets: ['homePageLeftSidebar', 'homePageRightSidebar', 'home'],
-        locale,
-        revalidate: 86400,
-    });
-
-    const sidebar = settingsData?.settings?.homePageSettings?.sidebar;
+    const widgets = await getWidgets(
+        ['homePageLeftSidebar', 'homePageRightSidebar', 'home'],
+        locale
+    );
 
     return (
-        <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
+        <div id={'content'} className={`page-${homePageSettings?.sidebar || 'no'}-sidebar`}>
             <main id={'primary'} className={'main homePage'}>
                 <MainWidgetArea
                     dictionary={dictionary}
                     locale={locale}
-                    widgets={widgetsData?.widgets?.home}
+                    widgets={widgets?.home}
                     position={'home'}
                 />
             </main>
 
             <SidebarWidgetAreaRenderer
-                leftSideWidgets={widgetsData.widgets?.['homePageLeftSidebar']}
-                rightSideWidgets={widgetsData.widgets?.['homePageRightSidebar']}
+                leftSideWidgets={widgets?.['homePageLeftSidebar']}
+                rightSideWidgets={widgets?.['homePageRightSidebar']}
                 dictionary={dictionary}
                 locale={locale}
-                sidebar={sidebar || 'no'}
+                sidebar={homePageSettings?.sidebar || 'no'}
                 position={'postPage'}
             />
         </div>

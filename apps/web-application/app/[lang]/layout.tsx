@@ -3,8 +3,6 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 import ServerSideStore from '@store/ServerSideStore';
 config.autoAddCss = false;
 import '@components/global/styles/global.styles.scss';
-import { fetchSettings } from '@lib/fetch-requests/fetchSettings';
-import { fetchWidgets } from '@lib/fetch-requests/fetchWidgets';
 import ReduxProvider from '@store/ReduxProvider';
 import { getDictionary } from '../../get-dictionary';
 import GlobalCustomStyles from '@components/global/styles/GlobalCustomStyles';
@@ -29,96 +27,102 @@ import UserConfigMenu from '@components/global/UserConfigMenu/UserConfigMenu';
 import LayoutViewportGenerator from '@components/LayoutMetaGenerator/LayoutViewportGenerator';
 import CustomScripts from '@components/CustomScripts';
 import CustomHeadTagsInitializer from '@components/CustomHeadTagsInitializer';
-import {ILayoutProps} from "@repo/typescript-types";
-import localDetector from "@lib/localDetector";
-
+import { ILayoutProps } from '@repo/typescript-types';
+import localDetector from '@lib/localDetector';
+import { getWidgets } from '@lib/database/operations/widgets';
+import { getSettings } from '@lib/database/operations/settings';
+import connectToDatabase from "@lib/database/databaseConnection";
 
 // export async function generateStaticParams() {
 //     return i18n.locales.map((lng: string) => ({ lng }));
 // }
 
-const RootLayout = async (props:ILayoutProps) => {
-    const params = await props.params;
-    const locale = localDetector(params.lang);
-    const dictionary = await getDictionary(locale);
 
-    const initialSettingsData = await fetchSettings({
-        requireSettings: ['initialSettings'],
-    });
 
-    const initialSettings = initialSettingsData?.settings?.initialSettings;
-    ServerSideStore.setInitialSettings(initialSettings);
+const RootLayout = async (props: ILayoutProps) => {
 
-    const staticWidgetsData = await fetchWidgets({
-        widgets: ['footer', 'header', 'topBar', 'navigation'],
-        locale,
-    });
+  const params = await props.params;
+  const locale = localDetector(params.lang);
+  const dictionary = await getDictionary(locale);
 
-    //dir={rtlLanguages.includes(locale) ? 'rtl' : 'ltr'}
+  const { initialSettings } = await getSettings(['initialSettings']);
 
-    const widgetAreasSharedProps = {
-        locale,
-        dictionary,
-    };
+  ServerSideStore.setInitialSettings(initialSettings);
 
-    return (
-        <html lang={locale}>
-            <body className={`dark `} style={{}}>
-                <ReduxProvider>
-                    <div className="layout">
-                        {initialSettings?.layoutSettings?.topbar && (
-                            <TopbarWidgetArea
-                                {...widgetAreasSharedProps}
-                                widgets={staticWidgetsData?.widgets?.topBar}
-                            />
-                        )}
-                        {initialSettings?.layoutSettings?.header && (
-                            <HeaderWidgetArea
-                                {...widgetAreasSharedProps}
-                                widgets={staticWidgetsData?.widgets?.header}
-                            />
-                        )}
-                        {initialSettings?.layoutSettings?.navigation && (
-                            <NavigationWidgetArea
-                                {...widgetAreasSharedProps}
-                                widgets={staticWidgetsData?.widgets?.navigation}
-                            />
-                        )}
-                        <div id={'page'} className={'App'}>
-                            {props.children}
-                        </div>
-                        {initialSettings?.layoutSettings?.footer && (
-                            <FooterWidgetArea
-                                {...widgetAreasSharedProps}
-                                widgets={staticWidgetsData?.widgets?.footer}
-                            />
-                        )}
-                    </div>
-                    <BackgroundFilterWholeScreen />
-                    <CookiesInformerBar />
-                    <UserAutoLogin />
-                    <GoogleAnalytics googleAnalyticsId={initialSettings?.headDataSettings?.googleAnalyticsId} />
-                    <LoadingComponent />
-                    <AlertBox dictionary={dictionary} />
-                    <BackToTopButton />
-                    <LoginRegisterPopup locale={locale} dictionary={dictionary} />
-                    <StyledComponentsRegistry>
-                        <GlobalCustomStyles
-                            primaryModeColors={initialSettings?.layoutSettings?.primaryModeColors}
-                            customStyles={initialSettings?.layoutSettings?.customStyles}
-                        />
-                    </StyledComponentsRegistry>
-                    <StoreDataInitializer initialSettings={initialSettings} />
-                    <WebSocketInitializer />
-                    {/*<MediaCall/>*/}
-                    <KeysListener />
-                    <UserConfigMenu locale={locale} dictionary={dictionary} />
-                    <CustomHeadTagsInitializer />
-                    <CustomScripts />
-                </ReduxProvider>
-            </body>
-        </html>
-    );
+  const widgets = await getWidgets(
+    ['footer', 'header', 'topBar', 'navigation'],
+    locale
+  );
+
+  const widgetAreasSharedProps = {
+    locale,
+    dictionary,
+  };
+
+  return (
+    <html lang={locale}>
+      <body className={`dark `} style={{}}>
+        <ReduxProvider>
+          <div className="layout">
+            {initialSettings?.layoutSettings?.topbar && (
+              <TopbarWidgetArea
+                {...widgetAreasSharedProps}
+                widgets={widgets?.topBar}
+              />
+            )}
+            {initialSettings?.layoutSettings?.header && (
+              <HeaderWidgetArea
+                {...widgetAreasSharedProps}
+                widgets={widgets?.header}
+              />
+            )}
+            {initialSettings?.layoutSettings?.navigation && (
+              <NavigationWidgetArea
+                {...widgetAreasSharedProps}
+                widgets={widgets?.navigation}
+              />
+            )}
+            <div id={'page'} className={'App'}>
+              {props.children}
+            </div>
+            {initialSettings?.layoutSettings?.footer && (
+              <FooterWidgetArea
+                {...widgetAreasSharedProps}
+                widgets={widgets?.footer}
+              />
+            )}
+          </div>
+          <BackgroundFilterWholeScreen />
+          <CookiesInformerBar />
+          <UserAutoLogin />
+          <GoogleAnalytics
+            googleAnalyticsId={
+              initialSettings?.headDataSettings?.googleAnalyticsId
+            }
+          />
+          <LoadingComponent />
+          <AlertBox dictionary={dictionary} />
+          <BackToTopButton />
+          <LoginRegisterPopup locale={locale} dictionary={dictionary} />
+          <StyledComponentsRegistry>
+            <GlobalCustomStyles
+              primaryModeColors={
+                initialSettings?.layoutSettings?.primaryModeColors
+              }
+              customStyles={initialSettings?.layoutSettings?.customStyles}
+            />
+          </StyledComponentsRegistry>
+          <StoreDataInitializer initialSettings={initialSettings} />
+          <WebSocketInitializer />
+          {/*<MediaCall/>*/}
+          <KeysListener />
+          <UserConfigMenu locale={locale} dictionary={dictionary} />
+          <CustomHeadTagsInitializer />
+          <CustomScripts />
+        </ReduxProvider>
+      </body>
+    </html>
+  );
 };
 
 export default RootLayout;
@@ -127,4 +131,3 @@ export const generateMetadata = LayoutMetaGenerator;
 
 export const generateViewport = LayoutViewportGenerator;
 // export const runtime = 'nodejs';
-export const dynamic = 'force-dynamic';

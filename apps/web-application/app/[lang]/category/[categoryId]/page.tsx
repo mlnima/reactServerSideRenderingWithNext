@@ -1,8 +1,4 @@
-import { fetchPosts } from '@lib/fetch-requests/fetchPosts';
-import { fetchSettings } from '@lib/fetch-requests/fetchSettings';
-import { fetchWidgets } from '@lib/fetch-requests/fetchWidgets';
 import SidebarWidgetAreaRenderer from '@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer';
-import { i18n } from '@i18nConfig';
 import { getDictionary } from '../../../../get-dictionary';
 import WidgetsRenderer from '@components/widgets/widgetRenderer/WidgetsRenderer';
 import PostPage from '@components/PostsPage/PostsPage';
@@ -10,9 +6,12 @@ import categoryMetaGenerator from './components/categoryMetaGenerator/categoryMe
 import MetaAdminQuickAccessBar from '@components/metas/MetaAdminQuickAccessBar';
 import PostsPageInfo from '@components/PostsPage/PostsPageInfo/PostsPageInfo';
 import Soft404 from '@components/Soft404/Soft404';
-import { mongoIdValidatorByRegex } from '@repo/shared-util';
 import { PageParams, PageSearchParams } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
+import {isValidObjectId} from '@repo/db'
+import {getSettings} from "@lib/database/operations/settings";
+import {getWidgets} from "@lib/database/operations/widgets";
+import {getPosts} from "@lib/database/operations/posts";
 
 interface IProps {
     params: PageParams;
@@ -22,37 +21,30 @@ interface IProps {
 const CategoryPage = async (props: IProps) => {
     const searchParams = await props.searchParams;
     const params = await props.params;
-
     const locale = localDetector(params.lang);
     const dictionary = await getDictionary(locale);
 
-    if (!mongoIdValidatorByRegex(params?.categoryId)) {
+    if (!isValidObjectId(params?.categoryId)) {
         return <Soft404 dictionary={dictionary} />;
     }
+    const { categoryPageSettings } = await getSettings(['categoryPageSettings']);
 
-    const settingsData = await fetchSettings({ requireSettings: ['categoryPageSettings'] });
-    const sidebar = settingsData?.settings?.categoryPageSettings?.sidebar;
+    const sidebar = categoryPageSettings?.sidebar;
+    // const sidebar = 'both';
 
-    const widgetsData = await fetchWidgets({
-        widgets: ['categoryPageTop', 'categoryPageLeftSidebar', 'categoryPageBottom', 'categoryPageRightSidebar'],
-        locale,
-    });
+    const widgets = await getWidgets(['categoryPageTop', 'categoryPageLeftSidebar', 'categoryPageBottom', 'categoryPageRightSidebar'], locale);
 
     const currentPageQuery = searchParams?.page;
     const currentPage = currentPageQuery && typeof currentPageQuery === 'string' ? parseInt(currentPageQuery, 10) : 1;
 
-    const postsData = await fetchPosts({
-        queryObject: {
-            sort: searchParams?.sort,
-            lang: locale,
-            metaId: params?.categoryId,
-            page: currentPage,
-            size: searchParams?.size,
-        },
+    const {meta,posts,totalCount} = await getPosts({
         locale,
-    });
+        metaId: params?.categoryId,
+        page: currentPageQuery && typeof currentPageQuery === 'string' ? parseInt(currentPageQuery, 10) : 1
+    })
 
-    if (!!params?.categoryId && !postsData?.meta) {
+   // console.log('\x1b[33m%s\x1b[0m','posts[0] => ',typeof posts[0]._id);
+    if (!!params?.categoryId && !meta) {
         return <Soft404 dictionary={dictionary} />;
     }
 
@@ -62,34 +54,34 @@ const CategoryPage = async (props: IProps) => {
                 {params.categoryId && <MetaAdminQuickAccessBar metaId={params?.categoryId} />}
 
                 <PostsPageInfo
-                    title={postsData?.meta?.translations?.[locale]?.name ?? postsData?.meta?.name}
-                    description={postsData?.meta?.translations?.[locale]?.description ?? postsData?.meta?.description}
+                    title={meta?.translations?.[locale]?.name ?? meta?.name}
+                    description={meta?.translations?.[locale]?.description ?? meta?.description}
                 />
                 <WidgetsRenderer
                     dictionary={dictionary}
                     locale={locale}
-                    widgets={widgetsData.widgets?.['categoryPageTop']}
+                    widgets={widgets?.['categoryPageTop']}
                     position={'categoryPageTop'}
                 />
                 <PostPage
                     renderPagination
-                    posts={postsData?.posts}
+                    posts={posts || []}
                     locale={locale}
                     dictionary={dictionary}
-                    totalCount={postsData?.totalCount}
+                    totalCount={totalCount || 0}
                     currentPage={currentPage}
                 />
                 <WidgetsRenderer
                     dictionary={dictionary}
                     locale={locale}
-                    widgets={widgetsData.widgets?.['categoryPageBottom']}
+                    widgets={widgets?.['categoryPageBottom']}
                     position={'categoryPageBottom'}
                 />
             </main>
 
             <SidebarWidgetAreaRenderer
-                leftSideWidgets={widgetsData.widgets?.['categoryPageLeftSidebar']}
-                rightSideWidgets={widgetsData.widgets?.['categoryPageRightSidebar']}
+                leftSideWidgets={widgets?.['categoryPageLeftSidebar']}
+                rightSideWidgets={widgets?.['categoryPageRightSidebar']}
                 dictionary={dictionary}
                 locale={locale}
                 sidebar={sidebar || 'no'}
@@ -102,4 +94,4 @@ const CategoryPage = async (props: IProps) => {
 export default CategoryPage;
 
 export const generateMetadata = categoryMetaGenerator;
-export const dynamic = 'force-dynamic';
+

@@ -1,7 +1,4 @@
 import React from 'react';
-import { fetchTags } from '@lib/fetch-requests/fetchPosts';
-import { fetchSettings } from '@lib/fetch-requests/fetchSettings';
-import { fetchWidgets } from '@lib/fetch-requests/fetchWidgets';
 import { getDictionary } from '../../../get-dictionary';
 import WidgetsRenderer from '@components/widgets/widgetRenderer/WidgetsRenderer';
 import SidebarWidgetAreaRenderer from '@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer';
@@ -9,6 +6,9 @@ import tagsMetaGenerator from './components/tagsMetaGenerator/tagsMetaGenerator'
 import TagsPageContentRenderer from '@components/metas/TagsPageContentRenderer';
 import {IPageProps} from "@repo/typescript-types";
 import localDetector from "@lib/localDetector";
+import {getMetas} from "@lib/database/operations/metas";
+import {getWidgets} from "@lib/database/operations/widgets";
+import {getSettings} from "@lib/database/operations/settings";
 
 const TagsPage = async (props: IPageProps) => {
     const searchParams = await props.searchParams;
@@ -16,57 +16,62 @@ const TagsPage = async (props: IPageProps) => {
 
     const locale = localDetector(params.lang);
     const dictionary = await getDictionary(locale);
-    const settingsData = await fetchSettings({
-        requireSettings: ['tagsPageSettings'],
-    });
-    const sidebar = settingsData?.settings?.tagsPageSettings?.sidebar;
 
-    const widgetsData = await fetchWidgets({
-        widgets: [
+    const { tagsPageSettings } = await getSettings(['tagsPageSettings']);
+    const sidebar = tagsPageSettings?.sidebar;
+
+
+
+    const widgets = await getWidgets(
+        [
             'tagsPageTop',
             'tagsPageLeftSidebar',
             'tagsPageBottom',
             'tagsPageRightSidebar',
         ],
+        locale
+    );
+
+
+
+    const { metas } = await getMetas({
         locale,
+        startWith: Array.isArray(searchParams?.startWith)
+            ? searchParams?.startWith[0]
+            : searchParams?.startWith,
+        metaType: 'tags',
+        page: 1,
+        count : 1000
     });
 
-    const metasData = await fetchTags({
-        queryObject: {
-            metaType: 'tags',
-            lang: locale,
-            startWith: searchParams?.startWith || undefined,
-        },
-        locale,
-    });
-
+    console.log('\x1b[33m%s\x1b[0m','metas => ',metas );
     return (
         <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
             <main id={'primary'} className={'main tagsPage'}>
                 <WidgetsRenderer
                     dictionary={dictionary}
                     locale={locale}
-                    widgets={widgetsData.widgets?.['tagsPageTop']}
+                    widgets={widgets?.['tagsPageTop']}
                     position={'tagsPageTop'}
                 />
 
                 <TagsPageContentRenderer
                     locale={locale}
-                    metas={metasData?.metas}
+                    metas={metas || []}
                     startWith={searchParams?.startWith as string}
                 />
 
                 <WidgetsRenderer
                     dictionary={dictionary}
                     locale={locale}
-                    widgets={widgetsData.widgets?.['tagsPageBottom']}
+                    widgets={widgets?.['tagsPageBottom']}
                     position={'tagsPageBottom'}
                 />
             </main>
 
             <SidebarWidgetAreaRenderer
-                leftSideWidgets={widgetsData.widgets?.['tagsPageLeftSidebar']}
-                rightSideWidgets={widgetsData.widgets?.['tagsPageRightSidebar']}
+                leftSideWidgets={widgets?.['tagsPageLeftSidebar']}
+                rightSideWidgets={widgets?.['tagsPageRightSidebar']}
                 dictionary={dictionary}
                 locale={locale}
                 sidebar={sidebar || 'no'}
@@ -79,4 +84,4 @@ const TagsPage = async (props: IPageProps) => {
 export default TagsPage;
 
 export const generateMetadata = tagsMetaGenerator;
-export const dynamic = 'force-dynamic';
+

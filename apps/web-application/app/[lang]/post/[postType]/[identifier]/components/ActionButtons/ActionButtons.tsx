@@ -45,7 +45,6 @@ const ActionButtons: FC<IProps> = ({
         if (_id && !didView) {
             setDidView(true);
             clientAPIRequestViewPost(_id);
-            // dispatch(viewPostAction(_id))
         }
         return () => {
             setDidView(false);
@@ -56,16 +55,9 @@ const ActionButtons: FC<IProps> = ({
         if (loggedIn && _id) {
             setDisableRatingButtons(true);
             await clientAPIRequestLikeDislikePost(_id, type)
-                // .then(response => {
-                //     // setDisLikesValue(response.data.disLikes || 0)
-                //     // setLikesValue(response.data.likes || 0)
-                // })
-                // .catch(error => {
-                //     console.log('error=> ', error);
-                // })
                 .finally(() => {
                     setDisableRatingButtons(false);
-                    clearACacheByTag(`${_id}Rating`);
+                    clearACacheByTag(`CPostRating-${_id}`);
                 });
         } else {
             dispatch(loginRegisterForm('register'));

@@ -6,17 +6,19 @@ import './Comments.styles.scss';
 import UserProfileImage from '@components/UserProfileImage/UserProfileImage';
 import { Comment, NewComment } from '@repo/typescript-types';
 import { dashboardAPIRequestDeleteComments } from '@repo/api-requests';
-import { fetchComments, postNewComment } from '@lib/fetch-requests/comment';
+import { postNewComment } from '@lib/fetch-requests/comment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAnglesDown, faAnglesUp, faPlus } from '@fortawesome/free-solid-svg-icons';
 import CommentsRenderer from './CommentsRenderer/CommentsRenderer';
 import { AxiosResponse } from 'axios';
+import {getComments, newComment} from "@lib/database/operations/posts";
+import {clearACacheByTag, clearCachesByServerAction} from "@lib/serverActions";
 
 interface IProps {
     dictionary: {
         [key: string]: string;
     };
-    postId?: string;
+    postId: string;
 }
 
 const Comments: FC<IProps> = ({ dictionary, postId }) => {
@@ -48,36 +50,70 @@ const Comments: FC<IProps> = ({ dictionary, postId }) => {
                 onDocumentId: postId,
             } as NewComment;
             commentsAllowScrollRef.current = false;
-            await postNewComment({ commentData })
-                .then((response: { savedComment: Comment }) => {
-                    const savedComment = response?.savedComment;
+            
+            const savedComment = await newComment({ commentData });
 
-                    if (savedComment?._id) {
-                        const completeCommentData: Comment = {
-                            ...savedComment,
-                            author: {
-                                //@ts-expect-error: it's fine, in order to avoid populating the saved comment to get author data instead we are adding them after return
-                                profileImage: userData?.profileImage,
-                                username: userData?.username,
-                                _id: userData?._id,
-                            },
-                        };
+            if (!savedComment){
+                dispatch(
+                    setAlert({
+                        message: "Something went wrong please try again later",
+                        type: 'error',
+                    }),
+                );
+            }
 
-                        setCommentsData(prevState => [completeCommentData, ...(prevState || [])]);
-                    }
-                })
-                .catch(error => {
-                    dispatch(
-                        setAlert({
-                            message: error.message,
-                            type: 'error',
-                        }),
-                    );
-                })
-                .finally(() => {
-                    setDraftCommentBody('');
-                    dispatch(loading(false));
-                });
+            const completeCommentData: Comment = {
+                ...savedComment,
+                author: {
+                    //@ts-expect-error: it's fine, in order to avoid populating the saved comment to get author data instead we are adding them after return
+                    profileImage: userData?.profileImage,
+                    username: userData?.username,
+                    _id: userData?._id,
+                },
+            };
+
+            setCommentsData(prevState => [completeCommentData, ...(prevState || [])]);
+            dispatch(loading(false));
+
+            // await postNewComment({ commentData })
+            //     .then((response: { savedComment: Comment }) => {
+            //         const savedComment = response?.savedComment;
+            //
+            //         if (savedComment?._id) {
+            //             const completeCommentData: Comment = {
+            //                 ...savedComment,
+            //                 author: {
+            //                     //@ts-expect-error: it's fine, in order to avoid populating the saved comment to get author data instead we are adding them after return
+            //                     profileImage: userData?.profileImage,
+            //                     username: userData?.username,
+            //                     _id: userData?._id,
+            //                 },
+            //             };
+            //
+            //             setCommentsData(prevState => [completeCommentData, ...(prevState || [])]);
+            //         }
+            //     }).finally(()=>{
+            //         clearACacheByTag(`CComments-${postId}`)
+            //         // await clearCachesByServerAction({
+            //         //     path: pathname,
+            //         //     segment,
+            //         //     mode,
+            //         //     searchParams,
+            //         //     params
+            //         // })
+            //     })
+            //     .catch(error => {
+            //         dispatch(
+            //             setAlert({
+            //                 message: error.message,
+            //                 type: 'error',
+            //             }),
+            //         );
+            //     })
+            //     .finally(() => {
+            //         setDraftCommentBody('');
+            //         dispatch(loading(false));
+            //     });
         } catch {
             return;
         }
@@ -119,7 +155,8 @@ const Comments: FC<IProps> = ({ dictionary, postId }) => {
 
     const onShowCommentsHandler = async () => {
         setShowComments(!showComments);
-        await onGetComments();
+        if (commentsData.length == 0)
+              await onGetComments();
     };
 
     const onGetComments = async () => {
@@ -129,24 +166,27 @@ const Comments: FC<IProps> = ({ dictionary, postId }) => {
             commentsAllowScrollRef.current = true;
             const limit = 4;
 
-            await fetchComments({
+
+
+            const comments = await getComments({
                 onDocument: postId,
                 skip: commentsData?.length || 0,
                 limit,
-            })
-                .then((response: { comments: Comment[] }) => {
-                    const comments = response?.comments || [];
+            });
+            dispatch(loading(false));
+            if (!comments) return
 
-                    if (comments.length > 0) {
-                        setCommentsData((prevState: Comment[]) => [...(prevState || []), ...comments]);
-                    }
-                    if (comments.length < limit) {
-                        setAllowFetchMoreComments(false);
-                    }
-                })
-                .finally(() => {
-                    dispatch(loading(false));
+            if (comments.length > 0) {
+                setCommentsData((prevState: Comment[]) => {
+                    let newComments = [...(prevState || []), ...comments]
+                   // newComments.sort((a : Comment, b: Comment) =>   b.createdAt - a.createdAt)
+                    return newComments
                 });
+            }
+            if (comments.length < limit) {
+                setAllowFetchMoreComments(false);
+            }
+
         } catch {
             dispatch(
                 setAlert({
@@ -217,3 +257,23 @@ const Comments: FC<IProps> = ({ dictionary, postId }) => {
     );
 };
 export default Comments;
+
+
+// await fetchComments({
+//     onDocument: postId,
+//     skip: commentsData?.length || 0,
+//     limit,
+// })
+//     .then((response: { comments: Comment[] }) => {
+//         const comments = response?.comments || [];
+//
+//         if (comments.length > 0) {
+//             setCommentsData((prevState: Comment[]) => [...(prevState || []), ...comments]);
+//         }
+//         if (comments.length < limit) {
+//             setAllowFetchMoreComments(false);
+//         }
+//     })
+//     .finally(() => {
+//         dispatch(loading(false));
+//     });

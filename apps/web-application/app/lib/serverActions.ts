@@ -12,6 +12,7 @@ interface TClearCachesByServerAction extends IClearCache {
 
 export const clearACacheByTag = async (tag: string) => {
     try {
+        console.log(`clearing cache => `,tag)
         revalidateTag(tag);
     } catch (error) {
         console.log(`error clearACacheByTag=> `, error);
@@ -38,12 +39,12 @@ export const clearCachesByServerAction = async ({
 
     if (mode === 'all') {
         revalidateTag('cacheItem');
-        revalidateTag('post');
+        revalidateTag('CPostViews');
         return;
     }
 
     if (mode === 'settings') {
-        revalidateTag('settings');
+        revalidateTag('CSetting');
         return;
     }
 

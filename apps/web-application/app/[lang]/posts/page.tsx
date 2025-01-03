@@ -86,4 +86,3 @@ const PostsPage = async (props: IPageProps) => {
 
 export default PostsPage;
 export const generateMetadata = postsMetaGenerator;
-export const dynamic = 'force-dynamic';

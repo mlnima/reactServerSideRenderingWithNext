@@ -1,7 +1,7 @@
 
 // import { getDictionary } from '../../../../get-dictionary';
 import React from 'react';
-import './page.styles.scss';
+import './page.scss';
 //import {PageParams, PageSearchParams} from "@repo/typescript-types";
 
 // interface IProps {

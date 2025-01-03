@@ -4,11 +4,8 @@ import VideoPlayer from "./VideoPlayer/VideoPlayer";
 import PostTitle from "../PostTitle/PostTitle";
 import PostDescription from "../PostDescription/PostDescription";
 import PostMetasRenderer from "../PostMetasRenderer/PostMetasRenderer";
-import WidgetsRenderer from "@components/widgets/widgetRenderer/WidgetsRenderer";
 import {Widget} from "@repo/typescript-types";
 import ActionButtons from "../ActionButtons/ActionButtons";
-import RelatedPostsRenderer from "../RelatedPostsRenderer/RelatedPostsRenderer";
-import Comments from "../Comments/Comments";
 
 interface IProps {
     post: Post,
@@ -26,12 +23,9 @@ interface IProps {
 
 const VideoTypePostPage: FC<IProps> =
     ({
-         widgets,
          post,
          locale,
          dictionary,
-         hasSidebar,
-         relatedPosts,
          views,
          likes,
          disLikes
@@ -58,13 +52,6 @@ const VideoTypePostPage: FC<IProps> =
                     <PostMetasRenderer type='actors' metas={post.actors} dictionary={dictionary}/>
                     <PostMetasRenderer type='categories' metas={post.categories} dictionary={dictionary}/>
                     <PostMetasRenderer type='tags' metas={post.tags} dictionary={dictionary}/>
-                </div>
-                {post?.status === 'published' && <Comments dictionary={dictionary} postId={post?._id}/>}
-
-                <RelatedPostsRenderer locale={locale} relatedPosts={relatedPosts} dictionary={dictionary}/>
-                <div className='under-post-widget-area'>
-                    <WidgetsRenderer widgets={widgets} position='underPost' hasSidebar={hasSidebar} locale={locale}
-                                     dictionary={dictionary}/>
                 </div>
             </div>
         )

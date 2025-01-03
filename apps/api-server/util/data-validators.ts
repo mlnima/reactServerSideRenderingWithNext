@@ -19,7 +19,7 @@ export const mongoIdValidator = (_id:string) => {
     // }
 };
 
-export const usernameValidatorRegisterForm = username => {
+export const usernameValidatorRegisterForm = (username:string | undefined) => {
 
     if (!username) return false;
     const regex = /^[a-zA-Z][a-zA-Z0-9]{5,14}$/;

@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { Request } from 'express';
 import GlobalStore from '@store/GlobalStore';
-import { multiQueryUniquer } from './queryUtil';
+import { multiQueryUniquer } from '@util/queryUtil';
 import globalStore from "@store/GlobalStore";
 
 

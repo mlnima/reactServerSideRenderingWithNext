@@ -1,5 +1,6 @@
 import {model, Schema, Document} from "mongoose";
 import {Widget} from "@repo/typescript-types";
+import mongooseLeanVirtuals from "mongoose-lean-virtuals";
 
 const widgetDataSchema = new Schema({
     extraClassName: String,
@@ -47,6 +48,8 @@ const widgetDataSchema = new Schema({
         }
     ]
 } );
+
+widgetDataSchema.plugin(mongooseLeanVirtuals);
 
 const widgetSchema = new Schema({
     data: widgetDataSchema,
