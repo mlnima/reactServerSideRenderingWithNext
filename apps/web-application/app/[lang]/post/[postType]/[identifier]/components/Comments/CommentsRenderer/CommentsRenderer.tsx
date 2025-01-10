@@ -41,7 +41,7 @@ const CommentsRenderer: FC<IProps> = ({comments, onDeleteCommentHandler, adminMo
             {comments?.length > 0 ?
                 <>
                     {comments.map((comment: Comment) => (
-                        <CommentItem key={comment?._id || comment?.author?._id}
+                        <CommentItem key={comment._id}
                                      onDeleteCommentHandler={onDeleteCommentHandler}
                                      comment={comment}
                                      adminMode={adminMode}/>

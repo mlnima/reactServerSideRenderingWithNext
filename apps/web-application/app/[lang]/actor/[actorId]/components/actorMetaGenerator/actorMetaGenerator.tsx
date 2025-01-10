@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { fetchPosts } from '@lib/fetch-requests/fetchPosts';
 import { textContentReplacer, getTextDataWithTranslation } from '@repo/shared-util';
 import { AlternatesGenerators } from '@lib/alternatesCanonicalGenerator';
 import { PageParams, PageSearchParams } from '@repo/typescript-types';
@@ -18,26 +17,11 @@ const actorMetaGenerator = async (props: IProps): Promise<Metadata> => {
     try {
         const searchParams = await props.searchParams;
         const params = await props.params;
-
         const locale = localDetector(params.lang);
         const { actorPageSettings  } = await getSettings(['actorPageSettings']);
         const {  initialSettings } = await getSettings(['initialSettings']);
-
         const fallbackImage = '/asset/images/default/no-image-available.png';
         const currentPageQuery = searchParams?.page;
-        const currentPage =
-            currentPageQuery && typeof currentPageQuery === 'string' ? parseInt(currentPageQuery, 10) : 1;
-
-        const postsData = await fetchPosts({
-            queryObject: {
-                sort: searchParams?.sort,
-                lang: locale,
-                metaId: params?.actorId,
-                page: currentPage,
-                size: searchParams?.size,
-            },
-            locale,
-        });
 
         const { meta, totalCount } = await getPosts({
             locale,

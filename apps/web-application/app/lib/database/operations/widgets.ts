@@ -1,5 +1,5 @@
 'use cache';
-import { connectToDatabase, widgetSchema, postSchema, metaSchema } from '@repo/db';
+import { connectToDatabase, widgetSchema, postSchema, metaSchema,formSchema } from '@repo/db';
 import { clientAllowedSortOptions, postFieldRequestForCards } from '@repo/data-structures';
 import { Widget } from '@repo/typescript-types';
 import { Document } from 'mongoose';
@@ -160,3 +160,20 @@ export const getWidgets = async (positions: string[], locale: string) => {
   cacheTag('cacheItem', `CWidgets-${positions.join('-')}`);
   return result;
 };
+
+interface ISaveFormWidgetData{
+  data : {
+    [key: string]: any;
+  }
+}
+export const saveFormWidgetData = async({data}:ISaveFormWidgetData)=>{
+  try {
+    await connectToDatabase('saveFormWidgetData');
+    const formDataDataToSave = new formSchema(data);
+    await formDataDataToSave.save()
+    return
+  }catch (error){
+    console.log(`saveFormWidgetData=> `,error)
+    return
+  }
+}

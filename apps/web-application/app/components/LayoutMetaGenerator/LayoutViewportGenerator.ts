@@ -1,11 +1,10 @@
-import {fetchSettings} from "@lib/fetch-requests/fetchSettings";
+import {getSettings} from "@lib/database/operations/settings";
 
 const LayoutViewportGenerator = async () => {
 
-    const settingsData = await fetchSettings({requireSettings: ['initialSettings']})
-
+    const { initialSettings } = await getSettings(['initialSettings']);
     return {
-        themeColor:settingsData?.settings?.initialSettings?.headDataSettings?.themeColor || 'black',
+        themeColor:initialSettings?.headDataSettings?.themeColor || 'black',
         viewport: {
             width: 'device-width',
             initialScale: 1,

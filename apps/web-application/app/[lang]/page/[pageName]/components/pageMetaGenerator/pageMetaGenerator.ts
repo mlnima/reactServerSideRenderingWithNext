@@ -1,7 +1,7 @@
-import { fetchPage } from '@lib/fetch-requests/fetchPage';
 import { AlternatesGenerators } from '@lib/alternatesCanonicalGenerator';
 import { IPageProps } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
+import {getPage} from "@lib/database/operations/pages";
 
 const alternatesGenerators = new AlternatesGenerators();
 
@@ -9,7 +9,7 @@ const pageMetaGenerator = async (props: IPageProps) => {
     const params = await props.params;
     const { lang, pageName } = params;
     const locale = localDetector(lang);
-    const pageData = pageName ? await fetchPage({ pageName }) : {};
+    const pageData = pageName ? await getPage({ pageName }) : {};
     const pageTitle =
         pageData.pageData?.translations?.[locale]?.title || pageData.pageData.title || pageData.pageData.pageName;
 

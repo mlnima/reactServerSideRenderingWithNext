@@ -1,9 +1,9 @@
-import { fetchSettings } from '@lib/fetch-requests/fetchSettings';
 import { getDictionary } from '../../../../../get-dictionary';
 import { capitalizeFirstLetter } from '@repo/shared-util';
 import { AlternatesGenerators } from '@lib/alternatesCanonicalGenerator';
 import {IPageProps} from "@repo/typescript-types";
 import localDetector from "@lib/localDetector";
+import {getSettings} from "@lib/database/operations/settings";
 
 const alternatesGenerators = new AlternatesGenerators();
 
@@ -14,8 +14,8 @@ const postsMetaGenerator = async (props: IPageProps) => {
 
     const locale = localDetector(params.lang);
     const dictionary = await getDictionary(locale);
-    const settingsData = await fetchSettings({ requireSettings: ['initialSettings'] });
-    const siteName = settingsData?.settings?.initialSettings?.headDataSettings?.siteName || '';
+    const { initialSettings } = await getSettings(['initialSettings']);
+    const siteName = initialSettings?.headDataSettings?.siteName || '';
     const postType = `${capitalizeFirstLetter(searchParams?.postType)}s` || 'posts';
 
     return {

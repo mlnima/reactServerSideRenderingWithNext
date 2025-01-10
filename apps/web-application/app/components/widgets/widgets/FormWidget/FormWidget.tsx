@@ -5,7 +5,8 @@ import { useSelector } from 'react-redux';
 import './FormWidget.scss';
 import FormWidgetField from '@components/widgets/widgets/FormWidget/FormWidgetField/FormWidgetField';
 import { loading, setAlert } from '@store/reducers/globalStateReducer';
-import { postFormData } from '@lib/fetch-requests/fetchForms';
+
+import {saveFormWidgetData} from "@lib/database/operations/widgets";
 
 interface FormWidgetPropTypes {
     locale: string;
@@ -85,7 +86,7 @@ const FormWidget: FC<FormWidgetPropTypes> = ({
                 ...state,
                 date: performance.timeOrigin + performance.now(),
             };
-            await postFormData({ formDataToPost: formData });
+            await saveFormWidgetData({ data: formData });
             setIsSubmit(true);
         } catch {
             dispatch(

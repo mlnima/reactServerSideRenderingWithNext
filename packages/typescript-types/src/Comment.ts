@@ -3,7 +3,7 @@ import {User} from "./User";
 
 interface Base {
     _id?: string,
-    createdAt: Date,
+    createdAt: Date | number,
     updatedAt ?: string
     likes?: number,
     disLikes?: number,
@@ -19,6 +19,7 @@ export interface Comment extends Base {
 }
 
 export interface CommentRaw extends Base {
+    _id: string;
     onDocumentId: string ,
     author: string ,
     reply?: [string]

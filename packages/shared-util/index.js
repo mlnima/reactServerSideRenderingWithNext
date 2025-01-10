@@ -84,6 +84,11 @@ export {
     mongoIdValidatorByRegex
 } from './src/validators';
 
+export {
+    getLocales,
+    getDefaultLocale
+} from './src/i18n-utils';
+
 export { touchDeviceDetector } from './src/device-util';
 
 export { nextTranslateWithCallback } from './src/translation-utils';

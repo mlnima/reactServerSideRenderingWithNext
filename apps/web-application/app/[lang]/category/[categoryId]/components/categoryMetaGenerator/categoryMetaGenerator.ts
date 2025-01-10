@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { fetchPosts } from '@lib/fetch-requests/fetchPosts';
 import {
   textContentReplacer,
   getTextDataWithTranslation,
@@ -8,6 +7,7 @@ import { AlternatesGenerators } from '@lib/alternatesCanonicalGenerator';
 import { PageParams, PageSearchParams } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
 import { getSettings } from '@lib/database/operations/settings';
+import { getPosts } from '@lib/database/operations/posts';
 
 interface IProps {
   params: PageParams;
@@ -31,21 +31,16 @@ const categoryMetaGenerator = async (props: IProps): Promise<Metadata> => {
     const { initialSettings } = await getSettings(['initialSettings']);
 
     const currentPageQuery = searchParams?.page;
-    const currentPage =
-      currentPageQuery && typeof currentPageQuery === 'string'
-        ? parseInt(currentPageQuery, 10)
-        : 1;
 
-    const postsData = await fetchPosts({
-      queryObject: {
-        sort: searchParams?.sort,
-        lang: locale,
-        metaId: params?.categoryId,
-        page: currentPage,
-        size: searchParams?.size,
-      },
+    const { meta } = await getPosts({
       locale,
+      metaId: params?.categoryId,
+      page:
+        currentPageQuery && typeof currentPageQuery === 'string'
+          ? parseInt(currentPageQuery, 10)
+          : 1,
     });
+
     const pageTitle =
       categoryPageSettings?.translations?.[locale]?.title ??
       categoryPageSettings?.title;
@@ -60,13 +55,13 @@ const categoryMetaGenerator = async (props: IProps): Promise<Metadata> => {
       ? textContentReplacer(
           pageDescription,
           {
-            name: postsData?.meta?.name,
-            count: postsData?.meta?.count,
+            name: meta?.name,
+            count: meta?.count,
             siteName: initialSettings?.headDataSettings?.siteName,
           },
           new Date()
         )
-      : getTextDataWithTranslation(locale, 'description', postsData?.meta);
+      : getTextDataWithTranslation(locale, 'description', meta);
 
     const alternates = params.categoryId
       ? {
@@ -82,16 +77,16 @@ const categoryMetaGenerator = async (props: IProps): Promise<Metadata> => {
       ...alternates,
       title: pageTitle
         ? textContentReplacer(pageTitle, {
-            name: postsData?.meta?.name,
-            count: postsData?.meta?.count,
+            name: meta?.name,
+            count: meta?.count,
             siteName: initialSettings?.headDataSettings?.siteName,
           })
-        : getTextDataWithTranslation(locale, 'title', postsData?.meta),
+        : getTextDataWithTranslation(locale, 'title', meta),
       description:
         description || initialSettings?.headDataSettings?.description || '',
-      keywords: `${postsData?.meta?.name}${pageKeywords ? `, ${pageKeywords}` : ''}`,
+      keywords: `${meta?.name}${pageKeywords ? `, ${pageKeywords}` : ''}`,
       openGraph: {
-        images: [postsData?.meta?.imageUrl || fallbackImage],
+        images: [meta?.imageUrl || fallbackImage],
       },
     };
   } catch (error) {

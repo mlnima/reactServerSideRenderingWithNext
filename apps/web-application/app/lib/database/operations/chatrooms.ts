@@ -11,6 +11,7 @@ import {
 import {Chatroom, Meta} from "@repo/typescript-types";
 import {Document} from "mongoose";
 import connectToDatabase from "@lib/database/databaseConnection";
+import {unstable_cacheTag as cacheTag} from "next/cache";
 
 export const getChatroom = async (identifier:string) => {
   try {
@@ -43,7 +44,7 @@ export const getChatroom = async (identifier:string) => {
       }
       return doc;
     })
-
+    cacheTag('cacheItem', `CChatroom-${currentChatroom._id}`);
     return { chatroom: currentChatroom, chatrooms: allTheChatrooms }
   } catch (error) {
     console.log('\x1b[33m%s\x1b[0m','getChatroom => ',error );

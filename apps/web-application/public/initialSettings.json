@@ -110,6 +110,7 @@
         "showDateOnCard": true
       }
     },
-    "numberOfCardsPerPage": 40
+    "numberOfCardsPerPage": 40,
+    "contentPerPage": 20
   }
 }

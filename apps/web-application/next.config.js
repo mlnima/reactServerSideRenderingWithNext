@@ -41,7 +41,7 @@ const nextConfig = {
     experimental: {
         dynamicIO: true,
         nextScriptWorkers: true,
-        esmExternals: "loose", // <-- add this
+        esmExternals: "loose",
         serverComponentsExternalPackages: ["mongoose"]
     },
     rewrites,
