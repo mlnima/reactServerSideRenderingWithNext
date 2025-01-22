@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { formatDistance } from 'date-fns';
-import { capitalizeFirstLetter } from '@repo/shared-util';
+import { capitalizeFirstLetter } from '@repo/utils';
 
 interface IProps {
     createdAt: string;

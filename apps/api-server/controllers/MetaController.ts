@@ -68,30 +68,30 @@ class MetaController {
         }
     }
 
-    static async getMeta(req: Request, res: Response) {
-        try {
-            const { _id } = req.query;
-
-            if (!mongoIdValidator(multiQueryUniquer(_id))) {
-                res.status(400).json({ message: 'invalid id' });
-            }
-
-            if (!_id) {
-                res.status(400).json({ message: 'No meta id provided' });
-            }
-
-            const meta = await metaSchema.findById(_id).exec();
-
-            if (!meta || meta.status !== 'published') {
-                res.status(404).json({ message: 'Meta not found' });
-            }
-
-            res.json({ meta });
-        } catch (err) {
-            console.error(err);
-            return res.status(500).json({ message: 'Something Went Wrong' });
-        }
-    }
+    // static async getMeta(req: Request, res: Response) {
+    //     try {
+    //         const { _id } = req.query;
+    //
+    //         if (!mongoIdValidator(multiQueryUniquer(_id))) {
+    //             res.status(400).json({ message: 'invalid id' });
+    //         }
+    //
+    //         if (!_id) {
+    //             res.status(400).json({ message: 'No meta id provided' });
+    //         }
+    //
+    //         const meta = await metaSchema.findById(_id).exec();
+    //
+    //         if (!meta || meta.status !== 'published') {
+    //             res.status(404).json({ message: 'Meta not found' });
+    //         }
+    //
+    //         res.json({ meta });
+    //     } catch (err) {
+    //         console.error(err);
+    //         return res.status(500).json({ message: 'Something Went Wrong' });
+    //     }
+    // }
 
     static async getTags(req: Request, res: Response) {
         try {

@@ -11,8 +11,8 @@ import { registerUserAction } from '@store/reducers/userReducers/registerUserAct
 import {
   usernameValidatorRegisterForm,
   passwordValidatorRegisterForm,
-  emailValidator
-} from '@repo/shared-util';
+  emailValidator,
+} from '@repo/utils';
 import './LoginRegisterPopupForms.scss';
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
@@ -39,15 +39,16 @@ interface IProps {
   };
 }
 
-const LoginRegisterPopupForms: FC<IProps> = ({
-  locale,
-  dictionary,
-}: IProps) => {
+const LoginRegisterPopupForms: FC<IProps> = (
+  {
+    locale,
+    dictionary,
+  }: IProps) => {
   const dispatch = useAppDispatch();
   const LoginRegisterPopupFormsRef = useRef(null);
   const globalState = useAppSelector(({ globalState }) => globalState);
   const { anyoneCanRegister } = useAppSelector(
-    ({ settings }) => settings?.initialSettings?.membershipSettings
+    ({ settings }) => settings?.initialSettings?.membershipSettings,
   );
   const [state, setState] = useState<StateTypes>({
     username: '',
@@ -56,11 +57,18 @@ const LoginRegisterPopupForms: FC<IProps> = ({
     password2: '',
     gender: '',
   });
+  // const [state, setState] = useState<StateTypes>({
+  //   username: 'test20',
+  //   email: 'test20@test20.com',
+  //   password: 'Zz123456',
+  //   password2: 'Zz123456',
+  //   gender: 'male',
+  // });
   const [stateValidator, setStateValidator] = useState<StateValidatorTypes>({});
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const onChangeHandler = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     setState({
       ...state,
@@ -72,7 +80,7 @@ const LoginRegisterPopupForms: FC<IProps> = ({
     e.preventDefault();
     if (state.username && state.password) {
       dispatch(
-        loginAction({ username: state.username, password: state.password })
+        loginAction({ username: state.username, password: state.password }),
       );
     }
   };
@@ -81,14 +89,14 @@ const LoginRegisterPopupForms: FC<IProps> = ({
     e.preventDefault();
     const checkUsername = state.username
       ? state.username.length <= 16 &&
-        state?.username?.length >= 6 &&
-        /[a-zA-Z]/.test(state.username)
+      state?.username?.length >= 6 &&
+      /[a-zA-Z]/.test(state.username)
       : false;
     const checkPasswords = state.password === state.password2;
 
     if (!checkUsername) {
       dispatch(
-        setAlert({ message: 'you can not use this username', type: 'error' })
+        setAlert({ message: 'you can not use this username', type: 'error' }),
       );
     }
 
@@ -97,7 +105,7 @@ const LoginRegisterPopupForms: FC<IProps> = ({
         setAlert({
           message: 'password is to short or is not match',
           type: 'error',
-        })
+        }),
       );
     }
 
@@ -117,8 +125,8 @@ const LoginRegisterPopupForms: FC<IProps> = ({
       password2: state.password2 ? state.password === state.password2 : false,
       gender: state.gender
         ? state.gender === 'male' ||
-          state.gender === 'female' ||
-          state.gender === 'other'
+        state.gender === 'female' ||
+        state.gender === 'other'
         : false,
     });
   }, [state]);
@@ -216,8 +224,8 @@ const LoginRegisterPopupForms: FC<IProps> = ({
               {!stateValidator.password ? (
                 <span className="password-info">
                   {dictionary[
-                    'Minimum eight characters, at least one letter and one number'
-                  ] ||
+                      'Minimum eight characters, at least one letter and one number'
+                      ] ||
                     'Minimum eight characters, at least one letter and one number'}
                 </span>
               ) : null}

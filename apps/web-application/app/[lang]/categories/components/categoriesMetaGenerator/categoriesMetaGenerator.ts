@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { getTextDataWithTranslation, textContentReplacer } from '@repo/shared-util';
+import { getTextDataWithTranslation, textContentReplacer } from '@repo/utils';
 import { AlternatesGenerators } from '@lib/alternatesCanonicalGenerator';
 import { PageParams, PageSearchParams } from '@repo/typescript-types';
 import localDetector from "@lib/localDetector";

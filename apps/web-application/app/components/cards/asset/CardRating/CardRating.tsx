@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import './CardRating.scss';
-import { ratingCalculator } from '@repo/shared-util';
+import { ratingCalculator } from '@repo/utils';
 
 interface CardRatingPropTypes {
     dislikes: number | undefined;

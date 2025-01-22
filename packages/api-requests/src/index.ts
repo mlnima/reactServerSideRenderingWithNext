@@ -15,14 +15,14 @@ export {default as commonAPIRequestClearCaches} from './common/clearCaches'
 // export {clientAPIRequestGetChatroom} from './client/clientChatrooms';
 
 //comments
-export {
-
-    clientAPIRequestGetPostComments,
-    clientAPIRequestPostNewComment
-} from './client/clientComments';
+// export {
+//
+//     clientAPIRequestGetPostComments,
+//     clientAPIRequestPostNewComment
+// } from './client/clientComments';
 
 //customPages
-export {clientAPIRequestGetPage} from './client/clientCustomPages';
+// export {clientAPIRequestGetPage} from './client/clientCustomPages';
 
 //fileManager
 export {
@@ -36,28 +36,28 @@ export {
 
 //messenger
 export {
-    clientAPIRequestGetAConversation,
-    clientAPIRequestGetConversationsList,
-    clientAPIRequestLoadOlderMessages,
-    clientAPIRequestStartAConversation,
+    // clientAPIRequestGetAConversation,
+    // clientAPIRequestGetConversationsList,
+    // clientAPIRequestLoadOlderMessages,
+    // clientAPIRequestStartAConversation,
 } from './client/clientMessenger';
 
 //metas
 export {
-    clientAPIRequestGetMetaSuggestion,
-    clientAPIRequestResetMetaImage,
-    getMeta
+    // clientAPIRequestGetMetaSuggestion,
+    // clientAPIRequestResetMetaImage,
+    // getMeta
 } from './client/clientMetas';
 
 //posts
 export {
-    clientAPIRequestCreateNewPost,
+    // clientAPIRequestCreateNewPost,
     // clientAPIRequestDisLikePost,
-    clientAPIRequestGetEditingPost,
+    // clientAPIRequestGetEditingPost,
     clientAPIRequestGetPosts,
     // clientAPIRequestLikePost,
     updatePost,
-    APISearchSuggestions,
+    // APISearchSuggestions,
     // checkPostExist,
     clientAPIRequestViewPost,
     clientDeletePostByAuthor,

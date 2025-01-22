@@ -1,7 +1,7 @@
 'use client';
 import { FC } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { rangeNumGenerator } from '@repo/shared-util';
+import { rangeNumGenerator } from '@repo/utils';
 import Link from 'next/link';
 import './Pagination.styles.scss';
 import ServerSideStore from '@store/ServerSideStore';

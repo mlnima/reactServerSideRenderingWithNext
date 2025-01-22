@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import {
   textContentReplacer,
   getTextDataWithTranslation,
-} from '@repo/shared-util';
+} from '@repo/utils';
 import { AlternatesGenerators } from '@lib/alternatesCanonicalGenerator';
 import { PageParams, PageSearchParams } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';

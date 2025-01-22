@@ -1,38 +1,80 @@
-'use cache';
+'use server';
 import {
-  commentSchema,
   connectToDatabase,
   isValidObjectId,
   metaSchema,
   postSchema,
-  searchKeywordSchema,
+  userSchema
 } from '@repo/db';
+
 import {
   unstable_cacheLife as cacheLife,
   unstable_cacheTag as cacheTag,
-  unstable_noStore as noStore,
 } from 'next/cache';
 
 import { postFieldRequestForCards } from '@repo/data-structures';
-import { getDefaultLocale, getLocales } from '@repo/shared-util';
-import { Comment, Meta, Post } from '@repo/typescript-types';
+import { JWTPayload, Meta, Post } from '@repo/typescript-types';
 import mongoose, { Document } from 'mongoose';
 import { getSettings } from './settings';
+import {
+  IOGetPost,
+  IGetPosts,
+  IOGetPosts,
+  IGetUserPagePosts, INewPost, IGetEditingPost, IUpdatePost, IRatePost,
+} from './types';
+import { _updateSaveMetas } from './metas';
+import { jwtValidator } from '@repo/utils-server';
 
 //import { notFound, unstable_rethrow } from 'next/navigation';
 
-interface IOGetPost {
-  post?: Post | null;
-  relatedPosts: Post[] | null;
-}
+export const ratePost = async ({ token, type, _id }: IRatePost) => {
+  try {
+    if (!token) return null;
+    const tokenData = await jwtValidator(token) as JWTPayload;
+    if (!tokenData) return null;
+    await connectToDatabase('ratePost');
 
-type IGetComments = {
-  onDocument: string | null | undefined;
-  skip?: number;
-  limit?: number;
+    const postId = new mongoose.Types.ObjectId(_id);
+    const oppositeType = type === 'likes' ? 'disLikes' : 'likes';
+
+    const user = await userSchema.findById(tokenData._id);
+    if (!user) return null;
+
+    const userField = type === 'likes' ? 'LikedPosts' : 'disLikedPosts';
+    const oppositeField = type === 'likes' ? 'disLikedPosts' : 'LikedPosts';
+
+    const alreadyDone = user[userField].some(id => id.equals(postId));
+    const oppositeDone = user[oppositeField].some(id => id.equals(postId));
+
+    let userUpdateQuery = {};
+    let postIncQuery = { [type]: 0, [oppositeType]: 0 };
+
+    if (oppositeDone) {
+      userUpdateQuery = {
+        $pull: { [oppositeField]: postId },
+        $addToSet: { [userField]: postId },
+      };
+      postIncQuery[type] = 1;
+      postIncQuery[oppositeType] = -1;
+    } else if (alreadyDone) {
+      userUpdateQuery = { $pull: { [userField]: postId } };
+      postIncQuery[type] = -1;
+    } else {
+      userUpdateQuery = { $addToSet: { [userField]: postId } };
+      postIncQuery[type] = 1;
+    }
+
+    await userSchema.findByIdAndUpdate(tokenData._id, userUpdateQuery);
+    await postSchema.findByIdAndUpdate(postId, { $inc: postIncQuery });
+    return null
+  } catch (error) {
+    console.log('\x1b[33m%s\x1b[0m','error => ',error );
+    return null
+  }
 };
 
 export const getPost = async (identifier: string): Promise<IOGetPost> => {
+  'use cache';
   try {
     await connectToDatabase('getPost');
     const isId = isValidObjectId(identifier);
@@ -40,11 +82,11 @@ export const getPost = async (identifier: string): Promise<IOGetPost> => {
     const findQuery = isId
       ? { _id: identifier }
       : {
-          $or: [
-            { title: identifier },
-            { permaLink: identifier.replaceAll(' ', '-') },
-          ],
-        };
+        $or: [
+          { title: identifier },
+          { permaLink: identifier.replaceAll(' ', '-') },
+        ],
+      };
 
     const post = await postSchema
       .findOne(findQuery, '-comments -views -likes -disLikes')
@@ -108,6 +150,7 @@ export const getPost = async (identifier: string): Promise<IOGetPost> => {
 };
 
 export const getPostViews = async (_id: string): Promise<number> => {
+  'use cache';
   try {
     await connectToDatabase('getPostViews');
     const postData = await postSchema.findById(_id).select('views').lean();
@@ -121,6 +164,7 @@ export const getPostViews = async (_id: string): Promise<number> => {
 };
 
 export const getPostRating = async (_id: string) => {
+  'use cache';
   try {
     await connectToDatabase('getPostRating');
     const postData = await postSchema
@@ -142,37 +186,20 @@ export const getPostRating = async (_id: string) => {
   }
 };
 
-interface IGetPosts {
-  locale: string;
-  metaId?: string;
-  postType?: string;
-  count?: number;
-  page?: number;
-  sort?: string;
-  author?: string;
-  status?: string;
-  returnPosts?: boolean;
-  returnTotalCount?: boolean;
-}
-
-interface IOGetPosts {
-  posts: Post[] | null;
-  totalCount?: number | null;
-  meta?: Meta | null;
-}
-
-export const getPosts = async ({
-  locale,
-  metaId,
-  postType,
-  page = 1,
-  count,
-  author,
-  sort = '-createdAt',
-  returnPosts = true,
-  returnTotalCount = true,
-  status = 'published',
-}: IGetPosts): Promise<IOGetPosts> => {
+export const getPosts = async (
+  {
+    locale,
+    metaId,
+    postType,
+    page = 1,
+    count,
+    author,
+    sort = '-createdAt',
+    returnPosts = true,
+    returnTotalCount = true,
+    status = 'published',
+  }: IGetPosts): Promise<IOGetPosts> => {
+  'use cache';
   try {
     await connectToDatabase('getPosts');
     const { initialSettings } = await getSettings(['initialSettings']);
@@ -180,26 +207,26 @@ export const getPosts = async ({
       count || initialSettings?.contentSettings?.numberOfCardsPerPage || 20;
     const meta = metaId
       ? await metaSchema.findById(metaId).lean<Meta>({
-          virtuals: true,
-          transform: (doc: Document) => {
-            if (doc._id) {
-              doc._id = doc._id.toString();
-            }
-            return doc;
-          },
-        })
+        virtuals: true,
+        transform: (doc: Document) => {
+          if (doc._id) {
+            doc._id = doc._id.toString();
+          }
+          return doc;
+        },
+      })
       : null;
 
     const metaQuery = metaId
       ? [
-          {
-            $or: [
-              { categories: { $in: [metaId] } },
-              { tags: { $in: [metaId] } },
-              { actors: { $in: [metaId] } },
-            ],
-          },
-        ]
+        {
+          $or: [
+            { categories: { $in: [metaId] } },
+            { tags: { $in: [metaId] } },
+            { actors: { $in: [metaId] } },
+          ],
+        },
+      ]
       : [];
     const postTypeQuery = postType ? [{ postType }] : [{}];
     const authorQuery = author ? [{ author }] : [{}];
@@ -220,34 +247,33 @@ export const getPosts = async ({
 
     let posts = returnPosts
       ? await postSchema
-          .find(findPostsQueries, null, {
-            skip: limit * (page - 1),
-            limit,
-            sort,
-          })
-          .populate<{ thumbnail: { filePath: string } }>([
-            { path: 'thumbnail', select: { filePath: 1 } },
-          ])
-          .select([...postFieldRequestForCards, `translations.${locale}.title`])
-          .lean<Post[]>()
+        .find(findPostsQueries, null, {
+          skip: limit * (page - 1),
+          limit,
+          sort,
+        })
+        .populate<{ thumbnail: { filePath: string } }>([
+          { path: 'thumbnail', select: { filePath: 1 } },
+        ])
+        .select([...postFieldRequestForCards, `translations.${locale}.title`])
+        .lean<Post[]>()
       : [];
 
-    posts = posts.map((doc) => {
-      if (doc._id) {
-        doc._id = doc._id.toString();
-      }
-      return doc;
-    });
+
+    const transformedPosts = posts.map((doc) => ({
+      ...doc,
+      _id: doc._id.toString(),
+    }));
 
     cacheTag(
       'cacheItem',
       `CgetPosts-${locale}${metaId ? `-${metaId}` : ''}${
         page ? `-${page}` : ''
-      }${author ? `-${author}` : ''}`
+      }${author ? `-${author}` : ''}`,
     );
 
     return {
-      posts,
+      posts: transformedPosts,
       meta,
       ...totalCount,
     };
@@ -261,279 +287,15 @@ export const getPosts = async ({
   }
 };
 
-export const getComments = async ({
-  onDocument,
-  skip = 0,
-  limit = 5,
-}: IGetComments) => {
+export const getUserPagePosts = async (
+  {
+    authorId,
+    skip = 0,
+    status = 'published',
+  }: IGetUserPagePosts) => {
+  'use cache';
   try {
-    console.log('\x1b[33m%s\x1b[0m', 'get comments  => ', onDocument);
-    await connectToDatabase('getComments');
-
-    const isId = isValidObjectId(onDocument);
-    if (!onDocument || !isId) return null;
-
-    let comments = await commentSchema
-      .find(
-        { onDocumentId: onDocument },
-        {},
-        {
-          skip,
-          limit,
-          sort: '-createdAt',
-        }
-      )
-      .populate([
-        {
-          path: 'author',
-          select: ['username', 'profileImage'],
-          populate: {
-            path: 'profileImage',
-            model: 'file',
-          },
-        },
-      ])
-      .lean<Comment[]>();
-
-    comments = comments.map((doc) => {
-      if (doc._id) {
-        doc._id = doc._id.toString();
-      }
-      if (doc.onDocumentId) {
-        doc.onDocumentId = doc.onDocumentId.toString();
-      }
-      if (doc?.author?._id) {
-        doc.author._id = doc.author._id.toString();
-      }
-      if (doc?.author?.profileImage?._id) {
-        doc.author.profileImage._id = doc.author.profileImage._id.toString();
-      }
-      return doc;
-    });
-
-    cacheTag(
-      'cacheItem',
-      `CComments-${onDocument}-${skip}-${limit}`,
-      `CComments-${onDocument}`
-    );
-    // cacheLife('seconds');
-    // noStore()
-    return comments;
-  } catch (error) {
-    console.error(`getComments => `, error);
-    return [];
-  }
-};
-
-interface INewComment {
-  commentData: {
-    body: string;
-    onDocumentId: string;
-    author: string;
-  };
-}
-
-// NEED TO BE TESTED FOR SPAM COMMENTS
-export const newComment = async ({ commentData }: INewComment) => {
-  noStore();
-  try {
-    if (
-      !commentData?.body ||
-      !commentData?.onDocumentId ||
-      !commentData?.author
-    )
-      return null;
-    await connectToDatabase('newComment');
-    const commentObject = {
-      body: commentData?.body,
-      onDocumentId: new mongoose.Types.ObjectId(commentData?.onDocumentId),
-      author: new mongoose.Types.ObjectId(commentData?.author),
-    };
-
-    const commentObjectToSave = new commentSchema(commentObject);
-    const savedComment = await commentObjectToSave.save();
-    if (!savedComment) {
-      return null;
-    }
-
-    return savedComment._id.toString();
-  } catch (error) {
-    console.log(`New Comment Error=> `, error);
-    return null;
-  }
-};
-
-interface IDeleteComments {
-  ids: string[];
-}
-
-export const deleteComments = async ({ ids }: IDeleteComments) => {
-  try {
-    if (!ids) return null;
-    const deletePromises = ids.map((commentId) => {
-      return commentSchema
-        .findByIdAndDelete(commentId as string, { useFindAndModify: false })
-        .exec();
-    });
-
-    await Promise.all(deletePromises);
-    return true;
-  } catch (error) {
-    console.log(`deleteComments=> `, error);
-    return null;
-  }
-};
-
-const saveSearchedKeyword = async (keyword: string, postsCount: number) => {
-  if (!keyword) return;
-  try {
-    await searchKeywordSchema
-      .findOneAndUpdate(
-        { name: keyword },
-        {
-          $set: {
-            name: keyword,
-            count: postsCount,
-          },
-          // $inc: { searchHits: 1 },
-        },
-        { upsert: true }
-      )
-      .exec();
-    console.log(`keyword ${keyword} Saved in DB with ${postsCount} result`);
-  } catch (error) {
-    console.log('error=> ', error);
-  }
-};
-
-interface IGetSearch {
-  sort?: string;
-  locale?: string;
-  keyword?: string;
-  page?: number;
-}
-
-export const getSearch = async ({
-  keyword,
-  page = 1,
-  locale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE,
-  sort = '-updatedAt -createdAt',
-}: IGetSearch) => {
-  if (!keyword) return null;
-  const defaultLocale = getDefaultLocale();
-  const locales = getLocales();
-  let targetKeyword = decodeURIComponent(keyword).toLowerCase();
-
-  const size = 20;
-
-  let postsTranslationsSearchQuery = [];
-  let metasTranslationsSearchQuery = [];
-  if (locale !== defaultLocale) {
-    for await (const locale of locales) {
-      metasTranslationsSearchQuery.push({
-        [`translations.${locale}.name`]: new RegExp(targetKeyword, 'i'),
-      });
-    }
-    for await (const locale of locales) {
-      postsTranslationsSearchQuery.push({
-        [`translations.${locale}.title`]: new RegExp(targetKeyword, 'i'),
-      });
-      postsTranslationsSearchQuery.push({
-        [`translations.${locale}.description`]: new RegExp(targetKeyword, 'i'),
-      });
-    }
-  }
-  const postSearchQuery = {
-    $and: [
-      {
-        $or: [
-          { title: new RegExp(targetKeyword, 'i') },
-          { description: new RegExp(targetKeyword, 'i') },
-          ...postsTranslationsSearchQuery,
-        ],
-      },
-      { status: 'published' },
-    ],
-  };
-
-  const metasSearchQuery = {
-    $and: [
-      {
-        $or: [
-          { name: new RegExp(targetKeyword, 'i') },
-          ...metasTranslationsSearchQuery,
-        ],
-      },
-      { status: 'published' },
-    ],
-  };
-
-  let posts = await postSchema
-    .find(postSearchQuery, postFieldRequestForCards, {
-      limit: size,
-      skip: size * page - size,
-      sort,
-    })
-    .select([...postFieldRequestForCards, `translations.${locale}.title`])
-    .lean();
-
-  posts = posts.map((doc) => {
-    if (doc._id) {
-      doc._id = doc._id.toString();
-    }
-    return doc;
-  });
-
-  const totalCount = await postSchema.countDocuments(postSearchQuery);
-  let metas = await metaSchema
-    .find(metasSearchQuery, {}, { sort })
-    .limit(size)
-    .lean();
-
-  metas = metas.map((doc: Document) => {
-    if (doc?._id) {
-      doc._id = doc._id.toString();
-    }
-    return doc;
-  });
-
-  const { actors, categories, tags } = (metas || []).reduce(
-    (acc: { [key: string]: Meta[] }, meta: Meta) => {
-      acc[meta?.type] = [...(acc?.[meta?.type] || []), meta];
-
-      return acc;
-    },
-    { actors: [], categories: [], tags: [] }
-  );
-
-  if (totalCount > 0) {
-    await saveSearchedKeyword(targetKeyword, totalCount);
-  }
-  cacheTag('cacheItem', `CPostRating-${targetKeyword}`);
-  return {
-    posts,
-    totalCount,
-    actors,
-    categories,
-    tags,
-  };
-};
-
-interface IGetUserPagePosts {
-  authorId: string;
-  status?: string;
-  skip?: number;
-  totalCount?: boolean;
-}
-
-export const getUserPagePosts = async ({
-  authorId,
-  skip = 0,
-  status = 'published',
-  totalCount,
-}: IGetUserPagePosts) => {
-  console.log('\x1b[33m%s\x1b[0m', 'skip => ', skip);
-  try {
+    await connectToDatabase('getUserPagePosts');
     const { initialSettings } = await getSettings(['initialSettings']);
     const limit = initialSettings?.contentSettings?.contentPerPage || 20;
 
@@ -544,22 +306,193 @@ export const getUserPagePosts = async ({
         {
           skip: skip || 0,
           limit,
-        }
+        },
       )
       .populate([{ path: 'thumbnail', select: { filePath: 1 } }])
       .lean();
 
-    posts = posts.map((doc) => {
-      if (doc._id) {
-        doc._id = doc._id.toString();
-      }
-      return doc;
-    });
+    const transformedPosts = posts.map((doc) => ({
+      ...doc,
+      _id: doc._id.toString(),
+    }));
 
     cacheTag('cacheItem', `CUserPagePosts-${authorId}-${skip}`);
-    return posts;
+    return transformedPosts;
   } catch (error) {
     console.error(`getUserPagePosts=> `, error);
     return [];
   }
 };
+
+// export const newPost = async ({ newPost, token }: INewPost) => {
+//   try {
+//     if (!newPost || !token) {
+//       return null;
+//     }
+//     const tokenData = await jwtValidator(token) as JWTPayload;
+//
+//     if (newPost?._id !== tokenData._id) {
+//       return null;
+//     }
+//
+//     await connectToDatabase('getUserPagePosts');
+//
+//     const editedNewPost = {
+//       ...newPost,
+//       tags: newPost.tags ? await _updateSaveMetas(newPost.tags) : [],
+//       categories: newPost.categories ? await _updateSaveMetas(newPost.categories) : [],
+//       actors: newPost.actors ? await _updateSaveMetas(newPost.actors) : [],
+//     };
+//
+//     const newPostDataToSave = new postSchema(editedNewPost);
+//
+//     const savedPost = await newPostDataToSave.save();
+//
+//     if (!savedPost) {
+//       return null;
+//     }
+//
+//     return { data: savedPost, message: 'Post Has Been Saved' };
+//
+//   } catch (error) {
+//     console.error(`getUserPagePosts=> `, error);
+//     return null;
+//   }
+// };
+
+export const getEditingPost = async ({ _id, token }: IGetEditingPost) => {
+  try {
+    if (!_id || !token) {
+      return null;
+    }
+    const tokenData = await jwtValidator(token) as JWTPayload;
+
+    await connectToDatabase('getEditingPost');
+
+    const post = await postSchema
+      .findOne({ _id, author: tokenData._id }, '-comments -views -likes -disLikes')
+      .populate([
+        {
+          path: 'author',
+          select: ['username', 'profileImage', 'role'],
+          populate: { path: 'profileImage', model: 'file' },
+        },
+        { path: 'categories', select: { name: 1, type: 1 } },
+        { path: 'images', select: { filePath: 1 }, model: 'file' },
+        { path: 'tags', select: { name: 1, type: 1 } },
+        { path: 'actors', select: { name: 1, type: 1, imageUrl: 1 } },
+        { path: 'thumbnail', select: { filePath: 1 } },
+      ])
+      .lean({
+        virtuals: true,
+        transform: (doc: Document) => {
+          if (doc?._id) {
+            doc._id = doc._id.toString();
+          }
+          // @ts-expect-error:it's fine
+          if (doc?.author?.profileImage?._id) {
+            // @ts-expect-error:it's fine
+            doc.author.profileImage._id =
+              // @ts-expect-error:it's fine
+              doc.author.profileImage._id.toString();
+          }
+          return doc;
+        },
+      });
+
+    if (!post) {
+      return null;
+    }
+    return post;
+  } catch (error) {
+
+    return null;
+  }
+};
+
+export const updatePost = async ({ data, token }: IUpdatePost) => {
+  try {
+    if (!data || !token) {
+      return null;
+    }
+
+    let postData;
+
+    try {
+      postData = JSON.parse(data);
+    } catch (error) {
+
+    }
+    const tokenData = await jwtValidator(token) as JWTPayload;
+
+    const countUserPendingPosts = await postSchema.countDocuments({
+      $and: [
+        { author: tokenData._id },
+        { status: 'pending' },
+      ],
+    });
+
+    if (countUserPendingPosts >= 10 && !postData._id) {
+      return {
+        message: 'You can not have more than 5 pending posts. Please wait for previous posts to be approved',
+      };
+    }
+
+
+  } catch (error) {
+  }
+};
+
+// posts = posts.map((doc) => {
+//   if (doc._id) {
+//     doc._id = doc._id.toString();
+//   }
+//   return doc;
+// });
+
+
+// posts = posts.map((doc) => {
+//   if (doc._id) {
+//     doc._id = doc._id.toString();
+//   }
+//   return doc;
+// });
+
+// export const deletePostByAuthor = async ({ postId, token }: IDeletePostByAuthor) => {
+//   try {
+//     const tokenData = await jwtValidator(token);
+//     if (!tokenData || !tokenData?._id) {
+//       return null;
+//     }
+//     await connectToDatabase('deletePostByAuthor');
+//
+//     const deletingPost = await postSchema
+//       .findById(_id)
+//       .select('author images')
+//       .populate([
+//         {
+//           path: 'images',
+//           select: { filePath: 1 },
+//           model: 'file',
+//         },
+//         {
+//           path: 'thumbnail',
+//           select: { filePath: 1 },
+//           model: 'file',
+//         },
+//       ])
+//       .lean();
+//
+//     if (deletingPost.author.toString() !== userData._id.toString()) {
+//       return {
+//         message: 'Unauthorized',
+//         type: 'error'
+//       };
+//     }
+//
+//     // const isId = isValidObjectId(_id);
+//   } catch (error) {
+//
+//   }
+// };
+

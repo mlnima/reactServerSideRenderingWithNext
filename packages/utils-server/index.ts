@@ -1,0 +1,1 @@
+export { jwtValidator } from './src/validators';

@@ -136,7 +136,10 @@ const nextConfig = {
     },
     sassOptions: {
         silenceDeprecations: ['legacy-js-api'],
-    }
+    },
+    transpilePackages: [
+        'ui',
+    ],
 
 }
 

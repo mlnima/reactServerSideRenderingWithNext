@@ -3,7 +3,7 @@ import React, {FC, useRef} from 'react';
 import styled from "styled-components";
 import { useSelector} from "react-redux";
 import { editPostAction} from "@store/reducers/postsReducer";
-import {uniqArrayBy} from "@repo/shared-util";
+import {uniqArrayBy} from "@repo/utils";
 import {DashboardStore, Store} from "@repo/typescript-types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useAppDispatch} from "@store/hooks";

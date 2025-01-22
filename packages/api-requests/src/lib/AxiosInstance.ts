@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 const createAxiosInstance = () => {
-
+    const dev = process.env.NODE_ENV !== 'production';
     const instance = axios.create({
-        baseURL:process.env.NEXT_PUBLIC_API_SERVER_URL,
+        baseURL: dev ? 'http://localhost:3002' :process.env.NEXT_PUBLIC_API_SERVER_URL,
     });
 
     instance.interceptors.request.use(

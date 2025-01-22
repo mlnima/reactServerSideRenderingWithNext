@@ -1,7 +1,7 @@
 import {FC} from "react";
 import parse from 'html-react-parser'
 import './WidgetText.scss'
-import { textContentReplacer } from '@repo/shared-util';
+import { textContentReplacer } from '@repo/utils';
 import {rtlLanguages} from "@repo/data-structures";
 
 

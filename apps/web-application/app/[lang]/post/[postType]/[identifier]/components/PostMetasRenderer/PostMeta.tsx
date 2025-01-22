@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import Link from "next/link";
-import {convertMetasTypeToSingular,capitalizeFirstLetters} from "@repo/shared-util";
+import {convertMetasTypeToSingular,capitalizeFirstLetters} from "@repo/utils";
 import {Meta} from "@repo/typescript-types";
 
 interface PostMetaPropTypes {

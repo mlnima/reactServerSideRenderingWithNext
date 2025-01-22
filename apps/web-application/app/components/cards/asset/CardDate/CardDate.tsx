@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { formatDatePostCard } from '@repo/shared-util';
+import { formatDatePostCard } from '@repo/utils';
 import './CardDate.scss';
 
 interface IProps {

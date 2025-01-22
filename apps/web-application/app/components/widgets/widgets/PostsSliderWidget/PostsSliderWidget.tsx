@@ -12,7 +12,7 @@ import {
   faChevronRight,
 } from '@fortawesome/free-solid-svg-icons';
 import { Post, Store } from '@repo/typescript-types';
-import { shortNumber, ratingCalculator } from '@repo/shared-util';
+import { shortNumber, ratingCalculator } from '@repo/utils';
 import './PostsSliderWidget.scss';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -231,10 +231,10 @@ export default PostsSliderWidget;
 // import useEmblaCarousel from 'embla-carousel-react'
 // import dynamic from "next/dynamic";
 // import {useSelector} from "react-redux";
-// import {ratingCalculator} from "@repo/shared-util";
+// import {ratingCalculator} from "@repo/utils";
 // import Autoplay from "embla-carousel-autoplay";
 // import {Post,utils} from "@repo/typescript-types";
-// import {shortNumber} from "@repo/shared-util";
+// import {shortNumber} from "@repo/utils";
 // import './PostsSliderWidget.styles.scss';
 // import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 // import {faChevronLeft, faChevronRight} from "@fortawesome/free-solid-svg-icons";

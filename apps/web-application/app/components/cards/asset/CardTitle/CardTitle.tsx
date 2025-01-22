@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React, {FC} from "react";
-import {capitalizeFirstLetter} from "@repo/shared-util";
+import {capitalizeFirstLetter} from "@repo/utils";
 import './CardTitle.scss';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowUpRightFromSquare} from "@fortawesome/free-solid-svg-icons";

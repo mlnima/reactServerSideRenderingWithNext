@@ -1,6 +1,6 @@
 import {FC} from "react";
 import {IdentitySettings} from "@repo/typescript-types";
-import {convertVariableNameToName} from "@repo/shared-util";
+import {convertVariableNameToName} from "@repo/utils";
 import styled from "styled-components";
 const Style = styled.div`
   textarea{

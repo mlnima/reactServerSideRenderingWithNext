@@ -2,7 +2,7 @@ import React, {FC, useEffect, useState} from 'react';
 import styled from "styled-components";
 import EditItemForm from "@components/pages/Design/Widgets/WidgetModel/MenuWidgetModelFields/EditItemForm";
 import {IMenuItem, WidgetData} from "@repo/typescript-types";
-import {inputValueSimplifier} from "@repo/shared-util";
+import {inputValueSimplifier} from "@repo/utils";
 
 const Styles = styled.div`
   background-color: rgba(0, 0, 0, .2);

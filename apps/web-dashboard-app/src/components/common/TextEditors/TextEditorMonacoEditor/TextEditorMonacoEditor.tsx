@@ -1,5 +1,5 @@
 import React from 'react';
-import {isJsonString} from '@repo/shared-util'
+import {isJsonString} from '@repo/utils'
 import Editor from "@monaco-editor/react";
 
 interface MonacoEditorProTypes {
@@ -15,7 +15,7 @@ interface MonacoEditorProTypes {
 const TextEditorMonacoEditor = (props: MonacoEditorProTypes) => {
 
     const onChangeHandler = (value : string) => {
-        if (isJsonString(props.value)) {
+        if (typeof props.value ==='string' && isJsonString(props.value)) {
             props.onChangeHandler(JSON.parse(value),props.name)
         } else {
             props.onChangeHandler(value,props.name)

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import Link from 'next/link';
-import { rangeNumGenerator } from '@repo/shared-util';
+import { rangeNumGenerator } from '@repo/utils';
 import './WidgetPagination.scss';
 
 interface WidgetPaginationPropTypes {

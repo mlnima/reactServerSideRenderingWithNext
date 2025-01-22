@@ -20,7 +20,7 @@ import {
   deleteComments,
   getComments,
   newComment,
-} from '@lib/database/operations/posts';
+} from '@lib/database/operations/comments';
 import { clearACacheByTag } from '@lib/serverActions';
 
 interface IProps {

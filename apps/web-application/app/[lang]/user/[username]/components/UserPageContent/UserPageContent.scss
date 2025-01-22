@@ -2,42 +2,9 @@
   color: var(--primary-text-color, #fff);
   padding: 10px;
 
-  .profileHeader {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px 0;
-    padding: 10px 0;
-    border-bottom: var(--default-border);
-    flex-direction: row;
-    gap: 30px;
-    flex-wrap: wrap;
 
-    .profileHeaderInfoActions {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      flex-wrap: wrap;
 
-      h1 {
-        font-size: initial;
-      }
-
-      .followCount {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-
-        p {
-          text-align: center;
-          margin: 5px 10px;
-        }
-      }
-    }
-  }
-
-  .profilePosts {
+  .profileContent {
     display: flex;
     justify-content: center;
     align-items: center;

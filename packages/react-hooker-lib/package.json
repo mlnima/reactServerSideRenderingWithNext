@@ -21,6 +21,6 @@
     "jest-presets": "*",
     "eslint-config-custom": "*",
     "tsconfig": "*",
-    "@repo/shared-util": "*"
+    "@repo/utils": "*"
   }
 }

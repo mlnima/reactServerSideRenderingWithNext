@@ -2,7 +2,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import WidgetImporter from "./WidgetImporter/WidgetImporter";
 import WidgetExporter from "./WidgetExporter/WidgetExporter";
-import {convertVariableNameToName} from "@repo/shared-util";
+import {convertVariableNameToName} from "@repo/utils";
 import {widgetsTypes,widgetsStaticPositions} from "@repo/data-structures";
 import styled from "styled-components";
 import {useSelector} from "react-redux";

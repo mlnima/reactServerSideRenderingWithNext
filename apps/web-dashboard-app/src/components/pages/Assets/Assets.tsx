@@ -13,7 +13,7 @@ import TableControls from '@components/pages/Assets/TableControls/TableControls'
 import TableHeader from '@components/pages/Assets/TableHeader/TableHeader';
 import TableBody from '@components/pages/Assets/TableBody/TableBody';
 import { getChatroomsAction } from '@store/reducers/chatroomsReducer';
-import { searchParamsToUrlQuery, searchParamsToObject } from '@repo/shared-util';
+import { searchParamsToUrlQuery, searchParamsToObject } from '@repo/utils';
 import tableItemProperties from './tableBodyItemProperties';
 
 const Style = styled.div``;

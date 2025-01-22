@@ -13,7 +13,7 @@ import { getPostAction, defineNewPost, changeActiveEditingLanguage } from '@stor
 import { DashboardStore } from '@repo/typescript-types';
 import { useAppDispatch } from '@store/hooks';
 import { LanguagesOptions } from '@repo/ui';
-import { isNumericString } from '@repo/shared-util';
+import { isNumericString } from '@repo/utils';
 import Author from "./Author";
 
 const AdminPostPageStyledDiv = styled.div`

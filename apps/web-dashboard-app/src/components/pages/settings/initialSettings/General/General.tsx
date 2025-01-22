@@ -1,6 +1,6 @@
 // // @ts-nocheck
 // import React, {useState,useRef} from 'react';
-// import {convertVariableNameToName, LanguagesOptions} from "@repo/shared-util";
+// import {convertVariableNameToName, LanguagesOptions} from "@repo/utils";
 // import styled from "styled-components";
 // import {useSelector} from "react-redux";
 // import {DashboardStore, utils} from "@repo/typescript-types";

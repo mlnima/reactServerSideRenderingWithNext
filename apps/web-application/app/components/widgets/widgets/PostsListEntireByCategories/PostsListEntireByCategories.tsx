@@ -3,7 +3,7 @@ import './PostsListEntireByCategories.scss';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons/faMagnifyingGlass';
-import { capitalizeFirstLetters } from '@repo/shared-util';
+import { capitalizeFirstLetters } from '@repo/utils';
 
 interface IProps {
     locale: string;

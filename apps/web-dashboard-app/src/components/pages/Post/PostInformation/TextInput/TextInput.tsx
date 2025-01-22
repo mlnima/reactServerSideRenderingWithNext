@@ -1,4 +1,4 @@
-import {convertVariableNameToName} from "@repo/shared-util";
+import {convertVariableNameToName} from "@repo/utils";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {DashboardStore, Store} from "@repo/typescript-types";

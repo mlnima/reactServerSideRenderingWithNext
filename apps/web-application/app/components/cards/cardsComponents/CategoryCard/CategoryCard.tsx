@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Meta } from "@repo/typescript-types";
 import Link from 'next/link';
-import { capitalizeFirstLetter } from '@repo/shared-util';
+import { capitalizeFirstLetter } from '@repo/utils';
 import './CategoryCard.scss';
 import CardImageRendererUseClient from '@components/cards/asset/CardImageRenderer/CardImageRendererUseClient';
 

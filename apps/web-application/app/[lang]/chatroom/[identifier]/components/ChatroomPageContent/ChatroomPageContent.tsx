@@ -2,7 +2,7 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import socket from '@lib/web-socket-client';
-import { headerSizeCalculator } from '@repo/shared-util';
+import { headerSizeCalculator } from '@repo/utils';
 import { setAlert } from '@store/reducers/globalStateReducer';
 import ChatroomTopbar from '../ChatroomTopbar/ChatroomTopbar';
 import ChatRoomMessageArea from '../ChatRoomMessageArea/ChatRoomMessageArea';

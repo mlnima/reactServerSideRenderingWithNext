@@ -1,6 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {loading} from "@store/reducers/globalStateReducer";
-import {clientAPIRequestStartAConversation} from "@repo/api-requests";
 import {NextRouter} from "next/router";
 
 interface IArgs {
@@ -19,14 +18,14 @@ export const startAConversationAction = createAsyncThunk<IResponse, IArgs>(
     async ({users,router}, thunkAPI) => {
         try {
 
-            thunkAPI.dispatch(loading(true));
-            const response = await clientAPIRequestStartAConversation({users})
-            //@ts-ignore
-            if (response?.data?.conversation?.id) {
-                //@ts-ignore
-                await router.push(`/messenger/${response.data.conversation.id}`)
-            }
-            thunkAPI.dispatch(loading(false));
+            // thunkAPI.dispatch(loading(true));
+            // const response = await clientAPIRequestStartAConversation({users})
+            // //@ts-ignore
+            // if (response?.data?.conversation?.id) {
+            //     //@ts-ignore
+            //     await router.push(`/messenger/${response.data.conversation.id}`)
+            // }
+            // thunkAPI.dispatch(loading(false));
         } catch (error) {
             thunkAPI.dispatch(loading(false));
         }

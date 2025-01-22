@@ -1,5 +1,5 @@
 import { getDictionary } from '../../../../../get-dictionary';
-import { capitalizeFirstLetter } from '@repo/shared-util';
+import { capitalizeFirstLetter } from '@repo/utils';
 import { AlternatesGenerators } from '@lib/alternatesCanonicalGenerator';
 import {IPageProps} from "@repo/typescript-types";
 import localDetector from "@lib/localDetector";

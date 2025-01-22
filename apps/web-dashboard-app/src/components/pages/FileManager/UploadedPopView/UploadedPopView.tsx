@@ -3,7 +3,7 @@ import UploadedFilePreviewImage from "./UploadedFilePreviewImage";
 import UploadedFilePreviewVideo from "./UploadedFilePreviewVideo";
 import UploadedFilePreviewText from "./UploadedFilePreviewText";
 import styled from "styled-components";
-import {fileTypeDetector} from "@repo/shared-util";
+import {fileTypeDetector} from "@repo/utils";
 import { useSelector} from "react-redux";
 import {DashboardStore, Store} from "@repo/typescript-types";
 import {fileManagerClosePopupAction, filManagerDeleteFileAction} from "@store/reducers/fileManagerReducer";

@@ -3,7 +3,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-regular-svg-icons/faEye';
-import { shortNumber } from '@repo/shared-util';
+import { shortNumber } from '@repo/utils';
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons/faThumbsUp';
 import { faThumbsDown } from '@fortawesome/free-solid-svg-icons/faThumbsDown';
 import './ActionButtons.scss';
@@ -15,6 +15,7 @@ import {
 
 import { faComments } from '@fortawesome/free-solid-svg-icons';
 import {clearACacheByTag} from "@lib/serverActions";
+import { ratePost } from '@lib/database/operations/posts';
 
 interface IProps {
     rating: boolean;
@@ -54,7 +55,16 @@ const ActionButtons: FC<IProps> = ({
     const onLikeOrDisLikeHandler = async (type: 'likes' | 'disLikes') => {
         if (loggedIn && _id) {
             setDisableRatingButtons(true);
-            await clientAPIRequestLikeDislikePost(_id, type)
+            // await clientAPIRequestLikeDislikePost(_id, type)
+            //     .finally(() => {
+            //         setDisableRatingButtons(false);
+            //         clearACacheByTag(`CPostRating-${_id}`);
+            //     });
+            await ratePost({
+              token:localStorage.getItem('wt'),
+              _id,
+              type
+            })
                 .finally(() => {
                     setDisableRatingButtons(false);
                     clearACacheByTag(`CPostRating-${_id}`);

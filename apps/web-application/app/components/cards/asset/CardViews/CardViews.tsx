@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { shortNumber } from '@repo/shared-util';
+import { shortNumber } from '@repo/utils';
 import './CardViews.scss';
 
 interface CardViewsPropTypes {

@@ -6,7 +6,7 @@ import {faCircleUser} from "@fortawesome/free-solid-svg-icons/faCircleUser";
 import {faXmark} from "@fortawesome/free-solid-svg-icons/faXmark";
 import {useAppDispatch} from "@store/hooks";
 import {resetMediaConnectionAction} from "@store/reducers/mediaConnectionReducer";
-import {capitalizeFirstLetter} from "@repo/shared-util";
+import {capitalizeFirstLetter} from "@repo/utils";
 import {useSelector} from "react-redux";
 import {User} from "@repo/typescript-types";
 

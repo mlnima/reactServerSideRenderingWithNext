@@ -1,9 +1,9 @@
 import { getDictionary } from '../../../../../get-dictionary';
-import { capitalizeFirstLetters } from '@repo/shared-util';
+import { capitalizeFirstLetters } from '@repo/utils';
 import { AlternatesGenerators } from '@lib/alternatesCanonicalGenerator';
 import { IPageProps } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
-import {getSearch} from "@lib/database/operations/posts";
+import {getSearch} from "@lib/database/operations/search";
 import {getSettings} from "@lib/database/operations/settings";
 
 const alternatesGenerators = new AlternatesGenerators();

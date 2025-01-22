@@ -37,7 +37,7 @@ import {WidgetData} from "./src/widgets/Widget";
 import {WidgetSettingsPropTypes,ISuggestion,UniqueDataTypes} from "./src/widgets/Widget";
 
 import {MenuItem} from "./src/widgets/MenuWidget/MenuItem";
-import {User,IUserPageData} from "./src/User";
+import {User,IUserPageData,IInitialUserPageData,ILoadedUserPageData,JWTPayload} from "./src/User";
 import {Comment} from "./src/Comment";
 import {CommentRaw} from "./src/Comment";
 import {NewComment} from "./src/Comment";
@@ -64,7 +64,10 @@ export type {
     IMessengerConversationMessage,
     CommentRaw,
     User,
+    JWTPayload,
     IUserPageData,
+    IInitialUserPageData,
+    ILoadedUserPageData,
     MenuItem,
     UniqueDataTypes,
     Comment,

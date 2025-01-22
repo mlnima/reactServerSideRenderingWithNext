@@ -1,10 +1,8 @@
-'use cache';
-import { Document, Types } from 'mongoose';
+"use server"
+import { Document } from 'mongoose';
 import { connectToDatabase, settingSchema } from '@repo/db';
 import {
-  unstable_cache,
   unstable_cacheTag as cacheTag,
-  unstable_cacheLife as cacheLife,
 } from 'next/cache';
 
 interface Setting extends Document {
@@ -16,6 +14,7 @@ interface Setting extends Document {
 export const getSettings = async (
   requireSettings: string[]
 ): Promise<Record<string, Setting>> => {
+  "use cache"
   try {
     await connectToDatabase('getSettings');
     const settings = await settingSchema

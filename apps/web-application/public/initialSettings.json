@@ -19,7 +19,7 @@
     "allowUserToPost": true,
     "postByUserSettings": {
       "video": {
-        "allow": false,
+        "allow": true,
         "maxTag": 3,
         "maxActors": 5
       },

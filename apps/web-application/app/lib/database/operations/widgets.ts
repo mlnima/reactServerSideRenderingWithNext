@@ -1,4 +1,4 @@
-'use cache';
+'use server';
 import { connectToDatabase, widgetSchema, postSchema, metaSchema,formSchema } from '@repo/db';
 import { clientAllowedSortOptions, postFieldRequestForCards } from '@repo/data-structures';
 import { Widget } from '@repo/typescript-types';
@@ -106,6 +106,7 @@ const findWidgetMetas = async (widgetData: any, withCount?: boolean): Promise<IO
 };
 
 export const getWidgets = async (positions: string[], locale: string) => {
+  "use cache"
   await connectToDatabase('getWidgets');
   let result = [];
   const widgets = await widgetSchema

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, FC } from 'react';
-import { convertVariableNameToName } from '@repo/shared-util';
+import { convertVariableNameToName } from '@repo/utils';
 import styled from 'styled-components';
 
 const TableHeaderStyledDiv = styled.div`

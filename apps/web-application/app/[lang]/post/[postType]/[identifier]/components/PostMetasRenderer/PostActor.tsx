@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import {convertMetasTypeToSingular, capitalizeFirstLetters} from "@repo/shared-util";
+import {convertMetasTypeToSingular, capitalizeFirstLetters} from "@repo/utils";
 import ActorMetaImageRenderer from "./ActorMetaImageRenderer";
 import {Meta} from "@repo/typescript-types";
 import Link from "next/link";

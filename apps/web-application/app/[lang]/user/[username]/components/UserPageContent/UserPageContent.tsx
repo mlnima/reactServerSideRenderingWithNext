@@ -5,228 +5,115 @@ import PostsCardsRenderer from '@components/cards/CardsRenderer/PostsCardsRender
 import { faCamera } from '@fortawesome/free-solid-svg-icons/faCamera';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getPosts } from '@lib/database/operations/posts';
-import { getLoadedUserPageData, getUserInitialPageData } from '@lib/database/operations/users';
-import { uniqArrayBy } from '@repo/shared-util';
+import { getLoadedUserPageData } from '@lib/database/operations/users';
+import { uniqArrayBy } from '@repo/utils';
 import { IUserPageData, Post } from '@repo/typescript-types';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { loading } from '@store/reducers/globalStateReducer';
 import { FC, useEffect, useRef, useState } from 'react';
-import AuthorPostsNavigation from './AuthorPostsNavigation';
-import ProfileHeader from './ProfileHeader';
+//import AuthorPostsNavigation from '../../posts/[postType]/components/AuthorPostsNavigation';
+import ProfileHeader from '../ProfileHeader';
 import './UserPageContent.scss';
+import { useSearchParams } from 'next/navigation';
 
 interface IProps {
   locale: string;
-  initialUserPageData: {
-    _id: string,
-    username: string,
-    role: string,
-    followingCount?: number,
-    followersCount?: number,
-    postsCount?: number,
-    profileImage?: {
-      _id: string,
-      filePath: string,
-    },
-    createdAt: string,
-    status?: string,
-    isVerified?: boolean,
-  };
+
+  initialUserPageData: IUserPageData;
   dictionary: {
     [key: string]: string;
   };
 }
 
-interface IGetUserPostsData {
-  override?: boolean;
-  authorId: string;
-  status: string;
-  skip: number;
-}
-
 const UserPageContent: FC<IProps> = ({ dictionary, locale, initialUserPageData }) => {
-  const dispatch = useAppDispatch();
   const { userData, loggedIn } = useAppSelector(({ user }) => user);
   const [isUserOwnProfile, setIsUserOwnProfile] = useState(false);
-  const [noMorePostToFetch, setNMoMorePostToFetch] = useState<boolean>(false);
   const [postStatusToFetch, setPostStatusToFetch] =
     useState<string>('published');
   const [userPagePosts, setUserPagePosts] = useState<Post[] | []>([]);
-  const isFetchingRef = useRef(false);
-  const { initialSettings } = useAppSelector(({ settings }) => settings);
+  const searchParams = useSearchParams();
 
-  const [userPageData, setUserPageData] = useState<IUserPageData | {}>({});
+  const [userPageData, setUserPageData] = useState<IUserPageData | null>(null);
 
   useEffect(() => {
-    setUserPageData(initialUserPageData)
-  }, []);
+    setUserPageData({
+      ...userPageData,
+      ...initialUserPageData,
+    });
+  }, [initialUserPageData]);
 
   useEffect(() => {
     if (loggedIn) {
-      getUserPageData()
+      getUserPageData();
     }
   }, [loggedIn]);
 
-  const getUserPageData = async ()  => {
+  useEffect(() => {
+    if (loggedIn) {
+      setIsUserOwnProfile(userData?._id === initialUserPageData._id);
+    }
+  }, [initialUserPageData._id, loggedIn, postStatusToFetch]);
+
+  // useEffect(() => {
+  //   if (
+  //     loggedIn &&
+  //     initialUserPageData.postsCount &&
+  //     initialUserPageData.postsCount > userPagePosts.length
+  //   ){
+  //     getUserPosts();
+  //   }
+  // }, [searchParams,loggedIn]);
+
+  const getUserPageData = async () => {
     try {
+      if (!initialUserPageData._id) return;
+
       const responseData = await getLoadedUserPageData({
-        _id:initialUserPageData._id,
+        userId: initialUserPageData._id,
         userWhoRequestIt: userData?._id as string,
       });
-      // if (responseData._id) {
-      //   await getUserPostsData({
-      //     status: postStatusToFetch || 'published',
-      //     authorId: userPageData?._id,
-      //     skip: userPagePosts.length,
-      //   });
-      // }
+
       setUserPageData({
         ...userPageData,
-        ...responseData
+        ...responseData,
       });
+
       return null;
     } catch {
       return null;
     }
   };
 
-  useEffect(() => {
-    if (loggedIn)
-      console.log(`userData?._id === initialUserPageData._id)=> `,userData?._id === initialUserPageData._id)
-      setIsUserOwnProfile(userData?._id === initialUserPageData._id);
+  const getUserPosts = async () => {
+    const currentPageQuery = searchParams.get('page');
+    const currentPage =
+      currentPageQuery && typeof currentPageQuery === 'string'
+        ? parseInt(currentPageQuery, 10)
+        : 1;
 
-
-
-  }, [initialUserPageData._id,loggedIn, postStatusToFetch]);
-  // if (initialUserPageData?._id) {
-  //   getUserPostsData({
-  //     override: true,
-  //     status: postStatusToFetch,
-  //     authorId: userPageData?._id,
-  //     skip: 0,
-  //   });
-  // }
-
-
-  // useEffect(() => {
-  //   const handleScroll = async () => {
-  //     if (isFetchingRef.current) return;
-  //     const scrolled = window.scrollY;
-  //     const viewportHeight = window.innerHeight;
-  //     const fullHeight = document.documentElement.scrollHeight;
-  //
-  //     if (scrolled + viewportHeight >= fullHeight - 20) {
-  //       if (userPageData?._id) {
-  //         isFetchingRef.current = true;
-  //         if (!noMorePostToFetch) {
-  //           await getUserPostsData({
-  //             status: postStatusToFetch,
-  //             authorId: userPageData._id,
-  //             skip: userPagePosts.length,
-  //           });
-  //           isFetchingRef.current = false;
-  //           window.scrollTo(0, scrolled - 20);
-  //         }
-  //       }
-  //     }
-  //   };
-  //
-  //   window.addEventListener('scroll', handleScroll);
-  //
-  //   return () => {
-  //     window.removeEventListener('scroll', handleScroll);
-  //   };
-  // }, [userPageData?._id, userPagePosts?.length, noMorePostToFetch]);
-
-  const getUserPostsData = async ({
-                                    authorId,
-                                    skip = 0,
-                                    status = 'published',
-                                    override = false,
-                                  }: IGetUserPostsData) => {
-    try {
-      if (authorId) {
-        dispatch(loading(true));
-
-        const { posts, totalCount } = await getPosts({
-          locale,
-          page: 1,
-          status,
-          author: authorId,
-        }).finally(() => {
-          dispatch(loading(false));
-        });
-
-        if (
-          posts?.length <
-          (initialSettings?.contentSettings?.contentPerPage || 20) &&
-          !noMorePostToFetch
-        ) {
-          setNMoMorePostToFetch(true);
-        }
-
-        if (posts?.length > 0) {
-          const newData = [...(posts || [])];
-          if (override) {
-            setUserPagePosts(newData);
-          } else {
-            const newSetOfPost = setUserPagePosts((prevState) =>
-              uniqArrayBy([...prevState, ...newData], '_id'),
-            );
-          }
-        } else {
-          setUserPagePosts([]);
-        }
-      }
-    } catch {
-      return null;
+    const { posts, totalCount } = await getPosts({
+      locale,
+      page: currentPage,
+      status: postStatusToFetch || 'published',
+      author: initialUserPageData._id,
+    });
+    if (posts) {
+      setUserPagePosts(posts);
     }
   };
 
-  // useEffect(() => {
-  //     console.log('userPagePosts=> ',userPagePosts)
-  // }, [userPagePosts]);
 
   if (!loggedIn) return <LoggedInRequirePageMessage dictionary={dictionary} />;
 
   return (
     <div className={'userPageContent'}>
-      <ProfileHeader
-        userPageData={userPageData}
-        setUserPageData={setUserPageData}
-        isUserOwnProfile={isUserOwnProfile}
-        dictionary={dictionary}
-      />
-
-      <div className="profilePosts">
-        {(isUserOwnProfile || userData.role === 'administrator') && (
-          <AuthorPostsNavigation
-            setPostStatusToFetch={setPostStatusToFetch}
-            dictionary={dictionary}
-            userRole={userData?.role}
-          />
-        )}
-
-        {/*{userPagePosts?.length > 0 && (*/}
-        {/*  <div className="postsContainer">*/}
-        {/*    <PostsCardsRenderer*/}
-        {/*      locale={locale}*/}
-        {/*      previewMode={true}*/}
-        {/*      dictionary={dictionary}*/}
-        {/*      posts={userPagePosts}*/}
-        {/*    />*/}
-        {/*  </div>*/}
-        {/*)}*/}
-
-        {/*{userPagePosts?.length === 0 && (*/}
-        {/*  <div className={'noPosts'}>*/}
-        {/*    <div className={'profileNoPostsYet'}>*/}
-        {/*      <FontAwesomeIcon icon={faCamera} />*/}
-        {/*    </div>*/}
-        {/*    <h2 className="profile-no-posts-title">*/}
-        {/*      {dictionary?.['Nothing Here'] || 'Nothing Here'}*/}
-        {/*    </h2>*/}
-        {/*  </div>*/}
+      <div className="profileContent">
+        {/*{(isUserOwnProfile || userData.role === 'administrator') && (*/}
+        {/*  <AuthorPostsNavigation*/}
+        {/*    setPostStatusToFetch={setPostStatusToFetch}*/}
+        {/*    dictionary={dictionary}*/}
+        {/*    userRole={userData?.role}*/}
+        {/*  />*/}
         {/*)}*/}
       </div>
     </div>
@@ -234,6 +121,103 @@ const UserPageContent: FC<IProps> = ({ dictionary, locale, initialUserPageData }
 };
 
 export default UserPageContent;
+// <ProfileHeader
+//   userPageData={userPageData}
+//   setUserPageData={setUserPageData}
+//   dictionary={dictionary}
+//   getUserPageData={getUserPageData}
+// />
+{/*{userPagePosts?.length > 0 && (*/}
+{/*  <div className="postsContainer">*/}
+{/*    <PostsCardsRenderer*/}
+{/*      locale={locale}*/}
+{/*      previewMode={true}*/}
+{/*      dictionary={dictionary}*/}
+{/*      posts={userPagePosts}*/}
+{/*    />*/}
+{/*  </div>*/}
+{/*)}*/}
+// const getUserPostsData = async (
+//   {
+//     authorId,
+//     page = 1,
+//     status = 'published',
+//   }: IGetUserPostsData) => {
+//   try {
+//     if (authorId) {
+//       const { posts, totalCount } = await getPosts({
+//         locale,
+//         page: searchParams.get('page') || 1,
+//         status,
+//         author: authorId,
+//       });
+//
+//       setUserPagePosts(posts);
+//
+//     }
+//   } catch {
+//     return null;
+//   }
+// };
+
+// if (initialUserPageData?._id) {
+
+// }
+
+
+// useEffect(() => {
+//   const handleScroll = async () => {
+//     if (isFetchingRef.current) return;
+//     const scrolled = window.scrollY;
+//     const viewportHeight = window.innerHeight;
+//     const fullHeight = document.documentElement.scrollHeight;
+//
+//     if (scrolled + viewportHeight >= fullHeight - 20) {
+//       if (userPageData?._id) {
+//         isFetchingRef.current = true;
+//         if (!noMorePostToFetch) {
+//           await getUserPostsData({
+//             status: postStatusToFetch,
+//             authorId: userPageData._id,
+//             skip: userPagePosts.length,
+//           });
+//           isFetchingRef.current = false;
+//           window.scrollTo(0, scrolled - 20);
+//         }
+//       }
+//     }
+//   };
+//
+//   window.addEventListener('scroll', handleScroll);
+//
+//   return () => {
+//     window.removeEventListener('scroll', handleScroll);
+//   };
+// }, [userPageData?._id, userPagePosts?.length, noMorePostToFetch]);
+
+
+// useEffect(() => {
+//     console.log('userPagePosts=> ',userPagePosts)
+// }, [userPagePosts]);
+
+// if (
+//   posts?.length <
+//   (initialSettings?.contentSettings?.contentPerPage || 20) &&
+//   !noMorePostToFetch
+// ) {
+//   setNMoMorePostToFetch(true);
+// }
+
+// if (posts?.length > 0) {
+//   if (override) {
+//     setUserPagePosts(posts);
+//   } else {
+//     // @ts-expect-error: its fine
+//     setUserPagePosts((prevState) => uniqArrayBy([...prevState, ...posts], '_id'));
+//   }
+// } else {
+//   setUserPagePosts([]);
+// }
 
 // {/*{postStatuses.filter(postStatus => postStatus !== 'trash' && postStatus !== 'draft').map(postStatus => {*/}
 //     {/*    return (*/}
@@ -279,3 +263,19 @@ export default UserPageContent;
 // username: '',
 // about: '',
 // _id: '',
+
+// initialUserPageData: {
+//   _id: string,
+//   username: string,
+//   role: string,
+//   followingCount?: number,
+//   followersCount?: number,
+//   postsCount?: number,
+//   profileImage?: {
+//     _id: string,
+//     filePath: string,
+//   },
+//   createdAt: string,
+//   status?: string,
+//   isVerified?: boolean,
+// };

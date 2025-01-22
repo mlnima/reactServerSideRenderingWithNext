@@ -1,7 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { loading } from '@store/reducers/globalStateReducer';
-import {clientAPIRequestLoadOlderMessages} from '@repo/api-requests';
+// import {clientAPIRequestLoadOlderMessages} from '@repo/api-requests';
 import React from "react";
+import { getConversationMessages } from '@lib/database/operations/Messenger';
 
 interface IArgs {
     limit: number;
@@ -20,7 +21,10 @@ export const loadOlderMessagesAction = createAsyncThunk<IResponse, IArgs>(
         try {
             thunkAPI.dispatch(loading(true));
 
-            const response = await clientAPIRequestLoadOlderMessages({ limit, skip, conversationId });
+            //const response = await clientAPIRequestLoadOlderMessages({ limit, skip, conversationId });
+
+            const messages = await getConversationMessages({ limit, skip, conversationId,token:localStorage.getItem('wt') });
+            console.log(`messages=> `,messages)
             thunkAPI.dispatch(loading(false));
 
             if (messageAreaRef?.current) {
@@ -31,7 +35,7 @@ export const loadOlderMessagesAction = createAsyncThunk<IResponse, IArgs>(
             }
 
             //@ts-ignore
-            return { messages: response?.data?.messages || [] };
+            return { messages: messages || [] };
         } catch (error) {
             thunkAPI.dispatch(loading(false));
             return { messages: [] }; // Changed from 'conversationsList' to 'messages' to match the interface

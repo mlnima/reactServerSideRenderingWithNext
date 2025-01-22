@@ -1,5 +1,11 @@
-import { connectToDatabase, userSchema, postSchema } from '@repo/db/dist/index';
+"use server"
+import { connectToDatabase, userSchema, postSchema } from '@repo/db';
 import {User} from '@repo/typescript-types'
+
+
+//next
+// remove the followers field and add only followersCount
+
 
 export const fixUserDocuments = async () => {
   try {
@@ -23,7 +29,14 @@ export const fixUserDocuments = async () => {
         { _id: user._id },
         { $set: { followersCount, followingCount, postsCount } }
       );
+
+      console.log('\x1b[33m%s\x1b[0m','updated  => ', user._id );
     }
+
+    await userSchema.updateMany({}, { $unset: { followers: 1 } });
+
+
+
   } catch (error) {
     console.error('Error fixing database:', error);
   }

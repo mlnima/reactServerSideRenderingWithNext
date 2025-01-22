@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { convertVariableNameToName } from '@repo/shared-util';
+import { convertVariableNameToName } from '@repo/utils';
 import styled from 'styled-components';
 import { postStatuses, userStatus } from '@repo/data-structures';
 import { useSelector } from 'react-redux';

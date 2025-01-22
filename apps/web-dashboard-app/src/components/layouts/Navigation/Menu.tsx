@@ -5,7 +5,7 @@ import {useSelector} from "react-redux";
 import {DashboardStore} from "@repo/typescript-types";
 import menuItems from './menuItems.json'
 import {setSidebarStatus} from "@store/reducers/globalStateReducer";
-import {convertVariableNameToName} from "@repo/shared-util";
+import {convertVariableNameToName} from "@repo/utils";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {NavLink} from "react-router-dom";
 import {faPlusMinus} from "@fortawesome/free-solid-svg-icons/faPlusMinus";

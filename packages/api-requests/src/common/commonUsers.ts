@@ -5,6 +5,7 @@ export const commonAPIRequestGetSignedInUserData = async (fields:string[])=>{
 }
 
 export const commonAPIRequestLoginUser = async (username:string, password:string)=>{
+    console.log('\x1b[33m%s\x1b[0m','process.env.NEXT_PUBLIC_API_SERVER_URL => ',process.env.NEXT_PUBLIC_API_SERVER_URL );
     return await AxiosInstance.get(`/api/v1/user/login`,{
         params:{
             username,

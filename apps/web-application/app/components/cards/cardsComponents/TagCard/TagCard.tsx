@@ -1,7 +1,7 @@
 import {FC} from "react";
 import {Meta} from "@repo/typescript-types";
 import Link from "next/link";
-import {capitalizeFirstLetter} from "@repo/shared-util";
+import {capitalizeFirstLetter} from "@repo/utils";
 import dynamic from "next/dynamic";
 import CardTitle from "@components/cards/asset/CardTitle/CardTitle";
 import '../metaCard.scss'

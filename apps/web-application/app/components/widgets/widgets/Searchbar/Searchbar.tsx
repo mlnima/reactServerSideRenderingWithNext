@@ -16,9 +16,10 @@ import {
   setBackgroundFilter,
   setLoading,
 } from '@store/reducers/globalStateReducer';
-import { APISearchSuggestions } from '@repo/api-requests';
+// import { APISearchSuggestions } from '@repo/api-requests';
 import SearchbarKeywordSuggestions from '@components/widgets/widgets/Searchbar/SearchbarKeywordSuggestions';
 import { ISuggestion } from '@repo/typescript-types';
+import { getSearchSuggestion } from '@lib/database/operations/search';
 
 interface IProps {
   locale: string;
@@ -122,9 +123,9 @@ const SearchBar: React.FC<IProps> = ({ dictionary, locale }) => {
     setKeyword(userInput);
 
     if (userInput.length > 2) {
-      const suggestionsData = await APISearchSuggestions(userInput);
-      if (suggestionsData?.data?.length !== 0) {
-        setSuggestions(suggestionsData.data);
+      const suggestionsData = await getSearchSuggestion(userInput);
+      if (suggestionsData && suggestionsData.length > 0) {
+        setSuggestions(suggestionsData);
       }
     }
   };

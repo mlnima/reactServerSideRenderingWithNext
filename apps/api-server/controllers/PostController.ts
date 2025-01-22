@@ -734,7 +734,7 @@ class PostController {
         }
     }
 
-    static async MetaSuggestion(req: Request, res: Response) {
+    static async  MetaSuggestion(req: Request, res: Response) {
         try {
             const type = {type: req.query?.type};
             const statusQuery = {status: 'published'};
@@ -878,7 +878,6 @@ class PostController {
             return res.status(500).json({message: 'Something Went Wrong'});
         }
     }
-
 
     //---------------------Dashboard--------------------
 

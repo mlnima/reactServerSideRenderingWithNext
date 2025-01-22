@@ -3,13 +3,13 @@ import React, {FC, MouseEventHandler, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {InitialSettings} from "@repo/typescript-types";
 import {postTypes} from '@repo/data-structures';
-import {inputValueSimplifier} from '@repo/shared-util';
+import {inputValueSimplifier} from '@repo/utils';
 import {editInitialSettings} from '@store/reducers/settingsReducer';
 import {useAppDispatch} from '@store/hooks';
 import {faMicrophone} from '@fortawesome/free-solid-svg-icons/faMicrophone';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faChevronDown, faChevronUp} from '@fortawesome/free-solid-svg-icons';
-import {convertVariableNameToName, capitalizeFirstLetter} from '@repo/shared-util';
+import {convertVariableNameToName, capitalizeFirstLetter} from '@repo/utils';
 
 interface StyleProps {
     className?: any;

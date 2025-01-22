@@ -4,7 +4,7 @@ import styled from "styled-components";
 import {useSearchParams} from "react-router-dom";
 import paramsObjectGenerator from "@variables/paramsObjectGenerator";
 import { userRoles } from '@repo/data-structures';
-import {capitalizeFirstLetter} from "@repo/shared-util";
+import {capitalizeFirstLetter} from "@repo/utils";
 
 const Style = styled.div``;
 

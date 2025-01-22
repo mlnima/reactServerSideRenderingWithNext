@@ -2,7 +2,7 @@ import React, { FC, useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { useSearchParams } from 'react-router-dom';
 import paramsObjectGenerator from '@variables/paramsObjectGenerator';
-import { capitalizeFirstLetter } from '@repo/shared-util';
+import { capitalizeFirstLetter } from '@repo/utils';
 
 const AssetPaginationStyledDiv = styled.div`
     display: flex;

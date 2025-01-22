@@ -2,11 +2,11 @@ import React, {useState} from "react";
 import styled from "styled-components";
 import {DashboardStore} from "@repo/typescript-types";
 import {postTypes} from "@repo/data-structures";
-import {convertVariableNameToName} from "@repo/shared-util";
+import {convertVariableNameToName} from "@repo/utils";
 import {useAppDispatch} from "@store/hooks";
 import {useSelector} from "react-redux";
 import {editMembershipSettingsAction, updateSettingAction} from "@store/reducers/settingsReducer";
-import {inputValueSimplifier} from "@repo/shared-util";
+import {inputValueSimplifier} from "@repo/utils";
 
 const Style = styled.div`
 

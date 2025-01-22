@@ -4,9 +4,9 @@ interface IProps {
     dictionary: {
         [key: string]: string;
     },
-    postsCount:number,
-    followersCount:number,
-    followingCount:number,
+    postsCount?:number ,
+    followersCount?:number,
+    followingCount?:number,
 
 }
 

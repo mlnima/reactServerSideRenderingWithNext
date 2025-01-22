@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, {FC, useState} from 'react';
-import {inputValueSimplifier} from "@repo/shared-util";
+import {inputValueSimplifier} from "@repo/utils";
 
 interface AddFormConditionalPropTypes{
     setWidgetData:React.SetStateAction<any>

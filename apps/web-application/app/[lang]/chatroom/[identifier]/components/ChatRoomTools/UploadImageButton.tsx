@@ -4,7 +4,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCamera} from "@fortawesome/free-solid-svg-icons/faCamera";
 import socket from '@lib/web-socket-client';
 import {useAppSelector} from "@store/hooks";
-import {imageCanvasCompressor} from "@repo/shared-util";
+import {imageCanvasCompressor} from "@repo/utils";
 
 interface PropTypes {
     inputRef: React.RefObject<HTMLInputElement>,

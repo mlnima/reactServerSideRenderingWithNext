@@ -5,7 +5,7 @@ import {
   setAlert,
   setBackgroundFilter,
 } from '@store/reducers/globalStateReducer';
-import { login } from '@lib/database/actions/auth';
+import { login } from '@lib/database/operations/auth';
 
 interface LoginActionArgs {
   username: string;

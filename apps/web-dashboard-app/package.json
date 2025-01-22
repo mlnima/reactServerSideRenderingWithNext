@@ -5,7 +5,6 @@
   "private": true,
   "dependencies": {
     "@babel/core": "^7.20.12",
-    "@craco/craco": "^5.9.0",
     "@fortawesome/fontawesome": "^1.1.8",
     "@fortawesome/fontawesome-free-solid": "^5.0.13",
     "@fortawesome/fontawesome-svg-core": "^6.2.1",
@@ -80,7 +79,9 @@
     "workbox-webpack-plugin": "^6.4.1"
   },
   "scripts": {
-    "dev": "cross-env BROWSER=none PORT=3008 node scripts/start.js",
+    "start": "craco start",
+    "dev": "cross-env BROWSER=none PORT=3008 cross-env craco start",
+    "dev2": "cross-env BROWSER=none PORT=3008 node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js"
   },
@@ -104,7 +105,8 @@
   },
   "devDependencies": {
     "babel-loader": "^9.1.2",
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "@craco/craco": "^5.9.0"
   },
   "jest": {
     "roots": [

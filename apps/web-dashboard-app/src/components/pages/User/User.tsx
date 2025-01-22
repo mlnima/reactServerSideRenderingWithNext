@@ -2,7 +2,7 @@ import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {useSelector} from "react-redux";
 import styled from "styled-components";
 import {userStatus, userRoles} from "@repo/data-structures";
-import {convertVariableNameToName} from "@repo/shared-util";
+import {convertVariableNameToName} from "@repo/utils";
 import {DashboardStore, Store} from "@repo/typescript-types";
 import {useAppDispatch} from "@store/hooks";
 import {useParams, useSearchParams} from "react-router-dom";

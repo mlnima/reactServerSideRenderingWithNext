@@ -1,7 +1,7 @@
 'use client';
 import React, { FC } from 'react';
-import { convertDurationStringToIso8601 } from '@repo/shared-util';
-import { convertDateToIsoString } from '@repo/shared-util';
+import { convertDurationStringToIso8601,convertDateToIsoString } from '@repo/utils';
+
 import { Post } from "@repo/typescript-types";
 import './VideoPlayer.scss';
 // import { clientCheckDeletedVideo } from '@repo/api-requests';

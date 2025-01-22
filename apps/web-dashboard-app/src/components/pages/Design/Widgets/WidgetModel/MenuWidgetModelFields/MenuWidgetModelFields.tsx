@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { WidgetData, IMenuItem } from '@repo/typescript-types';
 import AddNewItemForm from '@components/pages/Design/Widgets/WidgetModel/MenuWidgetModelFields/AddNewItemForm';
 import ItemPreview from '@components/pages/Design/Widgets/WidgetModel/MenuWidgetModelFields/ItemPreview';
-import { inputValueSimplifier,nestedObjectModifier } from '@repo/shared-util';
+import { inputValueSimplifier,nestedObjectModifier } from '@repo/utils';
 
 const MenuWidgetModelFieldsStyledDiv = styled.div`
     .mobileNavigationLabel {

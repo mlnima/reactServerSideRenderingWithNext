@@ -6,7 +6,7 @@ import { editInitialSettings } from '@store/reducers/settingsReducer';
 import { postTypes } from '@repo/data-structures';
 import { useSelector } from 'react-redux';
 import { DashboardStore } from "@repo/typescript-types";
-import { inputValueSimplifier } from '@repo/shared-util';
+import { inputValueSimplifier } from '@repo/utils';
 
 const Style = styled.div`
     display: flex;

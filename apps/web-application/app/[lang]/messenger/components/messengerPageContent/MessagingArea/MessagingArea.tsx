@@ -1,9 +1,9 @@
 'use client';
 import React, {FC, useEffect, useRef} from 'react';
 import Message from "../Message/Message";
-import {uniqArrayBy} from '@repo/shared-util'
+import {uniqArrayBy} from '@repo/utils'
 import {useAppSelector} from "@store/hooks";
-import {sortArrayByPropertyOfObject} from '@repo/shared-util';
+import {sortArrayByPropertyOfObject} from '@repo/utils';
 import './MessagingArea.scss'
 import {IMessengerConversation, IMessengerConversationMessage} from "@repo/typescript-types";
 

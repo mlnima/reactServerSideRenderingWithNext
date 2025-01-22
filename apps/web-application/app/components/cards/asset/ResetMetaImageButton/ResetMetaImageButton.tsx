@@ -1,10 +1,10 @@
 "use client";
 import React, {FC} from "react";
 import { useRouter } from 'next/navigation'
-import {clientAPIRequestResetMetaImage} from "@repo/api-requests";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faRotateRight} from "@fortawesome/free-solid-svg-icons/faRotateRight";
 import './ResetMetaImageButton.scss'
+import { resetMetaImage } from '@lib/database/operations/metas';
 
 
 interface PropTypes {
@@ -15,7 +15,7 @@ const ResetMetaImageButton: FC<PropTypes> = ({_id}) => {
     const {refresh} = useRouter()
 
     const onClickHandler = async ()=>{
-        await clientAPIRequestResetMetaImage(_id).then(()=>{
+        await resetMetaImage(_id).then(()=>{
             refresh()
         })
     }

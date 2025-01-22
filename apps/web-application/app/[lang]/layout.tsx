@@ -1,6 +1,6 @@
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
-import ServerSideStore from '@store/ServerSideStore';
+//import ServerSideStore from '@store/ServerSideStore';
 config.autoAddCss = false;
 import '@components/global/styles/global.styles.scss';
 import ReduxProvider from '@store/ReduxProvider';
@@ -31,7 +31,6 @@ import { ILayoutProps } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
 import { getWidgets } from '@lib/database/operations/widgets';
 import { getSettings } from '@lib/database/operations/settings';
-import connectToDatabase from "@lib/database/databaseConnection";
 
 // export async function generateStaticParams() {
 //     return i18n.locales.map((lng: string) => ({ lng }));
@@ -46,8 +45,6 @@ const RootLayout = async (props: ILayoutProps) => {
   const dictionary = await getDictionary(locale);
 
   const { initialSettings } = await getSettings(['initialSettings']);
-
-  ServerSideStore.setInitialSettings(initialSettings);
 
   const widgets = await getWidgets(
     ['footer', 'header', 'topBar', 'navigation'],

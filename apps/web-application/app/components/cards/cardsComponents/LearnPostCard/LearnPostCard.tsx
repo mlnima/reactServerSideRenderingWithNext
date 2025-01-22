@@ -5,7 +5,7 @@ import CardTitle from '../../asset/CardTitle/CardTitle';
 import '../postCard.scss';
 import './LearnPostCard.scss';
 import {imageLessCardColors} from '@repo/data-structures';
-import {randomNumberGenerator} from '@repo/shared-util';
+import {randomNumberGenerator} from '@repo/utils';
 import {connection} from 'next/server'
 
 import CardStats from '@components/cards/asset/CardStats/CardStats';

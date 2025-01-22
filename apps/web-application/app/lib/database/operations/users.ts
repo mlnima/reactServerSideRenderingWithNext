@@ -1,10 +1,10 @@
-'use cache';
+"use server"
 import { connectToDatabase, userSchema, postSchema } from '@repo/db';
-import { notFound, unstable_rethrow } from 'next/navigation';
+import { unstable_rethrow } from 'next/navigation';
 import {
   unstable_cacheTag as cacheTag,
 } from 'next/cache';
-import { Document } from 'mongoose';
+
 import { ObjectId } from 'mongodb';
 
 interface IGetUserInitialPageData {
@@ -12,10 +12,12 @@ interface IGetUserInitialPageData {
   userWhoRequestIt: string;
 }
 
-export const getUserInitialPageData = async ({
-                                               username,
-                                               userWhoRequestIt,
-                                             }: IGetUserInitialPageData) => {
+export const getUserInitialPageData = async (
+  {
+    username,
+    userWhoRequestIt,
+  }: IGetUserInitialPageData) => {
+  "use cache"
   try {
     await connectToDatabase('getUserInitialPageData');
     const pipeline = [
@@ -68,7 +70,8 @@ export const getUserInitialPageData = async ({
     if (userData?.profileImage?._id) {
       userData.profileImage._id = userData.profileImage._id.toString();
     }
-    cacheTag('cacheItem', `CUser-${username}`);
+
+    //cacheTag('cacheItem', `CUser-${username}`);
 
     return userData;
   } catch (error) {
@@ -87,31 +90,50 @@ export const getLoadedUserPageData = async (
     userId,
     userWhoRequestIt,
   }: IGetLoadedUserPageData) => {
+  "use cache"
   try {
-    await connectToDatabase('getUserInitialPageData');
+    await connectToDatabase('getLoadedUserPageData');
 
-    const user = await userSchema.findById(userId).lean()
+    // Perform all checks using a single query for each user
+    const [targetUser, requestingUser] = await Promise.all([
+      userSchema.findOne(
+        { _id: userId },
+        {
+          _id: 1,
+          blockList: { $elemMatch: { $eq: userWhoRequestIt } },
+          following: { $elemMatch: { $eq: userWhoRequestIt } },
+        },
+      ),
+      userSchema.findOne(
+        { _id: userWhoRequestIt },
+        {
+          _id: 1,
+          blockList: { $elemMatch: { $eq: userId } },
+          following: { $elemMatch: { $eq: userId } },
+        },
+      ),
+    ]);
 
-    if (!user) {
-      console.log('\x1b[33m%s\x1b[0m', 'NO USER FOUND');
-      return null;
-    }
-
+    // Convert results into boolean values
     const data = {
-      _id: user._id.toString(),
-      didThisUserBlockRequester: user.blockList ? user.blockList.includes(userWhoRequestIt) : false,
-      isFollowed: user.followers ? user.followers.includes(userWhoRequestIt) : false
-    }
+      isBlockedByTargetUser: !!targetUser?.blockList?.length,
+      isFollowedByTargetUser: !!targetUser?.following?.length,
+      isBlocked: !!requestingUser?.blockList?.length,
+      isFollowed: !!requestingUser?.following?.length,
+    };
 
-    cacheTag('cacheItem', `CUserPageInitial-${data._id}`);
+    cacheTag('cacheItem', `CUserPageLoaded-${userId}-${userWhoRequestIt}`);
 
+    return data;
   } catch (error) {
-
+    console.error(`getLoadedUserPageData => `, error);
+    return null;
   }
 };
 
 
 export const getInitialUserPageData = async (username: string | undefined) => {
+  "use cache"
   try {
     await connectToDatabase('getInitialUserPageData');
 
@@ -150,7 +172,7 @@ export const getInitialUserPageData = async (username: string | undefined) => {
       status: user.status,
       isVerified: user.isVerified,
     };
-    console.log('\x1b[33m%s\x1b[0m', 'data => ', data);
+
     cacheTag('cacheItem', `CUserPageInitial-${data._id}`);
 
     return data;
@@ -160,3 +182,102 @@ export const getInitialUserPageData = async (username: string | undefined) => {
     return null;
   }
 };
+
+interface ISendFollowUnfollowRequest {
+  follower: string,
+  followed: string
+}
+
+export const follow = async ({ follower, followed }: ISendFollowUnfollowRequest) => {
+  try {
+    await connectToDatabase('follow');
+
+    const alreadyFollowing = await userSchema.exists({
+      _id: follower,
+      following: { $elemMatch: { $eq: followed } },
+    });
+
+    if (alreadyFollowing) {
+      console.log('User is already followed.');
+      return null;
+    }
+
+    await userSchema.findByIdAndUpdate(follower, { $addToSet: { following: followed } });
+    await userSchema.findByIdAndUpdate(followed, { $inc: { followersCount: 1 } });
+    return null;
+  } catch (error) {
+    console.error(`sendFollowRequest => `, error);
+    return null;
+  }
+};
+
+export const unfollow = async ({ follower, followed }: ISendFollowUnfollowRequest) => {
+  try {
+    await connectToDatabase('unfollow');
+
+    const alreadyFollowing = await userSchema.exists({
+      _id: follower,
+      following: { $elemMatch: { $eq: followed } },
+    });
+
+    if (!alreadyFollowing) {
+      console.log('User is not followed.');
+      return null;
+    }
+
+    await userSchema.findByIdAndUpdate(follower, { $pull: { following: followed } });
+    await userSchema.findByIdAndUpdate(followed, { $inc: { followersCount: -1 } });
+    return null;
+  } catch (error) {
+    console.error(`sendFollowRequest => `, error);
+    return null;
+  }
+};
+
+//
+// export const getLoadedUserPageData = async (
+//   {
+//     userId,
+//     userWhoRequestIt,
+//   }: IGetLoadedUserPageData) => {
+//   try {
+//     await connectToDatabase('getUserInitialPageData');
+//
+//     const isBlockedByTargetUser = await userSchema.exists({
+//       _id: userId,
+//       blockList: { $elemMatch: { $eq: userWhoRequestIt } },
+//     }).then(Boolean);
+//     const isFollowedByTargetUser = await userSchema.exists({
+//       _id: userId,
+//       following: { $elemMatch: { $eq: userWhoRequestIt } },
+//     }).then(Boolean);
+//
+//     const isFollowed = await userSchema.exists({
+//       _id: userWhoRequestIt,
+//       following: { $elemMatch: { $eq: userId } },
+//     }).then(Boolean);
+//
+//     const isBlocked = await userSchema.exists({
+//       _id: userWhoRequestIt,
+//       following: { $elemMatch: { $eq: userId } },
+//     }).then(Boolean);
+//
+//     const data = {
+//       isBlockedByTargetUser,
+//       isFollowedByTargetUser,
+//       isBlocked,
+//       isFollowed,
+//     };
+//
+//     cacheTag('cacheItem', `CUserPageInitial-${userId}-${userWhoRequestIt}`);
+//
+//     return data;
+//   } catch (error) {
+//     console.error(`sendFollowRequest => `, error);
+//     return null;
+//   }
+// };
+// if (!user) {
+//   console.log('\x1b[33m%s\x1b[0m', 'NO USER FOUND');
+//   return null;
+// }

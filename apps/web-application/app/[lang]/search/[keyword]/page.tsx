@@ -7,12 +7,12 @@ import React from 'react';
 import { IPageProps, Meta } from '@repo/typescript-types';
 import CategoriesPageContentRenderer from '@components/metas/CategoriesPageContentRenderer';
 import TagsPageContentRenderer from '@components/metas/TagsPageContentRenderer';
-import { capitalizeFirstLetters } from '@repo/shared-util';
+import { capitalizeFirstLetters } from '@repo/utils';
 import './page.scss';
 import searchMetaGenerator from './components/searchMetaGenerator';
 import localDetector from '@lib/localDetector';
 import { getWidgets } from '@lib/database/operations/widgets';
-import { getSearch } from '@lib/database/operations/posts';
+import { getSearch } from '@lib/database/operations/search';
 import {getSettings} from "@lib/database/operations/settings";
 
 const searchPage = async (props: IPageProps) => {
