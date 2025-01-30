@@ -13,7 +13,6 @@ import {getSettings} from "@lib/database/operations/settings";
 const PostsPage = async (props: IPageProps) => {
     const searchParams = await props.searchParams;
     const params = await props.params;
-
     const locale = localDetector(params.lang);
     const dictionary = await getDictionary(locale);
     const { postsPageSettings } = await getSettings(['postsPageSettings']);

@@ -2,11 +2,7 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../../store";
 import {loginAction} from "@store/reducers/userReducers/loginAction";
 import {autoLoginAction} from "@store/reducers/userReducers/autoLoginAction";
-// import {getUserPageDataAction} from "@store/reducers/userReducers/getUserPageDataAction";
-// import {getMultipleUserDataByIdAction} from "@store/reducers/userReducers/getMultipleUserDataByIdAction";
-// import {getSpecificUserDataAction} from "@store/reducers/userReducers/getSpecificUserDataAction";
-import {unfollowUserAction} from "@store/reducers/userReducers/unfollowUserAction";
-import {followUserAction} from "@store/reducers/userReducers/followUserAction";
+
 
 const initialUserData = {
     _id:'',
@@ -134,24 +130,7 @@ export const userSlice = createSlice({
             //         }
             //     }
             // })
-            .addCase(unfollowUserAction.fulfilled, (state) => {
-                return{
-                    ...state,
-                    userPageData:{
-                        ...state.userPageData,
-                        isFollowed:false
-                    }
-                }
-            })
-            .addCase(followUserAction.fulfilled, (state) => {
-                return{
-                    ...state,
-                    userPageData:{
-                        ...state.userPageData,
-                        isFollowed:true
-                    }
-                }
-            })
+
     }
 });
 

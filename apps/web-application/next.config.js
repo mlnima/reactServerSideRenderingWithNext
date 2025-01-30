@@ -47,7 +47,9 @@ const nextConfig = {
     rewrites,
     async redirects() {
         return [
-            {
+
+
+          {
                 source: `/${languageQueryMatcher}/meta`,
                 destination: `/${process.env.NEXT_PUBLIC_DEFAULT_LOCALE}/categories`,
                 permanent: true,

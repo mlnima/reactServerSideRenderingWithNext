@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { commonAPIRequestClearCaches } from '@repo/api-requests';
 import { useAppDispatch } from '@store/hooks';
 import { setAdminMode, setAlert } from '@store/reducers/globalStateReducer';
 import { useSelector } from 'react-redux';
@@ -27,8 +26,6 @@ const AuthenticationAdminItems = () => {
 
   const onClearCacheHandler = async ({ mode }: IClearCache): Promise<void> => {
     try {
-      await commonAPIRequestClearCaches();
-
       await clearCachesByServerAction({
         path: pathname,
         segment,
@@ -68,6 +65,12 @@ const AuthenticationAdminItems = () => {
             <FontAwesomeIcon icon={faUserShield} style={{ width: 25, height: 25 }} />
           </div>
           Dashboard
+        </Link>
+        <Link href={'/admin'} className={'menuItemContent'}>
+          <div className={'icon-wrapper'}>
+            <FontAwesomeIcon icon={faUserShield} style={{ width: 25, height: 25 }} />
+          </div>
+          Admin Panel
         </Link>
       </div>
 

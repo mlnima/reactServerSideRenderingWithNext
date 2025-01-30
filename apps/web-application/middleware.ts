@@ -1,48 +1,61 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
-import { i18n } from '@i18nConfig'
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { i18n } from '@i18nConfig';
 
-const getLocaleFromUrl = (request: NextRequest,) => {
-    const newUrl = new URL(request.url);
-    const locale = newUrl.pathname.split('/')[1]; // Get the first parameter of the pathname
-    return i18n.locales.includes(locale) ? locale : i18n.defaultLocale;
-}
+const getLocaleFromUrl = (request: NextRequest) => {
+  const newUrl = new URL(request.url);
+  const locale = newUrl.pathname.split('/')[1]; // Get the first parameter of the pathname
+  return i18n.locales.includes(locale) ? locale : i18n.defaultLocale;
+};
 
 export function middleware(request: NextRequest) {
 
-    const pathname = request.nextUrl.pathname
+  const pathname = request.nextUrl.pathname;
+  const params = request?.nextUrl?.searchParams;
 
-    const pathnameIsMissingLocale = i18n.locales.every(
-        (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
-    )
+  const pathnameIsMissingLocale = i18n.locales.every(
+    (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`,
+  );
 
-    if (pathname === '/manifest.json'){
-        return NextResponse.rewrite(
-            new URL(
-                `/manifest.webmanifest`,
-                request.url
-            )
-        )
-    }
+  if (pathname.startsWith('/admin')) {
+    return NextResponse.next();
+  }
 
-    if (pathnameIsMissingLocale) {
-        const locale = getLocaleFromUrl(request)
-        const params = request?.nextUrl?.searchParams;
 
-        return NextResponse.rewrite(
-            new URL(
-                `/${locale}${pathname.startsWith('/') ? '' : '/'}${pathname}${params ? `?${params}` : ""}`,
-                request.url
-            )
-        )
-    }
+  if (pathname === '/manifest.json') {
+    return NextResponse.rewrite(
+      new URL(
+        `/manifest.webmanifest`,
+        request.url,
+      ),
+    );
+  }
+
+  if (pathnameIsMissingLocale) {
+    const locale = getLocaleFromUrl(request);
+console.log('\x1b[33m%s\x1b[0m','pathnameIsMissingLocale => ',pathnameIsMissingLocale );
+    return NextResponse.rewrite(
+      new URL(
+        `/${locale}${pathname.startsWith('/') ? '' : '/'}${pathname}${params ? `?${params}` : ''}`,
+        request.url,
+      ),
+    );
+  }
 }
 
 export const config = {
-     //matcher: [matcher],
-    matcher: ['/((?!api|_next/static|_next/image|favicon.ico|asset|fonts|public|sitemap|robots.txt|manifest.webmanifest).*)'],
+  matcher: [
+    '/((?!api|_next/static|_next/image|favicon.ico|asset|fonts|public|sitemap|robots.txt|manifest.webmanifest).*)',
+  ],
+};
 
-}
+//matcher: ['/((?!api|_next/static|_next/image|favicon.ico|asset|fonts|public|sitemap|robots.txt|manifest.webmanifest).*)'],
+// if (pathname.startsWith('/admin')) {
+//   return NextResponse.rewrite(
+//     new URL(request.url),
+//   )
+// }
+
 
 //|manifest.webmanifest
 

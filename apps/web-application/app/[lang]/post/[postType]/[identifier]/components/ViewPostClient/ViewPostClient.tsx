@@ -1,6 +1,6 @@
 'use client';
 import { FC, useEffect } from 'react';
-import { clientAPIRequestViewPost } from '@repo/api-requests';
+import { viewPost } from '@lib/database/operations/posts';
 
 interface IProps {
     _id: string;
@@ -9,7 +9,7 @@ interface IProps {
 const ViewPostClient: FC<IProps> = ({ _id }) => {
     useEffect(() => {
         if (_id) {
-            clientAPIRequestViewPost(_id);
+             viewPost(_id)
         }
     }, [_id]);
 

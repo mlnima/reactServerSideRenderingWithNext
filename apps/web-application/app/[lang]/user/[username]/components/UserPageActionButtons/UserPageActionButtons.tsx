@@ -7,7 +7,6 @@ import './UserPageActionButtons.styles.scss';
 import FollowingOptionsPopup from './FollowingOptionsPopup/FollowingOptionsPopup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import { AxiosResponse } from 'axios';
 import { IUserPageData } from '@repo/typescript-types';
 import { follow, unfollow } from '@lib/database/operations/users';
 import { clearACacheByTag } from '@lib/serverActions';

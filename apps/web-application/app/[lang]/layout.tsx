@@ -43,6 +43,7 @@ const RootLayout = async (props: ILayoutProps) => {
   const params = await props.params;
   const locale = localDetector(params.lang);
   const dictionary = await getDictionary(locale);
+console.log('\x1b[33m%s\x1b[0m','props => ',props );
 
   const { initialSettings } = await getSettings(['initialSettings']);
 

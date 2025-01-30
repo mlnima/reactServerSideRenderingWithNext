@@ -326,42 +326,42 @@ class UserController {
         }
     }
 
-    static async follow(req: Request, res: Response) {
-        try {
-            const senderFollowReqUser = req.userData;
-            const receiverFollowReqUserId = new mongoose.Types.ObjectId(req.body._id);
-            const senderFollowReqUserId = new mongoose.Types.ObjectId(senderFollowReqUser._id);
+    // static async follow(req: Request, res: Response) {
+    //     try {
+    //         const senderFollowReqUser = req.userData;
+    //         const receiverFollowReqUserId = new mongoose.Types.ObjectId(req.body._id);
+    //         const senderFollowReqUserId = new mongoose.Types.ObjectId(senderFollowReqUser._id);
+    //
+    //         await userSchema.findByIdAndUpdate(receiverFollowReqUserId, { $addToSet: { followers: senderFollowReqUserId } }).exec();
+    //
+    //         await userSchema
+    //             .findByIdAndUpdate(senderFollowReqUserId, { $addToSet: { following: receiverFollowReqUserId } }, { new: true })
+    //             .exec();
+    //
+    //         res.status(200).json({ message: 'Followed successfully' });
+    //     } catch (err) {
+    //         console.log(err);
+    //         return res.status(500).json({ message: 'Something Went Wrong' });
+    //     }
+    // }
 
-            await userSchema.findByIdAndUpdate(receiverFollowReqUserId, { $addToSet: { followers: senderFollowReqUserId } }).exec();
-
-            await userSchema
-                .findByIdAndUpdate(senderFollowReqUserId, { $addToSet: { following: receiverFollowReqUserId } }, { new: true })
-                .exec();
-
-            res.status(200).json({ message: 'Followed successfully' });
-        } catch (err) {
-            console.log(err);
-            return res.status(500).json({ message: 'Something Went Wrong' });
-        }
-    }
-
-    static async unfollow(req: Request, res: Response) {
-        try {
-            const senderUnFollowReqUser = req.userData;
-            const receiverUnFollowReqUserId = req.body._id;
-
-            await userSchema.findByIdAndUpdate(receiverUnFollowReqUserId, { $pull: { followers: senderUnFollowReqUser._id } }).exec();
-
-            await userSchema
-                .findByIdAndUpdate(senderUnFollowReqUser._id, { $pull: { following: receiverUnFollowReqUserId } }, { new: true })
-                .exec();
-
-            res.status(200).json({ message: 'Unfollowed successfully' });
-        } catch (err) {
-            console.log(err);
-            return res.status(500).json({ message: 'Something Went Wrong' });
-        }
-    }
+    // static async unfollow(req: Request, res: Response) {
+    //     try {
+    //         const senderUnFollowReqUser = req.userData;
+    //         const receiverUnFollowReqUserId = req.body._id;
+    //
+    //         await userSchema.findByIdAndUpdate(receiverUnFollowReqUserId, { $pull: { followers: senderUnFollowReqUser._id } }).exec();
+    //
+    //         await userSchema
+    //             .findByIdAndUpdate(senderUnFollowReqUser._id, { $pull: { following: receiverUnFollowReqUserId } }, { new: true })
+    //             .exec();
+    //
+    //         res.status(200).json({ message: 'Unfollowed successfully' });
+    //     } catch (err) {
+    //         console.log(err);
+    //         return res.status(500).json({ message: 'Something Went Wrong' });
+    //     }
+    // }
 
     static async suggestionList(req: Request, res: Response){
         try {

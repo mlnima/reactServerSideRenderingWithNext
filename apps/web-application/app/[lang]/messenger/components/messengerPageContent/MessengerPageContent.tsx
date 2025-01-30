@@ -3,7 +3,6 @@ import React, { FC, useEffect, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import socket from '@lib/web-socket-client';
 import { useSearchParams, usePathname } from 'next/navigation';
-//import { deleteAConversationAction } from '@store/reducers/messengerActions/deleteAConversation';
 import { loadOlderMessagesAction } from '@store/reducers/messengerActions/loadOlderMessagesAction';
 import './MessengerPageContent.styles.scss';
 import Link from 'next/link';
@@ -124,9 +123,7 @@ const MessengerPageContent: FC<IProps> = ({ dictionary }) => {
 
     const onStartTypingHandler = () => {};
 
-    // const onDeleteConversationHandler = (conversationId: string) => {
-    //     dispatch(deleteAConversationAction(conversationId));
-    // };
+
 
     // const conversationsMenuTriggerHandler = (value: boolean) => {
     //     setIsConversationsMenuOpen(!isConversationsMenuOpen);

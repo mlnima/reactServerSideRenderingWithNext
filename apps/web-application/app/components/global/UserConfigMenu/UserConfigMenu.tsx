@@ -42,6 +42,7 @@ const UserConfigMenu: ({locale, dictionary}: IProps) => (React.JSX.Element | nul
         const membershipSettings = useAppSelector(({settings}) => settings?.initialSettings?.membershipSettings);
         const dispatch = useAppDispatch()
         const {backgroundFilter} = useAppSelector(({globalState}) => globalState);
+        const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE
 
         useEffect(() => {
             if (!backgroundFilter && userConfigMenu) {
@@ -68,6 +69,7 @@ const UserConfigMenu: ({locale, dictionary}: IProps) => (React.JSX.Element | nul
                             height:(logoHeight || 150)/2
                         }} locale={locale}/>}
                     </div>
+
                     <div className="menuItems">
                         {(languagesSwitcherInUserConfigMenu ||themeColorsSwitcherInUserConfigMenu) &&
                             <div className={'menuItem'}>
@@ -99,10 +101,7 @@ const UserConfigMenu: ({locale, dictionary}: IProps) => (React.JSX.Element | nul
                                 <div className="menuItem">
                                     <div className={'userInfo menuItemContent'}>
                                         <Link
-                                            href={`${
-                                                locale === process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? '' : `/${locale}`}/user/${
-                                                user?.userData?.username
-                                            }`}
+                                            href={`${locale === defaultLocale ? '' : `/${locale}`}/user/${user?.userData?.username}`}
                                             onClick={() => dispatch(setUserConfigMenu(false))}>
                                             <div className='userInfoProfileIcon'>
                                                 <UserProfileImage size={40} profileRedirect={false}/>

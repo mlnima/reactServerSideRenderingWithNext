@@ -112,7 +112,7 @@ router.post('/v1/user/getSignedInUserData', authMiddleware, UserController.getSi
 router.post('/v1/user/resetPassword', authMiddleware, UserController.resetPassword);
 router.put('/v1/user', authMiddleware, UserController.updateUserData);
 router.get('/v1/user/initialPageData', authMiddleware,cacheSuccesses, UserController.getInitialPageData);
-router.patch('/v1/user/follow', authMiddleware, UserController.follow);
+// router.patch('/v1/user/follow', authMiddleware, UserController.follow);
 router.patch('/v1/user/unfollow', authMiddleware, UserController.unfollow);
 
 router.get('/dashboard/user/newAPIKey', adminAuthMiddleware, UserController.dashboardNewApiKey);

@@ -1,97 +1,33 @@
 export {default as AxiosInstance} from './lib/AxiosInstance';
 export {getAxiosInstance} from './lib/AxiosInstance';
-//______COMMON______
+
 export {
     commonAPIRequestGetSignedInUserData,
     commonAPIRequestLoginUser,
     getUserSuggestionList
 } from './common/commonUsers'
 
-
-export {default as commonAPIRequestClearCaches} from './common/clearCaches'
-
-//______CLIENT (Web-App) USE IT NOW______
-//chatrooms
-// export {clientAPIRequestGetChatroom} from './client/clientChatrooms';
-
-//comments
-// export {
-//
-//     clientAPIRequestGetPostComments,
-//     clientAPIRequestPostNewComment
-// } from './client/clientComments';
-
-//customPages
-// export {clientAPIRequestGetPage} from './client/clientCustomPages';
-
-//fileManager
 export {
-    // clientAPIRequestUploadImage,
     clientAPIRequestDeletePostImage,
     clientAPIRequestDeletePostImages,
     clientAPIRequestUploadPostImages,
     clientAPIRequestUploadProfileImage
-
 } from './client/clientFileManager';
 
-//messenger
 export {
-    // clientAPIRequestGetAConversation,
-    // clientAPIRequestGetConversationsList,
-    // clientAPIRequestLoadOlderMessages,
-    // clientAPIRequestStartAConversation,
 } from './client/clientMessenger';
 
-//metas
-export {
-    // clientAPIRequestGetMetaSuggestion,
-    // clientAPIRequestResetMetaImage,
-    // getMeta
-} from './client/clientMetas';
 
-//posts
 export {
-    // clientAPIRequestCreateNewPost,
-    // clientAPIRequestDisLikePost,
-    // clientAPIRequestGetEditingPost,
-    clientAPIRequestGetPosts,
-    // clientAPIRequestLikePost,
     updatePost,
-    // APISearchSuggestions,
-    // checkPostExist,
-    clientAPIRequestViewPost,
     clientDeletePostByAuthor,
-    clientAPIRequestLikeDislikePost,
-    clientCheckDeletedVideo
 } from './client/clientPosts';
 
-//settings
 export {
-    clientAPIRequestGetUncachedSettings,
-    clientAPIRequestGetSettings,
-    getSettingsBuild,
-    shutdownBuildServer
-} from './client/clientSettings';
-
-//users
-export {
-    // clientAPIRequestDeleteChatroomMessage,
     clientAPIRequestDeleteConversation,
-    clientAPIRequestFollowUser,
-    clientAPIRequestGetConversations,
-    // clientAPIRequestGetUserPageData,
-    // clientAPIRequestGetUsers,
-    clientAPIRequestRegisterUser,
-    clientAPIRequestResetPassword,
-    // clientAPIRequestSendPrivateMessage,
-    clientAPIRequestUnFollowUser,
+
 } from './client/clientUsers';
 
-//widgets
-export {
-    // clientAPIRequestGetUncachedWidgetsForAdmin,
-    clientAPIRequestSaveFormData,
-} from './client/clientWidgets';
 
 //______DASHBOARD PANEL (Web-DASHBOARD-App) USE IT NOW______
 

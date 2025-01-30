@@ -4,7 +4,7 @@ import {
   isValidObjectId,
   metaSchema,
   postSchema,
-  userSchema
+  userSchema,
 } from '@repo/db';
 
 import {
@@ -26,6 +26,34 @@ import { _updateSaveMetas } from './metas';
 import { jwtValidator } from '@repo/utils-server';
 
 //import { notFound, unstable_rethrow } from 'next/navigation';
+
+export const viewPost = async (_id: string) => {
+  try {
+    await connectToDatabase('viewPost');
+    await postSchema.findByIdAndUpdate(
+      _id,
+      { $inc: { views: 1 } },
+      { timestamps: false },
+    );
+    return null
+  } catch (error) {
+    return null
+  }
+};
+
+export const getPostViews = async (_id: string): Promise<number> => {
+  'use cache';
+  try {
+    await connectToDatabase('getPostViews');
+    const postData = await postSchema.findById(_id).select('views').lean();
+    cacheLife('hours');
+    cacheTag('cacheItem', `CPostViews-${_id}`);
+    return postData?.views || 0;
+  } catch (error) {
+    console.error(`getPostViews => `, error);
+    return 0;
+  }
+};
 
 export const ratePost = async ({ token, type, _id }: IRatePost) => {
   try {
@@ -66,10 +94,9 @@ export const ratePost = async ({ token, type, _id }: IRatePost) => {
 
     await userSchema.findByIdAndUpdate(tokenData._id, userUpdateQuery);
     await postSchema.findByIdAndUpdate(postId, { $inc: postIncQuery });
-    return null
+    return null;
   } catch (error) {
-    console.log('\x1b[33m%s\x1b[0m','error => ',error );
-    return null
+    return null;
   }
 };
 
@@ -149,19 +176,7 @@ export const getPost = async (identifier: string): Promise<IOGetPost> => {
   }
 };
 
-export const getPostViews = async (_id: string): Promise<number> => {
-  'use cache';
-  try {
-    await connectToDatabase('getPostViews');
-    const postData = await postSchema.findById(_id).select('views').lean();
-    cacheLife('hours');
-    cacheTag('cacheItem', `CPostViews-${_id}`);
-    return postData?.views || 0;
-  } catch (error) {
-    console.error(`getPostViews => `, error);
-    return 0;
-  }
-};
+
 
 export const getPostRating = async (_id: string) => {
   'use cache';

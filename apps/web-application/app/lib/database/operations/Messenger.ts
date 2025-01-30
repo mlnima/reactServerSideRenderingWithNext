@@ -154,7 +154,6 @@ export const getConversationMessages = async ({ token,limit = 10,skip = 0,conver
   }
 };
 
-
 export const newConversation = async ({ token,users }:INewConversation) => {
   'use cache';
   try {
@@ -194,3 +193,7 @@ export const newConversation = async ({ token,users }:INewConversation) => {
     return null
   }
 };
+
+export const deleteConversation = async ({ token,_id }:INewConversation) =>{
+//clientAPIRequestDeleteConversation
+}

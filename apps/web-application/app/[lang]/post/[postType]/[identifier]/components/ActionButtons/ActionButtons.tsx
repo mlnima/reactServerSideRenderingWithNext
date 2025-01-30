@@ -8,14 +8,13 @@ import { faThumbsUp } from '@fortawesome/free-solid-svg-icons/faThumbsUp';
 import { faThumbsDown } from '@fortawesome/free-solid-svg-icons/faThumbsDown';
 import './ActionButtons.scss';
 import { loginRegisterForm } from '@store/reducers/globalStateReducer';
-import {
-    clientAPIRequestViewPost,
-    clientAPIRequestLikeDislikePost,
-} from '@repo/api-requests';
+// import {
+//     clientAPIRequestViewPost,
+// } from '@repo/api-requests';
 
 import { faComments } from '@fortawesome/free-solid-svg-icons';
 import {clearACacheByTag} from "@lib/serverActions";
-import { ratePost } from '@lib/database/operations/posts';
+import { ratePost, viewPost } from '@lib/database/operations/posts';
 
 interface IProps {
     rating: boolean;
@@ -45,7 +44,8 @@ const ActionButtons: FC<IProps> = ({
     useEffect(() => {
         if (_id && !didView) {
             setDidView(true);
-            clientAPIRequestViewPost(_id);
+
+          viewPost(_id)
         }
         return () => {
             setDidView(false);
@@ -55,11 +55,6 @@ const ActionButtons: FC<IProps> = ({
     const onLikeOrDisLikeHandler = async (type: 'likes' | 'disLikes') => {
         if (loggedIn && _id) {
             setDisableRatingButtons(true);
-            // await clientAPIRequestLikeDislikePost(_id, type)
-            //     .finally(() => {
-            //         setDisableRatingButtons(false);
-            //         clearACacheByTag(`CPostRating-${_id}`);
-            //     });
             await ratePost({
               token:localStorage.getItem('wt'),
               _id,
