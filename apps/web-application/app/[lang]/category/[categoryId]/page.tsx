@@ -8,10 +8,10 @@ import PostsPageInfo from '@components/PostsPage/PostsPageInfo/PostsPageInfo';
 import Soft404 from '@components/Soft404/Soft404';
 import { PageParams, PageSearchParams } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
-import {isValidObjectId} from '@repo/db'
-import {getSettings} from "@lib/database/operations/settings";
-import {getWidgets} from "@lib/database/operations/widgets";
-import {getPosts} from "@lib/database/operations/posts";
+import getSettings from '@lib/actions/database/operations/settings/getSettings';
+import getWidgets from '@lib/actions/database/operations/widgets/getWidgets';
+import getPosts from "@lib/actions/database/operations/posts/getPosts";
+import { isValidObjectId } from '@repo/db';
 
 interface IProps {
     params: PageParams;
@@ -37,16 +37,18 @@ const CategoryPage = async (props: IProps) => {
     const currentPageQuery = searchParams?.page;
     const currentPage = currentPageQuery && typeof currentPageQuery === 'string' ? parseInt(currentPageQuery, 10) : 1;
 
-    const {meta,posts,totalCount} = await getPosts({
-        locale,
-        metaId: params?.categoryId,
-        page: currentPageQuery && typeof currentPageQuery === 'string' ? parseInt(currentPageQuery, 10) : 1
-    })
+    const { success, data } = await getPosts({
+      locale,
+      metaId: params?.categoryId,
+      page: currentPageQuery && typeof currentPageQuery === 'string' ? parseInt(currentPageQuery, 10) : 1,
+    });
 
-   // console.log('\x1b[33m%s\x1b[0m','posts[0] => ',typeof posts[0]._id);
-    if (!!params?.categoryId && !meta) {
-        return <Soft404 dictionary={dictionary} />;
+    if (!success || !data || !data?.meta) {
+      return <Soft404 dictionary={dictionary} />;
     }
+
+    const {posts, meta, totalCount } = data;
+
 
     return (
         <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>

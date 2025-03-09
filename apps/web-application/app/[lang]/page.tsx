@@ -4,10 +4,8 @@ import './page.styles.scss';
 import SidebarWidgetAreaRenderer from '@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer';
 import {IPageProps} from "@repo/typescript-types";
 import localDetector from "@lib/localDetector";
-import {getSettings} from "@lib/database/operations/settings";
-import {getWidgets} from "@lib/database/operations/widgets";
-import connectToDatabase from "@lib/database/databaseConnection";
-
+import getSettings from '@lib/actions/database/operations/settings/getSettings';
+import getWidgets from '@lib/actions/database/operations/widgets/getWidgets';
 
 
 const homePage = async (props: IPageProps) => {

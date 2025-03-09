@@ -1,4 +1,5 @@
-import SidebarWidgetAreaRenderer from '@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer';
+import SidebarWidgetAreaRenderer
+  from '@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer';
 import { getDictionary } from '../../../../get-dictionary';
 import WidgetsRenderer from '@components/widgets/widgetRenderer/WidgetsRenderer';
 import PostPage from '@components/PostsPage/PostsPage';
@@ -8,10 +9,10 @@ import ActorBio from './components/ActorBio/ActorBio';
 import Soft404 from '@components/Soft404/Soft404';
 import { PageParams, PageSearchParams } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
-import { isValidObjectId } from '@repo/db/dist/src/tools';
-import { getSettings } from '@lib/database/operations/settings';
-import { getWidgets } from '@lib/database/operations/widgets';
-import { getPosts } from '@lib/database/operations/posts';
+import getSettings from '@lib/actions/database/operations/settings/getSettings';
+import getWidgets from '@lib/actions/database/operations/widgets/getWidgets';
+import getPosts from "@lib/actions/database/operations/posts/getPosts";
+import { isValidObjectId } from '@repo/db';
 
 interface IProps {
   params: PageParams;
@@ -38,15 +39,17 @@ const ActorPage = async (props: IProps) => {
   const currentPageQuery = searchParams?.page;
   const currentPage = currentPageQuery && typeof currentPageQuery === 'string' ? parseInt(currentPageQuery, 10) : 1;
 
-  const { meta, posts, totalCount } = await getPosts({
+  const { success, data } = await getPosts({
     locale,
     metaId: params?.actorId,
-    page: currentPageQuery && typeof currentPageQuery === 'string' ? parseInt(currentPageQuery, 10) : 1,
+    page: currentPageQuery && typeof currentPageQuery === 'string' ? parseInt(currentPageQuery, 10) : 1
   });
 
-  if (!!params?.actorId && !meta) {
+  if (!success || !data || !data?.meta) {
     return <Soft404 dictionary={dictionary} />;
   }
+
+  const { meta, posts, totalCount } = data
 
   return (
     <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
@@ -54,7 +57,8 @@ const ActorPage = async (props: IProps) => {
         {params.actorId && <MetaAdminQuickAccessBar metaId={params.actorId} />}
         {meta && <ActorBio actorData={meta} />}
 
-        <WidgetsRenderer dictionary={dictionary} locale={locale} widgets={widgets?.['actorPageTop']} position={'actorPageTop'} />
+        <WidgetsRenderer dictionary={dictionary} locale={locale} widgets={widgets?.['actorPageTop']}
+                         position={'actorPageTop'} />
         <PostPage
           renderPagination
           posts={posts || []}
@@ -63,7 +67,8 @@ const ActorPage = async (props: IProps) => {
           totalCount={totalCount || 0}
           currentPage={currentPage}
         />
-        <WidgetsRenderer dictionary={dictionary} locale={locale} widgets={widgets?.['actorPageBottom']} position={'actorPageBottom'} />
+        <WidgetsRenderer dictionary={dictionary} locale={locale} widgets={widgets?.['actorPageBottom']}
+                         position={'actorPageBottom'} />
       </main>
 
       <SidebarWidgetAreaRenderer

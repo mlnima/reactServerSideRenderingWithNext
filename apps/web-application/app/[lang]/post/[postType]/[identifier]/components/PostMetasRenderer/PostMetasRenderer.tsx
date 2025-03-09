@@ -1,13 +1,13 @@
 import React, {FC} from "react";
 import {capitalizeFirstLetters} from "@repo/utils";
 import './PostMetasRenderer.scss';
-import {Meta} from "@repo/typescript-types";
+import {IMeta} from "@repo/typescript-types";
 import PostActor from "./PostActor";
 import PostMeta from "./PostMeta";
 
 interface PostMetaPropType {
     type: string,
-    metas: Meta[] | undefined,
+    metas: IMeta[] | undefined,
     dictionary: {
         [key: string]: string
     },

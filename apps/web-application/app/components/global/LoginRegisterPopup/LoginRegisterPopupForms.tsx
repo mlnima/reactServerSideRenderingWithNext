@@ -15,14 +15,7 @@ import {
 } from '@repo/utils';
 import './LoginRegisterPopupForms.scss';
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-
-interface StateTypes {
-  username?: string;
-  email?: string;
-  password?: string;
-  password2?: string;
-  gender?: string;
-}
+import { IRegisterNewUser } from '@repo/typescript-types';
 
 interface StateValidatorTypes {
   username?: boolean;
@@ -50,7 +43,7 @@ const LoginRegisterPopupForms: FC<IProps> = (
   const { anyoneCanRegister } = useAppSelector(
     ({ settings }) => settings?.initialSettings?.membershipSettings,
   );
-  const [state, setState] = useState<StateTypes>({
+  const [state, setState] = useState<IRegisterNewUser>({
     username: '',
     email: '',
     password: '',
@@ -73,7 +66,7 @@ const LoginRegisterPopupForms: FC<IProps> = (
     setState({
       ...state,
       [e.target.name]: e.target.value,
-    } as { [key: string]: string });
+    });
   };
 
   const onLoginHandler = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -110,7 +103,7 @@ const LoginRegisterPopupForms: FC<IProps> = (
     }
 
     if (checkUsername && checkPasswords) {
-      dispatch(registerUserAction({ data: state }));
+      dispatch(registerUserAction(state));
     }
   };
 

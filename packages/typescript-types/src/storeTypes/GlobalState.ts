@@ -1,4 +1,5 @@
 export interface GlobalState {
+    sidebar: any
     loginRegisterFormPopup: boolean | string,
     loading: boolean,
     adminMode: boolean,

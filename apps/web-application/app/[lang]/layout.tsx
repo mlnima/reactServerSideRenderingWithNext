@@ -1,6 +1,6 @@
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
-//import ServerSideStore from '@store/ServerSideStore';
+
 config.autoAddCss = false;
 import '@components/global/styles/global.styles.scss';
 import ReduxProvider from '@store/ReduxProvider';
@@ -8,10 +8,8 @@ import { getDictionary } from '../../get-dictionary';
 import GlobalCustomStyles from '@components/global/styles/GlobalCustomStyles';
 import LayoutMetaGenerator from '../components/LayoutMetaGenerator/LayoutMetaGenerator';
 import LoginRegisterPopup from '@components/global/LoginRegisterPopup/LoginRegisterPopup';
-import UserAutoLogin from '@components/global/UserAutoLogin';
 import BackToTopButton from '@components/global/BackToTopButton/BackToTopButton';
 import LoadingComponent from '@components/global/LoadingComponent/LoadingComponent';
-import CookiesInformerBar from '@components/global/CookiesInformerBar/CookiesInformerBar';
 import AlertBox from '@components/global/AlertBox/AlertBox';
 import GoogleAnalytics from '@components/global/GoogleAnalytics/GoogleAnalytics';
 import WebSocketInitializer from '@components/global/WebSocketInitializer/WebSocketInitializer';
@@ -27,30 +25,32 @@ import UserConfigMenu from '@components/global/UserConfigMenu/UserConfigMenu';
 import LayoutViewportGenerator from '@components/LayoutMetaGenerator/LayoutViewportGenerator';
 import CustomScripts from '@components/CustomScripts';
 import CustomHeadTagsInitializer from '@components/CustomHeadTagsInitializer';
-import { ILayoutProps } from '@repo/typescript-types';
+import { ILayoutProps, Widget } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
-import { getWidgets } from '@lib/database/operations/widgets';
-import { getSettings } from '@lib/database/operations/settings';
+import getWidgets from '@lib/actions/database/operations/widgets/getWidgets';
+import getSettings from '@lib/actions/database/operations/settings/getSettings';
+import { Suspense } from 'react';
+import MemberInitializer from '@components/global/MemberInitializer/MemberInitializer';
+import CookieInitializer from '@components/global/CookieInitializer/CookieInitializer';
 
 // export async function generateStaticParams() {
 //     return i18n.locales.map((lng: string) => ({ lng }));
 // }
 
 
-
 const RootLayout = async (props: ILayoutProps) => {
 
   const params = await props.params;
+
   const locale = localDetector(params.lang);
   const dictionary = await getDictionary(locale);
-console.log('\x1b[33m%s\x1b[0m','props => ',props );
-
   const { initialSettings } = await getSettings(['initialSettings']);
 
+  // @ts-expect-error: need type fix
   const widgets = await getWidgets(
     ['footer', 'header', 'topBar', 'navigation'],
-    locale
-  );
+    locale,
+  ) as { [key: string]: Widget[] };
 
   const widgetAreasSharedProps = {
     locale,
@@ -59,66 +59,71 @@ console.log('\x1b[33m%s\x1b[0m','props => ',props );
 
   return (
     <html lang={locale}>
-      <body className={`dark `} style={{}}>
-        <ReduxProvider>
-          <div className="layout">
-            {initialSettings?.layoutSettings?.topbar && (
-              <TopbarWidgetArea
-                {...widgetAreasSharedProps}
-                widgets={widgets?.topBar}
-              />
-            )}
-            {initialSettings?.layoutSettings?.header && (
-              <HeaderWidgetArea
-                {...widgetAreasSharedProps}
-                widgets={widgets?.header}
-              />
-            )}
-            {initialSettings?.layoutSettings?.navigation && (
-              <NavigationWidgetArea
-                {...widgetAreasSharedProps}
-                widgets={widgets?.navigation}
-              />
-            )}
-            <div id={'page'} className={'App'}>
-              {props.children}
-            </div>
-            {initialSettings?.layoutSettings?.footer && (
-              <FooterWidgetArea
-                {...widgetAreasSharedProps}
-                widgets={widgets?.footer}
-              />
-            )}
-          </div>
-          <BackgroundFilterWholeScreen />
-          <CookiesInformerBar />
-          <UserAutoLogin />
-          <GoogleAnalytics
-            googleAnalyticsId={
-              initialSettings?.headDataSettings?.googleAnalyticsId
-            }
+    <body className={`dark `} style={{}}>
+    <ReduxProvider>
+      <div className="layout">
+        {initialSettings?.layoutSettings?.topbar && (
+          <TopbarWidgetArea
+            {...widgetAreasSharedProps}
+            widgets={widgets?.topBar}
           />
-          <LoadingComponent />
-          <AlertBox dictionary={dictionary} />
-          <BackToTopButton />
-          <LoginRegisterPopup locale={locale} dictionary={dictionary} />
-          <StyledComponentsRegistry>
-            <GlobalCustomStyles
-              primaryModeColors={
-                initialSettings?.layoutSettings?.primaryModeColors
-              }
-              customStyles={initialSettings?.layoutSettings?.customStyles}
-            />
-          </StyledComponentsRegistry>
-          <StoreDataInitializer initialSettings={initialSettings} />
-          <WebSocketInitializer />
-          {/*<MediaCall/>*/}
-          <KeysListener />
-          <UserConfigMenu locale={locale} dictionary={dictionary} />
-          <CustomHeadTagsInitializer />
-          <CustomScripts />
-        </ReduxProvider>
-      </body>
+        )}
+        {initialSettings?.layoutSettings?.header && (
+          <HeaderWidgetArea
+            {...widgetAreasSharedProps}
+            widgets={widgets?.header}
+          />
+        )}
+        {initialSettings?.layoutSettings?.navigation && (
+          <NavigationWidgetArea
+            {...widgetAreasSharedProps}
+            widgets={widgets?.navigation}
+          />
+        )}
+        <div id={'page'} className={'App'}>
+          {props.children}
+        </div>
+        {initialSettings?.layoutSettings?.footer && (
+          <FooterWidgetArea
+            {...widgetAreasSharedProps}
+            widgets={widgets?.footer}
+          />
+        )}
+      </div>
+      <BackgroundFilterWholeScreen />
+      <CookieInitializer />
+
+      <Suspense fallback="loging in ...">
+        {/*// @ts-expect-error: its fine*/}
+        <MemberInitializer/>
+      </Suspense>
+
+      <GoogleAnalytics
+        googleAnalyticsId={
+          initialSettings?.headDataSettings?.googleAnalyticsId
+        }
+      />
+      <LoadingComponent />
+      <AlertBox dictionary={dictionary} />
+      <BackToTopButton />
+      <LoginRegisterPopup locale={locale} dictionary={dictionary} />
+      <StyledComponentsRegistry>
+        <GlobalCustomStyles
+          primaryModeColors={
+            initialSettings?.layoutSettings?.primaryModeColors
+          }
+          customStyles={initialSettings?.layoutSettings?.customStyles}
+        />
+      </StyledComponentsRegistry>
+      <StoreDataInitializer initialSettings={initialSettings} />
+      <WebSocketInitializer />
+      {/*<MediaCall/>*/}
+      <KeysListener />
+      <UserConfigMenu locale={locale} dictionary={dictionary} />
+      <CustomHeadTagsInitializer />
+      <CustomScripts />
+    </ReduxProvider>
+    </body>
     </html>
   );
 };
@@ -128,4 +133,4 @@ export default RootLayout;
 export const generateMetadata = LayoutMetaGenerator;
 
 export const generateViewport = LayoutViewportGenerator;
-// export const runtime = 'nodejs';
+

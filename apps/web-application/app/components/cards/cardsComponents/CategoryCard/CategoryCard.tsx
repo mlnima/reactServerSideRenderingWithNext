@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import { Meta } from "@repo/typescript-types";
+import { IMeta } from "@repo/typescript-types";
 import Link from 'next/link';
 import { capitalizeFirstLetter } from '@repo/utils';
 import './CategoryCard.scss';
 import CardImageRendererUseClient from '@components/cards/asset/CardImageRenderer/CardImageRendererUseClient';
 
 interface CategoryCardPropTypes {
-    meta: Meta;
+    meta: IMeta;
     index: number;
     isSidebar?: boolean;
     metaUrl: string;

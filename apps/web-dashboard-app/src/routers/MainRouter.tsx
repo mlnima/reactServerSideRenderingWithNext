@@ -21,7 +21,6 @@ import Page from "@components/pages/Page/Page";
 import Meta from "@components/pages/Meta/Meta";
 import Form from "@components/pages/Form/Form";
 import Translations from "@components/pages/Translations/Translations";
-import General from "@components/pages/settings/initialSettings/General/General";
 import Widgets from "@components/pages/Design/Widgets/Widgets";
 import Chatroom from "@components/pages/Chatroom/Chatroom";
 import Backup from "@components/pages/Backup/Backup";

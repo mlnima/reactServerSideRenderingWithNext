@@ -1,7 +1,7 @@
-import {Post} from "../Post";
+import {IPost} from "../Post";
 
 export interface AxiosResponseTypes {
     message?: string,
-    posts: Post[]
-    post: Post
+    posts: IPost[]
+    post: IPost
 }

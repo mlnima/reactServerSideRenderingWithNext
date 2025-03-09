@@ -1,5 +1,5 @@
 import {FC} from "react";
-import {Meta} from "@repo/typescript-types";
+import {IMeta} from "@repo/typescript-types";
 import Link from "next/link";
 import {capitalizeFirstLetter} from "@repo/utils";
 import dynamic from "next/dynamic";
@@ -10,7 +10,7 @@ import '../metaCard.scss'
 const CardImageRendererUseClient = dynamic(() => import('../../asset/CardImageRenderer/CardImageRendererUseClient'))
 
 interface TagCardPropTypes {
-    meta: Meta,
+    meta: IMeta,
     index: number,
     locale: string,
     metaUrl: string,

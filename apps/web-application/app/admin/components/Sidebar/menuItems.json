@@ -1,0 +1,173 @@
+[
+  {
+    "name": "Dashboard",
+    "url": "/admin",
+    "subItems": []
+  },
+  {
+    "name": "Posts",
+    "url": "/admin/assets?assetsType=posts",
+    "subItems": [
+      {
+        "name": "newPost",
+        "url": "/admin/post?new=1"
+      }
+    ]
+  },
+  {
+    "name": "Metas",
+    "url": "/admin/assets?assetsType=metas&metaType=categories",
+    "subItems": [
+      {
+        "name": "tags",
+        "url": "/admin/assets?assetsType=metas&metaType=tags"
+      },
+      {
+        "name": "categories",
+        "url": "/admin/assets?assetsType=metas&metaType=categories"
+      },
+      {
+        "name": "actors",
+        "url": "/admin/assets?assetsType=metas&metaType=actors"
+      }
+    ]
+  },
+  {
+    "name": "Forms",
+    "url": "/admin/assets?assetsType=forms",
+    "subItems": []
+  },
+  {
+    "name": "Comments",
+    "url": "/admin/assets?assetsType=comments",
+    "subItems": []
+  },
+  {
+    "name": "Users",
+    "url": "/admin/assets?assetsType=users",
+    "subItems": []
+  },
+  {
+    "name": "Chatrooms",
+    "url": "/admin/assets?assetsType=chatrooms",
+    "subItems": [
+      {
+        "name": "newChatroom",
+        "url": "/admin/chatroom?new=1"
+      }
+    ]
+  },
+  {
+    "name": "Orders",
+    "url": "/admin/assets?assetsType=orders",
+    "subItems": []
+  },
+  {
+    "name": "FileManager",
+    "url": "/admin/fileManager",
+    "subItems": []
+  },
+  {
+    "name": "Tools",
+    "url": "/admin/tools",
+    "subItems": [
+      {
+        "name": "terminal",
+        "url": "/admin/tools/terminal"
+      }
+    ]
+  },
+  {
+    "name": "Translations",
+    "url": "/admin/translations",
+    "subItems": []
+  },
+  {
+    "name": "settings",
+    "url": "/admin/settings",
+    "subItems": [
+      {
+        "name": "initialSettings",
+        "url": "/admin/settings/initialSettings"
+      },
+      {
+        "name": "ugcSettings",
+        "url": "/admin/settings/ugcSettings"
+      },
+      {
+        "name": "widgets",
+        "url": "/admin/appearance/editWidgets"
+      }
+    ]
+  },
+  {
+    "name": "defaultPagesSettings",
+    "url": "/admin/assets?assetsType=pages",
+    "subItems": [
+      {
+        "name": "home",
+        "url": "/admin/editDefaultPage?pageName=homePageSettings"
+      },
+      {
+        "name": "categories",
+        "url": "/admin/editDefaultPage?pageName=categoriesPageSettings"
+      },
+      {
+        "name": "tags",
+        "url": "/admin/editDefaultPage?pageName=tagsPageSettings"
+      },
+      {
+        "name": "actors",
+        "url": "/admin/editDefaultPage?pageName=actorsPageSettings"
+      },
+      {
+        "name": "category",
+        "url": "/admin/editDefaultPage?pageName=categoryPageSettings"
+      },
+      {
+        "name": "tag",
+        "url": "/admin/editDefaultPage?pageName=tagPageSettings"
+      },
+      {
+        "name": "actor",
+        "url": "/admin/editDefaultPage?pageName=actorPageSettings"
+      },
+      {
+        "name": "posts",
+        "url": "/admin/editDefaultPage?pageName=postsPageSettings"
+      },
+      {
+        "name": "post",
+        "url": "/admin/editDefaultPage?pageName=postPageSettings"
+      },
+      {
+        "name": "editPost",
+        "url": "/admin/editDefaultPage?pageName=editPostPage"
+      },
+      {
+        "name": "Search",
+        "url": "/admin/editDefaultPage?pageName=searchPageSettings"
+      },
+      {
+        "name": "messenger",
+        "url": "/admin/editDefaultPage?pageName=messengerPageSettings"
+      },
+      {
+        "name": "profile",
+        "url": "/admin/editDefaultPage?pageName=profilePageSettings"
+      },
+      {
+        "name": "user",
+        "url": "/admin/editDefaultPage?pageName=userPageSettings"
+      },
+      {
+        "name": "user",
+        "url": "/admin/editDefaultPage?pageName=usersPageSettings"
+      },
+      {
+        "name": "chatroom",
+        "url": "/admin/editDefaultPage?pageName=chatroomPageSettings"
+      }
+    ]
+  }
+]

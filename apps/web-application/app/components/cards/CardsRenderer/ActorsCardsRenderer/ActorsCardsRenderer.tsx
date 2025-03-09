@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import ActorCard from '@components/cards/cardsComponents/ActorCard/ActorCard';
-import { Meta } from '@repo/typescript-types';
+import { IMeta } from '@repo/typescript-types';
 import './ActorsCardsRenderer.scss';
 
 interface IProps {
-  metas?: Meta[];
+  metas?: IMeta[];
   isSidebar?: boolean;
   locale: string;
   dictionary: {

@@ -2,8 +2,8 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {AxiosResponse} from "axios";
 import {RootState} from "../store";
-import {AdminPanelGlobalState,PageTypes} from "@repo/typescript-types";
-import {dashboardAPIRequestGetPages,commonAPIRequestClearCaches} from "@repo/api-requests";
+import {AdminPanelGlobalState,IPage} from "@repo/typescript-types";
+import {dashboardAPIRequestGetPages} from "@repo/api-requests";
 
 const initialState : AdminPanelGlobalState = {
     customPages: [],
@@ -24,7 +24,7 @@ export const getCustomPagesAction = createAsyncThunk(
         // return AxiosInstance.post('/api/dashboard/pages/getPagesData', {token: localStorage.wt})
             .then((response: AxiosResponse<unknown | any>) => {
                 if (response.data?.pages) {
-                    return response.data.pages.map((page: PageTypes) => page.pageName)
+                    return response.data.pages.map((page: IPage) => page.pageName)
                 }
             }).catch(err => {
                 console.log(err)
@@ -37,13 +37,14 @@ export const clearCachesAction = createAsyncThunk(
     async ({} , thunkAPI) => {
         console.log('clearCachesAction')
          thunkAPI.dispatch(loading(true))
-        return await commonAPIRequestClearCaches().then((res: AxiosResponse<unknown | any>) => {
-
-            thunkAPI.dispatch(setAlert({message: res.data.message || 'done', type: 'success'}))
-        }).catch(err => {
-            console.log(err)
-            thunkAPI.dispatch(setAlert({message:'Error While Deleting Cache', type: 'error', err}))
-        }).finally(() =>  thunkAPI.dispatch(loading(false)))
+        return
+        // return await commonAPIRequestClearCaches().then((res: AxiosResponse<unknown | any>) => {
+        //
+        //     thunkAPI.dispatch(setAlert({message: res.data.message || 'done', type: 'success'}))
+        // }).catch(err => {
+        //     console.log(err)
+        //     thunkAPI.dispatch(setAlert({message:'Error While Deleting Cache', type: 'error', err}))
+        // }).finally(() =>  thunkAPI.dispatch(loading(false)))
     }
 )
 

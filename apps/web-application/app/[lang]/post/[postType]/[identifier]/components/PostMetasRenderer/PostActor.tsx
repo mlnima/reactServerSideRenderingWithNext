@@ -1,11 +1,11 @@
 import React, {FC} from "react";
 import {convertMetasTypeToSingular, capitalizeFirstLetters} from "@repo/utils";
 import ActorMetaImageRenderer from "./ActorMetaImageRenderer";
-import {Meta} from "@repo/typescript-types";
+import {IMeta} from "@repo/typescript-types";
 import Link from "next/link";
 
 interface ComponentPropTypes {
-    item: Meta
+    item: IMeta
 }
 
 const PostActor: FC<ComponentPropTypes> = ({item}) => {

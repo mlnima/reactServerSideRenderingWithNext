@@ -116,6 +116,7 @@ export interface UniqueDataTypes {
 }
 
 export interface ISuggestion {
-    name: string;
-    count: number;
+    _id:string,
+    name: string,
+    count: number,
 }

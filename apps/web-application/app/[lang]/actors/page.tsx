@@ -8,9 +8,10 @@ import ActorsPageContentRenderer from "@components/metas/ActorsPageContentRender
 import './page.styles.scss';
 import {PageParams, PageSearchParams} from "@repo/typescript-types";
 import localDetector from "@lib/localDetector";
-import {getWidgets} from "@lib/database/operations/widgets";
-import {getMetas} from "@lib/database/operations/metas";
-import {getSettings} from "@lib/database/operations/settings";
+import getWidgets from '@lib/actions/database/operations/widgets/getWidgets';
+import getMetas from "@lib/actions/database/operations/metas/getMetas";
+import getSettings from '@lib/actions/database/operations/settings/getSettings';
+import Soft404 from '@components/Soft404/Soft404';
 
 interface IProps {
     params: PageParams,
@@ -41,7 +42,7 @@ const actorsPage = async (props: IProps) => {
         parseInt(currentPageQuery, 10) : 1
 
 
-    const { metas, totalCount } = await getMetas({
+    const { success, data }= await getMetas({
         locale,
         startWith: Array.isArray(searchParams?.startWith)
             ? searchParams?.startWith[0]
@@ -49,6 +50,10 @@ const actorsPage = async (props: IProps) => {
         metaType: 'actors',
         page: currentPage,
     });
+
+  if (!success || !data) {
+    return <Soft404 dictionary={dictionary} />;
+  }
 
     return (
         <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
@@ -60,11 +65,11 @@ const actorsPage = async (props: IProps) => {
                                  position={'actorsPageTop'}/>
 
                 <ActorsPageContentRenderer renderPagination
-                                           totalCount={totalCount || 0}
+                                           totalCount={data?.totalCount || 0}
                                            currentPage={currentPage}
                                            locale={locale}
                                            dictionary={dictionary}
-                                           metas={metas || []}/>
+                                           metas={data?.metas || []}/>
 
 
                 <WidgetsRenderer dictionary={dictionary}

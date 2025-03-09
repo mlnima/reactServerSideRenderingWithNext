@@ -1,11 +1,11 @@
 import {FC} from "react";
-import {Meta} from "@repo/typescript-types";
+import {IMeta} from "@repo/typescript-types";
 import Link from "next/link";
 import CardLastUpdate from '../CardLastUpdate/CardLastUpdate';
 import { v4 as uuidv4 } from 'uuid';
 
 interface IProps {
-    actors: Meta[],
+    actors: IMeta[],
     updatedAt: string,
     createdAt: string,
     locale:string

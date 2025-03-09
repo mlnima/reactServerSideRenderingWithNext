@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Post } from '@repo/typescript-types';
+import { IPost } from '@repo/typescript-types';
 import PostTitle from '../PostTitle/PostTitle';
 import PostDescription from '../PostDescription/PostDescription';
 import PostMetasRenderer from '../PostMetasRenderer/PostMetasRenderer';
@@ -8,7 +8,7 @@ import ActionButtons from '../ActionButtons/ActionButtons';
 import './ArticleTypePostPage.styles.scss';
 
 interface IProps {
-  post: Post;
+  post: IPost;
   views: number;
   likes: number;
   disLikes: number;
@@ -18,7 +18,7 @@ interface IProps {
     [key: string]: string;
   };
   widgets: Widget[];
-  relatedPosts: Post[];
+  relatedPosts: IPost[];
 }
 
 const ArticleTypePostPage: FC<IProps> = ({

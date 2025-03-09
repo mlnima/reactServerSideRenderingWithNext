@@ -6,15 +6,17 @@ const UserPageContent = dynamic(
   () => import('./components/UserPageContent/UserPageContent'),
 );
 // import UserPageContent from './components/UserPageContent/UserPageContent';
-import { getSettings } from '@lib/database/operations/settings';
+import getSettings from '@lib/actions/database/operations/settings/getSettings';
 import localDetector from '@lib/localDetector';
-import { IPageProps } from '@repo/typescript-types';
-import { getInitialUserPageData } from '@lib/database/operations/users';
+import { IPageProps, User } from '@repo/typescript-types';
+import getInitialUserPageData from '@lib/actions/database/operations/users/getInitialUserPageData';
 import React from 'react';
-import { getPosts } from '@lib/database/operations/posts';
+import getPosts from "@lib/actions/database/operations/posts/getPosts";
 import PostsCardsRenderer from '@components/cards/CardsRenderer/PostsCardsRenderer/PostsCardsRenderer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons/faCamera';
+import Soft404 from '@components/Soft404/Soft404';
+import { ServerActionResponse } from '@lib/actions/response';
 
 const userPage = async (props: IPageProps) => {
   const params = await props.params;
@@ -23,21 +25,37 @@ const userPage = async (props: IPageProps) => {
   const { userPageSettings } = await getSettings(['userPageSettings']);
   const { username } = params;
 
-  const initialUserPageData = await getInitialUserPageData(username);
+  // const initialUserPageData = await getInitialUserPageData(username);
 
-  if (!initialUserPageData) {
+  const initialUserPageDataResponse = await getInitialUserPageData(username) as ServerActionResponse<{
+    initialUserPageData: User,
+  }>;
+
+  if (!initialUserPageDataResponse?.success || !initialUserPageDataResponse?.data) {
     return null;
   }
 
-  const { posts } = await getPosts({
+  const { initialUserPageData } = initialUserPageDataResponse?.data
+
+
+  const { success, data } = await getPosts({
     locale,
     page: 1,
     status: 'published',
     author: initialUserPageData._id,
     count: 8,
     sort: 'views',
-    returnTotalCount: false,
+    returnTotalCount: false
   });
+
+
+  if (!success || !data) {
+    return <Soft404 dictionary={dictionary} />;
+  }
+
+
+
+  const { posts } = data
 
   return (
     <>

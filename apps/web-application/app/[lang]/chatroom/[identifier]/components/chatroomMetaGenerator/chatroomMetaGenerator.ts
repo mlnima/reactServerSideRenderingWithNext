@@ -2,27 +2,33 @@ import { capitalizeFirstLetter } from '@repo/utils';
 import { AlternatesGenerators } from '@lib/alternatesCanonicalGenerator';
 import { IPageProps } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
-import {getChatroom} from "@lib/database/operations/chatrooms";
+import getChatroom from '@lib/actions/database/operations/chatrooms/getChatroom';
 
 const alternatesGenerators = new AlternatesGenerators();
 
-//const now = new Date(performance.timeOrigin + performance.now());
 const chatroomMetaGenerator = async (props: IPageProps) => {
-    const params = await props.params;
-    const locale = localDetector(params.lang);
-    if (params.identifier) {
-        //const chatroomsData = await fetchChatroomData({ identifier: params.identifier });
-        const { chatroom } = await getChatroom(params.identifier);
+  const params = await props.params;
+  const locale = localDetector(params.lang);
 
-        return {
-            alternates: alternatesGenerators.chatroomPage(locale, params.identifier),
-            title: chatroom?.name
-                ? `${capitalizeFirstLetter(chatroom?.name)} Chatroom`
-                : 'Chatroom',
-            description: chatroom?.description || '',
-            keywords: chatroom?.tags || '',
-        };
-    } else return {};
+  if (!params.identifier) {
+    return;
+  }
+
+  const { success, data } = await getChatroom(params.identifier);
+
+  if (!success || !data) {
+    return;
+  }
+
+
+  return {
+    alternates: alternatesGenerators.chatroomPage(locale, params.identifier),
+    title: data.chatroom?.name
+      ? `${capitalizeFirstLetter(data.chatroom?.name)} Chatroom`
+      : 'Chatroom',
+    description: data.chatroom?.description || '',
+    keywords: data.chatroom?.tags || '',
+  };
 };
 
 export default chatroomMetaGenerator;

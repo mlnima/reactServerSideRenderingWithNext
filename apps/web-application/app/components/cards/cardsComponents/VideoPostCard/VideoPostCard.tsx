@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import _qualityConvertor from '../../asset/_qualityConvertor';
-import { Post } from "@repo/typescript-types";
+import { IPost } from "@repo/typescript-types";
 import CardTitle from '../../asset/CardTitle/CardTitle';
 import './VideoPostCard.scss';
 import '../postCard.scss';
@@ -20,7 +20,7 @@ interface IProps {
     postUrl: string;
     index: number;
     isSidebar?: boolean;
-    post: Post;
+    post: IPost;
     isNextImageAllowed: boolean;
     dictionary: {
         [key: string]: string;

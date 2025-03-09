@@ -15,7 +15,8 @@ process.on('unhandledRejection', err => {
 // require('../config/env');
 // require('dotenv').config({path: '../../.env'})
 // const dotenv = require('dotenv')
-// const envVariablesFromFile = dotenv.config({path: '../../.env'}).parsed
+// dotenv.config({ path: '../../.env' });
+//const envVariablesFromFile = dotenv.config({path: '../../.env'}).parsed
 //
 // console.log('envVariablesFromFile',envVariablesFromFile)
 const fs = require('fs');

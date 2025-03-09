@@ -1,6 +1,6 @@
 import {Translations} from "./Translations";
 
-export interface Meta {
+export interface IMeta {
     parentId: string |undefined,
     coverImageUrl?: string,
     _id: string,

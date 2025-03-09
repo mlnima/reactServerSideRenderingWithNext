@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Meta } from "@repo/typescript-types";
+import { IMeta } from "@repo/typescript-types";
 import Link from 'next/link';
 import { capitalizeFirstLetter, convertMetasTypeToSingular,groupingArrayOfMetas } from '@repo/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,7 +7,7 @@ import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import './MetasRenderer.scss';
 
 interface MetasRendererPropTypes {
-    metaData: Meta[] | undefined;
+    metaData: IMeta[] | undefined;
     metaType?: string;
     locale: string;
     startWith?: string;

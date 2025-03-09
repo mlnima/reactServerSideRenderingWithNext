@@ -1,6 +1,6 @@
 import type {Metadata} from 'next'
 import {AlternatesGenerators} from "@lib/alternatesCanonicalGenerator";
-import {getSettings} from "@lib/database/operations/settings";
+import getSettings from '@lib/actions/database/operations/settings/getSettings';
 
 type Params = Promise<{ lang: string }>
 

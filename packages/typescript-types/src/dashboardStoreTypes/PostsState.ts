@@ -1,10 +1,10 @@
-import {Post} from "../Post";
+import {IPost} from "../Post";
 import {Meta} from "../Meta";
 
 export interface PostsState {
-    post?: Post,
+    post?: IPost,
     totalCount: number,
-    posts?: Post[],
+    posts?: IPost[],
     meta?: Meta,
     metas?: Meta[],
     statusesCount?: {

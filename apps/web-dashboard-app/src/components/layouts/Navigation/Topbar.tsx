@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {NavLink, useLocation, useNavigate} from 'react-router-dom';
+import {NavLink, useNavigate} from 'react-router-dom';
 import {useAppDispatch} from "@store/hooks";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faBars} from '@fortawesome/free-solid-svg-icons'
@@ -7,10 +7,8 @@ import {faUser} from '@fortawesome/free-solid-svg-icons'
 import {setSidebarStatus} from "@store/reducers/globalStateReducer";
 import {useSelector} from "react-redux";
 import {DashboardStore} from "@repo/typescript-types";
-import React, {useEffect} from "react";
+import React from "react";
 import {faHome} from "@fortawesome/free-solid-svg-icons/faHome";
-import {faEraser} from "@fortawesome/free-solid-svg-icons/faEraser";
-import {commonAPIRequestClearCaches} from "@repo/api-requests";
 
 const Style = styled.div`
   display: flex;
@@ -41,7 +39,6 @@ const Style = styled.div`
 `
 
 const Topbar = () => {
-    const navigate = useNavigate();
     const dispatch = useAppDispatch()
     const sidebar = useSelector(({globalState}: DashboardStore) => globalState?.sidebar)
     const AdminSideBarOpenCloseHandler = () => {
@@ -58,9 +55,7 @@ const Topbar = () => {
                 <a className={'navigationLink'} href={'/'} target={'_blank'}>
                     <FontAwesomeIcon icon={faHome}/>
                 </a>
-                <span className={'navigationLink'} onClick={() => commonAPIRequestClearCaches().then(() => navigate(0))}>
-                    <FontAwesomeIcon icon={faEraser}/>
-                </span>
+
             </div>
 
 

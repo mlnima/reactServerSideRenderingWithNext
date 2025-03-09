@@ -1,4 +1,5 @@
-import SidebarWidgetAreaRenderer from '@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer';
+import SidebarWidgetAreaRenderer
+  from '@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer';
 import { getDictionary } from '../../../../get-dictionary';
 import WidgetsRenderer from '@components/widgets/widgetRenderer/WidgetsRenderer';
 import PostPage from '@components/PostsPage/PostsPage';
@@ -8,10 +9,10 @@ import PostsPageInfo from '@components/PostsPage/PostsPageInfo/PostsPageInfo';
 import Soft404 from '@components/Soft404/Soft404';
 import { IPageProps } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
-import { isValidObjectId } from '@repo/db/dist/src/tools';
-import { getSettings } from '@lib/database/operations/settings';
-import { getWidgets } from '@lib/database/operations/widgets';
-import { getPosts } from '@lib/database/operations/posts';
+import getSettings from '@lib/actions/database/operations/settings/getSettings';
+import getWidgets from '@lib/actions/database/operations/widgets/getWidgets';
+import getPosts from '@lib/actions/database/operations/posts/getPosts';
+import { isValidObjectId } from '@repo/db';
 
 const TagPage = async (props: IPageProps) => {
   const searchParams = await props.searchParams;
@@ -33,15 +34,17 @@ const TagPage = async (props: IPageProps) => {
   const currentPageQuery = searchParams?.page;
   const currentPage = currentPageQuery && typeof currentPageQuery === 'string' ? parseInt(currentPageQuery, 10) : 1;
 
-  const { meta, posts, totalCount } = await getPosts({
+  const { success, data } = await getPosts({
     locale,
     metaId: params?.tagId,
     page: currentPageQuery && typeof currentPageQuery === 'string' ? parseInt(currentPageQuery, 10) : 1,
   });
 
-  if (!meta) {
+  if (!success || !data || !data?.meta) {
     return <Soft404 dictionary={dictionary} />;
   }
+
+  const { meta, posts, totalCount } = data;
 
   return (
     <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
@@ -52,7 +55,8 @@ const TagPage = async (props: IPageProps) => {
           title={meta?.translations?.[locale]?.name ?? meta?.name}
           description={meta?.translations?.[locale]?.description ?? meta?.description}
         />
-        <WidgetsRenderer dictionary={dictionary} locale={locale} widgets={widgets?.['tagPageTop']} position={'tagPageTop'} />
+        <WidgetsRenderer dictionary={dictionary} locale={locale} widgets={widgets?.['tagPageTop']}
+                         position={'tagPageTop'} />
         <PostPage
           renderPagination
           posts={posts || []}

@@ -1,44 +1,55 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { loading } from '@store/reducers/globalStateReducer';
-// import {clientAPIRequestLoadOlderMessages} from '@repo/api-requests';
-import React from "react";
-import { getConversationMessages } from '@lib/database/operations/Messenger';
+import { loading, setAlert } from '@store/reducers/globalStateReducer';
+import React from 'react';
+import getConversationMessages from '@lib/actions/database/operations/messenger/getConversationMessages';
 
 interface IArgs {
-    limit: number;
-    skip: number;
-    conversationId: string;
-    messageAreaRef: React.RefObject<HTMLDivElement>
+  limit: number;
+  skip: number;
+  conversationId: string;
+  messageAreaRef: React.RefObject<HTMLDivElement>;
 }
 
-interface IResponse {
-    messages: any[]; // Changed from '{}' to 'any[]' to represent an array of messages
-}
+export const loadOlderMessagesAction = createAsyncThunk(
+  'messenger/loadOlderMessages',
+  async ({ limit, skip, conversationId, messageAreaRef } : IArgs , thunkAPI) => {
+    try {
+      thunkAPI.dispatch(loading(true));
 
-export const loadOlderMessagesAction = createAsyncThunk<IResponse, IArgs>(
-    'messenger/loadOlderMessages',
-    async ({ limit, skip, conversationId,messageAreaRef }, thunkAPI) => {
-        try {
-            thunkAPI.dispatch(loading(true));
+      //const response = await clientAPIRequestLoadOlderMessages({ limit, skip, conversationId });
 
-            //const response = await clientAPIRequestLoadOlderMessages({ limit, skip, conversationId });
+      const { data, success, message } = await getConversationMessages({
+        limit,
+        skip,
+        conversationId,
+      });
+      console.log(`data=> `,data)
 
-            const messages = await getConversationMessages({ limit, skip, conversationId,token:localStorage.getItem('wt') });
-            console.log(`messages=> `,messages)
-            thunkAPI.dispatch(loading(false));
+      thunkAPI.dispatch(loading(false));
 
-            if (messageAreaRef?.current) {
-                messageAreaRef.current.scroll({
-                    top: 1,
-                    behavior: 'smooth',
-                });
-            }
+      if (!success || !data) {
+        thunkAPI.dispatch(setAlert({
+          message,
+          type: 'error',
+        }));
+        return;
+      }
 
-            //@ts-ignore
-            return { messages: messages || [] };
-        } catch (error) {
-            thunkAPI.dispatch(loading(false));
-            return { messages: [] }; // Changed from 'conversationsList' to 'messages' to match the interface
-        }
+      if (messageAreaRef?.current) {
+        messageAreaRef.current.scroll({
+          top: 1,
+          behavior: 'smooth',
+        });
+      }
+
+      return { messages: data?.messages || [] };
+    } catch (error) {
+      thunkAPI.dispatch(loading(false));
+      thunkAPI.dispatch(setAlert({
+        message: 'Something went wrong please try again later',
+        type: 'error',
+      }));
+      return;
     }
+  },
 );

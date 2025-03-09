@@ -1,9 +1,9 @@
-import { getInitialUserPageData } from '@lib/database/operations/users';
+import getInitialUserPageData from '@lib/actions/database/operations/users/getInitialUserPageData';
 import localDetector from '@lib/localDetector';
 import { getDictionary } from '../../../../get-dictionary';
-import { ILayoutProps } from '@repo/typescript-types';
-import { getSettings } from '@lib/database/operations/settings';
-import { getWidgets } from '@lib/database/operations/widgets';
+import { ILayoutProps, User } from '@repo/typescript-types';
+import getSettings from '@lib/actions/database/operations/settings/getSettings';
+import getWidgets from '@lib/actions/database/operations/widgets/getWidgets';
 import Soft404 from '@components/Soft404/Soft404';
 import React from 'react';
 import SidebarWidgetAreaRenderer
@@ -11,7 +11,7 @@ import SidebarWidgetAreaRenderer
 import ProfileHeader from './components/ProfileHeader';
 import './layout.scss';
 import AuthorPostsNavigation from './posts/components/AuthorPostsNavigation';
-import { Suspense } from 'react';
+import { ServerActionResponse } from '@lib/actions/response';
 
 const UserLayout = async (props: ILayoutProps) => {
   const params = await props.params;
@@ -20,11 +20,16 @@ const UserLayout = async (props: ILayoutProps) => {
   const { userPageSettings } = await getSettings(['userPageSettings']);
   const sidebar = userPageSettings?.sidebar;
   const { username } = params;
-  const initialUserPageData = await getInitialUserPageData(username);
 
-  if (!initialUserPageData) {
+  const { success, data } = await getInitialUserPageData(username) as ServerActionResponse<{
+    initialUserPageData: User,
+  }>;
+
+  if (!success || !data) {
     return <Soft404 dictionary={dictionary} />;
   }
+
+  const { initialUserPageData } = data
 
   const widgets = await getWidgets(
     [
@@ -40,12 +45,12 @@ const UserLayout = async (props: ILayoutProps) => {
     <div id={'content'} className={`userLayout page-${sidebar || 'no'}-sidebar`}>
       <main id={'primary'} className={'main userPage'}>
         {/*<Suspense fallback={<p>Loading feed...</p>}>*/}
-          <ProfileHeader
-            initialUserPageData={initialUserPageData}
-            dictionary={dictionary}
-          />
+        <ProfileHeader
+          initialUserPageData={initialUserPageData}
+          dictionary={dictionary}
+        />
 
-          <AuthorPostsNavigation initialUserPageData={initialUserPageData} />
+        <AuthorPostsNavigation initialUserPageData={initialUserPageData} dictionary={dictionary}/>
         {/*</Suspense>*/}
         {props.children}
       </main>

@@ -1,26 +1,16 @@
 'use client';
 import React, { FC, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
-import {
-  loading,
-  loginRegisterForm,
-  setAlert,
-} from '@store/reducers/globalStateReducer';
+import { loading, loginRegisterForm, setAlert } from '@store/reducers/globalStateReducer';
 import './Comments.styles.scss';
 import UserProfileImage from '@components/UserProfileImage/UserProfileImage';
-import { Comment, NewComment } from '@repo/typescript-types';
+import { IComment, NewComment } from '@repo/typescript-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faAnglesDown,
-  faAnglesUp,
-  faPlus,
-} from '@fortawesome/free-solid-svg-icons';
+import { faAnglesDown, faAnglesUp, faPlus } from '@fortawesome/free-solid-svg-icons';
 import CommentsRenderer from './CommentsRenderer/CommentsRenderer';
-import {
-  deleteComments,
-  getComments,
-  newComment,
-} from '@lib/database/operations/comments';
+import getComments from '@lib/actions/database/operations/comments/getComments';
+import newComment from '@lib/actions/database/operations/comments/newComment';
+import deleteComments from '@lib/actions/database/operations/comments/deleteComments';
 import { clearACacheByTag } from '@lib/serverActions';
 
 interface IProps {
@@ -38,7 +28,7 @@ const Comments: FC<IProps> = ({ dictionary, postId }) => {
   const [showComments, setShowComments] = useState<boolean>(false);
   const [allowFetchMoreComments, setAllowFetchMoreComments] =
     useState<boolean>(true);
-  const [commentsData, setCommentsData] = useState<Comment[]>([]);
+  const [commentsData, setCommentsData] = useState<IComment[]>([]);
   const [draftCommentBody, setDraftCommentBody] = useState<string>('');
   const adminMode = useAppSelector(({ globalState }) => globalState?.adminMode);
   const { loggedIn } = useAppSelector(({ user }) => user);
@@ -73,13 +63,13 @@ const Comments: FC<IProps> = ({ dictionary, postId }) => {
       } as NewComment;
       commentsAllowScrollRef.current = false;
 
-      const savedCommentId: string | null = await newComment({ commentData });
+      const {data,success,message} = await newComment({ commentData });
 
-      if (!savedCommentId) {
+      if (!success || !data) {
         dispatch(loading(false));
         dispatch(
           setAlert({
-            message: 'Something went wrong please try again later',
+            message,
             type: 'error',
           })
         );
@@ -89,8 +79,8 @@ const Comments: FC<IProps> = ({ dictionary, postId }) => {
       await clearACacheByTag(`CComments-${postId}`);
 
       if (showComments) {
-        const completeCommentData: Comment = {
-          _id: savedCommentId,
+        const completeCommentData: IComment = {
+          _id: data?.savedCommentId,
           body: draftCommentBody,
           onDocumentId: postId,
           createdAt: Date.now(),
@@ -117,18 +107,18 @@ const Comments: FC<IProps> = ({ dictionary, postId }) => {
   const onDeleteCommentHandler = async (_id: string) => {
     try {
       dispatch(loading(true));
-      const deleteCommentsRes = await deleteComments({ ids: [_id] });
-      if (!deleteCommentsRes) {
+      const {success,message} = await deleteComments({ ids: [_id] });
+      if (!success) {
         dispatch(
           setAlert({
-            message: 'Error While Deleting CommentItem',
+            message: message,
             type: 'error',
           })
         );
         return;
       }
       await clearACacheByTag(`CComments-${postId}`);
-      setCommentsData((prevState: Comment[]) =>
+      setCommentsData((prevState: IComment[]) =>
         prevState.filter((comment) => comment._id !== _id)
       );
       dispatch(loading(false));
@@ -154,22 +144,20 @@ const Comments: FC<IProps> = ({ dictionary, postId }) => {
       commentsAllowScrollRef.current = true;
       const limit = 4;
 
-      const comments = await getComments({
+      const {success,data} = await getComments({
         onDocument: postId,
         skip: commentsData?.length || 0,
         limit,
       });
-      dispatch(loading(false));
-      if (!comments) return;
 
-      if (comments.length > 0) {
-        setCommentsData((prevState: Comment[]) => {
-          let newComments = [...(prevState || []), ...comments];
-          // newComments.sort((a : Comment, b: Comment) =>   b.createdAt - a.createdAt)
-          return newComments;
-        });
-      }
-      if (comments.length < limit) {
+      dispatch(loading(false));
+      if (!success || !data || data?.comments.length < 1) return;
+
+      setCommentsData((prevState: IComment[]) => {
+        // newComments.sort((a : Comment, b: Comment) =>   b.createdAt - a.createdAt)
+        return [...(prevState || []), ...data?.comments];
+      });
+      if (data?.comments.length < limit) {
         setAllowFetchMoreComments(false);
       }
     } catch {

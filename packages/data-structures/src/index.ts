@@ -17,9 +17,11 @@ import { advertiseType, advertisePlaceType } from './advertiseType';
 import { languagesMapOrigin, languagesMapInEnglish } from './languagesMap';
 import errorMessages from './errorMessages';
 import { reactSelectPrimaryTheme } from './reactSelectGlobalConfig';
+import memberLoginDefaultRequireFields from './memberLoginDefaultRequireFields';
 
 export {
     databaseSelectFieldsForPostCards,
+    memberLoginDefaultRequireFields,
     postFieldRequestForCards,
     postTypes,
     clientAllowedSortOptions,

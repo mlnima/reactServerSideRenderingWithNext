@@ -1,4 +1,4 @@
-import {Meta, MetasType} from "@repo/typescript-types";
+import {IMeta, MetasType} from "@repo/typescript-types";
 import dynamic from 'next/dynamic';
 import React from "react";
 
@@ -12,7 +12,7 @@ const CategoriesCardsRenderer = dynamic(
 
 interface IProps{
     uniqueData: {
-        metaData?: Meta[];
+        metaData?: IMeta[];
         metaType: MetasType;
     };
     metaType: MetasType;

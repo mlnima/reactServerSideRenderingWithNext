@@ -1,6 +1,6 @@
 {
   "$schema": "https://turborepo.org/schema.json",
-  "ui":  "stream",
+  "ui":  "tui",
   "globalDependencies": [
     ".env"
   ],
@@ -46,8 +46,7 @@
       "dependsOn": [
         "generateStaticConfig"
       ],
-      "cache": false,
-      "outputLogs": "errors-only"
+      "cache": false
     },
     "graph": {
       "cache": false

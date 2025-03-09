@@ -10,20 +10,22 @@ interface IProps {
   dictionary: {
     [key: string]: string;
   };
-  setPostStatusToFetch: React.Dispatch<SetStateAction<string>>;
-  userRole: string;
+  // setPostStatusToFetch: React.Dispatch<SetStateAction<string>>;
+  // userRole: string;
   initialUserPageData: IInitialUserPageData
 }
 
+
+//*****************NEED ROUTING FIX
 const AuthorPostsNavigation: FC<IProps> = ({
-                                             setPostStatusToFetch,
+                                             // setPostStatusToFetch,
                                              dictionary,
-                                             userRole,
+                                             // userRole,
                                              initialUserPageData
                                            }) => {
   const pathname = usePathname()
-  const params = useParams<{ username: string }>()
-  const searchParams = useSearchParams()
+  // const params = useParams<{ username: string }>()
+  // const searchParams = useSearchParams()
   const { userData, loggedIn } = useAppSelector(({ user }) => user);
 
 

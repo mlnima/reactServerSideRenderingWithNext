@@ -1,11 +1,11 @@
-import {Post} from "../Post";
-import {Meta} from "../Meta";
+import {IPost} from "../Post";
+import {IMeta} from "../Meta";
 
 export interface AdminPanelPosts {
-    post?: Post,
+    post?: IPost,
     totalCount: number,
-    posts?: Post[],
-    meta?: Meta,
-    metas?: Meta[],
+    posts?: IPost[],
+    meta?: IMeta,
+    metas?: IMeta[],
     activeEditingLanguage: string
 }

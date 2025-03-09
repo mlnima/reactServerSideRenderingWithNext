@@ -1,10 +1,10 @@
 'use client';
 import Link from "next/link";
 import {FC} from "react";
-import {Comment} from "@repo/typescript-types"
+import {IComment} from "@repo/typescript-types"
 
 interface IProps{
-    comments:Comment[]
+    comments:IComment[]
 }
 
 const RecentComments:FC<IProps> = ({comments}) => {

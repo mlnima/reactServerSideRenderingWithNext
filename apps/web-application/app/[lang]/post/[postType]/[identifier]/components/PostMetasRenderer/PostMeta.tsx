@@ -1,10 +1,10 @@
 import React, {FC} from "react";
 import Link from "next/link";
 import {convertMetasTypeToSingular,capitalizeFirstLetters} from "@repo/utils";
-import {Meta} from "@repo/typescript-types";
+import {IMeta} from "@repo/typescript-types";
 
 interface PostMetaPropTypes {
-    item: Meta
+    item: IMeta
 }
 
 const PostMeta: FC<PostMetaPropTypes> = ({item}) => {

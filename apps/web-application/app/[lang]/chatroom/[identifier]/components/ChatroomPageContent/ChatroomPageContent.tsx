@@ -10,13 +10,12 @@ import ChatRoomTools from '../ChatRoomTools/ChatRoomTools';
 import ChatRoomOnlineUsersList from '../ChatRoomOnlineUsersList/ChatRoomOnlineUsersList';
 import { IChatroomUsers, INewUserJoinData, IPreference } from '../interfaces';
 import './ChatroomPageContent.scss';
-import Soft404 from '@components/Soft404/Soft404';
-import { Chatroom, ChatroomMessage, User } from '@repo/typescript-types';
+import { IChatroom, ChatroomMessage, User } from '@repo/typescript-types';
 
 interface IProps {
     locale: string;
-    chatroom: Chatroom;
-    chatrooms: Chatroom[];
+    chatroom: IChatroom;
+    chatrooms: IChatroom[];
     dictionary: {
         [key: string]: string;
     };

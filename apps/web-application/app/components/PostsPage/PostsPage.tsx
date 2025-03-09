@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
-import { Post } from "@repo/typescript-types";
+import { IPost } from "@repo/typescript-types";
 import PostsCardsRenderer from '@components/cards/CardsRenderer/PostsCardsRenderer/PostsCardsRenderer';
 import Pagination from '@components/Pagination/Pagination';
 
 interface PostPageTypes {
     renderPagination: boolean;
-    posts: Post[];
+    posts: IPost[];
     locale: string;
     totalCount: number;
     currentPage: number;

@@ -3,7 +3,7 @@ import { getTextDataWithTranslation, textContentReplacer } from '@repo/utils';
 import { AlternatesGenerators } from '@lib/alternatesCanonicalGenerator';
 import { IPageProps } from '@repo/typescript-types';
 import localDetector from "@lib/localDetector";
-import {getSettings} from "@lib/database/operations/settings";
+import getSettings from '@lib/actions/database/operations/settings/getSettings';
 
 const alternatesGenerators = new AlternatesGenerators();
 

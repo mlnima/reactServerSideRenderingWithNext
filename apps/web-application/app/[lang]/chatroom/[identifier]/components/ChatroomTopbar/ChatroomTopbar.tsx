@@ -8,10 +8,10 @@ import './ChatroomTopbar.scss'
 import {IPreference} from "../interfaces";
 import Link from "next/link";
 import {faHome} from "@fortawesome/free-solid-svg-icons";
-import {Chatroom} from "@repo/typescript-types";
+import {IChatroom} from "@repo/typescript-types";
 
 interface IProp {
-    chatrooms: Chatroom[],
+    chatrooms: IChatroom[],
     chatroomId: string,
     autoScroll: boolean,
     setAutoScroll: React.Dispatch<React.SetStateAction<boolean>>,

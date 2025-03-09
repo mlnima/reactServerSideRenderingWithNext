@@ -14,7 +14,8 @@ import { loginRegisterForm } from '@store/reducers/globalStateReducer';
 
 import { faComments } from '@fortawesome/free-solid-svg-icons';
 import {clearACacheByTag} from "@lib/serverActions";
-import { ratePost, viewPost } from '@lib/database/operations/posts';
+import ratePost from '@lib/actions/database/operations/posts/ratePost';
+import viewPost from '@lib/actions/database/operations/posts/viewPost';
 
 interface IProps {
     rating: boolean;

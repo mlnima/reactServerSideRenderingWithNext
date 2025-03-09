@@ -11,8 +11,8 @@ interface IProps {
     dictionary: {
         [key: string]: string
     },
-    profileImage:string,
-    username:string
+    profileImage?:string  ,
+    username?:string
 }
 
 const FollowingOptionsPopup: FC<IProps> = (

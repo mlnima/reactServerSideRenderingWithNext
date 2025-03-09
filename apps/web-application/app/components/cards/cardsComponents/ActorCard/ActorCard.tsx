@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Meta } from "@repo/typescript-types";
+import { IMeta } from "@repo/typescript-types";
 import Link from 'next/link';
 import { capitalizeFirstLetter } from '@repo/utils';
 import CardTitle from '@components/cards/asset/CardTitle/CardTitle';
@@ -7,7 +7,7 @@ import './ActorCard.scss';
 import CardImageRendererUseClient from '@components/cards/asset/CardImageRenderer/CardImageRendererUseClient';
 
 interface ActorCardPropTypes {
-    meta: Meta;
+    meta: IMeta;
     index: number;
     isSidebar?: boolean;
     actorUrl: string;

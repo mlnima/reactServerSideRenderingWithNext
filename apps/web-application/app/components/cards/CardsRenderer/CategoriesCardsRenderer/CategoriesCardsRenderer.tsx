@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
-import { Meta } from '@repo/typescript-types';
+import { IMeta } from '@repo/typescript-types';
 import './CategoriesCardsRenderer.scss';
 import CategoryCard from '@components/cards/cardsComponents/CategoryCard/CategoryCard';
 
 interface IProps {
-  metas?: Meta[];
+  metas?: IMeta[];
   locale: string;
   isSidebar?: boolean;
   dictionary: {

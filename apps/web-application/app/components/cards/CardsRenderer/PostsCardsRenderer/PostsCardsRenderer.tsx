@@ -1,5 +1,5 @@
 import {FC} from "react";
-import {Post} from "@repo/typescript-types";
+import {IPost} from "@repo/typescript-types";
 import dynamic from "next/dynamic";
 import './PostsCardsRenderer.scss';
 import ServerSideStore from "@store/ServerSideStore";
@@ -13,7 +13,7 @@ const AdPostCard = dynamic(() => import('../../cardsComponents/AdPostCard/AdPost
 interface IProps {
     isSidebar?: boolean,
     locale: string,
-    posts?: Post[],
+    posts?: IPost[],
     previewMode?: boolean,
     dictionary: {
         [key: string]: string
@@ -25,7 +25,7 @@ const PostsCardsRenderer: FC<IProps> = ({posts, locale, isSidebar,previewMode,di
     // console.log(`posts=> `,posts)
     return (
         <div className={`postsCardsWrapper${isSidebar ? 'Sidebar' : ''}`}>
-            {(posts || []).map((post: Post, index: number) => {
+            {(posts || []).map((post: IPost, index: number) => {
                 const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
                 // console.log('defaultLocale=> ',defaultLocale)
                 const imagesAllowedDomainsForNextImage = (process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES || '').split(' ') || []

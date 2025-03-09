@@ -6,8 +6,8 @@ import {
 import { AlternatesGenerators } from '@lib/alternatesCanonicalGenerator';
 import { IPageProps } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
-import { getPosts } from '@lib/database/operations/posts';
-import { getSettings } from '@lib/database/operations/settings';
+import getPosts from "@lib/actions/database/operations/posts/getPosts";
+import getSettings from '@lib/actions/database/operations/settings/getSettings';
 
 const alternatesGenerators = new AlternatesGenerators();
 
@@ -25,15 +25,20 @@ const tagMetaGenerator = async (props: IPageProps): Promise<Metadata> => {
 
   const currentPageQuery = searchParams?.page;
 
-  const { meta } = await getPosts({
+
+  const { success, data } = await getPosts({
     locale,
-    metaId: params?.categoryId,
-    page:
-      currentPageQuery && typeof currentPageQuery === 'string'
-        ? parseInt(currentPageQuery, 10)
-        : 1,
+    metaId: params?.tagId,
+    page: currentPageQuery && typeof currentPageQuery === 'string' ? parseInt(currentPageQuery, 10) : 1,
+    returnPosts: false,
   });
 
+
+  if (!success || !data || !data?.meta) {
+    return {};
+  }
+
+  const meta = data.meta;
   const pageTitle = tagPageSettings?.title;
   const pageKeywords = tagPageSettings?.keywords;
   const pageDescription = tagPageSettings?.description;
@@ -41,7 +46,7 @@ const tagMetaGenerator = async (props: IPageProps): Promise<Metadata> => {
   const description = pageDescription
     ? textContentReplacer(pageDescription, {
         name: meta?.name,
-        count: meta?.count,
+        count: meta?.count ? meta?.count.toString() : '0',
         siteName: initialSettings?.headDataSettings?.siteName,
       })
     : getTextDataWithTranslation(locale, 'description', meta);
@@ -56,7 +61,7 @@ const tagMetaGenerator = async (props: IPageProps): Promise<Metadata> => {
     title: pageTitle
       ? textContentReplacer(pageTitle, {
           name: meta?.name,
-          count: meta?.count,
+          count: meta?.count ? meta?.count.toString() : '0',
           siteName: initialSettings?.headDataSettings?.siteName,
         })
       : getTextDataWithTranslation(locale, 'title', meta),

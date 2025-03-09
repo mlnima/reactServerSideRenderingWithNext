@@ -1,4 +1,4 @@
-import {Post,Meta,PageTypes,Comment} from "@repo/typescript-types";
+import { Post, Meta, IComment, IPage } from '@repo/typescript-types';
 
 
 export interface PostStateTypes {
@@ -6,7 +6,7 @@ export interface PostStateTypes {
     tagsMetas: Meta[],
     categoriesMetas: Meta[],
     actorsMetas: Meta[],
-    pageData: PageTypes,
+    pageData: IPage,
     posts: Post[],
     relatedPosts: {
         actorsRelatedPosts:Post[],
@@ -22,5 +22,5 @@ export interface PostStateTypes {
     totalCount: number,
     post: Post,
     editingPost: Post,
-    comments: Comment[],
+    comments: IComment[],
 }

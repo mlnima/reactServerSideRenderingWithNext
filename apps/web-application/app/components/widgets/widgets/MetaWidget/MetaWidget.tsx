@@ -1,10 +1,10 @@
 import {FC} from "react";
-import {Meta, MetasType} from "@repo/typescript-types";
+import {IMeta, MetasType} from "@repo/typescript-types";
 import MetasRenderer from "@components/metas/MetasRenderer";
 
 interface MetaWidgetPropType {
     uniqueData?: {
-        metaData?: Meta[],
+        metaData?: IMeta[],
         grouping?:boolean,
         metaType?:string
     },

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {DashboardStore} from "@repo/typescript-types";
 import { getFormAction} from "@store/reducers/formsReducer";
-import {redirect, useNavigate, useParams, useSearchParams} from "react-router-dom";
+import { useNavigate, useParams, useSearchParams} from "react-router-dom";
 import {useAppDispatch} from "@store/hooks";
 import {dashboardAPIRequestDeleteForm} from "@repo/api-requests";
 

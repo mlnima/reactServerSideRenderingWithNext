@@ -1,6 +1,6 @@
 'use client';
 import { FC, useEffect } from 'react';
-import { viewPost } from '@lib/database/operations/posts';
+import viewPost from '@lib/actions/database/operations/posts/viewPost';
 
 interface IProps {
     _id: string;

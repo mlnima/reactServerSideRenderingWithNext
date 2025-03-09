@@ -1,20 +1,23 @@
 /* eslint-disable */
 'use client';
 import LoggedInRequirePageMessage from '@components/LoggedInRequireMessage/LoggedInRequirePageMessage';
-import PostsCardsRenderer from '@components/cards/CardsRenderer/PostsCardsRenderer/PostsCardsRenderer';
-import { faCamera } from '@fortawesome/free-solid-svg-icons/faCamera';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { getPosts } from '@lib/database/operations/posts';
-import { getLoadedUserPageData } from '@lib/database/operations/users';
-import { uniqArrayBy } from '@repo/utils';
-import { IUserPageData, Post } from '@repo/typescript-types';
-import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { loading } from '@store/reducers/globalStateReducer';
-import { FC, useEffect, useRef, useState } from 'react';
-//import AuthorPostsNavigation from '../../posts/[postType]/components/AuthorPostsNavigation';
-import ProfileHeader from '../ProfileHeader';
+import getPosts from "@lib/actions/database/operations/posts/getPosts";
+import getLoadedUserPageData from '@lib/actions/database/operations/users/getLoadedUserPageData';
+import { IUserPageData, IPost } from '@repo/typescript-types';
+import { useAppSelector } from '@store/hooks';
+import { FC, useEffect,  useState } from 'react';
 import './UserPageContent.scss';
 import { useSearchParams } from 'next/navigation';
+import Soft404 from '@components/Soft404/Soft404';
+// import PostsCardsRenderer from '@components/cards/CardsRenderer/PostsCardsRenderer/PostsCardsRenderer';
+// import { faCamera } from '@fortawesome/free-solid-svg-icons/faCamera';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+//import AuthorPostsNavigation from '../../posts/[postType]/components/AuthorPostsNavigation';
+// import ProfileHeader from '../ProfileHeader';
+// import { uniqArrayBy } from '@repo/utils';
+// import { loading } from '@store/reducers/globalStateReducer';
+
+
 
 interface IProps {
   locale: string;
@@ -30,7 +33,7 @@ const UserPageContent: FC<IProps> = ({ dictionary, locale, initialUserPageData }
   const [isUserOwnProfile, setIsUserOwnProfile] = useState(false);
   const [postStatusToFetch, setPostStatusToFetch] =
     useState<string>('published');
-  const [userPagePosts, setUserPagePosts] = useState<Post[] | []>([]);
+  const [userPagePosts, setUserPagePosts] = useState<IPost[] | []>([]);
   const searchParams = useSearchParams();
 
   const [userPageData, setUserPageData] = useState<IUserPageData | null>(null);
@@ -68,17 +71,20 @@ const UserPageContent: FC<IProps> = ({ dictionary, locale, initialUserPageData }
     try {
       if (!initialUserPageData._id) return;
 
-      const responseData = await getLoadedUserPageData({
+      const {success, data} = await getLoadedUserPageData({
         userId: initialUserPageData._id,
         userWhoRequestIt: userData?._id as string,
       });
 
+      if (!success || !data || !data.loadedUserPageData){
+        return
+      }
+
       setUserPageData({
         ...userPageData,
-        ...responseData,
+        ...data.loadedUserPageData
       });
 
-      return null;
     } catch {
       return null;
     }
@@ -91,12 +97,21 @@ const UserPageContent: FC<IProps> = ({ dictionary, locale, initialUserPageData }
         ? parseInt(currentPageQuery, 10)
         : 1;
 
-    const { posts, totalCount } = await getPosts({
+
+    const { success, data } = await getPosts({
       locale,
       page: currentPage,
       status: postStatusToFetch || 'published',
       author: initialUserPageData._id,
     });
+
+
+    if (!success || !data) {
+      return <Soft404 dictionary={dictionary} />;
+    }
+
+    const { posts, totalCount } = data
+
     if (posts) {
       setUserPagePosts(posts);
     }

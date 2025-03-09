@@ -1,5 +1,4 @@
-import { ObjectId } from 'mongodb';
-import mongoose, {Document} from 'mongoose';
+import {Document,Types,ObjectId} from 'mongoose';
 
 export const flatDocumentToObject = (document: Document) => {
   try {
@@ -26,9 +25,14 @@ export const flatArrayOdDocumentToObject = async (documents: Document[]) => {
 
 
 
+// export const isValidObjectId = (id: string | undefined | null): boolean => {
+//   if (!id) return false;
+//   return ObjectId.isValid(id);
+// };
+
 export const isValidObjectId = (id: string | undefined | null): boolean => {
   if (!id) return false;
-  return ObjectId.isValid(id);
+  return Types.ObjectId.isValid(id);
 };
 
 // export const reqQueryToMongooseOptions = (req: Request) => {

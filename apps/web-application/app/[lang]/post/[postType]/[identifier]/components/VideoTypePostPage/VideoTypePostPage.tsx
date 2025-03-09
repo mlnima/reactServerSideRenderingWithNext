@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import {Post} from "@repo/typescript-types";
+import {IPost} from "@repo/typescript-types";
 import VideoPlayer from "./VideoPlayer/VideoPlayer";
 import PostTitle from "../PostTitle/PostTitle";
 import PostDescription from "../PostDescription/PostDescription";
@@ -8,7 +8,7 @@ import {Widget} from "@repo/typescript-types";
 import ActionButtons from "../ActionButtons/ActionButtons";
 
 interface IProps {
-    post: Post,
+    post: IPost,
     views: number,
     likes: number,
     disLikes: number,
@@ -18,7 +18,7 @@ interface IProps {
         [key: string]: string
     },
     widgets: Widget[],
-    relatedPosts: Post[],
+    relatedPosts: IPost[],
 }
 
 const VideoTypePostPage: FC<IProps> =

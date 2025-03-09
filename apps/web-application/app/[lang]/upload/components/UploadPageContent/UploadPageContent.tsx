@@ -16,7 +16,7 @@ import { postTypes, videoQualities, postStatuses } from '@repo/data-structures';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
-import { Post } from '@repo/typescript-types';
+import { IPost } from '@repo/typescript-types';
 import './UploadPageContent.scss';
 import { faEye } from '@fortawesome/free-solid-svg-icons/faEye';
 import deepEqual from 'deep-equal';
@@ -26,8 +26,8 @@ import ForbiddenMessage from '@components/ForbiddenMessage/ForbiddenMessage';
 import { useSearchParams } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 import { AxiosError, AxiosResponse } from 'axios';
-import { getMeta } from '@lib/database/operations/metas';
-import { getEditingPost } from '@lib/database/operations/posts';
+import getMeta from '@lib/actions/database/operations/metas/getMeta';
+import getEditingPost from '@lib/actions/database/operations/posts/getEditingPost';
 
 interface IProps {
   _id: string;
@@ -43,8 +43,8 @@ const UploadPageContent = ({ _id, postType, dictionary, locale }: IProps) => {
   const pathname = usePathname();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const [editingPost, setEditingPost] = useState<Post | null>(null);
-  const [editingPostOriginal, setEditingPostOriginal] = useState<Post | null>(null);
+  const [editingPost, setEditingPost] = useState<IPost | null>(null);
+  const [editingPostOriginal, setEditingPostOriginal] = useState<IPost | null>(null);
   const fileInputRef = useRef(null);
   const { loggedIn, userData } = useAppSelector(({ user }) => user);
   const localeToSet = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? '' : `/${locale}`;
@@ -72,10 +72,11 @@ const UploadPageContent = ({ _id, postType, dictionary, locale }: IProps) => {
 
   const getPostMeta = async (_id: string) => {
     try {
-      const meta = await getMeta(_id);
-      if (meta) {
-        setEditingPost(prevState => ({ ...prevState, categories: [meta] }));
+      const {success,data} = await getMeta(_id);
+      if(!success || !data){
+        return
       }
+      setEditingPost(prevState => ({ ...prevState, categories: [data.meta] }));
 
     } catch {
       return;
@@ -92,25 +93,14 @@ const UploadPageContent = ({ _id, postType, dictionary, locale }: IProps) => {
   }, [searchParams, pathname]);
 
   const getEditingPostData = async () => {
-    const token = localStorage.getItem('wt');
-    if (_id && token) {
-      const post = await getEditingPost({
-        token,
-        _id,
-      });
-      console.log(`post=> `, post);
-      if (post && (userData.role === 'administrator' || post?.author?._id === userData?._id)) {
-        setEditingPost(post);
-        setEditingPostOriginal(post);
-      }
+    const { success, data }= await getEditingPost({ _id});
 
-      // clientAPIRequestGetEditingPost(_id).then((response: AxiosResponse) => {
-      //   if (userData.role === 'administrator' || response?.data?.post?.author?._id === userData?._id) {
-      //     setEditingPost(response?.data?.post || {});
-      //     setEditingPostOriginal(response?.data?.post || {});
-      //   }
-      // });
+    if (!success || !data){
+      return
     }
+
+    setEditingPost(data.post);
+    setEditingPostOriginal(data.post);
   };
 
   const onChangeHandler = (

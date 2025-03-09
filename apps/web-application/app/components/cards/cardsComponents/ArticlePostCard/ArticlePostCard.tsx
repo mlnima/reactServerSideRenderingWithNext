@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
-import { Post } from "@repo/typescript-types";
+import { IPost } from "@repo/typescript-types";
 import CardTitle from '../../asset/CardTitle/CardTitle';
 import '../postCard.scss';
 import CardStats from '@components/cards/asset/CardStats/CardStats';
@@ -13,7 +13,7 @@ interface ArticlePostCardPropTypes {
     postUrl: string;
     index: number;
     isSidebar?: boolean;
-    post: Post;
+    post: IPost;
     isNextImageAllowed: boolean;
     dictionary: {
         [key: string]: string;

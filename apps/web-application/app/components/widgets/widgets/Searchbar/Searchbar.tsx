@@ -16,10 +16,12 @@ import {
   setBackgroundFilter,
   setLoading,
 } from '@store/reducers/globalStateReducer';
-// import { APISearchSuggestions } from '@repo/api-requests';
+
 import SearchbarKeywordSuggestions from '@components/widgets/widgets/Searchbar/SearchbarKeywordSuggestions';
 import { ISuggestion } from '@repo/typescript-types';
-import { getSearchSuggestion } from '@lib/database/operations/search';
+import getSearchSuggestion from '@lib/actions/database/operations/search/getSearchSuggestion';
+import { ServerActionResponse } from '@lib/actions/response';
+import { Types } from 'mongoose';
 
 interface IProps {
   locale: string;
@@ -65,13 +67,13 @@ const SearchBar: React.FC<IProps> = ({ dictionary, locale }) => {
       formElement.style.animation = 'none';
       setTimeout(
         () => (formElement.style.animation = 'shake 0.5s ease-in-out'),
-        0
+        0,
       );
     }
   };
 
   const onClearHandler = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     event.preventDefault();
     setSuggestions([]);
@@ -91,7 +93,7 @@ const SearchBar: React.FC<IProps> = ({ dictionary, locale }) => {
   };
 
   const onCloseForm = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     event.preventDefault();
 
@@ -117,16 +119,17 @@ const SearchBar: React.FC<IProps> = ({ dictionary, locale }) => {
   };
 
   const onInputChangeHandler = async (
-    e: React.ChangeEvent<HTMLInputElement>
+    e: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const userInput = e.target.value;
     setKeyword(userInput);
 
     if (userInput.length > 2) {
-      const suggestionsData = await getSearchSuggestion(userInput);
-      if (suggestionsData && suggestionsData.length > 0) {
-        setSuggestions(suggestionsData);
+      const { success, data } = await getSearchSuggestion(userInput);
+      if (!success || !data || (data && data.suggestions.length < 1)) {
+        return;
       }
+      setSuggestions(data.suggestions);
     }
   };
 
@@ -143,13 +146,13 @@ const SearchBar: React.FC<IProps> = ({ dictionary, locale }) => {
       setKeyword(
         typeof params?.keyword === 'string'
           ? params?.keyword
-          : params?.keyword[0]
+          : params?.keyword[0],
       );
     } else {
       setKeyword('');
     }
     setSuggestions([]);
-    if (searchInputRef.current){
+    if (searchInputRef.current) {
       searchInputRef.current.value = '';
     }
     setIsOnFocus(false);

@@ -1,14 +1,14 @@
 'use client';
 import {FC} from "react";
-import {Post} from "@repo/typescript-types";
+import {IPost} from "@repo/typescript-types";
 import './PostsListWidget.scss'
 // import PromotionPostListCard from "@components/includes/cards/postsCards/PromotionPostListCard";
 
 interface PropTypes {
-    posts?: Post[],
+    posts?: IPost[],
     uniqueData?: {
         speed: number;
-        posts: Post[],
+        posts: IPost[],
         sliderEffect: string,
         spaceBetween: number,
         totalCount: number

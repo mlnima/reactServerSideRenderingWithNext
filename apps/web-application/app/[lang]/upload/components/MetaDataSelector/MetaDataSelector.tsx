@@ -2,18 +2,18 @@
 import React, { FC, Suspense } from 'react';
 import AsyncSelect from 'react-select/async';
 import { uniqArrayBy } from '@repo/utils';
-import { MetasType, Post } from '@repo/typescript-types';
+import { MetasType, IPost } from '@repo/typescript-types';
 import './MetaDataSelector.scss';
 import { setAlert } from '@store/reducers/globalStateReducer';
 import { useAppDispatch } from '@store/hooks';
 import { reactSelectPrimaryTheme } from '@repo/data-structures';
-import { getMetaSuggestion } from '@lib/database/operations/metas';
+import getMetaSuggestion from '@lib/actions/database/operations/metas/getMetaSuggestion';
 
 interface ComponentPropTypes {
   metaType: MetasType;
   maxLimit: number;
-  setEditingPost: React.Dispatch<React.SetStateAction<Post>>;
-  postData: Post;
+  setEditingPost: React.Dispatch<React.SetStateAction<IPost>>;
+  postData: IPost;
 }
 
 interface SelectOption {
@@ -50,16 +50,16 @@ const MetaDataSelector: FC<ComponentPropTypes> = ({ metaType, setEditingPost, ma
 
   const onLoadOptionsHandler = async (input: string) => {
     try {
-      const suggestionList = await getMetaSuggestion({
+      const { success, data } = await getMetaSuggestion({
         metaType,
         startWith: input,
       });
-      if (!suggestionList) {
-        return [];
+      if (!success || !data) {
+        return;
       }
-      return suggestionList;
+      return data?.suggestions;
     } catch {
-      return [];
+      return;
     }
   };
 

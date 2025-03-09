@@ -1,8 +1,8 @@
 import React from 'react';
-import { Post } from '@repo/typescript-types';
+import { IPost } from '@repo/typescript-types';
 
 interface PropTypes {
-    setEditingPost: React.Dispatch<React.SetStateAction<Post>>;
+    setEditingPost: React.Dispatch<React.SetStateAction<IPost>>;
 }
 
 const LocationField: React.FC<PropTypes> = ({ setEditingPost }) => {

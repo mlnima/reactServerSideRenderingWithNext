@@ -1,11 +1,11 @@
 import {FC} from "react";
 import './RelatedPostsRenderer.scss';
 import PostsCardsRenderer from "@components/cards/CardsRenderer/PostsCardsRenderer/PostsCardsRenderer";
-import {Post} from "@repo/typescript-types";
+import {IPost} from "@repo/typescript-types";
 
 interface IProps{
     locale:string,
-    relatedPosts: Post[],
+    relatedPosts: IPost[],
     dictionary: {
         [key: string]: string
     },

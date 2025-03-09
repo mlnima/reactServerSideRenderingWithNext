@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import dynamic from 'next/dynamic';
 import CardTitle from '../../asset/CardTitle/CardTitle';
-import { Post } from "@repo/typescript-types";
+import { IPost } from "@repo/typescript-types";
 import '../postCard.scss';
 import Link from 'next/link';
 import CardStats from '@components/cards/asset/CardStats/CardStats';
@@ -14,7 +14,7 @@ interface PromotionPostCardPropTypes {
     numberOfCardsPerRowInMobile: number;
     index: number;
     isSidebar?: boolean;
-    post: Post;
+    post: IPost;
     isNextImageAllowed: boolean;
     dictionary: {
         [key: string]: string;

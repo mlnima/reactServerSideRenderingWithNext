@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Post } from '@repo/typescript-types';
+import { IPost } from '@repo/typescript-types';
 import PostDescription from '../PostDescription/PostDescription';
 import PostMetasRenderer from '../PostMetasRenderer/PostMetasRenderer';
 import { Widget } from '@repo/typescript-types';
@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 
 interface IProps {
-  post: Post;
+  post: IPost;
   views: number;
   likes: number;
   disLikes: number;
@@ -20,7 +20,7 @@ interface IProps {
     [key: string]: string;
   };
   widgets: Widget[];
-  relatedPosts: Post[];
+  relatedPosts: IPost[];
 }
 
 const PromotionTypePostPage: FC<IProps> = ({

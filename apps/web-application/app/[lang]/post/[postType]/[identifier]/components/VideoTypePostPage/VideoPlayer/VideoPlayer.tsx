@@ -2,12 +2,12 @@
 import React, { FC } from 'react';
 import { convertDurationStringToIso8601,convertDateToIsoString } from '@repo/utils';
 
-import { Post } from "@repo/typescript-types";
+import { IPost } from "@repo/typescript-types";
 import './VideoPlayer.scss';
 // import { clientCheckDeletedVideo } from '@repo/api-requests';
 
 interface PropTypes {
-    post: Post;
+    post: IPost;
     locale: string;
     dictionary: {
         [key: string]: string;

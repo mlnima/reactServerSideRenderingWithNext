@@ -4,7 +4,7 @@ import ChatroomPageContent from './components/ChatroomPageContent/ChatroomPageCo
 import chatroomMetaGenerator from './components/chatroomMetaGenerator/chatroomMetaGenerator';
 import { PageParams, PageSearchParams } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
-import { getChatroom } from '@lib/database/operations/chatrooms';
+import getChatroom from '@lib/actions/database/operations/chatrooms/getChatroom';
 import Soft404 from '@components/Soft404/Soft404';
 
 interface IProps {
@@ -24,18 +24,17 @@ const chatroomPage = async (props: IProps) => {
     return <Soft404 dictionary={dictionary} />;
   }
 
-  //const chatroomsData = identifier ? await fetchChatroomData({identifier}) : {}
-  const { chatroom, chatrooms } = await getChatroom(identifier);
+  const { success, data } = await getChatroom(identifier);
 
-  if (!chatroom || !chatroom?._id) {
+  if (!success || !data || !data.chatroom?._id) {
     return <Soft404 dictionary={dictionary} />;
   } else
     return (
       <div id={'content'} className={`page-no-sidebar`} dir={'ltr'}>
         <main id={'primary'} className={'main chatroom'}>
           <ChatroomPageContent
-            chatroom={chatroom}
-            chatrooms={chatrooms}
+            chatroom={data.chatroom}
+            chatrooms={data.chatrooms}
             dictionary={dictionary}
             locale={locale}
           />

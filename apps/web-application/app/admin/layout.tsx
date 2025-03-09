@@ -1,19 +1,24 @@
+"use client";
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
-
 config.autoAddCss = false;
+import '@components/global/styles/global.styles.scss';
 import './layout.scss';
-import { Theme, ThemePanel } from "@radix-ui/themes";
-
+import Topbar from './components/Topbar/Topbar';
+import Sidebar from './components/Sidebar/Sidebar';
+import ReduxProvider from '@storeDashboard/ReduxProvider';
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   return (
       <html lang={'en'}>
       <body className={`dark `}>
-      AdminLayout
-      <div className="layout">
+      <ReduxProvider>
+      <Topbar/>
+      <Sidebar/>
+      <main>
         {children}
-      </div>
+      </main>
+      </ReduxProvider>
       </body>
       </html>
 
@@ -21,3 +26,6 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
 };
 
 export default AdminLayout;
+
+
+//import {commonAPIRequestClearCaches} from "@repo/api-requests";

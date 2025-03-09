@@ -1,11 +1,11 @@
 'use client';
 import React, {FC, useEffect, useRef} from "react";
 import CommentItem from "../Comment/CommentItem";
-import {Comment} from "@repo/typescript-types";
+import {IComment} from "@repo/typescript-types";
 import './CommentsRenderer.styles.scss'
 
 interface IProps {
-    comments: Comment[],
+    comments: IComment[],
     onDeleteCommentHandler:  (_id: string) => Promise<void> ,
     adminMode: boolean,
     commentsRef: React.RefObject<HTMLDivElement>,
@@ -40,7 +40,7 @@ const CommentsRenderer: FC<IProps> = ({comments, onDeleteCommentHandler, adminMo
 
             {comments?.length > 0 ?
                 <>
-                    {comments.map((comment: Comment) => (
+                    {comments.map((comment: IComment) => (
                         <CommentItem key={comment._id}
                                      onDeleteCommentHandler={onDeleteCommentHandler}
                                      comment={comment}

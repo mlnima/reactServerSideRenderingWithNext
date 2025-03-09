@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Post } from '@repo/typescript-types';
+import { IPost } from '@repo/typescript-types';
 import PostTitle from '../PostTitle/PostTitle';
 import PostMetasRenderer from '../PostMetasRenderer/PostMetasRenderer';
 import { Widget } from '@repo/typescript-types';
@@ -8,7 +8,7 @@ import './LearnTypePostPage.styles.scss';
 import LearnTypePostPageDescription from './LearnTypePostPageDescription/LearnTypePostPageDescription';
 
 interface IProps {
-  post: Post;
+  post: IPost;
   views: number;
   likes: number;
   disLikes: number;
@@ -18,7 +18,7 @@ interface IProps {
     [key: string]: string;
   };
   widgets: Widget[];
-  relatedPosts: Post[];
+  relatedPosts: IPost[];
 }
 
 const LearnTypePostPage: FC<IProps> = ({

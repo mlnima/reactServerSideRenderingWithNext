@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { i18n } from '@i18nConfig';
+import { cookies } from 'next/headers'
+import { JWTPayload } from '@repo/typescript-types';
+import { decryptJWT } from '@lib/session';
 
 const getLocaleFromUrl = (request: NextRequest) => {
   const newUrl = new URL(request.url);
@@ -8,17 +11,23 @@ const getLocaleFromUrl = (request: NextRequest) => {
   return i18n.locales.includes(locale) ? locale : i18n.defaultLocale;
 };
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
 
   const pathname = request.nextUrl.pathname;
   const params = request?.nextUrl?.searchParams;
+
 
   const pathnameIsMissingLocale = i18n.locales.every(
     (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`,
   );
 
   if (pathname.startsWith('/admin')) {
-    return NextResponse.next();
+    const sessionCookie = (await cookies()).get('session')?.value
+    const sessionData = sessionCookie ? await decryptJWT(sessionCookie) as JWTPayload : null;
+
+    if (sessionData?.role === 'administrator'){
+      return NextResponse.next();
+    }
   }
 
 
@@ -33,7 +42,6 @@ export function middleware(request: NextRequest) {
 
   if (pathnameIsMissingLocale) {
     const locale = getLocaleFromUrl(request);
-console.log('\x1b[33m%s\x1b[0m','pathnameIsMissingLocale => ',pathnameIsMissingLocale );
     return NextResponse.rewrite(
       new URL(
         `/${locale}${pathname.startsWith('/') ? '' : '/'}${pathname}${params ? `?${params}` : ''}`,

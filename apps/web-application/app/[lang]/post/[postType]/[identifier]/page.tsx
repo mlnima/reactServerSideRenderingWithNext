@@ -13,13 +13,15 @@ import LearnTypePostPage from './components/LearnTypePostPage/LearnTypePostPage'
 import { IPageProps } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
 
-import {
-  getPost,
-  getPostRating,
-  getPostViews,
-} from '@lib/database/operations/posts';
-import { getSettings } from '@lib/database/operations/settings';
-import { getWidgets } from '@lib/database/operations/widgets';
+
+import getPost from '@lib/actions/database/operations/posts/getPost';
+import getPostRating from '@lib/actions/database/operations/posts/getPostRating';
+
+import getPostViews from '@lib/actions/database/operations/posts/getPostViews';
+
+
+import getSettings from '@lib/actions/database/operations/settings/getSettings';
+import getWidgets from '@lib/actions/database/operations/widgets/getWidgets';
 import Comments from './components/Comments/Comments';
 import React from 'react';
 import RelatedPostsRenderer from "./components/RelatedPostsRenderer/RelatedPostsRenderer";
@@ -34,15 +36,20 @@ const PostPage = async (props: IPageProps) => {
   const dictionary = await getDictionary(locale);
   const { identifier, postType } = params;
 
-  const { post, relatedPosts } = await getPost(identifier as string);
-  const postId = post?._id ? post._id.toString() : null;
+  const { data, success } = await getPost(identifier as string);
 
-  if (!post) {
+  if (!success  || !data) {
     return <Soft404 dictionary={dictionary} />;
   }
+
+  const postId = data?.post._id;
+
+
   // const comments = await getComments({ onDocument: postId });
   const postViews = await getPostViews(postId as unknown as string);
   const postRating = await getPostRating(postId as unknown as string);
+
+
   const { postPageSettings } = await getSettings(['postPageSettings']);
   const widgets = await getWidgets(
     ['postPageLeftSidebar', 'postPageRightSidebar', 'underPost'],
@@ -50,31 +57,31 @@ const PostPage = async (props: IPageProps) => {
   );
   const sidebar = postPageSettings?.sidebar;
 
-  if (post?.status !== 'published') {
+  if (data?.post?.status !== 'published') {
     return (
       <>
         <PostAdminOrAuthorQuickAccessBar
           dictionary={dictionary}
           postId={postId}
-          authorId={post?.author?._id}
-          status={post.status}
-          createdAt={post.createdAt}
-          updatedAt={post.updatedAt}
+          authorId={data?.post?.author?._id}
+          status={data?.post.status}
+          createdAt={data?.post.createdAt}
+          updatedAt={data?.post.updatedAt}
         />
         <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
           <main id={'primary'} className="main postPage">
             {searchParams?.preview === 'true' && postType ? (
               <PreviewPost
                 widgets={widgets}
-                post={post}
+                post={data?.post}
                 views={postViews}
-                likes={postRating.likes}
-                disLikes={postRating.disLikes}
+                likes={postRating?.data?.likes || 0}
+                disLikes={postRating?.data?.disLikes || 0}
                 dictionary={dictionary}
                 locale={locale}
                 sidebar={postPageSettings?.sidebar || 'no'}
                 postType={postType}
-                relatedPosts={relatedPosts || []}
+                relatedPosts={data?.relatedPosts || []}
               />
             ) : (
               <NotFoundOrRestricted dictionary={dictionary} />
@@ -100,10 +107,10 @@ const PostPage = async (props: IPageProps) => {
       <PostAdminOrAuthorQuickAccessBar
         dictionary={dictionary}
         postId={postId}
-        authorId={post?.author?._id}
-        status={post.status}
-        createdAt={post.createdAt}
-        updatedAt={post.updatedAt}
+        authorId={data?.post?.author?._id}
+        status={data?.post.status}
+        createdAt={data?.post.createdAt}
+        updatedAt={data?.post.updatedAt}
       />
 
       <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
@@ -111,58 +118,58 @@ const PostPage = async (props: IPageProps) => {
           {postType === 'video' ? (
             <VideoTypePostPage
               widgets={widgets?.['underPost']}
-              post={post}
+              post={data?.post}
               views={postViews}
               likes={postRating.likes}
               disLikes={postRating.disLikes}
               hasSidebar={sidebar}
-              relatedPosts={relatedPosts || []}
+              relatedPosts={data?.relatedPosts || []}
               dictionary={dictionary}
               locale={locale}
             />
           ) : postType === 'article' ? (
             <ArticleTypePostPage
               widgets={widgets?.['underPost']}
-              post={post}
+              post={data?.post}
               views={postViews}
               likes={postRating.likes}
               disLikes={postRating.disLikes}
               hasSidebar={sidebar}
-              relatedPosts={relatedPosts || []}
+              relatedPosts={data?.relatedPosts || []}
               dictionary={dictionary}
               locale={locale}
             />
           ) : postType === 'promotion' ? (
             <PromotionTypePostPage
               widgets={widgets?.['underPost']}
-              post={post}
+              post={data?.post}
               views={postViews}
               likes={postRating.likes}
               disLikes={postRating.disLikes}
               hasSidebar={sidebar}
-              relatedPosts={relatedPosts || []}
+              relatedPosts={data?.relatedPosts || []}
               dictionary={dictionary}
               locale={locale}
             />
           ) : postType === 'learn' ? (
             <LearnTypePostPage
               widgets={widgets?.['underPost']}
-              post={post}
+              post={data?.post}
               views={postViews}
               likes={postRating.likes}
               disLikes={postRating.disLikes}
               hasSidebar={sidebar}
-              relatedPosts={relatedPosts || []}
+              relatedPosts={data?.relatedPosts || []}
               dictionary={dictionary}
               locale={locale}
             />
           ) : null}
-          <RelatedPostsRenderer locale={locale} relatedPosts={relatedPosts || []} dictionary={dictionary}/>
+          <RelatedPostsRenderer locale={locale} relatedPosts={data?.relatedPosts || []} dictionary={dictionary}/>
           <div className='under-post-widget-area'>
             <WidgetsRenderer widgets={widgets?.['underPost']} position='underPost' hasSidebar={sidebar} locale={locale}
                              dictionary={dictionary}/>
           </div>
-          {post?.status === 'published' && <Comments dictionary={dictionary} postId={post._id}/>}
+          {data?.post?.status === 'published' && <Comments dictionary={dictionary} postId={data?.post._id}/>}
 
         </main>
         <SidebarWidgetAreaRenderer

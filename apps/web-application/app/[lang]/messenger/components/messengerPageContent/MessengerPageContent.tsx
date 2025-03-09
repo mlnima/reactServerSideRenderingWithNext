@@ -12,7 +12,9 @@ import MessagingArea from './MessagingArea/MessagingArea';
 import MessengerMultiMediaInputBox from './MessengerMultiMediaInputBox/MessengerMultiMediaInputBox';
 import { IMessengerConversation, IMessengerConversationMessage } from '@repo/typescript-types';
 import ConversationsControlsHeader from './ConversationsControlsHeader/ConversationsControlsHeader';
-import { getConversation, getConversations } from '@lib/database/operations/Messenger';
+
+import getConversation from '@lib/actions/database/operations/messenger/getConversation';
+import getConversations from '@lib/actions/database/operations/messenger/getConversations';
 
 interface IProps {
     dictionary: {
@@ -60,15 +62,14 @@ const MessengerPageContent: FC<IProps> = ({ dictionary }) => {
 
     const onGetConversationHandler = async (_id: string) => {
         try {
-            // const conversation = await clientAPIRequestGetAConversation(_id);
-            const conversation =await getConversation({conversationId:_id,token:localStorage.getItem('wt')});
-            if (!conversation){
+            const {success,data} =await getConversation({conversationId:_id});
+            console.log(`onGetConversationHandler data=> `,data)
+            if (!success || !data){
                 return
             }
-            console.log(`conversation=> `,conversation)
             setActiveConversation(prevState => ({
                 ...prevState,
-                ...conversation,
+                ...data?.conversation,
             }));
         } catch {
             return;
@@ -80,6 +81,7 @@ const MessengerPageContent: FC<IProps> = ({ dictionary }) => {
             onGetConversationListHandler();
         }
     }, [loggedIn]);
+
 
     useEffect(() => {
         const handleGetPrivateMessage = (messageData: IMessengerConversationMessage) => {
@@ -105,16 +107,16 @@ const MessengerPageContent: FC<IProps> = ({ dictionary }) => {
 
     const onGetConversationListHandler = async () => {
         try {
-             const conversations = await getConversations({
-                 token:localStorage.getItem('wt'),
-                 skip: conversationsList?.length ,
+             const {success,data} = await getConversations({
+                 skip: conversationsList?.length
              })
-            console.log(`conversations=> `,conversations)
-            //
-            // const conversations = conversationsData?.data?.conversationsList || [];
 
-            if (conversations.length > 0) {
-                setConversationsList([...conversationsList, ...conversations]);
+            if (!success || !data){
+              return
+            }
+
+            if (data.conversations.length > 0) {
+                setConversationsList([...conversationsList, ...data.conversations]);
             }
         } catch {
             return;

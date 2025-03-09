@@ -1,11 +1,11 @@
 import React, {FC} from 'react';
-import {Meta} from "@repo/typescript-types";
+import {IMeta} from "@repo/typescript-types";
 import Pagination from "@components/Pagination/Pagination";
 import ActorsCardsRenderer from "@components/cards/CardsRenderer/ActorsCardsRenderer/ActorsCardsRenderer";
 
 interface IProps {
     renderPagination: boolean,
-    metas: Meta[],
+    metas: IMeta[],
     totalCount: number,
     currentPage: number,
     locale: string

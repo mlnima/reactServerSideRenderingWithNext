@@ -1,6 +1,6 @@
 'use client';
 import {FC} from "react";
-import {Post} from "@repo/typescript-types";
+import {IPost} from "@repo/typescript-types";
 import {Widget} from "@repo/typescript-types";
 import dynamic from "next/dynamic";
 import Csr from "@components/global/Csr";
@@ -18,7 +18,7 @@ const LearnTypePostPage = dynamic(() => import('../LearnTypePostPage/LearnTypePo
 // import PromotionTypePostPage from "../PromotionTypePostPage/PromotionTypePostPage";
 
 interface IProps {
-    post: Post,
+    post: IPost,
     locale: string,
     sidebar: string,
     postType: string,
@@ -33,7 +33,7 @@ interface IProps {
             [key: string]: Widget[]
         }
 
-    relatedPosts: Post[],
+    relatedPosts: IPost[],
 }
 
 const PreviewPost: FC<IProps> =

@@ -4,12 +4,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons/faCamera';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons/faCirclePlus';
 import './MultipleImageUploader.scss';
-import { Post } from '@repo/typescript-types';
+import { IPost } from '@repo/typescript-types';
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 
 export interface MultipleImageUploaderProps {
-  editingPost: Post;
-  setEditingPost: React.Dispatch<React.SetStateAction<Post>>;
+  editingPost: IPost;
+  setEditingPost: React.Dispatch<React.SetStateAction<IPost>>;
   fileInputRef: React.RefObject<HTMLInputElement>;
 }
 

@@ -2,7 +2,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import { AxiosResponse } from 'axios';
-import { Meta ,PostRaw} from '@repo/typescript-types';
+import { IMeta ,PostRaw} from '@repo/typescript-types';
 import { loading, setAlert } from './globalStateReducer';
 
 import {
@@ -37,8 +37,8 @@ interface IInitialState {
         // [key: string]: number;
     }
     posts: [];
-    meta: Meta;
-    metas: [Meta];
+    meta: IMeta;
+    metas: [IMeta];
     activeEditingLanguage: 'default';
 }
 
@@ -269,7 +269,7 @@ export const deleteMetaAction = createAsyncThunk(
 
 export const updateMetaAction = createAsyncThunk(
     'adminPanelPosts/updateMetaAction',
-    async (data: Meta, thunkAPI) => {
+    async (data: IMeta, thunkAPI) => {
         thunkAPI.dispatch(loading(true));
         const body = {
             data,

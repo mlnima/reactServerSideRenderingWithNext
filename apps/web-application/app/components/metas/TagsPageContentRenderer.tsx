@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
-import { Meta } from "@repo/typescript-types";
+import { IMeta } from "@repo/typescript-types";
 import MetasRenderer from '@components/metas/MetasRenderer';
 
 interface IProps {
-    metas: Meta[];
+    metas: IMeta[];
     locale: string;
     startWith?: string;
 }

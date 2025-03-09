@@ -8,9 +8,12 @@ import FollowingOptionsPopup from './FollowingOptionsPopup/FollowingOptionsPopup
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { IUserPageData } from '@repo/typescript-types';
-import { follow, unfollow } from '@lib/database/operations/users';
+import follow from '@lib/actions/database/operations/users/follow';
+import unfollow from '@lib/actions/database/operations/users/unfollow';
 import { clearACacheByTag } from '@lib/serverActions';
-import { newConversation } from '@lib/database/operations/Messenger';
+import newConversation from '@lib/actions/database/operations/messenger/newConversation';
+import { setAlert } from '@storeDashboard/reducers/globalStateReducer';
+import { ServerActionResponse } from '@lib/actions/response';
 
 interface IProps {
   _id?: string;
@@ -36,6 +39,8 @@ const UserPageActionButtons: FC<IProps> = (
 
   const onFollowHandler = async () => {
     try {
+      if (!_id) return;
+
       await follow({
         follower: userData._id,
         followed: _id,
@@ -51,6 +56,7 @@ const UserPageActionButtons: FC<IProps> = (
 
   const onUnFollowHandler = async () => {
     try {
+      if (!userPageData._id) return;
       await unfollow({
         follower: userData._id,
         followed: userPageData._id,
@@ -67,16 +73,18 @@ const UserPageActionButtons: FC<IProps> = (
   const onConversationHandler = async () => {
     if (loggedIn && userPageData._id && _id) {
 
-      const conversation = await newConversation({
-        token:localStorage.getItem('wt'),
-        users: [_id, userData?._id]
-      })
+      const { success, data, message } = await newConversation({
+        targetUsers: [_id],
+      }) as ServerActionResponse<{conversationId:string}>;
 
-      if (!conversation || !conversation?._id){
-        return
+      if (!success || !data || !data?.conversationId) {
+        if (message) {
+          dispatch(setAlert({ message, type: 'error', active: true }));
+        }
+        return;
       }
 
-      push(`/messenger?_id=${conversation._id}`);
+      push(`/messenger?_id=${data?.conversationId}`);
 
     } else {
       dispatch(loginRegisterForm('login'));

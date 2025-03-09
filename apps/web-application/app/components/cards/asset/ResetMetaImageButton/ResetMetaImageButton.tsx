@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faRotateRight} from "@fortawesome/free-solid-svg-icons/faRotateRight";
 import './ResetMetaImageButton.scss'
-import { resetMetaImage } from '@lib/database/operations/metas';
+import resetMetaImage from '@lib/actions/database/operations/metas/resetMetaImage';
 
 
 interface PropTypes {

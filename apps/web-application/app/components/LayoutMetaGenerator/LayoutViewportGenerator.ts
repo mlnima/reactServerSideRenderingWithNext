@@ -1,4 +1,4 @@
-import {getSettings} from "@lib/database/operations/settings";
+import getSettings from '@lib/actions/database/operations/settings/getSettings';
 
 const LayoutViewportGenerator = async () => {
 

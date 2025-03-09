@@ -1,4 +1,3 @@
-import {Post} from "./Post";
 import {User} from "./User";
 
 interface Base {
@@ -11,11 +10,11 @@ interface Base {
     status?: string
 }
 
-export interface Comment extends Base {
+export interface IComment extends Base {
     author:  User,
     onDocumentId:  string,
     _id:  string,
-    reply?: [Comment]
+    reply?: [IComment]
 }
 
 export interface CommentRaw extends Base {

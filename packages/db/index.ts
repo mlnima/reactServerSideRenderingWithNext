@@ -19,7 +19,6 @@ import postSchema from './src/schemas/postSchema';
 import searchKeywordSchema from './src/schemas/searchKeywordSchema';
 import settingSchema from './src/schemas/settingSchema';
 import tagSchema from './src/schemas/tagSchema';
-import translateSchema from './src/schemas/translateSchema';
 import userSchema from './src/schemas/userSchema';
 import widgetSchema from './src/schemas/widgetSchema';
 //----------------------------------------------------------------------
@@ -31,7 +30,6 @@ import {
 
 export {
     connectToDatabase,
-
     actorSchema,
     categorySchema,
     chatroomMessageSchema,
@@ -52,10 +50,8 @@ export {
     searchKeywordSchema,
     settingSchema,
     tagSchema,
-    translateSchema,
     userSchema,
     widgetSchema,
-
     isValidObjectId,
     flatDocumentToObject,
     flatArrayOdDocumentToObject

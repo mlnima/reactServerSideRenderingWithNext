@@ -1,12 +1,12 @@
 import { FC } from 'react';
-import { Post } from "@repo/typescript-types";
+import { IPost } from "@repo/typescript-types";
 import PostsCardsRenderer from '@components/cards/CardsRenderer/PostsCardsRenderer/PostsCardsRenderer';
 
 interface IProps {
     isSidebar?: boolean;
     locale: string;
     uniqueData?: {
-        posts: Post[];
+        posts: IPost[];
         totalCount: number;
     };
     dictionary: {

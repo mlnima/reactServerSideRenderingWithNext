@@ -1,6 +1,6 @@
-import {Comment} from "./Comment";
+import {IComment} from "./Comment";
 import {User} from "./User";
-import {Meta} from "./Meta";
+import {IMeta} from "./Meta";
 
 interface uniqueDataPossibility{
     startDate?: Date | string;
@@ -53,12 +53,12 @@ interface Base {
     uniqueData: uniqueDataPossibility;
 }
 
-export interface Post extends Base{
+export interface IPost extends Base{
     author?:  User,
-    comments:Comment[],
-    actors?:Meta[],
-    categories:Meta[],
-    tags:Meta[],
+    comments:IComment[],
+    actors?:IMeta[],
+    categories:IMeta[],
+    tags:IMeta[],
 }
 
 export interface PostRaw extends Base{

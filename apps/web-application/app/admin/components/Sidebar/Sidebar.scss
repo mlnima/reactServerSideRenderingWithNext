@@ -1,0 +1,82 @@
+#dashboardSideBar{
+  position: absolute;
+  font-size: 12px;
+  left: 0;
+  top: 40px;
+  grid-area: adminSideBar;
+  width: 256px;
+  background-color: var(--secondary-background-color, #181818);
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  z-index: 16;
+
+  .SideBarItemElement {
+    width: 100%;
+    border-bottom: 0.5px solid #333;
+    position: relative;
+
+    .SideBarItemTitle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .SideBarItem {
+        text-decoration: none;
+        color: var(--secondary-text-color, #c7c7c7);
+        width: 100%;
+        padding: 6px 8px;
+        margin: 5px;
+        display: block;
+      }
+
+      .sidebar-items-switch {
+        background-color: transparent;
+        border: none;
+        outline: none;
+        padding: 5px 10px;
+        color: var(--secondary-text-color, #c7c7c7);
+        width: 50px;
+        transition: all 0.5s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        svg {
+          width: 20px;
+          height: 20px;
+        }
+      }
+
+      &:hover {
+        background-color: #181818;
+        font-weight: bold;
+        transition: opacity 300ms ease-in;
+      }
+    }
+
+    .SideBarItemElementSubItems {
+      background-color: #181818;
+      position: absolute;
+      right: -100%;
+      top: 0;
+      width: 100%;
+      transition: opacity 300ms ease-in;
+      overflow-y: scroll;
+      max-height: 80vh;
+
+      .SideBarItem-SubItem {
+        color: white;
+        display: block;
+        transition: 1s height;
+        padding: 8px 16px;
+        box-sizing: border-box;
+
+        &:hover {
+          transition: 0.5s;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}

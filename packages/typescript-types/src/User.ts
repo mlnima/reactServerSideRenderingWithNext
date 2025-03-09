@@ -1,39 +1,53 @@
 import { IFile } from './IFile';
-import { getLoadedUserPageData } from 'web-application/app/lib/database/operations/users';
 
 export interface User {
-  draftPost: string | {};
+  draftPost?: string | {};
   _id: string;
   username: string;
   email: string;
   password: string;
   role?: string;
-  firstName: string;
-  lastName: string;
-  nickName: string;
-  about: string;
-  API_KEY: string;
-  uuid: string;
-  verificationToken: string;
-  age: number;
-  followingCount: number;
-  followersCount: number;
-  postsCount: number;
-  following: string[];
-  posts: string[];
-  followers: string[];
-  blockList: string[];
-  conversation: string[];
-  profileImage: IFile;
-  gender: string;
-  relationshipStatus: string;
-  city: string;
-  country: string;
-  status: string;
-  keyMaster: boolean;
-  createdAt: Date,
-  updatedAt: Date,
+  firstName?: string;
+  lastName?: string;
+  nickName?: string;
+  about?: string;
+  API_KEY?: string;
+  uuid?: string;
+  verificationToken?: string;
+  age?: number;
+  followingCount?: number;
+  followersCount?: number;
+  postsCount?: number;
+  following?: string[];
+  posts?: string[];
+  followers?: string[];
+  blockList?: string[];
+  conversation?: string[];
+  profileImage?: IFile;
+  gender?: string;
+  relationshipStatus?: string;
+  city?: string;
+  country?: string;
+  status?: string;
+  keyMaster?: boolean;
+  isVerified?: boolean;
+  createdAt?: Date,
+  updatedAt?: Date,
 }
+
+export interface IRegisterNewUser {
+  username: string;
+  email: string;
+  password: string;
+  password2: string;
+  gender?: string,
+}
+
+export interface IMemberLogin {
+  username: string;
+  password: string;
+}
+
 
 // export interface IUserPageData {
 //   isBlockedByTargetUser: boolean;
@@ -60,9 +74,9 @@ export interface IInitialUserPageData {
     _id: string,
     filePath: string
   },
-  username: string,
-  about: string,
-  _id: string,
+  username?: string,
+  about?: string,
+  _id?: string,
 }
 export interface ILoadedUserPageData {
   isBlockedByTargetUser?: boolean;
@@ -71,11 +85,12 @@ export interface ILoadedUserPageData {
   isFollowed?: boolean;
 }
 
-export interface IUserPageData extends  IInitialUserPageData , ILoadedUserPageData{};
+export interface IUserPageData extends  IInitialUserPageData , ILoadedUserPageData{}
 
 export interface JWTPayload{
-  "username": string,
+  "username"?: string,
   "_id": string,
+  "role"?: string,
   "iat": number,
   "exp": number
 }

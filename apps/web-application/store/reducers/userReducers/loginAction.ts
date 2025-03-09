@@ -1,62 +1,45 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { commonAPIRequestLoginUser } from '@repo/api-requests';
 import {
   loading,
   setAlert,
   setBackgroundFilter,
 } from '@store/reducers/globalStateReducer';
-import { login } from '@lib/database/operations/auth';
+import memberLogin from '@lib/actions/database/operations/users/memberLogin';
+import { ServerActionResponse } from '@lib/actions/response';
 
-interface LoginActionArgs {
-  username: string;
-  password: string;
+
+interface ILoginAction {
+  username: string,
+  password: string
 }
 
-interface LoginActionResponse {
-  loggedIn: boolean;
-  userData?: any; // Replace "any" with actual type of userData
-}
-
-export const loginAction = createAsyncThunk<
-  LoginActionResponse,
-  LoginActionArgs
->('user/loginAction', async ({ username, password }, thunkAPI) => {
+export const loginAction = createAsyncThunk('user/loginAction', async (
+  {
+    username,
+    password,
+  }: ILoginAction, thunkAPI) => {
   thunkAPI.dispatch(loading(true));
   try {
-    const { token, userData, success, message } = await login({
+    const { data, success, message } = await memberLogin({
       username,
       password,
-    });
+    }) as ServerActionResponse<{ userData: object, token: string }>;
 
-    if (message){
-      thunkAPI.dispatch(
-          setAlert({ message, type: success ? 'success' : 'error' })
-      );
+    if (!success || !data?.userData) {
+      setAlert({ message: message || 'Something went wrong', type: success ? 'success' : 'error' });
+      return;
     }
 
-    if (success && token) {
-      localStorage.setItem('wt', token);
-      thunkAPI.dispatch(setBackgroundFilter(false));
-      return {
-        userData,
-        loggedIn: true,
-      };
-    } else {
-      return {
-        loggedIn: false,
-      };
-    }
+    thunkAPI.dispatch(setBackgroundFilter(false));
+    return data.userData;
   } catch (error) {
     thunkAPI.dispatch(
       setAlert({
         message: 'Something went wrong please try again later',
         type: 'error',
-      })
+      }),
     );
-    return {
-      userData: {},
-      loggedIn: false,
-    };
+    return;
   } finally {
     thunkAPI.dispatch(loading(false));
   }

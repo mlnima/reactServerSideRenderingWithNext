@@ -1,6 +1,6 @@
 import React, {FC, Suspense} from 'react';
 import Link from 'next/link';
-import {Post} from "@repo/typescript-types";
+import {IPost} from "@repo/typescript-types";
 import CardTitle from '../../asset/CardTitle/CardTitle';
 import '../postCard.scss';
 import './LearnPostCard.scss';
@@ -17,7 +17,7 @@ interface LearnPostCardPropTypes {
     numberOfCardsPerRowInMobile: number;
     index: number;
     isSidebar?: boolean;
-    post: Post;
+    post: IPost;
     isNextImageAllowed: boolean;
     dictionary: {
         [key: string]: string;
@@ -30,7 +30,7 @@ interface LearnPostCardPropTypes {
 }
 
 interface IDynamicImageLessCard {
-    post:Post, 
+    post:IPost,
     postUrl:string,
     locale:string
 }

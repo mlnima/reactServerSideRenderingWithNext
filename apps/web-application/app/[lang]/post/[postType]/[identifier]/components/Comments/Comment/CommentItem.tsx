@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import { formatDistance } from 'date-fns';
 import { FC } from 'react';
-import { Comment } from '@repo/typescript-types';
+import { IComment } from '@repo/typescript-types';
 import './CommentItem.styles.scss';
 
 interface IProps {
-    comment: Comment;
+    comment: IComment;
     adminMode: boolean;
     onDeleteCommentHandler: (id: string) => void;
 }

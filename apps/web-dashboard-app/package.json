@@ -80,8 +80,9 @@
   },
   "scripts": {
     "start": "craco start",
+    "dev3": "set BROWSER=none PORT=3008 && react-scripts start",
     "dev": "cross-env BROWSER=none PORT=3008 cross-env craco start",
-    "dev2": "cross-env BROWSER=none PORT=3008 node scripts/start.js",
+    "dev1": "cross-env BROWSER=none PORT=3008 node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js"
   },
@@ -106,7 +107,7 @@
   "devDependencies": {
     "babel-loader": "^9.1.2",
     "cross-env": "^7.0.3",
-    "@craco/craco": "^5.9.0"
+    "@craco/craco": "^7.1.0"
   },
   "jest": {
     "roots": [

@@ -26,6 +26,7 @@
       "@components/*": ["./app/components/*"],
       "@lib/*": ["./app/lib/*"],
       "@store/*": ["./store/*"],
+      "@storeDashboard/*": ["./storeDashboard/*"],
       "@providers/*": ["./app/providers/*"],
       "@i18nConfig": ["./i18n-config"],
       "@public": ["./public/*"],

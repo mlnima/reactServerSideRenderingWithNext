@@ -11,7 +11,7 @@ import {
   faChevronLeft,
   faChevronRight,
 } from '@fortawesome/free-solid-svg-icons';
-import { Post, Store } from '@repo/typescript-types';
+import { IPost, Store } from '@repo/typescript-types';
 import { shortNumber, ratingCalculator } from '@repo/utils';
 import './PostsSliderWidget.scss';
 import { v4 as uuidv4 } from 'uuid';
@@ -36,9 +36,9 @@ const VideoPostCard = dynamic(
 // const AdPostCard = dynamic(() => import('@components/cards/cardsComponents/AdPostCard/AdPostCard'));
 
 interface PostsSliderPropsTypes {
-  posts: Post[];
+  posts: IPost[];
   uniqueData?: {
-    posts: Post[];
+    posts: IPost[];
     totalCount: number;
     sliderConfig?: {
       pagination?: boolean;

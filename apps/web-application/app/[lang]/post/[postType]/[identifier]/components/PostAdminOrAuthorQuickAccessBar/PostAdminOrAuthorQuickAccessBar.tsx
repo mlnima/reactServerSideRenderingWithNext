@@ -6,7 +6,7 @@ import Link from 'next/link';
 import './PostAdminOrAuthorQuickAccessBar.scss';
 import PostQuickAccessPostInformation from './PostQuickAccessPostInformation';
 import { clearACacheByTag } from '@lib/serverActions';
-import { adminUpdatePostsStatus } from '@lib/database/operations/admin/posts';
+import updatePostStatus from '@lib/actions/database/operations/posts/updatePostStatus';
 
 interface IProps {
   postId: string | null,
@@ -34,9 +34,8 @@ const PostAdminOrAuthorQuickAccessBar: FC<IProps> = (
   const router = useRouter();
 
   const onStatusChangeHandler = async (status: string) => {
-    const token = localStorage.getItem('wt');
-    if (postId && token) {
-      await adminUpdatePostsStatus({ ids: [postId], status, token });
+    if (postId) {
+      await updatePostStatus({ _id: postId, status });
       await clearACacheByTag(`CPost-${postId}`);
       router.push(`${pathname}?lastPageUpdate=${Date.now()}`);
     }

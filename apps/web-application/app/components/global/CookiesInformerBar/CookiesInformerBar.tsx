@@ -1,34 +1,26 @@
 'use client';
-import React, {FC, useEffect, useState} from 'react';
-import './CookiesInformerBar.styles.scss'
+import './CookiesInformerBar.scss';
+import { cookieSetter } from '@lib/actions/cookieTools';
 
-const CookiesInformerBar: FC = () => {
-    const [renderCookiesBar, setRenderCookiesBar] = useState(false)
+const CookiesInformerBar= () => {
 
-    useEffect(() => {
-        const isAccepted = localStorage.getItem('cookieAccepted');
-        if (isAccepted !== 'true') {
-            setRenderCookiesBar(true)
-        }
-    }, []);
+  const onAcceptHandler = () => {
+    cookieSetter({
+      name: 'cookiesAccepted',
+      value: 'true',
+    });
+  };
 
-    const onAcceptHandler = () => {
-        localStorage.setItem('cookieAccepted', 'true');
-        setRenderCookiesBar(false)
-    };
-
-    if (!renderCookiesBar) return null
-
-    return (
-        <div id={'cookiePopupWrapper'}>
-            <p>
-                This website collects cookies to deliver better user experience
-            </p>
-            <button className={'btn btn-primary'} onClick={onAcceptHandler}>
-                OK
-            </button>
-        </div>
-    );
+  return (
+    <div id={'cookiePopupWrapper'}>
+      <p>
+        This website collects cookies to deliver better user experience
+      </p>
+      <button className={'btn btn-primary'} onClick={onAcceptHandler}>
+        OK
+      </button>
+    </div>
+  );
 
 };
 

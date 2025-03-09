@@ -1,8 +1,8 @@
 import React, {FC} from 'react';
-import {Post} from "@repo/typescript-types";
+import {IPost} from "@repo/typescript-types";
 
 interface PropType{
-    postData:Post,
+    postData:IPost,
     rendering:boolean,
     onChangeHandler:any
 }

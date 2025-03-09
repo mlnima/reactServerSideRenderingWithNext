@@ -4,16 +4,18 @@ import WidgetsRenderer from '@components/widgets/widgetRenderer/WidgetsRenderer'
 import PostPage from '@components/PostsPage/PostsPage';
 import ActorsPageContentRenderer from '@components/metas/ActorsPageContentRenderer';
 import React from 'react';
-import { IPageProps, Meta } from '@repo/typescript-types';
+import { IPageProps, IMeta, IPost } from '@repo/typescript-types';
 import CategoriesPageContentRenderer from '@components/metas/CategoriesPageContentRenderer';
 import TagsPageContentRenderer from '@components/metas/TagsPageContentRenderer';
 import { capitalizeFirstLetters } from '@repo/utils';
 import './page.scss';
 import searchMetaGenerator from './components/searchMetaGenerator';
 import localDetector from '@lib/localDetector';
-import { getWidgets } from '@lib/database/operations/widgets';
-import { getSearch } from '@lib/database/operations/search';
-import {getSettings} from "@lib/database/operations/settings";
+import getWidgets from '@lib/actions/database/operations/widgets/getWidgets';
+import getSearch from '@lib/actions/database/operations/search/getSearch';
+import getSettings from '@lib/actions/database/operations/settings/getSettings';
+import Soft404 from '@components/Soft404/Soft404';
+import { ServerActionResponse } from '@lib/actions/response';
 
 const searchPage = async (props: IPageProps) => {
   const searchParams = await props.searchParams;
@@ -61,12 +63,33 @@ const searchPage = async (props: IPageProps) => {
     // searchType: searchParams?.searchType
   };
 
-  const { posts, totalCount, actors, categories, tags } =
+  // const { posts, totalCount, actors, categories, tags } =
+  //   await getSearch({
+  //     keyword: params.keyword,
+  //     page: currentPage,
+  //     locale,
+  //   });
+
+  const { success, data } =
     await getSearch({
       keyword: params.keyword,
       page: currentPage,
       locale,
-    });
+    }) as ServerActionResponse<{
+      posts: IPost[],
+      totalCount:number,
+      actors : IMeta[],
+      categories: IMeta[],
+      tags:IMeta[],
+    }>;
+
+  if (!success || !data ) {
+    return <Soft404 dictionary={dictionary} />;
+  }
+
+  const { posts, totalCount, actors, categories, tags } = data
+
+
 
   // const groupingMetas = (metas || []).reduce(
   //   (acc: { [key: string]: Meta[] }, meta: Meta) => {

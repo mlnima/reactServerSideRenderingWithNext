@@ -13,7 +13,8 @@ import { useParams, usePathname, useSearchParams, useSelectedLayoutSegment } fro
 import socket from '@lib/web-socket-client';
 import { faBolt } from '@fortawesome/free-solid-svg-icons';
 import { clearCachesByServerAction } from '@lib/serverActions';
-import { fixUserDocuments } from '@lib/database/operations/fix';
+import { fixUserDocuments } from '@lib/actions/database/operations/fix';
+import { cookieChecker, deleteCookie, cookieSetter } from '@lib/actions/cookieTools';
 
 const AuthenticationAdminItems = () => {
 
@@ -46,16 +47,32 @@ const AuthenticationAdminItems = () => {
       }));
     }
   };
+  //
+  const onSetAdminModeHandler = async () => {
+    const adminModeCookie = await cookieChecker('adminMode')
 
-  const onSetAdminModeHandler = () => {
-    dispatch(setAdminMode(!adminMode));
-    localStorage.setItem('adminMode', localStorage?.adminMode === 'true' ? 'false' : 'true');
+    if (!adminModeCookie){
+      dispatch(setAdminMode(true));
+      await cookieSetter({
+        name: 'adminMode',
+        value: 'true',
+      })
+
+    }else {
+      dispatch(setAdminMode(false));
+      await deleteCookie('adminMode');
+
+    }
   };
 
 
   const applyFixes = async () => {
     await fixUserDocuments();
   };
+
+
+
+
 
   return (
     <>
@@ -129,7 +146,7 @@ const AuthenticationAdminItems = () => {
         </>
       }
       <div className="menuItem">
-                            <span className={'menuItemContent'} onClick={() => onSetAdminModeHandler()}>
+                            <span className={'menuItemContent'} onClick={onSetAdminModeHandler}>
                    <div className={'icon-wrapper'}>
                        <FontAwesomeIcon icon={adminMode ? faCheck : faShield} style={{ width: 25, height: 25 }} />
                   </div>

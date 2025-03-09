@@ -40,6 +40,7 @@ const nextConfig = {
     },
     experimental: {
         dynamicIO: true,
+        instrumentationHook: true,
         nextScriptWorkers: true,
         esmExternals: "loose",
         serverComponentsExternalPackages: ["mongoose"]
