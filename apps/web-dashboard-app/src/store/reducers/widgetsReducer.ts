@@ -4,7 +4,7 @@ import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
 import {AxiosError, AxiosResponse} from "axios";
 import {loading, setAlert} from "./globalStateReducer";
-import {Widget} from "@repo/typescript-types";
+import {IWidget} from "@repo/typescript-types";
 import {
     dashboardAPIRequestGetWidgets,
     dashboardAPIRequestUpdateWidget,

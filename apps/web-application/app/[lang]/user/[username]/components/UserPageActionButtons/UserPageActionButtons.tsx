@@ -41,13 +41,22 @@ const UserPageActionButtons: FC<IProps> = (
     try {
       if (!_id) return;
 
-      await follow({
-        follower: userData._id,
-        followed: _id,
-      });
+      const { success,message } = await follow({
+        followId: _id,
+      }) as ServerActionResponse;
+
+      if (!success) {
+        setAlert({
+          message: message || 'Something went wrong please try again later',
+          type: 'error',
+        });
+        return;
+      }
+
       await clearACacheByTag(`CUserPageInitial-${_id}`);
       await clearACacheByTag(`CUserPageLoaded-${_id}-${userData._id}`);
       await getUserPageData();
+
     } catch (error) {
       console.error(`onFollowHandler=> `, error);
       return;
@@ -57,13 +66,22 @@ const UserPageActionButtons: FC<IProps> = (
   const onUnFollowHandler = async () => {
     try {
       if (!userPageData._id) return;
-      await unfollow({
-        follower: userData._id,
-        followed: userPageData._id,
-      });
+      const { success,message } = await unfollow({
+        unfollowId: userPageData._id,
+      }) as ServerActionResponse;
+
+      if (!success) {
+        setAlert({
+          message: message || 'Something went wrong please try again later',
+          type: 'error',
+        });
+        return;
+      }
+
       await clearACacheByTag(`CUserPageInitial-${userPageData._id}`);
       await clearACacheByTag(`CUserPageLoaded-${userPageData._id}-${userData._id}`);
       await getUserPageData();
+
     } catch (error) {
       console.error(`onUnFollowHandler=> `, error);
       return;
@@ -75,7 +93,7 @@ const UserPageActionButtons: FC<IProps> = (
 
       const { success, data, message } = await newConversation({
         targetUsers: [_id],
-      }) as ServerActionResponse<{conversationId:string}>;
+      }) as ServerActionResponse<{ conversationId: string }>;
 
       if (!success || !data || !data?.conversationId) {
         if (message) {

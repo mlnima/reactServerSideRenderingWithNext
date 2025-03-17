@@ -1,11 +1,18 @@
-import {DesignSettings, IdentitySettings, InitialSettings, MembershipSettings, PageSettings,UgcSettings} from "@repo/typescript-types";
+import {
+  DesignSettings,
+  IdentitySettings,
+  IInitialSettings,
+  IPageSettings,
+  MembershipSettings,
+  UgcSettings,
+} from '@repo/typescript-types';
 
 export interface SettingsState {
     membershipSettings: MembershipSettings;
     ip?: string,
-    initialSettings: InitialSettings,
+    initialSettings: IInitialSettings,
     ugcSettings: UgcSettings,
-    currentPageSettings: PageSettings,
+    currentPageSettings: IPageSettings,
     design: DesignSettings,
     identity: IdentitySettings,
     isSettingSet:boolean,

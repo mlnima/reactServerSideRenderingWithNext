@@ -48,6 +48,11 @@ export interface IMemberLogin {
   password: string;
 }
 
+export type TProfileImage = string | {
+  _id: string,
+  filePath: string
+}
+
 
 // export interface IUserPageData {
 //   isBlockedByTargetUser: boolean;
@@ -70,10 +75,7 @@ export interface IInitialUserPageData {
   followersCount?: number | undefined;
   followingCount?: number | undefined;
   postsCount?: number | undefined,
-  profileImage?: string | {
-    _id: string,
-    filePath: string
-  },
+  profileImage?: TProfileImage,
   username?: string,
   about?: string,
   _id?: string,
@@ -84,6 +86,8 @@ export interface ILoadedUserPageData {
   isBlocked?: boolean;
   isFollowed?: boolean;
 }
+
+
 
 export interface IUserPageData extends  IInitialUserPageData , ILoadedUserPageData{}
 

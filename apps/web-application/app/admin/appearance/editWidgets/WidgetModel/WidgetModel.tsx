@@ -6,13 +6,13 @@ import {WidgetModelStyledDiv} from './WidgetModel.style'
 import ActionButtons from "./ActionButtons";
 import UniqueFields from "./UniqueFields";
 import WidgetHeaderControl from "./WidgetHeaderControl/WidgetHeaderControl";
-import {Widget} from "@repo/typescript-types";
+import {IWidget} from "@repo/typescript-types";
 import {useAppDispatch} from "@storeDashboard/hooks";
 import {updateWidgetAction} from "@storeDashboard/reducers/widgetsReducer";
 import {inputValueSimplifier} from "@repo/utils";
 
 interface WidgetModelPropTypes {
-    widget: Widget
+    widget: IWidget
 }
 
 const WidgetModel: FC<WidgetModelPropTypes> = ({widget}) => {

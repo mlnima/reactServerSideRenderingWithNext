@@ -2,7 +2,7 @@ import settingSchema from '@schemas/settingSchema';
 import mongoose from 'mongoose';
 import path from 'path';
 import { Worker } from 'worker_threads';
-import { Widget } from '@repo/typescript-types';
+import { IWidget } from '@repo/typescript-types';
 import widgetSchema from '@schemas/widgetSchema';
 import WidgetController from '../controllers/WidgetController';
 
@@ -15,7 +15,7 @@ class GlobalStore {
         [key: string]: {}[];
     };
     widgets: {
-        [key: string]: Widget[];
+        [key: string]: IWidget[];
     };
 
     constructor() {
@@ -77,7 +77,7 @@ class GlobalStore {
             }
         }
 
-        this.widgets = allWidgets.reduce((widgetInPositions: any, widget: Widget) => {
+        this.widgets = allWidgets.reduce((widgetInPositions: any, widget: IWidget) => {
             if (!widgetInPositions[widget?.data?.position]) {
                 widgetInPositions[widget.data.position] = [];
             }

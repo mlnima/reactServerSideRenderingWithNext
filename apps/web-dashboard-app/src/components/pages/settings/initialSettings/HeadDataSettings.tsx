@@ -1,6 +1,6 @@
 import React, {FC, useState} from "react";
 import styled from "styled-components";
-import { InitialSettings} from "@repo/typescript-types";
+import { IInitialSettings} from "@repo/typescript-types";
 import MonacoEditor from "@components/common/MonacoEditor";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronDown, faChevronUp} from "@fortawesome/free-solid-svg-icons";
@@ -11,7 +11,7 @@ interface PropTypes {
     language:string,
     onChangeHandler:Function,
     onChangeHandlerWithTranslation:Function,
-    initialSettingsData:InitialSettings
+    initialSettingsData:IInitialSettings
 }
 
 const HeadDataSettings: FC<PropTypes> = ({onChangeHandler,onChangeHandlerWithTranslation,initialSettingsData,language}) => {

@@ -4,6 +4,7 @@ import './FollowingOptionsPopup.styles.scss'
 import {faXmark} from "@fortawesome/free-solid-svg-icons/faXmark";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {UserPreviewImage} from "@repo/ui";
+import { TProfileImage } from '@repo/typescript-types';
 
 interface IProps {
     onUnFollowHandler:()=>void,
@@ -11,7 +12,7 @@ interface IProps {
     dictionary: {
         [key: string]: string
     },
-    profileImage?:string  ,
+    profileImage?: TProfileImage  ,
     username?:string
 }
 
@@ -33,7 +34,7 @@ const FollowingOptionsPopup: FC<IProps> = (
                         <FontAwesomeIcon icon={faXmark} style={{width:25,height:25}}/>
                     </button>
                     <div className={'followingOptionsHeaderUserInfo'}>
-                        <UserPreviewImage imageUrl={profileImage} size={50}/>
+                        <UserPreviewImage imageUrl={typeof profileImage === 'string' ? profileImage : profileImage?.filePath } size={50}/>
                         <span>{username}</span>
                     </div>
 

@@ -8,7 +8,7 @@ const UserPageContent = dynamic(
 // import UserPageContent from './components/UserPageContent/UserPageContent';
 import getSettings from '@lib/actions/database/operations/settings/getSettings';
 import localDetector from '@lib/localDetector';
-import { IPageProps, User } from '@repo/typescript-types';
+import { IPageProps, IPageSettings, User } from '@repo/typescript-types';
 import getInitialUserPageData from '@lib/actions/database/operations/users/getInitialUserPageData';
 import React from 'react';
 import getPosts from "@lib/actions/database/operations/posts/getPosts";
@@ -16,13 +16,20 @@ import PostsCardsRenderer from '@components/cards/CardsRenderer/PostsCardsRender
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons/faCamera';
 import Soft404 from '@components/Soft404/Soft404';
-import { ServerActionResponse } from '@lib/actions/response';
+import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 
 const userPage = async (props: IPageProps) => {
   const params = await props.params;
   const locale = localDetector(params.lang);
   const dictionary = await getDictionary(locale);
-  const { userPageSettings } = await getSettings(['userPageSettings']);
+
+
+  const { userPageSettings } = unwrapResponse(
+    await getSettings(['userPageSettings']) as unknown as ServerActionResponse<{
+      userPageSettings: IPageSettings | undefined;
+    }>,
+  );
+
   const { username } = params;
 
   // const initialUserPageData = await getInitialUserPageData(username);

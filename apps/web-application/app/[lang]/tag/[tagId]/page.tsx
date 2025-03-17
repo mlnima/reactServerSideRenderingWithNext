@@ -7,12 +7,13 @@ import tagMetaGenerator from './components/tagMetaGenerator/tagMetaGenerator';
 import MetaAdminQuickAccessBar from '@components/metas/MetaAdminQuickAccessBar';
 import PostsPageInfo from '@components/PostsPage/PostsPageInfo/PostsPageInfo';
 import Soft404 from '@components/Soft404/Soft404';
-import { IPageProps } from '@repo/typescript-types';
+import { IPageProps, IPageSettings } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
 import getSettings from '@lib/actions/database/operations/settings/getSettings';
 import getWidgets from '@lib/actions/database/operations/widgets/getWidgets';
 import getPosts from '@lib/actions/database/operations/posts/getPosts';
 import { isValidObjectId } from '@repo/db';
+import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 
 const TagPage = async (props: IPageProps) => {
   const searchParams = await props.searchParams;
@@ -26,7 +27,12 @@ const TagPage = async (props: IPageProps) => {
     return <Soft404 dictionary={dictionary} />;
   }
 
-  const { tagPageSettings } = await getSettings(['tagPageSettings']);
+
+  const { tagPageSettings } = unwrapResponse(
+    await getSettings(['tagPageSettings']) as unknown as ServerActionResponse<{
+      tagPageSettings: IPageSettings | undefined;
+    }>,
+  );
   const sidebar = tagPageSettings?.sidebar;
 
   const widgets = await getWidgets(['tagPageTop', 'tagPageLeftSidebar', 'tagPageBottom', 'tagPageRightSidebar'], locale);

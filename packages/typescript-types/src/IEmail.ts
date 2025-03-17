@@ -1,13 +1,12 @@
-
 export interface IEmail {
-    from: String,
-    to: String,
-    receiver: String,
-    subject: String,
-    text?: String,
-    html?: String,
-    status: String,
-    attachments ?: String,
-    createdAt: Date,
-    updatedAt: Date
+    from: string;
+    to: string;
+    receiver: string; // Made this property required and used lowercase string
+    subject: string;
+    text?: string;
+    html?: string;
+    status: string;
+    attachments?: string[]; // Changed the type to string[]
+    createdAt: Date;
+    updatedAt: Date;
 }

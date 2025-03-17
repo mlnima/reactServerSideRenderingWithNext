@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch } from '@storeDashboard/hooks';
@@ -20,26 +20,22 @@ import { useSearchParams } from 'next/navigation';
 import { createSelector } from '@reduxjs/toolkit';
 
 const Style = styled.div`
-  .asset-page {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
+    .asset-page {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
 `;
 
-interface PropTypes {}
+interface PropTypes {
+}
 
 const Assets: FC<PropTypes> = () => {
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
 
   const [currentQuery, setCurrentQuery] = useState<{ [key: string]: string }>({});
   const [tableItemsType, setTableItemsType] = useState<string[]>([]);
   const [selectedItems, setSelectedItems] = useState([]);
-
-  const [content, setContent] = useState({
-    totalCount: 0,
-    content: [],
-  })
 
 
   // const getContent  = async ()=>{
@@ -96,7 +92,7 @@ const Assets: FC<PropTypes> = () => {
     (state: DashboardStore) => state.pages,
     (state: DashboardStore) => state.chatrooms,
     (posts, users, comments, forms, pages, chatrooms) => ({
-      totalCount: posts.totalCount || comments.totalCount || users.totalCount,
+      totalCount: posts.totalCount || comments.totalCount || users.totalCount || forms.totalCount,
       posts: posts.posts,
       chatrooms: chatrooms.chatrooms,
       metas: posts.metas,
@@ -104,10 +100,14 @@ const Assets: FC<PropTypes> = () => {
       comments: comments.comments,
       forms: forms.forms,
       pages: pages.pages,
-    })
+    }),
   );
 
   const assetPageData = useSelector(selectAssetPageData);
+
+  useEffect(() => {
+    console.log(`assetPageData=> `,assetPageData);
+  }, [assetPageData]);
 
   // const assetPageData = useSelector(({ posts, users, comments, forms, pages, chatrooms }: DashboardStore) => {
   //   return {
@@ -124,32 +124,34 @@ const Assets: FC<PropTypes> = () => {
 
   const getData = () => {
     const paramsQueries = searchParamsToUrlQuery(currentQuery);
-    const assetsType = currentQuery?.assetsType;
+    const assetsType = searchParams.get('assetsType');
 
     const queries = {
-      metaId:searchParams.get('metaId'),
-      keyword:searchParams.get('keyword'),
-      status:searchParams.get('status'),
-      postType:searchParams.get('postType'),
-      page:searchParams.get('page'),
-      size:searchParams.get('size'),
-      sort:searchParams.get('sort')
-    }
+      metaId: searchParams.get('metaId'),
+      keyword: searchParams.get('keyword'),
+      status: searchParams.get('status'),
+      postType: searchParams.get('postType'),
+      metaType: searchParams.get('metaType'),
+      page: searchParams.get('page'),
+      size: searchParams.get('size'),
+      sort: searchParams.get('sort'),
+      role: searchParams.get('role'),
+    };
 
     if (assetsType === 'posts') {
       dispatch(getPostsAction(queries));
     } else if (assetsType === 'users') {
-      dispatch(getUsersAction(paramsQueries));
+      dispatch(getUsersAction(queries));
     } else if (assetsType === 'metas') {
-      dispatch(getMetasAction(paramsQueries));
+      dispatch(getMetasAction(queries));
     } else if (assetsType === 'comments') {
-      dispatch(getCommentsAction(paramsQueries));
+      dispatch(getCommentsAction(queries));
     } else if (assetsType === 'forms') {
-      dispatch(getFormsAction(paramsQueries));
+      dispatch(getFormsAction(queries));
     } else if (assetsType === 'pages') {
       dispatch(getPagesAction(currentQuery));
     } else if (assetsType === 'chatrooms') {
-      dispatch(getChatroomsAction());
+      dispatch(getChatroomsAction(null));
     }
   };
 

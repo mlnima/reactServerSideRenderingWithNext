@@ -4,19 +4,26 @@ import { getDictionary } from '../../../get-dictionary';
 import WidgetsRenderer from '@components/widgets/widgetRenderer/WidgetsRenderer';
 import PostPage from '@components/PostsPage/PostsPage';
 import postsMetaGenerator from './components/postsMetaGenerator/postsMetaGenerator';
-import { IPageProps } from '@repo/typescript-types';
+import { IPageProps, IPageSettings } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
 import getWidgets from '@lib/actions/database/operations/widgets/getWidgets';
 import getPosts from '@lib/actions/database/operations/posts/getPosts';
 import getSettings from '@lib/actions/database/operations/settings/getSettings';
 import Soft404 from '@components/Soft404/Soft404';
+import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 
 const PostsPage = async (props: IPageProps) => {
   const searchParams = await props.searchParams;
   const params = await props.params;
   const locale = localDetector(params.lang);
   const dictionary = await getDictionary(locale);
-  const { postsPageSettings } = await getSettings(['postsPageSettings']);
+
+  const { postsPageSettings } = unwrapResponse(
+    await getSettings(['postsPageSettings']) as unknown as ServerActionResponse<{
+      postsPageSettings: IPageSettings | undefined;
+    }>,
+  );
+
   const sidebar = postsPageSettings?.sidebar;
 
   const widgets = await getWidgets([

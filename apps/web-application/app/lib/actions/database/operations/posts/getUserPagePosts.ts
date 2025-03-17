@@ -3,8 +3,9 @@ import { IGetUserPagePosts } from '@lib/actions/database/operations/types';
 import { connectToDatabase, postSchema } from '@repo/db';
 import getSettings from '@lib/actions/database/operations/settings/getSettings';
 import { postFieldRequestForCards } from '@repo/data-structures';
-import { Post } from '@repo/typescript-types';
+import { IInitialSettings, Post } from '@repo/typescript-types';
 import { unstable_cacheTag as cacheTag } from 'next/cache';
+import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 
 const getUserPagePosts = async (
   {
@@ -15,7 +16,11 @@ const getUserPagePosts = async (
   'use cache';
   try {
     await connectToDatabase('getUserPagePosts');
-    const { initialSettings } = await getSettings(['initialSettings']);
+    const { initialSettings } = unwrapResponse(
+      await getSettings(['initialSettings']) as unknown as ServerActionResponse<{
+        initialSettings: IInitialSettings | undefined;
+      }>,
+    );
     const limit = initialSettings?.contentSettings?.contentPerPage || 20;
 
     let posts = await postSchema

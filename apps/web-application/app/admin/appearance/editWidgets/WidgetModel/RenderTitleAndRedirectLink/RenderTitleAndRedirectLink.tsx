@@ -1,9 +1,9 @@
 // @ts-nocheck
 import React, {FC} from 'react';
-import {WidgetData, WidgetSettingsPropTypes} from "@repo/typescript-types";
+import { IWidgetData, WidgetSettingsPropTypes } from '@repo/typescript-types';
 
 interface RenderTitleAndRedirectLinkPropTypes {
-    widgetData: WidgetData,
+    widgetData: IWidgetData,
     widgetSettings: WidgetSettingsPropTypes,
     onChangeHandlerWithTranslate: any,
     onChangeHandler: any

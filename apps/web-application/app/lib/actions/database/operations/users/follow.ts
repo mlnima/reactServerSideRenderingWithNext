@@ -1,26 +1,36 @@
 'use server';
 import { connectToDatabase, userSchema } from '@repo/db';
+import { errorResponse, successResponse } from '@lib/actions/response';
+import { verifySession } from '@lib/dal';
 
-const follow = async ({ follower, followed }: { follower:string, followed:string }) => {
+const follow = async ({ followId }: { followId: string }) => {
   try {
+    const { isAuth, userId } = await verifySession();
+
+    if (!isAuth) {
+      return errorResponse({
+        message: 'You Need To Log In',
+      });
+    }
     await connectToDatabase('follow');
 
     const alreadyFollowing = await userSchema.exists({
-      _id: follower,
-      following: { $elemMatch: { $eq: followed } },
+      _id: userId,
+      following: { $elemMatch: { $eq: followId } },
     });
 
     if (alreadyFollowing) {
-      console.log('User is already followed.');
-      return null;
+      return errorResponse({
+        message: 'Something went wrong please try again later',
+      });
     }
 
-    await userSchema.findByIdAndUpdate(follower, { $addToSet: { following: followed } });
-    await userSchema.findByIdAndUpdate(followed, { $inc: { followersCount: 1 } });
-    return null;
+    await userSchema.findByIdAndUpdate(userId, { $addToSet: { following: followId } });
+    await userSchema.findByIdAndUpdate(followId, { $inc: { followersCount: 1 } });
+    return successResponse({});
   } catch (error) {
     console.error(`sendFollowRequest => `, error);
-    return null;
+    return errorResponse({});
   }
 };
 

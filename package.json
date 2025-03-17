@@ -5,7 +5,8 @@
   "private": true,
   "workspaces": [
     "packages/*",
-    "apps/*"
+    "apps/api-server",
+    "apps/web-application"
   ],
   "scripts": {
     "dev": "dotenv -- turbo run dev --log-order=stream",

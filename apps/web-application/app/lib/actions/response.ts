@@ -5,6 +5,20 @@ export interface ServerActionResponse<T = unknown> {
   error?: string | unknown;
 }
 
+export function unwrapResponse<T>(
+  response: ServerActionResponse<T>
+): { success: boolean; data?: T; message?: string; error?: string | unknown } & T {
+  const { success, message, error } = response;
+  const data = response.data || {} as T;
+
+  return {
+    success,
+    message,
+    error,
+    ...data as T
+  };
+}
+
 export const successResponse = <T>({ data, message }: { data?: T, message?: string }): ServerActionResponse<T> => ({
   success: true,
   data,

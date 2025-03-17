@@ -1,7 +1,7 @@
 import React, {FC,  useState} from 'react';
 import { nanoid } from 'nanoid';
 import styled from 'styled-components';
-import { WidgetData, IMenuItem } from '@repo/typescript-types';
+import { IWidgetData, IMenuItem } from '@repo/typescript-types';
 import AddNewItemForm from './AddNewItemForm';
 import ItemPreview from './ItemPreview';
 import { inputValueSimplifier,nestedObjectModifier } from '@repo/utils';
@@ -16,7 +16,7 @@ interface IProps {
     widgetSettings: {
         activeEditingLanguage: string;
     };
-    widgetData: WidgetData;
+    widgetData: IWidgetData;
     setWidgetData: Function;
     onUniqueDataChangeHandler: Function;
 }
@@ -88,7 +88,7 @@ const MenuWidgetModelFields: FC<IProps> = ({
     const onAddHandler = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (!formData.parent) {
-            setWidgetData((prevState: WidgetData) => ({
+            setWidgetData((prevState: IWidgetData) => ({
                 ...prevState,
                 menuItems: [
                     ...(prevState?.menuItems || []),

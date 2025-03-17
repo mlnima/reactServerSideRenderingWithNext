@@ -1,7 +1,7 @@
-"use client";
-import React, { FC } from 'react';
+'use client';
+import React, { FC, useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation';
 import { bulkActionPostsAction } from '@storeDashboard/reducers/postsReducer';
 import { deleteCommentsAction } from '@storeDashboard/reducers/commentsReducer';
 import { useAppDispatch } from '@storeDashboard/hooks';
@@ -9,17 +9,24 @@ import { dashboardAPIRequestDeleteForm } from '@repo/api-requests';
 import { useSearchParams } from 'next/navigation';
 
 interface TableBodyItemDirectActionPropTypes {
-  assetsType: string;
   _id: string;
   postType: string | undefined;
   title: string | undefined;
 }
 
-const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({ assetsType, _id, postType, title }) => {
+const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({  _id, postType }) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
   const statusQuery = searchParams.get('status');
+  const [assetsType, setAssetsType] = useState('posts');
+
+  useEffect(() => {
+    const assetsTypeQuery = searchParams.get('assetsType');
+    if (assetsTypeQuery) {
+      setAssetsType(assetsTypeQuery);
+    }
+  }, [searchParams]);
 
   const onActionHandler = (ids: string[], status: string) => {
     dispatch(bulkActionPostsAction({ ids, status }));
@@ -27,7 +34,7 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({ ass
 
   if (assetsType === 'posts') {
     return (
-      <div className='asset-page-table-body-item-hover-item'>
+      <div className="asset-page-table-body-item-hover-item">
         <Link href={`/admin/editPost?id=${_id}`} className={'btn btn-info'}>
           Edit
         </Link>
@@ -68,7 +75,7 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({ ass
     );
   } else if (assetsType === 'users') {
     return (
-      <div className='asset-page-table-body-item-hover-item'>
+      <div className="asset-page-table-body-item-hover-item">
         <Link href={`/admin/editUser?id=${_id}`} className={'btn btn-info'}>
           Edit
         </Link>
@@ -76,7 +83,7 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({ ass
     );
   } else if (assetsType === 'chatrooms') {
     return (
-      <div className='asset-page-table-body-item-hover-item'>
+      <div className="asset-page-table-body-item-hover-item">
         <Link href={`/admin/editChatroom?id=${_id}`} className={'btn btn-info'}>
           Edit
         </Link>
@@ -87,7 +94,7 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({ ass
     );
   } else if (assetsType === 'comments') {
     return (
-      <div className='asset-page-table-body-item-hover-item'>
+      <div className="asset-page-table-body-item-hover-item">
         <button className={'btn btn-danger'} onClick={() => dispatch(deleteCommentsAction([_id]))}>
           Delete
         </button>
@@ -95,7 +102,7 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({ ass
     );
   } else if (assetsType === 'metas') {
     return (
-      <div className='asset-page-table-body-item-hover-item'>
+      <div className="asset-page-table-body-item-hover-item">
         <Link href={`/admin/editMeta?id=${_id}`} className={'btn btn-info'}>
           Edit
         </Link>
@@ -103,7 +110,7 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({ ass
     );
   } else if (assetsType === 'forms') {
     return (
-      <div className='asset-page-table-body-item-hover-item'>
+      <div className="asset-page-table-body-item-hover-item">
         <Link href={`/admin/form/${_id}`} className={'btn btn-info'}>
           Edit
         </Link>
@@ -121,7 +128,7 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({ ass
     );
   } else if (assetsType === 'pages') {
     return (
-      <div className='asset-page-table-body-item-hover-item'>
+      <div className="asset-page-table-body-item-hover-item">
         <Link href={`/admin/editPage?id=${_id}`} className={'btn btn-info'}>
           Edit
         </Link>
@@ -134,7 +141,7 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({ ass
     );
   } else {
     return (
-      <div className='asset-page-table-body-item-hover-item'>
+      <div className="asset-page-table-body-item-hover-item">
       </div>
     );
   }

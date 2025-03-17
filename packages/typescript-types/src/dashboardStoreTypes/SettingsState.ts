@@ -1,8 +1,8 @@
-import {DesignSettings,IdentitySettings,MembershipSettings,InitialSettings,UgcSettings} from "@repo/typescript-types";
+import {DesignSettings,IdentitySettings,MembershipSettings,IInitialSettings,UgcSettings} from "@repo/typescript-types";
 
 export interface SettingsState {
     ip?: string,
-    initialSettings: InitialSettings,
+    initialSettings: IInitialSettings,
     ugcSettings: UgcSettings,
     design: DesignSettings,
     identity: IdentitySettings,

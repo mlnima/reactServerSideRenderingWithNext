@@ -2,7 +2,7 @@
 
 import React, { FC, useState } from "react";
 import styled from "styled-components";
-import { InitialSettings } from "@repo/typescript-types";
+import { IInitialSettings } from "@repo/typescript-types";
 import MonacoEditor from '@components/textEditors/MonacoEditor';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
@@ -11,7 +11,7 @@ const Style = styled.div``;
 
 interface PropTypes {
     onChangeHandler: (value: any, key: string) => void;
-    initialSettingsData: InitialSettings;
+    initialSettingsData: IInitialSettings;
 }
 
 const LayoutSettings: FC<PropTypes> = ({ onChangeHandler, initialSettingsData }) => {

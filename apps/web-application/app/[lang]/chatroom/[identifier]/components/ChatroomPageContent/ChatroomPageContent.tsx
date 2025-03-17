@@ -8,9 +8,9 @@ import ChatroomTopbar from '../ChatroomTopbar/ChatroomTopbar';
 import ChatRoomMessageArea from '../ChatRoomMessageArea/ChatRoomMessageArea';
 import ChatRoomTools from '../ChatRoomTools/ChatRoomTools';
 import ChatRoomOnlineUsersList from '../ChatRoomOnlineUsersList/ChatRoomOnlineUsersList';
-import { IChatroomUsers, INewUserJoinData, IPreference } from '../interfaces';
+import { IChatroomUsers, INewUserJoinData, IPreference, TChatroomUser } from '../interfaces';
 import './ChatroomPageContent.scss';
-import { IChatroom, ChatroomMessage, User } from '@repo/typescript-types';
+import { IChatroom, ChatroomMessage } from '@repo/typescript-types';
 
 interface IProps {
     locale: string;
@@ -29,7 +29,7 @@ const ChatroomPageContent: FC<IProps> = ({ dictionary, locale,chatroom,chatrooms
         isMaximized: false,
     });
 
-    const [chatroomUsers, setChatroomUsers] = useState<IChatroomUsers>([]);
+    const [chatroomUsers, setChatroomUsers] = useState<TChatroomUser[]>([]);
     const [chatroomMessages, setChatroomMessages] = useState<ChatroomMessage[]>([]);
     const [autoScroll, setAutoScroll] = useState(true);
     const messageAreaRef = useRef<HTMLDivElement | null>(null);
@@ -104,7 +104,7 @@ const ChatroomPageContent: FC<IProps> = ({ dictionary, locale,chatroom,chatrooms
 
     const initializeChatroomDataHandler = (data: {
         recentChatRoomMessages: ChatroomMessage[];
-        onlineUsersList: User[];
+        onlineUsersList: IChatroomUsers;
     }) => {
         isJoined.current = true;
 

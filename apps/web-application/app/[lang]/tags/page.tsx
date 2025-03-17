@@ -5,12 +5,13 @@ import SidebarWidgetAreaRenderer
   from '@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer';
 import tagsMetaGenerator from './components/tagsMetaGenerator/tagsMetaGenerator';
 import TagsPageContentRenderer from '@components/metas/TagsPageContentRenderer';
-import { IPageProps } from '@repo/typescript-types';
+import { IPageProps, IPageSettings } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
 import getMetas from '@lib/actions/database/operations/metas/getMetas';
 import getWidgets from '@lib/actions/database/operations/widgets/getWidgets';
 import getSettings from '@lib/actions/database/operations/settings/getSettings';
 import Soft404 from '@components/Soft404/Soft404';
+import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 
 const TagsPage = async (props: IPageProps) => {
   const searchParams = await props.searchParams;
@@ -19,7 +20,13 @@ const TagsPage = async (props: IPageProps) => {
   const locale = localDetector(params.lang);
   const dictionary = await getDictionary(locale);
 
-  const { tagsPageSettings } = await getSettings(['tagsPageSettings']);
+
+  const { tagsPageSettings } = unwrapResponse(
+    await getSettings(['tagsPageSettings']) as unknown as ServerActionResponse<{
+      tagsPageSettings: IPageSettings | undefined;
+    }>,
+  );
+
   const sidebar = tagsPageSettings?.sidebar;
 
 

@@ -17,7 +17,7 @@ const initialState = {
 
 export const getChatroomsAction = createAsyncThunk(
     'adminPanelPages/getChatroomsAction',
-    async ( data:null,thunkAPI) => {
+    async ( data?:null,thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         return await dashboardAPIRequestGetChatrooms().then((response: AxiosResponse) => {
             console.log(response.data)

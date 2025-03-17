@@ -7,7 +7,7 @@ import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { convertVariableNameToName, capitalizeFirstLetter, inputValueSimplifier } from '@repo/utils';
 import { useAppDispatch } from '@storeDashboard/hooks';
 import { editInitialSettings } from '@storeDashboard/reducers/settingsReducer';
-import { InitialSettings } from '@repo/typescript-types';
+import { IInitialSettings } from '@repo/typescript-types';
 
 interface StyleProps {
     className?: string;
@@ -47,7 +47,7 @@ const Style = styled.div`
 interface PropTypes {
     onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>, section: string) => void;
     onSaveHandler: (e: React.MouseEvent<HTMLButtonElement>) => void;
-    initialSettingsData: InitialSettings;
+    initialSettingsData: IInitialSettings;
 }
 
 const ContentSettings: React.FC<PropTypes> = ({ onChangeHandler, initialSettingsData, onSaveHandler }) => {

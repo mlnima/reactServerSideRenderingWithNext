@@ -2,7 +2,7 @@
 'use client';
 import React, {FC, useEffect, useState} from 'react';
 import styled from "styled-components";
-import {WidgetData} from "@repo/typescript-types";
+import {IWidgetData} from "@repo/typescript-types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSliders} from "@fortawesome/free-solid-svg-icons/faSliders";
 import {faSortUp} from "@fortawesome/free-solid-svg-icons/faSortUp";
@@ -47,7 +47,7 @@ let StyledDiv = styled.div`
 `
 
 interface FieldPreviewPropTypes{
-    widgetData:WidgetData,
+    widgetData:IWidgetData,
     setWidgetData:Function,
     field:{
         fieldName:string,

@@ -4,10 +4,10 @@ import { IChatroom } from './src/chatroom/Chatroom';
 import { ChatroomMessage } from './src/chatroom/ChatroomMessage';
 import { DesignSettings } from './src/settings/DesignSettings';
 import { IdentitySettings } from './src/settings/IdentitySettings';
-import { InitialSettings } from './src/settings/InitialSettings';
+import { IInitialSettings } from './src/settings/InitialSettings';
 import { UgcSettings } from './src/settings/UgcSettings';
 import { MembershipSettings } from './src/settings/MembershipSettings';
-import { PageSettings } from './src/settings/PageSettings';
+import { IPageSettings } from './src/settings/PageSettings';
 import { AdminPanelComments } from './src/storeTypes/AdminPanelComments';
 import { AdminPanelFileManager } from './src/storeTypes/AdminPanelFileManager';
 import { AdminPanelForms } from './src/storeTypes/AdminPanelForms';
@@ -31,9 +31,9 @@ import { WidgetsState } from './src/storeTypes/WidgetsState';
 import { IPost } from './src/Post';
 import { PostRaw } from './src/Post';
 import { IMeta, MetaType, MetasType } from './src/Meta';
-import { IMenuItem, Widget } from './src/widgets/Widget';
+import { IMenuItem, IWidget } from './src/widgets/Widget';
 import { IPage, PageSearchParams, PageParams, IPageProps, ILayoutProps } from './src/Page';
-import { WidgetData } from './src/widgets/Widget';
+import { IWidgetData } from './src/widgets/Widget';
 import { WidgetSettingsPropTypes, ISuggestion, UniqueDataTypes } from './src/widgets/Widget';
 
 import { MenuItem } from './src/widgets/MenuWidget/MenuItem';
@@ -44,7 +44,8 @@ import {
   ILoadedUserPageData,
   JWTPayload,
   IRegisterNewUser,
-  IMemberLogin
+  IMemberLogin,
+  TProfileImage
 } from './src/User';
 import { IComment } from './src/Comment';
 import { CommentRaw } from './src/Comment';
@@ -72,6 +73,7 @@ export type {
   IMessengerConversationMessage,
   CommentRaw,
   User,
+  TProfileImage,
   IRegisterNewUser,
   IMemberLogin,
   JWTPayload,
@@ -82,18 +84,18 @@ export type {
   UniqueDataTypes,
   IComment,
   NewComment,
-  WidgetData,
+  IWidgetData,
   WidgetSettingsPropTypes,
-  PageSettings,
+  IPageSettings,
   AxiosErrorTypes,
   IPage,
   AxiosResponseTypes,
-  Widget,
+  IWidget,
   ISuggestion,
   IMenuItem,
   IChatroom,
   ChatroomMessage,
-  InitialSettings,
+  IInitialSettings,
   UgcSettings,
   DesignSettings,
   IdentitySettings,

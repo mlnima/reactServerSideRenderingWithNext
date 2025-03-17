@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { WidgetData } from "@repo/typescript-types";
+import { IWidgetData } from "@repo/typescript-types";
 import dynamic from 'next/dynamic';
 import './WidgetWrapper.scss';
 import WidgetFooter from '@components/widgets/widgetWrapper/WidgetFooter/WidgetFooter';
@@ -41,7 +41,7 @@ const UserPreferenceConfigWidget = dynamic(
 );
 
 interface IProps {
-    data: WidgetData;
+    data: IWidgetData;
     widgetId: string;
     isSidebar?: boolean;
     locale:string;

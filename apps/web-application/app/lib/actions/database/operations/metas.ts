@@ -1,51 +1,51 @@
-'use server';
-import {  metaSchema,isValidObjectId,connectToDatabase } from '@repo/db';
-import { unstable_cacheTag as cacheTag } from 'next/cache';
-import getSettings from '@lib/actions/database/operations/settings/getSettings';
-import { metaFieldsRequestForCard } from '@repo/data-structures';
-import { IMeta } from '@repo/typescript-types';
-import { Types } from 'mongoose';
-
-import { randomNumberGenerator,isEmptyObject } from '@repo/utils';
-import postSchema from "../schemas/postSchema";
-
-
+// 'use server';
+// import {  metaSchema,isValidObjectId,connectToDatabase } from '@repo/db';
+// import { unstable_cacheTag as cacheTag } from 'next/cache';
+// import getSettings from '@lib/actions/database/operations/settings/getSettings';
+// import { metaFieldsRequestForCard } from '@repo/data-structures';
+// import { IMeta } from '@repo/typescript-types';
+// import { Types } from 'mongoose';
+//
+// import { randomNumberGenerator,isEmptyObject } from '@repo/utils';
+// import postSchema from "../schemas/postSchema";
 
 
 
 
-export const _updateSaveMetas = async (metas:any) => {
-  const metasData = metas ?? []
-  let finalData : string [] = []
 
-  try{
-    for await (let meta of metasData) {
-      if (meta.name && meta.type ){
-        const metaData = {
-          name: meta.name,
-          type: meta.type,
-          status:'published',
-        }
-        const findQuery = {$and:[{name: meta.name},{type: meta.type}]}
-
-        const updatedMeta =  await metaSchema.findOneAndUpdate(findQuery, {$set:{...metaData}},{new:true, upsert: true})
-
-        const count = await postSchema.countDocuments({$and:[{[updatedMeta.type]: updatedMeta._id},{status:'published'}]})
-        await metaSchema.findOneAndUpdate({name: updatedMeta.name}, {$set:{count}})
-        finalData = [...finalData, updatedMeta._id]
-
-        // await MetaSchema.findOneAndUpdate(findQuery, {$set:{...metaData}},{new:true, upsert: true}).exec().then(async meta=>{
-        //     const count = await PostSchema.countDocuments({$and:[{[meta.type]: meta._id},{status:'published'}]}).exec()
-        //     await MetaSchema.findOneAndUpdate({name: meta.name}, {$set:{count}}).exec()
-        //     finalData = [...finalData, meta._id]
-        // })
-      }
-    }
-    return finalData
-  }catch (err) {
-    console.log('error on saving meta')
-  }
-}
+//
+// export const _updateSaveMetas = async (metas:any) => {
+//   const metasData = metas ?? []
+//   let finalData : string [] = []
+//
+//   try{
+//     for await (let meta of metasData) {
+//       if (meta.name && meta.type ){
+//         const metaData = {
+//           name: meta.name,
+//           type: meta.type,
+//           status:'published',
+//         }
+//         const findQuery = {$and:[{name: meta.name},{type: meta.type}]}
+//
+//         const updatedMeta =  await metaSchema.findOneAndUpdate(findQuery, {$set:{...metaData}},{new:true, upsert: true})
+//
+//         const count = await postSchema.countDocuments({$and:[{[updatedMeta.type]: updatedMeta._id},{status:'published'}]})
+//         await metaSchema.findOneAndUpdate({name: updatedMeta.name}, {$set:{count}})
+//         finalData = [...finalData, updatedMeta._id]
+//
+//         // await MetaSchema.findOneAndUpdate(findQuery, {$set:{...metaData}},{new:true, upsert: true}).exec().then(async meta=>{
+//         //     const count = await PostSchema.countDocuments({$and:[{[meta.type]: meta._id},{status:'published'}]}).exec()
+//         //     await MetaSchema.findOneAndUpdate({name: meta.name}, {$set:{count}}).exec()
+//         //     finalData = [...finalData, meta._id]
+//         // })
+//       }
+//     }
+//     return finalData
+//   }catch (err) {
+//     console.log('error on saving meta')
+//   }
+// }
 
 // export const getMetas = async (
 //   {

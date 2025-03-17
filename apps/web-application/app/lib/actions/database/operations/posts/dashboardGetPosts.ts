@@ -1,13 +1,15 @@
 'use server';
 import { verifySession } from '@lib/dal';
-import { errorResponse, successResponse } from '@lib/actions/response';
+import { errorResponse, ServerActionResponse, successResponse, unwrapResponse } from '@lib/actions/response';
 import { connectToDatabase, postSchema } from '@repo/db';
 import getSettings from '@lib/actions/database/operations/settings/getSettings';
 import { Types } from 'mongoose';
 import { postStatuses } from '@repo/data-structures';
+import { IInitialSettings } from '@repo/typescript-types';
 
 const dashboardGetPosts = async ({ metaId, keyword, status, postType, page, size, sort }: any) => {
   try {
+
     const { isAdmin } = await verifySession();
 
     if (!isAdmin) {
@@ -18,12 +20,17 @@ const dashboardGetPosts = async ({ metaId, keyword, status, postType, page, size
 
     await connectToDatabase('dashboardGetPosts');
 
-    const { initialSettings } = await getSettings(['initialSettings']);
+    const { initialSettings } = unwrapResponse(
+      await getSettings(['initialSettings']) as unknown as ServerActionResponse<{
+        initialSettings: IInitialSettings | undefined;
+      }>,
+    );
 
-    const limit = size || initialSettings?.contentSettings?.numberOfCardsPerPage || 20;
+    const limit = size || initialSettings?.contentSettings?.contentPerPage || 20;
 
     const decodedKeyword = keyword ? decodeURIComponent(keyword) : '';
-    const metaQuery = metaId ? [{ $or: [{ categories: { $in: metaId } }, { tags: { $in: metaId } }, { actors: { $in: metaId } }] }] : [];
+    const metaQuery = metaId ?
+      [{ $or: [{ categories: { $in: metaId } }, { tags: { $in: metaId } }, { actors: { $in: metaId } }] }] : [];
     const searchQuery = !decodedKeyword ? [] : [{
       $or: [
         { title: new RegExp(decodedKeyword, 'i') },
@@ -37,11 +44,13 @@ const dashboardGetPosts = async ({ metaId, keyword, status, postType, page, size
         { videoScriptCode: new RegExp(decodedKeyword, 'i') },
       ],
     }];
+
     const statusQuery = !status
       ? [{ status: 'published' }]
       : status === 'all'
         ? [{ status: { $ne: 'trash' } }]
         : [{ status: status }];
+
     const postTypeQuery = postType && postType !== 'all' ? [{ postType }] : [];
 
     const findQuery = { $and: [...metaQuery, ...searchQuery, ...statusQuery, ...postTypeQuery] };
@@ -113,12 +122,14 @@ const dashboardGetPosts = async ({ metaId, keyword, status, postType, page, size
     });
 
   } catch (error) {
+
     console.log(`error=> `, error);
 
     return errorResponse({
       message: 'Something went wrong',
       error,
     });
+
   }
 };
 

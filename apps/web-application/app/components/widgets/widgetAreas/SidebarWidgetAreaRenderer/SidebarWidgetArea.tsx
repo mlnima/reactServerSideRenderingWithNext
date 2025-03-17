@@ -1,13 +1,13 @@
 import { FC } from 'react';
 import React from 'react';
-import { Widget } from "@repo/typescript-types";
+import { IWidget } from "@repo/typescript-types";
 import WidgetsRenderer from '@components/widgets/widgetRenderer/WidgetsRenderer';
 
 interface SideBarWidgetAreaProps {
     className: string;
     position: string;
     gridArea: string;
-    widgets: Widget[];
+    widgets: IWidget[];
     locale: string;
     dictionary: {
         [key: string]: string;

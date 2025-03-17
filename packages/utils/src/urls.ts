@@ -66,7 +66,7 @@ export const hostnameChecker = (hostname: string): string => {
   return splitHostname.slice(-2).join('.');
 };
 
-export const isImageAllowedForNextImage = (url: string): boolean => {
+export const isImageAllowedForNextImage = (url: string) => {
   try {
     if (!!url) {
       const AllowedSource = process.env?.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES
@@ -109,4 +109,29 @@ export const searchParamsToObject = (searchParams: URLSearchParams): Record<stri
 export const searchParamsToUrlQuery = (queryParams: Record<string, string>): string => {
   const queries = new URLSearchParams(queryParams).toString();
   return `?${queries}`;
+};
+//names: string | string[], value: string
+export const createQueryString = (urlItems: {
+  name: string,
+  value: string
+}[], searchParams: URLSearchParams) => {
+  const params = new URLSearchParams(searchParams.toString());
+  for (const { name, value } of urlItems) {
+    params.set(name, value);
+  }
+  return params.toString();
+};
+
+export const removeQueryParam = (names: string | string[], searchParams: URLSearchParams) => {
+  const params = new URLSearchParams(searchParams.toString());
+
+  if (Array.isArray(names)) {
+    for (const name of names) {
+      params.delete(name);
+    }
+  } else {
+    params.delete(names);
+  }
+
+  return params;
 };

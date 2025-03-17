@@ -34,13 +34,17 @@ export const isEmptyObject = (ObjectToTest: Record<string, unknown>): boolean =>
   );
 };
 
-export const getTextDataWithTranslation = (locale: string, name: string, parentObject: Record<string, any>): string | null => {
+
+export const getTextDataWithTranslation = (locale: string, name: string, parentObject?: any): string | null => {
+  if (!parentObject) {
+    return '';
+  }
   const isDefaultLocale = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCALE;
   return isDefaultLocale
     ? parentObject?.[name]
     : parentObject.translations?.[locale]?.[name] ||
     parentObject?.[name] ||
-    null;
+    '';
 };
 
 export const nestedObjectModifier = (obj: object, path: string[], value: unknown): object => {
@@ -52,48 +56,24 @@ export const nestedObjectModifier = (obj: object, path: string[], value: unknown
   }, {});
 };
 
-export function flatObjectId<T>(doc: T): T {
-  doc._id = doc._id.toString()
-  return doc;
-}
+type Document = {
+  [key: string]: any;
+};
 
-export function flatObjectIds<T>(docs: T[]): T[] {
-  return docs.map(doc => flatObjectId(doc));
-}
-
-
-export function deepFlattenObjectIds<T>(data: T): DeepFlattenedType<T> {
-  // Handle null/undefined
-  if (data == null) {
-    return data as any;
+export const deepConvertObjectIdsToStrings = (obj: Document): Document => {
+  if (typeof obj !== 'object' || obj === null) {
+    return obj;
   }
+  const newObj: Document = {};
 
-  // Handle ObjectId
-  if (data instanceof Types.ObjectId) {
-    return data.toString() as any;
-  }
-
-  // Handle arrays
-  if (Array.isArray(data)) {
-    return data.map(item => deepFlattenObjectIds(item)) as any;
-  }
-
-  // Handle objects (but not dates or other special objects)
-  if (typeof data === 'object' && !(data instanceof Date) && !(data instanceof RegExp)) {
-    const result: any = {};
-
-    for (const [key, value] of Object.entries(data)) {
-      result[key] = deepFlattenObjectIds(value);
+  for (let key in obj) {
+    if (key === 'createdAt' || key === 'updatedAt') {
+      newObj[key] = obj[key];
+    } else if ((key === '_id' || key === 'widgetId') && obj[key] instanceof Types.ObjectId) {
+      newObj[key] = obj[key].toString();
+    } else {
+      newObj[key] = deepConvertObjectIdsToStrings(obj[key]);
     }
-
-    return result;
   }
-
-  // Return primitive values as is
-  return data as any;
-}
-
-// Helper type to ensure arrays are handled properly
-export function deepFlattenObjectIdsArray<T>(data: T[]): DeepFlattenedType<T>[] {
-  return data.map(item => deepFlattenObjectIds(item));
-}
+  return newObj;
+};

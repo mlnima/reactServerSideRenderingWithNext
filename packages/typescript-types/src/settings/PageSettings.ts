@@ -1,8 +1,13 @@
-export interface PageSettings{
+
+
+
+
+
+export interface IPageSettings{
     title?:string,
     description?:string,
     keywords?:string,
-    sidebar:boolean,
+    sidebar:string,
     customStyles?:string,
     translations?:{
         [key: string]:{

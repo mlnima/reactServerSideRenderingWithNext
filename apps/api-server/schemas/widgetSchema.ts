@@ -1,5 +1,5 @@
 import {model, Schema, Document} from "mongoose";
-import {Widget} from "@repo/typescript-types";
+import {IWidget} from "@repo/typescript-types";
 
 const widgetDataSchema = new Schema({
     extraClassName: String,
@@ -52,4 +52,4 @@ const widgetSchema = new Schema({
     data: widgetDataSchema,
 },{timestamps: true});
 
-export default model<Widget & Document>("widgets", widgetSchema);
+export default model<IWidget & Document>("widgets", widgetSchema);

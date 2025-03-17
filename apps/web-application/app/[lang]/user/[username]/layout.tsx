@@ -1,7 +1,7 @@
 import getInitialUserPageData from '@lib/actions/database/operations/users/getInitialUserPageData';
 import localDetector from '@lib/localDetector';
 import { getDictionary } from '../../../../get-dictionary';
-import { ILayoutProps, User } from '@repo/typescript-types';
+import { ILayoutProps, IPageSettings, User } from '@repo/typescript-types';
 import getSettings from '@lib/actions/database/operations/settings/getSettings';
 import getWidgets from '@lib/actions/database/operations/widgets/getWidgets';
 import Soft404 from '@components/Soft404/Soft404';
@@ -11,13 +11,21 @@ import SidebarWidgetAreaRenderer
 import ProfileHeader from './components/ProfileHeader';
 import './layout.scss';
 import AuthorPostsNavigation from './posts/components/AuthorPostsNavigation';
-import { ServerActionResponse } from '@lib/actions/response';
+import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 
 const UserLayout = async (props: ILayoutProps) => {
   const params = await props.params;
   const locale = localDetector(params.lang);
   const dictionary = await getDictionary(locale);
-  const { userPageSettings } = await getSettings(['userPageSettings']);
+  // const { userPageSettings } = await getSettings(['userPageSettings']);
+  //
+
+  const { userPageSettings } = unwrapResponse(
+    await getSettings(['userPageSettings']) as unknown as ServerActionResponse<{
+      userPageSettings: IPageSettings | undefined;
+    }>,
+  );
+
   const sidebar = userPageSettings?.sidebar;
   const { username } = params;
 

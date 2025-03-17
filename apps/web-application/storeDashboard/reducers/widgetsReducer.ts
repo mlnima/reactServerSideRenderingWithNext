@@ -4,7 +4,7 @@ import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
 import {AxiosError, AxiosResponse} from "axios";
 import {loading, setAlert} from "./globalStateReducer";
-import {Widget} from "@repo/typescript-types";
+import {IWidget} from "@repo/typescript-types";
 import {
     dashboardAPIRequestGetWidgets,
     dashboardAPIRequestUpdateWidget,
@@ -52,7 +52,7 @@ export const updateWidgetAction = createAsyncThunk(
 
 export const createNewWidgetAction = createAsyncThunk(
     'adminPanelWidgets/createNewWidgetAction',
-    async (newWidgetData: Widget, thunkAPI) => {
+    async (newWidgetData: IWidget, thunkAPI) => {
         thunkAPI.dispatch(loading(true))
         return await dashboardAPIRequestCreateNewWidget(newWidgetData)
             .then((res: AxiosResponse<unknown | any>) => {

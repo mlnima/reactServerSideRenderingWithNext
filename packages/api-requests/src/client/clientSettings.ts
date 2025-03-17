@@ -1,10 +1,10 @@
-// import AxiosInstance from "../lib/AxiosInstance";
-// import axios from "axios";
+import AxiosInstance from "../lib/AxiosInstance";
+import axios from "axios";
 
-// export const clientAPIRequestGetUncachedSettings = async (requireSettings:string[])=>{
-//     const settingsQuery = `?${requireSettings.map((setting:string) => 'setting=' + setting).join('&')}`;
-//     return await AxiosInstance.get(`/api/dashboard/settings${settingsQuery}`);
-// }
+export const clientAPIRequestGetUncachedSettings = async (requireSettings:string[])=>{
+    const settingsQuery = `?${requireSettings.map((setting:string) => 'setting=' + setting).join('&')}`;
+    return await AxiosInstance.get(`/api/dashboard/settings${settingsQuery}`);
+}
 
 // export const clientAPIRequestGetSettings = async ({ requireSettings }:{requireSettings:string[]})=>{
 //     const settingsQuery = requireSettings.map((setting) => `setting=${setting}`).join('&');

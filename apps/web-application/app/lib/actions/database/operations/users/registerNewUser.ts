@@ -3,13 +3,14 @@ import { userSchema, connectToDatabase } from '@repo/db';
 import getSettings from '@lib/actions/database/operations/settings/getSettings';
 import bcrypt from 'bcryptjs';
 import { generateJwtToken } from '@lib/actions/database/tools';
-import { IRegisterNewUser, User } from '@repo/typescript-types';
+import { IInitialSettings, IRegisterNewUser, User } from '@repo/typescript-types';
 import { sendVerificationEmail } from '@lib/emailService';
 import {
   emailValidator,
   passwordValidatorRegisterForm,
   usernameValidatorRegisterForm,
 } from '@repo/utils/dist/src/validators';
+import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 
 const validateInputs = (
   {
@@ -84,7 +85,11 @@ export const registerNewUser = async (
   try {
     await connectToDatabase('register');
 
-    const { initialSettings } = await getSettings(['initialSettings']);
+    const { initialSettings } = unwrapResponse(
+      await getSettings(['initialSettings']) as unknown as ServerActionResponse<{
+        initialSettings: IInitialSettings | undefined;
+      }>,
+    );
 
     if (!initialSettings?.membershipSettings?.anyoneCanRegister) {
       return { message: 'Registration Is Disabled', type: 'error' };

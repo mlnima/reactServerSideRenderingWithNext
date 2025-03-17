@@ -45,7 +45,6 @@ interface TableBodyItemPropType {
         postType?: string;
         title?: string;
     };
-    assetsType: string;
     selectedItems: string[];
     setSelectedItems: any;
     tableItemsType: string[];
@@ -53,11 +52,11 @@ interface TableBodyItemPropType {
 
 const TableBodyItem: FC<TableBodyItemPropType> = ({
     data,
-    assetsType,
     selectedItems,
     setSelectedItems,
     tableItemsType,
 }) => {
+
     const onSelectChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         e.target.checked
             ? setSelectedItems([...selectedItems, data._id])
@@ -65,6 +64,10 @@ const TableBodyItem: FC<TableBodyItemPropType> = ({
     };
 
     const renderProperties = tableItemsType.map((property: string) => {
+
+        // if (typeof property != 'string'){
+        //   console.log(`property=> `,property, typeof property)
+        // }
       // @ts-expect-error: check later
         return <TableBodyItemSection key={property} dataValue={data?.[property]} dataName={property} />;
     });
@@ -81,7 +84,6 @@ const TableBodyItem: FC<TableBodyItemPropType> = ({
                 {renderProperties}
             </div>
             <TableBodyItemDirectAction
-                assetsType={assetsType}
                 _id={data._id}
                 postType={data?.postType}
                 title={data.title}

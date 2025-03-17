@@ -4,7 +4,7 @@ import WidgetsRenderer from '@components/widgets/widgetRenderer/WidgetsRenderer'
 import PostPage from '@components/PostsPage/PostsPage';
 import ActorsPageContentRenderer from '@components/metas/ActorsPageContentRenderer';
 import React from 'react';
-import { IPageProps, IMeta, IPost } from '@repo/typescript-types';
+import { IPageProps, IMeta, IPost, IInitialSettings, IPageSettings } from '@repo/typescript-types';
 import CategoriesPageContentRenderer from '@components/metas/CategoriesPageContentRenderer';
 import TagsPageContentRenderer from '@components/metas/TagsPageContentRenderer';
 import { capitalizeFirstLetters } from '@repo/utils';
@@ -15,7 +15,7 @@ import getWidgets from '@lib/actions/database/operations/widgets/getWidgets';
 import getSearch from '@lib/actions/database/operations/search/getSearch';
 import getSettings from '@lib/actions/database/operations/settings/getSettings';
 import Soft404 from '@components/Soft404/Soft404';
-import { ServerActionResponse } from '@lib/actions/response';
+import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 
 const searchPage = async (props: IPageProps) => {
   const searchParams = await props.searchParams;
@@ -24,7 +24,17 @@ const searchPage = async (props: IPageProps) => {
   const locale = localDetector(params.lang);
   const dictionary = await getDictionary(locale);
 
-  const { searchPageSettings,initialSettings } = await getSettings( ['searchPageSettings','initialSettings']);
+  const { initialSettings } = unwrapResponse(
+    await getSettings(['initialSettings']) as unknown as ServerActionResponse<{
+      initialSettings: IInitialSettings | undefined;
+    }>,
+  );
+
+  const { searchPageSettings } = unwrapResponse(
+    await getSettings(['searchPageSettings']) as unknown as ServerActionResponse<{
+      searchPageSettings: IPageSettings | undefined;
+    }>,
+  );
 
   const sidebar = searchPageSettings?.sidebar;
   const contentPerPage = initialSettings?.contentSettings?.contentPerPage || 20;
@@ -45,16 +55,6 @@ const searchPage = async (props: IPageProps) => {
       ? parseInt(currentPageQuery, 10)
       : 1;
 
-  // const queryObject = {
-  //     sort: searchParams?.sort,
-  //     lang: locale,
-  //     keyword: params?.keyword,
-  //     page: currentPage,
-  //     // searchType: searchParams?.searchType
-  // };
-
-  //const searchData = await fetchSearch({ queryObject, locale });
-
   const queryObject = {
     sort: searchParams?.sort,
     locale,
@@ -62,13 +62,6 @@ const searchPage = async (props: IPageProps) => {
     page: currentPage,
     // searchType: searchParams?.searchType
   };
-
-  // const { posts, totalCount, actors, categories, tags } =
-  //   await getSearch({
-  //     keyword: params.keyword,
-  //     page: currentPage,
-  //     locale,
-  //   });
 
   const { success, data } =
     await getSearch({
@@ -88,17 +81,6 @@ const searchPage = async (props: IPageProps) => {
   }
 
   const { posts, totalCount, actors, categories, tags } = data
-
-
-
-  // const groupingMetas = (metas || []).reduce(
-  //   (acc: { [key: string]: Meta[] }, meta: Meta) => {
-  //     acc[meta?.type] = [...(acc?.[meta?.type] || []), meta];
-  //
-  //     return acc;
-  //   },
-  //   { actors: [], categories: [], tags: [] }
-  // );
 
   return (
     <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
@@ -161,7 +143,6 @@ const searchPage = async (props: IPageProps) => {
                 totalCount={contentPerPage}
                 currentPage={currentPage}
                 dictionary={dictionary}
-                // contentPerPage={contentPerPage}
                 metas={categories}
               />
             </div>

@@ -1,13 +1,13 @@
 'use client';
 import {loading} from "@storeDashboard/reducers/globalStateReducer";
-import {WidgetData} from "@repo/typescript-types";
+import {IWidgetData} from "@repo/typescript-types";
 import React, {FC} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFileExport} from "@fortawesome/free-solid-svg-icons/faFileExport";
 import {useAppDispatch} from "@storeDashboard/hooks";
 
 interface PropTypes{
-    widgetData:WidgetData
+    widgetData:IWidgetData
 }
 const ExportWidget:FC<PropTypes> = ({widgetData}) => {
     const dispatch = useAppDispatch()

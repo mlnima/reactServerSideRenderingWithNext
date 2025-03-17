@@ -1,7 +1,7 @@
 import React, { ChangeEventHandler, FC } from 'react';
 // import dynamic from "next/dynamic";
 import {advertiseType, postTypes,advertisePlaceType} from '@repo/data-structures';
-import { WidgetData, WidgetSettingsPropTypes } from "@repo/typescript-types";
+import { IWidgetData, WidgetSettingsPropTypes } from "@repo/typescript-types";
 import SearchTypeInputFields from './SearchTypeInputFields/SearchTypeInputFields';
 import MultipleLinkWidgetModelFields from './MultipleLinkWidgetModelFields/MultipleLinkWidgetModelFields';
 import SelectFieldForWidget from './SelectFieldForWidget/SelectFieldForWidget';

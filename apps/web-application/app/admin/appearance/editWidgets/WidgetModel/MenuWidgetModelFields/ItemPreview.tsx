@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import styled from "styled-components";
 import EditItemForm from "./EditItemForm";
-import {IMenuItem, WidgetData} from "@repo/typescript-types";
+import {IMenuItem, IWidgetData} from "@repo/typescript-types";
 import {inputValueSimplifier} from "@repo/utils";
 
 const Styles = styled.div`
@@ -50,7 +50,7 @@ const Styles = styled.div`
 
 interface IProps{
     data:any,
-    widgetData:WidgetData
+    widgetData:IWidgetData
     activeEditingLanguage:string
     setWidgetData:any
     parentsOption:any

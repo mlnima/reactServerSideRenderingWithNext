@@ -1,49 +1,25 @@
-import { model, Schema, models, Document } from "mongoose";
-import { CommentRaw } from "@repo/typescript-types";
+import { model, Schema, models, Document } from 'mongoose';
+import { CommentRaw } from '@repo/typescript-types';
 
 const commentSchema = new Schema({
-    onDocumentId: { type: Schema.Types.ObjectId, ref: 'post' },
-    author: { type: Schema.Types.ObjectId, ref: 'user' },
-    reply: [],
-    likes: {
-        type: Number,
-        default: 0
-    },
-    disLikes: {
-        type: Number,
-        default: 0
-    },
-    body: String,
-    status: {
-        type: String,
-        default: 'approved'
-    }
+  onDocumentId: { type: Schema.Types.ObjectId, ref: 'post' },
+  author: { type: Schema.Types.ObjectId, ref: 'user' },
+  reply: [],
+  likes: {
+    type: Number,
+    default: 0,
+  },
+  disLikes: {
+    type: Number,
+    default: 0,
+  },
+  body: String,
+  status: {
+    type: String,
+    default: 'approved',
+  },
 }, { timestamps: true });
 
-const CommentModel = models?.comment || model<CommentRaw & Document>("comment", commentSchema);
+const CommentModel = models?.comment || model<CommentRaw & Document>('comment', commentSchema);
 
 export default CommentModel;
-
-// import {model, Schema, Document} from "mongoose";
-// import {CommentRaw} from "@repo/typescript-types";
-//
-// const commentSchema = new Schema({
-//     onDocumentId: {type:Schema.Types.ObjectId,ref:'post'},
-//     author:{type:Schema.Types.ObjectId,ref:'user'},
-//     reply:[],
-//     likes:{
-//         type: Number,
-//         default: 0
-//     },
-//     disLikes:{
-//         type: Number,
-//         default: 0
-//     },
-//     body: String,
-//     status:{
-//         type:String,
-//         default: 'approved'
-//     }
-// },{ timestamps: true });
-//
-// export default model<CommentRaw & Document>("comment",commentSchema);

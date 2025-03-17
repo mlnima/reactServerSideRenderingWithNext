@@ -1,7 +1,7 @@
 'use client';
 import {FC} from "react";
 import {IPost} from "@repo/typescript-types";
-import {Widget} from "@repo/typescript-types";
+import {IWidget} from "@repo/typescript-types";
 import dynamic from "next/dynamic";
 import Csr from "@components/global/Csr";
 import {useAppSelector} from "@store/hooks";
@@ -30,7 +30,7 @@ interface IProps {
     },
 
         widgets: {
-            [key: string]: Widget[]
+            [key: string]: IWidget[]
         }
 
     relatedPosts: IPost[],

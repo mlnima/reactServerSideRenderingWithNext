@@ -25,13 +25,14 @@ import UserConfigMenu from '@components/global/UserConfigMenu/UserConfigMenu';
 import LayoutViewportGenerator from '@components/LayoutMetaGenerator/LayoutViewportGenerator';
 import CustomScripts from '@components/CustomScripts';
 import CustomHeadTagsInitializer from '@components/CustomHeadTagsInitializer';
-import { ILayoutProps, Widget } from '@repo/typescript-types';
+import { IInitialSettings, ILayoutProps, IWidget } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
 import getWidgets from '@lib/actions/database/operations/widgets/getWidgets';
 import getSettings from '@lib/actions/database/operations/settings/getSettings';
 import { Suspense } from 'react';
 import MemberInitializer from '@components/global/MemberInitializer/MemberInitializer';
 import CookieInitializer from '@components/global/CookieInitializer/CookieInitializer';
+import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 
 // export async function generateStaticParams() {
 //     return i18n.locales.map((lng: string) => ({ lng }));
@@ -41,16 +42,21 @@ import CookieInitializer from '@components/global/CookieInitializer/CookieInitia
 const RootLayout = async (props: ILayoutProps) => {
 
   const params = await props.params;
-
   const locale = localDetector(params.lang);
   const dictionary = await getDictionary(locale);
-  const { initialSettings } = await getSettings(['initialSettings']);
 
+  const { initialSettings } = unwrapResponse(
+    await getSettings(['initialSettings']) as unknown as ServerActionResponse<{
+      initialSettings: IInitialSettings | undefined
+    }>
+  );
   // @ts-expect-error: need type fix
+  const { layoutSettings = {}, headDataSettings = {} } = initialSettings;
+
   const widgets = await getWidgets(
     ['footer', 'header', 'topBar', 'navigation'],
     locale,
-  ) as { [key: string]: Widget[] };
+  ) as { [key: string]: IWidget[] };
 
   const widgetAreasSharedProps = {
     locale,
@@ -62,19 +68,19 @@ const RootLayout = async (props: ILayoutProps) => {
     <body className={`dark `} style={{}}>
     <ReduxProvider>
       <div className="layout">
-        {initialSettings?.layoutSettings?.topbar && (
+        {layoutSettings?.topbar && (
           <TopbarWidgetArea
             {...widgetAreasSharedProps}
             widgets={widgets?.topBar}
           />
         )}
-        {initialSettings?.layoutSettings?.header && (
+        {layoutSettings?.header && (
           <HeaderWidgetArea
             {...widgetAreasSharedProps}
             widgets={widgets?.header}
           />
         )}
-        {initialSettings?.layoutSettings?.navigation && (
+        {layoutSettings?.navigation && (
           <NavigationWidgetArea
             {...widgetAreasSharedProps}
             widgets={widgets?.navigation}
@@ -83,7 +89,7 @@ const RootLayout = async (props: ILayoutProps) => {
         <div id={'page'} className={'App'}>
           {props.children}
         </div>
-        {initialSettings?.layoutSettings?.footer && (
+        {layoutSettings?.footer && (
           <FooterWidgetArea
             {...widgetAreasSharedProps}
             widgets={widgets?.footer}
@@ -91,16 +97,17 @@ const RootLayout = async (props: ILayoutProps) => {
         )}
       </div>
       <BackgroundFilterWholeScreen />
+      {/*// @ts-expect-error: check this later*/}
       <CookieInitializer />
 
       <Suspense fallback="loging in ...">
         {/*// @ts-expect-error: its fine*/}
-        <MemberInitializer/>
+        <MemberInitializer />
       </Suspense>
 
       <GoogleAnalytics
         googleAnalyticsId={
-          initialSettings?.headDataSettings?.googleAnalyticsId
+          headDataSettings?.googleAnalyticsId
         }
       />
       <LoadingComponent />
@@ -110,12 +117,12 @@ const RootLayout = async (props: ILayoutProps) => {
       <StyledComponentsRegistry>
         <GlobalCustomStyles
           primaryModeColors={
-            initialSettings?.layoutSettings?.primaryModeColors
+            layoutSettings?.primaryModeColors || ''
           }
-          customStyles={initialSettings?.layoutSettings?.customStyles}
+          customStyles={layoutSettings?.customStyles}
         />
       </StyledComponentsRegistry>
-      <StoreDataInitializer initialSettings={initialSettings} />
+      {initialSettings && <StoreDataInitializer initialSettings={initialSettings} />}
       <WebSocketInitializer />
       {/*<MediaCall/>*/}
       <KeysListener />

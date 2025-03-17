@@ -2,14 +2,14 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { InitialSettings } from "@repo/typescript-types";
+import { IInitialSettings } from "@repo/typescript-types";
 import PostByUserSettings from "./PostByUserSettings";
 
 const Style = styled.div``;
 
 interface PropTypes {
     onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>, section: string) => void;
-    initialSettingsData: InitialSettings;
+    initialSettingsData: IInitialSettings;
 }
 
 const MembershipSettings: React.FC<PropTypes> = ({ onChangeHandler, initialSettingsData }) => (

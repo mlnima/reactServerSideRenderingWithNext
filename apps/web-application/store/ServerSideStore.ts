@@ -1,3 +1,4 @@
+import { IInitialSettings } from '@repo/typescript-types';
 
 
 interface ContentSettings {
@@ -5,17 +6,17 @@ interface ContentSettings {
     contentPerPage?: number;
 }
 
-interface InitialSettings {
+interface IInitialSettings {
     contentSettings?: ContentSettings;
     [key: string]: any;
 }
 
 class ServerSideStore {
-    static initialSettings: InitialSettings = {};
+    static initialSettings: IInitialSettings = {};
     static defaultLocale: string = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
     static locales: string[] = (process.env.NEXT_PUBLIC_LOCALES || 'en').split(' ');
 
-    static setInitialSettings(settings: InitialSettings) {
+    static setInitialSettings(settings: IInitialSettings) {
         this.initialSettings = settings;
     }
 

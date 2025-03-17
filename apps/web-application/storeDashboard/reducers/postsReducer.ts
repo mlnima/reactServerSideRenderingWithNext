@@ -8,7 +8,7 @@ import { loading, setAlert } from './globalStateReducer';
 import {
   AxiosInstance,
   // dashboardAPIRequestGetPosts,
-  dashboardAPIRequestGetMetas,
+  // dashboardAPIRequestGetMetas,
   dashboardAPIRequestGetMeta,
   dashboardAPIRequestGetPost,
   dashboardAPIRequestUpdatePost,
@@ -27,6 +27,7 @@ import {
 } from '@repo/api-requests';
 
 import dashboardGetPosts from '@lib/actions/database/operations/posts/dashboardGetPosts';
+import dashboardGetMetas from '@lib/actions/database/operations/metas/dashboardGetMetas';
 
 
 interface IInitialState {
@@ -160,11 +161,11 @@ export const getSearchAndFindARelatedPostUrlAction = createAsyncThunk(
 export const getPostsAction = createAsyncThunk(
   'adminPanelPosts/getPostsAction',
   async (queries: object, thunkAPI) => {
+
     thunkAPI.dispatch(loading(true));
-
-
     const { data, success, message, errorCode, error } = await dashboardGetPosts(queries);
     thunkAPI.dispatch(loading(false));
+
     if (!success) {
       console.log(`getPostsAction error=> `, error);
       thunkAPI.dispatch(
@@ -326,30 +327,33 @@ export const updateMetaAction = createAsyncThunk(
 
 export const getMetasAction = createAsyncThunk(
   'adminPanelPosts/getMetasAction',
-  async (queries: string, thunkAPI) => {
+  async (queries: object, thunkAPI) => {
+
     thunkAPI.dispatch(loading(true));
-    return await dashboardAPIRequestGetMetas(queries)
-      .then((res: AxiosResponse<any>) => {
-        return {
-          metas: res.data?.metas,
-          totalCount: res.data?.totalCount,
-          statusesCount: res.data?.statusesCount,
-        };
-      })
-      .catch(err => {
-        thunkAPI.dispatch(
-          setAlert({
-            message: err.response.data.message,
-            type: 'error',
-            err,
-          }),
-        );
-      })
-      .finally(() => {
-        thunkAPI.dispatch(loading(false));
-      });
+    const { data, success, message, errorCode, error } = await dashboardGetMetas(queries);
+    thunkAPI.dispatch(loading(false));
+
+
+    if (!success) {
+      console.log(`getPostsAction error=> `, error);
+      thunkAPI.dispatch(
+        setAlert({
+          message,
+          type: 'Error',
+          err: errorCode,
+        }),
+      );
+      return;
+    }
+    return {
+      metas: data?.metas,
+      totalCount: data?.totalCount,
+      statusesCount: data?.statusesCount,
+    };
   },
 );
+
+
 export const getMetaAction = createAsyncThunk(
   'adminPanelPosts/getMetaAction',
   async (_id: string | null, thunkAPI) => {

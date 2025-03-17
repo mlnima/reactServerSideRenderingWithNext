@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Request, Response } from 'express';
 import fsExtra from 'fs-extra';
 import path from 'path';

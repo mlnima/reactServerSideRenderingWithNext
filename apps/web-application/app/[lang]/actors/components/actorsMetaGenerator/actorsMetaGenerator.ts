@@ -1,58 +1,37 @@
 import type { Metadata } from 'next';
 import { getTextDataWithTranslation, textContentReplacer } from '@repo/utils';
 import { AlternatesGenerators } from '@lib/alternatesCanonicalGenerator';
-import {PageParams, PageSearchParams} from "@repo/typescript-types";
-import localDetector from "@lib/localDetector";
+import { PageParams, PageSearchParams, IPageSettings, IInitialSettings } from '@repo/typescript-types';
+import localDetector from '@lib/localDetector';
 import getSettings from '@lib/actions/database/operations/settings/getSettings';
+import { ServerActionResponse } from '@lib/actions/response';
+import { headMetaFromSettings } from '@lib/headMetaFromSettings';
 
 interface IProps {
-    params: PageParams,
-    searchParams?: PageSearchParams,
+  params: PageParams,
+  searchParams?: PageSearchParams,
 }
 
 const alternatesGenerators = new AlternatesGenerators();
 
 const actorsMetaGenerator = async (props: IProps): Promise<Metadata> => {
-    const params = await props.params;
-    const locale = localDetector(params.lang);
+  const params = await props.params;
+  const searchParams = await props.searchParams;
+  const locale = localDetector(params.lang);
 
-    const { actorsPageSettings  } = await getSettings(['actorsPageSettings']);
-    const {  initialSettings } = await getSettings(['initialSettings']);
+  const headData = await headMetaFromSettings({
+    pageSettingToGet: 'actorsPageSettings',
+    locale,
+    pageNumber: searchParams?.page || '',
+    fallbackTitle:'actors'
+  });
 
-    const pageTitle =
-        actorsPageSettings?.translations?.[locale]?.title ??
-        actorsPageSettings?.title;
-    const pageKeywords =
-        actorsPageSettings?.translations?.[locale]?.keywords ??
-        actorsPageSettings?.keywords;
-    const pageDescription =
-        actorsPageSettings?.translations?.[locale]?.description ??
-        actorsPageSettings?.description;
+  if (!headData) return {};
 
-    return {
-        alternates: alternatesGenerators.metasPage(locale, 'actors'),
-        title: pageTitle
-            ? textContentReplacer(pageTitle, {
-                  siteName:
-                      initialSettings?.headDataSettings?.siteName,
-              })
-            : getTextDataWithTranslation(
-                  locale,
-                  'title',
-                  actorsPageSettings,
-              ),
-        description: pageDescription
-            ? textContentReplacer(pageDescription, {
-                  siteName:
-                      initialSettings?.headDataSettings?.siteName,
-              })
-            : getTextDataWithTranslation(
-                locale,
-                  'description',
-                  actorsPageSettings,
-              ),
-        keywords: pageKeywords ?? '',
-    };
+  return {
+    alternates: alternatesGenerators.metasPage(locale, 'actors'),
+    ...headData,
+  };
 };
 
 export default actorsMetaGenerator;

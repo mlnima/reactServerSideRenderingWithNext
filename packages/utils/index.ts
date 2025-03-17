@@ -46,10 +46,7 @@ export {
   getTextDataWithTranslation,
   removeEmptyProperties,
   nestedObjectModifier,
-  flatObjectId,
-  flatObjectIds,
-  deepFlattenObjectIds,
-  deepFlattenObjectIdsArray
+  deepConvertObjectIdsToStrings
 } from './src/objects';
 
 export {
@@ -80,7 +77,9 @@ export {
   isInternalUrl,
   queryUniquer,
   searchParamsToObject,
-  searchParamsToUrlQuery
+  searchParamsToUrlQuery,
+  createQueryString,
+  removeQueryParam
 } from './src/urls';
 
 export {

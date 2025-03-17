@@ -1,9 +1,9 @@
 // @ts-nocheck
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {loading, setAlert} from "./globalStateReducer";
-import {AxiosError, AxiosResponse} from "axios";
 import {RootState} from "../store";
-import {dashboardAPIRequestGetComments,dashboardAPIRequestDeleteComments} from "@repo/api-requests";
+import {dashboardAPIRequestDeleteComments} from "@repo/api-requests";
+import dashboardGetComments from '@lib/actions/database/operations/comments/dashboardGetComments';
 
 
 const initialState = {
@@ -14,14 +14,28 @@ const initialState = {
 
 export const getCommentsAction = createAsyncThunk(
     'adminPanelComments/getCommentsAction',
-    async (data: {}, thunkAPI) => {
-        thunkAPI.dispatch(loading(true))
+    async (queries: object, thunkAPI) => {
 
-        return await dashboardAPIRequestGetComments(data).then((response: AxiosResponse) => {
-            return response.data
-        }).catch((error: AxiosError) => {
+      thunkAPI.dispatch(loading(true));
+      const { data, success, message, errorCode, error } = await dashboardGetComments(queries);
+      thunkAPI.dispatch(loading(false));
 
-        }).finally(() => thunkAPI.dispatch(loading(false)))
+      if (!success) {
+        console.log(`getPostsAction error=> `, error);
+        thunkAPI.dispatch(
+          setAlert({
+            message,
+            type: 'Error',
+            err: errorCode,
+          }),
+        );
+        return;
+      }
+
+      return {
+        comments: data?.comments,
+        totalCount: data?.totalCount,
+      };
     }
 )
 

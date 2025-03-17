@@ -19,6 +19,7 @@ interface RenderArraySectionPropTypes{
 }
 
 const RenderArraySection :FC<RenderArraySectionPropTypes> = ({data}) => {
+  const searchParams = useSearchParams();
     const [search, setSearch] = useSearchParams();
     const paramsQueries = paramsQueryGenerator(search)
     // const {query,pathname,push} = useRouter()
@@ -33,6 +34,9 @@ const RenderArraySection :FC<RenderArraySectionPropTypes> = ({data}) => {
         //     pathname,
         //     query :queryData
         // }).finally()
+
+
+
     }
 
     const renderArrItem = (data || []).map((item,index) => {

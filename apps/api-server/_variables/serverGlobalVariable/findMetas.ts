@@ -1,3 +1,4 @@
+// @ts-nocheck
 import metaSchema from '@schemas/metaSchema';
 import { metaFieldsRequestForCard } from '@repo/data-structures';
 import { multiQueryUniquer } from '@util/queryUtil';
@@ -47,6 +48,7 @@ export const findMetas = async (query: FindMetasQueryTypes) => {
             .find(findQuery, {}, { sort: sortQuery })
             .limit(limit || (query?.startWith ? 0 : 1000))
             .skip(skip)
+
             .select(metaFieldsRequestForCard(multiQueryUniquer(query?.metaType),locale))
             .exec();
 

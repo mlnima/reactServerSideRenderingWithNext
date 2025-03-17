@@ -100,13 +100,20 @@ const ChatRoomMessageArea: FC<IProp> = ({
             }
         };
 
-        const debouncedHandleScroll = debounce((event: Event) => {
-            // Ensure the event's target is the intended element
-            const target = event.target as HTMLDivElement | null;
-            if (target) {
-                handleScroll({ currentTarget: target } as React.UIEvent<HTMLDivElement>);
-            }
-        }, 500);
+      const debouncedHandleScroll = debounce((event: unknown) => {
+        if (event instanceof Event) {
+          const target = event.target as HTMLDivElement | null;
+          if (target) {
+            handleScroll({ currentTarget: target } as React.UIEvent<HTMLDivElement>);
+          }
+        }
+      }, 500);
+        // const debouncedHandleScroll = debounce((event: Event) => {
+        //     const target = event.target as HTMLDivElement | null;
+        //     if (target) {
+        //         handleScroll({ currentTarget: target } as React.UIEvent<HTMLDivElement>);
+        //     }
+        // }, 500);
 
         const messageArea = messageAreaRef.current;
         if (messageArea) {

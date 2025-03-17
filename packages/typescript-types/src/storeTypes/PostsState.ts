@@ -1,26 +1,26 @@
-import { Post, Meta, IComment, IPage } from '@repo/typescript-types';
+import { IPost, IMeta, IComment, IPage } from '@repo/typescript-types';
 
 
 export interface PostStateTypes {
     editingPostImagesToUpload: {};
-    tagsMetas: Meta[],
-    categoriesMetas: Meta[],
-    actorsMetas: Meta[],
+    tagsMetas: IMeta[],
+    categoriesMetas: IMeta[],
+    actorsMetas: IMeta[],
     pageData: IPage,
-    posts: Post[],
+    posts: IPost[],
     relatedPosts: {
-        actorsRelatedPosts:Post[],
-        categoriesRelatedPosts:Post[],
-        tagsRelatedPosts:Post[],
+        actorsRelatedPosts:IPost[],
+        categoriesRelatedPosts:IPost[],
+        tagsRelatedPosts:IPost[],
     },
     statusesCount:{
         [key:string]:number
     }
-    actorData: Meta,
-    categoryData: Meta,
-    tagData: Meta,
+    actorData: IMeta,
+    categoryData: IMeta,
+    tagData: IMeta,
     totalCount: number,
-    post: Post,
-    editingPost: Post,
+    post: IPost,
+    editingPost: IPost,
     comments: IComment[],
 }

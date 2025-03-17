@@ -1,9 +1,9 @@
 import { FC } from 'react';
-import { Widget } from "@repo/typescript-types";
+import { IWidget } from "@repo/typescript-types";
 import WidgetWrapper from '../widgetWrapper/WidgetWrapper';
 
 interface IProps {
-    widgets: Widget[];
+    widgets: IWidget[];
     position: string;
     locale: string;
     hasSidebar?: string;

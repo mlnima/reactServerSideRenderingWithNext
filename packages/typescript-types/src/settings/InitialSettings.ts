@@ -25,7 +25,7 @@ export interface IHeadDataSettings{
 }
 
 
-export interface InitialSettings{
+export interface IInitialSettings{
     headDataSettings:IHeadDataSettings,
     membershipSettings:{
         allowUserToPost: boolean,

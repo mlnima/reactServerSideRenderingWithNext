@@ -21,7 +21,13 @@ interface SelectOption {
   label: string;
 }
 
-const MetaDataSelector: FC<ComponentPropTypes> = ({ metaType, setEditingPost, maxLimit, postData }) => {
+const MetaDataSelector: FC<ComponentPropTypes> = (
+  {
+    metaType,
+    setEditingPost,
+    maxLimit,
+    postData,
+  }) => {
   const dispatch = useAppDispatch();
 
   const onSelectHandler = (selected: SelectOption[] | null) => {
@@ -55,11 +61,11 @@ const MetaDataSelector: FC<ComponentPropTypes> = ({ metaType, setEditingPost, ma
         startWith: input,
       });
       if (!success || !data) {
-        return;
+        return [];
       }
       return data?.suggestions;
     } catch {
-      return;
+      return [];
     }
   };
 

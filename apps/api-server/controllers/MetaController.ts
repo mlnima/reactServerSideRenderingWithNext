@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Request, Response } from 'express';
 import metaSchema from '@schemas/metaSchema';
 import postSchema from '@schemas/postSchema';

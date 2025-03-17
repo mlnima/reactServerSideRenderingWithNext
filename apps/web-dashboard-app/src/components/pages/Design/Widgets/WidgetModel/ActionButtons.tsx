@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import ExportWidget from './ExportWidget/ExportWidget'
 import {useSelector} from "react-redux";
-import {DashboardStore, Widget} from "@repo/typescript-types";
+import {DashboardStore, IWidget} from "@repo/typescript-types";
 // import updateRouteQuery from "@_updateWidgetVariables/_clientVariables/clientVariables/updateRouteQuery";
 import {createNewWidgetAction, deleteWidgetAction, updateWidgetAction} from "@store/reducers/widgetsReducer";
 import {useAppDispatch} from "@store/hooks";
@@ -48,7 +48,7 @@ const ActionButtons: FC<ActionButtonsPropTypes> = ({widgetData, widgetId, widget
     const onCloneHandler = () => {
 
         const widgetsInTheSamePosition = widgets?.[widgetData.position]
-            ?.filter((widget: Widget) => widget?.data?.position === widgetData.position)
+            ?.filter((widget: IWidget) => widget?.data?.position === widgetData.position)
 
         const highestIndexInTheSamePosition = Math.max(...widgetsInTheSamePosition.map(() => widgetData.widgetIndex), 0)
 

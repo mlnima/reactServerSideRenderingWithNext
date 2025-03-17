@@ -1,7 +1,7 @@
 // @ts-nocheck
 import Editor from "@monaco-editor/react";
 import {FC,useMemo} from 'react';
-import {WidgetData} from "@repo/typescript-types";
+import {IWidgetData} from "@repo/typescript-types";
 
 
 interface PropTypes {
@@ -14,7 +14,7 @@ interface PropTypes {
     width?: number,
     height?: number,
     widgetSettings:any,
-    widgetData:WidgetData,
+    widgetData:IWidgetData,
     setWidgetData:Function,
     withTranslation?:boolean,
     // onChange: Function

@@ -1,10 +1,19 @@
 'use client';
-import React, { FC, SetStateAction } from 'react';
-import Link from 'next/link'
-import { usePathname, useParams, useSearchParams } from 'next/navigation'
+import React, {
+  FC,
+  // SetStateAction,
+  useEffect,
+  useState,
+} from 'react';
+import Link from 'next/link';
+import {
+  useParams,
+  // useSearchParams,
+  // usePathname
+} from 'next/navigation';
 import { useAppSelector } from '@store/hooks';
 import { IInitialUserPageData } from '@repo/typescript-types';
-import './AuthorPostsNavigation.scss'
+import './AuthorPostsNavigation.scss';
 
 interface IProps {
   dictionary: {
@@ -12,59 +21,66 @@ interface IProps {
   };
   // setPostStatusToFetch: React.Dispatch<SetStateAction<string>>;
   // userRole: string;
-  initialUserPageData: IInitialUserPageData
+  initialUserPageData: IInitialUserPageData;
 }
 
-
-//*****************NEED ROUTING FIX
 const AuthorPostsNavigation: FC<IProps> = ({
                                              // setPostStatusToFetch,
                                              dictionary,
                                              // userRole,
-                                             initialUserPageData
+                                             initialUserPageData,
                                            }) => {
-  const pathname = usePathname()
-  // const params = useParams<{ username: string }>()
+  // const pathname = usePathname()
   // const searchParams = useSearchParams()
+  const params = useParams<{ username: string, lang: string }>();
+  const [basePath, setBasePath] = useState<string | null>(null);
+
   const { userData, loggedIn } = useAppSelector(({ user }) => user);
 
 
+  useEffect(() => {
+
+    if (params?.username && params?.lang) {
+      const langQuery = params?.lang === process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? '' : params?.lang;
+      setBasePath(
+        `${langQuery}/user/${params?.username}`,
+      );
+    }
+  }, [params]);
+
+  useEffect(() => {
+    console.log(`basePath=> `, basePath);
+  }, [basePath]);
   return (
     <div className={'profilePostsNavigation'}>
       <div className={'profilePostsNavigationItems'}>
         {(loggedIn && initialUserPageData._id === userData._id || userData.role === 'administrator') ?
           <>
-            <Link href={`${pathname}/posts?status=published`} className={'btn btn-transparent'}>
+            <Link href={`${basePath}/posts?status=published`} className={'btn btn-transparent'}>
               {dictionary?.['Published'] || 'Published'}
             </Link>
 
-            <Link href={`${pathname}/posts?status=pending`} className={'btn btn-transparent'}>
+            <Link href={`${basePath}/posts?status=pending`} className={'btn btn-transparent'}>
               {dictionary?.['Pending'] || 'Pending'}
             </Link>
             {userData.role === 'administrator' && (
               <>
-
-
-                <Link href={`${pathname}/posts?status=draft`} className={'btn btn-transparent'}>
+                <Link href={`${basePath}/posts?status=draft`} className={'btn btn-transparent'}>
                   {dictionary?.['Draft'] || 'Draft'}
                 </Link>
-                <Link href={`${pathname}/posts?status=trash`} className={'btn btn-transparent'}>
+                <Link href={`${basePath}/posts?status=trash`} className={'btn btn-transparent'}>
                   {dictionary?.['Trash'] || 'Trash'}
                 </Link>
               </>
             )}
-          </>:
-          <Link href={`${pathname}/posts`} className={'btn btn-transparent'}>
+          </> :
+          <Link href={`${basePath}/posts`} className={'btn btn-transparent'}>
             {dictionary?.['All Posts'] || 'All Posts'}
           </Link>
         }
-
       </div>
-
-
     </div>
   );
-
 };
 export default AuthorPostsNavigation;
 

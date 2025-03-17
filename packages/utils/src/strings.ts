@@ -145,7 +145,11 @@ export const getMonthName = (monthNumber: number): string | null => {
     : null;
 };
 
-export const textContentReplacer = (textString: string, replaces: Record<string, string>): string => {
+export const textContentReplacer = (
+  textString: string,
+  replaces: Record<string, string>
+): string => {
+
   const now = new Date(performance.timeOrigin + performance.now());
   try {
     return textString
@@ -153,7 +157,8 @@ export const textContentReplacer = (textString: string, replaces: Record<string,
       .replaceAll('__SITE_NAME', replaces?.siteName || '')
       .replaceAll('__COUNT', replaces?.count || '')
       .replaceAll('__YEAR', now.getFullYear().toString())
-      .replaceAll('__MONTH', getMonthName(now.getMonth()) || '');
+      .replaceAll('__MONTH', getMonthName(now.getMonth()) || '')
+      .replaceAll('__PAGE', replaces?.page ? `${replaces?.page}` : '');
   } catch (err) {
     return textString;
   }

@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, {FC, MouseEventHandler, useEffect, useState} from 'react';
 import styled from 'styled-components';
-import {InitialSettings} from "@repo/typescript-types";
+import {IInitialSettings} from "@repo/typescript-types";
 import {postTypes} from '@repo/data-structures';
 import {inputValueSimplifier} from '@repo/utils';
 import {editInitialSettings} from '@store/reducers/settingsReducer';
@@ -49,7 +49,7 @@ const Style = styled.div`
 interface PropTypes {
     onChangeHandler: Function;
     onSaveHandler: MouseEventHandler<HTMLButtonElement>;
-    initialSettingsData: InitialSettings;
+    initialSettingsData: IInitialSettings;
 }
 
 const ContentSettings: FC<PropTypes> = ({onChangeHandler, initialSettingsData, onSaveHandler}) => {

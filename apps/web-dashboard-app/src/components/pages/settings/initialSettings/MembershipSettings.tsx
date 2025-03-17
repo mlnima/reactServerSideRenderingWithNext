@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { InitialSettings } from "@repo/typescript-types";
+import { IInitialSettings } from "@repo/typescript-types";
 import postTypes from '@repo/data-structures';
 import PostByUserSettings from "@components/pages/settings/initialSettings/PostByUserSettings";
 
@@ -8,7 +8,7 @@ const Style = styled.div``;
 
 interface PropTypes {
     onChangeHandler: Function;
-    initialSettingsData: InitialSettings;
+    initialSettingsData: IInitialSettings;
 }
 
 const MembershipSettings: FC<PropTypes> = ({ onChangeHandler, initialSettingsData }) => {

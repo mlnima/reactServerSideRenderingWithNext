@@ -1,16 +1,17 @@
+// @ts-nocheck
 'use client';
 
 import React from 'react';
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "@storeDashboard/hooks";
-import { DashboardStore, Store } from "@repo/typescript-types";
+import { DashboardStore, IWidget } from '@repo/typescript-types';
 
 const WidgetExporter = (): JSX.Element => {
     const widgets = useSelector(({ widgets }: DashboardStore) => widgets?.adminPanelWidgets);
     const dispatch = useAppDispatch();
 
     const exportAllWidgets = () => {
-        const data = Object.entries(widgets).reduce((finalArr, current) => {
+        const data = Object.entries(widgets).reduce((finalArr : IWidget[], current) => {
             const [position, widgetsOnPosition] = current;
             finalArr = [...finalArr, ...widgetsOnPosition];
             return finalArr;

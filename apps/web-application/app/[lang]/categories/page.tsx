@@ -4,12 +4,13 @@ import WidgetsRenderer from '@components/widgets/widgetRenderer/WidgetsRenderer'
 import SidebarWidgetAreaRenderer from '@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer';
 import CategoriesPageContentRenderer from '@components/metas/CategoriesPageContentRenderer';
 import categoriesMetaGenerator from './components/categoriesMetaGenerator/categoriesMetaGenerator';
-import { PageParams, PageSearchParams } from '@repo/typescript-types';
+import { IPageSettings, PageParams, PageSearchParams } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
 import getMetas from "@lib/actions/database/operations/metas/getMetas";
 import getWidgets from '@lib/actions/database/operations/widgets/getWidgets';
 import getSettings from '@lib/actions/database/operations/settings/getSettings';
 import Soft404 from '@components/Soft404/Soft404';
+import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 
 interface IProps {
   params: PageParams;
@@ -21,7 +22,13 @@ const CategoriesPage = async (props: IProps) => {
   const params = await props.params;
   const locale = localDetector(params.lang);
   const dictionary = await getDictionary(locale);
-  const { categoriesPageSettings } = await getSettings(['categoriesPageSettings']);
+
+  const { categoriesPageSettings } = unwrapResponse(
+    await getSettings(['categoriesPageSettings']) as unknown as ServerActionResponse<{
+      categoriesPageSettings: IPageSettings | undefined;
+    }>,
+  );
+
   const sidebar = categoriesPageSettings?.sidebar;
 
   const widgets = await getWidgets(

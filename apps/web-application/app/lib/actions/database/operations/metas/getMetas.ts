@@ -2,8 +2,8 @@ import { connectToDatabase, metaSchema } from '@repo/db';
 import getSettings from '@lib/actions/database/operations/settings/getSettings';
 import { metaFieldsRequestForCard } from '@repo/data-structures';
 import { unstable_cacheTag as cacheTag } from 'next/cache';
-import { errorResponse, ServerActionResponse, successResponse } from '@lib/actions/response';
-import { IMeta } from '@repo/typescript-types';
+import { errorResponse, ServerActionResponse, successResponse, unwrapResponse } from '@lib/actions/response';
+import { IInitialSettings, IMeta } from '@repo/typescript-types';
 
 interface IGetMetas {
   locale: string;
@@ -28,8 +28,12 @@ interface IGetMetas {
   'use cache';
   try {
     await connectToDatabase('getMetas');
-    const { initialSettings } = await getSettings(['initialSettings']);
-    const numberOfCardsPerPage = initialSettings?.contentSettings?.numberOfCardsPerPage || 20;
+    const { initialSettings } = unwrapResponse(
+      await getSettings(['initialSettings']) as unknown as ServerActionResponse<{
+        initialSettings: IInitialSettings | undefined;
+      }>,
+    );
+    const contentPerPage = initialSettings?.contentSettings?.contentPerPage || 20;
 
     const notStartWithNumberRegex = /^(?![0-9].*$).*/g;
     const notStartWithAlphabetRegex = /^(?![A-Za-z].*$).*/g;
@@ -40,7 +44,7 @@ interface IGetMetas {
           ? { name: { $regex: notStartWithNumberRegex } }
           : { name: { $regex: '^' + startWith } };
     const countQuery = { count: { $gt: 0 } };
-    let limit = count || numberOfCardsPerPage;
+    let limit = count || contentPerPage;
     if (metaType === 'tags' && limit > 1000) {
       limit = 1000;
     }

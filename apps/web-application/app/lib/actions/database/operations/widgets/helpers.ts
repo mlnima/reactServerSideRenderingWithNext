@@ -2,19 +2,25 @@ import getSettings from '@lib/actions/database/operations/settings/getSettings';
 import { clientAllowedSortOptions, postFieldRequestForCards } from '@repo/data-structures';
 import { metaSchema, postSchema } from '@repo/db';
 import { Document } from 'mongoose';
+import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
+import { IInitialSettings } from '@repo/typescript-types';
 
 export const findWidgetPosts = async (widgetData: any): Promise<{ posts: {}[]; totalCount: number }> => {
   try {
 
-    const { initialSettings } = await getSettings(['initialSettings']);
-    const numberOfCardsPerPage = initialSettings?.contentSettings?.numberOfCardsPerPage || 20;
+    const { initialSettings } = unwrapResponse(
+      await getSettings(['initialSettings']) as unknown as ServerActionResponse<{
+        initialSettings: IInitialSettings | undefined;
+      }>,
+    );
+    const contentPerPage = initialSettings?.contentSettings?.contentPerPage || 20;
 
     const metaId = widgetData?.uniqueData?.selectedMetaForPosts || widgetData?.selectedMetaForPosts;
     const postType = widgetData?.uniqueData?.postType || widgetData?.postType;
     const sort = widgetData?.uniqueData?.sort || widgetData?.sort;
     const metaQuery = metaId ? [{ $or: [{ categories: { $in: metaId } }, { tags: { $in: metaId } }, { actors: { $in: metaId } }] }] : [];
     const postTypeQuery = postType ? [{ postType }] : [];
-    const limit = widgetData?.uniqueData?.count || widgetData?.count || numberOfCardsPerPage;
+    const limit = widgetData?.uniqueData?.count || widgetData?.count || contentPerPage;
     const sortQuery = !sort || sort === 'updatedAt' ? { updatedAt: -1 } : clientAllowedSortOptions.includes(sort) ? { [sort]: -1 } : {};
 
     const findQuery = {
@@ -58,13 +64,17 @@ interface IOFindWidgetMetas {
 
 export const findWidgetMetas = async (widgetData: any, withCount?: boolean): Promise<IOFindWidgetMetas> => {
   try {
-    const { initialSettings } = await getSettings(['initialSettings']);
-    const numberOfCardsPerPage = initialSettings?.contentSettings?.numberOfCardsPerPage || 20;
+    const { initialSettings } = unwrapResponse(
+      await getSettings(['initialSettings']) as unknown as ServerActionResponse<{
+        initialSettings: IInitialSettings | undefined;
+      }>,
+    );
+    const numberOfCardsPerPage = initialSettings?.contentSettings?.contentPerPage || 20;
 
     const statusQuery = { status: 'published' };
     const type = { type: widgetData?.metaType || widgetData?.uniqueData?.metaType };
     const countQuery = { count: { $gt: 0 } };
-    const limit = widgetData?.uniqueData?.count || numberOfCardsPerPage;
+    const limit = widgetData?.uniqueData?.count || contentPerPage;
     const sortQuery =
       widgetData?.sort || widgetData?.uniqueData?.sort
         ? { updatedAt: -1 }

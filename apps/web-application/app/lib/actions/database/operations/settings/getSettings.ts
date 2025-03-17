@@ -1,20 +1,22 @@
-"use server"
+'use server';
 import { Document } from 'mongoose';
 import {
   settingSchema,
-  connectToDatabase
+  connectToDatabase,
 } from '@repo/db';
-import { unstable_cacheTag as cacheTag} from 'next/cache';
+import { unstable_cacheTag as cacheTag } from 'next/cache';
+import { errorResponse, successResponse } from '@lib/actions/response';
 
 interface Setting extends Document {
   type: string;
+
   [key: string]: any;
 }
 
 const getSettings = async (
-  requireSettings: string[]
-): Promise<Record<string, Setting>> => {
-  "use cache"
+  requireSettings: string[],
+) => {
+  'use cache';
   try {
     await connectToDatabase('getSettings');
     const settings = await settingSchema
@@ -31,13 +33,22 @@ const getSettings = async (
         },
       });
     cacheTag('cacheItem', 'CSetting', `CSettings-${requireSettings.join('-')}`);
-    return settings.reduce<Record<string, Setting>>((acc, setting) => {
-      acc[setting.type] = setting?.data || {};
-      return acc;
-    }, {});
+    // return settings.reduce<Record<string, Setting>>((acc, setting) => {
+    //   acc[setting.type] = setting?.data || {};
+    //   return acc;
+    // }, {});
+
+    return successResponse({
+      data: settings.reduce<Record<string, Setting>>((acc, setting) => {
+        acc[setting.type] = setting?.data || {};
+        return acc;
+      }, {})
+    });
   } catch (error) {
     console.error(`getSettings => `, error);
-    return {};
+    return errorResponse({
+      message: 'Something went wrong please try again later',
+    });
   }
 };
 

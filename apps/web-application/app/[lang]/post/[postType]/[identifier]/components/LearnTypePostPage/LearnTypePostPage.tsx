@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { IPost } from '@repo/typescript-types';
 import PostTitle from '../PostTitle/PostTitle';
 import PostMetasRenderer from '../PostMetasRenderer/PostMetasRenderer';
-import { Widget } from '@repo/typescript-types';
+import { IWidget } from '@repo/typescript-types';
 import ActionButtons from '../ActionButtons/ActionButtons';
 import './LearnTypePostPage.styles.scss';
 import LearnTypePostPageDescription from './LearnTypePostPageDescription/LearnTypePostPageDescription';
@@ -17,7 +17,7 @@ interface IProps {
   dictionary: {
     [key: string]: string;
   };
-  widgets: Widget[];
+  widgets: IWidget[];
   relatedPosts: IPost[];
 }
 

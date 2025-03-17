@@ -20,7 +20,7 @@ import authWithUserDataMiddleware from '@util/middlewares/authWithUserDataMiddle
 import rateLimitMiddleware from '../middlewares/rateLimitMiddleware';
 
 import cacheSuccesses from '../middlewares/apiCache';
-import CommentController from '../controllers/CommentController';
+// import CommentController from '../controllers/CommentController';
 import MetaController from '../controllers/MetaController';
 import multer from "multer"
 
@@ -28,10 +28,10 @@ const router = Router();
 const upload = multer();
 
 //---------------------Comments-------------------
-router.delete('/dashboard/comment', adminAuthMiddleware, CommentController.deleteComments);
-router.get('/dashboard/comment', adminAuthMiddleware, CommentController.dashboardGetComments);
-router.post('/v1/comment', rateLimitMiddleware(1, 60 * 1000), CommentController.newComment);
-router.get('/v1/comment', CommentController.getComments);
+// router.delete('/dashboard/comment', adminAuthMiddleware, CommentController.deleteComments);
+// router.get('/dashboard/comment', adminAuthMiddleware, CommentController.dashboardGetComments);
+// router.post('/v1/comment', rateLimitMiddleware(1, 60 * 1000), CommentController.newComment);
+// router.get('/v1/comment', CommentController.getComments);
 //---------------------Metas-------------------
 router.post('/v1/meta/resetMetaImage', MetaController.resetMetaImage);
 router.get('/v1/metas', MetaController.getMetas);

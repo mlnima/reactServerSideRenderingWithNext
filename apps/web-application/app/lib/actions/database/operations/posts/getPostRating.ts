@@ -3,11 +3,11 @@ import { connectToDatabase, postSchema } from '@repo/db';
 import { IPost } from '@repo/typescript-types';
 import { unstable_cacheTag as cacheTag } from 'next/cache';
 import { errorResponse, ServerActionResponse, successResponse } from '@lib/actions/response';
-
-const getPostRating = async (_id: string): Promise<ServerActionResponse<{
-  likes: number,
-  disLikes: number
-} | null>> => {
+//: Promise<ServerActionResponse<{
+//   likes: number,
+//   disLikes: number
+// } | null>>
+const getPostRating = async (_id: string) => {
   'use cache';
   try {
     await connectToDatabase('getPostRating');

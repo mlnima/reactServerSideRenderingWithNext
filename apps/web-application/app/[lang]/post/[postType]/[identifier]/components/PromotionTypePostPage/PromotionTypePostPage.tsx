@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { IPost } from '@repo/typescript-types';
 import PostDescription from '../PostDescription/PostDescription';
 import PostMetasRenderer from '../PostMetasRenderer/PostMetasRenderer';
-import { Widget } from '@repo/typescript-types';
+import { IWidget } from '@repo/typescript-types';
 import ActionButtons from '../ActionButtons/ActionButtons';
 import './PromotionTypePostPage.scss';
 import Link from 'next/link';
@@ -19,7 +19,7 @@ interface IProps {
   dictionary: {
     [key: string]: string;
   };
-  widgets: Widget[];
+  widgets: IWidget[];
   relatedPosts: IPost[];
 }
 

@@ -419,42 +419,42 @@ class UserController {
             });
     }
 
-    static async dashboardGetUsers(req: Request, res: Response) {
-        try {
-            const { keyword, status, role } = req.query;
-
-            const decodedKeyword = keyword ? decodeURIComponent(keyword) : '';
-            const searchQuery = !decodedKeyword
-                ? []
-                : [{ $or: [{ username: new RegExp(decodedKeyword, 'i') }, { email: new RegExp(decodedKeyword, 'i') }] }];
-            const statusQuery = status ? [{ status }] : [];
-            const roleQuery = role ? [{ role }] : [];
-            const findOptions = [...searchQuery, ...statusQuery,...roleQuery]
-            const findUsersQuery = findOptions.length>0 ?{
-                $and: [...searchQuery, ...statusQuery,...roleQuery],
-            } : {}
-
-            const totalCount = await userSchema.countDocuments(findUsersQuery).exec();
-
-            let statusesCount ={}
-
-            for await (const status of userStatus){
-                statusesCount[status] = await userSchema.countDocuments({status}).exec();
-            }
-
-
-
-            const users = await userSchema.find(findUsersQuery, null, reqQueryToMongooseOptions(req)).exec();
-
-
-
-
-            res.json({ users, totalCount,statusesCount });
-        } catch (error) {
-            console.log(error);
-            res.end();
-        }
-    }
+    // static async dashboardGetUsers(req: Request, res: Response) {
+    //     try {
+    //         const { keyword, status, role } = req.query;
+    //
+    //         const decodedKeyword = keyword ? decodeURIComponent(keyword) : '';
+    //         const searchQuery = !decodedKeyword
+    //             ? []
+    //             : [{ $or: [{ username: new RegExp(decodedKeyword, 'i') }, { email: new RegExp(decodedKeyword, 'i') }] }];
+    //         const statusQuery = status ? [{ status }] : [];
+    //         const roleQuery = role ? [{ role }] : [];
+    //         const findOptions = [...searchQuery, ...statusQuery,...roleQuery]
+    //         const findUsersQuery = findOptions.length>0 ?{
+    //             $and: [...searchQuery, ...statusQuery,...roleQuery],
+    //         } : {}
+    //
+    //         const totalCount = await userSchema.countDocuments(findUsersQuery).exec();
+    //
+    //         let statusesCount ={}
+    //
+    //         for await (const status of userStatus){
+    //             statusesCount[status] = await userSchema.countDocuments({status}).exec();
+    //         }
+    //
+    //
+    //
+    //         const users = await userSchema.find(findUsersQuery, null, reqQueryToMongooseOptions(req)).exec();
+    //
+    //
+    //
+    //
+    //         res.json({ users, totalCount,statusesCount });
+    //     } catch (error) {
+    //         console.log(error);
+    //         res.end();
+    //     }
+    // }
 
     static async dashboardDeleteUser(req: Request, res: Response) {
         userSchema

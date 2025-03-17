@@ -1,5 +1,5 @@
-import { connectToDatabase, widgetSchema } from '@repo/db';
-import { Widget } from '@repo/typescript-types';
+ import { connectToDatabase, widgetSchema } from '@repo/db';
+import { IWidget } from '@repo/typescript-types';
 import { unstable_cacheTag as cacheTag } from 'next/cache';
 import { findWidgetMetas, findWidgetPosts } from '@lib/actions/database/operations/widgets/helpers';
 
@@ -47,7 +47,7 @@ const getWidgets = async (positions: string[], locale: string): Promise<{ [key: 
 
 
 // @ts-expect-error: need fix
-  result = widgets.reduce((widgetInPositions: Record<string, Widget[]>, widget: Widget) => {
+  result = widgets.reduce((widgetInPositions: Record<string, IWidget[]>, widget: IWidget) => {
     const position = widget?.data?.position;
     if (!widgetInPositions[position]) {
       widgetInPositions[position] = [];

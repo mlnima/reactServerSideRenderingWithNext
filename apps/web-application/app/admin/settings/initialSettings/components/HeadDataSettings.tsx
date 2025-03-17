@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import styled from "styled-components";
-import { InitialSettings } from "@repo/typescript-types";
+import { IInitialSettings } from "@repo/typescript-types";
 import MonacoEditor from '@components/textEditors/MonacoEditor';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
@@ -13,7 +13,7 @@ interface PropTypes {
     language: string;
     onChangeHandler: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, section: string) => void;
     onChangeHandlerWithTranslation: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, section: string) => void;
-    initialSettingsData: InitialSettings;
+    initialSettingsData: IInitialSettings;
 }
 
 const HeadDataSettings: React.FC<PropTypes> = ({ onChangeHandler, onChangeHandlerWithTranslation, initialSettingsData, language }) => {

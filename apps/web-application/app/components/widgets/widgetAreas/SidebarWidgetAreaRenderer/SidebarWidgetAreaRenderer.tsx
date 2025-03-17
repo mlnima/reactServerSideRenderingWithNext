@@ -1,12 +1,12 @@
 import {FC} from "react";
 import SideBarWidgetArea from './SidebarWidgetArea';
-import {Widget} from "@repo/typescript-types";
+import {IWidget} from "@repo/typescript-types";
 
 interface SidebarWidgetAreaRendererPropTypes {
     sidebar:string|boolean|undefined
     position:string
-    leftSideWidgets:Widget[]
-    rightSideWidgets:Widget[]
+    leftSideWidgets:IWidget[]
+    rightSideWidgets:IWidget[]
     dictionary: {
         [key: string]: string
     },

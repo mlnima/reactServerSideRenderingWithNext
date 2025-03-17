@@ -2,11 +2,11 @@
 import { IGetPosts } from '@lib/actions/database/operations/types';
 import { connectToDatabase, metaSchema, postSchema } from '@repo/db';
 import getSettings from '@lib/actions/database/operations/settings/getSettings';
-import { IMeta, IPost } from '@repo/typescript-types';
+import { IInitialSettings, IMeta, IPost } from '@repo/typescript-types';
 import { Document } from 'mongoose';
 import { postFieldRequestForCards } from '@repo/data-structures';
 import { unstable_cacheTag as cacheTag } from 'next/cache';
-import { errorResponse, ServerActionResponse, successResponse } from '@lib/actions/response';
+import { errorResponse, ServerActionResponse, successResponse, unwrapResponse } from '@lib/actions/response';
 
 const getPosts = async (
   {
@@ -28,9 +28,13 @@ const getPosts = async (
   // 'use cache';
   try {
     await connectToDatabase('getPosts');
-    const { initialSettings } = await getSettings(['initialSettings']);
+    const { initialSettings } = unwrapResponse(
+      await getSettings(['initialSettings']) as unknown as ServerActionResponse<{
+        initialSettings: IInitialSettings | undefined;
+      }>,
+    );
     const limit =
-      count || initialSettings?.contentSettings?.numberOfCardsPerPage || 20;
+      count || initialSettings?.contentSettings?.contentPerPage || 20;
     const meta = metaId
       ? await metaSchema.findById(metaId).lean<IMeta>({
         virtuals: true,
