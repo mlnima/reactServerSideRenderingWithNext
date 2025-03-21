@@ -28,7 +28,7 @@ const AlertBox: ({ dictionary }: IProps) => null | React.JSX.Element = ({ dictio
                 const component = true;
                 clearAlertTimeout = setTimeout(() => {
                     if (component) {
-                        dispatch(closeAlert({}));
+                        dispatch(closeAlert(null));
                     }
                 }, 30000);
             }
@@ -43,6 +43,7 @@ const AlertBox: ({ dictionary }: IProps) => null | React.JSX.Element = ({ dictio
 
     const onClickHandler = ()=>{
         if (alert?.actionFunctions){
+
             alert.actionFunctions()
         }
     }
@@ -51,11 +52,11 @@ const AlertBox: ({ dictionary }: IProps) => null | React.JSX.Element = ({ dictio
 
     return (
         <Csr>
-            <div id="alertBox" onClick={() => dispatch(closeAlert({}))}>
+            <div id="alertBox" onClick={() => dispatch(closeAlert(null))}>
                 {/*<Draggable handle=".handle">*/}
                 <div className="alertMessage">
                     <div className="alertMessageHeader handle">
-                        <p className="alertType" onClick={() => dispatch(closeAlert({}))}>
+                        <p className="alertType" onClick={() => dispatch(closeAlert(null))}>
                             <FontAwesomeIcon
                                 icon={
                                     alert.type === 'success'
@@ -71,7 +72,7 @@ const AlertBox: ({ dictionary }: IProps) => null | React.JSX.Element = ({ dictio
                                 }}
                             />
                         </p>
-                        <button className="closeAlert" onClick={() => dispatch(closeAlert({}))}>
+                        <button className="closeAlert" onClick={() => dispatch(closeAlert(null))}>
                             <FontAwesomeIcon icon={faXmark} style={{ width: 25, height: 25 }} />
                         </button>
                     </div>
@@ -82,7 +83,7 @@ const AlertBox: ({ dictionary }: IProps) => null | React.JSX.Element = ({ dictio
                     <div className={'alertActionButtons'}>
                         {alert?.type === 'deleteAction' || alert?.type === 'confirmAction' ? (
                             <>
-                                <button className={'btn btn-info'} onClick={() => dispatch(closeAlert({}))}>
+                                <button className={'btn btn-info'} onClick={() => dispatch(closeAlert(null))}>
                                     {dictionary?.['No'] || 'No'}
                                 </button>
                                 <button className={'btn btn-danger'} onClick={onClickHandler}>
@@ -90,7 +91,7 @@ const AlertBox: ({ dictionary }: IProps) => null | React.JSX.Element = ({ dictio
                                 </button>
                             </>
                         ) : (
-                            <button className={'btn btn-primary'} onClick={() => dispatch(closeAlert({}))}>
+                            <button className={'btn btn-primary'} onClick={() => dispatch(closeAlert(null))}>
                                 {dictionary?.['Ok'] || 'Ok'}
                             </button>
                         )}

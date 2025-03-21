@@ -31,7 +31,6 @@ const MultipleImageUploader: React.FC<MultipleImageUploaderProps> = ({
   };
 
   const removeImage = async () => {
-    // @ts-expect-error: need to be fixed
     setEditingPost((prevState) => ({
       ...prevState,
       mainThumbnail: 'null',

@@ -100,7 +100,6 @@ const MessagingArea: FC<IProps> =
                                         <Message
                                             key={message._id}
                                             messageData={message}
-                                            // @ts-expect-error: types and logic need to be fixed
                                             isMine={(message?.sender || message?.sender?._id) === userData?._id}
                                         />
                                     )

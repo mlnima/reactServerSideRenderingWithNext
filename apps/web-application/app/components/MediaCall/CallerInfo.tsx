@@ -1,10 +1,11 @@
 import React, {FC} from "react";
 import {capitalizeFirstLetter} from "@repo/utils";
+import { TCallType } from '@repo/typescript-types';
 
 interface PropTypes {
     profileImage: string,
     username: string,
-    callType: string | null,
+    callType: TCallType,
 }
 
 const CallerInfo: FC<PropTypes> = ({profileImage, username, callType}) => {

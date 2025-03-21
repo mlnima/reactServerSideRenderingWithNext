@@ -29,7 +29,7 @@ const CustomScript: React.FC<PropTypes> = ({ width, height }) => {
             <div className={'customScriptsAsStringSection'}>
                 <Editor
                     language={'html'}
-                    name={'customScriptsAsString'}
+                    // name={'customScriptsAsString'}
                     theme={'vs-dark'}
                     value={identity?.customScriptsAsString || ''}
                     onChange={onCustomScriptsAsStringChangeHandler}

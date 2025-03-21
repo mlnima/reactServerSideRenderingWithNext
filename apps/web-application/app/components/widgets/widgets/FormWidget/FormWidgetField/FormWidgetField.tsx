@@ -13,7 +13,7 @@ interface IProps {
     [key: string]: string;
   };
   onFormFieldsChangeHandler: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
   state: {
     data: {
@@ -23,11 +23,11 @@ interface IProps {
 }
 
 const FormWidgetField: FC<IProps> = ({
-  field,
-  dictionary,
-  onFormFieldsChangeHandler,
-  state,
-}) => {
+                                       field,
+                                       dictionary,
+                                       onFormFieldsChangeHandler,
+                                       state,
+                                     }) => {
   const fieldPlaceholder = field.fieldPlaceHolder
     ? dictionary?.[field.fieldPlaceHolder] || field.fieldPlaceHolder || ''
     : '';
@@ -35,7 +35,7 @@ const FormWidgetField: FC<IProps> = ({
   return (
     <div className="formWidgetField">
       <p className="formWidgetFieldTitle">
-        {convertVariableNameToName(field.fieldName)}
+        {field.fieldName && convertVariableNameToName(field.fieldName)}
       </p>
       {field.fieldType === 'textarea' ? (
         <textarea

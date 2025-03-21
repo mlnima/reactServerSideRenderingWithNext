@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
 config.autoAddCss = false;
@@ -7,20 +7,25 @@ import './layout.scss';
 import Topbar from './components/Topbar/Topbar';
 import Sidebar from './components/Sidebar/Sidebar';
 import ReduxProvider from '@storeDashboard/ReduxProvider';
+import { ReactNode } from 'react';
+import AdminLayoutDataInitializer from './AdminLayoutDataInitializer';
 
-const AdminLayout = ({ children }: { children: React.ReactNode }) => {
+
+const AdminLayout = ({ children }: { children: ReactNode }) => {
+
   return (
-      <html lang={'en'}>
-      <body className={`dark `}>
-      <ReduxProvider>
-      <Topbar/>
-      <Sidebar/>
+    <html lang={'en'}>
+    <body className={`dark `}>
+    <ReduxProvider>
+      <Topbar />
+      <Sidebar />
       <main>
         {children}
       </main>
-      </ReduxProvider>
-      </body>
-      </html>
+      <AdminLayoutDataInitializer/>
+    </ReduxProvider>
+    </body>
+    </html>
 
   );
 };

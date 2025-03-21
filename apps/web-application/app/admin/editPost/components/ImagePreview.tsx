@@ -2,7 +2,7 @@
 
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import { DashboardStore } from "@repo/typescript-types";
+
 
 let ImagePreviewStyledDiv = styled.div`
   .editor {
@@ -17,7 +17,7 @@ let ImagePreviewStyledDiv = styled.div`
 `;
 
 const ImagePreview: React.FC = () => {
-  const mainThumbnail = useSelector(({ posts }: DashboardStore) => posts.post?.mainThumbnail);
+  const mainThumbnail = useSelector(({ posts }) => posts.post?.mainThumbnail);
 
   if (mainThumbnail) {
     const imageUrl = mainThumbnail.includes('http') ? mainThumbnail : `${process.env.NEXT_PUBLIC_API_SERVER_URL}${mainThumbnail}`;

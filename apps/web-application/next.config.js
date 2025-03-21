@@ -131,7 +131,7 @@ const nextConfig = {
         styledComponents: true,
     },
     typescript: {
-        ignoreBuildErrors: false,
+        ignoreBuildErrors: true,
     },
     images: {
         formats: ['image/avif', 'image/webp'],

@@ -6,7 +6,6 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { editPostAction } from "@storeDashboard/reducers/postsReducer";
 import { uniqArrayBy } from "@repo/utils";
-import { DashboardStore } from "@repo/typescript-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAppDispatch } from "@storeDashboard/hooks";
 import { faXmark } from "@fortawesome/free-solid-svg-icons/faXmark";
@@ -49,7 +48,7 @@ interface PropType {
 
 const Meta: FC<PropType> = props => {
   let newItemsElement = useRef(null);
-  const post = useSelector(({ posts }: DashboardStore) => posts.post);
+  const post = useSelector(({ posts }) => posts.post);
   const dispatch = useAppDispatch()
 
   const deleteItem = (e) => {

@@ -1,0 +1,9 @@
+#AssetStatusNavigation{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  .btn-navigation {
+    margin: 0 2px;
+  }
+}

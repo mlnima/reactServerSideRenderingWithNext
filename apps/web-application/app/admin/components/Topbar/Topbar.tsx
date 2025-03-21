@@ -4,14 +4,13 @@ import {setSidebarStatus} from "@storeDashboard/reducers/globalStateReducer";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faUser, faHome } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from "react-redux";
-import { DashboardStore } from "@repo/typescript-types";
 import React from "react";
 import './Topbar.scss'
 
 
 const Topbar = () => {
   const dispatch = useAppDispatch();
-  const sidebar = useSelector(({ globalState }: DashboardStore) => globalState?.sidebar);
+  const sidebar = useSelector(({ globalState }) => globalState?.sidebar);
 
   const AdminSideBarOpenCloseHandler = () => {
     dispatch(setSidebarStatus(!sidebar));

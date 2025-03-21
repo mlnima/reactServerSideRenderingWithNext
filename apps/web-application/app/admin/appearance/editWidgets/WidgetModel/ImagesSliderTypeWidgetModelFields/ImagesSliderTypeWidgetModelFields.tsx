@@ -308,7 +308,7 @@ const ImagesSliderTypeWidgetModelFields: FC<ImageSwiperTypeWidgetModelFieldsProp
                                           defaultValue={uniqueData?.details}
                                           value={uniqueData?.details}
                                           className={'details'}
-                                          onChange={onUniqueDataChangeHandler}
+                                          onParentChangeHandler={onUniqueDataChangeHandler}
                             />
                         </div>
                         : null

@@ -2,7 +2,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import { AxiosResponse } from 'axios';
-import { IMeta, PostRaw } from '@repo/typescript-types';
+import { IMeta, IPost } from '@repo/typescript-types';
 import { loading, setAlert } from './globalStateReducer';
 
 import {
@@ -12,7 +12,7 @@ import {
   dashboardAPIRequestGetMeta,
   dashboardAPIRequestGetPost,
   dashboardAPIRequestUpdatePost,
-  dashboardAPIRequestCreateNewPost,
+  // dashboardAPIRequestCreateNewPost,
   dashboardAPIRequestDeleteMeta,
   dashboardAPIRequestUpdateMeta,
   dashboardAPIRequestBulkActionOnPosts,
@@ -28,25 +28,26 @@ import {
 
 import dashboardGetPosts from '@lib/actions/database/operations/posts/dashboardGetPosts';
 import dashboardGetMetas from '@lib/actions/database/operations/metas/dashboardGetMetas';
+import dashboardCreateNewPost from '@lib/actions/database/operations/posts/dashboardCreateNewPost';
 
 
-interface IInitialState {
-  post: {
-    title: string;
-    description: string;
-  };
-  relatedPosts: [];
-  totalCount: number;
-  statusesCount: {
-    // [key: string]: number;
-  };
-  posts: [];
-  meta: IMeta;
-  metas: [IMeta];
-  activeEditingLanguage: 'default';
-}
+// interface IInitialState {
+//   post: {
+//     title: string;
+//     description: string;
+//   };
+//   relatedPosts: [];
+//   totalCount: number;
+//   statusesCount: {
+//     // [key: string]: number;
+//   };
+//   posts: [];
+//   meta: IMeta;
+//   metas: [IMeta];
+//   activeEditingLanguage: 'default';
+// }
 
-const initialState: IInitialState = {
+const initialState = {
   post: {
     title: '',
     description: '',
@@ -239,31 +240,27 @@ export const updatePostAction = createAsyncThunk(
 
 export const createNewPostAction = createAsyncThunk(
   'adminPanelPosts/createNewPostAction',
-  async ({ data, navigate }: { data?: PostRaw; navigate: any }, thunkAPI) => {
-    thunkAPI.dispatch(loading(true));
+  async ({ newPostData, router }: { newPostData?: object; router?: {push:Function} }, thunkAPI) => {
 
-    return await dashboardAPIRequestCreateNewPost(data)
-      .then((response: AxiosResponse<any>) => {
-        console.log(response.data?.savedPostData?._id);
-        if (response.data?.savedPostData?._id) {
-          navigate(
-            `/api/dashboard/post?id=${response.data.savedPostData._id}`,
-          );
-        }
-      })
-      .catch(err => {
-        console.log(err);
-        thunkAPI.dispatch(
-          setAlert({
-            message: err.response.data.message,
-            type: 'error',
-            err,
-          }),
-        );
-      })
-      .finally(() => {
-        thunkAPI.dispatch(loading(false));
-      });
+    thunkAPI.dispatch(loading(true));
+    const { data, success, message, errorCode, error } = await dashboardCreateNewPost(newPostData);
+    thunkAPI.dispatch(loading(false));
+
+    if (!success) {
+      console.log(`getPostsAction error=> `, error);
+      thunkAPI.dispatch(
+        setAlert({
+          message,
+          type: 'Error',
+          err: errorCode,
+        }),
+      );
+      return;
+    }
+    if (router){
+      router.push(`/admin/editPost?id=${data.savedPostData._id}`)
+    }
+    thunkAPI.dispatch(loading(true));
   },
 );
 

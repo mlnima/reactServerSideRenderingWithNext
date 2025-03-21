@@ -8,7 +8,6 @@ import TextInputFieldForWidget
     from "./TextInputFieldForWidget/TextInputFieldForWidget";
 import {useSelector} from "react-redux";
 import {widgetsStaticPositions} from "@repo/data-structures";
-import {DashboardStore, Store} from "@repo/typescript-types";
 import { WidgetSettingsPropTypes} from "@repo/typescript-types";
 
 interface DefaultFieldsPropTypes {
@@ -34,7 +33,7 @@ const DefaultFields: FC<DefaultFieldsPropTypes> =
          onChangeLanguageHandler,
          setWidgetSettings
      }) => {
-        const customPages = useSelector(({globalState}: DashboardStore) => globalState?.customPages)
+        const customPages = useSelector(({globalState}) => globalState?.customPages)
         const positions = useMemo(() => {
             return [
                 ...widgetsStaticPositions,
@@ -155,7 +154,7 @@ const DefaultFields: FC<DefaultFieldsPropTypes> =
                                     widgetData?.translations?.[widgetSettings.activeEditingLanguage]?.text
                             }
                             className={'widgetTextTextarea'}
-                            onChange={onChangeHandlerWithTranslate}
+                            onParentChangeHandler={onChangeHandlerWithTranslate}
                         />
                         : null
                     }
@@ -178,7 +177,7 @@ const DefaultFields: FC<DefaultFieldsPropTypes> =
                             defaultValue={widgetData.customStyles}
                             value={widgetData.customStyles}
                             className={'customStylesTextarea'}
-                            onChange={onChangeHandler}
+                            onParentChangeHandler={onChangeHandler}
                         />
                         : null
                     }

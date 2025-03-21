@@ -14,35 +14,33 @@ interface PropType {
 const Quality: FC<PropType> = ({ rendering, onChangeHandler }) => {
   const post = useSelector((state: DashboardStore) => state.posts.post);
 
-  if (rendering) {
-    return (
-      <div className='post-information-section'>
-        <div className="title">
-          <p>Quality</p>
-        </div>
-        <div className="editor">
-          <div className="option">
-            <select
-              className={'primarySelect'}
-              value={post?.quality || 'HD'}
-              name='quality'
-              onChange={onChangeHandler}
-            >
-              {videoQualities.map((videoQuality: string, index: number) => {
-                return (
-                  <option key={`${videoQuality}${index}`} value={videoQuality}>
-                    {videoQuality}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
+  if (!rendering) return null;
+
+  return (
+    <div className='post-information-section'>
+      <div className="title">
+        <p>Quality</p>
+      </div>
+      <div className="editor">
+        <div className="option">
+          <select
+            className={'primarySelect'}
+            value={post?.quality || 'HD'}
+            name='quality'
+            onChange={onChangeHandler}
+          >
+            {videoQualities.map((videoQuality: string, index: number) => {
+              return (
+                <option key={`${videoQuality}${index}`} value={videoQuality}>
+                  {videoQuality}
+                </option>
+              );
+            })}
+          </select>
         </div>
       </div>
-    );
-  } else {
-    return null;
-  }
+    </div>
+  );
 };
 
 export default Quality;

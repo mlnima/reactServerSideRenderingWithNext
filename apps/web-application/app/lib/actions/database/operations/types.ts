@@ -1,4 +1,4 @@
-import { Meta, IPost } from '@repo/typescript-types';
+import { IMeta, IPost } from '@repo/typescript-types';
 import { TToken } from '@repo/typescript-types/src/User';
 
 export interface IOGetPost {

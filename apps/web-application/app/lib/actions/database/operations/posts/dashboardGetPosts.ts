@@ -80,7 +80,7 @@ const dashboardGetPosts = async ({ metaId, keyword, status, postType, page, size
 
     const transformedPosts = posts.map((doc) => ({
       ...doc,
-      // @ts-expect-error: its fine
+
       _id: doc._id.toString(),
       author: doc?.author ? {
         ...doc?.author,

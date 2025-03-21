@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, FC } from 'react';
 import { convertVariableNameToName } from '@repo/utils';
 import styled from 'styled-components';
+import { useSearchParams } from 'next/navigation';
 
 const TableHeaderStyledDiv = styled.div`
     padding: 10px;
@@ -13,7 +14,7 @@ const TableHeaderStyledDiv = styled.div`
     flex-wrap: wrap;
     justify-content: space-between;
 
-    .assetPageTableHeaderItem{
+    .assetPageTableHeaderItem {
         margin: 5px 0;
         white-space: nowrap;
         overflow: hidden;
@@ -24,51 +25,45 @@ const TableHeaderStyledDiv = styled.div`
 `;
 
 interface TableHeaderPropType {
-    selectedItems: any[];
-    setSelectedItems: any;
-    assetPageData: any;
-    currentQuery: { [key: string]: string };
-    tableItemsType: string[];
+  selectedItems: any[],
+  setSelectedItems: any,
+  assetPageData: any,
+  tableItemsType: string[],
+  selectAllAssetsHandler:Function
 }
 
-const TableHeader: FC<TableHeaderPropType> = ({
-    currentQuery,
+const TableHeader: FC<TableHeaderPropType> = (
+  {
     selectedItems,
-    setSelectedItems,
-    assetPageData,
     tableItemsType,
-}) => {
-    const selectAllCheckBox = useRef(null);
+    selectAllAssetsHandler
+  }) => {
+  const selectAllCheckBox = useRef(null);
 
-    useEffect(() => {
-        if (selectedItems?.length === 0) {
-            //@ts-ignore
-            selectAllCheckBox.current.checked = false;
-        }
-    }, [selectedItems]);
+  useEffect(() => {
+    if (selectedItems?.length === 0) {
+      //@ts-ignore
+      selectAllCheckBox.current.checked = false;
+    }
+  }, [selectedItems]);
 
-    const onSelectChangeHandler = (e: React.ChangeEvent<any>) => {
-        e.target.checked
-            ? setSelectedItems(assetPageData[currentQuery.assetsType as string].map((i: { _id: string }) => i._id))
-            : setSelectedItems([]);
-    };
+  return (
+    <TableHeaderStyledDiv className="asset-page-table-header">
+      <input
+        ref={selectAllCheckBox}
+        type="checkbox"
+        className={'asset-table-check-box'}
+        onChange={e => selectAllAssetsHandler(e)}
+      />
+      {tableItemsType.map((item: any) => {
+        return (
+          <p key={item} className="assetPageTableHeaderItem">
+            {convertVariableNameToName(item)}
 
-    return (
-        <TableHeaderStyledDiv className="asset-page-table-header">
-            <input
-                ref={selectAllCheckBox}
-                type="checkbox"
-                className={'asset-table-check-box'}
-                onChange={e => onSelectChangeHandler(e)}
-            />
-            {tableItemsType.map((item: any) => {
-                return (
-                    <p key={item} className="assetPageTableHeaderItem">
-                        {convertVariableNameToName(item)}
-                    </p>
-                );
-            })}
-        </TableHeaderStyledDiv>
-    );
+          </p>
+        );
+      })}
+    </TableHeaderStyledDiv>
+  );
 };
 export default TableHeader;

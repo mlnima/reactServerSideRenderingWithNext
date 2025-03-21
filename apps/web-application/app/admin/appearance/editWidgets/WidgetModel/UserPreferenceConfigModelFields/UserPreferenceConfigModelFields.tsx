@@ -38,7 +38,7 @@ const UserPreferenceConfigModelFields: FC<IProps> = ({onChangeHandler, uniqueDat
                                 defaultValue={uniqueData?.themeColorsSwitcherColors || ''}
                                 value={uniqueData?.themeColorsSwitcherColors}
                                 className={'customStylesTextarea'}
-                                onChange={onChangeHandler}
+                                onParentChangeHandler={onChangeHandler}
                             />
                         </div>
                     }

@@ -1,20 +1,19 @@
-
 'use client';
 
 import React, { FC, useRef } from 'react';
-import styled from "styled-components";
-import { uploadFileAction } from "@storeDashboard/reducers/fileManagerReducer"; // Updated import path
-import { useAppDispatch } from "@storeDashboard/hooks"; // Updated import path
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUpload } from "@fortawesome/free-solid-svg-icons/faUpload";
+import styled from 'styled-components';
+import { uploadFileAction } from '@storeDashboard/reducers/fileManagerReducer'; // Updated import path
+import { useAppDispatch } from '@storeDashboard/hooks'; // Updated import path
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUpload } from '@fortawesome/free-solid-svg-icons/faUpload';
 
 const UploadFileBtnStyledDiv = styled.div`
-  button {
-    svg {
-      width: 20px;
-      height: 20px;
+    button {
+        svg {
+            width: 20px;
+            height: 20px;
+        }
     }
-  }
 `;
 
 interface PropType {
@@ -36,9 +35,9 @@ const UploadFileBtn: FC<PropType> = (props) => {
 
     const fileUseType =
       props.name === 'mainThumbnail' ? 'postMainThumbnail' :
-      props.name === 'videoUrl' ? 'postVideoUrl' :
-      props.name === 'VideoTrailerUrl' ? 'postVideoTrailerUrl' :
-      'fileManagerFileUpload';
+        props.name === 'videoUrl' ? 'postVideoUrl' :
+          props.name === 'VideoTrailerUrl' ? 'postVideoTrailerUrl' :
+            'fileManagerFileUpload';
 
     // @ts-ignore
     dispatch(uploadFileAction({ file: filesData, useType: fileUseType }));
@@ -50,12 +49,12 @@ const UploadFileBtn: FC<PropType> = (props) => {
     if (!e.dataTransfer.files || e.dataTransfer.files.length === 0) return;
 
     const fileData = e.dataTransfer.files[0];
-    const droppedHTML = e.dataTransfer.getData("text/html");
+    const droppedHTML = e.dataTransfer.getData('text/html');
 
     if (droppedHTML) {
-      const elem = document.createElement("div");
+      const elem = document.createElement('div');
       elem.innerHTML = droppedHTML;
-      const image = elem.getElementsByTagName("img");
+      const image = elem.getElementsByTagName('img');
       const url = (image[0] || image[1]).currentSrc;
       // You can handle the URL here if needed
     } else if (fileData) {
@@ -65,9 +64,9 @@ const UploadFileBtn: FC<PropType> = (props) => {
 
       const fileUseType =
         props.name === 'mainThumbnail' ? 'postMainThumbnail' :
-        props.name === 'videoUrl' ? 'postVideoUrl' :
-        props.name === 'VideoTrailerUrl' ? 'postVideoTrailerUrl' :
-        'fileManagerFileUpload';
+          props.name === 'videoUrl' ? 'postVideoUrl' :
+            props.name === 'VideoTrailerUrl' ? 'postVideoTrailerUrl' :
+              'fileManagerFileUpload';
 
       // @ts-ignore
       dispatch(uploadFileAction({ file: filesData, useType: fileUseType }));
@@ -97,8 +96,6 @@ const UploadFileBtn: FC<PropType> = (props) => {
 };
 
 export default UploadFileBtn;
-
-
 
 
 // import React, {FC, useRef} from 'react';

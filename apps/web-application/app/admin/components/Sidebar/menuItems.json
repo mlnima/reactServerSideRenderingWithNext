@@ -48,6 +48,12 @@
     "subItems": []
   },
   {
+    "name": "Pages",
+    "url": "/admin/assets?assetsType=pages",
+    "subItems": [  {"name": "newPage", "url": "/admin/editPage?new=1"}]
+  },
+
+  {
     "name": "Chatrooms",
     "url": "/admin/assets?assetsType=chatrooms",
     "subItems": [

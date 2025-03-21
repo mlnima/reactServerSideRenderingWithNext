@@ -73,7 +73,7 @@ const dashboardGetMetas = async (
 
     const transformedMetas = metas.map((doc) => ({
       ...doc,
-      // @ts-expect-error: its fine
+
       _id: doc._id.toString(),
     }));
 

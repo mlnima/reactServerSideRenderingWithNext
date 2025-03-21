@@ -1,8 +1,10 @@
+import { TCallType } from '../messengerTypes/Communications';
+
 export interface MediaConnectionState {
     //common
     mediaCall: false,
     onGoingCall: false,
-    callType: 'video' | 'audio' | 'stream' | null,
+    callType: TCallType | null,
     //receiver of the call request
     incomingCall: false,
     remoteSignal: any,

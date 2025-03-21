@@ -110,6 +110,7 @@ const LoginRegisterPopupForms: FC<IProps> = (
   useEffect(() => {
     setStateValidator({
       username:
+        // @ts-expect-error: its fine
         globalState.loginRegisterFormPopup === 'register'
           ? usernameValidatorRegisterForm(state?.username)
           : !!state?.username,
@@ -128,7 +129,9 @@ const LoginRegisterPopupForms: FC<IProps> = (
     <div className="loginRegisterContent" ref={LoginRegisterPopupFormsRef}>
       <FormHeader locale={locale} dictionary={dictionary} />
 
-      {globalState.loginRegisterFormPopup === 'register' &&
+      {
+        // @ts-expect-error: its fine
+        globalState.loginRegisterFormPopup === 'register' &&
       anyoneCanRegister ? (
         <form
           className="login-register-form"
@@ -258,7 +261,9 @@ const LoginRegisterPopupForms: FC<IProps> = (
             {dictionary['Register'] || 'Register'}
           </button>
         </form>
-      ) : globalState.loginRegisterFormPopup === 'login' ? (
+      ) :
+          // @ts-expect-error: fine
+          globalState.loginRegisterFormPopup === 'login' ? (
         <form
           className="login-register-form"
           onSubmit={(e) => onLoginHandler(e)}

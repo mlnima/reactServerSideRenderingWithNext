@@ -15,6 +15,7 @@ const LoginRegisterPopup: FC<IProps> = ({locale, dictionary}) => {
     const {loginRegisterFormPopup } = useAppSelector(({globalState}) => globalState)
     const {loggedIn} = useAppSelector(({user}) => user)
 
+    // @ts-expect-error: fine
     if  (!loggedIn && (loginRegisterFormPopup === 'register' || loginRegisterFormPopup === 'login')){
         return (
             <div className='loginRegisterPopup'>

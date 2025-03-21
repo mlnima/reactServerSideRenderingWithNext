@@ -1,9 +1,9 @@
 import React, { useState, useRef, ChangeEvent} from 'react';
 import styled from "styled-components";
-import {useAppDispatch} from "@store/hooks";
-import {updateSettingAction} from "@store/reducers/settingsReducer";
-import {loading} from "@store/reducers/globalStateReducer";
-import {getYoutubeDataScrapperAction} from "@store/reducers/postsReducer";
+import {useAppDispatch} from "@storeDashboard/hooks";
+import {updateSettingAction} from "@storeDashboard/reducers/settingsReducer";
+import {loading} from "@storeDashboard/reducers/globalStateReducer";
+import {getYoutubeDataScrapperAction} from "@storeDashboard/reducers/postsReducer";
 
 let StyledDiv = styled.div`
   .admin-import-page-youtube {

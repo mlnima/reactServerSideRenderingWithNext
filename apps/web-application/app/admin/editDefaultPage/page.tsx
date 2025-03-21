@@ -177,7 +177,7 @@ const Page: React.FC<PropTypes> = () => {
               value={fieldsData?.customScriptsAsString || ''}
               className={'initialSettings-editor'}
               //@ts-ignore
-              onChange={(e: any) => onChangeHandler(e)}
+              onParentChangeHandler={(e: any) => onChangeHandler(e)}
               height={'60vh'}
               width={'100%'}
             />

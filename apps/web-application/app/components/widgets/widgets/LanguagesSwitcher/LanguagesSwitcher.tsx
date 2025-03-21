@@ -54,6 +54,7 @@ const LanguagesSwitcher: FC<IProps> = ({ locale }) => {
     <div className={'languagesSwitcherWidget'}>
       <div className={'languagesSwitcherWidgetActiveLanguage'}>
         <button type={'button'} onClick={() => setIsOpen(!isOpen)}>
+
           <span> {languagesMapOrigin?.[locale] || locale}</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -84,6 +85,7 @@ const LanguagesSwitcher: FC<IProps> = ({ locale }) => {
                 className={'languagesItem'}
                 role="menuitem"
               >
+
                 {languagesMapOrigin?.[locale] || locale}
                 {/*{locale.toUpperCase()}*/}
               </button>

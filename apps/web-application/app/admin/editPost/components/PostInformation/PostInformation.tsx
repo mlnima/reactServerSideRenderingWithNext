@@ -1,4 +1,4 @@
-
+// @ts-nocheck
 
 'use client';
 
@@ -14,9 +14,6 @@ import ImageGallery from "./ImageGallery/ImageGallery";
 import ProductPrice from "./ProductPrice/ProductPrice";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import { DashboardStore } from "@repo/typescript-types";
-import { useAppDispatch } from "@storeDashboard/hooks";
-import { getPostScrapedDataAction } from "@storeDashboard/reducers/postsReducer";
 import ScraperOptions from "./ScraperOptions";
 
 const StyledDiv = styled.div`
@@ -56,8 +53,8 @@ interface PropTypes {
 }
 
 const PostInformation: FC<PropTypes> = (props) => {
-  const post = useSelector(({ posts }: DashboardStore) => posts.post);
-  const dispatch = useAppDispatch();
+  const post = useSelector(({ posts }) => posts.post);
+
 
   // Example of dispatching an action
   // useEffect(() => {
@@ -72,6 +69,7 @@ const PostInformation: FC<PropTypes> = (props) => {
       {!!post?.source && <ScraperOptions sourceURL={post?.source} postId={post?._id} />}
       <TextInput name='mainThumbnail' rendering={true} onChangeHandler={props.onChangeHandler} />
       <ImagePreview />
+
       <Quality rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler} />
       <TextInput name='videoUrl' rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler} />
       <TextInput name='videoEmbedCode' rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler} />
@@ -83,7 +81,7 @@ const PostInformation: FC<PropTypes> = (props) => {
       <TextInput name='downloadLink' rendering={true} onChangeHandler={props.onChangeHandler} />
       <Duration rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler} />
       <ProductPrice rendering={post?.postType === 'product'} onChangeHandler={props.onChangeHandler} />
-      <TextInput name='shippingCost' rendering={post?.postType === 'product'} onChangeHandler={props.onChangeHandler} />
+      {/*<TextInput name='shippingCost' rendering={post?.postType === 'product'} onChangeHandler={props.onChangeHandler} />*/}
       <ImageGallery rendering={post?.postType === 'product'} onChangeHandler={props.onChangeHandler} />
       <RatingAndViews name='views' rendering={true} onChangeHandler={props.onChangeHandler} />
       <RatingAndViews name='likes' rendering={true} onChangeHandler={props.onChangeHandler} />

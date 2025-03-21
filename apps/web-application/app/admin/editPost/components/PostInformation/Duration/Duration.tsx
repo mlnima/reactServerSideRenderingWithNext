@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { DashboardStore } from '@repo/typescript-types';
 
 interface DurationPropTypes {
   onChangeHandler: any;
@@ -10,7 +9,7 @@ interface DurationPropTypes {
 }
 
 const Duration: React.FC<DurationPropTypes> = ({ onChangeHandler, rendering }) => {
-  const duration = useSelector((state: DashboardStore) => state.posts.post?.duration);
+  const duration = useSelector(({posts}) => posts.post?.duration);
 
   if (rendering) {
     return (

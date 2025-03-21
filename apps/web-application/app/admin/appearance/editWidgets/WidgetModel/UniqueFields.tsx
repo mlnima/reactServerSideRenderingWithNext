@@ -253,7 +253,7 @@ const UniqueFields: FC<UniqueFieldsPropTypes> = ({
                             theme={'vs-dark'}
                             defaultValue={widgetData.uniqueData?.adCode}
                             value={widgetData.uniqueData?.adCode}
-                            onChange={onUniqueDataChangeHandler}
+                            onParentChangeHandler={onUniqueDataChangeHandler}
                         />
                     </div>
 

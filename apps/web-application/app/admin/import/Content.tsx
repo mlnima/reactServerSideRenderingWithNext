@@ -1,11 +1,10 @@
 import React, {useState, useRef} from 'react';
 import {useSelector} from "react-redux";
-import {DashboardStore} from "@repo/typescript-types";
-import {createNewPostAction} from "@store/reducers/postsReducer";
-import {useAppDispatch} from "@store/hooks";
+import {createNewPostAction} from "@storeDashboard/reducers/postsReducer";
+import {useAppDispatch} from "@storeDashboard/hooks";
 
 const ImportContent = () => {
-    const userData = useSelector(({users}: DashboardStore) => users.userData)
+    const userData = useSelector(({users}) => users.userData)
     const dataPreview = useRef(null)
     const dispatch = useAppDispatch()
     const [state, setState] = useState({
@@ -49,7 +48,7 @@ const ImportContent = () => {
                         }
                     }) : []
                     //@ts-ignore
-                    dispatch(createNewPostAction({data: post, router: null}))
+                    dispatch(createNewPostAction({newPostData: post, router: null}))
 
                 }
             }

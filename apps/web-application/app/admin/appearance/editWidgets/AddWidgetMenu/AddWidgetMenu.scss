@@ -1,0 +1,38 @@
+#adminAddWidgetMenu{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+
+  .add-new-widget-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .add-widget-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .import-export {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+
+    .export-widgets {
+      margin: 5px 20px;
+    }
+
+    .import-widgets {
+      margin: 5px 20px;
+    }
+  }
+}

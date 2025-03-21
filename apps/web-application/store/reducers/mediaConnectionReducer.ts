@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "@store/store";
-import {MediaConnectionState} from "@repo/typescript-types";
+import {MediaConnectionState, TCallType} from "@repo/typescript-types";
 
 const initialState: MediaConnectionState = {
     mediaCall: false,
@@ -19,17 +19,17 @@ const initialState: MediaConnectionState = {
 };
 
 interface IInitialIncomingCallAction {
-    callType: 'video' | 'audio' | 'stream',
+    callType: TCallType,
     remoteSignal: any,
     callerData: any
 }
 
 interface IInitialOutGoingCallAction {
-    callType?: 'video' | 'audio' | 'stream',
+    callType?: TCallType,
 }
 
 interface IInitialAcceptIncomingCall {
-    callType: 'video' | 'audio' | 'stream',
+    callType:TCallType,
     localStream: MediaStream | null,
     remoteStream: MediaStream | null,
 }

@@ -3,7 +3,7 @@ import { IGetUserPagePosts } from '@lib/actions/database/operations/types';
 import { connectToDatabase, postSchema } from '@repo/db';
 import getSettings from '@lib/actions/database/operations/settings/getSettings';
 import { postFieldRequestForCards } from '@repo/data-structures';
-import { IInitialSettings, Post } from '@repo/typescript-types';
+import { IInitialSettings, IPost } from '@repo/typescript-types';
 import { unstable_cacheTag as cacheTag } from 'next/cache';
 import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 
@@ -33,7 +33,7 @@ const getUserPagePosts = async (
         },
       )
       .populate([{ path: 'thumbnail', select: { filePath: 1 } }])
-      .lean<Post[]>();
+      .lean<IPost[]>();
 
     const transformedPosts = posts.map((doc) => ({
       ...doc,

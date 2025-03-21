@@ -74,7 +74,7 @@ const dashboardGetComments = async (
 
   const transformedComments = comments.map((doc) => ({
     ...doc,
-    // @ts-expect-error: its fine
+
     _id: doc._id.toString(),
     author: {
       ...doc.author,

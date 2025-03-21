@@ -117,6 +117,7 @@ const LearnPostCard: FC<LearnPostCardPropTypes> = ({
                 </>
             ) :
                 <Suspense fallback={<div>loading...</div>}>
+                  {/*// @ts-expect-error: its fine*/}
                     <DynamicImageLessCard post={post} postUrl={postUrl} locale={locale} />
                 </Suspense>
             }

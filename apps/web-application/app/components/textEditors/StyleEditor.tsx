@@ -80,7 +80,7 @@ const StyleEditor:FC<PropTypes> = props => {
                     //@ts-ignore
                     value={design?.[props.name]}
                     className={'style-section-editor'}
-                    onChange={onChangeHandler}
+                    onParentChangeHandler={onChangeHandler}
                     height={'80vh'}
 
                 />

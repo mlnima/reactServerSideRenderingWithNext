@@ -12,7 +12,6 @@ interface TableBodyPropTypes {
   assetPageData: any;
   selectedItems: string[];
   setSelectedItems: (items: string[]) => void; // Type the setSelectedItems function
-  currentQuery: { [key: string]: string };
   tableItemsType: string[];
 }
 

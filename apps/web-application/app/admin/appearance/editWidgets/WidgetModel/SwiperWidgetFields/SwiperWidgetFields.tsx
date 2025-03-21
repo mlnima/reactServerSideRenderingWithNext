@@ -92,7 +92,7 @@ const SwiperWidgetFields: FC<SliderWidgetTypeFieldsPropTypes> =
                             defaultValue={JSON.stringify(uniqueData?.swiperConfigDesktop, null, '\t')}
                             value={JSON.stringify(uniqueData?.swiperConfigDesktop, null, '\t')}
                             className={'details'}
-                            onChange={onUniqueDataJsonChangeHandler}
+                            onParentChangeHandler={onUniqueDataJsonChangeHandler}
                         />
                     </>
                     : null
@@ -119,7 +119,7 @@ const SwiperWidgetFields: FC<SliderWidgetTypeFieldsPropTypes> =
                             defaultValue={JSON.stringify(uniqueData?.swiperConfigMobile, null, '\t')}
                             value={JSON.stringify(uniqueData?.swiperConfigMobile, null, '\t')}
                             className={'details'}
-                            onChange={onUniqueDataJsonChangeHandler}
+                            onParentChangeHandler={onUniqueDataJsonChangeHandler}
                         />
                     </>
                     : null

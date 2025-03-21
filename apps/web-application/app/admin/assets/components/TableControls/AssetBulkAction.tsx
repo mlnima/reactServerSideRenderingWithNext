@@ -19,7 +19,7 @@ const Styles = styled.div`
 
 interface AssetBulkActionPropTypes {
   selectedItems: string[];
-  setSelectedItems: (items: string[]) => void; // Type the setSelectedItems function
+  setSelectedItems:  React.Dispatch<React.SetStateAction<string[]>>,
 }
 
 const AssetBulkAction: FC<AssetBulkActionPropTypes> = ({ selectedItems, setSelectedItems }) => {

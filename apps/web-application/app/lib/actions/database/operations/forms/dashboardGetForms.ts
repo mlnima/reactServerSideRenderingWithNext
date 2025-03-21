@@ -58,21 +58,9 @@ const dashboardGetForms = async (
         sort: sort || '-updatedAt',
       }).lean();
 
-    console.log(`forms=> `,typeof forms[0].createdAt)
-
     const transformedForms = forms.map((doc) => deepConvertObjectIdsToStrings(doc));
 
-
     const totalCount = await formSchema.countDocuments({});
-
-    // const transformedForms = forms.map((doc) => ({
-    //   ...doc,
-    //   _id: doc._id.toString(),
-    //   widgetId: doc.widgetId.toString(),
-    // }));
-
-
-
 
     return successResponse({
       data: {

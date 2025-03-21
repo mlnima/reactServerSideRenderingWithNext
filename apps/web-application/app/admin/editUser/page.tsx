@@ -74,7 +74,7 @@ const User = () => {
   };
 
   const onNewAPIKeyRequest = () => {
-    dispatch(generateNewAPIKeyAction(null));
+    dispatch(generateNewAPIKeyAction());
     dispatch(getUserDataAction(userId));
   };
 

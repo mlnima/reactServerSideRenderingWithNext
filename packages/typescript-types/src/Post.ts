@@ -41,6 +41,7 @@ interface Base {
     redirectLink?:string,
     videoTrailerUrl?:string,
     price?:string,
+    priceType?:string,
     duration?:string,
     quality?:string,
     _id:string,

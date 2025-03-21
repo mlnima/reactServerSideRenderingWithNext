@@ -1,4 +1,5 @@
 import {User} from "./User";
+import { IPost } from './Post';
 
 interface Base {
     _id?: string,
@@ -12,7 +13,7 @@ interface Base {
 
 export interface IComment extends Base {
     author:  User,
-    onDocumentId:  string,
+    onDocumentId:  IPost | string,
     _id:  string,
     reply?: [IComment]
 }

@@ -21,7 +21,7 @@ const AdvertiseWidgetModelFields: FC<AdvertiseWidgetModelFieldsPropTypes> =
                               theme={'vs-dark'}
                               defaultValue={uniqueData?.adCode}
                               value={uniqueData?.adCode}
-                              onChange={onUniqueDataChangeHandler}
+                              onParentChangeHandler={onUniqueDataChangeHandler}
                 />
             </div>
         )

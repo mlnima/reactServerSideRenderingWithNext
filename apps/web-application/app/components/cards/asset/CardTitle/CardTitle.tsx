@@ -15,6 +15,7 @@ interface CardTitlePropTypes {
 
 const CardTitle: FC<CardTitlePropTypes> = ({title, url, targetLink, useLink = true,useIcon=false}) => {
 
+    if (!title) return null ;
     return (
         <h2 className={'cardTitle'}
         style={{

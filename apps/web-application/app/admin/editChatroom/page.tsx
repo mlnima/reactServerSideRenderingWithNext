@@ -6,7 +6,6 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useAppDispatch } from "@storeDashboard/hooks";
 import { editChatroomFieldAction, getChatroomAction } from "@storeDashboard//reducers/chatroomsReducer";
 import { useSelector } from "react-redux";
-import { DashboardStore } from "@repo/typescript-types";
 import { dashboardAPIRequestUpdateChatroom, dashboardAPIRequestCreateChatroom, dashboardAPIRequestDeleteChatroom } from "@repo/api-requests";
 
 const Style = styled.div`
@@ -35,7 +34,7 @@ const Chatroom: React.FC<PropTypes> = ({}) => {
   const isNewChatroom = useMemo(() => searchParams.get('new'), [searchParams]);
 
   const dispatch = useAppDispatch();
-  const chatroomData = useSelector(({ chatrooms }: DashboardStore) => chatrooms.chatroom);
+  const chatroomData = useSelector(({ chatrooms }) => chatrooms.chatroom);
 
   useEffect(() => {
     if (chatroomId) {

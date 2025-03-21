@@ -46,7 +46,7 @@ const getWidgets = async (positions: string[], locale: string): Promise<{ [key: 
   }
 
 
-// @ts-expect-error: need fix
+
   result = widgets.reduce((widgetInPositions: Record<string, IWidget[]>, widget: IWidget) => {
     const position = widget?.data?.position;
     if (!widgetInPositions[position]) {

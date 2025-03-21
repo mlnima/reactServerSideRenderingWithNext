@@ -4,7 +4,7 @@ import React, { ChangeEvent, useEffect, useMemo, useState } from 'react';
 import Editor from "@monaco-editor/react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import { DashboardStore } from "@repo/typescript-types";
+
 import {
     createNewPageAction,
     deletePageAction,
@@ -36,6 +36,7 @@ let AdminEditCustomPageStyledDiv = styled.div`
 `;
 
 const Page = (props: any) => {
+
     const dispatch = useAppDispatch();
     const searchParams = useSearchParams();
     const router = useRouter();
@@ -43,7 +44,7 @@ const Page = (props: any) => {
     const [openStyleEditor, setOpenStyleEditor] = useState(false);
     const pageId = useMemo(() => searchParams.get('id'), [searchParams]);
 
-    const pageData = useSelector(({ pages }: DashboardStore) => pages.page);
+    const pageData = useSelector(({ pages }) => pages.page);
 
     useEffect(() => {
         if (pageId) {
@@ -77,10 +78,6 @@ const Page = (props: any) => {
 
     return (
         <>
-            <a href={'/dashboard/page?new=1'} className={'btn btn-primary'}>
-                New Page
-            </a>
-
             <AdminEditCustomPageStyledDiv className={'page-container'}>
                 <div className={'form-group'}>
                     <p>Page Name (without Space):</p>

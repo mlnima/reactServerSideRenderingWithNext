@@ -36,6 +36,7 @@ import { IPage, PageSearchParams, PageParams, IPageProps, ILayoutProps } from '.
 import { IWidgetData } from './src/widgets/Widget';
 import { WidgetSettingsPropTypes, ISuggestion, UniqueDataTypes } from './src/widgets/Widget';
 
+
 import { MenuItem } from './src/widgets/MenuWidget/MenuItem';
 import {
   User,
@@ -52,6 +53,7 @@ import { CommentRaw } from './src/Comment';
 import { NewComment } from './src/Comment';
 import { IEmail } from './src/IEmail';
 import { IMessengerConversation } from './src/messengerTypes/IMessengerConversation';
+import { TCallType } from './src/messengerTypes/Communications';
 import { IMessengerConversationMessage } from './src/messengerTypes/IMessengerConversationMessage';
 import { MediaConnectionState } from './src/storeTypes/MediaConnectionState';
 import { IClearCache } from './src/clearCaches';
@@ -61,7 +63,7 @@ import './src/global';
 
 
 export type {
-
+  TCallType,
   ILoadOlderMessages,
   PageParams,
   IPageProps,

@@ -76,7 +76,6 @@ const WidgetWrapper: FC<IProps> = ({ data, widgetId, isSidebar, dictionary, loca
         dayModeNightMode: DayModeNightMode,
     };
 
-    // @ts-expect-error: it's fine
     const WidgetToRender = data?.type && widgetMatcher.hasOwnProperty(data?.type) ? widgetMatcher[data.type] : null;
 
     const widgetExtraClass = data?.extraClassName ? ` ${data?.extraClassName}` : '';

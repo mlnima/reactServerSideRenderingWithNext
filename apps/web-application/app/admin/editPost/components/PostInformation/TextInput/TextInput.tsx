@@ -1,83 +1,43 @@
 'use client';
-
-import { convertVariableNameToName } from "@repo/utils";
-import styled from "styled-components";
-import { useSelector } from "react-redux";
-import { DashboardStore } from "@repo/typescript-types";
+import { convertVariableNameToName } from '@repo/utils';
+import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import { DashboardStore } from '@repo/typescript-types';
+import { ChangeEvent } from 'react';
 
 let StyledTextarea = styled.textarea`
-  outline: none;
-  padding: 3px 5px;
-  height: 30px;
-  width: 90%;
+    outline: none;
+    padding: 3px 5px;
+    height: 30px;
+    width: 90%;
 `;
 
 interface PropTypes {
-  onChangeHandler: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onChangeHandler: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   rendering: boolean;
-  name: string;
+  name: 'source' | 'mainThumbnail' | 'videoUrl' | 'videoEmbedCode' | 'redirectLink' | 'downloadLink' | 'videoTrailerUrl';
 }
 
-const TextInput = (props: PropTypes) => {
+const TextInput = ({ onChangeHandler, rendering, name }: PropTypes) => {
   const post = useSelector(({ posts }: DashboardStore) => posts.post);
 
-  if (props.rendering) {
-    return (
-      <div className='post-information-section'>
-        <div className="title">
-          <p>{convertVariableNameToName(props.name)}</p>
-        </div>
-        <div className="editor">
-          <StyledTextarea
-            className={'primaryInput'}
-            name={props.name}
-            value={post?.[props.name] || ''}
-            onChange={e => props.onChangeHandler(e)}
-          />
-        </div>
+  if (!rendering || !post) return null;
+
+  return (
+    <div className="post-information-section">
+      <div className="title">
+        <p>{convertVariableNameToName(name)}</p>
       </div>
-    );
-  } else {
-    return null;
-  }
+      <div className="editor">
+        <StyledTextarea
+          className={'primaryInput'}
+          name={name}
+          value={post?.[name] || ''}
+          onChange={e => onChangeHandler(e)}
+        />
+      </div>
+    </div>
+  );
 };
 
 export default TextInput;
-
-// import {convertVariableNameToName} from "@repo/utils";
-// import styled from "styled-components";
-// import {useSelector} from "react-redux";
-// import {DashboardStore} from "@repo/typescript-types";
-// import {FC} from "react";
-//
-// let StyledTextarea = styled.textarea`
-//   outline: none;
-//   padding: 3px 5px;
-//   height: 30px;
-//   width: 90%;
-// `
-//
-// interface PropTypes{
-//     onChangeHandler:Function,
-//     rendering:boolean
-//     name:string,
-// }
-// const TextInput:FC<PropTypes> = props => {
-//     const post = useSelector(({posts}: DashboardStore) => posts.post);
-//     if (props.rendering) {
-//         return (
-//             <div className='post-information-section'>
-//                 <div className="title">
-//                     <p>{convertVariableNameToName(props.name)}</p>
-//                 </div>
-//                 <div className="editor">
-//                     {/*//@ts-ignore*/}
-//                     <StyledTextarea className={'primaryInput'} name={props.name} value={post[props.name] || ''}
-//                                     onChange={e => props.onChangeHandler(e)}/>
-//                 </div>
-//             </div>
-//         );
-//     } else return null
-//
-// };
-// export default TextInput;

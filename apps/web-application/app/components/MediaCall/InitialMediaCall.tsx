@@ -11,7 +11,7 @@ import {useSelector} from "react-redux";
 import {User} from "@repo/typescript-types";
 
 interface PropTypes {
-    callType: 'video' | 'audio' | 'stream' | null,
+    callType: 'video' | 'audio' | 'stream'
     outGoingCall: boolean,
     callAccepted: boolean,
 }

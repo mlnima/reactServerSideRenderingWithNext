@@ -2,9 +2,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import { useRouter, useSearchParams } from 'next/navigation';
+import {  useSearchParams } from 'next/navigation';
 import { LanguagesOptions } from "@repo/ui";
-import { DashboardStore } from "@repo/typescript-types";
 import { useAppDispatch } from "@storeDashboard/hooks";
 import { deleteMetaAction, editMetaAction, getMetaAction, updateMetaAction } from "@storeDashboard/reducers/postsReducer";
 
@@ -65,7 +64,7 @@ const AdminMetaPageStyledDiv = styled.div`
 
 const Meta = () => {
   const dispatch = useAppDispatch();
-  const meta = useSelector(({ posts }: DashboardStore) => posts.meta);
+  const meta = useSelector(({ posts }) => posts.meta);
   const searchParams = useSearchParams()
 
   const { id, newMeta, metaType, lang } = useMemo(() => ({
@@ -284,7 +283,6 @@ export default Meta;
 // import styled from "styled-components";
 // import {useSelector} from "react-redux";
 // import {LanguagesOptions} from "@repo/ui";
-// import {DashboardStore} from "@repo/typescript-types";
 // import {useAppDispatch} from "@store/hooks";
 // import {useSearchParams} from "react-router-dom";
 // import {deleteMetaAction, editMetaAction, getMetaAction, updateMetaAction} from "@store/reducers/postsReducer";

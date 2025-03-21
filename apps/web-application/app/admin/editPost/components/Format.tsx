@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { editPostAction } from '@storeDashboard/reducers/postsReducer';
 import { postTypes } from '@repo/data-structures';
-import { DashboardStore } from '@repo/typescript-types';
 import { useAppDispatch } from '@storeDashboard/hooks';
 
 const FormatStyledDiv = styled.div`
@@ -18,7 +17,7 @@ const FormatStyledDiv = styled.div`
 
 const Format = () => {
   const dispatch = useAppDispatch();
-  const post = useSelector(({ posts }: DashboardStore) => posts.post);
+  const post = useSelector(({ posts }) => posts.post);
 
   const onChangeHandlerAndSetPreferPostTypeToLocalStorage = (e: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(editPostAction({ [e.target.name]: e.target.value }));
@@ -50,7 +49,7 @@ export default Format;
 // import {useSelector} from "react-redux";
 // import { editPostAction} from "@store/reducers/postsReducer";
 // import {postTypes} from "@repo/data-structures";
-// import {DashboardStore} from "@repo/typescript-types";
+
 // import {useAppDispatch} from "@store/hooks";
 //
 // const FormatStyledDiv = styled.div`
@@ -63,7 +62,7 @@ export default Format;
 //
 // const Format = () => {
 //     const dispatch = useAppDispatch()
-//     const post = useSelector(({posts}:DashboardStore) => posts.post);
+//     const post = useSelector(({posts}) => posts.post);
 //
 //     const onChangeHandlerAndSetPreferPostTypeToLocalStorage = (e: React.ChangeEvent<HTMLSelectElement>) => {
 //         dispatch(editPostAction({

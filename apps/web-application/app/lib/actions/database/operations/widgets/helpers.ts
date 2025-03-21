@@ -13,14 +13,15 @@ export const findWidgetPosts = async (widgetData: any): Promise<{ posts: {}[]; t
         initialSettings: IInitialSettings | undefined;
       }>,
     );
-    const contentPerPage = initialSettings?.contentSettings?.contentPerPage || 20;
+
+    const fallbackLimit = initialSettings?.contentSettings?.contentPerPage || 20;
 
     const metaId = widgetData?.uniqueData?.selectedMetaForPosts || widgetData?.selectedMetaForPosts;
     const postType = widgetData?.uniqueData?.postType || widgetData?.postType;
     const sort = widgetData?.uniqueData?.sort || widgetData?.sort;
     const metaQuery = metaId ? [{ $or: [{ categories: { $in: metaId } }, { tags: { $in: metaId } }, { actors: { $in: metaId } }] }] : [];
     const postTypeQuery = postType ? [{ postType }] : [];
-    const limit = widgetData?.uniqueData?.count || widgetData?.count || contentPerPage;
+    const limit = widgetData?.uniqueData?.count || widgetData?.count || fallbackLimit;
     const sortQuery = !sort || sort === 'updatedAt' ? { updatedAt: -1 } : clientAllowedSortOptions.includes(sort) ? { [sort]: -1 } : {};
 
     const findQuery = {
@@ -69,12 +70,11 @@ export const findWidgetMetas = async (widgetData: any, withCount?: boolean): Pro
         initialSettings: IInitialSettings | undefined;
       }>,
     );
-    const numberOfCardsPerPage = initialSettings?.contentSettings?.contentPerPage || 20;
-
+    const fallbackLimit = initialSettings?.contentSettings?.contentPerPage || 20;
     const statusQuery = { status: 'published' };
     const type = { type: widgetData?.metaType || widgetData?.uniqueData?.metaType };
     const countQuery = { count: { $gt: 0 } };
-    const limit = widgetData?.uniqueData?.count || contentPerPage;
+    const limit = widgetData?.uniqueData?.count || fallbackLimit;
     const sortQuery =
       widgetData?.sort || widgetData?.uniqueData?.sort
         ? { updatedAt: -1 }

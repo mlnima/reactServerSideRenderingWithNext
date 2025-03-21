@@ -4,56 +4,14 @@ import React, {useState, useEffect, useMemo} from 'react';
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {widgetsStaticPositions} from "@repo/data-structures";
-import {DashboardStore} from "@repo/typescript-types";
 import {useAppDispatch} from "@storeDashboard/hooks";
 import {getWidgetsAction} from "@storeDashboard/reducers/widgetsReducer";
 import WidgetPositionsSelect from './WidgetPositionsSelect'
 import WidgetGroupByPosition from './WidgetGroupByPosition'
 import AddWidgetMenu from './AddWidgetMenu/AddWidgetMenu'
+import './editWidgets.scss'
 
-let StyledDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
 
-  
-  .widget-setting {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-
-    .top-panel {
-      width: 100%;
-    }
-
-    .filter-positions {
-      width: 100%;
-    }
-
-    .widgets {
-      min-height: 600px;
-      margin: auto;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      flex-wrap: wrap;
-    }
-  }
-
-  @media only screen and (min-width: 768px) {
-    .widget-setting {
-      h2 {
-        justify-self: end;
-        width: 98%;
-      }
-    }
-  }
-`
 
 const AdminWidgets = () => {
 
@@ -63,7 +21,7 @@ const AdminWidgets = () => {
         ({
              widgets,
              globalState
-         }: DashboardStore) => {
+         }) => {
 
             return {
                 customPages: globalState?.customPages.reduce(
@@ -116,7 +74,7 @@ const AdminWidgets = () => {
     }, []);
 
     return (
-        <StyledDiv className='admin-widgets-page'>
+        <div id={'editWidgetsPage'} className='admin-widgets-page'>
             <h1>Widgets Settings</h1>
             <div className='widget-setting'>
                 <h2>Add New Widget:</h2>
@@ -147,7 +105,7 @@ const AdminWidgets = () => {
                     })}
                 </div>
             </div>
-        </StyledDiv>
+        </div>
     );
 };
 

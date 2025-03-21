@@ -30,7 +30,7 @@ const AssetSearch: FC = () => {
     router.push(pathname + '?' + createQueryString([
       {name:'keyword', value:keyword},
       {name:'page', value:'1'},
-    ], searchParams));
+    ], searchParams), { scroll: false });
   };
 
   const onDeleteKeywordHandler = () => {

@@ -50,8 +50,7 @@ const RootLayout = async (props: ILayoutProps) => {
       initialSettings: IInitialSettings | undefined
     }>
   );
-  // @ts-expect-error: need type fix
-  const { layoutSettings = {}, headDataSettings = {} } = initialSettings;
+
 
   const widgets = await getWidgets(
     ['footer', 'header', 'topBar', 'navigation'],
@@ -68,19 +67,19 @@ const RootLayout = async (props: ILayoutProps) => {
     <body className={`dark `} style={{}}>
     <ReduxProvider>
       <div className="layout">
-        {layoutSettings?.topbar && (
+        {initialSettings?.layoutSettings?.topbar && (
           <TopbarWidgetArea
             {...widgetAreasSharedProps}
             widgets={widgets?.topBar}
           />
         )}
-        {layoutSettings?.header && (
+        {initialSettings?.layoutSettings?.header && (
           <HeaderWidgetArea
             {...widgetAreasSharedProps}
             widgets={widgets?.header}
           />
         )}
-        {layoutSettings?.navigation && (
+        {initialSettings?.layoutSettings?.navigation && (
           <NavigationWidgetArea
             {...widgetAreasSharedProps}
             widgets={widgets?.navigation}
@@ -89,7 +88,7 @@ const RootLayout = async (props: ILayoutProps) => {
         <div id={'page'} className={'App'}>
           {props.children}
         </div>
-        {layoutSettings?.footer && (
+        {initialSettings?.layoutSettings?.footer && (
           <FooterWidgetArea
             {...widgetAreasSharedProps}
             widgets={widgets?.footer}
@@ -107,7 +106,7 @@ const RootLayout = async (props: ILayoutProps) => {
 
       <GoogleAnalytics
         googleAnalyticsId={
-          headDataSettings?.googleAnalyticsId
+          initialSettings?.headDataSettings?.googleAnalyticsId
         }
       />
       <LoadingComponent />
@@ -117,9 +116,9 @@ const RootLayout = async (props: ILayoutProps) => {
       <StyledComponentsRegistry>
         <GlobalCustomStyles
           primaryModeColors={
-            layoutSettings?.primaryModeColors || ''
+            initialSettings?.layoutSettings?.primaryModeColors || ''
           }
-          customStyles={layoutSettings?.customStyles}
+          customStyles={initialSettings?.layoutSettings?.customStyles}
         />
       </StyledComponentsRegistry>
       {initialSettings && <StoreDataInitializer initialSettings={initialSettings} />}

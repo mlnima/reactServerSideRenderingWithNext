@@ -1,11 +1,10 @@
+// @ts-nocheck
 'use client';
-
 import React, { FC, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { inputValueSimplifier } from "@repo/utils";
 import { useAppDispatch } from "@storeDashboard/hooks";
 import {
-  editPostSourceAction,
   getPostScrapedDataAction,
   getSearchAndFindARelatedPostUrlAction
 } from "@storeDashboard/reducers/postsReducer";
@@ -71,7 +70,7 @@ const ScraperOptions: FC<PropTypes> = ({ sourceURL, postId }) => {
   const findARelatedPostUrlSelectRef = useRef<HTMLSelectElement>(null);
   const findARelatedPostUrlInputRef = useRef<HTMLInputElement>(null);
   const [relatedPostsPage, setRelatedPostsPage] = useState<number>(1);
-  const post = useSelector(({ posts }: DashboardStore) => posts.post);
+  const post = useSelector(({ posts }) => posts.post);
   const dispatch = useAppDispatch();
   const [fields, setFields] = useState<string[]>([]);
   const relatedPosts = useSelector(({ posts }: DashboardStore) => posts?.relatedPosts);

@@ -60,7 +60,6 @@ const Component: FC<IProps> = ({imageInputRef,setDraftMessage}) => {
                     ...prevState,
                     imageContent: resizedImageBase64
                 }))
-                // @ts-expect-error: need to be tested and checked for ts type error
                 event.target.value = null;
             } catch (error) {
                 console.error(error);

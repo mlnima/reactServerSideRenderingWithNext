@@ -116,7 +116,7 @@ router.get('/v1/user/initialPageData', authMiddleware,cacheSuccesses, UserContro
 // router.patch('/v1/user/unfollow', authMiddleware, UserController.unfollow);
 
 router.get('/dashboard/user/newAPIKey', adminAuthMiddleware, UserController.dashboardNewApiKey);
-router.get('/dashboard/users', adminAuthMiddleware, UserController.dashboardGetUsers);
+// router.get('/dashboard/users', adminAuthMiddleware, UserController.dashboardGetUsers);
 router.get('/dashboard/user', adminAuthMiddleware, UserController.dashboardGetUser);
 router.delete('/dashboard/user', adminAuthMiddleware, UserController.dashboardDeleteUser);
 //---------------------widgets----------------------------

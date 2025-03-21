@@ -38,7 +38,7 @@ const DayModeNightModeFields = (
           defaultValue={dayNightModeData || ''}
           value={dayNightModeData}
           className={'customStylesTextarea'}
-          onChange={onChangeHandler}
+          onParentChangeHandler={onChangeHandler}
         />
       </div>
     </>

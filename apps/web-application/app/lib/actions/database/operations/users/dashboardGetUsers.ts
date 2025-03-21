@@ -75,7 +75,7 @@ const dashboardGetUsers = async (
 
     const transformedUsers = users.map((doc)=>({
       ...doc,
-      // @ts-expect-error: its fine
+
       _id: doc._id.toString(),
     }))
 

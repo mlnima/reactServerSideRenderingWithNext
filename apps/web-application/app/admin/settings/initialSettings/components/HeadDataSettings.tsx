@@ -11,8 +11,8 @@ const Style = styled.div``;
 
 interface PropTypes {
     language: string;
-    onChangeHandler: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, section: string) => void;
-    onChangeHandlerWithTranslation: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, section: string) => void;
+    onChangeHandler: (e: React. ChangeEvent<HTMLInputElement | HTMLTextAreaElement | object>, key: string) => void;
+    onChangeHandlerWithTranslation: (e: React. ChangeEvent<HTMLInputElement | HTMLTextAreaElement | object>, key: string) => void;
     initialSettingsData: IInitialSettings;
 }
 
@@ -98,7 +98,8 @@ const HeadDataSettings: React.FC<PropTypes> = ({ onChangeHandler, onChangeHandle
                         defaultValue={initialSettingsData?.headDataSettings?.customHeadTags || ''}
                         value={initialSettingsData?.headDataSettings?.customHeadTags}
                         className={'initialSettings-editor'}
-                        onChange={(e: string) => onChangeHandler(e, 'headDataSettings')}
+                      // @ts-expect-error: need fix
+                        onParentChangeHandler={(e: object) => onChangeHandler(e, 'headDataSettings')}
                         height={'80vh'} />
                 }
             </div>
@@ -116,7 +117,8 @@ const HeadDataSettings: React.FC<PropTypes> = ({ onChangeHandler, onChangeHandle
                         defaultValue={initialSettingsData?.headDataSettings?.customScripts || ''}
                         value={initialSettingsData?.headDataSettings?.customScripts}
                         className={'initialSettings-editor'}
-                        onChange={(e: string) => onChangeHandler(e, 'headDataSettings')}
+                      // @ts-expect-error: need fix
+                        onParentChangeHandler={(e: string) => onChangeHandler(e, 'headDataSettings')}
                         height={'80vh'} />
                 }
             </div>

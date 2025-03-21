@@ -330,11 +330,11 @@ const MediaCall: FC = () => {
             <div className={'mediaCallContainer'}>
                 <div className={'blur-background'} />
                 <div className={'inner-content'} onClick={onScreenTapHandler} onTouchStartCapture={onScreenTapHandler}>
-                    {!onGoingCall && !incomingCall && !outGoingCall && (
+                    {!onGoingCall && !incomingCall && !outGoingCall && callType (
                         <InitialMediaCall callAccepted={callAccepted} outGoingCall={outGoingCall} callType={callType} />
                     )}
 
-                    {!onGoingCall && incomingCall && !callAccepted && (
+                    {!onGoingCall && incomingCall && !callAccepted && callType && (
                         <CallerInfo
                             profileImage={callerData.profileImage}
                             username={callerData.username}

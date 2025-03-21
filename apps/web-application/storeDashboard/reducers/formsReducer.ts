@@ -22,7 +22,7 @@ export const getFormsAction = createAsyncThunk(
     thunkAPI.dispatch(loading(false));
 
     if (!success) {
-      console.log(`getPostsAction error=> `, error);
+      console.log(`getFormsAction error=> `, error);
       thunkAPI.dispatch(
         setAlert({
           message,

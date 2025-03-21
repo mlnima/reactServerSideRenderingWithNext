@@ -32,7 +32,7 @@ const SliderWidgetFields: FC<PostSliderTypeWidgetModelFieldsPropTypes> =
                         defaultValue={JSON.stringify(uniqueData?.sliderConfig, null, '\t')}
                         value={JSON.stringify(uniqueData?.sliderConfig, null, '\t')}
                         className={'details'}
-                        onChange={onUniqueDataJsonChangeHandler}
+                        onParentChangeHandler={onUniqueDataJsonChangeHandler}
                     />
                     : null
                 }

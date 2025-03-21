@@ -136,7 +136,7 @@ const LayoutSettings: FC<PropTypes> = ({ onChangeHandler, initialSettingsData })
                         defaultValue={initialSettingsData?.layoutSettings?.customStyles || ''}
                         value={initialSettingsData?.layoutSettings?.customStyles}
                         className={'initialSettings-editor'}
-                        onChange={(e: string) => onChangeHandler(e, 'layoutSettings')}
+                        onParentChangeHandler={(e: string) => onChangeHandler(e, 'layoutSettings')}
                         height={'80vh'}
                     />
                 )}
@@ -153,7 +153,7 @@ const LayoutSettings: FC<PropTypes> = ({ onChangeHandler, initialSettingsData })
                         defaultValue={initialSettingsData?.layoutSettings?.primaryModeColors || ''}
                         value={initialSettingsData?.layoutSettings?.primaryModeColors}
                         className={'initialSettings-editor'}
-                        onChange={(e: string) => onChangeHandler(e, 'layoutSettings')}
+                        onParentChangeHandler={(e: string) => onChangeHandler(e, 'layoutSettings')}
                         height={'80vh'}
                     />
                 )}
@@ -170,7 +170,7 @@ const LayoutSettings: FC<PropTypes> = ({ onChangeHandler, initialSettingsData })
                         defaultValue={initialSettingsData?.layoutSettings?.secondaryModeColors || ''}
                         value={initialSettingsData?.layoutSettings?.secondaryModeColors}
                         className={'initialSettings-editor'}
-                        onChange={(e: string) => onChangeHandler(e, 'layoutSettings')}
+                        onParentChangeHandler={(e: string) => onChangeHandler(e, 'layoutSettings')}
                         height={'80vh'}
                     />
                 )}

@@ -21,11 +21,7 @@ const _updateSaveMetas = async (metas:any) => {
                 await metaSchema.findOneAndUpdate({name: updatedMeta.name}, {$set:{count}}).exec()
                 finalData = [...finalData, updatedMeta._id]
 
-                // await MetaSchema.findOneAndUpdate(findQuery, {$set:{...metaData}},{new:true, upsert: true}).exec().then(async meta=>{
-                //     const count = await PostSchema.countDocuments({$and:[{[meta.type]: meta._id},{status:'published'}]}).exec()
-                //     await MetaSchema.findOneAndUpdate({name: meta.name}, {$set:{count}}).exec()
-                //     finalData = [...finalData, meta._id]
-                // })
+
             }
         }
         return finalData
@@ -35,3 +31,10 @@ const _updateSaveMetas = async (metas:any) => {
 }
 
 export default _updateSaveMetas;
+
+
+// await MetaSchema.findOneAndUpdate(findQuery, {$set:{...metaData}},{new:true, upsert: true}).exec().then(async meta=>{
+//     const count = await PostSchema.countDocuments({$and:[{[meta.type]: meta._id},{status:'published'}]}).exec()
+//     await MetaSchema.findOneAndUpdate({name: meta.name}, {$set:{count}}).exec()
+//     finalData = [...finalData, meta._id]
+// })

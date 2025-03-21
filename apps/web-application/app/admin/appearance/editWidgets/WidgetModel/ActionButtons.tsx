@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import ExportWidget from './ExportWidget/ExportWidget'
 import {useSelector} from "react-redux";
-import {DashboardStore, IWidget} from "@repo/typescript-types";
+
 // import updateRouteQuery from "@_updateWidgetVariables/_clientVariables/clientVariables/updateRouteQuery";
 import {createNewWidgetAction, deleteWidgetAction, updateWidgetAction} from "@storeDashboard//reducers/widgetsReducer";
 import {useAppDispatch} from "@storeDashboard/hooks";
@@ -9,6 +9,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFloppyDisk} from "@fortawesome/free-solid-svg-icons/faFloppyDisk";
 import {faClone} from "@fortawesome/free-solid-svg-icons/faClone";
 import {faTrash} from "@fortawesome/free-solid-svg-icons/faTrash";
+import { IWidget } from '@repo/typescript-types';
 
 
 
@@ -23,7 +24,7 @@ interface ActionButtonsPropTypes {
 const ActionButtons: FC<ActionButtonsPropTypes> = ({widgetData, widgetId, widgetSettings, setWidgetSettings}) => {
     const dispatch = useAppDispatch()
 
-    const widgets = useSelector(({widgets}: DashboardStore) => widgets?.adminPanelWidgets || [])
+    const widgets = useSelector(({widgets}) => widgets?.adminPanelWidgets || [])
 
     const onSaveHandler = () => {
         dispatch(updateWidgetAction({

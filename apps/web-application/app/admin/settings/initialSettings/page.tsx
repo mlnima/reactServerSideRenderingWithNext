@@ -1,9 +1,7 @@
 'use client';
-
 import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import { DashboardStore } from "@repo/typescript-types";
 import ContentSettings from './components/ContentSettings';
 import HeadDataSettings from './components/HeadDataSettings';
 import MembershipSettings from './components/MembershipSettings';
@@ -86,7 +84,7 @@ const Style = styled.div`
 interface PropTypes {}
 
 const Page: FC<PropTypes> = () => {
-    const initialSettingsData = useSelector(({ settings }: DashboardStore) => settings.initialSettings);
+    const initialSettingsData = useSelector(({ settings }) => settings.initialSettings);
     const dispatch = useAppDispatch();
     const [language, setLanguage] = useState('default');
 
@@ -94,12 +92,13 @@ const Page: FC<PropTypes> = () => {
         dispatch(updateSettingAction({ type: 'initialSettings', data: initialSettingsData }));
     };
 
-    const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>, key: string) => {
+    const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | object>, key: string) => {
         const value = inputValueSimplifier(e);
         dispatch(
             editInitialSettings({
                 [key]: {
                     ...(initialSettingsData?.[key] || {}),
+                  // @ts-expect-error: need fix
                     [e.target.name]: value,
                 },
             }),
@@ -117,7 +116,7 @@ const Page: FC<PropTypes> = () => {
         );
     };
 
-    const onChangeHandlerWithTranslation = (e: React.ChangeEvent<HTMLInputElement>, key: string) => {
+    const onChangeHandlerWithTranslation = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | object>, key: string) => {
         if (language === 'default') {
             onChangeHandler(e, key);
         } else {
@@ -129,6 +128,7 @@ const Page: FC<PropTypes> = () => {
                             ...(initialSettingsData?.[key]?.translations || {}),
                             [language]: {
                                 ...(initialSettingsData?.[key]?.translations?.[language] || {}),
+                              // @ts-expect-error: need fix
                                 [e.target.name]: inputValueSimplifier(e),
                             },
                         },

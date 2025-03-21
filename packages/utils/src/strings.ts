@@ -147,7 +147,7 @@ export const getMonthName = (monthNumber: number): string | null => {
 
 export const textContentReplacer = (
   textString: string,
-  replaces: Record<string, string>
+  replaces?: Record<string, string>
 ): string => {
 
   const now = new Date(performance.timeOrigin + performance.now());

@@ -1,8 +1,8 @@
-"use client";
+'use client';
 import React, { FC, useMemo } from 'react';
 import styled from 'styled-components';
 import { usePathname, useRouter } from 'next/navigation';
-import { capitalizeFirstLetter } from '@repo/utils';
+import { capitalizeFirstLetter, createQueryString } from '@repo/utils';
 import { useSearchParams } from 'next/navigation';
 import { _updateSearchParams } from '@lib/navigationTools';
 
@@ -17,50 +17,59 @@ const AssetPaginationStyledDiv = styled.div`
 `;
 
 interface PropTypes {
-  assetPageData: any;
+  totalCount: number;
 }
 
-const AssetPagination: FC<PropTypes> = ({ assetPageData }) => {
-  const router = useRouter(); // Use useRouter for handling query parameters
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
-  const size = parseInt(searchParams.get('size') ?? "20");
-  const currentPage = parseInt(searchParams.get('page') ?? "1");
-  const assetsType = searchParams.get('assetsType') ;
+const AssetPagination: FC<PropTypes> = ({ totalCount = 0 }) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const size = parseInt(searchParams.get('size') ?? '20');
+  const currentPage = parseInt(searchParams.get('page') ?? '1');
+  const assetsType = searchParams.get('assetsType');
 
   const maxPage = useMemo(() => {
-    return Math.ceil(parseInt(assetPageData.totalCount) / size);
-  }, [assetPageData, searchParams]);
+    return Math.ceil(totalCount / size);
+  }, [totalCount, searchParams]);
 
   const handleSetSearch = (newQuery: { [key: string]: string }) => {
-    router.push(_updateSearchParams({newQuery,searchParams,pathname}), { scroll: false });
+    router.push(_updateSearchParams({ newQuery, searchParams, pathname }), { scroll: false });
   };
+
+  const onSearchHandler = (targetPage: number) => {
+    router.push(pathname + '?' + createQueryString([
+      { name: 'page', value: targetPage.toString() },
+    ], searchParams), { scroll: false });
+  };
+
 
   return (
     <AssetPaginationStyledDiv className="assetControlItem">
       <p>
-        {assetPageData.totalCount} { assetsType ? capitalizeFirstLetter(assetsType) : ''}
+        {totalCount} {assetsType ? capitalizeFirstLetter(assetsType) : ''}
       </p>
-      <button onClick={() => handleSetSearch({ page: '1' })} className="btn btn-navigation">
+      <button onClick={() => onSearchHandler(1)} className="btn btn-navigation">
         1
       </button>
-      <button onClick={() => handleSetSearch({ page: (currentPage - 1).toString() })} className="btn btn-navigation" disabled={currentPage === 1}>
+      <button onClick={() => onSearchHandler(currentPage - 1)} className="btn btn-navigation"
+              disabled={currentPage === 1}>
         {'<'}
       </button>
       <input
         value={currentPage}
         onChange={(e) => {
           const newPage = parseInt(e.target.value, 10) || 1;
-          handleSetSearch({ page: newPage.toString() });
+          onSearchHandler(newPage);
         }}
         placeholder={currentPage.toString()}
         type={'number'}
         className={'primaryInput'}
       />
-      <button onClick={() => handleSetSearch({ page: (currentPage + 1).toString() })} className="btn btn-navigation" disabled={currentPage === maxPage}>
+      <button onClick={() => onSearchHandler(currentPage + 1)} className="btn btn-navigation"
+              disabled={currentPage === maxPage}>
         {'>'}
       </button>
-      <button onClick={() => handleSetSearch({ page: maxPage.toString() })} className="btn btn-navigation">
+      <button onClick={() => onSearchHandler(maxPage)} className="btn btn-navigation">
         {maxPage}
       </button>
       <p>Pages</p>

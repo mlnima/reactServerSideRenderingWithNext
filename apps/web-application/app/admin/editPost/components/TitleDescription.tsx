@@ -3,7 +3,6 @@
 import React from 'react';
 import styled from "styled-components";
 import { useSelector } from 'react-redux';
-import { DashboardStore } from '@repo/typescript-types';
 import TextEditors from '@components/textEditors/TextEditors';
 
 
@@ -55,8 +54,8 @@ interface TitleDescriptionProps {
 }
 
 const TitleDescription = ({ onTranslatedInputChangeHandler, onDescriptionChangeHandler }: TitleDescriptionProps) => {
-  const post = useSelector(({ posts }: DashboardStore) => posts.post);
-  const activeEditingLanguage = useSelector(({ posts }: DashboardStore) => posts.activeEditingLanguage);
+  const post = useSelector(({ posts }) => posts.post);
+  const activeEditingLanguage = useSelector(({ posts }) => posts.activeEditingLanguage);
 
   const allowsEditorToUse = post?.postType === 'learn'
     ? ['ReactPage', 'Monaco', 'SunEditor']

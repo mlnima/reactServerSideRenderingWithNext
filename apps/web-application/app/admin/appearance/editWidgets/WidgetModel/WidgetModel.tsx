@@ -237,7 +237,7 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({widget}) => {
                     defaultValue={JSON.stringify(widgetData, null, '\t')}
                     value={JSON.stringify(widgetData, null, '\t')}
                     className={'objectEditingModeEditor'}
-                    onChange={onObjectEditingModeChangeHandler}
+                    onParentChangeHandler={onObjectEditingModeChangeHandler}
                 />
                 : null
             }

@@ -4,10 +4,10 @@
 import React from 'react';
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "@storeDashboard/hooks";
-import { DashboardStore, IWidget } from '@repo/typescript-types';
+import {  IWidget } from '@repo/typescript-types';
 
 const WidgetExporter = (): JSX.Element => {
-    const widgets = useSelector(({ widgets }: DashboardStore) => widgets?.adminPanelWidgets);
+    const widgets = useSelector(({ widgets }) => widgets?.adminPanelWidgets);
     const dispatch = useAppDispatch();
 
     const exportAllWidgets = () => {

@@ -1,5 +1,4 @@
-import { connectToDatabase, metaSchema } from '@repo/db';
-import postSchema from '@lib/actions/database/schemas/postSchema';
+import { connectToDatabase, metaSchema,postSchema } from '@repo/db';
 import { randomNumberGenerator } from '@repo/utils/dist/src/maths';
 import { isEmptyObject } from '@repo/utils/dist/src/objects';
 

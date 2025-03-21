@@ -1,8 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {RootState} from "../store";
-import {GlobalState} from "@repo/typescript-types";
 
-const initialState : GlobalState = {
+const initialState  = {
     loginRegisterFormPopup: false,
     userConfigMenu: false,
     loading: false,
@@ -71,7 +70,9 @@ export const globalStateSlice = createSlice({
                 active: true,
             }
         },
-        closeAlert: (state, action: PayloadAction<any>) => {
+
+        closeAlert: (state, action: PayloadAction<null>) => {
+          // @ts-expect-error:its fine
             state.alert = {
                 active: false,
                 type: null,

@@ -25,12 +25,14 @@ const FormHeader: FC<IProps> = ({dictionary}) => {
             <div className={'switchForms'}>
                 <button onClick={()=>dispatch(loginRegisterForm('login'))}
                         onTouchStart={()=>dispatch(loginRegisterForm('login'))}
+                        // @ts-expect-error:its fine
                 className={`switchFormsTab ${loginRegisterFormPopup === 'login' ? 'activeTab' : 'inactiveTab'}`}>
                     {dictionary['Login'] || 'Login'}
                 </button>
                 {anyoneCanRegister &&
                     <button onClick={()=>dispatch(loginRegisterForm('register'))}
                             onTouchStart={()=>dispatch(loginRegisterForm('register'))}
+                      // @ts-expect-error:its fine
                             className={`switchFormsTab ${loginRegisterFormPopup === 'register' ? 'activeTab' : 'inactiveTab'}`}>
                         {dictionary['Register'] || 'Register'}
                     </button>

@@ -3,8 +3,9 @@ import {AxiosResponse} from "axios";
 import {RootState} from "../storeDashboard";
 import {AdminPanelGlobalState,IPage} from "@repo/typescript-types";
 import {dashboardAPIRequestGetPages} from "@repo/api-requests";
+import dashboardGetPages from '@lib/actions/database/operations/pages/dashboardGetPages';
 
-const initialState : AdminPanelGlobalState = {
+const initialState  = {
     customPages: [],
     sidebar: false,
     loading: false,
@@ -18,16 +19,32 @@ const initialState : AdminPanelGlobalState = {
 
 export const getCustomPagesAction = createAsyncThunk(
     'adminPanelGlobalState/getCustomPagesAction',
-    async (data:any , thunkAPI) => {
-        return await dashboardAPIRequestGetPages({})
-        // return AxiosInstance.post('/api/dashboard/pages/getPagesData', {token: localStorage.wt})
-            .then((response: AxiosResponse<unknown | any>) => {
-                if (response.data?.pages) {
-                    return response.data.pages.map((page: IPage) => page.pageName)
-                }
-            }).catch(err => {
-                console.log(err)
-            })
+    async (_, thunkAPI) => {
+      thunkAPI.dispatch(loading(true));
+      const { data, success, message, error } = await dashboardGetPages({size:1000});
+      thunkAPI.dispatch(loading(false));
+
+      if (!success) {
+        console.log(`getPagesAction error=> `, error);
+        thunkAPI.dispatch(
+          setAlert({
+            message,
+            type: 'Error',
+            err: error,
+          }),
+        );
+        return;
+      }
+
+      return data?.pages.map((page) => page.pageName)
+
+
+
+
+
+
+
+
     }
 )
 
@@ -94,3 +111,15 @@ export const {
 export const globalStateReducer = (state: RootState) => state?.globalState || null
 
 export default globalStateSlice.reducer
+
+
+
+// return await dashboardAPIRequestGetPages({})
+// // return AxiosInstance.post('/api/dashboard/pages/getPagesData', {token: localStorage.wt})
+//     .then((response: AxiosResponse<unknown | any>) => {
+//         if (response.data?.pages) {
+//             return response.data.pages.map((page: IPage) => page.pageName)
+//         }
+//     }).catch(err => {
+//         console.log(err)
+//     })

@@ -1,6 +1,6 @@
 // @ts-nocheck
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {loading} from "./globalStateReducer";
+import { loading, setAlert } from './globalStateReducer';
 import {AxiosError, AxiosResponse} from "axios";
 import {RootState} from "../store";
 import {
@@ -11,6 +11,8 @@ import {
     dashboardAPIRequestUpdatePage
 } from "@repo/api-requests";
 
+import dashboardGetPages from '@lib/actions/database/operations/pages/dashboardGetPages';
+
 
 
 const initialState = {
@@ -20,17 +22,28 @@ const initialState = {
 
 export const getPagesAction = createAsyncThunk(
     'adminPanelPages/getPagesAction',
-    async (data: {}, thunkAPI) => {
-        try {
-            thunkAPI.dispatch(loading(true))
-            const response : AxiosResponse = await dashboardAPIRequestGetPages(data)
-            return response.data?.pages
-        }catch (err){
-            console.log(`getPagesAction err=> `,err)
-            return []
-        }finally {
-            thunkAPI.dispatch(loading(false))
-        }
+    async (queries: object, thunkAPI) => {
+      thunkAPI.dispatch(loading(true));
+      const { data, success, message, error } = await dashboardGetPages(queries);
+      thunkAPI.dispatch(loading(false));
+
+      if (!success) {
+        console.log(`getPagesAction error=> `, error);
+        thunkAPI.dispatch(
+          setAlert({
+            message,
+            type: 'Error',
+            err: error,
+          }),
+        );
+        return;
+      }
+
+
+      return {
+        pages:data?.pages,
+        totalCount: data?.totalCount,
+      }
     }
 )
 
@@ -135,7 +148,7 @@ export const pagesSlice = createSlice({
 
                 return {
                     ...state,
-                    pages: action.payload
+                    ...action.payload
                 };
             })
             .addCase(getPageAction.fulfilled, (state, action: PayloadAction<any>) => {

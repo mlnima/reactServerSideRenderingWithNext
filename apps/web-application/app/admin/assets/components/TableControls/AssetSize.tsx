@@ -1,7 +1,6 @@
 'use client';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import { Store } from '@repo/typescript-types';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
@@ -21,7 +20,7 @@ const AssetSize: React.FC = () => {
   const searchParams = useSearchParams();
   const [currentSize, setCurrentSize] = useState<number>(20);
   const range = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 200, 300, 400, 500, 1000];
-  const { initialSettings } = useSelector(({ settings }: Store) => settings);
+  const { initialSettings } = useSelector(({ settings }) => settings);
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newSize = e.target.value;

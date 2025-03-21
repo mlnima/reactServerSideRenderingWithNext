@@ -12,13 +12,13 @@ interface PropTypes {
     height?: number | string,
     translation?: any,
     activeEditingLanguage?: string,
-    onChange: Function
+  onParentChangeHandler: Function
 }
 
 const MonacoEditor: FC<PropTypes> = (
     {
         name,
-        onChange,
+        onParentChangeHandler,
         language,
         theme,
         value,
@@ -44,7 +44,7 @@ const MonacoEditor: FC<PropTypes> = (
                     value
                 }
             }
-            onChange(e)
+          onParentChangeHandler(e)
         }
     }
 
