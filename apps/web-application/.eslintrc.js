@@ -13,7 +13,7 @@ module.exports = {
     sourceType: 'module'
   },
   plugins: [
-    'react-hooks',
+    // Remove 'react-hooks' from here since it's already in 'next'
     '@typescript-eslint'
   ],
   settings: {
@@ -22,29 +22,73 @@ module.exports = {
     }
   },
   extends: [
-    // 'plugin:react/recommended',
     "plugin:@typescript-eslint/recommended",
     "next",
-    // 'plugin:react-hooks/recommended',
-    // 'plugin:jsx-a11y/recommended',
-    // 'prettier',
-    // "next/core-web-vitals",
     "eslint:recommended"
   ],
   rules: {
+    // You can keep these rules even without the plugin listed above
     'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'off',
+    'react-hooks/exhaustive-deps': 'warn',
     "react/prop-types": "off",
-    "no-unused-vars": "warn", // Disable the default rule
+    "no-unused-vars": "off", // Turn off the base rule
     "@typescript-eslint/no-unused-vars": [
-      "warn", // Or "error" if you prefer
+      "warn",
       {
-        "vars": "all", // Check all variables
-        "args": "after-used", // Check function arguments
-        "argsIgnorePattern": "^_", // Ignore arguments prefixed with "_"
-        "varsIgnorePattern": "^_", // Ignore variables prefixed with "_"
-        "ignoreRestSiblings": true // Ignore unused siblings in object destructuring
+        "vars": "all",
+        "args": "after-used",
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "ignoreRestSiblings": true
       }
     ]
   }
 };
+
+
+// module.exports = {
+//   env: {
+//     browser: true,
+//     node: true,
+//     es2021: true,
+//   },
+//   parser: '@typescript-eslint/parser',
+//   parserOptions: {
+//     ecmaFeatures: {
+//       jsx: true
+//     },
+//     ecmaVersion: 2020,
+//     sourceType: 'module'
+//   },
+//   plugins: [
+//     'react-hooks',
+//     '@typescript-eslint'
+//   ],
+//   settings: {
+//     react: {
+//       version: 'detect'
+//     }
+//   },
+//   extends: [
+//     // 'plugin:react/recommended',
+//     "plugin:@typescript-eslint/recommended",
+//     "next",
+//     "eslint:recommended"
+//   ],
+//   rules: {
+//     'react-hooks/rules-of-hooks': 'error',
+//     'react-hooks/exhaustive-deps': 'warn',
+//     "react/prop-types": "off",
+//     "no-unused-vars": "warn", // Disable the default rule
+//     "@typescript-eslint/no-unused-vars": [
+//       "warn", // Or "error" if you prefer
+//       {
+//         "vars": "all",
+//         "args": "after-used",
+//         "argsIgnorePattern": "^_",
+//         "varsIgnorePattern": "^_",
+//         "ignoreRestSiblings": true
+//       }
+//     ]
+//   }
+// };

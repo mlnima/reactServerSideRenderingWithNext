@@ -20,8 +20,6 @@ import {
 import SearchbarKeywordSuggestions from '@components/widgets/widgets/Searchbar/SearchbarKeywordSuggestions';
 import { ISuggestion } from '@repo/typescript-types';
 import getSearchSuggestion from '@lib/actions/database/operations/search/getSearchSuggestion';
-import { ServerActionResponse } from '@lib/actions/response';
-import { Types } from 'mongoose';
 
 interface IProps {
   locale: string;

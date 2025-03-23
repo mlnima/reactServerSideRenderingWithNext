@@ -1,20 +1,17 @@
 'use client';
-import { FC, useEffect } from 'react';
+import {  useEffect } from 'react';
 import { getCustomPagesAction } from '@storeDashboard/reducers/globalStateReducer';
 import { useAppDispatch } from '@storeDashboard/hooks';
-import { getWidgetsAction } from 'web-dashboard-app/src/store/reducers/widgetsReducer';
-import { getSettingsAction } from 'web-dashboard-app/src/store/reducers/settingsReducer';
+import { getWidgetsAction } from '@storeDashboard/reducers/widgetsReducer';
+import { getSettingsAction } from '@storeDashboard/reducers/settingsReducer';
 
-interface IProps {
-}
-
-const AdminLayoutDataInitializer: FC<IProps> = ({}) => {
+const AdminLayoutDataInitializer = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getWidgetsAction(null));
     dispatch(getCustomPagesAction());
     dispatch(getSettingsAction(null));
   }, []);
-  return null;
+  return <div></div>;
 };
 export default AdminLayoutDataInitializer;

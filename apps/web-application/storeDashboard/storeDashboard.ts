@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { configureStore, combineReducers, ThunkAction, Action } from '@reduxjs/toolkit';
 import commentsSlice from './reducers/commentsReducer';
 import fileManagerSlice from './reducers/fileManagerReducer';

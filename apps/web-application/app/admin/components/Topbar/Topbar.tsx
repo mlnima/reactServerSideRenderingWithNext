@@ -1,3 +1,4 @@
+'use client';
 import Link from "next/link";
 import { useAppDispatch } from "@storeDashboard/hooks";
 import {setSidebarStatus} from "@storeDashboard/reducers/globalStateReducer";

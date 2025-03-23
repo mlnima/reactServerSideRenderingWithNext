@@ -7,7 +7,7 @@ import localDetector from '@lib/localDetector';
 import getSettings from '@lib/actions/database/operations/settings/getSettings';
 import getWidgets from '@lib/actions/database/operations/widgets/getWidgets';
 import { ServerActionResponse } from '@lib/actions/response';
-import './page.styles.scss';
+import './homePage.scss';
 
 
 const homePage = async (props: IPageProps) => {

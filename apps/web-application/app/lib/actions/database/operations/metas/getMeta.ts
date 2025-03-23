@@ -1,5 +1,4 @@
-import { connectToDatabase, metaSchema } from '@repo/db';
-import { isValidObjectId } from '@repo/db/dist/src/tools';
+import { connectToDatabase, metaSchema,isValidObjectId } from '@repo/db';
 import { IMeta } from '@repo/typescript-types';
 import { errorResponse, ServerActionResponse, successResponse } from '@lib/actions/response';
 

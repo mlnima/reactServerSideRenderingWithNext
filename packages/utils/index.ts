@@ -46,7 +46,6 @@ export {
   getTextDataWithTranslation,
   removeEmptyProperties,
   nestedObjectModifier,
-  deepConvertObjectIdsToStrings
 } from './src/objects';
 
 export {

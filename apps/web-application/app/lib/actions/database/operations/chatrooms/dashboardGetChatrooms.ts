@@ -4,7 +4,7 @@ import { errorResponse, ServerActionResponse, successResponse, unwrapResponse } 
 import { chatroomSchema, connectToDatabase } from '@repo/db';
 import getSettings from '@lib/actions/database/operations/settings/getSettings';
 import { IInitialSettings } from '@repo/typescript-types';
-import { deepConvertObjectIdsToStrings } from '@repo/utils';
+import { deepConvertObjectIdsToStrings } from '@repo/utils-server';
 
 interface IDashboardGetChatrooms {
   keyword?: string,

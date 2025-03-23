@@ -14,8 +14,8 @@
     "scss"
   ],
   "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
     "@types/jest": "^29.5.3",
     "styled-components": "^5.3.3",
     "@fortawesome/fontawesome": "^1.1.8",
