@@ -1,13 +1,12 @@
 'use client';
 
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '@storeDashboard/hooks';
 import { FC } from 'react';
-import { DashboardStore } from '@repo/typescript-types';
 import { useAppDispatch } from '@storeDashboard/hooks';
 import { editPostAction } from '@storeDashboard/reducers/postsReducer';
 
 const RatingOption: FC = () => {
-  const post = useSelector(({ posts }: DashboardStore) => posts.post);
+  const post = useAppSelector(({ posts }) => posts.post);
   const dispatch = useAppDispatch();
 
   return (

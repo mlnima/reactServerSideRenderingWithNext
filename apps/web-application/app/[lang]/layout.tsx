@@ -1,5 +1,7 @@
+
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
+
 config.autoAddCss = false;
 import '@components/global/styles/global.styles.scss';
 import ReduxProvider from '@store/ReduxProvider';
@@ -32,14 +34,10 @@ import { Suspense } from 'react';
 import MemberInitializer from '@components/global/MemberInitializer/MemberInitializer';
 import CookieInitializer from '@components/global/CookieInitializer/CookieInitializer';
 import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
-
-// export async function generateStaticParams() {
-//     return i18n.locales.map((lng: string) => ({ lng }));
-// }
-
+// import { connection } from 'next/server';
 
 const RootLayout = async (props: ILayoutProps) => {
-
+  // await connection()
   const params = await props.params;
   const locale = localDetector(params.lang);
   const dictionary = await getDictionary(locale);
@@ -47,9 +45,8 @@ const RootLayout = async (props: ILayoutProps) => {
   const { initialSettings } = unwrapResponse(
     await getSettings(['initialSettings']) as unknown as ServerActionResponse<{
       initialSettings: IInitialSettings | undefined
-    }>
+    }>,
   );
-
 
   const widgets = await getWidgets(
     ['footer', 'header', 'topBar', 'navigation'],
@@ -63,7 +60,8 @@ const RootLayout = async (props: ILayoutProps) => {
 
   return (
     <html lang={locale}>
-    <body className={`dark `} style={{}}>
+    <body className={`dark `}>
+    <Suspense fallback="loging in ...">
     <ReduxProvider>
       <div className="layout">
         {initialSettings?.layoutSettings?.topbar && (
@@ -95,19 +93,21 @@ const RootLayout = async (props: ILayoutProps) => {
         )}
       </div>
       <BackgroundFilterWholeScreen />
-      {/*// @ts-expect-error: check this later*/}
-      <CookieInitializer />
 
-      <Suspense fallback="loging in ...">
-        {/*// @ts-expect-error: its fine*/}
+
+
+        <CookieInitializer />
         <MemberInitializer />
-      </Suspense>
 
-      <GoogleAnalytics
-        googleAnalyticsId={
-          initialSettings?.headDataSettings?.googleAnalyticsId
-        }
-      />
+
+      {initialSettings?.headDataSettings?.googleAnalyticsId &&
+        <GoogleAnalytics
+          googleAnalyticsId={
+            initialSettings?.headDataSettings?.googleAnalyticsId
+          }
+        />
+      }
+
       <LoadingComponent />
       <AlertBox dictionary={dictionary} />
       <BackToTopButton />
@@ -122,12 +122,15 @@ const RootLayout = async (props: ILayoutProps) => {
       </StyledComponentsRegistry>
       {initialSettings && <StoreDataInitializer initialSettings={initialSettings} />}
       <WebSocketInitializer />
-      {/*<MediaCall/>*/}
+
       <KeysListener />
       <UserConfigMenu locale={locale} dictionary={dictionary} />
       <CustomHeadTagsInitializer />
       <CustomScripts />
+
+
     </ReduxProvider>
+    </Suspense>
     </body>
     </html>
   );
@@ -139,3 +142,5 @@ export const generateMetadata = LayoutMetaGenerator;
 
 export const generateViewport = LayoutViewportGenerator;
 
+
+// <MediaCall/>

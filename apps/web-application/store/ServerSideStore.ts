@@ -1,4 +1,3 @@
-import { IInitialSettings } from '@repo/typescript-types';
 
 
 interface ContentSettings {

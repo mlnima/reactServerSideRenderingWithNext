@@ -1,27 +1,15 @@
 'use client';
 import { convertVariableNameToName } from '@repo/utils';
-import styled from 'styled-components';
-import { useSelector } from 'react-redux';
-import { DashboardStore } from '@repo/typescript-types';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, FC } from 'react';
+import { IPost } from '@repo/typescript-types';
 
-let StyledTextarea = styled.textarea`
-    outline: none;
-    padding: 3px 5px;
-    height: 30px;
-    width: 90%;
-`;
-
-interface PropTypes {
+interface IProps {
   onChangeHandler: (e: ChangeEvent<HTMLTextAreaElement>) => void;
-  rendering: boolean;
   name: 'source' | 'mainThumbnail' | 'videoUrl' | 'videoEmbedCode' | 'redirectLink' | 'downloadLink' | 'videoTrailerUrl';
+  post: IPost;
 }
 
-const TextInput = ({ onChangeHandler, rendering, name }: PropTypes) => {
-  const post = useSelector(({ posts }: DashboardStore) => posts.post);
-
-  if (!rendering || !post) return null;
+const TextInput: FC<IProps> = ({ onChangeHandler, name, post }) => {
 
   return (
     <div className="post-information-section">
@@ -29,7 +17,7 @@ const TextInput = ({ onChangeHandler, rendering, name }: PropTypes) => {
         <p>{convertVariableNameToName(name)}</p>
       </div>
       <div className="editor">
-        <StyledTextarea
+        <textarea
           className={'primaryInput'}
           name={name}
           value={post?.[name] || ''}

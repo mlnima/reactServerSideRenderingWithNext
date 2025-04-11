@@ -12,6 +12,6 @@
     "dist/**"
   ],
   "dependencies": {
-    "mongoose": "^8.8.4"
+    "mongoose": "^8.10.1"
   }
 }

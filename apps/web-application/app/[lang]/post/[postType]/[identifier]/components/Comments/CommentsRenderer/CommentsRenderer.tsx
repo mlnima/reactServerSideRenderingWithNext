@@ -8,7 +8,7 @@ interface IProps {
     comments: IComment[],
     onDeleteCommentHandler:  (_id: string) => Promise<void> ,
     adminMode: boolean,
-    commentsRef: React.RefObject<HTMLDivElement>,
+    commentsRef: React.RefObject<HTMLDivElement | null>,
     commentsAllowScrollRef: React.MutableRefObject<boolean>,
 }
 

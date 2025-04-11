@@ -1,30 +1,8 @@
-import styled from "styled-components";
+'use client'
 import React, {FC} from "react";
 import {IMenuItem} from "@repo/typescript-types";
+import './MenuWidgetEditForm.scss'
 
-const MenuWidgetEditFormStyledFrom = styled.form`
-  width: 95%;
-  margin: auto;
-  .formId {
-    font-size: small;
-  }
-  .menu-widget-form {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin: auto;
-    width: 90%;
-  }
-  .menu-widget-form-form-field {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    input {
-      width: 70%;
-    }
-  }
-`
 
 interface IProps{
     parentsOption:[],
@@ -71,7 +49,7 @@ const MenuWidgetEditForm:FC<IProps> = (
 
     return (
 
-        <MenuWidgetEditFormStyledFrom className='menu-widget-form' onSubmit={e => onSubmitHandler(e)}>
+        <form className='MenuWidgetEditForm' onSubmit={e => onSubmitHandler(e)}>
             {mode === 'Edit' && <label className='formId'> ID : {data.itemId}</label>}
             {mode === 'Add' &&
                 <div className='menu-widget-form-form-field'>
@@ -141,7 +119,7 @@ const MenuWidgetEditForm:FC<IProps> = (
                 }
             </div>
 
-        </MenuWidgetEditFormStyledFrom>
+        </form>
 
 
     );

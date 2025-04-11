@@ -10,13 +10,13 @@ import { IInitialSettings } from '@repo/typescript-types';
 const dashboardGetPosts = async ({ metaId, keyword, status, postType, page, size, sort }: any) => {
   try {
 
-    const { isAdmin } = await verifySession();
-
-    if (!isAdmin) {
-      return errorResponse({
-        message: 'Unauthorized Access',
-      });
-    }
+    // const { isAdmin } = await verifySession();
+    //
+    // if (!isAdmin) {
+    //   return errorResponse({
+    //     message: 'Unauthorized Access',
+    //   });
+    // }
 
     await connectToDatabase('dashboardGetPosts');
 
@@ -55,8 +55,6 @@ const dashboardGetPosts = async ({ metaId, keyword, status, postType, page, size
 
     const findQuery = { $and: [...metaQuery, ...searchQuery, ...statusQuery, ...postTypeQuery] };
 
-    console.log(`findQuery=> `, findQuery);
-
     const populateOptions = [
       { path: 'author', select: ['username', 'role'] },
       { path: 'actors', select: { name: 1, type: 1 } },
@@ -78,31 +76,31 @@ const dashboardGetPosts = async ({ metaId, keyword, status, postType, page, size
     ).populate(populateOptions).lean();
 
 
-    const transformedPosts = posts.map((doc) => ({
-      ...doc,
-
-      _id: doc._id.toString(),
-      author: doc?.author ? {
-        ...doc?.author,
-        _id: doc?.author?._id.toString(),
-      } : null,
-      thumbnail: doc?.thumbnail ? {
-        ...doc?.thumbnail,
-        _id: doc?.thumbnail?._id.toString(),
-      } : null,
-      tags: (doc?.tags || []).map((meta: { _id: Types.ObjectId }) => ({
-        ...meta,
-        _id: meta._id.toString(),
-      })),
-      categories: (doc?.categories || []).map((meta: { _id: Types.ObjectId }) => ({
-        ...meta,
-        _id: meta._id.toString(),
-      })),
-      actors: (doc?.actors || []).map((meta: { _id: Types.ObjectId }) => ({
-        ...meta,
-        _id: meta._id.toString(),
-      })),
-    }));
+    // const transformedPosts = posts.map((doc) => ({
+    //   ...doc,
+    //
+    //   _id: doc._id.toString(),
+    //   author: doc?.author ? {
+    //     ...doc?.author,
+    //     _id: doc?.author?._id.toString(),
+    //   } : null,
+    //   thumbnail: doc?.thumbnail ? {
+    //     ...doc?.thumbnail,
+    //     _id: doc?.thumbnail?._id.toString(),
+    //   } : null,
+    //   tags: (doc?.tags || []).map((meta: { _id: Types.ObjectId }) => ({
+    //     ...meta,
+    //     _id: meta._id.toString(),
+    //   })),
+    //   categories: (doc?.categories || []).map((meta: { _id: Types.ObjectId }) => ({
+    //     ...meta,
+    //     _id: meta._id.toString(),
+    //   })),
+    //   actors: (doc?.actors || []).map((meta: { _id: Types.ObjectId }) => ({
+    //     ...meta,
+    //     _id: meta._id.toString(),
+    //   })),
+    // }));
 
     let statusesCount = postStatuses.reduce((final: { [key: string]: number }, current: string) => {
       final[current] = 0;
@@ -115,7 +113,7 @@ const dashboardGetPosts = async ({ metaId, keyword, status, postType, page, size
 
     return successResponse({
       data: {
-        posts: transformedPosts,
+        posts: JSON.parse(JSON.stringify(posts)),
         totalCount,
         statusesCount,
       },

@@ -1,0 +1,11 @@
+.ThumbnailPreview{
+  .editor {
+    display: flex;
+    justify-content: center;
+    img {
+      margin: auto;
+      width: 320px;
+      height: 180px;
+    }
+  }
+}

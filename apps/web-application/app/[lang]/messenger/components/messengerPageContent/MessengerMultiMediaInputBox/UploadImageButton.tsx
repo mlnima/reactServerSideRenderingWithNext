@@ -60,7 +60,10 @@ const Component: FC<IProps> = ({imageInputRef,setDraftMessage}) => {
                     ...prevState,
                     imageContent: resizedImageBase64
                 }))
-                event.target.value = null;
+                if (event.target){
+                  event.target.value = '';
+                }
+
             } catch (error) {
                 console.error(error);
             }

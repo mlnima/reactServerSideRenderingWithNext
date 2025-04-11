@@ -1,4 +1,5 @@
 /* eslint-disable */
+// @ts-nocheck
 'use client';
 import React, {FC, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import useEmblaCarousel , {

@@ -1,0 +1,47 @@
+#FileManagerArea{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  grid-gap: 10px;
+  background-color: var(--secondary-background-color,#181818);
+  padding: 20px 20px 200px 20px;
+  border-radius: 20px;
+
+  .dirItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .file-manager-image-item {
+      width: 80px;
+      object-fit: cover;
+    }
+
+    button {
+      width: 80px;
+      height: 80px;
+      background-color: rgba(255, 255, 255, .1);
+      outline: none;
+      transition: .4s;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+
+      .meta-icon{
+        width: 50px;
+        height: 50px;
+      }
+    }
+
+    p {
+      font-size: small;
+      overflow: hidden;
+      color: white;
+      text-align: center;
+    }
+  }
+}

@@ -1,52 +1,10 @@
 // @ts-nocheck
+'use client'
 import React, {FC, useEffect, useState} from 'react';
 import MenuWidgetEditForm from "./MenuWidgetEditForm";
 import EditSubMenuForm from "./subMenuComponenets/EditSubMenuForm";
-import styled from "styled-components";
+import './MenuWidgetModelFieldsPreview.scss'
 
-const MenuWidgetModelFieldsPreviewStyledDiv = styled.div`
-  background-color: rgba(0, 0, 0, .2);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 5px;
-  margin: 2px 0;
-  .menu-item-header {
-    display: flex;
-    gap: 2px;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    
-    button{
-      background-color: var(--secondary-background-color,#181818);
-      color: var(--secondary-text-color,#ccc);
-      border: none;
-    }
-    .menu-item-header-index-controller {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      button {
-
-       
-        font-size: large;
-        width: 30px;
-        height: 30px;
-        padding: 0;
-        &:hover{
-          border: 1px solid black;
-          box-shadow: 2px 5px black;
-        }
-        &:active{
-          box-shadow: 1px 2px black;
-          border-top: none;
-          border-left: none;
-        }
-      }
-    }
-  }
-`
 
 interface IProps{
     data:any,
@@ -193,7 +151,7 @@ const MenuWidgetModelFieldsPreview:FC<IProps> = props => {
             setState({...state, open: true})
     }
     return (
-        <MenuWidgetModelFieldsPreviewStyledDiv className='menu-item' key={props?.data?.itemId?.toString() + props.data.name ?? props.data.name}>
+        <div className='MenuWidgetModelFieldsPreview' key={props?.data?.itemId?.toString() + props.data.name ?? props.data.name}>
             <div className='menu-item-header'>
                 <div className='menu-item-header-index-controller'>
                     <p>index: {itemData.itemIndex}</p>
@@ -230,7 +188,7 @@ const MenuWidgetModelFieldsPreview:FC<IProps> = props => {
                 : null}
 
 
-        </MenuWidgetModelFieldsPreviewStyledDiv>
+        </div>
     );
 };
 export default MenuWidgetModelFieldsPreview;

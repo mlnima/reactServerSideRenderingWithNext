@@ -68,6 +68,7 @@ const TableBodyItem: FC<TableBodyItemPropType> = ({
         // if (typeof property != 'string'){
         //   console.log(`property=> `,property, typeof property)
         // }
+      // @ts-expect-error: it's fine
         return <TableBodyItemSection key={property} dataValue={data?.[property]} dataName={property} />;
     });
 

@@ -110,7 +110,6 @@ const LoginRegisterPopupForms: FC<IProps> = (
   useEffect(() => {
     setStateValidator({
       username:
-        // @ts-expect-error: its fine
         globalState.loginRegisterFormPopup === 'register'
           ? usernameValidatorRegisterForm(state?.username)
           : !!state?.username,
@@ -130,80 +129,79 @@ const LoginRegisterPopupForms: FC<IProps> = (
       <FormHeader locale={locale} dictionary={dictionary} />
 
       {
-        // @ts-expect-error: its fine
         globalState.loginRegisterFormPopup === 'register' &&
-      anyoneCanRegister ? (
-        <form
-          className="login-register-form"
-          onSubmit={(e) => onRegisterHandler(e)}
-        >
-          <div className="login-register-form-fields">
-            <div className="login-register-form-field">
-              <div className={'input-validator'}>
-                <input
-                  className={'primaryInput form-control-input-validator'}
-                  required={true}
-                  name="username"
-                  value={state.username}
-                  placeholder={dictionary?.['Username'] || 'Username'}
-                  onChange={(e) => onChangeHandler(e)}
-                />
-                <div className={'filedInfo'}>
-                  <ValidInput valid={stateValidator.username} />
+        anyoneCanRegister ? (
+            <form
+              className="login-register-form"
+              onSubmit={(e) => onRegisterHandler(e)}
+            >
+              <div className="login-register-form-fields">
+                <div className="login-register-form-field">
+                  <div className={'input-validator'}>
+                    <input
+                      className={'primaryInput form-control-input-validator'}
+                      required={true}
+                      name="username"
+                      value={state.username}
+                      placeholder={dictionary?.['Username'] || 'Username'}
+                      onChange={(e) => onChangeHandler(e)}
+                    />
+                    <div className={'filedInfo'}>
+                      <ValidInput valid={stateValidator.username} />
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div className="login-register-form-field">
-              <div className={'input-validator'}>
-                <input
-                  className={'primaryInput form-control-input-validator'}
-                  required={true}
-                  name="email"
-                  value={state.email}
-                  autoComplete={'off'}
-                  type="email"
-                  placeholder={dictionary['Email'] || 'Email'}
-                  onChange={(e) => onChangeHandler(e)}
-                />
-                <div className={'filedInfo'}>
-                  <ValidInput valid={stateValidator.email} />
+                <div className="login-register-form-field">
+                  <div className={'input-validator'}>
+                    <input
+                      className={'primaryInput form-control-input-validator'}
+                      required={true}
+                      name="email"
+                      value={state.email}
+                      autoComplete={'off'}
+                      type="email"
+                      placeholder={dictionary['Email'] || 'Email'}
+                      onChange={(e) => onChangeHandler(e)}
+                    />
+                    <div className={'filedInfo'}>
+                      <ValidInput valid={stateValidator.email} />
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div className="login-register-form-field gender">
-              <label> {dictionary['Gender'] || 'Gender'}:</label>
-              <select
-                className={'primarySelect'}
-                onChange={(e) => onChangeHandler(e)}
-                name={'gender'}
-                autoComplete={'off'}
-                value={state.gender}
-                required={true}
-              >
-                <option value="">{dictionary['Select'] || 'Select'}</option>
-                <option value="female">
-                  {dictionary['Female'] || 'Female'}
-                </option>
-                <option value="male">{dictionary['Male'] || 'Male'}</option>
-                <option value="other">{dictionary['Other'] || 'Other'}</option>
-              </select>
-              <div className={'filedInfo'}>
-                <ValidInput valid={!!state.gender} />
-              </div>
-            </div>
-            <div className="login-register-form-field">
-              <div className={'input-validator'}>
-                <input
-                  className={'primaryInput form-control-input-validator'}
-                  type={showPassword ? 'text' : 'password'}
-                  autoComplete={'off'}
-                  name={'password'}
-                  placeholder={dictionary['Password'] || 'Password'}
-                  required={true}
-                  value={state.password}
-                  onChange={(e) => onChangeHandler(e)}
-                />
-                <div className={'filedInfo'}>
+                <div className="login-register-form-field gender">
+                  <label> {dictionary['Gender'] || 'Gender'}:</label>
+                  <select
+                    className={'primarySelect'}
+                    onChange={(e) => onChangeHandler(e)}
+                    name={'gender'}
+                    autoComplete={'off'}
+                    value={state.gender}
+                    required={true}
+                  >
+                    <option value="">{dictionary['Select'] || 'Select'}</option>
+                    <option value="female">
+                      {dictionary['Female'] || 'Female'}
+                    </option>
+                    <option value="male">{dictionary['Male'] || 'Male'}</option>
+                    <option value="other">{dictionary['Other'] || 'Other'}</option>
+                  </select>
+                  <div className={'filedInfo'}>
+                    <ValidInput valid={!!state.gender} />
+                  </div>
+                </div>
+                <div className="login-register-form-field">
+                  <div className={'input-validator'}>
+                    <input
+                      className={'primaryInput form-control-input-validator'}
+                      type={showPassword ? 'text' : 'password'}
+                      autoComplete={'off'}
+                      name={'password'}
+                      placeholder={dictionary['Password'] || 'Password'}
+                      required={true}
+                      value={state.password}
+                      onChange={(e) => onChangeHandler(e)}
+                    />
+                    <div className={'filedInfo'}>
                   <span
                     className={'showPasswordButton'}
                     onClick={() => setShowPassword(!showPassword)}
@@ -214,84 +212,83 @@ const LoginRegisterPopupForms: FC<IProps> = (
                       style={{ width: 20, height: 20 }}
                     />
                   </span>
-                  <ValidInput valid={stateValidator.password} />
-                </div>
-              </div>
-              {!stateValidator.password ? (
-                <span className="password-info">
+                      <ValidInput valid={stateValidator.password} />
+                    </div>
+                  </div>
+                  {!stateValidator.password ? (
+                    <span className="password-info">
                   {dictionary[
                       'Minimum eight characters, at least one letter and one number'
                       ] ||
                     'Minimum eight characters, at least one letter and one number'}
                 </span>
-              ) : null}
-            </div>
-            <div className={'login-register-form-field'}>
-              <div className={'input-validator'}>
-                <input
-                  className={'primaryInput form-control-input-validator'}
-                  type={showPassword ? 'text' : 'password'}
-                  autoComplete={'off'}
-                  name={'password2'}
-                  required={true}
-                  placeholder={
-                    dictionary['Repeat Password'] || 'Repeat Password'
-                  }
-                  value={state.password2}
-                  onChange={(e) => onChangeHandler(e)}
-                />
-                <div className={'filedInfo'}>
-                  <ValidInput valid={stateValidator.password2} />
+                  ) : null}
+                </div>
+                <div className={'login-register-form-field'}>
+                  <div className={'input-validator'}>
+                    <input
+                      className={'primaryInput form-control-input-validator'}
+                      type={showPassword ? 'text' : 'password'}
+                      autoComplete={'off'}
+                      name={'password2'}
+                      required={true}
+                      placeholder={
+                        dictionary['Repeat Password'] || 'Repeat Password'
+                      }
+                      value={state.password2}
+                      onChange={(e) => onChangeHandler(e)}
+                    />
+                    <div className={'filedInfo'}>
+                      <ValidInput valid={stateValidator.password2} />
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <button
-            disabled={
-              !stateValidator.username &&
-              !stateValidator.username &&
-              !stateValidator.email &&
-              !stateValidator.password &&
-              !stateValidator.password2 &&
-              !stateValidator.gender
-            }
-            type={'submit'}
-            className={'login-register-form-button btn btn-primary'}
-          >
-            {dictionary['Register'] || 'Register'}
-          </button>
-        </form>
-      ) :
-          // @ts-expect-error: fine
+              <button
+                disabled={
+                  !stateValidator.username &&
+                  !stateValidator.username &&
+                  !stateValidator.email &&
+                  !stateValidator.password &&
+                  !stateValidator.password2 &&
+                  !stateValidator.gender
+                }
+                type={'submit'}
+                className={'login-register-form-button btn btn-primary'}
+              >
+                {dictionary['Register'] || 'Register'}
+              </button>
+            </form>
+          ) :
           globalState.loginRegisterFormPopup === 'login' ? (
-        <form
-          className="login-register-form"
-          onSubmit={(e) => onLoginHandler(e)}
-        >
-          <div className="login-register-form-fields">
-            <div className="login-register-form-field">
-              <div className={'input-validator'}>
-                <input
-                  className={'primaryInput form-control-input-validator'}
-                  name={'username'}
-                  value={state.username}
-                  placeholder={dictionary['Username'] || 'Username'}
-                  onChange={(e) => onChangeHandler(e)}
-                />
-              </div>
-            </div>
-            <div className="login-register-form-field">
-              <div className={'input-validator'}>
-                <input
-                  className={'primaryInput password'}
-                  // ref={passwordRef}
-                  name={'password'}
-                  placeholder={dictionary['Password'] || 'Password'}
-                  value={state.password}
-                  type={showPassword ? 'text' : 'password'}
-                  onChange={(e) => onChangeHandler(e)}
-                />
-                <div className={'filedInfo'}>
+            <form
+              className="login-register-form"
+              onSubmit={(e) => onLoginHandler(e)}
+            >
+              <div className="login-register-form-fields">
+                <div className="login-register-form-field">
+                  <div className={'input-validator'}>
+                    <input
+                      className={'primaryInput form-control-input-validator'}
+                      name={'username'}
+                      value={state.username}
+                      placeholder={dictionary['Username'] || 'Username'}
+                      onChange={(e) => onChangeHandler(e)}
+                    />
+                  </div>
+                </div>
+                <div className="login-register-form-field">
+                  <div className={'input-validator'}>
+                    <input
+                      className={'primaryInput password'}
+                      // ref={passwordRef}
+                      name={'password'}
+                      placeholder={dictionary['Password'] || 'Password'}
+                      value={state.password}
+                      type={showPassword ? 'text' : 'password'}
+                      onChange={(e) => onChangeHandler(e)}
+                    />
+                    <div className={'filedInfo'}>
                   <span
                     className={'showPasswordButton showPasswordButtonLogin'}
                     onClick={() => setShowPassword(!showPassword)}
@@ -302,21 +299,21 @@ const LoginRegisterPopupForms: FC<IProps> = (
                       style={{ width: 20, height: 20 }}
                     />
                   </span>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <button
-            disabled={!stateValidator.username && !state.password}
-            type={'submit'}
-            className={
-              'btn btn-primary login-register-form-button btn btn-primary'
-            }
-          >
-            {dictionary['Login'] || 'Login'}
-          </button>
-        </form>
-      ) : null}
+              <button
+                disabled={!stateValidator.username && !state.password}
+                type={'submit'}
+                className={
+                  'btn btn-primary login-register-form-button btn btn-primary'
+                }
+              >
+                {dictionary['Login'] || 'Login'}
+              </button>
+            </form>
+          ) : null}
     </div>
   );
 };

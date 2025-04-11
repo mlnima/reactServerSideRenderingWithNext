@@ -6,8 +6,7 @@ import UploadedFilePreviewVideo from "./UploadedFilePreviewVideo";
 import UploadedFilePreviewText from "./UploadedFilePreviewText";
 import styled from "styled-components";
 import { fileTypeDetector } from "@repo/utils";
-import { useSelector } from "react-redux";
-import { DashboardStore, Store } from "@repo/typescript-types";
+import { useAppSelector } from '@storeDashboard/hooks';
 import { fileManagerClosePopupAction, filManagerDeleteFileAction } from "@storeDashboard/reducers/fileManagerReducer";
 import { useAppDispatch } from "@storeDashboard/hooks";
 
@@ -63,7 +62,7 @@ const UploadedPopViewStyledDiv = styled.div`
 
 const UploadedPopView = () => {
     const dispatch = useAppDispatch();
-    const fileManagerData = useSelector(({ fileManager }: DashboardStore) => fileManager);
+    const fileManagerData = useAppSelector(({ fileManager }) => fileManager);
     const [state, setState] = useState({
         darkStyle: {
             backgroundColor: 'black'

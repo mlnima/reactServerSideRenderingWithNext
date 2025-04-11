@@ -1,6 +1,6 @@
 'use server';
 import { IRatePost } from '@lib/actions/database/operations/types';
-import { jwtValidator } from '@repo/utils-server/dist/src/validators';
+import { jwtValidator } from '@repo/utils-server';
 import { JWTPayload } from '@repo/typescript-types';
 import { connectToDatabase, postSchema, userSchema } from '@repo/db';
 import mongoose, { Types } from 'mongoose';

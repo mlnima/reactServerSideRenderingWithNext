@@ -1,7 +1,5 @@
 'use client';
-
 import React, { ChangeEvent, useEffect, useMemo, useState } from 'react';
-import styled from "styled-components";
 import { inputValueSimplifier } from "@repo/utils";
 import { LanguagesOptions } from "@repo/ui";
 import { updateSettingAction } from "@storeDashboard/reducers/settingsReducer";
@@ -9,39 +7,13 @@ import MonacoEditor from "@components/textEditors/MonacoEditor";
 import { useSearchParams } from 'next/navigation';
 import { useAppDispatch } from "@storeDashboard/hooks";
 import { dashboardAPIRequestGetSettings } from "@repo/api-requests";
+import './styles.scss'
 
 
-const Style = styled.form`
-  padding: 0;
-  margin: 0;
-
-  .form-field {}
-
-  .editors {
-    width: 100vw;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-wrap: wrap;
-
-    .editor-wrapper {
-      width: 100%;
-    }
-  }
-
-  @media only screen and (min-width: 768px) {
-    max-width: 50vw;
-    .editors {
-      .editor-wrapper {
-        width: 50%;
-      }
-    }
-  }
-`;
 
 interface PropTypes {}
 
-const Page: React.FC<PropTypes> = () => {
+const EditDefaultPage: React.FC<PropTypes> = () => {
   const dispatch = useAppDispatch();
   const searchParams = useSearchParams();
   const pageName = useMemo(() => searchParams.get('pageName'), [searchParams]);
@@ -62,10 +34,6 @@ const Page: React.FC<PropTypes> = () => {
 
   const dynamicSettingsPageMatcher = /homePageSettings|postPageSettings/g;
   const [fieldsData, setFieldsData] = useState(defaultPageData);
-
-  useEffect(() => {
-    console.log(fieldsData);
-  }, [fieldsData]);
 
   useEffect(() => {
     if (pageName) {
@@ -109,7 +77,7 @@ const Page: React.FC<PropTypes> = () => {
   };
 
   return (
-    <Style className={'form-default'} onSubmit={onSaveHandler}>
+    <form className={'EditDefaultPage'} onSubmit={onSaveHandler}>
       <h1>{pageName}:</h1>
       <div className="form-field">
         <button className={'btn btn-primary'} type={'submit'}>
@@ -190,8 +158,8 @@ const Page: React.FC<PropTypes> = () => {
           Save
         </button>
       </div>
-    </Style>
+    </form>
   );
 };
 
-export default Page;
+export default EditDefaultPage;

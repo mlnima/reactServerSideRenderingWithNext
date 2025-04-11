@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { i18n } from '@i18nConfig';
-import { cookies } from 'next/headers'
-import { JWTPayload } from '@repo/typescript-types';
+import { cookies } from 'next/headers';
 import { decryptJWT } from '@lib/session';
 
 const getLocaleFromUrl = (request: NextRequest) => {
@@ -22,10 +21,11 @@ export async function middleware(request: NextRequest) {
   );
 
   if (pathname.startsWith('/admin')) {
-    const sessionCookie = (await cookies()).get('session')?.value
-    const sessionData = sessionCookie ? await decryptJWT(sessionCookie) as JWTPayload : null;
+    const sessionCookie = (await cookies()).get('session')?.value;
+    const sessionData = sessionCookie ? await decryptJWT(sessionCookie) : null;
 
-    if (sessionData?.role === 'administrator'){
+    if (sessionData?.role === 'administrator') {
+      console.log(`admin access granted for `, pathname + params);
       return NextResponse.next();
     }
   }

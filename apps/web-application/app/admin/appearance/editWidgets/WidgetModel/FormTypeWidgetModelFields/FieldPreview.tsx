@@ -1,50 +1,13 @@
 // @ts-nocheck
 'use client';
 import React, {FC, useEffect, useState} from 'react';
-import styled from "styled-components";
 import {IWidgetData} from "@repo/typescript-types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSliders} from "@fortawesome/free-solid-svg-icons/faSliders";
 import {faSortUp} from "@fortawesome/free-solid-svg-icons/faSortUp";
 import {faSortDown} from "@fortawesome/free-solid-svg-icons/faSortDown";
 import {faTrashCan} from "@fortawesome/free-solid-svg-icons/faTrashCan";
-
-let StyledDiv = styled.div`
-  padding: 5px 10px;
-  margin-top: 10px;
-  border-radius: 10px;
-  background-color: black;
-  display: flex;
-  flex-direction: column;
-  
-  .field-index-control {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-
-    button {
-      transition: .5s;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      &:hover {
-        transform: scale(1.1);
-      }
-    }
-  }
-
-  .edit-form-fields {
-    padding: 5px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-
-    input {
-      max-width: 90%;
-    }
-  }
-`
+import './FieldPreview.scss'
 
 interface FieldPreviewPropTypes{
     widgetData:IWidgetData,
@@ -54,7 +17,6 @@ interface FieldPreviewPropTypes{
         filedId:number,
         fieldIndex:number,
         required:boolean
-
     }
 }
 
@@ -133,7 +95,7 @@ const FieldPreview :FC<FieldPreviewPropTypes>= ({setWidgetData,widgetData,field}
         }
 
         return (
-            <StyledDiv className='form-item-view' key={field.filedId}>
+            <div className='fieldPreview' key={field.filedId}>
                 <div className='field-index-control'>
                     <button
                         onClick={() => state.open ? setState({...state, open: false}) : setState({
@@ -203,7 +165,7 @@ const FieldPreview :FC<FieldPreviewPropTypes>= ({setWidgetData,widgetData,field}
                 }
 
                 {/*<RenderEditMode/>*/}
-            </StyledDiv>
+            </div>
         );
     }
 ;

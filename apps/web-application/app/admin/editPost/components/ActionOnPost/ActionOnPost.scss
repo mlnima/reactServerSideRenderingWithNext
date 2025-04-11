@@ -1,0 +1,11 @@
+.ActionOnPost {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+
+  .primarySelect {
+    width: 100%;
+    margin: 10px 0;
+  }
+}

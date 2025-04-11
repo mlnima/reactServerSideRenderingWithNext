@@ -1,10 +1,8 @@
 'use client';
 
 import React from 'react';
-import styled from "styled-components";
 import { fileTypeDetector } from "@repo/utils";
-import { useSelector } from "react-redux";
-import { DashboardStore } from "@repo/typescript-types";
+import { useAppSelector } from '@storeDashboard/hooks';
 import { fileManagerEditState, uploadFileAction } from "@storeDashboard/reducers/fileManagerReducer";
 import { useAppDispatch } from "@storeDashboard/hooks";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,59 +12,11 @@ import { faFolder } from "@fortawesome/free-solid-svg-icons/faFolder";
 import { faSass } from "@fortawesome/free-brands-svg-icons/faSass";
 import { faCss3 } from "@fortawesome/free-brands-svg-icons/faCss3";
 import { faFilePdf } from "@fortawesome/free-solid-svg-icons";
-
-const FileManagerAreaStyledDiv = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-  grid-gap: 10px;
-  background-color: var(--secondary-background-color,#181818);
-  padding: 20px 20px 200px 20px;
-  border-radius: 20px;
-
-  .dirItem {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    .file-manager-image-item {
-      width: 80px;
-      object-fit: cover;
-    }
-
-    button {
-      width: 80px;
-      height: 80px;
-      background-color: rgba(255, 255, 255, .1);
-      outline: none;
-      transition: .4s;
-      border-radius: 10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      &:hover {
-        transform: scale(1.2);
-      }
-      
-      .meta-icon{
-        width: 50px;
-        height: 50px;
-      }
-    }
-
-    p {
-      font-size: small;
-      overflow: hidden;
-      color: white;
-      text-align: center;
-    }
-  }
-
-`;
+import './FileManagerArea.scss'
 
 const FileManagerArea = () => {
     const dispatch = useAppDispatch();
-    const fileManagerData = useSelector(({ fileManager }: DashboardStore) => fileManager);
+    const fileManagerData = useAppSelector(({ fileManager }) => fileManager);
 
     const IconToRender = (data: any) => {
         const itemType = fileTypeDetector(data.fileName);
@@ -74,6 +24,7 @@ const FileManagerArea = () => {
             return (
                 <React.Fragment>
                     <img className='file-manager-image-item'
+                         alt={'icon'}
                          src={`${fileManagerData.path.replace('.', process.env.NEXT_PUBLIC_API_SERVER_URL || '')}/${data.fileName}`}
                     />
                 </React.Fragment>
@@ -121,7 +72,7 @@ const FileManagerArea = () => {
         }));
     };
 
-    const renderDir = fileManagerData.files.map(item => {
+    const renderDir = fileManagerData.files.map((item:string) => {
         return (
             <div key={item} className='dirItem' onClick={() => onClickHandler(item)}>
                 <IconToRender fileName={item} />
@@ -142,11 +93,11 @@ const FileManagerArea = () => {
     };
 
     return (
-        <FileManagerAreaStyledDiv className='FileManagerArea' onDrop={e => onDropFileHandler(e)}
+        <div id='FileManagerArea' onDrop={e => onDropFileHandler(e)}
                                   onDragOver={e => e.preventDefault()}>
 
             {renderDir}
-        </FileManagerAreaStyledDiv>
+        </div>
     );
 };
 

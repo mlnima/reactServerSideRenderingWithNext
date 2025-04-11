@@ -1,0 +1,12 @@
+#PostsByTypes{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+
+  p {
+    width: 100px;
+    white-space: nowrap;
+    margin: 0 0.25rem;
+  }
+}

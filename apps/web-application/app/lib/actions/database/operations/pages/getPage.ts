@@ -1,5 +1,4 @@
 'use server';
-import { unstable_cacheTag as cacheTag } from 'next/cache';
 import { pageSchema, connectToDatabase } from '@repo/db';
 import { errorResponse, ServerActionResponse, successResponse } from '@lib/actions/response';
 import { IPage } from '@repo/typescript-types';
@@ -7,7 +6,7 @@ import { IPage } from '@repo/typescript-types';
 const getPage = async ({ pageName }: { pageName: string }): Promise<ServerActionResponse<{
   pageData: IPage
 } | null>> => {
-  'use cache';
+  // 'use cache';
   try {
     if (!pageName) {
       return errorResponse({
@@ -22,15 +21,11 @@ const getPage = async ({ pageName }: { pageName: string }): Promise<ServerAction
         message: 'Not Found',
       });
     }
-
-    pageData._id = pageData._id.toString();
-
-    cacheTag('cacheItem', `CPage-${pageName}`);
-
-
+    // cacheTag('cacheItem', `CPage-${pageName}`);
+    //
     return successResponse({
       data: {
-        pageData,
+        pageData: JSON.parse(JSON.stringify(pageData)),
       },
     });
 

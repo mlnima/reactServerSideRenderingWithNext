@@ -1,31 +1,20 @@
 'use server';
 import { verifySession } from '@lib/dal';
 import { errorResponse, ServerActionResponse, successResponse, unwrapResponse } from '@lib/actions/response';
-import { postStatuses } from '@repo/data-structures';
 import { connectToDatabase, commentSchema } from '@repo/db';
 import getSettings from '@lib/actions/database/operations/settings/getSettings';
 import { IInitialSettings } from '@repo/typescript-types';
-import { multiQueryUniquer } from 'api-server/dist/util/queryUtil';
-import { reqQueryToMongooseOptions } from 'api-server/dist/util/database-util';
 
-interface IDashboardGetComments {
-  keyword?: string,
-  status?: string,
-  onDocument?: string,
-  page?: number,
-  size?: number,
-  sort?: string
-}
 
 const dashboardGetComments = async (
   {
     keyword,
     status,
-    onDocument,
+    // onDocument,
     page = 1,
     size,
     sort = '-createdAt',
-  }: IDashboardGetComments) => {
+  }: any) => {
 
   const { isAdmin } = await verifySession();
 
@@ -72,20 +61,9 @@ const dashboardGetComments = async (
   const totalCount = await commentSchema
     .countDocuments(findQuery);
 
-  const transformedComments = comments.map((doc) => ({
-    ...doc,
-
-    _id: doc._id.toString(),
-    author: {
-      ...doc.author,
-      _id: doc.author._id.toString(),
-    },
-
-  }));
-
   return successResponse({
     data: {
-      comments: transformedComments,
+      comments: JSON.parse(JSON.stringify(comments)),
       totalCount,
     },
   });

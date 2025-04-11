@@ -4,14 +4,9 @@ import React, { useState} from 'react';
 import AddFormConditional from "./AddFormConditional";
 import FieldPreview from "./FieldPreview";
 import TextInputFieldForWidget from "../TextInputFieldForWidget/TextInputFieldForWidget";
-import styled from "styled-components";
+import './FormTypeWidgetModelFields.scss'
 
-const FormTypeWidgetModelFieldsStyledDiv = styled.div`
-  .add-new-filed{
-   // border: var( --default-border);
-    padding: 20px 0;
-  }
-`
+
 const FormTypeWidgetModelFields = props => {
 
     const [state, setState] = useState({
@@ -41,7 +36,7 @@ const FormTypeWidgetModelFields = props => {
 
 
     return (
-        <FormTypeWidgetModelFieldsStyledDiv>
+        <div className={'FormTypeWidgetModelFields'}>
             <TextInputFieldForWidget inputTitle='Form Name :' name='formName' type='text' value={props.widgetData?.uniqueData?.formName} placeHolder='Form Name' onChangeHandler={e => onChangeHandler(e)}/>
             <TextInputFieldForWidget inputTitle='Form TextInput :' name='formTitle' type='text' value={props.widgetData?.uniqueData?.formTitle} placeHolder='Form TextInput' onChangeHandler={e => onChangeHandler(e)}/>
             <TextInputFieldForWidget inputTitle='After Submit Message :' name='afterSubmitMessage' type='text' value={props.widgetData?.uniqueData?.afterSubmitMessage} placeHolder='After Submit Message' onChangeHandler={e => onChangeHandler(e)}/>
@@ -52,7 +47,7 @@ const FormTypeWidgetModelFields = props => {
             />
             <h4>Edit Existing Fields</h4>
             {renderExistingFields}
-        </FormTypeWidgetModelFieldsStyledDiv>
+        </div>
     );
 };
 export default FormTypeWidgetModelFields;

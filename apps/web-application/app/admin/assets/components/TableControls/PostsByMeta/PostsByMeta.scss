@@ -1,0 +1,19 @@
+#PostsByMeta{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .25rem;
+
+  p {
+    margin: 0 10px;
+    white-space: nowrap;
+  }
+
+  .primaryInput {
+    /* width: 260px; */
+  }
+
+  .btn-navigation {
+    /* margin: 0 2px; */
+  }
+}

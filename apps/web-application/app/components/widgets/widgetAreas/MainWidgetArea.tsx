@@ -1,7 +1,7 @@
 /* eslint-disable */
 import WidgetsRenderer from '@components/widgets/widgetRenderer/WidgetsRenderer';
 
-const MainWidgetArea = (props) => {
+const MainWidgetArea = (props:any) => {
   return (
     <div className={'main-widget-area'}>
       <WidgetsRenderer {...props} />

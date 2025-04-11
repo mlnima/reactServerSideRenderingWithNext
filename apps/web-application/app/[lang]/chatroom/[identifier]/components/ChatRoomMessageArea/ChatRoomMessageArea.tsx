@@ -9,7 +9,7 @@ import { Spinner } from '@repo/ui';
 
 interface IProp {
     chatroomId: string;
-    messageAreaRef: React.RefObject<HTMLDivElement>;
+    messageAreaRef: React.RefObject<HTMLDivElement | null>;
     autoScroll: boolean;
     setAutoScroll: React.Dispatch<React.SetStateAction<boolean>>;
     chatroomMessages: ChatroomMessage[];

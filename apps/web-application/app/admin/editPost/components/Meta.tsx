@@ -3,7 +3,7 @@
 
 import React, { FC, useRef } from 'react';
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useAppSelector } from '@storeDashboard/hooks';
 import { editPostAction } from "@storeDashboard/reducers/postsReducer";
 import { uniqArrayBy } from "@repo/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -48,7 +48,7 @@ interface PropType {
 
 const Meta: FC<PropType> = props => {
   let newItemsElement = useRef(null);
-  const post = useSelector(({ posts }) => posts.post);
+  const post = useAppSelector(({ posts }) => posts.post);
   const dispatch = useAppDispatch()
 
   const deleteItem = (e) => {

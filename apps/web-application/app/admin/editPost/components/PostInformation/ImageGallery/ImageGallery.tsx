@@ -1,23 +1,22 @@
 // @ts-nocheck
 'use client';
 import React, { useEffect, useState, useRef } from 'react';
-import { useSelector } from 'react-redux';
 import { uploadFileAction } from '@storeDashboard/reducers/fileManagerReducer';
 import { useAppDispatch } from '@storeDashboard/hooks';
 import { faXmark, faPlus, faUpload } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './ImageGallary.scss';
+import { IPost } from '@repo/typescript-types';
 
 
 interface ImageGalleryPropTypes {
   onChangeHandler: any;
-  rendering: boolean;
+  post:IPost
 }
 
-const ImageGallery: React.FC<ImageGalleryPropTypes> = ({ onChangeHandler, rendering }) => {
+const ImageGallery: React.FC<ImageGalleryPropTypes> = ({ onChangeHandler,post }) => {
   const dispatch = useAppDispatch();
   const uploadInputElement = useRef(null);
-  const post = useSelector((state) => state.posts.post);
   const [state, setState] = useState({ images: [], imageFromUrl: '' });
 
   useEffect(() => {
@@ -55,11 +54,6 @@ const ImageGallery: React.FC<ImageGalleryPropTypes> = ({ onChangeHandler, render
     filesData.append('type', 'gallery');
     dispatch(uploadFileAction({ file: filesData, useType: 'postImageGallery', postData: post }));
   };
-
-
-  if(!rendering){
-    return null
-  }
 
   return (
     <>

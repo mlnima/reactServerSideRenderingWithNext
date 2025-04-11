@@ -1,6 +1,6 @@
 'use server';
 import { IUpdatePost } from '@lib/actions/database/operations/types';
-import { jwtValidator } from '@repo/utils-server/dist/src/validators';
+import { jwtValidator } from '@repo/utils-server';
 import { JWTPayload } from '@repo/typescript-types';
 import { postSchema } from '@repo/db';
 

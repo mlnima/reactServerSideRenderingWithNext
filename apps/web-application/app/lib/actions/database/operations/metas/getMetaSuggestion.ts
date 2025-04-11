@@ -18,7 +18,7 @@ const getMetaSuggestion = async (
   }: IGetMetaSuggestion): Promise<ServerActionResponse<{
   suggestions: { value: string, label: string }[],
 } | null>> => {
-  'use cache';
+  // 'use cache';
   try {
     await connectToDatabase('getMetaSuggestion');
     const startWithQuery =
@@ -46,10 +46,10 @@ const getMetaSuggestion = async (
       };
     });
 
-    cacheTag(
-      'cacheItem',
-      `CGetMetaSuggestion-${metaType ? `-${metaType}` : ''}${startWith ? `-${startWith}` : ''}`,
-    );
+    // cacheTag(
+    //   'cacheItem',
+    //   `CGetMetaSuggestion-${metaType ? `-${metaType}` : ''}${startWith ? `-${startWith}` : ''}`,
+    // );
 
     return successResponse({
       data: {

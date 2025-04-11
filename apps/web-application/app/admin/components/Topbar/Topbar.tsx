@@ -4,14 +4,14 @@ import { useAppDispatch } from "@storeDashboard/hooks";
 import {setSidebarStatus} from "@storeDashboard/reducers/globalStateReducer";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faUser, faHome } from '@fortawesome/free-solid-svg-icons';
-import { useSelector } from "react-redux";
+import { useAppSelector } from '@storeDashboard/hooks';
 import React from "react";
 import './Topbar.scss'
 
 
 const Topbar = () => {
   const dispatch = useAppDispatch();
-  const sidebar = useSelector(({ globalState }) => globalState?.sidebar);
+  const sidebar = useAppSelector(({ globalState }) => globalState?.sidebar);
 
   const AdminSideBarOpenCloseHandler = () => {
     dispatch(setSidebarStatus(!sidebar));

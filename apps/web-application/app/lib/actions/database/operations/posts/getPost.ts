@@ -1,6 +1,6 @@
 'use server';
 import { connectToDatabase, postSchema } from '@repo/db';
-import { isValidObjectId } from '@repo/db/dist/src/tools';
+import { isValidObjectId } from '@repo/db';
 import { IPost } from '@repo/typescript-types';
 import { errorResponse, ServerActionResponse, successResponse } from '@lib/actions/response';
 import { convertPostDocumentToObject } from '@lib/actions/database/tools';
@@ -10,7 +10,7 @@ const getPost = async (identifier: string): Promise<ServerActionResponse<{
   post: IPost,
   relatedPosts: IPost[]
 } | null>> => {
-  'use cache';
+  // 'use cache';
   try {
     await connectToDatabase('getPost');
     const isId = isValidObjectId(identifier);
@@ -56,7 +56,7 @@ const getPost = async (identifier: string): Promise<ServerActionResponse<{
     });
 
     //no cache life for the post data
-    cacheTag('cacheItem', `CPost-${post._id as unknown as string}`);
+    // cacheTag('cacheItem', `CPost-${post._id as unknown as string}`);
 
     return successResponse({
       data: {

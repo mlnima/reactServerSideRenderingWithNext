@@ -40,7 +40,11 @@ const VideoPostCard: FC<IProps> = ({
     index,
     isNextImageAllowed,
     dictionary,
-    settings,
+    settings = {
+      showViewsOnCard:  true,
+      showRatingOnCard:  true,
+      showDateOnCard:  true,
+    },
 }) => {
     // const rating = post.likes || post.disLikes ? ratingCalculator(post?.likes, post?.disLikes) : null
     return (

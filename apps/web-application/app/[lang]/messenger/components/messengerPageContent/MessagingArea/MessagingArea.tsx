@@ -9,7 +9,7 @@ import {IMessengerConversation, IMessengerConversationMessage} from "@repo/types
 
 interface IProps {
     onLoadOlderMessages: () => void
-    messageAreaRef: React.RefObject<HTMLDivElement>,
+    messageAreaRef: React.RefObject<HTMLDivElement | null>,
     autoScroll: boolean,
     setAutoScroll: React.Dispatch<React.SetStateAction<boolean>>,
     activeConversation: IMessengerConversation,

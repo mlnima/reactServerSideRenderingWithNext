@@ -7,6 +7,7 @@ import {faPhoneSlash} from "@fortawesome/free-solid-svg-icons/faPhoneSlash";
 import {faVideo} from "@fortawesome/free-solid-svg-icons/faVideo";
 import {faPhone} from "@fortawesome/free-solid-svg-icons/faPhone";
 import {useSelector} from "react-redux";
+import { useAppSelector } from '@store/hooks';
 
 interface PropTypes {
     inCallButtonsVisible: boolean,
@@ -45,7 +46,7 @@ const InCallActionButtons: FC<PropTypes> = (
         incomingCall,
         callAccepted,
         callType,
-    } = useSelector(({mediaConnection}) => mediaConnection);
+    } = useAppSelector(({mediaConnection}) => mediaConnection);
 
     useEffect(() => {
         if ((!outGoingCall || !incomingCall) && callAccepted) {

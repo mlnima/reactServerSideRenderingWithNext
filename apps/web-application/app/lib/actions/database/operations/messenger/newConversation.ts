@@ -10,7 +10,7 @@ interface INewConversation {
 }
 
 const newConversation = async ({ targetUsers }: INewConversation) => {
-  'use cache';
+  // 'use cache';
   try {
     const { isAuth ,userId} = await verifySession();
 

@@ -1,20 +1,16 @@
 'use client';
 import { convertVariableNameToName } from '@repo/utils';
-import { useSelector } from 'react-redux';
-import { DashboardStore } from '@repo/typescript-types';
 import { ChangeEvent } from 'react';
+import { IPost } from '@repo/typescript-types';
 
 interface PropTypes {
   onChangeHandler: (e: ChangeEvent<HTMLTextAreaElement>) => void;
-  rendering: boolean;
+
   name: 'videoScriptCode';
+  post: IPost;
 }
 
-const TextAreaComponent = ({ rendering, name, onChangeHandler }: PropTypes) => {
-  const post = useSelector(({ posts }: DashboardStore) => posts.post);
-
-
-  if (!rendering || !post) return null;
+const TextAreaComponent = ({ name, onChangeHandler, post }: PropTypes) => {
 
   return (
     <div className="post-information-section">

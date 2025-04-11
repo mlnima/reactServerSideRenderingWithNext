@@ -4,8 +4,8 @@ export interface User {
   draftPost?: string | {};
   _id: string;
   username: string;
-  email: string;
-  password: string;
+  email?: string;
+  password?: string;
   role?: string;
   firstName?: string;
   lastName?: string;

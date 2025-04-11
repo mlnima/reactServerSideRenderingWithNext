@@ -1,45 +1,47 @@
 import { FC } from 'react';
-import { IWidget } from "@repo/typescript-types";
+import { IContentSettings, IWidget } from '@repo/typescript-types';
 import WidgetWrapper from '../widgetWrapper/WidgetWrapper';
 
 interface IProps {
-    widgets: IWidget[];
-    position: string;
-    locale: string;
-    hasSidebar?: string;
-    dictionary: {
-        [key: string]: string;
-    };
+  widgets: IWidget[];
+  position: string;
+  locale: string;
+  hasSidebar?: string;
+  dictionary: {
+    [key: string]: string;
+  };
+  contentSettings?: IContentSettings;
 }
 
-const WidgetsRenderer: FC<IProps> = ({ widgets, position, dictionary, hasSidebar, locale }) => {
-    // const renderWidget = [...(widgets || [])]
-    //     ?.sort((a, b) => (a?.data?.widgetIndex > b?.data?.widgetIndex ? 1 : -1))
-    //     ?.map(widget => {
-    //         const widgetProps = {
-    //             dictionary,
-    //             hasSidebar,
-    //             locale,
-    //             widgetId: widget._id,
-    //             isSidebar: position ? position.includes('Sidebar') : false,
-    //             ...widget,
-    //         };
-    //         return <WidgetWrapper {...widgetProps} key={widget._id} />;
-    //     });
+const WidgetsRenderer: FC<IProps> = ({ widgets, position, dictionary, hasSidebar, locale, contentSettings }) => {
+  // const renderWidget = [...(widgets || [])]
+  //     ?.sort((a, b) => (a?.data?.widgetIndex > b?.data?.widgetIndex ? 1 : -1))
+  //     ?.map(widget => {
+  //         const widgetProps = {
+  //             dictionary,
+  //             hasSidebar,
+  //             locale,
+  //             widgetId: widget._id,
+  //             isSidebar: position ? position.includes('Sidebar') : false,
+  //             ...widget,
+  //         };
+  //         return <WidgetWrapper {...widgetProps} key={widget._id} />;
+  //     });
 
-    return <>{
-        (widgets || [])?.map(widget => {
-            const widgetProps = {
-                dictionary,
-                hasSidebar,
-                locale,
-                widgetId: widget._id,
-                isSidebar: position ? position.includes('Sidebar') : false,
-                ...widget,
-            };
-            return <WidgetWrapper {...widgetProps} key={widget._id} />;
-        })
-    }</>;
+  return <>{
+    (widgets || [])?.map(widget => {
+      const widgetProps = {
+        dictionary,
+        hasSidebar,
+        locale,
+        contentSettings,
+        widgetId: widget._id,
+        isSidebar: position ? position.includes('Sidebar') : false,
+        ...widget,
+      };
+      return <WidgetWrapper {...widgetProps} key={widget._id} />;
+    })
+  }</>;
 };
 export default WidgetsRenderer;
 

@@ -1,46 +1,41 @@
 'use client';
-
-import React, { useEffect } from 'react';
-import styled from "styled-components";
-import { useSelector } from "react-redux";
-import { DashboardStore } from "@repo/typescript-types";
-import { getFormAction } from "@storeDashboard/reducers/formsReducer";
+import React, { useEffect, useState } from 'react';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
-import { useAppDispatch } from "@storeDashboard/hooks";
-import { dashboardAPIRequestDeleteForm } from "@repo/api-requests";
-
-let StyledDiv = styled.div`
-  .form-data-container {
-    border-radius: 5px;
-    padding: 5px;
-    background-color: #333;
-    margin: 30px 0;
-    .form-field-data {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      color: white;
-      padding: 5px;
-      h3 {
-        margin-right: 20px;
-      }
-    }
-  }
-`;
+import { useAppDispatch } from '@storeDashboard/hooks';
+import { dashboardAPIRequestDeleteForm } from '@repo/api-requests';
+import './styles.scss';
+import dashboardGetForm from '@lib/actions/database/operations/forms/dashboardGetForm';
+import { setAlert } from '@storeDashboard/reducers/globalStateReducer';
+import { IForm } from '@repo/typescript-types';
 
 const Form = () => {
   const dispatch = useAppDispatch();
   const searchParams = useSearchParams();
-  const params = useParams<{ id: string }>()
+  const params = useParams<{ id: string }>();
   const router = useRouter();
 
-  const formData = useSelector(({ forms }: DashboardStore) => forms.form);
+  const [formData, setFormData] = useState<IForm | null>(null);
+
+  const getForm = async (_id: string) => {
+    const { data, error, message, success } = await dashboardGetForm({ _id });
+    if (!success || !data) {
+      dispatch(
+        setAlert({
+          message,
+          type: 'Error',
+          err: error,
+        }),
+      );
+      return;
+    }
+    setFormData(data.form);
+  };
 
   useEffect(() => {
-    if (params.id){
-      dispatch(getFormAction(params.id));
+    const _id = params.id;
+    if (_id) {
+      getForm(_id);
     }
-
   }, [searchParams]);
 
   const onDeleteHandler = async () => {
@@ -51,14 +46,18 @@ const Form = () => {
     }
   };
 
+
+  useEffect(() => {
+    console.log(`formData=> `, formData);
+  }, [formData]);
   return (
-    <StyledDiv>
+    <div className={'viewFormDataPage'}>
       <h1>{formData?.formName}</h1>
       <span>{formData?.date}</span>
-      <div className='form-data-container'>
+      <div className="form-data-container">
         {(formData?.data ? Object.keys(formData?.data) : []).map(fieldData => {
           return (
-            <div key={fieldData} className='form-field-data'>
+            <div key={fieldData} className="form-field-data">
               <h3>{fieldData} :</h3>
               <p>{formData?.data?.[fieldData]}</p>
             </div>
@@ -66,7 +65,7 @@ const Form = () => {
         })}
       </div>
       <button className={'btn btn-danger'} onClick={onDeleteHandler}>Delete</button>
-    </StyledDiv>
+    </div>
   );
 };
 

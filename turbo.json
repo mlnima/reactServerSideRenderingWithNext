@@ -44,7 +44,8 @@
     },
     "dev": {
       "dependsOn": [
-        "generateStaticConfig"
+        "generateStaticConfig",
+        "^build"
       ],
       "cache": false
     },

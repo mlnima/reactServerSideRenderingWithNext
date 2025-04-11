@@ -1,0 +1,15 @@
+#AssetStatusNavigation{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  max-width: 450px;
+  .btn-navigation {
+    margin: 0 2px;
+    padding: 6px;
+    .statusCount{
+      font-size: small;
+      overflow: hidden;
+      color: var(--primary-active-color);
+    }
+  }
+}

@@ -29,6 +29,11 @@ const CategoriesPage = async (props: IProps) => {
     }>,
   );
 
+  if (!categoriesPageSettings) {
+    console.log(`console=> categoriesPageSettings`,)
+    return <Soft404 dictionary={dictionary} />;
+  }
+
   const sidebar = categoriesPageSettings?.sidebar;
 
   const widgets = await getWidgets(
@@ -40,6 +45,10 @@ const CategoriesPage = async (props: IProps) => {
     ],
     locale
   );
+  if (!categoriesPageSettings) {
+    console.log(`console=> widgets`,)
+    return <Soft404 dictionary={dictionary} />;
+  }
 
   const currentPageQuery = searchParams?.page;
   const currentPage =

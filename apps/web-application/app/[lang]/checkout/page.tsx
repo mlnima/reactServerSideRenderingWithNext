@@ -11,11 +11,11 @@ import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 
 
 const checkoutPage = async (props: IPageProps) => {
-  const params = await props.params;
 
-  const {
-    lang,
-  } = params;
+  const params = await props.params;
+  // const {
+  //   lang,
+  // } = params;
 
   const locale = localDetector(params.lang);
   const dictionary = await getDictionary(locale);

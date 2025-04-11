@@ -1,20 +1,15 @@
-'use client';
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { convertVariableNameToName } from '@repo/utils';
-import { DashboardStore } from '@repo/typescript-types';
 import { FC } from 'react';
+import { IPost } from '@repo/typescript-types';
 
 interface PropTypes {
   name: 'likes' | 'disLikes' | 'views';
   onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  rendering: boolean;
+  post:IPost
 }
 
-const RatingAndViews: FC<PropTypes> = ({ name, onChangeHandler, rendering }) => {
-  const post = useSelector((state: DashboardStore) => state.posts.post);
-
-  if (!rendering || !post?.[name]) return null;
+const RatingAndViews: FC<PropTypes> = ({ name, onChangeHandler,post }) => {
 
   return (
     <div className="post-information-section">

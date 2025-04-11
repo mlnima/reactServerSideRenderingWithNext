@@ -1,53 +1,34 @@
 'use client';
-import AssetStatusNavigation from './AssetStatusNavigation';
-import AssetSearch from './AssetSearch';
-import AssetPagination from './AssetPagination';
-import AssetSize from './AssetSize';
-import AssetBulkAction from './AssetBulkAction';
-import PostsTypes from './PostsTypes';
-import PostsByMeta from './PostsByMeta';
-import styled from 'styled-components';
+import AssetStatusNavigation from './AssetStatusNavigation/AssetStatusNavigation';
+import AssetSearch from './AssetSearch/AssetSearch';
+import AssetPagination from './AssetPagination/AssetPagination';
+import AssetSize from './AssetSize/AssetSize';
+import AssetBulkAction from './AssetBulkAction/AssetBulkAction';
+import PostsTypes from './PostsByTypes/PostsByTypes';
+import PostsByMeta from './PostsByMeta/PostsByMeta';
 import React, { FC, useMemo } from 'react';
-import MetasType from './MetasTypes';
-import SortItemsBy from './SortItemsBy';
-import UsersRole from './UsersRole';
+import MetasType from './MetasType/MetasType';
+import SortAssetsBy from './SortAssetsBy/SortAssetsBy';
+import ContentUsersRoleFilter from './UsersRole/ContentUsersRoleFilter';
 import { useSearchParams } from 'next/navigation';
-
-const TableControlsStyledDiv = styled.div`
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.5rem;
-
-    .assetControlItem {
-        background-color: var(--tertiary-background-color);
-        padding: 0.35rem 1rem;
-        border-radius: 0.375rem;
-
-        p {
-            white-space: nowrap;
-            padding: 0;
-            margin: 0;
-        }
-    }
-`;
+import './TableControls.scss'
 
 interface TableControlsPropTypes {
   selectedItems: string[];
   setSelectedItems: React.Dispatch<React.SetStateAction<string[]>>,
   totalCount: number
+  statusesCount: any
 }
 
-const TableControls: FC<TableControlsPropTypes> = ({ selectedItems, setSelectedItems, totalCount = 0 }) => {
+const TableControls: FC<TableControlsPropTypes> = ({ selectedItems, setSelectedItems, totalCount = 0, statusesCount }) => {
 
   const searchParams = useSearchParams();
   const assetsType = useMemo(() => searchParams.get('assetsType'), [searchParams]);
 
   return (
-    <TableControlsStyledDiv className="asset-page-table-head">
+    <div id={'ContentTableControls'} className="asset-page-table-head">
       {(assetsType === 'posts' || assetsType === 'metas') && (
-        <AssetStatusNavigation />
+        <AssetStatusNavigation statusesCount={statusesCount} />
       )}
 
       <AssetSize />
@@ -56,12 +37,12 @@ const TableControls: FC<TableControlsPropTypes> = ({ selectedItems, setSelectedI
       )}
       {assetsType === 'posts' && <PostsTypes />}
       {assetsType === 'metas' && <MetasType />}
-      {assetsType === 'users' && <UsersRole />}
+      {assetsType === 'users' && <ContentUsersRoleFilter />}
       <AssetPagination totalCount={totalCount} />
       <AssetSearch />
       {assetsType === 'posts' && <PostsByMeta />}
-      <SortItemsBy />
-    </TableControlsStyledDiv>
+      <SortAssetsBy />
+    </div>
   );
 };
 

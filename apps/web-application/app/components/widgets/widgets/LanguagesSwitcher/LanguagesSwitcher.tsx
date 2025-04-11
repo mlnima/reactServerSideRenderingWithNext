@@ -26,12 +26,12 @@ const LanguagesSwitcher: FC<IProps> = ({ locale }) => {
     if (locales.some((locale: string) => pathname.includes(`/${locale}/`))) {
       if (targetedLocale === defaultLocale) {
         const newSegments = [...segments].filter(
-          (segment) => segment !== locale
+          (segment) => segment !== locale,
         );
         push(newSegments.join('/') + queryString);
       } else {
         const newSegments = [...segments].map((segment) =>
-          locales.includes(segment) ? targetedLocale : segment
+          locales.includes(segment) ? targetedLocale : segment,
         );
         push(newSegments.join('/') + queryString);
       }
@@ -55,7 +55,10 @@ const LanguagesSwitcher: FC<IProps> = ({ locale }) => {
       <div className={'languagesSwitcherWidgetActiveLanguage'}>
         <button type={'button'} onClick={() => setIsOpen(!isOpen)}>
 
-          <span> {languagesMapOrigin?.[locale] || locale}</span>
+          <span> {
+            // @ts-expect-error: its fine
+            languagesMapOrigin?.[locale] || locale
+          }</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
@@ -86,7 +89,10 @@ const LanguagesSwitcher: FC<IProps> = ({ locale }) => {
                 role="menuitem"
               >
 
-                {languagesMapOrigin?.[locale] || locale}
+                {
+                  // @ts-expect-error: its fine
+                  languagesMapOrigin?.[locale] || locale
+                }
                 {/*{locale.toUpperCase()}*/}
               </button>
             ))}

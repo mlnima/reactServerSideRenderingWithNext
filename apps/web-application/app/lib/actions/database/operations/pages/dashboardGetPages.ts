@@ -6,12 +6,7 @@ import getSettings from '@lib/actions/database/operations/settings/getSettings';
 import { IInitialSettings } from '@repo/typescript-types';
 import { deepConvertObjectIdsToStrings } from '@repo/utils-server';
 
-interface IDashboardGetForms {
-  keyword?: string,
-  page?: number,
-  size?: number,
-  sort?: string
-}
+
 
 const dashboardGetPages = async (
   {
@@ -19,7 +14,7 @@ const dashboardGetPages = async (
     page = 1,
     size,
     sort = '-updatedAt',
-  }: IDashboardGetForms,
+  }: any,
 ) => {
   try {
     const { isAdmin } = await verifySession();

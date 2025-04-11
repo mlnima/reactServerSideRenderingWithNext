@@ -1,10 +1,7 @@
-import dynamic from 'next/dynamic';
+
 import { getDictionary } from '../../../../get-dictionary';
 import './page.scss';
-
-const UserPageContent = dynamic(
-  () => import('./components/UserPageContent/UserPageContent'),
-);
+import UserPageContent from './components/UserPageContent/UserPageContent'
 // import UserPageContent from './components/UserPageContent/UserPageContent';
 import getSettings from '@lib/actions/database/operations/settings/getSettings';
 import localDetector from '@lib/localDetector';
@@ -24,11 +21,11 @@ const userPage = async (props: IPageProps) => {
   const dictionary = await getDictionary(locale);
 
 
-  const { userPageSettings } = unwrapResponse(
-    await getSettings(['userPageSettings']) as unknown as ServerActionResponse<{
-      userPageSettings: IPageSettings | undefined;
-    }>,
-  );
+  // const { userPageSettings } = unwrapResponse(
+  //   await getSettings(['userPageSettings']) as unknown as ServerActionResponse<{
+  //     userPageSettings: IPageSettings | undefined;
+  //   }>,
+  // );
 
   const { username } = params;
 
@@ -39,7 +36,7 @@ const userPage = async (props: IPageProps) => {
   }>;
 
   if (!initialUserPageDataResponse?.success || !initialUserPageDataResponse?.data) {
-    return null;
+    return <Soft404 dictionary={dictionary} />;
   }
 
   const { initialUserPageData } = initialUserPageDataResponse?.data
@@ -66,17 +63,16 @@ const userPage = async (props: IPageProps) => {
 
   return (
     <>
-      {/*{initialUserPageData &&*/}
-      {/*  <>*/}
+      {(initialUserPageData) &&
+        <>
 
-      {/*  <UserPageContent*/}
-      {/*    initialUserPageData={initialUserPageData}*/}
-      {/*    dictionary={dictionary}*/}
-      {/*    username={params.username}*/}
-      {/*    locale={locale}*/}
-      {/*  />*/}
-      {/*</>*/}
-      {/*}*/}
+        <UserPageContent
+          initialUserPageData={initialUserPageData}
+          dictionary={dictionary}
+          locale={locale}
+        />
+      </>
+      }
 
       {(posts && posts?.length > 0) ?
         <div className="postsContainer">

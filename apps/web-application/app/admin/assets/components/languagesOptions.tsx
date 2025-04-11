@@ -1,3 +1,4 @@
+'use client';
 const locales = process.env.NEXT_PUBLIC_LOCALES || ''
 const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || ''
 

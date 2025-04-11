@@ -1,77 +1,29 @@
 'use client';
 import React, { useEffect, useMemo, useState } from 'react';
-import styled from "styled-components";
-import { useSelector } from "react-redux";
-import {  useSearchParams } from 'next/navigation';
-import { LanguagesOptions } from "@repo/ui";
-import { useAppDispatch } from "@storeDashboard/hooks";
-import { deleteMetaAction, editMetaAction, getMetaAction, updateMetaAction } from "@storeDashboard/reducers/postsReducer";
 
-const AdminMetaPageStyledDiv = styled.div`
-  width: 95%;
-  max-width: 1300px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+import { useAppSelector } from '@storeDashboard/hooks';
+import { useSearchParams } from 'next/navigation';
+import { LanguagesOptions } from '@repo/ui';
+import { useAppDispatch } from '@storeDashboard/hooks';
+import {
+  deleteMetaAction,
+  editMetaAction,
+  getMetaAction,
+  updateMetaAction,
+} from '@storeDashboard/reducers/postsReducer';
+import './styles.scss';
 
-  .single-meta-page-section {
-    width: 700px;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
 
-    p {
-      width: 200px;
-    }
-
-    input, textarea {
-      min-width: 300px;
-      padding: 3px 5px;
-    }
-
-    textarea {
-      min-height: 200px;
-    }
-  }
-
-  .preview-image {
-    margin: 10px 0;
-    max-width: 600px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    img {
-      width: 280px;
-    }
-  }
-
-  .action-buttons {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-
-    .red-action-btn-link {
-      background-color: red;
-      border: none;
-      padding: 10px 30px;
-    }
-  }
-`;
-
-const Meta = () => {
+const EditMetaPage = () => {
   const dispatch = useAppDispatch();
-  const meta = useSelector(({ posts }) => posts.meta);
-  const searchParams = useSearchParams()
+  const meta = useAppSelector(({ posts }) => posts.meta);
+  const searchParams = useSearchParams();
 
   const { id, newMeta, metaType, lang } = useMemo(() => ({
     id: searchParams.get('id'),
-    newMeta:searchParams.get('new') ,
-    metaType:searchParams.get('metaType') ,
-    lang:searchParams.get('lang') ,
+    newMeta: searchParams.get('new'),
+    metaType: searchParams.get('metaType'),
+    lang: searchParams.get('lang'),
   }), [searchParams]);
 
   const [editingData, setEditingData] = useState({ activeEditingLanguage: 'default' });
@@ -88,7 +40,7 @@ const Meta = () => {
         imageUrlLock: false,
         translations: {},
         count: 0,
-        lang: lang || 'default'
+        lang: lang || 'default',
       }));
     } else if (id) {
       dispatch(getMetaAction(id));
@@ -123,12 +75,12 @@ const Meta = () => {
   if (!meta) return <h1>Not Found</h1>;
 
   return (
-    <AdminMetaPageStyledDiv className='single-meta-page'>
+    <div className="EditMetaPage">
       {!!meta?.type && <label>Type: {meta?.type}</label>}
       <div className={'single-meta-page-section'}>
         <p>Language :</p>
         <select className={'primarySelect'} onChange={onActiveEditingLanguageChangeHandler}>
-          <option value='default'>Default</option>
+          <option value="default">Default</option>
           <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALES || ''} />
         </select>
       </div>
@@ -136,7 +88,7 @@ const Meta = () => {
         <p>Meta Name :</p>
         <input
           className={'primaryInput'}
-          name='name'
+          name="name"
           onChange={onInputChangeHandler}
           // @ts-ignore
           value={
@@ -229,20 +181,20 @@ const Meta = () => {
       <div className={'single-meta-page-section'}>
         <p>Type :</p>
         <select className={'primarySelect'} name={'type'} onChange={onChangeHandler} value={meta?.type}>
-          <option value=''>Select</option>
-          <option value='tags'>Tag</option>
-          <option value='categories'>Category</option>
-          <option value='actors'>Actor</option>
+          <option value="">Select</option>
+          <option value="tags">Tag</option>
+          <option value="categories">Category</option>
+          <option value="actors">Actor</option>
         </select>
       </div>
       <div className={'single-meta-page-section'}>
         <p>Status :</p>
         <select className={'primarySelect'} name={'status'} onChange={onChangeHandler} value={meta?.status}>
-          <option value=''>Select</option>
-          <option value='draft'>Draft</option>
-          <option value='published'>Published</option>
-          <option value='trash'>Trash</option>
-          <option value='pending'>Pending</option>
+          <option value="">Select</option>
+          <option value="draft">Draft</option>
+          <option value="published">Published</option>
+          <option value="trash">Trash</option>
+          <option value="pending">Pending</option>
         </select>
       </div>
       <div className={'single-meta-page-section'}>
@@ -262,20 +214,20 @@ const Meta = () => {
           }
         />
       </div>
-      <div className='action-buttons'>
-        <button className='btn btn-primary' onClick={() => dispatch(updateMetaAction(meta))}>Update</button>
+      <div className="action-buttons">
+        <button className="btn btn-primary" onClick={() => dispatch(updateMetaAction(meta))}>Update</button>
         {!deleteButton && (
           <button className={'btn btn-danger'} onClick={() => setDeleteButton(true)}>I Want To Delete This Meta</button>
         )}
         {deleteButton && (
-          <button onClick={() => dispatch(deleteMetaAction(id!))} className='btn btn-danger'>Delete</button>
+          <button onClick={() => dispatch(deleteMetaAction(id!))} className="btn btn-danger">Delete</button>
         )}
       </div>
-    </AdminMetaPageStyledDiv>
+    </div>
   );
 };
 
-export default Meta;
+export default EditMetaPage;
 
 
 //

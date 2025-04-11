@@ -12,6 +12,6 @@ const AdminLayoutDataInitializer = () => {
     dispatch(getCustomPagesAction());
     dispatch(getSettingsAction(null));
   }, []);
-  return <div></div>;
+  return null;
 };
 export default AdminLayoutDataInitializer;

@@ -2,12 +2,12 @@
 'use client';
 
 import React from 'react';
-import { useSelector } from "react-redux";
 import { useAppDispatch } from "@storeDashboard/hooks";
 import {  IWidget } from '@repo/typescript-types';
+import { useAppSelector } from '@storeDashboard/hooks';
 
 const WidgetExporter = (): JSX.Element => {
-    const widgets = useSelector(({ widgets }) => widgets?.adminPanelWidgets);
+    const widgets = useAppSelector(({ widgets }) => widgets?.adminPanelWidgets);
     const dispatch = useAppDispatch();
 
     const exportAllWidgets = () => {

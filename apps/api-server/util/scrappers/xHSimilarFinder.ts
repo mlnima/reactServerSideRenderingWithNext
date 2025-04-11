@@ -1,8 +1,6 @@
 import got from 'got';
 import jsdom from 'jsdom';
-import { IPost } from '@repo/typescript-types';
-import { Simulate } from 'react-dom/test-utils';
-import error = Simulate.error;
+
 
 const { JSDOM } = jsdom;
 

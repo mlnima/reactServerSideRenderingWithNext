@@ -6,13 +6,13 @@ import SidebarWidgetAreaRenderer
 import actorsMetaGenerator from './components/actorsMetaGenerator/actorsMetaGenerator';
 import ActorsPageContentRenderer from '@components/metas/ActorsPageContentRenderer';
 import './page.styles.scss';
-import { PageParams, PageSearchParams } from '@repo/typescript-types';
+import { IInitialSettings, PageParams, PageSearchParams } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
 import getWidgets from '@lib/actions/database/operations/widgets/getWidgets';
 import getMetas from '@lib/actions/database/operations/metas/getMetas';
 import getSettings from '@lib/actions/database/operations/settings/getSettings';
 import Soft404 from '@components/Soft404/Soft404';
-import { ServerActionResponse } from '@lib/actions/response';
+import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 
 interface IProps {
   params: PageParams,
@@ -24,6 +24,13 @@ const actorsPage = async (props: IProps) => {
   const params = await props.params;
   const locale = localDetector(params.lang);
   const dictionary = await getDictionary(locale);
+
+
+  const { initialSettings } = unwrapResponse(
+    await getSettings(['initialSettings']) as unknown as ServerActionResponse<{
+      initialSettings: IInitialSettings | undefined
+    }>,
+  );
 
   const {
     data: { actorsPageSettings: { sidebar = 'no' } = {} } = {},
@@ -70,27 +77,31 @@ const actorsPage = async (props: IProps) => {
         <WidgetsRenderer dictionary={dictionary}
                          locale={locale}
                          widgets={widgets?.['actorsPageTop']}
-                         position={'actorsPageTop'} />
+                         position={'actorsPageTop'}
+                         contentSettings={initialSettings?.contentSettings}/>
 
         <ActorsPageContentRenderer renderPagination
                                    totalCount={data?.totalCount || 0}
                                    currentPage={currentPage}
                                    locale={locale}
                                    dictionary={dictionary}
-                                   metas={data?.metas || []} />
+                                   metas={data?.metas || []}
+                                   contentSettings={initialSettings?.contentSettings}/>
 
 
         <WidgetsRenderer dictionary={dictionary}
                          locale={locale}
                          widgets={widgets?.['actorsPageBottom']}
-                         position={'actorsPageBottom'} />
+                         position={'actorsPageBottom'}
+                         contentSettings={initialSettings?.contentSettings}/>
       </main>
       <SidebarWidgetAreaRenderer leftSideWidgets={widgets?.['actorsPageLeftSidebar']}
                                  rightSideWidgets={widgets?.['actorsPageRightSidebar']}
                                  dictionary={dictionary}
                                  locale={locale}
                                  sidebar={sidebar || 'no'}
-                                 position={'postPage'} />
+                                 position={'postPage'}
+                                 contentSettings={initialSettings?.contentSettings}/>
     </div>
   );
 };

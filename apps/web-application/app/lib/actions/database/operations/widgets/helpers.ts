@@ -1,3 +1,4 @@
+import 'server-only'
 import getSettings from '@lib/actions/database/operations/settings/getSettings';
 import { clientAllowedSortOptions, postFieldRequestForCards } from '@repo/data-structures';
 import { metaSchema, postSchema } from '@repo/db';

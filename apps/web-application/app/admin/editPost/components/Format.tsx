@@ -3,7 +3,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '@storeDashboard/hooks';
 import { editPostAction } from '@storeDashboard/reducers/postsReducer';
 import { postTypes } from '@repo/data-structures';
 import { useAppDispatch } from '@storeDashboard/hooks';
@@ -17,7 +17,7 @@ const FormatStyledDiv = styled.div`
 
 const Format = () => {
   const dispatch = useAppDispatch();
-  const post = useSelector(({ posts }) => posts.post);
+  const post = useAppSelector(({ posts }) => posts.post);
 
   const onChangeHandlerAndSetPreferPostTypeToLocalStorage = (e: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(editPostAction({ [e.target.name]: e.target.value }));

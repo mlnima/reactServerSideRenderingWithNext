@@ -78,7 +78,10 @@ export const imageCanvasCompressor = async ({ image, maxWidth = 640, maxHeight =
             );
           }
         };
-        img.src = event.target.result as string;
+
+        if (event.target){
+          img.src = event.target.result as string;
+        }
       };
       reader.onerror = reject;
       reader.readAsDataURL(image);

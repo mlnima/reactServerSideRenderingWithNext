@@ -2,9 +2,9 @@
 
 import React, { useRef } from 'react';
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useAppSelector } from '@storeDashboard/hooks';
 import { fileManagerEditState, uploadFileAction } from "@storeDashboard/reducers/fileManagerReducer";
-import { DashboardStore } from "@repo/typescript-types";
+
 import { useAppDispatch } from "@storeDashboard/hooks";
 
 const FileManagerControlStyledDiv = styled.div`
@@ -43,7 +43,7 @@ const FileManagerControl = () => {
     const addressBar = useRef(null);
     const uploadInputElement = useRef(null);
     const dispatch = useAppDispatch();
-    const fileManagerData = useSelector(({ fileManager }: DashboardStore) => fileManager);
+    const fileManagerData = useAppSelector(({ fileManager }) => fileManager);
 
     const onGoBackHandler = (e: any) => {
         clearClickedItemHandler(e);

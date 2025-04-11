@@ -1,3 +1,4 @@
+// 'use client'
 import getInitialUserPageData from '@lib/actions/database/operations/users/getInitialUserPageData';
 import localDetector from '@lib/localDetector';
 import { getDictionary } from '../../../../get-dictionary';

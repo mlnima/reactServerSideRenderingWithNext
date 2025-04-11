@@ -1,0 +1,23 @@
+.TableBodyItemArraySection{
+  display: flex;
+  flex-wrap: wrap;
+
+  button {
+    font-size: xx-small;
+    padding: 2px 4px;
+  }
+
+  p {
+    overflow: hidden;
+    display: inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 150px;
+  }
+  a {
+    border: none;
+    margin: 2px;
+    padding: 2px;
+    font-size: 10px;
+  }
+}

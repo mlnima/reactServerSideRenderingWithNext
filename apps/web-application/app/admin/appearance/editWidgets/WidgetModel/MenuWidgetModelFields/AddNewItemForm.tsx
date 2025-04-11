@@ -1,35 +1,6 @@
-import styled from "styled-components";
+'use client';
 import React, {FC} from "react";
 import {IMenuItem} from "@repo/typescript-types";
-
-const Styles = styled.form`
-  width: 95%;
-  margin: auto;
-  border: var(--default-border);
-
-  .formId {
-    font-size: small;
-  }
-
-  .menu-widget-form {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin: auto;
-    width: 90%;
-  }
-
-  .menu-widget-form-form-field {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    input {
-      width: 70%;
-    }
-  }
-`
 
 interface IProps {
     parentsOption: IMenuItem[],
@@ -64,7 +35,7 @@ const MenuWidgetEditForm: FC<IProps> = (
 
 
     return (
-        <Styles className='menu-widget-form' onSubmit={e => onSubmitHandler(e)}>
+        <form className='AddNewItemForm' onSubmit={e => onSubmitHandler(e)}>
            <h3> Add New Item</h3>
             <div className='menu-widget-form-form-field'>
                 <p>Parent:</p>
@@ -133,7 +104,7 @@ const MenuWidgetEditForm: FC<IProps> = (
                 <button className={'btn btn-primary'} type='submit'>Add</button>
             </div>
 
-        </Styles>
+        </form>
 
 
     );

@@ -1,0 +1,18 @@
+.EditPage{
+  padding: 10px 1rem;
+  .form-group {
+    margin: 5px 0;
+    .primaryInput, .primarySelect {
+      max-width: 300px;
+    }
+  }
+
+  .actions-btns{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .btn-primary{
+      margin: 20px 0;
+    }
+  }
+}

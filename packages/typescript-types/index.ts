@@ -4,7 +4,7 @@ import { IChatroom } from './src/chatroom/Chatroom';
 import { ChatroomMessage } from './src/chatroom/ChatroomMessage';
 import { DesignSettings } from './src/settings/DesignSettings';
 import { IdentitySettings } from './src/settings/IdentitySettings';
-import { IInitialSettings } from './src/settings/InitialSettings';
+import { IInitialSettings , IContentSettings } from './src/settings/InitialSettings';
 import { UgcSettings } from './src/settings/UgcSettings';
 import { MembershipSettings } from './src/settings/MembershipSettings';
 import { IPageSettings } from './src/settings/PageSettings';
@@ -35,6 +35,7 @@ import { IMenuItem, IWidget } from './src/widgets/Widget';
 import { IPage, PageSearchParams, PageParams, IPageProps, ILayoutProps } from './src/Page';
 import { IWidgetData } from './src/widgets/Widget';
 import { WidgetSettingsPropTypes, ISuggestion, UniqueDataTypes } from './src/widgets/Widget';
+import {IForm} from'./src/IForm'
 
 
 import { MenuItem } from './src/widgets/MenuWidget/MenuItem';
@@ -75,6 +76,7 @@ export type {
   IMessengerConversationMessage,
   CommentRaw,
   User,
+  IForm,
   TProfileImage,
   IRegisterNewUser,
   IMemberLogin,
@@ -98,6 +100,7 @@ export type {
   IChatroom,
   ChatroomMessage,
   IInitialSettings,
+  IContentSettings,
   UgcSettings,
   DesignSettings,
   IdentitySettings,

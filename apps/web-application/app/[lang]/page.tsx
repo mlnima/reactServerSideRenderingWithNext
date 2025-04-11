@@ -2,11 +2,11 @@ import MainWidgetArea from '@components/widgets/widgetAreas/MainWidgetArea';
 import { getDictionary } from '../../get-dictionary';
 import SidebarWidgetAreaRenderer
   from '@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer';
-import { IPageProps, IPageSettings } from '@repo/typescript-types';
+import { IInitialSettings, IPageProps, IPageSettings } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
 import getSettings from '@lib/actions/database/operations/settings/getSettings';
 import getWidgets from '@lib/actions/database/operations/widgets/getWidgets';
-import { ServerActionResponse } from '@lib/actions/response';
+import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 import './homePage.scss';
 
 
@@ -15,6 +15,13 @@ const homePage = async (props: IPageProps) => {
   const params = await props.params;
   const locale = localDetector(params.lang);
   const dictionary = await getDictionary(locale);
+
+
+  const { initialSettings } = unwrapResponse(
+    await getSettings(['initialSettings']) as unknown as ServerActionResponse<{
+      initialSettings: IInitialSettings | undefined
+    }>,
+  );
 
   const {
     data: {
@@ -37,6 +44,7 @@ const homePage = async (props: IPageProps) => {
           locale={locale}
           widgets={widgets?.home}
           position={'home'}
+          contentSettings={initialSettings?.contentSettings}
         />
       </main>
 
@@ -47,6 +55,7 @@ const homePage = async (props: IPageProps) => {
         locale={locale}
         sidebar={sidebar}
         position={'postPage'}
+        contentSettings={initialSettings?.contentSettings}
       />
     </div>
   );

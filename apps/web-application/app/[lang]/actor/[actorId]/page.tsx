@@ -7,13 +7,13 @@ import actorMetaGenerator from './components/actorMetaGenerator/actorMetaGenerat
 import MetaAdminQuickAccessBar from '@components/metas/MetaAdminQuickAccessBar';
 import ActorBio from './components/ActorBio/ActorBio';
 import Soft404 from '@components/Soft404/Soft404';
-import { IMeta, IPost, PageParams, PageSearchParams, IPageSettings } from '@repo/typescript-types';
+import { IMeta, IPost, PageParams, PageSearchParams, IInitialSettings } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
 import getSettings from '@lib/actions/database/operations/settings/getSettings';
 import getWidgets from '@lib/actions/database/operations/widgets/getWidgets';
 import getPosts from '@lib/actions/database/operations/posts/getPosts';
 import { isValidObjectId } from '@repo/db';
-import { ServerActionResponse } from '@lib/actions/response';
+import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 
 interface IProps {
   params: PageParams;
@@ -30,6 +30,12 @@ const ActorPage = async (props: IProps) => {
   if (!isValidObjectId(params?.actorId)) {
     return <Soft404 dictionary={dictionary} />;
   }
+
+  const { initialSettings } = unwrapResponse(
+    await getSettings(['initialSettings']) as unknown as ServerActionResponse<{
+      initialSettings: IInitialSettings | undefined
+    }>,
+  );
 
   const {
     data: { actorPageSettings: { sidebar = 'no' } = {} } = {},
@@ -76,6 +82,7 @@ const ActorPage = async (props: IProps) => {
           locale={locale}
           totalCount={totalCount || 0}
           currentPage={currentPage}
+          contentSettings={initialSettings?.contentSettings}
         />
         <WidgetsRenderer dictionary={dictionary} locale={locale} widgets={widgets?.['actorPageBottom']}
                          position={'actorPageBottom'} />
@@ -88,6 +95,7 @@ const ActorPage = async (props: IProps) => {
         locale={locale}
         sidebar={sidebar || 'no'}
         position={'actorPage'}
+        contentSettings={initialSettings?.contentSettings}
       />
     </div>
   );

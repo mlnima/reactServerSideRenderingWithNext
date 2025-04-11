@@ -1,17 +1,17 @@
 import 'server-only';
-import { SignJWT, jwtVerify } from 'jose';
+import { JWTPayload, SignJWT, jwtVerify } from 'jose';
 import { cookies } from 'next/headers';
 
 const secretKey = process.env.JWT_KEY;
 const encodedKey = new TextEncoder().encode(secretKey);
 
-interface SessionPayload {
-  _id: string,
-  role?: string,
-  expiresAt: Date
-}
+// interface SessionPayload {
+//   _id: string,
+//   role?: string,
+//   expiresAt: Date
+// }
 
-export async function encryptToJwt(payload: SessionPayload) {
+export async function encryptToJwt(payload: JWTPayload | undefined) {
   return new SignJWT(payload)
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()

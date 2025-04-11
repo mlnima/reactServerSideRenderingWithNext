@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "build": "tsc",
+    "build-package": "tsc",
     "dev": "tsc -w",
     "test": "jest"
   },
@@ -20,6 +21,7 @@
     "jest-presets": "*",
     "@repo/typescript-types": "*",
     "@types/node": "^18.16.14",
+    "mongoose": "^8.10.1",
     "jsonwebtoken": "^9.0.2"
   }
 }

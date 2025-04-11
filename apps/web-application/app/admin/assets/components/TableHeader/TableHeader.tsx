@@ -1,3 +1,4 @@
+'use client';
 import React, { useEffect, useRef, FC } from 'react';
 import { convertVariableNameToName } from '@repo/utils';
 import styled from 'styled-components';

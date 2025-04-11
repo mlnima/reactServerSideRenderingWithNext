@@ -1,10 +1,11 @@
+'use client';
 import React, {useState, useRef} from 'react';
-import {useSelector} from "react-redux";
+import { useAppSelector } from '@storeDashboard/hooks';
 import {createNewPostAction} from "@storeDashboard/reducers/postsReducer";
 import {useAppDispatch} from "@storeDashboard/hooks";
 
 const ImportContent = () => {
-    const userData = useSelector(({users}) => users.userData)
+    const userData = useAppSelector(({users}) => users.userData)
     const dataPreview = useRef(null)
     const dispatch = useAppDispatch()
     const [state, setState] = useState({

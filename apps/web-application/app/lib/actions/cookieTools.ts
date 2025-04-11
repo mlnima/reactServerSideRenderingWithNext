@@ -18,6 +18,9 @@ export const cookieSetter = async ({ name, value, expires }: IArg) => {
       expires: expires || new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days from now
     });
 };
+// export const cookieGeter = async ({ name }: IArg) => {
+//   return (await cookies()).get('session')?.value
+// };
 
 export const cookieChecker = async (name: string) => {
   const cookieStore = await cookies();

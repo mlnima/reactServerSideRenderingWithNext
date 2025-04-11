@@ -1,3 +1,4 @@
+'use server';
 import { connectToDatabase, metaSchema,isValidObjectId } from '@repo/db';
 import { IMeta } from '@repo/typescript-types';
 import { errorResponse, ServerActionResponse, successResponse } from '@lib/actions/response';

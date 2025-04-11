@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { combineReducers, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import { Action } from 'redux';
 import postsSlice from './reducers/postsReducers/postsReducer';

@@ -1,19 +1,12 @@
 'use server';
-import {  userStatus } from '@repo/data-structures';
+import { userStatus } from '@repo/data-structures';
 import { errorResponse, ServerActionResponse, successResponse, unwrapResponse } from '@lib/actions/response';
 import { verifySession } from '@lib/dal';
 import getSettings from '@lib/actions/database/operations/settings/getSettings';
 import { connectToDatabase, userSchema } from '@repo/db';
 import { IInitialSettings } from '@repo/typescript-types';
 
-interface IDashboardGetUsers {
-  keyword?: string,
-  status?: string,
-  role?: string,
-  page?: number,
-  size?: number,
-  sort?: string
-}
+
 
 const dashboardGetUsers = async (
   {
@@ -23,7 +16,7 @@ const dashboardGetUsers = async (
     page = 1,
     size,
     sort = '-updatedAt',
-  }: IDashboardGetUsers) => {
+  }: any) => {
   try {
     const { isAdmin } = await verifySession();
 
@@ -70,18 +63,12 @@ const dashboardGetUsers = async (
       skip: page ? (limit || 20) * (page - 1) : 0,
       limit: size || 20,
       sort: sort || '-updatedAt',
-    }).select('username role email status').lean();
+    }).select('username role email status postsCount').lean();
 
-
-    const transformedUsers = users.map((doc)=>({
-      ...doc,
-
-      _id: doc._id.toString(),
-    }))
 
     return successResponse({
       data: {
-        users: transformedUsers,
+        users: JSON.parse(JSON.stringify(users)),
         totalCount,
         statusesCount,
       },

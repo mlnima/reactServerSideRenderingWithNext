@@ -6,14 +6,6 @@ import { connectToDatabase, metaSchema } from '@repo/db';
 import getSettings from '@lib/actions/database/operations/settings/getSettings';
 import { IInitialSettings } from '@repo/typescript-types';
 
-interface IDashboardGetUsers {
-  keyword?: string,
-  status?: string,
-  metaType?: string,
-  page?: number,
-  size?: number,
-  sort?: string
-}
 
 const dashboardGetMetas = async (
   {
@@ -23,7 +15,7 @@ const dashboardGetMetas = async (
     page = 1,
     size,
     sort = '-updatedAt',
-  }: IDashboardGetUsers) => {
+  }: any) => {
   try {
 
     const { isAdmin } = await verifySession();
@@ -70,19 +62,11 @@ const dashboardGetMetas = async (
         sort: sort || '-updatedAt',
       }).lean();
 
-
-    const transformedMetas = metas.map((doc) => ({
-      ...doc,
-
-      _id: doc._id.toString(),
-    }));
-
-    const totalCount = await metaSchema
-      .countDocuments(findQuery);
+    const totalCount = await metaSchema.countDocuments(findQuery);
 
     return successResponse({
       data: {
-        metas: transformedMetas,
+        metas: JSON.parse(JSON.stringify(metas)),
         totalCount,
         statusesCount,
       },

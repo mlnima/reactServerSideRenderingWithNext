@@ -1,38 +1,12 @@
+'use client';
 import React, { useState, useRef, ChangeEvent} from 'react';
-import styled from "styled-components";
 import {useAppDispatch} from "@storeDashboard/hooks";
 import {updateSettingAction} from "@storeDashboard/reducers/settingsReducer";
 import {loading} from "@storeDashboard/reducers/globalStateReducer";
 import {getYoutubeDataScrapperAction} from "@storeDashboard/reducers/postsReducer";
+import './Youtube.scss'
 
-let StyledDiv = styled.div`
-  .admin-import-page-youtube {
-    display: flex;
-    flex-direction: column;
 
-    textarea {
-      background-color: white;
-      min-width: 50vw;
-      min-height: 300px;
-    }
-  }
-
-  .admin-import-page-youtube-api-key {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: white;
-    background-color: #33373c;
-    max-width: 300px;
-    padding: 10px;
-    border-radius: 5px;
-
-    input {
-      background-color: white;
-      width: 100%;
-    }
-  }
-`
 const Youtube = () => {
 
     const dispatch = useAppDispatch()
@@ -139,7 +113,7 @@ const Youtube = () => {
     // }, []);
 
     return (
-        <StyledDiv>
+        <div className={'youtubeImporter'}>
             <div className='admin-import-page-youtube-api-key'>
                 <h2>Youtube API KEY</h2>
                 <input name='apiKey' value={state.apiKey} onChange={e => onChaneHandler(e)}/>
@@ -150,7 +124,7 @@ const Youtube = () => {
                 <textarea ref={urlsElement}/>
                 <button className='saveBtn greenActionBtn' onClick={() => onImportHandler()}>Import</button>
             </div>
-        </StyledDiv>
+        </div>
     );
 };
 

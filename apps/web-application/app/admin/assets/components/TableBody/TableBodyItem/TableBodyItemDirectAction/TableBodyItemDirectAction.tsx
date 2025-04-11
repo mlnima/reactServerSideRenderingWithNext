@@ -3,10 +3,10 @@ import React, { FC, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { bulkActionPostsAction } from '@storeDashboard/reducers/postsReducer';
-import { deleteCommentsAction } from '@storeDashboard/reducers/commentsReducer';
 import { useAppDispatch } from '@storeDashboard/hooks';
 import { dashboardAPIRequestDeleteForm } from '@repo/api-requests';
 import { useSearchParams } from 'next/navigation';
+import dashboardDeleteComments from '@lib/actions/database/operations/comments/dashboardDeleteComments';
 
 interface TableBodyItemDirectActionPropTypes {
   _id: string;
@@ -95,7 +95,7 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({  _i
   } else if (assetsType === 'comments') {
     return (
       <div className="asset-page-table-body-item-hover-item">
-        <button className={'btn btn-danger'} onClick={() => dispatch(deleteCommentsAction([_id]))}>
+        <button className={'btn btn-danger'} onClick={async () =>dashboardDeleteComments({ ids: [_id] }).then(()=>router.refresh())}>
           Delete
         </button>
       </div>

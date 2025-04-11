@@ -7,7 +7,7 @@ interface IArgs {
   limit: number;
   skip: number;
   conversationId: string;
-  messageAreaRef: React.RefObject<HTMLDivElement>;
+  messageAreaRef: React.RefObject<HTMLDivElement | null>;
 }
 
 export const loadOlderMessagesAction = createAsyncThunk(

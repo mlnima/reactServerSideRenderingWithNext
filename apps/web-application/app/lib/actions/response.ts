@@ -6,7 +6,7 @@ export interface ServerActionResponse<T = unknown> {
 }
 
 export function unwrapResponse<T>(
-  response: ServerActionResponse<T>
+  response: ServerActionResponse<T>,
 ): { success: boolean; data?: T; message?: string; error?: string | unknown } & T {
   const { success, message, error } = response;
   const data = response.data || {} as T;
@@ -15,7 +15,7 @@ export function unwrapResponse<T>(
     success,
     message,
     error,
-    ...data as T
+    ...data as T,
   };
 }
 

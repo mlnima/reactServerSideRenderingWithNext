@@ -6,14 +6,15 @@ import FileManagerControl from './FileManagerControl/FileManagerControl';
 import FileManagerArea from './FileManagerArea/FileManagerArea';
 import UploadedPopView from './UploadedPopView/UploadedPopView';
 import CreateNewFileFolderPop from "./CreateNewFileFolderPop/CreateNewFileFolderPop";
-import { useSelector } from "react-redux";
-import { DashboardStore } from "@repo/typescript-types";
+import { useAppSelector } from '@storeDashboard/hooks';
+
 import { readThePathAction } from "@storeDashboard/reducers/fileManagerReducer";
 import { useAppDispatch } from "@storeDashboard/hooks";
+import './styles.scss'
 
-const Page = () => {
+const FileManagerPage = () => {
   const dispatch = useAppDispatch();
-  const fileManagerData = useSelector(({ fileManager }: DashboardStore) => fileManager);
+  const fileManagerData = useAppSelector(({ fileManager }) => fileManager);
   const [state, setState] = useState({
     path: './public',
     prevPath: './public',
@@ -59,4 +60,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default FileManagerPage;

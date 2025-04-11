@@ -1,126 +1,95 @@
 // @ts-nocheck
 'use client';
 
-import React, { useEffect, useRef, useMemo } from 'react';
+import React, { useEffect, useRef, useMemo, useState } from 'react';
 import Link from 'next/link';
-import TitleDescription from './components/TitleDescription';
-import ActionOnPost from './components/ActionOnPost';
+import TitleDescription from './components/TitleDescription/TitleDescription';
+import ActionOnPost from './components/ActionOnPost/ActionOnPost';
 import Format from './components/Format';
 import Meta from './components/Meta';
 import RatingOption from './components/RatingOption';
 import PostInformation from './components/PostInformation/PostInformation';
-import styled from 'styled-components';
-import { useSelector } from 'react-redux';
-import { editPostAction, getPostAction, defineNewPost, changeActiveEditingLanguage } from '@storeDashboard/reducers/postsReducer';
-import { DashboardStore } from '@repo/typescript-types';
+import { useAppSelector } from '@storeDashboard/hooks';
+import {
+  changeActiveEditingLanguage,
+} from '@storeDashboard/reducers/postsReducer';
 import { useAppDispatch } from '@storeDashboard/hooks';
 import { LanguagesOptions } from '@repo/ui';
 import { isNumericString } from '@repo/utils';
-import Author from "./components/Author";
+import Author from './components/Author';
 import { useSearchParams } from 'next/navigation';
-
-const AdminPostPageStyledDiv = styled.div`
-  display: grid;
-  justify-content: center;
-  grid-template-columns: 1fr 320px;
-  max-width: 100vw;
-
-  .editingPostSection {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    padding: 0.25rem 0.5rem;
-    background-color: var(--tertiary-background-color);
-    color: var(--secondary-text-color);
-    margin-top: 0.5rem;
-    border-radius: var(--primary-border-radius);
-    box-sizing: border-box;
-
-    .editingPostSectionTitle {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      padding: 0.25rem 0;
-    }
-  }
-
-  .content {
-    .language-action {
-      display: flex;
-      width: 100%;
-      justify-content: space-between;
-      align-items: center;
-      padding: 8px;
-
-      .language-selector {
-        width: 100px;
-      }
-    }
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 8px;
-    box-sizing: border-box;
-  }
-
-  .side {
-    width: 100%;
-  }
-`;
+import './styles.scss';
+import dashboardGetPost from '@lib/actions/database/operations/posts/dashboardGetPost';
+import { IPost } from '@repo/typescript-types';
 
 
+const EditPostPage = () => {
 
-const EditPost = () => {
+  //const post = useAppSelector(({ posts }) => posts.post);
 
-  const post = useSelector(({ posts }: DashboardStore) => posts.post);
-  const activeEditingLanguage = useSelector(({ posts }: DashboardStore) => posts.activeEditingLanguage);
+  const [post, setPost] = useState<IPost | null>(null);
+  const [relatedPosts, setRelatedPosts] = useState<IPost | null>(null);
+  const activeEditingLanguage = useAppSelector(({ posts }) => posts.activeEditingLanguage);
   const dispatch = useAppDispatch();
-
-  const searchParams = useSearchParams()
-  const postId = useMemo(() => searchParams.get('id'), [searchParams]);
+  const searchParams = useSearchParams();
   const languageElement = useRef(null);
 
-  useEffect(() => {
-    if (postId) {
-      dispatch(getPostAction(postId));
-    } else {
-      dispatch(defineNewPost(null));
+  const getPostData = async (_id) => {
+    const { data, success, message } = await dashboardGetPost(_id);
+    if (!success) {
+      return;
     }
-  }, [postId]);
+    setPost(data?.post);
+  };
+
+
+  useEffect(() => {
+    const _id = searchParams.get('id');
+    if (_id) {
+      getPostData(_id);
+    } else {
+      setPost({
+        postType: 'standard',
+      });
+    }
+  }, [searchParams]);
+
+
+  useEffect(() => {
+    console.log(post);
+  }, [post]);
+
 
   const onChangeHandler = (e: { target: { name: any; value: any } }) => {
-    if (isNumericString(e.target.value)) {
-      dispatch(editPostAction({ [e.target.name]: parseInt(e.target.value) }));
-    } else {
-      dispatch(editPostAction({ [e.target.name]: e.target.value }));
-    }
+    setPost(prevState => ({
+      ...prevState,
+      [e.target.name]: isNumericString(e.target.value) ? parseInt(e.target.value) : e.target.value,
+    }));
   };
+
 
   const onTranslatedInputChangeHandler = (e: { target: any }) => {
     if (activeEditingLanguage === 'default') {
-      dispatch(
-        editPostAction({ [e.target.name]: e.target.value }),
-      );
+      setPost(prevState => ({
+        ...prevState,
+        [e.target.name]: e.target.value,
+      }));
     } else {
-      dispatch(
-        editPostAction({
-          translations: {
-            ...(post?.translations || {}),
-            [activeEditingLanguage]: {
-              ...(post?.translations?.[activeEditingLanguage] || {}),
-              [e.target.name]: e.target.value,
-            },
+      setPost(prevState => ({
+        ...prevState,
+        translations: {
+          ...(post?.translations || {}),
+          [activeEditingLanguage]: {
+            ...(post?.translations?.[activeEditingLanguage] || {}),
+            [e.target.name]: e.target.value,
           },
-        }),
-      );
+        },
+      }));
     }
   };
 
   const onDescriptionChangeHandler = (data: string) => {
-    const e = { target: { name: 'description', value: data, } };
+    const e = { target: { name: 'description', value: data } };
     onTranslatedInputChangeHandler(e);
   };
 
@@ -129,19 +98,23 @@ const EditPost = () => {
   }
 
   return (
-    <AdminPostPageStyledDiv className={'admin-post'}>
+    <div className={'EditPostPage'}>
       <div className={'content'}>
         <div className="language-action">
           <Link href={'/dashboard/post?new=1'} className={'btn btn-info'}>
             New Post
           </Link>
-          <select className={'primarySelect language-selector'} ref={languageElement} onChange={(e) => dispatch(changeActiveEditingLanguage(e.target.value as string))}>
+          <select className={'primarySelect language-selector'} ref={languageElement}
+                  onChange={(e) => dispatch(changeActiveEditingLanguage(e.target.value as string))}>
             <option value={'default'}>{process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'Default'}</option>
             <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALES || ''} />
           </select>
         </div>
-        <TitleDescription onChangeHandler={onTranslatedInputChangeHandler} onDescriptionChangeHandler={onDescriptionChangeHandler} onTranslatedInputChangeHandler={onTranslatedInputChangeHandler} />
-        <PostInformation onChangeHandler={onChangeHandler} />
+        <TitleDescription onChangeHandler={onTranslatedInputChangeHandler}
+                          post={post}
+                          onDescriptionChangeHandler={onDescriptionChangeHandler}
+                          onTranslatedInputChangeHandler={onTranslatedInputChangeHandler} />
+        <PostInformation onChangeHandler={onChangeHandler} post={post} relatedPosts={relatedPosts} />
       </div>
       <aside className={'side'}>
         <div className={'editingPostSection editingPostSectionSide'}>
@@ -149,245 +122,64 @@ const EditPost = () => {
             <span>Status:</span>
             <span>{post?.status}</span>
           </div>
-          <ActionOnPost />
+          <ActionOnPost post={post}  />
         </div>
         <div className={'editingPostSection editingPostSectionSide'}>
           <div className={'editingPostSectionTitle'}>Format:</div>
-          <Format />
+          <Format post={post} onChangeHandler={onTranslatedInputChangeHandler} />
         </div>
         <div className={'editingPostSection editingPostSectionSide'}>
           <div className={'editingPostSectionTitle'}>Author:</div>
-          <Author />
+          <Author post={post} onChangeHandler={onTranslatedInputChangeHandler} />
         </div>
         <div className={'editingPostSection editingPostSectionSide'}>
           <div className={'editingPostSectionTitle'}>Categories:</div>
-          <Meta type={'categories'} />
+          <Meta type={'categories'} post={post} onChangeHandler={onTranslatedInputChangeHandler} />
         </div>
         <div className={'editingPostSection editingPostSectionSide'}>
           <div className={'editingPostSectionTitle'}>Tags:</div>
-          <Meta type={'tags'} />
+          <Meta type={'tags'} post={post} onChangeHandler={onTranslatedInputChangeHandler} />
         </div>
         {post?.postType === 'video' && (
           <div className={'editingPostSection editingPostSectionSide'}>
             <div className={'editingPostSectionTitle'}>Actors:</div>
-            <Meta type={'actors'} />
+            <Meta type={'actors'} post={post} onChangeHandler={onTranslatedInputChangeHandler} />
           </div>
         )}
         <div className={'editingPostSection editingPostSectionSide'}>
-          <RatingOption />
+          <RatingOption post={post} onChangeHandler={onTranslatedInputChangeHandler} />
         </div>
       </aside>
-    </AdminPostPageStyledDiv>
+    </div>
   );
 };
 
-export default EditPost;
+export default EditPostPage;
 
-
-// import React, { useEffect, useRef, useMemo } from 'react';
-// import TitleDescription from './TitleDescription';
-// import ActionOnPost from './ActionOnPost';
-// import Format from './Format';
-// import Meta from './Meta';
-// import { Link, useSearchParams } from 'react-router-dom';
-// import RatingOption from './RatingOption';
-// import PostInformation from './PostInformation/PostInformation';
-// import styled from 'styled-components';
-// import { useSelector } from 'react-redux';
-// import { editPostAction } from '@store/reducers/postsReducer';
-// import { getPostAction, defineNewPost, changeActiveEditingLanguage } from '@store/reducers/postsReducer';
-// import { DashboardStore } from '@repo/typescript-types';
-// import { useAppDispatch } from '@store/hooks';
-// import { LanguagesOptions } from '@repo/ui';
-// import { isNumericString } from '@repo/utils';
-// import Author from "./Author";
-//
-// const AdminPostPageStyledDiv = styled.div`
-//     display: grid;
-//     justify-content: center;
-//     grid-template-columns: 1fr 320px;
-//     max-width: 100vw;
-//
-//     .editingPostSection {
-//         display: flex;
-//         flex-direction: column;
-//         align-items: center;
-//         width: 100%;
-//         padding: 0.25rem 0.5rem;
-//         background-color: var(--tertiary-background-color);
-//         color: var(--secondary-text-color);
-//         margin-top: 0.5rem;
-//         border-radius: var(--primary-border-radius);
-//         box-sizing: border-box;
-//
-//         .editingPostSectionTitle {
-//             width: 100%;
-//             display: flex;
-//             justify-content: space-between;
-//             padding: 0.25rem 0;
-//         }
-//     }
-//
-//     .editingPostSectionSide {
-//     }
-//
-//     .content {
-//         .language-action {
-//             display: flex;
-//             width: 100%;
-//             justify-content: space-between;
-//             align-items: center;
-//             padding: 8px;
-//
-//             .language-selector {
-//                 width: 100px;
-//             }
-//         }
-//
-//         display: flex;
-//         justify-content: center;
-//         align-items: center;
-//         flex-direction: column;
-//         padding: 8px;
-//         box-sizing: border-box;
-//     }
-//
-//     .side {
-//         width: 100%;
-//         //padding: .5rem;
-//         //box-sizing: border-box;
-//     }
-// `;
-//
-// const Index = () => {
-//     const post = useSelector(({ posts }: DashboardStore) => posts.post);
-//     const activeEditingLanguage = useSelector(({ posts }: DashboardStore) => posts.activeEditingLanguage);
-//     const dispatch = useAppDispatch();
-//     const [search, setSearch] = useSearchParams();
-//     const postId = useMemo(() => search.get('id'), [search]);
-//     const languageElement = useRef(null);
-//
-//     useEffect(() => {
-//         if (postId) {
-//             dispatch(getPostAction(postId));
-//         } else {
-//             dispatch(defineNewPost(null));
-//         }
-//     }, [postId]);
-//
-//     const onChangeHandler = (e: { target: { name: any; value: any } }) => {
-//         if (isNumericString(e.target.value)) {
-//             dispatch(editPostAction({ [e.target.name]: parseInt(e.target.value) }));
-//         } else {
-//             dispatch(editPostAction({ [e.target.name]: e.target.value }));
-//         }
-//     };
-//
-//     const onTranslatedInputChangeHandler = (e: { target: any }) => {
-//         if (activeEditingLanguage === 'default') {
-//             dispatch(
-//                 editPostAction({
-//                     [e.target.name]: e.target.value,
-//                 }),
-//             );
-//         } else {
-//             dispatch(
-//                 editPostAction({
-//                     translations: {
-//                         ...(post?.translations || {}),
-//                         [activeEditingLanguage]: {
-//                             ...(post?.translations?.[activeEditingLanguage] || {}),
-//                             [e.target.name]: e.target.value,
-//                         },
-//                     },
-//                 }),
-//             );
-//         }
-//     };
-//
-//     const onDescriptionChangeHandler = (data: string) => {
-//         const e = {
-//             target: {
-//                 name: 'description',
-//                 value: data,
-//             },
-//         };
-//         onTranslatedInputChangeHandler(e);
-//     };
-//
-//     if (!post) {
-//         return <h1>Not Found</h1>;
-//     }
-//     return (
-//         <div>
-//             <AdminPostPageStyledDiv className={'admin-post'}>
-//                 <div className={'content'}>
-//                     <div className="language-action">
-//                         <Link to={'/dashboard/post?new=1'} className={'btn btn-info'}>
-//                             New Post
-//                         </Link>
-//                         <select
-//                             className={'primarySelect language-selector'}
-//                             ref={languageElement}
-//                             onChange={e => dispatch(changeActiveEditingLanguage(e.target.value as string))}
-//                         >
-//                             <option value={'default'}>{process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'Default'}</option>
-//                             <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALES || ''} />
-//                         </select>
-//                     </div>
-//
-//                     <TitleDescription
-//                         onChangeHandler={onTranslatedInputChangeHandler}
-//                         onDescriptionChangeHandler={onDescriptionChangeHandler}
-//                         onTranslatedInputChangeHandler={onTranslatedInputChangeHandler}
-//                     />
-//
-//                     <PostInformation onChangeHandler={onChangeHandler} />
-//                 </div>
-//
-//                 <aside className={'side'}>
-//                     <div className={'editingPostSection editingPostSectionSide'}>
-//                         <div className={'editingPostSectionTitle'}>
-//                             <span>Status:</span>
-//                             <span>{post?.status}</span>
-//                         </div>
-//                         <ActionOnPost />
-//                     </div>
-//                     <div className={'editingPostSection editingPostSectionSide'}>
-//                         <div className={'editingPostSectionTitle'}>Format:</div>
-//                         <Format />
-//                     </div>
-//                     <div className={'editingPostSection editingPostSectionSide'}>
-//                         <div className={'editingPostSectionTitle'}>Author:</div>
-//                         <Author />
-//                     </div>
-//                     <div className={'editingPostSection editingPostSectionSide'}>
-//                         <div className={'editingPostSectionTitle'}>Categories:</div>
-//                         <Meta type={'categories'} />
-//                     </div>
-//                     <div className={'editingPostSection editingPostSectionSide'}>
-//                         <div className={'editingPostSectionTitle'}>Tags:</div>
-//                         <Meta type={'tags'} />
-//                     </div>
-//
-//                     {post?.postType === 'video' && (
-//                         <div className={'editingPostSection editingPostSectionSide'}>
-//                             <div className={'editingPostSectionTitle'}>Actors:</div>
-//                             <Meta type={'actors'} />
-//                         </div>
-//                     )}
-//
-//                     <div className={'editingPostSection editingPostSectionSide'}>
-//                         <RatingOption />
-//                     </div>
-//                 </aside>
-//             </AdminPostPageStyledDiv>
-//         </div>
-//     );
+// const onChangeHandler = (e: { target: { name: any; value: any } }) => {
+//   if (isNumericString(e.target.value)) {
+//     dispatch(editPostAction({ [e.target.name]: parseInt(e.target.value) }));
+//   } else {
+//     dispatch(editPostAction({ [e.target.name]: e.target.value }));
+//   }
 // };
-//
-// export default Index;
-//
-//
-//
-//
+
+// const onTranslatedInputChangeHandler = (e: { target: any }) => {
+//   if (activeEditingLanguage === 'default') {
+//     dispatch(
+//       editPostAction({ [e.target.name]: e.target.value }),
+//     );
+//   } else {
+//     dispatch(
+//       editPostAction({
+//         translations: {
+//           ...(post?.translations || {}),
+//           [activeEditingLanguage]: {
+//             ...(post?.translations?.[activeEditingLanguage] || {}),
+//             [e.target.name]: e.target.value,
+//           },
+//         },
+//       }),
+//     );
+//   }
+// };

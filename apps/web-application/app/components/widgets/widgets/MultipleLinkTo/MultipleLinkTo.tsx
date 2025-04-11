@@ -30,7 +30,7 @@ const MultipleLinkTo: FC<MultipleLinkToPropTypes> = ({multipleLinks,locale,dicti
 
     return (
         <ul className='multipleLinksWidget'>
-            {([...multipleLinks] || []).sort((a, b) => a.linkIndex - b.linkIndex).map((linkData,index) => {
+            {(multipleLinks || []).sort((a, b) => a.linkIndex - b.linkIndex).map((linkData,index) => {
                 const linkTitle =  dictionary?.[linkData.linkTitle] || linkData?.translations?.[locale as string]?.linkTitle || linkData.linkTitle;
                 const linkDescription = linkData?.translations?.[locale as string]?.linkDescription || linkData.linkDescription;
 

@@ -1,79 +1,9 @@
 // @ts-nocheck
 'use client';
 import React, {useEffect, useState, FC} from 'react';
-import styled from "styled-components";
 import MonacoEditor from '@components/textEditors/MonacoEditor';
+import './ImagesSliderTypeWidgetModelFields.scss'
 
-const style = styled.div`
-  margin: 5px auto;
-  padding: 2px;
-  border-top: #fff solid;
-  border-bottom: 1px #fff solid;
-  width: 100%;
-  
-  .primaryInput {
-    width: 70%;
-  }
-
-  form {
-    .image-Swiper-fields-form-section {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      .primaryInput {
-        width: 70%;
-      }
-    }
-
-  }
-
-  .added-images {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-
-    .current-data-preview {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      flex-direction: column;
-      width: 220px;
-      border: 1px white solid;
-      border-radius: 5px;
-      padding: 10px;
-      margin: 10px;
-
-      img {
-        width: 200px !important;
-        object-fit: contain;
-
-      }
-
-      p {
-        padding: 2px;
-        margin: 2px;
-        align-self: flex-start;
-        display: flex;
-        align-items: center;
-      }
-
-      .index {
-        display: flex;
-        align-items: center;
-
-        button {
-          margin: 0 5px;
-        }
-      }
-    ;
-    }
-  }
-
-
-`
 
 interface ImageSwiperTypeWidgetModelFieldsPropTypes {
     onUniqueDataChangeHandler: any,
@@ -192,7 +122,7 @@ const ImagesSliderTypeWidgetModelFields: FC<ImageSwiperTypeWidgetModelFieldsProp
 
 
         return (
-            <style className={'image-Swiper-fields'}>
+            <div className={'ImagesSliderTypeWidgetModelFields'}>
 
                 <div className={'open-section'}>
                     <p className={'section-title'}> Image Swiper / Slider : </p>
@@ -315,7 +245,7 @@ const ImagesSliderTypeWidgetModelFields: FC<ImageSwiperTypeWidgetModelFieldsProp
                     }
                 </div>
 
-            </style>
+            </div>
         );
     };
 export default ImagesSliderTypeWidgetModelFields;

@@ -1,25 +1,28 @@
- import { connectToDatabase, widgetSchema } from '@repo/db';
+'use server';
+import { connectToDatabase, widgetSchema } from '@repo/db';
 import { IWidget } from '@repo/typescript-types';
-import { unstable_cacheTag as cacheTag } from 'next/cache';
+// import { unstable_cacheTag as cacheTag } from 'next/cache';
 import { findWidgetMetas, findWidgetPosts } from '@lib/actions/database/operations/widgets/helpers';
+// import { deepConvertObjectIdsToStrings } from '@repo/utils-server/dist/src/objects';
 
 const getWidgets = async (positions: string[], locale: string): Promise<{ [key: string]: [] }> => {
-  'use cache';
+  // 'use cache';
   await connectToDatabase('getWidgets');
   let result = {};
-  const widgets = await widgetSchema
-    .find({
+  const widgets = await widgetSchema.find({
       'data.position': { $in: positions },
-    })
-    .lean({ virtuals: true });
+    }).lean();
+
+ // const transformedWidgets = widgets.map((doc) => deepConvertObjectIdsToStrings(doc));
+
 
   for await (const widget of widgets) {
-    if (widget?._id) {
-      widget._id = widget._id.toString();
-    }
-    if (widget?.data?._id) {
-      delete widget.data._id;
-    }
+    // if (widget?._id) {
+    //   widget._id = widget._id.toString();
+    // }
+    // if (widget?.data?._id) {
+    //   delete widget.data._id;
+    // }
 
     if (
       widget?.data?.type === 'posts' ||
@@ -45,9 +48,9 @@ const getWidgets = async (positions: string[], locale: string): Promise<{ [key: 
     }
   }
 
+  const transformedWidgets = JSON.parse(JSON.stringify(widgets));
 
-
-  result = widgets.reduce((widgetInPositions: Record<string, IWidget[]>, widget: IWidget) => {
+  result = transformedWidgets.reduce((widgetInPositions: Record<string, IWidget[]>, widget: IWidget) => {
     const position = widget?.data?.position;
     if (!widgetInPositions[position]) {
       widgetInPositions[position] = [];
@@ -58,7 +61,11 @@ const getWidgets = async (positions: string[], locale: string): Promise<{ [key: 
     return widgetInPositions;
   }, {});
 
-  cacheTag('cacheItem', `CWidgets-${positions.join('-')}`);
+
+
+
+
+  // cacheTag('cacheItem', `CWidgets-${positions.join('-')}`);
   return result;
 };
 

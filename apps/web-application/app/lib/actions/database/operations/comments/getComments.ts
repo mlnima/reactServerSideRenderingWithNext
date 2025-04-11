@@ -12,7 +12,7 @@ const getComments = async (
     skip = 0,
     limit = 5,
   }: IGetComments): Promise<ServerActionResponse<{ comments: IComment[] } | null>> => {
-  'use cache';
+  // 'use cache';
   try {
     await connectToDatabase('getComments');
 
@@ -61,11 +61,11 @@ const getComments = async (
       return doc;
     });
 
-    cacheTag(
-      'cacheItem',
-      `CComments-${onDocument}-${skip}-${limit}`,
-      `CComments-${onDocument}`,
-    );
+    // cacheTag(
+    //   'cacheItem',
+    //   `CComments-${onDocument}-${skip}-${limit}`,
+    //   `CComments-${onDocument}`,
+    // );
 
     return successResponse({
       data: {

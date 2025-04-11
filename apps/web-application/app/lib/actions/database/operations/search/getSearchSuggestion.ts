@@ -7,7 +7,7 @@ import { ISuggestion } from '@repo/typescript-types';
 const getSearchSuggestion = async (userInput: string): Promise<ServerActionResponse<{
   suggestions: ISuggestion[]
 } | null>> => {
-  'use cache';
+  // 'use cache';
   try {
     await connectToDatabase('getSearchSuggestion');
     if (!userInput) {
@@ -28,7 +28,7 @@ const getSearchSuggestion = async (userInput: string): Promise<ServerActionRespo
       return keyword;
     });
 
-    cacheTag('cacheItem', `CGetSearchSuggestion-${userInput}`);
+    // cacheTag('cacheItem', `CGetSearchSuggestion-${userInput}`);
 
 
     return successResponse({

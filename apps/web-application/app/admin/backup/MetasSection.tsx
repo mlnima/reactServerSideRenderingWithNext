@@ -1,3 +1,4 @@
+'use client';
 import React, {FC, useEffect, useState} from "react";
 import styled from "styled-components";
 import {dashboardAPIRequestBackupMetas} from "@repo/api-requests";

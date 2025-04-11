@@ -1,0 +1,16 @@
+.editChatroomPage{
+  margin: 8px;
+  padding: 8px;
+  box-sizing: border-box;
+  width: 95%;
+  input {
+    max-width: 600px;
+  }
+  .action-buttons {
+    display: flex;
+    justify-content: space-between;
+    button {
+      margin: 8px 0;
+    }
+  }
+}

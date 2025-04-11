@@ -7,12 +7,9 @@ import { loading, setAlert } from './globalStateReducer';
 
 import {
   AxiosInstance,
-  // dashboardAPIRequestGetPosts,
-  // dashboardAPIRequestGetMetas,
   dashboardAPIRequestGetMeta,
   dashboardAPIRequestGetPost,
   dashboardAPIRequestUpdatePost,
-  // dashboardAPIRequestCreateNewPost,
   dashboardAPIRequestDeleteMeta,
   dashboardAPIRequestUpdateMeta,
   dashboardAPIRequestBulkActionOnPosts,
@@ -327,7 +324,7 @@ export const getMetasAction = createAsyncThunk(
   async (queries: object, thunkAPI) => {
 
     thunkAPI.dispatch(loading(true));
-    const { data, success, message, errorCode, error } = await dashboardGetMetas(queries);
+    const { data, success, message, error } = await dashboardGetMetas(queries);
     thunkAPI.dispatch(loading(false));
 
 
@@ -337,7 +334,7 @@ export const getMetasAction = createAsyncThunk(
         setAlert({
           message,
           type: 'Error',
-          err: errorCode,
+          err: error,
         }),
       );
       return;
@@ -682,15 +679,15 @@ export const postsSlice = createSlice({
           };
         },
       )
-      .addCase(
-        getPostsAction.fulfilled,
-        (state, action: PayloadAction<any>) => {
-          return {
-            ...state,
-            ...action.payload,
-          };
-        },
-      )
+      // .addCase(
+      //   getPostsAction.fulfilled,
+      //   (state, action: PayloadAction<any>) => {
+      //     return {
+      //       ...state,
+      //       ...action.payload,
+      //     };
+      //   },
+      // )
       .addCase(
         getMetasAction.fulfilled,
         (state, action: PayloadAction<any>) => {

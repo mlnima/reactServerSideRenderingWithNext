@@ -1,0 +1,35 @@
+.widgetGroupByPosition{
+  background-color: transparent;
+  width: 100%;
+  position: initial;
+  margin:  .5rem auto;
+
+  .widgetAdminPanelItemHeader {
+    height: 50px;
+    margin: 0;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+    border-radius: .5rem .5rem 0 0;
+  }
+
+  @media only screen and (min-width: 768px) {
+    width: 600px ;
+    position: relative;
+    .widget-model {
+      width: 600px;
+
+    }
+  }
+  @media only screen and (min-width: 1024px) {
+    max-width: 50vw;
+    .widget-model {
+      max-width: 50vw;
+    }
+  }
+}

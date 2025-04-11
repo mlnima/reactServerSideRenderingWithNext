@@ -36,6 +36,8 @@ const initialState = {
     userStreamData: null,
   },
   socketId: '',
+  users: [],
+  totalCount: 0,
 };
 
 export const userSlice = createSlice({
@@ -52,45 +54,12 @@ export const userSlice = createSlice({
     replaceUserProfileImage: (state, action: PayloadAction<any>) => {
       state.userData.profileImage.filePath = action.payload;
     },
-    removeUserDraftPost: (state, action: PayloadAction<any>) => {
-      state.userData.draftPost = '';
-    },
-    setUserPageData: (state, action: PayloadAction<any>) => {
-      return {
-        ...state,
-        userPageData: action.payload,
-      };
-    },
-    updateUserDataField: (state, action: PayloadAction<any>) => {
-      return {
-        ...state,
-        userData: {
-          ...state.userData,
-          ...action.payload,
-        },
-      };
-    },
-    getSpecificUserData: (state, action: PayloadAction<any>) => {
-      return {
-        ...state,
-        userData: {
-          ...state.userData,
-          ...action.payload.userData,
-        },
-      };
-    },
     userLogout: (state) => {
       deleteCookie('session').then(()=>console.log('logged out'))
       return {
         ...state,
         userData: initialUserData,
         loggedIn: false,
-      };
-    },
-    dispatchSocketId: (state, action: PayloadAction<any>) => {
-      return {
-        ...state,
-        socketId: action.payload,
       };
     },
   },
@@ -110,33 +79,7 @@ export const userSlice = createSlice({
           loggedIn: true,
         };
       });
-    // .addCase(getSpecificUserDataAction.fulfilled, (state, action: PayloadAction<any>) => {
-    //     return {
-    //         ...state,
-    //         userData: {
-    //             ...state.userData,
-    //             ...action.payload
-    //         },
-    //         loggedIn: true
-    //     }
-    // })
-    // .addCase(getUserPageDataAction.fulfilled, (state, action: PayloadAction<any>) => {
-    //     if (action.payload) {
-    //         return {
-    //             ...state,
-    //             userPageData: action.payload
-    //         }
-    //     }
-    // })
-    // .addCase(getMultipleUserDataByIdAction.fulfilled, (state, action: PayloadAction<any>) => {
-    //     return {
-    //         ...state,
-    //         userData: {
-    //             ...state.userData,
-    //             ...action.payload
-    //         }
-    //     }
-    // })
+
 
   },
 });
@@ -144,9 +87,7 @@ export const userSlice = createSlice({
 export const {
   userLogout,
   setUserData,
-  removeUserDraftPost,
   replaceUserProfileImage,
-  dispatchSocketId,
 } = userSlice.actions;
 
 export const userReducer = (state: RootState) => state?.user || null;

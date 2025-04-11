@@ -13,7 +13,7 @@ const getUserPagePosts = async (
     skip = 0,
     status = 'published',
   }: IGetUserPagePosts) => {
-  'use cache';
+  // 'use cache';
   try {
     await connectToDatabase('getUserPagePosts');
     const { initialSettings } = unwrapResponse(
@@ -40,7 +40,7 @@ const getUserPagePosts = async (
       _id: doc._id.toString(),
     }));
 
-    cacheTag('cacheItem', `CUserPagePosts-${authorId}-${skip}`);
+    // cacheTag('cacheItem', `CUserPagePosts-${authorId}-${skip}`);
     return transformedPosts;
   } catch (error) {
     console.error(`getUserPagePosts=> `, error);

@@ -1,52 +1,9 @@
 import React, {FC, useEffect, useState} from 'react';
-import styled from "styled-components";
 import EditItemForm from "./EditItemForm";
 import {IMenuItem, IWidgetData} from "@repo/typescript-types";
 import {inputValueSimplifier} from "@repo/utils";
+import './ItemPreview.scss'
 
-const Styles = styled.div`
-  background-color: rgba(0, 0, 0, .2);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 5px;
-  margin: 2px 0;
-  .menu-item-header {
-    display: flex;
-    gap: 2px;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    
-    button{
-      background-color: var(--secondary-background-color,#181818);
-      color: var(--secondary-text-color,#ccc);
-      border: none;
-    }
-    .menu-item-header-index-controller {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      button {
-
-       
-        font-size: large;
-        width: 30px;
-        height: 30px;
-        padding: 0;
-        &:hover{
-          border: 1px solid black;
-          box-shadow: 2px 5px black;
-        }
-        &:active{
-          box-shadow: 1px 2px black;
-          border-top: none;
-          border-left: none;
-        }
-      }
-    }
-  }
-`
 
 interface IProps{
     data:any,
@@ -166,7 +123,7 @@ const ItemPreview:FC<IProps> =
     }
 
     return (
-        <Styles className='menu-item' key={data?.itemId?.toString() + data.name ?? data.name}>
+        <div className='menuWidgetItemPreview' key={ data?.itemId ? data.itemId.toString() + data.name : data.name}>
             <div className='menu-item-header'>
                 <div className='menu-item-header-index-controller'>
                     <p>index: {itemData.itemIndex}</p>
@@ -204,7 +161,7 @@ const ItemPreview:FC<IProps> =
                 : null}
 
 
-        </Styles>
+        </div>
     );
 };
 export default ItemPreview;

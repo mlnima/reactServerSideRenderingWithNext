@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { IWidgetData } from "@repo/typescript-types";
+import { IContentSettings, IWidgetData } from '@repo/typescript-types';
 import dynamic from 'next/dynamic';
 import './WidgetWrapper.scss';
 import WidgetFooter from '@components/widgets/widgetWrapper/WidgetFooter/WidgetFooter';
@@ -48,9 +48,10 @@ interface IProps {
     dictionary: {
         [key: string]: string;
     };
+    contentSettings?: IContentSettings;
 }
 
-const WidgetWrapper: FC<IProps> = ({ data, widgetId, isSidebar, dictionary, locale }) => {
+const WidgetWrapper: FC<IProps> = ({ data, widgetId, isSidebar, dictionary, locale,contentSettings }) => {
     const widgetMatcher = {
         postsSlider: PostsSliderWidget,
         postsList: PostsListWidget,
@@ -76,7 +77,8 @@ const WidgetWrapper: FC<IProps> = ({ data, widgetId, isSidebar, dictionary, loca
         dayModeNightMode: DayModeNightMode,
     };
 
-    const WidgetToRender = data?.type && widgetMatcher.hasOwnProperty(data?.type) ? widgetMatcher[data.type] : null;
+    // @ts-expect-error: its fine
+    const WidgetToRender = data?.type && widgetMatcher.hasOwnProperty(data?.type) ? widgetMatcher?.[data.type] : null;
 
     const widgetExtraClass = data?.extraClassName ? ` ${data?.extraClassName}` : '';
     const widgetClass = `widget ${data?.type}WrapperWidget${widgetExtraClass}`;
@@ -102,6 +104,7 @@ const WidgetWrapper: FC<IProps> = ({ data, widgetId, isSidebar, dictionary, loca
                     locale={locale}
                     isSidebar={isSidebar}
                     widgetId={widgetId}
+                    contentSettings={contentSettings}
                 />
             )}
 

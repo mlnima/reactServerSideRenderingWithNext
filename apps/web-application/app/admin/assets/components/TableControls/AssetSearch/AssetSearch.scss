@@ -1,0 +1,14 @@
+.AssetSearch{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  max-width: 300px;
+
+  .primaryInput {
+    width: 160px;
+  }
+
+  .btn-navigation {
+    margin: 0 2px;
+  }
+}

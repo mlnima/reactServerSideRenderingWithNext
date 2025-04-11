@@ -1,23 +1,21 @@
 'use client';
 
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { videoQualities } from '@repo/data-structures';
 import { FC } from 'react';
-import { DashboardStore } from '@repo/typescript-types';
 
 interface PropType {
   rendering: boolean;
   onChangeHandler: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  postQuality?: string;
 }
 
-const Quality: FC<PropType> = ({ rendering, onChangeHandler }) => {
-  const post = useSelector((state: DashboardStore) => state.posts.post);
+const Quality: FC<PropType> = ({ rendering, onChangeHandler, postQuality }) => {
 
   if (!rendering) return null;
 
   return (
-    <div className='post-information-section'>
+    <div className="post-information-section">
       <div className="title">
         <p>Quality</p>
       </div>
@@ -25,8 +23,8 @@ const Quality: FC<PropType> = ({ rendering, onChangeHandler }) => {
         <div className="option">
           <select
             className={'primarySelect'}
-            value={post?.quality || 'HD'}
-            name='quality'
+            value={postQuality || 'HD'}
+            name="quality"
             onChange={onChangeHandler}
           >
             {videoQualities.map((videoQuality: string, index: number) => {
@@ -44,40 +42,3 @@ const Quality: FC<PropType> = ({ rendering, onChangeHandler }) => {
 };
 
 export default Quality;
-
-// import {useSelector} from "react-redux";
-// import {videoQualities} from "@repo/data-structures";
-// import {FC} from "react";
-// import {DashboardStore} from "@repo/typescript-types";
-//
-// interface PropType {
-//     rendering: boolean,
-//     onChangeHandler: any
-// }
-//
-// const Quality: FC<PropType> = ({rendering, onChangeHandler}) => {
-//     const post = useSelector(({posts}: DashboardStore) => posts.post);
-//
-//     if (rendering) {
-//         return (
-//             <div className='post-information-section'>
-//                 <div className="title">
-//                     <p>Quality</p>
-//                 </div>
-//                 <div className="editor">
-//                     <div className="option">
-//                         <select className={'primarySelect'} value={post?.quality || 'HD'} name='quality'
-//                                 onChange={e => onChangeHandler(e)}>
-//                             {videoQualities.map((videoQuality: string,index:number) => {
-//                                 return <option value={videoQuality} key={`${videoQuality}${index}`}>{videoQuality}</option>
-//                             })}
-//                         </select>
-//                     </div>
-//                 </div>
-//             </div>
-//         );
-//     } else return null
-//
-// };
-// export default Quality;
-//

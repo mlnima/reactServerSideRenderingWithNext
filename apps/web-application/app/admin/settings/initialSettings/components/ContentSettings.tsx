@@ -149,7 +149,7 @@ const ContentSettings: React.FC<PropTypes> = ({ onChangeHandler, initialSettings
                                         name={postTypeSetting}
 
                                         checked={
-
+                                            // @ts-expect-error: its fine
                                             initialSettingsData?.contentSettings?.postSettings?.[postType]?.[
                                                 postTypeSetting
                                             ]

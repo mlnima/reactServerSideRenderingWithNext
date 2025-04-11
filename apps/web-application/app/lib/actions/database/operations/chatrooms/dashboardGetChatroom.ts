@@ -38,7 +38,7 @@ const dashboardGetChatroom = async (
 
     return successResponse({
       data: {
-        chatroom,
+        chatroom:JSON.parse(JSON.stringify(chatroom)),
       },
     });
 

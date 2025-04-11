@@ -1,7 +1,7 @@
 import WidgetsRenderer from '../widgetRenderer/WidgetsRenderer';
 
 
-const NavigationWidgetArea = props => {
+const NavigationWidgetArea = (props:any) => {
     return (
         <nav className={'navigation-widget-area'}>
             <div className={'innerContent'}>

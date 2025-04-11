@@ -1,21 +1,20 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import WidgetImporter from './WidgetImporter/WidgetImporter';
 import WidgetExporter from './WidgetExporter/WidgetExporter';
 import { convertVariableNameToName } from '@repo/utils';
 import { widgetsTypes, widgetsStaticPositions } from '@repo/data-structures';
-import { useSelector } from 'react-redux';
 import defaultWidgetsData from './defaultWidgetsData';
 import { useAppDispatch } from '@storeDashboard/hooks';
 import { createNewWidgetAction } from '@storeDashboard/reducers/widgetsReducer';
+import { useAppSelector } from '@storeDashboard//hooks';
 import { IWidget } from '@repo/typescript-types';
 import './AddWidgetMenu.scss'
 
-
 const AddWidgetMenu = () => {
   const dispatch = useAppDispatch();
-  const customPages = useSelector(({ globalState }) => globalState?.customPages);
-  const adminPanelWidgets = useSelector(({ widgets }) => widgets?.adminPanelWidgets);
+  const customPages = useAppSelector(({ globalState }) => globalState?.customPages);
+  const adminPanelWidgets = useAppSelector(({ widgets }) => widgets?.adminPanelWidgets);
 
   const [state, setState] = useState({
     position: 'home',
@@ -24,10 +23,12 @@ const AddWidgetMenu = () => {
 
   const onAddNewWidget = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const highestIndexInTheSamePosition = Math.max(
       ...(adminPanelWidgets?.[state.position] || []).map((widget: IWidget) => widget?.data?.widgetIndex),
       0,
     );
+    // @ts-expect-error: its fine
     const widgetModelData = defaultWidgetsData?.[state.type] || {};
 
     let dataToSave = {
@@ -46,11 +47,7 @@ const AddWidgetMenu = () => {
       [e.target.name]: e.target.value,
     }));
   };
-
-  useEffect(() => {
-    console.log(`customPages=> `, customPages);
-  }, [customPages]);
-
+  
   return (
     <div id={'adminAddWidgetMenu'} className="add-export-widgets">
       <form className={'add-new-widget-form'} onSubmit={onAddNewWidget}>

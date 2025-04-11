@@ -1,7 +1,7 @@
 import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 import getSettings from '@lib/actions/database/operations/settings/getSettings';
 import { IInitialSettings, IPageSettings } from '@repo/typescript-types';
-import { textContentReplacer } from '@repo/utils/dist/src/strings';
+import { textContentReplacer } from '@repo/utils';
 
 interface IPageHeadMetaGenerator {
   pageSettingToGet: string,
@@ -21,6 +21,7 @@ export const headMetaFromSettings = async (
 ): Promise<{ title: string, description?: string, keywords?: string } | {}> => {
 
   try {
+    console.log(`headMetaFromSettings=> `,)
     const settingsResponse = unwrapResponse(
       await getSettings([pageSettingToGet]) as unknown as ServerActionResponse<SettingsResponse>,
     );
@@ -31,7 +32,7 @@ export const headMetaFromSettings = async (
 
     // Use the dynamic key to access the page settings
     const pageSettings: IPageSettings | undefined = settingsResponse[pageSettingToGet];
-
+    console.log(`headMetaFromSettings=> `,)
     const { initialSettings } = unwrapResponse(
       await getSettings(['initialSettings']) as unknown as ServerActionResponse<{
         initialSettings: IInitialSettings | undefined;

@@ -1,62 +1,37 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../../store";
 
-interface PostsState {
-    activeVideoTrailerId: string | null,
-    posts: [],
-    pageData: {},
-    actorData: {},
-    categoryData: {},
-    tagData: {},
-    totalCount: 0,
-    post: {
-        comments: [],
-        likes: 0,
-        disLikes: 0,
-        views: 0
-    },
-    relatedPosts: {
-        actorsRelatedPosts: [],
-        categoriesRelatedPosts: [],
-        tagsRelatedPosts: [],
-    },
-    editingPost: {},
-    editingPostImagesToUpload: any,
-    comments: {
-        _id: string
-    }[],
-    categoriesMetas: [],
-    tagsMetas: [],
-    actorsMetas: [],
-}
-
-const initialState: PostsState = {
+const initialState = {
     activeVideoTrailerId:null,
-    posts: [],
-    pageData: {},
-    actorData: {},
-
-    categoryData: {},
-    tagData: {},
+    relatedPosts: [],
     totalCount: 0,
-    post: {
-        comments: [],
-        likes: 0,
-        disLikes: 0,
-        views: 0
-    },
-    relatedPosts: {
-        actorsRelatedPosts: [],
-        categoriesRelatedPosts: [],
-        tagsRelatedPosts: [],
-    },
-    editingPost: {},
-    editingPostImagesToUpload: {},
-    comments: [],
-    categoriesMetas: [],
-    tagsMetas: [],
-    actorsMetas: [],
+    statusesCount: {},
+    posts: [],
+    meta: {},
+    metas: [],
+    activeEditingLanguage: 'default',
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export const postsSlice = createSlice({
     name: 'posts',
@@ -65,56 +40,7 @@ export const postsSlice = createSlice({
         setActiveVideoTrailerId: (state, action: PayloadAction<any>) => {
             state.activeVideoTrailerId = action.payload
         },
-        // setEditingPostImagesToUpload: (state, action: PayloadAction<any>) => {
-        //     state.editingPostImagesToUpload = action.payload
-        // },
-        // setPostsData: (state, action: PayloadAction<any>) => {
-        //     return {
-        //         ...state,
-        //         ...action.payload
-        //     }
-        // },
-        // getPosts: (state, action: PayloadAction<any>) => {
-        //     return {
-        //         ...state,
-        //         ...action.payload
-        //     }
-        // },
-        // initialPosts: (state, action: PayloadAction<any>) => {
-        //     return {
-        //         ...state,
-        //         posts: action.payload,
-        //         loading: false,
-        //         error: null
-        //     }
-        // },
-        // setPost: (state, action: PayloadAction<any>) => {
-        //     state.post = action.payload?.postData
-        //     state.relatedPosts = action.payload?.relatedPosts
-        // },
-        // getEditingPost: (state, action: PayloadAction<any>) => {
-        //     state.editingPost = action.payload
-        // },
-        // editPostField: (state, action: PayloadAction<any>) => {
-        //     state.editingPost = {
-        //         ...state.editingPost,
-        //         ...action.payload
-        //     }
-        // },
 
-        // newComment: (state, action: PayloadAction<any>) => {
-        //     state.post.comments = action.payload
-        // },
-        // deleteComment: (state, action: PayloadAction<any>) => {
-        //     //@ts-ignore
-        //     state.post.comments = state.post.comments.filter(comment => !action.payload.includes(comment._id))
-        // },
-        // viewPost: (state, action: PayloadAction<any>) => {
-        //     state.post.views += 1
-        // },
-        // getPageData: (state, action: PayloadAction<any>) => {
-        //     state.pageData = action.payload
-        // }
     },
     extraReducers: (builder) => {
         //@ts-ignore
@@ -216,18 +142,9 @@ export const postsSlice = createSlice({
 })
 
 export const {
-    // setEditingPostImagesToUpload,
-    // setPostsData,
-    // getPosts,
+
     setActiveVideoTrailerId,
-    // initialPosts,
-    // setPost,
-    // getEditingPost,
-    // editPostField,
-    // newComment,
-    // deleteComment,
-    // viewPost,
-    // getPageData
+
 } = postsSlice.actions
 
 export const postsReducer = (state: RootState) => state?.posts || null

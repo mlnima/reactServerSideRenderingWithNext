@@ -2,16 +2,16 @@ import { ReactNode } from 'react';
 import { Types } from 'mongoose';
 
 export interface IPage {
-  _id: string | Types.ObjectId,
-  pageName: string,
-  sidebar: string,
+  _id?: string | Types.ObjectId,
+  pageName?: string,
+  sidebar?: string,
   status: string,
-  imageUrl: string,
-  pageStyle: string,
+  imageUrl?: string,
+  pageStyle?: string,
   title: string,
-  description: string,
-  keywords: string,
-  translations: {
+  description?: string,
+  keywords?: string,
+  translations?: {
     [key:string]:{
       description: string,
       title: string,

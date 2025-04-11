@@ -1,92 +1,72 @@
 // @ts-nocheck
-
 'use client';
 
 import React, { FC } from 'react';
-import Quality from "./Quality/Quality";
-import TextInput from "./TextInput/TextInput";
-import TextAreaComponent from "./TextAreaComponent/TextAreaComponent";
-import RenderIframe from "./RenderIframe/RenderIframe";
-import Duration from "./Duration/Duration";
-import RatingAndViews from "./RatingAndViews/RatingAndViews";
-import ImagePreview from "../ImagePreview";
-import ImageGallery from "./ImageGallery/ImageGallery";
-import ProductPrice from "./ProductPrice/ProductPrice";
-import styled from "styled-components";
-import { useSelector } from "react-redux";
-import ScraperOptions from "./ScraperOptions";
-
-const StyledDiv = styled.div`
-  width: 100%;
-  padding: 8px;
-  box-sizing: border-box;
-  background-color: var(--secondary-background-color, #181818);
-  color: var(--secondary-text-color, #ccc);
-
-  .primaryInput {
-    box-sizing: border-box;
-  }
-
-  .VideoInformationSection, .post-information-section {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    align-items: center;
-    padding: 8px;
-    box-sizing: border-box;
-
-    .title {
-      padding: 2px;
-      font-size: small;
-    }
-
-    iframe {
-      padding: 8px;
-      box-sizing: border-box;
-      width: 50%;
-      aspect-ratio: 16/9;
-    }
-  }
-`;
+import Quality from './Quality/Quality';
+import TextInput from './TextInput/TextInput';
+import TextAreaComponent from './TextAreaComponent/TextAreaComponent';
+import RenderIframe from './RenderIframe/RenderIframe';
+import Duration from './Duration/Duration';
+import RatingAndViews from './RatingAndViews/RatingAndViews';
+import ImagePreview from '../ImagePreview/ImagePreview';
+import ImageGallery from './ImageGallery/ImageGallery';
+import ProductPrice from './ProductPrice/ProductPrice';
+import ScraperOptions from './ScraperOptions/ScraperOptions';
+import { IPost } from '@repo/typescript-types';
+import './PostInformation.scss';
 
 interface PropTypes {
   onChangeHandler: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  post: IPost | null;
+  relatedPosts: IPost[] | null;
 }
 
-const PostInformation: FC<PropTypes> = (props) => {
-  const post = useSelector(({ posts }) => posts.post);
-
-
-  // Example of dispatching an action
-  // useEffect(() => {
-  //   if (post?._id) {
-  //     dispatch(getPostScrapedDataAction(post?._id));
-  //   }
-  // }, [post?._id, dispatch]);
-
+const PostInformation: FC<PropTypes> = ({ onChangeHandler, post, relatedPosts }) => {
   return (
-    <StyledDiv className='post-information product-information admin-widget'>
-      <TextInput name='source' rendering={true} onChangeHandler={props.onChangeHandler} />
-      {!!post?.source && <ScraperOptions sourceURL={post?.source} postId={post?._id} />}
-      <TextInput name='mainThumbnail' rendering={true} onChangeHandler={props.onChangeHandler} />
-      <ImagePreview />
+    <div className="PostInformation product-information admin-widget">
+      <TextInput post={post} name="source" onChangeHandler={onChangeHandler} />
+      {!!post?.source &&
+        <ScraperOptions relatedPosts={relatedPosts} post={post} sourceURL={post?.source} postId={post?._id} />}
+      <TextInput post={post} name="mainThumbnail" onChangeHandler={onChangeHandler} />
+      <ImagePreview mainThumbnail={post?.mainThumbnail} />
 
-      <Quality rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler} />
-      <TextInput name='videoUrl' rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler} />
-      <TextInput name='videoEmbedCode' rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler} />
-      <TextInput name='redirectLink' rendering={post?.postType === 'promotion'} onChangeHandler={props.onChangeHandler} />
-      <TextInput name='redirectLink' rendering={!!post?.postType?.match(/^(promotion|out)$/)} onChangeHandler={props.onChangeHandler} />
-      <TextAreaComponent name='videoScriptCode' rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler} />
-      <RenderIframe rendering={post?.postType === 'video'} />
-      <TextInput name='videoTrailerUrl' rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler} />
-      <TextInput name='downloadLink' rendering={true} onChangeHandler={props.onChangeHandler} />
-      <Duration rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler} />
-      <ProductPrice rendering={post?.postType === 'product'} onChangeHandler={props.onChangeHandler} />
-      {/*<TextInput name='shippingCost' rendering={post?.postType === 'product'} onChangeHandler={props.onChangeHandler} />*/}
-      <ImageGallery rendering={post?.postType === 'product'} onChangeHandler={props.onChangeHandler} />
-      <RatingAndViews name='views' rendering={true} onChangeHandler={props.onChangeHandler} />
-      <RatingAndViews name='likes' rendering={true} onChangeHandler={props.onChangeHandler} />
-      <RatingAndViews name='disLikes' rendering={true} onChangeHandler={props.onChangeHandler} />
-    </StyledDiv>
+      <Quality postQuality={post?.quality} rendering={post?.postType === 'video'} onChangeHandler={onChangeHandler} />
+      {post?.postType === 'video' &&
+        <>
+          <TextInput post={post} name="videoUrl" onChangeHandler={onChangeHandler} />
+          <TextInput post={post} name="videoEmbedCode" onChangeHandler={onChangeHandler} />
+          <TextAreaComponent post={post} name="videoScriptCode" rendering={post?.postType === 'video'}
+                             onChangeHandler={onChangeHandler} />
+          <RenderIframe videoEmbedCode={post?.videoEmbedCode} rendering={post?.postType === 'video'} />
+          <TextInput post={post} name="videoTrailerUrl" onChangeHandler={onChangeHandler} />
+          <Duration duration={post.duration} onChangeHandler={onChangeHandler} />
+        </>
+      }
+
+      {post?.postType?.match(/^(promotion|out)$/) &&
+        <TextInput post={post} name="redirectLink" onChangeHandler={onChangeHandler} />
+      }
+      {post?.postType === 'promotion' &&
+        <TextInput post={post} name="redirectLink" onChangeHandler={onChangeHandler} />
+      }
+
+      {post?.postType === 'product' &&
+        <>
+          <ProductPrice onChangeHandler={onChangeHandler} price={post?.price} priceType={post?.priceType} />
+          <ImageGallery onChangeHandler={onChangeHandler} post={post} />
+        </>
+      }
+
+      <TextInput name="downloadLink" onChangeHandler={onChangeHandler} />
+      {/*<TextAreaComponent name='videoScriptCode' rendering={post?.postType === 'video'} onChangeHandler={onChangeHandler} />*/}
+      {/*<RenderIframe rendering={post?.postType === 'video'} />*/}
+      {/*<ProductPrice rendering={post?.postType === 'product'} onChangeHandler={onChangeHandler} />*/}
+      {/*<TextInput name='shippingCost' rendering={post?.postType === 'product'} onChangeHandler={onChangeHandler} />*/}
+      {/*<ImageGallery rendering={post?.postType === 'product'} onChangeHandler={onChangeHandler} />*/}
+      <RatingAndViews post={post} name="views" onChangeHandler={onChangeHandler} />
+      <RatingAndViews post={post} name="likes" onChangeHandler={onChangeHandler} />
+      <RatingAndViews post={post} name="disLikes" onChangeHandler={onChangeHandler} />
+    </div>
   );
 };
 
@@ -154,34 +134,34 @@ export default PostInformation;
 //
 //     return (
 //         <StyledDiv className='post-information  product-information admin-widget'>
-//             <TextInput name='source' rendering={true} onChangeHandler={props.onChangeHandler}/>
+//             <TextInput name='source' rendering={true} onChangeHandler={onChangeHandler}/>
 //             {!!post?.source && <ScraperOptions sourceURL={post?.source} postId={post?._id}  />}
-//             <TextInput name='mainThumbnail' rendering={true} onChangeHandler={props.onChangeHandler}/>
+//             <TextInput name='mainThumbnail' rendering={true} onChangeHandler={onChangeHandler}/>
 //             <ImagePreview/>
-//             <Quality rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
-//             <TextInput name='videoUrl' rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
+//             <Quality rendering={post?.postType === 'video'} onChangeHandler={onChangeHandler}/>
+//             <TextInput name='videoUrl' rendering={post?.postType === 'video'} onChangeHandler={onChangeHandler}/>
 //             <TextInput name='videoEmbedCode' rendering={post?.postType === 'video'}
-//                        onChangeHandler={props.onChangeHandler}/>
+//                        onChangeHandler={onChangeHandler}/>
 //
 //             <TextInput name='redirectLink' rendering={post?.postType === 'promotion'}
-//                        onChangeHandler={props.onChangeHandler}/>
+//                        onChangeHandler={onChangeHandler}/>
 //             <TextInput name='redirectLink' rendering={!!post?.postType?.match(/^(promotion|out)$/)}
-//                        onChangeHandler={props.onChangeHandler}/>
+//                        onChangeHandler={onChangeHandler}/>
 //             <TextAreaComponent name='videoScriptCode' rendering={post?.postType === 'video'}
-//                                onChangeHandler={props.onChangeHandler}/>
+//                                onChangeHandler={onChangeHandler}/>
 //             <RenderIframe rendering={post?.postType === 'video'}/>
 //             <TextInput name='videoTrailerUrl' rendering={post?.postType === 'video'}
-//                        onChangeHandler={props.onChangeHandler}/>
+//                        onChangeHandler={onChangeHandler}/>
 //             <TextInput name='downloadLink' rendering={true}
-//                        onChangeHandler={props.onChangeHandler}/>
-//             <Duration rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
-//             <ProductPrice rendering={post?.postType === 'product'} onChangeHandler={props.onChangeHandler}/>
+//                        onChangeHandler={onChangeHandler}/>
+//             <Duration rendering={post?.postType === 'video'} onChangeHandler={onChangeHandler}/>
+//             <ProductPrice rendering={post?.postType === 'product'} onChangeHandler={onChangeHandler}/>
 //             <TextInput name='shippingCost' rendering={post?.postType === 'product'}
-//                        onChangeHandler={props.onChangeHandler}/>
-//             <ImageGallery rendering={post?.postType === 'product'} onChangeHandler={props.onChangeHandler}/>
-//             <RatingAndViews name='views' rendering={true} onChangeHandler={props.onChangeHandler}/>
-//             <RatingAndViews name='likes' rendering={true} onChangeHandler={props.onChangeHandler}/>
-//             <RatingAndViews name='disLikes' rendering={true} onChangeHandler={props.onChangeHandler}/>
+//                        onChangeHandler={onChangeHandler}/>
+//             <ImageGallery rendering={post?.postType === 'product'} onChangeHandler={onChangeHandler}/>
+//             <RatingAndViews name='views' rendering={true} onChangeHandler={onChangeHandler}/>
+//             <RatingAndViews name='likes' rendering={true} onChangeHandler={onChangeHandler}/>
+//             <RatingAndViews name='disLikes' rendering={true} onChangeHandler={onChangeHandler}/>
 //
 //         </StyledDiv>
 //     );

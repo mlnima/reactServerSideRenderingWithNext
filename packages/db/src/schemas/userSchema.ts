@@ -46,6 +46,7 @@ const userSchema = new Schema({
   verificationToken: String,
 }, { timestamps: true });
 
+
 const UserModel = models?.user || model<User>('user', userSchema);
 
 export default UserModel;

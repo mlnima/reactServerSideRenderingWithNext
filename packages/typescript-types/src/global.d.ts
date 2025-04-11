@@ -1,9 +1,7 @@
 import { Schema } from "mongoose";
 declare module '@repo/api-requests';
 declare module '@repo/utils';
-declare module '@repo/utils';
 declare module '@repo/data-structures';
-declare module '@repo/react-hooker-lib';
 declare module 'tsconfig';
 declare module '@repo/ui';
 declare module '@repo/shared-style';

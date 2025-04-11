@@ -1,10 +1,8 @@
 import type { Metadata } from 'next';
-import { getTextDataWithTranslation, textContentReplacer } from '@repo/utils';
 import { AlternatesGenerators } from '@lib/alternatesCanonicalGenerator';
-import { PageParams, PageSearchParams, IPageSettings, IInitialSettings } from '@repo/typescript-types';
+import { PageParams, PageSearchParams } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
-import getSettings from '@lib/actions/database/operations/settings/getSettings';
-import { ServerActionResponse } from '@lib/actions/response';
+
 import { headMetaFromSettings } from '@lib/headMetaFromSettings';
 
 interface IProps {

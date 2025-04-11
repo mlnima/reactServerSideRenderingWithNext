@@ -5,8 +5,8 @@ import styled from 'styled-components';
 import { useAppDispatch } from '@storeDashboard/hooks';
 import { editInitialSettings } from '@storeDashboard/reducers/settingsReducer';
 import { postTypes } from '@repo/data-structures';
-import { useSelector } from 'react-redux';
-import { DashboardStore } from "@repo/typescript-types";
+import { useAppSelector } from '@storeDashboard/hooks';
+
 import { inputValueSimplifier } from '@repo/utils';
 
 const Style = styled.div`
@@ -50,7 +50,7 @@ interface PropTypes {}
 
 const PostByUserSettings: React.FC<PropTypes> = () => {
     const dispatch = useAppDispatch();
-    const initialSettingsData = useSelector(({ settings }) => settings.initialSettings);
+    const initialSettingsData = useAppSelector(({ settings }) => settings.initialSettings);
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>, postType: string) => {
         const value = inputValueSimplifier(e);

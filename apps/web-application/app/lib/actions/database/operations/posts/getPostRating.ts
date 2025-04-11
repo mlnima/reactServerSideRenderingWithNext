@@ -8,7 +8,7 @@ import { errorResponse, ServerActionResponse, successResponse } from '@lib/actio
 //   disLikes: number
 // } | null>>
 const getPostRating = async (_id: string) => {
-  'use cache';
+  // 'use cache';
   try {
     await connectToDatabase('getPostRating');
     const postData = await postSchema
@@ -16,7 +16,7 @@ const getPostRating = async (_id: string) => {
       .select('likes disLikes -_id')
       .lean<IPost>();
 
-    cacheTag('cacheItem', `CPostRating-${_id}`);
+    // cacheTag('cacheItem', `CPostRating-${_id}`);
 
     return successResponse({
       data: {

@@ -19,11 +19,18 @@ const LayoutMetaGenerator = async ({ params }: Props): Promise<Metadata> => {
 
   const fallbackIcon = '/asset/images/default/favicon.png';
 
-  const { initialSettings } = unwrapResponse(
+
+  const { success,initialSettings } = unwrapResponse(
     await getSettings(['initialSettings']) as unknown as ServerActionResponse<{
       initialSettings: IInitialSettings | undefined;
     }>,
   );
+
+  if (!success){
+    return {
+      title: 'CMS',
+    }
+  }
 
   const alternates = alternatesGenerators.homePage(lang);
 

@@ -1,8 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useSelector } from "react-redux";
-import { DashboardStore } from "@repo/typescript-types";
+import { useAppSelector } from '@storeDashboard/hooks';
 import { editIdentityAction, updateSettingAction } from "@storeDashboard/reducers/settingsReducer";
 import { useAppDispatch } from "@storeDashboard/hooks";
 import Editor from '@monaco-editor/react';
@@ -14,7 +13,7 @@ interface PropTypes {
 
 const CustomScript: React.FC<PropTypes> = ({ width, height }) => {
     const dispatch = useAppDispatch();
-    const identity = useSelector(({ settings }: DashboardStore) => settings?.identity);
+    const identity = useAppSelector(({ settings }   ) => settings?.identity);
 
     const onSaveHandler = () => {
         dispatch(updateSettingAction({ type: 'identity', data: identity }));

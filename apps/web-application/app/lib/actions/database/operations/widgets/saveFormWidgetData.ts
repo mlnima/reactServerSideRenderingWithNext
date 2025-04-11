@@ -1,3 +1,4 @@
+'use server';
 import { connectToDatabase, formSchema } from '@repo/db';
 
 interface ISaveFormWidgetData {

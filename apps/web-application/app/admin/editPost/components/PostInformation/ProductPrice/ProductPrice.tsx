@@ -1,16 +1,13 @@
 'use client';
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { DashboardStore } from '@repo/typescript-types';
 
-interface PropTypes {
+interface IProps {
   onChangeHandler: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
-  rendering: boolean;
+  price?: number,
+  priceType?: string
 }
 
-const ProductPrice: React.FC<PropTypes> = ({ onChangeHandler, rendering }) => {
-  const price = useSelector((state: DashboardStore) => state.posts.post?.price);
-  const priceType = useSelector((state: DashboardStore) => state.posts.post?.priceType);
+const ProductPrice: React.FC<IProps> = ({ onChangeHandler, price, priceType }) => {
 
   const priceInputAcceptCharacterLimiter = (e: React.ChangeEvent<HTMLInputElement>) => {
     const supportedChar = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'];
@@ -19,8 +16,6 @@ const ProductPrice: React.FC<PropTypes> = ({ onChangeHandler, rendering }) => {
       onChangeHandler(e);
     }
   };
-
-  if (!rendering) return null;
 
   return (
     <div className="post-information-section">

@@ -1,27 +1,19 @@
-'use client';
+import { FC } from 'react';
+import './RenderIframe.scss'
 
-import { useSelector } from 'react-redux';
-import { DashboardStore } from '@repo/typescript-types';
-
-interface PropTypes {
-  rendering: boolean;
+interface IProps {
+  videoEmbedCode?: string;
 }
 
-const RenderIframe = (props: PropTypes) => {
-  const videoEmbedCode = useSelector(({ posts }: DashboardStore) => posts.post?.videoEmbedCode);
-
-  if (props.rendering) {
-    return (
-      <div className="post-information-section">
-        <div className="title"> Video Preview</div>
-        <div className="editor">
-          {videoEmbedCode ? <iframe src={videoEmbedCode} /> : null}
-        </div>
+const RenderIframe: FC<IProps> = ({ videoEmbedCode }) => {
+  return (
+    <div className="RenderIframe ">
+      <div className="title"> Video Preview</div>
+      <div className="iframeWrapper">
+        {videoEmbedCode ? <iframe src={videoEmbedCode} /> : null}
       </div>
-    );
-  } else {
-    return null;
-  }
+    </div>
+  );
 };
 
 export default RenderIframe;

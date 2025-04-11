@@ -1,6 +1,6 @@
 'use server';
 import { metaSchema, postSchema, searchKeywordSchema } from '@repo/db';
-import { getDefaultLocale, getLocales } from '@repo/utils/dist/src/i18n';
+import { getDefaultLocale, getLocales } from '@repo/utils';
 import { postFieldRequestForCards } from '@repo/data-structures';
 import { IMeta, IPost } from '@repo/typescript-types';
 import { unstable_cacheTag as cacheTag } from 'next/cache';
@@ -47,7 +47,7 @@ export const getSearch = async (
     returnPosts = true,
     returnMetas = true,
   }: IGetSearch) => {
-  'use cache';
+  // 'use cache';
 
   try {
     if (!keyword) return null;
@@ -144,7 +144,7 @@ export const getSearch = async (
     if (totalCount > 0) {
       await _saveSearchedKeyword(targetKeyword, totalCount);
     }
-    cacheTag('cacheItem', `CGetSearch-${targetKeyword}`);
+    // cacheTag('cacheItem', `CGetSearch-${targetKeyword}`);
 
     return successResponse({
       data: {

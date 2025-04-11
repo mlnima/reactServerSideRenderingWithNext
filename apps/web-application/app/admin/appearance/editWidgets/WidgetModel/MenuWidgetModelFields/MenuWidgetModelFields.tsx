@@ -141,7 +141,7 @@ const MenuWidgetModelFields: FC<IProps> = ({
     //     })
     // }
 
-    const renderCurrentItems = ([...widgetData?.menuItems] || [])
+    const renderCurrentItems = ( widgetData?.menuItems || [])
         ?.sort((a: IMenuItem, b: IMenuItem) => (a.itemIndex > b.itemIndex ? 1 : -1))
         .map(menuItem => {
             return (
@@ -178,7 +178,9 @@ const MenuWidgetModelFields: FC<IProps> = ({
                 activeEditingLanguage={widgetSettings.activeEditingLanguage}
             />
 
-            <div className="menu-items">{renderCurrentItems}</div>
+            <div className="menu-items">
+              {renderCurrentItems}
+            </div>
         </MenuWidgetModelFieldsStyledDiv>
     );
 };

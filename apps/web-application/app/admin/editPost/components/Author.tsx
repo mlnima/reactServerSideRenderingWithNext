@@ -4,11 +4,11 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch } from '@storeDashboard/hooks';
-import { useSelector } from 'react-redux';
 import { getUserSuggestionList } from '@repo/api-requests';
 import AsyncSelect from 'react-select/async';
 import { editPostAction } from '@storeDashboard/reducers/postsReducer';
 import { reactSelectPrimaryTheme } from '@repo/data-structures';
+import { useAppSelector } from '@storeDashboard/hooks';
 
 const Style = styled.div`
   width: 100%;
@@ -23,7 +23,7 @@ interface SelectOption {
 
 const Author: FC<PropTypes> = ({}) => {
   const dispatch = useAppDispatch();
-  const author = useSelector(({ posts }) => posts.post?.author);
+  const author = useAppSelector(({ posts }) => posts.post?.author);
 
   const onLoadOptionsHandler = async (input: string) => {
     if (!input) return;

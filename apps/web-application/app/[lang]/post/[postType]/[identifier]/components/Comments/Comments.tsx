@@ -85,7 +85,6 @@ const Comments: FC<IProps> = ({ dictionary, postId }) => {
           onDocumentId: postId,
           createdAt: Date.now(),
           author: {
-            //@ts-expect-error: it's fine, in order to avoid populating the saved comment to get author data instead we are adding them after return
             profileImage: userData?.profileImage,
             username: userData?.username,
             _id: userData?._id,

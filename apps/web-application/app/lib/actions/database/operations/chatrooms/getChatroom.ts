@@ -1,6 +1,6 @@
 'use server';
 import { chatroomSchema, connectToDatabase } from '@repo/db';
-import { isValidObjectId } from '@repo/db/dist/src/tools';
+import { isValidObjectId } from '@repo/db';
 import { IChatroom } from '@repo/typescript-types';
 import { Document } from 'mongoose';
 import { unstable_cacheTag as cacheTag } from 'next/cache';
@@ -10,7 +10,7 @@ const getChatroom = async (identifier: string): Promise<ServerActionResponse<{
   chatroom: IChatroom,
   chatrooms: IChatroom[]
 } | null>> => {
-  'use cache';
+  // 'use cache';
   try {
     await connectToDatabase('getChatroom');
     const isValidId = isValidObjectId(identifier);
@@ -47,7 +47,7 @@ const getChatroom = async (identifier: string): Promise<ServerActionResponse<{
       }
       return doc;
     });
-    cacheTag('cacheItem', `CChatroom-${currentChatroom?._id || identifier}`);
+    // cacheTag('cacheItem', `CChatroom-${currentChatroom?._id || identifier}`);
     return successResponse({ data: { chatroom: currentChatroom, chatrooms: allTheChatrooms } });
   } catch (error) {
     return errorResponse({});

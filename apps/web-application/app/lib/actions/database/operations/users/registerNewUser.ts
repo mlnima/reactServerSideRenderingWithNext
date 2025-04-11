@@ -9,7 +9,7 @@ import {
   emailValidator,
   passwordValidatorRegisterForm,
   usernameValidatorRegisterForm,
-} from '@repo/utils/dist/src/validators';
+} from '@repo/utils';
 import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 
 const validateInputs = (

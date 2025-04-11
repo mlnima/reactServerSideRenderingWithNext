@@ -1,3 +1,4 @@
+'use server';
 import { connectToDatabase, metaSchema } from '@repo/db';
 import getSettings from '@lib/actions/database/operations/settings/getSettings';
 import { metaFieldsRequestForCard } from '@repo/data-structures';
@@ -25,7 +26,7 @@ interface IGetMetas {
   metas: IMeta[],
   totalCount: number,
 } | null>> => {
-  'use cache';
+  // 'use cache';
   try {
     await connectToDatabase('getMetas');
     const { initialSettings } = unwrapResponse(
@@ -83,12 +84,12 @@ interface IGetMetas {
       return meta;
     });
 
-    cacheTag(
-      'cacheItem',
-      `CGetMetas-${locale}${metaType ? `-${metaType}` : ''}${
-        page ? `-${page}` : ''
-      }${startWith ? `-${startWith}` : ''}`,
-    );
+    // cacheTag(
+    //   'cacheItem',
+    //   `CGetMetas-${locale}${metaType ? `-${metaType}` : ''}${
+    //     page ? `-${page}` : ''
+    //   }${startWith ? `-${startWith}` : ''}`,
+    // );
 
     return successResponse({
       data: {

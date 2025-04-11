@@ -28,7 +28,9 @@ const actorMetaGenerator = async (props: IProps): Promise<Metadata> => {
     });
 
     if (!success || !data || !data?.meta) {
-      return {};
+      return {
+        title: 'CMS',
+      }
     }
 
     const { meta } = data;

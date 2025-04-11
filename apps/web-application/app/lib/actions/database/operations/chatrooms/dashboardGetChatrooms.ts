@@ -4,14 +4,7 @@ import { errorResponse, ServerActionResponse, successResponse, unwrapResponse } 
 import { chatroomSchema, connectToDatabase } from '@repo/db';
 import getSettings from '@lib/actions/database/operations/settings/getSettings';
 import { IInitialSettings } from '@repo/typescript-types';
-import { deepConvertObjectIdsToStrings } from '@repo/utils-server';
 
-interface IDashboardGetChatrooms {
-  keyword?: string,
-  page?: number,
-  size?: number,
-  sort?: string
-}
 
 const dashboardGetChatrooms = async (
   {
@@ -19,7 +12,7 @@ const dashboardGetChatrooms = async (
     page = 1,
     size,
     sort = '-updatedAt',
-  }: IDashboardGetChatrooms,
+  }: any,
 ) => {
   try {
     const { isAdmin } = await verifySession();
@@ -58,13 +51,12 @@ const dashboardGetChatrooms = async (
         sort: sort || '-updatedAt',
       }).lean();
 
-    const transformedChatrooms = chatrooms.map((doc) => deepConvertObjectIdsToStrings(doc));
 
     const totalCount = await chatroomSchema.countDocuments({});
 
     return successResponse({
       data: {
-        chatrooms: transformedChatrooms,
+        chatrooms: JSON.parse(JSON.stringify(chatrooms)),
         totalCount,
       },
     });

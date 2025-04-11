@@ -10,6 +10,7 @@ import {faFloppyDisk} from "@fortawesome/free-solid-svg-icons/faFloppyDisk";
 import {faClone} from "@fortawesome/free-solid-svg-icons/faClone";
 import {faTrash} from "@fortawesome/free-solid-svg-icons/faTrash";
 import { IWidget } from '@repo/typescript-types';
+import { useAppSelector } from '@storeDashboard//hooks';
 
 
 
@@ -24,7 +25,7 @@ interface ActionButtonsPropTypes {
 const ActionButtons: FC<ActionButtonsPropTypes> = ({widgetData, widgetId, widgetSettings, setWidgetSettings}) => {
     const dispatch = useAppDispatch()
 
-    const widgets = useSelector(({widgets}) => widgets?.adminPanelWidgets || [])
+    const widgets = useAppSelector(({widgets}) => widgets?.adminPanelWidgets || [])
 
     const onSaveHandler = () => {
         dispatch(updateWidgetAction({

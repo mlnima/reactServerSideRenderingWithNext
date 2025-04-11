@@ -6,7 +6,7 @@ import MonacoEditor from '@components/textEditors/MonacoEditor';
 import RenderTitleAndRedirectLink from './RenderTitleAndRedirectLink/RenderTitleAndRedirectLink'
 import TextInputFieldForWidget
     from "./TextInputFieldForWidget/TextInputFieldForWidget";
-import {useSelector} from "react-redux";
+import { useAppSelector } from '@storeDashboard/hooks';
 import {widgetsStaticPositions} from "@repo/data-structures";
 import { WidgetSettingsPropTypes} from "@repo/typescript-types";
 
@@ -33,7 +33,7 @@ const DefaultFields: FC<DefaultFieldsPropTypes> =
          onChangeLanguageHandler,
          setWidgetSettings
      }) => {
-        const customPages = useSelector(({globalState}) => globalState?.customPages)
+        const customPages = useAppSelector(({globalState}) => globalState?.customPages)
         const positions = useMemo(() => {
             return [
                 ...widgetsStaticPositions,

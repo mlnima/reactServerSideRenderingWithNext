@@ -7,7 +7,7 @@ import { useAppSelector } from '@store/hooks';
 import { imageCanvasCompressor } from '@repo/utils';
 
 interface PropTypes {
-  inputRef: React.RefObject<HTMLInputElement>,
+  inputRef: React.RefObject<HTMLInputElement | null>,
   chatroomId: string
   authorId: string | undefined,
   setMessageText: React.Dispatch<React.SetStateAction<string>>

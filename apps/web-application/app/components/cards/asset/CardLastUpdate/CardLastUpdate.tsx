@@ -1,6 +1,6 @@
 import {FC, useMemo} from "react";
 import {formatDistance} from 'date-fns';
-import faIR from "date-fns/locale/fa-IR";
+import { faIR } from "date-fns/locale/fa-IR";
 
 interface CardLastUpdatePropTypes {
     targetedDate: string | Date,

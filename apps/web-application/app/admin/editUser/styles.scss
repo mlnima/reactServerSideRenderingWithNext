@@ -1,0 +1,39 @@
+.EditUserPage{
+  .user-admin-edit-profile-page-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 400px;
+    margin: auto;
+    input, textarea, select {
+      max-width: 300px;
+    }
+    textarea {
+      min-height: 200px;
+    }
+  }
+  .user-admin-edit-profile-page-section-reset-password {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 300px;
+    margin: auto;
+  }
+  .user-admin-edit-profile-page-section-API {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    button {
+      margin: 20px;
+    }
+  }
+  .user-admin-edit-profile-page-delete-user {
+    .delete-user-button {
+      background-color: red;
+      border: none;
+      padding: 10px 20px;
+    }
+  }
+}

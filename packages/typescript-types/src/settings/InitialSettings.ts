@@ -24,6 +24,24 @@ export interface IHeadDataSettings{
     },
 }
 
+export interface IContentSettings{
+  numberOfCardsPerRowInMobile: number,
+  contentPerPage ?: number,
+  cardsWidthDesktop: number,
+  maxInnerContentWidth: number,
+  postSettings:{
+    [key: string]: {
+      viewSystem: boolean,
+      showViewsOnCard: boolean,
+      ratingSystem: boolean,
+      showRatingOnCard: boolean,
+      showDateOnCard: boolean,
+      showDateInPostPage: boolean,
+      allowComment: boolean,
+    }
+  }
+}
+
 
 export interface IInitialSettings{
     headDataSettings:IHeadDataSettings,
@@ -56,22 +74,5 @@ export interface IInitialSettings{
     eCommerceSettings?:{
 
     },
-    contentSettings?:{
-        numberOfCardsPerRowInMobile: number,
-        contentPerPage ?: number,
-        cardsWidthDesktop: number,
-        maxInnerContentWidth: number,
-        postSettings:{
-            [key: string]: {
-                viewSystem: boolean,
-                showViewsOnCard: boolean,
-                ratingSystem: boolean,
-                showRatingOnCard: boolean,
-                showDateOnCard: boolean,
-                showDateInPostPage: boolean,
-                allowComment: boolean,
-            }
-        }
-
-    }
+    contentSettings?:IContentSettings
 }
