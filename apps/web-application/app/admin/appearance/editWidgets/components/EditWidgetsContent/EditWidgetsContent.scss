@@ -1,0 +1,32 @@
+#editWidgetsPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+
+  .widget-setting {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .top-panel {
+      width: 100%;
+    }
+
+    .filter-positions {
+      width: 100%;
+    }
+  }
+
+  @media only screen and (min-width: 768px) {
+    .widget-setting {
+      h2 {
+        justify-self: end;
+        width: 98%;
+      }
+    }
+  }
+}

@@ -16,7 +16,7 @@ export const dashboardAPIRequestGetMetas = async (queriesData:string)=>{
     return await AxiosInstance.get(`/api/dashboard/metas${queriesData}`)
 }
 
-export const dashboardAPIRequestSetMetaThumbnailsAndCount = async (type:string)=>{
+export const dashboardAPIRequestSetMetaThumbnailsAndCount = async (type?:string)=>{
     return await AxiosInstance.get(`/api/dashboard/meta/setMetaThumbnailsAndCount${type ? `?&type=${type}` : ''}`)
 }
 

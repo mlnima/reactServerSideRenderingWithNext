@@ -1,0 +1,49 @@
+#UploadedPopView{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 15;
+
+  .closeBtn {
+    align-self: flex-end;
+    color: white;
+    background-color: transparent;
+    border: none;
+    font-weight: bold;
+    font-size: xx-large;
+  }
+
+  .gallery-pop-view-content {
+    background-color: black !important;
+    border: 1px solid white;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    min-width: 80vw;
+    min-height: 80vh;
+
+    .uploaded-pop-view-url {
+      margin: 10px 0;
+      width: 90%;
+      color: white;
+    }
+
+    .uploaded-pop-delete-button {
+      font-size: 1rem;
+      padding: 10px 30px;
+      background-color: red;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+  }
+}

@@ -42,7 +42,7 @@ const MetasSection: FC<PropTypes> = ({}) => {
 
     const onBackupMetasHandler = (e: React.MouseEvent<HTMLElement>) => {
         const metaType = (e.target as any).name
-        const now = Date.now()
+        const now = performance.now()
         dashboardAPIRequestBackupMetas({
             metaType,
             fields :metasSelectedFields

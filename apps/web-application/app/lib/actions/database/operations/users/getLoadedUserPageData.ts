@@ -14,7 +14,7 @@ interface IGetLoadedUserPageData {
     userId,
     userWhoRequestIt,
   }: IGetLoadedUserPageData) => {
-  "use cache"
+  // "use cache"
   try {
     await connectToDatabase('getLoadedUserPageData');
 
@@ -46,7 +46,7 @@ interface IGetLoadedUserPageData {
       isFollowed: !!requestingUser?.following?.length,
     };
 
-    cacheTag('cacheItem', `CUserPageLoaded-${userId}-${userWhoRequestIt}`);
+    // cacheTag('cacheItem', `CUserPageLoaded-${userId}-${userWhoRequestIt}`);
 
 
     return successResponse({ data:{

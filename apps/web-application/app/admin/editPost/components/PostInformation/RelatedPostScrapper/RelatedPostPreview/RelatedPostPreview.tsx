@@ -1,8 +1,5 @@
 'use client';
-
 import React, { FC, useState } from 'react';
-import { editPostSourceAction } from '@storeDashboard/reducers/postsReducer';
-import { useAppDispatch } from '@storeDashboard/hooks';
 import styled from 'styled-components';
 
 interface IProps {
@@ -15,31 +12,38 @@ interface IProps {
     duration: string;
     title: string;
   };
+  onChangeHandler: (e: React.ChangeEvent<HTMLElement>) => void;
 }
 
 const Styles = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
-  width: 200px;
-
-  img, video {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
     width: 200px;
-    aspect-ratio: 16/9;
-  }
 
-  p {
-    width: 100%;
-    text-align: left;
-    margin: 4px 0;
-  }
+    img, video {
+        width: 200px;
+        aspect-ratio: 16/9;
+    }
+
+    p {
+        width: 100%;
+        text-align: left;
+        margin: 4px 0;
+    }
 `;
 
-const RelatedPostPreview: FC<IProps> = ({ cardData }) => {
-  const dispatch = useAppDispatch();
+const RelatedPostPreview: FC<IProps> = ({ cardData, onChangeHandler }) => {
   const [isHover, setIsHover] = useState(false);
-
+  const onClickHandler = () => {
+    const e = {
+      target: {
+        name: 'source',
+        value: cardData.source,
+      },
+    };
+  };
   return (
     <Styles
       className={'relatedPost'}
@@ -47,7 +51,7 @@ const RelatedPostPreview: FC<IProps> = ({ cardData }) => {
       onTouchStart={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
       onTouchEnd={() => setIsHover(false)}
-      onClick={() => dispatch(editPostSourceAction(cardData.source))}
+      onClick={onClickHandler}
     >
       {cardData?.mainThumbnail && (
         <>

@@ -6,7 +6,7 @@ import { FC } from 'react';
 
 interface PropType {
   rendering: boolean;
-  onChangeHandler: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChangeHandler: (e: React.ChangeEvent<HTMLElement>) => void;
   postQuality?: string;
 }
 

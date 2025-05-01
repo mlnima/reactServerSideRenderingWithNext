@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '@storeDashboard/hooks';
-import { setSidebarStatus } from '@storeDashboard/reducers/globalStateReducer';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { setSidebarStatus } from '@store/reducers/globalStateReducer';
 import menuItems from './menuItems.json';
 import { convertVariableNameToName } from '@repo/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -16,7 +16,7 @@ interface IMenuItem {
 }
 const Sidebar = () => {
   const dispatch = useAppDispatch();
-  const sidebar = useAppSelector((storeDashboard) => storeDashboard.globalState.sidebar);
+  const sidebar = useAppSelector(({globalState}) => globalState.sidebar);
   const [hovered, setHovered] = useState('');
 
   const renderItems = menuItems.map((item: IMenuItem) => (

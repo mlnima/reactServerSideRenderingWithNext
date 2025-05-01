@@ -3,14 +3,14 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { userStatus, userRoles } from '@repo/data-structures';
 import { convertVariableNameToName } from '@repo/utils';
-import { useAppDispatch } from '@storeDashboard/hooks';
+import { useAppDispatch } from '@store/hooks';
 import { useRouter, useSearchParams } from 'next/navigation';
 import './styles.scss';
 import { User } from '@repo/typescript-types';
 import dashboardGenerateNewApiKey from '@lib/actions/database/operations/users/dashboardGenerateNewApiKey';
 import { ServerActionResponse } from '@lib/actions/response';
 import dashboardGetUser from '@lib/actions/database/operations/users/dashboardGetUser';
-import { setAlert } from '@storeDashboard/reducers/globalStateReducer';
+import { setAlert } from '@store/reducers/globalStateReducer';
 import dashboardDeleteUser from '@lib/actions/database/operations/users/dashboardDeleteUser';
 import dashboardChangeUserPassword from '@lib/actions/database/operations/users/dashboardChangeUserPassword';
 import dashboardUpdateUser from '@lib/actions/database/operations/users/dashboardUpdateUser';

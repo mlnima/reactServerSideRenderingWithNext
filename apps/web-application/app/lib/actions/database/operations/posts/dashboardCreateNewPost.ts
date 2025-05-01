@@ -21,9 +21,9 @@ const dashboardCreateNewPost = async (newPost :IPost) => {
 
     const editedNewPost = {
       ...newPost,
-      tags: newPost.tags ? await _updateSaveMetas(newPost.tags) : [],
-      categories: newPost.categories ? await _updateSaveMetas(newPost.categories) : [],
-      actors: newPost.actors ? await _updateSaveMetas(newPost.actors) : [],
+      tags: newPost?.tags ? await _updateSaveMetas(newPost.tags) : [],
+      categories: newPost?.categories ? await _updateSaveMetas(newPost.categories) : [],
+      actors: newPost?.actors ? await _updateSaveMetas(newPost.actors) : [],
     };
     const newPostDataToSave = new postSchema(editedNewPost);
     const savedPost = newPostDataToSave.save();

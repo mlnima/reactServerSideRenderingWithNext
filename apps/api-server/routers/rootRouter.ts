@@ -133,9 +133,9 @@ router.post('/v1/file/upload/postImages', authMiddleware, FileManagerController.
 router.patch('/v1/file/upload/profileImage', authMiddleware, FileManagerController.uploadProfileImage);
 // router.delete('/v1/file/delete/postImage', authMiddleware, FileManagerController.deletePostImage);
 // router.delete('/v1/file/delete/postImages', authMiddleware, FileManagerController.deletePostImages);
-router.post('/dashboard/file/readPath', adminAuthMiddleware, FileManagerController.dashboardReadPath);
-router.post('/dashboard/file/delete/file', adminAuthMiddleware, FileManagerController.dashboardDeleteFile);
-router.post('/dashboard/file/upload/file', adminAuthMiddleware, FileManagerController.dashboardUploadFile);
+router.post('/dashboard/file/readPath', FileManagerController.dashboardReadPath);
+router.post('/dashboard/file/delete/file', FileManagerController.dashboardDeleteFile);
+router.post('/dashboard/file/upload/file', FileManagerController.dashboardUploadFile);
 
 //will be change due to not working custom translation after nextjs app router
 router.put('/dashboard/file/translationFile',express.json({ limit: '100MB' }), adminAuthMiddleware, FileManagerController.dashboardUpdateTranslationsFile);

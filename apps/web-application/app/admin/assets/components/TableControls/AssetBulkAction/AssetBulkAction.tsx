@@ -1,11 +1,12 @@
 'use client';
 import React, { FC, useState } from 'react';
-import { setAlert } from '@storeDashboard/reducers/globalStateReducer';
-import { bulkActionMetaAction, bulkActionPostsAction } from '@storeDashboard/reducers/postsReducer';
-import { useAppDispatch } from '@storeDashboard/hooks';
+import { setAlert } from '@store/reducers/globalStateReducer';
+import { useAppDispatch } from '@store/hooks';
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
 import './AssetBulkAction.scss';
+import dashboardUpdatePostsStatus from '@lib/actions/database/operations/posts/dashboardUpdatePostsStatus';
+import dashboardUpdateMetasStatus from '@lib/actions/database/operations/metas/dashboardUpdateMetasStatus';
 
 interface AssetBulkActionPropTypes {
   selectedItems: string[];
@@ -27,12 +28,12 @@ const AssetBulkAction: FC<AssetBulkActionPropTypes> = ({ selectedItems, setSelec
     if (selectedItems?.length && status) {
       switch (searchParams.get('assetsType')) {
         case 'posts':
-          dispatch(bulkActionPostsAction({ ids: selectedItems, status }));
+          dashboardUpdatePostsStatus({ ids: selectedItems, status })
           setSelectedItems([]);
           reGetData();
           break;
         case 'metas':
-          dispatch(bulkActionMetaAction({ type: 'metas', status, ids: selectedItems }));
+          dashboardUpdateMetasStatus({ type: 'metas', status, ids: selectedItems })
           reGetData();
           break;
         default:

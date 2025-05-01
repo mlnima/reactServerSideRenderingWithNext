@@ -1,26 +1,45 @@
-import FilterEditingWidgets from './FilterEditingWidgets/FilterEditingWidgets';
-import AddWidgetMenu from './AddWidgetMenu/AddWidgetMenu';
-import './styles.scss';
-import WidgetPositionsWrapper from './WidgetPositionsWrapper/WidgetPositionsWrapper';
 
-const page = async () => {
-  return (
-    <div id={'editWidgetsPage'} className="admin-widgets-page">
-      <h1>Widgets Settings</h1>
-      <div className="widget-setting">
-        <h2>Add New Widget:</h2>
-        <div className="top-panel">
-          <AddWidgetMenu />
-        </div>
-        <div className={'filter-positions'}>
-          <h2>Filter Position:</h2>
-          <FilterEditingWidgets />
-        </div>
-        <h2>Widgets:</h2>
-        <WidgetPositionsWrapper />
-      </div>
-    </div>
+import './styles.scss';
+
+import dashboardGetWidgets from '@lib/actions/database/operations/widgets/dashboardGetWidgets';
+import { reduceWidgetsToGroups } from '@repo/utils/dist/src/arrays';
+import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
+import { IPage, IWidget, IWidgetData, PageParams, PageSearchParams } from '@repo/typescript-types';
+import dashboardGetPages from '@lib/actions/database/operations/pages/dashboardGetPages';
+import EditWidgetsContent from './components/EditWidgetsContent/EditWidgetsContent';
+
+interface IProps {
+  params: PageParams;
+  searchParams?: PageSearchParams;
+}
+
+
+const page = async (props: IProps) => {
+  const searchParams = await props.searchParams;
+  const params = await props.params;
+
+  const { pages } = unwrapResponse(
+    await dashboardGetPages({ size: 100,fields:'title' }) as unknown as ServerActionResponse<{
+      pages: IPage[]
+    }>,
   );
+
+  const customPages = pages ? pages.map(p=>p.title) : []
+
+  // dont remove, we will get only require widgets later
+  const positions = Array.isArray(searchParams?.positions) ? searchParams?.positions : [searchParams?.positions];
+
+  const { success, data, message } = await dashboardGetWidgets() as ServerActionResponse<{ widgets: IWidget[] }>;
+
+  if (!success || !data) {
+    return <p>{message}</p>;
+  }
+
+  const widgetsInGroups = reduceWidgetsToGroups(data?.widgets);
+  const availablePositions = Object.keys(widgetsInGroups);
+
+
+  return <EditWidgetsContent customPages={customPages} widgetsInGroups={widgetsInGroups} availablePositions={availablePositions}/>;
 };
 
 

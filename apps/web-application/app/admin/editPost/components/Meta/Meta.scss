@@ -1,0 +1,30 @@
+.postMetaEditor{
+  width: 100%;
+  .add-new-meta {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    button{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .small-info {
+    font-size: var(--font-sizes-s);
+  }
+  .items {
+    display: flex;
+    flex-wrap: wrap;
+    .btn-danger{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: .2rem;
+      margin: 3px;
+      svg{
+        margin-left: 10px;
+      }
+    }
+  }
+}

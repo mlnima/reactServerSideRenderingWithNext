@@ -64,5 +64,9 @@ export interface IRatePost{
 export interface IUpdatePosts{
   ids: string[],
   status: string,
-  token: string
+}
+export interface IUpdateMetas{
+  ids: string[],
+  status: string,
+  type?:'actors' | 'categories' | 'tags'
 }

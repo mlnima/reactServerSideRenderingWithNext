@@ -6,14 +6,13 @@ import getSettings from '@lib/actions/database/operations/settings/getSettings';
 import { IInitialSettings } from '@repo/typescript-types';
 import { deepConvertObjectIdsToStrings } from '@repo/utils-server';
 
-
-
 const dashboardGetPages = async (
   {
     keyword,
     page = 1,
     size,
     sort = '-updatedAt',
+    fields,
   }: any,
 ) => {
   try {
@@ -52,7 +51,8 @@ const dashboardGetPages = async (
         skip: page ? (limit || 20) * (page - 1) : 0,
         limit: size || 20,
         sort: sort || '-updatedAt',
-      }).lean();
+      }).select(fields ?? '')
+      .lean();
 
     const transformedPages = pages.map((doc) => deepConvertObjectIdsToStrings(doc));
 

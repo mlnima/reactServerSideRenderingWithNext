@@ -45,7 +45,7 @@ const ChatRoomTools: FC<IProps> = ({chatroomId, setAutoScroll,dictionary}) => {
 
         if (!loggedIn) return
 
-        if (typeof lastMessageTime === 'number' && Date.now() - lastMessageTime < 2 * 1000) {
+        if (typeof lastMessageTime === 'number' && performance.now() - lastMessageTime < 2 * 1000) {
             dispatch(setAlert({
                 message: "You must wait 15 seconds between messages.",
                 type: 'info'
@@ -79,7 +79,7 @@ const ChatRoomTools: FC<IProps> = ({chatroomId, setAutoScroll,dictionary}) => {
                 }
             })
             setMessageText('')
-            setLastMessageTime(Date.now())
+            setLastMessageTime(performance.now())
             setAutoScroll(true)
         } else if (audioMessage) {
             const messageBody = {

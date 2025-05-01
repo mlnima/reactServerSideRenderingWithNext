@@ -5,7 +5,7 @@ import './FormWidget.scss';
 import FormWidgetField from '@components/widgets/widgets/FormWidget/FormWidgetField/FormWidgetField';
 import { loading, setAlert } from '@store/reducers/globalStateReducer';
 import saveFormWidgetData from '@lib/actions/database/operations/widgets/saveFormWidgetData';
-import { useAppSelector } from '@storeDashboard/hooks';
+import { useAppSelector } from '@store/hooks';
 
 interface FormWidgetPropTypes {
   locale: string;

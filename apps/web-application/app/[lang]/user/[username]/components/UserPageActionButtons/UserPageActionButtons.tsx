@@ -12,7 +12,7 @@ import follow from '@lib/actions/database/operations/users/follow';
 import unfollow from '@lib/actions/database/operations/users/unfollow';
 import { clearACacheByTag } from '@lib/serverActions';
 import newConversation from '@lib/actions/database/operations/messenger/newConversation';
-import { setAlert } from '@storeDashboard/reducers/globalStateReducer';
+import { setAlert } from '@store/reducers/globalStateReducer';
 import { ServerActionResponse } from '@lib/actions/response';
 
 interface IProps {

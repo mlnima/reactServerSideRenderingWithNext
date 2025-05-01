@@ -37,7 +37,7 @@ const Comments: FC<IProps> = ({ dictionary, postId }) => {
   const onSubmitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (lastCommentTime && Date.now() - lastCommentTime < 60 * 1000) {
+    if (lastCommentTime && performance.now() - lastCommentTime < 60 * 1000) {
       dispatch(
         setAlert({
           message: 'You Are Too Fast',
@@ -83,7 +83,7 @@ const Comments: FC<IProps> = ({ dictionary, postId }) => {
           _id: data?.savedCommentId,
           body: draftCommentBody,
           onDocumentId: postId,
-          createdAt: Date.now(),
+          createdAt: performance.now(),
           author: {
             profileImage: userData?.profileImage,
             username: userData?.username,
@@ -95,7 +95,7 @@ const Comments: FC<IProps> = ({ dictionary, postId }) => {
           ...(prevState || []),
         ]);
       }
-      setLastCommentTime(Date.now());
+      setLastCommentTime(performance.now());
       setDraftCommentBody('');
       dispatch(loading(false));
     } catch {

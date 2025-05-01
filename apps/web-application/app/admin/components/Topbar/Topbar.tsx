@@ -1,10 +1,10 @@
 'use client';
 import Link from "next/link";
-import { useAppDispatch } from "@storeDashboard/hooks";
-import {setSidebarStatus} from "@storeDashboard/reducers/globalStateReducer";
+import { useAppDispatch } from "@store/hooks";
+import {setSidebarStatus} from "@store/reducers/globalStateReducer";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faUser, faHome } from '@fortawesome/free-solid-svg-icons';
-import { useAppSelector } from '@storeDashboard/hooks';
+import { useAppSelector } from '@store/hooks';
 import React from "react";
 import './Topbar.scss'
 

@@ -1,0 +1,30 @@
+.ContentSettings{
+  .actionButtons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .postSettings {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+
+    .postSetting {
+      width: 300px;
+
+      .field {
+        h3 {
+          padding: 0.25rem;
+          margin: 0;
+        }
+      }
+
+      .checkboxField {
+        grid-template-columns: 1fr 50px;
+      }
+    }
+  }
+}

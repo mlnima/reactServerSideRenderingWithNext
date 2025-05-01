@@ -1,19 +1,13 @@
-// @ts-nocheck
 'use client';
 
-import React, { useEffect, useRef, useMemo, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import TitleDescription from './components/TitleDescription/TitleDescription';
 import ActionOnPost from './components/ActionOnPost/ActionOnPost';
-import Format from './components/Format';
-import Meta from './components/Meta';
+import Format from './components/Format/Format';
+import Meta from './components/Meta/Meta';
 import RatingOption from './components/RatingOption';
 import PostInformation from './components/PostInformation/PostInformation';
-import { useAppSelector } from '@storeDashboard/hooks';
-import {
-  changeActiveEditingLanguage,
-} from '@storeDashboard/reducers/postsReducer';
-import { useAppDispatch } from '@storeDashboard/hooks';
 import { LanguagesOptions } from '@repo/ui';
 import { isNumericString } from '@repo/utils';
 import Author from './components/Author';
@@ -21,61 +15,70 @@ import { useSearchParams } from 'next/navigation';
 import './styles.scss';
 import dashboardGetPost from '@lib/actions/database/operations/posts/dashboardGetPost';
 import { IPost } from '@repo/typescript-types';
+import {
+  dashboardAPIRequestFindAnotherSimilarSourceLink,
+  dashboardAPIRequestPostDataScrappers,
+} from '@repo/api-requests';
+import { setAlert } from '@store/reducers/globalStateReducer';
+import { useAppDispatch } from '@store/hooks';
 
 
 const EditPostPage = () => {
 
-  //const post = useAppSelector(({ posts }) => posts.post);
-
   const [post, setPost] = useState<IPost | null>(null);
-  const [relatedPosts, setRelatedPosts] = useState<IPost | null>(null);
-  const activeEditingLanguage = useAppSelector(({ posts }) => posts.activeEditingLanguage);
-  const dispatch = useAppDispatch();
+  const [relatedPosts, setRelatedPosts] = useState<IPost[] | null>(null);
+  const [activeEditingLanguage, setActiveEditingLanguage] = useState<string | 'default'>('default');
   const searchParams = useSearchParams();
   const languageElement = useRef(null);
+  const dispatch = useAppDispatch()
 
-  const getPostData = async (_id) => {
+  const getPostData = async (_id: string) => {
     const { data, success, message } = await dashboardGetPost(_id);
-    if (!success) {
+    if (!success || !data?.post) {
       return;
     }
-    setPost(data?.post);
+    setPost(data.post);
   };
 
 
   useEffect(() => {
     const _id = searchParams.get('id');
+
     if (_id) {
       getPostData(_id);
     } else {
       setPost({
-        postType: 'standard',
+        title: '',
+        description: '',
       });
     }
   }, [searchParams]);
 
 
-  useEffect(() => {
-    console.log(post);
-  }, [post]);
-
-
-  const onChangeHandler = (e: { target: { name: any; value: any } }) => {
-    setPost(prevState => ({
-      ...prevState,
+  const onChangeHandler = (e: React.ChangeEvent<React.ChangeEvent<HTMLElement | {
+    target: { name: any; value: any }
+  }>>) => {
+    // @ts-expect-error: it's fine
+    if (!e.target?.value) return;
+    setPost((prevState) => ({
+      ...(prevState || {}),
+      // @ts-expect-error: it's fine
       [e.target.name]: isNumericString(e.target.value) ? parseInt(e.target.value) : e.target.value,
     }));
   };
 
 
-  const onTranslatedInputChangeHandler = (e: { target: any }) => {
+  const onTranslatedInputChangeHandler = (e: { target: { name: any; value: any } }) => {
     if (activeEditingLanguage === 'default') {
+
       setPost(prevState => ({
         ...prevState,
         [e.target.name]: e.target.value,
       }));
+
     } else {
-      setPost(prevState => ({
+
+      setPost((prevState) => ({
         ...prevState,
         translations: {
           ...(post?.translations || {}),
@@ -93,6 +96,65 @@ const EditPostPage = () => {
     onTranslatedInputChangeHandler(e);
   };
 
+  const scrapAndSetPostData = async ({ url, fields }: { url: string; fields?: string[] }) => {
+    try {
+      const postData = await dashboardAPIRequestPostDataScrappers(url);
+
+      if (!postData) {
+        return;
+      }
+
+      if (!fields?.length) {
+        setPost(postData.data?.urlData);
+      } else {
+        let fieldToSet = {};
+        for await (const field of fields) {
+          // @ts-expect-error: it's fine
+          fieldToSet[field] = postData.data?.urlData?.[field];
+        }
+        setPost(fieldToSet);
+      }
+
+
+    } catch (error) {
+    }
+  };
+
+  const findSimilarPost = async (
+    {
+      postId,
+      relatedBy,
+      page,
+    }: { postId?: string; relatedBy?: string; page?: number }) => {
+    if (!postId || !relatedBy || !page) return;
+
+    try {
+      const scrapedRelatedPost = await dashboardAPIRequestFindAnotherSimilarSourceLink(
+        postId,
+        relatedBy,
+        page,
+      );
+
+      if (scrapedRelatedPost.data?.relatedPosts){
+        setRelatedPosts(scrapedRelatedPost?.data?.relatedPosts)
+      }
+
+
+
+    } catch (error) {
+      dispatch(
+        setAlert({
+          message: 'Something went wrong',
+          type: 'Error',
+        }),
+      )
+    }
+
+
+
+  };
+
+
   if (!post) {
     return <h1>Not Found</h1>;
   }
@@ -105,16 +167,24 @@ const EditPostPage = () => {
             New Post
           </Link>
           <select className={'primarySelect language-selector'} ref={languageElement}
-                  onChange={(e) => dispatch(changeActiveEditingLanguage(e.target.value as string))}>
+                  onChange={(e) => setActiveEditingLanguage(e.target.value as string)}>
             <option value={'default'}>{process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'Default'}</option>
             <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALES || ''} />
           </select>
         </div>
+        {/*// @ts-expect-error: it's fine*/}
         <TitleDescription onChangeHandler={onTranslatedInputChangeHandler}
+                          activeEditingLanguage={activeEditingLanguage}
                           post={post}
                           onDescriptionChangeHandler={onDescriptionChangeHandler}
                           onTranslatedInputChangeHandler={onTranslatedInputChangeHandler} />
-        <PostInformation onChangeHandler={onChangeHandler} post={post} relatedPosts={relatedPosts} />
+        {/*// @ts-expect-error: it's fine*/}
+        <PostInformation onChangeHandler={onChangeHandler}
+                         findSimilarPost={findSimilarPost}
+                         post={post}
+                         scrapAndSetPostData={scrapAndSetPostData}
+                         relatedPosts={relatedPosts}
+                         setPost={setPost} />
       </div>
       <aside className={'side'}>
         <div className={'editingPostSection editingPostSectionSide'}>
@@ -122,32 +192,32 @@ const EditPostPage = () => {
             <span>Status:</span>
             <span>{post?.status}</span>
           </div>
-          <ActionOnPost post={post}  />
+          <ActionOnPost post={post} setPost={setPost} />
         </div>
         <div className={'editingPostSection editingPostSectionSide'}>
           <div className={'editingPostSectionTitle'}>Format:</div>
-          <Format post={post} onChangeHandler={onTranslatedInputChangeHandler} />
+          <Format post={post} setPost={setPost} />
         </div>
         <div className={'editingPostSection editingPostSectionSide'}>
           <div className={'editingPostSectionTitle'}>Author:</div>
-          <Author post={post} onChangeHandler={onTranslatedInputChangeHandler} />
+          <Author author={post?.author} setPost={setPost} />
         </div>
         <div className={'editingPostSection editingPostSectionSide'}>
           <div className={'editingPostSectionTitle'}>Categories:</div>
-          <Meta type={'categories'} post={post} onChangeHandler={onTranslatedInputChangeHandler} />
+          <Meta type={'categories'} post={post} setPost={setPost} />
         </div>
         <div className={'editingPostSection editingPostSectionSide'}>
           <div className={'editingPostSectionTitle'}>Tags:</div>
-          <Meta type={'tags'} post={post} onChangeHandler={onTranslatedInputChangeHandler} />
+          <Meta type={'tags'} post={post} setPost={setPost} />
         </div>
         {post?.postType === 'video' && (
           <div className={'editingPostSection editingPostSectionSide'}>
             <div className={'editingPostSectionTitle'}>Actors:</div>
-            <Meta type={'actors'} post={post} onChangeHandler={onTranslatedInputChangeHandler} />
+            <Meta type={'actors'} post={post} setPost={setPost} />
           </div>
         )}
         <div className={'editingPostSection editingPostSectionSide'}>
-          <RatingOption post={post} onChangeHandler={onTranslatedInputChangeHandler} />
+          <RatingOption post={post} setPost={setPost} />
         </div>
       </aside>
     </div>

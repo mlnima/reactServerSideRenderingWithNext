@@ -3,7 +3,6 @@ import React from 'react';
 
 interface DurationPropTypes {
   onChangeHandler: any;
-  rendering: boolean;
   duration?: string;
 }
 

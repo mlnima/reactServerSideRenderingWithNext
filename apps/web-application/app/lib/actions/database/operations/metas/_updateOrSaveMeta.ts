@@ -1,9 +1,10 @@
 'use server';
 import { metaSchema,postSchema,connectToDatabase } from '@repo/db';
 import {Types} from 'mongoose';
+import { IMeta } from '@repo/typescript-types';
 
 
-const _updateSaveMetas = async (metas:{name:string,type:string}[]) => {
+const _updateSaveMetas = async (metas:IMeta[]) => {
   let finalData : Types.ObjectId[] = []
 
   if (!Array.isArray(metas) || metas.length < 1) return [];

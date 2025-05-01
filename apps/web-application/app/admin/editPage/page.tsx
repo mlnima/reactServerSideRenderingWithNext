@@ -1,14 +1,14 @@
 'use client';
 import React, { ChangeEvent, useEffect, useMemo, useState } from 'react';
 import Editor from '@monaco-editor/react';
-import { deletePageAction, } from '../../../../../trash/pagesReducer';
-import { useAppDispatch } from '@storeDashboard/hooks';
+import { useAppDispatch } from '@store/hooks';
 import { useRouter, useSearchParams } from 'next/navigation';
 import './styles.scss';
 import dashboardGetPage from '@lib/actions/database/operations/pages/dashboardGetPage';
-import { setAlert } from '@storeDashboard/reducers/globalStateReducer';
+import { setAlert } from '@store/reducers/globalStateReducer';
 import { IPage } from '@repo/typescript-types';
 import dashboardUpdatePage from '@lib/actions/database/operations/pages/dashboardUpdatePage';
+import dashboardDeletePage from '@lib/actions/database/operations/pages/dashboardDeletePage';
 
 const EditPage = (props: any) => {
 
@@ -112,8 +112,9 @@ const EditPage = (props: any) => {
     // }
   };
 
-  const onDeleteHandler = () => {
-    dispatch(deletePageAction(pageId as string));
+  const onDeleteHandler = async () => {
+    if (!pageId)return;
+    await dashboardDeletePage({_id:pageId})
     router.push('/admin/assets?assetsType=pages', { scroll: false });
   };
 

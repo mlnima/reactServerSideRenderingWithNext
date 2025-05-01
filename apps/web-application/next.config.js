@@ -38,6 +38,7 @@ const nextConfig = {
   reactStrictMode: false,
   serverExternalPackages: ['mongoose'],
   experimental: {
+    useCache: true,
     // dynamicIO: true,
     // esmExternals: 'loose',
     // instrumentationHook: true,

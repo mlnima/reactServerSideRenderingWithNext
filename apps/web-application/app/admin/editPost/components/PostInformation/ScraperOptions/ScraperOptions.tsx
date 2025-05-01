@@ -3,24 +3,22 @@
 import { convertVariableNameToName } from '@repo/utils';
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { inputValueSimplifier } from '@repo/utils';
-import { useAppDispatch } from '@storeDashboard/hooks';
-import {
-  getPostScrapedDataAction,
-  getSearchAndFindARelatedPostUrlAction,
-} from '@storeDashboard/reducers/postsReducer';
+import { useAppDispatch } from '@store/hooks';
 import RelatedPostPreview from '../RelatedPostScrapper/RelatedPostPreview/RelatedPostPreview';
 import './ScraperOptions.scss';
 import { IPost } from '@repo/typescript-types';
-
 
 interface PropTypes {
   sourceURL: string;
   postId?: string;
   post:IPost
   relatedPosts: IPost[] | null
+  scrapAndSetPostData:Function
+  findSimilarPost:Function
+  onChangeHandler: (e: React.ChangeEvent<HTMLElement>) => void;
 }
 
-const ScraperOptions: FC<PropTypes> = ({ sourceURL, postId,post,relatedPosts }) => {
+const ScraperOptions: FC<PropTypes> = ({ sourceURL, postId,post,relatedPosts,scrapAndSetPostData,findSimilarPost ,onChangeHandler}) => {
   const findARelatedPostUrlSelectRef = useRef<HTMLSelectElement>(null);
   const findARelatedPostUrlInputRef = useRef<HTMLInputElement>(null);
   const [relatedPostsPage, setRelatedPostsPage] = useState<number>(1);
@@ -43,7 +41,7 @@ const ScraperOptions: FC<PropTypes> = ({ sourceURL, postId,post,relatedPosts }) 
     'sourceSite',
   ];
 
-  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onCheckHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const isChecked = inputValueSimplifier(e);
     const fieldName = e.target.name;
     setFields((prevFields) =>
@@ -62,15 +60,15 @@ const ScraperOptions: FC<PropTypes> = ({ sourceURL, postId,post,relatedPosts }) 
   const onGetRelatedPostsHandler = (more?: boolean) => {
     const nextPage = more ? relatedPostsPage + 1 : relatedPostsPage;
     setRelatedPostsPage(nextPage);
-    dispatch(
-      getSearchAndFindARelatedPostUrlAction({
-        postId,
-        page: nextPage,
-        relatedBy: findARelatedPostUrlSelectRef.current?.value ||
-          findARelatedPostUrlInputRef.current?.value ||
-          '',
-      }),
-    );
+
+    findSimilarPost({
+      postId,
+      page: nextPage,
+      relatedBy: findARelatedPostUrlSelectRef.current?.value ||
+        findARelatedPostUrlInputRef.current?.value ||
+        '',
+    })
+
   };
 
   return (
@@ -83,7 +81,7 @@ const ScraperOptions: FC<PropTypes> = ({ sourceURL, postId,post,relatedPosts }) 
             <input
               type="checkbox"
               name={field}
-              onChange={onChangeHandler}
+              onChange={onCheckHandler}
               value={field}
               checked={fields.includes(field)}
             />
@@ -94,13 +92,13 @@ const ScraperOptions: FC<PropTypes> = ({ sourceURL, postId,post,relatedPosts }) 
         <button onClick={() => setFields(availableFields)} className="btn btn-info">All</button>
         <button onClick={() => setFields([])} className="btn btn-info">Clear</button>
         <button
-          onClick={() => dispatch(getPostScrapedDataAction({ url: sourceURL }))}
+          onClick={() =>scrapAndSetPostData({ url: sourceURL })}
           className="btn btn-primary"
         >
           Scrap All
         </button>
         <button
-          onClick={() => dispatch(getPostScrapedDataAction({ url: sourceURL, fields }))}
+          onClick={() => scrapAndSetPostData({ url: sourceURL })({ url: sourceURL, fields })}
           className="btn btn-primary"
         >
           Scrap Limited
@@ -127,7 +125,7 @@ const ScraperOptions: FC<PropTypes> = ({ sourceURL, postId,post,relatedPosts }) 
         <div className="relatedPostWrapper">
           <div className="relatedPostsContent">
             {relatedPosts.map((relatedPost, index) => (
-              <RelatedPostPreview key={index} cardData={relatedPost} />
+              <RelatedPostPreview onChangeHandler={onChangeHandler} key={index} cardData={relatedPost} />
             ))}
           </div>
           <button

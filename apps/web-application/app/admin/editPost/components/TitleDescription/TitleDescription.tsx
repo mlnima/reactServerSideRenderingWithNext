@@ -1,20 +1,18 @@
 'use client';
 
 import React from 'react';
-import { useAppSelector } from '@storeDashboard/hooks';
 import TextEditors from '@components/textEditors/TextEditors';
 import { IPost } from '@repo/typescript-types';
 import './TitleDescription.scss'
 
 interface TitleDescriptionProps {
-  onTranslatedInputChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onTranslatedInputChangeHandler: (e: React.ChangeEvent<any>) => void;
   onDescriptionChangeHandler: (data: string) => void;
-  post:IPost | null
+  post:IPost | null,
+  activeEditingLanguage:string
 }
 
-const TitleDescription = ({ onTranslatedInputChangeHandler, onDescriptionChangeHandler,post }: TitleDescriptionProps) => {
-
-  const activeEditingLanguage = useAppSelector(({ posts }) => posts.activeEditingLanguage);
+const TitleDescription = ({ onTranslatedInputChangeHandler, onDescriptionChangeHandler,post,activeEditingLanguage }: TitleDescriptionProps) => {
 
   const allowsEditorToUse = post?.postType === 'learn'
     ? ['ReactPage', 'Monaco', 'SunEditor']

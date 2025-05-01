@@ -1,17 +1,17 @@
 'use client';
 import React, { ChangeEvent, useEffect, useMemo, useState } from 'react';
-import { inputValueSimplifier } from "@repo/utils";
-import { LanguagesOptions } from "@repo/ui";
-import { updateSettingAction } from "@storeDashboard/reducers/settingsReducer";
-import MonacoEditor from "@components/textEditors/MonacoEditor";
+import { inputValueSimplifier } from '@repo/utils';
+import { LanguagesOptions } from '@repo/ui';
+import MonacoEditor from '@components/textEditors/MonacoEditor';
 import { useSearchParams } from 'next/navigation';
-import { useAppDispatch } from "@storeDashboard/hooks";
-import { dashboardAPIRequestGetSettings } from "@repo/api-requests";
-import './styles.scss'
+import { useAppDispatch } from '@store/hooks';
+import { dashboardAPIRequestGetSettings } from '@repo/api-requests';
+import './styles.scss';
+import dashboardUpdateSettings from '@lib/actions/database/operations/settings/dashboardUpdateSettings';
 
 
-
-interface PropTypes {}
+interface PropTypes {
+}
 
 const EditDefaultPage: React.FC<PropTypes> = () => {
   const dispatch = useAppDispatch();
@@ -29,7 +29,7 @@ const EditDefaultPage: React.FC<PropTypes> = () => {
     sidebar: false,
     themeColor: '',
     customScriptsAsString: '',
-    translations: {}
+    translations: {},
   };
 
   const dynamicSettingsPageMatcher = /homePageSettings|postPageSettings/g;
@@ -47,7 +47,7 @@ const EditDefaultPage: React.FC<PropTypes> = () => {
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLTextAreaElement>) => {
     setFieldsData(prevState => ({
       ...prevState,
-      [e.target.name]: inputValueSimplifier(e)
+      [e.target.name]: inputValueSimplifier(e),
     }));
   };
 
@@ -62,17 +62,20 @@ const EditDefaultPage: React.FC<PropTypes> = () => {
           [language]: {
             //@ts-ignore
             ...(fieldsData?.translations?.[language] || {}),
-            [e.target.name]: inputValueSimplifier(e)
-          }
-        }
+            [e.target.name]: inputValueSimplifier(e),
+          },
+        },
       });
     }
   };
 
-  const onSaveHandler = (e: any) => {
+  const onSaveHandler = async (e: any) => {
     e.preventDefault();
-    if (pageName) {
-      dispatch(updateSettingAction({ type: pageName, data: fieldsData }));
+    try {
+      if (pageName) {
+      await dashboardUpdateSettings({ type: pageName, data: fieldsData })
+      }
+    } catch (error) {
     }
   };
 
@@ -85,15 +88,15 @@ const EditDefaultPage: React.FC<PropTypes> = () => {
         </button>
       </div>
       <p>Editing language</p>
-      <select name='activeEditingLanguage' className={'primarySelect active-editing-language'}
+      <select name="activeEditingLanguage" className={'primarySelect active-editing-language'}
               onChange={e => setLanguage(e.target.value)}>
-        <option value='default'>{process.env.NEXT_PUBLIC_DEFAULT_LOCALE ?? 'default'}</option>
+        <option value="default">{process.env.NEXT_PUBLIC_DEFAULT_LOCALE ?? 'default'}</option>
         <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALES || ''} />
       </select>
       <p>Sidebar</p>
       {/*//@ts-ignore*/}
       <select name="sidebar" className={'primarySelect'} onChange={onChangeHandler}
-              //@ts-ignore
+        //@ts-ignore
               value={fieldsData?.sidebar || 'no'}>
         <option value={'both'}>Both</option>
         <option value={'left'}>Left</option>
@@ -106,7 +109,7 @@ const EditDefaultPage: React.FC<PropTypes> = () => {
           <p>Title:</p>
           <input className={'primaryInput'}
                  type="text" onChange={(e) => onChangeHandlerWithTranslation(e)}
-                 //@ts-ignore
+            //@ts-ignore
                  value={language === 'default' ? fieldsData.title : fieldsData?.translations?.[language]?.title || {}}
                  name={'title'}
                  placeholder={'Title'} />
@@ -115,7 +118,7 @@ const EditDefaultPage: React.FC<PropTypes> = () => {
           <p>Description:</p>
           <textarea className={'primaryInput'}
                     onChange={(e) => onChangeHandlerWithTranslation(e)}
-                    //@ts-ignore
+            //@ts-ignore
                     value={language === 'default' ? fieldsData.description : fieldsData?.translations?.[language]?.description || ''}
                     name={'description'}
                     placeholder={'Description'} />
@@ -124,7 +127,7 @@ const EditDefaultPage: React.FC<PropTypes> = () => {
           <p>Keywords:</p>
           <input className={'primaryInput'}
                  type="text" onChange={(e) => onChangeHandlerWithTranslation(e)}
-                 //@ts-ignore
+            //@ts-ignore
                  value={language === 'default' ? fieldsData.keywords : fieldsData?.translations?.[language]?.keywords || ''}
                  name={'keywords'}
                  placeholder={'Keywords'} />

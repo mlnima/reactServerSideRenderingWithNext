@@ -1,32 +1,25 @@
 'use client';
-import { editPostAction } from '@storeDashboard/reducers/postsReducer';
-import { useAppDispatch } from '@storeDashboard/hooks';
+import { useAppDispatch } from '@store/hooks';
 import { useRouter } from 'next/navigation';
-import { setAlert } from '@storeDashboard/reducers/globalStateReducer';
-import { useAppSelector } from '@storeDashboard/hooks';
+import { setAlert } from '@store/reducers/globalStateReducer';
 import './ActionOnPost.scss';
 import { IPost } from '@repo/typescript-types';
-import { FC } from 'react';
+import React, { FC } from 'react';
 import dashboardUpdatePost from '@lib/actions/database/operations/posts/dashboardUpdatePost';
 import { ServerActionResponse } from '@lib/actions/response';
 
 interface IProps {
   post: IPost;
+  setPost:React.Dispatch<React.SetStateAction<IPost | null>>
 }
 
-const ActionOnPost: FC<IProps> = ({ post }) => {
+const ActionOnPost: FC<IProps> = ({ post ,setPost}) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const ActionOnPostData = useAppSelector(({ users }) => ({
-    userId: users?.userData?._id,
-  }));
-
   const onViewHandler = () => {
-    const postType = ActionOnPostData?.post?.postType || 'video';
-    const postId = ActionOnPostData?.post?._id;
-    if (postId && typeof window !== 'undefined') {
-      window.open(`/post/${postType}/${postId}`, '_blank');
+    if (post?._id && typeof window !== 'undefined') {
+      window.open(`/post/${post?.postType || 'video'}/${post?._id}`, '_blank');
     }
   };
 
@@ -45,11 +38,10 @@ const ActionOnPost: FC<IProps> = ({ post }) => {
       }
 
       if (data && data?.newPostId) {
-        router.push(`/admin/editPost?id=${data?.newPostId)}`);
+        router.push(`/admin/editPost?id=${data?.newPostId}`);
       }
 
     } catch (error) {
-
       dispatch(setAlert({ message: 'something went wrong', type: 'error', active: true }));
     }
   };
@@ -60,8 +52,8 @@ const ActionOnPost: FC<IProps> = ({ post }) => {
       <select
         className="primarySelect"
         name="status"
-        value={ActionOnPostData?.post?.status || 'draft'}
-        onChange={(e) => dispatch(editPostAction({ [e.target.name]: e.target.value }))}>
+        value={post?.status || 'draft'}
+        onChange={(e) => setPost((prevState)=>({ ...prevState, [e.target.name]: e.target.value }))}>
         <option value="published">Published</option>
         <option value="draft">Draft</option>
         <option value="trash">Trash</option>
@@ -69,7 +61,7 @@ const ActionOnPost: FC<IProps> = ({ post }) => {
         <option value="reported">Reported</option>
       </select>
       <button className="btn btn-primary" onClick={onSaveHandler}>
-        {ActionOnPostData?.post?._id ? 'Update' : 'Save'}
+        {post?._id ? 'Update' : 'Save'}
       </button>
     </div>
   );

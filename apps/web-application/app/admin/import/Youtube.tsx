@@ -1,20 +1,19 @@
 'use client';
-import React, { useState, useRef, ChangeEvent} from 'react';
-import {useAppDispatch} from "@storeDashboard/hooks";
-import {updateSettingAction} from "@storeDashboard/reducers/settingsReducer";
-import {loading} from "@storeDashboard/reducers/globalStateReducer";
-import {getYoutubeDataScrapperAction} from "@storeDashboard/reducers/postsReducer";
-import './Youtube.scss'
+import React, { useState, useRef, ChangeEvent } from 'react';
+import { useAppDispatch } from '@store/hooks';
+import { loading } from '@store/reducers/globalStateReducer';
+import './Youtube.scss';
+import dashboardUpdateSettings from '@lib/actions/database/operations/settings/dashboardUpdateSettings';
 
 
 const Youtube = () => {
 
-    const dispatch = useAppDispatch()
-    const urlsElement = useRef(null)
-    const [state, setState] = useState({
-        apiKey: '',
-        scrapedVideos: []
-    });
+  const dispatch = useAppDispatch();
+  const urlsElement = useRef(null);
+  const [state, setState] = useState({
+    apiKey: '',
+    scrapedVideos: [],
+  });
 // @ts-ignore
 //     const durationToString = duration => {
 //         const hours = duration.hours === 0 ? '' :
@@ -35,15 +34,15 @@ const Youtube = () => {
 //     }
 
 
-    const onImportHandler = async () => {
-        // @ts-ignore
-        const data = urlsElement.current.value.split(/\r?\n/)
-        // @ts-ignore
-        const ids = data.map(url => url.split('?v=')[1])
+  const onImportHandler = async () => {
+    // @ts-ignore
+    const data = urlsElement.current.value.split(/\r?\n/);
+    // @ts-ignore
+    const ids = data.map(url => url.split('?v=')[1]);
 
-        for await (let url of data) {
-            if (url.includes('http')) {
-                dispatch(getYoutubeDataScrapperAction(url))
+    for await (let url of data) {
+      if (url.includes('http')) {
+        // dispatch(getYoutubeDataScrapperAction(url));
 //                 dispatch(setLoading(true))
 //                 youtubeDataScrapper(url).then(async res => {
 // // @ts-ignore
@@ -82,50 +81,52 @@ const Youtube = () => {
 //                 }).catch(err => {
 //                     dispatch(setLoading(false))
 //                 })
-            }
-        }
+      }
     }
+  };
 
-    const onSaveApiKeyHandler = () => {
-        dispatch(loading(true))
-        dispatch(updateSettingAction(
-            {
-                type:'youtubeApiKey',
-                data:{apiKey: state.apiKey}
-            }
-        ))
+  const onSaveApiKeyHandler = async () => {
+    dispatch(loading(true));
+
+    try {
+      await dashboardUpdateSettings({
+        type: 'youtubeApiKey',
+        data: { apiKey: state.apiKey },
+      });
+    } catch (error) {
     }
+  };
 
-    const onChaneHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setState({...state, [e.target.name]: e.target.value})
-    }
+  const onChaneHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setState({ ...state, [e.target.name]: e.target.value });
+  };
 
-    // useEffect(() => {
-    //     // @ts-ignore
-    //     getSetting('youtubeApiKey', window.location.origin, false, 'youtubeImporter').then(res => {
-    //         // @ts-ignore
-    //         const apiKeyData = res.data.setting ? res.data.setting.data.apiKey : ''
-    //         setState({
-    //             ...state,
-    //             apiKey: apiKeyData
-    //         })
-    //     })
-    // }, []);
+  // useEffect(() => {
+  //     // @ts-ignore
+  //     getSetting('youtubeApiKey', window.location.origin, false, 'youtubeImporter').then(res => {
+  //         // @ts-ignore
+  //         const apiKeyData = res.data.setting ? res.data.setting.data.apiKey : ''
+  //         setState({
+  //             ...state,
+  //             apiKey: apiKeyData
+  //         })
+  //     })
+  // }, []);
 
-    return (
-        <div className={'youtubeImporter'}>
-            <div className='admin-import-page-youtube-api-key'>
-                <h2>Youtube API KEY</h2>
-                <input name='apiKey' value={state.apiKey} onChange={e => onChaneHandler(e)}/>
-                <button onClick={() => onSaveApiKeyHandler()} className='saveBtn greenActionBtn'>Save API Key</button>
-            </div>
-            <div className='admin-import-page-youtube'>
-                <h1>Youtube Importer</h1>
-                <textarea ref={urlsElement}/>
-                <button className='saveBtn greenActionBtn' onClick={() => onImportHandler()}>Import</button>
-            </div>
-        </div>
-    );
+  return (
+    <div className={'youtubeImporter'}>
+      <div className="admin-import-page-youtube-api-key">
+        <h2>Youtube API KEY</h2>
+        <input name="apiKey" value={state.apiKey} onChange={e => onChaneHandler(e)} />
+        <button onClick={() => onSaveApiKeyHandler()} className="saveBtn greenActionBtn">Save API Key</button>
+      </div>
+      <div className="admin-import-page-youtube">
+        <h1>Youtube Importer</h1>
+        <textarea ref={urlsElement} />
+        <button className="saveBtn greenActionBtn" onClick={() => onImportHandler()}>Import</button>
+      </div>
+    </div>
+  );
 };
 
 export default Youtube;

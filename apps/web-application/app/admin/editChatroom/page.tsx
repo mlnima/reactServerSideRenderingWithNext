@@ -1,10 +1,10 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useAppDispatch } from '@storeDashboard/hooks';
+import { useAppDispatch } from '@store/hooks';
 import './styles.scss';
 import dashboardGetChatroom from '@lib/actions/database/operations/chatrooms/dashboardGetChatroom';
-import { setAlert } from '@storeDashboard/reducers/globalStateReducer';
+import { setAlert } from '@store/reducers/globalStateReducer';
 import { IChatroom } from '@repo/typescript-types';
 import dashboardUpdateChatroom from '@lib/actions/database/operations/chatrooms/dashboardUpdateChatroom';
 import dashboardDeleteChatroom from '@lib/actions/database/operations/chatrooms/dashboardDeleteChatroom';

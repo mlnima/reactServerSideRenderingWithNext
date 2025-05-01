@@ -15,7 +15,7 @@ export const cookieSetter = async ({ name, value, expires }: IArg) => {
     value,
     {
       secure: process.env.NODE_ENV === 'production',
-      expires: expires || new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days from now
+      expires: expires || new Date(performance.now() + 30 * 24 * 60 * 60 * 1000), // 30 days from now
     });
 };
 // export const cookieGeter = async ({ name }: IArg) => {
@@ -47,7 +47,7 @@ export const createNewSession = async (_id: string,role:string) => {
       session,
       {
         secure: process.env.NODE_ENV === 'production',
-        expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days from now
+        expires: new Date(performance.now() + 30 * 24 * 60 * 60 * 1000), // 30 days from now
       });
 
   } catch (error) {

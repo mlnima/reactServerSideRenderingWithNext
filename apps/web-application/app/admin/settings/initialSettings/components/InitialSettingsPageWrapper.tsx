@@ -1,0 +1,142 @@
+//InitialSettingsPageWrapper
+'use client';
+import React, { FC, useEffect, useState } from 'react';
+import ContentSettings from './ContentSettings/ContentSettings';
+import HeadDataSettings from './HeadDataSettings';
+import MembershipSettings from './MembershipSettings/MembershipSettings';
+import LayoutSettings from './layoutSettings';
+import { useAppDispatch } from '@store/hooks';
+import { inputValueSimplifier } from '@repo/utils';
+import { LanguagesOptions } from '@repo/ui';
+import { IInitialSettings } from '@repo/typescript-types';
+import dashboardUpdateSettings from '@lib/actions/database/operations/settings/dashboardUpdateSettings';
+import { setAlert } from '@store/reducers/globalStateReducer';
+
+interface PropTypes {
+  initialSettings?: IInitialSettings;
+}
+
+const InitialSettingsPageWrapper: FC<PropTypes> = ({ initialSettings }) => {
+
+  const [initialSettingsData, setInitialSettingsData] = useState<IInitialSettings | null>(null);
+
+  const dispatch = useAppDispatch();
+  const [language, setLanguage] = useState('default');
+
+
+  useEffect(() => {
+    if (initialSettings){
+      setInitialSettingsData(initialSettings);
+    }
+  }, [initialSettings]);
+
+
+  const onSaveHandler = async () => {
+
+    const { success, error, message } = await dashboardUpdateSettings({
+      type: 'initialSettings',
+      data: initialSettingsData,
+    });
+
+    if (!success) {
+      dispatch(
+        setAlert({
+          message,
+          type: 'Error',
+          err: error,
+        }),
+      );
+    }
+
+  };
+
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | {name:string}>, key: string) => {
+    const value = inputValueSimplifier(e);
+    if (!e.target?.name) return;
+    // @ts-expect-error: it's fine
+    setInitialSettingsData((prevState) => ({
+      ...prevState,
+      [key]: {
+        // @ts-expect-error: it's fine
+        ...(prevState?.[key] || {}),
+        [e.target.name]: value,
+      },
+    }));
+
+  };
+
+  const onJsonChangeHandler = (e: React.ChangeEvent<HTMLInputElement>, key: string) => {
+    // @ts-expect-error: it's fine
+    setInitialSettingsData((prevState) => ({
+      ...prevState,
+      [key]: {
+        // @ts-expect-error: it's fine
+        ...(prevState?.[key] || {}),
+        [e.target.name]: JSON.parse(e.target.value),
+      },
+    }));
+  };
+
+  const onChangeHandlerWithTranslation = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | {name:string}>, key: string) => {
+    if (language === 'default') {
+      onChangeHandler(e, key);
+    } else {
+      // @ts-expect-error: it's fine
+      setInitialSettingsData((prevState) => ({
+        ...prevState,
+        [key]: {
+          // @ts-expect-error: it's fine
+          ...(prevState?.[key] || {}),
+          translations: {
+            // @ts-expect-error: it's fine
+            ...(prevState?.[key]?.translations || {}),
+            [language]: {
+              // @ts-expect-error: it's fine
+              ...(prevState?.[key]?.translations?.[language] || {}),
+              [e.target.name]: inputValueSimplifier(e),
+            },
+          },
+        },
+      }));
+    }
+  };
+
+
+  if (!initialSettingsData) return null;
+
+  return (
+    <div className={'InitialSettingsPage'}>
+      <h1>Initial Settings</h1>
+      <select
+        name="activeEditingLanguage"
+        className={'primarySelect active-editing-language'}
+        onChange={e => setLanguage(e.target.value)}
+      >
+        <option value="default">{process.env.NEXT_PUBLIC_DEFAULT_LOCALE ?? 'default'}</option>
+        <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALES || ''} />
+      </select>
+      <div className={'setting-sections'}>
+        <HeadDataSettings
+          onChangeHandler={onChangeHandler}
+          initialSettingsData={initialSettingsData}
+          language={language}
+          onChangeHandlerWithTranslation={onChangeHandlerWithTranslation}
+        />
+        <LayoutSettings onChangeHandler={onChangeHandler} initialSettingsData={initialSettingsData} />
+
+        <ContentSettings
+          onChangeHandler={onChangeHandler}
+          initialSettingsData={initialSettingsData}
+          setInitialSettingsData={setInitialSettingsData}
+          onSaveHandler={onSaveHandler}
+        />
+        <MembershipSettings onChangeHandler={onChangeHandler} initialSettingsData={initialSettingsData} setInitialSettingsData={setInitialSettingsData} />
+      </div>
+      <button className={'btn btn-primary'} onClick={onSaveHandler}>
+        Save
+      </button>
+    </div>
+  );
+};
+
+export default InitialSettingsPageWrapper;

@@ -38,9 +38,12 @@ const TextToCanvasImage: FC<TextToCanvasImagePropTypes> = ({ numberOfCardsPerRow
         };
 
         const getRandomColor = () => {
-            const r = Math.floor(Math.random() * 256);
-            const g = Math.floor(Math.random() * 256);
-            const b = Math.floor(Math.random() * 256);
+            // const r = Math.floor(Math.random() * 256);
+            // const g = Math.floor(Math.random() * 256);
+            // const b = Math.floor(Math.random() * 256);
+            const r = 256;
+            const g = 256;
+            const b = 256;
             return {r, g, b};
         };
 

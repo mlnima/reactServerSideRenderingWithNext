@@ -37,7 +37,7 @@ const PostAdminOrAuthorQuickAccessBar: FC<IProps> = (
     if (postId) {
       await updatePostStatus({ _id: postId, status });
       await clearACacheByTag(`CPost-${postId}`);
-      router.push(`${pathname}?lastPageUpdate=${Date.now()}`);
+      router.push(`${pathname}?lastPageUpdate=${performance.now()}`);
     }
   };
 

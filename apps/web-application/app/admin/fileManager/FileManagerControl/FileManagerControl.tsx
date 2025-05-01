@@ -1,57 +1,27 @@
 'use client';
+import React, { FC, useRef } from 'react';
 
-import React, { useRef } from 'react';
-import styled from "styled-components";
-import { useAppSelector } from '@storeDashboard/hooks';
-import { fileManagerEditState, uploadFileAction } from "@storeDashboard/reducers/fileManagerReducer";
+interface IProps {
+  setFileManagerState: React.Dispatch<React.SetStateAction<any>>;
+  uploadFile: (file: any) => Promise<void>;
+  fileManagerState: any;
+}
 
-import { useAppDispatch } from "@storeDashboard/hooks";
-
-const FileManagerControlStyledDiv = styled.div`
-  margin: 20px 0;
-
-  .file-Manager-control-address-bar {
-    display: flex;
-    justify-content: flex-start;
-    margin: 20px 0;
-
-    input {
-      width: 90%;
-      background-color: white;
-    }
-  }
-
-  .file-Manager-control-quick-access {
-
-  }
-
-  button {
-    margin: 0 10px;
-    outline: none;
-    border: none;
-    padding: 8px 10px;
-    border-radius: 5px;
-
-    &:active {
-      background-color: white;
-      border: none;
-    }
-  }
-`;
-
-const FileManagerControl = () => {
+const FileManagerControl: FC<IProps> = ({ uploadFile, setFileManagerState,fileManagerState }) => {
     const addressBar = useRef(null);
     const uploadInputElement = useRef(null);
-    const dispatch = useAppDispatch();
-    const fileManagerData = useAppSelector(({ fileManager }) => fileManager);
 
     const onGoBackHandler = (e: any) => {
         clearClickedItemHandler(e);
-        let path = fileManagerData?.path;
+        let path = fileManagerState?.path;
         let splitPath = path.split('/');
         let lastItemPlusSlash = '/' + splitPath[splitPath?.length - 1];
         let newPath = path?.replace(lastItemPlusSlash, '');
-        dispatch(fileManagerEditState({ path: newPath }));
+
+      setFileManagerState((prevState:any) => ({
+        ...prevState,
+        path: newPath
+      }));
     };
 
     const clearClickedItemHandler = (e: any) => {
@@ -62,52 +32,64 @@ const FileManagerControl = () => {
     };
 
     const onChaneHandler = (e: any) => {
-        dispatch(fileManagerEditState({ [e.target.name]: e.target.value }));
+
+      setFileManagerState((prevState:any) => ({
+        ...prevState,
+        [e.target.name]: e.target.value
+      }));
     };
 
     const onUploadHandler = (e: any) => {
         const filesData = new FormData();
         filesData.append('token', localStorage.wt);
         filesData.append('uploadingFile', e.target.files[0]);
-        dispatch(uploadFileAction({ file: filesData, useType: 'fileManagerFileUpload' }));
+        uploadFile(filesData);
     };
 
     const onCreateNewFileClickHandler = (type: any) => {
-        dispatch(fileManagerEditState({
-            createNewFileFolderPop: true,
-            createNewFileFolderPopType: type
-        }));
+      setFileManagerState((prevState:any) => ({
+        ...prevState,
+        createNewFileFolderPop: true,
+        createNewFileFolderPopType: type
+      }));
     };
 
+    const editFileManagerState = (payload:object)=>{
+      setFileManagerState((prevState:any) => ({
+        ...prevState,
+        ...payload
+      }));
+    }
+
     return (
-        <FileManagerControlStyledDiv className='file-manager-control'>
+        <div id={'FileManagerControl'} className='file-manager-control'>
             <div className='file-Manager-control-address-bar'>
                 <button onClick={(e) => onGoBackHandler(e)} className={'backBtn btn btn-navigation'}>Back</button>
                 <input ref={addressBar} name='addressBar' onChange={e => onChaneHandler(e)} className="ControlFilesItem"
-                       onClick={e => clearClickedItemHandler(e)} value={fileManagerData?.path} />
+                       onClick={e => clearClickedItemHandler(e)} value={fileManagerState?.path} />
                 {/*//@ts-ignore*/}
-                <button onClick={() => dispatch(fileManagerEditState({ path: addressBar.current.value }))}
+                <button onClick={() => editFileManagerState({ path: addressBar.current.value })}
                         className={'btn btn-navigation'}>Go
                 </button>
             </div>
             <div className="file-Manager-control-quick-access">
-                <button onClick={() => dispatch(fileManagerEditState({ path: '.' }))}
+                <button onClick={() => editFileManagerState({ path: '.' })}
                         className={'btn btn-navigation'}>
                     Root
                 </button>
-                <button onClick={() => dispatch(fileManagerEditState({ path: './public/uploads/image' }))}
+                <button onClick={() => editFileManagerState({ path: './public/uploads/image' })}
                         className={'btn btn-navigation'}>
                     Images
                 </button>
-                <button onClick={() => dispatch(fileManagerEditState({ path: './public' }))}
+                <button onClick={() => editFileManagerState({ path: './public' })}
                         className={'btn btn-navigation'}>
                     Public
                 </button>
-                <button onClick={() => dispatch(fileManagerEditState({ path: './public/uploads/video' }))}
+                <button onClick={() => editFileManagerState({ path: './public/uploads/video' })}
                         className={'btn btn-navigation'}>
                     Videos
                 </button>
-                <button onClick={() => dispatch(fileManagerEditState({ path: './public/uploads/application' }))}
+                <button onClick={() => editFileManagerState({ path: './public/uploads/application' })}
                         className={'btn btn-navigation'}>Applications
                 </button>
                 <input ref={uploadInputElement} type='file' style={{ display: 'none' }}
@@ -120,7 +102,7 @@ const FileManagerControl = () => {
                 <button onClick={() => onCreateNewFileClickHandler('folder')} className={'btn btn-navigation'}>New Folder
                 </button>
             </div>
-        </FileManagerControlStyledDiv>
+        </div>
     );
 };
 

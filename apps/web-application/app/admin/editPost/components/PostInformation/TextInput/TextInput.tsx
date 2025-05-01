@@ -1,10 +1,10 @@
 'use client';
 import { convertVariableNameToName } from '@repo/utils';
-import { ChangeEvent, FC } from 'react';
+import React, { ChangeEvent, FC } from 'react';
 import { IPost } from '@repo/typescript-types';
 
 interface IProps {
-  onChangeHandler: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  onChangeHandler: (e: React.ChangeEvent<HTMLElement>) => void;
   name: 'source' | 'mainThumbnail' | 'videoUrl' | 'videoEmbedCode' | 'redirectLink' | 'downloadLink' | 'videoTrailerUrl';
   post: IPost;
 }

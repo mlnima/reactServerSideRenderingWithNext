@@ -1,13 +1,13 @@
 'use client';
 
-import { useAppSelector } from '@storeDashboard/hooks';
-import { FC } from 'react';
-import { useAppDispatch } from '@storeDashboard/hooks';
-import { editPostAction } from '@storeDashboard/reducers/postsReducer';
+import React, { FC } from 'react';
+import { IPost } from '@repo/typescript-types';
 
-const RatingOption: FC = () => {
-  const post = useAppSelector(({ posts }) => posts.post);
-  const dispatch = useAppDispatch();
+interface IProps{
+  post: IPost;
+  setPost: React.Dispatch<React.SetStateAction<IPost | null>>,
+}
+const RatingOption:FC<IProps> = ({post,setPost}) => {
 
   return (
     <select
@@ -15,7 +15,7 @@ const RatingOption: FC = () => {
       name='rating'
       value={post?.rating || 'enable'}
       onChange={(e) => {
-        dispatch(editPostAction({ [e.target.name]: e.target.value }));
+        setPost((prevState)=>({ ...prevState, [e.target.name]: e.target.value }));
       }}
     >
       <option value='enable'>Enable</option>
@@ -25,27 +25,3 @@ const RatingOption: FC = () => {
 };
 
 export default RatingOption;
-
-
-// import { useSelector} from "react-redux";
-// import {FC} from "react";
-// import {DashboardStore, } from "@repo/typescript-types";
-// import {useAppDispatch} from "@store/hooks";
-// import {editPostAction} from "@store/reducers/postsReducer";
-//
-//
-// const RatingOption:FC = () => {
-//     const post = useSelector(({posts}:DashboardStore) => posts.post);
-//     const dispatch = useAppDispatch()
-//
-//     return (
-//         <select className={'primarySelect'}
-//                 name='rating'
-//                 value={post?.rating || 'enable'}
-//                 onChange={e=>{dispatch(editPostAction({[e.target.name]: e.target.value}))}}>
-//             <option value='enable'>Enable</option>
-//             <option value='disable'>Disable</option>
-//         </select>
-//     );
-// };
-// export default RatingOption;

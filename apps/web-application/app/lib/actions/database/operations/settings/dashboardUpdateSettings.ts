@@ -4,13 +4,14 @@ import { settingSchema, connectToDatabase } from '@repo/db';
 import { errorResponse, successResponse } from '@lib/actions/response';
 
 const dashboardUpdateSettings = async (
-  { type, data }: { type: string, data: {} },
+  { type, data }: { type: string, data: any },
 ) => {
   // 'use cache';
   try {
-    await connectToDatabase('getSettings');
 
-    await settingSchema.findOneAndUpdate({ type }, data);
+    await connectToDatabase('dashboardUpdateSettings');
+
+    await settingSchema.findOneAndUpdate({ type }, { $set: { data } });
 
     return successResponse({
       message: 'updated',

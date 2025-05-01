@@ -32,7 +32,8 @@ export const findWidgetPosts = async (widgetData: any): Promise<{ posts: {}[]; t
     let totalCount = await postSchema.countDocuments(findQuery).exec();
     let posts = await postSchema
       .find(findQuery, ['_id'], {
-        skip: widgetData.sortBy === 'random' ? Math.floor(Math.random() * totalCount) : 0,
+        //skip: widgetData.sortBy === 'random' ? Math.floor(Math.random() * totalCount) : 0,
+        skip:  0,
         limit,
         sort: sortQuery,
       })

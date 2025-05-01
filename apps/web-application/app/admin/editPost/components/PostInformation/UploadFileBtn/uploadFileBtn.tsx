@@ -2,10 +2,12 @@
 
 import React, { FC, useRef } from 'react';
 import styled from 'styled-components';
-import { uploadFileAction } from '@storeDashboard/reducers/fileManagerReducer'; // Updated import path
-import { useAppDispatch } from '@storeDashboard/hooks'; // Updated import path
+import { useAppDispatch } from '@store/hooks'; // Updated import path
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload } from '@fortawesome/free-solid-svg-icons/faUpload';
+import { loading } from '@store/reducers/globalStateReducer';
+import { dashboardAPIRequestUploadFile } from '@repo/api-requests';
+import { AxiosResponse } from 'axios';
 
 const UploadFileBtnStyledDiv = styled.div`
     button {
@@ -21,26 +23,40 @@ interface PropType {
   type: string;
 }
 
+
+
+
+// is not in use, need fixes by modifying the post state
 const UploadFileBtn: FC<PropType> = (props) => {
   const uploadInputElement = useRef<HTMLInputElement | null>(null);
   const dispatch = useAppDispatch();
 
-  const onUploadHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files || e.target.files.length === 0) return;
+  const onUploadHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
 
-    const filesData = new FormData();
-    filesData.append('token', localStorage.wt);
-    filesData.append('uploadingFile', e.target.files[0]);
-    filesData.append('type', props.type);
+    try {
+      dispatch(loading(true));
+      if (!e.target.files || e.target.files.length === 0) return;
 
-    const fileUseType =
-      props.name === 'mainThumbnail' ? 'postMainThumbnail' :
-        props.name === 'videoUrl' ? 'postVideoUrl' :
-          props.name === 'VideoTrailerUrl' ? 'postVideoTrailerUrl' :
-            'fileManagerFileUpload';
+      const filesData = new FormData();
+      filesData.append('token', localStorage.wt);
+      filesData.append('uploadingFile', e.target.files[0]);
+      filesData.append('type', props.type);
 
-    // @ts-ignore
-    dispatch(uploadFileAction({ file: filesData, useType: fileUseType }));
+      const fileUseType =
+        props.name === 'mainThumbnail' ? 'postMainThumbnail' :
+          props.name === 'videoUrl' ? 'postVideoUrl' :
+            props.name === 'VideoTrailerUrl' ? 'postVideoTrailerUrl' :
+              'fileManagerFileUpload';
+
+      const uploadedFile = await dashboardAPIRequestUploadFile(filesData) as AxiosResponse<{ path: string }>;
+
+      //
+      // dispatch(uploadFileAction({ file: filesData, useType: fileUseType }));
+      dispatch(loading(false));
+    } catch (error) {
+      dispatch(loading(false));
+    }
+
   };
 
   const onDropFileHandler = (e: React.DragEvent<HTMLButtonElement>) => {
@@ -69,7 +85,7 @@ const UploadFileBtn: FC<PropType> = (props) => {
               'fileManagerFileUpload';
 
       // @ts-ignore
-      dispatch(uploadFileAction({ file: filesData, useType: fileUseType }));
+      // dispatch(uploadFileAction({ file: filesData, useType: fileUseType }));
     }
   };
 

@@ -1,16 +1,18 @@
 'use server';
+
 import { connectToDatabase, postSchema } from '@repo/db';
 import { isValidObjectId } from '@repo/db';
 import { IPost } from '@repo/typescript-types';
 import { errorResponse, ServerActionResponse, successResponse } from '@lib/actions/response';
-import { convertPostDocumentToObject } from '@lib/actions/database/tools';
-import { unstable_cacheTag as cacheTag } from 'next/cache';
+// import { convertPostDocumentToObject } from '@lib/actions/database/tools';
+// import { unstable_cacheTag as cacheTag } from 'next/cache';
 
 const getPost = async (identifier: string): Promise<ServerActionResponse<{
   post: IPost,
   relatedPosts: IPost[]
 } | null>> => {
-  // 'use cache';
+  'use cache';
+
   try {
     await connectToDatabase('getPost');
     const isId = isValidObjectId(identifier);
@@ -46,7 +48,6 @@ const getPost = async (identifier: string): Promise<ServerActionResponse<{
       });
     }
 
-    convertPostDocumentToObject(post);
 
     // @ts-expect-error:it's fine
     let relatedPosts = await postSchema.findRelatedPosts({
@@ -55,12 +56,12 @@ const getPost = async (identifier: string): Promise<ServerActionResponse<{
       limit: 8,
     });
 
+
     //no cache life for the post data
     // cacheTag('cacheItem', `CPost-${post._id as unknown as string}`);
-
     return successResponse({
       data: {
-        post,
+        post: JSON.parse(JSON.stringify(post)),
         relatedPosts,
       },
     });
@@ -75,3 +76,5 @@ const getPost = async (identifier: string): Promise<ServerActionResponse<{
 };
 
 export default getPost;
+
+

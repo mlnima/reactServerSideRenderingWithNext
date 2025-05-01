@@ -32,7 +32,7 @@ export const dashboardAPIRequestUpdateTranslationFile = async (path:string, data
     return await AxiosInstance.put('/api/dashboard/file/translationFile',{path, data,token: localStorage.wt})
 }
 
-export const dashboardAPIRequestUploadFile = async (file:File)=>{
+export const dashboardAPIRequestUploadFile = async (file:FormData)=>{
     return await AxiosInstance.post('/api/dashboard/file/upload/file',file)
 }
 

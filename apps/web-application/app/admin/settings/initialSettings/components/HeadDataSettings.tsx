@@ -11,8 +11,8 @@ const Style = styled.div``;
 
 interface PropTypes {
     language: string;
-    onChangeHandler: (e: React. ChangeEvent<HTMLInputElement | HTMLTextAreaElement | object>, key: string) => void;
-    onChangeHandlerWithTranslation: (e: React. ChangeEvent<HTMLInputElement | HTMLTextAreaElement | object>, key: string) => void;
+    onChangeHandler: (e: React. ChangeEvent<HTMLInputElement | HTMLTextAreaElement | {name:string}>, key: string) => void;
+    onChangeHandlerWithTranslation: (e: React. ChangeEvent<HTMLInputElement | HTMLTextAreaElement | {name:string}>, key: string) => void;
     initialSettingsData: IInitialSettings;
 }
 

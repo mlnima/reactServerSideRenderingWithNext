@@ -1,4 +1,3 @@
-
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
 
@@ -59,80 +58,80 @@ const RootLayout = async (props: ILayoutProps) => {
   };
 
   return (
-    <html lang={locale}>
-    <body className={`dark `}>
-    <Suspense fallback="loging in ...">
-    <ReduxProvider>
-      <div className="layout">
-        {initialSettings?.layoutSettings?.topbar && (
-          <TopbarWidgetArea
-            {...widgetAreasSharedProps}
-            widgets={widgets?.topBar}
-          />
-        )}
-        {initialSettings?.layoutSettings?.header && (
-          <HeaderWidgetArea
-            {...widgetAreasSharedProps}
-            widgets={widgets?.header}
-          />
-        )}
-        {initialSettings?.layoutSettings?.navigation && (
-          <NavigationWidgetArea
-            {...widgetAreasSharedProps}
-            widgets={widgets?.navigation}
-          />
-        )}
-        <div id={'page'} className={'App'}>
-          {props.children}
-        </div>
-        {initialSettings?.layoutSettings?.footer && (
-          <FooterWidgetArea
-            {...widgetAreasSharedProps}
-            widgets={widgets?.footer}
-          />
-        )}
-      </div>
-      <BackgroundFilterWholeScreen />
 
+      <html lang={locale}>
+      <body className={`dark `}>
+      <ReduxProvider>
+        <div className="layout">
+          {initialSettings?.layoutSettings?.topbar && (
+            <TopbarWidgetArea
+              {...widgetAreasSharedProps}
+              widgets={widgets?.topBar}
+            />
+          )}
+          {initialSettings?.layoutSettings?.header && (
+            <HeaderWidgetArea
+              {...widgetAreasSharedProps}
+              widgets={widgets?.header}
+            />
+          )}
+          {initialSettings?.layoutSettings?.navigation && (
+            <NavigationWidgetArea
+              {...widgetAreasSharedProps}
+              widgets={widgets?.navigation}
+            />
+          )}
+          <div id={'page'} className={'App'}>
+            {props.children}
+          </div>
+          {initialSettings?.layoutSettings?.footer && (
+            <FooterWidgetArea
+              {...widgetAreasSharedProps}
+              widgets={widgets?.footer}
+            />
+          )}
+        </div>
+        <BackgroundFilterWholeScreen />
 
 
         <CookieInitializer />
         <MemberInitializer />
 
 
-      {initialSettings?.headDataSettings?.googleAnalyticsId &&
-        <GoogleAnalytics
-          googleAnalyticsId={
-            initialSettings?.headDataSettings?.googleAnalyticsId
-          }
-        />
-      }
+        {initialSettings?.headDataSettings?.googleAnalyticsId &&
+          <GoogleAnalytics
+            googleAnalyticsId={
+              initialSettings?.headDataSettings?.googleAnalyticsId
+            }
+          />
+        }
 
-      <LoadingComponent />
-      <AlertBox dictionary={dictionary} />
-      <BackToTopButton />
-      <LoginRegisterPopup locale={locale} dictionary={dictionary} />
-      <StyledComponentsRegistry>
-        <GlobalCustomStyles
-          primaryModeColors={
-            initialSettings?.layoutSettings?.primaryModeColors || ''
-          }
-          customStyles={initialSettings?.layoutSettings?.customStyles}
-        />
-      </StyledComponentsRegistry>
-      {initialSettings && <StoreDataInitializer initialSettings={initialSettings} />}
-      <WebSocketInitializer />
+        <LoadingComponent />
+        <AlertBox dictionary={dictionary} />
+        <BackToTopButton />
+        <LoginRegisterPopup locale={locale} dictionary={dictionary} />
+        <StyledComponentsRegistry>
+          <GlobalCustomStyles
+            primaryModeColors={
+              initialSettings?.layoutSettings?.primaryModeColors || ''
+            }
+            customStyles={initialSettings?.layoutSettings?.customStyles}
+          />
+        </StyledComponentsRegistry>
+        {initialSettings && <StoreDataInitializer initialSettings={initialSettings} />}
+        <WebSocketInitializer />
 
-      <KeysListener />
-      <UserConfigMenu locale={locale} dictionary={dictionary} />
-      <CustomHeadTagsInitializer />
-      <CustomScripts />
+        <KeysListener />
+        <UserConfigMenu locale={locale} dictionary={dictionary} />
+        <CustomHeadTagsInitializer />
+        <CustomScripts />
 
 
-    </ReduxProvider>
-    </Suspense>
-    </body>
-    </html>
+      </ReduxProvider>
+
+      </body>
+      </html>
+
   );
 };
 

@@ -1,12 +1,12 @@
 import {Translations} from "./Translations";
 
 export interface IMeta {
-    parentId: string |undefined,
+    parentId?: string |undefined,
     coverImageUrl?: string,
-    _id: string,
-    name: string,
+    _id?: string,
+    name?: string,
     description?: string,
-    type: string,
+    type?: string,
     status?: string,
     imageUrl?: string,
     imageUrlLock?: boolean,

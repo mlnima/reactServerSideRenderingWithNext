@@ -13,20 +13,20 @@ interface uniqueDataPossibility{
 interface Base {
     outPostType?: string,
     images?: string[],
-    rating: string,
-    videoEmbedCode: string,
-    videoUrl: string,
-    videoScriptCode: string,
-    format: string,
-    status: string,
-    source: any,
-    updatedAt: string,
-    createdAt: string,
+    rating?: string,
+    videoEmbedCode?: string,
+    videoUrl?: string,
+    videoScriptCode?: string,
+    format?: string,
+    status?: string,
+    source?: any,
+    updatedAt?: string,
+    createdAt?: string,
     url?: string | undefined,
-    currency: string,
-    downloadLink: string,
-    downloadLinks: {url:string,title:string}[],
-    description: string | object,
+    currency?: string,
+    downloadLink?: string,
+    downloadLinks?: {url:string,title:string}[],
+    description?: string | object,
     translations?:{
         [key:string] :{
             title?:string
@@ -44,22 +44,22 @@ interface Base {
     priceType?:string,
     duration?:string,
     quality?:string,
-    _id:string,
+    _id?:string,
     mainThumbnail?:string,
     thumbnail?:{
         _id:string,
         filePath:string
     },
     VideoTrailerUrl?:string,
-    uniqueData: uniqueDataPossibility;
+    uniqueData?: uniqueDataPossibility;
 }
 
 export interface IPost extends Base{
     author?:  User,
-    comments:IComment[],
+    comments?:IComment[],
     actors?:IMeta[],
-    categories:IMeta[],
-    tags:IMeta[],
+    categories?:IMeta[],
+    tags?:IMeta[],
 }
 
 export interface PostRaw extends Base{

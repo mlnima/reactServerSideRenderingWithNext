@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client';
 
 import React, { FC } from 'react';
@@ -16,28 +15,41 @@ import { IPost } from '@repo/typescript-types';
 import './PostInformation.scss';
 
 interface PropTypes {
-  onChangeHandler: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onChangeHandler: (e: React.ChangeEvent<HTMLElement>) => void;
   post: IPost | null;
   relatedPosts: IPost[] | null;
+  setPost: React.Dispatch<React.SetStateAction<IPost | null>>;
+  scrapAndSetPostData: Function;
+  findSimilarPost:Function
 }
 
-const PostInformation: FC<PropTypes> = ({ onChangeHandler, post, relatedPosts }) => {
+const PostInformation: FC<PropTypes> = ({ onChangeHandler, post, relatedPosts, setPost, scrapAndSetPostData,findSimilarPost }) => {
+
+  if (!post) return null;
+
   return (
     <div className="PostInformation product-information admin-widget">
       <TextInput post={post} name="source" onChangeHandler={onChangeHandler} />
       {!!post?.source &&
-        <ScraperOptions relatedPosts={relatedPosts} post={post} sourceURL={post?.source} postId={post?._id} />}
+        <ScraperOptions relatedPosts={relatedPosts}
+                        scrapAndSetPostData={scrapAndSetPostData}
+                        findSimilarPost={findSimilarPost}
+                        post={post}
+                        onChangeHandler={onChangeHandler}
+                        sourceURL={post?.source}
+                        postId={post?._id} />}
       <TextInput post={post} name="mainThumbnail" onChangeHandler={onChangeHandler} />
-      <ImagePreview mainThumbnail={post?.mainThumbnail} />
+      {post?.mainThumbnail && <ImagePreview mainThumbnail={post.mainThumbnail} />}
+
 
       <Quality postQuality={post?.quality} rendering={post?.postType === 'video'} onChangeHandler={onChangeHandler} />
       {post?.postType === 'video' &&
         <>
           <TextInput post={post} name="videoUrl" onChangeHandler={onChangeHandler} />
           <TextInput post={post} name="videoEmbedCode" onChangeHandler={onChangeHandler} />
-          <TextAreaComponent post={post} name="videoScriptCode" rendering={post?.postType === 'video'}
+          <TextAreaComponent post={post} name="videoScriptCode"
                              onChangeHandler={onChangeHandler} />
-          <RenderIframe videoEmbedCode={post?.videoEmbedCode} rendering={post?.postType === 'video'} />
+          <RenderIframe videoEmbedCode={post?.videoEmbedCode} />
           <TextInput post={post} name="videoTrailerUrl" onChangeHandler={onChangeHandler} />
           <Duration duration={post.duration} onChangeHandler={onChangeHandler} />
         </>
@@ -57,7 +69,7 @@ const PostInformation: FC<PropTypes> = ({ onChangeHandler, post, relatedPosts })
         </>
       }
 
-      <TextInput name="downloadLink" onChangeHandler={onChangeHandler} />
+      <TextInput post={post} name="downloadLink" onChangeHandler={onChangeHandler} />
       {/*<TextAreaComponent name='videoScriptCode' rendering={post?.postType === 'video'} onChangeHandler={onChangeHandler} />*/}
       {/*<RenderIframe rendering={post?.postType === 'video'} />*/}
       {/*<ProductPrice rendering={post?.postType === 'product'} onChangeHandler={onChangeHandler} />*/}

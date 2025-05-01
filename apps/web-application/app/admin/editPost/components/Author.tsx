@@ -1,29 +1,27 @@
-
 'use client';
 
-import { FC } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
-import { useAppDispatch } from '@storeDashboard/hooks';
 import { getUserSuggestionList } from '@repo/api-requests';
 import AsyncSelect from 'react-select/async';
-import { editPostAction } from '@storeDashboard/reducers/postsReducer';
 import { reactSelectPrimaryTheme } from '@repo/data-structures';
-import { useAppSelector } from '@storeDashboard/hooks';
+import { IPost, User } from '@repo/typescript-types';
 
 const Style = styled.div`
-  width: 100%;
+    width: 100%;
 `;
 
-interface PropTypes {}
+interface PropTypes {
+  author?: User,
+  setPost:React.Dispatch<React.SetStateAction<IPost | null>>
+}
 
 interface SelectOption {
   value: string;
   label: string;
 }
 
-const Author: FC<PropTypes> = ({}) => {
-  const dispatch = useAppDispatch();
-  const author = useAppSelector(({ posts }) => posts.post?.author);
+const Author: FC<PropTypes> = ({ author, setPost }) => {
 
   const onLoadOptionsHandler = async (input: string) => {
     if (!input) return;
@@ -41,14 +39,14 @@ const Author: FC<PropTypes> = ({}) => {
 
   const onSelectHandler = (selected: SelectOption | null) => {
     if (!selected) return;
-    dispatch(
-      editPostAction({
-        author: {
-          _id: selected.value,
-          username: selected.label,
-        },
-      }),
-    );
+
+    setPost((prevState) => ({
+      ...prevState,
+      author: {
+        _id: selected.value,
+        username: selected.label,
+      },
+    }));
   };
 
   return (

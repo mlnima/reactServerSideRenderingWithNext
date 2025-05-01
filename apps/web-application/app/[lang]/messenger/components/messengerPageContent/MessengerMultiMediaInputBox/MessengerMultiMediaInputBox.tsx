@@ -45,7 +45,7 @@ const MessengerMultiMediaInputBox: FC<IProps> = (
                 content: draftMessage.textContent,
                 imageContent: draftMessage.imageContent,
                 audioContent: draftMessage.audioContent,
-                createdAt: Date.now(),
+                createdAt: performance.now(),
                 sender: userData._id,
                 conversation: activeConversation._id
             }

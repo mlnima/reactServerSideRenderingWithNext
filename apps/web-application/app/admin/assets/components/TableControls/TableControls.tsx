@@ -17,10 +17,11 @@ interface TableControlsPropTypes {
   selectedItems: string[];
   setSelectedItems: React.Dispatch<React.SetStateAction<string[]>>,
   totalCount: number
-  statusesCount: any
+  statusesCount: any,
+  contentPerPage?:number
 }
 
-const TableControls: FC<TableControlsPropTypes> = ({ selectedItems, setSelectedItems, totalCount = 0, statusesCount }) => {
+const TableControls: FC<TableControlsPropTypes> = ({ selectedItems, setSelectedItems, totalCount = 0, statusesCount,contentPerPage }) => {
 
   const searchParams = useSearchParams();
   const assetsType = useMemo(() => searchParams.get('assetsType'), [searchParams]);
@@ -31,7 +32,7 @@ const TableControls: FC<TableControlsPropTypes> = ({ selectedItems, setSelectedI
         <AssetStatusNavigation statusesCount={statusesCount} />
       )}
 
-      <AssetSize />
+      <AssetSize contentPerPage={contentPerPage}/>
       {(assetsType === 'posts' || assetsType === 'metas') && (
         <AssetBulkAction selectedItems={selectedItems} setSelectedItems={setSelectedItems} />
       )}

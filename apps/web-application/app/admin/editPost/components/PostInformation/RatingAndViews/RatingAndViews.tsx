@@ -5,11 +5,11 @@ import { IPost } from '@repo/typescript-types';
 
 interface PropTypes {
   name: 'likes' | 'disLikes' | 'views';
-  onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  post:IPost
+  onChangeHandler: (e: React.ChangeEvent<HTMLElement>) => void;
+  post: IPost;
 }
 
-const RatingAndViews: FC<PropTypes> = ({ name, onChangeHandler,post }) => {
+const RatingAndViews: FC<PropTypes> = ({ name, onChangeHandler, post }) => {
 
   return (
     <div className="post-information-section">

@@ -14,7 +14,7 @@ interface SettingSetting extends Document {
 const getSettings = async (
   requireSettings: string[],
 ) => {
-  // 'use cache';
+  'use cache';
   try {
     await connectToDatabase('getSettings');
     const settings = await settingSchema

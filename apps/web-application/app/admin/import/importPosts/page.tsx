@@ -1,9 +1,8 @@
 // @ts-nocheck
 'use client';
 import React, { ChangeEvent, useRef, useState } from 'react';
-import { useAppSelector } from '@storeDashboard/hooks';
-
-import { useAppDispatch } from '@storeDashboard/hooks';
+import { useAppSelector } from '@store/hooks';
+import { useAppDispatch } from '@store/hooks';
 import { dashboardAPIRequestCreateNewPost } from '@repo/api-requests';
 import qualityConvertor from '../../assets/components/qualityConvertor';
 import './styles.scss';
@@ -23,13 +22,13 @@ const ImportPostsPage = (): JSX.Element => {
   const onImportPostsHandler = async () => {
     for await (let post of posts) {
       const postDataToSave = {
-        ...post,
-        status: statusElement.current.value || 'draft',
+        // @ts-expect-error: it's fine
+        ...(post || {}),
+        status: statusElement?.current?.value || 'draft',
         quality: qualityConvertor(post.quality),
         author: userData._id,
       };
       await dashboardAPIRequestCreateNewPost(postDataToSave);
-      // dispatch(createNewPostAction({data:postDataToSave, router:null}))
     }
   };
 
