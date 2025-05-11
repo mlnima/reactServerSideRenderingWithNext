@@ -31,25 +31,7 @@ export {
 
 //posts
 
-export {
-
-    dashboardAPIRequestCheckAndRemoveDeletedVideos,
-    dashboardAPIRequestCreateNewPost,
-    dashboardAPIRequestExportPosts,
-    dashboardAPIRequestGeneratePermaLinkForPosts,
-
-
-    dashboardAPIRequestPostDataScrappers,
-
-
-    dashboardAPIRequestFindAnotherSimilarSourceLink
-} from './dashboard/dashboardPosts'
 
 
 
 
-
-
-export {
-    dashboardAPIRequestGenerateSiteMaps
-} from './dashboard/sitemaps'

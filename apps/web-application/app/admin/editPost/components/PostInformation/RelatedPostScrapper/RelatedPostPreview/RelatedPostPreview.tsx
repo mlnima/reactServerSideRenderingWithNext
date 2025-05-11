@@ -43,6 +43,7 @@ const RelatedPostPreview: FC<IProps> = ({ cardData, onChangeHandler }) => {
         value: cardData.source,
       },
     };
+    onChangeHandler(e)
   };
   return (
     <Styles

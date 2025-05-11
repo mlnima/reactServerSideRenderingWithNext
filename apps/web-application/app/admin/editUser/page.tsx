@@ -57,7 +57,7 @@ const EditUserPage = () => {
     });
 
     if (!success) {
-      dispatch(setAlert({ message, type: 'error', active: true }));
+      dispatch(setAlert({ message, type: 'error' }));
       return;
     }
   };

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { postTypes } from '@repo/data-structures';
 import { useAppDispatch } from '@store/hooks';
 import { loading, setAlert } from '@store/reducers/globalStateReducer';
-import { dashboardAPIRequestExportPosts } from '@repo/api-requests';
+
 
 const PostsExporterStyledDiv = styled.div`
     display: flex;
@@ -47,56 +47,56 @@ const PostsExporter = () => {
   };
 
   const getExportingPosts = async () => {
-    dispatch(loading(true));
-    await dashboardAPIRequestExportPosts(data)
-      .then(res => {
-        const posts = res.data.exportedData.map((post: any) => {
-          post.mainThumbnail = post.mainThumbnail
-            ? post.mainThumbnail.includes('http')
-              ? post.mainThumbnail
-              : process.env.NEXT_PUBLIC_PRODUCTION_URL +
-              post.mainThumbnail
-            : '';
-          //@ts-ignore
-          !data.ID ? delete post._id : null;
-          delete post.__v;
-          delete post.author;
-          return post;
-        });
-        let filename = `${performance.now().toLocaleString()}-posts.json`;
-        let contentType = 'application/json;charset=utf-8;';
-        //@ts-ignore
-        if (window.navigator && window.navigator?.msSaveOrOpenBlob) {
-          let blob = new Blob(
-            [decodeURIComponent(encodeURI(JSON.stringify(posts)))],
-            { type: contentType },
-          );
-          // @ts-ignore
-          navigator.msSaveOrOpenBlob(blob, filename);
-        } else {
-          let a = document.createElement('a');
-          a.download = filename;
-          a.href =
-            'data:' +
-            contentType +
-            ',' +
-            encodeURIComponent(JSON.stringify(posts));
-          a.target = '_blank';
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-        }
-      })
-      .catch(err => {
-        dispatch(
-          setAlert({
-            message: err?.response?.data?.message,
-            type: 'error',
-            err,
-          }),
-        );
-      })
-      .finally(() => dispatch(loading(false)));
+    // dispatch(loading(true));
+    // await dashboardAPIRequestExportPosts(data)
+    //   .then(res => {
+    //     const posts = res.data.exportedData.map((post: any) => {
+    //       post.mainThumbnail = post.mainThumbnail
+    //         ? post.mainThumbnail.includes('http')
+    //           ? post.mainThumbnail
+    //           : process.env.NEXT_PUBLIC_PRODUCTION_URL +
+    //           post.mainThumbnail
+    //         : '';
+    //       //@ts-ignore
+    //       !data.ID ? delete post._id : null;
+    //       delete post.__v;
+    //       delete post.author;
+    //       return post;
+    //     });
+    //     let filename = `${performance.now().toLocaleString()}-posts.json`;
+    //     let contentType = 'application/json;charset=utf-8;';
+    //     //@ts-ignore
+    //     if (window.navigator && window.navigator?.msSaveOrOpenBlob) {
+    //       let blob = new Blob(
+    //         [decodeURIComponent(encodeURI(JSON.stringify(posts)))],
+    //         { type: contentType },
+    //       );
+    //       // @ts-ignore
+    //       navigator.msSaveOrOpenBlob(blob, filename);
+    //     } else {
+    //       let a = document.createElement('a');
+    //       a.download = filename;
+    //       a.href =
+    //         'data:' +
+    //         contentType +
+    //         ',' +
+    //         encodeURIComponent(JSON.stringify(posts));
+    //       a.target = '_blank';
+    //       document.body.appendChild(a);
+    //       a.click();
+    //       document.body.removeChild(a);
+    //     }
+    //   })
+    //   .catch(err => {
+    //     dispatch(
+    //       setAlert({
+    //         message: err?.response?.data?.message,
+    //         type: 'error',
+    //         err,
+    //       }),
+    //     );
+    //   })
+    //   .finally(() => dispatch(loading(false)));
   };
 
   return (

@@ -1,5 +1,5 @@
 import postSchema from "@schemas/postSchema";
-import xHSimilarFinder from "./xHSimilarFinder";
+import xHSimilarFinder from "./xh/xHSimilarFinder";
 import {Request,Response} from "express";
 
 

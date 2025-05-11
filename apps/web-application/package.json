@@ -36,7 +36,6 @@
     "@monaco-editor/react": "^4.7.0",
     "@next/mdx": "^15.2.3",
     "@reduxjs/toolkit": "^2.6.1",
-    "@repo/api-requests": "*",
     "@repo/data-structures": "*",
     "@repo/shared-style": "*",
     "@repo/typescript-types": "*",

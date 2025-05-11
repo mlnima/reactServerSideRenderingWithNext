@@ -42,8 +42,6 @@ export const rootSitemapGenerator = async () => {
         flag: 'w',
       },
     );
-
-
   } catch (error) {
     console.log(error);
   }

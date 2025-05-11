@@ -10,7 +10,7 @@
     "subItems": [
       {
         "name": "newPost",
-        "url": "/admin/post?new=1"
+        "url": "/admin/editPost?new=1"
       }
     ]
   },

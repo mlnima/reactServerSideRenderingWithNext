@@ -1,22 +1,30 @@
-import xHScrapper from "./xHScrapper";
+'use server';
+import xHScrapper from "./xh/xHScrapper";
+import { errorResponse, successResponse } from 'web-application/app/lib/actions/response';
 
-const postDataScrappers = async (req, res) => {
+const postDataScrappers = async (targetUrl) => {
     try {
-        const urlToScrap = req.body.urlToScrap
 
-        if (urlToScrap.includes('xhamster')) {
+        if (targetUrl.includes('xhamster')) {
 
-            await xHScrapper(urlToScrap).then(urlData => {
-                res.json({urlData})
-            })
+            const urlData = await xHScrapper(targetUrl)
 
-            // res.end()
+          return successResponse({
+            data: {
+              urlData: JSON.parse(JSON.stringify(urlData))
+            },
+          });
 
         } else {
-            res.end()
+          return errorResponse({
+            message: 'URL does not supported',
+          });
         }
     } catch (error) {
-        console.log(error)
+      return errorResponse({
+        message: 'Something went wrong',
+        error,
+      });
     }
 
 }

@@ -15,12 +15,10 @@ import { useSearchParams } from 'next/navigation';
 import './styles.scss';
 import dashboardGetPost from '@lib/actions/database/operations/posts/dashboardGetPost';
 import { IPost } from '@repo/typescript-types';
-import {
-  dashboardAPIRequestFindAnotherSimilarSourceLink,
-  dashboardAPIRequestPostDataScrappers,
-} from '@repo/api-requests';
 import { setAlert } from '@store/reducers/globalStateReducer';
 import { useAppDispatch } from '@store/hooks';
+import postDataScrappers from '@lib/actions/scrapers/postDataScrappers';
+import findAnotherSimilarSourceLink from '@lib/actions/scrapers/findAnotherSimilarSourceLink';
 
 
 const EditPostPage = () => {
@@ -98,25 +96,33 @@ const EditPostPage = () => {
 
   const scrapAndSetPostData = async ({ url, fields }: { url: string; fields?: string[] }) => {
     try {
-      const postData = await dashboardAPIRequestPostDataScrappers(url);
+      const {success,data,message} = await postDataScrappers(url);
 
-      if (!postData) {
-        return;
+      if (!success || !data?.postData){
+        dispatch(setAlert({
+          message,
+          type:'error'
+        }))
+        return
       }
 
       if (!fields?.length) {
-        setPost(postData.data?.urlData);
+        setPost(data.postData);
       } else {
         let fieldToSet = {};
         for await (const field of fields) {
           // @ts-expect-error: it's fine
-          fieldToSet[field] = postData.data?.urlData?.[field];
+          fieldToSet[field] = data.postData?.[field];
         }
         setPost(fieldToSet);
       }
 
 
     } catch (error) {
+      dispatch(setAlert({
+        message:'Something went wrong',
+        type:'error'
+      }))
     }
   };
 
@@ -129,17 +135,22 @@ const EditPostPage = () => {
     if (!postId || !relatedBy || !page) return;
 
     try {
-      const scrapedRelatedPost = await dashboardAPIRequestFindAnotherSimilarSourceLink(
+
+      const {success, message, data} = await findAnotherSimilarSourceLink(
         postId,
         relatedBy,
         page,
-      );
+      )
 
-      if (scrapedRelatedPost.data?.relatedPosts){
-        setRelatedPosts(scrapedRelatedPost?.data?.relatedPosts)
+      if (!success || !data?.relatedPosts){
+        dispatch(setAlert({
+          message,
+          type:'error'
+        }))
+        return
       }
 
-
+      setRelatedPosts(data.relatedPosts)
 
     } catch (error) {
       dispatch(
@@ -155,9 +166,9 @@ const EditPostPage = () => {
   };
 
 
-  if (!post) {
-    return <h1>Not Found</h1>;
-  }
+  // if (!post) {
+  //   return <h1>Not Found</h1>;
+  // }
 
   return (
     <div className={'EditPostPage'}>

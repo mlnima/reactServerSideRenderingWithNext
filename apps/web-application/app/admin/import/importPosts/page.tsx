@@ -1,11 +1,10 @@
 // @ts-nocheck
 'use client';
 import React, { ChangeEvent, useRef, useState } from 'react';
-import { useAppSelector } from '@store/hooks';
-import { useAppDispatch } from '@store/hooks';
-import { dashboardAPIRequestCreateNewPost } from '@repo/api-requests';
+import { useAppSelector,useAppDispatch } from '@store/hooks';
 import qualityConvertor from '../../assets/components/qualityConvertor';
 import './styles.scss';
+import dashboardCreateNewPost from '@lib/actions/database/operations/posts/dashboardCreateNewPost';
 
 
 const ImportPostsPage = (): JSX.Element => {
@@ -28,7 +27,7 @@ const ImportPostsPage = (): JSX.Element => {
         quality: qualityConvertor(post.quality),
         author: userData._id,
       };
-      await dashboardAPIRequestCreateNewPost(postDataToSave);
+      await dashboardCreateNewPost(postDataToSave)
     }
   };
 
