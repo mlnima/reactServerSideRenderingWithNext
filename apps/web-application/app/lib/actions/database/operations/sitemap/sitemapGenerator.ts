@@ -1,5 +1,4 @@
-import fs from 'fs-extra';
-import globalStore from 'api-server/dist/store/GlobalStore';
+'use server';
 import axios from 'axios';
 import path from 'path';
 import {
@@ -12,18 +11,23 @@ import {
 
 } from './helpers';
 import { rootTemplate } from './templates';
+import { connectToDatabase } from '@repo/db/dist/index';
+import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
+import getSettings from '@lib/actions/database/operations/settings/getSettings';
+import { IInitialSettings } from '@repo/typescript-types';
+import { writeFile  } from 'fs/promises';
 
 const productionUrl = process.env.NEXT_PUBLIC_PRODUCTION_URL;
 const dev = process.env.NODE_ENV !== 'production';
 
-export const sitemapItemsPerPage = 500;
+const sitemapItemsPerPage = 500;
 
-export const sitemapOutputPath = path.join(process.cwd(), 'public');
+const sitemapOutputPath = path.join(process.cwd(), 'public');
 
 export const rootSitemapGenerator = async () => {
   try {
 
-    fs.writeFileSync(
+    await writeFile(
       `${sitemapOutputPath}/sitemap.xml`,
       rootTemplate(`
                 ${await searchSitemapsLinkForTheRoot()}
@@ -47,7 +51,15 @@ export const rootSitemapGenerator = async () => {
 
 
 export const generateSitemaps = async () => {
+  await connectToDatabase('generateSitemaps');
+  const { initialSettings } = unwrapResponse(
+    await getSettings(['initialSettings']) as unknown as ServerActionResponse<{
+      initialSettings: IInitialSettings | undefined;
+    }>,
+  );
+
   try {
+
     await cleanupOldPublicFolder();
     await searchKeywordsSitemapsGenerator();
     await metaSitemapGenerator();
@@ -59,8 +71,6 @@ export const generateSitemaps = async () => {
   }
 
   try {
-    //const initialSettings = globalStore.getInitialSettings()
-    const initialSettings = globalStore.getSetting('initialSettings');
 
     if (!!initialSettings?.headDataSettings?.favIconUrl) {
       const isAbsolute = initialSettings?.headDataSettings?.favIconUrl.includes('http');
@@ -71,7 +81,7 @@ export const generateSitemaps = async () => {
       });
       if (!!response.data) {
 
-        fs.writeFile(
+        await writeFile(
           `${sitemapOutputPath}/favicon.ico`,
           //@ts-ignore
           response.data,

@@ -4,7 +4,7 @@ import { errorResponse, successResponse } from '@lib/actions/response';
 import { verifySession } from '@lib/dal';
 import { getCurrentDatePath } from '@repo/utils';
 import path from 'path';
-import { mkdir, writeFile,unlink  } from 'fs/promises';
+import { mkdir, writeFile,unlink } from 'fs/promises';
 // @ts-expect-error: it's fine
 import mime from 'mime-types';
 

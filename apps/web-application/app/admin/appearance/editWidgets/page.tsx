@@ -26,7 +26,7 @@ const page = async (props: IProps) => {
 
   const customPages = pages ? pages.map(p=>p.title) : []
 
-  // dont remove, we will get only require widgets later
+  // dont remove, we will get only need widgets later
   const positions = Array.isArray(searchParams?.positions) ? searchParams?.positions : [searchParams?.positions];
 
   const { success, data, message } = await dashboardGetWidgets() as ServerActionResponse<{ widgets: IWidget[] }>;

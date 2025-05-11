@@ -1,11 +1,15 @@
 import { pagesTemplateGenerator, sitemapItemTemplate, urlSetXmlTemplate, urlXmlTemplate } from './templates';
 import { searchKeywordSchema,pageSchema,postSchema,metaSchema } from '@repo/db';
-import fs from 'fs-extra';
+import { writeFile,unlink ,readdir  } from 'fs/promises';
 import { MetasType } from '@repo/typescript-types';
-import { convertMetasTypeToSingular } from 'api-server/dist/util/units-convertor';
 import moment from "moment/moment";
 import path from 'path';
-import { sitemapItemsPerPage, sitemapOutputPath } from './sitemapGenerator';
+
+import {convertMetasTypeToSingular} from "@repo/utils";
+const sitemapItemsPerPage = 500;
+
+const sitemapOutputPath = path.join(process.cwd(), 'public');
+
 
 export const keywordXmlTemplateGenerator = (keywords:any[]) => {
   return keywords.reduce((finalXml, currentKeyword) => {
@@ -72,7 +76,7 @@ export const searchKeywordsSitemapsGenerator = async() => {
       const skip = sitemapItemsPerPage * (page - 1) || 0;
 
       const keywords = await searchKeywordSchema.find({count: {$gt: 0}}).limit(sitemapItemsPerPage).skip(skip)
-      fs.writeFileSync(
+      await writeFile(
         `${sitemapOutputPath}/sitemap-tax-search-${page}.xml`,
         urlSetXmlTemplate(keywordXmlTemplateGenerator(keywords)),
         {
@@ -133,7 +137,7 @@ export const metaSitemapGenerator = async () => {
       for await (const currentPage of amountOfPages) {
         const page = currentPage + 1
         const metas = await metaSchema.find(findMetaQuery).limit(500).skip(500 * (page - 1))
-        fs.writeFileSync(
+        await writeFile(
           `${sitemapOutputPath}/sitemap-tax-${metaType}-${page}.xml`,
           urlSetXmlTemplate(metaXmlTemplateGenerator(metas , '1', 'hourly', convertMetasTypeToSingular(metaType))),
           {
@@ -241,7 +245,7 @@ export const postSitemapLinkForTheRoot = async () => {
             )
 
             //here
-            fs.writeFileSync(
+            await writeFile(
               `${sitemapOutputPath}/${targetUrl}`,
               urlSetXmlTemplate(postXmlTemplateGenerator(posts)),
               {
@@ -293,7 +297,7 @@ export const pagesSitemapsLinksForRoot = async () => {
 export const pagesSitemapGenerator = async () => {
   try {
     const pages = await pageSchema.find({status: 'published'}) || []
-    fs.writeFileSync(
+    await writeFile(
       `${sitemapOutputPath}/sitemap-pt-page-1.xml`,
      await pagesTemplateGenerator(pages),
       {
@@ -310,11 +314,11 @@ export const pagesSitemapGenerator = async () => {
 
 export const cleanupOldPublicFolder = async () => {
   try {
-    const files = await fs.readdir(sitemapOutputPath);
+    const files = await readdir(sitemapOutputPath);
     const xmlFiles = files.filter(file => path.extname(file) === '.xml' || file === 'robots.txt' );
 
-    const deletePromises = xmlFiles.map(file => {
-      return fs.remove(path.join(sitemapOutputPath, file));
+    const deletePromises = xmlFiles.map( (file) => {
+      return unlink(path.join(sitemapOutputPath, file));
     });
     await Promise.all(deletePromises);
   } catch (error) {

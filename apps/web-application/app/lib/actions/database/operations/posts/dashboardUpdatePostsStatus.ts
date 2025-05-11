@@ -19,7 +19,7 @@ const dashboardUpdatePostsStatus = async ({ ids, status }: IUpdatePosts) => {
     let actions;
 
     if (status === 'delete') {
-      //***** it require to delete post thumbnail from express server, Need fix
+      //***** it need to delete post thumbnail from express server, Need fix
 
 
       // actions = ids.map(async id => {
