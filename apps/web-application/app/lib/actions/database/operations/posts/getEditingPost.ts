@@ -6,7 +6,9 @@ import { IPost } from '@repo/typescript-types/src/Post';
 import { verifySession } from '@lib/dal';
 
 const getEditingPost = async ({ _id }: IGetEditingPost): Promise<ServerActionResponse<{ post: IPost } | null>> => {
+
   try {
+   console.log('\x1b[33m%s\x1b[0m','getEditingPost is called', );
     const { isAuth, userId } = await verifySession();
 
     if (!isAuth) {
@@ -32,7 +34,7 @@ const getEditingPost = async ({ _id }: IGetEditingPost): Promise<ServerActionRes
       ])
       .lean<IPost>();
 
-
+console.log(`post=> `,post)
     if (!post) {
       return errorResponse({
         message: 'Not Found',

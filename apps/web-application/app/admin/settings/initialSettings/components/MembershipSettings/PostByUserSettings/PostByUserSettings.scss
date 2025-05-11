@@ -10,21 +10,22 @@
     gap: 1rem;
 
     .checkboxFieldItem {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+      //display: grid;
+      //grid-template-columns: 1fr 1fr 3fr 3fr 3fr;
+      //align-items: center;
+      display: flex;
       align-items: center;
+      justify-content: flex-start;
 
       .checkboxFieldItemSection {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        flex-direction: column;
-        gap: .5rem;
         align-content: flex-start;
         height: 100%;
-
+        width: 200px;
         p {
           place-items: flex-start;
+          margin: 0 .5rem;
         }
 
         input {

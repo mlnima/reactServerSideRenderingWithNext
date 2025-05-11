@@ -3,10 +3,10 @@ import React, { FC, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAppDispatch } from '@store/hooks';
-import { dashboardAPIRequestDeleteForm } from '@repo/api-requests';
 import { useSearchParams } from 'next/navigation';
 import dashboardDeleteComments from '@lib/actions/database/operations/comments/dashboardDeleteComments';
 import dashboardUpdatePostsStatus from '@lib/actions/database/operations/posts/dashboardUpdatePostsStatus';
+import dashboardDeleteForm from '@lib/actions/database/operations/forms/dashboardDeleteForm';
 
 interface TableBodyItemDirectActionPropTypes {
   _id: string;
@@ -118,9 +118,10 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({ _id
         <span
           className={'btn btn-danger'}
           onClick={async () => {
-            await dashboardAPIRequestDeleteForm(_id).then(() => {
-              router.push(`/admin/assets?assetsType=forms&size=20&lastUpdate=${performance.now()}`);
-            });
+            const {success} = await dashboardDeleteForm({ _id })
+            if (success) {
+              router.push(`/admin/assets?assetsType=forms&size=20&lastUpdate=${performance.now()}`)
+            }
           }}
         >
           Delete

@@ -5,6 +5,8 @@ import {
 } from '@repo/db';
 import { errorResponse, successResponse } from '@lib/actions/response';
 import { Document } from 'mongoose';
+import { unstable_cacheTag as cacheTag } from 'next/cache';
+
 
 interface SettingSetting extends Document {
   type: string;
@@ -28,7 +30,7 @@ const getSettings = async (
       return acc;
     }, {});
 
-    // cacheTag('cacheItem', 'CSetting', `CSettings-${requireSettings.join('-')}`);
+    cacheTag('cacheItem', 'CSetting', `CSettings-${requireSettings.join('-')}`);
     return successResponse({
       data: JSON.parse(JSON.stringify(objectifySettings)),
     });

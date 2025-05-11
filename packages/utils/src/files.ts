@@ -18,11 +18,12 @@ export const blobToBase64 = (blob: Blob): Promise<string> => {
   });
 };
 
-export const imageCanvasCompressor = async ({ image, maxWidth = 640, maxHeight = 640, outputType = 'base64' }: {
+export const imageCanvasCompressor = async ({ image, maxWidth = 640, maxHeight = 640, outputType = 'base64',fileName='compressed_image.webp' }: {
   image: Blob;
   maxWidth?: number;
   maxHeight?: number;
-  outputType?: string
+  outputType?: string;
+  fileName?: string
 }): Promise<string | File> => {
   try {
     return new Promise((resolve, reject) => {
@@ -68,7 +69,7 @@ export const imageCanvasCompressor = async ({ image, maxWidth = 640, maxHeight =
                   reject(new Error('Compression failed.'));
                   return;
                 }
-                const file = new File([blob], 'compressed_image.webp', {
+                const file = new File([blob], fileName, {
                   type: 'image/webp',
                 });
                 resolve(file);

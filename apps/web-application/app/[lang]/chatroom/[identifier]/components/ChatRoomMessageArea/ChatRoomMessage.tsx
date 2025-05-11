@@ -2,7 +2,7 @@
 import React from 'react';
 import { formatDistance } from 'date-fns';
 import { ChatroomMessage } from "@repo/typescript-types";
-import { UserPreviewImage } from '@repo/ui';
+import UserPreviewImage from '@components/UserPreviewImage/UserPreviewImage';
 import Link from 'next/link';
 import AdminAuthorMessageActionMenu from './AdminAuthorMessageActionMenu';
 import './ChatRoomMessage.styles.scss';

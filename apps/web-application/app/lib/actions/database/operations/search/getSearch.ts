@@ -47,7 +47,7 @@ export const getSearch = async (
     returnPosts = true,
     returnMetas = true,
   }: IGetSearch) => {
-  // 'use cache';
+  'use cache';
 
   try {
     if (!keyword) return null;
@@ -108,54 +108,39 @@ export const getSearch = async (
       .select([...postFieldRequestForCards, `translations.${locale}.title`])
       .lean<IPost[]>() : [];
 
-    posts = posts.map((doc) => {
-      if (doc._id) {
-        doc._id = doc._id.toString();
-      }
-      return doc;
-    });
-
     const totalCount = returnTotalCount ? await postSchema.countDocuments(postSearchQuery) : 0;
     let metas = returnMetas ? await metaSchema
       .find(metasSearchQuery, {}, { sort })
       .limit(size)
       .lean<IMeta[]>() : [];
 
-
-    if (returnMetas) {
-      metas = metas.map((doc) => {
-        if (doc?._id) {
-          doc._id = doc._id.toString();
-        }
-        return doc;
-      });
-    }
-
-
-    const { actors, categories, tags } = returnMetas ? (metas || []).reduce(
-      (acc: { [key: string]: IMeta[] }, meta: IMeta) => {
-        acc[meta?.type] = [...(acc?.[meta?.type] || []), meta];
-
-        return acc;
-      },
-      { actors: [], categories: [], tags: [] },
-    ) : { actors: [], categories: [], tags: [] };
+    const { actors, categories, tags } = returnMetas
+      ? (metas || []).reduce(
+        (acc: Record<string, IMeta[]>, meta: IMeta) => {
+          const type = meta.type; // Assume meta.type is guaranteed to be defined
+          // @ts-expect-error: it's fine
+          acc[type] = [...(acc[type] || []), meta];
+          return acc;
+        },
+        { actors: [], categories: [], tags: [] },
+      )
+      : { actors: [], categories: [], tags: [] };
 
     if (totalCount > 0) {
       await _saveSearchedKeyword(targetKeyword, totalCount);
     }
-    // cacheTag('cacheItem', `CGetSearch-${targetKeyword}`);
+
+    cacheTag('cacheItem', `CGetSearch-${targetKeyword}`);
 
     return successResponse({
       data: {
-        posts: posts as IPost[],
+        posts: JSON.parse(JSON.stringify(posts)),
         totalCount,
-        actors: actors as IMeta[],
-        categories: categories as IMeta[],
-        tags: tags as IMeta[],
+        actors: JSON.parse(JSON.stringify(actors)) ,
+        categories: JSON.parse(JSON.stringify(categories)) ,
+        tags: JSON.parse(JSON.stringify(tags))  ,
       },
     });
-
 
   } catch (error) {
     console.error(`error=> `, error);

@@ -1,6 +1,5 @@
 import mongoose, { Schema, models, model } from 'mongoose';
 import { postTypes, videoQualities } from "@repo/data-structures";
-import mongooseLeanVirtuals from "mongoose-lean-virtuals";
 import { postFieldRequestForCards } from '@repo/data-structures';
 import { IPost } from '@repo/typescript-types';
 
@@ -99,7 +98,7 @@ const postSchema = new Schema({
 
 }, {timestamps: true});
 
-postSchema.plugin(mongooseLeanVirtuals);
+
 
 postSchema.statics.findRelatedPostsByField = async function (
     {

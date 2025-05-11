@@ -11,6 +11,7 @@ import { LanguagesOptions } from '@repo/ui';
 import { IInitialSettings } from '@repo/typescript-types';
 import dashboardUpdateSettings from '@lib/actions/database/operations/settings/dashboardUpdateSettings';
 import { setAlert } from '@store/reducers/globalStateReducer';
+import { clearACacheByTag } from '@lib/serverActions';
 
 interface PropTypes {
   initialSettings?: IInitialSettings;
@@ -25,9 +26,13 @@ const InitialSettingsPageWrapper: FC<PropTypes> = ({ initialSettings }) => {
 
 
   useEffect(() => {
-    if (initialSettings){
+    if (initialSettings) {
       setInitialSettingsData(initialSettings);
     }
+  }, [initialSettings]);
+
+  useEffect(() => {
+    console.log(`initialSettings=> `,initialSettings);
   }, [initialSettings]);
 
 
@@ -46,11 +51,17 @@ const InitialSettingsPageWrapper: FC<PropTypes> = ({ initialSettings }) => {
           err: error,
         }),
       );
+      return
     }
+
+    await clearACacheByTag('CSettings-initialSettings')
+
 
   };
 
-  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | {name:string}>, key: string) => {
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | {
+    name: string
+  }>, key: string) => {
     const value = inputValueSimplifier(e);
     if (!e.target?.name) return;
     // @ts-expect-error: it's fine
@@ -77,7 +88,9 @@ const InitialSettingsPageWrapper: FC<PropTypes> = ({ initialSettings }) => {
     }));
   };
 
-  const onChangeHandlerWithTranslation = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | {name:string}>, key: string) => {
+  const onChangeHandlerWithTranslation = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | {
+    name: string
+  }>, key: string) => {
     if (language === 'default') {
       onChangeHandler(e, key);
     } else {
@@ -130,7 +143,8 @@ const InitialSettingsPageWrapper: FC<PropTypes> = ({ initialSettings }) => {
           setInitialSettingsData={setInitialSettingsData}
           onSaveHandler={onSaveHandler}
         />
-        <MembershipSettings onChangeHandler={onChangeHandler} initialSettingsData={initialSettingsData} setInitialSettingsData={setInitialSettingsData} />
+        <MembershipSettings onChangeHandler={onChangeHandler} initialSettingsData={initialSettingsData}
+                            setInitialSettingsData={setInitialSettingsData} />
       </div>
       <button className={'btn btn-primary'} onClick={onSaveHandler}>
         Save

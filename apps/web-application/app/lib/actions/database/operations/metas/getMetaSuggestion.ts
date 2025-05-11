@@ -18,7 +18,7 @@ const getMetaSuggestion = async (
   }: IGetMetaSuggestion): Promise<ServerActionResponse<{
   suggestions: { value: string, label: string }[],
 } | null>> => {
-  // 'use cache';
+  'use cache';
   try {
     await connectToDatabase('getMetaSuggestion');
     const startWithQuery =
@@ -40,17 +40,20 @@ const getMetaSuggestion = async (
 
 
     const suggestions = metas.map((meta) => {
-      return {
-        value: meta._id.toString(),
-        label: meta.name,
-      };
+      if (meta._id && meta.name){
+        return {
+          value: meta._id.toString(),
+          label: meta.name,
+        };
+      }
     });
 
-    // cacheTag(
-    //   'cacheItem',
-    //   `CGetMetaSuggestion-${metaType ? `-${metaType}` : ''}${startWith ? `-${startWith}` : ''}`,
-    // );
+    cacheTag(
+      'cacheItem',
+      `CGetMetaSuggestion-${metaType ? `-${metaType}` : ''}${startWith ? `-${startWith}` : ''}`,
+    );
 
+    // @ts-expect-error: it's fine
     return successResponse({
       data: {
         suggestions,

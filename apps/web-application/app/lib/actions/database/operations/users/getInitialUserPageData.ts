@@ -1,12 +1,12 @@
 'use server';
 import { connectToDatabase, userSchema } from '@repo/db';
-// import { unstable_cacheTag as cacheTag } from 'next/cache';
+import { unstable_cacheTag as cacheTag } from 'next/cache';
 import { unstable_rethrow } from 'next/navigation';
 import { User } from '@repo/typescript-types';
 import { errorResponse, successResponse } from '@lib/actions/response';
 
 const getInitialUserPageData = async (username: string | undefined) => {
-  // "use cache"
+  "use cache"
   try {
     await connectToDatabase('getInitialUserPageData');
 
@@ -46,9 +46,7 @@ const getInitialUserPageData = async (username: string | undefined) => {
       isVerified: user.isVerified,
     };
 
-    // cacheTag('cacheItem', `CUserPageInitial-${data._id}`);
-    //
-
+    cacheTag('cacheItem', `CUserPageInitial-${data._id}`);
 
     return successResponse({ data:{
         initialUserPageData:data

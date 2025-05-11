@@ -2,9 +2,12 @@
 import { connectToDatabase, metaSchema,isValidObjectId } from '@repo/db';
 import { IMeta } from '@repo/typescript-types';
 import { errorResponse, ServerActionResponse, successResponse } from '@lib/actions/response';
+import { unstable_cacheTag as cacheTag } from 'next/cache';
 
 const getMeta = async(_id:string):Promise<ServerActionResponse<{meta:IMeta} | null>> =>{
+  'use cache';
   try {
+
     await connectToDatabase('getMeta');
     const isId = isValidObjectId(_id);
     if (!isId){
@@ -20,12 +23,14 @@ const getMeta = async(_id:string):Promise<ServerActionResponse<{meta:IMeta} | nu
       });
     }
 
-    meta._id = meta._id.toString()
-
+    cacheTag(
+      'cacheItem',
+      `CMeta-${_id}`
+    );
 
     return successResponse({
       data: {
-        meta
+        meta : JSON.parse(JSON.stringify(meta))
       },
     });
 

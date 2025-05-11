@@ -7,6 +7,7 @@ import UploadedFilePreviewText from './UploadedFilePreviewText';
 import { fileTypeDetector } from '@repo/utils';
 import './UploadedPopView.scss';
 
+// we beed to provide more detail and its usage in this pop later
 const UploadedPopView: FC<{
   deleteFile: Function,
   clickedItem: string,
@@ -37,12 +38,12 @@ const UploadedPopView: FC<{
         {fileType === 'video' ? <UploadedFilePreviewVideo filePath={fileManagerState.clickedItem} /> : null}
         {fileType === 'document' ? <UploadedFilePreviewText file={fileManagerState.file} /> : null}
         <label className={'uploaded-pop-view-url'}>
-          {'/' + fileManagerState.clickedItem.replace('./', '')}
+          { fileManagerState.clickedItem.replace('./', '/')}
         </label>
         <label className={'uploaded-pop-view-url'}>
-          {process.env.NEXT_PUBLIC_PRODUCTION_URL + '/' + fileManagerState.clickedItem.replace('./', '')}
+          {process.env.NEXT_PUBLIC_PRODUCTION_URL +  fileManagerState.clickedItem.replace('./', '')}
         </label>
-        {(fileType === 'image' || fileType === 'video') &&
+        {(fileType === 'image' || fileType === 'video'|| fileType === 'application' || !fileType) &&
           <button className="uploaded-pop-delete-button"
                   onClick={() => deleteFile(fileManagerState.clickedItem)}>
             Delete

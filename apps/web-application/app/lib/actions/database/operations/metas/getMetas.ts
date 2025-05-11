@@ -26,7 +26,7 @@ interface IGetMetas {
   metas: IMeta[],
   totalCount: number,
 } | null>> => {
-  // 'use cache';
+  'use cache';
   try {
     await connectToDatabase('getMetas');
     const { initialSettings } = unwrapResponse(
@@ -79,21 +79,16 @@ interface IGetMetas {
       .select([...metaFieldsRequestForCard(metaType, locale), `translations.${locale}.name`])
       .lean<IMeta[]>();
 
-    metas = metas.map((meta) => {
-      meta._id = meta._id.toString();
-      return meta;
-    });
-
-    // cacheTag(
-    //   'cacheItem',
-    //   `CGetMetas-${locale}${metaType ? `-${metaType}` : ''}${
-    //     page ? `-${page}` : ''
-    //   }${startWith ? `-${startWith}` : ''}`,
-    // );
+    cacheTag(
+      'cacheItem',
+      `CGetMetas-${locale}${metaType ? `-${metaType}` : ''}${
+        page ? `-${page}` : ''
+      }${startWith ? `-${startWith}` : ''}`,
+    );
 
     return successResponse({
       data: {
-        metas,
+        metas:JSON.parse(JSON.stringify(metas)),
         totalCount,
       },
     });

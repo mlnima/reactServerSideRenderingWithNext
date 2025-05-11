@@ -23,7 +23,7 @@ const Topbar = () => {
                 <span className={'navigationLink'} onClick={AdminSideBarOpenCloseHandler}>
                     <FontAwesomeIcon icon={faBars} />
                 </span>
-        <Link className={'navigationLink'} target={'_blank'} href={'/apps/web-application/public'} passHref>
+        <Link className={'navigationLink'} href={'/'} passHref>
           <FontAwesomeIcon icon={faHome} />
         </Link>
       </div>

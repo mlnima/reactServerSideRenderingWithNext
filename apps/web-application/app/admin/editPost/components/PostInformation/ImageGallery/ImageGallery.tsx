@@ -6,8 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './ImageGallary.scss';
 import { IPost } from '@repo/typescript-types';
 import { loading } from '@store/reducers/globalStateReducer';
-import { dashboardAPIRequestUploadFile } from '@repo/api-requests';
-import { AxiosResponse } from 'axios';
+// import { dashboardAPIRequestUploadFile } from '@repo/api-requests';
+// import { AxiosResponse } from 'axios';
 
 
 interface ImageGalleryPropTypes {
@@ -56,12 +56,12 @@ const ImageGallery: React.FC<ImageGalleryPropTypes> = ({ onChangeHandler, post }
       const filesData = new FormData();
       filesData.append('uploadingFile', e.target.files?.[0]);
       filesData.append('type', 'gallery');
-      const uploadedFile = await dashboardAPIRequestUploadFile(filesData) as AxiosResponse<{ path: string }>;
+      // const uploadedFile = await dashboardAPIRequestUploadFile(filesData) as AxiosResponse<{ path: string }>;
 
-      setState(prevState => ({
-        ...prevState,
-        images: [...(post?.images || []), uploadedFile.data.path.replace('./', '/')],
-      }));
+      // setState(prevState => ({
+      //   ...prevState,
+      //   images: [...(post?.images || []), uploadedFile.data.path.replace('./', '/')],
+      // }));
 
       dispatch(loading(false));
     } catch (error) {

@@ -2,97 +2,40 @@
 import Link from 'next/link';
 import React from 'react';
 import { useAppDispatch } from '@store/hooks';
-import {
-  dashboardDeleteDuplicateMetas,
-  dashboardAPIRequestGenerateSiteMaps,
-  dashboardAPIRequestCheckAndRemoveDeletedVideos,
-  dashboardAPIRequestSetMetaThumbnailsAndCount,
-  dashboardAPIRequestGeneratePermaLinkForPosts,
-} from '@repo/api-requests';
 import './styles.scss';
 import { loading, setAlert } from '@store/reducers/globalStateReducer';
-import { AxiosResponse } from 'axios';
-
+import { setAllMetaImagesAndCount } from '@lib/actions/database/operations/metas/refreshMetaImagesAndCountFromPosts';
+import { ServerActionResponse } from '@lib/actions/response';
+import { checkRemovedVideos } from '@lib/actions/database/operations/posts/checkDeletedVideos';
+import { generateSitemaps } from '@lib/actions/database/operations/sitemap/sitemapGenerator';
 
 const ToolsPage = () => {
 
   const dispatch = useAppDispatch();
 
-  const checkAndRemoveDeletedVideos = async () => {
+  const setMetaThumbnailsAndCount = async (type?:'categories' | 'tags' | 'actors') => {
     dispatch(loading(true));
-    return await dashboardAPIRequestCheckAndRemoveDeletedVideos()
-      .then((res: AxiosResponse<any>) => {
+    try {
+      const {success,message,error} = await setAllMetaImagesAndCount(type) as ServerActionResponse
+      dispatch(loading(false))
+      if (!success){
         dispatch(
           setAlert({
-            message:
-              res.data?.message ||
-              'Checking Removed Video Started',
-            type: 'success',
-          }),
-        );
-      })
-      .catch(err => {
-        dispatch(
-          setAlert({
-            message: err.response.data.message,
+            message: message,
             type: 'error',
-            err,
+            error,
           }),
         );
-      })
-      .finally(() => {
-        dispatch(loading(false));
-      });
-  };
-
-  const setMetaThumbnailsAndCount = async (type?: string) => {
-    dispatch(loading(true));
-    await dashboardAPIRequestSetMetaThumbnailsAndCount(type)
-      .then((res: AxiosResponse<any>) => {
-        dispatch(
-          setAlert({
-            message:
-              res.data?.message ||
-              'Setting New Image and Fix Count For Meta Data Started',
-            type: 'success',
-          }),
-        );
-      })
-      .catch(err => {
-        dispatch(
-          setAlert({
-            message: err.response.data.message,
-            type: 'error',
-            err,
-          }),
-        );
-      })
-      .finally(() => dispatch(loading(false)));
-  };
-
-  const generatePermaLinkForPosts = async () => {
-    dispatch(loading(true));
-    await dashboardAPIRequestGeneratePermaLinkForPosts(type)
-      .then((res: AxiosResponse<any>) => {
-        dispatch(
-          setAlert({
-            message:
-              res.data?.message ||
-              'Generating PermaLinks for Posts Started',
-            type: 'success',
-          }),
-        );
-      })
-      .catch(err => {
-        dispatch(
-          setAlert({
-            message: err.response.data.message,
-            type: 'error',
-            err,
-          }),
-        );
-      })
-      .finally(() => dispatch(loading(false)));
+      }
+      dispatch(
+        setAlert({
+          message:message,
+          type: 'success',
+        }),
+      );
+    }catch{
+      dispatch(loading(false))
+    }
   };
 
   return (
@@ -100,11 +43,10 @@ const ToolsPage = () => {
       <Link href={'/dashboard/tools/terminal'} className={'btn btn-primary'}>
         Terminal
       </Link>
-      <button className={'btn btn-primary'} onClick={checkAndRemoveDeletedVideos}>
-        Check and Removed deleted videos
-      </button>
-      <button className={'btn btn-primary'} onClick={() => generatePermaLinkForPosts()}>
-        Generate PermaLink For Posts
+      <button className={'btn btn-primary'} onClick={async ()=> {
+        await checkRemovedVideos()
+      }}>
+        Check and Removed deleted videos(not working)
       </button>
       <button className={'btn btn-primary'} onClick={() => setMetaThumbnailsAndCount()}>
         Set New Meta Thumbnails And Count Fro Meta
@@ -119,10 +61,7 @@ const ToolsPage = () => {
       <button className={'btn btn-primary'} onClick={() => setMetaThumbnailsAndCount('actors')}>
         Set New Thumbnails And Count for actors
       </button>
-      <button className={'btn btn-primary'} onClick={() => dashboardDeleteDuplicateMetas()}>
-        Delete Duplicate Metas
-      </button>
-      <button className={'btn btn-primary'} onClick={() => dashboardAPIRequestGenerateSiteMaps()}>
+      <button className={'btn btn-primary'} onClick={() => generateSitemaps()}>
         Generate Sitemaps
       </button>
     </div>

@@ -3,9 +3,9 @@ import { formatDistance } from 'date-fns';
 import { capitalizeFirstLetter } from '@repo/utils';
 
 interface IProps {
-    createdAt: string;
-    updatedAt: string;
-    status: string;
+    createdAt?: string;
+    updatedAt?: string;
+    status?: string;
     dictionary: {
         [key: string]: string;
     };
@@ -21,16 +21,19 @@ const PostQuickAccessPostInformation: FC<IProps> = ({ createdAt, updatedAt, stat
                         {dictionary?.['Created At'] || 'Created At'}: {formatDistance(new Date(createdAt), new Date())}
                     </span>
                 )}
-                {updatedAt && (
+                { (createdAt && updatedAt) && (
                     <span title={updatedAt}>
                         {dictionary?.['Updated At'] || 'Updated At'}: {formatDistance(new Date(createdAt), new Date())}
                     </span>
                 )}
             </div>
+          {status &&
             <h4 className="status">
-                {dictionary?.['Status'] || 'Status'} :{' '}
-                {dictionary?.[capitalizeFirstLetter(status)] || capitalizeFirstLetter(status)}
+              {dictionary?.['Status'] || 'Status'} :{' '}
+              {dictionary?.[capitalizeFirstLetter(status)] || capitalizeFirstLetter(status)}
             </h4>
+          }
+
         </>
     );
 };

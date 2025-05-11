@@ -9,14 +9,6 @@ import { FC, useEffect,  useState } from 'react';
 import './UserPageContent.scss';
 import { useSearchParams } from 'next/navigation';
 import Soft404 from '@components/Soft404/Soft404';
-// import PostsCardsRenderer from '@components/cards/CardsRenderer/PostsCardsRenderer/PostsCardsRenderer';
-// import { faCamera } from '@fortawesome/free-solid-svg-icons/faCamera';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-//import AuthorPostsNavigation from '../../posts/[postType]/components/AuthorPostsNavigation';
-// import ProfileHeader from '../ProfileHeader';
-// import { uniqArrayBy } from '@repo/utils';
-// import { loading } from '@store/reducers/globalStateReducer';
-
 
 
 interface IProps {

@@ -1,7 +1,7 @@
 'use client';
 import React, {FC, useEffect, useState} from "react";
 import styled from "styled-components";
-import {dashboardAPIRequestBackupMetas} from "@repo/api-requests";
+
 import FileDownload from 'js-file-download'
 
 const Style = styled.div``;
@@ -43,15 +43,7 @@ const MetasSection: FC<PropTypes> = ({}) => {
     const onBackupMetasHandler = (e: React.MouseEvent<HTMLElement>) => {
         const metaType = (e.target as any).name
         const now = performance.now()
-        dashboardAPIRequestBackupMetas({
-            metaType,
-            fields :metasSelectedFields
 
-        }).then((response:{data:any})=>{
-            if (response?.data?.size){
-                FileDownload(response.data,`${metaType}${now.toLocaleString()}.json`)
-            }
-        })
     }
 
     return (

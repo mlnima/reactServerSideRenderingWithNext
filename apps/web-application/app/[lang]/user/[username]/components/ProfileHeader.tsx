@@ -1,5 +1,5 @@
 'use client';
-import { UserPreviewImage } from '@repo/ui';
+import UserPreviewImage from '@components/UserPreviewImage/UserPreviewImage';
 import React, { FC, useEffect, useState } from 'react';
 import ProfileImageWithEditing from './PrfileImageWithEditing/ProfileImageWithEditing';
 import UserPageActionButtons from './UserPageActionButtons/UserPageActionButtons';

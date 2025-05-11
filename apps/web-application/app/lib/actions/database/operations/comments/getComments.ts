@@ -12,7 +12,7 @@ const getComments = async (
     skip = 0,
     limit = 5,
   }: IGetComments): Promise<ServerActionResponse<{ comments: IComment[] } | null>> => {
-  // 'use cache';
+  'use cache';
   try {
     await connectToDatabase('getComments');
 
@@ -45,31 +45,15 @@ const getComments = async (
       ])
       .lean<IComment[]>();
 
-    comments = comments.map((doc) => {
-      if (doc._id) {
-        doc._id = doc._id.toString();
-      }
-      if (doc.onDocumentId) {
-        doc.onDocumentId = doc.onDocumentId.toString();
-      }
-      if (doc?.author?._id) {
-        doc.author._id = doc.author._id.toString();
-      }
-      if (doc?.author?.profileImage?._id) {
-        doc.author.profileImage._id = doc.author.profileImage._id.toString();
-      }
-      return doc;
-    });
-
-    // cacheTag(
-    //   'cacheItem',
-    //   `CComments-${onDocument}-${skip}-${limit}`,
-    //   `CComments-${onDocument}`,
-    // );
+    cacheTag(
+      'cacheItem',
+      `CComments-${onDocument}-${skip}-${limit}`,
+      `CComments-${onDocument}`,
+    );
 
     return successResponse({
       data: {
-        comments,
+        comments:JSON.parse(JSON.stringify(comments)),
       },
     });
   } catch (error) {

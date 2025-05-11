@@ -28,6 +28,8 @@ import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 export const generateMetadata = postMetaGenerator;
 
 const PostPage = async (props: IPageProps) => {
+
+
   const searchParams = await props.searchParams;
   const params = await props.params;
   const locale = localDetector(params.lang);
@@ -178,7 +180,7 @@ const PostPage = async (props: IPageProps) => {
             <WidgetsRenderer widgets={widgets?.['underPost']} position="underPost" hasSidebar={sidebar} locale={locale}
                              dictionary={dictionary} />
           </div>
-          {data?.post?.status === 'published' && <Comments dictionary={dictionary} postId={data?.post._id} />}
+          {(data.post._id && data?.post?.status === 'published') && <Comments dictionary={dictionary} postId={data.post._id} />}
 
         </main>
         <SidebarWidgetAreaRenderer

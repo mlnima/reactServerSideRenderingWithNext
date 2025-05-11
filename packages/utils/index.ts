@@ -18,6 +18,7 @@ export {
 } from './src/dates';
 
 export { touchDeviceDetector } from './src/devices';
+export { getCurrentDatePath } from './src/paths';
 
 
 export {

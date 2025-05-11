@@ -1,13 +1,17 @@
 import { models, model, Schema } from 'mongoose';
-import mongooseLeanVirtuals from 'mongoose-lean-virtuals';
 
 const metaSchema = new Schema({
   name: {
     type: String,
     trim: true,
     uppercase: false,
+    required: true
   },
-  type: String,
+  type: {
+    type: String,
+    enum: ['categories' , 'tags' , 'actors'],
+    required: true
+  },
   index: Number,
   description: String,
   status: {
@@ -31,7 +35,6 @@ const metaSchema = new Schema({
   },
 }, { timestamps: true });
 
-metaSchema.plugin(mongooseLeanVirtuals);
 metaSchema.index({ name: 1, type: 1 }, { unique: true });
 
 const MetaModel = models?.meta || model('meta', metaSchema);

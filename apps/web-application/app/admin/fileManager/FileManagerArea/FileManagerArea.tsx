@@ -81,19 +81,8 @@ const FileManagerArea: FC<IProps> = ({ uploadFile, setFileManagerState, fileMana
     );
   });
 
-  const onDropFileHandler = (e: any) => {
-    e.preventDefault();
-    const fileData = e.dataTransfer.files[0];
-    if (fileData) {
-      const filesData = new FormData();
-      filesData.append('token', localStorage.wt);
-      filesData.append('uploadingFile', fileData);
-      uploadFile(filesData);
-    }
-  };
-
   return (
-    <div id="FileManagerArea" onDrop={e => onDropFileHandler(e)}
+    <div id="FileManagerArea" onDrop={e => uploadFile(e)}
          onDragOver={e => e.preventDefault()}>
 
       {renderDir}

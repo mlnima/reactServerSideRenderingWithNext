@@ -25,7 +25,7 @@ const getPosts = async (
   totalCount: number,
   meta: IMeta | null,
 } | null >> => {
-  // 'use cache';
+  'use cache';
   try {
     await connectToDatabase('getPosts');
     const { initialSettings } = unwrapResponse(
@@ -36,15 +36,7 @@ const getPosts = async (
     const limit =
       count || initialSettings?.contentSettings?.contentPerPage || 20;
     const meta = metaId
-      ? await metaSchema.findById(metaId).lean<IMeta>({
-        virtuals: true,
-        transform: (doc: Document) => {
-          if (doc._id) {
-            doc._id = doc._id.toString();
-          }
-          return doc;
-        },
-      })
+      ? await metaSchema.findById(metaId).lean<IMeta>()
       : null;
 
     const metaQuery = metaId
@@ -86,26 +78,18 @@ const getPosts = async (
         .lean<IPost[]>()
       : [];
 
-
-    const transformedPosts = posts.map((post) => ({
-      ...post,
-      _id: post._id.toString(),
-    }));
-
-
-
-    // cacheTag(
-    //   'cacheItem',
-    //   `CgetPosts-${locale}${metaId ? `-${metaId}` : ''}${
-    //     page ? `-${page}` : ''
-    //   }${author ? `-${author}` : ''}`,
-    // );
+    cacheTag(
+      'cacheItem',
+      `CPosts-${locale}${metaId ? `-${metaId}` : ''}${
+        page ? `-${page}` : ''
+      }${author ? `-${author}` : ''}`,
+    );
 
 
     return successResponse({
       data: {
-        posts: transformedPosts as IPost[],
-        meta,
+        posts: JSON.parse(JSON.stringify(posts)),
+        meta: metaId ? JSON.parse(JSON.stringify(meta)) : null,
         totalCount : returnTotalCount ?  await postSchema.countDocuments(findPostsQueries) : 0,
       },
     });

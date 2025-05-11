@@ -1,15 +1,6 @@
 import AxiosInstance from '../lib/AxiosInstance';
 
-export const dashboardAPIRequestBulkActionOnPosts = async (
-    ids: string[],
-    status: string,
-) => {
-    return await AxiosInstance.patch('/api/dashboard/posts', {
-        ids,
-        status,
-        token: localStorage.wt,
-    });
-};
+
 
 export const dashboardAPIRequestCheckAndRemoveDeletedVideos = async () => {
     return await AxiosInstance.get(
@@ -39,17 +30,9 @@ export const dashboardAPIRequestGeneratePermaLinkForPosts = async (
     );
 };
 
-export const dashboardAPIRequestGetPost = async (_id: string) => {
-    return await AxiosInstance.get(
-        `/api/dashboard/post?_id=${_id}`,
-    );
-};
 
-export const dashboardAPIRequestGetPosts = async (queriesData: string) => {
-    return await AxiosInstance.get(
-        `/api/dashboard/posts${queriesData}`,
-    );
-};
+
+
 
 export const dashboardAPIRequestPostDataScrappers = async (
     urlToScrap: string,
@@ -71,15 +54,4 @@ export const dashboardAPIRequestFindAnotherSimilarSourceLink = async (
     );
 };
 
-export const dashboardAPIRequestScrapYoutubeInfo = async (url: string) => {
-    return await AxiosInstance.post('/api/dashboard/scrapper/scrapYoutubeInfo', {
-        url,
-        token: localStorage.wt,
-    });
-};
 
-export const dashboardAPIRequestUpdatePost = async (postData: {}) => {
-    return await AxiosInstance.put('/api/dashboard/post', {
-        postData
-    });
-};

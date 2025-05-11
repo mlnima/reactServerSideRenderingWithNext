@@ -46,10 +46,13 @@ const UserPageActionButtons: FC<IProps> = (
       }) as ServerActionResponse;
 
       if (!success) {
-        setAlert({
-          message: message || 'Something went wrong please try again later',
-          type: 'error',
-        });
+        dispatch(
+          setAlert({
+            message: message || 'Something went wrong please try again later',
+            type: 'error',
+          })
+        )
+
         return;
       }
 

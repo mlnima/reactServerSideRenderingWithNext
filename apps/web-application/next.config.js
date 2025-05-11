@@ -39,6 +39,9 @@ const nextConfig = {
   serverExternalPackages: ['mongoose'],
   experimental: {
     useCache: true,
+    serverActions: {
+      bodySizeLimit: '10mb',
+    },
     // dynamicIO: true,
     // esmExternals: 'loose',
     // instrumentationHook: true,

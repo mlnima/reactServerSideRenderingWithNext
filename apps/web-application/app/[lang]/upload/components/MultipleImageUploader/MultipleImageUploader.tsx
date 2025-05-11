@@ -87,7 +87,7 @@ const MultipleImageUploader: React.FC<MultipleImageUploaderProps> = ({
             src={
               image ||
               editingPost?.mainThumbnail ||
-              editingPost?.thumbnail?.filePath
+              `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${editingPost?.thumbnail?.filePath}`
             }
             alt=""
           />

@@ -33,6 +33,9 @@
         "allow": true,
         "maxCategories": 1,
         "maxTags": 5
+      },
+      "product": {
+        "allow": true
       }
     }
   },

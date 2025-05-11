@@ -3,7 +3,6 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
-import {  clientDeletePostByAuthor, updatePost } from '@repo/api-requests';
 import { capitalizeFirstLetter, imageCanvasCompressor, reduceArrayOfDataToIds } from '@repo/utils';
 import MultipleImageUploader from '../MultipleImageUploader/MultipleImageUploader';
 import MetaDataSelector from '../MetaDataSelector/MetaDataSelector';
@@ -25,9 +24,11 @@ import LoggedInRequirePageMessage from '@components/LoggedInRequireMessage/Logge
 import ForbiddenMessage from '@components/ForbiddenMessage/ForbiddenMessage';
 import { useSearchParams } from 'next/navigation';
 import { usePathname } from 'next/navigation';
-import { AxiosError, AxiosResponse } from 'axios';
 import getMeta from '@lib/actions/database/operations/metas/getMeta';
 import getEditingPost from '@lib/actions/database/operations/posts/getEditingPost';
+import deletePost from '@lib/actions/database/operations/posts/deletePost';
+import updatePost from '@lib/actions/database/operations/posts/updatePost';
+import { clearACacheByTag } from '@lib/serverActions';
 
 interface IProps {
   _id: string;
@@ -70,6 +71,15 @@ const UploadPageContent = ({ _id, postType, dictionary, locale }: IProps) => {
     }
   }, [_id, loggedIn]);
 
+  useEffect(() => {
+    const categoryParams = searchParams.get('category');
+    const category = categoryParams ? (Array.isArray(categoryParams) ? categoryParams[0] : categoryParams) : null;
+
+    if (category) {
+      void getPostMeta(category);
+    }
+  }, [searchParams, pathname]);
+
   const getPostMeta = async (_id: string) => {
     try {
       const {success,data} = await getMeta(_id);
@@ -83,22 +93,13 @@ const UploadPageContent = ({ _id, postType, dictionary, locale }: IProps) => {
     }
   };
 
-  useEffect(() => {
-    const categoryParams = searchParams.get('category');
-    const category = categoryParams ? (Array.isArray(categoryParams) ? categoryParams[0] : categoryParams) : null;
-
-    if (category) {
-      void getPostMeta(category);
-    }
-  }, [searchParams, pathname]);
-
   const getEditingPostData = async () => {
     const { success, data }= await getEditingPost({ _id});
 
     if (!success || !data){
       return
     }
-
+    console.log(`data=> `,data)
     setEditingPost(data.post);
     setEditingPostOriginal(data.post);
   };
@@ -112,26 +113,8 @@ const UploadPageContent = ({ _id, postType, dictionary, locale }: IProps) => {
     setEditingPost(prevState => ({ ...prevState, [e.target.name]: e.target.value }));
   };
 
-  // const onReactSelectChangeHandler = (name:string,value:string) => {
-  //     setEditingPost((prevState: any) => ({ ...prevState, [name]: value }));
-  // };
-
-  // const onUniqueFieldsChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //     setEditingPost(prevState => ({
-  //         ...prevState,
-  //         uniqueData: { ...(prevState?.uniqueData || {}), [e.target.name]: e.target.value },
-  //     }));
-  // };
-
-  // const onMetaChangeHandler = (metas: object, metaType: string) => {
-  //     setEditingPost(prevState => ({
-  //         ...prevState,
-  //         [metaType]: metas,
-  //     }));
-  // };
-
   const onSaveHandler = async () => {
-    if (deepEqual(editingPost, editingPostOriginal) && fileInputRef.current.files.length < 1) {
+    if (deepEqual(editingPost, editingPostOriginal) && (!fileInputRef.current || fileInputRef.current.files.length < 1)) {
       dispatch(
         setAlert({
           type: 'error',
@@ -142,74 +125,100 @@ const UploadPageContent = ({ _id, postType, dictionary, locale }: IProps) => {
     }
 
     const formData = new FormData();
+    let imageToProcess: File | undefined = undefined;
 
-    const image = fileInputRef.current.files?.[0] || fileInputRef.current.files?.[0];
+    if (fileInputRef.current?.files?.length) {
+      imageToProcess = fileInputRef.current.files[0];
+    }
 
-    if (image) {
-      formData.append(
-        'thumbnail',
-        await imageCanvasCompressor({
-          image,
+    if (imageToProcess) {
+      try {
+        const compressedImageFile = await imageCanvasCompressor({
+          image: imageToProcess,
           outputType: 'file',
           maxWidth: 320,
           maxHeight: 180,
-        }),
-      );
+        });
+        formData.append('thumbnail', compressedImageFile, imageToProcess.name);
+      } catch (compressionError) {
+        console.error("Image compression error:", compressionError);
+        dispatch(setAlert({ type: 'error', message: 'Failed to compress image.' }));
+        return;
+      }
     }
 
-    const comments = editingPost?.comments ? { comments: reduceArrayOfDataToIds(editingPost.comments) } : {};
-    const images = editingPost?.images ? { images: reduceArrayOfDataToIds(editingPost?.images) } : {};
-    const categories = editingPost?.categories
-      ? { categories: reduceArrayOfDataToIds(editingPost.categories) }
-      : {};
-    const tags = editingPost?.tags ? { tags: reduceArrayOfDataToIds(editingPost.tags) } : {};
-    const actors = editingPost?.actors ? { actors: reduceArrayOfDataToIds(editingPost.actors) } : {};
-    const author = editingPost?.author?._id
-      ? { author: editingPost?.author?._id }
-      : !_id && !editingPost?.author?._id
-        ? { author: userData?._id }
-        : {};
-    const thumbnail = editingPost?.thumbnail?._id ? { thumbnail: editingPost?.thumbnail?._id } : {};
+    const reduceArrayOfDataToIds = (arr: any[] | undefined): string[] =>
+      arr?.map(item => item._id || item).filter(id => !!id) || [];
 
-    const editedPost = {
+    const postDataForForm: Partial<IPost> = {
       ...editingPost,
-      ...images,
-      ...comments,
-      ...categories,
-      ...author,
-      ...tags,
-      ...actors,
-      ...thumbnail,
+      comments: editingPost?.comments ? reduceArrayOfDataToIds(editingPost.comments) : undefined,
+      images: editingPost?.images ? reduceArrayOfDataToIds(editingPost.images) : undefined,
+      categories: editingPost?.categories ? reduceArrayOfDataToIds(editingPost.categories) : undefined,
+      tags: editingPost?.tags ? reduceArrayOfDataToIds(editingPost.tags) : undefined,
+      actors: editingPost?.actors ? reduceArrayOfDataToIds(editingPost.actors) : undefined,
     };
 
-    formData.append('data', JSON.stringify(editedPost));
+    if (editingPost?.author?._id) {
+      postDataForForm.author = editingPost.author._id;
+    } else if (!editingPost?._id && !editingPost?.author?._id && userData?._id) {
+      postDataForForm.author = userData._id;
+    } else if (postDataForForm.hasOwnProperty('author')) {
+      delete postDataForForm.author;
+    }
 
-    await updatePost(formData)
-      .then((res: AxiosResponse) => {
-        dispatch(
-          setAlert({
-            type: 'success',
-            message: res.data.message,
-          }),
-        );
 
-        if (!editedPost._id && res.data?.postId) {
-          const localeToSet = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? '' : `/${locale}`;
-          router.push(`${localeToSet}/upload?_id=${res.data?.postId}`);
-        } else {
-          getEditingPostData();
-        }
-      })
-      .catch((error: AxiosError) => {
+    if (imageToProcess) {
+      postDataForForm.thumbnail = undefined;
+    } else {
+      if (editingPost?.thumbnail) {
+        postDataForForm.thumbnail = editingPost.thumbnail;
+      } else {
+        postDataForForm.thumbnail = null;
+      }
+    }
+
+    formData.append('data', JSON.stringify(postDataForForm));
+
+    dispatch(setAlert({ type: 'info', message: 'Submitting post...' }));
+
+    try {
+      const result = await updatePost(formData);
+
+      if (!result.success) {
         dispatch(
           setAlert({
             type: 'error',
-            //@ts-expect-error message might not defined
-            message: (error.response?.data?.message as string) || '',
+            message: result.message || 'An error occurred while updating the post.',
           }),
         );
-      });
+      } else {
+        dispatch(
+          setAlert({
+            type: 'success',
+            message: result.message,
+          }),
+        );
+
+        if (!editingPost?._id && result.data?.postId) {
+          const localeToSet = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? '' : `/${locale}`;
+          router.push(`${localeToSet}/upload?_id=${result.data.postId}`);
+        } else {
+          getEditingPostData();
+        }
+      }
+    } catch (error) {
+      console.error("Error submitting post:", error);
+      dispatch(
+        setAlert({
+          type: 'error',
+          message: (error instanceof Error ? error.message : 'An unexpected error occurred.'),
+        }),
+      );
+    }
   };
+
+
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -239,17 +248,17 @@ const UploadPageContent = ({ _id, postType, dictionary, locale }: IProps) => {
   };
 
   const onDeleteHandler = async () => {
-    const deletePostRequestResult = await clientDeletePostByAuthor(editingPost?._id);
+
+    const {success,error,message} = await deletePost({_id:editingPost?._id})
     dispatch(
       setAlert({
-        message: deletePostRequestResult?.data?.message,
-        type: 'success',
+        message,
+        type: success ?  'success' : 'error',
+        error
       }),
     );
     router.push(locale === process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? '/' : `/${locale}`);
   };
-
-  console.log(`postByUserSettings=> `, postByUserSettings);
 
   if (!loggedIn) return <LoggedInRequirePageMessage dictionary={dictionary} />;
 
@@ -551,25 +560,83 @@ const UploadPageContent = ({ _id, postType, dictionary, locale }: IProps) => {
 
 export default UploadPageContent;
 
-// {editingPost.status !== 'published' &&
-// <button
-//     type={'button'}
-//     onClick={async () => await savePostData({ status: 'draft' })}
-//     className={'btn btn-info submitButton'}
-// >
-//     <FontAwesomeIcon icon={faFilePen} className={'meta-icon'} />
-//     {dictionary?.['Draft'] || 'Draft'}
-// </button>
-// }
-
-// <label>
-//     <span>{dictionary?.['Category'] || 'Category'}: </span>
+// const onSaveHandler = async () => {
+//   if (deepEqual(editingPost, editingPostOriginal) && fileInputRef.current.files.length < 1) {
+//     dispatch(
+//       setAlert({
+//         type: 'error',
+//         message: 'You need to make changes in order to resubmit the post',
+//       }),
+//     );
+//     return;
+//   }
 //
-//     {editingPost?.categories?.map((category: any) => {
-//         return (
-//             <span className={'category'} key={category}>
-//                                             {category?.name}
-//                                         </span>
-//         );
-//     })}
-// </label>
+//   const formData = new FormData();
+//
+//   const image = fileInputRef.current.files?.[0] || fileInputRef.current.files?.[0];
+//
+//   if (image) {
+//     formData.append(
+//       'thumbnail',
+//       await imageCanvasCompressor({
+//         image,
+//         outputType: 'file',
+//         maxWidth: 320,
+//         maxHeight: 180,
+//       }),
+//     );
+//   }
+//
+//   const comments = editingPost?.comments ? { comments: reduceArrayOfDataToIds(editingPost.comments) } : {};
+//   const images = editingPost?.images ? { images: reduceArrayOfDataToIds(editingPost?.images) } : {};
+//   const categories = editingPost?.categories
+//     ? { categories: reduceArrayOfDataToIds(editingPost.categories) }
+//     : {};
+//   const tags = editingPost?.tags ? { tags: reduceArrayOfDataToIds(editingPost.tags) } : {};
+//   const actors = editingPost?.actors ? { actors: reduceArrayOfDataToIds(editingPost.actors) } : {};
+//   const author = editingPost?.author?._id
+//     ? { author: editingPost?.author?._id }
+//     : !_id && !editingPost?.author?._id
+//       ? { author: userData?._id }
+//       : {};
+//   const thumbnail = editingPost?.thumbnail?._id ? { thumbnail: editingPost?.thumbnail?._id } : {};
+//
+//   const editedPost = {
+//     ...editingPost,
+//     ...images,
+//     ...comments,
+//     ...categories,
+//     ...author,
+//     ...tags,
+//     ...actors,
+//     ...thumbnail,
+//   };
+//
+//   formData.append('data', JSON.stringify(editedPost));
+//
+//   await updatePost(formData)
+//     .then((res: AxiosResponse) => {
+//       dispatch(
+//         setAlert({
+//           type: 'success',
+//           message: res.data.message,
+//         }),
+//       );
+//
+//       if (!editedPost._id && res.data?.postId) {
+//         const localeToSet = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? '' : `/${locale}`;
+//         router.push(`${localeToSet}/upload?_id=${res.data?.postId}`);
+//       } else {
+//         getEditingPostData();
+//       }
+//     })
+//     .catch((error: AxiosError) => {
+//       dispatch(
+//         setAlert({
+//           type: 'error',
+//           //@ts-expect-error message might not defined
+//           message: (error.response?.data?.message as string) || '',
+//         }),
+//       );
+//     });
+// };

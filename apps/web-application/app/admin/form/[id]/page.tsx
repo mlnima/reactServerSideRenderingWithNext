@@ -2,11 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { useAppDispatch } from '@store/hooks';
-import { dashboardAPIRequestDeleteForm } from '@repo/api-requests';
 import './styles.scss';
 import dashboardGetForm from '@lib/actions/database/operations/forms/dashboardGetForm';
 import { setAlert } from '@store/reducers/globalStateReducer';
 import { IForm } from '@repo/typescript-types';
+import dashboardDeleteForm from '@lib/actions/database/operations/forms/dashboardDeleteForm';
 
 const Form = () => {
   const dispatch = useAppDispatch();
@@ -40,9 +40,10 @@ const Form = () => {
 
   const onDeleteHandler = async () => {
     if (params.id) {
-      await dashboardAPIRequestDeleteForm(params.id).then(() => {
-        router.push(`/dashboard/assets?assetsType=forms&size=20&lastUpdate=${performance.now()}`, { scroll: false });
-      });
+      const {success} = await dashboardDeleteForm({ _id })
+      if (success) {
+        router.push(`/admin/assets?assetsType=forms&size=20&lastUpdate=${performance.now()}`)
+      }
     }
   };
 

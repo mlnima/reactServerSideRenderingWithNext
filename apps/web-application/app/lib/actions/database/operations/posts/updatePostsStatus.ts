@@ -1,5 +1,7 @@
 'use server';
 import { postSchema,connectToDatabase } from '@repo/db';
+import fs from 'fs/promises';
+import path from 'path';
 
 export interface IUpdatePosts{
   ids: string[],

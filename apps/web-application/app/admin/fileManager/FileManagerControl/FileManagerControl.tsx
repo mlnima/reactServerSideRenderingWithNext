@@ -39,12 +39,37 @@ const FileManagerControl: FC<IProps> = ({ uploadFile, setFileManagerState,fileMa
       }));
     };
 
-    const onUploadHandler = (e: any) => {
-        const filesData = new FormData();
-        filesData.append('token', localStorage.wt);
-        filesData.append('uploadingFile', e.target.files[0]);
-        uploadFile(filesData);
-    };
+  // const onUploadHandler = async (e: React.ChangeEvent<HTMLInputElement> | DragEvent) => {
+  //   let file: File | null = null;
+  //
+  //   if ('dataTransfer' in e && e.dataTransfer?.files?.[0]) {
+  //     e.preventDefault();
+  //     file = e.dataTransfer.files[0];
+  //   } else if ('target' in e && (e.target as HTMLInputElement).files?.[0]) {
+  //     file = (e.target as HTMLInputElement).files![0];
+  //   }
+  //
+  //   if (!file) return;
+  //
+  //   const formData = new FormData();
+  //   formData.append('file', file);
+  //
+  //   await dashboardUploadFile({ file: formData });
+  //
+  //   setFileManagerState((prevState: any) => ({
+  //     ...prevState,
+  //     lastUpdate: performance.now(),
+  //   }));
+  // };
+    // const onUploadHandler =async (e: any) => {
+    //     const filesData = new FormData();
+    //     filesData.append('uploadingFile', e.target.files[0]);
+    //     await dashboardUploadFile({file:filesData})
+    //   setFileManagerState((prevState:any)=>({
+    //     ...prevState,
+    //     lastUpdate:performance.now()
+    //   }))
+    // };
 
     const onCreateNewFileClickHandler = (type: any) => {
       setFileManagerState((prevState:any) => ({
@@ -73,27 +98,23 @@ const FileManagerControl: FC<IProps> = ({ uploadFile, setFileManagerState,fileMa
                 </button>
             </div>
             <div className="file-Manager-control-quick-access">
-                <button onClick={() => editFileManagerState({ path: '.' })}
+                <button onClick={() => editFileManagerState({ path: '/public/uploads' })}
                         className={'btn btn-navigation'}>
                     Root
                 </button>
-                <button onClick={() => editFileManagerState({ path: './public/uploads/image' })}
+                <button onClick={() => editFileManagerState({ path: '/public/uploads/images' })}
                         className={'btn btn-navigation'}>
                     Images
                 </button>
-                <button onClick={() => editFileManagerState({ path: './public' })}
-                        className={'btn btn-navigation'}>
-                    Public
-                </button>
-                <button onClick={() => editFileManagerState({ path: './public/uploads/video' })}
+                <button onClick={() => editFileManagerState({ path: '/public/uploads/video' })}
                         className={'btn btn-navigation'}>
                     Videos
                 </button>
-                <button onClick={() => editFileManagerState({ path: './public/uploads/application' })}
+                <button onClick={() => editFileManagerState({ path: '/public/uploads/applications' })}
                         className={'btn btn-navigation'}>Applications
                 </button>
                 <input ref={uploadInputElement} type='file' style={{ display: 'none' }}
-                       onChange={e => onUploadHandler(e)} />
+                       onChange={e => uploadFile(e)} />
                 {/*//@ts-ignore*/}
                 <button onClick={() => uploadInputElement.current.click()} className={'btn btn-navigation'}>Upload
                 </button>

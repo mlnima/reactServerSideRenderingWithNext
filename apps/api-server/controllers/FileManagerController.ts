@@ -33,7 +33,6 @@ class FileManagerController {
             if (isValidObjectId(userData?.profileImage)) {
                 try {
                     const profileImageDocument = await fileSchema.findById(userData?.profileImage).exec();
-                    console.log('profileImageDocument=> ', profileImageDocument);
                     if (!profileImageDocument?.filePath.includes('http')) {
                         await fsExtra.unlink(path.join(__dirname, '../../../../', profileImageDocument.filePath));
                         await fileSchema.findByIdAndDelete(userData?.profileImage).exec();

@@ -1,6 +1,5 @@
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
-
 config.autoAddCss = false;
 import '@components/global/styles/global.styles.scss';
 import ReduxProvider from '@store/ReduxProvider';

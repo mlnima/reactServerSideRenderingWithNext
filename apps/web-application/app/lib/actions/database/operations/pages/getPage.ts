@@ -2,11 +2,12 @@
 import { pageSchema, connectToDatabase } from '@repo/db';
 import { errorResponse, ServerActionResponse, successResponse } from '@lib/actions/response';
 import { IPage } from '@repo/typescript-types';
+import { unstable_cacheTag as cacheTag } from 'next/cache';
 
 const getPage = async ({ pageName }: { pageName: string }): Promise<ServerActionResponse<{
   pageData: IPage
 } | null>> => {
-  // 'use cache';
+  'use cache';
   try {
     if (!pageName) {
       return errorResponse({
@@ -21,8 +22,9 @@ const getPage = async ({ pageName }: { pageName: string }): Promise<ServerAction
         message: 'Not Found',
       });
     }
-    // cacheTag('cacheItem', `CPage-${pageName}`);
-    //
+
+    cacheTag('cacheItem', `CPage-${pageName}`);
+
     return successResponse({
       data: {
         pageData: JSON.parse(JSON.stringify(pageData)),

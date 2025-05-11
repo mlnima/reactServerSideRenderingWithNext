@@ -30,6 +30,41 @@
     border-radius: 10px;
     min-width: 80vw;
     min-height: 80vh;
+    .uploaded-pop-view-image{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .uploaded-pop-view-image-element {
+        width: 90%;
+        max-width: 450px;
+        padding: 5px;
+      }
+    }
+    .uploaded-pop-view-video{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .uploaded-pop-view-video-element {
+        width: 90%;
+        max-width: 450px;
+        padding: 5px;
+      }
+    }
+    .uploaded-pop-view-text{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      height: 400px;
+
+      .uploaded-pop-view-text-element {
+        width: 100%;
+        min-width: 95%;
+        height: 400px;
+      }
+    }
 
     .uploaded-pop-view-url {
       margin: 10px 0;

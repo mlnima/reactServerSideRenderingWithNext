@@ -60,7 +60,7 @@ const PostByUserSettings: React.FC<PropTypes> = ({ setInitialSettingsData, initi
               </div>
 
               <div className={'checkboxFieldItemSection'}>
-                <p>Maximum Categories</p>
+                <p>Max Categories</p>
                 <input
                   onChange={e => onChangeHandler(e, postType)}
                   type={'number'}
@@ -71,7 +71,7 @@ const PostByUserSettings: React.FC<PropTypes> = ({ setInitialSettingsData, initi
               </div>
 
               <div className={'checkboxFieldItemSection'}>
-                <p>Maximum Tags</p>
+                <p>Max Tags</p>
                 <input
                   onChange={e => onChangeHandler(e, postType)}
                   type={'number'}
@@ -83,7 +83,7 @@ const PostByUserSettings: React.FC<PropTypes> = ({ setInitialSettingsData, initi
 
               {postType === 'video' && (
                 <div className={'checkboxFieldItemSection'}>
-                  <p>Maximum Actors</p>
+                  <p>Max Actors</p>
                   <input
                     onChange={e => onChangeHandler(e, postType)}
                     type={'number'}

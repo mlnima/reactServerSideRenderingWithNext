@@ -5,10 +5,11 @@ import { LanguagesOptions } from '@repo/ui';
 import MonacoEditor from '@components/textEditors/MonacoEditor';
 import { useSearchParams } from 'next/navigation';
 import { useAppDispatch } from '@store/hooks';
-import { dashboardAPIRequestGetSettings } from '@repo/api-requests';
 import './styles.scss';
 import dashboardUpdateSettings from '@lib/actions/database/operations/settings/dashboardUpdateSettings';
-
+import getSettings from '@lib/actions/database/operations/settings/getSettings';
+import { ServerActionResponse } from '@lib/actions/response';
+import { setAlert } from '@store/reducers/globalStateReducer';
 
 interface PropTypes {
 }
@@ -16,7 +17,7 @@ interface PropTypes {
 const EditDefaultPage: React.FC<PropTypes> = () => {
   const dispatch = useAppDispatch();
   const searchParams = useSearchParams();
-  const pageName = useMemo(() => searchParams.get('pageName'), [searchParams]);
+  const pageName = searchParams.get('pageName')
   const [openStyleEditor, setOpenStyleEditor] = useState(false);
   const [language, setLanguage] = useState('default');
   const [headEditor, setHeadEditor] = useState(false);
@@ -35,13 +36,22 @@ const EditDefaultPage: React.FC<PropTypes> = () => {
   const dynamicSettingsPageMatcher = /homePageSettings|postPageSettings/g;
   const [fieldsData, setFieldsData] = useState(defaultPageData);
 
-  useEffect(() => {
+  const getPageSettings = async ()=>{
     if (pageName) {
-      dashboardAPIRequestGetSettings([pageName]).then((response: { data: any }) => {
-        const settingData = response?.data?.settings?.[pageName]?.data || defaultPageData;
-        setFieldsData(settingData || {});
-      });
+      const {success,data,message,error} = await getSettings([pageName]) as unknown as ServerActionResponse<{
+        pageName: object;
+      }>
+      if (!success) {
+        dispatch(setAlert({ message, type: 'error', active: true }));
+        return;
+      }
+      const settingData = data?.[pageName] || defaultPageData;
+      setFieldsData(settingData || {});
     }
+  }
+
+  useEffect(() => {
+    getPageSettings()
   }, [searchParams, pageName]);
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLTextAreaElement>) => {

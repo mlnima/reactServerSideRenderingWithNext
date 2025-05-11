@@ -211,7 +211,7 @@ class PostController {
 
             const countUserPendingPosts = await postSchema.countDocuments({
                 $and: [
-                    {author: req.userData._id},
+                    {author: req.u-erData._id},
                     {status: 'pending'}
                 ]
             })

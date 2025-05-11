@@ -1,12 +1,12 @@
 'use server';
 import { connectToDatabase, widgetSchema } from '@repo/db';
 import { IWidget } from '@repo/typescript-types';
-// import { unstable_cacheTag as cacheTag } from 'next/cache';
+import { unstable_cacheTag as cacheTag } from 'next/cache';
 import { findWidgetMetas, findWidgetPosts } from '@lib/actions/database/operations/widgets/helpers';
 // import { deepConvertObjectIdsToStrings } from '@repo/utils-server/dist/src/objects';
 
 const getWidgets = async (positions: string[], locale: string): Promise<{ [key: string]: [] }> => {
-  // 'use cache';
+  'use cache';
   await connectToDatabase('getWidgets');
   let result = {};
   const widgets = await widgetSchema.find({
@@ -61,11 +61,7 @@ const getWidgets = async (positions: string[], locale: string): Promise<{ [key: 
     return widgetInPositions;
   }, {});
 
-
-
-
-
-  // cacheTag('cacheItem', `CWidgets-${positions.join('-')}`);
+  cacheTag('cacheItem', `CWidgets-${positions.join('-')}`);
   return result;
 };
 

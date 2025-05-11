@@ -4,23 +4,21 @@ import React, { useEffect, useState } from 'react';
 import FileManagerControl from './FileManagerControl/FileManagerControl';
 import FileManagerArea from './FileManagerArea/FileManagerArea';
 import UploadedPopView from './UploadedPopView/UploadedPopView';
-import CreateNewFileFolderPop from './CreateNewFileFolderPop/CreateNewFileFolderPop';
+//import CreateNewFileFolderPop from './CreateNewFileFolderPop/CreateNewFileFolderPop';
 import { useAppDispatch } from '@store/hooks';
 import './styles.scss';
-import {
-  dashboardAPIRequestCreateFileOrFolder,
-  dashboardAPIRequestDeleteFile,
-  dashboardAPIRequestReadPath, dashboardAPIRequestUploadFile,
-} from '@repo/api-requests';
 import { loading, setAlert } from '@store/reducers/globalStateReducer';
-import { AxiosResponse } from 'axios';
+import dashboardReadPath from '@lib/actions/database/operations/fileManager/dashboardReadPath';
+import { ServerActionResponse } from '@lib/actions/response';
+import dashboardDeleteFile from '@lib/actions/database/operations/fileManager/dashboardDeleteFile';
+import dashboardUploadFile from '@lib/actions/database/operations/fileManager/dashboardUploadFile';
 
 const FileManagerPage = () => {
   const dispatch = useAppDispatch();
 
   const [fileManagerState, setFileManagerState] = useState({
-    path: './public',
-    prevPath: './public',
+    path: '/public/uploads',
+    prevPath: '/public/uploads',
     files: [],
     clickedItem: '',
     clickedItemName: '',
@@ -44,15 +42,22 @@ const FileManagerPage = () => {
 
   const readPath = async () => {
     try {
-      const { data } = await dashboardAPIRequestReadPath(fileManagerState.path);
+      //const { data } = await dashboardAPIRequestReadPath(fileManagerState.path);
+      const {success,data,error,message} = await dashboardReadPath({targetPath:fileManagerState.path}) as unknown as ServerActionResponse<{data:[],type:'file'|'dir'}>
+      console.log(`data=> `,data)
+      if (!success || !data?.data) {
+        dispatch(setAlert({ message, type: 'error', active: true,error }));
+        return;
+      }
+
 
       if (data?.type === 'dir') {
         setFileManagerState(prevState => ({
           ...prevState,
           files: data.data,
         }));
-      } else if (data?.type === 'file') {
-        setFileManagerState(prevState => ({
+      } else if (data?.type === 'file' && data?.data) {
+        setFileManagerState((prevState:any) => ({
           ...prevState,
           clickedItem: fileManagerState.path,
           path: fileManagerState.prevPath,
@@ -65,10 +70,49 @@ const FileManagerPage = () => {
     }
   };
 
-  const deleteFile = async (filePath: string) => {
+  const uploadFile = async (e: React.ChangeEvent<HTMLInputElement> | DragEvent) => {
+    dispatch(loading(true));
+    try {
+      let file: File | null = null;
+
+      if ('dataTransfer' in e && e.dataTransfer?.files?.[0]) {
+        e.preventDefault();
+        file = e.dataTransfer.files[0];
+      } else if ('target' in e && (e.target as HTMLInputElement).files?.[0]) {
+        file = (e.target as HTMLInputElement).files![0];
+      }
+
+      if (!file) return;
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const {success,data,error,message} = await dashboardUploadFile({ file: formData }) ;
+
+      if (!success || !data?.filePath) {
+        dispatch(loading(false));
+        dispatch(setAlert({ message, type: 'error', active: true ,error}));
+        return;
+      }
+
+      setFileManagerState(prevState => ({
+        ...prevState,
+        clickedItem: data?.filePath?.replace('./', ''),
+        clickedItemName: data?.filePath?.split('/')[data?.filePath?.split('/')?.length - 1],
+        lastUpdate: performance.now(),
+      }));
+      dispatch(loading(false));
+
+    }catch (error){
+      dispatch(loading(false));
+    }
+
+  };
+
+  const deleteFile = async (targetPath: string) => {
     try {
       dispatch(loading(true));
-      await dashboardAPIRequestDeleteFile(filePath);
+      await dashboardDeleteFile({targetPath});
       setFileManagerState(prevState => ({
         ...prevState,
         clickedItem: '',
@@ -91,37 +135,24 @@ const FileManagerPage = () => {
     }));
   };
 
-  const createNewFileFolderPopHandler = (type: string) => {
-    setFileManagerState(prevState => ({
-      ...prevState,
-      createNewFileFolderPop: !prevState.createNewFileFolderPop,
-      createNewFileFolderPopType: type,
-    }));
-  };
-  const createFolderHandler = async (data: {}) => {
-    try {
-      dispatch(loading(true));
-      await dashboardAPIRequestCreateFileOrFolder(data);
-      dispatch(loading(false));
-    } catch (error) {
-    }
-    dispatch(loading(false));
-  };
+  // const createNewFileFolderPopHandler = (type: string) => {
+  //   setFileManagerState(prevState => ({
+  //     ...prevState,
+  //     createNewFileFolderPop: !prevState.createNewFileFolderPop,
+  //     createNewFileFolderPopType: type,
+  //   }));
+  // };
+  // const createFolderHandler = async (data: {}) => {
+  //   try {
+  //     dispatch(loading(true));
+  //     await dashboardAPIRequestCreateFileOrFolder(data);
+  //     dispatch(loading(false));
+  //   } catch (error) {
+  //   }
+  //   dispatch(loading(false));
+  // };
 
-  const uploadFile = async (file: any) => {
-    try {
-      dispatch(loading(true));
-      const uploadedFile = await dashboardAPIRequestUploadFile(file) as AxiosResponse<{ path: string }>;
-      setFileManagerState(prevState => ({
-        ...prevState,
-        clickedItem: uploadedFile.data?.path?.replace('./', ''),
-        clickedItemName: uploadedFile.data?.path?.split('/')[uploadedFile?.data?.path?.split('/')?.length - 1],
-      }));
-      dispatch(loading(false));
-    } catch (error) {
-      dispatch(loading(false));
-    }
-  };
+
 
   return (
     <div>
@@ -129,19 +160,19 @@ const FileManagerPage = () => {
                        closePopView={closePopView} setFileManagerState={setFileManagerState}
                        fileManagerState={fileManagerState}/>
       <div className="fileManager">
-        <FileManagerControl uploadFile={uploadFile} setFileManagerState={setFileManagerState} fileManagerState={fileManagerState} />
+        <FileManagerControl uploadFile={uploadFile}  setFileManagerState={setFileManagerState} fileManagerState={fileManagerState} />
         <FileManagerArea uploadFile={uploadFile} setFileManagerState={setFileManagerState} fileManagerState={fileManagerState} />
       </div>
 
-      {fileManagerState.createNewFileFolderPop &&
-        <CreateNewFileFolderPop
-          render={fileManagerState.createNewFileFolderPop}
-          createFolderHandler={createFolderHandler}
-          createNewFileFolderPopType={fileManagerState.createNewFileFolderPopType}
-          state={fileManagerState}
-          setState={setFileManagerState}
-        />
-      }
+      {/*{fileManagerState.createNewFileFolderPop &&*/}
+      {/*  <CreateNewFileFolderPop*/}
+      {/*    render={fileManagerState.createNewFileFolderPop}*/}
+      {/*    createFolderHandler={createFolderHandler}*/}
+      {/*    createNewFileFolderPopType={fileManagerState.createNewFileFolderPopType}*/}
+      {/*    state={fileManagerState}*/}
+      {/*    setState={setFileManagerState}*/}
+      {/*  />*/}
+      {/*}*/}
 
     </div>
   );

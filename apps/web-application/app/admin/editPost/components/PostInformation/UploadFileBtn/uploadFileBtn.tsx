@@ -6,7 +6,7 @@ import { useAppDispatch } from '@store/hooks'; // Updated import path
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload } from '@fortawesome/free-solid-svg-icons/faUpload';
 import { loading } from '@store/reducers/globalStateReducer';
-import { dashboardAPIRequestUploadFile } from '@repo/api-requests';
+// import { dashboardAPIRequestUploadFile } from '@repo/api-requests';
 import { AxiosResponse } from 'axios';
 
 const UploadFileBtnStyledDiv = styled.div`
@@ -48,7 +48,7 @@ const UploadFileBtn: FC<PropType> = (props) => {
             props.name === 'VideoTrailerUrl' ? 'postVideoTrailerUrl' :
               'fileManagerFileUpload';
 
-      const uploadedFile = await dashboardAPIRequestUploadFile(filesData) as AxiosResponse<{ path: string }>;
+      // const uploadedFile = await dashboardAPIRequestUploadFile(filesData) as AxiosResponse<{ path: string }>;
 
       //
       // dispatch(uploadFileAction({ file: filesData, useType: fileUseType }));

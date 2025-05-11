@@ -2,10 +2,12 @@
 
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { getUserSuggestionList } from '@repo/api-requests';
 import AsyncSelect from 'react-select/async';
 import { reactSelectPrimaryTheme } from '@repo/data-structures';
 import { IPost, User } from '@repo/typescript-types';
+import getUsersSuggestionList from '@lib/actions/database/operations/users/getUsersSuggestionList';
+import { setAlert } from '@store/reducers/globalStateReducer';
+import { useAppDispatch } from '@store/hooks';
 
 const Style = styled.div`
     width: 100%;
@@ -22,13 +24,19 @@ interface SelectOption {
 }
 
 const Author: FC<PropTypes> = ({ author, setPost }) => {
-
+  const dispatch = useAppDispatch();
   const onLoadOptionsHandler = async (input: string) => {
     if (!input) return;
 
-    const suggestionList = await getUserSuggestionList(input);
-    if (suggestionList.data?.users && suggestionList.data?.users?.length > 0) {
-      return suggestionList.data.users.reduce((final: SelectOption[], current: { _id: string, username: string }) => {
+    const {success, error, data, message} = await getUsersSuggestionList({keyword:input})
+
+    if (!success) {
+      dispatch(setAlert({ message, type: 'error', active: true,error }));
+      return;
+    }
+
+    if (data?.users && data?.users?.length > 0) {
+      return data.users.reduce((final: SelectOption[], current: { _id: string, username: string }) => {
         final = [...final, { value: current._id, label: current.username }];
         return final;
       }, []);

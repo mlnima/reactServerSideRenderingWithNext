@@ -1,19 +1,20 @@
-'use client';
+'use client'
 import React, { FC } from 'react';
 import { useAppSelector } from '@store/hooks';
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import './PostAdminOrAuthorQuickAccessBar.scss';
 import PostQuickAccessPostInformation from './PostQuickAccessPostInformation';
-import { clearACacheByTag } from '@lib/serverActions';
+import { clearACacheByPath, clearACacheByTag } from '@lib/serverActions';
 import updatePostStatus from '@lib/actions/database/operations/posts/updatePostStatus';
 
+
 interface IProps {
-  postId: string | null,
+  postId?: string | null,
   authorId?: string,
-  status: string,
-  createdAt: string,
-  updatedAt: string,
+  status?: string,
+  createdAt?: string,
+  updatedAt?: string,
   dictionary: {
     [key: string]: string;
   };
@@ -42,11 +43,14 @@ const PostAdminOrAuthorQuickAccessBar: FC<IProps> = (
   };
 
   const onClearCacheHandler = async () => {
+    // await  clearACacheByPath('/post/[postType]/[identifier]','page')
     await clearACacheByTag(`CPost-${postId}`);
     await clearACacheByTag(`CPostViews-${postId}`);
     await clearACacheByTag(`CPostRating-${postId}`);
     await clearACacheByTag(`CComments-${postId}`);
   };
+
+
 
   if (userData.role !== 'administrator' && authorId === userData?._id) {
     return (
@@ -77,7 +81,7 @@ const PostAdminOrAuthorQuickAccessBar: FC<IProps> = (
                 </span>
             <Link
               className="btn btn-primary"
-              href={`/dashboard/post?id=${postId}`}
+              href={`/admin/editPost?id${postId}`}
               target="_blank"
             >
               Edit As Admin

@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { IContentSettings, IPost } from '@repo/typescript-types';
 import dynamic from 'next/dynamic';
-import './PostsCardsRenderer.scss';
-
+// import './PostsCardsRenderer.scss';
+import '../staticCardsWrapper.styles.scss'
 const ArticlePostCard = dynamic(() => import('../../cardsComponents/ArticlePostCard/ArticlePostCard'));
 const PromotionPostCard = dynamic(() => import('../../cardsComponents/PromotionPostCard/PromotionPostCard'));
 const LearnPostCard = dynamic(() => import('../../cardsComponents/LearnPostCard/LearnPostCard'));
@@ -31,7 +31,8 @@ const PostsCardsRenderer: FC<IProps> = async (
   }) => {
 
   return (
-    <div className={`postsCardsWrapper${isSidebar ? 'Sidebar' : ''}`}>
+    // <div className={`postsCardsWrapper${isSidebar ? 'Sidebar' : ''}`}>
+    <div className={`staticCardsWrapper${isSidebar ? 'Sidebar' : ''}`}>
       {(posts || []).map((post: IPost, index: number) => {
         const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
         // console.log('defaultLocale=> ',defaultLocale)

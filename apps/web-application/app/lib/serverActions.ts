@@ -19,6 +19,17 @@ export const clearACacheByTag = async (tag: string) => {
     }
 };
 
+export const clearACacheByPath = async (path: string,type?:'page' | 'layout') => {
+  try {
+    console.log(`clearing path cache => `,path)
+    revalidatePath(path, type)
+  } catch (error) {
+    console.log(`error clearACacheByTag=> `, error);
+  }
+};
+
+
+
 export const clearCachesByServerAction = async ({
     //path,
     //searchParams,
