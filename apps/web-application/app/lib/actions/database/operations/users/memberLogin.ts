@@ -13,11 +13,13 @@ const memberLogin = async (
   }: IMemberLogin): Promise<ServerActionResponse> => {
 
   try {
-    await connectToDatabase('login');
+    await connectToDatabase('memberLogin');
 
     if (!username || !password) {
-      return errorResponse({ message: 'Wrong Username or Password'});
+      return errorResponse({ message: 'Missing Username or Password'});
     }
+    console.log(`username=> `,username)
+    console.log(`password=> `,password)
 
     let user = await userSchema
       .findOne({ username: { $regex: new RegExp(`^${username}$`, 'i') } })
@@ -30,7 +32,7 @@ const memberLogin = async (
       }).lean() as any;
 
     if (!user) {
-      return errorResponse({ message: 'Wrong Username or Password' });
+      return errorResponse({ message: 'User was not found' });
     }
 
     if (user?._id) {
@@ -60,6 +62,7 @@ const memberLogin = async (
     );
 
   } catch (error) {
+    console.log(`error=> `,error)
     return errorResponse({
       message: 'Something went wrong please try again later',
       error,

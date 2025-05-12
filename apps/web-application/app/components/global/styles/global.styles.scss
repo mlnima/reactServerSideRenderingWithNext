@@ -1,17 +1,17 @@
 @use './gridLayouts' as gridLayouts;
 @use './widgetAreas.styles' as widgetAreas;
-@use '@repo/shared-style' as shared-style;
+@use './defaultBody' as defaultBody;
+@use './defaultColors' as defaultColors;
+@use './ainimations' as ainimations;
+@use './buttons' as buttons;
+@use './forms' as forms;
+@use './inputs' as inputs;
+@use './scrollbars' as scrollbars;
+@use './selects' as selects;
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-//@import "./gridLayouts";
-//@import "./widgetAreas.styles";
-//@import "@repo/shared-style";
-
-
-//@use './gridLayouts' as gridLayouts;
-//@use './gridLayouts' as gridLayouts;
 
 body {
   color: var(--primary-text-color, #fff);

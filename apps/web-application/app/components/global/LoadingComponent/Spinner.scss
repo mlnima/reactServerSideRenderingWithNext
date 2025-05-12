@@ -1,0 +1,17 @@
+@keyframes loadingSpinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#loadingSpinner{
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid var(--primary-active-color);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: loadingSpinner 1s linear infinite;
+}

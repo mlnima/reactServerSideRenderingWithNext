@@ -7,7 +7,7 @@ import Topbar from './components/Topbar/Topbar';
 import Sidebar from './components/Sidebar/Sidebar';
 import ReduxProvider from '@store/ReduxProvider';
 import { ReactNode } from 'react';
-import { Suspense } from 'react';
+
 
 const AdminLayout = async ({ children }: { children: ReactNode }) => {
 
@@ -31,5 +31,3 @@ const AdminLayout = async ({ children }: { children: ReactNode }) => {
 
 export default AdminLayout;
 
-
-//import {commonAPIRequestClearCaches} from "@repo/api-requests";

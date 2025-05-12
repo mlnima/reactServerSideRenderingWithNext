@@ -1,3 +1,5 @@
+// @ts-nocheck
+//need to rebuild the whole component
 'use client';
 import React, { useEffect, useState, useRef } from 'react';
 import { useAppDispatch } from '@store/hooks';
@@ -6,8 +8,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './ImageGallary.scss';
 import { IPost } from '@repo/typescript-types';
 import { loading } from '@store/reducers/globalStateReducer';
-// import { dashboardAPIRequestUploadFile } from '@repo/api-requests';
-// import { AxiosResponse } from 'axios';
 
 
 interface ImageGalleryPropTypes {
@@ -23,7 +23,7 @@ const ImageGallery: React.FC<ImageGalleryPropTypes> = ({ onChangeHandler, post }
   useEffect(() => {
     setState({
       ...state,
-      images: post.images || [],
+      images: post?.images || [],
       imageFromUrl: '',
     });
   }, []);

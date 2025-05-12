@@ -15,17 +15,6 @@ import { decryptJWT } from '@lib/session';
 
 const memberAutoLogin = async (): Promise<ServerActionResponse> => {
   try {
-    // const cookieStore = await cookies()
-    // const session =  cookieStore.get('session')
-    //
-    // if (!session) return errorResponse({ message: 'Session ID Required', errorCode: ErrorCode.BAD_REQUEST });
-    //
-    // const sessionData = await jwtValidator(session?.value) as JWTPayload;
-    //
-    // if (!sessionData) {
-    //   cookieStore.delete('session')
-    //   return errorResponse({ message: 'Unauthorized', errorCode: ErrorCode.UNAUTHORIZED });
-    // }
 
     const session = (await cookies()).get('session')?.value
     const payload = await decryptJWT(session)

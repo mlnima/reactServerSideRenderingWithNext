@@ -1,8 +1,0 @@
-{
-  "name": "@repo/shared-style",
-  "version": "1.0.0",
-  "main": "./styles.scss",
-  "files": [
-    "scss"
-  ]
-}

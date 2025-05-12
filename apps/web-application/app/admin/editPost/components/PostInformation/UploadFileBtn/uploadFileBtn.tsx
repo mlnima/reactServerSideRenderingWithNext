@@ -6,8 +6,7 @@ import { useAppDispatch } from '@store/hooks'; // Updated import path
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload } from '@fortawesome/free-solid-svg-icons/faUpload';
 import { loading } from '@store/reducers/globalStateReducer';
-// import { dashboardAPIRequestUploadFile } from '@repo/api-requests';
-import { AxiosResponse } from 'axios';
+
 
 const UploadFileBtnStyledDiv = styled.div`
     button {

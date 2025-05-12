@@ -1,7 +1,7 @@
 'use client';
 import React, {useEffect, FC} from 'react';
 import {useAppDispatch, useAppSelector} from "@store/hooks";
-import {ActiveLoading} from "@repo/ui";
+import ActiveLoading from "./ActiveLoading";
 import {loading, setLoading} from "@store/reducers/globalStateReducer";
 import {usePathname, useSearchParams} from "next/navigation";
 

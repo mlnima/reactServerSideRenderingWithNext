@@ -1,0 +1,18 @@
+#RelatedPostPreview{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  width: 200px;
+
+  img, video {
+    width: 200px;
+    aspect-ratio: 16/9;
+  }
+
+  p {
+    width: 100%;
+    text-align: left;
+    margin: 4px 0;
+  }
+}

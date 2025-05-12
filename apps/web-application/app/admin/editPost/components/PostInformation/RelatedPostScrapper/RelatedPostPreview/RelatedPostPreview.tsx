@@ -1,6 +1,6 @@
 'use client';
 import React, { FC, useState } from 'react';
-import styled from 'styled-components';
+import './RelatedPostPreview.scss'
 
 interface IProps {
   cardData: {
@@ -12,27 +12,10 @@ interface IProps {
     duration: string;
     title: string;
   };
-  onChangeHandler: (e: React.ChangeEvent<HTMLElement>) => void;
+  onChangeHandler: (e: React.ChangeEvent<HTMLElement | object>) => void;
 }
 
-const Styles = styled.div`
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: column;
-    width: 200px;
 
-    img, video {
-        width: 200px;
-        aspect-ratio: 16/9;
-    }
-
-    p {
-        width: 100%;
-        text-align: left;
-        margin: 4px 0;
-    }
-`;
 
 const RelatedPostPreview: FC<IProps> = ({ cardData, onChangeHandler }) => {
   const [isHover, setIsHover] = useState(false);
@@ -43,11 +26,12 @@ const RelatedPostPreview: FC<IProps> = ({ cardData, onChangeHandler }) => {
         value: cardData.source,
       },
     };
+    // @ts-expect-error: it's fine
     onChangeHandler(e)
   };
   return (
-    <Styles
-      className={'relatedPost'}
+    <div
+      id={'RelatedPostPreview'}
       onMouseEnter={() => setIsHover(true)}
       onTouchStart={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
@@ -66,7 +50,7 @@ const RelatedPostPreview: FC<IProps> = ({ cardData, onChangeHandler }) => {
       {cardData?.title && <p>title: {cardData?.title}</p>}
       {cardData?.quality && <p>quality: {cardData?.quality}</p>}
       {cardData?.views && <p>views: {cardData?.views}</p>}
-    </Styles>
+    </div>
   );
 };
 

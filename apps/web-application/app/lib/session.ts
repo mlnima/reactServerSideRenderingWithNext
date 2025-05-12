@@ -21,6 +21,7 @@ export async function encryptToJwt(payload: JWTPayload | undefined) {
 
 export async function decryptJWT(session: string | undefined = '') {
   try {
+    console.log(`decryptJWT=> `, session)
     const { payload } = await jwtVerify(session, encodedKey, {
       algorithms: ['HS256'],
     });
@@ -49,6 +50,7 @@ export const createNewSession = async (_id: string, role: string) => {
       });
 
   } catch (error) {
+    console.log(`error=> `,error)
     return;
   }
 

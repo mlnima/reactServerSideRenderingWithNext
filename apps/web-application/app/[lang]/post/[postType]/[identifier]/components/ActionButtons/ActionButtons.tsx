@@ -8,9 +8,7 @@ import { faThumbsUp } from '@fortawesome/free-solid-svg-icons/faThumbsUp';
 import { faThumbsDown } from '@fortawesome/free-solid-svg-icons/faThumbsDown';
 import './ActionButtons.scss';
 import { loginRegisterForm } from '@store/reducers/globalStateReducer';
-// import {
-//     clientAPIRequestViewPost,
-// } from '@repo/api-requests';
+
 
 import { faComments } from '@fortawesome/free-solid-svg-icons';
 import {clearACacheByTag} from "@lib/serverActions";

@@ -5,7 +5,7 @@ import { verifySession } from '@lib/dal';
 import { errorResponse, successResponse } from '@lib/actions/response';
 import { IPost } from '@repo/typescript-types';
 
-const dashboardCreateNewPost = async (newPost :IPost) => {
+const dashboardCreateNewPost = async (newPost: IPost) => {
 
   try {
 
@@ -34,7 +34,6 @@ const dashboardCreateNewPost = async (newPost :IPost) => {
         message: 'Post Has Been Saved',
       },
     });
-
 
   } catch (error) {
     console.log(`dashboardCreateNewPost error=> `, error);

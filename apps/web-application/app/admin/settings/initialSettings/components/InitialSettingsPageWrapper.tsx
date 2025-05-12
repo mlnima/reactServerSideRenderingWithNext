@@ -7,7 +7,7 @@ import MembershipSettings from './MembershipSettings/MembershipSettings';
 import LayoutSettings from './layoutSettings';
 import { useAppDispatch } from '@store/hooks';
 import { inputValueSimplifier } from '@repo/utils';
-import { LanguagesOptions } from '@repo/ui';
+import LanguagesOptions from '@components/global/LanguagesOptions';
 import { IInitialSettings } from '@repo/typescript-types';
 import dashboardUpdateSettings from '@lib/actions/database/operations/settings/dashboardUpdateSettings';
 import { setAlert } from '@store/reducers/globalStateReducer';

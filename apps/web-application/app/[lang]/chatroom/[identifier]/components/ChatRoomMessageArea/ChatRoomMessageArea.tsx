@@ -5,7 +5,7 @@ import { ChatroomMessage } from '@repo/typescript-types';
 import socket from '@lib/web-socket-client';
 import { sortArrayByPropertyOfObject } from '@repo/utils';
 import './ChatRoomMessageArea.scss';
-import { Spinner } from '@repo/ui';
+import Spinner from '@components/global/LoadingComponent/Spinner';
 
 interface IProp {
     chatroomId: string;

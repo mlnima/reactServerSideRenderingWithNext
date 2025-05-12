@@ -11,6 +11,7 @@ import widgetsStaticPositions from './widgetsStaticPositions';
 import widgetsTypes from './widgetsTypes';
 import rtlLanguages from './rtlLanguages';
 import postStatuses from './postStatuses';
+import metaTypes from './metaTypes';
 import UGCPostImagesLimit from './UGCPostImagesLimit';
 import imageLessCardColors from './imageLessCardColors';
 import { advertiseType, advertisePlaceType } from './advertiseType';
@@ -20,27 +21,28 @@ import { reactSelectPrimaryTheme } from './reactSelectGlobalConfig';
 import memberLoginDefaultRequireFields from './memberLoginDefaultRequireFields';
 
 export {
-    databaseSelectFieldsForPostCards,
-    memberLoginDefaultRequireFields,
-    postFieldRequestForCards,
-    postTypes,
-    clientAllowedSortOptions,
-    userStatus,
-    userRoles,
-    videoQualities,
-    widgetsStaticPositions,
-    metaFieldsRequestForCard,
-    widgetsTypes,
-    rtlLanguages,
-    postStatuses,
-    UGCPostImagesLimit,
-    imageLessCardColors,
-    advertiseType,
-    advertisePlaceType,
-    languagesMapOrigin,
-    languagesMapInEnglish,
-    errorMessages,
-    reactSelectPrimaryTheme
+  databaseSelectFieldsForPostCards,
+  memberLoginDefaultRequireFields,
+  postFieldRequestForCards,
+  postTypes,
+  clientAllowedSortOptions,
+  userStatus,
+  userRoles,
+  videoQualities,
+  widgetsStaticPositions,
+  metaFieldsRequestForCard,
+  metaTypes,
+  widgetsTypes,
+  rtlLanguages,
+  postStatuses,
+  UGCPostImagesLimit,
+  imageLessCardColors,
+  advertiseType,
+  advertisePlaceType,
+  languagesMapOrigin,
+  languagesMapInEnglish,
+  errorMessages,
+  reactSelectPrimaryTheme,
 };
 
 

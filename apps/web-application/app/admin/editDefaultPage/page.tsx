@@ -1,7 +1,7 @@
 'use client';
-import React, { ChangeEvent, useEffect, useMemo, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { inputValueSimplifier } from '@repo/utils';
-import { LanguagesOptions } from '@repo/ui';
+import LanguagesOptions from '@components/global/LanguagesOptions';
 import MonacoEditor from '@components/textEditors/MonacoEditor';
 import { useSearchParams } from 'next/navigation';
 import { useAppDispatch } from '@store/hooks';
@@ -12,13 +12,13 @@ import { ServerActionResponse } from '@lib/actions/response';
 import { setAlert } from '@store/reducers/globalStateReducer';
 
 interface PropTypes {
+
 }
 
 const EditDefaultPage: React.FC<PropTypes> = () => {
   const dispatch = useAppDispatch();
   const searchParams = useSearchParams();
-  const pageName = searchParams.get('pageName')
-  const [openStyleEditor, setOpenStyleEditor] = useState(false);
+  const pageName = searchParams.get('pageName');
   const [language, setLanguage] = useState('default');
   const [headEditor, setHeadEditor] = useState(false);
 
@@ -36,22 +36,27 @@ const EditDefaultPage: React.FC<PropTypes> = () => {
   const dynamicSettingsPageMatcher = /homePageSettings|postPageSettings/g;
   const [fieldsData, setFieldsData] = useState(defaultPageData);
 
-  const getPageSettings = async ()=>{
+  const getPageSettings = async () => {
     if (pageName) {
-      const {success,data,message,error} = await getSettings([pageName]) as unknown as ServerActionResponse<{
-        pageName: object;
-      }>
+
+      const { success, data, message, error } = await getSettings([pageName]) as ServerActionResponse<{
+        [key: string]: object
+      }>;
+
       if (!success) {
         dispatch(setAlert({ message, type: 'error', active: true }));
         return;
       }
+
       const settingData = data?.[pageName] || defaultPageData;
+
+      // @ts-expect-error: it's fine
       setFieldsData(settingData || {});
     }
-  }
+  };
 
   useEffect(() => {
-    getPageSettings()
+    getPageSettings();
   }, [searchParams, pageName]);
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLTextAreaElement>) => {
@@ -83,9 +88,10 @@ const EditDefaultPage: React.FC<PropTypes> = () => {
     e.preventDefault();
     try {
       if (pageName) {
-      await dashboardUpdateSettings({ type: pageName, data: fieldsData })
+        await dashboardUpdateSettings({ type: pageName, data: fieldsData });
       }
     } catch (error) {
+
     }
   };
 
@@ -137,7 +143,7 @@ const EditDefaultPage: React.FC<PropTypes> = () => {
           <p>Keywords:</p>
           <input className={'primaryInput'}
                  type="text" onChange={(e) => onChangeHandlerWithTranslation(e)}
-            //@ts-ignore
+                 // @ts-expect-error: it's fine
                  value={language === 'default' ? fieldsData.keywords : fieldsData?.translations?.[language]?.keywords || ''}
                  name={'keywords'}
                  placeholder={'Keywords'} />

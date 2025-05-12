@@ -1,5 +1,4 @@
 import { Schema } from "mongoose";
-declare module '@repo/api-requests';
 declare module '@repo/utils';
 declare module '@repo/data-structures';
 declare module 'tsconfig';

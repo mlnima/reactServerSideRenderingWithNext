@@ -8,7 +8,7 @@ import Format from './components/Format/Format';
 import Meta from './components/Meta/Meta';
 import RatingOption from './components/RatingOption';
 import PostInformation from './components/PostInformation/PostInformation';
-import { LanguagesOptions } from '@repo/ui';
+import LanguagesOptions from '@components/global/LanguagesOptions';
 import { isNumericString } from '@repo/utils';
 import Author from './components/Author';
 import { useSearchParams } from 'next/navigation';
@@ -31,7 +31,7 @@ const EditPostPage = () => {
   const dispatch = useAppDispatch()
 
   const getPostData = async (_id: string) => {
-    const { data, success, message } = await dashboardGetPost(_id);
+    const { data, success } = await dashboardGetPost(_id);
     if (!success || !data?.post) {
       return;
     }
@@ -166,9 +166,9 @@ const EditPostPage = () => {
   };
 
 
-  // if (!post) {
-  //   return <h1>Not Found</h1>;
-  // }
+  if (!post) {
+    return <h1>Not Found</h1>;
+  }
 
   return (
     <div className={'EditPostPage'}>

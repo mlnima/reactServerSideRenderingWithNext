@@ -1,17 +1,15 @@
 'use client';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { LanguagesOptions } from '@repo/ui';
-import { useAppDispatch } from '@store/hooks';
+import LanguagesOptions from '@components/global/LanguagesOptions';
 import './styles.scss';
-import { IMeta } from '@repo/typescript-types';
+import { IMeta, MetasType } from '@repo/typescript-types';
 import dashboardGetMeta from '@lib/actions/database/operations/metas/dashboardGetMeta';
 import dashboardDeleteMeta from '@lib/actions/database/operations/metas/dashboardDeleteMeta';
 import dashboardUpdateMeta from '@lib/actions/database/operations/metas/dashboardUpdateMeta';
 
-
 const EditMetaPage = () => {
-  const dispatch = useAppDispatch();
+
   const [meta, setMeta] = useState<IMeta | null>(null);
 
   const searchParams = useSearchParams();
@@ -19,11 +17,11 @@ const EditMetaPage = () => {
   const { id, newMeta, metaType, lang } = useMemo(() => ({
     id: searchParams.get('id'),
     newMeta: searchParams.get('new'),
-    metaType: searchParams.get('metaType'),
+    metaType: searchParams.get('metaType') as MetasType,
     lang: searchParams.get('lang'),
   }), [searchParams]);
 
-  const [editingData,setEditingData ] = useState({ activeEditingLanguage: 'default' });
+  const [editingData, setEditingData] = useState({ activeEditingLanguage: 'default' });
   const [deleteButton, setDeleteButton] = useState(false);
 
   useEffect(() => {
@@ -31,27 +29,28 @@ const EditMetaPage = () => {
 
       setMeta({
         name: '',
-        type: metaType || 'categories',
+        type: metaType ? metaType : 'categories',
         description: '',
         imageUrl: '',
         imageUrlLock: false,
         translations: {},
         count: 0,
-      })
-      setEditingData({lang: lang || 'default'})
+      });
+      // @ts-expect-error: it's fine
+      setEditingData({ lang: lang || 'default' });
     } else if (id) {
-      initialMeta()
+      initialMeta();
     }
   }, [id, newMeta]);
 
   const initialMeta = async () => {
     try {
       if (!id) return;
-      const { success, data, message } = await dashboardGetMeta(id);
+      const { success, data } = await dashboardGetMeta(id);
 
       if (!success || !data || !data.meta) return;
 
-      setMeta(data.meta)
+      setMeta(data.meta);
 
     } catch (error) {
     }
@@ -65,13 +64,15 @@ const EditMetaPage = () => {
   const onInputChangeHandler = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
     if (editingData.activeEditingLanguage === 'default') {
 
-      setMeta((prevState)=>({
+      // @ts-expect-error: it's fine
+      setMeta((prevState) => ({
         ...prevState,
-        [e.target.name]: e.target.value
-      }))
+        [e.target.name]: e.target.value,
+      }));
+
     } else {
       // @ts-expect-error: it's fine
-      setMeta((prevState)=>({
+      setMeta((prevState) => ({
         ...prevState,
         translations: {
           ...(prevState?.translations || {}),
@@ -79,16 +80,17 @@ const EditMetaPage = () => {
             ...(prevState?.translations?.[editingData.activeEditingLanguage] || {}),
             [e.target.name]: e.target.value,
           },
-        },e
-      }))
+        }, e,
+      }));
     }
   };
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setMeta((prevState)=>({
+    // @ts-expect-error: it's fine
+    setMeta((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.value
-    }))
+      [e.target.name]: e.target.value,
+    }));
   };
 
   if (!meta) return <h1>Not Found</h1>;
@@ -109,12 +111,9 @@ const EditMetaPage = () => {
           className={'primaryInput'}
           name="name"
           onChange={onInputChangeHandler}
-          // @ts-ignore
           value={
             editingData.activeEditingLanguage === 'default' ? meta.name : meta?.translations ?
-              // @ts-ignore
               meta.translations[editingData.activeEditingLanguage] ?
-                // @ts-ignore
                 meta.translations[editingData.activeEditingLanguage].name || '' : ''
               : ''
           }
@@ -194,7 +193,10 @@ const EditMetaPage = () => {
           type={'checkbox'}
           checked={meta.imageUrlLock}
           name={'imageUrlLock'}
-          onChange={(e) => setMeta((prevState)=>({ ...prevState, imageUrlLock: e.target.checked })) }
+          onChange={(e) => setMeta((prevState) => (prevState ? {
+            ...prevState,
+            imageUrlLock: e.target.checked,
+          } : null))}
         />
       </div>
       <div className={'single-meta-page-section'}>
