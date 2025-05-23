@@ -8,8 +8,8 @@ import { faClone } from '@fortawesome/free-solid-svg-icons/faClone';
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 import { useRouter } from 'next/navigation';
 import { setAlert } from '@store/reducers/globalStateReducer';
-import dashboardRemoveWidget from '@lib/actions/database/operations/widgets/dashboardRemoveWidget';
-import dashboardUpdateWidget from '@lib/actions/database/operations/widgets/dashboardUpdateWidget';
+import dashboardRemoveWidget from '@lib/actions/database/widgets/dashboardRemoveWidget';
+import dashboardUpdateWidget from '@lib/actions/database/widgets/dashboardUpdateWidget';
 
 
 interface ActionButtonsPropTypes {

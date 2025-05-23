@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { loading, loginRegisterForm, setAlert } from '@store/reducers/globalStateReducer';
-import registerNewUser from '@lib/actions/database/operations/users/registerNewUser';
+import registerNewUser from '@lib/actions/database/users/registerNewUser';
 import { IRegisterNewUser } from '@repo/typescript-types';
 
 export const registerUserAction = createAsyncThunk(

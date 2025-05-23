@@ -7,13 +7,13 @@ import { useAppDispatch } from '@store/hooks';
 import { useRouter, useSearchParams } from 'next/navigation';
 import './styles.scss';
 import { User } from '@repo/typescript-types';
-import dashboardGenerateNewApiKey from '@lib/actions/database/operations/users/dashboardGenerateNewApiKey';
+import dashboardGenerateNewApiKey from '@lib/actions/database/users/dashboardGenerateNewApiKey';
 import { ServerActionResponse } from '@lib/actions/response';
-import dashboardGetUser from '@lib/actions/database/operations/users/dashboardGetUser';
+import dashboardGetUser from '@lib/actions/database/users/dashboardGetUser';
 import { setAlert } from '@store/reducers/globalStateReducer';
-import dashboardDeleteUser from '@lib/actions/database/operations/users/dashboardDeleteUser';
-import dashboardChangeUserPassword from '@lib/actions/database/operations/users/dashboardChangeUserPassword';
-import dashboardUpdateUser from '@lib/actions/database/operations/users/dashboardUpdateUser';
+import dashboardDeleteUser from '@lib/actions/database/users/dashboardDeleteUser';
+import dashboardChangeUserPassword from '@lib/actions/database/users/dashboardChangeUserPassword';
+import dashboardUpdateUser from '@lib/actions/database/users/dashboardUpdateUser';
 
 
 const EditUserPage = () => {

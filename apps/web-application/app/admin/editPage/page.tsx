@@ -4,11 +4,11 @@ import Editor from '@monaco-editor/react';
 import { useAppDispatch } from '@store/hooks';
 import { useRouter, useSearchParams } from 'next/navigation';
 import './styles.scss';
-import dashboardGetPage from '@lib/actions/database/operations/pages/dashboardGetPage';
+import dashboardGetPage from '@lib/actions/database/pages/dashboardGetPage';
 import { setAlert } from '@store/reducers/globalStateReducer';
 import { IPage } from '@repo/typescript-types';
-import dashboardUpdatePage from '@lib/actions/database/operations/pages/dashboardUpdatePage';
-import dashboardDeletePage from '@lib/actions/database/operations/pages/dashboardDeletePage';
+import dashboardUpdatePage from '@lib/actions/database/pages/dashboardUpdatePage';
+import dashboardDeletePage from '@lib/actions/database/pages/dashboardDeletePage';
 
 const EditPage = (props: any) => {
 

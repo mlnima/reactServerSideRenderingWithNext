@@ -153,17 +153,17 @@ router.get('/dashboard/backup/metas', adminAuthMiddleware, BackupController.meta
 router.get('/dashboard/backup/posts', adminAuthMiddleware, BackupController.posts);
 router.get('/dashboard/backup', adminAuthMiddleware, BackupController.backup);
 
-//---------------------Order----------------------------
-router.post('/v1/order/payPal', authMiddleware, OrderController.clientCreateOrder);
-router.get('/admin/order', adminAuthMiddleware, OrderController.dashboardGetOrders);
+// //---------------------Order----------------------------
+// router.post('/v1/order/payPal', authMiddleware, OrderController.clientCreateOrder);
+// router.get('/admin/order', adminAuthMiddleware, OrderController.dashboardGetOrders);
 
-//---------------------External API----------------------------
-router.post('/external/post', express.json({ limit: '50MB' }), adminApiRequestMiddleware, PostController.apiNewPost);
-router.patch('/external/post', adminApiRequestMiddleware, PostController.apiUpdatePost);
-router.patch('/external/meta', adminApiRequestMiddleware, PostController.apiUpdateMeta);
-
-//---------------------Sitemap----------------------------
-router.get('/dashboard/generateSitemaps', adminAuthMiddleware, SitemapController.generateSitemaps);
+// //---------------------External API----------------------------
+// router.post('/external/post', express.json({ limit: '50MB' }), adminApiRequestMiddleware, PostController.apiNewPost);
+// router.patch('/external/post', adminApiRequestMiddleware, PostController.apiUpdatePost);
+// router.patch('/external/meta', adminApiRequestMiddleware, PostController.apiUpdateMeta);
+//
+// //---------------------Sitemap----------------------------
+// router.get('/dashboard/generateSitemaps', adminAuthMiddleware, SitemapController.generateSitemaps);
 
 export default router;
 

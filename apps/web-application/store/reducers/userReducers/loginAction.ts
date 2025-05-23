@@ -4,7 +4,7 @@ import {
   setAlert,
   setBackgroundFilter,
 } from '@store/reducers/globalStateReducer';
-import memberLogin from '@lib/actions/database/operations/users/memberLogin';
+import memberLogin from '@lib/actions/database/users/memberLogin';
 import { ServerActionResponse } from '@lib/actions/response';
 
 

@@ -3,7 +3,7 @@ import { capitalizeFirstLetter, queryUniquer } from '@repo/utils';
 import { AlternatesGenerators } from '@lib/alternatesCanonicalGenerator';
 import { IInitialSettings, IPageProps } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
-import getSettings from '@lib/actions/database/operations/settings/getSettings';
+import getSettings from '@lib/actions/database/settings/getSettings';
 import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 
 const alternatesGenerators = new AlternatesGenerators();

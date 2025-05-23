@@ -21,7 +21,6 @@ export async function encryptToJwt(payload: JWTPayload | undefined) {
 
 export async function decryptJWT(session: string | undefined = '') {
   try {
-    console.log(`decryptJWT=> `, session)
     const { payload } = await jwtVerify(session, encodedKey, {
       algorithms: ['HS256'],
     });
@@ -34,11 +33,10 @@ export async function decryptJWT(session: string | undefined = '') {
 
 export const createNewSession = async (_id: string, role: string) => {
   try {
-    const expiresAt = new Date(performance.now() + 30 * 24 * 60 * 60 * 1000);
+    const expiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
     const cookieStore = await cookies();
 
     const session = await encryptToJwt({ _id,role, expiresAt });
-
     if (!session) return;
 
     cookieStore.set(

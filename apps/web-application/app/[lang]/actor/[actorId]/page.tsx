@@ -9,9 +9,9 @@ import ActorBio from './components/ActorBio/ActorBio';
 import Soft404 from '@components/Soft404/Soft404';
 import { IMeta, IPost, PageParams, PageSearchParams, IInitialSettings } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
-import getSettings from '@lib/actions/database/operations/settings/getSettings';
-import getWidgets from '@lib/actions/database/operations/widgets/getWidgets';
-import getPosts from '@lib/actions/database/operations/posts/getPosts';
+import getSettings from '@lib/actions/database/settings/getSettings';
+import getWidgets from '@lib/actions/database/widgets/getWidgets';
+import getPosts from '@lib/actions/database/posts/getPosts';
 import { isValidObjectId } from '@repo/db';
 import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 

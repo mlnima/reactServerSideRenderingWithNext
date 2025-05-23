@@ -1,5 +1,6 @@
 'use client';
 import React, { FC, useRef } from 'react';
+import './FileManagerControl.scss'
 
 interface IProps {
   setFileManagerState: React.Dispatch<React.SetStateAction<any>>;
@@ -89,14 +90,17 @@ const FileManagerControl: FC<IProps> = ({ uploadFile, setFileManagerState,fileMa
     return (
         <div id={'FileManagerControl'} className='file-manager-control'>
             <div className='file-Manager-control-address-bar'>
-                <button onClick={(e) => onGoBackHandler(e)} className={'backBtn btn btn-navigation'}>Back</button>
-                <input ref={addressBar} name='addressBar' onChange={e => onChaneHandler(e)} className="ControlFilesItem"
+                <button onClick={(e) => onGoBackHandler(e)} className={'backBtn btn btn-dark'}>Back</button>
+                <input ref={addressBar} name='addressBar' onChange={e => onChaneHandler(e)} className="primaryInput"
                        onClick={e => clearClickedItemHandler(e)} value={fileManagerState?.path} />
                 {/*//@ts-ignore*/}
                 <button onClick={() => editFileManagerState({ path: addressBar.current.value })}
-                        className={'btn btn-navigation'}>Go
+                        className={'btn btn-dark'}>Go
                 </button>
             </div>
+
+
+
             <div className="file-Manager-control-quick-access">
                 <button onClick={() => editFileManagerState({ path: '/public/uploads' })}
                         className={'btn btn-navigation'}>
@@ -116,11 +120,11 @@ const FileManagerControl: FC<IProps> = ({ uploadFile, setFileManagerState,fileMa
                 <input ref={uploadInputElement} type='file' style={{ display: 'none' }}
                        onChange={e => uploadFile(e)} />
                 {/*//@ts-ignore*/}
-                <button onClick={() => uploadInputElement.current.click()} className={'btn btn-navigation'}>Upload
+                <button onClick={() => uploadInputElement.current.click()} className={'btn btn-primary'}>Upload
                 </button>
-                <button onClick={() => onCreateNewFileClickHandler('file')} className={'btn btn-navigation'}>New File
+                <button onClick={() => onCreateNewFileClickHandler('file')} className={'btn btn-primary'}>New File
                 </button>
-                <button onClick={() => onCreateNewFileClickHandler('folder')} className={'btn btn-navigation'}>New Folder
+                <button onClick={() => onCreateNewFileClickHandler('folder')} className={'btn btn-primary'}>New Folder
                 </button>
             </div>
         </div>

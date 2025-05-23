@@ -9,7 +9,7 @@ import { useAppDispatch } from '@store/hooks';
 import { inputValueSimplifier } from '@repo/utils';
 import LanguagesOptions from '@components/global/LanguagesOptions';
 import { IInitialSettings } from '@repo/typescript-types';
-import dashboardUpdateSettings from '@lib/actions/database/operations/settings/dashboardUpdateSettings';
+import dashboardUpdateSettings from '@lib/actions/database/settings/dashboardUpdateSettings';
 import { setAlert } from '@store/reducers/globalStateReducer';
 import { clearACacheByTag } from '@lib/serverActions';
 

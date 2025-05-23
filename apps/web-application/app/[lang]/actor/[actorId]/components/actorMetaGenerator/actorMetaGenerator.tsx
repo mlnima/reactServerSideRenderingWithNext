@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { AlternatesGenerators } from '@lib/alternatesCanonicalGenerator';
 import { PageParams, PageSearchParams } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
-import getPosts from '@lib/actions/database/operations/posts/getPosts';
+import getPosts from '@lib/actions/database/posts/getPosts';
 import { headMetaFromSettings } from '@lib/headMetaFromSettings';
 
 interface IProps {

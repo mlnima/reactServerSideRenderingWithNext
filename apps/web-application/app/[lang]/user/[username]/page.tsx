@@ -3,12 +3,12 @@ import { getDictionary } from '../../../../get-dictionary';
 import './page.scss';
 import UserPageContent from './components/UserPageContent/UserPageContent'
 // import UserPageContent from './components/UserPageContent/UserPageContent';
-import getSettings from '@lib/actions/database/operations/settings/getSettings';
+import getSettings from '@lib/actions/database/settings/getSettings';
 import localDetector from '@lib/localDetector';
 import { IPageProps, IPageSettings, User } from '@repo/typescript-types';
-import getInitialUserPageData from '@lib/actions/database/operations/users/getInitialUserPageData';
+import getInitialUserPageData from '@lib/actions/database/users/getInitialUserPageData';
 import React from 'react';
-import getPosts from "@lib/actions/database/operations/posts/getPosts";
+import getPosts from "@lib/actions/database/posts/getPosts";
 import PostsCardsRenderer from '@components/cards/CardsRenderer/PostsCardsRenderer/PostsCardsRenderer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons/faCamera';

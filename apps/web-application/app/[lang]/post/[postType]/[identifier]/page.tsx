@@ -14,11 +14,11 @@ import PromotionTypePostPage from './components/PromotionTypePostPage/PromotionT
 import LearnTypePostPage from './components/LearnTypePostPage/LearnTypePostPage';
 import { IPageProps, IPageSettings } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
-import getPost from '@lib/actions/database/operations/posts/getPost';
-import getPostRating from '@lib/actions/database/operations/posts/getPostRating';
-import getPostViews from '@lib/actions/database/operations/posts/getPostViews';
-import getSettings from '@lib/actions/database/operations/settings/getSettings';
-import getWidgets from '@lib/actions/database/operations/widgets/getWidgets';
+import getPost from '@lib/actions/database/posts/getPost';
+import getPostRating from '@lib/actions/database/posts/getPostRating';
+import getPostViews from '@lib/actions/database/posts/getPostViews';
+import getSettings from '@lib/actions/database/settings/getSettings';
+import getWidgets from '@lib/actions/database/widgets/getWidgets';
 import Comments from './components/Comments/Comments';
 import React from 'react';
 import RelatedPostsRenderer from './components/RelatedPostsRenderer/RelatedPostsRenderer';
@@ -48,12 +48,13 @@ const PostPage = async (props: IPageProps) => {
   const postViews = await getPostViews(postId as unknown as string);
   // const postRating = await getPostRating(postId as unknown as string);
 
-  const { likes, disLikes } = unwrapResponse(
+  const { likes } = unwrapResponse(
     await getPostRating(postId as unknown as string) as unknown as ServerActionResponse<{
-      likes: number,
-      disLikes: number
+      likes: number
     }>,
   );
+
+  console.log(`likes=> `,likes)
 
   const { postPageSettings } = unwrapResponse(
     await getSettings(['postPageSettings']) as unknown as ServerActionResponse<{
@@ -87,7 +88,6 @@ const PostPage = async (props: IPageProps) => {
                 post={data?.post}
                 views={postViews}
                 likes={likes || 0}
-                disLikes={disLikes || 0}
                 dictionary={dictionary}
                 locale={locale}
                 sidebar={postPageSettings?.sidebar || 'no'}
@@ -132,7 +132,6 @@ const PostPage = async (props: IPageProps) => {
               post={data?.post}
               views={postViews}
               likes={likes}
-              disLikes={disLikes}
               hasSidebar={sidebar}
               relatedPosts={data?.relatedPosts || []}
               dictionary={dictionary}
@@ -144,7 +143,6 @@ const PostPage = async (props: IPageProps) => {
               post={data?.post}
               views={postViews}
               likes={likes}
-              disLikes={disLikes}
               hasSidebar={sidebar}
               relatedPosts={data?.relatedPosts || []}
               dictionary={dictionary}
@@ -156,7 +154,6 @@ const PostPage = async (props: IPageProps) => {
               post={data?.post}
               views={postViews}
               likes={likes}
-              disLikes={disLikes}
               hasSidebar={sidebar}
               relatedPosts={data?.relatedPosts || []}
               dictionary={dictionary}
@@ -168,7 +165,6 @@ const PostPage = async (props: IPageProps) => {
               post={data?.post}
               views={postViews}
               likes={likes}
-              disLikes={disLikes}
               hasSidebar={sidebar}
               relatedPosts={data?.relatedPosts || []}
               dictionary={dictionary}

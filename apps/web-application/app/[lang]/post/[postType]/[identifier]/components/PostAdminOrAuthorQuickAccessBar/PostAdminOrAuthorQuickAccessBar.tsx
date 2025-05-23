@@ -6,7 +6,7 @@ import Link from 'next/link';
 import './PostAdminOrAuthorQuickAccessBar.scss';
 import PostQuickAccessPostInformation from './PostQuickAccessPostInformation';
 import { clearACacheByPath, clearACacheByTag } from '@lib/serverActions';
-import updatePostStatus from '@lib/actions/database/operations/posts/updatePostStatus';
+import updatePostStatus from '@lib/actions/database/posts/updatePostStatus';
 
 
 interface IProps {

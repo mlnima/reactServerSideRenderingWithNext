@@ -104,7 +104,7 @@
     "@types/axios": "^0.14.4",
     "@types/google.analytics": "^0.0.46",
     "@types/mongoose-lean-virtuals": "^0.5.6",
-    "craco-babel-loader": "^1.0.4",
+
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "winston": "^3.17.0"
   }

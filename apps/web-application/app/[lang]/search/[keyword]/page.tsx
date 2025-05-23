@@ -11,9 +11,9 @@ import { capitalizeFirstLetters } from '@repo/utils';
 import './page.scss';
 import searchMetaGenerator from './components/searchMetaGenerator';
 import localDetector from '@lib/localDetector';
-import getWidgets from '@lib/actions/database/operations/widgets/getWidgets';
-import getSearch from '@lib/actions/database/operations/search/getSearch';
-import getSettings from '@lib/actions/database/operations/settings/getSettings';
+import getWidgets from '@lib/actions/database/widgets/getWidgets';
+import getSearch from '@lib/actions/database/search/getSearch';
+import getSettings from '@lib/actions/database/settings/getSettings';
 import Soft404 from '@components/Soft404/Soft404';
 import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 

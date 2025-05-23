@@ -4,9 +4,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAppDispatch } from '@store/hooks';
 import { useSearchParams } from 'next/navigation';
-import dashboardDeleteComments from '@lib/actions/database/operations/comments/dashboardDeleteComments';
-import dashboardUpdatePostsStatus from '@lib/actions/database/operations/posts/dashboardUpdatePostsStatus';
-import dashboardDeleteForm from '@lib/actions/database/operations/forms/dashboardDeleteForm';
+import dashboardDeleteComments from '@lib/actions/database/comments/dashboardDeleteComments';
+import dashboardUpdatePostsStatus from '@lib/actions/database/posts/dashboardUpdatePostsStatus';
+import dashboardDeleteForm from '@lib/actions/database/forms/dashboardDeleteForm';
 
 interface TableBodyItemDirectActionPropTypes {
   _id: string;

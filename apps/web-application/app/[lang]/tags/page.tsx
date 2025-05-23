@@ -7,9 +7,9 @@ import tagsMetaGenerator from './components/tagsMetaGenerator/tagsMetaGenerator'
 import TagsPageContentRenderer from '@components/metas/TagsPageContentRenderer';
 import { IPageProps, IPageSettings } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
-import getMetas from '@lib/actions/database/operations/metas/getMetas';
-import getWidgets from '@lib/actions/database/operations/widgets/getWidgets';
-import getSettings from '@lib/actions/database/operations/settings/getSettings';
+import getMetas from '@lib/actions/database/metas/getMetas';
+import getWidgets from '@lib/actions/database/widgets/getWidgets';
+import getSettings from '@lib/actions/database/settings/getSettings';
 import Soft404 from '@components/Soft404/Soft404';
 import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 

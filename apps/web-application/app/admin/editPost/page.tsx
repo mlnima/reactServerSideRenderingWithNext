@@ -13,7 +13,7 @@ import { isNumericString } from '@repo/utils';
 import Author from './components/Author';
 import { useSearchParams } from 'next/navigation';
 import './styles.scss';
-import dashboardGetPost from '@lib/actions/database/operations/posts/dashboardGetPost';
+import dashboardGetPost from '@lib/actions/database/posts/dashboardGetPost';
 import { IPost } from '@repo/typescript-types';
 import { setAlert } from '@store/reducers/globalStateReducer';
 import { useAppDispatch } from '@store/hooks';

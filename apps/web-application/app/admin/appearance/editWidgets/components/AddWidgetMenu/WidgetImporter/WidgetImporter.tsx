@@ -2,7 +2,7 @@
 'use client';
 import React, { useRef } from 'react';
 import { useAppDispatch } from "@store/hooks";
-import dashboardCreateNewWidget from '@lib/actions/database/operations/widgets/dashboardCreateNewWidget';
+import dashboardCreateNewWidget from '@lib/actions/database/widgets/dashboardCreateNewWidget';
 import { setAlert } from '@store/reducers/globalStateReducer';
 import { useRouter } from 'next/navigation';
 

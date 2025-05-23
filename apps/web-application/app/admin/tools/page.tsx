@@ -4,10 +4,10 @@ import React from 'react';
 import { useAppDispatch } from '@store/hooks';
 import './styles.scss';
 import { loading, setAlert } from '@store/reducers/globalStateReducer';
-import { setAllMetaImagesAndCount } from '@lib/actions/database/operations/metas/refreshMetaImagesAndCountFromPosts';
+import { setAllMetaImagesAndCount } from '@lib/actions/database/metas/refreshMetaImagesAndCountFromPosts';
 import { ServerActionResponse } from '@lib/actions/response';
-import { checkRemovedVideos } from '@lib/actions/database/operations/posts/checkDeletedVideos';
-import { generateSitemaps } from '@lib/actions/database/operations/sitemap/sitemapGenerator';
+import { checkRemovedVideos } from '@lib/actions/database/posts/checkDeletedVideos';
+import { generateSitemaps } from '@lib/actions/database/sitemap/sitemapGenerator';
 
 const ToolsPage = () => {
 

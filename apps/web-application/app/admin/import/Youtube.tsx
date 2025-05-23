@@ -3,7 +3,7 @@ import React, { useState, useRef, ChangeEvent } from 'react';
 import { useAppDispatch } from '@store/hooks';
 import { loading } from '@store/reducers/globalStateReducer';
 import './Youtube.scss';
-import dashboardUpdateSettings from '@lib/actions/database/operations/settings/dashboardUpdateSettings';
+import dashboardUpdateSettings from '@lib/actions/database/settings/dashboardUpdateSettings';
 
 
 const Youtube = () => {

@@ -24,7 +24,6 @@ interface IProps {
     postType: string,
     views:number,
     likes:number,
-    disLikes:number,
     dictionary: {
         [key: string]: string
     },
@@ -47,7 +46,6 @@ const PreviewPost: FC<IProps> =
          postType,
          views,
          likes,
-         disLikes
     }) => {
     const {userData} = useAppSelector(({user}) => user)
     const {loggedIn} = useAppSelector(({user}) => user)
@@ -64,7 +62,6 @@ const PreviewPost: FC<IProps> =
                                            post={post}
                                            views={views}
                                            likes={likes}
-                                           disLikes={disLikes}
                                            hasSidebar={sidebar}
                                            relatedPosts={relatedPosts}
                                            dictionary={dictionary}
@@ -74,7 +71,6 @@ const PreviewPost: FC<IProps> =
                                                  post={post}
                                                  views={views}
                                                  likes={likes}
-                                                 disLikes={disLikes}
                                                  hasSidebar={sidebar}
                                                  relatedPosts={relatedPosts}
                                                  dictionary={dictionary} locale={locale}/> :
@@ -83,7 +79,6 @@ const PreviewPost: FC<IProps> =
                                                        post={post}
                                                        views={views}
                                                        likes={likes}
-                                                       disLikes={disLikes}
                                                        hasSidebar={sidebar}
                                                        relatedPosts={relatedPosts}
                                                        dictionary={dictionary}
@@ -92,7 +87,6 @@ const PreviewPost: FC<IProps> =
                                                        post={post}
                                                        views={views}
                                                        likes={likes}
-                                                       disLikes={disLikes}
                                                        hasSidebar={sidebar}
                                                        relatedPosts={relatedPosts}
                                                        dictionary={dictionary} locale={locale}/> : null

@@ -7,7 +7,7 @@ import './MetaDataSelector.scss';
 import { setAlert } from '@store/reducers/globalStateReducer';
 import { useAppDispatch } from '@store/hooks';
 import { reactSelectPrimaryTheme } from '@repo/data-structures';
-import getMetaSuggestion from '@lib/actions/database/operations/metas/getMetaSuggestion';
+import getMetaSuggestion from '@lib/actions/database/metas/getMetaSuggestion';
 
 interface ComponentPropTypes {
   metaType: MetasType;

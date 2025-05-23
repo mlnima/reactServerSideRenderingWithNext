@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { setActiveVideoTrailerId } from '@store/reducers/postsReducers/postsReducer';
 import Image from 'next/image';
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
-import viewPost from '@lib/actions/database/operations/posts/viewPost';
+import viewPost from '@lib/actions/database/posts/viewPost';
 //import {clearACacheByTag} from "@lib/serverActions";
 const fallbackImage = '/asset/images/default/no-image-available.png';
 

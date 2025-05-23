@@ -6,7 +6,7 @@ import { faCirclePlus } from '@fortawesome/free-solid-svg-icons/faCirclePlus';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { imageCanvasCompressor } from '@repo/utils';
 import { replaceUserProfileImage } from '@store/reducers/userReducers/userReducer';
-import uploadUserProfileImage from '@lib/actions/database/operations/users/uploadUserProfileImage';
+import uploadUserProfileImage from '@lib/actions/database/users/uploadUserProfileImage';
 import { ServerActionResponse } from '@lib/actions/response';
 import { setAlert } from '@store/reducers/globalStateReducer';
 

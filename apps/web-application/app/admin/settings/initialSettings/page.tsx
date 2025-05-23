@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import './styles.scss';
 import InitialSettingsPageWrapper from './components/InitialSettingsPageWrapper';
-import getSettings from '@lib/actions/database/operations/settings/getSettings';
+import getSettings from '@lib/actions/database/settings/getSettings';
 import { IInitialSettings } from '@repo/typescript-types';
 import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 

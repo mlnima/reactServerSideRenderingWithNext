@@ -8,7 +8,7 @@ import defaultWidgetsData from './defaultWidgetsData';
 import { useAppDispatch } from '@store/hooks';
 import { IWidget } from '@repo/typescript-types';
 import './AddWidgetMenu.scss'
-import dashboardCreateNewWidget from '@lib/actions/database/operations/widgets/dashboardCreateNewWidget';
+import dashboardCreateNewWidget from '@lib/actions/database/widgets/dashboardCreateNewWidget';
 import { setAlert } from '@store/reducers/globalStateReducer';
 import { useRouter } from 'next/navigation';
 

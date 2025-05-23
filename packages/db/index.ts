@@ -21,38 +21,43 @@ import settingSchema from './src/schemas/settingSchema';
 import tagSchema from './src/schemas/tagSchema';
 import userSchema from './src/schemas/userSchema';
 import widgetSchema from './src/schemas/widgetSchema';
+import userRelationSchema from './src/schemas/userRelationSchema';
+import userEngagementSchema from './src/schemas/userEngagementSchema';
 //----------------------------------------------------------------------
 import {
-    isValidObjectId,
-    flatDocumentToObject,
-    flatArrayOdDocumentToObject
+  isValidObjectId,
+  flatDocumentToObject,
+  flatArrayOdDocumentToObject,
 } from './src/tools';
 
 export {
-    connectToDatabase,
-    actorSchema,
-    categorySchema,
-    chatroomMessageSchema,
-    chatroomSchema,
-    commentSchema,
-    contactFormSchema,
-    conversationSchema,
-    emailSchema,
-    fileSchema,
-    formSchema,
-    LogSchema,
-    messengerConversationMessageSchema,
-    messengerConversationSchema,
-    metaSchema,
-    orderSchema,
-    pageSchema,
-    postSchema,
-    searchKeywordSchema,
-    settingSchema,
-    tagSchema,
-    userSchema,
-    widgetSchema,
-    isValidObjectId,
-    flatDocumentToObject,
-    flatArrayOdDocumentToObject
-}
+  connectToDatabase,
+  actorSchema,
+  categorySchema,
+  chatroomMessageSchema,
+  chatroomSchema,
+  commentSchema,
+  contactFormSchema,
+  conversationSchema,
+  emailSchema,
+  fileSchema,
+  formSchema,
+  LogSchema,
+  messengerConversationMessageSchema,
+  messengerConversationSchema,
+  metaSchema,
+  orderSchema,
+  pageSchema,
+  postSchema,
+  searchKeywordSchema,
+  settingSchema,
+  tagSchema,
+  userSchema,
+  widgetSchema,
+  userRelationSchema,
+  userEngagementSchema,
+  isValidObjectId,
+  flatDocumentToObject,
+  flatArrayOdDocumentToObject,
+
+};

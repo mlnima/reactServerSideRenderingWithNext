@@ -5,8 +5,8 @@ import { useAppDispatch } from '@store/hooks';
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
 import './AssetBulkAction.scss';
-import dashboardUpdatePostsStatus from '@lib/actions/database/operations/posts/dashboardUpdatePostsStatus';
-import dashboardUpdateMetasStatus from '@lib/actions/database/operations/metas/dashboardUpdateMetasStatus';
+import dashboardUpdatePostsStatus from '@lib/actions/database/posts/dashboardUpdatePostsStatus';
+import dashboardUpdateMetasStatus from '@lib/actions/database/metas/dashboardUpdateMetasStatus';
 
 interface AssetBulkActionPropTypes {
   selectedItems: string[];

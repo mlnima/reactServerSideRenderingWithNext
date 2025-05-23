@@ -4,9 +4,9 @@ import { useSearchParams } from 'next/navigation';
 import LanguagesOptions from '@components/global/LanguagesOptions';
 import './styles.scss';
 import { IMeta, MetasType } from '@repo/typescript-types';
-import dashboardGetMeta from '@lib/actions/database/operations/metas/dashboardGetMeta';
-import dashboardDeleteMeta from '@lib/actions/database/operations/metas/dashboardDeleteMeta';
-import dashboardUpdateMeta from '@lib/actions/database/operations/metas/dashboardUpdateMeta';
+import dashboardGetMeta from '@lib/actions/database/metas/dashboardGetMeta';
+import dashboardDeleteMeta from '@lib/actions/database/metas/dashboardDeleteMeta';
+import dashboardUpdateMeta from '@lib/actions/database/metas/dashboardUpdateMeta';
 
 const EditMetaPage = () => {
 

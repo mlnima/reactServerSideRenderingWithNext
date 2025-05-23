@@ -8,10 +8,10 @@ import FollowingOptionsPopup from './FollowingOptionsPopup/FollowingOptionsPopup
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { IUserPageData } from '@repo/typescript-types';
-import follow from '@lib/actions/database/operations/users/follow';
-import unfollow from '@lib/actions/database/operations/users/unfollow';
+import follow from '@lib/actions/database/users/follow';
+import unfollow from '@lib/actions/database/users/unfollow';
 import { clearACacheByTag } from '@lib/serverActions';
-import newConversation from '@lib/actions/database/operations/messenger/newConversation';
+import newConversation from '@lib/actions/database/messenger/newConversation';
 import { setAlert } from '@store/reducers/globalStateReducer';
 import { ServerActionResponse } from '@lib/actions/response';
 

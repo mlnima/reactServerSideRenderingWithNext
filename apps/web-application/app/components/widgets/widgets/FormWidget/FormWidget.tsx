@@ -4,7 +4,7 @@ import { useAppDispatch } from '@store/hooks';
 import './FormWidget.scss';
 import FormWidgetField from '@components/widgets/widgets/FormWidget/FormWidgetField/FormWidgetField';
 import { loading, setAlert } from '@store/reducers/globalStateReducer';
-import saveFormWidgetData from '@lib/actions/database/operations/widgets/saveFormWidgetData';
+import saveFormWidgetData from '@lib/actions/database/widgets/saveFormWidgetData';
 import { useAppSelector } from '@store/hooks';
 
 interface FormWidgetPropTypes {

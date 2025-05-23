@@ -3,8 +3,8 @@ import { capitalizeFirstLetters } from '@repo/utils';
 import { AlternatesGenerators } from '@lib/alternatesCanonicalGenerator';
 import { IInitialSettings, IMeta, IPageProps, IPost } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
-import getSearch from '@lib/actions/database/operations/search/getSearch';
-import getSettings from '@lib/actions/database/operations/settings/getSettings';
+import getSearch from '@lib/actions/database/search/getSearch';
+import getSettings from '@lib/actions/database/settings/getSettings';
 import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 import { headMetaFromSettings } from '@lib/headMetaFromSettings';
 

@@ -24,10 +24,10 @@ import LoggedInRequirePageMessage from '@components/LoggedInRequireMessage/Logge
 import ForbiddenMessage from '@components/ForbiddenMessage/ForbiddenMessage';
 import { useSearchParams } from 'next/navigation';
 import { usePathname } from 'next/navigation';
-import getMeta from '@lib/actions/database/operations/metas/getMeta';
-import getEditingPost from '@lib/actions/database/operations/posts/getEditingPost';
-import deletePost from '@lib/actions/database/operations/posts/deletePost';
-import updatePost from '@lib/actions/database/operations/posts/updatePost';
+import getMeta from '@lib/actions/database/metas/getMeta';
+import getEditingPost from '@lib/actions/database/posts/getEditingPost';
+import deletePost from '@lib/actions/database/posts/deletePost';
+import updatePost from '@lib/actions/database/posts/updatePost';
 import { clearACacheByTag } from '@lib/serverActions';
 
 interface IProps {

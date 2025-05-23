@@ -11,7 +11,6 @@ interface IProps {
   post: IPost;
   views: number;
   likes: number;
-  disLikes: number;
   locale: string;
   hasSidebar?: string;
   dictionary: {
@@ -26,8 +25,7 @@ const ArticleTypePostPage: FC<IProps> = ({
   locale,
   dictionary,
   views,
-  likes,
-  disLikes,
+  likes
 }) => {
   return (
     <>
@@ -50,7 +48,6 @@ const ArticleTypePostPage: FC<IProps> = ({
             rating={true}
             dictionary={dictionary}
             likes={likes}
-            disLikes={disLikes}
             views={views}
             _id={post._id}
           />

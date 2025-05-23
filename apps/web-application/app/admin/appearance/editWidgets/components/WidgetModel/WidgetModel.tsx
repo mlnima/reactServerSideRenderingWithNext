@@ -8,7 +8,7 @@ import WidgetHeaderControl from './WidgetHeaderControl/WidgetHeaderControl';
 import { IWidget } from '@repo/typescript-types';
 import { useAppDispatch } from '@store/hooks';
 import { inputValueSimplifier } from '@repo/utils';
-import dashboardUpdateWidget from '@lib/actions/database/operations/widgets/dashboardUpdateWidget';
+import dashboardUpdateWidget from '@lib/actions/database/widgets/dashboardUpdateWidget';
 import { setAlert } from '@store/reducers/globalStateReducer';
 
 interface WidgetModelPropTypes {

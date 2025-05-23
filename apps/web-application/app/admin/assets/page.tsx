@@ -2,7 +2,7 @@ import React from 'react';
 import { IInitialSettings } from '@repo/typescript-types';
 import AssetsPageContent from './components/AssetsPageContent';
 import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
-import getSettings from '@lib/actions/database/operations/settings/getSettings';
+import getSettings from '@lib/actions/database/settings/getSettings';
 import './styles.scss';
 
 const Assets = async () => {

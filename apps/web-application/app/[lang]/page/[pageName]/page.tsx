@@ -5,8 +5,8 @@ import SidebarWidgetAreaRenderer
   from '@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer';
 import { IPageProps } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
-import getPage from '@lib/actions/database/operations/pages/getPage';
-import getWidgets from '@lib/actions/database/operations/widgets/getWidgets';
+import getPage from '@lib/actions/database/pages/getPage';
+import getWidgets from '@lib/actions/database/widgets/getWidgets';
 import Soft404 from '@components/Soft404/Soft404';
 import React from 'react';
 

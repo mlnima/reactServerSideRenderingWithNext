@@ -8,9 +8,9 @@ import { IComment, NewComment } from '@repo/typescript-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAnglesDown, faAnglesUp, faPlus } from '@fortawesome/free-solid-svg-icons';
 import CommentsRenderer from './CommentsRenderer/CommentsRenderer';
-import getComments from '@lib/actions/database/operations/comments/getComments';
-import newComment from '@lib/actions/database/operations/comments/newComment';
-import deleteComments from '@lib/actions/database/operations/comments/deleteComments';
+import getComments from '@lib/actions/database/comments/getComments';
+import newComment from '@lib/actions/database/comments/newComment';
+import deleteComments from '@lib/actions/database/comments/deleteComments';
 import { clearACacheByTag } from '@lib/serverActions';
 
 interface IProps {

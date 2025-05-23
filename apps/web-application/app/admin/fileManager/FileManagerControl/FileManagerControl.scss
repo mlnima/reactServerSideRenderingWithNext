@@ -1,31 +1,18 @@
-#FileManagerControl{
-  margin: 20px 0;
+#FileManagerControl {
+  margin: .5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 
   .file-Manager-control-address-bar {
     display: flex;
     justify-content: flex-start;
-    margin: 20px 0;
-
-    input {
-      width: 90%;
-      background-color: white;
-    }
   }
 
   .file-Manager-control-quick-access {
-
-  }
-
-  button {
-    margin: 0 10px;
-    outline: none;
-    border: none;
-    padding: 8px 10px;
-    border-radius: 5px;
-
-    &:active {
-      background-color: white;
-      border: none;
-    }
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .5rem;
   }
 }

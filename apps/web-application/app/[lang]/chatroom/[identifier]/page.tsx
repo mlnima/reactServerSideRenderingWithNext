@@ -4,7 +4,7 @@ import ChatroomPageContent from './components/ChatroomPageContent/ChatroomPageCo
 import chatroomMetaGenerator from './components/chatroomMetaGenerator/chatroomMetaGenerator';
 import { PageParams, PageSearchParams } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
-import getChatroom from '@lib/actions/database/operations/chatrooms/getChatroom';
+import getChatroom from '@lib/actions/database/chatrooms/getChatroom';
 import Soft404 from '@components/Soft404/Soft404';
 
 interface IProps {

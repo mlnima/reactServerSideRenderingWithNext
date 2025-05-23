@@ -4,7 +4,7 @@ import React, { ChangeEvent, useRef, useState } from 'react';
 import { useAppSelector,useAppDispatch } from '@store/hooks';
 import qualityConvertor from '../../assets/components/qualityConvertor';
 import './styles.scss';
-import dashboardCreateNewPost from '@lib/actions/database/operations/posts/dashboardCreateNewPost';
+import dashboardCreateNewPost from '@lib/actions/database/posts/dashboardCreateNewPost';
 
 
 const ImportPostsPage = (): JSX.Element => {

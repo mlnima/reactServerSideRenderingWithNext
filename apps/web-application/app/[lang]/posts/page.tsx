@@ -6,9 +6,9 @@ import PostPage from '@components/PostsPage/PostsPage';
 import postsMetaGenerator from './components/postsMetaGenerator/postsMetaGenerator';
 import { IPageProps, IPageSettings } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
-import getWidgets from '@lib/actions/database/operations/widgets/getWidgets';
-import getPosts from '@lib/actions/database/operations/posts/getPosts';
-import getSettings from '@lib/actions/database/operations/settings/getSettings';
+import getWidgets from '@lib/actions/database/widgets/getWidgets';
+import getPosts from '@lib/actions/database/posts/getPosts';
+import getSettings from '@lib/actions/database/settings/getSettings';
 import Soft404 from '@components/Soft404/Soft404';
 import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 

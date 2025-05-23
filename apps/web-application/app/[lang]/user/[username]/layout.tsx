@@ -1,10 +1,10 @@
 // 'use client'
-import getInitialUserPageData from '@lib/actions/database/operations/users/getInitialUserPageData';
+import getInitialUserPageData from '@lib/actions/database/users/getInitialUserPageData';
 import localDetector from '@lib/localDetector';
 import { getDictionary } from '../../../../get-dictionary';
 import { ILayoutProps, IPageSettings, User } from '@repo/typescript-types';
-import getSettings from '@lib/actions/database/operations/settings/getSettings';
-import getWidgets from '@lib/actions/database/operations/widgets/getWidgets';
+import getSettings from '@lib/actions/database/settings/getSettings';
+import getWidgets from '@lib/actions/database/widgets/getWidgets';
 import Soft404 from '@components/Soft404/Soft404';
 import React from 'react';
 import SidebarWidgetAreaRenderer

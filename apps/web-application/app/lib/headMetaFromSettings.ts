@@ -1,5 +1,5 @@
 import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
-import getSettings from '@lib/actions/database/operations/settings/getSettings';
+import getSettings from '@lib/actions/database/settings/getSettings';
 import { IInitialSettings, IPageSettings } from '@repo/typescript-types';
 import { textContentReplacer } from '@repo/utils';
 

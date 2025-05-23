@@ -19,7 +19,7 @@ const Topbar = () => {
 
   return (
     <div className={'dashboardTopbar'}>
-      <div className={'dashboard-navigation-item'}>
+      <div className={'dashboardNavigationItemsGroup'}>
                 <span className={'navigationLink'} onClick={AdminSideBarOpenCloseHandler}>
                     <FontAwesomeIcon icon={faBars} />
                 </span>
@@ -28,8 +28,8 @@ const Topbar = () => {
         </Link>
       </div>
 
-      <div className={'dashboard-navigation-item'}>
-        <Link className={'navigationLink'} href="/admin/appearance/editWidgets" passHref>
+      <div className={'dashboardNavigationItemsGroup'}>
+        <Link className={'navigationLink '} href="/admin/appearance/editWidgets" passHref>
           Widgets
         </Link>
         <Link className={'navigationLink'} href="/admin/assets?assetsType=posts&size=20" passHref>

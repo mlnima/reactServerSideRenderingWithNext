@@ -9,9 +9,9 @@ import PostsPageInfo from '@components/PostsPage/PostsPageInfo/PostsPageInfo';
 import Soft404 from '@components/Soft404/Soft404';
 import { IPageProps, IPageSettings } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
-import getSettings from '@lib/actions/database/operations/settings/getSettings';
-import getWidgets from '@lib/actions/database/operations/widgets/getWidgets';
-import getPosts from '@lib/actions/database/operations/posts/getPosts';
+import getSettings from '@lib/actions/database/settings/getSettings';
+import getWidgets from '@lib/actions/database/widgets/getWidgets';
+import getPosts from '@lib/actions/database/posts/getPosts';
 import { isValidObjectId } from '@repo/db';
 import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 

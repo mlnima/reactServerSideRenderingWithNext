@@ -17,7 +17,7 @@ node_modules
 
 apps/api-server/public/*
 
-apps/web-application/public/uploads
+trash/uploads
 apps/web-application/locales/*/customTranslation.json
 apps/web-application/public/*.xml
 apps/web-application/public/favicon.ico

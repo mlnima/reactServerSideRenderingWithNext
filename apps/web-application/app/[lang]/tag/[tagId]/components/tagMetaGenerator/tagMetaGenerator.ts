@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { AlternatesGenerators } from '@lib/alternatesCanonicalGenerator';
 import { IPageProps } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
-import getPosts from '@lib/actions/database/operations/posts/getPosts';
+import getPosts from '@lib/actions/database/posts/getPosts';
 import { headMetaFromSettings } from '@lib/headMetaFromSettings';
 
 const alternatesGenerators = new AlternatesGenerators();

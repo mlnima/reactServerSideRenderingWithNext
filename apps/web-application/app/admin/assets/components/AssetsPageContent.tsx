@@ -7,13 +7,13 @@ import TableBody from './TableBody/TableBody';
 import tableItemProperties from './tableBodyItemProperties';
 import { useSearchParams } from 'next/navigation';
 import { IChatroom, IComment, IInitialSettings, IMeta, IPage, IPost, User } from '@repo/typescript-types';
-import dashboardGetPosts from '@lib/actions/database/operations/posts/dashboardGetPosts';
-import dashboardGetMetas from '@lib/actions/database/operations/metas/dashboardGetMetas';
-import dashboardGetUsers from '@lib/actions/database/operations/users/dashboardGetUsers';
-import dashboardGetComments from '@lib/actions/database/operations/comments/dashboardGetComments';
-import dashboardGetForms from '@lib/actions/database/operations/forms/dashboardGetForms';
-import dashboardGetPages from '@lib/actions/database/operations/pages/dashboardGetPages';
-import dashboardGetChatrooms from '@lib/actions/database/operations/chatrooms/dashboardGetChatrooms';
+import dashboardGetPosts from '@lib/actions/database/posts/dashboardGetPosts';
+import dashboardGetMetas from '@lib/actions/database/metas/dashboardGetMetas';
+import dashboardGetUsers from '@lib/actions/database/users/dashboardGetUsers';
+import dashboardGetComments from '@lib/actions/database/comments/dashboardGetComments';
+import dashboardGetForms from '@lib/actions/database/forms/dashboardGetForms';
+import dashboardGetPages from '@lib/actions/database/pages/dashboardGetPages';
+import dashboardGetChatrooms from '@lib/actions/database/chatrooms/dashboardGetChatrooms';
 import { loading, setAlert } from '@store/reducers/globalStateReducer';
 
 

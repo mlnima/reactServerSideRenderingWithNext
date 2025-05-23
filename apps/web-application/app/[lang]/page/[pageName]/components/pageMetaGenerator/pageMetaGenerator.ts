@@ -1,7 +1,7 @@
 import { AlternatesGenerators } from '@lib/alternatesCanonicalGenerator';
 import { IPageProps } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
-import getPage from '@lib/actions/database/operations/pages/getPage';
+import getPage from '@lib/actions/database/pages/getPage';
 
 
 const alternatesGenerators = new AlternatesGenerators();

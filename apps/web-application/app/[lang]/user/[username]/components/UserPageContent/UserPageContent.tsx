@@ -1,8 +1,8 @@
 /* eslint-disable */
 'use client';
 import LoggedInRequirePageMessage from '@components/LoggedInRequireMessage/LoggedInRequirePageMessage';
-import getPosts from "@lib/actions/database/operations/posts/getPosts";
-import getLoadedUserPageData from '@lib/actions/database/operations/users/getLoadedUserPageData';
+import getPosts from "@lib/actions/database/posts/getPosts";
+import getLoadedUserPageData from '@lib/actions/database/users/getLoadedUserPageData';
 import { IUserPageData, IPost } from '@repo/typescript-types';
 import { useAppSelector } from '@store/hooks';
 import { FC, useEffect,  useState } from 'react';

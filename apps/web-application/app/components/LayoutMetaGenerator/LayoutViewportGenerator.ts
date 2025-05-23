@@ -1,6 +1,6 @@
 
 
-import getSettings from '@lib/actions/database/operations/settings/getSettings';
+import getSettings from '@lib/actions/database/settings/getSettings';
 import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 import { IInitialSettings } from '@repo/typescript-types';
 export const dynamic = 'force-dynamic';

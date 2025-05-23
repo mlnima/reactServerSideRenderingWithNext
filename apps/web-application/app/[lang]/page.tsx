@@ -4,8 +4,8 @@ import SidebarWidgetAreaRenderer
   from '@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer';
 import { IInitialSettings, IPageProps, IPageSettings } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
-import getSettings from '@lib/actions/database/operations/settings/getSettings';
-import getWidgets from '@lib/actions/database/operations/widgets/getWidgets';
+import getSettings from '@lib/actions/database/settings/getSettings';
+import getWidgets from '@lib/actions/database/widgets/getWidgets';
 import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 import './homePage.scss';
 

@@ -8,10 +8,10 @@ import UploadedPopView from './UploadedPopView/UploadedPopView';
 import { useAppDispatch } from '@store/hooks';
 import './styles.scss';
 import { loading, setAlert } from '@store/reducers/globalStateReducer';
-import dashboardReadPath from '@lib/actions/database/operations/fileManager/dashboardReadPath';
+import dashboardReadPath from '@lib/actions/database/fileManager/dashboardReadPath';
 import { ServerActionResponse } from '@lib/actions/response';
-import dashboardDeleteFile from '@lib/actions/database/operations/fileManager/dashboardDeleteFile';
-import dashboardUploadFile from '@lib/actions/database/operations/fileManager/dashboardUploadFile';
+import dashboardDeleteFile from '@lib/actions/database/fileManager/dashboardDeleteFile';
+import dashboardUploadFile from '@lib/actions/database/fileManager/dashboardUploadFile';
 
 const FileManagerPage = () => {
   const dispatch = useAppDispatch();

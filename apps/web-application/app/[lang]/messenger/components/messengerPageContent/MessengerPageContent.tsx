@@ -13,8 +13,8 @@ import MessengerMultiMediaInputBox from './MessengerMultiMediaInputBox/Messenger
 import { IMessengerConversation, IMessengerConversationMessage } from '@repo/typescript-types';
 import ConversationsControlsHeader from './ConversationsControlsHeader/ConversationsControlsHeader';
 
-import getConversation from '@lib/actions/database/operations/messenger/getConversation';
-import getConversations from '@lib/actions/database/operations/messenger/getConversations';
+import getConversation from '@lib/actions/database/messenger/getConversation';
+import getConversations from '@lib/actions/database/messenger/getConversations';
 
 interface IProps {
     dictionary: {

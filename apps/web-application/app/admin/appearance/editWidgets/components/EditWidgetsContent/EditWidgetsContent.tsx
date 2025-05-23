@@ -7,7 +7,7 @@ import { FC } from 'react';
 import './EditWidgetsContent.scss';
 import { useAppDispatch } from '@store/hooks';
 import { useRouter } from 'next/navigation';
-import dashboardCreateNewWidget from '@lib/actions/database/operations/widgets/dashboardCreateNewWidget';
+import dashboardCreateNewWidget from '@lib/actions/database/widgets/dashboardCreateNewWidget';
 import { setAlert } from '@store/reducers/globalStateReducer';
 
 interface IProps {

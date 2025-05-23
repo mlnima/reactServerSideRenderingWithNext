@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import memberAutoLogin from '@lib/actions/database/operations/users/memberAutoLogin';
+import memberAutoLogin from '@lib/actions/database/users/memberAutoLogin';
 import { ServerActionResponse } from '@lib/actions/response';
 
 const dev = process.env.NODE_ENV !== 'production';

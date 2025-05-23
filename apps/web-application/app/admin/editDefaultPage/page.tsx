@@ -6,8 +6,8 @@ import MonacoEditor from '@components/textEditors/MonacoEditor';
 import { useSearchParams } from 'next/navigation';
 import { useAppDispatch } from '@store/hooks';
 import './styles.scss';
-import dashboardUpdateSettings from '@lib/actions/database/operations/settings/dashboardUpdateSettings';
-import getSettings from '@lib/actions/database/operations/settings/getSettings';
+import dashboardUpdateSettings from '@lib/actions/database/settings/dashboardUpdateSettings';
+import getSettings from '@lib/actions/database/settings/getSettings';
 import { ServerActionResponse } from '@lib/actions/response';
 import { setAlert } from '@store/reducers/globalStateReducer';
 

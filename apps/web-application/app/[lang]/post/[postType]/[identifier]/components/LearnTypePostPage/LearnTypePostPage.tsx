@@ -11,7 +11,6 @@ interface IProps {
   post: IPost;
   views: number;
   likes: number;
-  disLikes: number;
   locale: string;
   hasSidebar?: string;
   dictionary: {
@@ -27,7 +26,7 @@ const LearnTypePostPage: FC<IProps> = ({
   dictionary,
   views,
   likes,
-  disLikes,
+
 }) => {
   return (
     <>
@@ -50,7 +49,6 @@ const LearnTypePostPage: FC<IProps> = ({
             rating={true}
             dictionary={dictionary}
             likes={likes}
-            disLikes={disLikes}
             views={views}
             _id={post._id}
           />

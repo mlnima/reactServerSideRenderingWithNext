@@ -8,9 +8,9 @@ import ActorsPageContentRenderer from '@components/metas/ActorsPageContentRender
 import './page.styles.scss';
 import { IInitialSettings, PageParams, PageSearchParams } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
-import getWidgets from '@lib/actions/database/operations/widgets/getWidgets';
-import getMetas from '@lib/actions/database/operations/metas/getMetas';
-import getSettings from '@lib/actions/database/operations/settings/getSettings';
+import getWidgets from '@lib/actions/database/widgets/getWidgets';
+import getMetas from '@lib/actions/database/metas/getMetas';
+import getSettings from '@lib/actions/database/settings/getSettings';
 import Soft404 from '@components/Soft404/Soft404';
 import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 

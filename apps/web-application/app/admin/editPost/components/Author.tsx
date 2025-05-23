@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import AsyncSelect from 'react-select/async';
 import { reactSelectPrimaryTheme } from '@repo/data-structures';
 import { IPost, User } from '@repo/typescript-types';
-import getUsersSuggestionList from '@lib/actions/database/operations/users/getUsersSuggestionList';
+import getUsersSuggestionList from '@lib/actions/database/users/getUsersSuggestionList';
 import { setAlert } from '@store/reducers/globalStateReducer';
 import { useAppDispatch } from '@store/hooks';
 

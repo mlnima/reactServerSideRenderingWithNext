@@ -5,7 +5,7 @@ import { setAlert } from '@store/reducers/globalStateReducer';
 import './ActionOnPost.scss';
 import { IPost } from '@repo/typescript-types';
 import React, { FC } from 'react';
-import dashboardUpdatePost from '@lib/actions/database/operations/posts/dashboardUpdatePost';
+import dashboardUpdatePost from '@lib/actions/database/posts/dashboardUpdatePost';
 import { ServerActionResponse } from '@lib/actions/response';
 
 interface IProps {

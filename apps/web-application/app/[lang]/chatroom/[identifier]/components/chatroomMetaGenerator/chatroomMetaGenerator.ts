@@ -2,7 +2,7 @@ import { capitalizeFirstLetter } from '@repo/utils';
 import { AlternatesGenerators } from '@lib/alternatesCanonicalGenerator';
 import { IPageProps } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
-import getChatroom from '@lib/actions/database/operations/chatrooms/getChatroom';
+import getChatroom from '@lib/actions/database/chatrooms/getChatroom';
 
 const alternatesGenerators = new AlternatesGenerators();
 

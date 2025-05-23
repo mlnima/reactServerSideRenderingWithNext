@@ -19,7 +19,7 @@ import {
 
 import SearchbarKeywordSuggestions from '@components/widgets/widgets/Searchbar/SearchbarKeywordSuggestions';
 import { ISuggestion } from '@repo/typescript-types';
-import getSearchSuggestion from '@lib/actions/database/operations/search/getSearchSuggestion';
+import getSearchSuggestion from '@lib/actions/database/search/getSearchSuggestion';
 
 interface IProps {
   locale: string;

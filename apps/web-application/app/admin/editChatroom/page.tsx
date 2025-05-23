@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAppDispatch } from '@store/hooks';
 import './styles.scss';
-import dashboardGetChatroom from '@lib/actions/database/operations/chatrooms/dashboardGetChatroom';
+import dashboardGetChatroom from '@lib/actions/database/chatrooms/dashboardGetChatroom';
 import { setAlert } from '@store/reducers/globalStateReducer';
 import { IChatroom } from '@repo/typescript-types';
-import dashboardUpdateChatroom from '@lib/actions/database/operations/chatrooms/dashboardUpdateChatroom';
-import dashboardDeleteChatroom from '@lib/actions/database/operations/chatrooms/dashboardDeleteChatroom';
+import dashboardUpdateChatroom from '@lib/actions/database/chatrooms/dashboardUpdateChatroom';
+import dashboardDeleteChatroom from '@lib/actions/database/chatrooms/dashboardDeleteChatroom';
 
 const EditChatroom = ({}) => {
   const searchParams = useSearchParams();

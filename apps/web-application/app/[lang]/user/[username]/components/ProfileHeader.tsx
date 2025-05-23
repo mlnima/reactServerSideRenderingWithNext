@@ -6,7 +6,7 @@ import UserPageActionButtons from './UserPageActionButtons/UserPageActionButtons
 import ProfileStats from './UserPageContent/ProfileStats';
 import { useAppSelector } from '@store/hooks';
 import { IInitialUserPageData, IUserPageData } from '@repo/typescript-types';
-import getLoadedUserPageData from '@lib/actions/database/operations/users/getLoadedUserPageData';
+import getLoadedUserPageData from '@lib/actions/database/users/getLoadedUserPageData';
 import './ProfileHeader.scss';
 
 interface IProps {

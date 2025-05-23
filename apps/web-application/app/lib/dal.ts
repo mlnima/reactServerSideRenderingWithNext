@@ -30,3 +30,20 @@ export const verifySession = cache(async (): Promise<TVerifySession> => {
 
 });
 
+export const verifyActionDelay = cache(async (): Promise<boolean> => {
+  try {
+    const cookie = (await cookies()).get('lastAction')?.value;
+
+    if (!cookie) {
+      return false;
+    }
+
+    const lastActionTime = parseInt(cookie, 10);
+    const currentTime = Date.now();
+
+    return currentTime - lastActionTime < 10000;
+  } catch (error) {
+    return false;
+  }
+});
+

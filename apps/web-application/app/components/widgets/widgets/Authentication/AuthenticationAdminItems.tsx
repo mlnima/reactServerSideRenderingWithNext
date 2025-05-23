@@ -13,7 +13,7 @@ import { useParams, usePathname, useSearchParams, useSelectedLayoutSegment } fro
 import socket from '@lib/web-socket-client';
 import { faBolt, faChevronDown, faChevronUp, faWrench } from '@fortawesome/free-solid-svg-icons';
 import { clearCachesByServerAction } from '@lib/serverActions';
-import { fixUserDocuments } from '@lib/actions/database/operations/fix';
+import { fixUserDocuments } from '@lib/actions/database/fix';
 import { cookieChecker, deleteCookie, cookieSetter } from '@lib/actions/cookieTools';
 import { useState } from 'react';
 

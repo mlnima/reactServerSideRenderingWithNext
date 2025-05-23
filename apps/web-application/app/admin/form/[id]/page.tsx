@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { useAppDispatch } from '@store/hooks';
 import './styles.scss';
-import dashboardGetForm from '@lib/actions/database/operations/forms/dashboardGetForm';
+import dashboardGetForm from '@lib/actions/database/forms/dashboardGetForm';
 import { setAlert } from '@store/reducers/globalStateReducer';
 import { IForm } from '@repo/typescript-types';
-import dashboardDeleteForm from '@lib/actions/database/operations/forms/dashboardDeleteForm';
+import dashboardDeleteForm from '@lib/actions/database/forms/dashboardDeleteForm';
 
 const Form = () => {
   const dispatch = useAppDispatch();

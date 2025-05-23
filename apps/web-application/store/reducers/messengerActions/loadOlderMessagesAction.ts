@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { loading, setAlert } from '@store/reducers/globalStateReducer';
 import React from 'react';
-import getConversationMessages from '@lib/actions/database/operations/messenger/getConversationMessages';
+import getConversationMessages from '@lib/actions/database/messenger/getConversationMessages';
 
 interface IArgs {
   limit: number;

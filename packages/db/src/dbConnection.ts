@@ -22,8 +22,6 @@ let cached: MongooseCache = global.mongoose || { conn: null, promise: null };
 global.mongoose = cached;
 
 const connectToDatabase = async (connectorName: string = ''): Promise<Mongoose> => {
-  //
-  // console.log('\x1b[33m%s\x1b[0m','mongoose.connection.readyState => ',mongoose.connection.readyState );
 
   if (cached.conn) {
     console.log('\x1b[33m%s\x1b[0m', `${connectorName} * Using cached database connection *`);
