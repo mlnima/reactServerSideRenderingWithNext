@@ -59,6 +59,11 @@ const UserPageContent: FC<IProps> = ({ dictionary, locale, initialUserPageData }
   //   }
   // }, [searchParams,loggedIn]);
 
+  useEffect(() => {
+    console.log(`userPageData=> `,userPageData);
+    // console.log(`console=> `);
+  }, [userPageData]);
+
   const getUserPageData = async () => {
     try {
       if (!initialUserPageData._id) return;
@@ -72,10 +77,10 @@ const UserPageContent: FC<IProps> = ({ dictionary, locale, initialUserPageData }
         return
       }
 
-      setUserPageData({
-        ...userPageData,
+      setUserPageData((prevState)=>({
+        ...prevState,
         ...data.loadedUserPageData
-      });
+      }));
 
     } catch {
       return null;
@@ -84,10 +89,7 @@ const UserPageContent: FC<IProps> = ({ dictionary, locale, initialUserPageData }
 
   const getUserPosts = async () => {
     const currentPageQuery = searchParams.get('page');
-    const currentPage =
-      currentPageQuery && typeof currentPageQuery === 'string'
-        ? parseInt(currentPageQuery, 10)
-        : 1;
+    const currentPage = currentPageQuery ? parseInt(currentPageQuery, 10) : 1;
 
 
     const { success, data } = await getPosts({

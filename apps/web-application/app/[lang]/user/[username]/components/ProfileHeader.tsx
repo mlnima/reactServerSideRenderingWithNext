@@ -35,9 +35,6 @@ const ProfileHeader: FC<IProps> = (
     }
   }, [loggedIn]);
 
-  useEffect(() => {
-    console.log(`userPageData=> `, userPageData);
-  }, [userPageData]);
 
   const getUserPageData = async () => {
     try {

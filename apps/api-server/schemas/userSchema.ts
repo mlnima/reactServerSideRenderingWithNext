@@ -11,10 +11,6 @@ const userSchema = new Schema({
         },
         draftPost: {type: Schema.Types.ObjectId, ref: 'post'},
         password: String,
-        superAdministrator: {
-                type: Boolean,
-                default: false,
-        },
         role: String,
         firstName: String,
         lastName: String,

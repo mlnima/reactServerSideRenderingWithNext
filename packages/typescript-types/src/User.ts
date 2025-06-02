@@ -1,4 +1,5 @@
 import { IFile } from './IFile';
+import mongoose, { Schema } from 'mongoose';
 
 export interface User {
   draftPost?: string | {};
@@ -100,3 +101,17 @@ export interface JWTPayload{
 }
 
 export type TToken = string | null
+
+export interface IUserRelation{
+  userId: string,
+  blockList: string[],
+  following: string[],
+  followingCount:number,
+  followersCount: number,
+}
+
+export interface IUserEngagement{
+  userId: string,
+  likedPosts: string[],
+  postsCount:number,
+}

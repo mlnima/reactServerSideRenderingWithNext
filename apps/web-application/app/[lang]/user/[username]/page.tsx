@@ -1,14 +1,13 @@
-
 import { getDictionary } from '../../../../get-dictionary';
 import './page.scss';
-import UserPageContent from './components/UserPageContent/UserPageContent'
+import UserPageContent from './components/UserPageContent/UserPageContent';
 // import UserPageContent from './components/UserPageContent/UserPageContent';
 import getSettings from '@lib/actions/database/settings/getSettings';
 import localDetector from '@lib/localDetector';
 import { IPageProps, IPageSettings, User } from '@repo/typescript-types';
 import getInitialUserPageData from '@lib/actions/database/users/getInitialUserPageData';
 import React from 'react';
-import getPosts from "@lib/actions/database/posts/getPosts";
+import getPosts from '@lib/actions/database/posts/getPosts';
 import PostsCardsRenderer from '@components/cards/CardsRenderer/PostsCardsRenderer/PostsCardsRenderer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons/faCamera';
@@ -39,7 +38,7 @@ const userPage = async (props: IPageProps) => {
     return <Soft404 dictionary={dictionary} />;
   }
 
-  const { initialUserPageData } = initialUserPageDataResponse?.data
+  const { initialUserPageData } = initialUserPageDataResponse?.data;
 
 
   const { success, data } = await getPosts({
@@ -49,7 +48,7 @@ const userPage = async (props: IPageProps) => {
     author: initialUserPageData._id,
     count: 8,
     sort: 'views',
-    returnTotalCount: false
+    returnTotalCount: false,
   });
 
 
@@ -59,19 +58,19 @@ const userPage = async (props: IPageProps) => {
 
 
 
-  const { posts } = data
+  const { posts } = data;
 
   return (
     <>
       {(initialUserPageData) &&
         <>
 
-        <UserPageContent
-          initialUserPageData={initialUserPageData}
-          dictionary={dictionary}
-          locale={locale}
-        />
-      </>
+          <UserPageContent
+            initialUserPageData={initialUserPageData}
+            dictionary={dictionary}
+            locale={locale}
+          />
+        </>
       }
 
       {(posts && posts?.length > 0) ?
@@ -83,14 +82,14 @@ const userPage = async (props: IPageProps) => {
             posts={posts}
           />
         </div>
-       : <div className={'noPosts'}>
-        <div className={'profileNoPostsYet'}>
-          <FontAwesomeIcon icon={faCamera} />
+        : <div className={'noPosts'}>
+          <div className={'profileNoPostsYet'}>
+            <FontAwesomeIcon icon={faCamera} />
+          </div>
+          <h2 className="profile-no-posts-title">
+            {dictionary?.['Nothing Here'] || 'Nothing Here'}
+          </h2>
         </div>
-        <h2 className="profile-no-posts-title">
-          {dictionary?.['Nothing Here'] || 'Nothing Here'}
-        </h2>
-      </div>
       }
 
 

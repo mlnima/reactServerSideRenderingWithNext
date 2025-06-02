@@ -5,6 +5,7 @@ import { verifySession } from '@lib/dal';
 
 const unfollow = async ({ unfollowId }: { unfollowId: string }) => {
   try {
+    console.log(`unfollow=> `,)
     const { isAuth ,userId} = await verifySession();
 
     if (!isAuth) {
@@ -25,8 +26,8 @@ const unfollow = async ({ unfollowId }: { unfollowId: string }) => {
       });
     }
 
-    await userRelationSchema.findByIdAndUpdate(userId, { $pull: { following: unfollowId } });
-    await userRelationSchema.findByIdAndUpdate(unfollowId, { $inc: { followersCount: -1 } });
+    await userRelationSchema.findOneAndUpdate({userId:userId}, { $pull: { following: unfollowId } });
+    await userRelationSchema.findOneAndUpdate({userId:unfollowId}, { $inc: { followersCount: -1 } });
     return successResponse({});
   } catch (error) {
     console.error(`sendFollowRequest => `, error);

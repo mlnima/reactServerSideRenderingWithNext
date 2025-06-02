@@ -1,8 +1,8 @@
 'use server';
-import { connectToDatabase, userSchema } from '@repo/db';
+import { connectToDatabase, userRelationSchema, userSchema } from '@repo/db';
 import { unstable_cacheTag as cacheTag } from 'next/cache';
 import { unstable_rethrow } from 'next/navigation';
-import { User } from '@repo/typescript-types';
+import { IUserEngagement, IUserRelation, User } from '@repo/typescript-types';
 import { errorResponse, successResponse } from '@lib/actions/response';
 
 const getInitialUserPageData = async (username: string | undefined) => {
@@ -14,10 +14,7 @@ const getInitialUserPageData = async (username: string | undefined) => {
       .select([
         'username',
         'role',
-        'followingCount',
-        'followersCount',
-        'postsCount',
-        'profileImage' +
+        'profileImage',
         'createdAt',
         'status',
         'isVerified',
@@ -30,13 +27,29 @@ const getInitialUserPageData = async (username: string | undefined) => {
       return null;
     }
 
+    const userRelationData = await userRelationSchema
+      .findOne({ userId:user._id })
+      .select([
+        'followingCount',
+        'followersCount',
+        'postsCount',
+      ])
+      .lean<IUserRelation | null>()
+
+    const userEngagementData = await userRelationSchema
+      .findOne({ userId:user._id })
+      .select([
+        'postsCount',
+      ])
+      .lean<IUserEngagement | null>()
+
     const data = {
       _id: user._id.toString(),
       username: user.username,
       role: user.role,
-      followingCount: user.followingCount || 0,
-      followersCount: user.followersCount || 0,
-      postsCount: user.postsCount || 0,
+      followingCount: userRelationData?.followingCount || 0,
+      followersCount: userRelationData?.followersCount || 0,
+      postsCount: userEngagementData?.postsCount || 0,
       profileImage: user.profileImage ? {
         _id: user.profileImage._id.toString(),
         filePath: user.profileImage.filePath,
@@ -48,9 +61,11 @@ const getInitialUserPageData = async (username: string | undefined) => {
 
     cacheTag('cacheItem', `CUserPageInitial-${data._id}`);
 
-    return successResponse({ data:{
+    return successResponse({
+      data:{
         initialUserPageData:data
-      } })
+      }})
+
   } catch (error) {
     unstable_rethrow(error);
     console.error(`getInitialUserPageData => `, error);

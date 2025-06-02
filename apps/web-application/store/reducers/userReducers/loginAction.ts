@@ -7,7 +7,6 @@ import {
 import memberLogin from '@lib/actions/database/users/memberLogin';
 import { ServerActionResponse } from '@lib/actions/response';
 
-
 interface ILoginAction {
   username: string,
   password: string
@@ -26,12 +25,15 @@ export const loginAction = createAsyncThunk('user/loginAction', async (
     }) as ServerActionResponse<{ userData: object, token: string }>;
 
     if (!success || !data?.userData) {
-      setAlert({ message: message || 'Something went wrong', type: success ? 'success' : 'error' });
+      thunkAPI.dispatch(setAlert({ message: message || 'Something went wrong', type: success ? 'success' : 'error' }));
       return;
     }
 
     thunkAPI.dispatch(setBackgroundFilter(false));
-    return data.userData;
+    return {
+      userData: data.userData,
+      loggedIn: true
+    };
   } catch (error) {
     thunkAPI.dispatch(
       setAlert({

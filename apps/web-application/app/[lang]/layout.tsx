@@ -59,7 +59,7 @@ const RootLayout = async (props: ILayoutProps) => {
   return (
 
       <html lang={locale}>
-      <body className={`dark `}>
+      <body >
       <ReduxProvider>
         <div className="layout">
           {initialSettings?.layoutSettings?.topbar && (

@@ -24,6 +24,7 @@ const FollowingOptionsPopup: FC<IProps> = (
         profileImage,
         username
     }) => {
+
     return (
         <div className={'followingOptionsPopup'}>
             <div className={'darkenBackground'}/>
@@ -47,7 +48,6 @@ const FollowingOptionsPopup: FC<IProps> = (
                 <button className={'userPageActionButton'}
                         onClick={()=>{
                             onUnFollowHandler()
-                            setFollowingOptionsPop(false)
                         }}>{dictionary?.['Unfollow'] || 'Unfollow'}  </button>
             </div>
         </div>

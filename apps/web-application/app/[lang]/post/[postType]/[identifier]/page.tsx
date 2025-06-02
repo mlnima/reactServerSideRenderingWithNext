@@ -35,7 +35,6 @@ const PostPage = async (props: IPageProps) => {
   const locale = localDetector(params.lang);
   const dictionary = await getDictionary(locale);
   const { identifier, postType } = params;
-
   const { data, success } = await getPost(identifier as string);
 
   if (!success || !data) {

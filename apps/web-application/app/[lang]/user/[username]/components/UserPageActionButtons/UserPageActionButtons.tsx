@@ -68,6 +68,7 @@ const UserPageActionButtons: FC<IProps> = (
 
   const onUnFollowHandler = async () => {
     try {
+console.log(`userPageData._id=> `,userPageData)
       if (!userPageData._id) return;
       const { success,message } = await unfollow({
         unfollowId: userPageData._id,
@@ -80,6 +81,7 @@ const UserPageActionButtons: FC<IProps> = (
         });
         return;
       }
+      setFollowingOptionsPop(false)
 
       await clearACacheByTag(`CUserPageInitial-${userPageData._id}`);
       await clearACacheByTag(`CUserPageLoaded-${userPageData._id}-${userData._id}`);

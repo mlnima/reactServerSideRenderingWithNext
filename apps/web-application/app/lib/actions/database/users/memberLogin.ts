@@ -19,8 +19,6 @@ const memberLogin = async (
       return errorResponse({ message: 'Missing Username or Password'});
     }
 
-
-
     let user = await userSchema
       .findOne({ username: { $regex: new RegExp(`^${username}$`, 'i') } })
       .select([...memberLoginDefaultRequireFields, 'password'])
@@ -32,7 +30,7 @@ const memberLogin = async (
       }).lean<User>() as any;
 
     if (!user) {
-      return errorResponse({ message: 'User was not found' });
+      return errorResponse({ message: 'Wrong Username or Password' });
     }
 
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
@@ -58,7 +56,7 @@ const memberLogin = async (
     // return successResponse({});
 
   } catch (error) {
-    console.log(`error=> `,error)
+    console.log(`memberLogin error=> `,error)
     return errorResponse({
       message: 'Something went wrong please try again later',
       error,

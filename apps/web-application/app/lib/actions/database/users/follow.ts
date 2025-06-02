@@ -32,9 +32,11 @@ const follow = async ({ followId }: { followId: string }) => {
       });
     }
 
-    await userRelationSchema.findByIdAndUpdate(userId, { $addToSet: { following: followId } });
-    await userRelationSchema.findByIdAndUpdate(followId, { $inc: { followersCount: 1 } });
-    return successResponse({});
+    await userRelationSchema.findOneAndUpdate({userId:userId}, { $addToSet: { following: followId } });
+    await userRelationSchema.findOneAndUpdate({userId:followId}, { $inc: { followersCount: 1 } });
+    return successResponse({
+      message: 'Success',
+    });
   } catch (error) {
     console.error(`sendFollowRequest => `, error);
     return errorResponse({});

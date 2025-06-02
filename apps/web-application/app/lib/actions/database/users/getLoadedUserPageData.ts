@@ -3,6 +3,7 @@ import { Types } from 'mongoose';
 import { connectToDatabase, userRelationSchema } from '@repo/db';
 import { unstable_cacheTag as cacheTag } from 'next/cache';
 import { errorResponse, successResponse } from '@lib/actions/response';
+import { IUserRelation } from '@repo/typescript-types';
 
 interface IGetLoadedUserPageData {
   userId: string | Types.ObjectId,
@@ -17,6 +18,10 @@ interface IGetLoadedUserPageData {
   "use cache"
   try {
     await connectToDatabase('getLoadedUserPageData');
+
+    const userRelationData = await userRelationSchema
+      .findOne({ userId })
+      .lean<IUserRelation>()
 
     const [targetUser, requestingUser] = await Promise.all([
       userRelationSchema.findOne(
@@ -46,10 +51,9 @@ interface IGetLoadedUserPageData {
 
     cacheTag('cacheItem', `CUserPageLoaded-${userId}-${userWhoRequestIt}`);
 
-
     return successResponse({ data:{
        loadedUserPageData
-      } })
+      }})
 
   } catch (error) {
     console.error(`getLoadedUserPageData => `, error);

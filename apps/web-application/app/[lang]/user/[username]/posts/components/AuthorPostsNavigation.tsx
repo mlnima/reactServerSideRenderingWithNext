@@ -48,9 +48,6 @@ const AuthorPostsNavigation: FC<IProps> = ({
     }
   }, [params]);
 
-  useEffect(() => {
-    console.log(`basePath=> `, basePath);
-  }, [basePath]);
   return (
     <div className={'profilePostsNavigation'}>
       <div className={'profilePostsNavigationItems'}>

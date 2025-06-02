@@ -47,7 +47,9 @@ import {
   JWTPayload,
   IRegisterNewUser,
   IMemberLogin,
-  TProfileImage
+  TProfileImage,
+  IUserRelation,
+  IUserEngagement
 } from './src/User';
 import { IComment } from './src/Comment';
 import { CommentRaw } from './src/Comment';
@@ -76,6 +78,8 @@ export type {
   IMessengerConversationMessage,
   CommentRaw,
   User,
+  IUserRelation,
+  IUserEngagement,
   IForm,
   TProfileImage,
   IRegisterNewUser,

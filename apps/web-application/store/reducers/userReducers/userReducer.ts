@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
 import { loginAction } from '@store/reducers/userReducers/loginAction';
-import { autoLoginAction } from '@store/reducers/userReducers/autoLoginAction';
 import { deleteCookie } from '@lib/actions/cookieTools';
 
 const initialUserData = {
@@ -55,7 +54,7 @@ export const userSlice = createSlice({
       state.userData.profileImage.filePath = action.payload;
     },
     userLogout: (state) => {
-      deleteCookie('session').then(()=>console.log('logged out'))
+      deleteCookie('session')
       return {
         ...state,
         userData: initialUserData,
@@ -68,19 +67,9 @@ export const userSlice = createSlice({
       .addCase(loginAction.fulfilled, (state, action: PayloadAction<any>) => {
         return {
           ...state,
-          userData: action.payload,
-          loggedIn: true,
+          ...action.payload,
         };
       })
-      .addCase(autoLoginAction.fulfilled, (state, action: PayloadAction<any>) => {
-        return {
-          ...state,
-          userData: action.payload,
-          loggedIn: true,
-        };
-      });
-
-
   },
 });
 
