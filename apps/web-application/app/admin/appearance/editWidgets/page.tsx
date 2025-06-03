@@ -44,3 +44,5 @@ const page = async (props: IProps) => {
 
 
 export default page;
+
+export const dynamic = 'force-dynamic'

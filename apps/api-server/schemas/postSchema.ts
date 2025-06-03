@@ -121,6 +121,7 @@ interface IFindRelatedPosts {
     relatedByFields: string[];
     limit?: number;
 }
+
 //*****************Author will be added  later******************
 postSchema.statics.findRelatedPosts = async function ({post, relatedByFields, limit = 8}: IFindRelatedPosts) {
     try {

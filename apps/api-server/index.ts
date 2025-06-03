@@ -17,7 +17,7 @@ const cleanup = register({
 
 import adminAuthMiddleware from '@util/middlewares/adminAuthMiddleware';
 import { getLocalIP } from '@util/network-util';
-import shouldCompress from '@util/shouldCompress';
+// import shouldCompress from '@util/shouldCompress';
 import express from 'express';
 import bodyParser from 'body-parser';
 import fileUpload from 'express-fileupload';
@@ -95,7 +95,7 @@ const runServer = () => {
   // app.use(bodyParser.json());
 
   app.use(xmlParser());
-  app.use(compression({ filter: shouldCompress }));
+  // app.use(compression({ filter: shouldCompress }));
 
   app.get('/api/admin/settings/clearCaches', adminAuthMiddleware, (req, res) => {
     //@ts-ignore

@@ -22,7 +22,6 @@
     "utf-8-validate": "^5.0.10"
   },
   "dependencies": {
-    "@builder.io/partytown": "0.10.3",
     "@formatjs/intl-localematcher": "^0.6.1",
     "@fortawesome/fontawesome": "^1.1.8",
     "@fortawesome/fontawesome-free-solid": "^5.0.13",
@@ -31,6 +30,8 @@
     "@fortawesome/free-regular-svg-icons": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "@fortawesome/fontawesome-free": "^6.0.0",
+    "@types/google.analytics": "^0.0.46",
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
     "@monaco-editor/react": "^4.7.0",
@@ -85,7 +86,7 @@
     "react-switch": "^7.0.0",
     "react-syntax-highlighter": "^15.6.1",
     "redux": "^5.0.1",
-    "redux-devtools-extension": "^2.13.9",
+
     "redux-mock-store": "^1.5.5",
     "remark": "^15.0.1",
     "remark-html": "^16.0.1",

@@ -93,7 +93,7 @@ export default manifest;
 
 
 
-// import initialSettings from '../public/initialSettings.json';
+// import initialSettings from '../public/initialSettings.json.bk';
 //
 // const manifest = async () => {
 //     try {

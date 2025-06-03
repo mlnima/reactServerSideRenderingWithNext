@@ -53,8 +53,6 @@ const PostPage = async (props: IPageProps) => {
     }>,
   );
 
-  console.log(`likes=> `,likes)
-
   const { postPageSettings } = unwrapResponse(
     await getSettings(['postPageSettings']) as unknown as ServerActionResponse<{
       postPageSettings: IPageSettings | undefined;

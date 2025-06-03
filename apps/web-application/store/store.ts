@@ -6,6 +6,7 @@ import userSlice from './reducers/userReducers/userReducer';
 import globalStateSlice from './reducers/globalStateReducer';
 import mediaConnectionSlice from './reducers/mediaConnectionReducer';
 
+
 const devTools = process.env.NODE_ENV !== 'production' || process.env.NEXT_PUBLIC_PRODUCTION_URL?.includes(':3000');
 
 const combinedReducer = combineReducers({

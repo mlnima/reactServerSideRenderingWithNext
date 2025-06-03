@@ -22,6 +22,7 @@ apps/web-application/locales/*/customTranslation.json
 apps/web-application/public/*.xml
 apps/web-application/public/favicon.ico
 apps/web-application/public/robots.txt
+
 ssl/**
 
 static
