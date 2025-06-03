@@ -27,8 +27,11 @@
   ],
   "tasks": {
     "generateStaticConfig": {
+      "dependsOn": [
+        "^build"
+      ],
       "cache": false,
-      "outputLogs": "errors-only"
+      "outputLogs": "full"
     },
 
     "build": {
