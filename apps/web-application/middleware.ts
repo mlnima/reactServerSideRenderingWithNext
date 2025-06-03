@@ -25,7 +25,6 @@ export async function middleware(request: NextRequest) {
     const sessionData = sessionCookie ? await decryptJWT(sessionCookie) : null;
 
     if (sessionData?.role === 'administrator') {
-      console.log(`admin access granted for `, pathname + params);
       return NextResponse.next();
     }
   }
