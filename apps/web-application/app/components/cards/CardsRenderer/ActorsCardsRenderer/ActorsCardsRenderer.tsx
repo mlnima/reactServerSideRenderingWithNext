@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import ActorCard from '@components/cards/cardsComponents/ActorCard/ActorCard';
 import { IMeta } from '@repo/typescript-types';
-import './ActorsCardsRenderer.scss';
+import '../cardsRenderer.scss';
 
 interface IProps {
   metas?: IMeta[];
@@ -20,7 +20,7 @@ const ActorsCardsRenderer: FC<IProps> = ({
 }) => {
   return (
     <div
-      className={`actorsCardsWrapper ${isSidebar ? 'actorsCardsWrapperSidebar' : ''}`}
+      className={`cardsWrapper actorsCardsWrapper`}
     >
       {metas?.map((meta, index) => {
         const imagesAllowedDomainsForNextImage =

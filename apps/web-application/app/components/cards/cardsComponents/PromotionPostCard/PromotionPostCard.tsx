@@ -4,7 +4,6 @@ import CardTitle from '../../asset/CardTitle/CardTitle';
 import { IPost } from "@repo/typescript-types";
 import '../postCard.scss';
 import Link from 'next/link';
-import CardStats from '@components/cards/asset/CardStats/CardStats';
 import './PromotionPostCard.scss'
 const CardImageRendererUseClient = dynamic(() => import('../../asset/CardImageRenderer/CardImageRendererUseClient'));
 
@@ -16,14 +15,6 @@ interface PromotionPostCardPropTypes {
     isSidebar?: boolean;
     post: IPost;
     isNextImageAllowed: boolean;
-    dictionary: {
-        [key: string]: string;
-    };
-    settings: {
-        showViewsOnCard:  boolean,
-        showRatingOnCard:  boolean,
-        showDateOnCard:  boolean,
-    };
 }
 
 const PromotionPostCard: FC<PromotionPostCardPropTypes> = ({
@@ -33,8 +24,6 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> = ({
     isSidebar,
     index,
     isNextImageAllowed,
-    dictionary,
-    settings,
 }) => {
     return (
         <article className={`postCard postCardPromotion${isSidebar ? ' postCardSidebar' : ''}`}>
@@ -57,19 +46,11 @@ const PromotionPostCard: FC<PromotionPostCardPropTypes> = ({
             <Link
                 href={post?.redirectLink || '#'}
                 target={'_blank'}
+                rel={'nofollow noopener'}
                 title={post?.translations?.[locale as string]?.title ?? post?.title}
             >
                 <div className={`cardInfo`}>
                     <CardTitle useLink={false} useIcon title={post?.translations?.[locale as string]?.title ?? post?.title} />
-                    <CardStats
-                        settings={settings}
-                        views={post?.views}
-                        dictionary={dictionary}
-                        likes={post?.likes}
-                        dislikes={post?.disLikes}
-                        createdAt={post?.createdAt}
-                        updatedAt={post?.updatedAt}
-                    />
                 </div>
             </Link>
 

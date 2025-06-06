@@ -1,6 +1,6 @@
 .postCard {
   width: 100%;
-  max-width: 320px;
+  max-width: 280px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -40,6 +40,6 @@
 
 @media only screen and (min-width: 768px){
   .postCard {
-    max-width: 320px;
+    max-width: 280px;
   }
 }

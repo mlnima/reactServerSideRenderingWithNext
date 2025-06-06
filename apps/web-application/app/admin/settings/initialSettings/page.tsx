@@ -6,6 +6,7 @@ import { IInitialSettings } from '@repo/typescript-types';
 import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 
 interface PropTypes {
+
 }
 
 const InitialSettingsPage: FC<PropTypes> = async () => {

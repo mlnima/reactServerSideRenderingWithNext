@@ -10,23 +10,34 @@ import { useRouter } from 'next/navigation';
 import { setAlert } from '@store/reducers/globalStateReducer';
 import dashboardRemoveWidget from '@lib/actions/database/widgets/dashboardRemoveWidget';
 import dashboardUpdateWidget from '@lib/actions/database/widgets/dashboardUpdateWidget';
+import { clearACacheByTag } from '@lib/serverActions';
 
 
 interface ActionButtonsPropTypes {
   widgetData: any,
   widgetSettings: any,
   setWidgetSettings: any,
+  position: string,
   widgetId: string
-  onCloneWidgetHandler:Function
+  onCloneWidgetHandler: Function
 }
 
-const ActionButtons: FC<ActionButtonsPropTypes> = ({ widgetData, widgetId, widgetSettings, setWidgetSettings,onCloneWidgetHandler }) => {
+const ActionButtons: FC<ActionButtonsPropTypes> = (
+  {
+    widgetData,
+    widgetId,
+    widgetSettings,
+    setWidgetSettings,
+    onCloneWidgetHandler,
+    position,
+  }) => {
+
   const dispatch = useAppDispatch();
   const router = useRouter();
 
   const onSaveHandler = async () => {
 
-    const { success, message, error,data } = await dashboardUpdateWidget({
+    const { success, message, error, data } = await dashboardUpdateWidget({
       _id: widgetId,
       data: {
         ...widgetData,
@@ -43,7 +54,7 @@ const ActionButtons: FC<ActionButtonsPropTypes> = ({ widgetData, widgetId, widge
       },
     });
 
-    if (!success ) {
+    if (!success) {
       console.log(`getPostsAction error=> `, error);
       dispatch(
         setAlert({
@@ -53,7 +64,7 @@ const ActionButtons: FC<ActionButtonsPropTypes> = ({ widgetData, widgetId, widge
       );
       return;
     }
-
+    await clearACacheByTag(`CWidgets-${position}`);
     router.refresh();
   };
 
@@ -67,12 +78,16 @@ const ActionButtons: FC<ActionButtonsPropTypes> = ({ widgetData, widgetId, widge
 
   return (
     <div className="control-buttons">
-      <button className={'btn btn-primary'} title="save" onClick={() => onSaveHandler()}>
+      <button className={'btn btn-primary'}
+              title="save"
+              onClick={() => onSaveHandler()}>
         <FontAwesomeIcon icon={faFloppyDisk} className={'meta-icon'} />
       </button>
 
       <ExportWidget widgetData={widgetData} />
-      <button className={'btn btn-primary'} title="clone" onClick={() => onCloneWidgetHandler(widgetData)}>
+      <button className={'btn btn-primary'}
+              title="clone"
+              onClick={() => onCloneWidgetHandler(widgetData)}>
         <FontAwesomeIcon icon={faClone} className={'meta-icon'} />
       </button>
       <button className={'btn btn-primary'} title="delete"

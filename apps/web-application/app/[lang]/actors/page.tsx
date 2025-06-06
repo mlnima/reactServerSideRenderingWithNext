@@ -71,7 +71,7 @@ const actorsPage = async (props: IProps) => {
   }
 
   return (
-    <div id={'content'} className={`page-${sidebar}-sidebar`}>
+    <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
 
       <main id={'primary'} className={'main actorsPage'}>
         <WidgetsRenderer dictionary={dictionary}

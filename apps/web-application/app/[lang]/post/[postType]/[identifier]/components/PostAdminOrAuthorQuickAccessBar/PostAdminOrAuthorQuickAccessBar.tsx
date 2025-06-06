@@ -81,7 +81,7 @@ const PostAdminOrAuthorQuickAccessBar: FC<IProps> = (
                 </span>
             <Link
               className="btn btn-primary"
-              href={`/admin/editPost?id${postId}`}
+              href={`/admin/editPost?id=${postId}`}
               target="_blank"
             >
               Edit As Admin

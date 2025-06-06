@@ -29,8 +29,8 @@ const CardImageRendererUsingNextImage: FC<CardImageNextPropTypes> =
             }}>
                 <Image src={imageUrl}
                        alt={mediaAlt || ''}
-                       width={320}
-                       height={240}
+                       width={280}
+                       height={157.5}
                        loading={index > 3 ? 'lazy' : 'eager'}
                        style={{
                            objectFit: objectFit || 'cover',

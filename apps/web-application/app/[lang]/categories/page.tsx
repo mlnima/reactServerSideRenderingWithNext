@@ -30,7 +30,6 @@ const CategoriesPage = async (props: IProps) => {
   );
 
   if (!categoriesPageSettings) {
-    console.log(`console=> categoriesPageSettings`,)
     return <Soft404 dictionary={dictionary} />;
   }
 
@@ -46,7 +45,6 @@ const CategoriesPage = async (props: IProps) => {
     locale
   );
   if (!categoriesPageSettings) {
-    console.log(`console=> widgets`,)
     return <Soft404 dictionary={dictionary} />;
   }
 

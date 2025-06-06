@@ -61,7 +61,7 @@ const VideoPostCard: FC<IProps> = ({
                         postType={'video'}
                         videoTrailerUrl={post?.videoTrailerUrl}
                         submitPostView={false}
-                        postId={post?._id.toString()}
+                        postId={post?._id}
                         mediaAlt={post?.translations?.[locale as string]?.title ?? post?.title}
                         index={index}
                     />

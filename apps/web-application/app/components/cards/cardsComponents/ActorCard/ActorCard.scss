@@ -1,48 +1,9 @@
 .actor-card {
   width: 100%;
-  //max-width: 150px;
-  max-width: 45vw;
   height: 100%;
-  display: grid;
-  grid-template-columns: 60% 40%;
   align-items: center;
   margin: 0 auto;
   overflow: hidden;
-
-  .card-info {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    height: 60%;
-    background-color: var(--quaternary-background-color);
-    padding: 0.8rem 1.6rem 0.8rem 0.8rem;
-    border-top-left-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem;
-    z-index: 1;
-    text-shadow: var(--primary-text-shodow);
-    position: relative;
-
-    .cardTitle {
-
-      a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-      }
-
-    }
-
-    .actorCardCounts {
-      position: absolute;
-      bottom: .25rem;
-      right: .25rem;
-      color: var(--primary-text-color);
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-  }
 
   .actor-card-link {
     box-shadow: 0 0 1rem -0.1rem var(--primary-background-color, #000);
@@ -50,24 +11,45 @@
 
     .card-image-wrapper {
       img {
-        border-radius: 0.5rem;
-
+        border-radius: 0.4rem;
       }
     }
 
 
-  }
-}
-
-@media only screen and (min-width: 1025px) {
-  .actor-card {
-    max-width: 250px;
-
     .card-info {
-      //height: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 0.1rem ;
+      border-top-left-radius: 0.25rem;
+      border-bottom-left-radius: 0.25rem;
+      //z-index: 1;
+      text-shadow: var(--primary-text-shodow);
+      position: relative;
+
+      .actorCardCounts {
+        display: flex;
+        width: 100%;
+        color: var(--secondary-text-color);
+        align-items: center;
+        gap: 4px;
+      }
+
+
     }
   }
 }
+
+//@media only screen and (min-width: 1025px) {
+//  .actor-card {
+//    max-width: 160px;
+//
+//    .card-info {
+//      //height: 50%;
+//      padding: 0.8rem 1.6rem 0.8rem 0.8rem;
+//    }
+//  }
+//}
 
 //.actorCardSidebar{
 //  display: grid;

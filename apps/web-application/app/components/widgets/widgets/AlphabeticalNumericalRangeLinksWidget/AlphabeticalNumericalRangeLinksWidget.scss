@@ -15,11 +15,9 @@
       justify-content: center;
       align-items: center;
     }
-
     .rangeItemOpenBtn {
       display: none;
     }
-
   }
 
 
@@ -36,6 +34,10 @@
       display: none;
       justify-content: center;
       align-items: center;
+    }
+    .activeItem{
+      background-color: var(--primary-active-color);
+      color: var(--primary-background-color);
     }
   }
 }

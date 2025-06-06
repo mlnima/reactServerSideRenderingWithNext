@@ -30,7 +30,7 @@ const getSettings = async (
       return acc;
     }, {});
 
-    cacheTag('cacheItem', 'CSetting', `CSettings-${requireSettings.join('-')}`);
+    cacheTag('cacheItem', 'CSettings', `CSettings-${requireSettings.join('-')}`);
     return successResponse({
       data: JSON.parse(JSON.stringify(objectifySettings)),
     });

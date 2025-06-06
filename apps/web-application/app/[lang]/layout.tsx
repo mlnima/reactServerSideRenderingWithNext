@@ -4,7 +4,6 @@ config.autoAddCss = false;
 import '@components/global/styles/global.styles.scss';
 import ReduxProvider from '@store/ReduxProvider';
 import { getDictionary } from '../../get-dictionary';
-import GlobalCustomStyles from '@components/global/styles/GlobalCustomStyles';
 import LayoutMetaGenerator from '../components/LayoutMetaGenerator/LayoutMetaGenerator';
 import LoginRegisterPopup from '@components/global/LoginRegisterPopup/LoginRegisterPopup';
 import BackToTopButton from '@components/global/BackToTopButton/BackToTopButton';
@@ -28,11 +27,12 @@ import { IInitialSettings, ILayoutProps, IWidget } from '@repo/typescript-types'
 import localDetector from '@lib/localDetector';
 import getWidgets from '@lib/actions/database/widgets/getWidgets';
 import getSettings from '@lib/actions/database/settings/getSettings';
-import { Suspense } from 'react';
 import MemberInitializer from '@components/global/MemberInitializer/MemberInitializer';
 import CookieInitializer from '@components/global/CookieInitializer/CookieInitializer';
 import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
-// import { connection } from 'next/server';
+import DynamicStyleInjector from '@components/global/DynamicStyleInjector';
+import CustomStylesSwitcher from '@components/global/styles/CustomStylesSwitcher';
+
 
 const RootLayout = async (props: ILayoutProps) => {
   // await connection()
@@ -57,7 +57,6 @@ const RootLayout = async (props: ILayoutProps) => {
   };
 
   return (
-
       <html lang={locale}>
       <body >
       <ReduxProvider>
@@ -80,7 +79,7 @@ const RootLayout = async (props: ILayoutProps) => {
               widgets={widgets?.navigation}
             />
           )}
-          <div id={'page'} className={'App'}>
+          <div id={'page'} className={'App innerContent'}>
             {props.children}
           </div>
           {initialSettings?.layoutSettings?.footer && (
@@ -91,12 +90,8 @@ const RootLayout = async (props: ILayoutProps) => {
           )}
         </div>
         <BackgroundFilterWholeScreen />
-
-
         <CookieInitializer />
         <MemberInitializer />
-
-
         {initialSettings?.headDataSettings?.googleAnalyticsId &&
           <GoogleAnalytics
             googleAnalyticsId={
@@ -104,30 +99,34 @@ const RootLayout = async (props: ILayoutProps) => {
             }
           />
         }
-
         <LoadingComponent />
         <AlertBox dictionary={dictionary} />
         <BackToTopButton />
         <LoginRegisterPopup locale={locale} dictionary={dictionary} />
-        <StyledComponentsRegistry>
-          <GlobalCustomStyles
-            primaryModeColors={
-              initialSettings?.layoutSettings?.primaryModeColors || ''
-            }
-            customStyles={initialSettings?.layoutSettings?.customStyles}
+        <CustomStylesSwitcher />
+        {initialSettings?.layoutSettings?.customStyles &&
+          <DynamicStyleInjector
+            styles={initialSettings?.layoutSettings?.customStyles}
+            id="customStyles"
+            enableScss={true}
           />
-        </StyledComponentsRegistry>
+        }
+        {initialSettings?.layoutSettings?.primaryModeColors &&
+          <DynamicStyleInjector
+            styles={initialSettings?.layoutSettings?.primaryModeColors}
+            id="primaryModeColors"
+            enableScss={true}
+          />
+        }
+
+
         {initialSettings && <StoreDataInitializer initialSettings={initialSettings} />}
         <WebSocketInitializer />
-
         <KeysListener />
         <UserConfigMenu locale={locale} dictionary={dictionary} />
         <CustomHeadTagsInitializer />
         <CustomScripts />
-
-
       </ReduxProvider>
-
       </body>
       </html>
 
@@ -142,3 +141,13 @@ export const generateViewport = LayoutViewportGenerator;
 
 
 // <MediaCall/>
+
+
+// {/*<StyledComponentsRegistry>*/}
+// {/*  <CustomStylesSwitcher*/}
+// {/*    primaryModeColors={*/}
+// {/*      initialSettings?.layoutSettings?.primaryModeColors || ''*/}
+// {/*    }*/}
+// {/*    customStyles={initialSettings?.layoutSettings?.customStyles}*/}
+// {/*  />*/}
+// {/*</StyledComponentsRegistry>*/}

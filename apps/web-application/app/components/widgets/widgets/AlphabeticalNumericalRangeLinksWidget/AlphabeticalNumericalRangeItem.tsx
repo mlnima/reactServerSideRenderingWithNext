@@ -11,9 +11,10 @@ interface IProps {
 }
 
 const AlphabeticalNumericalRangeItem: FC<IProps> = ({ letter, pathname, startWith, isOpen }) => {
+
     return (
         <Link
-            className={`rangeItem ${startWith?.includes(letter) ? 'activeItem' : ''} btn btn-dark`}
+            className={`rangeItem ${startWith === letter ? 'activeItem' : ''} btn btn-dark`}
             href={{
                 pathname,
                 query: {

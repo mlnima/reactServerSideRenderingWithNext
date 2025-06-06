@@ -28,7 +28,7 @@ export interface IContentSettings {
   numberOfCardsPerRowInMobile: number,
   contentPerPage?: number,
   cardsWidthDesktop: number,
-  maxInnerContentWidth: number,
+
   postSettings: {
     [key: string]: {
       viewSystem: boolean,
@@ -75,6 +75,7 @@ export interface IInitialSettings {
     defaultTheme: 'dark' | 'light',
     primaryModeColors: string,
     secondaryModeColors: string,
+    maxInnerContentWidth: number,
     logoUrl: string,
     logoWidth: number,
     logoHeight: number,

@@ -3,7 +3,6 @@ import { IPost } from "@repo/typescript-types";
 import PostsCardsRenderer from '@components/cards/CardsRenderer/PostsCardsRenderer/PostsCardsRenderer';
 
 interface IProps {
-    isSidebar?: boolean;
     locale: string;
     uniqueData?: {
         posts: IPost[];
@@ -14,10 +13,9 @@ interface IProps {
     };
 }
 
-const PostsCardsWidget: FC<IProps> = ({ locale, uniqueData, isSidebar, dictionary }) => {
+const PostsCardsWidget: FC<IProps> = ({ locale, uniqueData, dictionary }) => {
     return (
         <PostsCardsRenderer
-            isSidebar={isSidebar}
             locale={locale}
             posts={uniqueData?.posts}
             dictionary={dictionary}

@@ -102,10 +102,6 @@ const ActionButtons: FC<IProps> = (
 
   };
 
-  useEffect(() => {
-    console.log(`console=> `);
-  }, []);
-
   const onCommentsButtonClickHandler = () => {
     if (typeof window !== 'undefined') {
       const commentElement = document.getElementById('commentSection');

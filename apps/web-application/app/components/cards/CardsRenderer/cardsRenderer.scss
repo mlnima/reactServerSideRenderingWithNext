@@ -1,46 +1,47 @@
-.actorsCardsWrapper {
-  width: 100%;
+$grid-gap:8px;
+
+//.staticCardsWrapper{
+//  display: flex;
+//  justify-content: flex-start;
+//  box-sizing: inherit;
+//}
+
+.cardsWrapper {
   display: grid;
+  grid-gap: $grid-gap;
   justify-content: center;
   align-items: center;
-  grid-gap: 4px;
   padding: 8px 0;
-
+  //max-width: 100vw;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-
-  @media only screen and (max-width: 600px) {
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  }
 
   @media only screen and (min-width: 601px) and (max-width: 768px) {
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   }
 
-
   @media only screen and (min-width: 769px) and (max-width: 1024px) {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
-
 
   @media only screen and (min-width: 1025px) and (max-width: 1280px) {
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   }
 
-
-  @media only screen and (min-width: 1281px) and (max-width: 1440px) {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  }
-
+  //@media only screen and (min-width: 1281px) and (max-width: 1440px) {
+  //  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  //}
 
   @media only screen and (min-width: 1441px) {
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   }
 }
 
-.actorsCardsWrapperSidebar{
-  //grid-gap: 4px;
-  //grid-template-columns: 1fr 1fr;
-  @media only screen and (min-width: 768px){
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+.actorsCardsWrapper{
+  @media only screen and (min-width: 1281px) and (max-width: 1440px) {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+  @media only screen and (min-width: 1441px) {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   }
 }
+

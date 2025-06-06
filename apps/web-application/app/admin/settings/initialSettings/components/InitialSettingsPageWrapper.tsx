@@ -12,6 +12,7 @@ import { IInitialSettings } from '@repo/typescript-types';
 import dashboardUpdateSettings from '@lib/actions/database/settings/dashboardUpdateSettings';
 import { setAlert } from '@store/reducers/globalStateReducer';
 import { clearACacheByTag } from '@lib/serverActions';
+import KeyboardHandler from '@components/global/KeyboardHandler';
 
 interface PropTypes {
   initialSettings?: IInitialSettings;
@@ -43,20 +44,14 @@ const InitialSettingsPageWrapper: FC<PropTypes> = ({ initialSettings }) => {
       data: initialSettingsData,
     });
 
-    if (!success) {
-      dispatch(
-        setAlert({
-          message,
-          type: 'Error',
-          err: error,
-        }),
-      );
-      return
-    }
-
+    dispatch(
+      setAlert({
+        message,
+        type: !success ?  'Error' : 'Success',
+        err: error || null,
+      }),
+    );
     await clearACacheByTag('CSettings-initialSettings')
-
-
   };
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | {
@@ -123,8 +118,7 @@ const InitialSettingsPageWrapper: FC<PropTypes> = ({ initialSettings }) => {
       <select
         name="activeEditingLanguage"
         className={'primarySelect active-editing-language'}
-        onChange={e => setLanguage(e.target.value)}
-      >
+        onChange={e => setLanguage(e.target.value)}>
         <option value="default">{process.env.NEXT_PUBLIC_DEFAULT_LOCALE ?? 'default'}</option>
         <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALES || ''} />
       </select>
@@ -149,6 +143,11 @@ const InitialSettingsPageWrapper: FC<PropTypes> = ({ initialSettings }) => {
       <button className={'btn btn-primary'} onClick={onSaveHandler}>
         Save
       </button>
+      <KeyboardHandler shortcuts={[{
+        keys: ['s'],
+        ctrlKey: true,
+        callback: onSaveHandler
+      }]} />
     </div>
   );
 };

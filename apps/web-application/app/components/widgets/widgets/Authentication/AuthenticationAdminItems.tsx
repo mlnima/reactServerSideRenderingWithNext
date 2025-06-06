@@ -12,7 +12,7 @@ import { useParams, usePathname, useSearchParams, useSelectedLayoutSegment } fro
 
 import socket from '@lib/web-socket-client';
 import { faBolt, faChevronDown, faChevronUp, faWrench } from '@fortawesome/free-solid-svg-icons';
-import { clearCachesByServerAction } from '@lib/serverActions';
+import { clearACacheByTag, clearCachesByServerAction } from '@lib/serverActions';
 import { fixUserDocuments } from '@lib/actions/database/fix';
 import { cookieChecker, deleteCookie, cookieSetter } from '@lib/actions/cookieTools';
 import { useState } from 'react';
@@ -128,7 +128,9 @@ const AuthenticationAdminItems = () => {
             </div>
 
             <div className="menuItem">
-                        <span className={'menuItemContent'} onClick={() => onClearCacheHandler({ mode: 'widgets' })}>
+                        <span className={'menuItemContent'}
+                              // onClick={() => onClearCacheHandler({ mode: 'widgets' })}>
+                              onClick={async () => await clearACacheByTag('CWidgets')}>
                                <div className={'icon-wrapper'}>
                                    <FontAwesomeIcon icon={faEraser} style={{ width: 25, height: 25 }} />
                                </div>
@@ -137,8 +139,9 @@ const AuthenticationAdminItems = () => {
             </div>
 
             <div className="menuItem">
-                                            <span className={'menuItemContent'}
-                                                  onClick={() => onClearCacheHandler({ mode: 'settings' })}>
+                   <span className={'menuItemContent'}
+                         // onClick={() => onClearCacheHandler({ mode: 'settings' })}>
+                          onClick={async () => await clearACacheByTag(`CSettings`)}>
                    <div className={'icon-wrapper'}>
                        <FontAwesomeIcon icon={faEraser} style={{ width: 25, height: 25 }} />
                   </div>
@@ -148,7 +151,8 @@ const AuthenticationAdminItems = () => {
 
             <div className="menuItem">
                                             <span className={'menuItemContent'}
-                                                  onClick={() => onClearCacheHandler({ mode: 'all' })}>
+                                                 // onClick={() => onClearCacheHandler({ mode: 'all' })}>
+                                                  onClick={async () => await clearACacheByTag(`cacheItem`)}>
                    <div className={'icon-wrapper'}>
                        <FontAwesomeIcon icon={faEraser} style={{ width: 25, height: 25 }} />
                   </div>

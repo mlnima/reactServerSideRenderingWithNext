@@ -55,7 +55,7 @@ export const clearCachesByServerAction = async ({
     }
 
     if (mode === 'settings') {
-        revalidateTag('CSetting');
+        revalidateTag('CSettings');
         return;
     }
 
@@ -68,7 +68,7 @@ export const clearCachesByServerAction = async ({
     }
 
     if (mode === 'widgets') {
-        revalidateTag('widgets');
+        revalidateTag('CWidgets');
         return;
     }
 

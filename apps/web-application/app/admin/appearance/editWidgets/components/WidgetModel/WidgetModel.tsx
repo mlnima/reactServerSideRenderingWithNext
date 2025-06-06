@@ -335,6 +335,7 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({ widget ,customPages,onCloneWidg
         <ActionButtons widgetData={widgetData}
                        onCloneWidgetHandler={onCloneWidgetHandler}
                        widgetId={widget._id}
+                       position={widget.data.position}
                        widgetSettings={widgetSettings}
                        setWidgetSettings={setWidgetSettings}
         />

@@ -44,7 +44,7 @@
     "header": true,
     "navigation": true,
     "footer": true,
-    "customStyles": "// .navigation-widget-area{\r\n//   .innerContent{\r\n//     .userPreferenceWidget,.authenticationWidget{\r\n//         margin-left: auto;\r\n//      }\r\n//      .navigationWidget{\r\n//        flex-grow: 4;\r\n//      }\r\n   \r\n//   }\r\n// }\r\n\r\n\r\n// .topbar-widget-area{\r\n//   background-color: var(--primary-background-color);\r\n//   color: var(--primary-text-color);\r\n// }",
+    "customStyles": ".innerContent{\r\n   // max-width: 1323px !important;\r\n   //margin:auto;\r\n}",
     "customColors": "",
     "sidebarWidth": "320",
     "secondaryModeColors": ":root{\r\n  --primary-text-color: #000000;\r\n  --secondary-text-color: #333333;\r\n  --tertiary-text-color: #666666;\r\n  --quaternary-text-color: #999999;\r\n  --primary-background-color: #FFFFFF;\r\n  --secondary-background-color: #F5F5F5;\r\n  --tertiary-background-color: #E0E0E0;\r\n  --quaternary-background-color: #CCCCCC;\r\n}",
@@ -54,7 +54,8 @@
     "logoWidth": 160,
     "logoHeight": 40,
     "primaryModeColors": "",
-    "numberOfCardsPerPage": 30
+    "numberOfCardsPerPage": 30,
+    "maxInnerContentWidth": ""
   },
   "headDataSettings": {
     "title": "Positron Local Tests xxx",

@@ -134,8 +134,8 @@ const CardImageRendererUseClient: FC<CardImageNextPropTypes> = ({
           src={targetImageUrl}
           ref={imageRef}
           alt={mediaAlt || ''}
-          width={320}
-          height={240}
+          width={280}
+          height={157.5}
           onMouseEnter={() => onHoverHandler()}
           onTouchStart={() => onHoverHandler()}
           onTouchEnd={onUnHoverHandler}

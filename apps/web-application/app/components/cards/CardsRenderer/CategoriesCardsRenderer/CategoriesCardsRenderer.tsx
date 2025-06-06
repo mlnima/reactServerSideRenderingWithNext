@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { IMeta } from '@repo/typescript-types';
-import './CategoriesCardsRenderer.scss';
+import '../cardsRenderer.scss';
 import CategoryCard from '@components/cards/cardsComponents/CategoryCard/CategoryCard';
 
 interface IProps {
@@ -19,7 +19,7 @@ const CategoriesCardsRenderer: FC<IProps> = ({
   dictionary,
 }) => {
   return (
-    <div className={`categoriesCardsWrapper${isSidebar ? 'Sidebar' : ''} `}>
+    <div className={`cardsWrapper`}>
       {metas?.map((meta, index) => {
         const imagesAllowedDomainsForNextImage =
           process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES?.split(' ') || [];

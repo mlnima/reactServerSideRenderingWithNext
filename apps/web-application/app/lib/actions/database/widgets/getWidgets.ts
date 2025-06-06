@@ -60,8 +60,9 @@ const getWidgets = async (positions: string[], locale: string): Promise<{ [key: 
 
     return widgetInPositions;
   }, {});
+  const cachePositions = positions.map((position) => `CWidgets-${position}`);
 
-  cacheTag('cacheItem', `CWidgets-${positions.join('-')}`);
+  cacheTag('cacheItem', 'CWidgets', ...cachePositions);
   return result;
 };
 

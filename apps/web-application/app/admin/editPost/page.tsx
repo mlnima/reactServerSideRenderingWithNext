@@ -28,10 +28,11 @@ const EditPostPage = () => {
   const [activeEditingLanguage, setActiveEditingLanguage] = useState<string | 'default'>('default');
   const searchParams = useSearchParams();
   const languageElement = useRef(null);
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const getPostData = async (_id: string) => {
     const { data, success } = await dashboardGetPost(_id);
+    console.log(`data=> `, data);
     if (!success || !data?.post) {
       return;
     }
@@ -41,7 +42,6 @@ const EditPostPage = () => {
 
   useEffect(() => {
     const _id = searchParams.get('id');
-
     if (_id) {
       getPostData(_id);
     } else {
@@ -64,7 +64,6 @@ const EditPostPage = () => {
       [e.target.name]: isNumericString(e.target.value) ? parseInt(e.target.value) : e.target.value,
     }));
   };
-
 
   const onTranslatedInputChangeHandler = (e: { target: { name: any; value: any } }) => {
     if (activeEditingLanguage === 'default') {
@@ -96,14 +95,14 @@ const EditPostPage = () => {
 
   const scrapAndSetPostData = async ({ url, fields }: { url: string; fields?: string[] }) => {
     try {
-      const {success,data,message} = await postDataScrappers(url);
+      const { success, data, message } = await postDataScrappers(url);
 
-      if (!success || !data?.postData){
+      if (!success || !data?.postData) {
         dispatch(setAlert({
           message,
-          type:'error'
-        }))
-        return
+          type: 'error',
+        }));
+        return;
       }
 
       if (!fields?.length) {
@@ -120,9 +119,9 @@ const EditPostPage = () => {
 
     } catch (error) {
       dispatch(setAlert({
-        message:'Something went wrong',
-        type:'error'
-      }))
+        message: 'Something went wrong',
+        type: 'error',
+      }));
     }
   };
 
@@ -136,21 +135,21 @@ const EditPostPage = () => {
 
     try {
 
-      const {success, message, data} = await findAnotherSimilarSourceLink(
+      const { success, message, data } = await findAnotherSimilarSourceLink(
         postId,
         relatedBy,
         page,
-      )
+      );
 
-      if (!success || !data?.relatedPosts){
+      if (!success || !data?.relatedPosts) {
         dispatch(setAlert({
           message,
-          type:'error'
-        }))
-        return
+          type: 'error',
+        }));
+        return;
       }
 
-      setRelatedPosts(data.relatedPosts)
+      setRelatedPosts(data.relatedPosts);
 
     } catch (error) {
       dispatch(
@@ -158,9 +157,8 @@ const EditPostPage = () => {
           message: 'Something went wrong',
           type: 'Error',
         }),
-      )
+      );
     }
-
 
 
   };

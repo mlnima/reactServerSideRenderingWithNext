@@ -5,7 +5,6 @@ import MonacoEditor from '@components/textEditors/MonacoEditor';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 
-
 interface PropTypes {
     onChangeHandler: (value: any, key: string) => void;
     initialSettingsData: IInitialSettings;
@@ -117,7 +116,7 @@ const LayoutSettings: FC<PropTypes> = ({ onChangeHandler, initialSettingsData })
                     onChange={e => onChangeHandler(e, 'layoutSettings')}
                     type={'number'}
                     name={'maxInnerContentWidth'}
-                    value={initialSettingsData?.contentSettings?.maxInnerContentWidth}
+                    value={initialSettingsData?.layoutSettings?.maxInnerContentWidth}
                     className={'primaryInput'}
                 />
             </div>

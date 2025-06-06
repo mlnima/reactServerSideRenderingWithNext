@@ -136,8 +136,8 @@ const UploadPageContent = ({ _id, postType, dictionary, locale }: IProps) => {
         const compressedImageFile = await imageCanvasCompressor({
           image: imageToProcess,
           outputType: 'file',
-          maxWidth: 320,
-          maxHeight: 180,
+          maxWidth: 280,
+          maxHeight: 157.5,
         });
         formData.append('thumbnail', compressedImageFile, imageToProcess.name);
       } catch (compressionError) {
@@ -309,7 +309,7 @@ const UploadPageContent = ({ _id, postType, dictionary, locale }: IProps) => {
             )}
 
             <div className="formSection imageUploader">
-              <span className={'smallText'}> Expected size: 320px * 180px </span>
+              <span className={'smallText'}> Expected size: 280px * 157.5px </span>
               <MultipleImageUploader
                 fileInputRef={fileInputRef}
                 editingPost={editingPost}
