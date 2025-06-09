@@ -59,7 +59,7 @@ const actorMetaGenerator = async (props: IProps): Promise<Metadata> => {
       },
     };
   } catch (error) {
-    console.log(`error=> `, error);
+    console.log(`actorMetaGenerator Error=> `, error);
     return {};
   }
 };

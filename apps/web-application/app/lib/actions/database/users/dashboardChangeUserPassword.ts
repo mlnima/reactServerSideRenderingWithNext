@@ -54,7 +54,7 @@ const dashboardChangeUserPassword = async ({ _id, oldPass, newPass, newPass2 }: 
       message: 'Password has been changed',
     });
   } catch (error) {
-    console.log(`error=> `, error);
+    console.log(`dashboardChangeUserPassword Error=> `, error);
 
     return errorResponse({
       message: 'Something went wrong',

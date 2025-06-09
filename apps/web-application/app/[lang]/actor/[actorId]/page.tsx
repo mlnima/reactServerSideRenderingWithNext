@@ -27,7 +27,7 @@ const ActorPage = async (props: IProps) => {
   const locale = localDetector(params.lang);
   const dictionary = await getDictionary(locale);
 
-  if (!isValidObjectId(params?.actorId)) {
+  if ( !params?.actorId ||  (params?.actorId && !isValidObjectId(params.actorId))) {
     return <Soft404 dictionary={dictionary} />;
   }
 

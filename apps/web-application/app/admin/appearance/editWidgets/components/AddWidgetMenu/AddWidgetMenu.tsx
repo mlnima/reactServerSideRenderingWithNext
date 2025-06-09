@@ -46,7 +46,7 @@ const AddWidgetMenu:FC<IProps> = ({customPages=[],widgetsInGroups}) => {
     });
 
     if (!success) {
-      console.log(`getPostsAction error=> `, error);
+      console.log(`getPostsAction Error=> `, error);
       dispatch(
         setAlert({
           message,

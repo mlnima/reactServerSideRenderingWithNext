@@ -42,7 +42,7 @@ const worker = async ({ command }: WorkerData) => {
 if (parentPort) {
     worker(workerData).then(result => {
         parentPort.postMessage(result);
-    }).catch(error=>console.log(`worker error=> `,error))
+    }).catch(error=>console.log(`worker Error=> `,error))
 }
 
 

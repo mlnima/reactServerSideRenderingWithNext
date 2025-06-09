@@ -26,9 +26,10 @@ const CategoryPage = async (props: IProps) => {
   const locale = localDetector(params.lang);
   const dictionary = await getDictionary(locale);
 
-  if (!isValidObjectId(params?.categoryId)) {
+  if ( !params?.categoryId ||  (params?.categoryId && !isValidObjectId(params.categoryId))) {
     return <Soft404 dictionary={dictionary} />;
   }
+
 
   const { categoryPageSettings } = unwrapResponse(
     await getSettings(['categoryPageSettings']) as unknown as ServerActionResponse<{

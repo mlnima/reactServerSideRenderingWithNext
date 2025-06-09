@@ -44,7 +44,7 @@ const dashboardGetChatroom = async (
 
   } catch (error) {
 
-    console.log(`error=> `, error);
+    console.log(`dashboardGetChatroom Error=> `, error);
     return errorResponse({
       message: 'Something went wrong',
       error,

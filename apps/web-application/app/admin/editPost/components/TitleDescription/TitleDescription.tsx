@@ -20,11 +20,7 @@ const TitleDescription = ({ onTranslatedInputChangeHandler, onDescriptionChangeH
       ? ['Monaco', 'SunEditor', 'ReactQuillEditor']
       : ['Monaco', 'SunEditor', 'ReactQuillEditor', 'ReactPage'];
 
-  const openEditorOnLoad = post?.postType === 'learn'
-    ? 'Monaco'
-    : post?.postType === 'video'
-      ? 'Monaco'
-      : 'SunEditor';
+  const openEditorOnLoad = 'Monaco'
 
   return (
     <div className='TitleDescription'>

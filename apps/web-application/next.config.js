@@ -1,16 +1,10 @@
 /** @type {import('next').NextConfig} */
-// const dns = require("dns");
-// dns.setDefaultResultOrder("ipv4first")
 const rewrites = require('./nextConfigs/rewrites');
 const { postTypes } = require('@repo/data-structures');
-
 const projectLocales = process.env.NEXT_PUBLIC_LOCALES || 'en';
-
 const postTypeQueryMatcher = `:postType(${postTypes.join('|')})?`;
 const languageQueryMatcher = `(${projectLocales.split(' ').join('|')})`;
-
 const imagesAllowedDomainsForNextImage = process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES?.split(' ') || [];
-
 
 const allowedDomainsForNextImageConfig = imagesAllowedDomainsForNextImage.reduce((acc, source) => {
   acc = [...acc,
@@ -42,16 +36,29 @@ const nextConfig = {
     serverActions: {
       bodySizeLimit: '10mb',
     },
-    // dynamicIO: true,
-    // esmExternals: 'loose',
-    // instrumentationHook: true,
-    // nextScriptWorkers: true,
   },
-  rewrites,
+
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  compiler: {
+    styledComponents: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    remotePatterns: allowedDomainsForNextImageConfig,
+  },
+  sassOptions: {
+    silenceDeprecations: ['legacy-js-api'],
+  },
+  transpilePackages: [
+    'ui',
+  ],
   async redirects() {
     return [
-
-
       {
         source: `/${languageQueryMatcher}/meta`,
         destination: `/${process.env.NEXT_PUBLIC_DEFAULT_LOCALE}/categories`,
@@ -128,42 +135,14 @@ const nextConfig = {
       },
     ];
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  compiler: {
-    styledComponents: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  images: {
-    formats: ['image/avif', 'image/webp'],
-    remotePatterns: allowedDomainsForNextImageConfig,
-  },
-  sassOptions: {
-    silenceDeprecations: ['legacy-js-api'],
-  },
-  transpilePackages: [
-    'ui',
-  ],
-  // webpack: (config, { isServer }) => {
-  //   if (isServer) {
-  //     config.experiments = {
-  //       topLevelAwait: true,
-  //     };
-  //   }
-  //   return config;
-  // },
+  rewrites,
 };
 
 module.exports = nextConfig;
 
-// imagesX: {
-//     remotePatterns: [
-//         {
-//             protocol: 'https',
-//             hostname: '**.example.com',
-//         },
-//     ],
-// },
+
+
+// dynamicIO: true,
+// esmExternals: 'loose',
+// instrumentationHook: true,
+// nextScriptWorkers: true,

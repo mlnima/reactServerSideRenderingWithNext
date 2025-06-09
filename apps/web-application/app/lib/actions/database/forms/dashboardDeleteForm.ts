@@ -23,7 +23,7 @@ const dashboardDeleteForm = async ({ _id, }: { _id: string }) => {
 
   } catch (error) {
 
-    console.log(`error=> `, error);
+    console.log(`dashboardDeleteForm Error=> `, error);
     return errorResponse({
       message: 'Something went wrong',
       error,

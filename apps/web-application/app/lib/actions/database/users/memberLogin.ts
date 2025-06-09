@@ -56,7 +56,7 @@ const memberLogin = async (
     // return successResponse({});
 
   } catch (error) {
-    console.log(`memberLogin error=> `,error)
+    console.log(`memberLogin Error=> `,error)
     return errorResponse({
       message: 'Something went wrong please try again later',
       error,

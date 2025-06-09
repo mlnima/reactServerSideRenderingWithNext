@@ -43,6 +43,7 @@ const PromotionTypePostPage: FC<IProps> = ({
           {post?.redirectLink && (
             <Link
               href={post?.redirectLink}
+              rel={'nofollow noopener'}
               className="btn btn-primary redirectLink"
               target="_blank"
             >

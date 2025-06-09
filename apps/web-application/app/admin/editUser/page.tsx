@@ -128,7 +128,7 @@ const EditUserPage = () => {
       ));
 
     } catch (error) {
-      console.log(`error=> `, error);
+      console.log(`getUserData Error=> `, error);
     }
   };
 

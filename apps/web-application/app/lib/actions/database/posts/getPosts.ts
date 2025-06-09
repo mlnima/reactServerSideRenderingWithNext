@@ -95,7 +95,7 @@ const getPosts = async (
     });
 
   } catch (error) {
-    console.error(`error=> `, error);
+    console.error(`getPosts Error=> `, error);
     return errorResponse({
       message: 'Something went wrong please try again later',
     });

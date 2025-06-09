@@ -44,7 +44,7 @@
     "header": true,
     "navigation": true,
     "footer": true,
-    "customStyles": ".innerContent{\r\n   // max-width: 1323px !important;\r\n   //margin:auto;\r\n}",
+    "customStyles": ".innerContent{\r\n   max-width: 1400px !important;\r\n   margin:auto;\r\n}",
     "customColors": "",
     "sidebarWidth": "320",
     "secondaryModeColors": ":root{\r\n  --primary-text-color: #000000;\r\n  --secondary-text-color: #333333;\r\n  --tertiary-text-color: #666666;\r\n  --quaternary-text-color: #999999;\r\n  --primary-background-color: #FFFFFF;\r\n  --secondary-background-color: #F5F5F5;\r\n  --tertiary-background-color: #E0E0E0;\r\n  --quaternary-background-color: #CCCCCC;\r\n}",

@@ -20,7 +20,7 @@ const WidgetImporter = (): JSX.Element => {
               const { success, message, error } = await dashboardCreateNewWidget(widget);
 
               if (!success ) {
-                console.log(`getPostsAction error=> `, error);
+                console.log(`getPostsAction Error=> `, error);
                 dispatch(
                   setAlert({
                     message,

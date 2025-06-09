@@ -21,7 +21,7 @@ const MemberInitializerClient: FC<IProps> = ({ autoLoginData }) => {
         dispatch(setAdminMode(true));
       }
     }catch (error){
-      console.log(`error=> `,error)
+      console.log(`MemberInitializerClient Error=> `,error)
     }
 
   }

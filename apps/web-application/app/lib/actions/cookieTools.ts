@@ -18,10 +18,10 @@ export const cookieSetter = async ({ name, value, expires }: IArg) => {
         secure: process.env.NODE_ENV === 'production',
         expires: expires || new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days from now
       });
-  }catch (error){
-    console.log(`cookieSetter error=> `,error)
-  }
 
+  }catch (error){
+    console.log(`cookieSetter Error=> `,error)
+  }
 };
 
 

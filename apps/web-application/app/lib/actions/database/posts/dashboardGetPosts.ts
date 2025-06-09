@@ -121,7 +121,7 @@ const dashboardGetPosts = async ({ metaId, keyword, status, postType, page, size
 
   } catch (error) {
 
-    console.log(`error=> `, error);
+    console.log(`dashboardGetPosts Error=> `, error);
 
     return errorResponse({
       message: 'Something went wrong',

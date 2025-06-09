@@ -52,7 +52,7 @@ export const findWidgetPosts = async (widgetData: any): Promise<{ posts: {}[]; t
       totalCount,
     };
   } catch (error) {
-    console.log(`findWidgetPosts error=> `, error);
+    console.log(`findWidgetPosts Error=> `, error);
     return {
       posts: [],
       totalCount: 0,

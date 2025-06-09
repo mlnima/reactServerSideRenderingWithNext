@@ -17,7 +17,7 @@ export interface IGetSearch {
 }
 
 const _saveSearchedKeyword = async (keyword: string, postsCount: number) => {
-  if (!keyword) return;
+  if (!keyword || keyword.length < 3) return;
   try {
     await searchKeywordSchema
       .findOneAndUpdate(
@@ -33,7 +33,7 @@ const _saveSearchedKeyword = async (keyword: string, postsCount: number) => {
       );
     console.log(`keyword ${keyword} Saved in DB with ${postsCount} result`);
   } catch (error) {
-    console.log('error=> ', error);
+    console.log('_saveSearchedKeyword Error=> ', error);
   }
 };
 
@@ -59,6 +59,7 @@ export const getSearch = async (
 
     let postsTranslationsSearchQuery = [];
     let metasTranslationsSearchQuery = [];
+
     if (locale !== defaultLocale) {
       for await (const locale of locales) {
         metasTranslationsSearchQuery.push({
@@ -74,6 +75,7 @@ export const getSearch = async (
         });
       }
     }
+
     const postSearchQuery = {
       $and: [
         {
@@ -109,6 +111,7 @@ export const getSearch = async (
       .lean<IPost[]>() : [];
 
     const totalCount = returnTotalCount ? await postSchema.countDocuments(postSearchQuery) : 0;
+
     let metas = returnMetas ? await metaSchema
       .find(metasSearchQuery, {}, { sort })
       .limit(size)
@@ -118,7 +121,6 @@ export const getSearch = async (
       ? (metas || []).reduce(
         (acc: Record<string, IMeta[]>, meta: IMeta) => {
           const type = meta.type; // Assume meta.type is guaranteed to be defined
-          // @ts-expect-error: it's fine
           acc[type] = [...(acc[type] || []), meta];
           return acc;
         },
@@ -143,7 +145,7 @@ export const getSearch = async (
     });
 
   } catch (error) {
-    console.error(`error=> `, error);
+    console.error(`getSearch Error=> `, error);
     return errorResponse({
       message: 'Something went wrong please try again later',
     });

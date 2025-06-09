@@ -59,7 +59,7 @@ const getUsersSuggestionList = async ({ keyword }: IArg) => {
 
 
   } catch (error) {
-    console.log(`error=> `, error);
+    console.log(`getUsersSuggestionList Error=> `, error);
 
     return errorResponse({
       message: 'Something went wrong',

@@ -67,7 +67,7 @@ const dashboardGetPages = async (
 
   } catch (error) {
 
-    console.log(`error=> `, error);
+    console.log(`dashboardGetPages Error=> `, error);
     return errorResponse({
       message: 'Something went wrong',
       error,

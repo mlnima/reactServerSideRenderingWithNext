@@ -73,7 +73,7 @@ const dashboardGetMetas = async (
     });
 
   } catch (error) {
-    console.log(`error=> `, error);
+    console.log(`dashboardGetMetas Error=> `, error);
     return errorResponse({
       message: 'Something went wrong',
       error,

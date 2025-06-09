@@ -38,7 +38,7 @@ const dashboardGetUser = async ({ _id }: IDashboardGetUser) => {
     });
 
   } catch (error) {
-    console.log(`error=> `, error);
+    console.log(`dashboardGetUser Error=> `, error);
 
     return errorResponse({
       message: 'Something went wrong',

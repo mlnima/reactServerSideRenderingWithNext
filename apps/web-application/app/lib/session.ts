@@ -48,7 +48,7 @@ export const createNewSession = async (_id: string, role: string) => {
       });
 
   } catch (error) {
-    console.log(`error=> `,error)
+    console.log(`createNewSession Error=> `,error)
     return;
   }
 

@@ -63,7 +63,7 @@ const dashboardGetChatrooms = async (
 
   } catch (error) {
 
-    console.log(`error=> `, error);
+    console.log(`dashboardGetChatrooms Error=> `, error);
     return errorResponse({
       message: 'Something went wrong',
       error,

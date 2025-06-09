@@ -38,7 +38,7 @@ const EditWidgetsContent: FC<IProps> = ({ customPages, availablePositions, widge
       });
 
       if (!success) {
-        console.log(`getPostsAction error=> `, error);
+        console.log(`getPostsAction Error=> `, error);
         dispatch(
           setAlert({
             message,

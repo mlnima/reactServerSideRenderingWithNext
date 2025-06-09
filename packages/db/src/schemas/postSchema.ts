@@ -134,7 +134,7 @@ postSchema.statics.findRelatedPostsByField = async function (
 postSchema.statics.findRelatedPosts = async function ({post, relatedByFields, limit = 8}: IFindRelatedPosts) {
     try {
         let relatedPosts: any[] = [];
-        let seenPosts: Set<string> = new Set();  // To keep track of seen posts
+        let seenPosts: Set<string> = new Set();
 
         for (const field of relatedByFields) {
             const remainingLimit = limit - relatedPosts.length;
@@ -147,12 +147,7 @@ postSchema.statics.findRelatedPosts = async function ({post, relatedByFields, li
                 .select(postFieldRequestForCards)
                 .sort({updatedAt: -1, createdAt: -1})
                 .limit(remainingLimit)
-                .lean({ virtuals: true, transform: (doc:IPost) => {
-                        if (doc?._id) {
-                            doc._id = doc._id.toString();
-                        }
-                        return doc;
-                    }});
+                .lean();
 
             for (const p of postsByField) {
                 seenPosts.add(p._id.toString());
@@ -170,12 +165,8 @@ postSchema.statics.findRelatedPosts = async function ({post, relatedByFields, li
             })
                 .sort({updatedAt: -1, createdAt: -1})
                 .limit(remainingLimit)
-                .lean({ virtuals: true, transform: (doc:IPost) => {
-                        if (doc._id) {
-                            doc._id = doc._id.toString();
-                        }
-                        return doc;
-                    }});
+                .lean();
+
 
             relatedPosts = [...relatedPosts, ...fallbackPosts];
         }

@@ -63,7 +63,7 @@ const categoryMetaGenerator = async (props: IProps): Promise<Metadata> => {
       },
     };
   } catch (error) {
-    console.log(`error=> `, error);
+    console.log(`categoryMetaGenerator Error=> `, error);
     return {};
   }
 };

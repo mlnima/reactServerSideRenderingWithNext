@@ -24,7 +24,7 @@ const dashboardDeleteUser = async ({ _id }: IDashboardGetUser) => {
 
     return successResponse({});
   } catch (error) {
-    console.log(`error=> `, error);
+    console.log(`dashboardDeleteUser Error=> `, error);
 
     return errorResponse({
       message: 'Something went wrong',

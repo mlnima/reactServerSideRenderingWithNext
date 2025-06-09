@@ -14,16 +14,16 @@ import getWidgets from '@lib/actions/database/widgets/getWidgets';
 import getPosts from '@lib/actions/database/posts/getPosts';
 import { isValidObjectId } from '@repo/db';
 import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
+import { mongoIdValidatorByRegex } from '@repo/utils/dist/src/validators';
 
 const TagPage = async (props: IPageProps) => {
   const searchParams = await props.searchParams;
   const params = await props.params;
-
   const locale = localDetector(params.lang);
-
   const dictionary = await getDictionary(locale);
 
-  if (!isValidObjectId(params.tagId)) {
+
+  if ( !params?.tagId ||  (params?.tagId && !isValidObjectId(params.tagId))) {
     return <Soft404 dictionary={dictionary} />;
   }
 

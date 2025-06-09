@@ -75,7 +75,7 @@ const dashboardGetUsers = async (
     });
 
   } catch (error) {
-    console.log(`error=> `, error);
+    console.log(`dashboardGetUsers Error=> `, error);
 
     return errorResponse({
       message: 'Something went wrong',

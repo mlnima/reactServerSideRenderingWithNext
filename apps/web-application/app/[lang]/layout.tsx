@@ -32,6 +32,7 @@ import CookieInitializer from '@components/global/CookieInitializer/CookieInitia
 import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 import DynamicStyleInjector from '@components/global/DynamicStyleInjector';
 import CustomStylesSwitcher from '@components/global/styles/CustomStylesSwitcher';
+import { WebVitals } from '@components/web-vitals';
 
 
 const RootLayout = async (props: ILayoutProps) => {
@@ -126,6 +127,7 @@ const RootLayout = async (props: ILayoutProps) => {
         <UserConfigMenu locale={locale} dictionary={dictionary} />
         <CustomHeadTagsInitializer />
         <CustomScripts />
+        <WebVitals />
       </ReduxProvider>
       </body>
       </html>

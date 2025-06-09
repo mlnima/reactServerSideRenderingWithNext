@@ -4,6 +4,7 @@
 /apps/**/.turbo
 /apps/**/.vscode
 /apps/**/.idea
+/apps/**/core
 /apps/**/%SystemDrive%
 
 

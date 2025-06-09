@@ -49,7 +49,7 @@ const getPost = async (identifier: string): Promise<ServerActionResponse<{
     // @ts-expect-error:it's fine
     let relatedPosts = await postSchema.findRelatedPosts({
       post,
-      relatedByFields: ['actors', 'categories', 'tags'],
+      relatedByFields: ['actors', 'tags', 'categories'],
       limit: 8,
     });
 
