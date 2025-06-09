@@ -53,9 +53,9 @@ const UploadPageContent = ({ _id, postType, dictionary, locale }: IProps) => {
     ({ settings }) => settings.initialSettings?.membershipSettings?.postByUserSettings,
   );
 
-  useEffect(() => {
-    console.log(`postByUserSettings=> `, postByUserSettings);
-  }, [postByUserSettings]);
+  // useEffect(() => {
+  //   console.log(`postByUserSettings=> `, postByUserSettings);
+  // }, [postByUserSettings]);
 
   useEffect(() => {
     if (_id && loggedIn) {

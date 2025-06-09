@@ -63,7 +63,7 @@ const searchPage = async (props: IPageProps) => {
     // searchType: searchParams?.searchType
   };
 
-  const { success, data } =
+  const { success, data, message } =
     await getSearch({
       keyword: params.keyword,
       page: currentPage,
@@ -77,7 +77,7 @@ const searchPage = async (props: IPageProps) => {
     }>;
 
   if (!success || !data ) {
-    return <Soft404 dictionary={dictionary} />;
+    return <Soft404 dictionary={dictionary} message={message} />;
   }
 
   const { posts, totalCount, actors, categories, tags } = data

@@ -31,3 +31,4 @@ export const mongoIdValidatorByRegex = (_id: string): boolean => {
 export const postTypeValidator = (currentPostType: string) => {
   return currentPostType ? postTypes.includes(currentPostType) : false;
 };
+

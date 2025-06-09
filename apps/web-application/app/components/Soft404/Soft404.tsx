@@ -5,16 +5,17 @@ import './Soft404.styles.scss'
 interface IProps {
     dictionary: {
         [key: string]: string
-    }
+    },
+  message?:string
 }
 
-const Soft404: FC<IProps> = ({dictionary}) => {
+const Soft404: FC<IProps> = ({dictionary,message}) => {
 
     return (
         <div id={'primary'} className='post-page' >
             <main id={'content'} className={`page-no-sidebar`}>
             <div className={'soft404'}>
-                <h1>{dictionary?.['Nothing found'] || 'Nothing found'}</h1>
+                <h1>{message ? message : dictionary?.['Nothing found'] || 'Nothing found'}</h1>
                 <p>{
                     dictionary?.['Nothing found Description'] ||
                     'It seems we can’t find what you’re looking for. Perhaps searching can help'}
@@ -24,7 +25,6 @@ const Soft404: FC<IProps> = ({dictionary}) => {
                         {dictionary?.['Go To Homepage'] || 'Go To Homepage'}
                     </h2>
                 </Link>
-
             </div>
             </main>
         </div>

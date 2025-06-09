@@ -13,7 +13,7 @@ import { useParams, usePathname, useSearchParams, useSelectedLayoutSegment } fro
 import socket from '@lib/web-socket-client';
 import { faBolt, faChevronDown, faChevronUp, faWrench } from '@fortawesome/free-solid-svg-icons';
 import { clearACacheByTag, clearCachesByServerAction } from '@lib/serverActions';
-import { fixUserDocuments } from '@lib/actions/database/fix';
+import { fixSearchKeywords } from '@lib/actions/database/fix';
 import { cookieChecker, deleteCookie, cookieSetter } from '@lib/actions/cookieTools';
 import { useState } from 'react';
 
@@ -70,7 +70,7 @@ const AuthenticationAdminItems = () => {
 
 
   const applyFixes = async () => {
-    await fixUserDocuments();
+    await fixSearchKeywords();
   };
 
 

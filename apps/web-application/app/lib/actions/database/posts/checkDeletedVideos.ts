@@ -59,7 +59,7 @@ export const checkRemovedVideos = async ()=>{
       postFindPromises.push(await postSchema.find({$and:[{type:'video'},{status:'published'}]}).skip(currentGroup * 500))
       currentGroup++
     }
-    console.log(`postFindPromises=> `,postFindPromises.length)
+    // console.log(`postFindPromises=> `,postFindPromises.length)
     return successResponse({
       message: 'done',
     });

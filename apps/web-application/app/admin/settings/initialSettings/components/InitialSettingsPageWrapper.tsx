@@ -32,9 +32,9 @@ const InitialSettingsPageWrapper: FC<PropTypes> = ({ initialSettings }) => {
     }
   }, [initialSettings]);
 
-  useEffect(() => {
-    console.log(`initialSettings=> `,initialSettings);
-  }, [initialSettings]);
+  // useEffect(() => {
+  //   console.log(`initialSettings=> `,initialSettings);
+  // }, [initialSettings]);
 
 
   const onSaveHandler = async () => {

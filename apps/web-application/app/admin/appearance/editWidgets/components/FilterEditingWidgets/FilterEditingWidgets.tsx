@@ -41,9 +41,9 @@ const FilterEditingWidgets:FC<IProps> = ({availablePositions}) => {
     );
   });
 
-  useEffect(() => {
-    console.log(`paramsPositions=> `, paramsPositions);
-  }, [paramsPositions]);
+  // useEffect(() => {
+  //   console.log(`paramsPositions=> `, paramsPositions);
+  // }, [paramsPositions]);
   return (
     <div id={'FilterEditingWidgets'} className={'position-selector'}>
       <button onClick={() => router.refresh()} className={'btn btn-primary select-all'}>

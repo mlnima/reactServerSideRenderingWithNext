@@ -28,7 +28,7 @@ const CategoriesPage = async (props: IProps) => {
       categoriesPageSettings: IPageSettings | undefined;
     }>,
   );
-  console.log(`categoriesPageSettings=> `,categoriesPageSettings)
+
   if (!categoriesPageSettings) {
     return <Soft404 dictionary={dictionary} />;
   }
