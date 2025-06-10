@@ -1,6 +1,6 @@
 'use server';
 import { metaSchema, postSchema, searchKeywordSchema } from '@repo/db';
-import { getDefaultLocale, getLocales } from '@repo/utils';
+import { getDefaultLocale, getLocales, universalSanitizer } from '@repo/utils';
 import { postFieldRequestForCards } from '@repo/data-structures';
 import { IMeta, IPost } from '@repo/typescript-types';
 import { unstable_cacheTag as cacheTag } from 'next/cache';
@@ -16,77 +16,37 @@ export interface IGetSearch {
   returnMetas?: boolean;
 }
 
-// Lightweight input sanitization - only block obvious attacks
-const sanitizeKeyword = (keyword: string): { isValid: boolean; sanitized: string; reason?: string } => {
-  if (!keyword || typeof keyword !== 'string') {
-    return { isValid: false, sanitized: '', reason: 'Empty keyword' };
-  }
-
-  let sanitized = decodeURIComponent(keyword).trim();
-
-  // Basic length checks
-  if (sanitized.length < 1) {
-    return { isValid: false, sanitized: '', reason: 'Too short' };
-  }
-
-  if (sanitized.length > 200) {
-    return { isValid: false, sanitized: '', reason: 'Too long' };
-  }
-
-  // Only block OBVIOUS SQL injection attempts - be very specific
-  const criticalPatterns = [
-    /;\s*drop\s+/i,                    // DROP statements
-    /;\s*delete\s+from\s+/i,           // DELETE statements
-    /;\s*update\s+.+\s+set\s+/i,       // UPDATE statements
-    /;\s*insert\s+into\s+/i,           // INSERT statements
-    /;\s*create\s+(table|database)/i,   // CREATE statements
-    /waitfor\s+delay\s+['"][\d:]+['"]/i, // SQL Server time delays
-    /pg_sleep\s*\(/i,                  // PostgreSQL sleep
-    /sleep\s*\(\s*\d+\s*\)/i,          // MySQL sleep
-    /benchmark\s*\(/i,                 // MySQL benchmark
-    /information_schema/i,             // Schema enumeration
-    /union\s+all\s+select/i,           // UNION attacks
-  ];
-
-  for (const pattern of criticalPatterns) {
-    if (pattern.test(sanitized)) {
-      console.warn(`[SECURITY] Blocked SQL injection attempt: ${sanitized.substring(0, 50)}...`);
-      return { isValid: false, sanitized: '', reason: 'Suspicious pattern detected' };
-    }
-  }
-
-  // Clean up whitespace but preserve the search intent
-  sanitized = sanitized.replace(/\s+/g, ' ').toLowerCase();
-
-  return { isValid: true, sanitized };
+const escapeRegex = (string: string) => {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 };
 
-// Safe function to create MongoDB text search or regex
 const createSafeSearchQuery = (keyword: string, field: string) => {
-  // Option 1: Use MongoDB text search if you have text indexes
-  // return { $text: { $search: keyword } };
-
-  // Option 2: Use parameterized queries (MongoDB handles escaping automatically)
-  // This is the safest approach - MongoDB's RegExp constructor handles escaping
   try {
-    return { [field]: { $regex: keyword, $options: 'i' } };
+    const escapedKeyword = escapeRegex(keyword);
+    return { [field]: { $regex: escapedKeyword, $options: 'i' } };
   } catch (error) {
-    // Fallback to exact match if regex fails
     console.warn(`Regex failed for keyword: ${keyword}, using exact match`);
     return { [field]: keyword };
   }
 };
 
-// More permissive keyword saving - only block obvious attacks
+// const createSafeSearchQuery = (keyword: string, field: string) => {
+//   try {
+//     return { [field]: { $regex: keyword, $options: 'i' } };
+//   } catch (error) {
+//     console.warn(`Regex failed for keyword: ${keyword}, using exact match`);
+//     return { [field]: keyword };
+//   }
+// };
+
 const shouldSaveKeyword = (keyword: string): boolean => {
   if (!keyword || keyword.length < 3) return false;
 
-  // Only block if it's clearly malicious
   const obviousMaliciousPatterns = [
-    /^[\d\s\+\-\*\/\(\)\.]+$/,  // Pure math expressions
-    /waitfor.*delay/i,           // SQL delays
-    /union.*select/i,            // Union attacks
-    /drop.*table/i,              // Drop statements
+    /^[\d\s\+\-\*\/\(\)\.]+$/,
+    /waitfor.*delay/i,
+    /union.*select/i,
+    /drop.*table/i,
   ];
 
   return !obviousMaliciousPatterns.some(pattern => pattern.test(keyword));
@@ -98,8 +58,7 @@ const _saveSearchedKeyword = async (keyword: string, postsCount: number) => {
   }
 
   try {
-    await searchKeywordSchema
-      .findOneAndUpdate(
+    const savedDoc = await searchKeywordSchema.findOneAndUpdate(
         { name: keyword },
         {
           $set: {
@@ -107,9 +66,17 @@ const _saveSearchedKeyword = async (keyword: string, postsCount: number) => {
             count: postsCount,
           },
         },
-        { upsert: true },
+        {
+          upsert: true,
+          new: true,
+          rawResult: true,
+        },
       );
-    console.log(`keyword ${keyword} Saved in DB with ${postsCount} result`);
+
+    const existedBefore = savedDoc.lastErrorObject.updatedExisting;
+    if (!existedBefore){
+      console.log(`keyword ${keyword} Saved in DB with ${postsCount} result`);
+    }
   } catch (error) {
     console.log('_saveSearchedKeyword Error=> ', error);
   }
@@ -131,7 +98,10 @@ export const getSearch = async (
     if (!keyword) return null;
 
     // Lightweight validation - only block obvious attacks
-    const { isValid, sanitized, reason } = sanitizeKeyword(keyword);
+    const { isValid, sanitized, reason } = universalSanitizer(keyword,'search');
+    console.log(`isValid=> `,isValid)
+    console.log(`sanitized=> `,sanitized)
+    console.log(`reason=> `,reason)
     if (!isValid) {
       console.warn(`Search blocked: ${reason} - ${keyword?.substring(0, 50)}`);
       // Return empty results instead of error for better UX
@@ -222,7 +192,9 @@ export const getSearch = async (
       await _saveSearchedKeyword(targetKeyword, totalCount);
     }
 
-    cacheTag('cacheItem', `CGetSearch-${targetKeyword}`);
+    const cacheKey = `CSearch-${targetKeyword}-p${page}-s${sort}-l${locale}`;
+    cacheTag('cacheItem','CSearch', cacheKey);
+    // cacheTag('cacheItem', `CGetSearch-${targetKeyword}`);
 
     return successResponse({
       data: {
@@ -243,6 +215,8 @@ export const getSearch = async (
 };
 
 export default getSearch;
+
+
 // 'use server';
 // import { metaSchema, postSchema, searchKeywordSchema } from '@repo/db';
 // import { getDefaultLocale, getLocales } from '@repo/utils';
@@ -399,3 +373,55 @@ export default getSearch;
 // };
 //
 // export default getSearch;
+
+
+
+
+
+
+
+
+// // Lightweight input sanitization - only block obvious attacks
+// const sanitizeKeyword = (keyword: string): { isValid: boolean; sanitized: string; reason?: string } => {
+//   if (!keyword || typeof keyword !== 'string') {
+//     return { isValid: false, sanitized: '', reason: 'Empty keyword' };
+//   }
+//
+//   let sanitized = decodeURIComponent(keyword).trim();
+//
+//   // Basic length checks
+//   if (sanitized.length < 1) {
+//     return { isValid: false, sanitized: '', reason: 'Too short' };
+//   }
+//
+//   if (sanitized.length > 200) {
+//     return { isValid: false, sanitized: '', reason: 'Too long' };
+//   }
+//
+//   // Only block OBVIOUS SQL injection attempts - be very specific
+//   const criticalPatterns = [
+//     /;\s*drop\s+/i,                    // DROP statements
+//     /;\s*delete\s+from\s+/i,           // DELETE statements
+//     /;\s*update\s+.+\s+set\s+/i,       // UPDATE statements
+//     /;\s*insert\s+into\s+/i,           // INSERT statements
+//     /;\s*create\s+(table|database)/i,   // CREATE statements
+//     /waitfor\s+delay\s+['"][\d:]+['"]/i, // SQL Server time delays
+//     /pg_sleep\s*\(/i,                  // PostgreSQL sleep
+//     /sleep\s*\(\s*\d+\s*\)/i,          // MySQL sleep
+//     /benchmark\s*\(/i,                 // MySQL benchmark
+//     /information_schema/i,             // Schema enumeration
+//     /union\s+all\s+select/i,           // UNION attacks
+//   ];
+//
+//   for (const pattern of criticalPatterns) {
+//     if (pattern.test(sanitized)) {
+//       console.warn(`[SECURITY] Blocked SQL injection attempt: ${sanitized.substring(0, 50)}...`);
+//       return { isValid: false, sanitized: '', reason: 'Suspicious pattern detected' };
+//     }
+//   }
+//
+//   // Clean up whitespace but preserve the search intent
+//   sanitized = sanitized.replace(/\s+/g, ' ').toLowerCase();
+//
+//   return { isValid: true, sanitized };
+// };

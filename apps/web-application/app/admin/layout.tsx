@@ -11,6 +11,8 @@ import { getDictionary } from '../../get-dictionary';
 import localDetector from '@lib/localDetector';
 import AlertBox from '@components/global/AlertBox/AlertBox';
 import { ILayoutProps } from '@repo/typescript-types';
+import LayoutMetaGenerator from '@components/LayoutMetaGenerator/LayoutMetaGenerator';
+import LayoutViewportGenerator from '@components/LayoutMetaGenerator/LayoutViewportGenerator';
 
 const AdminLayout = async (props: ILayoutProps) => {
   const params = await props.params;
@@ -22,7 +24,7 @@ const AdminLayout = async (props: ILayoutProps) => {
     <body className={`dark `}>
     <ReduxProvider>
       <Topbar />
-      <Sidebar />
+      <Sidebar/>
       <main>
         {props.children}
       </main>
@@ -34,4 +36,8 @@ const AdminLayout = async (props: ILayoutProps) => {
 };
 
 export default AdminLayout;
+
+export const generateMetadata = LayoutMetaGenerator;
+
+export const generateViewport = LayoutViewportGenerator;
 

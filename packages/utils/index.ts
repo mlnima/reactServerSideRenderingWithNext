@@ -17,6 +17,10 @@ export {
   formatDatePostCard
 } from './src/dates';
 
+export {
+  universalSanitizer,
+} from './src/sanitizer';
+
 export { touchDeviceDetector } from './src/devices';
 export { getCurrentDatePath } from './src/paths';
 
