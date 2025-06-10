@@ -52,33 +52,29 @@ const shouldSaveKeyword = (keyword: string): boolean => {
   return !obviousMaliciousPatterns.some(pattern => pattern.test(keyword));
 };
 
+
 const _saveSearchedKeyword = async (keyword: string, postsCount: number) => {
   if (!shouldSaveKeyword(keyword)) {
     return;
   }
 
   try {
-    const savedDoc = await searchKeywordSchema.findOneAndUpdate(
-        { name: keyword },
-        {
-          $set: {
-            name: keyword,
-            count: postsCount,
-          },
-        },
-        {
-          upsert: true,
-          new: true,
-          rawResult: true,
-        },
-      );
-
-    const existedBefore = savedDoc.lastErrorObject.updatedExisting;
-    if (!existedBefore){
-      console.log(`keyword ${keyword} Saved in DB with ${postsCount} result`);
-    }
+    await searchKeywordSchema.findOneAndUpdate(
+      { name: keyword },
+      {
+        $set: {
+          name: keyword,
+          count: postsCount,
+        }
+      },
+      {
+        upsert: true,
+        new: true,
+        rawResult: true,
+      },
+    );
   } catch (error) {
-    console.log('_saveSearchedKeyword Error=> ', error);
+    console.log('saveSearchedKeyword Error=> ', error);
   }
 };
 
@@ -99,9 +95,7 @@ export const getSearch = async (
 
     // Lightweight validation - only block obvious attacks
     const { isValid, sanitized, reason } = universalSanitizer(keyword,'search');
-    console.log(`isValid=> `,isValid)
-    console.log(`sanitized=> `,sanitized)
-    console.log(`reason=> `,reason)
+
     if (!isValid) {
       console.warn(`Search blocked: ${reason} - ${keyword?.substring(0, 50)}`);
       // Return empty results instead of error for better UX
