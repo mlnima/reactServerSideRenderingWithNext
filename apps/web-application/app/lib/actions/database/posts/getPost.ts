@@ -58,10 +58,10 @@ const getPost = async (identifier: string): Promise<ServerActionResponse<{
     cacheTag('cacheItem', `CPost-${post._id as unknown as string}`);
 
     return successResponse({
-      data: {
-        post: JSON.parse(JSON.stringify(post)),
+      data: JSON.parse(JSON.stringify({
+        post ,
         relatedPosts,
-      },
+      }))
     });
 
 

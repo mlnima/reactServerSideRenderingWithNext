@@ -1,7 +1,9 @@
 'use server';
 import { postSchema, userSchema, connectToDatabase, userRelationSchema, userEngagementSchema,searchKeywordSchema } from '@repo/db';
-import { IUserEngagement, IUserRelation, User } from '@repo/typescript-types';
+// import { IUserEngagement, IUserRelation, User } from '@repo/typescript-types';
 import { universalSanitizer } from '@repo/utils';
+// import { z } from 'zod';
+// import xss from 'xss'
 
 // export const fixUserDocuments = async () => {
 //   try {
@@ -90,15 +92,16 @@ export const fixSearchKeywords = async () => {
     console.log(`Found ${allKeywords.length} total search keywords to check`);
 
     for (const keyword of allKeywords) {
-      const { isValid, sanitized, reason } = universalSanitizer(keyword,'search')
+       const { isValid, sanitized, reason } = universalSanitizer(keyword.name,'search')
 
       if (!isValid) {
         try {
-          await searchKeywordSchema.findByIdAndDelete(keyword._id);
           console.warn(`keyword deleted: ${reason} - ${keyword?.name?.substring(0, 50)}`);
         } catch (deleteError) {
           console.error(`Failed to delete keyword "${keyword.name}":`, deleteError);
         }
+      }else{
+        console.log(`${keyword?.name?.substring(0, 50)} is valid `,)
       }
     }
   } catch (error) {

@@ -13,8 +13,14 @@ const universalSanitizer = (data: string, usageType: UsageType): SanitizeResult 
   }
 
   let sanitized: string;
+  let wasUrlEncoded = false;
 
   try {
+    // Check if the input was URL encoded
+    const decoded = decodeURIComponent(data);
+    wasUrlEncoded = decoded !== data;
+
+    // Decode HTML entities first, then URL decode
     sanitized = data.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
     sanitized = decodeURIComponent(sanitized).trim();
   } catch {
@@ -35,24 +41,34 @@ const universalSanitizer = (data: string, usageType: UsageType): SanitizeResult 
     return { isValid: false, sanitized: '', reason: 'Too long', severity: 'medium' };
   }
 
+  // Critical MongoDB injection patterns - more precise matching
   const criticalPatterns = [
-    /\$where/i, /\$ne\s*[:=]/i, /\$gt\s*[:=]/i, /\$gte\s*[:=]/i, /\$lt\s*[:=]/i, /\$lte\s*[:=]/i,
+    /\$where\s*[:=]/i, /\$ne\s*[:=]/i, /\$gt\s*[:=]/i, /\$gte\s*[:=]/i, /\$lt\s*[:=]/i, /\$lte\s*[:=]/i,
     /\$in\s*[:=]/i, /\$nin\s*[:=]/i, /\$or\s*[:=]/i, /\$and\s*[:=]/i, /\$not\s*[:=]/i, /\$nor\s*[:=]/i,
     /\$exists\s*[:=]/i, /\$type\s*[:=]/i, /\$mod\s*[:=]/i, /\$regex\s*[:=]/i, /\$options\s*[:=]/i,
     /\$elemMatch\s*[:=]/i, /\$size\s*[:=]/i, /\$all\s*[:=]/i, /\$slice\s*[:=]/i,
     /\$match\s*[:=]/i, /\$group\s*[:=]/i, /\$project\s*[:=]/i, /\$lookup\s*[:=]/i,
+    // SQL injection patterns
     /;\s*(drop|delete|update|insert|alter|create|truncate|replace)\s+/i,
     /\bunion\s+(all\s+)?select\b/i, /\b(and|or)\s+[\d'"]+\s*[=!<>]+\s*[\d'"]+/i,
+    // Timing attacks
     /sleep\s*\(\s*\d+/i, /waitfor\s+delay/i, /pg_sleep\s*\(/i, /benchmark\s*\(/i,
+    // System tables
     /information_schema/i, /mysql\./i, /sys\./i, /pg_catalog/i,
+    // Dangerous SQL functions
     /xp_cmdshell/i, /sp_executesql/i, /exec\s*\(/i,
+    // SQL comments
     /-{2,}/, /\/\*[\s\S]*?\*\//, /#.*$/m,
-    /this\./i, /function\s*\(/i, /=>\s*[{(]/i, /eval\s*\(/i,
+    // JavaScript code execution
+    /this\.\w+\s*\(/i, /function\s*\(/i, /=>\s*[{(]/i, /eval\s*\(/i,
     /setTimeout\s*\(/i, /setInterval\s*\(/i, /new\s+Function/i,
+    // Command injection
     /[;&|`]\s*[a-z]/i, /\|\||\&\&/,
-    /(nslookup|curl|wget|ping|nc|netcat|telnet)/i,
+    /(nslookup|curl|wget|ping|nc|netcat|telnet)\s/i,
+    // Script injection
     /response\.write/i, /document\.write/i, /window\./i, /alert\s*\(/i,
-    /\b(cat|ls|dir|rm|del|copy|move|chmod|ps|kill|whoami|id|pwd)\b/i
+    // System commands
+    /\b(cat|ls|dir|rm|del|copy|move|chmod|ps|kill|whoami|id|pwd)\s/i
   ];
 
   const xssPatterns = [
@@ -122,21 +138,37 @@ const universalSanitizer = (data: string, usageType: UsageType): SanitizeResult 
     return { isValid: false, sanitized: '', reason: 'Numeric pattern', severity: 'medium' };
   }
 
+  // More precise suspicious structure detection - only for non-search or when context suggests attack
   const suspiciousStructures = [
-    /\[.*\]/,
-    /\{.*\}/,
-    /\(.*\|.*\)/,
-    /["'][^"']*["']\s*[=<>!]+/,
-    /\+.*\*/,
-    /\*.*\+/,
-    /\|\|.*\&\&/,
-    /\&\&.*\|\|/,
-    /[()]{3,}/,
-    /[[\]]{3,}/,
-    /[{}]{3,}/
+    // Only block structures that look like actual injection attempts
+    /\{[^}]*\$\w+[^}]*\}/,  // MongoDB operators in objects
+    /\[.*\$\w+.*\]/,        // MongoDB operators in arrays
+    /\(.*\|.*\|.*\)/,       // Multiple pipes in parentheses (regex injection)
+    /["'][^"']*["']\s*[=<>!]+/,  // String comparisons
+    /\+.*\*/,               // Arithmetic expressions
+    /\*.*\+/,               // Arithmetic expressions
+    /\|\|.*\&\&/,           // Logic operators
+    /\&\&.*\|\|/,           // Logic operators
+    /[()]{4,}/,             // Excessive parentheses
+    /[{}]{3,}/,             // Excessive braces
   ];
 
-  if (usageType === 'search' || usageType === 'username' || usageType === 'filename') {
+  // For search queries, be more lenient with brackets - only block if it looks like injection
+  if (usageType === 'search') {
+    // Only block brackets if they contain suspicious patterns
+    const suspiciousInBrackets = [
+      /\[[^\]]*\$\w+[^\]]*\]/,     // MongoDB operators in brackets
+      /\[[^\]]*[=<>!]+[^\]]*\]/,   // Comparison operators in brackets
+      /\[[^\]]*[;&|][^\]]*\]/,     // Command separators in brackets
+    ];
+
+    for (const pattern of suspiciousInBrackets) {
+      if (pattern.test(sanitized)) {
+        return { isValid: false, sanitized: '', reason: 'Suspicious structure', severity: 'medium' };
+      }
+    }
+  } else if (usageType === 'username' || usageType === 'filename') {
+    // For usernames and filenames, maintain strict structure checking
     for (const pattern of suspiciousStructures) {
       if (pattern.test(sanitized)) {
         return { isValid: false, sanitized: '', reason: 'Suspicious structure', severity: 'medium' };
@@ -178,7 +210,8 @@ const getConfigForType = (usageType: UsageType) => {
       minLength: 1,
       maxLength: 200,
       blockSuspiciousChars: true,
-      suspiciousChars: /[<>{}[\]();='"\\\/!@#$%^&*|`~]/,
+      // Removed brackets from suspicious chars for search - they're common in legitimate searches
+      suspiciousChars: /[<>{}();='"\\\/!@#$%^&*|`~]/,
       normalizeWhitespace: true,
       toLowerCase: true,
       customValidation: (str: string) => !/^[0-9\s\-_.,]*$/.test(str) || str.replace(/[0-9\s\-_.,]/g, '').length > 0

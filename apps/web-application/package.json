@@ -24,14 +24,13 @@
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.6.1",
     "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/fontawesome-free": "^6.0.0",
     "@fortawesome/fontawesome-free-solid": "^5.0.13",
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-brands-svg-icons": "^6.7.2",
     "@fortawesome/free-regular-svg-icons": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
-    "@fortawesome/fontawesome-free": "^6.0.0",
-    "@types/google.analytics": "^0.0.46",
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
     "@monaco-editor/react": "^4.7.0",
@@ -42,6 +41,7 @@
     "@repo/utils": "*",
     "@repo/utils-server": "*",
     "@tabler/icons-react": "^3.31.0",
+    "@types/google.analytics": "^0.0.46",
     "@vercel/edge": "^1.2.1",
     "@vercel/og": "^0.6.5",
     "accept-language": "^3.0.20",
@@ -86,7 +86,6 @@
     "react-switch": "^7.0.0",
     "react-syntax-highlighter": "^15.6.1",
     "redux": "^5.0.1",
-
     "redux-mock-store": "^1.5.5",
     "remark": "^15.0.1",
     "remark-html": "^16.0.1",
@@ -101,7 +100,8 @@
     "tailwindcss-animate": "^1.0.7",
     "tsconfig": "*",
     "uuid": "^9.0.1",
-    "uuid-apikey": "^1.5.3"
+    "uuid-apikey": "^1.5.3",
+    "zod": "^3.25.57"
   },
   "overrides": {
     "framer-motion": {

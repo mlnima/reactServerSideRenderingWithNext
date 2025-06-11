@@ -5,6 +5,7 @@ import { postFieldRequestForCards } from '@repo/data-structures';
 import { IMeta, IPost } from '@repo/typescript-types';
 import { unstable_cacheTag as cacheTag } from 'next/cache';
 import { errorResponse, successResponse } from '@lib/actions/response';
+import { z } from 'zod';
 
 export interface IGetSearch {
   sort?: string;
@@ -53,26 +54,57 @@ const shouldSaveKeyword = (keyword: string): boolean => {
 };
 
 
+// const _saveSearchedKeyword = async (keyword: string, postsCount: number) => {
+//   if (!shouldSaveKeyword(keyword)) {
+//     return;
+//   }
+//
+//   try {
+//     await searchKeywordSchema.findOneAndUpdate(
+//       { name: keyword },
+//       {
+//         $set: {
+//           name: keyword,
+//           count: postsCount,
+//         }
+//       },
+//       {
+//         upsert: true,
+//         new: true,
+//         rawResult: true,
+//       },
+//     );
+//   } catch (error) {
+//     console.log('saveSearchedKeyword Error=> ', error);
+//   }
+// };
+
 const _saveSearchedKeyword = async (keyword: string, postsCount: number) => {
   if (!shouldSaveKeyword(keyword)) {
     return;
   }
 
   try {
-    await searchKeywordSchema.findOneAndUpdate(
-      { name: keyword },
-      {
-        $set: {
-          name: keyword,
-          count: postsCount,
-        }
-      },
-      {
-        upsert: true,
-        new: true,
-        rawResult: true,
-      },
-    );
+    const existingKeyword = await searchKeywordSchema.findOne({ name: keyword });
+
+    if (!existingKeyword) {
+      const dataToSave = new searchKeywordSchema({
+        name: keyword,
+        count: postsCount,
+      })
+      dataToSave.save()
+      console.log(`search keyword ${keyword} saved`,)
+    }
+
+    const oneWeekAgo = new Date();
+    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+
+    if (existingKeyword.updatedAt < oneWeekAgo) {
+      console.log(`console=> `,)
+      existingKeyword.count = postsCount;
+      await existingKeyword.save();
+    }
+
   } catch (error) {
     console.log('saveSearchedKeyword Error=> ', error);
   }

@@ -1,0 +1,59 @@
+
+
+.loadingPageSkeleton{
+
+
+
+  .loadingPageSkeletonBox{
+    display: block;
+
+    span{
+      display: grid;
+      grid-gap: 8px;
+      justify-content: center;
+      align-items: center;
+      padding: .5rem 0;
+      width: 100%;
+
+
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+
+      @media only screen and (min-width: 601px) and (max-width: 768px) {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      }
+
+      @media only screen and (min-width: 769px) and (max-width: 1024px) {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      }
+
+      @media only screen and (min-width: 1025px) and (max-width: 1280px) {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      }
+
+
+
+      @media only screen and (min-width: 1441px) {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      }
+
+      .loadingPageSkeletonBoxInnerItemContent{
+        //display: none;
+        //max-width: 100%;
+        //height: 100%;
+        max-width: 280px;
+        border-radius: 0.375rem;
+        margin:0;
+        padding:0;
+        aspect-ratio: 16/9;
+      }
+      br{
+        display: none;
+      }
+
+    }
+  }
+
+}
+
+
+

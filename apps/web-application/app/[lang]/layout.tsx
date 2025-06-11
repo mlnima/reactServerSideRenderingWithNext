@@ -16,7 +16,6 @@ import TopbarWidgetArea from '@components/widgets/widgetAreas/TopbarWidgetArea';
 import HeaderWidgetArea from '@components/widgets/widgetAreas/HeaderWidgetArea';
 import NavigationWidgetArea from '@components/widgets/widgetAreas/NavigationWidgetArea';
 import FooterWidgetArea from '@components/widgets/widgetAreas/FooterWidgetArea';
-import StyledComponentsRegistry from '@lib/registry';
 import BackgroundFilterWholeScreen from '@components/global/BackgroundFilterWholeScreen/BackgroundFilterWholeScreen';
 import KeysListener from '@components/global/KeysListener';
 import UserConfigMenu from '@components/global/UserConfigMenu/UserConfigMenu';
@@ -33,7 +32,7 @@ import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 import DynamicStyleInjector from '@components/global/DynamicStyleInjector';
 import CustomStylesSwitcher from '@components/global/styles/CustomStylesSwitcher';
 import { WebVitals } from '@components/web-vitals';
-
+import React from 'react';
 
 const RootLayout = async (props: ILayoutProps) => {
   // await connection()
@@ -127,7 +126,6 @@ const RootLayout = async (props: ILayoutProps) => {
         <UserConfigMenu locale={locale} dictionary={dictionary} />
         <CustomHeadTagsInitializer />
         <CustomScripts />
-        <WebVitals />
       </ReduxProvider>
       </body>
       </html>

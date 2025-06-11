@@ -9,7 +9,7 @@ const Box = ({children}: PropsWithChildren<unknown>) => {
                 display: 'block',
                 lineHeight: 1,
                 margin:0,
-                padding:0,
+                padding:'0',
             }}>
 
             {children}
@@ -20,14 +20,14 @@ const Box = ({children}: PropsWithChildren<unknown>) => {
 import {FC} from "react";
 
 interface IProps {
-    height:number,
-    width:number,
+    height:string | number,
+    width:string | number,
     count:number,
 }
 
 const SkeletonRenderer: FC<IProps> = ({width,height,count=1}) => {
     return <Skeleton wrapper={Box}
-                     highlightColor={'var(--secondary-background-color,#2b2b2b)'}
+                     highlightColor={'var(--tertiary-background-color,#2b2b2b)'}
                      baseColor='var(--primary-background-color,#000)'
                      line-height={1}
                      style={{
@@ -36,6 +36,7 @@ const SkeletonRenderer: FC<IProps> = ({width,height,count=1}) => {
                          lineHeight: 1,
                          borderRadius:'.375rem'
                      }}
+                     duration={2.5}
                      height={height}
                      width={width}
                      count={count} />
