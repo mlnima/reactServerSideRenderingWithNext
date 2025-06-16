@@ -103,7 +103,8 @@
         "showRatingOnCard": true,
         "showDateOnCard": true,
         "showDateInPostPage": true,
-        "allowComment": true
+        "allowComment": true,
+        "showViewsOnCard": true
       },
       "learn": {
         "showRatingOnCard": true,
