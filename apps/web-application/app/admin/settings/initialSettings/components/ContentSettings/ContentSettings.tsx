@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { capitalizeFirstLetter, convertVariableNameToName, inputValueSimplifier } from '@repo/utils';
 import { IInitialSettings } from '@repo/typescript-types';
+import { postTypes } from "@repo/data-structures";
 import './ContentSettings.scss';
 
 interface PropTypes {
@@ -22,12 +23,11 @@ const ContentSettings: React.FC<PropTypes> = (
   }) => {
 
   const [openPostSettings, setOpenPostSettings] = useState(false);
-  const postTypes = ['blog', 'news']; // Assuming these are the post types
   const postConfigTypes = [
     'viewSystem',
     'showViewsOnCard',
     'ratingSystem',
-    'showRatingOnCard',
+    // 'showRatingOnCard',
     'showDateOnCard',
     'showDateInPostPage',
     'allowComment',

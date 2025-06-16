@@ -1,16 +1,22 @@
 .cardTitle {
   color: var(--primary-text-color, #fff);
+  //overflow: hidden;
+  //white-space: nowrap;
+  //text-overflow: ellipsis;
+  //max-width: 100%;
   overflow: hidden;
-  white-space: nowrap;
   text-overflow: ellipsis;
-
+  white-space: nowrap;
+  width: 100%;
+  min-width: 0;
   a {
     color: var(--primary-text-color, #fff);
     display: inline-block;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 100%;
+    width: 100%;
+    min-width: 0;
   }
 
   .rating-icon {
@@ -19,15 +25,15 @@
   }
 }
 
-.cardTitle.flex {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  a {
-    flex: 1;
-  }
-}
+//.cardTitle.flex {
+//  display: flex;
+//  align-items: center;
+//  justify-content: space-between;
+//
+//  a {
+//    flex: 1;
+//  }
+//}
 
 
 //.cardTitle{

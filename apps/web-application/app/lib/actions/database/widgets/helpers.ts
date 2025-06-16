@@ -4,7 +4,7 @@ import { clientAllowedSortOptions, postFieldRequestForCards } from '@repo/data-s
 import { metaSchema, postSchema } from '@repo/db';
 import { Document } from 'mongoose';
 import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
-import { IInitialSettings } from '@repo/typescript-types';
+import { IInitialSettings, IMeta, IPost } from '@repo/typescript-types';
 
 export const findWidgetPosts = async (widgetData: any): Promise<{ posts: {}[]; totalCount: number }> => {
   try {
@@ -38,7 +38,7 @@ export const findWidgetPosts = async (widgetData: any): Promise<{ posts: {}[]; t
         sort: sortQuery,
       })
       .select([...postFieldRequestForCards])
-      .lean();
+      .lean<IPost[]>();
 
     posts = posts.map((doc) => {
       if (doc._id) {
@@ -91,15 +91,7 @@ export const findWidgetMetas = async (widgetData: any, withCount?: boolean): Pro
       .find(findQuery, {}, { sort: sortQuery })
       .limit(limit)
       .select('name count imageUrl')
-      .lean({
-        virtuals: true,
-        transform: (doc: Document) => {
-          if (doc?._id) {
-            doc._id = doc._id.toString();
-          }
-          return doc;
-        },
-      });
+      .lean<IMeta[]>();
 
     return {
       metaData: metas,

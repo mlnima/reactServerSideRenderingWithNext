@@ -41,7 +41,7 @@ export const verifyActionDelay = cache(async (): Promise<boolean> => {
     const lastActionTime = parseInt(cookie, 10);
     const currentTime = Date.now();
 
-    return currentTime - lastActionTime < 10000;
+    return currentTime - lastActionTime < 5000;
   } catch (error) {
     return false;
   }

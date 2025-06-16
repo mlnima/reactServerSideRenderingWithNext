@@ -2,7 +2,7 @@
 import { FC, PropsWithChildren } from 'react';
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import '@components/cards/CardsRenderer/cardsRenderer.scss'
+// import '@components/cards/CardsRenderer/cardsRenderer.scss'
 import './LoadingPageSkeleton.scss'
 interface IProps {
 }

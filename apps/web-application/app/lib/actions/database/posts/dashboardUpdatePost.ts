@@ -23,6 +23,9 @@ const dashboardUpdatePost = async ({ postData }: IDashboardUpdatePost) => {
 
     if (postData?._id) {
       await postSchema.findByIdAndUpdate(postData._id, postData);
+      return successResponse({
+        message: 'Post Updated',
+      });
     } else {
       const newPostToSave = new postSchema({
         ...postData,
@@ -32,7 +35,7 @@ const dashboardUpdatePost = async ({ postData }: IDashboardUpdatePost) => {
       });
       const savedPost = await newPostToSave.save();
       return successResponse({
-        message: 'Update',
+        message: 'Post Created',
         data: {
           newPostId: savedPost?._id.toString(),
         },

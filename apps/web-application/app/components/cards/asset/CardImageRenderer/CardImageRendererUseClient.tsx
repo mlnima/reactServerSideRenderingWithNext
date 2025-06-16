@@ -8,7 +8,8 @@ import Image from 'next/image';
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import viewPost from '@lib/actions/database/posts/viewPost';
 //import {clearACacheByTag} from "@lib/serverActions";
-const fallbackImage = '/asset/images/default/no-image-available.png';
+const fallbackImage = '/asset/images/default/no-image-available260.png';
+
 
 interface CardImageNextPropTypes {
   imageUrl: string | undefined;
@@ -21,7 +22,6 @@ interface CardImageNextPropTypes {
   index: number;
   aspectRatio?: string | undefined;
   objectFit?: 'fill' | 'contain' | 'cover' | 'none' | 'scale-down';
-  metaId?: string;
   overlayShadow?: boolean;
 }
 
@@ -30,29 +30,34 @@ interface IImageStyle {
   aspectRatio: string;
 }
 
-const CardImageRendererUseClient: FC<CardImageNextPropTypes> = ({
-                                                                  imageUrl,
-                                                                  mediaAlt,
-                                                                  aspectRatio,
-                                                                  objectFit,
-                                                                  submitPostView = false,
-                                                                  videoTrailerUrl,
-                                                                  postId,
-                                                                  metaId,
-                                                                  index,
-                                                                  isNextImageAllowed = false,
-                                                                  overlayShadow,
-                                                                }) => {
+const CardImageRendererUseClient: FC<CardImageNextPropTypes> = (
+  {
+    imageUrl,
+    mediaAlt,
+    aspectRatio,
+    objectFit,
+    submitPostView = false,
+    videoTrailerUrl,
+    postId,
+    index,
+    isNextImageAllowed = false,
+    overlayShadow,
+  }) => {
   const activeVideoTrailerId = useAppSelector(({ posts }) => posts.activeVideoTrailerId);
   const dispatch = useAppDispatch();
   const [loadingAnimationOver, setLoadingAnimationOver] = useState(false);
   const videoTrailerRef = useRef<HTMLVideoElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const [gotError, setGotError] = useState<boolean>(false);
+  const [targetImageUrl, setTargetImageUrl] = useState<string>(imageUrl || '');
 
-  const targetImageUrl = useMemo(() => (gotError ? fallbackImage : imageUrl), [postId, metaId, gotError]) as
-    | string
-    | StaticImport;
+
+  useEffect(() => {
+    if (gotError){
+      setTargetImageUrl(fallbackImage)
+    }
+
+  }, [ postId, gotError]);
 
   const imageStyle = useMemo(
     () => ({
@@ -63,10 +68,10 @@ const CardImageRendererUseClient: FC<CardImageNextPropTypes> = ({
   ) as IImageStyle;
 
   useEffect(() => {
-    if (gotError) {
+    if (gotError && targetImageUrl === fallbackImage) {
       setGotError(false);
     }
-  }, [postId, metaId]);
+  }, [postId]);
 
   const onClickHandler = () => {
     if (submitPostView && postId) {
@@ -134,8 +139,8 @@ const CardImageRendererUseClient: FC<CardImageNextPropTypes> = ({
           src={targetImageUrl}
           ref={imageRef}
           alt={mediaAlt || ''}
-          width={280}
-          height={157.5}
+          width={320}
+          height={180}
           onMouseEnter={() => onHoverHandler()}
           onTouchStart={() => onHoverHandler()}
           onTouchEnd={onUnHoverHandler}
@@ -167,6 +172,7 @@ const CardImageRendererUseClient: FC<CardImageNextPropTypes> = ({
           style={{
             position: 'absolute',
             width: '100%',
+            maxWidth: '100%',
             height: '100%',
             top: 0,
             left: 0,

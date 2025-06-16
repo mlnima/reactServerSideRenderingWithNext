@@ -7,7 +7,7 @@ const MultipleLinkWidgetSingleLinkPreviewStyledDiv = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: var(--default-border);
+  border: var(--primary-border);
   filter: opacity(90%);
 
   .multiple-link-widget-single-link-preview-header {

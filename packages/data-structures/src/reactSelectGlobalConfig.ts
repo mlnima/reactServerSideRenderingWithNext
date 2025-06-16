@@ -4,7 +4,7 @@ export const reactSelectPrimaryTheme = {
         ...baseStyles,
         color: 'var(--secondary-text-color)',
         backgroundColor: 'var(--secondary-background-color)',
-        border: 'var(--default-border)',
+        border: 'var(--primary-border)',
         borderRadius: '.375rem',
         width: '100%',
     }),

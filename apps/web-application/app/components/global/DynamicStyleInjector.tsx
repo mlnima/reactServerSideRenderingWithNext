@@ -1,6 +1,3 @@
-/*
-replacement for Styled-Component to render dynamic styles
- */
 import { compileString } from 'sass';
 
 interface IProps {

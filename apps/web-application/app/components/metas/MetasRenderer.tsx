@@ -43,9 +43,11 @@ const MetasRenderer: FC<MetasRendererPropTypes> = (
                                               ? '#'
                                               : capitalizeFirstLetter(group)}
                                         </span>
+
                   </div>
                   <div className={'items '}>
                     {groupMetas[group].map((meta: IMeta) => {
+
                       const name = capitalizeFirstLetter(
                         meta?.translations?.[locale]
                           ?.name ?? meta.name,
@@ -55,9 +57,9 @@ const MetasRenderer: FC<MetasRendererPropTypes> = (
                           className={`metaWidgetItem btn`}
                           key={meta._id}
                           href={`/${typePath}/${meta._id}`}
-                          title={name}
-                        >
-                          {name}
+                          title={name}>
+                          <span>{name}</span>
+                          <span>{meta?.count || 0}</span>
                         </Link>
                       );
                     })}
@@ -103,7 +105,8 @@ const MetasRenderer: FC<MetasRendererPropTypes> = (
                     href={`/${typePath}/${meta._id}`}
                     title={name}
                   >
-                    {name}
+                    <span className={'metaWidgetItemName'}>{name}</span>
+                    <span className={'metaWidgetItemCount'}>{meta?.count || 0}</span>
                   </Link>
                 );
               })}

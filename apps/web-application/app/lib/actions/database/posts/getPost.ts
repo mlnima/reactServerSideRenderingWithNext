@@ -2,7 +2,7 @@
 import { connectToDatabase, postSchema,isValidObjectId } from '@repo/db';
 import { IPost } from '@repo/typescript-types';
 import { errorResponse, ServerActionResponse, successResponse } from '@lib/actions/response';
-import { unstable_cacheTag as cacheTag } from 'next/cache';
+import { unstable_cacheTag as cacheTag , unstable_cacheLife as cacheLife } from 'next/cache';
 
 const getPost = async (identifier: string): Promise<ServerActionResponse<{
   post: IPost,
@@ -56,6 +56,7 @@ const getPost = async (identifier: string): Promise<ServerActionResponse<{
 
     //no cache life for the post data
     cacheTag('cacheItem', `CPost-${post._id as unknown as string}`);
+    cacheLife('minutes')
 
     return successResponse({
       data: JSON.parse(JSON.stringify({
@@ -63,7 +64,6 @@ const getPost = async (identifier: string): Promise<ServerActionResponse<{
         relatedPosts,
       }))
     });
-
 
   } catch (error) {
     console.error(`getPost => `, error);

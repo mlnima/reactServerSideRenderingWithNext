@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons/faXmark';
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus';
 import { IMeta, IPost } from '@repo/typescript-types';
+import './Meta.scss'
 
 interface PropType {
   type: 'categories' | 'tags' | 'actors';

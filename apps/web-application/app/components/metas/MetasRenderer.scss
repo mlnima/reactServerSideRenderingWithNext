@@ -32,11 +32,10 @@
         width: 100%;
         gap: .5rem;
         .metaWidgetItem{
-          height: 48px;
-          min-width: 48px;
-          max-width: 16rem;
-          //display: block;
           display: flex;
+          justify-content: space-between;
+          height: 48px;
+          width: 100%;
 
           align-items: center;
           list-style-type: none;
@@ -48,8 +47,17 @@
           cursor: pointer;
           word-wrap: break-word;
           //background-color: var(--secondary-background-color);
-          background-color: var(--quaternary-background-color);
+         // background-color: var(--quaternary-background-color);
           box-sizing: border-box;
+          &:hover{
+            color: var(--primary-active-color);
+          }
+
+          .metaWidgetItemName{
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
 
         }
         .view-all{
@@ -79,9 +87,11 @@
         .items{
           gap: .1rem;
           .metaWidgetItem{
+            height: 30px;
             //background-color: var(--primary-background-color);
             //padding: 0.25rem;
             //min-height: 1rem;
+
           }
 
         }

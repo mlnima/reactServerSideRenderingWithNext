@@ -3,6 +3,7 @@ import type { NextRequest } from 'next/server';
 import { i18n } from '@i18nConfig';
 import { cookies } from 'next/headers';
 import { decryptJWT } from '@lib/session';
+import initialSettings from './public/initialSettings.json'
 
 const getLocaleFromUrl = (request: NextRequest) => {
   const newUrl = new URL(request.url);
@@ -14,6 +15,21 @@ export async function middleware(request: NextRequest) {
 
   const pathname = request.nextUrl.pathname;
   const params = request?.nextUrl?.searchParams;
+
+
+  if (pathname === '/favicon.ico'){
+    if (initialSettings?.headDataSettings?.favIconUrl){
+      return NextResponse.rewrite(
+        new URL(
+          initialSettings?.headDataSettings?.favIconUrl || '/favicon.ico',
+          request.url,
+        ),
+      );
+    }else {
+      return NextResponse.next();
+    }
+  }
+
 
 
   const pathnameIsMissingLocale = i18n.locales.every(
@@ -52,38 +68,12 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/((?!api|_next/static|_next/image|favicon.ico|asset|fonts|public|sitemap|robots.txt|manifest.webmanifest).*)',
+    '/((?!api|_next/static|_next/image|asset|fonts|public|sitemap|robots.txt|manifest.webmanifest).*)',
   ],
 };
 
-//matcher: ['/((?!api|_next/static|_next/image|favicon.ico|asset|fonts|public|sitemap|robots.txt|manifest.webmanifest).*)'],
-// if (pathname.startsWith('/admin')) {
-//   return NextResponse.rewrite(
-//     new URL(request.url),
-//   )
-// }
-
-
-//|manifest.webmanifest
-
-// |manifest.json |manifest.webmanifest
-
-// //This function detect accepted language and return the best one but is not in use due to the bug
-// function getLocale(request: NextRequest): string | undefined {
-//     // Negotiator expects plain object so we need to transform headers
-//     const negotiatorHeaders: Record<string, string> = {}
-//     request.headers.forEach((value, key) => (negotiatorHeaders[key] = value))
-//
-//
-//     // @ts-ignore locales are readonly
-//     const locales: string[] = i18n.locales
-//
-//     // Use negotiator and intl-localematcher to get best locale
-//     let languages = new Negotiator({ headers: negotiatorHeaders }).languages(
-//         locales
-//     )
-// //@ts-ignore
-//     const locale = matchLocale(languages, locales, i18n.defaultLocale)
-//     console.log('middleware locale=> ',locale)
-//     return locale
-// }
+// export const config = {
+//   matcher: [
+//     '/((?!api|_next/static|_next/image|favicon.ico|asset|fonts|public|sitemap|robots.txt|manifest.webmanifest).*)',
+//   ],
+// };

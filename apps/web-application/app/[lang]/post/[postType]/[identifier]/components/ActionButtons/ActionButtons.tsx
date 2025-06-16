@@ -13,6 +13,7 @@ import { clearACacheByTag } from '@lib/serverActions';
 import ratePost from '@lib/actions/database/posts/ratePost';
 import viewPost from '@lib/actions/database/posts/viewPost';
 import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons';
+import { ServerActionResponse } from '@lib/actions/response';
 
 interface IProps {
   rating: boolean;
@@ -64,9 +65,9 @@ const ActionButtons: FC<IProps> = (
     if (loggedIn && _id) {
       try {
         setRateLock(true);
-        const { success, message } = await ratePost({ _id });
+        const { success, message , data } = await ratePost({ _id }) as ServerActionResponse<{result:string}>;
 
-        if (!success) {
+        if (!success || !data) {
           dispatch(setAlert({
             message,
             type: 'error',
@@ -75,20 +76,27 @@ const ActionButtons: FC<IProps> = (
         }
 
         const stored = localStorage.getItem('likedPosts');
+
         let likedPosts: string[] = stored ? JSON.parse(stored) : [];
 
+        const result = data.result
         if (likedPosts.includes(_id)) {
-          likedPosts = likedPosts.filter(id => id !== _id);
-          setDidLike(false);
+          if (result === 'liked'){
+            return
+          }else {
+            likedPosts = likedPosts.filter(id => id !== _id);
+            setDidLike(false);
+          }
         } else {
-          likedPosts.push(_id);
-          setDidLike(true);
+          if (result === 'liked') {
+            likedPosts.push(_id);
+            setDidLike(true);
+          }else {
+            setDidLike(false);
+          }
         }
-
         localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
-
         await clearACacheByTag(`CPostRating-${_id}`);
-
       } catch (error) {
         dispatch(setAlert({
           message: 'Something Went Wrong',

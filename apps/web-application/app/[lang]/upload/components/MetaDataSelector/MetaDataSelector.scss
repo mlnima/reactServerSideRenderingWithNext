@@ -18,10 +18,10 @@
   .react-select__menu{
     color: var(--secondary-text-color, #b3b3b3);
     background: var(--secondary-background-color, #181818);
-    border: var(--default-border);
+    border: var(--primary-border);
     .react-select__menu-list{
       .react-select__option{
-        border-bottom: var(--default-border);
+        border-bottom: var(--primary-borderr);
         color: var(--secondary-text-color, #b3b3b3);
         background: var(--secondary-background-color, #181818);
         &:hover{

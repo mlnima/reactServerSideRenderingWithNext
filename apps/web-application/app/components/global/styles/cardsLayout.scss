@@ -1,0 +1,95 @@
+$CardWrapperGap:.5rem;
+
+@mixin MixinCardWrapper {
+  padding: $CardWrapperGap 0;
+  box-sizing: border-box;
+  display: grid;
+  gap: $CardWrapperGap;
+  justify-content: center;
+  width: 100%;
+  grid-template-columns: repeat(1,  minmax(0, 1fr) );
+
+  @media (min-width: 360px) {
+    grid-template-columns: repeat(2,  minmax(0, 1fr) );
+  }
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3,  minmax(0, 1fr) );
+  }
+
+  @media (min-width: 820px) {
+    grid-template-columns: repeat(4,  minmax(0, 1fr) );
+  }
+
+  @media (min-width: 1440px) {
+    grid-template-columns: repeat(5,  minmax(0, 1fr) );
+  }
+
+  @media (min-width: 1920px) {
+    grid-template-columns: repeat(6,  minmax(0, 1fr) );
+  }
+}
+
+
+@mixin MixinActorCardWrapper{
+  padding: $CardWrapperGap 0;
+  box-sizing: border-box;
+  gap: $CardWrapperGap;
+
+  grid-template-columns: repeat(2,  minmax(0, 1fr) );
+  @media (min-width: 360px) {
+    grid-template-columns: repeat(3,  minmax(0, 1fr) );
+  }
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(4,  minmax(0, 1fr) );
+  }
+
+  @media (min-width: 820px) {
+    grid-template-columns: repeat(6,  minmax(0, 1fr) );
+  }
+
+  @media (min-width: 1440px) {
+    grid-template-columns: repeat(7,  minmax(0, 1fr) );
+  }
+}
+
+
+
+//@mixin MixinCardWrapper {
+//  padding: .25rem;
+//  box-sizing: border-box;
+//  display: grid;
+//  gap: $CardWrapperGap;
+//  justify-content: center;
+//  width: 100%;
+//  grid-template-columns: repeat(auto-fit, minmax(120px, max-content));
+//
+//  @media (min-width: 480px) {
+//    grid-template-columns: repeat(auto-fit, minmax(140px, max-content));
+//  }
+//
+//  @media (min-width: 768px) {
+//    grid-template-columns: repeat(auto-fit, minmax(140px, max-content));
+//  }
+//
+//  @media (min-width: 1024px) {
+//    grid-template-columns: repeat(auto-fit, minmax(220px, max-content));
+//  }
+//
+//  @media (min-width: 1440px) {
+//    grid-template-columns: repeat(auto-fit, minmax(260px, max-content));
+//  }
+//
+//  @media (min-width: 1920px) {
+//    grid-template-columns: repeat(auto-fit, minmax(300px, max-content));
+//  }
+//
+//  @media (min-width: 2560px) {
+//    grid-template-columns: repeat(auto-fit, minmax(340px, max-content));
+//  }
+//
+//  @media (min-width: 3840px) {
+//    grid-template-columns: repeat(auto-fit, minmax(400px, max-content));
+//  }
+//}

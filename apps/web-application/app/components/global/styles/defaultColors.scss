@@ -8,9 +8,10 @@
   --tertiary-background-color: #151515;
   --quaternary-background-color: #252525;
 
+  --primary-active-color: #f90;
   --dim-background-color: rgba(0, 0, 0, .6);
   --primary-background-filter :  blur(10px);
-  --primary-active-color: #f90;
+
   --secondary-active-color: #6c757d;
   --primary-gradiant: linear-gradient(180deg, #fff, hsla(0, 0%, 100%, .6));
 
@@ -20,10 +21,8 @@
   --primary-text-shodow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 
   /*sidebar size*/
-  --sidebar-desktop-width: 320px;
-  /*borders*/
-  --default-border-color: rgba(138, 145, 158, .2);
-  --default-border: solid var(--default-border-color) .2px;
+  --sidebar-desktop-width: 200px;
+
   /*buttons*/
   --primary-button-link-background-color: #f90;
   --primary-button-link-text-color: #000;
@@ -57,6 +56,12 @@
   --desktop-breakpoint : 1025px;
 
   //radius
+  /*borders*/
+  --default-border-color: rgba(138, 145, 158, .2);
+  --default-border: solid var(--default-border-color) .2px;
+
+  --primary-border: solid var(--default-border-color) .2px;
+  --primary-border-color: rgba(138, 145, 158, .2);
   --primary-border-radius: .375rem;
 
   //font sizes

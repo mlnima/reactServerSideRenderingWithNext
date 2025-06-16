@@ -1,10 +1,10 @@
 const postTypes  = [
     'video',
+    'article',
+    'promotion',
+    'learn',
     'standard',
     'product',
-    'promotion',
-    'article',
-    'learn',
     'event',
     'food',
     'book',

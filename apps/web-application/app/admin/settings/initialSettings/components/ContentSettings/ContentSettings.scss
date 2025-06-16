@@ -14,6 +14,8 @@
 
     .postSetting {
       width: 300px;
+      border: var(--primary-border);
+      border-radius: var(--primary-border-radius);
 
       .field {
         h3 {

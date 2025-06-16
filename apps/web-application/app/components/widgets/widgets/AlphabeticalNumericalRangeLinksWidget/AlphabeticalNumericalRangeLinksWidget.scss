@@ -1,13 +1,11 @@
 .lettersWrapper {
   width: 100%;
-
   .rangeControls {
-
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 4px;
-    padding: 4px 2px;
+    gap: .25rem;
+    padding: .25rem;
 
     .rangeItemOpenBtn, .rangeActiveItem {
       width: 48px;
@@ -16,7 +14,8 @@
       align-items: center;
     }
     .rangeItemOpenBtn {
-      display: none;
+      width: 100%;
+      //display: none;
     }
   }
 
@@ -26,7 +25,7 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 4px;
+    gap: .6rem;
 
     .rangeItem {
       width: 48px;
@@ -47,7 +46,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
+    .rangeControls {
+      .rangeItemOpenBtn {
+        display: none;
+      }
+    }
     .lettersItems {
       justify-content: center;
 

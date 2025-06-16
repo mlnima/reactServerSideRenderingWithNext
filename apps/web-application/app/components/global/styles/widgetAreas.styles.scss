@@ -1,11 +1,11 @@
-.topbar-widget-area, .header-widget-area, .navigation-widget-area, .footer-widget-area {
+.topbarWidgetArea, .headerWidgetArea, .navigationWidgetArea, .footerWidgetArea {
 
   color: var(--primary-text-color);
   width: 100%;
-  padding: 0 8px;
+  padding: 0 .25rem;
 }
 
-.header-widget-area, .footer-widget-area {
+.headerWidgetArea, .footerWidgetArea {
   .innerContent {
     display: flex;
     justify-content: space-between;
@@ -16,7 +16,7 @@
   }
 }
 
-.footer-widget-area{
+.footerWidgetArea{
   padding: 1rem;
   box-sizing: border-box;
   background-color: var(--secondary-background-color);
@@ -24,7 +24,7 @@
 
 
 
-.topbar-widget-area, .navigation-widget-area {
+.topbarWidgetArea, .navigationWidgetArea{
   background-color: var(--secondary-background-color);
   min-height: 60px;
 
@@ -42,7 +42,7 @@
 
 
 
-.header-widget-area {
+.headerWidgetArea {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -62,7 +62,7 @@
   box-sizing: border-box;
 }
 
-.footer-widget-area {
+.footerWidgetArea {
   .innerContent {
     display: flex;
     flex-direction: column;
@@ -70,7 +70,7 @@
 }
 
 .sidebarWidgetArea {
-  background-color: var(--secondary-background-color);
+  border: var(--primary-border);
   display: flex;
   flex-direction: column;
 }

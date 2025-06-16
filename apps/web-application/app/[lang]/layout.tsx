@@ -31,8 +31,8 @@ import CookieInitializer from '@components/global/CookieInitializer/CookieInitia
 import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 import DynamicStyleInjector from '@components/global/DynamicStyleInjector';
 import CustomStylesSwitcher from '@components/global/styles/CustomStylesSwitcher';
-import { WebVitals } from '@components/web-vitals';
 import React from 'react';
+
 
 const RootLayout = async (props: ILayoutProps) => {
   // await connection()
@@ -81,6 +81,7 @@ const RootLayout = async (props: ILayoutProps) => {
           )}
           <div id={'page'} className={'App innerContent'}>
             {props.children}
+
           </div>
           {initialSettings?.layoutSettings?.footer && (
             <FooterWidgetArea

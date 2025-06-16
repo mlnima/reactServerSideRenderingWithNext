@@ -5,7 +5,6 @@ import { postFieldRequestForCards } from '@repo/data-structures';
 import { IMeta, IPost } from '@repo/typescript-types';
 import { unstable_cacheTag as cacheTag } from 'next/cache';
 import { errorResponse, successResponse } from '@lib/actions/response';
-import { z } from 'zod';
 
 export interface IGetSearch {
   sort?: string;
@@ -85,15 +84,16 @@ const _saveSearchedKeyword = async (keyword: string, postsCount: number) => {
   }
 
   try {
-    const existingKeyword = await searchKeywordSchema.findOne({ name: keyword });
+    const existingKeyword = await searchKeywordSchema.findOne({ name: keyword.toLowerCase() });
 
     if (!existingKeyword) {
       const dataToSave = new searchKeywordSchema({
-        name: keyword,
+        name: keyword.toLowerCase(),
         count: postsCount,
       })
       dataToSave.save()
-      console.log(`search keyword ${keyword} saved`,)
+      console.log(`search keyword ${keyword.toLowerCase()} saved`,)
+      return
     }
 
     const oneWeekAgo = new Date();
@@ -104,7 +104,7 @@ const _saveSearchedKeyword = async (keyword: string, postsCount: number) => {
       existingKeyword.count = postsCount;
       await existingKeyword.save();
     }
-
+    console.log(`search keyword ${keyword.toLowerCase()} updated`,)
   } catch (error) {
     console.log('saveSearchedKeyword Error=> ', error);
   }

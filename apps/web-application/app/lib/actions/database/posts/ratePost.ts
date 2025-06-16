@@ -1,14 +1,15 @@
 'use server';
 import { connectToDatabase, userEngagementSchema, postSchema } from '@repo/db';
 import mongoose from 'mongoose';
-import { verifySession } from '@lib/dal';
-import { verifyActionDelay } from '@lib/dal';
+import { verifySession,verifyActionDelay } from '@lib/dal';
 import { errorResponse, successResponse } from '@lib/actions/response';
 import { cookieSetter } from '@lib/actions/cookieTools';
+// import { IUserEngagement } from '@repo/typescript-types';
 
 const ratePost = async ({ _id }: { _id: string }) => {
   try {
     const isDelayActive = await verifyActionDelay();
+
     if (isDelayActive) {
       return errorResponse({
         message: 'Please wait before performing another action',
@@ -24,14 +25,20 @@ const ratePost = async ({ _id }: { _id: string }) => {
 
     await connectToDatabase('ratePost');
     const postId = new mongoose.Types.ObjectId(_id);
-    const userEngagementData = await userEngagementSchema.findOne({ userId });
-    const isLiked = !!(userEngagementData && userEngagementData.likedPosts.includes(postId));
+
+    const docExists = await userEngagementSchema.findOne(
+      { userId, likedPosts: postId },
+      { _id: 1 } // Projection: only return the _id
+    ).lean();
+
+    const isLiked = !!docExists;
+
+    console.log(`docExists=> `,docExists)
+    const updateQuery =  isLiked ? { $pull: { likedPosts: postId } } : { $addToSet: { likedPosts: postId } }
 
     await userEngagementSchema.updateOne(
       { userId },
-      isLiked ?
-        { $pull: { likedPosts: postId } } :
-        { $addToSet: { likedPosts: postId } },
+      updateQuery,
       { upsert: true },
     );
 
@@ -46,7 +53,11 @@ const ratePost = async ({ _id }: { _id: string }) => {
       value: Date.now().toString(),
     });
 
-    return successResponse({});
+    return successResponse({
+      data:{
+        result : isLiked ? 'unliked' : 'liked'
+      }
+    });
   } catch (error) {
     return errorResponse({
       message: 'Something went wrong',

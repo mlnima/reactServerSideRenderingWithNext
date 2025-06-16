@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { capitalizeFirstLetter } from '@repo/utils';
 import './CategoryCard.scss';
 import CardImageRendererUseClient from '@components/cards/asset/CardImageRenderer/CardImageRendererUseClient';
+import MetaCardImage from '@components/cards/asset/CardImageRenderer/MetaCardImage';
 
 interface CategoryCardPropTypes {
     meta: IMeta;
@@ -30,13 +31,13 @@ const CategoryCard: FC<CategoryCardPropTypes> = ({
     return (
         <article className={`categoryCard${isSidebar ? ' categoryCardSidebar' : ''}`}>
             <Link href={metaUrl} className="categoryCardLink" title={meta?.translations?.[locale]?.name ?? meta?.name}>
-                <CardImageRendererUseClient
+                <MetaCardImage
+                   usage={'categoryCard'}
                     imageUrl={meta.imageUrl}
                     key={meta?._id}
                     metaId={meta?._id}
                     isNextImageAllowed={isNextImageAllowed}
                     mediaAlt={meta?.translations?.[locale]?.name ?? meta?.name}
-                    overlayShadow
                     index={index}
                 />
                 <div className={`cardInfo`}>

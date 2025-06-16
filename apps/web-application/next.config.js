@@ -5,6 +5,7 @@ const projectLocales = process.env.NEXT_PUBLIC_LOCALES || 'en';
 const postTypeQueryMatcher = `:postType(${postTypes.join('|')})?`;
 const languageQueryMatcher = `(${projectLocales.split(' ').join('|')})`;
 const imagesAllowedDomainsForNextImage = process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES?.split(' ') || [];
+const path = require('path');
 
 const allowedDomainsForNextImageConfig = imagesAllowedDomainsForNextImage.reduce((acc, source) => {
   acc = [...acc,
@@ -53,6 +54,7 @@ const nextConfig = {
   },
   sassOptions: {
     silenceDeprecations: ['legacy-js-api'],
+    includePaths: [path.join(__dirname, 'app')],
   },
   transpilePackages: [
     'ui',

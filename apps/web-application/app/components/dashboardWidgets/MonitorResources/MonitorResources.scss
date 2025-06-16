@@ -1,0 +1,136 @@
+.monitor-resources {
+  background-color: var(--secondary-background-color);
+  border-radius: 8px;
+  padding: 20px;
+  border: 1px solid var(--tertiary-background-color);
+
+  .monitor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--tertiary-background-color);
+    padding-bottom: 12px;
+
+    h3 {
+      color: var(--primary-text-color);
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .last-updated {
+      color: var(--secondary-text-color);
+      font-size: 12px;
+    }
+  }
+
+  .loading-state,
+  .error-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 120px;
+    color: var(--secondary-text-color);
+    font-size: 14px;
+  }
+
+  .error-state {
+    color: #ef4444;
+  }
+
+  .resources-grid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  .resource-card {
+    background-color: var(--tertiary-background-color);
+    border-radius: 6px;
+    padding: 16px;
+    border: 1px solid var(--quaternary-background-color);
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-color: var(--primary-active-color);
+      transform: translateY(-1px);
+    }
+
+    .resource-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+
+      .resource-title {
+        color: var(--primary-text-color);
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .resource-value {
+        font-size: 16px;
+        font-weight: 600;
+
+        &.normal {
+          color: #10b981;
+        }
+
+        &.warning {
+          color: var(--primary-active-color);
+        }
+
+        &.critical {
+          color: #ef4444;
+        }
+      }
+    }
+
+    .resource-details {
+      color: var(--secondary-text-color);
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background-color: var(--quaternary-background-color);
+      border-radius: 3px;
+      overflow: hidden;
+
+      .progress-fill {
+        height: 100%;
+        border-radius: 3px;
+        transition: width 0.3s ease;
+
+        &.normal {
+          background-color: #10b981;
+        }
+
+        &.warning {
+          background-color: var(--primary-active-color);
+        }
+
+        &.critical {
+          background-color: #ef4444;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .monitor-resources {
+    .monitor-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .resources-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}

@@ -5,7 +5,6 @@ import SidebarWidgetAreaRenderer
   from '@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer';
 import actorsMetaGenerator from './components/actorsMetaGenerator/actorsMetaGenerator';
 import ActorsPageContentRenderer from '@components/metas/ActorsPageContentRenderer';
-import './page.styles.scss';
 import { IInitialSettings, PageParams, PageSearchParams } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
 import getWidgets from '@lib/actions/database/widgets/getWidgets';

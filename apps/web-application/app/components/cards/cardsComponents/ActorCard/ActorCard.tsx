@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { capitalizeFirstLetter } from '@repo/utils';
 import CardTitle from '@components/cards/asset/CardTitle/CardTitle';
 import './ActorCard.scss';
-import CardImageRendererUseClient from '@components/cards/asset/CardImageRenderer/CardImageRendererUseClient';
+import MetaCardImage from '@components/cards/asset/CardImageRenderer/MetaCardImage';
 
 interface ActorCardPropTypes {
   meta: IMeta;
@@ -30,15 +30,14 @@ const ActorCard: FC<ActorCardPropTypes> = (
     <article className={`actor-card metaCard${isSidebar ? ' actorCardSidebar' : ''}`}>
 
       <Link href={actorUrl} className="actor-card-link" title={meta?.name as string}>
-        <CardImageRendererUseClient
+        <MetaCardImage
+          usage={'actorCard'}
           imageUrl={meta.imageUrl}
           key={meta?._id}
           metaId={meta?._id}
           mediaAlt={meta?.name}
-          overlayShadow
           isNextImageAllowed={isNextImageAllowed}
           index={index}
-          objectFit={'cover'}
           aspectRatio={'1/1'}
         />
 

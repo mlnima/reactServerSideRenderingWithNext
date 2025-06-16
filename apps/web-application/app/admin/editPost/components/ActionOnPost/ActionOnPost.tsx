@@ -7,6 +7,7 @@ import { IPost } from '@repo/typescript-types';
 import React, { FC } from 'react';
 import dashboardUpdatePost from '@lib/actions/database/posts/dashboardUpdatePost';
 import { ServerActionResponse } from '@lib/actions/response';
+import KeyboardHandler from '@components/global/KeyboardHandler';
 
 interface IProps {
   post: IPost;
@@ -30,19 +31,15 @@ const ActionOnPost: FC<IProps> = ({ post ,setPost}) => {
         newPostId?: string
       }>;
 
-      if (!success) {
-        if (message) {
-          dispatch(setAlert({ message, type: 'error', active: true }));
-        }
-        return;
-      }
+      dispatch(setAlert({ message, type: success ? 'success': 'error', active: true }));
 
-      if (data && data?.newPostId) {
+      if (success && data && data?.newPostId) {
         router.push(`/admin/editPost?id=${data?.newPostId}`);
       }
 
     } catch (error) {
-      dispatch(setAlert({ message: 'something went wrong', type: 'error', active: true }));
+      console.log(`error=> `,error)
+      dispatch(setAlert({ message: 'something went wrong', type: 'error', active: true,error }));
     }
   };
 
@@ -63,6 +60,11 @@ const ActionOnPost: FC<IProps> = ({ post ,setPost}) => {
       <button className="btn btn-primary" onClick={onSaveHandler}>
         {post?._id ? 'Update' : 'Save'}
       </button>
+      <KeyboardHandler shortcuts={[{
+        keys: ['s'],
+        ctrlKey: true,
+        callback: onSaveHandler
+      }]} />
     </div>
   );
 };

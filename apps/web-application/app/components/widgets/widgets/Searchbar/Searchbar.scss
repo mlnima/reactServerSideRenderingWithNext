@@ -75,7 +75,7 @@
     padding: .5rem 0;
     box-sizing: border-box;
     border-radius: var(--primary-border-radius);
-    border: var(--default-border);
+    border: var(--primary-border);
 
     .SearchbarKeywordSuggestion {
       padding: .5rem 1rem;
@@ -98,7 +98,7 @@
 
 @media only screen and (min-width: 768px) {
   .searchbarWidget {
-    //border: var(--default-border);
+    //border: var(--primary-border);
     width: clamp(300px, 450px, 678px);
     border-radius: 2rem;
     background-color: var(--quaternary-background-color);

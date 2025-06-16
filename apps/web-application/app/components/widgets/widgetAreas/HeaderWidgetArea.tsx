@@ -2,7 +2,7 @@ import WidgetsRenderer from '../widgetRenderer/WidgetsRenderer';
 
 const HeaderWidgetArea = (props:any) => {
   return (
-    <div className={'header-widget-area'}>
+    <div className={'headerWidgetArea'}>
       <div className={'innerContent'}>
         <WidgetsRenderer {...props} position={'header'} />
       </div>

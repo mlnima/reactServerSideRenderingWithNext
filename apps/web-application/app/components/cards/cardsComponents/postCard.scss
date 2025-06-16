@@ -1,12 +1,13 @@
+
+
 .postCard {
   width: 100%;
-  max-width: 280px;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0;
+  padding: 0;
   .cardInfo {
     height: 100%;
     min-height: 48px;
@@ -16,8 +17,6 @@
     flex-direction: column;
     justify-content: space-between;
   }
-
-
 }
 
 .postCardSidebar {
@@ -40,6 +39,6 @@
 
 @media only screen and (min-width: 768px){
   .postCard {
-    max-width: 280px;
+    //max-width: 280px;
   }
 }

@@ -1,3 +1,7 @@
+import MonitorResources from '@components/dashboardWidgets/MonitorResources/MonitorResources';
+
 export default function Page() {
-  return <p>Dashboard Page</p>;
+  return <div>
+    <MonitorResources interval={5000} />
+  </div>;
 }

@@ -3,7 +3,7 @@ import WidgetsRenderer from '../widgetRenderer/WidgetsRenderer';
 
 const TopbarWidgetArea = (props: any) => {
   return (
-    <div className={'topbar-widget-area'}>
+    <div className={'widgetArea topbarWidgetArea'}>
       <div className={'innerContent'}>
         <WidgetsRenderer {...props} position={'navigation'} />
       </div>

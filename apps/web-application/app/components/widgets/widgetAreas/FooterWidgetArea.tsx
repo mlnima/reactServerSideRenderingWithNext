@@ -2,7 +2,7 @@ import WidgetsRenderer from '../widgetRenderer/WidgetsRenderer';
 
 const FooterWidgetArea = (props: any) => {
   return (
-    <footer className={'footer-widget-area'}>
+    <footer className={'footerWidgetArea'}>
       <div className={'innerContent'}>
         <WidgetsRenderer {...props} position={'footer'} />
       </div>
