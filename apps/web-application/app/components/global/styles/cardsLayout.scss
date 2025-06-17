@@ -35,6 +35,7 @@ $CardWrapperGap:.5rem;
   padding: $CardWrapperGap 0;
   box-sizing: border-box;
   gap: $CardWrapperGap;
+  place-items: center;
 
   grid-template-columns: repeat(2,  minmax(0, 1fr) );
   @media (min-width: 360px) {
@@ -51,6 +52,9 @@ $CardWrapperGap:.5rem;
 
   @media (min-width: 1440px) {
     grid-template-columns: repeat(7,  minmax(0, 1fr) );
+  }
+  @media (min-width: 1920px) {
+    grid-template-columns: repeat(9,  minmax(0, 1fr) );
   }
 }
 
