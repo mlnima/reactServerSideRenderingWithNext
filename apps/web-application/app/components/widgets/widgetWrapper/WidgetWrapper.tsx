@@ -1,8 +1,9 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { IContentSettings, IWidgetData } from '@repo/typescript-types';
 import dynamic from 'next/dynamic';
 import './WidgetWrapper.scss';
 import WidgetFooter from '@components/widgets/widgetWrapper/WidgetFooter/WidgetFooter';
+import { divide } from 'lodash';
 //import ServerSideStore from '@store/ServerSideStore';
 
 const WidgetHeader = dynamic(() => import('./WidgetHeader/WidgetHeader'));
@@ -76,6 +77,7 @@ const WidgetWrapper: FC<IProps> = ({ data, widgetId, isSidebar, dictionary, loca
         userPreferenceConfig: UserPreferenceConfigWidget,
         dayModeNightMode: DayModeNightMode,
     };
+    console.log(`console=> `,data.position)
 
     // @ts-expect-error: its fine
     const WidgetToRender = data?.type && widgetMatcher.hasOwnProperty(data?.type) ? widgetMatcher?.[data.type] : null;
@@ -83,50 +85,113 @@ const WidgetWrapper: FC<IProps> = ({ data, widgetId, isSidebar, dictionary, loca
     const widgetExtraClass = data?.extraClassName ? ` ${data?.extraClassName}` : '';
     const widgetClass = `widget ${data?.type}WrapperWidget${widgetExtraClass}`;
 
-    return (
-        <div className={widgetClass} id={data?.extraId || undefined}>
-            {(data?.title || data?.translations?.[locale]?.title) && (
-                <WidgetHeader
-                    title={data?.translations?.[locale]?.title || data?.title}
-                    dictionary={dictionary}
-                    pagination={data?.pagination}
-                    redirectLinkPosition={data?.redirectLinkPosition}
-                    redirectLink={data?.redirectLink}
-                    redirectToTitle={data?.translations?.[locale]?.redirectToTitle || data?.redirectToTitle}
-                />
-            )}
-            {data?.text && <WidgetText translations={data?.translations} text={data?.text} locale={locale} />}
 
-            {!!WidgetToRender && (
-                <WidgetToRender
-                    {...data}
-                    dictionary={dictionary}
-                    locale={locale}
-                    isSidebar={isSidebar}
-                    widgetId={widgetId}
-                    contentSettings={contentSettings}
-                />
-            )}
+  const wrapperElement = (children : React.ReactNode) => {
+    if (['header', 'navigation', 'footer'].includes(data.position)) {
+      return <div className={widgetClass} id={data?.extraId || undefined}>{children}</div>;
+    } else {
+      return <section className={widgetClass} id={data?.extraId || undefined}>{children}</section>;
+    }
+  };
 
-            {data?.redirectLinkPosition === 'bottom' && (
-                <WidgetFooter
-                    redirectLink={data?.redirectLink}
-                    dictionary={dictionary}
-                    redirectToTitle={data?.translations?.[locale]?.redirectToTitle || data?.redirectToTitle}
-                />
-            )}
+  return wrapperElement(
+    <>
+      {(data?.title || data?.translations?.[locale]?.title) && (
+        <WidgetHeader
+          title={data?.translations?.[locale]?.title || data?.title}
+          dictionary={dictionary}
+          position={data?.position}
+          pagination={data?.pagination}
+          redirectLinkPosition={data?.redirectLinkPosition}
+          redirectLink={data?.redirectLink}
+          redirectToTitle={data?.translations?.[locale]?.redirectToTitle || data?.redirectToTitle}
+        />
+      )}
 
-            {!!data?.pagination &&
-                !!data?.redirectLink &&
-                data?.uniqueData?.totalCount > (data?.count || data?.uniqueData?.count) && (
-                    <WidgetPagination
-                        baseUrl={data?.redirectLink}
-                        sortBy={data?.sortBy}
-                        totalCount={data?.uniqueData?.totalCount}
-                        count={data?.count || data?.uniqueData?.count}
-                    />
-                )}
-        </div>
-    );
+      {data?.text && (
+        <WidgetText
+          translations={data?.translations}
+          text={data?.text}
+          locale={locale}
+        />
+      )}
+
+      {!!WidgetToRender && (
+        <WidgetToRender
+          {...data}
+          dictionary={dictionary}
+          locale={locale}
+          isSidebar={isSidebar}
+          widgetId={widgetId}
+          contentSettings={contentSettings}
+        />
+      )}
+
+      {data?.redirectLinkPosition === 'bottom' && (
+        <WidgetFooter
+          redirectLink={data?.redirectLink}
+          dictionary={dictionary}
+          redirectToTitle={data?.translations?.[locale]?.redirectToTitle || data?.redirectToTitle}
+        />
+      )}
+
+      {!!data?.pagination &&
+        !!data?.redirectLink &&
+        data?.uniqueData?.totalCount > (data?.count || data?.uniqueData?.count) && (
+          <WidgetPagination
+            baseUrl={data?.redirectLink}
+            sortBy={data?.sortBy}
+            totalCount={data?.uniqueData?.totalCount}
+            count={data?.count || data?.uniqueData?.count}
+          />
+        )}
+    </>
+  );
+
+    // return (
+    //     <section className={widgetClass} id={data?.extraId || undefined}>
+    //         {(data?.title || data?.translations?.[locale]?.title) && (
+    //             <WidgetHeader
+    //                 title={data?.translations?.[locale]?.title || data?.title}
+    //                 dictionary={dictionary}
+    //                 pagination={data?.pagination}
+    //                 redirectLinkPosition={data?.redirectLinkPosition}
+    //                 redirectLink={data?.redirectLink}
+    //                 redirectToTitle={data?.translations?.[locale]?.redirectToTitle || data?.redirectToTitle}
+    //             />
+    //         )}
+    //         {data?.text && <WidgetText translations={data?.translations} text={data?.text} locale={locale} />}
+    //
+    //         {!!WidgetToRender && (
+    //             <WidgetToRender
+    //                 {...data}
+    //                 dictionary={dictionary}
+    //                 locale={locale}
+    //                 isSidebar={isSidebar}
+    //                 widgetId={widgetId}
+    //                 contentSettings={contentSettings}
+    //             />
+    //         )}
+    //
+    //         {data?.redirectLinkPosition === 'bottom' && (
+    //             <WidgetFooter
+    //                 redirectLink={data?.redirectLink}
+    //                 dictionary={dictionary}
+    //                 redirectToTitle={data?.translations?.[locale]?.redirectToTitle || data?.redirectToTitle}
+    //             />
+    //         )}
+    //
+    //         {!!data?.pagination &&
+    //             !!data?.redirectLink &&
+    //             data?.uniqueData?.totalCount > (data?.count || data?.uniqueData?.count) && (
+    //                 <WidgetPagination
+    //                     baseUrl={data?.redirectLink}
+    //                     sortBy={data?.sortBy}
+    //                     totalCount={data?.uniqueData?.totalCount}
+    //                     count={data?.count || data?.uniqueData?.count}
+    //                 />
+    //             )}
+    //     </section>
+    // );
 };
 export default WidgetWrapper;
