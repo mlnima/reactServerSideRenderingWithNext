@@ -53,17 +53,16 @@ const getPost = async (identifier: string): Promise<ServerActionResponse<{
       limit: 8,
     });
 
+    const data = JSON.parse(JSON.stringify({
+      post ,
+      relatedPosts,
+    }))
 
     //no cache life for the post data
     cacheTag('cacheItem', `CPost-${post._id as unknown as string}`);
     cacheLife('minutes')
 
-    return successResponse({
-      data: JSON.parse(JSON.stringify({
-        post ,
-        relatedPosts,
-      }))
-    });
+    return successResponse({ data });
 
   } catch (error) {
     console.error(`getPost => `, error);

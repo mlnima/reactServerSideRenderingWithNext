@@ -30,9 +30,10 @@ const getSettings = async (
       return acc;
     }, {});
 
+    const data =  JSON.parse(JSON.stringify(objectifySettings))
     cacheTag('cacheItem', 'CSettings', `CSettings-${requireSettings.join('-')}`);
     return successResponse({
-      data: JSON.parse(JSON.stringify(objectifySettings)),
+      data
     });
   } catch (error) {
     console.error(`getSettings => `, error);
