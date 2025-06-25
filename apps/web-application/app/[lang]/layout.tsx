@@ -4,7 +4,7 @@ config.autoAddCss = false;
 import '@components/global/styles/global.styles.scss';
 import ReduxProvider from '@store/ReduxProvider';
 import { getDictionary } from '../../get-dictionary';
-import LayoutMetaGenerator from '../components/LayoutMetaGenerator/LayoutMetaGenerator';
+import LayoutMetaGenerator from '@components/LayoutMetaGenerator/LayoutMetaGenerator';
 import LoginRegisterPopup from '@components/global/LoginRegisterPopup/LoginRegisterPopup';
 import BackToTopButton from '@components/global/BackToTopButton/BackToTopButton';
 import LoadingComponent from '@components/global/LoadingComponent/LoadingComponent';
@@ -49,6 +49,7 @@ const RootLayout = async (props: ILayoutProps) => {
   const widgets = await getWidgets(
     ['footer', 'header', 'topBar', 'navigation'],
     locale,
+
   ) as { [key: string]: IWidget[] };
 
   const widgetAreasSharedProps = {

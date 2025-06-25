@@ -77,7 +77,7 @@ const WidgetWrapper: FC<IProps> = ({ data, widgetId, isSidebar, dictionary, loca
         userPreferenceConfig: UserPreferenceConfigWidget,
         dayModeNightMode: DayModeNightMode,
     };
-    console.log(`console=> `,data.position)
+    // console.log(`console=> `,data.position)
 
     // @ts-expect-error: its fine
     const WidgetToRender = data?.type && widgetMatcher.hasOwnProperty(data?.type) ? widgetMatcher?.[data.type] : null;

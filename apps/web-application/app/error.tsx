@@ -1,5 +1,6 @@
 'use client';
 import { useEffect } from 'react'
+import './error.scss'
 
 export default function Error(
   {
@@ -18,8 +19,11 @@ export default function Error(
     // global-error must include html and body tags
     <html>
     <body>
-    <h2>Something went wrong!</h2>
-    <button onClick={() => reset()}>Try again</button>
+    <div className={'errorPage'}>
+      <h1>Something went wrong Please try again later</h1>
+      <button onClick={() => reset()}>Try again</button>
+    </div>
+
     </body>
     </html>
   );

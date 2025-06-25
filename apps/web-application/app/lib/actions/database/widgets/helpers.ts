@@ -6,7 +6,7 @@ import { Document } from 'mongoose';
 import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 import { IInitialSettings, IMeta, IPost } from '@repo/typescript-types';
 
-export const findWidgetPosts = async (widgetData: any): Promise<{ posts: {}[]; totalCount: number }> => {
+export const findWidgetPosts = async (widgetData: any,session:any): Promise<{ posts: {}[]; totalCount: number }> => {
   try {
 
     const { initialSettings } = unwrapResponse(
@@ -38,6 +38,7 @@ export const findWidgetPosts = async (widgetData: any): Promise<{ posts: {}[]; t
         sort: sortQuery,
       })
       .select([...postFieldRequestForCards])
+      .session(session)
       .lean<IPost[]>();
 
     posts = posts.map((doc) => {
@@ -65,7 +66,7 @@ interface IOFindWidgetMetas {
   totalCount?: number
 }
 
-export const findWidgetMetas = async (widgetData: any, withCount?: boolean): Promise<IOFindWidgetMetas> => {
+export const findWidgetMetas = async (widgetData: any, withCount?: boolean,session:any): Promise<IOFindWidgetMetas> => {
   try {
     const { initialSettings } = unwrapResponse(
       await getSettings(['initialSettings']) as unknown as ServerActionResponse<{
@@ -91,6 +92,7 @@ export const findWidgetMetas = async (widgetData: any, withCount?: boolean): Pro
       .find(findQuery, {}, { sort: sortQuery })
       .limit(limit)
       .select('name count imageUrl')
+      .session(session)
       .lean<IMeta[]>();
 
     return {

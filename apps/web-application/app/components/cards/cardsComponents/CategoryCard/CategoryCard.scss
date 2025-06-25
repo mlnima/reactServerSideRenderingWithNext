@@ -4,7 +4,6 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  //max-width: 280px;
   flex-direction: column;
   margin: auto;
   .cardInfo {
@@ -17,17 +16,21 @@
     color: #fff;
 
     .cardTitle {
-      align-items: flex-end;
+      align-items: center;
       font-size: 1rem;
       font-weight: bold;
       height: 1.2rem;
       position: absolute;
+
+
       bottom: .25rem;
-      left: .25rem;
+      padding-left: .25rem;
+      padding-right: .25rem;
       width: 100%;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
+      box-sizing: border-box;
 
     }
 

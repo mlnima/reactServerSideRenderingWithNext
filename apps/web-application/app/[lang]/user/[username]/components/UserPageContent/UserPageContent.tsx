@@ -59,10 +59,10 @@ const UserPageContent: FC<IProps> = ({ dictionary, locale, initialUserPageData }
   //   }
   // }, [searchParams,loggedIn]);
 
-  useEffect(() => {
-    console.log(`userPageData=> `,userPageData);
-    // console.log(`console=> `);
-  }, [userPageData]);
+  // useEffect(() => {
+  //   console.log(`userPageData=> `,userPageData);
+  //   // console.log(`console=> `);
+  // }, [userPageData]);
 
   const getUserPageData = async () => {
     try {

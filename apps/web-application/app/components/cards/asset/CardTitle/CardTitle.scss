@@ -1,9 +1,5 @@
 .cardTitle {
   color: var(--primary-text-color, #fff);
-  //overflow: hidden;
-  //white-space: nowrap;
-  //text-overflow: ellipsis;
-  //max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -25,60 +21,3 @@
   }
 }
 
-//.cardTitle.flex {
-//  display: flex;
-//  align-items: center;
-//  justify-content: space-between;
-//
-//  a {
-//    flex: 1;
-//  }
-//}
-
-
-//.cardTitle{
-//  display: flex;
-//  justify-content: space-between;
-//  align-items: center;
-//  overflow: hidden;
-//  width: 100%;
-//  color: var(--primary-text-color,#fff);
-//  a,p,svg,h2{
-//    color: var(--primary-text-color,#fff);
-//    display: flex;
-//    &:nth-child(odd) {
-//      justify-content: flex-start;
-//    }
-//
-//    &:nth-child(even) {
-//      justify-content: flex-end;
-//    }
-//  }
-//
-//  a,p,h2{
-//    white-space: nowrap;
-//    overflow: hidden;
-//    text-overflow: ellipsis;
-//  }
-//
-//  a{
-//    height: 1.5rem;
-//    box-sizing: border-box;
-//    font-size: 1rem;
-//    max-width: 100%;
-//    cursor: pointer;
-//    white-space: nowrap;
-//    overflow: hidden;
-//    text-overflow: ellipsis;
-//
-//  }
-//}
-//
-//@media only screen and (min-width: 600px) {
-//  .cardTitle{
-//    a{
-//
-//      font-size: 1rem;
-//    }
-//  }
-//}
