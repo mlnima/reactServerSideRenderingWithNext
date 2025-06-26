@@ -5,7 +5,7 @@ import path from 'path';
 import { mkdir, writeFile } from 'fs/promises';
 // @ts-expect-error
 import mime from 'mime-types';
-import { getCurrentDatePath } from '../../../../../../../packages/utils';
+import { getCurrentDatePath } from '@repo/utils';
 
 const dashboardUploadFile = async ({ file }: { file: FormData }) => {
   try {
