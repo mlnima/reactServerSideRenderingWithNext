@@ -36,12 +36,35 @@ export async function middleware(request: NextRequest) {
     (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`,
   );
 
-  if (pathname.startsWith('/admin')) {
-    const sessionCookie = (await cookies()).get('session')?.value;
-    const sessionData = sessionCookie ? await decryptJWT(sessionCookie) : null;
+  // if (pathname.startsWith('/admin')) {
+  //   const sessionCookie = (await cookies()).get('session')?.value;
+  //   const sessionData = sessionCookie ? await decryptJWT(sessionCookie) : null;
+  //
+  //
+  //
+  //   if (sessionData?.role === 'administrator') {
+  //     return NextResponse.next();
+  //   }
+  // }
 
-    if (sessionData?.role === 'administrator') {
+  if (pathname.startsWith('/admin')) {
+    try {
+      const sessionCookie = (await cookies()).get('session')?.value;
+
+      if (!sessionCookie) {
+        return NextResponse.redirect(new URL('/login', request.url));
+      }
+
+      const sessionData = await decryptJWT(sessionCookie);
+
+      if (!sessionData || !sessionData.role || sessionData.role !== 'administrator') {
+        return NextResponse.redirect(new URL('/unauthorized', request.url));
+      }
+
       return NextResponse.next();
+    } catch (error) {
+      console.error('Admin auth error:', error);
+      return NextResponse.redirect(new URL('/login', request.url));
     }
   }
 
