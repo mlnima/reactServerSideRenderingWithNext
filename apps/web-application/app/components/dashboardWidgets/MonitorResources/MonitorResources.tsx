@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import './MonitorResources.scss'
 import { getSystemResources } from '@lib/actions/getSystemResources';
+import executeCommand from '@lib/actions/executeCommand';
 
 interface SystemResources {
   cpu: {
@@ -168,6 +169,13 @@ export default function MonitorResources({ interval = 10000 }: MonitorResourcesP
             />
           </div>
         </div>
+        <div className="resource-card">
+          <button className={'btn btn-primary'}
+                  onClick={async ()=> executeCommand('pm2 restart all')}>
+            Restart Server
+          </button>
+        </div>
+
       </div>
     </div>
   )
