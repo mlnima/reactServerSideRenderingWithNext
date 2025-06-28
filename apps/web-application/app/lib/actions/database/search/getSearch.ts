@@ -208,7 +208,8 @@ export const getSearch = async (
       posts = null;
       metas = null;
 
-      const cacheKey = `CSearch-${targetKeyword}-p${page}-s${sort}-l${locale}`;
+     // const cacheKey = `CSearch-${targetKeyword}-p${page}-s${sort}-l${locale}`;
+      const cacheKey = `CSearch-${targetKeyword}-p${page}`;
       cacheTag('cacheItem', 'CSearch', cacheKey);
 
       return successResponse({

@@ -9,6 +9,7 @@ interface IDashboardGetUser {
 }
 
 const dashboardGetUser = async ({ _id }: IDashboardGetUser) => {
+  let connection;
   try {
     const { isAdmin } = await verifySession();
 
@@ -18,25 +19,31 @@ const dashboardGetUser = async ({ _id }: IDashboardGetUser) => {
       });
     }
 
-    await connectToDatabase('dashboardGetUser');
+    connection = await connectToDatabase('dashboardGetUser');
+    const session = await connection.startSession();
 
-    let user = await userSchema
-      .findById(_id)
-      .select([ '-password'])
-      .populate({
-        path: 'profileImage',
-        select: 'filePath',
-        model: 'file',
-        options: { strictPopulate: false },
-      }).lean<User>() ;
+    try {
+      let user = await userSchema
+        .findById(_id)
+        .select([ '-password'])
+        .populate({
+          path: 'profileImage',
+          select: 'filePath',
+          model: 'file',
+          options: { strictPopulate: false },
+        })
+        .session(session)
+        .lean<User>() ;
 
-    return successResponse({
-      data: {
-        user: JSON.parse(JSON.stringify(user)),
+      return successResponse({
+        data: {
+          user: JSON.parse(JSON.stringify(user)),
 
-      },
-    });
-
+        },
+      });
+    } finally {
+      await session.endSession();
+    }
   } catch (error) {
     console.log(`dashboardGetUser Error=> `, error);
 
@@ -48,3 +55,54 @@ const dashboardGetUser = async ({ _id }: IDashboardGetUser) => {
 };
 
 export default dashboardGetUser;
+
+// 'use server';
+// import { errorResponse, successResponse } from '@lib/actions/response';
+// import { verifySession } from '@lib/dal';
+// import { connectToDatabase, userSchema } from '@repo/db';
+// import { User } from '@repo/typescript-types';
+//
+// interface IDashboardGetUser {
+//   _id: string;
+// }
+//
+// const dashboardGetUser = async ({ _id }: IDashboardGetUser) => {
+//   try {
+//     const { isAdmin } = await verifySession();
+//
+//     if (!isAdmin) {
+//       return errorResponse({
+//         message: 'Unauthorized Access',
+//       });
+//     }
+//
+//     await connectToDatabase('dashboardGetUser');
+//
+//     let user = await userSchema
+//       .findById(_id)
+//       .select([ '-password'])
+//       .populate({
+//         path: 'profileImage',
+//         select: 'filePath',
+//         model: 'file',
+//         options: { strictPopulate: false },
+//       }).lean<User>() ;
+//
+//     return successResponse({
+//       data: {
+//         user: JSON.parse(JSON.stringify(user)),
+//
+//       },
+//     });
+//
+//   } catch (error) {
+//     console.log(`dashboardGetUser Error=> `, error);
+//
+//     return errorResponse({
+//       message: 'Something went wrong',
+//       error,
+//     });
+//   }
+// };
+//
+// export default dashboardGetUser;

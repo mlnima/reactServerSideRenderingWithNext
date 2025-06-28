@@ -63,7 +63,7 @@ export const findWidgetPosts = async (widgetData: any,session:any): Promise<{ po
 
 interface IOFindWidgetMetas {
   metaData: {}[],
-  totalCount?: number
+  totalCount?: number,
 }
 
 export const findWidgetMetas = async (widgetData: any, withCount?: boolean,session:any): Promise<IOFindWidgetMetas> => {

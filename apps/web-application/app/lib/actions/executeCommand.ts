@@ -1,7 +1,6 @@
 'use server'
-
-import { exec } from 'child_process'
-import { promisify } from 'util'
+import { exec } from 'child_process';
+import { promisify } from 'util';
 import { verifySession } from '@lib/dal';
 import { errorResponse } from '@lib/actions/response';
 
