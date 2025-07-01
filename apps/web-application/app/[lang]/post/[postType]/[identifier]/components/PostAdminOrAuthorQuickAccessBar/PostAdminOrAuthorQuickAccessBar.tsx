@@ -1,11 +1,11 @@
-'use client'
+'use client';
 import React, { FC } from 'react';
 import { useAppSelector } from '@store/hooks';
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import './PostAdminOrAuthorQuickAccessBar.scss';
 import PostQuickAccessPostInformation from './PostQuickAccessPostInformation';
-import { clearACacheByPath, clearACacheByTag } from '@lib/serverActions';
+import { clearACacheByTag } from '@lib/serverActions';
 import updatePostStatus from '@lib/actions/database/posts/updatePostStatus';
 
 
@@ -29,6 +29,7 @@ const PostAdminOrAuthorQuickAccessBar: FC<IProps> = (
     updatedAt,
     dictionary,
   }) => {
+
   const adminMode = useAppSelector(({ globalState }) => globalState?.adminMode);
   const { userData } = useAppSelector(({ user }) => user);
   const pathname = usePathname();
@@ -45,11 +46,10 @@ const PostAdminOrAuthorQuickAccessBar: FC<IProps> = (
   const onClearCacheHandler = async () => {
     // await  clearACacheByPath('/post/[postType]/[identifier]','page')
     await clearACacheByTag(`CPost-${postId}`);
-    await clearACacheByTag(`CPostViews-${postId}`);
-    await clearACacheByTag(`CPostRating-${postId}`);
+    // await clearACacheByTag(`CPostViews-${postId}`);
+    // await clearACacheByTag(`CPostRating-${postId}`);
     await clearACacheByTag(`CComments-${postId}`);
   };
-
 
 
   if (userData.role !== 'administrator' && authorId === userData?._id) {
@@ -66,9 +66,7 @@ const PostAdminOrAuthorQuickAccessBar: FC<IProps> = (
         />
       </div>
     );
-  }
-
-  if (adminMode && userData.role === 'administrator') {
+  } else if (adminMode && userData.role === 'administrator') {
     return (
       <div className={'PostAdminQuickAccessBar'}>
         {adminMode && userData.role === 'administrator' && (
@@ -86,30 +84,18 @@ const PostAdminOrAuthorQuickAccessBar: FC<IProps> = (
             >
               Edit As Admin
             </Link>
-            <span
-              className={'btn btn-info'}
-              onClick={() => onStatusChangeHandler('draft')}
-            >
+            <span className={'btn btn-info'} onClick={() => onStatusChangeHandler('draft')}>
                   Draft
-                </span>
-            <span
-              className={'btn btn-primary'}
-              onClick={() => onStatusChangeHandler('published')}
-            >
+            </span>
+            <span className={'btn btn-primary'} onClick={() => onStatusChangeHandler('published')}>
                   Publish
-                </span>
-            <span
-              className={'btn btn-info'}
-              onClick={() => onStatusChangeHandler('pending')}
-            >
+            </span>
+            <span className={'btn btn-info'} onClick={() => onStatusChangeHandler('pending')}>
                   Pending
-                </span>
-            <span
-              className={'btn btn-danger'}
-              onClick={() => onStatusChangeHandler('trash')}
-            >
+            </span>
+            <span className={'btn btn-danger'} onClick={() => onStatusChangeHandler('trash')}>
                   Trash
-                </span>
+            </span>
           </>
         )}
 

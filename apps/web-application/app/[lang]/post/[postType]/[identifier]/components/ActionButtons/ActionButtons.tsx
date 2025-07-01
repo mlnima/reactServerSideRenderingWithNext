@@ -96,7 +96,8 @@ const ActionButtons: FC<IProps> = (
           }
         }
         localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
-        await clearACacheByTag(`CPostRating-${_id}`);
+       // await clearACacheByTag(`CPostRating-${_id}`); since we are getting the rating along the post to avoid high memory usage, we will clear the post cache,
+        await clearACacheByTag(`CPost-${_id}`);
       } catch (error) {
         dispatch(setAlert({
           message: 'Something Went Wrong',

@@ -30,7 +30,8 @@ const getPost = async (identifier: string): Promise<ServerActionResponse<{
     try {
       // Execute query with explicit cursor management
       let post = await postSchema
-        .findOne(findQuery, '-comments -views -likes')
+       // .findOne(findQuery, '-comments -views -likes') we will not cache them saparatly to avoid big cache size
+        .findOne(findQuery)
         .populate([
           {
             path: 'author',

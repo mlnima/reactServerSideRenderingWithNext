@@ -1,6 +1,7 @@
 import {IComment} from "./Comment";
 import {User} from "./User";
 import {IMeta} from "./Meta";
+import { IWidget } from './widgets/Widget';
 
 interface uniqueDataPossibility{
     startDate?: Date | string;
@@ -68,4 +69,18 @@ export interface PostRaw extends Base{
     actors?:string[],
     categories:string[],
     tags:string[],
+}
+
+export interface PostPageProps {
+  widgets:IWidget[],
+  post:IPost,
+  views: number,
+  likes:  number,
+  hasSidebar:  boolean ,
+  relatedPosts:  IPost[] ,
+  dictionary:  {
+    [key:string]:string
+  } ,
+  locale:  string,
+  postType?:string
 }

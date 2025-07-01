@@ -1,34 +1,21 @@
 import React, { FC } from 'react';
-import { IPost } from '@repo/typescript-types';
+import { PostPageProps } from '@repo/typescript-types';
 import PostDescription from '../PostDescription/PostDescription';
 import PostMetasRenderer from '../PostMetasRenderer/PostMetasRenderer';
-import { IWidget } from '@repo/typescript-types';
 import ActionButtons from '../ActionButtons/ActionButtons';
 import './PromotionTypePostPage.scss';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 
-interface IProps {
-  post: IPost;
-  views: number;
-  likes: number;
-  locale: string;
-  hasSidebar?: string;
-  dictionary: {
-    [key: string]: string;
-  };
-  widgets: IWidget[];
-  relatedPosts: IPost[];
-}
-
-const PromotionTypePostPage: FC<IProps> = ({
-  post,
-  locale,
-  dictionary,
-  views,
-  likes,
-}) => {
+const PromotionTypePostPage: FC<PostPageProps> = (
+  {
+    post,
+    locale,
+    dictionary,
+    views,
+    likes,
+  }) => {
   return (
     <>
       <div className={'entry-header promotionEntryHeader'}>

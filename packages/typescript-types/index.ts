@@ -28,8 +28,7 @@ import { DashboardStore } from './src/dashboardStoreTypes/DashboardStore';
 import { MessengerStore } from './src/messengerStoreTypes/MessengerStore';
 import { UserState } from './src/storeTypes/UserState';
 import { WidgetsState } from './src/storeTypes/WidgetsState';
-import { IPost } from './src/Post';
-import { PostRaw } from './src/Post';
+import { IPost,PostPageProps,PostRaw } from './src/Post';
 import { IMeta, MetaType, MetasType } from './src/Meta';
 import { IMenuItem, IWidget } from './src/widgets/Widget';
 import { IPage, PageSearchParams, PageParams, IPageProps, ILayoutProps } from './src/Page';
@@ -90,6 +89,7 @@ export type {
   ILoadedUserPageData,
   MenuItem,
   UniqueDataTypes,
+  PostPageProps,
   IComment,
   NewComment,
   IWidgetData,

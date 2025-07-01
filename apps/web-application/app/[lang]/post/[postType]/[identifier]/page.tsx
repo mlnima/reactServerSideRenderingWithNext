@@ -8,15 +8,25 @@ import PostAdminOrAuthorQuickAccessBar
 import Soft404 from '@components/Soft404/Soft404';
 import NotFoundOrRestricted from './components/NotFoundOrRestricted/NotFoundOrRestricted';
 import PreviewPost from './components/PreviewPost/PreviewPost';
-import VideoTypePostPage from './components/VideoTypePostPage/VideoTypePostPage';
-import ArticleTypePostPage from './components/ArticleTypePostPage/ArticleTypePostPage';
-import PromotionTypePostPage from './components/PromotionTypePostPage/PromotionTypePostPage';
-import LearnTypePostPage from './components/LearnTypePostPage/LearnTypePostPage';
-import { IPageProps, IPageSettings } from '@repo/typescript-types';
+import {Suspense} from 'react';
+
+// import VideoTypePostPage from './components/VideoTypePostPage/VideoTypePostPage';
+// import ArticleTypePostPage from './components/ArticleTypePostPage/ArticleTypePostPage';
+// import PromotionTypePostPage from './components/PromotionTypePostPage/PromotionTypePostPage';
+// import LearnTypePostPage from './components/LearnTypePostPage/LearnTypePostPage';
+
+const VideoTypePostPage = dynamic(() => import('./components/VideoTypePostPage/VideoTypePostPage'));
+const ArticleTypePostPage = dynamic(() => import('./components/ArticleTypePostPage/ArticleTypePostPage'));
+const PromotionTypePostPage = dynamic(() => import('./components/PromotionTypePostPage/PromotionTypePostPage'));
+const LearnTypePostPage = dynamic(() => import('./components/LearnTypePostPage/LearnTypePostPage'));
+
+
+
+import { IPageProps, IPageSettings, PostPageProps } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
 import getPost from '@lib/actions/database/posts/getPost';
-import getPostRating from '@lib/actions/database/posts/getPostRating';
-import getPostViews from '@lib/actions/database/posts/getPostViews';
+// import getPostRating from '@lib/actions/database/posts/getPostRating';
+// import getPostViews from '@lib/actions/database/posts/getPostViews';
 import getSettings from '@lib/actions/database/settings/getSettings';
 import getWidgets from '@lib/actions/database/widgets/getWidgets';
 import Comments from './components/Comments/Comments';
@@ -24,6 +34,7 @@ import React from 'react';
 import RelatedPostsRenderer from './components/RelatedPostsRenderer/RelatedPostsRenderer';
 import WidgetsRenderer from '@components/widgets/widgetRenderer/WidgetsRenderer';
 import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
+import dynamic from 'next/dynamic';
 
 export const generateMetadata = postMetaGenerator;
 
@@ -37,21 +48,22 @@ const PostPage = async (props: IPageProps) => {
   const { identifier, postType } = params;
   const { data, success } = await getPost(identifier as string);
 
-  if (!success || !data) {
+  if (!success || !data || !data.post) {
     return <Soft404 dictionary={dictionary} />;
   }
 
   const postId = data?.post._id;
 
-  // const comments = await getComments({ onDocument: postId });
-  const postViews = await getPostViews(postId as unknown as string);
+  // const postViews = await getPostViews(postId as unknown as string);
+  //
   // const postRating = await getPostRating(postId as unknown as string);
 
-  const { likes } = unwrapResponse(
-    await getPostRating(postId as unknown as string) as unknown as ServerActionResponse<{
-      likes: number
-    }>,
-  );
+  // const { likes } = unwrapResponse(
+  //   await getPostRating(postId as unknown as string) as unknown as ServerActionResponse<{
+  //     likes: number
+  //   }>,
+  // );
+
 
   const { postPageSettings } = unwrapResponse(
     await getSettings(['postPageSettings']) as unknown as ServerActionResponse<{
@@ -66,31 +78,37 @@ const PostPage = async (props: IPageProps) => {
 
   const sidebar = postPageSettings?.sidebar;
 
+
+  const postProps: PostPageProps = {
+    widgets: widgets?.['underPost'],
+    post: data?.post,
+    views: data.post?.views || 0,
+    likes: data.post?.likes || 0,
+    hasSidebar: !!sidebar,
+    relatedPosts: data?.relatedPosts || [],
+    dictionary: dictionary,
+    locale: locale,
+  };
+
+
   if (data?.post?.status !== 'published') {
     return (
       <>
-        <PostAdminOrAuthorQuickAccessBar
-          dictionary={dictionary}
-          postId={postId}
-          authorId={data?.post?.author?._id}
-          status={data?.post.status}
-          createdAt={data?.post.createdAt}
-          updatedAt={data?.post.updatedAt}
-        />
+        <Suspense>
+          <PostAdminOrAuthorQuickAccessBar
+            dictionary={dictionary}
+            postId={postId}
+            authorId={data?.post?.author?._id}
+            status={data?.post.status}
+            createdAt={data?.post.createdAt}
+            updatedAt={data?.post.updatedAt}
+          />
+        </Suspense>
+
         <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
           <main id={'primary'} className="main postPage">
             {searchParams?.preview === 'true' && postType ? (
-              <PreviewPost
-                widgets={widgets}
-                post={data?.post}
-                views={postViews}
-                likes={likes || 0}
-                dictionary={dictionary}
-                locale={locale}
-                sidebar={postPageSettings?.sidebar || 'no'}
-                postType={postType}
-                relatedPosts={data?.relatedPosts || []}
-              />
+              <PreviewPost{...postProps} postType={postType} />
             ) : (
               <NotFoundOrRestricted dictionary={dictionary} />
             )}
@@ -123,57 +141,20 @@ const PostPage = async (props: IPageProps) => {
 
       <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
         <main id={'primary'} className={'main postPage'}>
-          {postType === 'video' ? (
-            <VideoTypePostPage
-              widgets={widgets?.['underPost']}
-              post={data?.post}
-              views={postViews}
-              likes={likes}
-              hasSidebar={sidebar}
-              relatedPosts={data?.relatedPosts || []}
-              dictionary={dictionary}
-              locale={locale}
-            />
-          ) : postType === 'article' ? (
-            <ArticleTypePostPage
-              widgets={widgets?.['underPost']}
-              post={data?.post}
-              views={postViews}
-              likes={likes}
-              hasSidebar={sidebar}
-              relatedPosts={data?.relatedPosts || []}
-              dictionary={dictionary}
-              locale={locale}
-            />
+          {postType === 'video' ? <VideoTypePostPage {...postProps} /> : postType === 'article' ? (
+            <ArticleTypePostPage {...postProps} />
           ) : postType === 'promotion' ? (
-            <PromotionTypePostPage
-              widgets={widgets?.['underPost']}
-              post={data?.post}
-              views={postViews}
-              likes={likes}
-              hasSidebar={sidebar}
-              relatedPosts={data?.relatedPosts || []}
-              dictionary={dictionary}
-              locale={locale}
-            />
+            <PromotionTypePostPage {...postProps} />
           ) : postType === 'learn' ? (
-            <LearnTypePostPage
-              widgets={widgets?.['underPost']}
-              post={data?.post}
-              views={postViews}
-              likes={likes}
-              hasSidebar={sidebar}
-              relatedPosts={data?.relatedPosts || []}
-              dictionary={dictionary}
-              locale={locale}
-            />
+            <LearnTypePostPage {...postProps} />
           ) : null}
           <RelatedPostsRenderer locale={locale} relatedPosts={data?.relatedPosts || []} dictionary={dictionary} />
           <div className="under-post-widget-area">
             <WidgetsRenderer widgets={widgets?.['underPost']} position="underPost" hasSidebar={sidebar} locale={locale}
                              dictionary={dictionary} />
           </div>
-          {(data.post._id && data?.post?.status === 'published') && <Comments dictionary={dictionary} postId={data.post._id} />}
+          {(data.post._id && data?.post?.status === 'published') &&
+            <Comments dictionary={dictionary} postId={data.post._id} />}
 
         </main>
         <SidebarWidgetAreaRenderer

@@ -20,7 +20,7 @@ const ActionOnPost: FC<IProps> = ({ post ,setPost}) => {
 
   const onViewHandler = () => {
     if (post?._id && typeof window !== 'undefined') {
-      window.open(`/post/${post?.postType || 'video'}/${post?._id}`, '_blank');
+      window.open(`/post/${post?.postType || 'video'}/${post?._id}?preview=true`, '_blank');
     }
   };
 

@@ -9,7 +9,6 @@ const page: FC<IProps> = ({}) => {
   return (
     <div>
 
-posts
     </div>
   );
 };
