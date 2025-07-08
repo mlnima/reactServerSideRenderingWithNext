@@ -33,7 +33,7 @@ const PostsCardsRenderer: FC<IProps> = async (
       {(posts || []).map((post: IPost, index: number) => {
         const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
         const imagesAllowedDomainsForNextImage = (process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES || '').split(' ') || [];
-        const previewModeQuery = previewMode ? '?preview=true' : '';
+        const previewModeQuery = previewMode ? '/preview' : '';
         const postUrl = locale === defaultLocale ?
           `/post/${post?.postType}/${post._id}${previewModeQuery}` :
           `/${locale}${`/post/${post?.postType}/${post._id}`}${previewModeQuery}`;

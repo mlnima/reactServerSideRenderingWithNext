@@ -37,7 +37,6 @@ const ratePost = async ({ _id }: { _id: string }): Promise<ServerActionResponse<
 
       const isLiked = !!docExists;
 
-      console.log(`docExists=> `, docExists)
       const updateQuery = isLiked ? { $pull: { likedPosts: postId } } : { $addToSet: { likedPosts: postId } };
 
       await userEngagementSchema.updateOne(

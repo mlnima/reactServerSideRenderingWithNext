@@ -51,7 +51,7 @@ const InitialSettingsPageWrapper: FC<PropTypes> = ({ initialSettings }) => {
         err: error || null,
       }),
     );
-    await clearACacheByTag('CSettings-initialSettings')
+    await clearACacheByTag('CSetting-initialSettings')
   };
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | {
@@ -63,7 +63,6 @@ const InitialSettingsPageWrapper: FC<PropTypes> = ({ initialSettings }) => {
     setInitialSettingsData((prevState) => ({
       ...prevState,
       [key]: {
-        // @ts-expect-error: it's fine
         ...(prevState?.[key] || {}),
         [e.target.name]: value,
       },
@@ -76,7 +75,6 @@ const InitialSettingsPageWrapper: FC<PropTypes> = ({ initialSettings }) => {
     setInitialSettingsData((prevState) => ({
       ...prevState,
       [key]: {
-        // @ts-expect-error: it's fine
         ...(prevState?.[key] || {}),
         [e.target.name]: JSON.parse(e.target.value),
       },

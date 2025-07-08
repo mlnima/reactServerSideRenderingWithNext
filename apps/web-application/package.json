@@ -4,7 +4,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev2": "next dev",
+    "dev": "set set DEBUG=*cache* && next dev",
     "devHTTPS": "next dev --experimental-https",
     "build": "next build --debug",
     "start": "next start",
@@ -71,7 +72,7 @@
     "lucide-react": "^0.474.0",
     "mongoose": "^8.12.2",
     "negotiator": "^0.6.3",
-    "next": "v15.4.0-canary.103",
+    "next": "v15.4.0-canary.116",
     "next-compose-plugins": "^2.2.1",
     "next-transpile-modules": "^10.0.1",
     "peerjs": "^1.5.4",

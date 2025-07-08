@@ -1,6 +1,6 @@
 {
   "$schema": "https://turborepo.org/schema.json",
-  "ui":  "stream",
+  "ui":  "tui",
   "globalDependencies": [
     ".env"
   ],
@@ -52,6 +52,7 @@
       ],
       "cache": false
     },
+    "start": {},
     "graph": {
       "cache": false
     },

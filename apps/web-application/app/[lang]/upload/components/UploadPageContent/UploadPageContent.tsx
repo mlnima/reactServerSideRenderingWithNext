@@ -541,7 +541,7 @@ const UploadPageContent = ({ _id, postType, dictionary, locale }: IProps) => {
                   type={'button'}
                   onClick={() =>
                     router.push(
-                      `${localeToSet}/post/${editingPost?.postType}/${editingPost?._id}?preview=true`,
+                      `${localeToSet}/post/${editingPost?.postType}/${editingPost?._id}/preview`,
                     )
                   }
                   className={'btn btn-info submitButton'}

@@ -140,7 +140,6 @@ const AuthenticationAdminItems = () => {
 
             <div className="menuItem">
                    <span className={'menuItemContent'}
-                         // onClick={() => onClearCacheHandler({ mode: 'settings' })}>
                           onClick={async () => await clearACacheByTag(`CSettings`)}>
                    <div className={'icon-wrapper'}>
                        <FontAwesomeIcon icon={faEraser} style={{ width: 25, height: 25 }} />

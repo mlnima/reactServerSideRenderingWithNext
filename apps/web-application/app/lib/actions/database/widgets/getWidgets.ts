@@ -74,7 +74,7 @@ const getWidgets = async (
         return widgetInPositions;
       }, {});
 
-      // Set cache tags
+
       const cachePositions = positions.map((position) => `CWidgets-${position}`);
       cacheTag('cacheItem', 'CWidgets', ...cachePositions);
       cacheLife(cacheLifeDuration);
@@ -82,7 +82,6 @@ const getWidgets = async (
       return result;
 
     } finally {
-      // Always end the session to free resources
       await session.endSession();
     }
 

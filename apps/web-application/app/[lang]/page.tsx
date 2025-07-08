@@ -16,20 +16,14 @@ const homePage = async (props: IPageProps) => {
   const locale = localDetector(params.lang);
   const dictionary = await getDictionary(locale);
 
-
-  const { initialSettings } = unwrapResponse(
-    await getSettings(['initialSettings']) as unknown as ServerActionResponse<{
-      initialSettings: IInitialSettings | undefined
+  const { initialSettings, homePageSettings } = unwrapResponse(
+    await getSettings(['initialSettings','homePageSettings']) as unknown as ServerActionResponse<{
+      initialSettings: IInitialSettings | undefined,
+      homePageSettings : IPageSettings
     }>,
   );
 
-  const {
-    data: {
-      homePageSettings: { sidebar = 'no' } = {},
-    } = {},
-  } = await getSettings(['homePageSettings']) as unknown as ServerActionResponse<{
-    homePageSettings: IPageSettings
-  }>;
+  const sidebar = homePageSettings?.sidebar || 'no'
 
   const widgets = await getWidgets(
     ['homePageLeftSidebar', 'homePageRightSidebar', 'home'],

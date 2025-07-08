@@ -9,6 +9,7 @@ import { setAlert } from '@store/reducers/globalStateReducer';
 import { IPage } from '@repo/typescript-types';
 import dashboardUpdatePage from '@lib/actions/database/pages/dashboardUpdatePage';
 import dashboardDeletePage from '@lib/actions/database/pages/dashboardDeletePage';
+import { clearACacheByTag } from '@lib/serverActions';
 
 const EditPage = (props: any) => {
 
@@ -55,9 +56,6 @@ const EditPage = (props: any) => {
     }
   }, [searchParams]);
 
-  useEffect(() => {
-    console.log(`pageData=> `,pageData);
-  }, [pageData]);
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) => {
     const finalValue = e.target.value === 'true' ? true :
@@ -86,6 +84,7 @@ const EditPage = (props: any) => {
 
     try {
       if (pageData) {
+        console.log(`pageData=> `, pageData);
         const { success, message, data, error } = await dashboardUpdatePage({ pageData });
         if (!success || !data) {
           dispatch(
@@ -97,12 +96,13 @@ const EditPage = (props: any) => {
           );
           return;
         }
-
+        await clearACacheByTag(`CPage-${pageData?.pageName}`);
         setPageData(data.updatedPage);
+
       }
 
     } catch (error) {
-
+      dispatch(setAlert({ type: 'error', active: true, error }));
     }
     // if (pageId) {
     //   const { success, message, data, error } = await dashboardUpdatePage({ pageData });
@@ -113,8 +113,8 @@ const EditPage = (props: any) => {
   };
 
   const onDeleteHandler = async () => {
-    if (!pageId)return;
-    await dashboardDeletePage({_id:pageId})
+    if (!pageId) return;
+    await dashboardDeletePage({ _id: pageId });
     router.push('/admin/assets?assetsType=pages', { scroll: false });
   };
 
@@ -136,7 +136,7 @@ const EditPage = (props: any) => {
                  className={'primaryInput'}
                  placeholder={'title'}
                  type={'text'}
-                 value={pageData?.title  || ''}
+                 value={pageData?.title || ''}
                  onChange={e => onChangeHandler(e)} />
         </div>
         <div className={'form-group'}>
@@ -144,7 +144,7 @@ const EditPage = (props: any) => {
           <textarea name={'description'}
                     className={'primaryInput'}
                     placeholder={'description'}
-                    value={pageData?.description  || ''}
+                    value={pageData?.description || ''}
             //@ts-ignore
                     onChange={e => onChangeHandler(e)} />
         </div>

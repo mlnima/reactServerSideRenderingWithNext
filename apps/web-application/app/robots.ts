@@ -3,12 +3,12 @@ import { MetadataRoute } from 'next';
 export default function robots(): MetadataRoute.Robots {
     const disAllowRoutes = [
         '/user/*',
-        '/previewPost/*',
         '/dashboard/*',
         '/chatroom/*',
         '/page/test',
         '/editPost/*',
         '/messenger/*',
+        '/post/*/*/preview/',
         '/account/*',
         '/*?preview=true*',
     ];

@@ -10,6 +10,7 @@ import dashboardUpdateSettings from '@lib/actions/database/settings/dashboardUpd
 import getSettings from '@lib/actions/database/settings/getSettings';
 import { ServerActionResponse } from '@lib/actions/response';
 import { setAlert } from '@store/reducers/globalStateReducer';
+import { clearACacheByTag } from '@lib/serverActions';
 
 interface PropTypes {
 
@@ -55,6 +56,7 @@ const EditDefaultPage: React.FC<PropTypes> = () => {
     }
   };
 
+
   useEffect(() => {
     getPageSettings();
   }, [searchParams, pageName]);
@@ -88,10 +90,15 @@ const EditDefaultPage: React.FC<PropTypes> = () => {
     e.preventDefault();
     try {
       if (pageName) {
-        await dashboardUpdateSettings({ type: pageName, data: fieldsData });
+       const {success,error,message}= await dashboardUpdateSettings({ type: pageName, data: fieldsData });
+        if (!success) {
+          dispatch(setAlert({ message, type: 'error', active: true,error }));
+          return;
+        }
+        await clearACacheByTag(`CSetting-${pageName}`)
       }
     } catch (error) {
-
+      dispatch(setAlert({type: 'error', active: true,error }));
     }
   };
 

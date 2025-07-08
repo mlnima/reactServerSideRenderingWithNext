@@ -1,5 +1,6 @@
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
+
 config.autoAddCss = false;
 import '@components/global/styles/global.styles.scss';
 import ReduxProvider from '@store/ReduxProvider';
@@ -35,7 +36,7 @@ import React from 'react';
 
 
 const RootLayout = async (props: ILayoutProps) => {
-  // await connection()
+
   const params = await props.params;
   const locale = localDetector(params.lang);
   const dictionary = await getDictionary(locale);
@@ -49,7 +50,6 @@ const RootLayout = async (props: ILayoutProps) => {
   const widgets = await getWidgets(
     ['footer', 'header', 'topBar', 'navigation'],
     locale,
-
   ) as { [key: string]: IWidget[] };
 
   const widgetAreasSharedProps = {
@@ -58,79 +58,79 @@ const RootLayout = async (props: ILayoutProps) => {
   };
 
   return (
-      <html lang={locale}>
-      <body >
-      <ReduxProvider>
-        <div className="layout">
-          {initialSettings?.layoutSettings?.topbar && (
-            <TopbarWidgetArea
-              {...widgetAreasSharedProps}
-              widgets={widgets?.topBar}
-            />
-          )}
-          {initialSettings?.layoutSettings?.header && (
-            <HeaderWidgetArea
-              {...widgetAreasSharedProps}
-              widgets={widgets?.header}
-            />
-          )}
-          {initialSettings?.layoutSettings?.navigation && (
-            <NavigationWidgetArea
-              {...widgetAreasSharedProps}
-              widgets={widgets?.navigation}
-            />
-          )}
-          <div id={'page'} className={'App innerContent'}>
-            {props.children}
+    <html lang={locale}>
+    <body>
+    <ReduxProvider>
+      <div className="layout">
+        {initialSettings?.layoutSettings?.topbar && (
+          <TopbarWidgetArea
+            {...widgetAreasSharedProps}
+            widgets={widgets?.topBar}
+          />
+        )}
+        {initialSettings?.layoutSettings?.header && (
+          <HeaderWidgetArea
+            {...widgetAreasSharedProps}
+            widgets={widgets?.header}
+          />
+        )}
+        {initialSettings?.layoutSettings?.navigation && (
+          <NavigationWidgetArea
+            {...widgetAreasSharedProps}
+            widgets={widgets?.navigation}
+          />
+        )}
+        <div id={'page'} className={'App innerContent'}>
+          {props.children}
 
-          </div>
-          {initialSettings?.layoutSettings?.footer && (
-            <FooterWidgetArea
-              {...widgetAreasSharedProps}
-              widgets={widgets?.footer}
-            />
-          )}
         </div>
-        <BackgroundFilterWholeScreen />
-        <CookieInitializer />
-        <MemberInitializer />
-        {initialSettings?.headDataSettings?.googleAnalyticsId &&
-          <GoogleAnalytics
-            googleAnalyticsId={
-              initialSettings?.headDataSettings?.googleAnalyticsId
-            }
+        {initialSettings?.layoutSettings?.footer && (
+          <FooterWidgetArea
+            {...widgetAreasSharedProps}
+            widgets={widgets?.footer}
           />
-        }
-        <LoadingComponent />
-        <AlertBox dictionary={dictionary} />
-        <BackToTopButton />
-        <LoginRegisterPopup locale={locale} dictionary={dictionary} />
-        <CustomStylesSwitcher />
-        {initialSettings?.layoutSettings?.customStyles &&
-          <DynamicStyleInjector
-            styles={initialSettings?.layoutSettings?.customStyles}
-            id="customStyles"
-            enableScss={true}
-          />
-        }
-        {initialSettings?.layoutSettings?.primaryModeColors &&
-          <DynamicStyleInjector
-            styles={initialSettings?.layoutSettings?.primaryModeColors}
-            id="primaryModeColors"
-            enableScss={true}
-          />
-        }
+        )}
+      </div>
+      <BackgroundFilterWholeScreen />
+      <CookieInitializer />
+      <MemberInitializer />
+      {initialSettings?.headDataSettings?.googleAnalyticsId &&
+        <GoogleAnalytics
+          googleAnalyticsId={
+            initialSettings?.headDataSettings?.googleAnalyticsId
+          }
+        />
+      }
+      <LoadingComponent />
+      <AlertBox dictionary={dictionary} />
+      <BackToTopButton />
+      <LoginRegisterPopup locale={locale} dictionary={dictionary} />
+      <CustomStylesSwitcher />
+      {initialSettings?.layoutSettings?.customStyles &&
+        <DynamicStyleInjector
+          styles={initialSettings?.layoutSettings?.customStyles}
+          id="customStyles"
+          enableScss={true}
+        />
+      }
+      {initialSettings?.layoutSettings?.primaryModeColors &&
+        <DynamicStyleInjector
+          styles={initialSettings?.layoutSettings?.primaryModeColors}
+          id="primaryModeColors"
+          enableScss={true}
+        />
+      }
 
 
-        {initialSettings && <StoreDataInitializer initialSettings={initialSettings} />}
-        <WebSocketInitializer />
-        <KeysListener />
-        <UserConfigMenu locale={locale} dictionary={dictionary} />
-        <CustomHeadTagsInitializer />
-        <CustomScripts />
-      </ReduxProvider>
-      </body>
-      </html>
+      {initialSettings && <StoreDataInitializer initialSettings={initialSettings} />}
+      <WebSocketInitializer />
+      <KeysListener />
+      <UserConfigMenu locale={locale} dictionary={dictionary} />
+      <CustomHeadTagsInitializer />
+      <CustomScripts />
+    </ReduxProvider>
+    </body>
+    </html>
 
   );
 };

@@ -3,11 +3,8 @@ import SidebarWidgetAreaRenderer
   from '@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer';
 import './page.styles.scss';
 import postMetaGenerator from './components/postMetaGenerator/postMetaGenerator';
-import PostAdminOrAuthorQuickAccessBar
-  from './components/PostAdminOrAuthorQuickAccessBar/PostAdminOrAuthorQuickAccessBar';
 import Soft404 from '@components/Soft404/Soft404';
-import NotFoundOrRestricted from './components/NotFoundOrRestricted/NotFoundOrRestricted';
-import { IPageProps, IPageSettings, PostPageProps } from '@repo/typescript-types';
+import { IPageProps, IPageSettings, IPost, PostPageProps } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
 import getPost from '@lib/actions/database/posts/getPost';
 import getSettings from '@lib/actions/database/settings/getSettings';
@@ -18,15 +15,50 @@ import RelatedPostsRenderer from './components/RelatedPostsRenderer/RelatedPosts
 import WidgetsRenderer from '@components/widgets/widgetRenderer/WidgetsRenderer';
 import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 import dynamic from 'next/dynamic';
+import getAllPublishedPosts from '@lib/actions/database/posts/getAllPublishedPosts';
 const VideoTypePostPage = dynamic(() => import('./components/VideoTypePostPage/VideoTypePostPage'));
 const ArticleTypePostPage = dynamic(() => import('./components/ArticleTypePostPage/ArticleTypePostPage'));
 const PromotionTypePostPage = dynamic(() => import('./components/PromotionTypePostPage/PromotionTypePostPage'));
 const LearnTypePostPage = dynamic(() => import('./components/LearnTypePostPage/LearnTypePostPage'));
 
+export const revalidate = 3600
+
 export const generateMetadata = postMetaGenerator;
 
-const PostPage = async (props: IPageProps) => {
+export async function generateStaticParams() {
+  try {
+    const { data } = await getAllPublishedPosts() as ServerActionResponse<{
+      posts:IPost[]
+    }> ;
 
+    if (!data || !data.posts) {
+      return [];
+    }
+
+    const params = [];
+
+    // Get supported languages from environment variable
+    const supportedLangs = process.env.NEXT_PUBLIC_LOCALES?.split(',') || ['en'];
+
+    for (const post of data.posts) {
+      for (const lang of supportedLangs) {
+        // @ts-expect-error: it's fine
+        params.push({
+          lang: lang.trim(),
+          identifier: post._id || post.title ,
+          postType: post.type || 'article'
+        });
+      }
+    }
+
+    return params;
+  } catch (error) {
+    console.error('Error generating static params:', error);
+    return [];
+  }
+}
+
+const PostPage = async (props: IPageProps) => {
   const params = await props.params;
   const locale = localDetector(params.lang);
   const dictionary = await getDictionary(locale);
@@ -52,7 +84,6 @@ const PostPage = async (props: IPageProps) => {
 
   const sidebar = postPageSettings?.sidebar;
 
-
   const postProps: PostPageProps = {
     widgets: widgets?.['underPost'],
     post: data?.post,
@@ -65,19 +96,8 @@ const PostPage = async (props: IPageProps) => {
   };
 
 
-  if (data?.post?.status !== 'published') return <NotFoundOrRestricted dictionary={dictionary} />
-
   return (
     <>
-
-      <PostAdminOrAuthorQuickAccessBar
-        dictionary={dictionary}
-        postId={postId}
-        authorId={data?.post?.author?._id}
-        status={data?.post.status}
-        createdAt={data?.post.createdAt}
-        updatedAt={data?.post.updatedAt}
-      />
 
       <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
         <main id={'primary'} className={'main postPage'}>
@@ -95,7 +115,6 @@ const PostPage = async (props: IPageProps) => {
           </div>
           {(data.post._id && data?.post?.status === 'published') &&
             <Comments dictionary={dictionary} postId={data.post._id} />}
-
         </main>
         <SidebarWidgetAreaRenderer
           leftSideWidgets={widgets?.['postPageLeftSidebar']}
@@ -111,16 +130,3 @@ const PostPage = async (props: IPageProps) => {
 };
 
 export default PostPage;
-
-
-
-//*****************************DO NOT DELETE***************************
-// const postViews = await getPostViews(postId as unknown as string);
-//
-// const postRating = await getPostRating(postId as unknown as string);
-
-// const { likes } = unwrapResponse(
-//   await getPostRating(postId as unknown as string) as unknown as ServerActionResponse<{
-//     likes: number
-//   }>,
-// );

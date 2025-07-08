@@ -45,7 +45,8 @@ const getSettings = async (
 
       settings = null;
 
-      cacheTag('cacheItem', 'CSettings', `CSettings-${requireSettings.join('-')}`);
+      const cachedTags = requireSettings.map((requireSetting) => `CSetting-${requireSetting}`);
+      cacheTag('cacheItem', 'CSettings',...cachedTags);
 
       return successResponse({
         data: serializedData
