@@ -1,238 +1,201 @@
 'use client'
-import { useState } from 'react'
+
+import { useEffect, useState, useMemo, useCallback } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUserShield, faBan, faCheckCircle, faSpinner, faExclamationTriangle, faSearch, faFilter } from '@fortawesome/free-solid-svg-icons'
 import './NginxLogMonitor.scss'
-import { getNginxLogs } from '@lib/actions/getNginxLogs'
+import {
+  getNginxLogs,
+  getBlockedIps,
+  manageIpFirewall,
+  AccessLogEntry,
+  ErrorLogEntry,
+} from '@lib/actions/nginxActions'
 
-interface LogEntry {
-  timestamp: string
-  method: string
-  path: string
-  status: number
-  size: string
-  userAgent: string
-  ip: string
-  referer: string
-  responseTime?: string
-  raw: string
-}
+type LogEntry = AccessLogEntry | ErrorLogEntry
+type LogType = 'access' | 'error'
 
-interface NginxLogData {
-  accessLogs: LogEntry[]
-  errorLogs: LogEntry[]
-  stats: {
-    total: number
-    statusCodes: { [key: string]: number }
-    methods: { [key: string]: number }
-    errors: number
+const isAccessLog = (log: LogEntry): log is AccessLogEntry => 'status' in log
+const isBot = (userAgent: string = ''): boolean => /bot|spider|crawl|slurp|yandex/i.test(userAgent)
+const limitOptions = [20, 50, 100, 200, 500, 1000]
+
+const LogItem = ({ log, blockedIps, onToggleBlock, isBlocking }: {
+  log: LogEntry,
+  blockedIps: string[],
+  onToggleBlock: (ip: string, action: 'block' | 'unblock') => void,
+  isBlocking: string | null
+}) => {
+  const ip = isAccessLog(log) ? log.ip : log.client
+  const isBlocked = ip ? blockedIps.includes(ip) : false
+  const isCurrentlyProcessing = isBlocking === ip
+
+  const getStatusClass = (status: number) => {
+    if (status >= 500) return 'status-5xx'
+    if (status >= 400) return 'status-4xx'
+    if (status >= 300) return 'status-3xx'
+    if (status >= 200) return 'status-2xx'
+    return ''
   }
-  timestamp: number
+
+  const getLevelClass = (level: string) => {
+    const lowerLevel = level.toLowerCase()
+    if (lowerLevel.includes('crit') || lowerLevel.includes('error')) return 'level-error'
+    if (lowerLevel.includes('warn')) return 'level-warn'
+    return ''
+  }
+
+  const handleBlockClick = () => {
+    if (ip) {
+      onToggleBlock(ip, isBlocked ? 'unblock' : 'block')
+    }
+  }
+
+  return (
+    <div className={`log-entry ${isAccessLog(log) ? getStatusClass(log.status) : getLevelClass(log.level)}`}>
+      {isAccessLog(log) ? (
+        <>
+          <span className={`log-status ${getStatusClass(log.status)}`}>{log.status}</span>
+          <span className="log-method">{log.method}</span>
+          <span className="log-path">{log.path}</span>
+          {ip && <span className="log-ip">{ip}</span>}
+          <span className="log-user-agent">
+            {isBot(log.userAgent) && <FontAwesomeIcon icon={faUserShield} className="bot-icon" title="Bot Detected"/>}
+            {log.userAgent}
+          </span>
+        </>
+      ) : (
+        <>
+          <span className={`log-level level-${log.level.toLowerCase()}`}>{log.level.toUpperCase()}</span>
+          {ip && <span className="log-ip">{ip}</span>}
+          <span className="log-message">{log.message}</span>
+        </>
+      )}
+      {ip && (
+        <div className="log-actions">
+          <button
+            onClick={handleBlockClick}
+            className={isBlocked ? 'btn-unblock' : 'btn-block'}
+            disabled={isCurrentlyProcessing}
+            title={isBlocked ? `Unblock ${ip}` : `Block ${ip}`}
+          >
+            {isCurrentlyProcessing ? <FontAwesomeIcon icon={faSpinner} spin/> : (isBlocked ? <FontAwesomeIcon icon={faCheckCircle} /> : <FontAwesomeIcon icon={faBan} />)}
+            {isBlocked ? ' Unblock' : ' Block'}
+          </button>
+        </div>
+      )}
+    </div>
+  )
 }
 
-interface NginxLogMonitorProps {
-  maxEntries?: number
-}
-
-const NginxLogMonitor = ({ maxEntries = 100 }: NginxLogMonitorProps) => {
-  const [logData, setLogData] = useState<NginxLogData | null>(null)
-  const [loading, setLoading] = useState(false)
+const NginxMonitor = ({ interval = 5000 }: { interval?: number }) => {
+  const [logs, setLogs] = useState<LogEntry[]>([])
+  const [blockedIps, setBlockedIps] = useState<string[]>([])
+  const [logType, setLogType] = useState<LogType>('access')
+  const [limit, setLimit] = useState<number>(50)
+  const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [activeTab, setActiveTab] = useState<'access' | 'error' | 'stats'>('access')
+  const [searchTerm, setSearchTerm] = useState('')
+  const [excludeTerm, setExcludeTerm] = useState('')
+  const [lastUpdated, setLastUpdated] = useState<number | null>(null)
+  const [isBlocking, setIsBlocking] = useState<string | null>(null)
 
-  const fetchLogs = async () => {
-    setLoading(true)
+  const fetchLogsAndIps = useCallback(async () => {
+    if (document.hidden) return
     try {
-      const websiteUrl = process.env.NEXT_PUBLIC_PRODUCTION_URL || 'localhost'
-      const data = await getNginxLogs(websiteUrl, maxEntries)
-      setLogData(data)
+      setLoading(true)
+      const [fetchedLogs, fetchedIps] = await Promise.all([
+        getNginxLogs({ logType, limit }),
+        getBlockedIps()
+      ])
+      setLogs(fetchedLogs as LogEntry[])
+      setBlockedIps(fetchedIps)
       setError(null)
+      setLastUpdated(Date.now())
     } catch (err) {
-      setError('Failed to fetch nginx logs')
-      console.error(err)
+      setError(err instanceof Error ? err.message : 'An unknown error occurred')
     } finally {
       setLoading(false)
     }
-  }
+  }, [logType, limit])
 
-  const getStatusColor = (status: number) => {
-    if (status >= 500) return 'critical'
-    if (status >= 400) return 'warning'
-    if (status >= 300) return 'info'
-    return 'normal'
-  }
+  useEffect(() => {
+    fetchLogsAndIps()
+    const intervalId = setInterval(fetchLogsAndIps, interval)
+    return () => clearInterval(intervalId)
+  }, [fetchLogsAndIps, interval])
 
-  const getMethodColor = (method: string) => {
-    switch (method) {
-      case 'GET': return 'normal'
-      case 'POST': return 'info'
-      case 'PUT': return 'warning'
-      case 'DELETE': return 'critical'
-      default: return 'normal'
+  const handleToggleBlock = async (ip: string, action: 'block' | 'unblock') => {
+    setIsBlocking(ip)
+    const result = await manageIpFirewall(ip, action)
+    if (!result.success) {
+      setError(`Firewall Error: ${result.message}`)
     }
+    await fetchLogsAndIps()
+    setIsBlocking(null)
   }
 
-  const formatTimestamp = (timestamp: string) => {
-    try {
-      return new Date(timestamp).toLocaleString()
-    } catch {
-      return timestamp
-    }
-  }
+  const filteredLogs = useMemo(() => {
+    const lowerSearch = searchTerm.toLowerCase()
+    const lowerExclude = excludeTerm.toLowerCase()
 
-  const renderAccessLogs = () => (
-    <div className="access-logs">
-      <div className="log-entries">
-        {logData?.accessLogs.length === 0 ? (
-          <div className="no-logs">No access logs found for this website</div>
-        ) : (
-          logData?.accessLogs.map((entry, index) => (
-            <div key={index} className="log-entry">
-              <div className="log-entry-header">
-                <span className="timestamp">{formatTimestamp(entry.timestamp)}</span>
-                <span className="ip">{entry.ip}</span>
-                <span className={`method ${getMethodColor(entry.method)}`}>
-                  {entry.method}
-                </span>
-                <span className={`status ${getStatusColor(entry.status)}`}>
-                  {entry.status}
-                </span>
-              </div>
-              <div className="log-entry-details">
-                <span className="path">{entry.path}</span>
-                <span className="size">{entry.size}</span>
-                {entry.responseTime && (
-                  <span className="response-time">{entry.responseTime}ms</span>
-                )}
-              </div>
-              {entry.userAgent && (
-                <div className="user-agent">{entry.userAgent}</div>
-              )}
-            </div>
-          ))
-        )}
-      </div>
-    </div>
-  )
-
-  const renderErrorLogs = () => (
-    <div className="error-logs">
-      <div className="log-entries">
-        {logData?.errorLogs.length === 0 ? (
-          <div className="no-logs">No error logs found for this website</div>
-        ) : (
-          logData?.errorLogs.map((entry, index) => (
-            <div key={index} className="log-entry error-entry">
-              <div className="log-entry-header">
-                <span className="timestamp">{formatTimestamp(entry.timestamp)}</span>
-                <span className="ip">{entry.ip}</span>
-              </div>
-              <div className="error-details">
-                {entry.raw}
-              </div>
-            </div>
-          ))
-        )}
-      </div>
-    </div>
-  )
-
-  const renderStats = () => (
-    <div className="stats-view">
-      <div className="stats-grid">
-        <div className="stat-card">
-          <div className="stat-title">Total Requests</div>
-          <div className="stat-value">{logData?.stats.total || 0}</div>
-        </div>
-
-        <div className="stat-card">
-          <div className="stat-title">Error Count</div>
-          <div className="stat-value critical">{logData?.stats.errors || 0}</div>
-        </div>
-
-        <div className="stat-card">
-          <div className="stat-title">Status Codes</div>
-          <div className="stat-breakdown">
-            {Object.entries(logData?.stats.statusCodes || {}).map(([status, count]) => (
-              <div key={status} className="stat-item">
-                <span className={`status-code ${getStatusColor(parseInt(status))}`}>
-                  {status}
-                </span>
-                <span className="count">{count}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="stat-card">
-          <div className="stat-title">HTTP Methods</div>
-          <div className="stat-breakdown">
-            {Object.entries(logData?.stats.methods || {}).map(([method, count]) => (
-              <div key={method} className="stat-item">
-                <span className={`method ${getMethodColor(method)}`}>{method}</span>
-                <span className="count">{count}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  )
+    return logs
+      .filter(log => {
+        if (!excludeTerm) return true
+        const logString = JSON.stringify(log).toLowerCase()
+        return !logString.includes(lowerExclude)
+      })
+      .filter(log => {
+        if (!searchTerm) return true
+        const logString = JSON.stringify(log).toLowerCase()
+        return logString.includes(lowerSearch)
+      })
+  }, [logs, searchTerm, excludeTerm])
 
   return (
-    <div className="nginx-log-monitor">
+    <div className="nginx-monitor">
       <div className="monitor-header">
-        <h3>Nginx Log Monitor</h3>
-        <div className="header-actions">
-          <button
-            className="btn btn-primary"
-            onClick={fetchLogs}
-            disabled={loading}
-          >
-            {loading ? 'Loading...' : 'Fetch Logs'}
-          </button>
-          {logData && (
-            <div className="last-updated">
-              Last updated: {new Date(logData.timestamp).toLocaleTimeString()}
-            </div>
-          )}
+        <h3>Nginx Monitor</h3>
+        <div className="last-updated">
+          {loading && !lastUpdated ? <FontAwesomeIcon icon={faSpinner} spin /> :
+            lastUpdated ? `Last updated: ${new Date(lastUpdated).toLocaleTimeString()}` : 'N/A'
+          }
         </div>
       </div>
-
-      {error && (
-        <div className="error-state">{error}</div>
-      )}
-
-      {logData && (
-        <>
-          <div className="log-tabs">
-            <button
-              className={`tab-button ${activeTab === 'access' ? 'active' : ''}`}
-              onClick={() => setActiveTab('access')}
-            >
-              Access Logs ({logData.accessLogs.length})
-            </button>
-            <button
-              className={`tab-button ${activeTab === 'error' ? 'active' : ''}`}
-              onClick={() => setActiveTab('error')}
-            >
-              Error Logs ({logData.errorLogs.length})
-            </button>
-            <button
-              className={`tab-button ${activeTab === 'stats' ? 'active' : ''}`}
-              onClick={() => setActiveTab('stats')}
-            >
-              Statistics
-            </button>
-          </div>
-
-          <div className="log-content">
-            {activeTab === 'access' && renderAccessLogs()}
-            {activeTab === 'error' && renderErrorLogs()}
-            {activeTab === 'stats' && renderStats()}
-          </div>
-        </>
-      )}
+      <div className="log-controls">
+        <div className="control-group tabs">
+          <button onClick={() => setLogType('access')} className={logType === 'access' ? 'active' : ''}>Access</button>
+          <button onClick={() => setLogType('error')} className={logType === 'error' ? 'active' : ''}>Error</button>
+        </div>
+        <div className="control-group">
+          <select value={limit} onChange={e => setLimit(Number(e.target.value))}>
+            {limitOptions.map(opt => <option key={opt} value={opt}>Show {opt}</option>)}
+          </select>
+        </div>
+        <div className="control-group">
+          <FontAwesomeIcon icon={faSearch} />
+          <input type="text" placeholder="Search..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
+        </div>
+        <div className="control-group">
+          <FontAwesomeIcon icon={faFilter} />
+          <input type="text" placeholder="Exclude 'socket.io'..." value={excludeTerm} onChange={e => setExcludeTerm(e.target.value)} />
+        </div>
+      </div>
+      <div className="log-list-container">
+        {loading && logs.length === 0 && <div className="state-container">Loading logs...</div>}
+        {error && <div className="state-container error-state"><FontAwesomeIcon icon={faExclamationTriangle} /> {error}</div>}
+        {!loading && !error && filteredLogs.length === 0 && <div className="state-container">No logs found.</div>}
+        {filteredLogs.map(log => (
+          <LogItem
+            key={log.id}
+            log={log}
+            blockedIps={blockedIps}
+            onToggleBlock={handleToggleBlock}
+            isBlocking={isBlocking}
+          />
+        ))}
+      </div>
     </div>
   )
 }
 
-export default NginxLogMonitor
+export default NginxMonitor
