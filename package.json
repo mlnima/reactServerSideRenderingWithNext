@@ -9,7 +9,8 @@
     "apps/api-server"
   ],
   "scripts": {
-    "dev": "dotenv -- turbo run dev --log-order=stream",
+    "dev": "dotenv -- turbo run dev",
+    "dev2": "dotenv -- turbo run dev --log-order=stream",
     "start": "dotenv -- turbo run start --log-order=stream",
     "start2": "dotenv -- concurrently  \"npm run start:api-server\" \"npm run start:web-application\" ",
     "build": "dotenv -- turbo run build",

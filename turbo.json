@@ -1,6 +1,6 @@
 {
   "$schema": "https://turborepo.org/schema.json",
-  "ui":  "tui",
+  "ui":  "stream",
   "globalDependencies": [
     ".env"
   ],
@@ -30,8 +30,7 @@
       "dependsOn": [
         "^build"
       ],
-      "cache": false,
-      "outputLogs": "full"
+      "cache": false
     },
 
     "build": {
