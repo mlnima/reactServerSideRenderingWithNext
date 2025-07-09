@@ -11,12 +11,12 @@ declare module '*.module.css' {
   export default classes;
 }
 
-
-declare function mongooseLeanVirtuals(schema: Schema): void;
-
-declare namespace mongooseLeanVirtuals {}
-
-export = mongooseLeanVirtuals;
+//
+// declare function mongooseLeanVirtuals(schema: Schema): void;
+//
+// declare namespace mongooseLeanVirtuals {}
+//
+// export = mongooseLeanVirtuals;
 
 
 

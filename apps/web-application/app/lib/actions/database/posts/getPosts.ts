@@ -66,8 +66,8 @@ const getPosts = async (
   try {
     connection = await connectToDatabase('getPosts');
 
-    // Validate metaId input
     const { isValid, sanitized: validatedMetaId, reason } = validateMetaId(metaId);
+
     if (!isValid) {
       console.error(`getPosts: Invalid metaId - ${reason}: ${metaId}`);
       return errorResponse({
@@ -75,7 +75,6 @@ const getPosts = async (
       });
     }
 
-    // Create session for better resource management
     const session = await connection.startSession();
 
     try {
@@ -87,7 +86,6 @@ const getPosts = async (
 
       const limit = count || initialSettings?.contentSettings?.contentPerPage || 20;
 
-      // Only try to find meta if we have a valid metaId
       let meta: IMeta | null = null;
       if (validatedMetaId) {
         try {
@@ -134,7 +132,6 @@ const getPosts = async (
         ? { $and: queryConditions }
         : {};
 
-      // Execute posts query with session
       let posts = returnPosts
         ? await postSchema
           .find(findPostsQueries, null, {
@@ -163,11 +160,13 @@ const getPosts = async (
       posts = null;
       meta = null;
 
+      const metaCacheTag = validatedMetaId ? `-${validatedMetaId}` : '';
+      const pageCacheTag = page ? `-${page}` : '';
+      const authorCacheTag = author ? `-${author}` : '';
+
       cacheTag(
         'cacheItem',
-        `CPosts-${locale}${validatedMetaId ? `-${validatedMetaId}` : ''}${
-          page ? `-${page}` : ''
-        }${author ? `-${author}` : ''}`,
+        `CPosts${metaCacheTag}${pageCacheTag}${authorCacheTag}`,
       );
 
       return successResponse({
@@ -179,7 +178,6 @@ const getPosts = async (
       });
 
     } finally {
-      // Always end the session to free resources
       await session.endSession();
     }
 
@@ -198,7 +196,13 @@ export default getPosts;
 
 
 
-
+//********** old cache tag with local
+// cacheTag(
+//   'cacheItem',
+//   `CPosts-${locale}${validatedMetaId ? `-${validatedMetaId}` : ''}${
+//     page ? `-${page}` : ''
+//   }${author ? `-${author}` : ''}`,
+// );
 
 
 

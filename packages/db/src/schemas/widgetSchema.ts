@@ -1,6 +1,5 @@
 import { Schema, models, model, Document } from 'mongoose';
 import { IWidget, IWidgetData } from '@repo/typescript-types';
-import mongooseLeanVirtuals from 'mongoose-lean-virtuals';
 
 const widgetDataSchema = new Schema<IWidgetData>({
   extraClassName: String,
@@ -48,8 +47,6 @@ const widgetDataSchema = new Schema<IWidgetData>({
     },
   ],
 });
-
-widgetDataSchema.plugin(mongooseLeanVirtuals);
 
 interface IDWidget extends Document, Omit<IWidget, '_id'> {
   data: IWidgetData;

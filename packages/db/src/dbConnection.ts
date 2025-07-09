@@ -51,7 +51,7 @@ const connectToDatabase = async (connectorName: string = '', connectionUri: stri
       serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
       socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
       family: 4, // Use IPv4, skip trying IPv6
-      maxIdleTimeMS: 30000, // Close connections after 30 seconds of inactivity
+      maxIdleTimeMS: 5000, // Close connections after 30 seconds of inactivity
     };
 
     cached.promise = mongoose.connect(connectionUri || MONGODB_URI, opts).then((mongoose) => {
