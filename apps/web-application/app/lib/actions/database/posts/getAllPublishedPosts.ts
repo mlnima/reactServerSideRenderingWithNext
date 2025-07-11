@@ -1,4 +1,3 @@
-// @lib/actions/database/posts/getAllPublishedPosts.ts
 'use server';
 import { connectToDatabase, postSchema } from '@repo/db';
 import { IPost } from '@repo/typescript-types';
@@ -10,34 +9,22 @@ interface GetAllPublishedPostsResponse {
   totalCount: number;
 }
 
-const getAllPublishedPosts = async (): Promise<ServerActionResponse<GetAllPublishedPostsResponse>> => {
-  'use cache'
-  let connection;
+const getAllPublishedPosts = async (): Promise<ServerActionResponse<GetAllPublishedPostsResponse | null>> => {
+  'use cache';
+
   try {
-    connection = await connectToDatabase('getAllPublishedPosts');
-    const session = await connection.startSession();
+    await connectToDatabase('getAllPublishedPosts');
+    const posts = await postSchema.find({ status: 'published' }, 'title permaLink type status _id').lean<IPost[]>().exec();
 
-    try {
-      const posts = await postSchema
-        .find(
-          { status: 'published' },
-          'title permaLink type status _id'
-        )
-        .session(session)
-        .lean<IPost[]>();
+    const serializedData = {
+      posts: JSON.parse(JSON.stringify(posts)),
+      totalCount: posts.length,
+    };
 
-      const serializedData = {
-        posts: JSON.parse(JSON.stringify(posts)),
-        totalCount: posts.length
-      };
+    cacheTag('cacheItem', 'CAllPublishedPosts');
+    cacheLife('minutes');
 
-      cacheTag('cacheItem', 'CAllPublishedPosts');
-      cacheLife('minutes');
-
-      return successResponse({ data: serializedData });
-    } finally {
-      await session.endSession();
-    }
+    return successResponse({ data: serializedData });
   } catch (error) {
     console.error('getAllPublishedPosts => ', error);
     return errorResponse({

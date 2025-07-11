@@ -19,13 +19,18 @@ const mergeDuplicateMeta = async (metaNameToMerge: string, metaType: MetasType, 
 
     const normalizedInputName = metaNameToMerge.toLowerCase();
 
-    const duplicateCandidates: IMeta[] = await metaSchema.find({
-      name: new RegExp(`^${metaNameToMerge.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, 'i'),
-      type: metaType,
-    }).session(session).lean<IMeta[]>();
+    const duplicateCandidates: IMeta[] = await metaSchema
+      .find({
+        name: new RegExp(`^${metaNameToMerge.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, 'i'),
+        type: metaType,
+      })
+      .session(session)
+      .lean<IMeta[]>();
 
     if (duplicateCandidates.length < 2) {
-      console.log(`No significant duplicates found for name "${metaNameToMerge}" (type: "${metaType}") to merge. Candidates found: ${duplicateCandidates.length}`);
+      console.log(
+        `No significant duplicates found for name "${metaNameToMerge}" (type: "${metaType}") to merge. Candidates found: ${duplicateCandidates.length}`,
+      );
       return;
     }
 
@@ -36,10 +41,12 @@ const mergeDuplicateMeta = async (metaNameToMerge: string, metaType: MetasType, 
       if (!candidate._id) {
         continue;
       }
-      const count = await postSchema.countDocuments({
-        [candidate.type as string]: candidate._id,
-        status: 'published',
-      }).session(session);
+      const count = await postSchema
+        .countDocuments({
+          [candidate.type as string]: candidate._id,
+          status: 'published',
+        })
+        .session(session);
       metasWithCounts.push({ ...candidate, _id: candidate._id, postCount: count });
     }
 
@@ -60,7 +67,9 @@ const mergeDuplicateMeta = async (metaNameToMerge: string, metaType: MetasType, 
     const metasToMerge = metasWithCounts.slice(1);
 
     if (metasToMerge.length === 0) {
-      console.log(`All candidates resolved to a single primary meta: "${primaryMeta.name}" (ID: ${primaryMeta._id}). No further merging action required for this set.`);
+      console.log(
+        `All candidates resolved to a single primary meta: "${primaryMeta.name}" (ID: ${primaryMeta._id}). No further merging action required for this set.`,
+      );
       return;
     }
 
@@ -71,7 +80,9 @@ const mergeDuplicateMeta = async (metaNameToMerge: string, metaType: MetasType, 
         continue;
       }
 
-      console.log(`Merging "${metaToMerge.name}" (ID: ${metaToMerge._id}, Posts: ${metaToMerge.postCount}) into "${primaryMeta.name}" (ID: ${primaryMeta._id})`);
+      console.log(
+        `Merging "${metaToMerge.name}" (ID: ${metaToMerge._id}, Posts: ${metaToMerge.postCount}) into "${primaryMeta.name}" (ID: ${primaryMeta._id})`,
+      );
 
       const updateQueryKey = metaType as string;
 
@@ -82,52 +93,62 @@ const mergeDuplicateMeta = async (metaNameToMerge: string, metaType: MetasType, 
         { $addToSet: { [updateQueryKey]: primaryMeta._id } },
         { session },
       );
-      console.log(`  Step 1: Added primary meta ID to posts. Matched: ${updateAddResult.matchedCount}, Modified: ${updateAddResult.modifiedCount}`);
+      console.log(
+        `  Step 1: Added primary meta ID to posts. Matched: ${updateAddResult.matchedCount}, Modified: ${updateAddResult.modifiedCount}`,
+      );
 
       const updatePullResult = await postSchema.updateMany(
         { [updateQueryKey]: metaToMerge._id },
         { $pull: { [updateQueryKey]: metaToMerge._id } },
         { session },
       );
-      console.log(`  Step 2: Removed merged meta ID from posts. Matched: ${updatePullResult.matchedCount}, Modified: ${updatePullResult.modifiedCount}`);
+      console.log(
+        `  Step 2: Removed merged meta ID from posts. Matched: ${updatePullResult.matchedCount}, Modified: ${updatePullResult.modifiedCount}`,
+      );
 
       await metaSchema.findByIdAndDelete(metaToMerge._id, { session });
       console.log(`  Step 3: Deleted meta document: "${metaToMerge.name}" (ID: ${metaToMerge._id})`);
     }
 
-    console.log(`Successfully merged duplicates of "${metaNameToMerge}" (type: "${metaType}") into "${primaryMeta.name}" (ID: ${primaryMeta._id}).`);
-
+    console.log(
+      `Successfully merged duplicates of "${metaNameToMerge}" (type: "${metaType}") into "${primaryMeta.name}" (ID: ${primaryMeta._id}).`,
+    );
   } catch (error) {
-    console.error(`Error during meta merge process for "${metaNameToMerge}" (type: "${metaType}"):`, error instanceof Error ? error.message : error);
+    console.error(
+      `Error during meta merge process for "${metaNameToMerge}" (type: "${metaType}"):`,
+      error instanceof Error ? error.message : error,
+    );
   }
 };
 
 const setSingleMetaImageAndCount = async (meta: IMeta, session: ClientSession) => {
   try {
-    const metaCount = await postSchema.countDocuments(
-      { $and: [{ [meta.type]: { $in: meta?._id } }, { status: 'published' }] },
-    ).session(session);
+    const metaCount = await postSchema
+      .countDocuments({ $and: [{ [meta.type]: { $in: meta?._id } }, { status: 'published' }] })
+      .session(session);
 
     if (metaCount > 0) {
-      const totalSumData = await postSchema.aggregate([
-        {
-          $match: {
-            $and: [
-              { status: 'published' },
-              { [meta?.type]: { $exists: true } },
-              { [meta?.type]: { $in: [new mongoose.Types.ObjectId(meta._id)] } },
-            ],
+      const totalSumData = await postSchema
+        .aggregate([
+          {
+            $match: {
+              $and: [
+                { status: 'published' },
+                { [meta?.type]: { $exists: true } },
+                { [meta?.type]: { $in: [new mongoose.Types.ObjectId(meta._id)] } },
+              ],
+            },
           },
-        },
-        { $project: { likes: 1, views: 1, [meta?.type]: 1 } },
-        {
-          $group: {
-            _id: null,
-            likes: { $sum: { $add: ['$likes'] } },
-            views: { $sum: { $add: ['$views'] } },
+          { $project: { likes: 1, views: 1, [meta?.type]: 1 } },
+          {
+            $group: {
+              _id: null,
+              likes: { $sum: { $add: ['$likes'] } },
+              views: { $sum: { $add: ['$views'] } },
+            },
           },
-        },
-      ]).session(session);
+        ])
+        .session(session);
 
       let updateData = {
         count: metaCount,
@@ -142,11 +163,7 @@ const setSingleMetaImageAndCount = async (meta: IMeta, session: ClientSession) =
         const skipDocuments = metaCount <= 1 ? 0 : randomNumberGenerator(1, metaCount) - 1;
         const randomPost = await postSchema
           .findOne({
-            $and: [
-              { [meta?.type]: meta?._id },
-              { status: 'published' },
-              { mainThumbnail: { $exists: true } },
-            ],
+            $and: [{ [meta?.type]: meta?._id }, { status: 'published' }, { mainThumbnail: { $exists: true } }],
           })
           .sort({ updatedAt: -1 })
           .skip(skipDocuments)
@@ -158,21 +175,13 @@ const setSingleMetaImageAndCount = async (meta: IMeta, session: ClientSession) =
         }
       }
 
-      await metaSchema.findByIdAndUpdate(
-        meta?._id,
-        { $set: { ...updateData } },
-        { timestamps: false, session },
-      ).finally(() => {
+      await metaSchema.findByIdAndUpdate(meta?._id, { $set: { ...updateData } }, { timestamps: false, session }).finally(() => {
         console.log(
           `${meta?.type} ${meta?.name} has ${metaCount} and image set to ${updateData?.imageUrl || '/asset/images/default/no-image-available.png'}`,
         );
       });
     } else {
-      await metaSchema.findByIdAndUpdate(
-        meta?._id,
-        { $set: { status: 'draft' } },
-        { timestamps: false, session },
-      );
+      await metaSchema.findByIdAndUpdate(meta?._id, { $set: { status: 'draft' } }, { timestamps: false, session });
       console.log(meta.name, ` status changed from ${meta.status} to draft`);
       return;
     }
@@ -217,24 +226,18 @@ const fixASingleMetaImageAndCountById = async (_id: string): Promise<ServerActio
 };
 
 export const setAllMetaImagesAndCount = async (metaType?: 'categories' | 'tags' | 'actors'): Promise<ServerActionResponse> => {
-  let connection;
   try {
-    connection = await connectToDatabase('setAllMetaImagesAndCount');
+    await connectToDatabase('setAllMetaImagesAndCount');
     await metaSchema.syncIndexes();
 
-    const session = await connection.startSession();
-    try {
-      const type = metaType ? { type: metaType } : {};
-      const metas = await metaSchema.find(type).session(session);
-      for await (let meta of metas) {
-        await setSingleMetaImageAndCount(meta, session);
-      }
-      return successResponse({
-        message: 'All metas processed successfully.',
-      });
-    } finally {
-      await session.endSession();
+    const type = metaType ? { type: metaType } : {};
+    const metas = await metaSchema.find(type).exec();
+    for await (let meta of metas) {
+      await setSingleMetaImageAndCount(meta);
     }
+    return successResponse({
+      message: 'All metas processed successfully.',
+    });
   } catch (error) {
     console.error(`setAllMetaImagesAndCount => `, error);
     return errorResponse({
@@ -242,7 +245,6 @@ export const setAllMetaImagesAndCount = async (metaType?: 'categories' | 'tags' 
     });
   }
 };
-
 
 
 // 'use server';

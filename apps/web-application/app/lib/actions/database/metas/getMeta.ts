@@ -7,10 +7,8 @@ import { unstable_cacheTag as cacheTag } from 'next/cache';
 const getMeta = async (_id: string): Promise<ServerActionResponse<{ meta: IMeta } | null>> => {
   'use cache';
 
-  let connection;
-
   try {
-    connection = await connectToDatabase('getMeta');
+    await connectToDatabase('getMeta');
 
     const isId = isValidObjectId(_id);
     if (!isId) {
@@ -19,41 +17,25 @@ const getMeta = async (_id: string): Promise<ServerActionResponse<{ meta: IMeta 
       });
     }
 
-    // Create session for better resource management
-    const session = await connection.startSession();
+    let meta = await metaSchema.findById(_id).lean<IMeta>().exec();
 
-    try {
-      // Execute query with session
-      let meta = await metaSchema
-        .findById(_id)
-        .session(session)
-        .lean<IMeta>();
-
-      if (!meta || meta.status !== 'published') {
-        return errorResponse({
-          message: 'Not Found',
-        });
-      }
-
-      // Serialize data efficiently
-      const serializedMeta = JSON.parse(JSON.stringify(meta));
-
-      // Clean up reference to prevent memory leaks
-      meta = null;
-
-      cacheTag('cacheItem', `CMeta-${_id}`);
-
-      return successResponse({
-        data: {
-          meta: serializedMeta
-        },
+    if (!meta || meta.status !== 'published') {
+      return errorResponse({
+        message: 'Not Found',
       });
-
-    } finally {
-      // Always end the session to free resources
-      await session.endSession();
     }
 
+    const serializedMeta = JSON.parse(JSON.stringify(meta));
+
+    meta = null;
+
+    cacheTag('cacheItem', `CMeta-${_id}`);
+
+    return successResponse({
+      data: {
+        meta: serializedMeta,
+      },
+    });
   } catch (error) {
     console.error(`getMeta => `, error);
     return errorResponse({
@@ -63,10 +45,6 @@ const getMeta = async (_id: string): Promise<ServerActionResponse<{ meta: IMeta 
 };
 
 export default getMeta;
-
-
-
-
 
 
 // 'use server';

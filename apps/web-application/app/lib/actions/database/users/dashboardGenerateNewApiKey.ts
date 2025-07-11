@@ -5,8 +5,6 @@ import { connectToDatabase, userSchema } from '@repo/db';
 import uuidAPIKey from 'uuid-apikey';
 
 const dashboardGenerateNewApiKey = async () => {
-  let connection;
-
   try {
     const { isAdmin, userId } = await verifySession();
 
@@ -15,27 +13,22 @@ const dashboardGenerateNewApiKey = async () => {
         message: 'Unauthorized Access',
       });
     }
-    connection = await connectToDatabase('dashboardGenerateNewApiKey');
-    const session = await connection.startSession();
+    await connectToDatabase('dashboardGenerateNewApiKey');
 
-    try {
-      const newAPIKey = uuidAPIKey.create();
+    const newAPIKey = uuidAPIKey.create();
 
-      const APIkeys = {
-        API_KEY: newAPIKey.apiKey,
-        uuid: newAPIKey.uuid,
-      };
+    const APIkeys = {
+      API_KEY: newAPIKey.apiKey,
+      uuid: newAPIKey.uuid,
+    };
 
-      await userSchema.findByIdAndUpdate(userId, { $set: APIkeys }).session(session);
+    await userSchema.findByIdAndUpdate(userId, { $set: APIkeys }).exec();
 
-      return successResponse({
-        data: {
-          ...APIkeys,
-        },
-      });
-    } finally {
-      await session.endSession();
-    }
+    return successResponse({
+      data: {
+        ...APIkeys,
+      },
+    });
   } catch (error) {
     console.log(`dashboardGenerateNewApiKey Error=> `, error);
 
@@ -47,49 +40,3 @@ const dashboardGenerateNewApiKey = async () => {
 };
 
 export default dashboardGenerateNewApiKey;
-
-
-// 'use server';
-// import { errorResponse, successResponse } from '@lib/actions/response';
-// import { verifySession } from '@lib/dal';
-// import { connectToDatabase, userSchema } from '@repo/db';
-// import uuidAPIKey from 'uuid-apikey';
-//
-// const dashboardGenerateNewApiKey = async () => {
-//   try {
-//     const { isAdmin, userId } = await verifySession();
-//
-//     if (!isAdmin) {
-//       return errorResponse({
-//         message: 'Unauthorized Access',
-//       });
-//     }
-//     await connectToDatabase('dashboardGenerateNewApiKey');
-//
-//
-//     const newAPIKey = uuidAPIKey.create();
-//
-//     const APIkeys = {
-//       API_KEY: newAPIKey.apiKey,
-//       uuid: newAPIKey.uuid,
-//     };
-//
-//     userSchema.findByIdAndUpdate(userId, { $set: APIkeys });
-//
-//     return successResponse({
-//       data: {
-//         ...APIkeys,
-//       },
-//     });
-//
-//   } catch (error) {
-//     console.log(`dashboardGenerateNewApiKey Error=> `, error);
-//
-//     return errorResponse({
-//       message: 'Something went wrong',
-//       error,
-//     });
-//   }
-// };
-//
-// export default dashboardGenerateNewApiKey;

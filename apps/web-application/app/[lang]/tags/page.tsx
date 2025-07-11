@@ -1,8 +1,7 @@
 import React from 'react';
 import { getDictionary } from '../../../get-dictionary';
 import WidgetsRenderer from '@components/widgets/widgetRenderer/WidgetsRenderer';
-import SidebarWidgetAreaRenderer
-  from '@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer';
+import SidebarWidgetAreaRenderer from '@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer';
 import tagsMetaGenerator from './components/tagsMetaGenerator/tagsMetaGenerator';
 import TagsPageContentRenderer from '@components/metas/TagsPageContentRenderer';
 import { IPageProps, IPageSettings } from '@repo/typescript-types';
@@ -20,64 +19,36 @@ const TagsPage = async (props: IPageProps) => {
   const locale = localDetector(params.lang);
   const dictionary = await getDictionary(locale);
 
-
   const { tagsPageSettings } = unwrapResponse(
-    await getSettings(['tagsPageSettings']) as unknown as ServerActionResponse<{
+    (await getSettings(['tagsPageSettings'])) as unknown as ServerActionResponse<{
       tagsPageSettings: IPageSettings | undefined;
     }>,
   );
 
   const sidebar = tagsPageSettings?.sidebar;
 
-
-  const widgets = await getWidgets(
-    [
-      'tagsPageTop',
-      'tagsPageLeftSidebar',
-      'tagsPageBottom',
-      'tagsPageRightSidebar',
-    ],
-    locale,
-  );
-
+  const widgets = await getWidgets(['tagsPageTop', 'tagsPageLeftSidebar', 'tagsPageBottom', 'tagsPageRightSidebar'], locale);
 
   const { success, data } = await getMetas({
     locale,
-    startWith: Array.isArray(searchParams?.startWith)
-      ? searchParams?.startWith[0]
-      : searchParams?.startWith,
+    startWith: Array.isArray(searchParams?.startWith) ? searchParams?.startWith[0] : searchParams?.startWith,
     metaType: 'tags',
     page: 1,
-    count: 1000,
+    size: 1000,
   });
 
   if (!success || !data) {
     return <Soft404 dictionary={dictionary} />;
   }
 
-
   return (
     <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
       <main id={'primary'} className={'main tagsPage'}>
-        <WidgetsRenderer
-          dictionary={dictionary}
-          locale={locale}
-          widgets={widgets?.['tagsPageTop']}
-          position={'tagsPageTop'}
-        />
+        <WidgetsRenderer dictionary={dictionary} locale={locale} widgets={widgets?.['tagsPageTop']} position={'tagsPageTop'} />
 
-        <TagsPageContentRenderer
-          locale={locale}
-          metas={data?.metas || []}
-          startWith={searchParams?.startWith as string}
-        />
+        <TagsPageContentRenderer locale={locale} metas={data?.metas || []} startWith={searchParams?.startWith as string} />
 
-        <WidgetsRenderer
-          dictionary={dictionary}
-          locale={locale}
-          widgets={widgets?.['tagsPageBottom']}
-          position={'tagsPageBottom'}
-        />
+        <WidgetsRenderer dictionary={dictionary} locale={locale} widgets={widgets?.['tagsPageBottom']} position={'tagsPageBottom'} />
       </main>
 
       <SidebarWidgetAreaRenderer
@@ -95,4 +66,3 @@ const TagsPage = async (props: IPageProps) => {
 export default TagsPage;
 
 export const generateMetadata = tagsMetaGenerator;
-

@@ -13,19 +13,18 @@ import { useParams, usePathname, useSearchParams, useSelectedLayoutSegment } fro
 import socket from '@lib/web-socket-client';
 import { faBolt, faChevronDown, faChevronUp, faWrench } from '@fortawesome/free-solid-svg-icons';
 import { clearACacheByTag, clearCachesByServerAction } from '@lib/serverActions';
-import { fixSearchKeywords } from '@lib/actions/database/fix';
+// import { fixSearchKeywords } from '@lib/actions/database/fix';
 import { cookieChecker, deleteCookie, cookieSetter } from '@lib/actions/cookieTools';
 import { useState } from 'react';
 
 const AuthenticationAdminItems = () => {
-
   const dispatch = useAppDispatch();
   const pathname = usePathname();
   const params = useParams();
   const searchParams = useSearchParams();
   const segment = useSelectedLayoutSegment();
   const adminMode = useSelector(({ globalState }: Store) => globalState.adminMode);
-  const [cacheManagerItems,setCacheManagerItems] = useState<boolean>(false)
+  const [cacheManagerItems, setCacheManagerItems] = useState<boolean>(false);
 
   const onClearCacheHandler = async ({ mode }: IClearCache): Promise<void> => {
     try {
@@ -37,45 +36,42 @@ const AuthenticationAdminItems = () => {
         params,
       });
 
-      dispatch(setAlert({
-        message: 'Cache cleared',
-        type: 'info',
-      }));
+      dispatch(
+        setAlert({
+          message: 'Cache cleared',
+          type: 'info',
+        }),
+      );
     } catch (error) {
       console.log(`onClearCacheHandler=> `, error);
-      dispatch(setAlert({
-        message: 'Error While Clearing Cache',
-        type: 'error',
-      }));
+      dispatch(
+        setAlert({
+          message: 'Error While Clearing Cache',
+          type: 'error',
+        }),
+      );
     }
   };
   //
   const onSetAdminModeHandler = async () => {
-    const adminModeCookie = await cookieChecker('adminMode')
+    const adminModeCookie = await cookieChecker('adminMode');
 
-    if (!adminModeCookie){
+    if (!adminModeCookie) {
       dispatch(setAdminMode(true));
       await cookieSetter({
         name: 'adminMode',
         value: 'true',
-      })
+      });
       dispatch(setAdminMode(true));
-
-    }else {
+    } else {
       dispatch(setAdminMode(false));
       await deleteCookie('adminMode');
-
     }
   };
 
-
   const applyFixes = async () => {
-    await fixSearchKeywords();
+    // await fixSearchKeywords();
   };
-
-
-
-
 
   return (
     <>
@@ -95,90 +91,84 @@ const AuthenticationAdminItems = () => {
       </div>
 
       <div className="menuItem">
-                            <span className={'menuItemContent'} onClick={onSetAdminModeHandler}>
-                   <div className={'icon-wrapper'}>
-                       <FontAwesomeIcon icon={adminMode ? faCheck : faShield} style={{ width: 25, height: 25 }} />
-                  </div>
-                Admin Mode
-            </span>
+        <span className={'menuItemContent'} onClick={onSetAdminModeHandler}>
+          <div className={'icon-wrapper'}>
+            <FontAwesomeIcon icon={adminMode ? faCheck : faShield} style={{ width: 25, height: 25 }} />
+          </div>
+          Admin Mode
+        </span>
       </div>
 
-
-      {adminMode &&
+      {adminMode && (
         <>
           <div className={'menuItem'}>
-            <span className={'menuItemContent'} onClick={()=>setCacheManagerItems(!cacheManagerItems)}>
+            <span className={'menuItemContent'} onClick={() => setCacheManagerItems(!cacheManagerItems)}>
               <div className={'icon-wrapper'}>
-                <FontAwesomeIcon icon={cacheManagerItems ? faChevronUp:faChevronDown} style={{ width: 25, height: 25 }} />
+                <FontAwesomeIcon icon={cacheManagerItems ? faChevronUp : faChevronDown} style={{ width: 25, height: 25 }} />
               </div>
               Cache Manager
-
             </span>
           </div>
-          {cacheManagerItems && <>
-
-            <div className={'menuItem'}>
-                        <span className={'menuItemContent'}
-                              onClick={() => onClearCacheHandler({ mode: 'only' })}>
-                            <div className={'icon-wrapper'}>
-                            <FontAwesomeIcon icon={faEraser} style={{ width: 25, height: 25 }} />
-                            </div>
-                            Clear Only This Page Caches
-                        </span>
-            </div>
-
-            <div className="menuItem">
-                        <span className={'menuItemContent'}
-                              // onClick={() => onClearCacheHandler({ mode: 'widgets' })}>
-                              onClick={async () => await clearACacheByTag('CWidgets')}>
-                               <div className={'icon-wrapper'}>
-                                   <FontAwesomeIcon icon={faEraser} style={{ width: 25, height: 25 }} />
-                               </div>
-                               Clear Widgets Caches
-                       </span>
-            </div>
-
-            <div className="menuItem">
-                   <span className={'menuItemContent'}
-                          onClick={async () => await clearACacheByTag(`CSettings`)}>
-                   <div className={'icon-wrapper'}>
-                       <FontAwesomeIcon icon={faEraser} style={{ width: 25, height: 25 }} />
+          {cacheManagerItems && (
+            <>
+              <div className={'menuItem'}>
+                <span className={'menuItemContent'} onClick={() => onClearCacheHandler({ mode: 'only' })}>
+                  <div className={'icon-wrapper'}>
+                    <FontAwesomeIcon icon={faEraser} style={{ width: 25, height: 25 }} />
                   </div>
-                Clear Settings Caches
-            </span>
-            </div>
+                  Clear Only This Page Caches
+                </span>
+              </div>
 
-            <div className="menuItem">
-                                            <span className={'menuItemContent'}
-                                                 // onClick={() => onClearCacheHandler({ mode: 'all' })}>
-                                                  onClick={async () => await clearACacheByTag(`cacheItem`)}>
-                   <div className={'icon-wrapper'}>
-                       <FontAwesomeIcon icon={faEraser} style={{ width: 25, height: 25 }} />
+              <div className="menuItem">
+                <span
+                  className={'menuItemContent'}
+                  // onClick={() => onClearCacheHandler({ mode: 'widgets' })}>
+                  onClick={async () => await clearACacheByTag('CWidgets')}
+                >
+                  <div className={'icon-wrapper'}>
+                    <FontAwesomeIcon icon={faEraser} style={{ width: 25, height: 25 }} />
                   </div>
-                Clear Entire Website Caches
-            </span>
-            </div>
+                  Clear Widgets Caches
+                </span>
+              </div>
 
+              <div className="menuItem">
+                <span className={'menuItemContent'} onClick={async () => await clearACacheByTag(`CSettings`)}>
+                  <div className={'icon-wrapper'}>
+                    <FontAwesomeIcon icon={faEraser} style={{ width: 25, height: 25 }} />
+                  </div>
+                  Clear Settings Caches
+                </span>
+              </div>
 
-
-          </>}
+              <div className="menuItem">
+                <span
+                  className={'menuItemContent'}
+                  // onClick={() => onClearCacheHandler({ mode: 'all' })}>
+                  onClick={async () => await clearACacheByTag(`cacheItem`)}
+                >
+                  <div className={'icon-wrapper'}>
+                    <FontAwesomeIcon icon={faEraser} style={{ width: 25, height: 25 }} />
+                  </div>
+                  Clear Entire Website Caches
+                </span>
+              </div>
+            </>
+          )}
 
           <div className="menuItem">
-                                            <span className={'menuItemContent'}
-                                                  onClick={() => applyFixes()}>
-                   <div className={'icon-wrapper'}>
-                       <FontAwesomeIcon icon={faWrench} style={{ width: 25, height: 25 }} />
-                  </div>
-               Apply Fixes
+            <span className={'menuItemContent'} onClick={() => applyFixes()}>
+              <div className={'icon-wrapper'}>
+                <FontAwesomeIcon icon={faWrench} style={{ width: 25, height: 25 }} />
+              </div>
+              Apply Fixes
             </span>
           </div>
-
-
         </>
-      }
+      )}
 
-
-      {pathname.includes('/chatroom/') &&
+      {pathname.includes('/chatroom/') && (
         <div className="menuItem">
           <button className={'menuItemContent'} onClick={() => socket.emit('correctChatroomsMessages')}>
             <div className={'icon-wrapper'}>
@@ -187,7 +177,7 @@ const AuthenticationAdminItems = () => {
             Correct Chatroom's Messages
           </button>
         </div>
-      }
+      )}
     </>
   );
 };

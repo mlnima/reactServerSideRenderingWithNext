@@ -12,10 +12,10 @@
     "dist/**"
   ],
   "dependencies": {
-    "@types/jest": "^29.5.3",
-    "mongoose": "^8.8.4",
+    "@types/jest": "^30.0.0",
+    "mongoose": "^8.16.2",
     "@repo/data-structures": "*",
-    "jest": "^29.6.1",
+    "jest": "^30.0.4",
     "jest-presets": "*",
     "eslint-config-custom": "*",
     "tsconfig": "*"

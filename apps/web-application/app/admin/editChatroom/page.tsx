@@ -29,6 +29,7 @@ const EditChatroom = ({}) => {
       );
       return;
     }
+
     setChatroomData(data.chatroom);
   };
 
@@ -61,7 +62,15 @@ const EditChatroom = ({}) => {
         );
         return;
       }
+
       if (searchParams.get('id')) {
+
+        dispatch(
+          setAlert({
+            message:'Updated',
+            type: 'Success',
+          }),
+        );
         setChatroomData(data.chatroom);
       } else {
         router.push(`/adminchatroom?id=${data.chatroom._id}`);

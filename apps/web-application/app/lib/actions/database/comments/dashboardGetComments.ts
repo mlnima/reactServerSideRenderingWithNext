@@ -25,7 +25,7 @@ const dashboardGetComments = async (
   totalCount: number;
 } | null>> => {
 
-  let connection;
+
 
   try {
     const { isAdmin } = await verifySession();
@@ -36,63 +36,48 @@ const dashboardGetComments = async (
       });
     }
 
-    // This is a separate server action and manages its own connection.
-    const { initialSettings } = unwrapResponse(
-      await getSettings(['initialSettings']) as unknown as ServerActionResponse<{
-        initialSettings: IInitialSettings | undefined;
-      }>,
-    );
+    await connectToDatabase('dashboardGetComments');
 
-    connection = await connectToDatabase('dashboardGetComments');
-    const session = await connection.startSession();
+    const decodedKeyword = keyword ? decodeURIComponent(keyword) : '';
+    const statusQuery = status ? [{ status }] : [];
+    const searchQuery = !decodedKeyword
+      ? []
+      : [{
+        $or: [
+          { author: new RegExp(decodedKeyword, 'i') },
+          { email: new RegExp(decodedKeyword, 'i') },
+          { body: new RegExp(decodedKeyword, 'i') }
+        ]
+      }];
 
-    try {
-      const decodedKeyword = keyword ? decodeURIComponent(keyword) : '';
-      const statusQuery = status ? [{ status }] : [];
-      const searchQuery = !decodedKeyword
-        ? []
-        : [{
-          $or: [
-            { author: new RegExp(decodedKeyword, 'i') },
-            { email: new RegExp(decodedKeyword, 'i') },
-            { body: new RegExp(decodedKeyword, 'i') }
-          ]
-        }];
+    const limit = size   || 20;
+    const findQuery = { $and: [...searchQuery, ...statusQuery] };
 
-      const limit = size || initialSettings?.contentSettings?.contentPerPage || 20;
-      const findQuery = { $and: [...searchQuery, ...statusQuery] };
+    let comments = await commentSchema
+      .find(findQuery, {}, {
+        skip: page ? limit * (page - 1) : 0,
+        limit: limit,
+        sort: sort || '-updatedAt',
+      })
+      .populate([
+        { path: 'author', select: { username: 1 } },
+        { path: 'onDocumentId', select: { title: 1, postType: 1 } },
+      ])
+      .lean<IComment[]>()
+      .exec();
 
-      let comments = await commentSchema
-        .find(findQuery, {}, {
-          skip: page ? limit * (page - 1) : 0,
-          limit: limit,
-          sort: sort || '-updatedAt',
-        })
-        .populate([
-          { path: 'author', select: { username: 1 } },
-          { path: 'onDocumentId', select: { title: 1, postType: 1 } },
-        ])
-        .session(session)
-        .lean<IComment[]>();
+    const totalCount = await commentSchema.countDocuments(findQuery ).exec();
 
-      const totalCount = await commentSchema
-        .countDocuments(findQuery, { session });
+    const serializedData = JSON.parse(JSON.stringify({
+      comments ,
+      totalCount,
+    })) ;
 
-      const serializedData = {
-        comments: JSON.parse(JSON.stringify(comments)),
-        totalCount,
-      };
+    comments = null;
 
-      // Clean up reference
-      comments = null;
-
-      return successResponse({
-        data: serializedData,
-      });
-
-    } finally {
-      await session.endSession();
-    }
+    return successResponse({
+      data: serializedData,
+    });
 
   } catch (error) {
     console.error('dashboardGetComments Error =>', error);

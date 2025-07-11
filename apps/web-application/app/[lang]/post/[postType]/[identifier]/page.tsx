@@ -18,6 +18,7 @@ import RelatedPostsRenderer from './components/RelatedPostsRenderer/RelatedPosts
 import WidgetsRenderer from '@components/widgets/widgetRenderer/WidgetsRenderer';
 import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 import dynamic from 'next/dynamic';
+import ViewPostClient from './components/ViewPostClient/ViewPostClient';
 const VideoTypePostPage = dynamic(() => import('./components/VideoTypePostPage/VideoTypePostPage'));
 const ArticleTypePostPage = dynamic(() => import('./components/ArticleTypePostPage/ArticleTypePostPage'));
 const PromotionTypePostPage = dynamic(() => import('./components/PromotionTypePostPage/PromotionTypePostPage'));
@@ -106,6 +107,7 @@ const PostPage = async (props: IPageProps) => {
           position={'postPage'}
         />
       </div>
+      <ViewPostClient _id={data.post._id}/>
     </>
   );
 };

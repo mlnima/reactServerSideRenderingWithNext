@@ -8,6 +8,7 @@ import { IInitialSettings , IContentSettings } from './src/settings/InitialSetti
 import { UgcSettings } from './src/settings/UgcSettings';
 import { MembershipSettings } from './src/settings/MembershipSettings';
 import { IPageSettings } from './src/settings/PageSettings';
+import { IFile } from './src/IFile';
 import { AdminPanelComments } from './src/storeTypes/AdminPanelComments';
 import { AdminPanelFileManager } from './src/storeTypes/AdminPanelFileManager';
 import { AdminPanelForms } from './src/storeTypes/AdminPanelForms';
@@ -80,6 +81,7 @@ export type {
   IUserRelation,
   IUserEngagement,
   IForm,
+  IFile,
   TProfileImage,
   IRegisterNewUser,
   IMemberLogin,

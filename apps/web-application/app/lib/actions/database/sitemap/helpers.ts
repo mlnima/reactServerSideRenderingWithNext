@@ -1,206 +1,190 @@
 import { pagesTemplateGenerator, sitemapItemTemplate, urlSetXmlTemplate, urlXmlTemplate } from './templates';
-import { searchKeywordSchema,pageSchema,postSchema,metaSchema } from '@repo/db';
-import { writeFile,unlink ,readdir  } from 'fs/promises';
+import { searchKeywordSchema, pageSchema, postSchema, metaSchema } from '@repo/db';
+import { writeFile, unlink, readdir } from 'fs/promises';
 import { MetasType } from '@repo/typescript-types';
-import moment from "moment/moment";
+import moment from 'moment/moment';
 import path from 'path';
 
-import {convertMetasTypeToSingular} from "@repo/utils";
+import { convertMetasTypeToSingular } from '@repo/utils';
+
 const sitemapItemsPerPage = 500;
 
 const sitemapOutputPath = path.join(process.cwd(), 'public');
 
-
-export const keywordXmlTemplateGenerator = (keywords:any[]) => {
+export const keywordXmlTemplateGenerator = (keywords: any[]) => {
   return keywords.reduce((finalXml, currentKeyword) => {
-    const keywordsUrl = `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/search/${currentKeyword?.name}`
-    const date = new Date (currentKeyword?.updatedAt || currentKeyword?.createdAt|| currentKeyword._id.getTimestamp() || Date.now() )
-    finalXml += urlXmlTemplate(keywordsUrl,date.toISOString(),'hourly','1')
-    return finalXml
-  }, '')
+    const keywordsUrl = `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/search/${currentKeyword?.name}`;
+    const date = new Date(currentKeyword?.updatedAt || currentKeyword?.createdAt || currentKeyword._id.getTimestamp() || Date.now());
+    finalXml += urlXmlTemplate(keywordsUrl, date.toISOString(), 'hourly', '1');
+    return finalXml;
+  }, '');
 };
-export const postXmlTemplateGenerator = (posts:any[]) => {
+export const postXmlTemplateGenerator = (posts: any[]) => {
   return posts.reduce((finalXml, currentPost) => {
     let postUrl = process.env.NEXT_PUBLIC_PRODUCTION_URL + `/post/${currentPost?.postType}/${currentPost._id}`;
-    let lastModify = new Date(currentPost.updatedAt || currentPost?.createdAt || currentPost._id.getTimestamp() || Date.now() );
-    finalXml += urlXmlTemplate(postUrl,lastModify.toISOString(),'hourly','1')
-    return finalXml
-  }, '')
+    let lastModify = new Date(currentPost.updatedAt || currentPost?.createdAt || currentPost._id.getTimestamp() || Date.now());
+    finalXml += urlXmlTemplate(postUrl, lastModify.toISOString(), 'hourly', '1');
+    return finalXml;
+  }, '');
 };
-export const metaXmlTemplateGenerator = (metaData:any[],priority:string,changeFreq:string,metaUrlFormat:string) => {
-  return metaData.reduce((sitemap,currentMeta)=>{
-    const metaUrl = `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${metaUrlFormat}/${currentMeta._id}`
-    const date = new Date(currentMeta.updatedAt || currentMeta.createdAt || currentMeta._id.getTimestamp() || Date.now())
-    sitemap += urlXmlTemplate(metaUrl,date.toISOString(),changeFreq,priority)
-    return sitemap
-  },'' )
+export const metaXmlTemplateGenerator = (metaData: any[], priority: string, changeFreq: string, metaUrlFormat: string) => {
+  return metaData.reduce((sitemap, currentMeta) => {
+    const metaUrl = `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${metaUrlFormat}/${currentMeta._id}`;
+    const date = new Date(currentMeta.updatedAt || currentMeta.createdAt || currentMeta._id.getTimestamp() || Date.now());
+    sitemap += urlXmlTemplate(metaUrl, date.toISOString(), changeFreq, priority);
+    return sitemap;
+  }, '');
 };
 
-export const searchSitemapsPageCalculator =async () => {
+export const searchSitemapsPageCalculator = async () => {
   try {
-    const amountOfKeywords = await searchKeywordSchema.countDocuments({count: {$gt: 0}})
-    const maxPage = amountOfKeywords <= sitemapItemsPerPage ? 1 : Math.ceil(amountOfKeywords / sitemapItemsPerPage )
-    return  maxPage > 1 ? [...Array(maxPage).keys()] : [0]
-
-  }catch (error){
-    console.log(`searchSitemapsPageCalculator=> `,error)
-    return [0]
+    const amountOfKeywords = await searchKeywordSchema.countDocuments({ count: { $gt: 0 } }).exec();
+    const maxPage = amountOfKeywords <= sitemapItemsPerPage ? 1 : Math.ceil(amountOfKeywords / sitemapItemsPerPage);
+    return maxPage > 1 ? [...Array(maxPage).keys()] : [0];
+  } catch (error) {
+    console.log(`searchSitemapsPageCalculator=> `, error);
+    return [0];
   }
-
-}
-export const searchSitemapsLinkForTheRoot = async() => {
+};
+export const searchSitemapsLinkForTheRoot = async () => {
   try {
-    let finalXML = ''
-    const amountOfPages = await searchSitemapsPageCalculator()
+    let finalXML = '';
+    const amountOfPages = await searchSitemapsPageCalculator();
     const currentDayDate = new Date();
     for await (const currentPage of amountOfPages) {
-      const page = currentPage + 1
+      const page = currentPage + 1;
       finalXML += sitemapItemTemplate(
         `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemap-tax-search-${page}.xml`,
-        currentDayDate.toISOString()
-      )
+        currentDayDate.toISOString(),
+      );
     }
-    return finalXML
+    return finalXML;
   } catch (error) {
-    console.error(error)
-    return ''
+    console.error(error);
+    return '';
   }
-
-
-}
-export const searchKeywordsSitemapsGenerator = async() => {
+};
+export const searchKeywordsSitemapsGenerator = async () => {
   try {
-    const amountOfPages = await searchSitemapsPageCalculator()
+    const amountOfPages = await searchSitemapsPageCalculator();
     for await (const currentPage of amountOfPages) {
-      const page = currentPage + 1
+      const page = currentPage + 1;
       const skip = sitemapItemsPerPage * (page - 1) || 0;
 
-      const keywords = await searchKeywordSchema.find({count: {$gt: 0}}).limit(sitemapItemsPerPage).skip(skip)
-      await writeFile(
-        `${sitemapOutputPath}/sitemap-tax-search-${page}.xml`,
-        urlSetXmlTemplate(keywordXmlTemplateGenerator(keywords)),
-        {
-          encoding: "utf8",
-          flag: "w",
-        })
+      const keywords = await searchKeywordSchema
+        .find({ count: { $gt: 0 } })
+        .limit(sitemapItemsPerPage)
+        .skip(skip)
+        .exec();
+      await writeFile(`${sitemapOutputPath}/sitemap-tax-search-${page}.xml`, urlSetXmlTemplate(keywordXmlTemplateGenerator(keywords)), {
+        encoding: 'utf8',
+        flag: 'w',
+      });
     }
-
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
-
-}
-export const mongoDocumentDateCorrector = (documentDate:Date, documentId:any):Date => {
+};
+export const mongoDocumentDateCorrector = (documentDate: Date, documentId: any): Date => {
   try {
-    return documentDate ?? documentId?.getTimestamp()
+    return documentDate ?? documentId?.getTimestamp();
   } catch (error) {
-    console.log(error)
-    return documentDate
+    console.log(error);
+    return documentDate;
   }
-
-}
-export const metasSitemapsLinkForRoot = async(metaType:MetasType) => {
+};
+export const metasSitemapsLinkForRoot = async (metaType: MetasType) => {
   try {
-    let finalXML = ''
-    const findMetaQuery = {$and: [{count: {$gt: 0}}, {status: 'published'}, {type: metaType}]}
-    const metasCount = await metaSchema.countDocuments(findMetaQuery)
+    let finalXML = '';
+    const findMetaQuery = { $and: [{ count: { $gt: 0 } }, { status: 'published' }, { type: metaType }] };
+    const metasCount = await metaSchema.countDocuments(findMetaQuery).exec();
     const currentDayDate = new Date();
-    const maxPage = metasCount <= 500 ? 1 : Math.ceil(metasCount / 500)
-    const amountOfPages = maxPage > 1 ? [...Array(maxPage).keys()] : [0]
+    const maxPage = metasCount <= 500 ? 1 : Math.ceil(metasCount / 500);
+    const amountOfPages = maxPage > 1 ? [...Array(maxPage).keys()] : [0];
 
     for await (const currentPage of amountOfPages) {
-      const page = currentPage + 1
+      const page = currentPage + 1;
       finalXML += sitemapItemTemplate(
         `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemap-tax-${metaType}-${page}.xml`,
-        currentDayDate.toISOString()
-      )
+        currentDayDate.toISOString(),
+      );
     }
-    return finalXML
+    return finalXML;
   } catch (error) {
-    console.log(error)
-    return ''
+    console.log(error);
+    return '';
   }
-
-}
+};
 
 export const metaSitemapGenerator = async () => {
-
   try {
-    const metaTypes = ['categories', 'tags', 'actors']
+    const metaTypes = ['categories', 'tags', 'actors'];
 
     for await (const metaType of metaTypes) {
-      const findMetaQuery = {$and: [{count: {$gt: 0}}, {status: 'published'}, {type: metaType}]}
-      const metasCount = await metaSchema.countDocuments(findMetaQuery)
-      const maxPage = metasCount <= 500 ? 1 : Math.ceil(metasCount / 500)
-      const amountOfPages = maxPage > 1 ? [...Array(maxPage).keys()] : [0]
+      const findMetaQuery = { $and: [{ count: { $gt: 0 } }, { status: 'published' }, { type: metaType }] };
+      const metasCount = await metaSchema.countDocuments(findMetaQuery).exec();
+      const maxPage = metasCount <= 500 ? 1 : Math.ceil(metasCount / 500);
+      const amountOfPages = maxPage > 1 ? [...Array(maxPage).keys()] : [0];
 
       for await (const currentPage of amountOfPages) {
-        const page = currentPage + 1
-        const metas = await metaSchema.find(findMetaQuery).limit(500).skip(500 * (page - 1))
+        const page = currentPage + 1;
+        const metas = await metaSchema
+          .find(findMetaQuery)
+          .limit(500)
+          .skip(500 * (page - 1))
+          .exec();
         await writeFile(
           `${sitemapOutputPath}/sitemap-tax-${metaType}-${page}.xml`,
-          urlSetXmlTemplate(metaXmlTemplateGenerator(metas , '1', 'hourly', convertMetasTypeToSingular(metaType))),
+          urlSetXmlTemplate(metaXmlTemplateGenerator(metas, '1', 'hourly', convertMetasTypeToSingular(metaType))),
           {
-            encoding: "utf8",
-            flag: "w",
-          })
+            encoding: 'utf8',
+            flag: 'w',
+          },
+        );
       }
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
 
-export const getRangeOfTheDates = (firstCreatedPostDate:string, lastUpdatedPostDate:string) => {
+export const getRangeOfTheDates = (firstCreatedPostDate: string, lastUpdatedPostDate: string) => {
   try {
     let dateArray = [];
     let beginDate = moment(new Date(firstCreatedPostDate + '/01'));
     let endDate = moment(new Date(lastUpdatedPostDate + '/01')).endOf('month');
-    dateArray.push(moment(beginDate).format('YYYY-MM'))
+    dateArray.push(moment(beginDate).format('YYYY-MM'));
 
     while (beginDate < endDate) {
-      dateArray.push(moment(beginDate).add(1, 'M').format('YYYY-MM'))
+      dateArray.push(moment(beginDate).add(1, 'M').format('YYYY-MM'));
       beginDate = moment(beginDate).add(1, 'M');
     }
 
     return [...new Set(dateArray)].reverse();
   } catch (err) {
-    console.log('getRangeOfTheDates :', err)
+    console.log('getRangeOfTheDates :', err);
   }
-
-}
+};
 
 export const postSitemapLinkForTheRoot = async () => {
   try {
-    const oldestPost = await postSchema.findOne({status: 'published'})
-      .select(['createdAt'])
-      .sort({'_id': 1})
-      
+    const oldestPost = await postSchema.findOne({ status: 'published' }).select(['createdAt']).sort({ _id: 1 }).exec();
 
-    const lastPost = await postSchema.findOne({status: 'published'})
-      .select(['createdAt'])
-      .sort({'_id': -1})
-      
-
+    const lastPost = await postSchema.findOne({ status: 'published' }).select(['createdAt']).sort({ _id: -1 }).exec();
 
     const startDate = mongoDocumentDateCorrector(oldestPost?.createdAt, oldestPost?._id);
     const endDate = mongoDocumentDateCorrector(lastPost?.createdAt, lastPost?._id);
 
-    const firstPostDate = `${startDate.getFullYear()}/${startDate.getMonth() + 1}`
-    const lastPostDate = `${endDate.getFullYear()}/${endDate.getMonth() + 1}`
+    const firstPostDate = `${startDate.getFullYear()}/${startDate.getMonth() + 1}`;
+    const lastPostDate = `${endDate.getFullYear()}/${endDate.getMonth() + 1}`;
 
-    const rangeOfTheMonths = firstPostDate === lastPostDate ?
-      [firstPostDate] :
-      getRangeOfTheDates(firstPostDate, lastPostDate)
+    const rangeOfTheMonths = firstPostDate === lastPostDate ? [firstPostDate] : getRangeOfTheDates(firstPostDate, lastPostDate);
 
+    let finalXML = '';
 
-
-
-    let finalXML = ''
-
-    if (!rangeOfTheMonths){
-      console.log(`rangeOfTheMonths is missing`,)
-      return finalXML
+    if (!rangeOfTheMonths) {
+      console.log(`rangeOfTheMonths is missing`);
+      return finalXML;
     }
 
     for await (const month of rangeOfTheMonths) {
@@ -209,119 +193,94 @@ export const postSitemapLinkForTheRoot = async () => {
       const endDate = moment(startDate).endOf('month');
 
       const postQuery = {
-        $and: [
-          {'createdAt': {$gte: startDate}},
-          {'createdAt': {$lte: endDate}},
-          {status: 'published'}
-        ]
-      }
+        $and: [{ createdAt: { $gte: startDate } }, { createdAt: { $lte: endDate } }, { status: 'published' }],
+      };
 
-      const postCountInThisMonth = await postSchema.countDocuments(postQuery)
+      const postCountInThisMonth = await postSchema.countDocuments(postQuery).exec();
 
+      if (postCountInThisMonth) {
+        const maxPage = postCountInThisMonth <= 500 ? 1 : Math.ceil(postCountInThisMonth / 500);
+        const amountOfPages = maxPage > 1 ? [...Array(maxPage).keys()] : [0];
 
-      if (postCountInThisMonth){
-        const maxPage = postCountInThisMonth <= 500 ? 1 : Math.ceil(postCountInThisMonth / 500)
-        const amountOfPages = maxPage > 1 ? [...Array(maxPage).keys()] : [0]
-
-        const lastDocumentUpdatedDate = await postSchema.findOne(postQuery)
-          .select(['createdAt'])
-          .sort('-_id')
+        const lastDocumentUpdatedDate = await postSchema.findOne(postQuery).select(['createdAt']).sort('-_id').exec();
 
         for await (const currentPage of amountOfPages) {
           try {
-
-            const page = currentPage + 1
+            const page = currentPage + 1;
             const skip = 500 * (page - 1) || 0;
-            const posts = await postSchema.find(postQuery).limit(500).skip(skip)
+            const posts = await postSchema.find(postQuery).limit(500).skip(skip).exec();
             const lastUpdate = new Date(mongoDocumentDateCorrector(lastDocumentUpdatedDate.createdAt, lastDocumentUpdatedDate._id));
 
-            const targetUrl =  `/sitemap-pt-post-${fixedMonth}-page${page}.xml`
-            const absoluteUrl =  `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${targetUrl}`
+            const targetUrl = `/sitemap-pt-post-${fixedMonth}-page${page}.xml`;
+            const absoluteUrl = `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${targetUrl}`;
 
             finalXML += sitemapItemTemplate(
               // `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemap-pt-post-${fixedMonth}-${page}.xml`,
               absoluteUrl,
-              lastUpdate.toISOString()
-            )
+              lastUpdate.toISOString(),
+            );
 
             //here
-            await writeFile(
-              `${sitemapOutputPath}/${targetUrl}`,
-              urlSetXmlTemplate(postXmlTemplateGenerator(posts)),
-              {
-                encoding: "utf8",
-                flag: "w",
-              })
-
-
+            await writeFile(`${sitemapOutputPath}/${targetUrl}`, urlSetXmlTemplate(postXmlTemplateGenerator(posts)), {
+              encoding: 'utf8',
+              flag: 'w',
+            });
           } catch (error) {
-            console.log(error)
+            console.log(error);
           }
-
         }
 
         //**
       }
     }
-    return finalXML
-  } catch (error) {
-
-  }
-
-}
+    return finalXML;
+  } catch (error) {}
+};
 
 export const pagesSitemapsLinksForRoot = async () => {
   try {
-    let finalXML = ''
-    const findPageQuery = {status:'published'}
-    const pagesCount = await pageSchema.countDocuments(findPageQuery)
+    let finalXML = '';
+    const findPageQuery = { status: 'published' };
+    const pagesCount = await pageSchema.countDocuments(findPageQuery).exec();
     const currentDayDate = new Date();
-    const maxPage = pagesCount <= 500 ? 1 : Math.ceil(pagesCount / 500)
-    const amountOfPages = maxPage > 1 ? [...Array(maxPage).keys()] : [0]
+    const maxPage = pagesCount <= 500 ? 1 : Math.ceil(pagesCount / 500);
+    const amountOfPages = maxPage > 1 ? [...Array(maxPage).keys()] : [0];
 
     for await (const currentPage of amountOfPages) {
-      const page = currentPage + 1
+      const page = currentPage + 1;
       finalXML += sitemapItemTemplate(
         `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemap-pt-page-${page}.xml`,
-        currentDayDate.toISOString()
-      )
+        currentDayDate.toISOString(),
+      );
     }
-    return finalXML
-  }catch (err){
-    console.error(err)
-
+    return finalXML;
+  } catch (err) {
+    console.error(err);
   }
-}
-
+};
 
 export const pagesSitemapGenerator = async () => {
   try {
-    const pages = await pageSchema.find({status: 'published'}) || []
-    await writeFile(
-      `${sitemapOutputPath}/sitemap-pt-page-1.xml`,
-     await pagesTemplateGenerator(pages),
-      {
-        encoding: "utf8",
-        flag: "w",
-      })
-
+    const pages = (await pageSchema.find({ status: 'published' }).exec()) || [];
+    await writeFile(`${sitemapOutputPath}/sitemap-pt-page-1.xml`, await pagesTemplateGenerator(pages), {
+      encoding: 'utf8',
+      flag: 'w',
+    });
   } catch (error) {
-    console.error(error)
-
+    console.error(error);
   }
-}
-
+};
 
 export const cleanupOldPublicFolder = async () => {
   try {
     const files = await readdir(sitemapOutputPath);
-    const xmlFiles = files.filter(file => path.extname(file) === '.xml' || file === 'robots.txt' );
+    const xmlFiles = files.filter((file) => path.extname(file) === '.xml' || file === 'robots.txt');
 
-    const deletePromises = xmlFiles.map( (file) => {
+    const deletePromises = xmlFiles.map((file) => {
       return unlink(path.join(sitemapOutputPath, file));
     });
     await Promise.all(deletePromises);
   } catch (error) {
-    console.log(`Error on cleanupOldPublicFolder=> `,error)
+    console.log(`Error on cleanupOldPublicFolder=> `, error);
   }
-}
+};

@@ -6,7 +6,6 @@ import { errorResponse, successResponse } from '@lib/actions/response';
 import { IPost } from '@repo/typescript-types';
 
 const dashboardCreateNewPost = async (newPost: IPost) => {
-  let connection;
   try {
     const { isAdmin } = await verifySession();
 
@@ -16,34 +15,27 @@ const dashboardCreateNewPost = async (newPost: IPost) => {
       });
     }
 
-    connection = await connectToDatabase('dashboardCreateNewPost');
-    const session = await connection.startSession();
+    await connectToDatabase('dashboardCreateNewPost');
+    const editedNewPost = {
+      ...newPost,
+      tags: newPost?.tags ? await _updateSaveMetas(newPost.tags) : [],
+      categories: newPost?.categories ? await _updateSaveMetas(newPost.categories) : [],
+      actors: newPost?.actors ? await _updateSaveMetas(newPost.actors) : [],
+    };
 
-    try {
-      const editedNewPost = {
-        ...newPost,
-        tags: newPost?.tags ? await _updateSaveMetas(newPost.tags, { session }) : [],
-        categories: newPost?.categories ? await _updateSaveMetas(newPost.categories, { session }) : [],
-        actors: newPost?.actors ? await _updateSaveMetas(newPost.actors, { session }) : [],
-      };
+    const newPostDataToSave = new postSchema(editedNewPost);
+    let savedPost = await newPostDataToSave.save();
 
-      const newPostDataToSave = new postSchema(editedNewPost);
-      let savedPost = await newPostDataToSave.save({ session });
+    const serializedData = {
+      savedPostData: JSON.parse(JSON.stringify(savedPost)),
+      message: 'Post Has Been Saved',
+    };
 
-      const serializedData = {
-        savedPostData: JSON.parse(JSON.stringify(savedPost)),
-        message: 'Post Has Been Saved',
-      };
+    savedPost = null;
 
-      savedPost = null;
-
-      return successResponse({
-        data: serializedData,
-      });
-
-    } finally {
-      await session.endSession();
-    }
+    return successResponse({
+      data: serializedData,
+    });
   } catch (error) {
     console.log(`dashboardCreateNewPost error=> `, error);
 

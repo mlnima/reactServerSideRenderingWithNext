@@ -33,32 +33,25 @@ const createSafeSearchQuery = (keyword: string, field: string) => {
 const shouldSaveKeyword = (keyword: string): boolean => {
   if (!keyword || keyword.length < 3) return false;
 
-  const obviousMaliciousPatterns = [
-    /^[\d\s\+\-\*\/\(\)\.]+$/,
-    /waitfor.*delay/i,
-    /union.*select/i,
-    /drop.*table/i,
-  ];
+  const obviousMaliciousPatterns = [/^[\d\s\+\-\*\/\(\)\.]+$/, /waitfor.*delay/i, /union.*select/i, /drop.*table/i];
 
-  return !obviousMaliciousPatterns.some(pattern => pattern.test(keyword));
+  return !obviousMaliciousPatterns.some((pattern) => pattern.test(keyword));
 };
 
-const _saveSearchedKeyword = async (keyword: string, postsCount: number, session) => {
+const _saveSearchedKeyword = async (keyword: string, postsCount: number) => {
   if (!shouldSaveKeyword(keyword)) {
     return;
   }
 
   try {
-    const existingKeyword = await searchKeywordSchema
-      .findOne({ name: keyword.toLowerCase() })
-      .session(session);
+    const existingKeyword = await searchKeywordSchema.findOne({ name: keyword.toLowerCase() }).exec();
 
     if (!existingKeyword) {
       const dataToSave = new searchKeywordSchema({
         name: keyword.toLowerCase(),
         count: postsCount,
       });
-      await dataToSave.save({ session });
+      await dataToSave.save();
       console.log(`search keyword ${keyword.toLowerCase()} saved`);
       return;
     }
@@ -69,7 +62,7 @@ const _saveSearchedKeyword = async (keyword: string, postsCount: number, session
     if (existingKeyword.updatedAt < oneWeekAgo) {
       console.log(`updating search keyword count`);
       existingKeyword.count = postsCount;
-      await existingKeyword.save({ session });
+      await existingKeyword.save();
     }
     console.log(`search keyword ${keyword.toLowerCase()} updated`);
   } catch (error) {
@@ -77,19 +70,16 @@ const _saveSearchedKeyword = async (keyword: string, postsCount: number, session
   }
 };
 
-export const getSearch = async (
-  {
-    keyword,
-    page = 1,
-    locale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE,
-    sort = '-updatedAt -createdAt',
-    returnTotalCount = true,
-    returnPosts = true,
-    returnMetas = true,
-  }: IGetSearch) => {
+export const getSearch = async ({
+  keyword,
+  page = 1,
+  locale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE,
+  sort = '-updatedAt -createdAt',
+  returnTotalCount = true,
+  returnPosts = true,
+  returnMetas = true,
+}: IGetSearch) => {
   'use cache';
-
-  let connection;
 
   try {
     if (!keyword) return null;
@@ -104,86 +94,67 @@ export const getSearch = async (
       });
     }
 
-    connection = await connectToDatabase('getSearch');
+    await connectToDatabase('getSearch');
 
-    // Create session for better resource management
-    const session = await connection.startSession();
+    const targetKeyword = sanitized;
+    const defaultLocale = getDefaultLocale();
+    const locales = getLocales();
+    const size = 20;
 
-    try {
-      const targetKeyword = sanitized;
-      const defaultLocale = getDefaultLocale();
-      const locales = getLocales();
-      const size = 20;
+    let postsTranslationsSearchQuery = [];
+    let metasTranslationsSearchQuery = [];
 
-      let postsTranslationsSearchQuery = [];
-      let metasTranslationsSearchQuery = [];
-
-      if (locale !== defaultLocale) {
-        for (const locale of locales) {
-          metasTranslationsSearchQuery.push(
-            createSafeSearchQuery(targetKeyword, `translations.${locale}.name`)
-          );
-        }
-        for (const locale of locales) {
-          postsTranslationsSearchQuery.push(
-            createSafeSearchQuery(targetKeyword, `translations.${locale}.title`)
-          );
-          postsTranslationsSearchQuery.push(
-            createSafeSearchQuery(targetKeyword, `translations.${locale}.description`)
-          );
-        }
+    if (locale !== defaultLocale) {
+      for (const locale of locales) {
+        metasTranslationsSearchQuery.push(createSafeSearchQuery(targetKeyword, `translations.${locale}.name`));
       }
+      for (const locale of locales) {
+        postsTranslationsSearchQuery.push(createSafeSearchQuery(targetKeyword, `translations.${locale}.title`));
+        postsTranslationsSearchQuery.push(createSafeSearchQuery(targetKeyword, `translations.${locale}.description`));
+      }
+    }
 
-      const postSearchQuery = {
-        $and: [
-          {
-            $or: [
-              createSafeSearchQuery(targetKeyword, 'title'),
-              createSafeSearchQuery(targetKeyword, 'description'),
-              ...postsTranslationsSearchQuery,
-            ],
-          },
-          { status: 'published' },
-        ],
-      };
+    const postSearchQuery = {
+      $and: [
+        {
+          $or: [
+            createSafeSearchQuery(targetKeyword, 'title'),
+            createSafeSearchQuery(targetKeyword, 'description'),
+            ...postsTranslationsSearchQuery,
+          ],
+        },
+        { status: 'published' },
+      ],
+    };
 
-      const metasSearchQuery = {
-        $and: [
-          {
-            $or: [
-              createSafeSearchQuery(targetKeyword, 'name'),
-              ...metasTranslationsSearchQuery,
-            ],
-          },
-          { status: 'published' },
-        ],
-      };
+    const metasSearchQuery = {
+      $and: [
+        {
+          $or: [createSafeSearchQuery(targetKeyword, 'name'), ...metasTranslationsSearchQuery],
+        },
+        { status: 'published' },
+      ],
+    };
 
-      // Execute posts query with session
-      let posts = returnPosts ? await postSchema
-        .find(postSearchQuery, postFieldRequestForCards, {
-          limit: size,
-          skip: size * page - size,
-          sort,
-        })
-        .select([...postFieldRequestForCards, `translations.${locale}.title`])
-        .session(session)
-        .lean<IPost[]>() : [];
+    let posts = returnPosts
+      ? await postSchema
+          .find(postSearchQuery, postFieldRequestForCards, {
+            limit: size,
+            skip: size * page - size,
+            sort,
+          })
+          .select([...postFieldRequestForCards, `translations.${locale}.title`])
 
-      // Execute count query with session
-      const totalCount = returnTotalCount
-        ? await postSchema.countDocuments(postSearchQuery).session(session)
-        : 0;
+          .lean<IPost[]>()
+          .exec()
+      : [];
 
-      // Execute metas query with session
-      let metas = returnMetas ? await metaSchema
-        .find(metasSearchQuery, {}, { sort })
-        .limit(size)
-        .session(session)
-        .lean<IMeta[]>() : [];
+    const totalCount = returnTotalCount ? await postSchema.countDocuments(postSearchQuery).exec() : 0;
 
-      const { actors, categories, tags } = returnMetas
-        ? (metas || []).reduce(
+    let metas = returnMetas ? await metaSchema.find(metasSearchQuery, {}, { sort }).limit(size).lean<IMeta[]>().exec() : [];
+
+    const { actors, categories, tags } = returnMetas
+      ? (metas || []).reduce(
           (acc: Record<string, IMeta[]>, meta: IMeta) => {
             const type = meta.type;
             acc[type] = [...(acc[type] || []), meta];
@@ -191,42 +162,33 @@ export const getSearch = async (
           },
           { actors: [], categories: [], tags: [] },
         )
-        : { actors: [], categories: [], tags: [] };
+      : { actors: [], categories: [], tags: [] };
 
-      // Save search keyword with session
-      if (totalCount > 0) {
-        await _saveSearchedKeyword(targetKeyword, totalCount, session);
-      }
-
-      // Serialize data efficiently
-      const serializedPosts = JSON.parse(JSON.stringify(posts));
-      const serializedActors = JSON.parse(JSON.stringify(actors));
-      const serializedCategories = JSON.parse(JSON.stringify(categories));
-      const serializedTags = JSON.parse(JSON.stringify(tags));
-
-      // Clean up references to prevent memory leaks
-      posts = null;
-      metas = null;
-
-     // const cacheKey = `CSearch-${targetKeyword}-p${page}-s${sort}-l${locale}`;
-      const cacheKey = `CSearch-${targetKeyword}-p${page}`;
-      cacheTag('cacheItem', 'CSearch', cacheKey);
-
-      return successResponse({
-        data: {
-          posts: serializedPosts,
-          totalCount,
-          actors: serializedActors,
-          categories: serializedCategories,
-          tags: serializedTags,
-        },
-      });
-
-    } finally {
-      // Always end the session to free resources
-      await session.endSession();
+    if (totalCount > 0) {
+      await _saveSearchedKeyword(targetKeyword, totalCount);
     }
 
+    const serializedData = JSON.parse(
+      JSON.stringify({
+        posts,
+        totalCount,
+        actors,
+        categories,
+        tags,
+      }),
+    );
+
+    // Clean up references to prevent memory leaks
+    posts = null;
+    metas = null;
+
+    // const cacheKey = `CSearch-${targetKeyword}-p${page}-s${sort}-l${locale}`;
+    const cacheKey = `CSearch-${targetKeyword}-p${page}`;
+    cacheTag('cacheItem', 'CSearch', cacheKey);
+
+    return successResponse({
+      data: serializedData,
+    });
   } catch (error) {
     console.error(`getSearch Error=> `, error);
     return errorResponse({
@@ -484,8 +446,6 @@ export default getSearch;
 // };
 
 
-
-
 // 'use server';
 // import { metaSchema, postSchema, searchKeywordSchema } from '@repo/db';
 // import { getDefaultLocale, getLocales } from '@repo/utils';
@@ -642,12 +602,6 @@ export default getSearch;
 // };
 //
 // export default getSearch;
-
-
-
-
-
-
 
 
 // // Lightweight input sanitization - only block obvious attacks

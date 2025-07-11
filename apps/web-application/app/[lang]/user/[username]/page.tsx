@@ -19,7 +19,6 @@ const userPage = async (props: IPageProps) => {
   const locale = localDetector(params.lang);
   const dictionary = await getDictionary(locale);
 
-
   // const { userPageSettings } = unwrapResponse(
   //   await getSettings(['userPageSettings']) as unknown as ServerActionResponse<{
   //     userPageSettings: IPageSettings | undefined;
@@ -30,8 +29,8 @@ const userPage = async (props: IPageProps) => {
 
   // const initialUserPageData = await getInitialUserPageData(username);
 
-  const initialUserPageDataResponse = await getInitialUserPageData(username) as ServerActionResponse<{
-    initialUserPageData: User,
+  const initialUserPageDataResponse = (await getInitialUserPageData(username)) as ServerActionResponse<{
+    initialUserPageData: User;
   }>;
 
   if (!initialUserPageDataResponse?.success || !initialUserPageDataResponse?.data) {
@@ -40,59 +39,42 @@ const userPage = async (props: IPageProps) => {
 
   const { initialUserPageData } = initialUserPageDataResponse?.data;
 
-
   const { success, data } = await getPosts({
     locale,
     page: 1,
     status: 'published',
     author: initialUserPageData._id,
-    count: 8,
+    size: 8,
     sort: 'views',
     returnTotalCount: false,
   });
-
 
   if (!success || !data) {
     return <Soft404 dictionary={dictionary} />;
   }
 
-
-
   const { posts } = data;
 
   return (
     <>
-      {(initialUserPageData) &&
+      {initialUserPageData && (
         <>
-
-          <UserPageContent
-            initialUserPageData={initialUserPageData}
-            dictionary={dictionary}
-            locale={locale}
-          />
+          <UserPageContent initialUserPageData={initialUserPageData} dictionary={dictionary} locale={locale} />
         </>
-      }
+      )}
 
-      {(posts && posts?.length > 0) ?
+      {posts && posts?.length > 0 ? (
         <div className="postsContainer">
-          <PostsCardsRenderer
-            locale={locale}
-            previewMode={true}
-            dictionary={dictionary}
-            posts={posts}
-          />
+          <PostsCardsRenderer locale={locale} previewMode={true} dictionary={dictionary} posts={posts} />
         </div>
-        : <div className={'noPosts'}>
+      ) : (
+        <div className={'noPosts'}>
           <div className={'profileNoPostsYet'}>
             <FontAwesomeIcon icon={faCamera} />
           </div>
-          <h2 className="profile-no-posts-title">
-            {dictionary?.['Nothing Here'] || 'Nothing Here'}
-          </h2>
+          <h2 className="profile-no-posts-title">{dictionary?.['Nothing Here'] || 'Nothing Here'}</h2>
         </div>
-      }
-
-
+      )}
     </>
   );
 };

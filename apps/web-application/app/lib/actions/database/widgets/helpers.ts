@@ -1,16 +1,15 @@
-import 'server-only'
+import 'server-only';
 import getSettings from '@lib/actions/database/settings/getSettings';
 import { clientAllowedSortOptions, postFieldRequestForCards } from '@repo/data-structures';
 import { metaSchema, postSchema } from '@repo/db';
-import { Document } from 'mongoose';
+
 import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 import { IInitialSettings, IMeta, IPost } from '@repo/typescript-types';
 
-export const findWidgetPosts = async (widgetData: any,session:any): Promise<{ posts: {}[]; totalCount: number }> => {
+export const findWidgetPosts = async (widgetData: any): Promise<{ posts: {}[]; totalCount: number }> => {
   try {
-
     const { initialSettings } = unwrapResponse(
-      await getSettings(['initialSettings']) as unknown as ServerActionResponse<{
+      (await getSettings(['initialSettings'])) as unknown as ServerActionResponse<{
         initialSettings: IInitialSettings | undefined;
       }>,
     );
@@ -33,20 +32,13 @@ export const findWidgetPosts = async (widgetData: any,session:any): Promise<{ po
     let posts = await postSchema
       .find(findQuery, ['_id'], {
         //skip: widgetData.sortBy === 'random' ? Math.floor(Math.random() * totalCount) : 0,
-        skip:  0,
+        skip: 0,
         limit,
         sort: sortQuery,
       })
       .select([...postFieldRequestForCards])
-      .session(session)
-      .lean<IPost[]>();
-
-    posts = posts.map((doc) => {
-      if (doc._id) {
-        doc._id = doc._id.toString();
-      }
-      return doc;
-    });
+      .lean<IPost[]>()
+      .exec();
 
     return {
       posts,
@@ -62,14 +54,14 @@ export const findWidgetPosts = async (widgetData: any,session:any): Promise<{ po
 };
 
 interface IOFindWidgetMetas {
-  metaData: {}[],
-  totalCount?: number,
+  metaData: {}[];
+  totalCount?: number;
 }
 
-export const findWidgetMetas = async (widgetData: any, withCount?: boolean,session:any): Promise<IOFindWidgetMetas> => {
+export const findWidgetMetas = async (widgetData: any, withCount?: boolean): Promise<IOFindWidgetMetas> => {
   try {
     const { initialSettings } = unwrapResponse(
-      await getSettings(['initialSettings']) as unknown as ServerActionResponse<{
+      (await getSettings(['initialSettings'])) as unknown as ServerActionResponse<{
         initialSettings: IInitialSettings | undefined;
       }>,
     );
@@ -82,18 +74,18 @@ export const findWidgetMetas = async (widgetData: any, withCount?: boolean,sessi
       widgetData?.sort || widgetData?.uniqueData?.sort
         ? { updatedAt: -1 }
         : {
-          rank: 1,
-          count: -1,
-        };
+            rank: 1,
+            count: -1,
+          };
 
     const findQuery = { $and: [type, statusQuery, countQuery] };
-    const totalCount = withCount ? await metaSchema.countDocuments(findQuery) : 0;
+    const totalCount = withCount ? await metaSchema.countDocuments(findQuery).exec() : 0;
     const metas = await metaSchema
       .find(findQuery, {}, { sort: sortQuery })
       .limit(limit)
       .select('name count imageUrl')
-      .session(session)
-      .lean<IMeta[]>();
+      .lean<IMeta[]>()
+      .exec();
 
     return {
       metaData: metas,

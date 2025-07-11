@@ -4,10 +4,15 @@ import { IMeta } from '@repo/typescript-types';
 import { errorResponse, ServerActionResponse, successResponse } from '@lib/actions/response';
 import { verifySession } from '@lib/dal';
 
-const dashboardUpdateMeta = async ({ updatingData }: { updatingData: IMeta }): Promise<ServerActionResponse<{ meta: IMeta } | null>> => {
-
-  let connection;
-
+const dashboardUpdateMeta = async ({
+  updatingData,
+}: {
+  updatingData: IMeta;
+}): Promise<
+  ServerActionResponse<{
+    meta: IMeta;
+  } | null>
+> => {
   try {
     const { isAdmin } = await verifySession();
 
@@ -21,37 +26,24 @@ const dashboardUpdateMeta = async ({ updatingData }: { updatingData: IMeta }): P
       });
     }
 
-    connection = await connectToDatabase('dashboardUpdateMeta');
-    const session = await connection.startSession();
+    await connectToDatabase('dashboardUpdateMeta');
 
-    try {
-      // Use { new: true } to get the updated document back. Pass the session.
-      let updatedMeta = await metaSchema.findByIdAndUpdate(
-        updatingData._id,
-        updatingData,
-        { new: true, session }
-      );
+    let updatedMeta = await metaSchema.findByIdAndUpdate(updatingData._id, updatingData, { new: true });
 
-      if (!updatedMeta) {
-        return errorResponse({ message: 'Meta not found for update.' });
-      }
-
-      const serializedData = {
-        meta: JSON.parse(JSON.stringify(updatedMeta)),
-      };
-
-      // Clean up reference
-      updatedMeta = null;
-
-      return successResponse({
-        data: serializedData,
-        message: 'Updated',
-      });
-
-    } finally {
-      await session.endSession();
+    if (!updatedMeta) {
+      return errorResponse({ message: 'Meta not found for update.' });
     }
 
+    const serializedData = {
+      meta: JSON.parse(JSON.stringify(updatedMeta)),
+    };
+
+    updatedMeta = null;
+
+    return successResponse({
+      data: serializedData,
+      message: 'Updated',
+    });
   } catch (error) {
     console.error('dashboardUpdateMeta Error =>', error);
     return errorResponse({
@@ -61,32 +53,3 @@ const dashboardUpdateMeta = async ({ updatingData }: { updatingData: IMeta }): P
 };
 
 export default dashboardUpdateMeta;
-
-// 'use server';
-// import { connectToDatabase, metaSchema } from '@repo/db';
-// import { IMeta } from '@repo/typescript-types';
-// import { errorResponse, ServerActionResponse, successResponse } from '@lib/actions/response';
-//
-// const dashboardUpdateMeta = async(updatingData:IMeta):Promise<ServerActionResponse<{meta:IMeta} | null>> =>{
-//   try {
-//     await connectToDatabase('dashboardUpdateMeta');
-//
-//     if (!updatingData){
-//       return errorResponse({
-//         message: 'No Data Provided',
-//       });
-//     }
-//     await metaSchema.findByIdAndUpdate(updatingData._id,updatingData).lean<IMeta>()
-//
-//     return successResponse({
-//       message: 'Updated',
-//     });
-//
-//   }catch (error){
-//     return errorResponse({
-//       message: 'Something went wrong please try again later',
-//     });
-//   }
-// }
-//
-// export default dashboardUpdateMeta

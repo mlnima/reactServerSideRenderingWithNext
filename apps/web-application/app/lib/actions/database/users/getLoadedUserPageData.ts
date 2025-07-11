@@ -5,86 +5,68 @@ import { unstable_cacheTag as cacheTag } from 'next/cache';
 import { errorResponse, successResponse } from '@lib/actions/response';
 
 interface IGetLoadedUserPageData {
-  userId: string | Types.ObjectId,
-  userWhoRequestIt: string | Types.ObjectId,
+  userId: string | Types.ObjectId;
+  userWhoRequestIt: string | Types.ObjectId;
 }
 
-const getLoadedUserPageData = async (
-  {
-    userId,
-    userWhoRequestIt,
-  }: IGetLoadedUserPageData) => {
-  "use cache";
-
-  let connection;
+const getLoadedUserPageData = async ({ userId, userWhoRequestIt }: IGetLoadedUserPageData) => {
+  'use cache';
 
   try {
-    connection = await connectToDatabase('getLoadedUserPageData');
-    const session = await connection.startSession();
-
-    try {
-      let [targetUser, requestingUser] = await Promise.all([
-        userRelationSchema.findOne(
+    await connectToDatabase('getLoadedUserPageData');
+    let [targetUser, requestingUser] = await Promise.all([
+      userRelationSchema
+        .findOne(
           { userId: userId },
           {
             _id: 1,
             blockList: { $elemMatch: { $eq: userWhoRequestIt } },
             following: { $elemMatch: { $eq: userWhoRequestIt } },
           },
-        ).session(session).lean(),
-        userRelationSchema.findOne(
+        )
+        .lean()
+        .exec(),
+      userRelationSchema
+        .findOne(
           { userId: userWhoRequestIt },
           {
             _id: 1,
             blockList: { $elemMatch: { $eq: userId } },
             following: { $elemMatch: { $eq: userId } },
           },
-        ).session(session).lean(),
-      ]);
+        )
+        .lean()
+        .exec(),
+    ]);
 
-      const loadedUserPageData = {
-        isBlockedByTargetUser: !!targetUser?.blockList?.length,
-        isFollowedByTargetUser: !!targetUser?.following?.length,
-        isBlocked: !!requestingUser?.blockList?.length,
-        isFollowed: !!requestingUser?.following?.length,
-      };
+    const loadedUserPageData = {
+      isBlockedByTargetUser: !!targetUser?.blockList?.length,
+      isFollowedByTargetUser: !!targetUser?.following?.length,
+      isBlocked: !!requestingUser?.blockList?.length,
+      isFollowed: !!requestingUser?.following?.length,
+    };
 
-      targetUser = null;
-      requestingUser = null;
+    targetUser = null;
+    requestingUser = null;
 
-      cacheTag('cacheItem', `CUserPageLoaded-${userId}-${userWhoRequestIt}`);
+    cacheTag('cacheItem', `CUserPageLoaded-${userId}-${userWhoRequestIt}`);
 
-      return successResponse({
-        data: {
-          loadedUserPageData,
-        },
-      });
-
-    } finally {
-      await session.endSession();
-    }
-
+    return successResponse({
+      data: {
+        loadedUserPageData,
+      },
+    });
   } catch (error) {
     console.error(`getLoadedUserPageData => `, error);
 
     return errorResponse({
-      message: "Something went wrong please try again later",
+      message: 'Something went wrong please try again later',
     });
   }
 };
 
 
 export default getLoadedUserPageData;
-
-
-
-
-
-
-
-
-
-
 
 
 // 'use server';

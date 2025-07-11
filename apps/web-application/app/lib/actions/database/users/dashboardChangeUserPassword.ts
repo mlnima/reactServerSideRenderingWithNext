@@ -7,14 +7,12 @@ import bcrypt from 'bcryptjs';
 
 interface IDashboardGetUser {
   _id: string;
-  oldPass: string,
-  newPass: string
-  newPass2: string
+  oldPass: string;
+  newPass: string;
+  newPass2: string;
 }
 
 const dashboardChangeUserPassword = async ({ _id, oldPass, newPass, newPass2 }: IDashboardGetUser) => {
-  let connection;
-
   try {
     const { isAdmin } = await verifySession();
 
@@ -24,41 +22,36 @@ const dashboardChangeUserPassword = async ({ _id, oldPass, newPass, newPass2 }: 
       });
     }
 
-    connection = await connectToDatabase('dashboardGetUser');
-    const session = await connection.startSession();
+    await connectToDatabase('dashboardGetUser');
 
-    try {
-      const user = await userSchema.findById(_id).session(session).lean<User>();
+    const user = await userSchema.findById(_id).lean<User>().exec();
 
-      if (!user || !user?.password) {
-        return errorResponse({
-          message: 'Not Found',
-        });
-      }
-
-      const passwordMatch = await bcrypt.compare(oldPass, user.password);
-
-      if (!passwordMatch) {
-        return errorResponse({
-          message: 'Unauthorized Access',
-        });
-      }
-      if (newPass !== newPass2) {
-        return errorResponse({
-          message: 'Mismatch Password',
-        });
-      }
-
-      const hash = bcrypt.hashSync(newPass, 10);
-
-      await userSchema.findByIdAndUpdate(user._id, { $set: { password: hash } }).session(session);
-
-      return successResponse({
-        message: 'Password has been changed',
+    if (!user || !user?.password) {
+      return errorResponse({
+        message: 'Not Found',
       });
-    } finally {
-      await session.endSession();
     }
+
+    const passwordMatch = await bcrypt.compare(oldPass, user.password);
+
+    if (!passwordMatch) {
+      return errorResponse({
+        message: 'Unauthorized Access',
+      });
+    }
+    if (newPass !== newPass2) {
+      return errorResponse({
+        message: 'Mismatch Password',
+      });
+    }
+
+    const hash = bcrypt.hashSync(newPass, 10);
+
+    await userSchema.findByIdAndUpdate(user._id, { $set: { password: hash } }).exec();
+
+    return successResponse({
+      message: 'Password has been changed',
+    });
   } catch (error) {
     console.log(`dashboardChangeUserPassword Error=> `, error);
 
@@ -70,71 +63,3 @@ const dashboardChangeUserPassword = async ({ _id, oldPass, newPass, newPass2 }: 
 };
 
 export default dashboardChangeUserPassword;
-
-
-// 'use server';
-// import { errorResponse, successResponse } from '@lib/actions/response';
-// import { verifySession } from '@lib/dal';
-// import { connectToDatabase, userSchema } from '@repo/db';
-// import { User } from '@repo/typescript-types';
-// import bcrypt from 'bcryptjs';
-//
-// interface IDashboardGetUser {
-//   _id: string;
-//   oldPass: string,
-//   newPass: string
-//   newPass2: string
-// }
-//
-// const dashboardChangeUserPassword = async ({ _id, oldPass, newPass, newPass2 }: IDashboardGetUser) => {
-//   try {
-//     const { isAdmin } = await verifySession();
-//
-//     if (!isAdmin) {
-//       return errorResponse({
-//         message: 'Unauthorized Access',
-//       });
-//     }
-//
-//     await connectToDatabase('dashboardGetUser');
-//
-//     const user = await userSchema.findById(_id).lean<User>();
-//
-//
-//     if (!user || !user?.password) {
-//       return errorResponse({
-//         message: 'Not Found',
-//       });
-//     }
-//
-//     const passwordMatch = await bcrypt.compare(oldPass, user.password);
-//
-//     if (!passwordMatch) {
-//       return errorResponse({
-//         message: 'Unauthorized Access',
-//       });
-//     }
-//     if (newPass !== newPass2) {
-//       return errorResponse({
-//         message: 'Mismatch Password',
-//       });
-//     }
-//
-//     const hash = bcrypt.hashSync(newPass, 10);
-//
-//     await userSchema.findByIdAndUpdate(user._id, { $set: { password: hash } });
-//
-//     return successResponse({
-//       message: 'Password has been changed',
-//     });
-//   } catch (error) {
-//     console.log(`dashboardChangeUserPassword Error=> `, error);
-//
-//     return errorResponse({
-//       message: 'Something went wrong',
-//       error,
-//     });
-//   }
-// };
-//
-// export default dashboardChangeUserPassword;

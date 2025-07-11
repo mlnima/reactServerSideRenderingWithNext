@@ -1,45 +1,39 @@
 'use server';
 import { connectToDatabase, metaSchema, postSchema } from '@repo/db';
-import { randomNumberGenerator, isEmptyObject } from '@repo/utils';
+import { randomNumberGenerator } from '@repo/utils';
 
 const resetMetaImage = async (_id: string) => {
-  let connection;
   try {
-    connection = await connectToDatabase('resetMetaImage');
-    const session = await connection.startSession();
+    await connectToDatabase('resetMetaImage');
 
-    try {
-      let metaDocument = await metaSchema.findById(_id).session(session).lean();
+    let metaDocument = await metaSchema.findById(_id).lean().exec();
 
-      if (metaDocument && !metaDocument.imageUrlLock) {
-        const metaCount = await postSchema
-          .countDocuments({
+    if (metaDocument && !metaDocument.imageUrlLock) {
+      const metaCount = await postSchema
+        .countDocuments({
+          $and: [{ [metaDocument.type]: metaDocument._id }, { status: 'published' }],
+        })
+        .exec();
+
+      if (metaCount > 0) {
+        const randomSkip = randomNumberGenerator(1, metaCount);
+
+        let findPostWithSameMeta = await postSchema
+          .findOne({
             $and: [{ [metaDocument.type]: metaDocument._id }, { status: 'published' }],
           })
-          .session(session);
+          .skip(randomSkip)
+          .lean()
+          .exec();
 
-        if (metaCount > 0) {
-          const randomSkip = randomNumberGenerator(1, metaCount);
-
-          let findPostWithSameMeta = await postSchema
-            .findOne({
-              $and: [{ [metaDocument.type]: metaDocument._id }, { status: 'published' }],
-            })
-            .skip(randomSkip)
-            .session(session)
-            .lean();
-
-          if (findPostWithSameMeta) {
-            await metaSchema.findByIdAndUpdate(_id, { imageUrl: findPostWithSameMeta.mainThumbnail }).session(session);
-          }
-          findPostWithSameMeta = null;
+        if (findPostWithSameMeta) {
+          await metaSchema.findByIdAndUpdate(_id, { imageUrl: findPostWithSameMeta.mainThumbnail }).exec();
         }
+        findPostWithSameMeta = null;
       }
-      metaDocument = null;
-      return null;
-    } finally {
-      await session.endSession();
     }
+    metaDocument = null;
+    return null;
   } catch (error) {
     console.error(`resetMetaImage => `, error);
     return;

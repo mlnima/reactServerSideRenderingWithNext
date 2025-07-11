@@ -13,28 +13,20 @@ const dashboardRemoveWidget = async (_id: string): Promise<ServerActionResponse<
       });
     }
 
-    let connection;
-    connection = await connectToDatabase('dashboardRemoveWidget');
-    const session = await connection.startSession();
+    await connectToDatabase('dashboardRemoveWidget');
 
-    try {
-      const result = await widgetSchema.findByIdAndDelete(_id, { session });
+    const result = await widgetSchema.findByIdAndDelete(_id).exec();
 
-      if (!result) {
-        return errorResponse({
-          message: 'Widget not found.',
-        });
-      }
-
-      return successResponse({
-        data: null,
-        message: 'Widget deleted successfully'
+    if (!result) {
+      return errorResponse({
+        message: 'Widget not found.',
       });
-
-    } finally {
-      await session.endSession();
     }
 
+    return successResponse({
+      data: null,
+      message: 'Widget deleted successfully',
+    });
   } catch (error) {
     console.error(`dashboardRemoveWidget => `, error);
     return errorResponse({
@@ -44,35 +36,3 @@ const dashboardRemoveWidget = async (_id: string): Promise<ServerActionResponse<
 };
 
 export default dashboardRemoveWidget;
-
-
-// 'use server';
-// import { connectToDatabase, widgetSchema } from '@repo/db';
-// import { verifySession } from '@lib/dal';
-// import { errorResponse, successResponse } from '@lib/actions/response';
-//
-// const dashboardRemoveWidget = async (_id:string) => {
-//   try {
-//     const { isAdmin } = await verifySession();
-//
-//     if (!isAdmin) {
-//       return errorResponse({
-//         message: 'Unauthorized Access',
-//       });
-//     }
-//     await connectToDatabase('dashboardRemoveWidget');
-//
-//     await widgetSchema.findByIdAndDelete(_id)
-//
-//     return successResponse({
-//       message:'deleted'
-//     });
-//
-//   } catch (error) {
-//     return errorResponse({
-//       message: 'Something went wrong please try again later',
-//     });
-//   }
-// };
-//
-// export default dashboardRemoveWidget;

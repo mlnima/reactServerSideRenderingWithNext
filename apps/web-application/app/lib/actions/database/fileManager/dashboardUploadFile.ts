@@ -3,7 +3,7 @@
 import { errorResponse, successResponse } from '@lib/actions/response';
 import path from 'path';
 import { mkdir, writeFile } from 'fs/promises';
-// @ts-expect-error
+
 import mime from 'mime-types';
 import { getCurrentDatePath } from '@repo/utils';
 

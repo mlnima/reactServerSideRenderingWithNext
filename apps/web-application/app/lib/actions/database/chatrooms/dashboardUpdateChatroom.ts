@@ -4,7 +4,6 @@ import { errorResponse, successResponse, ServerActionResponse } from '@lib/actio
 import { chatroomSchema, connectToDatabase } from '@repo/db';
 import { IChatroom } from '@repo/typescript-types';
 
-
 interface IDashboardUpdateChatroom {
   chatroomData: IChatroom,
 }
@@ -15,8 +14,6 @@ const dashboardUpdateChatroom = async (
   }: IDashboardUpdateChatroom,
 ): Promise<ServerActionResponse<{ chatroom: IChatroom } | null>> => {
 
-  let connection;
-
   try {
     const { isAdmin } = await verifySession();
 
@@ -26,35 +23,26 @@ const dashboardUpdateChatroom = async (
       });
     }
 
-    connection = await connectToDatabase('dashboardUpdateChatroom');
-    const session = await connection.startSession();
+    await connectToDatabase('dashboardUpdateChatroom');
 
-    try {
-      // Pass the session into the update options
-      let updatedChatroom = await chatroomSchema.findByIdAndUpdate(
-        chatroomData._id,
-        chatroomData,
-        { new: true, upsert: true, session }
-      );
+    let updatedChatroom = await chatroomSchema.findByIdAndUpdate(
+      chatroomData._id,
+      chatroomData,
+      { new: true, upsert: true },
+    ).lean().exec();
 
-      const serializedData = {
-        chatroom: JSON.parse(JSON.stringify(updatedChatroom)),
-      };
+    const serializedData = JSON.parse(JSON.stringify({
+      chatroom: updatedChatroom,
+    }));
 
-      // Clean up reference to the Mongoose document
-      updatedChatroom = null;
+    updatedChatroom = null;
 
-      return successResponse({
-        data: serializedData,
-        message: 'Updated',
-      });
-
-    } finally {
-      await session.endSession();
-    }
+    return successResponse({
+      data: serializedData,
+      message: 'Updated',
+    });
 
   } catch (error) {
-
     console.log(`dashboardUpdateChatroom Error=> `, error);
     return errorResponse({
       message: 'Something went wrong',
@@ -64,74 +52,3 @@ const dashboardUpdateChatroom = async (
 
 export default dashboardUpdateChatroom;
 
-
-
-
-
-
-
-
-
-
-
-
-// 'use server';
-// import { verifySession } from '@lib/dal';
-// import { errorResponse, successResponse } from '@lib/actions/response';
-// import { chatroomSchema, connectToDatabase } from '@repo/db';
-// import { IChatroom } from '@repo/typescript-types';
-//
-//
-// interface IDashboardGetChatroom {
-//   chatroomData: IChatroom,
-// }
-//
-// const dashboardUpdateChatroom = async (
-//   {
-//     chatroomData,
-//   }: IDashboardGetChatroom,
-// ) => {
-//   try {
-//     const { isAdmin } = await verifySession();
-//
-//     if (!isAdmin) {
-//       return errorResponse({
-//         message: 'Unauthorized Access',
-//       });
-//     }
-//
-//     await connectToDatabase('dashboardUpdateChatroom');
-//
-//     const updatedChatroom = await chatroomSchema.findByIdAndUpdate(chatroomData._id,chatroomData,{new:true,upsert: true});
-//
-//     return successResponse({
-//       data:{
-//         chatroom:JSON.parse(JSON.stringify(updatedChatroom)),
-//       },
-//       message: 'Updated',
-//     });
-//
-//   } catch (error) {
-//
-//     console.log(`dashboardUpdateChatroom Error=> `, error);
-//     return errorResponse({
-//       message: 'Something went wrong',
-//       error,
-//     });
-//   }
-// };
-//
-// export default dashboardUpdateChatroom;
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//

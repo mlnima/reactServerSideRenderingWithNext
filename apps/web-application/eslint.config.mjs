@@ -7,77 +7,77 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Create compatibility layer
 const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: {},
-  allConfig: {},
+ baseDirectory: __dirname,
+ recommendedConfig: {},
+ allConfig: {},
 });
 
 // Define your configuration directly in flat config format
 const eslintConfig = [
-  // Global ignores
-  {
-    ignores: ['**/node_modules/**', '.next/**', 'dist/**', 'build/**'],
-  },
+ // Global ignores
+ {
+  ignores: ['**/node_modules/**', '.next/**', 'dist/**', 'build/**'],
+ },
 
-  // TypeScript & JSX files
-  {
-    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
-    languageOptions: {
-      parser: compat.plugins['@typescript-eslint'].parsers['@typescript-eslint-parser'],
-      parserOptions: {
-        ecmaVersion: 2020,
-        sourceType: 'module',
-        ecmaFeatures: {
-          jsx: true
-        },
-      },
-      globals: {
-        // Browser globals
-        window: 'readonly',
-        document: 'readonly',
-        // Node globals
-        process: 'readonly',
-        // ES globals
-        Promise: 'readonly',
-      }
+ // TypeScript & JSX files
+ {
+  files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
+  languageOptions: {
+   parser: compat.plugins['@typescript-eslint'].parsers['@typescript-eslint-parser'],
+   parserOptions: {
+    ecmaVersion: 2020,
+    sourceType: 'module',
+    ecmaFeatures: {
+     jsx: true,
     },
-    // Use settings from compat to maintain compatibility with old format
-    settings: {
-      react: {
-        version: 'detect'
-      },
-      next: {
-        rootDir: 'apps/web-application/',
-      },
-    },
-    plugins: {
-      '@typescript-eslint': compat.plugins['@typescript-eslint'],
-    },
-    rules: {
-      // React Hooks rules
-      'react-hooks/rules-of-hooks': 'error',
-      'react-hooks/exhaustive-deps': 'warn',
-      // TypeScript rules
-      '@typescript-eslint/no-unused-vars': [
-        'warn',
-        {
-          'vars': 'all',
-          'args': 'after-used',
-          'argsIgnorePattern': '^_',
-          'varsIgnorePattern': '^_',
-          'ignoreRestSiblings': true
-        }
-      ],
-      'no-unused-vars': 'off',
-      'react/prop-types': 'off',
-      'import/no-unresolved': 'off',
-    }
+   },
+   globals: {
+    // Browser globals
+    window: 'readonly',
+    document: 'readonly',
+    // Node globals
+    process: 'readonly',
+    // ES globals
+    Promise: 'readonly',
+   },
   },
+  // Use settings from compat to maintain compatibility with old format
+  settings: {
+   react: {
+    version: 'detect',
+   },
+   next: {
+    rootDir: 'apps/web-application/',
+   },
+  },
+  plugins: {
+   '@typescript-eslint': compat.plugins['@typescript-eslint'],
+  },
+  rules: {
+   // React Hooks rules
+   'react-hooks/rules-of-hooks': 'error',
+   'react-hooks/exhaustive-deps': 'warn',
+   // TypeScript rules
+   '@typescript-eslint/no-unused-vars': [
+    'warn',
+    {
+     vars: 'all',
+     args: 'after-used',
+     argsIgnorePattern: '^_',
+     varsIgnorePattern: '^_',
+     ignoreRestSiblings: true,
+    },
+   ],
+   'no-unused-vars': 'off',
+   'react/prop-types': 'off',
+   'import/no-unresolved': 'off',
+  },
+ },
 
-  // Include Next.js configuration
-  ...compat.extends('next'),
-  ...compat.extends('eslint:recommended'),
-  ...compat.extends('plugin:@typescript-eslint/recommended'),
+ // Include Next.js configuration
+ ...compat.extends('next'),
+ ...compat.extends('eslint:recommended'),
+ ...compat.extends('plugin:@typescript-eslint/recommended'),
 ];
 
 export default eslintConfig;

@@ -134,7 +134,7 @@ const NginxMonitor = ({ interval = 5000 }: { interval?: number }) => {
       const intervalId = setInterval(fetchLogsAndIps, interval);
       return () => clearInterval(intervalId);
     }
-  }, [fetchLogsAndIps, interval]);
+  }, [fetchLogsAndIps, interval,show]);
 
   const handleToggleBlock = async (ip: string, action: 'block' | 'unblock') => {
     setIsBlocking(ip);
@@ -146,15 +146,15 @@ const NginxMonitor = ({ interval = 5000 }: { interval?: number }) => {
     setIsBlocking(null);
   };
 
+
   const filteredLogs = useMemo(() => {
     const lowerSearch = searchTerm.toLowerCase();
-    const lowerExclude = excludeTerm.toLowerCase();
+    const excludeList = ['/socket.io', '/admin', ...excludeTerm.split(',').map(a => a.trim().toLowerCase())];
 
     return logs
       .filter(log => {
-        if (!excludeTerm) return true;
         const logString = JSON.stringify(log).toLowerCase();
-        return !logString.includes(lowerExclude);
+        return !excludeList.some(exclude => logString.includes(exclude));
       })
       .filter(log => {
         if (!searchTerm) return true;

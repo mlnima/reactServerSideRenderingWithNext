@@ -5,34 +5,35 @@ import { errorResponse, ServerActionResponse, successResponse } from '@lib/actio
 import { IMeta } from '@repo/typescript-types';
 
 interface IGetMetaSuggestion {
-  metaType: string,
-  status?: string,
-  startWith: string
+  metaType: string;
+  status?: string;
+  startWith: string;
 }
 
-const getMetaSuggestion = async (
-  {
-    metaType,
-    status = 'published',
-    startWith,
-  }: IGetMetaSuggestion): Promise<ServerActionResponse<{
-  suggestions: { value: string, label: string }[],
-} | null>> => {
+const getMetaSuggestion = async ({
+  metaType,
+  status = 'published',
+  startWith,
+}: IGetMetaSuggestion): Promise<
+  ServerActionResponse<{
+    suggestions: { value: string; label: string }[];
+  } | null>
+> => {
   'use cache';
 
   let connection;
 
   try {
-    connection = await connectToDatabase('getMetaSuggestion');
+    await connectToDatabase('getMetaSuggestion');
     const startWithQuery =
       startWith === 'any'
         ? {}
         : {
-          name: {
-            $regex: '^' + startWith,
-            $options: 'i',
-          },
-        };
+            name: {
+              $regex: '^' + startWith,
+              $options: 'i',
+            },
+          };
 
     const session = await connection.startSession();
 
@@ -56,22 +57,16 @@ const getMetaSuggestion = async (
 
       metas = null;
 
-      cacheTag(
-        'cacheItem',
-        `CGetMetaSuggestion-${metaType ? `-${metaType}` : ''}${startWith ? `-${startWith}` : ''}`,
-      );
+      cacheTag('cacheItem', `CGetMetaSuggestion-${metaType ? `-${metaType}` : ''}${startWith ? `-${startWith}` : ''}`);
 
       return successResponse({
-        // @ts-expect-error: it's fine
         data: {
           suggestions,
         },
       });
-
     } finally {
       await session.endSession();
     }
-
   } catch (error) {
     console.error(`getMetaSuggestion => `, error);
     return errorResponse({
@@ -81,80 +76,3 @@ const getMetaSuggestion = async (
 };
 
 export default getMetaSuggestion;
-
-
-
-
-
-
-// 'use server';
-// import { connectToDatabase, metaSchema } from '@repo/db';
-// import { unstable_cacheTag as cacheTag } from 'next/cache';
-// import { errorResponse, ServerActionResponse, successResponse } from '@lib/actions/response';
-// import { IMeta } from '@repo/typescript-types';
-//
-// interface IGetMetaSuggestion {
-//   metaType: string,
-//   status?: string,
-//   startWith: string
-// }
-//
-// const getMetaSuggestion = async (
-//   {
-//     metaType,
-//     status = 'published',
-//     startWith,
-//   }: IGetMetaSuggestion): Promise<ServerActionResponse<{
-//   suggestions: { value: string, label: string }[],
-// } | null>> => {
-//   'use cache';
-//   try {
-//     await connectToDatabase('getMetaSuggestion');
-//     const startWithQuery =
-//       startWith === 'any'
-//         ? {}
-//         : {
-//           name: {
-//             $regex: '^' + startWith,
-//             $options: 'i',
-//           },
-//         };
-//
-//     let metas = await metaSchema
-//       .find({ $and: [{ type: metaType }, startWithQuery, { status }] }, 'name type', {
-//         sort: { updatedAt: -1 },
-//       })
-//       .limit(10)
-//       .lean<IMeta[]>();
-//
-//
-//     const suggestions = metas.map((meta) => {
-//       if (meta._id && meta.name){
-//         return {
-//           value: meta._id.toString(),
-//           label: meta.name,
-//         };
-//       }
-//     });
-//
-//     cacheTag(
-//       'cacheItem',
-//       `CGetMetaSuggestion-${metaType ? `-${metaType}` : ''}${startWith ? `-${startWith}` : ''}`,
-//     );
-//
-//     // @ts-expect-error: it's fine
-//     return successResponse({
-//       data: {
-//         suggestions,
-//       },
-//     });
-//
-//   } catch (error) {
-//     console.error(`getMetaSuggestion => `, error);
-//     return errorResponse({
-//       message: 'Something went wrong please try again later',
-//     });
-//   }
-// };
-//
-// export default getMetaSuggestion;

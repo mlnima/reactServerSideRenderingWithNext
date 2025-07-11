@@ -2,21 +2,10 @@
 import { connectToDatabase, postSchema } from '@repo/db';
 
 const viewPost = async (_id: string) => {
-  let connection;
-
   try {
-    connection = await connectToDatabase('viewPost');
-    const session = await connection.startSession();
+    await connectToDatabase();
 
-    try {
-      await postSchema.findByIdAndUpdate(
-        _id,
-        { $inc: { views: 1 } },
-        { timestamps: false, session },
-      );
-    } finally {
-      await session.endSession();
-    }
+    await postSchema.findByIdAndUpdate(_id, { $inc: { views: 1 } }, { timestamps: false }).exec();
 
     return null;
   } catch (error) {
@@ -26,22 +15,3 @@ const viewPost = async (_id: string) => {
 };
 
 export default viewPost;
-
-// 'use server';
-// import { connectToDatabase, postSchema } from '@repo/db';
-//
-// const viewPost = async (_id: string) => {
-//   try {
-//     await connectToDatabase('viewPost');
-//     await postSchema.findByIdAndUpdate(
-//       _id,
-//       { $inc: { views: 1 } },
-//       { timestamps: false },
-//     );
-//     return null;
-//   } catch (error) {
-//     return null;
-//   }
-// };
-//
-// export default viewPost;

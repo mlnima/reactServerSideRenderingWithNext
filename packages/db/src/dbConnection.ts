@@ -23,43 +23,34 @@ let cached: MongooseCache = global.mongoose || { conn: null, promise: null };
 global.mongoose = cached;
 
 const connectToDatabase = async (connectorName: string = '', connectionUri: string = undefined): Promise<Mongoose> => {
-  // Check if connection exists and is ready
   if (cached.conn && cached.conn.connection.readyState === 1) {
-    if (isDev) {
-      console.log('\x1b[33m%s\x1b[0m', `${connectorName} * Using cached database connection *`);
-    }
+    // if (isDev) {
+    //   console.log('\x1b[33m%s\x1b[0m', `${connectorName} * cached.conn *`);
+    // }
     return cached.conn;
   }
 
-  // Clean up stale connections
   if (cached.conn && cached.conn.connection.readyState !== 1) {
-    if (isDev) {
-      console.log('\x1b[33m%s\x1b[0m', `${connectorName} * Cleaning up stale connection *`);
-    }
     cached.conn = null;
     cached.promise = null;
   }
 
   if (!cached.promise) {
-    if (isDev) {
-      console.log('\x1b[33m%s\x1b[0m', `${connectorName} * Establishing new database connection *`);
-    }
+    // if (isDev) {
+    //   console.log('\x1b[33m%s\x1b[0m', `${connectorName} * MISS database Connection Cache *`);
+    // }
 
     const opts = {
       bufferCommands: false,
-      maxPoolSize: 10, // Maintain up to 10 socket connections
-      serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
-      socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
-      family: 4, // Use IPv4, skip trying IPv6
-      maxIdleTimeMS: 5000, // Close connections after 30 seconds of inactivity
+      maxPoolSize: 10,
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 45000,
+      family: 4,
+      maxIdleTimeMS: 5000,
     };
 
     cached.promise = mongoose.connect(connectionUri || MONGODB_URI, opts).then((mongoose) => {
-      if (isDev) {
-        console.log('\x1b[33m%s\x1b[0m', `${connectorName} * Connected to Database *`);
-      }
 
-      // Handle connection events
       mongoose.connection.on('error', (err) => {
         console.error('MongoDB connection error:', err);
         cached.conn = null;
@@ -86,13 +77,23 @@ const connectToDatabase = async (connectorName: string = '', connectionUri: stri
     if (isDev) {
       console.error('Error connecting to Database', error);
     }
-    throw error; // Throw instead of process.exit in serverless
+    throw error;
   }
 
   return cached.conn;
 };
 
 export default connectToDatabase;
+
+
+// const opts = {
+//   bufferCommands: false,
+//   maxPoolSize: 10, // Maintain up to 10 socket connections
+//   serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
+//   socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
+//   family: 4, // Use IPv4, skip trying IPv6
+//   maxIdleTimeMS: 5000, // Close connections after 30 seconds of inactivity
+// };
 
 
 //-------OLD CODE-----

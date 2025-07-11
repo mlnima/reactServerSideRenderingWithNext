@@ -34,11 +34,24 @@ const nextConfig = {
   serverExternalPackages: ['mongoose'],
   experimental: {
     useCache: true,
+
+    // for file uploading - might be removed and use the express server
     serverActions: {
       bodySizeLimit: '10mb',
     },
-  },
 
+    // Configure cache settings
+    staleTimes: {
+      dynamic: 30,
+      static: 180,
+    },
+
+    // Reduce memory usage for development
+    ...(process.env.NODE_ENV === 'development' && {
+      forceSwcTransforms: true,
+    }),
+  },
+  cacheMaxMemorySize: 1024 * 1024 * 1024,
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -56,9 +69,7 @@ const nextConfig = {
     silenceDeprecations: ['legacy-js-api'],
     includePaths: [path.join(__dirname, 'app')],
   },
-  transpilePackages: [
-    'ui',
-  ],
+  // transpilePackages: [],
   async redirects() {
     return [
       {
@@ -138,6 +149,35 @@ const nextConfig = {
     ];
   },
   rewrites,
+  // Environment-specific memory settings
+  // env: {
+  //   // Reduce memory usage in production
+  //   NODE_OPTIONS: process.env.NODE_ENV === 'production'
+  //     ? '--max-old-space-size=2048'
+  //     : '--max-old-space-size=4096',
+  // },
+  webpack: (config, { dev, isServer }) => {
+    // Memory optimization for production
+    if (!dev && isServer) {
+      config.optimization.splitChunks = {
+        chunks: 'all',
+        cacheGroups: {
+          default: {
+            minChunks: 2,
+            priority: -20,
+            reuseExistingChunk: true,
+          },
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            priority: -10,
+            reuseExistingChunk: true,
+          },
+        },
+      };
+    }
+
+    return config;
+  },
 };
 
 module.exports = nextConfig;

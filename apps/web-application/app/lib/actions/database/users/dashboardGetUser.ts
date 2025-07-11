@@ -9,7 +9,6 @@ interface IDashboardGetUser {
 }
 
 const dashboardGetUser = async ({ _id }: IDashboardGetUser) => {
-  let connection;
   try {
     const { isAdmin } = await verifySession();
 
@@ -19,31 +18,26 @@ const dashboardGetUser = async ({ _id }: IDashboardGetUser) => {
       });
     }
 
-    connection = await connectToDatabase('dashboardGetUser');
-    const session = await connection.startSession();
+    await connectToDatabase('dashboardGetUser');
 
-    try {
-      let user = await userSchema
-        .findById(_id)
-        .select([ '-password'])
-        .populate({
-          path: 'profileImage',
-          select: 'filePath',
-          model: 'file',
-          options: { strictPopulate: false },
-        })
-        .session(session)
-        .lean<User>() ;
+    let user = await userSchema
+      .findById(_id)
+      .select(['-password'])
+      .populate({
+        path: 'profileImage',
+        select: 'filePath',
+        model: 'file',
+        options: { strictPopulate: false },
+      })
 
-      return successResponse({
-        data: {
-          user: JSON.parse(JSON.stringify(user)),
+      .lean<User>()
+      .exec();
 
-        },
-      });
-    } finally {
-      await session.endSession();
-    }
+    return successResponse({
+      data: {
+        user: JSON.parse(JSON.stringify(user)),
+      },
+    });
   } catch (error) {
     console.log(`dashboardGetUser Error=> `, error);
 

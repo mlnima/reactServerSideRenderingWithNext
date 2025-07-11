@@ -12,8 +12,6 @@ interface IArg {
 const getUsersSuggestionList = async ({ keyword }: IArg) => {
   'use cache';
 
-  let connection;
-
   try {
     if (!keyword) {
       return errorResponse({
@@ -21,58 +19,56 @@ const getUsersSuggestionList = async ({ keyword }: IArg) => {
       });
     }
 
-    connection = await connectToDatabase('getUsersSuggestionList');
-    const session = await connection.startSession();
+    await connectToDatabase('getUsersSuggestionList');
 
-    try {
-      const isMongoObjectId = isValidObjectId(keyword);
-      const selectedFields = ['username', 'profileImage'];
+    const isMongoObjectId = isValidObjectId(keyword);
+    const selectedFields = ['username', 'profileImage'];
 
-      if (isMongoObjectId) {
-        let user = await userSchema.findById(keyword)
-          .select(selectedFields)
-          .session(session)
-          .lean<User>();
+    if (isMongoObjectId) {
+      let user = await userSchema
+        .findById(keyword)
+        .select(selectedFields)
 
-        if (user) {
-          const serializedData = {
-            users: JSON.parse(JSON.stringify([user])),
-          };
-          user = null;
-          cacheTag('cacheItem', `CUUsersSuggestionList-${keyword}`);
-          return successResponse({ data: serializedData });
-        } else {
-          return errorResponse({
-            message: 'user not found',
-          });
-        }
+        .lean<User>()
+        .exec();
+
+      if (user) {
+        const serializedData = {
+          users: JSON.parse(JSON.stringify([user])),
+        };
+        user = null;
+        cacheTag('cacheItem', `CUUsersSuggestionList-${keyword}`);
+        return successResponse({ data: serializedData });
       } else {
-        let users = await userSchema.find({
+        return errorResponse({
+          message: 'user not found',
+        });
+      }
+    } else {
+      let users = await userSchema
+        .find({
           username: {
             $regex: '^' + keyword,
             $options: 'i',
           },
         })
-          .select(selectedFields)
-          .limit(20)
-          .session(session)
-          .lean<User[]>();
+        .select(selectedFields)
+        .limit(20)
 
-        const serializedData = {
-          users: JSON.parse(JSON.stringify(users)),
-        };
+        .lean<User[]>()
+        .exec();
 
-        users = null;
+      const serializedData = {
+        users: JSON.parse(JSON.stringify(users)),
+      };
 
-        cacheTag('cacheItem', `CUUsersSuggestionList-${keyword}`);
-        return successResponse({
-          data: serializedData,
-        });
-      }
-    } finally {
-      await session.endSession();
+      users = null;
+
+      cacheTag('cacheItem', `CUUsersSuggestionList-${keyword}`);
+      return successResponse({
+        data: serializedData,
+      });
     }
-
   } catch (error) {
     console.log(`getUsersSuggestionList Error=> `, error);
 
@@ -84,13 +80,6 @@ const getUsersSuggestionList = async ({ keyword }: IArg) => {
 };
 
 export default getUsersSuggestionList;
-
-
-
-
-
-
-
 
 
 // 'use server';

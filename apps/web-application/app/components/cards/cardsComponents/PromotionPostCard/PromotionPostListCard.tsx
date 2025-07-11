@@ -18,9 +18,9 @@ interface PropTypes {
 const PromotionPostListCard: FC<PropTypes> = ({ post }) => {
 
   return (
-    <li className={'postsListItem'} onClick={() => {
+    <li className={'postsListItem'} onClick={async () => {
       if (post?._id) {
-        viewPost(post?._id);
+        await viewPost(post?._id);
       }
     }}>
       <div className={'external-link-index'}>

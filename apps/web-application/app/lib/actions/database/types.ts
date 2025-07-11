@@ -16,7 +16,7 @@ export interface IGetPosts {
   locale: string;
   metaId?: string;
   postType?: string;
-  count?: number;
+  size?: number;
   page?: number;
   sort?: string;
   author?: string;
@@ -25,20 +25,18 @@ export interface IGetPosts {
   returnTotalCount?: boolean;
 }
 
-
 export interface IGetUserPagePosts {
   authorId: string;
   status?: string;
   skip?: number;
   totalCount?: boolean;
+  size?: number;
 }
 
 export interface IDeletePostByAuthor {
-  postId: string,
-  token: string
+  postId: string;
+  token: string;
 }
-
-
 
 export interface INewPost {
   token: TToken;
@@ -55,18 +53,19 @@ export interface IUpdatePost {
   data: string;
 }
 
-export interface IRatePost{
+export interface IRatePost {
   token: TToken;
   type: string;
   _id: string;
 }
 
-export interface IUpdatePosts{
-  ids: string[],
-  status: string,
+export interface IUpdatePosts {
+  ids: string[];
+  status: string;
 }
-export interface IUpdateMetas{
-  ids: string[],
-  status: string,
-  type?:'actors' | 'categories' | 'tags'
+
+export interface IUpdateMetas {
+  ids: string[];
+  status: string;
+  type?: 'actors' | 'categories' | 'tags';
 }

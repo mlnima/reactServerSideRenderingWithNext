@@ -5,7 +5,7 @@ import { connectToDatabase, formSchema } from '@repo/db';
 
 const dashboardDeleteForm = async ({ _id, }: { _id: string }): Promise<ServerActionResponse> => {
 
-  let connection;
+
 
   try {
     const { isAdmin } = await verifySession();
@@ -16,19 +16,12 @@ const dashboardDeleteForm = async ({ _id, }: { _id: string }): Promise<ServerAct
       });
     }
 
-    connection = await connectToDatabase('dashboardDeleteForm');
-    const session = await connection.startSession();
+    await connectToDatabase('dashboardDeleteForm');
 
-    try {
-      // Pass the session into the delete options
-      const deletedForm = await formSchema.findByIdAndDelete(_id, { session });
+    const deletedForm = await formSchema.findByIdAndDelete(_id ).exec();
 
-      if (!deletedForm) {
-        return errorResponse({ message: 'Form not found.' });
-      }
-
-    } finally {
-      await session.endSession();
+    if (!deletedForm) {
+      return errorResponse({ message: 'Form not found.' });
     }
 
     return successResponse({

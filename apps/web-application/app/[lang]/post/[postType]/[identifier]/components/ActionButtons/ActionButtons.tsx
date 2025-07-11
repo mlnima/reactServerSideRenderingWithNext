@@ -11,7 +11,7 @@ import { loginRegisterForm, setAlert } from '@store/reducers/globalStateReducer'
 import { faComments, faHeart as faHeardSolid } from '@fortawesome/free-solid-svg-icons';
 import { clearACacheByTag } from '@lib/serverActions';
 import ratePost from '@lib/actions/database/posts/ratePost';
-import viewPost from '@lib/actions/database/posts/viewPost';
+// import viewPost from '@lib/actions/database/posts/viewPost';
 import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons';
 import { ServerActionResponse } from '@lib/actions/response';
 
@@ -43,7 +43,7 @@ const ActionButtons: FC<IProps> = (
   useEffect(() => {
     if (_id && !didView) {
       setDidView(true);
-      viewPost(_id);
+      // viewPost(_id);
     }
     return () => {
       setDidView(false);

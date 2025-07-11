@@ -29,10 +29,6 @@ const chatroomPage = async (props: IProps) => {
   if (!success || !data || !data.chatroom?._id) {
     return <Soft404 dictionary={dictionary} />;
   }
-
-
-
-
     return (
       <div id={'content'} className={`page-no-sidebar`} dir={'ltr'}>
         <main id={'primary'} className={'main chatroom'}>
