@@ -73,7 +73,7 @@
     "lucide-react": "^0.474.0",
     "mongoose": "^8.12.2",
     "negotiator": "^0.6.3",
-    "next": "v15.4.0-canary.116",
+    "next": "v15.4.0-canary.127",
     "next-compose-plugins": "^2.2.1",
     "next-transpile-modules": "^10.0.1",
     "peerjs": "^1.5.4",

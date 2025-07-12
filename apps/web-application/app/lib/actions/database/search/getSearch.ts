@@ -44,7 +44,8 @@ const _saveSearchedKeyword = async (keyword: string, postsCount: number) => {
   }
 
   try {
-    const existingKeyword = await searchKeywordSchema.findOne({ name: keyword.toLowerCase() }).exec();
+    const lowerKeyword = keyword.toLowerCase();
+    const existingKeyword = await searchKeywordSchema.findOne({ name: lowerKeyword }).lean().exec();
 
     if (!existingKeyword) {
       const dataToSave = new searchKeywordSchema({
@@ -52,21 +53,21 @@ const _saveSearchedKeyword = async (keyword: string, postsCount: number) => {
         count: postsCount,
       });
       await dataToSave.save();
-      console.log(`search keyword ${keyword.toLowerCase()} saved`);
+      console.log(`New Search Keyword Saved: ${keyword.toLowerCase()} `);
       return;
     }
 
     const oneWeekAgo = new Date();
-    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+    oneWeekAgo.setDate(oneWeekAgo.getDate() - 30);
 
     if (existingKeyword.updatedAt < oneWeekAgo) {
       console.log(`updating search keyword count`);
-      existingKeyword.count = postsCount;
-      await existingKeyword.save();
+      await searchKeywordSchema.findByIdAndUpdate(existingKeyword._id, { $set: { count: postsCount } }).exec();
+      console.log(`Search Keyword Updated: ${keyword.toLowerCase()} `);
     }
-    console.log(`search keyword ${keyword.toLowerCase()} updated`);
   } catch (error) {
     console.log('saveSearchedKeyword Error=> ', error);
+    return;
   }
 };
 
