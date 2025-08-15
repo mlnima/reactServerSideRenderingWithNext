@@ -1,5 +1,4 @@
-import SidebarWidgetAreaRenderer
-  from '@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer';
+import SidebarWidgetAreaRenderer from '@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer';
 import { getDictionary } from '../../../../get-dictionary';
 import WidgetsRenderer from '@components/widgets/widgetRenderer/WidgetsRenderer';
 import PostPage from '@components/PostsPage/PostsPage';
@@ -14,7 +13,6 @@ import getWidgets from '@lib/actions/database/widgets/getWidgets';
 import getPosts from '@lib/actions/database/posts/getPosts';
 import { isValidObjectId } from '@repo/db';
 import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
-import { mongoIdValidatorByRegex } from '@repo/utils/dist/src/validators';
 
 const TagPage = async (props: IPageProps) => {
   const searchParams = await props.searchParams;
@@ -22,14 +20,12 @@ const TagPage = async (props: IPageProps) => {
   const locale = localDetector(params.lang);
   const dictionary = await getDictionary(locale);
 
-
-  if ( !params?.tagId ||  (params?.tagId && !isValidObjectId(params.tagId))) {
+  if (!params?.tagId || (params?.tagId && !isValidObjectId(params.tagId))) {
     return <Soft404 dictionary={dictionary} />;
   }
 
-
   const { tagPageSettings } = unwrapResponse(
-    await getSettings(['tagPageSettings']) as unknown as ServerActionResponse<{
+    (await getSettings(['tagPageSettings'])) as unknown as ServerActionResponse<{
       tagPageSettings: IPageSettings | undefined;
     }>,
   );
@@ -61,8 +57,7 @@ const TagPage = async (props: IPageProps) => {
           title={meta?.translations?.[locale]?.name ?? meta?.name}
           description={meta?.translations?.[locale]?.description ?? meta?.description}
         />
-        <WidgetsRenderer dictionary={dictionary} locale={locale} widgets={widgets?.['tagPageTop']}
-                         position={'tagPageTop'} />
+        <WidgetsRenderer dictionary={dictionary} locale={locale} widgets={widgets?.['tagPageTop']} position={'tagPageTop'} />
         <PostPage
           renderPagination
           posts={posts || []}
