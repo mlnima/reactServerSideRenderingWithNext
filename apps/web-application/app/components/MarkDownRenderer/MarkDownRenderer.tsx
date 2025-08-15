@@ -5,7 +5,7 @@ import remarkBreaks from 'remark-breaks';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeStringify from 'rehype-stringify';
 import rehypeRaw from 'rehype-raw';
-import './MarkdownRenderer.scss';
+import './style.scss';
 
 type Props = {
   markdown: string | object;

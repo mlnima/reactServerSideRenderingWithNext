@@ -8,7 +8,6 @@ import './ArticleTypePostPage.styles.scss';
 import MarkDownRenderer from '@components/MarkDownRenderer/MarkDownRenderer';
 
 const ArticleTypePostPage: FC<PostPageProps> = ({ post, locale, dictionary, views, likes, isMarkDownDescription = false }) => {
-  console.log(`isMarkDownDescription=> `, isMarkDownDescription);
   return (
     <>
       <div className={'entry-header'}>
