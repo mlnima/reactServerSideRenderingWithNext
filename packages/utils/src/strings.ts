@@ -1,6 +1,23 @@
-export const base64toBlobURL = (base64: string): string => {
+// export const base64toBlobURL = (base64: string): string => {
+//   const byteCharacters = atob(base64);
+//   const byteArrays: Uint8Array[] = [];
+//   for (let offset = 0; offset < byteCharacters.length; offset += 512) {
+//     const slice = byteCharacters.slice(offset, offset + 512);
+//     const byteNumbers = new Array(slice.length);
+//     for (let i = 0; i < slice.length; i++) {
+//       byteNumbers[i] = slice.charCodeAt(i);
+//     }
+//     const byteArray = new Uint8Array(byteNumbers);
+//     byteArrays.push(byteArray);
+//   }
+//
+//   const blob = new Blob(byteArrays, { type: 'audio/mp3' }); // Adjust the MIME type accordingly
+//   return URL.createObjectURL(blob);
+// };
+
+export const base64toBlobURL = (base64) => {
   const byteCharacters = atob(base64);
-  const byteArrays: Uint8Array[] = [];
+  const byteArrays = [];
   for (let offset = 0; offset < byteCharacters.length; offset += 512) {
     const slice = byteCharacters.slice(offset, offset + 512);
     const byteNumbers = new Array(slice.length);
@@ -10,7 +27,7 @@ export const base64toBlobURL = (base64: string): string => {
     const byteArray = new Uint8Array(byteNumbers);
     byteArrays.push(byteArray);
   }
-  const blob = new Blob(byteArrays, { type: 'audio/mp3' }); // Adjust the MIME type accordingly
+  const blob = new Blob(byteArrays, { type: 'audio/mp3' });
   return URL.createObjectURL(blob);
 };
 
@@ -28,30 +45,16 @@ export const convertVariableNameToName = (str: string): string => {
 };
 
 export const convertMetasTypeToSingular = (metaType: string): string => {
-  return metaType === 'actors'
-    ? 'actor'
-    : metaType === 'tags'
-      ? 'tag'
-      : metaType === 'categories'
-        ? 'category'
-        : metaType;
+  return metaType === 'actors' ? 'actor' : metaType === 'tags' ? 'tag' : metaType === 'categories' ? 'category' : metaType;
 };
 
 export const convertMetasTypeToPlural = (metaType: string): string => {
-  return metaType === 'actor'
-    ? 'actors'
-    : metaType === 'tag'
-      ? 'tags'
-      : metaType === 'category'
-        ? 'categories'
-        : metaType;
+  return metaType === 'actor' ? 'actors' : metaType === 'tag' ? 'tags' : metaType === 'category' ? 'categories' : metaType;
 };
 
 export const capitalizeFirstLetter = (str: string): string => {
   try {
-    return typeof str === 'string'
-      ? str.replace(/^(.)|\s+(.)/g, c => c.toUpperCase())
-      : str;
+    return typeof str === 'string' ? str.replace(/^(.)|\s+(.)/g, (c) => c.toUpperCase()) : str;
   } catch (err) {
     return str;
   }
@@ -61,11 +64,9 @@ export const capitalizeFirstLetters = (str: string): string => {
   try {
     return typeof str === 'string'
       ? str
-        .split(' ')
-        .map(word =>
-          word.replace(/^(.)|\s+(.)/g, c => c.toUpperCase()),
-        )
-        .join(' ')
+          .split(' ')
+          .map((word) => word.replace(/^(.)|\s+(.)/g, (c) => c.toUpperCase()))
+          .join(' ')
       : str;
   } catch (err) {
     return str;
@@ -83,7 +84,7 @@ export const fileTypeDetector = (fileName: string): string => {
     application: ['exe'],
     archive: ['zip', 'rar'],
   };
-  Object.keys(fileFormats).forEach(formatArr => {
+  Object.keys(fileFormats).forEach((formatArr) => {
     if (fileFormats[formatArr].includes(fileFormat)) {
       finalFormat = formatArr;
     }
@@ -93,9 +94,7 @@ export const fileTypeDetector = (fileName: string): string => {
 
 export const getFileExtension = (fileName: string): string => {
   try {
-    return fileName.slice(
-      (Math.max(0, fileName.lastIndexOf('.')) || Infinity) + 1,
-    );
+    return fileName.slice((Math.max(0, fileName.lastIndexOf('.')) || Infinity) + 1);
   } catch (error) {
     return fileName;
   }
@@ -140,16 +139,10 @@ export const getMonthName = (monthNumber: number): string | null => {
     'November',
     'December',
   ];
-  return monthNumber >= 1 && monthNumber <= 12
-    ? monthNames[monthNumber - 1]
-    : null;
+  return monthNumber >= 1 && monthNumber <= 12 ? monthNames[monthNumber - 1] : null;
 };
 
-export const textContentReplacer = (
-  textString: string,
-  replaces?: Record<string, string>
-): string => {
-
+export const textContentReplacer = (textString: string, replaces?: Record<string, string>): string => {
   const now = new Date(performance.timeOrigin + performance.now());
   try {
     return textString
