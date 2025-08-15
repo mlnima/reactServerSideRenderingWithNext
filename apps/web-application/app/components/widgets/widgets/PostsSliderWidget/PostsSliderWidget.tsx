@@ -12,25 +12,25 @@ import {
   faChevronRight,
 } from '@fortawesome/free-solid-svg-icons';
 import { IPost, Store } from '@repo/typescript-types';
-import { shortNumber, ratingCalculator } from '@repo/utils';
+import { shortNumber, ratingCalculator } from '@repo/utils/dist/src';
 import './PostsSliderWidget.scss';
 import { v4 as uuidv4 } from 'uuid';
 
 const ArticlePostCard = dynamic(
   () =>
-    import('@components/cards/cardsComponents/ArticlePostCard/ArticlePostCard')
+    import('@components/cards/cardsComponents/ArticlePostCard/ArticlePostCard'),
 );
 const PromotionPostCard = dynamic(
   () =>
     import(
       '@components/cards/cardsComponents/PromotionPostCard/PromotionPostCard'
-    )
+      ),
 );
 const LearnPostCard = dynamic(
-  () => import('@components/cards/cardsComponents/VideoPostCard/VideoPostCard')
+  () => import('@components/cards/cardsComponents/VideoPostCard/VideoPostCard'),
 );
 const VideoPostCard = dynamic(
-  () => import('@components/cards/cardsComponents/VideoPostCard/VideoPostCard')
+  () => import('@components/cards/cardsComponents/VideoPostCard/VideoPostCard'),
 );
 
 // const AdPostCard = dynamic(() => import('@components/cards/cardsComponents/AdPostCard/AdPostCard'));
@@ -51,12 +51,12 @@ interface PostsSliderPropsTypes {
 }
 
 const PostsSliderWidget: FC<PostsSliderPropsTypes> = ({
-  posts,
-  uniqueData,
-  isSidebar,
-  locale,
-  dictionary,
-}) => {
+                                                        posts,
+                                                        uniqueData,
+                                                        isSidebar,
+                                                        locale,
+                                                        dictionary,
+                                                      }) => {
   const options = { delay: 3000, stopOnInteraction: false };
   const autoplay = Autoplay(options);
 
@@ -67,7 +67,7 @@ const PostsSliderWidget: FC<PostsSliderPropsTypes> = ({
       skipSnaps: false,
       align: 'center',
     },
-    [autoplay]
+    [autoplay],
   );
 
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -78,7 +78,7 @@ const PostsSliderWidget: FC<PostsSliderPropsTypes> = ({
   const scrollNext = useCallback(() => sliderApi?.scrollNext(), [sliderApi]);
   const scrollTo = useCallback(
     (index: number) => sliderApi?.scrollTo(index),
-    [sliderApi]
+    [sliderApi],
   );
 
   const onSelect = useCallback(() => {
@@ -96,7 +96,7 @@ const PostsSliderWidget: FC<PostsSliderPropsTypes> = ({
       cardsWidthDesktop:
         store.settings?.initialSettings?.contentSettings?.cardsWidthDesktop ??
         255,
-    })
+    }),
   );
 
   useEffect(() => {
@@ -107,11 +107,11 @@ const PostsSliderWidget: FC<PostsSliderPropsTypes> = ({
 
   const postsToRender = useMemo(
     () => uniqueData?.posts ?? posts ?? [],
-    [uniqueData?.posts, posts]
+    [uniqueData?.posts, posts],
   );
   const sliderPaginationItems = useMemo(
     () => Array.from({ length: postsToRender.length }, (_, i) => i),
-    [postsToRender]
+    [postsToRender],
   );
 
   const renderSlides = postsToRender.map((post, index) => {
@@ -120,8 +120,8 @@ const PostsSliderWidget: FC<PostsSliderPropsTypes> = ({
 
     const isNextImageAllowed = post.mainThumbnail
       ? imagesAllowedDomainsForNextImage?.some((domain) =>
-          post.mainThumbnail?.includes(domain)
-        )
+        post.mainThumbnail?.includes(domain),
+      )
       : false;
 
     const postProps = {

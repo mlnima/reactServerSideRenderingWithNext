@@ -1,6 +1,6 @@
 'use server';
 import { metaSchema, postSchema, searchKeywordSchema, connectToDatabase } from '@repo/db';
-import { getDefaultLocale, getLocales, universalSanitizer } from '@repo/utils';
+import { getDefaultLocale, getLocales, universalSanitizer } from '@repo/utils/dist/src';
 import { postFieldRequestForCards } from '@repo/data-structures';
 import { IMeta, IPost } from '@repo/typescript-types';
 import { unstable_cacheTag as cacheTag } from 'next/cache';

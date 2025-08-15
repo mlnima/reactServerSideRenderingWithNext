@@ -1,5 +1,5 @@
 import { getDictionary } from '../../../../../get-dictionary';
-import { capitalizeFirstLetters } from '@repo/utils';
+import { capitalizeFirstLetters } from '@repo/utils/dist/src';
 import { AlternatesGenerators } from '@lib/alternatesCanonicalGenerator';
 import { IInitialSettings, IMeta, IPageProps, IPost } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
@@ -17,7 +17,7 @@ const searchMetaGenerator = async (props: IPageProps) => {
   const dictionary = await getDictionary(locale);
 
   const { initialSettings } = unwrapResponse(
-    await getSettings(['initialSettings']) as unknown as ServerActionResponse<{
+    (await getSettings(['initialSettings'])) as unknown as ServerActionResponse<{
       initialSettings: IInitialSettings | undefined;
     }>,
   );
@@ -37,38 +37,33 @@ const searchMetaGenerator = async (props: IPageProps) => {
   //         returnMetas: false;
   //     });
 
-
-  const { success, data } =
-    await getSearch({
-      keyword: params.keyword,
-      page: currentPage,
-      locale,
-      returnPosts: false,
-      returnMetas: false,
-    }) as ServerActionResponse<{
-      posts: IPost[],
-      totalCount: number,
-      actors: IMeta[],
-      categories: IMeta[],
-      tags: IMeta[],
-    }>;
-
+  const { success, data } = (await getSearch({
+    keyword: params.keyword,
+    page: currentPage,
+    locale,
+    returnPosts: false,
+    returnMetas: false,
+  })) as ServerActionResponse<{
+    posts: IPost[];
+    totalCount: number;
+    actors: IMeta[];
+    categories: IMeta[];
+    tags: IMeta[];
+  }>;
 
   if (!success || !data) {
     return {};
   }
-
 
   // const title = `${params.keyword ? capitalizeFirstLetters(decodeURIComponent(params.keyword)) : ''} - ${
   //   data?.totalCount || 0
   // } ${dictionary['Search Results'] || 'Search Results'} ${siteName || ''}`;
   //
 
-
   const alternates = params.keyword
     ? {
-      alternates: alternatesGenerators.searchPage(locale, params.keyword),
-    }
+        alternates: alternatesGenerators.searchPage(locale, params.keyword),
+      }
     : {};
 
   const headData = await headMetaFromSettings({
@@ -83,7 +78,6 @@ const searchMetaGenerator = async (props: IPageProps) => {
   return {
     ...alternates,
     ...headData,
-
   };
 };
 

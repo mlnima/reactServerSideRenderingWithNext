@@ -1,4 +1,4 @@
-import { capitalizeFirstLetter } from '@repo/utils';
+import { capitalizeFirstLetter } from '@repo/utils/dist/src';
 import { AlternatesGenerators } from '@lib/alternatesCanonicalGenerator';
 import { IPageProps } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
@@ -20,12 +20,9 @@ const chatroomMetaGenerator = async (props: IPageProps) => {
     return;
   }
 
-
   return {
     alternates: alternatesGenerators.chatroomPage(locale, params.identifier),
-    title: data.chatroom?.name
-      ? `${capitalizeFirstLetter(data.chatroom?.name)} Chatroom`
-      : 'Chatroom',
+    title: data.chatroom?.name ? `${capitalizeFirstLetter(data.chatroom?.name)} Chatroom` : 'Chatroom',
     description: data.chatroom?.description || '',
     keywords: data.chatroom?.tags || '',
   };

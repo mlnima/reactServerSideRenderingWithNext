@@ -1,7 +1,7 @@
 import './styles.scss';
 
 import dashboardGetWidgets from '@lib/actions/database/widgets/dashboardGetWidgets';
-import { reduceWidgetsToGroups } from '@repo/utils';
+import { reduceWidgetsToGroups } from '@repo/utils/dist/src';
 import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 import { IPage, IWidget, IWidgetData, PageParams, PageSearchParams } from '@repo/typescript-types';
 import dashboardGetPages from '@lib/actions/database/pages/dashboardGetPages';

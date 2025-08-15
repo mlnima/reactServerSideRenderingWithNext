@@ -7,17 +7,17 @@ import UniqueFields from './UniqueFields';
 import WidgetHeaderControl from './WidgetHeaderControl/WidgetHeaderControl';
 import { IWidget } from '@repo/typescript-types';
 import { useAppDispatch } from '@store/hooks';
-import { inputValueSimplifier } from '@repo/utils';
+import { inputValueSimplifier } from '@repo/utils/dist/src';
 import dashboardUpdateWidget from '@lib/actions/database/widgets/dashboardUpdateWidget';
 import { setAlert } from '@store/reducers/globalStateReducer';
 
 interface WidgetModelPropTypes {
   widget: IWidget;
-  customPages:string[]
-  onCloneWidgetHandler:Function
+  customPages: string[];
+  onCloneWidgetHandler: Function;
 }
 
-const WidgetModel: FC<WidgetModelPropTypes> = ({ widget ,customPages,onCloneWidgetHandler}) => {
+const WidgetModel: FC<WidgetModelPropTypes> = ({ widget, customPages, onCloneWidgetHandler }) => {
   const dispatch = useAppDispatch();
 
   const [widgetSettings, setWidgetSettings] = useState({
@@ -46,16 +46,16 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({ widget ,customPages,onCloneWidg
     }
   }, [widget]);
 
-  const onChangeLanguageHandler = (e:React.ChangeEvent<HTMLSelectElement>) => {
-    setWidgetSettings(prevState => ({
+  const onChangeLanguageHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setWidgetSettings((prevState) => ({
       ...prevState,
       activeEditingLanguage: e.target.value,
     }));
   };
 
-  const onChangeHandler = (e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | {name:string}>) => {
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | { name: string }>) => {
     const value = inputValueSimplifier(e);
-    setWidgetData(prevState => ({
+    setWidgetData((prevState) => ({
       ...prevState,
       [e.target.name]: value,
     }));
@@ -65,12 +65,11 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({ widget ,customPages,onCloneWidg
   //     console.log(widgetData)
   // }, [widgetData]);
 
-  const onChangeHandlerWithTranslate = (e:React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeHandlerWithTranslate = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (widgetSettings.activeEditingLanguage === 'default') {
       onChangeHandler(e);
     } else {
-
-      setWidgetData(prevState => {
+      setWidgetData((prevState) => {
         // @ts-expect-error: it's fine
         if (!prevState || prevState.translations?.[widgetSettings?.activeEditingLanguage]) return prevState;
         return {
@@ -83,28 +82,34 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({ widget ,customPages,onCloneWidg
               [e.target.name]: e.target.value,
             },
           },
-        }
+        };
       });
     }
   };
 
-  const onObjectEditingModeChangeHandler = (e:{target:{value:string}}) => {
+  const onObjectEditingModeChangeHandler = (e: { target: { value: string } }) => {
     setWidgetData(JSON.parse(e.target.value));
   };
 
-  const onCheckboxChangeHandler = (e:React.ChangeEvent<HTMLInputElement>) => {
-    setWidgetData(prevState => (
-      {
-        ...prevState,
-        [e.target.name]: e.target.checked,
-      }
-    ));
+  const onCheckboxChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setWidgetData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.checked,
+    }));
   };
 
-  const onUniqueDataChangeHandler = (e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | {name:string}>) => {
+  const onUniqueDataChangeHandler = (
+    e: React.ChangeEvent<
+      | HTMLInputElement
+      | HTMLTextAreaElement
+      | {
+          name: string;
+        }
+    >,
+  ) => {
     const value = inputValueSimplifier(e);
 
-    setWidgetData(prevState => ({
+    setWidgetData((prevState) => ({
       ...prevState,
       uniqueData: {
         ...(prevState?.uniqueData || {}),
@@ -113,12 +118,19 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({ widget ,customPages,onCloneWidg
     }));
   };
 
-  const onUniqueDataChangeHandlerWithTranslate = (e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | {name:string}>) => {
+  const onUniqueDataChangeHandlerWithTranslate = (
+    e: React.ChangeEvent<
+      | HTMLInputElement
+      | HTMLTextAreaElement
+      | {
+          name: string;
+        }
+    >,
+  ) => {
     const value = inputValueSimplifier(e);
     if (widgetSettings.activeEditingLanguage === 'default') {
       onUniqueDataChangeHandler(e);
     } else {
-
       // setWidgetData({
       //     ...widgetData,
       //     uniqueData: {
@@ -137,8 +149,7 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({ widget ,customPages,onCloneWidg
       //     }
       // })
 
-
-      setWidgetData(prevState => ({
+      setWidgetData((prevState) => ({
         ...prevState,
         uniqueData: {
           ...(prevState?.uniqueData || {}),
@@ -150,15 +161,22 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({ widget ,customPages,onCloneWidg
               ...(prevState?.uniqueData?.translations?.[widgetSettings.activeEditingLanguage] || {}),
               [e.target.name]: value,
             },
-
           },
         },
       }));
-
     }
   };
 
-  const onUniqueDataJsonChangeHandler = (e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | {name:string,value:string}>) => {
+  const onUniqueDataJsonChangeHandler = (
+    e: React.ChangeEvent<
+      | HTMLInputElement
+      | HTMLTextAreaElement
+      | {
+          name: string;
+          value: string;
+        }
+    >,
+  ) => {
     const parseJsonData = JSON?.parse(e.target.value);
     if (parseJsonData) {
       for (const property in parseJsonData) {
@@ -176,7 +194,7 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({ widget ,customPages,onCloneWidg
     });
   };
 
-  const changeWidgetIndex = async (action:boolean) => {
+  const changeWidgetIndex = async (action: boolean) => {
     const valueToSet = action ? widgetData.widgetIndex + 1 : widgetData.widgetIndex - 1;
 
     const { success, message, error, data } = await dashboardUpdateWidget({
@@ -187,9 +205,9 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({ widget ,customPages,onCloneWidg
         uniqueData: {
           ...(widgetData?.uniqueData || {}),
           posts: [],
-          metaData: []
-        }
-      }
+          metaData: [],
+        },
+      },
     });
 
     if (!success) {
@@ -203,7 +221,6 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({ widget ,customPages,onCloneWidg
       return;
     }
 
-
     setWidgetData({
       ...widgetData,
       widgetIndex: valueToSet,
@@ -212,8 +229,7 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({ widget ,customPages,onCloneWidg
     //router.refresh();
   };
 
-  const onLockHandler =async () => {
-
+  const onLockHandler = async () => {
     const { success, message, error } = await dashboardUpdateWidget({
       _id: widget._id,
       data: {
@@ -268,22 +284,22 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({ widget ,customPages,onCloneWidg
 
   return (
     <WidgetModelStyledDiv className="widget-model">
-      <WidgetHeaderControl setKey={false}
-                           widgetSettings={widgetSettings}
-                           widgetId={widget._id}
-                           widgetData={widgetData}
-                           onObjectModeHandler={() =>
-                             setWidgetSettings({
-                               ...widgetSettings,
-                               objectEditingMode: !widgetSettings.objectEditingMode,
-                             })}
-                           onLockHandler={onLockHandler}
-                           changeWidgetIndex={changeWidgetIndex}
+      <WidgetHeaderControl
+        setKey={false}
+        widgetSettings={widgetSettings}
+        widgetId={widget._id}
+        widgetData={widgetData}
+        onObjectModeHandler={() =>
+          setWidgetSettings({
+            ...widgetSettings,
+            objectEditingMode: !widgetSettings.objectEditingMode,
+          })
+        }
+        onLockHandler={onLockHandler}
+        changeWidgetIndex={changeWidgetIndex}
       />
 
-
-      {widgetData.stayOpen && widgetSettings.objectEditingMode ?
-
+      {widgetData.stayOpen && widgetSettings.objectEditingMode ? (
         <MonacoEditor
           language={'json'}
           name={'widgetData'}
@@ -294,56 +310,50 @@ const WidgetModel: FC<WidgetModelPropTypes> = ({ widget ,customPages,onCloneWidg
           className={'objectEditingModeEditor'}
           onParentChangeHandler={onObjectEditingModeChangeHandler}
         />
-        : null
-      }
+      ) : null}
 
-      {widgetData.stayOpen && !widgetSettings.objectEditingMode ?
-
+      {widgetData.stayOpen && !widgetSettings.objectEditingMode ? (
         <div className="widgetModel">
-
-          <DefaultFields widgetData={widgetData}
-                         customPages={customPages}
-                         setWidgetData={setWidgetData}
-                         widgetSettings={widgetSettings}
-                         onCheckboxChangeHandler={onCheckboxChangeHandler}
-                         onChangeHandler={onChangeHandler}
-                         onChangeHandlerWithTranslate={onChangeHandlerWithTranslate}
-                         onChangeLanguageHandler={onChangeLanguageHandler}
-                         setWidgetSettings={setWidgetSettings}
-                         widgetId={widget._id}
-
+          <DefaultFields
+            widgetData={widgetData}
+            customPages={customPages}
+            setWidgetData={setWidgetData}
+            widgetSettings={widgetSettings}
+            onCheckboxChangeHandler={onCheckboxChangeHandler}
+            onChangeHandler={onChangeHandler}
+            onChangeHandlerWithTranslate={onChangeHandlerWithTranslate}
+            onChangeLanguageHandler={onChangeLanguageHandler}
+            setWidgetSettings={setWidgetSettings}
+            widgetId={widget._id}
           />
 
-          <UniqueFields widgetData={widgetData}
-                        widgetId={widget._id}
-                        widgetSettings={widgetSettings}
-                        setWidgetSettings={setWidgetSettings}
-                        setWidgetData={setWidgetData}
-                        onChangeHandler={onChangeHandler}
-                        onUniqueDataChangeHandler={onUniqueDataChangeHandler}
-                        onUniqueDataChangeHandlerWithTranslate={onUniqueDataChangeHandlerWithTranslate}
-                        onChangeHandlerWithTranslate={onChangeHandlerWithTranslate}
-                        onUniqueDataJsonChangeHandler={onUniqueDataJsonChangeHandler}
-                        onCheckboxChangeHandler={onCheckboxChangeHandler}
+          <UniqueFields
+            widgetData={widgetData}
+            widgetId={widget._id}
+            widgetSettings={widgetSettings}
+            setWidgetSettings={setWidgetSettings}
+            setWidgetData={setWidgetData}
+            onChangeHandler={onChangeHandler}
+            onUniqueDataChangeHandler={onUniqueDataChangeHandler}
+            onUniqueDataChangeHandlerWithTranslate={onUniqueDataChangeHandlerWithTranslate}
+            onChangeHandlerWithTranslate={onChangeHandlerWithTranslate}
+            onUniqueDataJsonChangeHandler={onUniqueDataJsonChangeHandler}
+            onCheckboxChangeHandler={onCheckboxChangeHandler}
           />
-
         </div>
-        : null
-      }
+      ) : null}
 
-      {widgetData.stayOpen ?
-        <ActionButtons widgetData={widgetData}
-                       onCloneWidgetHandler={onCloneWidgetHandler}
-                       widgetId={widget._id}
-                       position={widget.data.position}
-                       widgetSettings={widgetSettings}
-                       setWidgetSettings={setWidgetSettings}
+      {widgetData.stayOpen ? (
+        <ActionButtons
+          widgetData={widgetData}
+          onCloneWidgetHandler={onCloneWidgetHandler}
+          widgetId={widget._id}
+          position={widget.data.position}
+          widgetSettings={widgetSettings}
+          setWidgetSettings={setWidgetSettings}
         />
-        : null
-      }
-
+      ) : null}
     </WidgetModelStyledDiv>
   );
-
 };
 export default WidgetModel;

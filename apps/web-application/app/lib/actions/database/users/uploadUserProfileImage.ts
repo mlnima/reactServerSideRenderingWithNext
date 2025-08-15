@@ -2,7 +2,7 @@
 import { connectToDatabase, userSchema, fileSchema } from '@repo/db';
 import { errorResponse, ServerActionResponse, successResponse } from '@lib/actions/response';
 import { verifySession } from '@lib/dal';
-import { getCurrentDatePath } from '@repo/utils';
+import { getCurrentDatePath } from '@repo/utils/dist/src';
 import path from 'path';
 import { mkdir, writeFile, unlink } from 'fs/promises';
 

@@ -3,10 +3,9 @@ import React, { FC, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-regular-svg-icons/faEye';
-import { shortNumber } from '@repo/utils';
+import { shortNumber } from '@repo/utils/dist/src';
 import './ActionButtons.scss';
 import { loginRegisterForm, setAlert } from '@store/reducers/globalStateReducer';
-
 
 import { faComments, faHeart as faHeardSolid } from '@fortawesome/free-solid-svg-icons';
 import { clearACacheByTag } from '@lib/serverActions';
@@ -25,15 +24,7 @@ interface IProps {
   _id: string | undefined;
 }
 
-const ActionButtons: FC<IProps> = (
-  {
-    rating,
-    likes,
-    views,
-    dictionary,
-    _id,
-  }) => {
-
+const ActionButtons: FC<IProps> = ({ rating, likes, views, dictionary, _id }) => {
   const dispatch = useAppDispatch();
   const { loggedIn } = useAppSelector(({ user }) => user);
   const [didView, setDidView] = useState<boolean>(false);
@@ -54,8 +45,7 @@ const ActionButtons: FC<IProps> = (
     if (_id && typeof window !== 'undefined') {
       const stored = localStorage.getItem('likedPosts');
       let likedPosts: string[] = stored ? JSON.parse(stored) : [];
-      if (likedPosts.includes(_id))
-        setDidLike(true);
+      if (likedPosts.includes(_id)) setDidLike(true);
     }
   }, []);
 
@@ -65,13 +55,15 @@ const ActionButtons: FC<IProps> = (
     if (loggedIn && _id) {
       try {
         setRateLock(true);
-        const { success, message , data } = await ratePost({ _id }) as ServerActionResponse<{result:string}>;
+        const { success, message, data } = (await ratePost({ _id })) as ServerActionResponse<{ result: string }>;
 
         if (!success || !data) {
-          dispatch(setAlert({
-            message,
-            type: 'error',
-          }));
+          dispatch(
+            setAlert({
+              message,
+              type: 'error',
+            }),
+          );
           return;
         }
 
@@ -79,36 +71,36 @@ const ActionButtons: FC<IProps> = (
 
         let likedPosts: string[] = stored ? JSON.parse(stored) : [];
 
-        const result = data.result
+        const result = data.result;
         if (likedPosts.includes(_id)) {
-          if (result === 'liked'){
-            return
-          }else {
-            likedPosts = likedPosts.filter(id => id !== _id);
+          if (result === 'liked') {
+            return;
+          } else {
+            likedPosts = likedPosts.filter((id) => id !== _id);
             setDidLike(false);
           }
         } else {
           if (result === 'liked') {
             likedPosts.push(_id);
             setDidLike(true);
-          }else {
+          } else {
             setDidLike(false);
           }
         }
         localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
-       // await clearACacheByTag(`CPostRating-${_id}`); since we are getting the rating along the post to avoid high memory usage, we will clear the post cache,
+        // await clearACacheByTag(`CPostRating-${_id}`); since we are getting the rating along the post to avoid high memory usage, we will clear the post cache,
         await clearACacheByTag(`CPost-${_id}`);
       } catch (error) {
-        dispatch(setAlert({
-          message: 'Something Went Wrong',
-          type: 'error',
-        }));
+        dispatch(
+          setAlert({
+            message: 'Something Went Wrong',
+            type: 'error',
+          }),
+        );
       }
     } else {
       dispatch(loginRegisterForm('register'));
     }
-
-
   };
 
   const onCommentsButtonClickHandler = () => {
@@ -123,7 +115,6 @@ const ActionButtons: FC<IProps> = (
     }
   };
 
-
   useEffect(() => {
     if (rateLock) {
       setTimeout(() => {
@@ -137,13 +128,9 @@ const ActionButtons: FC<IProps> = (
       <div className="actionButtonsLeftArea">
         {views ? (
           <span className={'actionItem views'} title={dictionary?.['Views'] || 'Views'}>
-                        <FontAwesomeIcon
-                          className={'rate-logo view'}
-                          color={'var(--primary-text-color)'}
-                          icon={faEye}
-                        />
-                        <p className="ActionItemValue">{shortNumber(views + 1)} </p>
-                    </span>
+            <FontAwesomeIcon className={'rate-logo view'} color={'var(--primary-text-color)'} icon={faEye} />
+            <p className="ActionItemValue">{shortNumber(views + 1)} </p>
+          </span>
         ) : null}
 
         {rating ? (
@@ -153,7 +140,8 @@ const ActionButtons: FC<IProps> = (
               onClick={onRateHandler}
               disabled={rateLock}
               aria-label="like"
-              title={dictionary?.['Like'] || 'Like'}>
+              title={dictionary?.['Like'] || 'Like'}
+            >
               <FontAwesomeIcon
                 className={'rate-logo thumbs-up'}
                 color={rateLock ? '#666' : 'var(--primary-text-color)'}
@@ -168,9 +156,7 @@ const ActionButtons: FC<IProps> = (
         </button>
       </div>
 
-      <div className="actionButtonsRightArea">
-
-      </div>
+      <div className="actionButtonsRightArea"></div>
     </div>
   );
 };

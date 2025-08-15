@@ -1,6 +1,6 @@
 'use client';
 import React, { FC, useEffect } from 'react';
-import { convertDurationStringToIso8601, convertDateToIsoString } from '@repo/utils';
+import { convertDurationStringToIso8601, convertDateToIsoString } from '@repo/utils/dist/src';
 import { IPost } from '@repo/typescript-types';
 import './VideoPlayersWrapper.scss';
 import InternalVideoPlayer from '../InternalVideoPlayer/InternalVideoPlayer';

@@ -5,7 +5,7 @@ import { MetasType } from '@repo/typescript-types';
 import moment from 'moment/moment';
 import path from 'path';
 
-import { convertMetasTypeToSingular } from '@repo/utils';
+import { convertMetasTypeToSingular } from '@repo/utils/dist/src';
 
 const sitemapItemsPerPage = 500;
 

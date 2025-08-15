@@ -2,9 +2,9 @@
 
 import React from 'react';
 import { postTypes } from '@repo/data-structures';
-import { inputValueSimplifier } from '@repo/utils';
+import { inputValueSimplifier } from '@repo/utils/dist/src';
 import { IInitialSettings } from '@repo/typescript-types';
-import './PostByUserSettings.scss'
+import './PostByUserSettings.scss';
 
 interface PropTypes {
   initialSettingsData: IInitialSettings;
@@ -12,10 +12,8 @@ interface PropTypes {
 }
 
 const PostByUserSettings: React.FC<PropTypes> = ({ setInitialSettingsData, initialSettingsData }) => {
-
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>, postType: string) => {
     const value = inputValueSimplifier(e);
-
 
     setInitialSettingsData((prevState: IInitialSettings | null) => {
       if (!prevState || !prevState.membershipSettings?.postByUserSettings) return prevState;
@@ -31,7 +29,7 @@ const PostByUserSettings: React.FC<PropTypes> = ({ setInitialSettingsData, initi
             },
           },
         },
-      }
+      };
     });
   };
 
@@ -42,7 +40,7 @@ const PostByUserSettings: React.FC<PropTypes> = ({ setInitialSettingsData, initi
       </div>
 
       <div className={'checkboxFieldItems'}>
-        {postTypes.map(postType => {
+        {postTypes.map((postType) => {
           return (
             <div className={'checkboxFieldItem'} key={postType}>
               <div className={'checkboxFieldItemSection'}>
@@ -51,7 +49,7 @@ const PostByUserSettings: React.FC<PropTypes> = ({ setInitialSettingsData, initi
               <div className={'checkboxFieldItemSection'}>
                 <p>Allow</p>
                 <input
-                  onChange={e => onChangeHandler(e, postType)}
+                  onChange={(e) => onChangeHandler(e, postType)}
                   type={'checkbox'}
                   name={'allow'}
                   checked={initialSettingsData?.membershipSettings?.postByUserSettings?.[postType]?.allow}
@@ -62,7 +60,7 @@ const PostByUserSettings: React.FC<PropTypes> = ({ setInitialSettingsData, initi
               <div className={'checkboxFieldItemSection'}>
                 <p>Max Categories</p>
                 <input
-                  onChange={e => onChangeHandler(e, postType)}
+                  onChange={(e) => onChangeHandler(e, postType)}
                   type={'number'}
                   name={'maxCategories'}
                   value={initialSettingsData?.membershipSettings?.postByUserSettings?.[postType]?.maxCategories}
@@ -73,7 +71,7 @@ const PostByUserSettings: React.FC<PropTypes> = ({ setInitialSettingsData, initi
               <div className={'checkboxFieldItemSection'}>
                 <p>Max Tags</p>
                 <input
-                  onChange={e => onChangeHandler(e, postType)}
+                  onChange={(e) => onChangeHandler(e, postType)}
                   type={'number'}
                   name={'maxTags'}
                   value={initialSettingsData?.membershipSettings?.postByUserSettings?.[postType]?.maxTags}
@@ -85,7 +83,7 @@ const PostByUserSettings: React.FC<PropTypes> = ({ setInitialSettingsData, initi
                 <div className={'checkboxFieldItemSection'}>
                   <p>Max Actors</p>
                   <input
-                    onChange={e => onChangeHandler(e, postType)}
+                    onChange={(e) => onChangeHandler(e, postType)}
                     type={'number'}
                     name={'maxActors'}
                     value={initialSettingsData?.membershipSettings?.postByUserSettings?.[postType]?.maxActors}

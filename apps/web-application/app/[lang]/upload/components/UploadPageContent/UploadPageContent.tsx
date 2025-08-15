@@ -3,7 +3,7 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { capitalizeFirstLetter, imageCanvasCompressor, reduceArrayOfDataToIds } from '@repo/utils';
+import { capitalizeFirstLetter, imageCanvasCompressor, reduceArrayOfDataToIds } from '@repo/utils/dist/src';
 import MultipleImageUploader from '../MultipleImageUploader/MultipleImageUploader';
 import MetaDataSelector from '../MetaDataSelector/MetaDataSelector';
 import Price from '../Price/Price';
@@ -82,9 +82,9 @@ const UploadPageContent = ({ _id, postType, dictionary, locale }: IProps) => {
 
   const getPostMeta = async (_id: string) => {
     try {
-      const {success,data} = await getMeta(_id);
-      if(!success || !data){
-        return
+      const { success, data } = await getMeta(_id);
+      if (!success || !data) {
+        return;
       }
       setEditingPost(prevState => ({ ...prevState, categories: [data.meta] }));
 
@@ -94,12 +94,12 @@ const UploadPageContent = ({ _id, postType, dictionary, locale }: IProps) => {
   };
 
   const getEditingPostData = async () => {
-    const { success, data }= await getEditingPost({ _id});
+    const { success, data } = await getEditingPost({ _id });
 
-    if (!success || !data){
-      return
+    if (!success || !data) {
+      return;
     }
-    console.log(`data=> `,data)
+    console.log(`data=> `, data);
     setEditingPost(data.post);
     setEditingPostOriginal(data.post);
   };
@@ -141,7 +141,7 @@ const UploadPageContent = ({ _id, postType, dictionary, locale }: IProps) => {
         });
         formData.append('thumbnail', compressedImageFile, imageToProcess.name);
       } catch (compressionError) {
-        console.error("Image compression error:", compressionError);
+        console.error('Image compression error:', compressionError);
         dispatch(setAlert({ type: 'error', message: 'Failed to compress image.' }));
         return;
       }
@@ -208,7 +208,7 @@ const UploadPageContent = ({ _id, postType, dictionary, locale }: IProps) => {
         }
       }
     } catch (error) {
-      console.error("Error submitting post:", error);
+      console.error('Error submitting post:', error);
       dispatch(
         setAlert({
           type: 'error',
@@ -217,7 +217,6 @@ const UploadPageContent = ({ _id, postType, dictionary, locale }: IProps) => {
       );
     }
   };
-
 
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -249,12 +248,12 @@ const UploadPageContent = ({ _id, postType, dictionary, locale }: IProps) => {
 
   const onDeleteHandler = async () => {
 
-    const {success,error,message} = await deletePost({_id:editingPost?._id})
+    const { success, error, message } = await deletePost({ _id: editingPost?._id });
     dispatch(
       setAlert({
         message,
-        type: success ?  'success' : 'error',
-        error
+        type: success ? 'success' : 'error',
+        error,
       }),
     );
     router.push(locale === process.env.NEXT_PUBLIC_DEFAULT_LOCALE ? '/' : `/${locale}`);

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import * as process from 'node:process';
-import { verifyVideoToken } from '@repo/utils-server/dist/src/auth';
+import { verifyVideoToken } from '@repo/utils-server';
 
 const videoStreamVerifyMiddleware = (req: Request, res: Response, next) => {
   const allowedExternalDomains = process.env.ALLOWED_VIDEO_FETCHING_FROM || '';

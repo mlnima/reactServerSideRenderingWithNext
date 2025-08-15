@@ -5,7 +5,7 @@ import bcrypt from 'bcryptjs';
 import { generateJwtToken } from '@lib/actions/database/tools';
 import { IInitialSettings, IRegisterNewUser } from '@repo/typescript-types';
 import { sendVerificationEmail } from '@lib/emailService';
-import { emailValidator, passwordValidatorRegisterForm, usernameValidatorRegisterForm } from '@repo/utils';
+import { emailValidator, passwordValidatorRegisterForm, usernameValidatorRegisterForm } from '@repo/utils/dist/src';
 import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 
 const validateInputs = ({

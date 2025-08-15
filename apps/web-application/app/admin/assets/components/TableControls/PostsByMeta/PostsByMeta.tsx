@@ -2,7 +2,7 @@
 import React, { useEffect, FC, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { createQueryString, removeQueryParam } from '@repo/utils';
+import { createQueryString, removeQueryParam } from '@repo/utils/dist/src';
 import './PostsByMeta.scss';
 
 const PostsByMeta: FC = () => {
@@ -14,20 +14,25 @@ const PostsByMeta: FC = () => {
   const onSearchByMetaHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (metaId && metaId?.trim()?.match(/^[0-9a-fA-F]{24}$/)) {
-      router.push(pathname + '?' + createQueryString([
-        { name: 'metaId', value: metaId },
-        { name: 'page', value: '1' },
-        { name: 'keyword', value: '' },
-      ], searchParams), { scroll: false });
+      router.push(
+        pathname +
+          '?' +
+          createQueryString(
+            [
+              { name: 'metaId', value: metaId },
+              { name: 'page', value: '1' },
+              { name: 'keyword', value: '' },
+            ],
+            searchParams,
+          ),
+        { scroll: false },
+      );
     }
   };
 
   const onDeleteMetaHandler = () => {
     if (searchParams.get('metaId')) {
-      router.push(pathname + '?' + removeQueryParam(
-        ['keyword', 'metaId', 'page'],
-        searchParams,
-      ), { scroll: false });
+      router.push(pathname + '?' + removeQueryParam(['keyword', 'metaId', 'page'], searchParams), { scroll: false });
     }
   };
 

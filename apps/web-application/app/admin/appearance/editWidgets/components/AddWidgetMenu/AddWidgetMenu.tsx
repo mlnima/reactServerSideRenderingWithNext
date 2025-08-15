@@ -2,26 +2,26 @@
 import React, { FC, useState } from 'react';
 import WidgetImporter from './WidgetImporter/WidgetImporter';
 import WidgetExporter from './WidgetExporter/WidgetExporter';
-import { convertVariableNameToName } from '@repo/utils';
+import { convertVariableNameToName } from '@repo/utils/dist/src';
 import { widgetsTypes, widgetsStaticPositions } from '@repo/data-structures';
 import defaultWidgetsData from './defaultWidgetsData';
 import { useAppDispatch } from '@store/hooks';
 import { IWidget } from '@repo/typescript-types';
-import './AddWidgetMenu.scss'
+import './AddWidgetMenu.scss';
 import dashboardCreateNewWidget from '@lib/actions/database/widgets/dashboardCreateNewWidget';
 import { setAlert } from '@store/reducers/globalStateReducer';
 import { useRouter } from 'next/navigation';
 
-interface IProps{
-  widgetsInGroups:{
-    [key:string]:IWidget[]
-  },
-  customPages:string[]
-
+interface IProps {
+  widgetsInGroups: {
+    [key: string]: IWidget[];
+  };
+  customPages: string[];
 }
-const AddWidgetMenu:FC<IProps> = ({customPages=[],widgetsInGroups}) => {
+
+const AddWidgetMenu: FC<IProps> = ({ customPages = [], widgetsInGroups }) => {
   const dispatch = useAppDispatch();
-  const router = useRouter()
+  const router = useRouter();
 
   const [state, setState] = useState({
     position: 'home',
@@ -56,36 +56,37 @@ const AddWidgetMenu:FC<IProps> = ({customPages=[],widgetsInGroups}) => {
       return;
     }
 
-    router.refresh()
-
+    router.refresh();
   };
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setState(prevState => ({
+    setState((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
   };
-  
+
   return (
     <div id={'adminAddWidgetMenu'} className="add-export-widgets">
       <form className={'add-new-widget-form'} onSubmit={onAddNewWidget}>
         <select name={'type'} className={'primarySelect'} value={state.type} onChange={onChangeHandler}>
           {widgetsTypes.map((type: string, index: number) => (
-            <option key={index} value={type}>{convertVariableNameToName(type)}</option>
+            <option key={index} value={type}>
+              {convertVariableNameToName(type)}
+            </option>
           ))}
         </select>
         <select name={'position'} className={'primarySelect'} value={state.position} onChange={onChangeHandler}>
           {widgetsStaticPositions.map((position) => (
-            <option value={position} key={position}>{convertVariableNameToName(position)}</option>
+            <option value={position} key={position}>
+              {convertVariableNameToName(position)}
+            </option>
           ))}
           {customPages.map((customPage: string, index: number) => (
             <React.Fragment key={index}>
-              <option value={customPage}>{convertVariableNameToName(customPage )}</option>
-              <option
-                value={customPage + 'LeftSidebar'}>{convertVariableNameToName(customPage) + ' Left Sidebar'}</option>
-              <option
-                value={customPage + 'RightSidebar'}>{convertVariableNameToName(customPage) + ' Right Sidebar'}</option>
+              <option value={customPage}>{convertVariableNameToName(customPage)}</option>
+              <option value={customPage + 'LeftSidebar'}>{convertVariableNameToName(customPage) + ' Left Sidebar'}</option>
+              <option value={customPage + 'RightSidebar'}>{convertVariableNameToName(customPage) + ' Right Sidebar'}</option>
             </React.Fragment>
           ))}
         </select>

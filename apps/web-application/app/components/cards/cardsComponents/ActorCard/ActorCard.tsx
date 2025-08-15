@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { IMeta } from '@repo/typescript-types';
 import Link from 'next/link';
-import { capitalizeFirstLetter } from '@repo/utils';
+import { capitalizeFirstLetter } from '@repo/utils/dist/src';
 import CardTitle from '@components/cards/asset/CardTitle/CardTitle';
 import './ActorCard.scss';
 import MetaCardImage from '@components/cards/asset/CardImageRenderer/MetaCardImage';
@@ -17,18 +17,9 @@ interface ActorCardPropTypes {
   };
 }
 
-const ActorCard: FC<ActorCardPropTypes> = (
-  {
-    meta,
-    index,
-    isSidebar,
-    actorUrl,
-    isNextImageAllowed = false,
-    dictionary,
-  }) => {
+const ActorCard: FC<ActorCardPropTypes> = ({ meta, index, isSidebar, actorUrl, isNextImageAllowed = false, dictionary }) => {
   return (
     <article className={`actor-card metaCard${isSidebar ? ' actorCardSidebar' : ''}`}>
-
       <Link href={actorUrl} className="actor-card-link" title={meta?.name as string}>
         <MetaCardImage
           usage={'actorCard'}
@@ -44,12 +35,10 @@ const ActorCard: FC<ActorCardPropTypes> = (
         <div className={`card-info`}>
           <CardTitle title={capitalizeFirstLetter(meta?.name)} useLink={false} url={actorUrl} />
           <span className={'actorCardCounts smallText'}>
-
-                {meta?.count}
+            {meta?.count}
             <span>{dictionary?.['Videos'] || 'Videos'}</span>
           </span>
         </div>
-
       </Link>
     </article>
   );

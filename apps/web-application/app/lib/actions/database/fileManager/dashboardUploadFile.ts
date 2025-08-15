@@ -5,7 +5,7 @@ import path from 'path';
 import { mkdir, writeFile } from 'fs/promises';
 
 import mime from 'mime-types';
-import { getCurrentDatePath } from '@repo/utils';
+import { getCurrentDatePath } from '@repo/utils/dist/src';
 
 const dashboardUploadFile = async ({ file }: { file: FormData }) => {
   try {
@@ -13,7 +13,6 @@ const dashboardUploadFile = async ({ file }: { file: FormData }) => {
     if (!formFile || !(formFile instanceof File)) {
       return errorResponse({ message: 'Invalid file' });
     }
-
 
     const fileName = formFile.name;
     const ext = path.extname(fileName).toLowerCase().replace('.', ''); // e.g. 'exe'
@@ -45,7 +44,7 @@ const dashboardUploadFile = async ({ file }: { file: FormData }) => {
 
     const datePath = getCurrentDatePath('ym');
     const relativeUploadPath = `/public/uploads/${category}/${datePath}`;
-    const absoluteUploadPath = path.join(process.cwd(), '..', 'api-server' , 'public', 'uploads', category, datePath);
+    const absoluteUploadPath = path.join(process.cwd(), '..', 'api-server', 'public', 'uploads', category, datePath);
 
     await mkdir(absoluteUploadPath, { recursive: true });
 

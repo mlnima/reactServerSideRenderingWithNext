@@ -1,7 +1,7 @@
 'use client';
 import { FC } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { rangeNumGenerator } from '@repo/utils';
+import { rangeNumGenerator } from '@repo/utils/dist/src';
 import Link from 'next/link';
 import './Pagination.styles.scss';
 
@@ -17,9 +17,7 @@ const Pagination: FC<IProps> = ({ totalCount, currentPage = 1, contentPerPage = 
   const maxPage = Math.ceil(totalCount / contentPerPage);
 
   if (totalCount > contentPerPage) {
-    const range = rangeNumGenerator(currentPage, maxPage).filter(
-      (n: number) => n !== (1 || maxPage) && n < maxPage && n > 0,
-    );
+    const range = rangeNumGenerator(currentPage, maxPage).filter((n: number) => n !== (1 || maxPage) && n < maxPage && n > 0);
     const rangeWithMinMax = [1, ...range, maxPage];
 
     return (

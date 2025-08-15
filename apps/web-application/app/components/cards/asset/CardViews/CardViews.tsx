@@ -1,24 +1,24 @@
 import React, { FC } from 'react';
-import { shortNumber } from '@repo/utils';
+import { shortNumber } from '@repo/utils/dist/src';
 import './CardViews.scss';
 
 interface CardViewsPropTypes {
-    views: number | undefined;
-    dictionary: {
-        [key: string]: string;
-    },
-    showViewsOnCard:boolean
+  views: number | undefined;
+  dictionary: {
+    [key: string]: string;
+  };
+  showViewsOnCard: boolean;
 }
 
 const CardViews: FC<CardViewsPropTypes> = ({ views, dictionary, showViewsOnCard }) => {
-    if (!views) return null;
+  if (!views) return null;
 
-    return (
-        <span className={`cardViews smallText cardStat`}>
-            <span >
-                {shortNumber(views)} {dictionary?.['Views'] || 'Views'}
-            </span>
-        </span>
-    );
+  return (
+    <span className={`cardViews smallText cardStat`}>
+      <span>
+        {shortNumber(views)} {dictionary?.['Views'] || 'Views'}
+      </span>
+    </span>
+  );
 };
 export default CardViews;

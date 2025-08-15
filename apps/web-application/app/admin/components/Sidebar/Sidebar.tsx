@@ -3,20 +3,21 @@ import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { setSidebarStatus } from '@store/reducers/globalStateReducer';
 import menuItems from './menuItems.json';
-import { convertVariableNameToName } from '@repo/utils';
+import { convertVariableNameToName } from '@repo/utils/dist/src';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusMinus } from '@fortawesome/free-solid-svg-icons/faPlusMinus';
 import Link from 'next/link';
 import './Sidebar.scss';
 
 interface IMenuItem {
-  name:string,
+  name: string;
   url: string;
   subItems?: IMenuItem[];
 }
+
 const Sidebar = () => {
   const dispatch = useAppDispatch();
-  const sidebar = useAppSelector(({globalState}) => globalState.sidebar);
+  const sidebar = useAppSelector(({ globalState }) => globalState.sidebar);
   const [hovered, setHovered] = useState('');
 
   const renderItems = menuItems.map((item: IMenuItem) => (
@@ -35,7 +36,7 @@ const Sidebar = () => {
           <span
             className="sidebar-items-switch"
             onMouseOver={() => setHovered(item.name)}
-            onClick={() => setHovered( hovered === item.name ? '' : item.name)}
+            onClick={() => setHovered(hovered === item.name ? '' : item.name)}
           >
             <FontAwesomeIcon icon={faPlusMinus} className="sidebar-items-switch-icon" />
           </span>

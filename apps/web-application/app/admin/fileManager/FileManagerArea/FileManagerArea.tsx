@@ -1,6 +1,6 @@
 'use client';
 import React, { FC } from 'react';
-import { fileTypeDetector } from '@repo/utils';
+import { fileTypeDetector } from '@repo/utils/dist/src';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFile } from '@fortawesome/free-solid-svg-icons/faFile';
 import { faSliders } from '@fortawesome/free-solid-svg-icons/faSliders';
@@ -17,18 +17,17 @@ interface IProps {
 }
 
 const FileManagerArea: FC<IProps> = ({ uploadFile, setFileManagerState, fileManagerState }) => {
-
   const IconToRender = (data: any) => {
     const itemType = fileTypeDetector(data.fileName);
     if (itemType === 'image') {
       return (
         <React.Fragment>
-          <img className="file-manager-image-item"
-               alt={'icon'}
-               src={`${fileManagerState.path.replace('.', process.env.NEXT_PUBLIC_API_SERVER_URL || '')}/${data.fileName}`}
+          <img
+            className="file-manager-image-item"
+            alt={'icon'}
+            src={`${fileManagerState.path.replace('.', process.env.NEXT_PUBLIC_API_SERVER_URL || '')}/${data.fileName}`}
           />
         </React.Fragment>
-
       );
     } else if (itemType === 'video') {
       return (
@@ -37,20 +36,31 @@ const FileManagerArea: FC<IProps> = ({ uploadFile, setFileManagerState, fileMana
         </video>
       );
     } else {
-      const logoToRender = data.fileName.includes('.js') ? faFile :
-        data.fileName.includes('.env') ? faSliders :
-          !data.fileName.includes('.') ? faFolder :
-            data.fileName.includes('.scss') ? faSass :
-              data.fileName.includes('.pdf') ? faFilePdf :
-                data.fileName.includes('.css') ? faCss3 :
-                  faFile;
+      const logoToRender = data.fileName.includes('.js')
+        ? faFile
+        : data.fileName.includes('.env')
+          ? faSliders
+          : !data.fileName.includes('.')
+            ? faFolder
+            : data.fileName.includes('.scss')
+              ? faSass
+              : data.fileName.includes('.pdf')
+                ? faFilePdf
+                : data.fileName.includes('.css')
+                  ? faCss3
+                  : faFile;
 
-      const logoColorToRender = data.fileName.includes('.js') ? '#efd81d' :
-        data.fileName.includes('.env') ? 'red' :
-          !data.fileName.includes('.') ? '#ffe8a0' :
-            data.fileName.includes('.scss') ? 'red' :
-              data.fileName.includes('.css') ? 'blue' :
-                'white';
+      const logoColorToRender = data.fileName.includes('.js')
+        ? '#efd81d'
+        : data.fileName.includes('.env')
+          ? 'red'
+          : !data.fileName.includes('.')
+            ? '#ffe8a0'
+            : data.fileName.includes('.scss')
+              ? 'red'
+              : data.fileName.includes('.css')
+                ? 'blue'
+                : 'white';
 
       return (
         <React.Fragment>
@@ -82,9 +92,7 @@ const FileManagerArea: FC<IProps> = ({ uploadFile, setFileManagerState, fileMana
   });
 
   return (
-    <div id="FileManagerArea" onDrop={e => uploadFile(e)}
-         onDragOver={e => e.preventDefault()}>
-
+    <div id="FileManagerArea" onDrop={(e) => uploadFile(e)} onDragOver={(e) => e.preventDefault()}>
       {renderDir}
     </div>
   );

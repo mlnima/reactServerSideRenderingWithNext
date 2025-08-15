@@ -6,7 +6,7 @@ import HeadDataSettings from './HeadDataSettings';
 import MembershipSettings from './MembershipSettings/MembershipSettings';
 import LayoutSettings from './layoutSettings';
 import { useAppDispatch } from '@store/hooks';
-import { inputValueSimplifier } from '@repo/utils';
+import { inputValueSimplifier } from '@repo/utils/dist/src';
 import LanguagesOptions from '@components/global/LanguagesOptions';
 import { IInitialSettings } from '@repo/typescript-types';
 import dashboardUpdateSettings from '@lib/actions/database/settings/dashboardUpdateSettings';
@@ -19,12 +19,10 @@ interface PropTypes {
 }
 
 const InitialSettingsPageWrapper: FC<PropTypes> = ({ initialSettings }) => {
-
   const [initialSettingsData, setInitialSettingsData] = useState<IInitialSettings | null>(null);
 
   const dispatch = useAppDispatch();
   const [language, setLanguage] = useState('default');
-
 
   useEffect(() => {
     if (initialSettings) {
@@ -36,9 +34,7 @@ const InitialSettingsPageWrapper: FC<PropTypes> = ({ initialSettings }) => {
   //   console.log(`initialSettings=> `,initialSettings);
   // }, [initialSettings]);
 
-
   const onSaveHandler = async () => {
-
     const { success, error, message } = await dashboardUpdateSettings({
       type: 'initialSettings',
       data: initialSettingsData,
@@ -47,16 +43,23 @@ const InitialSettingsPageWrapper: FC<PropTypes> = ({ initialSettings }) => {
     dispatch(
       setAlert({
         message,
-        type: !success ?  'Error' : 'Success',
+        type: !success ? 'Error' : 'Success',
         err: error || null,
       }),
     );
-    await clearACacheByTag('CSetting-initialSettings')
+    await clearACacheByTag('CSetting-initialSettings');
   };
 
-  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | {
-    name: string
-  }>, key: string) => {
+  const onChangeHandler = (
+    e: React.ChangeEvent<
+      | HTMLInputElement
+      | HTMLTextAreaElement
+      | {
+          name: string;
+        }
+    >,
+    key: string,
+  ) => {
     const value = inputValueSimplifier(e);
     if (!e.target?.name) return;
     // @ts-expect-error: it's fine
@@ -67,7 +70,6 @@ const InitialSettingsPageWrapper: FC<PropTypes> = ({ initialSettings }) => {
         [e.target.name]: value,
       },
     }));
-
   };
 
   const onJsonChangeHandler = (e: React.ChangeEvent<HTMLInputElement>, key: string) => {
@@ -81,9 +83,16 @@ const InitialSettingsPageWrapper: FC<PropTypes> = ({ initialSettings }) => {
     }));
   };
 
-  const onChangeHandlerWithTranslation = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | {
-    name: string
-  }>, key: string) => {
+  const onChangeHandlerWithTranslation = (
+    e: React.ChangeEvent<
+      | HTMLInputElement
+      | HTMLTextAreaElement
+      | {
+          name: string;
+        }
+    >,
+    key: string,
+  ) => {
     if (language === 'default') {
       onChangeHandler(e, key);
     } else {
@@ -107,7 +116,6 @@ const InitialSettingsPageWrapper: FC<PropTypes> = ({ initialSettings }) => {
     }
   };
 
-
   if (!initialSettingsData) return null;
 
   return (
@@ -116,7 +124,8 @@ const InitialSettingsPageWrapper: FC<PropTypes> = ({ initialSettings }) => {
       <select
         name="activeEditingLanguage"
         className={'primarySelect active-editing-language'}
-        onChange={e => setLanguage(e.target.value)}>
+        onChange={(e) => setLanguage(e.target.value)}
+      >
         <option value="default">{process.env.NEXT_PUBLIC_DEFAULT_LOCALE ?? 'default'}</option>
         <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALES || ''} />
       </select>
@@ -135,17 +144,24 @@ const InitialSettingsPageWrapper: FC<PropTypes> = ({ initialSettings }) => {
           setInitialSettingsData={setInitialSettingsData}
           onSaveHandler={onSaveHandler}
         />
-        <MembershipSettings onChangeHandler={onChangeHandler} initialSettingsData={initialSettingsData}
-                            setInitialSettingsData={setInitialSettingsData} />
+        <MembershipSettings
+          onChangeHandler={onChangeHandler}
+          initialSettingsData={initialSettingsData}
+          setInitialSettingsData={setInitialSettingsData}
+        />
       </div>
       <button className={'btn btn-primary'} onClick={onSaveHandler}>
         Save
       </button>
-      <KeyboardHandler shortcuts={[{
-        keys: ['s'],
-        ctrlKey: true,
-        callback: onSaveHandler
-      }]} />
+      <KeyboardHandler
+        shortcuts={[
+          {
+            keys: ['s'],
+            ctrlKey: true,
+            callback: onSaveHandler,
+          },
+        ]}
+      />
     </div>
   );
 };

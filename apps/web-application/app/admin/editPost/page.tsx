@@ -9,7 +9,7 @@ import Meta from './components/Meta/Meta';
 import RatingOption from './components/RatingOption';
 import PostInformation from './components/PostInformation/PostInformation';
 import LanguagesOptions from '@components/global/LanguagesOptions';
-import { isNumericString } from '@repo/utils';
+import { isNumericString } from '@repo/utils/dist/src';
 import Author from './components/Author';
 import { useSearchParams } from 'next/navigation';
 import './styles.scss';

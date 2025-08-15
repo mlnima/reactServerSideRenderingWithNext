@@ -1,25 +1,25 @@
 'use client';
 import React, { FC } from 'react';
-import { convertVariableNameToName } from '@repo/utils';
+import { convertVariableNameToName } from '@repo/utils/dist/src';
 import WidgetModel from '../WidgetModel/WidgetModel';
 import './WidgetGroupByPosition.scss';
-import {  useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { IWidget } from '@repo/typescript-types';
 
 interface IProps {
-  position: string
-  widgets:IWidget[]
-  customPages:string[]
-  onCloneWidgetHandler:Function
+  position: string;
+  widgets: IWidget[];
+  customPages: string[];
+  onCloneWidgetHandler: Function;
 }
 
-const WidgetGroupByPosition: FC<IProps> = ({ position,widgets,customPages,onCloneWidgetHandler }) => {
+const WidgetGroupByPosition: FC<IProps> = ({ position, widgets, customPages, onCloneWidgetHandler }) => {
   const searchParams = useSearchParams();
   const paramsPositions = searchParams.getAll('position');
 
   const sortedWidgets = widgets.sort((a, b) => {
-    return (a.data.widgetIndex > b.data.widgetIndex) ? 1 : -1;
-  })
+    return a.data.widgetIndex > b.data.widgetIndex ? 1 : -1;
+  });
 
   if (!paramsPositions?.includes(position)) return null;
 

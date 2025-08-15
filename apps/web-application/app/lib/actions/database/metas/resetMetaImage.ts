@@ -1,6 +1,6 @@
 'use server';
 import { connectToDatabase, metaSchema, postSchema } from '@repo/db';
-import { randomNumberGenerator } from '@repo/utils';
+import { randomNumberGenerator } from '@repo/utils/dist/src';
 
 const resetMetaImage = async (_id: string) => {
   try {

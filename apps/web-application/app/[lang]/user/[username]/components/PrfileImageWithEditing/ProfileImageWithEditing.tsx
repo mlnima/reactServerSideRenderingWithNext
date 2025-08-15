@@ -4,7 +4,7 @@ import './ProfileImageWithEditing.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons/faCirclePlus';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { imageCanvasCompressor } from '@repo/utils';
+import { imageCanvasCompressor } from '@repo/utils/dist/src';
 import { replaceUserProfileImage } from '@store/reducers/userReducers/userReducer';
 import uploadUserProfileImage from '@lib/actions/database/users/uploadUserProfileImage';
 import { ServerActionResponse } from '@lib/actions/response';
@@ -20,34 +20,28 @@ const ProfileImageWithEditing = () => {
   const onUploadHandler = async (event: UploadEvent): Promise<void> => {
     try {
       if (loggedIn) {
-
-
         const formData = new FormData();
 
-        const image = 'files' in event.target ?
-          event.target.files?.[0] :
-          // @ts-expect-error: need fix
-          (event as React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLDivElement>)?.dataTransfer?.files[0];
+        const image =
+          'files' in event.target
+            ? event.target.files?.[0]
+            : // @ts-expect-error: need fix
+              (event as React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLDivElement>)?.dataTransfer?.files[0];
         if (!image) return;
 
-
-        const compressedFile = await imageCanvasCompressor({
+        const compressedFile = (await imageCanvasCompressor({
           image,
           outputType: 'file',
           maxWidth: 200,
           maxHeight: 200,
           fileName: `${userData._id}.webp`,
-        }) as File;
+        })) as File;
 
         formData.append('file', compressedFile, compressedFile.name);
 
-
-        const {
-          success,
-          data,
-          error,
-          message,
-        } = await uploadUserProfileImage({ file: formData }) as unknown as ServerActionResponse<{ filePath: string }>;
+        const { success, data, error, message } = (await uploadUserProfileImage({ file: formData })) as unknown as ServerActionResponse<{
+          filePath: string;
+        }>;
 
         if (!success || !data?.filePath) {
           dispatch(
@@ -56,11 +50,10 @@ const ProfileImageWithEditing = () => {
               type: 'error',
             }),
           );
-          return
+          return;
         }
 
         dispatch(replaceUserProfileImage(`${data.filePath}?time${performance.now()}`));
-
       }
     } catch {
       return;
@@ -76,11 +69,11 @@ const ProfileImageWithEditing = () => {
   return (
     <div
       className="profileImage"
-      onDrop={async e => {
+      onDrop={async (e) => {
         e.preventDefault();
         await onUploadHandler(e);
       }}
-      onDragOver={e => e.preventDefault()}
+      onDragOver={(e) => e.preventDefault()}
     >
       <img
         onClick={onImageClickHandler}
@@ -93,17 +86,11 @@ const ProfileImageWithEditing = () => {
         icon={faCirclePlus}
         style={{ width: '20px', height: '20px' }}
       />
-      <input
-        ref={uploadInputElement}
-        type="file"
-        style={{ display: 'none' }}
-        onChange={e => onUploadHandler(e)}
-      />
+      <input ref={uploadInputElement} type="file" style={{ display: 'none' }} onChange={(e) => onUploadHandler(e)} />
     </div>
   );
 };
 export default ProfileImageWithEditing;
-
 
 
 // formData.append(
@@ -123,8 +110,6 @@ export default ProfileImageWithEditing;
 //
 //
 // ;
-
-
 
 
 // const res = await fetch(`${process.env.NEXT_PUBLIC_PRODUCTION_URL}/api/upload`, {

@@ -2,7 +2,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { createQueryString } from '@repo/utils';
+import { createQueryString } from '@repo/utils/dist/src';
 import './MetasType.scss';
 
 const MetasType: React.FC = () => {
@@ -13,10 +13,18 @@ const MetasType: React.FC = () => {
   const onFormatChangeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (!e.target.value) return;
 
-    router.push(pathname + '?' + createQueryString([
-      { name: 'metaType', value: e.target.value },
-      { name: 'page', value: '1' },
-    ], searchParams), { scroll: false });
+    router.push(
+      pathname +
+        '?' +
+        createQueryString(
+          [
+            { name: 'metaType', value: e.target.value },
+            { name: 'page', value: '1' },
+          ],
+          searchParams,
+        ),
+      { scroll: false },
+    );
   };
 
   return (

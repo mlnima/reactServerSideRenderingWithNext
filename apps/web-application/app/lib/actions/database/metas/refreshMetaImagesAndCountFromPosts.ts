@@ -1,7 +1,7 @@
 'use server';
 import { connectToDatabase, metaSchema, isValidObjectId, postSchema } from '@repo/db';
 import { IMeta, MetasType, IPost } from '@repo/typescript-types';
-import { randomNumberGenerator } from '@repo/utils';
+import { randomNumberGenerator } from '@repo/utils/dist/src';
 import mongoose, { ClientSession } from 'mongoose';
 import { errorResponse, ServerActionResponse, successResponse } from '@lib/actions/response';
 
@@ -175,11 +175,20 @@ const setSingleMetaImageAndCount = async (meta: IMeta, session: ClientSession) =
         }
       }
 
-      await metaSchema.findByIdAndUpdate(meta?._id, { $set: { ...updateData } }, { timestamps: false, session }).finally(() => {
-        console.log(
-          `${meta?.type} ${meta?.name} has ${metaCount} and image set to ${updateData?.imageUrl || '/asset/images/default/no-image-available.png'}`,
-        );
-      });
+      await metaSchema
+        .findByIdAndUpdate(
+          meta?._id,
+          { $set: { ...updateData } },
+          {
+            timestamps: false,
+            session,
+          },
+        )
+        .finally(() => {
+          console.log(
+            `${meta?.type} ${meta?.name} has ${metaCount} and image set to ${updateData?.imageUrl || '/asset/images/default/no-image-available.png'}`,
+          );
+        });
     } else {
       await metaSchema.findByIdAndUpdate(meta?._id, { $set: { status: 'draft' } }, { timestamps: false, session });
       console.log(meta.name, ` status changed from ${meta.status} to draft`);

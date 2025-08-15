@@ -1,6 +1,6 @@
 'use client';
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { inputValueSimplifier } from '@repo/utils';
+import { inputValueSimplifier } from '@repo/utils/dist/src';
 import LanguagesOptions from '@components/global/LanguagesOptions';
 import MonacoEditor from '@components/textEditors/MonacoEditor';
 import { useSearchParams } from 'next/navigation';
@@ -12,9 +12,7 @@ import { ServerActionResponse } from '@lib/actions/response';
 import { setAlert } from '@store/reducers/globalStateReducer';
 import { clearACacheByTag } from '@lib/serverActions';
 
-interface PropTypes {
-
-}
+interface PropTypes {}
 
 const EditDefaultPage: React.FC<PropTypes> = () => {
   const dispatch = useAppDispatch();
@@ -39,9 +37,8 @@ const EditDefaultPage: React.FC<PropTypes> = () => {
 
   const getPageSettings = async () => {
     if (pageName) {
-
-      const { success, data, message, error } = await getSettings([pageName]) as ServerActionResponse<{
-        [key: string]: object
+      const { success, data, message, error } = (await getSettings([pageName])) as ServerActionResponse<{
+        [key: string]: object;
       }>;
 
       if (!success) {
@@ -56,19 +53,20 @@ const EditDefaultPage: React.FC<PropTypes> = () => {
     }
   };
 
-
   useEffect(() => {
     getPageSettings();
   }, [searchParams, pageName]);
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLTextAreaElement>) => {
-    setFieldsData(prevState => ({
+    setFieldsData((prevState) => ({
       ...prevState,
       [e.target.name]: inputValueSimplifier(e),
     }));
   };
 
-  const onChangeHandlerWithTranslation = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLTextAreaElement>) => {
+  const onChangeHandlerWithTranslation = (
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLTextAreaElement>,
+  ) => {
     if (language === 'default') {
       onChangeHandler(e);
     } else {
@@ -90,15 +88,15 @@ const EditDefaultPage: React.FC<PropTypes> = () => {
     e.preventDefault();
     try {
       if (pageName) {
-       const {success,error,message}= await dashboardUpdateSettings({ type: pageName, data: fieldsData });
+        const { success, error, message } = await dashboardUpdateSettings({ type: pageName, data: fieldsData });
         if (!success) {
-          dispatch(setAlert({ message, type: 'error', active: true,error }));
+          dispatch(setAlert({ message, type: 'error', active: true, error }));
           return;
         }
-        await clearACacheByTag(`CSetting-${pageName}`)
+        await clearACacheByTag(`CSetting-${pageName}`);
       }
     } catch (error) {
-      dispatch(setAlert({type: 'error', active: true,error }));
+      dispatch(setAlert({ type: 'error', active: true, error }));
     }
   };
 
@@ -111,56 +109,73 @@ const EditDefaultPage: React.FC<PropTypes> = () => {
         </button>
       </div>
       <p>Editing language</p>
-      <select name="activeEditingLanguage" className={'primarySelect active-editing-language'}
-              onChange={e => setLanguage(e.target.value)}>
+      <select
+        name="activeEditingLanguage"
+        className={'primarySelect active-editing-language'}
+        onChange={(e) => setLanguage(e.target.value)}
+      >
         <option value="default">{process.env.NEXT_PUBLIC_DEFAULT_LOCALE ?? 'default'}</option>
         <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALES || ''} />
       </select>
       <p>Sidebar</p>
       {/*//@ts-ignore*/}
-      <select name="sidebar" className={'primarySelect'} onChange={onChangeHandler}
+      <select
+        name="sidebar"
+        className={'primarySelect'}
+        onChange={onChangeHandler}
         //@ts-ignore
-              value={fieldsData?.sidebar || 'no'}>
+        value={fieldsData?.sidebar || 'no'}
+      >
         <option value={'both'}>Both</option>
         <option value={'left'}>Left</option>
         <option value={'right'}>Right</option>
         <option value={'no'}>No</option>
       </select>
 
-      {!dynamicSettingsPageMatcher.test(pageName as string) && <>
-        <div className="form-field">
-          <p>Title:</p>
-          <input className={'primaryInput'}
-                 type="text" onChange={(e) => onChangeHandlerWithTranslation(e)}
-            //@ts-ignore
-                 value={language === 'default' ? fieldsData.title : fieldsData?.translations?.[language]?.title || {}}
-                 name={'title'}
-                 placeholder={'Title'} />
-        </div>
-        <div className="form-field">
-          <p>Description:</p>
-          <textarea className={'primaryInput'}
-                    onChange={(e) => onChangeHandlerWithTranslation(e)}
-            //@ts-ignore
-                    value={language === 'default' ? fieldsData.description : fieldsData?.translations?.[language]?.description || ''}
-                    name={'description'}
-                    placeholder={'Description'} />
-        </div>
-        <div className="form-field">
-          <p>Keywords:</p>
-          <input className={'primaryInput'}
-                 type="text" onChange={(e) => onChangeHandlerWithTranslation(e)}
-                 // @ts-expect-error: it's fine
-                 value={language === 'default' ? fieldsData.keywords : fieldsData?.translations?.[language]?.keywords || ''}
-                 name={'keywords'}
-                 placeholder={'Keywords'} />
-        </div>
-      </>}
+      {!dynamicSettingsPageMatcher.test(pageName as string) && (
+        <>
+          <div className="form-field">
+            <p>Title:</p>
+            <input
+              className={'primaryInput'}
+              type="text"
+              onChange={(e) => onChangeHandlerWithTranslation(e)}
+              //@ts-ignore
+              value={language === 'default' ? fieldsData.title : fieldsData?.translations?.[language]?.title || {}}
+              name={'title'}
+              placeholder={'Title'}
+            />
+          </div>
+          <div className="form-field">
+            <p>Description:</p>
+            <textarea
+              className={'primaryInput'}
+              onChange={(e) => onChangeHandlerWithTranslation(e)}
+              //@ts-ignore
+              value={language === 'default' ? fieldsData.description : fieldsData?.translations?.[language]?.description || ''}
+              name={'description'}
+              placeholder={'Description'}
+            />
+          </div>
+          <div className="form-field">
+            <p>Keywords:</p>
+            <input
+              className={'primaryInput'}
+              type="text"
+              onChange={(e) => onChangeHandlerWithTranslation(e)}
+              // @ts-expect-error: it's fine
+              value={language === 'default' ? fieldsData.keywords : fieldsData?.translations?.[language]?.keywords || ''}
+              name={'keywords'}
+              placeholder={'Keywords'}
+            />
+          </div>
+        </>
+      )}
 
       <button className={'btn btn-primary'} type={'button'} onClick={() => setHeadEditor(!headEditor)}>
         Head Editor
       </button>
-      {headEditor &&
+      {headEditor && (
         <div className={'editors'}>
           <div className={'editor-wrapper'}>
             <p>Custom Head Tags:</p>
@@ -177,7 +192,7 @@ const EditDefaultPage: React.FC<PropTypes> = () => {
             />
           </div>
         </div>
-      }
+      )}
 
       <div className="form-field">
         <button className={'btn btn-primary'} type={'submit'}>

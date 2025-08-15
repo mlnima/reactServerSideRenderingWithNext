@@ -1,5 +1,5 @@
 import { getDictionary } from '../../../../../get-dictionary';
-import { capitalizeFirstLetter, queryUniquer } from '@repo/utils';
+import { capitalizeFirstLetter, queryUniquer } from '@repo/utils/dist/src';
 import { AlternatesGenerators } from '@lib/alternatesCanonicalGenerator';
 import { IInitialSettings, IPageProps } from '@repo/typescript-types';
 import localDetector from '@lib/localDetector';
@@ -16,7 +16,7 @@ const postsMetaGenerator = async (props: IPageProps) => {
   const locale = localDetector(params.lang);
   const dictionary = await getDictionary(locale);
   const { initialSettings } = unwrapResponse(
-    await getSettings(['initialSettings']) as unknown as ServerActionResponse<{
+    (await getSettings(['initialSettings'])) as unknown as ServerActionResponse<{
       initialSettings: IInitialSettings | undefined;
     }>,
   );

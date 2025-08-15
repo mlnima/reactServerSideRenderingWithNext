@@ -1,7 +1,7 @@
 'use server';
-import { postSchema, userSchema, connectToDatabase, userRelationSchema, userEngagementSchema,searchKeywordSchema } from '@repo/db';
+import { postSchema, userSchema, connectToDatabase, userRelationSchema, userEngagementSchema, searchKeywordSchema } from '@repo/db';
 // import { IUserEngagement, IUserRelation, User } from '@repo/typescript-types';
-import { universalSanitizer } from '@repo/utils';
+import { universalSanitizer } from '@repo/utils/dist/src';
 // import { z } from 'zod';
 // import xss from 'xss'
 
@@ -92,7 +92,7 @@ export const fixSearchKeywords = async () => {
     console.log(`Found ${allKeywords.length} total search keywords to check`);
 
     for (const keyword of allKeywords) {
-       const { isValid, sanitized, reason } = universalSanitizer(keyword.name,'search')
+      const { isValid, sanitized, reason } = universalSanitizer(keyword.name, 'search');
 
       if (!isValid) {
         try {
@@ -100,15 +100,15 @@ export const fixSearchKeywords = async () => {
         } catch (deleteError) {
           console.error(`Failed to delete keyword "${keyword.name}":`, deleteError);
         }
-      }else{
-        console.log(`${keyword?.name?.substring(0, 50)} is valid `,)
+      } else {
+        console.log(`${keyword?.name?.substring(0, 50)} is valid `);
       }
     }
   } catch (error) {
     console.error('Error during search keywords cleanup:', error);
     return {
       success: false,
-      error: error.message
+      error: error.message,
     };
   }
 };

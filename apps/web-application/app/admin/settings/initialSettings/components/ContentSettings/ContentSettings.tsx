@@ -2,9 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
-import { capitalizeFirstLetter, convertVariableNameToName, inputValueSimplifier } from '@repo/utils';
+import { capitalizeFirstLetter, convertVariableNameToName, inputValueSimplifier } from '@repo/utils/dist/src';
 import { IInitialSettings } from '@repo/typescript-types';
-import { postTypes } from "@repo/data-structures";
+import { postTypes } from '@repo/data-structures';
 import './ContentSettings.scss';
 
 interface PropTypes {
@@ -14,14 +14,7 @@ interface PropTypes {
   setInitialSettingsData: React.Dispatch<React.SetStateAction<IInitialSettings | null>>;
 }
 
-const ContentSettings: React.FC<PropTypes> = (
-  {
-    onChangeHandler,
-    initialSettingsData,
-    onSaveHandler,
-    setInitialSettingsData,
-  }) => {
-
+const ContentSettings: React.FC<PropTypes> = ({ onChangeHandler, initialSettingsData, onSaveHandler, setInitialSettingsData }) => {
   const [openPostSettings, setOpenPostSettings] = useState(false);
   const postConfigTypes = [
     'viewSystem',
@@ -44,7 +37,7 @@ const ContentSettings: React.FC<PropTypes> = (
         ...prevState.contentSettings.postSettings,
         [postType]: {
           ...(prevState.contentSettings.postSettings[postType] || {}),
-          [e.target.name as keyof typeof postConfigTypes[number]]: value,
+          [e.target.name as keyof (typeof postConfigTypes)[number]]: value,
         },
       };
 
@@ -71,7 +64,7 @@ const ContentSettings: React.FC<PropTypes> = (
       <div className="inputField">
         <p>Cards Width in Desktop:</p>
         <input
-          onChange={e => onChangeHandler(e, 'contentSettings')}
+          onChange={(e) => onChangeHandler(e, 'contentSettings')}
           name={'cardsWidthDesktop'}
           value={initialSettingsData?.contentSettings?.cardsWidthDesktop}
           className={'primaryInput'}
@@ -81,7 +74,7 @@ const ContentSettings: React.FC<PropTypes> = (
       <div className="inputField">
         <p>Content per page:</p>
         <input
-          onChange={e => onChangeHandler(e, 'contentSettings')}
+          onChange={(e) => onChangeHandler(e, 'contentSettings')}
           name={'contentPerPage'}
           value={initialSettingsData?.contentSettings?.contentPerPage}
           className={'primaryInput'}
@@ -91,7 +84,7 @@ const ContentSettings: React.FC<PropTypes> = (
       <div className="inputField">
         <p>Number of cards per row In Mobile:</p>
         <input
-          onChange={e => onChangeHandler(e, 'contentSettings')}
+          onChange={(e) => onChangeHandler(e, 'contentSettings')}
           name={'numberOfCardsPerRowInMobile'}
           value={initialSettingsData?.contentSettings?.numberOfCardsPerRowInMobile}
           className={'primaryInput'}
@@ -123,12 +116,9 @@ const ContentSettings: React.FC<PropTypes> = (
                     onChange={(e) => onPostTypeSettingChangeHandler(e, postType)}
                     type={'checkbox'}
                     name={postTypeSetting}
-
                     checked={
                       // @ts-expect-error: its fine
-                      initialSettingsData?.contentSettings?.postSettings?.[postType]?.[
-                        postTypeSetting
-                        ]
+                      initialSettingsData?.contentSettings?.postSettings?.[postType]?.[postTypeSetting]
                     }
                     className={'primaryInput'}
                   />

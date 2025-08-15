@@ -1,12 +1,12 @@
 'use client';
 
 import React, { FC, SyntheticEvent, useRef } from 'react';
-import { uniqArrayBy } from '@repo/utils';
+import { uniqArrayBy } from '@repo/utils/dist/src';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons/faXmark';
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus';
 import { IMeta, IPost } from '@repo/typescript-types';
-import './Meta.scss'
+import './Meta.scss';
 
 interface PropType {
   type: 'categories' | 'tags' | 'actors';
@@ -17,7 +17,7 @@ interface PropType {
 const Meta: FC<PropType> = ({ post, type, setPost }) => {
   let newItemsElement = useRef(null);
 
-  const deleteItem = (e : any) => {
+  const deleteItem = (e: any) => {
     if (post?.[type]) {
       setPost((prevState) => ({
         ...prevState,
@@ -27,11 +27,13 @@ const Meta: FC<PropType> = ({ post, type, setPost }) => {
     }
   };
 
-  const addNewItem = (e:any) => {
+  const addNewItem = (e: any) => {
     e.preventDefault();
     if (!newItemsElement.current) return;
     // @ts-expect-error: it's fine
-    const metasToAdd = newItemsElement.current.value.includes(',') ? newItemsElement.current.value.split(',') : [newItemsElement.current.value];
+    const metasToAdd = newItemsElement.current.value.includes(',')
+      ? newItemsElement.current.value.split(',')
+      : [newItemsElement.current.value];
     const newItemsToSchemaForm = metasToAdd.map((newItem: string) => {
       return {
         name: newItem.trim().toLowerCase(),
@@ -51,8 +53,6 @@ const Meta: FC<PropType> = ({ post, type, setPost }) => {
         // @ts-expect-error: it's fine
         newItemsElement.current.value = '';
       }
-
-
     }, 100);
   };
 
@@ -67,16 +67,14 @@ const Meta: FC<PropType> = ({ post, type, setPost }) => {
 
   return (
     <div className="postMetaEditor">
-      <form className="add-new-meta" onSubmit={e => addNewItem(e)}>
+      <form className="add-new-meta" onSubmit={(e) => addNewItem(e)}>
         <input className={'primaryInput'} ref={newItemsElement} type="text" />
         <button className={'btn btn-success'} type="submit">
           <FontAwesomeIcon icon={faPlus} className={'add-new-meta-icon'} />
         </button>
       </form>
       <span className="small-info">Separate tags with commas</span>
-      <div className="items">
-        {addedItems}
-      </div>
+      <div className="items">{addedItems}</div>
     </div>
   );
 };

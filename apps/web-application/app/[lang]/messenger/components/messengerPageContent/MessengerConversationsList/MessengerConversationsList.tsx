@@ -1,65 +1,61 @@
 import MessengerConversationPreview from './MessengerConversationPreview/MessengerConversationPreview';
 import { IMessengerConversation } from '@repo/typescript-types';
-import { sortArrayByPropertyOfObject,uniqArrayBy } from '@repo/utils';
+import { sortArrayByPropertyOfObject, uniqArrayBy } from '@repo/utils/dist/src';
 import React, { FC, useEffect, useRef } from 'react';
 import './MessengerConversationsList.scss';
 
 interface IProps {
-    onGetConversationListHandler: () => void;
-    conversationsList: IMessengerConversation[];
+  onGetConversationListHandler: () => void;
+  conversationsList: IMessengerConversation[];
 }
 
 const MessengerConversationsList: FC<IProps> = ({ onGetConversationListHandler, conversationsList }) => {
-    const conversationListRef = useRef<null | HTMLDivElement>(null);
-    const prevScrollPosition = useRef(0);
+  const conversationListRef = useRef<null | HTMLDivElement>(null);
+  const prevScrollPosition = useRef(0);
 
-    useEffect(() => {
-        if (conversationListRef.current) {
+  useEffect(() => {
+    if (conversationListRef.current) {
+      conversationListRef.current.scroll({
+        top: 1,
+        behavior: 'smooth',
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
+      const { scrollTop } = event.currentTarget;
+      prevScrollPosition.current = scrollTop;
+
+      if (scrollTop === 0) {
+        onGetConversationListHandler();
+        setTimeout(() => {
+          if (conversationListRef.current) {
             conversationListRef.current.scroll({
-                top: 1,
-                behavior: 'smooth',
+              top: 1,
+              behavior: 'smooth',
             });
-        }
-    }, []);
+          }
+        }, 500);
+      }
+    };
 
-    useEffect(() => {
-        const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
-            const { scrollTop } = event.currentTarget;
-            prevScrollPosition.current = scrollTop;
+    const conversationList = conversationListRef.current;
+    conversationList?.addEventListener('scroll', handleScroll as unknown as EventListener);
+    return () => conversationList?.removeEventListener('scroll', handleScroll as unknown as EventListener);
+  }, [conversationsList]);
 
-            if (scrollTop === 0) {
-                onGetConversationListHandler();
-                setTimeout(() => {
-                    if (conversationListRef.current) {
-                        conversationListRef.current.scroll({
-                            top: 1,
-                            behavior: 'smooth',
-                        });
-                    }
-                }, 500);
-            }
-        };
+  const renderConversationsPreview = sortArrayByPropertyOfObject(uniqArrayBy(conversationsList || [], '_id'), 'updatedAt', 'desc').map(
+    (conversationData: IMessengerConversation) => {
+      return <MessengerConversationPreview key={conversationData._id} conversationData={conversationData} />;
+    },
+  );
 
-        const conversationList = conversationListRef.current;
-        conversationList?.addEventListener('scroll', handleScroll as unknown as EventListener);
-        return () => conversationList?.removeEventListener('scroll', handleScroll as unknown as EventListener);
-    }, [conversationsList]);
-
-    const renderConversationsPreview = sortArrayByPropertyOfObject(
-        uniqArrayBy(conversationsList || [], '_id'),
-        'updatedAt',
-        'desc',
-    ).map((conversationData: IMessengerConversation) => {
-        return <MessengerConversationPreview key={conversationData._id} conversationData={conversationData} />;
-    });
-
-    return (
-        <div id={'messengerConversationsList'} className={'custom-scroll'} ref={conversationListRef}>
-            {renderConversationsPreview}
-            {!conversationsList || conversationsList?.length < 1 ? (
-                <p className="no-message">there is no messages yet</p>
-            ) : null}
-        </div>
-    );
+  return (
+    <div id={'messengerConversationsList'} className={'custom-scroll'} ref={conversationListRef}>
+      {renderConversationsPreview}
+      {!conversationsList || conversationsList?.length < 1 ? <p className="no-message">there is no messages yet</p> : null}
+    </div>
+  );
 };
 export default MessengerConversationsList;

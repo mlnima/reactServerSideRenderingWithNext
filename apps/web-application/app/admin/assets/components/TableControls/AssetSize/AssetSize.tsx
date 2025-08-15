@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { createQueryString } from '@repo/utils';
+import { createQueryString } from '@repo/utils/dist/src';
 import './AssetSize.scss';
 
 interface IProps {
@@ -19,10 +19,18 @@ const AssetSize: React.FC<IProps> = ({ contentPerPage = 20 }) => {
   const onChangeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newSize = e.target.value;
     setCurrentSize(parseInt(newSize));
-    router.push(pathname + '?' + createQueryString([
-      { name: 'size', value: newSize },
-      { name: 'page', value: '1' },
-    ], searchParams), { scroll: false });
+    router.push(
+      pathname +
+        '?' +
+        createQueryString(
+          [
+            { name: 'size', value: newSize },
+            { name: 'page', value: '1' },
+          ],
+          searchParams,
+        ),
+      { scroll: false },
+    );
   };
 
   useEffect(() => {
@@ -34,8 +42,10 @@ const AssetSize: React.FC<IProps> = ({ contentPerPage = 20 }) => {
   return (
     <div id={'AssetSize'} className={'assetControlItem'}>
       <select className={'primarySelect'} value={currentSize} onChange={onChangeHandler}>
-        {range.map(unit => (
-          <option key={unit} value={unit}>{unit}</option>
+        {range.map((unit) => (
+          <option key={unit} value={unit}>
+            {unit}
+          </option>
         ))}
       </select>
     </div>

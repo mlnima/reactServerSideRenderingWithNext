@@ -1,13 +1,13 @@
 // @ts-nocheck
 import got from 'got';
 import jsdom from 'jsdom';
-import { convertSecondsToTimeString } from '@repo/utils';
+import { convertSecondsToTimeString } from '@repo/utils/dist/src';
 
 const { JSDOM } = jsdom;
 
 const xHScrapper = async (url) => {
   try {
-    return await got(url).then(async videoPageData => {
+    return await got(url).then(async (videoPageData) => {
       const videoPageDom = new JSDOM(videoPageData.body.toString()).window.document;
       let videoData = {
         tags: [],
@@ -20,12 +20,10 @@ const xHScrapper = async (url) => {
       const initialsScript = videoPageDom?.querySelector('#initials-script');
       const initialsScriptAsText = initialsScript?.textContent;
 
-
       const initialsScriptContent = initialsScriptAsText ? initialsScriptAsText.replace('window.initials=', '') : null;
       const videoDataJson = initialsScriptContent ? initialsScriptContent.slice(0, -1) : null;
 
       if (videoDataJson) {
-
         try {
           const parsedObject = eval('(' + videoDataJson + ')');
           const videoModel = parsedObject?.['videoModel'];
@@ -41,7 +39,6 @@ const xHScrapper = async (url) => {
         } catch (error) {
           console.log('Error Parsing VideoData=> ', error);
         }
-
       }
 
       const metaPurifier = async (type, elementsList) => {
@@ -76,13 +73,11 @@ const xHScrapper = async (url) => {
       await metaPurifier('categories', categoriesElements);
       await metaPurifier('tags', tagsElements);
 
-
       return videoData;
     });
   } catch (error) {
     console.log(error);
   }
-
 };
 
 export default xHScrapper;

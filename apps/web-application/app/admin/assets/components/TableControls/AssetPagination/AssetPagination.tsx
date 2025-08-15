@@ -1,11 +1,10 @@
 'use client';
 import React, { FC, useMemo } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-import { capitalizeFirstLetter, createQueryString } from '@repo/utils';
+import { capitalizeFirstLetter, createQueryString } from '@repo/utils/dist/src';
 import { useSearchParams } from 'next/navigation';
 import { _updateSearchParams } from '@lib/navigationTools';
 import './AssetPagination.scss';
-
 
 interface PropTypes {
   totalCount: number;
@@ -28,11 +27,8 @@ const AssetPagination: FC<PropTypes> = ({ totalCount = 0 }) => {
   };
 
   const onSearchHandler = (targetPage: number) => {
-    router.push(pathname + '?' + createQueryString([
-      { name: 'page', value: targetPage.toString() },
-    ], searchParams), { scroll: false });
+    router.push(pathname + '?' + createQueryString([{ name: 'page', value: targetPage.toString() }], searchParams), { scroll: false });
   };
-
 
   return (
     <div className="assetControlItem AssetPagination">
@@ -42,8 +38,7 @@ const AssetPagination: FC<PropTypes> = ({ totalCount = 0 }) => {
       <button onClick={() => onSearchHandler(1)} className="btn btn-navigation">
         1
       </button>
-      <button onClick={() => onSearchHandler(currentPage - 1)} className="btn btn-navigation"
-              disabled={currentPage === 1}>
+      <button onClick={() => onSearchHandler(currentPage - 1)} className="btn btn-navigation" disabled={currentPage === 1}>
         {'<'}
       </button>
       <input
@@ -56,8 +51,7 @@ const AssetPagination: FC<PropTypes> = ({ totalCount = 0 }) => {
         type={'number'}
         className={'primaryInput'}
       />
-      <button onClick={() => onSearchHandler(currentPage + 1)} className="btn btn-navigation"
-              disabled={currentPage === maxPage}>
+      <button onClick={() => onSearchHandler(currentPage + 1)} className="btn btn-navigation" disabled={currentPage === maxPage}>
         {'>'}
       </button>
       <button onClick={() => onSearchHandler(maxPage)} className="btn btn-navigation">

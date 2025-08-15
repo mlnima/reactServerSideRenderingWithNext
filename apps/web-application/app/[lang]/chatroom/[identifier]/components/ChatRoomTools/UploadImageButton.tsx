@@ -4,13 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons/faCamera';
 import socket from '@lib/web-socket-client';
 import { useAppSelector } from '@store/hooks';
-import { imageCanvasCompressor } from '@repo/utils';
+import { imageCanvasCompressor } from '@repo/utils/dist/src';
 
 interface PropTypes {
-  inputRef: React.RefObject<HTMLInputElement | null>,
-  chatroomId: string
-  authorId: string | undefined,
-  setMessageText: React.Dispatch<React.SetStateAction<string>>
+  inputRef: React.RefObject<HTMLInputElement | null>;
+  chatroomId: string;
+  authorId: string | undefined;
+  setMessageText: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const UploadImageButton: FC<PropTypes> = ({ inputRef, chatroomId, authorId, setMessageText }) => {
@@ -18,7 +18,8 @@ const UploadImageButton: FC<PropTypes> = ({ inputRef, chatroomId, authorId, setM
   const onSelectImageHandler = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files && event.target.files[0];
 
-    if (file) { // Check if the file is not null
+    if (file) {
+      // Check if the file is not null
       try {
         const messageData = await imageCanvasCompressor({
           image: file,
@@ -49,8 +50,6 @@ const UploadImageButton: FC<PropTypes> = ({ inputRef, chatroomId, authorId, setM
     }
   };
 
-
-
   const onClickHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     if (inputRef?.current) {
@@ -60,15 +59,9 @@ const UploadImageButton: FC<PropTypes> = ({ inputRef, chatroomId, authorId, setM
 
   return (
     <>
-      <input ref={inputRef}
-             type="file"
-             accept="image/*"
-             style={{ display: 'none' }}
-             onChange={onSelectImageHandler} />
+      <input ref={inputRef} type="file" accept="image/*" style={{ display: 'none' }} onChange={onSelectImageHandler} />
 
-      <button className={'chatroomToolBoxActionBtn paperclip-button'}
-              type={'button'}
-              onClick={e => onClickHandler(e)}>
+      <button className={'chatroomToolBoxActionBtn paperclip-button'} type={'button'} onClick={(e) => onClickHandler(e)}>
         <FontAwesomeIcon icon={faCamera} style={{ width: 25, height: 25 }} />
       </button>
     </>

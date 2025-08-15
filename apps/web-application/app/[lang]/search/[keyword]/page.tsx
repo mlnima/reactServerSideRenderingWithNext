@@ -7,7 +7,7 @@ import React from 'react';
 import { IPageProps, IMeta, IPost, IInitialSettings, IPageSettings } from '@repo/typescript-types';
 import CategoriesPageContentRenderer from '@components/metas/CategoriesPageContentRenderer';
 import TagsPageContentRenderer from '@components/metas/TagsPageContentRenderer';
-import { capitalizeFirstLetters } from '@repo/utils';
+import { capitalizeFirstLetters } from '@repo/utils/dist/src';
 import './page.scss';
 import searchMetaGenerator from './components/searchMetaGenerator';
 import localDetector from '@lib/localDetector';
@@ -25,13 +25,13 @@ const searchPage = async (props: IPageProps) => {
   const dictionary = await getDictionary(locale);
 
   const { initialSettings } = unwrapResponse(
-    await getSettings(['initialSettings']) as unknown as ServerActionResponse<{
+    (await getSettings(['initialSettings'])) as unknown as ServerActionResponse<{
       initialSettings: IInitialSettings | undefined;
     }>,
   );
 
   const { searchPageSettings } = unwrapResponse(
-    await getSettings(['searchPageSettings']) as unknown as ServerActionResponse<{
+    (await getSettings(['searchPageSettings'])) as unknown as ServerActionResponse<{
       searchPageSettings: IPageSettings | undefined;
     }>,
   );
@@ -39,21 +39,10 @@ const searchPage = async (props: IPageProps) => {
   const sidebar = searchPageSettings?.sidebar;
   const contentPerPage = initialSettings?.contentSettings?.contentPerPage || 20;
 
-  const widgets = await getWidgets(
-    [
-      'searchPageTop',
-      'searchPageLeftSidebar',
-      'searchPageBottom',
-      'searchPageRightSidebar',
-    ],
-    locale
-  );
+  const widgets = await getWidgets(['searchPageTop', 'searchPageLeftSidebar', 'searchPageBottom', 'searchPageRightSidebar'], locale);
 
   const currentPageQuery = searchParams?.page;
-  const currentPage =
-    currentPageQuery && typeof currentPageQuery === 'string'
-      ? parseInt(currentPageQuery, 10)
-      : 1;
+  const currentPage = currentPageQuery && typeof currentPageQuery === 'string' ? parseInt(currentPageQuery, 10) : 1;
 
   const queryObject = {
     sort: searchParams?.sort,
@@ -63,24 +52,23 @@ const searchPage = async (props: IPageProps) => {
     // searchType: searchParams?.searchType
   };
 
-  const { success, data, message } =
-    await getSearch({
-      keyword: params.keyword,
-      page: currentPage,
-      locale,
-    }) as ServerActionResponse<{
-      posts: IPost[],
-      totalCount:number,
-      actors : IMeta[],
-      categories: IMeta[],
-      tags:IMeta[],
-    }>;
+  const { success, data, message } = (await getSearch({
+    keyword: params.keyword,
+    page: currentPage,
+    locale,
+  })) as ServerActionResponse<{
+    posts: IPost[];
+    totalCount: number;
+    actors: IMeta[];
+    categories: IMeta[];
+    tags: IMeta[];
+  }>;
 
-  if (!success || !data ) {
+  if (!success || !data) {
     return <Soft404 dictionary={dictionary} message={message} />;
   }
 
-  const { posts, totalCount, actors, categories, tags } = data
+  const { posts, totalCount, actors, categories, tags } = data;
 
   return (
     <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
@@ -88,23 +76,14 @@ const searchPage = async (props: IPageProps) => {
         {!!queryObject.keyword && (
           <div className={'searchPageTitle'}>
             <span>{`${dictionary['Search Result For'] || 'Search Result For'}: `}</span>
-            <h1>
-              {capitalizeFirstLetters(decodeURIComponent(queryObject.keyword))}
-            </h1>
+            <h1>{capitalizeFirstLetters(decodeURIComponent(queryObject.keyword))}</h1>
           </div>
         )}
-        <WidgetsRenderer
-          dictionary={dictionary}
-          locale={locale}
-          widgets={widgets?.['searchPageTop']}
-          position={'searchPageTop'}
-        />
+        <WidgetsRenderer dictionary={dictionary} locale={locale} widgets={widgets?.['searchPageTop']} position={'searchPageTop'} />
         {actors?.length > 0 && currentPage === 1 && (
           <div className={'metaSection'}>
             <div className={'metaSectionHeader'}>
-              <h2 className={'searchSectionTitle'}>
-                {dictionary['Actors'] || 'Actors'}:
-              </h2>
+              <h2 className={'searchSectionTitle'}>{dictionary['Actors'] || 'Actors'}:</h2>
             </div>
 
             <div className={'metaSectionCardsWrapper'}>
@@ -131,9 +110,7 @@ const searchPage = async (props: IPageProps) => {
         {categories?.length > 0 && currentPage === 1 && (
           <div className={'metaSection'}>
             <div className={'metaSectionHeader'}>
-              <h2 className={'searchSectionTitle'}>
-                {dictionary['Categories'] || 'Categories'}:
-              </h2>
+              <h2 className={'searchSectionTitle'}>{dictionary['Categories'] || 'Categories'}:</h2>
             </div>
 
             <div className={'metaSectionCardsWrapper'}>
@@ -151,9 +128,7 @@ const searchPage = async (props: IPageProps) => {
         {tags.length > 0 && currentPage === 1 && (
           <div className={'metaSection'}>
             <div className={'metaSectionHeader'}>
-              <h2 className={'searchSectionTitle'}>
-                {dictionary['Tags'] || 'Tags'}:
-              </h2>
+              <h2 className={'searchSectionTitle'}>{dictionary['Tags'] || 'Tags'}:</h2>
             </div>
 
             <div className={'metaSectionCardsWrapper'}>
@@ -161,12 +136,7 @@ const searchPage = async (props: IPageProps) => {
             </div>
           </div>
         )}
-        <WidgetsRenderer
-          dictionary={dictionary}
-          locale={locale}
-          widgets={widgets?.['actorPageBottom']}
-          position={'searchPageBottom'}
-        />
+        <WidgetsRenderer dictionary={dictionary} locale={locale} widgets={widgets?.['actorPageBottom']} position={'searchPageBottom'} />
       </main>
       <SidebarWidgetAreaRenderer
         leftSideWidgets={widgets?.['searchPageLeftSidebar']}

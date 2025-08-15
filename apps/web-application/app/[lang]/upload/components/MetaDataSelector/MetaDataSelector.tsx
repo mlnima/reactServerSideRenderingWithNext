@@ -1,7 +1,7 @@
 'use client';
 import React, { FC, Suspense } from 'react';
 import AsyncSelect from 'react-select/async';
-import { uniqArrayBy } from '@repo/utils';
+import { uniqArrayBy } from '@repo/utils/dist/src';
 import { MetasType, IPost } from '@repo/typescript-types';
 import './MetaDataSelector.scss';
 import { setAlert } from '@store/reducers/globalStateReducer';
@@ -21,13 +21,7 @@ interface SelectOption {
   label: string;
 }
 
-const MetaDataSelector: FC<ComponentPropTypes> = (
-  {
-    metaType,
-    setEditingPost,
-    maxLimit,
-    postData,
-  }) => {
+const MetaDataSelector: FC<ComponentPropTypes> = ({ metaType, setEditingPost, maxLimit, postData }) => {
   const dispatch = useAppDispatch();
 
   const onSelectHandler = (selected: SelectOption[] | null) => {
@@ -43,12 +37,12 @@ const MetaDataSelector: FC<ComponentPropTypes> = (
       return;
     }
 
-    const convertSelectedMetas = selected.map(selectedMeta => ({
+    const convertSelectedMetas = selected.map((selectedMeta) => ({
       name: selectedMeta.label,
       _id: selectedMeta.value,
     }));
 
-    setEditingPost(prevState => ({
+    setEditingPost((prevState) => ({
       ...prevState,
       [metaType]: uniqArrayBy(convertSelectedMetas, '_id'),
     }));
@@ -75,12 +69,10 @@ const MetaDataSelector: FC<ComponentPropTypes> = (
         <AsyncSelect
           name={metaType}
           className={'reactSelectComponent'}
-          onChange={val => onSelectHandler(val as SelectOption[])}
+          onChange={(val) => onSelectHandler(val as SelectOption[])}
           loadOptions={onLoadOptionsHandler}
           isMulti
-          value={(postData[metaType] || []).map(
-            (meta): SelectOption => ({ value: meta._id, label: meta.name }),
-          )}
+          value={(postData[metaType] || []).map((meta): SelectOption => ({ value: meta._id, label: meta.name }))}
           styles={reactSelectPrimaryTheme}
         />
       </Suspense>
