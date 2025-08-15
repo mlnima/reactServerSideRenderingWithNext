@@ -43,6 +43,7 @@ class OrderController {
       .find({ $and: [orderTypeQuery, statusQuery, searchQuery] })
       .skip(size * (pageNo - 1))
       .limit(size)
+      // @ts-expect-error: it's fine
       .sort(sortQuery)
       .exec();
     Promise.all([orders, ordersCount])

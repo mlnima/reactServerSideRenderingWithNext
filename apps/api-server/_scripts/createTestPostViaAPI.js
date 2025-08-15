@@ -63,27 +63,3 @@ axios
   })
   .then((r) => console.log(r.data))
   .catch((e) => console.error(e.response?.data || e.message));
-
-
-// form.append('videoFile', fs.createReadStream('./test.mp4'), {
-//   filename: 'test.mp4',
-//   contentType: 'video/mp4',
-// });
-//
-// form.append('imageFile', fs.createReadStream('./test.png'), {
-//   filename: 'test.png',
-//   contentType: 'image/png',
-// });
-
-// axios
-//   .post('http://localhost:4002/wp/v2/posts', testPost)
-//   .then((res) => {
-//     console.log('Post created:', res.data);
-//   })
-//   .catch((err) => {
-//     if (err.response) {
-//       console.error('Error response:', err.response.status, err.response.data);
-//     } else {
-//       console.error('Error:', err.message);
-//     }
-//   });

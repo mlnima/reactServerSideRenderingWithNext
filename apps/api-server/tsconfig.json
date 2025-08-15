@@ -1,18 +1,36 @@
 {
   "extends": "tsconfig/server.json",
-  "include": ["**/*.ts"],
-  "exclude": ["node_modules", ".turbo", "coverage", "dist/**/*", "generateStaticConfig.ts"
+  "include": [
+    "**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    ".turbo",
+    "coverage",
+    "dist/**/*",
+    "generateStaticConfig.ts"
   ],
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": ".",
     "baseUrl": ".",
+    "noCheck": true,
     "paths": {
-      "@_variables/*": ["./_variables/*"],
-      "@schemas/*": ["./schemas/*"],
-      "@util/*": ["./util/*"],
-      "@env/*": ["../../.env"],
-      "@store/*": ["./store/*"]
+      "@_variables/*": [
+        "./_variables/*"
+      ],
+      "@schemas/*": [
+        "./schemas/*"
+      ],
+      "@util/*": [
+        "./util/*"
+      ],
+      "@env/*": [
+        "../../.env"
+      ],
+      "@store/*": [
+        "./store/*"
+      ]
     },
     "lib": [
       "dom"

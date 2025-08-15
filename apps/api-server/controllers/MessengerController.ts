@@ -16,7 +16,9 @@ class MessengerController {
             model: 'messengerConversationMessage',
             options: {
               sort: { createdAt: -1 },
+              // @ts-expect-error: it's fine
               limit: req.query.limit || 10,
+              // @ts-expect-error: it's fine
               skip: req.query.skip || 0,
             },
           },

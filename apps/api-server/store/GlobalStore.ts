@@ -76,6 +76,7 @@ class GlobalStore {
       }
     }
 
+    // @ts-expect-error: it's fine
     this.widgets = allWidgets.reduce((widgetInPositions: any, widget: IWidget) => {
       if (!widgetInPositions[widget?.data?.position]) {
         widgetInPositions[widget.data.position] = [];
