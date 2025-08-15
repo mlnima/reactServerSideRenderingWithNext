@@ -1,9 +1,8 @@
 // @ts-nocheck
 import postSchema from '../schemas/postSchema';
 import { IPost } from '@repo/typescript-types';
-import updateSaveMetas from 'api-server/dist/util/_updateSaveMetas';
+
 import { updateCreateMultipleMetaByNameNType } from './meta';
-import path from 'node:path';
 
 const duplicatePostFinderQueryGenerator = (postData: IPost) => {
   try {

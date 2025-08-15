@@ -1,6 +1,6 @@
 import { UploadedFile } from 'express-fileupload';
 
-declare module '@repo/utils';
+declare module '@repo/utils/dist/src';
 declare module '@repo/data-structures';
 declare module 'tsconfig';
 declare module '@repo/ui';

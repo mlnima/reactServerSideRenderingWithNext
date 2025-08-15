@@ -1,4 +1,4 @@
-export { googleAnalyticsEvent, googleAnalyticsPageView } from './src/analytics';
+export { googleAnalyticsEvent, googleAnalyticsPageView } from './analytics';
 
 export {
   arraySortRandom,
@@ -8,24 +8,24 @@ export {
   sortArrayByPropertyOfObject,
   reduceWidgetsToGroups,
   reduceArrayOfDataToIds,
-} from './src/arrays';
+} from './arrays';
 
-export { convertSecondsToTimeString, convertDateToIsoString, convertDurationStringToIso8601, formatDatePostCard } from './src/dates';
+export { convertSecondsToTimeString, convertDateToIsoString, convertDurationStringToIso8601, formatDatePostCard } from './dates';
 
-export { universalSanitizer } from './src/sanitizer';
+export { universalSanitizer } from './sanitizer';
 
-export { touchDeviceDetector } from './src/devices';
-export { getCurrentDatePath } from './src/paths';
+export { touchDeviceDetector } from './devices';
+export { getCurrentDatePath } from './paths';
 
-export { removeFileExtension, blobToBase64, imageCanvasCompressor, ImageCompressorByBrowser } from './src/files';
+export { removeFileExtension, blobToBase64, imageCanvasCompressor, ImageCompressorByBrowser } from './files';
 
-export { getLocales, getDefaultLocale } from './src/i18n';
+export { getLocales, getDefaultLocale } from './i18n';
 
-export { inputValueSimplifier } from './src/inputs';
+export { inputValueSimplifier } from './inputs';
 
-export { shortNumber, randomNumberGenerator, rangeNumGenerator, ratingCalculator } from './src/maths';
+export { shortNumber, randomNumberGenerator, rangeNumGenerator, ratingCalculator } from './maths';
 
-export { isEmptyObject, getTextDataWithTranslation, removeEmptyProperties, nestedObjectModifier } from './src/objects';
+export { isEmptyObject, getTextDataWithTranslation, removeEmptyProperties, nestedObjectModifier } from './objects';
 
 export {
   capitalizeFirstLetter,
@@ -39,9 +39,9 @@ export {
   textContentReplacer,
   convertMetasTypeToPlural,
   convertMetasTypeToSingular,
-} from './src/strings';
+} from './strings';
 
-export { nextTranslateWithCallback } from './src/translations';
+export { nextTranslateWithCallback } from './translations';
 
 export {
   isAbsolutePath,
@@ -58,7 +58,7 @@ export {
   searchParamsToUrlQuery,
   createQueryString,
   removeQueryParam,
-} from './src/urls';
+} from './urls';
 
 export {
   usernameValidatorRegisterForm,
@@ -66,8 +66,8 @@ export {
   emailValidator,
   mongoIdValidatorByRegex,
   postTypeValidator,
-} from './src/validators';
+} from './validators';
 
-export { headerSizeCalculator } from './src/ui-elements';
+export { headerSizeCalculator } from './ui-elements';
 
-export { renderByLanguageCondition, renderByDayCondition, renderByDevice, isEditMode } from './src/widgets';
+export { renderByLanguageCondition, renderByDayCondition, renderByDevice, isEditMode } from './widgets';

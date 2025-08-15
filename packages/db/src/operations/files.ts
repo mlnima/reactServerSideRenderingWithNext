@@ -1,6 +1,6 @@
 import { join } from 'path';
 import { existsSync, unlinkSync } from 'fs';
-import { getCurrentDatePath } from '@repo/utils';
+import { getCurrentDatePath } from '@repo/utils/dist/src';
 import fsExtra from 'fs-extra';
 import fileSchema from '../schemas/fileSchema';
 import postSchema from '../schemas/postSchema';
