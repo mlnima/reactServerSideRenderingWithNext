@@ -22,10 +22,13 @@ import rateLimitMiddleware from '../middlewares/rateLimitMiddleware';
 import cacheSuccesses from '../middlewares/apiCache';
 // import CommentController from '../controllers/CommentController';
 import MetaController from '../controllers/MetaController';
-import multer from "multer"
+import multer from 'multer';
+//-------------------NEW imports
 
 const router = Router();
 const upload = multer();
+
+//---------------NEW
 
 //---------------------Comments-------------------
 // router.delete('/dashboard/comment', adminAuthMiddleware, CommentController.deleteComments);
@@ -106,12 +109,12 @@ router.get('/dashboard/settings', adminAuthMiddleware, SettingController.dashboa
 
 //---------------------User-------------------------------
 router.post('/v1/user', UserController.register);
-router.get('/v1/user/suggestionList',cacheSuccesses, UserController.suggestionList);
-router.get('/v1/user/login',cacheSuccesses, UserController.login);
+router.get('/v1/user/suggestionList', cacheSuccesses, UserController.suggestionList);
+router.get('/v1/user/login', cacheSuccesses, UserController.login);
 router.post('/v1/user/getSignedInUserData', authMiddleware, UserController.getSignedInUserData);
 router.post('/v1/user/resetPassword', authMiddleware, UserController.resetPassword);
 router.put('/v1/user', authMiddleware, UserController.updateUserData);
-router.get('/v1/user/initialPageData', authMiddleware,cacheSuccesses, UserController.getInitialPageData);
+router.get('/v1/user/initialPageData', authMiddleware, cacheSuccesses, UserController.getInitialPageData);
 // router.patch('/v1/user/follow', authMiddleware, UserController.follow);
 // router.patch('/v1/user/unfollow', authMiddleware, UserController.unfollow);
 
@@ -138,7 +141,12 @@ router.post('/dashboard/file/delete/file', FileManagerController.dashboardDelete
 router.post('/dashboard/file/upload/file', FileManagerController.dashboardUploadFile);
 
 //will be change due to not working custom translation after nextjs app router
-router.put('/dashboard/file/translationFile',express.json({ limit: '100MB' }), adminAuthMiddleware, FileManagerController.dashboardUpdateTranslationsFile);
+router.put(
+  '/dashboard/file/translationFile',
+  express.json({ limit: '100MB' }),
+  adminAuthMiddleware,
+  FileManagerController.dashboardUpdateTranslationsFile,
+);
 router.get('/dashboard/file/translationFile', adminAuthMiddleware, FileManagerController.dashboardGetTranslationsFile);
 //---------------------Page----------------------------
 router.get('/v1/page', PageController.getPage);

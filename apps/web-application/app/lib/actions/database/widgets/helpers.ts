@@ -37,6 +37,7 @@ export const findWidgetPosts = async (widgetData: any): Promise<{ posts: {}[]; t
         sort: sortQuery,
       })
       .select([...postFieldRequestForCards])
+      .populate<{ thumbnail: { filePath: string } }>([{ path: 'thumbnail', select: 'filePath' }])
       .lean<IPost[]>()
       .exec();
 

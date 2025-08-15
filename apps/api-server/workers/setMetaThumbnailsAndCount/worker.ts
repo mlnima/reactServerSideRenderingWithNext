@@ -16,8 +16,7 @@ const cleanup = register({
 });
 
 import { parentPort, workerData } from 'worker_threads';
-import postSchema from '@schemas/postSchema';
-import metaSchema from '@schemas/metaSchema';
+import { postSchema, metaSchema } from '@repo/db';
 import mongoose from 'mongoose';
 import { connectToDatabase } from '@repo/db';
 
@@ -94,14 +93,14 @@ const fixSingleMeta = async (meta) => {
         .findByIdAndUpdate(
           meta?._id,
           { $set: { ...updateData } },
-          { timestamps: false }
+          { timestamps: false },
         )
         .exec()
         .finally(() => {
           // console.log(`${meta?.type} ${meta?.name} set to ${JSON.stringify(updateData, null, '\t')}`)
           //@ts-ignore
           console.log(
-            `${meta?.type} ${meta?.name} has ${metaCount} and image set to ${updateData?.imageUrl || '/asset/images/default/no-image-available.png'}`
+            `${meta?.type} ${meta?.name} has ${metaCount} and image set to ${updateData?.imageUrl || '/asset/images/default/no-image-available.png'}`,
           );
         });
     } else {
@@ -109,12 +108,13 @@ const fixSingleMeta = async (meta) => {
         .findByIdAndUpdate(
           meta?._id,
           { $set: { status: 'draft' } },
-          { timestamps: false }
+          { timestamps: false },
         )
         .exec();
       console.log(meta?.name, `drafted`);
     }
-  } catch (error) {}
+  } catch (error) {
+  }
 };
 
 const worker = async (workerData) => {

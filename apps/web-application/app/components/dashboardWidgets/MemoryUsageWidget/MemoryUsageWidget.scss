@@ -1,0 +1,42 @@
+.memory-usage-widget {
+  background: var(--secondary-background-color);
+  color: var(--primary-text-color);
+  border: var(--primary-border);
+  border-radius: var(--primary-border-radius);
+  padding: 1rem;
+  margin: 1rem 0;
+  font-family: monospace;
+  box-shadow: 0 0 10px var(--glow-color-end);
+
+  h3 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    color: var(--primary-active-color);
+    text-shadow: var(--primary-text-shodow);
+  }
+
+  .memory-details {
+    display: grid;
+    gap: 0.4rem;
+    font-size: 0.95rem;
+
+    div {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--default-border-color);
+      padding-bottom: 2px;
+    }
+  }
+
+  .updated-time {
+    margin-top: 0.5rem;
+    color: var(--secondary-text-color);
+    font-size: 0.8rem;
+    text-align: right;
+  }
+
+  .loading {
+    font-style: italic;
+    color: var(--secondary-text-color);
+  }
+}

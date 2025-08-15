@@ -1,14 +1,14 @@
 import 'server-only';
 import { cache } from 'react';
 import { cookies } from 'next/headers';
-import { decryptJWT } from './session';
+import { decryptJWT } from '@repo/utils-server';
 
-export type TVerifySession = { isAuth?: boolean; userId?: any; isAdmin?: boolean; }
+export type TVerifySession = { isAuth?: boolean; userId?: any; isAdmin?: boolean };
 
 export const verifySession = cache(async (): Promise<TVerifySession> => {
   try {
     const cookie = (await cookies()).get('session')?.value;
-    const session = await decryptJWT(cookie);
+    const session = await decryptJWT({ session: cookie });
 
     if (!session?._id) {
       return {
@@ -27,7 +27,6 @@ export const verifySession = cache(async (): Promise<TVerifySession> => {
       isAuth: false,
     };
   }
-
 });
 
 export const verifyActionDelay = cache(async (): Promise<boolean> => {
@@ -46,4 +45,3 @@ export const verifyActionDelay = cache(async (): Promise<boolean> => {
     return false;
   }
 });
-

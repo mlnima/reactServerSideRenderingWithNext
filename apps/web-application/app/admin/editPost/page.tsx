@@ -20,9 +20,7 @@ import { useAppDispatch } from '@store/hooks';
 import postDataScrappers from '@lib/actions/scrapers/postDataScrappers';
 import findAnotherSimilarSourceLink from '@lib/actions/scrapers/findAnotherSimilarSourceLink';
 
-
 const EditPostPage = () => {
-
   const [post, setPost] = useState<IPost | null>(null);
   const [relatedPosts, setRelatedPosts] = useState<IPost[] | null>(null);
   const [activeEditingLanguage, setActiveEditingLanguage] = useState<string | 'default'>('default');
@@ -39,7 +37,6 @@ const EditPostPage = () => {
     setPost(data.post);
   };
 
-
   useEffect(() => {
     const _id = searchParams.get('id');
     if (_id) {
@@ -52,10 +49,16 @@ const EditPostPage = () => {
     }
   }, [searchParams]);
 
-
-  const onChangeHandler = (e: React.ChangeEvent<React.ChangeEvent<HTMLElement | {
-    target: { name: any; value: any }
-  }>>) => {
+  const onChangeHandler = (
+    e: React.ChangeEvent<
+      React.ChangeEvent<
+        | HTMLElement
+        | {
+            target: { name: any; value: any };
+          }
+      >
+    >,
+  ) => {
     // @ts-expect-error: it's fine
     if (!e.target?.value) return;
     setPost((prevState) => ({
@@ -67,14 +70,11 @@ const EditPostPage = () => {
 
   const onTranslatedInputChangeHandler = (e: { target: { name: any; value: any } }) => {
     if (activeEditingLanguage === 'default') {
-
-      setPost(prevState => ({
+      setPost((prevState) => ({
         ...prevState,
         [e.target.name]: e.target.value,
       }));
-
     } else {
-
       setPost((prevState) => ({
         ...prevState,
         translations: {
@@ -98,10 +98,12 @@ const EditPostPage = () => {
       const { success, data, message } = await postDataScrappers(url);
 
       if (!success || !data?.postData) {
-        dispatch(setAlert({
-          message,
-          type: 'error',
-        }));
+        dispatch(
+          setAlert({
+            message,
+            type: 'error',
+          }),
+        );
         return;
       }
 
@@ -110,47 +112,37 @@ const EditPostPage = () => {
       } else {
         let fieldToSet = {};
         for await (const field of fields) {
-          // @ts-expect-error: it's fine
           fieldToSet[field] = data.postData?.[field];
         }
         setPost(fieldToSet);
       }
-
-
     } catch (error) {
-      dispatch(setAlert({
-        message: 'Something went wrong',
-        type: 'error',
-      }));
+      dispatch(
+        setAlert({
+          message: 'Something went wrong',
+          type: 'error',
+        }),
+      );
     }
   };
 
-  const findSimilarPost = async (
-    {
-      postId,
-      relatedBy,
-      page,
-    }: { postId?: string; relatedBy?: string; page?: number }) => {
+  const findSimilarPost = async ({ postId, relatedBy, page }: { postId?: string; relatedBy?: string; page?: number }) => {
     if (!postId || !relatedBy || !page) return;
 
     try {
-
-      const { success, message, data } = await findAnotherSimilarSourceLink(
-        postId,
-        relatedBy,
-        page,
-      );
+      const { success, message, data } = await findAnotherSimilarSourceLink(postId, relatedBy, page);
 
       if (!success || !data?.relatedPosts) {
-        dispatch(setAlert({
-          message,
-          type: 'error',
-        }));
+        dispatch(
+          setAlert({
+            message,
+            type: 'error',
+          }),
+        );
         return;
       }
 
       setRelatedPosts(data.relatedPosts);
-
     } catch (error) {
       dispatch(
         setAlert({
@@ -159,10 +151,7 @@ const EditPostPage = () => {
         }),
       );
     }
-
-
   };
-
 
   if (!post) {
     return <h1>Not Found</h1>;
@@ -175,25 +164,32 @@ const EditPostPage = () => {
           <Link href={'/dashboard/post?new=1'} className={'btn btn-info'}>
             New Post
           </Link>
-          <select className={'primarySelect language-selector'} ref={languageElement}
-                  onChange={(e) => setActiveEditingLanguage(e.target.value as string)}>
+          <select
+            className={'primarySelect language-selector'}
+            ref={languageElement}
+            onChange={(e) => setActiveEditingLanguage(e.target.value as string)}
+          >
             <option value={'default'}>{process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'Default'}</option>
             <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALES || ''} />
           </select>
         </div>
         {/*// @ts-expect-error: it's fine*/}
-        <TitleDescription onChangeHandler={onTranslatedInputChangeHandler}
-                          activeEditingLanguage={activeEditingLanguage}
-                          post={post}
-                          onDescriptionChangeHandler={onDescriptionChangeHandler}
-                          onTranslatedInputChangeHandler={onTranslatedInputChangeHandler} />
+        <TitleDescription
+          setPost={setPost}
+          activeEditingLanguage={activeEditingLanguage}
+          post={post}
+          onDescriptionChangeHandler={onDescriptionChangeHandler}
+          onTranslatedInputChangeHandler={onTranslatedInputChangeHandler}
+        />
         {/*// @ts-expect-error: it's fine*/}
-        <PostInformation onChangeHandler={onChangeHandler}
-                         findSimilarPost={findSimilarPost}
-                         post={post}
-                         scrapAndSetPostData={scrapAndSetPostData}
-                         relatedPosts={relatedPosts}
-                         setPost={setPost} />
+        <PostInformation
+          onChangeHandler={onChangeHandler}
+          findSimilarPost={findSimilarPost}
+          post={post}
+          scrapAndSetPostData={scrapAndSetPostData}
+          relatedPosts={relatedPosts}
+          setPost={setPost}
+        />
       </div>
       <aside className={'side'}>
         <div className={'editingPostSection editingPostSectionSide'}>

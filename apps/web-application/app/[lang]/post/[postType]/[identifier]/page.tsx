@@ -1,10 +1,8 @@
 import { getDictionary } from '../../../../../get-dictionary';
-import SidebarWidgetAreaRenderer
-  from '@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer';
+import SidebarWidgetAreaRenderer from '@components/widgets/widgetAreas/SidebarWidgetAreaRenderer/SidebarWidgetAreaRenderer';
 import './page.styles.scss';
 import postMetaGenerator from './components/postMetaGenerator/postMetaGenerator';
-import PostAdminOrAuthorQuickAccessBar
-  from './components/PostAdminOrAuthorQuickAccessBar/PostAdminOrAuthorQuickAccessBar';
+import PostAdminOrAuthorQuickAccessBar from './components/PostAdminOrAuthorQuickAccessBar/PostAdminOrAuthorQuickAccessBar';
 import Soft404 from '@components/Soft404/Soft404';
 import NotFoundOrRestricted from './components/NotFoundOrRestricted/NotFoundOrRestricted';
 import { IPageProps, IPageSettings, PostPageProps } from '@repo/typescript-types';
@@ -19,6 +17,7 @@ import WidgetsRenderer from '@components/widgets/widgetRenderer/WidgetsRenderer'
 import { ServerActionResponse, unwrapResponse } from '@lib/actions/response';
 import dynamic from 'next/dynamic';
 import ViewPostClient from './components/ViewPostClient/ViewPostClient';
+
 const VideoTypePostPage = dynamic(() => import('./components/VideoTypePostPage/VideoTypePostPage'));
 const ArticleTypePostPage = dynamic(() => import('./components/ArticleTypePostPage/ArticleTypePostPage'));
 const PromotionTypePostPage = dynamic(() => import('./components/PromotionTypePostPage/PromotionTypePostPage'));
@@ -27,7 +26,6 @@ const LearnTypePostPage = dynamic(() => import('./components/LearnTypePostPage/L
 export const generateMetadata = postMetaGenerator;
 
 const PostPage = async (props: IPageProps) => {
-
   const params = await props.params;
   const locale = localDetector(params.lang);
   const dictionary = await getDictionary(locale);
@@ -41,18 +39,14 @@ const PostPage = async (props: IPageProps) => {
   const postId = data?.post._id;
 
   const { postPageSettings } = unwrapResponse(
-    await getSettings(['postPageSettings']) as unknown as ServerActionResponse<{
+    (await getSettings(['postPageSettings'])) as unknown as ServerActionResponse<{
       postPageSettings: IPageSettings | undefined;
     }>,
   );
 
-  const widgets = await getWidgets(
-    ['postPageLeftSidebar', 'postPageRightSidebar', 'underPost'],
-    locale,
-  );
+  const widgets = await getWidgets(['postPageLeftSidebar', 'postPageRightSidebar', 'underPost'], locale);
 
   const sidebar = postPageSettings?.sidebar;
-
 
   const postProps: PostPageProps = {
     widgets: widgets?.['underPost'],
@@ -63,14 +57,14 @@ const PostPage = async (props: IPageProps) => {
     relatedPosts: data?.relatedPosts || [],
     dictionary: dictionary,
     locale: locale,
+    isMarkDownDescription: data?.post?.isMarkDownDescription,
+    postType,
   };
 
-
-  if (data?.post?.status !== 'published') return <NotFoundOrRestricted dictionary={dictionary} />
+  if (data?.post?.status !== 'published') return <NotFoundOrRestricted dictionary={dictionary} />;
 
   return (
     <>
-
       <PostAdminOrAuthorQuickAccessBar
         dictionary={dictionary}
         postId={postId}
@@ -81,8 +75,10 @@ const PostPage = async (props: IPageProps) => {
       />
 
       <div id={'content'} className={`page-${sidebar || 'no'}-sidebar`}>
-        <main id={'primary'} className={'main postPage'}>
-          {postType === 'video' ? <VideoTypePostPage {...postProps} /> : postType === 'article' ? (
+        <main id={`primary  ${postType}PostPage`} className={`main postPage`}>
+          {postType === 'video' ? (
+            <VideoTypePostPage {...postProps} />
+          ) : postType === 'article' ? (
             <ArticleTypePostPage {...postProps} />
           ) : postType === 'promotion' ? (
             <PromotionTypePostPage {...postProps} />
@@ -91,12 +87,15 @@ const PostPage = async (props: IPageProps) => {
           ) : null}
           <RelatedPostsRenderer locale={locale} relatedPosts={data?.relatedPosts || []} dictionary={dictionary} />
           <div className="under-post-widget-area">
-            <WidgetsRenderer widgets={widgets?.['underPost']} position="underPost" hasSidebar={sidebar} locale={locale}
-                             dictionary={dictionary} />
+            <WidgetsRenderer
+              widgets={widgets?.['underPost']}
+              position="underPost"
+              hasSidebar={sidebar}
+              locale={locale}
+              dictionary={dictionary}
+            />
           </div>
-          {(data.post._id && data?.post?.status === 'published') &&
-            <Comments dictionary={dictionary} postId={data.post._id} />}
-
+          {data.post._id && data?.post?.status === 'published' && <Comments dictionary={dictionary} postId={data.post._id} />}
         </main>
         <SidebarWidgetAreaRenderer
           leftSideWidgets={widgets?.['postPageLeftSidebar']}
@@ -107,13 +106,12 @@ const PostPage = async (props: IPageProps) => {
           position={'postPage'}
         />
       </div>
-      <ViewPostClient _id={data.post._id}/>
+      <ViewPostClient _id={data.post._id} />
     </>
   );
 };
 
 export default PostPage;
-
 
 
 //*****************************DO NOT DELETE***************************

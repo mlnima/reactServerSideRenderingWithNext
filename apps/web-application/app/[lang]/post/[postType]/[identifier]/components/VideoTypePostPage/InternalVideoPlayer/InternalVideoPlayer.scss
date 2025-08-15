@@ -1,0 +1,168 @@
+@mixin glassBackground {
+  backdrop-filter: blur(16px);
+}
+
+
+.video-js {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+
+  .vjs-tech {
+    width: 100%;
+    height: 100%;
+  }
+
+  .vjs-poster {
+
+    picture {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      img {
+        object-fit: cover
+      }
+    }
+  }
+
+  .vjs-big-play-button {
+
+    border-radius: 50%;
+    border: none;
+    width: 4rem;
+    height: 4rem;
+    line-height: 4rem;
+    margin: -2rem 0 0 -2rem;
+  }
+
+  .vjs-control-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: transparent;
+    height: 3.5rem;
+    align-items: center;
+    display: grid;
+    place-content: center;
+    grid-auto-columns: 64px 48px 1fr 48px 48px 48px;
+    grid-template-areas: 'vjs-progress-control vjs-progress-control vjs-progress-control vjs-progress-control vjs-progress-control vjs-progress-control'
+                          'vjs-play-control vjs-volume-panel . . vjs-remaining-time  vjs-fullscreen-control';
+
+    .vjs-play-control, .vjs-volume-panel, .vjs-remaining-time, .vjs-picture-in-picture-control, .vjs-fullscreen-control {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+
+      div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      span {
+
+
+        &:before {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+
+
+    }
+
+    .vjs-play-control {
+      grid-area: vjs-play-control;
+      width: 3rem;
+      height: 3rem;
+      font-size: 1.2rem;
+      border-radius: 50%;
+      margin: .25rem;
+      @include glassBackground;
+    }
+
+    .vjs-fullscreen-control {
+      grid-area: vjs-fullscreen-control;
+      width: 3rem;
+      height: 2.5rem;
+      font-size: .8rem;
+      border-radius: 0 50% 50% 0;
+      @include glassBackground;
+    }
+
+    .vjs-picture-in-picture-control {
+      display: none;
+      //grid-area: vjs-picture-in-picture-control;
+      //width: 3rem;
+      //height: 3rem;
+      //font-size: 1rem;
+      //@include glassBackground;
+    }
+
+    .vjs-remaining-time {
+      grid-area: vjs-remaining-time;
+      width: 3rem;
+      height: 2.5rem;
+      font-size: .8rem;
+      border-radius: 50% 0 0 50%;
+      @include glassBackground;
+    }
+
+    .vjs-volume-panel {
+      grid-area: vjs-volume-panel;
+      width: 3rem;
+      height: 2.5rem;
+      z-index: 1;
+      font-size: .8rem;
+      transition: none;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      border-radius: 50%;
+      margin: 0 .5rem;
+
+      &:hover {
+        width: 8rem;
+      }
+
+      .vjs-mute-control {
+        @include glassBackground;
+        border-radius: 50%;
+        width: 3rem;
+        height: 3rem;
+        transition: none;
+      }
+    }
+
+
+    .vjs-progress-control {
+      grid-area: vjs-progress-control;
+      height: 6px;
+      width: 100%;
+      z-index: 2;
+    }
+
+
+  }
+
+  [data-vjs-player] {
+    width: 100%;
+    height: 100%; // ✅ Add this too
+  }
+}
+
+.vjs-layout-x-small {
+  .vjs-progress-control {
+    display: initial !important;
+  }
+}
+
+//.video-js.vjs-layout-x-small .vjs-progress-control, .video-js.vjs-layout-tiny .vjs-progress-control {
+//  display: none;
+//}

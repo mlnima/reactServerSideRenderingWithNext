@@ -4,11 +4,15 @@ import { IPost } from '@repo/typescript-types';
 import { errorResponse, ServerActionResponse, successResponse } from '@lib/actions/response';
 import { unstable_cacheTag as cacheTag, unstable_cacheLife as cacheLife } from 'next/cache';
 
-const getPost = async (identifier: string): Promise<ServerActionResponse<{
-  post: IPost,
-  relatedPosts?: IPost[]
-} | null>> => {
-  'use cache'
+const getPost = async (
+  identifier: string,
+): Promise<
+  ServerActionResponse<{
+    post: IPost;
+    relatedPosts?: IPost[];
+  } | null>
+> => {
+  'use cache';
 
   try {
     await connectToDatabase('getPost');
@@ -17,11 +21,8 @@ const getPost = async (identifier: string): Promise<ServerActionResponse<{
     const findQuery = isId
       ? { _id: identifier }
       : {
-        $or: [
-          { title: identifier },
-          { permaLink: identifier.replaceAll(' ', '-') },
-        ],
-      };
+          $or: [{ title: identifier }, { permaLink: identifier.replaceAll(' ', '-') }],
+        };
 
     const post = await postSchema
       .findOne(findQuery)
@@ -29,13 +30,14 @@ const getPost = async (identifier: string): Promise<ServerActionResponse<{
         {
           path: 'author',
           select: ['username', 'profileImage', 'role'],
-          populate: { path: 'profileImage', model: 'file' },
+          populate: [{ path: 'profileImage', model: 'file' }],
         },
         { path: 'categories', select: { name: 1, type: 1 } },
         { path: 'images', select: { filePath: 1 }, model: 'file' },
         { path: 'tags', select: { name: 1, type: 1 } },
         { path: 'actors', select: { name: 1, type: 1, imageUrl: 1 } },
         { path: 'thumbnail', select: { filePath: 1 } },
+        { path: 'video', model: 'file' },
       ])
       .lean<IPost>()
       .exec();
@@ -46,22 +48,24 @@ const getPost = async (identifier: string): Promise<ServerActionResponse<{
       });
     }
 
+    // @ts-expect-error: it's fine
     const relatedPosts = await postSchema.findRelatedPosts({
       post,
       relatedByFields: ['actors', 'tags', 'categories'],
       limit: 8,
     });
 
-    const serializedData = JSON.parse(JSON.stringify({
+    const serializedData = JSON.parse(
+      JSON.stringify({
         post,
-        relatedPosts
-      }))
+        relatedPosts,
+      }),
+    );
 
     cacheTag('cacheItem', `CPost-${serializedData.post._id as string}`);
     cacheLife('minutes');
 
     return successResponse({ data: serializedData });
-
   } catch (error) {
     console.error(`getPost => `, error);
     return errorResponse({
@@ -71,9 +75,6 @@ const getPost = async (identifier: string): Promise<ServerActionResponse<{
 };
 
 export default getPost;
-
-
-
 
 
 // 'use server';

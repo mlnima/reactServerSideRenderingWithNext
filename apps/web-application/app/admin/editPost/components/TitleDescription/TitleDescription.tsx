@@ -3,35 +3,53 @@
 import React from 'react';
 import TextEditors from '@components/textEditors/TextEditors';
 import { IPost } from '@repo/typescript-types';
-import './TitleDescription.scss'
+import './TitleDescription.scss';
 
 interface TitleDescriptionProps {
   onTranslatedInputChangeHandler: (e: React.ChangeEvent<any>) => void;
+  setPost: React.Dispatch<React.SetStateAction<IPost>>;
   onDescriptionChangeHandler: (data: string) => void;
-  post:IPost | null,
-  activeEditingLanguage:string
+  post: IPost | null;
+  activeEditingLanguage: string;
 }
 
-const TitleDescription = ({ onTranslatedInputChangeHandler, onDescriptionChangeHandler,post,activeEditingLanguage }: TitleDescriptionProps) => {
+const TitleDescription = ({
+  onTranslatedInputChangeHandler,
+  onDescriptionChangeHandler,
+  post,
+  activeEditingLanguage,
+  setPost,
+}: TitleDescriptionProps) => {
+  const allowsEditorToUse =
+    post?.postType === 'learn'
+      ? ['ReactPage', 'Monaco', 'SunEditor']
+      : post?.postType === 'video'
+        ? ['Monaco', 'SunEditor', 'ReactQuillEditor']
+        : ['Monaco', 'SunEditor', 'ReactQuillEditor', 'ReactPage'];
 
-  const allowsEditorToUse = post?.postType === 'learn'
-    ? ['ReactPage', 'Monaco', 'SunEditor']
-    : post?.postType === 'video'
-      ? ['Monaco', 'SunEditor', 'ReactQuillEditor']
-      : ['Monaco', 'SunEditor', 'ReactQuillEditor', 'ReactPage'];
+  const openEditorOnLoad = 'Monaco';
 
-  const openEditorOnLoad = 'Monaco'
+  const onSetMarkdown = (e) => {
+    setPost((prevState) => ({
+      ...prevState,
+      isMarkDownDescription: e.currentTarget.checked,
+    }));
+  };
 
   return (
-    <div className='TitleDescription'>
+    <div className="TitleDescription">
       <input
         type="text"
-        name='title'
+        name="title"
         value={(activeEditingLanguage === 'default' ? post?.title : post?.translations?.[activeEditingLanguage]?.title) || ''}
-        className='primaryInput'
-        placeholder='Enter The TextInput Here'
+        className="primaryInput"
+        placeholder="Enter The TextInput Here"
         onChange={onTranslatedInputChangeHandler}
       />
+      <div>
+        <span>is Markdown</span>
+        <input type="checkbox" checked={post?.isMarkDownDescription} name={'isMarkDownDescription'} onChange={onSetMarkdown} />
+      </div>
       <TextEditors
         value={activeEditingLanguage === 'default' ? post?.description : post?.translations?.[activeEditingLanguage]?.description || {}}
         use={allowsEditorToUse}

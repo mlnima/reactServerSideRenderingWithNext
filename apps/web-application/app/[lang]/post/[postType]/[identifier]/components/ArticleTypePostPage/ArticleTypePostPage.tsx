@@ -5,49 +5,29 @@ import PostDescription from '../PostDescription/PostDescription';
 import PostMetasRenderer from '../PostMetasRenderer/PostMetasRenderer';
 import ActionButtons from '../ActionButtons/ActionButtons';
 import './ArticleTypePostPage.styles.scss';
+import MarkDownRenderer from '@components/MarkDownRenderer/MarkDownRenderer';
 
-const ArticleTypePostPage: FC<PostPageProps> = ({
-  post,
-  locale,
-  dictionary,
-  views,
-  likes
-}) => {
+const ArticleTypePostPage: FC<PostPageProps> = ({ post, locale, dictionary, views, likes, isMarkDownDescription = false }) => {
+  console.log(`isMarkDownDescription=> `, isMarkDownDescription);
   return (
     <>
       <div className={'entry-header'}>
         <div className="entry-header-data">
-          <PostTitle
-            title={post?.translations?.[locale]?.title ?? post?.title}
-          />
+          <PostTitle title={post?.translations?.[locale]?.title ?? post?.title} />
         </div>
       </div>
 
       <div className="entry-content">
-        <PostDescription
-          description={
-            post?.translations?.[locale]?.description ?? post?.description
-          }
-        />
+        {isMarkDownDescription ? (
+          <MarkDownRenderer markdown={post?.translations?.[locale]?.description ?? (post?.description as string)} />
+        ) : (
+          <PostDescription description={post?.translations?.[locale]?.description ?? post?.description} />
+        )}
         <div className="entry-header-actions">
-          <ActionButtons
-            rating={true}
-            dictionary={dictionary}
-            likes={likes}
-            views={views}
-            _id={post._id}
-          />
+          <ActionButtons rating={true} dictionary={dictionary} likes={likes} views={views} _id={post._id} />
         </div>
-        <PostMetasRenderer
-          type="categories"
-          metas={post.categories}
-          dictionary={dictionary}
-        />
-        <PostMetasRenderer
-          type="tags"
-          metas={post.tags}
-          dictionary={dictionary}
-        />
+        <PostMetasRenderer type="categories" metas={post.categories} dictionary={dictionary} />
+        <PostMetasRenderer type="tags" metas={post.tags} dictionary={dictionary} />
       </div>
     </>
   );

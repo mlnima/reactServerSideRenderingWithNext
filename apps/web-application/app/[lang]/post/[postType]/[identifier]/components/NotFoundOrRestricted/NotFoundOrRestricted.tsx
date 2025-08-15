@@ -10,7 +10,7 @@ interface PropTypes {
 
 const NotFoundOrRestricted: FC<PropTypes> = ({ dictionary }) => {
     return (
-        <div id={'primary'} className="post-page notFoundOrRestrictedPage">
+        <div id={'primary'} className="postPage notFoundOrRestrictedPage">
             <div className={'notFoundOrRestricted'}>
                 <div className="entry-header-data">
                     <h1>

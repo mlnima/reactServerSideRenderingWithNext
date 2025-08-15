@@ -30,7 +30,7 @@ const dashboardUpdatePost = async ({ postData }: IDashboardUpdatePost) => {
         author: userId,
         postType: postData?.postType || 'standard',
         status: postData?.status || 'draft',
-      }).exec();
+      });
       const savedPost = await newPostToSave.save();
       return successResponse({
         message: 'Post Created',

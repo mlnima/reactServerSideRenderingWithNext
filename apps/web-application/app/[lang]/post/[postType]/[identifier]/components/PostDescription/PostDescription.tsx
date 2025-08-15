@@ -1,50 +1,36 @@
 /* eslint-disable */
-import { FC } from "react";
+import { FC } from 'react';
 import createDOMPurify from 'dompurify';
-import './PostDescription.scss'
+import './PostDescription.scss';
 
 interface IProps {
-    description?: any;
+  description?: any;
 }
 
 const PostDescription: FC<IProps> = ({ description }) => {
-    let DOMPurify;
+  let DOMPurify;
 
-    if (typeof window !== 'undefined') {
-        // Client-side
-        DOMPurify = createDOMPurify(window);
-    } else {
-        // Server-side
-        const { JSDOM } = require('jsdom');
-        DOMPurify = createDOMPurify(new JSDOM().window);
-    }
+  if (typeof window !== 'undefined') {
 
-    if (!!description && typeof description === 'string') {
-        const cleanHTML = DOMPurify.sanitize(description);
-        return (
-            <div className={'postDescription'}
-                 dangerouslySetInnerHTML={{__html: cleanHTML}}/>
-        );
-    } else {
-        return null;
-    }
+    DOMPurify = createDOMPurify(window);
+  } else {
+
+    const { JSDOM } = require('jsdom');
+    DOMPurify = createDOMPurify(new JSDOM().window);
+  }
+
+  if (!!description && typeof description === 'string') {
+    const cleanHTML = DOMPurify.sanitize(description);
+    return (
+      <div className={'postDescription'}
+           dangerouslySetInnerHTML={{ __html: cleanHTML }} />
+    );
+  } else {
+    return null;
+  }
 };
 
 export default PostDescription;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // 'use server'

@@ -5,16 +5,38 @@ import path from 'path';
 import { connectToDatabase, fileSchema, postSchema } from '@repo/db';
 import { verifySession } from '@lib/dal';
 import { IFile } from '@repo/typescript-types';
+import { join, isAbsolute } from 'path';
+import { unlink } from 'fs/promises';
 
 interface IArg {
   targetPath: string;
 }
 
+export const deleteFileAndDoc = async (fileId) => {
+  if (!fileId) return true; // nothing to delete
+
+  const fileDoc = await fileSchema.findById(fileId).exec();
+  if (!fileDoc) return true; // file record missing, still proceed
+
+  const isExternal = /^https?:\/\//i.test(fileDoc.filePath);
+  if (!isExternal) {
+    const fileAbsolutePath = isAbsolute(fileDoc.filePath) ? fileDoc.filePath : join(process.cwd(), '..', 'api-server', fileDoc.filePath);
+
+    try {
+      await unlink(fileAbsolutePath);
+      console.log(`File ${fileAbsolutePath} deleted`);
+    } catch (err) {
+      console.error(`Error deleting file: ${fileAbsolutePath}`, err);
+      return false; // fail here
+    }
+  }
+
+  await fileSchema.findByIdAndDelete(fileId).exec();
+  return true;
+};
+
 const dashboardDeleteFile = async ({ targetPath }: IArg): Promise<ServerActionResponse> => {
-
-
   try {
-
     const { isAdmin } = await verifySession();
 
     if (!isAdmin) {
@@ -23,7 +45,6 @@ const dashboardDeleteFile = async ({ targetPath }: IArg): Promise<ServerActionRe
 
     await connectToDatabase('dashboardDeleteFile');
 
-
     let fileFound = false;
 
     const fileData = await fileSchema.findOne({ filePath: targetPath }).lean<IFile>().exec();
@@ -31,10 +52,7 @@ const dashboardDeleteFile = async ({ targetPath }: IArg): Promise<ServerActionRe
     if (fileData) {
       fileFound = true;
       if (fileData.usageType === 'postThumbnail') {
-        await postSchema.findOneAndUpdate(
-          { thumbnail: fileData._id },
-          { $unset: { thumbnail: '' } },
-        ).exec();
+        await postSchema.findOneAndUpdate({ thumbnail: fileData._id }, { $unset: { thumbnail: '' } }).exec();
       }
       await fileSchema.findByIdAndDelete(fileData._id).exec();
     }
@@ -49,11 +67,9 @@ const dashboardDeleteFile = async ({ targetPath }: IArg): Promise<ServerActionRe
       }
     }
 
-
     return successResponse({
       message: 'Deleted',
     });
-
   } catch (error: any) {
     console.error('dashboardDeleteFile Error =>', error);
     return errorResponse({

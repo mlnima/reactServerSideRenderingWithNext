@@ -1,6 +1,6 @@
 'use server';
 import { IGetPosts } from '@lib/actions/database/types';
-import { connectToDatabase, metaSchema, postSchema } from '@repo/db';
+import { connectToDatabase, fileSchema, metaSchema, postSchema } from '@repo/db';
 import { IMeta, IPost } from '@repo/typescript-types';
 import { postFieldRequestForCards } from '@repo/data-structures';
 import { unstable_cacheTag as cacheTag } from 'next/cache';
@@ -117,12 +117,12 @@ const getPosts = async ({
             limit: size,
             sort,
           })
-          .populate<{ thumbnail: { filePath: string } }>([{ path: 'thumbnail', select: { filePath: 1 } }])
           .select([...postFieldRequestForCards, `translations.${locale}.title`])
+          .populate<{ thumbnail: { filePath: string } }>([{ path: 'thumbnail', select: 'filePath' }])
           .lean<IPost[]>()
           .exec()
       : [];
-
+    
     const totalCount = returnTotalCount ? await postSchema.countDocuments(findPostsQueries).exec() : 0;
     const serializedData = JSON.parse(
       JSON.stringify({
@@ -131,7 +131,7 @@ const getPosts = async ({
         totalCount,
       }),
     );
-
+    // @ts-expect-error: it's fine
     posts = null;
     meta = null;
 

@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { i18n } from '@i18nConfig';
 import { cookies } from 'next/headers';
-import { decryptJWT } from '@lib/session';
-import initialSettings from './public/initialSettings.json'
+import { decryptJWT } from '@repo/utils-server';
+import initialSettings from './public/initialSettings.json';
 
 const getLocaleFromUrl = (request: NextRequest) => {
   const newUrl = new URL(request.url);
@@ -12,29 +12,18 @@ const getLocaleFromUrl = (request: NextRequest) => {
 };
 
 export async function middleware(request: NextRequest) {
-
   const pathname = request.nextUrl.pathname;
   const params = request?.nextUrl?.searchParams;
 
-
-  if (pathname === '/favicon.ico'){
-    if (initialSettings?.headDataSettings?.favIconUrl){
-      return NextResponse.rewrite(
-        new URL(
-          initialSettings?.headDataSettings?.favIconUrl || '/favicon.ico',
-          request.url,
-        ),
-      );
-    }else {
+  if (pathname === '/favicon.ico') {
+    if (initialSettings?.headDataSettings?.favIconUrl) {
+      return NextResponse.rewrite(new URL(initialSettings?.headDataSettings?.favIconUrl || '/favicon.ico', request.url));
+    } else {
       return NextResponse.next();
     }
   }
 
-
-
-  const pathnameIsMissingLocale = i18n.locales.every(
-    (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`,
-  );
+  const pathnameIsMissingLocale = i18n.locales.every((locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`);
 
   // if (pathname.startsWith('/admin')) {
   //   const sessionCookie = (await cookies()).get('session')?.value;
@@ -55,7 +44,7 @@ export async function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL('/login', request.url));
       }
 
-      const sessionData = await decryptJWT(sessionCookie);
+      const sessionData = await decryptJWT({ session: sessionCookie });
 
       if (!sessionData || !sessionData.role || sessionData.role !== 'administrator') {
         return NextResponse.redirect(new URL('/unauthorized', request.url));
@@ -68,31 +57,24 @@ export async function middleware(request: NextRequest) {
     }
   }
 
+  if (pathname.startsWith('/embed')) {
+    return NextResponse.next();
+  }
 
   if (pathname === '/manifest.json') {
-    return NextResponse.rewrite(
-      new URL(
-        `/manifest.webmanifest`,
-        request.url,
-      ),
-    );
+    return NextResponse.rewrite(new URL(`/manifest.webmanifest`, request.url));
   }
 
   if (pathnameIsMissingLocale) {
     const locale = getLocaleFromUrl(request);
     return NextResponse.rewrite(
-      new URL(
-        `/${locale}${pathname.startsWith('/') ? '' : '/'}${pathname}${params ? `?${params}` : ''}`,
-        request.url,
-      ),
+      new URL(`/${locale}${pathname.startsWith('/') ? '' : '/'}${pathname}${params ? `?${params}` : ''}`, request.url),
     );
   }
 }
 
 export const config = {
-  matcher: [
-    '/((?!api|_next/static|_next/image|asset|fonts|public|sitemap|robots.txt|manifest.webmanifest).*)',
-  ],
+  matcher: ['/((?!api|_next/static|_next/image|asset|fonts|public|sitemap|robots.txt|manifest.webmanifest).*)'],
 };
 
 // export const config = {

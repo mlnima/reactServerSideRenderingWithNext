@@ -46,8 +46,6 @@ a {
 //}
 
 
-
-
 //.desktopOnly {
 //  display: none !important;
 //}
@@ -63,6 +61,15 @@ a {
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, .5);
+}
+
+.glassBackground {
+  //border-radius: 50%;
+  //margin-top: 8px;
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  background: var(--yt-spec-static-overlay-background-medium-light, rgba(0, 0, 0, .3));
+  text-shadow: 0 0 2px #000;
 }
 
 //.darkenBackgroundVisible {

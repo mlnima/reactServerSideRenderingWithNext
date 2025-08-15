@@ -1,7 +1,8 @@
 // @ts-nocheck
 import dotenv from 'dotenv';
 import { parentPort } from 'worker_threads';
-import postSchema from '@schemas/postSchema';
+
+import { postSchema } from '@repo/db';
 import { connectToDatabase } from '@repo/db';
 
 dotenv.config();
@@ -17,10 +18,7 @@ const worker = async () => {
       .exec()
       .then(async (posts) => {
         for await (let post of posts) {
-
-          const permaLink = post?.title
-            ? post.title.replaceAll(' ', '-')
-            : null;
+          const permaLink = post?.title ? post.title.replaceAll(' ', '-') : null;
 
           await postSchema
             .findByIdAndUpdate(
@@ -29,7 +27,7 @@ const worker = async () => {
               {
                 new: true,
                 timestamps: false,
-              }
+              },
             )
             .exec()
             .then((updatedPost) => {

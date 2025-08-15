@@ -6,6 +6,7 @@ const postTypeQueryMatcher = `:postType(${postTypes.join('|')})?`;
 const languageQueryMatcher = `(${projectLocales.split(' ').join('|')})`;
 const imagesAllowedDomainsForNextImage = process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES?.split(' ') || [];
 const path = require('path');
+const createMDX = require('@next/mdx');
 
 const allowedDomainsForNextImageConfig = imagesAllowedDomainsForNextImage.reduce((acc, source) => {
   acc = [...acc,
@@ -30,6 +31,7 @@ const allowedDomainsForNextImageConfig = imagesAllowedDomainsForNextImage.reduce
 }, []);
 
 const nextConfig = {
+  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   reactStrictMode: false,
   serverExternalPackages: ['mongoose'],
   experimental: {
@@ -70,6 +72,7 @@ const nextConfig = {
     includePaths: [path.join(__dirname, 'app')],
   },
   // transpilePackages: [],
+  rewrites,
   async redirects() {
     return [
       {
@@ -148,7 +151,7 @@ const nextConfig = {
       },
     ];
   },
-  rewrites,
+
   // Environment-specific memory settings
   // env: {
   //   // Reduce memory usage in production
@@ -180,8 +183,11 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+const withMDX = createMDX({
+  // Add markdown plugins here, as desired
+});
 
+module.exports = withMDX(nextConfig);
 
 
 // dynamicIO: true,

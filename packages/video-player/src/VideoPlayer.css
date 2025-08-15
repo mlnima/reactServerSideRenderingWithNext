@@ -1,0 +1,20 @@
+//@import 'video.js/src/css/video-js';
+
+.video-js {
+  --vjs-theme-color: #ff0050;
+  --vjs-theme-secondary: #fff;
+
+  .vjs-big-play-button {
+    background: var(--vjs-theme-color);
+    border-radius: 50%;
+    border: none;
+    width: 4rem;
+    height: 4rem;
+    line-height: 4rem;
+    margin: -2rem 0 0 -2rem;
+  }
+
+  .vjs-control-bar {
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+  }
+}

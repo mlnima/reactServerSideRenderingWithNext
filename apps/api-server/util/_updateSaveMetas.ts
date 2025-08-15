@@ -1,34 +1,38 @@
-import metaSchema from "@schemas/metaSchema";
-import postSchema from "@schemas/postSchema";
+import { metaSchema, postSchema } from '@repo/db';
 
-const _updateSaveMetas = async (metas:any) => {
-    const metasData = metas ?? []
-    let finalData = []
+const _updateSaveMetas = async (metas: any) => {
+  const metasData = metas ?? [];
+  let finalData = [];
 
-    try{
-        for await (let meta of metasData) {
-            if (meta.name && meta.type ){
-                const metaData = {
-                    name: meta.name,
-                    type: meta.type,
-                    status:'published',
-                }
-                const findQuery = {$and:[{name: meta.name},{type: meta.type}]}
-
-                const updatedMeta =  await metaSchema.findOneAndUpdate(findQuery, {$set:{...metaData}},{new:true, upsert: true}).exec()
-
-                const count = await postSchema.countDocuments({$and:[{[updatedMeta.type]: updatedMeta._id},{status:'published'}]}).exec()
-                await metaSchema.findOneAndUpdate({name: updatedMeta.name}, {$set:{count}}).exec()
-                finalData = [...finalData, updatedMeta._id]
-
-
-            }
-        }
-        return finalData
-    }catch (err) {
-        console.log('error on saving meta')
+  try {
+    for await (let meta of metasData) {
+      if (meta.name && meta.type) {
+        const metaData = {
+          name: meta.name,
+          type: meta.type,
+          status: 'published',
+        };
+        const findQuery = { $and: [{ name: meta.name }, { type: meta.type }] };
+        const updatedMeta = await metaSchema
+          .findOneAndUpdate(
+            findQuery,
+            { $set: { ...metaData } },
+            {
+              new: true,
+              upsert: true,
+            },
+          )
+          .exec();
+        const count = await postSchema.countDocuments({ $and: [{ [updatedMeta.type]: updatedMeta._id }, { status: 'published' }] }).exec();
+        await metaSchema.findOneAndUpdate({ name: updatedMeta.name }, { $set: { count } }).exec();
+        finalData = [...finalData, updatedMeta._id];
+      }
     }
-}
+    return finalData;
+  } catch (err) {
+    console.log('error on saving meta');
+  }
+};
 
 export default _updateSaveMetas;
 

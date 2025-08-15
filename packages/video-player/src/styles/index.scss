@@ -1,0 +1,656 @@
+// src/styles/VideoPlayer.scss
+
+// Variables
+$primary-color: #007bff;
+$secondary-color: #6c757d;
+$success-color: #28a745;
+$danger-color: #dc3545;
+$warning-color: #ffc107;
+$info-color: #17a2b8;
+$light-color: #f8f9fa;
+$dark-color: #343a40;
+
+$control-bg: rgba(0, 0, 0, 0.8);
+$control-hover: rgba(255, 255, 255, 0.2);
+$progress-bg: rgba(255, 255, 255, 0.3);
+$progress-filled: $primary-color;
+$progress-buffered: rgba(255, 255, 255, 0.4);
+
+$border-radius: 4px;
+$transition: all 0.2s ease-in-out;
+$z-controls: 10;
+$z-overlay: 20;
+$z-ads: 30;
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin button-reset {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  outline: none;
+
+  &:focus-visible {
+    outline: 2px solid $primary-color;
+    outline-offset: 2px;
+  }
+}
+
+@mixin absolute-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+// Base styles
+.video-player {
+  position: relative;
+  width: 100%;
+  height: auto;
+  background: #000;
+  overflow: hidden;
+  border-radius: $border-radius;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  &.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 9999;
+    border-radius: 0;
+  }
+
+  &:focus {
+    outline: 3px solid $primary-color;
+    outline-offset: 2px;
+  }
+
+  // Video element
+  &__video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+  }
+
+  // Error overlay
+  &__error {
+    @include absolute-fill;
+    @include flex-center;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    z-index: $z-overlay;
+
+    &-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+    }
+
+    &-message {
+      font-size: 16px;
+      text-align: center;
+      max-width: 80%;
+      line-height: 1.5;
+    }
+  }
+
+  // Loading overlay
+  &__loading {
+    @include absolute-fill;
+    @include flex-center;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    z-index: $z-overlay;
+  }
+
+  &__spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 12px;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  // Controls
+  &__controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    padding: 20px 16px 16px;
+    z-index: $z-controls;
+    transition: opacity 0.3s ease;
+
+    &.visible {
+      opacity: 1;
+    }
+
+    &.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+
+  &__controls-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  &__controls-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+  }
+
+  // Progress bar
+  &__progress-bar {
+    position: relative;
+    width: 100%;
+    height: 6px;
+    cursor: pointer;
+    margin-bottom: 8px;
+
+    &:hover {
+      .video-player__progress-track {
+        height: 8px;
+      }
+
+      .video-player__progress-thumb {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  }
+
+  &__progress-track {
+    position: relative;
+    width: 100%;
+    height: 6px;
+    background: $progress-bg;
+    border-radius: 3px;
+    transition: height 0.2s ease;
+    overflow: hidden;
+  }
+
+  &__progress-buffered {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    background: $progress-buffered;
+    border-radius: 3px;
+  }
+
+  &__progress-filled {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: $progress-filled;
+    border-radius: 3px;
+    transition: width 0.1s ease;
+  }
+
+  &__progress-hover {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background: white;
+    opacity: 0.8;
+    transform: translateX(-50%);
+  }
+
+  &__progress-thumb {
+    position: absolute;
+    top: 50%;
+    width: 14px;
+    height: 14px;
+    background: $progress-filled;
+    border: 2px solid white;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    transition: $transition;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  &__progress-tooltip {
+    position: absolute;
+    bottom: 24px;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  // Playback controls
+  &__playback-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__play-btn {
+    @include button-reset;
+    @include flex-center;
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: white;
+    font-size: 18px;
+    transition: $transition;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.05);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  // Volume control
+  &__volume-control {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  &__volume-btn {
+    @include button-reset;
+    @include flex-center;
+    width: 36px;
+    height: 36px;
+    color: white;
+    font-size: 16px;
+    border-radius: 4px;
+    transition: $transition;
+
+    &:hover {
+      background: $control-hover;
+    }
+  }
+
+  &__volume-slider {
+    position: absolute;
+    bottom: 48px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 36px;
+    height: 100px;
+    background: $control-bg;
+    border-radius: 18px;
+    padding: 8px;
+    cursor: pointer;
+  }
+
+  &__volume-track {
+    position: relative;
+    width: 4px;
+    height: 100%;
+    background: $progress-bg;
+    border-radius: 2px;
+    margin: 0 auto;
+  }
+
+  &__volume-filled {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: $progress-filled;
+    border-radius: 2px;
+    transition: height 0.1s ease;
+  }
+
+  &__volume-thumb {
+    position: absolute;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    background: white;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  // Time display
+  &__time {
+    color: white;
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+    min-width: 80px;
+    white-space: nowrap;
+  }
+
+  // Quality selector
+  &__quality-selector,
+  &__subtitle-selector {
+    position: relative;
+  }
+
+  &__quality-btn,
+  &__subtitle-btn {
+    @include button-reset;
+    @include flex-center;
+    padding: 8px 12px;
+    color: white;
+    font-size: 14px;
+    border-radius: 4px;
+    transition: $transition;
+    white-space: nowrap;
+
+    &:hover {
+      background: $control-hover;
+    }
+  }
+
+  &__quality-menu,
+  &__subtitle-menu {
+    position: absolute;
+    bottom: 48px;
+    right: 0;
+    min-width: 120px;
+    background: $control-bg;
+    border-radius: $border-radius;
+    padding: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+  }
+
+  &__quality-option,
+  &__subtitle-option {
+    @include button-reset;
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    color: white;
+    font-size: 14px;
+    text-align: left;
+    border-radius: 4px;
+    transition: $transition;
+
+    &:hover {
+      background: $control-hover;
+    }
+
+    &.active {
+      background: $primary-color;
+      color: white;
+    }
+  }
+
+  // Fullscreen button
+  &__fullscreen-btn {
+    @include button-reset;
+    @include flex-center;
+    width: 36px;
+    height: 36px;
+    color: white;
+    font-size: 18px;
+    border-radius: 4px;
+    transition: $transition;
+
+    &:hover {
+      background: $control-hover;
+    }
+  }
+
+  // Ad overlay
+  &__ad-overlay {
+    @include absolute-fill;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: $z-ads;
+  }
+
+  &__ad-content {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+
+  &__ad-label {
+    background: $warning-color;
+    color: $dark-color;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  &__ad-countdown {
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  &__ad-skip {
+    @include button-reset;
+    background: rgba(255, 255, 255, 0.9);
+    color: $dark-color;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: $transition;
+
+    &:hover {
+      background: white;
+    }
+  }
+
+  // Accessibility
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  // Responsive design
+  @media (max-width: 768px) {
+    &__controls {
+      padding: 16px 12px 12px;
+    }
+
+    &__controls-row {
+      gap: 8px;
+    }
+
+    &__time {
+      font-size: 12px;
+      min-width: 70px;
+    }
+
+    &__play-btn {
+      width: 40px;
+      height: 40px;
+      font-size: 16px;
+    }
+
+    &__quality-btn,
+    &__subtitle-btn {
+      padding: 6px 8px;
+      font-size: 12px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    &__controls-row {
+      gap: 6px;
+    }
+
+    &__time {
+      display: none;
+    }
+
+    &__volume-control {
+      order: -1;
+    }
+  }
+
+  // High contrast mode
+  @media (prefers-contrast: high) {
+    &__controls {
+      background: rgba(0, 0, 0, 0.95);
+    }
+
+    &__progress-filled {
+      background: #fff;
+    }
+
+    &__progress-track {
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    &__progress-buffered {
+      background: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  // Reduced motion
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  // Print styles
+  @media print {
+    display: none;
+  }
+}
+
+// Dark mode
+@media (prefers-color-scheme: dark) {
+  .video-player {
+    &__error {
+      background: rgba(0, 0, 0, 0.95);
+    }
+
+    &__loading {
+      background: rgba(0, 0, 0, 0.9);
+    }
+  }
+}
+
+// RTL support
+[dir="rtl"] .video-player {
+  &__controls-right {
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  &__quality-menu,
+  &__subtitle-menu {
+    right: auto;
+    left: 0;
+  }
+
+  &__ad-content {
+    right: auto;
+    left: 20px;
+    align-items: flex-start;
+  }
+}
+
+// Focus management
+.video-player {
+  &:focus-within {
+    .video-player__controls.hidden {
+      opacity: 1;
+    }
+  }
+
+  button:focus-visible {
+    outline: 2px solid $primary-color;
+    outline-offset: 2px;
+    z-index: 1;
+  }
+}
+
+// Loading states
+.video-player {
+  &--loading {
+    .video-player__controls {
+      pointer-events: none;
+    }
+
+    .video-player__play-btn {
+      opacity: 0.5;
+    }
+  }
+
+  &--error {
+    .video-player__controls {
+      display: none;
+    }
+  }
+}
+
+// Custom scrollbar for menus
+.video-player__quality-menu,
+.video-player__subtitle-menu {
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.5);
+    }
+  }
+}

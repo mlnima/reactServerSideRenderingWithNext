@@ -1,18 +1,12 @@
 import { compileString } from 'sass';
 
 interface IProps {
-  styles?: string,
-  id?: string,
-  enableScss?: boolean
+  styles?: string;
+  id?: string;
+  enableScss?: boolean;
 }
 
-const DynamicStyleInjector = (
-  {
-    styles,
-    id = 'admin-dynamic-styles',
-    enableScss = true,
-  }: IProps) => {
-
+const DynamicStyleInjector = ({ styles, id = 'custom-styles', enableScss = true }: IProps) => {
   if (!styles) {
     return null;
   }
@@ -31,8 +25,6 @@ const DynamicStyleInjector = (
         compiledStyles = result.css;
       }
     } catch (error) {
-      // @ts-expect-error: it's fine
-      console.error('SCSS compilation failed:', error?.message);
       compiledStyles = styles;
     }
   }
@@ -46,32 +38,15 @@ const DynamicStyleInjector = (
     return null;
   }
 
-  return (
-    <style
-      id={id}
-      dangerouslySetInnerHTML={{ __html: cleanedStyles }}
-      suppressHydrationWarning={true}
-    />
-  );
+  return <style id={id} dangerouslySetInnerHTML={{ __html: cleanedStyles }} suppressHydrationWarning={true} />;
 };
 
-const SimpleDynamicStyleInjector = (
-  {
-    styles,
-    id = 'admin-dynamic-styles',
-  }: IProps) => {
-
+const SimpleDynamicStyleInjector = ({ styles, id = 'admin-dynamic-styles' }: IProps) => {
   if (!styles) {
     return null;
   }
 
-  return (
-    <style
-      id={id}
-      dangerouslySetInnerHTML={{ __html: styles }}
-      suppressHydrationWarning={true}
-    />
-  );
+  return <style id={id} dangerouslySetInnerHTML={{ __html: styles }} suppressHydrationWarning={true} />;
 };
 
 export default DynamicStyleInjector;

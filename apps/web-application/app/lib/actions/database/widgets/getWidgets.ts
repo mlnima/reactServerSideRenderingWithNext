@@ -4,7 +4,13 @@ import { IWidget } from '@repo/typescript-types';
 import { unstable_cacheTag as cacheTag, unstable_cacheLife as cacheLife } from 'next/cache';
 import { findWidgetMetas, findWidgetPosts } from '@lib/actions/database/widgets/helpers';
 
-const getWidgets = async (positions: string[], locale: string, cacheLifeDuration: string = 'days'): Promise<{ [key: string]: [] }> => {
+const getWidgets = async (
+  positions: string[],
+  locale: string,
+  cacheLifeDuration: string = 'days',
+): Promise<{
+  [key: string]: [];
+}> => {
   'use cache';
 
   try {
@@ -46,6 +52,7 @@ const getWidgets = async (positions: string[], locale: string, cacheLifeDuration
 
     const transformedWidgets = JSON.parse(JSON.stringify(widgets));
 
+    // @ts-expect-error: it's fine
     widgets = null;
 
     result = transformedWidgets.reduce((widgetInPositions: Record<string, IWidget[]>, widget: IWidget) => {

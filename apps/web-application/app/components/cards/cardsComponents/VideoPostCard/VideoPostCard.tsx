@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import _qualityConvertor from '../../asset/_qualityConvertor';
-import { IPost } from "@repo/typescript-types";
+import { IPost } from '@repo/typescript-types';
 import CardTitle from '../../asset/CardTitle/CardTitle';
 import './VideoPostCard.scss';
 import '../postCard.scss';
@@ -16,78 +16,78 @@ const CardImageRendererUseClient = dynamic(() => import('../../asset/CardImageRe
 // const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
 
 interface IProps {
-    locale: string;
-    postUrl: string;
-    index: number;
-    isSidebar?: boolean;
-    post: IPost;
-    isNextImageAllowed: boolean;
-    dictionary: {
-        [key: string]: string;
-    };
-    settings: {
-        showViewsOnCard:  boolean,
-        showRatingOnCard:  boolean,
-        showDateOnCard:  boolean,
-    };
+  locale: string;
+  postUrl: string;
+  index: number;
+  isSidebar?: boolean;
+  post: IPost;
+  isNextImageAllowed: boolean;
+  dictionary: {
+    [key: string]: string;
+  };
+  settings: {
+    showViewsOnCard: boolean;
+    showRatingOnCard: boolean;
+    showDateOnCard: boolean;
+  };
 }
 
 const VideoPostCard: FC<IProps> = ({
-    post,
-    locale,
-    postUrl,
-    isSidebar,
-    index,
-    isNextImageAllowed,
-    dictionary,
-    settings = {
-      showViewsOnCard:  true,
-      showRatingOnCard:  true,
-      showDateOnCard:  true,
-    },
+  post,
+  locale,
+  postUrl,
+  isSidebar,
+  index,
+  isNextImageAllowed,
+  dictionary,
+  settings = {
+    showViewsOnCard: true,
+    showRatingOnCard: true,
+    showDateOnCard: true,
+  },
 }) => {
-    // const rating = post.likes || post.disLikes ? ratingCalculator(post?.likes, post?.disLikes) : null
-    return (
-        <article className={`postCard postCardVideo${isSidebar ? ' postCardSidebar' : ''}`}>
-            <div className={'cardMedia'}>
-                <Link
-                    href={postUrl}
-                    className={'card-link'}
-                    title={post?.translations?.[locale as string]?.title ?? post?.title}
-                >
-                    <CardImageRendererUseClient
-                        imageUrl={post.mainThumbnail || post?.thumbnail?.filePath}
-                        isNextImageAllowed={isNextImageAllowed}
-                        postType={'video'}
-                        videoTrailerUrl={post?.videoTrailerUrl}
-                        submitPostView={false}
-                        postId={post?._id}
-                        mediaAlt={post?.translations?.[locale as string]?.title ?? post?.title}
-                        index={index}
-                    />
-                    {!!post?.quality && <CardQuality quality={_qualityConvertor(post?.quality)} />}
+  // const rating = post.likes || post.disLikes ? ratingCalculator(post?.likes, post?.disLikes) : null
 
-                    {!!post?.duration && <CardDuration duration={post?.duration} />}
-                </Link>
-            </div>
-            <div className={`cardInfo`}>
-                <CardTitle title={post?.translations?.[locale as string]?.title ?? post?.title} url={postUrl} />
-                {/*<CardStats views={post?.views} dictionary={dictionary} likes={post?.likes} dislikes={post?.dislikes} />*/}
-                {/*/!*<div className={'card-info-stats'}>*!/*/}
-                {/*/!*    {!!post.views && <CardViews views={post.views}/>}*!/*/}
-                {/*/!*    {!!post.rating && <CardRating rating={post.rating}/>}*!/*/}
-                {/*/!*</div>*!/*/}
-                <CardStats
-                    views={post?.views}
-                    dictionary={dictionary}
-                    likes={post?.likes}
-                    dislikes={post?.disLikes}
-                    createdAt={post?.createdAt}
-                    updatedAt={post?.updatedAt}
-                    settings={settings}
-                />
-            </div>
-        </article>
-    );
+  if (post?.thumbnail){
+    console.log(`post?.thumbnail=> `,post?.thumbnail)
+  }
+  return (
+    <article className={`postCard postCardVideo${isSidebar ? ' postCardSidebar' : ''}`}>
+      <div className={'cardMedia'}>
+        <Link href={postUrl} className={'card-link'} title={post?.translations?.[locale as string]?.title ?? post?.title}>
+          <CardImageRendererUseClient
+            imageUrl={post?.thumbnail?.filePath || post.mainThumbnail}
+            isNextImageAllowed={isNextImageAllowed}
+            postType={'video'}
+            videoTrailerUrl={post?.videoTrailerUrl}
+            submitPostView={false}
+            postId={post?._id}
+            mediaAlt={post?.translations?.[locale as string]?.title ?? post?.title}
+            index={index}
+          />
+          {!!post?.quality && <CardQuality quality={_qualityConvertor(post?.quality)} />}
+
+          {!!post?.duration && <CardDuration duration={post?.duration} />}
+        </Link>
+      </div>
+      <div className={`cardInfo`}>
+        <CardTitle title={post?.translations?.[locale as string]?.title ?? post?.title} url={postUrl} />
+        {/*<CardStats views={post?.views} dictionary={dictionary} likes={post?.likes} dislikes={post?.dislikes} />*/}
+        {/*/!*<div className={'card-info-stats'}>*!/*/}
+        {/*/!*    {!!post.views && <CardViews views={post.views}/>}*!/*/}
+        {/*/!*    {!!post.rating && <CardRating rating={post.rating}/>}*!/*/}
+        {/*/!*</div>*!/*/}
+        <CardStats
+          views={post?.views}
+          dictionary={dictionary}
+          likes={post?.likes}
+          dislikes={post?.disLikes}
+          createdAt={post?.createdAt}
+          updatedAt={post?.updatedAt}
+          settings={settings}
+        />
+      </div>
+    </article>
+  );
 };
 export default VideoPostCard;

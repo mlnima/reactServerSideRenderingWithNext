@@ -3,7 +3,7 @@ import { connectToDatabase, userSchema } from '@repo/db';
 import { memberLoginDefaultRequireFields } from '@repo/data-structures';
 import { errorResponse, successResponse, ServerActionResponse } from '@lib/actions/response';
 import { cookies } from 'next/headers';
-import { decryptJWT } from '@lib/session';
+import { decryptJWT } from '@repo/utils-server';
 import { User } from '@repo/typescript-types';
 
 const memberAutoLogin = async (): Promise<ServerActionResponse> => {
@@ -15,7 +15,7 @@ const memberAutoLogin = async (): Promise<ServerActionResponse> => {
     if (!sessionCookie) {
       return errorResponse({ message: 'Unauthorized Access' });
     }
-    const payload = await decryptJWT(sessionCookie);
+    const payload = await decryptJWT({ session: sessionCookie });
 
     if (!payload) {
       return errorResponse({ message: 'Unauthorized Access' });
