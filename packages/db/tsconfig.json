@@ -2,28 +2,21 @@
   "extends": "tsconfig/internal-packages.json",
   "compilerOptions": {
     "target": "ES2021",
-    "module": "CommonJS",
-    "lib": ["ES2021"],
-    "strict": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "declaration": true,
-    "declarationMap": true,
     "outDir": "dist",
     "rootDir": ".",
-    "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "sourceMap": true
+    "experimentalDecorators": true
   },
-  "exclude": ["node_modules","dist"],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
   "include": [
     "index.ts",
     "src",
     "src/**/*.ts",
-    "src/*.ts"
+    "src/*.ts",
+    "global.d.ts"
   ]
 }

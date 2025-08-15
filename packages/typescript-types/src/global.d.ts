@@ -1,4 +1,5 @@
-import { Schema } from "mongoose";
+import { UploadedFile } from 'express-fileupload';
+
 declare module '@repo/utils';
 declare module '@repo/data-structures';
 declare module 'tsconfig';
@@ -11,61 +12,23 @@ declare module '*.module.css' {
   export default classes;
 }
 
-//
-// declare function mongooseLeanVirtuals(schema: Schema): void;
-//
-// declare namespace mongooseLeanVirtuals {}
-//
-// export = mongooseLeanVirtuals;
+declare module 'express-fileupload' {
+  interface FileArray {
+    file?: UploadedFile | UploadedFile[];
+  }
+}
 
+declare global {
+  type MDXProvidedComponents = typeof components;
+}
 
+declare global {
+  namespace Express {
+    interface Request {
+      userData?: { _id: string };
+      auth?: TVerifySession;
+    }
+  }
+}
 
-
-
-
-
-
-
-
-// declare module 'axios' {
-//     export interface AxiosResponse<T = any> {
-//         data: T & { message?: string }; // Extend response data with an optional message property
-//     }
-//
-//     export interface AxiosError<T = any> {
-//         response?: AxiosResponse<T>;
-//     }
-// }
-
-// declare module '*';
-// export {};
-//
-// declare namespace NodeJS {
-//     interface ProcessEnv {
-//         NODE_ENV: string;
-//         JWT_KEY:string;
-//         NEXT_PUBLIC_PRODUCTION_URL:string;
-//         NEXT_PUBLIC_API_SERVER_URL:string;
-//         NEXT_PUBLIC_LOCALES:string;
-//         NEXT_PUBLIC_DEFAULT_LOCALE:string;
-//         NEXT_PUBLIC_SOCKET:string;
-//         NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES:string;
-//         PORT:string;
-//         API_SERVER_PORT:string;
-//         REACT_APP_DEV_DASHBOARD_PORT:string;
-//         DB_NAME:string;
-//         DB_HOST:string;
-//         DB_USER:string;
-//         DB_PASS:string;
-//         DB_PORT:string;
-//         MAIL_SERVER:string;
-//         MAIL_SERVER_HOST:string;
-//         MAIL_EXTENSION:string;
-//         SSL_CERT:string;
-//         SSL_KEY:string;
-//
-//         // Add any other environment variables here
-//     }
-// }
-
-
+export {};

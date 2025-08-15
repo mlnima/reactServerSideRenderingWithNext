@@ -1,21 +1,23 @@
 const postFieldRequestForCards = [
-    'redirectLink',
-    'title',
-    'mainThumbnail',
-    'thumbnail',
-    'quality',
-    'duration',
-    'videoTrailerUrl',
-    'postType',
-    'views',
-    // 'translations',
-    // 'likes',
-    // 'disLikes',
-    'updatedAt',
-    'createdAt',
-    // 'outPostType',
-    // 'uniqueData'
-]
+  'redirectLink',
+  'title',
+  'mainThumbnail',
+  'quality',
+  'duration',
+  'videoTrailerUrl',
+  'postType',
+  'views',
+  'updatedAt',
+  'createdAt',
+  'thumbnail',
+];
+
+export default postFieldRequestForCards;
 
 
-export default  postFieldRequestForCards
+// 'thumbnail',
+// 'outPostType',
+// 'uniqueData'
+// 'translations',
+// 'likes',
+// 'disLikes',

@@ -1,15 +1,21 @@
-import mongoose, { models, model } from 'mongoose';
+import mongoose, { models, model, Model } from 'mongoose';
+import { IFile } from '@repo/typescript-types';
+
 const Schema = mongoose.Schema;
 
-const fileSchema = new Schema({
-  usageType: String,
-  filePath: {
-    type: String,
-    required: true,
+const fileSchema = new Schema(
+  {
+    usageType: String,
+    filePath: {
+      type: String,
+      required: true,
+    },
+    mimeType: String,
+    status: String,
   },
-  mimeType: String,
-}, { timestamps: true });
+  { timestamps: true },
+);
 
-const FileModel = models?.file || model('file', fileSchema);
+const FileModel = (models?.file || model('file', fileSchema)) as Model<IFile>;
 
 export default FileModel;

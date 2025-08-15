@@ -1,4 +1,4 @@
-import { Schema, models, model } from 'mongoose';
+import { Schema, models, model, Model } from 'mongoose';
 
 const settingSchema = new Schema({
   type: {
@@ -8,7 +8,6 @@ const settingSchema = new Schema({
   data: Schema.Types.Mixed,
 });
 
-const SettingModel = models?.settings || model('settings', settingSchema);
+const SettingModel = (models?.settings || model('settings', settingSchema)) as Model<any>;
 
 export default SettingModel;
-

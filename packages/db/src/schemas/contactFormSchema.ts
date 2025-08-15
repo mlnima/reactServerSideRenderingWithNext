@@ -1,4 +1,4 @@
-import mongoose, { models, model } from 'mongoose';
+import mongoose, { models, model, Model } from 'mongoose';
 
 const contactFormSchema = new mongoose.Schema(
   {
@@ -15,7 +15,6 @@ const contactFormSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-const ContactModel = models?.contact || model('contact', contactFormSchema);
+const ContactModel = (models?.contact || model('contact', contactFormSchema)) as Model<any>;
 
 export default ContactModel;
-

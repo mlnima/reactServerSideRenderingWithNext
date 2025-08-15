@@ -1,16 +1,16 @@
-import mongoose, { Schema, models, model } from 'mongoose';
+import mongoose, { Schema, models, model, Model } from 'mongoose';
 import { postTypes, videoQualities } from '@repo/data-structures';
 import { postFieldRequestForCards } from '@repo/data-structures';
 import { IPost } from '@repo/typescript-types';
 
 interface IFindRelatedPostsByField {
-  currentPostId: string,
-  relatedByField: string,
-  limit: number
+  currentPostId: string;
+  relatedByField: string;
+  limit: number;
 }
 
 interface IFindRelatedPosts {
-  post: any;  // You can replace 'any' with the actual post document type
+  post: any; // You can replace 'any' with the actual post document type
   relatedByFields: string[];
   limit?: number;
 }
@@ -20,91 +20,89 @@ const downloadLinks = new Schema({
   url: String,
 });
 
-const postSchema = new Schema({
-  author: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'user',
-    required: true,
-  },
-  title: {
-    type: String,
-    required: true,
-  },
-  permaLink: String,
-  company: String,
-  description: mongoose.Schema.Types.Mixed,
-  descriptionRenderer: String,
-  mainThumbnail: String,
-  thumbnail: { type: mongoose.Schema.Types.ObjectId, ref: 'file' },
-  images: [{ type: mongoose.Schema.Types.ObjectId, ref: 'file' }],
-  videoTrailerUrl: String,
-  quality: {
-    type: String,
-    enum: videoQualities,
-    default: 'HD',
-  },
-  translations: mongoose.Schema.Types.Mixed,
-  shippingCost: String,
-  format: String,
-  source: String,
-  sourceSite: String,
-  videoUrl: String,
-  postType: {
-    type: String,
-    enum: postTypes,
-  },
-  outPostType: {
-    type: String,
-    enum: postTypes,
-  },
-  videoEmbedCode: String,
-  videoScriptCode: String,
-
-  downloadLink: String,
-  downloadLinks: [downloadLinks],
-  redirectLink: String,
-  currency: String,
-  iframe: String,
-  status: {
-    type: String,
-    required: true,
-    default: 'draft',
-  },
-  posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'post' }],
-  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'comment' }],
-  categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'meta' }],
-  actors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'meta' }],
-  tags: [{ type: mongoose.Schema.Types.ObjectId, ref: 'meta' }],
-  likes: {
-    type: Number,
-    default: 0,
-  },
-  price: String,
-  disLikes: {
-    type: Number,
-    default: 0,
-  },
-  views: {
-    type: Number,
-    default: 0,
-  },
-  duration: {
-    type: String,
-    default: '00:00',
-  },
-  premium: Boolean,
-  rating: Boolean,
-  uniqueData: mongoose.Schema.Types.Mixed,
-
-}, { timestamps: true });
-
-
-postSchema.statics.findRelatedPostsByField = async function(
+const postSchema = new Schema(
   {
-    currentPostId,
-    relatedByField,
-    limit = 8,
-  }: IFindRelatedPostsByField) {
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'user',
+      required: true,
+    },
+    title: {
+      type: String,
+      required: true,
+    },
+    permaLink: String,
+    company: String,
+    description: mongoose.Schema.Types.Mixed,
+    isMarkDownDescription: Boolean,
+    descriptionRenderer: String,
+    mainThumbnail: String,
+    thumbnail: { type: mongoose.Schema.Types.ObjectId, ref: 'file' },
+    images: [{ type: mongoose.Schema.Types.ObjectId, ref: 'file' }],
+    videoTrailerUrl: String,
+    quality: {
+      type: String,
+      enum: videoQualities,
+      default: 'HD',
+    },
+    translations: mongoose.Schema.Types.Mixed,
+    shippingCost: String,
+    format: String,
+    source: String,
+    sourceSite: String,
+    video: { type: mongoose.Schema.Types.ObjectId, ref: 'file' },
+    videoUrl: String,
+    postType: {
+      type: String,
+      enum: postTypes,
+    },
+    outPostType: {
+      type: String,
+      enum: postTypes,
+    },
+    videoEmbedCode: String,
+    videoScriptCode: String,
+
+    downloadLink: String,
+    downloadLinks: [downloadLinks],
+    redirectLink: String,
+    currency: String,
+    iframe: String,
+    status: {
+      type: String,
+      required: true,
+      default: 'draft',
+    },
+    posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'post' }],
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'comment' }],
+    categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'meta' }],
+    actors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'meta' }],
+    tags: [{ type: mongoose.Schema.Types.ObjectId, ref: 'meta' }],
+    likes: {
+      type: Number,
+      default: 0,
+    },
+    price: String,
+    disLikes: {
+      type: Number,
+      default: 0,
+    },
+    views: {
+      type: Number,
+      default: 0,
+    },
+    duration: {
+      type: String,
+      default: '00:00',
+    },
+    premium: Boolean,
+    rating: Boolean,
+    uniqueData: mongoose.Schema.Types.Mixed,
+  },
+  { timestamps: true },
+);
+
+postSchema.statics.findRelatedPostsByField = async function ({ currentPostId, relatedByField, limit = 8 }: IFindRelatedPostsByField) {
   try {
     if (!['actors', 'categories', 'tags', 'author'].includes(relatedByField)) {
       return [];
@@ -131,7 +129,7 @@ postSchema.statics.findRelatedPostsByField = async function(
   }
 };
 
-postSchema.statics.findRelatedPosts = async function({ post, relatedByFields, limit = 8 }: IFindRelatedPosts) {
+postSchema.statics.findRelatedPosts = async function ({ post, relatedByFields, limit = 8 }: IFindRelatedPosts) {
   try {
     let relatedPosts: any[] = [];
     let seenPosts: Set<string> = new Set();
@@ -169,7 +167,6 @@ postSchema.statics.findRelatedPosts = async function({ post, relatedByFields, li
         .lean()
         .exec();
 
-
       relatedPosts = [...relatedPosts, ...fallbackPosts];
     }
 
@@ -182,7 +179,6 @@ postSchema.statics.findRelatedPosts = async function({ post, relatedByFields, li
   }
 };
 
-const PostModel = models?.post || model('post', postSchema);
+const PostModel = (models?.post || model('post', postSchema)) as Model<any>;
 
 export default PostModel;
-

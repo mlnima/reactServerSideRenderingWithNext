@@ -50,3 +50,4 @@ package-lock.json
 /additionalTools
 
 /apps/web-application/tailwind-default.config.js
+/apps/api-server/_scripts/*

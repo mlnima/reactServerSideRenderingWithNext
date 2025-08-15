@@ -20,7 +20,7 @@
     "jest-presets": "*",
     "@repo/typescript-types": "*",
     "@types/node": "^18.16.14",
-    "mongoose": "^8.10.1",
-    "jsonwebtoken": "^9.0.2"
+    "jsonwebtoken": "^9.0.2",
+    "jose": "^6.0.8"
   }
 }

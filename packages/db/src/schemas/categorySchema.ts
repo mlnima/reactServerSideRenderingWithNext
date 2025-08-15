@@ -1,18 +1,20 @@
-import { Schema, models, model } from 'mongoose';
+import { Schema, models, model, Model } from 'mongoose';
 
-const categorySchema = new Schema({
-  name: {
-    type: String,
-    unique: true,
+const categorySchema = new Schema(
+  {
+    name: {
+      type: String,
+      unique: true,
+    },
+    description: String,
+    status: String,
+    imageUrl: String,
+    translations: Schema.Types.Mixed,
+    count: Number,
   },
-  description: String,
-  status: String,
-  imageUrl: String,
-  translations: Schema.Types.Mixed,
-  count: Number,
-}, { timestamps: true });
+  { timestamps: true },
+);
 
-const CategoryModel = models?.category || model('category', categorySchema);
+const CategoryModel = (models?.category || model('category', categorySchema)) as Model<any>;
 
 export default CategoryModel;
-

@@ -13,8 +13,8 @@
   ],
   "dependencies": {
     "@types/jest": "^30.0.0",
-    "mongoose": "^8.16.2",
     "@repo/data-structures": "*",
+    "@repo/utils": "*",
     "jest": "^30.0.4",
     "jest-presets": "*",
     "eslint-config-custom": "*",

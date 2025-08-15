@@ -1,4 +1,4 @@
-import { Schema, models, model } from 'mongoose';
+import { Schema, models, model, Model } from 'mongoose';
 import { IEmail } from '@repo/typescript-types';
 
 interface IEmailDocument extends Document, IEmail {
@@ -14,49 +14,54 @@ interface IEmailDocument extends Document, IEmail {
   attachments: any[];
 }
 
-const emailSchema = new Schema<IEmailDocument>({
-  from: {
-    type: String,
-    required: true,
+const emailSchema = new Schema<IEmailDocument>(
+  {
+    from: {
+      type: String,
+      required: true,
+    },
+    to: {
+      type: String,
+      required: true,
+    },
+    receiver: {
+      type: Schema.Types.ObjectId,
+      ref: 'user',
+    },
+    sender: {
+      type: Schema.Types.ObjectId,
+      ref: 'user',
+    },
+    subject: {
+      type: String,
+      required: true,
+    },
+    text: {
+      type: String,
+      required: true,
+    },
+    html: {
+      type: String,
+    },
+    read: {
+      type: Boolean,
+      default: false,
+    },
+    status: {
+      type: String,
+      enum: ['sent', 'received', 'trash', 'draft', 'archived', 'spam'],
+      default: 'sent',
+    },
+    attachments: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'file',
+      },
+    ],
   },
-  to: {
-    type: String,
-    required: true,
-  },
-  receiver: {
-    type: Schema.Types.ObjectId,
-    ref: 'user',
-  },
-  sender: {
-    type: Schema.Types.ObjectId,
-    ref: 'user',
-  },
-  subject: {
-    type: String,
-    required: true,
-  },
-  text: {
-    type: String,
-    required: true,
-  },
-  html: {
-    type: String,
-  },
-  read: {
-    type: Boolean,
-    default: false,
-  },
-  status: {
-    type: String,
-    enum: ['sent', 'received', 'trash', 'draft', 'archived', 'spam'],
-    default: 'sent',
-  },
-  attachments: [{
-    type: Schema.Types.ObjectId,
-    ref: 'file',
-  }],
-}, { timestamps: true });
+  { timestamps: true },
+);
 
-const EmailModel = models?.email || model<IEmailDocument>('email', emailSchema);
+const EmailModel = (models?.email || model<IEmailDocument>('email', emailSchema)) as Model<any>;
 
 export default EmailModel;

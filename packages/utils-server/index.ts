@@ -1,2 +1,2 @@
 export { jwtValidator } from './src/validators';
-export { deepConvertObjectIdsToStrings } from './src/objects';
+export { generateVideoToken, verifyVideoToken, encryptToJwt, decryptJWT } from '../utils-server/src/auth';

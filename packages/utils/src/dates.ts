@@ -1,4 +1,4 @@
-export const convertDateToIsoString = (dateString: string): string | null => {
+export const convertDateToIsoString = (dateString: string): string => {
   try {
     const ISO8601Date = new Date(dateString);
     if (!isNaN(ISO8601Date.getTime())) {
@@ -14,10 +14,7 @@ export const convertDurationStringToIso8601 = (duration: string): string => {
     const splitDuration = duration.split(':');
     const seconds = parseInt(splitDuration[splitDuration.length - 1], 10);
     const minutes = parseInt(splitDuration[splitDuration.length - 2], 10);
-    const hours = parseInt(
-      splitDuration.length === 3 ? splitDuration[splitDuration.length - 3] : '0',
-      10,
-    );
+    const hours = parseInt(splitDuration.length === 3 ? splitDuration[splitDuration.length - 3] : '0', 10);
     return `P0DT${hours}H${minutes}M${seconds}S`;
   } catch (error) {
     return duration;
@@ -25,11 +22,7 @@ export const convertDurationStringToIso8601 = (duration: string): string => {
 };
 
 export const convertSecondsToTimeString = (seconds: number): string => {
-  return (
-    Math.floor(seconds / 60) +
-    ':' +
-    ('0' + Math.floor(seconds % 60)).slice(-2)
-  );
+  return Math.floor(seconds / 60) + ':' + ('0' + Math.floor(seconds % 60)).slice(-2);
 };
 
 export const formatDatePostCard = (dateString: string): string => {

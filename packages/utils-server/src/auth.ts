@@ -1,4 +1,36 @@
 import crypto from 'crypto';
+import { JWTPayload, SignJWT, jwtVerify } from 'jose';
+
+interface IEncryptToJwt {
+  payload?: JWTPayload;
+  expiresIn?: string;
+  customEncodeKey?: string;
+}
+
+export const encryptToJwt = async ({ payload, expiresIn = '30d', customEncodeKey }: IEncryptToJwt): Promise<string> => {
+  const secretKey = customEncodeKey || process.env.JWT_KEY;
+  const encodedKey = new TextEncoder().encode(secretKey);
+  return new SignJWT(payload).setProtectedHeader({ alg: 'HS256' }).setIssuedAt().setExpirationTime(expiresIn).sign(encodedKey);
+};
+
+interface IDecryptJWT {
+  session?: string;
+  customDecodeKey?: string;
+}
+
+export const decryptJWT = async ({ session = '', customDecodeKey }: IDecryptJWT) => {
+  const secretKey = customDecodeKey || process.env.JWT_KEY;
+  const decodedKey = new TextEncoder().encode(secretKey);
+
+  try {
+    const { payload } = await jwtVerify(session, decodedKey, {
+      algorithms: ['HS256'],
+    });
+    return payload;
+  } catch (error) {
+    console.log('Failed to verify session');
+  }
+};
 
 export const generateVideoToken = (videoPath, expiresIn = 3600000) => {
   const payload = {

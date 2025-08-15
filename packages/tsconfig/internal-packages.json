@@ -6,6 +6,7 @@
       "ES2016",
       "ES2022",
       "ES2018",
+      "ES2021",
       "dom"
     ],
     "declaration": true,
@@ -22,7 +23,9 @@
     "moduleResolution": "node",
     "preserveWatchOutput": true,
     "skipLibCheck": true,
-    "types": ["node"],
+    "types": [
+      "node"
+    ],
     "noEmit": false,
     "strict": false,
     "composite": false,

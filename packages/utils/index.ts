@@ -1,4 +1,4 @@
-export {googleAnalyticsEvent, googleAnalyticsPageView} from './src/analytics';
+export { googleAnalyticsEvent, googleAnalyticsPageView } from './src/analytics';
 
 export {
   arraySortRandom,
@@ -10,48 +10,22 @@ export {
   reduceArrayOfDataToIds,
 } from './src/arrays';
 
-export {
-  convertSecondsToTimeString,
-  convertDateToIsoString,
-  convertDurationStringToIso8601,
-  formatDatePostCard
-} from './src/dates';
+export { convertSecondsToTimeString, convertDateToIsoString, convertDurationStringToIso8601, formatDatePostCard } from './src/dates';
 
-export {
-  universalSanitizer,
-} from './src/sanitizer';
+export { universalSanitizer } from './src/sanitizer';
 
 export { touchDeviceDetector } from './src/devices';
 export { getCurrentDatePath } from './src/paths';
 
+export { removeFileExtension, blobToBase64, imageCanvasCompressor, ImageCompressorByBrowser } from './src/files';
 
-export {
-  removeFileExtension,
-  blobToBase64,
-  imageCanvasCompressor,
-  ImageCompressorByBrowser,
-} from './src/files';
-
-export {
-  getLocales,
-  getDefaultLocale
-} from './src/i18n';
+export { getLocales, getDefaultLocale } from './src/i18n';
 
 export { inputValueSimplifier } from './src/inputs';
 
-export {
-  shortNumber,
-  randomNumberGenerator,
-  rangeNumGenerator,
-  ratingCalculator,
-} from './src/maths';
+export { shortNumber, randomNumberGenerator, rangeNumGenerator, ratingCalculator } from './src/maths';
 
-export {
-  isEmptyObject,
-  getTextDataWithTranslation,
-  removeEmptyProperties,
-  nestedObjectModifier,
-} from './src/objects';
+export { isEmptyObject, getTextDataWithTranslation, removeEmptyProperties, nestedObjectModifier } from './src/objects';
 
 export {
   capitalizeFirstLetter,
@@ -83,7 +57,7 @@ export {
   searchParamsToObject,
   searchParamsToUrlQuery,
   createQueryString,
-  removeQueryParam
+  removeQueryParam,
 } from './src/urls';
 
 export {
@@ -91,14 +65,9 @@ export {
   passwordValidatorRegisterForm,
   emailValidator,
   mongoIdValidatorByRegex,
-  postTypeValidator
+  postTypeValidator,
 } from './src/validators';
 
 export { headerSizeCalculator } from './src/ui-elements';
 
-export {
-  renderByLanguageCondition,
-  renderByDayCondition,
-  renderByDevice,
-  isEditMode,
-} from './src/widgets';
+export { renderByLanguageCondition, renderByDayCondition, renderByDevice, isEditMode } from './src/widgets';

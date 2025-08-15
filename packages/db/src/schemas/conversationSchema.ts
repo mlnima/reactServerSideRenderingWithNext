@@ -1,4 +1,4 @@
-import { Schema, models, model } from 'mongoose';
+import { Schema, models, model, Model } from 'mongoose';
 
 interface ISystemMessage {
   message: string;
@@ -36,12 +36,15 @@ const messageSchema = new Schema<IMessage>({
   },
 });
 
-const conversationSchema = new Schema<IConversation>({
-  users: [{ type: Schema.Types.ObjectId, ref: 'user' }],
-  messages: [messageSchema],
-  systemMessages: [systemMessageSchema],
-}, { timestamps: true });
+const conversationSchema = new Schema<IConversation>(
+  {
+    users: [{ type: Schema.Types.ObjectId, ref: 'user' }],
+    messages: [messageSchema],
+    systemMessages: [systemMessageSchema],
+  },
+  { timestamps: true },
+);
 
-const ConversationModel = models?.conversation || model<IConversation>('conversation', conversationSchema);
+const ConversationModel = (models?.conversation || model('conversation', conversationSchema)) as Model<any>;
 
 export default ConversationModel;

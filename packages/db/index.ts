@@ -1,4 +1,5 @@
 import connectToDatabase from './src/dbConnection';
+//----------------------------schemas------------------------------------------
 import actorSchema from './src/schemas/actorSchema';
 import categorySchema from './src/schemas/categorySchema';
 import chatroomMessageSchema from './src/schemas/chatroomMessageSchema';
@@ -23,14 +24,16 @@ import userSchema from './src/schemas/userSchema';
 import widgetSchema from './src/schemas/widgetSchema';
 import userRelationSchema from './src/schemas/userRelationSchema';
 import userEngagementSchema from './src/schemas/userEngagementSchema';
-//----------------------------------------------------------------------
-import {
-  isValidObjectId,
-  flatDocumentToObject,
-  flatArrayOdDocumentToObject,
-} from './src/tools';
+//----------------------------operations---------------------------------------
+import { createNewPostViaAPI } from './src/operations/posts';
+import { saveFileExpress, savePostMedia } from './src/operations/files';
+//----------------------------schemas------------------------------------------
+import { isValidObjectId, flatDocumentToObject, flatArrayOdDocumentToObject } from './src/tools';
 
 export {
+  createNewPostViaAPI,
+  saveFileExpress,
+  savePostMedia,
   connectToDatabase,
   actorSchema,
   categorySchema,
@@ -59,5 +62,4 @@ export {
   isValidObjectId,
   flatDocumentToObject,
   flatArrayOdDocumentToObject,
-
 };

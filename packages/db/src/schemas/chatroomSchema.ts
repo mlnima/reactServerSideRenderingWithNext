@@ -1,19 +1,21 @@
-import { model, Schema, models, Document } from 'mongoose';
-import { IChatroom } from '@repo/typescript-types';
+import { model, Schema, models, Model } from 'mongoose';
 
-const chatroomSchema = new Schema({
-  name: {
-    type: String,
-    trim: true,
-    unique: true,
+const chatroomSchema = new Schema(
+  {
+    name: {
+      type: String,
+      trim: true,
+      unique: true,
+    },
+    title: String,
+    description: String,
+    tags: String,
+    status: String,
+    messages: [{ type: Schema.Types.ObjectId, ref: 'chatroomMessage' }],
   },
-  title: String,
-  description: String,
-  tags: String,
-  status: String,
-  messages: [{ type: Schema.Types.ObjectId, ref: 'chatroomMessage' }],
-}, { timestamps: true });
+  { timestamps: true },
+);
 
-const ChatroomModel = models?.chatroom || model<IChatroom & Document>('chatroom', chatroomSchema);
+const ChatroomModel = (models?.chatroom || model('chatroom', chatroomSchema)) as Model<any>;
 
 export default ChatroomModel;

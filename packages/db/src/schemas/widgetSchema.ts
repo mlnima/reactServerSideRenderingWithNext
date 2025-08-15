@@ -1,4 +1,4 @@
-import { Schema, models, model, Document } from 'mongoose';
+import { Schema, models, model, Document, Model } from 'mongoose';
 import { IWidget, IWidgetData } from '@repo/typescript-types';
 
 const widgetDataSchema = new Schema<IWidgetData>({
@@ -52,10 +52,13 @@ interface IDWidget extends Document, Omit<IWidget, '_id'> {
   data: IWidgetData;
 }
 
-const widgetSchema = new Schema<IDWidget>({
-  data: widgetDataSchema,
-}, { timestamps: true });
+const widgetSchema = new Schema<IDWidget>(
+  {
+    data: widgetDataSchema,
+  },
+  { timestamps: true },
+);
 
-const WidgetModel = models?.widgets || model<IDWidget>('widgets', widgetSchema);
+const WidgetModel = (models?.widgets || model<IDWidget>('widgets', widgetSchema)) as Model<any>;
 
 export default WidgetModel;
