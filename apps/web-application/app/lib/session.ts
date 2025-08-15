@@ -1,6 +1,6 @@
 import 'server-only';
 import { cookies } from 'next/headers';
-import { encryptToJwt } from '@repo/utils-server';
+import { encryptToJwt } from '@repo/utils-server/dist/src';
 
 export const createNewSession = async (_id: string, role: string) => {
   try {

@@ -1,7 +1,7 @@
 import 'server-only';
 import { cache } from 'react';
 import { cookies } from 'next/headers';
-import { decryptJWT } from '@repo/utils-server';
+import { decryptJWT } from '@repo/utils-server/dist/src';
 
 export type TVerifySession = { isAuth?: boolean; userId?: any; isAdmin?: boolean };
 

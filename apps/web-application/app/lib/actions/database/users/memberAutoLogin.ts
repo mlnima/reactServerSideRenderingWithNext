@@ -3,7 +3,7 @@ import { connectToDatabase, userSchema } from '@repo/db';
 import { memberLoginDefaultRequireFields } from '@repo/data-structures';
 import { errorResponse, successResponse, ServerActionResponse } from '@lib/actions/response';
 import { cookies } from 'next/headers';
-import { decryptJWT } from '@repo/utils-server';
+import { decryptJWT } from '@repo/utils-server/dist/src';
 import { User } from '@repo/typescript-types';
 
 const memberAutoLogin = async (): Promise<ServerActionResponse> => {

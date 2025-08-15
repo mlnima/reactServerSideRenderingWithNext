@@ -1,4 +1,4 @@
-import { decryptJWT } from '@repo/utils-server';
+import { decryptJWT } from '@repo/utils-server/dist/src';
 import { Request, Response, NextFunction } from 'express';
 
 export const verifySession = async (req: Request, res: Response, next: NextFunction) => {

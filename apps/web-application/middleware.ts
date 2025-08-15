@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { i18n } from '@i18nConfig';
 import { cookies } from 'next/headers';
-import { decryptJWT } from '@repo/utils-server';
+import { decryptJWT } from '@repo/utils-server/dist/src';
 import initialSettings from './public/initialSettings.json';
 
 const getLocaleFromUrl = (request: NextRequest) => {
