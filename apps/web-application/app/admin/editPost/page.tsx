@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import TitleDescription from './components/TitleDescription/TitleDescription';
 import ActionOnPost from './components/ActionOnPost/ActionOnPost';
@@ -19,6 +19,7 @@ import { setAlert } from '@store/reducers/globalStateReducer';
 import { useAppDispatch } from '@store/hooks';
 import postDataScrappers from '@lib/actions/scrapers/postDataScrappers';
 import findAnotherSimilarSourceLink from '@lib/actions/scrapers/findAnotherSimilarSourceLink';
+import Thumbnail from './components/Thumbnail/Thumbnail';
 
 const EditPostPage = () => {
   const [post, setPost] = useState<IPost | null>(null);
@@ -34,6 +35,7 @@ const EditPostPage = () => {
     if (!success || !data?.post) {
       return;
     }
+    console.log(`post=> `, data.post);
     setPost(data.post);
   };
 
@@ -49,21 +51,10 @@ const EditPostPage = () => {
     }
   }, [searchParams]);
 
-  const onChangeHandler = (
-    e: React.ChangeEvent<
-      React.ChangeEvent<
-        | HTMLElement
-        | {
-            target: { name: any; value: any };
-          }
-      >
-    >,
-  ) => {
-    // @ts-expect-error: it's fine
+  const onChangeHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     if (!e.target?.value) return;
     setPost((prevState) => ({
       ...(prevState || {}),
-      // @ts-expect-error: it's fine
       [e.target.name]: isNumericString(e.target.value) ? parseInt(e.target.value) : e.target.value,
     }));
   };
@@ -173,7 +164,7 @@ const EditPostPage = () => {
             <LanguagesOptions languages={process.env.NEXT_PUBLIC_LOCALES || ''} />
           </select>
         </div>
-        {/*// @ts-expect-error: it's fine*/}
+        
         <TitleDescription
           setPost={setPost}
           activeEditingLanguage={activeEditingLanguage}
@@ -181,7 +172,6 @@ const EditPostPage = () => {
           onDescriptionChangeHandler={onDescriptionChangeHandler}
           onTranslatedInputChangeHandler={onTranslatedInputChangeHandler}
         />
-        {/*// @ts-expect-error: it's fine*/}
         <PostInformation
           onChangeHandler={onChangeHandler}
           findSimilarPost={findSimilarPost}
@@ -203,6 +193,14 @@ const EditPostPage = () => {
           <div className={'editingPostSectionTitle'}>Format:</div>
           <Format post={post} setPost={setPost} />
         </div>
+
+        {post.thumbnail && (
+          <div className={'editingPostSection editingPostSectionSide'}>
+            <div className={'editingPostSectionTitle'}>Thumbnail:</div>
+            <Thumbnail thumbnail={post.thumbnail} />
+          </div>
+        )}
+
         <div className={'editingPostSection editingPostSectionSide'}>
           <div className={'editingPostSectionTitle'}>Author:</div>
           <Author author={post?.author} setPost={setPost} />

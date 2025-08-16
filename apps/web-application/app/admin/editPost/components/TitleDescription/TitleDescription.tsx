@@ -7,7 +7,7 @@ import './TitleDescription.scss';
 
 interface TitleDescriptionProps {
   onTranslatedInputChangeHandler: (e: React.ChangeEvent<any>) => void;
-  setPost: React.Dispatch<React.SetStateAction<IPost>>;
+  setPost: React.Dispatch<React.SetStateAction<IPost | null>>;
   onDescriptionChangeHandler: (data: string) => void;
   post: IPost | null;
   activeEditingLanguage: string;

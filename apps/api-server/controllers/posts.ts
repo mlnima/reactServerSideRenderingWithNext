@@ -9,6 +9,8 @@ export const createPost = async (req: Request, res: Response) => {
   try {
     const newPost = typeof req.body.postData === 'string' ? JSON.parse(req.body.postData) : req.body.postData;
     const files = req.files as object;
+    const skipDuplicate = req.body.skipDuplicate;
+    const userData = req.userData;
 
     if (!newPost || !newPost?.title) {
       return res.status(400).json({
@@ -16,7 +18,7 @@ export const createPost = async (req: Request, res: Response) => {
       });
     }
 
-    const { success, message, data, statusCode } = await createNewPostViaAPI({ newPost });
+    const { success, message, data, statusCode } = await createNewPostViaAPI({ newPost, skipDuplicate, userData });
 
     if (!success || !data?.post?._id) {
       return res.status(statusCode).json(message);
@@ -26,7 +28,7 @@ export const createPost = async (req: Request, res: Response) => {
       const savedFiles = await savePostMedia({ files, postId: data?.post?._id });
       console.log(`savedFiles=> `, savedFiles);
     }
-    
+
     return res.json({ message: `${newPost?.title} saved` });
   } catch (error) {
     console.log(`createPost error=> `, error);

@@ -1,10 +1,10 @@
 'use client';
 import { convertVariableNameToName } from '@repo/utils/dist/src';
-import React, { ChangeEvent } from 'react';
+import { ChangeEvent } from 'react';
 import { IPost } from '@repo/typescript-types';
 
 interface PropTypes {
-  onChangeHandler: (e: React.ChangeEvent<HTMLElement>) => void;
+  onChangeHandler: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
   name: 'videoScriptCode';
   post: IPost;
 }

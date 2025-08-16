@@ -26,6 +26,7 @@ const dashboardGetPost = async (
         { path: 'tags', select: { name: 1, type: 1 } },
         { path: 'actors', select: { name: 1, type: 1, imageUrl: 1 } },
         { path: 'thumbnail', select: { filePath: 1 } },
+        { path: 'video', select: { filePath: 1 } },
       ])
 
       .lean<IPost>()

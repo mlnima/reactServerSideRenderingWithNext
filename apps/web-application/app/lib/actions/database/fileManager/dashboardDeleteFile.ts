@@ -20,7 +20,10 @@ export const deleteFileAndDoc = async (fileId) => {
 
   const isExternal = /^https?:\/\//i.test(fileDoc.filePath);
   if (!isExternal) {
-    const fileAbsolutePath = isAbsolute(fileDoc.filePath) ? fileDoc.filePath : join(process.cwd(), '..', 'api-server', fileDoc.filePath);
+    //const fileAbsolutePath = isAbsolute(fileDoc.filePath) ? fileDoc.filePath : join(process.cwd(), '..', 'api-server', fileDoc.filePath);
+    const fileAbsolutePath = join(process.cwd(), '..', 'api-server', fileDoc.filePath);
+    console.log(`isAbsolute(fileDoc.filePath)=> `, isAbsolute(fileDoc.filePath));
+    console.log(`fileAbsolutePath=> `, fileAbsolutePath);
 
     try {
       await unlink(fileAbsolutePath);

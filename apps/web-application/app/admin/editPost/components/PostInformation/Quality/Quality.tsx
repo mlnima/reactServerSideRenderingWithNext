@@ -1,17 +1,16 @@
 'use client';
 
-import React from 'react';
+import { ChangeEvent } from 'react';
 import { videoQualities } from '@repo/data-structures';
 import { FC } from 'react';
 
 interface PropType {
   rendering: boolean;
-  onChangeHandler: (e: React.ChangeEvent<HTMLElement>) => void;
+  onChangeHandler: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
   postQuality?: string;
 }
 
 const Quality: FC<PropType> = ({ rendering, onChangeHandler, postQuality }) => {
-
   if (!rendering) return null;
 
   return (
@@ -21,12 +20,7 @@ const Quality: FC<PropType> = ({ rendering, onChangeHandler, postQuality }) => {
       </div>
       <div className="editor">
         <div className="option">
-          <select
-            className={'primarySelect'}
-            value={postQuality || 'HD'}
-            name="quality"
-            onChange={onChangeHandler}
-          >
+          <select className={'primarySelect'} value={postQuality || 'HD'} name="quality" onChange={onChangeHandler}>
             {videoQualities.map((videoQuality: string, index: number) => {
               return (
                 <option key={`${videoQuality}${index}`} value={videoQuality}>

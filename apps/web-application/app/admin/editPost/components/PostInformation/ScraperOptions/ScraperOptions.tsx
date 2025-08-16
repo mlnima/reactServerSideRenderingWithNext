@@ -15,7 +15,19 @@ interface PropTypes {
   relatedPosts: IPost[] | null;
   scrapAndSetPostData: Function;
   findSimilarPost: Function;
-  onChangeHandler: (e: React.ChangeEvent<HTMLElement>) => void;
+  onChangeHandler: (
+    e: ChangeEvent<
+      ChangeEvent<
+        | HTMLElement
+        | {
+            target: {
+              name: any;
+              value: any;
+            };
+          }
+      >
+    >,
+  ) => void;
 }
 
 const ScraperOptions: FC<PropTypes> = ({

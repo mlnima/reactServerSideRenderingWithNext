@@ -1,11 +1,11 @@
-import React from 'react';
+import { ChangeEvent } from 'react';
 import { convertVariableNameToName } from '@repo/utils/dist/src';
 import { FC } from 'react';
 import { IPost } from '@repo/typescript-types';
 
 interface PropTypes {
   name: 'likes' | 'disLikes' | 'views';
-  onChangeHandler: (e: React.ChangeEvent<HTMLElement>) => void;
+  onChangeHandler: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
   post: IPost;
 }
 

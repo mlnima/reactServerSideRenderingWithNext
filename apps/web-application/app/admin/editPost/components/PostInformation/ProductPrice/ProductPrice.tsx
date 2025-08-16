@@ -2,7 +2,7 @@
 import React from 'react';
 
 interface IProps {
-  onChangeHandler: (e: React.ChangeEvent<HTMLElement>) => void;
+  onChangeHandler: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
   price?: string,
   priceType?: string
 }
