@@ -42,7 +42,8 @@ export const savePostMedia = async ({ files, postId }: ISavePostMedia) => {
     };
 
     if (videoFile) {
-      const fileType = videoFile.name.split('.')[1];
+      const fileNameSplit = videoFile.name.split('.');
+      const fileType = fileNameSplit[fileNameSplit.length - 1];
       const targetFileName = `${postId}.${fileType}`;
       const targetDirectoryAbsolutePath = join(process.cwd(), 'public', 'uploads', 'videos', currentDatePath);
       const fileUrlPath = `/public/uploads/videos/${currentDatePath}/${targetFileName}`;

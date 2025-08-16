@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { IMeta } from '@repo/typescript-types';
 import metaSchema from '../schemas/metaSchema';
+import { mongoIdValidator } from '@repo/utils';
 
 export const createMeta = async (meta: IMeta) => {
   try {
@@ -45,7 +46,7 @@ export const updateCreateMetaByNameNType = async ({ metasData }: IUpdateMeta): P
   }
 };
 
-export const updateCreateMultipleMetaByNameNType = async (metas: IMeta[]) => {
+export const updateCreateMultipleMetaByNameNType = async (metas: IMeta[] | string[]) => {
   try {
     if (!Array.isArray(metas) || metas.length < 1) {
       return [];
@@ -53,7 +54,11 @@ export const updateCreateMultipleMetaByNameNType = async (metas: IMeta[]) => {
     let finalData = [];
 
     for await (const metasData of metas) {
-      if (metasData.name && metasData.type) {
+      if (typeof metasData === 'string' && mongoIdValidator(metasData)) {
+        finalData.push(metasData);
+      }
+
+      if (metasData?.name && metasData?.type) {
         const metaId = await updateCreateMetaByNameNType({ metasData });
         if (metaId) {
           finalData.push(metaId);

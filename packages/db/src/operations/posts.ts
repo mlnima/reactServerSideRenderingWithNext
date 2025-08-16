@@ -8,7 +8,6 @@ const duplicatePostFinderQueryGenerator = (postData: IPost) => {
   try {
     if (postData.postType === 'video') {
       const fieldToCheck = ['title', 'videoEmbedCode', 'mainThumbnail', 'duration'].filter((field) => postData[field]);
-      console.log(`fieldToCheck=> `, fieldToCheck);
       return {
         $and: [
           { duration: postData.duration },
@@ -31,19 +30,23 @@ interface IArgCreateNewPostViaAPI {
   newPost: IPost;
 }
 
-export const createNewPostViaAPI = async ({ newPost }: IArgCreateNewPostViaAPI) => {
+export const createNewPostViaAPI = async ({ newPost, skipDuplicate = false, userData }: IArgCreateNewPostViaAPI) => {
   try {
-    const duplicateFinderQuery = duplicatePostFinderQueryGenerator(newPost);
-    console.log(`duplicateFinderQuery=> `, duplicateFinderQuery);
-    const hasDuplicate = await postSchema.exists(duplicateFinderQuery);
-    if (hasDuplicate) {
-      console.log(`hasDuplicate=> `, hasDuplicate);
-      return {
-        success: false,
-        message: 'Duplicate',
-        statusCode: 409,
-      };
+    if (!skipDuplicate) {
+      const duplicateFinderQuery = duplicatePostFinderQueryGenerator(newPost);
+      const hasDuplicate = await postSchema.exists(duplicateFinderQuery);
+      if (hasDuplicate) {
+        console.log(`hasDuplicate=> `, hasDuplicate);
+        return {
+          success: false,
+          message: 'Duplicate',
+          statusCode: 409,
+        };
+      }
     }
+
+    console.log(`userData=> `, userData);
+
     const documentToSave = new postSchema({
       ...newPost,
       tags: newPost.tags ? await updateCreateMultipleMetaByNameNType(newPost.tags) : [],
@@ -51,6 +54,8 @@ export const createNewPostViaAPI = async ({ newPost }: IArgCreateNewPostViaAPI) 
       actors: newPost.actors ? await updateCreateMultipleMetaByNameNType(newPost.actors) : [],
       // mainThumbnail: downloadImageContent ? await FileManagerController.downloadCreatedPostByApiThumbnail(newPost) : newPost.mainThumbnail
       mainThumbnail: newPost.mainThumbnail,
+      status: newPost.status || 'draft',
+      author: userData._id || newPost?.author,
     });
 
     const savedDocument = await documentToSave.save();
@@ -72,4 +77,9 @@ export const createNewPostViaAPI = async ({ newPost }: IArgCreateNewPostViaAPI) 
       statusCode: 500,
     };
   }
+};
+
+export const deletePostThumbnail = async (postId: string) => {
+  try {
+  } catch (error) {}
 };
